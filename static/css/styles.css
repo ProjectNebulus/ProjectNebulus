@@ -108,6 +108,7 @@ nav a:hover{
   margin-left:calc(50% - 300px);
   margin-right:calc(50% - 300px);
   margin-top:50px;
+  margin-bottom:50px;
   
 }
 #signupinnerbody{
@@ -133,4 +134,12 @@ input:focus{
 }
 input[type=submit]:hover{
   background:#0268a3;
+}
+a{
+  color:#00a2ff;
+  text-decoration:none;
+  font-weight:600;
+}
+a:hover{
+  color:#0268a3;
 }
