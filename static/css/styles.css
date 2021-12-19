@@ -112,12 +112,25 @@ nav a:hover{
 }
 #signupinnerbody{
   background:#1a1a1a;
-  padding-top:20px;
-  padding-bottom:20px;
+  padding-top:40px;
+  padding-bottom:40px;
   padding-right:5px;
   padding-left:5px;
   border-radius:10px;
 }
 #signupinnerbody input{
   background-color: #212121;
+  color:white;
+}
+input:focus{
+  border-style:solid;
+  border-color:blue;
+}
+
+#signupinnerbody input[type=submit]{
+  background-color: #00a2ff;
+  color:white;
+}
+input[type=submit]:hover{
+  background:#0268a3;
 }

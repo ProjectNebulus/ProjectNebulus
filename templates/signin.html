@@ -2,18 +2,14 @@
 {% block main %}
 <div id="signupbody">
   <h1><img src="static/logo.png" style="height:1.5em;"></h1>
-  <h1>Sign Up for Nebulus</h1>
+  <h1>Sign In for Nebulus</h1>
   <div id="signupinnerbody">
-    <p>Email Address</p>
+    <p>Username/Email Address</p>
     <input type="text" placeholder="jonnyappleseed@appleseed.org"><br>
-    <p>Username</p>
-    <input type="text" placeholder="loliminahurry"><br>
     <p>Password</p>
     <input type="password" placeholder="••••••••••"><br>
-    <p>Confirm Passsword</p>
-    <input type="password" placeholder="••••••••••"><br>
-    <input type="submit" value="Sign Up!"><br><br>
-    <p>Have an account? <a href="/signin">Sign In</a>!</p>
+    <input type="submit" value="Sign Up!">
+    <p>Don't have an account? <a href="/signup">Sign Up</a>!</p>
   </div>
 </div>
 {% endblock %}

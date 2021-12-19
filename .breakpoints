@@ -4,7 +4,7 @@
       {
         "id": "b36c8974-2de7-4a05-b62e-91fbb4c7437f",
         "line": 11,
-        "version": 1057,
+        "version": 1119,
         "index": 299
       }
     ],
@@ -14,6 +14,14 @@
         "line": 12,
         "version": 23,
         "index": 275
+      }
+    ],
+    "templates/signup.html": [
+      {
+        "id": "b4510f63-96df-439d-837b-a9e9460e65a2",
+        "line": 9,
+        "version": 714,
+        "index": 289
       }
     ]
   }
