@@ -14,6 +14,11 @@ strong{
   font-weight:200;
   font-size:1.3em;
 }
+.smaller2{
+  color:#a8a8a8;
+  font-weight:600;
+  font-size:1.3em;
+}
 #homePageBanner{
   margin:0px; /* No borders for the image*/
 
@@ -27,7 +32,24 @@ strong{
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+   overflow: hidden;
 }
+/*CURVED BOTTOM OF DIV
+#homePageBanner::before {
+  border-radius: 100%;
+  position: absolute;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://wallpaperaccess.com/full/39608.jpg) !important; 
+  background: no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  right: -200px;
+  left: -200px;
+  top: -200px;
+  content: '';
+  bottom: 0;
+}*/
 input{
   background:white;
   padding:10px;
@@ -60,4 +82,14 @@ nav a:hover{
 }
 #signup:hover{
   border-color:grey;
+}
+#premium{
+  margin:0px; /* No borders for the image*/
+
+  width: calc(100% - 80px); /*Padding*/
+  padding:40px;
+  padding-top:90px;
+  padding-bottom:200px;
+  background: white;
+  color:black;
 }
