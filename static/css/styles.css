@@ -35,9 +35,6 @@ strong{
    overflow: hidden;
 }
 
-.with-image {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://wallpaperaccess.com/full/39608.jpg) !important; 
-}
 
 .center {
   align-content: center;
@@ -99,7 +96,18 @@ nav a:hover{
   width: calc(100% - 80px); /*Padding*/
   padding:40px;
   padding-top:90px;
-  padding-bottom:200px;
+  padding-bottom:90px;
   background: white;
   color:black;
+}
+#signupbody{
+  text-align:center;
+  width: 600px;
+  height:900px;
+  background:black;
+  margin-left:calc(50% - 300px);
+  margin-right:calc(50% - 300px);
+  margin-top:calc(50% - 450px);
+  margin-bottom:calc(50% - 450px);
+  
 }
