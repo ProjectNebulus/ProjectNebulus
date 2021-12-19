@@ -7,21 +7,37 @@ body{
 }
 strong{
   font-weight:900;
-  font-size:3em;
+  font-size:2em;
 }
 .smaller{
   color:#a8a8a8;
   font-weight:200;
-  font-size:1.5em;
+  font-size:1.3em;
 }
 #homePageBanner{
   margin:0px; /* No borders for the image*/
+
   width: calc(100% - 80px); /*Padding*/
   padding:40px;
+  padding-top:90px;
+  padding-bottom:90px;
   background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://wallpaperaccess.com/full/39608.jpg) !important; 
   background: no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+input{
+  background:white;
+  padding:10px;
+  font-size:1.3em;
+  font-family: 'Lexend Deca', sans-serif;
+  border-radius:5px;
+  outline:none;
+  border:none;
+  margin:10px;
+}
+input[type=submit]{
+  background:#00a2ff;
 }
