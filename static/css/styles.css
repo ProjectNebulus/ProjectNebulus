@@ -20,7 +20,7 @@ strong{
   width: calc(100% - 80px); /*Padding*/
   padding:40px;
   padding-top:90px;
-  padding-bottom:90px;
+  padding-bottom:200px;
   background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://wallpaperaccess.com/full/39608.jpg) !important; 
   background: no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -40,4 +40,14 @@ input{
 }
 input[type=submit]{
   background:#00a2ff;
+}
+nav a{
+  text-decoration:none;
+  color:white;
+  margin:10px;
+}
+nav a:hover{
+  text-decoration:none;
+  color:grey;
+  margin:10px;
 }
