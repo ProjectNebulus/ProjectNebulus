@@ -35,6 +35,9 @@ strong{
    overflow: hidden;
 }
 
+.with-image {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://wallpaperaccess.com/full/39608.jpg) !important; 
+}
 
 .center {
   align-content: center;
