@@ -51,3 +51,13 @@ nav a:hover{
   color:grey;
   margin:10px;
 }
+#signup{
+  border-style:solid;
+  border-color:white;
+  border-radius:10px;
+  border-width:1px;
+  padding:10px;
+}
+#signup:hover{
+  border-color:grey;
+}
