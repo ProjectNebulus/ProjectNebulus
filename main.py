@@ -16,5 +16,8 @@ def signup():
 @app.route("/signin")
 def signin():
   return render_template("signin.html")
+@app.route("/musiqueworld")
+def musiqueworld():
+  return render_template("musiqueworld.html")
 #Running
 app.run(host='0.0.0.0', port=8080)
