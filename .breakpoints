@@ -4,16 +4,22 @@
       {
         "id": "b36c8974-2de7-4a05-b62e-91fbb4c7437f",
         "line": 141,
-        "version": 2142,
-        "index": 3144
+        "version": 2144,
+        "index": 3148
       }
     ],
     "templates/index.html": [
       {
         "id": "e1db57a6-1694-400b-8b06-37d5e384dee0",
         "line": 4,
-        "version": 1422,
+        "version": 1425,
         "index": 71
+      },
+      {
+        "id": "952e745f-6039-4ad5-b87d-089458bd8dea",
+        "line": 17,
+        "version": 1433,
+        "index": 460
       }
     ],
     "templates/layout.html": [
@@ -33,17 +39,17 @@
     "templates/login.html": [
       {
         "id": "b40930d9-d119-4068-a520-9a7d55b2f0fc",
-        "line": 31,
-        "version": 50,
-        "index": 1363
+        "line": 1,
+        "version": 51,
+        "index": 405
       }
     ],
     "templates/signup.html": [
       {
         "id": "b4510f63-96df-439d-837b-a9e9460e65a2",
         "line": 16,
-        "version": 1025,
-        "index": 452
+        "version": 1026,
+        "index": 436
       }
     ]
   }
