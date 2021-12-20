@@ -1,6 +1,18 @@
 {% extends "layout.html" %}
 {% block main %}
-<body>
+<body id="with-image">
+  <nav>
+    <span style="float:left;">
+      <a href="/"><img src="static/logo.png" style="height:2em;"></a>
+      <a href="/pricing">Pricing</a>
+      <a href="/signup">Developers</a>
+      <a href="/signup">API</a>
+      <a href="/signup">LMS</a>
+      <a href="/signup">Chat</a>
+      <a href="/signup">MusiqueWorld</a>
+      <a href="/signup">MusiSearch</a>
+    </span>
+  </nav>
   <div id="signupbody">
     <h1><img src="static/logo.png" style="height:1.5em;"></h1>
     <h1>Sign Up for Nebulus</h1>
@@ -14,7 +26,7 @@
       <p>Confirm Passsword</p>
       <input type="password" placeholder="••••••••••"><br>
       <input type="submit" value="Sign Up!"><br><br>
-      <p>Have an account? <a href="/signin">Sign In</a>!</p>
+      <p>Already have an account? <a href="/login">Log In</a>!</p>
     </div>
   </div>
 </body>
