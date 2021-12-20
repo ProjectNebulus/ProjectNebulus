@@ -213,3 +213,22 @@ input[type=file]{
   font-size:1.5em;
   font-family: 'Lexend Deca', sans-serif;
 }
+#labelfile{
+  color:white !important;
+  padding:20px;
+  margin:10px;
+  
+  background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://wallpaperaccess.com/full/39608.jpg) !important; 
+  background: no-repeat center center fixed;
+  background-size: 100% auto;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+   overflow: hidden;
+  color:black;
+  border-style:none;
+  border-radius:10px;
+  font-size:1.5em;
+  font-family: 'Lexend Deca', sans-serif;
+}

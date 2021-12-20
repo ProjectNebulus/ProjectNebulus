@@ -31,8 +31,11 @@
             <script>
               $(":file").filestyle();
             </script>
-            <input  data-buttonText="Upload an Image" type="file" id="file1" name="file1" onchange="uploadFile()"
+            
+            <input style="display:none;" data-buttonText="Upload an Image" type="file" id="file1" name="file1" onchange="uploadFile()"
                    accept="image/png, image/jpeg, .gif, .png, .jpg, .jpeg">
+            <br><br>
+            <label id="labelfile" for="file1">Upload Image</label>
             <input class="submit" value="Search" type="submit">
             </form>
 

@@ -2,9 +2,7 @@
 {% extends "layout.html" %}
 {% block main %}
 
-
-<div id="homePageBanner">
-  <nav>
+<nav>
   <span style="float:left;">
     <a href="/"><img src="static/logo.png" style="height:2em;"></a>
     <a href="/pricing">Pricing</a>
@@ -20,6 +18,8 @@
     <a id="signup" href="/signup">Sign Up</a>
   </span>
 </nav>
+
+<div id="homePageBanner">
   <br><h1><strong>Balance Your Organization.</strong></h1>
   <span class="smaller">Join a Community of Students, Musicians, Gamers, Developers, and more! Welcome to Nebulus.</span><br>
   <form type="GET" action="/signup">
