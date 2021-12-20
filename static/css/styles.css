@@ -38,7 +38,7 @@ strong{
   width: calc(100% - 80px); /*Padding*/
   padding:40px;
   padding-top:90px;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://wallpaperaccess.com/full/39608.jpg) !important; 
+  background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max) !important; 
   background: no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -196,7 +196,15 @@ progress[value]::-webkit-progress-value {
 input[type=file]{
   padding:20px;
   margin:10px;
-  background:rgba(256,256,256,0.3);
+  
+  background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://wallpaperaccess.com/full/39608.jpg) !important; 
+  background: no-repeat center center fixed;
+  background-size: 100% auto;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+   overflow: hidden;
   color:black;
   border-style:none;
   border-radius:10px;
