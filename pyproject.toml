@@ -8,6 +8,7 @@ authors = ["nicholasxwang <<>>"]
 python = "^3.8"
 Flask = "^2.0.2"
 youtube_dl = "^2021.12.17"
+pymongo = "^4.0.1"
 
 [tool.poetry.dev-dependencies]
 

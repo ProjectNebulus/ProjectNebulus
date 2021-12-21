@@ -23,8 +23,8 @@ strong{
   margin:0px; /* No borders for the image*/
   width: calc(100% - 80px); /*Padding*/
   padding:40px;
-  padding-top:90px;
-  padding-bottom:180px;
+  padding-top:5px;
+  padding-bottom:200px;
   background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://wallpaperaccess.com/full/39608.jpg) !important; 
   background: no-repeat center center fixed;
   -webkit-background-size: cover;

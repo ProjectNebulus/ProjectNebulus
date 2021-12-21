@@ -23,7 +23,7 @@ def dl_youtube(query):
     ydl.download([f"ytsearch1:{query}"])
   return location+query+".mp3"
 
-def search(query):
+def search_yt(query):
   import urllib.request
   import re
   search_keyword = query
