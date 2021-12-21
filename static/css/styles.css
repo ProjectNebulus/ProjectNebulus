@@ -19,6 +19,11 @@ strong{
   font-weight:600;
   font-size:1.3em;
 }
+.medium{
+  color: #a8a8a8;
+  font-weight: 750;
+  font-size: 1.5em;
+}
 #homePageBanner{
   margin:0px; /* No borders for the image*/
   width: calc(100% - 80px); /*Padding*/
@@ -124,7 +129,7 @@ nav a:hover{
 
   width: calc(100% - 80px); /*Padding*/
   padding:40px;
-  padding-top:90px;
+  padding-top:40px;
   padding-bottom:90px;
   background: white;
   color:black;

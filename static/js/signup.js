@@ -3,7 +3,8 @@ window.addEventListener('load', function() {
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
   }
-
+let r_l = []
+var hasNumber = /\d/;  
   function validate(email) {
 
     if (validateEmail(email)) {
@@ -22,6 +23,9 @@ window.addEventListener('load', function() {
         ocument.getElementsByClassName("response")[0].innerHTML = '<i class="material-icons">error</i>';
       }
     }
+  if (localStorage.getItem('email') !== null) {
+    document.getElementById("email").value = localStorage.getItem('email')
+  }
   function checkPassword(){
   var value = document.getElementById("password").value;
       if (value.length<6){
@@ -29,17 +33,20 @@ window.addEventListener('load', function() {
         document.getElementById("bubble").style.display="none";
         document.getElementById("bubble2").innerHTML = "Message: Password must be at least 6 characters long";
         document.getElementById("passwordValid").style.display="none";
-      }else if (!value.includes("1") &&!value.includes("2") && !value.includes("3") && !value.includes("3") && !value.includes("4") && !value.includes("5") && !value.includes("6") && !value.includes("7") && !value.includes("8") && !value.includes("9") && !value.includes("0")){
+      }else if (!hasNumber.test(value)){
         document.getElementById("bubble2").style.display="block";
         document.getElementById("bubble").style.display="none";
         document.getElementById("bubble2").innerHTML = "Message: Password must include at least 1 number";
         document.getElementById("passwordValid").style.display="none";
-      }else if (!value.includes("!") &&!value.includes(" ") && !value.includes("#") && !value.includes('"') && !value.includes("'") && !value.includes("$") && !value.includes("%") && !value.includes("&") && !value.includes("(") && !value.includes(")") && !value.includes("*") && !value.includes("+") && !value.includes(",") && !value.includes(".") && !value.includes("-") && !value.includes("/") && !value.includes(":") &&!value.includes("=") && !value.includes("<") && !value.includes(">") && !value.includes(";") && !value.includes("@") && !value.includes("?") && !value.includes("[") && !value.includes("]") && !value.includes("^") && !value.includes("`") && !value.includes("|") && 
-      !value.includes("{") &&!value.includes("}") ){
-        document.getElementById("bubble2").style.display="block";
-        document.getElementById("bubble").style.display="none";
-        document.getElementById("bubble2").innerHTML = "Message: Password must include at least 1 special character";
-        document.getElementById("passwordValid").style.display="none";
+      }else if (true){
+        for (var i = 0, i < value.length, i++) {
+          if (!r_l.includes(value[i])) {
+            document.getElementById("bubble2").style.display="block";
+            document.getElementById("bubble").style.display="none";
+            document.getElementById("bubble2").innerHTML = "Message: Password must include at least 1 special character";
+            document.getElementById("passwordValid").style.display="none";
+          }
+        }
       }else{
         document.getElementById("bubble").style.display="block";
         document.getElementById("bubble2").style.display="none";
