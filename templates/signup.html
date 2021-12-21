@@ -6,6 +6,7 @@
     <h1><img src="static/logo.png" style="height:1.5em;"></h1>
     <h1>Sign Up for Nebulus</h1>
     <div id="signupinnerbody">
+      <form method="POST">
       <p>Email Address</p>
       <input onkeyup = "changeEmail()" id="email" name="email" type="text" placeholder="jonnyappleseed@appleseed.org"><span class="response"></span><br>
       <p>Username</p>
@@ -16,6 +17,7 @@
       <input id="confirm" name = "password" type="password" placeholder="••••••••••"><span class="response"></span><br>
       <input type="submit" value="Sign Up!"><br><br>
       <p>Already have an account? <a href="/login">Log In</a>!</p>
+      </form>
     </div>
   </div>
 </body>

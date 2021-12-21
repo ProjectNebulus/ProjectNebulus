@@ -9,7 +9,10 @@ import os
 #Variables
 app = Flask('app')
 app.secret_key = '12345678987654321'
-#Routing
+@app.errorhandler(404)
+def not_found(e):
+  return render_template("404.html")
+
 @app.route('/')
 def index():
   return render_template("index.html")
@@ -23,7 +26,8 @@ def signup_post():
   session["username"] = request.form.get("username")
   session["email"] = request.form.get("email")
   session["password"] = request.form.get("password")
-  return render_template("dashboard.html", new_account = True)
+  create_user(session["username"],session["email"],session["password"])
+  return render_template("dashboard.html", new_account = True, user = session["username"])
 
 @app.route("/signin")
 def signin():
