@@ -1,9 +1,9 @@
-import gvision
+from static.python.gvision import *
 import musixmatch
-import youtube
+import static.python.youtube
 
 def convert(file_path):
-  a = gvision.detect_image(file_path)
+  a = detect_image(file_path)
   musix = musixmatch.Musixmatch('bbd8cc3d9f6c1444e01d9d66b44f0f49')
   songs= []
   for i in a:

@@ -1,5 +1,6 @@
 #Imports
-from flask import Flask, render_template, session, flash, secure_filename
+from flask import Flask, render_template, session, flash
+from werkzeug.utils import secure_filename
 from static.python.image_to_music import *
 from static.python.mongodb import *
 import os
