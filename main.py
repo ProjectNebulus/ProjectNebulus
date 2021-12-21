@@ -1,8 +1,9 @@
 #Imports
-from flask import Flask, render_template, session, flash
+from flask import Flask, render_template, session, flash, request
 from werkzeug.utils import secure_filename
 from static.python.image_to_music import *
 from static.python.mongodb import *
+from static.python.security import *
 import os
 
 #Variables
@@ -16,6 +17,13 @@ def index():
 @app.route("/signup")
 def signup():
   return render_template("signup.html")
+
+@app.route("/signup", methods=["POST"])
+def signup_post():
+  session["username"] = request.form.get("username")
+  session["email"] = request.form.get("email")
+  session["password"] = request.form.get("password")
+  return render_template("dashboard.html", new_account = True)
 
 @app.route("/signin")
 def signin():

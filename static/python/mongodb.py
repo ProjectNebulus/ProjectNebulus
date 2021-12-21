@@ -17,15 +17,15 @@ def check_login(user, password):
       if account["email"].lower() == user.lower():
         userPassword = account["password"]
         if validate_password(userPassword, password):
-          return True
+          return "True"
         else:
-          return False
+          return "Invalid Password for "+account["email"]
   #It's a username
   for account in Accounts.find({}):
       if account["username"].lower() == user.lower():
         userPassword = account["password"]
         if validate_password(userPassword, password):
-          return True
+          return "True"
         else:
-          return False
-  return False
+          return "Invalid Password for "+account["email"]
+  return "Unknown Username or Email"
