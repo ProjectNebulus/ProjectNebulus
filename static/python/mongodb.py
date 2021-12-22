@@ -16,7 +16,7 @@ def check_login(user, password):
     for account in Accounts.find({}):
       if account["email"].lower() == user.lower():
         userPassword = account["password"]
-        if validate_password(userPassword, password):
+        if valid_password(userPassword, password):
           return "True"
         else:
           return "Invalid Password for "+account["email"]
@@ -24,7 +24,7 @@ def check_login(user, password):
   for account in Accounts.find({}):
       if account["username"].lower() == user.lower():
         userPassword = account["password"]
-        if validate_password(userPassword, password):
+        if valid_password(userPassword, password):
           return "True"
         else:
           return "Invalid Password for "+account["email"]

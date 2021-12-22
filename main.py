@@ -31,7 +31,30 @@ def signup_post():
 
 @app.route("/signin")
 def signin():
+  if session.get('username'):
+    return render_template("dashboard.html", user = session["username"])
   return render_template("signin.html")
+
+@app.route("/signin", methods=['POST'])
+def signin_post():
+  data = request.get_json()
+  print(data)
+
+  username = data['username']
+  password = data['password']
+
+  validation = check_login(username, password) #hi neel
+  #cuz first we need to get it work ng, then we can make it look nice 
+
+  if validation != "True":
+    return "False"
+  else:
+    session['username'] = username
+    session['password'] = password
+    return "True"
+  
+  
+  
   
 @app.route("/musiqueworld")
 def musiqueworld():

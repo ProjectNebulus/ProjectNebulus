@@ -3,44 +3,44 @@
     "main.py": [
       {
         "id": "1a96932e-ecb0-4cdb-8de1-01e6d9931860",
-        "line": 28,
-        "version": 826,
-        "index": 615
+        "line": 41,
+        "version": 1220,
+        "index": 1133
       }
     ],
     "static/css/styles.css": [
       {
         "id": "b36c8974-2de7-4a05-b62e-91fbb4c7437f",
-        "line": 141,
-        "version": 2159,
-        "index": 3147
+        "line": 146,
+        "version": 2229,
+        "index": 3216
       }
     ],
     "templates/index.html": [
       {
-        "id": "e1db57a6-1694-400b-8b06-37d5e384dee0",
+        "id": "397eee39-3edd-40f9-9bb7-f54d85330b1b",
         "line": 4,
-        "version": 1475,
+        "version": 1662,
         "index": 71
       },
       {
-        "id": "952e745f-6039-4ad5-b87d-089458bd8dea",
+        "id": "b58ed213-3688-4cfb-9f32-7a46c8c679e5",
         "line": 5,
-        "version": 1475,
-        "index": 73
+        "version": 1662,
+        "index": 72
       }
     ],
     "templates/layout.html": [
       {
         "id": "53a2cbb2-d7e4-49e6-83dc-19e104d7e174",
         "line": 12,
-        "version": 142,
+        "version": 144,
         "index": 275
       },
       {
         "id": "d346a680-e7da-49a3-92a4-e0d2a01a853b",
         "line": 12,
-        "version": 142,
+        "version": 144,
         "index": 297
       }
     ],
@@ -52,12 +52,20 @@
         "index": 405
       }
     ],
+    "templates/signin.html": [
+      {
+        "id": "1b8b5f99-41bd-47a2-9c67-a9cf18703c65",
+        "line": 19,
+        "version": 171,
+        "index": 555
+      }
+    ],
     "templates/signup.html": [
       {
         "id": "b4510f63-96df-439d-837b-a9e9460e65a2",
         "line": 4,
-        "version": 1028,
-        "index": 55
+        "version": 1313,
+        "index": 54
       }
     ]
   }

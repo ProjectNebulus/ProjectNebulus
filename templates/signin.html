@@ -1,19 +1,27 @@
 {% extends "layout.html" %}
 {% block main %}
+
+
+
 <body>
   <div id="signupbody">
+    <script src='/static/js/signin.js'></script>
     <h1><img src="static/logo.png" style="height:1.5em;"></h1>
     <h1>Log in</h1>
     <div id="signupinnerbody">
-      <p>Username/Email Address</p>
-      <input type="text" placeholder="jonnyappleseed@appleseed.org"><br>
-      <p>Password</p>
-      <input type="password" placeholder="••••••••••"><br>
-
-      <p id="fail"></p>
-      <input type="submit" value="Log in">
-      <p>Don't have an account? <a href="/signup">Sign Up</a>!</p>
+      <form id='signin_form' action='#' onsubmit='loginUser(); return false'>
+        <p>Username/Email Address</p>
+        <input type="text" placeholder="jonnyappleseed@appleseed.org" id="usrname"><be>
+        <p>Password</p>
+        <input type="password" placeholder="••••••••••" id="psw"><br>
+      
+        <p id="fail"></p>
+        <input id="log_in" type="submit" value="Log in">
+      </form>
+      
+      <p>Don't have an account? <a href="/signin">Sign Up</a>!</p>
     </div>
   </div>
 </body>
+
 {% endblock %}
