@@ -12,7 +12,7 @@ function reqListener(){
   if (this.responseText == 'True'){
     text.innerHTML = 'Your login attempt was successful';
     text.style.color = 'green';
-    window.location.href='/dashboard';
+    window.location.href='/dashboard?new_user=false';
   } else {
     text.innerHTML = 'That username/email and password does not exist';
     text.style.color = 'red';

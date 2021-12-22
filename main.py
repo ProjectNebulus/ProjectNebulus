@@ -1,5 +1,5 @@
 #Imports
-from flask import Flask, render_template, session, flash, request
+from flask import Flask, render_template, session, flash, request, redirect
 from werkzeug.utils import secure_filename
 from static.python.image_to_music import *
 from static.python.mongodb import *
@@ -17,6 +17,20 @@ def not_found(e):
 def index():
   return render_template("index.html")
 
+
+@app.route('/dashboard')
+def dashboard():
+
+  if not session.get('username'):
+    return redirect('/signin')
+  else:
+    new_user = request.args.get('new_user', default='false', type=str)
+    if new_user == 'true':
+      return render_template("dashboard.html", user = session["username"], new_account = True)
+    else:
+      return render_template("dashboard.html", user = session["username"])
+    
+
 @app.route("/signup")
 def signup():
   return render_template("signup.html")
@@ -27,12 +41,10 @@ def signup_post():
   session["email"] = request.form.get("email")
   session["password"] = request.form.get("password")
   create_user(session["username"],session["email"],session["password"])
-  return render_template("dashboard.html", new_account = True, user = session["username"])
+  return redirect('/dashboard?new_user=true')
 
 @app.route("/signin")
 def signin():
-  if session.get('username'):
-    return render_template("dashboard.html", user = session["username"])
   return render_template("signin.html")
 
 @app.route("/signin", methods=['POST'])
