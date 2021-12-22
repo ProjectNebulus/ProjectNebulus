@@ -45,12 +45,13 @@ def signup_post():
 
 @app.route("/signin")
 def signin():
-  return render_template("signin.html")
+  if not session.get('username'):
+    return render_template("signin.html")
+  return redirect('/dashboard?new_user=false')
 
 @app.route("/signin", methods=['POST'])
 def signin_post():
   data = request.get_json()
-  print(data)
 
   username = data['username']
   password = data['password']
