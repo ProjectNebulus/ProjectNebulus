@@ -186,10 +186,6 @@ details div:hover {
   color:white;
 }
 
-#log-out, #log-out:hover {
-  color: red;
-}
-
 input:focus{
   border-style:solid;
   border-color:blue;

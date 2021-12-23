@@ -39,6 +39,8 @@ def dashboard():
 
 @app.route("/signup")
 def signup():
+  if session.get("username"):
+    return redirect('/dashboard?new_user=false')
   return render_template("signup.html")
 
 @app.route("/signup", methods=["POST"])
