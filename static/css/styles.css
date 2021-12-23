@@ -86,6 +86,7 @@ input{
   outline:none;
   border:none;
   margin:10px;
+  transition: 0.5s;
 }
 
 input[type=text] {
@@ -100,32 +101,58 @@ input[type=submit]{
   background:#00a2ff;
 }
 
+hr {
+  height: 1px;
+  border-width: 0;
+  color: white;
+  background-color: white;
+}
+
 nav {
   margin: 0px;
   padding: 20px 10px 10px 20px;
   height: 50px;
   /*background: rgba(0,0,0,0.3);*/
 }
+
 nav a {
   text-decoration:none;
   color:white;
   margin-left:20px;
 }
+
 nav a:hover{
   text-decoration:none;
   color:grey;
 }
-#signup{
+
+details a {
+  font-weight: 500;
+  font-size: 0.8em;
+  margin: 5px 10px 5px 10px;
+}
+
+details a:hover {
+  color: white;
+}
+
+details div:hover {
+  background-color: #00a2ff;
+}
+
+#signup {
   border-style:solid;
   border-color:white;
   border-radius:10px;
   border-width:1px;
   padding:10px;
 }
-#signup:hover{
+
+#signup:hover {
   border-color:grey;
 }
-#premium{
+
+#premium {
   margin:0px; /* No borders for the image*/
 
   width: calc(100% - 80px); /*Padding*/
@@ -153,10 +180,16 @@ nav a:hover{
   padding-left:5px;
   border-radius:10px;
 }
+
 #signupinnerbody input{
   background-color: #212121;
   color:white;
 }
+
+#log-out, #log-out:hover {
+  color: red;
+}
+
 input:focus{
   border-style:solid;
   border-color:blue;
@@ -166,14 +199,18 @@ input:focus{
   background-color: #00a2ff;
   color:white;
 }
+
 input[type=submit]:hover{
   background:#0268a3;
+  color: white;
 }
-a{
+
+a {
   color:#00a2ff;
   text-decoration:none;
   font-weight:600;
 }
+
 a:hover{
   color:#0268a3;
 }
@@ -184,8 +221,8 @@ progress[value] {
 
   width: 250px;
   height: 20px;
-  
 }
+
 progress[value]::-webkit-progress-value {
   background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://wallpapercave.com/wp/wp2742875.jpg) !important; 
   background: no-repeat center center fixed;
@@ -200,6 +237,7 @@ progress[value]::-webkit-progress-value {
     border-radius: 2px; 
     background-size: 35px 20px, 100% 100%, 100% 100%;
 }
+
 input[type=file]{
   color:white;
   padding:20px;
@@ -245,5 +283,7 @@ input[type=file]{
   border-color:white;
   border-width:1px;
   border-radius:10px;
-  
+  margin:10px;
+  width:300px;
+  float:left;
 }

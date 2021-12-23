@@ -3,24 +3,24 @@
     "main.py": [
       {
         "id": "1a96932e-ecb0-4cdb-8de1-01e6d9931860",
-        "line": 77,
-        "version": 1396,
-        "index": 2011
+        "line": 98,
+        "version": 2428,
+        "index": 2727
       }
     ],
     "static/css/styles.css": [
       {
         "id": "b36c8974-2de7-4a05-b62e-91fbb4c7437f",
-        "line": 147,
-        "version": 2252,
-        "index": 3217
+        "line": 172,
+        "version": 3106,
+        "index": 3476
       }
     ],
     "templates/dashboard.html": [
       {
         "id": "b30ddc39-8b49-4920-8bd8-2de61a2da748",
         "line": 7,
-        "version": 1437,
+        "version": 2153,
         "index": 316
       }
     ],
@@ -42,13 +42,13 @@
       {
         "id": "53a2cbb2-d7e4-49e6-83dc-19e104d7e174",
         "line": 12,
-        "version": 146,
+        "version": 160,
         "index": 275
       },
       {
         "id": "d346a680-e7da-49a3-92a4-e0d2a01a853b",
         "line": 12,
-        "version": 146,
+        "version": 160,
         "index": 297
       }
     ],
@@ -64,8 +64,8 @@
       {
         "id": "1b8b5f99-41bd-47a2-9c67-a9cf18703c65",
         "line": 23,
-        "version": 234,
-        "index": 743
+        "version": 412,
+        "index": 875
       }
     ],
     "templates/signup.html": [

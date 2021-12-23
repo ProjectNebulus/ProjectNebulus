@@ -16,7 +16,6 @@ function loginUser() {
 
   var submit = document.getElementById("log_in");
   submit.disabled = true;
-  submit.value = "Logging in...";
   submit.style.color = "gray";
   submit.style.backgroundColor = "#006097";
 
@@ -44,7 +43,6 @@ function reqListener() {
   
   var submit = document.getElementById("log_in");
   submit.disabled = false;
-  submit.value = "Log in";
   submit.style.color = "white";
   submit.style.backgroundColor = "#00a2ff";
 }

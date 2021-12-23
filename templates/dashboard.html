@@ -17,11 +17,17 @@
       <a href="/music">MusiSearch</a>
       <a href="/vh">Virtual Holidays</a>
     </span>
-    <span style="float:right;">
-      <br>
-      <br>
-      <a id="signup" href="/pricing">Upgrade</a>
-      <a>{{user}}</a>
+    <span style="float:right;margin:30px 20px 30px 5px;">
+      <details>
+        <summary>{{user}}</summary>
+
+        <div style="background-color:black; border:1px solid lightgray; border-radius:5px;margin-top:10px;">
+          <div style="margin-top:5px"><a href="/pricing">Upgrade</a></div>
+          <hr>
+          <div style="margin-bottom:5px"><a href='/logout' id="log-out">Log Out</a></div>
+        </div>
+
+      </details>
     </span>
 </nav>
 <br><br>

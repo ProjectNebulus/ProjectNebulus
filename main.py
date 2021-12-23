@@ -9,6 +9,7 @@ import os
 #Variables
 app = Flask('app')
 app.secret_key = '12345678987654321'
+
 @app.errorhandler(404)
 def not_found(e):
   return render_template("404.html")
@@ -17,6 +18,11 @@ def not_found(e):
 def index():
   return render_template("index.html")
 
+@app.route('/logout')
+def logout():
+  session['username'] = None
+  session['password'] = None
+  return redirect('/')
 
 @app.route('/dashboard')
 def dashboard():
