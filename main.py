@@ -12,11 +12,11 @@ app.secret_key = '12345678987654321'
 
 @app.errorhandler(404)
 def not_found(e):
-  return render_template("404.html")
+  return render_template("404.html", page='404')
 
 @app.route('/')
 def index():
-  return render_template("index.html")
+  return render_template("index.html", page = 'Nebulus')
 
 @app.route('/logout')
 def logout():
@@ -26,7 +26,6 @@ def logout():
 
 @app.route('/dashboard')
 def dashboard():
-
   if not session.get('username'):
     return redirect('/signin')
   else:
@@ -34,14 +33,17 @@ def dashboard():
     if new_user == 'true':
       return render_template("dashboard.html", user = session["username"], new_account = True)
     else:
-      return render_template("dashboard.html", user = session["username"])
-    
+      return render_template("dashboard.html", user = session["username"], page='Nebulus - Dashboard')
+
+@app.route("/developers")
+def developers():
+  return render_template("developers.html", page='Nebulus - Developers')    
 
 @app.route("/signup")
 def signup():
   if session.get("username"):
     return redirect('/dashboard?new_user=false')
-  return render_template("signup.html")
+  return render_template("signup.html", page = 'Nebulus - Sign Up')
 
 @app.route("/signup", methods=["POST"])
 def signup_post():
@@ -54,7 +56,7 @@ def signup_post():
 @app.route("/signin")
 def signin():
   if not session.get('username'):
-    return render_template("signin.html")
+    return render_template("signin.html", page='Nebulus - Log In')
   return redirect('/dashboard?new_user=false')
 
 @app.route("/signin", methods=['POST'])
@@ -79,7 +81,7 @@ def signin_post():
   
 @app.route("/musiqueworld")
 def musiqueworld():
-  return render_template("musiqueworld.html")
+  return render_template("musiqueworld.html", page = "Nebulus - Musiqueworld")
 
 @app.route("/musiqueworld", methods=["POST"])
 def musiqueworld_post():

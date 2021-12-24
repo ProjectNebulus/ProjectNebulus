@@ -5,6 +5,13 @@ body{
   color:white;
   font-family: 'Lexend Deca', sans-serif;
 }
+.dev_identifiers{
+  color: white;
+}
+.dev_images {
+  height: 150px;
+  border: 5px solid #505050
+}
 strong{
   font-weight:900;
   font-size:2em;
@@ -14,6 +21,7 @@ strong{
   font-weight:200;
   font-size:1.3em;
 }
+
 .smaller2{
   color:#a8a8a8;
   font-weight:600;
@@ -136,6 +144,10 @@ details a:hover {
   color: white;
 }
 
+details div {
+  margin-top: 5px;
+}
+
 details div:hover {
   background-color: #00a2ff;
 }
@@ -253,7 +265,8 @@ input[type=file]{
   font-size:1.5em;
   font-family: 'Lexend Deca', sans-serif;
 }
-#labelfile{
+
+#labelfile {
   color:white !important;
   padding:20px;
   margin:10px;
@@ -272,8 +285,10 @@ input[type=file]{
   font-size:1.5em;
   font-family: 'Lexend Deca', sans-serif;
 }
-.dashboardCourse{
+
+.dashboardCourse {
   background-color:#000000;
+  color: white;
   padding:10px;
   border-style:solid;
   border-color:white;
@@ -282,4 +297,17 @@ input[type=file]{
   margin:10px;
   width:300px;
   float:left;
+}
+
+.dashboardCourse:hover {
+  color: gray;
+  border-color: gray;
+}
+
+.button {
+  margin: 20px 5px 20px 5px;
+  padding: 5px 10px 5px 10px;
+  background-color: #00a2ff;
+  border-radius: 3px;
+  color:white;
 }

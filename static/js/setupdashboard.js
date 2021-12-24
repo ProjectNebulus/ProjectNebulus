@@ -5,16 +5,16 @@ var teachers = ["Ms. Nagami", "Mr. Ross", "Ms. Gousia", "Ms. Adams", "Ms. Odell"
 var courses = document.getElementById("center");
 
 for (var i = 0; i < courseNames.length; i++) {
-  var div = document.createElement("DIV");
-  div.className = "dashboardCourse";
+  var a = document.createElement("a");
+  a.className = "dashboardCourse";
 
-  var courseName = document.createElement("H2");
+  var courseName = document.createElement("h2");
   courseName.innerHTML = courseNames[i];
-  div.appendChild(courseName);
+  a.appendChild(courseName);
 
-  var teacher = document.createElement("H3");
+  var teacher = document.createElement("h3");
   teacher.innerHTML = teachers[i];
-  div.appendChild(teacher);
+  a.appendChild(teacher);
 
-  courses.appendChild(div);
+  courses.appendChild(a);
 }
