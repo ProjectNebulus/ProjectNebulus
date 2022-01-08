@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block main %}
+<html>
+  <nav>
+    <span style="float:left;">
+      <a href="/"><img src="static/images/logo.png" style="height:2em;"></a>
+      <a href="/pricing">Pricing</a>
+      <a href="/developers">Developers</a>
+      <a href="/docs/api">API</a>
+      <a href="/lms">LMS</a>
+      <a href="/chat">Chat</a>
+      <a href="/musiqueworld">MusiqueWorld</a>
+      <a href="/music">MusiSearch</a>
+      <a href="/vh">Virtual Holidays</a>
+    </span>
+    <span style='float:right'>
+      <details style="float:right;margin:30px 20px 30px 5px;">
+    <summary>{{user}} <img style="vertical-align: middle;" src="/static/images/expand.png"></summary>
+    </span>
+  </nav>
+</html>
+{% endblock %}

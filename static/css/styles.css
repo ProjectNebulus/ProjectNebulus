@@ -6,7 +6,7 @@ body{
   font-family: 'Lexend Deca', sans-serif;
 }
 .dev_identifiers{
-  color: white;
+  color: black;
 }
 .dev_images {
   height: 150px;
@@ -27,11 +27,19 @@ strong{
   font-weight:600;
   font-size:1.3em;
 }
+
 .medium{
   color: #a8a8a8;
   font-weight: 750;
   font-size: 1.5em;
 }
+
+#account input, #account input:hover, #account input:focus {
+  background: transparent;
+  border: transparent;
+  color: white;
+}
+
 #homePageBanner{
   margin:0px; /* No borders for the image*/
   width: calc(100% - 80px); /*Padding*/
@@ -69,6 +77,16 @@ strong{
   background-color: white;
 }
 
+.change-text {
+  float: right;
+  color: #00d0ff;
+  cursor: pointer;
+}
+
+.change-text:hover {
+  text-decoration: underline;
+}
+
 /*CURVED BOTTOM OF DIV
 #homePageBanner::before {
   border-radius: 100%;
@@ -85,7 +103,7 @@ strong{
   content: '';
   bottom: 0;
 }*/
-input{
+input {
   background:white;
   padding:10px;
   font-size:1.3em;
@@ -105,8 +123,22 @@ input[type=password] {
   width:70%;
 }
 
-input[type=submit]{
+input[type=submit], #signupinnerbody input[type=submit] {
   background:#00a2ff;
+  color: white;
+}
+
+.button {
+  background: #00a2ff;
+  color: white;
+  border-radius: 3px;
+  padding: 10px;
+  transition: 0.25s;
+}
+
+.button:hover {
+  background: #0268a3;
+  color: gray;
 }
 
 hr {
@@ -114,6 +146,8 @@ hr {
   border-width: 0;
   color: white;
   background-color: white;
+  margin: 2px 0px 2px 0px;
+  width: 100%;
 }
 
 nav {
@@ -134,18 +168,14 @@ nav a:hover{
   color:grey;
 }
 
-details a {
-  font-weight: 500;
-  font-size: 0.8em;
-  margin: 5px 10px 5px 10px;
-}
-
-details a:hover {
-  color: white;
+details {
+  cursor: pointer;
 }
 
 details div {
-  margin-top: 5px;
+  padding: 5px;
+  font-size: 0.9em;
+  cursor: pointer;
 }
 
 details div:hover {
@@ -164,7 +194,7 @@ details div:hover {
   border-color:grey;
 }
 
-#premium {
+.col1, .col2 {
   margin:0px; /* No borders for the image*/
 
   width: calc(100% - 80px); /*Padding*/
@@ -174,6 +204,21 @@ details div:hover {
   background: white;
   color:black;
 }
+
+.col2 {
+  background: #EEE;
+}
+
+#chat_options {
+  margin: 0px;
+  width: calc(100% - 80px); /*Padding*/
+  padding:40px;
+  padding-top:40px;
+  padding-bottom:90px;
+  background: white;
+  color:black;
+}
+
 #signupbody{
   text-align:center;
   width: 600px;
@@ -184,6 +229,7 @@ details div:hover {
   margin-top:50px;
   margin-bottom:50px;
 }
+
 #signupinnerbody{
   background:#1a1a1a;
   padding-top:40px;
@@ -203,12 +249,7 @@ input:focus{
   border-color:blue;
 }
 
-#signupinnerbody input[type=submit]{
-  background-color: #00a2ff;
-  color:white;
-}
-
-input[type=submit]:hover{
+input[type=submit]:hover, #signupinnerbody input[type=submit]:hover {
   background:#0268a3;
   color: white;
 }
@@ -304,10 +345,16 @@ input[type=file]{
   border-color: gray;
 }
 
-.button {
-  margin: 20px 5px 20px 5px;
-  padding: 5px 10px 5px 10px;
-  background-color: #00a2ff;
-  border-radius: 3px;
-  color:white;
+.white {
+  background: white;
+  height: 100%;
+  width: 100%;
+}
+
+details summary::-webkit-details-marker {
+  display:none;
+}
+
+details summary {
+  list-style: none;
 }

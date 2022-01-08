@@ -1,11 +1,8 @@
-<!--Extend with Jinja!-->
+
 {% extends "layout.html" %}
 {% block main %}
 <html>
-  <head>
-    <title>testing</title>
-    <meta charset="utf-8">
-  </head>
+  
   <body>
     <nav>
     <span style="float:left;">
@@ -21,12 +18,13 @@
     </span>
   </nav>
   <div align='center'>
+    <div  class='col1'>
     <div id='c-level'>
       <h1 class='dev_identifiers'>C-Level</h1>
       <table>
         <tr>
           <th><img class='dev_images' src='/static/images/nicholas_wang.png'></th>
-          <th><img class='dev_images' src='/static/images/logo.png'></th>
+          <th><img class='dev_images' src='/static/images/vedh_r.png'></th>
           <th><img class='dev_images' src='/static/images/kevin_m.png'></th>
         </tr>
         <tr>
@@ -41,6 +39,8 @@
         </tr>
       </table>
     </div>
+    </div>
+    <div  class='col2'>
     <div id='directors'>
       <h1 class='dev_identifiers'>Directors</h1>
       <table>
@@ -58,6 +58,7 @@
         </tr>
       </table>
     </div> 
+  </div>
   </div>
   </body>
 </html>

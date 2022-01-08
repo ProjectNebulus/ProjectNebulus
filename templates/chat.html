@@ -1,0 +1,30 @@
+<!--Extend with Jinja!-->
+{% extends "layout.html" %}
+{% block main %}
+<div id='homePageBanner'>
+  <nav>
+    <span style="float:left;">
+      <a href="/"><img src="static/images/logo.png" style="height:2em;"></a>
+      <a href="/pricing">Pricing</a>
+      <a href="/developers">Developers</a>
+      <a href="/docs/api">API</a>
+      <a href="/lms">LMS</a>
+      <a href="/chat">Chat</a>
+      <a href="/musiqueworld">MusiqueWorld</a>
+      <a href="/music">MusiSearch</a>
+      <a href="/vh">Virtual Holidays</a>
+    </span>
+    <span style="float:right;">
+      <a href="/signin">Login</a>
+      <a id="signup" href="/signup">Sign Up</a>
+    </span>
+  </nav>
+  <br><h1><strong>Chat with friends on Nebulus!</strong></h1>
+  <span class='smaller'>
+    Find servers to chat with like-minded individuals or fun communities
+  </span>
+</div>
+<div id='chat_options'>
+  <input type='submit' value='Create a Server'><input type='submit' value='Friend someone'>
+</div>
+{% endblock %}

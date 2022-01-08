@@ -12,7 +12,7 @@ function loginUser() {
     return;
   }
 
-  status.innerHTML = "";
+  status.innerHTML = "<br>";
 
   var submit = document.getElementById("log_in");
   submit.disabled = true;
@@ -29,15 +29,21 @@ function loginUser() {
 function reqListener() {
   let text = document.getElementById('fail');
 
-  if (this.responseText == 'True')
+  if (this.responseText == "0")
   {
     text.innerHTML = 'Login Successful!';
     text.style.color = 'greenyellow';
-    window.location.href='/dashboard?new_user=false';
+    console.log('Success');
+    window.location.href='/dashboard';
   }
-  else 
+  else if (this.responseText == "1")
   {
-    text.innerHTML = 'The username/password is incorrect.';
+    text.innerHTML = 'The password is incorrect.';
+    text.style.color = 'red';
+  }
+  else if (this.responseText == "2")
+  {
+    text.innerHTML = "This username/email does not exist.";
     text.style.color = 'red';
   }
   

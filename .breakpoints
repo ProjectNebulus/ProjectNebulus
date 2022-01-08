@@ -2,60 +2,60 @@
   "files": {
     "main.py": [
       {
+        "id": "e188b25f-7862-4e96-a513-b98d3ddf3943",
+        "line": 46,
+        "version": 5391,
+        "index": 1187
+      },
+      {
         "id": "1a96932e-ecb0-4cdb-8de1-01e6d9931860",
-        "line": 98,
-        "version": 2459,
-        "index": 2727
+        "line": 134,
+        "version": 5047,
+        "index": 4011
       }
     ],
     "static/css/styles.css": [
       {
         "id": "b36c8974-2de7-4a05-b62e-91fbb4c7437f",
-        "line": 176,
-        "version": 3270,
-        "index": 3512
+        "line": 234,
+        "version": 4957,
+        "index": 4305
+      },
+      {
+        "id": "1284458e-185e-4fbf-b2db-e2da291b2c55",
+        "line": 341,
+        "version": 4957,
+        "index": 6646
+      }
+    ],
+    "static/json/festive-freedom-309323-0124a1c976ae.json": [
+      {
+        "id": "dcc346d6-cbc7-4d3c-b105-2340fff55f8b",
+        "line": 5,
+        "version": 28,
+        "index": 137
       }
     ],
     "templates/dashboard.html": [
       {
         "id": "b30ddc39-8b49-4920-8bd8-2de61a2da748",
-        "line": 7,
-        "version": 3367,
-        "index": 316
-      },
-      {
-        "id": "6c5f0192-2dab-4110-8304-4fefac786b90",
-        "line": 24,
-        "version": 3410,
-        "index": 957
+        "line": 3,
+        "version": 5519,
+        "index": 70
       }
     ],
     "templates/index.html": [
       {
         "id": "397eee39-3edd-40f9-9bb7-f54d85330b1b",
         "line": 4,
-        "version": 1672,
+        "version": 2060,
         "index": 71
       },
       {
         "id": "b58ed213-3688-4cfb-9f32-7a46c8c679e5",
         "line": 5,
-        "version": 1672,
+        "version": 2060,
         "index": 72
-      }
-    ],
-    "templates/layout.html": [
-      {
-        "id": "53a2cbb2-d7e4-49e6-83dc-19e104d7e174",
-        "line": 12,
-        "version": 160,
-        "index": 275
-      },
-      {
-        "id": "d346a680-e7da-49a3-92a4-e0d2a01a853b",
-        "line": 12,
-        "version": 160,
-        "index": 297
       }
     ],
     "templates/login.html": [
@@ -70,8 +70,8 @@
       {
         "id": "1b8b5f99-41bd-47a2-9c67-a9cf18703c65",
         "line": 23,
-        "version": 421,
-        "index": 882
+        "version": 426,
+        "index": 886
       }
     ],
     "templates/signup.html": [

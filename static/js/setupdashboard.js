@@ -1,20 +1,78 @@
-var courseNames = ["English 7", "History 7", "Biology 7", "Physics 7", "Latin II B", "Algebra & Geometry II", "Health 7"];
+// Set up trick or treat
+var zipCode = ["Caroline"];
+var city = ["Sally", "Peter", "John"];
+var state = [];
+var country = [];
+var international = [];
+var stateUnlocked = false;
+var countryUnlocked = false;
+var internUnlocked = false;
 
-var teachers = ["Ms. Nagami", "Mr. Ross", "Ms. Gousia", "Ms. Adams", "Ms. Odell", "Mr. Rocha", "Mr. Floyd"]
+var leftBar = document.getElementsByTagName("center")[0];
 
-var courses = document.getElementById("center");
+for (name of zipCode) {
+  var namep = document.createElement("p");
+  namep.innerHTML = "🏠 " + name;
+  leftBar.appendChild(namep);
+}
 
-for (var i = 0; i < courseNames.length; i++) {
-  var a = document.createElement("a");
-  a.className = "dashboardCourse";
+var newArea = document.createElement("h4");
+newArea.innerHTML = "Same city";
+leftBar.appendChild(newArea);
 
-  var courseName = document.createElement("h2");
-  courseName.innerHTML = courseNames[i];
-  a.appendChild(courseName);
+for (name of city) {
+  var namep = document.createElement("p");
+  namep.innerHTML = "🏠 " + name;
+  leftBar.appendChild(namep);
+}
 
-  var teacher = document.createElement("h3");
-  teacher.innerHTML = teachers[i];
-  a.appendChild(teacher);
+newArea = document.createElement("h4");
+newArea.innerHTML = "Same Province/State";
+leftBar.appendChild(newArea);
 
-  courses.appendChild(a);
+if (stateUnlocked) {
+  for (name of state) {
+    var namep = document.createElement("p");
+    namep.innerHTML = "🏠 " + name;
+    leftBar.appendChild(namep);
+  }
+}
+else {
+  var message = document.createElement("p");
+  message.innerHTML = "🔒 You must finish everyone in your city!";
+  leftBar.appendChild(message);
+}
+
+newArea = document.createElement("h4");
+newArea.innerHTML = "Same country";
+leftBar.appendChild(newArea);
+
+if (countryUnlocked) {
+  for (name of country) {
+    var namep = document.createElement("p");
+    namep.innerHTML = "🏠 " + name;
+    leftBar.appendChild(namep);
+  }
+}
+else {
+  var message = document.createElement("p");
+  message.innerHTML = "🔒 You must finish everyone of your province or state!";
+  leftBar.appendChild(message);
+}
+
+newArea = document.createElement("h4");
+newArea.innerHTML = "International";
+leftBar.appendChild(newArea);
+
+if (internUnlocked) {
+  for (name of international) {
+    var namep = document.createElement("p");
+    namep.innerHTML = "🏠 " + name;
+    leftBar.appendChild(namep);
+  }
+}
+else {
+  var message = document.createElement("p");
+  message.innerHTML = "🔒 You must finish everyone in your country!";
+  leftBar.appendChild(message);
 }

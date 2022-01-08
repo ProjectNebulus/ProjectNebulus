@@ -1,73 +1,65 @@
 <!--Extend with Jinja!-->
 {% extends "layout.html" %}
 {% block main %}
-
-{% if new_account %}
-<span style="background-color:rgba(3, 163, 67,0.5);color:black;padding:10px;border-radius:10px;font-size:1.3em;margin-top:10px;z-index:10;float:right;position: absolute;top: 0;right: 0;">Welcome to Nebulus, {{user}}</span>
+{% if "@" in user and '.' in user %}
+{% set user = db.Accounts.find_one({'email':user}).username %}
 {% endif %}
 <nav style="height:10%;width:100%;float:left; background-color:#000000; position: relative;z-index:1;padding:0px;">
-    <span style="float:left;">
-      <br>
-      <a href="/"><img src="static/images/logo.png" style="height:2em;"></a>
-      <a href="/developers">Developers</a>
-      <a href="/docs/api">API</a>
-      <a href="/lms">LMS</a>
-      <a href="/chat">Chat</a>
-      <a href="/musiqueworld">MusiqueWorld</a>
-      <a href="/music">MusiSearch</a>
-      <a href="/vh">Virtual Holidays</a>
-    </span>
-    <span style="float:right;margin:30px 20px 30px 5px;">
-      <details>
-        <summary>{{user}}</summary>
+  <span style="float:left;">
+    <br>
+    <a href="/"><img src="static/images/logo.png" style="height:2em;"></a>
+    <a href="/developers">Developers</a>
+    <a href="/docs/api">API</a>
+    <a href="/lms">LMS</a>
+    <a href="/chat">Chat</a>
+    <a href="/musiqueworld">MusiqueWorld</a>
+    <a href="/music">MusiSearch</a>
+    <a href="/vh">Virtual Holidays</a>
+  </span>
 
-        <div style="background-color:black; border:1px solid lightgray; border-radius:5px;margin-top:10px;">
-          <div style="margin-top:5px"><a href="/settings">Settings</a></div>
-          <div><a href="/profile">Profile</a></div>
-          <hr>
-          <div><a href="/pricing">Upgrade to Premium</a></div>
-          <hr>
-          <div style="margin-bottom:5px"><a href='/logout'>Log Out</a></div>
-        </div>
+  {% if new_account %}
+  <span style="margin-top:20px;padding: 10px 5px 10px 5px;background:rgba(0, 255, 0, 0.2);border-radius:10px;float:right">Welcome to Nebulus, {{user}}</span>
+  {% endif %}
+  
+  <details style="float:right;margin:30px 20px 30px 5px;">
+    <summary>
+      {{user}} 
+      <img style="vertical-align:middle;" src="/static/images/expand.png"></img>
+    </summary>
 
-      </details>
-    </span>
+    <div style="background-color:black; border:1px solid lightgray; border-radius:5px;margin-top:10px;">
+      <div onclick="window.open('/settings', '_self')">Settings</div>
+      <div onclick="window.open('/profile', '_self')">Profile</div>
+      <hr>
+      <div onclick="window.open('/pricing', '_self')">Upgrade to Premium</div>
+      <hr>
+      <div onclick="window.open('/logout', '_self')">Log Out</div>
+    </div>
+  </details>
 </nav>
-<br><br>
+<br>
 <div id="left" style="width:20%;height:90%;float:left;background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://wallpapercave.com/wp/wp2742875.jpg) !important; background: no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;overflow: hidden;overflow:auto;">
   <center>
-  <h3>Continue Trick Or Treating</h3>
-  <h4>Same Zip Code</h4>
-  <p>🏠 Caroline</p>
-  <h4>Same City</h4>
-  <p>🏠 Sally</p>
-  <p>🏠 Peter</p>
-  <p>🏠 John</p>
-  <h4>Same Province/State</h4>
-  <p>🏠 Lauren</p>
-  <p>🏠 Timothy</p>
-  <p>🏠 Jack</p>
-  <p>🏠 Elizabeth</p>
-  <p>🏠 Isabel</p>
-  <p>🏠 Sunny</p>
-  <h4>Same Country</h4>
-  <p>🔒 You must finish everyone in your province or state!</p>
-  <h4>International</h4>
-  <p>🔒 You must finish everyone in your country</p>
-
+    <h3>Continue Trick Or Treating</h3>
+    <h4>Same Zip Code</h4>
   </center>
 </div>
 <div id="middle" style="width:60%;height:90%;float:left;overflow:auto;">
-  <center id="center">
+  <center>
   <h1>
     Jump into These Courses 
-    <a style="margin-left:10px">Create New</a>
-  </h1>
-  </center>
-  
+    <a style="margin-left:10px" href='/new'>Create New</a>
+  </h1><!--Checking if the user signed in by email or username-->
+
+    {% for i in db.Accounts.find_one({'username': user}).courses %}
+    <a class='dashboardCourse' href='/courses/{{i.id}}'>
+      <h2>{{i.name}}</h2>
+      <h3>{{i.teacher}}</h3>
+    </a>
+    {% endfor %}
 </div>
 
-<div id="right" style="width:20%;height:90%;float:left;background-color:transparent;overflow:auto">
+<div id="right" style="width:20%;height:90%;float:right;background-color:transparent;overflow:auto">
   <h3>My MusiqueWorld Creations:</h3>
   <hr>
   <div style="height:140px;">
@@ -130,8 +122,6 @@
   </div>
   </div>
   <hr>
-
-  <script src="/static/js/setupdashboard.js"></script>
 </div>
 
 {% endblock %}

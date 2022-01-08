@@ -13,6 +13,8 @@ musixmatch = "^0.9"
 google-cloud-vision = "^2.6.3"
 Werkzeug = "^2.0.2"
 dnspython = "^2.1.0"
+javascript = "^2015.32.59"
+"Python.js" = "^1.2.0"
 
 [tool.poetry.dev-dependencies]
 
