@@ -1,4 +1,3 @@
-
 #Imports
 from flask import Flask, render_template, session, flash, request, redirect
 from werkzeug.utils import secure_filename
@@ -32,7 +31,7 @@ def courses(id):
       if course.get('_id') == id:
         break
 
-    return render_template("course.html", page="Nebulus - {{db.Accounts.find_one({'username':user}).courses.find_one({'_id':id}).name}}", db=db, course=course)
+    return render_template("course.html", page="Nebulus - {{db.Accounts.find_one({'username':user}).courses.find_one({'_id':id}).name}}", db=db, course=course, user=session.get("username"))
 
   else:
     return redirect('/signin')
