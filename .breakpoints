@@ -3,29 +3,29 @@
     "main.py": [
       {
         "id": "e188b25f-7862-4e96-a513-b98d3ddf3943",
-        "line": 46,
-        "version": 5391,
-        "index": 1187
+        "line": 51,
+        "version": 6721,
+        "index": 1253
       },
       {
         "id": "1a96932e-ecb0-4cdb-8de1-01e6d9931860",
-        "line": 134,
-        "version": 5047,
-        "index": 4011
+        "line": 143,
+        "version": 6721,
+        "index": 4180
       }
     ],
     "static/css/styles.css": [
       {
         "id": "b36c8974-2de7-4a05-b62e-91fbb4c7437f",
         "line": 234,
-        "version": 4957,
-        "index": 4305
+        "version": 5058,
+        "index": 4342
       },
       {
         "id": "1284458e-185e-4fbf-b2db-e2da291b2c55",
         "line": 341,
-        "version": 4957,
-        "index": 6646
+        "version": 5058,
+        "index": 6727
       }
     ],
     "static/json/festive-freedom-309323-0124a1c976ae.json": [
@@ -39,9 +39,9 @@
     "templates/dashboard.html": [
       {
         "id": "b30ddc39-8b49-4920-8bd8-2de61a2da748",
-        "line": 3,
-        "version": 5519,
-        "index": 70
+        "line": 2,
+        "version": 7013,
+        "index": 53
       }
     ],
     "templates/index.html": [
@@ -70,15 +70,15 @@
       {
         "id": "1b8b5f99-41bd-47a2-9c67-a9cf18703c65",
         "line": 23,
-        "version": 426,
-        "index": 886
+        "version": 429,
+        "index": 889
       }
     ],
     "templates/signup.html": [
       {
         "id": "b4510f63-96df-439d-837b-a9e9460e65a2",
         "line": 4,
-        "version": 1321,
+        "version": 1511,
         "index": 54
       }
     ]

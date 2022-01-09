@@ -1,7 +1,7 @@
 <!--Extend with Jinja!-->
 {% extends "layout.html" %}
 {% block main %}
-{% if "@" in user and '.' in user %}
+{% if '@' in user and '.' in user %}
 {% set user = db.Accounts.find_one({'email':user}).username %}
 {% endif %}
 <nav style="height:10%;width:100%;float:left; background-color:#000000; position: relative;z-index:1;padding:0px;">
@@ -21,13 +21,13 @@
   <span style="margin-top:20px;padding: 10px 5px 10px 5px;background:rgba(0, 255, 0, 0.2);border-radius:10px;float:right">Welcome to Nebulus, {{user}}</span>
   {% endif %}
   
-  <details style="float:right;margin:30px 20px 30px 5px;">
+  <details style="float:right;margin:30px 20px 30px 5px;text-align:right">
     <summary>
       {{user}} 
       <img style="vertical-align:middle;" src="/static/images/expand.png"></img>
     </summary>
 
-    <div style="background-color:black; border:1px solid lightgray; border-radius:5px;margin-top:10px;">
+    <div style="background-color:black;border:1px solid lightgray;border-radius:5px;margin-top:10px;text-align:left">
       <div onclick="window.open('/settings', '_self')">Settings</div>
       <div onclick="window.open('/profile', '_self')">Profile</div>
       <hr>

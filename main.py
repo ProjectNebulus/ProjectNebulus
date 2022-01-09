@@ -21,7 +21,7 @@ def not_found(e):
 
 @app.errorhandler(500)
 def server_error(e):
-  return render_template("500.html", page="500 Internal Server Error")
+  return render_template("500.html", page="500 Internal Server Error", e=e)
 
 @app.route('/new')
 def new():
@@ -30,7 +30,11 @@ def new():
 @app.route('/new', methods=['POST'])
 def new_post():
   data = request.get_json()
-  db.create_course(data['name'], data['teacher'], session['username'])
+  if ("@" in user and "." in user):
+    username = db.Accounts.find_one({'email':user}).username
+  else:
+    username = user
+  db.create_course(data['name'], data['teacher'], username)
   return 'success'
 
 @app.route('/')
@@ -42,7 +46,7 @@ def index():
 
 @app.route("/chat")
 def chat():
-  return render_template("chat.html", page='Nebulus - Chat') 
+  return render_template("chat.html", page='Nebulus - Chat', session=session) 
 
 @app.route('/logout')
 def logout():
@@ -51,20 +55,14 @@ def logout():
   session['password'] = None
   return redirect('/')
 
-@app.route("/profile")
-def profile():
-  if session.get("username"):
-    return render_template("profile.html", page="Nebulus - Profile", user=session["username"])
-  else:
-    return redirect("/signin")
 
 @app.route('/settings')
 def settings():
-  return render_template("settings.html", page='Nebulus - Account Settings')
+  return render_template("settings.html", page='Nebulus - Account Settings', session=session, user=session.get("username"), db=db)
   
 @app.route('/dashboard')
 def dashboard():
-  if not session.get('username') and not session.get('email'):
+  if not session.get('username'):
     return redirect('/signin')
   else:
     new_user = request.args.get('new_user', default='false', type=str)
@@ -82,13 +80,14 @@ def signup():
 
 @app.route("/signup", methods=["POST"])
 def signup_post():
-  session["username"] = request.form.get("username")
-  session["email"] = request.form.get("email")
-  session["password"] = request.form.get("password") 
-  if ( not db.create_user(session['username'], session['email'], session['password'])):
-    pass
-  else:
-    return redirect('/dashboard?new_user=true')
+  data = request.get_json()
+  print(data)
+  session["username"] = data.get("username")
+  session["email"] = data.get("email")
+  session["password"] = data.get("password") 
+  
+  if db.create_user(session['username'], session['email'], session['password']):
+    return redirect("/dashboard?new_user=true")
 
 @app.route("/signin")
 def signin():

@@ -14,12 +14,12 @@ window.addEventListener('load', function() {
     if (validate(value))
     {
       document.getElementsByClassName("response")[0].style.color="green";
-      ocument.getElementsByClassName("response")[0].innerHTML = '<i class="material-icons">check_circle</i>';
+      document.getElementsByClassName("response")[0].innerHTML = '<i class="material-icons">check_circle</i>';
     }
     else
     {
       document.getElementsByClassName("response")[0].style.color="red";
-      ocument.getElementsByClassName("response")[0].innerHTML = '<i class="material-icons">error</i>';
+      document.getElementsByClassName("response")[0].innerHTML = '<i class="material-icons">error</i>';
     }
   }
 
@@ -62,5 +62,50 @@ window.addEventListener('load', function() {
       document.getElementById("passwordValid").style.display="block";
 
     }
-  }  
+  }
+
+  document.getElementById("email").onkeyup = changeEmail;
+  document.getElementById("password").onkeyup = checkPassword;
 });
+
+function signUp() {
+  var status = document.getElementById("status");
+  status.style.color = "red";
+  status.innerHTML = "<br>";
+
+  if (document.getElementById("email").value == "")
+    status.innerHTML = "Please enter an email!";
+
+  else if (document.getElementById("username").value == "")
+    status.innerHTML = "Please enter a username!";
+
+  else if (document.getElementById("password").value == "")
+    status.innerHTML = "Please enter a password!";
+
+  else if (document.getElementById("confirm").value == "")
+    status.innerHTML = "Please confirm your password!";
+
+  else {
+    var submit = document.getElementById("submit");
+    submit.disabled = true;
+    submit.style.color = "gray";
+    submit.style.backgroundColor = "#006097";
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/signup", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.addEventListener('load', reqListener);
+    xhttp.send(JSON.stringify({username: document.querySelector('#username').value, password: document.querySelector('#password').value, email: document.querySelector("#email")}));
+  }
+}  
+
+function reqListener() {
+  var submit = document.getElementById("submit");
+  submit.disabled = false;
+  submit.style.color = "white";
+  submit.style.backgroundColor = "#00a2ff";
+
+  var status = document.getElementById("status");
+  status.style.color = "yellowgreen";
+  status.innerHTML = "Sign up successful!";
+}
