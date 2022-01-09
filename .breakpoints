@@ -40,22 +40,8 @@
       {
         "id": "b30ddc39-8b49-4920-8bd8-2de61a2da748",
         "line": 2,
-        "version": 7159,
+        "version": 7163,
         "index": 53
-      }
-    ],
-    "templates/index.html": [
-      {
-        "id": "397eee39-3edd-40f9-9bb7-f54d85330b1b",
-        "line": 4,
-        "version": 2060,
-        "index": 71
-      },
-      {
-        "id": "b58ed213-3688-4cfb-9f32-7a46c8c679e5",
-        "line": 5,
-        "version": 2060,
-        "index": 72
       }
     ],
     "templates/login.html": [

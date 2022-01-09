@@ -67,7 +67,7 @@ def logout():
 
 @app.route('/settings')
 def settings():
-  return render_template("settings.html", page='Nebulus - Account Settings', session=session, user=session.get("username"), db=db)
+  return render_template("settings.html", page='Nebulus - Account Settings', session=session)
   
 @app.route('/dashboard')
 def dashboard():
@@ -85,7 +85,7 @@ def developers():
 def signup():
   if session.get("username"):
     return redirect('/dashboard')
-  return render_template("signup.html", page = 'Nebulus - Sign Up')
+  return render_template("signup.html", page = 'Nebulus - Sign Up', disablebar=True)
 
 @app.route("/signup", methods=["POST"])
 def signup_post():
@@ -101,7 +101,7 @@ def signup_post():
 @app.route("/signin")
 def signin():
   if not session.get('username'):
-    return render_template("signin.html", page='Nebulus - Log In')
+    return render_template("signin.html", page='Nebulus - Log In', disablebar=True)
   return redirect('/dashboard')
 
 @app.route("/signin", methods=['POST'])

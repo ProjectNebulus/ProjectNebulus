@@ -2,41 +2,11 @@
 {% extends "layout.html" %}
 {% block main %}
 <body>
-  {% if '@' in user and '.' in user %}
-  {% set user = db.Accounts.find_one({'email':user}).username %}
-  {% endif %}
-  <nav style="height:10%;width:100%;float:left; background-color:#000000; position: relative;z-index:1;padding:0px;">
-    <span style="float:left;">
-      <br>
-      <a href="/"><img src="static/images/logo.png" style="height:2em;"></a>
-      <a href="/developers">Developers</a>
-      <a href="/docs/api">API</a>
-      <a href="/lms">LMS</a>
-      <a href="/chat">Chat</a>
-      <a href="/musiqueworld">MusiqueWorld</a>
-      <a href="/music">MusiSearch</a>
-      <a href="/vh">Virtual Holidays</a>
-    </span>
-    
-    <details style="float:right;margin:30px 20px 30px 5px;">
-      <summary>{{user}} <img style="vertical-align: middle;" src="/static/images/expand.png"></summary>
-
-      <div style="background-color:black; border:1px solid lightgray; border-radius:5px;margin-top:10px;">
-        <div onclick="window.open('/settings', '_self')">Settings</div>
-        <div onclick="window.open('/profile', '_self')">Profile</div>
-        <hr>
-        <div onclick="window.open('/pricing', '_self')">Upgrade to Premium</div>
-        <hr>
-        <div onclick="window.open('/logout', '_self')">Log Out</div>
-      </div>
-    </details>
-  </nav>
-
   <div id="account" style="margin: 0px 20% 0px 20%; padding 20px 20% 20px 20%;font-size: 1.2em">
     <h2>Your Account</h2>
     <p>
       <span style="color:lightgray">Username:</span>
-      {{user}}
+      {{session.get('username')}}
 
       <span class="change-text">Change</span>
     </p>
@@ -50,7 +20,7 @@
 
     <p>
       <span style="color: lightgray">Email:</span>
-      {{db.Accounts.find_one({'username':user}).email}}
+      {{session.get('email')}}
 
       <span class="change-text">Change</span>
     </p>
