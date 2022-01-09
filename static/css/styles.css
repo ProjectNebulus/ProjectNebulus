@@ -40,6 +40,11 @@ strong{
   color: white;
 }
 
+#course-body {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
 #homePageBanner{
   margin:0px; /* No borders for the image*/
   width: calc(100% - 80px); /*Padding*/

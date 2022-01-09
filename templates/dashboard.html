@@ -1,9 +1,6 @@
 <!--Extend with Jinja!-->
 {% extends "layout.html" %}
 {% block main %}
-{% if '@' in user and '.' in user %}
-{% set user = db.Accounts.find_one({'email':user}).username %}
-{% endif %}
 <nav style="height:10%;width:100%;float:left; background-color:#000000; position: relative;z-index:1;padding:0px;">
   <span style="float:left;">
     <br>
@@ -52,7 +49,7 @@
   </h1><!--Checking if the user signed in by email or username-->
 
     {% for i in db.Accounts.find_one({'username': user}).courses %}
-    <a class='dashboardCourse' href='/courses/{{i.id}}'>
+    <a class='dashboardCourse' href='/courses/{{i._id[2:-1]}}'>
       <h2>{{i.name}}</h2>
       <h3>{{i.teacher}}</h3>
     </a>

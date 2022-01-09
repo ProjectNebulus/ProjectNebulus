@@ -23,6 +23,20 @@ def not_found(e):
 def server_error(e):
   return render_template("500.html", page="500 Internal Server Error", e=e)
 
+@app.route('/courses/<id>')
+def courses(id):
+  if session.get("username"): 
+    courses = db.Accounts.find_one({'username':session.get("username")})["courses"]
+  
+    for course in courses:
+      if course.get('_id') == id:
+        break
+
+    return render_template("course.html", page="Nebulus - {{db.Accounts.find_one({'username':user}).courses.find_one({'_id':id}).name}}", db=db, course=course)
+
+  else:
+    return redirect('/signin')
+
 @app.route('/new')
 def new():
    return render_template("new_course.html", page='Nebulus - New Course')
@@ -30,11 +44,7 @@ def new():
 @app.route('/new', methods=['POST'])
 def new_post():
   data = request.get_json()
-  if ("@" in user and "." in user):
-    username = db.Accounts.find_one({'email':user}).username
-  else:
-    username = user
-  db.create_course(data['name'], data['teacher'], username)
+  db.create_course(data['name'], data['teacher'], session.get("username"))
   return 'success'
 
 @app.route('/')
