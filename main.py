@@ -31,7 +31,7 @@ def courses(id):
       if course.get('_id') == id:
         break
 
-    return render_template("course.html", page="Nebulus - {{db.Accounts.find_one({'username':user}).courses.find_one({'_id':id}).name}}", db=db, course=course, user=session.get("username"))
+    return render_template("course.html", page="Nebulus - " + course.get("name", "Courses"), db=db, course=course, user=session.get("username"))
 
   else:
     return redirect('/signin')
@@ -95,8 +95,8 @@ def signup_post():
   session["email"] = data.get("email")
   session["password"] = data.get("password") 
   
-  if db.create_user(session['username'], session['email'], session['password']):
-    return redirect("/dashboard?new_user=true")
+  return db.create_user(session['username'], session['email'], session['password'])
+  
 
 @app.route("/signin")
 def signin():

@@ -99,13 +99,10 @@ function signUp() {
   }
 }  
 
-function reqListener() {
-  var submit = document.getElementById("submit");
-  submit.disabled = false;
-  submit.style.color = "white";
-  submit.style.backgroundColor = "#00a2ff";
-
+function reqListener() 
+{
   var status = document.getElementById("status");
   status.style.color = "yellowgreen";
   status.innerHTML = "Sign up successful!";
+  window.location.href = "/dashboard?new_user=true";
 }
