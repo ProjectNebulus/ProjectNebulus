@@ -24,14 +24,15 @@ def server_error(e):
 
 @app.route('/courses/<id>')
 def courses(id):
-  if session.get("username"): 
+  if session.get("id"): 
     courses = db.Accounts.find_one({'_id':session.get("id")})["courses"]
   
     for course in courses:
+      
       if course.get('_id') == id:
         break
 
-    return render_template("course.html", page="Nebulus - " + course.get("name", "Courses"), db=db, course=course, user=session.get("username"))
+    return render_template("course.html", page="Nebulus - " + course.get("name", "Courses"), db=db, course=course, user=session.get("id"))
 
   else:
     return redirect('/signin')
@@ -48,7 +49,7 @@ def new_post():
 
 @app.route('/')
 def index():
-  if session.get("username"):
+  if session.get("id"):
     return redirect('/dashboard')
   else:
     return render_template("index.html", page='Nebulus')
@@ -71,7 +72,7 @@ def settings():
   
 @app.route('/dashboard')
 def dashboard():
-  if not session.get('username'):
+  if not session.get('id'):
     return redirect('/signin')
   else:
     new_user = request.args.get('new_user', default='false', type=str)
@@ -83,7 +84,7 @@ def developers():
 
 @app.route("/signup")
 def signup():
-  if session.get("username"):
+  if session.get("id"):
     return redirect('/dashboard')
   return render_template("signup.html", page = 'Nebulus - Sign Up', disablebar=True)
 
