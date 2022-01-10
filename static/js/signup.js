@@ -85,6 +85,9 @@ function signUp() {
   else if (document.getElementById("confirm").value == "")
     status.innerHTML = "Please confirm your password!";
 
+  else if (document.getElementById("confirm").value != document.getElementById("password").value)
+    status.innerHTML = "Your confirmation does not match your password."
+
   else {
     var submit = document.getElementById("submit");
     submit.disabled = true;
@@ -95,7 +98,7 @@ function signUp() {
     xhttp.open("POST", "/signup", true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.addEventListener('load', reqListener);
-    xhttp.send(JSON.stringify({username: document.querySelector('#username').value, password: document.querySelector('#password').value, email: document.querySelector("#email")}));
+    xhttp.send(JSON.stringify({username: document.querySelector('#username').value, password: document.querySelector('#password').value, email: document.querySelector("#email").value}));
   }
 }  
 

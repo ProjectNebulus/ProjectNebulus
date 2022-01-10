@@ -10,22 +10,44 @@ db = client.Nebulus
 Accounts = db.Accounts
 ids = db.course_ids
 
-def create_course(course_name, course_teacher, username):
+def create_course(course_name, course_teacher, user_id):
   id = binascii.b2a_hex(os.urandom(15))
   while (ids.find_one({'id':id}) != None):
     id = binascii.b2a_hex(os.urandom(15))
-  db.Accounts.update_one({'username':username}, {'$push': {'courses': {'name': course_name, 'teacher': course_teacher, '_id':id}}})
+  id = id.decode('utf-8')
+  db.Accounts.update_one({'_id':user_id}, {'$set': {f'courses.{id}': {'name': course_name, 'teacher': course_teacher}}})
   ids.insert_one({'id':id})
   print('course created')
 
-def create_user(username, email, password):
+def create_user(username, email, password, id):
   password = hash256(password)
-  if not db.Accounts.find_one({'username': username}):
-    db.Accounts.insert_one({'username':username, "password":password, "email":email, "courses":[], "_id":db.Accounts.count_documents({})})
-    return True
-  else:
-    return False
+  
+  user = {
+    "_id": id,
+    "username" : username,
+    "email": email,
+    "password" : password,
+    "avatar" : "",
+    "courses" : {},
+    "musiqueworld" : {},
+    "bio": "",
+    "premium" : 0,
+    "staff" : 0,
+    "virtual_holidays" : {}
+  }
+  
+  for i in range(Accounts.count_documents({})):
+    try:
+      Accounts.insert_one(user)
+    except:
+      user["_id"] += 1
+    else:
+      return True
 
+def delete_course(user_id, course_id):
+  Accounts.update_one({'_id': user_id}, {'$unset': {f'courses.{course_id}': 1}})
+  return True
+  
 """
 Status codes:
 0 - Login Successful

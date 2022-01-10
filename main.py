@@ -16,16 +16,16 @@ app.secret_key = '12345678987654321'
 #app routes
 @app.errorhandler(404)
 def not_found(e):
-  return render_template("404.html", page='404 Not Found')
+  return render_template("404.html", page='404 Not Found', disablebar=True)
 
 @app.errorhandler(500)
 def server_error(e):
-  return render_template("500.html", page="500 Internal Server Error", e=e)
+  return render_template("500.html", page="500 Internal Server Error", disablebar=True)
 
 @app.route('/courses/<id>')
 def courses(id):
   if session.get("username"): 
-    courses = db.Accounts.find_one({'username':session.get("username")})["courses"]
+    courses = db.Accounts.find_one({'_id':session.get("id")})["courses"]
   
     for course in courses:
       if course.get('_id') == id:
@@ -43,7 +43,7 @@ def new():
 @app.route('/new', methods=['POST'])
 def new_post():
   data = request.get_json()
-  db.create_course(data['name'], data['teacher'], session.get("username"))
+  db.create_course(data['name'], data['teacher'], session.get("id"))
   return 'success'
 
 @app.route('/')
@@ -62,8 +62,8 @@ def logout():
   session['username'] = None
   session['email'] = None
   session['password'] = None
+  session['id'] = None
   return redirect('/')
-
 
 @app.route('/settings')
 def settings():
@@ -75,7 +75,7 @@ def dashboard():
     return redirect('/signin')
   else:
     new_user = request.args.get('new_user', default='false', type=str)
-    return render_template("dashboard.html", user = session["username"], db=db, page='Nebulus - Dashboard', new_account = new_user == 'true')
+    return render_template("dashboard.html", user = session["username"], db=db, page='Nebulus - Dashboard', new_account = new_user == 'true', session=session)
 
 @app.route("/developers")
 def developers():
@@ -93,9 +93,10 @@ def signup_post():
   print(data)
   session["username"] = data.get("username")
   session["email"] = data.get("email")
-  session["password"] = data.get("password") 
-  
-  return db.create_user(session['username'], session['email'], session['password'])
+  session["password"] = data.get("password")
+  session["id"] = db.Accounts.count_documents({}) + 1000000000000000001
+
+  return db.create_user(session['username'], session['email'], session['password'], session['id'])
   
 
 @app.route("/signin")
@@ -107,7 +108,9 @@ def signin():
 @app.route("/signin", methods=['POST'])
 def signin_post():
   json = request.get_json()
+  print(json)
   validation = db.check_login(json.get('username'), json.get('password'))
+  print(validation)
   
   """
   Status codes:
@@ -118,14 +121,13 @@ def signin_post():
   if validation == "0":
     session['username'] = json.get('username')
     session['password'] = json.get('password')
+    session['id'] = db.Accounts.find_one({"password": security.hash256(session["password"])})["_id"]
     
     if re.fullmatch(regex, session['username']):
       session['email'] = session['username']
       session['username'] = db.Accounts.find_one({'email': session['email']})['username']
     else:
-      session['email'] = db.Accounts.find_one({'username': session['username']})['email']
-    
-      
+      session['email'] = db.Accounts.find_one({'_id': session['id']})['email']
   
   return validation
     

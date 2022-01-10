@@ -15,8 +15,8 @@
     <a style="margin-left:10px" href='/new'>Create New</a>
   </h1><!--Checking if the user signed in by email or username-->
 
-    {% for i in db.Accounts.find_one({'username': user}).courses %}
-    <a class='dashboardCourse' href='/courses/{{i._id.decode("utf-8")}}'>
+    {% for x, i in db.Accounts.find_one({"_id":session.get("id")}).courses.items() %}
+    <a class='dashboardCourse' href='/courses/{{x}}'>
       <h2>{{i.name}}</h2>
       <h3>{{i.teacher}}</h3>
     </a>
