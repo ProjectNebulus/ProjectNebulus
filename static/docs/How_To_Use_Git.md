@@ -5,20 +5,26 @@
 2) Wait for an email from `JetBrains Sales` with an email titled `License Certificate for your JetBrains Educational Pack`. Give it 2 minutes, if its not there wait another 2 minutes. It's usually very quick!
 3) Download required Nebulus IDEs. `PyCharm Professional` (Don't get `PyCharm CE/Community Edition`), `WebStorm`, `DataGrip`. Optional IDEs include `IntelliJ Ultimate` and `CLion`
 
-• PyCharm Professional [Download Link](https://www.jetbrains.com/pycharm/download/)
+### Download Links:
 
-    • Make sure to download Professional, not Community Edition
+- [PyCharm Professional](https://www.jetbrains.com/pycharm/download/)
+
+> Make sure to download Professional, not Community Edition
  
-• WebStorm [Download Link](https://www.jetbrains.com/webstorm/download/)
+- [WebStorm](https://www.jetbrains.com/webstorm/download/)
 
-• DataGrip [Download Link](https://www.jetbrains.com/datagrip/download/)
+- [DataGrip](https://www.jetbrains.com/datagrip/download/)
 
-**OPTIONAL**
+- [CLion](https://www.jetbrains.com/clion/download/)
 
-• CLion [Download Link](https://www.jetbrains.com/clion/download/)
+- [IntelliJ Ultimate](https://www.jetbrains.com/intellij/download/)
 
-• IntelliJ Ultimate [Download Link](https://www.jetbrains.com/intellij/download/)
-
-    • Make sure to download Ultimate, not Community Edition
+> Make sure to download Ultimate, not Community Edition
  
 ## Step 2: Get the GitHub Repo running on Your Device
+
+### Clone the Repository
+
+```bash
+$ git clone https://github.com/ProjectNebulus/ProjectNebulus.git
+```
