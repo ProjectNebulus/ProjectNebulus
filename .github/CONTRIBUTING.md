@@ -50,7 +50,7 @@ $ git config --global user.name "your username"
 3. There will be a few results, click on the one that says "Internet Password"
 
 
-4. Click the "Show Password" option and enter your password
+4. Click the "Show Password" option and enter your computer password
 
 5) Enter Your Personal Access Token in the area where it shows your password.
 
