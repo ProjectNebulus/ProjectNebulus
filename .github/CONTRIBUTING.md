@@ -15,9 +15,9 @@
 
 - [DataGrip](https://www.jetbrains.com/datagrip/download/)
 
-- [CLion](https://www.jetbrains.com/clion/download/)
+- [CLion](https://www.jetbrains.com/clion/download/) (optional)
 
-- [IntelliJ Ultimate](https://www.jetbrains.com/intellij/download/)
+- [IntelliJ Ultimate](https://www.jetbrains.com/intellij/download/) (optional)
 
 > Make sure to download Ultimate, not Community Edition
  
