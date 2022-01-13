@@ -1,5 +1,5 @@
 function new_course() {
-    var xhttp = new XMLHttpRequest();
+    const xhttp = new XMLHttpRequest();
     xhttp.open('POST', '/new', true);
     xhttp.setRequestHeader('Content-type', 'application/json');
     xhttp.addEventListener('load', reqListener);
