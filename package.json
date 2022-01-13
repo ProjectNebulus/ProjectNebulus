@@ -3,11 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "author": "@projectnebulus",
-  "scripts": {},
+  "scripts": {
+    "format": "prettier --write \"**/*.{js,json}\""
+  },
   "keywords": [],
   "license": "MPL-2.0",
-  "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "@kevinzma/prettier-config": "^1.1.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ProjectNebulus/ProjectNebulus.git"

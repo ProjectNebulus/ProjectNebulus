@@ -36,8 +36,7 @@ if (stateUnlocked) {
     namep.innerHTML = "🏠 " + name;
     leftBar.appendChild(namep);
   }
-}
-else {
+} else {
   var message = document.createElement("p");
   message.innerHTML = "🔒 You must finish everyone in your city!";
   leftBar.appendChild(message);
@@ -53,8 +52,7 @@ if (countryUnlocked) {
     namep.innerHTML = "🏠 " + name;
     leftBar.appendChild(namep);
   }
-}
-else {
+} else {
   var message = document.createElement("p");
   message.innerHTML = "🔒 You must finish everyone of your province or state!";
   leftBar.appendChild(message);
@@ -70,8 +68,7 @@ if (internUnlocked) {
     namep.innerHTML = "🏠 " + name;
     leftBar.appendChild(namep);
   }
-}
-else {
+} else {
   var message = document.createElement("p");
   message.innerHTML = "🔒 You must finish everyone in your country!";
   leftBar.appendChild(message);
