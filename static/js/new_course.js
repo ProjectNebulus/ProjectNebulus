@@ -1,4 +1,4 @@
-function new_course() {
+function newCourse() {
     const xhttp = new XMLHttpRequest();
     xhttp.open('POST', '/new', true);
     xhttp.setRequestHeader('Content-type', 'application/json');
