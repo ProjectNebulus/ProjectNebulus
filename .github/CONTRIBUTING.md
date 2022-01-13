@@ -35,7 +35,7 @@ $ git clone https://github.com/ProjectNebulus/ProjectNebulus.git
 
 >⚠ WARNING: If you haven't created a Personal Access Token yet, please make one! It is basically your password when using the github api. 
 
-> To create one go to Settings > Developer Settings > Personal Access Token
+> To create one go to Settings > Developer Settings > [Personal access tokens](https://github.com/settings/tokens)
 
 
 ### Set Username
