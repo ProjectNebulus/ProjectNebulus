@@ -3,6 +3,15 @@
 <script src='/static/js/new_course.js'></script>
 <div id='signupbody'>
   <form method='POST' onsubmit='newCourse(); return false'>
+      <h1>Use a Template</h1>
+      <select>
+          <option>History</option>
+          <option>Science</option>
+          <option>Language</option>
+          <option>Mathematics</option>
+          <option>Music</option>
+      </select> <br>
+      <h1>Or make your own</h1>
     <input type='text' placeholder='Course Name' id='name'>
     <input type='text' placeholder='Course Teacher' id='teacher'>
     <p id='result'></p>
