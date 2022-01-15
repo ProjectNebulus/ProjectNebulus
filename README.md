@@ -1,5 +1,18 @@
 # Project Nebulus
 
+## Table of Contents
+
+- [Setup (normal)](#setup-normal)
+  - [Clone the Repository](#clone-the-repository)
+  - [Install Python 3.10](#install-python-310)
+    - [Install from python.org](#install-from-pythonorg)
+    - [MacOS homebrew](#macos-homebrew)
+    - [Linux](#linux)
+  - [Install Poetry](#install-poetry)
+  - [Install Dependencies](#install-dependencies)
+  - [Run](#run)
+- [Setup (docker)](#setup-docker)
+
 ## Setup (normal)
 
 ### Clone the Repository
