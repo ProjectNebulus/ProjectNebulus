@@ -1,6 +1,6 @@
 FROM python:3.10
 
-ENV
+ENV \
   # python:
   PYTHONFAULTHANDLER=1 \
   PYTHONUNBUFFERED=1 \
@@ -41,6 +41,10 @@ RUN poetry install --no-interaction --no-ansi \
   && poetry run pip install -U pip \
   && rm -rf "$POETRY_CACHE_DIR"
 
-COPY ./main.py ./templates/ ./static/ /opt/app/
+COPY ./main.py /opt/app/
+COPY ./templates/ /opt/app/templates
+COPY ./static/ /opt/app/static
+
+EXPOSE 8080:8080
 
 CMD ["python3", "main.py"]
