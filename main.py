@@ -1,4 +1,6 @@
 #Imports
+from dotenv import load_dotenv
+load_dotenv()
 from flask import Flask, render_template, session, flash, request, redirect
 from werkzeug.utils import secure_filename
 from static.python.image_to_music import *
