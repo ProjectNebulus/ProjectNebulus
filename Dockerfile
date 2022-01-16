@@ -36,6 +36,7 @@ WORKDIR /opt/app
 
 COPY ./poetry.lock ./pyproject.toml /opt/app/
 
+LABEL org.opencontainers.image.source="https://github.com/ProjectNebulus/ProjectNebulus"
 # install deps
 RUN poetry install --no-interaction --no-ansi \
   && poetry run pip install -U pip \
