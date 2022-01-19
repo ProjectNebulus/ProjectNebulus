@@ -16,7 +16,7 @@
   </h1><!--Checking if the user signed in by email or username-->
 
     {% for i in db.Accounts.find_one({'username': user}).courses %}
-    <a class='dashboardCourse' href='/courses/{{i._id.decode("utf-8")}}'>
+    <a class='dashboardCourse' href='/courses/{{i._id}}'>
       <h2>{{i.name}}</h2>
       <h3>{{i.teacher}}</h3>
     </a>

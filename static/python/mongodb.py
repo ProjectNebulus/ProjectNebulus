@@ -1,8 +1,8 @@
 import pymongo, dns
 from static.python.security import *
 import os, binascii, re
-from classes.course import Course
-from classes.user import User
+from static.python.classes.course import Course
+from static.python.classes.user import User
 import random
 
 regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
@@ -14,8 +14,8 @@ ids = db.course_ids
 
 
 def create_course(course_name, course_teacher, username):
-    course = Course(course_name=course_name, course_teacher=course_teacher,
-                    _id=1000000000000000001 + ids.count_documents({}), course_owner=username)
+    course = Course(name=course_name, teacher=course_teacher,
+                    _id=1000000000000000001 + ids.count_documents({}), owner=username)
     Accounts.update_one({'username': username}, {'$push': {'courses': course.__dict__}})
     ids.insert_one({'id': id})
     print('course created')
@@ -23,8 +23,10 @@ def create_course(course_name, course_teacher, username):
 
 def create_user(username, email, password):
     password = hash256(password)
+    if Accounts.find_one({'username': username}):
+        return 'Username already exists'
     new_user = User(username=username, email=email, password=password,
-                    _id=1000000000000000001 + db.accounts.count_documents({}))
+                    _id=1000000000000000001 + db.Accounts.count_documents({}))
     Accounts.insert_one(new_user.__dict__)
 
 
