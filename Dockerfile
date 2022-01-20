@@ -1,5 +1,7 @@
 FROM python:3.10
 
+LABEL org.opencontainers.image.source="https://github.com/ProjectNebulus/ProjectNebulus"
+
 ENV \
   # python:
   PYTHONFAULTHANDLER=1 \
@@ -36,7 +38,6 @@ WORKDIR /opt/app
 
 COPY ./poetry.lock ./pyproject.toml /opt/app/
 
-LABEL org.opencontainers.image.source="https://github.com/ProjectNebulus/ProjectNebulus"
 # install deps
 RUN poetry install --no-interaction --no-ansi \
   && poetry run pip install -U pip \
