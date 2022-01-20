@@ -4,72 +4,64 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <body>
-  {% if '@' in user and '.' in user %}
-  {% set user = db.Accounts.find_one({'email':user}).username %}
-  {% endif %}
+{% if '@' in user and '.' in user %}
+{% set user = db.Accounts.find_one({'email':user}).username %}
+{% endif %}
 
 <br>
-  <div id="account" style="margin: 0px 20% 0px 20%; padding 20px 20% 20px 20%;font-size: 1.2em">
+<div id="account" style="margin: 0px 20% 0px 20%; padding: 20px 20% 20px 20%; font-size: 1.2em">
     <h2>Your Account</h2>
     <p>
-      <span style="color:lightgray">Username: </span>
-      {{session.get('username')}}
+        <span style="color:lightgray">Username: </span>
+        {{session.get('username')}}
 
-      <span class="change-text">Change</span>
+        <span class="change-text">Change</span>
     </p>
-    
-    <p>
-      <span style="color:lightgray">Password: </span>
-      {{"•" * session.get("password")|length}}
 
-      <span class="change-text">Change</span>
+    <p>
+        <span style="color:lightgray">Password: </span>
+        {{"•" * session.get("password")|length}}
+
+        <span class="change-text">Change</span>
     </p>
 
     {% if session.get("email") != "" %}
     <p>
-      <span style="color: lightgray">Email: </span>
-      {{session.get('email')}}
+        <span style="color: lightgray">Email: </span>
+        {{session.get('email')}}
 
-      <span class="change-text">Change</span>
+        <span class="change-text">Change</span>
     </p>
     {% else %}
     <p>
-      <span style="color: lightgray">Email: </span>None
+        <span style="color: lightgray">Email: </span>None
 
-      <span class="change-text">Add New</span>
+        <span class="change-text">Add New</span>
     </p>
     {% endif %}
     <h2>Spotify Status</h2>
     <p id="song">Loading...</p>
-    <br><p>This is dynamic as it changes when what you listen to changes!</p>
-  </div>
+    <br>
+    <p>This is dynamic as it changes when what you listen to changes!</p>
+</div>
 </body>
 
 <script>
-  function fetchStatus() {
-      var request =  $.ajax({
-        type: "POST",
-        url: "/spoistatus"
-      });
+    function fetchStatus() {
+        const request = $.ajax({
+            type: "POST",
+            url: "/spoistatus"
+        });
 
-      request.done(function(data){
-        if (data == "no_song_is_playing_right_now")
-          data = "No song is playing on Spotify right now!";
+        request.done((data) => {
+            if (data === "no_song_is_playing_right_now")
+                data = "No song is playing on Spotify right now!";
 
-        document.getElementById("song").innerHTML = "<p>"+data+"</p>";
-      });
-      
+            document.getElementById("song").innerHTML = "<p>" + data + "</p>";
+        });
+
     }
-  function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-  function myfunction(){
-    sleep(20000)
-    while (true){
-      sleep(2000);
-      fetchStatus();
-    }
-  }
-    window.onload = myfunction();
+
+    setInterval(fetchStatus, 5000);
 </script>
 {% endblock %}  
