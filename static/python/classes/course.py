@@ -5,12 +5,12 @@ class Course:
         self.owner = kwargs.get('owner')
         self.name = kwargs.get('name')
         self.teacher = kwargs.get('teacher')
-        self.files = kwargs.get('files') or []
-        self.grades = kwargs.get('grades') or 0
-        self.textbooks = kwargs.get('textbooks') or []
-        self.extensions = kwargs.get('extensions') or []
+        self.files = kwargs.get('files', [])
+        self.grades = kwargs.get('grades', 0)
+        self.textbooks = kwargs.get('textbooks', [])
+        self.extensions = kwargs.get('extensions', [])
 
-    def to_dictionary(self):
+    def to_dict(self):
         return {
             "owner": self.owner,
             "name": self.name,

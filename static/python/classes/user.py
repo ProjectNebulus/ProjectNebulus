@@ -4,15 +4,15 @@ class User:
         self.username = kwargs.get('username')
         self.email = kwargs.get('email')
         self.password = kwargs.get('password')
-        self.avatar = kwargs.get('avatar') or ''
-        self.courses = kwargs.get('courses') or []
-        self.musiqueworld = kwargs.get('musiqueworld') or []
-        self.bio = kwargs.get('bio') or ''
-        self.premium = kwargs.get('premium') or '0'
-        self.staff = kwargs.get('staff') or '0'
-        self.virtual_holidays = kwargs.get('virtual_holidays') or []
+        self.avatar = kwargs.get('avatar', '')
+        self.courses = kwargs.get('courses', [])
+        self.musiqueworld = kwargs.get('musiqueworld', [])
+        self.bio = kwargs.get('bio', '')
+        self.premium = kwargs.get('premium', '0')
+        self.staff = kwargs.get('staff', '0')
+        self.virtual_holidays = kwargs.get('virtual_holidays', [])
 
-    def to_dictionary(self):
+    def to_dict(self):
         return {
             "_id": self._id,
             "username": self.username,
