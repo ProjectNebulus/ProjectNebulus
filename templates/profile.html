@@ -1,6 +1,8 @@
 <!--Extend with Jinja!-->
 {% extends "layout.html" %}
 {% block main %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <body>
   {% if '@' in user and '.' in user %}
   {% set user = db.Accounts.find_one({'email':user}).username %}
@@ -38,8 +40,36 @@
     </p>
     {% endif %}
     <h2>Spotify Status</h2>
-    <p>Unstoppable - The Score</p>
+    <p id="song">Loading...</p>
+    <br><p>This is dynamic as it changes when what you listen to changes!</p>
   </div>
 </body>
 
+<script>
+  function fetchStatus() {
+      var request =  $.ajax({
+        type: "POST",
+        url: "/spoistatus"
+      });
+
+      request.done(function(data){
+        if (data == "no_song_is_playing_right_now")
+          data = "No song is playing on Spotify right now!";
+
+        document.getElementById("song").innerHTML = "<p>"+data+"</p>";
+      });
+      
+    }
+  function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+  function myfunction(){
+    sleep(20000)
+    while (true){
+      sleep(2000);
+      fetchStatus();
+    }
+  }
+    window.onload = myfunction();
+</script>
 {% endblock %}  

@@ -20,7 +20,9 @@ app.secret_key = '12345678987654321'
 #app routes
 @app.route("/spoistatus",methods=["POST"])
 def spotify_status():
-  return get_song()
+  a = status()
+  string = a[0]+" - "+a[1]
+  return string
 
 @app.route("/profile")
 def profile():
