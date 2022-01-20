@@ -6,6 +6,7 @@ from werkzeug.utils import secure_filename
 from static.python.image_to_music import *
 from static.python import mongodb as db
 from static.python import security
+from static.python.spotify import *
 import os
 import re
 
@@ -15,7 +16,15 @@ regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
 app = Flask('app')
 app.secret_key = '12345678987654321'
 
+
 #app routes
+@app.route("/spoistatus",methods=["POST"])
+def spotify_status():
+  return get_song()
+
+@app.route("/profile")
+def profile():
+  return render_template("profile.html", page = "Nebulus Profile")
 @app.errorhandler(404)
 def not_found(e):
   return render_template("404.html", page='404 Not Found')
