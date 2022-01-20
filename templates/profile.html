@@ -4,9 +4,6 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <body>
-{% if '@' in user and '.' in user %}
-{% set user = db.Accounts.find_one({'email':user}).username %}
-{% endif %}
 
 <br>
 <div id="account" style="margin: 0px 20% 0px 20%; padding: 20px 20% 20px 20%; font-size: 1.2em">
