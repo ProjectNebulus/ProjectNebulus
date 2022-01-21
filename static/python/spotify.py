@@ -1,4 +1,5 @@
 from SwSpotify import spotify
+#import pyautogui
 import os
 
 def status():
