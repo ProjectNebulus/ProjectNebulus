@@ -69,6 +69,8 @@ function signUp() {
         status.innerHTML = 'Please enter a password!';
     else if (document.getElementById('confirm').value === '')
         status.innerHTML = 'Please confirm your password!';
+    else if (document.getElementById('password').value !== document.getElementById('confirm').value)
+        status.innerHTML = 'Passwords do not match!';
     else {
         let submit = document.getElementById('submit');
         submit.disabled = true;
