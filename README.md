@@ -12,6 +12,7 @@
   - [Install Dependencies](#install-dependencies)
   - [Run](#run)
 - [Setup (docker)](#setup-docker)
+- [Setup (Pre-hosted Website)](#website)
 
 ## Setup (normal)
 
@@ -56,3 +57,5 @@ $ python3 main.py
 ## Setup (docker)
 
 wip
+## Website
+Go to [this link](https://project-nebulus.nicholasxwang.repl.co/)!
