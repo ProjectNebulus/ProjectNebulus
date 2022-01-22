@@ -1,22 +1,16 @@
 <!--Style Sheets!-->
-<link rel="stylesheet" href="https://project-nebulus.nicholasxwang.repl.co/static/css/styles.css">
+<link rel="stylesheet" href="/static/css/styles.css">
 
 <!--Javascript!-->
-<script src="https://project-nebulus.nicholasxwang.repl.co/static/nodejs/main.js"></script>
+<script src="/static/js/main.js"></script>
 <!--Jquery!-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <!--if clicked elsewhere the profile menu (if there is one) will close-->
-<script>
-  window.onload = function() {
-    var details = document.getElementsByTagName("details");
-    if (details.length > 0)
-      document.addEventListener("click", function() { details[0].open = false; });
-  }
-</script>
+
 
 <!--Icons!-->
-<link rel="icon" type="image/x-icon" href="https://project-nebulus.nicholasxwang.repl.co/static/images/logo.ico">
+<link rel="icon" type="image/x-icon" href="/static/images/logo.ico">
 <!--Title!-->
 <title>{{page}}</title>
 
@@ -24,7 +18,7 @@
   <nav style="height:10%;width:100%;float:left; background-color:#000000; position: relative;z-index:1;padding:0px;">
     <span style="float:left;">
       <br>
-      <a href="/"><img src="https://project-nebulus.nicholasxwang.repl.co/static/images/logo.png" style="height:2em;"></a>
+      <a href="/"><img src="static/images/logo.png" style="height:2em;"></a>
       <a href="/developers">Developers</a>
       <a href="/docs/api">API</a>
       <a href="/lms">LMS</a>

@@ -1,64 +1,52 @@
 <!--Extend with Jinja!-->
 {% extends "layout.html" %}
 {% block main %}
+    <html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="/static/js/profile.js"></script>
+    </head>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<body>
+    <body>
 
-<br>
-<div id="account" style="margin: 0px 20% 0px 20%; padding: 20px 20% 20px 20%; font-size: 1.2em">
-    <h2>Your Account</h2>
-    <p>
-        <span style="color:lightgray">Username: </span>
-        {{session.get('username')}}
-
-        <span class="change-text">Change</span>
-    </p>
-
-    <p>
-        <span style="color:lightgray">Password: </span>
-        {{"•" * session.get("password")|length}}
-
-        <span class="change-text">Change</span>
-    </p>
-
-    {% if session.get("email") != "" %}
-    <p>
-        <span style="color: lightgray">Email: </span>
-        {{session.get('email')}}
-
-        <span class="change-text">Change</span>
-    </p>
-    {% else %}
-    <p>
-        <span style="color: lightgray">Email: </span>None
-
-        <span class="change-text">Add New</span>
-    </p>
-    {% endif %}
-    <h2>Spotify Status</h2>
-    <p id="song">Loading...</p>
     <br>
-    <p>This is dynamic as it changes when what you listen to changes!</p>
-</div>
-</body>
+    <div id="account" style="margin: 0px 20% 0px 20%; padding: 20px 20% 20px 20%; font-size: 1.2em">
+        <h2>Your Account</h2>
+        <p>
+            <span style="color:lightgray">Username: </span>
+            {{ session.get('username') }}
 
-<script>
-    function fetchStatus() {
-        const request = $.ajax({
-            type: "POST",
-            url: "/spoistatus"
-        });
+            <span class="change-text">Change</span>
+        </p>
 
-        request.done((data) => {
-            if (data === "no_song_is_playing_right_now")
-                data = "No song is playing on Spotify right now!";
+        <p>
+            <span style="color:lightgray">Password: </span>
+            {{ "•" * session.get("password")|length }}
 
-            document.getElementById("song").innerHTML = "<p>" + data + "</p>";
-        });
+            <span class="change-text">Change</span>
+        </p>
 
-    }
+        {% if session.get("email") != "" %}
+            <p>
+                <span style="color: lightgray">Email: </span>
+                {{ session.get('email') }}
 
-    setInterval(fetchStatus, 5000);
-</script>
+                <span class="change-text">Change</span>
+            </p>
+        {% else %}
+            <p>
+                <span style="color: lightgray">Email: </span>None
+
+                <span class="change-text">Add New</span>
+            </p>
+        {% endif %}
+        <h2>Spotify Status</h2>
+        <p id="song">Loading...</p>
+        <br>
+        <p>This is dynamic as it changes when what you listen to changes!</p>
+    </div>
+    </body>
+
+
+    </html>
 {% endblock %}  

@@ -8,6 +8,7 @@ from static.python.image_to_music import *
 from static.python import mongodb as db
 from static.python import security
 from static.python.spotify import *
+from static.python.youtube import *
 import os
 import re
 
@@ -163,7 +164,7 @@ def signin_post():
 
 @app.route("/musiqueworld")
 def musiqueworld():
-    return render_template("musiqueworld.html", page="Nebulus - Musiqueworld")
+    return render_template("musiqueworld/layout.html", page="Nebulus - Musiqueworld")
 
 
 @app.route("/musiqueworld", methods=["POST"])

@@ -1,54 +1,18 @@
 <!--Extend with Jinja!-->
 {% extends "layout.html" %}
 {% block main %}
-<style>
-  #side_bar{
-    width:15%;
-    height:100%;
-    float:left;
-    background:#595959;
-  }
-  #course-body{
-    width:80%;
-    height:100%;
-    float:left;
-  }
-  .course_option{
-    border-style:block;
-    padding-top:10px;
-    padding-bottom:10px;
-    margin-left:10px;
-    border: 1px solid transparent; 
-    border-width:1px 0px 1px 1px;
-    padding-left:5px;
-  }
-  .course_option:hover{
-    border-color:white;
-    background:black;
-    border-radius:10px;
-  }
-  .course-title{
-    border-style:block;
-    padding-top:10px;
-    padding-bottom:10px;
-    margin-left:10px;
-    margin-right:10px;
-    border-color:transparent;
-    font-size:1.5em;
-  }
-</style>
-<div id="side_bar">
-  <p class="course-title">{{course.name}}</p>
-  <p class="course_option">Documents</p>
-  <p class="course_option">Grades</p>
-  <p class="course_option">Information</p>
-  <p class="course_option">Settings</p>
-  <p class="course_option">Textbook</p>
-  <p class="course_option">Extension</p>
-  <p class="course_option coming-soon">Learning*</p>
-  <p>Learning is coming soon!</p>
-</div>
-<div id="course-body">
-</div>
+    <div id="side_bar">
+        <p class="course-title">{{ course.name }}</p>
+        <p class="course_option">Documents</p>
+        <p class="course_option">Grades</p>
+        <p class="course_option">Information</p>
+        <p class="course_option">Settings</p>
+        <p class="course_option">Textbook</p>
+        <p class="course_option">Extension</p>
+        <p class="course_option coming-soon">Learning*</p>
+        <p>Learning is coming soon!</p>
+    </div>
+    <div id="course-body">
+    </div>
 
 {% endblock %}

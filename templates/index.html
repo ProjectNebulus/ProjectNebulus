@@ -2,23 +2,25 @@
 {% extends "layout.html" %}
 {% block main %}
 
-<div id="homePageBanner">
-  <br><h1><strong>Balance Your Organization.</strong></h1>
-  <span class="smaller">Join a Community of Students, Musicians, Gamers, Developers, and more! Welcome to Nebulus.</span><br>
-  <form type="GET" action="/signup">
-    <input name="e" placeholder="Email Address" type="email"><input type="submit" value="Sign Up for Nebulus" onclick="localStorage.setItem('email', document.getElementByName('e').value">
-  </form>
-</div>
+    <div id="homePageBanner">
+        <br>
+        <h1><strong>Balance Your Organization.</strong></h1>
+        <span class="smaller">Join a Community of Students, Musicians, Gamers, Developers, and more! Welcome to Nebulus.</span><br>
+        <form type="GET" action="/signup">
+            <input name="e" placeholder="Email Address" type="email"><input type="submit" value="Sign Up for Nebulus"
+                                                                            onclick="localStorage.setItem('email', document.getElementByName('e').value">
+        </form>
+    </div>
 
-<div class="col1">
-  <span class="medium">Chat with new people</span><br>
-  <p>Whether it's friends or new communities, we've got you covered.</p>
-  <a class="button" href="/chat">Check it out!</a>
-</div>
+    <div class="col1">
+        <span class="medium">Chat with new people</span><br>
+        <p>Whether it's friends or new communities, we've got you covered.</p>
+        <a class="button" href="/chat">Check it out!</a>
+    </div>
 
-<div class="col2">
-  <span class="medium">Get Additional Benefits and use Nebulus like a Pro</span><br>
-  <p>Bring Nebulus to the Next Level with Nebulus Premium</p>
-  <a class="button" href="/pricing">Upgrade Now</a>
-</div>
+    <div class="col2">
+        <span class="medium">Get Additional Benefits and use Nebulus like a Pro</span><br>
+        <p>Bring Nebulus to the Next Level with Nebulus Premium</p>
+        <a class="button" href="/pricing">Upgrade Now</a>
+    </div>
 {% endblock %}

@@ -1,31 +1,35 @@
 {% extends "layout.html" %}
 {% block main %}
-<body>
-  <div id="signupbody">
-    <script  type="text/javascript" src="./static/js/signup.js"></script>
-    <h1><img src="static/images/logo.png" style="height:1.5em;"></h1>
-    <h1>Sign Up for Nebulus</h1>
-    <div id="signupinnerbody">
-      <form action="#" onsubmit="signUp(); return false;">
-        <p>Email Address</p>
-        <input id="email" name="email" type="text" placeholder="jonnyappleseed@appleseed.org"><span class="response"></span><br>
-        
-        <p>Username</p>
-        <input id="username" name="username" type="text" placeholder="jonnyappleseed"><span class="response"></span><br>
-        
-        <p>Password</p>
-        <input id="password" name = "password" type="password" placeholder="••••••••••"><span class="response"></span><br>
-        
-        <p>Confirm Passsword</p>
-        <input id="confirm" name = "password" type="password" placeholder="••••••••••"><span class="response"></span><br>
+    <body>
+    <div id="signupbody">
+        <script type="text/javascript" src="./static/js/signup.js"></script>
+        <h1><img src="static/images/logo.png" style="height:1.5em;"></h1>
+        <h1>Sign Up for Nebulus</h1>
+        <div id="signupinnerbody">
+            <form action="#" onsubmit="signUp(); return false;">
+                <p>Email Address</p>
+                <input id="email" name="email" type="text" placeholder="jonnyappleseed@appleseed.org"><span
+                    class="response"></span><br>
 
-        <p id="status"><br></p>
+                <p>Username</p>
+                <input id="username" name="username" type="text" placeholder="jonnyappleseed"><span
+                    class="response"></span><br>
 
-        <input type="submit" id="submit" value="Sign Up!"><br><br>
-        
-        <p>Already have an account? <a href="/signin">Log In</a>!</p>
-      </form>
+                <p>Password</p>
+                <input id="password" name="password" type="password" placeholder="••••••••••"><span
+                    class="response"></span><br>
+
+                <p>Confirm Passsword</p>
+                <input id="confirm" name="password" type="password" placeholder="••••••••••"><span
+                    class="response"></span><br>
+
+                <p id="status"><br></p>
+
+                <input type="submit" id="submit" value="Sign Up!"><br><br>
+
+                <p>Already have an account? <a href="/signin">Log In</a>!</p>
+            </form>
+        </div>
     </div>
-  </div>
-</body>
+    </body>
 {% endblock %}
