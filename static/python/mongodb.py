@@ -39,9 +39,12 @@ Status codes:
 
 
 def check_login(user, password):
+    #Checking if the entered Username/Email is an email
     if re.fullmatch(regex, user):
+        #If the entered Username/Email is an email, check if the entered email exists in the database
         data = Accounts.find_one({'email': user})
     else:
+        #If the entered Username/Email is not an email, check if the entered username exists in the database
         data = Accounts.find_one({'username': user})
 
     if not data:

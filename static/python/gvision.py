@@ -3,7 +3,7 @@ import io
 import os
 from google.cloud import vision
 
-
+# Google Vision API - Converts image into text
 def detect_image(file_name):
   
   os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="./static/json/festive-freedom-309323-0124a1c976ae.json"

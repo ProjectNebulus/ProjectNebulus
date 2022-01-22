@@ -1,4 +1,5 @@
 # todo: add types
+# A Course Object - Will be used in the API
 class Course:
     def __init__(self, **kwargs):
         self._id = kwargs.get("_id")

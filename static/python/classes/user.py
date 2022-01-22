@@ -1,3 +1,4 @@
+# A user object - Will be used in the API
 class User:
     def __init__(self, **kwargs):
         self._id = kwargs.get("_id")
