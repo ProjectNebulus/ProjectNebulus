@@ -18,14 +18,14 @@
       {
         "id": "b36c8974-2de7-4a05-b62e-91fbb4c7437f",
         "line": 239,
-        "version": 5347,
-        "index": 4401
+        "version": 5346,
+        "index": 4393
       },
       {
         "id": "1284458e-185e-4fbf-b2db-e2da291b2c55",
         "line": 346,
-        "version": 5347,
-        "index": 6786
+        "version": 5346,
+        "index": 6774
       }
     ],
     "static/json/festive-freedom-309323-0124a1c976ae.json": [
@@ -40,16 +40,16 @@
       {
         "id": "b30ddc39-8b49-4920-8bd8-2de61a2da748",
         "line": 2,
-        "version": 7366,
-        "index": 53
+        "version": 7365,
+        "index": 26
       }
     ],
     "templates/layout.html": [
       {
         "id": "23ec76f8-cb00-499c-8e37-7c42c82def8c",
-        "line": 58,
-        "version": 933,
-        "index": 2284
+        "line": 3,
+        "version": 974,
+        "index": 75
       }
     ],
     "templates/login.html": [
@@ -64,15 +64,15 @@
       {
         "id": "1b8b5f99-41bd-47a2-9c67-a9cf18703c65",
         "line": 24,
-        "version": 559,
-        "index": 1008
+        "version": 561,
+        "index": 1062
       }
     ],
     "templates/signup.html": [
       {
         "id": "b4510f63-96df-439d-837b-a9e9460e65a2",
         "line": 3,
-        "version": 1512,
+        "version": 1558,
         "index": 45
       }
     ]
