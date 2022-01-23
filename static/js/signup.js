@@ -95,19 +95,16 @@ function reqListener() {
     let status = document.getElementById('status');
     let submit = document.getElementById('submit');
 
-    if (this.responseText === '1'){
+    if (this.responseText === '1') {
         status.style.color = 'red';
         status.innerHTML = 'That email and username already exist! Consider signing in instead.';
-    }
-    else if (this.responseText === '2'){
+    } else if (this.responseText === '2') {
         status.style.color = 'red';
         status.innerHTML = 'Username already exists!';
-    }
-    else if (this.responseText === '3'){
+    } else if (this.responseText === '3') {
         status.style.color = 'red';
         status.innerHTML = 'Email already exists!';
-    }
-    else {
+    } else {
         status.style.color = 'yellowgreen';
         status.innerHTML = 'Sign up successful!';
         window.location.href = '/dashboard?new_user=true';

@@ -22,13 +22,13 @@ def create_course(course_name, course_teacher, username):
 
 
 def create_user(username, email, password):
-    '''
+    """
     Status Codes:
     0: Success
     1: Username and Email already exist
     2: Username already exists
     3: Email already exists
-    '''
+    """
     password = hash256(password)
     if Accounts.find_one({'username': username, 'email': email}):
         return '1'

@@ -7,14 +7,14 @@
         <h1>Log in</h1>
         <div id="signupinnerbody">
             <form id='signin_form' action='#' onsubmit='loginUser(); return false'>
-                <p>Username/Email Address</p>
-                <input type="text" placeholder="jonnyappleseed@appleseed.org" id="usrname">
-                <be>
-                    <p>Password</p>
-                    <input type="password" placeholder="••••••••••" id="psw"><br>
-
-                    <p id="fail"><br></p>
-                    <input id="log_in" type="submit" value="Log in">
+                <span class="material-icons md-36">perm_identity</span>
+                <input type="text" placeholder="Username or Email" id="usrname">
+                <br>
+                <span class="material-icons-outlined md-36">lock</span>
+                <input type="password" placeholder="Password" id="psw">
+                <br>
+                <p id="fail"><br></p>
+                <input id="log_in" type="submit" value="Log in">
             </form>
 
             <p>Don't have an account? <a href="/signup">Sign Up</a>!</p>
