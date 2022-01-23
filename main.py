@@ -122,11 +122,13 @@ def signup():
 @app.route("/signup", methods=["POST"])
 def signup_post():
     data = request.get_json()
-    session["username"] = data.get("username")
-    session["email"] = data.get("email")
-    session["password"] = data.get("password")
+    validation = db.create_user(data['username'], data['email'], data['password'])
+    if validation == '0':
+        session["username"] = data.get("username")
+        session["email"] = data.get("email")
+        session["password"] = data.get("password")
+    return validation
 
-    return db.create_user(session['username'], session['email'], session['password'])
 
 
 @app.route("/signin")
