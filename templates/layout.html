@@ -10,13 +10,14 @@
 
 
 <!--Icons!-->
-<link rel="icon" type="image/x-icon" href="/static/images/logo.ico">
+<link rel="icon" type="image/x-icon" href="/static/images/logo.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <!--Title!-->
 <title>{{page}}</title>
 
 {% if not disablebar %}
   <nav style="height:10%;width:100%;float:left; background-color:#000000; position: relative;z-index:1;padding:0px;">
-    <!--
+    
     <span style="float:left;">
       <br>
       <a href="/"><img src="static/images/logo.png" style="height:2em;"></a>
@@ -55,12 +56,12 @@
         <a id="signup" href="/signup">Sign Up</a>
       </span>
     {% endif %}
-  --> 
+  
   </nav>
 
 {% endif %}
 <!--Twemoji!-->
-<!--
+
 <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
 <script>
   window.onload = function() {      
@@ -70,5 +71,5 @@
   }
 
 </script>
-!-->
+
 {% block main %} {% endblock %}
