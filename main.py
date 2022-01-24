@@ -17,6 +17,23 @@ app.secret_key = '12345678987654321'
 
 
 # app routes
+
+@app.route("/lms")
+def lms():
+  return " "
+@app.route("/developers")
+def developers():
+  return " "
+@app.route("/developers/api")
+def api_docs():
+  return " "
+@app.route("/music")
+def music():
+  return " "
+@app.route("/holidays")
+def vh():
+  return " "
+
 @app.route("/spoistatus", methods=["POST"])
 def spotify_status():
     a = spotifystatus()
