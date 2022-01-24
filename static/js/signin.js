@@ -1,3 +1,5 @@
+let validUser = false;
+let validPass = false;
 window.addEventListener('load', function () {
     let submit = document.getElementById('log_in');
     submit.disabled = true;
@@ -63,6 +65,7 @@ function reqListener1() {
         document.getElementsByClassName('response')[0].style.color = 'green';
         document.getElementsByClassName('response')[0].innerHTML =
             '<i class="material-icons">check_circle</i>';
+        validUser = true;
     } else if (this.responseText === 'false') {
         document.getElementsByClassName('response')[0].style.color = 'red';
         document.getElementsByClassName('response')[0].innerHTML =
@@ -78,15 +81,28 @@ function reqListener2() {
         document.getElementsByClassName('response')[1].style.color = 'green';
         document.getElementsByClassName('response')[1].innerHTML =
             '<i class="material-icons">check_circle</i>';
-        submit.disabled = false;
-        submit.style.color = 'white';
-        submit.style.backgroundColor = '#00a2ff';
+        validPass = true;
     } else if (this.responseText === 'false') {
         document.getElementsByClassName('response')[1].style.color = 'red';
         document.getElementsByClassName('response')[1].innerHTML =
             '<i class="material-icons">error</i>';
     }
 }
+
+function enableButton() {
+    let submit = document.getElementById('log_in');
+    if (validUser && validPass) {
+        submit.disabled = false;
+        submit.style.color = 'white';
+        submit.style.backgroundColor = '#00a2ff';
+    } else {
+        submit.disabled = true;
+        submit.style.color = 'gray';
+        submit.style.backgroundColor = '#00a2ff';
+    }
+}
+
+let interval = setInterval(enableButton, 100);
 
 
 function loginUser() {
