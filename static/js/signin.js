@@ -89,16 +89,16 @@ function reqListener2() {
     }
 }
 
-function enableButton() {
+function enableButton(){
     let submit = document.getElementById('log_in');
-    if (validUser && validPass) {
+    if (validUser && validPass){
         submit.disabled = false;
         submit.style.color = 'white';
         submit.style.backgroundColor = '#00a2ff';
     } else {
         submit.disabled = true;
         submit.style.color = 'gray';
-        submit.style.backgroundColor = '#00a2ff';
+        submit.style.backgroundColor = '#006097';
     }
 }
 
