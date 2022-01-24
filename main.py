@@ -43,7 +43,7 @@ def server_error(e):
 
 @app.route('/courses/<id>')
 def courses(id):
-    if session.get("username"):
+    if session.get("username") and session.get('password'):
         courses = db.Accounts.find_one({'username': session.get("username")})["courses"]
 
         for course in courses:
@@ -71,7 +71,7 @@ def new_post():
 
 @app.route('/')
 def index():
-    if session.get("username"):
+    if session.get("username") and session.get('password'):
         return redirect('/dashboard')
     else:
         return render_template("index.html", page='Nebulus')
@@ -98,7 +98,7 @@ def settings():
 @app.route('/dashboard')
 def dashboard():
     # if the user is not logged in, redirect to the login page
-    if not session.get('username'):
+    if not session.get('username') and not session.get('password'):
         return redirect('/signin')
     else:
         new_user = request.args.get('new_user', default='false', type=str)
@@ -114,7 +114,7 @@ def developers():
 @app.route("/signup")
 def signup():
     # If the user is already logged in, redirect to the dashboard
-    if session.get("username"):
+    if session.get("username") and session.get('password'):
         return redirect('/dashboard')
     return render_template("signup.html", page='Nebulus - Sign Up', disablebar=True)
 
@@ -133,25 +133,19 @@ def signup_post():
 
 @app.route("/signin")
 def signin():
-    if not session.get('username'):
+    print(session)
+    if not session.get('username') and not session.get('password'):
         return render_template("signin.html", page='Nebulus - Log In', disablebar=True)
     return redirect('/dashboard')
 
 
-@app.route("/signin", methods=['POST'])
-def signin_post():
+@app.route("/signin_username", methods=['POST'])
+def signin_username():
     json = request.get_json()
-    validation = db.check_login(json.get('username'), json.get('password'))
+    validation = db.check_user(json.get('username'))
 
-    """
-  Status codes:
-  0 - Login Successful
-  1 - Invalid Password
-  2 - Username does not exist
-  """
-    if validation == "0":
+    if validation == "true":
         session['username'] = json.get('username')
-        session['password'] = json.get('password')
         # Checking if the entered username is an email
         if re.fullmatch(regex, session['username']):
             # If the username is an email, then we need to get the username from the database
@@ -161,6 +155,15 @@ def signin_post():
             # If the username is not an email, then we need to get the email from the database
             session['email'] = db.Accounts.find_one({'username': session['username']})['email']
 
+    return validation
+
+@app.route("/signin_password", methods=['POST'])
+def signin_password():
+    json = request.get_json()
+    validation = db.check_password(json.get('username'), json.get('password'))
+
+    if validation == "true":
+        session['password'] = json.get('password')
     return validation
 
 

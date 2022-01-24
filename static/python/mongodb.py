@@ -44,24 +44,26 @@ def create_user(username, email, password):
     return '0'
 
 
-"""
-Status codes:
-0 - Login Successful
-1 - Invalid Password
-2 - Username does not exist
-"""
-
-
-def check_login(user, password):
-    #Checking if the entered Username/Email is an email
+def check_user(user):
     if re.fullmatch(regex, user):
-        #If the entered Username/Email is an email, check if the entered email exists in the database
+        # If the entered Username/Email is an email, check if the entered email exists in the database
         data = Accounts.find_one({'email': user})
     else:
-        #If the entered Username/Email is not an email, check if the entered username exists in the database
+        # If the entered Username/Email is not an email, check if the entered username exists in the database
         data = Accounts.find_one({'username': user})
 
     if not data:
-        return '2'
+        return 'false'
     else:
-        return str(int(not valid_password(data['password'], password)))
+        return 'true'
+
+
+def check_password(username, password):
+    data = Accounts.find_one({'username': username})
+    if not data:
+        return 'false'
+    elif valid_password(data['password'], password):
+        return 'true'
+    else:
+        return 'false'
+
