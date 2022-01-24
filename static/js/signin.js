@@ -8,7 +8,6 @@ window.addEventListener('load', function () {
 
     function checkValidUsername() {
         let status = document.getElementById('fail');
-        status.style.color = 'red';
 
 
         if (document.getElementById('usrname').value === '') {
@@ -29,11 +28,6 @@ window.addEventListener('load', function () {
     }
 
     function checkValidPassword() {
-        let status = document.getElementById('fail');
-        status.innerHTML = '<br>';
-        status.style.color = 'red';
-
-
         if (document.getElementById('psw').value === '') {
             return false;
         } else {
@@ -45,7 +39,6 @@ window.addEventListener('load', function () {
             xhttp.addEventListener('load', reqListener2);
             xhttp.send(
                 JSON.stringify({
-                    username: username,
                     password: password
                 })
             );

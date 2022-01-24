@@ -131,7 +131,7 @@ def signup_post():
 
 @app.route("/signin")
 def signin():
-    print(session)
+    # If the user is already logged in, redirect to the dashboard
     if not session.get('username') and not session.get('password'):
         return render_template("main/signin.html", page='Nebulus - Log In', disablebar=True)
     return redirect('/dashboard')
@@ -158,7 +158,7 @@ def signin_username():
 @app.route("/signin_password", methods=['POST'])
 def signin_password():
     json = request.get_json()
-    validation = db.check_password(json.get('username'), json.get('password'))
+    validation = db.check_password(session['email'], json.get('password'))
 
     if validation == "true":
         session['password'] = json.get('password')

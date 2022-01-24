@@ -58,8 +58,8 @@ def check_user(user):
         return 'true'
 
 
-def check_password(username, password):
-    data = Accounts.find_one({'username': username})
+def check_password(email, password):
+    data = Accounts.find_one({'email': email})
     if not data:
         return 'false'
     elif valid_password(data['password'], password):
