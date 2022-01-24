@@ -72,7 +72,11 @@ def index():
     if session.get("username") and session.get('password'):
         return redirect('/dashboard')
     else:
-        return render_template("main/index.html", page='Nebulus')
+        try:
+          user = session["username"]
+        except:
+          user = None
+        return render_template("main/index.html", page='Nebulus', user=user)
 
 
 @app.route("/chat")
@@ -104,9 +108,9 @@ def dashboard():
                                new_account=new_user == 'true')
 
 
-@app.route("/developers")
-def developers():
-    return render_template("developers.html", page='Nebulus - Developers')
+@app.route("/about")
+def about():
+    return render_template("about.html", page='Nebulus - About Us')
 
 
 @app.route("/signup")
