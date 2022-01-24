@@ -110,7 +110,11 @@ def dashboard():
 
 @app.route("/about")
 def about():
-    return render_template("about.html", page='Nebulus - About Us')
+    try:
+          user = session["username"]
+    except:
+          user = None
+    return render_template("about.html", page='Nebulus - About Us', user=user)
 
 
 @app.route("/signup")
