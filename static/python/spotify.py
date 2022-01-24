@@ -50,5 +50,3 @@ def attemptsongart():
     if len(items) > 0:
         artist = items[0]
         print(artist['name']+": Song Cover Image Link: ", artist['images'][0]['url'])
-
-attemptsongart()
