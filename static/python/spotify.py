@@ -1,6 +1,7 @@
 from SwSpotify import spotify
-# import pyautogui
-import os
+import spotipy
+import sys
+from spotipy.oauth2 import SpotifyClientCredentials
 
 
 def status():
@@ -8,11 +9,46 @@ def status():
 
 
 def get_song(old_song):
-    try:
-        current_song = spotify.song()
-        current_artist = spotify.artist()
-    except:
-        current_song = "no_song_is_playing_right_now"
-        current_artist = ""
+  client_credentials_manager = SpotifyClientCredentials(client_id='b61065c28d774965b96027c3e2def9d9', client_secret='f0f01a4427ea4b48a9defabb46749311')
+  sp = spotipy.Spotify(client_credentials_manager = client_credentials_manager)
 
-    return [current_song, current_artist]
+  try:
+      currentsong = spotify.song()
+      songartist = spotify.artist()
+
+      print(f"Song Playing: {currentsong}\nArtist: {songartist}")
+
+      if len(sys.argv) > 1:
+          name = songartist.join(sys.argv[1:])
+      else:
+          name = songartist
+
+      results = sp.search(q='artist:' + name, type='artist')
+      items = results['artists']['items']
+      if len(items) > 0:
+          artist = items[0]
+          print(artist['name']+": Artist Cover Image Link: ", artist['images'][0]['url'])
+  except:
+      print("Spotify is not running")
+
+def attemptsongart():
+    client_credentials_manager = SpotifyClientCredentials(client_id='b61065c28d774965b96027c3e2def9d9', client_secret='f0f01a4427ea4b48a9defabb46749311')
+    sp = spotipy.Spotify(client_credentials_manager = client_credentials_manager)
+
+    currentsong = spotify.song()
+    songartist = spotify.artist()
+
+    print(f"Song Playing: {currentsong}\nArtist: {songartist}")
+
+    if len(sys.argv) > 1:
+        name = currentsong.join(sys.argv[1:])
+    else:
+        name = currentsong
+
+    results = sp.search(q='song:' + name, type='track')
+    items = results['tracks']['items']
+    if len(items) > 0:
+        artist = items[0]
+        print(artist['name']+": Song Cover Image Link: ", artist['images'][0]['url'])
+
+attemptsongart()

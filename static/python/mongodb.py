@@ -1,9 +1,9 @@
 import pymongo, dns
-from static.python.security import *
-import os, binascii, re
+from static.python.security import  hash256, valid_password
+import os
+import re
 from static.python.classes.course import Course
 from static.python.classes.user import User
-import random
 
 regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
 

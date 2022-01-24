@@ -1,14 +1,12 @@
 # Imports
-from dotenv import load_dotenv
-#Exportng Environment Variables in the .env file
+from dotenv import load_dotenv #Exportng Environment Variables in the .env file
 load_dotenv()
 from flask import Flask, render_template, session, flash, request, redirect
 from werkzeug.utils import secure_filename
 from static.python.image_to_music import *
 from static.python import mongodb as db
-from static.python import security
-from static.python.spotify import *
-from static.python.youtube import *
+from static.python.spotify import status as spotifystatus
+from static.python.youtube import search_yt
 import os
 import re
 
@@ -21,24 +19,24 @@ app.secret_key = '12345678987654321'
 # app routes
 @app.route("/spoistatus", methods=["POST"])
 def spotify_status():
-    a = status()
+    a = spotifystatus()
     string = a[0] + " - " + a[1]
     return string
 
 
 @app.route("/profile")
 def profile():
-    return render_template("profile.html", page="Nebulus Profile")
+    return render_template("user/profile.html", page="Nebulus Profile")
 
 
 @app.errorhandler(404)
 def not_found(e):
-    return render_template("404.html", page='404 Not Found')
+    return render_template("errors/404.html", page='404 Not Found')
 
 
 @app.errorhandler(500)
 def server_error(e):
-    return render_template("500.html", page="500 Internal Server Error", e=e)
+    return render_template("errors/500.html", page="500 Internal Server Error", e=e)
 
 
 @app.route('/courses/<id>')
@@ -50,7 +48,7 @@ def courses(id):
             if course.get('_id') == id:
                 break
 
-        return render_template("course.html", page="Nebulus - " + course.get("name", "Courses"), db=db, course=course,
+        return render_template("courses/course.html", page="Nebulus - " + course.get("name", "Courses"), db=db, course=course,
                                user=session.get("username"))
 
     else:
@@ -59,7 +57,7 @@ def courses(id):
 
 @app.route('/new')
 def new():
-    return render_template("new_course.html", page='Nebulus - New Course')
+    return render_template("courses/new.html", page='Nebulus - New Course')
 
 
 @app.route('/new', methods=['POST'])
@@ -74,7 +72,7 @@ def index():
     if session.get("username") and session.get('password'):
         return redirect('/dashboard')
     else:
-        return render_template("index.html", page='Nebulus')
+        return render_template("main/index.html", page='Nebulus')
 
 
 @app.route("/chat")
@@ -92,7 +90,7 @@ def logout():
 
 @app.route('/settings')
 def settings():
-    return render_template("settings.html", page='Nebulus - Account Settings', session=session)
+    return render_template("user/settings.html", page='Nebulus - Account Settings', session=session)
 
 
 @app.route('/dashboard')
@@ -116,7 +114,7 @@ def signup():
     # If the user is already logged in, redirect to the dashboard
     if session.get("username") and session.get('password'):
         return redirect('/dashboard')
-    return render_template("signup.html", page='Nebulus - Sign Up', disablebar=True)
+    return render_template("main/signup.html", page='Nebulus - Sign Up', disablebar=True)
 
 
 @app.route("/signup", methods=["POST"])
@@ -135,7 +133,7 @@ def signup_post():
 def signin():
     print(session)
     if not session.get('username') and not session.get('password'):
-        return render_template("signin.html", page='Nebulus - Log In', disablebar=True)
+        return render_template("main/signin.html", page='Nebulus - Log In', disablebar=True)
     return redirect('/dashboard')
 
 
