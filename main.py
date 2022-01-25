@@ -43,7 +43,11 @@ def spotify_status():
 
 @app.route("/profile")
 def profile():
-    return render_template("user/profile.html", page="Nebulus Profile")
+    try:
+            user = session["username"]
+    except:
+          user = None
+    return render_template("user/profile.html", page="Nebulus Profile", user=user)
 
 
 @app.errorhandler(404)
@@ -111,7 +115,11 @@ def logout():
 
 @app.route('/settings')
 def settings():
-    return render_template("user/settings.html", page='Nebulus - Account Settings', session=session)
+    try:
+          user = session["username"]
+    except:
+          user = None
+    return render_template("user/settings.html", page='Nebulus - Account Settings', session=session, user=user)
 
 
 @app.route('/dashboard')
