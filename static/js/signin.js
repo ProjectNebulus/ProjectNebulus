@@ -63,6 +63,7 @@ function reqListener1() {
         document.getElementsByClassName('response')[0].style.color = 'red';
         document.getElementsByClassName('response')[0].innerHTML =
             '<i class="material-icons">error</i>';
+        validUser = false;
     }
 
 }
@@ -79,6 +80,7 @@ function reqListener2() {
         document.getElementsByClassName('response')[1].style.color = 'red';
         document.getElementsByClassName('response')[1].innerHTML =
             '<i class="material-icons">error</i>';
+        validPass = false;
     }
 }
 
