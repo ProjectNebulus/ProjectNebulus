@@ -37,7 +37,10 @@ def vh():
 @app.route("/spoistatus", methods=["POST"])
 def spotify_status():
     a = spotifystatus()
-    string = a[0] + " - " + a[1]
+    try:
+      string = a[0] + " - " + a[1]
+    except:
+      string = "You aren't listening to anything!"
     return string
 
 
