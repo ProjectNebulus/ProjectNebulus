@@ -17,6 +17,23 @@ app.secret_key = '12345678987654321'
 
 
 # app routes
+
+@app.route("/lms")
+def lms():
+  return " "
+@app.route("/developers")
+def developers():
+  return " "
+@app.route("/developers/api")
+def api_docs():
+  return " "
+@app.route("/music")
+def music():
+  return " "
+@app.route("/holidays")
+def vh():
+  return " "
+
 @app.route("/spoistatus", methods=["POST"])
 def spotify_status():
     a = spotifystatus()
@@ -72,7 +89,11 @@ def index():
     if session.get("username") and session.get('password'):
         return redirect('/dashboard')
     else:
-        return render_template("main/index.html", page='Nebulus')
+        try:
+          user = session["username"]
+        except:
+          user = None
+        return render_template("main/index.html", page='Nebulus', user=user)
 
 
 @app.route("/chat")
@@ -104,9 +125,13 @@ def dashboard():
                                new_account=new_user == 'true')
 
 
-@app.route("/developers")
-def developers():
-    return render_template("developers.html", page='Nebulus - Developers')
+@app.route("/about")
+def about():
+    try:
+          user = session["username"]
+    except:
+          user = None
+    return render_template("about.html", page='Nebulus - About Us', user=user)
 
 
 @app.route("/signup")
