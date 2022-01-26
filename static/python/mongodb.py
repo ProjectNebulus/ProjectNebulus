@@ -59,6 +59,8 @@ def check_user(user):
 
 
 def check_password(email, password):
+    print(email)
+
     data = Accounts.find_one({'email': email})
     if not data:
         return 'false'

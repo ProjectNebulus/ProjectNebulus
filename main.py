@@ -47,9 +47,9 @@ def spotify_status():
 @app.route("/profile")
 def profile():
     try:
-            user = session["username"]
+        user = session["username"]
     except:
-          user = None
+        user = None
     return render_template("user/profile.html", page="Nebulus Profile", user=user)
 
 
@@ -128,7 +128,7 @@ def settings():
 @app.route('/dashboard')
 def dashboard():
     # if the user is not logged in, redirect to the login page
-    if not session.get('username') and not session.get('password'):
+    if not (session.get('username') and session.get('password')):
         return redirect('/signin')
     else:
         new_user = request.args.get('new_user', default='false', type=str)
@@ -168,7 +168,7 @@ def signup_post():
 @app.route("/signin")
 def signin():
     # If the user is already logged in, redirect to the dashboard
-    if not session.get('username') and not session.get('password'):
+    if not (session.get('username') and session.get('password')):
         return render_template("main/signin.html", page='Nebulus - Log In', disablebar=True)
     return redirect('/dashboard')
 
@@ -177,10 +177,8 @@ def signin():
 def signin_username():
     json = request.get_json()
     validation = db.check_user(json.get('username'))
-
-    if validation == "true":
-        session['username'] = json.get('username')
-        # Checking if the entered username is an email
+    if validation == 'true':
+        session["username"] = json.get('username')
         if re.fullmatch(regex, session['username']):
             # If the username is an email, then we need to get the username from the database
             session['email'] = session['username']
@@ -188,18 +186,19 @@ def signin_username():
         else:
             # If the username is not an email, then we need to get the email from the database
             session['email'] = db.Accounts.find_one({'username': session['username']})['email']
-
     return validation
 
 @app.route("/signin_password", methods=['POST'])
 def signin_password():
     json = request.get_json()
     validation = db.check_password(session['email'], json.get('password'))
-
-    if validation == "true":
-        session['password'] = json.get('password')
     return validation
 
+@app.route("/signin", methods=['POST'])
+def signin_post():
+    data = request.get_json()
+    session["password"] = data.get("password")
+    return 'success'
 
 @app.route("/musiqueworld")
 def musiqueworld():

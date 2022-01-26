@@ -34,7 +34,6 @@ window.addEventListener('load', function () {
             return false;
         } else {
             let password = document.getElementById('psw').value;
-            let username = document.getElementById('usrname').value;
             const xhttp = new XMLHttpRequest();
             xhttp.open('POST', '/signin_password', true);
             xhttp.setRequestHeader('Content-type', 'application/json');
@@ -54,7 +53,6 @@ window.addEventListener('load', function () {
 });
 
 function reqListener1() {
-    let submit = document.getElementById('log_in');
     // TODO(kev): switch case
     if (this.responseText === 'true') {
         document.getElementsByClassName('response')[0].style.color = 'green';
@@ -71,7 +69,6 @@ function reqListener1() {
 }
 
 function reqListener2() {
-    let submit = document.getElementById('log_in');
     // TODO(kev): switch case
     if (this.responseText === 'true') {
         document.getElementsByClassName('response')[1].style.color = 'green';
@@ -103,7 +100,28 @@ let interval = setInterval(enableButton, 100);
 
 
 function loginUser() {
-    window.location.href = '/dashboard';
+    let password = document.getElementById('psw').value;
+    let username = document.getElementById('usrname').value;
+    const xhttp = new XMLHttpRequest();
+    xhttp.open('POST', '/signin', true);
+    xhttp.setRequestHeader('Content-type', 'application/json');
+    xhttp.addEventListener('load', reqListener3);
+    xhttp.send(
+        JSON.stringify({
+            password: password
+}
+    ));
+}
+
+function reqListener3() {
+    if (this.responseText === 'success') {
+        window.location.href = '/dashboard';
+    } else {
+        let fail = document.getElementById('fail');
+        fail.style.color = 'red';
+        fail.innerHTML = 'There was an error during signin';
+
+    }
 }
 
 
