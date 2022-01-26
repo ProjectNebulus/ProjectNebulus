@@ -108,17 +108,41 @@ button:hover{
     <p style="color:#bababa;font-size:0.5em;">By the Way, Templates have a lot of secret features so only create your own if you can't find a template!</p>
     </center>
     <p style="font-size:0.5em;">Step 1 of 3</p>
-    <p><span style="height: 0.5em;width: 0.5em;background-color: green;border-radius: 50%;display: inline-block;"></span>
-  <span style="height: 0.5em;width: 0.5em;background-color: red;border-radius: 50%;display: inline-block;"></span>
-  <span style="height: 0.5em;width: 0.5em;background-color: red;border-radius: 50%;display: inline-block;"></span></p>
-    <span class='button'><span style="float:left;"><img src="/static/images/icons/new.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>Create your Own!<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span></span>
+    <p><span style="height: 0.5em;width: 0.5em;background-color: yellow;border-radius: 50%;display: inline-block;"></span>
+  <span style="height: 0.5em;width: 0.5em;background-color: grey;border-radius: 50%;display: inline-block;"></span>
+  <span style="height: 0.5em;width: 0.5em;background-color: grey;border-radius: 50%;display: inline-block;"></span></p>
+    <span class='button' onclick="stepTwo('create')"><span style="float:left;"><img src="/static/images/icons/new.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>Create your Own!<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span></span>
     <p style="font-weight:800;font-size:1em;">Or Use a Template!</p>
-    <span class='button'><span style="float:left;"><img src="/static/images/icons/science.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>Science<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span><br><span style="color:grey;font-size:0.8em;">(Science, Physics, Chemistry, Biology, Astronomy, Life Science, Earth Science, Physical Science, Physical Geography, Computer Science (Coding) etc.)</span></span><br>
-    <span class='button'><span style="float:left;"><img src="/static/images/icons/math.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>Mathematics<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span><br><span style="color:grey;font-size:0.8em;">(K-8th Math, Pre-Algebra, Algebra I, Algebra II, Pre-Calculus A/B/AB, Calculus AB/BC, AP Statistics, AP Calculus, Competitive Math etc.)</span></span><br>
-    <span class='button'><span style="float:left;"><img src="/static/images/icons/history.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>History<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span><br><span style="color:grey;font-size:0.8em;">(Social Studies, World History I, World History II, US History, AP World History, AP US History, etc.)</span></span><br>
-    <span class='button'><span style="float:left;"><img src="/static/images/icons/art.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>Art<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span><br><span style="color:grey;font-size:0.8em;">(Art, Music, Drama, etc.)</span></span>
-    <span class='button'><span style="float:left;"><img src="/static/images/icons/language.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>Language<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span><br><span style="color:grey;font-size:0.8em;">(English, Latin, Spanish, French, Mandarin, German, etc. Primary or Secondary Language)</span></span><br>
-    <span class='button'><span style="float:left;"><img src="/static/images/icons/sport.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>Sports<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span><br><span style="color:grey;font-size:0.8em;">(PE Class, Basketball, Soccer, Ice Hockey, Volleyball, Running, Football, Tennis, Dance)</span></span><br>
+    <span class='button' onclick="stepTwo('science)"><span style="float:left;"><img src="/static/images/icons/science.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>Science<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span><br><span style="color:grey;font-size:0.8em;">(Science, Physics, Chemistry, Biology, Astronomy, Life Science, Earth Science, Physical Science, Physical Geography, Computer Science (Coding) etc.)</span></span><br>
+    <span class='button' onclick="stepTwo('math')"><span style="float:left;"><img src="/static/images/icons/math.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>Mathematics<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span><br><span style="color:grey;font-size:0.8em;">(K-8th Math, Pre-Algebra, Algebra I, Algebra II, Pre-Calculus A/B/AB, Calculus AB/BC, AP Statistics, AP Calculus, Competitive Math etc.)</span></span><br>
+    <span class='button' onclick="stepTwo('history')"><span style="float:left;"><img src="/static/images/icons/history.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>History<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span><br><span style="color:grey;font-size:0.8em;">(Social Studies, World History I, World History II, US History, AP World History, AP US History, etc.)</span></span><br>
+    <span class='button' onclick="stepTwo('art')" ><span style="float:left;"><img src="/static/images/icons/art.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>Art<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span><br><span style="color:grey;font-size:0.8em;">(Art, Music, Drama, etc.)</span></span>
+    <span class='button' onclick="stepTwo('language')"><span style="float:left;"><img src="/static/images/icons/language.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>Language<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span><br><span style="color:grey;font-size:0.8em;">(English, Latin, Spanish, French, Mandarin, German, etc. Primary or Secondary Language)</span></span><br>
+    <span class='button' onclick="stepTwo('sports')"><span style="float:left;"><img src="/static/images/icons/sport.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>Sports<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span><br><span style="color:grey;font-size:0.8em;">(PE Class, Basketball, Soccer, Ice Hockey, Volleyball, Running, Football, Tennis, Dance)</span></span><br>
+    </div>
+
+</div>
+
+<div id="Science" class="modal">
+  <div class="CourseBtn">
+    <div style='height:380px;overflow:scroll;overflow-y:scroll;' class='scroll'>
+  	<center>
+    <h1 style="font-size:1em">Aight, Choose which Type of Science course you would like to make?</h1>
+    <p style="color:#bababa;font-size:0.5em;">A course is a space for you to organize and thrive in your learning experience. All you have to do is create a course and fill it in with content!</p>
+    <p style="color:#bababa;font-size:0.5em;">By the Way, Templates have a lot of secret features so only create your own if you can't find a template!</p>
+    </center>
+    <p style="font-size:0.5em;">Step 1 of 3</p>
+    <p><span style="height: 0.5em;width: 0.5em;background-color: yellow;border-radius: 50%;display: inline-block;"></span>
+  <span style="height: 0.5em;width: 0.5em;background-color: grey;border-radius: 50%;display: inline-block;"></span>
+  <span style="height: 0.5em;width: 0.5em;background-color: grey;border-radius: 50%;display: inline-block;"></span></p>
+    <span class='button' onclick="stepTwo('create')"><span style="float:left;"><img src="/static/images/icons/new.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>Create your Own!<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span></span>
+    <p style="font-weight:800;font-size:1em;">Or Use a Template!</p>
+    <span class='button' onclick="stepTwo('science)"><span style="float:left;"><img src="/static/images/icons/science.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>Science<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span><br><span style="color:grey;font-size:0.8em;">(Science, Physics, Chemistry, Biology, Astronomy, Life Science, Earth Science, Physical Science, Physical Geography, Computer Science (Coding) etc.)</span></span><br>
+    <span class='button' onclick="stepTwo('math')"><span style="float:left;"><img src="/static/images/icons/math.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>Mathematics<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span><br><span style="color:grey;font-size:0.8em;">(K-8th Math, Pre-Algebra, Algebra I, Algebra II, Pre-Calculus A/B/AB, Calculus AB/BC, AP Statistics, AP Calculus, Competitive Math etc.)</span></span><br>
+    <span class='button' onclick="stepTwo('history')"><span style="float:left;"><img src="/static/images/icons/history.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>History<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span><br><span style="color:grey;font-size:0.8em;">(Social Studies, World History I, World History II, US History, AP World History, AP US History, etc.)</span></span><br>
+    <span class='button' onclick="stepTwo('art')" ><span style="float:left;"><img src="/static/images/icons/art.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>Art<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span><br><span style="color:grey;font-size:0.8em;">(Art, Music, Drama, etc.)</span></span>
+    <span class='button' onclick="stepTwo('language')"><span style="float:left;"><img src="/static/images/icons/language.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>Language<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span><br><span style="color:grey;font-size:0.8em;">(English, Latin, Spanish, French, Mandarin, German, etc. Primary or Secondary Language)</span></span><br>
+    <span class='button' onclick="stepTwo('sports')"><span style="float:left;"><img src="/static/images/icons/sport.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>Sports<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span><br><span style="color:grey;font-size:0.8em;">(PE Class, Basketball, Soccer, Ice Hockey, Volleyball, Running, Football, Tennis, Dance)</span></span><br>
     </div>
 
 </div>
@@ -231,4 +255,10 @@ window.onclick = function(event) {
         <hr>
     </div>
 
+<script>
+  function stepTwo(text){
+    document.getElementById("CourseModal").style.display = "none";
+    document.getElementById("Science").style.display = "block";
+  }
+</script>
 {% endblock %}
