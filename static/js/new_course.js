@@ -1,3 +1,7 @@
+function setUpStuff() {
+  
+}
+
 function newCourse() {
     const xhttp = new XMLHttpRequest();
     xhttp.open('POST', '/new', true);

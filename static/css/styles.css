@@ -131,6 +131,7 @@ input[type=password] {
 input[type=submit], #signupinnerbody input[type=submit] {
   background:#00a2ff;
   color: white;
+  cursor: pointer;
 }
 
 .button {
@@ -412,3 +413,16 @@ details summary {
 .material-icons-outlined.md-24 { font-size: 24px; vertical-align: middle;}
 .material-icons-outlined.md-36 { font-size: 36px; vertical-align: middle;}
 .material-icons-outlined.md-48 { font-size: 48px; vertical-align: middle;}
+
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: rgb(200, 200, 200);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  width: 10px;
+  border-radius: 2px;
+  background-color: rgb(100, 100, 100);
+}
