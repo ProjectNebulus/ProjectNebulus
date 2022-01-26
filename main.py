@@ -23,7 +23,11 @@ def lms():
   return " "
 @app.route("/developers")
 def developers():
-  return " "
+  try:
+          user = session["username"]
+  except:
+          user = None
+  return render_template("developerportal.html", user=user, db=db, page = "Nebulus - Developer Portal")
 @app.route("/developers/api")
 def api_docs():
   return " "
