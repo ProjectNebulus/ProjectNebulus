@@ -23,6 +23,8 @@
       }
       .spoiler{
         background:black;
+        color:black;
+        padding:2px;
       }
     </style>
     <div id="middle" style="width:60%;height:90%;float:left;overflow:auto;">
@@ -47,7 +49,7 @@
         <div style="height:140px;">
             <div style="width:50%;float:left;">
                 <h4 style="font-weight:800;">Unnamed Project 1</h4>
-                <p>Token: <span class="spoiler">your mom</span></p>
+                <p>Token: <span class="spoiler" onclick="unspoil(this)">your mom</span></p>
             </div>
             <div style="width:50%;float:left;">
                 <button style="padding:10px;font-size:1em;color:white;background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://cdn.wallpapersafari.com/17/52/NQHESK.jpg) !important; background: no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;overflow: hidden;overflow:auto;border-style:none;border-radius:10px;">
@@ -60,7 +62,7 @@
             <div style="width:50%;float:left;">
                 <h4 style="font-weight:800;">Unnamed Project 2</h4>
                <h4 style="font-weight:800;">Unnamed Project 1</h4>
-                <p>Token: <span class="spoiler">your mom</span></p>
+                <p>Token: <span class="spoiler" onclick="unspoil(this)">your mom</span></p>
             </div>
             <div style="width:50%;float:left;">
                 <button style="padding:10px;font-size:1em;color:white;background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://cdn.wallpapersafari.com/17/52/NQHESK.jpg) !important; background: no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;overflow: hidden;overflow:auto;border-style:none;border-radius:10px;">
@@ -76,6 +78,10 @@
   function stepTwo(text){
     document.getElementById("CourseModal").style.display = "none";
     document.getElementById("Science").style.display = "block";
+  }
+  function unspoil(element){
+    element.style.background-color = "transparent";
+    element.style.color = "white";
   }
 </script>
 {% endblock %}

@@ -27,7 +27,7 @@ def developers():
           user = session["username"]
   except:
           user = None
-  return render_template("developerportal.html", user=user, db=db, page = "Nebulus - Developer Portal")
+  return render_template("developerportal.html", user=user, db=db, page = "Nebulus - Developer Portal", developer=True)
 @app.route("/developers/api")
 def api_docs():
   return " "

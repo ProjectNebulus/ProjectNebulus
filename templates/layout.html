@@ -32,7 +32,11 @@
     </span>
 
     {% if session.get("username") %}
+    
       {% if new_account %}
+      {% if developer %}
+        <button>New Application</button>
+        {% endif %}
       <span style="margin-top:20px;padding: 10px 5px 10px 5px;background:rgba(0, 255, 0, 0.2);border-radius:10px;float:right">Welcome to Nebulus, {{user}}</span>
       {% endif %}
       <details style="float:right;margin:30px 20px 30px 5px;text-align:right">
