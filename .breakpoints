@@ -4,19 +4,19 @@
       {
         "id": "e188b25f-7862-4e96-a513-b98d3ddf3943",
         "line": 1,
-        "version": 9903,
+        "version": 10007,
         "index": 0
       },
       {
         "id": "1a96932e-ecb0-4cdb-8de1-01e6d9931860",
         "line": 1,
-        "version": 9903,
+        "version": 10007,
         "index": 0
       },
       {
         "id": "a3c66d9f-84f6-457a-87eb-984f8779b063",
         "line": 8,
-        "version": 9903,
+        "version": 10007,
         "index": 306
       }
     ],
@@ -53,9 +53,9 @@
     "templates/dashboard.html": [
       {
         "id": "b30ddc39-8b49-4920-8bd8-2de61a2da748",
-        "line": 2,
-        "version": 9240,
-        "index": 26
+        "line": 1,
+        "version": 9280,
+        "index": 0
       }
     ],
     "templates/layout.html": [
