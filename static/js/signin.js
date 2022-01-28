@@ -1,5 +1,6 @@
 let validUser = false;
 let validPass = false;
+
 window.addEventListener('load', function () {
     let submit = document.getElementById('log_in');
     submit.disabled = true;

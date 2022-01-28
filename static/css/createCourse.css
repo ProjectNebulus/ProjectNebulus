@@ -2,7 +2,7 @@
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  z-index: 2; /* Sit on top */
   padding-top: 100px; /* Location of the box */
   left: 0;
   top: 0;
@@ -31,6 +31,46 @@
   top: -1000px;
   animation-fill-mode: forwards;
   -webkit-animation-fill-mode: forwards;
+}
+
+#create, #join {
+  background: black;
+  cursor: pointer;
+  vertical-align: middle;
+  border-radius: 3px;
+  padding: 5px;
+}
+
+#join-hover {
+  display: none;
+  z-index: 1;
+  background: black;
+  padding: 3px;
+  font-size: 1.05em;
+}
+
+#join:hover #join-hover {
+  display: block;
+}
+
+#course-nav {
+  z-index: 1;
+  float: right;
+  margin-right: 75px;
+}
+
+#create:hover, #join:hover {
+  background: gray;
+}
+
+#close {
+  float: right;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+#close:hover {
+  background: gray;
 }
 
 @keyframes movein {

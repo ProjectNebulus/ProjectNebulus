@@ -1,264 +1,139 @@
 <!--Extend with Jinja!-->
 {% extends "layout.html" %}
 {% block main %}
-    <br>
-    <div id="left"
-         style="width:20%;height:90%;float:left;background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://wallpapercave.com/wp/wp2742875.jpg) !important; background: no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;overflow: hidden;overflow:auto;">
-        <center>
-            <h3>Continue Trick Or Treating</h3>
-            <h4>Same Zip Code</h4>
-        </center>
-    </div>
-    <div id="middle" style="width:60%;height:90%;float:left;overflow:auto;">
-        <center>
-            <h1>
-                Jump into These Courses
-                <!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-
-
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content */
-.CourseBtn {
-  background-color: black;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 50%;
-  color:white;
-  border-radius:10px;
-}
-.image{
-	width:20px;
-    height:20px;
-    border-radius:0%;
-    margin-right:10px;
-}
-button{
-	padding:10px;
-  background:black;
-  border-style:none;
-  color:white;
-  border-radius:5px;
-}
-
-button:hover{
-	  padding:10px;
-    background:grey;
-    border-style:none;
-    color:white;
-    border-radius:5px;
-}
-.button{
-	font-size:20px;
-  color:white;
-  padding:10px;
-  border-radius:5px;
-  border-style:solid;
-  border-width:1px;
-  border-color:#bababa;
-  display: inline-block;
-  margin-bottom:10px;
-  width:500px;
-  cursor: grab;
-  background:black !important;
-}
-.button:hover{
-	background:#4f4f4f !important;
-  
-}
-
-::-webkit-scrollbar {
-  -webkit-appearance: none;
-  width: 7px;
-}
-
-::-webkit-scrollbar-thumb {
-  border-radius: 4px;
-  background-color: rgba(0, 0, 0, .5);
-  box-shadow: 0 0 1px rgba(255, 255, 255, .5);
-}
-</style>
-</head>
-<body>
-<button id="CourseBtn">Create a Course!</button>
-<div id="CourseModal" class="modal">
-  <div class="CourseBtn">
-    <div style='height:380px;overflow:scroll;overflow-y:scroll;' class='scroll'>
-  	<center>
-    <h1 style="font-size:1em">Create a Course</h1>
-    <p style="color:#bababa;font-size:0.5em;">A course is a space for you to organize and thrive in your learning experience. All you have to do is create a course and fill it in with content!</p>
-    <p style="color:#bababa;font-size:0.5em;">By the Way, Templates have a lot of secret features so only create your own if you can't find a template!</p>
+<div id="left"
+      style="width:20%;height:90%;float:left;background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://wallpapercave.com/wp/wp2742875.jpg) !important; background: no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;overflow: hidden;overflow:auto;">
+    <center>
+        <h3>Continue Trick Or Treating</h3>
+        <h4>Same Zip Code</h4>
     </center>
-    <p style="font-size:0.5em;">Step 1 of 3</p>
-    <p><span style="height: 0.5em;width: 0.5em;background-color: yellow;border-radius: 50%;display: inline-block;"></span>
-  <span style="height: 0.5em;width: 0.5em;background-color: grey;border-radius: 50%;display: inline-block;"></span>
-  <span style="height: 0.5em;width: 0.5em;background-color: grey;border-radius: 50%;display: inline-block;"></span></p>
-    <span class='button' onclick="stepTwo('create')"><span style="float:left;"><img src="/static/images/icons/new.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>Create your Own!<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span></span>
-    <p style="font-weight:800;font-size:1em;">Or Use a Template!</p>
-    <span class='button' onclick="stepTwo('science)"><span style="float:left;"><img src="/static/images/icons/science.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>Science<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span><br><span style="color:grey;font-size:0.8em;">(Science, Physics, Chemistry, Biology, Astronomy, Life Science, Earth Science, Physical Science, Physical Geography, Computer Science (Coding) etc.)</span></span><br>
-    <span class='button' onclick="stepTwo('math')"><span style="float:left;"><img src="/static/images/icons/math.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>Mathematics<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span><br><span style="color:grey;font-size:0.8em;">(K-8th Math, Pre-Algebra, Algebra I, Algebra II, Pre-Calculus A/B/AB, Calculus AB/BC, AP Statistics, AP Calculus, Competitive Math etc.)</span></span><br>
-    <span class='button' onclick="stepTwo('history')"><span style="float:left;"><img src="/static/images/icons/history.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>History<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span><br><span style="color:grey;font-size:0.8em;">(Social Studies, World History I, World History II, US History, AP World History, AP US History, etc.)</span></span><br>
-    <span class='button' onclick="stepTwo('art')" ><span style="float:left;"><img src="/static/images/icons/art.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>Art<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span><br><span style="color:grey;font-size:0.8em;">(Art, Music, Drama, etc.)</span></span>
-    <span class='button' onclick="stepTwo('language')"><span style="float:left;"><img src="/static/images/icons/language.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>Language<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span><br><span style="color:grey;font-size:0.8em;">(English, Latin, Spanish, French, Mandarin, German, etc. Primary or Secondary Language)</span></span><br>
-    <span class='button' onclick="stepTwo('sports')"><span style="float:left;"><img src="/static/images/icons/sport.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>Sports<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span><br><span style="color:grey;font-size:0.8em;">(PE Class, Basketball, Soccer, Ice Hockey, Volleyball, Running, Football, Tennis, Dance)</span></span><br>
-    </div>
+</div>
+<div id="middle" style="width:60%;height:90%;float:left;overflow:auto;">
+  <center>
+    <h1>
+      Jump into These Courses
 
+      <div style="float:right" id="course-nav">
+        <span id="join" class="material-icons">search</span>
+        <span id="create" class="material-icons">add</span>
+      </div>
+    
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="static/css/createCourse.css">
+      </head>
+      <body>
+      <div id="CourseModal" class="modal">
+        <div class="CourseBtn">
+          <center>
+            <h1 style="font-size:1.75vw">
+              Step 1: Create a Course
+              <span class="material-icons" id="close">close</span>
+            </h1>
+
+            <p style="color:#bababa;font-size:0.5em;">A course is a space for you to organize and thrive in your learning experience. All you have to do is create a course and fill it in with content!</p>
+
+            <span class='button'>
+              <img src="/static/images/icons/new.svg" style="visibility: visible;width:20px;height:20px;float:left;">
+              Create course
+              <img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;">
+            </span>
+
+            <h2 style="font-size:1.4vw">Or start from a template</h2>
+
+            <div style='height:380px;overflow:scroll;overflow-y:scroll;' class='scroll'></div>
+          </center>
+        </body>
+
+        <script src="static/js/createCourse.js"></script>
+      </html>
+    </h1>
+
+    {% for i in db.Accounts.find_one({'username': user}).courses %}
+    <a class='dashboardCourse' href='/courses/{{ i._id }}'>
+      <h2>{{ i.name }}</h2>
+      <h3>{{ i.teacher }}</h3>
+    </a>
+    {% endfor %}
 </div>
 
-<div id="Science" class="modal">
-  <div class="CourseBtn">
-    <div style='height:380px;overflow:scroll;overflow-y:scroll;' class='scroll'>
-  	<center>
-    <h1 style="font-size:1em">Aight, Choose which Type of Science course you would like to make?</h1>
-    <p style="color:#bababa;font-size:0.5em;">A course is a space for you to organize and thrive in your learning experience. All you have to do is create a course and fill it in with content!</p>
-    <p style="color:#bababa;font-size:0.5em;">By the Way, Templates have a lot of secret features so only create your own if you can't find a template!</p>
-    </center>
-    <p style="font-size:0.5em;">Step 1 of 3</p>
-    <p><span style="height: 0.5em;width: 0.5em;background-color: yellow;border-radius: 50%;display: inline-block;"></span>
-  <span style="height: 0.5em;width: 0.5em;background-color: grey;border-radius: 50%;display: inline-block;"></span>
-  <span style="height: 0.5em;width: 0.5em;background-color: grey;border-radius: 50%;display: inline-block;"></span></p>
-    <span class='button' onclick="stepTwo('create')"><span style="float:left;"><img src="/static/images/icons/new.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>Create your Own!<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span></span>
-    <p style="font-weight:800;font-size:1em;">Or Use a Template!</p>
-    <span class='button' onclick="stepTwo('science)"><span style="float:left;"><img src="/static/images/icons/science.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>Science<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span><br><span style="color:grey;font-size:0.8em;">(Science, Physics, Chemistry, Biology, Astronomy, Life Science, Earth Science, Physical Science, Physical Geography, Computer Science (Coding) etc.)</span></span><br>
-    <span class='button' onclick="stepTwo('math')"><span style="float:left;"><img src="/static/images/icons/math.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>Mathematics<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span><br><span style="color:grey;font-size:0.8em;">(K-8th Math, Pre-Algebra, Algebra I, Algebra II, Pre-Calculus A/B/AB, Calculus AB/BC, AP Statistics, AP Calculus, Competitive Math etc.)</span></span><br>
-    <span class='button' onclick="stepTwo('history')"><span style="float:left;"><img src="/static/images/icons/history.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>History<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span><br><span style="color:grey;font-size:0.8em;">(Social Studies, World History I, World History II, US History, AP World History, AP US History, etc.)</span></span><br>
-    <span class='button' onclick="stepTwo('art')" ><span style="float:left;"><img src="/static/images/icons/art.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>Art<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span><br><span style="color:grey;font-size:0.8em;">(Art, Music, Drama, etc.)</span></span>
-    <span class='button' onclick="stepTwo('language')"><span style="float:left;"><img src="/static/images/icons/language.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>Language<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span><br><span style="color:grey;font-size:0.8em;">(English, Latin, Spanish, French, Mandarin, German, etc. Primary or Secondary Language)</span></span><br>
-    <span class='button' onclick="stepTwo('sports')"><span style="float:left;"><img src="/static/images/icons/sport.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span>Sports<span style="float:right;"><img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;"></span><br><span style="color:grey;font-size:0.8em;">(PE Class, Basketball, Soccer, Ice Hockey, Volleyball, Running, Football, Tennis, Dance)</span></span><br>
+<div id="right" style="width:20%;height:90%;float:right;background-color:transparent;overflow:auto">
+    <h3>My MusiqueWorld Creations:</h3>
+    <hr>
+    <div style="height:140px;">
+        <div style="width:50%;float:left;">
+            <h4 style="font-weight:800;">Head Up</h4>
+            <h5 style="font-weight: 400;font-style: italic;color:grey;">The Score</h5>
+        </div>
+        <div style="width:50%;float:left;">
+            <button style="padding:10px;font-size:1em;color:white;background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://cdn.wallpapersafari.com/17/52/NQHESK.jpg) !important; background: no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;overflow: hidden;overflow:auto;border-style:none;border-radius:10px;">
+                Go to Creation
+            </button>
+        </div>
     </div>
-
+    <hr>
+    <div style="height:140px;">
+        <div style="width:50%;float:left;">
+            <h4 style="font-weight:800;">Burn the House Down</h4>
+            <h5 style="font-weight: 400;font-style: italic;color:grey;">AJR</h5>
+        </div>
+        <div style="width:50%;float:left;">
+            <button style="padding:10px;font-size:1em;color:white;background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://cdn.wallpapersafari.com/17/52/NQHESK.jpg) !important; background: no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;overflow: hidden;overflow:auto;border-style:none;border-radius:10px;">
+                Go to Creation
+            </button>
+        </div>
+    </div>
+    <hr>
+    <div style="height:140px;">
+        <div style="width:50%;float:left;">
+            <h4 style="font-weight:800;">Faded</h4>
+            <h5 style="font-weight: 400;font-style: italic;color:grey;">Alan Walker</h5>
+        </div>
+        <div style="width:50%;float:left;">
+            <button style="padding:10px;font-size:1em;color:white;background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://cdn.wallpapersafari.com/17/52/NQHESK.jpg) !important; background: no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;overflow: hidden;overflow:auto;border-style:none;border-radius:10px;">
+                Go to Creation
+            </button>
+        </div>
+    </div>
+    <hr>
+    <div style="height:140px;">
+        <div style="width:50%;float:left;">
+            <h4 style="font-weight:800;">Kill this Love</h4>
+            <h5 style="font-weight: 400;font-style: italic;color:grey;">Blackpink</h5>
+        </div>
+        <div style="width:50%;float:left;">
+            <button style="padding:10px;font-size:1em;color:white;background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://cdn.wallpapersafari.com/17/52/NQHESK.jpg) !important; background: no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;overflow: hidden;overflow:auto;border-style:none;border-radius:10px;">
+                Go to Creation
+            </button>
+        </div>
+    </div>
+    <hr>
+    <div style="height:140px;">
+        <div style="width:50%;float:left;">
+            <h4 style="font-weight:800;">bad guy</h4>
+            <h5 style="font-weight: 400;font-style: italic;color:grey;">Billie Eilish</h5>
+        </div>
+        <div style="width:50%;float:left;">
+            <button style="padding:10px;font-size:1em;color:white;background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://cdn.wallpapersafari.com/17/52/NQHESK.jpg) !important; background: no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;overflow: hidden;overflow:auto;border-style:none;border-radius:10px;">
+                Go to Creation
+            </button>
+        </div>
+    </div>
+    <hr>
+    <div style="height:140px;">
+        <div style="width:50%;float:left;">
+            <h4 style="font-weight:800;">Natural</h4>
+            <h5 style="font-weight: 400;font-style: italic;color:grey;">Imagine Dragons</h5>
+        </div>
+        <div style="width:50%;float:left;">
+            <button style="padding:10px;font-size:1em;color:white;background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://cdn.wallpapersafari.com/17/52/NQHESK.jpg) !important; background: no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;overflow: hidden;overflow:auto;border-style:none;border-radius:10px;">
+                Go to Creation
+            </button>
+        </div>
+    </div>
+    <hr>
 </div>
 
-<script>
-// Get the modal
-var modal = document.getElementById("CourseModal");
-
-// Get the button that opens the modal
-var btn = document.getElementById("CourseBtn");
-
-
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-</script>
-
-            </h1><!--Checking if the user signed in by email or username-->
-
-            {% for i in db.Accounts.find_one({'username': user}).courses %}
-                <a class='dashboardCourse' href='/courses/{{ i._id }}'>
-                    <h2>{{ i.name }}</h2>
-                    <h3>{{ i.teacher }}</h3>
-                </a>
-            {% endfor %}
-    </div>
-
-    <div id="right" style="width:20%;height:90%;float:right;background-color:transparent;overflow:auto">
-        <h3>My MusiqueWorld Creations:</h3>
-        <hr>
-        <div style="height:140px;">
-            <div style="width:50%;float:left;">
-                <h4 style="font-weight:800;">Head Up</h4>
-                <h5 style="font-weight: 400;font-style: italic;color:grey;">The Score</h5>
-            </div>
-            <div style="width:50%;float:left;">
-                <button style="padding:10px;font-size:1em;color:white;background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://cdn.wallpapersafari.com/17/52/NQHESK.jpg) !important; background: no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;overflow: hidden;overflow:auto;border-style:none;border-radius:10px;">
-                    Go to Creation
-                </button>
-            </div>
-        </div>
-        <hr>
-        <div style="height:140px;">
-            <div style="width:50%;float:left;">
-                <h4 style="font-weight:800;">Burn the House Down</h4>
-                <h5 style="font-weight: 400;font-style: italic;color:grey;">AJR</h5>
-            </div>
-            <div style="width:50%;float:left;">
-                <button style="padding:10px;font-size:1em;color:white;background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://cdn.wallpapersafari.com/17/52/NQHESK.jpg) !important; background: no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;overflow: hidden;overflow:auto;border-style:none;border-radius:10px;">
-                    Go to Creation
-                </button>
-            </div>
-        </div>
-        <hr>
-        <div style="height:140px;">
-            <div style="width:50%;float:left;">
-                <h4 style="font-weight:800;">Faded</h4>
-                <h5 style="font-weight: 400;font-style: italic;color:grey;">Alan Walker</h5>
-            </div>
-            <div style="width:50%;float:left;">
-                <button style="padding:10px;font-size:1em;color:white;background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://cdn.wallpapersafari.com/17/52/NQHESK.jpg) !important; background: no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;overflow: hidden;overflow:auto;border-style:none;border-radius:10px;">
-                    Go to Creation
-                </button>
-            </div>
-        </div>
-        <hr>
-        <div style="height:140px;">
-            <div style="width:50%;float:left;">
-                <h4 style="font-weight:800;">Kill this Love</h4>
-                <h5 style="font-weight: 400;font-style: italic;color:grey;">Blackpink</h5>
-            </div>
-            <div style="width:50%;float:left;">
-                <button style="padding:10px;font-size:1em;color:white;background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://cdn.wallpapersafari.com/17/52/NQHESK.jpg) !important; background: no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;overflow: hidden;overflow:auto;border-style:none;border-radius:10px;">
-                    Go to Creation
-                </button>
-            </div>
-        </div>
-        <hr>
-        <div style="height:140px;">
-            <div style="width:50%;float:left;">
-                <h4 style="font-weight:800;">bad guy</h4>
-                <h5 style="font-weight: 400;font-style: italic;color:grey;">Billie Eilish</h5>
-            </div>
-            <div style="width:50%;float:left;">
-                <button style="padding:10px;font-size:1em;color:white;background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://cdn.wallpapersafari.com/17/52/NQHESK.jpg) !important; background: no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;overflow: hidden;overflow:auto;border-style:none;border-radius:10px;">
-                    Go to Creation
-                </button>
-            </div>
-        </div>
-        <hr>
-        <div style="height:140px;">
-            <div style="width:50%;float:left;">
-                <h4 style="font-weight:800;">Natural</h4>
-                <h5 style="font-weight: 400;font-style: italic;color:grey;">Imagine Dragons</h5>
-            </div>
-            <div style="width:50%;float:left;">
-                <button style="padding:10px;font-size:1em;color:white;background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://cdn.wallpapersafari.com/17/52/NQHESK.jpg) !important; background: no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;overflow: hidden;overflow:auto;border-style:none;border-radius:10px;">
-                    Go to Creation
-                </button>
-            </div>
-        </div>
-        <hr>
-    </div>
-
-<script>
-  function stepTwo(text){
-    document.getElementById("CourseModal").style.display = "none";
-    document.getElementById("Science").style.display = "block";
-  }
-</script>
 {% endblock %}

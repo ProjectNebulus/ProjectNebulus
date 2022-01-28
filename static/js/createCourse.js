@@ -1,6 +1,6 @@
 // set up button
 var modal = document.getElementById("CourseModal");
-var btn = document.getElementById("CourseBtn");
+var btn = document.getElementById("create");
 
 btn.onclick = function() {
   modal.style.display = "block";

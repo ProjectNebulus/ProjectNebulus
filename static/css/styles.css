@@ -13,25 +13,26 @@ body{
   border: 5px solid #505050
 }
 strong{
-  font-weight:900;
-  font-size:2em;
+  font-weight: 900;
+  font-size: 3.5vw;
 }
+
 .smaller{
   color:#a8a8a8;
   font-weight:200;
-  font-size:1.3em;
+  font-size:1.25vw;
 }
 
 .smaller2{
   color:#a8a8a8;
   font-weight:600;
-  font-size:1.3em;
+  font-size:1.25vw;
 }
 
 .medium{
   color: #a8a8a8;
   font-weight: 750;
-  font-size: 1.5em;
+  font-size: 1.5vw;
 }
 
 #account input, #account input:hover, #account input:focus {
@@ -57,8 +58,9 @@ strong{
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-   overflow: hidden;
+  overflow: hidden;
 }
+
 #mwBanner{
   margin:0px; /* No borders for the image*/
   width: calc(100% - 80px); /*Padding*/
@@ -111,7 +113,7 @@ strong{
 input {
   background:white;
   padding:10px;
-  font-size:1.3em;
+  font-size:1.25vw;
   font-family: 'Lexend Deca', sans-serif;
   border-radius:5px;
   outline:none;
@@ -180,7 +182,7 @@ details {
 
 details div {
   padding: 5px;
-  font-size: 0.9em;
+  font-size: 0.75vw;
   cursor: pointer;
 }
 
@@ -314,7 +316,7 @@ input[type=file]{
   color:black;
   border-style:none;
   border-radius:10px;
-  font-size:1.5em;
+  font-size:1.5vw;
   font-family: 'Lexend Deca', sans-serif;
 }
 
@@ -334,7 +336,7 @@ input[type=file]{
   color:black;
   border-style:none;
   border-radius:10px;
-  font-size:1.5em;
+  font-size:1.5vw;
   font-family: 'Lexend Deca', sans-serif;
 }
 
@@ -402,7 +404,7 @@ details summary {
   margin-left:10px;
   margin-right:10px;
   border-color:transparent;
-  font-size:1.5em;
+  font-size:1.5vw;
 }
 
 .material-icons.md-18 { font-size: 18px; vertical-align: middle;}
