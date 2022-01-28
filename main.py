@@ -18,9 +18,7 @@ app.secret_key = '12345678987654321'
 
 # app routes
 
-@app.route("/lms")
-def lms():
-  return " "
+
 @app.route("/developers")
 def developers():
   try:
@@ -31,12 +29,7 @@ def developers():
 @app.route("/developers/api")
 def api_docs():
   return " "
-@app.route("/music")
-def music():
-  return " "
-@app.route("/holidays")
-def vh():
-  return " "
+
 
 @app.route("/spoistatus", methods=["POST"])
 def spotify_status():
@@ -149,6 +142,29 @@ def about():
     return render_template("about.html", page='Nebulus - About Us', user=user)
 
 
+@app.route("/lms")
+def lms():
+    try:
+          user = session["username"]
+    except:
+          user = None
+    return render_template("lms.html", page='Nebulus - LMS', user=user)
+
+@app.route("/music")
+def music():
+    try:
+          user = session["username"]
+    except:
+          user = None
+    return render_template("music.html", page='Nebulus - Music', user=user)
+
+@app.route("/holidays")
+def vh():
+    try:
+          user = session["username"]
+    except:
+          user = None
+    return render_template("holidays.html", page='Nebulus - Virtual Holidays', user=user)
 @app.route("/signup")
 def signup():
     # If the user is already logged in, redirect to the dashboard
