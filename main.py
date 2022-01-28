@@ -144,11 +144,13 @@ def about():
 
 @app.route("/lms")
 def lms():
-    try:
-          user = session["username"]
-    except:
-          user = None
-    return render_template("lms.html", page='Nebulus - LMS', user=user)
+    if not (session.get('username') and session.get('password')):
+        return redirect('/signin')
+    else:
+        new_user = request.args.get('new_user', default='false', type=str)
+        return render_template("lms.html", user=session["username"], db=db, page='Nebulus - Dashboard',
+                               new_account=new_user == 'true')
+
 
 @app.route("/music")
 def music():
