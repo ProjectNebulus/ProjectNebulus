@@ -1,87 +1,139 @@
 <!--Extend with Jinja!-->
 {% extends "layout.html" %}
 {% block main %}
-    <br>
-    <div id="left"
-         style="width:20%;height:90%;float:left;background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://wallpapercave.com/wp/wp2742875.jpg) !important; background: no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;overflow: hidden;overflow:auto;">
-        <center>
-            <span style="width:100%;padding-top:20px;padding-bottom:20px;margin-bottom:1px;">Applications</span><br>
-            <span style="width:100%;padding-top:20px;padding-bottom:20px;margin-top:1px;">API Docs</span>
-            
-        </center>
-    </div>
-    <style>
-      .app{
-        position: relative;
-      top: 0;
-      transition: top ease 0.5s;
-      background:black;
-      }
-      .app:hover{
-        background:#262626;
-        top: -10px;
-      }
-      .spoiler{
-        background:black;
-        color:black;
-        padding:2px;
-      }
-    </style>
-    <div id="middle" style="width:60%;height:90%;float:left;overflow:auto;">
-        <center>
-            <h1>
-                Your Applications
+<div id="left"
+      style="width:20%;height:90%;float:left;background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://wallpapercave.com/wp/wp2742875.jpg) !important; background: no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;overflow: hidden;overflow:auto;">
+    <center>
+        <h3>Continue Trick Or Treating</h3>
+        <h4>Same Zip Code</h4>
+    </center>
+</div>
+<div id="middle" style="width:60%;height:90%;float:left;overflow:auto;">
+  <center>
+    <h1>
+      Jump into These Courses
+
+      <div style="float:right" id="course-nav">
+        <span id="join" class="material-icons">search</span>
+        <span id="create" class="material-icons">add</span>
+      </div>
+    
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="static/css/createCourse.css">
+      </head>
+      <body>
+      <div id="CourseModal" class="modal">
+        <div class="CourseBtn">
+          <center>
+            <h1 style="font-size:1.75vw">
+              Step 1: Create a Course
+              <span class="material-icons" id="close">close</span>
             </h1>
-            <div style="float:left;color:white;padding:20px;margin:20px;border-radius:20px;width:200px;" class="app">
-              <img src="http://cdn.shopify.com/s/files/1/1061/1924/products/The_Sun_Emoji_grande.png?v=1571606063" style="height:80px;width810px;">
-              <p>Unnamed Project 1</p>
-            </div>
-            <div style="float:left;color:white;padding:20px;margin:20px;border-radius:20px;width:200px;" class="app">
-              <img src="http://cdn.shopify.com/s/files/1/1061/1924/products/Dark_Blue_Moon_Emoji_grande.png?v=1571606063" style="height:80px;width:80px;">
-              <p>Unnamed Project 2</p>
-            </div>
-        </center>
-    </div>
 
-    <div id="right" style="width:20%;height:90%;float:right;background_color:transparent;overflow:auto">
-        <h3>Quick View</h3>
-        <hr>
-        <div style="height:140px;">
-            <div style="width:50%;float:left;">
-                <h4 style="font-weight:800;">Unnamed Project 1</h4>
-                <p>Token: <span class="spoiler" onclick="this.style.background_color='transparent';     this.style.color = 'white';">your mom</span></p>
-            </div>
-            <div style="width:50%;float:left;">
-                <button style="padding:10px;font-size:1em;color:white;background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://cdn.wallpapersafari.com/17/52/NQHESK.jpg) !important; background: no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;overflow: hidden;overflow:auto;border-style:none;border-radius:10px;">
-                    Go to Application
-                </button>
-            </div>
-        </div>
-        <hr>
-        <div style="height:140px;">
-            <div style="width:50%;float:left;">
-                <h4 style="font-weight:800;">Unnamed Project 2</h4>
-              
-                <p>Token: <span class="spoiler" onclick="this.style.background_color='transparent';     this.style.color = 'white';">https://www.youtube.com/watch?v=dQw4w9WgXcQ</span></p>
-            </div>
-            <div style="width:50%;float:left;">
-                <button style="padding:10px;font-size:1em;color:white;background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://cdn.wallpapersafari.com/17/52/NQHESK.jpg) !important; background: no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;overflow: hidden;overflow:auto;border-style:none;border-radius:10px;">
-                    Go to Application
-                </button>
-            </div>
-        </div>
-        <hr>
-        
-    </div>
+            <p style="color:#bababa;font-size:0.5em;">A course is a space for you to organize and thrive in your learning experience. All you have to do is create a course and fill it in with content!</p>
 
-<script type="text/javascript">
-  function stepTwo(text){
-    document.getElementById("CourseModal").style.display = "none";
-    document.getElementById("Science").style.display = "block";
-  }
-  function unspoil(element){
-    element.style.background_color = "transparent";
-    element.style.color = "white";
-  }
-</script>
+            <span class='button'>
+              <img src="/static/images/icons/new.svg" style="visibility: visible;width:20px;height:20px;float:left;">
+              Create course
+              <img src="/static/images/icons/next.svg" style="visibility: visible;width:20px;height:20px;float:right;">
+            </span>
+
+            <h2 style="font-size:1.4vw">Or start from a template</h2>
+
+            <div style='height:380px;overflow:scroll;overflow-y:scroll;' class='scroll'></div>
+          </center>
+        </body>
+
+        <script src="static/js/createCourse.js"></script>
+      </html>
+    </h1>
+
+    {% for i in db.Accounts.find_one({'username': user}).courses %}
+    <a class='dashboardCourse' href='/courses/{{ i._id }}'>
+      <h2>{{ i.name }}</h2>
+      <h3>{{ i.teacher }}</h3>
+    </a>
+    {% endfor %}
+</div>
+
+<div id="right" style="width:20%;height:90%;float:right;background-color:transparent;overflow:auto">
+    <h3>My MusiqueWorld Creations:</h3>
+    <hr>
+    <div style="height:140px;">
+        <div style="width:50%;float:left;">
+            <h4 style="font-weight:800;">Head Up</h4>
+            <h5 style="font-weight: 400;font-style: italic;color:grey;">The Score</h5>
+        </div>
+        <div style="width:50%;float:left;">
+            <button style="padding:10px;font-size:1em;color:white;background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://cdn.wallpapersafari.com/17/52/NQHESK.jpg) !important; background: no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;overflow: hidden;overflow:auto;border-style:none;border-radius:10px;">
+                Go to Creation
+            </button>
+        </div>
+    </div>
+    <hr>
+    <div style="height:140px;">
+        <div style="width:50%;float:left;">
+            <h4 style="font-weight:800;">Burn the House Down</h4>
+            <h5 style="font-weight: 400;font-style: italic;color:grey;">AJR</h5>
+        </div>
+        <div style="width:50%;float:left;">
+            <button style="padding:10px;font-size:1em;color:white;background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://cdn.wallpapersafari.com/17/52/NQHESK.jpg) !important; background: no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;overflow: hidden;overflow:auto;border-style:none;border-radius:10px;">
+                Go to Creation
+            </button>
+        </div>
+    </div>
+    <hr>
+    <div style="height:140px;">
+        <div style="width:50%;float:left;">
+            <h4 style="font-weight:800;">Faded</h4>
+            <h5 style="font-weight: 400;font-style: italic;color:grey;">Alan Walker</h5>
+        </div>
+        <div style="width:50%;float:left;">
+            <button style="padding:10px;font-size:1em;color:white;background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://cdn.wallpapersafari.com/17/52/NQHESK.jpg) !important; background: no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;overflow: hidden;overflow:auto;border-style:none;border-radius:10px;">
+                Go to Creation
+            </button>
+        </div>
+    </div>
+    <hr>
+    <div style="height:140px;">
+        <div style="width:50%;float:left;">
+            <h4 style="font-weight:800;">Kill this Love</h4>
+            <h5 style="font-weight: 400;font-style: italic;color:grey;">Blackpink</h5>
+        </div>
+        <div style="width:50%;float:left;">
+            <button style="padding:10px;font-size:1em;color:white;background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://cdn.wallpapersafari.com/17/52/NQHESK.jpg) !important; background: no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;overflow: hidden;overflow:auto;border-style:none;border-radius:10px;">
+                Go to Creation
+            </button>
+        </div>
+    </div>
+    <hr>
+    <div style="height:140px;">
+        <div style="width:50%;float:left;">
+            <h4 style="font-weight:800;">bad guy</h4>
+            <h5 style="font-weight: 400;font-style: italic;color:grey;">Billie Eilish</h5>
+        </div>
+        <div style="width:50%;float:left;">
+            <button style="padding:10px;font-size:1em;color:white;background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://cdn.wallpapersafari.com/17/52/NQHESK.jpg) !important; background: no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;overflow: hidden;overflow:auto;border-style:none;border-radius:10px;">
+                Go to Creation
+            </button>
+        </div>
+    </div>
+    <hr>
+    <div style="height:140px;">
+        <div style="width:50%;float:left;">
+            <h4 style="font-weight:800;">Natural</h4>
+            <h5 style="font-weight: 400;font-style: italic;color:grey;">Imagine Dragons</h5>
+        </div>
+        <div style="width:50%;float:left;">
+            <button style="padding:10px;font-size:1em;color:white;background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://cdn.wallpapersafari.com/17/52/NQHESK.jpg) !important; background: no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;overflow: hidden;overflow:auto;border-style:none;border-radius:10px;">
+                Go to Creation
+            </button>
+        </div>
+    </div>
+    <hr>
+</div>
+
 {% endblock %}
