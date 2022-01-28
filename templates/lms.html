@@ -7,19 +7,20 @@
 
         <h3>Recent Activity</h3>
         {% for x in db.Accounts.find_one({'user': user}).courses %}
-          <div id='course_updates'>
-            {% for i in range(3) %}
-              <div id='update_teacher'>
-                {{x.teacher}}
+          <h3>{{x.name}}</h3><hr/>
+          <div class='course_updates'>
+            {% for i in x.updates[0:3] %}
+              <div class='update_teacher'>
+                <p>{{x.teacher}} > {{x.name}}</p>
               </div>
-              {% endfor %}
+              <div class='update_header'>
+                <h3>{{i.header}}</h3>
+              <div class='update_info'>
+                <h4>{{i.info}}</h4>
+              </div>
+            {% endfor %}
           </div>
           {% endfor %}
-
-        <div id="">
-          <p>Dr. B posted an update</p>
-          <p>The course "Physics" got created.</p>
-        </div>
     </center>
 </div>
 <div id="middle" style="width:60%;height:90%;float:left;overflow:auto;">
