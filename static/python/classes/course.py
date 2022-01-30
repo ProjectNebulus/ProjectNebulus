@@ -11,7 +11,7 @@ class Course:
         self.textbooks = kwargs.get('textbooks', [])
         self.extensions = kwargs.get('extensions', [])
 
-    def to_dict(self):
+    def __dict__(self):
         return {
             "owner": self.owner,
             "name": self.name,

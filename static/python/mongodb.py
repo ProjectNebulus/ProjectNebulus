@@ -16,7 +16,7 @@ ids = db.course_ids
 def create_course(course_name, course_teacher, username):
     course = Course(name=course_name, teacher=course_teacher,
                     _id=1000000000000000001 + ids.count_documents({}), owner=username)
-    Accounts.update_one({'username': username}, {'$push': {'courses': course.__dict__}})
+    Accounts.update_one({'username': username}, {'$push': {'courses': dict(course)}})
     ids.insert_one({'id': id})
     print('course created')
 
@@ -39,7 +39,7 @@ def create_user(username, email, password):
 
     new_user = User(username=username, email=email, password=password,
                     _id=1000000000000000001 + db.Accounts.count_documents({}))
-    Accounts.insert_one(new_user.__dict__)
+    Accounts.insert_one(dict(new_user))
 
     return '0'
 

@@ -1,15 +1,48 @@
 <!--Extend with Jinja!-->
 {% extends "layout.html" %}
 {% block main %}
-<h1>
-  Good Afternon, {{user}}
-</h1>
-<h2>Upcoming Assignments</h2>
-<p>stuff</p>
-<h2>Recent Courses</h2>
-<p>stuff</p>
-<h2>Recent Songs</h2>
-<p>stuff</p>
-<h2>Recent Holiday Houses</h2>
-<p>stuff</p>
+<head>
+    <style>
+        #page {
+            margin-left: 5%;
+            margin-right: 5%;
+        }
+
+        .section {
+            border-radius: 5px;
+            margin: 5px 2% 5px 2%; 
+            padding: 5px;
+            height: 20vw;
+            width: 40vw;
+            background: black;
+        }
+
+        .button {
+            height: 150px;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="page">
+        <center><h1>Good Afternoon, {{user}}</h1></center>
+
+        <h2 style="font-size:1.5vw">Recent courses</h2>
+        <div class="section">
+            {% for course in db.Accounts.find_one({"email":email}).get("courses") %}
+                <a class="button" href="/courses/{{course.id}}">
+                    <h1>{{course.name}}</h1>
+                    <h2>{{course.teacher}}</h2>
+                </a>
+            {% endfor %}
+        </div>
+        <br>
+        <h2 style="font-size:1.5vw">Recent Activity</h2>
+        <div class="section">
+
+        </div>
+
+        <script src="static/js/dashboard.js"></script>
+    </div>
+</body>
 {% endblock %}

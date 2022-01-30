@@ -13,7 +13,7 @@ class User:
         self.staff = kwargs.get('staff', '0')
         self.virtual_holidays = kwargs.get('virtual_holidays', [])
 
-    def to_dict(self):
+    def __dict__(self):
         return {
             "_id": self._id,
             "username": self.username,

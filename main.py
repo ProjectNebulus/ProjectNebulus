@@ -17,29 +17,22 @@ app.secret_key = '12345678987654321'
 
 
 # app routes
-
-
 @app.route("/developers")
 def developers():
-  try:
-          user = session["username"]
-  except:
-          user = None
-  return render_template("developerportal.html", user=user, db=db, page = "Nebulus - Developer Portal", developer=True)
+  return render_template("developerportal.html", user=session.get("username"), db=db, page = "Nebulus - Developer Portal", developer=True)
+
 @app.route("/developers/api")
 def api_docs():
   return " "
 
-
 @app.route("/spoistatus", methods=["POST"])
 def spotify_status():
     a = spotifystatus()
-    try:
+    if len(string) >= 1:
       string = a[0] + " - " + a[1]
-    except:
+    else:
       string = "You aren't listening to anything!"
     return string
-
 
 @app.route("/profile")
 def profile():
@@ -129,8 +122,7 @@ def dashboard():
         return redirect('/signin')
     else:
         new_user = request.args.get('new_user', default='false', type=str)
-        return render_template("dashboard.html", user=session["username"], db=db, page='Nebulus - Dashboard',
-                               new_account=new_user == 'true')
+        return render_template("dashboard.html", user=session["username"], email=session["email"], db=db, page='Nebulus - Dashboard', new_account=new_user == 'true')
 
 
 @app.route("/about")
