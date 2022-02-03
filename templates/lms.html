@@ -2,10 +2,11 @@
 {% extends "layout.html" %}
 {% block main %}
 <div id="left"
-      style="width:20%;height:90%;float:left;background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://wallpapercave.com/wp/wp2742875.jpg) !important; background: no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;overflow: hidden;overflow:auto;">
+      style="width:20%;height:90%;float:left; background-color: #171717 !important; ">
     <center>
-
+        <div style="background:linear-gradient(to top right, #ff3c00, #ffd900); width:100%;top:0px;margin: 0 px;height:6em;">
         <h3>Recent Activity</h3>
+        </div>
         {% for x in db.Accounts.find_one({'user': user}).courses %}
           <h3>{{x.name}}</h3><hr/>
           <div class='course_updates'>

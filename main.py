@@ -90,7 +90,7 @@ def index():
           user = session["username"]
         except:
           user = None
-        return render_template("main/index.html", page='Nebulus', user=user)
+        return render_template("main/index.html", page='Nebulus | Learning, All in One.', user=user)
 
 
 @app.route("/chat")
