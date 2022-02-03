@@ -6,7 +6,7 @@ window.addEventListener('load', function () {
     submit.disabled = true;
     submit.style.color = 'gray';
     submit.style.backgroundColor = '#006097';
-    function launch_SSO()(){
+    function launch_SSO(){
       document.getElementById("signin_form").style.display = "none";
     }
     function checkValidUsername() {

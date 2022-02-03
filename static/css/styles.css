@@ -131,21 +131,29 @@ input[type=password] {
 }
 
 input[type=submit], #signupinnerbody input[type=submit] {
-  background:#00a2ff;
-  color: white;
+  background:linear-gradient(to top right, #00ffb7, #00b7ff);
+  color: black;
   cursor: pointer;
+  padding-top:15px;
+  padding-bottom:40px;
+  padding-left:40px;
+  padding-right:40px;
+  font-size:1.5em;
 }
 
 .button {
-  background: #00a2ff;
+  background:linear-gradient(to top right, #ff3c00, #ffd900);
   color: white;
   border-radius: 3px;
-  padding: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   transition: 0.25s;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 .button:hover {
-  background: #0268a3;
+  background:linear-gradient(to top right, #ff3c0080, #ffd90080);
   color: gray;
 }
 
@@ -255,7 +263,6 @@ details div:hover {
   background-position: 90%;
 
 }
-}
 
 input:focus{
   border-style:solid;
@@ -263,7 +270,7 @@ input:focus{
 }
 
 input[type=submit]:hover, #signupinnerbody input[type=submit]:hover {
-  background:#0268a3;
+  background:linear-gradient(to top right, #00ffb780, #00b7ff80);
   color: white;
 }
 
