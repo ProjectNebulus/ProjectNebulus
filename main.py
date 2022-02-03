@@ -28,6 +28,7 @@ def api_docs():
 @app.route("/spoistatus", methods=["POST"])
 def spotify_status():
     a = spotifystatus()
+    string = ""
     if len(string) >= 1:
       string = a[0] + " - " + a[1]
     else:
