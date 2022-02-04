@@ -37,11 +37,7 @@ def spotify_status():
 
 @app.route("/profile")
 def profile():
-    try:
-        user = session["username"]
-    except:
-        user = None
-    return render_template("user/profile.html", page="Nebulus Profile", user=user)
+    return render_template("user/profile.html", page="Nebulus Profile", user=session.get("username"))
 
 
 @app.errorhandler(404)
@@ -84,14 +80,10 @@ def new_post():
 
 @app.route('/')
 def index():
-    if session.get("username") and session.get('password'):
+    if session.get("username"):
         return redirect('/dashboard')
     else:
-        try:
-          user = session["username"]
-        except:
-          user = None
-        return render_template("main/index.html", page='Nebulus | Learning, All in One.', user=user)
+        return render_template("main/index.html", page='Nebulus | Learning, All in One.', user=session.get("username"))
 
 
 @app.route("/chat")
@@ -109,11 +101,7 @@ def logout():
 
 @app.route('/settings')
 def settings():
-    try:
-          user = session["username"]
-    except:
-          user = None
-    return render_template("user/settings.html", page='Nebulus - Account Settings', session=session, user=user)
+    return render_template("user/settings.html", page='Nebulus - Account Settings', session=session, user=session.get("username"))
 
 
 @app.route('/dashboard')
@@ -128,11 +116,7 @@ def dashboard():
 
 @app.route("/about")
 def about():
-    try:
-          user = session["username"]
-    except:
-          user = None
-    return render_template("about.html", page='Nebulus - About Us', user=user)
+    return render_template("about.html", page='Nebulus - About Us', user=session.get("username"))
 
 
 @app.route("/lms")
@@ -141,25 +125,18 @@ def lms():
         return redirect('/signin')
     else:
         new_user = request.args.get('new_user', default='false', type=str)
-        return render_template("lms.html", user=session["username"], db=db, page='Nebulus - Dashboard',
-                               new_account=new_user == 'true')
+        return render_template("lms.html", user=session["username"], db=db, page='Nebulus - Dashboard', new_account=new_user == 'true')
 
 
 @app.route("/music")
 def music():
-    try:
-          user = session["username"]
-    except:
-          user = None
-    return render_template("music.html", page='Nebulus - Music', user=user)
+    return render_template("music.html", page='Nebulus - Music', user=session.get("username"))
 
 @app.route("/holidays")
 def vh():
-    try:
-          user = session["username"]
-    except:
-          user = None
-    return render_template("holidays.html", page='Nebulus - Virtual Holidays', user=user)
+    return render_template("holidays.html", page='Nebulus - Virtual Holidays', user=session.get("username"))
+
+
 @app.route("/signup")
 def signup():
     # If the user is already logged in, redirect to the dashboard

@@ -67,6 +67,7 @@
   float: right;
   cursor: pointer;
   border-radius: 3px;
+  padding: 5px;
 }
 
 #close:hover {
