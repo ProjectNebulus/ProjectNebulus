@@ -15,6 +15,7 @@ regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
 app = Flask('app')
 app.secret_key = '12345678987654321'
 
+check_user_params = True
 
 # app routes
 @app.route("/developers")
@@ -37,7 +38,7 @@ def spotify_status():
 
 @app.route("/profile")
 def profile():
-    return render_template("user/profile.html", page="Nebulus Profile", user=session.get("username"))
+    return render_template("user/profile.html", page="Nebulus - Profile", user=session.get("username"))
 
 
 @app.errorhandler(404)
@@ -160,8 +161,12 @@ def signup_post():
 @app.route("/signin")
 def signin():
     # If the user is already logged in, redirect to the dashboard
-    if not (session.get('username') and session.get('password')):
+    if not session.get('username') and session.get('password'):
+        if check_user_params and session.get("email"):
+            db.check_user_params(session.get("email"))
+
         return render_template("main/signin.html", page='Nebulus - Log In', disablebar=True)
+
     return redirect('/dashboard')
 
 

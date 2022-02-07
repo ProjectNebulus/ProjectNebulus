@@ -63,14 +63,14 @@
   background: gray;
 }
 
-#close {
+.close {
   float: right;
   cursor: pointer;
   border-radius: 3px;
   padding: 5px;
 }
 
-#close:hover {
+.close:hover {
   background: gray;
 }
 
@@ -86,10 +86,11 @@
 
 .image{
 	width:20px;
-    height:20px;
-    border-radius:0%;
-    margin-right:10px;
+  height:20px;
+  border-radius:0%;
+  margin-right:10px;
 }
+
 button{
 	padding:10px;
   background:black;
@@ -100,12 +101,13 @@ button{
 }
 
 button:hover{
-	  padding:10px;
-    background:grey;
-    border-style:none;
-    color:white;
-    border-radius:5px;
+  padding:10px;
+  background:grey;
+  border-style:none;
+  color:white;
+  border-radius:5px;
 }
+
 .button{
 	font-size:20px;
   color:white;
@@ -120,8 +122,14 @@ button:hover{
   cursor: pointer;
   background:black !important;
 }
+
 .button:hover{
 	background:#4f4f4f !important; 
+}
+
+.scroll {
+  height:380px;
+  overflow:scroll;
 }
 
 ::-webkit-scrollbar {

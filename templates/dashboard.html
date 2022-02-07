@@ -3,8 +3,19 @@
 {% block main %}
 <head>
   <style>
+    #left {
+      float: left;
+      text-align: left;
+    }
+
+    #right {
+      float: right;
+      text-align: right;
+    }
+
     h2 {
       margin-left: 30px;
+      font-size: 3vh;
     }
 
     #page {
@@ -21,6 +32,11 @@
       background: black;
     }
 
+    .vertical {
+      height: 26vw;
+      width: 40vw;
+    }
+
     .button {
       height: 150px;
       width: 100px;
@@ -31,19 +47,28 @@
     <div id="page">
         <center><h1>Good Afternoon, {{user}}</h1></center>
 
-        <h2 style="font-size:1.5vw">Recent courses</h2>
-        <div class="section">
-            {% for course in db.Accounts.find_one({"email":email}).get("courses") %}
-                <a class="button" href="/courses/{{course.id}}">
-                    <h1>{{course.name}}</h1>
-                    <h2>{{course.teacher}}</h2>
-                </a>
-            {% endfor %}
-        </div>
-        <br>
-        <h2 style="font-size:1.5vw">Recent Activity</h2>
-        <div class="section">
+        <div id="left">
+          <h2>Recent courses</h2>
+          <div class="section">
+              {% for course in db.Accounts.find_one({"email":email}).get("courses") %}
+                  <a class="button" href="/courses/{{course.id}}">
+                      <h1>{{course.name}}</h1>
+                      <h2>{{course.teacher}}</h2>
+                  </a>
+              {% endfor %}
+          </div>
+          <br>
+          <h2>Recent Activity</h2>
+          <div class="section">
 
+          </div>
+        </div>
+
+        <div id="right">
+          <h2>Upcoming Assignments</h2>
+          <div class="vertical section">
+
+          </div>
         </div>
 
         <script src="static/js/dashboard.js"></script>

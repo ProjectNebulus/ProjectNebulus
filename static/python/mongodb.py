@@ -2,8 +2,6 @@ import pymongo, dns
 from static.python.security import  hash256, valid_password
 import os
 import re
-from static.python.classes.course import Course
-from static.python.classes.user import User
 
 regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
 
@@ -12,11 +10,12 @@ db = client.Nebulus
 Accounts = db.Accounts
 ids = db.course_ids
 
-
 def create_course(course_name, course_teacher, username):
-    course = Course(name=course_name, teacher=course_teacher,
-                    _id=1000000000000000001 + ids.count_documents({}), owner=username)
-    Accounts.update_one({'username': username}, {'$push': {'courses': dict(course)}})
+    Accounts.update_one({'username': username}, {'$push': {'courses': {
+      "name": course_name,
+      "teacher": course_teacher,
+      "owner": username
+    }}})
     ids.insert_one({'id': id})
     print('course created')
 
@@ -37,12 +36,46 @@ def create_user(username, email, password):
     elif Accounts.find_one({'email': email}):
         return '3'
 
-    new_user = User(username=username, email=email, password=password,
-                    _id=1000000000000000001 + db.Accounts.count_documents({}))
-    Accounts.insert_one(dict(new_user))
+    Accounts.insert_one({
+        "_id": db.Accounts.count_documents({}),
+        "username": username,
+        "email": email,
+        "password": password,
+        "avatar": "",
+        "bio": "",
+        "courses": [],
+        "musiqueworld": [],
+        "premium": "false",
+        "staff": "false"
+    })
 
     return '0'
 
+def check_user_params(email):
+    user = Accounts.find_one({"email": email})
+    push = {}
+
+    if type(user.get("avatar")) is not str:
+        push["avatar"] = ""
+
+    if type(user.get("bio")) is not str:
+        push["bio"] = ""
+
+    if type(user.get("courses")) is not list:
+        push["courses"] = []
+
+    if type(user.get("musiqueworld")) is not list:
+        push["musiqueworld"] = []
+
+    if user.get("premium") not in ("true", "false"):
+        push["premium"] = "false"
+
+    if user.get("staff") not in ("true", "false"):
+        push["staff"] = "false"
+
+    Accounts.update_one({"email": email}, {"$push": push})
+
+    return "0"
 
 def check_user(user):
     if re.fullmatch(regex, user):
