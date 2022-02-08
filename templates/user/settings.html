@@ -27,9 +27,9 @@
         <h2>Connections</h2>
         <h3>Schoology</h3>
         <br>
-        <button id = "auth" onclick="if (resp.innerHTML === 'Login Failed. Reason: Clicked Deny on Schoology. Click Authorize again and click Approve this time!') {location.reload();} newwindow=window.open('{{schoologyURL}}','Authorize with Schoology','height=500,width=900');document.getElementById('auth').style.display = 'none';document.getElementById('connectbtn').style.display = 'inline';" class="shinyButton">Authorize Schoology</button>
+        <button id = "auth" onclick="if (resp.innerHTML === 'Login Failed. Reason: Clicked Deny on Schoology. Click Authorize again and click Approve this time!') {location.reload();} newwindow=window.open('{{schoologyURL}}','Authorize with Schoology','height=500,width=900');document.getElementById('auth').style.display = 'none';document.getElementById('connectbtn').style.display = 'inline';" class="button">Authorize Schoology</button>
         <br>
-        <button style="display:none;" id="connectbtn" class="shinyButton">Confirm Connect Schoology Account</button>
+        <button style="display:none;" id="connectbtn" class="button">Confirm Connect Schoology Account</button>
         <br>
         <span id="resp"></span>
         <script>
