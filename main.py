@@ -18,6 +18,11 @@ app.secret_key = '12345678987654321'
 check_user_params = True
 
 # app routes
+@app.route("/closeSchoology")
+def close():
+    session['token'] = request.args.get("oauth_token")
+    return "<script>window.close();</script>"
+    
 @app.route("/developers")
 def developers():
   return render_template("developerportal.html", user=session.get("username"), db=db, page = "Nebulus - Developer Portal", developer=True)
@@ -97,12 +102,62 @@ def logout():
     session['username'] = None
     session['email'] = None
     session['password'] = None
+    #Schoology
+    session['token'] = None
+    session["request_token"] = None
+    session["request_token_secret"] = None
+    session["access_token_secret"] = None
+    session["access_token"] = None
     return redirect('/')
 
+@app.route("/schoology", methods=["POST"])
+def loginpost():
+  import schoolopy, random, time
+  key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
+  secret = "59ccaaeb93ba02570b1281e1b0a90e18"
+  sc = schoolopy.Schoology(schoolopy.Auth(key, secret))
+  sc.limit = 10
+  request_token = session["request_token"]
+  request_token_secret = session["request_token_secret"]
+  access_token_secret = session["access_token_secret"]
+  access_token = session["access_token"]
+  auth = schoolopy.Auth(key, secret, domain='https://bins.schoology.com', three_legged=True,
+                 request_token=request_token, request_token_secret=request_token_secret, access_token=access_token, access_token_secret=access_token_secret)
+  print(auth.authorized)
+  print(auth.authorize())
+  a = auth.authorized
+  print(a)
+  if (a == False):
+    return "error!!!"
+  sc = schoolopy.Schoology(auth)
+  sc.limit = 10
+  print(sc.get_me().name_display)
+  session["name"] = sc.get_me().name_display
+  session["email"] = sc.get_me().primary_email
+
+  return str(sc.get_me().name_display)
 
 @app.route('/settings')
 def settings():
-    return render_template("user/settings.html", page='Nebulus - Account Settings', session=session, user=session.get("username"))
+    #Schoology Info
+    import schoolopy
+    key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
+    secret = "59ccaaeb93ba02570b1281e1b0a90e18"
+    # Instantiate with 'three_legged' set to True for three_legged oauth.
+    # Make sure to replace 'https://www.schoology.com' with your school's domain.
+    # DOMAIN = 'https://www.schoology.com'
+    DOMAIN = 'https://bins.schoology.com'
+
+    auth = schoolopy.Auth(key, secret, three_legged=True, domain=DOMAIN)
+    # Request authorization URL to open in another window.
+    url = auth.request_authorization("https://Project-Nebulus.nicholasxwang.repl.co/closeSchoology")
+    session["request_token"] = auth.request_token
+    session["request_token_secret"] = auth.request_token_secret
+    session["access_token_secret"] = auth.access_token_secret
+    session["access_token"] = auth.access_token
+
+    # Open OAuth authorization webpage. Give time to authorize.
+    return render_template("user/settings.html", page='Nebulus - Account Settings', session=session, user=session.get("username"), schoologyURL = url)
 
 
 @app.route('/dashboard')
