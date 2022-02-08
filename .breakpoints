@@ -4,66 +4,66 @@
       {
         "id": "e188b25f-7862-4e96-a513-b98d3ddf3943",
         "line": 1,
-        "version": 636,
+        "version": 10262,
         "index": 0
       },
       {
         "id": "1a96932e-ecb0-4cdb-8de1-01e6d9931860",
         "line": 1,
-        "version": 636,
+        "version": 10262,
         "index": 0
       },
       {
         "id": "a3c66d9f-84f6-457a-87eb-984f8779b063",
-        "line": 8,
-        "version": 636,
-        "index": 306
+        "line": 1,
+        "version": 10262,
+        "index": 0
       }
     ],
     "static/css/styles.css": [
       {
         "id": "b36c8974-2de7-4a05-b62e-91fbb4c7437f",
         "line": 16,
-        "version": 602,
-        "index": 362
+        "version": 5573,
+        "index": 374
       },
       {
         "id": "1284458e-185e-4fbf-b2db-e2da291b2c55",
         "line": 16,
-        "version": 602,
-        "index": 362
+        "version": 5573,
+        "index": 374
       }
     ],
     "static/json/festive-freedom-309323-0124a1c976ae.json": [
       {
         "id": "dcc346d6-cbc7-4d3c-b105-2340fff55f8b",
         "line": 2,
-        "version": 1,
-        "index": 6
+        "version": 29,
+        "index": 4
       }
     ],
     "static/python/mongodb.py": [
       {
         "id": "8a80265e-92f5-46e8-9d9c-e270e78d046a",
         "line": 2,
-        "version": 1085,
+        "version": 4083,
         "index": 20
       }
     ],
     "templates/layout.html": [
       {
         "id": "23ec76f8-cb00-499c-8e37-7c42c82def8c",
-        "line": 3,
-        "version": 497,
-        "index": 75
+        "line": 2,
+        "version": 1114,
+        "index": 50
       }
     ],
     "templates/lms.html": [
       {
         "id": "24fbf8ca-eff8-484f-8ea2-dbe3cc861b90",
-        "line": 83,
-        "version": 606,
-        "index": 2934
+        "line": 91,
+        "version": 879,
+        "index": 3075
       }
     ],
     "templates/login.html": [

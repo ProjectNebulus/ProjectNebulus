@@ -140,6 +140,17 @@ input[type=submit], #signupinnerbody input[type=submit] {
   padding-right:40px;
   font-size:1.5em;
 }
+button {
+  background:linear-gradient(to top right, #ff3c00, #ffd900);
+  color: white;
+  border-radius: 3px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  transition: 0.25s;
+  padding-left: 40px;
+  padding-right: 40px;
+  border-style:none;
+}
 
 .button {
   background:linear-gradient(to top right, #ff3c00, #ffd900);
