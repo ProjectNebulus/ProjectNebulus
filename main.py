@@ -164,8 +164,10 @@ def settings():
 def dashboard():
     # if the user is not logged in, redirect to the login page
     if not (session.get('username') and session.get('password')):
+        print("Not Signed In")
         return redirect('/signin')
     else:
+        print("Signed In")
         new_user = request.args.get('new_user', default='false', type=str)
         return render_template("dashboard.html", user=session["username"], email=session["email"], db=db, page='Nebulus - Dashboard', new_account=new_user == 'true')
 
@@ -216,11 +218,13 @@ def signup_post():
 @app.route("/signin")
 def signin():
     # If the user is already logged in, redirect to the dashboard
-    if not session.get('username') and session.get('password'):
+    if not session.get('username') and not session.get('password'):
+        print("Not Logged In")
         if check_user_params and session.get("email"):
             db.check_user_params(session.get("email"))
 
         return render_template("main/signin.html", page='Nebulus - Log In', disablebar=True)
+    print("Logged In")
 
     return redirect('/dashboard')
 

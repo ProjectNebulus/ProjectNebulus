@@ -182,6 +182,8 @@ nav {
   padding: 20px 10px 10px 20px;
   height: 50px;
   /*background: rgba(0,0,0,0.3);*/
+  width:80%;
+  
 }
 
 nav a {
