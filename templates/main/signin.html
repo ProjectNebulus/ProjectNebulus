@@ -9,10 +9,10 @@
         <div id="signupinnerbody">
             <form id='signin_form' action='#' onsubmit='loginUser(); return false'>
                 <span class="material-icons md-36">perm_identity</span>
-                <input type="text" placeholder="Username or Email" id="usrname"><span class="response"></span>
+                <input autocomplete="false" type="text" placeholder="Username or Email" id="usrname"><span class="response"></span>
                 <br>
                 <span class="material-icons-outlined md-36">lock</span>
-                <input type="password" placeholder="Password" id="psw"><span class="response"></span>
+                <input autocomplete="false" type="password" placeholder="Password" id="psw"><span class="response"></span>
                 <br>
                 <p id="fail">Please type out your username first and then your password!</p>
                 <input id="log_in" type="submit" style="padding-bottom:40px;" value="Log in">
@@ -24,7 +24,7 @@
             <p>Are you a Nebulus Staff Member or a student of a School? Use SSO Login!</p>
         </div>
         <div id="ssoinnerbody" style="display:none;">
-            <form id='signin_form' action='#' onsubmit='loginUser(); return false'>
+            <form id='signin_form' autocomplete="off"  action='#' onsubmit='loginUser(); return false'>
                <span class="material-icons md-36">corporate_fare</span>
                 <input type="text" placeholder="Organization or School" id="usrname"><span class="response"></span>
                 <br>

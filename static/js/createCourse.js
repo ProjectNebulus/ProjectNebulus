@@ -6,6 +6,7 @@ var screens = document.getElementsByClassName("CourseBtn");
 var modal = document.getElementById("CourseModal");
 var btn = document.getElementById("create");
 
+
 btn.onclick = function() {
   modal.style.display = "block";
 
@@ -42,7 +43,7 @@ var templates = [
   {
     name: "Science",
     icon: "science.svg",
-    subtemplates: ['Science', 'Physics', 'Chemistry', 'Biology', 'Astronomy', 'Life Science', 'Earth Science', 'Physical Science', 'Physical Geography', 'Computer Science']
+    subtemplates: ['Science', 'Physics', 'Chemistry', 'Biology', 'Astronomy', 'Life Science', 'Earth Science', 'Physical Science', 'Physical Geography', 'Computer Science', 'Programming', 'Coding']
   },
 
   {
