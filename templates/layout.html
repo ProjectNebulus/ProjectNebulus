@@ -20,64 +20,6 @@
 <!--Title!-->
 <title>{{page}}</title>
 
-{% if not disablebar %}
-  <nav style="padding-top:10px !important;padding-bottom:30px !important;margin: auto !important;width:80%;float:left; background-color:#00000090; position: relative;z-index:1;padding:0px;">
-
-    <span style="float:left;">
-      <br>
-      <a href="/"><img src="static/images/logo.png" style="height:6vh; vertical-align: middle;"></a>
-      {% if user %}
-      <a href="/dashboard">Dashboard</a>
-      <a href="/lms">Learning</a>
-      <a href="/calendar">Calendar</a>
-      {% else %}
-      <a href="/developers">Developer Portal</a>
-      <a href="/developers/api">API</a>
-      <a href="/lms">LMS</a>
-      <a href="/chat">Chat</a>
-      <a href="/musiqueworld">Music</a>
-      <a href="/holidays">Virtual Holidays</a>
-      <a href="/about">About Us</a>
-      {% endif %}
-    </span>
-
-    {% if session.get("username") %}
-    
-      {% if new_account %}
-        {% if developer %}
-        <button>New Application</button>
-        {% endif %}
-      <span style="margin-top:20px;padding: 10px 5px 10px 5px;background:rgba(0, 255, 0, 0.2);border-radius:10px;float:right">Welcome to Nebulus, {{user}}</span>
-      {% endif %}
-      <details style="float:right;margin:30px 20px 30px 5px;text-align:right">
-        <summary>
-          {{user}}
-          <span class="material-icons" style="vertical-align:middle">expand_more</span>
-        </summary>
-
-        <div style="background-color:black;border:1px solid lightgray;border-radius:5px;margin-top:10px;text-align:left">
-          <div onclick="window.open('/settings', '_self')">Settings</div>
-          <div onclick="window.open('/profile', '_self')">Profile</div>
-          <hr>
-          <div onclick="window.open('/pricing', '_self')">Upgrade to Premium</div>
-          <hr>
-          <div onclick="window.open('/points', '_self')">
-            <span>5</span>
-            <img src="https://images.emojiterra.com/twitter/v13.1/512px/1fa99.png" style="height:1em;">
-          </div>
-          <hr>
-          <div onclick="window.open('/logout', '_self')">Log Out</div>
-        </div>
-      </details>
-    {% else %}
-      <span style="float:right;margin:30px 20px 30px 5px;">
-        <a href="/signin">Login</a>
-        <a id="signup" href="/signup">Sign Up</a>
-      </span>
-    {% endif %}
-  </nav><br><br>
-
-{% endif %}
 <!--Twemoji!-->
 <!--
 <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
