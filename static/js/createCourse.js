@@ -164,3 +164,43 @@ function step2(template) {
 
   document.getElementsByTagName("h1")[2].innerHTML.replace("[replace this]", template.name)
 }
+
+function step3(template) {
+  screens[0].style.display = "none";
+  screens[1].style.display = "block";
+
+  divs[1].innerHTML = "";
+
+  for (var subtemplate of template.subtemplates) {  
+    var button = document.createElement("span");
+    button.className = "button";
+    
+    var imageSpan = document.createElement("span");
+    imageSpan.style.float = "left";
+
+    var image = document.createElement("img");
+    image.style.float = "right";
+    image.height = 20;
+    image.width = 20;
+    image.src = "static/images/icons/" + template.icon;
+    imageSpan.appendChild(image);
+
+    button.appendChild(imageSpan);
+
+    var templateName = document.createElement("span");
+    templateName.innerHTML = subtemplate;
+    button.appendChild(templateName);
+    
+    var next = document.createElement("span");
+    next = document.createElement("img");
+    next.style.float = "right";
+    next.height = 20;
+    next.width = 20;
+    next.src = "static/images/icons/next.svg";
+    button.appendChild(next);
+
+    divs[1].appendChild(button);
+  }
+
+  document.getElementsByTagName("h1")[2].innerHTML.replace("[replace this]", template.name)
+}
