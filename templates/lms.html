@@ -5,7 +5,7 @@
 <div id="left"
       style="width:20%;height:90%;float:left; background-color: #171717 !important; ">
     <center>
-        <div style="background:linear-gradient(to top right, #ff3c00, #ffd900); width:100%;top:0px;margin: 0 px;height:6em;">
+        <div style="background:linear-gradient(to top right, #ff3c00, #ffd900); width:100%;top:0px;margin: 0 px;font-size:1.5em;padding-top:20px;padding-bottom:20px;border-radius: 8px 8px 0px 0px;">
         <h3>Recent Activity</h3>
         </div>
         {% for x in db.Accounts.find_one({'user': user}).courses %}

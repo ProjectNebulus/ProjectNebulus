@@ -139,6 +139,7 @@ input[type=submit], #signupinnerbody input[type=submit] {
   padding-left:40px;
   padding-right:40px;
   font-size:1.5em;
+  
 }
 button {
   background:linear-gradient(to top right, #ff3c00, #ffd900);
@@ -277,6 +278,10 @@ details div:hover {
 
 }
 
+button{
+  font-family: 'Lexend Deca', sans-serif;
+  font-size:1.3em;
+}
 input:focus{
   border-style:solid;
   border-color:blue;
