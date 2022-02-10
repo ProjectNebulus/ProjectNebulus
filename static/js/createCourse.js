@@ -171,7 +171,7 @@ function step3(template, subtemplate) {
   screens[1].style.display = "none";
   screens[2].style.display = "block";
 
-  screens[2].innerHTML = "<h1 style='font-size:1.75vw'>Step 3: Create the Course</h1><br>You selected '"+template+" > "+subtemplate+"'<br><h2 style='font-size:1.4vw'>Make your Own</h2><input placeholder='Course Name'><br><input placeholder='Teacher Name'><h2 style='font-size:1.4vw'>or...import from other LMSs (recommended)</h2><button class='button'>Import from Schoology</button><br><buttonn class='button'>Import from Google Classroom</button><br><button>Import from Canvas by Instructure</button>";
+  screens[2].innerHTML = "<h1 style='font-size:1.75vw'>Step 3: Create the Course</h1><br><span style='font-size:1em;color:grey;'>You selected '"+template+" > "+subtemplate+"'</span><br><h2 style='font-size:1.4vw'>Make your Own</h2><input placeholder='Course Name'><br><input placeholder='Teacher Name'><h2 style='font-size:1.4vw'>or...import from other LMSs (recommended)</h2><button class='button'>Import from Schoology</button><br><button class='button'>Import from Google Classroom</button><br><button class='button'>Import from Canvas by Instructure</button>";
 
 
 }
