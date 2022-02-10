@@ -130,11 +130,12 @@ function step2(template) {
   screens[1].style.display = "block";
 
   divs[1].innerHTML = "";
-
+  var count = 0;
   for (var subtemplate of template.subtemplates) {  
     var button = document.createElement("span");
+    var thesubtemplate = subtemplate
     button.className = "button";
-    button.onclick = function() { step3(template, subtemplate) }
+    button.onclick = function() { step3(template.name, thesubtemplate) }
     
     var imageSpan = document.createElement("span");
     imageSpan.style.float = "left";
@@ -170,7 +171,7 @@ function step3(template, subtemplate) {
   screens[1].style.display = "none";
   screens[2].style.display = "block";
 
-  screens[2].innerHTML = "<h1>"+template+" > "+subtemplate+"</h1>";
+  screens[2].innerHTML = "<h1 style='font-size:1.75vw'>Step 3: Create the Course</h1><br>You selected '"+template+" > "+subtemplate+"'<br><h2 style='font-size:1.4vw'>Make your Own</h2><input placeholder='Course Name'><br><input placeholder='Teacher Name'><h2 style='font-size:1.4vw'>or...import from other LMSs (recommended)</h2><button class='button'>Import from Schoology</button><br><buttonn class='button'>Import from Google Classroom</button><br><button>Import from Canvas by Instructure</button>";
 
 
 }
