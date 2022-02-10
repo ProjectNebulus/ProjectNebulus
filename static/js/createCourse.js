@@ -40,6 +40,12 @@ function createCourse(subtemplate) {
   const xhttp = new XMLHttpRequest();
   xhttp.open('POST', '/createCourse', true);
   xhttp.setRequestHeader('Content-type', 'application/json');
+  if (document.getElementById("course-name").value == "") {
+    document.getElementById("course-name").value = subtemplate
+  }
+  if (document.getElementById("course-teacher").value == "") {
+    document.getElementById("course-teacher").value = courseTeacher.placeholder
+  }
   xhttp.send(
     JSON.stringify({
         name: document.getElementById("course-name").value,

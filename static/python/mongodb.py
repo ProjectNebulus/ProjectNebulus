@@ -2,6 +2,7 @@ import pymongo, dns
 from static.python.security import  hash256, valid_password
 import os
 import re
+import random
 
 regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
 
@@ -11,13 +12,17 @@ Accounts = db.Accounts
 ids = db.course_ids
 
 def create_course(course_name, course_teacher, template, username):
-    Accounts.update_one({'username': username}, {'$push': {'courses': {
-      "name": course_name,
-      "teacher": course_teacher,
-      "owner": username
-    }}})
-    ids.insert_one({'id': id})
-    print('course created')
+  rand_id = hex(random.randint(0, 1000000))
+  while (ids.find_one({"_id": rand_id}) != None):
+    rand_id = hex(random.randint(0,1000000))
+  Accounts.update_one({'username': username}, {'$push': {'courses': {
+    "name": course_name,
+    "teacher": course_teacher,
+    "owner": username,
+    "_id": rand_id
+  }}})
+  ids.insert_one({'_id': rand_id})
+  print('course created')
 
 
 def create_user(username, email, password):
