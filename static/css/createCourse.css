@@ -33,12 +33,33 @@
   -webkit-animation-fill-mode: forwards;
 }
 
+h1 {
+  font-size: 1.75vw;
+}
+
+label {
+  font-size: 1.25vw;
+  font-weight: 700;
+  color: lightgray;
+  float: left;
+}
+
+input[type=submit] {
+  color: white;
+  font-size: 1.25vw;
+}
+
 #create, #join {
   background: black;
   cursor: pointer;
   vertical-align: middle;
   border-radius: 3px;
   padding: 5px;
+}
+
+.button, button {
+  font-size: 1.25vw;
+  color: white;
 }
 
 #join-hover {

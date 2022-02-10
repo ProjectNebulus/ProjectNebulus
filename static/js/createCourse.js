@@ -6,7 +6,6 @@ var screens = document.getElementsByClassName("CourseBtn");
 var modal = document.getElementById("CourseModal");
 var btn = document.getElementById("create");
 
-
 btn.onclick = function() {
   modal.style.display = "block";
 
@@ -21,11 +20,33 @@ window.onclick = function(event) {
   }
 }
 
-//set up close button
+// set up close button
 for (var close of document.getElementsByClassName("close")) {
   close.className += " material-icons";
   close.innerHTML = "close";
   close.onclick = function() { modal.style.display = "none"; }
+}
+
+// set up user
+var user = document.getElementById("userinfo").innerHTML;
+
+// set up course stuff
+var courseName = document.getElementById("course-name");
+var courseTeacher = document.getElementById("course-teacher");
+
+function createCourse(subtemplate) {
+  document.getElementById("create-course-status").innerHTML = "Creating course...";
+
+  const xhttp = new XMLHttpRequest();
+  xhttp.open('POST', '/createCourse', true);
+  xhttp.setRequestHeader('Content-type', 'application/json');
+  xhttp.send(
+    JSON.stringify({
+        name: document.getElementById("course-name").value,
+        teacher: document.getElementById("course-teacher").value,
+        template: subtemplate
+    })
+  );
 }
 
 /*
@@ -43,7 +64,7 @@ var templates = [
   {
     name: "Science",
     icon: "science.svg",
-    subtemplates: ['Science', 'Physics', 'Chemistry', 'Biology', 'Astronomy', 'Life Science', 'Earth Science', 'Physical Science', 'Physical Geography', 'Computer Science', 'Programming', 'Coding']
+    subtemplates: ['Introduction to Science', 'Physics', 'Chemistry', 'Biology', 'Astronomy', 'Life Science', 'Earth Science', 'Physical Science', 'Physical Geography', 'Computer Science', 'Programming', 'Coding']
   },
 
   {
@@ -113,11 +134,11 @@ for (var template of templates) {
   var description = document.createElement("span");
   description.style.color = "gray";
   description.style.fontSize = "0.8em";
-  description.innerHTML = "(";
+  description.innerHTML = "Subtemplates: ";
 
   for (var subtemplate of template.subtemplates)
     description.innerHTML += subtemplate + ", ";
-  description.innerHTML += "etc.)"
+  description.innerHTML = description.innerHTML.substring(0, description.innerHTML.length - 2)
 
   button.appendChild(description);
 
@@ -133,9 +154,12 @@ function step2(template) {
   var count = 0;
   for (var subtemplate of template.subtemplates) {  
     var button = document.createElement("span");
-    var thesubtemplate = subtemplate
     button.className = "button";
-    button.onclick = function() { step3(template.name, thesubtemplate) }
+    button.onclick = function() {
+      const subtemplateName = subtemplate;
+      const name = template.name;
+      step3(name, subtemplateName) 
+    }
     
     var imageSpan = document.createElement("span");
     imageSpan.style.float = "left";
@@ -163,15 +187,14 @@ function step2(template) {
 
     divs[1].appendChild(button);
   }
-
-  document.getElementsByTagName("h1")[2].innerHTML.replace("[replace this]", template.name)
 }
 
 function step3(template, subtemplate) {
   screens[1].style.display = "none";
   screens[2].style.display = "block";
 
-  screens[2].innerHTML = "<h1 style='font-size:1.75vw'>Step 3: Create the Course</h1><br><span style='font-size:1em;color:grey;'>You selected '"+template+" > "+subtemplate+"'</span><br><h2 style='font-size:1.4vw'>Make your Own</h2><input placeholder='Course Name'><br><input placeholder='Teacher Name'><h2 style='font-size:1.4vw'>or...import from other LMSs (recommended)</h2><button class='button'>Import from Schoology</button><br><button class='button'>Import from Google Classroom</button><br><button class='button'>Import from Canvas by Instructure</button>";
+  courseName.placeholder = subtemplate;
+  courseTeacher.placeholder = user;
 
-
+  document.getElementById("create-course").onsubmit = function() { createCourse(subtemplate); }
 }

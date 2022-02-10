@@ -119,7 +119,7 @@ input {
   outline:none;
   border:none;
   margin:10px;
-  transition: 0.5s;
+  transition: 0.25s;
 }
 
 input[type=text] {
@@ -141,7 +141,7 @@ input[type=submit], #signupinnerbody input[type=submit] {
   font-size:1.5em;
   
 }
-button {
+button, .button {
   background:linear-gradient(to top right, #ff3c00, #ffd900);
   color: white;
   border-radius: 3px;
@@ -153,18 +153,7 @@ button {
   border-style:none;
 }
 
-.button {
-  background:linear-gradient(to top right, #ff3c00, #ffd900);
-  color: white;
-  border-radius: 3px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  transition: 0.25s;
-  padding-left: 40px;
-  padding-right: 40px;
-}
-
-.button:hover {
+button:hover, .button:hover {
   background:linear-gradient(to top right, #ff3c0080, #ffd90080);
   color: gray;
 }
