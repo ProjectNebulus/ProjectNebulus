@@ -10,7 +10,7 @@ db = client.Nebulus
 Accounts = db.Accounts
 ids = db.course_ids
 
-def create_course(course_name, course_teacher, username):
+def create_course(course_name, course_teacher, template, username):
     Accounts.update_one({'username': username}, {'$push': {'courses': {
       "name": course_name,
       "teacher": course_teacher,

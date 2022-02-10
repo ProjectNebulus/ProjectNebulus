@@ -51,7 +51,7 @@
         <div id="left">
           <h2>Recent courses</h2>
           <div class="section">
-              {% for course in db.Accounts.find_one({"email":email}).get("courses") %}
+              {% for course in db.Accounts.find_one({"username":user}).get("courses") %}
                   <a class="button" href="/courses/{{course.id}}">
                       <h1>{{course.name}}</h1>
                       <h2>{{course.teacher}}</h2>

@@ -1,33 +1,12 @@
 {% extends "layout.html" %}
 {% block main %}
     <body>
-      {% include "navbar.html" %}
     <div id="signupbody"  autocomplete="off">
         <script src='/static/js/signin.js'></script>
         <h1><img src="static/images/logo.png" style="height:3.5em;"></h1>
         <h1>Log in</h1>
         <div id="signupinnerbody">
             <form id='signin_form' action='#' onsubmit='loginUser(); return false'>
-                <span class="material-icons md-36">perm_identity</span>
-                <input autocomplete="false" type="text" placeholder="Username or Email" id="usrname"><span class="response"></span>
-                <br>
-                <span class="material-icons-outlined md-36">lock</span>
-                <input autocomplete="false" type="password" placeholder="Password" id="psw"><span class="response"></span>
-                <br>
-                <p id="fail">Please type out your username first and then your password!</p>
-                <input id="log_in" type="submit" style="padding-bottom:40px;" value="Log in">
-            </form>
-            <script src='/static/js/signin.js'></script>
-            <button style="background:black;color:white;font-size:1.3em;border-style:none;border-radius:10px;padding:15px" onclick="launch_SSO();"><span class="material-icons-outlined md-36">key</span> SSO Login</button>
-
-            <p>Don't have an account? <a href="/signup">Sign Up</a>!</p>
-            <p>Are you a Nebulus Staff Member or a student of a School? Use SSO Login!</p>
-        </div>
-        <div id="ssoinnerbody" style="display:none;">
-            <form id='signin_form' autocomplete="off"  action='#' onsubmit='loginUser(); return false'>
-               <span class="material-icons md-36">corporate_fare</span>
-                <input type="text" placeholder="Organization or School" id="usrname"><span class="response"></span>
-                <br>
                 <span class="material-icons md-36">perm_identity</span>
                 <input type="text" placeholder="Username or Email" id="usrname"><span class="response"></span>
                 <br>
@@ -37,10 +16,10 @@
                 <p id="fail">Please type out your username first and then your password!</p>
                 <input id="log_in" type="submit" value="Log in">
             </form>
-            <script src='/static/js/signin.js'></script>
-            <button style="background:black;color:white;font-size:1.3em;border-style:none;border-radius:10px;padding:15px;" onclick="unlaunch_SSO();"><span class="material-icons-outlined md-36">key</span> Regular Login</button>
+            <button style="background:black;color:white;font-size:1.3em;border-style:none;border-radius:10px;padding:15px;" onclick="SSO()"><span class="material-icons-outlined md-36">key</span> SSO Login</button>
 
             <p>Don't have an account? <a href="/signup">Sign Up</a>!</p>
+            <p>Are you a Nebulus Staff Member or a student of a School? Use SSO Login!</p>
         </div>
     </div>
     </body>

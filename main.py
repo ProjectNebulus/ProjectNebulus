@@ -22,6 +22,11 @@ check_user_params = True
 def close():
     session['token'] = request.args.get("oauth_token")
     return "<script>window.close();</script>"
+
+@app.route("/createCourse", methods=["POST"])
+def create_course():
+    data = request.get_json()
+    db.create_course(data["name"], data["teacher"], data["template"], session.get("username"))
     
 @app.route("/developers")
 def developers():
@@ -53,7 +58,11 @@ def not_found(e):
 
 @app.errorhandler(500)
 def server_error(e):
-    return render_template("errors/500.html", page="500 Internal Server Error", e=e)
+    return render_template("errors/500.html", page="500 Internal Server Error")
+
+@app.errorhandler(405)
+def method_not_allowed(e):
+    return render_template("errors/404.html", page="404 Not Found")
 
 
 @app.route('/courses/<id>')
@@ -70,18 +79,6 @@ def courses(id):
 
     else:
         return redirect('/signin')
-
-
-@app.route('/new')
-def new():
-    return render_template("courses/new.html", page='Nebulus - New Course')
-
-
-@app.route('/new', methods=['POST'])
-def new_post():
-    data = request.get_json()
-    db.create_course(data['name'], data['teacher'], session.get("username"))
-    return 'success'
 
 
 @app.route('/')
@@ -150,7 +147,7 @@ def settings():
 
     auth = schoolopy.Auth(key, secret, three_legged=True, domain=DOMAIN)
     # Request authorization URL to open in another window.
-    url = auth.request_authorization("https://Project-Nebulus.nicholasxwang.repl.co/closeSchoology")
+    url = auth.request_authorization(request.url_root + "/closeSchoology")
     session["request_token"] = auth.request_token
     session["request_token_secret"] = auth.request_token_secret
     session["access_token_secret"] = auth.access_token_secret

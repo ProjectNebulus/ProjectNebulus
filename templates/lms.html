@@ -2,6 +2,10 @@
 {% extends "layout.html" %}
 {% block main %}
 {% include "navbar.html" %}
+
+{# Contains information like the username #}
+<span style="display:none" id="userinfo">{{user}}</span>
+
 <div id="left"
       style="width:20%;height:90%;float:left; background-color: #171717 !important; ">
     <center>
@@ -66,19 +70,35 @@
 
           <div class="CourseBtn">
             <center>
-              <h1 style="font-size: 1.75vw;">
-                Step 2: Choose a Sub-Course
+              <h1>
+                Step 2: Choose a Course
                 <span class="close"></span>
               </h1>
 
               <div class="scroll"></div>
             </center>
           </div>
+          
           <div class="CourseBtn">
             <center>
-              <h1 style="font-size: 1.75vw;">
-                Step 3: Create the Course
-                <p>hi</p>
+              <h1>
+                Step 3: Customize your Course
+                <span class="close"></span>
+              </h1>
+              <form id="create-course">
+                <input type="text" id="course-name"></input>
+                <label for="course-name">Course Name:</label>
+                <input type="text" id="course-teacher"></input>
+                <label for="course-teacher">Course Teacher:</label>
+                <br>
+                <input type="submit" value="Create your Course!"></input>
+                <p style="color:yellowgreen;font-size:1.5vw;font-weight:700;" id="create-course-status"><p>
+              </form>
+
+              <h1>Or import from another LMS</h1>
+              <button class="button" id="import-schoology">Import from Schoology</button>
+              <button class="button" id="import-classroom">Import from Google Classroom</button>
+              <button class="button" id="import-canvas">Import from Canvas</button>
             </center>
           </div>
         </div>
