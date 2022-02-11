@@ -158,11 +158,11 @@ function step2(template) {
 
   divs[1].innerHTML = "";
   var count = 0;
-  for (var subtemplate of template.subtemplates) {  
+  for (var subtemplate = 0; subtemplate < templates.length; subtemplate++) {  
     var button = document.createElement("span");
     button.className = "button";
     button.onclick = function() {
-      const subtemplateName = subtemplate;
+      const subtemplateName = ;
       const name = template.name;
       step3(name, subtemplateName) 
     }
