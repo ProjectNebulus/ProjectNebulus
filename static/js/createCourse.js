@@ -104,12 +104,12 @@ var templates = [
   }
 ]
 
-for (var template of templates) {
-  const t = template;
+for (var template = 0; template<templates.length; template++) {
+  const t = templates[template];
 
   var button = document.createElement("span");
   button.className = "button";
-  button.onclick = function() { step2(t) }
+  button.onclick = function() { step2(templates[template]) }
   
   var imageSpan = document.createElement("span");
   imageSpan.style.float = "left";
@@ -118,13 +118,13 @@ for (var template of templates) {
   image.style.float = "right";
   image.height = 20;
   image.width = 20;
-  image.src = "static/images/icons/" + template.icon;
+  image.src = "static/images/icons/" + templates[template].icon;
   imageSpan.appendChild(image);
 
   button.appendChild(imageSpan);
 
   var templateName = document.createElement("span");
-  templateName.innerHTML = template.name;
+  templateName.innerHTML = templates[template].name;
   button.appendChild(templateName);
   
   var next = document.createElement("span");
@@ -142,7 +142,7 @@ for (var template of templates) {
   description.style.fontSize = "0.8em";
   description.innerHTML = "Subtemplates: ";
 
-  for (var subtemplate of template.subtemplates)
+  for (var subtemplate of templates[template])
     description.innerHTML += subtemplate + ", ";
   description.innerHTML = description.innerHTML.substring(0, description.innerHTML.length - 2)
 
@@ -162,12 +162,12 @@ function step2(template) {
     var button = document.createElement("span");
     button.className = "button";
     button.onclick = function() {
-      console.log(templates)
-      console.log(subtemplate)
-      console.log(templates[subtemplate])
-      console.log(templates[subtemplate].name)
+      alert(templates)
+      alert(subtemplate)
+      alert(templates[subtemplate])
+      alert(templates[subtemplate].name)
       const subtemplateName = templates[subtemplate].name;
-      const name = template.name;
+      const name = templates[subtemplate].name;
       step3(name, subtemplateName) 
     }
     
