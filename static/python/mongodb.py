@@ -107,3 +107,12 @@ def check_password(email, password):
     else:
         return 'false'
 
+
+def schoologyLogin(email, request_token, request_token_secret, access_token, access_token_secret):
+  for i in (Accounts.find({})):
+    if i["email"] == email:
+      i["schoology"] = True
+      i["Schoology_request_token"] = request_token
+      i["Schoology_request_token_secret"] = request_token_secret
+      i["Schoology_access_token"] = access_token
+      i["Schoology_access_token_secret"] = access_token_secret

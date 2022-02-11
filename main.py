@@ -100,6 +100,7 @@ def logout():
     session['email'] = None
     session['password'] = None
     #Schoology
+    session['schoologyEmail'] = None
     session['token'] = None
     session["request_token"] = None
     session["request_token_secret"] = None
@@ -130,7 +131,8 @@ def loginpost():
   sc.limit = 10
   print(sc.get_me().name_display)
   session["name"] = sc.get_me().name_display
-  session["email"] = sc.get_me().primary_email
+  session["Schoologyemail"] = sc.get_me().primary_email
+  db.schoologyLogin(session["email"], request_token, request_token_secret, access_token, access_token_secret)
 
   return str(sc.get_me().name_display)
 
