@@ -141,9 +141,9 @@ for (var template = 0; template<templates.length; template++) {
   description.style.color = "gray";
   description.style.fontSize = "0.8em";
   description.innerHTML = "Subtemplates: ";
-
-  for (var subtemplate of templates[template])
-    description.innerHTML += subtemplate + ", ";
+// What are you doing?
+  for (var subtemplate of templates)
+    description.innerHTML += subtemplate.name + ", ";
   description.innerHTML = description.innerHTML.substring(0, description.innerHTML.length - 2)
 
   button.appendChild(description);
