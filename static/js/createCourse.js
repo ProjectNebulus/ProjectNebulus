@@ -162,7 +162,7 @@ function step2(template) {
     var button = document.createElement("span");
     button.className = "button";
     button.onclick = function() {
-      const subtemplateName = templates.subtemplates;
+      const subtemplateName = templates[templates.subtemplates].name;
       const name = template.name;
       step3(name, subtemplateName) 
     }
