@@ -109,7 +109,7 @@ for (var template = 0; template<templates.length; template++) {
 
   var button = document.createElement("span");
   button.className = "button";
-  button.onclick = function() { step2(templates[template]) }
+  button.onclick = function() { step2(templates, template) }
   
   var imageSpan = document.createElement("span");
   imageSpan.style.float = "left";
@@ -141,7 +141,7 @@ for (var template = 0; template<templates.length; template++) {
   description.style.color = "gray";
   description.style.fontSize = "0.8em";
   description.innerHTML = "Subtemplates: ";
-// What are you doing?
+
   for (var subtemplate of templates)
     description.innerHTML += subtemplate.name + ", ";
   description.innerHTML = description.innerHTML.substring(0, description.innerHTML.length - 2)
@@ -152,7 +152,8 @@ for (var template = 0; template<templates.length; template++) {
 }
 
 
-function step2(template) {
+function step2(templates, template) {
+  
   screens[0].style.display = "none";
   screens[1].style.display = "block";
 
@@ -178,7 +179,10 @@ function step2(template) {
     image.style.float = "right";
     image.height = 20;
     image.width = 20;
-    image.src = "static/images/icons/" + template.icon;
+    console.log(template);
+    console.log(templates);
+    console.log(templates[template])
+    image.src = "static/images/icons/" + templates[template].icon;
     imageSpan.appendChild(image);
 
     button.appendChild(imageSpan);
