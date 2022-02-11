@@ -152,7 +152,7 @@ for (var template = 0; template<templates.length; template++) {
 }
 
 
-function step2(templates, template) {
+function step2(templates) {
   
   screens[0].style.display = "none";
   screens[1].style.display = "block";
@@ -181,8 +181,8 @@ function step2(templates, template) {
     image.width = 20;
     console.log(template);
     console.log(templates);
-    console.log(templates[template])
-    image.src = "static/images/icons/" + templates[template].icon;
+    console.log(templates[template]);
+    image.src = "static/images/icons/" + templates[subtemplate].icon;
     imageSpan.appendChild(image);
 
     button.appendChild(imageSpan);
