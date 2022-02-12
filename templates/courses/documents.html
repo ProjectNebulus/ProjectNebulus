@@ -2,20 +2,80 @@
 {% extends "layout.html" %}
 {% block main %}
 
+    <div class="bg-slate-100">
+        <aside class="w-64 h-full" aria-label="Sidebar">
+            <div class="px-3 py-4 overflow-y-auto rounded bg-gray-50 dark:bg-gray-800 h-full">
+                <a href="#" class="flex pl-2.5 mb-5">
 
-<div id="side_bar">
-        <p class="course-title">{{ course.name }}</p>
-        <a href=""><p class="course_option course_option_selected"><i class="material-icons">description</i> Documents</p></a>
-        <a href="{{'/courses/'+id+'/announcements'}}"><p class="course_option"><i class="material-icons">campaign</i> Announcements</p></a>
-        <a href="{{'/courses/'+id+'/grades'}}"><p class="course_option"><i class="material-icons"><span class="material-icons-outlined">trending_up</span></i> Grades</p></a>
-        <a href="{{'/courses/'+id+'/information'}}"><p class="course_option"><i class="material-icons">info</i> Information</p></a>
-        <a href="{{'/courses/'+id+'/settings'}}"><p class="course_option"><i class="material-icons">settings</i> Settings</p></a>
-        <a href="{{'/courses/'+id+'/textbook'}}"><p class="course_option"><i class="material-icons">menu_book</i> Textbook</p></a>
-        <a href="{{'/courses/'+id+'/extensions'}}"><p class="course_option"><i class="material-icons">extension</i> Extensions</p></a>
-        <a href="{{'/courses/'+id+'/learning'}}"><p class="course_option coming-soon"><i class="material-icons">school</i> Learning</p></a>
+                    <span style="text-align: center"class="self-center text-lg font-semibold whitespace-nowrap dark:text-white">{{ course.name }}</span>
+                </a>
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400"><i class="material-icons">description</i></p>
+
+                            <span class="ml-3">Documents</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ '/courses'+id+'/announcements' }}" target="_blank"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400"><i class="material-icons">campaign</i></p>
+
+                            <span class="ml-3">Announcements</span>
+
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{'/courses/'+id+'/grades'}}" target="_blank"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400"><i class="material-icons">trending_up</i></p>
+
+                            <span class="ml-3">Grades</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ '/courses'+id+'/information' }}" target="_blank"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400"><i class="material-icons">info</i></p>
+
+                            <span class="ml-3">Information</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ '/courses'+id+'/settings' }}" target="_blank"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400"><i class="material-icons">settings</i></p>
+
+                            <span class="ml-3">Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ '/courses'+id+'/textbook' }}" target="_blank"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400"><i class="material-icons">menu_book</i></p>
+                            <span class="flex-1 ml-3 whitespace-nowrap">Textbook</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ '/courses'+id+'/extensions' }}" target="_blank"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400"><i class="material-icons">extension</i></p>
+                            <span class="flex-1 ml-3 whitespace-nowrap">Extensions</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ '/courses'+id+'/learning' }}" target="_blank"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400"><i class="material-icons">school</i></p>
+                            <span class="flex-1 ml-3 whitespace-nowrap">Learning</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
     </div>
-    <div id="course-body">
-      <h1>Documents</h1>
-    </div>
+
 
 {% endblock %}
