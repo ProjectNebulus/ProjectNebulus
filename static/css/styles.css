@@ -41,11 +41,6 @@ strong{
   color: white;
 }
 
-#course-body {
-  margin-left: 10%;
-  margin-right: 10%;
-  float:left !important;
-}
 
 #homePageBanner{
   margin:0px; /* No borders for the image*/
@@ -388,13 +383,13 @@ details summary {
 }
 
 #side_bar{
-  width:15%;
+  width:200px;
   height:100%;
-  float:left;
+  float:left !important;
   background:#383838;
 }
 #course-body{
-  width:80%;
+  width:calc(100% - 200px);
   height:100%;
   float:left !important;
 }
