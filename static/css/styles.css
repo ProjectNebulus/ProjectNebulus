@@ -411,6 +411,11 @@ details summary {
   background:black;
   border-radius:10px;
 }
+.course_option_selected{
+  border-color:white;
+  background:black;
+  border-radius:10px;
+}
 .course-title{
   border-style:block;
   padding-top:10px;

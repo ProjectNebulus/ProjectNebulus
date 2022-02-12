@@ -67,6 +67,9 @@ def method_not_allowed(e):
 
 @app.route('/courses/<id>')
 def courses(id):
+  return redirect("/courses/"+str(id)+"/documents")
+@app.route('/courses/<id>/documents')
+def courses_documents(id):
     if session.get("username") and session.get('password'):
         courses = db.Accounts.find_one({'username': session.get("username")})["courses"]
 
