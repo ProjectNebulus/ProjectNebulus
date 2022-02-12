@@ -390,7 +390,7 @@ details summary {
   width:15%;
   height:100%;
   float:left;
-  background:#595959;
+  background:#383838;
 }
 #course-body{
   width:80%;
@@ -418,7 +418,7 @@ details summary {
   margin-left:10px;
   margin-right:10px;
   border-color:transparent;
-  font-size:2.5vh;
+  font-size:1.4em;
 }
 
 .material-icons.md-18 { font-size: 18px; vertical-align: middle;}
