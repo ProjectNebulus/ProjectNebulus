@@ -152,7 +152,8 @@ for (var template = 0; template<templates.length; template++) {
 }
 
 
-function step2(templates) {
+function step2(templates, template) {
+  console.log(templates);
   
   screens[0].style.display = "none";
   screens[1].style.display = "block";
@@ -163,10 +164,6 @@ function step2(templates) {
     var button = document.createElement("span");
     button.className = "button";
     button.onclick = function() {
-      alert(templates)
-      alert(subtemplate)
-      alert(templates[subtemplate])
-      alert(templates[subtemplate].name)
       const subtemplateName = templates[subtemplate].name;
       const name = templates[subtemplate].name;
       step3(name, subtemplateName) 
@@ -179,16 +176,13 @@ function step2(templates) {
     image.style.float = "right";
     image.height = 20;
     image.width = 20;
-    console.log(template);
-    console.log(templates);
-    console.log(templates[template]);
     image.src = "static/images/icons/" + templates[subtemplate].icon;
     imageSpan.appendChild(image);
 
     button.appendChild(imageSpan);
 
     var templateName = document.createElement("span");
-    templateName.innerHTML = subtemplate;
+    templateName.innerHTML = templates[subtemplate].name;
     button.appendChild(templateName);
     
     var next = document.createElement("span");
