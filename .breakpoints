@@ -23,15 +23,15 @@
     "static/css/styles.css": [
       {
         "id": "b36c8974-2de7-4a05-b62e-91fbb4c7437f",
-        "line": 16,
-        "version": 5778,
-        "index": 360
+        "line": 2,
+        "version": 5779,
+        "index": 116
       },
       {
         "id": "1284458e-185e-4fbf-b2db-e2da291b2c55",
-        "line": 16,
-        "version": 5778,
-        "index": 360
+        "line": 2,
+        "version": 5779,
+        "index": 116
       }
     ],
     "static/json/festive-freedom-309323-0124a1c976ae.json": [
@@ -54,8 +54,8 @@
       {
         "id": "23ec76f8-cb00-499c-8e37-7c42c82def8c",
         "line": 2,
-        "version": 1175,
-        "index": 50
+        "version": 1176,
+        "index": 27
       }
     ],
     "templates/lms.html": [
