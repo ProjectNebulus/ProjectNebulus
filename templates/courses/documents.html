@@ -1,7 +1,9 @@
 <!--Extend with Jinja!-->
 {% extends "layout.html" %}
 {% block main %}
-    <div id="side_bar">
+
+
+<div id="side_bar">
         <p class="course-title">{{ course.name }}</p>
         <a href=""><p class="course_option course_option_selected"><i class="material-icons">description</i> Documents</p></a>
         <a href="{{'/courses/'+id+'/announcements'}}"><p class="course_option"><i class="material-icons">campaign</i> Announcements</p></a>

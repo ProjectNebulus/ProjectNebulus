@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;200;300;400;500;600;700;800;900&display=swap');
-body{ 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
   margin: 0; /* No borders for the image */
   background:#212121;
   color:white;
@@ -386,13 +390,14 @@ details summary {
   width:200px;
   height:100%;
   float:left !important;
-  background:#383838;
+  background-color: rgb(15 23 42);
 }
 #course-body{
   width:calc(100% - 220px);
   height:100%;
   float:left !important;
   padding-left:20px;
+  background-color: rgb(17 24 39);
 }
 .course_option{
   border-style:block;
