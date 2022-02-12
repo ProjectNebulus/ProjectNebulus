@@ -389,9 +389,10 @@ details summary {
   background:#383838;
 }
 #course-body{
-  width:calc(100% - 200px);
+  width:calc(100% - 220px);
   height:100%;
   float:left !important;
+  padding-left:20px;
 }
 .course_option{
   border-style:block;

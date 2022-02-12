@@ -77,13 +77,110 @@ def courses_documents(id):
             if course.get('_id') == id:
                 break
 
-        return render_template("courses/course.html", page="Nebulus - " + course.get("name", "Courses"), db=db, course=course, id=id,
+        return render_template("courses/documents.html", page="Nebulus - " + course.get("name", "Courses"), db=db, course=course, id=id,
+                               user=session.get("username"))
+
+    else:
+        return redirect('/signin')
+@app.route('/courses/<id>/announcements')
+def courses_announcements(id):
+    if session.get("username") and session.get('password'):
+        courses = db.Accounts.find_one({'username': session.get("username")})["courses"]
+
+        for course in courses:
+            if course.get('_id') == id:
+                break
+
+        return render_template("courses/announcements.html", page="Nebulus - " + course.get("name", "Courses"), db=db, course=course, id=id,
                                user=session.get("username"))
 
     else:
         return redirect('/signin')
 
+@app.route('/courses/<id>/grades')
+def courses_grades(id):
+    if session.get("username") and session.get('password'):
+        courses = db.Accounts.find_one({'username': session.get("username")})["courses"]
 
+        for course in courses:
+            if course.get('_id') == id:
+                break
+
+        return render_template("courses/grades.html", page="Nebulus - " + course.get("name", "Courses"), db=db, course=course, id=id,
+                               user=session.get("username"))
+
+    else:
+        return redirect('/signin')
+@app.route('/courses/<id>/information')
+def courses_information(id):
+    if session.get("username") and session.get('password'):
+        courses = db.Accounts.find_one({'username': session.get("username")})["courses"]
+
+        for course in courses:
+            if course.get('_id') == id:
+                break
+
+        return render_template("courses/information.html", page="Nebulus - " + course.get("name", "Courses"), db=db, course=course, id=id,
+                               user=session.get("username"))
+
+    else:
+        return redirect('/signin')
+@app.route('/courses/<id>/learning')
+def courses_learning(id):
+    if session.get("username") and session.get('password'):
+        courses = db.Accounts.find_one({'username': session.get("username")})["courses"]
+
+        for course in courses:
+            if course.get('_id') == id:
+                break
+
+        return render_template("courses/learning.html", page="Nebulus - " + course.get("name", "Courses"), db=db, course=course, id=id,
+                               user=session.get("username"))
+
+    else:
+        return redirect('/signin')
+@app.route('/courses/<id>/settings')
+def courses_settings(id):
+    if session.get("username") and session.get('password'):
+        courses = db.Accounts.find_one({'username': session.get("username")})["courses"]
+
+        for course in courses:
+            if course.get('_id') == id:
+                break
+
+        return render_template("courses/settings.html", page="Nebulus - " + course.get("name", "Courses"), db=db, course=course, id=id,
+                               user=session.get("username"))
+
+    else:
+        return redirect('/signin')
+@app.route('/courses/<id>/textbook')
+def courses_textbook(id):
+    if session.get("username") and session.get('password'):
+        courses = db.Accounts.find_one({'username': session.get("username")})["courses"]
+
+        for course in courses:
+            if course.get('_id') == id:
+                break
+
+        return render_template("courses/textbook.html", page="Nebulus - " + course.get("name", "Courses"), db=db, course=course, id=id,
+                               user=session.get("username"))
+
+    else:
+        return redirect('/signin')
+@app.route('/courses/<id>/extensions')
+def courses_extensions(id):
+    if session.get("username") and session.get('password'):
+        courses = db.Accounts.find_one({'username': session.get("username")})["courses"]
+
+        for course in courses:
+            if course.get('_id') == id:
+                break
+
+        return render_template("courses/extensions.html", page="Nebulus - " + course.get("name", "Courses"), db=db, course=course, id=id,
+                               user=session.get("username"))
+
+    else:
+        return redirect('/signin')
 @app.route('/')
 def index():
     if session.get("username"):
