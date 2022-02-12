@@ -44,6 +44,7 @@ strong{
 #course-body {
   margin-left: 10%;
   margin-right: 10%;
+  float:left !important;
 }
 
 #homePageBanner{
@@ -395,7 +396,7 @@ details summary {
 #course-body{
   width:80%;
   height:100%;
-  float:left;
+  float:left !important;
 }
 .course_option{
   border-style:block;
@@ -407,14 +408,16 @@ details summary {
   padding-left:5px;
 }
 .course_option:hover{
-  border-color:white;
-  background:black;
-  border-radius:10px;
+  background:rgb(24, 24, 24);
+  border-radius:10px 0px 0px 10px;
 }
 .course_option_selected{
-  border-color:white;
   background:black;
-  border-radius:10px;
+  border-radius:10px 0px 0px 10px;
+}
+.course_option_selected:hover{
+  background:black;
+  border-radius:10px 0px 0px 10px;
 }
 .course-title{
   border-style:block;

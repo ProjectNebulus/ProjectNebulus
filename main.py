@@ -77,7 +77,7 @@ def courses_documents(id):
             if course.get('_id') == id:
                 break
 
-        return render_template("courses/course.html", page="Nebulus - " + course.get("name", "Courses"), db=db, course=course,
+        return render_template("courses/course.html", page="Nebulus - " + course.get("name", "Courses"), db=db, course=course, id=id,
                                user=session.get("username"))
 
     else:
