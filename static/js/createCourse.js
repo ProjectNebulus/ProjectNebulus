@@ -109,7 +109,10 @@ for (var template = 0; template<templates.length; template++) {
 
   var button = document.createElement("span");
   button.className = "button";
-  button.onclick = function() { step2(templates, template) }
+  console.log(templates);
+  console.log(templates[template]);
+  console.log(templates[template].subtemplates);
+  button.onclick = "function() { step2("+templates[template].subtemplates+") }"
   
   var imageSpan = document.createElement("span");
   imageSpan.style.float = "left";
@@ -152,7 +155,7 @@ for (var template = 0; template<templates.length; template++) {
 }
 
 
-function step2(templates, template) {
+function step2(templates) {
   console.log(templates);
   
   screens[0].style.display = "none";
