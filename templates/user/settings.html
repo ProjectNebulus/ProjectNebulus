@@ -40,6 +40,7 @@
         {% else %}
         <h1>Schoology</h1>
         <p>Schoology Account Connected to {{schoologyname}} ({{schoologyemail}})</p>
+        <a href="/logoutSchoology"><button>Disconnect from Schoology</button></a> 
         {% endif %}
         <script>
           $('#connectbtn').on('click', function() {

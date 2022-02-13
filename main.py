@@ -211,6 +211,7 @@ def logout():
     session['password'] = None
     #Schoology
     session['schoologyEmail'] = None
+    session['schoologyName'] = None
     session['token'] = None
     session["request_token"] = None
     session["request_token_secret"] = None
@@ -240,9 +241,9 @@ def loginpost():
   sc = schoolopy.Schoology(auth)
   sc.limit = 10
   print(sc.get_me().name_display)
-  session["name"] = sc.get_me().name_display
+  session["Schoologyname"] = sc.get_me().name_display
   session["Schoologyemail"] = sc.get_me().primary_email
-  db.schoologyLogin(session["email"], request_token, request_token_secret, access_token, access_token_secret, session["Schoologyemail"], session["name"] )
+  db.schoologyLogin(session["email"], request_token, request_token_secret, access_token, access_token_secret, session["Schoologyemail"], session["Schoologyname"] )
 
   return str(sc.get_me().name_display)
 
@@ -400,6 +401,18 @@ def musiqueworld_post():
         youtube = search_yt(songs[0]["track_name"] + " by " + songs[0]["artist_name"])
         return render_template(returned=True, youtube=youtube, resp=resp)
 
-
+@app.route('/logoutSchoology')
+def logout_from_schoology():
+    session['schoologyEmail'] = None
+    session['schoologyName'] = None
+    session['token'] = None
+    session["request_token"] = None
+    session["request_token_secret"] = None
+    session["access_token_secret"] = None
+    session["access_token"] = None
+    print("hi")
+    db.logout_from_schoology(session["username"])
+    print("byee")
+    return redirect('/settings')
 # Running
 serve(app, host='0.0.0.0', port=8080) 

@@ -174,3 +174,17 @@ def schoologyLogin(email, request_token, request_token_secret, access_token, acc
                    }
               }
     Accounts.update_one(query, values)
+def logout_from_schoology(username):
+    query = {"username": username}
+    values = {"$set":
+                  {"schoologyEmail":None,
+                    "schoologyName":None,
+                    "schoology": False,
+                   "Schoology_request_token": None,
+                   "Schoology_request_token_secret": None,
+                   "Schoology_access_token": None,
+                   "Schoology_access_token_secret": None
+                   }
+              }
+    Accounts.update_one(query, values)
+
