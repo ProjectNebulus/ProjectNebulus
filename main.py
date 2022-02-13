@@ -86,10 +86,10 @@ def courses_documents(course_id):
 
         for course in courses:
             if course.get('_id') == course_id:
-                break
-
-        return render_template("courses/documents.html", page="Nebulus - " + course.get("name", "Courses"), db=db, course=course, course_id=course_id,
+                return render_template("courses/documents.html", page="Nebulus - " + course.get("name", "Courses"), db=db, course=course, course_id=course_id,
                                user=session.get("username"))
+
+        
 
     else:
         return redirect('/signin')
@@ -100,10 +100,10 @@ def courses_announcements(course_id):
 
         for course in courses:
             if course.get('_id') == course_id:
-                break
-
-        return render_template("courses/announcements.html", page="Nebulus - " + course.get("name", "Courses"), db=db, course=course, course_id=course_id,
+                return render_template("courses/announcements.html", page="Nebulus - " + course.get("name", "Courses"), db=db, course=course, course_id=course_id,
                                user=session.get("username"))
+
+        
 
     else:
         return redirect('/signin')
@@ -115,10 +115,10 @@ def courses_grades(course_id):
 
         for course in courses:
             if course.get('_id') == course_id:
-                break
-
-        return render_template("courses/grades.html", page="Nebulus - " + course.get("name", "Courses"), db=db, course=course, course_id=course_id,
+                return render_template("courses/grades.html", page="Nebulus - " + course.get("name", "Courses"), db=db, course=course, course_id=course_id,
                                user=session.get("username"))
+
+        
 
     else:
         return redirect('/signin')
@@ -129,10 +129,10 @@ def courses_information(course_id):
 
         for course in courses:
             if course.get('_id') == course_id:
-                break
-
-        return render_template("courses/information.html", page="Nebulus - " + course.get("name", "Courses"), db=db, course=course, course_id=course_id,
+                return render_template("courses/information.html", page="Nebulus - " + course.get("name", "Courses"), db=db, course=course, course_id=course_id,
                                user=session.get("username"))
+
+        
 
     else:
         return redirect('/signin')
@@ -143,10 +143,10 @@ def courses_learning(course_id):
 
         for course in courses:
             if course.get('_id') == course_id:
-                break
-
-        return render_template("courses/learning.html", page="Nebulus - " + course.get("name", "Courses"), db=db, course=course, course_id=course_id,
+                return render_template("courses/learning.html", page="Nebulus - " + course.get("name", "Courses"), db=db, course=course, course_id=course_id,
                                user=session.get("username"))
+
+        
 
     else:
         return redirect('/signin')
@@ -157,10 +157,10 @@ def courses_settings(course_id):
 
         for course in courses:
             if course.get('_id') == course_id:
-                break
-
-        return render_template("courses/settings.html", page="Nebulus - " + course.get("name", "Courses"), db=db, course=course, course_id=course_id,
+                return render_template("courses/settings.html", page="Nebulus - " + course.get("name", "Courses"), db=db, course=course, course_id=course_id,
                                user=session.get("username"))
+
+        
 
     else:
         return redirect('/signin')
@@ -171,10 +171,10 @@ def courses_textbook(course_id):
 
         for course in courses:
             if course.get('_id') == course_id:
-                break
-
-        return render_template("courses/textbook.html", page="Nebulus - " + course.get("name", "Courses"), db=db, course=course, course_id=course_id,
+                return render_template("courses/textbook.html", page="Nebulus - " + course.get("name", "Courses"), db=db, course=course, course_id=course_id,
                                user=session.get("username"))
+
+        
 
     else:
         return redirect('/signin')
@@ -185,10 +185,10 @@ def courses_extensions(course_id):
 
         for course in courses:
             if course.get('_id') == course_id:
-                break
-
-        return render_template("courses/extensions.html", page="Nebulus - " + course.get("name", "Courses"), db=db, course=course, course_id=course_id,
+                return render_template("courses/extensions.html", page="Nebulus - " + course.get("name", "Courses"), db=db, course=course, course_id=course_id,
                                user=session.get("username"))
+
+        
 
     else:
         return redirect('/signin')
