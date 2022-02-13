@@ -1,5 +1,5 @@
-from collections import dataclass
-from teacher import Teacher
+from dataclasses import dataclass, field
+from Folder import Folder
 from typing import List
 from Assignment import Assignment
 from User import User
@@ -20,5 +20,8 @@ class Course:
     name: str
     _id: str
     teacher: str
-    assignments: List[Assignment] = []
+    assignments: List[Assignment] = field(default_factory=list)
     teacherAccount: User = None
+    folders: List[Folder] = field(default_factory=list)
+    imported_from: str = None
+    description: str = None

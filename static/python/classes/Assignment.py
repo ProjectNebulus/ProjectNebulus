@@ -5,7 +5,7 @@ from datetime import datetime
 @dataclass
 class Assignment:
     due: datetime.date
-    description: str = ""
+    description: str = None
     title: str
     _id: int
 

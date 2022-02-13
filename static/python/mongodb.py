@@ -152,18 +152,13 @@ def check_password(email, password):
 
 
 def schoologyLogin(email, request_token, request_token_secret, access_token, access_token_secret):
-  for i in (Accounts.find({})):
-    if i["email"] == email:
-      myquery = { "email": email}
-      newvalues = { "$set": { "schoology": True } }
-      mycol = Accounts
-      mycol.update_one(myquery, newvalues)
-      newvalues = { "$set": { "Schoology_request_token": request_token } }
-      mycol.update_one(myquery, newvalues)
-      newvalues = { "$set": { "Schoology_request_token_secret": request_token_secret } }
-      mycol.update_one(myquery, newvalues)
-      newvalues = { "$set": { "Schoology_access_token": access_token } }
-      mycol.update_one(myquery, newvalues)
+
+    query = { "email": email}
+    values = { "$set":
+                   { "schoology": True,
+                    "Schoology_request_token": request_token,
+                     "Schoology_request_token_secret": request_token_secret,
+                     "Schoology_access_token": access_token } }
       newvalues = { "$set": { "Schoology_access_token_secret": access_token_secret } }
       mycol.update_one(myquery, newvalues)
       

@@ -1,8 +1,9 @@
-from collections import dataclass
+from dataclasses import dataclass, field
 from typing import List
 from Course import Course
 from Avatar import Avatar
 from datetime import datetime
+from Schoology import Schoology
 
 @dataclass
 class User:
@@ -30,7 +31,7 @@ class User:
     username: str
     password: str
     email: str
-    courses: List[Course] = []
+    courses: List[Course] = field(default_factory=list)
     points: int = 0
     avatar: Avatar = None
     bio: str = None
@@ -41,6 +42,7 @@ class User:
     is_staff: bool = False
     student: bool = True
     teacher: bool = False
+    schoology: Schoology = None
 
 
 
