@@ -196,8 +196,7 @@ def courses_extensions(course_id):
 def index():
     if session.get("username"):
         return redirect('/dashboard')
-    else:
-        return render_template("main/index.html", page='Nebulus | Learning, All in One.', user=session.get("username"))
+    return render_template("main/index.html", page='Nebulus | Learning, All in One.', user=session.get("username"))
 
 
 @app.route("/chat")
@@ -290,10 +289,10 @@ def dashboard():
     if not (session.get('username') and session.get('password')):
         print("Not Signed In")
         return redirect('/signin')
-    else:
-        print("Signed In")
-        new_user = request.args.get('new_user', default='false', type=str)
-        return render_template("dashboard.html", user=session["username"], email=session["email"], db=db, page='Nebulus - Dashboard', new_account=new_user == 'true')
+    
+    print("Signed In")
+    new_user = request.args.get('new_user', default='false', type=str)
+    return render_template("dashboard.html", user=session["username"], email=session["email"], db=db, page='Nebulus - Dashboard', new_account=new_user == 'true')
 
 
 @app.route("/about")
@@ -305,9 +304,9 @@ def about():
 def lms():
     if not (session.get('username') and session.get('password')):
         return redirect('/signin')
-    else:
-        new_user = request.args.get('new_user', default='false', type=str)
-        return render_template("lms.html", user=session["username"], db=db, page='Nebulus - Dashboard', new_account=new_user == 'true')
+
+    new_user = request.args.get('new_user', default='false', type=str)
+    return render_template("lms.html", user=session["username"], db=db, page='Nebulus - Dashboard', new_account=new_user == 'true')
 
 
 @app.route("/music")
