@@ -306,12 +306,10 @@ progress[value]::-webkit-progress-value {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;
    overflow: hidden;
 
 
     border-radius: 2px; 
-    background-size: 35px 20px, 100% 100%, 100% 100%;
 }
 
 input[type=file]{
@@ -324,9 +322,7 @@ input[type=file]{
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;
    overflow: hidden;
-  color:black;
   border-style:none;
   border-radius:10px;
   font-size:1.5vw;
@@ -343,9 +339,7 @@ input[type=file]{
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;
    overflow: hidden;
-  color:black;
   border-style:none;
   border-radius:10px;
   font-size:1.5vw;
