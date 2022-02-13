@@ -3,6 +3,7 @@ from Folder import Folder
 from typing import List
 from Assignment import Assignment
 from User import User
+from Grades import Grades
 
 
 @dataclass
@@ -25,3 +26,4 @@ class Course:
     folders: List[Folder] = field(default_factory=list)
     imported_from: str = None
     description: str = None
+    grades: Grades = None
