@@ -249,7 +249,11 @@ def loginpost():
 
 @app.route('/settings')
 def settings():
+    if not (session.get('username') and session.get('password')):
+          print("Not Signed In")
+          return redirect('/signin')
     #Schoology Info
+    
     import schoolopy
     key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
     secret = "59ccaaeb93ba02570b1281e1b0a90e18"
