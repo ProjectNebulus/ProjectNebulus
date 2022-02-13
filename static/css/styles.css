@@ -278,20 +278,7 @@ progress[value] {
   height: 20px;
 }
 
-progress[value]::-webkit-progress-value {
-  background: no-repeat center center fixed;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://wallpapercave.com/wp/wp2742875.jpg) !important; 
-  background-size: 100% auto;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-   overflow: hidden;
-
-
-    border-radius: 2px; 
-}
-
-input[type=file], #labelfile {
+input[type=file], #labelfile, progress[value]::-webkit-progress-value {
   color:white;
   padding:20px;
   margin:10px;
