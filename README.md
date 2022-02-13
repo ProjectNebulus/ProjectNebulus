@@ -1,5 +1,7 @@
 # Project Nebulus
 
+[![CodeFactor](https://www.codefactor.io/repository/github/projectnebulus/projectnebulus/badge/main?s=984a8cc42046715d68584c438c428701c76bc2e9)](https://www.codefactor.io/repository/github/projectnebulus/projectnebulus/overview/main)
+
 ## Table of Contents
 
 - [Setup (normal)](#setup-normal)
