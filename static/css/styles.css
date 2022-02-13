@@ -163,12 +163,12 @@ hr {
   border-width: 0;
   color: white;
   background-color: white;
-  margin: 2px 0px;
+  margin: 2px 0;
   width: 100%;
 }
 
 nav {
-  margin: 0px;
+  margin: 0;
   padding: 20px 10px 10px 20px;
   height: 50px;
   /*background: rgba(0,0,0,0.3);*/
@@ -229,7 +229,7 @@ details div:hover {
 }
 
 #chat_options {
-  margin: 0px;
+  margin: 0;
   width: calc(100% - 80px); /*Padding*/
   padding:40px;
   padding-top:40px;
@@ -397,20 +397,20 @@ details summary {
   padding-bottom:10px;
   margin-left:10px;
   border: 1px solid transparent;
-  border-width:1px 0px 1px 1px;
+  border-width:1px 0 1px 1px;
   padding-left:5px;
 }
 .course_option:hover{
   background:rgb(24, 24, 24);
-  border-radius:10px 0px 0px 10px;
+  border-radius:10px 0 0 10px;
 }
 .course_option_selected{
   background:black;
-  border-radius:10px 0px 0px 10px;
+  border-radius:10px 0 0 10px;
 }
 .course_option_selected:hover{
   background:black;
-  border-radius:10px 0px 0px 10px;
+  border-radius:10px 0 0 10px;
 }
 .course-title{
   border-style:block;
