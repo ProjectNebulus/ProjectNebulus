@@ -32,7 +32,7 @@
         <button>Authorize Canvas</button>
         {% if not db.CheckSchoology(session.get('username')) %}
         <h3>Schoology</h3>
-        <p>You log onto Schoology with this link: <input style="background:grey;width:200px;" type="text" value="app" id="schooldomain">.schoology.com/</p>
+        <p>You log onto Schoology with this link: <input style="background:grey;width:64px !important;" type="text" value="app" id="schooldomain" onkeypress="this.style.width = ((this.value.length + 5) * 8) + 'px';">.schoology.com/</p>
         <button id = "auth" onclick="AuthorizeSchoology()" class="button">Authorize Schoology</button>
         <br>
         <button style="display:none;" id="connectbtn" class="button">Confirm Connect Schoology Account</button>

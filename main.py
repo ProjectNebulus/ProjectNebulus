@@ -31,6 +31,7 @@ check_user_params = True
 @app.route("/closeSchoology")
 def close():
     session['token'] = request.args.get("oauth_token")
+    print("I was here :walk:")
     return "<script>window.close();</script>"
 
 @app.route("/createCourse", methods=["POST"])
@@ -264,7 +265,8 @@ def settings():
 
     auth = schoolopy.Auth(key, secret, three_legged=True, domain=DOMAIN)
     # Request authorization URL to open in another window.
-    url = auth.request_authorization(request.url_root + "/closeSchoology")
+    print(request.url_root + "closeSchoology")
+    url = auth.request_authorization(request.url_root + "closeSchoology")
     session["request_token"] = auth.request_token
     session["request_token_secret"] = auth.request_token_secret
     session["access_token_secret"] = auth.access_token_secret
