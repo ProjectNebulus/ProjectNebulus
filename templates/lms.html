@@ -116,7 +116,10 @@
               <p>Type the <b>your-section-id</b> into the box above!
               
               {% else %}
-              <p>Connect your Schoology account <a href="/settings">here</a>!
+              <div id="connect-schoology">
+                <span class="material-icons-outlined">error</span>
+                <span>You must <a href="/settings">connect your Schoology account</a> to perform this action!</span>
+              </div>
               {% endif %}
           </div>
         </div>

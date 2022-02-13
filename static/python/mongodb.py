@@ -44,12 +44,9 @@ def generateSchoologyObject(username):
 def CheckSchoology(username):
     for account in Accounts.find({}):
         if username == account["username"]:
-            if "schoology" not in account.keys():
-                return False
-            if account["schoology"] == True:
-                return True
-            else:
-                return False
+            return bool(account.get("schoology"))
+
+    return False
 
 
 def create_course(course_name, course_teacher, template, username):

@@ -33,6 +33,20 @@
   -webkit-animation-fill-mode: forwards;
 }
 
+#connect-schoology {
+  background: #EC7063;
+  border: 3px solid red;
+  color: black;
+  font-size: 1vw;
+  padding: 10px 50px 10px 50px;
+  width: 60%;
+  border-radius: 10px;
+}
+
+#connect-schoology a {
+  color: #5499C7;
+}
+
 h1 {
   font-size: 1.75vw;
 }
