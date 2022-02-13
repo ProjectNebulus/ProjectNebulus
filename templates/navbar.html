@@ -1,9 +1,9 @@
 {% if not disablebar %}
-  <nav style="margin-top:15px !important;margin-bottom: 15px !important;padding-top:10px !important;padding-bottom:30px !important;margin-left: 10% !important;margin-right: 10% !important;width:80%;height:5%;float:left; background-color:#00000090; position: relative;z-index:1;padding:0px;border-radius:15px;">
+  <nav style="margin-top:15px !important;margin-bottom: 15px !important;padding-top:10px !important;padding-bottom:30px !important;margin-left: 10% !important;margin-right: 10% !important;width:80%;height:5%;float:left; background-color:#00000090; position: relative;z-index:1;padding:0;border-radius:15px;">
 
     <span>
       <br>
-      <a href="/"><img src="static/images/logo.png" style="height:6vh;margin:0px; vertical-align:middle;"></a>
+      <a href="/"><img src="static/images/logo.png" style="height:6vh;margin:0; vertical-align:middle;"></a>
       {% if user %}
       <a href="/dashboard">Dashboard</a>
       <a href="/lms">Learning</a>
@@ -30,7 +30,7 @@
         {% if developer %}
         <button>New Application</button>
         {% endif %}
-      <span style="margin-top:20px;padding: 10px 5px 10px 5px;background:rgba(0, 255, 0, 0.2);border-radius:10px;float:right">Welcome to Nebulus, {{user}}</span>
+      <span style="margin-top:20px;padding: 10px 5px;background:rgba(0, 255, 0, 0.2);border-radius:10px;float:right">Welcome to Nebulus, {{user}}</span>
       {% endif %}
       <details style="float:right;margin:30px 20px 30px 5px;text-align:right">
         <summary>
