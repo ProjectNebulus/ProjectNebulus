@@ -9,20 +9,41 @@ regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
 client = pymongo.MongoClient(os.environ['MONGO'])
 db = client.Nebulus
 Accounts = db.Accounts
-ids = db.course_ids
+courses = db.Courses
+
+def find_courses(username):
+    output = []
+    courseIds = Accounts.find_one({"username": username}).get("courses")
+
+    for course in courses.find():
+        if course.get("_id") in courseIds:
+            output.append(course)
+
+    return output
+
 
 def create_course(course_name, course_teacher, template, username):
-  rand_id = hex(random.randint(0, 1000000))
-  while (ids.find_one({"_id": rand_id}) != None):
-    rand_id = hex(random.randint(0,1000000))
-  Accounts.update_one({'username': username}, {'$push': {'courses': {
-    "name": course_name,
-    "teacher": course_teacher,
-    "owner": username,
-    "_id": rand_id
-  }}})
-  ids.insert_one({'_id': rand_id})
-  print('course created')
+    rand_id = hex(random.randint(10**5, 10**10))
+
+    duplicate = True
+    while duplicate:
+        duplicate = False
+
+        for course in courses.find():
+            if course.get("_id") == rand_id:
+                duplicate = True
+                rand_id = hex(random.randint(10**5, 10**10))
+
+    Accounts.update_one({"username": username}, {"$push": {"courses": rand_id}})
+    courses.insert_one({
+        "name": course_name,
+        "teachers": [course_teacher],
+        "students": [],
+        "materials": [],
+        "owner": username
+    })
+    
+    print('course created')
 
 
 def create_user(username, email, password):

@@ -4,19 +4,19 @@
       {
         "id": "e188b25f-7862-4e96-a513-b98d3ddf3943",
         "line": 1,
-        "version": 10663,
+        "version": 1752,
         "index": 0
       },
       {
         "id": "1a96932e-ecb0-4cdb-8de1-01e6d9931860",
         "line": 1,
-        "version": 10663,
+        "version": 1752,
         "index": 0
       },
       {
         "id": "a3c66d9f-84f6-457a-87eb-984f8779b063",
         "line": 1,
-        "version": 10663,
+        "version": 1752,
         "index": 0
       }
     ],
@@ -24,13 +24,13 @@
       {
         "id": "b36c8974-2de7-4a05-b62e-91fbb4c7437f",
         "line": 2,
-        "version": 5779,
+        "version": 850,
         "index": 116
       },
       {
         "id": "1284458e-185e-4fbf-b2db-e2da291b2c55",
         "line": 2,
-        "version": 5779,
+        "version": 850,
         "index": 116
       }
     ],
@@ -38,15 +38,15 @@
       {
         "id": "dcc346d6-cbc7-4d3c-b105-2340fff55f8b",
         "line": 2,
-        "version": 29,
-        "index": 4
+        "version": 1,
+        "index": 6
       }
     ],
     "static/python/mongodb.py": [
       {
         "id": "8a80265e-92f5-46e8-9d9c-e270e78d046a",
         "line": 2,
-        "version": 4508,
+        "version": 2315,
         "index": 20
       }
     ],
@@ -54,16 +54,16 @@
       {
         "id": "23ec76f8-cb00-499c-8e37-7c42c82def8c",
         "line": 2,
-        "version": 1176,
-        "index": 27
+        "version": 531,
+        "index": 21
       }
     ],
     "templates/lms.html": [
       {
         "id": "24fbf8ca-eff8-484f-8ea2-dbe3cc861b90",
-        "line": 119,
-        "version": 1050,
-        "index": 4335
+        "line": 124,
+        "version": 2514,
+        "index": 5273
       }
     ],
     "templates/login.html": [

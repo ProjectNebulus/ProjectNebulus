@@ -40,12 +40,6 @@ function createCourse(subtemplate) {
   const xhttp = new XMLHttpRequest();
   xhttp.open('POST', '/createCourse', true);
   xhttp.setRequestHeader('Content-type', 'application/json');
-  if (document.getElementById("course-name").value == "") {
-    document.getElementById("course-name").value = subtemplate
-  }
-  if (document.getElementById("course-teacher").value == "") {
-    document.getElementById("course-teacher").value = courseTeacher.placeholder
-  }
   xhttp.send(
     JSON.stringify({
         name: document.getElementById("course-name").value,
@@ -104,15 +98,12 @@ var templates = [
   }
 ]
 
-for (var template = 0; template<templates.length; template++) {
-  const t = templates[template];
+for (var template of templates) {
+  const t = template;
 
   var button = document.createElement("span");
   button.className = "button";
-  console.log(templates);
-  console.log(templates[template]);
-  console.log(templates[template].subtemplates);
-  button.onclick = "function() { step2("+templates[template].subtemplates+") }"
+  button.onclick = function() { step2(t) }
   
   var imageSpan = document.createElement("span");
   imageSpan.style.float = "left";
@@ -121,13 +112,13 @@ for (var template = 0; template<templates.length; template++) {
   image.style.float = "right";
   image.height = 20;
   image.width = 20;
-  image.src = "static/images/icons/" + templates[template].icon;
+  image.src = "static/images/icons/" + template.icon;
   imageSpan.appendChild(image);
 
   button.appendChild(imageSpan);
 
   var templateName = document.createElement("span");
-  templateName.innerHTML = templates[template].name;
+  templateName.innerHTML = template.name;
   button.appendChild(templateName);
   
   var next = document.createElement("span");
@@ -145,8 +136,8 @@ for (var template = 0; template<templates.length; template++) {
   description.style.fontSize = "0.8em";
   description.innerHTML = "Subtemplates: ";
 
-  for (var subtemplate of templates)
-    description.innerHTML += subtemplate.name + ", ";
+  for (var subtemplate of template.subtemplates)
+    description.innerHTML += subtemplate + ", ";
   description.innerHTML = description.innerHTML.substring(0, description.innerHTML.length - 2)
 
   button.appendChild(description);
@@ -155,20 +146,18 @@ for (var template = 0; template<templates.length; template++) {
 }
 
 
-function step2(templates) {
-  console.log(templates);
-  
+function step2(template) {
   screens[0].style.display = "none";
   screens[1].style.display = "block";
 
   divs[1].innerHTML = "";
   var count = 0;
-  for (var subtemplate = 0; subtemplate < templates.length; subtemplate++) {  
+  for (var subtemplate of template.subtemplates) {  
     var button = document.createElement("span");
     button.className = "button";
     button.onclick = function() {
-      const subtemplateName = templates[subtemplate].name;
-      const name = templates[subtemplate].name;
+      const subtemplateName = subtemplate;
+      const name = template.name;
       step3(name, subtemplateName) 
     }
     
@@ -179,13 +168,13 @@ function step2(templates) {
     image.style.float = "right";
     image.height = 20;
     image.width = 20;
-    image.src = "static/images/icons/" + templates[subtemplate].icon;
+    image.src = "static/images/icons/" + template.icon;
     imageSpan.appendChild(image);
 
     button.appendChild(imageSpan);
 
     var templateName = document.createElement("span");
-    templateName.innerHTML = templates[subtemplate].name;
+    templateName.innerHTML = subtemplate;
     button.appendChild(templateName);
     
     var next = document.createElement("span");
@@ -208,4 +197,11 @@ function step3(template, subtemplate) {
   courseTeacher.placeholder = user;
 
   document.getElementById("create-course").onsubmit = function() { createCourse(subtemplate); }
+
+  document.getElementById("import-schoology").onclick = step4;
+}
+
+function step4() {
+    screens[2].style.display = "none";
+    screens[3].style.display = "block";
 }
