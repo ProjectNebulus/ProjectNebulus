@@ -8,14 +8,14 @@ window.addEventListener('load', function () {
     submit.disabled = true;
     submit.style.color = 'gray';
     submit.style.backgroundColor = '#006097';
-    function launch_SSO(){
-      document.getElementById("signin_form").style.display = "none";
-    }
+    // function launch_SSO(){
+    //   document.getElementById("signin_form").style.display = "none";
+    // }
     function checkValidUsername() {
         var response = document.getElementsByClassName("response")[0]
         response.innerHTML = '<span class="material-icons-outlined" style="color:lightgray;">pending</span>';
 
-        let status = document.getElementById('fail');
+        // let status = document.getElementById('fail');
 
         if (document.getElementById('usrname').value === '') {
             response.innerHTML = '<i class="material-icons" style="color:red;">error</i>';
@@ -124,20 +124,20 @@ function enableButton() {
 
 setInterval(enableButton, 200);
 
-function loginUser() {
-    let password = document.getElementById('psw').value;
-    let username = document.getElementById('usrname').value;
+// function loginUser() {
+//     let password = document.getElementById('psw').value;
+//     let username = document.getElementById('usrname').value;
 
-    const xhttp = new XMLHttpRequest();
-    xhttp.open('POST', '/signin', true);
-    xhttp.setRequestHeader('Content-type', 'application/json');
-    xhttp.addEventListener('load', reqListener3);
-    xhttp.send(
-        JSON.stringify({
-            password: password
-        }
-    ));
-}
+//     const xhttp = new XMLHttpRequest();
+//     xhttp.open('POST', '/signin', true);
+//     xhttp.setRequestHeader('Content-type', 'application/json');
+//     xhttp.addEventListener('load', reqListener3);
+//     xhttp.send(
+//         JSON.stringify({
+//             password: password
+//         }
+//     ));
+// }
 
 function reqListener3() {
     if (this.responseText === 'success') {
