@@ -113,5 +113,4 @@ function reqListener() {
     submit.disabled = false;
     submit.style.color = 'white';
     submit.style.backgroundColor = '#00a2ff';
-
 }

@@ -12,16 +12,16 @@ window.addEventListener('load', function () {
     //   document.getElementById("signin_form").style.display = "none";
     // }
     function checkValidUsername() {
-        var response = document.getElementsByClassName("response")[0]
-        response.innerHTML = '<span class="material-icons-outlined" style="color:lightgray;">pending</span>';
+        var response = document.getElementsByClassName('response')[0];
+        response.innerHTML =
+            '<span class="material-icons-outlined" style="color:lightgray;">pending</span>';
 
         // let status = document.getElementById('fail');
 
         if (document.getElementById('usrname').value === '') {
             response.innerHTML = '<i class="material-icons" style="color:red;">error</i>';
-            return false; 
-        } 
-        else {
+            return false;
+        } else {
             let username = document.getElementById('usrname').value;
             const xhttp = new XMLHttpRequest();
             xhttp.open('POST', '/signin_username', true);
@@ -32,13 +32,13 @@ window.addEventListener('load', function () {
                     username: username
                 })
             );
-
         }
     }
 
     function checkValidPassword() {
-        var response = document.getElementsByClassName("response")[1]
-        response.innerHTML = '<span class="material-icons-outlined" style="color:lightgray;">pending</span>';
+        var response = document.getElementsByClassName('response')[1];
+        response.innerHTML =
+            '<span class="material-icons-outlined" style="color:lightgray;">pending</span>';
 
         if (document.getElementById('psw').value === '') {
             response.innerHTML = '<i class="material-icons" style="color:red;">error</i>';
@@ -65,11 +65,11 @@ window.addEventListener('load', function () {
         }
     }
 
-    document.getElementById('usrname').onkeyup = function() {
+    document.getElementById('usrname').onkeyup = function () {
         lastKeyUpTime = Date.now();
         recheck = true;
     };
-    document.getElementById('psw').onkeyup = function() {
+    document.getElementById('psw').onkeyup = function () {
         lastKeyUpTime = Date.now();
         recheck = true;
     };
@@ -85,17 +85,15 @@ function reqListener1() {
         response.style.color = 'green';
         response.innerHTML = '<i class="material-icons">check_circle</i>';
         validUser = true;
-    } 
-    else if (this.responseText === 'false') {
+    } else if (this.responseText === 'false') {
         response.style.color = 'red';
         response.innerHTML = '<i class="material-icons">error</i>';
         validUser = false;
     }
-
 }
 
 function reqListener2() {
-    var response = document.getElementsByClassName("response")[1];
+    var response = document.getElementsByClassName('response')[1];
 
     // TODO(kev): switch case
     if (this.responseText === 'true') {
@@ -111,7 +109,7 @@ function reqListener2() {
 
 function enableButton() {
     let submit = document.getElementById('log_in');
-    if (validUser && validPass){
+    if (validUser && validPass) {
         submit.disabled = false;
         submit.style.color = 'white';
         submit.style.backgroundColor = '#00a2ff';
@@ -142,7 +140,6 @@ setInterval(enableButton, 200);
 function reqListener3() {
     if (this.responseText === 'success') {
         window.location.href = '/dashboard';
-
     } else {
         let fail = document.getElementById('fail');
         fail.style.color = 'red';

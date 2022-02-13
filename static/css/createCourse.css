@@ -1,179 +1,190 @@
 /* The Modal (background) */
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 2; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 2; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
 /* Modal Content */
 
 .CourseBtn {
-  background-color: black;
-  margin: auto;
-  margin-top: 5%;
-  margin-left: 25%;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 50%;
-  height: 70%;
-  color:white;
-  border-radius:10px;
-  animation: movein 0.5s;
-  position: absolute;
-  top: -1000px;
-  animation-fill-mode: forwards;
-  -webkit-animation-fill-mode: forwards;
+    background-color: black;
+    margin: auto;
+    margin-top: 5%;
+    margin-left: 25%;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    height: 70%;
+    color: white;
+    border-radius: 10px;
+    animation: movein 0.5s;
+    position: absolute;
+    top: -1000px;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
 }
 
 #connect-schoology {
-  background: #EC7063;
-  border: 3px solid red;
-  color: black;
-  font-size: 1vw;
-  padding: 10px 50px;
-  width: 60%;
-  border-radius: 10px;
+    background: #ec7063;
+    border: 3px solid red;
+    color: black;
+    font-size: 1vw;
+    padding: 10px 50px;
+    width: 60%;
+    border-radius: 10px;
 }
 
 #connect-schoology a {
-  color: #5499C7;
+    color: #5499c7;
 }
 
 h1 {
-  font-size: 1.75vw;
+    font-size: 1.75vw;
 }
 
 label {
-  font-size: 1.25vw;
-  font-weight: 700;
-  color: lightgray;
-  float: left;
+    font-size: 1.25vw;
+    font-weight: 700;
+    color: lightgray;
+    float: left;
 }
 
-input[type=submit] {
-  color: white;
-  font-size: 1.25vw;
+input[type='submit'] {
+    color: white;
+    font-size: 1.25vw;
 }
 
-#create, #join {
-  background: black;
-  cursor: pointer;
-  vertical-align: middle;
-  border-radius: 3px;
-  padding: 5px;
+#create,
+#join {
+    background: black;
+    cursor: pointer;
+    vertical-align: middle;
+    border-radius: 3px;
+    padding: 5px;
 }
 
-.button, button {
-  font-size: 1.25vw;
-  color: white;
+.button,
+button {
+    font-size: 1.25vw;
+    color: white;
 }
 
 #join-hover {
-  display: none;
-  z-index: 1;
-  background: black;
-  padding: 3px;
-  font-size: 1.05em;
+    display: none;
+    z-index: 1;
+    background: black;
+    padding: 3px;
+    font-size: 1.05em;
 }
 
 #join:hover #join-hover {
-  display: block;
+    display: block;
 }
 
 #course-nav {
-  z-index: 1;
-  float: right;
-  margin-right: 75px;
+    z-index: 1;
+    float: right;
+    margin-right: 75px;
 }
 
-#create:hover, #join:hover {
-  background: gray;
+#create:hover,
+#join:hover {
+    background: gray;
 }
 
 .close {
-  float: right;
-  cursor: pointer;
-  border-radius: 3px;
-  padding: 5px;
+    float: right;
+    cursor: pointer;
+    border-radius: 3px;
+    padding: 5px;
 }
 
 .close:hover {
-  background: gray;
+    background: gray;
 }
 
 @keyframes movein {
-  from {top: -1000px;}
-  to {top: 0;}
+    from {
+        top: -1000px;
+    }
+    to {
+        top: 0;
+    }
 }
 
 @webkit-keyframes movein {
-  from {top: -1000px;}
-  to {top: 0;}
+    from {
+        top: -1000px;
+    }
+    to {
+        top: 0;
+    }
 }
 
-.image{
-	width:20px;
-  height:20px;
-  border-radius:0%;
-  margin-right:10px;
+.image {
+    width: 20px;
+    height: 20px;
+    border-radius: 0%;
+    margin-right: 10px;
 }
 
-button{
-	padding:10px;
-  background:black;
-  border-style:none;
-  color:white;
-  border-radius:5px;
-  cursor: pointer;
+button {
+    padding: 10px;
+    background: black;
+    border-style: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-button:hover{
-  padding:10px;
-  background:grey;
-  border-style:none;
-  color:white;
-  border-radius:5px;
+button:hover {
+    padding: 10px;
+    background: grey;
+    border-style: none;
+    color: white;
+    border-radius: 5px;
 }
 
-.button{
-	font-size:20px;
-  color:white;
-  padding:10px;
-  border-radius:5px;
-  border-style:solid;
-  border-width:1px;
-  border-color:#bababa;
-  display: inline-block;
-  margin-bottom:10px;
-  width:500px;
-  cursor: pointer;
-  background:black !important;
+.button {
+    font-size: 20px;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #bababa;
+    display: inline-block;
+    margin-bottom: 10px;
+    width: 500px;
+    cursor: pointer;
+    background: black !important;
 }
 
-.button:hover{
-	background:#4f4f4f !important; 
+.button:hover {
+    background: #4f4f4f !important;
 }
 
 .scroll {
-  height:380px;
-  overflow:scroll;
+    height: 380px;
+    overflow: scroll;
 }
 
 ::-webkit-scrollbar {
-  width: 7px;
-  background-color: rgba(50, 50, 50, 0.5);
-  border-radius: 4px;
+    width: 7px;
+    background-color: rgba(50, 50, 50, 0.5);
+    border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  border-radius: 4px;
-  background-color: rgba(100, 100, 100, .5);
+    border-radius: 4px;
+    background-color: rgba(100, 100, 100, 0.5);
 }
