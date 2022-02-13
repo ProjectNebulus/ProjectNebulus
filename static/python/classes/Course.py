@@ -17,6 +17,11 @@ class Course:
     :optional params:
         - assignments: A list of Assignment Objects for the course. Default: []
         - teacherAccount: The account of the teacher. Default: None (Because some teachers may not have an account)
+        - imported_from: The LMS this course was imported from. Default: None
+        - folders: A list of Folder Objects for the course. Default: []
+        - description: The course description. Default: None
+        - grades: A Grades Object for the course. Represents the user's grades. Default: None
+
     """
     name: str
     _id: str

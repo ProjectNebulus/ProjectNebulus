@@ -26,6 +26,7 @@ class User:
         - premium: Whether the user has a premium subscription. Default: False
         - premium_expiration: The date of expiration of the premium subscription. Default: None
         - status: The status of the user. Default: None
+        - schoology: The user's schoology account information. Default: None
     """
     _id: int
     username: str

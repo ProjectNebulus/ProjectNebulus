@@ -6,6 +6,10 @@ from Document import Document
 class Folder:
     """
     A class that represents a Folder of Documents
+    :params:
+        name: The name of the folder
+        documents: A list of Document objects inside the folder
+        _id: The id of the folder
     """
     name: str
     documents: List[Document]
