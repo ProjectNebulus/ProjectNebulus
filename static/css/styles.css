@@ -52,8 +52,8 @@ strong{
   padding:40px;
   padding-top:5px;
   padding-bottom:200px;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://wallpaperaccess.com/full/39608.jpg) !important; 
   background: no-repeat center center fixed;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://wallpaperaccess.com/full/39608.jpg) !important; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -66,8 +66,8 @@ strong{
   width: calc(100% - 80px); /*Padding*/
   padding:40px;
   padding-top:90px;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://wallpapercave.com/wp/wp2742875.jpg) !important; 
   background: no-repeat center center fixed;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://wallpapercave.com/wp/wp2742875.jpg) !important; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -163,7 +163,7 @@ hr {
   border-width: 0;
   color: white;
   background-color: white;
-  margin: 2px 0px 2px 0px;
+  margin: 2px 0px;
   width: 100%;
 }
 
@@ -300,8 +300,8 @@ progress[value] {
 }
 
 progress[value]::-webkit-progress-value {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://wallpapercave.com/wp/wp2742875.jpg) !important; 
   background: no-repeat center center fixed;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://wallpapercave.com/wp/wp2742875.jpg) !important; 
   background-size: 100% auto;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -318,9 +318,8 @@ input[type=file]{
   color:white;
   padding:20px;
   margin:10px;
-  
-  background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://wallpaperaccess.com/full/39608.jpg) !important; 
   background: no-repeat center center fixed;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://wallpaperaccess.com/full/39608.jpg) !important; 
   background-size: 100% auto;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -338,9 +337,8 @@ input[type=file]{
   color:white !important;
   padding:20px;
   margin:10px;
-  
-  background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://wallpaperaccess.com/full/39608.jpg) !important; 
   background: no-repeat center center fixed;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://wallpaperaccess.com/full/39608.jpg) !important; 
   background-size: 100% auto;
   -webkit-background-size: cover;
   -moz-background-size: cover;
