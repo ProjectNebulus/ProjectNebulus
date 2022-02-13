@@ -14,10 +14,10 @@ class User:
         - username: The username of the user.
         - password: The password of the user.
         - email: The email of the user.
+        - created_at: The date of creation of the user. Takes a datetime.DateTime object.
     :optional params:
         - courses: The courses of the user. Default: []
         - avatar: The avatar of the user. Default: None
-        - created_at: The date of creation of the user. Default: datetime.now()
         - is_staff: Whether the user is a staff member. Default: False
         - student: Whether the user is a student. Default: True
         - teacher: Whether the user is a teacher. Default: False
@@ -32,6 +32,7 @@ class User:
     username: str
     password: str
     email: str
+    created_at: datetime.DateTime
     courses: List[Course] = field(default_factory=list)
     points: int = 0
     avatar: Avatar = None
@@ -39,7 +40,6 @@ class User:
     premium: bool = False
     premium_expiration: datetime.date = None
     status: str = None
-    created_at: datetime.DateTime = datetime.now()
     is_staff: bool = False
     student: bool = True
     teacher: bool = False

@@ -9,7 +9,7 @@ class Folder:
     :params:
         name: The name of the folder
         documents: A list of Document objects inside the folder
-        _id: The id of the folder
+        _id: The folder's unique identifier
     """
     name: str
     documents: List[Document]
