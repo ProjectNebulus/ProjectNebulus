@@ -38,7 +38,7 @@
   border: 3px solid red;
   color: black;
   font-size: 1vw;
-  padding: 10px 50px 10px 50px;
+  padding: 10px 50px;
   width: 60%;
   border-radius: 10px;
 }
@@ -111,12 +111,12 @@ input[type=submit] {
 
 @keyframes movein {
   from {top: -1000px;}
-  to {top: 0px;}
+  to {top: 0;}
 }
 
 @webkit-keyframes movein {
   from {top: -1000px;}
-  to {top: 0px;}
+  to {top: 0;}
 }
 
 .image{
