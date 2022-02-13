@@ -26,12 +26,14 @@ def generateSchoologyObject(username):
   for i in Accounts.find({}):
     if i["username"] == username:
       import schoolopy
-      auth = schoolopy.Auth(key, secret, domain='https://bins.schoology.com', three_legged=True,
-                    request_token=request_token, request_token_secret=request_token_secret, access_token=access_token, access_token_secret=access_token_secret)
-   
-        a = auth.authorized 
-        sc = schoolopy.Schoology(auth)
-        sc.limit = 10
+      request_token = i["Schoology_request_token"]
+      request_token_secret = i["Schoology_request_token_secret"]
+      access_token = i["Schoology_accesstoken"]
+      access_token_secret = i["Schoology_access_token_secret"]
+      auth = schoolopy.Auth(key, secret,domain='https://bins.schoology.com', three_legged=True,request_token=request_token, request_token_secret=request_token_secret, access_token=access_token, access_token_secret=access_token_secret)
+      a = auth.authorized 
+      sc = schoolopy.Schoology(auth)
+      sc.limit = 10
 def CheckSchoology(username):
   for account in Accounts.find({}):
     if username == account["username"]:
