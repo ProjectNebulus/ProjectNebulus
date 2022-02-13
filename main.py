@@ -9,6 +9,16 @@ from static.python.spotify import status as spotifystatus
 from static.python.youtube import search_yt
 import os
 import re
+from static.python.schoology import getcourse
+from waitress import serve
+import schoolopy
+
+key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
+secret = "59ccaaeb93ba02570b1281e1b0a90e18"
+
+sc = schoolopy.Schoology(schoolopy.Auth(key, secret))
+getcourse(5131176032, sc)
+
 
 regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
 # Variables
@@ -383,4 +393,4 @@ def musiqueworld_post():
 
 
 # Running
-app.run(host='0.0.0.0', port=8080)
+serve(app, host='0.0.0.0', port=8080) 
