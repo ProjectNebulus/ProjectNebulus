@@ -266,7 +266,7 @@ def settings():
     session["access_token"] = auth.access_token
 
     # Open OAuth authorization webpage. Give time to authorize.
-    return render_template("user/settings.html", page='Nebulus - Account Settings', session=session, user=session.get("username"), schoologyURL = url)
+    return render_template("user/settings.html", page='Nebulus - Account Settings', session=session, user=session.get("username"), schoologyURL = url, db=db)
 
 
 @app.route('/dashboard')
