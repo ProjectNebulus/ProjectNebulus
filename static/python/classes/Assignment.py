@@ -21,5 +21,3 @@ class Assignment:
     _id: int
     points: int = 100
 
-
-
