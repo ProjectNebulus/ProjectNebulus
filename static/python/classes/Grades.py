@@ -45,8 +45,7 @@ class Grades:
         self.grades_list.sort()
         if len(self.grades_list) % 2 == 0:
             return (self.grades_list[int(len(self.grades_list) / 2)] + self.grades_list[int(len(self.grades_list) / 2) - 1]) / 2
-        else:
-            return self.grades_list[int(len(self.grades_list) / 2)]
+        return self.grades_list[int(len(self.grades_list) / 2)]
 
     def get_mode(self):
         mode = []
