@@ -45,8 +45,7 @@ strong{
   color: white;
 }
 
-
-#homePageBanner{
+#homePageBanner, #mvBanner{
   margin:0; /* No borders for the image*/
   width: calc(100% - 80px); /*Padding*/
   padding:40px;
@@ -62,17 +61,7 @@ strong{
 }
 
 #mwBanner{
-  margin:0; /* No borders for the image*/
-  width: calc(100% - 80px); /*Padding*/
-  padding:40px;
   padding-top:90px;
-  background: no-repeat center center fixed;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://wallpapercave.com/wp/wp2742875.jpg) !important; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-   overflow: hidden;
 }
 
 #with-image {
@@ -213,7 +202,7 @@ details div:hover {
   border-color:grey;
 }
 
-.col1, .col2 {
+.col1, .col2, #chatoptions {
   margin:0; /* No borders for the image*/
 
   width: calc(100% - 80px); /*Padding*/
@@ -226,16 +215,6 @@ details div:hover {
 
 .col2 {
   background: #EEE;
-}
-
-#chat_options {
-  margin: 0;
-  width: calc(100% - 80px); /*Padding*/
-  padding:40px;
-  padding-top:40px;
-  padding-bottom:90px;
-  background: white;
-  color:black;
 }
 
 #signupbody{
@@ -312,25 +291,8 @@ progress[value]::-webkit-progress-value {
     border-radius: 2px; 
 }
 
-input[type=file]{
+input[type=file], #labelfile {
   color:white;
-  padding:20px;
-  margin:10px;
-  background: no-repeat center center fixed;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://wallpaperaccess.com/full/39608.jpg) !important; 
-  background-size: 100% auto;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-   overflow: hidden;
-  border-style:none;
-  border-radius:10px;
-  font-size:1.5vw;
-  font-family: 'Lato', sans-serif;
-}
-
-#labelfile {
-  color:white !important;
   padding:20px;
   margin:10px;
   background: no-repeat center center fixed;
@@ -384,6 +346,7 @@ details summary {
   float:left !important;
   background-color: rgb(15 23 42);
 }
+
 #course-body{
   width:calc(100% - 220px);
   height:100%;
@@ -391,6 +354,7 @@ details summary {
   padding-left:20px;
   background-color: rgb(17 24 39);
 }
+
 .course_option{
   border-style:block;
   padding-top:10px;
@@ -400,18 +364,12 @@ details summary {
   border-width:1px 0 1px 1px;
   padding-left:5px;
 }
-.course_option:hover{
+
+.course_option:hover, .course_option_selected, .course_option_selected:hover {
   background:rgb(24, 24, 24);
   border-radius:10px 0 0 10px;
 }
-.course_option_selected{
-  background:black;
-  border-radius:10px 0 0 10px;
-}
-.course_option_selected:hover{
-  background:black;
-  border-radius:10px 0 0 10px;
-}
+
 .course-title{
   border-style:block;
   padding-top:10px;
@@ -422,15 +380,18 @@ details summary {
   font-size:1.4em;
 }
 
-.material-icons.md-18 { font-size: 18px; vertical-align: middle;}
-.material-icons.md-24 { font-size: 24px; vertical-align: middle;}
-.material-icons.md-36 { font-size: 36px; vertical-align: middle;}
-.material-icons.md-48 { font-size: 48px; vertical-align: middle;}
-.material-icons-outlined.md-18 { font-size: 18px; vertical-align: middle;}
-.material-icons-outlined.md-24 { font-size: 24px; vertical-align: middle;}
-.material-icons-outlined.md-36 { font-size: 36px; vertical-align: middle;}
-.material-icons-outlined.md-48 { font-size: 48px; vertical-align: middle;}
-
+.material-icons.md-18, .material-icons-outlined.md-18 {
+   font-size: 18px; vertical-align: middle;
+}
+.material-icons.md-24, .material-icons-outlined.md-24 {
+   font-size: 24px; vertical-align: middle;
+}
+.material-icons.md-36, .material-icons-outlined.md-36 { 
+  font-size: 36px; vertical-align: middle;
+}
+.material-icons.md-48, .material-icons-outlined.md-48 { 
+  font-size: 48px; vertical-align: middle;
+}
 
 ::-webkit-scrollbar {
   width: 10px;
