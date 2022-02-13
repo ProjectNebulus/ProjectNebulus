@@ -31,6 +31,24 @@ def getcourse(courseid, sc):
   #Events
 
   #Members
+
+  #Assignments
+  scassignments = sc.get_assignments(courseid)
+  assignments = []
+  for scassignment in scassignments:
+    assignment = {}
+    assignment["id"] = scassignment["id"]
+    assignment["name"] = scassignment["title"]
+    assignment["info"] = scassignment["description"]
+    assignment["url"] = scassignment["web_url"]
+    assignment["completed"] = scassignment["completed"]
+    assignment["due"] = scassignment["due"]
+    assignments.append(assignment)
+  
+  print(assignments)
+  course["assignments"] = assignments
+
+  #Final
   with open("schoology.json", "w") as out:
     json.dump(course, out, indent=4)
   
