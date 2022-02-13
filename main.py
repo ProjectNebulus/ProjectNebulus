@@ -348,6 +348,7 @@ def signin_username():
             # If the username is an email, then we need to get the username from the database
             session['email'] = session['username']
             session['username'] = db.Accounts.find_one({'email': session['email']})['username']
+            
         else:
             # If the username is not an email, then we need to get the email from the database
             session['email'] = db.Accounts.find_one({'username': session['username']})['email']

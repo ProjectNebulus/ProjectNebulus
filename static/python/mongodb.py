@@ -20,8 +20,26 @@ def find_courses(username):
             output.append(course)
 
     return output
-
-
+def generateSchoologyObject(username):
+  key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
+  secret = "59ccaaeb93ba02570b1281e1b0a90e18"
+  for i in Accounts.find({}):
+    if i["username"] == username:
+      import schoolopy
+      auth = schoolopy.Auth(key, secret, domain='https://bins.schoology.com', three_legged=True,
+                    request_token=request_token, request_token_secret=request_token_secret, access_token=access_token, access_token_secret=access_token_secret)
+   
+        a = auth.authorized 
+        sc = schoolopy.Schoology(auth)
+        sc.limit = 10
+def CheckSchoology(username):
+  for account in Accounts.find({}):
+    if username == account["username"]:
+      if account["schoology"] == True:
+        return True
+      else:
+        return False
+  
 def create_course(course_name, course_teacher, template, username):
     rand_id = hex(random.randint(10**5, 10**10))
 
@@ -132,8 +150,16 @@ def check_password(email, password):
 def schoologyLogin(email, request_token, request_token_secret, access_token, access_token_secret):
   for i in (Accounts.find({})):
     if i["email"] == email:
-      i["schoology"] = True
-      i["Schoology_request_token"] = request_token
-      i["Schoology_request_token_secret"] = request_token_secret
-      i["Schoology_access_token"] = access_token
-      i["Schoology_access_token_secret"] = access_token_secret
+      myquery = { "email": email}
+      newvalues = { "$set": { "schoology": True } }
+      mycol = Accounts
+      mycol.update_one(myquery, newvalues)
+      newvalues = { "$set": { "Schoology_request_token": request_token } }
+      mycol.update_one(myquery, newvalues)
+      newvalues = { "$set": { "Schoology_request_token_secret": request_token_secret } }
+      mycol.update_one(myquery, newvalues)
+      newvalues = { "$set": { "Schoology_access_token": access_token } }
+      mycol.update_one(myquery, newvalues)
+      newvalues = { "$set": { "Schoology_access_token_secret": access_token_secret } }
+      mycol.update_one(myquery, newvalues)
+      

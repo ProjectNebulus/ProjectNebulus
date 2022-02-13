@@ -107,6 +107,13 @@
                   Import from Schoology
                   <span class="close"></span>
               </h1>
+              {{% if db.ConnectedSchoology%}}
+              <input type="text" placeholder="Schoology Section ID"><br>
+              <input type="submit">
+              {{% endif %}}
+              {% else %}
+              <p>Connect your Schoology account <a href="/settings">here</a>!
+              {% endif %}
           </div>
         </div>
         <script src="static/js/createCourse.js"></script>
