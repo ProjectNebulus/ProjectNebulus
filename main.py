@@ -254,7 +254,7 @@ def settings():
           return redirect('/signin')
     #Schoology Info
     
-    import schoolopy
+    import schoolopy, pymongo
     key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
     secret = "59ccaaeb93ba02570b1281e1b0a90e18"
     # Instantiate with 'three_legged' set to True for three_legged oauth.
@@ -272,7 +272,7 @@ def settings():
 
     # Open OAuth authorization webpage. Give time to authorize.
     try:
-      import pymongo
+      
       schoologyemail = pymongo.MongoClient(os.environ['MONGO']).Nebulus.Accounts.find_one({"username": session.get("username")}).get("schoologyEmail")
       schoologyname = pymongo.MongoClient(os.environ['MONGO']).Nebulus.Accounts.find_one({"username": session.get("username")}).get("schoologyName")
     except Exception as e:
