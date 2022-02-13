@@ -1,7 +1,7 @@
 <!--Extend with Jinja!-->
 {% extends "layout.html" %}
 {% block main %}
-{% include "navbar.html" %}
+    {% include "navbar.html" %}
     <body>
     <div id="account" style="margin: 0px 20% 0px 20%; padding 20px 20% 20px 20%;font-size: 1.2em">
         <h2>Your Account</h2>
@@ -31,56 +31,65 @@
         <h3>Canvas by Instructure</h3>
         <button>Authorize Canvas</button>
         {% if not db.CheckSchoology(session.get('username')) %}
-        <h3>Schoology</h3>
-        <p>You log onto Schoology with this link: <input style="background:grey;width:64px !important;" type="text" value="app" id="schooldomain" onkeypress="this.style.width = ((this.value.length + 5) * 8) + 'px';">.schoology.com/</p>
-        <button id = "auth" onclick="AuthorizeSchoology()" class="button">Authorize Schoology</button>
-        <br>
-        <button style="display:none;" id="connectbtn" class="button">Confirm Connect Schoology Account</button>
-        <br>
-        <span id="resp"></span>
+            <h3>Schoology</h3>
+            <p>You log onto Schoology with this link: <input style="background:grey;width:64px !important;" type="text"
+                                                             value="app" id="schooldomain"
+                                                             onkeypress="this.style.width = ((this.value.length + 5) * 8) + 'px';">.schoology.com/
+            </p>
+            <button id="auth" onclick="AuthorizeSchoology()" class="button">Authorize Schoology</button>
+            <br>
+            <button style="display:none;" id="connectbtn" class="button">Confirm Connect Schoology Account</button>
+            <br>
+            <span id="resp"></span>
         {% else %}
-        <h1>Schoology</h1>
-        <p>Schoology Account Connected to {{schoologyname}} ({{schoologyemail}})</p>
-        <a href="/logoutSchoology"><button>Disconnect from Schoology</button></a> 
+            <h1>Schoology</h1>
+            <p>Schoology Account Connected to {{ schoologyname }} ({{ schoologyemail }})</p>
+            <a href="/logoutSchoology">
+                <button>Disconnect from Schoology</button>
+            </a>
         {% endif %}
         <script>
-          function AuthorizeSchoology(){
-            if (resp.innerHTML === 'Login Failed. Reason: Clicked Deny on Schoology. Click Authorize again and click Approve this time!') {location.reload();} newwindow=window.open('{{schoologyURL}}'.replace('bins', document.getElementById("schooldomain").value),'Authorize with Schoology','height=300,width=800');document.getElementById('auth').style.display = 'none';document.getElementById('connectbtn').style.display = 'inline';
-          }
-          $('#connectbtn').on('click', function() {
-            var $this = $(this);
-        $this.button('loading');
-        setTimeout(function() {
-
-          var request =  $.ajax({
-              type: "POST",
-              url: "/schoology",
-              data: {
-              }
-            });
-        request.done(function(data) {
-            $this.button('reset');
-            resp = document.getElementById("resp")
-            if (data==="error!!!"){
-                resp.style.color = "red";
-                resp.innerHTML = "Login Failed. Reason: Clicked Deny on Schoology or closed Schoology popup window. Make sure Popups are enabled on your browser. Click Authorize again and click Approve this time!";
-                document.getElementById('auth').style.display = 'inline';
-                document.getElementById('connectbtn').style.display = 'none';
-                window.location.replace("/settings")
-
-            }else{
-                resp.style.color = "green";
-                resp.innerHTML = "Successfully linked the Schoology Account <b>"+data+"</b>!";
-                window.location.replace("/settings");
+            function AuthorizeSchoology() {
+                if (resp.innerHTML === 'Login Failed. Reason: Clicked Deny on Schoology. Click Authorize again and click Approve this time!') {
+                    location.reload();
+                }
+                newwindow = window.open('{{schoologyURL}}'.replace('bins', document.getElementById("schooldomain").value), 'Authorize with Schoology', 'height=300,width=800');
+                document.getElementById('auth').style.display = 'none';
+                document.getElementById('connectbtn').style.display = 'inline';
             }
 
-        });
+            $('#connectbtn').on('click', function () {
+                var $this = $(this);
+                $this.button('loading');
+                setTimeout(function () {
 
-          }, 1000);
+                    var request = $.ajax({
+                        type: "POST",
+                        url: "/schoology",
+                        data: {}
+                    });
+                    request.done(function (data) {
+                        $this.button('reset');
+                        resp = document.getElementById("resp")
+                        if (data === "error!!!") {
+                            resp.style.color = "red";
+                            resp.innerHTML = "Login Failed. Reason: Clicked Deny on Schoology or closed Schoology popup window. Make sure Popups are enabled on your browser. Click Authorize again and click Approve this time!";
+                            document.getElementById('auth').style.display = 'inline';
+                            document.getElementById('connectbtn').style.display = 'none';
+                            window.location.replace("/settings")
+
+                        } else {
+                            resp.style.color = "green";
+                            resp.innerHTML = "Successfully linked the Schoology Account <b>" + data + "</b>!";
+                            window.location.replace("/settings");
+                        }
+
+                    });
+
+                }, 1000);
 
 
-
-    });
+            });
         </script>
     </div>
     </body>

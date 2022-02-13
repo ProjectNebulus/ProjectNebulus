@@ -3,17 +3,27 @@
 {% block main %}
     <div id="side_bar">
         <p class="course-title">{{ course.name }}</p>
-        <a href="{{ '/courses/'+course_id+'/documents' }}"><p class="course_option"><i class="material-icons">description</i> Documents</p></a>
-        <a href="{{ '/courses/'+course_id+'/announcements' }}"><p class="course_option"><i class="material-icons">campaign</i> Announcements</p></a>
-        <a href=""><p class="course_option"><i class="material-icons  course_option_selected"><span class="material-icons-outlined">trending_up</span></i> Grades</p></a>
-        <a href="{{ '/courses/'+course_id+'/information' }}"><p class="course_option"><i class="material-icons">info</i> Information</p></a>
-        <a href="{{ '/courses/'+course_id+'/settings' }}"><p class="course_option"><i class="material-icons">settings</i> Settings</p></a>
-        <a href="{{ '/courses/'+course_id+'/textbook' }}"><p class="course_option"><i class="material-icons">menu_book</i> Textbook</p></a>
-        <a href="{{ '/courses/'+course_id+'/extensions }}"><p class="course_option"><i class="material-icons">extension</i> Extensions</p></a>
-        <a href="{{ '/courses/'+course_id+'/learning' }}"><p class="course_option coming-soon"><i class="material-icons">school</i> Learning</p></a>
+        <a href="{{ '/courses/'+course_id+'/documents' }}"><p class="course_option"><i
+                class="material-icons">description</i> Documents</p></a>
+        <a href="{{ '/courses/'+course_id+'/announcements' }}"><p class="course_option"><i
+                class="material-icons">campaign</i> Announcements</p></a>
+        <a href=""><p class="course_option"><i class="material-icons  course_option_selected"><span
+                class="material-icons-outlined">trending_up</span></i> Grades</p></a>
+        <a href="{{ '/courses/'+course_id+'/information' }}"><p class="course_option"><i class="material-icons">info</i>
+            Information</p></a>
+        <a href="{{ '/courses/'+course_id+'/settings' }}"><p class="course_option"><i
+                class="material-icons">settings</i>
+            Settings</p></a>
+        <a href="{{ '/courses/'+course_id+'/textbook' }}"><p class="course_option"><i
+                class="material-icons">menu_book</i>
+            Textbook</p></a>
+        <a href="{{ '/courses/'+course_id+'/extensions' }}"><p class="course_option"><i
+                class="material-icons">extension</i> Extensions</p></a>
+        <a href="{{ '/courses/'+course_id+'/learning' }}"><p class="course_option coming-soon"><i
+                class="material-icons">school</i> Learning</p></a>
     </div>
     <div id="course-body">
-      <h1>Grades</h1>
+        <h1>Grades</h1>
     </div>
 
 {% endblock %}
