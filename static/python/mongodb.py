@@ -84,11 +84,10 @@ def create_user(username, email, password):
     password = hash256(password)
     if Accounts.find_one({'username': username, 'email': email}):
         return '1'
-    elif Accounts.find_one({'username': username}):
+    if Accounts.find_one({'username': username}):
         return '2'
-    elif Accounts.find_one({'email': email}):
+    if Accounts.find_one({'email': email}):
         return '3'
-
     Accounts.insert_one({
         "_id": db.Accounts.count_documents({}),
         "username": username,
@@ -142,8 +141,7 @@ def check_user(user):
 
     if not data:
         return 'false'
-    else:
-        return 'true'
+    return 'true'
 
 
 def check_password(email, password):
@@ -152,10 +150,9 @@ def check_password(email, password):
     data = Accounts.find_one({'email': email})
     if not data:
         return 'false'
-    elif valid_password(data['password'], password):
+    if valid_password(data['password'], password):
         return 'true'
-    else:
-        return 'false'
+    return 'false'
 
 
 def schoologyLogin(email, request_token, request_token_secret, access_token, access_token_secret, schoologyemail, schoologyname):
@@ -184,4 +181,3 @@ def logout_from_schoology(username):
                    }
               }
     Accounts.update_one(query, values)
-
