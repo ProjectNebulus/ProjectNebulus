@@ -1,26 +1,26 @@
 // set up templates
-var divs = document.getElementsByClassName('scroll');
-var screens = document.getElementsByClassName('CourseBtn');
+let divs = document.getElementsByClassName('scroll');
+let screens = document.getElementsByClassName('CourseBtn');
 
 // set up button
-var modal = document.getElementById('CourseModal');
-var btn = document.getElementById('create');
+let modal = document.getElementById('CourseModal');
+let btn = document.getElementById('create');
 
 btn.onclick = function () {
     modal.style.display = 'block';
 
-    for (var screen of screens) screen.style.display = 'none';
+    for (let screen of screens) screen.style.display = 'none';
     screens[0].style.display = 'block';
 };
 
 window.onclick = function (event) {
-    if (event.target == modal) {
+    if (event.target === modal) {
         modal.style.display = 'none';
     }
 };
 
 // set up close button
-for (var close of document.getElementsByClassName('close')) {
+for (let close of document.getElementsByClassName('close')) {
     close.className += ' material-icons';
     close.innerHTML = 'close';
     close.onclick = function () {
@@ -29,11 +29,11 @@ for (var close of document.getElementsByClassName('close')) {
 }
 
 // set up user
-var user = document.getElementById('userinfo').innerHTML;
+const user = document.getElementById('userinfo').innerHTML;
 
 // set up course stuff
-var courseName = document.getElementById('course-name');
-var courseTeacher = document.getElementById('course-teacher');
+let courseName = document.getElementById('course-name');
+let courseTeacher = document.getElementById('course-teacher');
 
 function createCourse(subtemplate) {
     document.getElementById('create-course-status').innerHTML = 'Creating course...';
@@ -61,7 +61,7 @@ description (e.g. Physics, Chemistry, Biology)
 as demonstrated below.
 
 */
-var templates = [
+const templates = [
     {
         name: 'Science',
         icon: 'science.svg',
@@ -138,19 +138,18 @@ var templates = [
     }
 ];
 
-for (var template of templates) {
-    const t = template;
-
-    var button = document.createElement('span');
+for (const template of templates) {
+    let button = document.createElement('span');
     button.className = 'button';
     button.onclick = function () {
-        step2(t);
+        step2(template);
     };
 
-    var imageSpan = document.createElement('span');
+    // TODO: fix duplicate code fragments
+    let imageSpan = document.createElement('span');
     imageSpan.style.float = 'left';
 
-    var image = document.createElement('img');
+    let image = document.createElement('img');
     image.style.float = 'right';
     image.height = 20;
     image.width = 20;
@@ -159,11 +158,11 @@ for (var template of templates) {
 
     button.appendChild(imageSpan);
 
-    var templateName = document.createElement('span');
+    let templateName = document.createElement('span');
     templateName.innerHTML = template.name;
     button.appendChild(templateName);
 
-    var next = document.createElement('span');
+    let next = document.createElement('span');
     next = document.createElement('img');
     next.style.float = 'right';
     next.height = 20;
@@ -173,12 +172,12 @@ for (var template of templates) {
 
     button.appendChild(document.createElement('br'));
 
-    var description = document.createElement('span');
+    let description = document.createElement('span');
     description.style.color = 'gray';
     description.style.fontSize = '0.8em';
     description.innerHTML = 'Subtemplates: ';
 
-    for (var subtemplate of template.subtemplates) description.innerHTML += subtemplate + ', ';
+    for (const subtemplate of template.subtemplates) description.innerHTML += subtemplate + ', ';
     description.innerHTML = description.innerHTML.substring(0, description.innerHTML.length - 2);
 
     button.appendChild(description);
@@ -186,25 +185,24 @@ for (var template of templates) {
     divs[0].appendChild(button);
 }
 
+// TODO: give step* functions more meaningful names
 function step2(template) {
     screens[0].style.display = 'none';
     screens[1].style.display = 'block';
 
     divs[1].innerHTML = '';
-    var count = 0;
-    for (var subtemplate of template.subtemplates) {
-        var button = document.createElement('span');
+    for (const subtemplate of template.subtemplates) {
+        let button = document.createElement('span');
         button.className = 'button';
         button.onclick = function () {
-            const subtemplateName = subtemplate;
             const name = template.name;
-            step3(name, subtemplateName);
+            step3(name, subtemplate);
         };
 
-        var imageSpan = document.createElement('span');
+        let imageSpan = document.createElement('span');
         imageSpan.style.float = 'left';
 
-        var image = document.createElement('img');
+        let image = document.createElement('img');
         image.style.float = 'right';
         image.height = 20;
         image.width = 20;
@@ -213,11 +211,11 @@ function step2(template) {
 
         button.appendChild(imageSpan);
 
-        var templateName = document.createElement('span');
+        let templateName = document.createElement('span');
         templateName.innerHTML = subtemplate;
         button.appendChild(templateName);
 
-        var next = document.createElement('span');
+        let next = document.createElement('span');
         next = document.createElement('img');
         next.style.float = 'right';
         next.height = 20;
