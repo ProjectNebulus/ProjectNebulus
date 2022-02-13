@@ -12,7 +12,7 @@
         <div style="background:linear-gradient(to top right, #ff3c00, #ffd900); width:100%;top:0px;margin: 0 px;font-size:1.5em;padding-top:20px;padding-bottom:20px;border-radius: 8px 8px 0px 0px;">
         <h3>Recent Activity</h3>
         </div>
-        {% for x in db.Accounts.find_one({'user': user}).courses %}
+        {% for x in db.find_courses(user) %}
           <h3>{{x.name}}</h3><hr/>
           <div class='course_updates'>
             {% for i in x.updates[0:3] %}
@@ -101,6 +101,13 @@
               <button class="button" id="import-canvas">Import from Canvas</button>
             </center>
           </div>
+
+          <div class="CourseBtn">
+              <h1>
+                  Import from Schoology
+                  <span class="close"></span>
+              </h1>
+          </div>
         </div>
         <script src="static/js/createCourse.js"></script>
       </body>
@@ -108,7 +115,7 @@
       </html>
     </h1>
 
-    {% for i in db.Accounts.find_one({'username': user}).courses %}
+    {% for i in db.find_courses(user) %}
     <a class='dashboardCourse' href='/courses/{{ i._id }}'>
       <h2>{{ i.name }}</h2>
       <h3>{{ i.teacher }}</h3>

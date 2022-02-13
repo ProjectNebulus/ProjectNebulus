@@ -1,12 +1,12 @@
 import schoolopy, json
+
 def getcourse(courseid, sc):
   print("Getting Course")
   course = {}
   #Main
 
-  section = sc.get_section(courseid)
+  section = dict(sc.get_section(courseid))
   #print(section)
-  section = dict(section)
   course["id"] = section["id"]
   course["name"] = section["course_title"]
   course["image"] = section["profile_url"]
@@ -14,16 +14,23 @@ def getcourse(courseid, sc):
   #updates = sc.get_updates(section_id = courseid)
   scupdates = sc.get_section_updates(courseid)
   updates = []
-  for i in scupdates:
-    theupdate = {}
-    theupdate["body"] = i["body"]
-    theupdate["id"] = i["id"]
-    theupdate["likes"] = i["likes"]
-    theupdate["liked"] = i["user_like_action"]
-    theupdate["comments"] = i["num_comments"]
-    updates.append(theupdate)
+  for update in scupdates:
+    updates.append({
+      "body": update["body"],
+      "id": update["id"],
+      "likes": update["likes"],
+      "liked": update["user_like_action"],
+      "comments": update["num_comments"]
+    })
   course["updates"] = updates
-  print(updates)
+
+  print("Updates:\n")
+
+  for update in updates:
+    for key in update:
+      print(key + ":", update[key])
+    print()
+
   #Documents
 
   #Grades
@@ -35,17 +42,23 @@ def getcourse(courseid, sc):
   #Assignments
   scassignments = sc.get_assignments(courseid)
   assignments = []
-  for scassignment in scassignments:
-    assignment = {}
-    assignment["id"] = scassignment["id"]
-    assignment["name"] = scassignment["title"]
-    assignment["info"] = scassignment["description"]
-    assignment["url"] = scassignment["web_url"]
-    assignment["completed"] = scassignment["completed"]
-    assignment["due"] = scassignment["due"]
-    assignments.append(assignment)
+  for assignment in scassignments:
+    assignments.append({
+      "id": assignment["id"],
+      "name": assignment["title"],
+      "info": assignment["description"],
+      "url": assignment["web_url"],
+      "completed": assignment["completed"],
+      "due": assignment["due"]
+    })
   
-  print(assignments)
+    print("\nAssignments:")
+
+    for assignment in assignments:
+      for key in assignment:
+        print(key + ":", assignment[key])
+      print()
+
   course["assignments"] = assignments
 
   #Final
