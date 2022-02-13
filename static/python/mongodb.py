@@ -161,10 +161,12 @@ def check_password(email, password):
         return 'false'
 
 
-def schoologyLogin(email, request_token, request_token_secret, access_token, access_token_secret):
+def schoologyLogin(email, request_token, request_token_secret, access_token, access_token_secret, schoologyemail, schoologyname):
     query = {"email": email}
     values = {"$set":
-                  {"schoology": True,
+                  {"schoologyEmail":schoologyemail,
+                    "schoologyName":schoologyname,
+                    "schoology": True,
                    "Schoology_request_token": request_token,
                    "Schoology_request_token_secret": request_token_secret,
                    "Schoology_access_token": access_token,

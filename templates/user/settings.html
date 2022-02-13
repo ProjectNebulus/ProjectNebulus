@@ -38,7 +38,8 @@
         <br>
         <span id="resp"></span>
         {% else %}
-        <p>Schoology Account Connected</p>
+        <h1>Schoology</h1>
+        <p>Schoology Account Connected to {{schoolname}} ({{schoologyemail}})</p>
         {% endif %}
         <script>
           $('#connectbtn').on('click', function() {
@@ -60,11 +61,12 @@
                 resp.innerHTML = "Login Failed. Reason: Clicked Deny on Schoology or closed Schoology popup window. Make sure Popups are enabled on your browser. Click Authorize again and click Approve this time!";
                 document.getElementById('auth').style.display = 'inline';
                 document.getElementById('connectbtn').style.display = 'none';
+                window.location.replace("/settings")
 
             }else{
                 resp.style.color = "green";
                 resp.innerHTML = "Successfully linked the Schoology Account <b>"+data+"</b>!";
-                //window.location.replace("/settings");
+                window.location.replace("/settings");
             }
 
         });

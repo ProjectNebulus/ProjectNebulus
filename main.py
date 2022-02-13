@@ -242,7 +242,7 @@ def loginpost():
   print(sc.get_me().name_display)
   session["name"] = sc.get_me().name_display
   session["Schoologyemail"] = sc.get_me().primary_email
-  db.schoologyLogin(session["email"], request_token, request_token_secret, access_token, access_token_secret)
+  db.schoologyLogin(session["email"], request_token, request_token_secret, access_token, access_token_secret, session["name"] , session["Schoologyemail"] )
 
   return str(sc.get_me().name_display)
 
@@ -266,7 +266,15 @@ def settings():
     session["access_token"] = auth.access_token
 
     # Open OAuth authorization webpage. Give time to authorize.
-    return render_template("user/settings.html", page='Nebulus - Account Settings', session=session, user=session.get("username"), schoologyURL = url, db=db)
+    try:
+      import pymongo
+      schoologyemail = pymongo.MongoClient(os.environ['MONGO']).Accounts.find_one({"username": session.get("username")}).get("schoologyEmail")
+      schoologyname = pymongo.MongoClient(os.environ['MONGO']).Accounts.find_one({"username": session.get("username")}).get("schoologyName")
+    except Exception as e:
+      print(e)
+      schoologyemail = None
+      schoologyname = None
+    return render_template("user/settings.html", page='Nebulus - Account Settings', session=session, user=session.get("username"), schoologyURL = url, db=db, schoologyemail=schoologyemail, schoologyname=schoologyname)
 
 
 @app.route('/dashboard')
