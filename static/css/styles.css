@@ -47,7 +47,7 @@ strong{
 
 
 #homePageBanner{
-  margin:0px; /* No borders for the image*/
+  margin:0; /* No borders for the image*/
   width: calc(100% - 80px); /*Padding*/
   padding:40px;
   padding-top:5px;
@@ -62,7 +62,7 @@ strong{
 }
 
 #mwBanner{
-  margin:0px; /* No borders for the image*/
+  margin:0; /* No borders for the image*/
   width: calc(100% - 80px); /*Padding*/
   padding:40px;
   padding-top:90px;
@@ -214,7 +214,7 @@ details div:hover {
 }
 
 .col1, .col2 {
-  margin:0px; /* No borders for the image*/
+  margin:0; /* No borders for the image*/
 
   width: calc(100% - 80px); /*Padding*/
   padding:40px;
