@@ -107,10 +107,10 @@
                   Import from Schoology
                   <span class="close"></span>
               </h1>
-              {{% if db.ConnectedSchoology%}}
+              {% if db.CheckSchoology(user) %}
               <input type="text" placeholder="Schoology Section ID"><br>
               <input type="submit">
-              {{% endif %}}
+              
               {% else %}
               <p>Connect your Schoology account <a href="/settings">here</a>!
               {% endif %}

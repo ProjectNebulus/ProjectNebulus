@@ -37,6 +37,8 @@ def generateSchoologyObject(username):
 def CheckSchoology(username):
   for account in Accounts.find({}):
     if username == account["username"]:
+      if "schoology" not in account.keys():
+        return False
       if account["schoology"] == True:
         return True
       else:
