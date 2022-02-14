@@ -48,7 +48,8 @@ def getcourse(courseid, sc, user):
   print(scgrades)
 
   #Events
-
+  scevents = sc.get_section_events(courseid)
+  print(scevents)
   #Members
 
   #Unavailable
