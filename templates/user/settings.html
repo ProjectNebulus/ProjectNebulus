@@ -27,30 +27,30 @@
         </p>
         <h2>Connections</h2>
         <h3>Google Classroom</h3>
-        <button>Authorize Google Classroom</button>
+        <button><img src="./static/images/logos/classroom.png" style="height:1.2em;margin-right:12px;">Connect your Google Classroom Account</button>
         <h3>Canvas by Instructure</h3>
-        <button>Authorize Canvas</button>
+        <button><img src="./static/images/logos/canvas.png" style="height:1.2em;margin-right:12px;"> Connect your Canvas Account</button>
         {% if not db.CheckSchoology(session.get('username')) %}
             <h3>Schoology</h3>
             <p>You log onto Schoology with this link: <input style="background:grey;width:64px !important;" type="text"
                                                              value="app" id="schooldomain"
                                                              onkeypress="this.style.width = ((this.value.length + 5) * 8) + 'px';">.schoology.com/
             </p>
-            <button id="auth" onclick="AuthorizeSchoology()" class="button">Authorize Schoology</button>
+            <button id="auth" onclick="AuthorizeSchoology()" class="button"><img src="./static/images/logos/schoology.png" style="height:1.2em;margin-right:12px;"> Connect your Schoology Account</button>
             <br>
-            <button style="display:none;" id="connectbtn" class="button">Confirm Connect Schoology Account</button>
+            <button style="display:none;" id="connectbtn" class="button"><img src="https://hotemoji.com/images/dl/7/white-heavy-check-mark-emoji-by-twitter.png" style="height:1.2em;margin-right:12px;"> Confirm Connect Schoology Account</button>
             <br>
             <span id="resp"></span>
         {% else %}
             <h1>Schoology</h1>
             <p>Schoology Account Connected to {{ schoologyname }} ({{ schoologyemail }})</p>
             <a href="/logoutSchoology">
-                <button>Disconnect from Schoology</button>
+                <button><img src="https://emojipedia-us.s3.amazonaws.com/source/skype/289/cross-mark_274c.png" style="height:1.2em;margin-right:12px;"> Disconnect from Schoology</button>
             </a>
         {% endif %}
         <script>
             function AuthorizeSchoology() {
-                if (resp.innerHTML === 'Login Failed. Reason: Clicked Deny on Schoology. Click Authorize again and click Approve this time!') {
+                if (resp.innerHTML === 'Login Failed. Reason: Clicked Deny on Schoology. Click the Connect button again and click Approve this time!') {
                     location.reload();
                 }
                 newwindow = window.open('{{schoologyURL}}'.replace('bins', document.getElementById("schooldomain").value), 'Authorize with Schoology', 'height=300,width=800');
