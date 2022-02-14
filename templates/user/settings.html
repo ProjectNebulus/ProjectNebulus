@@ -35,7 +35,7 @@
         <h3>Canvas by Instructure</h3>
         <button><img src="./static/images/logos/canvas.png" style="height:1.2em;margin-right:12px;"> Connect your Canvas Account</button>
         {% if not db.CheckSchoology(session.get('username')) %}
-            <h3>Schoology</h3>
+            <h2>Schoology</h2>
             <p>You log onto Schoology with this link: <input style="background:grey;width:64px !important;" type="text"
                                                              value="app" id="schooldomain"
                                                              onkeypress="this.style.width = ((this.value.length + 5) * 8) + 'px';">.schoology.com/
@@ -52,6 +52,20 @@
                 <button><img src="https://emojipedia-us.s3.amazonaws.com/source/skype/289/cross-mark_274c.png" style="height:1.2em;margin-right:12px;"> Disconnect from Schoology</button>
             </a>
         {% endif %}
+        <h2>Discord</h2>
+        <button><img src="./static/images/logos/discord.png" style="height:1.2em;margin-right:12px;">Connect your Discord Account</button>
+        <h2>Github</h2>
+        <button><img src="./static/images/logos/github.png" style="height:1.2em;margin-right:12px;">Connect your Github Account</button>
+        <h2>Spotify</h2>
+        <button><img src="./static/images/logos/spotify.png" style="height:1.2em;margin-right:12px;">Connect your Spotify Account</button>
+        <h2>YouTube</h2>
+        <button><img src="./static/images/logos/youtube.png" style="height:1.2em;margin-right:12px;">Connect your Youtube Account</button>
+        <h2>Google</h2>
+        <button><img src="./static/images/logos/google.png" style="height:1.2em;margin-right:12px;">Connect your Google Account</button>
+        <h2>Apple</h2>
+        <button><img src="./static/images/logos/apple.png" style="height:1.2em;margin-right:12px;">Connect your Apple Account</button>
+        <h2>Microsoft</h2>
+        <button><img src="./static/images/logos/microsoft.png" style="height:1.2em;margin-right:12px;">Connect your Microsoft Account</button>
         <script>
             function AuthorizeSchoology() {
                 if (resp.innerHTML === 'Login Failed. Reason: Clicked Deny on Schoology. Click the Connect button again and click Approve this time!') {
