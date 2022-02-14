@@ -341,7 +341,9 @@ def signup_post():
 @app.route("/signin")
 def signin():
     # If the user is already logged in, redirect to the dashboard
-    if not session.get('username') and not session.get('password'):
+    print(session)
+    if not (session.get('username') and session.get('password')):
+        print(checl_user_params)
         print("Not Logged In")
         if check_user_params and session.get("email"):
             db.check_user_params(session.get("email"))
@@ -420,4 +422,4 @@ def logout_from_schoology():
     print("byee")
     return redirect('/settings')
 # Running
-serve(app, host='0.0.0.0', port=8080) 
+app.run('0.0.0.0', port=8080) 

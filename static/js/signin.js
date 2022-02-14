@@ -122,23 +122,24 @@ function enableButton() {
 
 setInterval(enableButton, 200);
 
-// function loginUser() {
-//     let password = document.getElementById('psw').value;
-//     let username = document.getElementById('usrname').value;
+function loginUser() {
+     let password = document.getElementById('psw').value;
+     let username = document.getElementById('usrname').value;
 
-//     const xhttp = new XMLHttpRequest();
-//     xhttp.open('POST', '/signin', true);
-//     xhttp.setRequestHeader('Content-type', 'application/json');
-//     xhttp.addEventListener('load', reqListener3);
-//     xhttp.send(
-//         JSON.stringify({
-//             password: password
-//         }
-//     ));
-// }
+     const xhttp = new XMLHttpRequest();
+     xhttp.open('POST', '/signin', true);
+     xhttp.setRequestHeader('Content-type', 'application/json');
+     xhttp.addEventListener('load', reqListener3);
+     xhttp.send(
+         JSON.stringify({
+             password: password
+        }
+     ));
+}
 
 function reqListener3() {
-    if (this.responseText === 'success') {
+  
+    if (this.responseText === 'success') {``
         window.location.href = '/dashboard';
     } else {
         let fail = document.getElementById('fail');
