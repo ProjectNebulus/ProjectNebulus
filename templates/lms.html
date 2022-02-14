@@ -113,10 +113,12 @@
                             <span class="close"></span>
                         </h1>
                         {% if db.CheckSchoology(user) %}
+                          <form class="schoology-import">
                             <input type="text" placeholder="Schoology Section ID"><br>
                             <input type="submit">
+                          </form>
                             <br><br>
-                            <h2>Instructions for getting the Section ID</h2>
+                            <h3>Instructions for getting the Section ID</h3>
                             <p>Open a course in Schoology. You will get a link like this: https://&lt;your-school&gt;.schoology.com/course/&lt;</b>
                                 your-section-id<b>&gt;/materials
                             <p>Type the <b>your-section-id</b> into the box above!

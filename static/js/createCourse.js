@@ -244,4 +244,17 @@ function step3(template, subtemplate) {
 function step4() {
     screens[2].style.display = 'none';
     screens[3].style.display = 'block';
+    document.getElementById('schoology_import').onsubmit = function () {
+        document.getElementById('create-course-status').innerHTML = 'Creating course...';
+
+        const xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '/createCourseSchoology', true);
+        xhttp.setRequestHeader('Content-type', 'application/json');
+        xhttp.send(
+            JSON.stringify({
+                schoology: document.getElementById('schoology-id').value
+                
+            })
+      );
+    };
 }
