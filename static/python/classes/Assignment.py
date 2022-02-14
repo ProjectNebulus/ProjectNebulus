@@ -1,9 +1,10 @@
 from collections import dataclass
 from typing import List
 from datetime import datetime
+from Snowflake import Snowflake
 
 @dataclass
-class Assignment:
+class Assignment(Snowflake):
     """
     A Class representing an assignment.
     :required params:
@@ -15,9 +16,8 @@ class Assignment:
         description: The description of the assignment. Default: None
         points: The number of points the assignment is worth. Default: 100.
     """
-    due: datetime.date
+    due: datetime
     description: str = None
     title: str
-    _id: int
     points: int = 100
 

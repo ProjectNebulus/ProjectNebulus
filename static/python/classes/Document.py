@@ -16,5 +16,5 @@ class Document:
     _id: int
     url: str
     name: str
-    upload_date: datetime.DateTime
+    upload_date: datetime
     description: str = None

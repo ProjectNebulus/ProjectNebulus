@@ -4,10 +4,10 @@ from typing import List
 from Assignment import Assignment
 from User import User
 from Grades import Grades
-
+from Snowflake import Snowflake
 
 @dataclass
-class Course:
+class Course(Snowflake):
     """
     A class for representing a course.
      :required params:
@@ -24,7 +24,6 @@ class Course:
 
     """
     name: str
-    _id: str
     teacher: str
     assignments: List[Assignment] = field(default_factory=list)
     teacherAccount: User = None

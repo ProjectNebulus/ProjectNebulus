@@ -1,9 +1,11 @@
 from dataclasses import dataclass
 from typing import List
 from Document import Document
+from Snowflake import Snowflake
+
 
 @dataclass
-class Folder:
+class Folder(Snowflake):
     """
     A class that represents a Folder of Documents
     :params:
@@ -13,4 +15,3 @@ class Folder:
     """
     name: str
     documents: List[Document]
-    _id: str

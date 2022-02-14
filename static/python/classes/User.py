@@ -4,9 +4,10 @@ from Course import Course
 from Avatar import Avatar
 from datetime import datetime
 from Schoology import Schoology
+from Snowflake import Snowflake
 
 @dataclass
-class User:
+class User(Snowflake):
     """
     A class representing a user.
     :required params:
@@ -28,17 +29,16 @@ class User:
         - status: The status of the user. Default: None
         - schoology: The user's schoology account information. Default: None
     """
-    _id: int
     username: str
     password: str
     email: str
-    created_at: datetime.DateTime
+    created_at: datetime
     courses: List[Course] = field(default_factory=list)
     points: int = 0
     avatar: Avatar = None
     bio: str = None
     premium: bool = False
-    premium_expiration: datetime.date = None
+    premium_expiration: datetime = None
     status: str = None
     is_staff: bool = False
     student: bool = True
