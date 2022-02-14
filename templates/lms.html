@@ -39,6 +39,12 @@
                     <span id="join" class="material-icons">search</span>
                     <span id="create" class="material-icons">add</span>
                 </div>
+                {% for i in db.find_courses(user) %}
+                <a class='dashboardCourse' href='/courses/{{ i._id }}'>
+                    <h2>{{ i.name }}</h2>
+                    <h3>{{ i.teacher }}</h3>
+                </a>
+            {% endfor %}
 
                 <!DOCTYPE html>
                 <html>
@@ -126,7 +132,6 @@
                                 {% else %}
                             <div id="connect-schoology">
                                 <span class="material-icons-outlined">error</span>
-                                <span>You must <a href="/settings">connect your Schoology account</a> to perform this action!</span>
                             </div>
                         {% endif %}
                     </div>
@@ -137,12 +142,7 @@
                 </html>
             </h1>
 
-            {% for i in db.find_courses(user) %}
-                <a class='dashboardCourse' href='/courses/{{ i._id }}'>
-                    <h2>{{ i.name }}</h2>
-                    <h3>{{ i.teacher }}</h3>
-                </a>
-            {% endfor %}
+            
     </div>
 
     <div id="right" style="width:20%;height:90%;float:right;background-color:transparent;overflow:auto">

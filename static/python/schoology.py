@@ -1,7 +1,7 @@
 import schoolopy, json
 
-def getcourse(courseid, sc):
-  print("Getting Course")
+def getcourse(courseid, sc, user):
+  # print("Getting Course")
   course = {}
   #Main
 
@@ -24,20 +24,34 @@ def getcourse(courseid, sc):
     })
   course["updates"] = updates
 
-  print("Updates:\n")
+  # print("Updates:\n")
 
-  for update in updates:
-    for key in update:
-      print(key + ":", update[key])
-    print()
+  # for update in updates:
+  #   for key in update:
+  #     print(key + ":", update[key])
+  #   print()
 
   #Documents
+  scdocuments= sc.get_section_documents(courseid)
+  documents = []
+  for scdocument in scdocuments:
+    document = {}
+    document["id"] = scdocument["id"]
+    document["name"] = scdocument["title"]
+    document["attachment"] = scdocument["attachments"]
+    documents.append(document)
+  course["documents"] = documents
+  
 
   #Grades
+  scgrades= sc.get_user_grades_by_section(user, courseid)
+  print(scgrades)
 
   #Events
 
   #Members
+
+  #Unavailable
 
   #Assignments
   scassignments = sc.get_assignments(courseid)
@@ -52,12 +66,12 @@ def getcourse(courseid, sc):
       "due": assignment["due"]
     })
   
-    print("\nAssignments:")
+    # print("\nAssignments:")
 
-    for assignment in assignments:
-      for key in assignment:
-        print(key + ":", assignment[key])
-      print()
+    # for assignment in assignments:
+    #   for key in assignment:
+    #     print(key + ":", assignment[key])
+    #   print()
 
   course["assignments"] = assignments
 

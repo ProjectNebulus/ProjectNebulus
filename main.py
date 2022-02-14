@@ -17,7 +17,7 @@ key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
 secret = "59ccaaeb93ba02570b1281e1b0a90e18"
 
 sc = schoolopy.Schoology(schoolopy.Auth(key, secret))
-getcourse(5131176032, sc)
+getcourse(5131176032, sc, 95200185)
 
 
 regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
@@ -225,7 +225,7 @@ def loginpost():
   key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
   secret = "59ccaaeb93ba02570b1281e1b0a90e18"
   sc = schoolopy.Schoology(schoolopy.Auth(key, secret))
-  sc.limit = 10
+  sc.limit = 100
   request_token = session["request_token"]
   request_token_secret = session["request_token_secret"]
   access_token_secret = session["access_token_secret"]
