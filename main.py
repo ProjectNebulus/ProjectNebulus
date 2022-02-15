@@ -1,26 +1,26 @@
 # Exportng Environment Variables in the .env file
 import os
 import re
-
+import datetime
 import schoolopy
 from dotenv import load_dotenv
 from flask import Flask, flash, redirect, render_template, request, session
 from waitress import serve
 from werkzeug.utils import secure_filename
-
+load_dotenv()
 from static.python import mongodb as db
 from static.python.image_to_music import *
 from static.python.schoology import getcourse
 from static.python.spotify import status as spotifystatus
 from static.python.youtube import search_yt
 
-load_dotenv()
+
 
 KEY = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
 SECRET = "59ccaaeb93ba02570b1281e1b0a90e18"
 
 sc = schoolopy.Schoology(schoolopy.Auth(KEY, SECRET))
-getcourse(5131176032, sc, 95200185)
+
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 # Variables

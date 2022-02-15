@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class Avatar:
+class AvatarSize:
     """
     Size in Pixels
     """

@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
-
-from Snowflake import Snowflake
+from typing import List, Dict
+from .Snowflake import Snowflake
 
 
 @dataclass
@@ -24,13 +24,13 @@ class Grades(Snowflake):
 
     course_id: int
     student_id: int
-    grades: dict[int : list[float]] = field(default_factory=dict)
-    grades_list: list[float] = field(default_factory=list)
+    grades: Dict[int, List[float]] = field(default_factory=dict)
+    grades_list: List[float] = field(default_factory=list)
     average: float = 0.0
     median: float = 0.0
     mode: float = 0.0
     range: float = 0.0
-    grade_frequency: list[int] = field(default_factory=list)
+    grade_frequency: List[int] = field(default_factory=list)
 
     def __post_init__(self):
         self.grades_list = [

@@ -1,8 +1,8 @@
-from collections import dataclass
+from dataclasses import dataclass
 from datetime import datetime
 from typing import List
 
-from Snowflake import Snowflake
+from .Snowflake import Snowflake
 
 
 @dataclass
@@ -20,6 +20,6 @@ class Assignment(Snowflake):
     """
 
     due: datetime
-    description: str = None
     title: str
     points: int = 100
+    description: str = None

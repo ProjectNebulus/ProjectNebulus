@@ -1,11 +1,10 @@
 from dataclasses import dataclass, field
 from typing import List
 
-from Assignment import Assignment
-from Folder import Folder
-from Grades import Grades
-from Snowflake import Snowflake
-from User import User
+from .Assignment import Assignment
+from .Folder import Folder
+from .Grades import Grades
+from .Snowflake import Snowflake
 
 
 @dataclass
@@ -13,7 +12,6 @@ class Course(Snowflake):
     """
     A class for representing a course.
      :required params:
-        - _id: The id of the course.
         - name: The name of the course.
         - teacher: The teacher of the course.
     :optional params:
@@ -29,7 +27,7 @@ class Course(Snowflake):
     name: str
     teacher: str
     assignments: List[Assignment] = field(default_factory=list)
-    teacherAccount: User = None
+    teacherAccountID: int = None
     folders: List[Folder] = field(default_factory=list)
     imported_from: str = None
     description: str = None

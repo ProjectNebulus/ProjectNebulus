@@ -2,10 +2,10 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from typing import List
 
-from Avatar import Avatar
-from Course import Course
-from Schoology import Schoology
-from Snowflake import Snowflake
+from .Avatar import Avatar
+from .Course import Course
+from .Schoology import Schoology
+from .Snowflake import Snowflake
 
 
 @dataclass
@@ -13,7 +13,6 @@ class User(Snowflake):
     """
     A class representing a user.
     :required params:
-        - _id: The id of the user.
         - username: The username of the user.
         - password: The password of the user.
         - email: The email of the user.
