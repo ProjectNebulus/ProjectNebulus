@@ -1,7 +1,9 @@
 from collections import dataclass
-from typing import List
 from datetime import datetime
+from typing import List
+
 from Snowflake import Snowflake
+
 
 @dataclass
 class Assignment(Snowflake):
@@ -16,8 +18,8 @@ class Assignment(Snowflake):
         description: The description of the assignment. Default: None
         points: The number of points the assignment is worth. Default: 100.
     """
+
     due: datetime
     description: str = None
     title: str
     points: int = 100
-

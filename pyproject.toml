@@ -19,6 +19,8 @@ PyAutoGUI = "^0.9.53"
 spotipy = "^2.19.0"
 schoolopy = "^0.2.2"
 waitress = "^2.0.0"
+black = "^22.1.0"
+isort = "^5.10.1"
 
 [tool.poetry.dev-dependencies]
 

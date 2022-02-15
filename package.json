@@ -1,7 +1,7 @@
 {
     "name": "projectnebulus",
     "version": "1.0.0",
-    "description": "Project Nebulus - Learning, All In One\n\n",
+    "description": "Project Nebulus - Learning, All In One",
     "author": "@projectnebulus",
     "scripts": {
         "format": "prettier --write \"**/*.{js,json,css}\""

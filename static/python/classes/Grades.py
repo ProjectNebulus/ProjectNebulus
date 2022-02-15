@@ -1,4 +1,5 @@
 from dataclasses import dataclass, field
+
 from Snowflake import Snowflake
 
 
@@ -20,9 +21,10 @@ class Grades(Snowflake):
         - range: The range of the student's grades.
         - grade_frequency: A dictionary with the frequency of each grade.
     """
+
     course_id: int
     student_id: int
-    grades: dict[int: list[float]] = field(default_factory=dict)
+    grades: dict[int : list[float]] = field(default_factory=dict)
     grades_list: list[float] = field(default_factory=list)
     average: float = 0.0
     median: float = 0.0
@@ -31,7 +33,9 @@ class Grades(Snowflake):
     grade_frequency: list[int] = field(default_factory=list)
 
     def __post_init__(self):
-        self.grades_list = [grade[0] * (grade[1] / 100) for grade in self.grades.values()]
+        self.grades_list = [
+            grade[0] * (grade[1] / 100) for grade in self.grades.values()
+        ]
         self.average = self.get_average()
         self.median = self.get_median()
         self.mode = self.get_mode()
@@ -44,8 +48,10 @@ class Grades(Snowflake):
     def get_median(self):
         self.grades_list.sort()
         if len(self.grades_list) % 2 == 0:
-            return (self.grades_list[int(len(self.grades_list) / 2)] + self.grades_list[
-                int(len(self.grades_list) / 2) - 1]) / 2
+            return (
+                self.grades_list[int(len(self.grades_list) / 2)]
+                + self.grades_list[int(len(self.grades_list) / 2) - 1]
+            ) / 2
         return self.grades_list[int(len(self.grades_list) / 2)]
 
     def get_mode(self):

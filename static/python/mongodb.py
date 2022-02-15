@@ -1,12 +1,15 @@
-import pymongo, dns
-from static.python.security import hash256, valid_password
 import os
-import re
 import random
+import re
 
-regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+import dns
+import pymongo
 
-client = pymongo.MongoClient(os.environ['MONGO'])
+from static.python.security import hash256, valid_password
+
+regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
+
+client = pymongo.MongoClient(os.environ["MONGO"])
 db = client.Nebulus
 Accounts = db.Accounts
 courses = db.Courses
@@ -29,13 +32,21 @@ def generateSchoologyObject(username):
     for i in Accounts.find({}):
         if i["username"] == username:
             import schoolopy
+
             request_token = i["Schoology_request_token"]
             request_token_secret = i["Schoology_request_token_secret"]
             access_token = i["Schoology_accesstoken"]
             access_token_secret = i["Schoology_access_token_secret"]
-            auth = schoolopy.Auth(key, secret, domain='https://bins.schoology.com', three_legged=True,
-                                  request_token=request_token, request_token_secret=request_token_secret,
-                                  access_token=access_token, access_token_secret=access_token_secret)
+            auth = schoolopy.Auth(
+                key,
+                secret,
+                domain="https://bins.schoology.com",
+                three_legged=True,
+                request_token=request_token,
+                request_token_secret=request_token_secret,
+                access_token=access_token,
+                access_token_secret=access_token_secret,
+            )
             a = auth.authorized
             sc = schoolopy.Schoology(auth)
             sc.limit = 10
@@ -50,7 +61,7 @@ def CheckSchoology(username):
 
 
 def create_course(course_name, course_teacher, template, username):
-    rand_id = hex(random.randint(10 ** 5, 10 ** 10))
+    rand_id = hex(random.randint(10**5, 10**10))
 
     duplicate = True
     while duplicate:
@@ -59,18 +70,20 @@ def create_course(course_name, course_teacher, template, username):
         for course in courses.find():
             if course.get("_id") == rand_id:
                 duplicate = True
-                rand_id = hex(random.randint(10 ** 5, 10 ** 10))
+                rand_id = hex(random.randint(10**5, 10**10))
 
     Accounts.update_one({"username": username}, {"$push": {"courses": rand_id}})
-    courses.insert_one({
-        "name": course_name,
-        "teachers": [course_teacher],
-        "students": [],
-        "materials": [],
-        "owner": username
-    })
+    courses.insert_one(
+        {
+            "name": course_name,
+            "teachers": [course_teacher],
+            "students": [],
+            "materials": [],
+            "owner": username,
+        }
+    )
 
-    print('course created')
+    print("course created")
 
 
 def create_user(username, email, password):
@@ -82,26 +95,28 @@ def create_user(username, email, password):
     3: Email already exists
     """
     password = hash256(password)
-    if Accounts.find_one({'username': username, 'email': email}):
-        return '1'
-    if Accounts.find_one({'username': username}):
-        return '2'
-    if Accounts.find_one({'email': email}):
-        return '3'
-    Accounts.insert_one({
-        "_id": db.Accounts.count_documents({}),
-        "username": username,
-        "email": email,
-        "password": password,
-        "avatar": "",
-        "bio": "",
-        "courses": [],
-        "musiqueworld": [],
-        "premium": "false",
-        "staff": "false"
-    })
+    if Accounts.find_one({"username": username, "email": email}):
+        return "1"
+    if Accounts.find_one({"username": username}):
+        return "2"
+    if Accounts.find_one({"email": email}):
+        return "3"
+    Accounts.insert_one(
+        {
+            "_id": db.Accounts.count_documents({}),
+            "username": username,
+            "email": email,
+            "password": password,
+            "avatar": "",
+            "bio": "",
+            "courses": [],
+            "musiqueworld": [],
+            "premium": "false",
+            "staff": "false",
+        }
+    )
 
-    return '0'
+    return "0"
 
 
 def check_user_params(email):
@@ -134,50 +149,62 @@ def check_user_params(email):
 def check_user(user):
     if re.fullmatch(regex, user):
         # If the entered Username/Email is an email, check if the entered email exists in the database
-        data = Accounts.find_one({'email': user})
+        data = Accounts.find_one({"email": user})
     else:
         # If the entered Username/Email is not an email, check if the entered username exists in the database
-        data = Accounts.find_one({'username': user})
+        data = Accounts.find_one({"username": user})
 
     if not data:
-        return 'false'
-    return 'true'
+        return "false"
+    return "true"
 
 
 def check_password(email, password):
     print(email)
 
-    data = Accounts.find_one({'email': email})
+    data = Accounts.find_one({"email": email})
     if not data:
-        return 'false'
-    if valid_password(data['password'], password):
-        return 'true'
-    return 'false'
+        return "false"
+    if valid_password(data["password"], password):
+        return "true"
+    return "false"
 
 
-def schoologyLogin(email, request_token, request_token_secret, access_token, access_token_secret, schoologyemail, schoologyname):
+def schoologyLogin(
+    email,
+    request_token,
+    request_token_secret,
+    access_token,
+    access_token_secret,
+    schoologyemail,
+    schoologyname,
+):
     query = {"email": email}
-    values = {"$set":
-                  {"schoologyEmail":schoologyemail,
-                    "schoologyName":schoologyname,
-                    "schoology": True,
-                   "Schoology_request_token": request_token,
-                   "Schoology_request_token_secret": request_token_secret,
-                   "Schoology_access_token": access_token,
-                   "Schoology_access_token_secret": access_token_secret
-                   }
-              }
+    values = {
+        "$set": {
+            "schoologyEmail": schoologyemail,
+            "schoologyName": schoologyname,
+            "schoology": True,
+            "Schoology_request_token": request_token,
+            "Schoology_request_token_secret": request_token_secret,
+            "Schoology_access_token": access_token,
+            "Schoology_access_token_secret": access_token_secret,
+        }
+    }
     Accounts.update_one(query, values)
+
+
 def logout_from_schoology(username):
     query = {"username": username}
-    values = {"$set":
-                  {"schoologyEmail":None,
-                    "schoologyName":None,
-                    "schoology": False,
-                   "Schoology_request_token": None,
-                   "Schoology_request_token_secret": None,
-                   "Schoology_access_token": None,
-                   "Schoology_access_token_secret": None
-                   }
-              }
+    values = {
+        "$set": {
+            "schoologyEmail": None,
+            "schoologyName": None,
+            "schoology": False,
+            "Schoology_request_token": None,
+            "Schoology_request_token_secret": None,
+            "Schoology_access_token": None,
+            "Schoology_access_token_secret": None,
+        }
+    }
     Accounts.update_one(query, values)

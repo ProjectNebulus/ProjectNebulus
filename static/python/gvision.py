@@ -1,15 +1,18 @@
 import io
 import os
+
 from google.cloud import vision
 
 
 # Google Vision API - Converts image into text
 def detect_image(file_name):
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "./static/json/festive-freedom-309323-0124a1c976ae.json"
+    os.environ[
+        "GOOGLE_APPLICATION_CREDENTIALS"
+    ] = "./static/json/festive-freedom-309323-0124a1c976ae.json"
     client = vision.ImageAnnotatorClient()
     file_name = os.path.abspath(file_name)
     # Loads the image into memory
-    with io.open(file_name, 'rb') as image_file:
+    with io.open(file_name, "rb") as image_file:
         content = image_file.read()
     image = vision.Image(content=content)
 
@@ -20,7 +23,7 @@ def detect_image(file_name):
     for logo in logos:
         logo_list.append(logo.description)
 
-    if (len(logo_list) > 0):
+    if len(logo_list) > 0:
         return logo_list
     response = client.landmark_detection(image=image)
     landmarks = response.landmark_annotations
@@ -28,7 +31,7 @@ def detect_image(file_name):
     for landmark in landmarks:
         landmark_list.append(landmark.description)
 
-    if (len(landmark_list) > 0):
+    if len(landmark_list) > 0:
         return landmark_list
 
     # General

@@ -1,10 +1,12 @@
 from dataclasses import dataclass, field
-from Folder import Folder
 from typing import List
+
 from Assignment import Assignment
-from User import User
+from Folder import Folder
 from Grades import Grades
 from Snowflake import Snowflake
+from User import User
+
 
 @dataclass
 class Course(Snowflake):
@@ -23,6 +25,7 @@ class Course(Snowflake):
         - grades: A Grades Object for the course. Represents the user's grades. Default: None
 
     """
+
     name: str
     teacher: str
     assignments: List[Assignment] = field(default_factory=list)

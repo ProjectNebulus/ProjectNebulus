@@ -1,5 +1,7 @@
 from dataclasses import dataclass
+
 from AvatarSize import AvatarSize
+
 
 @dataclass
 class Avatar:

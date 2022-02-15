@@ -1,10 +1,12 @@
 from dataclasses import dataclass, field
-from typing import List
-from Course import Course
-from Avatar import Avatar
 from datetime import datetime
+from typing import List
+
+from Avatar import Avatar
+from Course import Course
 from Schoology import Schoology
 from Snowflake import Snowflake
+
 
 @dataclass
 class User(Snowflake):
@@ -29,6 +31,7 @@ class User(Snowflake):
         - status: The status of the user. Default: None
         - schoology: The user's schoology account information. Default: None
     """
+
     username: str
     password: str
     email: str
@@ -44,9 +47,3 @@ class User(Snowflake):
     student: bool = True
     teacher: bool = False
     schoology: Schoology = None
-
-
-
-
-
-

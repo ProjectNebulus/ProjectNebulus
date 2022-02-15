@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from datetime import datetime
 
+
 @dataclass
 class Document:
     """
@@ -13,6 +14,7 @@ class Document:
     :optional params:
         - description: The Document's description.
     """
+
     _id: int
     url: str
     name: str
