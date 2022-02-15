@@ -1,7 +1,7 @@
 import io
 import os
 
-from google.cloud import vision
+# from google.cloud import vision
 
 
 # Google Vision API - Converts image into text
