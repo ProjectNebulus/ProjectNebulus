@@ -1,4 +1,4 @@
-import inspect
+
 from datetime import datetime
 from dataclasses import dataclass, field
 import dataclasses
@@ -14,7 +14,7 @@ class Snowflake:
     def to_dict(self):
         for x, y in self.__dict__.items():
             if isinstance(y, list):
-                if any(inspect.isclass(z) for z in y):
+                if all(dataclasses.is_dataclass(z) for z in y):
                     self.__dict__[x] = [z.to_dict() for z in y]
 
             elif inspect.isclass(y):
