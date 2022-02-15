@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import List
+from typing import List, Union
 
 from .Document import Document
 from .Snowflake import Snowflake
@@ -15,4 +15,4 @@ class Folder(Snowflake):
     """
 
     name: str
-    documents: List[Document]
+    documents: List[Union[Document, int]]

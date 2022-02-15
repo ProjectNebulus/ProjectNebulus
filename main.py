@@ -15,14 +15,15 @@ from static.python.spotify import status as spotifystatus
 from static.python.youtube import search_yt
 from static.python.classes.User import User
 from static.python.classes.Course import Course
+from static.python.encode_class import encode_class
 
-"""
-Test code for objects:
 
-course = Course('test', 'test')
-user = User('test', 'test', 'test', datetime.datetime.now(), courses=[course])
-print(user.to_dict(storeById=True))
-"""
+
+# course = Course('test', 'test')
+# user = User('test', 'test', 'test', datetime.datetime.now(), courses=[course])
+# user2 = user.to_dict()
+# print(encode_class(user2, User))
+
 
 
 

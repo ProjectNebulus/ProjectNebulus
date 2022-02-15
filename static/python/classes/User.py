@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import List
+from typing import List, Union
 
 from .Avatar import Avatar
 from .Course import Course
@@ -35,7 +35,7 @@ class User(Snowflake):
     password: str
     email: str
     created_at: datetime
-    courses: List[Course] = field(default_factory=list)
+    courses: List[Union[Course, int]] = field(default_factory=list)
     points: int = 0
     avatar: Avatar = None
     bio: str = None
