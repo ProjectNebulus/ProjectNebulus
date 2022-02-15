@@ -13,9 +13,16 @@ from static.python.image_to_music import *
 from static.python.schoology import getcourse
 from static.python.spotify import status as spotifystatus
 from static.python.youtube import search_yt
+from static.python.classes.User import User
+from static.python.classes.Course import Course
 
+"""
+Test code for objects:
 
-
+course = Course('test', 'test')
+user = User('test', 'test', 'test', datetime.datetime.now(), courses=[course])
+print(user.to_dict(storeById=True))
+"""
 
 
 
