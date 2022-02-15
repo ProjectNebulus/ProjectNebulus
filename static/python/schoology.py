@@ -2,8 +2,18 @@ import json
 
 import schoolopy
 
-
-def getcourse(courseid, sc, user):
+from static.python.classes.Assignment import Assignment
+from static.python.classes.Course import Course
+from static.python.classes.Document import Document
+from static.python.classes.Folder import Course
+from static.python.classes.Folder import Course
+from static.python.classes.Grades import Grades
+from static.python.classes.Schoology import Schoology
+def getcourse(courseid, sc, user, jsonEnabled):
+    """
+    jsonEnabled = True | returns json
+    jsonEnabled = False | returns objects
+    """
     # print("Getting Course")
     course = {}
     # Main

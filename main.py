@@ -17,16 +17,6 @@ from static.python.classes.User import User
 from static.python.classes.Course import Course
 from static.python.encode_class import encode_class
 
-
-
-# course = Course('test', 'test')
-# user = User('test', 'test', 'test', datetime.datetime.now(), courses=[course])
-# user2 = user.to_dict()
-# print(encode_class(user2, User))
-
-
-
-
 KEY = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
 SECRET = "59ccaaeb93ba02570b1281e1b0a90e18"
 
