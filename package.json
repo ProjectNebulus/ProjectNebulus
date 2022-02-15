@@ -4,7 +4,8 @@
     "description": "Project Nebulus - Learning, All In One",
     "author": "@projectnebulus",
     "scripts": {
-        "format": "prettier --write \"**/*.{js,json,css}\""
+        "format": "prettier --write \"**/*.{js,json,css}\"",
+        "format:py": "isort . && black ."
     },
     "keywords": [],
     "license": "MPL-2.0",

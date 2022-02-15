@@ -1,10 +1,9 @@
 # Exportng Environment Variables in the .env file
-from dotenv import load_dotenv
-
 import os
 import re
 
 import schoolopy
+from dotenv import load_dotenv
 from flask import Flask, flash, redirect, render_template, request, session
 from waitress import serve
 from werkzeug.utils import secure_filename
