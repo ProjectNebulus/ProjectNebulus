@@ -22,6 +22,13 @@ SECRET = "59ccaaeb93ba02570b1281e1b0a90e18"
 
 sc = schoolopy.Schoology(schoolopy.Auth(KEY, SECRET))
 
+# Testing out the object classes
+# course = Course('test', 'test')
+# user = User('test', 'test', 'test', datetime.datetime.now(), courses=[course._id])
+# user2 = user.to_dict()
+# user3 = encode_class(user2, User)
+# print(user2)
+# print(user3)
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 # Variables

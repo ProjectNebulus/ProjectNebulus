@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import List, Union
+from typing import List, Union, Optional
 
 from .Avatar import Avatar
 from .Course import Course
@@ -35,14 +35,15 @@ class User(Snowflake):
     password: str
     email: str
     created_at: datetime
+    schoology: Optional[Schoology] = None
+    avatar: Optional[Avatar] = None
+    bio: Optional[str] = None
+    premium_expiration: Optional[datetime] = None
+    status: Optional[str] = None
     courses: List[Union[Course, int]] = field(default_factory=list)
     points: int = 0
-    avatar: Avatar = None
-    bio: str = None
     premium: bool = False
-    premium_expiration: datetime = None
-    status: str = None
     is_staff: bool = False
     student: bool = True
     teacher: bool = False
-    schoology: Schoology = None
+

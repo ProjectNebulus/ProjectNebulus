@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import List, Union
 
+# Relative imports
 from .Document import Document
 from .Snowflake import Snowflake
 

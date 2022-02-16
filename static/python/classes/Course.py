@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import List, Union
+from typing import (
+    List,
+    Optional,
+    Union
+)
 
+# Local imports
 from .Assignment import Assignment
 from .Folder import Folder
 from .Grades import Grades
@@ -26,9 +31,9 @@ class Course(Snowflake):
 
     name: str
     teacher: str
+    imported_from: Optional[str] = None
+    description: Optional[str] = None
+    grades: Optional[Union[Grades, int]] = None
+    teacherAccountID: Optional[int] = None
     assignments: List[Union[Assignment, int]] = field(default_factory=list)
-    teacherAccountID: int = None
     folders: List[Union[Folder, int]] = field(default_factory=list)
-    imported_from: str = None
-    description: str = None
-    grades: Union[Grades, int] = None

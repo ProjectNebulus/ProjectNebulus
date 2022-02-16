@@ -5,8 +5,7 @@ import schoolopy
 from static.python.classes.Assignment import Assignment
 from static.python.classes.Course import Course
 from static.python.classes.Document import Document
-from static.python.classes.Folder import Course
-from static.python.classes.Folder import Course
+from static.python.classes.Folder import Folder
 from static.python.classes.Grades import Grades
 from static.python.classes.Schoology import Schoology
 def getcourse(courseid, sc, user, jsonEnabled):
