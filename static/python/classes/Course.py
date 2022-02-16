@@ -11,6 +11,7 @@ from .Folder import Folder
 from .Grades import Grades
 from .Snowflake import Snowflake
 from .Avatar import Avatar
+from .Events import Event
 
 
 @dataclass
@@ -39,3 +40,4 @@ class Course(Snowflake):
     assignments: List[Union[Assignment, int]] = field(default_factory=list)
     folders: List[Union[Folder, int]] = field(default_factory=list)
     image: Optional[Avatar] = None
+    events: List[Union[Event, int]] = field(default_factory=list)

@@ -20,5 +20,5 @@ class Assignment(Snowflake):
 
     due: datetime
     title: str
-    points: Optional[int] = 100
+    points: int = 100
     description: Optional[str] = None
