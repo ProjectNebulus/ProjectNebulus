@@ -1,1 +1,1 @@
-run = "python main.py"
+run = "(python3.10 --version || install-pkg python3.10) && clear && python3.10 main.pyy"
