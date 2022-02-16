@@ -147,6 +147,9 @@ def schoologyLogin(
 def logout_from_schoology(username):
     query = {"username": username}
     values = {
-        "$set": vars(Schoology())
+        "$set": {
+            'schoology':
+                vars(Schoology())
+        }
     }
     Accounts.update_one(query, values)
