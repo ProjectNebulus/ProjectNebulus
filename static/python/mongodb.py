@@ -1,9 +1,13 @@
 import os
 import random
 import re
-
+import schoolopy
 import dns
 import pymongo
+from encode_class import encode_class
+from classes.Schoology import Schoology
+from classes.User import User
+from classes.Course import Course
 
 from static.python.security import hash256, valid_password
 
@@ -15,78 +19,53 @@ Accounts = db.Accounts
 courses = db.Courses
 
 
-def find_courses(username):
-    output = []
-    courseIds = Accounts.find_one({"username": username}).get("courses")
-
-    for course in courses.find():
-        if course.get("_id") in courseIds:
-            output.append(course)
-
-    return output
+def find_courses(id: int):
+    course = courses.find_one({"_id": id})
+    return course if course else None
 
 
-def generateSchoologyObject(username):
+def generateSchoologyObject(id: int):
     key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
     secret = "59ccaaeb93ba02570b1281e1b0a90e18"
-    for i in Accounts.find({}):
-        if i["username"] == username:
-            import schoolopy
-
-            request_token = i["Schoology_request_token"]
-            request_token_secret = i["Schoology_request_token_secret"]
-            access_token = i["Schoology_accesstoken"]
-            access_token_secret = i["Schoology_access_token_secret"]
-            auth = schoolopy.Auth(
-                key,
-                secret,
-                domain="https://bins.schoology.com",
-                three_legged=True,
-                request_token=request_token,
-                request_token_secret=request_token_secret,
-                access_token=access_token,
-                access_token_secret=access_token_secret,
-            )
-            a = auth.authorized
-            sc = schoolopy.Schoology(auth)
-            sc.limit = 10
-
-
-def CheckSchoology(username):
-    for account in Accounts.find({}):
-        if username == account["username"]:
-            return bool(account.get("schoology"))
-
-    return False
-
-
-def create_course(course_name, course_teacher, template, username):
-    rand_id = hex(random.randint(10**5, 10**10))
-
-    duplicate = True
-    while duplicate:
-        duplicate = False
-
-        for course in courses.find():
-            if course.get("_id") == rand_id:
-                duplicate = True
-                rand_id = hex(random.randint(10**5, 10**10))
-
-    Accounts.update_one({"username": username}, {"$push": {"courses": rand_id}})
-    courses.insert_one(
-        {
-            "name": course_name,
-            "teachers": [course_teacher],
-            "students": [],
-            "materials": [],
-            "owner": username,
-        }
+    acc = Accounts.find_one({"_id": id})
+    if not acc:
+        raise KeyError("Account not found")
+    acc = acc['schoology']
+    request_token = acc["Schoology_request_token"]
+    request_token_secret = acc["Schoology_request_token_secret"]
+    access_token = acc["Schoology_access_token"]
+    access_token_secret = acc["Schoology_access_token_secret"]
+    auth = schoolopy.Auth(
+        key,
+        secret,
+        domain="https://bins.schoology.com",
+        three_legged=True,
+        request_token=request_token,
+        request_token_secret=request_token_secret,
+        access_token=access_token,
+        access_token_secret=access_token_secret,
     )
+    a = auth.authorized
+    sc = schoolopy.Schoology(auth)
+    sc.limit = 10
+
+
+def CheckSchoology(id: int):
+    acc = Accounts.find_one({"_id": id})
+    if not acc:
+        raise KeyError("Account not found")
+    return bool(acc.get("schoology"))
+
+
+def create_course(course: Course):
+    for i in course.authorizedUserIDs:
+        Accounts.update_one({"_id": i}, {"$push": {"courses": course._id}})
+    courses.insert_one(course.to_dict())
 
     print("course created")
 
 
-def create_user(username, email, password):
+def create_user(user: User):
     """
     Status Codes:
     0: Success
@@ -94,29 +73,15 @@ def create_user(username, email, password):
     2: Username already exists
     3: Email already exists
     """
-    password = hash256(password)
-    if Accounts.find_one({"username": username, "email": email}):
+    #password = hash256(password)
+    if Accounts.find_one({"username": user.username, "email": user.email}):
         return "1"
-    if Accounts.find_one({"username": username}):
+    if Accounts.find_one({"username": user.username}):
         return "2"
-    if Accounts.find_one({"email": email}):
+    if Accounts.find_one({"email": user.email}):
         return "3"
-    Accounts.insert_one(
-        {
-            "_id": db.Accounts.count_documents({}),
-            "username": username,
-            "email": email,
-            "password": password,
-            "avatar": "",
-            "bio": "",
-            "courses": [],
-            "musiqueworld": [],
-            "premium": "false",
-            "staff": "false",
-        }
-    )
-
-    return "0"
+    Accounts.insert_one(user.to_dict())
+     return "0"
 
 
 def check_user_params(email):
@@ -160,8 +125,6 @@ def check_user(user):
 
 
 def check_password(email, password):
-    print(email)
-
     data = Accounts.find_one({"email": email})
     if not data:
         return "false"
@@ -171,25 +134,12 @@ def check_password(email, password):
 
 
 def schoologyLogin(
-    email,
-    request_token,
-    request_token_secret,
-    access_token,
-    access_token_secret,
-    schoologyemail,
-    schoologyname,
+    "_id": int,
+    schoology: Schoology,
 ):
-    query = {"email": email}
+    query = {"email": id}
     values = {
-        "$set": {
-            "schoologyEmail": schoologyemail,
-            "schoologyName": schoologyname,
-            "schoology": True,
-            "Schoology_request_token": request_token,
-            "Schoology_request_token_secret": request_token_secret,
-            "Schoology_access_token": access_token,
-            "Schoology_access_token_secret": access_token_secret,
-        }
+        "$set": {vars(schoology)}
     }
     Accounts.update_one(query, values)
 
@@ -197,14 +147,6 @@ def schoologyLogin(
 def logout_from_schoology(username):
     query = {"username": username}
     values = {
-        "$set": {
-            "schoologyEmail": None,
-            "schoologyName": None,
-            "schoology": False,
-            "Schoology_request_token": None,
-            "Schoology_request_token_secret": None,
-            "Schoology_access_token": None,
-            "Schoology_access_token_secret": None,
-        }
+        "$set": vars(Schoology())
     }
     Accounts.update_one(query, values)
