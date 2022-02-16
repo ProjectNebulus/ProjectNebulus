@@ -20,18 +20,22 @@ Accounts = db.Accounts
 courses = db.Courses
 
 
-def find_courses(id: int):
-    course = courses.find_one({"_id": id})
+def find_courses(_id: int):
+    course = courses.find_one({"_id": _id})
     return course if course else None
 
 
-def generateSchoologyObject(id: int):
+def generateSchoologyObject(_id: int):
     key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
     secret = "59ccaaeb93ba02570b1281e1b0a90e18"
-    acc = Accounts.find_one({"_id": id})
+    acc = Accounts.find_one({"_id": _id})
     if not acc:
         raise KeyError("Account not found")
-    acc = acc['schoology']
+
+    if not acc["schoology"]:
+        raise KeyError("Account not linked to Schoology")
+
+    acc = acc["schoology"]
     request_token = acc["Schoology_request_token"]
     request_token_secret = acc["Schoology_request_token_secret"]
     access_token = acc["Schoology_access_token"]
@@ -51,8 +55,8 @@ def generateSchoologyObject(id: int):
     sc.limit = 10
 
 
-def CheckSchoology(id: int):
-    acc = Accounts.find_one({"_id": id})
+def CheckSchoology(_id: int):
+    acc = Accounts.find_one({"_id": _id})
     if not acc:
         raise KeyError("Account not found")
     return bool(acc.get("schoology"))
@@ -74,7 +78,7 @@ def create_user(user: User):
     2: Username already exists
     3: Email already exists
     """
-    #password = hash256(password)
+    # password = hash256(password)
     if Accounts.find_one({"username": user.username, "email": user.email}):
         return "1"
     if Accounts.find_one({"username": user.username}):
@@ -82,7 +86,7 @@ def create_user(user: User):
     if Accounts.find_one({"email": user.email}):
         return "3"
     Accounts.insert_one(user.to_dict())
-     return "0"
+    return "0"
 
 
 def check_user_params(email):
@@ -125,7 +129,10 @@ def check_user(user):
     return "true"
 
 
-def check_password(email, password):
+def check_password(
+        email,
+        password
+):
     data = Accounts.find_one({"email": email})
     if not data:
         return "false"
@@ -135,22 +142,26 @@ def check_password(email, password):
 
 
 def schoologyLogin(
-    "_id": int,
-    schoology: Schoology,
+        _id: int,
+        schoology: Schoology,
 ):
-    query = {"email": id}
-    values = {
-        "$set": {vars(schoology)}
+    query = {
+         "email": _id
+    }
+
+    values = {"$set":
+        {
+            "schoology": vars(schoology)
+        }
     }
     Accounts.update_one(query, values)
 
 
 def logout_from_schoology(username):
     query = {"username": username}
-    values = {
-        "$set": {
-            'schoology':
-                vars(Schoology())
+    values = {"$set":
+        {
+            "schoology": None
         }
     }
     Accounts.update_one(query, values)
