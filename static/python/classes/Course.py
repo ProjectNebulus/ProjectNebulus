@@ -28,6 +28,7 @@ class Course(Snowflake):
         - folders: A list of Folder Objects for the course. Default: []
         - description: The course description. Default: None
         - grades: A Grades Object for the course. Represents the user's grades. Default: None
+        - authorizedUserIds: A list of user IDs that are authorized to view the course. Default: []
 
     """
 

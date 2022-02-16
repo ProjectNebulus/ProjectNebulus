@@ -41,7 +41,7 @@ class User(Snowflake):
     premium_expiration: Optional[datetime] = None
     status: Optional[str] = None
     courses: List[Union[Course, int]] = field(default_factory=list)
-    points: Optional[int] = 0
+    points: int = 0
     premium: bool = False
     is_staff: bool = False
     student: bool = True
