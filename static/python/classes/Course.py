@@ -41,3 +41,4 @@ class Course(Snowflake):
     folders: List[Union[Folder, int]] = field(default_factory=list)
     image: Optional[Avatar] = None
     events: List[Union[Event, int]] = field(default_factory=list)
+    authorizedUserIDs: List[int] = field(default_factory=list)
