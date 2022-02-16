@@ -4,8 +4,13 @@ from dataclasses import dataclass
 @dataclass
 class AvatarSize:
     """
-    Size in Pixels
+    Class to store the size of an avatar. Represents the size in pixels.
+
+    :params:
+        - width: The width of the avatar. (int)
+        - height: The height of the avatar. (int)
+
     """
 
-    x_size: int
-    y_size: int
+    width: int
+    height: int

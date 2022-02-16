@@ -12,7 +12,7 @@ class Folder(Snowflake):
     A class that represents a Folder of Documents
     :params:
         name: The name of the folder
-        documents: A list of Document objects inside the folder
+        documents: A list of Document objects or Document Ids inside the folder
     """
 
     name: str

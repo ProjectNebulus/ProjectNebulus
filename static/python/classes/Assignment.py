@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from datetime import datetime
-from typing import List
+from typing import Optional
 
 from .Snowflake import Snowflake
 
@@ -20,5 +20,5 @@ class Assignment(Snowflake):
 
     due: datetime
     title: str
-    points: int = 100
-    description: str = None
+    points: Optional[int] = 100
+    description: Optional[str] = None

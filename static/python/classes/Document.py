@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import Optional
 from datetime import datetime
 
 
@@ -17,4 +18,4 @@ class Document:
     url: str
     name: str
     upload_date: datetime
-    description: str = None
+    description: Optional[str] = None
