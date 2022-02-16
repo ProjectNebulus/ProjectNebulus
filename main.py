@@ -1,21 +1,23 @@
 # Exportng Environment Variables in the .env file
+import datetime
 import os
 import re
-import datetime
+
 import schoolopy
 from dotenv import load_dotenv
 from flask import Flask, flash, redirect, render_template, request, session
 from waitress import serve
 from werkzeug.utils import secure_filename
+
 load_dotenv()
 from static.python import mongodb as db
+from static.python.classes.Course import Course
+from static.python.classes.User import User
+from static.python.encode_class import encode_class
 from static.python.image_to_music import *
 from static.python.schoology import getcourse
 from static.python.spotify import status as spotifystatus
 from static.python.youtube import search_yt
-from static.python.classes.User import User
-from static.python.classes.Course import Course
-from static.python.encode_class import encode_class
 
 KEY = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
 SECRET = "59ccaaeb93ba02570b1281e1b0a90e18"
@@ -576,4 +578,4 @@ def logout_from_schoology():
 
 
 # Running
-serve(app, host='0.0.0.0', port=8080) 
+serve(app, host="0.0.0.0", port=8080)

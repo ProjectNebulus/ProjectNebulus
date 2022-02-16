@@ -1,17 +1,13 @@
 from dataclasses import dataclass, field
-from typing import (
-    List,
-    Optional,
-    Union
-)
+from typing import List, Optional, Union
 
 # Local imports
 from .Assignment import Assignment
+from .Avatar import Avatar
+from .Events import Event
 from .Folder import Folder
 from .Grades import Grades
 from .Snowflake import Snowflake
-from .Avatar import Avatar
-from .Events import Event
 
 
 @dataclass

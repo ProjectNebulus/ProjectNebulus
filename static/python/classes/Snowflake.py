@@ -1,6 +1,7 @@
-from datetime import datetime
-from dataclasses import dataclass
 import dataclasses
+from dataclasses import dataclass
+from datetime import datetime
+
 
 @dataclass(kw_only=True)
 class Snowflake:
@@ -12,9 +13,8 @@ class Snowflake:
     :methods:
         - to_dict: Returns a dictionary representation of the object.
     """
-    _id: int = int((datetime.now() - datetime(2021, 12, 1)).total_seconds() * 10**12)
 
+    _id: int = int((datetime.now() - datetime(2021, 12, 1)).total_seconds() * 10**12)
 
     def to_dict(self):
         return dataclasses.asdict(self)
-

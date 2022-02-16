@@ -12,5 +12,6 @@ class Avatar:
         - url: The url of the avatar image.
         - size: The size of the avatar image. Takes in an AvatarSize Object.
     """
+
     avatar_url: str
     avatar_size: AvatarSize

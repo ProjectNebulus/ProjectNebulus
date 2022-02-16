@@ -253,8 +253,7 @@ function step4() {
         xhttp.send(
             JSON.stringify({
                 schoology: document.getElementById('schoology-id').value
-                
             })
-      );
+        );
     };
 }

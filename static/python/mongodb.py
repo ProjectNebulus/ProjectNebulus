@@ -1,13 +1,14 @@
 import os
 import random
 import re
-import schoolopy
+
 import dns
 import pymongo
-from encode_class import encode_class
+import schoolopy
+from classes.Course import Course
 from classes.Schoology import Schoology
 from classes.User import User
-from classes.Course import Course
+from encode_class import encode_class
 
 from static.python.security import hash256, valid_password
 
