@@ -6,6 +6,7 @@ from .Avatar import Avatar
 from .Course import Course
 from .Schoology import Schoology
 from .Snowflake import Snowflake
+from static.python.security import hash256
 
 
 @dataclass
@@ -46,3 +47,6 @@ class User(Snowflake):
     is_staff: bool = False
     student: bool = True
     teacher: bool = False
+
+    def __post_init__(self):
+        self.password = hash256(self.password)

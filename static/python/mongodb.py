@@ -5,10 +5,10 @@ import re
 import dns
 import pymongo
 import schoolopy
-from classes.Course import Course
-from classes.Schoology import Schoology
-from classes.User import User
-from encode_class import encode_class
+from static.python.classes.Course import Course
+from static.python.classes.Schoology import Schoology
+from static.python.classes.User import User
+from .encode_class import encode_class
 
 from static.python.security import hash256, valid_password
 
@@ -22,8 +22,11 @@ courses = db.Courses
 
 def find_courses(_id: int):
     course = courses.find_one({"_id": _id})
-    return course if course else None
+    return encode_class(course, Course) if course else None
 
+def find_user(_id: int):
+    user = Accounts.find_one({"_id": _id})
+    return encode_class(user, User) if user else None
 
 def generateSchoologyObject(_id: int):
     key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"

@@ -39,3 +39,4 @@ class Course(Snowflake):
     image: Optional[Avatar] = None
     events: List[Union[Event, int]] = field(default_factory=list)
     authorizedUserIDs: List[int] = field(default_factory=list)
+    updates: List = field(default_factory=list)
