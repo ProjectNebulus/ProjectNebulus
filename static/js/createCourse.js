@@ -244,16 +244,44 @@ function step3(template, subtemplate) {
 function step4() {
     screens[2].style.display = 'none';
     screens[3].style.display = 'block';
+
+    const status = document.getElementById('create-course-status');
+    const input = document.getElementById("schoology-id");
+    
     document.getElementById('schoology_import').onsubmit = function () {
-        document.getElementById('create-course-status').innerHTML = 'Creating course...';
+        var index = input.value.indexOf(".schoology.com/course/");        
+      
+        if (index == -1) {
+            status.style.color = "red";
+            status.innerHTML = "Invalid Course Link!";
+            return;
+        }
+
+        var endIndex;
+        for (var endIndex = index + 22; endIndex < input.value.length; endIndex++) {
+          if (isNaN(parseInt(input.value.charAt(i))))
+            break
+        }
+
+        if (endIndex - index < 1) {
+            status.style.color = "red";
+            status.innerHTML = "Invalid Course Link!";
+            return;
+        }
+        
+        const id = input.value.substring(index, endIndex);
+
+        status.innerHTML
+        status.innerHTML = 'Creating course...';
 
         const xhttp = new XMLHttpRequest();
         xhttp.open('POST', '/createCourseSchoology', true);
         xhttp.setRequestHeader('Content-type', 'application/json');
         xhttp.send(
             JSON.stringify({
-                schoology: document.getElementById('schoology-id').value
+                schoology: id;
             })
         );
+
     };
 }

@@ -119,20 +119,18 @@
                             <span class="close"></span>
                         </h1>
                         {% if db.CheckSchoology(user) %}
-                          <form class="schoology-import">
-                            <input type="text" placeholder="Schoology Section ID"><br>
-                            <input type="submit">
-                          </form>
-                            <br><br>
-                            <h3>Instructions for getting the Section ID</h3>
-                            <p>Open a course in Schoology. You will get a link like this: https://&lt;your-school&gt;.schoology.com/course/&lt;</b>
-                                your-section-id<b>&gt;/materials
-                            <p>Type the <b>your-section-id</b> into the box above!
-
-                                {% else %}
-                            <div id="connect-schoology">
-                                <span class="material-icons-outlined">error</span>
-                            </div>
+                        <form class="schoology-import">
+                        <input type="text" placeholder="Schoology Course Link"><br>
+                        <input type="submit">
+                        </form>
+                        <br><br>
+                        <h3>Instructions for getting the Section ID</h3>
+                        <p>When you open a course, the link should be something like "[school].schoology.com/courses/[course-id]/materials".</p>
+                        <p>Paste that link in the box above!</p>
+                        {% else %}
+                        <div id="connect-schoology">
+                            <span class="material-icons-outlined">error</span>
+                        </div>
                         {% endif %}
                     </div>
                 </div>

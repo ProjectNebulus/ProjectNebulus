@@ -41,6 +41,10 @@ check_user_params = True
 
 
 # app routes
+@app.route("/createCourseSchoology")
+def import_schoology():
+    print(request.get_json())
+
 @app.route("/closeSchoology")
 def close():
     session["token"] = request.args.get("oauth_token")
