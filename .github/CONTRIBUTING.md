@@ -83,7 +83,7 @@ $ gh auth login
 
 ### Code Style
 
-Use our project-specific conventions for code formatting. For example, we use [prettier](https://prettier.io) for JavaScript (and related), [black](https://github.com/psf/black) for Python, etc. There should be scripts already written to do this, such as `npm run format` (prettier).
+Use our project-specific conventions for code formatting. For example, we use [prettier](https://prettier.io) for JavaScript (and related), [black](https://github.com/psf/black) for Python, etc. There should be scripts already written to do this, such as `npm run format` (prettier) or `npm run format:py` (python formatters).
 
 ### Commit Messages
 
