@@ -78,11 +78,8 @@ def getcourseObject(courseid, sc, user, template, teacher, created_at):
     image = Avatar(url = json_course["image"])
     assignments = []
     for assignment in course["assignments"]:
-      newassignment = Assignment(due = datetime(assignment["due"]),title = assignment["name"]
-    points: int = 100
-    description: Optional[str] = None
-)
+      newassignment = Assignment(due = datetime(assignment["due"]),title = assignment["name"], points=-1,  description= assignment["info"])
     grades = []
     folders = []
-    course = Course(name = json_course["name"],template=template, created_at=created_at, teacher = teacher imported_from = "Schoology", description = "", grades = [] teacherAccountID = None, assignments = [], folders = [], image = image, events:, authorizedUserIDs:)
+    course = Course(name = json_course["name"],template=template, created_at=created_at, teacher = teacher, imported_from = "Schoology", description = "", grades = [], teacherAccountID = None, assignments = [], folders = [], image = image, events = None, authorizedUserIDs = None)
     
