@@ -7,27 +7,25 @@
         <center>
             <span style="width:100%;padding-top:20px;padding-bottom:20px;margin-bottom:1px;">Applications</span><br>
             <span style="width:100%;padding-top:20px;padding-bottom:20px;margin-top:1px;">API Docs</span>
-
+            
         </center>
     </div>
     <style>
-        .app {
-            position: relative;
-            top: 0;
-            transition: top ease 0.5s;
-            background: black;
-        }
-
-        .app:hover {
-            background: #262626;
-            top: -10px;
-        }
-
-        .spoiler {
-            background: black;
-            color: black;
-            padding: 2px;
-        }
+      .app{
+        position: relative;
+      top: 0;
+      transition: top ease 0.5s;
+      background:black;
+      }
+      .app:hover{
+        background:#262626;
+        top: -10px;
+      }
+      .spoiler{
+        background:black;
+        color:black;
+        padding:2px;
+      }
     </style>
     <div id="middle" style="width:60%;height:90%;float:left;overflow:auto;">
         <center>
@@ -35,14 +33,12 @@
                 Your Applications
             </h1>
             <div style="float:left;color:white;padding:20px;margin:20px;border-radius:20px;width:200px;" class="app">
-                <img src="http://cdn.shopify.com/s/files/1/1061/1924/products/The_Sun_Emoji_grande.png?v=1571606063"
-                     style="height:80px;width810px;">
-                <p>Unnamed Project 1</p>
+              <img src="http://cdn.shopify.com/s/files/1/1061/1924/products/The_Sun_Emoji_grande.png?v=1571606063" style="height:80px;width810px;">
+              <p>Unnamed Project 1</p>
             </div>
             <div style="float:left;color:white;padding:20px;margin:20px;border-radius:20px;width:200px;" class="app">
-                <img src="http://cdn.shopify.com/s/files/1/1061/1924/products/Dark_Blue_Moon_Emoji_grande.png?v=1571606063"
-                     style="height:80px;width:80px;">
-                <p>Unnamed Project 2</p>
+              <img src="http://cdn.shopify.com/s/files/1/1061/1924/products/Dark_Blue_Moon_Emoji_grande.png?v=1571606063" style="height:80px;width:80px;">
+              <p>Unnamed Project 2</p>
             </div>
         </center>
     </div>
@@ -65,7 +61,7 @@
         <div style="height:140px;">
             <div style="width:50%;float:left;">
                 <h4 style="font-weight:800;">Unnamed Project 2</h4>
-
+              
                 <p>Token: <span class="spoiler">https://www.youtube.com/watch?v=dQw4w9WgXcQ</span></p>
             </div>
             <div style="width:50%;float:left;">
@@ -75,20 +71,20 @@
             </div>
         </div>
         <hr>
-
+        
     </div>
 
-    <script type="text/javascript">
-        function stepTwo(text) {
-            document.getElementById("CourseModal").style.display = "none";
-            document.getElementById("Science").style.display = "block";
-        }
-
-        for (var spoiler of document.getElementByClassName("spoiler")) {
-            spoiler.onclick = function () {
-                spoiler.style.backgroundColor = "rgb(50, 50, 50, 0.5)";
-                spoiler.style.color = "white";
-            }
-        }
-    </script>
+<script type="text/javascript">
+  function stepTwo(text){
+    document.getElementById("CourseModal").style.display = "none";
+    document.getElementById("Science").style.display = "block";
+  }
+  
+  for (var spoiler of document.getElementByClassName("spoiler")) {
+      spoiler.onclick = function () {
+          spoiler.style.backgroundColor = "rgb(50, 50, 50, 0.5)";
+          spoiler.style.color = "white";
+      }
+  }
+</script>
 {% endblock %}

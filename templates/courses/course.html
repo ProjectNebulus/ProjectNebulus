@@ -1,0 +1,18 @@
+<!--Extend with Jinja!-->
+{% extends "layout.html" %}
+{% block main %}
+    <div id="side_bar">
+        <p class="course-title">{{ course.name }}</p>
+        <p class="course_option">Documents</p>
+        <p class="course_option">Grades</p>
+        <p class="course_option">Information</p>
+        <p class="course_option">Settings</p>
+        <p class="course_option">Textbook</p>
+        <p class="course_option">Extension</p>
+        <p class="course_option coming-soon">Learning*</p>
+        <p>Learning is coming soon!</p>
+    </div>
+    <div id="course-body">
+    </div>
+
+{% endblock %}

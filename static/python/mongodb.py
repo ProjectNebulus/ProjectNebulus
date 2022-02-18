@@ -23,6 +23,7 @@ courses = db.Courses
 def get_user_courses(user_id: int):
     user = Accounts.find_one({"_id": user_id})
     return [Course(i) for i in user] if user and "courses" in user else []
+    
 def find_courses(_id: int):
     course = courses.find_one({"_id": _id})
     return encode_class(course, Course) if course else None

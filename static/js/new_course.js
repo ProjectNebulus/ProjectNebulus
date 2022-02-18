@@ -1,4 +1,6 @@
-function setUpStuff() {}
+function setUpStuff() {
+  
+}
 
 function newCourse() {
     const xhttp = new XMLHttpRequest();

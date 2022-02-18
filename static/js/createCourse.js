@@ -50,6 +50,13 @@ function createCourse(subtemplate) {
     );
 }
 
+function skipTemplates() {
+    screens[0].style.display = "none";
+    customize(null, user + "'s class");
+    const h1 = document.getElementById("change-if-skip-templates");
+    h1.innerHTML = h1.innerHTML.replace("Step 3: ", "");
+}
+
 /*
 
 To create a new template, add a new dictionary and put the parameters:
@@ -142,7 +149,7 @@ for (const template of templates) {
     let button = document.createElement('span');
     button.className = 'button';
     button.onclick = function () {
-        step2(template);
+        chooseTemplate(template);
     };
 
     // TODO: fix duplicate code fragments
@@ -185,8 +192,7 @@ for (const template of templates) {
     divs[0].appendChild(button);
 }
 
-// TODO: give step* functions more meaningful names
-function step2(template) {
+function chooseTemplate(template) {
     screens[0].style.display = 'none';
     screens[1].style.display = 'block';
 
@@ -196,7 +202,7 @@ function step2(template) {
         button.className = 'button';
         button.onclick = function () {
             const name = template.name;
-            step3(name, subtemplate);
+            customize(name, subtemplate);
         };
 
         let imageSpan = document.createElement('span');
@@ -227,7 +233,7 @@ function step2(template) {
     }
 }
 
-function step3(template, subtemplate) {
+function customize(template, subtemplate) {
     screens[1].style.display = 'none';
     screens[2].style.display = 'block';
 
@@ -238,10 +244,10 @@ function step3(template, subtemplate) {
         createCourse(subtemplate);
     };
 
-    document.getElementById('import-schoology').onclick = step4;
+    document.getElementById('import-schoology').onclick = importSchoology;
 }
 
-function step4() {
+function importSchoology() {
     screens[2].style.display = 'none';
     screens[3].style.display = 'block';
 
@@ -279,7 +285,7 @@ function step4() {
         xhttp.setRequestHeader('Content-type', 'application/json');
         xhttp.send(
             JSON.stringify({
-                schoology: id;
+                schoology: id
             })
         );
 

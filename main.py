@@ -454,7 +454,7 @@ def lms():
         user=session["username"],
         user_acc=db.find_user(session["id"]),
         db=db,
-        page="Nebulus - Dashboard",
+        page="Nebulus - Learning",
         new_account=new_user == "true",
     )
 
@@ -490,9 +490,9 @@ def signup_post():
     validation = db.create_user(user)
     print(validation)
     if validation == "0":
-        session["username"] = data.get("username")
-        session["email"] = data.get("email")
-        session["password"] = data.get("password")
+        session["username"] = user.username
+        session["email"] = user.email
+        session["password"] = user.password
         session["id"] = user._id
     return validation
 
@@ -503,8 +503,6 @@ def signin():
     print(session)
     if not (session.get("username") and session.get("password")):
         print("Not Logged In")
-        if check_user_params and session.get("email"):
-            db.check_user_params(session.get("email"))
 
         return render_template(
             "main/signin.html", page="Nebulus - Log In", disablebar=True
@@ -593,4 +591,4 @@ def logout_from_schoology():
 
 
 # Running
-app.run(host="0.0.0.0", port=8080)
+app.run(host="0.0.0.0", port="8080")

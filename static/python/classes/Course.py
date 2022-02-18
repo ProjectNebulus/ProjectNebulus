@@ -1,20 +1,17 @@
 from dataclasses import dataclass, field
-from typing import List, Optional, Union
-from datetime import datetime
-# Local imports
-from .Assignment import Assignment
-from .Avatar import Avatar
-from .Events import Event
-from .Folder import Folder
-from .Grades import Grades
-from .Snowflake import Snowflake
+from Folder import Folder
+from typing import List
+from Assignment import Assignment
+from User import User
+from Grades import Grades
 
 
 @dataclass
-class Course(Snowflake):
+class Course:
     """
     A class for representing a course.
      :required params:
+        - _id: The id of the course.
         - name: The name of the course.
         - teacher: The teacher of the course.
     :optional params:
@@ -24,21 +21,14 @@ class Course(Snowflake):
         - folders: A list of Folder Objects for the course. Default: []
         - description: The course description. Default: None
         - grades: A Grades Object for the course. Represents the user's grades. Default: None
-        - authorizedUserIds: A list of user IDs that are authorized to view the course. Default: []
 
     """
-
     name: str
-    template: str
-    created_at: datetime
-    teacher: Optional[str] = None
-    imported_from: Optional[str] = None
-    description: Optional[str] = None
-    grades: Optional[Union[Grades, int]] = None
-    teacherAccountID: Optional[int] = None
-    assignments: List[Union[Assignment, int]] = field(default_factory=list)
-    folders: List[Union[Folder, int]] = field(default_factory=list)
-    image: Optional[Avatar] = None
-    events: List[Union[Event, int]] = field(default_factory=list)
-    authorizedUserIDs: List[int] = field(default_factory=list)
-    updates: List = field(default_factory=list)
+    _id: str
+    teacher: str
+    assignments: List[Assignment] = field(default_factory=list)
+    teacherAccount: User = None
+    folders: List[Folder] = field(default_factory=list)
+    imported_from: str = None
+    description: str = None
+    grades: Grades = None

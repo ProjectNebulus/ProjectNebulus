@@ -3,7 +3,6 @@ import musixmatch
 import static.python.youtube
 from static.python.gvision import *
 
-
 def convert(file_path):
     a = detect_image(file_path)
     musix = musixmatch.Musixmatch("bbd8cc3d9f6c1444e01d9d66b44f0f49")

@@ -43,29 +43,23 @@
   
     function rightClick(e) {
         e.preventDefault();
-  
-        if (document.getElementById("contextMenu")
-                .style.display == "block")
-            hideMenu();
-        else{
-            var menu = document.getElementById("contextMenu")
-  
-            menu.style.display = 'block';
-            menu.style.left = e.pageX + "px";
-            menu.style.top = e.pageY + "px";
-        }
+        var menu = document.getElementById("contextMenu")
+
+        menu.style.display = 'block';
+        menu.style.left = e.pageX + "px";
+        menu.style.top = e.pageY + "px";
     }
 </script>
 
 <style type="text/css">
     .context-menu {
         position: absolute;
-        text-align: center;
         background: #1a1a1a;
         color:white;
         border: 1px solid transparent;
         border-radius:10px;
         padding:10px;
+        z-index: 5;
     }
   
     .context-menu ul {
@@ -76,15 +70,10 @@
     }
   
     .context-menu ul li {
-        padding-bottom: 7px;
-        padding-top: 7px;
+        padding: 7px 5px 7px 5px;
         border: 1px solid transparent;
-        border-radius:10px;
-    }
-  
-    .context-menu ul li a {
-        text-decoration: none;
-        color: white;
+        border-radius:5px;
+        cursor: pointer;
     }
   
     .context-menu ul li:hover {
@@ -95,8 +84,8 @@
 <div id="contextMenu" class="context-menu" 
     style="display: none">
     <ul>
-        <li><a href="/logout">Logout</a></li>
-        <li><a href="/dashboard">Return to Dashboard</a></li>
+        <li onclick="window.open('/logout', target='_self')">Logout</li>
+        <li onclick="window.open('/dashboard', target='_self')">Return to Dashboard</li>
     </ul>
 </div>
 {% block main %} {% endblock %}
