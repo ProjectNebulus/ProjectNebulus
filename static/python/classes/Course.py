@@ -29,9 +29,9 @@ class Course(Snowflake):
     """
 
     name: str
-    teacher: str
     template: str
     created_at: datetime
+    teacher: Optional[str] = None
     imported_from: Optional[str] = None
     description: Optional[str] = None
     grades: Optional[Union[Grades, int]] = None

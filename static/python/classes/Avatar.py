@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-
+from typing import Optional
 from .AvatarSize import AvatarSize
 
 
@@ -14,4 +14,4 @@ class Avatar:
     """
 
     avatar_url: str
-    avatar_size: AvatarSize
+    avatar_size: Optional[AvatarSize] = None

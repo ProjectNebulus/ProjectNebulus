@@ -60,7 +60,7 @@ def close():
 def create_course():
     data = request.get_json()
     db.create_course(
-        Course(data["name"], data["teacher"], data["template"], datetime.datetime.now(), authorizedUserIds=session.get("id"))
+        Course(name=data["name"], template=data["template"], created_at=datetime.datetime.now(), teacher= data["teacher"], authorizedUserIds=[session.get("id")])
     )
 
 
@@ -133,6 +133,9 @@ def courses_documents(course_id):
                     course_id=course_id,
                     user=session.get("username"),
                 )
+        return render_template(
+            "errors/404.html", page="404 Not Found", user=session.get("username")
+        )
 
     else:
         return redirect("/signin")
