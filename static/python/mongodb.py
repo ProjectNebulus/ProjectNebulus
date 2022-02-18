@@ -3,6 +3,7 @@ import random
 import re
 
 import dns
+import certifi
 import pymongo
 import schoolopy
 from static.python.classes.Course import Course
@@ -13,13 +14,15 @@ from .encode_class import encode_class
 from static.python.security import hash256, valid_password
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
-
-client = pymongo.MongoClient(os.environ["MONGO"])
+ca = certifi.where()
+client = pymongo.MongoClient(os.environ["MONGO"], tlsCAFile=ca)
 db = client.Nebulus
 Accounts = db.Accounts
 courses = db.Courses
 
-
+def get_user_courses(user_id: int):
+    user = Accounts.find_one({"_id": user_id})
+    return [Course(i) for i in user] if user and "courses" in user else []
 def find_courses(_id: int):
     course = courses.find_one({"_id": _id})
     return encode_class(course, Course) if course else None

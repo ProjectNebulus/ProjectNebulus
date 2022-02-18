@@ -10,6 +10,9 @@ from waitress import serve
 from werkzeug.utils import secure_filename
 
 load_dotenv()
+import certifi
+
+certifi.where()
 from static.python import mongodb as db
 from static.python.classes.Course import Course
 from static.python.classes.User import User
@@ -45,6 +48,7 @@ check_user_params = True
 def import_schoology():
     print(request.get_json())
 
+
 @app.route("/closeSchoology")
 def close():
     session["token"] = request.args.get("oauth_token")
@@ -56,7 +60,7 @@ def close():
 def create_course():
     data = request.get_json()
     db.create_course(
-        data["name"], data["teacher"], data["template"], session.get("username")
+        Course(data["name"], data["teacher"], data["template"], datetime.datetime.now(), authorizedUserIds=session.get("id"))
     )
 
 
@@ -386,13 +390,13 @@ def settings():
 
         schoologyemail = (
             pymongo.MongoClient(os.environ["MONGO"])
-            .Nebulus.Accounts.find_one({"username": session.get("username")})
-            .get("schoologyEmail")
+                .Nebulus.Accounts.find_one({"username": session.get("username")})
+                .get("schoologyEmail")
         )
         schoologyname = (
             pymongo.MongoClient(os.environ["MONGO"])
-            .Nebulus.Accounts.find_one({"username": session.get("username")})
-            .get("schoologyName")
+                .Nebulus.Accounts.find_one({"username": session.get("username")})
+                .get("schoologyName")
         )
     except Exception as e:
         print(e)
@@ -445,6 +449,7 @@ def lms():
     return render_template(
         "lms.html",
         user=session["username"],
+        user_acc=db.find_user(session["id"]),
         db=db,
         page="Nebulus - Dashboard",
         new_account=new_user == "true",
@@ -478,11 +483,14 @@ def signup():
 @app.route("/signup", methods=["POST"])
 def signup_post():
     data = request.get_json()
-    validation = db.create_user(data["username"], data["email"], data["password"])
+    user = User(data["username"], data["password"], data['email'], datetime.datetime.now())
+    validation = db.create_user(user)
+    print(validation)
     if validation == "0":
         session["username"] = data.get("username")
         session["email"] = data.get("email")
         session["password"] = data.get("password")
+        session["id"] = user._id
     return validation
 
 
@@ -491,7 +499,6 @@ def signin():
     # If the user is already logged in, redirect to the dashboard
     print(session)
     if not (session.get("username") and session.get("password")):
-        print(checl_user_params)
         print("Not Logged In")
         if check_user_params and session.get("email"):
             db.check_user_params(session.get("email"))
@@ -522,6 +529,7 @@ def signin_username():
             session["email"] = db.Accounts.find_one({"username": session["username"]})[
                 "email"
             ]
+        session["id"] = db.Accounts.find_one({"username": session["username"]})["_id"]
     return validation
 
 
@@ -582,4 +590,4 @@ def logout_from_schoology():
 
 
 # Running
-serve(app, host="0.0.0.0", port=8080)
+app.run(host="0.0.0.0", port=8080)

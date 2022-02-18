@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 from typing import List, Optional, Union
-
+from datetime import datetime
 # Local imports
 from .Assignment import Assignment
 from .Avatar import Avatar
@@ -30,6 +30,8 @@ class Course(Snowflake):
 
     name: str
     teacher: str
+    template: str
+    created_at: datetime
     imported_from: Optional[str] = None
     description: Optional[str] = None
     grades: Optional[Union[Grades, int]] = None
