@@ -59,8 +59,9 @@ def close():
 @app.route("/createCourse", methods=["POST"])
 def create_course():
     data = request.get_json()
+    print(data)
     db.create_course(
-        Course(name=data["name"], template=data["template"], created_at=datetime.datetime.now(), teacher= data["teacher"], authorizedUserIds=[session.get("id")])
+        Course(data["name"], template=data["template"], created_at=datetime.datetime.now(), teacher=data["teacher"], authorizedUserIds=[session.get("id")])
     )
 
 
@@ -426,10 +427,12 @@ def dashboard():
 
     print("Signed In")
     new_user = request.args.get("new_user", default="false", type=str)
+    user_courses = db.get_user_courses(session.get("id"))
     return render_template(
         "dashboard.html",
         user=session["username"],
         email=session["email"],
+        user_courses=user_courses,
         db=db,
         page="Nebulus - Dashboard",
         new_account=new_user == "true",
@@ -449,10 +452,14 @@ def lms():
         return redirect("/signin")
 
     new_user = request.args.get("new_user", default="false", type=str)
+    user_acc = db.find_user(session["id"])
+    user_courses = db.get_user_courses(session["id"])
+    print(user_courses)
     return render_template(
         "lms.html",
         user=session["username"],
-        user_acc=db.find_user(session["id"]),
+        user_acc=user_acc,
+        user_courses=user_courses,
         db=db,
         page="Nebulus - Learning",
         new_account=new_user == "true",

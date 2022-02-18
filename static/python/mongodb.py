@@ -22,7 +22,10 @@ courses = db.Courses
 
 def get_user_courses(user_id: int):
     user = Accounts.find_one({"_id": user_id})
-    return [Course(i) for i in user] if user and "courses" in user else []
+    if not user:
+        raise KeyError("Account not found")
+    course = courses.find({"_id": {"$in": user["courses"]}})
+    return [encode_class(i, Course) for i in course]
     
 def find_courses(_id: int):
     course = courses.find_one({"_id": _id})
@@ -70,7 +73,8 @@ def CheckSchoology(_id: int):
 
 
 def create_course(course: Course):
-    for i in course.authorizedUserIDs:
+    for i in course.authorizedUserIds:
+        print(course._id)
         Accounts.update_one({"_id": i}, {"$push": {"courses": course._id}})
     courses.insert_one(course.to_dict())
 

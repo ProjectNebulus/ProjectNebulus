@@ -1,13 +1,15 @@
 from dataclasses import dataclass, field
-from Folder import Folder
-from typing import List
-from Assignment import Assignment
-from User import User
-from Grades import Grades
-
+from typing import List, Optional
+from datetime import datetime
+# Relative imports (because this directory is a module
+from .Folder import Folder
+from .Assignment import Assignment
+from .Grades import Grades
+from .Snowflake import Snowflake
+from .Events import Event
 
 @dataclass
-class Course:
+class Course(Snowflake):
     """
     A class for representing a course.
      :required params:
@@ -24,11 +26,15 @@ class Course:
 
     """
     name: str
-    _id: str
-    teacher: str
+    created_at: datetime
+    template: Optional[str] = None
+    teacher: Optional[str] = None
+    authorizedUserIds: List[int] = field(default_factory=list)
     assignments: List[Assignment] = field(default_factory=list)
-    teacherAccount: User = None
+    teacherAccountId: Optional[int] = None
     folders: List[Folder] = field(default_factory=list)
-    imported_from: str = None
-    description: str = None
-    grades: Grades = None
+    imported_from: Optional[str] = None
+    description: Optional[str] = None
+    grades: Optional[Grades] = None
+    events: List[Event] = field(default_factory=list)
+    updates: list = field(default_factory=list)

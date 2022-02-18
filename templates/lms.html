@@ -12,7 +12,7 @@
             <div style="background:linear-gradient(to top right, #ff3c00, #ffd900); width:100%;top:0;margin: 0;font-size:1.5em;padding-top:20px;padding-bottom:20px;border-radius: 8px 8px 0 0;">
                 <h3>Recent Activity</h3>
             </div>
-            {% for x in user_acc.courses %}
+            {% for x in user_courses %}
                 <h3>{{ x.name }}</h3>
                 <hr/>
                 <div class='course_updates'>
@@ -39,7 +39,7 @@
                     <span id="join" class="material-icons">search</span>
                     <span id="create" class="material-icons">add</span>
                 </div>
-                {% for i in user_acc.courses %}
+                {% for i in user_courses %}
                 <a class='dashboardCourse' href='/courses/{{ i._id }}'>
                     <h2>{{ i.name }}</h2>
                     <h3>{{ i.teacher }}</h3>

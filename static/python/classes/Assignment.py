@@ -1,5 +1,5 @@
-from collections import dataclass
-from typing import List
+from dataclasses import dataclass
+from typing import Optional
 from datetime import datetime
 
 @dataclass
@@ -16,8 +16,7 @@ class Assignment:
         points: The number of points the assignment is worth. Default: 100.
     """
     due: datetime.date
-    description: str = None
     title: str
-    _id: int
     points: int = 100
+    description: Optional[str] = None
     
