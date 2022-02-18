@@ -7,6 +7,7 @@ from static.python.classes.Schoology import Schoology
 from static.python.classes import Avatar
 import json
 
+from datetime import datetime
 def getcourse(courseid, sc, user, jsonEnabled):
     """
     jsonEnabled = True | returns json
@@ -75,6 +76,13 @@ def getCourseJson(courseid, sc, user):
 def getcourseObject(courseid, sc, user, template, teacher, created_at):
     json_course = getCourseJson(courseid, sc, user)
     image = Avatar(url = json_course["image"])
-  
-    course = Course(name = json_course["name"],template=template, created_at=created_at, teacher = teacher, imported_from = "Schoology", description = "", grades = [], teacherAccountID = None, assignments = [], folders = [], image = image)
+    assignments = []
+    for assignment in course["assignments"]:
+      newassignment = Assignment(due = datetime(assignment["due"]),title = assignment["name"]
+    points: int = 100
+    description: Optional[str] = None
+)
+    grades = []
+    folders = []
+    course = Course(name = json_course["name"],template=template, created_at=created_at, teacher = teacher imported_from = "Schoology", description = "", grades = [] teacherAccountID = None, assignments = [], folders = [], image = image, events:, authorizedUserIDs:)
     

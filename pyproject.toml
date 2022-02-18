@@ -17,6 +17,9 @@ python-dotenv = "^0.19.2"
 swspotify = "^1.2.2"
 PyAutoGUI = "^0.9.53"
 spotipy = "^2.19.0"
+dacite = "^1.6.0"
+schoolopy = "^0.2.2"
+waitress = "^2.0.0"
 
 [tool.poetry.dev-dependencies]
 
