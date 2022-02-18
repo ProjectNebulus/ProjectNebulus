@@ -52,7 +52,7 @@
             <h2>Recent courses</h2>
             <div class="section">
                 {% for course in db.Accounts.find_one({"username":user}).get("courses") %}
-                    <a class="button" href="/courses/{{ course.id }}">
+                    <a class='dashboardCourse' href="/courses/{{ course.id }}">
                         <h1>{{ course.name }}</h1>
                         <h2>{{ course.teacher }}</h2>
                     </a>
