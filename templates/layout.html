@@ -63,9 +63,9 @@
         text-align: center;
         background: #1a1a1a;
         color:white;
-        border: 1px solid black;
+        border: 1px solid transparent;
         border-radius:10px;
-        padding:20px;
+        padding:10px;
     }
   
     .context-menu ul {
@@ -78,7 +78,7 @@
     .context-menu ul li {
         padding-bottom: 7px;
         padding-top: 7px;
-        border: 1px solid black;
+        border: 1px solid transparent;
         border-radius:10px;
     }
   
@@ -95,13 +95,8 @@
 <div id="contextMenu" class="context-menu" 
     style="display: none">
     <ul>
-        <li><a href="#">Element-1</a></li>
-        <li><a href="#">Element-2</a></li>
-        <li><a href="#">Element-3</a></li>
-        <li><a href="#">Element-4</a></li>
-        <li><a href="#">Element-5</a></li>
-        <li><a href="#">Element-6</a></li>
-        <li><a href="#">Element-7</a></li>
+        <li><a href="/logout">Logout</a></li>
+        <li><a href="/dashboard">Return to Dashboard</a></li>
     </ul>
 </div>
 {% block main %} {% endblock %}
