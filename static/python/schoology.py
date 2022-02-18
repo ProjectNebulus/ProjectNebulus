@@ -4,7 +4,7 @@ from static.python.classes.Document import Document
 from static.python.classes.Folder import Folder
 from static.python.classes.Grades import Grades
 from static.python.classes.Schoology import Schoology
-
+from static.python.classes import Avatar
 
 def getcourse(courseid, sc, user, jsonEnabled):
     """
@@ -20,14 +20,21 @@ def getcourse(courseid, sc, user, jsonEnabled):
 
 
 def getCourseObject(courseid, sc, user):
-    course = Course()
     # Main
 
     section = dict(sc.get_section(courseid))
+    course = Course(
+      name=section["course_title"], 
+      created_at = 
+      _id=section["id"], 
+      imported_from="Schoology", 
+      image=Avatar(section["profile_url"]),
+    updates=)
     # print(section)
     course["id"] = section["id"]
-    course["name"] = section["course_title"]
-    course["image"] = section["profile_url"]
+    course.name = section["course_title"]
+    course.imported_from = "Schoology"
+    course.image = section["profile_url"]
     # Updates
     # updates = sc.get_updates(section_id = courseid)
     scupdates = sc.get_section_updates(courseid)
