@@ -5,6 +5,7 @@ from static.python.classes.Folder import Folder
 from static.python.classes.Grades import Grades
 from static.python.classes.Schoology import Schoology
 from static.python.classes import Avatar
+import json
 
 def getcourse(courseid, sc, user, jsonEnabled):
     """
@@ -19,24 +20,15 @@ def getcourse(courseid, sc, user, jsonEnabled):
         getCourseObject(courseid, sc, user)
 
 
-def getCourseObject(courseid, sc, user):
+def getCourseJson(courseid, sc, user):
     # Main
-
     section = dict(sc.get_section(courseid))
-    course = Course(
-      name=section["course_title"], 
-      created_at = 
-      _id=section["id"], 
-      imported_from="Schoology", 
-      image=Avatar(section["profile_url"]),
-    updates=)
+    course = []
     # print(section)
     course["id"] = section["id"]
-    course.name = section["course_title"]
-    course.imported_from = "Schoology"
-    course.image = section["profile_url"]
-    # Updates
-    # updates = sc.get_updates(section_id = courseid)
+    course["name"] = section["course_title"]
+    course["import"] = "Schoology"
+    course["image"] = section["profile_url"]
     scupdates = sc.get_section_updates(courseid)
     updates = []
     for update in scupdates:
@@ -50,15 +42,6 @@ def getCourseObject(courseid, sc, user):
             }
         )
     course["updates"] = updates
-
-    # print("Updates:\n")
-
-    # for update in updates:
-    #   for key in update:
-    #     print(key + ":", update[key])
-    #   print()
-
-    # Documents
     scdocuments = sc.get_section_documents(courseid)
     documents = []
     for scdocument in scdocuments:
@@ -68,19 +51,10 @@ def getCourseObject(courseid, sc, user):
         document["attachment"] = scdocument["attachments"]
         documents.append(document)
     course["documents"] = documents
-
-    # Grades
     scgrades = sc.get_user_grades_by_section(user, courseid)
     print(scgrades)
-
-    # Events
     scevents = sc.get_section_events(courseid)
     print(scevents)
-    # Members
-
-    # Unavailable
-
-    # Assignments
     scassignments = sc.get_assignments(courseid)
     assignments = []
     for assignment in scassignments:
@@ -94,21 +68,13 @@ def getCourseObject(courseid, sc, user):
                 "due": assignment["due"],
             }
         )
-
-        # print("\nAssignments:")
-
-        # for assignment in assignments:
-        #   for key in assignment:
-        #     print(key + ":", assignment[key])
-        #   print()
-
     course["assignments"] = assignments
-
-    # Final
-    json.dump(course, out, indent=4)
+    return course
 
 
-def getcourseJson(courseid, sc, user):
-    course = {}
-    # Main
-    section = dict(sc.get_section(courseid))
+def getcourseObject(courseid, sc, user, template, teacher, created_at):
+    json_course = getCourseJson(courseid, sc, user)
+    image = Avatar(url = json_course["image"])
+  
+    course = Course(name = json_course["name"],template=template, created_at=created_at, teacher = teacher imported_from = "Schoology", description = "", grades = [] teacherAccountID = None, assignments = [], folders = [], image = image, events:, authorizedUserIDs:)
+    
