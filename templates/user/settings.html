@@ -26,11 +26,10 @@
             <span class="change-text">Change</span>
         </p>
         <h2>Connections</h2>
-        <button style="background-image:url('/static/images/logos/classroom.png');background-size: 100px 100px;background-repeat: no-repeat; height: 104px; width: 104px;"></button>
-        <button style="background-image:url('/static/images/logos/canvas.png');background-size: 100px 100px;background-repeat: no-repeat; height: 104px; width: 104px;"></button>
-        <button style="background-image:url('/static/images/logos/schoology.png');background-size: 100px 100px;background-repeat: no-repeat; height: 104px; width: 104px;margin:15px;padding:15px;" id = "auth" onclick="if (resp.innerHTML === 'Login Failed. Reason: Clicked Deny on Schoology. Click Authorize again and click Approve this time!') {location.reload();} newwindow=window.open('{{schoologyURL}}','Authorize with Schoology','height=300,width=800');document.getElementById('auth').style.display = 'none';document.getElementById('connectbtn').style.display = 'inline';" class="button"></button>
-        <br>
-        <button style="background-image:url('https://hotemoji.com/images/dl/7/white-heavy-check-mark-emoji-by-twitter.png');background-size: 100px 100px;background-repeat: no-repeat; height: 104px; width: 104px;display:none !important;margin:15px;padding:15px;" style="display:none;" id="connectbtn" class="button"></button>
+        <button style="background-image:url('/static/images/logos/classroom.png');background-size: 100px 100px;background-repeat: no-repeat; height: 120px; width: 120px;background-position: center;margin:15px;"></button>
+        <button style="background-image:url('/static/images/logos/canvas.png');background-size: 100px 100px;background-repeat: no-repeat; height: 120px; width: 120px;background-position: center;margin:15px;"></button>
+        <button style="background-image:url('/static/images/logos/schoology.png');background-size: 100px 100px;background-repeat: no-repeat; height: 120px; width: 120px;margin:15px;background-position: center;" id = "auth" onclick="if (resp.innerHTML === 'Login Failed. Reason: Clicked Deny on Schoology. Click Authorize again and click Approve this time!') {location.reload();} newwindow=window.open('{{schoologyURL}}','Authorize with Schoology','height=300,width=800');document.getElementById('auth').style.display = 'none';document.getElementById('connectbtn').style.display = 'inline';" class="button"></button>
+        <button style="background-image:url('https://hotemoji.com/images/dl/7/white-heavy-check-mark-emoji-by-twitter.png');background-size: 100px 100px;background-repeat: no-repeat; height: 120px; width: 120px;display:none !important;margin:15px;background-position: center;" style="display:none;" id="connectbtn" class="button"></button>
         <br>
         <span id="resp"></span>
         <script>
