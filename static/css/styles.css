@@ -126,7 +126,7 @@ input[type='password'] {
 
 input[type='submit'],
 #signupinnerbody input[type='submit'] {
-    background: linear-gradient(to top right, #00ffb7, #00b7ff);
+    background: #0084ff;
     color: black;
     cursor: pointer;
     padding-top: 15px;
@@ -137,7 +137,7 @@ input[type='submit'],
 }
 button,
 .button {
-    background: linear-gradient(to top right, #ff3c00, #ffd900);
+    background: #0084ff;
     color: white;
     border-radius: 3px;
     padding-top: 10px;
@@ -150,7 +150,7 @@ button,
 
 button:hover,
 .button:hover {
-    background: linear-gradient(to top right, #ff3c0080, #ffd90080);
+    background: #003261;
     color: gray;
 }
 
@@ -227,11 +227,11 @@ details div:hover {
 
 #signupbody {
     text-align: center;
-    width: 600px;
+    width: 900px;
     height: 600px;
     /*background:black;*/
-    margin-left: calc(50% - 300px);
-    margin-right: calc(50% - 300px);
+    margin-left: calc(50% - 450px);
+    margin-right: calc(50% - 450px);
     margin-top: 50px;
     margin-bottom: 50px;
 }
@@ -259,12 +259,12 @@ button {
 }
 input:focus {
     border-style: solid;
-    border-color: blue;
+    border-color: #0084ff;
 }
 
 input[type='submit']:hover,
 #signupinnerbody input[type='submit']:hover {
-    background: linear-gradient(to top right, #00ffb780, #00b7ff80);
+    background: #003261;
     color: white;
 }
 
@@ -411,4 +411,17 @@ details summary {
     width: 10px;
     border-radius: 2px;
     background-color: rgb(100, 100, 100);
+}
+
+/* Change the white to any color */
+/*override autofill color*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px #212121 inset !important;
+}
+/*Change text in autofill textbox*/
+input:-webkit-autofill{
+    -webkit-text-fill-color: white !important;
 }
