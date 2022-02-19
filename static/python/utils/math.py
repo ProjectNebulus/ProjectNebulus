@@ -61,3 +61,25 @@ def e():
   return math.e
 def complex(real, imaginary):
   return complex(real, imaginary)
+
+def graphingCalculator(equations):
+  #powered by desmos
+  string = """
+  <script src="https://www.desmos.com/api/v1.6/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
+<div id="calculator" style="width: 600px; height: 400px;"></div>
+
+<script>
+  var elt = document.getElementById('calculator');
+  var calculator = Desmos.GraphingCalculator(elt);"""
+  for i in range(0, len(equations)):
+      string+=("calculator.setExpression({ id: 'graph"+str(i)+"', latex: '"+equations[i]+"' });")
+  string+="""</script>
+  """
+  return string
+
+def ln(a):
+  return math.log(a)
+def log(a):
+  return math.log(a, 10)
+def log_base(a, base):
+  return math.log(a, base)
