@@ -118,3 +118,18 @@ class UpdateGrades(graphene.Mutation):
             setattr(grades, key, value)
 
         grades.save()
+
+class UpdateSchoology(graphene.Mutation):
+    class Arguments:
+        user_id = graphene.UUID(required=True)
+        data = SchoologyInput(required=True)
+
+    user = graphene.Field(User)
+
+    def mutate(self, info, user_id, data):
+        user = User.objects.get(pk=user_id)
+        for key, value in vars(data).items():
+            setattr(user.schoology, key, value)
+        user.save()
+
+        return UpdateSchoology(user=user)
