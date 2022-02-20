@@ -23,6 +23,8 @@ waitress = "^2.0.0"
 tortilla = "^0.5.0"
 chempy = "^0.8.2"
 Flask-GraphQL = "^2.0.1"
+graphene = "^3.0"
+graphene-mongo = "^0.2.14"
 
 [tool.poetry.dev-dependencies]
 

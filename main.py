@@ -161,9 +161,9 @@ def courses_announcements(course_id):
                     course_id=course_id,
                     user=session.get("username"),
                 )
+        return "/lms"
 
-    else:
-        return redirect("/signin")
+    return redirect("/signin")
 
 
 @app.route("/courses/<course_id>/grades")
