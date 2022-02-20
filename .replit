@@ -1,1 +1,1 @@
-run = "(python3.10 --version || install-pkg python3.10) && clear && python3.10 main.py"
+run = "(python3.10 --version || install-pkg python3.10) && clear && poetry remove pymongo==4.0.1 graphene==3.0; poetry add pymongo==3.12.3 mongoengine==0.23.1 graphene==3.0b7 graphene-mongo==0.2.13 Flask-GraphQL; python3.10 main.py"
