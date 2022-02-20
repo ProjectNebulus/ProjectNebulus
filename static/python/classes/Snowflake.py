@@ -5,5 +5,6 @@ import uuid
 
 
 class Snowflake(Document):
+    meta = {'allow_inheritance': True}
     _id = UUIDField(default=uuid.uuid4(), primary_key=True)
 

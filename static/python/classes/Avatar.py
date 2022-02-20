@@ -4,4 +4,4 @@ from .AvatarSize import AvatarSize
 
 class Avatar(EmbeddedDocument):
     avatar_url: URLField(required=True)
-    avatar_size: EmbeddedDocumentField(AvatarSize, default=None)
+    avatar_size: GenericEmbeddedDocumentField(AvatarSize, default=None, null=True)

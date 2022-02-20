@@ -7,6 +7,7 @@ from .Assignment import Assignment
 from .Grades import Grades
 from .Snowflake import Snowflake
 from .Events import Event
+from .Avatar import Avatar
 
 templates = ("Sports", "Math", "Science", "Language", "History", "Art", "Music", "Other")
 lms_choices = ("Canvas", "Google Classroom", "Microsoft Teams", "Schoology", "Moodle", "Blackboard Learn", "Other")
@@ -40,11 +41,12 @@ class Course(Snowflake):
     template = StringField(default=None, choices=templates)
     authorizedUsers = ListField(ReferenceField('User'))
     assignments = ListField(ReferenceField('Assignment'))
-    teacherAccount = ReferenceField('User', default=None)
-    folders = ListField(ReferenceField('Folder'), default=[])
-    imported_from = StringField(default=None, choices=lms_choices)
-    description = StringField(default='')
-    documents = ListField(ReferenceField('DocumentFile'), default=[])
-    grades = ReferenceField('Grades', default=None)
-    events = ListField(ReferenceField('Event'), default=[])
-    updates = ListField(default=[])
+    teacherAccount = ReferenceField('User', default=None, null=True)
+    folders = ListField(ReferenceField('Folder'))
+    imported_from = StringField(default=None, choices=lms_choices, null=True)
+    description = StringField(default='', null=True)
+    documents = ListField(ReferenceField('DocumentFile'))
+    grades = ReferenceField('Grades')
+    events = ListField(ReferenceField('Event'))
+    image = GenericEmbeddedDocumentField(Avatar)
+    updates = ListField()

@@ -11,4 +11,4 @@ class Folder(Snowflake):
     """
     meta = {'collection': 'Folders'}
     name: StringField(required=True)
-    documents: ListField(ReferenceField('DocumentFile'), default=[])
+    documents: ListField(ReferenceField('DocumentFile'))

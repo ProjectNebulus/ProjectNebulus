@@ -19,5 +19,5 @@ class DocumentFile(Snowflake):
     url: URLField(required=True)
     name: StringField(required=True)
     upload_date: DateTimeField(default=datetime.now)
-    description: StringField(default='')
-    folder = ReferenceField('Folder', default=None)
+    description: StringField(default='', null=True)
+    folder = ReferenceField('Folder', default=None, null=True)

@@ -37,17 +37,17 @@ class User(Snowflake):
     email = EmailField(required=True)
     created_at = DateTimeField(default=datetime.now())
     # optional params
-    schoology = EmbeddedDocumentField(Schoology)
-    avatar = EmbeddedDocumentField(Avatar, default=None)
-    bio = StringField(default='')
-    premium_expiration = DateTimeField(required=False, default=None)
-    status = StringField(default='')
-    courses = ListField(ReferenceField('Course'), default=[])
+    schoology = GenericEmbeddedDocumentField(Schoology, default=None, null=True)
+    avatar = GenericEmbeddedDocumentField(Avatar, default=None, null=True)
+    bio = StringField(default='', null=True)
+    premium_expiration = DateTimeField(required=False, default=None, null=True)
+    status = StringField(default='', null=True)
+    courses = ListField(ReferenceField('Course'))
     points = IntField(default=0)
     premium = BooleanField(default=False)
     is_staff = BooleanField(default=False)
     student = BooleanField(default=True)
     teacher = BooleanField(default=False)
 
-
-
+    def clean(self):
+        self.password = hash256(self.password)

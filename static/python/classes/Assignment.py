@@ -18,5 +18,5 @@ class Assignment(Snowflake):
     due = DateTimeField(required=True)
     title = StringField(required=True)
     points = IntField(default=100)
-    description = StringField(default='')
+    description = StringField(default='', null=True)
     
