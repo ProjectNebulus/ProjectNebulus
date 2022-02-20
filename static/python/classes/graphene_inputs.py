@@ -1,4 +1,6 @@
-from graphene_models import *
+from .graphene_models import *
+
+import graphene
 
 
 class UserInput(graphene.InputObjectType):
@@ -6,6 +8,10 @@ class UserInput(graphene.InputObjectType):
 
 
 class CourseInput(graphene.InputObjectType):
+    pass
+
+
+class GradesInput(graphene.InputObjectType):
     pass
 
 

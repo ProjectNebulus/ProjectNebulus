@@ -21,6 +21,8 @@ from static.python.image_to_music import *
 from static.python.schoology import getcourse
 from static.python.spotify import status as spotifystatus
 from static.python.youtube import search_yt
+from graphql_server.flask import GraphQLView
+from static.python.classes.graphql_query import schema
 
 KEY = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
 SECRET = "59ccaaeb93ba02570b1281e1b0a90e18"
@@ -598,4 +600,7 @@ def logout_from_schoology():
 
 
 # Running
-serve(app, host="0.0.0.0", port="8080")
+app.add_url_rule(
+    "/graphql", view_func=GraphQLView.as_view("graphql", schema=schema.graphql_schema, graphiql=True)
+)
+app.run(host="0.0.0.0", port="8080")

@@ -23,7 +23,7 @@ class Grades(Snowflake):
     """
 
     course = ReferenceField('Course', required=True)
-    student = ReferenceField('Student', required=True)
+    student = ReferenceField('User', required=True)
     grades = DictField(required=True)
     average = FloatField(required=False)
     median = FloatField(required=False)

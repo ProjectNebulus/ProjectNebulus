@@ -3,7 +3,7 @@ import graphene
 from ..User import User
 from ..Assignment import Assignment
 from ..Course import Course
-from ...Folder import Folder
+from ..Folder import Folder
 from ..Document import DocumentFile
 from ..Events import Event
 
