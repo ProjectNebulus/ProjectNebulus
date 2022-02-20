@@ -133,3 +133,33 @@ class UpdateSchoology(graphene.Mutation):
         user.save()
 
         return UpdateSchoology(user=user)
+
+class UpdateAvatar(graphene.Mutation):
+    class Arguments:
+        user_id = graphene.UUID(required=True)
+        data = AvatarInput(required=True)
+
+    user = graphene.Field(User)
+
+    def mutate(self, info, user_id, data):
+        user = User.objects.get(pk=user_id)
+        for key, value in vars(data).items():
+            setattr(user.avatar, key, value)
+        user.save()
+
+        return UpdateAvatar(user=user)
+
+class UpdateAvatarSize(graphene.Mutation):
+    class Arguments:
+        user_id = graphene.UUID(required=True)
+        data = AvatarSizeInput(required=True)
+
+    user = graphene.Field(User)
+
+    def mutate(self, info, user_id, data):
+        user = User.objects.get(pk=user_id)
+
+        for key, value in vars(data).items():
+            setattr(user.avatar.avatar_size, key, value)
+        user.save()
+        return UpdateAvatarSize(user=user)
