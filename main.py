@@ -287,6 +287,7 @@ def courses_extensions(course_id):
 
 @app.route("/")
 def index():
+    print('hi')
     if session.get("username") and session.get("password"):
         return redirect("/dashboard")
     return render_template(
@@ -604,4 +605,4 @@ def logout_from_schoology():
 app.add_url_rule(
     "/graphql", view_func=GraphQLView.as_view("graphql", schema=schema.graphql_schema, graphiql=True)
 )
-app.run(host="0.0.0.0", port="8080")
+app.run(host="localhost", port="8080")
