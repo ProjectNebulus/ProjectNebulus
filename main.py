@@ -63,6 +63,7 @@ def create_course():
     db.create_course(
         Course(data["name"], template=data["template"], created_at=datetime.datetime.now(), teacher=data["teacher"], authorizedUserIds=[session.get("id")])
     )
+    return "Course Created"
 
 
 @app.route("/developers")
@@ -286,7 +287,7 @@ def courses_extensions(course_id):
 
 @app.route("/")
 def index():
-    if session.get("username"):
+    if session.get("username") and session.get("password"):
         return redirect("/dashboard")
     return render_template(
         "main/index.html",
