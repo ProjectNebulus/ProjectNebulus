@@ -152,7 +152,7 @@ def courses_announcements(course_id):
         courses = db.Accounts.find_one({"username": session.get("username")})["courses"]
 
         for course in courses:
-            if course.get("_id") == course_id:
+            if course == course_id:
                 return render_template(
                     "courses/announcements.html",
                     page="Nebulus - " + course.get("name", "Courses"),
