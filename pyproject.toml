@@ -8,7 +8,6 @@ authors = ["nicholasxwang <<>>"]
 python = "^3.8"
 Flask = "^2.0.2"
 youtube_dl = "^2021.12.17"
-pymongo = "^4.0.1"
 musixmatch = "^0.9"
 google-cloud-vision = "^2.6.3"
 Werkzeug = "^2.0.2"
@@ -21,6 +20,7 @@ dacite = "^1.6.0"
 schoolopy = "^0.2.2"
 waitress = "^2.0.0"
 tortilla = "^0.5.0"
+graphene-mongo = "^0.2.14"
 
 [tool.poetry.dev-dependencies]
 

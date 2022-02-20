@@ -1,10 +1,9 @@
 from datetime import datetime
-from dataclasses import dataclass, field
-import dataclasses
+from mongoengine import *
+from graphene.relay import Node
+import uuid
 
-@dataclass(kw_only=True)
-class Snowflake:
-    _id: int = int((datetime.now() - datetime(2021, 12, 1)).total_seconds() * 10**12)
 
-    def to_dict(self):
-        return dataclasses.asdict(self)
+class Snowflake(Document):
+    _id = UUIDField(default=uuid.uuid4(), primary_key=True)
+

@@ -1,13 +1,13 @@
-from dataclasses import dataclass
 from datetime import datetime
-from typing import Optional
+from mongoengine import *
 
 # local imports
 from .Snowflake import Snowflake
 
 
-@dataclass
 class Event(Snowflake):
-    title: str
-    date: datetime
-    description: Optional[str] = None
+    meta = {'collection': 'Events'}
+    title: StringField(required=True)
+    course = ReferenceField('Course', required=True)
+    date: DateTimeField(defualt=datetime.now)
+    description: StringField(default='')

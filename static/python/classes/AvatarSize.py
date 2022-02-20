@@ -1,8 +1,7 @@
-from dataclasses import dataclass
+from mongoengine import *
 
 
-@dataclass
-class AvatarSize:
+class AvatarSize(EmbeddedDocument):
     """
     Class to store the size of an avatar. Represents the size in pixels.
 
@@ -12,5 +11,5 @@ class AvatarSize:
 
     """
 
-    width: int
-    height: int
+    width: IntField(required=True)
+    height: IntField(required=True)

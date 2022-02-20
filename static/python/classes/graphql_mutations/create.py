@@ -1,18 +1,21 @@
 import graphene
 
-from static.python.classes.User import User
-from static.python.classes.Assignment import Assignment
-from static.python.classes.Course import Course
-from static.python.classes.Folder import Folder
-from static.python.classes.Document import DocumentFile
-from .Event import Event
+from ..User import User
+from ..Assignment import Assignment
+from ..Course import Course
+from ...Folder import Folder
+from ..Document import DocumentFile
+from ..Events import Event
 
-from static.python.classes.graphene_inputs import *
+from ..graphene_inputs import *
 
 
 # class CourseInput(graphene.InputObjectType):
 
 class CreateCourse(graphene.Mutation):
+    class Arguments:
+        data = CourseInput(required=True)
+
     course = graphene.Field(Course)
 
     def mutate(self, info, data):
@@ -26,6 +29,9 @@ class CreateCourse(graphene.Mutation):
 
 
 class CreateUser(graphene.Mutation):
+    class Arguments:
+        data = UserInput(required=True)
+
     user = graphene.Field(User)
 
     def mutate(self, info, data):
@@ -36,6 +42,9 @@ class CreateUser(graphene.Mutation):
 
 
 class CreateAssignment(graphene.Mutation):
+    class Arguments:
+        data = AssignmentInput(required=True)
+
     assignment = graphene.Field(Assignment)
 
     def mutate(self, info, data):
@@ -49,6 +58,9 @@ class CreateAssignment(graphene.Mutation):
 
 
 class CreateFolder(graphene.Mutation):
+    class Arguments:
+        data = FolderInput(required=True)
+
     folder = graphene.Field(Folder)
 
     def mutate(self, info, data):
@@ -62,6 +74,9 @@ class CreateFolder(graphene.Mutation):
 
 
 class CreateDocumentFile(graphene.Mutation):
+    class Arguments:
+        data = DocumentFileInput(required=True)
+
     document_file = graphene.Field(DocumentFile)
 
     def mutate(self, info, data):
@@ -82,6 +97,9 @@ class CreateDocumentFile(graphene.Mutation):
 
 
 class CreateEvent(graphene.Mutation):
+    class Arguments:
+        data = EventInput(required=True)
+
     event = graphene.List(Event)
 
     def mutate(self, info, data):

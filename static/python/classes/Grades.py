@@ -1,10 +1,9 @@
-from dataclasses import dataclass, field
+from mongoengine
 from typing import Dict, List
 
 from .Snowflake import Snowflake
 
 
-@dataclass
 class Grades(Snowflake):
     """
     Class to store the grades of a student in one course.
@@ -25,46 +24,52 @@ class Grades(Snowflake):
 
     course_id: int
     student_id: int
-    grades: Dict[int, List[float]] = field(default_factory=dict)
-    grades_list: List[float] = field(default_factory=list)
-    average: float = 0.0
-    median: float = 0.0
-    mode: float = 0.0
-    range: float = 0.0
-    grade_frequency: List[int] = field(default_factory=list)
+    grades: Dict[int, List[float]]
+    grades_list: List[float]
+    average: float
+    median: float
+    mode: float
+    range: float
+    grade_frequency: List[int]
 
-    def __post_init__(self):
-        self.grades_list = [
-            grade[0] * (grade[1] / 100) for grade in self.grades.values()
-        ]
-        self.average = self.get_average()
-        self.median = self.get_median()
-        self.mode = self.get_mode()
-        self.range = self.get_range()
-        self.grade_frequency = self.get_grade_frequency()
+# saved for future use
+def __post_init__(self):
+    self.grades_list = [
+        grade[0] * (grade[1] / 100) for grade in self.grades.values()
+    ]
+    self.average = self.get_average()
+    self.median = self.get_median()
+    self.mode = self.get_mode()
+    self.range = self.get_range()
+    self.grade_frequency = self.get_grade_frequency()
 
-    def get_average(self):
-        return sum(self.grades_list) / len(self.grades_list)
 
-    def get_median(self):
-        self.grades_list.sort()
-        if len(self.grades_list) % 2 == 0:
-            return (
-                self.grades_list[int(len(self.grades_list) / 2)]
-                + self.grades_list[int(len(self.grades_list) / 2) - 1]
-            ) / 2
-        return self.grades_list[int(len(self.grades_list) / 2)]
+def get_average(self):
+    return sum(self.grades_list) / len(self.grades_list)
 
-    def get_mode(self):
-        mode = []
-        for grade in self.grades_list:
-            if self.grades_list.count(grade) > len(self.grades_list) / 2:
-                mode.append(grade)
-        return mode
 
-    def get_range(self):
-        self.grades_list.sort()
-        return self.grades_list[-1] - self.grades_list[0]
+def get_median(self):
+    self.grades_list.sort()
+    if len(self.grades_list) % 2 == 0:
+        return (
+                       self.grades_list[int(len(self.grades_list) / 2)]
+                       + self.grades_list[int(len(self.grades_list) / 2) - 1]
+               ) / 2
+    return self.grades_list[int(len(self.grades_list) / 2)]
 
-    def get_grade_frequency(self):
-        return {grade: self.grades_list.count(grade) for grade in self.grades_list}
+
+def get_mode(self):
+    mode = []
+    for grade in self.grades_list:
+        if self.grades_list.count(grade) > len(self.grades_list) / 2:
+            mode.append(grade)
+    return mode
+
+
+def get_range(self):
+    self.grades_list.sort()
+    return self.grades_list[-1] - self.grades_list[0]
+
+
+def get_grade_frequency(self):
+    return {grade: self.grades_list.count(grade) for grade in self.grades_list}

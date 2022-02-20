@@ -1,7 +1,7 @@
-from dataclasses import dataclass
+from mongoengine import *
 from .AvatarSize import AvatarSize
 
-@dataclass
-class Avatar:
-    avatar_url: str
-    avatar_size: AvatarSize
+
+class Avatar(EmbeddedDocument):
+    avatar_url: URLField(required=True)
+    avatar_size: EmbeddedDocumentField(AvatarSize, default=None)

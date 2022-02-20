@@ -12,7 +12,7 @@ from .AvatarSize import AvatarSize as AvatarSizeModel
 from .Assignment import Assignment as AssignmentModel
 from .Schoology import Schoology as SchoologyModel
 
-from static.python.classes.graphql_mutations.graphql_mutation import Mutations
+from static.python.classes.graphql_mutations.core import DBMutations
 
 
 class User(MongoengineObjectType):
@@ -95,4 +95,4 @@ class Query(graphene.ObjectType):
     schoology = graphene.Field(Schoology)
 
 
-schema = graphene.Schema(query=Query, mutation=Mutations, types=[User, Course, Folder, DocumentFile, Event, Assignment, Grades, Avatar, AvatarSize, Schoology])
+schema = graphene.Schema(query=Query, mutation=DBMutations, types=[User, Course, Folder, DocumentFile, Event, Assignment, Grades, Avatar, AvatarSize, Schoology])

@@ -1,16 +1,14 @@
-from dataclasses import dataclass
-from typing import Optional
+from mongoengine import *
 
 
-@dataclass
-class Schoology:
+class Schoology(EmbeddedDocument):
     """
     A class representing a user's Schoology account
     """
 
-    Schoology_request_token: Optional[str] = None
-    Schoology_request_secret: Optional[str] = None
-    Schoology_access_token: Optional[str] = None
-    Schoology_access_secret: Optional[str] = None
-    schoologyName: Optional[str] = None
-    schoologyEmail: Optional[str] = None
+    Schoology_request_token = StringField(required=True)
+    Schoology_request_secret = StringField(required=True)
+    Schoology_access_token = StringField(required=True)
+    Schoology_access_secret = StringField(required=True)
+    schoologyName = StringField(required=True)
+    schoologyEmail = EmailField(required=True)

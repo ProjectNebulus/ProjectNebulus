@@ -1,5 +1,6 @@
-from dataclasses import dataclass, field
+from mongoengine import *
 from datetime import datetime
+import graphene
 from typing import List, Optional, Union
 
 from .Avatar import Avatar
@@ -8,7 +9,7 @@ from .Schoology import Schoology
 from .Snowflake import Snowflake
 from static.python.security import hash256
 
-@dataclass
+
 class User(Snowflake):
     """
     A class representing a user.
@@ -30,23 +31,23 @@ class User(Snowflake):
         - status: str - The status of the user - Default: None
         - schoology: Schoology - The user's schoology account information - Default: None
     """
+    meta = {'collection': 'Accounts'}
+    username = StringField(required=True)
+    password = StringField(required=True)
+    email = EmailField(required=True)
+    created_at = DateTimeField(default=datetime.now())
+    # optional params
+    schoology = EmbeddedDocumentField(Schoology)
+    avatar = EmbeddedDocumentField(Avatar, default=None)
+    bio = StringField(default='')
+    premium_expiration = DateTimeField(required=False, default=None)
+    status = StringField(default='')
+    courses = ListField(ReferenceField('Course'), default=[])
+    points = IntField(default=0)
+    premium = BooleanField(default=False)
+    is_staff = BooleanField(default=False)
+    student = BooleanField(default=True)
+    teacher = BooleanField(default=False)
 
-    username: str
-    password: str
-    email: str
-    created_at: datetime
-    schoology: Optional[Schoology] = None
-    avatar: Optional[Avatar] = None
-    bio: Optional[str] = None
-    premium_expiration: Optional[datetime] = None
-    status: Optional[str] = None
-    courses: List[Union[Course, int]] = field(default_factory=list)
-    points: int = 0
-    premium: bool = False
-    is_staff: bool = False
-    student: bool = True
-    teacher: bool = False
 
-    def __post_init__(self):
-        self.password = hash256(self.password)
-            
+

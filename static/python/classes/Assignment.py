@@ -1,9 +1,7 @@
-from dataclasses import dataclass
-from typing import Optional
-from datetime import datetime
+from mongoengine import *
 
-@dataclass
-class Assignment:
+
+class Assignment(Snowflake):
     """
     A Class representing an assignment.
     :required params:
@@ -15,8 +13,10 @@ class Assignment:
         description: The description of the assignment. Default: None
         points: The number of points the assignment is worth. Default: 100.
     """
-    due: datetime.date
-    title: str
-    points: int = 100
-    description: Optional[str] = None
+    meta = {'collection': 'Assignments'}
+    course = ReferenceField('Course', required=True)
+    due = DateTimeField(required=True)
+    title = StringField(required=True)
+    points = IntField(default=100)
+    description = StringField(default='')
     

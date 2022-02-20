@@ -1,40 +1,40 @@
 import os
 import random
+from static.python.classes.Course import Course
+from static.python.classes.User import User
 import re
 
 import dns
 import certifi
-import pymongo
+from mongengine import *
 import schoolopy
-from static.python.classes.Course import Course
-from static.python.classes.Schoology import Schoology
-from static.python.classes.User import User
-from .encode_class import encode_class
 
 from static.python.security import hash256, valid_password
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 ca = certifi.where()
-client = pymongo.MongoClient(os.environ["MONGO"], tlsCAFile=ca)
-db = client.Nebulus
-Accounts = db.Accounts
-courses = db.Courses
+connect(os.environ["MONGO"], tlsCAFile=ca)
 
+# done
 def get_user_courses(user_id: int):
-    user = Accounts.find_one({"_id": user_id})
-    if not user:
-        raise KeyError("Account not found")
-    course = courses.find({"_id": {"$in": user["courses"]}})
-    return [encode_class(i, Course) for i in course]
-    
+    user = find_user(user_id)
+    return Course.objects(authorizedUsers__in=[user])
+
+# done
 def find_courses(_id: int):
-    course = courses.find_one({"_id": _id})
-    return encode_class(course, Course) if course else None
+    course = Course.objects(_id=_id)
+    if not course:
+        raise KeyError("Course not found")
+    return course[0]
 
+# done
 def find_user(_id: int):
-    user = Accounts.find_one({"_id": _id})
-    return encode_class(user, User) if user else None
+    user = User.objects(_id=_id)
+    if not user:
+        raise KeyError("User not found")
+    return user[0]
 
+# done
 def generateSchoologyObject(_id: int):
     key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
     secret = "59ccaaeb93ba02570b1281e1b0a90e18"
@@ -64,19 +64,16 @@ def generateSchoologyObject(_id: int):
     sc = schoolopy.Schoology(auth)
     sc.limit = 10
 
-
+# done
 def CheckSchoology(_id: int):
-    acc = Accounts.find_one({"_id": _id})
+    acc = User.objects(_id=_id)
     if not acc:
         raise KeyError("Account not found")
-    return bool(acc.get("schoology"))
+    return bool(acc[0].get("schoology"))
 
 
-def create_course(course: Course):
-    for i in course.authorizedUserIds:
-        print(course._id)
-        Accounts.update_one({"_id": i}, {"$push": {"courses": course._id}})
-    courses.insert_one(course.to_dict())
+def create_course():
+
 
     print("course created")
 
@@ -99,55 +96,28 @@ def create_user(user: User):
     Accounts.insert_one(user.to_dict())
     return "0"
 
-
-def check_user_params(email):
-    user = Accounts.find_one({"email": email})
-    push = {}
-
-    if type(user.get("avatar")) is not str:
-        push["avatar"] = ""
-
-    if type(user.get("bio")) is not str:
-        push["bio"] = ""
-
-    if type(user.get("courses")) is not list:
-        push["courses"] = []
-
-    if type(user.get("musiqueworld")) is not list:
-        push["musiqueworld"] = []
-
-    if user.get("premium") not in ("true", "false"):
-        push["premium"] = "false"
-
-    if user.get("staff") not in ("true", "false"):
-        push["staff"] = "false"
-
-    Accounts.update_one({"email": email}, {"$push": push})
-
-    return "0"
-
-
+# done
 def check_user(user):
     if re.fullmatch(regex, user):
         # If the entered Username/Email is an email, check if the entered email exists in the database
-        data = Accounts.find_one({"email": user})
+        data = User.objects(email=user)
     else:
         # If the entered Username/Email is not an email, check if the entered username exists in the database
-        data = Accounts.find_one({"username": user})
+        data = User.objects(username=user)
 
     if not data:
         return "false"
     return "true"
 
-
+# done
 def check_password(
         email,
         password
 ):
-    data = Accounts.find_one({"email": email})
+    data = User.objects(email=email)
     if not data:
         return "false"
-    if valid_password(data["password"], password):
+    if valid_password(data[0].password, password):
         return "true"
     return "false"
 
@@ -157,7 +127,7 @@ def schoologyLogin(
         schoology: Schoology,
 ):
     query = {
-         "email": _id
+        "email": _id
     }
 
     values = {"$set":
@@ -169,10 +139,6 @@ def schoologyLogin(
 
 
 def logout_from_schoology(username):
-    query = {"username": username}
-    values = {"$set":
-        {
-            "schoology": None
-        }
-    }
-    Accounts.update_one(query, values)
+    user = User.objects(username=username)
+    user.schoology = None
+    user.save()

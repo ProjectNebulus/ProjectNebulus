@@ -1,10 +1,11 @@
-from dataclasses import dataclass
+from mongoengine import *
 from datetime import datetime
-from typing import Optional
 
 
-@dataclass
-class Document:
+from .Snowflake import Snowflake
+
+
+class DocumentFile(Snowflake):
     """
     Class to represent a document. A document is basically a file.
     :required params:
@@ -14,8 +15,9 @@ class Document:
     :optional params:
         - description: The Document's description.
     """
-
-    url: str
-    name: str
-    upload_date: datetime
-    description: Optional[str] = None
+    meta = {'collection': 'Documents'}
+    url: URLField(required=True)
+    name: StringField(required=True)
+    upload_date: DateTimeField(default=datetime.now)
+    description: StringField(default='')
+    folder = ReferenceField('Folder', default=None)
