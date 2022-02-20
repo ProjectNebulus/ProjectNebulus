@@ -3,8 +3,6 @@ import graphene
 from ..graphene_inputs import *
 
 
-
-
 class DeleteCourse(graphene.Mutation):
     class Arguments:
         course_id = graphene.UUID(required=True)

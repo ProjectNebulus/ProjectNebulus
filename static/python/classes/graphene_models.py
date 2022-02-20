@@ -12,7 +12,6 @@ from .Assignment import Assignment as AssignmentModel
 from .Schoology import Schoology as SchoologyModel
 
 
-
 class User(MongoengineObjectType):
     class Meta:
         model = UserModel
@@ -61,4 +60,3 @@ class AvatarSize(MongoengineObjectType):
 class Schoology(MongoengineObjectType):
     class Meta:
         model = SchoologyModel
-

@@ -20,6 +20,7 @@ class UpdateUser(graphene.Mutation):
         user.save()
         return UpdateUser(user=user)
 
+
 class UpdateCourse(graphene.Mutation):
     class Arguments:
         course_id = graphene.UUID(required=True)
@@ -66,6 +67,7 @@ class UpdateEvent(graphene.Mutation):
 
         event.save()
         return UpdateEvent(event=event)
+
 
 class UpdateFolder(graphene.Mutation):
     class Arguments:
@@ -114,6 +116,7 @@ class UpdateGrades(graphene.Mutation):
 
         grades.save()
 
+
 class UpdateSchoology(graphene.Mutation):
     class Arguments:
         user_id = graphene.UUID(required=True)
@@ -129,6 +132,7 @@ class UpdateSchoology(graphene.Mutation):
 
         return UpdateSchoology(user=user)
 
+
 class UpdateAvatar(graphene.Mutation):
     class Arguments:
         user_id = graphene.UUID(required=True)
@@ -143,6 +147,7 @@ class UpdateAvatar(graphene.Mutation):
         user.save()
 
         return UpdateAvatar(user=user)
+
 
 class UpdateAvatarSize(graphene.Mutation):
     class Arguments:

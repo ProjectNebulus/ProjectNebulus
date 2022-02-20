@@ -57,11 +57,12 @@ def create_course():
     data = request.get_json()
     print(data)
     if data["name"] == '':
-      data["name"] = data["template"]
+        data["name"] = data["template"]
     if data["teacher"] == '':
-      data["teacher"] = "Unknown Teacher"
+        data["teacher"] = "Unknown Teacher"
     db.create_course(
-        Course(data["name"], template=data["template"], created_at=datetime.datetime.now(), teacher=data["teacher"], authorizedUserIds=[session.get("id")])
+        Course(data["name"], template=data["template"], created_at=datetime.datetime.now(), teacher=data["teacher"],
+               authorizedUserIds=[session.get("id")])
     )
     return "Course Created"
 

@@ -1,6 +1,7 @@
 from ..graphene_inputs import *
 from ..graphene_inputs import *
 
+
 # class CourseInput(graphene.InputObjectType):
 
 class CreateCourse(graphene.Mutation):
