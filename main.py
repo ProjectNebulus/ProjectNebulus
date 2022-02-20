@@ -125,11 +125,13 @@ def courses(course_id):
 
 @app.route("/courses/<id>/documents")
 def courses_documents(course_id):
+    print(1)
     if session.get("username") and session.get("password"):
         courses = db.Accounts.find_one({"username": session.get("username")})["courses"]
 
         for course in courses:
             if course.get("_id") == course_id:
+                print(2)
                 return render_template(
                     "courses/documents.html",
                     page="Nebulus - " + course.get("name", "Courses"),
