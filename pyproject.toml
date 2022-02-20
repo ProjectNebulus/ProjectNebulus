@@ -18,6 +18,9 @@ youtube_dl = "^2021.12.17"
 musixmatch = "^0.9"
 graphene-mongo = "^0.2.14"
 graphql-server = "^3.0.0-beta.5"
+Werkzeug = "^2.0.3"
+Flask = "^2.0.3"
+graphql-server-core = "^2.0.0"
 
 [tool.poetry.dev-dependencies]
 
