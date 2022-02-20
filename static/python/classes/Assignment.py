@@ -1,5 +1,5 @@
 from mongoengine import *
-
+from .Snowflake import Snowflake
 
 class Assignment(Snowflake):
     """

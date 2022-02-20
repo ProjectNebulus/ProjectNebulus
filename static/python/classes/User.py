@@ -1,6 +1,5 @@
 from mongoengine import *
 from datetime import datetime
-import graphene
 from typing import List, Optional, Union
 
 from .Avatar import Avatar
@@ -37,8 +36,8 @@ class User(Snowflake):
     email = EmailField(required=True)
     created_at = DateTimeField(default=datetime.now())
     # optional params
-    schoology = GenericEmbeddedDocumentField(Schoology, default=None, null=True)
-    avatar = GenericEmbeddedDocumentField(Avatar, default=None, null=True)
+    schoology = EmbeddedDocumentField(Schoology, default=None, null=True)
+    avatar = EmbeddedDocumentField(Avatar, default=None, null=True)
     bio = StringField(default='', null=True)
     premium_expiration = DateTimeField(required=False, default=None, null=True)
     status = StringField(default='', null=True)

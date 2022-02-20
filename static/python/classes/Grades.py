@@ -38,7 +38,6 @@ class Grades(Snowflake):
         self.mode = get_mode(grades_list)
         self.range = get_range(grades_list)
         self.grade_frequency = get_grade_frequency(grades_list)
-# saved for future use
 
 
 def get_average(grades_list):

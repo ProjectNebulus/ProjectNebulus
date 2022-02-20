@@ -2,18 +2,19 @@ import os
 import random
 from static.python.classes.Course import Course
 from static.python.classes.User import User
+from static.python.classes.Schoology import Schoology
 import re
 
 import dns
 import certifi
-from mongengine import *
+from mongoengine import *
 import schoolopy
 
 from static.python.security import hash256, valid_password
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 ca = certifi.where()
-connect(os.environ["MONGO"], tlsCAFile=ca)
+connect(db='Nebulus', username='MainUser', password=os.environ.get('MONGOPASS'), host=os.environ.get('MONGO'), tlsCAFile=ca)
 
 # done
 def get_user_courses(user_id: int):
