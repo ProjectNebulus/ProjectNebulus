@@ -1,4 +1,4 @@
-import graphene
+from graphene_models import *
 
 
 class UserInput(graphene.InputObjectType):
@@ -22,7 +22,13 @@ class DocumentFileInput(graphene.InputObjectType):
 
 
 class AvatarInput(graphene.InputObjectType):
-    pass
+    avatar_url = graphene.String(required=True)
+    avatar_size = graphene.Field(AvatarSize, required=True)
+
+
+class AvatarSizeInput(graphene.InputObjectType):
+    width = graphene.Int(required=True)
+    height = graphene.Int(required=True)
 
 
 class FolderInput(graphene.InputObjectType):
@@ -30,4 +36,9 @@ class FolderInput(graphene.InputObjectType):
 
 
 class SchoologyInput(graphene.InputObjectType):
-    pass
+    Schoology_request_token = graphene.String(required=True)
+    Schoology_request_secret = graphene.String(required=True)
+    Schoology_access_token = graphene.String(required=True)
+    Schoology_access_secret = graphene.String(required=True)
+    schoologyName = graphene.String(required=True)
+    schoologyEmail = graphene.String(required=True)

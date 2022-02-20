@@ -10,5 +10,6 @@ class Folder(Snowflake):
         documents: A list of Document objects inside the folder
     """
     meta = {'collection': 'Folders'}
-    name: StringField(required=True)
-    documents: ListField(ReferenceField('DocumentFile'))
+    name = StringField(required=True)
+    course = ReferenceField('Course', required=True)
+    documents = ListField(ReferenceField('DocumentFile'))
