@@ -57,7 +57,7 @@ def generateSchoologyObject(_id: str):
     secret = "59ccaaeb93ba02570b1281e1b0a90e18"
     get_schoology = gql("""
     query GetSchoology ($userId: String!) {
-        schoology(user_id: $userId) {
+        schoology(userId: $userId) {
             SchoologyRequestToken
             SchoologyRequestSecret
             SchoologyAccessToken
