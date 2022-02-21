@@ -24,8 +24,10 @@ class CreateCourse(graphene.Mutation):
         course = CourseModel(**vars(data))
         course.save(force_insert=True)
         for i in course.authorizedUsers:
-            i.courses.append(course)
-            i.save(force_insert=True)
+            user = UserModel.objects.get(_id=i.pk)
+            user.courses.append(course.id)
+            user.save()
+
 
         return CreateCourse(course=course)
 
