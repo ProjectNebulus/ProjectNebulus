@@ -22,13 +22,13 @@ client = Client(schema=schema)
 
 
 # done
-def get_user_courses(user_id: int):
+def get_user_courses(user_id: str):
     user = find_user(user_id)
     return Course.objects(authorizedUsers__in=[user])
 
 
 # done
-def find_courses(_id: int):
+def find_courses(_id: str):
     course = Course.objects(_id=_id)
     if not course:
         raise KeyError("Course not found")
@@ -36,7 +36,7 @@ def find_courses(_id: int):
 
 
 # done
-def find_user(_id: int):
+def find_user(_id: str):
     user = User.objects(_id=_id)
     if not user:
         raise KeyError("User not found")
@@ -87,14 +87,17 @@ def CheckSchoology(_id: int):
             SchoologyRequestToken
         }
     }""")
-    data = client.execute(check_schoology, variables={"userId": _id})["data"]
-    if not data["schoology"]:
+    data = client.execute(check_schoology, variables={"userId": _id})
+    if "errors" in data:
+        raise KeyError("Account does not exist")
+    if not data["data"]["schoology"]:
         return False
     return True
 
 
-def create_course():
-    print("course created")
+def create_course(course: Course):
+    course.save()
+    return True
 
 
 def create_user(user: User):
@@ -106,13 +109,13 @@ def create_user(user: User):
     3: Email already exists
     """
     # password = hash256(password)
-    if Accounts.find_one({"username": user.username, "email": user.email}):
+    if User.objects(username=user.username, email=user.email):
         return "1"
-    if Accounts.find_one({"username": user.username}):
+    if User.objects(username=user.username):
         return "2"
-    if Accounts.find_one({"email": user.email}):
+    if User.objects(email=user.email):
         return "3"
-    Accounts.insert_one(user.to_dict())
+    user.save()
     return "0"
 
 
@@ -164,28 +167,22 @@ def check_password(
 
 def schoologyLogin(
         _id: str,
+        schoology: Schoology
 
 ):
-    query = {
-        "email": _id
-    }
-
-    values = {"$set":
-        {
-            "schoology": vars(schoology)
-        }
-    }
-    Accounts.update_one(query, values)
+    user = find_user(_id)
+    if not user:
+        raise KeyError("User not found")
+    if user.schoology:
+        return "User already linked to Schoology"
+    user.schoology = schoology
+    user.save()
 
 
 def logout_from_schoology(_id: str):
-    logout_schoology = gql("""
-    mutation LogoutSchoology ($userId: String!) {
- updateUser(_id: $userId, schoology: null) {
-    schoology {
-        SchoologyRequestToken
-    }
-}
-}""")
-    client.execute(logout_schoology, variables={"userId": _id})
+    user = find_user(_id)
+    if not user:
+        raise KeyError("User not found")
+    user.schoology = None
+    user.save()
     return True
