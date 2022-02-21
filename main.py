@@ -494,7 +494,7 @@ def signup():
 @app.route("/signup", methods=["POST"])
 def signup_post():
     data = request.get_json()
-    user = User(data["username"], data["password"], data['email'], datetime.datetime.now())
+    user = User(username=data["username"], password=data["password"],  email=data['email'], created_at=datetime.datetime.now())
     validation = db.create_user(user)
     print(validation)
     if validation == "0":
