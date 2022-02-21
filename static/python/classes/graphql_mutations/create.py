@@ -1,5 +1,15 @@
+from ..User import User as UserModel
+from ..Course import Course as CourseModel
+from ..Folder import Folder as FolderModel
+from ..Document import DocumentFile as DocumentFileModel
+from ..Events import Event as EventModel
+from ..Grades import Grades
+from ..Avatar import Avatar as AvatarModel
+from ..AvatarSize import AvatarSize as AvatarSizeModel
+from ..Assignment import Assignment as AssignmentModel
+from ..Schoology import Schoology as SchoologyModel
 from ..graphene_inputs import *
-from ..graphene_inputs import *
+from ..graphene_models import *
 
 
 # class CourseInput(graphene.InputObjectType):
@@ -11,7 +21,7 @@ class CreateCourse(graphene.Mutation):
     course = graphene.Field(Course)
 
     def mutate(self, info, data):
-        course = Course(**vars(data))
+        course = CourseModel(**vars(data))
         course.save()
         for i in course.authorizedUsers:
             i.courses.append(course)
@@ -27,7 +37,9 @@ class CreateUser(graphene.Mutation):
     user = graphene.Field(User)
 
     def mutate(self, info, data):
-        user = User(**vars(data))
+        print(data)
+        user = UserModel(**data)
+        print(user)
         user.save()
 
         return CreateUser(user=user)
@@ -40,7 +52,7 @@ class CreateAssignment(graphene.Mutation):
     assignment = graphene.Field(Assignment)
 
     def mutate(self, info, data):
-        assignment = Assignment(**vars(data))
+        assignment = AssignmentModel(**data)
         course = assignment.course
         course.assignments.append(assignment)
         course.save()
@@ -56,7 +68,7 @@ class CreateFolder(graphene.Mutation):
     folder = graphene.Field(Folder)
 
     def mutate(self, info, data):
-        folder = Folder(**vars(data))
+        folder = FolderModel(**data)
         course = folder.course
         course.folders.append(folder)
         course.save()
@@ -72,7 +84,7 @@ class CreateDocumentFile(graphene.Mutation):
     document_file = graphene.Field(DocumentFile)
 
     def mutate(self, info, data):
-        document_file = DocumentFile(**vars(data))
+        document_file = DocumentFileModel(**data)
         folder = document_file.folder
         course = document_file.course
         if not folder:
@@ -92,13 +104,29 @@ class CreateEvent(graphene.Mutation):
     class Arguments:
         data = EventInput(required=True)
 
-    event = graphene.List(Event)
+    event = graphene.Field(Event)
 
     def mutate(self, info, data):
-        event = Event(**vars(data))
+        event = EventModel(**data)
         course = event.course
         course.events.append(event)
         course.save()
         event.save()
 
         return CreateEvent(event=event)
+
+class CreateGrades(graphene.Mutation):
+    class Arguments:
+        data = GradesInput(required=True)
+
+    grades = graphene.Field(Grades)
+
+    def mutate(self, info, data):
+        grades = GradesModel(**data)
+        course = grades.course
+        course.grades = grades
+        course.save()
+        grades.save()
+        return CreateGrades(grades=grades)
+
+

@@ -11,5 +11,5 @@ class AvatarSize(EmbeddedDocument):
 
     """
 
-    width: IntField(required=True)
-    height: IntField(required=True)
+    width = IntField(required=True)
+    height = IntField(required=True)

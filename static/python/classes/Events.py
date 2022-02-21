@@ -7,7 +7,7 @@ from .Snowflake import Snowflake
 
 class Event(Snowflake):
     meta = {'collection': 'Events'}
-    title: StringField(required=True)
+    title = StringField(required=True)
     course = ReferenceField('Course', required=True)
-    date: DateTimeField(defualt=datetime.now)
-    description: StringField(default='', null=True)
+    date = DateTimeField(default=datetime.now())
+    description = StringField(default='', null=True)

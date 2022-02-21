@@ -16,9 +16,9 @@ class DocumentFile(Snowflake):
         - description: The Document's description.
     """
     meta = {'collection': 'Documents'}
-    url: URLField(required=True)
-    name: StringField(required=True)
-    upload_date: DateTimeField(default=datetime.now)
-    description: StringField(default='', null=True)
+    url = URLField(required=True)
+    name = StringField(required=True)
+    upload_date = DateTimeField(default=datetime.now)
+    description = StringField(default='', null=True)
     folder = ReferenceField('Folder', default=None, null=True)
     course = ReferenceField('Course', default=None, null=True)
