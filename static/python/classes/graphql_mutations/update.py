@@ -1,20 +1,26 @@
 import graphene
 
-from ..graphene_inputs import *
-
-from ..graphene_inputs import *
+from ..graphene_models import *
+from ..graphql_inputs.update_inputs import *
+from ..Course import Course as CourseModel
+from ..User import User as UserModel
+from ..Folder import Folder as FolderModel
+from ..Document import DocumentFile as DocumentFileModel
+from ..Events import Event as EventModel
+from ..Grades import Grades as GradesModel
+from ..Assignment import Assignment as AssignmentModel
 
 
 class UpdateUser(graphene.Mutation):
     class Arguments:
-        user_id = graphene.UUID(required=True)
-        data = UserInput(required=True)
+        user_id = graphene.String(required=True)
+        data = UpdateUserInput(required=True)
 
     user = graphene.Field(User)
 
     def mutate(self, info, user_id, data):
-        user = User.objects.get(pk=user_id)
-        for key, value in vars(data).items():
+        user = UserModel.objects.get(pk=user_id)
+        for key, value in data.items():
             setattr(user, key, value)
 
         user.save()
@@ -23,14 +29,14 @@ class UpdateUser(graphene.Mutation):
 
 class UpdateCourse(graphene.Mutation):
     class Arguments:
-        course_id = graphene.UUID(required=True)
-        data = CourseInput(required=True)
+        course_id = graphene.String(required=True)
+        data = UpdateCourseInput(required=True)
 
     course = graphene.Field(Course)
 
     def mutate(self, info, course_id, data):
-        course = Course.objects.get(pk=course_id)
-        for key, value in vars(data).items():
+        course = CourseModel.objects.get(pk=course_id)
+        for key, value in data.items():
             setattr(course, key, value)
 
         course.save()
@@ -39,14 +45,14 @@ class UpdateCourse(graphene.Mutation):
 
 class UpdateAssignment(graphene.Mutation):
     class Arguments:
-        assignment_id = graphene.UUID(required=True)
-        data = AssignmentInput(required=True)
+        assignment_id = graphene.String(required=True)
+        data = UpdateAssignmentInput(required=True)
 
     assignment = graphene.Field(Assignment)
 
     def mutate(self, info, assignment_id, data):
-        assignment = Assignment.objects.get(pk=assignment_id)
-        for key, value in vars(data).items():
+        assignment = AssignmentModel.objects.get(pk=assignment_id)
+        for key, value in data.items():
             setattr(assignment, key, value)
 
         assignment.save()
@@ -55,14 +61,14 @@ class UpdateAssignment(graphene.Mutation):
 
 class UpdateEvent(graphene.Mutation):
     class Arguments:
-        event_id = graphene.UUID(required=True)
-        data = EventInput(required=True)
+        event_id = graphene.String(required=True)
+        data = UpdateEventInput(required=True)
 
     event = graphene.Field(Event)
 
     def mutate(self, info, event_id, data):
-        event = Event.objects.get(pk=event_id)
-        for key, value in vars(data).items():
+        event = EventModel.objects.get(pk=event_id)
+        for key, value in data.items():
             setattr(event, key, value)
 
         event.save()
@@ -71,14 +77,14 @@ class UpdateEvent(graphene.Mutation):
 
 class UpdateFolder(graphene.Mutation):
     class Arguments:
-        folder_id = graphene.UUID(required=True)
-        data = FolderInput(required=True)
+        folder_id = graphene.String(required=True)
+        data = UpdateFolderInput(required=True)
 
     folder = graphene.Field(Folder)
 
     def mutate(self, info, folder_id, data):
-        folder = Folder.objects.get(pk=folder_id)
-        for key, value in vars(data).items():
+        folder = FolderModel.objects.get(pk=folder_id)
+        for key, value in data.items():
             setattr(folder, key, value)
 
         folder.save()
@@ -87,14 +93,14 @@ class UpdateFolder(graphene.Mutation):
 
 class UpdateDocumentFile(graphene.Mutation):
     class Arguments:
-        document_id = graphene.UUID(required=True)
-        data = DocumentFileInput(required=True)
+        document_id = graphene.String(required=True)
+        data = UpdateDocumentFileInput(required=True)
 
     document = graphene.Field(DocumentFile)
 
     def mutate(self, info, document_id, data):
-        document = DocumentFile.objects.get(pk=document_id)
-        for key, value in vars(data).items():
+        document = DocumentFileModel.objects.get(pk=document_id)
+        for key, value in data.items():
             setattr(document, key, value)
 
         document.save()
@@ -103,15 +109,15 @@ class UpdateDocumentFile(graphene.Mutation):
 
 class UpdateGrades(graphene.Mutation):
     class Arguments:
-        grades_id = graphene.UUID(required=True)
-        data = GradesInput(required=True)
+        grades_id = graphene.String(required=True)
+        data = UpdateGradesInput(required=True)
 
     grades = graphene.Field(Grades)
 
     def mutate(self, info, grades_id, data):
-        grades = Grades.objects.get(pk=grades_id)
+        grades = GradesModel.objects.get(pk=grades_id)
 
-        for key, value in vars(data).items():
+        for key, value in data.items():
             setattr(grades, key, value)
 
         grades.save()
@@ -119,14 +125,14 @@ class UpdateGrades(graphene.Mutation):
 
 class UpdateSchoology(graphene.Mutation):
     class Arguments:
-        user_id = graphene.UUID(required=True)
-        data = SchoologyInput(required=True)
+        user_id = graphene.String(required=True)
+        data = UpdateSchoologyInput(required=True)
 
     user = graphene.Field(User)
 
     def mutate(self, info, user_id, data):
-        user = User.objects.get(pk=user_id)
-        for key, value in vars(data).items():
+        user = UserModel.objects.get(pk=user_id)
+        for key, value in data.items():
             setattr(user.schoology, key, value)
         user.save()
 
@@ -135,14 +141,14 @@ class UpdateSchoology(graphene.Mutation):
 
 class UpdateAvatar(graphene.Mutation):
     class Arguments:
-        user_id = graphene.UUID(required=True)
-        data = AvatarInput(required=True)
+        user_id = graphene.String(required=True)
+        data = UpdateAvatarInput(required=True)
 
     user = graphene.Field(User)
 
     def mutate(self, info, user_id, data):
-        user = User.objects.get(pk=user_id)
-        for key, value in vars(data).items():
+        user = UserModel.objects.get(pk=user_id)
+        for key, value in data.items():
             setattr(user.avatar, key, value)
         user.save()
 
@@ -151,15 +157,15 @@ class UpdateAvatar(graphene.Mutation):
 
 class UpdateAvatarSize(graphene.Mutation):
     class Arguments:
-        user_id = graphene.UUID(required=True)
-        data = AvatarSizeInput(required=True)
+        user_id = graphene.String(required=True)
+        data = UpdateAvatarSizeInput(required=True)
 
     user = graphene.Field(User)
 
     def mutate(self, info, user_id, data):
-        user = User.objects.get(pk=user_id)
+        user = UserModel.objects.get(pk=user_id)
 
-        for key, value in vars(data).items():
+        for key, value in data.items():
             setattr(user.avatar.avatar_size, key, value)
         user.save()
         return UpdateAvatarSize(user=user)

@@ -1,14 +1,11 @@
-from ..User import User as UserModel
+import graphene
 from ..Course import Course as CourseModel
+from ..User import User as UserModel
 from ..Folder import Folder as FolderModel
 from ..Document import DocumentFile as DocumentFileModel
 from ..Events import Event as EventModel
-from ..Grades import Grades
-from ..Avatar import Avatar as AvatarModel
-from ..AvatarSize import AvatarSize as AvatarSizeModel
+from ..Grades import Grades as GradesModel
 from ..Assignment import Assignment as AssignmentModel
-from ..Schoology import Schoology as SchoologyModel
-from ..graphene_inputs import *
 
 
 class DeleteCourse(graphene.Mutation):

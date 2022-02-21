@@ -1,4 +1,3 @@
-from .graphene_models import *
 from datetime import datetime
 import graphene
 from graphene.types import generic

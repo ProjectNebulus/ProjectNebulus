@@ -1,14 +1,10 @@
+from ..Document import DocumentFile as DocumentFileModel
 from ..User import User as UserModel
 from ..Course import Course as CourseModel
 from ..Folder import Folder as FolderModel
-from ..Document import DocumentFile as DocumentFileModel
-from ..Events import Event as EventModel
-from ..Grades import Grades
-from ..Avatar import Avatar as AvatarModel
-from ..AvatarSize import AvatarSize as AvatarSizeModel
 from ..Assignment import Assignment as AssignmentModel
-from ..Schoology import Schoology as SchoologyModel
-from ..graphene_inputs import *
+from ..Events import Event as EventModel
+from ..graphql_inputs.create_inputs import *
 from ..graphene_models import *
 
 
