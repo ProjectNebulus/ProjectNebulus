@@ -94,7 +94,7 @@ def generateSchoologyObject(_id: str):
 def CheckSchoology(_id: int):
     check_schoology = gql("""
     query CheckSchoology ($userId: String!) { 
-        schoology(user_id: $userId) {
+        schoology(userId: $userId) {
             SchoologyRequestToken
         }
     }""")
