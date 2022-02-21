@@ -56,9 +56,11 @@ def create_course():
         data["name"] = data["template"]
     if data["teacher"] == '':
         data["teacher"] = "Unknown Teacher"
+    if not data["template"]:
+        data["template"] = None
     db.create_course(
-        Course(data["name"], template=data["template"], created_at=datetime.datetime.now(), teacher=data["teacher"],
-               authorizedUserIds=[session.get("id")])
+        Course(name=data["name"], template=data["template"], created_at=datetime.datetime.now(), teacher=data["teacher"],
+               authorizedUsers=[session.get("id")])
     )
     return "Course Created"
 
@@ -117,26 +119,26 @@ def courses(course_id):
     return redirect("/courses/" + str(course_id) + "/documents")
 
 
-@app.route("/courses/<id>/documents")
+@app.route("/courses/<course_id>/documents")
 def courses_documents(course_id):
     print(1)
     if session.get("username") and session.get("password"):
-        courses = db.Accounts.find_one({"username": session.get("username")})["courses"]
+        courses = db.get_user_courses(session.get("id"))
 
-        for course in courses:
-            if course.get("_id") == course_id:
-                print(2)
-                return render_template(
-                    "courses/documents.html",
-                    page="Nebulus - " + course.get("name", "Courses"),
-                    db=db,
-                    course=course,
-                    course_id=course_id,
-                    user=session.get("username"),
-                )
+        course = list(filter(lambda x: x.id == course_id, courses))
+        if not course:
+            return render_template(
+                "errors/404.html", page="404 Not Found", user=session.get("username")
+            )
         return render_template(
-            "errors/404.html", page="404 Not Found", user=session.get("username")
+            "courses/documents.html",
+            page="Nebulus - " + course[0].name,
+            db=db,
+            course=course[0],
+            course_id=course_id,
+            user=session.get("username"),
         )
+
 
     else:
         return redirect("/signin")
@@ -455,7 +457,6 @@ def lms():
     new_user = request.args.get("new_user", default="false", type=str)
     user_acc = db.find_user(session["id"])
     user_courses = db.get_user_courses(session["id"])
-    print(user_courses)
     return render_template(
         "lms.html",
         user=session["username"],
