@@ -602,4 +602,4 @@ def logout_from_schoology():
 app.add_url_rule(
     "/graphql", view_func=GraphQLView.as_view("graphql", schema=schema.graphql_schema, graphiql=True)
 )
-app.run(host="localhost", port="8080")
+serve(app, host="0.0.0.0", port="8080")
