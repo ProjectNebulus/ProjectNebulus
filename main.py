@@ -1,9 +1,5 @@
 # Exportng Environment Variables in the .env file
-import datetime
-import os
-import re
-
-import schoolopy
+import datetime, os, re, schoolopy
 from dotenv import load_dotenv
 from flask import Flask, flash, redirect, render_template, request, session
 from waitress import serve
