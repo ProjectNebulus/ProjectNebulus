@@ -21,6 +21,7 @@ class UpdateUser(graphene.Mutation):
     def mutate(self, info, user_id, data):
         user = UserModel.objects.get(pk=user_id)
         for key, value in data.items():
+            print(key, value)
             setattr(user, key, value)
 
         user.save()
