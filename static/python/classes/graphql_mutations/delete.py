@@ -9,11 +9,12 @@ from ..AvatarSize import AvatarSize as AvatarSizeModel
 from ..Assignment import Assignment as AssignmentModel
 from ..Schoology import Schoology as SchoologyModel
 from ..graphene_inputs import *
+from graphene.types.scalars import BigInt
 
 
 class DeleteCourse(graphene.Mutation):
     class Arguments:
-        course_id = graphene.UUID(required=True)
+        course_id = BigInt(required=True)
 
     result = graphene.Boolean()
 
@@ -27,7 +28,7 @@ class DeleteCourse(graphene.Mutation):
 
 class DeleteUser(graphene.Mutation):
     class Arguments:
-        user_id = graphene.UUID(required=True)
+        user_id = BigInt(required=True)
 
     result = graphene.Boolean()
 
@@ -41,7 +42,7 @@ class DeleteUser(graphene.Mutation):
 
 class DeleteAssignment(graphene.Mutation):
     class Arguments:
-        assignment_id = graphene.UUID(required=True)
+        assignment_id = BigInt(required=True)
 
     result = graphene.Boolean()
 
@@ -54,7 +55,7 @@ class DeleteAssignment(graphene.Mutation):
 
 class DeleteFolder(graphene.Mutation):
     class Arguments:
-        folder_id = graphene.UUID(required=True)
+        folder_id = BigInt(required=True)
 
     result = graphene.Boolean()
 
@@ -67,7 +68,7 @@ class DeleteFolder(graphene.Mutation):
 
 class DeleteDocumentFile(graphene.Mutation):
     class Arguments:
-        document_id = graphene.UUID(required=True)
+        document_id = BigInt(required=True)
 
     result = graphene.Boolean()
 
@@ -83,7 +84,7 @@ class DeleteDocumentFile(graphene.Mutation):
 
 class DeleteEvent(graphene.Mutation):
     class Arguments:
-        event_id = graphene.UUID(required=True)
+        event_id = BigInt(required=True)
 
     result = graphene.Boolean()
 
@@ -96,7 +97,7 @@ class DeleteEvent(graphene.Mutation):
 
 class DeleteGrades(graphene.Mutation):
     class Arguments:
-        grades_id = graphene.UUID(required=True)
+        grades_id = BigInt(required=True)
 
     result = graphene.Boolean()
 
@@ -109,7 +110,7 @@ class DeleteGrades(graphene.Mutation):
 
 class DeleteAvatar(graphene.Mutation):
     class Arguments:
-        user_id = graphene.UUID(required=True)
+        user_id = BigInt(required=True)
 
     result = graphene.Boolean()
 
@@ -122,7 +123,7 @@ class DeleteAvatar(graphene.Mutation):
 
 class DeleteAvatarSize(graphene.Mutation):
     class Arguments:
-        user_id = graphene.UUID(required=True)
+        user_id = BigInt(required=True)
 
     result = graphene.Boolean()
 
@@ -135,7 +136,7 @@ class DeleteAvatarSize(graphene.Mutation):
 
 class DeleteSchoology(graphene.Mutation):
     class Arguments:
-        user_id = graphene.UUID(required=True)
+        user_id = BigInt(required=True)
 
     result = graphene.Boolean()
 

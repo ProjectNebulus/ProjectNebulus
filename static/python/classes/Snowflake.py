@@ -1,9 +1,9 @@
-from datetime import datetime
+import time
 from mongoengine import *
-import uuid
+from ..snowflake_generator import make_snowflake
 
-
+# In graphql, we use the snowflake as the unique identifier for a node. The snowflake is represented as a BigInt.
 class Snowflake(Document):
     meta = {'allow_inheritance': True, 'abstract': True}
-    _id = UUIDField(default=uuid.uuid4(), primary_key=True)
+    _id = LongField(default=lambda: make_snowflake(time.time()*1000, 1, 0, 0), primary_key=True)
 
