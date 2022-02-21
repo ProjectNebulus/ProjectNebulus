@@ -22,10 +22,10 @@ class CreateCourse(graphene.Mutation):
 
     def mutate(self, info, data):
         course = CourseModel(**vars(data))
-        course.save()
+        course.save(force_insert=True)
         for i in course.authorizedUsers:
             i.courses.append(course)
-            i.save()
+            i.save(force_insert=True)
 
         return CreateCourse(course=course)
 
@@ -37,10 +37,8 @@ class CreateUser(graphene.Mutation):
     user = graphene.Field(User)
 
     def mutate(self, info, data):
-        print(data)
         user = UserModel(**data)
-        print(user)
-        user.save()
+        user.save(force_insert=True)
 
         return CreateUser(user=user)
 
@@ -55,8 +53,8 @@ class CreateAssignment(graphene.Mutation):
         assignment = AssignmentModel(**data)
         course = assignment.course
         course.assignments.append(assignment)
-        course.save()
-        assignment.save()
+        course.save(force_insert=True)
+        assignment.save(force_insert=True)
 
         return CreateAssignment(assignment=assignment)
 
@@ -71,8 +69,8 @@ class CreateFolder(graphene.Mutation):
         folder = FolderModel(**data)
         course = folder.course
         course.folders.append(folder)
-        course.save()
-        folder.save()
+        course.save(force_insert=True)
+        folder.save(force_insert=True)
 
         return CreateFolder(folder=folder)
 
@@ -89,13 +87,13 @@ class CreateDocumentFile(graphene.Mutation):
         course = document_file.course
         if not folder:
             course.documents.append(document_file)
-            course.save()
+            course.save(force_insert=True)
         elif not course:
             folder.documents.append(document_file)
-            folder.save()
+            folder.save(force_insert=True)
         else:
             raise Exception("Cannot create document file without either course or folder")
-        document_file.save()
+        document_file.save(force_insert=True)
 
         return CreateDocumentFile(document_file=document_file)
 
@@ -110,8 +108,8 @@ class CreateEvent(graphene.Mutation):
         event = EventModel(**data)
         course = event.course
         course.events.append(event)
-        course.save()
-        event.save()
+        course.save(force_insert=True)
+        event.save(force_insert=True)
 
         return CreateEvent(event=event)
 
@@ -125,8 +123,8 @@ class CreateGrades(graphene.Mutation):
         grades = GradesModel(**data)
         course = grades.course
         course.grades = grades
-        course.save()
-        grades.save()
+        course.save(force_insert=True)
+        grades.save(force_insert=True)
         return CreateGrades(grades=grades)
 
 
