@@ -19,14 +19,14 @@ class Query(graphene.ObjectType):
     # all_events = MongoengineConnectionField(Event)
     # all_assignments = MongoengineConnectionField(Assignment)
     # all_grades = MongoengineConnectionField(Grades)
-    user = graphene.Field(User, _id=graphene.String(required=True))
+    user = graphene.Field(User, args={'_id': graphene.String(), 'username': graphene.String(), 'email': graphene.String()})
     course = graphene.Field(Course, _id=graphene.String(required=True))
     folder = graphene.Field(Folder, _id=graphene.String(required=True))
     document = graphene.Field(DocumentFile, _id=graphene.String(required=True))
     event = graphene.Field(Event, _id=graphene.String(required=True))
     assignment = graphene.Field(Assignment, _id=graphene.String(required=True))
     grades = graphene.Field(Grades, _id=graphene.String(required=True))
-    schoology = graphene.Field(Schoology, user_id=graphene.String(required=True))
+    schoology = graphene.Field(Schoology, args={'user_id': graphene.String(), 'username': graphene.String(), 'email': graphene.String()})
 
     def resolve_course(self, info, _id):
         return CourseModel.objects.get(pk=_id)

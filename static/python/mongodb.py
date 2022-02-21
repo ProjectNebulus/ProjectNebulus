@@ -18,7 +18,7 @@ regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 ca = certifi.where()
 connect(db='Nebulus', username='MainUser', password=os.environ.get('MONGOPASS'), host=os.environ.get('MONGO'),
         tlsCAFile=ca)
-client = Client(schema=schema)
+client = Client(schema=schema.graphql_schema)
 
 
 # done
@@ -36,8 +36,16 @@ def find_courses(_id: str):
 
 
 # done
-def find_user(_id: str):
-    user = User.objects(_id=_id)
+def find_user(_id: str = None, username: str = None, email: str = None):
+    if all(not i for i in [_id, username, email]):
+        raise KeyError("No user id, username, or email provided")
+    user = None
+    if _id:
+        user = User.objects(_id=_id)
+    elif username:
+        user = User.objects(username=username)
+    elif email:
+        user = User.objects(email=email)
     if not user:
         raise KeyError("User not found")
     return user[0]
@@ -56,7 +64,10 @@ def generateSchoologyObject(_id: str):
             SchoologyAccessSecret
         }
     }""")
-    data = client.execute(get_schoology, variables={"userId": _id})["data"]
+    data = client.execute(get_schoology, variable_values={"userId": _id})
+    if "errors" in data:
+        raise KeyError("Account does not exist")
+    data = data["data"]
     if not data["schoology"]:
         raise KeyError("Account not linked to Schoology")
 
@@ -87,10 +98,10 @@ def CheckSchoology(_id: int):
             SchoologyRequestToken
         }
     }""")
-    data = client.execute(check_schoology, variables={"userId": _id})
+    data = client.execute(check_schoology, variable_values={"userId": _id})
     if "errors" in data:
         raise KeyError("Account does not exist")
-    if not data["data"]["schoology"]:
+    if not data["schoology"]:
         return False
     return True
 
@@ -129,7 +140,9 @@ def check_user(user):
                 Id
             }
         }""")
-        data = client.execute(get_user, variables={"email": user})
+
+        data = client.execute(get_user, variable_values={"email": user})
+        print(data)
     else:
         # If the entered Username/Email is not an email, check if the entered username exists in the database
         get_user = gql("""
@@ -138,7 +151,7 @@ def check_user(user):
                 Id
             }
         }""")
-        data = client.execute(get_user, variables={"username": user})
+        data = client.execute(get_user, variable_values={"username": user})
 
     if "errors" in data:
         return "false"
@@ -156,11 +169,11 @@ def check_password(
             password
         }
     }""")
-    data = client.execute(get_password, variables={"email": email})
+    data = client.execute(get_password, variable_values={"email": email})
     if "errors" in data:
         raise KeyError("User not found")
 
-    if valid_password(data["data"]["password"], password):
+    if valid_password(data["user"]["password"], password):
         return "true"
     return "false"
 
