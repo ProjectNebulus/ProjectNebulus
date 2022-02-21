@@ -26,12 +26,19 @@ class Query(graphene.ObjectType):
     event = graphene.Field(Event, _id=graphene.String(required=True))
     assignment = graphene.Field(Assignment, _id=graphene.String(required=True))
     grades = graphene.Field(Grades, _id=graphene.String(required=True))
+    schoology = graphene.Field(Schoology, user_id=graphene.String(required=True))
 
     def resolve_course(self, info, _id):
         return CourseModel.objects.get(pk=_id)
 
-    def resolve_user(self, info, _id):
-        return UserModel.objects.get(pk=_id)
+    def resolve_user(self, info, _id=None, username=None, email=None):
+        if all(not i for i in [_id, username, email]):
+            raise Exception('Must provide either username, email, or user_id')
+        if _id:
+            return UserModel.objects.get(pk=_id)
+        elif username:
+            return UserModel.objects.get(username=username)
+        return UserModel.objects.get(email=email)
 
     def resolve_grades(self, info, _id):
         return GradesModel.objects.get(pk=_id)
@@ -47,6 +54,15 @@ class Query(graphene.ObjectType):
 
     def resolve_folder(self, info, _id):
         return FolderModel.objects.get(pk=_id)
+
+    def resolve_schoology(self, info, user_id=None, username=None, email=None):
+        if all(not i for i in [user_id, username, email]):
+            raise Exception('Must provide either username, email, or user_id')
+        if user_id:
+            return UserModel.objects.get(pk=user_id).schoology
+        elif username:
+            return UserModel.objects.get(username=username).schoology
+        return UserModel.objects.get(email=email).schoology
 
 
 schema = graphene.Schema(query=Query, mutation=DBMutations,
