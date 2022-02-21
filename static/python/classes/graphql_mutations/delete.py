@@ -31,7 +31,7 @@ class DeleteUser(graphene.Mutation):
     def mutate(self, info, user_id):
         user = UserModel.objects.get(pk=user_id)
         for i in user.courses:
-            i.AuthorizedUsers.remove(user)
+            i.authorizedUsers.remove(user)
         user.delete()
         return DeleteUser(result=True)
 
