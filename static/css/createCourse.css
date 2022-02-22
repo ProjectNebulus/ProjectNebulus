@@ -67,14 +67,6 @@ input[type='submit'] {
     font-size: 1.25vw;
 }
 
-#create,
-#join {
-    background: black;
-    cursor: pointer;
-    vertical-align: middle;
-    border-radius: 3px;
-    padding: 5px;
-}
 
 .button,
 button {
@@ -82,27 +74,12 @@ button {
     color: white;
 }
 
-#join-hover {
-    display: none;
-    z-index: 1;
-    background: black;
-    padding: 3px;
-    font-size: 1.05em;
-}
 
-#join:hover #join-hover {
-    display: block;
-}
 
 #course-nav {
     z-index: 1;
     float: right;
     margin-right: 75px;
-}
-
-#create:hover,
-#join:hover {
-    background: gray;
 }
 
 .close {
