@@ -1,5 +1,6 @@
 module.exports = {
-    content: ['./templates/**/*.html', './static/**/*.{js,css}'],
+    content: ['./templates/**/*.html', './static/**/*.{js,css}',"./node_modules/flowbite/**/*.js"]
+  
     theme: {
         extend: {}
     },
@@ -8,5 +9,6 @@ module.exports = {
         require('@tailwindcss/forms'),
         require('@tailwindcss/line-clamp'),
         require('@tailwindcss/aspect-ratio')
+        require('flowbite/plugin')
     ]
 };
