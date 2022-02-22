@@ -19,6 +19,7 @@ window.addEventListener('load', function () {
 
         if (document.getElementById('usrname').value === '') {
             response.innerHTML = ' <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Ahhh!</span> We coudn\'t find that username</p>';
+            document.getElementById('usrname').classList.add('bg-red-50', 'border', 'border-red-500', 'text-red-900', 'placeholder-red-700', 'text-sm', 'rounded-lg', 'focus:ring-red-500', 'focus:border-red-500', 'block', 'w-full', 'p-2.5', 'dark:bg-red-100', 'dark:border-red-400');
             return false; 
         } 
         else {
@@ -42,6 +43,7 @@ window.addEventListener('load', function () {
 
         if (document.getElementById('psw').value === '') {
             response.innerHTML = '<p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Ahhh!</span> We coudn\'t find that password</p>';
+          document.getElementById('psw').classList.add('bg-red-50', 'border', 'border-red-500', 'text-red-900', 'placeholder-red-700', 'text-sm', 'rounded-lg', 'focus:ring-red-500', 'focus:border-red-500', 'block', 'w-full', 'p-2.5', 'dark:bg-red-100', 'dark:border-red-400');
             return false;
         } else {
             let password = document.getElementById('psw').value;
@@ -85,12 +87,13 @@ function reqListener1() {
         response.style.color = 'green';
         response.innerHTML = '<p class="mt-2 text-sm text-green-600 dark:text-green-500"><span class="font-medium">Yay!</span> Correct Username!</p>';
           
-        document.getElementById('usrname').classList.add("mt-2","text-sm", "text-green-600",  "dark:text-green-500");
+        document.getElementById('usrname').classList.add('g-green-50', 'border', 'border-green-500', 'text-green-900', 'placeholder-green-700', 'text-sm', 'rounded-lg', 'focus:ring-green-500', 'focus:border-green-500', 'block', 'w-full', 'p-2.5', 'dark:bg-green-100', 'dark:border-green-400');
         validUser = true;
     } 
     else if (this.responseText === 'false') {
         response.style.color = 'red';
         response.innerHTML = ' <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Ahhh!</span> We coudn\'t find that username!</p>';
+      document.getElementById('usrname').classList.add('bg-red-50', 'border', 'border-red-500', 'text-red-900', 'placeholder-red-700', 'text-sm', 'rounded-lg', 'focus:ring-red-500', 'focus:border-red-500', 'block', 'w-full', 'p-2.5', 'dark:bg-red-100', 'dark:border-red-400');
         validUser = false;
     }
 
@@ -103,11 +106,12 @@ function reqListener2() {
     if (this.responseText === 'true') {
         response.style.color = 'green';
         response.innerHTML = '<p class="mt-2 text-sm text-green-600 dark:text-green-500"><span class="font-medium">Yay</span> Correct password! </p>';
-      document.getElementById('psw').classList.add("mt-2","text-sm", "text-green-600",  "dark:text-green-500");
+      document.getElementById('psw').classList.add('g-green-50', 'border', 'border-green-500', 'text-green-900', 'placeholder-green-700', 'text-sm', 'rounded-lg', 'focus:ring-green-500', 'focus:border-green-500', 'block', 'w-full', 'p-2.5', 'dark:bg-green-100', 'dark:border-green-400');
         validPass = true;
     } else if (this.responseText === 'false') {
         response.style.color = 'red';
         response.innerHTML = '<p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oh No!</span> Incorrect password!</p>>';
+      document.getElementById('psw').classList.add('bg-red-50', 'border', 'border-red-500', 'text-red-900', 'placeholder-red-700', 'text-sm', 'rounded-lg', 'focus:ring-red-500', 'focus:border-red-500', 'block', 'w-full', 'p-2.5', 'dark:bg-red-100', 'dark:border-red-400');
         validPass = false;
     }
 }
