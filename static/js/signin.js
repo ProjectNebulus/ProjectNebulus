@@ -84,6 +84,8 @@ function reqListener1() {
     if (this.responseText === 'true') {
         response.style.color = 'green';
         response.innerHTML = '<p class="mt-2 text-sm text-green-600 dark:text-green-500"><span class="font-medium">Yay!</span> Correct Username!</p>';
+          
+        document.getElementById('usrname').classList.add("mt-2","text-sm", "text-green-600",  "dark:text-green-500");
         validUser = true;
     } 
     else if (this.responseText === 'false') {
@@ -101,6 +103,7 @@ function reqListener2() {
     if (this.responseText === 'true') {
         response.style.color = 'green';
         response.innerHTML = '<p class="mt-2 text-sm text-green-600 dark:text-green-500"><span class="font-medium">Yay</span> Correct password! </p>';
+      document.getElementById('psw').classList.add("mt-2","text-sm", "text-green-600",  "dark:text-green-500");
         validPass = true;
     } else if (this.responseText === 'false') {
         response.style.color = 'red';
