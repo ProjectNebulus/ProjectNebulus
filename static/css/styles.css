@@ -39,13 +39,6 @@ strong {
     font-size: 2.25vh;
 }
 
-#account input,
-#account input:hover,
-#account input:focus {
-    background: transparent;
-    border: transparent;
-    color: white;
-}
 
 #homePageBanner,
 #mvBanner {
@@ -104,37 +97,7 @@ strong {
   content: '';
   bottom: 0;
 }*/
-input {
-    background: white;
-    padding: 10px;
-    font-size: 2.25vh;
-    font-family: 'Lato', sans-serif;
-    border-radius: 5px;
-    outline: none;
-    border: none;
-    margin: 10px;
-    transition: 0.25s;
-}
 
-input[type='text'] {
-    width: 70%;
-}
-
-input[type='password'] {
-    width: 70%;
-}
-
-input[type='submit'],
-#signupinnerbody input[type='submit'] {
-    background: #0084ff;
-    color: black;
-    cursor: pointer;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 40px;
-    padding-right: 40px;
-    font-size: 1.5em;
-}
 button,
 .button {
     background: #0084ff;
@@ -245,27 +208,9 @@ details div:hover {
     border-radius: 10px;
 }
 
-#signupinnerbody input {
-    background-color: #212121;
-    color: white;
-    box-sizing: border-box;
-    height: 42px;
-    background-position: 90%;
-}
-
 button {
     font-family: 'Lato', sans-serif;
     font-size: 1.3em;
-}
-input:focus {
-    border-style: solid;
-    border-color: #0084ff;
-}
-
-input[type='submit']:hover,
-#signupinnerbody input[type='submit']:hover {
-    background: #003261;
-    color: white;
 }
 
 a {
@@ -411,17 +356,4 @@ details summary {
     width: 10px;
     border-radius: 2px;
     background-color: rgb(100, 100, 100);
-}
-
-/* Change the white to any color */
-/*override autofill color*/
-input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active{
-    -webkit-box-shadow: 0 0 0 30px #212121 inset !important;
-}
-/*Change text in autofill textbox*/
-input:-webkit-autofill{
-    -webkit-text-fill-color: white !important;
 }
