@@ -7,11 +7,9 @@
     <span style="display:none" id="userinfo">{{ user }}</span>
 
     <div id="left"
-         style="width:20%;height:90%;float:left; background-color: #171717 !important; ">
+         style="width:20%;height:90%;float:left; background-color: white !important; ">
         <center>
-            <div style="background:linear-gradient(to top right, #ff3c00, #ffd900); width:100%;top:0;margin: 0;font-size:1.5em;padding-top:20px;padding-bottom:20px;border-radius: 8px 8px 0 0;">
-                <h3>Recent Activity</h3>
-            </div>
+              <h3>Recent Activity</h3>
             {% for x in user_courses %}
                 <h3>{{ x.name }}</h3>
                 <hr/>
