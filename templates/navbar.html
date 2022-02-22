@@ -15,21 +15,26 @@
       <!-- Dropdown menu -->
       <div class="hidden z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown">
         <div class="py-3 px-4">
-          <span class="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
-          <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
+          <span class="block text-sm text-gray-900 dark:text-white">{{user}}</span>
+          <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">{{user}}m</span>
         </div>
         <ul class="py-1" aria-labelledby="dropdown">
         <li>
           <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
         </li>
+          <li>
+          <a href="/points" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"><span>5</span>
+                        <img src="https://images.emojiterra.com/twitter/v13.1/512px/1fa99.png" style="height:1em;"></a>
+        </li>
+          
         <li>
-          <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
+          <a href="/settings" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
         </li>
         <li>
-          <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Earnings</a>
+          <a href="/profile" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profile</a>
         </li>
         <li>
-          <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+          <a href="/logout" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
         </li>
         </ul>
       </div>
@@ -41,7 +46,7 @@
   </div>
     {% else %}
     <div class="flex md:order-2">
-      <a href="/login"><button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</button></a>
+      <a href="/signin"><button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</button></a>
       <a href="/signup"><button type="button" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Sign Up</button></a>
       <button data-collapse-toggle="mobile-menu-4" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-4" aria-expanded="false">
       <span class="sr-only">Open main menu</span>
@@ -83,66 +88,4 @@
   </div>
   </div>
 </nav>
-    <nav style="margin-top:15px !important;margin-bottom: 15px !important;padding-top:10px !important;padding-bottom:30px !important;margin-left: 10% !important;margin-right: 10% !important;width:80%;height:5%;float:left; background-color:#00000090; position: relative;z-index:1;padding:0;border-radius:15px;">
-
-    <span>
-      <br>
-      <a href="/"><img src="static/images/logo.png" style="height:6vh;margin:0; vertical-align:middle;"></a>
-        {% if user %}
-            <a href="/dashboard">Dashboard</a>
-            <a href="/lms">Learning</a>
-            <a href="/api">API</a>
-            <a href="/about">About Nebulus</a>
-            <!-- <a href="/calendar">Calendar</a> -->
-        {% else %}
-            <!-- <a href="/developers">Developer Portal</a>
-            <a href="/developers/api">API</a>
-            <a href="/lms">LMS</a>
-            <a href="/chat">Chat</a>
-            <a href="/musiqueworld">Music</a>
-            <a href="/holidays">Virtual Holidays</a>
-            <a href="/about">About Us</a> -->
-            <a href="/about">About Nebulus</a>
-            <a href="/pricing">Pricing</a>
-            <a href="/api">API</a>
-        {% endif %}
-    </span>
-
-        {% if session.get("username") %}
-
-            {% if new_account %}
-                {% if developer %}
-                    <button>New Application</button>
-                {% endif %}
-                <span style="margin-top:20px;padding: 10px 5px;background:rgba(0, 255, 0, 0.2);border-radius:10px;float:right">Welcome to Nebulus, {{ user }}</span>
-            {% endif %}
-            <details style="float:right;margin:30px 20px 30px 5px;text-align:right;margin-top:0;">
-                <summary>
-                    {{ user }}
-                    <span class="material-icons" style="vertical-align:middle">expand_more</span>
-                </summary>
-
-                <div style="background-color:black;border:1px solid lightgray;border-radius:5px;margin-top:10px;text-align:left">
-                    <div onclick="window.open('/settings', '_self')">Settings</div>
-                    <div onclick="window.open('/profile', '_self')">Profile</div>
-                    <hr>
-                    <div onclick="window.open('/pricing', '_self')">Upgrade to Premium</div>
-                    <hr>
-                    <div onclick="window.open('/points', '_self')">
-                        <span>5</span>
-                        <img src="https://images.emojiterra.com/twitter/v13.1/512px/1fa99.png" style="height:1em;">
-                    </div>
-                    <hr>
-                    <div onclick="window.open('/logout', '_self')">Log Out</div>
-                </div>
-            </details>
-        {% else %}
-            <span style="float:right;margin:30px 20px 30px 5px;margin-top:0px;">
-        <a href="/signin">Login</a>
-        <a id="signup" href="/signup">Sign Up</a>
-      </span>
-        {% endif %}
-    </nav>
-    <br><br>
-
 {% endif %}
