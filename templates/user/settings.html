@@ -26,10 +26,23 @@
             <span class="change-text">Change</span>
         </p>
         <h2>Connections</h2>
-        <button style="background-image:url('/static/images/logos/classroom.png');background-size: 100px 100px;background-repeat: no-repeat; height: 120px; width: 120px;background-position: center;margin:15px;"></button>
-        <button style="background-image:url('/static/images/logos/canvas.png');background-size: 100px 100px;background-repeat: no-repeat; height: 120px; width: 120px;background-position: center;margin:15px;"></button>
-        <button style="background-image:url('/static/images/logos/schoology.png');background-size: 100px 100px;background-repeat: no-repeat; height: 120px; width: 120px;margin:15px;background-position: center;" id = "auth" onclick="if (resp.innerHTML === 'Login Failed. Reason: Clicked Deny on Schoology. Click Authorize again and click Approve this time!') {location.reload();} newwindow=window.open('{{schoologyURL}}','Authorize with Schoology','height=300,width=800');document.getElementById('auth').style.display = 'none';document.getElementById('connectbtn').style.display = 'inline';" class="button"></button>
-        <button style="background-image:url('https://hotemoji.com/images/dl/7/white-heavy-check-mark-emoji-by-twitter.png');background-size: 100px 100px;background-repeat: no-repeat; height: 120px; width: 120px;display:none !important;margin:15px;background-position: center;" style="display:none;" id="connectbtn" class="button"></button>
+        <button type="button" class="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 mr-2 mb-2">
+  <svg class="mr-2 -ml-1 w-4 h-4" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="gooogle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M279.1 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.4 0 225.4 0c-73.22 0-121.1 44.38-121.1 124.7v70.62H22.89V288h81.39v224h100.2V288z"></path></svg>
+  Connect Google Classroom
+</button>
+        <button type="button" class="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2">
+  <svg class="mr-2 -ml-1 w-4 h-4" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><path fill="currentColor" d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"></path></svg>
+  Connect Canvas by Instructure
+</button>
+      <button id = "auth" onclick="if (resp.innerHTML === 'Login Failed. Reason: Clicked Deny on Schoology. Click Authorize again and click Approve this time!') {location.reload();} newwindow=window.open('{{schoologyURL}}','Authorize with Schoology','height=300,width=800');document.getElementById('auth').style.display = 'none';document.getElementById('connectbtn').style.display = 'inline';" type="button" class="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2">
+  <svg class="mr-2 -ml-1 w-4 h-4" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><path fill="currentColor" d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"></path></svg>
+  Connect Schoology
+</button>
+      <button  style="display:none;" id="connectbtn" class="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2">
+        <svg class="mr-2 -ml-1 w-4 h-4" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><path fill="currentColor" d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"></path></svg>
+  Confirm Schoology Connection
+</button>
+ 
         <br>
         <span id="resp"></span>
         <script>
