@@ -6,6 +6,10 @@ from .Snowflake import Snowflake
 
 
 class Event(Snowflake):
+    """
+    A class to represent an event.
+    Has a bidirectional relationship with a course. -> event.course -> course.events
+    """
     meta = {'collection': 'Events'}
     title = StringField(required=True)
     course = ReferenceField('Course', required=True)

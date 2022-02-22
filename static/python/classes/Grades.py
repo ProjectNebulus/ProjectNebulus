@@ -29,14 +29,14 @@ class Grades(Snowflake):
     median = FloatField(required=False)
     mode = FloatField(required=False)
     range = FloatField(required=False)
-    grade_frequency = ListField(FloatField(), required=False)
+    grade_frequency = DictField(required=False)
 
     def clean(self):
         grades_list = list(self.grades.values())
-        self.average = get_average(grades_list)
-        self.median = get_median(grades_list)
-        self.mode = get_mode(grades_list)
-        self.range = get_range(grades_list)
+        self.average = float(get_average(grades_list))
+        self.median = float(get_median(grades_list))
+        self.mode = float(get_mode(grades_list))
+        self.range = float(get_range(grades_list))
         self.grade_frequency = get_grade_frequency(grades_list)
 
 
@@ -55,11 +55,7 @@ def get_median(grades_list):
 
 
 def get_mode(grades_list):
-    mode = []
-    for grade in grades_list:
-        if grades_list.count(grade) > len(grades_list) / 2:
-            mode.append(grade)
-    return mode
+    return max(set(grades_list), key=grades_list.count)
 
 
 def get_range(grades_list):
@@ -68,4 +64,4 @@ def get_range(grades_list):
 
 
 def get_grade_frequency(grades_list):
-    return {grade: grades_list.count(grade) for grade in grades_list}
+    return {str(grade): grades_list.count(grade) for grade in grades_list}

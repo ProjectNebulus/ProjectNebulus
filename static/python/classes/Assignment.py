@@ -3,20 +3,18 @@ from .Snowflake import Snowflake
 
 class Assignment(Snowflake):
     """
-    A Class representing an assignment.
-    :required params:
-        name: The name of the assignment.
-        due: The due date of the assignment. Is a datetime.date object.
-        title: The title of the assignment.
-        _id: The id of the assignment.
-    :optional params:
-        description: The description of the assignment. Default: None
-        points: The number of points the assignment is worth. Default: 100.
+    A subclass of the snowflake object, representing an assignment in a course.
+
+    Has a bidirectional relationship with the Course class. -> Course.assignments -> Assignment.course
+
+    This allows for easy access to the course that the assignment is in,
+    and also allows for easy access to the assignments in the course.
+
     """
     meta = {'collection': 'Assignments'}
-    course = ReferenceField('Course', required=True)
-    due = DateTimeField(required=True)
-    title = StringField(required=True)
-    points = IntField(default=100)
-    description = StringField(default='', null=True)
+    course = ReferenceField('Course', required=True, description='The course that this assignment is in.')
+    due = DateTimeField(required=True, description='The due date of the assignment.')
+    title = StringField(required=True, description='The title of the assignment.')
+    points = IntField(default=100, description='The number of points the assignment is worth.')
+    description = StringField(default='', null=True, description='The description of the assignment.')
     

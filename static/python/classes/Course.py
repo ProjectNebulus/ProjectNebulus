@@ -15,24 +15,13 @@ lms_choices = ("Canvas", "Google Classroom", "Microsoft Teams", "Schoology", "Mo
 
 class Course(Snowflake):
     """
-    A class for representing a course.
-     :required params:
-        - name: The name of the course.
-        - teacher: The teacher of the course.
-    :optional params:
-        - template: The template of the course. Defaults to None.
-        - teacher: The name of the teacher of the course. Defaults to None.
-        - authorizedUserIds: The ids of the authorized users of the course. Defaults to None.
-
-        - assignments: A list of Assignment Objects for the course. Default: []
-        - teacherAccountId: The nebulus account id of the teacher. Default: None (Because some teachers may not have an account)
-        - imported_from: The LMS this course was imported from. Default: None
-        - events: A list of Event Objects for the course. Default: []
-        - updates: A list of updates for the course. Default: []
-        - folders: A list of Folder Objects for the course. Default: []
-        - description: The course description. Default: None
-        - grades: A Grades Object for the course. Represents the user's grades. Default: None
-
+    A subclass of the Snowflake object, representing a course.
+    Has many bidirectional references to other objects.
+        - Folders - (A list of folders in the course.) -> course.folders -> folder.course
+        - Assignments - (The assignments that are in the course) -> course.assignments -> assignment.course
+        - Grades - (A list of complete grades for the course) -> course.grades -> grades.course
+        - Events - (The events that are associated with this course) -> course.events -> event.course
+        - Users (The users that are enrolled in the course) -> course.authorizedUsers -> user.courses
     """
     meta = {'collection': 'Courses'}
     name = StringField(required=True)

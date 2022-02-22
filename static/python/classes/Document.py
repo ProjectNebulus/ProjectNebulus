@@ -7,13 +7,10 @@ from .Snowflake import Snowflake
 
 class DocumentFile(Snowflake):
     """
-    Class to represent a document. A document is basically a file.
-    :required params:
-        - name: The Document's name.
-        - url: The Document's url.
-        - upload_date: The Document's creation date.
-    :optional params:
-        - description: The Document's description.
+    Class to represent a document. A document is any file containing some data.
+    Has a bidirectional relationship with Folders, and Courses.
+    A Document can be linked to either a folder or a course.
+    Currently, Documents can only be stored as a URL to the actual file.
     """
     meta = {'collection': 'Documents'}
     url = URLField(required=True)

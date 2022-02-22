@@ -4,6 +4,7 @@ from ..Course import Course as CourseModel
 from ..Folder import Folder as FolderModel
 from ..Assignment import Assignment as AssignmentModel
 from ..Events import Event as EventModel
+from ..Grades import Grades as GradesModel
 from ..graphql_inputs.create_inputs import *
 from ..graphene_models import *
 
@@ -22,7 +23,6 @@ class CreateCourse(graphene.Mutation):
         for i in course.authorizedUsers:
             i.courses.append(course)
             i.save()
-
 
         return CreateCourse(course=course)
 
@@ -93,7 +93,6 @@ class CreateDocumentFile(graphene.Mutation):
         else:
             raise Exception("Cannot create document file without either course or folder")
 
-
         return CreateDocumentFile(document_file=document_file)
 
 
@@ -112,6 +111,7 @@ class CreateEvent(graphene.Mutation):
 
         return CreateEvent(event=event)
 
+
 class CreateGrades(graphene.Mutation):
     class Arguments:
         data = GradesInput(required=True)
@@ -125,5 +125,3 @@ class CreateGrades(graphene.Mutation):
         course.grades = grades
         course.save()
         return CreateGrades(grades=grades)
-
-

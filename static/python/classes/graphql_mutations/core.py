@@ -12,6 +12,7 @@ class DBMutations(graphene.ObjectType):
     create_folder = CreateFolder.Field()
     create_document_file = CreateDocumentFile.Field()
     create_event = CreateEvent.Field()
+    createGrades = CreateGrades.Field()
     update_course = UpdateCourse.Field()
     update_user = UpdateUser.Field()
     update_assignment = UpdateAssignment.Field()

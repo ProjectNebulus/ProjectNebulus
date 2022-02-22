@@ -147,19 +147,21 @@ def courses_documents(course_id):
 @app.route("/courses/<course_id>/announcements")
 def courses_announcements(course_id):
     if session.get("username") and session.get("password"):
-        courses = db.Accounts.find_one({"username": session.get("username")})["courses"]
+        courses = db.get_user_courses(session.get("id"))
 
-        for course in courses:
-            if course == course_id:
-                return render_template(
-                    "courses/announcements.html",
-                    page="Nebulus - " + course.get("name", "Courses"),
-                    db=db,
-                    course=course,
-                    course_id=course_id,
-                    user=session.get("username"),
-                )
-        return "/lms"
+        course = list(filter(lambda x: x.id == course_id, courses))
+        if not course:
+            return render_template(
+                "errors/404.html", page="404 Not Found", user=session.get("username")
+            )
+        return render_template(
+            "courses/documents.html",
+            page="Nebulus - " + course[0].name,
+            db=db,
+            course=course[0],
+            course_id=course_id,
+            user=session.get("username"),
+        )
 
     return redirect("/signin")
 
