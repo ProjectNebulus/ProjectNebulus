@@ -98,24 +98,6 @@ strong {
   bottom: 0;
 }*/
 
-button,
-.button {
-    background: #0084ff;
-    color: white;
-    border-radius: 3px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    transition: 0.25s;
-    padding-left: 40px;
-    padding-right: 40px;
-    border-style: none;
-}
-
-button:hover,
-.button:hover {
-    background: #003261;
-    color: gray;
-}
 
 hr {
     height: 1px;
@@ -126,24 +108,6 @@ hr {
     width: 100%;
 }
 
-nav {
-    margin: 0;
-    padding: 20px 10px 10px 20px;
-    height: 50px;
-    /*background: rgba(0,0,0,0.3);*/
-    width: 80%;
-}
-
-nav a {
-    text-decoration: none;
-    color: white;
-    margin-left: 20px;
-}
-
-nav a:hover {
-    text-decoration: none;
-    color: grey;
-}
 
 details {
     cursor: pointer;
