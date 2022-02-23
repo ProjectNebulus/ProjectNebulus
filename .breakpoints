@@ -18,19 +18,25 @@
         "line": 1,
         "version": 12157,
         "index": 0
+      },
+      {
+        "id": "860b54fc-f1c8-43cf-97e8-97693638b6f0",
+        "line": 2,
+        "version": 12157,
+        "index": 50
       }
     ],
     "static/css/styles.css": [
       {
         "id": "b36c8974-2de7-4a05-b62e-91fbb4c7437f",
         "line": 2,
-        "version": 6088,
+        "version": 6098,
         "index": 116
       },
       {
         "id": "1284458e-185e-4fbf-b2db-e2da291b2c55",
         "line": 2,
-        "version": 6088,
+        "version": 6098,
         "index": 116
       }
     ],
@@ -53,17 +59,17 @@
     "templates/layout.html": [
       {
         "id": "23ec76f8-cb00-499c-8e37-7c42c82def8c",
-        "line": 2,
-        "version": 1623,
-        "index": 21
+        "line": 4,
+        "version": 1675,
+        "index": 174
       }
     ],
     "templates/lms.html": [
       {
         "id": "24fbf8ca-eff8-484f-8ea2-dbe3cc861b90",
-        "line": 161,
-        "version": 1594,
-        "index": 8146
+        "line": 181,
+        "version": 1668,
+        "index": 9874
       }
     ],
     "templates/login.html": [
