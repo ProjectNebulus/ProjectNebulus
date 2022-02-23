@@ -4,7 +4,7 @@
   <a href="#" class="flex">
     <img class="mr-3 h-10"src="static/images/logo.png">
    
-      <span style="color:black !important" class="self-center text-xl font-semibold whitespace-nowrap dark:text-black">Nebulus</span>
+      <span  class="self-center text-xl font-semibold whitespace-nowrap dark:text-black">Nebulus</span>
   </a>
     {% if user %}
     <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
@@ -105,10 +105,10 @@ var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
 // Change the icons inside the button based on previous settings
 if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
     themeToggleLightIcon.classList.remove('hidden');
-    document.body.style.background = "#111926";
+   
 } else {
     themeToggleDarkIcon.classList.remove('hidden');
-    document.body.style.background = "white";
+
 }
 
 var themeToggleBtn = document.getElementById('theme-toggle');
@@ -123,10 +123,13 @@ themeToggleBtn.addEventListener('click', function() {
     if (localStorage.getItem('color-theme')) {
         if (localStorage.getItem('color-theme') === 'light') {
             document.documentElement.classList.add('dark');
+            
             localStorage.setItem('color-theme', 'dark');
+            document.body.style.background = "#111926";
         } else {
             document.documentElement.classList.remove('dark');
             localStorage.setItem('color-theme', 'light');
+          document.body.style.background = "white";
         }
 
     // if NOT set via local storage previously
@@ -134,11 +137,16 @@ themeToggleBtn.addEventListener('click', function() {
         if (document.documentElement.classList.contains('dark')) {
             document.documentElement.classList.remove('dark');
             localStorage.setItem('color-theme', 'light');
+          document.body.style.background = "white";
         } else {
             document.documentElement.classList.add('dark');
             localStorage.setItem('color-theme', 'dark');
+          document.body.style.background = "#111926";
         }
     }
+
+  
+  
     
 });
 </script>

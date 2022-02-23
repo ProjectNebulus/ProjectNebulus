@@ -7,11 +7,11 @@
     <span style="display:none" id="userinfo">{{ user }}</span>
 
     <div id="left"
-         style="width:20%;height:90%;float:left; background-color: white !important; ">
+         style="width:20%;height:90%;float:left; ">
         <center>
-              <h3>Recent Activity</h3>
+              <p class="text-5xl dark:text-white">Recent Activity</p>
             {% for x in user_courses %}
-                <h3>{{ x.name }}</h3>
+                <h3><p class="text-xl dark:text-white">{{x.name}}</p></h3>
                 <hr/>
                 <div class='course_updates'>
                 {% for i in x.updates[0:3] %}
@@ -31,7 +31,7 @@
     <div id="middle" style="width:60%;height:90%;float:left;overflow:auto;">
         <center>
             <h1>
-                Your Courses
+                <p class="text-5xl dark:text-white">Your Courses</p>
 
                 <div style="float:right" id="course-nav">
                     <button type="button" id="join" class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"><span class="material-icons">search</span></button>
@@ -41,7 +41,7 @@
                 </div>
               <br><br></br>
                 {% for course in user_courses %}
-                        <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700" style="float:left;margin:20px;">
+                        <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700" style="float:left;margin:20px;height:200px;width:250px;">
       <a href="#">
           <img class="rounded-t-lg" src="/docs/images/blog/image-1.jpg" alt="" />
       </a>
@@ -177,8 +177,9 @@
     </div>
 
     <div id="right" style="width:20%;height:90%;float:right;background-color:transparent;overflow:auto">
-        <h3>Upcoming Events & Assignments</h3>
-        <p>Unit 3 Test</p>
+        <p class="text-5xl dark:text-white">Upcoming Events</p>
+        <p class="text-xl dark:text-white">Unit 3 Test</p>
+      <p class="text-xl dark:text-white">Math HW #5</p>
     </div>
 
 {% endblock %}
