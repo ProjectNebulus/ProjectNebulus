@@ -497,7 +497,8 @@ def signup():
 @app.route("/signup", methods=["POST"])
 def signup_post():
     data = request.get_json()
-    user = User(username=data["username"], password=data["password"],  email=data['email'], created_at=datetime.datetime.now())
+    print(data)
+    user = User(username=data["username"], password=data["password"],  email=data['email'])
     validation = db.create_user(user)
     print(validation)
     if validation == "0":
@@ -602,5 +603,5 @@ def logout_from_schoology():
 app.add_url_rule(
     "/graphql", view_func=GraphQLView.as_view("graphql", schema=schema.graphql_schema, graphiql=True)
 )
-serve(app, host="0.0.0.0", port="8000")
-#app.run(host="localhost", port=8080)
+#serve(app, host="0.0.0.0", port="8000")
+app.run(host="localhost", port=8080)

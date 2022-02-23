@@ -1,15 +1,12 @@
-from ..Document import DocumentFile as DocumentFileModel
+from ...mongodb import *
 from ..User import User as UserModel
-from ..Course import Course as CourseModel
-from ..Folder import Folder as FolderModel
-from ..Assignment import Assignment as AssignmentModel
-from ..Events import Event as EventModel
-from ..Grades import Grades as GradesModel
 from ..graphql_inputs.create_inputs import *
 from ..graphene_models import *
 
 
-# class CourseInput(graphene.InputObjectType):
+"""
+GraphQL Mutations to create objects in the database
+"""
 
 class CreateCourse(graphene.Mutation):
     class Arguments:
@@ -18,12 +15,7 @@ class CreateCourse(graphene.Mutation):
     course = graphene.Field(Course)
 
     def mutate(self, info, data):
-        course = CourseModel(**vars(data))
-        course.save(force_insert=True)
-        for i in course.authorizedUsers:
-            i.courses.append(course)
-            i.save()
-
+        course = create_course(data)
         return CreateCourse(course=course)
 
 
@@ -34,10 +26,16 @@ class CreateUser(graphene.Mutation):
     user = graphene.Field(User)
 
     def mutate(self, info, data):
-        user = UserModel(**data)
-        user.save(force_insert=True)
+        result = create_user(data)
+        if result == "0":
+            return CreateUser(user=UserModel.objects.get(username=data["username"]))
+        elif result == "1":
+            raise Exception("Username and email already exists")
+        elif result == "2":
+            raise Exception("Username already exists")
+        else:
+            raise Exception("Email already exists")
 
-        return CreateUser(user=user)
 
 
 class CreateAssignment(graphene.Mutation):
@@ -47,12 +45,7 @@ class CreateAssignment(graphene.Mutation):
     assignment = graphene.Field(Assignment)
 
     def mutate(self, info, data):
-        assignment = AssignmentModel(**data)
-        assignment.save(force_insert=True)
-        course = assignment.course
-        course.assignments.append(assignment)
-
-        course.save()
+        assignment = createAssignment(data)
 
         return CreateAssignment(assignment=assignment)
 
@@ -64,11 +57,7 @@ class CreateFolder(graphene.Mutation):
     folder = graphene.Field(Folder)
 
     def mutate(self, info, data):
-        folder = FolderModel(**data)
-        folder.save(force_insert=True)
-        course = folder.course
-        course.folders.append(folder)
-        course.save()
+        folder = createFolder(data)
 
         return CreateFolder(folder=folder)
 
@@ -80,19 +69,7 @@ class CreateDocumentFile(graphene.Mutation):
     document_file = graphene.Field(DocumentFile)
 
     def mutate(self, info, data):
-        document_file = DocumentFileModel(**data)
-        document_file.save(force_insert=True)
-        folder = document_file.folder
-        course = document_file.course
-        if not folder:
-            course.documents.append(document_file)
-            course.save()
-        elif not course:
-            folder.documents.append(document_file)
-            folder.save()
-        else:
-            raise Exception("Cannot create document file without either course or folder")
-
+        document_file = createDocumentFile(data)
         return CreateDocumentFile(document_file=document_file)
 
 
@@ -119,9 +96,5 @@ class CreateGrades(graphene.Mutation):
     grades = graphene.Field(Grades)
 
     def mutate(self, info, data):
-        grades = GradesModel(**data)
-        grades.save(force_insert=True)
-        course = grades.course
-        course.grades = grades
-        course.save()
+        grades = createGrades(data)
         return CreateGrades(grades=grades)
