@@ -1,9 +1,16 @@
-from .graphene_models import *
+from . import graphene_models as gm
 import graphene
-from graphene_mongo import MongoengineConnectionField
 from .graphql_mutations.core import DBMutations
-from ..mongodb import *
-
+from ..mongodb import (
+    find_user,
+    find_courses,
+    getAssignment,
+    getGrades,
+    getEvent,
+    getFolder,
+    getSchoology,
+    getDocumentFile
+)
 
 
 
@@ -15,22 +22,22 @@ class Query(graphene.ObjectType):
     # all_events = MongoengineConnectionField(Event)
     # all_assignments = MongoengineConnectionField(Assignment)
     # all_grades = MongoengineConnectionField(Grades)
-    user = graphene.Field(User,
+    user = graphene.Field(gm.User,
                           args={'_id': graphene.String(), 'username': graphene.String(), 'email': graphene.String()})
-    course = graphene.Field(Course, _id=graphene.String(required=True))
-    folder = graphene.Field(Folder, _id=graphene.String(required=True))
-    document = graphene.Field(DocumentFile, _id=graphene.String(required=True))
-    event = graphene.Field(Event, _id=graphene.String(required=True))
-    assignment = graphene.Field(Assignment, _id=graphene.String(required=True))
-    grades = graphene.Field(Grades, _id=graphene.String(required=True))
-    schoology = graphene.Field(Schoology, args={'user_id': graphene.String(), 'username': graphene.String(),
+    course = graphene.Field(gm.Course, _id=graphene.String(required=True))
+    folder = graphene.Field(gm.Folder, _id=graphene.String(required=True))
+    document = graphene.Field(gm.DocumentFile, _id=graphene.String(required=True))
+    event = graphene.Field(gm.Event, _id=graphene.String(required=True))
+    assignment = graphene.Field(gm.Assignment, _id=graphene.String(required=True))
+    grades = graphene.Field(gm.Grades, _id=graphene.String(required=True))
+    schoology = graphene.Field(gm.Schoology, args={'user_id': graphene.String(), 'username': graphene.String(),
                                                 'email': graphene.String()})
 
     def resolve_user(self, info, _id=None, username=None, email=None):
-        return get_user_courses(_id, username, email)
+        return find_user(_id, username, email)
 
     def resolve_grades(self, info, _id):
-        return GradesModel.objects.get(pk=_id)
+        return getGrades(_id)
 
     def resolve_document(self, info, _id):
         return getDocumentFile(_id)
@@ -47,7 +54,10 @@ class Query(graphene.ObjectType):
     def resolve_schoology(self, info, user_id=None, username=None, email=None):
         return getSchoology(user_id, username, email)
 
+    def resolve_course(self, info, _id):
+        return find_courses(_id)
+
 
 schema = graphene.Schema(query=Query, mutation=DBMutations,
-                         types=[User, Course, Folder, DocumentFile, Event, Assignment, Grades, Avatar, AvatarSize,
-                                Schoology])
+                         types=[gm.User, gm.Course, gm.Folder, gm.DocumentFile, gm.Event, gm.Assignment, gm.Grades, gm.Avatar, gm.AvatarSize,
+                                gm.Schoology])

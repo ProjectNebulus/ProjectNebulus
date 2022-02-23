@@ -3,7 +3,6 @@ import random
 
 from .classes.Document import DocumentFile
 from .classes.Folder import Folder
-from .classes.graphql_query import schema
 from .classes.Course import Course
 from .classes.User import User
 from .classes.Assignment import Assignment
@@ -11,7 +10,6 @@ from .classes.Grades import Grades
 from .classes.Schoology import Schoology
 from .classes.Events import Event
 import re
-from gql import Client, gql
 
 import dns
 import certifi
@@ -24,7 +22,6 @@ regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 ca = certifi.where()
 connect(db='Nebulus', username='MainUser', password=os.environ.get('MONGOPASS'), host=os.environ.get('MONGO'),
         tlsCAFile=ca)
-client = Client(schema=schema.graphql_schema)
 
 
 # done
@@ -47,7 +44,7 @@ def find_user(_id: str = None, username: str = None, email: str = None):
         raise KeyError("No user id, username, or email provided")
     user = None
     if _id:
-        user = User.objects(_id=_id)
+        user = User.objects(pk=_id)
     elif username:
         user = User.objects(username=username)
     elif email:
@@ -62,35 +59,15 @@ def getSchoology(user_id: str=None, username: str=None, email: str=None):
 def generateSchoologyObject(_id: str):
     key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
     secret = "59ccaaeb93ba02570b1281e1b0a90e18"
-    get_schoology = gql("""
-    query GetSchoology ($userId: String!) {
-        schoology(userId: $userId) {
-            SchoologyRequestToken
-            SchoologyRequestSecret
-            SchoologyAccessToken
-            SchoologyAccessSecret
-        }
-    }""")
-    data = client.execute(get_schoology, variable_values={"userId": _id})
-    if "errors" in data:
-        raise KeyError("Account does not exist")
-    data = data["data"]
-    if not data["schoology"]:
-        raise KeyError("Account not linked to Schoology")
-
-    request_token = data["SchoologyRequestToken"]
-    request_token_secret = data["SchoologyRequestSecret"]
-    access_token = data["SchoologyAccessToken"]
-    access_token_secret = data["SchoologyAccessSecret"]
+    user = find_user(_id)
+    if not user:
+        raise KeyError("User not found")
     auth = schoolopy.Auth(
         key,
         secret,
         domain="https://bins.schoology.com",
         three_legged=True,
-        request_token=request_token,
-        request_token_secret=request_token_secret,
-        access_token=access_token,
-        access_token_secret=access_token_secret,
+        **user.schoology
     )
     a = auth.authorized
     sc = schoolopy.Schoology(auth)
