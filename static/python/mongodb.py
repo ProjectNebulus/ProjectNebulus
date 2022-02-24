@@ -15,7 +15,7 @@ import dns
 import certifi
 from mongoengine import *
 import schoolopy
-
+from typing import List
 from static.python.security import hash256, valid_password
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
@@ -89,7 +89,7 @@ def create_course(data: dict):
     return course
 
 
-def create_user(data: dict):
+def create_user(data: dict) -> str | List[str | User]:
     """
     Status Codes:
     0: Success
@@ -106,7 +106,7 @@ def create_user(data: dict):
     if User.objects(email=user.email):
         return "3"
     user.save(force_insert=True)
-    return "0"
+    return ["0", user]
 
 
 # done
