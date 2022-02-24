@@ -31,6 +31,10 @@ check_user_params = True
 
 
 # app routes
+@app.route("/google34d8c04c4b82b69a.html")
+def googleVerification():
+  #DO NOT REMOVE, IF YOU DO GOOGLE SEARCH CONSOLE WON'T WORK!
+  return render_template("google34d8c04c4b82b69a.html")
 @app.route("/createCourseSchoology")
 def import_schoology():
     print(request.get_json())
