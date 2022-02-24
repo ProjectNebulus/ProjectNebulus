@@ -7,6 +7,4 @@ def hash256(password):
 
 
 def valid_password(hashed, unhashed):
-    if check_password_hash(hashed, unhashed):
-        return True
-    return False
+    return check_password_hash(hashed, unhashed)

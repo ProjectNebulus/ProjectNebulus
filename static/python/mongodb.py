@@ -12,18 +12,20 @@ from static.python.security import valid_password
 from .classes import *
 
 from dotenv import load_dotenv
+
 load_dotenv()
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 ca = certifi.where()
-db = connect(db='Nebulus', username='MainUser', password=os.environ.get('MONGOPASS'), host=os.environ.get('MONGO'), tlsCAFile=ca)
+db = connect(db='Nebulus', username='MainUser', password=os.environ.get('MONGOPASS'), host=os.environ.get('MONGO'),
+             tlsCAFile=ca)
 
 Accounts = db.Accounts
 
 
 # done
 def get_user_courses(user_id: str):
-    user = find_user(user_id)
+    user = find_user(id=user_id)
     return Course.objects(authorizedUsers__in=[user])
 
 
@@ -36,23 +38,21 @@ def find_courses(_id: str):
 
 
 # done
-def find_user(_id: str = None, username: str = None, email: str = None):
-    if all(not i for i in [_id, username, email]):
-        raise KeyError("No user id, username, or email provided")
+def find_user(**kwargs):
     user = None
-    if _id:
-        user = User.objects(pk=_id)
-    elif username:
-        user = User.objects(username=username)
-    elif email:
-        user = User.objects(email=email)
+    if kwargs.get("id"):
+        user = User.objects(pk=kwargs["id"])
+    elif kwargs.get("username"):
+        user = User.objects(username=kwargs["username"])
+    elif kwargs.get("email"):
+        user = User.objects(email=kwargs["email"])
     if not user:
         return
     return user[0]
 
 
 def getSchoology(user_id: str = None, username: str = None, email: str = None):
-    return find_user(user_id, username, email).schoology
+    return find_user(id=user_id, username=username, email=email).schoology
 
 
 # done
@@ -76,8 +76,11 @@ def generateSchoologyObject(_id: str):
 
 # done
 def CheckSchoology(_id: int):
-    user = find_user(_id)
-    return "false" if not user.schoology else "true"
+    user = find_user(id=_id)
+
+    if not user or not user.schoology:
+        return "false"
+    return "true"
 
 
 def create_course(**kwargs):
@@ -124,20 +127,17 @@ def check_user(user):
 
 
 # done
-def check_password(
-        email,
-        password
-):
+def check_password(email, password):
     user = find_user(email=email)
     if not user:
         return "false"
-    if valid_password(password, user.password):
+    if valid_password(user.password, password):
         return "true"
     return "false"
 
 
 def schoologyLogin(_id: str, schoology: Schoology):
-    user = find_user(_id)
+    user = find_user(id=_id)
     if not user:
         raise KeyError("User not found")
     if user.schoology:
@@ -147,7 +147,7 @@ def schoologyLogin(_id: str, schoology: Schoology):
 
 
 def logout_from_schoology(_id: str):
-    user = find_user(_id)
+    user = find_user(id=_id)
     if not user:
         raise KeyError("User not found")
     user.schoology = None

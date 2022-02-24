@@ -24,7 +24,7 @@ class Query(graphene.ObjectType):
                                                 'email': graphene.String()})
 
     def resolve_user(self, info, _id=None, username=None, email=None):
-        return find_user(_id, username, email)
+        return find_user(id=_id, username=username, email=email)
 
     def resolve_grades(self, info, _id):
         return getGrades(_id)

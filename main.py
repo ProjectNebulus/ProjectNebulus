@@ -447,7 +447,7 @@ def lms():
         return redirect("/signin")
 
     new_user = request.args.get("new_user", default="false", type=str)
-    user_acc = db.find_user(session["id"])
+    user_acc = db.find_user(id=session["id"])
     user_courses = db.get_user_courses(session["id"])
     return render_template(
         "lms.html",
