@@ -9,14 +9,7 @@ import schoolopy
 from mongoengine import *
 
 from static.python.security import valid_password
-from .classes.Assignment import Assignment
-from .classes.Course import Course
-from .classes.Document import DocumentFile
-from .classes.Events import Event
-from .classes.Folder import Folder
-from .classes.Grades import Grades
-from .classes.Schoology import Schoology
-from .classes.User import User
+from .classes import *
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 ca = certifi.where()
@@ -140,11 +133,7 @@ def check_password(
     return "false"
 
 
-def schoologyLogin(
-        _id: str,
-        schoology: Schoology
-
-):
+def schoologyLogin(_id: str, schoology: Schoology):
     user = find_user(_id)
     if not user:
         raise KeyError("User not found")

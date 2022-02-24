@@ -1,17 +1,7 @@
 from . import graphene_models as gm
 import graphene
 from .graphql_mutations.core import DBMutations
-from ..mongodb import (
-    find_user,
-    find_courses,
-    getAssignment,
-    getGrades,
-    getEvent,
-    getFolder,
-    getSchoology,
-    getDocumentFile
-)
-
+from ..mongodb import *
 
 
 class Query(graphene.ObjectType):

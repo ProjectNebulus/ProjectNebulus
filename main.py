@@ -1,9 +1,11 @@
-# Exportng Environment Variables in the .env file
+# Exporting Environment Variables in the .env file
 import datetime
 import re
 import schoolopy
 
 from dotenv import load_dotenv
+load_dotenv()
+
 from flask import Flask, flash, redirect, render_template, request, session
 from werkzeug.utils import secure_filename
 
@@ -16,7 +18,6 @@ from static.python.youtube import search_yt
 from graphql_server.flask import GraphQLView
 from static.python.classes import *
 
-load_dotenv()
 certifi.where()
 
 KEY = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
@@ -188,9 +189,9 @@ def courses_grades(course_id):
 @app.route("/courses/<course_id>/information")
 def courses_information(course_id):
     if session.get("username") and session.get("password"):
-        courses = db.Accounts.find_one({"username": session.get("username")})["courses"]
+        user_courses = db.Accounts.find_one({"username": session.get("username")})["courses"]
 
-        for course in courses:
+        for course in user_courses:
             if course.get("_id") == course_id:
                 return render_template(
                     "courses/information.html",
@@ -208,9 +209,9 @@ def courses_information(course_id):
 @app.route("/courses/<course_id>/learning")
 def courses_learning(course_id):
     if session.get("username") and session.get("password"):
-        courses = db.Accounts.find_one({"username": session.get("username")})["courses"]
+        user_courses = db.Accounts.find_one({"username": session.get("username")})["courses"]
 
-        for course in courses:
+        for course in user_courses:
             if course.get("_id") == course_id:
                 return render_template(
                     "courses/learning.html",
