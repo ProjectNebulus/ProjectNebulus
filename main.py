@@ -530,7 +530,7 @@ def signin_username():
             # If the username is not an email, then we need to get the email from the database
             session["email"] = db.find_user(username=session["username"]).email
 
-        session["id"] = db.find_user(username=session["username"])._id
+        session["id"] = db.find_user(username=session["username"]).pk
     return validation
 
 
