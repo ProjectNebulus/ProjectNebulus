@@ -1,130 +1,132 @@
 <!--Style Sheets!-->
-<meta name="google-site-verification" content="5RLtqNU5_UuQAcLqyee0ZoaLyNQ9-6VF0qfJsABVhm4" />
-<head><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7084604546168550"  crossorigin="anonymous"></script></head>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
-      rel="stylesheet">
-<link rel="stylesheet" href="/static/css/styles.css">
-<link rel="stylesheet" href="/static/css/tailwind.css">
-<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
-<!-- <script src="../path/to/flowbite/dist/flowbite.js"></script> -->
-<link rel="stylesheet" href="https://unpkg.com/flowbite@1.3.4/dist/flowbite.min.css"/>
-<script src="https://unpkg.com/flowbite@1.3.4/dist/flowbite.js"></script>
-<!--Javascript!-->
-<script src="/static/js/main.js"></script>
-<!--Jquery!-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.f6.0/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-<!--if clicked elsewhere the profile menu (if there is one) will close-->
-
-<!--discord embeds!-->
-<meta property="og:title" content="Nebulus | Learning, All in One."/>
-<meta property="og:type" content="website"/>
-<meta property="og:url" content="https://Project-Nebulus.nicholasxwang.repl.co"/>
-<meta property="og:image" content="https://project-nebulus.nicholasxwang.repl.co/static/images/logo.png"/>
-<meta property="og:description" content="https://project-nebulus.nicholasxwang.repl.co/static/images/logo.png"/>
-<meta name="theme-color" content="#AC7AFF">
-
-<!--Icons!-->
-<link rel="icon" type="image/x-icon" href="/static/images/nebulusCats/cat1.png">
-
-<!--Title!-->
-<title>{{ page }}</title>
-
-<!--Twemoji!-->
-<!--
-<script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
-<script>
-  window.onload = function() {
-      twemoji.parse(document.body,
-              {folder: 'svg', ext: '.svg',size: "32x32"},
-      );
-  }
-
-</script>
-!-->
-<!--right click!-->
-<script>
-    document.onclick = hideMenu;
-    document.oncontextmenu = rightClick;
-
-    function hideMenu() {
-        document.getElementById("contextMenu")
-            .style.display = "none"
+<head>
+  <meta name="google-site-verification" content="5RLtqNU5_UuQAcLqyee0ZoaLyNQ9-6VF0qfJsABVhm4" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7084604546168550"  crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+        rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="stylesheet" href="/static/css/tailwind.css">
+  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+  <!-- <script src="../path/to/flowbite/dist/flowbite.js"></script> -->
+  <link rel="stylesheet" href="https://unpkg.com/flowbite@1.3.4/dist/flowbite.min.css"/>
+  <script src="https://unpkg.com/flowbite@1.3.4/dist/flowbite.js"></script>
+  <!--Javascript!-->
+  <script src="/static/js/main.js"></script>
+  <!--Jquery!-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.f6.0/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  
+  <!--if clicked elsewhere the profile menu (if there is one) will close-->
+  
+  <!--discord embeds!-->
+  <meta property="og:title" content="Nebulus | Learning, All in One."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://Project-Nebulus.nicholasxwang.repl.co"/>
+  <meta property="og:image" content="https://project-nebulus.nicholasxwang.repl.co/static/images/logo.png"/>
+  <meta property="og:description" content="https://project-nebulus.nicholasxwang.repl.co/static/images/logo.png"/>
+  <meta name="theme-color" content="#AC7AFF">
+  
+  <!--Icons!-->
+  <link rel="icon" type="image/x-icon" href="/static/images/nebulusCats/cat1.png">
+  
+  <!--Title!-->
+  <title>{{ page }}</title>
+  
+  <!--Twemoji!-->
+  <!--
+  <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
+  <script>
+    window.onload = function() {
+        twemoji.parse(document.body,
+                {folder: 'svg', ext: '.svg',size: "32x32"},
+        );
     }
-
-    function rightClick(e) {
-        e.preventDefault();
-        var menu = document.getElementById("contextMenu")
-
-        menu.style.display = 'block';
-        menu.style.left = e.pageX + "px";
-        menu.style.top = e.pageY + "px";
+  
+  </script>
+  !-->
+  <!--right click!-->
+  <script>
+      document.onclick = hideMenu;
+      document.oncontextmenu = rightClick;
+  
+      function hideMenu() {
+          document.getElementById("contextMenu")
+              .style.display = "none"
+      }
+  
+      function rightClick(e) {
+          e.preventDefault();
+          var menu = document.getElementById("contextMenu")
+  
+          menu.style.display = 'block';
+          menu.style.left = e.pageX + "px";
+          menu.style.top = e.pageY + "px";
+      }
+  </script>
+  
+  <style type="text/css">
+      .context-menu {
+          position: absolute;
+          background: #292b38;
+          color: white;
+          border: 1px solid transparent;
+          border-radius: 10px;
+          padding: 10px;
+          z-index: 5;
+      }
+  
+      .context-menu ul {
+          padding: 0;
+          margin: 0;
+          min-width: 150px;
+          list-style: none;
+      }
+  
+      .context-menu ul li {
+          padding: 7px 5px 7px 5px;
+          border: 1px solid transparent;
+          border-radius: 5px;
+          cursor: pointer;
+      }
+  
+      .context-menu ul li:hover {
+          background: #043ab0;
+          color: white;
+      }
+  </style>
+  <div id="contextMenu" class="context-menu"
+       style="display: none">
+      <ul>
+          <li onclick="window.open('/logout', target='_self')">Logout</li>
+          <li onclick="window.open('/dashboard', target='_self')">Return to Dashboard</li>
+      </ul>
+  </div>
+  <script>
+    function detectTheme(){
+      if (localStorage.getItem("color-theme")== null){
+      const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
+      if (darkThemeMq.matches) {
+        localStorage.setItem("color-theme", "dark");
+      } else {
+        localStorage.setItem("color-theme", "light");
+      }
     }
-</script>
-
-<style type="text/css">
-    .context-menu {
-        position: absolute;
-        background: #292b38;
-        color: white;
-        border: 1px solid transparent;
-        border-radius: 10px;
-        padding: 10px;
-        z-index: 5;
+      if (localStorage.getItem("color-theme") === "dark")
+          document.body.style.background = "#111926";
+      else
+          document.body.style.background = "white";
+  
+      // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+      if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+      } else {
+          document.documentElement.classList.remove('dark')
+      }
     }
-
-    .context-menu ul {
-        padding: 0;
-        margin: 0;
-        min-width: 150px;
-        list-style: none;
-    }
-
-    .context-menu ul li {
-        padding: 7px 5px 7px 5px;
-        border: 1px solid transparent;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    .context-menu ul li:hover {
-        background: #043ab0;
-        color: white;
-    }
-</style>
-<div id="contextMenu" class="context-menu"
-     style="display: none">
-    <ul>
-        <li onclick="window.open('/logout', target='_self')">Logout</li>
-        <li onclick="window.open('/dashboard', target='_self')">Return to Dashboard</li>
-    </ul>
-</div>
-<script>
-  function detectTheme(){
-    if (localStorage.getItem("color-theme")== null){
-    const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
-    if (darkThemeMq.matches) {
-      localStorage.setItem("color-theme", "dark");
-    } else {
-      localStorage.setItem("color-theme", "light");
-    }
-  }
-    if (localStorage.getItem("color-theme") === "dark")
-        document.body.style.background = "#111926";
-    else
-        document.body.style.background = "white";
-
-    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark');
-    } else {
-        document.documentElement.classList.remove('dark')
-    }
-  }
-  window.onload = detectTheme
-</script>
+    window.onload = detectTheme
+  </script>
+</head>
 {% block main %} {% endblock %}
