@@ -104,7 +104,8 @@
     </ul>
 </div>
 <script>
-  if (localStorage.getItem("color-theme")== null){
+  function detectTheme(){
+    if (localStorage.getItem("color-theme")== null){
     const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
     if (darkThemeMq.matches) {
       localStorage.setItem("color-theme", "dark");
@@ -123,5 +124,7 @@
     } else {
         document.documentElement.classList.remove('dark')
     }
+  }
+  window.onload = detectTheme
 </script>
 {% block main %} {% endblock %}
