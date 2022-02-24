@@ -180,7 +180,7 @@ for (const template of templates) {
     button.appendChild(document.createElement('br'));
 
     let description = document.createElement('span');
-    description.style.color = 'gray';
+    description.classList.add('text-gray-600', 'dark:text-gray-300')
     description.style.fontSize = '0.8em';
     description.innerHTML = 'Subtemplates: ';
 
