@@ -7,8 +7,7 @@ window.addEventListener('load', function () {
         return EMAIL_REGEX.test(email);
     }
 
-    // TODO(kev): get rid of this, not sure why this is here, as this array is never modified
-    let r_l = [];
+    const r_l = ",<.>/?;:'\"\\|[{]}=+-_`!@#$%^&*()_+";
 
     function changeEmail() {
         const value = document.getElementById('email').value;
@@ -41,14 +40,19 @@ window.addEventListener('load', function () {
                 'Message: Password must include at least 1 number';
             document.getElementById('passwordValid').style.display = 'none';
         } else {
+            let hasSpecialCharacter = false;
+
             for (let i = 0; i < value.length; i++) {
-                if (!r_l.includes(value[i])) {
-                    document.getElementById('bubble2').style.display = 'block';
-                    document.getElementById('bubble').style.display = 'none';
-                    document.getElementById('bubble2').innerHTML =
-                        'Message: Password must include at least 1 special character';
-                    document.getElementById('passwordValid').style.display = 'none';
-                }
+                if (r_l.includes(value[i]))
+                    hasSpecialCharacter = true;
+            }
+
+            if (!hasSpecialCharacter) {
+                document.getElementById('bubble2').style.display = 'block';
+                document.getElementById('bubble').style.display = 'none';
+                document.getElementById('bubble2').innerHTML =
+                    'Message: Password must include at least 1 special character';
+                document.getElementById('passwordValid').style.display = 'none';
             }
         }
     }
@@ -62,7 +66,8 @@ function signUp() {
     status.style.color = 'red';
     status.innerHTML = '<br>';
 
-    if (document.getElementById('email').value === '') status.innerHTML = 'Please enter an email!';
+    if (document.getElementById('email').value === '')
+        status.innerHTML = 'Please enter an email!';
     else if (document.getElementById('username').value === '')
         status.innerHTML = 'Please enter a username!';
     else if (document.getElementById('password').value === '')

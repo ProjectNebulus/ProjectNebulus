@@ -1,31 +1,28 @@
 # Exportng Environment Variables in the .env file
-import datetime, os, re, schoolopy
+import datetime
+import re
+import schoolopy
+
 from dotenv import load_dotenv
 from flask import Flask, flash, redirect, render_template, request, session
-from waitress import serve
 from werkzeug.utils import secure_filename
 
-load_dotenv()
 import certifi
 
-certifi.where()
 from static.python import mongodb as db
-from static.python.classes.Course import Course
-from static.python.classes.User import User
-from static.python.encode_class import encode_class
 from static.python.image_to_music import *
-from static.python.schoology import getcourse
 from static.python.spotify import status as spotifystatus
 from static.python.youtube import search_yt
 from graphql_server.flask import GraphQLView
-from static.python.classes.graphql_query import schema
+from static.python.classes import *
+
+load_dotenv()
+certifi.where()
 
 KEY = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
 SECRET = "59ccaaeb93ba02570b1281e1b0a90e18"
 
 sc = schoolopy.Schoology(schoolopy.Auth(KEY, SECRET))
-
-import static.python.khanacademy
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 # Variables
@@ -59,8 +56,11 @@ def create_course():
     if not data["template"]:
         data["template"] = None
     db.create_course(
-        Course(name=data["name"], template=data["template"], created_at=datetime.datetime.now(), teacher=data["teacher"],
-               authorizedUsers=[session.get("id")])
+        name=data["name"],
+        template=data["template"],
+        created_at=datetime.datetime.now(),
+        teacher=data["teacher"],
+        authorizedUsers=[session.get("id")]
     )
     return "Course Created"
 
@@ -100,17 +100,17 @@ def profile():
 
 
 @app.errorhandler(404)
-def not_found(e):
+def not_found():
     return render_template("errors/404.html", page="404 Not Found")
 
 
 @app.errorhandler(500)
-def server_error(e):
+def server_error():
     return render_template("errors/500.html", page="500 Internal Server Error")
 
 
 @app.errorhandler(405)
-def method_not_allowed(e):
+def method_not_allowed():
     return render_template("errors/404.html", page="404 Not Found")
 
 
@@ -138,7 +138,6 @@ def courses_documents(course_id):
             course_id=course_id,
             user=session.get("username"),
         )
-
 
     else:
         return redirect("/signin")
@@ -321,9 +320,6 @@ def logout():
 
 @app.route("/schoology", methods=["POST"])
 def loginpost():
-    import random
-    import time
-
     import schoolopy
 
     key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
@@ -344,11 +340,7 @@ def loginpost():
         access_token=access_token,
         access_token_secret=access_token_secret,
     )
-    print(auth.authorized)
-    print(auth.authorize())
-    a = auth.authorized
-    print(a)
-    if a == False:
+    if not auth.authorized:
         return "error!!!"
     sc = schoolopy.Schoology(auth)
     sc.limit = 10
@@ -601,5 +593,5 @@ def logout_from_schoology():
 app.add_url_rule(
     "/graphql", view_func=GraphQLView.as_view("graphql", schema=schema.graphql_schema, graphiql=True)
 )
-#serve(app, host="0.0.0.0", port="8000")
+# serve(app, host="0.0.0.0", port="8000")
 app.run(host="localhost", port=8080)

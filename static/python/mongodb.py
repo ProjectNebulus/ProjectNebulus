@@ -1,27 +1,28 @@
-import os
-import random
+from __future__ import annotations
 
-from .classes.Document import DocumentFile
-from .classes.Folder import Folder
-from .classes.Course import Course
-from .classes.User import User
+import os
+import re
+from typing import List
+
+import certifi
+import schoolopy
+from mongoengine import *
+
+from static.python.security import valid_password
 from .classes.Assignment import Assignment
+from .classes.Course import Course
+from .classes.Document import DocumentFile
+from .classes.Events import Event
+from .classes.Folder import Folder
 from .classes.Grades import Grades
 from .classes.Schoology import Schoology
-from .classes.Events import Event
-import re
-
-import dns
-import certifi
-from mongoengine import *
-import schoolopy
-from typing import List
-from static.python.security import hash256, valid_password
+from .classes.User import User
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 ca = certifi.where()
-connect(db='Nebulus', username='MainUser', password=os.environ.get('MONGOPASS'), host=os.environ.get('MONGO'),
-        tlsCAFile=ca)
+db = connect(db='Nebulus', username='MainUser', password=os.environ.get('MONGOPASS'), host=os.environ.get('MONGO'), tlsCAFile=ca)
+
+Accounts = db.Accounts
 
 
 # done
@@ -53,8 +54,11 @@ def find_user(_id: str = None, username: str = None, email: str = None):
         return
     return user[0]
 
-def getSchoology(user_id: str=None, username: str=None, email: str=None):
+
+def getSchoology(user_id: str = None, username: str = None, email: str = None):
     return find_user(user_id, username, email).schoology
+
+
 # done
 def generateSchoologyObject(_id: str):
     key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
@@ -80,8 +84,8 @@ def CheckSchoology(_id: int):
     return "false" if not user.schoology else "true"
 
 
-def create_course(data: dict):
-    course = Course(**data)
+def create_course(**kwargs):
+    course = Course(kwargs)
     course.save(force_insert=True)
     for i in course.authorizedUsers:
         i.courses.append(course)
