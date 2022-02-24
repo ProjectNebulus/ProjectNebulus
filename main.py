@@ -537,6 +537,7 @@ def signin_username():
 @app.route("/signin_password", methods=["POST"])
 def signin_password():
     json = request.get_json()
+
     validation = db.check_password(session["email"], json.get("password"))
     return validation
 
