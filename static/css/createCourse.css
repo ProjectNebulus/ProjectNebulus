@@ -16,12 +16,10 @@
 /* Modal Content */
 
 .CourseBtn {
-    background-color: black;
     margin: auto;
     margin-top: 5%;
     margin-left: 25%;
     padding: 20px;
-    border: 1px solid #888;
     width: 50%;
     height: 70%;
     color: white;
@@ -132,7 +130,6 @@ button:hover {
 
 .button {
     font-size: 20px;
-    color: white;
     padding: 10px;
     border-radius: 5px;
     border-style: solid;
@@ -142,7 +139,6 @@ button:hover {
     margin-bottom: 10px;
     width: 500px;
     cursor: pointer;
-    background: black !important;
 }
 
 .button:hover {
