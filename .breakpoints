@@ -4,39 +4,39 @@
       {
         "id": "e188b25f-7862-4e96-a513-b98d3ddf3943",
         "line": 1,
-        "version": 12169,
+        "version": 12172,
         "index": 0
       },
       {
         "id": "1a96932e-ecb0-4cdb-8de1-01e6d9931860",
         "line": 1,
-        "version": 12169,
+        "version": 12172,
         "index": 0
       },
       {
         "id": "a3c66d9f-84f6-457a-87eb-984f8779b063",
         "line": 1,
-        "version": 12169,
+        "version": 12172,
         "index": 0
       },
       {
         "id": "860b54fc-f1c8-43cf-97e8-97693638b6f0",
-        "line": 2,
-        "version": 12169,
-        "index": 50
+        "line": 1,
+        "version": 12172,
+        "index": 8
       }
     ],
     "static/css/styles.css": [
       {
         "id": "b36c8974-2de7-4a05-b62e-91fbb4c7437f",
         "line": 2,
-        "version": 6111,
+        "version": 6116,
         "index": 116
       },
       {
         "id": "1284458e-185e-4fbf-b2db-e2da291b2c55",
         "line": 2,
-        "version": 6111,
+        "version": 6116,
         "index": 116
       }
     ],
@@ -60,7 +60,7 @@
       {
         "id": "23ec76f8-cb00-499c-8e37-7c42c82def8c",
         "line": 4,
-        "version": 1725,
+        "version": 1726,
         "index": 174
       }
     ],

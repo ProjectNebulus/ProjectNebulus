@@ -5,7 +5,7 @@ import schoolopy
 
 from flask import Flask, flash, redirect, render_template, request, session
 from werkzeug.utils import secure_filename
-
+from waitress import serve
 import certifi
 
 from static.python import mongodb as db
@@ -591,5 +591,5 @@ def logout_from_schoology():
 app.add_url_rule(
     "/graphql", view_func=GraphQLView.as_view("graphql", schema=schema.graphql_schema, graphiql=True)
 )
-# serve(app, host="0.0.0.0", port="8000")
-app.run(host="localhost", port=8080)
+serve(app, host="0.0.0.0", port="8000")
+# app.run(host="localhost", port=8080)
