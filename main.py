@@ -3,9 +3,6 @@ import datetime
 import re
 import schoolopy
 
-from dotenv import load_dotenv
-load_dotenv()
-
 from flask import Flask, flash, redirect, render_template, request, session
 from werkzeug.utils import secure_filename
 
@@ -101,17 +98,17 @@ def profile():
 
 
 @app.errorhandler(404)
-def not_found():
+def not_found(e):
     return render_template("errors/404.html", page="404 Not Found")
 
 
 @app.errorhandler(500)
-def server_error():
+def server_error(e):
     return render_template("errors/500.html", page="500 Internal Server Error")
 
 
 @app.errorhandler(405)
-def method_not_allowed():
+def method_not_allowed(e):
     return render_template("errors/404.html", page="404 Not Found")
 
 

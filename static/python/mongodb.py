@@ -11,6 +11,9 @@ from mongoengine import *
 from static.python.security import valid_password
 from .classes import *
 
+from dotenv import load_dotenv
+load_dotenv()
+
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 ca = certifi.where()
 db = connect(db='Nebulus', username='MainUser', password=os.environ.get('MONGOPASS'), host=os.environ.get('MONGO'), tlsCAFile=ca)
