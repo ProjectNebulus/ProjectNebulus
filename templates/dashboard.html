@@ -24,12 +24,10 @@
             }
 
             .section {
-                border-radius: 5px;
                 margin: 5px 2%;
                 padding: 5px;
                 height: 10vw;
                 width: 40vw;
-                background: black;
             }
 
             .vertical {
@@ -46,11 +44,11 @@
     <body>
     {% include "navbar.html" %}
     <div id="page">
-        <center><h1>Good Afternoon, {{ user }}</h1></center>
+        <center><h1 class="text-black dark:text-white">Good Afternoon, {{ user }}</h1></center>
 
         <div id="left">
-            <h2>Recent courses</h2>
-            <div class="section">
+            <h2 class="text-black dark:text-white">Recent courses</h2>
+            <div class="section p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                 {% for course in user_courses %}
                     <a href="/courses/{{ course._id }}">
                         <button style="margin:15px;" type="button"
@@ -60,15 +58,15 @@
                 {% endfor %}
             </div>
             <br>
-            <h2>Recent Activity</h2>
-            <div class="section">
+            <h2 class="text-black dark:text-white">Recent Activity</h2>
+            <div class="section p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
 
             </div>
         </div>
 
         <div id="right">
-            <h2>Upcoming Assignments</h2>
-            <div class="vertical section">
+            <h2 class="text-black dark:text-white">Upcoming Assignments</h2>
+            <div class="vertical section p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
 
             </div>
         </div>
