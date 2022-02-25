@@ -65,8 +65,8 @@ def find_user(**kwargs) -> User | None:
     return user[0]
 
 
-def getSchoology(user_id: str = None, username: str = None, email: str = None) -> Schoology:
-    return find_user(id=user_id, username=username, email=email).schoology
+def getSchoology(id: str = None, username: str = None, email: str = None) -> Schoology:
+    return find_user(id=id, username=username, email=email).schoology
 
 
 def CheckSchoology(_id: int):

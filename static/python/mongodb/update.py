@@ -2,7 +2,7 @@ from .read import find_user
 from ..classes.Schoology import Schoology
 
 def schoologyLogin(_id: str, schoology: Schoology):
-    user = find_user(id=_id)
+    user = find_user(pk=_id)
     if not user:
         raise KeyError("User not found")
     if user.schoology:

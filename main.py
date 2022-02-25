@@ -59,13 +59,8 @@ def create_course():
         data["teacher"] = "Unknown Teacher"
     if not data["template"]:
         data["template"] = None
-    db.create_course(
-        name=data["name"],
-        template=data["template"],
-        created_at=datetime.datetime.now(),
-        teacher=data["teacher"],
-        authorizedUsers=[session.get("id")]
-    )
+    data["authorizedUsers"] = [session.get("id")]
+    create.create_course(data)
     return "Course Created"
 
 
@@ -354,12 +349,12 @@ def loginpost():
     update.schoologyLogin(
         session["id"],
         Schoology(
-            request_token,
-            request_token_secret,
-            access_token,
-            access_token_secret,
-            session["Schoologyemail"],
-            session["Schoologyname"],
+            Schoology_request_token=request_token,
+            Schoology_request_secret = request_token_secret,
+            Schoology_access_token= access_token,
+            Schoology_access_secret=access_token_secret,
+            schoologyName=session["Schoologyemail"],
+            schoologyEmail=session["Schoologyname"],
         ))
 
     return str(sc.get_me().name_display)
