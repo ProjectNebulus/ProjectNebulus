@@ -1,7 +1,7 @@
 from . import graphene_models as gm
 import graphene
 from .graphql_mutations.core import DBMutations
-from ..mongodb import *
+from ..mongodb.read import *
 
 
 class Query(graphene.ObjectType):
@@ -21,33 +21,42 @@ class Query(graphene.ObjectType):
     assignment = graphene.Field(gm.Assignment, _id=graphene.String(required=True))
     grades = graphene.Field(gm.Grades, _id=graphene.String(required=True))
     schoology = graphene.Field(gm.Schoology, args={'user_id': graphene.String(), 'username': graphene.String(),
-                                                'email': graphene.String()})
+                                                   'email': graphene.String()})
 
-    def resolve_user(self, info, _id=None, username=None, email=None):
+    @staticmethod
+    def resolve_user(info, _id=None, username=None, email=None):
         return find_user(id=_id, username=username, email=email)
 
-    def resolve_grades(self, info, _id):
+    @staticmethod
+    def resolve_grades(info, _id):
         return getGrades(_id)
 
-    def resolve_document(self, info, _id):
+    @staticmethod
+    def resolve_document(info, _id):
         return getDocumentFile(_id)
 
-    def resolve_assignment(self, info, _id):
+    @staticmethod
+    def resolve_assignment(info, _id):
         return getAssignment(_id)
 
-    def resolve_event(self, info, _id):
+    @staticmethod
+    def resolve_event(info, _id):
         return getEvent(_id)
 
-    def resolve_folder(self, info, _id):
+    @staticmethod
+    def resolve_folder(info, _id):
         return getFolder(_id)
 
-    def resolve_schoology(self, info, user_id=None, username=None, email=None):
+    @staticmethod
+    def resolve_schoology(info, user_id=None, username=None, email=None):
         return getSchoology(user_id, username, email)
 
-    def resolve_course(self, info, _id):
+    @staticmethod
+    def resolve_course(info, _id):
         return find_courses(_id)
 
 
 schema = graphene.Schema(query=Query, mutation=DBMutations,
-                         types=[gm.User, gm.Course, gm.Folder, gm.DocumentFile, gm.Event, gm.Assignment, gm.Grades, gm.Avatar, gm.AvatarSize,
+                         types=[gm.User, gm.Course, gm.Folder, gm.DocumentFile, gm.Event, gm.Assignment, gm.Grades,
+                                gm.Avatar, gm.AvatarSize,
                                 gm.Schoology])

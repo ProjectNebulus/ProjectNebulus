@@ -8,7 +8,7 @@ from werkzeug.utils import secure_filename
 from waitress import serve
 import certifi
 
-from static.python import mongodb as db
+from static.python.mongodb import *
 from static.python.image_to_music import *
 from static.python.spotify import status as spotifystatus
 from static.python.youtube import search_yt
@@ -33,8 +33,10 @@ check_user_params = True
 # app routes
 @app.route("/google34d8c04c4b82b69a.html")
 def googleVerification():
-  #DO NOT REMOVE, IF YOU DO GOOGLE SEARCH CONSOLE WON'T WORK!
-  return render_template("google34d8c04c4b82b69a.html")
+    # DO NOT REMOVE, IF YOU DO GOOGLE SEARCH CONSOLE WON'T WORK!
+    return render_template("google34d8c04c4b82b69a.html")
+
+
 @app.route("/createCourseSchoology")
 def import_schoology():
     print(request.get_json())
@@ -148,7 +150,7 @@ def courses_documents(course_id):
 @app.route("/courses/<course_id>/announcements")
 def courses_announcements(course_id):
     if session.get("username") and session.get("password"):
-        courses = db.get_user_courses(session.get("id"))
+        courses = read.get_user_courses(session.get("id"))
 
         course = list(filter(lambda x: x.id == course_id, courses))
         if not course:
@@ -170,7 +172,7 @@ def courses_announcements(course_id):
 @app.route("/courses/<course_id>/grades")
 def courses_grades(course_id):
     if session.get("username") and session.get("password"):
-        courses = db.Accounts.find_one({"username": session.get("username")})["courses"]
+        courses = read.find_courses(session.get("id"))
 
         for course in courses:
             if course.get("_id") == course_id:
@@ -190,7 +192,7 @@ def courses_grades(course_id):
 @app.route("/courses/<course_id>/information")
 def courses_information(course_id):
     if session.get("username") and session.get("password"):
-        user_courses = db.Accounts.find_one({"username": session.get("username")})["courses"]
+        user_courses = read.find_courses(session.get("id"))
 
         for course in user_courses:
             if course.get("_id") == course_id:
@@ -210,7 +212,7 @@ def courses_information(course_id):
 @app.route("/courses/<course_id>/learning")
 def courses_learning(course_id):
     if session.get("username") and session.get("password"):
-        user_courses = db.Accounts.find_one({"username": session.get("username")})["courses"]
+        user_courses = read.find_courses(session.get("id"))
 
         for course in user_courses:
             if course.get("_id") == course_id:
@@ -230,7 +232,7 @@ def courses_learning(course_id):
 @app.route("/courses/<course_id>/settings")
 def courses_settings(course_id):
     if session.get("username") and session.get("password"):
-        courses = db.Accounts.find_one({"username": session.get("username")})["courses"]
+        courses = read.find_courses(session.get("id"))
 
         for course in courses:
             if course.get("_id") == course_id:
@@ -250,7 +252,7 @@ def courses_settings(course_id):
 @app.route("/courses/<course_id>/textbook")
 def courses_textbook(course_id):
     if session.get("username") and session.get("password"):
-        courses = db.Accounts.find_one({"username": session.get("username")})["courses"]
+        courses = read.find_courses(session.get("id"))
 
         for course in courses:
             if course.get("_id") == course_id:
@@ -270,7 +272,7 @@ def courses_textbook(course_id):
 @app.route("/courses/<course_id>/extensions")
 def courses_extensions(course_id):
     if session.get("username") and session.get("password"):
-        courses = db.Accounts.find_one({"username": session.get("username")})["courses"]
+        courses = read.find_courses(session.get("id"))
 
         for course in courses:
             if course.get("_id") == course_id:
@@ -349,15 +351,16 @@ def loginpost():
     print(sc.get_me().name_display)
     session["Schoologyname"] = sc.get_me().name_display
     session["Schoologyemail"] = sc.get_me().primary_email
-    db.schoologyLogin(
-        session["email"],
-        request_token,
-        request_token_secret,
-        access_token,
-        access_token_secret,
-        session["Schoologyemail"],
-        session["Schoologyname"],
-    )
+    update.schoologyLogin(
+        session["id"],
+        Schoology(
+            request_token,
+            request_token_secret,
+            access_token,
+            access_token_secret,
+            session["Schoologyemail"],
+            session["Schoologyname"],
+        ))
 
     return str(sc.get_me().name_display)
 
@@ -368,9 +371,6 @@ def settings():
         print("Not Signed In")
         return redirect("/signin")
     # Schoology Info
-
-    import pymongo
-    import schoolopy
 
     key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
     secret = "59ccaaeb93ba02570b1281e1b0a90e18"
@@ -391,16 +391,9 @@ def settings():
     # Open OAuth authorization webpage. Give time to authorize.
     try:
 
-        schoologyemail = (
-            pymongo.MongoClient(os.environ["MONGO"])
-                .Nebulus.Accounts.find_one({"username": session.get("username")})
-                .get("schoologyEmail")
-        )
-        schoologyname = (
-            pymongo.MongoClient(os.environ["MONGO"])
-                .Nebulus.Accounts.find_one({"username": session.get("username")})
-                .get("schoologyName")
-        )
+        schoologyemail = getSchoology(id=session.get("id")).schoologyEmail
+        schoologyname = getSchoology(id=session.get("id")).schoologyName
+
     except Exception as e:
         print(e)
         schoologyemail = None
@@ -426,7 +419,7 @@ def dashboard():
 
     print("Signed In")
     new_user = request.args.get("new_user", default="false", type=str)
-    user_courses = db.get_user_courses(session.get("id"))
+    user_courses = read.get_user_courses(session.get("id"))
     return render_template(
         "dashboard.html",
         user=session["username"],
@@ -451,8 +444,8 @@ def lms():
         return redirect("/signin")
 
     new_user = request.args.get("new_user", default="false", type=str)
-    user_acc = db.find_user(id=session["id"])
-    user_courses = db.get_user_courses(session["id"])
+    user_acc = read.find_user(id=session["id"])
+    user_courses = read.get_user_courses(session["id"])
     return render_template(
         "lms.html",
         user=session["username"],
@@ -492,7 +485,7 @@ def signup():
 def signup_post():
     data = request.get_json()
 
-    validation = db.create_user(data)
+    validation = create.create_user(data)
     if validation[0] == "0":
         session["username"] = validation[1].username
         session["email"] = validation[1].email
@@ -519,7 +512,7 @@ def signin():
 @app.route("/signin_username", methods=["POST"])
 def signin_username():
     json = request.get_json()
-    validation = db.check_user(json.get("username"))
+    validation = read.check_user(json.get("username"))
     if validation == "true":
         session["username"] = json.get("username")
         if re.fullmatch(regex, session["username"]):
@@ -539,7 +532,7 @@ def signin_username():
 def signin_password():
     json = request.get_json()
 
-    validation = db.check_password(session["email"], json.get("password"))
+    validation = read.check_password(session["email"], json.get("password"))
     return validation
 
 
@@ -587,7 +580,7 @@ def logout_from_schoology():
     session["access_token_secret"] = None
     session["access_token"] = None
     print("hi")
-    db.logout_from_schoology(session["username"])
+    update.logout_from_schoology(session["username"])
     print("byee")
     return redirect("/settings")
 
@@ -596,5 +589,5 @@ def logout_from_schoology():
 app.add_url_rule(
     "/graphql", view_func=GraphQLView.as_view("graphql", schema=schema.graphql_schema, graphiql=True)
 )
-serve(app, host="0.0.0.0", port="8080")
-# app.run(host="localhost", port=8080)
+# serve(app, host="0.0.0.0", port="8080")
+app.run(host="localhost", port=8080)

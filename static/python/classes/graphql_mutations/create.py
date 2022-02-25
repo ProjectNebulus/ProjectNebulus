@@ -1,4 +1,4 @@
-from ...mongodb import *
+from ...mongodb.create import *
 from ..User import User as UserModel
 from ..graphql_inputs.create_inputs import *
 from ..graphene_models import *
