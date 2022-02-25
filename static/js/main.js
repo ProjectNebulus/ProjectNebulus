@@ -1,6 +1,6 @@
 let menu;
 let rightClickElements = {};
-let prevRightClickElements = {"format: string here": "function to run if clicked here"};
+let prevRightClickElements = {"format: string as key": "function to run if clicked there as value"};
 
 window.onload = function () {
     menu = document.getElementById("context-menu");
@@ -12,7 +12,6 @@ window.onload = function () {
             if (event.target !== details[0])
                 details[0].open = false;
         });
-
 
     if (localStorage.getItem("color-theme") == null) {
         const darkTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;

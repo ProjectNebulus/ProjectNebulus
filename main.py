@@ -59,7 +59,7 @@ def create_course():
         data["teacher"] = "Unknown Teacher"
     if not data["template"]:
         data["template"] = None
-    db.create_course(
+    create.create_course(
         name=data["name"],
         template=data["template"],
         created_at=datetime.datetime.now(),
@@ -127,7 +127,7 @@ def courses(course_id):
 def courses_documents(course_id):
     print(1)
     if session.get("username") and session.get("password"):
-        courses = db.get_user_courses(session.get("id"))
+        courses = read.get_user_courses(session.get("id"))
 
         course = list(filter(lambda x: x.id == course_id, courses))
         if not course:

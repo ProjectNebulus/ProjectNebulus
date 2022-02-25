@@ -36,7 +36,7 @@ def generateSchoologyObject(_id: str) -> schoolopy.Schoology:
 
 
 def create_course(**kwargs):
-    course = Course(kwargs)
+    course = Course(**kwargs)
     course.save(force_insert=True)
     for i in course.authorizedUsers:
         i.courses.append(course)
