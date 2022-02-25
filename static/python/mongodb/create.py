@@ -35,6 +35,7 @@ def generateSchoologyObject(_id: str) -> schoolopy.Schoology:
     return sc
 
 
+
 def create_course(data: dict) -> Course:
     course = Course(**data)
     course.save(force_insert=True)

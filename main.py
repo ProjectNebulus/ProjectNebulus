@@ -59,6 +59,7 @@ def create_course():
         data["teacher"] = "Unknown Teacher"
     if not data["template"]:
         data["template"] = None
+
     data["authorizedUsers"] = [session.get("id")]
     create.create_course(data)
     return "Course Created"
@@ -122,7 +123,7 @@ def courses(course_id):
 def courses_documents(course_id):
     print(1)
     if session.get("username") and session.get("password"):
-        courses = db.get_user_courses(session.get("id"))
+        courses = read.get_user_courses(session.get("id"))
 
         course = list(filter(lambda x: x.id == course_id, courses))
         if not course:
@@ -587,5 +588,5 @@ def logout_from_schoology():
 app.add_url_rule(
     "/graphql", view_func=GraphQLView.as_view("graphql", schema=schema.graphql_schema, graphiql=True)
 )
-# serve(app, host="0.0.0.0", port="8080")
-app.run(host="localhost", port=8080)
+serve(app, host="0.0.0.0", port="8080")
+# app.run(host="localhost", port=8080)

@@ -35,6 +35,11 @@ const user = document.getElementById('userinfo').innerHTML;
 let courseName = document.getElementById('course-name');
 let courseTeacher = document.getElementById('course-teacher');
 
+for (const element of document.getElementsByClassName("CourseBtn")) {
+    element.className += " hidden overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center h-modal md:h-full md:inset-0";
+    element.oncontextmenu = () => rightClickElements = {};
+}
+
 function createCourse(subtemplate) {
     document.getElementById('create-course-status').innerHTML = 'Creating course...';
 
