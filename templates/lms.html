@@ -6,29 +6,31 @@
     {# Contains information like the username #}
     <span style="display:none" id="userinfo">{{ user }}</span>
 
-    <div id="left"
-         style="width:20%;height:90%;float:left; ">
+    <div id="left" style="width:20%;height:90%;float:left;">
         <div style="text-align: center;">
             <p class="text-3xl text-black dark:text-white">Recent Activity</p>
             {% for x in user_courses %}
-                <h3><p class="text-xl dark:text-white">{{ x.name }}</p></h3>
-                <hr/>
+                <h3 class="text-xl dark:text-white">{{ x.name }}</h3>
+                <hr>
                 <div class='course_updates'>
-                {% for i in x.updates[0:3] %}
-                    <div class='update_teacher'>
-                        <p>{{ x.teacher }} > {{ x.name }}</p>
-                    </div>
-                    <div class='update_header'>
-                    <h3>{{ i.header }}</h3>
-                    <div class='update_info'>
-                        <h4>{{ i.info }}</h4>
-                    </div>
-                {% endfor %}
-            </div>
+                    {% for i in x.updates[0:3] %}
+                        <div class='update_teacher'>
+                            <p>{{ x.teacher }} > {{ x.name }}</p>
+                        </div>
+                        <div class='update_header'>
+                            <h3>{{ i.header }}</h3>
+                            <div class='update_info'>
+                                <h4>{{ i.info }}</h4>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
             {% endfor %}
         </div>
     </div>
-    <div id="middle" style="width:60%;height:90%;float:left;overflow:auto;">
+
+    <div id="middle" style="width:60%;height:90%;float:left;overflow:auto;"
+         oncontextmenu="rightClickElements={'Join Course': () => {}, 'Create Course': () => screens[0].style.display = 'block'}">
         <div style="text-align: center;">
             <h1>
                 <p class="text-4xl text-black dark:text-white">Your Courses</p>
@@ -40,15 +42,13 @@
                     <button type="button" id="create"
                             class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
                         <span class="material-icons">add</span></button>
-
-
                 </div>
-                <br><br></br>
+                <br><br>
                 {% for course in user_courses %}
                     <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
                          style="float:left;margin:20px;height:200px;width:250px;">
                         <a href="#">
-                            <img class="rounded-t-lg" src="/docs/images/blog/image-1.jpg" alt=""/>
+                            <img class="rounded-t-lg" src="/docs/images/blog/image-1.jpg"/>
                         </a>
                         <div class="p-5">
                             <a href="#">
@@ -67,19 +67,19 @@
                             </a>
                         </div>
                     </div>
-
                 {% endfor %}
 
                 <!DOCTYPE html>
-                <html>
+                <html lang="en">
                 <head>
                     <meta name="viewport" content="width=device-width, initial-scale=1">
                     <link rel="stylesheet" href="static/css/createCourse.css">
+                    <title>Create Course</title>
                 </head>
                 <body>
                 <div id="CourseModal" class="modal">
-                    <div class="CourseBtn" aria-hidden="true"
-                         class="hidden overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center h-modal md:h-full md:inset-0">
+                    <div aria-hidden="true"
+                         class="CourseBtn hidden overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center h-modal md:h-full md:inset-0">
                         <div class="relative px-4 w-full max-w-2xl h-full md:h-auto">
                             <!-- Modal content -->
                             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -101,25 +101,26 @@
                                 </div>
                                 <!-- Modal body -->
                                 <div class="p-6 space-y-6">
-                                    <center>
+                                    <div style="text-align: center;">
 
                                         <p style="color:#bababa;font-size:0.5em;">A course is a space for you to
-                                            organize and thrive
-                                            in your learning experience. All you have to do is create a course and fill
+                                            organize and thrive in your learning experience. All you have to do is
+                                            create a course and fill
                                             it in with
                                             content!</p>
 
-                                        <span class='button text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2' onclick="skipTemplates()">
-                <img src="/static/images/icons/new.svg" style="visibility: visible;width:20px;height:20px;float:left;">
-                Create course
-                <img src="/static/images/icons/next.svg"
-                     style="visibility: visible;width:20px;height:20px;float:right;">
-              </span>
+                                        <span class='button text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2'
+                                              onclick="skipTemplates()">
+            <img src="/static/images/icons/new.svg" style="visibility: visible;width:20px;height:20px;float:left;">
+            Create course
+            <img src="/static/images/icons/next.svg"
+                 style="visibility: visible;width:20px;height:20px;float:right;">
+          </span>
 
                                         <h2 style="font-size:1.4vw">Or choose a template type</h2>
 
                                         <div class='scroll'></div>
-                                    </center>
+                                    </div>
                                 </div>
                                 <!-- Modal footer -->
                                 <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
@@ -132,79 +133,83 @@
                             </div>
                         </div>
                     </div>
-                        
 
-                        <div class="CourseBtn">
-                            <center>
-                                <h1>
-                                    Step 2: Choose a Course
-                                    <span class="close"></span>
-                                </h1>
 
-                                <div class="scroll"></div>
-                            </center>
-                        </div>
-
-                        <div class="CourseBtn">
-                            <center>
-                                <h1 id="change-if-skip-templates">
-                                    Step 3: Customize your Course
-                                    <span class="close"></span>
-                                </h1>
-                                <form id="create-course">
-                                    <input type="text" id="course-name"/>
-                                    <label for="course-name">Course Name:</label>
-                                    <input type="text" id="course-teacher"/>
-                                    <label for="course-teacher">Course Teacher:</label>
-                                    <br>
-                                    <input type="submit" value="Create your Course!"/>
-                                    <p style="color:yellowgreen;font-size:1.5vw;font-weight:700;"
-                                       id="create-course-status">
-                                    <p>
-                                </form>
-
-                                <h1>Or import from another LMS</h1>
-                                <button class="button text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" id="import-schoology">Import from Schoology</button>
-                                <button class="button text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" id="import-classroom">Import from Google Classroom</button>
-                                <button class="button text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" id="import-canvas">Import from Canvas</button>
-                            </center>
-                        </div>
-
-                        <div class="CourseBtn">
+                    <div class="CourseBtn">
+                        <div style="text-align: center;">
                             <h1>
-                                Import from Schoology
+                                Step 2: Choose a Course
                                 <span class="close"></span>
                             </h1>
-                            {% if db.CheckSchoology(user_acc._id) %}
-                                <form class="schoology-import">
-                                    <input type="text" placeholder="Schoology Course Link"><br>
-                                    <input type="submit">
-                                </form>
-                                <br><br>
-                                <h3>Instructions for getting the Section ID</h3>
-                                <p>When you open a course, the link should be something like
-                                    "[school].schoology.com/courses/[course-id]/materials".</p>
-                                <p>Paste that link in the box above!</p>
-                            {% else %}
-                                <div id="connect-schoology">
-                                    <span class="material-icons-outlined">error</span>
-                                </div>
-                            {% endif %}
+
+                            <div class="scroll"></div>
                         </div>
                     </div>
-                    <script src="static/js/createCourse.js"></script>
+
+                    <div class="CourseBtn">
+                        <div style="text-align: center;">
+                            <h1 id="change-if-skip-templates">
+                                Step 3: Customize your Course
+                                <span class="close"></span>
+                            </h1>
+                            <form id="create-course">
+                                <input type="text" id="course-name"/>
+                                <label for="course-name">Course Name:</label>
+                                <input type="text" id="course-teacher"/>
+                                <label for="course-teacher">Course Teacher:</label>
+                                <br>
+                                <input type="submit" value="Create your Course!"/>
+                                <p style="color:yellowgreen;font-size:1.5vw;font-weight:700;"
+                                   id="create-course-status">
+                                <p>
+                            </form>
+
+                            <h1>Or import from another LMS</h1>
+                            <button class="button text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                                    id="import-schoology">Import from Schoology
+                            </button>
+                            <button class="button text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                                    id="import-classroom">Import from Google Classroom
+                            </button>
+                            <button class="button text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                                    id="import-canvas">Import from Canvas
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="CourseBtn">
+                        <h1>
+                            Import from Schoology
+                            <span class="close"></span>
+                        </h1>
+                        {% if read.CheckSchoology(user_acc.id) %}
+                            <form class="schoology-import">
+                                <input type="text" placeholder="Schoology Course Link"><br>
+                                <input type="submit">
+                            </form>
+                            <br><br>
+                            <h3>Instructions for getting the Course Link</h3>
+                            <p>When you open a course, the link should be something like
+                                "[school].schoology.com/courses/[course-id]/materials".</p>
+                            <p>Paste that link in the box above!</p>
+                        {% else %}
+                            <div id="connect-schoology">
+                                <span class="material-icons-outlined">error</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <script src="static/js/createCourse.js"></script>
                 </body>
 
                 </html>
             </h1>
-
-
+        </div>
     </div>
 
-    <div id="right" style="width:20%;height:90%;float:right;background-color:transparent;overflow:auto">
+    <div id="right" style="width:20%;height:90%;float:right;background-color:transparent;overflow:auto;">
         <p class="text-3xl text-black dark:text-white">Upcoming Events</p>
         <p class="text-xl dark:text-white">Unit 3 Test</p>
         <p class="text-xl dark:text-white">Math HW #5</p>
     </div>
-
 {% endblock %}

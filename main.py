@@ -74,7 +74,7 @@ def developers():
     return render_template(
         "developerportal.html",
         user=session.get("username"),
-        db=db,
+        read=read,
         page="Nebulus - Developer Portal",
         developer=True,
     )
@@ -137,7 +137,7 @@ def courses_documents(course_id):
         return render_template(
             "courses/documents.html",
             page="Nebulus - " + course[0].name,
-            db=db,
+            read=read,
             course=course[0],
             course_id=course_id,
             user=session.get("username"),
@@ -160,7 +160,7 @@ def courses_announcements(course_id):
         return render_template(
             "courses/documents.html",
             page="Nebulus - " + course[0].name,
-            db=db,
+            read=read,
             course=course[0],
             course_id=course_id,
             user=session.get("username"),
@@ -179,7 +179,7 @@ def courses_grades(course_id):
                 return render_template(
                     "courses/grades.html",
                     page="Nebulus - " + course.get("name", "Courses"),
-                    db=db,
+                    read=read,
                     course=course,
                     course_id=course_id,
                     user=session.get("username"),
@@ -199,7 +199,7 @@ def courses_information(course_id):
                 return render_template(
                     "courses/information.html",
                     page="Nebulus - " + course.get("name", "Courses"),
-                    db=db,
+                    read=read,
                     course=course,
                     course_id=course_id,
                     user=session.get("username"),
@@ -219,7 +219,7 @@ def courses_learning(course_id):
                 return render_template(
                     "courses/learning.html",
                     page="Nebulus - " + course.get("name", "Courses"),
-                    db=db,
+                    read=read,
                     course=course,
                     course_id=course_id,
                     user=session.get("username"),
@@ -239,7 +239,7 @@ def courses_settings(course_id):
                 return render_template(
                     "courses/settings.html",
                     page="Nebulus - " + course.get("name", "Courses"),
-                    db=db,
+                    read=read,
                     course=course,
                     course_id=course_id,
                     user=session.get("username"),
@@ -259,7 +259,7 @@ def courses_textbook(course_id):
                 return render_template(
                     "courses/textbook.html",
                     page="Nebulus - " + course.get("name", "Courses"),
-                    db=db,
+                    read=read,
                     course=course,
                     course_id=course_id,
                     user=session.get("username"),
@@ -279,7 +279,7 @@ def courses_extensions(course_id):
                 return render_template(
                     "courses/extensions.html",
                     page="Nebulus - " + course.get("name", "Courses"),
-                    db=db,
+                    read=read,
                     course=course,
                     course_id=course_id,
                     user=session.get("username"),
@@ -404,7 +404,7 @@ def settings():
         session=session,
         user=session.get("username"),
         schoologyURL=url,
-        db=db,
+        read=read,
         schoologyemail=schoologyemail,
         schoologyname=schoologyname,
     )
@@ -425,7 +425,7 @@ def dashboard():
         user=session["username"],
         email=session["email"],
         user_courses=user_courses,
-        db=db,
+        read=read,
         page="Nebulus - Dashboard",
         new_account=new_user == "true",
     )
@@ -451,7 +451,7 @@ def lms():
         user=session["username"],
         user_acc=user_acc,
         user_courses=user_courses,
-        db=db,
+        read=read,
         page="Nebulus - Learning",
         new_account=new_user == "true",
     )
