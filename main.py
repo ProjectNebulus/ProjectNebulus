@@ -518,13 +518,13 @@ def signin_username():
         if re.fullmatch(regex, session["username"]):
             # If the username is an email, then we need to get the username from the database
             session["email"] = session["username"]
-            session["username"] = db.find_user(email=session["email"]).username
+            session["username"] = read.find_user(email=session["email"]).username
 
         else:
             # If the username is not an email, then we need to get the email from the database
-            session["email"] = db.find_user(username=session["username"]).email
+            session["email"] = read.find_user(username=session["username"]).email
 
-        session["id"] = db.find_user(username=session["username"]).pk
+        session["id"] = read.find_user(username=session["username"]).pk
     return validation
 
 
@@ -533,6 +533,9 @@ def signin_password():
     json = request.get_json()
 
     validation = read.check_password(session["email"], json.get("password"))
+    if validation == "true":
+        session["password"] = json.get("password")
+
     return validation
 
 
