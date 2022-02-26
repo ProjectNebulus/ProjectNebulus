@@ -87,7 +87,6 @@
     <div id="context-menu"></div>
 </body>
 <script>
-   <script>
     function detectTheme(){
       if (localStorage.getItem("color-theme")== null){
       const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
@@ -110,6 +109,5 @@
       }
     }
     window.onload = detectTheme;
-  </script>
 </script>
 {% block main %} {% endblock %}
