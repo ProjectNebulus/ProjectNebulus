@@ -7,7 +7,7 @@
         </a>
         <ul class="space-y-2">
             <li>
-                <a href="/courses/{{ course_id }}/documents" target="frame"
+                <a href="/courses/{{ course_id }}/documents" target="frame" style="pointer-events: none"
                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-100 dark:hover:bg-gray-700 dark:bg-gray-600">
                     <p class="dark:text-gray-400"><i class="material-icons">description</i></p>
 
@@ -73,8 +73,6 @@
 </aside>
 
 <script>
-    const sidebarLinks = document.getElementsByTagName("a");
-
     for (const a of sidebarLinks) {
         if (a.target !== "frame")
             continue;
@@ -89,12 +87,16 @@
                 link.className = a.className.replace(" dark:bg-gray-600", "");
             }
 
-            const title = a.href.substring(a.href.indexOf(document.documentURI)).split("/")[5];
-            pageTitle.innerHTML = title[0].toUpperCase() + title.substring(1);
+            let title = a.href.substring(a.href.indexOf(document.documentURI)).split("/")[5];
+            title = title[0].toUpperCase() + title.substring(1);
+            pageTitle.innerHTML = title + loadingIcon;
+            setTimeout(() => pageTitle.innerHTML = pageTitle.innerHTML.replace(loadingIcon, ""), 1000)
 
             a.style.pointerEvents = "none";
             a.style.cursor = "default";
             a.className += " dark:bg-gray-600";
+
+            localStorage.setItem("{{ course_id }}", title);
         }
     }
 </script>

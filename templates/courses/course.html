@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% block main %}
 <body oncontextmenu="rightClickElements={}">
+    {% include "navbar.html" %}
     {% include "courses/sidebar.html" %}
     <div style="margin-left:10px;width:calc(100% - 400px);float:left;">
         <p class="text-5xl text-black dark:text-white text-black" id="page-title">Documents</p>
@@ -11,19 +12,28 @@
     <iframe name="frame" width="80%" height="90%" src="/courses/{{ course_id }}/documents"></iframe>
 
     <script>
+        let sidebarLinks = document.getElementsByTagName("a");
+
         const iframe = document.getElementsByName("frame")[0];
         const pageTitle = document.getElementById("page-title");
         let removed = true;
 
-        setInterval(() => {
-            if (!removed && iframe.readyState === "complete") {
-                removed = true;
-                pageTitle.innerHTML = pageTitle.innerHTML.replace(loadingIcon, "");
-            } else if (removed && iframe.readyState !== "complete") {
-                removed = false;
-                pageTitle.innerHTML += loadingIcon;
+        const saveData = localStorage.getItem("{{ course_id }}");
+        if (saveData !== null) {
+            iframe.src = "/courses/{{ course_id }}/" + saveData.toLowerCase();
+            pageTitle.innerHTML = saveData;
+
+            sidebarLinks[1].className = sidebarLinks[1].className.replace("dark:bg-gray-600", "dark:bg-gray-100");
+            sidebarLinks[1].style.pointerEvents = "auto";
+
+            for (const link of sidebarLinks) {
+                if (link.innerHTML.includes(saveData)) {
+                    link.className += " dark:bg-gray-600";
+                    link.style.pointerEvents = "none";
+                    break;
+                }
             }
-        }, 200)
+        }
     </script>
 </body>
 {% endblock %}
