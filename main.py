@@ -576,6 +576,7 @@ def signin_password():
     validation = read.check_password(session["email"], json.get("password"))
     if validation == "true":
         session["password"] = json.get("password")
+        print(session['password'])
 
     return validation
 
