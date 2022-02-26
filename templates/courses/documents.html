@@ -3,83 +3,11 @@
 {% block main %}
 
     <div class="bg-slate-100">
-        <aside style="float:left;" class="w-64 h-full" aria-label="Sidebar">
-            <div class="px-3 py-4 overflow-y-auto rounded bg-gray-50 dark:bg-gray-800 h-full">
-                <a href="#" class="flex pl-2.5 mb-5">
-
-                    <span style="text-align: center"
-                          class="self-center text-lg font-semibold whitespace-nowrap text-black dark:text-white">{{ course.name }}</span>
-                </a>
-                <ul class="space-y-2">
-                    <li>
-                        <a href="#"
-                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                            <p class="dark:text-gray-400"><i class="material-icons">description</i></p>
-
-                            <span class="ml-3">Documents</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ '/courses'+course_id+'/announcements' }}" target="_blank"
-                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                            <p class="dark:text-gray-400"><i class="material-icons">campaign</i></p>
-
-                            <span class="ml-3">Announcements</span>
-
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ '/courses/'+course_id+'/grades' }}" target="_blank"
-                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                            <p class="dark:text-gray-400"><i class="material-icons">trending_up</i></p>
-
-                            <span class="ml-3">Grades</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ '/courses'+course_id+'/information' }}" target="_blank"
-                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                            <p class="dark:text-gray-400"><i class="material-icons">info</i></p>
-
-                            <span class="ml-3">Information</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ '/courses'+course_id+'/settings' }}" target="_blank"
-                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                            <p class="dark:text-gray-400"><i class="material-icons">settings</i></p>
-
-                            <span class="ml-3">Settings</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ '/courses'+course_id+'/textbook' }}" target="_blank"
-                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                            <p class="dark:text-gray-400"><i class="material-icons">menu_book</i></p>
-                            <span class="flex-1 ml-3 whitespace-nowrap">Textbook</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ '/courses'+course_id+'/extensions' }}" target="_blank"
-                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                            <p class="dark:text-gray-400"><i class="material-icons">extension</i></p>
-                            <span class="flex-1 ml-3 whitespace-nowrap">Extensions</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ '/courses'+course_id+'/learning' }}" target="_blank"
-                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                            <p class="dark:text-gray-400"><i class="material-icons">school</i></p>
-                            <span class="flex-1 ml-3 whitespace-nowrap">Learning</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </aside>
-        <div style="margin-left:10px;width:calc(100% - 400px);float:left;">
-            <p class="text-5xl text-black dark:text-white">Documents</p>
+        {% include "/courses/sidebar.html" %}
+        <div style="margin-left:10px;width:calc(100% - 280px);float:left;">
+            <p class="text-5xl text-black dark:text-white text-black">Documents</p>
             <br>
-            <hr>
+            <hr class="dark:text-white text-black">
             <br>
             <a href="#" style="width:90%;"
                class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
@@ -92,7 +20,7 @@
                     <span>Week 1</span></p>
             </a>
             <br>
-            <hr>
+            <hr class="dark:text-white text-black">
             <br>
             <a href="#" style="width:90%;"
                class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
@@ -105,7 +33,7 @@
                     <span>Week 2</span></p>
             </a>
             <br>
-            <hr>
+            <hr class="dark:text-white text-black">
             <br>
             <a href="#" style="width:90%;"
                class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
@@ -118,7 +46,7 @@
                     <span>Week 3</span></p>
             </a>
             <br>
-            <hr>
+            <hr class="dark:text-white text-black">
             <br>
             <a href="#" style="width:90%;"
                class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">

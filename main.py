@@ -31,6 +31,16 @@ check_user_params = True
 
 
 # app routes
+
+@app.route("/processSchoologyUrl", methods=["GET"])
+def schoologyURLProcess():
+  url = request.args.get('url')
+  if url == None:
+    return "0"
+  #https://<domain>.schoology.com/course/XXXXXXXXXX/materials
+  course = url.find("course")
+  course+=7
+  return (url[course:course+10])
 @app.route("/google34d8c04c4b82b69a.html")
 def googleVerification():
     # DO NOT REMOVE, IF YOU DO GOOGLE SEARCH CONSOLE WON'T WORK!
@@ -59,7 +69,7 @@ def create_course():
         data["teacher"] = "Unknown Teacher"
     if not data["template"]:
         data["template"] = None
-
+        
     data["authorizedUsers"] = [session.get("id")]
     create.create_course(data)
     return "Course Created"
@@ -123,7 +133,7 @@ def courses(course_id):
 def courses_documents(course_id):
     print(1)
     if session.get("username") and session.get("password"):
-        courses = read.get_user_courses(session.get("id"))
+        courses = db.get_user_courses(session.get("id"))
 
         course = list(filter(lambda x: x.id == course_id, courses))
         if not course:
@@ -154,7 +164,7 @@ def courses_announcements(course_id):
                 "errors/404.html", page="404 Not Found", user=session.get("username")
             )
         return render_template(
-            "courses/documents.html",
+            "courses/announcements.html",
             page="Nebulus - " + course[0].name,
             read=read,
             course=course[0],
@@ -168,121 +178,137 @@ def courses_announcements(course_id):
 @app.route("/courses/<course_id>/grades")
 def courses_grades(course_id):
     if session.get("username") and session.get("password"):
-        courses = read.find_courses(session.get("id"))
+        courses = read.get_user_courses(session.get("id"))
 
-        for course in courses:
-            if course.get("_id") == course_id:
-                return render_template(
-                    "courses/grades.html",
-                    page="Nebulus - " + course.get("name", "Courses"),
-                    read=read,
-                    course=course,
-                    course_id=course_id,
-                    user=session.get("username"),
-                )
+        course = list(filter(lambda x: x.id == course_id, courses))
+        if not course:
+            return render_template(
+                "errors/404.html", page="404 Not Found", user=session.get("username")
+            )
+        return render_template(
+            "courses/grades.html",
+            page="Nebulus - " + course[0].name,
+            read=read,
+            course=course[0],
+            course_id=course_id,
+            user=session.get("username"),
+        )
 
-    else:
-        return redirect("/signin")
+    return redirect("/signin")
+
 
 
 @app.route("/courses/<course_id>/information")
 def courses_information(course_id):
     if session.get("username") and session.get("password"):
-        user_courses = read.find_courses(session.get("id"))
+        courses = read.get_user_courses(session.get("id"))
 
-        for course in user_courses:
-            if course.get("_id") == course_id:
-                return render_template(
-                    "courses/information.html",
-                    page="Nebulus - " + course.get("name", "Courses"),
-                    read=read,
-                    course=course,
-                    course_id=course_id,
-                    user=session.get("username"),
-                )
+        course = list(filter(lambda x: x.id == course_id, courses))
+        if not course:
+            return render_template(
+                "errors/404.html", page="404 Not Found", user=session.get("username")
+            )
+        return render_template(
+            "courses/information.html",
+            page="Nebulus - " + course[0].name,
+            read=read,
+            course=course[0],
+            course_id=course_id,
+            user=session.get("username"),
+        )
 
-    else:
-        return redirect("/signin")
+    return redirect("/signin")
+
 
 
 @app.route("/courses/<course_id>/learning")
 def courses_learning(course_id):
     if session.get("username") and session.get("password"):
-        user_courses = read.find_courses(session.get("id"))
+        courses = read.get_user_courses(session.get("id"))
 
-        for course in user_courses:
-            if course.get("_id") == course_id:
-                return render_template(
-                    "courses/learning.html",
-                    page="Nebulus - " + course.get("name", "Courses"),
-                    read=read,
-                    course=course,
-                    course_id=course_id,
-                    user=session.get("username"),
-                )
+        course = list(filter(lambda x: x.id == course_id, courses))
+        if not course:
+            return render_template(
+                "errors/404.html", page="404 Not Found", user=session.get("username")
+            )
+        return render_template(
+            "courses/learning.html",
+            page="Nebulus - " + course[0].name,
+            read=read,
+            course=course[0],
+            course_id=course_id,
+            user=session.get("username"),
+        )
 
-    else:
-        return redirect("/signin")
-
+    return redirect("/signin")
 
 @app.route("/courses/<course_id>/settings")
 def courses_settings(course_id):
     if session.get("username") and session.get("password"):
-        courses = read.find_courses(session.get("id"))
+        courses = read.get_user_courses(session.get("id"))
 
-        for course in courses:
-            if course.get("_id") == course_id:
-                return render_template(
-                    "courses/settings.html",
-                    page="Nebulus - " + course.get("name", "Courses"),
-                    read=read,
-                    course=course,
-                    course_id=course_id,
-                    user=session.get("username"),
-                )
+        course = list(filter(lambda x: x.id == course_id, courses))
+        if not course:
+            return render_template(
+                "errors/404.html", page="404 Not Found", user=session.get("username")
+            )
+        return render_template(
+            "courses/settings.html",
+            page="Nebulus - " + course[0].name,
+            read=read,
+            course=course[0],
+            course_id=course_id,
+            user=session.get("username"),
+        )
 
-    else:
-        return redirect("/signin")
+    return redirect("/signin")
+
 
 
 @app.route("/courses/<course_id>/textbook")
 def courses_textbook(course_id):
     if session.get("username") and session.get("password"):
-        courses = read.find_courses(session.get("id"))
+        courses = read.get_user_courses(session.get("id"))
 
-        for course in courses:
-            if course.get("_id") == course_id:
-                return render_template(
-                    "courses/textbook.html",
-                    page="Nebulus - " + course.get("name", "Courses"),
-                    read=read,
-                    course=course,
-                    course_id=course_id,
-                    user=session.get("username"),
-                )
+        course = list(filter(lambda x: x.id == course_id, courses))
+        if not course:
+            return render_template(
+                "errors/404.html", page="404 Not Found", user=session.get("username")
+            )
+        return render_template(
+            "courses/textbook.html",
+            page="Nebulus - " + course[0].name,
+            read=read,
+            course=course[0],
+            course_id=course_id,
+            user=session.get("username"),
+        )
 
-    else:
-        return redirect("/signin")
+    return redirect("/signin")
+
 
 
 @app.route("/courses/<course_id>/extensions")
 def courses_extensions(course_id):
     if session.get("username") and session.get("password"):
-        courses = read.find_courses(session.get("id"))
+        courses = read.get_user_courses(session.get("id"))
 
-        for course in courses:
-            if course.get("_id") == course_id:
-                return render_template(
-                    "courses/extensions.html",
-                    page="Nebulus - " + course.get("name", "Courses"),
-                    read=read,
-                    course=course,
-                    course_id=course_id,
-                    user=session.get("username"),
-                )
+        course = list(filter(lambda x: x.id == course_id, courses))
+        if not course:
+            return render_template(
+                "errors/404.html", page="404 Not Found", user=session.get("username")
+            )
+        return render_template(
+            "courses/extensions.html",
+            page="Nebulus - " + course[0].name,
+            read=read,
+            course=course[0],
+            course_id=course_id,
+            user=session.get("username"),
+        )
 
-    else:
-        return redirect("/signin")
+    return redirect("/signin")
+
 
 
 @app.route("/")
@@ -325,6 +351,7 @@ def loginpost():
     key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
     secret = "59ccaaeb93ba02570b1281e1b0a90e18"
     sc = schoolopy.Schoology(schoolopy.Auth(key, secret))
+    
     sc.limit = 100
     request_token = session["request_token"]
     request_token_secret = session["request_token_secret"]
@@ -340,22 +367,24 @@ def loginpost():
         access_token=access_token,
         access_token_secret=access_token_secret,
     )
+    print(auth)
+    auth.authorize()
     if not auth.authorized:
         return "error!!!"
     sc = schoolopy.Schoology(auth)
-    sc.limit = 10
+    sc.limit = 100
     print(sc.get_me().name_display)
     session["Schoologyname"] = sc.get_me().name_display
     session["Schoologyemail"] = sc.get_me().primary_email
     update.schoologyLogin(
         session["id"],
         Schoology(
-            Schoology_request_token=request_token,
-            Schoology_request_secret = request_token_secret,
-            Schoology_access_token= access_token,
-            Schoology_access_secret=access_token_secret,
-            schoologyName=session["Schoologyemail"],
-            schoologyEmail=session["Schoologyname"],
+            request_token,
+            request_token_secret,
+            access_token,
+            access_token_secret,
+            session["Schoologyemail"],
+            session["Schoologyname"],
         ))
 
     return str(sc.get_me().name_display)
@@ -387,8 +416,8 @@ def settings():
     # Open OAuth authorization webpage. Give time to authorize.
     try:
 
-        schoologyemail = getSchoology(id=session.get("id")).schoologyEmail
-        schoologyname = getSchoology(id=session.get("id")).schoologyName
+        schoologyemail = getSchoology(user_id=session.get("id")).schoologyEmail
+        schoologyname = getSchoology(user_id=session.get("id")).schoologyName
 
     except Exception as e:
         print(e)
@@ -579,7 +608,7 @@ def logout_from_schoology():
     session["access_token_secret"] = None
     session["access_token"] = None
     print("hi")
-    update.logout_from_schoology(session["username"])
+    logout_from_schoology(session["username"])
     print("byee")
     return redirect("/settings")
 

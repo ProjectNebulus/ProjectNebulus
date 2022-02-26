@@ -53,7 +53,7 @@
     <style>
         #context-menu {
             position: absolute;
-            background: #292b38;
+            background: #233876;
             color: white;
             border: 1px solid transparent;
             border-radius: 10px;
@@ -77,7 +77,8 @@
         }
 
         #context-menu ul li:hover {
-            background: #043ab0;
+            background: #1C64F2
+;
             color: white;
         }
     </style>
@@ -86,7 +87,6 @@
     <div id="context-menu"></div>
 </body>
 <script>
-   <script>
     function detectTheme(){
       if (localStorage.getItem("color-theme")== null){
       const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
@@ -109,6 +109,5 @@
       }
     }
     window.onload = detectTheme;
-  </script>
 </script>
 {% block main %} {% endblock %}
