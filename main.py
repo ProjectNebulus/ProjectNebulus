@@ -593,7 +593,7 @@ def logout_from_schoology():
     return redirect("/settings")
 
 
-# Running
+Running
 app.add_url_rule(
     "/graphql", view_func=GraphQLView.as_view("graphql", schema=schema.graphql_schema, graphiql=True)
 )
