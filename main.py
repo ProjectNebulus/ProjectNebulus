@@ -126,14 +126,30 @@ def method_not_allowed(e):
 
 @app.route("/courses/<course_id>")
 def courses(course_id):
-    return redirect("/courses/" + str(course_id) + "/documents")
+    if session.get("username") and session.get("password"):
+        courses = read.get_user_courses(session.get("id"))
 
+        course = list(filter(lambda x: x.id == course_id, courses))
+        if not course:
+            return render_template(
+                "errors/404.html", page="404 Not Found", user=session.get("username")
+            )
+        return render_template(
+            "courses/course.html",
+            page="Nebulus - " + course[0].name,
+            read=read,
+            course=course[0],
+            course_id=course_id,
+            user=session.get("username"),
+        )
+
+    else:
+        return redirect("/signin")
 
 @app.route("/courses/<course_id>/documents")
 def courses_documents(course_id):
-    print(1)
     if session.get("username") and session.get("password"):
-        courses = db.get_user_courses(session.get("id"))
+        courses = read.get_user_courses(session.get("id"))
 
         course = list(filter(lambda x: x.id == course_id, courses))
         if not course:
