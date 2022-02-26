@@ -123,25 +123,7 @@ def method_not_allowed(e):
 
 @app.route("/courses/<course_id>")
 def courses(course_id):
-    if session.get("username") and session.get("password"):
-        courses = read.get_user_courses(session.get("id"))
-
-        course = list(filter(lambda x: x.id == course_id, courses))
-        if not course:
-            return render_template(
-                "errors/404.html", page="404 Not Found", user=session.get("username")
-            )
-        return render_template(
-            "courses/course.html",
-            page="Nebulus - " + course[0].name,
-            read=read,
-            course=course[0],
-            course_id=course_id,
-            user=session.get("username"),
-        )
-
-    else:
-        return redirect("/signin")
+    return redirect("/courses/"+course_id+"/documents")
 
 @app.route("/courses/<course_id>/documents")
 def courses_documents(course_id):
@@ -616,5 +598,8 @@ def logout_from_schoology():
 app.add_url_rule(
     "/graphql", view_func=GraphQLView.as_view("graphql", schema=schema.graphql_schema, graphiql=True)
 )
+
+print("Site is running at http://0.0.0.0:8080 . Please test it on CHROME, not SAFARI!")
 serve(app, host="0.0.0.0", port="8080")
+
 # app.run(host="localhost", port=8080)
