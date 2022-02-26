@@ -379,12 +379,12 @@ def loginpost():
     update.schoologyLogin(
         session["id"],
         Schoology(
-            request_token,
-            request_token_secret,
-            access_token,
-            access_token_secret,
-            session["Schoologyemail"],
-            session["Schoologyname"],
+            Schoology_request_token=request_token,
+            Schoology_request_secret=request_token_secret,
+            Schoology_access_token=access_token,
+            Schoology_access_secret=access_token_secret,
+            schoologyName=session["Schoologyemail"],
+            schoologyEmail=session["Schoologyname"],
         ))
 
     return str(sc.get_me().name_display)
