@@ -1,1 +1,1 @@
-run = "python3.10 main.py"
+run = "git pull; install-pkg python3.10; python3.10 main.py"
