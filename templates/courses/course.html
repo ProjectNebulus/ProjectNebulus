@@ -1,5 +1,29 @@
 {% extends "layout.html" %}
 {% block main %}
+<body oncontextmenu="rightClickElements={}">
     {% include "courses/sidebar.html" %}
-    <iframe name="frame" width="80%" height="100%" src="documents.html"></iframe>
+    <div style="margin-left:10px;width:calc(100% - 400px);float:left;">
+        <p class="text-5xl text-black dark:text-white text-black" id="page-title">Documents</p>
+        <br>
+        <hr class="dark:text-white text-black">
+    </div>
+
+    <iframe name="frame" width="80%" height="90%" src="/courses/{{ course_id }}/documents"></iframe>
+
+    <script>
+        const iframe = document.getElementsByName("frame")[0];
+        const pageTitle = document.getElementById("page-title");
+        let removed = true;
+
+        setInterval(() => {
+            if (!removed && iframe.readyState === "complete") {
+                removed = true;
+                pageTitle.innerHTML = pageTitle.innerHTML.replace(loadingIcon, "");
+            } else if (removed && iframe.readyState !== "complete") {
+                removed = false;
+                pageTitle.innerHTML += loadingIcon;
+            }
+        }, 200)
+    </script>
+</body>
 {% endblock %}

@@ -8,14 +8,14 @@
         <ul class="space-y-2">
             <li>
                 <a href="/courses/{{ course_id }}/documents" target="frame"
-                   class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-100 dark:hover:bg-gray-700">
+                   class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-100 dark:hover:bg-gray-700 dark:bg-gray-600">
                     <p class="dark:text-gray-400"><i class="material-icons">description</i></p>
 
                     <span class="ml-3">Documents</span>
                 </a>
             </li>
             <li>
-                <a href="/courses/{{ course_id }}/grades" target="frame"
+                <a href="/courses/{{ course_id }}/announcements" target="frame"
                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-100 dark:hover:bg-gray-700">
                     <p class="dark:text-gray-400"><i class="material-icons">campaign</i></p>
 
@@ -73,7 +73,7 @@
 </aside>
 
 <script>
-    const sidebarLinks = document.getElementsByTagName("a")
+    const sidebarLinks = document.getElementsByTagName("a");
 
     for (const a of sidebarLinks) {
         if (a.target !== "frame")
@@ -81,14 +81,20 @@
 
         a.onclick = () => {
             for (const link of sidebarLinks) {
+                if (a.target !== "frame")
+                    continue;
+
                 link.style.pointerEvents = "auto";
                 link.style.cursor = "pointer";
-                link.className += " dark:background-color:gray";
+                link.className = a.className.replace(" dark:bg-gray-600", "");
             }
+
+            const title = a.href.substring(a.href.indexOf(document.documentURI)).split("/")[5];
+            pageTitle.innerHTML = title[0].toUpperCase() + title.substring(1);
 
             a.style.pointerEvents = "none";
             a.style.cursor = "default";
-            a.className = a.className.replace(" dark:background-color:gray", "");
+            a.className += " dark:bg-gray-600";
         }
     }
 </script>

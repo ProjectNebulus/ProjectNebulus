@@ -48,7 +48,7 @@ def googleVerification():
 
 
 @app.route("/createCourseSchoology")
-def import_schoology():
+def import_schoology(): ...
 
 
 @app.route("/closeSchoology")

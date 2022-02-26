@@ -87,6 +87,8 @@
     <div id="context-menu"></div>
 </body>
 <script>
+    const menu = document.getElementById("context-menu");
+
     function detectTheme(){
       if (localStorage.getItem("color-theme")== null){
       const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
