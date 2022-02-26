@@ -1,28 +1,13 @@
 <!--Extend with Jinja!-->
 {% extends "layout.html" %}
 {% block main %}
-    <div id="side_bar">
-        <p class="course-title">{{ course.name }}</p>
-        <a href="{{ '/courses/'+course_id+'/documents' }}"><p class="course_option"><i
-                class="material-icons">description</i> Documents</p></a>
-        <a href="{{ '/courses/'+course_id+'/announcements' }}"><p class="course_option"><i
-                class="material-icons">campaign</i> Announcements</p></a>
-        <a href="{{ '/courses/'+course_id+'/grades' }}"><p class="course_option"><i class="material-icons"><span
-                class="material-icons-outlined">trending_up</span></i> Grades</p></a>
-        <a href="{{ '/courses/'+course_id+'/information' }}"><p class="course_option"><i class="material-icons">info</i>
-            Information</p></a>
-        <a href=""><p class="course_option"><i class="material-icons course_option_selected">settings</i> Settings</p>
-        </a>
-        <a href="{{ '/courses/'+course_id+'/textbook' }}"><p class="course_option"><i
-                class="material-icons">menu_book</i>
-            Textbook</p></a>
-        <a href="{{ '/courses/'+course_id+'/extensions' }}"><p class="course_option"><i
-                class="material-icons">extension</i> Extensions</p></a>
-        <a href="{{ '/courses/'+course_id+'/learning' }}"><p class="course_option coming-soon"><i
-                class="material-icons">school</i> Learning</p></a>
+
+    <div class="bg-slate-100">
+        {% include "/courses/sidebar.html" %}
+        <div style="margin-left:10px;width:calc(100% - 400px);float:left;">
+          <p class="text-5xl text-black dark:text-white text-black">Documents</p>
+        </div>
     </div>
-    <div id="course-body">
-        <h1>Settings</h1>
-    </div>
+
 
 {% endblock %}
