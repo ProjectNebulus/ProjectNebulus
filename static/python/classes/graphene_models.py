@@ -10,6 +10,7 @@ from .Avatar import Avatar as AvatarModel
 from .AvatarSize import AvatarSize as AvatarSizeModel
 from .Assignment import Assignment as AssignmentModel
 from .Schoology import Schoology as SchoologyModel
+from .Announcement import Announcement as AnnouncementModel
 
 
 class User(MongoengineObjectType):
@@ -60,3 +61,8 @@ class AvatarSize(MongoengineObjectType):
 class Schoology(MongoengineObjectType):
     class Meta:
         model = SchoologyModel
+
+
+class Announcement(MongoengineObjectType):
+    class Meta:
+        model = AnnouncementModel

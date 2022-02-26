@@ -13,7 +13,7 @@ from static.python.image_to_music import *
 from static.python.spotify import status as spotifystatus
 from static.python.youtube import search_yt
 from graphql_server.flask import GraphQLView
-from static.python.classes import *
+from static.python.classes.graphql_query import schema
 
 certifi.where()
 
@@ -28,7 +28,6 @@ app = Flask("app")
 app.secret_key = "12345678987654321"
 
 check_user_params = True
-
 
 # app routes
 
@@ -368,16 +367,16 @@ def loginpost():
     sc.limit = 100
     session["Schoologyname"] = sc.get_me().name_display
     session["Schoologyemail"] = sc.get_me().primary_email
+    schoology = {
+        "Schoology_request_token": request_token,
+        "Schoology_request_secret": request_token_secret,
+        "Schoology_access_token": access_token,
+        "Schoology_access_secret": access_token_secret,
+        "schoologyName": session["Schoologyname"],
+        "schoologyEmail": session["Schoologyemail"],
+    }
     update.schoologyLogin(
-        session["id"],
-        Schoology(
-            Schoology_request_token=request_token,
-            Schoology_request_secret=request_token_secret,
-            Schoology_access_token=access_token,
-            Schoology_access_secret=access_token_secret,
-            schoologyName=session["Schoologyemail"],
-            schoologyEmail=session["Schoologyname"],
-        ))
+        session["id"], schoology)
 
     return str(sc.get_me().name_display)
 
@@ -599,7 +598,8 @@ app.add_url_rule(
     "/graphql", view_func=GraphQLView.as_view("graphql", schema=schema.graphql_schema, graphiql=True)
 )
 
-print("Site is running at http://0.0.0.0:8080 . Please test it on CHROME, not SAFARI!")
-serve(app, host="0.0.0.0", port="8080")
 
-# app.run(host="localhost", port=8080)
+print("Site is running at http://0.0.0.0:8080 . Please test it on CHROME, not SAFARI!")
+#serve(app, host="0.0.0.0", port="8080")
+app.run(host="localhost", port=8080)
+

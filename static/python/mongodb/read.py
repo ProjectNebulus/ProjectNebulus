@@ -11,6 +11,7 @@ from ..classes.Folder import Folder
 from ..classes.Grades import Grades
 from ..classes.User import User
 from ..classes.Schoology import Schoology
+from ..classes.Announcement import Announcement
 from ..security import valid_password
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
@@ -42,7 +43,7 @@ def getFolder(folder_id: str) -> Folder:
 
 
 def get_user_courses(user_id: str) -> List[Course]:
-    user = find_user(id=user_id)
+    user = find_user(pk=user_id)
     return Course.objects(authorizedUsers__in=[user])
 
 
@@ -54,14 +55,20 @@ def find_courses(_id: str):
 
 
 def find_user(**kwargs) -> User | None:
-    if not any(i in ["id", "username", "email"] for i in kwargs):
+    print(kwargs)
+    if not any(i in ["pk", "id", "username", "email"] for i in kwargs.keys()):
         return
     if kwargs.get("id"):
         user = User.objects(pk=kwargs["id"])
+    elif kwargs.get("pk"):
+        user = User.objects(pk=kwargs["pk"])
     elif kwargs.get("username"):
         user = User.objects(username=kwargs["username"])
     else:
         user = User.objects(email=kwargs["email"])
+
+    if not user:
+        raise KeyError("User not found")
     return user[0]
 
 
@@ -98,3 +105,8 @@ def check_password(email, password):
     if valid_password(user.password, password):
         return "true"
     return "false"
+
+
+def get_announcement(announcement_id: str) -> Announcement:
+    announcement = Announcement.objects(pk=announcement_id).first()
+    return announcement

@@ -98,3 +98,14 @@ class CreateGrades(graphene.Mutation):
     def mutate(self, info, data):
         grades = createGrades(data)
         return CreateGrades(grades=grades)
+
+
+class CreateAnnouncement(graphene.Mutation):
+    class Arguments:
+        data = AnnouncementInput(required=True)
+
+    announcement = graphene.Field(Announcement)
+
+    def mutate(self, info, data):
+        announcement = createAnnouncement(data)
+        return CreateAnnouncement(announcement=announcement)

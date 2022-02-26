@@ -38,4 +38,4 @@ class Course(Snowflake):
     grades = ReferenceField('Grades')
     events = ListField(ReferenceField('Event'))
     image = EmbeddedDocumentField(Avatar)
-    updates = ListField()
+    announcements = ListField(ReferenceField('Announcement'))

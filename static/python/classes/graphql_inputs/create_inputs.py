@@ -29,7 +29,7 @@ class CourseInput(graphene.InputObjectType):
     grades = graphene.String(default_value=None)
     events = graphene.List(graphene.String, default_value=[])
     image = graphene.Field(AvatarInput, default_value=None)
-    updates = graphene.List(generic.GenericScalar, default_value=[])
+    announcements = graphene.List(graphene.String, default_value=[])
 
 
 class GradesInput(graphene.InputObjectType):
@@ -98,3 +98,12 @@ class UserInput(graphene.InputObjectType):
     is_staff = graphene.Boolean(default_value=False)
     student = graphene.Boolean(default_value=False)
     teacher = graphene.Boolean(default_value=False)
+
+class AnnouncementInput(graphene.InputObjectType):
+    _id = graphene.String(required=False)
+    content = graphene.String(required=True)
+    course = graphene.String(required=True)
+    title = graphene.String(required=True)
+    date = graphene.DateTime(default_value=datetime.now())
+    author = graphene.String(required=True)
+

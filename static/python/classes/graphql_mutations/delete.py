@@ -6,6 +6,7 @@ from ..Document import DocumentFile as DocumentFileModel
 from ..Events import Event as EventModel
 from ..Grades import Grades as GradesModel
 from ..Assignment import Assignment as AssignmentModel
+from ..Announcement import Announcement as AnnouncementModel
 
 
 class DeleteCourse(graphene.Mutation):
@@ -141,3 +142,15 @@ class DeleteSchoology(graphene.Mutation):
         user.schoology = None
         user.save()
         return DeleteSchoology(result=True)
+
+
+class DeleteAnnouncement(graphene.Mutation):
+    class Arguments:
+        announcement_id = graphene.String(required=True)
+
+    result = graphene.Boolean()
+
+    def mutate(self, info, announcement_id):
+        announcement = AnnouncementModel.objects.get(pk=announcement_id)
+        announcement.course.announcements.remove(announcement)
+        announcement.delete()

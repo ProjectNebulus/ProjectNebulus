@@ -14,6 +14,7 @@ from ..classes.Events import Event
 from ..classes.Folder import Folder
 from ..classes.Grades import Grades
 from ..classes.User import User
+from ..classes.Announcement import Announcement
 
 
 def generateSchoologyObject(_id: str) -> schoolopy.Schoology:
@@ -116,3 +117,12 @@ def createFolder(data: dict) -> Folder:
     course.folders.append(folder)
     course.save()
     return folder
+
+
+def createAnnouncement(data: dict) -> Announcement:
+    announcement = Announcement(**data)
+    announcement.save(force_insert=True)
+    course = announcement.course
+    course.announcements.append(announcement)
+    course.save()
+    return announcement

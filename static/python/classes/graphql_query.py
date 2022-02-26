@@ -1,7 +1,8 @@
+from ..mongodb import read
 from . import graphene_models as gm
 import graphene
 from .graphql_mutations.core import DBMutations
-from ..mongodb.read import *
+
 
 
 class Query(graphene.ObjectType):
@@ -13,50 +14,19 @@ class Query(graphene.ObjectType):
     # all_assignments = MongoengineConnectionField(Assignment)
     # all_grades = MongoengineConnectionField(Grades)
     user = graphene.Field(gm.User,
-                          args={'_id': graphene.String(), 'username': graphene.String(), 'email': graphene.String()})
-    course = graphene.Field(gm.Course, _id=graphene.String(required=True))
-    folder = graphene.Field(gm.Folder, _id=graphene.String(required=True))
-    document = graphene.Field(gm.DocumentFile, _id=graphene.String(required=True))
-    event = graphene.Field(gm.Event, _id=graphene.String(required=True))
+                          args={'_id': graphene.String(), 'username': graphene.String(), 'email': graphene.String()}, resolver=read.find_user)
+    course = graphene.Field(gm.Course, _id=graphene.String(required=True), resolver=read.find_courses)
+    folder = graphene.Field(gm.Folder, _id=graphene.String(required=True), resolver=read.getFolder)
+    document = graphene.Field(gm.DocumentFile, _id=graphene.String(required=True), resolver=read.getDocumentFile)
+    event = graphene.Field(gm.Event, _id=graphene.String(required=True), resolver=read.getEvent)
     assignment = graphene.Field(gm.Assignment, _id=graphene.String(required=True))
-    grades = graphene.Field(gm.Grades, _id=graphene.String(required=True))
+    grades = graphene.Field(gm.Grades, _id=graphene.String(required=True), resolver=read.getGrades)
     schoology = graphene.Field(gm.Schoology, args={'user_id': graphene.String(), 'username': graphene.String(),
-                                                   'email': graphene.String()})
-
-    @staticmethod
-    def resolve_user(info, _id=None, username=None, email=None):
-        return find_user(id=_id, username=username, email=email)
-
-    @staticmethod
-    def resolve_grades(info, _id):
-        return getGrades(_id)
-
-    @staticmethod
-    def resolve_document(info, _id):
-        return getDocumentFile(_id)
-
-    @staticmethod
-    def resolve_assignment(info, _id):
-        return getAssignment(_id)
-
-    @staticmethod
-    def resolve_event(info, _id):
-        return getEvent(_id)
-
-    @staticmethod
-    def resolve_folder(info, _id):
-        return getFolder(_id)
-
-    @staticmethod
-    def resolve_schoology(info, user_id=None, username=None, email=None):
-        return getSchoology(user_id, username, email)
-
-    @staticmethod
-    def resolve_course(info, _id):
-        return find_courses(_id)
+                                                   'email': graphene.String()}, resolver=read.getSchoology)
+    announcement = graphene.Field(gm.Announcement, _id=graphene.String(required=True), resolver=read.get_announcement)
 
 
 schema = graphene.Schema(query=Query, mutation=DBMutations,
                          types=[gm.User, gm.Course, gm.Folder, gm.DocumentFile, gm.Event, gm.Assignment, gm.Grades,
                                 gm.Avatar, gm.AvatarSize,
-                                gm.Schoology])
+                                gm.Schoology, gm.Announcement])
