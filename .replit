@@ -1,1 +1,1 @@
-run = "git pull; install-pkg python3.10; python3.10 main.py"
+run = "git config --global credential.helper store; git config --global credential.helper cache git pull; install-pkg python3.10; python3.10 main.py; pip install spotipy; pip install musixmatch; pip install swspotify; pip install dacite; python3.10 main.py;"
