@@ -549,7 +549,7 @@ def signin_password():
     return validation
 
 
-@app.route("/signin", methods=["POST"])
+@app.route("/signi4n", methods=["POST"])
 def signin_post():
     data = request.get_json()
     session["password"] = data.get("password")
