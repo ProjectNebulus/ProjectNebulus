@@ -49,20 +49,17 @@ def googleVerification():
 
 @app.route("/createCourseSchoology")
 def import_schoology():
-    print(request.get_json())
 
 
 @app.route("/closeSchoology")
 def close():
     session["token"] = request.args.get("oauth_token")
-    print("I was here :walk:")
     return "<script>window.close();</script>"
 
 
 @app.route("/createCourse", methods=["POST"])
 def create_course():
     data = request.get_json()
-    print(data)
     if data["name"] == '':
         data["name"] = data["template"]
     if data["teacher"] == '':
@@ -329,7 +326,6 @@ def courses_extensions(course_id):
 
 @app.route("/")
 def index():
-    print('hi')
     if session.get("username") and session.get("password"):
         return redirect("/dashboard")
     return render_template(
@@ -383,13 +379,11 @@ def loginpost():
         access_token=access_token,
         access_token_secret=access_token_secret,
     )
-    print(auth)
     auth.authorize()
     if not auth.authorized:
         return "error!!!"
     sc = schoolopy.Schoology(auth)
     sc.limit = 100
-    print(sc.get_me().name_display)
     session["Schoologyname"] = sc.get_me().name_display
     session["Schoologyemail"] = sc.get_me().primary_email
     update.schoologyLogin(
@@ -409,7 +403,6 @@ def loginpost():
 @app.route("/settings")
 def settings():
     if not (session.get("username") and session.get("password")):
-        print("Not Signed In")
         return redirect("/signin")
     # Schoology Info
 
@@ -422,7 +415,6 @@ def settings():
 
     auth = schoolopy.Auth(key, secret, three_legged=True, domain=DOMAIN)
     # Request authorization URL to open in another window.
-    print(request.url_root + "closeSchoology")
     url = auth.request_authorization(request.url_root + "closeSchoology")
     session["request_token"] = auth.request_token
     session["request_token_secret"] = auth.request_token_secret
@@ -436,7 +428,6 @@ def settings():
         schoologyname = getSchoology(id=session.get("id")).schoologyName
 
     except Exception as e:
-        print(e)
         schoologyemail = None
         schoologyname = None
     return render_template(
@@ -455,10 +446,8 @@ def settings():
 def dashboard():
     # if the user is not logged in, redirect to the login page
     if not (session.get("username") and session.get("password")):
-        print("Not Signed In")
         return redirect("/signin")
 
-    print("Signed In")
     new_user = request.args.get("new_user", default="false", type=str)
     user_courses = read.get_user_courses(session.get("id"))
     return render_template(
@@ -538,14 +527,11 @@ def signup_post():
 @app.route("/signin")
 def signin():
     # If the user is already logged in, redirect to the dashboard
-    print(session)
     if not (session.get("username") and session.get("password")):
-        print("Not Logged In")
 
         return render_template(
             "main/signin.html", page="Nebulus - Log In", disablebar=True
         )
-    print("Logged In")
 
     return redirect("/dashboard")
 
@@ -596,18 +582,15 @@ def musiqueworld():
 @app.route("/musiqueworld", methods=["POST"])
 def musiqueworld_post():
     if "file1" not in request.files:
-        print("1")
         flash("No file part")
         return redirect(request.url)
 
     file = request.files["file1"]
     if file.filename == "":
-        print("2")
         flash("No selected file")
         return redirect(request.url)
 
     if file and allowed_file(file.filename):
-        print("3")
         filename = secure_filename(file.filename)
         file.save(os.path.join("static/userbase/images", filename))
         resp = convert((os.path.join(UPLOAD_FOLDER, filename)))
@@ -624,9 +607,8 @@ def logout_from_schoology():
     session["request_token_secret"] = None
     session["access_token_secret"] = None
     session["access_token"] = None
-    print("hi")
+    "hi"
     logout_from_schoology(session["username"])
-    print("byee")
     return redirect("/settings")
 
 
