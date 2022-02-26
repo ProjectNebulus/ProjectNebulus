@@ -416,8 +416,8 @@ def settings():
     # Open OAuth authorization webpage. Give time to authorize.
     try:
 
-        schoologyemail = getSchoology(user_id=session.get("id")).schoologyEmail
-        schoologyname = getSchoology(user_id=session.get("id")).schoologyName
+        schoologyemail = getSchoology(id=session.get("id")).schoologyEmail
+        schoologyname = getSchoology(id=session.get("id")).schoologyName
 
     except Exception as e:
         print(e)
@@ -617,5 +617,5 @@ def logout_from_schoology():
 app.add_url_rule(
     "/graphql", view_func=GraphQLView.as_view("graphql", schema=schema.graphql_schema, graphiql=True)
 )
-serve(app, host="0.0.0.0", port="8080")
-# app.run(host="localhost", port=8080)
+# serve(app, host="0.0.0.0", port="8080")
+app.run(host="localhost", port=8080)
