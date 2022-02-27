@@ -1,15 +1,12 @@
 # Exporting Environment Variables in the .env file
 
-from flask import Flask, flash, redirect, render_template, request, session
+from flask import Flask, redirect, render_template, request, session
 from graphql_server.flask import GraphQLView
 from waitress import serve
-from werkzeug.utils import secure_filename
 
 from static.python.classes.graphql_query import schema
-from static.python.image_to_music import *
 from static.python.mongodb import *
 from static.python.spotify import *
-from static.python.youtube import search_yt
 
 certifi.where()
 
@@ -502,13 +499,9 @@ def music():
         "music.html", page="Nebulus - Music", user=session.get("username")
     )
 
-
-from flask import make_response
-
-
-@app.route("/sw.js", methods=["GET"])
+@app.route('/sw.js', methods=['GET'])
 def sw():
-    return app.send_static_file("static/js/sw.js")
+    return app.send_static_file('static/js/sw.js')
 
 
 @app.route("/holidays")
@@ -595,23 +588,23 @@ def musiqueworld():
     return render_template("musiqueworld/layout.html", page="Nebulus - Musiqueworld")
 
 
-@app.route("/musiqueworld", methods=["POST"])
-def musiqueworld_post():
-    if "file1" not in request.files:
-        flash("No file part")
-        return redirect(request.url)
-
-    file = request.files["file1"]
-    if file.filename == "":
-        flash("No selected file")
-        return redirect(request.url)
-
-    if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
-        file.save(os.path.join("static/userbase/images", filename))
-        resp = convert((os.path.join(UPLOAD_FOLDER, filename)))
-        youtube = search_yt(songs[0]["track_name"] + " by " + songs[0]["artist_name"])
-        return render_template(returned=True, youtube=youtube, resp=resp)
+# @app.route("/musiqueworld", methods=["POST"])
+# def musiqueworld_post():
+#     if "file1" not in request.files:
+#         flash("No file part")
+#         return redirect(request.url)
+#
+#     file = request.files["file1"]
+#     if file.filename == "":
+#         flash("No selected file")
+#         return redirect(request.url)
+#
+#     if file and allowed_file(file.filename):
+#         filename = secure_filename(file.filename)
+#         file.save(os.path.join("static/userbase/images", filename))
+#         resp = convert((os.path.join(UPLOAD_FOLDER, filename)))
+#         youtube = search_yt(songs[0]["track_name"] + " by " + songs[0]["artist_name"])
+#         return render_template(returned=True, youtube=youtube, resp=resp)
 
 
 @app.route("/logoutSchoology")
