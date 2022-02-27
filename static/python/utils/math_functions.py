@@ -2,7 +2,7 @@ import math
 
 
 def pythagorean(a, b):
-    return math.sqrt(a**2 + b**2)
+    return math.sqrt(a ** 2 + b ** 2)
 
 
 def midpoint_formula(x1, y1, x2, y2):
@@ -14,7 +14,7 @@ def slope(x1, y1, x2, y2):
 
 
 def cube_volume(x):
-    return x**3
+    return x ** 3
 
 
 def overlap(a, b):
@@ -51,12 +51,8 @@ def choose(a, b):
     return factorial(a) / (factorial(b) * factorial(a - b))
 
 
-def square(a):
-    return a**2
-
-
 def exponent(a, b):
-    return a**b
+    return a ** b
 
 
 def square_root(a):
@@ -105,11 +101,11 @@ def graphingCalculator(equations):
   var calculator = Desmos.GraphingCalculator(elt);"""
     for i in range(0, len(equations)):
         string += (
-            "calculator.setExpression({ id: 'graph"
-            + str(i)
-            + "', latex: '"
-            + equations[i]
-            + "' });"
+                "calculator.setExpression({ id: 'graph"
+                + str(i)
+                + "', latex: '"
+                + equations[i]
+                + "' });"
         )
     string += """</script>
   """
@@ -121,8 +117,20 @@ def ln(a):
 
 
 def log(a):
-    return math.log(a, 10)
+    return math.log10(a)
 
 
 def log_base(a, base):
     return math.log(a, base)
+
+
+def midpoint_formula(x1, y1, x2, y2):
+    return [(x1 + x2) / 2, (y1 + y2) / 2]
+
+
+def slope(x1, y1, x2, y2):
+    return (y2 - y1) / (x2 - x1)
+
+
+def log_base2(a):
+    return math.log2(a)
