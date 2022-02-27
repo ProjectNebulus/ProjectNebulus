@@ -5,8 +5,8 @@ jobs:
     name: Python linting
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - name: Python linting
-        uses: konstruktoid/action-pylint@master
+      - uses: jpetrucciani/black-check@master
+        with:
+          path: '.'
 
     
