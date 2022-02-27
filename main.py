@@ -593,7 +593,6 @@ def logout_from_schoology():
     return redirect("/settings")
 
 
-Running
 app.add_url_rule(
     "/graphql",
     view_func=GraphQLView.as_view(
@@ -603,5 +602,5 @@ app.add_url_rule(
 
 
 print("Site is running at http://0.0.0.0:8080 . Please test it on CHROME, not SAFARI!")
-# serve(app, host="0.0.0.0", port="8080")
-app.run(host="localhost", port=8080)
+serve(app, host="0.0.0.0", port="8080")
+# serve(app, host="localhost", port=8080)

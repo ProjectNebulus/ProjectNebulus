@@ -18,7 +18,7 @@
                                 {% for x in user_courses %}
                                     <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                         <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ x.name }}
-                                            <br><br>{% for i in x.updates[0:3] %}
+                                            <br><br>{% for i in x.announcements[0:3] %}
                                                 <div class='update_teacher'>
                                                     <p>{{ x.teacher }} > {{ x.name }}</p>
                                                 </div>
@@ -363,11 +363,16 @@
                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                    required>
                                         </div>
-
+                                        {% if read.CheckSchoology(user_acc.id) %}
                                         <button type="submit"
                                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                             Create Course
                                         </button>
+                                      {% else %}
+                                      <div id="connect-schoology">
+                        <span class="material-icons-outlined">error</span> You must link your schoology account to do this!
+                    </div>
+                {% endif %}
                                         <p style="color:yellowgreen;font-size:1.5vw;font-weight:700;"
                                            id="create-course-status">
                                     </form>
@@ -389,7 +394,7 @@
                     </div>
                     <!-- Modal footer -->
                     <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-                        <p>Page 3/5</p>
+                        <p>Page 4/5</p>
 
                     </div>
                 </div>
@@ -397,27 +402,6 @@
 
 
             <script src="static/js/createCourse.js"></script>
-            <div class="CourseBtn">
-                <h1>
-                    Import from Schoology
-                    <span class="close"></span>
-                </h1>
-                {% if read.CheckSchoology(user_acc.id) %}
-                    <form class="schoology-import">
-                        <input placeholder="Schoology Course Link"><br>
-                        <input type="submit">
-                    </form>
-                    <br><br>
-                    <h3>Instructions for getting the Course Link</h3>
-                    <p>When you open a course, the link should be something like
-                        "[school].schoology.com/courses/[course-id]/materials".</p>
-                    <p>Paste that link in the box above!</p>
-                {% else %}
-                    <div id="connect-schoology">
-                        <span class="material-icons-outlined">error</span>
-                    </div>
-                {% endif %}
-            </div>
             <script src="static/js/createCourse.js"></script>
             </body>
             </html>
