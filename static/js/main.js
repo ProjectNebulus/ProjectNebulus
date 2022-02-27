@@ -66,3 +66,15 @@ document.oncontextmenu = (e) => {
     menu.style.left = e.pageX + "px";
     menu.style.top = e.pageY + "px";
 }
+
+if ('serviceWorker' in navigator) {
+    // we are checking here to see if the browser supports the service worker api
+    window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js').then(function(registration) {
+            // Registration was successful
+            console.log('Service Worker registration was successful with scope: ', registration.scope);
+        }, function(error) {
+            console.log('ServiceWorker registration failed: ', error);
+        });
+    });
+}

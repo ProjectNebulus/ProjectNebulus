@@ -1,4 +1,4 @@
-if ('serviceWorker' in navigator) {   
+if ('serviceWorker' in navigator) {
    // we are checking here to see if the browser supports the  service worker api
 window.addEventListener('load', function() {
     navigator.serviceWorker.register('../sw.js').then(function(registration) {
@@ -52,7 +52,21 @@ self.addEventListener('fetch', function(event) {
 
 var urlsToCache = [
   '/',
-  '/static/style.css',
-  '/static/script.js',
- 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'
+  '/static/styles.css',
+    '/static/tailwind.css',
+    '/static/createCourse.css',
+    '/static/createCourse.js',
+    '/static/main.js',
+    '/static/dashboard.js',
+    '/static/profile.js',
+    '/static/signin.js',
+    '/static/signup.js',
+    "/signin",
+    "/signup",
+    "/lms",
+    "/dashboard",
+    "/settings",
+    "/profile",
+
+    'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'
 ];

@@ -506,11 +506,9 @@ def music():
 from flask import make_response
 
 
-@app.route("/manifest")
-def manifest():
-    res = make_response(render_template("manifest.appcache"), 200)
-    res.headers["Content-Type"] = "text/cache-manifest"
-    return res
+@app.route('/sw.js', methods=['GET'])
+def sw():
+    return app.send_static_file('static/js/sw.js')
 
 
 @app.route("/holidays")
