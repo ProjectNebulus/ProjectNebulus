@@ -11,7 +11,7 @@ window.onload = function () {
     if (menu !== null)
         document.addEventListener("click", () => menu.onclick.call(menu))
 
-    if (localStorage.getItem("color-theme") == null) {
+    if (localStorage.getItem("color-theme") === null) {
         const darkTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
         localStorage.setItem("color-theme", darkTheme ? "dark" : "light")
     }
@@ -34,7 +34,7 @@ document.onclick = () => menu.style.visibility = "hidden";
 document.oncontextmenu = (e) => {
     menu.style.visibility = "hidden";
 
-    if (rightClickElements == null)
+    if (rightClickElements === null)
         return;
 
     e.preventDefault();
