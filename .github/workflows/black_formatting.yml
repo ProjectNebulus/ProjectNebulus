@@ -15,8 +15,11 @@ jobs:
           pip install black
       - uses: wearerequired/lint-action@v1
         with:
-          github_token: ${{ secrets.PAT }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           black: true
           auto_fix: true
+          commit_message: 'Cleaning up your code!!'
+          git_name: 'Code Formatter 😎 '
+          git_email: 'code_formatter@formatting.com'
 
     
