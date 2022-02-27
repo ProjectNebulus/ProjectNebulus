@@ -4,6 +4,7 @@ from static.python.classes import Avatar
 from static.python.classes.Assignment import Assignment
 from static.python.classes.Course import Course
 
+
 def getcourse(courseid, sc, user, jsonEnabled):
     """
     jsonEnabled = True | returns json
