@@ -11,40 +11,43 @@
     <body>
 
     <br>
-    <div id="account" style="margin: 0px 20% 0px 20%; padding: 20px 20% 20px 20%; font-size: 1.2em">
-        <h2>Your Account</h2>
-        <p>
-            <span style="color:lightgray">Username: </span>
-            {{ session.get('username') }}
-
-            <span class="change-text">Change</span>
-        </p>
-
-        <p>
-            <span style="color:lightgray">Password: </span>
-            {{ "•" * session.get("password")|length }}
-
-            <span class="change-text">Change</span>
-        </p>
-
-        {% if session.get("email") != "" %}
-            <p>
-                <span style="color: lightgray">Email: </span>
-                {{ session.get('email') }}
-
-                <span class="change-text">Change</span>
-            </p>
-        {% else %}
-            <p>
-                <span style="color: lightgray">Email: </span>None
-
-                <span class="change-text">Add New</span>
-            </p>
-        {% endif %}
-        <h2>Spotify Status</h2>
-        <p id="song">Loading...</p>
+      <h1 class="dark:text-white">Your Profile</h1>
+      <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+    <div class="flex justify-end px-4 pt-4">
+        <button id="dropdownButton" data-dropdown-toggle="dropdown" class="hidden sm:inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
+        </button>
+        <!-- Dropdown menu -->
+        <div id="dropdown" class="hidden z-10 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
+            <ul class="py-1" aria-labelledby="dropdownButton">
+            <li>
+                <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
+            </li>
+            <li>
+                <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Export Data</a>
+            </li>
+            <li>
+                <a href="#" class="block py-2 px-4 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+            </li>
+            </ul>
+        </div>
+    </div>
+    <div class="flex flex-col items-center pb-10">
+        <img class="mb-3 w-24 h-24 rounded-full shadow-lg" src="/static/images/logo.png" alt="Bonnie image"/>
+        <h3 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ session.get('username') }}</h3>
+        <span class="text-sm text-gray-500 dark:text-gray-400">{{ session.get('email') }}</span>
+        <div class="flex mt-4 space-x-3 lg:mt-6">
+            <a href="/settings" class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Settings</a>
+            <a href="/dashboard" class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-800">Dashboard</a>
+        </div>
+    </div>
+        <h2 class="dark:text-white">Spotify Status</h2>
+        <p class="dark:text-white" id="song">Loading...</p>
         <br>
-        <p>This is dynamic as it changes when what you listen to changes!</p>
+        <p class="dark:text-white">This is dynamic as it changes when what you listen to changes!</p>
+</div>
+
+        
     </div>
     </body>
 

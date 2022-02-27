@@ -179,15 +179,7 @@ button {
     font-size: 1.3em;
 }
 
-a {
-    color: #00a2ff;
-    text-decoration: none;
-    font-weight: 600;
-}
 
-a:hover {
-    color: #0268a3;
-}
 progress[value] {
     /* Reset the default appearance */
     -webkit-appearance: none;

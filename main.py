@@ -591,8 +591,15 @@ def logout_from_schoology():
     "hi"
     logout_from_schoology(session["username"])
     return redirect("/settings")
-
-
+@app.route("/pricing")
+def pricing():
+  return render_template('errors/soon.html', page = "Pricing | Coming Soon")
+@app.route("/points")
+def points():
+  return render_template('errors/soon.html', page = "Points | Coming Soon")
+@app.route("/api")
+def api():
+  return render_template('errors/soon.html', page = "API | Coming Soon")
 app.add_url_rule(
     "/graphql",
     view_func=GraphQLView.as_view(
