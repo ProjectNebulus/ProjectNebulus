@@ -499,9 +499,10 @@ def music():
         "music.html", page="Nebulus - Music", user=session.get("username")
     )
 
-@app.route('/sw.js', methods=['GET'])
+
+@app.route("/sw.js", methods=["GET"])
 def sw():
-    return app.send_static_file('static/js/sw.js')
+    return app.send_static_file("static/js/sw.js")
 
 
 @app.route("/holidays")
