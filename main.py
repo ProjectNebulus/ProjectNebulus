@@ -37,7 +37,7 @@ def schoologyURLProcess():
     # https://<domain>.schoology.com/course/XXXXXXXXXX/materials
     course = url.find("course")
     course += 7
-    return url[course: course + 10]
+    return url[course : course + 10]
 
 
 @app.route("/google34d8c04c4b82b69a.html")
