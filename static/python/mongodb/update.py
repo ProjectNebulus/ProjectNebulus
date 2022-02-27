@@ -1,5 +1,6 @@
-from .read import find_user
 from ..classes.Schoology import Schoology
+from .read import find_user
+
 
 def schoologyLogin(_id: str, schoology: dict):
     user = find_user(pk=_id)
@@ -10,7 +11,6 @@ def schoologyLogin(_id: str, schoology: dict):
     schoology = Schoology(**schoology)
     print(vars(schoology))
     user.update(set__schoology=schoology)
-
 
 
 def logout_from_schoology(_id: str):

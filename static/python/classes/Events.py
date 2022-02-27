@@ -1,4 +1,5 @@
 from datetime import datetime
+
 from mongoengine import *
 
 # local imports
@@ -10,8 +11,9 @@ class Event(Snowflake):
     A class to represent an event.
     Has a bidirectional relationship with a course. -> event.course -> course.events
     """
-    meta = {'collection': 'Events'}
+
+    meta = {"collection": "Events"}
     title = StringField(required=True)
-    course = ReferenceField('Course', required=True)
+    course = ReferenceField("Course", required=True)
     date = DateTimeField(default=datetime.now())
-    description = StringField(default='', null=True)
+    description = StringField(default="", null=True)

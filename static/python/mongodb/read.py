@@ -1,17 +1,17 @@
 from __future__ import annotations
 
-from typing import List
 import re
+from typing import List
 
+from ..classes.Announcement import Announcement
 from ..classes.Assignment import Assignment
 from ..classes.Course import Course
 from ..classes.Document import DocumentFile
 from ..classes.Events import Event
 from ..classes.Folder import Folder
 from ..classes.Grades import Grades
-from ..classes.User import User
 from ..classes.Schoology import Schoology
-from ..classes.Announcement import Announcement
+from ..classes.User import User
 from ..security import valid_password
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"

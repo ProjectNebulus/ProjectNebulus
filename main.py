@@ -1,19 +1,19 @@
 # Exporting Environment Variables in the .env file
 import datetime
 import re
-import schoolopy
 
-from flask import Flask, flash, redirect, render_template, request, session
-from werkzeug.utils import secure_filename
-from waitress import serve
 import certifi
+import schoolopy
+from flask import Flask, flash, redirect, render_template, request, session
+from graphql_server.flask import GraphQLView
+from waitress import serve
+from werkzeug.utils import secure_filename
 
-from static.python.mongodb import *
+from static.python.classes.graphql_query import schema
 from static.python.image_to_music import *
+from static.python.mongodb import *
 from static.python.spotify import status as spotifystatus
 from static.python.youtube import search_yt
-from graphql_server.flask import GraphQLView
-from static.python.classes.graphql_query import schema
 
 certifi.where()
 
@@ -31,15 +31,18 @@ check_user_params = True
 
 # app routes
 
+
 @app.route("/processSchoologyUrl", methods=["GET"])
 def schoologyURLProcess():
-  url = request.args.get('url')
-  if url == None:
-    return "0"
-  #https://<domain>.schoology.com/course/XXXXXXXXXX/materials
-  course = url.find("course")
-  course+=7
-  return (url[course:course+10])
+    url = request.args.get("url")
+    if url == None:
+        return "0"
+    # https://<domain>.schoology.com/course/XXXXXXXXXX/materials
+    course = url.find("course")
+    course += 7
+    return url[course : course + 10]
+
+
 @app.route("/google34d8c04c4b82b69a.html")
 def googleVerification():
     # DO NOT REMOVE, IF YOU DO GOOGLE SEARCH CONSOLE WON'T WORK!
@@ -47,7 +50,8 @@ def googleVerification():
 
 
 @app.route("/createCourseSchoology")
-def import_schoology(): ...
+def import_schoology():
+    ...
 
 
 @app.route("/closeSchoology")
@@ -59,13 +63,13 @@ def close():
 @app.route("/createCourse", methods=["POST"])
 def create_course():
     data = request.get_json()
-    if data["name"] == '':
+    if data["name"] == "":
         data["name"] = data["template"]
-    if data["teacher"] == '':
+    if data["teacher"] == "":
         data["teacher"] = "Unknown Teacher"
     if not data["template"]:
         data["template"] = None
-        
+
     data["authorizedUsers"] = [session.get("id")]
     create.create_course(data)
     return "Course Created"
@@ -122,7 +126,8 @@ def method_not_allowed(e):
 
 @app.route("/courses/<course_id>")
 def courses(course_id):
-    return redirect("/courses/"+course_id+"/documents")
+    return redirect("/courses/" + course_id + "/documents")
+
 
 @app.route("/courses/<course_id>/documents")
 def courses_documents(course_id):
@@ -191,7 +196,6 @@ def courses_grades(course_id):
     return redirect("/signin")
 
 
-
 @app.route("/courses/<course_id>/information")
 def courses_information(course_id):
     if session.get("username") and session.get("password"):
@@ -212,7 +216,6 @@ def courses_information(course_id):
         )
 
     return redirect("/signin")
-
 
 
 @app.route("/courses/<course_id>/learning")
@@ -236,6 +239,7 @@ def courses_learning(course_id):
 
     return redirect("/signin")
 
+
 @app.route("/courses/<course_id>/settings")
 def courses_settings(course_id):
     if session.get("username") and session.get("password"):
@@ -256,7 +260,6 @@ def courses_settings(course_id):
         )
 
     return redirect("/signin")
-
 
 
 @app.route("/courses/<course_id>/textbook")
@@ -281,7 +284,6 @@ def courses_textbook(course_id):
     return redirect("/signin")
 
 
-
 @app.route("/courses/<course_id>/extensions")
 def courses_extensions(course_id):
     if session.get("username") and session.get("password"):
@@ -302,7 +304,6 @@ def courses_extensions(course_id):
         )
 
     return redirect("/signin")
-
 
 
 @app.route("/")
@@ -344,7 +345,7 @@ def loginpost():
     key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
     secret = "59ccaaeb93ba02570b1281e1b0a90e18"
     sc = schoolopy.Schoology(schoolopy.Auth(key, secret))
-    
+
     sc.limit = 100
     request_token = session["request_token"]
     request_token_secret = session["request_token_secret"]
@@ -375,8 +376,7 @@ def loginpost():
         "schoologyName": session["Schoologyname"],
         "schoologyEmail": session["Schoologyemail"],
     }
-    update.schoologyLogin(
-        session["id"], schoology)
+    update.schoologyLogin(session["id"], schoology)
 
     return str(sc.get_me().name_display)
 
@@ -543,7 +543,7 @@ def signin_password():
     validation = read.check_password(session["email"], json.get("password"))
     if validation == "true":
         session["password"] = json.get("password")
-        print(session['password'])
+        print(session["password"])
 
     return validation
 
@@ -595,11 +595,13 @@ def logout_from_schoology():
 
 Running
 app.add_url_rule(
-    "/graphql", view_func=GraphQLView.as_view("graphql", schema=schema.graphql_schema, graphiql=True)
+    "/graphql",
+    view_func=GraphQLView.as_view(
+        "graphql", schema=schema.graphql_schema, graphiql=True
+    ),
 )
 
 
 print("Site is running at http://0.0.0.0:8080 . Please test it on CHROME, not SAFARI!")
-#serve(app, host="0.0.0.0", port="8080")
+# serve(app, host="0.0.0.0", port="8080")
 app.run(host="localhost", port=8080)
-

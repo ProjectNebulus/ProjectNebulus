@@ -1,5 +1,6 @@
-from mongoengine import *
 from typing import Dict, List
+
+from mongoengine import *
 
 from .Snowflake import Snowflake
 
@@ -22,8 +23,8 @@ class Grades(Snowflake):
         - grade_frequency: A dictionary with the frequency of each grade.
     """
 
-    course = ReferenceField('Course', required=True)
-    student = ReferenceField('User', required=True)
+    course = ReferenceField("Course", required=True)
+    student = ReferenceField("User", required=True)
     grades = DictField(required=True)
     average = FloatField(required=False)
     median = FloatField(required=False)
@@ -48,9 +49,9 @@ def get_median(grades_list):
     grades_list.sort()
     if len(grades_list) % 2 == 0:
         return (
-                       grades_list[int(len(grades_list) / 2)]
-                       + grades_list[int(len(grades_list) / 2) - 1]
-               ) / 2
+            grades_list[int(len(grades_list) / 2)]
+            + grades_list[int(len(grades_list) / 2) - 1]
+        ) / 2
     return grades_list[int(len(grades_list) / 2)]
 
 

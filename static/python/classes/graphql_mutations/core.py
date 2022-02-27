@@ -1,8 +1,8 @@
-from .create import *
-from .update import *
-from .delete import *
-
 import graphene
+
+from .create import *
+from .delete import *
+from .update import *
 
 
 class DBMutations(graphene.ObjectType):

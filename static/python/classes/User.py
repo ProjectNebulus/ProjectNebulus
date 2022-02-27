@@ -1,12 +1,14 @@
-from mongoengine import *
 from datetime import datetime
 from typing import List, Optional, Union
+
+from mongoengine import *
+
+from static.python.security import hash256
 
 from .Avatar import Avatar
 from .Course import Course
 from .Schoology import Schoology
 from .Snowflake import Snowflake
-from static.python.security import hash256
 
 
 class User(Snowflake):
@@ -30,7 +32,8 @@ class User(Snowflake):
         - status: str - The status of the user - Default: None
         - schoology: Schoology - The user's schoology account information - Default: None
     """
-    meta = {'collection': 'Accounts'}
+
+    meta = {"collection": "Accounts"}
     username = StringField(required=True)
     password = StringField(required=True)
     email = EmailField(required=True)
@@ -38,10 +41,10 @@ class User(Snowflake):
     # optional params
     schoology = EmbeddedDocumentField(Schoology, default=None, null=True)
     avatar = EmbeddedDocumentField(Avatar, default=None, null=True)
-    bio = StringField(default='', null=True)
+    bio = StringField(default="", null=True)
     premium_expiration = DateTimeField(required=False, default=None, null=True)
-    status = StringField(default='', null=True)
-    courses = ListField(ReferenceField('Course'), default=[], null=True)
+    status = StringField(default="", null=True)
+    courses = ListField(ReferenceField("Course"), default=[], null=True)
     points = IntField(default=0)
     premium = BooleanField(default=False)
     is_staff = BooleanField(default=False)

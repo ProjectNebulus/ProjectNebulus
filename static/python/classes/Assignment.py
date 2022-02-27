@@ -1,5 +1,7 @@
 from mongoengine import *
+
 from .Snowflake import Snowflake
+
 
 class Assignment(Snowflake):
     """
@@ -11,10 +13,16 @@ class Assignment(Snowflake):
     and also allows for easy access to the assignments in the course.
 
     """
-    meta = {'collection': 'Assignments'}
-    course = ReferenceField('Course', required=True, description='The course that this assignment is in.')
-    due = DateTimeField(required=True, description='The due date of the assignment.')
-    title = StringField(required=True, description='The title of the assignment.')
-    points = IntField(default=100, description='The number of points the assignment is worth.')
-    description = StringField(default='', null=True, description='The description of the assignment.')
-    
+
+    meta = {"collection": "Assignments"}
+    course = ReferenceField(
+        "Course", required=True, description="The course that this assignment is in."
+    )
+    due = DateTimeField(required=True, description="The due date of the assignment.")
+    title = StringField(required=True, description="The title of the assignment.")
+    points = IntField(
+        default=100, description="The number of points the assignment is worth."
+    )
+    description = StringField(
+        default="", null=True, description="The description of the assignment."
+    )

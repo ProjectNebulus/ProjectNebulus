@@ -1,13 +1,15 @@
+import json
+from datetime import datetime
+
+from static.python.classes import Avatar
 from static.python.classes.Assignment import Assignment
 from static.python.classes.Course import Course
 from static.python.classes.Document import Document
 from static.python.classes.Folder import Folder
 from static.python.classes.Grades import Grades
 from static.python.classes.Schoology import Schoology
-from static.python.classes import Avatar
-import json
 
-from datetime import datetime
+
 def getcourse(courseid, sc, user, jsonEnabled):
     """
     jsonEnabled = True | returns json
@@ -75,11 +77,29 @@ def getCourseJson(courseid, sc, user):
 
 def getcourseObject(courseid, sc, user, template, teacher, created_at):
     json_course = getCourseJson(courseid, sc, user)
-    image = Avatar(url = json_course["image"])
+    image = Avatar(url=json_course["image"])
     assignments = []
     for assignment in course["assignments"]:
-      newassignment = Assignment(due = datetime(assignment["due"]),title = assignment["name"], points=-1,  description= assignment["info"])
+        newassignment = Assignment(
+            due=datetime(assignment["due"]),
+            title=assignment["name"],
+            points=-1,
+            description=assignment["info"],
+        )
     grades = []
     folders = []
-    course = Course(name = json_course["name"],template=template, created_at=created_at, teacher = teacher, imported_from = "Schoology", description = "", grades = [], teacherAccountID = None, assignments = [], folders = [], image = image, events = None, authorizedUserIDs = None)
-    
+    course = Course(
+        name=json_course["name"],
+        template=template,
+        created_at=created_at,
+        teacher=teacher,
+        imported_from="Schoology",
+        description="",
+        grades=[],
+        teacherAccountID=None,
+        assignments=[],
+        folders=[],
+        image=image,
+        events=None,
+        authorizedUserIDs=None,
+    )

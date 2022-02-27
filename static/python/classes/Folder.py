@@ -1,4 +1,5 @@
 from mongoengine import *
+
 from .Snowflake import Snowflake
 
 
@@ -9,7 +10,8 @@ class Folder(Snowflake):
         name: The name of the folder
         documents: A list of Document objects inside the folder
     """
-    meta = {'collection': 'Folders'}
+
+    meta = {"collection": "Folders"}
     name = StringField(required=True)
-    course = ReferenceField('Course', required=True)
-    documents = ListField(ReferenceField('DocumentFile'))
+    course = ReferenceField("Course", required=True)
+    documents = ListField(ReferenceField("DocumentFile"))

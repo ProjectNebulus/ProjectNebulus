@@ -1,16 +1,36 @@
-from mongoengine import *
-from typing import List, Optional
 from datetime import datetime
+from typing import List, Optional
+
+from mongoengine import *
+
+from .Assignment import Assignment
+from .Avatar import Avatar
+from .Events import Event
+
 # Relative imports (because this directory is a module
 from .Folder import Folder
-from .Assignment import Assignment
 from .Grades import Grades
 from .Snowflake import Snowflake
-from .Events import Event
-from .Avatar import Avatar
 
-templates = ("Sports", "Math", "Science", "Language", "History", "Art", "Music", "Other")
-lms_choices = ("Canvas", "Google Classroom", "Microsoft Teams", "Schoology", "Moodle", "Blackboard Learn", "Other")
+templates = (
+    "Sports",
+    "Math",
+    "Science",
+    "Language",
+    "History",
+    "Art",
+    "Music",
+    "Other",
+)
+lms_choices = (
+    "Canvas",
+    "Google Classroom",
+    "Microsoft Teams",
+    "Schoology",
+    "Moodle",
+    "Blackboard Learn",
+    "Other",
+)
 
 
 class Course(Snowflake):
@@ -23,19 +43,20 @@ class Course(Snowflake):
         - Events - (The events that are associated with this course) -> course.events -> event.course
         - Users (The users that are enrolled in the course) -> course.authorizedUsers -> user.courses
     """
-    meta = {'collection': 'Courses'}
+
+    meta = {"collection": "Courses"}
     name = StringField(required=True)
     teacher = StringField(required=True)
     created_at = DateTimeField(default=datetime.now())
     template = StringField(default=None)
-    authorizedUsers = ListField(ReferenceField('User'))
-    assignments = ListField(ReferenceField('Assignment'))
-    teacherAccount = ReferenceField('User', default=None, null=True)
-    folders = ListField(ReferenceField('Folder'))
+    authorizedUsers = ListField(ReferenceField("User"))
+    assignments = ListField(ReferenceField("Assignment"))
+    teacherAccount = ReferenceField("User", default=None, null=True)
+    folders = ListField(ReferenceField("Folder"))
     imported_from = StringField(default=None, choices=lms_choices, null=True)
-    description = StringField(default='', null=True)
-    documents = ListField(ReferenceField('DocumentFile'))
-    grades = ReferenceField('Grades')
-    events = ListField(ReferenceField('Event'))
+    description = StringField(default="", null=True)
+    documents = ListField(ReferenceField("DocumentFile"))
+    grades = ReferenceField("Grades")
+    events = ListField(ReferenceField("Event"))
     image = EmbeddedDocumentField(Avatar)
-    announcements = ListField(ReferenceField('Announcement'))
+    announcements = ListField(ReferenceField("Announcement"))

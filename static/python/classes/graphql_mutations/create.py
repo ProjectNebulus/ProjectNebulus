@@ -1,12 +1,12 @@
 from ...mongodb.create import *
-from ..User import User as UserModel
-from ..graphql_inputs.create_inputs import *
 from ..graphene_models import *
-
+from ..graphql_inputs.create_inputs import *
+from ..User import User as UserModel
 
 """
 GraphQL Mutations to create objects in the database
 """
+
 
 class CreateCourse(graphene.Mutation):
     class Arguments:
@@ -35,7 +35,6 @@ class CreateUser(graphene.Mutation):
             raise Exception("Username already exists")
         else:
             raise Exception("Email already exists")
-
 
 
 class CreateAssignment(graphene.Mutation):

@@ -1,6 +1,7 @@
 import requests
 from thefuzz import fuzz
 
+
 def getCountry(country):
     if len(country) in [3, 2]:
         data = requests.get(f"https://restcountries.com/v2/alpha/{country}")
@@ -18,7 +19,7 @@ def getCountry(country):
                 pass
             else:
                 if "status" in data:
-                    raise ValueError('Could not find that country')
+                    raise ValueError("Could not find that country")
                 close_dict = {}
 
                 for i, x in enumerate(data):
@@ -29,10 +30,10 @@ def getCountry(country):
                 if index:
                     data = data[index]
                 else:
-                    raise ValueError('Could not find that country')
+                    raise ValueError("Could not find that country")
 
     if "status" in data:
-        raise ValueError('Could not find that country')
+        raise ValueError("Could not find that country")
 
     else:
         if isinstance(data, list):

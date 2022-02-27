@@ -1,12 +1,13 @@
 from __future__ import annotations
 
 from typing import List
+
 from dotenv import load_dotenv
 
 load_dotenv()
 import schoolopy
 
-from .read import find_user
+from ..classes.Announcement import Announcement
 from ..classes.Assignment import Assignment
 from ..classes.Course import Course
 from ..classes.Document import DocumentFile
@@ -14,7 +15,7 @@ from ..classes.Events import Event
 from ..classes.Folder import Folder
 from ..classes.Grades import Grades
 from ..classes.User import User
-from ..classes.Announcement import Announcement
+from .read import find_user
 
 
 def generateSchoologyObject(_id: str) -> schoolopy.Schoology:
@@ -34,7 +35,6 @@ def generateSchoologyObject(_id: str) -> schoolopy.Schoology:
     sc = schoolopy.Schoology(auth)
     sc.limit = 10
     return sc
-
 
 
 def create_course(data: dict) -> Course:

@@ -1,4 +1,6 @@
 from musixmatch.musixmatch import Musixmatch
+
+
 class Musixmatch(object):
     def __init__(self, apikey):
         """Define objects of type Musixmatch.
@@ -61,9 +63,7 @@ class Musixmatch(object):
         )
         return request
 
-    def track_search(
-        self, q_track, page_size, page, s_track_rating, _format="json"
-    ):
+    def track_search(self, q_track, page_size, page, s_track_rating, _format="json"):
         """Search for track in our database.
         Parameters:
         q_track - The song title.
@@ -468,7 +468,11 @@ class Musixmatch(object):
                 "artist.related.get?artist_id={}"
                 "&artist_mbid={}&page={}"
                 "&page_size={}&format={}".format(
-                    artist_id, artist_mbid, page, self._set_page_size(page_size), _format
+                    artist_id,
+                    artist_mbid,
+                    page,
+                    self._set_page_size(page_size),
+                    _format,
                 )
             )
         )

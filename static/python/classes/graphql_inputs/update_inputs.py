@@ -1,4 +1,5 @@
 from datetime import datetime
+
 import graphene
 from graphene.types import generic
 
@@ -23,7 +24,7 @@ class UpdateCourseInput(graphene.InputObjectType):
     teacherAccount = graphene.Int(default_value=None)
     folders = graphene.List(graphene.String, default_value=[])
     imported_from = graphene.String(default_value=None)
-    description = graphene.String(default_value='')
+    description = graphene.String(default_value="")
     documents = graphene.List(graphene.String, default_value=[])
     grades = graphene.String(default_value=None)
     events = graphene.List(graphene.String, default_value=[])
@@ -42,21 +43,21 @@ class UpdateAssignmentInput(graphene.InputObjectType):
     due = graphene.DateTime()
     title = graphene.String()
     points = graphene.Int(default_value=100)
-    description = graphene.String(default_value='')
+    description = graphene.String(default_value="")
 
 
 class UpdateEventInput(graphene.InputObjectType):
     title = graphene.String()
     course = graphene.String()
     date = graphene.DateTime(default_value=datetime.now())
-    description = graphene.String(default_value='')
+    description = graphene.String(default_value="")
 
 
 class UpdateDocumentFileInput(graphene.InputObjectType):
     url = graphene.String()
     name = graphene.String()
     upload_date = graphene.DateTime(default_value=datetime.now)
-    description = graphene.String(default_value='')
+    description = graphene.String(default_value="")
     folder = graphene.String(default_value=None)
     course = graphene.String(default_value=None)
 
@@ -82,9 +83,9 @@ class UpdateUserInput(graphene.InputObjectType):
     password = graphene.String()
     schoology = graphene.Field(UpdateSchoologyInput, default_value=None)
     avatar = graphene.Field(UpdateAvatarInput, default_value=None)
-    bio = graphene.String(default_value='')
+    bio = graphene.String(default_value="")
     premium_expiration = graphene.DateTime(default=None)
-    status = graphene.String(default='')
+    status = graphene.String(default="")
     courses = graphene.List(graphene.String, default_value=[])
     points = graphene.Int(default_value=0)
     premium = graphene.Boolean(default_value=False)
