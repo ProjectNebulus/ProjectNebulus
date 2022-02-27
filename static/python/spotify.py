@@ -20,7 +20,7 @@ def get_song():
         currentsong = spotify.song()
         songartist = spotify.artist()
 
-        print(f"Song Playing: {currentsong}\nArtist: {songartist}")
+        # print(f"Song Playing: {currentsong}\nArtist: {songartist}")
 
         if len(sys.argv) > 1:
             name = songartist.join(sys.argv[1:])
@@ -31,13 +31,13 @@ def get_song():
         items = results["artists"]["items"]
         if len(items) > 0:
             artist = items[0]
-            print(
-                artist["name"] + ": Artist Cover Image Link: ",
-                artist["images"][0]["url"],
-            )
+            # print(
+            # artist["name"] + ": Artist Cover Image Link: ",
+            # artist["images"][0]["url"],
+            # )
             return (currentsong, songartist, artist["images"][0]["url"])
     except:
-        print("Spotify is not running")
+        # print("Spotify is not running")
         return ()
 
 

@@ -14,7 +14,7 @@ from static.python.image_to_music import *
 from static.python.mongodb import *
 from static.python.spotify import status as spotifystatus
 from static.python.youtube import search_yt
-from static.python.spotify import  *
+from static.python.spotify import *
 
 certifi.where()
 
@@ -96,12 +96,13 @@ def api_docs():
 def spotify_status():
     a = get_song()
     string = ""
-    if len(a) ==3:
+    if len(a) == 3:
         string = a[0] + " - " + a[1]
     else:
         string = "You aren't listening to anything!"
-    print(string)
+    # print(string)
     return string
+
 
 @app.route("/spoistatus2", methods=["POST"])
 def spotify_status2():
@@ -111,8 +112,9 @@ def spotify_status2():
         string = a[2]
     else:
         string = "You aren't listening to anything!"
-    print(string)
+    # print(string)
     return string
+
 
 @app.route("/profile")
 def profile():
@@ -603,15 +605,23 @@ def logout_from_schoology():
     "hi"
     logout_from_schoology(session["username"])
     return redirect("/settings")
+
+
 @app.route("/pricing")
 def pricing():
-  return render_template('errors/soon.html', page = "Pricing | Coming Soon")
+    return render_template("errors/soon.html", page="Pricing | Coming Soon")
+
+
 @app.route("/points")
 def points():
-  return render_template('errors/soon.html', page = "Points | Coming Soon")
+    return render_template("errors/soon.html", page="Points | Coming Soon")
+
+
 @app.route("/api")
 def api():
-  return render_template('errors/soon.html', page = "API | Coming Soon")
+    return render_template("errors/soon.html", page="API | Coming Soon")
+
+
 app.add_url_rule(
     "/graphql",
     view_func=GraphQLView.as_view(

@@ -29,7 +29,7 @@ def generateSchoologyObject(_id: str) -> schoolopy.Schoology:
         secret,
         domain="https://bins.schoology.com",
         three_legged=True,
-        **user.schoology
+        **user.schoology,
     )
     a = auth.authorized
     sc = schoolopy.Schoology(auth)

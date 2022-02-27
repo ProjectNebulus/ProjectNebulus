@@ -5,8 +5,8 @@ function fetchStatus() {
     });
 
     request.done((data) => {
-        if (data === "no_song_is_playing_right_now") {
-            data = "No song is playing on Spotify right now!";
+        if (data === "You aren't listening to anything!") {
+            data = "Music Paused";
             document.getElementById("song").innerHTML = "<p>" + data + "</p>";
         }
         else{
