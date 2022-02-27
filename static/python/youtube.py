@@ -12,7 +12,6 @@ ydl_opts = {
 
 def dl_youtube(query):
     import youtube_dl
-    from youtube_search import YoutubeSearch
 
     ydl_opts = {
         "format": "bestaudio/best",

@@ -1,14 +1,8 @@
-import json
 from datetime import datetime
 
 from static.python.classes import Avatar
 from static.python.classes.Assignment import Assignment
 from static.python.classes.Course import Course
-from static.python.classes.Document import Document
-from static.python.classes.Folder import Folder
-from static.python.classes.Grades import Grades
-from static.python.classes.Schoology import Schoology
-
 
 def getcourse(courseid, sc, user, jsonEnabled):
     """
@@ -18,7 +12,7 @@ def getcourse(courseid, sc, user, jsonEnabled):
     # print("Getting Course")
     # print("Getting Course")
     if jsonEnabled():
-        getcourseJson(courseid, sc, user)
+        getCourseJson(courseid, sc, user)
     else:
         getCourseObject(courseid, sc, user)
 
@@ -75,11 +69,11 @@ def getCourseJson(courseid, sc, user):
     return course
 
 
-def getcourseObject(courseid, sc, user, template, teacher, created_at):
+def getCourseObject(courseid, sc, user, template, teacher, created_at):
     json_course = getCourseJson(courseid, sc, user)
     image = Avatar(url=json_course["image"])
     assignments = []
-    for assignment in course["assignments"]:
+    for assignment in json_course["assignments"]:
         newassignment = Assignment(
             due=datetime(assignment["due"]),
             title=assignment["name"],
