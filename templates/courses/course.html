@@ -12,8 +12,6 @@
     <iframe name="frame" width="80%" height="80%"></iframe>
 
     <script>
-        let sidebarLinks = document.getElementsByTagName("a");
-
         const iframe = document.getElementsByName("frame")[0];
         const pageTitle = document.getElementById("page-title");
         let removed = true;
@@ -24,9 +22,6 @@
 
         iframe.src = "/courses/{{ course_id }}/" + saveData.toLowerCase();
         pageTitle.innerHTML = saveData;
-
-        sidebarLinks[1].className = sidebarLinks[1].className.replace("dark:bg-gray-600", "dark:bg-gray-100");
-        sidebarLinks[1].style.pointerEvents = "auto";
 
         for (const link of sidebarLinks) {
             if (link.innerHTML.includes(saveData)) {
