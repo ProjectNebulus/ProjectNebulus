@@ -506,9 +506,9 @@ def music():
 from flask import make_response
 
 
-@app.route('/sw.js', methods=['GET'])
+@app.route("/sw.js", methods=["GET"])
 def sw():
-    return app.send_static_file('static/js/sw.js')
+    return app.send_static_file("static/js/sw.js")
 
 
 @app.route("/holidays")
