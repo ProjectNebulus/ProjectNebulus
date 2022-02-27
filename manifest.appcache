@@ -1,0 +1,12 @@
+CACHE MANIFEST
+{{ url_for('static/css', filename='styles.css') }}
+{{ url_for('static/css', filename='tailwind.css') }}
+{{ url_for('static/css', filename='createCourse.css') }}
+{{ url_for('static/js', filename='createCourse.js') }}
+{{ url_for('static/js', filename='dashboard.js') }}
+{{ url_for('static/js', filename='main.js') }}
+{{ url_for('static/js', filename='new_course.js') }}
+{{ url_for('static/js', filename='profile.js') }}
+{{ url_for('static/js', filename='signin.js') }}
+{{ url_for('static/js', filename='signup.js') }}
+{{ url_for('static/js', filename='sw.js') }}

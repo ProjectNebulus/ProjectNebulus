@@ -502,6 +502,13 @@ def music():
         "music.html", page="Nebulus - Music", user=session.get("username")
     )
 
+from flask import make_response
+
+@app.route('/manifest')
+def manifest():
+    res = make_response(render_template('manifest.appcache'), 200)
+    res.headers["Content-Type"] = "text/cache-manifest"
+    return res
 
 @app.route("/holidays")
 def vh():
