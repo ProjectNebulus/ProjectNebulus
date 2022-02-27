@@ -22,7 +22,7 @@ window.addEventListener('load', function () {
         }
     }
 
-    if (localStorage.getItem('email') != null)
+    if (localStorage.getItem('email') !== null)
         document.getElementById('email').value = localStorage.getItem('email');
 
     function checkPassword() {

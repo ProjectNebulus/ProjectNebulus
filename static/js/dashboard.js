@@ -11,7 +11,7 @@ function updateTime() {
     else if (hour > 17)
         text = 'Evening';
 
-    if (text != null) 
+    if (text !== null) 
         greeting.innerHTML = greeting.innerHTML.replace('Afternoon', text);
 }
 
