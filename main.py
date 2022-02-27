@@ -14,6 +14,7 @@ from static.python.image_to_music import *
 from static.python.mongodb import *
 from static.python.spotify import status as spotifystatus
 from static.python.youtube import search_yt
+from static.python.spotify import  *
 
 certifi.where()
 
@@ -93,14 +94,25 @@ def api_docs():
 
 @app.route("/spoistatus", methods=["POST"])
 def spotify_status():
-    a = spotifystatus()
+    a = get_song()
     string = ""
-    if len(string) >= 1:
+    if len(a) ==3:
         string = a[0] + " - " + a[1]
     else:
         string = "You aren't listening to anything!"
+    print(string)
     return string
 
+@app.route("/spoistatus2", methods=["POST"])
+def spotify_status2():
+    a = get_song()
+    string = ""
+    if len(a) == 3:
+        string = a[2]
+    else:
+        string = "You aren't listening to anything!"
+    print(string)
+    return string
 
 @app.route("/profile")
 def profile():
