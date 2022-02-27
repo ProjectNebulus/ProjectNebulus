@@ -1,15 +1,15 @@
 {% extends "layout.html" %}
 {% block main %}
-<body oncontextmenu="rightClickElements={}">
+    <body oncontextmenu="rightClickElements={}">
     {% include "navbar.html" %}
     {% include "courses/sidebar.html" %}
     <div style="margin-left:10px;width:calc(100% - 400px);float:left;">
-        <p class="text-5xl text-black dark:text-white text-black" id="page-title">Documents</p>
+        <p class="text-5xl text-black dark:text-white text-black" id="page-title"></p>
         <br>
         <hr class="dark:text-white text-black">
     </div>
 
-    <iframe name="frame" width="80%" height="90%" src="/courses/{{ course_id }}/documents"></iframe>
+    <iframe name="frame" width="80%" height="80%"></iframe>
 
     <script>
         let sidebarLinks = document.getElementsByTagName("a");
@@ -18,22 +18,24 @@
         const pageTitle = document.getElementById("page-title");
         let removed = true;
 
-        const saveData = localStorage.getItem("{{ course_id }}");
-        if (saveData !== null) {
-            iframe.src = "/courses/{{ course_id }}/" + saveData.toLowerCase();
-            pageTitle.innerHTML = saveData;
+        let saveData = localStorage.getItem("{{ course_id }}");
+        if (saveData === null)
+            saveData = "Documents";
 
-            sidebarLinks[1].className = sidebarLinks[1].className.replace("dark:bg-gray-600", "dark:bg-gray-100");
-            sidebarLinks[1].style.pointerEvents = "auto";
+        iframe.src = "/courses/{{ course_id }}/" + saveData.toLowerCase();
+        pageTitle.innerHTML = saveData;
 
-            for (const link of sidebarLinks) {
-                if (link.innerHTML.includes(saveData)) {
-                    link.className += " dark:bg-gray-600";
-                    link.style.pointerEvents = "none";
-                    break;
-                }
+        sidebarLinks[1].className = sidebarLinks[1].className.replace("dark:bg-gray-600", "dark:bg-gray-100");
+        sidebarLinks[1].style.pointerEvents = "auto";
+
+        for (const link of sidebarLinks) {
+            if (link.innerHTML.includes(saveData)) {
+                link.className += " dark:bg-gray-600";
+                link.style.pointerEvents = "none";
+                break;
             }
         }
+
     </script>
-</body>
+    </body>
 {% endblock %}

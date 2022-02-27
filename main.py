@@ -1,9 +1,5 @@
 # Exporting Environment Variables in the .env file
-import datetime
-import re
 
-import certifi
-import schoolopy
 from flask import Flask, flash, redirect, render_template, request, session
 from graphql_server.flask import GraphQLView
 from waitress import serve
@@ -12,9 +8,8 @@ from werkzeug.utils import secure_filename
 from static.python.classes.graphql_query import schema
 from static.python.image_to_music import *
 from static.python.mongodb import *
-from static.python.spotify import status as spotifystatus
-from static.python.youtube import search_yt
 from static.python.spotify import *
+from static.python.youtube import search_yt
 
 certifi.where()
 
@@ -30,6 +25,7 @@ app.secret_key = "12345678987654321"
 
 check_user_params = True
 
+
 # app routes
 
 
@@ -41,7 +37,7 @@ def schoologyURLProcess():
     # https://<domain>.schoology.com/course/XXXXXXXXXX/materials
     course = url.find("course")
     course += 7
-    return url[course : course + 10]
+    return url[course: course + 10]
 
 
 @app.route("/google34d8c04c4b82b69a.html")
@@ -140,7 +136,25 @@ def method_not_allowed(e):
 
 @app.route("/courses/<course_id>")
 def courses(course_id):
-    return redirect("/courses/" + course_id + "/documents")
+    if session.get("username") and session.get("password"):
+        courses = read.get_user_courses(session.get("id"))
+
+        course = list(filter(lambda x: x.id == course_id, courses))
+        if not course:
+            return render_template(
+                "errors/404.html", page="404 Not Found", user=session.get("username")
+            )
+        return render_template(
+            "courses/course.html",
+            page="Nebulus - " + course[0].name,
+            read=read,
+            course=course[0],
+            course_id=course_id,
+            user=session.get("username"),
+        )
+
+    else:
+        return redirect("/signin")
 
 
 @app.route("/courses/<course_id>/documents")
@@ -523,7 +537,6 @@ def signup_post():
 def signin():
     # If the user is already logged in, redirect to the dashboard
     if not (session.get("username") and session.get("password")):
-
         return render_template(
             "main/signin.html", page="Nebulus - Log In", disablebar=True
         )
@@ -628,7 +641,6 @@ app.add_url_rule(
         "graphql", schema=schema.graphql_schema, graphiql=True
     ),
 )
-
 
 print("Site is running at http://0.0.0.0:8080 . Please test it on CHROME, not SAFARI!")
 serve(app, host="0.0.0.0", port="8080")

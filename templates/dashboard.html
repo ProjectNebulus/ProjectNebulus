@@ -13,14 +13,13 @@
                 text-align: right;
             }
 
+            #page {
+                height: 100%;
+            }
+
             h2 {
                 margin-left: 30px;
                 font-size: 3vh;
-            }
-
-            #page {
-                margin-left: 5%;
-                margin-right: 5%;
             }
 
             .section {
@@ -42,9 +41,10 @@
         </style>
     </head>
     <body>
-    {% include "navbar.html" %}
     <div id="page">
-        <center><h1 class="text-black dark:text-white">Good Afternoon, {{ user }}</h1></center>
+        {% include "navbar.html" %}
+        <div style="text-align: center; font-size: 5vh"><h1 class="text-black dark:text-white">Good
+            Afternoon, {{ user }}</h1></div>
 
         <div id="left">
             <h2 class="text-black dark:text-white">Recent courses</h2>
@@ -63,7 +63,6 @@
 
             </div>
         </div>
-    </div>
 
         <div id="right">
             <h2 class="text-black dark:text-white">Upcoming Assignments</h2>
@@ -74,6 +73,6 @@
 
         <script src="static/js/dashboard.js"></script>
     </div>
+    {% include "footer.html" %}
     </body>
-{% include "footer.html" %}
 {% endblock %}
