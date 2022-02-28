@@ -11,12 +11,26 @@ window.addEventListener('load', function() {
   });
 }
 
-var CACHE_NAME = 'offline-calculator';
+var CACHE_NAME = 'nebulus-offline';
 var urlsToCache = [
-  '/',
-  '/index',
-  '/static/style.css',
-  '/static/script.js'
+    'https://Project-Nebulus.nicholasxwang.repl.co/',
+  'https://Project-Nebulus.nicholasxwang.repl.co/static/styles.css',
+    'https://Project-Nebulus.nicholasxwang.repl.co/static/tailwind.css',
+    'https://Project-Nebulus.nicholasxwang.repl.co/static/createCourse.css',
+    'https://Project-Nebulus.nicholasxwang.repl.co/static/createCourse.js',
+    'https://Project-Nebulus.nicholasxwang.repl.co/static/main.js',
+    'https://Project-Nebulus.nicholasxwang.repl.co/static/dashboard.js',
+    'https://Project-Nebulus.nicholasxwang.repl.co/static/profile.js',
+    'https://Project-Nebulus.nicholasxwang.repl.co/static/signin.js',
+    'https://Project-Nebulus.nicholasxwang.repl.co/static/signup.js',
+    "https://Project-Nebulus.nicholasxwang.repl.co/signin",
+    "https://Project-Nebulus.nicholasxwang.repl.co/signup",
+    "https://Project-Nebulus.nicholasxwang.repl.co/lms",
+    "https://Project-Nebulus.nicholasxwang.repl.co/dashboard",
+    "https://Project-Nebulus.nicholasxwang.repl.co/settings",
+    "https://Project-Nebulus.nicholasxwang.repl.co/profile",
+
+    'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'
 ];
 self.addEventListener('install', function(event) {
   // install files needed offline
@@ -51,22 +65,22 @@ self.addEventListener('fetch', function(event) {
 });
 
 var urlsToCache = [
-  '/',
-  '/static/styles.css',
-    '/static/tailwind.css',
-    '/static/createCourse.css',
-    '/static/createCourse.js',
-    '/static/main.js',
-    '/static/dashboard.js',
-    '/static/profile.js',
-    '/static/signin.js',
-    '/static/signup.js',
-    "/signin",
-    "/signup",
-    "/lms",
-    "/dashboard",
-    "/settings",
-    "/profile",
+    'https://Project-Nebulus.nicholasxwang.repl.co/',
+  'https://Project-Nebulus.nicholasxwang.repl.co/static/styles.css',
+    'https://Project-Nebulus.nicholasxwang.repl.co/static/tailwind.css',
+    'https://Project-Nebulus.nicholasxwang.repl.co/static/createCourse.css',
+    'https://Project-Nebulus.nicholasxwang.repl.co/static/createCourse.js',
+    'https://Project-Nebulus.nicholasxwang.repl.co/static/main.js',
+    'https://Project-Nebulus.nicholasxwang.repl.co/static/dashboard.js',
+    'https://Project-Nebulus.nicholasxwang.repl.co/static/profile.js',
+    'https://Project-Nebulus.nicholasxwang.repl.co/static/signin.js',
+    'https://Project-Nebulus.nicholasxwang.repl.co/static/signup.js',
+    "https://Project-Nebulus.nicholasxwang.repl.co/signin",
+    "https://Project-Nebulus.nicholasxwang.repl.co/signup",
+    "https://Project-Nebulus.nicholasxwang.repl.co/lms",
+    "https://Project-Nebulus.nicholasxwang.repl.co/dashboard",
+    "https://Project-Nebulus.nicholasxwang.repl.co/settings",
+    "https://Project-Nebulus.nicholasxwang.repl.co/profile",
 
     'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'
 ];
