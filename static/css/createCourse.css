@@ -18,7 +18,7 @@
 .CourseBtn {
     margin: auto;
     margin-top: 5%;
-    margin-left: 25%;
+    margin-left: 30%;
     padding: 20px;
     width: 50%;
     height: 70%;
@@ -66,9 +66,6 @@ input[type='submit'] {
 }
 
 
-
-
-
 #course-nav {
     z-index: 1;
     float: right;
@@ -99,6 +96,7 @@ input[type='submit'] {
     from {
         top: -1000px;
     }
+
     to {
         top: 0;
     }

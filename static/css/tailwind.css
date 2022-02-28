@@ -778,6 +778,10 @@ select{
   overflow: hidden;
 }
 
+.overflow-visible {
+  overflow: visible;
+}
+
 .overflow-y-auto{
   overflow-y: auto;
 }
@@ -975,7 +979,14 @@ select{
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
 }
 
-@media (prefers-color-scheme: dark){
+@media (prefers-color-scheme: light) {
+  .light\:bg-gray-100 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+  }
+}
+
+@media (prefers-color-scheme: dark) {
   .dark\:bg-gray-800{
     --tw-bg-opacity: 1;
     background-color: rgb(31 41 55 / var(--tw-bg-opacity));

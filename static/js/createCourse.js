@@ -21,7 +21,7 @@ window.onclick = function (event) {
 
 // set up close button
 for (let close of document.getElementsByClassName('close')) {
-    close.className += ' material-icons';
+    close.className += ' material-icons dark:text-white';
     close.innerHTML = 'close';
     close.onclick = function () {
         modal.style.display = 'none';
@@ -36,7 +36,7 @@ let courseName = document.getElementById('course-name');
 let courseTeacher = document.getElementById('course-teacher');
 
 for (const element of document.getElementsByClassName("CourseBtn")) {
-    element.className += " hidden overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center h-modal md:h-full md:inset-0";
+    element.className += " hidden overflow-visible fixed right-0 left-0 top-4 z-50 justify-center items-center h-modal md:h-full md:inset-0";
     element.oncontextmenu = () => rightClickElements = {};
 }
 
@@ -258,10 +258,10 @@ function importSchoology() {
 
     const status = document.getElementById('create-course-status');
     const input = document.getElementById("schoology-id");
-    
+
     document.getElementById('schoology_import').onsubmit = function () {
-        var index = input.value.indexOf(".schoology.com/course/");        
-      
+        var index = input.value.indexOf(".schoology.com/course/");
+
         if (index == -1) {
             status.style.color = "red";
             status.innerHTML = "Invalid Course Link!";
@@ -270,8 +270,8 @@ function importSchoology() {
 
         var endIndex;
         for (var endIndex = index + 22; endIndex < input.value.length; endIndex++) {
-          if (isNaN(parseInt(input.value.charAt(i))))
-            break
+            if (isNaN(parseInt(input.value.charAt(i))))
+                break
         }
 
         if (endIndex - index < 1) {
@@ -279,7 +279,7 @@ function importSchoology() {
             status.innerHTML = "Invalid Course Link!";
             return;
         }
-        
+
         const id = input.value.substring(index, endIndex);
 
         status.innerHTML
