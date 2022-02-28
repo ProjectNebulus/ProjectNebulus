@@ -500,9 +500,9 @@ def music():
     )
 
 
-@app.route("/sw.js", methods=["GET"])
-def sw():
-    return app.send_static_file("static/js/sw.js")
+# @app.route("/sw.js", methods=["GET"])
+# def sw():
+#     return app.send_static_file("static/js/sw.js")
 
 
 @app.route("/holidays")
