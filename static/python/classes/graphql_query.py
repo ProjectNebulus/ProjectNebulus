@@ -23,37 +23,23 @@ class Query(graphene.ObjectType):
             "_id": graphene.String(),
             "username": graphene.String(),
             "email": graphene.String(),
-        }
+        },
     )
-    course = graphene.Field(
-        gm.Course, _id=graphene.String(required=True)
-    )
-    folder = graphene.Field(
-        gm.Folder, _id=graphene.String(required=True)
-    )
-    document = graphene.Field(
-        gm.DocumentFile,
-        _id=graphene.String(required=True)
-    )
-    event = graphene.Field(
-        gm.Event, _id=graphene.String(required=True)
-    )
+    course = graphene.Field(gm.Course, _id=graphene.String(required=True))
+    folder = graphene.Field(gm.Folder, _id=graphene.String(required=True))
+    document = graphene.Field(gm.DocumentFile, _id=graphene.String(required=True))
+    event = graphene.Field(gm.Event, _id=graphene.String(required=True))
     assignment = graphene.Field(gm.Assignment, _id=graphene.String(required=True))
-    grades = graphene.Field(
-        gm.Grades, _id=graphene.String(required=True)
-    )
+    grades = graphene.Field(gm.Grades, _id=graphene.String(required=True))
     schoology = graphene.Field(
         gm.Schoology,
         args={
             "user_id": graphene.String(),
             "username": graphene.String(),
             "email": graphene.String(),
-        }
+        },
     )
-    announcement = graphene.Field(
-        gm.Announcement,
-        _id=graphene.String(required=True)
-    )
+    announcement = graphene.Field(gm.Announcement, _id=graphene.String(required=True))
 
     @staticmethod
     def resolve_user(parent, info, _id=None, username=None, email=None):
@@ -86,7 +72,6 @@ class Query(graphene.ObjectType):
     @staticmethod
     def resolve_announcement(parent, info, _id):
         return get_announcement(_id)
-
 
 
 schema = graphene.Schema(
