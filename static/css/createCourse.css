@@ -11,6 +11,7 @@
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0, 0, 0); /* Fallback color */
     background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    align-content: center;
 }
 
 /* Modal Content */
@@ -18,7 +19,6 @@
 .CourseBtn {
     margin: auto;
     margin-top: 5%;
-    margin-left: 30%;
     padding: 20px;
     width: 50%;
     height: 70%;
