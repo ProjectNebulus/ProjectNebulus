@@ -1,16 +1,17 @@
 {% extends "layout.html" %}
 {% block main %}
 <form id="selectdomain">
-    <div class="mb-6">
-        <label for="domain" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your password</label>
-        <input type="text" id="domain" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>.schoology.com
-    </div>
+    <p class="text-black text-5xl dark:text-white">
+        <span style="float:left;">https://</span>
+        <input style="float:left;" type="text" id="domain" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+        <span style="float:left;"></span>.schoology.com</span>
+        </p>
 
 </form>
 <button id="launchBTN" onclick = "startSchoology()" type="button" class="text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">Connect Schoology</button>
 <button id="confirmBTN"  style="display:none;" type="button" class="text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">I Confirm I want to Connect this Schoology Accounts</button>
 
-<iframe id="schoologyFrame" style="display:none;"
+<iframe id="schoologyFrame" style="display:none;"></iframe>
 <script>
     $('#confirmBTN').on('click', function() {
         var $this = $(this);
@@ -53,6 +54,13 @@
         iframe.src = "{{url}}"
 
 
+    }
+    var input = document.querySelector('domain'); // get the input element
+    input.addEventListener('input', resizeInput); // bind the "resizeInput" callback on "input" event
+    resizeInput.call(input); // immediately call the function
+
+    function resizeInput() {
+        this.style.width = this.value.length + "ch";
     }
 </script>
 {% endblock %}
