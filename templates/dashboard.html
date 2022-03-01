@@ -46,7 +46,7 @@
         <div style="text-align: center; font-size: 5vh"><h1 class="text-black dark:text-white">Good
             Afternoon, {{ user }}</h1></div>
 
-        <div id="left">
+        <div id="left" style="overflow:visible">
             <h2 class="text-black dark:text-white">Recent courses</h2>
             <div class="section p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                 {% for course in user_courses %}
@@ -64,7 +64,7 @@
             </div>
         </div>
 
-        <div id="right">
+        <div id="right" style="overflow:visible">
             <h2 class="text-black dark:text-white">Upcoming Assignments</h2>
             <div class="vertical section p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
 
