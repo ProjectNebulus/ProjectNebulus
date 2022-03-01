@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block main %}
+<form id="selectdomain">
+    <div class="mb-6">
+        <label for="domain" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your password</label>
+        <input type="text" id="domain" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>.schoology.com
+    </div>
+
+</form>
+<button id="launchBTN" onclick = "startSchoology()" type="button" class="text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">Connect Schoology</button>
+<button id="confirmBTN"  style="display:none;" type="button" class="text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">I Confirm I want to Connect this Schoology Accounts</button>
+
+<iframe id="schoologyFrame" style="display:none;"
+<script>
+    $('#confirmBTN').on('click', function() {
+        var $this = $(this);
+        $this.button('loading');
+        setTimeout(function() {
+
+            var request =  $.ajax({
+                type: "POST",
+                url: "/schoology",
+                data: {
+                }
+            });
+            request.done(function(data) {
+                $this.button('reset');
+                resp = document.getElementById("resp")
+                if (data==="error!!!"){
+                    resp.style.color = "red";
+                    resp.innerHTML = "Login Failed. Reason: Clicked Deny on Schoology or closed Schoology popup window. Make sure Popups are enabled on your browser. Click Authorize again and click Approve this time!";
+                    document.getElementById('auth').style.display = 'inline';
+                    document.getElementById('connectbtn').style.display = 'none';
+
+                }else{
+                    resp.style.color = "green";
+                    resp.innerHTML = "Successfully linked the Schoology Account <b>"+data+"</b>!";
+                    //window.location.replace("/settings");
+                }
+
+            });
+
+        }, 1000);
+
+
+
+    });
+    function startSchoology(){
+        document.getElementById("schoologyFrame").style.display = "block";
+        document.getElementById("launchBTN").style.display = "none";
+        document.getElementById("selectdomain").style.display = "none";
+        let iframe = document.getElementById("schoologyFrame");
+        iframe.src = "{{url}}"
+
+
+    }
+</script>
+{% endblock %}

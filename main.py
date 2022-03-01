@@ -26,6 +26,30 @@ check_user_params = True
 # app routes
 
 
+
+@app.route("/schoology")
+# schoologyURL=url,
+
+def schoology():
+    # Schoology Info
+
+    key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
+    secret = "59ccaaeb93ba02570b1281e1b0a90e18"
+    # Instantiate with 'three_legged' set to True for three_legged oauth.
+    # Make sure to replace 'https://www.schoology.com' with your school's domain.
+    # DOMAIN = 'https://www.schoology.com'
+    DOMAIN = "https://bins.schoology.com"
+
+    auth = schoolopy.Auth(key, secret, three_legged=True, domain=DOMAIN)
+    # Request authorization URL to open in another window.
+    url = auth.request_authorization((request.url_root + "closeSchoology"))
+    session["request_token"] = auth.request_token
+    session["request_token_secret"] = auth.request_token_secret
+    session["access_token_secret"] = auth.access_token_secret
+    session["access_token"] = auth.access_token
+
+    # Open OAuth authorization webpage. Give time to authorize.
+    return render_template("connectSchoology.html",  url=url)
 @app.route("/processSchoologyUrl", methods=["GET"])
 def schoologyURLProcess():
     url = request.args.get("url")
@@ -50,7 +74,7 @@ def import_schoology():
 
 @app.route("/closeSchoology")
 def close():
-    session["token"] = request.args.get("oauth_token")
+    session["token"] = "authorized"
     return "<script>window.close();</script>"
 
 
@@ -362,9 +386,13 @@ def logout():
     session["access_token"] = None
     return redirect("/")
 
+@app.route("/checkConnectedSchoology")
+def checkConnectedSchoology():
+    return session["token"] is not None
 
 @app.route("/schoology", methods=["POST"])
 def loginpost():
+    session["token"] = None
     import schoolopy
 
     key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
@@ -410,41 +438,13 @@ def loginpost():
 def settings():
     if not (session.get("username") and session.get("password")):
         return redirect("/signin")
-    # Schoology Info
 
-    key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
-    secret = "59ccaaeb93ba02570b1281e1b0a90e18"
-    # Instantiate with 'three_legged' set to True for three_legged oauth.
-    # Make sure to replace 'https://www.schoology.com' with your school's domain.
-    # DOMAIN = 'https://www.schoology.com'
-    DOMAIN = "https://bins.schoology.com"
-
-    auth = schoolopy.Auth(key, secret, three_legged=True, domain=DOMAIN)
-    # Request authorization URL to open in another window.
-    url = auth.request_authorization(request.url_root + "closeSchoology")
-    session["request_token"] = auth.request_token
-    session["request_token_secret"] = auth.request_token_secret
-    session["access_token_secret"] = auth.access_token_secret
-    session["access_token"] = auth.access_token
-
-    # Open OAuth authorization webpage. Give time to authorize.
-    try:
-
-        schoologyemail = getSchoology(id=session.get("id")).schoologyEmail
-        schoologyname = getSchoology(id=session.get("id")).schoologyName
-
-    except Exception as e:
-        schoologyemail = None
-        schoologyname = None
     return render_template(
         "user/settings.html",
         page="Nebulus - Account Settings",
         session=session,
         user=session.get("username"),
-        schoologyURL=url,
-        read=read,
-        schoologyemail=schoologyemail,
-        schoologyname=schoologyname,
+
     )
 
 
@@ -645,5 +645,5 @@ app.add_url_rule(
 )
 
 print("Site is running at http://0.0.0.0:8080 . Please test it on CHROME, not SAFARI!")
-# serve(app, host="0.0.0.0", port="8080")
+#serve(app, host="0.0.0.0", port="8080")
 serve(app, host="localhost", port=8080)
