@@ -26,9 +26,9 @@ check_user_params = True
 # app routes
 
 
-
 @app.route("/schoology")
 # schoologyURL=url,
+
 
 def schoology():
     # Schoology Info
@@ -49,7 +49,9 @@ def schoology():
     session["access_token"] = auth.access_token
 
     # Open OAuth authorization webpage. Give time to authorize.
-    return render_template("connectSchoology.html",  url=url)
+    return render_template("connectSchoology.html", url=url)
+
+
 @app.route("/processSchoologyUrl", methods=["GET"])
 def schoologyURLProcess():
     url = request.args.get("url")
@@ -386,9 +388,11 @@ def logout():
     session["access_token"] = None
     return redirect("/")
 
+
 @app.route("/checkConnectedSchoology")
 def checkConnectedSchoology():
     return session["token"] is not None
+
 
 @app.route("/schoology", methods=["POST"])
 def loginpost():
@@ -444,7 +448,6 @@ def settings():
         page="Nebulus - Account Settings",
         session=session,
         user=session.get("username"),
-
     )
 
 
@@ -645,5 +648,5 @@ app.add_url_rule(
 )
 
 print("Site is running at http://0.0.0.0:8080 . Please test it on CHROME, not SAFARI!")
-#serve(app, host="0.0.0.0", port="8080")
+# serve(app, host="0.0.0.0", port="8080")
 serve(app, host="localhost", port=8080)
