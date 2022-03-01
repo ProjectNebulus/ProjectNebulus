@@ -3,15 +3,13 @@
 <form id="selectdomain">
     <p class="text-black text-5xl dark:text-white">
         <span style="float:left;">https://</span>
-        <input style="float:left;" type="text" id="domain" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+        <input style="float:left;" value="app" type="text" id="domain" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
         <span style="float:left;"></span>.schoology.com</span>
         </p>
 
 </form>
 <button id="launchBTN" onclick = "startSchoology()" type="button" class="text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">Connect Schoology</button>
 <button id="confirmBTN"  style="display:none;" type="button" class="text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">I Confirm I want to Connect this Schoology Accounts</button>
-
-<iframe id="schoologyFrame" style="display:none;"></iframe>
 <script>
     $('#confirmBTN').on('click', function() {
         var $this = $(this);
@@ -47,11 +45,11 @@
 
     });
     function startSchoology(){
-        document.getElementById("schoologyFrame").style.display = "block";
+        let domain = document.getElementById("domain").value;
+        newwindow2=window.open('{{url}}'.replace('bins',domain),'Authorize with Schoology','height=400,width=800')
         document.getElementById("launchBTN").style.display = "none";
+        document.getElementById("confirmBTN").style.display = "none";
         document.getElementById("selectdomain").style.display = "none";
-        let iframe = document.getElementById("schoologyFrame");
-        iframe.src = "{{url}}"
 
 
     }
