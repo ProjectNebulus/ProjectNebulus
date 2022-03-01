@@ -1,16 +1,16 @@
 from graphene_mongo import MongoengineObjectType
 
-from .Announcement import Announcement as AnnouncementModel
-from .Assignment import Assignment as AssignmentModel
-from .Avatar import Avatar as AvatarModel
-from .AvatarSize import AvatarSize as AvatarSizeModel
-from .Course import Course as CourseModel
-from .Document import DocumentFile as DocumentModel
-from .Events import Event as EventModel
-from .Folder import Folder as FolderModel
-from .Grades import Grades as GradesModel
-from .Schoology import Schoology as SchoologyModel
-from .User import User as UserModel
+from static.python.classes.Announcement import Announcement as AnnouncementModel
+from static.python.classes.Assignment import Assignment as AssignmentModel
+from static.python.classes.Avatar import Avatar as AvatarModel
+from static.python.classes.AvatarSize import AvatarSize as AvatarSizeModel
+from static.python.classes.Course import Course as CourseModel
+from static.python.classes.Document import DocumentFile as DocumentModel
+from static.python.classes.Events import Event as EventModel
+from static.python.classes.Folder import Folder as FolderModel
+from static.python.classes.Grades import Grades as GradesModel
+from static.python.classes.Schoology import Schoology as SchoologyModel
+from static.python.classes.User import User as UserModel
 
 
 class User(MongoengineObjectType):

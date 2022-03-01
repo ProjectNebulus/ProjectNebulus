@@ -4,7 +4,7 @@ from flask import Flask, redirect, render_template, request, session
 from graphql_server.flask import GraphQLView
 from waitress import serve
 
-from static.python.classes.graphql_query import schema
+from static.python.classes.GraphQL.graphql_schema import schema
 from static.python.mongodb import *
 from static.python.spotify import *
 
