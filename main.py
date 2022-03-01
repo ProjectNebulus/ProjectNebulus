@@ -42,7 +42,9 @@ def schoology():
 
     auth = schoolopy.Auth(key, secret, three_legged=True, domain=DOMAIN)
     # Request authorization URL to open in another window.
-    url = auth.request_authorization(callback_url=(request.url_root + "/closeSchoology"))
+    url = auth.request_authorization(
+        callback_url=(request.url_root + "/closeSchoology")
+    )
     print((request.url_root + "closeSchoology"))
     session["request_token"] = auth.request_token
     session["request_token_secret"] = auth.request_token_secret
