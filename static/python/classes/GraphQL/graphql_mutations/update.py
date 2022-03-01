@@ -1,14 +1,7 @@
-import graphene
-
-from ..Assignment import Assignment as AssignmentModel
-from ..Course import Course as CourseModel
-from ..Document import DocumentFile as DocumentFileModel
-from ..Events import Event as EventModel
-from ..Folder import Folder as FolderModel
-from ..Grades import Grades as GradesModel
+from ...Document import DocumentFile as DocumentFileModel
 from ..graphene_models import *
+from ...User import User as UserModel
 from ..graphql_inputs.update_inputs import *
-from ..User import User as UserModel
 
 
 class UpdateUser(graphene.Mutation):

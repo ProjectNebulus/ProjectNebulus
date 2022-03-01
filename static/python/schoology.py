@@ -3,6 +3,8 @@ from datetime import datetime
 from static.python.classes import Avatar
 from static.python.classes.Assignment import Assignment
 from static.python.classes.Course import Course
+from static.python.classes.Grades import Grades
+from static.python.classes.Events import Events
 
 
 def getcourse(courseid, sc, user, jsonEnabled):
@@ -21,7 +23,7 @@ def getcourse(courseid, sc, user, jsonEnabled):
 def getCourseJson(courseid, sc, user):
     # Main
     section = dict(sc.get_section(courseid))
-    course = []
+    course = {}
     # print(section)
     course["id"] = section["id"]
     course["name"] = section["course_title"]
@@ -70,8 +72,9 @@ def getCourseJson(courseid, sc, user):
     return course
 
 
-def getCourseObject(courseid, sc, user, template, teacher, created_at):
+def getCourseObject(courseid, template, teacher, created_at, sc, user ):
     json_course = getCourseJson(courseid, sc, user)
+    course = Course(name = json_course["name"], teacher = "Unknown Teacher",  imported_from="Schoology", template = template,  created_at = created_at, authorizedUsers = user)
     image = Avatar(url=json_course["image"])
     assignments = []
     for assignment in json_course["assignments"]:
@@ -81,8 +84,12 @@ def getCourseObject(courseid, sc, user, template, teacher, created_at):
             points=-1,
             description=assignment["info"],
         )
+
     grades = []
+    for grade in json_course["grades"]:
+        newgrade = Grades()
     folders = []
+
     course = Course(
         name=json_course["name"],
         template=template,

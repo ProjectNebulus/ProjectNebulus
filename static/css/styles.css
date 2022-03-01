@@ -4,7 +4,7 @@
 @tailwind utilities;
 
 body {
-    margin: 25px; /* No borders for the image */
+    margin: 0px; /* No borders for the image */
     background: white;
     color: black;
     font-family: 'Lato', sans-serif;
@@ -42,7 +42,7 @@ strong {
 
 #homePageBanner,
 #mvBanner {
-    margin: 25px; /* No borders for the image*/
+    margin: 0; /* No borders for the image*/
     width: calc(100% - 80px); /*Padding*/
     padding: 40px;
     padding-top: 5px;
@@ -73,7 +73,6 @@ strong {
     float: right;
     color: #00d0ff;
     cursor: pointer;
-    margin: 10px;
 }
 
 .change-text:hover {
