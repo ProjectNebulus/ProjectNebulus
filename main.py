@@ -267,6 +267,8 @@ def courses_information(course_id):
             course=course[0],
             course_id=course_id,
             user=session.get("username"),
+            name = course[0].name,
+            teacher = course[0].teacher
         )
 
     return redirect("/signin")
@@ -650,6 +652,6 @@ app.add_url_rule(
     ),
 )
 
-print("Site is running at http://0.0.0.0:8080 . Please test it on CHROME, not SAFARI!")
+print("Site is running at http://0.0.0.0:8080 or http://localhost:8080 . Please test it on CHROME, not SAFARI!")
 serve(app, host="0.0.0.0", port="8080")
 # serve(app, host="localhost", port=8080)
