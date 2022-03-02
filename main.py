@@ -307,7 +307,7 @@ def courses_settings(course_id):
         return render_template(
             "courses/settings.html",
             page="Nebulus - " + course[0].name,
-            read=read,
+            read=read, #reed = reed
             course=course[0],
             course_id=course_id,
             user=session.get("username"),
