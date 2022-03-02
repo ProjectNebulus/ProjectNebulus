@@ -1,6 +1,7 @@
 <!--Extend with Jinja!-->
 {% extends "layout.html" %}
 {% block main %}
+<div style="height:100%">
     {% include "navbar.html" %}
 
     {# Contains information like the username #}
@@ -409,7 +410,7 @@
         </div>
     </div>
 
-    <div id="right" style="width:20%;height:90%;float:right;background-color:transparent;overflow:auto;">
+    <div id="right" style="width:18%;height:90%;float:left;background-color:transparent;overflow:auto;">
         <p class="text-3xl text-black dark:text-white">Upcoming Events</p><br>
         <div style="text-align: center;">
 
@@ -448,5 +449,6 @@
             </div>
         </div>
     </div>
-    {% include "footer.html" %}
+</div>
+{% include "footer.html" %}
 {% endblock %}
