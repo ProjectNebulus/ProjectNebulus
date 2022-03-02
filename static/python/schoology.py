@@ -72,9 +72,16 @@ def getCourseJson(courseid, sc, user):
     return course
 
 
-def getCourseObject(courseid, template, teacher, created_at, sc, user ):
+def getCourseObject(courseid, template, teacher, created_at, sc, user):
     json_course = getCourseJson(courseid, sc, user)
-    course = Course(name = json_course["name"], teacher = "Unknown Teacher",  imported_from="Schoology", template = template,  created_at = created_at, authorizedUsers = user)
+    course = Course(
+        name=json_course["name"],
+        teacher="Unknown Teacher",
+        imported_from="Schoology",
+        template=template,
+        created_at=created_at,
+        authorizedUsers=user,
+    )
     image = Avatar(url=json_course["image"])
     assignments = []
     for assignment in json_course["assignments"]:
