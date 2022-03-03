@@ -263,17 +263,18 @@ function importSchoology() {
     const input = document.getElementById('schoology-id');
 
     document.getElementById('schoology_import').onsubmit = function () {
-        var index = input.value.indexOf('.schoology.com/course/');
+        // todo: maybe this needs regex instead of whatever this is
+        const index = input.value.indexOf('.schoology.com/course/');
 
-        if (index == -1) {
+        if (index === -1) {
             status.style.color = 'red';
             status.innerHTML = 'Invalid Course Link!';
             return;
         }
 
-        var endIndex;
-        for (var endIndex = index + 22; endIndex < input.value.length; endIndex++) {
-            if (isNaN(parseInt(input.value.charAt(i)))) break;
+        let endIndex;
+        for (endIndex = index + 22; endIndex < input.value.length; endIndex++) {
+            if (isNaN(parseInt(input.value.charAt(endIndex)))) break;
         }
 
         if (endIndex - index < 1) {
