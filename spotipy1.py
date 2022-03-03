@@ -3,6 +3,9 @@ from flask import Flask, session, request, redirect
 from flask_session import Session
 import spotipy
 import uuid
+
+#In order to get Spotipy to work, you must install the latest version with cloning the repo with the following command:
+#pip3 install git+https://github.com/plamere/spotipy
 SPOTIPY_CLIENT_ID="b61065c28d774965b96027c3e2def9d9"
 SPOTIPY_CLIENT_SECRET="f0f01a4427ea4b48a9defabb46749311"
 SPOTIPY_REDIRECT_URI="https://localhost:9080"
