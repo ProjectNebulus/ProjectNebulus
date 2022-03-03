@@ -67,7 +67,8 @@ self.addEventListener('fetch', function (event) {
     );
 });
 
-var urlsToCache = [
+var urlsToCache = [ 
+
     'https://Project-Nebulus.nicholasxwang.repl.co/',
     'https://Project-Nebulus.nicholasxwang.repl.co/static/styles.css',
     'https://Project-Nebulus.nicholasxwang.repl.co/static/tailwind.css',
