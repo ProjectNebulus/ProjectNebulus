@@ -8,7 +8,6 @@ you input how many hours you have and how much time that you want
 --premium
 """
 
-
 def basefunction(timestudy, timerelax):
     timeneeded = timestudy - timerelax
     remainder = timeneeded % 25
@@ -16,3 +15,6 @@ def basefunction(timestudy, timerelax):
         return int(timeneeded / timerelax)
     else:
         return int(timeneeded / timerelaxed) + 1
+
+#we needa
+

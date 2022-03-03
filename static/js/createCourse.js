@@ -1,5 +1,5 @@
 // set up templates
-let divs = document.getElementsByClassName('scroll');
+let divs1 = document.getElementsByClassName('scroll');
 let screens = document.getElementsByClassName('CourseBtn');
 
 // set up button
@@ -196,14 +196,14 @@ for (const template of templates) {
 
     button.appendChild(description);
 
-    divs[0].appendChild(button);
+    divs1[0].appendChild(button);
 }
 
 function chooseTemplate(template) {
     screens[0].style.display = 'none';
     screens[1].style.display = 'block';
 
-    divs[1].innerHTML = '';
+    divs1[1].innerHTML = '';
     for (const subtemplate of template.subtemplates) {
         let button = document.createElement('span');
         button.className =
@@ -237,7 +237,7 @@ function chooseTemplate(template) {
         next.src = 'static/images/icons/next.svg';
         button.appendChild(next);
 
-        divs[1].appendChild(button);
+        divs1[1].appendChild(button);
     }
 }
 
