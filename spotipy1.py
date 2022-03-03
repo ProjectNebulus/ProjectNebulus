@@ -5,7 +5,7 @@ import spotipy
 import uuid
 SPOTIPY_CLIENT_ID="b61065c28d774965b96027c3e2def9d9"
 SPOTIPY_CLIENT_SECRET="f0f01a4427ea4b48a9defabb46749311"
-SPOTIPY_REDIRECT_URI="https://localhost:8080"
+SPOTIPY_REDIRECT_URI="https://localhost:9080"
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.urandom(64)
@@ -29,7 +29,7 @@ def index():
     cache_handler = spotipy.cache_handler.CacheFileHandler(cache_path=session_cache_path())
     auth_manager = spotipy.oauth2.SpotifyOAuth(scope='user-read-currently-playing playlist-modify-private',
                                                 cache_handler=cache_handler, 
-                                                show_dialog=True)
+                                                show_dialog=True, client_id = SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET, redirect_uri=SPOTIPY_REDIRECT_URI)
 
     if request.args.get("code"):
         # Step 3. Being redirected from Spotify auth page
