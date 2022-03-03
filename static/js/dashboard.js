@@ -5,14 +5,10 @@ function updateTime() {
 
     var text = null;
 
-    if (hour < 11) 
-        text = 'Morning';
-        
-    else if (hour > 17)
-        text = 'Evening';
+    if (hour < 11) text = 'Morning';
+    else if (hour > 17) text = 'Evening';
 
-    if (text !== null) 
-        greeting.innerHTML = greeting.innerHTML.replace('Afternoon', text);
+    if (text !== null) greeting.innerHTML = greeting.innerHTML.replace('Afternoon', text);
 }
 
 updateTime();

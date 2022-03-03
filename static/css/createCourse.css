@@ -65,7 +65,6 @@ input[type='submit'] {
     font-size: 1.25vw;
 }
 
-
 #course-nav {
     z-index: 1;
     float: right;
@@ -138,7 +137,6 @@ button:hover {
     width: 500px;
     cursor: pointer;
 }
-
 
 .scroll {
     height: 380px;

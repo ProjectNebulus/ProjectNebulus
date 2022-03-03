@@ -7,7 +7,7 @@ window.addEventListener('load', function () {
         return EMAIL_REGEX.test(email);
     }
 
-    const r_l = ",<.>/?;:'\"\\|[{]}=+-_`!@#$%^&*()_+";
+    const r_l = ',<.>/?;:\'"\\|[{]}=+-_`!@#$%^&*()_+';
 
     function changeEmail() {
         const value = document.getElementById('email').value;
@@ -43,8 +43,7 @@ window.addEventListener('load', function () {
             let hasSpecialCharacter = false;
 
             for (let i = 0; i < value.length; i++) {
-                if (r_l.includes(value[i]))
-                    hasSpecialCharacter = true;
+                if (r_l.includes(value[i])) hasSpecialCharacter = true;
             }
 
             if (!hasSpecialCharacter) {
@@ -66,8 +65,7 @@ function signUp() {
     status.style.color = 'red';
     status.innerHTML = '<br>';
 
-    if (document.getElementById('email').value === '')
-        status.innerHTML = 'Please enter an email!';
+    if (document.getElementById('email').value === '') status.innerHTML = 'Please enter an email!';
     else if (document.getElementById('username').value === '')
         status.innerHTML = 'Please enter a username!';
     else if (document.getElementById('password').value === '')
@@ -118,5 +116,4 @@ function reqListener() {
     submit.disabled = false;
     submit.style.color = 'white';
     submit.style.backgroundColor = '#00a2ff';
-
 }
