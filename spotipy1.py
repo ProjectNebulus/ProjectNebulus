@@ -4,11 +4,13 @@ from flask_session import Session
 import spotipy
 import uuid
 
-# In order to get Spotipy to work, you must install the latest version with cloning the repo with the following command:
-# pip3 install git+https://github.com/plamere/spotipy
-SPOTIPY_CLIENT_ID = "b61065c28d774965b96027c3e2def9d9"
-SPOTIPY_CLIENT_SECRET = "f0f01a4427ea4b48a9defabb46749311"
-SPOTIPY_REDIRECT_URI = "https://localhost:9080"
+
+#In order to get Spotipy to work, you must install the latest version with cloning the repo with the following command:
+#pip3 install git+https://github.com/plamere/spotipy
+SPOTIPY_CLIENT_ID="846095b9ce934b0da3e0aaf3adbf600c"
+SPOTIPY_CLIENT_SECRET="1d79c77cee124d8f8e20b16f720d65e8"
+SPOTIPY_REDIRECT_URI="http://127.0.0.1:9080/"
+
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.urandom(64)
@@ -77,10 +79,12 @@ def sign_out():
 
 @app.route("/playlists")
 def playlists():
-    cache_handler = spotipy.cache_handler.CacheFileHandler(
-        cache_path=session_cache_path()
-    )
-    auth_manager = spotipy.oauth2.SpotifyOAuth(cache_handler=cache_handler)
+    cache_handler = spotipy.cache_handler.CacheFileHandler(cache_path=session_cache_path())
+    auth_manager = spotipy.oauth2.SpotifyOAuth(scope='user-read-currently-playing playlist-modify-private',
+                                               cache_handler=cache_handler,
+                                               show_dialog=True, client_id = SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET, redirect_uri=SPOTIPY_REDIRECT_URI)
+
+
     if not auth_manager.validate_token(cache_handler.get_cached_token()):
         return redirect("/")
 
@@ -90,10 +94,12 @@ def playlists():
 
 @app.route("/currently_playing")
 def currently_playing():
-    cache_handler = spotipy.cache_handler.CacheFileHandler(
-        cache_path=session_cache_path()
-    )
-    auth_manager = spotipy.oauth2.SpotifyOAuth(cache_handler=cache_handler)
+    cache_handler = spotipy.cache_handler.CacheFileHandler(cache_path=session_cache_path())
+    auth_manager = spotipy.oauth2.SpotifyOAuth(scope='user-read-currently-playing playlist-modify-private',
+                                               cache_handler=cache_handler,
+                                               show_dialog=True, client_id = SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET, redirect_uri=SPOTIPY_REDIRECT_URI)
+
+
     if not auth_manager.validate_token(cache_handler.get_cached_token()):
         return redirect("/")
     spotify = spotipy.Spotify(auth_manager=auth_manager)
@@ -105,10 +111,12 @@ def currently_playing():
 
 @app.route("/current_user")
 def current_user():
-    cache_handler = spotipy.cache_handler.CacheFileHandler(
-        cache_path=session_cache_path()
-    )
-    auth_manager = spotipy.oauth2.SpotifyOAuth(cache_handler=cache_handler)
+    cache_handler = spotipy.cache_handler.CacheFileHandler(cache_path=session_cache_path())
+    auth_manager = spotipy.oauth2.SpotifyOAuth(scope='user-read-currently-playing playlist-modify-private',
+                                               cache_handler=cache_handler,
+                                               show_dialog=True, client_id = SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET, redirect_uri=SPOTIPY_REDIRECT_URI)
+
+
     if not auth_manager.validate_token(cache_handler.get_cached_token()):
         return redirect("/")
     spotify = spotipy.Spotify(auth_manager=auth_manager)
