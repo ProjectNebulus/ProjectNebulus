@@ -143,6 +143,9 @@ def profile():
     return render_template(
         "user/profile.html", page="Nebulus - Profile", user=session.get("username")
     )
+@app.route('/community/profile/<id>')
+def pubProfile(id):
+    return render_template("user/pubProfile.html", user=session.get("username"), page=f"{session.get('username')} - Nebulus", db=db)
 
 
 @app.errorhandler(404)
