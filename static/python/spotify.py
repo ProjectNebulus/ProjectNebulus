@@ -1,7 +1,7 @@
 import sys
 
-import spotipy
-from spotipy.oauth2 import SpotifyClientCredentials
+import spotipy1
+from spotipy1.oauth2 import SpotifyClientCredentials
 from SwSpotify import spotify
 
 
