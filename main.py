@@ -3,7 +3,6 @@
 from flask import Flask, redirect, render_template, request, session
 from graphql_server.flask import GraphQLView
 from waitress import serve
-
 from static.python.classes.GraphQL.graphql_schema import schema
 from static.python.mongodb import *
 from static.python.spotify import *
@@ -19,7 +18,6 @@ regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 # Variables
 app = Flask("app")
 app.secret_key = "12345678987654321"
-
 check_user_params = True
 
 
@@ -658,5 +656,5 @@ app.add_url_rule(
 print(
     "Site is running at http://0.0.0.0:8080 or http://localhost:8080 . Please test it on CHROME, not SAFARI!"
 )
-serve(app, host="0.0.0.0", port="8080")
-# serve(app, host="localhost", port=8080)
+
+serve(app, host="localhost", port=8080)

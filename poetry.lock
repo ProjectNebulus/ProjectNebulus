@@ -1,4 +1,17 @@
 [[package]]
+name = "flask"
+version = "0.10.1"
+description = "A microframework based on Werkzeug, Jinja2 and good intentions"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+itsdangerous = ">=0.21"
+Jinja2 = ">=2.4"
+Werkzeug = ">=0.7"
+
+[[package]]
 name = "gql"
 version = "3.0.0"
 description = "GraphQL client for Python"
@@ -37,12 +50,74 @@ optional = false
 python-versions = ">=3.5"
 
 [[package]]
+name = "itsdangerous"
+version = "0.23"
+description = "Various helpers to pass trusted data to untrusted environments and back."
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "jinja2"
+version = "2.7.1"
+description = "A small but fast and easy to use stand-alone template engine written in pure python."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+markupsafe = "*"
+
+[package.extras]
+i18n = ["Babel (>=0.8)"]
+
+[[package]]
+name = "markupsafe"
+version = "0.18"
+description = "Implements a XML/HTML/XHTML Markup safe string for Python"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "multidict"
 version = "6.0.2"
 description = "multidict implementation"
 category = "main"
 optional = false
 python-versions = ">=3.7"
+
+[[package]]
+name = "pyside"
+version = "1.2.1"
+description = "Python bindings for the Qt cross-platform application and UI framework"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "webui"
+version = "0.1.7"
+description = "WebUI lets you create first class desktop applications in Python with HTML/CSS"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+Flask = "0.10.1"
+itsdangerous = "0.23"
+Jinja2 = "2.7.1"
+MarkupSafe = "0.18"
+pyside = "1.2.1"
+Werkzeug = "0.9.4"
+
+[[package]]
+name = "werkzeug"
+version = "0.9.4"
+description = "The Swiss Army knife of Python web development"
+category = "main"
+optional = false
+python-versions = "*"
 
 [[package]]
 name = "yarl"
@@ -59,9 +134,12 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "bb96762d013e9765ab142427c1bcde4cde7181491a4db60dc057ffa699e752a9"
+content-hash = "ee321d0b746bb6559d7210a0c8352fb247c1828420dc3c9d02f8b88297612cc2"
 
 [metadata.files]
+flask = [
+    {file = "Flask-0.10.1.tar.gz", hash = "sha256:4c83829ff83d408b5e1d4995472265411d2c414112298f2eb4b359d9e4563373"},
+]
 gql = [
     {file = "gql-3.0.0.tar.gz", hash = "sha256:a21ff880a69caec8786be5cc6de7de6fc2f2b87547af8cd30746b9401ffd47b2"},
 ]
@@ -72,6 +150,15 @@ graphql-core = [
 idna = [
     {file = "idna-3.3-py3-none-any.whl", hash = "sha256:84d9dd047ffa80596e0f246e2eab0b391788b0503584e8945f2368256d2735ff"},
     {file = "idna-3.3.tar.gz", hash = "sha256:9d643ff0a55b762d5cdb124b8eaa99c66322e2157b69160bc32796e824360e6d"},
+]
+itsdangerous = [
+    {file = "itsdangerous-0.23.tar.gz", hash = "sha256:71c0bf6bde4dcc93d838415e728a961a7b16f324b8ae182525fbdadde9f55d62"},
+]
+jinja2 = [
+    {file = "Jinja2-2.7.1.tar.gz", hash = "sha256:5cc0a087a81dca1c08368482fb7a92fe2bdd8cfbb22bc0fccfe6c85affb04c8b"},
+]
+markupsafe = [
+    {file = "MarkupSafe-0.18.tar.gz", hash = "sha256:b7d5d688bdd345bfa897777d297756688cf02e1b3742c56885e2e5c2b996ff82"},
 ]
 multidict = [
     {file = "multidict-6.0.2-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:0b9e95a740109c6047602f4db4da9949e6c5945cefbad34a1299775ddc9a62e2"},
@@ -133,6 +220,15 @@ multidict = [
     {file = "multidict-6.0.2-cp39-cp39-win32.whl", hash = "sha256:23b616fdc3c74c9fe01d76ce0d1ce872d2d396d8fa8e4899398ad64fb5aa214a"},
     {file = "multidict-6.0.2-cp39-cp39-win_amd64.whl", hash = "sha256:4bae31803d708f6f15fd98be6a6ac0b6958fcf68fda3c77a048a4f9073704aae"},
     {file = "multidict-6.0.2.tar.gz", hash = "sha256:5ff3bd75f38e4c43f1f470f2df7a4d430b821c4ce22be384e1459cb57d6bb013"},
+]
+pyside = [
+    {file = "PySide-1.2.1.tar.gz", hash = "sha256:be6e4b16df746cb5428193736c0ee4647595211c69fd5b93534083fd773e46e9"},
+]
+webui = [
+    {file = "WebUI-0.1.7.zip", hash = "sha256:795dba37ccbd417ab29dbf2ec9de9aeb8db16ff6d05112923a7ad5c52bdea5f3"},
+]
+werkzeug = [
+    {file = "Werkzeug-0.9.4.tar.gz", hash = "sha256:c1baf7a3e8be70f34d931ee173283f406877bd3d17f372bbe82318a5b3c510cc"},
 ]
 yarl = [
     {file = "yarl-1.7.2-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:f2a8508f7350512434e41065684076f640ecce176d262a7d54f0da41d99c5a95"},
