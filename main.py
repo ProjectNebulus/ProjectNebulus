@@ -446,6 +446,7 @@ def loginpost():
         "schoologyName": session["Schoologyname"],
         "schoologyEmail": session["Schoologyemail"],
     }
+
     update.schoologyLogin(session["id"], schoology)
 
     return str([sc.get_me().name_display, sc.get_me().primary_email])
