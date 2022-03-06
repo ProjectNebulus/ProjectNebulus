@@ -17,18 +17,29 @@ sc = schoolopy.Schoology(schoolopy.Auth(KEY, SECRET))
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 # Variables
 app = Flask("app")
-app.secret_key = "12345678987654321"
+app.secret_key = os.getenv("MONGOPASS")
 check_user_params = True
 
 
 # app routes
 
 
+def checkLogIn(session):
+    try:
+        a = read.check_password_username(session["username"], session["password"])
+        if a == True:
+            return True
+    except:
+        a = read.check_password(session["email"], session["password"])
+        if a == True:
+            return True
+    return False
 @app.route("/schoology")
-# schoologyURL=url,
-
-
 def schoology():
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
+
     # Schoology Info
 
     key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
@@ -55,6 +66,9 @@ def schoology():
 
 @app.route("/processSchoologyUrl", methods=["GET"])
 def schoologyURLProcess():
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     url = request.args.get("url")
     if url is None:
         return "0"
@@ -66,23 +80,35 @@ def schoologyURLProcess():
 
 @app.route("/google34d8c04c4b82b69a.html")
 def googleVerification():
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     # DO NOT REMOVE, IF YOU DO GOOGLE SEARCH CONSOLE WON'T WORK!
     return render_template("google34d8c04c4b82b69a.html")
 
 
 @app.route("/createCourseSchoology")
 def import_schoology():
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     ...
 
 
 @app.route("/closeSchoology")
 def close():
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     session["token"] = "authorized"
     return "<script>window.close();</script>"
 
 
 @app.route("/createCourse", methods=["POST"])
 def create_course():
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     data = request.get_json()
     if data["name"] == "":
         data["name"] = data["template"]
@@ -98,6 +124,9 @@ def create_course():
 
 @app.route("/developers")
 def developers():
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     return render_template(
         "developerportal.html",
         password=session.get("password"), user=session.get("username"),
@@ -109,11 +138,17 @@ def developers():
 
 @app.route("/developers/api")
 def api_docs():
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     return " "
 
 
 @app.route("/spoistatus", methods=["POST"])
 def spotify_status():
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     a = get_song()
     string = ""
     if len(a) == 3:
@@ -126,6 +161,9 @@ def spotify_status():
 
 @app.route("/spoistatus2", methods=["POST"])
 def spotify_status2():
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     a = get_song()
     string = ""
     if len(a) == 3:
@@ -138,6 +176,9 @@ def spotify_status2():
 
 @app.route("/profile")
 def profile():
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     return render_template(
         "user/profile.html", page="Nebulus - Profile", password=session.get("password"), user=session.get("username")
     )
@@ -145,6 +186,9 @@ def profile():
 
 @app.route("/community/profile/<id>")
 def pubProfile(id):
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     return render_template(
         "user/pubProfile.html",
         password=session.get("password"), user=session.get("username"),
@@ -155,6 +199,7 @@ def pubProfile(id):
 
 @app.errorhandler(404)
 def not_found(e):
+
     return render_template("errors/404.html", page="404 Not Found")
 
 
@@ -170,6 +215,9 @@ def method_not_allowed(e):
 
 @app.route("/courses/<course_id>")
 def courses(course_id):
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     if session.get("username") and session.get("password"):
         courses = read.get_user_courses(session.get("id"))
 
@@ -193,6 +241,9 @@ def courses(course_id):
 
 @app.route("/courses/<course_id>/documents")
 def courses_documents(course_id):
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     if session.get("username") and session.get("password"):
         courses = read.get_user_courses(session.get("id"))
 
@@ -216,6 +267,9 @@ def courses_documents(course_id):
 
 @app.route("/courses/<course_id>/announcements")
 def courses_announcements(course_id):
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     if session.get("username") and session.get("password"):
         courses = read.get_user_courses(session.get("id"))
 
@@ -238,6 +292,9 @@ def courses_announcements(course_id):
 
 @app.route("/courses/<course_id>/grades")
 def courses_grades(course_id):
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     if session.get("username") and session.get("password"):
         courses = read.get_user_courses(session.get("id"))
 
@@ -260,6 +317,9 @@ def courses_grades(course_id):
 
 @app.route("/courses/<course_id>/information")
 def courses_information(course_id):
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     if session.get("username") and session.get("password"):
         courses = read.get_user_courses(session.get("id"))
 
@@ -284,6 +344,9 @@ def courses_information(course_id):
 
 @app.route("/courses/<course_id>/learning")
 def courses_learning(course_id):
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     if session.get("username") and session.get("password"):
         courses = read.get_user_courses(session.get("id"))
 
@@ -306,6 +369,9 @@ def courses_learning(course_id):
 
 @app.route("/courses/<course_id>/settings")
 def courses_settings(course_id):
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     if session.get("username") and session.get("password"):
         courses = read.get_user_courses(session.get("id"))
 
@@ -328,6 +394,9 @@ def courses_settings(course_id):
 
 @app.route("/courses/<course_id>/textbook")
 def courses_textbook(course_id):
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     if session.get("username") and session.get("password"):
         courses = read.get_user_courses(session.get("id"))
 
@@ -350,6 +419,9 @@ def courses_textbook(course_id):
 
 @app.route("/courses/<course_id>/extensions")
 def courses_extensions(course_id):
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     if session.get("username") and session.get("password"):
         courses = read.get_user_courses(session.get("id"))
 
@@ -383,6 +455,9 @@ def index():
 
 @app.route("/chat")
 def chat():
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     return render_template("chat.html", page="Nebulus - Chat", session=session)
 
 
@@ -404,11 +479,17 @@ def logout():
 
 @app.route("/checkConnectedSchoology")
 def checkConnectedSchoology():
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     return str(session["token"] is not None)
 
 
 @app.route("/schoology", methods=["POST"])
 def loginpost():
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     session["token"] = None
     import schoolopy
 
@@ -454,6 +535,9 @@ def loginpost():
 
 @app.route("/settings")
 def settings():
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     if not (session.get("username") and session.get("password")):
         return redirect("/signin")
 
@@ -471,6 +555,9 @@ def settings():
 
 @app.route("/dashboard")
 def dashboard():
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     # if the user is not logged in, redirect to the login page
     if not (session.get("username") and session.get("password")):
         return redirect("/signin")
@@ -491,6 +578,7 @@ def dashboard():
 
 @app.route("/about")
 def about():
+
     return render_template(
         "about.html", page="Nebulus - About Us", password=session.get("password"), user=session.get("username")
     )
@@ -498,6 +586,9 @@ def about():
 
 @app.route("/lms")
 def lms():
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     if not (session.get("username") and session.get("password")):
         return redirect("/signin")
 
@@ -517,6 +608,9 @@ def lms():
 
 @app.route("/music")
 def music():
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     return render_template(
         "music.html", page="Nebulus - Music", password=session.get("password"), user=session.get("username")
     )
@@ -529,6 +623,9 @@ def music():
 
 @app.route("/holidays")
 def vh():
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     return render_template(
         "holidays.html", page="Nebulus - Virtual Holidays", password=session.get("password"), user=session.get("username")
     )
@@ -536,6 +633,9 @@ def vh():
 
 @app.route("/signup")
 def signup():
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     # If the user is already logged in, redirect to the dashboard
     if session.get("username") and session.get("password"):
         return redirect("/dashboard")
@@ -546,6 +646,9 @@ def signup():
 
 @app.route("/signup", methods=["POST"])
 def signup_post():
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     data = request.get_json()
 
     validation = create.create_user(data)
@@ -559,6 +662,9 @@ def signup_post():
 
 @app.route("/signin")
 def signin():
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     # If the user is already logged in, redirect to the dashboard
     if not (session.get("username") and session.get("password")):
         return render_template(
@@ -570,6 +676,9 @@ def signin():
 
 @app.route("/signin_username", methods=["POST"])
 def signin_username():
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     json = request.get_json()
     validation = read.check_user(json.get("username"))
     if validation == "true":
@@ -591,6 +700,9 @@ def signin_username():
 
 @app.route("/signin_password", methods=["POST"])
 def signin_password():
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     json = request.get_json()
 
     validation = read.check_password(session["email"], json.get("password"))
@@ -605,6 +717,9 @@ def signin_password():
 
 @app.route("/musiqueworld")
 def musiqueworld():
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     return render_template("musiqueworld/layout.html", page="Nebulus - Musiqueworld")
 
 
@@ -643,16 +758,26 @@ def logout_from_schoology():
 
 @app.route("/pricing")
 def pricing():
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     return render_template("errors/soon.html", page="Pricing | Coming Soon")
 
 
 @app.route("/points")
 def points():
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
+
     return render_template("errors/soon.html", page="Points | Coming Soon")
 
 
 @app.route("/api")
 def api():
+    if (checkLogIn(session) == False):
+        session.clear()
+        return redirect("/")
     return render_template("errors/soon.html", page="API | Coming Soon")
 
 
