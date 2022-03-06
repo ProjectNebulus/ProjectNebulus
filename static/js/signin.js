@@ -3,14 +3,15 @@ let validPass = false;
 let lastKeyUpTime = Date.now();
 let recheck = true;
 
+function SSO() {
+        document.getElementById('signin_form').style.display = 'none';
+}
+
 window.addEventListener('load', function () {
     let submit = document.getElementById('log_in');
     submit.disabled = true;
     submit.style.color = 'gray';
     submit.style.backgroundColor = '#006097';
-    function SSO() {
-        document.getElementById('signin_form').style.display = 'none';
-    }
     function checkValidUsername() {
         const response = document.getElementsByClassName('response')[0];
 
