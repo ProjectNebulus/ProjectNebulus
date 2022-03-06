@@ -448,7 +448,7 @@ def loginpost():
     }
     update.schoologyLogin(session["id"], schoology)
 
-    return str(sc.get_me().name_display)
+    return str([sc.get_me().name_display, sc.get_me().primary_email])
 
 
 @app.route("/settings")
