@@ -110,9 +110,10 @@ def check_password(email, password):
         return "true"
     return "false"
 
+
 def check_password_username(username, password):
     try:
-        user = find_user(username = username)
+        user = find_user(username=username)
     except KeyError:
         return "false"
     if valid_password(user.password, password):
