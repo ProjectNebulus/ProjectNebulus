@@ -3,6 +3,7 @@ from flask import Flask, session, request, redirect
 from flask_session import Session
 import spotipy
 import uuid
+from SwSpotify import spotify
 
 
 # In order to get Spotipy to work, you must install the latest version with cloning the repo with the following command:
