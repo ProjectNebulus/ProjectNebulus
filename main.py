@@ -785,4 +785,9 @@ print(
     "Site is running at http://0.0.0.0:8080 or http://localhost:8080 . Please test it on CHROME, not SAFARI!"
 )
 
-serve(app, host="localhost", port=8080)
+try:
+  print("Attempting to start in http://localhost:8080")
+  serve(app, host="localhost", port=8080)
+except:
+  print("Failed, trying http://0.0.0.0:8080 or https://Project-Nebulus.nicholasxwang.repl.co")
+  serve(app, host="0.0.0.0", port=8080)
