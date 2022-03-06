@@ -457,15 +457,14 @@ def settings():
     if not (session.get("username") and session.get("password")):
         return redirect("/signin")
 
-    theschoology = read.getSchoology(username = session.get("username"))
+    theschoology = read.getSchoology(username=session.get("username"))
 
     return render_template(
         "user/settings.html",
         page="Nebulus - Account Settings",
         session=session,
         user=session.get("username"),
-        schoology = theschoology
-
+        schoology=theschoology,
     )
 
 
