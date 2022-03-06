@@ -660,6 +660,13 @@ def signup_post():
         session["id"] = validation[1].id
     return validation[0]
 
+@app.route("/signin", methods=["POST"])
+def signin_post():
+
+    
+    if (checkLogIn(session) == True):
+      return "success"
+    return "fail"
 
 @app.route("/signin")
 def signin():
@@ -785,9 +792,12 @@ print(
     "Site is running at http://0.0.0.0:8080 or http://localhost:8080 . Please test it on CHROME, not SAFARI!"
 )
 
-try:
-  print("Attempting to start in http://localhost:8080")
-  serve(app, host="localhost", port=8080)
-except:
-  print("Failed, trying http://0.0.0.0:8080 or https://Project-Nebulus.nicholasxwang.repl.co")
-  serve(app, host="0.0.0.0", port=8080)
+# try:
+  # print("Attempting to start in http://localhost:8080")
+  # serve(app, host="localhost", port=8080)
+# except:
+#   print("Failed, trying http://0.0.0.0:8080 or https://Project-Nebulus.nicholasxwang.repl.co")
+#   serve(app, host="0.0.0.0", port=8080)
+
+print("Failed, trying http://0.0.0.0:8080 or https://Project-Nebulus.nicholasxwang.repl.co")
+serve(app, host="0.0.0.0", port=8080)

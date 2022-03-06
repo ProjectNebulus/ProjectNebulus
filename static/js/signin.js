@@ -253,7 +253,11 @@ function loginUser() {
 function reqListener3() {
     if (this.responseText === 'success') {
         window.location.href = '/dashboard';
+        
     } else {
+        console.log("Error:");
+        console.log(this.responseText);
+        console.log(".");
         let fail = document.getElementById('fail');
         fail.style.color = 'red';
         fail.innerHTML = 'There was an error when signing in';
