@@ -218,7 +218,11 @@ function reqListener2() {
 
 function enableButton() {
     let submit = document.getElementById('log_in');
+    let usrname = document.getElementById('usrname');
+    let psw = document.getElementById('psw');
     if (validUser && validPass) {
+        usrname.disabled = true;
+        psw.disabled = true;
         submit.disabled = false;
         submit.style.color = 'white';
         submit.style.backgroundColor = '#00a2ff';

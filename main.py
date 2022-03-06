@@ -56,7 +56,7 @@ def schoology():
 @app.route("/processSchoologyUrl", methods=["GET"])
 def schoologyURLProcess():
     url = request.args.get("url")
-    if url == None:
+    if url is None:
         return "0"
     # https://<domain>.schoology.com/course/XXXXXXXXXX/materials
     course = url.find("course")
@@ -573,6 +573,7 @@ def signin_username():
     validation = read.check_user(json.get("username"))
     if validation == "true":
         session["username"] = json.get("username")
+        print(session['username'])
         if re.fullmatch(regex, session["username"]):
             # If the username is an email, then we need to get the username from the database
             session["email"] = session["username"]
@@ -583,6 +584,7 @@ def signin_username():
             session["email"] = read.find_user(username=session["username"]).email
 
         session["id"] = read.find_user(username=session["username"]).pk
+        print(session['email'])
     return validation
 
 
@@ -593,16 +595,11 @@ def signin_password():
     validation = read.check_password(session["email"], json.get("password"))
     if validation == "true":
         session["password"] = json.get("password")
-        print(session["password"])
 
     return validation
 
 
-@app.route("/signi4n", methods=["POST"])
-def signin_post():
-    data = request.get_json()
-    session["password"] = data.get("password")
-    return "success"
+
 
 
 @app.route("/musiqueworld")
