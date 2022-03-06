@@ -1,6 +1,8 @@
 const HAS_NUMBER = /\d/;
 const EMAIL_REGEX =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+let email_valid = false;
+let password_valid = false;
 
 window.addEventListener('load', function () {
     function validate(email) {
@@ -10,15 +12,21 @@ window.addEventListener('load', function () {
     const r_l = ',<.>/?;:\'"\\|[{]}=+-_`!@#$%^&*()_+';
 
     function changeEmail() {
+        let status = document.getElementById('status');
+        status.style.color = 'red';
+        status.innerHTML = '<br>';
         const value = document.getElementById('email').value;
         if (validate(value)) {
             document.getElementsByClassName('response')[0].style.color = 'green';
             document.getElementsByClassName('response')[0].innerHTML =
                 '<i class="material-icons">check_circle</i>';
+            email_valid = true;
         } else {
             document.getElementsByClassName('response')[0].style.color = 'red';
             document.getElementsByClassName('response')[0].innerHTML =
                 '<i class="material-icons">error</i>';
+            status.innerHTML = 'Enter a valid email!';
+            email_valid = false;
         }
     }
 
@@ -26,19 +34,18 @@ window.addEventListener('load', function () {
         document.getElementById('email').value = localStorage.getItem('email');
 
     function checkPassword() {
+        let status = document.getElementById('status');
+        status.style.color = 'red';
+        status.innerHTML = '<br>';
         const value = document.getElementById('password').value;
         if (value.length < 6) {
-            document.getElementById('bubble2').style.display = 'block';
-            document.getElementById('bubble').style.display = 'none';
-            document.getElementById('bubble2').innerHTML =
-                'Message: Password must be at least 6 characters long';
-            document.getElementById('passwordValid').style.display = 'none';
+            status.innerHTML =
+                'Password must be at least 6 characters long';
+            password_valid = false;
         } else if (!HAS_NUMBER.test(value)) {
-            document.getElementById('bubble2').style.display = 'block';
-            document.getElementById('bubble').style.display = 'none';
-            document.getElementById('bubble2').innerHTML =
+            status.innerHTML =
                 'Message: Password must include at least 1 number';
-            document.getElementById('passwordValid').style.display = 'none';
+            password_valid = false;
         } else {
             let hasSpecialCharacter = false;
 
@@ -52,6 +59,9 @@ window.addEventListener('load', function () {
                 document.getElementById('bubble2').innerHTML =
                     'Message: Password must include at least 1 special character';
                 document.getElementById('passwordValid').style.display = 'none';
+                password_valid = false;
+            } else {
+                password_valid = true;
             }
         }
     }
@@ -61,6 +71,9 @@ window.addEventListener('load', function () {
 });
 
 function signUp() {
+    console.log(password_valid);
+    console.log(email_valid);
+
     let status = document.getElementById('status');
     status.style.color = 'red';
     status.innerHTML = '<br>';
@@ -75,6 +88,19 @@ function signUp() {
     else if (document.getElementById('password').value !== document.getElementById('confirm').value)
         status.innerHTML = 'Passwords do not match!';
     else {
+        if (!email_valid) {
+            status.innerHTML = 'Please enter a valid email!';
+            return false;
+        }
+        else if (!password_valid) {
+            status.innerHTML = 'Please enter a valid password!';
+            return false;
+        }
+        else if (!(password_valid && email_valid)) {
+            status.innerHTML = 'Please enter a valid email and password!';
+            return false;
+        }
+
         let submit = document.getElementById('submit');
         submit.disabled = true;
         submit.style.color = 'gray';
