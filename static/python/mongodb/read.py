@@ -85,12 +85,15 @@ def CheckSchoology(_id: int):
 
 
 def check_user(user):
-    if re.fullmatch(regex, user):
-        # If the entered Username/Email is an email, check if the entered email exists in the database
-        data = find_user(email=user)
-    else:
-        # If the entered Username/Email is not an email, check if the entered username exists in the database
-        data = find_user(username=user)
+    try:
+        if re.fullmatch(regex, user):
+            # If the entered Username/Email is an email, check if the entered email exists in the database
+            data = find_user(email=user)
+        else:
+            # If the entered Username/Email is not an email, check if the entered username exists in the database
+            data = find_user(username=user)
+    except KeyError:
+        return "false"
 
     if data:
         return "true"
@@ -99,8 +102,9 @@ def check_user(user):
 
 # done
 def check_password(email, password):
-    user = find_user(email=email)
-    if not user:
+    try:
+        user = find_user(email=email)
+    except KeyError:
         return "false"
     if valid_password(user.password, password):
         return "true"
