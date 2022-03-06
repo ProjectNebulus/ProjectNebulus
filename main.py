@@ -638,9 +638,7 @@ def vh():
 
 @app.route("/signup")
 def signup():
-    if (checkLogIn(session) == False):
-        session.clear()
-        return redirect("/")
+
     # If the user is already logged in, redirect to the dashboard
     if session.get("username") and session.get("password"):
         return redirect("/dashboard")
@@ -651,9 +649,7 @@ def signup():
 
 @app.route("/signup", methods=["POST"])
 def signup_post():
-    if (checkLogIn(session) == False):
-        session.clear()
-        return redirect("/")
+
     data = request.get_json()
 
     validation = create.create_user(data)
@@ -667,9 +663,6 @@ def signup_post():
 
 @app.route("/signin")
 def signin():
-    if (checkLogIn(session) == False):
-        session.clear()
-        return redirect("/")
     # If the user is already logged in, redirect to the dashboard
     if not (session.get("username") and session.get("password")):
         return render_template(
@@ -681,9 +674,6 @@ def signin():
 
 @app.route("/signin_username", methods=["POST"])
 def signin_username():
-    if (checkLogIn(session) == False):
-        session.clear()
-        return redirect("/")
     json = request.get_json()
     validation = read.check_user(json.get("username"))
     if validation == "true":
@@ -705,9 +695,7 @@ def signin_username():
 
 @app.route("/signin_password", methods=["POST"])
 def signin_password():
-    if (checkLogIn(session) == False):
-        session.clear()
-        return redirect("/")
+
     json = request.get_json()
 
     validation = read.check_password(session["email"], json.get("password"))
