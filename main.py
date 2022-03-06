@@ -26,14 +26,19 @@ check_user_params = True
 
 def checkLogIn(session):
     try:
-        a = read.check_password_username(session["username"], session["password"])
-        if a == True:
-            return True
+        try:
+            a = read.check_password_username(session["username"], session["password"])
+            if a == True:
+                return True
+        except:
+            a = read.check_password(session["email"], session["password"])
+            if a == True:
+                return True
+        return False
     except:
-        a = read.check_password(session["email"], session["password"])
-        if a == True:
-            return True
-    return False
+        return False
+
+
 @app.route("/schoology")
 def schoology():
     if (checkLogIn(session) == False):
