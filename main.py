@@ -449,7 +449,7 @@ def loginpost():
 
     update.schoologyLogin(session["id"], schoology)
 
-    return str([sc.get_me().name_display, sc.get_me().primary_email])
+    return str(sc.get_me().name_display + "•" + sc.get_me().primary_email)
 
 
 @app.route("/settings")
@@ -457,11 +457,15 @@ def settings():
     if not (session.get("username") and session.get("password")):
         return redirect("/signin")
 
+    theschoology = read.getSchoology(username = session.get("username"))
+
     return render_template(
         "user/settings.html",
         page="Nebulus - Account Settings",
         session=session,
         user=session.get("username"),
+        schoology = theschoology
+
     )
 
 

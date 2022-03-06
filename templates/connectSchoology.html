@@ -12,7 +12,7 @@
 <button id="launchBTN" onclick = "startSchoology()" type="button" class="text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">Connect Schoology</button>
 <button id="confirmBTN"  onclick = "confirmSchoology()" style="display:none;" type="button" class="text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">I Confirm I want to Connect this Schoology Accounts</button>
 <div id="confirmation" class="dark:text-white text-black"style="display:none;">
-    <h1>Confirmation</h1>
+    <h1 class="text-5xl">Confirmation</h1>
     <p>Name: <span id="name"></span></p>
     <p>Email: <span id="email"></span></p>
 </div>
@@ -98,8 +98,11 @@
 
             }
             else{
+                let email = data.split("•")[1];
+                let name = data.split("•")[0];
                 document.getElementById("confirmation").style.display = "block";
-                document.getElementById("name").innerHTML = data;
+                document.getElementById("name").innerHTML = name;
+                document.getElementById("email").innerHTML = email;
 
             }
 
