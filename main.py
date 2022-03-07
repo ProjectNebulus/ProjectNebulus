@@ -25,20 +25,15 @@ check_user_params = True
 
 
 def checkLogIn(session):
-    print("Checking Login")
-    print(session)
     try:
         try:
-            print("Trying USERNAME-PASSWORD check")
             a = read.check_password_username(username = session["username"], password = session["password"])
-            if a == True:
+            if a == "true":
                 return True
             print(int("a")) #illegal intentionally
         except:
-            print("FAILED")
-            print("Trying EMAIL-PASSWORD")
             a = read.check_password(session["email"], session["password"])
-            if a == True:
+            if a == "true":
                 return True
         return False
     except:
@@ -65,7 +60,6 @@ def schoology():
     url = auth.request_authorization(
         callback_url=(request.url_root + "/closeSchoology")
     )
-    print((request.url_root + "closeSchoology"))
     session["request_token"] = auth.request_token
     session["request_token_secret"] = auth.request_token_secret
     session["access_token_secret"] = auth.access_token_secret
@@ -166,7 +160,6 @@ def spotify_status():
         string = a[0] + " - " + a[1]
     else:
         string = "You aren't listening to anything!"
-    # print(string)
     return string
 
 
@@ -181,7 +174,6 @@ def spotify_status2():
         string = a[2]
     else:
         string = "You aren't listening to anything!"
-    # print(string)
     return string
 
 
@@ -668,8 +660,6 @@ def signup_post():
 
 @app.route("/signin", methods=["POST"])
 def signin_post():
-    print("Finalll")
-    print(session)
     
     if (checkLogIn(session) == True):
       return "success"
@@ -692,7 +682,6 @@ def signin_username():
     validation = read.check_user(json.get("username"))
     if validation == "true":
         session["username"] = json.get("username")
-        print(session['username'])
         if re.fullmatch(regex, session["username"]):
             # If the username is an email, then we need to get the username from the database
             session["email"] = session["username"]
@@ -703,7 +692,6 @@ def signin_username():
             session["email"] = read.find_user(username=session["username"]).email
 
         session["id"] = read.find_user(username=session["username"]).pk
-        print(session['email'])
     return validation
 
 
@@ -715,8 +703,7 @@ def signin_password():
     validation = read.check_password(session["email"], json.get("password"))
     if validation == "true":
         session["password"] = json.get("password")
-        print("True")
-        print(session)
+
 
     return validation
 
@@ -798,15 +785,6 @@ app.add_url_rule(
 )
 
 print(
-    "Site is running at http://0.0.0.0:8080 or http://localhost:8080 . Please test it on CHROME, not SAFARI!"
+    "Site is running at http://0.0.0.0:8080 or http://localhost:8080 (or https://Project-Nebulus.nicholasxwang.repl.co if Replit) . Please test it on CHROME, not SAFARI!"
 )
-
-# try:
-  # print("Attempting to start in http://localhost:8080")
-  # serve(app, host="localhost", port=8080)
-# except:
-#   print("Failed, trying http://0.0.0.0:8080 or https://Project-Nebulus.nicholasxwang.repl.co")
-#   serve(app, host="0.0.0.0", port=8080)
-
-print("Failed, trying http://0.0.0.0:8080 or https://Project-Nebulus.nicholasxwang.repl.co")
 serve(app, host="0.0.0.0", port=8080)
