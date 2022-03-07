@@ -29,7 +29,7 @@ def checkLogIn(session):
         if read.check_password_username(username = session["username"], password = session["password"]):
             return True
         
-        return read.check_password(session["email"], session["password"]):
+        return read.check_password(session["email"], session["password"])
     
     except Exception:
         return False
