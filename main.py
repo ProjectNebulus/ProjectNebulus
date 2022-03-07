@@ -676,7 +676,7 @@ def signin():
     return redirect("/dashboard")
 
 
-@app.route("/signin_username", methods=["POST"])
+@app.route("/signin_check", methods=["POST"])
 def signin_username():
     json = request.get_json()
     validation = read.check_user(json.get("username"))
@@ -692,20 +692,8 @@ def signin_username():
             session["email"] = read.find_user(username=session["username"]).email
 
         session["id"] = read.find_user(username=session["username"]).pk
-    return validation
-
-
-@app.route("/signin_password", methods=["POST"])
-def signin_password():
-
-    json = request.get_json()
-
-    validation = read.check_password(session["email"], json.get("password"))
-    if validation == "true":
-        session["password"] = json.get("password")
-
-
-    return validation
+    validation2 = read.check_password(session["email"], json.get("password"))
+    return validation+"-"+validation2
 
 
 

@@ -41,13 +41,15 @@ window.addEventListener('load', function () {
             return false;
         } else {
             let username = document.getElementById('usrname').value;
+          let password = document.getElementById('psw').value;
             const xhttp = new XMLHttpRequest();
-            xhttp.open('POST', '/signin_username', true);
+            xhttp.open('POST', '/signin_check', true);
             xhttp.setRequestHeader('Content-type', 'application/json');
             xhttp.addEventListener('load', reqListener1);
             xhttp.send(
                 JSON.stringify({
-                    username: username
+                    username: username,
+                    password: password
                 })
             );
         }
@@ -82,12 +84,14 @@ window.addEventListener('load', function () {
             return false;
         } else {
             let password = document.getElementById('psw').value;
+            let username = document.getElementById('usrname').value;
             const xhttp = new XMLHttpRequest();
-            xhttp.open('POST', '/signin_password', true);
+            xhttp.open('POST', '/signin_check', true);
             xhttp.setRequestHeader('Content-type', 'application/json');
             xhttp.addEventListener('load', reqListener2);
             xhttp.send(
                 JSON.stringify({
+                    username :username,
                     password: password
                 })
             );
@@ -116,9 +120,10 @@ window.addEventListener('load', function () {
 
 function reqListener1() {
     const response = document.getElementsByClassName('response')[0];
-
+    const response2 = document.getElementsByClassName('response')[1];
     // TODO(kev): switch case
-    if (this.responseText === 'true') {
+  
+    if (this.responseText.split("-")[0] === 'true') {
         response.style.color = 'green';
         response.innerHTML = '<p class="material-icons">check_circle</p>';
         
@@ -158,9 +163,50 @@ function reqListener1() {
                 'dark:bg-green-100',
                 'dark:border-green-400'
             );
+            if (this.responseText.split("-")[1] == "true"){
+              response2.style.color = 'green';
+        response2.innerHTML = '<p class="material-icons">check_circle</p>';
+        
+         document
+            .getElementById('psw')
+            .classList.remove(
+              'bg-red-50',
+              'border',
+              'border-red-500',
+              'text-red-900',
+              'placeholder-red-700',
+              'text-sm',
+              'rounded-lg',
+              'focus:ring-red-500',
+              'focus:border-red-500',
+              'block',
+              'w-full',
+              'p-2.5',
+        'dark:bg-red-100',
+              'dark:border-red-400'
+            );
+        document
+            .getElementById('psw')
+            .classList.add(
+                'g-green-50',
+                'border',
+                'border-green-500',
+                'text-green-900',
+                'placeholder-green-700',
+                'text-sm',
+                'rounded-lg',
+                'focus:ring-green-500',
+                'focus:border-green-500',
+                'block',
+                'w-full',
+                'p-2.5',
+                'dark:bg-green-100',
+                'dark:border-green-400'
+            );
+            }
      
         validUser = true;
-    } else if (this.responseText === 'false') {
+    } else if (this.responseText.split("-")[0] === 'false') {
         response.style.color = 'red';
         response.innerHTML = '<p class="material-icons">error</p>';
       document
@@ -322,6 +368,7 @@ function loginUser() {
     xhttp.addEventListener('load', reqListener3);
     xhttp.send(
         JSON.stringify({
+            username: username,
             password: password
         })
     );
