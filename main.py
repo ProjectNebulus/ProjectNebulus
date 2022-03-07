@@ -766,7 +766,7 @@ def points():
         session.clear()
         return redirect("/")
 
-    return render_template("errors/soon.html", page="Points | Coming Soon")
+    return render_template("points.html", page="Nebulus Points")
 
 
 @app.route("/api")

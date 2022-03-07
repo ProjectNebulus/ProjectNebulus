@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block main %}
+{% include "navbar.html" %}
+<br>
+<a href="#" class="block p-6 w-full bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+    <div class="flex justify-between mb-1">
+        <span class="text-base font-medium text-yellow-700 dark:text-white">Nebulus Points <span class="bg-red-100 text-red-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">Beta</span></span>
+        <span class="text-sm font-medium text-yellow-700 dark:text-white">45% to 1000 Points</span>
+    </div>
+    <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+        <div class="bg-yellow-600 h-2.5 rounded-full" style="width: 45%"></div>
+    </div>
+</a>
+<br>
+<a href="#" class="block p-6 w-1/2 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" style="float:left;">
+    <h1>How to Use Nebulus Points</h1>
+</a>
+<a href="#" class="block p-6 w-1/2 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" style="float:left;">
+    <h1>How to Earn Nebulus Points</h1>
+</a>
+
+{% endblock %}
