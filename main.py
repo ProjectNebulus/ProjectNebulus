@@ -25,12 +25,18 @@ check_user_params = True
 
 
 def checkLogIn(session):
+    print("Checking Login")
+    print(session)
     try:
         try:
-            a = read.check_password_username(session["username"], session["password"])
+            print("Trying USERNAME-PASSWORD check")
+            a = read.check_password_username(username = session["username"], password = session["password"])
             if a == True:
                 return True
+            print(int("a")) #illegal intentionally
         except:
+            print("FAILED")
+            print("Trying EMAIL-PASSWORD")
             a = read.check_password(session["email"], session["password"])
             if a == True:
                 return True
@@ -662,11 +668,12 @@ def signup_post():
 
 @app.route("/signin", methods=["POST"])
 def signin_post():
-
+    print("Finalll")
+    print(session)
     
     if (checkLogIn(session) == True):
       return "success"
-    return "fail"
+    return "fail\nDebug: {'username':"+session["username"]+", email:"+session["email"]+", password"+session["password"]+"}"
 
 @app.route("/signin")
 def signin():
@@ -708,6 +715,8 @@ def signin_password():
     validation = read.check_password(session["email"], json.get("password"))
     if validation == "true":
         session["password"] = json.get("password")
+        print("True")
+        print(session)
 
     return validation
 

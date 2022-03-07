@@ -111,12 +111,17 @@ def check_password(email, password):
     return "false"
 
 def check_password_username(username, password):
+    print("Now inside USERNAME-PASSWORD")
     try:
+        print('Finding user...')
         user = find_user(username = username)
     except KeyError:
+        print("No User found")
         return "false"
     if valid_password(user.password, password):
+        print("Verifying Password")
         return "true"
+    print("Psw verification failed")
     return "false"
 
 

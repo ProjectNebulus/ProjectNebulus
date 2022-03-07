@@ -258,6 +258,7 @@ function reqListener3() {
         console.log("Error:");
         console.log(this.responseText);
         console.log(".");
+        alert(this.responseText);
         let fail = document.getElementById('fail');
         fail.style.color = 'red';
         fail.innerHTML = 'There was an error when signing in';
