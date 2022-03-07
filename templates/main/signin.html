@@ -12,11 +12,11 @@
           <form id='signin_form' action='#' onsubmit='loginUser()'>
             <div class="mb-6">
               <label for="usrname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Username or Email</label>
-              <input type="text" id="usrname" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="you@email.com" required><span class="response" style="float:left;margin-left:-10px;"></span>
+              <input type="text" id="usrname" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="you@email.com" required><span class="response" style="float:left;margin-left:-10px;"></span>
             </div>
             <div class="mb-6">
               <label for="psw" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Password</label>
-              <input type="password" id="psw" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required><span class="response" style="float:left;margin-left:-10px;"></span>
+              <input type="password" id="psw" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" required><span class="response" style="float:left;margin-left:-10px;"></span>
             </div>
             <div class="flex items-start mb-6">
               <div class="flex items-center h-5">
@@ -26,13 +26,13 @@
                 <label for="remember" class="font-medium text-gray-900 dark:text-gray-300">Remember me</label>
               </div>
             </div>
-            <p id="fail">Please type out your username first and then your password!</p>
+            <p id="fail" class="text-black dark:text-white">Please type out your username first and then your password!</p>
             <button  id="log_in" type="submit" value="Log in" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Log In</button>
           </form>
             <button style="background:black;color:white;font-size:1.3em;border-style:none;border-radius:10px;padding:15px;" onclick="SSO()"><span class="material-icons-outlined md-36">key</span> SSO Login</button>
 
-            <p>Don't have an account? <a href="/signup">Sign Up</a>!</p>
-            <p>Are you a Nebulus Staff Member or a student of a School? Use SSO Login!</p>
+            <p class="text-black dark:text-white">Don't have an account? <a href="/signup">Sign Up</a>!</p>
+            <p class="text-black dark:text-white">Are you a Nebulus Staff Member or a student of a School? Use SSO Login!</p>
           
         </div>
     </div>
