@@ -26,23 +26,18 @@ check_user_params = True
 
 def checkLogIn(session):
     try:
-        try:
-            a = read.check_password_username(username = session["username"], password = session["password"])
-            if a == "true":
-                return True
-            print(int("a")) #illegal intentionally
-        except:
-            a = read.check_password(session["email"], session["password"])
-            if a == "true":
-                return True
-        return False
-    except:
+        if read.check_password_username(username = session["username"], password = session["password"]):
+            return True
+        
+        return read.check_password(session["email"], session["password"]):
+    
+    except Exception:
         return False
 
 
 @app.route("/schoology")
 def schoology():
-    if (checkLogIn(session) == False):
+    if not checkLogIn(session):
         session.clear()
         return redirect("/")
 
@@ -71,21 +66,21 @@ def schoology():
 
 @app.route("/processSchoologyUrl", methods=["GET"])
 def schoologyURLProcess():
-    if (checkLogIn(session) == False):
+    if not checkLogIn(session):
         session.clear()
         return redirect("/")
-    url = request.args.get("url")
-    if url is None:
+    
+    if url := request.args.get("url") is None:
         return "0"
+   
     # https://<domain>.schoology.com/course/XXXXXXXXXX/materials
-    course = url.find("course")
-    course += 7
+    course = url.find("course") + 7
     return url[course : course + 10]
 
 
 @app.route("/google34d8c04c4b82b69a.html")
 def googleVerification():
-    if (checkLogIn(session) == False):
+    if not checkLogIn(session):
         session.clear()
         return redirect("/")
     # DO NOT REMOVE, IF YOU DO GOOGLE SEARCH CONSOLE WON'T WORK!
@@ -94,15 +89,14 @@ def googleVerification():
 
 @app.route("/createCourseSchoology")
 def import_schoology():
-    if (checkLogIn(session) == False):
+    if not checkLogIn(session):
         session.clear()
         return redirect("/")
-    ...
 
 
 @app.route("/closeSchoology")
 def close():
-    if (checkLogIn(session) == False):
+    if not checkLogIn(session):
         session.clear()
         return redirect("/")
     session["token"] = "authorized"
@@ -111,7 +105,7 @@ def close():
 
 @app.route("/createCourse", methods=["POST"])
 def create_course():
-    if (checkLogIn(session) == False):
+    if not checkLogIn(session):
         session.clear()
         return redirect("/")
     data = request.get_json()
@@ -129,7 +123,7 @@ def create_course():
 
 @app.route("/developers")
 def developers():
-    if (checkLogIn(session) == False):
+    if not checkLogIn(session):
         session.clear()
         return redirect("/")
     return render_template(
@@ -143,7 +137,7 @@ def developers():
 
 @app.route("/developers/api")
 def api_docs():
-    if (checkLogIn(session) == False):
+    if not checkLogIn(session):
         session.clear()
         return redirect("/")
     return " "
@@ -151,7 +145,7 @@ def api_docs():
 
 @app.route("/spoistatus", methods=["POST"])
 def spotify_status():
-    if (checkLogIn(session) == False):
+    if not checkLogIn(session):
         session.clear()
         return redirect("/")
     a = get_song()
@@ -165,9 +159,10 @@ def spotify_status():
 
 @app.route("/spoistatus2", methods=["POST"])
 def spotify_status2():
-    if (checkLogIn(session) == False):
+    if not checkLogIn(session):
         session.clear()
         return redirect("/")
+    
     a = get_song()
     string = ""
     if len(a) == 3:
@@ -179,9 +174,10 @@ def spotify_status2():
 
 @app.route("/profile")
 def profile():
-    if (checkLogIn(session) == False):
+    if not checkLogIn(session):
         session.clear()
         return redirect("/")
+    
     return render_template(
         "user/profile.html", page="Nebulus - Profile", password=session.get("password"), user=session.get("username")
     )
@@ -189,7 +185,7 @@ def profile():
 
 @app.route("/community/profile/<id>")
 def pubProfile(id):
-    if (checkLogIn(session) == False):
+    if not checkLogIn(session):
         session.clear()
         return redirect("/")
     return render_template(
