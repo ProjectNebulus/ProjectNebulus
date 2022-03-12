@@ -4,7 +4,16 @@ let lastKeyUpTime = Date.now();
 let recheck = true;
 
 function SSO() {
-        document.getElementById('signin_form').style.display = 'none';
+        if("SSO" in document.getElementById("sso")){
+            document.getElementById('signin_form').style.display = 'none';
+            document.getElementById("sso").innerHTML = "Return to Log In"
+
+        }else{
+            document.getElementById('signin_form').style.display = 'block';
+            document.getElementById("sso").innerHTML = "<span class=\"material-icons-outlined md-36\">key</span> SSO Login"
+        }
+
+
 }
 
 window.addEventListener('load', function () {
