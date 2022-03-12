@@ -706,8 +706,8 @@ def loop_forever():
 def signin_username():
     json = request.get_json()
     validation = read.check_user(json.get("username"))
-    signal.signal(signal.SIGALRM, handler)
-    signal.alarm(10)
+    #signal.signal(signal.SIGALRM, handler)
+    #signal.alarm(10)
     try:
         if validation == "true":
             session["username"] = json.get("username")
@@ -724,7 +724,11 @@ def signin_username():
         validation2 = read.check_password(session["email"], json.get("password"))
         if (validation2 == "true"):
           session["password"] = json.get("password")
-        return validation+"-"+validation2
+
+        print(validation+"-"+validation2)
+        ans = validation+"-"+validation2
+        #ans isn't returning
+        return ans
     except Exception as e:
         print(e)
         print("error")
