@@ -21,7 +21,7 @@ app = Flask("app")
 app.secret_key = os.getenv("MONGOPASS")
 check_user_params = True
 app.config['MAIL_SERVER']='smtp.gmail.com'
-app.config['MAIL_PORT'] = 587
+app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = os.getenv("email")
 app.config['MAIL_PASSWORD'] = os.getenv("password")
 app.config['MAIL_USE_TLS'] = False
@@ -47,9 +47,9 @@ def checkLogIn(session):
 @app.route("/sendEmail")
 def email():
     # raise SMTPAuthenticationError(code, resp)
-    #smtplib.SMTPAuthenticationError: (535, b'5.7.8 Username and Password not accepted. Learn more at\n5.7.8  https://support.google.com/mail/?p=BadCredentials r17-20020a639b11000000b003810ac60e40sm3412151pgd.69 - gsmtp')
+    #smtplib.SMTPAuthentic1ationError: (535, b'5.7.8 Username and Password not accepted. Learn more at\n5.7.8  https://support.google.com/mail/?p=BadCredentials r17-20020a639b11000000b003810ac60e40sm3412151pgd.69 - gsmtp')
     msg = Message('Hello', sender = os.getenv("email"), recipients = ['nicholas.x.wang@gmail.com'])
-    msg.html = "<h1>Hello/h1>"
+    msg.html = "<h1>Hello</h1><br>Your code is: 001"
     mail.send(msg)
     return "Sent"
 
