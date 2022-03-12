@@ -42,7 +42,7 @@ def checkLogIn(session):
 def email():
     # raise SMTPAuthenticationError(code, resp)
     #smtplib.SMTPAuthentic1ationError: (535, b'5.7.8 Username and Password not accepted. Learn more at\n5.7.8  https://support.google.com/mail/?p=BadCredentials r17-20020a639b11000000b003810ac60e40sm3412151pgd.69 - gsmtp')
-    msg = Message('Hello', sender = os.getenv("email"), recipients = ['nicholas.x.wang@gmail.com'])
+    msg = Message(f'Your Nebulus Email Verification Code [1029] ', sender = f"Nebulus <{os.getenv('email')}>", recipients = ['nicholas.x.wang@gmail.com'])
     import codecs
     htmlform =codecs.open("templates/email.html", 'r')
     msg.html = htmlform.read()
