@@ -344,11 +344,9 @@ function enableButton() {
     if (validUser && validPass) {
         usrname.disabled = true;
         psw.disabled = true;
-        submit.disabled = false;
         submit.style.color = 'white';
         submit.style.backgroundColor = '#00a2ff';
     } else {
-        submit.disabled = true;
         submit.style.color = 'gray';
         submit.style.backgroundColor = '#006097';
     }
