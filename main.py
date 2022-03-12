@@ -34,15 +34,6 @@ mail = Mail(app)
 # app routes
 
 
-def checkLogIn(session):
-    try:
-        if read.check_password_username(username = session["username"], password = session["password"]):
-            return True
-        
-        return read.check_password(session["email"], session["password"])
-    
-    except Exception:
-        return False
 
 
 @app.route("/sendEmail")
@@ -705,34 +696,23 @@ def loop_forever():
 @app.route("/signin_check", methods=["POST"])
 def signin_username():
     json = request.get_json()
-    validation = read.check_user(json.get("username"))
-    #signal.signal(signal.SIGALRM, handler)
-    #signal.alarm(10)
-    try:
-        if validation == "true":
-            session["username"] = json.get("username")
-            if re.fullmatch(regex, session["username"]):
-                # If the username is an email, then we need to get the username from the database
-                session["email"] = session["username"]
-                session["username"] = read.find_user(email=session["email"]).username
+    validation = read.check_password_username(json.get("username"), json.get("password"))
+    print(validation)
 
-            else:
-                # If the username is not an email, then we need to get the email from the database
-                session["email"] = read.find_user(username=session["username"]).email
+    if validation.split('-')[0] == "true" and validation.split('-')[1] == json.get("password"):
+        session["username"] = json.get("username")
+        if re.fullmatch(regex, session["username"]):
+            # If the username is an email, then we need to get the username from the database
+            session["email"] = session["username"]
+            session["username"] = read.find_user(email=session["email"]).username
 
-            session["id"] = read.find_user(username=session["username"]).pk
-        validation2 = read.check_password(session["email"], json.get("password"))
-        if (validation2 == "true"):
-          session["password"] = json.get("password")
+        else:
+            # If the username is not an email, then we need to get the email from the database
+            session["email"] = read.find_user(username=session["username"]).email
 
-        print(validation+"-"+validation2)
-        ans = validation+"-"+validation2
-        #ans isn't returning
-        return ans
-    except Exception as e:
-        print(e)
-        print("error")
-        return "false-false"
+        session["id"] = read.find_user(username=session["username"]).pk
+
+    return validation
 
 
 

@@ -84,45 +84,23 @@ def CheckSchoology(_id: int):
     return "true"
 
 
-def check_user(user):
-    try:
-        if re.fullmatch(regex, user):
-            # If the entered Username/Email is an email, check if the entered email exists in the database
-            data = find_user(email=user)
-        else:
-            # If the entered Username/Email is not an email, check if the entered username exists in the database
-            data = find_user(username=user)
-    except KeyError:
-        return "false"
-
-    if data:
-        return "true"
-    return "false"
-
-
-# done
-def check_password(email, password):
-    try:
-        user = find_user(email=email)
-    except KeyError:
-        return "false"
-    if valid_password(user.password, password):
-        return "true"
-    return "false"
 
 def check_password_username(username, password):
-    print("Now inside USERNAME-PASSWORD")
+    validuser = 'false'
+    valid_pass = 'false'
     try:
-        print('Finding user...')
-        user = find_user(username = username)
+        if re.fullmatch(regex, username):
+            user = find_user(email=username)
+            validuser = 'true'
+        else:
+            user = find_user(username = username)
+            validuser = 'true'
     except KeyError:
-        print("No User found")
-        return "false"
-    if valid_password(user.password, password):
-        print("Verifying Password")
-        return "true"
-    print("Psw verification failed")
-    return "false"
+        return 'false-false'
+    print(password)
+    if valid_password(password, user.password):
+        valid_pass = 'true'
+    return f"{validuser}-{valid_pass}"
 
 
 def get_announcement(announcement_id: str) -> Announcement:
