@@ -7,6 +7,7 @@ from static.python.classes.GraphQL.graphql_schema import schema
 from static.python.mongodb import *
 from static.python.spotify import *
 from flask_mail import Mail, Message
+import signal 
 
 certifi.where()
 
@@ -693,11 +694,20 @@ def signin():
 
     return redirect("/dashboard")
 
+def handler(signum, frame):
+  print("Forever is over!")
+  raise Exception("end of time")
+def loop_forever():
+  while 1:     
+    print("sec")
+    time.sleep(1)
 
 @app.route("/signin_check", methods=["POST"])
 def signin_username():
     json = request.get_json()
     validation = read.check_user(json.get("username"))
+    signal.signal(signal.SIGALRM, handler)
+    signal.alarm(10)
     try:
         if validation == "true":
             session["username"] = json.get("username")
@@ -712,6 +722,8 @@ def signin_username():
 
             session["id"] = read.find_user(username=session["username"]).pk
         validation2 = read.check_password(session["email"], json.get("password"))
+        if (validation2 == "true"):
+          session["password"] = json.get("password")
         return validation+"-"+validation2
     except Exception as e:
         print(e)
