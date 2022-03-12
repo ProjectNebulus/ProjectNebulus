@@ -656,7 +656,7 @@ def signup_post():
 
 @app.route("/signin", methods=["POST"])
 def signin_post():
-    
+    print(session)
     if (checkLogIn(session) == True):
       return "success"
     return "fail\nDebug: {'username':"+session["username"]+", email:"+session["email"]+", password"+session["password"]+"}"
@@ -691,7 +691,9 @@ def signin_username():
             session["id"] = read.find_user(username=session["username"]).pk
         validation2 = read.check_password(session["email"], json.get("password"))
         return validation+"-"+validation2
-    except:
+    except Exception as e:
+        print(e)
+        print("error")
         return "false-false"
 
 
