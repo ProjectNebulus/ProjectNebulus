@@ -9,7 +9,6 @@ function SSO() {
 
 window.addEventListener('load', function () {
     let submit = document.getElementById('log_in');
-    submit.disabled = true;
     submit.style.color = 'gray';
     submit.style.backgroundColor = '#006097';
     function checkValidUsername() {

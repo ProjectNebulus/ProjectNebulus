@@ -96,7 +96,12 @@
       const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
       if (darkThemeMq.matches) {
         localStorage.setItem("color-theme", "dark");
-        document.getElementById("logo_").style.filter = "invert(1)";
+
+        for (let a in document.getElementsByClassName("logo_")){
+          console.log(a);
+          a.style.filter = "invert(1)";
+        }
+
       } else {
         localStorage.setItem("color-theme", "light");
       }
@@ -104,6 +109,7 @@
       if (localStorage.getItem("color-theme") === "dark") {
         document.body.style.background = "#111926";
         document.getElementById("logo_").style.filter = "invert(1)";
+        document.getElementsByTagName( 'html' )[0].setAttribute( 'class', 'dark' );
       }
       else{
         document.body.style.background = "white";
@@ -112,7 +118,10 @@
   
       // On page load or when changing themes, best to add inline in `head` to avoid FOUC
       if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.getElementById("logo_").style.filter = "invert(1)";
+        for (let a in document.getElementsByClassName("logo_")){
+          console.log(a);
+          a.style.filter = "invert(1)";
+        }
           document.documentElement.classList.add('dark');
       } else {
           document.documentElement.classList.remove('dark')

@@ -676,20 +676,23 @@ def signin():
 def signin_username():
     json = request.get_json()
     validation = read.check_user(json.get("username"))
-    if validation == "true":
-        session["username"] = json.get("username")
-        if re.fullmatch(regex, session["username"]):
-            # If the username is an email, then we need to get the username from the database
-            session["email"] = session["username"]
-            session["username"] = read.find_user(email=session["email"]).username
+    try:
+        if validation == "true":
+            session["username"] = json.get("username")
+            if re.fullmatch(regex, session["username"]):
+                # If the username is an email, then we need to get the username from the database
+                session["email"] = session["username"]
+                session["username"] = read.find_user(email=session["email"]).username
 
-        else:
-            # If the username is not an email, then we need to get the email from the database
-            session["email"] = read.find_user(username=session["username"]).email
+            else:
+                # If the username is not an email, then we need to get the email from the database
+                session["email"] = read.find_user(username=session["username"]).email
 
-        session["id"] = read.find_user(username=session["username"]).pk
-    validation2 = read.check_password(session["email"], json.get("password"))
-    return validation+"-"+validation2
+            session["id"] = read.find_user(username=session["username"]).pk
+        validation2 = read.check_password(session["email"], json.get("password"))
+        return validation+"-"+validation2
+    except:
+        return "false-false"
 
 
 
