@@ -3,6 +3,7 @@ let passwordInput = document.getElementById('psw');
 let lastKeyUpTime = Date.now();
 let recheck = true;
 
+
 function SSO() {
     document.getElementById('signin_form').style.display = 'none';
         if("SSO" in document.getElementById("sso")){
@@ -18,9 +19,10 @@ function SSO() {
 }
 
 window.addEventListener('load', function () {
-        let submit = document.getElementById('log_in');
-        submit.style.color = 'gray';
-        submit.style.backgroundColor = '#006097';
+        let loginButton = document.getElementById('log_in');
+        loginButton.style.color = 'gray';
+        loginButton.style.backgroundColor = '#006097';
+        loginButton.disabled = true;
 
         function checkCredentials() {
             const response = document.getElementsByClassName('response')[0];
@@ -114,7 +116,6 @@ window.addEventListener('load', function () {
 function reqListener1() {
     const response = document.getElementsByClassName('response')[0];
     const response2 = document.getElementsByClassName('response')[1];
-    let loginButton = document.getElementById('log_in');
 
     // TODO(kev): switch case
 
@@ -158,7 +159,8 @@ function reqListener1() {
             'dark:bg-green-100',
             'dark:border-green-400'
         );
-        if (this.responseText.split("-")[1] == "true") {
+    }
+        if (this.responseText.split("-")[1] === "true") {
             response2.style.color = 'green';
             response2.innerHTML = '<p class="material-icons">check_circle</p>';
 
@@ -200,7 +202,7 @@ function reqListener1() {
             );
         }
 
-    } else if (this.responseText.split("-")[0] === 'false') {
+    if (this.responseText.split("-")[0] === 'false' && document.getElementById('usrname').value !== '') {
         response.style.color = 'red';
         response.innerHTML = '<p class="material-icons">error</p>';
         document
@@ -240,8 +242,8 @@ function reqListener1() {
             'dark:border-red-400'
         );
 
-
-    } else if (this.responseText.split('-')[1] === 'false') {
+    }
+    if (this.responseText.split('-')[1] === 'false' && document.getElementById('psw').value !== '') {
         response2.style.color = 'red';
         response2.innerHTML = '<p class="material-icons">error</p>';
         document
@@ -283,6 +285,7 @@ function reqListener1() {
     }
 
     if (this.responseText.split('-')[1] === 'true' && this.responseText.split('-')[0] === 'true') {
+        let loginButton = document.getElementById('log_in');
         loginButton.disabled = false;
         usernameInput.disabled = true;
         passwordInput.disabled = true;
@@ -293,5 +296,31 @@ function reqListener1() {
 
 
 function loginUser() {
-    window.location.href = '/dashboard';
+    let username = document.getElementById('usrname').value;
+    let password = document.getElementById('psw').value;
+    const xhttp = new XMLHttpRequest();
+    xhttp.open('POST', '/signin', true);
+    xhttp.setRequestHeader('Content-type', 'application/json');
+    xhttp.addEventListener('load', reqListener1);
+    xhttp.send(
+        JSON.stringify({
+            username: username,
+            password: password
+        })
+    );
+}
+
+
+
+function reqListener2() {
+    if (this.responseText === 'true') {
+        let status = document.getElementById('fail');
+        status.style.color = 'yellowgreen';
+        status.innerHTML = 'Login was successful!';
+        window.location.href = '/dashboard';
+    } else {
+        let status = document.getElementById('fail');
+        status.style.color = 'red';
+        status.innerHTML = 'Login failed!';
+    }
 }

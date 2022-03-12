@@ -33,6 +33,8 @@ mail = Mail(app)
 
 # app routes
 
+def checkLogIn(session):
+    return True if session.get("logged_in") else False
 
 
 
@@ -670,10 +672,10 @@ def signup_post():
 
 @app.route("/signin", methods=["POST"])
 def signin_post():
-    print(session)
-    if (checkLogIn(session) == True):
-      return "success"
-    return "fail\nDebug: {'username':"+session["username"]+", email:"+session["email"]+", password"+session["password"]+"}"
+    if not (session.get("username") and session.get("password")):
+        return 'false'
+    session['logged_in'] = True
+    return 'true'
 
 @app.route("/signin")
 def signin():
