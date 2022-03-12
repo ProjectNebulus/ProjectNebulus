@@ -6,6 +6,7 @@ from waitress import serve
 from static.python.classes.GraphQL.graphql_schema import schema
 from static.python.mongodb import *
 from static.python.spotify import *
+from flask_mail import Mail, Message
 
 certifi.where()
 
@@ -19,6 +20,14 @@ regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 app = Flask("app")
 app.secret_key = os.getenv("MONGOPASS")
 check_user_params = True
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = os.getenv("email")
+app.config['MAIL_PASSWORD'] = os.getenv("password")
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+
+mail = Mail(app)
 
 
 # app routes
@@ -33,6 +42,15 @@ def checkLogIn(session):
     
     except Exception:
         return False
+
+
+@app.route("/sendEmail")
+def email():
+    msg = Message('Hello', sender = os.getenv("email"), recipients = ['nicholas.x.wang@gmail.com'])
+    msg.html = "<h1>Hello/h1>"
+    mail.send(msg)
+    return "Sent"
+
 
 
 @app.route("/schoology")
