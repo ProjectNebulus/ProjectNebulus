@@ -294,7 +294,7 @@ function reqListener1() {
         let usernameInput = document.getElementById('usrname');
         let passwordInput = document.getElementById('psw');
         loginButton.disabled = false;
-        loginButton.style.backgroundColor = '#00b894';
+        loginButton.style.backgroundColor = '#1B64F1';
         usernameInput.disabled = true;
         passwordInput.disabled = true;
     }
