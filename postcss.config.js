@@ -6,5 +6,6 @@ module.exports = {
         'tailwindcss/line-clamp': {},
         'tailwindcss/forms': {},
         'tailwindcss/typography': {}
+
     }
 };
