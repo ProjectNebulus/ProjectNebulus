@@ -4,6 +4,12 @@ let lastKeyUpTime = Date.now();
 let recheck = true;
 
 
+function selectChanged(){
+    document.getElementById('schoolName').innerText = 'Your '+document.getElementById('selection').value+' account';
+    document.getElementById('schoolInput').placeholder= 'Your '+document.getElementById('selection').value+' Username';
+    document.getElementById('typeHere').style.display = 'block';
+
+}
 function SSO() {
     document.getElementById('signin_form').style.display = 'none';
         if("SSO" in document.getElementById("sso")){
