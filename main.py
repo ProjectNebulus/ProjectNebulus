@@ -48,10 +48,11 @@ def logged_in(f):
 
 @app.route("/sendEmail", methods=["POST"])
 def email():
-    session["verificationCode"] = str(code)
     import random
 
     code = random.randint(10000000, 99999999)
+    session["verificationCode"] = str(code)
+
     msg = Message(
         f"Your Nebulus Email Verification Code [{code}] ",
         sender=f"Nebulus <{os.getenv('email')}>",
