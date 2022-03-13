@@ -1,5 +1,3 @@
-let usernameInput = document.getElementById('usrname');
-let passwordInput = document.getElementById('psw');
 let lastKeyUpTime = Date.now();
 let recheck = true;
 
@@ -120,6 +118,7 @@ window.addEventListener('load', function () {
 
 
 function reqListener1() {
+    console.log(this.responseText);
     const response = document.getElementsByClassName('response')[0];
     const response2 = document.getElementsByClassName('response')[1];
 
@@ -292,7 +291,10 @@ function reqListener1() {
 
     if (this.responseText.split('-')[1] === 'true' && this.responseText.split('-')[0] === 'true') {
         let loginButton = document.getElementById('log_in');
+        let usernameInput = document.getElementById('usrname');
+        let passwordInput = document.getElementById('psw');
         loginButton.disabled = false;
+        loginButton.style.backgroundColor = '#00b894';
         usernameInput.disabled = true;
         passwordInput.disabled = true;
     }
@@ -307,7 +309,7 @@ function loginUser() {
     const xhttp = new XMLHttpRequest();
     xhttp.open('POST', '/signin', true);
     xhttp.setRequestHeader('Content-type', 'application/json');
-    xhttp.addEventListener('load', reqListener1);
+    xhttp.addEventListener('load', reqListener2);
     xhttp.send(
         JSON.stringify({
             username: username,

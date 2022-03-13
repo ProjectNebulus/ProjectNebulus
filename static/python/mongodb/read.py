@@ -1,5 +1,5 @@
 from __future__ import annotations
-
+from werkzeug.security import check_password_hash
 import re
 from typing import List
 
@@ -97,8 +97,8 @@ def check_password_username(username, password):
             validuser = 'true'
     except KeyError:
         return 'false-false'
-    print(password)
-    if valid_password(password, user.password):
+
+    if valid_password(user.password, password):
         valid_pass = 'true'
     return f"{validuser}-{valid_pass}"
 

@@ -606,7 +606,7 @@ def signup_post():
 
 @app.route("/signin", methods=["POST"])
 def signin_post():
-    if not (session.get("username") and session.get("password")):
+    if not session.get("username") and not session.get("password"):
         return 'false'
     session['logged_in'] = True
     return 'true'
@@ -638,20 +638,20 @@ def loop_forever():
 def signin_username():
     json = request.get_json()
     validation = read.check_password_username(json.get("username"), json.get("password"))
-    print(validation)
 
-    if validation.split('-')[0] == "true" and validation.split('-')[1] == json.get("password"):
-        session["username"] = json.get("username")
-        if re.fullmatch(regex, session["username"]):
+    if validation.split('-')[0] == "true" and validation.split('-')[1] == 'true':
+        if re.fullmatch(regex, json.get("username")):
             # If the username is an email, then we need to get the username from the database
-            session["email"] = session["username"]
-            session["username"] = read.find_user(email=session["email"]).username
+            user = read.find_user(email=json.get('username'))
 
         else:
             # If the username is not an email, then we need to get the email from the database
-            session["email"] = read.find_user(username=session["username"]).email
+            user = read.find_user(username=json.get("username"))
 
-        session["id"] = read.find_user(username=session["username"]).pk
+        session["username"] = user.username
+        session["email"] = user.email
+        session["password"] = json.get("password")
+        session["id"] = user.id
 
     return validation
 
