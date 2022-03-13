@@ -38,16 +38,18 @@ def checkLogIn(session):
 
 
 
-@app.route("/sendEmail")
+@app.route("/sendEmail", methods=["POST"])
 def email():
-    # raise SMTPAuthenticationError(code, resp)
-    #smtplib.SMTPAuthentic1ationError: (535, b'5.7.8 Username and Password not accepted. Learn more at\n5.7.8  https://support.google.com/mail/?p=BadCredentials r17-20020a639b11000000b003810ac60e40sm3412151pgd.69 - gsmtp')
-    msg = Message(f'Your Nebulus Email Verification Code [1029] ', sender = f"Nebulus <{os.getenv('email')}>", recipients = ['nicholas.x.wang@gmail.com'])
+    session["verificationCode"] = str(code)
+    import random
+    code = random.randint(10000000, 99999999)
+    msg = Message(f'Your Nebulus Email Verification Code [{code}] ', sender = f"Nebulus <{os.getenv('email')}>", recipients = ['nicholas.x.wang@gmail.com'])
     import codecs
-    htmlform =codecs.open("templates/email.html", 'r')
-    msg.html = htmlform.read()
+    htmlform =str(codecs.open("templates/email.html", 'r').read()).replace("1029", str(code))
+
+    msg.html = htmlform
     mail.send(msg)
-    return htmlform.read()
+    return "success"
 
 
 
