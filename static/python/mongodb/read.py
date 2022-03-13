@@ -84,22 +84,21 @@ def CheckSchoology(_id: int):
     return "true"
 
 
-
 def check_password_username(username, password):
-    validuser = 'false'
-    valid_pass = 'false'
+    validuser = "false"
+    valid_pass = "false"
     try:
         if re.fullmatch(regex, username):
             user = find_user(email=username)
-            validuser = 'true'
+            validuser = "true"
         else:
-            user = find_user(username = username)
-            validuser = 'true'
+            user = find_user(username=username)
+            validuser = "true"
     except KeyError:
-        return 'false-false'
+        return "false-false"
 
     if valid_password(user.password, password):
-        valid_pass = 'true'
+        valid_pass = "true"
     return f"{validuser}-{valid_pass}"
 
 
