@@ -26,11 +26,13 @@ check_user_params = True
 
 def checkLogIn(session):
     try:
-        if read.check_password_username(username = session["username"], password = session["password"]):
+        if read.check_password_username(
+            username=session["username"], password=session["password"]
+        ):
             return True
-        
+
         return read.check_password(session["email"], session["password"])
-    
+
     except Exception:
         return False
 
@@ -69,10 +71,10 @@ def schoologyURLProcess():
     if not checkLogIn(session):
         session.clear()
         return redirect("/")
-    
+
     if url := request.args.get("url") is None:
         return "0"
-   
+
     # https://<domain>.schoology.com/course/XXXXXXXXXX/materials
     course = url.find("course") + 7
     return url[course : course + 10]
@@ -128,7 +130,8 @@ def developers():
         return redirect("/")
     return render_template(
         "developerportal.html",
-        password=session.get("password"), user=session.get("username"),
+        password=session.get("password"),
+        user=session.get("username"),
         read=read,
         page="Nebulus - Developer Portal",
         developer=True,
@@ -162,7 +165,7 @@ def spotify_status2():
     if not checkLogIn(session):
         session.clear()
         return redirect("/")
-    
+
     a = get_song()
     string = ""
     if len(a) == 3:
@@ -177,9 +180,12 @@ def profile():
     if not checkLogIn(session):
         session.clear()
         return redirect("/")
-    
+
     return render_template(
-        "user/profile.html", page="Nebulus - Profile", password=session.get("password"), user=session.get("username")
+        "user/profile.html",
+        page="Nebulus - Profile",
+        password=session.get("password"),
+        user=session.get("username"),
     )
 
 
@@ -190,7 +196,8 @@ def pubProfile(id):
         return redirect("/")
     return render_template(
         "user/pubProfile.html",
-        password=session.get("password"), user=session.get("username"),
+        password=session.get("password"),
+        user=session.get("username"),
         page=f"{session.get('username')} - Nebulus",
         db=db,
     )
@@ -214,7 +221,7 @@ def method_not_allowed(e):
 
 @app.route("/courses/<course_id>")
 def courses(course_id):
-    if (checkLogIn(session) == False):
+    if checkLogIn(session) == False:
         session.clear()
         return redirect("/")
     if session.get("username") and session.get("password"):
@@ -223,7 +230,10 @@ def courses(course_id):
         course = list(filter(lambda x: x.id == course_id, courses))
         if not course:
             return render_template(
-                "errors/404.html", page="404 Not Found", password=session.get("password"), user=session.get("username")
+                "errors/404.html",
+                page="404 Not Found",
+                password=session.get("password"),
+                user=session.get("username"),
             )
         return render_template(
             "courses/course.html",
@@ -231,7 +241,8 @@ def courses(course_id):
             read=read,
             course=course[0],
             course_id=course_id,
-            password=session.get("password"), user=session.get("username"),
+            password=session.get("password"),
+            user=session.get("username"),
         )
 
     else:
@@ -240,7 +251,7 @@ def courses(course_id):
 
 @app.route("/courses/<course_id>/documents")
 def courses_documents(course_id):
-    if (checkLogIn(session) == False):
+    if checkLogIn(session) == False:
         session.clear()
         return redirect("/")
     if session.get("username") and session.get("password"):
@@ -249,7 +260,10 @@ def courses_documents(course_id):
         course = list(filter(lambda x: x.id == course_id, courses))
         if not course:
             return render_template(
-                "errors/404.html", page="404 Not Found", password=session.get("password"), user=session.get("username")
+                "errors/404.html",
+                page="404 Not Found",
+                password=session.get("password"),
+                user=session.get("username"),
             )
         return render_template(
             "courses/documents.html",
@@ -257,7 +271,8 @@ def courses_documents(course_id):
             read=read,
             course=course[0],
             course_id=course_id,
-            password=session.get("password"), user=session.get("username"),
+            password=session.get("password"),
+            user=session.get("username"),
         )
 
     else:
@@ -266,7 +281,7 @@ def courses_documents(course_id):
 
 @app.route("/courses/<course_id>/announcements")
 def courses_announcements(course_id):
-    if (checkLogIn(session) == False):
+    if checkLogIn(session) == False:
         session.clear()
         return redirect("/")
     if session.get("username") and session.get("password"):
@@ -275,7 +290,10 @@ def courses_announcements(course_id):
         course = list(filter(lambda x: x.id == course_id, courses))
         if not course:
             return render_template(
-                "errors/404.html", page="404 Not Found", password=session.get("password"), user=session.get("username")
+                "errors/404.html",
+                page="404 Not Found",
+                password=session.get("password"),
+                user=session.get("username"),
             )
         return render_template(
             "courses/announcements.html",
@@ -283,7 +301,8 @@ def courses_announcements(course_id):
             read=read,
             course=course[0],
             course_id=course_id,
-            password=session.get("password"), user=session.get("username"),
+            password=session.get("password"),
+            user=session.get("username"),
         )
 
     return redirect("/signin")
@@ -291,7 +310,7 @@ def courses_announcements(course_id):
 
 @app.route("/courses/<course_id>/grades")
 def courses_grades(course_id):
-    if (checkLogIn(session) == False):
+    if checkLogIn(session) == False:
         session.clear()
         return redirect("/")
     if session.get("username") and session.get("password"):
@@ -300,7 +319,10 @@ def courses_grades(course_id):
         course = list(filter(lambda x: x.id == course_id, courses))
         if not course:
             return render_template(
-                "errors/404.html", page="404 Not Found", password=session.get("password"), user=session.get("username")
+                "errors/404.html",
+                page="404 Not Found",
+                password=session.get("password"),
+                user=session.get("username"),
             )
         return render_template(
             "courses/grades.html",
@@ -308,7 +330,8 @@ def courses_grades(course_id):
             read=read,
             course=course[0],
             course_id=course_id,
-            password=session.get("password"), user=session.get("username"),
+            password=session.get("password"),
+            user=session.get("username"),
         )
 
     return redirect("/signin")
@@ -316,7 +339,7 @@ def courses_grades(course_id):
 
 @app.route("/courses/<course_id>/information")
 def courses_information(course_id):
-    if (checkLogIn(session) == False):
+    if checkLogIn(session) == False:
         session.clear()
         return redirect("/")
     if session.get("username") and session.get("password"):
@@ -325,7 +348,10 @@ def courses_information(course_id):
         course = list(filter(lambda x: x.id == course_id, courses))
         if not course:
             return render_template(
-                "errors/404.html", page="404 Not Found", password=session.get("password"), user=session.get("username")
+                "errors/404.html",
+                page="404 Not Found",
+                password=session.get("password"),
+                user=session.get("username"),
             )
         return render_template(
             "courses/information.html",
@@ -333,7 +359,8 @@ def courses_information(course_id):
             read=read,
             course=course[0],
             course_id=course_id,
-            password=session.get("password"), user=session.get("username"),
+            password=session.get("password"),
+            user=session.get("username"),
             name=course[0].name,
             teacher=course[0].teacher,
         )
@@ -343,7 +370,7 @@ def courses_information(course_id):
 
 @app.route("/courses/<course_id>/learning")
 def courses_learning(course_id):
-    if (checkLogIn(session) == False):
+    if checkLogIn(session) == False:
         session.clear()
         return redirect("/")
     if session.get("username") and session.get("password"):
@@ -352,7 +379,10 @@ def courses_learning(course_id):
         course = list(filter(lambda x: x.id == course_id, courses))
         if not course:
             return render_template(
-                "errors/404.html", page="404 Not Found", password=session.get("password"), user=session.get("username")
+                "errors/404.html",
+                page="404 Not Found",
+                password=session.get("password"),
+                user=session.get("username"),
             )
         return render_template(
             "courses/learning.html",
@@ -360,7 +390,8 @@ def courses_learning(course_id):
             read=read,
             course=course[0],
             course_id=course_id,
-            password=session.get("password"), user=session.get("username"),
+            password=session.get("password"),
+            user=session.get("username"),
         )
 
     return redirect("/signin")
@@ -368,7 +399,7 @@ def courses_learning(course_id):
 
 @app.route("/courses/<course_id>/settings")
 def courses_settings(course_id):
-    if (checkLogIn(session) == False):
+    if checkLogIn(session) == False:
         session.clear()
         return redirect("/")
     if session.get("username") and session.get("password"):
@@ -377,7 +408,10 @@ def courses_settings(course_id):
         course = list(filter(lambda x: x.id == course_id, courses))
         if not course:
             return render_template(
-                "errors/404.html", page="404 Not Found", password=session.get("password"), user=session.get("username")
+                "errors/404.html",
+                page="404 Not Found",
+                password=session.get("password"),
+                user=session.get("username"),
             )
         return render_template(
             "courses/settings.html",
@@ -385,7 +419,8 @@ def courses_settings(course_id):
             read=read,  # reed = reed
             course=course[0],
             course_id=course_id,
-            password=session.get("password"), user=session.get("username"),
+            password=session.get("password"),
+            user=session.get("username"),
         )
 
     return redirect("/signin")
@@ -393,7 +428,7 @@ def courses_settings(course_id):
 
 @app.route("/courses/<course_id>/textbook")
 def courses_textbook(course_id):
-    if (checkLogIn(session) == False):
+    if checkLogIn(session) == False:
         session.clear()
         return redirect("/")
     if session.get("username") and session.get("password"):
@@ -402,7 +437,10 @@ def courses_textbook(course_id):
         course = list(filter(lambda x: x.id == course_id, courses))
         if not course:
             return render_template(
-                "errors/404.html", page="404 Not Found", password=session.get("password"), user=session.get("username")
+                "errors/404.html",
+                page="404 Not Found",
+                password=session.get("password"),
+                user=session.get("username"),
             )
         return render_template(
             "courses/textbook.html",
@@ -410,7 +448,8 @@ def courses_textbook(course_id):
             read=read,
             course=course[0],
             course_id=course_id,
-            password=session.get("password"), user=session.get("username"),
+            password=session.get("password"),
+            user=session.get("username"),
         )
 
     return redirect("/signin")
@@ -418,7 +457,7 @@ def courses_textbook(course_id):
 
 @app.route("/courses/<course_id>/extensions")
 def courses_extensions(course_id):
-    if (checkLogIn(session) == False):
+    if checkLogIn(session) == False:
         session.clear()
         return redirect("/")
     if session.get("username") and session.get("password"):
@@ -427,7 +466,10 @@ def courses_extensions(course_id):
         course = list(filter(lambda x: x.id == course_id, courses))
         if not course:
             return render_template(
-                "errors/404.html", page="404 Not Found", password=session.get("password"), user=session.get("username")
+                "errors/404.html",
+                page="404 Not Found",
+                password=session.get("password"),
+                user=session.get("username"),
             )
         return render_template(
             "courses/extensions.html",
@@ -435,7 +477,8 @@ def courses_extensions(course_id):
             read=read,
             course=course[0],
             course_id=course_id,
-            password=session.get("password"), user=session.get("username"),
+            password=session.get("password"),
+            user=session.get("username"),
         )
 
     return redirect("/signin")
@@ -448,13 +491,14 @@ def index():
     return render_template(
         "main/index.html",
         page="Nebulus | Learning, All in One.",
-        password=session.get("password"), user=session.get("username"),
+        password=session.get("password"),
+        user=session.get("username"),
     )
 
 
 @app.route("/chat")
 def chat():
-    if (checkLogIn(session) == False):
+    if checkLogIn(session) == False:
         session.clear()
         return redirect("/")
     return render_template("chat.html", page="Nebulus - Chat", session=session)
@@ -478,7 +522,7 @@ def logout():
 
 @app.route("/checkConnectedSchoology")
 def checkConnectedSchoology():
-    if (checkLogIn(session) == False):
+    if checkLogIn(session) == False:
         session.clear()
         return redirect("/")
     return str(session["token"] is not None)
@@ -486,7 +530,7 @@ def checkConnectedSchoology():
 
 @app.route("/schoology", methods=["POST"])
 def loginpost():
-    if (checkLogIn(session) == False):
+    if checkLogIn(session) == False:
         session.clear()
         return redirect("/")
     session["token"] = None
@@ -534,27 +578,27 @@ def loginpost():
 
 @app.route("/settings")
 def settings():
-    if (checkLogIn(session) == False):
+    if checkLogIn(session) == False:
         session.clear()
         return redirect("/")
     if not (session.get("username") and session.get("password")):
         return redirect("/signin")
 
-    theschoology = read.getSchoology(username = session.get("username"))
+    theschoology = read.getSchoology(username=session.get("username"))
 
     return render_template(
         "user/settings.html",
         page="Nebulus - Account Settings",
         session=session,
-        password=session.get("password"), user=session.get("username"),
-        schoology = theschoology
-
+        password=session.get("password"),
+        user=session.get("username"),
+        schoology=theschoology,
     )
 
 
 @app.route("/dashboard")
 def dashboard():
-    if (checkLogIn(session) == False):
+    if checkLogIn(session) == False:
         session.clear()
         return redirect("/")
     # if the user is not logged in, redirect to the login page
@@ -565,9 +609,9 @@ def dashboard():
     user_courses = read.get_user_courses(session.get("id"))
     return render_template(
         "dashboard.html",
-        password=session["password"], user=session["username"],
+        password=session["password"],
+        user=session["username"],
         email=session["email"],
-        
         user_courses=user_courses,
         read=read,
         page="Nebulus - Dashboard",
@@ -579,13 +623,16 @@ def dashboard():
 def about():
 
     return render_template(
-        "about.html", page="Nebulus - About Us", password=session.get("password"), user=session.get("username")
+        "about.html",
+        page="Nebulus - About Us",
+        password=session.get("password"),
+        user=session.get("username"),
     )
 
 
 @app.route("/lms")
 def lms():
-    if (checkLogIn(session) == False):
+    if checkLogIn(session) == False:
         session.clear()
         return redirect("/")
     if not (session.get("username") and session.get("password")):
@@ -596,7 +643,8 @@ def lms():
     user_courses = read.get_user_courses(session["id"])
     return render_template(
         "lms.html",
-        password=session["password"], user=session["username"],
+        password=session["password"],
+        user=session["username"],
         user_acc=user_acc,
         user_courses=user_courses,
         read=read,
@@ -607,11 +655,14 @@ def lms():
 
 @app.route("/music")
 def music():
-    if (checkLogIn(session) == False):
+    if checkLogIn(session) == False:
         session.clear()
         return redirect("/")
     return render_template(
-        "music.html", page="Nebulus - Music", password=session.get("password"), user=session.get("username")
+        "music.html",
+        page="Nebulus - Music",
+        password=session.get("password"),
+        user=session.get("username"),
     )
 
 
@@ -622,11 +673,14 @@ def music():
 
 @app.route("/holidays")
 def vh():
-    if (checkLogIn(session) == False):
+    if checkLogIn(session) == False:
         session.clear()
         return redirect("/")
     return render_template(
-        "holidays.html", page="Nebulus - Virtual Holidays", password=session.get("password"), user=session.get("username")
+        "holidays.html",
+        page="Nebulus - Virtual Holidays",
+        password=session.get("password"),
+        user=session.get("username"),
     )
 
 
@@ -654,12 +708,22 @@ def signup_post():
         session["id"] = validation[1].id
     return validation[0]
 
+
 @app.route("/signin", methods=["POST"])
 def signin_post():
-    
-    if (checkLogIn(session) == True):
-      return "success"
-    return "fail\nDebug: {'username':"+session["username"]+", email:"+session["email"]+", password"+session["password"]+"}"
+
+    if checkLogIn(session) == True:
+        return "success"
+    return (
+        "fail\nDebug: {'username':"
+        + session["username"]
+        + ", email:"
+        + session["email"]
+        + ", password"
+        + session["password"]
+        + "}"
+    )
+
 
 @app.route("/signin")
 def signin():
@@ -689,15 +753,12 @@ def signin_username():
 
         session["id"] = read.find_user(username=session["username"]).pk
     validation2 = read.check_password(session["email"], json.get("password"))
-    return validation+"-"+validation2
-
-
-
+    return validation + "-" + validation2
 
 
 @app.route("/musiqueworld")
 def musiqueworld():
-    if (checkLogIn(session) == False):
+    if checkLogIn(session) == False:
         session.clear()
         return redirect("/")
     return render_template("musiqueworld/layout.html", page="Nebulus - Musiqueworld")
@@ -738,7 +799,7 @@ def logout_from_schoology():
 
 @app.route("/pricing")
 def pricing():
-    if (checkLogIn(session) == False):
+    if checkLogIn(session) == False:
         session.clear()
         return redirect("/")
     return render_template("errors/soon.html", page="Pricing | Coming Soon")
@@ -746,7 +807,7 @@ def pricing():
 
 @app.route("/points")
 def points():
-    if (checkLogIn(session) == False):
+    if checkLogIn(session) == False:
         session.clear()
         return redirect("/")
 
@@ -755,7 +816,7 @@ def points():
 
 @app.route("/api")
 def api():
-    if (checkLogIn(session) == False):
+    if checkLogIn(session) == False:
         session.clear()
         return redirect("/")
     return render_template("errors/soon.html", page="API | Coming Soon")
