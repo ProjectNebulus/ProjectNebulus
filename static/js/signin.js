@@ -8,7 +8,7 @@ function selectChanged(){
 
 }
 function SSO() {
-        alert('triggered');
+
         if( document.getElementById("sso").innerText.includes("SSO")){
             document.getElementById('signin_form').style.display = 'none';
             document.getElementById("sso").innerHTML = "Return to Log In"
@@ -19,6 +19,21 @@ function SSO() {
             document.getElementById('signin_form2').style.display = 'none';
             document.getElementById("sso").innerHTML = "<span class=\"material-icons-outlined md-36\">key</span> SSO Login"
         }
+
+
+}
+function Schoology() {
+
+    if( document.getElementById("schoologyy").innerText.includes("Schoology")){
+        document.getElementById('signin_form').style.display = 'none';
+        document.getElementById("schoologyy").innerHTML = "Return to Log In"
+        document.getElementById('signin_form3').style.display = 'block';
+
+    }else {
+        document.getElementById('signin_form').style.display = 'block';
+        document.getElementById('signin_form3').style.display = 'none';
+        document.getElementById("schoologyy").innerHTML = "Schoology Login"
+    }
 
 
 }
