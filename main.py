@@ -118,9 +118,9 @@ def import_schoology():
 
 
 @app.route("/closeSchoology")
-@logged_in
 def close():
     session["token"] = "authorized"
+    print("I arrived here")
     return "<script>window.close();</script>"
 
 
@@ -218,7 +218,7 @@ def generate_url_signin():
     auth = schoolopy.Auth(key, secret, three_legged=True, domain=DOMAIN)
     # Request authorization URL to open in another window.
     url = auth.request_authorization(
-        callback_url=(request.url_root + "/closeSchoology")
+        callback_url=(request.url_root + "closeSchoology")
     )
     session["request_token"] = auth.request_token
     session["request_token_secret"] = auth.request_token_secret
@@ -532,6 +532,7 @@ def checkConnectedSchoology():
 @app.route("/schoology", methods=["POST"])
 @logged_in
 def loginpost():
+
     session["token"] = None
     import schoolopy
 
@@ -547,7 +548,7 @@ def loginpost():
     auth = schoolopy.Auth(
         key,
         secret,
-        domain="https://bins.schoology.com",
+        domain=request.form.get("link"),
         three_legged=True,
         request_token=request_token,
         request_token_secret=request_token_secret,

@@ -48,6 +48,7 @@ $('#confirmBTN').on('click', function() {
             type: "POST",
             url: "/schoology",
             data: {
+                "link": "https://"+document.getElementById("domain").value+".schoology.com/"
             }
         });
         request.done(function(data) {
@@ -127,6 +128,9 @@ function confirmSchoology(){
     var request =  $.ajax({
         type: "POST",
         url: "/schoology",
+        data: {
+            "link": "https://"+document.getElementById("domain").value+".schoology.com/"
+        }
     })
     request.done(function(data){
         document.getElementById("confirmBTN").style.display = "none";
