@@ -1,5 +1,4 @@
-let lastKeyUpTime = Date.now();
-let recheck = true;
+
 
 
 function selectChanged(){
@@ -9,20 +8,24 @@ function selectChanged(){
 
 }
 function SSO() {
-    document.getElementById('signin_form').style.display = 'none';
-        if("SSO" in document.getElementById("sso")){
+        alert('triggered');
+        if( document.getElementById("sso").innerText.includes("SSO")){
             document.getElementById('signin_form').style.display = 'none';
             document.getElementById("sso").innerHTML = "Return to Log In"
+            document.getElementById('signin_form2').style.display = 'block';
 
-        }else{
+        }else {
             document.getElementById('signin_form').style.display = 'block';
-        }
+            document.getElementById('signin_form2').style.display = 'none';
             document.getElementById("sso").innerHTML = "<span class=\"material-icons-outlined md-36\">key</span> SSO Login"
+        }
 
 
 }
 
 window.addEventListener('load', function () {
+        let lastKeyUpTime1 = Date.now();
+        let recheck = true;
         let loginButton = document.getElementById('log_in');
         loginButton.style.color = 'gray';
         loginButton.style.backgroundColor = '#006097';
@@ -96,18 +99,18 @@ window.addEventListener('load', function () {
         }
 
         function checkStuff() {
-            if (recheck && Date.now() - lastKeyUpTime > 300) {
+            if (recheck && Date.now() - lastKeyUpTime1 > 300) {
                 checkCredentials();
                 recheck = false;
             }
         }
 
         document.getElementById('usrname').onkeyup = function () {
-            lastKeyUpTime = Date.now();
+            lastKeyUpTime1 = Date.now();
             recheck = true;
         };
         document.getElementById('psw').onkeyup = function () {
-            lastKeyUpTime = Date.now();
+            lastKeyUpTime1 = Date.now();
             recheck = true;
         };
 
