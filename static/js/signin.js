@@ -81,11 +81,18 @@ function startSchoology(){
         data: {
         }
     });
-    request.done(function(data){
-        newurl = data;
-    });
+    // request.done(function(data){
+    //     alert("done");
+    //     newurl = data;
+    //     alert(data);
+    // });
+    // alert(data);
+    // alert(newurl);
 
-    newwindow2=window.open(newurl.replace('bins',domain),'Authorize with Schoology2','height=400,width=800')
+    //newwindow2=window.open(newurl.replace('bins',domain),'Authorize with Schoology2','height=400,width=800')
+    request.done(function (data){
+        newwindow2=window.open(data.replace('bins',domain),'Authorize with Schoology2','height=400,width=800')
+    })
     document.getElementById("launchBTN").style.display = "none";
     document.getElementById("confirmBTN").style.display = "none";
     document.getElementById("selectdomain").style.display = "none";
