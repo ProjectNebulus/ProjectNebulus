@@ -22,11 +22,17 @@ function next(num){
         }, 3000);
 
     }else{
-        const myTimeout =  setTimeout(function() {
+        if (num === 1 && EMAIL_REGEX.test(document.getElementById("email").value)) {
 
-            document.getElementById("section"+num.toString()).style.display = "none";
-            document.getElementById("section"+(num+1).toString()).style.display = "block";
-        }, 1000);
+        } else if (num === 1 && EMAIL_REGEX.test(document.getElementById("email").value)) {
+
+        } else {
+            const myTimeout = setTimeout(function () {
+
+                document.getElementById("section" + num.toString()).style.display = "none";
+                document.getElementById("section" + (num + 1).toString()).style.display = "block";
+            }, 1000);
+        }
 
     }
 

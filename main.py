@@ -69,6 +69,14 @@ def email():
     return "success"
 
 
+@app.route("/checkUsernameExists", methods=["POST"])
+def username_check():
+    usrname = request.form.get("u")
+    untaken = True
+    for i in (db.Accounts)
+        return untaken
+
+
 @app.route("/schoology")
 @logged_in
 def schoology():
