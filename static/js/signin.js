@@ -117,9 +117,6 @@ function startSchoology(){
     document.getElementById("confirmBTN").style.display = "block";
 
 }
-var input = document.querySelector('domain'); // get the input element
-input.addEventListener('input', resizeInput); // bind the "resizeInput" callback on "input" event
-resizeInput.call(input); // immediately call the function
 
 function resizeInput() {
     this.style.width = this.value.length + "ch";
@@ -153,7 +150,9 @@ function confirmSchoology(){
 
 }
 window.addEventListener('load', function () {
-        let lastKeyUpTime1 = Date.now();
+    document.querySelector('#domain').addEventListener('input', resizeInput);
+
+    let lastKeyUpTime1 = Date.now();
         let recheck = true;
         let loginButton = document.getElementById('log_in');
         loginButton.style.color = 'gray';
