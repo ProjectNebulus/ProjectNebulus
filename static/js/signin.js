@@ -28,16 +28,119 @@ function Schoology() {
         document.getElementById('signin_form').style.display = 'none';
         document.getElementById("schoologyy").innerHTML = "Return to Log In"
         document.getElementById('signin_form3').style.display = 'block';
+        document.getElementById("launchBTN").style.display = "block";
 
     }else {
         document.getElementById('signin_form').style.display = 'block';
         document.getElementById('signin_form3').style.display = 'none';
         document.getElementById("schoologyy").innerHTML = "Schoology Login"
+        document.getElementById("launchBTN").style.display = "none";
     }
 
 
 }
+$('#confirmBTN').on('click', function() {
+    var $this = $(this);
+    $this.button('loading');
+    setTimeout(function() {
 
+        var request =  $.ajax({
+            type: "POST",
+            url: "/schoology",
+            data: {
+            }
+        });
+        request.done(function(data) {
+            $this.button('reset');
+            resp = document.getElementById("resp")
+            if (data==="error!!!"){
+                resp.style.color = "red";
+                resp.innerHTML = "Login Failed. Reason: Clicked Deny on Schoology or closed Schoology popup window. Make sure Popups are enabled on your browser. Click Authorize again and click Approve this time!";
+                document.getElementById('auth').style.display = 'inline';
+                document.getElementById('connectbtn').style.display = 'none';
+
+            }else{
+                resp.style.color = "green";
+                resp.innerHTML = "Successfully linked the Schoology Account <b>"+data+"</b>!";
+                //window.location.replace("/settings");
+            }
+
+        });
+
+    }, 1000);
+
+
+
+});
+function startSchoology(){
+    let domain = document.getElementById("domain").value;
+    let newurl = "";
+    var request =  $.ajax({
+        type: "GET",
+        url: "/generateURL_Signin",
+        data: {
+        }
+    });
+    request.done(function(data){
+        newurl = data;
+    });
+
+    newwindow2=window.open(newurl.replace('bins',domain),'Authorize with Schoology2','height=400,width=800')
+    document.getElementById("launchBTN").style.display = "none";
+    document.getElementById("confirmBTN").style.display = "none";
+    document.getElementById("selectdomain").style.display = "none";
+    function checkIfDone(){
+        var request =  $.ajax({
+            type: "GET",
+            url: "/checkConnectedSchoology",
+            data: {
+            }
+        });
+        request.done(function(data){
+                if (data==="False"){
+                    checkIfDone();
+                }else{
+                    return;
+                }
+            }
+        )
+    }
+    checkIfDone();
+    document.getElementById("confirmBTN").style.display = "block";
+
+}
+var input = document.querySelector('domain'); // get the input element
+input.addEventListener('input', resizeInput); // bind the "resizeInput" callback on "input" event
+resizeInput.call(input); // immediately call the function
+
+function resizeInput() {
+    this.style.width = this.value.length + "ch";
+}
+function confirmSchoology(){
+    var request =  $.ajax({
+        type: "POST",
+        url: "/schoology",
+    })
+    request.done(function(data){
+        document.getElementById("confirmBTN").style.display = "none";
+        if (data==="error!!!"){
+
+            document.getElementById("launchBTN").style.display = "block";
+            document.getElementById("error").style.display = "block";
+
+        }
+        else{
+            let email = data.split("•")[1];
+            let name = data.split("•")[0];
+            document.getElementById("confirmation").style.display = "block";
+            document.getElementById("name").innerHTML = name;
+            document.getElementById("email").innerHTML = email;
+
+        }
+
+    })
+
+}
 window.addEventListener('load', function () {
         let lastKeyUpTime1 = Date.now();
         let recheck = true;
