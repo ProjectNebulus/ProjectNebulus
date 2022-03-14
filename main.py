@@ -56,7 +56,7 @@ def email():
     msg = Message(
         f"Your Nebulus Email Verification Code [{code}] ",
         sender=f"Nebulus <{os.getenv('email')}>",
-        recipients=["nicholas.x.wang@gmail.com"],
+        recipients=[request.form.get("email")],
     )
     import codecs
 

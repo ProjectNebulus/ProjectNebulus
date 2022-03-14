@@ -12,12 +12,15 @@ function next(num){
                 type: "POST",
                 url: "/sendEmail",
                 data: {
+                    "email": document.getElementById("email").value
 
                 }
             });
             document.getElementById("section"+num.toString()).style.display = "none";
-            document.getElementById("section"+(num+1).toString()).style.display = "block";
+            document.getElementById("section" + (num + 1).toString()).style.display = "block";
+            document.getElementsByClassName("ease-in duration-75")[num * 2 - 1].innerHTML = "Next <svg style=\"display: inline-block;\" class=\"ml-2 -mr-1 w-5 h-5\" fill=\"currentColor\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" d=\"M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z\" clip-rule=\"evenodd\"></path></svg>"
         }, 3000);
+
     }else{
         const myTimeout =  setTimeout(function() {
 
@@ -26,7 +29,6 @@ function next(num){
         }, 1000);
 
     }
-    document.getElementsByClassName("ease-in duration-75")[num*2-1].innerHTML = "Next <svg style=\"display: inline-block;\" class=\"ml-2 -mr-1 w-5 h-5\" fill=\"currentColor\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" d=\"M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z\" clip-rule=\"evenodd\"></path></svg>"
 
 
 
@@ -39,12 +41,11 @@ function prev(num){
         const myTimeout =  setTimeout(function() {
 
             document.getElementById("section"+num.toString()).style.display = "none";
-            document.getElementById("section"+(num-1).toString()).style.display = "block";
+            document.getElementById("section" + (num - 1).toString()).style.display = "block";
+            document.getElementsByClassName("ease-in duration-75")[num * 2 - 2].innerHTML = "<svg style=\"display: inline-block;\" class=\"w-6 h-6\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M7 16l-4-4m0 0l4-4m-4 4h18\"></path></svg> Previous"
         }, 1000);
 
     }
-    document.getElementsByClassName("ease-in duration-75")[num*2-2].innerHTML = "<svg style=\"display: inline-block;\" class=\"w-6 h-6\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M7 16l-4-4m0 0l4-4m-4 4h18\"></path></svg> Previous"
-
 
 
 }
