@@ -3,13 +3,16 @@
     <body oncontextmenu="rightClickElements={}">
     {% include "navbar.html" %}
     {% include "courses/sidebar.html" %}
-    <div style="margin-left:10px;width:calc(100% - 400px);float:left;">
-        <p class="text-5xl text-black dark:text-white text-black" id="page-title"></p>
-        <br>
+    <div style="margin-left:10px;width:calc(100% - 400px);float:left">
+        <span class="text-5xl text-black dark:text-white text-black" id="page-title"></span>
+        <span class="material-icons text-black dark:text-white dark:hover:bg-gray-700 light:hover:bg-gray-200 text-black"
+              style="float:right; cursor:pointer; font-size: 2.5em; padding:5px; border-radius:5px"
+              id="refresh" onclick="iframe.contentWindow.location.reload()">refresh</span>
+        <br><br>
         <hr class="dark:text-white text-black">
     </div>
 
-    <iframe id="frame" name="frame" width="80%" height="80%"></iframe>
+    <iframe name="frame" width="80%" height="80%"></iframe>
 
     <script>
         const iframe = document.getElementsByName("frame")[0];

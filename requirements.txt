@@ -4,6 +4,7 @@ appdirs
 async-timeout
 attrs
 black
+beautifulsoup4
 certifi
 chardet
 charset-normalizer
@@ -27,6 +28,7 @@ iso8601
 itsdangerous
 Jinja2
 MarkupSafe
+mechanize
 mongoengine
 multidict
 musixmatch

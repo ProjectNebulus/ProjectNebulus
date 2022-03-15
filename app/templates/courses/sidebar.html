@@ -94,7 +94,7 @@
             let title = a.href.substring(a.href.indexOf(document.documentURI)).split("/")[5];
             title = title[0].toUpperCase() + title.substring(1);
             pageTitle.innerHTML = title + loadingIcon;
-            setTimeout(() => pageTitle.innerHTML = pageTitle.innerHTML.replace(loadingIcon, ""), 1000)
+            setTimeout(() => pageTitle.innerHTML = pageTitle.innerHTML.replace(loadingIcon, ""), 3000)
 
             a.style.pointerEvents = "none";
             a.style.cursor = "default";

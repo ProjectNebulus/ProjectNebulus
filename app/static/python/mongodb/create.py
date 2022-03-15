@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import List
 
 from dotenv import load_dotenv
+from flask import session
 
 load_dotenv()
 import schoolopy
@@ -22,16 +23,23 @@ def generateSchoologyObject(_id: str) -> schoolopy.Schoology:
     key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
     secret = "59ccaaeb93ba02570b1281e1b0a90e18"
     user = find_user(id=_id)
+
     if not user:
         raise KeyError("User not found")
+
     auth = schoolopy.Auth(
         key,
         secret,
-        domain="https://bins.schoology.com",
-        three_legged=True,
-        **user.schoology,
+        "https://bins.schoology.com",
+        True,
+        session["request_token"],
+        session["request_token_secret"],
+        session["access_token"],
+        session["access_token_secret"],
     )
-    a = auth.authorized
+
+    print(auth.authorize())
+
     sc = schoolopy.Schoology(auth)
     sc.limit = 10
     return sc
