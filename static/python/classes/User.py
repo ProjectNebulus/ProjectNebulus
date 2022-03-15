@@ -8,6 +8,7 @@ from static.python.security import hash256
 from .Avatar import Avatar
 from .Course import Course
 from .Schoology import Schoology
+from .GoogleClassroom import GoogleClassroom
 from .Snowflake import Snowflake
 
 
@@ -40,6 +41,7 @@ class User(Snowflake):
     created_at = DateTimeField(default=datetime.now())
     # optional params
     schoology = EmbeddedDocumentField(Schoology, default=None, null=True)
+    gclassroom = EmbeddedDocumentField(GoogleClassroom, default=None, null=True)
     avatar = EmbeddedDocumentField(Avatar, default=None, null=True)
     bio = StringField(default="", null=True)
     premium_expiration = DateTimeField(required=False, default=None, null=True)
