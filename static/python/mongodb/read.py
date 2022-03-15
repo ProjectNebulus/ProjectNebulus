@@ -11,6 +11,7 @@ from ..classes.Events import Event
 from ..classes.Folder import Folder
 from ..classes.Grades import Grades
 from ..classes.Schoology import Schoology
+from ..classes.GoogleClassroom import GoogleClassroom
 from ..classes.User import User
 from ..security import valid_password
 
@@ -74,6 +75,10 @@ def find_user(**kwargs) -> User | None:
 
 def getSchoology(id: str = None, username: str = None, email: str = None) -> Schoology:
     return find_user(id=id, username=username, email=email).schoology
+
+
+def getClassroom(id: str = None, username: str = None, email: str = None) -> GoogleClassroom:
+    return find_user(id=id, username=username, email=email).gclassroom
 
 
 def CheckSchoology(_id: int):

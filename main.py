@@ -73,7 +73,7 @@ def email():
 def username_check():
     usrname = request.form.get("u")
     untaken = True
-    for i in (db.Accounts)
+    for i in (db.Accounts):
         return untaken
 
 
@@ -584,10 +584,43 @@ def loginpost():
     return str(sc.get_me().name_display + "•" + sc.get_me().primary_email)
 
 
+@app.route("/gclassroom")
+def g_classroom_auth():
+    import os.path
+    from google.auth.transport.requests import Request
+    from google.oauth2.credentials import Credentials
+    from google_auth_oauthlib.flow import InstalledAppFlow
+    from googleapiclient.discovery import build
+    from googleapiclient.errors import HttpError
+    SCOPES = ['https://www.googleapis.com/auth/classroom.courses.readonly']
+    creds = None
+    # The file token.json stores the user's access and refresh tokens, and is
+    # created automatically when the authorization flow completes for the first
+    # time.
+    classroom_object = getClassroom(username=session["username"])
+    if classroom_object:
+        creds = Credentials.from_authorized_user_file('token.json', SCOPES)
+    # If there are no (valid) credentials available, let the user log in.
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file(
+                'credentials.json', SCOPES)
+            print(flow)
+            creds = flow.run_local_server(host="localhost", port=8000, open_browser=False)
+            return creds
+        # Save the credentials for the next run
+        # with open('token.json', 'w') as token:
+        #     token.write(creds.to_json())
+    return str(creds)
+
+
 @app.route("/settings")
 @logged_in
 def settings():
     theschoology = read.getSchoology(username=session.get("username"))
+    thegoogleclassroom = read.getClassroom(username=session.get("username"))
 
     return render_template(
         "user/settings.html",
@@ -774,7 +807,7 @@ def musiqueworld():
 
 
 @app.route("/logoutSchoology")
-def logout_from_schoology():
+def logout_from_schoology2():
     session["schoologyEmail"] = None
     session["schoologyName"] = None
     session["token"] = None
@@ -783,7 +816,7 @@ def logout_from_schoology():
     session["access_token_secret"] = None
     session["access_token"] = None
     "hi"
-    logout_from_schoology(session["username"])
+    logout_from_schoology(find_user(username=session["username"]).id)
     return redirect("/settings")
 
 
