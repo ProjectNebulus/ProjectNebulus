@@ -4,7 +4,7 @@ Essentially this is a time management
 you input how many hours you have and how much time that you want
 
 --base-- makes intervals
-
+    
 --premium
 """
 

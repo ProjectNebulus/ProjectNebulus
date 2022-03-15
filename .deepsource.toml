@@ -1,6 +1,10 @@
 version = 1
 
 [[analyzers]]
+name = "secrets"
+enabled = true
+
+[[analyzers]]
 name = "javascript"
 enabled = true
 
@@ -12,9 +16,9 @@ enabled = true
   runtime_version = "3.x.x"
 
 [[transformers]]
-name = "black"
+name = "prettier"
 enabled = true
 
 [[transformers]]
-name = "prettier"
+name = "black"
 enabled = true

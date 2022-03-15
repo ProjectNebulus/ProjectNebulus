@@ -1,6 +1,6 @@
 [[package]]
 name = "gql"
-version = "3.0.0"
+version = "3.1.0"
 description = "GraphQL client for Python"
 category = "main"
 optional = false
@@ -59,11 +59,11 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "bb96762d013e9765ab142427c1bcde4cde7181491a4db60dc057ffa699e752a9"
+content-hash = "76ad9f6c962cee1178d0eeb93ac3fb4f89f65bb0d8702cb65a9ccafce915d387"
 
 [metadata.files]
 gql = [
-    {file = "gql-3.0.0.tar.gz", hash = "sha256:a21ff880a69caec8786be5cc6de7de6fc2f2b87547af8cd30746b9401ffd47b2"},
+    {file = "gql-3.1.0.tar.gz", hash = "sha256:4b33029e9214aabd2609f3457b8a158b29a3134b193998c9b701785ba31c7ed3"},
 ]
 graphql-core = [
     {file = "graphql-core-3.2.0.tar.gz", hash = "sha256:86e2a0be008bfde19ef78388de8a725a1d942a9190ca431c24a60837973803ce"},

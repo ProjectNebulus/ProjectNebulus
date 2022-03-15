@@ -1,42 +1,178 @@
 {% extends "layout.html" %}
 {% block main %}
-    <body>
-      <div id="signupbody"  autocomplete="off">
-        <script src='/static/js/signup.js'></script>
-        <h1><img style="height: 200px;width: 200px;margin-left:calc(50% - 140px);margin-right:calc(50% - 160px);" src="static/images/logo.png"></h1>
-        <h1 style="font-size:2em;" class="text-gray-900 dark:text-white">Sign Up for Nebulus</h1>
-        <div class="bg-gray-300 dark:bg-gray-600" id="signupinnerbody">
-          <form onsubmit="signUp(); return false;">
-            <div class="mb-6">
-              <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email</label>
-              <input type="text" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="you@email.com" required><span class="response" style="float:left;margin-left:-10px;"></span>
-              <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Username</label>
-              <input type="text" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required><span class="response" style="float:left;margin-left:-10px;"></span>
-            </div>
-            <div class="mb-6">
-              <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Password</label>
-              <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required><span class="response" style="float:left;margin-left:-10px;"></span>
-               <label for="confirm" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Confirm Password</label>
-              <input type="password" id="confirm" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required><span class="response" style="float:left;margin-left:-10px;"></span>
-            </div>
-            
-            <div class="flex items-start mb-6">
-              <div class="flex items-center h-5">
-                <input id="remember" aria-describedby="remember" type="checkbox" class="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800" required>
-              </div>
-              <div class="ml-3 text-sm">
-                <label for="remember" class="font-medium text-gray-900 dark:text-gray-300">Remember me</label>
-              </div>
-            </div>
-            <p id="status">Please type out your username first and then your password!</p>
-            <button id="submit" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Sign Up</button>
-          </form>
-
-            <p>Have an account? <a href="/signin">Log In</a>!</p>
-            
+<body>
+<div id="signupbody"  autocomplete="off">
+  <script src='/static/js/signup.js'></script>
+  <h1><img class = "logo_" style="width: 200px; margin-left: calc(50% - 100px);" src="static/images/logo.png"></h1>
+  <h1 style="font-size:2em;" class="text-gray-900 dark:text-white">Sign Up for Nebulus</h1>
+  <div class="bg-gray-300 dark:bg-gray-600" id="signupinnerbody">
+    <form onsubmit="signUp(); return false;">
+      <div class="mb-6" id="section1">
+        <h1 class="text-6xl dark:text-white">Step 1 of 5: Account Creation</h1>
+        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email</label>
+        <input type="text" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="you@email.com" required><span class="response" style="float:left;margin-left:-10px;"></span>
+        <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Username</label>
+        <input type="text" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required><span class="response" style="float:left;margin-left:-10px;"></span>
+        <button  type="button" onclick = "prev(1);" class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:ring-cyan-200 dark:focus:ring-cyan-800">
+              <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                  <svg style="display: inline-block;" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"></path></svg> Previous
+              </span>
+        </button>
+        <button  type="button" onclick = "next(1);" class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:ring-cyan-200 dark:focus:ring-cyan-800">
+              <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                  Next <svg style="display: inline-block;" class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+              </span>
+        </button>
+      </div>
+      <div class="mb-6" id="section2" style="display:none;">
+          <h1 class="text-6xl dark:text-white">Step 2 of 5: Account Security</h1>
+        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Password</label>
+        <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required><span class="response" style="float:left;margin-left:-10px;"></span>
+        <label for="confirm" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Confirm Password</label>
+        <input type="password" id="confirm" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required><span class="response" style="float:left;margin-left:-10px;"></span>
+        <button  type="button" onclick = "prev(2);" class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:ring-cyan-200 dark:focus:ring-cyan-800">
+              <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                  <svg style="display: inline-block;" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"></path></svg> Previous
+              </span>
+        </button>
+        <button  type="button" onclick = "next(2);" class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:ring-cyan-200 dark:focus:ring-cyan-800">
+              <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                  Next <svg style="display: inline-block;" class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+              </span>
+        </button>
+      </div>
+      <div class="mb-6" id="section3" style="display:none;">
+          <h1 class="text-6xl dark:text-white">Step 3 of 5: Email Verification</h1>
+        <label for="everify" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email Verification Code</label>
+        <input type="number" id="everify" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required><span class="response" style="float:left;margin-left:-10px;"></span>
+        <button  type="button" onclick = "prev(3);" class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:ring-cyan-200 dark:focus:ring-cyan-800">
+              <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                  <svg style="display: inline-block;" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"></path></svg> Previous
+              </span>
+        </button>
+        <button  type="button" onclick = "next(3);" class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:ring-cyan-200 dark:focus:ring-cyan-800">
+              <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                  Next <svg style="display: inline-block;" class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+              </span>
+        </button>
+      </div>
+      <div class="mb-6" id="section4" style="display:none;">
+          <h1 class="text-6xl dark:text-white">Step 4 of 5: Accessibility</h1>
+        <label for="age" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Age</label>
+        <input type="number" id="age" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required><span class="response" style="float:left;margin-left:-10px;"></span>
+        <p>Language</p>
+        <div class="flex items-center mb-4">
+          <input id="country-option-4" type="radio" name="countries" value="United Kingdom" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring:blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600" aria-labelledby="country-option-4" aria-describedby="country-option-4">
+          <label for="country-option-4" class="block ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+            English - 英文 Inglés
+          </label>
         </div>
-    </div>
-    
-    </div>
-    </body>
+
+        <div class="flex items-center">
+          <input id="option-disabled" type="radio" name="countries" value="China" class="w-4 h-4 border-gray-200 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600" aria-labelledby="option-disabled" aria-describedby="option-disabled" disabled>
+          <label for="option-disabled" class="block ml-2 text-sm font-medium text-gray-300 dark:text-gray-700">
+            Mandarin - 中文 Mandarín (unsupported currently)
+          </label>
+        </div>
+        <div class="flex items-center">
+          <input id="option-disabled" type="radio" name="countries" value="China" class="w-4 h-4 border-gray-200 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600" aria-labelledby="option-disabled" aria-describedby="option-disabled" disabled>
+          <label for="option-disabled" class="block ml-2 text-sm font-medium text-gray-300 dark:text-gray-700">
+            Spanish - 西班牙语 Español  (unsupported currently)
+          </label>
+        </div>
+        </fieldset>
+        <button  type="button" onclick = "prev(4);" class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:ring-cyan-200 dark:focus:ring-cyan-800">
+              <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                  <svg style="display: inline-block;" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"></path></svg> Previous
+              </span>
+        </button>
+        <button  type="button" onclick = "next(4);" class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:ring-cyan-200 dark:focus:ring-cyan-800">
+              <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                  Next <svg style="display: inline-block;" class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+              </span>
+        </button>
+      </div>
+
+
+        <div class="mb-6" id="section5" style="display:none;">
+            <h1 class="text-6xl dark:text-white">Step 5 of 5: Customize Nebulus</h1>
+            <h2 class="text-5xl dark:text-white">Choose a Profile Picture</h2>
+
+            <img style="float:left; margin:10px;" class="pfp pfp_selected mb-3 w-24 h-24 rounded-full shadow-lg"
+                 src="/static/images/nebulusCats/black_cat.png" alt="Bonnie image"/>
+            <img style="float:left; margin:10px;" class="pfp mb-3 w-24 h-24 rounded-full shadow-lg"
+                 src="/static/images/nebulusCats/blue_cat.png" alt="Bonnie image"/>
+            <img style="float:left; margin:10px;" class="pfp mb-3 w-24 h-24 rounded-full shadow-lg"
+                 src="/static/images/nebulusCats/green_cat.png" alt="Bonnie image"/>
+            <img style="float:left; margin:10px;" class="pfp mb-3 w-24 h-24 rounded-full shadow-lg"
+                 src="/static/images/nebulusCats/pink_cat.png" alt="Bonnie image"/>
+            <img style="float:left; margin:10px;" class="pfp mb-3 w-24 h-24 rounded-full shadow-lg"
+                 src="/static/images/nebulusCats/yellow_cat.png" alt="Bonnie image"/>
+            <img style="float:left; margin:10px;" class="pfp mb-3 w-24 h-24 rounded-full shadow-lg"
+                 src="/static/images/nebulusCats/blurple_cat.png" alt="Bonnie image"/>
+            <img style="float:left; margin:10px;" class="pfp mb-3 w-24 h-24 rounded-full shadow-lg"
+                 src="/static/images/nebulusCats/red_cat.png" alt="Bonnie image"/><img style="float:left; margin:10px;"
+                                                                                       class="mb-3 w-24 h-24 rounded-full shadow-lg"
+                                                                                       src="/static/images/nebulusCats/red_cat.png"
+                                                                                       alt="Bonnie image"/>
+            <img style="float:left; margin:10px;" class="pfp mb-3 w-24 h-24 rounded-full shadow-lg"
+                 src="/static/images/nebulusCats/100_cat.png" alt="Bonnie image"/>
+            <img style="float:left; margin:10px;" class="pfp mb-3 w-24 h-24 rounded-full shadow-lg"
+                 src="/static/images/nebulusCats/river_cat.png" alt="Bonnie image"/>
+        <img style="float:left; margin:10px;" class="pfp mb-3 w-24 h-24 rounded-full shadow-lg" src="/static/images/nebulusCats/cake_cat.png" alt="Bonnie image"/>
+        <img style="float:left; margin:10px;" class="pfp mb-3 w-24 h-24 rounded-full shadow-lg" src="/static/images/nebulusCats/ocean_cat.png" alt="Bonnie image"/>
+
+            <h2 class="text-5xl dark:text-white">Theme</h2>
+        <fieldset>
+          <legend class="sr-only">Countries</legend>
+
+          <div class="flex items-center mb-4">
+            <input id="country-option-1" type="radio" name="countries" value="USA" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600" aria-labelledby="country-option-1" aria-describedby="country-option-1" checked>
+            <label for="country-option-1" class="block ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+              Light
+            </label>
+          </div>
+
+          <div class="flex items-center mb-4">
+            <input id="country-option-2" type="radio" name="countries" value="Germany" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600" aria-labelledby="country-option-2" aria-describedby="country-option-2">
+            <label for="country-option-2" class="block ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+              Dark
+            </label>
+          </div>
+
+          <div class="flex items-center mb-4">
+            <input id="country-option-3" type="radio" name="countries" value="Spain" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600" aria-labelledby="country-option-3" aria-describedby="country-option-3">
+            <label for="country-option-3" class="block ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+              System
+            </label>
+          </div>
+
+
+        </fieldset>=
+        <button  type="button" onclick = "prev(5);" class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:ring-cyan-200 dark:focus:ring-cyan-800">
+              <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                  <svg style="display: inline-block;" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"></path></svg> Previous
+              </span>
+        </button>
+        <button id="submit" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Sign Up</button>
+      </div>
+  </div>
+  <p>Have an account? <a href="/signin">Log In</a>!</p>
+  </form>
+
+
+
+</div>
+</div>
+
+</div>
+<style>
+  .pfp_selected{
+    border-style: block; border-width:2px; border-color: blue; background-color: black; opacity: 0.5;
+  }
+  .pfp:hover{
+    border-style: block; border-width:2px; border-color: blue; background-color: grey; opacity: 0.5;
+  }
+</style>
+</body>
 {% endblock %}

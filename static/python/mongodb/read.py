@@ -1,5 +1,5 @@
 from __future__ import annotations
-
+from werkzeug.security import check_password_hash
 import re
 from typing import List
 
@@ -11,6 +11,7 @@ from ..classes.Events import Event
 from ..classes.Folder import Folder
 from ..classes.Grades import Grades
 from ..classes.Schoology import Schoology
+from ..classes.GoogleClassroom import GoogleClassroom
 from ..classes.User import User
 from ..security import valid_password
 
@@ -76,6 +77,10 @@ def getSchoology(id: str = None, username: str = None, email: str = None) -> Sch
     return find_user(id=id, username=username, email=email).schoology
 
 
+def getClassroom(id: str = None, username: str = None, email: str = None) -> GoogleClassroom:
+    return find_user(id=id, username=username, email=email).gclassroom
+
+
 def CheckSchoology(_id: int):
     user = find_user(id=_id)
 
@@ -84,27 +89,22 @@ def CheckSchoology(_id: int):
     return "true"
 
 
-def check_user(user):
-    if re.fullmatch(regex, user):
-        # If the entered Username/Email is an email, check if the entered email exists in the database
-        data = find_user(email=user)
-    else:
-        # If the entered Username/Email is not an email, check if the entered username exists in the database
-        data = find_user(username=user)
+def check_password_username(username, password):
+    validuser = "false"
+    valid_pass = "false"
+    try:
+        if re.fullmatch(regex, username):
+            user = find_user(email=username)
+            validuser = "true"
+        else:
+            user = find_user(username=username)
+            validuser = "true"
+    except KeyError:
+        return "false-false"
 
-    if data:
-        return "true"
-    return "false"
-
-
-# done
-def check_password(email, password):
-    user = find_user(email=email)
-    if not user:
-        return "false"
     if valid_password(user.password, password):
-        return "true"
-    return "false"
+        valid_pass = "true"
+    return f"{validuser}-{valid_pass}"
 
 
 def get_announcement(announcement_id: str) -> Announcement:
