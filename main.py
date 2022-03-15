@@ -622,8 +622,8 @@ def g_classroom_auth():
             flow = InstalledAppFlow.from_client_secrets_file(
                 'credentials.json', scope)
             print(flow)
-            # creds = flow.run_local_server(host="localhost", port=8000, open_browser=False)
-            # return creds
+            creds = flow.authorization_url()
+            return creds
         # Save the credentials for the next run
         # with open('token.json', 'w') as token:
         #     token.write(creds.to_json())
