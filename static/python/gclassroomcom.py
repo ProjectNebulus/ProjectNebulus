@@ -9,6 +9,19 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 # If modifying these scopes, delete the file token.json.
+"""
+https://www.googleapis.com/auth/classroom.courses.readonly,
+https://www.googleapis.com/auth/classroom.rosters.readonly,
+https://www.googleapis.com/auth/classroom.coursework.me,
+https://www.googleapis.com/auth/classroom.coursework.me.readonly
+https://www.googleapis.com/auth/classroom.coursework.students
+https://www.googleapis.com/auth/classroom.coursework.students.readonly
+https://www.googleapis.com/auth/classroom.announcements
+https://www.googleapis.com/auth/classroom.announcements.readonly
+https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly
+https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly
+https://www.googleapis.com/auth/classroom.push-notifications
+"""
 SCOPES = ['https://www.googleapis.com/auth/classroom.courses.readonly']
 
 
@@ -38,6 +51,7 @@ def main():
         service = build('classroom', 'v1', credentials=creds)
 
         # Call the Classroom API
+
         results = service.courses().list(pageSize=10).execute()
         courses = results.get('courses', [])
 
@@ -47,6 +61,7 @@ def main():
         # Prints the names of the first 10 courses.
         print('Courses:')
         for course in courses:
+            print(course)
             print(course['name'])
 
     except HttpError as error:
