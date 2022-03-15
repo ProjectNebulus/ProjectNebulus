@@ -73,7 +73,7 @@ def email():
 def username_check():
     usrname = request.form.get("u")
     untaken = True
-    for i in (db.Accounts):
+    for i in db.Accounts:
         return untaken
 
 
@@ -225,9 +225,7 @@ def generate_url_signin():
 
     auth = schoolopy.Auth(key, secret, three_legged=True, domain=DOMAIN)
     # Request authorization URL to open in another window.
-    url = auth.request_authorization(
-        callback_url=(request.url_root + "closeSchoology")
-    )
+    url = auth.request_authorization(callback_url=(request.url_root + "closeSchoology"))
     session["request_token"] = auth.request_token
     session["request_token_secret"] = auth.request_token_secret
     session["access_token_secret"] = auth.access_token_secret
@@ -592,29 +590,35 @@ def g_classroom_auth():
     from google_auth_oauthlib.flow import InstalledAppFlow
     from googleapiclient.discovery import build
     from googleapiclient.errors import HttpError
-    scope = ['https://www.googleapis.com/auth/classroom.courses.readonly']
+
+    scope = ["https://www.googleapis.com/auth/classroom.courses.readonly"]
     authorization_base_url = "https://accounts.google.com/o/oauth2/v2/auth"
     redirect_uri = "http://localhost:8080/"
     token_url = "https://www.googleapis.com/oauth2/v4/token"
     creds = None
     from requests_oauthlib import OAuth2Session
-    client_id = "422831063238-uv3d7jvr8lv3du4p1b2eoj2l3kfkfp0m.apps.googleusercontent.com"
+
+    client_id = (
+        "422831063238-uv3d7jvr8lv3du4p1b2eoj2l3kfkfp0m.apps.googleusercontent.com"
+    )
     client_secret = "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"
     classroom_object = getClassroom(username=session["username"])
     google1 = OAuth2Session(client_id, scope=scope, redirect_uri=redirect_uri)
-    authorization_url, state = google1.authorization_url(authorization_base_url, access_type="offline",
-                                                         prompt="select_account")
+    authorization_url, state = google1.authorization_url(
+        authorization_base_url, access_type="offline", prompt="select_account"
+    )
     return redirect(authorization_url)
     if classroom_object:
-        creds = Credentials.from_authorized_user_file('token.json', scope)
+        creds = Credentials.from_authorized_user_file("token.json", scope)
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
-            flow = InstalledAppFlow.from_client_secrets_file(
-                'credentials.json', SCOPES)
+            flow = InstalledAppFlow.from_client_secrets_file("credentials.json", SCOPES)
             print(flow)
-            creds = flow.run_local_server(host="localhost", port=8000, open_browser=False)
+            creds = flow.run_local_server(
+                host="localhost", port=8000, open_browser=False
+            )
             return creds
         # Save the credentials for the next run
         # with open('token.json', 'w') as token:
