@@ -1,4 +1,5 @@
 # Exporting Environment Variables in the .env file
+import json
 
 from flask import Flask, redirect, render_template, request, session
 from graphql_server.flask import GraphQLView
@@ -604,22 +605,29 @@ def g_classroom_auth():
     google1 = OAuth2Session(client_id, scope=scope, redirect_uri=redirect_uri)
     authorization_url, state = google1.authorization_url(authorization_base_url, access_type="offline",
                                                          prompt="select_account")
-    return redirect(authorization_url)
+
     if classroom_object:
-        creds = Credentials.from_authorized_user_file('token.json', scope)
+        import random, json, os
+        filename = "token_" + str(random.randrange(1000000000, 9999999999)) + ".json"
+        tokeninfo2 = classroom_object.to_json()
+        with open(filename, "w") as out:
+            json.dump(tokeninfo2, out, indent=4)
+        creds = Credentials.from_authorized_user_file(filename, scope)
+        os.remove(filename)
+
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                'credentials.json', SCOPES)
+                'credentials.json', scope)
             print(flow)
-            creds = flow.run_local_server(host="localhost", port=8000, open_browser=False)
-            return creds
+            # creds = flow.run_local_server(host="localhost", port=8000, open_browser=False)
+            # return creds
         # Save the credentials for the next run
         # with open('token.json', 'w') as token:
         #     token.write(creds.to_json())
-    return str(creds)
+    return str(authorization_url)
 
 
 @app.route("/settings")
