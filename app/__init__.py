@@ -4,8 +4,7 @@ from flask import Flask, Blueprint, render_template
 from graphql_server.flask import GraphQLView
 from .static.python.classes.GraphQL.graphql_schema import schema
 
-simple_page = Blueprint('simple_page', __name__,
-                        template_folder='templates')
+simple_page = Blueprint("simple_page", __name__, template_folder="templates")
 
 
 def init_app():
@@ -14,22 +13,24 @@ def init_app():
     """
     app = Flask(__name__)
 
-
     # todo: blueprints
     with app.app_context():
         app.add_url_rule(
-            "/graphql", view_func=GraphQLView.as_view("graphql", schema=schema.graphql_schema, graphiql=True)
+            "/graphql",
+            view_func=GraphQLView.as_view(
+                "graphql", schema=schema.graphql_schema, graphiql=True
+            ),
         )
 
         # Import parts of the application
 
         # Register blueprints
-        @simple_page.route('/', defaults={'page': 'index'}, methods=['GET'])
+        @simple_page.route("/", defaults={"page": "index"}, methods=["GET"])
         def index():
             return render_template("main/index.html")
 
-        @simple_page.errorhandler(404, methods=['GET'])
+        @simple_page.errorhandler(404, methods=["GET"])
         def error_404(e):
-            return render_template('errors/404.html')
+            return render_template("errors/404.html")
 
         return app
