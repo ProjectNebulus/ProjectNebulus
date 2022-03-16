@@ -13,7 +13,10 @@ def init_app():
     # todo: blueprints
     with app.app_context():
         app.add_url_rule(
-            "/graphql", view_func=GraphQLView.as_view("graphql", schema=schema.graphql_schema, graphiql=True)
+            "/graphql",
+            view_func=GraphQLView.as_view(
+                "graphql", schema=schema.graphql_schema, graphiql=True
+            ),
         )
 
         # Import parts of the application
