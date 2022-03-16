@@ -13,7 +13,7 @@ def init_app():
     Creates a flask application.
     """
     app = Flask(__name__)
-    app.register_blueprint(simple_page)
+
 
     # todo: blueprints
     with app.app_context():
@@ -24,11 +24,11 @@ def init_app():
         # Import parts of the application
 
         # Register blueprints
-        @simple_page.route('/', defaults={'page': 'index'})
+        @simple_page.route('/', defaults={'page': 'index'}, methods=['GET'])
         def index():
             return render_template("main/index.html")
 
-        @simple_page.errorhandler(404)
+        @simple_page.errorhandler(404, methods=['GET'])
         def error_404(e):
             return render_template('errors/404.html')
 
