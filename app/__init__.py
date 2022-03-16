@@ -8,8 +8,7 @@ from app.static.python.classes.GraphQL.graphql_schema import schema
 from functools import wraps
 
 # Define Blueprints
-simple_page = Blueprint('simple_page', __name__,
-                        template_folder='templates')
+simple_page = Blueprint("simple_page", __name__, template_folder="templates")
 
 
 def init_app():
@@ -27,7 +26,10 @@ def init_app():
 
     with app.app_context():
         app.add_url_rule(
-            "/graphql", view_func=GraphQLView.as_view("graphql", schema=schema.graphql_schema, graphiql=True)
+            "/graphql",
+            view_func=GraphQLView.as_view(
+                "graphql", schema=schema.graphql_schema, graphiql=True
+            ),
         )
 
         # Import parts of the application
@@ -42,30 +44,35 @@ def init_app():
             return wrap
 
         # Register blueprints
-        @simple_page.route('/', methods=['GET'])
+        @simple_page.route("/", methods=["GET"])
         def index():
-            return render_template("main/index.html", page="Nebulus - Learning, All In One")
+            return render_template(
+                "main/index.html", page="Nebulus - Learning, All In One"
+            )
 
-        @simple_page.route("/signin", methods=['GET'])
+        @simple_page.route("/signin", methods=["GET"])
         def signin():
             if not (session.get("username") and session.get("password")):
-                return render_template("main/signin.html", page="Nebulus - Log In", disablebar=True)
+                return render_template(
+                    "main/signin.html", page="Nebulus - Log In", disablebar=True
+                )
             return redirect("/dashboard")
 
-        @simple_page.route("/signup", methods=['GET'])
+        @simple_page.route("/signup", methods=["GET"])
         def signup():
             if session.get("username") and session.get("password"):
                 return redirect("/dashboard")
-            return render_template("main/signup.html", page="Nebulus - Sign Up", disablebar=True)
+            return render_template(
+                "main/signup.html", page="Nebulus - Sign Up", disablebar=True
+            )
 
     @simple_page.errorhandler(404)
-
     @simple_page.errorhandler(405)
     def error_404(e):
-        return render_template('errors/404.html')
+        return render_template("errors/404.html")
 
     @simple_page.errorhandler(500)
     def error_500(e):
-        return render_template('errors/500.html')
+        return render_template("errors/500.html")
 
     return app
