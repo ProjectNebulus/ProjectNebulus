@@ -42,7 +42,7 @@ def logged_in(f):
 
     return wrap
 
-
+"""
 @app.route("/sendEmail", methods=["POST"])
 def email():
     import random
@@ -65,7 +65,7 @@ def email():
     mail.send(msg)
     return "success"
 
-
+"""
 @app.route("/checkUsernameExists", methods=["POST"])
 def username_check():
     usrname = request.form.get("u")
@@ -101,7 +101,7 @@ def schoology():
 @app.route("/processSchoologyUrl", methods=["GET"])
 @logged_in
 def schoologyURLProcess():
-    if url := request.args.get("url") is None:
+    if url == request.args.get("url") is None:
         return "0"
 
     # https://<domain>.schoology.com/course/XXXXXXXXXX/materials
@@ -206,8 +206,8 @@ def pubProfile(id):
         "user/pubProfile.html",
         password=session.get("password"),
         user=session.get("username"),
-        page=f"{session.get('username')} - Nebulus",
-        db=db,
+        # page=f"{session.get('username')} - Nebulus",
+        # db=db,
     )
 
 
@@ -532,6 +532,7 @@ def checkConnectedSchoology():
     return str(session["token"] is not None)
 
 
+"""
 @app.route("/schoology", methods=["POST"])
 @logged_in
 def loginpost():
@@ -574,10 +575,10 @@ def loginpost():
     }
 
     update.schoologyLogin(session["id"], schoology)
-
+m
     return str(sc.get_me().name_display + "•" + sc.get_me().primary_email)
 
-
+"""
 @app.route("/gclassroom")
 def g_classroom_auth():
     from google.auth.transport.requests import Request
