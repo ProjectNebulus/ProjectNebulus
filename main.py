@@ -74,7 +74,7 @@ def email():
 def username_check():
     usrname = request.form.get("u")
     untaken = True
-    for i in (db.Accounts):
+    for i in db.Accounts:
         return untaken
 
 
@@ -226,9 +226,7 @@ def generate_url_signin():
 
     auth = schoolopy.Auth(key, secret, three_legged=True, domain=DOMAIN)
     # Request authorization URL to open in another window.
-    url = auth.request_authorization(
-        callback_url=(request.url_root + "closeSchoology")
-    )
+    url = auth.request_authorization(callback_url=(request.url_root + "closeSchoology"))
     session["request_token"] = auth.request_token
     session["request_token_secret"] = auth.request_token_secret
     session["access_token_secret"] = auth.access_token_secret
@@ -593,13 +591,16 @@ def g_classroom_auth():
     from google_auth_oauthlib.flow import InstalledAppFlow
     from googleapiclient.discovery import build
     from googleapiclient.errors import HttpError
-    scope = ['https://www.googleapis.com/auth/classroom.courses.readonly']
+
+    scope = ["https://www.googleapis.com/auth/classroom.courses.readonly"]
     creds = None
     from requests_oauthlib import OAuth2Session
+
     classroom_object = getClassroom(username=session["username"])
 
     if classroom_object:
         import random, json, os
+
         filename = "token_" + str(random.randrange(1000000000, 9999999999)) + ".json"
         tokeninfo2 = classroom_object.to_json()
         with open(filename, "w") as out:
@@ -611,8 +612,7 @@ def g_classroom_auth():
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
-            flow = InstalledAppFlow.from_client_secrets_file(
-                'credentials.json', scope)
+            flow = InstalledAppFlow.from_client_secrets_file("credentials.json", scope)
             flow.redirect_uri = "http://localhost:8080"
             print(flow)
             creds = flow.authorization_url()
