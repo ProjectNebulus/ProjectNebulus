@@ -2,7 +2,7 @@
 
 from flask import Flask
 from graphql_server.flask import GraphQLView
-
+from .static.python.classes.GraphQL.graphql_schema import schema
 
 def init_app():
     """
