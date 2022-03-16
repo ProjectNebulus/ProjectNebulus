@@ -594,17 +594,9 @@ def g_classroom_auth():
     from googleapiclient.discovery import build
     from googleapiclient.errors import HttpError
     scope = ['https://www.googleapis.com/auth/classroom.courses.readonly']
-    authorization_base_url = "https://accounts.google.com/o/oauth2/v2/auth"
-    redirect_uri = "http://localhost:8080/"
-    token_url = "https://www.googleapis.com/oauth2/v4/token"
     creds = None
     from requests_oauthlib import OAuth2Session
-    client_id = "422831063238-uv3d7jvr8lv3du4p1b2eoj2l3kfkfp0m.apps.googleusercontent.com"
-    client_secret = "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"
     classroom_object = getClassroom(username=session["username"])
-    google1 = OAuth2Session(client_id, scope=scope, redirect_uri=redirect_uri)
-    authorization_url, state = google1.authorization_url(authorization_base_url, access_type="offline",
-                                                         prompt="select_account")
 
     if classroom_object:
         import random, json, os
@@ -621,13 +613,13 @@ def g_classroom_auth():
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
                 'credentials.json', scope)
+            flow.redirect_uri = "http://localhost:8080"
             print(flow)
             creds = flow.authorization_url()
-            return creds
-        # Save the credentials for the next run
-        # with open('token.json', 'w') as token:
-        #     token.write(creds.to_json())
-    return str(authorization_url)
+            creds = str(creds).replace("(", "").replace(")", "").replace("'", "")
+            print(creds)
+
+    return render_template("connectClassroom.html", link=creds)
 
 
 @app.route("/settings")
