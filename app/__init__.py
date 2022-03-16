@@ -1,6 +1,7 @@
 # Imports
 
 from flask import Flask, Blueprint, render_template, session, redirect
+import os
 from flask_mail import Mail, Message
 from graphql_server.flask import GraphQLView
 from app.static.python.classes.GraphQL.graphql_schema import schema
