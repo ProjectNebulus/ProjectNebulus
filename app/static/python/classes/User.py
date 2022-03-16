@@ -1,12 +1,10 @@
 from datetime import datetime
-from typing import List, Optional, Union
 
 from mongoengine import *
 
-from static.python.security import hash256
+from app.static.python.security import hash256
 
 from .Avatar import Avatar
-from .Course import Course
 from .Schoology import Schoology
 from .GoogleClassroom import GoogleClassroom
 from .Snowflake import Snowflake

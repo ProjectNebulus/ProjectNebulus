@@ -53,7 +53,7 @@ $ poetry install
 ### Run
 
 ```bash
-$ python3 main.py
+$ python3 oldmain.py
 ```
 
 ## Setup (docker)

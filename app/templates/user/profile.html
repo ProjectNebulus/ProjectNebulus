@@ -5,7 +5,7 @@
     <html>
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="/static/js/profile.js"></script>
+        <script src="/app/static/js/profile.js"></script>
     </head>
 
     <body>
@@ -33,7 +33,7 @@
         </div>
     </div>
     <div class="flex flex-col items-center pb-10">
-        <img class="mb-3 w-24 h-24 rounded-full shadow-lg" src="/static/images/logo.png" alt="Bonnie image"/>
+        <img class="mb-3 w-24 h-24 rounded-full shadow-lg" src="/app/static/images/logo.png" alt="Bonnie image"/>
         <h3 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ session.get('username') }}</h3>
         <span class="text-sm text-gray-500 dark:text-gray-400">{{ session.get('email') }}</span>
         <div class="flex mt-4 space-x-3 lg:mt-6">

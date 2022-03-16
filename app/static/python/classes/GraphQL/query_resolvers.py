@@ -1,6 +1,3 @@
-from static.python.mongodb.read import *
-
-
 def resolve_document(parent, info, _id):
     return getDocumentFile(_id)
 

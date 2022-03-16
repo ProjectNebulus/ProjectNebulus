@@ -1,8 +1,5 @@
 import musixmatch
 
-import static.python.youtube
-from static.python.gvision import *
-
 
 def convert(file_path):
     a = detect_image(file_path)

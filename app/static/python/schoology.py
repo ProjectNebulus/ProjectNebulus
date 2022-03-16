@@ -1,10 +1,9 @@
 from datetime import datetime
 
-from static.python.classes import Avatar
-from static.python.classes.Assignment import Assignment
-from static.python.classes.Course import Course
-from static.python.classes.Grades import Grades
-from static.python.classes.Events import Events
+from app.static.python.classes import Avatar
+from app.static.python.classes.Assignment import Assignment
+from app.static.python.classes.Course import Course
+from app.static.python.classes.Grades import Grades
 
 
 def getcourse(courseid, sc, user, jsonEnabled):
