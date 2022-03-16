@@ -78,7 +78,7 @@ def getSchoology(id: str = None, username: str = None, email: str = None) -> Sch
 
 
 def getClassroom(
-        id: str = None, username: str = None, email: str = None
+    id: str = None, username: str = None, email: str = None
 ) -> GoogleClassroom:
     return find_user(id=id, username=username, email=email).gclassroom
 
