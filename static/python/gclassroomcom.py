@@ -42,7 +42,17 @@ def main():
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
                 'credentials.json', SCOPES)
-            creds = flow.run_local_server(host="localhost", port=8080)
+            flow.redirect_uri = "http:localhost:8080"
+            # creds = flow.run_local_server(host='localhost',
+            #                               port=8080,
+            #                               authorization_prompt_message='Please visit this URL: {url}',
+            #                               success_message='The auth flow is complete; you may close this window.',
+            #                               open_browser=True)
+            creds = flow.run_console(host='localhost',
+                                     port=8080,
+                                     authorization_prompt_message='Please visit this URL: {url}',
+                                     success_message='The auth flow is complete; you may close this window.',
+                                     open_browser=True)
         # Save the credentials for the next run
         with open('token.json', 'w') as token:
             token.write(creds.to_json())
