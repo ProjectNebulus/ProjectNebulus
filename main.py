@@ -1,7 +1,7 @@
 """
 App entrypoint.
 """
-from app import init_app, simple_page
+from app.routes import init_app, simple_page
 from waitress import serve
 
 app = init_app()

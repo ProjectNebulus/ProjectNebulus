@@ -3,7 +3,7 @@
 from flask import Flask, redirect, render_template, request, session
 from graphql_server.flask import GraphQLView
 from waitress import serve
-from app.static.python.classes.GraphQL.graphql_schema import schema
+from app import schema
 from flask_mail import Mail, Message
 from functools import wraps
 

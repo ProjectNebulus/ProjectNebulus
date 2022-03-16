@@ -1,13 +1,13 @@
 import graphene
 
-from app.static.python.classes.Announcement import Announcement as AnnouncementModel
-from app.static.python.classes.Assignment import Assignment as AssignmentModel
-from app.static.python.classes.Course import Course as CourseModel
-from app.static.python.classes.Document import DocumentFile as DocumentFileModel
-from app.static.python.classes.Events import Event as EventModel
-from app.static.python.classes.Folder import Folder as FolderModel
-from app.static.python.classes.Grades import Grades as GradesModel
-from app.static.python.classes.User import User as UserModel
+from app import Announcement as AnnouncementModel
+from app import Assignment as AssignmentModel
+from app import Course as CourseModel
+from app import DocumentFile as DocumentFileModel
+from app import Event as EventModel
+from app import Folder as FolderModel
+from app import Grades as GradesModel
+from app import User as UserModel
 
 
 class DeleteCourse(graphene.Mutation):
