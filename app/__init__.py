@@ -2,7 +2,7 @@
 
 from flask import Flask, Blueprint, render_template
 from graphql_server.flask import GraphQLView
-from .static.python.classes.GraphQL.graphql_schema import schema
+from app.static.python.classes.GraphQL.graphql_schema import schema
 
 simple_page = Blueprint('simple_page', __name__,
                         template_folder='templates')
@@ -24,11 +24,11 @@ def init_app():
         # Import parts of the application
 
         # Register blueprints
-        @simple_page.route('/', defaults={'page': 'index'}, methods=['GET'])
+        @simple_page.route('/', methods=['GET'])
         def index():
             return render_template("main/index.html")
 
-        @simple_page.errorhandler(404, methods=['GET'])
+        @simple_page.errorhandler(404)
         def error_404(e):
             return render_template('errors/404.html')
 
