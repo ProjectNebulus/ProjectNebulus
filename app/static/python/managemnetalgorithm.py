@@ -18,4 +18,4 @@ def basefunction(timestudy, timerelax):
         return int(timeneeded / timerelaxed) + 1
 
 
-#practical commit
+# practical commit
