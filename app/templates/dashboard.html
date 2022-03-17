@@ -1,0 +1,78 @@
+<!--Extend with Jinja!-->
+{% extends "layout.html" %}
+{% block main %}
+    <head>
+        <style>
+            #left {
+                float: left;
+                text-align: left;
+            }
+
+            #right {
+                float: right;
+                text-align: right;
+            }
+
+            #page {
+                height: 100%;
+            }
+
+            h2 {
+                margin-left: 30px;
+                font-size: 3vh;
+            }
+
+            .section {
+                margin: 5px 2%;
+                padding: 5px;
+                min-height: 10vw;
+                width: 40vw;
+            }
+
+            .vertical {
+                min-height: 26vw;
+                width: 40vw;
+            }
+
+            .button {
+                height: 150px;
+                width: 100px;
+            }
+        </style>
+    </head>
+    <body>
+    <div id="page">
+        {% include "navbar.html" %}
+        <div style="text-align: center; font-size: 5vh"><h1 class="text-black dark:text-white">Good
+            Afternoon, {{ user }}</h1></div>
+
+        <div id="left" style="overflow:visible">
+            <h2 class="text-black dark:text-white">Recent courses</h2>
+            <div class="block w-full section p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                {% for course in user_courses %}
+                    <a href="/courses/{{ course.id }}">
+                        <button style="margin:15px;" type="button"
+                                class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">{{ course.name }}</button>
+                    </a>
+
+                {% endfor %}
+            </div>
+            <br>
+            <h2 class="text-black dark:text-white">Recent Activity</h2>
+            <div class="block w-full section p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+
+            </div>
+        </div>
+
+        <div id="right" style="overflow:visible">
+            <h2 class="text-black dark:text-white">Upcoming Assignments</h2>
+            <div class="vertical block w-full section p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+
+            </div>
+        </div>
+
+        <script src="../static/js/dashboard.js"></script>
+    </div>
+    {% include "footer.html" %}
+    </body>
+{% endblock %}

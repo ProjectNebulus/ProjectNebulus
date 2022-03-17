@@ -43,9 +43,9 @@ RUN poetry install --no-interaction --no-ansi \
   && poetry run pip install -U pip \
   && rm -rf "$POETRY_CACHE_DIR"
 
-COPY ./main.py /opt/app/
-COPY ./templates/ /opt/app/templates
-COPY ./static/ /opt/app/static
+COPY oldmain.py /opt/app/
+COPY app/templates/ /opt/app/templates
+COPY app/static/ /opt/app/static
 
 EXPOSE 8080:8080
 

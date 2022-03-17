@@ -1,0 +1,91 @@
+{% extends "layout.html" %}
+{% block main %}
+    <!-- https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max-->
+    <html>
+
+    <head>
+        <script src="https://prestohacks.nicholasxwang.repl.co/static/js/main.js"></script>
+        <link rel="stylesheet/less" type="text/css" href="../../app/static/css/styles.less"/>
+        <script src="https://cdn.jsdelivr.net/npm/less@4.1.1"></script>
+        <meta property="og:title" content="MusiqueWorld"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:url" content="https://PrestoHacks.nicholasxwang.repl.co"/>
+        <meta property="og:image" content="/static/images/Logo.png"/>
+        <meta property="og:description"
+              content="MusiqueWorld is the perfect app for people who make music, listen to music, and play music. It includes tools for composing music, playing music, and listening to music!"/>
+        <meta name="theme-color" content="#11022C">
+    </head>
+    <body>
+    <center>
+        <div id="mwBanner">
+            <nav>
+          <span style="float:left;">
+            <a href="Nebulus">Return to Nebulus</a>
+          </span>
+            </nav>
+            <h1 align="left" style="vertical-align: top;">MusiqueWorld | Nebulus</h1>
+        </div>
+        <div class="file">
+            <form method="POST" enctype="multipart/form-data">
+                <!--<label for="file">File: </label>-->
+                <script>
+                    $(":file").filestyle();
+                </script>
+
+                <input style="display:none;" data-buttonText="Upload an Image" type="file" id="file1" name="file1"
+                       onchange="uploadFile()"
+                       accept="image/png, image/jpeg, .gif, .png, .jpg, .jpeg">
+                <br><br>
+                <label id="labelfile" for="file1">Upload Image</label>
+                <input class="submit" value="Search" type="submit">
+            </form>
+
+            <progress id="progressBar" value="0" max="100" style="width:300px;"></progress>
+            <!--<h3 id="status"></h3>!-->
+            <p id="loaded_n_total"></p>
+    </center>
+    <script>
+        function _(el) {
+            return document.getElementById(el);
+        }
+
+        function uploadFile() {
+            var file = _("file1").files[0];
+            // alert(file.name+" | "+file.size+" | "+file.type);
+            var formdata = new FormData();
+            formdata.append("file1", file);
+            var ajax = new XMLHttpRequest();
+            ajax.upload.addEventListener("progress", progressHandler, false);
+            ajax.addEventListener("load", completeHandler, false);
+            ajax.addEventListener("error", errorHandler, false);
+            ajax.addEventListener("abort", abortHandler, false);
+            ajax.open("POST", "file_upload_parser.php"); // http://www.developphp.com/video/JavaScript/File-Upload-Progress-Bar-Meter-Tutorial-Ajax-PHP
+            //use file_upload_parser.php from above url
+            ajax.send(formdata);
+        }
+
+        function progressHandler(event) {
+            _("loaded_n_total").innerHTML = "Uploaded " + Math.floor(event.loaded / 1024) + " kilobytes of " + Math.floor(event.total / 1024);
+            var percent = (event.loaded / event.total) * 100;
+            _("progressBar").value = Math.round(percent);
+            _("status").innerHTML = Math.round(percent) + "% uploaded... please wait";
+        }
+
+        function completeHandler(event) {
+            _("status").innerHTML = event.target.responseText;
+            _("progressBar").value = 0; //wil clear progress bar after successful upload
+        }
+
+        function errorHandler(event) {
+            _("status").innerHTML = "Upload Failed";
+        }
+
+        function abortHandler(event) {
+            _("status").innerHTML = "Upload Aborted";
+        }
+    </script>
+
+    </body>
+    </html>
+{% endblock %}
+
