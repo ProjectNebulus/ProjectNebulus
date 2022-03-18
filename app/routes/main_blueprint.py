@@ -1,8 +1,12 @@
 from flask import Blueprint, session
 from app.static.python.mongodb import read as r
 
-main_blueprint = Blueprint('main_blueprint', __name__, template_folder="../app/templates/main",
-                           static_folder="./app/static")
+main_blueprint = Blueprint(
+    "main_blueprint",
+    __name__,
+    template_folder="../app/templates/main",
+    static_folder="./app/static",
+)
 
 
 def logged_in():
