@@ -3,5 +3,5 @@ from flask import render_template
 
 
 @main_blueprint.route("/api", methods=["GET"])
-def apig():
+def api():
     return render_template("errors/soon.html", page="API | Coming Soon")

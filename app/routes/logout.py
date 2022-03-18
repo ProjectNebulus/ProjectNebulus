@@ -3,7 +3,7 @@ from flask import session, redirect
 
 
 @main_blueprint.route("/logout", methods=["GET"])
-def signin():
+def logout():
     session["username"] = None
     session["email"] = None
     session["password"] = None
