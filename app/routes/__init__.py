@@ -6,11 +6,6 @@ from flask_mail import Mail, Message
 from graphql_server.flask import GraphQLView
 from app.static.python.classes.GraphQL.graphql_schema import schema
 from functools import wraps
-from app.routes.home import route
-
-# Define Blueprints
-simple_page = Blueprint("simple_page", __name__, template_folder="templates")
-
 
 def init_app():
     """
