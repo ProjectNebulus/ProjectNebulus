@@ -35,21 +35,18 @@ mail = Mail(app)
 # app routes
 
 
-def logged_in(f):
-    @wraps(f)
-    def wrap(*args, **kwargs):
-        if not session.get("logged_in"):
-            session.clear()
-            return redirect("/signin")
-        return f(*args, **kwargs)
-
-    return wrap
-
-"""
-@app.route("/sendEmail", methods=["POST"])
-def email():
+@app.route("/api/internal/send-email", methods=["POST"])
+def send_email():
+    """
+    POST /api/internal/send-email
+    Args
+    - recipients
+    - message-head
+    - message-body
+    - message-html-file
+    :return:
+    """
     import random
-
     code = random.randint(10000000, 99999999)
     session["verificationCode"] = str(code)
 
@@ -68,8 +65,8 @@ def email():
     mail.send(msg)
     return "success"
 
-"""
-@app.route("/checkUsernameExists", methods=["POST"])
+
+@app.route("/api/internal/username-exists", methods=["POST"])
 def username_check():
     usrname = request.form.get("u")
     untaken = True
@@ -78,7 +75,6 @@ def username_check():
 
 
 @app.route("/schoology")
-@logged_in
 def schoology():
     key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
     secret = "59ccaaeb93ba02570b1281e1b0a90e18"
@@ -101,8 +97,7 @@ def schoology():
     return render_template("connectSchoology.html", url=url)
 
 
-@app.route("/processSchoologyUrl", methods=["GET"])
-@logged_in
+@app.route("/api/internal/generate-schoology-url", methods=["GET"])
 def schoologyURLProcess():
     if url == request.args.get("url") is None:
         return "0"
@@ -113,27 +108,23 @@ def schoologyURLProcess():
 
 
 @app.route("/google34d8c04c4b82b69a.html")
-@logged_in
 def googleVerification():
     # DO NOT REMOVE, IF YOU DO GOOGLE SEARCH CONSOLE WON'T WORK!
     return render_template("google34d8c04c4b82b69a.html")
 
 
 @app.route("/createCourseSchoology")
-@logged_in
 def import_schoology():
     return "success"
 
 
-@app.route("/closeSchoology")
+@app.route("/api/internal/schoology-callback")
 def close():
     session["token"] = "authorized"
-    print("I arrived here")
     return "<script>window.close();</script>"
 
 
-@app.route("/createCourse", methods=["POST"])
-@logged_in
+@app.route("/api/internal/create-course", methods=["POST"])
 def create_course():
     data = request.get_json()
     if data["name"] == "":
@@ -148,27 +139,8 @@ def create_course():
     return "Course Created"
 
 
-@app.route("/developers")
-@logged_in
-def developers():
-    return render_template(
-        "developerportal.html",
-        password=session.get("password"),
-        user=session.get("username"),
-        read=read,
-        page="Nebulus - Developer Portal",
-        developer=True,
-    )
+@app.route("/api/internal/spotify-status", methods=["POST"])
 
-
-@app.route("/developers/api")
-@logged_in
-def api_docs():
-    return " "
-
-
-@app.route("/spoistatus", methods=["POST"])
-@logged_in
 def spotify_status():
     a = get_song()
     string = ""
@@ -178,21 +150,7 @@ def spotify_status():
         string = "You aren't listening to anything!"
     return string
 
-
-@app.route("/spoistatus2", methods=["POST"])
-@logged_in
-def spotify_status2():
-    a = get_song()
-    string = ""
-    if len(a) == 3:
-        string = a[2]
-    else:
-        string = "You aren't listening to anything!"
-    return string
-
-
 @app.route("/profile")
-@logged_in
 def profile():
     return render_template(
         "user/profile.html",
@@ -203,7 +161,6 @@ def profile():
 
 
 @app.route("/community/profile/<id>")
-@logged_in
 def pubProfile(id):
     return render_template(
         "user/pubProfile.html",
@@ -233,21 +190,6 @@ def generate_url_signin():
     return url
 
 
-@app.errorhandler(404)
-def not_found(e):
-    return render_template("errors/404.html", page="404 Not Found")
-
-
-@app.errorhandler(500)
-def server_error(e):
-    return render_template("errors/500.html", page="500 Internal Server Error")
-
-
-@app.errorhandler(405)
-def method_not_allowed(e):
-    return render_template("errors/404.html", page="404 Not Found")
-
-
 @app.route("/courses/<course_id>")
 def courses(course_id):
     user_courses = read.get_user_courses(session.get("id"))
@@ -272,7 +214,7 @@ def courses(course_id):
 
 
 @app.route("/courses/<course_id>/documents")
-@logged_in
+
 def courses_documents(course_id):
     user_courses = read.get_user_courses(session.get("id"))
 
@@ -296,7 +238,7 @@ def courses_documents(course_id):
 
 
 @app.route("/courses/<course_id>/announcements")
-@logged_in
+
 def courses_announcements(course_id):
     user_courses = read.get_user_courses(session.get("id"))
 
@@ -495,15 +437,12 @@ def courses_extensions(course_id):
     return redirect("/signin")
 
 
-@app.route("/checkConnectedSchoology")
-@logged_in
+@app.route("/api/internal/connected-to-schoology")
 def checkConnectedSchoology():
     return str(session["token"] is not None)
 
-
-"""
 @app.route("/schoology", methods=["POST"])
-@logged_in
+
 def loginpost():
     session["token"] = None
     import schoolopy
@@ -547,7 +486,7 @@ def loginpost():
 m
     return str(sc.get_me().name_display + "•" + sc.get_me().primary_email)
 
-"""
+
 @app.route("/gclassroom")
 def g_classroom_auth():
     from google.auth.transport.requests import Request
@@ -581,17 +520,8 @@ def g_classroom_auth():
 
     return render_template("connectClassroom.html", link=creds)
 
-@app.route("/signup")
-def signup():
-    # If the user is already logged in, redirect to the dashboard
-    if session.get("username") and session.get("password"):
-        return redirect("/dashboard")
-    return render_template(
-        "main/signup.html", page="Nebulus - Sign Up", disablebar=True
-    )
 
-
-@app.route("/signup", methods=["POST"])
+@app.route("/api/internal/signup", methods=["POST"])
 def signup_post():
     data = request.get_json()
 
@@ -604,7 +534,7 @@ def signup_post():
     return validation[0]
 
 
-@app.route("/signin", methods=["POST"])
+@app.route("/api/internal/sign-in", methods=["POST"])
 def signin_post():
     if not session.get("username") and not session.get("password"):
         return "false"
@@ -623,7 +553,7 @@ def loop_forever():
         time.sleep(1)
 
 
-@app.route("/signin_check", methods=["POST"])
+@app.route("/api/internal/check-signin", methods=["POST"])
 def signin_username():
     json = request.get_json()
     validation = read.check_password_username(
@@ -646,7 +576,8 @@ def signin_username():
 
     return validation
 
-@app.route("/logoutSchoology")
+
+@app.route("/api/internal/logout-of-schoology")
 def logout_from_schoology2():
     session["schoologyEmail"] = None
     session["schoologyName"] = None
