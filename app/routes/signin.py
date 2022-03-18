@@ -1,4 +1,4 @@
-from main_blueprint import main_blueprint, logged_in
+from app.routes.main_blueprint import main_blueprint, logged_in
 from flask import session, render_template, redirect
 
 
