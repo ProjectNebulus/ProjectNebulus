@@ -2,7 +2,7 @@ from flask import Blueprint, session
 from app.static.python.mongodb import read as r
 
 main_blueprint = Blueprint('main_blueprint', __name__, template_folder="../templates",
-                           static_folder="./app/static")
+                           static_folder="../static")
 
 
 def logged_in():
