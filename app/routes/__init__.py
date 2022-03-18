@@ -9,7 +9,7 @@ import app.routes.about
 import app.routes.home
 import app.routes.signin
 import app.routes.signup
-import app.routes.api
+import app.routes.theapi
 import app.routes.points
 import app.routes.pricing
 import app.routes.logout

@@ -14,13 +14,16 @@ regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 secret_key = os.getenv("MONGOPASS")
 check_user_params = True
 config = {}
-Flask(__name__).config["MAIL_SERVER"] = "smtp.gmail.com"
-current_app.config["MAIL_PORT"] = 465
-current_app.config["MAIL_USERNAME"] = os.getenv("email")
-current_app.config["MAIL_PASSWORD"] = os.getenv("password")
-current_app.config["MAIL_USE_TLS"] = False
-current_app.config["MAIL_USE_SSL"] = True
-mail = Mail(current_app)
+
+
+# Flask(__name__).config["MAIL_SERVER"] = "smtp.gmail.com"
+#
+# current_app.config["MAIL_PORT"] = 465
+# current_app.config["MAIL_USERNAME"] = os.getenv("email")
+# current_app.config["MAIL_PASSWORD"] = os.getenv("password")
+# current_app.config["MAIL_USE_TLS"] = False
+# current_app.config["MAIL_USE_SSL"] = True
+# mail = Mail(current_app)
 
 
 @main_blueprint.route("/api", methods=["GET"])
