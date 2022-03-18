@@ -14,8 +14,6 @@ from ..Announcement import Announcement as AnnouncementModel
 from ..AvatarSize import AvatarSize as AvatarSizeModel
 
 
-
-
 class User(MongoengineObjectType):
     class Meta:
         model = UserModel
