@@ -6,5 +6,5 @@ from flask import render_template, redirect
 def index():
     # return "hi"
     return render_template(
-        "main/index.html", page="Nebulus - Learning, All In One"
+        "main/home.html", page="Nebulus - Learning, All In One"
     )

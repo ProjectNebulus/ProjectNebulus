@@ -500,7 +500,7 @@ def index():
     if session.get("username") and session.get("password"):
         return redirect("/dashboard")
     return render_template(
-        "main/index.html",
+        "main/home.html",
         page="Nebulus | Learning, All in One.",
         password=session.get("password"),
         user=session.get("username"),
