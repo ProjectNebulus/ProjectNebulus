@@ -495,40 +495,6 @@ def courses_extensions(course_id):
     return redirect("/signin")
 
 
-@app.route("/")
-def index():
-    if session.get("username") and session.get("password"):
-        return redirect("/dashboard")
-    return render_template(
-        "main/home.html",
-        page="Nebulus | Learning, All in One.",
-        password=session.get("password"),
-        user=session.get("username"),
-    )
-
-
-@app.route("/chat")
-@logged_in
-def chat():
-    return render_template("chat.html", page="Nebulus - Chat", session=session)
-
-
-@app.route("/logout")
-def logout():
-    session["username"] = None
-    session["email"] = None
-    session["password"] = None
-    # Schoology
-    session["schoologyEmail"] = None
-    session["schoologyName"] = None
-    session["token"] = None
-    session["request_token"] = None
-    session["request_token_secret"] = None
-    session["access_token_secret"] = None
-    session["access_token"] = None
-    return redirect("/")
-
-
 @app.route("/checkConnectedSchoology")
 @logged_in
 def checkConnectedSchoology():
@@ -735,17 +701,6 @@ def signin_post():
     return "true"
 
 
-@app.route("/signin")
-def signin():
-    # If the user is already logged in, redirect to the dashboard
-    if not (session.get("username") and session.get("password")):
-        return render_template(
-            "main/signin.html", page="Nebulus - Log In", disablebar=True
-        )
-
-    return redirect("/dashboard")
-
-
 def handler(signum, frame):
     print("Forever is over!")
     raise Exception("end of time")
@@ -779,32 +734,6 @@ def signin_username():
         session["id"] = user.id
 
     return validation
-
-
-@app.route("/musiqueworld")
-@logged_in
-def musiqueworld():
-    return render_template("musiqueworld/layout.html", page="Nebulus - Musiqueworld")
-
-
-# @app.route("/musiqueworld", methods=["POST"])
-# def musiqueworld_post():
-#     if "file1" not in request.files:
-#         flash("No file part")
-#         return redirect(request.url)
-#
-#     file = request.files["file1"]
-#     if file.filename == "":
-#         flash("No selected file")
-#         return redirect(request.url)
-#
-#     if file and allowed_file(file.filename):
-#         filename = secure_filename(file.filename)
-#         file.save(os.path.join("static/userbase/images", filename))
-#         resp = convert((os.path.join(UPLOAD_FOLDER, filename)))
-#         youtube = search_yt(songs[0]["track_name"] + " by " + songs[0]["artist_name"])
-#         return render_template(returned=True, youtube=youtube, resp=resp)
-
 
 @app.route("/logoutSchoology")
 def logout_from_schoology2():
