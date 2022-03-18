@@ -6,6 +6,8 @@ main_blueprint = Blueprint('main_blueprint', __name__, template_folder="../templ
 
 
 def logged_in():
+    if "username" not in session.keys() or "password" not in session.keys():
+        return False
     username = session["username"]
     password = session["password"]
     if not username or not password:
