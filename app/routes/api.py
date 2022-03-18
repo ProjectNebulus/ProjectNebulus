@@ -31,6 +31,7 @@ def send_email():
     :return:
     """
     import random
+
     code = random.randint(10000000, 99999999)
     session["verificationCode"] = str(code)
 
@@ -65,7 +66,7 @@ def schoologyURLProcess():
 
     # https://<domain>.schoology.com/course/XXXXXXXXXX/materials
     course = url.find("course") + 7
-    return url[course: course + 10]
+    return url[course : course + 10]
 
 
 @app.route("/api/internal/create-schoology-course")

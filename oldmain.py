@@ -5,6 +5,7 @@ from flask_mail import Mail, Message
 from functools import wraps
 import os
 from app.static.python.classes.GraphQL.graphql_schema import schema
+
 KEY = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
 SECRET = "59ccaaeb93ba02570b1281e1b0a90e18"
 sc = schoolopy.Schoology(schoolopy.Auth(KEY, SECRET))
@@ -19,6 +20,8 @@ app.config["MAIL_PASSWORD"] = os.getenv("password")
 app.config["MAIL_USE_TLS"] = False
 app.config["MAIL_USE_SSL"] = True
 mail = Mail(app)
+
+
 @app.route("/schoology")
 def schoology():
     key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
@@ -40,10 +43,13 @@ def schoology():
 
     # Open OAuth authorization webpage. Give time to authorize.
     return render_template("connectSchoology.html", url=url)
+
+
 @app.route("/google34d8c04c4b82b69a.html")
 def googleVerification():
     # DO NOT REMOVE, IF YOU DO GOOGLE SEARCH CONSOLE WON'T WORK!
     return render_template("google34d8c04c4b82b69a.html")
+
 
 @app.route("/profile")
 def profile():
@@ -53,6 +59,8 @@ def profile():
         password=session.get("password"),
         user=session.get("username"),
     )
+
+
 @app.route("/community/profile/<id>")
 def pubProfile(id):
     return render_template(
@@ -62,6 +70,8 @@ def pubProfile(id):
         # page=f"{session.get('username')} - Nebulus",
         # db=db,
     )
+
+
 @app.route("/courses/<course_id>")
 def courses(course_id):
     user_courses = read.get_user_courses(session.get("id"))
@@ -83,6 +93,8 @@ def courses(course_id):
         password=session.get("password"),
         user=session.get("username"),
     )
+
+
 @app.route("/courses/<course_id>/documents")
 def courses_documents(course_id):
     user_courses = read.get_user_courses(session.get("id"))
@@ -127,6 +139,8 @@ def courses_announcements(course_id):
         password=session.get("password"),
         user=session.get("username"),
     )
+
+
 @app.route("/courses/<course_id>/grades")
 def courses_grades(course_id):
     if checkLogIn(session) == False:
@@ -154,6 +168,8 @@ def courses_grades(course_id):
         )
 
     return redirect("/signin")
+
+
 @app.route("/courses/<course_id>/information")
 def courses_information(course_id):
     if checkLogIn(session) == False:
@@ -183,6 +199,8 @@ def courses_information(course_id):
         )
 
     return redirect("/signin")
+
+
 @app.route("/courses/<course_id>/learning")
 def courses_learning(course_id):
     if checkLogIn(session) == False:
@@ -210,6 +228,8 @@ def courses_learning(course_id):
         )
 
     return redirect("/signin")
+
+
 @app.route("/courses/<course_id>/settings")
 def courses_settings(course_id):
     if checkLogIn(session) == False:
@@ -237,6 +257,8 @@ def courses_settings(course_id):
         )
 
     return redirect("/signin")
+
+
 @app.route("/courses/<course_id>/textbook")
 def courses_textbook(course_id):
     if checkLogIn(session) == False:
@@ -264,6 +286,8 @@ def courses_textbook(course_id):
         )
 
     return redirect("/signin")
+
+
 @app.route("/courses/<course_id>/extensions")
 def courses_extensions(course_id):
     if checkLogIn(session) == False:
@@ -291,6 +315,8 @@ def courses_extensions(course_id):
         )
 
     return redirect("/signin")
+
+
 @app.route("/google-classroom")
 def g_classroom_auth():
     from google.auth.transport.requests import Request
@@ -323,4 +349,3 @@ def g_classroom_auth():
             print(creds)
 
     return render_template("connectClassroom.html", link=creds)
-
