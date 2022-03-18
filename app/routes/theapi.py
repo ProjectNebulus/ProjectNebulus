@@ -223,12 +223,12 @@ def signin_post():
 def signin_username():
     json = request.get_json()
     try:
-        print(f"Username:{json.get('username')}\npASSWORD:{json.get('password')}")
+        print(f"Username:{json.get('username')}\nPassword:{json.get('password')}")
     except:
         try:
             print(f"Username:{json.get('username')}\nPassword:{None}")
         except:
-            print(f"Username:{None}\nUPassword{None}")
+            print(f"Username:{None}\nPassword{None}")
     validation = read.check_password_username(
         json.get("username"), json.get("password")
     )
