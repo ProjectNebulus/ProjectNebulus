@@ -1,11 +1,12 @@
 """
 App entrypoint.
 """
-from app.routes import init_app, simple_page
+from app.routes import init_app
 from waitress import serve
+from app.routes.main_blueprint import main_blueprint
 
 app = init_app()
-app.register_blueprint(simple_page)
+app.register_blueprint(main_blueprint)
 
 if __name__ == "__main__":
     print("Started running on http://localhost:8080")

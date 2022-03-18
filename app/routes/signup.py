@@ -1,10 +1,10 @@
-from app.routes import simple_page
+from app.routes.main_blueprint import main_blueprint, logged_in
 from flask import session, render_template, redirect
 
 
-@simple_page.route("/signup", methods=["GET"])
+@main_blueprint.route("/signup", methods=["GET"])
 def signup():
-    if session.get("username") and session.get("password"):
+    if logged_in():
         return redirect("/dashboard")
     return render_template(
         "main/signup.html", page="Nebulus - Sign Up", disablebar=True

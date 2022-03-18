@@ -5,10 +5,10 @@ import os
 from flask_mail import Mail, Message
 from graphql_server.flask import GraphQLView
 from app.static.python.classes.GraphQL.graphql_schema import schema
-from functools import wraps
-
-# Define Blueprints
-simple_page = Blueprint("simple_page", __name__, template_folder="templates")
+import app.routes.about
+import app.routes.home
+import app.routes.signin
+import app.routes.signup
 
 
 def init_app():
@@ -31,27 +31,4 @@ def init_app():
                 "graphql", schema=schema.graphql_schema, graphiql=True
             ),
         )
-
-        # Import parts of the application
-        def logged_in(f):
-            @wraps(f)
-            def wrap(*args, **kwargs):
-                if not session.get("logged_in"):
-                    session.clear()
-                    return redirect("/signin")
-                return f(*args, **kwargs)
-
-            return wrap
-
-        # Register blueprints
-
-        @simple_page.errorhandler(404)
-        @simple_page.errorhandler(405)
-        def error_404(e):
-            return render_template("errors/404.html")
-
-        @simple_page.errorhandler(500)
-        def error_500(e):
-            return render_template("errors/500.html")
-
     return app

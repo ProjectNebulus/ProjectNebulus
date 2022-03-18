@@ -1,16 +1,19 @@
 from graphene_mongo import MongoengineObjectType
 
-from app.static.python.classes import Announcement as AnnouncementModel
-from app.static.python.classes import Assignment as AssignmentModel
-from app.static.python.classes import Avatar as AvatarModel
-from app.static.python.classes import AvatarSize as AvatarSizeModel
-from app.static.python.classes import Course as CourseModel
-from app.static.python.classes import DocumentFile as DocumentModel
-from app.static.python.classes import Event as EventModel
-from app.static.python.classes import Folder as FolderModel
-from app.static.python.classes import Grades as GradesModel
-from app.static.python.classes import Schoology as SchoologyModel
-from app.static.python.classes import User as UserModel
+
+from ..Assignment import Assignment as AssignmentModel
+from ..Course import Course as CourseModel
+from ..Document import DocumentFile as DocumentModel
+from ..Events import Event as EventModel
+from ..Folder import Folder as FolderModel
+from ..Grades import Grades as GradesModel
+from ..Schoology import Schoology as SchoologyModel
+from ..User import User as UserModel
+from ..Avatar import Avatar as AvatarModel
+from ..Announcement import Announcement as AnnouncementModel
+from ..AvatarSize import AvatarSize as AvatarSizeModel
+
+
 
 
 class User(MongoengineObjectType):
@@ -50,12 +53,12 @@ class Grades(MongoengineObjectType):
 
 class Avatar(MongoengineObjectType):
     class Meta:
-        model = AvatarModel
+        model = AssignmentModel
 
 
 class AvatarSize(MongoengineObjectType):
     class Meta:
-        model = AvatarSizeModel
+        model = AssignmentModel
 
 
 class Schoology(MongoengineObjectType):
@@ -65,4 +68,4 @@ class Schoology(MongoengineObjectType):
 
 class Announcement(MongoengineObjectType):
     class Meta:
-        model = AnnouncementModel
+        model = AssignmentModel

@@ -1,9 +1,10 @@
-from app.routes import simple_page
-from flask import session, render_template, redirect
+from app.routes.main_blueprint import main_blueprint
+from flask import render_template, redirect
 
 
-@simple_page.route("/", methods=["GET"])
+@main_blueprint.route("/", methods=["GET"])
 def index():
+    # return "hi"
     return render_template(
         "main/index.html", page="Nebulus - Learning, All In One"
     )
