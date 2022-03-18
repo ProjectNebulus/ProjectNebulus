@@ -1,6 +1,13 @@
 from app.routes.main_blueprint import main_blueprint
 from flask import render_template, session, request, redirect, Flask, current_app
-from app.static.python.mongodb import read, create, update, logout_from_schoology, find_user, db
+from app.static.python.mongodb import (
+    read,
+    create,
+    update,
+    logout_from_schoology,
+    find_user,
+    db,
+)
 import os
 from flask_mail import Mail, Message
 import schoolopy
@@ -55,6 +62,7 @@ def send_email():
     :return:
     """
     import random
+
     code = random.randint(10000000, 99999999)
     session["verificationCode"] = str(code)
 
@@ -90,7 +98,7 @@ def schoologyURLProcess():
 
     # https://<domain>.schoology.com/course/XXXXXXXXXX/materials
     course = url.find("course") + 7
-    return url[course: course + 10]
+    return url[course : course + 10]
 
 
 @main_blueprint.route("/api/internal/create-schoology-course")
@@ -247,10 +255,14 @@ def signin_username():
         session["password"] = json.get("password")
         session["id"] = user.id
     try:
-        print(f"Username:{session['username']}\npASSWORD:{session['password']}\nValidation {validation}")
+        print(
+            f"Username:{session['username']}\npASSWORD:{session['password']}\nValidation {validation}"
+        )
     except:
         try:
-            print(f"Username:{session['username']}\nPassword:{None}\nValidation {validation}")
+            print(
+                f"Username:{session['username']}\nPassword:{None}\nValidation {validation}"
+            )
         except:
             print(f"Username:{None}\nUPassword{None}\nValidation {validation}")
     return validation
