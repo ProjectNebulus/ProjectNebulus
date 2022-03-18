@@ -16,6 +16,9 @@ import app.routes.logout
 import app.routes.lms
 import app.routes.dashboard
 import app.routes.settings
+import app.routes.profile
+import app.routes.connections
+import app.routes.courses
 
 
 def init_app():
