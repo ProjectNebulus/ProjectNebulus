@@ -215,7 +215,7 @@ window.addEventListener('load', function () {
             let username = document.getElementById('usrname').value;
             let password = document.getElementById('psw').value;
             const xhttp = new XMLHttpRequest();
-            xhttp.open('POST', '/signin_check', true);
+            xhttp.open('POST', '/api/internal/check-signin', true);
             xhttp.setRequestHeader('Content-type', 'application/json');
             xhttp.addEventListener('load', reqListener1);
             xhttp.send(
@@ -438,7 +438,7 @@ function loginUser() {
     let username = document.getElementById('usrname').value;
     let password = document.getElementById('psw').value;
     const xhttp = new XMLHttpRequest();
-    xhttp.open('POST', '/signin', true);
+    xhttp.open('POST', '/api/internal/sign-in', true);
     xhttp.setRequestHeader('Content-type', 'application/json');
     xhttp.addEventListener('load', reqListener2);
     xhttp.send(

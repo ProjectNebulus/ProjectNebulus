@@ -1,5 +1,26 @@
 from app.routes.main_blueprint import main_blueprint
-from flask import render_template, session
+from flask import render_template, session, request, redirect
+from app.static.python.mongodb import read, create, update, logout_from_schoology, find_user, db
+import os
+from flask_mail import Mail, Message
+import schoolopy
+import re
+from app.static.python.spotify import get_song
+
+KEY = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
+SECRET = "59ccaaeb93ba02570b1281e1b0a90e18"
+sc = schoolopy.Schoology(schoolopy.Auth(KEY, SECRET))
+regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
+secret_key = os.getenv("MONGOPASS")
+check_user_params = True
+config = {}
+main_blueprint.config["MAIL_SERVER"] = "smtp.gmail.com"
+main_blueprint.config["MAIL_PORT"] = 465
+main_blueprint.config["MAIL_USERNAME"] = os.getenv("email")
+main_blueprint.config["MAIL_PASSWORD"] = os.getenv("password")
+main_blueprint.config["MAIL_USE_TLS"] = False
+main_blueprint.config["MAIL_USE_SSL"] = True
+mail = Mail(main_blueprint)
 
 
 @main_blueprint.route("/api", methods=["GET"])
@@ -19,7 +40,7 @@ def developers():
     )
 
 
-@app.route("/api/internal/send-email", methods=["POST"])
+@main_blueprint.route("/api/internal/send-email", methods=["POST"])
 def send_email():
     """
     POST /api/internal/send-email
@@ -50,7 +71,7 @@ def send_email():
     return "success"
 
 
-@app.route("/api/internal/username-exists", methods=["POST"])
+@main_blueprint.route("/api/internal/username-exists", methods=["POST"])
 def username_check():
     usrname = request.form.get("u")
     untaken = True
@@ -58,9 +79,10 @@ def username_check():
         return untaken
 
 
-@app.route("/api/internal/generate-schoology-url", methods=["GET"])
+@main_blueprint.route("/api/internal/generate-schoology-url", methods=["GET"])
 def schoologyURLProcess():
-    if url == request.args.get("url") is None:
+    url = request.args.get("url")
+    if url is None:
         return "0"
 
     # https://<domain>.schoology.com/course/XXXXXXXXXX/materials
@@ -68,18 +90,18 @@ def schoologyURLProcess():
     return url[course: course + 10]
 
 
-@app.route("/api/internal/create-schoology-course")
+@main_blueprint.route("/api/internal/create-schoology-course")
 def import_schoology():
     return "success"
 
 
-@app.route("/api/internal/schoology-callback")
+@main_blueprint.route("/api/internal/schoology-callback")
 def close():
     session["token"] = "authorized"
     return "<script>window.close();</script>"
 
 
-@app.route("/api/internal/create-course", methods=["POST"])
+@main_blueprint.route("/api/internal/create-course", methods=["POST"])
 def create_course():
     data = request.get_json()
     if data["name"] == "":
@@ -94,7 +116,7 @@ def create_course():
     return "Course Created"
 
 
-@app.route("/api/internal/spotify-status", methods=["POST"])
+@main_blueprint.route("/api/internal/spotify-status", methods=["POST"])
 def spotify_status():
     a = get_song()
     string = ""
@@ -105,7 +127,7 @@ def spotify_status():
     return string
 
 
-@app.route("/api/interal/generate-schoology-signin-url")
+@main_blueprint.route("/api/interal/generate-schoology-signin-url")
 def generate_url_signin():
     key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
     secret = "59ccaaeb93ba02570b1281e1b0a90e18"
@@ -124,12 +146,12 @@ def generate_url_signin():
     return url
 
 
-@app.route("/api/internal/connected-to-schoology")
+@main_blueprint.route("/api/internal/connected-to-schoology")
 def checkConnectedSchoology():
     return str(session["token"] is not None)
 
 
-@app.route("/api/internal/connect-to-schoology", methods=["POST"])
+@main_blueprint.route("/api/internal/connect-to-schoology", methods=["POST"])
 def loginpost():
     session["token"] = None
     import schoolopy
@@ -170,13 +192,10 @@ def loginpost():
     }
 
     update.schoologyLogin(session["id"], schoology)
+    return str(sc.get_me().name_display + "•" + sc.get_me().primary_email)
 
 
-m
-return str(sc.get_me().name_display + "•" + sc.get_me().primary_email)
-
-
-@app.route("/api/internal/signup", methods=["POST"])
+@main_blueprint.route("/api/internal/signup", methods=["POST"])
 def signup_post():
     data = request.get_json()
 
@@ -189,7 +208,7 @@ def signup_post():
     return validation[0]
 
 
-@app.route("/api/internal/sign-in", methods=["POST"])
+@main_blueprint.route("/api/internal/sign-in", methods=["POST"])
 def signin_post():
     if not session.get("username") and not session.get("password"):
         return "false"
@@ -197,7 +216,7 @@ def signin_post():
     return "true"
 
 
-@app.route("/api/internal/check-signin", methods=["POST"])
+@main_blueprint.route("/api/internal/check-signin", methods=["POST"])
 def signin_username():
     json = request.get_json()
     validation = read.check_password_username(
@@ -221,7 +240,7 @@ def signin_username():
     return validation
 
 
-@app.route("/api/internal/logout-of-schoology")
+@main_blueprint.route("/api/internal/logout-of-schoology")
 def logout_from_schoology2():
     session["schoologyEmail"] = None
     session["schoologyName"] = None
