@@ -222,6 +222,13 @@ def signin_post():
 @main_blueprint.route("/api/internal/check-signin", methods=["POST"])
 def signin_username():
     json = request.get_json()
+    try:
+        print(f"Username:{json.get('username')}\npASSWORD:{json.get('password')}")
+    except:
+        try:
+            print(f"Username:{json.get('username')}\nPassword:{None}")
+        except:
+            print(f"Username:{None}\nUPassword{None}")
     validation = read.check_password_username(
         json.get("username"), json.get("password")
     )
@@ -239,7 +246,13 @@ def signin_username():
         session["email"] = user.email
         session["password"] = json.get("password")
         session["id"] = user.id
-
+    try:
+        print(f"Username:{session['username']}\npASSWORD:{session['password']}\nValidation {validation}")
+    except:
+        try:
+            print(f"Username:{session['username']}\nPassword:{None}\nValidation {validation}")
+        except:
+            print(f"Username:{None}\nUPassword{None}\nValidation {validation}")
     return validation
 
 
