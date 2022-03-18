@@ -13,6 +13,7 @@ from app.static.python.classes import Schoology as SchoologyModel
 from app.static.python.classes import User as UserModel
 
 
+# todo: fix AvatarSize, Avatar, and Announcement objects of "AssertionError: The attribute model in Announcement.Meta must be a valid Mongoengine Model. Received "<class 'module'>" instead."
 class User(MongoengineObjectType):
     class Meta:
         model = UserModel
@@ -48,15 +49,14 @@ class Grades(MongoengineObjectType):
         model = GradesModel
 
 
-#
-# class Avatar(MongoengineObjectType):
-#     class Meta:
-#         model = AvatarModel
+class Avatar(MongoengineObjectType):
+    class Meta:
+        model = AssignmentModel
 
 
-# class AvatarSize(MongoengineObjectType):
-#     class Meta:
-#         model = AvatarSizeModel
+class AvatarSize(MongoengineObjectType):
+    class Meta:
+        model = AssignmentModel
 
 
 class Schoology(MongoengineObjectType):
@@ -64,11 +64,6 @@ class Schoology(MongoengineObjectType):
         model = SchoologyModel
 
 
-# class Announcement(MongoengineObjectType):
-#     class Meta:
-#         model = AnnouncementModel
-
 class Announcement(MongoengineObjectType):
     class Meta:
-        # model = AssignmentModel
-        model = AnnouncementModel
+        model = AssignmentModel
