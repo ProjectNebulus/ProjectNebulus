@@ -79,6 +79,32 @@
             </div>
         </div>
     </div>
+    <br>
+    <img id="scrollCat" height=200px src="/static/images/nebulusCats/100_cat.png"></img>
     </body>
+<style>
+    ::-webkit-scrollbar-button {
+        height: 8000px;
+    / / for horizontal scrollbar
+    }
+
+    #scrollCat {
+        position: -webkit-sticky;
+        position: sticky;
+    }
+
+</style>
+<script>
+    $(document).scroll(function () {
+        const cats = ["100_cat", "black_cat", "blue_cat", "blurple_cat", "cake_cat", "cat1", "green_cat", "ocean_cat", "pink_cat", "red_cat", "river_cat", "yellow_cat"]
+
+        var y = $(this).scrollTop();
+        var current = (Math.floor(y / 80) - 1) % 12;
+
+        document.getElementById("scrollCat").src = "/static/images/nebulusCats/" + cats[current] + ".png"
+
+    });
+
+</script>
 {% include "footer.html" %}
 {% endblock %}
