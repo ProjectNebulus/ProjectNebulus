@@ -1,5 +1,5 @@
 from main_blueprint import main_blueprint
-from flask import session, render_template, redirect
+from flask import render_template, redirect
 
 
 @main_blueprint.route("/", methods=["GET"])

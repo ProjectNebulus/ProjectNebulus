@@ -1,3 +1,9 @@
-import flask
+from flask import render_template
 
-error_404 = flask.Blueprint('404', __name__, url_prefix='/404', template_folder='templates', static_folder='static')
+from error_blueprint import error_blueprint
+
+
+@error_blueprint.errorhandler(404)
+@error_blueprint.errorhandler(405)
+def error404():
+    return render_template("404.html")
