@@ -6,7 +6,8 @@ from flask import render_template, session
 def index():
     # return "hi"
     return render_template(
-        "main/home.html", page="Nebulus - Learning, All In One",
+        "main/home.html",
+        page="Nebulus - Learning, All In One",
         password=session.get("password"),
         user=session.get("username"),
     )
