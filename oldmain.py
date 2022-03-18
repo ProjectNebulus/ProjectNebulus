@@ -614,17 +614,6 @@ def dashboard():
         new_account=new_user == "true",
     )
 
-
-@app.route("/about")
-def about():
-    return render_template(
-        "about.html",
-        page="Nebulus - About Us",
-        password=session.get("password"),
-        user=session.get("username"),
-    )
-
-
 @app.route("/lms")
 @logged_in
 def lms():
@@ -641,35 +630,6 @@ def lms():
         page="Nebulus - Learning",
         new_account=new_user == "true",
     )
-
-
-@app.route("/music")
-@logged_in
-def music():
-    return render_template(
-        "music.html",
-        page="Nebulus - Music",
-        password=session.get("password"),
-        user=session.get("username"),
-    )
-
-
-# @app.route("/sw.js", methods=["GET"])
-# def sw():
-#     return app.send_static_file("static/js/sw.js")
-
-
-@app.route("/holidays")
-@logged_in
-def vh():
-    return render_template(
-        "holidays.html",
-        page="Nebulus - Virtual Holidays",
-        password=session.get("password"),
-        user=session.get("username"),
-    )
-
-
 @app.route("/signup")
 def signup():
     # If the user is already logged in, redirect to the dashboard
@@ -748,31 +708,6 @@ def logout_from_schoology2():
     logout_from_schoology(find_user(username=session["username"]).id)
     return redirect("/settings")
 
-
-@app.route("/pricing")
-@logged_in
-def pricing():
-    return render_template("errors/soon.html", page="Pricing | Coming Soon")
-
-
-@app.route("/points")
-@logged_in
-def points():
-    return render_template("points.html", page="Nebulus Points")
-
-
-@app.route("/api")
-@logged_in
-def api():
-    return render_template("errors/soon.html", page="API | Coming Soon")
-
-
-app.add_url_rule(
-    "/api",
-    view_func=GraphQLView.as_view(
-        "graphql", schema=schema.graphql_schema, graphiql=True
-    ),
-)
 
 print(
     "Site is running at http://0.0.0.0:8080 or http://localhost:8080 (or https://Project-Nebulus.nicholasxwang.repl.co if Replit) . Please test it on CHROME, not SAFARI!"
