@@ -48,14 +48,15 @@ class Grades(MongoengineObjectType):
         model = GradesModel
 
 
-class Avatar(MongoengineObjectType):
-    class Meta:
-        model = AvatarModel
+#
+# class Avatar(MongoengineObjectType):
+#     class Meta:
+#         model = AvatarModel
 
 
-class AvatarSize(MongoengineObjectType):
-    class Meta:
-        model = AvatarSizeModel
+# class AvatarSize(MongoengineObjectType):
+#     class Meta:
+#         model = AvatarSizeModel
 
 
 class Schoology(MongoengineObjectType):
@@ -63,6 +64,11 @@ class Schoology(MongoengineObjectType):
         model = SchoologyModel
 
 
+# class Announcement(MongoengineObjectType):
+#     class Meta:
+#         model = AnnouncementModel
+
 class Announcement(MongoengineObjectType):
     class Meta:
+        # model = AssignmentModel
         model = AnnouncementModel

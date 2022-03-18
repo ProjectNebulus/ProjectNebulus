@@ -6,7 +6,7 @@ from .Snowflake import Snowflake
 
 
 class Announcement(Snowflake):
-    meta = {"collection": "announcements"}
+    meta = {"collection": "Announcements"}
     course = ReferenceField("Course", required=True)
     title = StringField(required=True)
     content = StringField(required=True)
