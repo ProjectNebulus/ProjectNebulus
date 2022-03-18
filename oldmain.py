@@ -1,24 +1,14 @@
 # Exporting Environment Variables in the .env file
-
 from flask import Flask, redirect, render_template, request, session
-from graphql_server.flask import GraphQLView
-from waitress import serve
-import certifi
 import schoolopy
 from flask_mail import Mail, Message
 from functools import wraps
 import os
 from app.static.python.classes.GraphQL.graphql_schema import schema
-
-certifi.where()
-
 KEY = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
 SECRET = "59ccaaeb93ba02570b1281e1b0a90e18"
-
 sc = schoolopy.Schoology(schoolopy.Auth(KEY, SECRET))
-
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
-# Variables
 app = Flask("app")
 app.secret_key = os.getenv("MONGOPASS")
 check_user_params = True
@@ -28,52 +18,7 @@ app.config["MAIL_USERNAME"] = os.getenv("email")
 app.config["MAIL_PASSWORD"] = os.getenv("password")
 app.config["MAIL_USE_TLS"] = False
 app.config["MAIL_USE_SSL"] = True
-
 mail = Mail(app)
-
-
-# app routes
-
-
-@app.route("/api/internal/send-email", methods=["POST"])
-def send_email():
-    """
-    POST /api/internal/send-email
-    Args
-    - recipients
-    - message-head
-    - message-body
-    - message-html-file
-    :return:
-    """
-    import random
-    code = random.randint(10000000, 99999999)
-    session["verificationCode"] = str(code)
-
-    msg = Message(
-        f"Your Nebulus Email Verification Code [{code}] ",
-        sender=f"Nebulus <{os.getenv('email')}>",
-        recipients=[request.form.get("email")],
-    )
-    import codecs
-
-    htmlform = str(codecs.open("app/templates/email.html", "r").read()).replace(
-        "1029", str(code)
-    )
-
-    msg.html = htmlform
-    mail.send(msg)
-    return "success"
-
-
-@app.route("/api/internal/username-exists", methods=["POST"])
-def username_check():
-    usrname = request.form.get("u")
-    untaken = True
-    for i in db.Accounts:
-        return untaken
-
-
 @app.route("/schoology")
 def schoology():
     key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
@@ -95,60 +40,10 @@ def schoology():
 
     # Open OAuth authorization webpage. Give time to authorize.
     return render_template("connectSchoology.html", url=url)
-
-
-@app.route("/api/internal/generate-schoology-url", methods=["GET"])
-def schoologyURLProcess():
-    if url == request.args.get("url") is None:
-        return "0"
-
-    # https://<domain>.schoology.com/course/XXXXXXXXXX/materials
-    course = url.find("course") + 7
-    return url[course: course + 10]
-
-
 @app.route("/google34d8c04c4b82b69a.html")
 def googleVerification():
     # DO NOT REMOVE, IF YOU DO GOOGLE SEARCH CONSOLE WON'T WORK!
     return render_template("google34d8c04c4b82b69a.html")
-
-
-@app.route("/createCourseSchoology")
-def import_schoology():
-    return "success"
-
-
-@app.route("/api/internal/schoology-callback")
-def close():
-    session["token"] = "authorized"
-    return "<script>window.close();</script>"
-
-
-@app.route("/api/internal/create-course", methods=["POST"])
-def create_course():
-    data = request.get_json()
-    if data["name"] == "":
-        data["name"] = data["template"]
-    if data["teacher"] == "":
-        data["teacher"] = "Unknown Teacher"
-    if not data["template"]:
-        data["template"] = None
-
-    data["authorizedUsers"] = [session.get("id")]
-    create.create_course(data)
-    return "Course Created"
-
-
-@app.route("/api/internal/spotify-status", methods=["POST"])
-
-def spotify_status():
-    a = get_song()
-    string = ""
-    if len(a) == 3:
-        string = a[0] + " - " + a[1]
-    else:
-        string = "You aren't listening to anything!"
-    return string
 
 @app.route("/profile")
 def profile():
@@ -158,8 +53,6 @@ def profile():
         password=session.get("password"),
         user=session.get("username"),
     )
-
-
 @app.route("/community/profile/<id>")
 def pubProfile(id):
     return render_template(
@@ -169,27 +62,6 @@ def pubProfile(id):
         # page=f"{session.get('username')} - Nebulus",
         # db=db,
     )
-
-
-@app.route("/generateURL_Signin")
-def generate_url_signin():
-    key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
-    secret = "59ccaaeb93ba02570b1281e1b0a90e18"
-    # Instantiate with 'three_legged' set to True for three_legged oauth.
-    # Make sure to replace 'https://www.schoology.com' with your school's domain.
-    # DOMAIN = 'https://www.schoology.com'
-    DOMAIN = "https://bins.schoology.com"
-
-    auth = schoolopy.Auth(key, secret, three_legged=True, domain=DOMAIN)
-    # Request authorization URL to open in another window.
-    url = auth.request_authorization(callback_url=(request.url_root + "closeSchoology"))
-    session["request_token"] = auth.request_token
-    session["request_token_secret"] = auth.request_token_secret
-    session["access_token_secret"] = auth.access_token_secret
-    session["access_token"] = auth.access_token
-    return url
-
-
 @app.route("/courses/<course_id>")
 def courses(course_id):
     user_courses = read.get_user_courses(session.get("id"))
@@ -211,10 +83,7 @@ def courses(course_id):
         password=session.get("password"),
         user=session.get("username"),
     )
-
-
 @app.route("/courses/<course_id>/documents")
-
 def courses_documents(course_id):
     user_courses = read.get_user_courses(session.get("id"))
 
@@ -238,7 +107,6 @@ def courses_documents(course_id):
 
 
 @app.route("/courses/<course_id>/announcements")
-
 def courses_announcements(course_id):
     user_courses = read.get_user_courses(session.get("id"))
 
@@ -259,8 +127,6 @@ def courses_announcements(course_id):
         password=session.get("password"),
         user=session.get("username"),
     )
-
-
 @app.route("/courses/<course_id>/grades")
 def courses_grades(course_id):
     if checkLogIn(session) == False:
@@ -288,8 +154,6 @@ def courses_grades(course_id):
         )
 
     return redirect("/signin")
-
-
 @app.route("/courses/<course_id>/information")
 def courses_information(course_id):
     if checkLogIn(session) == False:
@@ -319,8 +183,6 @@ def courses_information(course_id):
         )
 
     return redirect("/signin")
-
-
 @app.route("/courses/<course_id>/learning")
 def courses_learning(course_id):
     if checkLogIn(session) == False:
@@ -348,8 +210,6 @@ def courses_learning(course_id):
         )
 
     return redirect("/signin")
-
-
 @app.route("/courses/<course_id>/settings")
 def courses_settings(course_id):
     if checkLogIn(session) == False:
@@ -377,8 +237,6 @@ def courses_settings(course_id):
         )
 
     return redirect("/signin")
-
-
 @app.route("/courses/<course_id>/textbook")
 def courses_textbook(course_id):
     if checkLogIn(session) == False:
@@ -406,8 +264,6 @@ def courses_textbook(course_id):
         )
 
     return redirect("/signin")
-
-
 @app.route("/courses/<course_id>/extensions")
 def courses_extensions(course_id):
     if checkLogIn(session) == False:
@@ -435,59 +291,7 @@ def courses_extensions(course_id):
         )
 
     return redirect("/signin")
-
-
-@app.route("/api/internal/connected-to-schoology")
-def checkConnectedSchoology():
-    return str(session["token"] is not None)
-
-@app.route("/schoology", methods=["POST"])
-
-def loginpost():
-    session["token"] = None
-    import schoolopy
-
-    key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
-    secret = "59ccaaeb93ba02570b1281e1b0a90e18"
-    sc = schoolopy.Schoology(schoolopy.Auth(key, secret))
-
-    sc.limit = 100
-    request_token = session["request_token"]
-    request_token_secret = session["request_token_secret"]
-    access_token_secret = session["access_token_secret"]
-    access_token = session["access_token"]
-    auth = schoolopy.Auth(
-        key,
-        secret,
-        domain=request.form.get("link"),
-        three_legged=True,
-        request_token=request_token,
-        request_token_secret=request_token_secret,
-        access_token=access_token,
-        access_token_secret=access_token_secret,
-    )
-    auth.authorize()
-    if not auth.authorized:
-        return "error!!!"
-    sc = schoolopy.Schoology(auth)
-    sc.limit = 100
-    session["Schoologyname"] = sc.get_me().name_display
-    session["Schoologyemail"] = sc.get_me().primary_email
-    schoology = {
-        "Schoology_request_token": request_token,
-        "Schoology_request_secret": request_token_secret,
-        "Schoology_access_token": access_token,
-        "Schoology_access_secret": access_token_secret,
-        "schoologyName": session["Schoologyname"],
-        "schoologyEmail": session["Schoologyemail"],
-    }
-
-    update.schoologyLogin(session["id"], schoology)
-m
-    return str(sc.get_me().name_display + "•" + sc.get_me().primary_email)
-
-
-@app.route("/gclassroom")
+@app.route("/google-classroom")
 def g_classroom_auth():
     from google.auth.transport.requests import Request
     from google.oauth2.credentials import Credentials
@@ -520,78 +324,3 @@ def g_classroom_auth():
 
     return render_template("connectClassroom.html", link=creds)
 
-
-@app.route("/api/internal/signup", methods=["POST"])
-def signup_post():
-    data = request.get_json()
-
-    validation = create.create_user(data)
-    if validation[0] == "0":
-        session["username"] = validation[1].username
-        session["email"] = validation[1].email
-        session["password"] = validation[1].password
-        session["id"] = validation[1].id
-    return validation[0]
-
-
-@app.route("/api/internal/sign-in", methods=["POST"])
-def signin_post():
-    if not session.get("username") and not session.get("password"):
-        return "false"
-    session["logged_in"] = True
-    return "true"
-
-
-def handler(signum, frame):
-    print("Forever is over!")
-    raise Exception("end of time")
-
-
-def loop_forever():
-    while 1:
-        print("sec")
-        time.sleep(1)
-
-
-@app.route("/api/internal/check-signin", methods=["POST"])
-def signin_username():
-    json = request.get_json()
-    validation = read.check_password_username(
-        json.get("username"), json.get("password")
-    )
-
-    if validation.split("-")[0] == "true" and validation.split("-")[1] == "true":
-        if re.fullmatch(regex, json.get("username")):
-            # If the username is an email, then we need to get the username from the database
-            user = read.find_user(email=json.get("username"))
-
-        else:
-            # If the username is not an email, then we need to get the email from the database
-            user = read.find_user(username=json.get("username"))
-
-        session["username"] = user.username
-        session["email"] = user.email
-        session["password"] = json.get("password")
-        session["id"] = user.id
-
-    return validation
-
-
-@app.route("/api/internal/logout-of-schoology")
-def logout_from_schoology2():
-    session["schoologyEmail"] = None
-    session["schoologyName"] = None
-    session["token"] = None
-    session["request_token"] = None
-    session["request_token_secret"] = None
-    session["access_token_secret"] = None
-    session["access_token"] = None
-    "hi"
-    logout_from_schoology(find_user(username=session["username"]).id)
-    return redirect("/settings")
-
-
-print(
-    "Site is running at http://0.0.0.0:8080 or http://localhost:8080 (or https://Project-Nebulus.nicholasxwang.repl.co if Replit) . Please test it on CHROME, not SAFARI!"
-)
-serve(app, host="0.0.0.0", port=8080)
