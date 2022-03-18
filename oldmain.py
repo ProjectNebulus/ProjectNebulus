@@ -581,55 +581,6 @@ def g_classroom_auth():
 
     return render_template("connectClassroom.html", link=creds)
 
-
-@app.route("/settings")
-@logged_in
-def settings():
-    theschoology = read.getSchoology(username=session.get("username"))
-    thegoogleclassroom = read.getClassroom(username=session.get("username"))
-
-    return render_template(
-        "user/settings.html",
-        page="Nebulus - Account Settings",
-        session=session,
-        password=session.get("password"),
-        user=session.get("username"),
-        schoology=theschoology,
-    )
-
-
-@app.route("/dashboard")
-@logged_in
-def dashboard():
-    new_user = request.args.get("new_user", default="false", type=str)
-    user_courses = read.get_user_courses(session.get("id"))
-    return render_template(
-        "dashboard.html",
-        password=session["password"],
-        user=session["username"],
-        email=session["email"],
-        user_courses=user_courses,
-        read=read,
-        page="Nebulus - Dashboard",
-        new_account=new_user == "true",
-    )
-
-@app.route("/lms")
-@logged_in
-def lms():
-    new_user = request.args.get("new_user", default="false", type=str)
-    user_acc = read.find_user(id=session["id"])
-    user_courses = read.get_user_courses(session["id"])
-    return render_template(
-        "lms.html",
-        password=session["password"],
-        user=session["username"],
-        user_acc=user_acc,
-        user_courses=user_courses,
-        read=read,
-        page="Nebulus - Learning",
-        new_account=new_user == "true",
-    )
 @app.route("/signup")
 def signup():
     # If the user is already logged in, redirect to the dashboard

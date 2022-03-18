@@ -13,6 +13,9 @@ import app.routes.api
 import app.routes.points
 import app.routes.pricing
 import app.routes.logout
+import app.routes.lms
+import app.routes.dashboard
+import app.routes.settings
 
 
 def init_app():
