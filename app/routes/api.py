@@ -1,5 +1,5 @@
 from app.routes.main_blueprint import main_blueprint
-from flask import render_template, session, request, redirect
+from flask import render_template, session, request, redirect, Flask, current_app
 from app.static.python.mongodb import read, create, update, logout_from_schoology, find_user, db
 import os
 from flask_mail import Mail, Message
@@ -14,13 +14,13 @@ regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 secret_key = os.getenv("MONGOPASS")
 check_user_params = True
 config = {}
-main_blueprint.config["MAIL_SERVER"] = "smtp.gmail.com"
-main_blueprint.config["MAIL_PORT"] = 465
-main_blueprint.config["MAIL_USERNAME"] = os.getenv("email")
-main_blueprint.config["MAIL_PASSWORD"] = os.getenv("password")
-main_blueprint.config["MAIL_USE_TLS"] = False
-main_blueprint.config["MAIL_USE_SSL"] = True
-mail = Mail(main_blueprint)
+Flask(__name__).config["MAIL_SERVER"] = "smtp.gmail.com"
+current_app.config["MAIL_PORT"] = 465
+current_app.config["MAIL_USERNAME"] = os.getenv("email")
+current_app.config["MAIL_PASSWORD"] = os.getenv("password")
+current_app.config["MAIL_USE_TLS"] = False
+current_app.config["MAIL_USE_SSL"] = True
+mail = Mail(current_app)
 
 
 @main_blueprint.route("/api", methods=["GET"])
