@@ -4,6 +4,4 @@ from flask import session, render_template, redirect
 
 @main_blueprint.route("/", methods=["GET"])
 def index():
-    return render_template(
-        "main/index.html", page="Nebulus - Learning, All In One"
-    )
+    return render_template("main/index.html", page="Nebulus - Learning, All In One")

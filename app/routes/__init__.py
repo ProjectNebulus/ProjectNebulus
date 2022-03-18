@@ -7,6 +7,7 @@ from graphql_server.flask import GraphQLView
 from app.static.python.classes.GraphQL.graphql_schema import schema
 from functools import wraps
 
+
 def init_app():
     """
     Creates a flask application.

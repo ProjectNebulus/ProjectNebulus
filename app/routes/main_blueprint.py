@@ -1,7 +1,7 @@
 from flask import Blueprint, session
 from app.static.python.mongodb import read as r
 
-main_blueprint = Blueprint('example_blueprint', __name__)
+main_blueprint = Blueprint("example_blueprint", __name__)
 
 
 def logged_in(f):
