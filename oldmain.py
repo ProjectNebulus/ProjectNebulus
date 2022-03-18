@@ -45,6 +45,7 @@ def logged_in(f):
 
     return wrap
 
+
 """
 @app.route("/sendEmail", methods=["POST"])
 def email():
@@ -69,6 +70,8 @@ def email():
     return "success"
 
 """
+
+
 @app.route("/checkUsernameExists", methods=["POST"])
 def username_check():
     usrname = request.form.get("u")
@@ -109,7 +112,7 @@ def schoologyURLProcess():
 
     # https://<domain>.schoology.com/course/XXXXXXXXXX/materials
     course = url.find("course") + 7
-    return url[course: course + 10]
+    return url[course : course + 10]
 
 
 @app.route("/google34d8c04c4b82b69a.html")
@@ -548,6 +551,8 @@ m
     return str(sc.get_me().name_display + "•" + sc.get_me().primary_email)
 
 """
+
+
 @app.route("/gclassroom")
 def g_classroom_auth():
     from google.auth.transport.requests import Request
@@ -614,6 +619,7 @@ def dashboard():
         new_account=new_user == "true",
     )
 
+
 @app.route("/lms")
 @logged_in
 def lms():
@@ -630,6 +636,8 @@ def lms():
         page="Nebulus - Learning",
         new_account=new_user == "true",
     )
+
+
 @app.route("/signup")
 def signup():
     # If the user is already logged in, redirect to the dashboard
@@ -694,6 +702,7 @@ def signin_username():
         session["id"] = user.id
 
     return validation
+
 
 @app.route("/logoutSchoology")
 def logout_from_schoology2():
