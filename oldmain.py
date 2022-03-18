@@ -5,6 +5,7 @@ from flask_mail import Mail, Message
 from functools import wraps
 import os
 from app.static.python.classes.GraphQL.graphql_schema import schema
+
 KEY = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
 SECRET = "59ccaaeb93ba02570b1281e1b0a90e18"
 sc = schoolopy.Schoology(schoolopy.Auth(KEY, SECRET))
@@ -20,10 +21,8 @@ app.config["MAIL_USE_TLS"] = False
 app.config["MAIL_USE_SSL"] = True
 mail = Mail(app)
 
+
 @app.route("/google34d8c04c4b82b69a.html")
 def googleVerification():
     # DO NOT REMOVE, IF YOU DO GOOGLE SEARCH CONSOLE WON'T WORK!
     return render_template("google34d8c04c4b82b69a.html")
-
-
-
