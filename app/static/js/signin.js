@@ -13,11 +13,13 @@ function SSO() {
             document.getElementById('signin_form').style.display = 'none';
             document.getElementById("sso").innerHTML = "Return to Log In"
             document.getElementById('signin_form2').style.display = 'block';
+            document.getElementById("schoologyy").style.display = "none";
 
         }else {
             document.getElementById('signin_form').style.display = 'block';
             document.getElementById('signin_form2').style.display = 'none';
             document.getElementById("sso").innerHTML = "<span class=\"material-icons-outlined md-36\">key</span> SSO Login"
+            document.getElementById("schoologyy").style.display = "block";
         }
 
 
@@ -29,12 +31,14 @@ function Schoology() {
         document.getElementById("schoologyy").innerHTML = "Return to Log In"
         document.getElementById('signin_form3').style.display = 'block';
         document.getElementById("launchBTN").style.display = "block";
+        document.getElementById("sso").style.display = "none";
 
     }else {
         document.getElementById('signin_form').style.display = 'block';
         document.getElementById('signin_form3').style.display = 'none';
         document.getElementById("schoologyy").innerHTML = "Schoology Login"
         document.getElementById("launchBTN").style.display = "none";
+        document.getElementById("sso").style.display = "block";
     }
 
 
