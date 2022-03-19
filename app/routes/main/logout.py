@@ -1,8 +1,10 @@
-from app.routes.main.__init__ import main_blueprint
+from . import main_blueprint
 from flask import session, redirect
+from ...utils.logged_in import logged_in
 
 
 @main_blueprint.route("/logout", methods=["GET"])
+@logged_in
 def logout():
     session["username"] = None
     session["email"] = None

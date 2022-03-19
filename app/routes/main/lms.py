@@ -1,12 +1,12 @@
-from app.routes.main.__init__ import main_blueprint, logged_in
+from . import main_blueprint
 from flask import render_template, redirect, session, request
-from app.static.python.mongodb import read
+from ...static.python.mongodb import read
+from ...utils.logged_in import logged_in
 
 
 @main_blueprint.route("/lms", methods=["GET"])
+@logged_in
 def lms():
-    if not logged_in():
-        return redirect("/")
     new_user = request.args.get("new_user", default="false", type=str)
     user_acc = read.find_user(id=session["id"])
     user_courses = read.get_user_courses(session["id"])
