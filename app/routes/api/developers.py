@@ -1,7 +1,9 @@
 from flask import render_template, Blueprint, session
 from .__init__ import api
 
-developers = Blueprint('developers', __name__, url_prefix='/api/developers', static_folder='static')
+developers = Blueprint(
+    "developers", __name__, url_prefix="/api/developers", static_folder="static"
+)
 api.register_blueprint(developers)
 
 
