@@ -18,7 +18,7 @@ import app.routes.settings
 import app.routes.profile
 import app.routes.connections
 import app.routes.courses
-
+import app.routes.error_handlers
 
 def init_app():
     """

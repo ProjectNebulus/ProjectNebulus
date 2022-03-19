@@ -1,6 +1,6 @@
 from flask import render_template
 
-from error_blueprint import error_blueprint
+from app.routes.error_handlers.error_blueprint import error_blueprint
 
 
 @error_blueprint.errorhandler(404)
