@@ -4,7 +4,8 @@ from .__init__ import internal
 from .private_endpoint import private_endpoint
 from .....static.python.mongodb import update
 
-@internal.route('/connect-to-schoology', methods=['POST'])
+
+@internal.route("/connect-to-schoology", methods=["POST"])
 @private_endpoint
 def connect_schoology():
     session["token"] = None

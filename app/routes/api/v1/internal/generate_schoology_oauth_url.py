@@ -4,7 +4,7 @@ import schoolopy
 from .private_endpoint import private_endpoint
 
 
-@internal.route('/generate-schoology-oauth-url', methods=['GET'])
+@internal.route("/generate-schoology-oauth-url", methods=["GET"])
 @private_endpoint
 def generate_url_signin():
     key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
