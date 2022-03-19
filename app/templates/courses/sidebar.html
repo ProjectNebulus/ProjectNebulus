@@ -3,11 +3,13 @@
         <a href="" class="flex pl-2.5 mb-5">
 
                     <span style="text-align: center"
-                          class="self-center text-lg font-semibold whitespace-nowrap text-black dark:text-white text-black">{{ course.name }}</span>
+                          class="self-center text-lg font-semibold whitespace-nowrap text-black dark:text-white text-black"><img
+                            src="https://bins.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg?"
+                            style="object-fit: cover; width:40px; height:40px; border-radius:10px;display: inline-block; margin: 10px;"> {{ course.name }}</span>
         </a>
         <ul class="space-y-2">
             <li>
-                <a href="/courses/{{ course_id }}/documents" target="frame"
+                <a href="/courses/course/{{ course_id }}/documents" target="frame"
                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-100 dark:hover:bg-gray-700 dark:bg-gray-100">
                     <p class="dark:text-gray-400"><i class="material-icons">description</i></p>
 
@@ -15,7 +17,7 @@
                 </a>
             </li>
             <li>
-                <a href="/courses/{{ course_id }}/announcements" target="frame"
+                <a href="/courses/course/{{ course_id }}/announcements" target="frame"
                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-100 dark:hover:bg-gray-700">
                     <p class="dark:text-gray-400"><i class="material-icons">campaign</i></p>
 
@@ -24,7 +26,7 @@
                 </a>
             </li>
             <li>
-                <a href="/courses/{{ course_id }}/grades" target="frame"
+                <a href="/courses/course/{{ course_id }}/grades" target="frame"
                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-100 dark:hover:bg-gray-700">
                     <p class="dark:text-gray-400"><i class="material-icons">trending_up</i></p>
 
@@ -32,7 +34,7 @@
                 </a>
             </li>
             <li>
-                <a href="/courses/{{ course_id }}/information" target="frame"
+                <a href="/courses/course/{{ course_id }}/information" target="frame"
                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-100 dark:hover:bg-gray-700">
                     <p class="dark:text-gray-400"><i class="material-icons">info</i></p>
 
@@ -40,7 +42,7 @@
                 </a>
             </li>
             <li>
-                <a href="/courses/{{ course_id }}/settings" target="frame"
+                <a href="/courses/course/{{ course_id }}/settings" target="frame"
                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-100 dark:hover:bg-gray-700">
                     <p class="dark:text-gray-400"><i class="material-icons">settings</i></p>
 
@@ -48,21 +50,21 @@
                 </a>
             </li>
             <li>
-                <a href="/courses/{{ course_id }}/textbook" target="frame"
+                <a href="/courses/course/{{ course_id }}/textbook" target="frame"
                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-100 dark:hover:bg-gray-700">
                     <p class="dark:text-gray-400"><i class="material-icons">menu_book</i></p>
                     <span class="flex-1 ml-3 whitespace-nowrap">Textbook</span>
                 </a>
             </li>
             <li>
-                <a href="/courses/{{ course_id }}/extensions" target="frame"
+                <a href="/courses/course/{{ course_id }}/extensions" target="frame"
                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-100 dark:hover:bg-gray-700">
                     <p class="dark:text-gray-400"><i class="material-icons">extension</i></p>
                     <span class="flex-1 ml-3 whitespace-nowrap">Extensions</span>
                 </a>
             </li>
             <li>
-                <a href="/courses/{{ course_id }}/learning" target="frame"
+                <a href="/courses/course/{{ course_id }}/learning" target="frame"
                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-100 dark:hover:bg-gray-700">
                     <p class="dark:text-gray-400"><i class="material-icons">school</i></p>
                     <span class="flex-1 ml-3 whitespace-nowrap">Learning</span>

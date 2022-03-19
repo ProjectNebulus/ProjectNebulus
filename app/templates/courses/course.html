@@ -20,7 +20,7 @@
         if (saveData === null)
             saveData = "Documents";
 
-        iframe.src = "/courses/{{ course_id }}/" + saveData.toLowerCase();
+        iframe.src = "/courses/course/{{ course_id }}/" + saveData.toLowerCase();
         pageTitle.innerHTML = saveData;
 
         for (const link of sidebarLinks) {
