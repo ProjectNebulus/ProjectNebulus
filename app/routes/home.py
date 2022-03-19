@@ -6,10 +6,12 @@ from flask import render_template, session
 def index():
     # return "hi"
     return render_template(
-        "main/home.html", page="Nebulus - Learning, All In One",
+        "main/home.html",
+        page="Nebulus - Learning, All In One",
         password=session.get("password"),
         user=session.get("username"),
     )
+
 
 @main_blueprint.route("/google34d8c04c4b82b69a.html")
 def googleVerification():
