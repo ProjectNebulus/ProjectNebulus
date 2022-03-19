@@ -1,7 +1,7 @@
 from flask import request, session
-from .__init__ import internal
 import schoolopy
-from app.utils.private_endpoint import private_endpoint
+from . import internal
+from .....utils.private_endpoint import private_endpoint
 
 
 @internal.route("/generate-schoology-oauth-url", methods=["GET"])

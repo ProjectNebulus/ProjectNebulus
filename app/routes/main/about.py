@@ -1,4 +1,4 @@
-from app.routes.main_blueprint import main_blueprint
+from app.routes.main.__init__ import main_blueprint
 from flask import render_template, session
 
 

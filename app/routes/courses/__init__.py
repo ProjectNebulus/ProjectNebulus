@@ -7,3 +7,4 @@ courses = flask.Blueprint(
     static_folder="static",
     template_folder="templates",
 )
+from .course import *

@@ -1,5 +1,5 @@
 from flask import session, render_template
-from .__init__ import course
+from .import course
 from ....static.python.mongodb import read
 from ....utils.logged_in import logged_in
 

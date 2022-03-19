@@ -7,3 +7,7 @@ api = Blueprint(
     template_folder="templates",
     static_folder="static",
 )
+
+from .v1 import *
+from .developers import *
+from .graphql import *

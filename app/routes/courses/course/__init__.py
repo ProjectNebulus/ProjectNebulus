@@ -9,3 +9,15 @@ course = flask.Blueprint(
     static_folder="static",
 )
 courses.register_blueprint(course)
+
+from .announcements import *
+from .documents import *
+from .extensions import *
+from .grades import *
+from .home import *
+from .info import *
+from .learning import *
+from .settings import *
+from .textbook import *
+
+

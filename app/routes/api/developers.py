@@ -1,5 +1,5 @@
 from flask import render_template, Blueprint, session
-from .__init__ import api
+from . import api
 
 developers = Blueprint(
     "developers", __name__, url_prefix="/api/developers", static_folder="static"

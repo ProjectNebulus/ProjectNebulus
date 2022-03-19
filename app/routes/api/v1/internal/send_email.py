@@ -4,10 +4,11 @@ import random
 import os
 import smtplib
 from flask_mail import Mail, Message
+from . import internal
 
 
 # todo: Finish email sending blueprint
-@main_blueprint.route("/api/internal/send-email", methods=["POST"])
+@internal.route("/send-email", methods=["POST"])
 def send_email():
     """
     POST /api/internal/send-email

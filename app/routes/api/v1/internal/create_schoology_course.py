@@ -1,5 +1,5 @@
-from .__init__ import internal
-from app.utils.private_endpoint import private_endpoint
+from . import internal
+from .....utils.private_endpoint import private_endpoint
 
 
 @internal.route("/create-schoology-course")

@@ -1,6 +1,6 @@
-from app.routes.main_blueprint import main_blueprint, logged_in
-from flask import render_template, redirect, session, request
-from app.static.python.mongodb import read, getClassroom
+from app.routes.main.__init__ import main_blueprint
+from flask import render_template, session, request
+from app.static.python.mongodb import getClassroom
 import schoolopy
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials

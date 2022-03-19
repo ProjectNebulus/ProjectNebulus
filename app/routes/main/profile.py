@@ -1,6 +1,5 @@
-from app.routes.main_blueprint import main_blueprint, logged_in
-from flask import render_template, redirect, session, request
-from app.static.python.mongodb import read
+from app.routes.main.__init__ import main_blueprint
+from flask import render_template, session
 
 
 @main_blueprint.route("/profile")

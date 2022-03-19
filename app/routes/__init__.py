@@ -1,23 +1,11 @@
 # Imports
-
-from flask import Flask, Blueprint, render_template, session, redirect
+from flask import Flask
+from flask_mail import Mail
 import os
-from flask_mail import Mail, Message
-from graphql_server.flask import GraphQLView
-from app.static.python.classes.GraphQL.graphql_schema import schema
-import app.routes.about
-import app.routes.home
-import app.routes.signin
-import app.routes.signup
-import app.routes.points
-import app.routes.pricing
-import app.routes.logout
-import app.routes.lms
-import app.routes.dashboard
-import app.routes.settings
-import app.routes.profile
-import app.routes.connections
-import app.routes.courses
+from .error_handlers import error_blueprint
+from .main import main_blueprint
+from .api import api
+from .static import static_blueprint
 
 
 # import app.routes.error_handlers
@@ -34,13 +22,12 @@ def init_app():
     app.config["MAIL_PASSWORD"] = os.getenv("password")
     app.config["MAIL_USE_TLS"] = False
     app.config["MAIL_USE_SSL"] = True
+    print(api.url_prefix)
+    app.register_blueprint(main_blueprint)
+    app.register_blueprint(error_blueprint)
+    app.register_blueprint(api)
+    app.register_blueprint(static_blueprint)
     mail = Mail(app)
+    print([str(p) for p in app.url_map.iter_rules()])
 
-    with app.app_context():
-        app.add_url_rule(
-            "/graphql",
-            view_func=GraphQLView.as_view(
-                "graphql", schema=schema.graphql_schema, graphiql=True
-            ),
-        )
     return app
