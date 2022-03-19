@@ -1,4 +1,4 @@
-from . import main_blueprint, logged_in
+from . import main_blueprint
 from flask import render_template, redirect, session
 from ...static.python.mongodb import read
 from ...utils.logged_in import logged_in

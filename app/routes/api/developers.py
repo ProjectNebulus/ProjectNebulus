@@ -1,10 +1,10 @@
 from flask import render_template, Blueprint, session
-from . import api
+from . import api_blueprint
 
 developers = Blueprint(
     "developers", __name__, url_prefix="/api/developers", static_folder="static"
 )
-api.register_blueprint(developers)
+api_blueprint.register_blueprint(developers)
 
 
 @developers.route("/", methods=["GET"])

@@ -1,5 +1,5 @@
 import flask
-from ..__init__ import v1
+from .. import v1
 
 internal = flask.Blueprint(
     "internal",

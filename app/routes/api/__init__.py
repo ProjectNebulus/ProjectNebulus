@@ -1,6 +1,6 @@
 from flask import Blueprint
 
-api = Blueprint(
+api_blueprint = Blueprint(
     "api",
     __name__,
     url_prefix="/api",
@@ -8,6 +8,6 @@ api = Blueprint(
     static_folder="static",
 )
 
-from .v1 import *
-from .developers import *
-from .graphql import *
+from . import v1
+from . import developers
+#from .graphql import *

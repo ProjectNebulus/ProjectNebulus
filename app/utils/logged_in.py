@@ -3,9 +3,9 @@ from functools import wraps
 
 
 def logged_in(func):
-    @wraps(logged_in)
+    @wraps(func)
     def wrapper(*args, **kwargs):
-        if "username" in session and "password" in session:
+        if session.get('logged_in'):
             return func(*args, **kwargs)
         else:
             return redirect("/signin")

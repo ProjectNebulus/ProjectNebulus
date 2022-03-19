@@ -1,5 +1,5 @@
 import flask
-from ..__init__ import api
+from .. import api_blueprint
 
 v1 = flask.Blueprint(
     "v1",
@@ -8,6 +8,7 @@ v1 = flask.Blueprint(
     static_folder="static",
     template_folder="templates",
 )
-api.register_blueprint(v1)
+print(v1.url_prefix)
+api_blueprint.register_blueprint(v1)
 
-from .internal import *
+from . import internal

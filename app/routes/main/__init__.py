@@ -13,7 +13,7 @@ from .connections import *
 from .dashboard import *
 from .home import *
 from .lms import *
-from logout import *
+from .logout import *
 from .points import *
 from .pricing import *
 from .profile import *

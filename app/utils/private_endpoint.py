@@ -16,3 +16,5 @@ def private_endpoint(func):
             return func(*args, **kwargs)
         else:
             return render_template("errors/404.html", error="Unauthorized Access")
+
+    return wrapper
