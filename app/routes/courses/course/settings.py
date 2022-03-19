@@ -4,7 +4,7 @@ from ....static.python.mongodb import read
 from ....utils.logged_in import logged_in
 
 
-@course.route("/courses/<course_id>/settings")
+@course.route("/settings")
 @logged_in
 def courses_settings(course_id):
         courses = read.get_user_courses(session.get("id"))
