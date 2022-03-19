@@ -53,4 +53,4 @@ def signin_post():
 # app.register_blueprint(error_blueprint)
 if __name__ == "__main__":
     print("Started running on http://localhost:8080")
-    serve(app=app, host="localhost", port=8080)
+    serve(app=app, host="0.0.0.0", port=8080)
