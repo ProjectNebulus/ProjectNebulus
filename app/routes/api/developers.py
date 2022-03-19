@@ -1,13 +1,10 @@
 from flask import render_template, Blueprint, session
 from . import api_blueprint
-
-developers = Blueprint(
-    "developers", __name__, url_prefix="/api/developers", static_folder="static"
-)
-api_blueprint.register_blueprint(developers)
+from ...static.python.mongodb import read
 
 
-@developers.route("/", methods=["GET"])
+
+@api_blueprint.route("/developers", methods=["GET"])
 def api():
     return render_template(
         "developerportal.html",
