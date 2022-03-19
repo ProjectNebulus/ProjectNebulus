@@ -10,3 +10,8 @@ def index():
         password=session.get("password"),
         user=session.get("username"),
     )
+
+@main_blueprint.route("/google34d8c04c4b82b69a.html")
+def googleVerification():
+    # GOOGLE VERIFICATION FILE
+    return render_template("google34d8c04c4b82b69a.html")
