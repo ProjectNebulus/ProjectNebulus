@@ -1,9 +1,9 @@
 from datetime import datetime
 
-from app.static.python.classes import Avatar
-from app.static.python.classes.Assignment import Assignment
-from app.static.python.classes.Course import Course
-from app.static.python.classes.Grades import Grades
+from app import Avatar
+from app import Assignment
+from app import Course
+from app import Grades
 
 
 def getcourse(courseid, sc, user, jsonEnabled):

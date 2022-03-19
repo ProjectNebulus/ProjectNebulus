@@ -13,11 +13,13 @@ function SSO() {
             document.getElementById('signin_form').style.display = 'none';
             document.getElementById("sso").innerHTML = "Return to Log In"
             document.getElementById('signin_form2').style.display = 'block';
+            document.getElementById("schoologyy").style.display = "none";
 
         }else {
             document.getElementById('signin_form').style.display = 'block';
             document.getElementById('signin_form2').style.display = 'none';
             document.getElementById("sso").innerHTML = "<span class=\"material-icons-outlined md-36\">key</span> SSO Login"
+            document.getElementById("schoologyy").style.display = "block";
         }
 
 
@@ -29,12 +31,14 @@ function Schoology() {
         document.getElementById("schoologyy").innerHTML = "Return to Log In"
         document.getElementById('signin_form3').style.display = 'block';
         document.getElementById("launchBTN").style.display = "block";
+        document.getElementById("sso").style.display = "none";
 
     }else {
         document.getElementById('signin_form').style.display = 'block';
         document.getElementById('signin_form3').style.display = 'none';
         document.getElementById("schoologyy").innerHTML = "Schoology Login"
         document.getElementById("launchBTN").style.display = "none";
+        document.getElementById("sso").style.display = "block";
     }
 
 
@@ -215,7 +219,7 @@ window.addEventListener('load', function () {
             let username = document.getElementById('usrname').value;
             let password = document.getElementById('psw').value;
             const xhttp = new XMLHttpRequest();
-            xhttp.open('POST', '/signin_check', true);
+            xhttp.open('POST', '/api/v1/internal/check-signin', true);
             xhttp.setRequestHeader('Content-type', 'application/json');
             xhttp.addEventListener('load', reqListener1);
             xhttp.send(
@@ -438,7 +442,7 @@ function loginUser() {
     let username = document.getElementById('usrname').value;
     let password = document.getElementById('psw').value;
     const xhttp = new XMLHttpRequest();
-    xhttp.open('POST', '/signin', true);
+    xhttp.open('POST', '/api/v1/internal/sign-in', true);
     xhttp.setRequestHeader('Content-type', 'application/json');
     xhttp.addEventListener('load', reqListener2);
     xhttp.send(
