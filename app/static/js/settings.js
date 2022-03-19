@@ -11,7 +11,8 @@ function change2() {
     inputs[1].classList.remove("bg-gray-100", "cursor-not-allowed", "dark:border-gray-600", "dark:placeholder-gray-500", "dark:text-gray-500")
     inputs[1].classList.add("bg-gray-50", "dark:border-gray-600", "dark:placeholder-gray-400", "dark:text-white")
     inputs[1].disabled = false;
-    document.getElementById("change2").innerText = "Change Password"
+    document.getElementById("change2").innerText = "Change Password";
+    toggleModal('authentication-modal');
 }
 
 function change3() {
@@ -23,9 +24,9 @@ function change3() {
 }
 
 window.addEventListener('load', function () {
-    document.getElementById("change1").addEventListener("click", change1(), false);
-    document.getElementById("change2").addEventListener("click", change2(), false);
-    document.getElementById("change3").addEventListener("click", change3(), false);
+    // document.getElementById("change1").onclick = change1();
+    // document.getElementById("change2").onclick = change2();
+    // document.getElementById("change3").onclick = change3();
     let inputs = document.getElementsByTagName("input");
     for (let input = 0; input < inputs.length; input++) {
         inputs[input].classList.remove("bg-gray-50", "dark:border-gray-600", "dark:placeholder-gray-400", "dark:text-white")
