@@ -16,6 +16,6 @@ def logged_in():
     password = session["password"]
     if not username or not password:
         return False
-    if r.check_password_username(username, password) == "true":
+    if r.check_password_username(username, password) == True:
         return True
     return False
