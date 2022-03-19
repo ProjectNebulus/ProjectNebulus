@@ -10,6 +10,7 @@ course = flask.Blueprint(
 )
 courses.register_blueprint(course)
 
+from .course import *
 from .announcements import *
 from .documents import *
 from .extensions import *
