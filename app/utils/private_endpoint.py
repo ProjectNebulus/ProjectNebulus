@@ -1,20 +1,18 @@
 from functools import wraps
 from flask import request, render_template
-from ipaddress import ip_network
 
 
 def private_endpoint(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
-        user_ip = request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)
-        a = ip_network(
-            user_ip, strict=False
-        ).network_address
+        if request.headers.getlist("X-Forwarded-For"):
+            user_ip = request.headers.getlist("X-Forwarded-For")[0]
+        else:
+            user_ip = request.remote_addr
+        print(f'{user_ip} is trying to access {func.__name__}')
         # the first parameter should be the flask server ip address, so change it to what the ip is for your server
-        b = ip_network("127.0.0.1", strict=False).network_address # localhost
 
-        print(b)
-        if a == b:
+        if user_ip == '127.0.0.1':
             return func(*args, **kwargs)
         else:
             return render_template("errors/404.html", error="Unauthorized Access")
