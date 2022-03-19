@@ -5,6 +5,7 @@ from app.routes import init_app
 from waitress import serve
 from app.routes.main_blueprint import main_blueprint
 from app.routes.static.static_blueprint import static_blueprint
+
 # from app.routes.error_handlers import error_blueprint
 app = init_app()
 app.register_blueprint(main_blueprint)

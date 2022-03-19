@@ -20,6 +20,7 @@ import app.routes.connections
 import app.routes.courses
 import app.routes.error_handlers
 
+
 def init_app():
     """
     Creates a flask application.
