@@ -1,12 +1,12 @@
-from . import main_blueprint, logged_in
-from flask import render_template, redirect, session, request
-from app.static.python.mongodb import read
+from . import main_blueprint
+from flask import render_template, session, request
+from ...static.python.mongodb import read
+from ...utils.logged_in import logged_in
 
 
 @main_blueprint.route("/dashboard", methods=["GET"])
+@logged_in
 def dashboard():
-    if not logged_in():
-        return redirect("/")
     new_user = request.args.get("new_user", default="false", type=str)
     user_courses = read.get_user_courses(session.get("id"))
     return render_template(
