@@ -6,11 +6,13 @@ from ipaddress import ip_network
 def private_endpoint(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
+        user_ip = request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)
         a = ip_network(
-            request.headers["X-Appengine-User-Ip"], strict=False
+            user_ip, strict=False
         ).network_address
-        print(a)
-        b = ip_network(request.remote_addr, strict=False).network_address
+        # the first parameter should be the flask server ip address, so change it to what the ip is for your server
+        b = ip_network("127.0.0.1", strict=False).network_address # localhost
+
         print(b)
         if a == b:
             return func(*args, **kwargs)
