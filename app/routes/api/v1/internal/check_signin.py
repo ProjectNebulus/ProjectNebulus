@@ -2,6 +2,7 @@ from flask import session, request
 from . import internal
 from .....utils.private_endpoint import private_endpoint
 from .....static.python.mongodb import read
+import re
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 

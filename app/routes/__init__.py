@@ -6,7 +6,7 @@ from .error_handlers import error_blueprint
 from .main import *
 from .static import *
 from .courses import *
-from . import api
+from .api import *
 
 # import app.routes.error_handlers
 
