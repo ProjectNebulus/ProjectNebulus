@@ -22,11 +22,12 @@ function next(num){
         }, 3000);
 
     }else{
-        if (num === 1 && EMAIL_REGEX.test(document.getElementById("email").value)) {
-
+        if (num === 1 && !EMAIL_REGEX.test(document.getElementById("email").value)) {
+            document.getElementById("error").innerText = "Invalid Email";
         } else if (num === 1 && EMAIL_REGEX.test(document.getElementById("email").value)) {
 
         } else {
+            document.getElementById("error").innerText = "";
             const myTimeout = setTimeout(function () {
 
                 document.getElementById("section" + num.toString()).style.display = "none";
