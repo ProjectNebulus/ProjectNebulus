@@ -4,9 +4,9 @@ from ....static.python.mongodb import read
 from ....utils.logged_in import logged_in
 
 
-@course.route("/grades")
+@course.route("/learning")
 @logged_in
-def courses_grades(course_id):
+def courses_learning(course_id):
     courses = read.get_user_courses(session.get("id"))
 
     user_course = list(filter(lambda x: x.id == course_id, courses))
@@ -18,7 +18,7 @@ def courses_grades(course_id):
             user=session.get("username"),
         )
     return render_template(
-        "courses/grades.html",
+        "courses/learning.html",
         page="Nebulus - " + user_course[0].name,
         read=read,
         course=user_course[0],
