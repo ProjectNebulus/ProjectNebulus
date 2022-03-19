@@ -1,7 +1,7 @@
 from flask import session, request
 import schoolopy
 from .__init__ import internal
-from .private_endpoint import private_endpoint
+from app.utils.private_endpoint import private_endpoint
 from .....static.python.mongodb import update
 
 

@@ -1,6 +1,6 @@
 from flask import session, redirect
 from .__init__ import internal
-from .private_endpoint import private_endpoint
+from app.utils.private_endpoint import private_endpoint
 from .....static.python.mongodb import update, read
 
 

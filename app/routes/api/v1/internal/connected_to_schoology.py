@@ -1,5 +1,5 @@
 from flask import session
-from private_endpoint import private_endpoint
+from app.utils.private_endpoint import private_endpoint
 from .__init__ import internal
 
 
