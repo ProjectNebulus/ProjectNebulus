@@ -9,7 +9,7 @@ from ....utils.logged_in import logged_in
 def courses_announcements(course_id):
     user_courses = read.get_user_courses(session.get("id"))
 
-    user_course = list(filter(lambda x: x.id == course_id, user_courses))
+    user_course = list(filter(lambda x: x.id == str(course_id), user_courses))
     if not user_course:
         return render_template(
             "errors/404.html",
