@@ -42,5 +42,5 @@ def signin_with_schoology():
     session["id"] = user.pk
     session["username"] = user.username
     session["email"] = user.email
-    session['token']
+
     return str(sc.get_me().name_display + "•" + sc.get_me().primary_email)

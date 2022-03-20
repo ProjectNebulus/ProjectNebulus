@@ -142,11 +142,17 @@ function confirmSchoology() {
         }
     })
     request.done(function (data) {
-        document.getElementById("confirmBTN").style.display = "none";
-        if (data === "error!!!") {
 
+
+        document.getElementById("confirmBTN").style.display = "none";
+        if (data === "1" || data === "2") {
             document.getElementById("launchBTN").style.display = "block";
             document.getElementById("error").style.display = "block";
+            if (data === "1") {
+                document.getElementById("error").innerHTML = "Login Failed. Reason: Clicked Deny on Schoology or closed Schoology popup window. Make sure Popups are enabled on your browser. Click Authorize again and click Approve this time!";
+            } else {
+                document.getElementById("error").innerHTML = "Login Failed. Reason: Your account is not connected to Schoology. Please signin normaly and then connect your schoology account to signin with Schoology.";
+            }
 
         } else {
             let email = data.split("•")[1];
@@ -154,6 +160,8 @@ function confirmSchoology() {
             document.getElementById("confirmation").style.display = "block";
             document.getElementById("name").innerHTML = name;
             document.getElementById("email").innerHTML = email;
+
+            window.location.href = '/dashboard'
 
         }
 
