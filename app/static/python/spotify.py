@@ -23,8 +23,10 @@ def get_song():
         results = sp.search(q="artist:" + name, type="artist")
         items = results["artists"]["items"]
         artist = items[0]
-
-        return current_song, song_artist, artist["images"][0]["url"]
+        # results2 = sp.search(q="track:" + current_song, type="track")["tracks"]["items"][0]['images']
+        results2 = sp.search(q="track:" + current_song, type="track")["tracks"]["items"][0]["album"]['images'][0]["url"]
+        print(results2)
+        return current_song, song_artist, artist["images"][0]["url"], results2
     except:
         # print("Spotify is not running")
         return ()

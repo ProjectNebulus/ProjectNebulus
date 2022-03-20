@@ -10,15 +10,18 @@ function fetchStatus() {
             document.getElementById('song').innerHTML = '<p>' + data + '</p>';
         } else {
             let songs = data.split("-");
-            song = songs[0];
-            artist = songs[1]
-            art = songs[2]
+            let song = songs[0];
+            let artist = songs[1]
+            let art = songs[2]
+            let art2 = songs[3];
             document.getElementById('song').innerHTML =
                 '<p>' +
                 song + " - " + artist +
                 '</p><br><img class="mb-3 w-24 h-24 rounded-full shadow-lg" src=\'' +
                 art +
-                "' >";
+                ' >' + '<br><img class="mb-3 w-24 h-24 rounded-full shadow-lg" src=\'' +
+                art2 +
+                ' >';
         }
     });
 }
