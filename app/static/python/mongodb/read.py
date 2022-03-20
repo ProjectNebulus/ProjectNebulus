@@ -61,8 +61,11 @@ def find_user(**kwargs) -> User | None:
         raise KeyError("User not found")
     return user
 
-def getSchoology(id: str = None, username: str = None, email: str = None) -> Schoology:
-    return find_user(id=id, username=username, email=email).schoology
+def getSchoology(**kwargs) -> Schoology:
+    try:
+        return find_user(**kwargs).schoology
+    except KeyError:
+        return
 
 
 def getClassroom(
