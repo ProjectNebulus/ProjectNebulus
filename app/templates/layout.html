@@ -130,16 +130,19 @@
       if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         elements = document.getElementsByClassName("logo_");
         for (var i = 0; i < elements.length; i++) {
-          elements[i].style.filter = "invert(1)";
+            elements[i].style.filter = "invert(1)";
         }
           document.documentElement.classList.add('dark');
       } else {
           document.documentElement.classList.remove('dark')
-        elements = document.getElementsByClassName("logo_");
-        for (var i = 0; i < elements.length; i++) {
-          elements[i].style.filter = "invert(0)";
-        }
+          elements = document.getElementsByClassName("logo_");
+          for (var i = 0; i < elements.length; i++) {
+              elements[i].style.filter = "invert(0)";
+          }
       }
+        // if (window.location.href.includes("course")){
+        //     document.getElementById("frame").contentWindow.location.reload();
+        // }
     }
 
     window.onload = detectTheme;

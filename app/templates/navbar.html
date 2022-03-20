@@ -204,13 +204,16 @@
                     document.documentElement.classList.remove('dark');
                     localStorage.setItem('color-theme', 'light');
                     document.body.style.background = "white";
-                  document.getElementById('frame').contentWindow.location.reload();
+                    document.getElementById('frame').contentWindow.location.reload();
                 } else {
                     document.documentElement.classList.add('dark');
                     localStorage.setItem('color-theme', 'dark');
                     document.body.style.background = "#111926";
-                  document.getElementById('frame').contentWindow.location.reload();
+                    document.getElementById('frame').contentWindow.location.reload();
                 }
+            }
+            if (window.location.href.includes("course")) {
+                document.getElementById("frame").contentWindow.location.reload();
             }
         });
 
