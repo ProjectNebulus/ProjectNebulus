@@ -49,25 +49,18 @@ def spotify():
     if not auth_manager.validate_token(cache_handler.get_cached_token()):
         # Step 2. Display sign in link when no token
         auth_url = auth_manager.get_authorize_url()
-        return f'<h2><a href="{auth_url}">Sign in</a></h2>'
+        return render_template("connectSpotify.html", auth=True, auth_url=auth_url)
 
     # Step 4. Signed in, display data
     spotify = spotipy.Spotify(auth_manager=auth_manager)
-    return (
-        f'<h2>Hi {spotify.me()["display_name"]}, '
-        f'<small><a href="/spotify/sign_out">[sign out]<a/></small></h2>'
-        f'<a href="/spotify/playlists">my playlists</a> | '
-        f'<a href="/spotify/currently_playing">currently playing</a> | '
-        f'<a href="/spotify/current_user">me</a>'
-    )
-
+    return render_template("connectSpotify.html", spotify=spotify, auth=False)
 
 @main_blueprint.route("/spotify/sign_out")
 def spotify_sign_out():
     try:
         # Remove the CACHE file (.cache-test) so that a new user can authorize.
         os.remove(session_cache_path())
-        session.clear()
+        session.pop("uuid")
     except OSError as e:
         print("Error: %s - %s." % (e.filename, e.strerror))
     return redirect("/spotify")
