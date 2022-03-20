@@ -7,9 +7,12 @@ from .....static.python.spotify import get_song
 @private_endpoint
 def spotify_status():
     song = get_song()
+    the_song = song[0]
+    artist = song[1]
+    art = song[2]
     string = ""
     if len(song) == 3:
-        string = a[0] + " - " + a[1]
+        string = the_song + "-" + artist + "-" + art
     else:
         string = "You aren't listening to anything!"
     return string

@@ -1,7 +1,7 @@
 function fetchStatus() {
     const request = $.ajax({
         type: 'POST',
-        url: '/spoistatus'
+        url: '/api/v1/internal/spotify-status'
     });
 
     request.done((data) => {
@@ -9,18 +9,16 @@ function fetchStatus() {
             data = 'Music Paused';
             document.getElementById('song').innerHTML = '<p>' + data + '</p>';
         } else {
-            const request2 = $.ajax({
-                type: 'POST',
-                url: '/spoistatus2'
-            });
-            request2.done((data2) => {
-                document.getElementById('song').innerHTML =
-                    '<p>' +
-                    data +
-                    '</p><br><img class="mb-3 w-24 h-24 rounded-full shadow-lg" src=\'' +
-                    data2 +
-                    "' >";
-            });
+            let songs = data.split("-");
+            song = songs[0];
+            artist = songs[1]
+            art = songs[2]
+            document.getElementById('song').innerHTML =
+                '<p>' +
+                song + " - " + artist +
+                '</p><br><img class="mb-3 w-24 h-24 rounded-full shadow-lg" src=\'' +
+                art +
+                "' >";
         }
     });
 }
