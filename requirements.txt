@@ -15,6 +15,7 @@ dnspython
 Flask
 Flask-Cors
 Flask-GraphQL
+flask_session
 fuzzywuzzy
 google-auth
 gql

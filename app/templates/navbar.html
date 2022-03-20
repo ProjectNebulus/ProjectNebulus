@@ -1,7 +1,7 @@
 {% if not disablebar %}
-    <nav 
-         class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded bg-gray-300 dark:bg-gray-600"
-         oncontextmenu="rightClickElements=null">
+    <nav
+            class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded bg-gray-300 dark:bg-gray-600"
+            oncontextmenu="rightClickElements=null">
         <div class="container flex flex-wrap justify-between items-center mx-auto">
             <a href="/" class="flex">
                 <img class="mr-3 h-10 logo_">
@@ -33,19 +33,20 @@
                                     <img src="https://images.emojiterra.com/twitter/v13.1/512px/1fa99.png"
                                          style="height:1em;float:left;"></a>
                             </li>
-                            <li><a href=""
-                                   class="dropdown-link block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                                   id="online"></a></li>
 
-                            <li><a href="/settings"
+                            <li>
+                                <a href="/settings"
                                    class="dropdown-link block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
                             </li>
-                            <li><a href="/profile"
+                            <li>
+                                <a href="/profile"
                                    class="dropdown-link block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profile</a>
                             </li>
-                            <li><a href="/logout"
+                            <li>
+                                <a href="/logout"
                                    class="dropdown-link block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign
-                                out</a></li>
+                                    out</a>
+                            </li>
                         </ul>
                     </div>
                     <button data-collapse-toggle="mobile-menu-2" type="button"
@@ -177,6 +178,7 @@
             themeToggleLightIcon.classList.toggle('hidden');
 
             // if set via local storage previously
+            let elements;
             if (localStorage.getItem('color-theme')) {
                 if (localStorage.getItem('color-theme') === 'light') {
                     document.documentElement.classList.add('dark');
@@ -212,9 +214,9 @@
                     document.getElementById('frame').contentWindow.location.reload();
                 }
             }
-            if (window.location.href.includes("course")) {
+            if (window.location.href.includes("course"))
                 document.getElementById("frame").contentWindow.location.reload();
-            }
+
         });
 
         for (let a of document.getElementsByClassName("nav-link"))
@@ -222,17 +224,5 @@
 
         for (let a of document.getElementsByClassName("nav-link-2"))
             a.className += " block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white";
-
-        function checkWIFI() {
-            let oelement = document.getElementById("online");
-            if (navigator.onLine) {
-                oelement.innerHTML = "<svg style=\"display: inline-block;\" class=\"w-6 h-6\" fill=\"green\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" d=\"M17.778 8.222c-4.296-4.296-11.26-4.296-15.556 0A1 1 0 01.808 6.808c5.076-5.077 13.308-5.077 18.384 0a1 1 0 01-1.414 1.414zM14.95 11.05a7 7 0 00-9.9 0 1 1 0 01-1.414-1.414 9 9 0 0112.728 0 1 1 0 01-1.414 1.414zM12.12 13.88a3 3 0 00-4.242 0 1 1 0 01-1.415-1.415 5 5 0 017.072 0 1 1 0 01-1.415 1.415zM9 16a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z\" clip-rule=\"evenodd\"></path></svg>Connected";
-            } else {
-                oelement.innerHTML = "<svg style=\"display: inline-block;\" class=\"w-6 h-6\" fill=\"red\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" d=\"M17.778 8.222c-4.296-4.296-11.26-4.296-15.556 0A1 1 0 01.808 6.808c5.076-5.077 13.308-5.077 18.384 0a1 1 0 01-1.414 1.414zM14.95 11.05a7 7 0 00-9.9 0 1 1 0 01-1.414-1.414 9 9 0 0112.728 0 1 1 0 01-1.414 1.414zM12.12 13.88a3 3 0 00-4.242 0 1 1 0 01-1.415-1.415 5 5 0 017.072 0 1 1 0 01-1.415 1.415zM9 16a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z\" clip-rule=\"evenodd\"></path></svg> Offline";
-            }
-        }
-
-        checkWIFI();
-        setInterval(checkWIFI, 1000);
     </script>
 {% endif %}

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -9,13 +10,16 @@ body {
     color: black;
     font-family: 'Lato', sans-serif;
 }
+
 .dev_identifiers {
     color: black;
 }
+
 .dev_images {
     height: 150px;
     border: 5px solid #505050;
 }
+
 strong {
     font-weight: 900;
     font-size: 6.25vh;
@@ -283,16 +287,19 @@ details summary {
     font-size: 18px;
     vertical-align: middle;
 }
+
 .material-icons.md-24,
 .material-icons-outlined.md-24 {
     font-size: 24px;
     vertical-align: middle;
 }
+
 .material-icons.md-36,
 .material-icons-outlined.md-36 {
     font-size: 36px;
     vertical-align: middle;
 }
+
 .material-icons.md-48,
 .material-icons-outlined.md-48 {
     font-size: 48px;
@@ -314,13 +321,16 @@ details summary {
 #middle {
     overflow-y: scroll;
 }
+
 #left {
     overflow-y: scroll;
 }
+
 #right {
     overflow-y: scroll;
     margin-right: 25px;
 }
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 #middle::-webkit-scrollbar {
     display: none;
@@ -331,6 +341,7 @@ details summary {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
 }
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 #left::-webkit-scrollbar {
     display: none;
@@ -341,6 +352,7 @@ details summary {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
 }
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 #right::-webkit-scrollbar {
     display: none;
@@ -357,11 +369,11 @@ details summary {
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
-input:-webkit-autofill:active{
+input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 30px #374151 inset !important;
 }
 
 /*Change text in autofill textbox*/
-input:-webkit-autofill{
+input:-webkit-autofill {
     -webkit-text-fill-color: white !important;
 }

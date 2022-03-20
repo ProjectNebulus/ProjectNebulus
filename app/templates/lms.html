@@ -10,129 +10,120 @@
         <div id="left" style="width:20%;height:90%;float:left;">
             <div style="text-align: center;">
                 <p class="text-3xl text-black dark:text-white">Recent Activity</p><br>
-                <div class="flex flex-col">
-                    <div class="overflow-x-auto shadow-md sm:rounded-lg">
-                        <div class="inline-block min-w-full align-middle">
-                            <div class="overflow-hidden ">
-                                <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-700">
-                                    <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-                                    {% for x in user_courses %}
-                                        <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
-                                            <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ x.name }}
-                                                <br><br>{% for i in x.announcements[0:3] %}
-                                                <div class='update_teacher'>
-                                                    <p>{{ x.teacher }} > {{ x.name }}</p>
-                                                </div>
-                                                <div class='update_header'>
-                                                    <h3>{{ i.header }}</h3>
-                                                    <div class='update_info'>
-                                                        <h4>{{ i.info }}</h4>
-                                                    </div>
-                                                </div>
-                                            {% endfor %}<br></td>
-
-                                        </tr>
-                                    {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                <div class="flex flex-col overflow-x-auto shadow-md sm:rounded-lg inline-block min-w-full align-middle overflow-hidden">
+                    <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-700">
+                        <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+                        {% for course in user_courses %}
+                            {% if course.announcements|length > 0 %}
+                                <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        <img src="https://bins.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg?"
+                                             style="object-fit: cover; width:40px; height:40px; border-radius:10px;display: inline-block; margin: 10px;"
+                                             alt>
+                                        {{ course.name }}
+                                        <br><br>{% for update in course.announcements[0:3] %}
+                                        <div class='update_teacher'>
+                                            <p>{{ course.teacher }} > {{ course.name }}</p>
+                                        </div>
+                                        <div class='update_header'>
+                                            <h3>{{ update.header }}</h3>
+                                            <div class='update_info'>
+                                                <h4>{{ update.info }}</h4>
+                                            </div>
+                                        </div>
+                                    {% endfor %}<br>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-        <div id="middle" style="width:60%;height:90%;float:left;overflow:auto;"
-             oncontextmenu="if (rightClickElements === prevRightClickElements) rightClickElements={'Join Course': () => {}, 'Create Course': () => screens[0].style.display = 'block', 'Import from Schoology': () => {},'Import from Google Classroom': () => {}, 'Import from Canvas': () => {}}">
+        <div id="middle" style="width:60%;height:90%;float:left;overflow:auto;">
             <div style="text-align: center;">
-                <h1>
-                    <p class="text-4xl text-black dark:text-white">Your Courses</p>
+                <h1 class="text-4xl text-black dark:text-white">Your Courses</h1>
 
-                    <div style="float:right" id="course-nav">
-                        <button type="button" id="join" style="width:64px;height:44px"
-                                class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                            <span class="material-icons">search</span></button>
-                        <button type="button" id="create" style="width:64px;height:44px"
-                                class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                            <span class="material-icons">add</span></button>
-                    </div>
-                    <br><br>
-                    <div class="align-items: center;" style="text-align:center !important;">
-                        {% for course in user_courses %}
-                            <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
-                                 style="float:left;margin:20px;height:300px;width:250px;"
-                                 oncontextmenu="rightClickElements={'Get Link': () => {}, 'Duplicate': () => {}, 'View Details': () => {}, 'Share': () => {}, 'Export': () => {}}">
-                                <a href="#">
-
-                                </a>
-                                <div class="p-5">
-                                    <div style="text-align: left;">
-                                        <a href="#">
-                                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                                <img
-                                                        src="https://bins.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg?"
-                                                        style="object-fit: cover; width:40px; height:40px; border-radius:10px;display: inline-block; margin: 10px;">{{ course.name }}
-                                            </h5>
-                                        </a>
-                                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ course.teacher }}</p>
-
-                                        <p class="text-base  text-gray-700 dark:text-gray-400">
-                                            <svg style="display: inline-block;" xmlns="http://www.w3.org/2000/svg"
-                                                 class="h-5 w-5"
-                                                 viewBox="0 0 20 20" fill="currentColor">
-                                                <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
-                                            </svg>
-                                            Schoology
-                                        </p>
-                                        <p class="text-base  text-gray-700 dark:text-gray-400">
-                                            <svg style="display: inline-block;" xmlns="http://www.w3.org/2000/svg"
-                                                 class="h-5 w-5"
-                                                 viewBox="0 0 20 20" fill="currentColor">
-                                                <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
-                                            </svg>
-                                            35 Assignments
-                                        </p>
-                                        <p class="text-base  text-gray-700 dark:text-gray-400">
-                                            <svg style="display: inline-block;" xmlns="http://www.w3.org/2000/svg"
-                                                 class="h-5 w-5"
-                                                 viewBox="0 0 20 20" fill="currentColor">
-                                                <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
-                                            </svg>
-                                            71 Announcements
-                                        </p>
-                                        <p class="text-base  text-gray-700 dark:text-gray-400">
-                                            <svg style="display: inline-block;" xmlns="http://www.w3.org/2000/svg"
-                                                 class="h-5 w-5"
-                                                 viewBox="0 0 20 20" fill="currentColor">
-                                                <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
-                                            </svg>
-                                            29 Documents
-                                        </p>
-                                        <p class="text-base  text-gray-700 dark:text-gray-400">
-                                            <svg style="display: inline-block;" xmlns="http://www.w3.org/2000/svg"
-                                                 class="h-5 w-5"
-                                                 viewBox="0 0 20 20" fill="currentColor">
-                                                <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
-                                            </svg>
-                                            10 Events
-                                        </p>
+                <div style="float:right" id="course-nav">
+                    <button type="button" id="join" style="width:64px;height:44px"
+                            class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                        <span class="material-icons">search</span></button>
+                    <button type="button" id="create" style="width:64px;height:44px"
+                            class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                        <span class="material-icons">add</span></button>
+                </div>
+                <br><br>
+                <div class="align-items: center;" style="text-align:center !important;">
+                    {% for course in user_courses %}
+                        <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
+                             style="float:left;margin:20px;height:300px;width:250px;">
+                            <div class="p-5">
+                                <div style="text-align: left;">
+                                    <div style="margin-bottom:10px">
+                                        <img src="https://bins.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg?"
+                                             style="object-fit: cover; width:40px; height:40px; border-radius:10px;display: inline-block; margin: 10px;">
+                                        <div style="float:right;margin-right:30%;">
+                                            <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ course.name }}</h5>
+                                            <span class="font-normal text-gray-700 dark:text-gray-400">{{ course.teacher }}</span>
+                                        </div>
                                     </div>
-                                    <a href="/course/{{ course.id }}"
-                                       class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                        Jump Into Course
-                                        <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd"
-                                                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                                  clip-rule="evenodd"></path>
+                                    <p class="text-base  text-gray-700 dark:text-gray-400">
+                                        <svg style="display: inline-block;" xmlns="http://www.w3.org/2000/svg"
+                                             class="h-5 w-5"
+                                             viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
                                         </svg>
-                                    </a>
+                                        Schoology
+                                    </p>
+                                    <p class="text-base  text-gray-700 dark:text-gray-400">
+                                        <svg style="display: inline-block;" xmlns="http://www.w3.org/2000/svg"
+                                             class="h-5 w-5"
+                                             viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
+                                        </svg>
+                                        35 Assignments
+                                    </p>
+                                    <p class="text-base  text-gray-700 dark:text-gray-400">
+                                        <svg style="display: inline-block;" xmlns="http://www.w3.org/2000/svg"
+                                             class="h-5 w-5"
+                                             viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
+                                        </svg>
+                                        71 Announcements
+                                    </p>
+                                    <p class="text-base  text-gray-700 dark:text-gray-400">
+                                        <svg style="display: inline-block;" xmlns="http://www.w3.org/2000/svg"
+                                             class="h-5 w-5"
+                                             viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
+                                        </svg>
+                                        29 Documents
+                                    </p>
+                                    <p class="text-base  text-gray-700 dark:text-gray-400">
+                                        <svg style="display: inline-block;" xmlns="http://www.w3.org/2000/svg"
+                                             class="h-5 w-5"
+                                             viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
+                                        </svg>
+                                        10 Events
+                                    </p>
                                 </div>
+                                <a href="/course/{{ course.id }}" style="margin-top: 20px"
+                                   class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                    Jump Into Course
+                                    <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                              clip-rule="evenodd"></path>
+                                    </svg>
+                                </a>
                             </div>
-                        {% endfor %}
-                    </div>
+                        </div>
+                    {% endfor %}
+                </div>
 
-                </h1>
                 <!DOCTYPE html>
                 <html lang="en">
                 <head>
@@ -164,10 +155,11 @@
 
                                     <span class='button text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2'
                                           onclick="skipTemplates()">
-            <img src="/app/static/images/icons/new.svg" style="visibility: visible;width:20px;height:20px;float:left;">
+            <img src="/app/static/images/icons/new.svg" style="visibility: visible;width:20px;height:20px;float:left;"
+                 alt>
             Create course
             <img src="/app/static/images/icons/next.svg"
-                 style="visibility: visible;width:20px;height:20px;float:right;">
+                 style="visibility: visible;width:20px;height:20px;float:right;" alt="">
           </span>
 
                                     <h2 style="font-size:1.4vw">Or choose a template type</h2>
@@ -262,10 +254,11 @@
                                         </div>
                                         <span class='button text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2'
                                               onclick="skipTemplates()">
-            <img src="/app/static/images/icons/new.svg" style="visibility: visible;width:20px;height:20px;float:left;">
+            <img src="/app/static/images/icons/new.svg" style="visibility: visible;width:20px;height:20px;float:left;"
+                 alt="">
             Create course
             <img src="/app/static/images/icons/next.svg"
-                 style="visibility: visible;width:20px;height:20px;float:right;">
+                 style="visibility: visible;width:20px;height:20px;float:right;" alt="">
           </span>
 
                                         <h2 style="font-size:1.4vw">Or choose a template type</h2>

@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block main %}
-    <body oncontextmenu="rightClickElements={}">
+    <body>
     {% include "navbar.html" %}
     {% include "courses/sidebar.html" %}
     <div style="margin-left:10px;width:calc(100% - 400px);float:left">
@@ -24,7 +24,7 @@
 
         for (const link of sidebarLinks) {
             if (link.innerHTML.includes(saveData)) {
-                link.className += " dark:bg-gray-600";
+                link.classList.add("dark:bg-gray-600", "light:bg-gray-600");
                 link.style.pointerEvents = "none";
                 break;
             }
