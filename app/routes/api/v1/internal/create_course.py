@@ -1,6 +1,7 @@
 from flask import session, request
+
 from . import internal
-from .....utils.private_endpoint import private_endpoint
+from ....main.utils import private_endpoint
 from .....static.python.mongodb import create
 
 

@@ -1,18 +1,16 @@
 """
 App entrypoint.
 """
-from app.routes import init_app
+import os
+
 from waitress import serve
 
-import flask, re, os
-from app.static.python.mongodb import read
-
+from app.routes import init_app
 
 app = init_app()
 print(app.url_map)
 app.secret_key = os.getenv("MONGOPASS")
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
-
 
 # app.register_blueprint(error_blueprint)
 if __name__ == "__main__":

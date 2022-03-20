@@ -1,9 +1,9 @@
-var greeting = document.getElementsByTagName('h1')[0];
+const greeting = document.getElementsByTagName('h1')[0];
 
 function updateTime() {
-    hour = new Date().getHours();
+    let hour = new Date().getHours();
 
-    var text = null;
+    let text = null;
 
     if (hour < 11) text = 'Morning';
     else if (hour > 17) text = 'Evening';

@@ -1,7 +1,8 @@
+from flask import render_template, session, request
+
 from . import main_blueprint
-from flask import render_template, redirect, session, request
+from .utils import logged_in
 from ...static.python.mongodb import read
-from ...utils.logged_in import logged_in
 
 
 @main_blueprint.route("/lms", methods=["GET"])
@@ -10,6 +11,7 @@ def lms():
     new_user = request.args.get("new_user", default="false", type=str)
     user_acc = read.find_user(id=session["id"])
     user_courses = read.get_user_courses(session["id"])
+
     return render_template(
         "lms.html",
         password=session["password"],

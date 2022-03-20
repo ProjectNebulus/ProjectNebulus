@@ -1,7 +1,8 @@
-from . import main_blueprint
 from flask import render_template, session, request
+
+from . import main_blueprint
+from .utils import logged_in
 from ...static.python.mongodb import read
-from ...utils.logged_in import logged_in
 
 
 @main_blueprint.route("/dashboard", methods=["GET"])

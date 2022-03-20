@@ -1,5 +1,5 @@
 from . import internal
-from .....utils.private_endpoint import private_endpoint
+from ....main.utils import private_endpoint
 from .....static.python.spotify import get_song
 
 

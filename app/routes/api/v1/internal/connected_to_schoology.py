@@ -1,7 +1,7 @@
 from flask import session
-from . import internal
-from .....utils.private_endpoint import private_endpoint
 
+from . import internal
+from ....main.utils import private_endpoint
 
 
 @internal.route("/check-schoology-connection", methods=["GET"])

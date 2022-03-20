@@ -10,6 +10,7 @@ main_blueprint = Blueprint(
 
 from .about import *
 from .connections import *
+from .course import *
 from .dashboard import *
 from .home import *
 from .lms import *

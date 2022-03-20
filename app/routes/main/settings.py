@@ -1,7 +1,8 @@
+from flask import render_template, session
+
 from . import main_blueprint
-from flask import render_template, redirect, session
+from .utils import logged_in
 from ...static.python.mongodb import read
-from ...utils.logged_in import logged_in
 
 
 @main_blueprint.route("/settings", methods=["GET"])

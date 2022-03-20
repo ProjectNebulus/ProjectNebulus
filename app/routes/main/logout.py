@@ -1,6 +1,7 @@
-from . import main_blueprint
 from flask import session, redirect
-from ...utils.logged_in import logged_in
+
+from . import main_blueprint
+from .utils import logged_in
 
 
 @main_blueprint.route("/logout", methods=["GET"])

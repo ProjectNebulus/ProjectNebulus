@@ -1,5 +1,17 @@
 from functools import wraps
-from flask import request, render_template
+
+from flask import session, redirect, request, render_template
+
+
+def logged_in(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        if session.get('logged_in'):
+            return func(*args, **kwargs)
+        else:
+            return redirect("/signin")
+
+    return wrapper
 
 
 def private_endpoint(func):

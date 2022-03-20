@@ -4,8 +4,8 @@ import mechanize
 import requests
 from bs4 import BeautifulSoup
 
-from static.python.classes import Avatar
-from static.python.mongodb import *
+from app.static.python.classes import Avatar
+from app.static.python.mongodb import *
 
 
 def scrapeSchoology():

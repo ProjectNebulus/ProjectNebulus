@@ -16,6 +16,7 @@ Flask
 Flask-Cors
 Flask-GraphQL
 fuzzywuzzy
+google-auth
 gql
 graphene
 graphene-mongo
