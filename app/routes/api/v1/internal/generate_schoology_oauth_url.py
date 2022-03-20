@@ -17,7 +17,7 @@ def generate_url_signin():
 
     auth = schoolopy.Auth(key, secret, three_legged=True, domain=DOMAIN)
     # Request authorization URL to open in another window.
-    url = auth.request_authorization(callback_url=(request.url_root + "closeSchoology"))
+    url = auth.request_authorization(callback_url=(request.url_root + "api/v1/internal/schoology-callback"))
     session["request_token"] = auth.request_token
     session["request_token_secret"] = auth.request_token_secret
     session["access_token_secret"] = auth.access_token_secret

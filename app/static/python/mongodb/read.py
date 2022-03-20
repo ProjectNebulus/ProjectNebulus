@@ -56,22 +56,10 @@ def find_courses(_id: str):
 
 
 def find_user(**kwargs) -> User | None:
-    print(kwargs)
-    if not any(i in ["pk", "id", "username", "email"] for i in kwargs.keys()):
-        return
-    if kwargs.get("id"):
-        user = User.objects(pk=kwargs["id"])
-    elif kwargs.get("pk"):
-        user = User.objects(pk=kwargs["pk"])
-    elif kwargs.get("username"):
-        user = User.objects(username=kwargs["username"])
-    else:
-        user = User.objects(email=kwargs["email"])
-
+    user = User.objects(**kwargs).first()
     if not user:
         raise KeyError("User not found")
-    return user[0]
-
+    return user
 
 def getSchoology(id: str = None, username: str = None, email: str = None) -> Schoology:
     return find_user(id=id, username=username, email=email).schoology
