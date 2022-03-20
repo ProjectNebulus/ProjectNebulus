@@ -4,6 +4,7 @@ import os
 from flask import Flask, session, request, redirect
 from flask_session import Session
 import spotipy
+from .utils import logged_in
 import uuid
 
 # In order to get Spotipy to work, you must install the latest version with cloning the repo with the following command:
@@ -22,6 +23,7 @@ def session_cache_path():
 
 
 @main_blueprint.route("/spotify")
+@logged_in
 def spotify():
     if not session.get("uuid"):
         # Step 1. Visitor is unknown, give random ID
