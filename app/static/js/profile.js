@@ -14,7 +14,12 @@ function fetchStatus() {
             let artist = songs[1]
             let art = songs[2]
             let art2 = songs[3];
-            document.getElementById('song').innerHTML = `<p> ${song} - ${artist} <br><br><img class="mb-3 w-24 h-24 rounded-full shadow-lg" src="${art}"><img class="mb-3 w-24 h-24 rounded-full shadow-lg" src=${art2}>`;
+            document.getElementById('song').innerHTML = `<div class="p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+            <p> ${song} - ${artist} <br><br>
+            <img style="display: inline-block; margin:20px;" class="mb-3 w-24 h-24 rounded-full shadow-lg" src="${art}">
+            <img style="float:left; margin:20px; display: inline-block;" class="mb-3 w-24 h-24 shadow-lg" src=${art2}>
+            </div>
+            `;
 
 
         }
