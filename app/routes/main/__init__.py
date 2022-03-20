@@ -23,3 +23,4 @@ from .signin import *
 from .signup import *
 
 from .calendar import *
+from .spotify import *

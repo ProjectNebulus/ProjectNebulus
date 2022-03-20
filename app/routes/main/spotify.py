@@ -1,23 +1,16 @@
+from flask import render_template, redirect, session
+from . import main_blueprint
 import os
 from flask import Flask, session, request, redirect
 from flask_session import Session
 import spotipy
 import uuid
-from SwSpotify import spotify
-
 
 # In order to get Spotipy to work, you must install the latest version with cloning the repo with the following command:
 # pip3 install git+https://github.com/plamere/spotipy
 SPOTIPY_CLIENT_ID = "846095b9ce934b0da3e0aaf3adbf600c"
 SPOTIPY_CLIENT_SECRET = "1d79c77cee124d8f8e20b16f720d65e8"
-SPOTIPY_REDIRECT_URI = "http://127.0.0.1:9080/"
-
-
-app = Flask(__name__)
-app.config["SECRET_KEY"] = os.urandom(64)
-app.config["SESSION_TYPE"] = "filesystem"
-app.config["SESSION_FILE_DIR"] = "./.flask_session/"
-Session(app)
+SPOTIPY_REDIRECT_URI = "http://localhost:8080/spotify"
 
 caches_folder = "./.spotify_caches/"
 if not os.path.exists(caches_folder):
@@ -28,8 +21,8 @@ def session_cache_path():
     return caches_folder + session.get("uuid")
 
 
-@app.route("/")
-def index():
+@main_blueprint.route("/spotify")
+def spotify():
     if not session.get("uuid"):
         # Step 1. Visitor is unknown, give random ID
         session["uuid"] = str(uuid.uuid4())
@@ -49,7 +42,7 @@ def index():
     if request.args.get("code"):
         # Step 3. Being redirected from Spotify auth page
         auth_manager.get_access_token(request.args.get("code"))
-        return redirect("/")
+        return redirect("/spotify")
 
     if not auth_manager.validate_token(cache_handler.get_cached_token()):
         # Step 2. Display sign in link when no token
@@ -60,26 +53,26 @@ def index():
     spotify = spotipy.Spotify(auth_manager=auth_manager)
     return (
         f'<h2>Hi {spotify.me()["display_name"]}, '
-        f'<small><a href="/sign_out">[sign out]<a/></small></h2>'
-        f'<a href="/playlists">my playlists</a> | '
-        f'<a href="/currently_playing">currently playing</a> | '
-        f'<a href="/current_user">me</a>'
+        f'<small><a href="/spotify/sign_out">[sign out]<a/></small></h2>'
+        f'<a href="/spotify/playlists">my playlists</a> | '
+        f'<a href="/spotify/currently_playing">currently playing</a> | '
+        f'<a href="/spotify/current_user">me</a>'
     )
 
 
-@app.route("/sign_out")
-def sign_out():
+@main_blueprint.route("/spotify/sign_out")
+def spotify_sign_out():
     try:
         # Remove the CACHE file (.cache-test) so that a new user can authorize.
         os.remove(session_cache_path())
         session.clear()
     except OSError as e:
         print("Error: %s - %s." % (e.filename, e.strerror))
-    return redirect("/")
+    return redirect("/spotify")
 
 
-@app.route("/playlists")
-def playlists():
+@main_blueprint.route("/spotify/playlists")
+def spotify_playlists():
     cache_handler = spotipy.cache_handler.CacheFileHandler(
         cache_path=session_cache_path()
     )
@@ -93,13 +86,13 @@ def playlists():
     )
 
     if not auth_manager.validate_token(cache_handler.get_cached_token()):
-        return redirect("/")
+        return redirect("/spotify")
 
     spotify = spotipy.Spotify(auth_manager=auth_manager)
     return spotify.current_user_playlists()
 
 
-@app.route("/currently_playing")
+@main_blueprint.route("/spotify/currently_playing")
 def currently_playing():
     cache_handler = spotipy.cache_handler.CacheFileHandler(
         cache_path=session_cache_path()
@@ -114,7 +107,7 @@ def currently_playing():
     )
 
     if not auth_manager.validate_token(cache_handler.get_cached_token()):
-        return redirect("/")
+        return redirect("/spotify")
     spotify = spotipy.Spotify(auth_manager=auth_manager)
     track = spotify.current_user_playing_track()
     if not track is None:
@@ -122,8 +115,8 @@ def currently_playing():
     return "No track currently playing."
 
 
-@app.route("/current_user")
-def current_user():
+@main_blueprint.route("/spotify/current_user")
+def spotify_current_user():
     cache_handler = spotipy.cache_handler.CacheFileHandler(
         cache_path=session_cache_path()
     )
@@ -137,15 +130,15 @@ def current_user():
     )
 
     if not auth_manager.validate_token(cache_handler.get_cached_token()):
-        return redirect("/")
+        return redirect("/spotify")
     spotify = spotipy.Spotify(auth_manager=auth_manager)
     return spotify.current_user()
 
 
 """
-Following lines allow application to be run more conveniently with
-`python app.py` (Make sure you're using python3)
+Following lines allow main_blueprintlication to be run more conveniently with
+`python main_blueprint.py` (Make sure you're using python3)
 (Also includes directive to leverage pythons threading capacity.)
 """
 if __name__ == "__main__":
-    app.run(threaded=True, port=int(os.environ.get("PORT", 9080)))
+    main_blueprint.run(threaded=True, port=int(os.environ.get("PORT", 9080)))
