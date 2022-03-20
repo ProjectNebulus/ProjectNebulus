@@ -24,3 +24,4 @@ from .signup import *
 
 from .calendar import *
 from .spotify import *
+from .discordauth import *
