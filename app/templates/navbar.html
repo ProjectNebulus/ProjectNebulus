@@ -1,7 +1,7 @@
 {% if not disablebar %}
-    <nav
-            class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded bg-gray-300 dark:bg-gray-600"
-            oncontextmenu="rightClickElements=null">
+    <nav 
+         class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded bg-gray-300 dark:bg-gray-600"
+         oncontextmenu="rightClickElements=null">
         <div class="container flex flex-wrap justify-between items-center mx-auto">
             <a href="/" class="flex">
                 <img class="mr-3 h-10 logo_">
@@ -204,13 +204,17 @@
                     document.documentElement.classList.remove('dark');
                     localStorage.setItem('color-theme', 'light');
                     document.body.style.background = "white";
+                    document.getElementById('frame').contentWindow.location.reload();
                 } else {
                     document.documentElement.classList.add('dark');
                     localStorage.setItem('color-theme', 'dark');
                     document.body.style.background = "#111926";
+                    document.getElementById('frame').contentWindow.location.reload();
                 }
             }
-            document.getElementById('frame').contentWindow.location.reload();
+            if (window.location.href.includes("course")) {
+                document.getElementById("frame").contentWindow.location.reload();
+            }
         });
 
         for (let a of document.getElementsByClassName("nav-link"))

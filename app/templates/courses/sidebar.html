@@ -75,7 +75,7 @@
 </aside>
 
 <script>
-    let sidebarLinks = document.getElementsByTagName("a");
+    let sidebarLinks = document.getElementById("space-y-2").getElementsByTagName("a");
 
     for (const a of sidebarLinks) {
         if (a.target !== "frame")
@@ -91,7 +91,7 @@
                 link.className = a.className.replace(" dark:bg-gray-600", "");
             }
 
-            let title = a.href.substring(a.href.indexOf(document.documentURI)).split("/")[5];
+            let title = a.href.substring(a.href.indexOf(document.documentURI)).split("/")[6];
             title = title[0].toUpperCase() + title.substring(1);
             pageTitle.innerHTML = title + loadingIcon;
             setTimeout(() => pageTitle.innerHTML = pageTitle.innerHTML.replace(loadingIcon, ""), 3000)
