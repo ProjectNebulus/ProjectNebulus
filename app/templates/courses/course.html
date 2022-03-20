@@ -15,9 +15,7 @@
         const iframe = document.getElementsByName("frame")[0];
         const pageTitle = document.getElementById("page-title");
         let removed = true;
-        alert("{{ course_id }}")
         let saveData = localStorage.getItem("{{ course_id }}");
-        alert(localStorage.getItem("{{ course_id }}"))
         if (saveData === null)
             saveData = "Documents";
 
