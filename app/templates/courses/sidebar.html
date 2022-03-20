@@ -1,12 +1,15 @@
 <aside style="float:left; width:20%" class="w-64 h-full" aria-label="Sidebar">
     <div class="px-3 py-4 overflow-y-auto rounded bg-gray-50 dark:bg-gray-800 h-full">
-        <span style="text-align: center"
-              class="self-center text-lg font-semibold whitespace-nowrap text-black dark:text-white text-black"><img
-                src="https://bins.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg?"
-                style="object-fit: cover; width:40px; height:40px; border-radius:10px;display: inline-block; margin: 10px;"> {{ course.name }}</span>
+        <a href="" class="flex pl-2.5 mb-5">
+
+                    <span style="text-align: center"
+                          class="self-center text-lg font-semibold whitespace-nowrap text-black dark:text-white text-black"><img
+                            src="https://bins.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg?"
+                            style="object-fit: cover; width:40px; height:40px; border-radius:10px;display: inline-block; margin: 10px;"> {{ course.name }}</span>
+        </a>
         <ul class="space-y-2">
             <li>
-                <a href="/course/{{ course_id }}/documents" target="frame"
+                <a href="/courses/course/{{ course_id }}/documents" target="frame"
                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-100 dark:hover:bg-gray-700">
                     <p class="dark:text-gray-400"><i class="material-icons">description</i></p>
 
@@ -14,7 +17,7 @@
                 </a>
             </li>
             <li>
-                <a href="/course/{{ course_id }}/announcements" target="frame"
+                <a href="/courses/course/{{ course_id }}/announcements" target="frame"
                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-100 dark:hover:bg-gray-700">
                     <p class="dark:text-gray-400"><i class="material-icons">campaign</i></p>
 
@@ -23,7 +26,7 @@
                 </a>
             </li>
             <li>
-                <a href="/course/{{ course_id }}/grades" target="frame"
+                <a href="/courses/course/{{ course_id }}/grades" target="frame"
                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-100 dark:hover:bg-gray-700">
                     <p class="dark:text-gray-400"><i class="material-icons">trending_up</i></p>
 
@@ -31,7 +34,7 @@
                 </a>
             </li>
             <li>
-                <a href="/course/{{ course_id }}/information" target="frame"
+                <a href="/courses/course/{{ course_id }}/information" target="frame"
                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-100 dark:hover:bg-gray-700">
                     <p class="dark:text-gray-400"><i class="material-icons">info</i></p>
 
@@ -39,7 +42,7 @@
                 </a>
             </li>
             <li>
-                <a href="/course/{{ course_id }}/settings" target="frame"
+                <a href="/courses/course/{{ course_id }}/settings" target="frame"
                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-100 dark:hover:bg-gray-700">
                     <p class="dark:text-gray-400"><i class="material-icons">settings</i></p>
 
@@ -47,21 +50,21 @@
                 </a>
             </li>
             <li>
-                <a href="/course/{{ course_id }}/textbook" target="frame"
+                <a href="/courses/course/{{ course_id }}/textbook" target="frame"
                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-100 dark:hover:bg-gray-700">
                     <p class="dark:text-gray-400"><i class="material-icons">menu_book</i></p>
                     <span class="flex-1 ml-3 whitespace-nowrap">Textbook</span>
                 </a>
             </li>
             <li>
-                <a href="/course/{{ course_id }}/extensions" target="frame"
+                <a href="/courses/course/{{ course_id }}/extensions" target="frame"
                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-100 dark:hover:bg-gray-700">
                     <p class="dark:text-gray-400"><i class="material-icons">extension</i></p>
                     <span class="flex-1 ml-3 whitespace-nowrap">Extensions</span>
                 </a>
             </li>
             <li>
-                <a href="/course/{{ course_id }}/learning" target="frame"
+                <a href="/courses/course/{{ course_id }}/learning" target="frame"
                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-100 dark:hover:bg-gray-700">
                     <p class="dark:text-gray-400"><i class="material-icons">school</i></p>
                     <span class="flex-1 ml-3 whitespace-nowrap">Learning</span>
@@ -72,26 +75,30 @@
 </aside>
 
 <script>
-    let sidebarLinks = document.getElementsByClassName("space-y-2")[0].getElementsByTagName("a");
+    let sidebarLinks = document.getElementById("space-y-2").getElementsByTagName("a");
 
     for (const a of sidebarLinks) {
+        if (a.target !== "frame")
+            continue;
+
         a.onclick = () => {
             for (const link of sidebarLinks) {
-                if (link === a)
+                if (a.target !== "frame")
                     continue;
 
                 link.style.pointerEvents = "auto";
                 link.style.cursor = "pointer";
-                link.classList.remove("dark:bg-gray-600")
+                link.className = a.className.replace(" dark:bg-gray-600", "");
             }
 
-            let title = a.href.substring(a.href.indexOf(document.documentURI)).split("/")[5];
+            let title = a.href.substring(a.href.indexOf(document.documentURI)).split("/")[6];
             title = title[0].toUpperCase() + title.substring(1);
-            pageTitle.innerHTML = title;
+            pageTitle.innerHTML = title + loadingIcon;
+            setTimeout(() => pageTitle.innerHTML = pageTitle.innerHTML.replace(loadingIcon, ""), 1000)
 
             a.style.pointerEvents = "none";
             a.style.cursor = "default";
-            a.classList.add("dark:bg-gray-600");
+            a.className += " dark:bg-gray-600";
 
             localStorage.setItem("{{ course_id }}", title);
         }
