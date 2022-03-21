@@ -14,6 +14,7 @@ from ..classes.Schoology import Schoology
 from ..classes.GoogleClassroom import GoogleClassroom
 from ..classes.User import User
 from ..security import valid_password
+from ..classes.Spotify import Spotify
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 
@@ -73,6 +74,18 @@ def getClassroom(
         id: str = None, username: str = None, email: str = None
 ) -> GoogleClassroom:
     return find_user(id=id, username=username, email=email).gclassroom
+
+
+def getSpotify(
+        id: str = None, username: str = None, email: str = None
+) -> Spotify:
+    return find_user(id=id, username=username, email=email).spotify
+
+
+def getSpotifyCache(
+        id: str = None, username: str = None, email: str = None
+) -> Spotify:
+    return find_user(id=id, username=username, email=email).spotify.Spotify_cache
 
 
 def CheckSchoology(_id: int):

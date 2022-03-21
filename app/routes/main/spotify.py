@@ -6,6 +6,7 @@ from flask_session import Session
 import spotipy
 from .utils import logged_in
 import uuid
+from app.static.python.mongodb import read
 
 # In order to get Spotipy to work, you must install the latest version with cloning the repo with the following command:
 # pip3 install git+https://github.com/plamere/spotipy
@@ -18,8 +19,10 @@ if not os.path.exists(caches_folder):
     os.makedirs(caches_folder)
 
 
-def session_cache_path():
-    return caches_folder + session.get("uuid")
+def fetch_cache():
+    cache = read.getSpotifyCache(username=session["username"])
+    return cache
+    # return caches_folder + session.get("uuid")
 
 
 @main_blueprint.route("/spotify")
@@ -52,6 +55,8 @@ def spotify():
         return render_template("connectSpotify.html", auth=True, auth_url=auth_url)
 
     # Step 4. Signed in, display data
+    uuid = session["uuid"]
+    cache = fetch_cache()
     spotify = spotipy.Spotify(auth_manager=auth_manager)
     return render_template("connectSpotify.html", spotify=spotify, auth=False)
 
