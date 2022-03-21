@@ -58,6 +58,7 @@ def find_courses(_id: str):
 def find_user(**kwargs) -> User | None:
     user = User.objects(**kwargs).first()
     if not user:
+        print(user)
         raise KeyError("User not found")
     return user
 

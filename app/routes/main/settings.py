@@ -8,6 +8,7 @@ from ...static.python.mongodb import read
 @main_blueprint.route("/settings", methods=["GET"])
 @logged_in
 def settings():
+    print(session.get("username"))
     the_schoology = read.getSchoology(username=session.get("username"))
     the_google_classroom = read.getClassroom(username=session.get("username"))
 
