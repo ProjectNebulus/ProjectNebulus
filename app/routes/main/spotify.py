@@ -22,7 +22,18 @@ if not os.path.exists(caches_folder):
 def fetch_cache():
     cache = read.getSpotifyCache(username=session["username"])
     return cache
-    # return caches_folder + session.get("uuid")
+
+
+def update_cache():
+    return
+
+
+def get_path():
+    cache = fetch_cache()
+    folder = caches_folder + session.get("uuid")
+    with open(folder, "w") as thefolder:
+        print(cache, file=thefolder)
+    return folder
 
 
 @main_blueprint.route("/spotify")
@@ -33,7 +44,7 @@ def spotify():
         session["uuid"] = str(uuid.uuid4())
 
     cache_handler = spotipy.cache_handler.CacheFileHandler(
-        cache_path=session_cache_path()
+        cache_path=get_path()
     )
     auth_manager = spotipy.oauth2.SpotifyOAuth(
         scope="user-read-currently-playing playlist-modify-private",
@@ -64,7 +75,7 @@ def spotify():
 def spotify_sign_out():
     try:
         # Remove the CACHE file (.cache-test) so that a new user can authorize.
-        os.remove(session_cache_path())
+        os.remove(get_path())
         session.pop("uuid")
     except OSError as e:
         print("Error: %s - %s." % (e.filename, e.strerror))
@@ -74,7 +85,7 @@ def spotify_sign_out():
 @main_blueprint.route("/spotify/playlists")
 def spotify_playlists():
     cache_handler = spotipy.cache_handler.CacheFileHandler(
-        cache_path=session_cache_path()
+        cache_path=get_path()
     )
     auth_manager = spotipy.oauth2.SpotifyOAuth(
         scope="user-read-currently-playing playlist-modify-private",
@@ -95,7 +106,7 @@ def spotify_playlists():
 @main_blueprint.route("/spotify/currently_playing")
 def currently_playing():
     cache_handler = spotipy.cache_handler.CacheFileHandler(
-        cache_path=session_cache_path()
+        cache_path=get_path()
     )
     auth_manager = spotipy.oauth2.SpotifyOAuth(
         scope="user-read-currently-playing playlist-modify-private",
@@ -118,7 +129,7 @@ def currently_playing():
 @main_blueprint.route("/spotify/current_user")
 def spotify_current_user():
     cache_handler = spotipy.cache_handler.CacheFileHandler(
-        cache_path=session_cache_path()
+        cache_path=get_path()
     )
     auth_manager = spotipy.oauth2.SpotifyOAuth(
         scope="user-read-currently-playing playlist-modify-private",

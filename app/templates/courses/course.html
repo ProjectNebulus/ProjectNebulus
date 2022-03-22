@@ -9,10 +9,13 @@
         <hr class="dark:text-white text-black">
     </div>
 
-    <iframe name="frame" width="80%" height="80%"></iframe>
+    <iframe id="frame" name="frame" width="80%" height="80%"></iframe>
+    <div style="display:none" id="load" width="80%" height="80%">Please wait...<br><img
+            src="/static/images/nebulusCats/v3.gif"></div>
 
     <script>
         const iframe = document.getElementsByName("frame")[0];
+
         const pageTitle = document.getElementById("page-title");
         let removed = true;
         let saveData = localStorage.getItem("{{ course_id }}");
