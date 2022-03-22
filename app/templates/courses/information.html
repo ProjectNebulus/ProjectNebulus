@@ -2,9 +2,9 @@
 {% extends "layout.html" %}
 {% block main %}
 
-        <span class="font-black dark:text-white text-black">Name: </span> <span class="dark:text-white text-black">{{name}}</span><br>
-        <span class="font-black dark:text-white text-black">Teacher: </span> <span class="dark:text-white text-black">{{teacher}}</span><br>
-
-
+<div style="margin-left: 20px; margin-top: 20px">
+    <p class="text-3xl dark:text-white">Name: <span class="text-red-400">{{course.name}}</span></p>
+    <p class="text-3xl dark:text-white">Teacher: <span class="text-red-400">{{teacher}}</span></p>
+</div>
 
 {% endblock %}

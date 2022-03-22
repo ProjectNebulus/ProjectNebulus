@@ -25,6 +25,7 @@ def course_page(page, **kwargs):
                     page="Nebulus - " + course.name,
                     read=read,
                     course=course,
+                    teacher=course.teacher,
                     course_id=course_id,
                     password=session.get("password"),
                     user=session.get("username"),

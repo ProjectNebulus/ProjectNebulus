@@ -1,6 +1,15 @@
 <!--Extend with Jinja!-->
 {% extends "layout.html" %}
 {% block main %}
-
+<div style="margin-left: 20px; margin-top: 20px">
+    <p class="text-3xl dark:text-white"><span style="float:left;">Name: </span><span class="text-red-400"><input
+            style="float:left;width:50%" type="email" id="email"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            value="{{course.name}}" required></span></p><br><br><br>
+    <p class="text-3xl dark:text-white"><span style="float:left;">Teacher: </span><span class="text-red-400"><input
+            style="float:left;width:50%" type="email" id="email"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            value="{{teacher}}" required></span></p>
+</div>
 
 {% endblock %}
