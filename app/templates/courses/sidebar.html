@@ -5,7 +5,7 @@
                 src="https://bins.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg?"
                 style="object-fit: cover; width:40px; height:40px; border-radius:10px;display: inline-block; margin: 10px;"> {{ course.name }}</span>
         <ul class="space-y-2">
-            <li onclick="wait_for_loading()">
+            <li onclick="wait_for_loading('documents')">
                 <a href="/course/{{ course_id }}/documents" target="frame"
                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-100 dark:hover:bg-gray-700">
                     <p class="dark:text-gray-400"><i class="material-icons">description</i></p>
@@ -13,7 +13,7 @@
                     <span class="ml-3">Documents</span>
                 </a>
             </li>
-            <li onclick="wait_for_loading()">
+            <li onclick="wait_for_loading('announcements')">
                 <a href="/course/{{ course_id }}/announcements" target="frame"
                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-100 dark:hover:bg-gray-700">
                     <p class="dark:text-gray-400"><i class="material-icons">campaign</i></p>
@@ -22,7 +22,7 @@
 
                 </a>
             </li>
-            <li onclick="wait_for_loading()">
+            <li onclick="wait_for_loading('grades')">
                 <a href="/course/{{ course_id }}/grades" target="frame"
                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-100 dark:hover:bg-gray-700">
                     <p class="dark:text-gray-400"><i class="material-icons">trending_up</i></p>
@@ -30,7 +30,7 @@
                     <span class="ml-3">Grades</span>
                 </a>
             </li>
-            <li onclick="wait_for_loading()">
+            <li onclick="wait_for_loading('information')">
                 <a href="/course/{{ course_id }}/information" target="frame"
                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-100 dark:hover:bg-gray-700">
                     <p class="dark:text-gray-400"><i class="material-icons">info</i></p>
@@ -38,7 +38,7 @@
                     <span class="ml-3">Information</span>
                 </a>
             </li>
-            <li onclick="wait_for_loading()">
+            <li onclick="wait_for_loading('settings')">
                 <a href="/course/{{ course_id }}/settings" target="frame"
                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-100 dark:hover:bg-gray-700">
                     <p class="dark:text-gray-400"><i class="material-icons">settings</i></p>
@@ -46,21 +46,21 @@
                     <span class="ml-3">Settings</span>
                 </a>
             </li>
-            <li onclick="wait_for_loading()">
+            <li onclick="wait_for_loading('textbook')">
                 <a href="/course/{{ course_id }}/textbook" target="frame"
                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-100 dark:hover:bg-gray-700">
                     <p class="dark:text-gray-400"><i class="material-icons">menu_book</i></p>
                     <span class="flex-1 ml-3 whitespace-nowrap">Textbook</span>
                 </a>
             </li>
-            <li onclick="wait_for_loading()">
+            <li onclick="wait_for_loading('extensions')">
                 <a href="/course/{{ course_id }}/extensions" target="frame"
                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-100 dark:hover:bg-gray-700">
                     <p class="dark:text-gray-400"><i class="material-icons">extension</i></p>
                     <span class="flex-1 ml-3 whitespace-nowrap">Extensions</span>
                 </a>
             </li>
-            <li onclick="wait_for_loading()">
+            <li onclick="wait_for_loading('learning')">
                 <a href="/course/{{ course_id }}/learning" target="frame"
                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-100 dark:hover:bg-gray-700">
                     <p class="dark:text-gray-400"><i class="material-icons">school</i></p>
@@ -72,18 +72,21 @@
 </aside>
 
 <script>
-    function wait_for_loading() {
-        //alert("start function");
+    function wait_for_loading(link) {
         var iframe = document.getElementById('frame');
-        var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+        var iframelink = iframe.contentWindow.location.href
+        //alert(iframelink)
 
-        // Check if loading is complete
-        alert(iframeDoc.readyState);
-        while (iframeDoc.readyState !== 'complete') {
-            alert("hi");
-            iframe.style.display = "none";
-            document.getElementById("load").display = "block";
-        }
+        iframe.style.display = "none";
+        document.getElementById("load").style.display = "block";
+        iframelink = iframe.contentWindow.location.href;
+        setInterval(function () {
+            if (iframelink.includes(link)) {
+                iframe.style.display = "block";
+                document.getElementById("load").style.display = "none";
+            }
+        }, 1000)
+
 
         iframe.style.display = "block";
         document.getElementById("load").display = "none";
