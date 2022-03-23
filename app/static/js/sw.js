@@ -67,7 +67,6 @@ self.addEventListener('fetch', function (event) {
     );
 });
 
-<<<<<<< HEAD
 var urlsToCache = [ 
 
     'https://Project-Nebulus.nicholasxwang.repl.co/',
@@ -86,8 +85,6 @@ var urlsToCache = [
     'https://Project-Nebulus.nicholasxwang.repl.co/dashboard',
     'https://Project-Nebulus.nicholasxwang.repl.co/settings',
     'https://Project-Nebulus.nicholasxwang.repl.co/profile',
-=======
-var urlsToCache = [
     '/',
     '/static/styles.css',
     '/static/tailwind.css',
@@ -104,7 +101,7 @@ var urlsToCache = [
     '/dashboard',
     '/settings',
     '/profile',
->>>>>>> 3223cbcf271f9d227d90a811e1e61418924ddc6c
+
 
     'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'
 ];
