@@ -72,25 +72,14 @@
 </aside>
 
 <script>
-    function wait_for_loading(link) {
-        var iframe = document.getElementById('frame');
-        var iframelink = iframe.contentWindow.location.href
-        //alert(iframelink)
-
-        iframe.style.display = "none";
-        document.getElementById("load").style.display = "block";
-        iframelink = iframe.contentWindow.location.href;
-        setInterval(function () {
-            if (iframelink.includes(link)) {
-                iframe.style.display = "block";
-                document.getElementById("load").style.display = "none";
-            }
-        }, 1000)
-
-
-        iframe.style.display = "block";
-        document.getElementById("load").display = "none";
-    }
+    $('#frame').ready(function () {
+        $('#frame').css('display', 'block');
+        $('#load').css('display', 'none');
+    });
+    $('#frame').load(function () {
+        $('#frame').css('display', 'none');
+        $('#load').css('display', 'block');
+    });
 
     let sidebarLinks = document.getElementsByClassName("space-y-2")[0].getElementsByTagName("a");
 
