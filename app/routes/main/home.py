@@ -1,10 +1,11 @@
 from . import main_blueprint
-from flask import render_template, session, redirect
+from flask import render_template, session, redirect, request
 
 
 @main_blueprint.route("/", methods=["GET"])
 def index():
     # return "hi"
+    print(request.remote_addr)
     return render_template(
         "main/home.html",
         page="Nebulus - Learning, All In One",

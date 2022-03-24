@@ -7,6 +7,25 @@ authors = ["Your Name <you@example.com>"]
 [tool.poetry.dependencies]
 python = "^3.8"
 gql = "^3.1.0"
+swspotify = "^1.2.3"
+Flask-Session = "^0.4.0"
+google-api-python-client = "^2.42.0"
+youtube_dl = "^2021.12.17"
+Werkzeug = "^2.0.3"
+schoolopy = "^0.2.2"
+bs4 = "^0.0.1"
+python-dotenv = "^0.19.2"
+spotipy = "^2.19.0"
+Flask = "^2.0.3"
+mechanize = "^0.4.7"
+graphene = "^3.0"
+google-auth-oauthlib = "^0.5.1"
+Jinja2 = "^3.1.0"
+Flask-GraphQL = "^2.0.1"
+waitress = "^2.1.1"
+graphene-mongo = "^0.2.14"
+mongoengine = "^0.24.1"
+Flask-Mail = "^0.9.1"
 
 
 [tool.poetry.dev-dependencies]

@@ -4,7 +4,6 @@ from .....static.python.spotify import get_song
 
 
 @internal.route("/spotify-status", methods=["POST"])
-@private_endpoint
 def spotify_status():
     song = get_song()
     if len(song) == 4:

@@ -6,7 +6,6 @@ from .....static.python.mongodb import create
 
 
 @internal.route("/create-course", methods=["POST"])
-@private_endpoint
 def create_course():
     data = request.get_json()
     if data["name"] == "":

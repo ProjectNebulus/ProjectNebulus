@@ -4,7 +4,7 @@ App entrypoint.
 import os
 
 from waitress import serve
-
+from flask import request
 from app.routes import init_app
 
 app = init_app()

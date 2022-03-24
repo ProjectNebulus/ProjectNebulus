@@ -7,7 +7,6 @@ from .....static.python.mongodb import update
 
 
 @internal.route("/connect-to-schoology", methods=["POST"])
-@private_endpoint
 def connect_schoology():
     session["token"] = None
 

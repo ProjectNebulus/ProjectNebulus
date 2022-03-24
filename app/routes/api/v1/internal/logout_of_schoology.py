@@ -6,7 +6,6 @@ from .....static.python.mongodb import update, read
 
 
 @internal.route("/logout-of-schoology")
-@private_endpoint
 def logout_from_schoology2():
     session["schoologyEmail"] = None
     session["schoologyName"] = None

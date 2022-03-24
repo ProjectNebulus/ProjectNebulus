@@ -10,8 +10,8 @@ def private_endpoint(func):
             user_ip = request.remote_addr
         print(f'{user_ip} is trying to access {func.__name__}')
         # the first parameter should be the flask server ip address, so change it to what the ip is for your server
-
-        if user_ip == '127.0.0.1':
+        
+        if user_ip == '127.0.0.1' or user_ip == '172.18.0.1':
             return func(*args, **kwargs)
         else:
             return jsonify({'message': 'You are not authorized to access this endpoint'}), 401

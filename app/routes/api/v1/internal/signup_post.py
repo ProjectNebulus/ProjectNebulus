@@ -6,7 +6,6 @@ from .....static.python.mongodb import create
 
 
 @internal.route("/signup", methods=["POST"])
-@private_endpoint
 def signup_post():
     data = request.get_json()
 

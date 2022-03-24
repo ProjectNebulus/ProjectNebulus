@@ -21,6 +21,8 @@ def private_endpoint(func):
             user_ip = request.headers.getlist("X-Forwarded-For")[0]
         else:
             user_ip = request.remote_addr
+            print("computer ip")
+          
         # the first parameter should be the flask server ip address, so change it to what the ip is for your server
 
         if user_ip == '127.0.0.1':
