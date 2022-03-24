@@ -60,3 +60,4 @@ class Course(Snowflake):
     events = ListField(ReferenceField("Event"))
     image = EmbeddedDocumentField(Avatar)
     announcements = ListField(ReferenceField("Announcement"))
+    archived = BooleanField(default=False)

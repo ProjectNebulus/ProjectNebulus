@@ -13,5 +13,11 @@ class Folder(Snowflake):
 
     meta = {"collection": "Folders"}
     name = StringField(required=True)
-    course = ReferenceField("Course", required=True)
+    course = ReferenceField("Course", required=False)
+    parent = ReferenceField("Folder", required=False)
     documents = ListField(ReferenceField("DocumentFile"))
+
+
+    def clean(self):
+        if not (self.course and self.parent):
+            raise ValidationError("Folder must be a child of a course or a folder")
