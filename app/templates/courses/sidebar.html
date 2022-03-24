@@ -3,7 +3,13 @@
         <span style="text-align: center"
               class="self-center text-lg font-semibold whitespace-nowrap text-black dark:text-white text-black"><img
                 src="https://bins.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg?"
-                style="object-fit: cover; width:40px; height:40px; border-radius:10px;display: inline-block; margin: 10px;"> {{ course.name }}</span>
+                style="object-fit: cover; width:40px; height:40px; border-radius:10px;display: inline-block; margin: 10px;">
+            {% if (course.name|length) <= 17 %}
+            {{ course.name }}
+            {% else %}
+            {{ course.name[0:14] }}...
+            {% endif %}
+        </span>
         <ul class="space-y-2">
             <li onclick="wait_for_loading('documents')">
                 <a href="/course/{{ course_id }}/documents" target="frame"
