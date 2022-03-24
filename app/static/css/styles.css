@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 body {
-    margin: 0px; /* No borders for the image */
+    margin: 0; /* No borders for the image */
     background: white;
     color: black;
     font-family: 'Lato', sans-serif;
@@ -30,29 +30,6 @@ body {
 .dev_images {
     height: 150px;
     border: 5px solid #505050;
-}
-
-strong {
-    font-weight: 900;
-    font-size: 6.25vh;
-}
-
-.smaller {
-    color: #a8a8a8;
-    font-weight: 400;
-    font-size: 2.25vh;
-}
-
-.smaller2 {
-    color: #a8a8a8;
-    font-weight: 600;
-    font-size: 2.25vh;
-}
-
-.medium {
-    color: #a8a8a8;
-    font-weight: 750;
-    font-size: 2.25vh;
 }
 
 #homePageBanner,
@@ -368,4 +345,13 @@ input:-webkit-autofill:active {
 /*Change text in autofill textbox*/
 input:-webkit-autofill {
     -webkit-text-fill-color: white !important;
+}
+
+/*CUSTOM HIGHLIGHT COLOR*/
+::selection {
+    background: #00000080; /* WebKit/Blink Browsers */
+}
+
+::-moz-selection {
+    background: #00000080; /* Gecko Browsers */
 }

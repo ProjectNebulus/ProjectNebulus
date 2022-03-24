@@ -56,7 +56,11 @@
                             <img src="https://bins.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg?"
                                  style="object-fit: cover; width:40px; height:40px; border-radius:10px;display: inline-block; margin: 10px;"
                                  alt>
+                            {% if course.name|length <= 8 %}
                             {{ course.name }}
+                            {% else %}
+                            {{ course.name[0:5] }}...
+                            {% endif %}
                         </button>
                     </a>
 
