@@ -5,6 +5,8 @@ from typing import List
 from dotenv import load_dotenv
 from flask import session
 
+from . import read
+
 load_dotenv()
 import schoolopy
 
@@ -46,11 +48,12 @@ def generateSchoologyObject(_id: str) -> schoolopy.Schoology:
 
 
 def create_course(data: dict) -> Course:
+    user = read.find_user(username=data["username"])
+    del data["username"]
+
     course = Course(**data)
+    course.authorizedUsers.append(user)
     course.save(force_insert=True)
-    for i in course.authorizedUsers:
-        i.courses.append(course)
-        i.save()
     return course
 
 

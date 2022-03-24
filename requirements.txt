@@ -15,9 +15,12 @@ dnspython
 Flask
 Flask-Cors
 Flask-GraphQL
+flask_discord
+flask_mail
 flask_session
 fuzzywuzzy
 google-auth
+google-auth-oauthlib
 gql
 graphene
 graphene-mongo

@@ -1,9 +1,9 @@
-from flask import render_template, session
+from flask import render_template, session, request
 from jinja2 import TemplateNotFound
 
 from . import main_blueprint
-from .utils import logged_in
-from ...static.python.mongodb import read
+from .utils import logged_in, private_endpoint
+from ...static.python.mongodb import read, create
 
 
 @main_blueprint.route("/course/<id>")
@@ -40,3 +40,10 @@ def course_page(page, **kwargs):
         password=session.get("password"),
         user=session.get("username"),
     )
+
+
+@main_blueprint.route("/createCourse", methods=["POST"])
+@private_endpoint
+def createCourse():
+    create.create_course(request.get_json())
+    return "0"

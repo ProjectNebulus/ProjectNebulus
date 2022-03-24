@@ -1,5 +1,5 @@
 from __future__ import annotations
-from werkzeug.security import check_password_hash
+
 import re
 from typing import List
 
@@ -9,12 +9,12 @@ from ..classes.Course import Course
 from ..classes.Document import DocumentFile
 from ..classes.Events import Event
 from ..classes.Folder import Folder
+from ..classes.GoogleClassroom import GoogleClassroom
 from ..classes.Grades import Grades
 from ..classes.Schoology import Schoology
-from ..classes.GoogleClassroom import GoogleClassroom
+from ..classes.Spotify import Spotify
 from ..classes.User import User
 from ..security import valid_password
-from ..classes.Spotify import Spotify
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 
@@ -62,6 +62,7 @@ def find_user(**kwargs) -> User | None:
         print(user)
         raise KeyError("User not found")
     return user
+
 
 def getSchoology(**kwargs) -> Schoology:
     try:

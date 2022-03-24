@@ -12,5 +12,5 @@ def calendar():
         password=session["password"],
         user=session["username"],
         email=session["email"],
-        page="Nebulus - Dashboard",
+        page="Nebulus - Calendar",
     )

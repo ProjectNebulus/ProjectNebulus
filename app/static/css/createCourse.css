@@ -1,5 +1,5 @@
 /* The Modal (background) */
-.modal {
+#CourseModal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 2; /* Sit on top */
@@ -12,23 +12,20 @@
     background-color: rgb(0, 0, 0); /* Fallback color */
     background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
     align-content: center;
+    text-align: center;
 }
 
 /* Modal Content */
 
-.CourseBtn {
-    margin: auto;
-    margin-top: 5%;
+.CoursePage {
+    margin-top: 6%;
+    margin-left: 31%;
     padding: 20px;
     width: 50%;
     height: 70%;
     color: white;
     border-radius: 10px;
-    animation: movein 0.5s;
     position: absolute;
-    top: -1000px;
-    animation-fill-mode: forwards;
-    -webkit-animation-fill-mode: forwards;
 }
 
 h3 {
@@ -53,16 +50,34 @@ h1 {
     font-size: 1.75vw;
 }
 
+p {
+    color: #bababa;
+    font-size: 1.5vh;
+}
+
 label {
     font-size: 1.25vw;
     font-weight: 700;
     color: lightgray;
     float: left;
+    margin: 5px;
 }
 
 input[type='submit'] {
     color: white;
     font-size: 1.25vw;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+input[type="text"] {
+    border-radius: 10px;
+    padding: 10px;
+    width: 80%;
+    float: right;
+    color: black;
 }
 
 #course-nav {
@@ -91,20 +106,19 @@ input[type='submit'] {
     }
 }
 
-@webkit-keyframes movein {
+@keyframes moveout {
     from {
-        top: -1000px;
-    }
-
-    to {
         top: 0;
+    }
+    to {
+        top: -1000px;
     }
 }
 
 .image {
     width: 20px;
     height: 20px;
-    border-radius: 0%;
+    border-radius: 0;
     margin-right: 10px;
 }
 
