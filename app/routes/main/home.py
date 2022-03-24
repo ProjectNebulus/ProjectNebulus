@@ -1,5 +1,5 @@
 from . import main_blueprint
-from flask import render_template, session
+from flask import render_template, session, redirect
 
 
 @main_blueprint.route("/", methods=["GET"])
@@ -17,3 +17,8 @@ def index():
 def googleVerification():
     # GOOGLE VERIFICATION FILE
     return render_template("google34d8c04c4b82b69a.html")
+
+
+@main_blueprint.route("/arc-sw.js")
+def arcstuff():
+    return redirect("https://arc.io/arc-sw.js.")
