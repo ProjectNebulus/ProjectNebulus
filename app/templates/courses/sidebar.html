@@ -4,11 +4,7 @@
               class="self-center text-lg font-semibold whitespace-nowrap text-black dark:text-white text-black"><img
                 src="https://bins.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg?"
                 style="object-fit: cover; width:40px; height:40px; border-radius:10px;display: inline-block; margin: 10px;">
-            {% if (course.name|length) <= 17 %}
-            {{ course.name }}
-            {% else %}
-            {{ course.name[0:14] }}...
-            {% endif %}
+            {{ course.name[:14] + "..." * (course.name|length > 14) }}
         </span>
         <ul class="space-y-2">
             <li onclick="wait_for_loading('documents')">
@@ -78,15 +74,6 @@
 </aside>
 
 <script>
-    $('#frame').ready(function () {
-        $('#frame').css('display', 'block');
-        $('#load').css('display', 'none');
-    });
-    $('#frame').load(function () {
-        $('#frame').css('display', 'none');
-        $('#load').css('display', 'block');
-    });
-
     let sidebarLinks = document.getElementsByClassName("space-y-2")[0].getElementsByTagName("a");
 
     for (const a of sidebarLinks) {

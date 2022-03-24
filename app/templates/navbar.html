@@ -179,26 +179,16 @@
             themeToggleLightIcon.classList.toggle('hidden');
 
             // if set via local storage previously
-            let elements;
             if (localStorage.getItem('color-theme')) {
                 if (localStorage.getItem('color-theme') === 'light') {
                     document.documentElement.classList.add('dark');
 
                     localStorage.setItem('color-theme', 'dark');
                     document.body.style.background = "#111926";
-                    elements = document.getElementsByClassName("logo_");
-                    for (var i = 0; i < elements.length; i++) {
-                        elements[i].style.filter = "invert(1)";
-                    }
-
                 } else {
                     document.documentElement.classList.remove('dark');
                     localStorage.setItem('color-theme', 'light');
                     document.body.style.background = "white";
-                    elements = document.getElementsByClassName("logo_");
-                    for (var i = 0; i < elements.length; i++) {
-                        elements[i].style.filter = "invert(0)";
-                    }
                 }
 
                 // if NOT set via local storage previously
@@ -207,17 +197,24 @@
                     document.documentElement.classList.remove('dark');
                     localStorage.setItem('color-theme', 'light');
                     document.body.style.background = "white";
-                    document.getElementById('frame').contentWindow.location.reload();
                 } else {
                     document.documentElement.classList.add('dark');
                     localStorage.setItem('color-theme', 'dark');
                     document.body.style.background = "#111926";
-                    document.getElementById('frame').contentWindow.location.reload();
                 }
             }
-            if (window.location.href.includes("course"))
-                document.getElementById("frame").contentWindow.location.reload();
+            if (window.location.href.includes("course")) {
+                const frame = document.getElementById("frame");
+                const innerDoc = frame.contentDocument || frame.contentWindow.document;
 
+                if (document.documentElement.classList.contains("dark")) {
+                    innerDoc.documentElement.classList.add("dark");
+                    innerDoc.body.style.background = "#111926";
+                } else {
+                    innerDoc.documentElement.classList.remove("dark");
+                    innerDoc.body.style.background = "white";
+                }
+            }
         });
 
         for (let a of document.getElementsByClassName("nav-link"))
