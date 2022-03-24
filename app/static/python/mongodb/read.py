@@ -9,6 +9,7 @@ from ..classes.Course import Course
 from ..classes.Document import DocumentFile
 from ..classes.Events import Event
 from ..classes.Folder import Folder
+from ..classes.Document import Document
 from ..classes.GoogleClassroom import GoogleClassroom
 from ..classes.Grades import Grades
 from ..classes.Schoology import Schoology
@@ -64,6 +65,22 @@ def find_user(**kwargs) -> User | None:
     return user
 
 
+def find_folder(**kwargs) -> Folder | None:
+    folder = Folder.objects(**kwargs).first()
+    if not folder:
+        print(folder)
+        raise KeyError("User not found")
+    return folder
+
+
+def find_document(**kwargs) -> Document | None:
+    document = Document.objects(**kwargs).first()
+    if not document:
+        print(document)
+        raise KeyError("User not found")
+    return document
+
+
 def getSchoology(**kwargs) -> Schoology:
     try:
         return find_user(**kwargs).schoology
@@ -95,6 +112,17 @@ def CheckSchoology(_id: int):
     if not user or not user.schoology:
         return "false"
     return "true"
+
+
+def check_type(theobject):
+    try:
+        a = find_folder(theobject)
+        if a == None:
+            return "document"
+        else:
+            return "folder"
+    except:
+        return "document"
 
 
 def check_password_username(username, password):
