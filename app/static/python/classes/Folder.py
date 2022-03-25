@@ -2,6 +2,18 @@ from mongoengine import *
 
 from .Snowflake import Snowflake
 
+COLORS = ['red', 'blue', 'orange', 'yellow', 'green', 'purple', 'pink']
+
+
+def color_validator(v):
+    if v.index('#') == 0:
+        if len(v) == 7:  # #f0f0f0
+            return True
+        elif len(v) == 4:  # #fff
+            return True
+
+    return COLORS.index(v) > -1
+
 
 class Folder(Snowflake):
     """
@@ -17,7 +29,7 @@ class Folder(Snowflake):
     parent = ReferenceField("Folder", required=False)
     subfolders = ListField(ReferenceField("Folder", required=False))
     documents = ListField(ReferenceField("DocumentFile"))
-
+    color = StringField(validation=color_validator)
 
     def clean(self):
         if not (self.course and self.parent):
