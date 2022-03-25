@@ -10,8 +10,7 @@ from .....static.python.classes import Folder, Course
 @private_endpoint
 def connect_schoology(id):
     courseid = id
-    course = read.find_courses(courseid)
-    folders = course.folders
+    folders = read.get_folders(courseid)
     string = "0"
     for i in folders:
         string += " • "

@@ -146,3 +146,13 @@ def check_password_username(username, password):
 def get_announcement(announcement_id: str) -> Announcement:
     announcement = Announcement.objects(pk=announcement_id).first()
     return announcement
+
+
+def get_folders(parent_id: int=None, course_id: int=None) -> List[Folder]:
+    if not parent_id and not course_id:
+        raise ValueError("Must provide either parent_id or course_id")
+
+    if course_id:
+        return find_courses(course_id).folders
+    else:
+        return find_folder(id=parent_id).subfolders
