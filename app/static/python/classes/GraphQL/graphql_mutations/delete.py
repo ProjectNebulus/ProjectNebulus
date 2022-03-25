@@ -1,13 +1,5 @@
 import graphene
-
-from app.static.python.classes import Announcement as AnnouncementModel
-from app.static.python.classes import Assignment as AssignmentModel
-from app.static.python.classes import Course as CourseModel
-from app.static.python.classes import DocumentFile as DocumentFileModel
-from app.static.python.classes import Event as EventModel
-from app.static.python.classes import Folder as FolderModel
-from app.static.python.classes import Grades as GradesModel
-from app.static.python.classes import User as UserModel
+from app.static.python.mongodb import delete
 
 
 class DeleteCourse(graphene.Mutation):
@@ -17,10 +9,7 @@ class DeleteCourse(graphene.Mutation):
     result = graphene.Boolean()
 
     def mutate(self, info, course_id):
-        course = CourseModel.objects.get(pk=course_id)
-        for i in course.AuthorizedUsers:
-            i.courses.remove(course)
-        course.delete()
+        delete.delete_course(course_id)
         return DeleteCourse(result=True)
 
 
@@ -31,10 +20,7 @@ class DeleteUser(graphene.Mutation):
     result = graphene.Boolean()
 
     def mutate(self, info, user_id):
-        user = UserModel.objects.get(pk=user_id)
-        for i in user.courses:
-            i.authorizedUsers.remove(user)
-        user.delete()
+        delete.delete_user(user_id)
         return DeleteUser(result=True)
 
 
@@ -45,9 +31,7 @@ class DeleteAssignment(graphene.Mutation):
     result = graphene.Boolean()
 
     def mutate(self, info, assignment_id):
-        assignment = AssignmentModel.objects.get(pk=assignment_id)
-        assignment.course.assignments.remove(assignment)
-        assignment.delete()
+        delete.delete_assignment(assignment_id)
         return DeleteAssignment(result=True)
 
 
@@ -58,9 +42,7 @@ class DeleteFolder(graphene.Mutation):
     result = graphene.Boolean()
 
     def mutate(self, info, folder_id):
-        folder = FolderModel.objects.get(pk=folder_id)
-        folder.course.folders.remove(folder)
-        folder.delete()
+        delete.delete_folder(folder_id)
         return DeleteFolder(result=True)
 
 
@@ -71,12 +53,7 @@ class DeleteDocumentFile(graphene.Mutation):
     result = graphene.Boolean()
 
     def mutate(self, info, document_id):
-        document = DocumentFileModel.objects.get(pk=document_id)
-        if document.folder:
-            document.folder.documents.remove(document)
-        elif document.course:
-            document.course.documents.remove(document)
-        document.delete()
+        delete.delete_document_file(document_id)
         return DeleteDocumentFile(result=True)
 
 
@@ -87,9 +64,7 @@ class DeleteEvent(graphene.Mutation):
     result = graphene.Boolean()
 
     def mutate(self, info, event_id):
-        event = EventModel.objects.get(pk=event_id)
-        event.course.events.remove(event)
-        event.delete()
+        delete.delete_event(event_id)
         return DeleteEvent(result=True)
 
 
@@ -100,9 +75,7 @@ class DeleteGrades(graphene.Mutation):
     result = graphene.Boolean()
 
     def mutate(self, info, grades_id):
-        grades = GradesModel.objects.get(pk=grades_id)
-        grades.course.grades.remove(grades)
-        grades.delete()
+        delete.delete_grade(grades_id)
         return DeleteGrades(result=True)
 
 
@@ -113,9 +86,7 @@ class DeleteAvatar(graphene.Mutation):
     result = graphene.Boolean()
 
     def mutate(self, info, user_id):
-        user = User.objects.get(pk=user_id)
-        user.avatar = None
-        user.save()
+        delete.delete_avatar(user_id=user_id)
         return DeleteAvatar(result=True)
 
 
@@ -126,9 +97,7 @@ class DeleteAvatarSize(graphene.Mutation):
     result = graphene.Boolean()
 
     def mutate(self, info, user_id):
-        user = User.objects.get(pk=user_id)
-        user.avatar.avatar_size = None
-        user.save()
+        delete.delete_avatar_size(user_id=user_id)
         return DeleteAvatarSize(result=True)
 
 
@@ -139,9 +108,7 @@ class DeleteSchoology(graphene.Mutation):
     result = graphene.Boolean()
 
     def mutate(self, info, user_id):
-        user = User.objects.get(pk=user_id)
-        user.schoology = None
-        user.save()
+        delete.delete_schoology(user_id)
         return DeleteSchoology(result=True)
 
 
@@ -152,6 +119,5 @@ class DeleteAnnouncement(graphene.Mutation):
     result = graphene.Boolean()
 
     def mutate(self, info, announcement_id):
-        announcement = AnnouncementModel.objects.get(pk=announcement_id)
-        announcement.course.announcements.remove(announcement)
-        announcement.delete()
+        delete.delete_announcement(announcement_id)
+        return DeleteAnnouncement(result=True)

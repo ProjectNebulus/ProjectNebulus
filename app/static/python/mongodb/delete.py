@@ -93,3 +93,38 @@ def delete_grade(grade_id: int) -> None:
     grade.course.grades.remove(grade)
     grade.delete()
 
+
+def delete_schoology(user_id: int) -> None:
+    """
+    Deletes a user from the database.
+    """
+    user = User.objects.get(pk=user_id)
+    user.schoology = None
+    user.save()
+
+
+def delete_avatar(user_id: int=None, course_id: int=None) -> None:
+    if not user_id and not course_id:
+        raise ValueError("Must provide either a user_id or a course_id")
+
+    if user_id:
+        user = User.objects.get(pk=user_id)
+        user.avatar = None
+        user.save()
+    else:
+        course = Course.objects.get(pk=course_id)
+        course.image = None
+        course.save()
+
+def delete_avatar_size(user_id: int=None, course_id: int=None) -> None:
+    if not user_id and not course_id:
+        raise ValueError("Must provide either a user_id or a course_id")
+    if user_id:
+        user = User.objects.get(pk=user_id)
+        user.avatar.avatar_size = None
+        user.save()
+    else:
+        course = Course.objects.get(pk=course_id)
+        course.image.avatar_size = None
+        course.save()
+
