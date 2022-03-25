@@ -70,24 +70,6 @@ body {
 .change-text:hover {
     text-decoration: underline;
 }
-
-/*CURVED BOTTOM OF DIV
-#homePageBanner::before {
-  border-radius: 100%;
-  position: absolute;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.525), rgba(0, 0, 0, 0.5)), url(https://wallpaperaccess.com/full/39608.jpg) !important; 
-  background: no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  right: -200px;
-  left: -200px;
-  top: -200px;
-  content: '';
-  bottom: 0;
-}*/
-
 hr {
     height: 1px;
     border-width: 0;
@@ -138,43 +120,6 @@ details div:hover {
 
 .col2 {
     background: #eee;
-}
-
-#signupbody {
-    text-align: center;
-    width: 900px;
-    height: 600px;
-    /*background:black;*/
-    margin-left: calc(50% - 450px);
-    margin-right: calc(50% - 450px);
-    margin-top: 50px;
-    margin-bottom: 50px;
-}
-
-#signupinnerbody {
-    border-style: solid;
-    border-width: 1px;
-    border-color: #d6d6d6;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    padding-right: 30px;
-    padding-left: 30px;
-    border-radius: 10px;
-    margin-bottom: 40px;
-}
-
-button {
-    font-family: 'Lato', sans-serif;
-    font-size: 1.3em;
-}
-
-progress[value] {
-    /* Reset the default appearance */
-    -webkit-appearance: none;
-    appearance: none;
-
-    width: 250px;
-    height: 20px;
 }
 
 .dashboardCourse {
