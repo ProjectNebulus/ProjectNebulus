@@ -20,3 +20,12 @@ class DocumentFile(Snowflake):
     description = StringField(default="", null=True)
     folder = ReferenceField("Folder", default=None, null=True)
     course = ReferenceField("Course", default=None, null=True)
+
+    def clean(self):
+        """
+        Validates the Document.
+        """
+        if self.folder is not None and self.course is not None:
+            raise ValidationError("Document cannot be linked to both a folder and a course.")
+        if self.folder is None and self.course is None:
+            raise ValidationError("Document must be linked to either a folder or a course.")

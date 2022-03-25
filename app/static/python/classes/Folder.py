@@ -15,6 +15,7 @@ class Folder(Snowflake):
     name = StringField(required=True)
     course = ReferenceField("Course", required=False)
     parent = ReferenceField("Folder", required=False)
+    subfolders = ListField(ReferenceField("Folder", required=False))
     documents = ListField(ReferenceField("DocumentFile"))
 
 
