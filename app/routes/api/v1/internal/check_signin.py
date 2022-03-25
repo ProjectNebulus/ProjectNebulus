@@ -12,7 +12,7 @@ regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 @internal.route("/check-signin", methods=["POST"])
 def signin_username():
   
-    print("I'm here")
+    # print("I'm here")
     json = request.get_json()
     validation = read.check_password_username(
         json.get("username"), json.get("password")
