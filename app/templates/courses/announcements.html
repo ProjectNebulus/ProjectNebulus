@@ -2,6 +2,10 @@
 {% extends "layout.html" %}
 {% block main %}
 
+{% if course.announcements|length == 0 %}
+<h1>No Announcements :c</h1>
+{% endif %}
+{% for i in course.announcements %}
 <a style="width:90%;margin:20px;" href="#"
    class="block p-6 w-full bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
     <div class="flex flex-col items-left pb-10">
@@ -12,9 +16,7 @@
         <span class="text-sm text-gray-500 dark:text-gray-400">English 7 &lt; Schoology<br>Sat Feb 19, 2022 at 3:26 pm</br></span>
     </div>
 
-    <p class="font-normal text-gray-700 dark:text-gray-400">Hi, all! The draft of the poetry project was/is due today,
-        February 18, 2022. I just changed the date in Schoology, though, so that I could move it to be part of the T3
-        grade.</p>
+    <p class="font-normal text-gray-700 dark:text-gray-400">{{i.content}}</p>
     <svg class="react w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
         <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z"></path>
     </svg>
@@ -32,27 +34,15 @@
     <span href="#" class="text-blue-600 dark:text-blue-300">Show Comments</span>
 </a>
 </a>
-<a style="width:90%;margin:20px;" href="#"
-   class="block p-6 w-full bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-    <div class="flex flex-col items-left pb-10">
-        <img class="mb-3 w-12 h-12 rounded-full shadow-lg"
-             src="https://asset-cdn.schoology.com/users/95200861/profile-image/profile_sm?1596748684"
-             alt="Bonnie image">
-        <h3 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Ms. Nagami</h3>
-        <span class="text-sm text-gray-500 dark:text-gray-400">English 7 &lt; Schoology<br>Fri Feb 18, 2022 at 12:23 pm</br></span>
-    </div>
 
-    <p class="font-normal text-gray-700 dark:text-gray-400">Hi, Students! Remember to bring headphones or earbuds and a
-        device to access the internet tomorrow. IF YOU CANNOT BRING A DEVICE TO ACCESS THE INTERNET, PLEASE MESSAGE ME
-        ASAP so that I can print out the alternative assignment for you. (If you can bring a device but not headphones,
-        that is okay; you can still do the regular assignment.)</p>
-</a>
+{% endfor %}
+
 <style>
     .react {
-    float:left;
-    margin:10px;
-    color:#1C64F2;
-  }
+        float: left;
+        margin: 10px;
+        color: #1C64F2;
+    }
 </style>
 
 {% endblock %}
