@@ -3,6 +3,7 @@ import os
 
 from flask import Flask
 from flask_mail import Mail
+from flask_cors import CORS
 
 from .api import *
 from .main import *
@@ -17,6 +18,7 @@ def init_app():
     Creates a flask application.
     """
     app = Flask(__name__)
+    cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
     app.config["MAIL_SERVER"] = "smtp.gmail.com"
     app.config["MAIL_PORT"] = 465
     app.config["MAIL_USERNAME"] = os.getenv("email")
