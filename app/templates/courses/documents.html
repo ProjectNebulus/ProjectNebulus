@@ -26,7 +26,7 @@
         {% endfor %}
         {% for i in course.documents %}
         <br>
-        <a onclick="document.getElementById('pdf-viewer').style.display = 'block';document.getElementById('documentPage').style.display = 'none';startPDF('{{i.url}}');"
+        <a onclick="document.getElementById('documentPage').style.display = 'none';startFile('{{i.url}}');"
            style="width:90%;"
            class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
             <p class="font-normal text-gray-700 dark:text-gray-400" style="white-space: nowrap;  ">
@@ -76,6 +76,25 @@
         let currentPageNum = 1;
 
         // events
+        function startFile(link) {
+            if (link.includes("pdf")) {
+                document.getElementById("pdf-viewer").style.display = "block";
+                startPDF(link)
+            } else {
+                var request = new XMLHttpRequest();
+                request.open('GET', link, true);
+                request.send(null);
+                request.onreadystatechange = function () {
+                    if (request.readyState === 4 && request.status === 200) {
+                        var type = request.getResponseHeader('Content-Type');
+                        if (type.indexOf("text") !== 1) {
+                            document.getElementById("code_loc").innerText = request.responseText;
+                        }
+                    }
+                }
+            }
+        }
+
         function startPDF(link) {
             isPageRendering = false;
             pageRenderingQueue = null;
@@ -100,7 +119,6 @@
 
         // init when window is loaded
         function initPDFRenderer(url) {
-            url = 'https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf';
 
 
             // const url = 'test1.pdf'; // replace with your pdf location
@@ -206,7 +224,7 @@
     <!-- Replace pdf.js with downloaded pdf.js file -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"></script>
 </div>
-<div id=code-viewer" style="display:block;">
+<div id=code-viewer" style="display:none;">
     <script>
         // // load the library and ALL languages
         // hljs = require('highlight.js');
@@ -223,60 +241,9 @@
         }, 5000)
     </script>
     <pre onClick="this.contentEditable='true';" style="width:80%;border-radius:10px;margin-left:10%;">
-        <code onClick="this.contentEditable='true';" style="border-radius:10px; background:#1F2937;color:white;"
+        <code id="code_loc" onClick="this.contentEditable='true';"
+              style="border-radius:10px; background:#1F2937;color:white;"
               class="language-python">
-            """
-App entrypoint.
-"""
-import os
-
-from waitress import serve
-from flask import request
-from app.routes import init_app
-
-from app.static.python.mongodb import create
-
-yes = input("Should I create folders? ")
-if yes == "yes":
-    folder1 = create.createFolder({"name": "Week 1", "course": "1497078952970289156", "color": "red"})
-    folder2 = create.createFolder({"name": "Week 2", "course": "1497078952970289156", "color": "orange"})
-    folder3 = create.createFolder({"name": "Week 3", "course": "1497078952970289156", "color": "green"})
-    folder4 = create.createFolder({"name": "Week 4", "course": "1497078952970289156", "color": "blue"})
-    create.createAnnouncement(
-        {"title": "Week 1", "course": "1497078952970289156", "content": "Hello Class!", "author": "Ms. Nagami"})
-    create.createDocumentFile({"name": "Inside Out and Back Again",
-                               "url": "http://www.skylineschools.com/wp-content/uploads/2018/10/8-M1-Inside-Out-and-Back-Again.pdf",
-                               "course": "1497078952970289156"})
-    create.createDocumentFile(
-        {"name": "History Textbook", "url": "http://icomets.org/wh/chap01.pdf", "folder": folder1.id})
-app = init_app()
-print(app.url_map)
-app.secret_key = os.getenv("MONGOPASS")
-regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
-
-# app.register_blueprint(error_blueprint)
-if __name__ == "__main__":
-    print("Started running on http://localhost:8080")
-    serve(app=app, host="0.0.0.0", port=8080)
-        </code>
-    </pre>
-    <pre style="width:80%;border-radius:10px;margin-left:10%;">
-        <code style="border-radius:10px; background:#1F2937;color:white;">
-            &lt;link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
-&lt;div style="border-radius:15px; text-align: center; background:#111926; font-family: 'Lato', sans-serif; color:white; padding-top:50px;padding-bottom:50px;" >
-    &lt;img src="https://nebulus.ml/static/images/logo.png" style="width:200px; filter:invert(1);">
-    &lt;br>
-    &lt;div style="margin:40px;background:#1F2836; border-radius:10px; padding:10px;border-width:1px;border-color:#374050;">
-        &lt;h1 style="font-weight:400;">Email Verification Code&lt;/h1>
-            &lt;h2 style="font-weight:400;">Hello &lt;span style="font-weight:700; ">Nicholas Wang&lt;/span>! Your Code is: &lt;br>&lt;span
-                style="font-weight:700; font-size:30px; ">1029&lt;/span>&lt;/h2>
-            &lt;a href="https://nebulus.ml/">&lt;/a>
-            &lt;button style="border-style:none; border-radius:10px; background:#1B65F0;color:white;padding:10px;">Go to
-            Nebulus
-        &lt;/button>
-        &lt;/a>
-    &lt;/div>
-<&lt;/div>
         </code>
     </pre>
     <style>
