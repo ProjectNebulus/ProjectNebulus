@@ -58,6 +58,7 @@ def find_courses(_id: str):
 
 
 def find_user(**kwargs) -> User | None:
+    kwargs = {k: v for k, v in kwargs.items() if v is not None}
     user = User.objects(**kwargs).first()
     if not user:
         print(user)
