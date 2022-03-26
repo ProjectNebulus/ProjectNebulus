@@ -307,14 +307,13 @@ if __name__ == "__main__":
         }
 
         .hljs-tag,
-        .hljs-attr,
         .hljs-name {
             color: #79DC83 !important;
 
         }
 
         .hljs-attr {
-            color: #78C1FF;
+            color: #78C1FF !important;
         }
 
 
@@ -370,6 +369,17 @@ if __name__ == "__main__":
 
         .hljs-strong {
             font-weight: 700
+        }
+
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        code::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        code {
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
         }
 
 
