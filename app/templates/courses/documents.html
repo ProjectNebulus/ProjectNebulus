@@ -88,8 +88,9 @@
                     if (request.readyState === 4 && request.status === 200) {
                         var type = request.getResponseHeader('Content-Type');
                         if (type.indexOf("text") !== 1) {
-
-                            document.getElementById("code_loc").innerText = request.responseText;
+                            //alert(request.responseText);
+                            let text = request.responseText.replace("/\n/g", "<br>");
+                            document.getElementById("code_loc").innerHTML = text;
                         }
                     }
                 }
