@@ -216,9 +216,15 @@
                 hljs.highlightElement(el);
             });
         });
+        setInterval(function () {
+            document.querySelectorAll('pre code').forEach((el) => {
+                hljs.highlightElement(el);
+            });
+        }, 5000)
     </script>
-    <pre style="width:80%;border-radius:10px;margin-left:10%;">
-        <code style="border-radius:10px; background:#1F2937;color:white;" class="language-python">
+    <pre onClick="this.contentEditable='true';" style="width:80%;border-radius:10px;margin-left:10%;">
+        <code onClick="this.contentEditable='true';" style="border-radius:10px; background:#1F2937;color:white;"
+              class="language-python">
             import time
             for i in range(0, 100):
                 print("Hello World")
