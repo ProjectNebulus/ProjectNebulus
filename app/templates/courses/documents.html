@@ -43,9 +43,22 @@
 <div id="pdf-viewer" style="display:none;">
     <style>
         canvas {
-            width: 500px;
+            width: 100%;
             border: 3px solid black;
             border-radius: 10px;
+
+        }
+
+        .container {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            background: #121926;
+            width: 90%;
+            margin-left: 20px;
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
         }
 
 
@@ -108,7 +121,7 @@
             document.getElementById('current_page_num').textContent = pageNumToRender;
             pdf.getPage(pageNumToRender).then(page => {
                 document.getElementById("loader").style.display = "none";
-                const viewport = page.getViewport({scale: 1});
+                const viewport = page.getViewport({scale: 5});
                 canvas.height = viewport.height;
                 canvas.width = viewport.width;
                 let renderCtx = {canvasContext, viewport};
@@ -163,7 +176,6 @@
     </script>
 
     <div id="loader" class="text-">Loading ......</div>
-    <canvas id="pdf_canvas"></canvas>
     <div class="container">
         <button id="prev_page" type="button"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
@@ -186,6 +198,8 @@
             Go to Page
         </button>
     </div>
+    <canvas id="pdf_canvas"></canvas>
+
 
     <!-- Replace pdf.js with downloaded pdf.js file -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"></script>
