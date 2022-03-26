@@ -24,7 +24,7 @@
         {% endfor %}
         {% for i in course.documents %}
         <br>
-        <a onclick="document.getElementById('pdf-viewer').style.display = 'block';document.getElementById('documentPage').style.display = 'none';//{{i.url}}"
+        <a onclick="document.getElementById('pdf-viewer').style.display = 'block';document.getElementById('documentPage').style.display = 'none';startPDF('{{i.url}}');"
            style="width:90%;"
            class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
             <p class="font-normal text-gray-700 dark:text-gray-400" style="white-space: nowrap;  ">
@@ -40,9 +40,7 @@
 
 
     </div>
-<div id="pdf-viewer">
-    <meta charset="utf-8">
-    <title></title>
+<div id="pdf-viewer" style="display:none;">
     <style>
         canvas {
             width: 500px;
@@ -51,22 +49,7 @@
             border-radius: 10px;
         }
 
-        button {
-            outline: 0;
-            border: none;
-            border-radius: 3px;
-            color: white;
-            background: black;
-            width: 100px;
-            height: 40px;
-            transition: all .1s ease-in-out;
-        }
 
-        button:hover {
-            background: none;
-            border: 3px solid black;
-            color: black;
-        }
     </style>
     <script>
         // intial params
@@ -79,15 +62,15 @@
         let currentPageNum = 1;
 
         // events
-        window.addEventListener('load', function () {
+        function startPDF(link) {
             isPageRendering = false;
             pageRenderingQueue = null;
             canvas = document.getElementById('pdf_canvas');
             canvasContext = canvas.getContext('2d');
 
             initEvents();
-            initPDFRenderer();
-        });
+            initPDFRenderer(link);
+        }
 
         function initEvents() {
             let prevPageBtn = document.getElementById('prev_page');
@@ -99,9 +82,8 @@
         }
 
         // init when window is loaded
-        function initPDFRenderer() {
+        function initPDFRenderer(url) {
 
-            var url = 'https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf';
 
             // const url = 'test1.pdf'; // replace with your pdf location
 
@@ -181,22 +163,28 @@
     <div id="loader">Loading ......</div>
     <canvas id="pdf_canvas"></canvas>
     <div class="container">
-        <button id="prev_page">Previos Page</button>
-        <button id="next_page">next Page</button>
+        <button id="prev_page" type="button"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            Previous Page
+        </button>
+        <button id="next_page" type="button"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            Next Page
+        </button>
         <span id="current_page_num"></span>
         of
         <span id="total_page_num"></span>
 
-        <input type="text" id="page_num">
-        <button id="go_to_page">Go To Page</button>
+        <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+               style="width:150px;display:inline-block;" type="text" id="page_num">
+        <button id="go_to_pagee" type="button"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            Go to Page
+        </button>
     </div>
 
     <!-- Replace pdf.js with downloaded pdf.js file -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"></script>
-
-    </body>
-    </html>
-
 </div>
 
 
