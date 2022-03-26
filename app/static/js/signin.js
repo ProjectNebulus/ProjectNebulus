@@ -233,8 +233,12 @@ window.addEventListener('load', function () {
                     'dark:bg-red-100',
                     'dark:border-red-400'
                 );
+
             } else {
                 errorPassword.innerHTML = '';
+            }
+            if (document.getElementById('usrname').value === '' && document.getElementById('psw').value === '') {
+                return false;
             }
             let username = document.getElementById('usrname').value;
             let password = document.getElementById('psw').value;
@@ -458,7 +462,9 @@ function reqListener1() {
         let usernameInput = document.getElementById('usrname');
         let passwordInput = document.getElementById('psw');
         loginButton.disabled = false;
-        loginButton.style.backgroundColor = '#1B64F1';
+        loginButton.style.color = '#eff6ff';
+        loginButton.style.backgroundColor = '#1d4ed8';
+        loginButton.classList.add('hover:bg-blue-800');
         usernameInput.disabled = true;
         passwordInput.disabled = true;
     }
