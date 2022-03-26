@@ -354,6 +354,41 @@
 
     </style>
 </div>
+<div id="video-viewer">
+    <link href="https://vjs.zencdn.net/7.18.1/video-js.css" rel="stylesheet"/>
+    <link
+            href="https://unpkg.com/video.js@7/dist/video-js.min.css"
+            rel="stylesheet"
+    />
+    <link
+            href="https://unpkg.com/@videojs/themes@1/dist/fantasy/index.css"
+            rel="stylesheet"
+    />
+    <video
+            id="my-video"
+            class="video-js  vjs-theme-fantasy"
+            controls
+            preload="auto"
+            width="640"
+            height="264"
+            poster="https://media.discordapp.net/attachments/951319765820002384/956401024162217984/adexportnebulus.ml.mp4?format=jpeg&width=800&height=450"
+            data-setup="{}"
+    >
+        <source src="https://cdn.discordapp.com/attachments/951319765820002384/956401024162217984/adexportnebulus.ml.mp4"
+                type="video/mp4"/>
+        <source src="https://cdn.discordapp.com/attachments/951319765820002384/956401024162217984/adexportnebulus.ml.mp4"
+                type="video/webm"/>
+        <p class="vjs-no-js">
+            To view this video please enable JavaScript, and consider upgrading to a
+            web browser that
+            <a href="https://videojs.com/html5-video-support/" target="_blank"
+            >supports HTML5 video</a
+            >
+        </p>
+    </video>
+
+    <script src="https://vjs.zencdn.net/7.18.1/video.min.js"></script>
+</div>
 
 
 {% endblock %}}}
