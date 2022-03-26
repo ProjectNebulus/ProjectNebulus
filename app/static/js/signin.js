@@ -170,7 +170,6 @@ function confirmSchoology() {
 }
 
 window.addEventListener('load', function () {
-        document.querySelector('#domain').addEventListener('input', resizeInput);
 
         let lastKeyUpTime1 = Date.now();
         let recheck = true;
@@ -180,16 +179,16 @@ window.addEventListener('load', function () {
         loginButton.disabled = true;
 
         function checkCredentials() {
-            const response = document.getElementsByClassName('response')[0];
-            response.classList.add("text-blue-600")
-            response.innerHTML = loadingIcon + 'Please wait...';
-            const response2 = document.getElementsByClassName('response')[1];
-            response2.classList.add("text-blue-600")
-            response2.innerHTML = loadingIcon + 'Please wait...';
+            const response = document.getElementById('username-error');
 
+
+            const response2 = document.getElementById('password-error');
+
+            const errorUsername = document.getElementsByClassName('username-error-msg');
+            const errorPassword = document.getElementsByClassName('password-error-msg');
             if (document.getElementById('usrname').value === '') {
-                response.innerHTML =
-                    ' <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Ahhh!</span> Please enter a username!</p>';
+                errorUsername.innerHTML =
+                    'Hey! Please enter a username!';
                 document
                     .getElementById('usrname')
                     .classList.add(
@@ -209,10 +208,13 @@ window.addEventListener('load', function () {
                     'dark:border-red-400'
                 );
             }
+            else {
+                errorUsername.innerHTML = '';
+            }
             if (document.getElementById('psw').value === '') {
                 console.log('password is empty');
-                response2.innerHTML =
-                    ' <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Ahhh!</span> Please enter a password!</p>';
+                errorPassword.innerHTML =
+                    'Hey! Please enter a password!';
                 document
                     .getElementById('psw')
                     .classList.add(
@@ -231,6 +233,8 @@ window.addEventListener('load', function () {
                     'dark:bg-red-100',
                     'dark:border-red-400'
                 );
+            } else {
+                errorPassword.innerHTML = '';
             }
             let username = document.getElementById('usrname').value;
             let password = document.getElementById('psw').value;
@@ -270,14 +274,17 @@ window.addEventListener('load', function () {
 
 function reqListener1() {
     console.log(this.responseText);
-    const response = document.getElementsByClassName('response')[0];
-    const response2 = document.getElementsByClassName('response')[1];
-
+    const usernameError = document.getElementById('username-error');
+    const passwordError = document.getElementById('password-error');
+    const usernameErrorMsg = document.getElementById('username-error-msg');
+    const passwordErrorMsg = document.getElementById('password-error-msg');
     // TODO(kev): switch case
 
     if (this.responseText.split("-")[0] === 'true') {
-        response.style.color = 'green';
-        response.innerHTML = '<p class="material-icons">check_circle</p>';
+        usernameError.style.color = 'green';
+        usernameError.innerHTML = '<p class="material-icons">check_circle</p>';
+        usernameErrorMsg.style.color = 'green';
+        usernameErrorMsg.innerHTML = 'Correct Username!';
 
         document
             .getElementById('usrname')
@@ -317,8 +324,10 @@ function reqListener1() {
         );
     }
     if (this.responseText.split("-")[1] === "true") {
-        response2.style.color = 'green';
-        response2.innerHTML = '<p class="material-icons">check_circle</p>';
+        passwordError.style.color = 'green';
+        passwordError.innerHTML = '<p class="material-icons">check_circle</p>';
+        passwordErrorMsg.style.color = 'green';
+        passwordErrorMsg.innerHTML = 'Correct Password!';
 
         document
             .getElementById('psw')
@@ -359,8 +368,10 @@ function reqListener1() {
     }
 
     if (this.responseText.split("-")[0] === 'false' && document.getElementById('usrname').value !== '') {
-        response.style.color = 'red';
-        response.innerHTML = '<p class="material-icons">error</p>';
+        usernameError.style.color = 'red';
+        usernameError.innerHTML = '<p class="material-icons">error</p>';
+        usernameErrorMsg.style.color = 'red';
+        usernameErrorMsg.innerHTML = 'Incorrect Username!';
         document
             .getElementById('usrname')
             .classList.add(
@@ -400,8 +411,10 @@ function reqListener1() {
 
     }
     if (this.responseText.split('-')[1] === 'false' && document.getElementById('psw').value !== '') {
-        response2.style.color = 'red';
-        response2.innerHTML = '<p class="material-icons">error</p>';
+        passwordError.style.color = 'red';
+        passwordError.innerHTML = '<p class="material-icons">error</p>';
+        passwordErrorMsg.style.color = 'red';
+        passwordErrorMsg.innerHTML = 'Incorrect Password!';
         document
             .getElementById('psw')
             .classList.add(
