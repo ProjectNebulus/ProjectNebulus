@@ -225,9 +225,58 @@
     <pre onClick="this.contentEditable='true';" style="width:80%;border-radius:10px;margin-left:10%;">
         <code onClick="this.contentEditable='true';" style="border-radius:10px; background:#1F2937;color:white;"
               class="language-python">
-            import time
-            for i in range(0, 100):
-                print("Hello World")
+            """
+App entrypoint.
+"""
+import os
+
+from waitress import serve
+from flask import request
+from app.routes import init_app
+
+from app.static.python.mongodb import create
+
+yes = input("Should I create folders? ")
+if yes == "yes":
+    folder1 = create.createFolder({"name": "Week 1", "course": "1497078952970289156", "color": "red"})
+    folder2 = create.createFolder({"name": "Week 2", "course": "1497078952970289156", "color": "orange"})
+    folder3 = create.createFolder({"name": "Week 3", "course": "1497078952970289156", "color": "green"})
+    folder4 = create.createFolder({"name": "Week 4", "course": "1497078952970289156", "color": "blue"})
+    create.createAnnouncement(
+        {"title": "Week 1", "course": "1497078952970289156", "content": "Hello Class!", "author": "Ms. Nagami"})
+    create.createDocumentFile({"name": "Inside Out and Back Again",
+                               "url": "http://www.skylineschools.com/wp-content/uploads/2018/10/8-M1-Inside-Out-and-Back-Again.pdf",
+                               "course": "1497078952970289156"})
+    create.createDocumentFile(
+        {"name": "History Textbook", "url": "http://icomets.org/wh/chap01.pdf", "folder": folder1.id})
+app = init_app()
+print(app.url_map)
+app.secret_key = os.getenv("MONGOPASS")
+regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
+
+# app.register_blueprint(error_blueprint)
+if __name__ == "__main__":
+    print("Started running on http://localhost:8080")
+    serve(app=app, host="0.0.0.0", port=8080)
+        </code>
+    </pre>
+    <pre style="width:80%;border-radius:10px;margin-left:10%;">
+        <code style="border-radius:10px; background:#1F2937;color:white;">
+            &lt;link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+&lt;div style="border-radius:15px; text-align: center; background:#111926; font-family: 'Lato', sans-serif; color:white; padding-top:50px;padding-bottom:50px;" >
+    &lt;img src="https://nebulus.ml/static/images/logo.png" style="width:200px; filter:invert(1);">
+    &lt;br>
+    &lt;div style="margin:40px;background:#1F2836; border-radius:10px; padding:10px;border-width:1px;border-color:#374050;">
+        &lt;h1 style="font-weight:400;">Email Verification Code&lt;/h1>
+            &lt;h2 style="font-weight:400;">Hello &lt;span style="font-weight:700; ">Nicholas Wang&lt;/span>! Your Code is: &lt;br>&lt;span
+                style="font-weight:700; font-size:30px; ">1029&lt;/span>&lt;/h2>
+            &lt;a href="https://nebulus.ml/">&lt;/a>
+            &lt;button style="border-style:none; border-radius:10px; background:#1B65F0;color:white;padding:10px;">Go to
+            Nebulus
+        &lt;/button>
+        &lt;/a>
+    &lt;/div>
+<&lt;/div>
         </code>
     </pre>
     <style>
@@ -254,8 +303,19 @@
         .hljs-name,
         .hljs-selector-tag {
             font-weight: 700;
-            color: #81a2be;
+            color: #FF7B72;
         }
+
+        .hljs-tag,
+        .hljs-name {
+            color: #79DC83 !important;
+
+        }
+
+        .hljs-attr {
+            color: #78C1FF !important;
+        }
+
 
         .hljs-deletion,
         .hljs-number,
@@ -265,13 +325,13 @@
         .hljs-string,
         .hljs-template-tag,
         .hljs-type {
-            color: #99cc99;
+            color: #9ECFF6;
         }
 
         .hljs-section,
         .hljs-title {
             color: #99cc99;
-            font-weight: 700
+            font-weight: 700;
         }
 
         .hljs-link,
@@ -292,7 +352,7 @@
         .hljs-built_in,
         .hljs-bullet,
         .hljs-code {
-            color: #de935f;
+            color: #D1A8FE;
         }
 
         .hljs-meta {
@@ -300,7 +360,7 @@
         }
 
         .hljs-meta-string {
-            color: #4d99bf
+            color: #9ECFF6
         }
 
         .hljs-emphasis {
@@ -309,6 +369,17 @@
 
         .hljs-strong {
             font-weight: 700
+        }
+
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        code::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        code {
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
         }
 
 
