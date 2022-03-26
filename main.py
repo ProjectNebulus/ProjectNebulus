@@ -9,11 +9,19 @@ from app.routes import init_app
 
 from app.static.python.mongodb import create
 
-create.createFolder({"name": "Week 1", "course": "1497078952970289156", "color": "red"})
-create.createAnnouncement(
-    {"title": "Week 1", "course": "1497078952970289156", "content": "Hello CLass!", "author": "Ms. Nagami"})
-create.createDocumentFile({"url": "https://bins.schoology.com/attachment/1940579309/source"
-                                  "/bcf2b7f6e0dc2df1df6a03d748d7c56d.docx"})
+yes = input("Should I create folders? ")
+if yes == "yes":
+    folder1 = create.createFolder({"name": "Week 1", "course": "1497078952970289156", "color": "red"})
+    folder2 = create.createFolder({"name": "Week 2", "course": "1497078952970289156", "color": "orange"})
+    folder3 = create.createFolder({"name": "Week 3", "course": "1497078952970289156", "color": "green"})
+    folder4 = create.createFolder({"name": "Week 4", "course": "1497078952970289156", "color": "blue"})
+    create.createAnnouncement(
+        {"title": "Week 1", "course": "1497078952970289156", "content": "Hello Class!", "author": "Ms. Nagami"})
+    create.createDocumentFile({"name": "Inside Out and Back Again",
+                               "url": "http://www.skylineschools.com/wp-content/uploads/2018/10/8-M1-Inside-Out-and-Back-Again.pdf",
+                               "course": "1497078952970289156"})
+    create.createDocumentFile(
+        {"name": "History Textbook", "url": "http://icomets.org/wh/chap01.pdf", "folder": folder1.id})
 app = init_app()
 print(app.url_map)
 app.secret_key = os.getenv("MONGOPASS")
