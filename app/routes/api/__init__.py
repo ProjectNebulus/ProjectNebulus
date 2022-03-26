@@ -10,4 +10,4 @@ api_blueprint = Blueprint(
 
 from . import v1
 from . import developers
-#from .graphql import *
+from .graphql import *

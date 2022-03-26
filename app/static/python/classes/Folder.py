@@ -5,14 +5,13 @@ from .Snowflake import Snowflake
 COLORS = ['red', 'blue', 'orange', 'yellow', 'green', 'purple', 'pink']
 
 
-def color_validator(v):
-    if v.index('#') == 0:
-        if len(v) == 7:  # #f0f0f0
-            return True
-        elif len(v) == 4:  # #fff
-            return True
+def validate_color(color):
+    if not color.startswith("#"):
+        if color not in COLORS:
+            raise ValidationError("Invalid color")
 
-    return COLORS.index(v) > -1
+    elif len(color) not in [4, 7]:
+        raise ValidationError("Invalid color")
 
 
 class Folder(Snowflake):
@@ -28,9 +27,9 @@ class Folder(Snowflake):
     course = ReferenceField("Course", required=False)
     parent = ReferenceField("Folder", required=False)
     subfolders = ListField(ReferenceField("Folder", required=False))
-    documents = ListField(ReferenceField("DocumentFile"))
-    color = StringField(validation=color_validator)
+    documents = ListField(ReferenceField("DocumentFile"), required=False)
+    color = StringField(validation=validate_color, required=False)
 
     def clean(self):
-        if not (self.course and self.parent):
+        if not self.course and not self.parent:
             raise ValidationError("Folder must be a child of a course or a folder")
