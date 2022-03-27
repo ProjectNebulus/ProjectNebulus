@@ -16,6 +16,7 @@ from ..classes.Schoology import Schoology
 from ..classes.Spotify import Spotify
 from ..classes.User import User
 from ..security import valid_password
+from ..classes.Assesment import Assesment
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 
@@ -157,6 +158,27 @@ def get_folders(parent_id: int=None, course_id: int=None) -> List[Folder]:
         return find_courses(course_id).folders
     else:
         return find_folder(id=parent_id).subfolders
+
+
+def sortByDate(obj):
+    if obj._cls == "Event":
+        return obj.date
+    return obj.due
+
+
+def sort_user_events(user_id: str) -> List[List]:
+    courses = get_user_courses(user_id)
+    events = Event.objects(course__in=courses)
+    announcements = Announcement.objects(course__in=courses)
+    assignments = Assignment.objects(course__in=courses)
+    assesments = Assesment.objects(course__in=courses)
+    events_assessments_assignments = events + assignments + assesments
+    events_assessments_assignments = sorted(events_assessments_assignments, key=sortByDate)
+    announcements = sorted(announcements, key=lambda x: x.date)
+
+    return [[announcements], [events_assessments_assignments]]
+
+
 
 
 
