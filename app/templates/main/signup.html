@@ -74,7 +74,7 @@
                 </div>
                 <input type="text" id="email-adress-icon"
                        class="mt-4  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
-                       placeholder="Verification Code">
+                       placeholder="Email Verification Code (Check Your Email)">
             </div>
             <div class="relative">
                 <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -91,6 +91,200 @@
             </div>
 
 
+            <button style="float:left;"
+                    class="mt-4 px-4 py-3  leading-6 text-base rounded-md border border-transparent text-white focus:outline-none bg-blue-500 text-blue-100 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer inline-flex items-center w-1/2 justify-center items-center font-medium focus:outline-none"
+            >
+                <svg style="display: inline-block;" class="w-6 h-6" fill="none" stroke="currentColor"
+                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M7 16l-4-4m0 0l4-4m-4 4h18"></path>
+                </svg>
+                Previous Step
+            </button>
+            <button style="float:left;"
+                    class="mt-4 px-4 py-3  leading-6 text-base rounded-md border border-transparent text-white focus:outline-none bg-blue-500 text-blue-100 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer inline-flex items-center w-1/2 justify-center items-center font-medium focus:outline-none"
+            >
+                Next Step
+                <svg style="display: inline-block;" class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                          d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                          clip-rule="evenodd"></path>
+                </svg>
+            </button>
+            <div class="flex flex-col items-center mt-5">
+                <p class="mt-1 text-xs font-light text-gray-500">
+                    Existing Member?<a href="/signin" class="ml-1 font-medium text-blue-400">Login!</a>
+                </p>
+            </div>
+        </form style="display:none;">
+        <form class="flex flex-col mt-4" id="step3" style="display:none;">
+            <fieldset>
+                <legend class="sr-only">Countries</legend>
+
+                <div class="flex items-center mb-4">
+                    <input id="country-option-1" type="radio" name="countries" value="USA"
+                           class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600"
+                           aria-labelledby="country-option-1" aria-describedby="country-option-1" checked>
+                    <label for="country-option-1" class="block ml-2 text-sm font-medium text-gray-900">
+                        English (United States)
+                    </label>
+                </div>
+
+                <div class="flex items-center mb-4">
+                    <input id="option-disabled" type="radio" name="countries" value="China"
+                           class="w-4 h-4 border-gray-200 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600"
+                           aria-labelledby="option-disabled" aria-describedby="option-disabled" disabled>
+                    <label for="option-disabled"
+                           class="block ml-2 text-sm font-medium text-gray-300 dark:text-gray-700">
+                        English (United Kingdom)
+                    </label>
+                </div>
+                <div class="flex items-center mb-4">
+                    <input id="option-disabled" type="radio" name="countries" value="China"
+                           class="w-4 h-4 border-gray-200 focus:ring-2 focus:ring-blue-300"
+                           aria-labelledby="option-disabled" aria-describedby="option-disabled" disabled>
+                    <label for="option-disabled" class="block ml-2 text-sm font-medium text-gray-300">
+                        English (Australia)
+                    </label>
+                </div>
+                <div class="flex items-center mb-4">
+                    <input id="option-disabled" type="radio" name="countries" value="China"
+                           class="w-4 h-4 border-gray-200 focus:ring-2 focus:ring-blue-300"
+                           aria-labelledby="option-disabled" aria-describedby="option-disabled" disabled>
+                    <label for="option-disabled" class="block ml-2 text-sm font-medium text-gray-300>
+                        Français (Français)
+                    </label>
+                </div>
+                <div class=" flex items-center mb-4">
+                    <input id="option-disabled" type="radio" name="countries" value="China"
+                           class="w-4 h-4 border-gray-200 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600"
+                           aria-labelledby="option-disabled" aria-describedby="option-disabled" disabled>
+                    <label for="option-disabled" class="block ml-2 text-sm font-medium text-gray-3000">
+                        Español (españa)
+                    </label>
+                </div>
+                <div class="flex items-center mb-4">
+                    <input id="option-disabled" type="radio" name="countries" value="China"
+                           class="w-4 h-4 border-gray-200 focus:ring-2 focus:ring-blue-300"
+                           aria-labelledby="option-disabled" aria-describedby="option-disabled" disabled>
+                    <label for="option-disabled" class="block ml-2 text-sm font-medium text-gray-300">
+                        Español (latinoamerica)
+                    </label>
+                </div>
+                <div class="flex items-center mb-4">
+                    <input id="option-disabled" type="radio" name="countries" value="China"
+                           class="w-4 h-4 border-gray-200 focus:ring-2 focus:ring-blue-300"
+                           aria-labelledby="option-disabled" aria-describedby="option-disabled" disabled>
+                    <label for="option-disabled" class="block ml-2 text-sm font-medium text-gray-300m">
+                        中文（中国）
+                    </label>
+                </div>
+                <div class="flex items-center mb-4">
+                    <input id="option-disabled" type="radio" name="countries" value="China"
+                           class="w-4 h-4 border-gray-200 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600"
+                           aria-labelledby="option-disabled" aria-describedby="option-disabled" disabled>
+                    <label for="option-disabled" class="block ml-2 text-sm font-medium text-gray-300">
+                        中文（台灣）
+                    </label>
+                </div>
+                <div class="flex items-center mb-4">
+                    <input id="option-disabled" type="radio" name="countries" value="China"
+                           class="w-4 h-4 border-gray-200 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600"
+                           aria-labelledby="option-disabled" aria-describedby="option-disabled" disabled>
+                    <label for="option-disabled" class="block ml-2 text-sm font-medium text-gray-300">
+                        한국어(한국)
+                    </label>
+                </div>
+                <div class="flex items-center mb-4">
+                    <input id="option-disabled" type="radio" name="countries" value="China"
+                           class="w-4 h-4 border-gray-200 focus:ring-2 focus:ring-blue-300 "
+                           aria-labelledby="option-disabled" aria-describedby="option-disabled" disabled>
+                    <label for="option-disabled" class="block ml-2 text-sm font-medium text-gray-300">
+                        日本語（日本）
+                    </label>
+                </div>
+
+            </fieldset>
+            <fieldset>
+                <legend class="sr-only">Countries</legend>
+
+                <div class="flex items-center mb-4">
+                    <input id="country-option-1" type="radio" name="countries" value="USA"
+                           class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
+                           aria-labelledby="country-option-1" aria-describedby="country-option-1" checked>
+                    <label for="country-option-1"
+                           class="block ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Dark Mode
+                    </label>
+                </div>
+
+                <div class="flex items-center mb-4">
+                    <input id="country-option-2" type="radio" name="countries" value="Germany"
+                           class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
+                           aria-labelledby="country-option-2" aria-describedby="country-option-2">
+                    <label for="country-option-2"
+                           class="block ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Light Mode
+                    </label>
+                </div>
+
+                <div class="flex items-center mb-4">
+                    <input id="country-option-3" type="radio" name="countries" value="Spain"
+                           class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600"
+                           aria-labelledby="country-option-3" aria-describedby="country-option-3">
+                    <label for="country-option-3"
+                           class="block ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        System Theme
+                    </label>
+                </div>
+
+
+                <div class="flex items-center mb-4">
+                    <input id="option-disabled" type="radio" name="countries" value="China"
+                           class="w-4 h-4 border-gray-200 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600"
+                           aria-labelledby="option-disabled" aria-describedby="option-disabled" disabled>
+                    <label for="option-disabled"
+                           class="block ml-2 text-sm font-medium text-gray-300 dark:text-gray-700">
+                        Gradient (Unavaialble)
+                    </label>
+                </div>
+                <div class="flex items-center mb-4">
+                    <input id="option-disabled" type="radio" name="countries" value="China"
+                           class="w-4 h-4 border-gray-200 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600"
+                           aria-labelledby="option-disabled" aria-describedby="option-disabled" disabled>
+                    <label for="option-disabled"
+                           class="block ml-2 text-sm font-medium text-gray-300 dark:text-gray-700">
+                        Wallpaper (Unavaiable)
+                    </label>
+                </div>
+            </fieldset>
+            <img style="float:left; margin:10px;" class="pfp pfp_selected mb-3 w-24 h-24 rounded-full shadow-lg"
+                 src="/static/images/nebulusCats/black_cat.png" alt="Bonnie image"/>
+            <img style="float:left; margin:10px;" class="pfp mb-3 w-24 h-24 rounded-full shadow-lg"
+                 src="/static/images/nebulusCats/blue_cat.png" alt="Bonnie image"/>
+            <img style="float:left; margin:10px;" class="pfp mb-3 w-24 h-24 rounded-full shadow-lg"
+                 src="/static/images/nebulusCats/green_cat.png" alt="Bonnie image"/>
+            <img style="float:left; margin:10px;" class="pfp mb-3 w-24 h-24 rounded-full shadow-lg"
+                 src="/static/images/nebulusCats/pink_cat.png" alt="Bonnie image"/>
+            <img style="float:left; margin:10px;" class="pfp mb-3 w-24 h-24 rounded-full shadow-lg"
+                 src="/static/images/nebulusCats/yellow_cat.png" alt="Bonnie image"/>
+            <img style="float:left; margin:10px;" class="pfp mb-3 w-24 h-24 rounded-full shadow-lg"
+                 src="/static/images/nebulusCats/blurple_cat.png" alt="Bonnie image"/>
+            <img style="float:left; margin:10px;" class="pfp mb-3 w-24 h-24 rounded-full shadow-lg"
+                 src="/static/images/nebulusCats/red_cat.png" alt="Bonnie image"/><img
+                style="float:left; margin:10px;"
+                class="mb-3 w-24 h-24 rounded-full shadow-lg"
+                src="/static/images/nebulusCats/red_cat.png"
+                alt="Bonnie image"/>
+            <img style="float:left; margin:10px;" class="pfp mb-3 w-24 h-24 rounded-full shadow-lg"
+                 src="/static/images/nebulusCats/100_cat.png" alt="Bonnie image"/>
+            <img style="float:left; margin:10px;" class="pfp mb-3 w-24 h-24 rounded-full shadow-lg"
+                 src="/static/images/nebulusCats/river_cat.png" alt="Bonnie image"/>
+            <img style="float:left; margin:10px;" class="pfp mb-3 w-24 h-24 rounded-full shadow-lg"
+                 src="/static/images/nebulusCats/cake_cat.png" alt="Bonnie image"/>
+            <img style="float:left; margin:10px;" class="pfp mb-3 w-24 h-24 rounded-full shadow-lg"
+                 src="/static/images/nebulusCats/ocean_cat.png" alt="Bonnie image"/>
             <button style="float:left;"
                     class="mt-4 px-4 py-3  leading-6 text-base rounded-md border border-transparent text-white focus:outline-none bg-blue-500 text-blue-100 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer inline-flex items-center w-1/2 justify-center items-center font-medium focus:outline-none"
             >
