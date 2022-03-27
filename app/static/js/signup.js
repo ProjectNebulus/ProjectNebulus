@@ -158,14 +158,14 @@ window.addEventListener('load', function () {
         let status = document.getElementsByClassName('errormsg')[3];
         status.style.color = 'red';
         status.innerHTML = '<br>';
-        const value = document.getElementById('confirm-password').value;
-        const value2 = document.getElementById(']password').value;
-        if (value === value2) {
+        let value = document.getElementById('confirm-password').value;
+        let value2 = document.getElementById('password').value;
+        if (value === value2 && value !== "") {
             document.getElementsByClassName('username-error')[3].style.color = 'green';
             document.getElementsByClassName('username-error')[3].innerHTML =
                 '<i class="material-icons">check_circle</i>';
             document
-                .getElementById('email')
+                .getElementById('confirm-password')
                 .classList.remove(
                 'bg-red-50',
                 'border',
@@ -183,7 +183,7 @@ window.addEventListener('load', function () {
                 'dark:border-red-400'
             );
             document
-                .getElementById('email')
+                .getElementById('confirm-password')
                 .classList.add(
                 'g-green-50',
                 'border',
@@ -202,12 +202,12 @@ window.addEventListener('load', function () {
             );
             email_valid = true;
         } else {
-            document.getElementsByClassName('confirm-password')[1].style.color = 'red';
-            document.getElementsByClassName('confirm-password')[1].innerHTML =
+            document.getElementsByClassName('username-error')[3].style.color = 'red';
+            document.getElementsByClassName('username-error')[3].innerHTML =
                 '<i class="material-icons">error</i>';
-            status.innerHTML = 'Invalid Email';
+            status.innerHTML = 'Two Passwords do not Match';
             document
-                .getElementById('email')
+                .getElementById('confirm-password')
                 .classList.remove(
                 'g-green-50',
                 'border',
@@ -225,7 +225,7 @@ window.addEventListener('load', function () {
                 'dark:border-green-400'
             );
             document
-                .getElementById('email')
+                .getElementById('confirm-password')
                 .classList.add(
                 'bg-red-50',
                 'border',
@@ -273,7 +273,7 @@ window.addEventListener('load', function () {
                 status.innerHTML =
                     'Password must include at least 1 special character';
                 document
-                    .getElementById('email')
+                    .getElementById('password')
                     .classList.remove(
                     'g-green-50',
                     'border',
@@ -291,7 +291,7 @@ window.addEventListener('load', function () {
                     'dark:border-green-400'
                 );
                 document
-                    .getElementById('email')
+                    .getElementById('password')
                     .classList.add(
                     'bg-red-50',
                     'border',
@@ -308,7 +308,8 @@ window.addEventListener('load', function () {
                     'dark:bg-red-100',
                     'dark:border-red-400'
                 );
-                document.getElementsByClassName('username-error')[3].innerHTML =
+                document.getElementsByClassName('username-error')[2].style.color = 'red';
+                document.getElementsByClassName('username-error')[2].innerHTML =
                     '<i class="material-icons">error</i>';
                 password_valid = false;
             } else {
@@ -349,7 +350,8 @@ window.addEventListener('load', function () {
                     'dark:bg-green-100',
                     'dark:border-green-400'
                 );
-                document.getElementsByClassName('username-error')[3].innerHTML =
+                document.getElementsByClassName('username-error')[2].style.color = 'green';
+                document.getElementsByClassName('username-error')[2].innerHTML =
                     '<i class="material-icons">check_circle</i>';
             }
         }
@@ -357,7 +359,7 @@ window.addEventListener('load', function () {
 
     document.getElementById('email').onkeyup = changeEmail;
     document.getElementById('password').onkeyup = checkPassword;
-    document.getElementById('confirm-password').onkeyup = confirmPassword();
+    document.getElementById('confirm-password').onkeyup = confirmPassword;
 });
 
 function signUp() {
