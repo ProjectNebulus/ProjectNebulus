@@ -20,7 +20,6 @@ if ('serviceWorker' in navigator) {
 var CACHE_NAME = 'nebulus-offline';
 var urlsToCache = [
     '/',
-    '/static/styles.css',
     '/static/tailwind.css',
     '/static/createCourse.css',
     '/static/createCourse.js',
@@ -86,7 +85,6 @@ var urlsToCache = [
     'https://nebulus.ml/settings',
     'https://nebulus.ml/profile',
     '/',
-    '/static/styles.css',
     '/static/tailwind.css',
     '/static/createCourse.css',
     '/static/createCourse.js',

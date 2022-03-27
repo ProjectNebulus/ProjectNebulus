@@ -6,31 +6,27 @@
          style="width:100% !important; justify-content: center; text-align: center;">
         {% include "navbar.html" %}
         <br>
-        </center><p class="text-7xl text-gray-900 dark:text-white">Learning, All In One</p>
+        <p class="text-5xl text-gray-900 dark:text-white">Learning, All In One</p>
         <br>
         <p class="text-2xl text-gray-900 dark:text-white">Get all of your learning websites connected in one Nebulus
             Account.</p>
         <br>
         {% if user and password %}
-        <a href="/dashboard">
-            <button class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 hover:text-grey dark:text-white">
-                <span class=" px-6 py-3.5 relative transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0"
-                      style="font-size:30px;">
+            <a href="/dashboard">
+                <button class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 hover:text-grey dark:text-white">
+                <span class="text-xl px-6 py-3.5 relative transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                   Launch App
                 </span>
-            </button>
-
-        </a>
+                </button>
+            </a>
         {% else %}
-        <a href="/signup">
-            <button class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 hover:text-grey dark:text-white">
-                <span class=" px-6 py-3.5 relative transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0"
-                      style="font-size:30px;">
+            <a href="/signup">
+                <button class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 hover:text-grey dark:text-white">
+                <span class="text-xl px-6 py-3.5 relative transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                   Sign Up!
                 </span>
-            </button>
-
-        </a>
+                </button>
+            </a>
         {% endif %}
     </div>
     <div style="text-align: center;">
@@ -39,8 +35,7 @@
     <div class="flex items-center justify-center">
 
         <div class="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-3 grid-rows-1 gap-4 pt-0" id="feature-list">
-            <div href="#"
-                 class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <div class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"> Connect every
                     account</h5>
                 <p class="font-normal text-gray-700 dark:text-gray-400">No more switching between websites. Get your
@@ -60,7 +55,8 @@
             <div class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Chat with new
                     people</h5>
-                <p class="font-normal text-gray-700 dark:text-gray-400">Whether it's friends or new communities, we've got you covered.</p>
+                <p class="font-normal text-gray-700 dark:text-gray-400">Whether it's friends or new communities, we've
+                    got you covered.</p>
                 <br>
                 <a href="/chat"
                    class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -78,7 +74,8 @@
                  class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Get Additional Benefits
                     and use Nebulus like a Pro</h5>
-                <p class="font-normal text-gray-700 dark:text-gray-400">Bring Nebulus to the Next Level with Nebulus Premium</p>
+                <p class="font-normal text-gray-700 dark:text-gray-400">Bring Nebulus to the Next Level with Nebulus
+                    Premium</p>
                 <br>
                 <a href="/pricing"
                    class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -96,30 +93,30 @@
     <br>
     <img id="scrollCat" height=200px src="/static/images/nebulusCats/100_cat.png"></img>
     </body>
-<style>
+    <style>
 
-    ::-webkit-scrollbar-track {
-        height: 16000px;
-    / / for horizontal scrollbar
-    }
+        ::-webkit-scrollbar-track {
+            height: 16000px;
+        / / for horizontal scrollbar
+        }
 
-    #scrollCat {
-        position: -webkit-sticky;
-        position: sticky;
-    }
+        #scrollCat {
+            position: -webkit-sticky;
+            position: sticky;
+        }
 
-</style>
-<script>
-    $(document).scroll(function () {
-        const cats = ["100_cat", "black_cat", "blue_cat", "blurple_cat", "cake_cat", "cat1", "green_cat", "ocean_cat", "pink_cat", "red_cat", "river_cat", "yellow_cat"]
+    </style>
+    <script>
+        $(document).scroll(function () {
+            const cats = ["100_cat", "black_cat", "blue_cat", "blurple_cat", "cake_cat", "cat1", "green_cat", "ocean_cat", "pink_cat", "red_cat", "river_cat", "yellow_cat"]
 
-        var y = $(this).scrollTop();
-        var current = (Math.floor(y / 80) - 1) % 12;
+            var y = $(this).scrollTop();
+            var current = (Math.floor(y / 80) - 1) % 12;
 
-        document.getElementById("scrollCat").src = "/static/images/nebulusCats/" + cats[current] + ".png"
+            document.getElementById("scrollCat").src = "/static/images/nebulusCats/" + cats[current] + ".png"
 
-    });
+        });
 
-</script>
-{% include "footer.html" %}
+    </script>
+    {% include "footer.html" %}
 {% endblock %}

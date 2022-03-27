@@ -90,6 +90,7 @@ button, select {
     text-transform: none
 }
 
+
 [type=button], [type=reset], [type=submit], button {
     -webkit-appearance: button;
     background-color: initial;
@@ -1136,6 +1137,18 @@ input:checked + .toggle-bg {
 
 .overflow-visible {
     overflow: visible
+}
+
+.overflow-clip {
+    overflow: clip;
+}
+
+.overflow-ellipsis {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+    display: block;
+    overflow: hidden
 }
 
 .overflow-x-auto {

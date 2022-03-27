@@ -29,6 +29,7 @@ def course_page(page, **kwargs):
                     course_id=course_id,
                     password=session.get("password"),
                     user=session.get("username"),
+                    disableWidget=(page != "course")
                 )
 
             except TemplateNotFound:

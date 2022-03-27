@@ -9,7 +9,7 @@
 
         <div id="left" style="width:20%;height:90%;float:left;">
             <div style="text-align: center;">
-                <p class="text-3xl text-black dark:text-white">Recent Activity</p><br>
+                <p class="text-2xl text-black dark:text-white">Recent Activity</p><br>
                 <div class="flex flex-col overflow-x-auto shadow-md sm:rounded-lg inline-block min-w-full align-middle overflow-hidden">
                     <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-700">
                         <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
@@ -20,7 +20,7 @@
                                         <img src="https://bins.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg?"
                                              style="object-fit: cover; width:40px; height:40px; border-radius:10px;display: inline-block; margin: 10px;"
                                              alt>
-                                        {{ course.name }}
+                                        <span class="overflow-ellipsis">{{ course.name }}</span>
                                         <br><br>{% for update in course.announcements[0:3] %}
                                         <div class='update_teacher'>
                                             <p>{{ course.teacher }} > {{ course.name }}</p>
@@ -58,20 +58,31 @@
                     {% for course in user_courses %}
                         <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
                              style="float:left;margin:20px;height:300px;width:300px;">
+
                             <div class="p-5">
                                 <div style="text-align: left;">
                                     <div style="margin-bottom:10px">
                                         <img src="https://bins.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg?"
                                              alt="Course Image"
                                              style="object-fit: cover; width:40px; height:40px; border-radius:10px;display: inline-block; margin: 10px;">
-                                        <div style="float:right;width:75%">
-                                            <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                                <!--                                                {{ (course.name|length)}}-->
-                                                {% if (course.name|length) <= 15 %}
+
+                                        <button style="float:right;padding:0"
+                                                data-dropdown-toggle="{{ course.id }}"
+                                                class="dark:text-gray-200 material-icons bg-transparent dark:hover:bg-gray-700 rounded cursor-pointer focus:outline-none">
+                                            more_horiz
+                                        </button>
+                                        <div id="{{ course.id }}" class="hidden dark:bg-gray-700 rounded p-1">
+                                            <ul class="p-0 py-1">
+                                                <li class="dark:text-white cursor-pointer hover:bg-blue-800 text-xs p-0.5"
+                                                    onclick="navigator.clipboard.writeText(siteName + '/course/{{ course.id }}')">
+                                                    Copy Link
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <div style="float:right;width:65%">
+                                            <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white overflow-ellipsis">
                                                 {{ course.name }}
-                                                {% else %}
-                                                {{ course.name[0:12] }}...
-                                                {% endif %}
                                             </h5>
                                             <span class="font-normal text-gray-700 dark:text-gray-400">{{ course.teacher }}</span>
                                         </div>
@@ -83,9 +94,9 @@
                                             <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
                                         </svg>
                                         {% if course.imported_from %}
-                                        {{course.imported_from}}
+                                            {{ course.imported_from }}
                                         {% else %}
-                                        Not Imported
+                                            Not Imported
                                         {% endif %}
 
                                     </p>
@@ -95,7 +106,7 @@
                                              viewBox="0 0 20 20" fill="currentColor">
                                             <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
                                         </svg>
-                                        {{course.assignments|length}} Assignments
+                                        {{ course.assignments|length }} Assignments
                                     </p>
                                     <p class="text-base  text-gray-700 dark:text-gray-400">
                                         <svg style="display: inline-block;" xmlns="http://www.w3.org/2000/svg"
@@ -103,7 +114,7 @@
                                              viewBox="0 0 20 20" fill="currentColor">
                                             <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
                                         </svg>
-                                        {{course.announcements|length}} Announcements
+                                        {{ course.announcements|length }} Announcements
                                     </p>
                                     <p class="text-base  text-gray-700 dark:text-gray-400">
                                         <svg style="display: inline-block;" xmlns="http://www.w3.org/2000/svg"
@@ -111,7 +122,7 @@
                                              viewBox="0 0 20 20" fill="currentColor">
                                             <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
                                         </svg>
-                                        {{course.documents|length}} Documents
+                                        {{ course.documents|length }} Documents
                                     </p>
                                     <p class="text-base  text-gray-700 dark:text-gray-400">
                                         <svg style="display: inline-block;" xmlns="http://www.w3.org/2000/svg"
@@ -119,7 +130,7 @@
                                              viewBox="0 0 20 20" fill="currentColor">
                                             <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
                                         </svg>
-                                        {{course.events|length}} Events
+                                        {{ course.events|length }} Events
                                     </p>
                                 </div>
                                 <a href="/course/{{ course.id }}" style="margin-top: 20px"
@@ -142,7 +153,7 @@
         </div>
 
         <div id="right" style="width:18%;height:90%;float:left;background-color:transparent;overflow:auto;">
-            <p class="text-3xl text-black dark:text-white">Upcoming Events</p><br>
+            <p class="text-2xl text-black dark:text-white">Upcoming Events</p><br>
             <div style="text-align: center;">
 
                 <div class="flex flex-col">

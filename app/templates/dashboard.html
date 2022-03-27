@@ -38,11 +38,11 @@
     <body>
     <div id="page">
         {% include "navbar.html" %}
-        <div style="text-align: center; "><h1 class="text-black dark:text-white">Good
+        <div style="text-align: center; "><h1 class="text-black text-3xl dark:text-white">Good
             Afternoon, {{ user }}</h1></div>
 
         <div id="left" style="overflow:visible">
-            <h2 class="text-black dark:text-white">Recent courses</h2>
+            <h2 class="text-black dark:text-white text-2xl">Recent courses</h2>
             <div class="block w-full section p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                 {% for course in user_courses %}
                     <a href="/course/{{ course.id }}">
@@ -52,9 +52,9 @@
                                  style="object-fit: cover; width:40px; height:40px; border-radius:10px;display: inline-block; margin: 10px;"
                                  alt>
                             {% if course.name|length <= 8 %}
-                            {{ course.name }}
+                                {{ course.name }}
                             {% else %}
-                            {{ course.name[0:5] }}...
+                                {{ course.name[0:5] }}...
                             {% endif %}
                         </button>
                     </a>
@@ -62,14 +62,14 @@
                 {% endfor %}
             </div>
             <br>
-            <h2 class="text-black dark:text-white">Recent Activity</h2>
+            <h2 class="text-2xl text-black dark:text-white">Recent Activity</h2>
             <div class="block w-full section p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
 
             </div>
         </div>
 
         <div id="right" style="overflow:visible">
-            <h2 class="text-black dark:text-white">Upcoming Assignments</h2>
+            <h2 class="text-black dark:text-white text-2xl">Upcoming Assignments</h2>
             <div class="vertical block w-full section p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
 
             </div>
