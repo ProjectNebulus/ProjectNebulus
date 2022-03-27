@@ -41,6 +41,7 @@ def get_path():
 def spotify():
     if not session.get("uuid"):
         # Step 1. Visitor is unknown, give random ID
+        import uuid
         session["uuid"] = str(uuid.uuid4())
 
     cache_handler = spotipy.cache_handler.CacheFileHandler(

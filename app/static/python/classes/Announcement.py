@@ -12,6 +12,15 @@ class Announcement(Snowflake):
     content = StringField(required=True)
     date = DateTimeField(default=datetime.datetime.now())
     author = StringField(required=True)
-    authorpic = StringField(
-
-    )
+    author_pic = StringField(default="http://localhost:8080/static/images/nebulusCats/v3.gif")
+    likes = IntField(default=0)
+    dislikes = IntField(default=0)
+    comment_number = IntField(default=0)
+    imported_from = StringField(default="Nebulus")
+    """
+    [
+        ["User": "Message"],
+        ["User#2: "Message"]
+    ]
+    """
+    comments = ListField(ListField(StringField))

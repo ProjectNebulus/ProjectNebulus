@@ -17,18 +17,21 @@
                             {% if course.announcements|length > 0 %}
                                 <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                     <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        <img src="https://bins.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg?"
-                                             style="object-fit: cover; width:40px; height:40px; border-radius:10px;display: inline-block; margin: 10px;"
-                                             alt>
-                                        <span class="overflow-ellipsis">{{ course.name }}</span>
+                                        <span class="overflow-ellipsis" class="text-3xl"><img
+                                                src="https://bins.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg?"
+                                                style="object-fit: cover; width:40px; height:40px; border-radius:10px;display: inline-block; margin: 10px;"
+                                                alt> {{ course.name }}</span>
                                         <br><br>{% for update in course.announcements[0:3] %}
-                                        <div class='update_teacher'>
-                                            <p>{{ course.teacher }} > {{ course.name }}</p>
-                                        </div>
+
                                         <div class='update_header'>
-                                            <h3>{{ update.header }}</h3>
+                                            <h3 class="text-2xl">{{ update.title }}</h3>
+                                            <div class='update_teacher'>
+                                                <p class="text-xl text-gray-500"><img href="{{update.author_pic}}"
+                                                                                      style="margin-left:20px; width:20px; height:20px; border-radius:50%;display: inline-block;">{{
+                                                    update.author }} > {{ update.imported_from }}</p>
+                                            </div>
                                             <div class='update_info'>
-                                                <h4>{{ update.info }}</h4>
+                                                <h4 class="text-lg">{{ update.content }}</h4>
                                             </div>
                                         </div>
                                     {% endfor %}<br>
