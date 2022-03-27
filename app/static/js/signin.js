@@ -463,7 +463,7 @@ function reqListener1() {
         let passwordInput = document.getElementById('psw');
         loginButton.disabled = false;
         loginButton.style.color = '#eff6ff';
-        loginButton.style.backgroundColor = '#1d4ed8';
+        loginButton.style.backgroundColor = '3';
         loginButton.classList.add('hover:bg-blue-800');
         usernameInput.disabled = true;
         passwordInput.disabled = true;
