@@ -4,6 +4,20 @@
 <link rel="stylesheet"
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/default.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script>
+<nav class="flex py-3 px-5 text-gray-700 bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700"
+     aria-label="Breadcrumb">
+    <ol class="inline-flex items-center space-x-1 md:space-x-3" id="breadcrumy">
+        <li class="inline-flex items-center">
+            <a onclick="location.reload();"
+               class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
+                <svg class="mr-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                </svg>
+                Home
+            </a>
+        </li>
+    </ol>
+</nav>
 <div style="margin-left:10px;width:calc(100% - 280px);float:left;" id="documentPage">
     {% if course.documents|length == 0 and course.folders|length == 0 %}
     <h1 style="margin-left:20px;margin-top:20px;" class="text-2xl text-black dark:text-white">You have no documents
@@ -25,7 +39,7 @@
     {% endfor %}
     {% for i in course.documents %}
     <br>
-    <a onclick="document.getElementById('documentPage').style.display = 'none';startFile('https://cors-anywhere.herokuapp.com/{{i.url}}');"
+    <a onclick="document.getElementById('documentPage').style.display = 'none';startFile('{{i.name}}','https://cors-anywhere.herokuapp.com/{{i.url}}');"
        style="width:90%;"
        class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
         <p class="font-normal text-gray-700 dark:text-gray-400" style="white-space: nowrap;  ">
@@ -45,7 +59,7 @@
     <style>
         canvas {
             width: 100%;
-            border: 3px solid black;
+            border: 3px solid transparent;
             border-radius: 10px;
 
         }
@@ -56,7 +70,7 @@
             top: 0;
             background: #121926;
             width: 90%;
-            margin-left: 20px;
+            margin-left: 5%;
             border-radius: 10px;
             padding: 10px;
             text-align: center;
@@ -75,7 +89,15 @@
         let currentPageNum = 1;
 
         // events
-        function startFile(link) {
+        function startFile(file, link) {
+            document.getElementById("breadcrumy").innerHTML = document.getElementById("breadcrumy").innerHTML + `
+            <li>
+      <div class="flex items-center">
+        <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+        <a href="#" class="ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white">${file}</a>
+      </div>
+    </li>
+            `
             if (link.includes("pdf")) {
                 document.getElementById("pdf-viewer").style.display = "block";
                 startPDF(link)
@@ -207,14 +229,14 @@
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
             Next Page
         </button>
-        <span class="text-black dark:text-white">
-            <span id="current_page_num"></span>
+        <span class="text-white dark:text-white">
+            <span class="text-red-500" id="current_page_num"></span>
             of
             <span id="total_page_num"></span>
         </span>
 
         <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-               style="width:150px;display:inline-block;" type="text" id="page_num">
+               style="width:150px;margin-left:10px; margin-right:10px; display:inline-block;" type="text" id="page_num">
         <button id="go_to_page" type="button"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
             Go to Page
@@ -399,7 +421,7 @@
         Office</a> document, powered by <a target='_blank' href='http://office.com/webapps'>Office Online</a>.
     </iframe>
 </div>
-<div id="audio-viewer" style="">
+<div id="audio-viewer" style="display:none;">
 
     <div style="width: 50px; height: 50px;"></div>
     <div class="audio-player">
@@ -430,14 +452,6 @@
         </div>
     </div>
     <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
-            background: linear-gradient(to bottom right, #b968c5, skyblue);
-        }
 
         .audio-player {
             height: 50px;
