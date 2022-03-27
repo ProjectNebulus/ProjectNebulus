@@ -64,18 +64,18 @@ window.addEventListener('load', function () {
     const r_l = ',<.>/?;:\'"\\|[{]}=+-_`!@#$%^&*()_+';
 
     function changeEmail() {
-        let status = document.getElementById('status');
+        let status = document.getElementById('errormsg');
         status.style.color = 'red';
         status.innerHTML = '<br>';
         const value = document.getElementById('email').value;
         if (validate(value)) {
-            document.getElementsByClassName('response')[0].style.color = 'green';
-            document.getElementsByClassName('response')[0].innerHTML =
+            document.getElementsByClassName('username-error')[1].style.color = 'green';
+            document.getElementsByClassName('username-error')[1].innerHTML =
                 '<i class="material-icons">check_circle</i>';
             email_valid = true;
         } else {
-            document.getElementsByClassName('response')[0].style.color = 'red';
-            document.getElementsByClassName('response')[0].innerHTML =
+            document.getElementsByClassName('username-error')[1].style.color = 'red';
+            document.getElementsByClassName('username-error')[1].innerHTML =
                 '<i class="material-icons">error</i>';
             status.innerHTML = 'Enter a valid email!';
             email_valid = false;
