@@ -10,7 +10,7 @@ def index():
         "main/home.html",
         page="Nebulus - Learning, All In One",
         password=session.get("password"),
-        user=session.get("username"),
+        user=session.get("username"), email=session.get("email"),
     )
 
 
