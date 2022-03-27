@@ -23,11 +23,11 @@ function next(num){
 
     }else{
         if (num === 1 && !EMAIL_REGEX.test(document.getElementById("email").value)) {
-            document.getElementById("error").innerText = "Invalid Email";
+            //document.getElementById("error").innerText = "Invalid Email";
         } else if (num === 1 && EMAIL_REGEX.test(document.getElementById("email").value)) {
 
         } else {
-            document.getElementById("error").innerText = "";
+            //document.getElementById("error").innerText = "";
             const myTimeout = setTimeout(function () {
 
                 document.getElementById("step" + num.toString()).style.display = "none";
