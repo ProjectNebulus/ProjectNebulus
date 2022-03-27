@@ -64,7 +64,7 @@ window.addEventListener('load', function () {
     const r_l = ',<.>/?;:\'"\\|[{]}=+-_`!@#$%^&*()_+';
 
     function changeEmail() {
-        let status = document.getElementById('errormsg');
+        let status = document.getElementsByClassName('errormsg')[1];
         status.style.color = 'red';
         status.innerHTML = '<br>';
         const value = document.getElementById('email').value;
@@ -72,12 +72,176 @@ window.addEventListener('load', function () {
             document.getElementsByClassName('username-error')[1].style.color = 'green';
             document.getElementsByClassName('username-error')[1].innerHTML =
                 '<i class="material-icons">check_circle</i>';
+            document
+                .getElementById('email')
+                .classList.remove(
+                'bg-red-50',
+                'border',
+                'border-red-500',
+                'text-red-900',
+                'placeholder-red-700',
+                'text-sm',
+                'rounded-lg',
+                'focus:ring-red-500',
+                'focus:border-red-500',
+                'block',
+                'w-full',
+                'p-2.5',
+                'dark:bg-red-100',
+                'dark:border-red-400'
+            );
+            document
+                .getElementById('email')
+                .classList.add(
+                'g-green-50',
+                'border',
+                'border-green-500',
+                'text-green-900',
+                'placeholder-green-700',
+                'text-sm',
+                'rounded-lg',
+                'focus:ring-green-500',
+                'focus:border-green-500',
+                'block',
+                'w-full',
+                'p-2.5',
+                'dark:bg-green-100',
+                'dark:border-green-400'
+            );
             email_valid = true;
         } else {
             document.getElementsByClassName('username-error')[1].style.color = 'red';
             document.getElementsByClassName('username-error')[1].innerHTML =
                 '<i class="material-icons">error</i>';
-            status.innerHTML = 'Enter a valid email!';
+            status.innerHTML = 'Invalid Email';
+            document
+                .getElementById('email')
+                .classList.remove(
+                'g-green-50',
+                'border',
+                'border-green-500',
+                'text-green-900',
+                'placeholder-green-700',
+                'text-sm',
+                'rounded-lg',
+                'focus:ring-green-500',
+                'focus:border-green-500',
+                'block',
+                'w-full',
+                'p-2.5',
+                'dark:bg-green-100',
+                'dark:border-green-400'
+            );
+            document
+                .getElementById('email')
+                .classList.add(
+                'bg-red-50',
+                'border',
+                'border-red-500',
+                'text-red-900',
+                'placeholder-red-700',
+                'text-sm',
+                'rounded-lg',
+                'focus:ring-red-500',
+                'focus:border-red-500',
+                'block',
+                'w-full',
+                'p-2.5',
+                'dark:bg-red-100',
+                'dark:border-red-400'
+            );
+            email_valid = false;
+        }
+    }
+
+    function confirmPassword() {
+        let status = document.getElementsByClassName('errormsg')[3];
+        status.style.color = 'red';
+        status.innerHTML = '<br>';
+        const value = document.getElementById('confirm-password').value;
+        const value2 = document.getElementById(']password').value;
+        if (value === value2) {
+            document.getElementsByClassName('username-error')[3].style.color = 'green';
+            document.getElementsByClassName('username-error')[3].innerHTML =
+                '<i class="material-icons">check_circle</i>';
+            document
+                .getElementById('email')
+                .classList.remove(
+                'bg-red-50',
+                'border',
+                'border-red-500',
+                'text-red-900',
+                'placeholder-red-700',
+                'text-sm',
+                'rounded-lg',
+                'focus:ring-red-500',
+                'focus:border-red-500',
+                'block',
+                'w-full',
+                'p-2.5',
+                'dark:bg-red-100',
+                'dark:border-red-400'
+            );
+            document
+                .getElementById('email')
+                .classList.add(
+                'g-green-50',
+                'border',
+                'border-green-500',
+                'text-green-900',
+                'placeholder-green-700',
+                'text-sm',
+                'rounded-lg',
+                'focus:ring-green-500',
+                'focus:border-green-500',
+                'block',
+                'w-full',
+                'p-2.5',
+                'dark:bg-green-100',
+                'dark:border-green-400'
+            );
+            email_valid = true;
+        } else {
+            document.getElementsByClassName('confirm-password')[1].style.color = 'red';
+            document.getElementsByClassName('confirm-password')[1].innerHTML =
+                '<i class="material-icons">error</i>';
+            status.innerHTML = 'Invalid Email';
+            document
+                .getElementById('email')
+                .classList.remove(
+                'g-green-50',
+                'border',
+                'border-green-500',
+                'text-green-900',
+                'placeholder-green-700',
+                'text-sm',
+                'rounded-lg',
+                'focus:ring-green-500',
+                'focus:border-green-500',
+                'block',
+                'w-full',
+                'p-2.5',
+                'dark:bg-green-100',
+                'dark:border-green-400'
+            );
+            document
+                .getElementById('email')
+                .classList.add(
+                'bg-red-50',
+                'border',
+                'border-red-500',
+                'text-red-900',
+                'placeholder-red-700',
+                'text-sm',
+                'rounded-lg',
+                'focus:ring-red-500',
+                'focus:border-red-500',
+                'block',
+                'w-full',
+                'p-2.5',
+                'dark:bg-red-100',
+                'dark:border-red-400'
+            );
             email_valid = false;
         }
     }
@@ -86,7 +250,7 @@ window.addEventListener('load', function () {
         document.getElementById('email').value = localStorage.getItem('email');
 
     function checkPassword() {
-        let status = document.getElementById('status');
+        let status = document.getElementsByClassName('errormsg')[2];
         status.style.color = 'red';
         status.innerHTML = '<br>';
         const value = document.getElementById('password').value;
@@ -106,20 +270,94 @@ window.addEventListener('load', function () {
             }
 
             if (!hasSpecialCharacter) {
-                document.getElementById('bubble2').style.display = 'block';
-                document.getElementById('bubble').style.display = 'none';
-                document.getElementById('bubble2').innerHTML =
-                    'Message: Password must include at least 1 special character';
-                document.getElementById('passwordValid').style.display = 'none';
+                status.innerHTML =
+                    'Password must include at least 1 special character';
+                document
+                    .getElementById('email')
+                    .classList.remove(
+                    'g-green-50',
+                    'border',
+                    'border-green-500',
+                    'text-green-900',
+                    'placeholder-green-700',
+                    'text-sm',
+                    'rounded-lg',
+                    'focus:ring-green-500',
+                    'focus:border-green-500',
+                    'block',
+                    'w-full',
+                    'p-2.5',
+                    'dark:bg-green-100',
+                    'dark:border-green-400'
+                );
+                document
+                    .getElementById('email')
+                    .classList.add(
+                    'bg-red-50',
+                    'border',
+                    'border-red-500',
+                    'text-red-900',
+                    'placeholder-red-700',
+                    'text-sm',
+                    'rounded-lg',
+                    'focus:ring-red-500',
+                    'focus:border-red-500',
+                    'block',
+                    'w-full',
+                    'p-2.5',
+                    'dark:bg-red-100',
+                    'dark:border-red-400'
+                );
+                document.getElementsByClassName('username-error')[3].innerHTML =
+                    '<i class="material-icons">error</i>';
                 password_valid = false;
             } else {
                 password_valid = true;
+                document
+                    .getElementById('password')
+                    .classList.remove(
+                    'bg-red-50',
+                    'border',
+                    'border-red-500',
+                    'text-red-900',
+                    'placeholder-red-700',
+                    'text-sm',
+                    'rounded-lg',
+                    'focus:ring-red-500',
+                    'focus:border-red-500',
+                    'block',
+                    'w-full',
+                    'p-2.5',
+                    'dark:bg-red-100',
+                    'dark:border-red-400'
+                );
+                document
+                    .getElementById('password')
+                    .classList.add(
+                    'g-green-50',
+                    'border',
+                    'border-green-500',
+                    'text-green-900',
+                    'placeholder-green-700',
+                    'text-sm',
+                    'rounded-lg',
+                    'focus:ring-green-500',
+                    'focus:border-green-500',
+                    'block',
+                    'w-full',
+                    'p-2.5',
+                    'dark:bg-green-100',
+                    'dark:border-green-400'
+                );
+                document.getElementsByClassName('username-error')[3].innerHTML =
+                    '<i class="material-icons">check_circle</i>';
             }
         }
     }
 
     document.getElementById('email').onkeyup = changeEmail;
     document.getElementById('password').onkeyup = checkPassword;
+    document.getElementById('confirm-password').onkeyup = confirmPassword();
 });
 
 function signUp() {
