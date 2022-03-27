@@ -26,12 +26,15 @@
                                         <div class='update_header'>
                                             <h3 class="text-2xl">{{ update.title }}</h3>
                                             <div class='update_teacher'>
-                                                <p class="text-xl text-gray-500"><img href="{{update.author_pic}}"
-                                                                                      style="margin-left:20px; width:20px; height:20px; border-radius:50%;display: inline-block;">{{
+                                                <p class="text-xl text-gray-500"><img src="{{update.author_pic}}"
+                                                                                      style="margin-right:20px; width:20px; height:20px; border-radius:50%;display: inline-block;">{{
                                                     update.author }} > {{ update.imported_from }}</p>
                                             </div>
                                             <div class='update_info'>
-                                                <h4 class="text-lg">{{ update.content }}</h4>
+                                                <h4 style="width:95%; overflow-wrap: break-word !important; white-space: pre-wrap;white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+    white-space: -pre-wrap; /* Opera 4-6 */
+    white-space: -o-pre-wrap; /* Opera 7 */
+    word-wrap: break-word; /* Internet Explorer 5.5+ */" class="text-lg">{{ update.content }}</h4>
                                             </div>
                                         </div>
                                     {% endfor %}<br>
