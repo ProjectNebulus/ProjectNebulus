@@ -16,7 +16,7 @@ from ..classes.Schoology import Schoology
 from ..classes.Spotify import Spotify
 from ..classes.User import User
 from ..security import valid_password
-from ..classes.assessment import assessment
+from ..classes.Assessment import Assessment
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 

@@ -24,7 +24,9 @@ def get_song():
         items = results["artists"]["items"]
         artist = items[0]
         # results2 = sp.search(q="track:" + current_song, type="track")["tracks"]["items"][0]['images']
-        results2 = sp.search(q="track:" + current_song, type="track")["tracks"]["items"][0]["album"]['images'][0]["url"]
+        results2 = \
+        sp.search(q="track:" + artist + " - " + current_song, type="track")["tracks"]["items"][0]["album"]['images'][0][
+            "url"]
 
         return current_song, song_artist, artist["images"][0]["url"], results2
     except:

@@ -3,7 +3,7 @@ from mongoengine import *
 from .Snowflake import Snowflake
 
 
-class assessment(Snowflake):
+class Assessment(Snowflake):
     """
     A subclass of the snowflake object, representing an assignment in a course.
 
