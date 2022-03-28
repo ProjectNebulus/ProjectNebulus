@@ -8,9 +8,17 @@ from flask import request
 def username_exists():
     try:
         user = request.form.get("username")
+        print(user)
         user = find_user(username=user)
-        if user:
+        print(user)
+        if str(user) == "None":
+            print("True")
             return "True"
+        if str(user.DoesNotExist) != "None":
+            print("True")
+            return "True"
+        print("False")
         return "False"
     except:
+        print("False")
         return "False"
