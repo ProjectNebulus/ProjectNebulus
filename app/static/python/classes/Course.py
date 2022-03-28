@@ -4,6 +4,8 @@ from typing import List, Optional
 from mongoengine import *
 
 from .Assignment import Assignment
+from .Textbook import Textbook
+from .Extension import Extension
 from .Avatar import Avatar
 from .Events import Event
 
@@ -61,3 +63,5 @@ class Course(Snowflake):
     image = EmbeddedDocumentField(Avatar)
     announcements = ListField(ReferenceField("Announcement"))
     archived = BooleanField(default=False)
+    extensions = ListField(ReferenceField("Extension"))
+    textbooks = ListField(ReferenceField("Textbook"))

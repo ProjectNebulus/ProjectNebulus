@@ -3,7 +3,7 @@ from mongoengine import *
 from .Snowflake import Snowflake
 
 
-class Assesment(Snowflake):
+class assessment(Snowflake):
     """
     A subclass of the snowflake object, representing an assignment in a course.
 
@@ -14,7 +14,7 @@ class Assesment(Snowflake):
 
     """
 
-    meta = {"collection": "Assesments"}
+    meta = {"collection": "assessments"}
     course = ReferenceField(
         "Course", required=True, description="The course that this assignment is in."
     )
