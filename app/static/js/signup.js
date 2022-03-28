@@ -71,6 +71,7 @@ function checkUsernameExists(username) {
         }
         return false;
     });
+    return false;
 }
 
 window.addEventListener('load', function () {
@@ -176,7 +177,7 @@ window.addEventListener('load', function () {
         status.style.color = 'red';
         status.innerHTML = '<br>';
         const value = document.getElementById('username').value;
-        if (validate(value)) {
+        if (checkUsernameExists(value)) {
             document.getElementsByClassName('username-error')[0].style.color = 'green';
             document.getElementsByClassName('username-error')[0].innerHTML =
                 '<i class="material-icons">check_circle</i>';
