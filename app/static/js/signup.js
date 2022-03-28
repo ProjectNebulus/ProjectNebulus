@@ -66,14 +66,13 @@ function checkUsernameExists(username) {
         }
     });
     request.done(function (data) {
-        alert(data);
-        alert(data === "False");
+        // alert(data);
+        // alert(data === "False");
         if (data === "False") {
             return true;
         }
         return false;
     });
-    return false;
 
 }
 
@@ -197,8 +196,8 @@ window.addEventListener('load', function () {
         status.style.color = 'red';
         status.innerHTML = '<br>';
         const value = document.getElementById('username').value;
-        alert(value);
-        alert(checkUsernameExists(value));
+        // alert(value);
+        // alert(checkUsernameExists(value));
         if (checkUsernameExists(value)) {
             document.getElementsByClassName('username-error')[0].style.color = 'green';
             document.getElementsByClassName('username-error')[0].innerHTML =

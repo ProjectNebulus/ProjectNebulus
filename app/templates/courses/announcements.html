@@ -3,7 +3,8 @@
 {% block main %}
 
 {% if course.announcements|length == 0 %}
-<h1>No Announcements :c</h1>
+<h1 style="margin-left:20px;margin-top:20px;" class="text-2xl text-black dark:text-white">You have no announcements! Try
+    creating one!</h1>
 {% endif %}
 {% for i in course.announcements %}
 <a style="width:90%;margin:20px;" href="#"
