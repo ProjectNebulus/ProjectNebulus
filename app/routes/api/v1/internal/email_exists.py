@@ -9,7 +9,7 @@ def email_exists():
     try:
         user = request.form.get("email")
         user = find_user(email=user)
-        if not user:
+        if user:
             return "True"
         return "False"
     except:
