@@ -104,7 +104,7 @@
         }
         if (localStorage.getItem("color-theme") === "dark") {
             if (window.location.href[window.location.href.length - 1] === "/") {
-                document.body.style.backgroundImage = "url(\"https://www.tailwindtoolbox.com/templates/header.png\")";
+                document.body.style.backgroundImage = "url(\"/static/images/darkwallpaper.png\")";
             } else {
                 document.body.style.background = "#111926";
 
@@ -112,7 +112,11 @@
 
             document.getElementsByTagName('html')[0].setAttribute('class', 'dark');
         } else {
-            document.body.style.background = "white";
+            if (window.location.href[window.location.href.length - 1] === "/") {
+                document.body.style.backgroundImage = "url(\"/static/images/lightwallpaper.png\")";
+            } else {
+                document.body.style.background = "white";
+            }
         }
 
 
