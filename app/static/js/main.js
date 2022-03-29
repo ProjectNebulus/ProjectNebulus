@@ -18,7 +18,8 @@ window.onload = function () {
         localStorage.setItem('color-theme', darkTheme ? 'dark' : 'light');
     }
 
-    if (localStorage.getItem('color-theme') === 'dark') document.body.style.background = '#111926';
+    if (localStorage.getItem('color-theme') === 'dark' && window.location.href[window.location.href.length - 1] !== "/") document.body.style.background = '#111926';
+    else if (localStorage.getItem('color-theme') === 'dark' && window.location.href[window.location.href.length - 1] === "/") document.body.style.backgroundImage = "url(\"https://www.tailwindtoolbox.com/templates/header.png\")";
     else document.body.style.background = '#EEEEEE';
 
     // On page load or when changing themes, best to add inline in `head` to avoid FOUC

@@ -192,7 +192,11 @@
                     document.documentElement.classList.add('dark');
 
                     localStorage.setItem('color-theme', 'dark');
-                    document.body.style.background = "#111926";
+                    if (window.location.href[window.location.href.length - 1] === "/") {
+                        document.body.style.backgroundImage = "url(\"https://www.tailwindtoolbox.com/templates/header.png\")";
+                    } else {
+                        document.body.style.background = "#111926";
+                    }
                 } else {
                     document.documentElement.classList.remove('dark');
                     localStorage.setItem('color-theme', 'light');
@@ -208,7 +212,12 @@
                 } else {
                     document.documentElement.classList.add('dark');
                     localStorage.setItem('color-theme', 'dark');
-                    document.body.style.background = "#111926";
+                    if (window.location.href[window.location.href.length - 1] === "/") {
+                        document.body.style.backgroundImage = "url(\"https://www.tailwindtoolbox.com/templates/header.png\")";
+                    } else {
+                        document.body.style.background = "#111926";
+                    }
+
                 }
             }
             if (window.location.href.includes("course")) {
@@ -217,7 +226,12 @@
 
                 if (document.documentElement.classList.contains("dark")) {
                     innerDoc.documentElement.classList.add("dark");
-                    innerDoc.body.style.background = "#111926";
+                    if (window.location.href[window.location.href.length - 1] === "/") {
+                        document.body.style.backgroundImage = "url(\"https://www.tailwindtoolbox.com/templates/header.png\")";
+                    } else {
+                        document.body.style.background = "#111926";
+                    }
+
                 } else {
                     innerDoc.documentElement.classList.remove("dark");
                     innerDoc.body.style.background = "white";

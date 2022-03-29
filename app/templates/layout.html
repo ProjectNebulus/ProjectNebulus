@@ -103,7 +103,13 @@
                 localStorage.setItem("color-theme", "light");
         }
         if (localStorage.getItem("color-theme") === "dark") {
-            document.body.style.background = "#111926";
+            if (window.location.href[window.location.href.length - 1] === "/") {
+                document.body.style.backgroundImage = "url(\"https://www.tailwindtoolbox.com/templates/header.png\")";
+            } else {
+                document.body.style.background = "#111926";
+
+            }
+
             document.getElementsByTagName('html')[0].setAttribute('class', 'dark');
         } else {
             document.body.style.background = "white";
