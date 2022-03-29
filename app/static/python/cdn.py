@@ -1,10 +1,6 @@
 # Step 1: Import the all necessary libraries and SDK commands.
 import os
 import boto3
-import botocore
-from botocore import UNSIGNED
-from botocore.config import Config
-
 # Step 2: The new session validates your request and directs it to your Space's specified endpoint using the AWS SDK.
 session = boto3.session.Session()
 client = session.client('s3',
@@ -15,7 +11,6 @@ client = session.client('s3',
                         # Access key pair. You can create access key pairs using the control panel or API.
                         aws_secret_access_key="PXVzHLe+Be77KjPzZsWYD4eUyP2HuoSYgrC4/XOnpc8",
                         # Secret access key defined through an environment variable.
-                        config=Config(signature_version=UNSIGNED),
                         )
 # Step 3: Call the put_object command and specify the file to upload.
 client.put_object(
@@ -24,7 +19,7 @@ client.put_object(
     # The path to the directory you want to upload the object to, starting with your Space name.
     Key='hello-world.txt',  # Object key, referenced whenever you want to access this file later.
     Body=b'Hello, World!',  # The object's contents.
-    ACL='public',  # Defines Access-control List (ACL) permissions, such as private or public.
+    ACL='public-read',  # Defines Access-control List (ACL) permissions, such as private or public.
     Metadata={  # Defines metadata tags.
         'x-amz-meta-my-key': 'your-value'
     },
