@@ -13,20 +13,10 @@ client = session.client('s3',
                         # Secret access key defined through an environment variable.
                         )
 # Step 3: Call the put_object command and specify the file to upload.
-client.put_object(
-    # Bucket='nebulus-cdn/Images',
-    Bucket='nebulus-cdn',
-    # The path to the directory you want to upload the object to, starting with your Space name.
-    Key='hello-world.txt',  # Object key, referenced whenever you want to access this file later.
-    Body=b'Hello, World!',  # The object's contents.
-    ACL='public-read',  # Defines Access-control List (ACL) permissions, such as private or public.
-    Metadata={  # Defines metadata tags.
-        'x-amz-meta-my-key': 'your-value'
-    },
-
-)
+client.upload_file('/Users/NicholasWang/IdeaProjects/ProjectNebulus/app/static/images/logo.png', 'nebulus-cdn',
+                   'logo.png')
 base = "https://nebulus-cdn.sfo3.digitaloceanspaces.com/"
-input = "hello-world.txt"
+input = "nebulus-cdn/logo.png"
 print(base + input)
 
 # todo: upload/delete file: https://docs.digitalocean.com/products/spaces/resources/s3-sdk-examples/
