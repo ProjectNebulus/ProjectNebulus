@@ -1,15 +1,24 @@
 {% if not disablebar %}
-    <nav
-            class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded bg-gray-300 dark:bg-gray-600"
-            oncontextmenu="rightClickElements=null">
-        <div class="container flex flex-wrap justify-between items-center mx-auto">
-            <a href="/" class="flex">
-                <img class="mr-3 h-10 logo_">
-                <span class="self-center text-xl font-semibold whitespace-nowrap text-black dark:text-white">Nebulus</span>
-            </a>
-            {% if user and password %}
-                <div class="flex items-center md:order-2">
-                    <button class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+<script>
+    window.addEventListener('load', function () {
+        if (window.location.href[window.location.href.length - 1] === "/") {
+            document.getElementById("nav").classList.remove("dark:bg-gray-600");
+            document.getElementById("nav").classList.add("dark:bg-gray-800/50");
+        }
+    });
+
+</script>
+<nav id="nav"
+     class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded bg-gray-300 dark:bg-gray-600"
+     oncontextmenu="rightClickElements=null">
+    <div class="container flex flex-wrap justify-between items-center mx-auto">
+        <a href="/" class="flex">
+            <img class="mr-3 h-10 logo_">
+            <span class="self-center text-xl font-semibold whitespace-nowrap text-black dark:text-white">Nebulus</span>
+        </a>
+        {% if user and password %}
+        <div class="flex items-center md:order-2">
+            <button class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                             id="user-menu-button" aria-expanded="false" type="button" data-dropdown-toggle="dropdown">
                         <span class="sr-only">Open user menu</span>
                         <img class="logo_ h-8 rounded-full" src="/static/images/nebulusCats/v3.gif" alt="User Photo"
