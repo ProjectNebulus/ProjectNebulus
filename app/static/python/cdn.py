@@ -1,22 +1,16 @@
-# Step 1: Import the all necessary libraries and SDK commands.
-import os
-import boto3
-# Step 2: The new session validates your request and directs it to your Space's specified endpoint using the AWS SDK.
-session = boto3.session.Session()
-client = session.client('s3',
-                        endpoint_url='https://nebulus-cdn.sfo3.digitaloceanspaces.com',
-                        # Find your endpoint in the control panel, under Settings. Prepend "https://".
-                        region_name='sfo3',  # Use the region in your endpoint.
-                        aws_access_key_id='ZITBOFJ4QRQA4WBLMO33',
-                        # Access key pair. You can create access key pairs using the control panel or API.
-                        aws_secret_access_key="GnHgjOQ8ZorAnckiT5uRskFFwNqndEmhcWwtesr1LYM",
-                        # Secret access key defined through an environment variable.
-                        )
-# Step 3: Call the put_object command and specify the file to upload.
-print(client.upload_file('/Users/NicholasWang/IdeaProjects/ProjectNebulus/app/static/images/logo.png', 'nebulus-cdn',
-                         'logo.png'))
-base = "https://nebulus-cdn.sfo3.digitaloceanspaces.com/"
-input = "nebulus-cdn/logo.png"
-print(base + input)
+from boto3 import session
+from botocore.client import Config
 
-# todo: upload/delete file: https://docs.digitalocean.com/products/spaces/resources/s3-sdk-examples/
+ACCESS_ID = 'VCRH4QOPCDEQR5PFNPQM'
+SECRET_KEY = 'Vx3pqPbLTGlSvNAhfxPFDto8CskcWOXOjvcW0ziwXys'
+
+# Initiate session
+session = session.Session()
+client = session.client('s3',
+                        region_name='sfo3',
+                        endpoint_url='https://sfo3.digitaloceanspaces.com',
+                        aws_access_key_id=ACCESS_ID,
+                        aws_secret_access_key=SECRET_KEY)
+
+# Upload a file to your Space
+client.upload_file('cdn.py', 'nebulus-cdn', 'testing.py')
