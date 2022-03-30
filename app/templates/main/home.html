@@ -1,16 +1,48 @@
 <!--Extend with Jinja!-->
 {% extends "layout.html" %}
 {% block main %}
-    <body oncontextmenu="rightClickElements=null">
-    <div class="dark:bg-gray-800" id="homePageBanner"
-         style="width:100% !important; justify-content: center; text-align: center;">
-        {% include "navbar.html" %}
-        <br>
-        <p class="text-7xl text-gray-900 dark:text-white font-black "
-           >
-            Learning, All In One</p>
-        <br>
-        <p class="text-2xl text-gray-900 dark:text-white">Have your whole learning experience <span
+<style>
+    .correct-size {
+        width: 384px !important;
+        height: 318px !important;
+    }
+
+    .thecontainer {
+        width: 384px !important;
+        height: 318px !important;
+
+        box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);
+        border-radius: 5px;
+        position: relative;
+        z-index: 1;
+        background: inherit;
+        overflow: hidden;
+    }
+
+    .thecontainer:before {
+        content: "";
+        position: absolute;
+        background: inherit;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        box-shadow: inset 0 0 2000px rgba(255, 255, 255, .5);
+        filter: blur(10px);
+        margin: -20px;
+    }
+</style>
+<body oncontextmenu="rightClickElements=null">
+<div class="dark:bg-gray-800" id="homePageBanner"
+     style="width:100% !important; justify-content: center; text-align: center;">
+    {% include "navbar.html" %}
+    <br>
+    <p class="text-7xl text-gray-900 dark:text-white font-black "
+    >
+        Learning, All In One</p>
+    <br>
+    <p class="text-2xl text-gray-900 dark:text-white">Have your whole learning experience <span
                 class="font-extrabold"
                 style="background: -webkit-linear-gradient(left, #E02424, #FACA15); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">organized</span>
             and <span class="font-extrabold"
@@ -42,60 +74,67 @@
     <div class="flex items-center justify-center">
 
         <div class="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-3 grid-rows-1 gap-4 pt-0" id="feature-list">
-            <div class="block p-6 max-w-sm bg-white/50 rounded-lg border border-gray-200 shadow-md hover:bg-gray-100/50 dark:bg-gray-800/50 dark:border-gray-700 dark:hover:bg-gray-700/50">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"> Connect all of
-                    Learning</h5>
-                <p class="font-normal text-gray-700 dark:text-gray-400">No more switching between websites. Get your
-                    Schoology, Google Classroom, and Canvas account connected today.</p>
-                <br>
-                <a href="/dashboard"
-                   class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Start Now!
-                    <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                              clip-rule="evenodd"></path>
-                    </svg>
-                </a>
+            <div class="thecontainer">
+                <div class="correct-size block p-6 max-w-sm bg-white/50 rounded-sg border border-gray-200 shadow-md hover:bg-gray-100/50 dark:bg-gray-800/50 dark:border-gray-700 dark:hover:bg-gray-700/50">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"> Connect all of
+                        Learning</h5>
+                    <p class="font-normal text-gray-700 dark:text-gray-400">No more switching between websites. Get your
+                        Schoology, Google Classroom, and Canvas account connected today.</p>
+                    <br>
+                    <a href="/dashboard"
+                       class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Start Now!
+                        <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                  clip-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                </div>
             </div>
-            <div class="block p-6 max-w-sm bg-white/50 rounded-lg border border-gray-200 shadow-md hover:bg-gray-100/50 dark:bg-gray-800/50 dark:border-gray-700 dark:hover:bg-gray-700/50">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Organize your Learning
-                    Experience
-                </h5>
-                <p class="font-normal text-gray-700 dark:text-gray-400">With Nebulus, there is no need to have your
-                    papers, documents, assignments, and events be all over the place. With Nebulus, every thing is
-                    organized for you in an easy-to-use way!</p>
-                <br>
-                <a href="/dashboard"
-                   class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Start Now!
-                    <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                              clip-rule="evenodd"></path>
-                    </svg>
-                </a>
-            </div>
+            <div class="thecontainer">
 
-            <div href="#"
-                 class="block p-6 max-w-sm bg-white/50 rounded-lg border border-gray-200 shadow-md hover:bg-gray-100/50 dark:bg-gray-800/50 dark:border-gray-700 dark:hover:bg-gray-700/50">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Make Learning
-                    Easier</h5>
-                <p class="font-normal text-gray-700 dark:text-gray-400">We have tools to organize your studying,
-                    organize your materials, and keep you focused!</p>
-                <br>
-                <a href="/dashboard"
-                   class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Start Now!
-                    <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                              clip-rule="evenodd"></path>
-                    </svg>
-                </a>
+                <div class="correct-size block p-6 max-w-sm bg-white/50 rounded-sg border border-gray-200 shadow-md hover:bg-gray-100/50 dark:bg-gray-800/50 dark:border-gray-700 dark:hover:bg-gray-700/50">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Organize your
+                        Learning
+                        Experience
+                    </h5>
+                    <p class="font-normal text-gray-700 dark:text-gray-400">With Nebulus, there is no need to have your
+                        papers, documents, assignments, and events be all over the place. With Nebulus, every thing is
+                        organized for you in an easy-to-use way!</p>
+                    <br>
+                    <a href="/dashboard"
+                       class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Start Now!
+                        <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                  clip-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="thecontainer">
+                <div
+                        class="correct-size block p-6 max-w-sm bg-white/50 rounded-sg border border-gray-200 shadow-md hover:bg-gray-100/50 dark:bg-gray-800/50 dark:border-gray-700 dark:hover:bg-gray-700/50">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Make Learning
+                        Easier</h5>
+                    <p class="font-normal text-gray-700 dark:text-gray-400">We have tools to organize your studying,
+                        organize your materials, and keep you focused!</p>
+                    <br>
+                    <a href="/dashboard"
+                       class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Start Now!
+                        <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                  clip-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
