@@ -26,3 +26,4 @@ from .spotify_status import *
 from .username_exists import *
 from .signin_with_schoology import *
 from .file_upload import *
+from .file_upload_link import *
