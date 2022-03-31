@@ -38,8 +38,8 @@ def upload_file():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            cdn.upload_file(filename, os.path.join(app.config['UPLOAD_FOLDER_CDN'], filename))
-
-            return redirect(url_for('download_file', name=filename))
+            cdn.upload_file(filename, os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return "done"
         else:
             return "Bad File"
