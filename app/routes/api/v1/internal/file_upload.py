@@ -40,6 +40,6 @@ def upload_file():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             cdn.upload_file(filename, os.path.join(app.config['UPLOAD_FOLDER'], filename))
             os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return "done"
+            return ('', 204)
         else:
             return "Bad File"
