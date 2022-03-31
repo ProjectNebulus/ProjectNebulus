@@ -1,10 +1,11 @@
 <aside style="float:left;" class="w-64 h-full" aria-label="Sidebar">
     <div class="px-3 py-4 overflow-y-auto rounded bg-gray-50 dark:bg-gray-800 h-full">
         <span style="text-align: center"
-              class="self-center text-lg font-semibold whitespace-nowrap text-black dark:text-white text-black"><img
-                src="https://bins.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg?"
-                style="object-fit: cover; width:40px; height:40px; border-radius:10px;display: inline-block; margin: 10px;">
-            {{ course.name[:14] + "..." * (course.name|length > 14) }}
+              class="self-center text-lg font-semibold whitespace-nowrap text-black dark:text-white text-black overflow-ellipsis">
+            <img src="https://bins.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg?"
+                 alt="Course Icon"
+                 style="object-fit: cover; width:40px; height:40px; border-radius:10px;display: inline-block; margin: 10px;">
+            {{ course.name }}
         </span>
         <ul class="space-y-2">
             <li onclick="wait_for_loading('documents')">

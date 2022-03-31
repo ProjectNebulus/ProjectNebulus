@@ -1139,10 +1139,6 @@ input:checked + .toggle-bg {
     overflow: visible
 }
 
-.overflow-clip {
-    overflow: clip;
-}
-
 .overflow-ellipsis {
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -1631,6 +1627,10 @@ input:checked + .toggle-bg {
 
 .text-center {
     text-align: center
+}
+
+.text-right {
+    text-align: right;
 }
 
 .align-middle {

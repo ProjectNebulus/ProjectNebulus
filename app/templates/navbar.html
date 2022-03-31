@@ -1,163 +1,89 @@
 {% if not disablebar %}
-<script>
-    window.addEventListener('load', function () {
-        if (window.location.href[window.location.href.length - 1] === "/") {
-            document.getElementById("nav").classList.remove("dark:bg-gray-600");
-            document.getElementById("nav").classList.add("dark:bg-gray-800/50");
-            document.getElementById("nav").classList.remove("bg-gray-300");
-            document.getElementById("nav").classList.add("bg-white/50");
-        }
-    });
+    <nav
+            class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded bg-gray-300 dark:bg-gray-600"
+            oncontextmenu="rightClickElements=null">
+        <div class="container flex flex-wrap justify-between items-center mx-auto">
+            <div style="float:left;margin-left:10rem" class="flex">
+                <a href="/" class="flex">
+                    <logo></logo>
+                    <span class="self-center text-xl font-semibold whitespace-nowrap text-black dark:text-white">Nebulus</span>
+                </a>
 
-</script>
-<nav id="nav"
-     class="border-gray-200 px-2 sm:px-4 py-2.5 rounded bg-gray-300 dark:bg-gray-600"
-     oncontextmenu="rightClickElements=null">
-    <div class="container flex flex-wrap justify-between items-center mx-auto">
-        <a href="/" class="flex">
-            <img class="mr-3 h-10 logo_">
-            <span class="self-center text-xl font-semibold whitespace-nowrap text-black dark:text-white">Nebulus</span>
-        </a>
-        {% if user and password %}
-        <div class="flex items-center md:order-2">
-            <button class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-                            id="user-menu-button" aria-expanded="false" type="button" data-dropdown-toggle="dropdown">
-                        <span class="sr-only">Open user menu</span>
-                        <img class="logo_ h-8 rounded-full" src="/static/images/nebulusCats/v3.gif" alt="User Photo"
-                             title="Your Profile">
-                    </button>
-                    <!-- Dropdown menu -->
-                    <div class="hidden z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
-                         id="dropdown">
-                        <div class="py-3 px-4">
-                            <span class="block text-sm text-gray-900 dark:text-white">{{ user }}</span>
-                            <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">{{ email }}</span>
-                        </div>
-                        <ul class="py-1" aria-labelledby="dropdown">
-                            <li><a href="/dashboard"
-                                   class="dropdown-link block py-2 px-4 text-sm text-gray-700  dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
-                            </li>
-
+                <div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="mobile-menu-2"
+                     style="margin-left:5rem;margin-top:0.1rem">
+                    <ul class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
+                        {% if user %}
                             <li>
-                                <a href="/points"
-                                   class="dropdown-link block py-2 px-4 text-sm text-gray-700  dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"><span
-                                        style="">0</span>
-                                    <svg style="display:inline-block;horizontal-align:middle;" class="w-6 h-6"
-                                         fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"></path>
-                                        <path fill-rule="evenodd"
-                                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z"
-                                              clip-rule="evenodd"></path>
-                                    </svg>
-                                </a>
-
-                            </li>
-
-
-                            <li>
-                                <a href="/settings"
-                                   class="dropdown-link block py-2 px-4 text-sm text-gray-700  dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
+                                <a href="/dashboard" class="nav-link-2" aria-current="page" style="margin-top: 8px">Dashboard</a>
                             </li>
                             <li>
-                                <a href="/profile"
-                                   class="dropdown-link block py-2 px-4 text-sm text-gray-700  dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profile</a>
+                                <a href="/lms" class="nav-link">Learning</a>
                             </li>
                             <li>
-                                <a href="/logout"
-                                   class="dropdown-link block py-2 px-4 text-sm text-gray-700  dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign
-                                    out</a>
+                                <a href="/api" class="nav-link">API</a>
                             </li>
-                        </ul>
-                    </div>
-                    <button data-collapse-toggle="mobile-menu-2" type="button"
-                            class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden  focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                            aria-controls="mobile-menu-2" aria-expanded="false">
-                        <span class="sr-only">Open main menu</span>
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                                  clip-rule="evenodd"></path>
-                        </svg>
-                        <svg class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                  clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
-                </div>
-            {% else %}
-                <button id="theme-toggle" type="button"
-                        class="text-gray-500 dark:text-gray-400  dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
-                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-                    </svg>
-                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
-                              fill-rule="evenodd" clip-rule="evenodd"></path>
-                    </svg>
-                </button>
-                <div class="flex md:order-2">
-                    <a href="/signin">
-                        <button style="margin-right:10px;" type="button"
-                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Login
-                        </button>
-                    </a>
-                    <a href="/signup">
-                        <button type="button"
-                                class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                            Sign Up
-                        </button>
-                    </a>
-                    <button data-collapse-toggle="mobile-menu-4" type="button"
-                            class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden  focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                            aria-controls="mobile-menu-4" aria-expanded="false">
-                        <span class="sr-only">Open main menu</span>
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                                  clip-rule="evenodd"></path>
-                        </svg>
-                        <svg class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                  clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
-                </div>
-            {% endif %}
-            <div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="mobile-menu-2">
-                <ul class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
-                    {% if user %}
-                        <li>
-                            <a href="/dashboard" class="nav-link-2" aria-current="page" style="margin-top: 8px">Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="/lms" class="nav-link">Learning</a>
-                        </li>
-                        <li>
-                            <a href="/api" class="nav-link">API</a>
-                        </li>
-                        <a href="/about" class="nav-link">About Nebulus</a>
-                    {% else %}
-                        <li>
-                            <a href="/" class="nav-link-2" aria-current="page" style="margin-top: 8px;">Home</a>
-                        </li>
-                        <li>
                             <a href="/about" class="nav-link">About Nebulus</a>
-                        </li>
-                        <li>
-                            <a href="/pricing" class="nav-link">Pricing</a>
-                        </li>
-                        <li>
-                            <a href="/api" class="nav-link">API</a>
-                        </li>
-                    {% endif %}
+                        {% else %}
+                            <li>
+                                <a href="/" class="nav-link-2" aria-current="page" style="margin-top: 8px;">Home</a>
+                            </li>
+                            <li>
+                                <a href="/about" class="nav-link">About Nebulus</a>
+                            </li>
+                            <li>
+                                <a href="/pricing" class="nav-link">Pricing</a>
+                            </li>
+                            <li>
+                                <a href="/api" class="nav-link">API</a>
+                            </li>
+                        {% endif %}
 
+                        <button id="theme-toggle" type="button"
+                                class="text-gray-500 dark:text-gray-400  dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
+                            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor"
+                                 viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                            </svg>
+                            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor"
+                                 viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                                      fill-rule="evenodd" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="float:right;">
+                {% if user and password %}
+                    <dropdown-menu style="float: right">
+                        <trigger id="user-menu-button">
+                            <logo class="rounded-full bg-gray-900 my-4 mx-4"></logo>
+                        </trigger>
+                        <!-- Dropdown menu -->
+                        <contents class="invisible my-4 text-base bg-white dark:bg-gray-700 dark:divide-gray-600">
+                            <item class="text-gray-300">
+                                <span class="block text-sm text-gray-900 dark:text-white">{{ user }}</span>
+                                <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">{{ email }}</span>
+                            </item>
+                            <item class="text-gray-300" href="/dashboard">Dashboard</item>
+                            <item class="text-gray-300" href="/points">0
+                                <svg style="display:inline-block;horizontal-align:middle;" class="w-6 h-6"
+                                     fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"></path>
+                                    <path fill-rule="evenodd"
+                                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                            </item>
+                            <item class="text-gray-300" href="/settings">Settings</item>
+                            <item class="text-gray-300" href="/profile">Profile</item>
+                            <item class="text-gray-300" href="/logout">Sign Out</item>
+                        </contents>
+                    </dropdown-menu>
+                {% else %}
                     <button id="theme-toggle" type="button"
                             class="text-gray-500 dark:text-gray-400  dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
                         <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
@@ -170,17 +96,43 @@
                                   fill-rule="evenodd" clip-rule="evenodd"></path>
                         </svg>
                     </button>
-
-
-                </ul>
+                    <div class="flex md:order-2">
+                        <a href="/signin">
+                            <button style="margin-right:10px;" type="button"
+                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Login
+                            </button>
+                        </a>
+                        <a href="/signup">
+                            <button type="button"
+                                    class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                                Sign Up
+                            </button>
+                        </a>
+                        <button data-collapse-toggle="mobile-menu-4" type="button"
+                                class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden  focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                                aria-controls="mobile-menu-4" aria-expanded="false">
+                            <span class="sr-only">Open main menu</span>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                            <svg class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </nav>
 
     <script>
-        document.getElementsByTagName("img")[0].src = window.location.protocol + "//" + window.location.host + "/static/images/nebulusCats/v3.gif";
-        document.getElementsByTagName("img")[0].classList.add("logo_", "h-8", "rounded-full");
-
         const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
         const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
 
@@ -203,19 +155,11 @@
                     document.documentElement.classList.add('dark');
 
                     localStorage.setItem('color-theme', 'dark');
-                    if (window.location.href[window.location.href.length - 1] === "/") {
-                        document.body.style.backgroundImage = "url(\"/static/images/darkwallpaper.png\")";
-                    } else {
-                        document.body.style.background = "#111926";
-                    }
+                    document.body.style.background = "#111926";
                 } else {
                     document.documentElement.classList.remove('dark');
                     localStorage.setItem('color-theme', 'light');
-                    if (window.location.href[window.location.href.length - 1] === "/") {
-                        document.body.style.backgroundImage = "url(\"/static/images/lightwallpaper.png\")";
-                    } else {
-                        document.body.style.background = "white";
-                    }
+                    document.body.style.background = "white";
                 }
 
                 // if NOT set via local storage previously
@@ -223,20 +167,11 @@
                 if (document.documentElement.classList.contains('dark')) {
                     document.documentElement.classList.remove('dark');
                     localStorage.setItem('color-theme', 'light');
-                    if (window.location.href[window.location.href.length - 1] === "/") {
-                        document.body.style.backgroundImage = "url(\"/static/images/lightwallpaper.png\")";
-                    } else {
-                        document.body.style.background = "white";
-                    }
+                    document.body.style.background = "white";
                 } else {
                     document.documentElement.classList.add('dark');
                     localStorage.setItem('color-theme', 'dark');
-                    if (window.location.href[window.location.href.length - 1] === "/") {
-                        document.body.style.backgroundImage = "url(\"/static/images/darkwallpaper.png\")";
-                    } else {
-                        document.body.style.background = "#111926";
-                    }
-
+                    document.body.style.background = "#111926";
                 }
             }
             if (window.location.href.includes("course")) {
@@ -245,20 +180,25 @@
 
                 if (document.documentElement.classList.contains("dark")) {
                     innerDoc.documentElement.classList.add("dark");
-                    if (window.location.href[window.location.href.length - 1] === "/") {
-                        innerDoc.style.backgroundImage = "url(\"/static/images/darkwallpaper.png\")";
-                    } else {
-                        innerDoc.style.background = "#111926";
-                    }
-
+                    innerDoc.body.style.background = "#111926";
                 } else {
                     innerDoc.documentElement.classList.remove("dark");
-                    if (window.location.href[window.location.href.length - 1] === "/") {
-                        innerDoc.style.backgroundImage = "url(\"/static/images/darkwallpaper.png\")";
-                    } else {
-                        innerDoc.style.background = "#111926";
-                    }
+                    innerDoc.body.style.background = "white";
                 }
+            }
+
+            if (localStorage.getItem("color-theme") === "dark") {
+                if (window.location.href.endsWith("/"))
+                    document.body.style.backgroundImage = "url(\"/static/images/darkwallpaper.png\")";
+                else
+                    document.body.style.background = "#111926";
+
+                document.getElementsByTagName('html')[0].setAttribute('class', 'dark');
+            } else {
+                if (window.location.href.endsWith("/"))
+                    document.body.style.backgroundImage = "url(\"/static/images/lightwallpaper.png\")";
+                else
+                    document.body.style.background = "white";
             }
         });
 

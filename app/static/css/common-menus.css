@@ -1,0 +1,28 @@
+trigger {
+    border: none;
+    cursor: pointer;
+    text-align: right;
+}
+
+contents {
+    visibility: hidden;
+    z-index: 50;
+    border-radius: 5px;
+    position: absolute;
+    box-shadow: black;
+    padding: 1rem;
+    text-align: left;
+}
+
+item {
+    padding: 0.15rem;
+    width: 100%;
+    border-radius: 2px;
+    display: inline-block;
+    font-size: 0.8rem;
+}
+
+item[href]:hover {
+    background: dodgerblue;
+    cursor: pointer;
+}
