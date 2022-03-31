@@ -22,8 +22,9 @@ def allowed_file(filename):
 
 @internal.route('/upload_file', methods=['POST'])
 def upload_file():
-    course = int(request.form.get("course"))
-    folder = int(request.form.get("folder"))
+    print("arrived")
+    course = (request.form.get("course"))
+    folder = (request.form.get("folder"))
     # check if the post request has the file part
     if 'file' not in request.files:
         flash('No file part')
@@ -38,7 +39,7 @@ def upload_file():
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         cdn.upload_file(filename, os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        if folder == 0:
+        if folder == "0":
             create.createDocumentFile({"name": filename, "url": "https://cdn.nebulus.ml/" + filename, "course": course})
         else:
             create.createDocumentFile(

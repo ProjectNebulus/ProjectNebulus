@@ -45,14 +45,16 @@ $("#search").click(function () {
 
 $("#upload-file").click(function () {
     alert('Uploaded');
-    let formData = new FormData();
-    let fileupload = document.getElementById("file")
+    var formData = new FormData();
+    let fileupload = document.getElementById("file");
     formData.append("file", fileupload.files[0]);
     formData.append("course", document.getElementById("course_id").innerText);
     formData.append("folder", "0");
-    var request = $.ajax({
+    let request = $.ajax({
         type: "POST",
         url: "/api/v1/internal/upload_file",
+        processData: false,
+        contentType: false,
         data: formData
     });
 

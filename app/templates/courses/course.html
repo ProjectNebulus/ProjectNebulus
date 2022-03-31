@@ -6,7 +6,7 @@
     <script>
         $("#upload-file").click(function () {
             alert('Uploaded');
-            let formData = new FormData();
+            var formData = new FormData();
             let fileupload = document.getElementById("file");
             formData.append("file", fileupload.files[0]);
             formData.append("course", document.getElementById("course_id").innerText);
@@ -14,6 +14,8 @@
             let request = $.ajax({
                 type: "POST",
                 url: "/api/v1/internal/upload_file",
+                processData: false,
+                contentType: false,
                 data: formData
             });
 
