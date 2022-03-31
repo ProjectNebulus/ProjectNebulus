@@ -25,3 +25,4 @@ from .signup_post import *
 from .spotify_status import *
 from .username_exists import *
 from .signin_with_schoology import *
+from .file_upload import *

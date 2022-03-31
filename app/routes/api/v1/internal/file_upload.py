@@ -22,16 +22,19 @@ def upload_file():
         # check if the post request has the file part
         if 'file' not in request.files:
             flash('No file part')
-            return redirect(request.url)
+            return "No File Selected"
         file = request.files['file']
         # If the user does not select a file, the browser submits an
         # empty file without a filename.
         if file.filename == '':
             flash('No selected file')
-            return redirect(request.url)
+            return redirect("/")
         if file and allowed_file(file.filename):
+            return "cool"
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             cdn.upload_file(filename, "/../" + os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
             return redirect(url_for('download_file', name=filename))
+        else:
+            return "Bad File"
