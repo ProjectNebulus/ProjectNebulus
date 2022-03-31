@@ -19,9 +19,6 @@ app.config['UPLOAD_FOLDER_CDN'] = UPLOAD_FOLDER_CDN
 
 def allowed_file(filename):
     return True
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
 
 @internal.route('/upload_file', methods=['POST'])
 def upload_file():
