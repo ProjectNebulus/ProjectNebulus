@@ -4,14 +4,20 @@ from flask import Flask, flash, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from .....static.python import cdn
 
-UPLOAD_FOLDER = '../../../../static/'
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+UPLOAD_FOLDER = 'app/static/'
+UPLOAD_FOLDER_CDN = "../"
+ALLOWED_EXTENSIONS = {
+    'txt', 'py', 'java', 'js',
+    'gif', 'jpeg'
+}
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['UPLOAD_FOLDER_CDN'] = UPLOAD_FOLDER_CDN
 
 
 def allowed_file(filename):
+    return True
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
@@ -30,10 +36,9 @@ def upload_file():
             flash('No selected file')
             return redirect("/")
         if file and allowed_file(file.filename):
-            return "cool"
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            cdn.upload_file(filename, "/../" + os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            cdn.upload_file(filename, os.path.join(app.config['UPLOAD_FOLDER_CDN'], filename))
 
             return redirect(url_for('download_file', name=filename))
         else:
