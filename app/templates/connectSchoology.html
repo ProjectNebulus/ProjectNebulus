@@ -88,9 +88,9 @@
     function confirmSchoology(){
         var request =  $.ajax({
             type: "POST",
-            url: "/schoology",
+            url: "/api/v1/internal/connect-to-schoology",
             data: {
-                "link": "https://"+document.getElementById("domain").value+".schoology.com/"
+                "link": "https://" + document.getElementById("domain").value + ".schoology.com/"
             }
 
         })
