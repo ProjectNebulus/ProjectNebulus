@@ -105,7 +105,10 @@ def getSpotify(
 def getSpotifyCache(
         id: str = None, username: str = None, email: str = None
 ) -> Spotify:
-    return find_user(id=id, username=username, email=email).spotify.Spotify_cache
+    try:
+        return find_user(id=id, username=username, email=email).spotify.Spotify_cache
+    except:
+        return None
 
 
 def CheckSchoology(_id: int):

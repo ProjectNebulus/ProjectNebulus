@@ -12,7 +12,7 @@ print(app.url_map)
 app.secret_key = os.getenv("MONGOPASS")
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 
-from app.static.python.mongodb import create
+from app.static.python.mongodb.create import *
 
 if __name__ == "__main__":
     print("Started running on http://localhost:8080")

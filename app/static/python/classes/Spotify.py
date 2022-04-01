@@ -7,3 +7,4 @@ class Spotify(EmbeddedDocument):
     """
     Spotify_uuid = StringField()
     Spotify_cache = DictField()
+    Spotify_authManager = DictField()

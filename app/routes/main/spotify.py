@@ -6,7 +6,7 @@ from flask_session import Session
 import spotipy
 from .utils import logged_in
 import uuid
-from app.static.python.mongodb import read
+from app.static.python.mongodb import read, update
 
 # In order to get Spotipy to work, you must install the latest version with cloning the repo with the following command:
 # pip3 install git+https://github.com/plamere/spotipy
@@ -21,6 +21,8 @@ if not os.path.exists(caches_folder):
 
 def fetch_cache():
     cache = read.getSpotifyCache(username=session["username"])
+    if cache is None:
+        return {}
     return cache
 
 
@@ -59,6 +61,8 @@ def spotify():
     if request.args.get("code"):
         # Step 3. Being redirected from Spotify auth page
         auth_manager.get_access_token(request.args.get("code"))
+        print(auth_manager)
+        print(cache_handler)
         return redirect("/spotify")
 
     if not auth_manager.validate_token(cache_handler.get_cached_token()):

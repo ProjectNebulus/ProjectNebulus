@@ -41,7 +41,7 @@ window.addEventListener("load", function () {
     for (const logo of document.getElementsByTagName("logo")) {
         let img = logo.getAttribute("image");
         if (img === null)
-            img = "cat1.png";
+            img = "v3.gif";
 
         let size = logo.getAttribute("size");
 
