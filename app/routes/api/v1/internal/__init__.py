@@ -23,7 +23,6 @@ from .send_email import *
 from .signin_post import *
 from .signup_post import *
 from .spotify_status import *
-from .username_exists import *
 from .signin_with_schoology import *
 from .file_upload import *
 from .file_upload_link import *
