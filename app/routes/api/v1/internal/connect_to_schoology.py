@@ -30,6 +30,10 @@ def connect_schoology():
         access_token_secret=access_token_secret,
     )
     auth.authorize()
+    auth.authorize()
+    auth.authorize()
+    auth.authorize()
+    auth.authorize()
     if not auth.authorized:
         return "error!!!"
     sc = schoolopy.Schoology(auth)

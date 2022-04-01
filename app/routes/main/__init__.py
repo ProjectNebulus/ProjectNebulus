@@ -21,7 +21,7 @@ from .profile import *
 from .settings import *
 from .signin import *
 from .signup import *
-
 from .calendar import *
 from .spotify import *
 from .discordauth import *
+from .schoology import *
