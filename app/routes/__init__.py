@@ -19,6 +19,7 @@ def init_app():
     """
     app = Flask(__name__)
     cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+    app.config['UPLOAD_FOLDER'] = '/app/static/UserContent/'
     app.config["MAIL_SERVER"] = "smtp.gmail.com"
     app.config["MAIL_PORT"] = 465
     app.config["MAIL_USERNAME"] = os.getenv("email")

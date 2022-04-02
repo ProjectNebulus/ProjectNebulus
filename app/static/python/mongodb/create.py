@@ -105,8 +105,12 @@ def createGrades(data: dict) -> Grades:
 
 
 def createDocumentFile(data: dict) -> DocumentFile:
+    file_ending = data["file_ending"]
+    del data["file_ending"]
     document_file = DocumentFile(**data)
     document_file.save(force_insert=True)
+    document_file.url += '.' + file_ending
+    document_file.save()
     folder = document_file.folder
     course = document_file.course
     if not folder:

@@ -13,6 +13,7 @@ def upload_file():
         flash("No file part")
         return "no-file"
     file = request.files["file"]
+    print(file)
     # If the user does not select a file, the browser submits an
     # empty file without a filename.
     validation = upload_document(file, course, folder)
