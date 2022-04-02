@@ -57,23 +57,6 @@ function prev(num){
 
 }
 
-function checkUsernameExists(username) {
-    //return true;
-    let thedata = null;
-    var request = $.ajax({
-        type: "POST",
-        url: "/api/v1/internal/username-exists",
-        data: {
-            "username": username
-        }
-    });
-    request.done(function (data) {
-        let thedata = data;
-    });
-    return thedata === "False";
-
-}
-
 function validate(email) {
     return EMAIL_REGEX.test(email);
 }
@@ -90,7 +73,6 @@ window.addEventListener('load', function () {
         const value = document.getElementById('email').value;
         // alert(validate(value) && checkEmailExists(value));
         // return true;
-        let thedata = "True";
         var request = $.ajax({
             type: "POST",
             url: "/api/v1/internal/email-exists",
@@ -100,95 +82,93 @@ window.addEventListener('load', function () {
         });
 
         request.done(function (data) {
-            // alert(data === "False");
-            thedata = data;
+            if (validate(value) === true && data === "False") {
+                document.getElementsByClassName('username-error')[1].style.color = 'green';
+                document.getElementsByClassName('username-error')[1].innerHTML =
+                    '<i class="material-icons">check_circle</i>';
+                document
+                    .getElementById('email')
+                    .classList.remove(
+                    'bg-red-50',
+                    'border',
+                    'border-red-500',
+                    'text-red-900',
+                    'placeholder-red-700',
+                    'text-sm',
+                    'rounded-lg',
+                    'focus:ring-red-500',
+                    'focus:border-red-500',
+                    'block',
+                    'w-full',
+                    'p-2.5',
+                    'dark:bg-red-100',
+                    'dark:border-red-400'
+                );
+                document
+                    .getElementById('email')
+                    .classList.add(
+                    'g-green-50',
+                    'border',
+                    'border-green-500',
+                    'text-green-900',
+                    'placeholder-green-700',
+                    'text-sm',
+                    'rounded-lg',
+                    'focus:ring-green-500',
+                    'focus:border-green-500',
+                    'block',
+                    'w-full',
+                    'p-2.5',
+                    'dark:bg-green-100',
+                    'dark:border-green-400'
+                );
+                email_valid = true;
+            } else {
+                document.getElementsByClassName('username-error')[1].style.color = 'red';
+                document.getElementsByClassName('username-error')[1].innerHTML =
+                    '<i class="material-icons">error</i>';
+                status.innerHTML = 'Invalid Email';
+                document
+                    .getElementById('email')
+                    .classList.remove(
+                    'g-green-50',
+                    'border',
+                    'border-green-500',
+                    'text-green-900',
+                    'placeholder-green-700',
+                    'text-sm',
+                    'rounded-lg',
+                    'focus:ring-green-500',
+                    'focus:border-green-500',
+                    'block',
+                    'w-full',
+                    'p-2.5',
+                    'dark:bg-green-100',
+                    'dark:border-green-400'
+                );
+                document
+                    .getElementById('email')
+                    .classList.add(
+                    'bg-red-50',
+                    'border',
+                    'border-red-500',
+                    'text-red-900',
+                    'placeholder-red-700',
+                    'text-sm',
+                    'rounded-lg',
+                    'focus:ring-red-500',
+                    'focus:border-red-500',
+                    'block',
+                    'w-full',
+                    'p-2.5',
+                    'dark:bg-red-100',
+                    'dark:border-red-400'
+                );
+                email_valid = false;
+            }
 
         });
-        alert(thedata);
-        if (validate(value) === true && thedata === "False") {
-            document.getElementsByClassName('username-error')[1].style.color = 'green';
-            document.getElementsByClassName('username-error')[1].innerHTML =
-                '<i class="material-icons">check_circle</i>';
-            document
-                .getElementById('email')
-                .classList.remove(
-                'bg-red-50',
-                'border',
-                'border-red-500',
-                'text-red-900',
-                'placeholder-red-700',
-                'text-sm',
-                'rounded-lg',
-                'focus:ring-red-500',
-                'focus:border-red-500',
-                'block',
-                'w-full',
-                'p-2.5',
-                'dark:bg-red-100',
-                'dark:border-red-400'
-            );
-            document
-                .getElementById('email')
-                .classList.add(
-                'g-green-50',
-                'border',
-                'border-green-500',
-                'text-green-900',
-                'placeholder-green-700',
-                'text-sm',
-                'rounded-lg',
-                'focus:ring-green-500',
-                'focus:border-green-500',
-                'block',
-                'w-full',
-                'p-2.5',
-                'dark:bg-green-100',
-                'dark:border-green-400'
-            );
-            email_valid = true;
-        } else {
-            document.getElementsByClassName('username-error')[1].style.color = 'red';
-            document.getElementsByClassName('username-error')[1].innerHTML =
-                '<i class="material-icons">error</i>';
-            status.innerHTML = 'Invalid Email';
-            document
-                .getElementById('email')
-                .classList.remove(
-                'g-green-50',
-                'border',
-                'border-green-500',
-                'text-green-900',
-                'placeholder-green-700',
-                'text-sm',
-                'rounded-lg',
-                'focus:ring-green-500',
-                'focus:border-green-500',
-                'block',
-                'w-full',
-                'p-2.5',
-                'dark:bg-green-100',
-                'dark:border-green-400'
-            );
-            document
-                .getElementById('email')
-                .classList.add(
-                'bg-red-50',
-                'border',
-                'border-red-500',
-                'text-red-900',
-                'placeholder-red-700',
-                'text-sm',
-                'rounded-lg',
-                'focus:ring-red-500',
-                'focus:border-red-500',
-                'block',
-                'w-full',
-                'p-2.5',
-                'dark:bg-red-100',
-                'dark:border-red-400'
-            );
-            email_valid = false;
-        }
+
     }
 
     function changeUsername() {
@@ -196,92 +176,101 @@ window.addEventListener('load', function () {
         status.style.color = 'red';
         status.innerHTML = '<br>';
         const value = document.getElementById('username').value;
-        // alert(value);
-        // alert(checkUsernameExists(value));
-        if (checkUsernameExists(value)) {
-            document.getElementsByClassName('username-error')[0].style.color = 'green';
-            document.getElementsByClassName('username-error')[0].innerHTML =
-                '<i class="material-icons">check_circle</i>';
-            document
-                .getElementById('username')
-                .classList.remove(
-                'bg-red-50',
-                'border',
-                'border-red-500',
-                'text-red-900',
-                'placeholder-red-700',
-                'text-sm',
-                'rounded-lg',
-                'focus:ring-red-500',
-                'focus:border-red-500',
-                'block',
-                'w-full',
-                'p-2.5',
-                'dark:bg-red-100',
-                'dark:border-red-400'
-            );
-            document
-                .getElementById('username')
-                .classList.add(
-                'g-green-50',
-                'border',
-                'border-green-500',
-                'text-green-900',
-                'placeholder-green-700',
-                'text-sm',
-                'rounded-lg',
-                'focus:ring-green-500',
-                'focus:border-green-500',
-                'block',
-                'w-full',
-                'p-2.5',
-                'dark:bg-green-100',
-                'dark:border-green-400'
-            );
-            username_valid = true;
-        } else {
-            document.getElementsByClassName('username-error')[0].style.color = 'red';
-            document.getElementsByClassName('username-error')[0].innerHTML =
-                '<i class="material-icons">error</i>';
-            status.innerHTML = 'Invalid Username';
-            document
-                .getElementById('username')
-                .classList.remove(
-                'g-green-50',
-                'border',
-                'border-green-500',
-                'text-green-900',
-                'placeholder-green-700',
-                'text-sm',
-                'rounded-lg',
-                'focus:ring-green-500',
-                'focus:border-green-500',
-                'block',
-                'w-full',
-                'p-2.5',
-                'dark:bg-green-100',
-                'dark:border-green-400'
-            );
-            document
-                .getElementById('username')
-                .classList.add(
-                'bg-red-50',
-                'border',
-                'border-red-500',
-                'text-red-900',
-                'placeholder-red-700',
-                'text-sm',
-                'rounded-lg',
-                'focus:ring-red-500',
-                'focus:border-red-500',
-                'block',
-                'w-full',
-                'p-2.5',
-                'dark:bg-red-100',
-                'dark:border-red-400'
-            );
-            username_valid = false;
-        }
+        var request = $.ajax({
+            type: "POST",
+            url: "/api/v1/internal/username-exists",
+            data: {
+                "username": value
+            }
+        });
+        request.done(function (data) {
+            if (data === "False") {
+                document.getElementsByClassName('username-error')[0].style.color = 'green';
+                document.getElementsByClassName('username-error')[0].innerHTML =
+                    '<i class="material-icons">check_circle</i>';
+                document
+                    .getElementById('username')
+                    .classList.remove(
+                    'bg-red-50',
+                    'border',
+                    'border-red-500',
+                    'text-red-900',
+                    'placeholder-red-700',
+                    'text-sm',
+                    'rounded-lg',
+                    'focus:ring-red-500',
+                    'focus:border-red-500',
+                    'block',
+                    'w-full',
+                    'p-2.5',
+                    'dark:bg-red-100',
+                    'dark:border-red-400'
+                );
+                document
+                    .getElementById('username')
+                    .classList.add(
+                    'g-green-50',
+                    'border',
+                    'border-green-500',
+                    'text-green-900',
+                    'placeholder-green-700',
+                    'text-sm',
+                    'rounded-lg',
+                    'focus:ring-green-500',
+                    'focus:border-green-500',
+                    'block',
+                    'w-full',
+                    'p-2.5',
+                    'dark:bg-green-100',
+                    'dark:border-green-400'
+                );
+                username_valid = true;
+            } else {
+                document.getElementsByClassName('username-error')[0].style.color = 'red';
+                document.getElementsByClassName('username-error')[0].innerHTML =
+                    '<i class="material-icons">error</i>';
+                status.innerHTML = 'Invalid Username';
+                document
+                    .getElementById('username')
+                    .classList.remove(
+                    'g-green-50',
+                    'border',
+                    'border-green-500',
+                    'text-green-900',
+                    'placeholder-green-700',
+                    'text-sm',
+                    'rounded-lg',
+                    'focus:ring-green-500',
+                    'focus:border-green-500',
+                    'block',
+                    'w-full',
+                    'p-2.5',
+                    'dark:bg-green-100',
+                    'dark:border-green-400'
+                );
+                document
+                    .getElementById('username')
+                    .classList.add(
+                    'bg-red-50',
+                    'border',
+                    'border-red-500',
+                    'text-red-900',
+                    'placeholder-red-700',
+                    'text-sm',
+                    'rounded-lg',
+                    'focus:ring-red-500',
+                    'focus:border-red-500',
+                    'block',
+                    'w-full',
+                    'p-2.5',
+                    'dark:bg-red-100',
+                    'dark:border-red-400'
+                );
+                username_valid = false;
+            }
+        });
+
+
     }
 
     function confirmPassword() {

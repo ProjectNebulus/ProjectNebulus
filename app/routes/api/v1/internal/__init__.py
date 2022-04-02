@@ -16,6 +16,7 @@ from .connected_to_schoology import *
 from .create_course import *
 from .create_schoology_course import *
 from .email_exists import *
+from .username_exists import *
 from .generate_schoology_oauth_url import *
 from .logout_of_schoology import *
 from .schoology_callback import *
