@@ -5,6 +5,7 @@ from mongoengine import *
 from .Snowflake import Snowflake
 from .Avatar import Avatar
 
+
 class Announcement(Snowflake):
     meta = {"collection": "Announcements"}
     course = ReferenceField("Course", required=True)
@@ -12,7 +13,9 @@ class Announcement(Snowflake):
     content = StringField(required=True)
     date = DateTimeField(default=datetime.datetime.now())
     author = StringField(required=True)
-    author_pic = StringField(default="http://localhost:8080/static/images/nebulusCats/v3.gif")
+    author_pic = StringField(
+        default="http://localhost:8080/static/images/nebulusCats/v3.gif"
+    )
     likes = IntField(default=0)
     dislikes = IntField(default=0)
     comment_number = IntField(default=0)

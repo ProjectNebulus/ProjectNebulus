@@ -6,6 +6,4 @@ from flask import render_template, redirect, session
 def signin():
     if session.get("logged_in"):
         return redirect("/dashboard")
-    return render_template(
-        "main/signin.html", page="Nebulus - Log In", disablebar=True
-    )
+    return render_template("main/signin.html", page="Nebulus - Log In", disablebar=True)

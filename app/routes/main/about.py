@@ -8,5 +8,6 @@ def about():
         "about.html",
         page="Nebulus - Learning, All In One",
         password=session.get("password"),
-        user=session.get("username"), email=session.get("email"),
+        user=session.get("username"),
+        email=session.get("email"),
     )

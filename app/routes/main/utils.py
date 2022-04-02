@@ -6,7 +6,7 @@ from flask import session, redirect, request, render_template
 def logged_in(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
-        if session.get('logged_in'):
+        if session.get("logged_in"):
             return func(*args, **kwargs)
         else:
             return redirect("/signin")
@@ -22,10 +22,10 @@ def private_endpoint(func):
         else:
             user_ip = request.remote_addr
             print("computer ip")
-          
+
         # the first parameter should be the flask server ip address, so change it to what the ip is for your server
 
-        if user_ip == '127.0.0.1':
+        if user_ip == "127.0.0.1":
             return func(*args, **kwargs)
         else:
             return render_template("errors/404.html", error="Unauthorized Access")

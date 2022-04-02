@@ -44,11 +44,10 @@ def spotify():
     if not session.get("uuid"):
         # Step 1. Visitor is unknown, give random ID
         import uuid
+
         session["uuid"] = str(uuid.uuid4())
 
-    cache_handler = spotipy.cache_handler.CacheFileHandler(
-        cache_path=get_path()
-    )
+    cache_handler = spotipy.cache_handler.CacheFileHandler(cache_path=get_path())
     auth_manager = spotipy.oauth2.SpotifyOAuth(
         scope="user-read-currently-playing playlist-modify-private",
         cache_handler=cache_handler,
@@ -76,6 +75,7 @@ def spotify():
     spotify = spotipy.Spotify(auth_manager=auth_manager)
     return render_template("connectSpotify.html", spotify=spotify, auth=False)
 
+
 @main_blueprint.route("/spotify/sign_out")
 def spotify_sign_out():
     try:
@@ -89,9 +89,7 @@ def spotify_sign_out():
 
 @main_blueprint.route("/spotify/playlists")
 def spotify_playlists():
-    cache_handler = spotipy.cache_handler.CacheFileHandler(
-        cache_path=get_path()
-    )
+    cache_handler = spotipy.cache_handler.CacheFileHandler(cache_path=get_path())
     auth_manager = spotipy.oauth2.SpotifyOAuth(
         scope="user-read-currently-playing playlist-modify-private",
         cache_handler=cache_handler,
@@ -110,9 +108,7 @@ def spotify_playlists():
 
 @main_blueprint.route("/spotify/currently_playing")
 def currently_playing():
-    cache_handler = spotipy.cache_handler.CacheFileHandler(
-        cache_path=get_path()
-    )
+    cache_handler = spotipy.cache_handler.CacheFileHandler(cache_path=get_path())
     auth_manager = spotipy.oauth2.SpotifyOAuth(
         scope="user-read-currently-playing playlist-modify-private",
         cache_handler=cache_handler,
@@ -133,9 +129,7 @@ def currently_playing():
 
 @main_blueprint.route("/spotify/current_user")
 def spotify_current_user():
-    cache_handler = spotipy.cache_handler.CacheFileHandler(
-        cache_path=get_path()
-    )
+    cache_handler = spotipy.cache_handler.CacheFileHandler(cache_path=get_path())
     auth_manager = spotipy.oauth2.SpotifyOAuth(
         scope="user-read-currently-playing playlist-modify-private",
         cache_handler=cache_handler,

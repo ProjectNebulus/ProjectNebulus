@@ -17,7 +17,8 @@ def settings():
         page="Nebulus - Account Settings",
         session=session,
         password=session.get("password"),
-        user=session.get("username"), email=session.get("email"),
+        user=session.get("username"),
+        email=session.get("email"),
         schoology=the_schoology,
         classroom=the_google_classroom,
     )

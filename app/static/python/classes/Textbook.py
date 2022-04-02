@@ -5,9 +5,9 @@ from .Avatar import Avatar
 
 class Textbook(Snowflake):
     """
-    A subclass of the Snowflake object, representing an extension.
-   - name: extension name
-   - link: NEBULUS URL to the Extension
+     A subclass of the Snowflake object, representing an extension.
+    - name: extension name
+    - link: NEBULUS URL to the Extension
     """
 
     meta = {"collection": "Courses"}

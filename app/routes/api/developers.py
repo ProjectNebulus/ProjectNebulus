@@ -9,7 +9,8 @@ def api():
     return render_template(
         "developerportal.html",
         password=session.get("password"),
-        user=session.get("username"), email=session.get("email"),
+        user=session.get("username"),
+        email=session.get("email"),
         read=read,
         page="Nebulus - Developer Portal",
         developer=True,

@@ -103,7 +103,7 @@ def delete_schoology(user_id: int) -> None:
     user.save()
 
 
-def delete_avatar(user_id: int=None, course_id: int=None) -> None:
+def delete_avatar(user_id: int = None, course_id: int = None) -> None:
     if not user_id and not course_id:
         raise ValueError("Must provide either a user_id or a course_id")
 
@@ -116,7 +116,8 @@ def delete_avatar(user_id: int=None, course_id: int=None) -> None:
         course.image = None
         course.save()
 
-def delete_avatar_size(user_id: int=None, course_id: int=None) -> None:
+
+def delete_avatar_size(user_id: int = None, course_id: int = None) -> None:
     if not user_id and not course_id:
         raise ValueError("Must provide either a user_id or a course_id")
     if user_id:
@@ -127,4 +128,3 @@ def delete_avatar_size(user_id: int=None, course_id: int=None) -> None:
         course = Course.objects.get(pk=course_id)
         course.image.avatar_size = None
         course.save()
-

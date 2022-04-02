@@ -2,7 +2,7 @@ from mongoengine import *
 
 from .Snowflake import Snowflake
 
-COLORS = ['red', 'blue', 'orange', 'yellow', 'green', 'purple', 'pink']
+COLORS = ["red", "blue", "orange", "yellow", "green", "purple", "pink"]
 
 
 def validate_color(color):

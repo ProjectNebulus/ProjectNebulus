@@ -4,6 +4,7 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 from SwSpotify import spotify
 
+
 def get_song():
     client_credentials_manager = SpotifyClientCredentials(
         client_id="b61065c28d774965b96027c3e2def9d9",
@@ -24,9 +25,9 @@ def get_song():
         items = results["artists"]["items"]
         artist = items[0]
         # results2 = sp.search(q="track:" + current_song, type="track")["tracks"]["items"][0]['images']
-        results2 = \
-        sp.search(q="track:" + artist + " - " + current_song, type="track")["tracks"]["items"][0]["album"]['images'][0][
-            "url"]
+        results2 = sp.search(q="track:" + artist + " - " + current_song, type="track")[
+            "tracks"
+        ]["items"][0]["album"]["images"][0]["url"]
 
         return current_song, song_artist, artist["images"][0]["url"], results2
     except:

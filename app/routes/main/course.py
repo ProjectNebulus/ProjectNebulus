@@ -28,8 +28,9 @@ def course_page(page, **kwargs):
                     teacher=course.teacher,
                     course_id=course_id,
                     password=session.get("password"),
-                    user=session.get("username"), email=session.get("email"),
-                    disableWidget=(page != "course")
+                    user=session.get("username"),
+                    email=session.get("email"),
+                    disableWidget=(page != "course"),
                 )
 
             except TemplateNotFound:
@@ -39,7 +40,8 @@ def course_page(page, **kwargs):
         "errors/404.html",
         page="404 Not Found",
         password=session.get("password"),
-        user=session.get("username"), email=session.get("email"),
+        user=session.get("username"),
+        email=session.get("email"),
     )
 
 

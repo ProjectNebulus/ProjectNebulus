@@ -26,6 +26,10 @@ class DocumentFile(Snowflake):
         Validates the Document.
         """
         if self.folder is not None and self.course is not None:
-            raise ValidationError("Document cannot be linked to both a folder and a course.")
+            raise ValidationError(
+                "Document cannot be linked to both a folder and a course."
+            )
         if self.folder is None and self.course is None:
-            raise ValidationError("Document must be linked to either a folder or a course.")
+            raise ValidationError(
+                "Document must be linked to either a folder or a course."
+            )

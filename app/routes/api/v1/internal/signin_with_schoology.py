@@ -4,7 +4,7 @@ from . import internal
 from .....static.python.mongodb import read
 
 
-@internal.route('/signin-with-schoology', methods=['POST'])
+@internal.route("/signin-with-schoology", methods=["POST"])
 def signin_with_schoology():
     session["token"] = None
 

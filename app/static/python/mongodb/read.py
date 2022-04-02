@@ -96,15 +96,11 @@ def getClassroom(
     return find_user(id=id, username=username, email=email).gclassroom
 
 
-def getSpotify(
-        id: str = None, username: str = None, email: str = None
-) -> Spotify:
+def getSpotify(id: str = None, username: str = None, email: str = None) -> Spotify:
     return find_user(id=id, username=username, email=email).spotify
 
 
-def getSpotifyCache(
-        id: str = None, username: str = None, email: str = None
-) -> Spotify:
+def getSpotifyCache(id: str = None, username: str = None, email: str = None) -> Spotify:
     try:
         return find_user(id=id, username=username, email=email).spotify.Spotify_cache
     except:
@@ -153,7 +149,7 @@ def get_announcement(announcement_id: str) -> Announcement:
     return announcement
 
 
-def get_folders(parent_id: int=None, course_id: int=None) -> List[Folder]:
+def get_folders(parent_id: int = None, course_id: int = None) -> List[Folder]:
     if not parent_id and not course_id:
         raise ValueError("Must provide either parent_id or course_id")
 
@@ -176,7 +172,9 @@ def sort_user_events(user_id: str) -> List[List]:
     assignments = Assignment.objects(course__in=courses)
     assessments = assessment.objects(course__in=courses)
     events_assessments_assignments = events + assignments + assessments
-    events_assessments_assignments = sorted(events_assessments_assignments, key=sortByDate)
+    events_assessments_assignments = sorted(
+        events_assessments_assignments, key=sortByDate
+    )
     announcements = sorted(announcements, key=lambda x: x.date)
 
     return [[announcements], [events_assessments_assignments]]

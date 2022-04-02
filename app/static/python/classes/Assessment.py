@@ -26,6 +26,4 @@ class Assessment(Snowflake):
     description = StringField(
         default="", null=True, description="The description of the assignment."
     )
-    link = StringField(
-        default="", null=True, description="Link to the LMS"
-    )
+    link = StringField(default="", null=True, description="Link to the LMS")
