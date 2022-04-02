@@ -7,12 +7,15 @@
         {# Contains information like the username #}
         <span style="display:none" id="userinfo">{{ user }}</span>
 
-        <div id="left" style="width:20%;height:90%;float:left;">
+        <div id="left" style="width:25%;height:90%;float:left;">
             <div style="text-align: center;">
                 <p class="text-2xl text-black dark:text-white">Recent Activity</p><br>
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <table style="width:90%" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <tbody>
+                        {% if announcements|length == 0 %}
+                        <p class="text-black dark:text-white">No Announcements!</p>
+                        {% endif %}
                         {% for announcement in announcements %}
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                             <th scope="row"
@@ -26,7 +29,7 @@
                                     {{announcement.imported_from}}</h1>
                                 <p style="width:95%; overflow-wrap: break-word !important; white-space: pre-wrap;white-space: -moz-pre-wrap; /* Mozilla, since 1999 */ white-space: -pre-wrap; /* Opera 4-6 */ white-space: -o-pre-wrap; /* Opera 7 */ word-wrap: break-word; /* Internet Explorer 5.5+ */"
                                    class="text-black dark:text-white text-xl">{{announcement.content}}</p>
-                                <h1 class="text-black dark:text-grey text-xl">{{announcement.date}}</h1>
+                                <h1 class="text-black dark:text-gray-600 text-xl">{{announcement.date}}</h1>
                         </tr>
                         </th>
 
@@ -38,7 +41,7 @@
                 </div>
             </div>
         </div>
-        <div id="middle" style="width:60%;height:90%;float:left;overflow:auto;">
+        <div id="middle" style="width:55%;height:90%;float:left;overflow:auto;">
             <div style="text-align: center;">
                 <h1 class="text-4xl text-black dark:text-white">Your Courses</h1>
 
@@ -163,25 +166,40 @@
                                     <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
 
                                     <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" style="white-space: nowrap;  ">
+                                        {% if events|length == 0 %}{
+                                        <p class="text-black dark:text-white">No Events!</p>
+                                        {% endif %}
+                                        {% for event in events %}
                                         <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{event.type()}}
                                             <svg style="display: inline-block;margin-right:15px;" class="w-6 h-6"
                                                  fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                                  xmlns="http://www.w3.org/2000/svg">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                       d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                             </svg>
-                                            Unit 3 Test
+                                            {{event.title}}
                                     </tr>
-                                    <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" style="white-space: nowrap;  ">
-                                        <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            <svg style="display: inline-block;margin-right:15px;" class="w-6 h-6"
-                                                 fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                            </svg>
-                                            Math HW #5
-                                    </tr>
+                                    {% endfor %}
+                                    <!--                                        <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">-->
+                                    <!--                                            <svg style="display: inline-block;margin-right:15px;" class="w-6 h-6"-->
+                                    <!--                                                 fill="none" stroke="currentColor" viewBox="0 0 24 24"-->
+                                    <!--                                                 xmlns="http://www.w3.org/2000/svg">-->
+                                    <!--                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"-->
+                                    <!--                                                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>-->
+                                    <!--                                            </svg>-->
+                                    <!--                                            Unit 3 Test-->
+                                    <!--                                    </tr>-->
+                                    <!--                                    <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" style="white-space: nowrap;  ">-->
+                                    <!--                                        <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">-->
+                                    <!--                                            <svg style="display: inline-block;margin-right:15px;" class="w-6 h-6"-->
+                                    <!--                                                 fill="none" stroke="currentColor" viewBox="0 0 24 24"-->
+                                    <!--                                                 xmlns="http://www.w3.org/2000/svg">-->
+                                    <!--                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"-->
+                                    <!--                                                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>-->
+                                    <!--                                            </svg>-->
+                                    <!--                                            Math HW #5-->
+                                    <!--                                    </tr>-->
                                     </tbody>
                                 </table>
                             </div>
