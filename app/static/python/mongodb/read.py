@@ -170,8 +170,10 @@ def sort_user_events(user_id: str) -> List[List]:
     events = Event.objects(course__in=courses)
     announcements = Announcement.objects(course__in=courses)
     assignments = Assignment.objects(course__in=courses)
-    assessments = assessment.objects(course__in=courses)
-    events_assessments_assignments = events + assignments + assessments
+    assessments = Assessment.objects(course__in=courses)
+    from itertools import chain
+    events_assessments_assignments = list(chain(events, assignments, assessments))
+    # events_assessments_assignments = events | assignments | assessments
     events_assessments_assignments = sorted(
         events_assessments_assignments, key=sortByDate
     )

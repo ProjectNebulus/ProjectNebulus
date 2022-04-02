@@ -11,7 +11,11 @@ def lms():
     new_user = request.args.get("new_user", default="false", type=str)
     user_acc = read.find_user(id=session["id"])
     user_courses = read.get_user_courses(session["id"])
-
+    # print(str(read.sort_user_events(session["id"])))
+    # return str(read.sort_user_events(session["id"]))
+    sorted = read.sort_user_events(session["id"])
+    print(sorted)
+    print(sorted[0])
     return render_template(
         "lms.html",
         password=session["password"],
@@ -21,4 +25,6 @@ def lms():
         read=read,
         page="Nebulus - Learning",
         new_account=new_user == "true",
+        announcements=sorted[0][0],
+        events=sorted[1][0],
     )
