@@ -4,13 +4,11 @@ from .....static.python.classes.User import User
 from flask import request
 
 
-@internal.route("/email-exists", methods=["POST"])
-def email_exists():
-    user = request.form.get("email")
+@internal.route("/username-exists", methods=["POST"])
+def username_exists():
+    user = request.form.get("username")
     print(user)
-    user = User.objects(email=user)
-    print(user)
-    print(len(user) == 1)
+    user = User.objects(username=user)
     if len(user) == 1:
         return "True"
     return "False"

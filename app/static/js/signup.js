@@ -58,6 +58,8 @@ function prev(num){
 }
 
 function checkUsernameExists(username) {
+    //return true;
+    let thedata = null;
     var request = $.ajax({
         type: "POST",
         url: "/api/v1/internal/username-exists",
@@ -66,17 +68,14 @@ function checkUsernameExists(username) {
         }
     });
     request.done(function (data) {
-        // alert(data);
-        // alert(data === "False");
-        if (data === "False") {
-            return true;
-        }
-        return false;
+        let thedata = data;
     });
+    return thedata === "False";
 
 }
 
 function checkEmailExists(email) {
+    // return true;
     var request = $.ajax({
         type: "POST",
         url: "/api/v1/internal/email-exists",
@@ -85,12 +84,10 @@ function checkEmailExists(email) {
         }
     });
     request.done(function (data) {
-        if (data === "False") {
-            return true;
-        }
-        return false;
+        alert(data === "False");
+        return data === "False";
+
     });
-    return false;
 }
 
 window.addEventListener('load', function () {
@@ -105,6 +102,7 @@ window.addEventListener('load', function () {
         status.style.color = 'red';
         status.innerHTML = '<br>';
         const value = document.getElementById('email').value;
+        alert(validate(value) && checkEmailExists(value));
         if (validate(value) && checkEmailExists(value)) {
             document.getElementsByClassName('username-error')[1].style.color = 'green';
             document.getElementsByClassName('username-error')[1].innerHTML =
