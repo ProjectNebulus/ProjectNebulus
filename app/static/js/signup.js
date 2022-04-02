@@ -60,7 +60,14 @@ function validate(email) {
 
 window.addEventListener('load', function () {
 
+    for (let i = 1; i < 23; i++) {
+        document.getElementsByClassName("cat" + i.toString())[0].onclick = (function () {
+            document.getElementsByClassName(document.getElementById("chosen").innerText)[0].classList.remove("pfp_selected");
+            document.getElementById("chosen").innerText = "cat" + i.toString();
+            document.getElementsByClassName("cat" + i.toString())[0].classList.add("pfp_selected");
 
+        })
+    }
     const r_l = ',<.>/?;:\'"\\|[{]}=+-_`!@#$%^&*()_+';
 
     function changeEmail() {
@@ -668,6 +675,7 @@ window.addEventListener('load', function () {
     document.getElementById('confirm-password').onkeyup = confirmPassword;
     document.getElementById('username').onkeyup = changeUsername;
     document.getElementById('bday').onkeyup = confirmDate;
+    document.getElementById('bday').onclick = confirmDate;
     document.getElementById('verification').onkeyup = confirmVerification;
 
 });
@@ -745,3 +753,4 @@ function reqListener() {
     submit.style.color = 'white';
     submit.style.backgroundColor = '#00a2ff';
 }
+
