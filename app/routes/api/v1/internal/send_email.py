@@ -5,6 +5,16 @@ import os
 import smtplib
 from flask_mail import Mail, Message
 from . import internal
+from flask import Flask
+
+app = Flask(__name__)
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'support@nebulus.ml'
+app.config['MAIL_PASSWORD'] = 'Myzen234*'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail = Mail(app)
 
 
 # todo: Finish email sending blueprint

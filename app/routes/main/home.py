@@ -24,3 +24,16 @@ def googleVerification():
 @main_blueprint.route("/arc-sw.js")
 def arcstuff():
     return redirect("https://arc.io/arc-sw.js")
+
+
+@main_blueprint.errorhandler(404)
+@main_blueprint.errorhandler(400)
+def page_not_found(e):
+    # note that we set the 404 status explicitly
+    return render_template('errors/404.html'), 404
+
+
+@main_blueprint.errorhandler(500)
+def internal_error(e):
+    # note that we set the 404 status explicitly
+    return render_template('errors/500.html'), 500

@@ -11,7 +11,7 @@ function next(num){
         if (checks[0].innerHTML.includes("check_circle") && checks[1].innerHTML.includes("check_circle") && checks[2].innerHTML.includes("check_circle") && checks[3].innerHTML.includes("check_circle")) {
             var request = $.ajax({
                 type: "POST",
-                url: "/sendEmail",
+                url: "/api/v1/internal/send-email",
                 data: {
                     "email": document.getElementById("email").value
 
