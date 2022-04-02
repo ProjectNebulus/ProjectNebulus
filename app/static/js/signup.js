@@ -84,16 +84,18 @@ function checkEmailExists(email) {
         }
     });
     request.done(function (data) {
-        alert(data === "False");
+        // alert(data === "False");
         return data === "False";
 
     });
 }
 
+function validate(email) {
+    return EMAIL_REGEX.test(email);
+}
+
 window.addEventListener('load', function () {
-    function validate(email) {
-        return EMAIL_REGEX.test(email);
-    }
+
 
     const r_l = ',<.>/?;:\'"\\|[{]}=+-_`!@#$%^&*()_+';
 
@@ -102,8 +104,8 @@ window.addEventListener('load', function () {
         status.style.color = 'red';
         status.innerHTML = '<br>';
         const value = document.getElementById('email').value;
-        alert(validate(value) && checkEmailExists(value));
-        if (validate(value) && checkEmailExists(value)) {
+        // alert(validate(value) && checkEmailExists(value));
+        if (validate(value) === true && checkEmailExists(value) == true) {
             document.getElementsByClassName('username-error')[1].style.color = 'green';
             document.getElementsByClassName('username-error')[1].innerHTML =
                 '<i class="material-icons">check_circle</i>';
