@@ -74,22 +74,6 @@ function checkUsernameExists(username) {
 
 }
 
-function checkEmailExists(email) {
-    // return true;
-    var request = $.ajax({
-        type: "POST",
-        url: "/api/v1/internal/email-exists",
-        data: {
-            "email": email
-        }
-    });
-    request.done(function (data) {
-        // alert(data === "False");
-        return data === "False";
-
-    });
-}
-
 function validate(email) {
     return EMAIL_REGEX.test(email);
 }
@@ -105,7 +89,23 @@ window.addEventListener('load', function () {
         status.innerHTML = '<br>';
         const value = document.getElementById('email').value;
         // alert(validate(value) && checkEmailExists(value));
-        if (validate(value) === true && checkEmailExists(value) == true) {
+        // return true;
+        let thedata = "True";
+        var request = $.ajax({
+            type: "POST",
+            url: "/api/v1/internal/email-exists",
+            data: {
+                "email": value
+            }
+        });
+
+        request.done(function (data) {
+            // alert(data === "False");
+            thedata = data;
+
+        });
+        alert(thedata);
+        if (validate(value) === true && thedata === "False") {
             document.getElementsByClassName('username-error')[1].style.color = 'green';
             document.getElementsByClassName('username-error')[1].innerHTML =
                 '<i class="material-icons">check_circle</i>';
