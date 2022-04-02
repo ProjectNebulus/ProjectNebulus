@@ -19,6 +19,9 @@ class User(Snowflake):
         - password: str - The password of the user.
         - email: str - The email of the user.
         - created_at: datetime - The date of creation of the user.
+        - age : datetime
+        - theme : string
+        - language: language
     :optional params:
         - courses: List[Course | int] - The courses of the user - Default: []
         - avatar: Avatar - The avatar of the user - Default: None
@@ -39,6 +42,9 @@ class User(Snowflake):
     username = StringField(required=True)
     password = StringField(required=True)
     email = EmailField(required=True)
+    age = DateTimeField(required=True)
+    theme = StringField(required=True, default="system")
+    language = StringField(required=True, default="english")
     created_at = DateTimeField(default=datetime.now())
     # optional params
     schoology = EmbeddedDocumentField(Schoology, default=None, null=True)
