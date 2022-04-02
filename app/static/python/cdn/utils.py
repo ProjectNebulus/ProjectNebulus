@@ -1,5 +1,4 @@
-from boto3 import session
-from botocore.client import Config
+from spaces import Client
 import requests
 import os
 
@@ -7,19 +6,17 @@ ACCESS_ID = "VCRH4QOPCDEQR5PFNPQM"
 SECRET_KEY = "Vx3pqPbLTGlSvNAhfxPFDto8CskcWOXOjvcW0ziwXys"
 
 
-def upload_file(file_name, path):
+def upload_file(path, filename, bucket_folder):
     # Initiate session
-    cdn_session = session.Session()
-    client = cdn_session.client(
-        "s3",
+    client = Client(
         region_name="sfo3",
-        endpoint_url="https://sfo3.digitaloceanspaces.com",
-        aws_access_key_id=ACCESS_ID,
-        aws_secret_access_key=SECRET_KEY,
+        space_name="nebulus-cdn",
+        public_key=ACCESS_ID,
+        secret_key=SECRET_KEY,
     )
 
     # Upload a file to your Space
-    client.upload_file(path, "nebulus-cdn", file_name, ExtraArgs={"ACL": "public-read"})
+    client.upload_file(file=path, rename=filename, destination=f"{bucket_folder}/", extra_args={"ACL": "public-read"})
 
 
 def upload_file_link(url):

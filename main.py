@@ -6,6 +6,8 @@ import os
 from waitress import serve
 
 from app.routes import init_app
+from app.static.python.cdn.utils import upload_file
+
 
 app = init_app()
 print(app.url_map)
