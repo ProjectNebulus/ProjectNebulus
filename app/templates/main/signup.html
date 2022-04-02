@@ -83,9 +83,10 @@
                     <p class="username-error material-icons"
                        style="color: red; vertical-align: middle;">error</p>
                 </div>
-                <input type="text" id="verification"
-                       class="mt-4  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
+                <input type="number" min="10000000" max="99999999" id="verification"
+                       class="bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 mt-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
                        placeholder="Email Verification Code (Check Your Email)">
+                <p style="color:red;" class="text-sm errormsg">Incorrect Verification Code</p>
             </div>
             <div class="relative">
                 <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -94,9 +95,10 @@
                            style="color: red; vertical-align: middle;">error</p>
                     </div>
                 </div>
-                <input datepicker datepicker-buttons type="text"
-                       class="mt-4  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
+                <input datepicker datepicker-buttons id="ndau" type="text"
+                       class="bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400 mt-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
                        placeholder="Birthday">
+                <p style="color:red;" class="text-sm errormsg">Invalid Birthday</p>
             </div>
 
 

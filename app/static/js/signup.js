@@ -22,7 +22,14 @@ function next(num){
         } else {
             alert("You can't move on yet!");
         }
-    } else {
+    } else if (num === 2) {
+        let checks = document.getElementsByClassName("username-error");
+        if (checks[4].innerHTML.includes("check_circle") && checks[5].innerHTML.includes("check_circle")) {
+            document.getElementById("step" + num.toString()).style.display = "none";
+            document.getElementById("step" + (num + 1).toString()).style.display = "block";
+        } else {
+            alert("You can't move on yet!");
+        }
 
 
     }
@@ -263,6 +270,196 @@ window.addEventListener('load', function () {
 
     }
 
+    function confirmDate() {
+        let status = document.getElementsByClassName('errormsg')[5];
+        status.style.color = 'red';
+        status.innerHTML = '<br>';
+        let value = document.getElementById('bday').value;
+        if (value !== "") {
+            document.getElementsByClassName('username-error')[5].style.color = 'green';
+            document.getElementsByClassName('username-error')[5].innerHTML =
+                '<i class="material-icons">check_circle</i>';
+            document
+                .getElementById('bday')
+                .classList.remove(
+                'bg-red-50',
+                'border',
+                'border-red-500',
+                'text-red-900',
+                'placeholder-red-700',
+                'text-sm',
+                'rounded-lg',
+                'focus:ring-red-500',
+                'focus:border-red-500',
+                'block',
+                'w-full',
+                'p-2.5',
+                'dark:bg-red-100',
+                'dark:border-red-400'
+            );
+            document
+                .getElementById('bday')
+                .classList.add(
+                'g-green-50',
+                'border',
+                'border-green-500',
+                'text-green-900',
+                'placeholder-green-700',
+                'text-sm',
+                'rounded-lg',
+                'focus:ring-green-500',
+                'focus:border-green-500',
+                'block',
+                'w-full',
+                'p-2.5',
+                'dark:bg-green-100',
+                'dark:border-green-400'
+            );
+            email_valid = true;
+        } else {
+            document.getElementsByClassName('username-error')[5].style.color = 'red';
+            document.getElementsByClassName('username-error')[5].innerHTML =
+                '<i class="material-icons">error</i>';
+            status.innerHTML = 'Invalid Birthday';
+            document
+                .getElementById('bday')
+                .classList.remove(
+                'g-green-50',
+                'border',
+                'border-green-500',
+                'text-green-900',
+                'placeholder-green-700',
+                'text-sm',
+                'rounded-lg',
+                'focus:ring-green-500',
+                'focus:border-green-500',
+                'block',
+                'w-full',
+                'p-2.5',
+                'dark:bg-green-100',
+                'dark:border-green-400'
+            );
+            document
+                .getElementById('bday')
+                .classList.add(
+                'bg-red-50',
+                'border',
+                'border-red-500',
+                'text-red-900',
+                'placeholder-red-700',
+                'text-sm',
+                'rounded-lg',
+                'focus:ring-red-500',
+                'focus:border-red-500',
+                'block',
+                'w-full',
+                'p-2.5',
+                'dark:bg-red-100',
+                'dark:border-red-400'
+            );
+            email_valid = false;
+        }
+    }
+
+    function confirmVerification() {
+        let status = document.getElementsByClassName('errormsg')[4];
+        status.style.color = 'red';
+        status.innerHTML = '<br>';
+        let value = document.getElementById('verification').value;
+        var request = $.ajax({
+            type: "POST",
+            url: "/api/v1/internal/get-verification-code",
+            data: {}
+        });
+        request.done(function (data) {
+            if (value === data) {
+                document.getElementsByClassName('username-error')[4].style.color = 'green';
+                document.getElementsByClassName('username-error')[4].innerHTML =
+                    '<i class="material-icons">check_circle</i>';
+                document
+                    .getElementById('verification')
+                    .classList.remove(
+                    'bg-red-50',
+                    'border',
+                    'border-red-500',
+                    'text-red-900',
+                    'placeholder-red-700',
+                    'text-sm',
+                    'rounded-lg',
+                    'focus:ring-red-500',
+                    'focus:border-red-500',
+                    'block',
+                    'w-full',
+                    'p-2.5',
+                    'dark:bg-red-100',
+                    'dark:border-red-400'
+                );
+                document
+                    .getElementById('verification')
+                    .classList.add(
+                    'g-green-50',
+                    'border',
+                    'border-green-500',
+                    'text-green-900',
+                    'placeholder-green-700',
+                    'text-sm',
+                    'rounded-lg',
+                    'focus:ring-green-500',
+                    'focus:border-green-500',
+                    'block',
+                    'w-full',
+                    'p-2.5',
+                    'dark:bg-green-100',
+                    'dark:border-green-400'
+                );
+                email_valid = true;
+            } else {
+                document.getElementsByClassName('username-error')[4].style.color = 'red';
+                document.getElementsByClassName('username-error')[4].innerHTML =
+                    '<i class="material-icons">error</i>';
+                status.innerHTML = 'Incorrect Confirmation';
+                document
+                    .getElementById('verification')
+                    .classList.remove(
+                    'g-green-50',
+                    'border',
+                    'border-green-500',
+                    'text-green-900',
+                    'placeholder-green-700',
+                    'text-sm',
+                    'rounded-lg',
+                    'focus:ring-green-500',
+                    'focus:border-green-500',
+                    'block',
+                    'w-full',
+                    'p-2.5',
+                    'dark:bg-green-100',
+                    'dark:border-green-400'
+                );
+                document
+                    .getElementById('verification')
+                    .classList.add(
+                    'bg-red-50',
+                    'border',
+                    'border-red-500',
+                    'text-red-900',
+                    'placeholder-red-700',
+                    'text-sm',
+                    'rounded-lg',
+                    'focus:ring-red-500',
+                    'focus:border-red-500',
+                    'block',
+                    'w-full',
+                    'p-2.5',
+                    'dark:bg-red-100',
+                    'dark:border-red-400'
+                );
+                email_valid = false;
+            }
+        })
+
+
+    }
     function confirmPassword() {
         let status = document.getElementsByClassName('errormsg')[3];
         status.style.color = 'red';
@@ -470,6 +667,9 @@ window.addEventListener('load', function () {
     document.getElementById('password').onkeyup = checkPassword;
     document.getElementById('confirm-password').onkeyup = confirmPassword;
     document.getElementById('username').onkeyup = changeUsername;
+    document.getElementById('bday').onkeyup = confirmDate;
+    document.getElementById('verification').onkeyup = confirmVerification;
+
 });
 
 function signUp() {

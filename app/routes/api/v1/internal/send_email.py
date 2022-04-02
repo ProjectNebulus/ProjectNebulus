@@ -10,7 +10,7 @@ from flask import Flask
 app = Flask(__name__)
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'support@nebulus.ml'
+app.config['MAIL_USERNAME'] = 'help.nebulus@gmail.com'
 app.config['MAIL_PASSWORD'] = 'Myzen234*'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
@@ -35,7 +35,7 @@ def send_email():
 
     msg = Message(
         f"Your Nebulus Email Verification Code [{code}] ",
-        sender=f"Nebulus <{os.getenv('email')}>",
+        sender=f"Nebulus <help.nebulus@gmail.com>",
         recipients=[request.form.get("email")],
     )
     import codecs
