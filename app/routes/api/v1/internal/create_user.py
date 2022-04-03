@@ -6,7 +6,7 @@ from .....static.python.mongodb import create
 
 
 @internal.route("/create-user", methods=["POST"])
-def create_course():
+def create_user():
     data = request.get_json()
     create.create_user(data)
     return "done"
