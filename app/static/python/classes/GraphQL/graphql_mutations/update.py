@@ -147,19 +147,3 @@ class UpdateAvatar(graphene.Mutation):
         user.save()
 
         return UpdateAvatar(user=user)
-
-
-class UpdateAvatarSize(graphene.Mutation):
-    class Arguments:
-        user_id = graphene.String(required=True)
-        data = UpdateAvatarSizeInput(required=True)
-
-    user = graphene.Field(User)
-
-    def mutate(self, info, user_id, data):
-        user = UserModel.objects.get(pk=user_id)
-
-        for key, value in data.items():
-            setattr(user.avatar.avatar_size, key, value)
-        user.save()
-        return UpdateAvatarSize(user=user)

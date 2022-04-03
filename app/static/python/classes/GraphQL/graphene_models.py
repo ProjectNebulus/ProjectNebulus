@@ -13,6 +13,21 @@ from ..Avatar import Avatar as AvatarModel
 from ..Announcement import Announcement as AnnouncementModel
 
 
+class Avatar(MongoengineObjectType):
+    class Meta:
+        model = AvatarModel
+
+
+class Schoology(MongoengineObjectType):
+    class Meta:
+        model = SchoologyModel
+
+
+class Assignment(MongoengineObjectType):
+    class Meta:
+        model = AssignmentModel
+
+
 class User(MongoengineObjectType):
     class Meta:
         model = UserModel
@@ -38,9 +53,9 @@ class Event(MongoengineObjectType):
         model = EventModel
 
 
-class Assignment(MongoengineObjectType):
+class Announcement(MongoengineObjectType):
     class Meta:
-        model = AssignmentModel
+        model = AnnouncementModel
 
 
 class Grades(MongoengineObjectType):
@@ -48,16 +63,4 @@ class Grades(MongoengineObjectType):
         model = GradesModel
 
 
-class Avatar(MongoengineObjectType):
-    class Meta:
-        model = AvatarModel
 
-
-class Schoology(MongoengineObjectType):
-    class Meta:
-        model = SchoologyModel
-
-
-class Announcement(MongoengineObjectType):
-    class Meta:
-        model = AnnouncementModel
