@@ -70,7 +70,7 @@ def hypot(a, b):
 
 
 def pythagorean_theorem(a, b):
-    return math.sqrt(a**2 + b**2)
+    return math.sqrt(a ** 2 + b ** 2)
 
 
 def convert_radians_to_degrees(a):

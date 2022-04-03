@@ -20,17 +20,24 @@ def upload_avatar(file, parent, parent_id):
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
 
-        mongo_document = create.createAvatar({
-            "parent": parent,
-            "parent_id": parent_id,
-            "file_ending": filename.rsplit('.', 1)[1].lower(),
-        })
+        mongo_document = create.createAvatar(
+            {
+                "parent": parent,
+                "parent_id": parent_id,
+                "file_ending": filename.rsplit(".", 1)[1].lower(),
+            }
+        )
         current_dir = Path(__file__)
-        root_path = [p for p in current_dir.parents if p.parts[-1]=='ProjectNebulus'][0]
+        root_path = [p for p in current_dir.parents if p.parts[-1] == "ProjectNebulus"][
+            0
+        ]
         print(root_path)
-        file_path = os.path.join(f'{root_path}/app/static/UserContent/Avatars/{parent}', str(mongo_document.id) + "." + filename.split(".")[-1])
+        file_path = os.path.join(
+            f"{root_path}/app/static/UserContent/Avatars/{parent}",
+            str(mongo_document.id) + "." + filename.split(".")[-1],
+        )
         file.save(file_path)
-        upload_file(file_path, mongo_document.id, 'Avatars/' + parent)
+        upload_file(file_path, mongo_document.id, "Avatars/" + parent)
         os.remove(file_path)
         return "4"
     else:

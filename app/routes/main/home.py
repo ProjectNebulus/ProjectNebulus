@@ -30,10 +30,10 @@ def arcstuff():
 @main_blueprint.app_errorhandler(400)
 def page_not_found(e):
     # note that we set the 404 status explicitly
-    return render_template('errors/404.html'), 404
+    return render_template("errors/404.html"), 404
 
 
 @main_blueprint.app_errorhandler(500)
 def internal_error(e):
     # note that we set the 404 status explicitly
-    return render_template('errors/500.html'), 500
+    return render_template("errors/500.html"), 500

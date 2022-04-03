@@ -11,20 +11,20 @@ def rectangle_area(a, b):
 
 
 def circle_area(a):
-    return math.pi * a**2
+    return math.pi * a ** 2
 
 
 def pentagon_area(a):
-    return (3 * math.sqrt(3) / 2) * a**2
+    return (3 * math.sqrt(3) / 2) * a ** 2
 
 
 def hexagon_area(a):
-    return (2 * math.sqrt(3) * a**2) / 2
+    return (2 * math.sqrt(3) * a ** 2) / 2
 
 
 def octagon_area(a):
-    return 2 * math.sqrt(2) * a**2
+    return 2 * math.sqrt(2) * a ** 2
 
 
 def square(a):
-    return a**2
+    return a ** 2

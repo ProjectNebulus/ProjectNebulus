@@ -111,7 +111,7 @@ def createDocumentFile(data: dict) -> DocumentFile:
     del data["file_ending"]
     document_file = DocumentFile(**data)
     document_file.save(force_insert=True)
-    document_file.url += '.' + file_ending
+    document_file.url += "." + file_ending
     document_file.save()
     folder = document_file.folder
     course = document_file.course
@@ -146,16 +146,16 @@ def createAnnouncement(data: dict) -> Announcement:
 
 
 def createAvatar(data: dict) -> Avatar:
-    if data['parent'] == 'User':
-        parent = User.objects(id=data['parent_id']).first()
-    elif data['parent'] == 'Course':
-        parent = Course.objects(id=data['parent_id']).first()
+    if data["parent"] == "User":
+        parent = User.objects(id=data["parent_id"]).first()
+    elif data["parent"] == "Course":
+        parent = Course.objects(id=data["parent_id"]).first()
     else:
-        parent = Textbook.objects(id=data['parent_id']).first()
+        parent = Textbook.objects(id=data["parent_id"]).first()
     file_ending = data["file_ending"]
     del data["parent_id"], data["file_ending"]
     avatar = Avatar(**data)
-    avatar.avatar_url += '.' + file_ending
+    avatar.avatar_url += "." + file_ending
     parent.avatar = avatar
     parent.save()
     return avatar

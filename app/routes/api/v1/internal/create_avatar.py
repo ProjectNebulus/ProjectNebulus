@@ -3,7 +3,7 @@ from . import internal
 from .....static.python.cdn.upload_avatar import upload_avatar
 
 
-@internal.route('/create_avatar', methods=['POST'])
+@internal.route("/create_avatar", methods=["POST"])
 def create_avatar():
     """
     Create a new avatar.
@@ -15,7 +15,7 @@ def create_avatar():
     }
     """
     data = request.get_json()
-    parent_object = data['parent_object']
+    parent_object = data["parent_object"]
 
     if "file" not in request.files:
         flash("No file part")
@@ -23,9 +23,6 @@ def create_avatar():
 
     file = request.files["file"]
 
-    validation = upload_avatar(file, parent_object, data['parent_id'])
+    validation = upload_avatar(file, parent_object, data["parent_id"])
 
     return validation
-
-
-

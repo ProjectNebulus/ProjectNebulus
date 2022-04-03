@@ -21,4 +21,3 @@ def upload_file():
         flash("no-file")
 
     return validation
-

@@ -3,7 +3,7 @@ from . import internal
 from .....static.python.mongodb.create import createFolder
 
 
-@internal.route('/create-folder', methods=['POST'])
+@internal.route("/create-folder", methods=["POST"])
 def create_folder():
     createFolder(request.json())
-    return 'success', 200
+    return "success", 200

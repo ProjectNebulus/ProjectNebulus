@@ -16,7 +16,12 @@ def upload_file(path, filename, bucket_folder):
     )
 
     # Upload a file to your Space
-    client.upload_file(file=path, rename=filename, destination=f"{bucket_folder}/", extra_args={"ACL": "public-read"})
+    client.upload_file(
+        file=path,
+        rename=filename,
+        destination=f"{bucket_folder}/",
+        extra_args={"ACL": "public-read"},
+    )
 
 
 def upload_file_link(url):

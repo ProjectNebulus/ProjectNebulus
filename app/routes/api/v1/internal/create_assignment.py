@@ -2,7 +2,8 @@ from flask import request
 from . import internal
 from .....static.python.mongodb.create import createAssignment
 
-@internal.route('/create_assignment', methods=['POST'])
+
+@internal.route("/create_assignment", methods=["POST"])
 def create_assignment():
     """
     Create an assignment.
@@ -14,4 +15,4 @@ def create_assignment():
     createAssignment(data)
 
     # Return the success message.
-    return 'success', 200
+    return "success", 200

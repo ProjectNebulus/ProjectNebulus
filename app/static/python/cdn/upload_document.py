@@ -38,11 +38,16 @@ def upload_document(file, course, folder):
                 }
             )
         current_dir = Path(__file__)
-        root_path = [p for p in current_dir.parents if p.parts[-1]=='ProjectNebulus'][0]
+        root_path = [p for p in current_dir.parents if p.parts[-1] == "ProjectNebulus"][
+            0
+        ]
         print(root_path)
-        file_path = os.path.join(f'{root_path}/app/static/UserContent/Documents/', str(mongo_document.pk) + "." + filename.split(".")[-1])
+        file_path = os.path.join(
+            f"{root_path}/app/static/UserContent/Documents/",
+            str(mongo_document.pk) + "." + filename.split(".")[-1],
+        )
         file.save(file_path)
-        upload_file(file_path, mongo_document.pk, 'Documents')
+        upload_file(file_path, mongo_document.pk, "Documents")
         os.remove(file_path)
         return "4"
     else:

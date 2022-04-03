@@ -91,7 +91,7 @@ def getSchoology(**kwargs) -> Schoology:
 
 
 def getClassroom(
-        id: str = None, username: str = None, email: str = None
+    id: str = None, username: str = None, email: str = None
 ) -> GoogleClassroom:
     return find_user(id=id, username=username, email=email).gclassroom
 
@@ -172,6 +172,7 @@ def sort_user_events(user_id: str) -> List[List]:
     assignments = Assignment.objects(course__in=courses)
     assessments = Assessment.objects(course__in=courses)
     from itertools import chain
+
     events_assessments_assignments = list(chain(events, assignments, assessments))
     # events_assessments_assignments = events | assignments | assessments
     events_assessments_assignments = sorted(
