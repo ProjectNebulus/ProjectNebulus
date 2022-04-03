@@ -18,6 +18,10 @@ function closeModal(object_id) {
     };
     const modal = new Modal(targetEl, options);
     modal.hide();
+    let elements = document.querySelectorAll('[modal-backdrop]');
+    for (let i = 0; i < elements.length; i++) {
+        elements[i].style.display = "none";
+    }
     return true;
 }
 
