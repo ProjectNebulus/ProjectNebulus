@@ -60,7 +60,7 @@ class Course(Snowflake):
     documents = ListField(ReferenceField("DocumentFile"))
     grades = ReferenceField("Grades")
     events = ListField(ReferenceField("Event"))
-    image = EmbeddedDocumentField(Avatar)
+    avatar = EmbeddedDocumentField(Avatar)
     announcements = ListField(ReferenceField("Announcement"))
     archived = BooleanField(default=False)
     extensions = ListField(ReferenceField("Extension"))

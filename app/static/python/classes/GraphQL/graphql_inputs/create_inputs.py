@@ -4,14 +4,8 @@ import graphene
 from graphene.types import generic
 
 
-class AvatarSizeInput(graphene.InputObjectType):
-    width = graphene.Int(required=True)
-    height = graphene.Int(required=True)
-
-
 class AvatarInput(graphene.InputObjectType):
     avatar_url = graphene.String(required=True)
-    avatar_size = graphene.Field(AvatarSizeInput, required=True)
 
 
 class CourseInput(graphene.InputObjectType):

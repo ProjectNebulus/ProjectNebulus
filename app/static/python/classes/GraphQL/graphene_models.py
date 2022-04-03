@@ -11,7 +11,6 @@ from ..Schoology import Schoology as SchoologyModel
 from ..User import User as UserModel
 from ..Avatar import Avatar as AvatarModel
 from ..Announcement import Announcement as AnnouncementModel
-from ..AvatarSize import AvatarSize as AvatarSizeModel
 
 
 class User(MongoengineObjectType):
@@ -51,12 +50,7 @@ class Grades(MongoengineObjectType):
 
 class Avatar(MongoengineObjectType):
     class Meta:
-        model = AssignmentModel
-
-
-class AvatarSize(MongoengineObjectType):
-    class Meta:
-        model = AssignmentModel
+        model = AvatarModel
 
 
 class Schoology(MongoengineObjectType):
@@ -66,4 +60,4 @@ class Schoology(MongoengineObjectType):
 
 class Announcement(MongoengineObjectType):
     class Meta:
-        model = AssignmentModel
+        model = AnnouncementModel

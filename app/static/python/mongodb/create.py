@@ -18,6 +18,8 @@ from ..classes.Events import Event
 from ..classes.Folder import Folder
 from ..classes.Grades import Grades
 from ..classes.User import User
+from ..classes.Avatar import Avatar
+from ..classes.Textbook import Textbook
 from .read import find_user
 
 
@@ -141,3 +143,19 @@ def createAnnouncement(data: dict) -> Announcement:
     course.announcements.append(announcement)
     course.save()
     return announcement
+
+
+def createAvatar(data: dict) -> Avatar:
+    if data['parent'] == 'User':
+        parent = User.objects(id=data['parent_id']).first()
+    elif data['parent'] == 'Course':
+        parent = Course.objects(id=data['parent_id']).first()
+    else:
+        parent = Textbook.objects(id=data['parent_id']).first()
+    file_ending = data["file_ending"]
+    del data["parent_id"], data["file_ending"]
+    avatar = Avatar(**data)
+    avatar.avatar_url += '.' + file_ending
+    parent.avatar = avatar
+    parent.save()
+    return avatar

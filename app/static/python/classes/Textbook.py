@@ -8,10 +8,11 @@ class Textbook(Snowflake):
      A subclass of the Snowflake object, representing an extension.
     - name: extension name
     - link: NEBULUS URL to the Extension
+    - image: CDN URL to the Extension's icon
     """
 
     meta = {"collection": "Courses"}
     name = StringField(required=True)
     link = URLField(required=True)
-    image = EmbeddedDocumentField(Avatar, required=True, default="")
+    avatar = EmbeddedDocumentField(Avatar, required=False, default="")
     provider = StringField()  # Pearson, Cambrdige, ...

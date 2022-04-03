@@ -16,7 +16,6 @@ schema = graphene.Schema(
         gm.Assignment,
         gm.Grades,
         gm.Avatar,
-        gm.AvatarSize,
         gm.Schoology,
         gm.Announcement,
     ],
