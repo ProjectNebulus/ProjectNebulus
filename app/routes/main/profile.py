@@ -1,15 +1,16 @@
 from . import main_blueprint
 from flask import render_template, session
-
+from ...static.python.mongodb import read
 
 @main_blueprint.route("/profile")
 def profile():
     return render_template(
         "user/profile.html",
         page="Nebulus - Profile",
-        password=session.get("password"),
         user=session.get("username"),
         email=session.get("email"),
+        password=session.get("password"),
+        read=read,
     )
 
 
