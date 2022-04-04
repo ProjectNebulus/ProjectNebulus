@@ -25,23 +25,23 @@
 
             var request =  $.ajax({
                 type: "POST",
-                url: "/schoology",
+                url: "/api/v1/internal/signin-with-schoology",
                 data: {
-                    "link": "https://"+document.getElementById("domain").value+".schoology.com/"
+                    "link": "https://" + document.getElementById("domain").value + ".schoology.com/"
                 }
             });
             request.done(function(data) {
                 $this.button('reset');
-                resp = document.getElementById("resp")
-                if (data==="error!!!"){
+                resp = document.getElementById("error")
+                if (data === "1") {
                     resp.style.color = "red";
                     resp.innerHTML = "Login Failed. Reason: Clicked Deny on Schoology or closed Schoology popup window. Make sure Popups are enabled on your browser. Click Authorize again and click Approve this time!";
                     document.getElementById('auth').style.display = 'inline';
                     document.getElementById('connectbtn').style.display = 'none';
 
-                }else{
+                } else {
                     resp.style.color = "green";
-                    resp.innerHTML = "Successfully linked the Schoology Account <b>"+data+"</b>!";
+                    resp.innerHTML = "Successfully linked your Schoology Account!";
                     //window.location.replace("/settings");
                 }
 
@@ -61,9 +61,8 @@
         function checkIfDone(){
             var request =  $.ajax({
                 type: "GET",
-                url: "/checkConnectedSchoology",
-                data: {
-                }
+                url: "/api/v1/internal/check-schoology-connection",
+                data: {}
             });
             request.done(function(data){
                 if (data==="False"){
