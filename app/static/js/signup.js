@@ -78,6 +78,9 @@ window.addEventListener('load', function () {
             if (document.getElementById('username').value === '') {
                 usernameStatus.innerHTML =
                     'Hey! Please enter a username!';
+                document.getElementsByClassName('username-error')[0].style.color = 'red';
+                document.getElementsByClassName('username-error')[0].innerHTML =
+                            '<i class="material-icons">error</i>';
                 document
                     .getElementById('username')
                     .classList.add(
@@ -101,6 +104,9 @@ window.addEventListener('load', function () {
             if (username.length < 6) {
                 usernameStatus.innerHTML =
                     'Hey! Your username must be at least 6 characters long!';
+                document.getElementsByClassName('username-error')[0].style.color = 'red';
+                document.getElementsByClassName('username-error')[0].innerHTML =
+                            '<i class="material-icons">error</i>';
                 document
                     .getElementById('username')
                     .classList.add(
@@ -124,6 +130,9 @@ window.addEventListener('load', function () {
             if (username.length > 32){
                 usernameStatus.innerHTML =
                     'Hey! Your username must be less than 32 characters long!';
+                document.getElementsByClassName('username-error')[0].style.color = 'red';
+                document.getElementsByClassName('username-error')[0].innerHTML =
+                            '<i class="material-icons">error</i>';
                 document
                     .getElementById('username')
                     .classList.add(
@@ -149,6 +158,9 @@ window.addEventListener('load', function () {
                 if((username[i].toLowerCase() in validChars)) {
                     usernameStatus.innerHTML =
                         'Hey! Your username can only contain letters, numbers, underscores, dashes, and spaces!';
+                    document.getElementsByClassName('username-error')[0].style.color = 'red';
+                    document.getElementsByClassName('username-error')[0].innerHTML =
+                        '<i class="material-icons">error</i>';
                     document
                         .getElementById('username')
                         .classList.add(
@@ -279,6 +291,9 @@ window.addEventListener('load', function () {
             emailStatus.innerHTML = '<br>';
 
             if (document.getElementById('email').value === '') {
+                document.getElementsByClassName('username-error')[1].style.color = 'red';
+                document.getElementsByClassName('username-error')[1].innerHTML =
+                        '<i class="material-icons">error</i>';
                 emailStatus.innerHTML =
                     'Hey! Please enter an email!';
                 document
@@ -299,12 +314,31 @@ window.addEventListener('load', function () {
                     'dark:bg-red-100',
                     'dark:border-red-400'
                 );
+                return false;
             }
             if (validate(value) === false && value !== '') {
                 document.getElementsByClassName('username-error')[1].style.color = 'red';
                 document.getElementsByClassName('username-error')[1].innerHTML =
                     '<i class="material-icons">error</i>';
                 emailStatus.innerHTML = 'Please enter a valid email!';
+                document
+                    .getElementById('email')
+                    .classList.add(
+                    'bg-red-50',
+                    'border',
+                    'border-red-500',
+                    'text-red-900',
+                    'placeholder-red-700',
+                    'text-sm',
+                    'rounded-lg',
+                    'focus:ring-red-500',
+                    'focus:border-red-500',
+                    'block',
+                    'w-full',
+                    'p-2.5',
+                    'dark:bg-red-100',
+                    'dark:border-red-400'
+                );
                 return false;
             }
 
@@ -373,8 +407,8 @@ window.addEventListener('load', function () {
                     return false;
 
                 } else {
-                    document.getElementsByClassName('email-error')[0].style.color = 'green';
-                    document.getElementsByClassName('email-error')[0].innerHTML =
+                    document.getElementsByClassName('username-error')[1].style.color = 'green';
+                    document.getElementsByClassName('username-error')[1].innerHTML =
                     '<i class="material-icons">check</i>';
                     console.log('email is valid');
 
