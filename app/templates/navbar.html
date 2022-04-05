@@ -56,17 +56,17 @@
                 </div>
             </div>
 
-            <div style="float:right;">
+            <div style="float:right;display: grid; grid-auto-flow: column; align-content: center;">
                 {% if user and password %}
-                    <dropdown-menu style="display: grid; grid-auto-flow: column; align-content: middle;">
-                        <trigger id="user-menu-button">
-                            <logo class="rounded-full bg-gray-900 my-4 mx-4"></logo>
-                        </trigger>
-                        <!-- Dropdown menu -->
-                        <contents class="invisible my-4 text-base bg-white dark:bg-gray-700 dark:divide-gray-600">
-                            <item class="text-gray-300">
-                                <span class="block text-sm text-gray-900 dark:text-white">{{ user }}</span>
-                                <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">{{ email }}</span>
+                <dropdown-menu style="display: grid; grid-auto-flow: column; align-content: middle;">
+                    <trigger id="user-menu-button">
+                        <logo class="rounded-full bg-gray-900 my-4 mx-4"></logo>
+                    </trigger>
+                    <!-- Dropdown menu -->
+                    <contents class="invisible my-4 text-base bg-white dark:bg-gray-700 dark:divide-gray-600">
+                        <item class="text-gray-300">
+                            <span class="block text-sm text-gray-900 dark:text-white">{{ user }}</span>
+                            <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">{{ email }}</span>
                             </item>
                             <item class="text-gray-300" href="/dashboard">Dashboard</item>
                             <item class="text-gray-300" href="/points">0

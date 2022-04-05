@@ -37,14 +37,17 @@
 </style>
 <body oncontextmenu="rightClickElements=null">
 <div class="dark:bg-gray-800" id="homePageBanner"
-     style="width:100% !important; justify-content: center; text-align: center;">
+     style="width:100% !important; justify-content: left; text-align: left;">
     {% include "navbar.html" %}
-    <br>
-    <p class="text-7xl text-gray-900 dark:text-white font-black "
-    >
-        Learning, All In One</p>
-    <br>
-    <p class="text-2xl text-gray-900 dark:text-white">Have your whole learning experience <span
+    <br><br>
+    <img src="https://media.discordapp.net/attachments/951319765820002384/961047165935947786/unknown.png"
+         style="width:40%;float:left;">
+    <div style="width:60%;float:left;">
+        <p class="text-7xl text-gray-900 dark:text-white font-black "
+        >
+            Learning, All In One</p>
+        <br>
+        <p class="text-2xl text-gray-900 dark:text-white">Have your whole learning experience <span
                 class="font-extrabold"
                 style="background: -webkit-linear-gradient(left, #E02424, #FACA15); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">organized</span>
             and <span class="font-extrabold"
@@ -53,17 +56,18 @@
         <p class="text-2xl text-gray-900 dark:text-white">All it takes is one <span class="font-extrabold"
                                                                                     style="background: -webkit-linear-gradient(left, #0E9F6E,#3F83F8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Nebulus Account</span>.
         </p>
-        <br>
-        {% if user and password %}
-        <a href="/dashboard">
-            <button class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 hover:text-grey dark:text-white">
+    </div>
+    <br><br>
+    {% if user and password %}
+    <a href="/dashboard">
+        <button class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 hover:text-grey dark:text-white">
                 <span class="text-xl px-6 py-3.5 relative transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                   Launch App
                 </span>
-            </button>
-        </a>
-        {% else %}
-            <a href="/signup">
+        </button>
+    </a>
+    {% else %}
+    <a href="/signup">
                 <button class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 hover:text-grey dark:text-white">
                 <span class="text-xl px-6 py-3.5 relative transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                   Get Started
