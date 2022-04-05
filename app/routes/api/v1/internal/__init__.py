@@ -30,3 +30,5 @@ from .file_upload_link import *
 from .upload_document import *
 from .get_verification_code import *
 from .create_user import *
+from .check_signup_user import *
+from .check_signup_email import *

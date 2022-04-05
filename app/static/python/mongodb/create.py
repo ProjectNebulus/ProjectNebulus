@@ -159,3 +159,4 @@ def createAvatar(data: dict) -> Avatar:
     parent.avatar = avatar
     parent.save()
     return avatar
+

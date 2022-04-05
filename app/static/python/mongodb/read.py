@@ -181,3 +181,16 @@ def sort_user_events(user_id: str) -> List[List]:
     announcements = sorted(announcements, key=lambda x: x.date)
 
     return [[announcements], [events_assessments_assignments]]
+
+
+def check_signup_user(username) -> str:
+    if User.objects(username=username):
+        return "false"
+
+    return "true"
+
+def check_signup_email(email) -> str:
+    if User.objects(email=email):
+        return "false"
+
+    return "true"
