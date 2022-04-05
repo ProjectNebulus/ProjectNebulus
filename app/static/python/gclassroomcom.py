@@ -44,7 +44,7 @@ def main():
 
             creds = flow.run_local_server(
                 host="localhost",
-                port=8980,
+                port=8080,
                 authorization_prompt_message="{url}",
                 success_message="The auth flow is complete; you may close this window.",
                 open_browser=False,
@@ -60,6 +60,7 @@ def main():
             token.write(creds.to_json())
 
     try:
+        print(creds)
         service = build("classroom", "v1", credentials=creds)
 
         # Call the Classroom API
