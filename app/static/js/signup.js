@@ -80,7 +80,7 @@ window.addEventListener('load', function () {
                     'Hey! Please enter a username!';
                 document.getElementsByClassName('username-error')[0].style.color = 'red';
                 document.getElementsByClassName('username-error')[0].innerHTML =
-                            '<i class="material-icons">error</i>';
+                            '<i class="material-icons">close</i>';
                 document
                     .getElementById('username')
                     .classList.add(
@@ -106,7 +106,7 @@ window.addEventListener('load', function () {
                     'Hey! Your username must be at least 6 characters long!';
                 document.getElementsByClassName('username-error')[0].style.color = 'red';
                 document.getElementsByClassName('username-error')[0].innerHTML =
-                            '<i class="material-icons">error</i>';
+                            '<i class="material-icons">close</i>';
                 document
                     .getElementById('username')
                     .classList.add(
@@ -132,7 +132,7 @@ window.addEventListener('load', function () {
                     'Hey! Your username must be less than 32 characters long!';
                 document.getElementsByClassName('username-error')[0].style.color = 'red';
                 document.getElementsByClassName('username-error')[0].innerHTML =
-                            '<i class="material-icons">error</i>';
+                            '<i class="material-icons">close</i>';
                 document
                     .getElementById('username')
                     .classList.add(
@@ -160,7 +160,7 @@ window.addEventListener('load', function () {
                         'Hey! Your username can only contain letters, numbers, underscores, dashes, and spaces!';
                     document.getElementsByClassName('username-error')[0].style.color = 'red';
                     document.getElementsByClassName('username-error')[0].innerHTML =
-                        '<i class="material-icons">error</i>';
+                        '<i class="material-icons">close</i>';
                     document
                         .getElementById('username')
                         .classList.add(
@@ -197,7 +197,7 @@ window.addEventListener('load', function () {
                     if (data === "false") {
                         document.getElementsByClassName('username-error')[0].style.color = 'red';
                         document.getElementsByClassName('username-error')[0].innerHTML =
-                            '<i class="material-icons">error</i>';
+                            '<i class="material-icons">close</i>';
                         usernameStatus.innerHTML = 'This username already exists!';
                         document
                             .getElementById('username')
@@ -293,7 +293,7 @@ window.addEventListener('load', function () {
             if (document.getElementById('email').value === '') {
                 document.getElementsByClassName('username-error')[1].style.color = 'red';
                 document.getElementsByClassName('username-error')[1].innerHTML =
-                        '<i class="material-icons">error</i>';
+                        '<i class="material-icons">close</i>';
                 emailStatus.innerHTML =
                     'Hey! Please enter an email!';
                 document
@@ -319,7 +319,7 @@ window.addEventListener('load', function () {
             if (validate(value) === false && value !== '') {
                 document.getElementsByClassName('username-error')[1].style.color = 'red';
                 document.getElementsByClassName('username-error')[1].innerHTML =
-                    '<i class="material-icons">error</i>';
+                    '<i class="material-icons">close</i>';
                 emailStatus.innerHTML = 'Please enter a valid email!';
                 document
                     .getElementById('email')
@@ -366,7 +366,7 @@ window.addEventListener('load', function () {
                 if (data === "false") {
                     document.getElementsByClassName('username-error')[1].style.color = 'red';
                     document.getElementsByClassName('username-error')[1].innerHTML =
-                        '<i class="material-icons">error</i>';
+                        '<i class="material-icons">close</i>';
                     emailStatus.innerHTML = 'This email already exists!';
                     document
                         .getElementById('email')
@@ -468,7 +468,7 @@ window.addEventListener('load', function () {
                 if (value !== "") {
                     document.getElementsByClassName('username-error')[5].style.color = 'green';
                     document.getElementsByClassName('username-error')[5].innerHTML =
-                        '<i class="material-icons">check_circle</i>';
+                        '<i class="material-icons">check</i>';
                     document
                         .getElementById('bday')
                         .classList.remove(
@@ -509,7 +509,7 @@ window.addEventListener('load', function () {
                 } else {
                     document.getElementsByClassName('username-error')[5].style.color = 'red';
                     document.getElementsByClassName('username-error')[5].innerHTML =
-                        '<i class="material-icons">error</i>';
+                        '<i class="material-icons">close</i>';
                     status.innerHTML = 'Invalid Birthday';
                     document
                         .getElementById('bday')
@@ -565,7 +565,7 @@ window.addEventListener('load', function () {
                     if (value === data) {
                         document.getElementsByClassName('username-error')[4].style.color = 'green';
                         document.getElementsByClassName('username-error')[4].innerHTML =
-                            '<i class="material-icons">check_circle</i>';
+                            '<i class="material-icons">check</i>';
                         document
                             .getElementById('verification')
                             .classList.remove(
@@ -606,7 +606,7 @@ window.addEventListener('load', function () {
                     } else {
                         document.getElementsByClassName('username-error')[4].style.color = 'red';
                         document.getElementsByClassName('username-error')[4].innerHTML =
-                            '<i class="material-icons">error</i>';
+                            '<i class="material-icons">close</i>';
                         status.innerHTML = 'Incorrect Confirmation';
                         document
                             .getElementById('verification')
@@ -660,7 +660,7 @@ window.addEventListener('load', function () {
                 if (value === value2 && value !== "") {
                     document.getElementsByClassName('username-error')[3].style.color = 'green';
                     document.getElementsByClassName('username-error')[3].innerHTML =
-                        '<i class="material-icons">check_circle</i>';
+                        '<i class="material-icons">check</i>';
                     document
                         .getElementById('confirm-password')
                         .classList.remove(
@@ -701,7 +701,7 @@ window.addEventListener('load', function () {
                 } else {
                     document.getElementsByClassName('username-error')[3].style.color = 'red';
                     document.getElementsByClassName('username-error')[3].innerHTML =
-                        '<i class="material-icons">error</i>';
+                        '<i class="material-icons">close</i>';
                     status.innerHTML = 'Two Passwords do not Match';
                     document
                         .getElementById('confirm-password')
@@ -807,7 +807,7 @@ window.addEventListener('load', function () {
                         );
                         document.getElementsByClassName('username-error')[2].style.color = 'red';
                         document.getElementsByClassName('username-error')[2].innerHTML =
-                            '<i class="material-icons">error</i>';
+                            '<i class="material-icons">close</i>';
                         password_valid = false;
                     } else {
                         password_valid = true;
@@ -849,7 +849,7 @@ window.addEventListener('load', function () {
                         );
                         document.getElementsByClassName('username-error')[2].style.color = 'green';
                         document.getElementsByClassName('username-error')[2].innerHTML =
-                            '<i class="material-icons">check_circle</i>';
+                            '<i class="material-icons">check</i>';
                     }
                 }
             }
