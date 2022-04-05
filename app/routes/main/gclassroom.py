@@ -31,7 +31,8 @@ def gclassroom():
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
-            flow = InstalledAppFlow.from_client_secrets_file("credentials.json", scope)
+            # flow = InstalledAppFlow.from_client_secrets_file("../../../static/python/credentials.json", scope)
+            flow = InstalledAppFlow.from_client_secrets_file("app/static/python/credentials.json", scope)
             flow.redirect_uri = "http://localhost:8080"
             print(flow)
             creds = flow.authorization_url()

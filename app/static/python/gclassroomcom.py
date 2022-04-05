@@ -44,7 +44,7 @@ def main():
 
             creds = flow.run_local_server(
                 host="localhost",
-                port=8080,
+                port=8980,
                 authorization_prompt_message="{url}",
                 success_message="The auth flow is complete; you may close this window.",
                 open_browser=False,
