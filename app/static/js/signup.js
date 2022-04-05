@@ -98,6 +98,78 @@ window.addEventListener('load', function () {
                 );
                 return false;
             }
+            if (username.length < 6) {
+                usernameStatus.innerHTML =
+                    'Hey! Your username must be at least 6 characters long!';
+                document
+                    .getElementById('username')
+                    .classList.add(
+                    'bg-red-50',
+                    'border',
+                    'border-red-500',
+                    'text-red-900',
+                    'placeholder-red-700',
+                    'text-sm',
+                    'rounded-lg',
+                    'focus:ring-red-500',
+                    'focus:border-red-500',
+                    'block',
+                    'w-full',
+                    'p-2.5',
+                    'dark:bg-red-100',
+                    'dark:border-red-400'
+                );
+                return false;
+            }
+            if (username.length > 32){
+                usernameStatus.innerHTML =
+                    'Hey! Your username must be less than 32 characters long!';
+                document
+                    .getElementById('username')
+                    .classList.add(
+                    'bg-red-50',
+                    'border',
+                    'border-red-500',
+                    'text-red-900',
+                    'placeholder-red-700',
+                    'text-sm',
+                    'rounded-lg',
+                    'focus:ring-red-500',
+                    'focus:border-red-500',
+                    'block',
+                    'w-full',
+                    'p-2.5',
+                    'dark:bg-red-100',
+                    'dark:border-red-400'
+                );
+                return false;
+            }
+            let validChars = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '_', '-', ' '];
+            for (let i = 0; i < username.length; i++) {
+                if((username[i].toLowerCase() in validChars)) {
+                    usernameStatus.innerHTML =
+                        'Hey! Your username can only contain letters, numbers, underscores, dashes, and spaces!';
+                    document
+                        .getElementById('username')
+                        .classList.add(
+                        'bg-red-50',
+                        'border',
+                        'border-red-500',
+                        'text-red-900',
+                        'placeholder-red-700',
+                        'text-sm',
+                        'rounded-lg',
+                        'focus:ring-red-500',
+                        'focus:border-red-500',
+                        'block',
+                        'w-full',
+                        'p-2.5',
+                        'dark:bg-red-100',
+                        'dark:border-red-400'
+                    );
+                    return false;
+                }
+            }
             var request = $.ajax({
                 type: "POST",
                 url: "/api/v1/internal/check-signup-user",
@@ -304,8 +376,45 @@ window.addEventListener('load', function () {
                     document.getElementsByClassName('email-error')[0].style.color = 'green';
                     document.getElementsByClassName('email-error')[0].innerHTML =
                     '<i class="material-icons">check</i>';
+                    console.log('email is valid');
 
-                    emailStatus.innerHTML = 'Valid Email!'
+                    document
+                        .getElementById('email')
+                        .classList.remove(
+                        'bg-red-50',
+                        'border',
+                        'border-red-500',
+                        'text-red-900',
+                        'placeholder-red-700',
+                        'text-sm',
+                        'rounded-lg',
+                        'focus:ring-red-500',
+                        'focus:border-red-500',
+                        'block',
+                        'w-full',
+                        'p-2.5',
+                        'dark:bg-red-100',
+                        'dark:border-red-400'
+                    );
+                    document
+                        .getElementById('email')
+                        .classList.add(
+                        'g-green-50',
+                        'border',
+                        'border-green-500',
+                        'text-green-900',
+                        'placeholder-green-700',
+                        'text-sm',
+                        'rounded-lg',
+                        'focus:ring-green-500',
+                        'focus:border-green-500',
+                        'block',
+                        'w-full',
+                        'p-2.5',
+                        'dark:bg-green-100',
+                        'dark:border-green-400'
+                    );
+                    emailStatus.innerHTML = '<br>'
                     }
 
 
