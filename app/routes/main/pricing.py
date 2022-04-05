@@ -4,4 +4,4 @@ from flask import render_template
 
 @main_blueprint.route("/pricing", methods=["GET"])
 def pricing():
-    return render_template("errors/soon.html", page="Pricing | Coming Soon")
+    return render_template("pricing.html", page="Pricing - Nebulus")

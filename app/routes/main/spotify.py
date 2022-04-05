@@ -29,6 +29,8 @@ def fetch_cache():
 def update_cache():
     return
 
+def update_auth():
+    return
 
 def get_path():
     cache = fetch_cache()
@@ -62,6 +64,8 @@ def spotify():
         auth_manager.get_access_token(request.args.get("code"))
         print(auth_manager)
         print(cache_handler)
+        update_cache(cache_handler)
+        update_auth(auth_manager)
         return redirect("/spotify")
 
     if not auth_manager.validate_token(cache_handler.get_cached_token()):

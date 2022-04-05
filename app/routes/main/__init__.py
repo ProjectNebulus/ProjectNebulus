@@ -25,3 +25,4 @@ from .calendar import *
 from .spotify import *
 from .discordauth import *
 from .schoology import *
+from .gclassroom import *

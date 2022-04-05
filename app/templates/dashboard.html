@@ -71,19 +71,24 @@
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                     <th scope="row"
                         class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                                <span class="overflow-ellipsis text-2xl dark:text-white text-black"><img
+                                <span class="overflow-ellipsis text-2xl dark:text-white text-black"> <span
+                                        class="dark:text-red-500 text-red-600">{{announcement.title}}</span> <i
+                                        class="material-icons">arrow_forward_ios</i>  <img
                                         src="https://bins.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg?"
                                         style="object-fit: cover; width:20px; height:20px; border-radius:3px;display: inline-block; margin: 10px;"
-                                        alt=""> {{announcement.course.name}} | <span
-                                        class="dark:text-red-500 text-red-600">{{announcement.title}}</span> | <span
+                                        alt=""> {{announcement.course.name}} <i
+                                        class="material-icons">arrow_forward_ios</i> <span
                                         class="font-bold text-blue-600 dark:text-blue-300">{{announcement.author}}</span>
                             >
                             <span class="text-blue-500 dark:text-blue-400">{{announcement.imported_from}}</span></h1></span>
 
                         <p style="width:95%; overflow-wrap: break-word !important; white-space: pre-wrap;white-space: -moz-pre-wrap; /* Mozilla, since 1999 */ white-space: -pre-wrap; /* Opera 4-6 */ white-space: -o-pre-wrap; /* Opera 7 */ word-wrap: break-word; /* Internet Explorer 5.5+ */"
                            class="text-black dark:text-white text-xl overflow-ellipsis"><span
-                                class="text-gray-600 dark:text-gray-400 text-xl">{{announcement.date}}</span> |
-                            {{announcement.content[0:40]}}...</p>
+                                {% set announcement_data=announcement.date | string() %}
+                                class="text-gray-600 dark:text-gray-400 text-xl">{{ announcement_data.split()[0]}}</span>
+                            <i class="material-icons">arrow_forward_ios</i>
+                            <span style="float:left;">{{announcement.content[0:30]}}...</span></p>
+                        <hr style="margin-top:10px;margin-bottom:10px; color:white;">
 
                 </tr>
                 {% endfor %}
