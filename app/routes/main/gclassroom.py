@@ -89,8 +89,8 @@ def authorize():
     # for the OAuth 2.0 client, which you configured in the API Console. If this
     # value doesn't match an authorized URI, you will get a 'redirect_uri_mismatch'
     # error.
-    flow.redirect_uri = request.root_url + "gclassroom/oauth2callback"
-
+    flow.redirect_uri = request.root_url.replace('http', 'https') + "gclassroom/oauth2callback"
+    print(request.root_url.replace('http', 'https') + "gclassroom/oauth2callback")
     authorization_url, state = flow.authorization_url(
         # Enable offline access so that you can refresh an access token without
         # re-prompting the user for permission. Recommended for web server apps.
@@ -113,7 +113,8 @@ def oauth2callback():
 
     flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
         CLIENT_SECRETS_FILE, scopes=SCOPES, state=state)
-    flow.redirect_uri = request.root_url + "gclassroom/oauth2callback"
+    flow.redirect_uri = request.root_url.replace('http', 'https') + "gclassroom/oauth2callback"
+    print(request.root_url.replace('http', 'https') + "gclassroom/oauth2callback")
 
     # Use the authorization server's response to fetch the OAuth 2.0 tokens.
     authorization_response = flask.request.url
