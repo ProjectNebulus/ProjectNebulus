@@ -158,7 +158,8 @@ window.addEventListener('load', function () {
             }
             let validChars = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '_', '-', ' '];
             for (let i = 0; i < username.length; i++) {
-                if((username[i].toLowerCase() in validChars)) {
+                console.log(username[i]);
+                if(!(validChars.includes(username[i].toLowerCase()))) {
                     usernameStatus.innerHTML =
                         'Hey! Your username can only contain letters, numbers, underscores, dashes, and spaces!';
                     document.getElementsByClassName('username-error')[0].style.color = 'red';
