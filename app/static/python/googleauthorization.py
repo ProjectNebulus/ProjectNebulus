@@ -8,26 +8,36 @@ import google.oauth2.credentials
 import google_auth_oauthlib.flow
 import googleapiclient.discovery
 
+import os.path
+
+from google.auth.transport.requests import Request
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
+
+os.environ["OAUTHLIB_RELAX_TOKEN_SCOPE"] = "None"
+
 # This variable specifies the name of a file that contains the OAuth 2.0
 # information for this application, including its client_id and client_secret.
 CLIENT_SECRETS_FILE = "credentials.json"
 
 # This OAuth 2.0 access scope allows for full read/write access to the
 # authenticated user's account and requires requests to use an SSL connection.
-SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly',
-          'https://www.googleapis.com/auth/classroom.courses.readonly',
-          'https://www.googleapis.com/auth/classroom.rosters.readonly',
-          'https://www.googleapis.com/auth/classroom.coursework.me,',
-          'https://www.googleapis.com/auth/classroom.coursework.me.readonly',
-          'https://www.googleapis.com/auth/classroom.coursework.students',
-          'https://www.googleapis.com/auth/classroom.coursework.students.readonly',
-          'https://www.googleapis.com/auth/classroom.announcements',
-          'https://www.googleapis.com/auth/classroom.announcements.readonly',
-          'https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly',
-          'https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly',
-          'https://www.googleapis.com/auth/classroom.push-notifications']
-API_SERVICE_NAME = 'drive'
-API_VERSION = 'v2'
+SCOPES = [
+    'https://www.googleapis.com/auth/classroom.courses.readonly',
+    'https://www.googleapis.com/auth/classroom.rosters.readonly',
+    'https://www.googleapis.com/auth/classroom.coursework.me',
+    'https://www.googleapis.com/auth/classroom.coursework.me.readonly',
+    'https://www.googleapis.com/auth/classroom.coursework.students',
+    'https://www.googleapis.com/auth/classroom.coursework.students.readonly',
+    'https://www.googleapis.com/auth/classroom.announcements',
+    'https://www.googleapis.com/auth/classroom.announcements.readonly',
+    'https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly',
+    'https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly',
+    'https://www.googleapis.com/auth/classroom.push-notifications']
+API_SERVICE_NAME = 'classroom'
+API_VERSION = 'v1'
 
 app = flask.Flask(__name__)
 # Note: A secret key is included in the sample so that it works.
@@ -50,17 +60,18 @@ def test_api_request():
     credentials = google.oauth2.credentials.Credentials(
         **flask.session['credentials'])
 
-    drive = googleapiclient.discovery.build(
-        API_SERVICE_NAME, API_VERSION, credentials=credentials)
+    service = build("classroom", "v1", credentials=credentials)
 
-    files = drive.files().list().execute()
+    # Call the Classroom API
 
+    results = service.courses().list(pageSize=10).execute()
+    courses = results.get("courses", [])
     # Save credentials back to session in case access token was refreshed.
     # ACTION ITEM: In a production app, you likely want to save these
     #              credentials in a persistent database instead.
     flask.session['credentials'] = credentials_to_dict(credentials)
 
-    return flask.jsonify(**files)
+    return flask.jsonify(courses)
 
 
 @app.route('/authorize')
