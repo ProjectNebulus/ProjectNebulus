@@ -280,6 +280,18 @@ function customize(template, subtemplate) {
     document.getElementById('create-course').onsubmit = () => createCourse(subtemplate);
 
     document.getElementById('import-schoology').onclick = importSchoology;
+    document.getElementById('import-classroom').onclick = importGClassroom;
+    document.getElementById('import-canvas').onclick = importCanvas;
+}
+
+function importGClassroom() {
+    screens[2].style.display = 'none';
+    screens[4].style.display = 'block';
+}
+
+function importCanvas() {
+    screens[2].style.display = 'none';
+    screens[4].style.display = 'block';
 }
 
 function importSchoology() {

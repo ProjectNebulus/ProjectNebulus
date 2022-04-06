@@ -92,6 +92,35 @@
             </button>
         </div>
     </div>
+
+    <div class="CoursePage">
+        <h3 class="flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white">
+            Import from Schoology
+            <span class="close"></span>
+        </h3>
+    </div>
+    <div class="CoursePage">
+        <h3 class="flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white">
+            Import from Google Classroom
+            <span class="close"></span>
+        </h3>
+        {% if gcourses|length == 0 %}
+        <h1>We coudn't find any courses! Maybe try linking your google classroom account in Settings!</h1>
+        {% else %}
+        <h1>Select a Google Classroom Course</h1>
+        {% endif %}
+
+        {% for i in gcourses %}
+        <button>{{i}}</button>
+        <br><br>
+        {% endfor %}
+    </div>
+    <div class="CoursePage">
+        <h3 class="flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white">
+            Import from Canvas
+            <span class="close"></span>
+        </h3>
+    </div>
 </div>
 
 <script src="../static/js/createCourse.js"></script>
