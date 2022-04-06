@@ -24,6 +24,7 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 os.environ["OAUTHLIB_RELAX_TOKEN_SCOPE"] = "None"
+os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 # This variable specifies the name of a file that contains the OAuth 2.0
 # information for this application, including its client_id and client_secret.
