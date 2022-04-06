@@ -5,15 +5,17 @@ let email_valid = false;
 let password_valid = false;
 
 function next(num) {
-
+    let status = document.getElementById("status");
     if (num === 1) {
+
         let checks = document.getElementsByClassName("username-error");
-        if (checks[0].innerHTML.includes("check_circle") && checks[1].innerHTML.includes("check_circle") && checks[2].innerHTML.includes("check_circle") && checks[3].innerHTML.includes("check_circle")) {
+        if (checks[0].innerText == "check" && checks[1].innerText === "check" && checks[2].innerText === "check" && checks[3].innerText === "check") {
             var request = $.ajax({
                 type: "POST",
                 url: "/api/v1/internal/send-email",
                 data: {
-                    "email": document.getElementById("email").value
+                    "email": document.getElementById("email").value,
+                    "username": document.getElementById("username").value
 
                 }
             });
@@ -24,7 +26,8 @@ function next(num) {
         }
     } else if (num === 2) {
         let checks = document.getElementsByClassName("username-error");
-        if (checks[4].innerHTML.includes("check_circle") && checks[5].innerHTML.includes("check_circle")) {
+        console.log(checks)
+        if (checks[4].innerHTML.includes("check") && checks[5].innerHTML.includes("check")) {
             document.getElementById("step" + num.toString()).style.display = "none";
             document.getElementById("step" + (num + 1).toString()).style.display = "block";
         } else {
@@ -657,6 +660,50 @@ window.addEventListener('load', function () {
                 status.innerHTML = '<br>';
                 let value = document.getElementById('confirm-password').value;
                 let value2 = document.getElementById('password').value;
+                if (value === ""){
+                    document.getElementsByClassName('username-error')[3].style.color = 'red';
+                    document.getElementsByClassName('username-error')[3].innerHTML =
+                        '<i class="material-icons">close</i>';
+                    status.innerHTML = 'Please confirm your password!';
+                    document
+                        .getElementById('confirm-password')
+                        .classList.remove(
+                        'g-green-50',
+                        'border',
+                        'border-green-500',
+                        'text-green-900',
+                        'placeholder-green-700',
+                        'text-sm',
+                        'rounded-lg',
+                        'focus:ring-green-500',
+                        'focus:border-green-500',
+                        'block',
+                        'w-full',
+                        'p-2.5',
+                        'dark:bg-green-100',
+                        'dark:border-green-400'
+                    );
+                    document
+                        .getElementById('confirm-password')
+                        .classList.add(
+                        'bg-red-50',
+                        'border',
+                        'border-red-500',
+                        'text-red-900',
+                        'placeholder-red-700',
+                        'text-sm',
+                        'rounded-lg',
+                        'focus:ring-red-500',
+                        'focus:border-red-500',
+                        'block',
+                        'w-full',
+                        'p-2.5',
+                        'dark:bg-red-100',
+                        'dark:border-red-400'
+                    );
+                    email_valid = false;
+                    return false;
+                }
                 if (value === value2 && value !== "") {
                     document.getElementsByClassName('username-error')[3].style.color = 'green';
                     document.getElementsByClassName('username-error')[3].innerHTML =
@@ -751,6 +798,53 @@ window.addEventListener('load', function () {
                 status.style.color = 'red';
                 status.innerHTML = '<br>';
                 const value = document.getElementById('password').value;
+                if (value === ""){
+                    // User hasn't entered a password
+                    status.innerHTML =
+                            'Please enter a password!';
+                        document
+                            .getElementById('password')
+                            .classList.remove(
+                            'g-green-50',
+                            'border',
+                            'border-green-500',
+                            'text-green-900',
+                            'placeholder-green-700',
+                            'text-sm',
+                            'rounded-lg',
+                            'focus:ring-green-500',
+                            'focus:border-green-500',
+                            'block',
+                            'w-full',
+                            'p-2.5',
+                            'dark:bg-green-100',
+                            'dark:border-green-400'
+                        );
+                        document
+                            .getElementById('password')
+                            .classList.add(
+                            'bg-red-50',
+                            'border',
+                            'border-red-500',
+                            'text-red-900',
+                            'placeholder-red-700',
+                            'text-sm',
+                            'rounded-lg',
+                            'focus:ring-red-500',
+                            'focus:border-red-500',
+                            'block',
+                            'w-full',
+                            'p-2.5',
+                            'dark:bg-red-100',
+                            'dark:border-red-400'
+                        );
+                        document.getElementsByClassName('username-error')[2].style.color = 'red';
+                        document.getElementsByClassName('username-error')[2].innerHTML =
+                            '<i class="material-icons">close</i>';
+                        password_valid = false;
+                        return false;
+
+                }
                 if (value.length < 6) {
                     status.innerHTML =
                         'Password must be at least 6 characters long';

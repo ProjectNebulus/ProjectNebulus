@@ -44,6 +44,9 @@ def send_email():
         "1029", str(code)
     )
 
+    htmlform = htmlform.replace("Nicholas Wang", request.form.get("username"))
+
     msg.html = htmlform
+    print('sending email')
     mail.send(msg)
     return "success"
