@@ -111,24 +111,7 @@ input[type="text"] {
     margin-right: 10px;
 }
 
-button {
-    padding: 10px;
-    background: black;
-    border-style: none;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button:hover {
-    padding: 10px;
-    background: grey;
-    border-style: none;
-    color: white;
-    border-radius: 5px;
-}
-
-.button {
+.createSelectButton {
     font-size: 20px;
     padding: 10px;
     border-radius: 5px;
