@@ -43,7 +43,8 @@ SCOPES = [
     'https://www.googleapis.com/auth/classroom.announcements.readonly',
     'https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly',
     'https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly',
-    'https://www.googleapis.com/auth/classroom.push-notifications']
+    'https://www.googleapis.com/auth/classroom.push-notifications',
+    'https://www.googleapis.com/auth/userinfo.profile']
 API_SERVICE_NAME = 'classroom'
 API_VERSION = 'v1'
 
@@ -132,7 +133,11 @@ def oauth2callback():
     credentials = flow.credentials
     flask.session['credentials'] = credentials_to_dict(credentials)
 
-    return flask.redirect(flask.url_for('test_api_request'))
+    if "local" not in request.root_url:
+        finalurl = request.root_url.replace('http', 'https') + "gclassroom"
+    else:
+        finalurl = request.root_url + "gclassroom/oauth2callback"
+    return flask.redirect(finalurl)
 
 
 @main_blueprint.route('/gclassroom/revoke')
@@ -195,13 +200,13 @@ def print_index_table():
             '    API request</a> again, you should go back to the auth flow.' +
             '</td></tr></table>')
 
-
-if __name__ == '__main__':
-    # When running locally, disable OAuthlib's HTTPs verification.
-    # ACTION ITEM for developers:
-    #     When running in production *do not* leave this option enabled.
-    os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
-
-    # Specify a hostname and port that are set as a valid redirect URI
-    # for your API project in the Google API Console.
-    app.run('localhost', 8080, debug=True)
+#
+# if __name__ == '__main__':
+#     # When running locally, disable OAuthlib's HTTPs verification.
+#     # ACTION ITEM for developers:
+#     #     When running in production *do not* leave this option enabled.
+#     os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+#
+#     # Specify a hostname and port that are set as a valid redirect URI
+#     # for your API project in the Google API Console.
+#     app.run('localhost', 8080, debug=True)
