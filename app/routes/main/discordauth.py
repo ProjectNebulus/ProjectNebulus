@@ -1,97 +1,101 @@
-# from requests_oauthlib import OAuth2Session
-# from flask import Blueprint, request, redirect, abort, flash, url_for, session
-# from . import main_blueprint
-#
-# API_BASE_URL = 'https://discordapp.com/api'
-# OAUTH2_CLIENT_ID =
-# OAUTH2_CLIENT_SECRET = app.config['DISCORD_CLIENT_SECRET']
-# BASE_AUTH_URL = API_BASE_URL + 'discord//oauth2/authorize'
-# TOKEN_URL = API_BASE_URL + 'discord//oauth2/token'
-# REQUESTED_SCOPES = ['identify', 'guilds']
-#
-# import os;
-#
-# os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = 'true'
-#
-#
-# @login_manager.user_loader
-# def load_user(uid):
-#     return User.query.get(uid)
-#
-#
-# def oauth2_token_updater(token):
-#     session['oauth2_token'] = token
-#
-#
-# def oauth2_session(token=None, state=None, scope=None):
-#     return OAuth2Session(
-#         client_id=OAUTH2_CLIENT_ID,
-#         token=token,
-#         state=state,
-#         scope=scope,
-#         redirect_uri=url_for('.authorized', _external=True),
-#         auto_refresh_kwargs={
-#             'client_id': OAUTH2_CLIENT_ID,
-#             'client_secret': OAUTH2_CLIENT_SECRET,
-#         },
-#         auto_refresh_url=TOKEN_URL,
-#         token_updater=oauth2_token_updater)
-#
-#
-# def discord_get_user():
-#     discord = oauth2_session(token=session.get('oauth2_token'))
-#     user_dat = discord.get(API_BASE_URL + '/users/@me').json()
-#
-#     return User(user_dat['id'], user_dat['username'],
-#                 user_dat['discriminator'], user_dat['avatar'])
-#
-#
-# # -- routes
-# auth = Blueprint('auth', __name__)
-#
-#
-# @auth.route('/discord')
-# def login():
-#     discord = oauth2_session(scope=REQUESTED_SCOPES)
-#     auth_url, state = discord.authorization_url(BASE_AUTH_URL)
-#     session['oauth2_state'] = state
-#     session['next'] = request.args.get('next')
-#
-#     return redirect(auth_url)
-#
-#
-# @auth.route('/discord/logout')
-# @login_required
-# def logout():
-#     logout_user()
-#     return redirect(url_for('index'))
-#
-#
-# @auth.route('/discord/oauth2/authorized')
-# def authorized():
-#     if request.values.get('error'):
-#         error = request.values['error']
-#         if error == 'access_denied':
-#             flash('OAuth flow cancelled :(', 'error')
-#         else:
-#             flash('Error in OAuth flow: {}'.format(error), 'error')
-#         return redirect(url_for('index'))
-#
-#     discord = oauth2_session(state=session['oauth2_state'])
-#     token = discord.fetch_token(TOKEN_URL,
-#                                 client_secret=OAUTH2_CLIENT_SECRET,
-#                                 authorization_response=request.url)
-#
-#     session['oauth2_token'] = token
-#
-#     user = discord_get_user()
-#     login_user(user)
-#     db.session.merge(user)
-#     db.session.commit()
-#
-#     next = session['next']
-#     if not is_safe_redirect(next):
-#         return abort(400)
-#
-#     flash('Successful OAuth login!', 'success')
-#     return redirect(next or url_for('index'))
+import flask_discord
+from flask_discord import DiscordOAuth2Session, requires_authorization, Unauthorized
+from flask import current_app
+from flask import Flask, request, redirect
+import discord
+import requests
+from . import main_blueprint
+import json
+
+app = Flask(__name__)
+app.config["DISCORD_CLIENT_ID"] = 955153343020429343  # Discord client ID.
+app.config["DISCORD_CLIENT_SECRET"] = "6ApEyUtWUsp1SwuXlrRn3e_lNB6IqfSO"  # Discord client secret.
+app.config["DISCORD_REDIRECT_URI"] = "http://localhost:8080/discord/receive"
+
+
+def exchange_code(code):
+    data = {
+        'client_id': 826815572472758333,
+        'client_secret': "UmFqaDEbgPdtLAjw_ObAbqNWuNquIZTv",
+        'grant_type': 'authorization_code',
+        'code': code,
+        'redirect_uri': "https://camphalfblooddiscord.ga/recieve"
+    }
+    headers = {
+        'Content-Type': 'application/x-www-form-urlencoded'
+    }
+    r = requests.post('https://discord.com/api/v8/oauth2/token', data=data, headers=headers)
+    # r.raise_for_status()
+    return r.json()
+
+
+global baseUrl
+baseUrl = "https://discordapp.com/api"
+
+
+def getHeaders(access_token):
+    return {
+        "Authorization": "{} {}".format("Bearer", access_token),
+        # "user-agent" : "DiscordBackup/0.0.1"
+    }
+
+
+def getRequest(access_token, endpoint, asJson=True, additional=None):
+    url = "{}/{}".format(baseUrl, endpoint)
+    req = requests.get(url, headers=getHeaders(access_token))
+
+    if asJson:
+        return json.loads(req.text)
+    else:
+        return req.text
+
+
+def getMe(access_token):  # this works
+    endpoint = "users/@me"
+    return getRequest(access_token, endpoint)
+
+
+@main_blueprint.route("/discord")
+def discord_auth():
+    # app.config["DISCORD_REDIRECT_URI"] = request.root_url+"discord/recieve"
+    # print(request.root_url+"discord/receive")
+    thediscord = DiscordOAuth2Session(app)
+
+    return thediscord.create_session()
+
+
+@main_blueprint.route('/discord/receive')
+def recieve():
+    import json
+    if "code" in request.args:
+        try:
+            code = request.args["code"]
+
+            data = exchange_code(code)
+
+            access_token = data['access_token']
+
+            data = getMe(access_token)
+
+            avatar_link = f"https://cdn.discordapp.com/avatars/{data['id']}/{data['avatar']}.png"
+
+            user = f"{data['username']}#{data['discriminator']}"
+
+            data = [user, int(data['id']), avatar_link]
+            return data
+
+
+
+        except Exception as e:
+            print(e)
+
+            return redirect("/discord")
+
+
+    else:
+        return redirect("/discord")
+    resp = flask.make_response(redirect('/'))
+    resp.set_cookie('login', str(data[0]))
+    resp.set_cookie('id', str(data[1]))
+    resp.set_cookie('avatar', str(data[2]))
+    return resp

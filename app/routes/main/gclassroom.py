@@ -60,21 +60,23 @@ app.secret_key = 'REPLACE ME - this value is here as a placeholder.'
 def test_api_request():
     if 'credentials' not in flask.session:
         return flask.redirect('/gclassroom/authorize')
+    try:
+        # Load credentials from the session.
+        credentials = google.oauth2.credentials.Credentials(
+            **flask.session['credentials'])
 
-    # Load credentials from the session.
-    credentials = google.oauth2.credentials.Credentials(
-        **flask.session['credentials'])
+        service = build("classroom", "v1", credentials=credentials)
 
-    service = build("classroom", "v1", credentials=credentials)
+        # Call the Classroom API
 
-    # Call the Classroom API
-
-    results = service.courses().list(pageSize=10).execute()
-    courses = results.get("courses", [])
-    # Save credentials back to session in case access token was refreshed.
-    # ACTION ITEM: In a production app, you likely want to save these
-    #              credentials in a persistent database instead.
-    flask.session['credentials'] = credentials_to_dict(credentials)
+        results = service.courses().list(pageSize=10).execute()
+        courses = results.get("courses", [])
+        # Save credentials back to session in case access token was refreshed.
+        # ACTION ITEM: In a production app, you likely want to save these
+        #              credentials in a persistent database instead.
+        flask.session['credentials'] = credentials_to_dict(credentials)
+    except:  # TokenExpired
+        return flask.redirect('/gclassroom/authorize')
 
     return flask.jsonify(courses)
 
