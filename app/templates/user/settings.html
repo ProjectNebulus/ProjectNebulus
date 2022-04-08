@@ -11,7 +11,7 @@
 <script src="/static/js/settings.js"></script>
 <div id="account" style="overflow-y: scroll; height:100%; float:left; margin-left: 8%; font-size: 1.2em; width:80%;">
     <h1 class="text-5xl text-black dark:text-white">{{session.get('username')}}'s Nebulus Account</h1><br>
-    <h2 class="text-4xl text-black dark:text-white">General Settings </h2><br>
+    <h2 id="general" class="text-4xl text-black dark:text-white">General Settings </h2><br>
     <label style="margin-bottom:-10px; for=" email-adress-icon" class="block mb-2 text-sm font-medium text-gray-900
     dark:text-gray-300">Your Username</label>
     <div class="settingItem" style="display: inline-block;">
@@ -20,8 +20,8 @@
                 <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20"
                      xmlns="http://www.w3.org/2000/svg">
                     <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
-                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
-                    </svg>
+                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                </svg>
                 </div>
                 <input style="width:400px;" disabled type="text" value="{{session.get('username')}}"
                        id="email-adress-icon"
@@ -76,18 +76,18 @@
             </button>
 
         </div>
-        <br>
-        <h2 class="text-4xl text-black dark:text-white">Connections</h2><br>
-        {% if not googleclassroom %}
-        <button onclick="newwindow=window.open('/gclassroom','Authorize with Google','height=300,width=800')"
-                style="height:50px" type="button"
-                class="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2">
-            <svg class="mr-2 -ml-1 w-4 h-4" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google"
-                 role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512">
-                <path fill="currentColor"
-                      d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"></path>
-            </svg>
-            Connect Google Classroom
+    <br>
+    <h2 id="connections" class="text-4xl text-black dark:text-white">Connections</h2><br>
+    {% if not googleclassroom %}
+    <button onclick="newwindow=window.open('/gclassroom','Authorize with Google','height=300,width=800')"
+            style="height:50px" type="button"
+            class="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2">
+        <svg class="mr-2 -ml-1 w-4 h-4" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google"
+             role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512">
+            <path fill="currentColor"
+                  d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"></path>
+        </svg>
+        Connect Google Classroom
         </button>
         {% endif %}
 
@@ -206,7 +206,7 @@
 
     </script>
 
-    <h2 class="text-4xl text-black dark:text-white">Submit a Bug</h2><br>
+    <h2 id="bug" class="text-4xl text-black dark:text-white">Submit a Bug</h2><br>
     <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Your Bug</label>
     <textarea id="message" rows="4"
               class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -216,17 +216,23 @@
         Submit
     </button>
     <br>
-    <h2 class="text-4xl text-black dark:text-white">Submit a Feature Request</h2><br>
-      <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Your Bug</label>
-<textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Leave a comment..."></textarea>
-        <button style="margin-top: 20px;" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button><br>
-        <div id="alert-border-1" class="flex p-4 mb-4 bg-blue-100 border-t-4 border-blue-500 dark:bg-blue-200" role="alert">
-            <svg class="flex-shrink-0 w-5 h-5 text-blue-700" fill="currentColor" viewBox="0 0 20 20"
-                 xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                      clip-rule="evenodd"></path>
-            </svg>
+    <h2 id="request" class="text-4xl text-black dark:text-white">Submit a Feature Request</h2><br>
+    <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Your Bug</label>
+    <textarea id="message" rows="4"
+              class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Leave a comment..."></textarea>
+    <button style="margin-top: 20px;" type="button"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        Submit
+    </button>
+    <br>
+    <div id="alert-border-1" class="flex p-4 mb-4 bg-blue-100 border-t-4 border-blue-500 dark:bg-blue-200" role="alert">
+        <svg class="flex-shrink-0 w-5 h-5 text-blue-700" fill="currentColor" viewBox="0 0 20 20"
+             xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                  clip-rule="evenodd"></path>
+        </svg>
             <div class="ml-3 text-sm font-medium text-blue-700">
                 <span class="font-medium">Did you know?</span> You can earn up to 20 points for submitting feature
                 requests or bugs! A developer will manually review your request and if it is valid, they will decide how
@@ -243,17 +249,17 @@
                 </svg>
             </button>
         </div>
-        <div id="alert-additional-content-2" class="p-4 mb-4 bg-red-100 rounded-lg dark:bg-red-200" role="alert">
-            <div class="flex items-center">
-                <svg class="w-6 h-6" fill="#9F2826" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                          d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-                          clip-rule="evenodd"></path>
-                </svg>
-                <h3 class="text-lg font-medium text-red-700 dark:text-red-800">Danger Zone</h3>
-            </div>
-            <div class="mt-2 mb-4 text-sm text-red-700 dark:text-red-800">
-                These are very dangerous actions!
+    <div id="danger" class="p-4 mb-4 bg-red-100 rounded-lg dark:bg-red-200" role="alert">
+        <div class="flex items-center">
+            <svg class="w-6 h-6" fill="#9F2826" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                      d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                      clip-rule="evenodd"></path>
+            </svg>
+            <h3 class="text-lg font-medium text-red-700 dark:text-red-800">Danger Zone</h3>
+        </div>
+        <div class="mt-2 mb-4 text-sm text-red-700 dark:text-red-800">
+            These are very dangerous actions!
             </div>
             <div class="flex">
                 <button type="button"
@@ -281,11 +287,12 @@
 <div id="sidebar" class="mt-4 border-l border-blue-500" style="margin:1%; float:left; width:10%;text-align:right;position: sticky;
     top: 0;">
     <p class="text-black dark:text-white uppercase mb-4">Settings</p>
-    <p class="text-black dark:text-gray-400 hover:text-gray-600 mb-4">General Settings</p>
-    <p class="text-black dark:text-gray-400 hover:text-gray-600 mb-4">Connections</p>
-    <p class="text-black dark:text-gray-400 hover:text-gray-600 mb-4">Submit a Bug</p>
-    <p class="text-black dark:text-gray-400 hover:text-gray-600 mb-4">Submit a Feature Request</p>
-    <p class="text-black dark:text-gray-400 hover:text-gray-600 mb-4">Danger Zone</p>
+    <a href="#general"><p class="text-black dark:text-gray-400 hover:text-gray-600 mb-4">General Settings</p></a>
+    <a href="#connections"><p class="text-black dark:text-gray-400 hover:text-gray-600 mb-4">Connections</p></a>
+    <a href="#bug"><p class="text-black dark:text-gray-400 hover:text-gray-600 mb-4">Submit a Bug</p></a>
+    <a href="#request"><p class="text-black dark:text-gray-400 hover:text-gray-600 mb-4">Submit a Feature Request</p>
+    </a>
+    <a href="#danger"><p class="text-black dark:text-gray-400 hover:text-gray-600 mb-4">Danger Zone</p></a>
 </div>
 <div id="authentication-modal" aria-hidden="true"
      class="hidden overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center h-modal md:h-full md:inset-0">

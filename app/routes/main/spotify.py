@@ -1,4 +1,6 @@
 from flask import render_template, redirect, session
+from spotipy import CacheHandler
+
 from . import main_blueprint
 import os
 from flask import Flask, session, request, redirect
@@ -6,7 +8,6 @@ from flask_session import Session
 import spotipy
 from .utils import logged_in
 import uuid
-from app.static.python.mongodb import read, update
 
 # In order to get Spotipy to work, you must install the latest version with cloning the repo with the following command:
 # pip3 install git+https://github.com/plamere/spotipy
@@ -19,25 +20,49 @@ if not os.path.exists(caches_folder):
     os.makedirs(caches_folder)
 
 
-def fetch_cache():
-    cache = read.getSpotifyCache(username=session["username"])
-    if cache is None:
-        return {}
-    return cache
+class FlaskSessionCacheHandler(CacheHandler):
+    """
+    A cache handler that stores the token info in the session framework
+    provided by Django.
+    Read more at https://docs.djangoproject.com/en/3.2/topics/http/sessions/
+    """
+
+    def __init__(self, request):
+        """
+        Parameters:
+            * request: HttpRequest object provided by Django for every
+            incoming request
+        """
+        self.request = request
+
+    def get_cached_token(self):
+        token_info = None
+        try:
+            token_info = session['token_info']
+        except KeyError:
+            print("Token not found in the session")
+
+        return token_info
+
+    def save_token_to_cache(self, token_info):
+        try:
+            session['token_info'] = token_info
+        except Exception as e:
+            print("Error saving token to cache: " + str(e))
 
 
-def update_cache():
-    return
+def session_cache_path():
+    return caches_folder + session.get("uuid")
 
-def update_auth():
-    return
 
-def get_path():
-    cache = fetch_cache()
-    folder = caches_folder + session.get("uuid")
-    with open(folder, "w") as thefolder:
-        print(cache, file=thefolder)
-    return folder
+def cache_to_session():
+    file = caches_folder + session.get("uuid")
+    data = open(file, "r").readlines()[0]
+    session["spotify"] = str(data)
+
+
+def session_to_cache():
+    return (session["spotify"])
 
 
 @main_blueprint.route("/spotify")
@@ -45,11 +70,11 @@ def get_path():
 def spotify():
     if not session.get("uuid"):
         # Step 1. Visitor is unknown, give random ID
-        import uuid
-
         session["uuid"] = str(uuid.uuid4())
 
-    cache_handler = spotipy.cache_handler.CacheFileHandler(cache_path=get_path())
+    cache_handler = spotipy.cache_handler.CacheFileHandler(
+        cache_path=session_cache_path()
+    )
     auth_manager = spotipy.oauth2.SpotifyOAuth(
         scope="user-read-currently-playing playlist-modify-private",
         cache_handler=cache_handler,
@@ -62,10 +87,6 @@ def spotify():
     if request.args.get("code"):
         # Step 3. Being redirected from Spotify auth page
         auth_manager.get_access_token(request.args.get("code"))
-        print(auth_manager)
-        print(cache_handler)
-        update_cache(cache_handler)
-        update_auth(auth_manager)
         return redirect("/spotify")
 
     if not auth_manager.validate_token(cache_handler.get_cached_token()):
@@ -74,17 +95,14 @@ def spotify():
         return render_template("connectSpotify.html", auth=True, auth_url=auth_url)
 
     # Step 4. Signed in, display data
-    uuid = session["uuid"]
-    cache = fetch_cache()
     spotify = spotipy.Spotify(auth_manager=auth_manager)
     return render_template("connectSpotify.html", spotify=spotify, auth=False)
-
 
 @main_blueprint.route("/spotify/sign_out")
 def spotify_sign_out():
     try:
         # Remove the CACHE file (.cache-test) so that a new user can authorize.
-        os.remove(get_path())
+        os.remove(session_cache_path())
         session.pop("uuid")
     except OSError as e:
         print("Error: %s - %s." % (e.filename, e.strerror))
@@ -93,7 +111,9 @@ def spotify_sign_out():
 
 @main_blueprint.route("/spotify/playlists")
 def spotify_playlists():
-    cache_handler = spotipy.cache_handler.CacheFileHandler(cache_path=get_path())
+    cache_handler = spotipy.cache_handler.CacheFileHandler(
+        cache_path=session_cache_path()
+    )
     auth_manager = spotipy.oauth2.SpotifyOAuth(
         scope="user-read-currently-playing playlist-modify-private",
         cache_handler=cache_handler,
@@ -112,7 +132,9 @@ def spotify_playlists():
 
 @main_blueprint.route("/spotify/currently_playing")
 def currently_playing():
-    cache_handler = spotipy.cache_handler.CacheFileHandler(cache_path=get_path())
+    cache_handler = spotipy.cache_handler.CacheFileHandler(
+        cache_path=session_cache_path()
+    )
     auth_manager = spotipy.oauth2.SpotifyOAuth(
         scope="user-read-currently-playing playlist-modify-private",
         cache_handler=cache_handler,
@@ -133,7 +155,9 @@ def currently_playing():
 
 @main_blueprint.route("/spotify/current_user")
 def spotify_current_user():
-    cache_handler = spotipy.cache_handler.CacheFileHandler(cache_path=get_path())
+    cache_handler = spotipy.cache_handler.CacheFileHandler(
+        cache_path=session_cache_path()
+    )
     auth_manager = spotipy.oauth2.SpotifyOAuth(
         scope="user-read-currently-playing playlist-modify-private",
         cache_handler=cache_handler,
@@ -147,12 +171,3 @@ def spotify_current_user():
         return redirect("/spotify")
     spotify = spotipy.Spotify(auth_manager=auth_manager)
     return spotify.current_user()
-
-
-"""
-Following lines allow main_blueprintlication to be run more conveniently with
-`python main_blueprint.py` (Make sure you're using python3)
-(Also includes directive to leverage pythons threading capacity.)
-"""
-if __name__ == "__main__":
-    main_blueprint.run(threaded=True, port=int(os.environ.get("PORT", 9080)))
