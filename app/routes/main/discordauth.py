@@ -57,8 +57,8 @@ def getMe(access_token):  # this works
 
 @main_blueprint.route("/discord")
 def discord_auth():
-    # app.config["DISCORD_REDIRECT_URI"] = request.root_url+"discord/recieve"
-    # print(request.root_url+"discord/receive")
+    app.config["DISCORD_REDIRECT_URI"] = request.root_url + "discord/recieve"
+    print(request.root_url + "discord/receive")
     thediscord = DiscordOAuth2Session(app)
 
     return thediscord.create_session()
