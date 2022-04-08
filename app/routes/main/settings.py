@@ -72,7 +72,10 @@ def settings():
         user_info = [user_info["name"], user_info["picture"]]
     except:
         user_info = None
-
+    try:
+        canvas = session["canvas"]
+    except:
+        canvas = None
     return render_template(
         "user/settings.html",
         page="Nebulus - Account Settings",
@@ -83,4 +86,5 @@ def settings():
         schoology=the_schoology,
         classroom=the_google_classroom,
         googleclassroom=user_info,
+        canvas=canvas,
     )

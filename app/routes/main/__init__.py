@@ -26,3 +26,4 @@ from .spotify import *
 from .discordauth import *
 from .schoology import *
 from .gclassroom import *
+from .canvas import *
