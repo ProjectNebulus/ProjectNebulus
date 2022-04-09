@@ -13,12 +13,18 @@ import uuid
 # pip3 install git+https://github.com/plamere/spotipy
 SPOTIPY_CLIENT_ID = "846095b9ce934b0da3e0aaf3adbf600c"
 SPOTIPY_CLIENT_SECRET = "1d79c77cee124d8f8e20b16f720d65e8"
-SPOTIPY_REDIRECT_URI = "http://localhost:8080/spotify"
+# SPOTIPY_REDIRECT_URI = "http://localhost:8080/spotify"
 
 caches_folder = "./.spotify_caches/"
 if not os.path.exists(caches_folder):
     os.makedirs(caches_folder)
 
+
+def generate_redirect(url):
+    if "nebulus" in url:
+        if "https" not in url:
+            return url.replace("http", "https") + "spotify"
+    return url + "spotify"
 
 class FlaskSessionCacheHandler(CacheHandler):
     """
@@ -59,6 +65,7 @@ def spotify():
         session["uuid"] = str(uuid.uuid4())
 
     cache_handler = FlaskSessionCacheHandler(CacheHandler())
+    SPOTIPY_REDIRECT_URI = generate_redirect(request.root_url)
     auth_manager = spotipy.oauth2.SpotifyOAuth(
         scope="user-read-currently-playing playlist-modify-private",
         cache_handler=cache_handler,
@@ -96,6 +103,7 @@ def spotify_sign_out():
 @main_blueprint.route("/spotify/playlists")
 def spotify_playlists():
     cache_handler = FlaskSessionCacheHandler(CacheHandler())
+    SPOTIPY_REDIRECT_URI = generate_redirect(request.root_url)
     auth_manager = spotipy.oauth2.SpotifyOAuth(
         scope="user-read-currently-playing playlist-modify-private",
         cache_handler=cache_handler,
@@ -115,6 +123,7 @@ def spotify_playlists():
 @main_blueprint.route("/spotify/currently_playing")
 def currently_playing():
     cache_handler = FlaskSessionCacheHandler(CacheHandler)
+    SPOTIPY_REDIRECT_URI = generate_redirect(request.root_url)
     auth_manager = spotipy.oauth2.SpotifyOAuth(
         scope="user-read-currently-playing playlist-modify-private",
         cache_handler=cache_handler,
@@ -136,6 +145,7 @@ def currently_playing():
 @main_blueprint.route("/spotify/current_user")
 def spotify_current_user():
     cache_handler = FlaskSessionCacheHandler(CacheHandler)
+    SPOTIPY_REDIRECT_URI = generate_redirect(request.root_url)
     auth_manager = spotipy.oauth2.SpotifyOAuth(
         scope="user-read-currently-playing playlist-modify-private",
         cache_handler=cache_handler,

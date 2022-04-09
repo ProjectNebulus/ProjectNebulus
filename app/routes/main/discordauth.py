@@ -12,6 +12,11 @@ app.config["DISCORD_CLIENT_ID"] = 955153343020429343  # Discord client ID.
 app.config["DISCORD_CLIENT_SECRET"] = "6ApEyUtWUsp1SwuXlrRn3e_lNB6IqfSO"  # Discord client secret.
 app.config["DISCORD_REDIRECT_URI"] = "http://localhost:8080/discord/receive"
 
+def generate_redirect(url):
+    if "nebulus" in url:
+        if "https" not in url:
+            return url.replace("http", "https") + "discord/receive"
+    return url + "discord/receive"
 
 def exchange_code(code):
     data = {
@@ -57,8 +62,7 @@ def getMe(access_token):  # this works
 
 @main_blueprint.route("/discord")
 def discord_auth():
-    # app.config["DISCORD_REDIRECT_URI"] = request.root_url + "discord/recieve"
-    # print(request.root_url + "discord/receive")
+    app.config["DISCORD_REDIRECT_URI"] = generate_redirect(request.root_url)
     thediscord = DiscordOAuth2Session(app)
 
     return thediscord.create_session()
