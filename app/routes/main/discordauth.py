@@ -10,7 +10,7 @@ import json
 app = Flask(__name__)
 app.config["DISCORD_CLIENT_ID"] = 955153343020429343  # Discord client ID.
 app.config["DISCORD_CLIENT_SECRET"] = "6ApEyUtWUsp1SwuXlrRn3e_lNB6IqfSO"  # Discord client secret.
-app.config["DISCORD_REDIRECT_URI"] = "http://localhost:8080/discord/receive"
+app.config["DISCORD_REDIRECT_URI"] = "null"
 
 def generate_redirect(url):
     if "nebulus" in url:
@@ -18,13 +18,14 @@ def generate_redirect(url):
             return url.replace("http", "https") + "discord/receive"
     return url + "discord/receive"
 
-def exchange_code(code):
+
+def exchange_code(code, url):
     data = {
         'client_id': 955153343020429343,
         'client_secret': "6ApEyUtWUsp1SwuXlrRn3e_lNB6IqfSO",
         'grant_type': 'authorization_code',
         'code': code,
-        'redirect_uri': "http://localhost:8080/discord/receive"
+        'redirect_uri': generate_redirect(url)
     }
     headers = {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -75,7 +76,7 @@ def recieve():
         try:
             code = request.args["code"]
 
-            data = exchange_code(code)
+            data = exchange_code(code, request.root_url)
 
             access_token = data['access_token']
 
