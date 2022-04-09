@@ -7,11 +7,8 @@ def schoologyLogin(_id: str, schoology: dict):
     user = find_user(pk=_id)
     if not user:
         raise KeyError("User not found")
-    if user.schoology:
-        return "User already linked to Schoology"
     schoology = Schoology(**schoology)
-    print(vars(schoology))
-    user.update(set__schoology=schoology)
+    user.schoology.append(schoology)
 
 
 def spotifyLogin(_id: str, spotify: Spotify):

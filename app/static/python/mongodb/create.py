@@ -167,29 +167,29 @@ def createAvatar(data: dict) -> Avatar:
 
 def createDiscordConnection(user_id, data: dict) -> Discord:
     user = find_user(pk=user_id)
-    user.discord = Discord(**data)
+    user.discord.append(Discord(**data))
     user.save()
-    return user.discord
+    return user.discord[-1]
 
 
 def createCanvasConnection(user_id, data: dict) -> Canvas:
     user = find_user(pk=user_id)
-    user.canvas = Canvas(**data)
+    user.canvas.append(Canvas(**data))
     user.save()
-    return user.canvas
+    return user.canvas[-1]
 
 
-def createSpotifyConnection(user_id, data: dict) -> Spotify:
+def createSpotifyConnection(user_id: str, data: dict) -> Spotify:
     user = find_user(pk=user_id)
-    user.spotify = Spotify(**data)
+    user.spotify.append(Spotify(**data))
     user.save()
-    return user.spotify
+    return user.spotify[-1]
 
 
-def createGoogleClassroomConnection(user_id, data: dict) -> GoogleClassroom:
+def createGoogleClassroomConnection(user_id: str, data: dict) -> GoogleClassroom:
     user = find_user(pk=user_id)
-    user.google_classroom = GoogleClassroom(**data)
+    user.gclassroom.append(GoogleClassroom(**data))
     user.save()
-    return user.google_classroom
+    return user.gclassroom[-1]
 
 

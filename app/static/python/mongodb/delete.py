@@ -9,6 +9,12 @@ from ..classes.Events import Event
 from ..classes.Folder import Folder
 from ..classes.Grades import Grades
 from ..classes.User import User
+from ..classes.Spotify import Spotify
+from ..classes.Schoology import Schoology
+from ..classes.Discord import Discord
+from ..classes.Canvas import Canvas
+from ..classes.GoogleClassroom import GoogleClassroom
+
 from .read import find_user
 
 
@@ -94,12 +100,12 @@ def delete_grade(grade_id: int) -> None:
     grade.delete()
 
 
-def delete_schoology(user_id: int) -> None:
+def delete_schoology(user_id: int, schoology_object: Schoology) -> None:
     """
     Deletes a user from the database.
     """
     user = User.objects.get(pk=user_id)
-    user.schoology = None
+    user.schoology.remove(schoology_object)
     user.save()
 
 
@@ -117,14 +123,39 @@ def delete_avatar(user_id: int = None, course_id: int = None) -> None:
         course.save()
 
 
-def delete_avatar_size(user_id: int = None, course_id: int = None) -> None:
-    if not user_id and not course_id:
-        raise ValueError("Must provide either a user_id or a course_id")
-    if user_id:
-        user = User.objects.get(pk=user_id)
-        user.avatar.avatar_size = None
-        user.save()
-    else:
-        course = Course.objects.get(pk=course_id)
-        course.image.avatar_size = None
-        course.save()
+def delete_discord_connection(user_id: int, discord_object: Discord) -> None:
+    """
+    Deletes a discord connection object  from the database.
+    """
+    user = User.objects.get(pk=user_id)
+    user.discord = None
+    user.save()
+
+
+def delete_canvas_connection(user_id: int, canvas_object: Canvas) -> None:
+    """
+    Deletes a canvas connection object  from the database.
+    """
+    user = User.objects.get(pk=user_id)
+    user.canvas.remove(canvas_object)
+    user.save()
+
+
+def delete_google_classroom_connection(user_id: int, google_classroom_object: GoogleClassroom) -> None:
+    """
+    Deletes a Google Classroom connection object  from the database.
+    """
+    user = User.objects.get(pk=user_id)
+    user.gclassroom.remove(google_classroom_object)
+    user.save()
+
+
+def delete_spotify_connection(user_id: int, spotify_object: Spotify) -> None:
+    """
+    Deletes a Spotify connection object  from the database.
+    """
+    user = User.objects.get(pk=user_id)
+    user.spotify.remove(spotify_object)
+    user.save()
+
+
