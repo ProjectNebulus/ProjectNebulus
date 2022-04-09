@@ -8,6 +8,8 @@ from .Avatar import Avatar
 from .Schoology import Schoology
 from .GoogleClassroom import GoogleClassroom
 from .Spotify import Spotify
+from .Discord import Discord
+from .Canvas import Canvas
 from .Snowflake import Snowflake
 
 
@@ -34,8 +36,6 @@ class User(Snowflake):
         - premium_expiration: datetime - The date of expiration of the premium subscription - Default: None
         - status: str - The status of the user - Default: None
         - schoology: Schoology - The user's schoology account information - Default: None
-        - schoology: Schoology - The user's schoology account information - Default: None
-        - schoology: Schoology - The user's schoology account information - Default: None
     """
 
     meta = {"collection": "Accounts"}
@@ -50,6 +50,8 @@ class User(Snowflake):
     schoology = EmbeddedDocumentField(Schoology, default=None, null=True)
     gclassroom = EmbeddedDocumentField(GoogleClassroom, default=None, null=True)
     spotify = EmbeddedDocumentField(Spotify, default=None, null=True)
+    discord = EmbeddedDocumentField(Discord, default=None, null=True)
+    canvas = EmbeddedDocumentField(Canvas, default=None, null=True)
     avatar = EmbeddedDocumentField(Avatar, default=None, null=True)
     bio = StringField(default="", null=True)
     premium_expiration = DateTimeField(required=False, default=None, null=True)

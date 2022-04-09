@@ -20,6 +20,10 @@ from ..classes.Grades import Grades
 from ..classes.User import User
 from ..classes.Avatar import Avatar
 from ..classes.Textbook import Textbook
+from ..classes.Discord import Discord
+from ..classes.Canvas import Canvas
+from ..classes.Spotify import Spotify
+from ..classes.GoogleClassroom import GoogleClassroom
 from .read import find_user
 
 
@@ -159,4 +163,33 @@ def createAvatar(data: dict) -> Avatar:
     parent.avatar = avatar
     parent.save()
     return avatar
+
+
+def createDiscordConnection(user_id, data: dict) -> Discord:
+    user = find_user(pk=user_id)
+    user.discord = Discord(**data)
+    user.save()
+    return user.discord
+
+
+def createCanvasConnection(user_id, data: dict) -> Canvas:
+    user = find_user(pk=user_id)
+    user.canvas = Canvas(**data)
+    user.save()
+    return user.canvas
+
+
+def createSpotifyConnection(user_id, data: dict) -> Spotify:
+    user = find_user(pk=user_id)
+    user.spotify = Spotify(**data)
+    user.save()
+    return user.spotify
+
+
+def createGoogleClassroomConnection(user_id, data: dict) -> GoogleClassroom:
+    user = find_user(pk=user_id)
+    user.google_classroom = GoogleClassroom(**data)
+    user.save()
+    return user.google_classroom
+
 
