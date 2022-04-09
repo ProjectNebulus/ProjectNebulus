@@ -83,7 +83,7 @@ def find_document(**kwargs) -> Document | None:
     return document
 
 
-def getSchoology(**kwargs) -> Schoology:
+def getSchoology(**kwargs) -> List[Schoology]:
     try:
         return find_user(**kwargs).schoology
     except KeyError:
