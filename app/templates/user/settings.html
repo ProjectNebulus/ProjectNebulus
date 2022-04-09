@@ -7,7 +7,7 @@
         display: none;
     }
 </style>
-<body>
+<body style="overflow: hidden;">
 <script src="/static/js/settings.js"></script>
 <div id="account" style="overflow-y: scroll; height:100%; float:left; margin-left: 8%; font-size: 1.2em; width:80%;">
     <h1 class="text-5xl text-black dark:text-white">{{session.get('username')}}'s Nebulus Account</h1><br>
@@ -278,68 +278,141 @@
 
     {% endif %}
     {% if spotify %}
-    <a href="#"
-       class="block p-6 w-1/2 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Spotify Account
-            Connected</h5>
-        <p class="font-normal text-gray-700 dark:text-gray-400">{{spotify["display_name"]}}</p>
-        <p href="/spotify/sign_out"
-           class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            Disconnect Spotify
-            <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
-                 xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                      clip-rule="evenodd"></path>
-            </svg>
-        </p>
-    </a>
+    <div>
+        <a
+                class="block p-6 w-1/2 bg-white rounded-t-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+            <div>
+                <div style="float:left;margin-right:15px;">
+                    <img src="/static/images/logos/spotify.png" style="width:30px;height:30px;overflow:hidden;">
+                </div>
+                <div style="float:left;">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                        {{spotify["display_name"]}}</h5>
+                    <p class="font-normal text-gray-700 dark:text-gray-400">Spotify</p>
+                </div>
+            </div>
+            <br><br>
+        </a>
+        <a
+                class="block p-6 w-1/2 bg-white rounded-b-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-700 dark:border-gray-700 dark:hover:bg-gray-700">
+            <p href="/spotify/sign_out"
+               class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Disconnect Spotify
+                <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                          d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                          clip-rule="evenodd"></path>
+                </svg>
+            </p>
+            <br><br>
+            <label for="toggle-example-checked" class="flex relative items-center mb-4 cursor-pointer">
+                <input type="checkbox" id="toggle-example-checked" class="sr-only" checked>
+                <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
+                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Show in Profile</span>
+            </label>
+            <label for="toggle-example-checked1" class="flex relative items-center mb-4 cursor-pointer">
+                <input type="checkbox" id="toggle-example-checked1" class="sr-only" checked>
+                <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
+                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Use in Courses</span>
+            </label>
+        </a>
+    </div>
+    <br>
 
     {% endif %}
     <br>
     {% if googleclassroom %}
-    <a href="#"
-       class="block p-6 w-1/2 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Google Classroom Account
-            Connected</h5>
-        <p class="font-normal text-gray-700 dark:text-gray-400"><img style="display: inline-block;"
-                                                                     src="{{googleclassroom[1]}}"
-                                                                     class="w-10 h-10 rounded-full">{{googleclassroom[0]}}
-        </p>
-        <p href="/gclassroom/clear"
-           class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            Disconnect Google Classroom
-            <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
-                 xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                      clip-rule="evenodd"></path>
-            </svg>
-        </p>
-    </a>
+    <div>
+        <a
+                class="block p-6 w-1/2 bg-white rounded-t-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+            <div>
+                <div style="float:left;margin-right:15px;">
+                    <img src="/static/images/logos/classroom.png" style="width:30px;height:30px;overflow:hidden;">
+                </div>
+                <div style="float:left;">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><img
+                            style="display: inline-block;"
+                            src="{{googleclassroom[1]}}"
+                            class="w-10 h-10 rounded-full">{{googleclassroom[0]}}</h5>
+                    <p class="font-normal text-gray-700 dark:text-gray-400">Classroom</p>
+                </div>
+            </div>
+            <br><br>
+        </a>
+        <a
+                class="block p-6 w-1/2 bg-white rounded-b-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-700 dark:border-gray-700 dark:hover:bg-gray-700">
+            <p href="/gclassroom/clear"
+               class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Disconnect Google Classroom
+                <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                          d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                          clip-rule="evenodd"></path>
+                </svg>
+            </p>
+            <br><br>
+            <label for="toggle-example-checked" class="flex relative items-center mb-4 cursor-pointer">
+                <input type="checkbox" id="toggle-example-checked" class="sr-only" checked>
+                <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
+                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Show in Profile</span>
+            </label>
+            <label for="toggle-example-checked1" class="flex relative items-center mb-4 cursor-pointer">
+                <input type="checkbox" id="toggle-example-checked1" class="sr-only" checked>
+                <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
+                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Use in Courses</span>
+            </label>
+        </a>
+    </div>
+
 
     <br>
     {% endif %}
     {% if discord %}
-    <a href="#"
-       class="block p-6 w-1/2 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Discord Account
-            Connected</h5>
-        <p class="font-normal text-gray-700 dark:text-gray-400"><img style="display: inline-block;"
-                                                                     src="{{discord[1]}}"
-                                                                     class="w-10 h-10 rounded-full">{{discord[0]}}
-        </p>
-        <p href="/discord/clear"
-           class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            Disconnect Discord
-            <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
-                 xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                      clip-rule="evenodd"></path>
-            </svg>
-        </p>
-    </a>
+    <div>
+        <a
+                class="block p-6 w-1/2 bg-white rounded-t-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+            <div>
+                <div style="float:left;margin-right:15px;">
+                    <img src="/static/images/logos/discord.png" style="width:30px;height:30px;overflow:hidden;">
+                </div>
+                <div style="float:left;">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><img
+                            style="display: inline-block;"
+                            src="{{discord[1]}}"
+                            class="w-10 h-10 rounded-full">{{discord[0]}}</h5>
+                    <p class="font-normal text-gray-700 dark:text-gray-400">Discord</p>
+                </div>
+            </div>
+            <br><br>
+        </a>
+        <a
+                class="block p-6 w-1/2 bg-white rounded-b-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-700 dark:border-gray-700 dark:hover:bg-gray-700">
+            <p href="/discord/clear"
+               class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Disconnect Discord
+                <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                          d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                          clip-rule="evenodd"></path>
+                </svg>
+            </p>
+            <br><br>
+            <label for="toggle-example-checked" class="flex relative items-center mb-4 cursor-pointer">
+                <input type="checkbox" id="toggle-example-checked" class="sr-only" checked>
+                <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
+                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Show in Profile</span>
+            </label>
+            <label for="toggle-example-checked1" class="flex relative items-center mb-4 cursor-pointer">
+                <input type="checkbox" id="toggle-example-checked1" class="sr-only" checked>
+                <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
+                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Use in Courses</span>
+            </label>
+        </a>
+    </div>
+
 
     <br>
     {% endif %}
