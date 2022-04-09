@@ -1,7 +1,7 @@
 import flask_discord
 from flask_discord import DiscordOAuth2Session, requires_authorization, Unauthorized
 from flask import current_app
-from flask import Flask, request, redirect
+from flask import Flask, request, redirect, session
 import discord
 import requests
 from . import main_blueprint
@@ -15,16 +15,16 @@ app.config["DISCORD_REDIRECT_URI"] = "http://localhost:8080/discord/receive"
 
 def exchange_code(code):
     data = {
-        'client_id': 826815572472758333,
-        'client_secret': "UmFqaDEbgPdtLAjw_ObAbqNWuNquIZTv",
+        'client_id': 955153343020429343,
+        'client_secret': "6ApEyUtWUsp1SwuXlrRn3e_lNB6IqfSO",
         'grant_type': 'authorization_code',
         'code': code,
-        'redirect_uri': "https://camphalfblooddiscord.ga/recieve"
+        'redirect_uri': "http://localhost:8080/discord/receive"
     }
     headers = {
         'Content-Type': 'application/x-www-form-urlencoded'
     }
-    r = requests.post('https://discord.com/api/v8/oauth2/token', data=data, headers=headers)
+    r = requests.post('https://discord.com/api/v8/oauth2/token', data=data, headers=headers, verify=False)
     # r.raise_for_status()
     return r.json()
 
@@ -57,8 +57,8 @@ def getMe(access_token):  # this works
 
 @main_blueprint.route("/discord")
 def discord_auth():
-    app.config["DISCORD_REDIRECT_URI"] = request.root_url + "discord/recieve"
-    print(request.root_url + "discord/receive")
+    # app.config["DISCORD_REDIRECT_URI"] = request.root_url + "discord/recieve"
+    # print(request.root_url + "discord/receive")
     thediscord = DiscordOAuth2Session(app)
 
     return thediscord.create_session()
@@ -82,7 +82,12 @@ def recieve():
             user = f"{data['username']}#{data['discriminator']}"
 
             data = [user, int(data['id']), avatar_link]
-            return data
+            session["discord_code"] = code
+            session["discord_access_token"] = access_token
+            session["discord_avatar"] = avatar_link
+            session["discord_user"] = user
+            session["discord_id"] = data[1]
+            return str(data)
 
 
 

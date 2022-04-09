@@ -51,20 +51,6 @@ class FlaskSessionCacheHandler(CacheHandler):
             print("Error saving token to cache: " + str(e))
 
 
-def session_cache_path():
-    return caches_folder + session.get("uuid")
-
-
-def cache_to_session():
-    file = caches_folder + session.get("uuid")
-    data = open(file, "r").readlines()[0]
-    session["spotify"] = str(data)
-
-
-def session_to_cache():
-    return (session["spotify"])
-
-
 @main_blueprint.route("/spotify")
 @logged_in
 def spotify():
@@ -72,9 +58,7 @@ def spotify():
         # Step 1. Visitor is unknown, give random ID
         session["uuid"] = str(uuid.uuid4())
 
-    cache_handler = spotipy.cache_handler.CacheFileHandler(
-        cache_path=session_cache_path()
-    )
+    cache_handler = FlaskSessionCacheHandler(CacheHandler())
     auth_manager = spotipy.oauth2.SpotifyOAuth(
         scope="user-read-currently-playing playlist-modify-private",
         cache_handler=cache_handler,
@@ -102,7 +86,7 @@ def spotify():
 def spotify_sign_out():
     try:
         # Remove the CACHE file (.cache-test) so that a new user can authorize.
-        os.remove(session_cache_path())
+        session.pop("token_info")
         session.pop("uuid")
     except OSError as e:
         print("Error: %s - %s." % (e.filename, e.strerror))
@@ -111,9 +95,7 @@ def spotify_sign_out():
 
 @main_blueprint.route("/spotify/playlists")
 def spotify_playlists():
-    cache_handler = spotipy.cache_handler.CacheFileHandler(
-        cache_path=session_cache_path()
-    )
+    cache_handler = FlaskSessionCacheHandler(CacheHandler())
     auth_manager = spotipy.oauth2.SpotifyOAuth(
         scope="user-read-currently-playing playlist-modify-private",
         cache_handler=cache_handler,
@@ -132,9 +114,7 @@ def spotify_playlists():
 
 @main_blueprint.route("/spotify/currently_playing")
 def currently_playing():
-    cache_handler = spotipy.cache_handler.CacheFileHandler(
-        cache_path=session_cache_path()
-    )
+    cache_handler = FlaskSessionCacheHandler(CacheHandler)
     auth_manager = spotipy.oauth2.SpotifyOAuth(
         scope="user-read-currently-playing playlist-modify-private",
         cache_handler=cache_handler,
@@ -155,9 +135,7 @@ def currently_playing():
 
 @main_blueprint.route("/spotify/current_user")
 def spotify_current_user():
-    cache_handler = spotipy.cache_handler.CacheFileHandler(
-        cache_path=session_cache_path()
-    )
+    cache_handler = FlaskSessionCacheHandler(CacheHandler)
     auth_manager = spotipy.oauth2.SpotifyOAuth(
         scope="user-read-currently-playing playlist-modify-private",
         cache_handler=cache_handler,

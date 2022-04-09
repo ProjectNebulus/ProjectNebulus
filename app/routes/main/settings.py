@@ -9,6 +9,7 @@ from . import main_blueprint
 from .utils import logged_in
 from ...static.python.mongodb import read
 from ...static.python.gclassroomcom import *
+from .spotify import *
 
 # -*- coding: utf-8 -*-
 
@@ -76,6 +77,26 @@ def settings():
         canvas = session["canvas"]
     except:
         canvas = None
+    cache_handler = FlaskSessionCacheHandler(CacheHandler)
+    spotify_auth_manager = spotipy.oauth2.SpotifyOAuth(
+        scope="user-read-currently-playing playlist-modify-private",
+        cache_handler=cache_handler,
+        show_dialog=True,
+        client_id=SPOTIPY_CLIENT_ID,
+        client_secret=SPOTIPY_CLIENT_SECRET,
+        redirect_uri=SPOTIPY_REDIRECT_URI,
+    )
+    spotify = spotipy.Spotify(auth_manager=spotify_auth_manager)
+
+    if not spotify_auth_manager.validate_token(cache_handler.get_cached_token()):
+        spotify = None
+    else:
+        spotify = spotify.current_user()
+    try:
+        discord = [session["discord_user"], session["discord_avatar"]]
+    except:
+        discord = None
+
     return render_template(
         "user/settings.html",
         page="Nebulus - Account Settings",
@@ -87,4 +108,6 @@ def settings():
         classroom=the_google_classroom,
         googleclassroom=user_info,
         canvas=canvas,
+        spotify=spotify,
+        discord=discord,
     )
