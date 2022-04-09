@@ -111,11 +111,10 @@
                 document.body.style.background = "#111926";
 
             document.getElementsByTagName('html')[0].setAttribute('class', 'dark');
+            document.getElementById("homeBanner").style.filter = "invert(0)";
         } else {
-            if (window.location.href.endsWith("/"))
-                document.body.style.backgroundImage = "url(\"/static/images/lightwallpaper.png\")";
-            else
-                document.body.style.background = "white";
+            document.body.style.background = "white";
+            document.getElementById("homeBanner").style.filter = "invert(1)";
         }
 
 
