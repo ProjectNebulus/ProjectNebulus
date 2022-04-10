@@ -97,7 +97,27 @@
         <h3 class="flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white">
             Import from Schoology
             <span class="close"></span>
+
         </h3>
+        {% if schoologycoursess|length == 0 %}
+        <h1 class="text-black dark:text-white text-3xl">We coudn't find any courses! Maybe try linking Schoology account
+            in <a href="/settings">Settings</a>!</h1>
+        {% else %}
+        <h1 class="text-black dark:text-white text-3xl">Select a Schoology Course</h1>
+        {% endif %}
+
+        {% for i in schoologycourses %}
+        <button type="button"
+                class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+            {{i}}
+            <svg style="display:inline-block;" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+            </svg>
+        </button>
+        <br><br>
+        {% endfor %}
     </div>
     <div class="CoursePage">
         <h3 class="flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white">
@@ -129,6 +149,25 @@
             Import from Canvas
             <span class="close"></span>
         </h3>
+        {% if canvascourses|length == 0 %}
+        <h1 class="text-black dark:text-white text-3xl">We coudn't find any courses! Maybe try linking Canvas account in
+            <a href="/settings">Settings</a>!</h1>
+        {% else %}
+        <h1 class="text-black dark:text-white text-3xl">Select a Canvas Course</h1>
+        {% endif %}
+
+        {% for i in canvascourses %}
+        <button type="button"
+                class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+            {{i}}
+            <svg style="display:inline-block;" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+            </svg>
+        </button>
+        <br><br>
+        {% endfor %}
     </div>
 </div>
 

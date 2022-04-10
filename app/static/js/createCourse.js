@@ -291,7 +291,7 @@ function importGClassroom() {
 
 function importCanvas() {
     screens[2].style.display = 'none';
-    screens[4].style.display = 'block';
+    screens[5].style.display = 'block';
 }
 
 function importSchoology() {

@@ -7,7 +7,7 @@ from .....static.python.mongodb import read
 @internal.route("/signin-with-schoology", methods=["POST"])
 def signin_with_schoology():
     session["token"] = None
-
+    session["Schoologydomain"] = request.form.get("link")  # auth.domain
     key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
     secret = "59ccaaeb93ba02570b1281e1b0a90e18"
     sc = schoolopy.Schoology(schoolopy.Auth(key, secret))
@@ -42,5 +42,11 @@ def signin_with_schoology():
     session["id"] = user.pk
     session["username"] = user.username
     session["email"] = user.email
+    session["Schoologydomain"] = request.form.get("link")  # auth.domain
+    # session["Schoologykey"] = key
+    # session["Schoologyrequesttoken"] = auth.request_token
+    # session["Schoologyaccesstoken"] = auth.access_token
+    # session["Schoologyrequesttokensecret"] = auth.request_token_secret
+    # session["Schoologyaccesstokensecret"] = auth.access_token_secret
 
     return str(sc.get_me().name_display + "•" + sc.get_me().primary_email)

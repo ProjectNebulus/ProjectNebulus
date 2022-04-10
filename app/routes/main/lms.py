@@ -63,6 +63,59 @@ def lms():
         gcourses = getGclassroomcourses()
     except:
         gcourses = []
+
+    canvascourses = []
+    try:
+        from canvasapi import Canvas
+        API_URL = session["canvas_link"]
+        API_KEY = session["canvas_key"]
+        canvas = Canvas(API_URL, API_KEY)
+        account = canvas.get_user(user="self")
+        courses = account.get_courses()
+        for course in courses:
+            canvascourses.append(course.name)
+    except:
+        canvascourses = []
+
+    schoologycourses = []
+    import schoolopy
+    try:
+        request_token = session["request_token"]
+        request_token_secret = session["request_token_secret"]
+        access_token_secret = session["access_token_secret"]
+        access_token = session["access_token"]
+        key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
+        secret = "59ccaaeb93ba02570b1281e1b0a90e18"
+        link = session["Schoologydomain"]
+        auth = schoolopy.Auth(
+            key,
+            secret,
+            domain=link,
+            three_legged=True,
+            request_token=request_token,
+            request_token_secret=request_token_secret,
+            access_token=access_token,
+            access_token_secret=access_token_secret,
+        )
+        # auth.authorize()
+        # if not auth.authorized:
+        #     schoologycourses = []
+        #     print("Not Authorized")
+        # else:
+        auth.authorize()
+        auth.authorize()
+        auth.authorized = True
+        sc = schoolopy.Schoology(auth)
+        print(sc.get_sections())
+        schoologycourses = list(sc.get_sections())
+    except:
+        try:
+            sc = session["theschoology"]
+            print(sc.get_sections())
+            schoologycourses = list(sc.get_sections())
+        except:
+            schoologycourses = []
+
     return render_template(
         "lms.html",
         password=session["password"],
@@ -75,4 +128,6 @@ def lms():
         announcements=sorted[0][0],
         events=sorted[1][0],
         gcourses=gcourses,
+        canvascourses=canvascourses,
+        schoologycourses=schoologycourses
     )
