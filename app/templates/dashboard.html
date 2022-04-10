@@ -82,12 +82,14 @@
                             >
                             <span class="text-blue-500 dark:text-blue-400">{{announcement.imported_from}}</span></h1></span>
 
-                        <p style="width:95%; overflow-wrap: break-word !important; white-space: pre-wrap;white-space: -moz-pre-wrap; /* Mozilla, since 1999 */ white-space: -pre-wrap; /* Opera 4-6 */ white-space: -o-pre-wrap; /* Opera 7 */ word-wrap: break-word; /* Internet Explorer 5.5+ */"
-                           class="text-black dark:text-white text-xl overflow-ellipsis"><span
-                                {% set announcement_data=announcement.date | string() %}
-                                class="text-gray-600 dark:text-gray-400 text-xl">{{ announcement_data.split()[0]}}</span>
-                            <i class="material-icons">arrow_forward_ios</i>
-                            <span style="float:left;">{{announcement.content[0:30]}}...</span></p>
+                        <p style="width:95%;"
+                           class="text-black dark:text-white text-xl overflow-ellipsis">
+                            {% set announcement_data=announcement.date | string() %}
+                            <span
+                                    style="float:left;display:inline-block;"
+                                    class="text-gray-600 dark:text-gray-400 text-xl">{{ announcement_data.split()[0]}}</span>
+                            <i style="float:left;display:inline-block;" class="material-icons">arrow_forward_ios</i>
+                            <span style="float:left;display:inline-block;">{{announcement.content}}</span></p>
                         <hr style="margin-top:10px;margin-bottom:10px; color:white;">
 
                 </tr>

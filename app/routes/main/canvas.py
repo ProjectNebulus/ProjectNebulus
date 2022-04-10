@@ -20,4 +20,6 @@ def canvasConnect2():
     a = connectCanvas(request.form.get("link"), request.form.get("key"))
     if a != False:
         session["canvas"] = str(a)
+        session["canvas_key"] = request.form.get("key")
+        session["canvas_link"] = request.form.get("link")
     return "<script>window.close();</script>"
