@@ -125,8 +125,8 @@ def lms():
         read=read,
         page="Nebulus - Learning",
         new_account=new_user == "true",
-        announcements=sorted[0][0],
-        events=sorted[1][0],
+        announcements=sorted[0],
+        events=sorted[1],
         gcourses=gcourses,
         canvascourses=canvascourses,
         schoologycourses=schoologycourses

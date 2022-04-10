@@ -160,9 +160,10 @@ def get_folders(parent_id: int = None, course_id: int = None) -> List[Folder]:
 
 
 def sortByDate(obj):
-    if obj._cls == "Event":
-        return obj.date
-    return obj.due
+    return obj.date.date() if obj._cls == "Event" else obj.due.date()
+
+def sortByDateTime(obj):
+    return obj.date if obj._cls == "Event" else obj.due
 
 
 def sort_user_events(user_id: str) -> List[List]:
@@ -171,16 +172,34 @@ def sort_user_events(user_id: str) -> List[List]:
     announcements = Announcement.objects(course__in=courses)
     assignments = Assignment.objects(course__in=courses)
     assessments = Assessment.objects(course__in=courses)
+    from itertools import chain, groupby
+
+    events_assessments_assignments = list(chain(events, assignments, assessments))
+    sorted_events = sorted(events_assessments_assignments, key=lambda obj: sortByDateTime(obj))
+    dates ={key: list(result) for key, result in groupby(
+        sorted_events, key=lambda obj: sortByDate(obj))}
+
+    print(dates)
+
+
+
+
+
+    return [announcements, dates]
+
+
+    # events_assessments_assignments = events | assignments | assessments
+
+def unsorted_user_events(user_id: str) -> List[List]:
+    courses = get_user_courses(user_id)
+    events = Event.objects(course__in=courses)
+    announcements = Announcement.objects(course__in=courses)
+    assignments = Assignment.objects(course__in=courses)
+    assessments = Assessment.objects(course__in=courses)
     from itertools import chain
 
     events_assessments_assignments = list(chain(events, assignments, assessments))
-    # events_assessments_assignments = events | assignments | assessments
-    events_assessments_assignments = sorted(
-        events_assessments_assignments, key=sortByDate
-    )
-    announcements = sorted(announcements, key=lambda x: x.date, reverse=True)
-
-    return [[announcements], [events_assessments_assignments]]
+    return [announcements, sorted(events_assessments_assignments, key=lambda obj: sortByDateTime(obj))]
 
 
 def check_signup_user(username) -> str:
