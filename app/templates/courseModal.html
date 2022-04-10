@@ -99,25 +99,25 @@
             <span class="close"></span>
 
         </h3>
-        {% if schoologycoursess|length == 0 %}
-        <h1 class="text-black dark:text-white text-3xl">We coudn't find any courses! Maybe try linking Schoology account
-            in <a href="/settings">Settings</a>!</h1>
-        {% else %}
-        <h1 class="text-black dark:text-white text-3xl">Select a Schoology Course</h1>
-        {% endif %}
+        <p>Schoology's API endpoint to get User Courses is currently broken. Thus, you will have to enter your course
+            id. </p>
+        <form id="schoology-create-course">
+            <div class="mb-6">
+                <label for="course-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Course
+                    Schoology Course ID</label>
+                <input type=text" id="schoology-course-id"
+                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                       placeholder="Course ID" required>
+            </div>
+            <br>
 
-        {% for i in schoologycourses %}
-        <button type="button"
-                class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-            {{i}}
-            <svg style="display:inline-block;" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                 xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-            </svg>
-        </button>
-        <br><br>
-        {% endfor %}
+            <button type="submit" type="button"
+                    class="text-createSelectButtonwhite bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                Next Step ->
+            </button>
+
+            <p style="color:yellowgreen;font-size:1.5vw;font-weight:700;" id="create-course-status"></p>
+        </form>
     </div>
     <div class="CoursePage">
         <h3 class="flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white">

@@ -52,5 +52,7 @@ def connect_schoology():
     }
 
     update.schoologyLogin(session["id"], schoology)
-    print(sc.get_sections(course_id=None))
+    # print(sc.get_sections())
+    # print(sc.get_courses())
+    # schoology doesn't provide data for these
     return str(sc.get_me().name_display + "•" + sc.get_me().primary_email)
