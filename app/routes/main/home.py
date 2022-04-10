@@ -26,6 +26,16 @@ def arcstuff():
     return redirect("https://arc.io/arc-sw.js")
 
 
+@main_blueprint.route("/privacy-policy")
+def pp():
+    return redirect("https://privacypolicy.nebuluslms.repl.co/")
+
+
+@main_blueprint.route("/terms-of-service")
+def tos():
+    return redirect("https://docs.google.com/document/d/1XjNHjBRS2xJWKObo_zuQ2oPVSKQ8EK8Y_o8e77VPZf4/edit")
+
+
 @main_blueprint.app_errorhandler(404)
 @main_blueprint.app_errorhandler(400)
 def page_not_found(e):
