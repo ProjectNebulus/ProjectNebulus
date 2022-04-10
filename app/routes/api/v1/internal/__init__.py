@@ -26,6 +26,7 @@ from .signup_post import *
 from .spotify_status import *
 from .signin_with_schoology import *
 from .create_announcement import *
+from .create_assignment import *
 from .file_upload import *
 from .file_upload_link import *
 from .upload_document import *

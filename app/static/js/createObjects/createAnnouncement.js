@@ -11,7 +11,7 @@ function createAnnouncement(){
         data: JSON.stringify(announcement),
         dataType: "json",
         contentType: "application/json",
-        success: function(data){
+        done: function(data){
             alert('Successfully created announcement');
         },
         error: function(error){
