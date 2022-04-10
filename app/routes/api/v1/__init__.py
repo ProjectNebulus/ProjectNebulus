@@ -8,7 +8,6 @@ v1 = flask.Blueprint(
     static_folder="static",
     template_folder="templates",
 )
-print(v1.url_prefix)
 api_blueprint.register_blueprint(v1)
 
 from . import internal
