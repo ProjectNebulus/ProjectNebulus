@@ -1,4 +1,4 @@
-from flask import render_template, session, request
+from flask import render_template, session, request, redirect
 
 from . import main_blueprint
 from .utils import logged_in
@@ -48,11 +48,12 @@ SCOPES = [
 API_SERVICE_NAME = 'classroom'
 API_VERSION = 'v1'
 
-app = flask.Flask(__name__)
-# Note: A secret key is included in the sample so that it works.
-# If you use this code in your application, replace this with a truly secret
-# key. See https://flask.palletsprojects.com/quickstart/#sessions.
-app.secret_key = 'REPLACE ME - this value is here as a placeholder.'
+
+# app = flask.Flask(__name__)
+# # Note: A secret key is included in the sample so that it works.
+# # If you use this code in your application, replace this with a truly secret
+# # key. See https://flask.palletsprojects.com/quickstart/#sessions.
+# app.secret_key = 'REPLACE ME - this value is here as a placeholder.'
 
 
 @main_blueprint.route('/gclassroom')
@@ -77,8 +78,16 @@ def test_api_request():
         flask.session['credentials'] = credentials_to_dict(credentials)
     except:  # TokenExpired
         return flask.redirect('/gclassroom/authorize')
-
-    return flask.jsonify(courses)
+    credentials = google.oauth2.credentials.Credentials(
+        **flask.session['credentials'])
+    user_info_service = build(
+        serviceName='oauth2', version='v2', credentials=credentials)
+    user_info = None
+    user_info = user_info_service.userinfo().get().execute()
+    print(user_info)
+    user_info = [user_info["name"], user_info["picture"]]
+    return render_template("connectClassroom.html", data=user_info)
+    # return flask.jsonify(courses)
 
 
 @main_blueprint.route('/gclassroom/authorize')
@@ -105,9 +114,9 @@ def authorize():
         include_granted_scopes='true')
 
     # Store the state so the callback can verify the auth server response.
-    flask.session['state'] = state
+    session['state'] = state
 
-    return flask.redirect(authorization_url)
+    return redirect(authorization_url)
 
 
 @main_blueprint.route('/gclassroom/oauth2callback')
@@ -119,12 +128,8 @@ def oauth2callback():
 
     flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
         CLIENT_SECRETS_FILE, scopes=SCOPES, state=state)
-    if "local" not in request.root_url:
-        flow.redirect_uri = request.root_url.replace('http', 'https') + "gclassroom/oauth2callback"
-    else:
-        flow.redirect_uri = request.root_url + "gclassroom/oauth2callback"
-    print(request.root_url.replace('http', 'https') + "gclassroom/oauth2callback")
-
+    # flow.redirect_uri = flask.url_for('gclassroom/oauth2callback', _external=True)
+    flow.redirect_uri = flask.url_for('main_blueprint.oauth2callback', _external=True)
     # Use the authorization server's response to fetch the OAuth 2.0 tokens.
     authorization_response = flask.request.url
     flow.fetch_token(authorization_response=authorization_response)
@@ -135,11 +140,7 @@ def oauth2callback():
     credentials = flow.credentials
     flask.session['credentials'] = credentials_to_dict(credentials)
 
-    if "local" not in request.root_url:
-        finalurl = request.root_url.replace('http', 'https') + "gclassroom"
-    else:
-        finalurl = request.root_url + "gclassroom/oauth2callback"
-    return flask.redirect(finalurl)
+    return flask.redirect(flask.url_for('gclassroom'))
 
 
 @main_blueprint.route('/gclassroom/revoke')
@@ -158,9 +159,9 @@ def revoke():
 
     status_code = getattr(revoke, 'status_code')
     if status_code == 200:
-        return ('Credentials successfully revoked.' + print_index_table())
+        return redirect("/settings")
     else:
-        return ('An error occurred.' + print_index_table())
+        return redirect("/settings")
 
 
 @main_blueprint.route('/gclassroom/clear')

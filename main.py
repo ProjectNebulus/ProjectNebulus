@@ -4,13 +4,11 @@ App entrypoint.
 import os
 
 from waitress import serve
-
 from app.routes import init_app
 from app.static.python.cdn.utils import upload_file
 
 
 app = init_app()
-print(app.url_map)
 app.secret_key = os.getenv("MONGOPASS")
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 

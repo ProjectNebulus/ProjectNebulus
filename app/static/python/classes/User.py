@@ -43,8 +43,8 @@ class User(Snowflake):
     password = StringField(required=True)
     email = EmailField(required=True)
     age = DateTimeField(required=True)
-    theme = StringField(required=True, default="system")
-    language = StringField(required=True, default="english")
+    theme = StringField(required=True, default="System Default")
+    language = StringField(required=True, default="English (United States)")
     created_at = DateTimeField(default=datetime.now())
     # optional params
     schoology = ListField(EmbeddedDocumentField(Schoology, default=None, null=True))

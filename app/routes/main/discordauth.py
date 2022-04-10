@@ -1,7 +1,7 @@
 import flask_discord
 from flask_discord import DiscordOAuth2Session, requires_authorization, Unauthorized
 from flask import current_app
-from flask import Flask, request, redirect, session
+from flask import Flask, request, redirect, session, render_template
 import discord
 import requests
 from . import main_blueprint
@@ -92,7 +92,7 @@ def recieve():
             session["discord_avatar"] = avatar_link
             session["discord_user"] = user
             session["discord_id"] = data[1]
-            return str(data)
+            return render_template("connectDiscord.html", data=data)
 
 
 

@@ -1,4 +1,4 @@
-from flask import render_template, session, request
+from flask import render_template, session, request, redirect
 
 from . import main_blueprint
 from .utils import logged_in
@@ -22,4 +22,6 @@ def canvasConnect2():
         session["canvas"] = str(a)
         session["canvas_key"] = request.form.get("key")
         session["canvas_link"] = request.form.get("link")
-    return "<script>window.close();</script>"
+    else:
+        return redirect("/canvas")
+    return render_template("connectCanvas.html", done=str(a))

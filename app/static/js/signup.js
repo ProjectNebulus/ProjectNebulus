@@ -4,6 +4,32 @@ const EMAIL_REGEX =
 let email_valid = false;
 let password_valid = false;
 
+function createUser() {
+    var request = $.ajax({
+        type: "POST",
+        url: "/api/v1/internal/create-user",
+        data: {
+            "email": document.getElementById("email").value,
+            "username": document.getElementById("username").value,
+            "password": document.getElementById("password").value,
+            "age": document.getElementById("bday").value,
+            "language": document.getElementById("languages").value,
+            "theme": document.getElementById("theme").value,
+            "avatar": document.getElementById("chosen").innerText
+
+
+        },
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+    });
+    request.done(
+        function (data) {
+            window.location.href = "/signin";
+        }
+    )
+
+}
+
 function next(num) {
     let status = document.getElementById("status");
     if (num === 1) {
@@ -35,6 +61,8 @@ function next(num) {
         }
 
 
+    } else if (num === 3) {
+        createUser();
     }
 
 
