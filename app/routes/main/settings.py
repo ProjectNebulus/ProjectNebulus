@@ -28,6 +28,11 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
+def generate_redirect(url):
+    if "nebulus" in url:
+        if "https" not in url:
+            return url.replace("http", "https") + "spotify"
+    return url + "spotify"
 
 @main_blueprint.route("/settings", methods=["GET"])
 @logged_in
@@ -84,7 +89,7 @@ def settings():
         show_dialog=True,
         client_id=SPOTIPY_CLIENT_ID,
         client_secret=SPOTIPY_CLIENT_SECRET,
-        redirect_uri=SPOTIPY_REDIRECT_URI,
+        redirect_uri=generate_redirect(request.root_url),
     )
     spotify = spotipy.Spotify(auth_manager=spotify_auth_manager)
 
