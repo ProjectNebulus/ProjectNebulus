@@ -45,10 +45,10 @@
             Afternoon, {{ user }}
         </h1>
     </div>
-    <div style="height:45%;width:100%;float:left;">
+    <div style="height:45%;width:95%;margin-left:2%;float:left;">
         <div style="height:100%;width:50%;float:left;display:block;"
              class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table id="scroll1" style="overflow-y:scroll;height:100%;width:100%;float:left;display:block;"
+            <table id="scroll1" style="overflow-y:scroll;height:100%;width:95%;margin-left:2%;float:left;display:block;"
                    class="rounded-lg text-sm text-left text-gray-500 dark:text-gray-400 px w-full h-full">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
@@ -117,7 +117,7 @@
             {% if announcements|length == 0 %}
             <p class="text-black dark:text-white">No Announcements!</p>
             {% endif %}
-            {% for announcement in announcements[0:5] %}
+            {% for announcement in announcements %}
             <div id="alert-additional-content-5" class="p-4 mb-4 bg-gray-100 rounded-lg dark:bg-gray-700" role="alert">
                 <div class="flex items-center">
                     <svg class="mr-2 w-5 h-5 text-gray-700 dark:text-gray-300" fill="currentColor" viewBox="0 0 20 20"
@@ -159,12 +159,12 @@
             {% endfor %}
         </div>
     </div>
-    <div id="scroll3" style="overflow:scroll;height:45%;float:left;">
+    <div id="scroll3" style="overflow:scroll;height:45%;float:left;width:95%;margin-left:2%;">
         <h2 class="text-black dark:text-white text-2xl">Recent Courses</h2>
         <div style="text-align: left;"
              class="vertical block w-full section p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
             <a href="/lms" class="text-blue-500">View All Course</a><br><br>
-            {% for course in user_courses[0:8] %}
+            {% for course in user_courses %}
             <a href="/course/{{ course.id }}">
                 <button style="margin:15px; text-align:left;padding-top:0;padding-bottom:0;  " type="button"
                         class="text-xl  text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
