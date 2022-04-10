@@ -39,147 +39,150 @@
 </head>
 <body>
 {% include "navbar.html" %}
-<div style="text-align: center; ">
-    <h1 class="text-black text-3xl dark:text-white">Good
-        Afternoon, {{ user }}
-    </h1>
-</div>
-<div style="height:50%;width:100%;float:left;">
-    <div style="height:100%;width:50%;float:left;display:block;"
-         class="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table id="scroll1" style="overflow-y:scroll;height:100%;width:100%;float:left;display:block;"
-               class="rounded-lg text-sm text-left text-gray-500 dark:text-gray-400 px w-full h-full">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="px-6 py-3">
-                    Event
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Date
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Time
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Course
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    <span class="sr-only">Edit</span>
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for event in events %}
-            {% if event._cls == "Event" %}
-            <tr class="bg-white dark:bg-gray-800">
-                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
-                    <span class="material-icons-outlined">event</span>{{ event.title }}
-                </td>
-                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
-                    {{ event.date.date().strftime("%m/%d/%Y") }}
-                </td>
-                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
-                    {{ event.date.time().strftime("%I:%M %p") }}
-                </td>
-                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
-                    {{ event.course.name }}
-                </td>
-                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
-                    <a href="/edit/{{ event.id }}" class="text-blue-500 hover:text-blue-700">Edit</a>
-                </td>
-            </tr>
-            {% else %}
-            <tr class="bg-white dark:bg-gray-800">
-                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
-                    <span class="material-icons-outlined">description</span>{{ event.title }}
-                </td>
-                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
-                    {{ event.due.date().strftime("%m/%d/%Y") }}
-                </td>
-                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
-                    {{ event.due.time().strftime("%I:%M %p") }}
-                </td>
-                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
-                    {{ event.course.name }}
-                </td>
-                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
-                    <a href="/edit/{{ event.id }}" class="text-blue-500 hover:text-blue-700">Edit</a>
-                </td>
-            </tr>
-            {% endif %}
-            {% endfor %}
-            </tbody>
-        </table>
+<div style="height:100%;overflow:hidden;">
+    <div style="text-align: center; height:10%;">
+        <h1 class="text-black text-3xl dark:text-white">Good
+            Afternoon, {{ user }}
+        </h1>
     </div>
-    <div id="scroll2" class="grid grid-cols-2 gap-4" style="overflow-y:scroll;  height:100%;">
-        <a href="/lms" class="text-blue-500">View All Announcements</a><br><br>
-        {% if announcements|length == 0 %}
-        <p class="text-black dark:text-white">No Announcements!</p>
-        {% endif %}
-        {% for announcement in announcements[0:5] %}
-        <div id="alert-additional-content-5" class="p-4 mb-4 bg-gray-100 rounded-lg dark:bg-gray-700" role="alert">
-            <div class="flex items-center">
-                <svg class="mr-2 w-5 h-5 text-gray-700 dark:text-gray-300" fill="currentColor" viewBox="0 0 20 20"
-                     xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                          clip-rule="evenodd"></path>
-                </svg>
-                <h3 class="text-lg font-medium text-gray-700 dark:text-gray-300">{{ announcement.title}}</h3>
-            </div>
-            <p class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">{{
-                announcement.course }} > {{ announcement.author }}</p>
-            <div class="mt-2 mb-4 text-sm text-gray-700 dark:text-gray-300">
-                {{ announcement.content }}
-            </div>
-            <br>
-            <div class="flex">
-                <button type="button"
-                        class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-xs px-3 py-1.5 mr-2 text-center inline-flex items-center dark:bg-gray-600 dark:hover:bg-gray-500 dark:focus:ring-gray-600">
-                    <svg class="-ml-0.5 mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20"
+    <div style="height:45%;width:100%;float:left;">
+        <div style="height:100%;width:50%;float:left;display:block;"
+             class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table id="scroll1" style="overflow-y:scroll;height:100%;width:100%;float:left;display:block;"
+                   class="rounded-lg text-sm text-left text-gray-500 dark:text-gray-400 px w-full h-full">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Event
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Date
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Time
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Course
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        <span class="sr-only">Edit</span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for event in events %}
+                {% if event._cls == "Event" %}
+                <tr class="bg-white dark:bg-gray-800">
+                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                        <span class="material-icons-outlined">event</span>{{ event.title }}
+                    </td>
+                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                        {{ event.date.date().strftime("%m/%d/%Y") }}
+                    </td>
+                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                        {{ event.date.time().strftime("%I:%M %p") }}
+                    </td>
+                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                        {{ event.course.name }}
+                    </td>
+                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                        <a href="/edit/{{ event.id }}" class="text-blue-500 hover:text-blue-700">Edit</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr class="bg-white dark:bg-gray-800">
+                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                        <span class="material-icons-outlined">description</span>{{ event.title }}
+                    </td>
+                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                        {{ event.due.date().strftime("%m/%d/%Y") }}
+                    </td>
+                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                        {{ event.due.time().strftime("%I:%M %p") }}
+                    </td>
+                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                        {{ event.course.name }}
+                    </td>
+                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                        <a href="/edit/{{ event.id }}" class="text-blue-500 hover:text-blue-700">Edit</a>
+                    </td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div id="scroll2" class="grid grid-cols-2 gap-4" style="overflow-y:scroll;  height:100%;">
+            <a href="/lms" class="text-blue-500">View All Announcements</a><br><br>
+            {% if announcements|length == 0 %}
+            <p class="text-black dark:text-white">No Announcements!</p>
+            {% endif %}
+            {% for announcement in announcements[0:5] %}
+            <div id="alert-additional-content-5" class="p-4 mb-4 bg-gray-100 rounded-lg dark:bg-gray-700" role="alert">
+                <div class="flex items-center">
+                    <svg class="mr-2 w-5 h-5 text-gray-700 dark:text-gray-300" fill="currentColor" viewBox="0 0 20 20"
                          xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
                         <path fill-rule="evenodd"
-                              d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
                               clip-rule="evenodd"></path>
                     </svg>
-                    View more
-                </button>
-                <button type="button"
-                        class="text-gray-700 bg-transparent border border-gray-700 hover:bg-gray-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:border-gray-600 dark:hover:bg-gray-600 focus:ring-gray-600 dark:text-gray-300 dark:hover:text-white"
-                        data-dismiss-target="#alert-additional-content-5" aria-label="Close">
-                    Dismiss
-                </button>
+                    <h3 class="text-lg font-medium text-gray-700 dark:text-gray-300">{{ announcement.title}}</h3>
+                </div>
+                <p class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">{{
+                    announcement.course.name }} > {{ announcement.author }}</p>
+                <div class="mt-2 mb-4 text-sm text-gray-700 dark:text-gray-300">
+                    {{ announcement.content }}
+                </div>
+                <br>
+                <div class="flex">
+                    <button type="button"
+                            class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-xs px-3 py-1.5 mr-2 text-center inline-flex items-center dark:bg-gray-600 dark:hover:bg-gray-500 dark:focus:ring-gray-600">
+                        <svg class="-ml-0.5 mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                            <path fill-rule="evenodd"
+                                  d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                                  clip-rule="evenodd"></path>
+                        </svg>
+                        View more
+                    </button>
+                    <button type="button"
+                            class="text-gray-700 bg-transparent border border-gray-700 hover:bg-gray-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:border-gray-600 dark:hover:bg-gray-600 focus:ring-gray-600 dark:text-gray-300 dark:hover:text-white"
+                            data-dismiss-target="#alert-additional-content-5" aria-label="Close">
+                        Dismiss
+                    </button>
+                </div>
+                <br>
+                <p class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">{{
+                    announcement.date }}</p>
             </div>
-            <br>
-            <p class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">{{
-                announcement.date }}</p>
+            {% endfor %}
         </div>
-        {% endfor %}
+    </div>
+    <div id="scroll3" style="overflow:scroll;height:45%;float:left;">
+        <h2 class="text-black dark:text-white text-2xl">Recent Courses</h2>
+        <div style="text-align: left;"
+             class="vertical block w-full section p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+            <a href="/lms" class="text-blue-500">View All Course</a><br><br>
+            {% for course in user_courses[0:8] %}
+            <a href="/course/{{ course.id }}">
+                <button style="margin:15px; text-align:left;padding-top:0;padding-bottom:0;  " type="button"
+                        class="text-xl  text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                    <img src="https://bins.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg?"
+                         style="object-fit: cover; width:40px; height:40px; border-radius:10px;display: inline-block; margin: 10px;"
+                         alt>
+                    {% if course.name|length <= 8 %}
+                    {{ course.name }}
+                    {% else %}
+                    {{ course.name[0:5] }}...
+                    {% endif %}
+                </button>
+            </a>
+            {% endfor %}
+        </div>
     </div>
 </div>
-<div id="scroll3" style="overflow:scroll;height:50%;float:left;">
-    <h2 class="text-black dark:text-white text-2xl">Recent Courses</h2>
-    <div style="text-align: left;"
-         class="vertical block w-full section p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-        <a href="/lms" class="text-blue-500">View All Course</a><br><br>
-        {% for course in user_courses[0:8] %}
-        <a href="/course/{{ course.id }}">
-            <button style="margin:15px; text-align:left;padding-top:0;padding-bottom:0;  " type="button"
-                    class="text-xl  text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                <img src="https://bins.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg?"
-                     style="object-fit: cover; width:40px; height:40px; border-radius:10px;display: inline-block; margin: 10px;"
-                     alt>
-                {% if course.name|length <= 8 %}
-                {{ course.name }}
-                {% else %}
-                {{ course.name[0:5] }}...
-                {% endif %}
-            </button>
-        </a>
-        {% endfor %}
-    </div>
-</div>
+
 <script src="../static/js/dashboard.js"></script>
 </body>
 {% endblock %}
