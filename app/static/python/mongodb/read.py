@@ -178,7 +178,7 @@ def sort_user_events(user_id: str) -> List[List]:
     events_assessments_assignments = sorted(
         events_assessments_assignments, key=sortByDate
     )
-    announcements = sorted(announcements, key=lambda x: x.date)
+    announcements = sorted(announcements, key=lambda x: x.date, reverse=True)
 
     return [[announcements], [events_assessments_assignments]]
 
