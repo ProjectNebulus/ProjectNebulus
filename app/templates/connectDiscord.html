@@ -1,9 +1,7 @@
-{% extends "layout.html" %}
-{% block main %}
 {% include "layout.html" %}
 <div style="margin:15px;">
-    <p class="text-black dark:text-white">Successfully Connected to the Google Classroom Account
-        <span class="font-bold"><img src="{{data[1]}}" style="margin-right:10px;display:inline-block;"
+    <p class="text-black dark:text-white">Successfully Connected to the Discord Account
+        <span class="font-bold"><img src="{{data[2]}}" style="margin-right:10px;display:inline-block;"
                                      class="w-10 h-10 rounded-full">{{data[0]}}</span>
     </p>
     <button onclick="window.close();"
@@ -18,5 +16,3 @@
         OK, Close Window
     </button>
 </div>
-
-{% endblock %}
