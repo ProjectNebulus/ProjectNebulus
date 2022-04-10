@@ -5,30 +5,67 @@ const siteName = window.location.protocol + "//" + window.location.host;
 
 let rightClickElements = null;
 let prevRightClickElements = null;
+
 // string as key, function to run as value
 
-window.addEventListener("load", function () {
-    document.documentElement.lang = 'en';
+function detectTheme() {
+    const banner = document.getElementById("homeBanner");
 
-    if (localStorage.getItem('color-theme') === null) {
+    if (!localStorage.getItem('color-theme')) {
         const darkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
         localStorage.setItem('color-theme', darkTheme ? 'dark' : 'light');
     }
 
-    if (localStorage.getItem('color-theme') === 'dark' && window.location.href[window.location.href.length - 1] !== "/") document.body.style.background = '#111926';
-    else if (localStorage.getItem('color-theme') === 'dark' && window.location.href[window.location.href.length - 1] === "/") document.body.style.backgroundImage = "url(\"https://www.tailwindtoolbox.com/templates/header.png\")";
+    if (localStorage.getItem("color-theme") === "dark") {
+        if (window.location.href.endsWith("/"))
+            document.body.style.backgroundImage = "url(\"/static/images/darkwallpaper.png\")";
+        else
+            document.body.style.background = "#111926";
 
-    else document.body.style.background = '#EEEEEE';
-
-    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-    if (
-        localStorage.getItem('color-theme') === 'dark' ||
-        (!('color-theme' in localStorage) &&
-            window.matchMedia('(prefers-color-scheme: dark)').matches)
-    )
         document.documentElement.classList.add('dark');
-    else
+
+        document.getElementsByTagName('html')[0].setAttribute('class', 'dark');
+
+        if (banner) banner.style.filter = "invert(0)";
+
+        for (const logo of document.getElementsByTagName("logo")) {
+            if (!logo.getAttribute("no-revert"))
+                logo.style.filter = "invert(0)";
+        }
+
+    } else {
+        if (window.location.href.endsWith("/"))
+            document.body.style.backgroundImage = "url(\"/static/images/lightwallpaper.png\")";
+        else
+            document.body.style.background = "white";
+
         document.documentElement.classList.remove('dark');
+        if (banner) banner.style.filter = "invert(1)";
+
+        for (const logo of document.getElementsByTagName("logo")) {
+            if (logo.getAttribute("no-revert") === null)
+                logo.style.filter = "invert(1)";
+        }
+    }
+
+    if (window.location.href.includes("course")) {
+        const frame = document.getElementById("frame");
+        const innerDoc = frame.contentDocument || frame.contentWindow.document;
+
+        if (document.documentElement.classList.contains("dark")) {
+            innerDoc.documentElement.classList.add("dark");
+            innerDoc.body.style.background = "#111926";
+        } else {
+            innerDoc.documentElement.classList.remove("dark");
+            innerDoc.body.style.background = "white";
+        }
+    }
+}
+
+window.addEventListener("load", function () {
+    document.documentElement.lang = 'en';
+
+    detectTheme();
 
     if (navigator.onLine)
         online();
@@ -41,7 +78,7 @@ window.addEventListener("load", function () {
     for (const logo of document.getElementsByTagName("logo")) {
         let img = logo.getAttribute("image");
         if (img === null)
-            img = "v3.gif";
+            img = "cat1.png";
 
         let size = logo.getAttribute("size");
 

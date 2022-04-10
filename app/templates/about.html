@@ -3,445 +3,101 @@
     <html>
     <body>
     {% include "navbar.html" %}
-    <div align='center' style="overflow: hidden;">
-
+    <div class="overflow-hidden text-center">
         <h1 class="text-3xl text-black dark:text-white">What's Nebulus?</h1>
-        <p class="text-xl text-black dark:text-white">Nebulus' mission is to help students with Education. [to be continued]</p>
-        <h1 class="text-3xl text-black dark:text-white">Our Team</h1>
-        <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
-             style="margin:20px;padding:10px;float:left;">
-            <div class="flex justify-end px-4 pt-4">
-                <button id="otherdropdownButton" data-otherdropdown-toggle="otherdropdown"
-                        class="hidden sm:inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
-                        type="button">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
-                    </svg>
-                </button>
-                <!-- otherdropdown menu -->
-                <div id="otherdropdown"
-                     class="hidden z-10 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
-                    <ul class="py-1" aria-labelledby="otherdropdownButton">
-                        <li>
-                            <a href="#"
-                               class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                               class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Export
-                                Data</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                               class="block py-2 px-4 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="flex flex-col items-center pb-10">
-                <img class="mb-3 w-24 h-24 rounded-full shadow-lg" src="/static/people/nicholas.png" alt="image"/>
-                <h3 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Nicholas Wang</h3>
-                <span class="text-sm text-gray-500 dark:text-gray-400">CEO</span>
-                <div class="flex mt-4 space-x-3 lg:mt-6">
-                    <a href="#"
-                       class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">View
-                        Profile</a>
-                    <a href="#"
-                       class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-800">Message</a>
-                </div>
-            </div>
+        <p class="text-xl text-black dark:text-white">Nebulus' mission is to help students with Education. [to be
+            continued]</p><br>
+        <hr class="dark:text-white">
+        <br>
+        <h1 class="text-3xl text-black dark:text-white">Our Team</h1><br>
+        <div class="bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
+             style="margin:20px;padding:10px;float:left;" id="people">
         </div>
-        <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
-             style="margin:20px;padding:10px;float:left;">
-            <div class="flex justify-end px-4 pt-4">
-                <button id="otherdropdownButton" data-otherdropdown-toggle="otherdropdown"
-                        class="hidden sm:inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
-                        type="button">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
-                    </svg>
-                </button>
-                <!-- otherdropdown menu -->
-                <div id="otherdropdown"
-                     class="hidden z-10 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
-                    <ul class="py-1" aria-labelledby="otherdropdownButton">
-                        <li>
-                            <a href="#"
-                               class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                               class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Export
-                                Data</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                               class="block py-2 px-4 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="flex flex-col items-center pb-10">
-                <img class="mb-3 w-24 h-24 rounded-full shadow-lg" src="/static/people/neel.gif" alt="image"/>
-                <h3 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Neel Parpia</h3>
-                <span class="text-sm text-gray-500 dark:text-gray-400">CTO</span>
-                <div class="flex mt-4 space-x-3 lg:mt-6">
-                    <a href="#"
-                       class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">View
-                        Profile</a>
-                    <a href="#"
-                       class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-800">Message</a>
-                </div>
-            </div>
-        </div>
-        <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
-             style="margin:20px;padding:10px;float:left;">
-            <div class="flex justify-end px-4 pt-4">
-                <button id="otherdropdownButton" data-otherdropdown-toggle="otherdropdown"
-                        class="hidden sm:inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
-                        type="button">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
-                    </svg>
-                </button>
-                <!-- otherdropdown menu -->
-                <div id="otherdropdown"
-                     class="hidden z-10 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
-                    <ul class="py-1" aria-labelledby="otherdropdownButton">
-                        <li>
-                            <a href="#"
-                               class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                               class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Export
-                                Data</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                               class="block py-2 px-4 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="flex flex-col items-center pb-10">
-                <img class="mb-3 w-24 h-24 rounded-full shadow-lg" src="/static/people/kevin.gif" alt="image"/>
-                <h3 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Kevin Ma</h3>
-                <span class="text-sm text-gray-500 dark:text-gray-400">COO</span>
-                <div class="flex mt-4 space-x-3 lg:mt-6">
-                    <a href="#"
-                       class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">View
-                        Profile</a>
-                    <a href="#"
-                       class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-800">Message</a>
-                </div>
-            </div>
-        </div>
-        <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
-             style="margin:20px;padding:10px;float:left;">
-            <div class="flex justify-end px-4 pt-4">
-                <button id="otherdropdownButton" data-otherdropdown-toggle="otherdropdown"
-                        class="hidden sm:inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
-                        type="button">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
-                    </svg>
-                </button>
-                <!-- otherdropdown menu -->
-                <div id="otherdropdown"
-                     class="hidden z-10 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
-                    <ul class="py-1" aria-labelledby="otherdropdownButton">
-                        <li>
-                            <a href="#"
-                               class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                               class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Export
-                                Data</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                               class="block py-2 px-4 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+    </div>
 
-            <div class="flex flex-col items-center pb-10">
-                <img class="mb-3 w-24 h-24 rounded-full shadow-lg" src="/static/people/rishaan.jpeg" alt="image"/>
-                <h3 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Rishaan Desai</h3>
-                <span class="text-sm text-gray-500 dark:text-gray-400">CIO</span>
-                <div class="flex mt-4 space-x-3 lg:mt-6">
-                    <a href="#"
-                       class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">View
-                        Profile</a>
-                    <a href="#"
-                       class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-800">Message</a>
-                </div>
-            </div>
-        </div>
-    <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
-         style="margin:20px;padding:10px;float:left;">
-        <div class="flex justify-end px-4 pt-4">
-            <button id="otherdropdownButton" data-otherdropdown-toggle="otherdropdown"
-                    class="hidden sm:inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
-                    type="button">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
-                </svg>
-            </button>
-            <!-- otherdropdown menu -->
-            <div id="otherdropdown"
-                 class="hidden z-10 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
-                <ul class="py-1" aria-labelledby="otherdropdownButton">
-                    <li>
-                        <a href="#"
-                           class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                           class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Export
-                            Data</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                           class="block py-2 px-4 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="flex flex-col items-center pb-10">
-            <img class="mb-3 w-24 h-24 rounded-full shadow-lg" src="/static/people/timothy1.webp" alt="image"/>
-            <h3 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Timothy Liu</h3>
-            <span class="text-sm text-gray-500 dark:text-gray-400">Developer</span>
-            <div class="flex mt-4 space-x-3 lg:mt-6">
-                <a href="#"
-                   class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">View
-                    Profile</a>
-                <a href="#"
-                   class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-800">Message</a>
-            </div>
-        </div>
-    </div>
-    <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
-         style="margin:20px;padding:10px;float:left;">
-        <div class="flex justify-end px-4 pt-4">
-            <button id="otherdropdownButton" data-otherdropdown-toggle="otherdropdown"
-                    class="hidden sm:inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
-                    type="button">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
-                </svg>
-            </button>
-            <!-- otherdropdown menu -->
-            <div id="otherdropdown"
-                 class="hidden z-10 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
-                <ul class="py-1" aria-labelledby="otherdropdownButton">
-                    <li>
-                        <a href="#"
-                           class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                           class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Export
-                            Data</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                           class="block py-2 px-4 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="flex flex-col items-center pb-10">
-            <img class="mb-3 w-24 h-24 rounded-full shadow-lg" src="/static/people/timothy2.webp" alt="image"/>
-            <h3 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Timothy Hu</h3>
-            <span class="text-sm text-gray-500 dark:text-gray-400">Developer</span>
-            <div class="flex mt-4 space-x-3 lg:mt-6">
-                <a href="#"
-                   class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">View
-                    Profile</a>
-                <a href="#"
-                   class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-800">Message</a>
-            </div>
-        </div>
-    </div>
-    <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
-         style="margin:20px;padding:10px;float:left;">
-        <div class="flex justify-end px-4 pt-4">
-            <button id="otherdropdownButton" data-otherdropdown-toggle="otherdropdown"
-                    class="hidden sm:inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
-                    type="button">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
-                </svg>
-            </button>
-            <!-- otherdropdown menu -->
-            <div id="otherdropdown"
-                 class="hidden z-10 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
-                <ul class="py-1" aria-labelledby="otherdropdownButton">
-                    <li>
-                        <a href="#"
-                           class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                           class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Export
-                            Data</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                           class="block py-2 px-4 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="flex flex-col items-center pb-10">
-            <img class="mb-3 w-24 h-24 rounded-full shadow-lg" src="/static/people/vedh.jpeg" alt="image"/>
-            <h3 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Vedh Reddy</h3>
-            <span class="text-sm text-gray-500 dark:text-gray-400">COO</span>
-            <div class="flex mt-4 space-x-3 lg:mt-6">
-                <a href="#"
-                   class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">View
-                    Profile</a>
-                <a href="#"
-                   class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-800">Message</a>
-            </div>
-        </div>
-    </div>
-    <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
-         style="margin:20px;padding:10px;float:left;">
-        <div class="flex justify-end px-4 pt-4">
-            <button id="otherdropdownButton" data-otherdropdown-toggle="otherdropdown"
-                    class="hidden sm:inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
-                    type="button">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
-                </svg>
-            </button>
-            <!-- otherdropdown menu -->
-            <div id="otherdropdown"
-                 class="hidden z-10 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
-                <ul class="py-1" aria-labelledby="otherdropdownButton">
-                    <li>
-                        <a href="#"
-                           class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                           class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Export
-                            Data</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                           class="block py-2 px-4 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="flex flex-col items-center pb-10">
-            <img class="mb-3 w-24 h-24 rounded-full shadow-lg" src="/static/people/rhyley.webp" alt="image"/>
-            <h3 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Rhyley Plant</h3>
-            <span class="text-sm text-gray-500 dark:text-gray-400">Developer</span>
-            <div class="flex mt-4 space-x-3 lg:mt-6">
-                <a href="/community/profile/1234"
-                   class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">View
-                    Profile</a>
-                <a href="#"
-                   class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-800">Message</a>
-            </div>
-        </div>
-    </div>
-    <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
-         style="margin:20px;padding:10px;float:left;">
-        <div class="flex justify-end px-4 pt-4">
-            <button id="otherdropdownButton" data-otherdropdown-toggle="otherdropdown"
-                    class="hidden sm:inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
-                    type="button">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
-                </svg>
-            </button>
-            <!-- otherdropdown menu -->
-            <div id="otherdropdown"
-                 class="hidden z-10 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
-                <ul class="py-1" aria-labelledby="otherdropdownButton">
-                    <li>
-                        <a href="#"
-                           class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                           class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Export
-                            Data</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                           class="block py-2 px-4 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="flex flex-col items-center pb-10">
-            <img class="mb-3 w-24 h-24 rounded-full shadow-lg" src="/static/people/vivian.webp" alt="image"/>
-            <h3 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Vivian Liao</h3>
-            <span class="text-sm text-gray-500 dark:text-gray-400">Artist</span>
-            <div class="flex mt-4 space-x-3 lg:mt-6">
-                <a href="#"
-                   class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">View
-                    Profile</a>
-                <a href="#"
-                   class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-800">Message</a>
-            </div>
-        </div>
-    </div>
-    <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
-         style="margin:20px;padding:10px;float:left;">
-        <div class="flex justify-end px-4 pt-4">
-            <button id="otherdropdownButton" data-otherdropdown-toggle="otherdropdown"
-                    class="hidden sm:inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
-                    type="button">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
-                </svg>
-            </button>
-            <!-- otherdropdown menu -->
-            <div id="otherdropdown"
-                 class="hidden z-10 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
-                <ul class="py-1" aria-labelledby="otherdropdownButton">
-                    <li>
-                        <a href="#"
-                           class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                           class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Export
-                            Data</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                           class="block py-2 px-4 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="flex flex-col items-center pb-10">
-            <img class="mb-3 w-24 h-24 rounded-full shadow-lg" src="/static/people/harly.jpeg" alt="image"/>
-            <h3 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Harly Liu</h3>
-            <span class="text-sm text-gray-500 dark:text-gray-400">Planner</span>
-            <div class="flex mt-4 space-x-3 lg:mt-6">
-                <a href="#"
-                   class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">View
-                    Profile</a>
-                <a href="#"
-                   class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-800">Message</a>
-            </div>
-        </div>
-    </div>
-    </div>
-    </div>
+    <script>
+        const peopleDiv = document.getElementById("people");
+
+        const people = [
+            {
+                image: "nicholas.png",
+                name: "Nicholas Wang",
+                title: "CEO",
+                profileLink: ""
+            },
+            {
+                image: "neel.gif",
+                name: "Neel Parpia",
+                title: "CTO",
+                profileLink: ""
+            },
+            {
+                image: "kevin.gif",
+                name: "Kevin Ma",
+                title: "COO",
+                profileLink: ""
+            },
+            {
+                image: "vedh.jpeg",
+                name: "Vedh Reddy",
+                title: "COO",
+                profileLink: ""
+            },
+            {
+                image: "rishaan.jpeg",
+                name: "Rishaan Desai",
+                title: "CIO",
+                profileLink: ""
+            },
+        ]
+
+        people.innerHTML += '<h1 class="text-3xl text-black dark:text-white">Executives</h1>'
+
+        for (const person of people) {
+            const bgDiv = document.createElement("div");
+            bgDiv.className = "max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700";
+            bgDiv.style.margin = "1.5rem";
+            bgDiv.style.padding = "1rem";
+            bgDiv.style.float = "left";
+
+            const bodyDiv = document.createElement("div");
+            bodyDiv.className = "flex flex-col items-center pb-5 mt-5";
+
+            const img = document.createElement("img");
+            img.className = "mb-3 w-24 h-24 rounded-full shadow-lg";
+            img.src = "/static/people/" + person.image;
+
+            const name = document.createElement("h3");
+            name.className = "mb-1 text-xl font-medium text-gray-900 dark:text-white";
+            name.innerHTML = person.name;
+
+            const title = document.createElement("span");
+            title.className = "text-sm text-gray-500 dark:text-gray-400";
+            title.innerHTML = person.title;
+
+            bodyDiv.append(img, name, title);
+            bgDiv.append(bodyDiv);
+
+            const buttons = document.createElement("div");
+            buttons.className = "flex mt-4 space-x-3 lg:mt-6";
+
+            const viewProfile = document.createElement("a");
+            viewProfile.className = "inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800";
+            viewProfile.href = person.profileLink;
+            viewProfile.innerHTML = "View Profile";
+
+            const message = document.createElement("a");
+            message.className = "inline-flex items-center py-2 px-4 text-sm font-medium text-center text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-800";
+            message.href = person.profileLink;
+            message.innerHTML = "Message";
+
+            buttons.append(viewProfile, message);
+            bgDiv.append(buttons);
+            people.append(bgDiv);
+        }
+    </script>
+
     </body>
     </html>
-{% include "footer.html" %}
+    {% include "footer.html" %}
 {% endblock %}

@@ -18,7 +18,6 @@ window.addEventListener("resize", function () {
     for (const menu of dropdowns) {
         let trigger = menu.getElementsByTagName("trigger")[0].getBoundingClientRect(),
             contents = menu.getElementsByTagName("contents")[0],
-
             rightAlign = menu.getAttribute("align") !== "left";
 
         if (rightAlign) {
@@ -59,10 +58,12 @@ function setUpDropdowns() {
             }
         });
 
-        contents.style.width = (contents.offsetWidth * 0.9).toString();
+        let cRect = contents.getBoundingClientRect();
+        let tRect = trigger.getBoundingClientRect();
+
         if (rightAlign) {
-            contents.style.left = (contents.getBoundingClientRect().left - contents.getBoundingClientRect().width).toString();
-            contents.style.top = (contents.getBoundingClientRect().top + trigger.getBoundingClientRect().height).toString();
+            contents.style.left = (cRect.left - cRect.width + tRect.width * 2).toString();
+            contents.style.top = (cRect.top + tRect.height).toString();
         }
 
         for (let i = 0; i < contents.childElementCount - 1; i++) {

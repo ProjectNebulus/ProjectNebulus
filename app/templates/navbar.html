@@ -1,7 +1,6 @@
 {% if not disablebar %}
-    <nav
-            class="bg-white border-gray-200 px-2 sm:px-4 rounded bg-gray-300 dark:bg-gray-600"
-            oncontextmenu="rightClickElements=null">
+    <nav class="bg-white border-gray-200 px-2 sm:px-4 rounded-lg bg-gray-300 dark:bg-gray-600"
+         oncontextmenu="rightClickElements=null">
         <div class="container flex flex-wrap justify-between items-center mx-auto">
             <div style="float:left;" class="flex">
                 <a href="/" class="flex">
@@ -13,7 +12,7 @@
                      style="margin-left:5rem;margin-top:0.1rem">
                     <ul class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
                         {% if user %}
-                        <li>
+                            <li>
                                 <a href="/dashboard" class="nav-link-2" aria-current="page" style="margin-top: 8px">Dashboard</a>
                             </li>
                             <li>
@@ -58,15 +57,15 @@
 
             <div style="float:right;display: grid; grid-auto-flow: column; align-content: center;">
                 {% if user and password %}
-                <dropdown-menu style="display: grid; grid-auto-flow: column; align-content: middle;">
-                    <trigger id="user-menu-button">
-                        <logo class="rounded-full my-4 mx-4"></logo>
-                    </trigger>
-                    <!-- Dropdown menu -->
-                    <contents class="invisible my-4 text-base bg-white dark:bg-gray-700 dark:divide-gray-600">
-                        <item class="text-gray-300">
-                            <span class="block text-sm text-gray-900 dark:text-white">{{ user }}</span>
-                            <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">{{ email }}</span>
+                    <dropdown-menu style="display: grid; grid-auto-flow: column; align-content: center;">
+                        <trigger id="user-menu-button" class="rounded-full my-2 mx-2" style="background-color: black">
+                            <logo no-revert></logo>
+                        </trigger>
+                        <!-- Dropdown menu -->
+                        <contents class="my-4 text-base bg-white dark:bg-gray-700 dark:divide-gray-600">
+                            <item class="text-gray-300">
+                                <span class="block text-sm text-gray-900 dark:text-white">{{ user }}</span>
+                                <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">{{ email }}</span>
                             </item>
                             <item class="text-gray-300" href="/dashboard">Dashboard</item>
                             <item class="text-gray-300" href="/points">0
@@ -136,6 +135,8 @@
         const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
         const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
 
+        const banner = document.getElementById("homeBanner");
+
         // Change the icons inside the button based on previous settings
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches))
             themeToggleLightIcon.classList.remove('hidden');
@@ -153,13 +154,10 @@
             if (localStorage.getItem('color-theme')) {
                 if (localStorage.getItem('color-theme') === 'light') {
                     document.documentElement.classList.add('dark');
-
                     localStorage.setItem('color-theme', 'dark');
-                    document.body.style.background = "#111926";
                 } else {
                     document.documentElement.classList.remove('dark');
                     localStorage.setItem('color-theme', 'light');
-                    document.body.style.background = "white";
                 }
 
                 // if NOT set via local storage previously
@@ -167,38 +165,13 @@
                 if (document.documentElement.classList.contains('dark')) {
                     document.documentElement.classList.remove('dark');
                     localStorage.setItem('color-theme', 'light');
-                    document.body.style.background = "white";
                 } else {
                     document.documentElement.classList.add('dark');
                     localStorage.setItem('color-theme', 'dark');
-                    document.body.style.background = "#111926";
-                }
-            }
-            if (window.location.href.includes("course")) {
-                const frame = document.getElementById("frame");
-                const innerDoc = frame.contentDocument || frame.contentWindow.document;
-
-                if (document.documentElement.classList.contains("dark")) {
-                    innerDoc.documentElement.classList.add("dark");
-                    innerDoc.body.style.background = "#111926";
-                } else {
-                    innerDoc.documentElement.classList.remove("dark");
-                    innerDoc.body.style.background = "white";
                 }
             }
 
-            if (localStorage.getItem("color-theme") === "dark") {
-                if (window.location.href.endsWith("/"))
-                    document.body.style.backgroundImage = "url(\"/static/images/darkwallpaper.png\")";
-                else
-                    document.body.style.background = "#111926";
-
-                document.getElementsByTagName('html')[0].setAttribute('class', 'dark');
-                document.getElementById("homeBanner").style.filter = "invert(0)";
-            } else {
-                document.body.style.background = "white";
-                document.getElementById("homeBanner").style.filter = "invert(1)";
-            }
+            detectTheme();
         });
 
         for (let a of document.getElementsByClassName("nav-link"))

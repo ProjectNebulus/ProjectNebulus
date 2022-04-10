@@ -8,7 +8,7 @@ let screens = modal.getElementsByClassName('CoursePage');
 let btn = document.getElementById('create');
 
 for (let screen of screens)
-    screen.className += " relative px-4 w-full max-w-2xl h-full md:h-auto relative bg-white rounded-lg shadow dark:bg-gray-700"
+    screen.className += " relative px-4 w-full max-w-2xl h-full md:h-auto relative bg-white rounded-lg shadow dark:bg-gray-700 text-black dark:text-white"
 
 for (let h3 of modal.getElementsByTagName("h3"))
     h3.className += " flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white"
@@ -39,9 +39,6 @@ for (let close of modal.getElementsByClassName('close')) {
     close.innerHTML = 'close';
     close.onclick = () => modal.style.display = "none";
 }
-
-// set up user
-const user = document.getElementById('userinfo').innerHTML;
 
 // set up course stuff
 let courseName = document.getElementById('course-name');

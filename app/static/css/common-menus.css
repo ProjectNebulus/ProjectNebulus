@@ -4,6 +4,10 @@ trigger {
     text-align: right;
 }
 
+trigger:hover {
+    background: lightgray;
+}
+
 contents {
     visibility: hidden;
     z-index: 50;
