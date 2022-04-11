@@ -45,34 +45,7 @@
             Afternoon, {{ user }}
         </h1>
     </div>
-    <div style="height:45%;width:95%;margin-left:2%;float:left;" class="grid grid-cols-2 gap-8">
-    {% if events|length == 0 %}
-    <div id="alert-additional-content-1" class="p-4 mb-4 bg-blue-100 rounded-lg dark:bg-blue-200" role="alert">
-  <div class="flex items-center">
-    <svg class="mr-2 w-5 h-5 text-blue-700 dark:text-blue-800" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-    <h3 class="text-lg font-medium text-blue-700 dark:text-blue-800">No Upcoming Events</h3>
-  </div>
-  <div class="mt-2 mb-4 text-sm text-blue-700 dark:text-blue-800">
-    Hey, you don't have any upcoming events. Try adding one or importing one from your LMS or calendar!
-      <br>
-      <br>
-      Fun Fact:
-        <br>
-      Nebulus treats Assignments and Assessments as Events. So just remember that your assignments and assessments will show up in the events section in the dashboard.
-      <br>
-      <br>
-      TIP:
-<br>
-      To create one or import an Event,  head to your course page (you can access it down below) and click the little plus sign in the top right corner. A pop-up will appear, and choose the option to create an Event, Assignment, or Assessment!.
-
-  </div>
-  <div class="flex">
-    <button type="button" class="text-blue-700 bg-transparent border border-blue-700 hover:bg-blue-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:border-blue-800 dark:text-blue-800 dark:hover:text-white" data-dismiss-target="#alert-additional-content-1" aria-label="Close">
-      Dismiss
-    </button>
-  </div>
-</div>
-{% else %}
+    <div style="height:45%;width:95%;margin-left:2%;float:left;">
         <div style="height:100%;width:50%;float:left;display:block;"
              class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table id="scroll1" style="overflow-y:scroll;height:100%;width:95%;margin-left:2%;float:left;display:block;"
@@ -139,9 +112,11 @@
                 </tbody>
             </table>
         </div>
-    {% endif %}
         <div id="scroll2" class="grid grid-cols-2 gap-4" style="overflow-y:scroll;  height:100%;">
-
+            <a href="/lms" class="text-blue-500">View All Announcements</a><br><br>
+            {% if announcements|length == 0 %}
+            <p class="text-black dark:text-white">No Announcements!</p>
+            {% endif %}
             {% for announcement in announcements %}
             <div id="alert-additional-content-5" class="p-4 mb-4 bg-gray-100 rounded-lg dark:bg-gray-700" role="alert">
                 <div class="flex items-center">
@@ -158,12 +133,10 @@
                 <div class="mt-2 mb-4 text-sm text-gray-700 dark:text-gray-300">
                     {{ announcement.content }}
                 </div>
-
-
+                <br>
                 <div class="flex">
-                    <a href="/course/{{ announcement.course.id }}">
                     <button type="button"
-                            class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-xs px-3 py-1.5 pb-3 mr-2 text-center inline-flex items-center dark:bg-gray-600 dark:hover:bg-gray-500 dark:focus:ring-gray-600">
+                            class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-xs px-3 py-1.5 mr-2 text-center inline-flex items-center dark:bg-gray-600 dark:hover:bg-gray-500 dark:focus:ring-gray-600">
                         <svg class="-ml-0.5 mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20"
                              xmlns="http://www.w3.org/2000/svg">
                             <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
@@ -173,14 +146,13 @@
                         </svg>
                         View more
                     </button>
-                    </a>
                     <button type="button"
-                            class="text-gray-700 bg-transparent border border-gray-700 hover:bg-gray-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-xs px-3 py-1.5 pb-3 text-center dark:border-gray-600 dark:hover:bg-gray-600 focus:ring-gray-600 dark:text-gray-300 dark:hover:text-white"
+                            class="text-gray-700 bg-transparent border border-gray-700 hover:bg-gray-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:border-gray-600 dark:hover:bg-gray-600 focus:ring-gray-600 dark:text-gray-300 dark:hover:text-white"
                             data-dismiss-target="#alert-additional-content-5" aria-label="Close">
                         Dismiss
                     </button>
                 </div>
-
+                <br>
                 <p class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">{{
                     announcement.date }}</p>
             </div>
