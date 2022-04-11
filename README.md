@@ -42,7 +42,7 @@ $ sudo add-apt-repository ppa:deadsnakes/ppa -y
 $ sudo apt install python3.10
 ```
 
-### [Install Poetry](https://python-poetry.org/docs/#installation) (Not needed curently, but might be needed later)
+### [Install Poetry](https://python-poetry.org/docs/#installation) (Not needed currently, but might be needed later)
 
 ### Install Dependencies
 
