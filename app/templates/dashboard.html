@@ -39,17 +39,18 @@
 </head>
 <body>
 {% include "navbar.html" %}
-<div style="height:100%;overflow:hidden;">
+<br>
+<div style="height:100%;overflow:visible;">
     <div style="text-align: center; height:10%;">
         <h1 class="text-black text-3xl dark:text-white">Good
             Afternoon, {{ user }}
         </h1>
     </div>
-    <div style="height:45%;width:95%;margin-left:2%;float:left;">
-        <div style="height:100%;width:50%;float:left;display:block;"
-             class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table id="scroll1" style="overflow-y:scroll;height:100%;width:95%;margin-left:2%;float:left;display:block;"
-                   class="rounded-lg text-sm text-left text-gray-500 dark:text-gray-400 px w-full h-full">
+    <div class="grid grid-cols-2 gap-8 p-6">
+        <div class="pb-2">
+            <table id="scroll1"
+                   class=" rounded-lg text-sm text-left text-gray-500 dark:text-gray-400 px w-full h-full" style="overflow: hidden;">
+
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3">
@@ -112,7 +113,7 @@
                 </tbody>
             </table>
         </div>
-        <div id="scroll2" class="grid grid-cols-2 gap-4" style="overflow-y:scroll;  height:100%;">
+        <div id="scroll2" class="grid grid-cols-2 gap-4 pl-4" style="height:100%;">
             <a href="/lms" class="text-blue-500">View All Announcements</a><br><br>
             {% if announcements|length == 0 %}
             <p class="text-black dark:text-white">No Announcements!</p>
@@ -159,29 +160,33 @@
             {% endfor %}
         </div>
     </div>
-    <div id="scroll3" style="overflow:scroll;height:45%;float:left;width:95%;margin-left:2%;">
+<br>
+<br>
+    <div id="scroll3" style="height:45%;float:left;width:95%;margin-left:2%; overflow: visible;" class="pb-2" >
         <h2 class="text-black dark:text-white text-2xl">Recent Courses</h2>
+    <br>
         <div style="text-align: left;"
-             class="vertical block w-full section p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-            <a href="/lms" class="text-blue-500">View All Course</a><br><br>
+             class=" grid grid-cols-4 gap-4">
             {% for course in user_courses %}
             <a href="/course/{{ course.id }}">
-                <button style="margin:15px; text-align:left;padding-top:0;padding-bottom:0;  " type="button"
-                        class="text-xl  text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                    <img src="https://bins.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg?"
-                         style="object-fit: cover; width:40px; height:40px; border-radius:10px;display: inline-block; margin: 10px;"
-                         alt>
+                <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                    <img class="rounded-t-lg" src="https://bins.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg?" alt="" />
+                <div class="p-5">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                     {% if course.name|length <= 8 %}
                     {{ course.name }}
                     {% else %}
                     {{ course.name[0:5] }}...
                     {% endif %}
-                </button>
+                    </h5>
+                </div>
+                </div>
             </a>
             {% endfor %}
         </div>
     </div>
 </div>
+
 
 <script src="../static/js/dashboard.js"></script>
 </body>
