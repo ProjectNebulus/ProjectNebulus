@@ -42,18 +42,18 @@ $ sudo add-apt-repository ppa:deadsnakes/ppa -y
 $ sudo apt install python3.10
 ```
 
-### [Install Poetry](https://python-poetry.org/docs/#installation)
+### [Install Poetry](https://python-poetry.org/docs/#installation) (Not needed curently, but might be needed later)
 
 ### Install Dependencies
 
 ```bash
-$ poetry install
+$ pip install -r requirements.txt
 ```
 
 ### Run
 
 ```bash
-$ python3 oldmain.py
+$ python3 main.py
 ```
 
 ## Setup (docker)
