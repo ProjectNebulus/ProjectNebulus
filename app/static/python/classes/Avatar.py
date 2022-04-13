@@ -18,4 +18,5 @@ class Avatar(EmbeddedDocument):
     )
 
     def clean(self):
-        self.avatar_url = f"https://cdn.nebulus.ml/Avatars/{self.parent}/{self.id}"
+        if not self.avatar_url:
+            self.avatar_url = f"https://cdn.nebulus.ml/Avatars/{self.parent}/{self.id}"

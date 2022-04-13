@@ -5,20 +5,24 @@ let email_valid = false;
 let password_valid = false;
 
 function createUser() {
+    console.log(document.getElementById("chosen").value);
     var request = $.ajax({
         type: "POST",
         url: "/api/v1/internal/create-user",
-        data: {
-            "email": document.getElementById("email").value,
-            "username": document.getElementById("username").value,
-            "password": document.getElementById("password").value,
-            "age": document.getElementById("bday").value,
-            "language": document.getElementById("languages").value,
-            "theme": document.getElementById("theme").value,
-            "avatar": document.getElementById("chosen").innerText
+        data: JSON.stringify({
+            email: document.getElementById("email").value,
+            username: document.getElementById("username").value,
+            password: document.getElementById("password").value,
+            age: document.getElementById("bday").value,
+            language: document.getElementById("languages").value,
+            theme: document.getElementById("theme").value,
+            avatar: {
+                parent: "User",
+                avatar_url: `https://nebulus.ml/${document.getElementById("chosen").innerText}`
+            }
 
 
-        },
+        }),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
     });
