@@ -1,6 +1,8 @@
-from spaces import Client
-import requests
 import os
+
+import requests
+
+# from spaces import Client
 
 ACCESS_ID = "VCRH4QOPCDEQR5PFNPQM"
 SECRET_KEY = "Vx3pqPbLTGlSvNAhfxPFDto8CskcWOXOjvcW0ziwXys"
@@ -32,7 +34,9 @@ def upload_file_link(url):
         upload_file(name, name)
         os.remove(name)
         return True
-    except:
+
+    except Exception as e:
+        print(e)
         return False
 
 

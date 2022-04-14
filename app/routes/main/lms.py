@@ -1,23 +1,13 @@
+import flask
+import google.oauth2.credentials
 from flask import render_template, session, request
 
 from . import main_blueprint
 from .utils import logged_in
 from ...static.python.mongodb import read
-import os
-import flask
-import requests
 
-import google.oauth2.credentials
-import google_auth_oauthlib.flow
-import googleapiclient.discovery
 
-import os.path
-
-from google.auth.transport.requests import Request
-from google.oauth2.credentials import Credentials
-from google_auth_oauthlib.flow import InstalledAppFlow
-from googleapiclient.discovery import build
-from googleapiclient.errors import HttpError
+# from googleapiclient.discovery import build
 
 
 def credentials_to_dict(credentials):
@@ -48,6 +38,8 @@ def getGclassroomcourses():
         courses[i] = courses[i]["descriptionHeading"]
 
     return courses
+
+
 @main_blueprint.route("/lms", methods=["GET"])
 @logged_in
 def lms():

@@ -1,4 +1,6 @@
+import requests
 from flask import render_template, session, request
+from flask_cors import cross_origin
 from jinja2 import TemplateNotFound
 
 from . import main_blueprint
@@ -50,3 +52,19 @@ def course_page(page, **kwargs):
 def createCourse():
     create.create_course(request.get_json())
     return "0"
+
+
+@main_blueprint.route("/getResource/<courseID>/<documentID>")
+@private_endpoint
+@cross_origin()
+def getResource(courseID, documentID):
+    courses = list(filter(lambda c: c.id == courseID, read.get_user_courses(session["id"])))
+    if not len(courses) or not len([user for user in courses[0].authorizedUsers if user.id == session["id"]]):
+        return render_template("errors/404.html")
+
+    documents = list(filter(lambda d: d.id == documentID, courses[0].documents))
+    if not len(documents):
+        return render_template("errors/404.html")
+
+    req = requests.get(documents[0].url)
+    return req.content

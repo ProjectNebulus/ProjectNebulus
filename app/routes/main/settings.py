@@ -1,38 +1,22 @@
-from flask import render_template, session
+import flask
+import google.oauth2.credentials
 
 from . import main_blueprint
-from .utils import logged_in
-from ...static.python.mongodb import read
-from flask import render_template, session, request
-
-from . import main_blueprint
-from .utils import logged_in
-from ...static.python.mongodb import read
-from ...static.python.gclassroomcom import *
 from .spotify import *
+from ...static.python.mongodb import read
+
+
+# from googleapiclient.discovery import build
+
 
 # -*- coding: utf-8 -*-
-
-import os
-import flask
-import requests
-
-import google.oauth2.credentials
-import google_auth_oauthlib.flow
-import googleapiclient.discovery
-
-import os.path
-from google.auth.transport.requests import Request
-from google.oauth2.credentials import Credentials
-from google_auth_oauthlib.flow import InstalledAppFlow
-from googleapiclient.discovery import build
-from googleapiclient.errors import HttpError
 
 def generate_redirect(url):
     if "nebulus" in url:
         if "https" not in url:
             return url.replace("http", "https") + "spotify"
     return url + "spotify"
+
 
 @main_blueprint.route("/settings", methods=["GET"])
 @logged_in

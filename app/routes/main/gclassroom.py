@@ -1,27 +1,16 @@
+import flask
+import google.oauth2.credentials
+import google_auth_oauthlib.flow
+import requests
 from flask import render_template, session, request, redirect
 
 from . import main_blueprint
 from .utils import logged_in
-from ...static.python.mongodb import read
 from ...static.python.gclassroomcom import *
 
+# from googleapiclient.discovery import build
+
 # -*- coding: utf-8 -*-
-
-import os
-import flask
-import requests
-
-import google.oauth2.credentials
-import google_auth_oauthlib.flow
-import googleapiclient.discovery
-
-import os.path
-
-from google.auth.transport.requests import Request
-from google.oauth2.credentials import Credentials
-from google_auth_oauthlib.flow import InstalledAppFlow
-from googleapiclient.discovery import build
-from googleapiclient.errors import HttpError
 
 os.environ["OAUTHLIB_RELAX_TOKEN_SCOPE"] = "None"
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'

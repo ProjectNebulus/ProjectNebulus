@@ -1,10 +1,11 @@
-from . import main_blueprint
-from flask import render_template, session, request
-from ...static.python.mongodb import getClassroom
 import schoolopy
+from flask import render_template, session, request
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
+
+from . import main_blueprint
+from ...static.python.mongodb import getClassroom
 
 
 @main_blueprint.route("/connections/schoology")
@@ -51,7 +52,7 @@ def g_classroom_auth():
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file("credentials.json", scope)
-            flow.redirect_uri = "http://localhost:8080"
+            flow.redirect_uri = ""
             print(flow)
             creds = flow.authorization_url()
             creds = str(creds).replace("(", "").replace(")", "").replace("'", "")

@@ -3,7 +3,6 @@ import datetime
 from mongoengine import *
 
 from .Snowflake import Snowflake
-from .Avatar import Avatar
 
 
 class Announcement(Snowflake):
@@ -14,7 +13,7 @@ class Announcement(Snowflake):
     date = DateTimeField(default=datetime.datetime.now())
     author = StringField(required=True)
     author_pic = StringField(
-        default="http://localhost:8080/static/images/nebulusCats/v3.gif"
+        default="/static/images/nebulusCats/v3.gif"
     )
     likes = IntField(default=0)
     dislikes = IntField(default=0)

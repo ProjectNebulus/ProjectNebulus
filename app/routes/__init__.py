@@ -1,9 +1,7 @@
 # Imports
-import os
 
-from flask import Flask
-from flask_mail import Mail
 from flask_cors import CORS
+from flask_mail import Mail
 
 from .api import *
 from .main import *
@@ -18,7 +16,7 @@ def init_app():
     Creates a flask application.
     """
     app = Flask(__name__)
-    cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+    CORS(app, resources={r"/api/*": {"origins": "*"}, r"/getResource/*": {"origins": "*"}})
     app.config["UPLOAD_FOLDER"] = "/app/static/UserContent/"
     app.config["MAIL_SERVER"] = "smtp.gmail.com"
     app.config["MAIL_PORT"] = 465
@@ -30,6 +28,6 @@ def init_app():
     app.register_blueprint(api.api_blueprint)
     app.register_blueprint(static_blueprint)
     mail = Mail(app)
-    print([str(p) for p in app.url_map.iter_rules()])
+    print("Paths:", *sorted(app.url_map.iter_rules(), key=str), sep="\n")
 
     return app
