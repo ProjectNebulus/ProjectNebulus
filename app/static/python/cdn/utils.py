@@ -1,8 +1,7 @@
 import os
 
 import requests
-
-# from spaces import Client
+from spaces import Client
 
 ACCESS_ID = "VCRH4QOPCDEQR5PFNPQM"
 SECRET_KEY = "Vx3pqPbLTGlSvNAhfxPFDto8CskcWOXOjvcW0ziwXys"
