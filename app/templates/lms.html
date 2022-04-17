@@ -14,7 +14,7 @@
                        class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <tbody>
                     {% if announcements|length == 0 %}
-                        <p class="text-gray-300 dark:text-gray-700">No Announcements</p>
+                        <p class="text-gray-200 dark:text-gray-600">No Announcements</p>
                         {% for announcement in announcements %}
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                 <th scope="row"
@@ -25,8 +25,8 @@
                                         alt=""> {{ announcement.course.name }}</span>
                                     <h1 class="font-bold dark:text-red-500 text-red-600 text-black dark:text-white text-3xl">
                                         {{ announcement.title }}</h1>
-                                    <h1 class="text-black dark:text-white text-2xl"><span
-                                            class="font-bold text-blue-600 dark:text-blue-300">{{ announcement.author }}</span>
+                                    <h1 class="text-black dark:text-white text-2xl">
+                                        <span class="font-bold text-blue-600 dark:text-blue-300">{{ announcement.author }}</span>
                                         >
                                         <span class="text-blue-500 dark:text-blue-400">{{ announcement.imported_from }}</span>
                                     </h1>
@@ -152,29 +152,30 @@
             <p class="text-2xl text-black dark:text-white">Upcoming Events</p><br>
             <div style="text-align: center;">
                 <div class="flex flex-col overflow-x-auto sm:rounded-lg inline-block min-w-full align-middle overflow-hidden">
-                    <table style="margin-left:15px;"
-                           class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-700">
-                        <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-
-                        <tr class="hover:bg-gray-100 dark:hover:bg-gray-700" style="white-space: nowrap;">
-                            {% if events|length == 0 %}
-                                <p class="text-gray-300 dark:text-gray-700">No Events</p>
+                    {% if events|length == 0 %}
+                        <p class="text-gray-300 dark:text-gray-700">No Assignments</p>
+                    {% endif %}
+                    {% for date, assignments in events.items() %}
+                        {% for a in assignments[:15] %}
+                            {% if a.submitDate == None or date > today %}
+                                <a href="/assignment/{{ assignments.id }}" class="text-black dark:text-white text-left
+                            bg-gray-200 dark:bg-gray-700 rounded-lg p-4 ml-3 shadow-md dark:border-gray-700 text-xl mb-5">
+                                    <span class="material-icons" style="vertical-align: bottom">event</span>
+                                    <span class="ml-2">{{ a.title }}</span>
+                                    <div class="text-gray-900 dark:text-gray-300 text-sm"
+                                         style="margin-left: 2.3rem">
+                                        Due: {{ date.strftime("%D") }}
+                                        {% if date < today %}
+                                            • <span class="text-red-600 dark:text-red-500">Overdue</span>
+                                        {% elif a.grade != None and a.grade / a.points < 0.6 %}
+                                            <span class="text-black dark:text-white"> • </span>
+                                            <span class="text-gray-300 dark:text-gray-700">{{ a.grade }}/{{ a.points }}</span>
+                                        {% endif %}
+                                    </div>
+                                </a>
                             {% endif %}
-                            {% for event in events %}
-                                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ event.__class__.__name__ }}
-                                    <svg style="display: inline-block;margin-right:15px;" class="w-6 h-6"
-                                         fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                              stroke-width="2"
-                                              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                    </svg>
-                                    {{ event.title }}
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                        {% endfor %}
+                    {% endfor %}
                 </div>
             </div>
         </div>

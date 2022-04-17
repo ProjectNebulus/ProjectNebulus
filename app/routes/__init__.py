@@ -16,7 +16,7 @@ def init_app():
     Creates a flask application.
     """
     app = Flask(__name__)
-    CORS(app, resources={r"/api/*": {"origins": "*"}, r"/getResource/*": {"origins": "*"}})
+    CORS(app, resources={r"/api/*": {"origins": "*"}})
     app.config["UPLOAD_FOLDER"] = "/app/static/UserContent/"
     app.config["MAIL_SERVER"] = "smtp.gmail.com"
     app.config["MAIL_PORT"] = 465

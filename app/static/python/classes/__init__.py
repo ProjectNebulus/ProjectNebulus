@@ -1,10 +1,12 @@
+from .Announcement import Announcement
+from .Assessment import Assessment
 from .Assignment import Assignment
 from .Course import Course
 from .Document import DocumentFile
 from .Events import Event
 from .Folder import Folder
+from .GoogleClassroom import GoogleClassroom
 from .Grades import Grades
 from .Schoology import Schoology
+from .Spotify import Spotify
 from .User import User
-
-# from .graphql_query import schema

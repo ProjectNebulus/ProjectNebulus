@@ -14,12 +14,17 @@ html {
     -moz-tab-size: 4;
     -o-tab-size: 4;
     tab-size: 4;
-    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 }
 
 body {
     margin: 0;
-    line-height: inherit
+    line-height: inherit;
+    background-color: white;
+}
+
+html.dark > body {
+    background-color: #111926;
 }
 
 hr {
@@ -362,21 +367,7 @@ select {
     outline: 1px auto -webkit-focus-ring-color
 }
 
-input[type=file]::-webkit-file-upload-button {
-    color: #fff;
-    background: #374151;
-    font-weight: 500;
-    font-size: .875rem;
-    cursor: pointer;
-    border: 0;
-    padding: .625rem 1rem .625rem 2rem;
-    -webkit-margin-start: -1rem;
-    margin-inline-start: -1rem;
-    -webkit-margin-end: 1rem;
-    margin-inline-end: 1rem
-}
-
-input[type=file]::file-selector-button {
+input[type=file]::-webkit-file-upload-button, input[type=file]::file-selector-button {
     color: #fff;
     background: #374151;
     font-weight: 500;
@@ -933,7 +924,7 @@ input:checked + .toggle-bg {
 }
 
 .flex-1 {
-    flex: 1 1 0%
+    flex: 1 1 0
 }
 
 .flex-shrink-0 {
@@ -1937,8 +1928,6 @@ input:checked + .toggle-bg {
 }
 
 .transition {
-    transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
     transition-timing-function: cubic-bezier(.4, 0, .2, 1);
     transition-duration: .15s
