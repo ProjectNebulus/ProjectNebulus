@@ -1,6 +1,7 @@
 let openDropdown = null;
 let justOpened = false;
 let dropdowns = document.getElementsByTagName("dropdown-menu");
+let popups = document.getElementsByTagName("popup");
 
 window.addEventListener("load", setUpDropdowns);
 window.addEventListener("click", function () {
@@ -52,7 +53,8 @@ function setUpDropdowns() {
                 contents.style.visibility = "visible";
                 justOpened = true;
                 openDropdown = contents;
-            } else {
+            }
+            else {
                 contents.style.visibility = "hidden";
                 openDropdown = null;
             }

@@ -1,11 +1,15 @@
+import datetime
+
 import flask
 import google.oauth2.credentials
 from flask import render_template, session, request
-from googleapiclient.discovery import build
 
 from . import main_blueprint
 from .utils import logged_in
 from ...static.python.mongodb import read
+
+
+# from googleapiclient.discovery import build
 
 
 def credentials_to_dict(credentials):
@@ -44,11 +48,9 @@ def lms():
     new_user = request.args.get("new_user", default="false", type=str)
     user_acc = read.find_user(id=session["id"])
     user_courses = read.get_user_courses(session["id"])
-    # print(str(read.sort_user_events(session["id"])))
-    # return str(read.sort_user_events(session["id"]))
-    sorted = read.sort_user_events(session["id"])
-    print(sorted)
-    print(sorted[0])
+    events = read.sort_user_events(session["id"])
+    print(events)
+    print(events[0])
     try:
         gcourses = getGclassroomcourses()
     except:
@@ -93,7 +95,6 @@ def lms():
         #     print("Not Authorized")
         # else:
         auth.authorize()
-        auth.authorize()
         auth.authorized = True
         sc = schoolopy.Schoology(auth)
         print(sc.get_sections())
@@ -111,13 +112,10 @@ def lms():
         password=session["password"],
         user=session["username"],
         user_acc=user_acc,
-        user_courses=user_courses,
+        user_courses=list(user_courses) + list(gcourses) + list(schoologycourses),
         read=read,
         page="Nebulus - Learning",
-        new_account=new_user == "true",
-        announcements=sorted[0],
-        events=sorted[1],
-        gcourses=gcourses,
-        canvascourses=canvascourses,
-        schoologycourses=schoologycourses
+        announcements=events[0],
+        events=events[1],
+        today=datetime.date.today()
     )

@@ -158,12 +158,11 @@
                     {% for date, assignments in events.items() %}
                         {% for a in assignments[:15] %}
                             {% if a.submitDate == None or date > today %}
-                                <a href="/assignment/{{ assignments.id }}" class="text-black dark:text-white text-left
+                                <a href="/assignment/{{ a.id }}" class="text-black dark:text-white text-left
                             bg-gray-200 dark:bg-gray-700 rounded-lg p-4 ml-3 shadow-md dark:border-gray-700 text-xl mb-5">
                                     <span class="material-icons" style="vertical-align: bottom">event</span>
                                     <span class="ml-2">{{ a.title }}</span>
-                                    <div class="text-gray-900 dark:text-gray-300 text-sm"
-                                         style="margin-left: 2.3rem">
+                                    <div class="text-gray-900 dark:text-gray-300 text-sm" style="margin-left: 2.3rem">
                                         Due: {{ date.strftime("%D") }}
                                         {% if date < today %}
                                             • <span class="text-red-600 dark:text-red-500">Overdue</span>
