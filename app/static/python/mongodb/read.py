@@ -76,7 +76,7 @@ def find_folder(**kwargs) -> Folder | None:
 
 
 def find_document(**kwargs) -> Document | None:
-    document = Document.objects(**kwargs).first()
+    document = DocumentFile.objects(**kwargs).first()
     if not document:
         print(document)
         raise KeyError("User not found")

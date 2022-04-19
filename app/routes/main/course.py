@@ -66,5 +66,5 @@ def getResource(courseID, documentID):
     if not len(documents):
         return render_template("errors/404.html")
 
-    req = requests.get(documents[0].url)
+    req = requests.get(read.find_document(id=documentID).url)
     return req.content
