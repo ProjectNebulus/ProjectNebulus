@@ -1,6 +1,6 @@
 module.exports = {
     darkMode: 'class',
-    content: ['./templates/**/*.html', './static/**/*.{js,css}', './node_modules/flowbite/**/*.js'],
+    content: ['./app/templates/**/*.html', './app/static/**/*.{js,css}', './app/static/flowbite/**/*.js'],
     theme: {
         extend: {
             fontFamily: {
@@ -13,6 +13,6 @@ module.exports = {
         require('@tailwindcss/forms'),
         require('@tailwindcss/line-clamp'),
         require('@tailwindcss/aspect-ratio'),
-        require('flowbite/plugin')
+        require('./app/static/flowbite/plugin')
     ]
 };
