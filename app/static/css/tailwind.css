@@ -56,7 +56,14 @@ body {
   /* 1 */
   line-height: inherit;
   /* 2 */
+
+  background: white;
 }
+
+html.dark body {
+  background: #111926;
+}
+
 
 /*
 1. Add the correct height in Firefox.
@@ -1209,6 +1216,11 @@ input:checked + .toggle-bg {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
 .bg-blue-700 {

@@ -44,10 +44,8 @@ for (let close of modal.getElementsByClassName('close')) {
 let courseName = document.getElementById('course-name');
 let courseTeacher = document.getElementById('course-teacher');
 
-for (const element of modal.getElementsByClassName('CoursePage')) {
+for (const element of modal.getElementsByClassName('CoursePage'))
     element.className += ' hidden overflow-visible fixed right-0 left-0 top-4 z-50 justify-center items-center h-modal md:h-full md:inset-0';
-    element.oncontextmenu = () => rightClickElements = null;
-}
 
 function createCourse(subtemplate) {
     document.getElementById('create-course-status').innerHTML = 'Creating course...';
@@ -175,8 +173,7 @@ const templates = [
 
 for (const template of templates) {
     let button = document.createElement('span');
-    button.className =
-        'createSelectButton text-white  focus:ring-4 shadow-lg font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2';
+    button.className = 'createSelectButton text-white focus:ring-4 shadow-lg font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2';
     button.onclick = () => chooseTemplate(template);
 
     // TODO: fix duplicate code fragments
@@ -231,8 +228,7 @@ function chooseTemplate(template) {
     templateLists[1].innerHTML = '';
     for (const subtemplate of template.subtemplates) {
         let button = document.createElement('span');
-        button.className =
-            'createSelectButton text-white focus:ring-4 shadow-lg font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2';
+        button.className = 'createSelectButton text-white focus:ring-4 shadow-lg font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2';
         button.onclick = function () {
             const name = template.name;
             customize(name, subtemplate);

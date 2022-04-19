@@ -1,7 +1,6 @@
-from ..graphql_inputs.create_inputs import *
-from ...User import User as UserModel
-from ....mongodb.create import *
 from ..graphene_models import *
+from ..graphql_inputs.create_inputs import *
+from ....mongodb.create import *
 
 """
 GraphQL Mutations to create objects in the database

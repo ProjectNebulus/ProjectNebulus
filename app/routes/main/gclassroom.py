@@ -3,11 +3,12 @@ import google.oauth2.credentials
 import google_auth_oauthlib.flow
 import requests
 from flask import render_template, session, request, redirect
-from googleapiclient.discovery import build
 
 from . import main_blueprint
 from .utils import logged_in
 from ...static.python.gclassroomcom import *
+
+# from googleapiclient.discovery import build
 
 # -*- coding: utf-8 -*-
 

@@ -3,20 +3,8 @@ from __future__ import annotations
 import re
 from typing import List
 
-from ..classes.Announcement import Announcement
-from ..classes.Assignment import Assignment
-from ..classes.Course import Course
-from ..classes.Document import DocumentFile
-from ..classes.Events import Event
-from ..classes.Folder import Folder
-from ..classes.Document import Document
-from ..classes.GoogleClassroom import GoogleClassroom
-from ..classes.Grades import Grades
-from ..classes.Schoology import Schoology
-from ..classes.Spotify import Spotify
-from ..classes.User import User
+from ..classes import *
 from ..security import valid_password
-from ..classes.Assessment import Assessment
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 
@@ -59,8 +47,8 @@ def find_courses(_id: str):
 
 
 def find_user(**kwargs) -> User | None:
-    kwargs = {k: v for k, v in kwargs.items() if v is not None}
-    user = User.objects(**kwargs).first()
+    data = {k: v for k, v in kwargs.items() if v is not None}
+    user = User.objects(**data).first()
     if not user:
         print(user)
         raise KeyError("User not found")
@@ -83,42 +71,37 @@ def find_document(**kwargs) -> Document | None:
     return document
 
 
-def getSchoology(**kwargs) -> List[Schoology]:
+def getSchoology(**kwargs) -> List[Schoology] | None:
     try:
         return find_user(**kwargs).schoology
     except KeyError:
         return
 
 
-def getClassroom(
-    id: str = None, username: str = None, email: str = None
-) -> GoogleClassroom:
-    return find_user(id=id, username=username, email=email).gclassroom
+def getClassroom(userID: str = None, username: str = None, email: str = None) -> GoogleClassroom:
+    return find_user(id=userID, username=username, email=email).gclassroom
 
 
-def getSpotify(id: str = None, username: str = None, email: str = None) -> Spotify:
-    return find_user(id=id, username=username, email=email).spotify
+def getSpotify(userID: str = None, username: str = None, email: str = None) -> Spotify:
+    return find_user(id=userID, username=username, email=email).spotify
 
 
-def getSpotifyCache(id: str = None, username: str = None, email: str = None) -> Spotify:
+def getSpotifyCache(userID: str = None, username: str = None, email: str = None) -> Spotify | None:
     try:
-        return find_user(id=id, username=username, email=email).spotify.Spotify_cache
+        return find_user(id=userID, username=username, email=email).spotify.Spotify_cache
     except:
         return None
 
 
-def CheckSchoology(_id: int):
+def checkSchoology(_id: int):
     user = find_user(id=_id)
-
-    if not user or not user.schoology:
-        return "false"
-    return "true"
+    return str(user and user.schoology).lower()
 
 
-def check_type(theobject):
+def check_type(o):
     try:
-        a = find_folder(theobject)
-        if a == None:
+        a = find_folder(**o)
+        if a is None:
             return "document"
         else:
             return "folder"
@@ -162,6 +145,7 @@ def get_folders(parent_id: int = None, course_id: int = None) -> List[Folder]:
 def sortByDate(obj):
     return obj.date.date() if obj._cls == "Event" else obj.due.date()
 
+
 def sortByDateTime(obj):
     return obj.date if obj._cls == "Event" else obj.due
 
@@ -176,19 +160,14 @@ def sort_user_events(user_id: str) -> List[List]:
 
     events_assessments_assignments = list(chain(events, assignments, assessments))
     sorted_events = sorted(events_assessments_assignments, key=lambda obj: sortByDateTime(obj))
-    dates ={key: list(result) for key, result in groupby(
-        sorted_events, key=lambda obj: sortByDate(obj))}
+    dates = {key: list(result) for key, result in groupby(sorted_events, key=lambda obj: sortByDate(obj))}
 
     print(dates)
 
-
-
-
-
     return [announcements, dates]
 
-
     # events_assessments_assignments = events | assignments | assessments
+
 
 def unsorted_user_events(user_id: str) -> List[List]:
     courses = get_user_courses(user_id)
@@ -203,13 +182,8 @@ def unsorted_user_events(user_id: str) -> List[List]:
 
 
 def check_signup_user(username) -> str:
-    if User.objects(username=username):
-        return "false"
+    return str(User.objects(username=username)).lower()
 
-    return "true"
 
 def check_signup_email(email) -> str:
-    if User.objects(email=email):
-        return "false"
-
-    return "true"
+    return str(User.objects(email=email)).lower()

@@ -2,6 +2,7 @@ from .Announcement import Announcement
 from .Assessment import Assessment
 from .Assignment import Assignment
 from .Course import Course
+from .Discord import Discord
 from .Document import DocumentFile
 from .Events import Event
 from .Folder import Folder

@@ -22,33 +22,28 @@
     <div style="margin-left:10px;width:calc(100% - 280px);float:left;" id="documentPage">
         {% if course.documents|length == 0 and course.folders|length == 0 %}
             <h1 style="margin-left:20px;margin-top:20px;" class="text-2xl text-black dark:text-white">You have no
-                documents
-                or folders! Try creating one!</h1>
+                documents or folders! Try creating one!</h1>
         {% endif %}
 
-        {% for i in course.folders %}
+        {% for folder in course.folders %}
             <br>
-            <a
-                    class="truncate text-ellipsis overflow-hidden ...  block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <a class="truncate text-ellipsis overflow-hidden block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 <p class="font-normal text-gray-700 dark:text-gray-400" style="white-space: nowrap;  ">
                     <svg style="display: inline-block;margin-right:15px;" class="w-6 h-6" fill="none"
-                         stroke="{{ i.color }}" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                         stroke="{{ folder.color }}" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                               d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
                     </svg>
-                    <span>{{ i.name }}</span></p>
+                    <span>{{ folder.name }}</span></p>
             </a>
         {% endfor %}
         {% for document in course.documents %}
             <br>
             <a onclick="document.getElementById('documentPage').style.display = 'none';startFile('{{ document.name }}','/getResource/{{ course.id }}/{{ document.id }}', {{ ("pdf" in document.url)|string|lower }});"
-
-               class="truncate text-ellipsis overflow-hidden ... block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+               class="truncate text-ellipsis overflow-hidden block p-6 max-w-sm bg-white rounded-lg cursor-pointer border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 <p class="font-normal text-gray-700 dark:text-gray-400" style="white-space: nowrap;  ">
                     <svg style="display:inline-block;margin-right:15px;" class="w-6 h-6" fill="none"
-                         stroke="currentColor"
-                         viewBox="0 0 24 24"
-                         xmlns="http://www.w3.org/2000/svg">
+                         stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                               d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
                     </svg>
@@ -64,7 +59,6 @@
                 width: 100%;
                 border: 3px solid transparent;
                 border-radius: 10px;
-
             }
 
             .container {
@@ -78,8 +72,6 @@
                 padding: 10px;
                 text-align: center;
             }
-
-
         </style>
         <script>
             // intial params
@@ -104,7 +96,8 @@
                 if (isPDF) {
                     document.getElementById("pdf-viewer").style.display = "block";
                     startPDF(link)
-                } else {
+                }
+                else {
                     document.getElementById("code-viewer").style.display = "block";
                     const request = new XMLHttpRequest();
                     request.open('GET', link, true);
@@ -114,8 +107,7 @@
                             const type = request.getResponseHeader('Content-Type');
                             if (type.indexOf("text") !== 1) {
                                 //alert(request.responseText);
-                                let text = request.responseText.replace("/\n/g", "<br>");
-                                document.getElementById("code_loc").innerHTML = text;
+                                document.getElementById("code_loc").innerHTML = request.responseText.replace("/\n/g", "<br>");
                             }
                         }
                     }
@@ -133,6 +125,8 @@
             }
 
             function initEvents() {
+                canvas.oncontextmenu = (e) => e.preventDefault();
+
                 let prevPageBtn = document.getElementById('prev_page');
                 let nextPageBtn = document.getElementById('next_page');
                 let goToPage = document.getElementById('go_to_page');
@@ -146,12 +140,7 @@
 
             // init when window is loaded
             function initPDFRenderer(url) {
-
-
-                // const url = 'test1.pdf'; // replace with your pdf location
-
                 let option = {url};
-
 
                 pdfjsLib.getDocument(option).promise.then(pdfData => {
                     totalPages = pdfData.numPages;
@@ -168,7 +157,7 @@
                 document.getElementById('current_page_num').textContent = pageNumToRender;
                 pdf.getPage(pageNumToRender).then(page => {
                     document.getElementById("loader").style.display = "none";
-                    const viewport = page.getViewport({scale: 5});
+                    const viewport = page.getViewport({scale: 3});
                     canvas.height = viewport.height;
                     canvas.width = viewport.width;
                     let renderCtx = {canvasContext, viewport};
@@ -185,7 +174,8 @@
             function renderPageQueue(pageNum) {
                 if (pageRenderingQueue != null) {
                     pageRenderingQueue = pageNum;
-                } else {
+                }
+                else {
                     renderPage(pageNum);
                 }
             }
@@ -652,7 +642,8 @@
                         playBtn.classList.remove("play");
                         playBtn.classList.add("pause");
                         audio.play();
-                    } else {
+                    }
+                    else {
                         playBtn.classList.remove("pause");
                         playBtn.classList.add("play");
                         audio.pause();
@@ -667,7 +658,8 @@
                 if (audio.muted) {
                     volumeEl.classList.remove("icono-volumeMedium");
                     volumeEl.classList.add("icono-volumeMute");
-                } else {
+                }
+                else {
                     volumeEl.classList.add("icono-volumeMedium");
                     volumeEl.classList.remove("icono-volumeMute");
                 }
