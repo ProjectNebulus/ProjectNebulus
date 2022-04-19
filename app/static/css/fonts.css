@@ -4,5 +4,32 @@
 
 @font-face {
   font-family: 'SpotifyFont';
-  src: url('../fonts/Spotify-Font/Gotham-Medium.woff') format('woff')
+  src: url('../fonts/Spotify-Font/Gotham-Medium.woff') format('woff');
+  font-weight: normal;
+}
+@font-face {
+  font-family: 'SpotifyFont';
+  src: url('../fonts/Spotify-Font/Gotham-Medium.woff') format('woff');
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'SpotifyFont';
+  src: url('../fonts/Spotify-Font/Gotham-Medium.woff') format('woff');
+  font-weight: 500;
+}
+@font-face {
+  font-family: 'SpotifyFont';
+  src: url('../fonts/Spotify-Font/Gotham-Medium.woff') format('woff');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'SpotifyFont';
+  src: url('../fonts/Spotify-Font/Gotham-Medium.woff') format('woff');
+  font-weight: 300;
+}
+
+@layer base {
+  html {
+    font-family: SpotifyFont;
+  }
 }

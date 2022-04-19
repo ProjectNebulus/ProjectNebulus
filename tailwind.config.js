@@ -1,12 +1,12 @@
+
 module.exports = {
+
     darkMode: 'class',
     content: ['./app/templates/**/*.html', './app/static/**/*.{js,css}', './app/static/flowbite/**/*.js'],
     theme: {
-        extend: {
             fontFamily: {
-                SpotifyFont: ['SpotifyFont', 'sans-serif'],
-            }
-        }
+                sans: ['SpotifyFont', "sans-serif"],
+            },
     },
     plugins: [
         require('@tailwindcss/typography'),
