@@ -31,7 +31,6 @@ function createUser() {
 
 function next(num) {
     if (num === 1) {
-        let checks = document.getElementsByClassName("username-error");
         if (checks[0].innerText === "check" && checks[1].innerText === "check" && checks[2].innerText === "check" && checks[3].innerText === "check") {
             const request = $.ajax({
                 type: "POST",
@@ -47,7 +46,6 @@ function next(num) {
         else alert("You can't move on yet!");
     }
     else if (num === 2) {
-        let checks = document.getElementsByClassName("username-error");
         console.log(checks)
         if (checks[4].innerHTML.includes("check") && checks[5].innerHTML.includes("check")) {
             document.getElementById("step" + num.toString()).style.display = "none";
@@ -73,16 +71,18 @@ function validate(email) {
     return EMAIL_REGEX.test(email);
 }
 
-let username, usernameError, password, passwordConfirm, email, bday, verification;
+let username, validationIcons, password, passwordConfirm, email, bday, verification, errorMessages, checks;
 
 window.addEventListener('load', function () {
     username = document.getElementById('username');
-    usernameError = document.getElementsByClassName('username-error');
+    validationIcons = document.getElementsByClassName('validation-icon');
     password = document.getElementById('password');
     passwordConfirm = document.getElementById('confirm-password');
     email = document.getElementById('email');
     bday = document.getElementById('bday');
     verification = document.getElementById('verification');
+    errorMessages = document.getElementsByClassName("errormsg");
+    checks = document.getElementsByClassName("validation-icon");
 
     const RED_BORDER = ['bg-red-50', 'border', 'border-red-500', 'text-red-900', 'placeholder-red-700', 'text-sm', 'rounded-lg', 'focus:ring-red-500', 'focus:border-red-500', 'block', 'w-full', 'p-2.5', 'dark:bg-red-100', 'dark:border-red-400'];
 
@@ -98,31 +98,31 @@ window.addEventListener('load', function () {
     const r_l = ',<.>/?;:\'"\\|[{]}=+-_`!@#$%^&*()_+';
 
     function changeUser() {
-        let usernameStatus = document.getElementsByClassName('errormsg')[0];
+        let usernameStatus = errorMessages[1];
         const usrname = username.value;
         usernameStatus.style.color = 'red';
         usernameStatus.innerHTML = '<br>';
         if (usrname === '') {
             usernameStatus.innerHTML =
                 'Please enter a username!';
-            usernameError[0].style.color = 'red';
-            usernameError[0].innerHTML =
+            validationIcons[1].style.color = 'red';
+            validationIcons[1].innerHTML =
                 '<i class="material-icons">close</i>';
             usrname.classList.add(...RED_BORDER);
             return false;
         }
         if (usrname.length < 6) {
             usernameStatus.innerHTML = 'Your username must be at least 6 characters long!';
-            usernameError[0].style.color = 'red';
-            usernameError[0].innerHTML =
+            validationIcons[1].style.color = 'red';
+            validationIcons[1].innerHTML =
                 '<i class="material-icons">close</i>';
             usrname.classList.add(...RED_BORDER);
             return false;
         }
         if (usrname.length > 32) {
             usernameStatus.innerHTML = 'Your username must be less than 32 characters long!';
-            usernameError[0].style.color = 'red';
-            usernameError[0].innerHTML =
+            validationIcons[1].style.color = 'red';
+            validationIcons[1].innerHTML =
                 '<i class="material-icons">close</i>';
             usrname.classList.add(...RED_BORDER);
             return false;
@@ -131,8 +131,8 @@ window.addEventListener('load', function () {
         for (let i = 0; i < usrname.length; i++) {
             if (!(validChars.includes(usrname[i].toLowerCase()))) {
                 usernameStatus.innerHTML = 'Your username can only contain letters, numbers, underscores, dashes, and spaces!';
-                usernameError[0].style.color = 'red';
-                usernameError[0].innerHTML = '<i class="material-icons">close</i>';
+                validationIcons[1].style.color = 'red';
+                validationIcons[1].innerHTML = '<i class="material-icons">close</i>';
                 usrname.classList.add(...RED_BORDER);
                 return false;
             }
@@ -147,8 +147,8 @@ window.addEventListener('load', function () {
         });
         request.done(function (data) {
             if (data === "false") {
-                usernameError[0].style.color = 'red';
-                usernameError[0].innerHTML =
+                validationIcons[1].style.color = 'red';
+                validationIcons[1].innerHTML =
                     '<i class="material-icons">close</i>';
                 usernameStatus.innerHTML = 'This username already exists!';
                 usrname.classList.remove(...GREEN_BORDER);
@@ -156,9 +156,8 @@ window.addEventListener('load', function () {
                 return false;
             }
             else {
-                usernameError[0].style.color = 'green';
-                usernameError[0].innerHTML =
-                    '<i class="material-icons">check</i>';
+                validationIcons[1].style.color = 'green';
+                validationIcons[1].innerHTML = '<i class="material-icons">check</i>';
                 usrname.classList.remove(...RED_BORDER);
                 usrname.classList.add(...GREEN_BORDER);
                 usernameStatus.innerHTML = '<br>';
@@ -169,20 +168,20 @@ window.addEventListener('load', function () {
     function changeEmail() {
         const value = email.value;
 
-        let emailStatus = document.getElementsByClassName('errormsg')[1];
+        let emailStatus = errorMessages[0];
         emailStatus.style.color = 'red';
         emailStatus.innerHTML = '<br>';
 
         if (email.value === '') {
-            usernameError[1].style.color = 'red';
-            usernameError[1].innerHTML = '<i class="material-icons">close</i>';
+            validationIcons[0].style.color = 'red';
+            validationIcons[0].innerHTML = '<i class="material-icons">close</i>';
             emailStatus.innerHTML = 'Please enter an email!';
             email.classList.add(...RED_BORDER);
             return false;
         }
         if (validate(value) === false && value !== '') {
-            usernameError[1].style.color = 'red';
-            usernameError[1].innerHTML = '<i class="material-icons">close</i>';
+            validationIcons[0].style.color = 'red';
+            validationIcons[0].innerHTML = '<i class="material-icons">close</i>';
             emailStatus.innerHTML = 'Please enter a valid email!';
             email.classList.add(...RED_BORDER);
             return false;
@@ -202,19 +201,16 @@ window.addEventListener('load', function () {
         request.done(function (data) {
             console.log(data);
             if (data === "false") {
-                usernameError[1].style.color = 'red';
-                usernameError[1].innerHTML = '<i class="material-icons">close</i>';
+                validationIcons[0].style.color = 'red';
+                validationIcons[0].innerHTML = '<i class="material-icons">close</i>';
                 emailStatus.innerHTML = 'This email already exists!';
                 email.classList.remove(...GREEN_BORDER);
                 email.classList.add(...RED_BORDER);
                 return false;
-
             }
             else {
-                usernameError[1].style.color = 'green';
-                usernameError[1].innerHTML =
-                    '<i class="material-icons">check</i>';
-
+                validationIcons[0].style.color = 'green';
+                validationIcons[0].innerHTML = '<i class="material-icons">check</i>';
                 email.classList.remove(...RED_BORDER);
                 email.classList.add(...GREEN_BORDER);
                 emailStatus.innerHTML = '<br>'
@@ -224,20 +220,20 @@ window.addEventListener('load', function () {
 
 
     function confirmDate() {
-        let status = document.getElementsByClassName('errormsg')[5];
+        let status = errorMessages[5];
         status.style.color = 'red';
         status.innerHTML = '<br>';
         let value = bday.value;
         if (value !== "") {
-            usernameError[5].style.color = 'green';
-            usernameError[5].innerHTML = '<i class="material-icons">check</i>';
+            validationIcons[5].style.color = 'green';
+            validationIcons[5].innerHTML = '<i class="material-icons">check</i>';
             bday.classList.remove(...RED_BORDER);
             bday.classList.add(...GREEN_BORDER);
             email_valid = true;
         }
         else {
-            usernameError[5].style.color = 'red';
-            usernameError[5].innerHTML = '<i class="material-icons">close</i>';
+            validationIcons[5].style.color = 'red';
+            validationIcons[5].innerHTML = '<i class="material-icons">close</i>';
             status.innerHTML = 'Invalid Birthday';
             bday.classList.remove(...GREEN_BORDER);
             bday.classList.add(...RED_BORDER);
@@ -246,7 +242,7 @@ window.addEventListener('load', function () {
     }
 
     function confirmVerification() {
-        let status = document.getElementsByClassName('errormsg')[4];
+        let status = errorMessages[4];
         status.style.color = 'red';
         status.innerHTML = '<br>';
         let value = verification.value;
@@ -257,15 +253,15 @@ window.addEventListener('load', function () {
         });
         request.done(function (data) {
             if (value === data) {
-                usernameError[4].style.color = 'green';
-                usernameError[4].innerHTML = '<i class="material-icons">check</i>';
+                validationIcons[4].style.color = 'green';
+                validationIcons[4].innerHTML = '<i class="material-icons">check</i>';
                 verification.classList.remove(...RED_BORDER);
                 verification.classList.add(...GREEN_BORDER);
                 email_valid = true;
             }
             else {
-                usernameError[4].style.color = 'red';
-                usernameError[4].innerHTML = '<i class="material-icons">close</i>';
+                validationIcons[4].style.color = 'red';
+                validationIcons[4].innerHTML = '<i class="material-icons">close</i>';
                 status.innerHTML = 'Incorrect Confirmation';
                 verification.classList.remove(...GREEN_BORDER);
                 verification.classList.add(...RED_BORDER);
@@ -275,14 +271,14 @@ window.addEventListener('load', function () {
     }
 
     function confirmPassword() {
-        let status = document.getElementsByClassName('errormsg')[3];
+        let status = errorMessages[3];
         status.style.color = 'red';
         status.innerHTML = '<br>';
         let value = passwordConfirm.value;
         let value2 = password.value;
         if (value === "") {
-            usernameError[3].style.color = 'red';
-            usernameError[3].innerHTML =
+            validationIcons[3].style.color = 'red';
+            validationIcons[3].innerHTML =
                 '<i class="material-icons">close</i>';
             status.innerHTML = 'Please confirm your password!';
             passwordConfirm.classList.remove(...GREEN_BORDER);
@@ -291,16 +287,16 @@ window.addEventListener('load', function () {
             return false;
         }
         if (value === value2 && value !== "") {
-            usernameError[3].style.color = 'green';
-            usernameError[3].innerHTML =
+            validationIcons[3].style.color = 'green';
+            validationIcons[3].innerHTML =
                 '<i class="material-icons">check</i>';
             passwordConfirm.classList.remove(...RED_BORDER);
             passwordConfirm.classList.add(...GREEN_BORDER);
             email_valid = true;
         }
         else {
-            usernameError[3].style.color = 'red';
-            usernameError[3].innerHTML =
+            validationIcons[3].style.color = 'red';
+            validationIcons[3].innerHTML =
                 '<i class="material-icons">close</i>';
             status.innerHTML = 'Two Passwords do not Match';
             passwordConfirm.classList.remove(...GREEN_BORDER);
@@ -315,7 +311,7 @@ window.addEventListener('load', function () {
     function checkPassword() {
         validPassword = false;
 
-        let status = document.getElementsByClassName('errormsg')[2];
+        let status = errorMessages[2];
         status.style.color = 'red';
         status.innerHTML = '<br>';
         const value = password.value;
@@ -325,8 +321,8 @@ window.addEventListener('load', function () {
                 'Please enter a password!';
             password.classList.remove(...GREEN_BORDER);
             password.classList.add(...RED_BORDER);
-            usernameError[2].style.color = 'red';
-            usernameError[2].innerHTML =
+            validationIcons[2].style.color = 'red';
+            validationIcons[2].innerHTML =
                 '<i class="material-icons">close</i>';
             return false;
 
@@ -350,17 +346,16 @@ window.addEventListener('load', function () {
                     'Password must include at least 1 special character';
                 password.classList.remove(...GREEN_BORDER);
                 password.classList.add(...RED_BORDER);
-                usernameError[2].style.color = 'red';
-                usernameError[2].innerHTML =
+                validationIcons[2].style.color = 'red';
+                validationIcons[2].innerHTML =
                     '<i class="material-icons">close</i>';
             }
             else {
                 validPassword = true;
                 password.classList.remove(...RED_BORDER);
                 password.classList.add(...GREEN_BORDER);
-                usernameError[2].style.color = 'green';
-                usernameError[2].innerHTML =
-                    '<i class="material-icons">check</i>';
+                validationIcons[2].style.color = 'green';
+                validationIcons[2].innerHTML = '<i class="material-icons">check</i>';
             }
         }
     }

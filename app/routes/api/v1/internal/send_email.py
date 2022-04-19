@@ -1,11 +1,10 @@
-from flask import Blueprint, session, request
-import codecs
 import random
-import os
-import smtplib
-from flask_mail import Mail, Message
-from . import internal
+
 from flask import Flask
+from flask import session, request
+from flask_mail import Mail, Message
+
+from . import internal
 
 app = Flask(__name__)
 app.config["MAIL_SERVER"] = "smtp.gmail.com"
@@ -32,6 +31,7 @@ def send_email():
 
     code = random.randint(10000000, 99999999)
     session["verificationCode"] = str(code)
+    print(code)
 
     msg = Message(
         f"Your Nebulus Email Verification Code [{code}] ",

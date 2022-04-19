@@ -154,7 +154,7 @@ window.addEventListener('load', function () {
     loginButton.disabled = true;
 
     function checkCredentials() {
-        const errorUsername = document.getElementsByClassName('username-error-msg');
+        const errorUsername = document.getElementsByClassName('error-msg');
         const errorPassword = document.getElementsByClassName('password-error-msg');
 
         if (username.value === '') {
@@ -206,9 +206,9 @@ window.addEventListener('load', function () {
 
 
 function reqListener1() {
-    const usernameError = document.getElementById('username-error');
+    const usernameError = document.getElementById('error');
     const passwordError = document.getElementById('password-error');
-    const usernameErrorMsg = document.getElementById('username-error-msg');
+    const usernameErrorMsg = document.getElementById('error-msg');
     const passwordErrorMsg = document.getElementById('password-error-msg');
 
     if (this.responseText.split("-")[0] === 'true') {
