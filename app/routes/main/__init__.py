@@ -12,7 +12,7 @@ from .about import *
 from .connections import *
 from .course import *
 from .dashboard import *
-from .home import *
+from .index import *
 from .lms import *
 from .logout import *
 from .points import *

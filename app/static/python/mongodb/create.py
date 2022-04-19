@@ -96,7 +96,7 @@ def createAssignment(data: dict) -> Assignment:
     assignment = Assignment(**data)
     assignment.save(force_insert=True)
     course = assignment.course
-    course.assignments.append(assignment)
+    course.events.append(assignment)
     course.save()
     return assignment
 
@@ -191,5 +191,3 @@ def createGoogleClassroomConnection(user_id: str, data: dict) -> GoogleClassroom
     user.gclassroom.append(GoogleClassroom(**data))
     user.save()
     return user.gclassroom[-1]
-
-

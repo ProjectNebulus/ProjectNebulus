@@ -1,7 +1,6 @@
 let openDropdown = null;
 let justOpened = false;
 let dropdowns = document.getElementsByTagName("dropdown-menu");
-let popups = document.getElementsByTagName("popup");
 
 window.addEventListener("load", setUpDropdowns);
 window.addEventListener("click", function () {

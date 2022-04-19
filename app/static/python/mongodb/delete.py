@@ -1,21 +1,6 @@
 from __future__ import annotations
 
-
-from ..classes.Announcement import Announcement
-from ..classes.Assignment import Assignment
-from ..classes.Course import Course
-from ..classes.Document import DocumentFile
-from ..classes.Events import Event
-from ..classes.Folder import Folder
-from ..classes.Grades import Grades
-from ..classes.User import User
-from ..classes.Spotify import Spotify
-from ..classes.Schoology import Schoology
-from ..classes.Discord import Discord
-from ..classes.Canvas import Canvas
-from ..classes.GoogleClassroom import GoogleClassroom
-
-from .read import find_user
+from ..classes import *
 
 
 def delete_course(course_id: int) -> None:
@@ -33,7 +18,7 @@ def delete_announcement(announcement_id) -> None:
     Deletes an announcement from the database.
     """
     announcement = Announcement.objects.get(pk=announcement_id)
-    announcement.course.assignments.remove(announcement)
+    announcement.course.events.remove(announcement)
     announcement.delete()
 
 
@@ -66,7 +51,7 @@ def delete_assignment(assignment_id: int) -> None:
     Deletes an assignment from the database.
     """
     assignment = Assignment.objects.get(pk=assignment_id)
-    assignment.course.assignments.remove(assignment)
+    assignment.course.events.remove(assignment)
     assignment.delete()
 
 
@@ -157,5 +142,3 @@ def delete_spotify_connection(user_id: int, spotify_object: Spotify) -> None:
     user = User.objects.get(pk=user_id)
     user.spotify.remove(spotify_object)
     user.save()
-
-

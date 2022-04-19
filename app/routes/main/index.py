@@ -1,5 +1,6 @@
-from . import main_blueprint
 from flask import render_template, session, redirect, request
+
+from . import main_blueprint
 
 
 @main_blueprint.route("/", methods=["GET"])
@@ -7,7 +8,7 @@ def index():
     # return "hi"
     print(request.remote_addr)
     return render_template(
-        "main/home.html",
+        "main/index.html",
         page="Nebulus - Learning, All In One",
         password=session.get("password"),
         user=session.get("username"),

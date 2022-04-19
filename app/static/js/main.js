@@ -1,10 +1,5 @@
 const siteName = window.location.protocol + "//" + window.location.host;
 
-let rightClickElements = null;
-let prevRightClickElements = null;
-
-// string as key, function to run as value
-
 function detectTheme() {
     if (!localStorage.getItem('color-theme')) {
         const darkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -30,7 +25,8 @@ function invertSite() {
             if (!logo.getAttribute("no-revert"))
                 logo.style.filter = "invert(0)";
         }
-    } else {
+    }
+    else {
         if (window.location.href.endsWith("/"))
             document.body.style.backgroundImage = "url(\"/static/images/lightwallpaper.png\")";
 
@@ -49,7 +45,8 @@ function invertSite() {
         if (document.documentElement.classList.contains("dark")) {
             innerDoc.documentElement.classList.add("dark");
             innerDoc.body.style.background = "#111926";
-        } else {
+        }
+        else {
             innerDoc.documentElement.classList.remove("dark");
             innerDoc.body.style.background = "white";
         }
@@ -79,7 +76,6 @@ window.addEventListener("load", function () {
 
         logo.style.width = size;
         logo.style.height = size;
-        logo.classList.add("inline-block", "mx-3", "my-3");
 
         logo.innerHTML = '<img alt="logo" style="' + logo.getAttribute("style") + '" class="' + logo.className + '" src="/static/images/nebulusCats/' + img + '">';
 
@@ -88,43 +84,10 @@ window.addEventListener("load", function () {
     }
 });
 
-document.onclick = () => (menu.style.visibility = 'hidden');
-
-document.oncontextmenu = (e) => {
-    menu.style.visibility = 'hidden';
-
-    if (rightClickElements === null) return;
-
-    e.preventDefault();
-
-    if (Object.keys(rightClickElements).length === 0) return;
-
-    if (rightClickElements !== prevRightClickElements) {
-        prevRightClickElements = rightClickElements;
-        menu.innerHTML = '';
-
-        const ul = document.createElement('ul');
-        for (const [key, value] of Object.entries(rightClickElements)) {
-            const li = document.createElement('li');
-            li.innerHTML = key;
-            li.onclick = rightClickElements[value];
-            ul.appendChild(li);
-        }
-
-        menu.appendChild(ul);
-
-        rightClickElements = {};
-    }
-
-    menu.style.visibility = 'visible';
-    menu.style.left = e.pageX + 'px';
-    menu.style.top = e.pageY + 'px';
-};
-
 if ('serviceWorker' in navigator) {
     // we are checking here to see if the browser supports the service worker api
-    window.addEventListener('load', function () {
-        navigator.serviceWorker.register('/static/js/sw.js').then(
+    window.addEventListener('load', async function () {
+        await navigator.serviceWorker.register('/static/js/sw.js', {scope: "/"}).then(
             function (registration) {
                 // Registration was successful
                 console.log(

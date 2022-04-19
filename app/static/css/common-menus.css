@@ -1,16 +1,16 @@
-trigger {
+dropdown-menu trigger {
     border: none;
     cursor: pointer;
     text-align: right;
 }
 
-trigger:hover {
+dropdown-menu trigger:hover {
     background: lightgray;
 }
 
-contents {
+dropdown-menu contents {
     visibility: hidden;
-    z-index: 50;
+    z-index: 5;
     border-radius: 5px;
     position: absolute;
     box-shadow: black;
@@ -18,7 +18,7 @@ contents {
     text-align: left;
 }
 
-item {
+dropdown-menu contents item {
     padding: 0.15rem;
     width: 100%;
     border-radius: 2px;
@@ -26,7 +26,7 @@ item {
     font-size: 0.8rem;
 }
 
-item[href]:hover {
+dropdown-menu contents item[href]:hover {
     background: dodgerblue;
     cursor: pointer;
 }
