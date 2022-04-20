@@ -160,9 +160,11 @@ def sort_user_events(user_id: str) -> List[List]:
 
     events_assessments_assignments = list(chain(events, assignments, assessments))
     sorted_events = sorted(events_assessments_assignments, key=lambda obj: sortByDateTime(obj))
-    dates = {key: list(result) for key, result in groupby(sorted_events, key=lambda obj: sortByDate(obj))}
+    dates = dict({key: list(result) for key, result in groupby(sorted_events, key=lambda obj: sortByDate(obj))})
 
-    print(dates)
+    sorted_announcements = sorted(announcements, key=lambda obj: obj.date)
+    announcements = dict(reversed(list({key: list(result) for key, result in groupby(sorted_announcements, key=lambda obj: obj.date.date())}.items())))
+
 
     return [announcements, dates]
 
