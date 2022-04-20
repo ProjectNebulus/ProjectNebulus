@@ -1,6 +1,6 @@
 
 module.exports = {
-
+    purge: false,
     darkMode: 'class',
     content: ['./app/templates/**/*.html', './app/static/**/*.{js,css}', './app/static/flowbite/**/*.js'],
     theme: {
