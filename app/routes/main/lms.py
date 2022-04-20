@@ -49,8 +49,7 @@ def lms():
     user_acc = read.find_user(id=session["id"])
     user_courses = read.get_user_courses(session["id"])
     events = read.sort_user_events(session["id"])
-    print(events)
-    print(events[0])
+
     try:
         gcourses = getGclassroomcourses()
     except:
