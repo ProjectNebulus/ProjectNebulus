@@ -1324,6 +1324,10 @@ html {
   margin-bottom: 1.25rem;
 }
 
+.ml-6 {
+  margin-left: 1.5rem;
+}
+
 .ml-1 {
   margin-left: 0.25rem;
 }
@@ -1346,10 +1350,6 @@ html {
 
 .mr-8 {
   margin-right: 2rem;
-}
-
-.ml-6 {
-  margin-left: 1.5rem;
 }
 
 .mr-1 {
@@ -2359,6 +2359,11 @@ html {
   background-color: rgb(225 239 254 / var(--tw-bg-opacity));
 }
 
+.bg-gray-900 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+}
+
 .bg-gray-300 {
   --tw-bg-opacity: 1;
   background-color: rgb(209 213 219 / var(--tw-bg-opacity));
@@ -2392,11 +2397,6 @@ html {
 .bg-red-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(253 242 242 / var(--tw-bg-opacity));
-}
-
-.bg-gray-900 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(17 24 39 / var(--tw-bg-opacity));
 }
 
 .bg-green-500 {
@@ -3111,6 +3111,10 @@ html {
   padding-right: 1rem;
 }
 
+.pl-8 {
+  padding-left: 2rem;
+}
+
 .pl-3 {
   padding-left: 0.75rem;
 }
@@ -3141,10 +3145,6 @@ html {
 
 .pt-6 {
   padding-top: 1.5rem;
-}
-
-.pl-8 {
-  padding-left: 2rem;
 }
 
 .pt-10 {
@@ -3709,14 +3709,14 @@ html {
   transition-duration: 150ms;
 }
 
-.transition-all {
-  transition-property: all;
+.transition-opacity {
+  transition-property: opacity;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
 
-.transition-opacity {
-  transition-property: opacity;
+.transition-all {
+  transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
@@ -3737,12 +3737,12 @@ html {
   transition-duration: 75ms;
 }
 
-.duration-100 {
-  transition-duration: 100ms;
-}
-
 .duration-300 {
   transition-duration: 300ms;
+}
+
+.duration-100 {
+  transition-duration: 100ms;
 }
 
 .duration-200 {
@@ -3834,6 +3834,11 @@ html {
   background-color: rgb(31 41 55 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-blue-200:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(195 221 253 / var(--tw-bg-opacity));
+}
+
 .hover\:bg-red-800:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(155 28 28 / var(--tw-bg-opacity));
@@ -3851,11 +3856,6 @@ html {
 
 .hover\:bg-gray-100\/50:hover {
   background-color: rgb(243 244 246 / 0.5);
-}
-
-.hover\:bg-blue-200:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(195 221 253 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-white:hover {
@@ -4345,6 +4345,11 @@ html {
   background-color: rgb(75 85 99 / var(--tw-bg-opacity));
 }
 
+.dark .dark\:hover\:bg-blue-300:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(164 202 254 / var(--tw-bg-opacity));
+}
+
 .dark .dark\:hover\:bg-red-700:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(200 30 30 / var(--tw-bg-opacity));
@@ -4352,11 +4357,6 @@ html {
 
 .dark .dark\:hover\:bg-gray-700\/50:hover {
   background-color: rgb(55 65 81 / 0.5);
-}
-
-.dark .dark\:hover\:bg-blue-300:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(164 202 254 / var(--tw-bg-opacity));
 }
 
 .dark .dark\:hover\:bg-red-900:hover {
@@ -4595,6 +4595,9 @@ html {
 
   .md\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .md\:flex-row {

@@ -21,7 +21,7 @@
 <div class="grid grid-cols-1 divide-y divide-gray-700" style="height:100%;width:60%;float:left;padding-left:2rem;padding-right:1rem">
         <div id="middle"
              style="height:calc(90% - 2rem);float:left;padding-left:2rem;padding-right:1rem">
-                <h1 class="text-4xl text-black dark:text-white">Recent Anouncements</h1>
+                <h1 class="text-4xl text-black dark:text-white">Recent Anouncements <a href="#middle2" class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-xl font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 dark:hover:bg-blue-300">Jump to Courses</a></h1>
         <br>
             <ol class="relative border-l border-gray-200 dark:border-gray-700">
                 {% for announcement_date, announcement_list in announcements.items() %}
@@ -47,8 +47,8 @@
 
                                 <div class="text-sm text-gray-900 dark:text-white font-normal">
                                     <div class="text-sm text-gray-900 dark:text-white font-normal">
-                                    {% if announcement.content.split(' ')|length > 30 %}
-                                        {{ ' '.join(announcement.content.split(' ')[:30]) }}...
+                                    {% if announcement.content.split(' ')|length > 15 %}
+                                        {{ ' '.join(announcement.content.split(' ')[:15]) }}...
                                     {% else %}
                                         {{ announcement.content }}
                                     {% endif %}
@@ -67,7 +67,7 @@
             </ol>
         </div>
 
-            <div style="float:left;" class=" text-center hover:show-scroll dark:scroll">
+            <div id="middle2" style="float:left;" class=" text-center hover:show-scroll dark:scroll">
             <br>
                 <h1 style="float:left" class="text-4xl pr-4 text-black dark:text-white">Your Courses</h1>
 
@@ -80,9 +80,9 @@
                         <span class="material-icons">add</span></button>
                 </div>
                 <br><br>
-                <div class="text-center ml-4 mr-2">
+                <div class="w-full grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-2">
                     {% for course in user_courses %}
-                        <div class="max-w-sm bg-gray-100 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 p-5"
+                        <div class=" max-w-sm bg-gray-100 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 p-5"
                              style="float:left;margin:20px;height:18rem;width:18rem;">
                             <div style="text-align: left;">
                                 <div style="margin-bottom:10px">
