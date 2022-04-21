@@ -36,11 +36,21 @@ $ brew install python@3.10
 
 #### Linux
 
+## Ubuntu / Debian
+
 ```bash
-$ sudo apt install software-properties-common -y
-$ sudo add-apt-repository ppa:deadsnakes/ppa -y
-$ sudo apt install python3.10
+$ sudo apt install python3
 ```
+
+## Arch Linux
+
+```bash
+$ sudo pacman -S python3
+```
+
+## Other Distros
+
+Install using preferred package manager.
 
 ### [Install Poetry](https://python-poetry.org/docs/#installation) (Not needed currently, but might be needed later)
 
