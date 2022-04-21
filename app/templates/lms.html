@@ -30,7 +30,8 @@
                     <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
                     <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">{{ announcement_date.strftime("%a, %B %-d, %Y") }}</time>
                 <br>
-                    <div class="grid grid-cols-4 gap-4 pt-2">
+                <div class="hidden md:block">
+                    <div class="grid grid-cols-4 gap-2 pt-2 ">
 
                     {% for announcement in announcement_list %}
                         <div id="toast-notification" class="w-full max-w-xs p-4 text-gray-900 bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300" role="alert">
@@ -57,13 +58,34 @@
                                 </div>
                             </div>
                         </div>
+
                     {% endfor %}
                     </div>
+                </div>
+                <div class="grid grid-cols-1 block md:hidden">
+                    {%  for announcement in announcement_list %}
+                        <div id="toast-notification" class="w-full max-w-xs p-4 text-gray-900 bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 mb-4 mt-4" role="alert">
+                        <div class="flex">
+                <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-blue-500 bg-transparent text-slate-800 rounded-lg dark:bg-transparent dark:text-slate-400">
+                    <span class="material-icons">info</span>
+                </div>
+                            <div class="ml-3 text-sm font-normal">
+            <span class="mb-1 text-sm font-semibold text-gray-900 dark:text-white">{{ announcement.title }}</span> <p class="text-xs text-gray-700 dark:text-gray-400 pl-2 ">
+                                    <span class="uppercase font-bold text-white">{{ announcement.author }}</span> in <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">{{ announcement.course.name }}</span></p>
+
+
+            </div>
+                        </div>
+                        </div>
+                    {% endfor %}
+                </div>
                 </li>
 
 
 
-                {% endfor %}
+
+            {% endfor %}
+
             </ol>
         </div>
 

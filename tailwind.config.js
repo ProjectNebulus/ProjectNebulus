@@ -7,6 +7,7 @@ module.exports = {
             fontFamily: {
                 sans: ['SpotifyFont', "sans-serif"],
             },
+
     },
     plugins: [
         require('@tailwindcss/typography'),
