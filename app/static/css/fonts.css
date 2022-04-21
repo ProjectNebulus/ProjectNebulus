@@ -114,3 +114,8 @@
     font-family: SpotifyFont;
   }
 }
+@layer base {
+  html.dark body {
+    background: #111926;
+  }
+}
