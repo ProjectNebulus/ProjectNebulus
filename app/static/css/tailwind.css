@@ -1307,20 +1307,20 @@ html {
   margin-top: 0.25rem;
 }
 
-.ml-2 {
-  margin-left: 0.5rem;
-}
-
-.-mr-1 {
-  margin-right: -0.25rem;
-}
-
 .mb-5 {
   margin-bottom: 1.25rem;
 }
 
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
 .ml-6 {
   margin-left: 1.5rem;
+}
+
+.-mr-1 {
+  margin-right: -0.25rem;
 }
 
 .ml-1 {
@@ -1459,6 +1459,10 @@ html {
   height: 0.75rem;
 }
 
+.h-8 {
+  height: 2rem;
+}
+
 .h-12 {
   height: 3rem;
 }
@@ -1485,10 +1489,6 @@ html {
 
 .h-64 {
   height: 16rem;
-}
-
-.h-8 {
-  height: 2rem;
 }
 
 .h-9 {
@@ -1555,6 +1555,10 @@ html {
   width: 0.75rem;
 }
 
+.w-8 {
+  width: 2rem;
+}
+
 .w-12 {
   width: 3rem;
 }
@@ -1581,10 +1585,6 @@ html {
 
 .w-11 {
   width: 2.75rem;
-}
-
-.w-8 {
-  width: 2rem;
 }
 
 .w-72 {
@@ -3097,12 +3097,12 @@ html {
   padding-left: 0.5rem;
 }
 
-.pr-4 {
-  padding-right: 1rem;
-}
-
 .pl-8 {
   padding-left: 2rem;
+}
+
+.pr-4 {
+  padding-right: 1rem;
 }
 
 .pl-3 {
@@ -3394,6 +3394,11 @@ html {
   color: rgb(28 100 242 / var(--tw-text-opacity));
 }
 
+.text-slate-800 {
+  --tw-text-opacity: 1;
+  color: rgb(30 41 59 / var(--tw-text-opacity));
+}
+
 .text-gray-300 {
   --tw-text-opacity: 1;
   color: rgb(209 213 219 / var(--tw-text-opacity));
@@ -3537,11 +3542,6 @@ html {
 .text-orange-500 {
   --tw-text-opacity: 1;
   color: rgb(255 90 31 / var(--tw-text-opacity));
-}
-
-.text-slate-800 {
-  --tw-text-opacity: 1;
-  color: rgb(30 41 59 / var(--tw-text-opacity));
 }
 
 .underline {
@@ -3802,14 +3802,6 @@ html {
   src: url('../fonts/Spotify-Font/Gotham-Medium.woff') format('woff');
 
   font-weight: 300;
-}
-
-.tooltip.hover\:invisible:hover > .tooltip-arrow:before {
-  visibility: hidden;
-}
-
-.hover\:invisible:hover {
-  visibility: hidden;
 }
 
 .hover\:border-gray-300:hover {
@@ -4159,6 +4151,10 @@ html {
   background-color: rgb(195 221 253 / var(--tw-bg-opacity));
 }
 
+.dark .dark\:bg-transparent {
+  background-color: transparent;
+}
+
 .dark .dark\:bg-red-600 {
   --tw-bg-opacity: 1;
   background-color: rgb(224 36 36 / var(--tw-bg-opacity));
@@ -4187,15 +4183,6 @@ html {
 .dark .dark\:bg-green-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(222 247 236 / var(--tw-bg-opacity));
-}
-
-.dark .dark\:bg-blue-800 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(30 66 159 / var(--tw-bg-opacity));
-}
-
-.dark .dark\:bg-transparent {
-  background-color: transparent;
 }
 
 .dark .dark\:bg-opacity-80 {
@@ -4232,9 +4219,9 @@ html {
   color: rgb(63 131 248 / var(--tw-text-opacity));
 }
 
-.dark .dark\:text-gray-200 {
+.dark .dark\:text-slate-400 {
   --tw-text-opacity: 1;
-  color: rgb(229 231 235 / var(--tw-text-opacity));
+  color: rgb(148 163 184 / var(--tw-text-opacity));
 }
 
 .dark .dark\:text-gray-700 {
@@ -4245,6 +4232,11 @@ html {
 .dark .dark\:text-red-500 {
   --tw-text-opacity: 1;
   color: rgb(240 82 82 / var(--tw-text-opacity));
+}
+
+.dark .dark\:text-gray-200 {
+  --tw-text-opacity: 1;
+  color: rgb(229 231 235 / var(--tw-text-opacity));
 }
 
 .dark .dark\:text-red-900 {
@@ -4260,16 +4252,6 @@ html {
 .dark .dark\:text-red-800 {
   --tw-text-opacity: 1;
   color: rgb(155 28 28 / var(--tw-text-opacity));
-}
-
-.dark .dark\:text-blue-200 {
-  --tw-text-opacity: 1;
-  color: rgb(195 221 253 / var(--tw-text-opacity));
-}
-
-.dark .dark\:text-slate-400 {
-  --tw-text-opacity: 1;
-  color: rgb(148 163 184 / var(--tw-text-opacity));
 }
 
 .dark .dark\:placeholder-gray-400::-moz-placeholder {
@@ -4482,14 +4464,6 @@ html {
 }
 
 @media (min-width: 640px) {
-  .tooltip.sm\:invisible > .tooltip-arrow:before {
-    visibility: hidden;
-  }
-
-  .sm\:invisible {
-    visibility: hidden;
-  }
-
   .sm\:-mx-6 {
     margin-left: -1.5rem;
     margin-right: -1.5rem;
@@ -4513,6 +4487,14 @@ html {
 
   .sm\:w-auto {
     width: auto;
+  }
+
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sm\:grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 
   .sm\:justify-center {
@@ -4552,18 +4534,6 @@ html {
 }
 
 @media (min-width: 768px) {
-  .tooltip.md\:invisible > .tooltip-arrow:before {
-    visibility: hidden;
-  }
-
-  .md\:visible {
-    visibility: visible;
-  }
-
-  .md\:invisible {
-    visibility: hidden;
-  }
-
   .md\:inset-0 {
     top: 0px;
     right: 0px;
@@ -4635,12 +4605,12 @@ html {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
-  .md\:grid-cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .md\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .md\:flex-row {
@@ -4696,18 +4666,6 @@ html {
 }
 
 @media (min-width: 1024px) {
-  .tooltip.lg\:invisible > .tooltip-arrow:before {
-    visibility: hidden;
-  }
-
-  .lg\:visible {
-    visibility: visible;
-  }
-
-  .lg\:invisible {
-    visibility: hidden;
-  }
-
   .lg\:-mx-8 {
     margin-left: -2rem;
     margin-right: -2rem;
@@ -4731,6 +4689,10 @@ html {
 
   .lg\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-5 {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
   .lg\:grid-cols-4 {
@@ -4761,6 +4723,14 @@ html {
     width: 10rem;
   }
 
+  .xl\:grid-cols-5 {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .xl\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
   .xl\:pb-8 {
     padding-bottom: 2rem;
   }
@@ -4768,5 +4738,15 @@ html {
   .xl\:text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  .\32xl\:grid-cols-5 {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .\32xl\:grid-cols-6 {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 }
