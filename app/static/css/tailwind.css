@@ -3777,7 +3777,39 @@ html {
 
   src: url('../fonts/Spotify-Font/Gotham-Medium.woff') format('woff');
 
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'SpotifyFont';
+
+  src: url('../fonts/Spotify-Font/Gotham-Medium.woff') format('woff');
+
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: 'SpotifyFont';
+
+  src: url('../fonts/Spotify-Font/Gotham-Medium.woff') format('woff');
+
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: 'SpotifyFont';
+
+  src: url('../fonts/Spotify-Font/Gotham-Medium.woff') format('woff');
+
   font-weight: 700;
+}
+
+@font-face {
+  font-family: 'SpotifyFont';
+
+  src: url('../fonts/Spotify-Font/Gotham-Medium.woff') format('woff');
+
+  font-weight: 600;
 }
 
 @font-face {
@@ -3802,6 +3834,102 @@ html {
   src: url('../fonts/Spotify-Font/Gotham-Medium.woff') format('woff');
 
   font-weight: 300;
+}
+
+@font-face {
+  font-family: 'SpotifyFont';
+
+  src: url('../fonts/Spotify-Font/Gotham-Medium.woff') format('woff');
+
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'SpotifyFont';
+
+  src: url('../fonts/Spotify-Font/Gotham-Medium.woff') format('woff');
+
+  font-style: oblique;
+}
+
+@font-face {
+  font-family: 'SpotifyFont';
+
+  src: url('../fonts/Spotify-Font/Gotham-Medium.woff') format('woff');
+
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SpotifyFont';
+
+  src: url('../fonts/Spotify-Font/Gotham-Medium.woff') format('woff');
+
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: 'SpotifyFont';
+
+  src: url('../fonts/Spotify-Font/Gotham-Medium.woff') format('woff');
+
+  font-stretch: condensed;
+}
+
+@font-face {
+  font-family: 'SpotifyFont';
+
+  src: url('../fonts/Spotify-Font/Gotham-Medium.woff') format('woff');
+
+  font-stretch: semi-condensed;
+}
+
+@font-face {
+  font-family: 'SpotifyFont';
+
+  src: url('../fonts/Spotify-Font/Gotham-Medium.woff') format('woff');
+
+  font-stretch: ultra-condensed;
+}
+
+@font-face {
+  font-family: 'SpotifyFont';
+
+  src: url('../fonts/Spotify-Font/Gotham-Medium.woff') format('woff');
+
+  font-stretch: extra-condensed;
+}
+
+@font-face {
+  font-family: 'SpotifyFont';
+
+  src: url('../fonts/Spotify-Font/Gotham-Medium.woff') format('woff');
+
+  font-stretch: expanded;
+}
+
+@font-face {
+  font-family: 'SpotifyFont';
+
+  src: url('../fonts/Spotify-Font/Gotham-Medium.woff') format('woff');
+
+  font-stretch: semi-expanded;
+}
+
+@font-face {
+  font-family: 'SpotifyFont';
+
+  src: url('../fonts/Spotify-Font/Gotham-Medium.woff') format('woff');
+
+  font-stretch: extra-expanded;
+}
+
+@font-face {
+  font-family: 'SpotifyFont';
+
+  src: url('../fonts/Spotify-Font/Gotham-Medium.woff') format('woff');
+
+  font-stretch: ultra-expanded;
 }
 
 .hover\:border-gray-300:hover {
@@ -4493,10 +4621,6 @@ html {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .sm\:grid-cols-1 {
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-  }
-
   .sm\:justify-center {
     justify-content: center;
   }
@@ -4609,10 +4733,6 @@ html {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .md\:grid-cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .md\:flex-row {
     flex-direction: row;
   }
@@ -4687,16 +4807,12 @@ html {
     width: 33.333333%;
   }
 
-  .lg\:grid-cols-3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .lg\:grid-cols-5 {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-  }
-
   .lg\:grid-cols-4 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .lg\:px-8 {
@@ -4727,10 +4843,6 @@ html {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
-  .xl\:grid-cols-4 {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
   .xl\:pb-8 {
     padding-bottom: 2rem;
   }
@@ -4742,10 +4854,6 @@ html {
 }
 
 @media (min-width: 1536px) {
-  .\32xl\:grid-cols-5 {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-  }
-
   .\32xl\:grid-cols-6 {
     grid-template-columns: repeat(6, minmax(0, 1fr));
   }
