@@ -31,9 +31,7 @@
 3. Use a more readable tab size.
 4. Use the user's configured `sans` font-family by default.
 */
-html.dark body {
-  background: #111926;
-}
+
 html {
   line-height: 1.5;
   /* 1 */
@@ -44,7 +42,7 @@ html {
   -o-tab-size: 4;
      tab-size: 4;
   /* 3 */
-  font-family: SpotifyFont, sans-serif;
+  font-family: Spotify-Font, sans-serif;
   /* 4 */
 }
 
@@ -1383,6 +1381,14 @@ html {
   margin-bottom: -1px;
 }
 
+.ml-12 {
+  margin-left: 3rem;
+}
+
+.ml-14 {
+  margin-left: 3.5rem;
+}
+
 .block {
   display: block;
 }
@@ -2349,19 +2355,9 @@ html {
   background-color: rgb(225 239 254 / var(--tw-bg-opacity));
 }
 
-.bg-gray-900 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(17 24 39 / var(--tw-bg-opacity));
-}
-
 .bg-gray-300 {
   --tw-bg-opacity: 1;
   background-color: rgb(209 213 219 / var(--tw-bg-opacity));
-}
-
-.bg-black {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
 .bg-red-700 {
@@ -2387,6 +2383,16 @@ html {
 .bg-red-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(253 242 242 / var(--tw-bg-opacity));
+}
+
+.bg-gray-900 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+}
+
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
 .bg-green-500 {
@@ -3178,7 +3184,7 @@ html {
 }
 
 .font-sans {
-  font-family: SpotifyFont, sans-serif;
+  font-family: Spotify-Font, sans-serif;
 }
 
 .text-3xl {
@@ -3704,14 +3710,14 @@ html {
   transition-duration: 150ms;
 }
 
-.transition-opacity {
-  transition-property: opacity;
+.transition-all {
+  transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
 
-.transition-all {
-  transition-property: all;
+.transition-opacity {
+  transition-property: opacity;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
@@ -3732,12 +3738,12 @@ html {
   transition-duration: 75ms;
 }
 
-.duration-300 {
-  transition-duration: 300ms;
-}
-
 .duration-100 {
   transition-duration: 100ms;
+}
+
+.duration-300 {
+  transition-duration: 300ms;
 }
 
 .duration-200 {
@@ -3957,11 +3963,6 @@ html {
   background-color: rgb(31 41 55 / var(--tw-bg-opacity));
 }
 
-.hover\:bg-blue-200:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(195 221 253 / var(--tw-bg-opacity));
-}
-
 .hover\:bg-red-800:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(155 28 28 / var(--tw-bg-opacity));
@@ -3979,6 +3980,11 @@ html {
 
 .hover\:bg-gray-100\/50:hover {
   background-color: rgb(243 244 246 / 0.5);
+}
+
+.hover\:bg-blue-200:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(195 221 253 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-white:hover {
@@ -4283,6 +4289,11 @@ html {
   background-color: transparent;
 }
 
+.dark .dark\:bg-gray-900 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+}
+
 .dark .dark\:bg-red-600 {
   --tw-bg-opacity: 1;
   background-color: rgb(224 36 36 / var(--tw-bg-opacity));
@@ -4291,11 +4302,6 @@ html {
 .dark .dark\:bg-red-200 {
   --tw-bg-opacity: 1;
   background-color: rgb(251 213 213 / var(--tw-bg-opacity));
-}
-
-.dark .dark\:bg-gray-900 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(17 24 39 / var(--tw-bg-opacity));
 }
 
 .dark .dark\:bg-red-100 {
@@ -4477,11 +4483,6 @@ html {
   background-color: rgb(75 85 99 / var(--tw-bg-opacity));
 }
 
-.dark .dark\:hover\:bg-blue-300:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(164 202 254 / var(--tw-bg-opacity));
-}
-
 .dark .dark\:hover\:bg-red-700:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(200 30 30 / var(--tw-bg-opacity));
@@ -4489,6 +4490,11 @@ html {
 
 .dark .dark\:hover\:bg-gray-700\/50:hover {
   background-color: rgb(55 65 81 / 0.5);
+}
+
+.dark .dark\:hover\:bg-blue-300:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(164 202 254 / var(--tw-bg-opacity));
 }
 
 .dark .dark\:hover\:bg-red-900:hover {
@@ -4665,10 +4671,6 @@ html {
     left: 0px;
   }
 
-  .md\:order-1 {
-    order: 1;
-  }
-
   .md\:order-2 {
     order: 2;
   }
@@ -4703,10 +4705,6 @@ html {
 
   .md\:h-auto {
     height: auto;
-  }
-
-  .md\:w-auto {
-    width: auto;
   }
 
   .md\:w-48 {
@@ -4786,6 +4784,10 @@ html {
 }
 
 @media (min-width: 1024px) {
+  .lg\:order-1 {
+    order: 1;
+  }
+
   .lg\:-mx-8 {
     margin-left: -2rem;
     margin-right: -2rem;
@@ -4799,8 +4801,16 @@ html {
     display: block;
   }
 
+  .lg\:flex {
+    display: flex;
+  }
+
   .lg\:hidden {
     display: none;
+  }
+
+  .lg\:w-auto {
+    width: auto;
   }
 
   .lg\:w-1\/3 {

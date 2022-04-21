@@ -102,22 +102,16 @@
                         {% for date, assignments in events.items() %}
                             {% for a in assignments[:15] %}
                                 {% if a.submitDate == None or date > today %}
-                                    <a href="/assignment/{{ a.id }}" class="text-black dark:text-white text-left
-                            bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 rounded-lg p-4 ml-3 shadow-md dark:border-gray-700 text-xl mb-5">
-                                        <span class="material-icons ml-2"
-                                              style="transform: translate(0, 50%) scale(1.75)">event</span>
-                                        <span class="ml-4">{{ a.title }}
-                                            {% if a.course.name|length > 10 %}
-                                            <span data-tooltip-target="event-course-tooltip" class="bg-gray-100 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">{{ a.course.name[:10] }}...</span>
-                                        <div id="event-course-tooltip" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
-                                            {{ a.course.name }}
-                                        <div class="tooltip-arrow" data-popper-arrow></div>
-                                        </div>
-                                                {% else %}
-                                            <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">{{ a.course.name }}</span>
-                                            {% endif %}
+                                    <a href="/assignment/{{ a.id }}" class="flex text-black dark:text-white text-left
+                            bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 rounded-lg p-4 ml-3 shadow-md dark:border-gray-700 text-xl mb-5" >
+                                        <div class="mr-4 material-icons ml-2"
+                                              style="transform: translate(0, 50%) scale(1.75)">event</div>
+                                    <div class="truncate">
+                                        <span class="text-ellipses">{{ a.title }}
                                         </span>
-                                        <div class="ml-6 pl-8 text-xs text-gray-700 uppercase dark:text-gray-400">
+
+                                     <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">{{ a.course.name }}</span>
+                                        <div class="text-xs text-gray-700 uppercase dark:text-gray-400">
                                             Due: {{ date.strftime("%D") }}
                                             {% if date < today %}
                                                 • <span class="text-red-600 dark:text-red-500">Overdue</span>
@@ -126,6 +120,7 @@
                                                 <span class="text-gray-300 dark:text-gray-700">{{ a.grade }}/{{ a.points }}</span>
                                             {% endif %}
                                         </div>
+                                    </div>
                                     </a>
                                 {% endif %}
                             {% endfor %}
