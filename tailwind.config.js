@@ -7,6 +7,11 @@ module.exports = {
             fontFamily: {
                 sans: ['Spotify-Font', "sans-serif"],
             },
+        extend: {
+                backgroundImage: {
+                    'signin-bg': "url('/static/images/background-images/signin-background.png')",
+                }
+        }
 
     },
     plugins: [
