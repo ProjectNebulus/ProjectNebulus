@@ -14,6 +14,7 @@ module.exports = {
         require('@tailwindcss/forms'),
         require('@tailwindcss/line-clamp'),
         require('@tailwindcss/aspect-ratio'),
-        require('./app/static/flowbite/plugin')
+        require('./app/static/flowbite/plugin'),
+        require('@tailwindcss/line-clamp'),
     ]
 };

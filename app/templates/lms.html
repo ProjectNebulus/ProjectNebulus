@@ -22,9 +22,10 @@
     </div>
         <div id="middle"
              style="height:calc(90% - 2rem);padding-left:2rem;padding-right:1rem">
-                <h1 class="text-4xl text-black dark:text-white mt-5 text-center lg:text-left">Recent Anouncements <a href="#middle2" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Jump to Courses</a></h1>
+
+                <h1 class="text-4xl text-black dark:text-white mt-5 text-center lg:text-left">Recent Anouncements <a href="#middle2" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" style="display: inline-block;">Jump to Courses</a></h1>
         <br>
-            <ol class="relative border-l border-gray-200 dark:border-gray-700 ml-[25%] lg:ml-0">
+            <ol class="relative border-l border-gray-200 dark:border-gray-700 lg:ml-0">
                 {% for announcement_date, announcement_list in announcements.items() %}
 
                 <li class="mb-10 ml-4">
@@ -32,28 +33,25 @@
                     <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">{{ announcement_date.strftime("%a, %B %-d, %Y") }}</time>
                 <br>
                 <div class="hidden lg:block">
-                    <div class="grid grid-cols-4 gap-2 pt-2 ">
+                    <div class="grid grid-cols-4 gap-2 pt-2">
 
                     {% for announcement in announcement_list %}
-                        <div id="toast-notification" class="w-full max-w-xs p-4 text-gray-900 bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300" role="alert">
-                         <h4 class="text-lg font-semibold text-gray-900 dark:text-white">{{ announcement.title }}</h4>
+                        <div id="toast-notification" class="w-full max-w-xs p-4 text-gray-900 bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 overflow-hidden" role="alert">
+                         <h4 class="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2 text-ellipses">{{ announcement.title }}</h4>
                             <div class="flex items-center mb-3">
 
                                 <img class="w-6 h-6 pr-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src="https://media.discordapp.net/attachments/934282772657344562/954066226462752828/v9c.gif" alt="{{ announcement.author}} image">
                                 <br>
 
-                                <p class="text-xs text-gray-700 dark:text-gray-400 pl-2 ">
-                                    <span class="uppercase font-bold text-white">{{ announcement.author }}</span> in <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">{{ announcement.course.name }}</span></p>
+                                <p class="text-xs text-gray-700 dark:text-gray-400 pl-2 line-clamp-1">
+                                    <span class="uppercase font-bold text-white ">{{ announcement.author }}</span> in <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">{{ announcement.course.name }}</span></p>
                             </div>
                             <div class="flex items-center">
 
                                 <div class="text-sm text-gray-900 dark:text-white font-normal">
-                                    <div class="text-sm text-gray-900 dark:text-white font-normal">
-                                    {% if announcement.content.split(' ')|length > 15 %}
-                                        {{ ' '.join(announcement.content.split(' ')[:15]) }}...
-                                    {% else %}
+                                    <div class="text-sm text-gray-900 dark:text-white font-normal line-clamp-3">
                                         {{ announcement.content }}
-                                    {% endif %}
+
                                     </div>
                                     <span class="text-xs font-medium text-blue-600 dark:text-blue-500">{{ announcement.date.time().strftime("%-I:%-M %p") }}</span>
                                 </div>
@@ -63,9 +61,10 @@
                     {% endfor %}
                     </div>
                 </div>
+
                 <div class="grid grid-cols-1 block lg:hidden">
                     {%  for announcement in announcement_list %}
-                        <div id="toast-notification" class="w-full max-w-xs p-4 text-gray-900 bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 mb-4 mt-4" role="alert">
+                        <div id="{{ announcement.id }}" class="peer w-full max-w-xs p-4 text-gray-900 bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 mb-4 mt-4" role="alert">
                         <div class="flex">
                 <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-blue-500 bg-transparent text-slate-800 rounded-lg dark:bg-transparent dark:text-slate-400">
                     <span class="material-icons">info</span>
@@ -91,8 +90,8 @@
         </div>
 
 
-        <div id="right" style="width:25%;float:right;overflow:auto;"
-             class="border-gray-200 dark:border-gray-700 h-full border-l text-center hover:show-scroll dark:scroll ">
+        <div id="right" style="float:right; overflow:auto;"
+             class="border-gray-200 dark:border-gray-700 h-full border-l text-center hover:show-scroll dark:scroll">
             <p class="text-2xl text-black dark:text-white">Upcoming Events</p><br>
             <div style="text-align: center;">
                 <div class="flex flex-col overflow-x-auto sm:rounded-lg inline-block min-w-full align-middle overflow-hidden">
@@ -143,7 +142,7 @@
                         <span class="material-icons">add</span></button>
                 </div>
                 <br><br>
-                <div class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-2" style="display: inline-block">
+                <div class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-2 " style="display: inline-block">
                     {% for course in user_courses %}
                         <div class=" max-w-sm bg-gray-100 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 p-5"
                              style="float:left;margin:20px;height:18rem;width:18rem;">
