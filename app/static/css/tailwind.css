@@ -2744,6 +2744,10 @@ html.dark body {
   background-color: rgb(117 26 61 / var(--tw-bg-opacity));
 }
 
+.bg-white\/\[0\.9\] {
+  background-color: rgb(255 255 255 / 0.9);
+}
+
 .bg-opacity-50 {
   --tw-bg-opacity: 0.5;
 }
