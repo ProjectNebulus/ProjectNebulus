@@ -184,8 +184,12 @@ def unsorted_user_events(user_id: str) -> List[List]:
 
 
 def check_signup_user(username) -> str:
-    return str(User.objects(username=username)).lower()
+    if User.objects(username=username):
+        return "false"
+    return "true"
 
 
 def check_signup_email(email) -> str:
-    return str(User.objects(email=email)).lower()
+    if User.objects(email=email):
+        return "false"
+    return "true"

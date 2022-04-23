@@ -102,7 +102,7 @@ window.addEventListener('load', function () {
         const usrname = username.value;
         usernameStatus.style.color = 'red';
         usernameStatus.innerHTML = '<br>';
-        if (usrname === '') {
+        if (!usrname) {
             usernameStatus.innerHTML =
                 'Please enter a username!';
             validationIcons[1].style.color = 'red';
@@ -116,7 +116,7 @@ window.addEventListener('load', function () {
             validationIcons[1].style.color = 'red';
             validationIcons[1].innerHTML =
                 '<i class="material-icons">close</i>';
-            usrname.classList.add(...RED_BORDER);
+            username.classList.add(...RED_BORDER);
             return false;
         }
         if (usrname.length > 32) {
@@ -124,7 +124,7 @@ window.addEventListener('load', function () {
             validationIcons[1].style.color = 'red';
             validationIcons[1].innerHTML =
                 '<i class="material-icons">close</i>';
-            usrname.classList.add(...RED_BORDER);
+            username.classList.add(...RED_BORDER);
             return false;
         }
         let validChars = 'abcdefghijklmnopqrstuvwxyz0123456789_- ';
@@ -133,7 +133,7 @@ window.addEventListener('load', function () {
                 usernameStatus.innerHTML = 'Your username can only contain letters, numbers, underscores, dashes, and spaces!';
                 validationIcons[1].style.color = 'red';
                 validationIcons[1].innerHTML = '<i class="material-icons">close</i>';
-                usrname.classList.add(...RED_BORDER);
+                username.classList.add(...RED_BORDER);
                 return false;
             }
         }
@@ -151,15 +151,15 @@ window.addEventListener('load', function () {
                 validationIcons[1].innerHTML =
                     '<i class="material-icons">close</i>';
                 usernameStatus.innerHTML = 'This username already exists!';
-                usrname.classList.remove(...GREEN_BORDER);
-                usrname.classList.add(...RED_BORDER);
+                username.classList.remove(...GREEN_BORDER);
+                username.classList.add(...RED_BORDER);
                 return false;
             }
             else {
                 validationIcons[1].style.color = 'green';
                 validationIcons[1].innerHTML = '<i class="material-icons">check</i>';
-                usrname.classList.remove(...RED_BORDER);
-                usrname.classList.add(...GREEN_BORDER);
+                username.classList.remove(...RED_BORDER);
+                username.classList.add(...GREEN_BORDER);
                 usernameStatus.innerHTML = '<br>';
             }
         });
@@ -327,8 +327,15 @@ window.addEventListener('load', function () {
             return false;
 
         }
-        if (value.length < 6)
+        if (value.length < 6){
             status.innerHTML = 'Password must be at least 6 characters long';
+        password.classList.remove(...GREEN_BORDER);
+        password.classList.add(...RED_BORDER);
+        validationIcons[2].style.color = 'red';
+        validationIcons[2].innerHTML =
+            '<i class="material-icons">close</i>';
+        return false;
+    }
         else if (!HAS_NUMBER.test(value))
             status.innerHTML = 'Password must include at least 1 number';
         else {
@@ -343,7 +350,7 @@ window.addEventListener('load', function () {
 
             if (!hasSpecialCharacter) {
                 status.innerHTML =
-                    'Password must include at least 1 special character';
+                    'Password must include at least 1 special character!';
                 password.classList.remove(...GREEN_BORDER);
                 password.classList.add(...RED_BORDER);
                 validationIcons[2].style.color = 'red';
@@ -361,7 +368,7 @@ window.addEventListener('load', function () {
     }
 
     email.onkeyup = changeEmail;
-    password.onkeyup = checkPassword;
+    password.onkeyup = checkPassword, confirmPassword;
     passwordConfirm.onkeyup = confirmPassword;
     username.onkeyup = changeUser;
     bday.onkeyup = confirmDate;
