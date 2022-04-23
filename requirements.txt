@@ -12,7 +12,7 @@ chardet
 charset-normalizer
 click
 dacite
-discord.py
+discord
 dnspython
 Flask~=2.0.3
 flask_cors
