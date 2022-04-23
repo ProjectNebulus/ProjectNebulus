@@ -34,6 +34,7 @@ graphql-server-core
 idna
 iso8601
 itsdangerous
+discord
 Jinja2~=3.1.1
 MarkupSafe
 mechanize~=0.4.7
