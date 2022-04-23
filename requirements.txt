@@ -64,3 +64,6 @@ urllib3
 waitress
 Werkzeug~=2.0.3
 yarl
+google-api-python-client
+google-auth-httplib2 
+google-auth-oauthlib
