@@ -28,25 +28,25 @@ RUN apt-get update && apt-get upgrade -y \
     git \
   # Installing `poetry` package manager:
   # https://github.com/python-poetry/poetry
-  && curl -sSL 'https://install.python-poetry.org' | python - \
-  && poetry --version \
+  #  && curl -sSL 'https://install.python-poetry.org' | python - \
+  #  && poetry --version \
   # Cleaning cache:
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /opt/app
 
-COPY ./poetry.lock ./pyproject.toml /opt/app/
-
+#COPY ./poetry.lock ./pyproject.toml /opt/app/
+COPY * /opt/app
 # install deps
-RUN poetry install --no-interaction --no-ansi \
-  && poetry run pip install -U pip \
-  && rm -rf "$POETRY_CACHE_DIR"
+#RUN poetry install --no-interaction --no-ansi \
+#  && poetry run pip install -U pip \
+#  && rm -rf "$POETRY_CACHE_DIR"
 
-COPY oldmain.py /opt/app/
-COPY app/templates/ /opt/app/templates
-COPY app/static/ /opt/app/static
+#COPY oldmain.py /opt/app/
+#COPY app/templates/ /opt/app/templates
+#COPY app/static/ /opt/app/static
 
 EXPOSE 8080:8080
 
-CMD ["python3", "main.py"]
+CMD ["stdbuf", "-oL", "python3", "main.py"]

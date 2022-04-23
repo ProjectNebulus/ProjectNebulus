@@ -15,12 +15,13 @@ dacite
 discord.py
 dnspython
 Flask~=2.0.3
-Flask-Cors
+flask_cors
 Flask-GraphQL
 flask_discord
 flask_mail
 flask_session
 fuzzywuzzy
+google
 google-auth
 google-auth-oauthlib
 gql
@@ -52,7 +53,7 @@ Rx
 schoolopy~=0.2.2
 singledispatch
 six
-spaces
+digital-ocean-spaces
 spotipy~=2.19.0
 swspotify~=1.2.3
 termcolor
