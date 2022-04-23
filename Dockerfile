@@ -26,18 +26,19 @@ RUN apt-get update && apt-get upgrade -y \
     curl \
     gettext \
     git \
+     libdbus-glib-1-dev libgirepository1.0-dev
   # Installing `poetry` package manager:
   # https://github.com/python-poetry/poetry
   #  && curl -sSL 'https://install.python-poetry.org' | python - \
   #  && poetry --version \
   # Cleaning cache:
-  && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
-  && apt-get clean -y && rm -rf /var/lib/apt/lists/*
+  #&& apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
+ # && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /opt/app
+WORKDIR /opt/nebulus
 
 #COPY ./poetry.lock ./pyproject.toml /opt/app/
-COPY * /opt/app
+COPY * /opt/nebulus
 # install deps
 #RUN poetry install --no-interaction --no-ansi \
 #  && poetry run pip install -U pip \
@@ -47,8 +48,19 @@ COPY * /opt/app
 #COPY app/templates/ /opt/app/templates
 #COPY app/static/ /opt/app/static
 
-CMD ["stdbuf", "-oL", "pip", "install", "/opt/app/requirements.txt"]
+RUN ["stdbuf", "-oL", "pip", "install", "-r", "/opt/nebulus/requirements.txt"]
+
+RUN ["stdbuf", "-oL", "mkdir", "/opt/nebulus/app"]
+RUN ["stdbuf", "-oL", "mv", "/opt/nebulus/__init__.py", "/opt/nebulus/app"]
+RUN ["stdbuf", "-oL", "mv", "/opt/nebulus/static", "/opt/nebulus/app"]
+RUN ["stdbuf", "-oL", "mv", "/opt/nebulus/routes", "/opt/nebulus/app"]
+RUN ["stdbuf", "-oL", "mv", "/opt/nebulus/templates", "/opt/nebulus/app"]
+
+
+#RUN ["stdbuf", "-oL", "pip", "install", "--upgrade", "google-api-python-client", "google-auth-httplib2", "google-auth-oauthlib"]
 
 EXPOSE 8080:8080
 
-CMD ["stdbuf", "-oL", "python3", "main.py"]
+#CMD ["stdbuf", "-oL", "ls /opt/nebulus"]
+
+#CMD ["stdbuf", "-oL", "python3", "/opt/app/main.py"]
