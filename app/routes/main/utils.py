@@ -1,3 +1,4 @@
+import datetime
 from functools import wraps
 
 from flask import session, redirect, request, render_template
@@ -31,3 +32,16 @@ def private_endpoint(func):
             return render_template("errors/404.html", error="Unauthorized Access")
 
     return wrapper
+
+
+def strftime(time: datetime.date, fmt) -> str:
+    try:
+        return time.strftime(fmt)
+
+    except ValueError:
+        if "-" in fmt:
+            fmt = fmt.replace("-", "#")
+        else:
+            fmt = fmt.replace("#", "-")
+
+        return time.strftime(fmt)

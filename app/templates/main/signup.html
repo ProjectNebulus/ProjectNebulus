@@ -2,9 +2,9 @@
 {% block main %}
     <body>
     <script src="https://unpkg.com/flowbite@1.4.1/dist/datepicker.js"></script>
-    <div class="container mx-auto p-4 bg-white"
-         style="width:40%; border-radius:10px;position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); overflow-y:auto">
-        <div class="w-full md:w-1/3 lg:w-1/3 mx-auto my-12">
+    <div class="container mx-auto bg-white"
+         style="width:40%; padding: 5rem; border-radius:10px;position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); overflow-y:auto">
+        <div class="mx-auto">
             <h1 class="text-lg font-bold">Sign Up</h1>
             <div class="flex flex-col items-left mt-5">
                 <p class="mt-1 text-xs font-light text-gray-500">
@@ -128,7 +128,7 @@
                     </svg>
                 </button>
 
-            </div style="display:none;" style="display:none;">
+            </div>
             <div class="mt-4" id="step3" style="display:none;">
                 <label for="languages" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Select
                     your
@@ -157,51 +157,55 @@
                     <option disabled>Wallpaper Theme (Coming Soon)</option>
                 </select>
                 <span style="display:none;" id="chosen">cat1</span>
-                <img style="float:left; margin:10px;"
-                     class="cat1 pfp pfp_selected mb-3 w-16 h-16 rounded-full shadow-lg"
-                     src="/static/images/nebulusCats/black_cat.png" alt="Bonnie image"/>
-                <img style="float:left; margin:10px;" class="cat2 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
-                     src="/static/images/nebulusCats/blue_cat.png" alt="Bonnie image"/>
-                <img style="float:left; margin:10px;" class="cat3 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
-                     src="/static/images/nebulusCats/green_cat.png" alt="Bonnie image"/>
-                <img style="float:left; margin:10px;" class="cat4 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
-                     src="/static/images/nebulusCats/pink_cat.png" alt="Bonnie image"/>
-                <img style="float:left; margin:10px;" class="cat5 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
-                     src="/static/images/nebulusCats/yellow_cat.png" alt="Bonnie image"/>
-                <img style="float:left; margin:10px;" class="cat6 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
-                     src="/static/images/nebulusCats/blurple_cat.png" alt="Bonnie image"/>
-                <img style="float:left; margin:10px;" class="cat7 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
-                     src="/static/images/nebulusCats/red_cat.png" alt="Bonnie image"/>
-                <img style="float:left; margin:10px;" class="cat8 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
-                     src="/static/images/nebulusCats/100_cat.png" alt="Bonnie image"/>
-                <img style="float:left; margin:10px;" class="cat9 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
-                     src="/static/images/nebulusCats/river_cat.png" alt="Bonnie image"/>
-                <img style="float:left; margin:10px;" class="cat10 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
-                     src="/static/images/nebulusCats/cake_cat.png" alt="Bonnie image"/>
-                <img style="float:left; margin:10px;" class="cat11 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
-                     src="/static/images/nebulusCats/ocean_cat.png" alt="Bonnie image"/>
-                <img style="float:left; margin:10px;" class="cat12 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
-                     src="/static/images/nebulusCats/mountains.png" alt="Bonnie image"/>
-                <img style="float:left; margin:10px;" class="cat13 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
-                     src="/static/images/nebulusCats/pizza.png" alt="Bonnie image"/>
-                <img style="float:left; margin:10px;" class="cat14 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
-                     src="/static/images/nebulusCats/popTart.png" alt="Bonnie image"/>
-                <img style="float:left; margin:10px;" class="cat15 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
-                     src="/static/images/nebulusCats/v3.gif" alt="Bonnie image"/>
-                <img style="float:left; margin:10px;" class="cat16 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
-                     src="/static/images/nebulusCats/v2.gif" alt="Bonnie image"/>
-                <img style="float:left; margin:10px;" class="cat17 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
-                     src="/static/images/nebulusCats/newBlue.png" alt="Bonnie image"/>
-                <img style="float:left; margin:10px;" class="cat18 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
-                     src="/static/images/nebulusCats/newGreen.png" alt="Bonnie image"/>
-                <img style="float:left; margin:10px;" class="cat19 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
-                     src="/static/images/nebulusCats/newJade.png" alt="Bonnie image"/>
-                <img style="float:left; margin:10px;" class="cat20 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
-                     src="/static/images/nebulusCats/newPink.png" alt="Bonnie image"/>
-                <img style="float:left; margin:10px;" class="cat21 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
-                     src="/static/images/nebulusCats/newRed.png" alt="Bonnie image"/>
-                <img style="float:left; margin:10px;" class="cat22 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
-                     src="/static/images/nebulusCats/newYellow.png" alt="Bonnie image"/><br><br style="clear: left;">
+                <div style="overflow: auto; height: 100px">
+                    <img style="float:left; margin:10px;"
+                         class="cat1 pfp pfp_selected mb-3 w-16 h-16 rounded-full shadow-lg"
+                         height="50" width="50" src="/static/images/nebulusCats/black_cat.png" alt="Pfp selection"/>
+                    <img style="float:left; margin:10px;" class="cat2 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
+                         height="50" width="50" src="/static/images/nebulusCats/blue_cat.png" alt="Pfp selection"/>
+                    <img style="float:left; margin:10px;" class="cat3 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
+                         height="50" width="50" src="/static/images/nebulusCats/green_cat.png" alt="Pfp selection"/>
+                    <img style="float:left; margin:10px;" class="cat4 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
+                         height="50" width="50" src="/static/images/nebulusCats/pink_cat.png" alt="Pfp selection"/>
+                    <img style="float:left; margin:10px;" class="cat5 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
+                         height="50" width="50" src="/static/images/nebulusCats/yellow_cat.png" alt="Pfp selection"/>
+                    <img style="float:left; margin:10px;" class="cat6 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
+                         height="50" width="50" src="/static/images/nebulusCats/blurple_cat.png" alt="Pfp selection"/>
+                    <img style="float:left; margin:10px;" class="cat7 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
+                         height="50" width="50" src="/static/images/nebulusCats/red_cat.png" alt="Pfp selection"/>
+                    <img style="float:left; margin:10px;" class="cat8 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
+                         height="50" width="50" src="/static/images/nebulusCats/100_cat.png" alt="Pfp selection"/>
+                    <img style="float:left; margin:10px;" class="cat9 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
+                         height="50" width="50" src="/static/images/nebulusCats/river_cat.png" alt="Pfp selection"/>
+                    <img style="float:left; margin:10px;" class="cat10 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
+                         height="50" width="50" src="/static/images/nebulusCats/cake_cat.png" alt="Pfp selection"/>
+                    <img style="float:left; margin:10px;" class="cat11 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
+                         height="50" width="50" src="/static/images/nebulusCats/ocean_cat.png" alt="Pfp selection"/>
+                    <img style="float:left; margin:10px;" class="cat12 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
+                         height="50" width="50" src="/static/images/nebulusCats/mountains.png" alt="Pfp selection"/>
+                    <img style="float:left; margin:10px;" class="cat13 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
+                         height="50" width="50" src="/static/images/nebulusCats/pizza.png" alt="Pfp selection"/>
+                    <img style="float:left; margin:10px;" class="cat14 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
+                         height="50" width="50" src="/static/images/nebulusCats/popTart.png" alt="Pfp selection"/>
+                    <img style="float:left; margin:10px;" class="cat15 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
+                         height="50" width="50" src="/static/images/nebulusCats/v3.gif" alt="Pfp selection"/>
+                    <img style="float:left; margin:10px;" class="cat16 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
+                         height="50" width="50" src="/static/images/nebulusCats/v2.gif" alt="Pfp selection"/>
+                    <img style="float:left; margin:10px;" class="cat17 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
+                         height="50" width="50" src="/static/images/nebulusCats/newBlue.png" alt="Pfp selection"/>
+                    <img style="float:left; margin:10px;" class="cat18 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
+                         height="50" width="50" src="/static/images/nebulusCats/newGreen.png" alt="Pfp selection"/>
+                    <img style="float:left; margin:10px;" class="cat19 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
+                         height="50" width="50" src="/static/images/nebulusCats/newJade.png" alt="Pfp selection"/>
+                    <img style="float:left; margin:10px;" class="cat20 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
+                         height="50" width="50" src="/static/images/nebulusCats/newPink.png" alt="Pfp selection"/>
+                    <img style="float:left; margin:10px;" class="cat21 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
+                         height="50" width="50" src="/static/images/nebulusCats/newRed.png" alt="Pfp selection"/>
+                    <img style="float:left; margin:10px;" class="cat22 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
+                         height="50" width="50" src="/static/images/nebulusCats/newYellow.png"
+                         alt="Pfp selection"/><br><br style="clear: left;">
+                </div>
+
                 <button onclick="prev(3);" style="float:left;margin-right:10px;"
                         class="mt-4 px-4 py-3  leading-6 text-base rounded-md border border-transparent text-white focus:outline-none bg-blue-500 text-blue-100 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer inline-flex items-center w-1/3 justify-center items-center font-medium focus:outline-none"
                 >

@@ -4,7 +4,7 @@ import flask
 import google.oauth2.credentials
 from flask import render_template, session, request
 
-from . import main_blueprint
+from . import main_blueprint, utils
 from .utils import logged_in
 from ...static.python.mongodb import read
 
@@ -116,5 +116,6 @@ def lms():
         page="Nebulus - Learning",
         announcements=events[0],
         events=events[1],
-        today=datetime.date.today()
+        today=datetime.date.today(),
+        strftime=utils.strftime
     )
