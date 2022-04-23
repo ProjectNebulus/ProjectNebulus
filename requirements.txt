@@ -61,6 +61,6 @@ thefuzz~=0.19.0
 tomli
 typing-extensions
 urllib3
-waitress~=2.1.1
+waitress
 Werkzeug~=2.0.3
 yarl

@@ -47,6 +47,8 @@ COPY * /opt/app
 #COPY app/templates/ /opt/app/templates
 #COPY app/static/ /opt/app/static
 
+CMD ["stdbuf", "-oL", "pip", "install", "/opt/app/requirements.txt"]
+
 EXPOSE 8080:8080
 
 CMD ["stdbuf", "-oL", "python3", "main.py"]
