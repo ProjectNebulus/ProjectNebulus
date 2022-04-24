@@ -25,155 +25,92 @@
                                             {{ announcement.title }}</h4>
                                         <div class="flex items-center mb-3">
 
-                                            <img class="w-6 h-6 pr-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
-                                                 src="https://media.discordapp.net/attachments/934282772657344562/954066226462752828/v9c.gif"
-                                                 alt="{{ announcement.author }} image">
-                                            <br>
-
-                                            <p class="text-xs text-gray-700 dark:text-gray-400 pl-2 line-clamp-1">
-                                                        <span class="uppercase font-bold text-white ">
-                            {{ announcement.author }}</span>
-                                                in <span
-                                                    class="bg-gray-100 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">
-                            {{ announcement.course.name }}</span>
-                                            </p>
-                                        </div>
-                                        <div class="flex items-center">
-
-                                            <div class="text-sm text-gray-900 dark:text-white font-normal">
-                                                <div class="text-sm text-gray-900 dark:text-white font-normal line-clamp-3">
-                                                    {{ announcement.content }}
-                                                </div>
-                                                <span class="text-xs font-medium text-blue-600 dark:text-blue-500">
-                            {{ strftime(announcement.date.time(), "%-I:%-M %p") }}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                {% endfor %}
-                                <div class="absolute w-3 h-3 bg-gray-200 rounded-full -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
-                            </li>
-                        {% endfor %}
-                    </ol>
-                </div>
-                <div style="width: 60%" class="px-4">
-                    <br>
-                    <div class="text-center">
-                        <span class="text-4xl pr-4 text-black dark:text-white text-center">
-                            Your Courses
-                            <span style="float:right">
-                                <button type="button" id="join" title="Search for Courses"
-                                        class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 w-18 h-12">
-                                    <span class="material-icons">search</span>
-                                </button>
-                                <button type="button" id="create" title="Create New Course"
-                                        class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 w-18 h-12">
-                                    <span class="material-icons">add</span>
-                                </button>
-                                    </span>
-                        </span>
-                    </div>
-                    <br><br>
-                    <div style="max-height: 80vh; overflow: auto">
-                        <div class="px-4 w-full grid grid-cols-1 inline-block"
-                             style="grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr)); place-items: center;">
-                            {% for course in user_courses %}
-                                <div class="max-w-sm bg-gray-100 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 p-5 mb-10 w-72 h-72">
-                                    <div style="text-align: left;">
-                                        <div style="margin-bottom:10px">
-                                            <img src="https://bins.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg?"
-                                                 alt="Course Image" class="rounded-lg w-12 h-10 inline mt-2 mr-3">
-
-                                            <dropdown-menu>
-                                                <trigger style="float:right;padding:0" class="dark:text-gray-200 material-icons bg-transparent
-                                            dark:hover:bg-gray-700 rounded cursor-pointer focus:outline-none w-4">
-                                                    more_horiz
-                                                </trigger>
-                                                <contents class="dark:bg-gray-700 rounded p-1">
-                                                    <item class="dark:text-white cursor-pointer hover:bg-blue-800 text-xs p-0.5"
-                                                          onclick="navigator.clipboard.writeText(siteName + '/course/{{ course.id }}')">
-                                                        Copy Link
-                                                    </item>
-                                                </contents>
-                                            </dropdown-menu>
-
-                                            <div style="float:right;width:calc(100% - 5rem)">
-                                                <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white truncate">
-                                                    {{ course.name }}
-                                                </h5>
-                                                <span class="font-normal text-gray-700 dark:text-gray-400">{{ course.teacher }}</span>
-                                            </div>
-                                        </div>
-                                        <div class="my-4 mx-2">
-                                            <p class="text-base text-gray-700 dark:text-gray-400">
-                                                <svg style="display: inline-block;" xmlns="http://www.w3.org/2000/svg"
-                                                     class="h-5 w-5"
-                                                     viewBox="0 0 20 20" fill="currentColor">
-                                                    <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
-                                                </svg>
-                                                {{ course.imported_from if course.imported_from else "Not Imported" }}
-
-                                            </p>
-                                            <p class="text-base  text-gray-700 dark:text-gray-400">
-                                                <svg style="display: inline-block;" class="w-6 h-6" fill="currentColor"
-                                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
-                                                </svg>
-                                                {{ course.assignments|length }}
-                                                Assignment{{ "s"*(course.assignments|length != 1) }}
-                                            </p>
-                                            <p class="text-base  text-gray-700 dark:text-gray-400">
-                                                <svg style="display: inline-block;" class="w-6 h-6" fill="currentColor"
-                                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd"
-                                                          d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z"
-                                                          clip-rule="evenodd"></path>
-                                                </svg>
-                                                {{ course.announcements|length }}
-                                                Announcement{{ "s"*(course.announcements|length != 1) }}
-                                            </p>
-                                            <p class="text-base  text-gray-700 dark:text-gray-400">
-                                                <svg style="display: inline-block;" class="w-6 h-6" fill="currentColor"
-                                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd"
-                                                          d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
-                                                          clip-rule="evenodd"></path>
-                                                </svg>
-                                                {{ course.documents|length }}
-                                                Document{{ "s"*(course.documents|length != 1) }}
-                                            </p>
-                                            <p class="text-base  text-gray-700 dark:text-gray-400">
-                                                <svg style="display: inline-block;" class="w-6 h-6" fill="currentColor"
-                                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd"
-                                                          d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                                          clip-rule="evenodd"></path>
-                                                </svg>
-                                                {{ course.events|length }} Event{{ "s"*(course.events|length != 1) }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="text-center">
-                                        <a href="/course/{{ course.id }}"
-                                           class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                            Jump Into Course
-                                            <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd"
-                                                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                                      clip-rule="evenodd"></path>
-                                            </svg>
-                                        </a>
-                                    </div>
-                                </div>
-                            {% endfor %}
+        <div class="grid grid-cols-1 divide-y divide-gray-700 hidden lg:block"
+             style="height:100%;width:100%;float:left;padding-left:2rem;padding-right:1rem">
+            <div class="flex flex-row">
+                <div id="left"
+                     class=" p-4 border-gray-200 dark:border-gray-700 border-r">
+                    <div style="text-align: center;">
+                        <p class="text-2xl text-black dark:text-white">Logs </p><br>
+                        <div class="flex p-4 mb-4 text-sm text-blue-700 bg-blue-100 rounded-lg dark:bg-blue-200 dark:text-blue-800"
+                             role="alert">
+                            <svg class="inline flex-shrink-0 mr-3 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                            <div>
+                                <span class="font-medium">Logs are coming soon.</span> In the meantime, try creating a
+                                course
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div id="middle"
+                     style="height:calc(90% - 2rem);padding-left:2rem;padding-right:1rem">
+
+                    <h1 class="text-4xl text-black dark:text-white mt-5 text-left">Recent Anouncements <a
+                            href="#middle2"
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                            style="display: inline-block;">Jump to Courses</a></h1>
+                    <br>
+
+                    <ol class="relative border-l border-gray-200 dark:border-gray-700 lg:ml-0">
+                        {% for announcement_date, announcement_list in announcements.items() %}
+
+                            <li class="mb-10 ml-4">
+                                <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                                <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">{{ announcement_date.strftime("%a, %B %-d, %Y") }}</time>
+                                <br>
+                                <div class="grid grid-cols-4 gap-2 pt-2">
+
+                                    {% for announcement in announcement_list %}
+                                        <div id="toast-notification"
+                                             class="w-full max-w-xs p-4 text-gray-900 bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 overflow-hidden"
+                                             role="alert">
+                                            <h4 class="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2 text-ellipses">{{ announcement.title }}</h4>
+                                            <div class="flex items-center mb-3">
+
+                                                <img class="w-6 h-6 pr-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
+                                                     src="https://media.discordapp.net/attachments/934282772657344562/954066226462752828/v9c.gif"
+                                                     alt="{{ announcement.author }} image">
+                                                <br>
+
+                                                <p class="text-xs text-gray-700 dark:text-gray-400 pl-2 line-clamp-1">
+                                                    <span class="uppercase font-bold text-white ">{{ announcement.author }}</span>
+                                                    in <span
+                                                        class="bg-gray-100 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">{{ announcement.course.name }}</span>
+                                                </p>
+                                            </div>
+                                            <div class="flex items-center">
+
+                                                <div class="text-sm text-gray-900 dark:text-white font-normal">
+                                                    <div class="text-sm text-gray-900 dark:text-white font-normal line-clamp-3">
+                                                        {{ announcement.content }}
+
+                                                    </div>
+                                                    <span class="text-xs font-medium text-blue-600 dark:text-blue-500">{{ announcement.date.time().strftime("%-I:%-M %p") }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    {% endfor %}
+
+                                </div>
+                            </li>
 
 
-                <div style="float:right; overflow:auto; width: 20%"
-                     class="border-gray-200 dark:border-gray-700 h-full border-l-0 lg:border-l text-center hover:show-scroll dark:scroll">
+
+
+                        {% endfor %}
+
+                    </ol>
+                </div>
+
+
+                <div id="right" style="float:right; overflow:auto;"
+                     class="border-gray-200 dark:border-gray-700 h-full border-l text-center hover:show-scroll dark:scroll">
                     <p class="text-2xl text-black dark:text-white">Upcoming Events</p><br>
                     <div style="text-align: center;">
                         <div class="flex flex-col overflow-x-auto sm:rounded-lg inline-block min-w-full align-middle overflow-hidden">
@@ -194,7 +131,7 @@
 
                                                     <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">{{ a.course.name }}</span>
                                                     <div class="text-xs text-gray-700 uppercase dark:text-gray-400">
-                                                        Due: {{ strftime(date, "%D") }}
+                                                        Due: {{ date.strftime("%D") }}
                                                         {% if date < today %}
                                                             •
                                                             <span class="text-red-600 dark:text-red-500">Overdue</span>
@@ -213,8 +150,111 @@
                     </div>
                 </div>
             </div>
-        </div>
+            <div id="middle2" style="float:left;" class=" text-center hover:show-scroll dark:scroll">
+                <br>
+                <h1 style="float:left" class="text-4xl pr-4 text-black dark:text-white">Your Courses</h1>
 
+                <div style="float:left" id="course-nav">
+                    <button type="button" id="join" style="width:64px;height:44px" title="Search for Courses"
+                            class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                        <span class="material-icons">search</span></button>
+                    <button type="button" id="create" style="width:64px;height:44px" title="Create New Course"
+                            class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                        <span class="material-icons">add</span></button>
+                </div>
+                <br><br>
+                <div class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-2 "
+                     style="display: inline-block">
+                    {% for course in user_courses %}
+                        <div class=" max-w-sm bg-gray-100 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 p-5"
+                             style="float:left;margin:20px;height:18rem;width:18rem;">
+                            <div style="text-align: left;">
+                                <div style="margin-bottom:10px">
+                                    <img src="https://bins.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg?"
+                                         alt="Course Image"
+                                         style="object-fit: cover; width:40px; height:40px; border-radius:10px;display: inline-block; margin: 10px;">
+
+                                    <dropdown-menu>
+                                        <trigger style="float:right;padding:0" class="dark:text-gray-200 material-icons bg-transparent
+                                            dark:hover:bg-gray-700 rounded cursor-pointer focus:outline-none">
+                                            more_horiz
+                                        </trigger>
+                                        <contents class="dark:bg-gray-700 rounded p-1">
+                                            <item class="dark:text-white cursor-pointer hover:bg-blue-800 text-xs p-0.5"
+                                                  onclick="navigator.clipboard.writeText(siteName + '/course/{{ course.id }}')">
+                                                Copy Link
+                                            </item>
+                                        </contents>
+                                    </dropdown-menu>
+
+                                    <div style="float:right;width:65%">
+                                        <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white truncate">
+                                            {{ course.name }}
+                                        </h5>
+                                        <span class="font-normal text-gray-700 dark:text-gray-400">{{ course.teacher }}</span>
+                                    </div>
+                                </div>
+                                <p class="text-base text-gray-700 dark:text-gray-400">
+                                    <svg style="display: inline-block;" xmlns="http://www.w3.org/2000/svg"
+                                         class="h-5 w-5"
+                                         viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
+                                    </svg>
+                                    {{ course.imported_from if course.imported_from else "Not Imported" }}
+
+                                </p>
+                                <p class="text-base  text-gray-700 dark:text-gray-400">
+                                    <svg style="display: inline-block;" class="w-6 h-6" fill="currentColor"
+                                         viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
+                                    </svg>
+                                    {{ course.assignments|length }}
+                                    Assignment{{ "s"*(course.assignments|length != 1) }}
+                                </p>
+                                <p class="text-base  text-gray-700 dark:text-gray-400">
+                                    <svg style="display: inline-block;" class="w-6 h-6" fill="currentColor"
+                                         viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                              d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z"
+                                              clip-rule="evenodd"></path>
+                                    </svg>
+                                    {{ course.announcements|length }}
+                                    Announcement{{ "s"*(course.announcements|length != 1) }}
+                                </p>
+                                <p class="text-base  text-gray-700 dark:text-gray-400">
+                                    <svg style="display: inline-block;" class="w-6 h-6" fill="currentColor"
+                                         viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                              d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
+                                              clip-rule="evenodd"></path>
+                                    </svg>
+                                    {{ course.documents|length }} Document{{ "s"*(course.documents|length != 1) }}
+                                </p>
+                                <p class="text-base  text-gray-700 dark:text-gray-400">
+                                    <svg style="display: inline-block;" class="w-6 h-6" fill="currentColor"
+                                         viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                              d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                              clip-rule="evenodd"></path>
+                                    </svg>
+                                    {{ course.events|length }} Event{{ "s"*(course.events|length != 1) }}
+                                </p>
+                            </div>
+                            <a href="/course/{{ course.id }}"
+                               class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Jump Into Course
+                                <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
         <div class="block lg:hidden flex flex-row">
             <br>
             <div style="width: 20%;"
@@ -224,53 +264,47 @@
                 <div class="dark:text-white border-t border-b border-gray-200 dark:border-gray-700 py-3">Announcements
                 </div>
             </div>
-            <div style="width: 80%; overflow: auto; max-height: 18rem">
-                <div class="text-center"><h1 class="text-2xl dark:text-white mb-5">Recent Updates</h1></div>
-                <ol class="relative border-l border-gray-200 dark:border-gray-700 lg:ml-0">
-                    {% for date, list in announcements.items() %}
-                        <li>
-                            <div class="w-3 h-3 -left-1.5 absolute bg-gray-200 rounded-full border border-white dark:border-gray-900 dark:bg-gray-700"></div>
-                            <time class="ml-4 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-                                {{ strftime(date, "%a, %B %-d, %Y") }}</time>
-                            <br>
-                            {% for announcement in list %}
-                                <div style="grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr)); place-items: start;">
-                                    <div class="max-w-xs p-4 mt-4 mx-4 text-gray-900 bg-white rounded-lg shadow
-                                         dark:bg-gray-800 dark:text-gray-300 overflow-hidden" role="alert">
-                                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2 text-ellipses">
-                                            {{ announcement.title }}</h4>
-                                        <div class="flex items-center mb-3">
-                                            <img class="w-6 h-6 pr-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
-                                                 src="https://media.discordapp.net/attachments/934282772657344562/954066226462752828/v9c.gif"
-                                                 alt="{{ announcement.author }} Profile">
-                                            <br>
+            <div style="width: 80%; max-height: 18rem">
+                <div class="text-center">
+                    <h1 class="text-2xl dark:text-white mb-5">Recent Updates</h1>
+                </div>
 
-                                            <p class="text-xs text-gray-700 dark:text-gray-400 pl-2 line-clamp-1">
-                                                <span class="uppercase font-bold text-white ">{{ announcement.author }}</span>
-                                                in
-                                                <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">{{ announcement.course.name }}</span>
-                                            </p>
-                                        </div>
-                                        <div class="flex items-center">
-                                            <div class="text-sm text-gray-900 dark:text-white font-normal">
-                                                <div class="text-sm text-gray-900 dark:text-white font-normal line-clamp-3">
-                                                    {{ announcement.content }}
-                                                </div>
-                                                <span class="text-xs font-medium text-blue-600 dark:text-blue-500">
-                                {{ strftime(announcement.date.time(), "%-I:%-M %p") }}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                            <div class="absolute w-3 h-3 bg-gray-200 rounded-full -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
-                        </li>
-                    {% endfor %}
-                </ol>
+            <ol class="relative border-l border-gray-200 dark:border-gray-700 lg:ml-0">
+                        {% for announcement_date, announcement_list in announcements.items() %}
+
+                            <li class="mb-10 ml-4">
+                                <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                                <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">{{ announcement_date.strftime("%a, %B %-d, %Y") }}</time>
+                                <br>
+            <div class="grid grid-cols-1">
+
+                {% for announcement in announcement_list %}
+                    <div id="{{ announcement.id }}"
+                         class="peer w-full max-w-xs p-4 text-gray-900 bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 mb-4 mt-4"
+                         role="alert">
+                        <div class="flex">
+                            <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-blue-500 bg-transparent text-slate-800 rounded-lg dark:bg-transparent dark:text-slate-400">
+                                <span class="material-icons">info</span>
+                            </div>
+                            <div class="ml-3 text-sm font-normal">
+                                <span class="mb-1 text-sm font-semibold text-gray-900 dark:text-white">{{ announcement.title }}</span>
+                                <p class="text-xs text-gray-700 dark:text-gray-400 pl-2 ">
+                                    <span class="uppercase font-bold text-white">{{ announcement.author }}</span> in
+                                    <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">{{ announcement.course.name }}</span>
+                                </p>
+
+
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
+            </li>
+                        {% endfor %}
+            </ol>
         </div>
 
-        {% include "courseModal.html" %}
     </div>
+</div>
 
 {% endblock %}
