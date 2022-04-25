@@ -235,28 +235,35 @@
             </div>
         </div>
     </div>
-        <div class="block lg:hidden flex flex-row">
+        <div class="block lg:hidden flex flex-col">
             <br>
-            <div style="width: 20%;"
-                 class="border-r border-gray-200 dark:border-gray-700 mr-8">
-                <div class="dark:text-white border-t border-gray-200 dark:border-gray-700 py-3">Updates</div>
-                <div class="dark:text-white border-t border-gray-200 dark:border-gray-700 py-3">Courses</div>
-                <div class="dark:text-white border-t border-b border-gray-200 dark:border-gray-700 py-3">Announcements
-                </div>
-            </div>
-            <div style="width: 80%; max-height: 18rem">
-                <div class="text-center">
-                    <h1 class="text-2xl dark:text-white mb-5">Recent Updates</h1>
-                </div>
-
-            <ol class="relative border-l border-gray-200 dark:border-gray-700 lg:ml-0">
+            <div class="p-6">
+    <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
+        <li class="mr-2" role="presentation">
+            <button class="inline-block p-4 rounded-t-lg border-b-2" id="announcement-tab" data-tabs-target="#announcements" type="button" role="tab" aria-controls="announcements" aria-selected="false">Announcements</button>
+        </li>
+        <li class="mr-2" role="presentation">
+            <button class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="logs-tab" data-tabs-target="#logs" type="button" role="tab" aria-controls="logs" aria-selected="false">Logs</button>
+        </li>
+        <li class="mr-2" role="presentation">
+            <button class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="settings-tab" data-tabs-target="#settings" type="button" role="tab" aria-controls="settings" aria-selected="false">Settings</button>
+        </li>
+        <li role="presentation">
+            <button class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="contacts-tab" data-tabs-target="#contacts" type="button" role="tab" aria-controls="contacts" aria-selected="false">Contacts</button>
+        </li>
+    </ul>
+</div>
+    <div id="myTabContent">
+        <div class="p-6" id="announcements" role="tabpanel" aria-labelledby="profile-tab">
+         <h1 class="text-4xl text-black dark:text-white mt-5 text-center pb-4">Recent Anouncements</h1>
+            <ol class="relative border-l border-gray-200 dark:border-gray-700 lg:ml-0 p-6">
                         {% for announcement_date, announcement_list in announcements.items() %}
 
                             <li class="mb-10 ml-4">
                                 <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
                                 <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">{{ announcement_date.strftime("%a, %B %-d, %Y") }}</time>
                                 <br>
-            <div class="grid grid-cols-1">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
 
                 {% for announcement in announcement_list %}
                     <div id="{{ announcement.id }}"
@@ -268,7 +275,7 @@
                             </div>
                             <div class="ml-3 text-sm font-normal">
                                 <span class="mb-1 text-sm font-semibold text-gray-900 dark:text-white">{{ announcement.title }}</span>
-                                <p class="text-xs text-gray-700 dark:text-gray-400 pl-2 ">
+                                <p class="text-xs text-gray-700 dark:text-gray-4000">
                                     <span class="uppercase font-bold text-white">{{ announcement.author }}</span> in
                                     <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">{{ announcement.course.name }}</span>
                                 </p>
@@ -283,6 +290,32 @@
                         {% endfor %}
             </ol>
         </div>
+
+        <div class="p-6 text-center" id="logs" role="tabpanel" aria-labelledby="logs-tab">
+            <p class="text-2xl text-black dark:text-white">Logs </p><br>
+                        <div class="flex p-4 mb-4 text-sm text-blue-700 bg-blue-100 rounded-lg dark:bg-blue-200 dark:text-blue-800"
+                             role="alert">
+                            <svg class="inline flex-shrink-0 mr-3 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                            <div>
+                                <span class="font-medium">Logs are coming soon.</span> In the meantime, try creating a
+                                course
+                            </div>
+                        </div>
+                    </div>
+        <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+            <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Settings tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
+        </div>
+        <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
+            <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Contacts tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
+        </div>
+    </div>
+
+
 
     </div>
 </div>

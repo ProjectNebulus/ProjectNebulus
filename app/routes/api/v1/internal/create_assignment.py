@@ -20,4 +20,4 @@ def create_assignment():
     createAssignment(data)
 
     # Return the success message.
-    return "success", 200
+    return "success"

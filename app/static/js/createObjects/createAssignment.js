@@ -6,7 +6,7 @@ document.addEventListener('load', function(){
 );
 
 function createAssignment(){
-    var assignment = {
+   let assignment = {
         title: document.getElementById("assignmentname").value,
         points: document.getElementById("points").value,
         due_date: document.getElementById("duedate").value,
@@ -20,7 +20,7 @@ function createAssignment(){
         dataType: "json",
         contentType: "application/json",
         done: function(data){
-            alert('Successfully created assignment');
+            alert("Successfully created assignment");
         },
         error: function(error){
             alert(error);
