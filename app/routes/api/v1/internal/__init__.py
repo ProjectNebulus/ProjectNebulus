@@ -22,6 +22,7 @@ from .logout_of_schoology import *
 from .schoology_callback import *
 from .send_email import *
 from .signup_post import *
+from .signin_post import *
 from .spotify_status import *
 from .signin_with_schoology import *
 from .create_course_resource import *
