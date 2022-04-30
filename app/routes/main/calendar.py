@@ -9,7 +9,6 @@ from .utils import logged_in
 def calendar():
     return render_template(
         "calendar.html",
-        password=session["password"],
         user=session["username"],
         email=session["email"],
         page="Nebulus - Calendar",

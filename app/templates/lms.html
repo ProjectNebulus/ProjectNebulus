@@ -12,11 +12,6 @@
                     <div class="flex flex-row w-full">
                         <h1 class="text-4xl text-black dark:text-white mt-5 text-left" style="flex-grow: 1;">
                             Recent Activity
-                            <a href="#middle2"
-                               class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                               style="display: inline-block;">
-                                Jump to Courses
-                            </a>
                         </h1>
                         <br>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mt-5 text-black dark:text-white"
@@ -78,7 +73,7 @@
                      class="border-gray-200 dark:border-gray-700 border-l text-center hover:show-scroll dark:scroll">
                     <p class="text-2xl text-black dark:text-white">Upcoming Events</p><br>
                     <div style="text-align: center;">
-                        <div class="flex flex-col overflow-x-auto sm:rounded-lg inline-block min-w-full align-middle overflow-auto">
+                        <div class="flex flex-col overflow-x-auto sm:rounded-lg min-w-full align-middle overflow-auto inline-block">
                             {% if events|length == 0 %}
                                 <p class="text-gray-300 dark:text-gray-700">No Assignments</p>
                             {% else %}
@@ -217,35 +212,34 @@
                             </a>
                         </div>
                     {% endfor %}
-                    </ol>
                 </div>
             </div>
         </div>
-        <div class="block lg:hidden flex flex-col">
+        <div class="block lg:hidden flex flex-row">
             <br>
-            <div class="p-6">
-                <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab"
+            <div class="p-4">
+                <ul class="flex flex-col -mb-px text-xs font-medium" id="myTab"
                     data-tabs-toggle="#myTabContent" role="tablist">
                     <li class="mr-2" role="presentation">
-                        <button class="inline-block p-4 rounded-t-lg border-b-2" id="announcement-tab"
+                        <button class="inline-block p-2 border-r-2 w-32 text-left" id="announcement-tab"
                                 data-tabs-target="#announcements" type="button" role="tab" aria-controls="announcements"
                                 aria-selected="false">Announcements
                         </button>
                     </li>
                     <li class="mr-2" role="presentation">
-                        <button class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                        <button class="inline-block p-2 border-r-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 w-32 text-left"
                                 id="logs-tab" data-tabs-target="#logs" type="button" role="tab" aria-controls="logs"
                                 aria-selected="false">Logs
                         </button>
                     </li>
                     <li class="mr-2" role="presentation">
-                        <button class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                        <button class="inline-block p-2 border-r-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 w-32 text-left"
                                 id="settings-tab" data-tabs-target="#settings" type="button" role="tab"
                                 aria-controls="settings" aria-selected="false">Settings
                         </button>
                     </li>
                     <li role="presentation">
-                        <button class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                        <button class="inline-block p-2 border-r-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 w-32 text-left"
                                 id="contacts-tab" data-tabs-target="#contacts" type="button" role="tab"
                                 aria-controls="contacts" aria-selected="false">Contacts
                         </button>
@@ -254,20 +248,19 @@
             </div>
             <div id="myTabContent">
                 <div class="p-6" id="announcements" role="tabpanel" aria-labelledby="profile-tab">
-                    <h1 class="text-4xl text-black dark:text-white mt-5 text-center pb-4">Recent Anouncements</h1>
+                    <h1 class="text-xl text-black dark:text-white mt-2 text-center pb-4">Recent Announcements</h1>
                     <ol class="relative border-l border-gray-200 dark:border-gray-700 lg:ml-0 p-6">
-                        {% for announcement_date, announcement_list in announcements.items() %}
-
+                        {% for date, list in announcements.items() %}
                             <li class="mb-10 ml-4">
                                 <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
                                 <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-                                    {{ strftime(announcement_date, "%a, %B %-d, %Y") }}
+                                    {{ strftime(date, "%a, %B %-d, %Y") }}
                                 </time>
                                 <br>
                                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
 
-                                    {% for announcement in announcement_list %}
-                                        <div id="{{ announcement.id }}"
+                                    {% for a in list %}
+                                        <div id="{{ a.id }}"
                                              class="peer w-full max-w-xs p-4 text-gray-900 bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 mb-4 mt-4"
                                              role="alert">
                                             <div class="flex">
@@ -275,11 +268,11 @@
                                                     <span class="material-icons">info</span>
                                                 </div>
                                                 <div class="ml-3 text-sm font-normal">
-                                                    <span class="mb-1 text-sm font-semibold text-gray-900 dark:text-white">{{ announcement.title }}</span>
+                                                    <span class="mb-1 text-sm font-semibold text-gray-900 dark:text-white">{{ a.title }}</span>
                                                     <p class="text-xs text-gray-700 dark:text-gray-4000">
-                                                        <span class="uppercase font-bold text-white">{{ announcement.author }}</span>
+                                                        <span class="uppercase font-bold text-white">{{ a.author }}</span>
                                                         in
-                                                        <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">{{ announcement.course.name }}</span>
+                                                        <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">{{ a.course.name }}</span>
                                                     </p>
                                                 </div>
                                             </div>

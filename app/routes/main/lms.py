@@ -4,9 +4,9 @@ import flask
 import google.oauth2.credentials
 from flask import render_template, session, request
 
+from static.python.mongodb import read
 from . import main_blueprint, utils
 from .utils import logged_in
-from ...static.python.mongodb import read
 
 
 # from googleapiclient.discovery import build
@@ -108,7 +108,6 @@ def lms():
 
     return render_template(
         "lms.html",
-        password=session["password"],
         user=session["username"],
         user_acc=user_acc,
         user_courses=list(user_courses) + list(gcourses) + list(schoologycourses),

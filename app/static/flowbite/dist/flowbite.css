@@ -1898,6 +1898,10 @@ input:checked + .toggle-bg {
     border-right-width: 0;
 }
 
+.border-r-2 {
+    border-right-width: 2px;
+}
+
 .border-l {
     border-left-width: 1px;
 }

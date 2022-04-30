@@ -10,7 +10,6 @@ def index():
     return render_template(
         "main/index.html",
         page="Nebulus - Learning, All In One",
-        password=session.get("password"),
         user=session.get("username"),
         email=session.get("email"),
     )

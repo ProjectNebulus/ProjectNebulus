@@ -8,7 +8,6 @@ from ...static.python.mongodb import read
 def api():
     return render_template(
         "developerportal.html",
-        password=session.get("password"),
         user=session.get("username"),
         email=session.get("email"),
         read=read,

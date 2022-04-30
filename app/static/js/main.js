@@ -71,11 +71,10 @@ window.addEventListener("load", function () {
 
         let size = logo.getAttribute("size");
 
-        if (size === null)
-            size = "2rem";
-
-        logo.style.width = size;
-        logo.style.height = size;
+        if (size === null) {
+            logo.style.width = size;
+            logo.style.height = size;
+        }
 
         logo.innerHTML = '<img alt="logo" style="' + logo.getAttribute("style") + '" class="' + logo.className + '" src="/static/images/nebulusCats/' + img + '">';
 

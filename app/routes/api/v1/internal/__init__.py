@@ -1,4 +1,5 @@
 import flask
+
 from .. import v1
 
 internal = flask.Blueprint(
@@ -14,23 +15,19 @@ from .check_signin import *
 from .connect_to_schoology import *
 from .connected_to_schoology import *
 from .create_course import *
-from .create_schoology_course import *
 from .email_exists import *
 from .username_exists import *
 from .generate_schoology_oauth_url import *
 from .logout_of_schoology import *
 from .schoology_callback import *
 from .send_email import *
-from .signin_post import *
 from .signup_post import *
 from .spotify_status import *
 from .signin_with_schoology import *
-from .create_announcement import *
-from .create_assignment import *
+from .create_course_resource import *
 from .file_upload import *
 from .file_upload_link import *
 from .upload_document import *
 from .get_verification_code import *
 from .create_user import *
-from .check_signup_user import *
-from .check_signup_email import *
+from .check_signup import *

@@ -1,8 +1,8 @@
 from flask import render_template, session, request
 
+from static.python.mongodb import read
 from . import main_blueprint, utils
 from .utils import logged_in
-from ...static.python.mongodb import read
 
 
 @main_blueprint.route("/dashboard", methods=["GET"])
@@ -19,7 +19,6 @@ def dashboard():
         user_courses = user_courses[len(user_courses) - 8:]
     return render_template(
         "dashboard.html",
-        password=session["password"],
         user=session["username"],
         email=session["email"],
         user_courses=user_courses,

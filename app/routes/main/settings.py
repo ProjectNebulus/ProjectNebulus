@@ -1,15 +1,11 @@
 import flask
 import google.oauth2.credentials
 
-from . import main_blueprint
 from .spotify import *
 from ...static.python.mongodb import read
 
 
 # from googleapiclient.discovery import build
-
-
-# -*- coding: utf-8 -*-
 
 def generate_redirect(url):
     if "nebulus" in url:
@@ -26,21 +22,6 @@ def settings():
     the_google_classroom = read.getClassroom(username=session.get("username"))
     googleclassroom = None
     try:
-        # service = build('people', 'v1', credentials=creds)
-        #
-        # # Call the People API
-        # print('List 10 connection names')
-        # results = service.people().connections().list(
-        #     resourceName='people/me',
-        #     pageSize=10,
-        #     personFields='names,emailAddresses').execute()
-        # connections = results.get('connections', [])
-        #
-        # for person in connections:
-        #     names = person.get('names', [])
-        #     if names:
-        #         name = names[0].get('displayName')
-        #         print(name)
         credentials = google.oauth2.credentials.Credentials(
             **flask.session['credentials'])
 
@@ -60,12 +41,15 @@ def settings():
         user_info = user_info_service.userinfo().get().execute()
         print(user_info)
         user_info = [user_info["name"], user_info["picture"]]
+
     except:
         user_info = None
     try:
         canvas = session["canvas"]
+
     except:
         canvas = None
+
     cache_handler = FlaskSessionCacheHandler(CacheHandler)
     spotify_auth_manager = spotipy.oauth2.SpotifyOAuth(
         scope="user-read-currently-playing playlist-modify-private",
@@ -81,8 +65,9 @@ def settings():
         spotify = None
     else:
         spotify = spotify.current_user()
+
     try:
-        discord = [session["discord_user"], session["discord_avatar"]]
+        discord = (session["discord_user"], session["discord_avatar"])
     except:
         discord = None
 
@@ -90,8 +75,8 @@ def settings():
         "user/settings.html",
         page="Nebulus - Account Settings",
         session=session,
-        password=session.get("password"),
         user=session.get("username"),
+        pswHashes="*" * session.get("pswLen"),
         email=session.get("email"),
         schoology=the_schoology,
         classroom=the_google_classroom,

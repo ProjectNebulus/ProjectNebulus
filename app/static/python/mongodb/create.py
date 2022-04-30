@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from typing import List
 
 from dotenv import load_dotenv
@@ -10,20 +8,7 @@ from . import read
 load_dotenv()
 import schoolopy
 
-from ..classes.Announcement import Announcement
-from ..classes.Assignment import Assignment
-from ..classes.Course import Course
-from ..classes.Document import DocumentFile
-from ..classes.Events import Event
-from ..classes.Folder import Folder
-from ..classes.Grades import Grades
-from ..classes.User import User
-from ..classes.Avatar import Avatar
-from ..classes.Textbook import Textbook
-from ..classes.Discord import Discord
-from ..classes.Canvas import Canvas
-from ..classes.Spotify import Spotify
-from ..classes.GoogleClassroom import GoogleClassroom
+from ..classes import *
 from .read import find_user
 
 
@@ -71,7 +56,6 @@ def create_user(data: dict) -> str | List[str | User]:
     2: Username already exists
     3: Email already exists
     """
-    # password = hash256(password)
     user = User(**data)
     if User.objects(username=user.username, email=user.email):
         return "1"

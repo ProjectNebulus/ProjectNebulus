@@ -7,7 +7,7 @@ from flask import session, redirect, request, render_template
 def logged_in(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
-        if session.get("logged_in"):
+        if session.get("username"):
             return func(*args, **kwargs)
         else:
             return redirect("/signin")

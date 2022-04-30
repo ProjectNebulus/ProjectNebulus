@@ -1,7 +1,6 @@
 from flask import session, request
 
 from . import internal
-from ....main.utils import private_endpoint
 from .....static.python.mongodb import create
 
 
@@ -13,6 +12,6 @@ def signup_post():
     if validation[0] == "0":
         session["username"] = validation[1].username
         session["email"] = validation[1].email
-        session["password"] = validation[1].password
+        session["pswLen"] = len(data.get("password"))
         session["id"] = validation[1].id
     return validation[0]

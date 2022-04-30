@@ -29,7 +29,6 @@ def course_page(page, **kwargs):
                     course=course,
                     teacher=course.teacher,
                     course_id=course_id,
-                    password=session.get("password"),
                     user=session.get("username"),
                     email=session.get("email"),
                     disableWidget=(page != "course"),
@@ -41,7 +40,6 @@ def course_page(page, **kwargs):
     return render_template(
         "errors/404.html",
         page="404 Not Found",
-        password=session.get("password"),
         user=session.get("username"),
         email=session.get("email"),
     )

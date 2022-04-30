@@ -127,7 +127,7 @@ input[type="text"] {
 }
 
 .scroll {
-    height: 380px;
+    height: 45%;
     overflow: scroll;
 }
 
