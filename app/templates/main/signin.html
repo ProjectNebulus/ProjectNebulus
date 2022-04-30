@@ -2,10 +2,20 @@
 {% block main %}
     <head>
         <script src="/static/js/signin.js"></script>
+        <style>
+            .bg-signin-bg{
+                background: url("/static/images/background-images/signin-background.png") no-repeat center center fixed !important;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+                top:0px;
+                left:0px;
+            }
+        </style>
     </head>
-    <body class="bg-signin-bg"
-          style="background: url('/static/images/background-images/signin-background.png');background-size:100%;">
-    <div class="container mx-auto p-4 bg-white/[0.9] rounded-lg w-1/2  pb-1/2"
+    <body class="bg-signin-bg">
+    <div class="container mx-auto p-4 bg-white/[0.9] rounded-lg w-1/2 pb-1/2"
          style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
         <div class="w-full md:w-1/2 lg:w-1/3 mx-auto my-12">
             <h1 class="text-lg font-bold">Login</h1>
