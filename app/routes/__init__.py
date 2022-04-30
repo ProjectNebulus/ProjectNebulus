@@ -25,6 +25,7 @@ def init_app():
     app.config["MAIL_PASSWORD"] = os.getenv("password")
     app.config["MAIL_USE_TLS"] = False
     app.config["MAIL_USE_SSL"] = True
+    app.config["SECRET_KEY"] = os.getenv("MONGOPASS")
     app.register_blueprint(main_blueprint)
     app.register_blueprint(api.api_blueprint)
     app.register_blueprint(static_blueprint)
