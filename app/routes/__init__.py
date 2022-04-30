@@ -16,6 +16,7 @@ def init_app():
     Creates a flask application.
     """
     app = Flask(__name__)
+    app.config["SECRET_KEY"] = os.environ.get("MONGOPASS")
     CORS(app, resources={r"/api/*": {"origins": "*"}})
     app.config["UPLOAD_FOLDER"] = "/app/static/UserContent/"
     app.config["MAIL_SERVER"] = "smtp.gmail.com"
