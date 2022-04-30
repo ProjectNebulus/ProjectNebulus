@@ -26,6 +26,7 @@ def generate_redirect(url):
             return url.replace("http", "https") + "spotify"
     return url + "spotify"
 
+
 class FlaskSessionCacheHandler(CacheHandler):
     """
     A cache handler that stores the token info in the session framework
@@ -44,7 +45,7 @@ class FlaskSessionCacheHandler(CacheHandler):
     def get_cached_token(self):
         token_info = None
         try:
-            token_info = session['token_info']
+            token_info = session["token_info"]
         except KeyError:
             print("Token not found in the session")
 
@@ -52,7 +53,7 @@ class FlaskSessionCacheHandler(CacheHandler):
 
     def save_token_to_cache(self, token_info):
         try:
-            session['token_info'] = token_info
+            session["token_info"] = token_info
         except Exception as e:
             print("Error saving token to cache: " + str(e))
 
@@ -88,6 +89,7 @@ def spotify():
     # Step 4. Signed in, display data
     spotify = spotipy.Spotify(auth_manager=auth_manager)
     return render_template("connectSpotify.html", spotify=spotify, auth=False)
+
 
 @main_blueprint.route("/spotify/sign_out")
 def spotify_sign_out():

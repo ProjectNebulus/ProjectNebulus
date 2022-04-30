@@ -1,9 +1,19 @@
 {% extends "layout.html" %}
 {% block main %}
+    <style>
+        .signupbody{
+            width: 80%;
+        }
+        @media (min-width: /*768px*/ 1000px){
+            .signupbody{
+                width: 40%;
+            }
+        }
+    </style>
     <body>
     <script src="https://unpkg.com/flowbite@1.4.1/dist/datepicker.js"></script>
-    <div class="container mx-auto bg-white"
-         style="width:40%; padding: 5rem; border-radius:10px;position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); overflow-y:auto">
+    <div class="container mx-auto bg-white signupbody"
+         style="padding: 5rem; border-radius:10px;position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); overflow-y:auto">
         <div class="mx-auto">
             <h1 class="text-lg font-bold">Sign Up</h1>
             <div class="flex flex-col items-left mt-5">

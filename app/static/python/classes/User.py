@@ -48,7 +48,9 @@ class User(Snowflake):
     created_at = DateTimeField(default=datetime.now())
     # optional params
     schoology = ListField(EmbeddedDocumentField(Schoology, default=None, null=True))
-    gclassroom = ListField(EmbeddedDocumentField(GoogleClassroom, default=None, null=True))
+    gclassroom = ListField(
+        EmbeddedDocumentField(GoogleClassroom, default=None, null=True)
+    )
     spotify = ListField(EmbeddedDocumentField(Spotify, default=None, null=True))
     discord = ListField(EmbeddedDocumentField(Discord, default=None, null=True))
     canvas = ListField(EmbeddedDocumentField(Canvas, default=None, null=True))

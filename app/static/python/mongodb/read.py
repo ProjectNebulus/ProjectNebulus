@@ -78,7 +78,9 @@ def getSchoology(**kwargs) -> List[Schoology] | None:
         return
 
 
-def getClassroom(userID: str = None, username: str = None, email: str = None) -> GoogleClassroom:
+def getClassroom(
+    userID: str = None, username: str = None, email: str = None
+) -> GoogleClassroom:
     return find_user(id=userID, username=username, email=email).gclassroom
 
 
@@ -86,9 +88,13 @@ def getSpotify(userID: str = None, username: str = None, email: str = None) -> S
     return find_user(id=userID, username=username, email=email).spotify
 
 
-def getSpotifyCache(userID: str = None, username: str = None, email: str = None) -> Spotify | None:
+def getSpotifyCache(
+    userID: str = None, username: str = None, email: str = None
+) -> Spotify | None:
     try:
-        return find_user(id=userID, username=username, email=email).spotify.Spotify_cache
+        return find_user(
+            id=userID, username=username, email=email
+        ).spotify.Spotify_cache
     except:
         return None
 
@@ -159,12 +165,29 @@ def sort_user_events(user_id: str) -> List[List]:
     from itertools import chain, groupby
 
     events_assessments_assignments = list(chain(events, assignments, assessments))
-    sorted_events = sorted(events_assessments_assignments, key=lambda obj: sortByDateTime(obj))
-    dates = dict({key: list(result) for key, result in groupby(sorted_events, key=lambda obj: sortByDate(obj))})
+    sorted_events = sorted(
+        events_assessments_assignments, key=lambda obj: sortByDateTime(obj)
+    )
+    dates = dict(
+        {
+            key: list(result)
+            for key, result in groupby(sorted_events, key=lambda obj: sortByDate(obj))
+        }
+    )
 
     sorted_announcements = sorted(announcements, key=lambda obj: obj.date)
-    announcements = dict(reversed(list({key: list(result) for key, result in groupby(sorted_announcements, key=lambda obj: obj.date.date())}.items())))
-
+    announcements = dict(
+        reversed(
+            list(
+                {
+                    key: list(result)
+                    for key, result in groupby(
+                        sorted_announcements, key=lambda obj: obj.date.date()
+                    )
+                }.items()
+            )
+        )
+    )
 
     return [announcements, dates]
 
@@ -180,7 +203,10 @@ def unsorted_user_events(user_id: str) -> List[List]:
     from itertools import chain
 
     events_assessments_assignments = list(chain(events, assignments, assessments))
-    return [announcements, sorted(events_assessments_assignments, key=lambda obj: sortByDateTime(obj))]
+    return [
+        announcements,
+        sorted(events_assessments_assignments, key=lambda obj: sortByDateTime(obj)),
+    ]
 
 
 def check_signup_user(username) -> str:

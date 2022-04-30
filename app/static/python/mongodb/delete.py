@@ -126,7 +126,9 @@ def delete_canvas_connection(user_id: int, canvas_object: Canvas) -> None:
     user.save()
 
 
-def delete_google_classroom_connection(user_id: int, google_classroom_object: GoogleClassroom) -> None:
+def delete_google_classroom_connection(
+    user_id: int, google_classroom_object: GoogleClassroom
+) -> None:
     """
     Deletes a Google Classroom connection object  from the database.
     """

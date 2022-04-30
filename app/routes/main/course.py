@@ -56,8 +56,12 @@ def createCourse():
 @private_endpoint
 @cross_origin()
 def getResource(courseID, documentID):
-    courses = list(filter(lambda c: c.id == courseID, read.get_user_courses(session["id"])))
-    if not len(courses) or not len([user for user in courses[0].authorizedUsers if user.id == session["id"]]):
+    courses = list(
+        filter(lambda c: c.id == courseID, read.get_user_courses(session["id"]))
+    )
+    if not len(courses) or not len(
+        [user for user in courses[0].authorizedUsers if user.id == session["id"]]
+    ):
         return render_template("errors/404.html")
 
     documents = list(filter(lambda d: d.id == documentID, courses[0].documents))

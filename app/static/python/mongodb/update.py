@@ -11,8 +11,6 @@ def schoologyLogin(_id: str, schoology: dict):
     user.schoology.append(schoology)
 
 
-
-
 def logout_from_schoology(_id: str):
     user = find_user(id=_id)
     if not user:

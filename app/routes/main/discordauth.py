@@ -9,8 +9,11 @@ import json
 
 app = Flask(__name__)
 app.config["DISCORD_CLIENT_ID"] = 955153343020429343  # Discord client ID.
-app.config["DISCORD_CLIENT_SECRET"] = "6ApEyUtWUsp1SwuXlrRn3e_lNB6IqfSO"  # Discord client secret.
+app.config[
+    "DISCORD_CLIENT_SECRET"
+] = "6ApEyUtWUsp1SwuXlrRn3e_lNB6IqfSO"  # Discord client secret.
 app.config["DISCORD_REDIRECT_URI"] = "null"
+
 
 def generate_redirect(url):
     if "nebulus" in url:
@@ -21,16 +24,19 @@ def generate_redirect(url):
 
 def exchange_code(code, url):
     data = {
-        'client_id': 955153343020429343,
-        'client_secret': "6ApEyUtWUsp1SwuXlrRn3e_lNB6IqfSO",
-        'grant_type': 'authorization_code',
-        'code': code,
-        'redirect_uri': generate_redirect(url)
+        "client_id": 955153343020429343,
+        "client_secret": "6ApEyUtWUsp1SwuXlrRn3e_lNB6IqfSO",
+        "grant_type": "authorization_code",
+        "code": code,
+        "redirect_uri": generate_redirect(url),
     }
-    headers = {
-        'Content-Type': 'application/x-www-form-urlencoded'
-    }
-    r = requests.post('https://discord.com/api/v8/oauth2/token', data=data, headers=headers, verify=False)
+    headers = {"Content-Type": "application/x-www-form-urlencoded"}
+    r = requests.post(
+        "https://discord.com/api/v8/oauth2/token",
+        data=data,
+        headers=headers,
+        verify=False,
+    )
     # r.raise_for_status()
     return r.json()
 
@@ -69,24 +75,27 @@ def discord_auth():
     return thediscord.create_session()
 
 
-@main_blueprint.route('/discord/receive')
+@main_blueprint.route("/discord/receive")
 def recieve():
     import json
+
     if "code" in request.args:
         try:
             code = request.args["code"]
 
             data = exchange_code(code, request.root_url)
 
-            access_token = data['access_token']
+            access_token = data["access_token"]
 
             data = getMe(access_token)
 
-            avatar_link = f"https://cdn.discordapp.com/avatars/{data['id']}/{data['avatar']}.png"
+            avatar_link = (
+                f"https://cdn.discordapp.com/avatars/{data['id']}/{data['avatar']}.png"
+            )
 
             user = f"{data['username']}#{data['discriminator']}"
 
-            data = [user, int(data['id']), avatar_link]
+            data = [user, int(data["id"]), avatar_link]
             session["discord_code"] = code
             session["discord_access_token"] = access_token
             session["discord_avatar"] = avatar_link
@@ -94,18 +103,15 @@ def recieve():
             session["discord_id"] = data[1]
             return render_template("connectDiscord.html", data=data)
 
-
-
         except Exception as e:
             print(e)
 
             return redirect("/discord")
 
-
     else:
         return redirect("/discord")
-    resp = flask.make_response(redirect('/'))
-    resp.set_cookie('login', str(data[0]))
-    resp.set_cookie('id', str(data[1]))
-    resp.set_cookie('avatar', str(data[2]))
+    resp = flask.make_response(redirect("/"))
+    resp.set_cookie("login", str(data[0]))
+    resp.set_cookie("id", str(data[1]))
+    resp.set_cookie("avatar", str(data[2]))
     return resp

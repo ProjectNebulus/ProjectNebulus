@@ -12,5 +12,5 @@ def points():
         user=session.get("username"),
         email=session.get("email"),
         read=read,
-        points=read.find_user(username=session.get("username")).points
+        points=read.find_user(username=session.get("username")).points,
     )

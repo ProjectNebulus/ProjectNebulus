@@ -30,7 +30,9 @@ def create_assignment():
     # Get the data from the request.
     data = request.get_json()
     data["points"] = int(data["points"])
-    date = datetime.datetime.strptime(data["due_date"], "%m/%d/%Y") - datetime.timedelta(days=1)
+    date = datetime.datetime.strptime(
+        data["due_date"], "%m/%d/%Y"
+    ) - datetime.timedelta(days=1)
     del data["due_date"]
     data["due"] = datetime.datetime.combine(date, datetime.time(11, 59, 59))
 

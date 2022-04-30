@@ -16,8 +16,15 @@ function invertSite() {
     const banner = document.getElementById("homeBanner");
 
     if (localStorage.getItem("color-theme") === "dark") {
-        if (window.location.href.endsWith("/"))
+        if (window.location.pathname === "/")
             document.body.style.backgroundImage = "url(\"/static/images/darkwallpaper.png\")";
+            document.body.style.backgroundSize = "cover";
+            document.body.style.background = "url(\"static/images/darkwallpaper.png\") no-repeat center center fixed";
+            // document.body.style += "background: url(\"static/images/darkwallpaper.png\") no-repeat center center fixed; \n" +
+            //     "  -webkit-background-size: cover;\n" +
+            //     "  -moz-background-size: cover;\n" +
+            //     "  -o-background-size: cover;\n" +
+            //     "  background-size: cover;"
 
         if (banner) banner.style.filter = "invert(0)";
 

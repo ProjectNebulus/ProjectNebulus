@@ -12,9 +12,7 @@ class Announcement(Snowflake):
     content = StringField(required=True)
     date = DateTimeField(default=datetime.datetime.now())
     author = StringField(required=True)
-    author_pic = StringField(
-        default="/static/images/nebulusCats/v3.gif"
-    )
+    author_pic = StringField(default="/static/images/nebulusCats/v3.gif")
     likes = IntField(default=0)
     dislikes = IntField(default=0)
     comment_number = IntField(default=0)

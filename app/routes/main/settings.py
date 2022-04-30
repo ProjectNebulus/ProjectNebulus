@@ -7,6 +7,7 @@ from ...static.python.mongodb import read
 
 # from googleapiclient.discovery import build
 
+
 def generate_redirect(url):
     if "nebulus" in url:
         if "https" not in url:
@@ -23,10 +24,11 @@ def settings():
     googleclassroom = None
     try:
         credentials = google.oauth2.credentials.Credentials(
-            **flask.session['credentials'])
+            **flask.session["credentials"]
+        )
 
         service = build("people", "v1", credentials=credentials)
-        profile = service.people().get('people/me', personFields='names,emailAddresses')
+        profile = service.people().get("people/me", personFields="names,emailAddresses")
         print(profile)
 
     except:
@@ -34,9 +36,11 @@ def settings():
 
     try:
         credentials = google.oauth2.credentials.Credentials(
-            **flask.session['credentials'])
+            **flask.session["credentials"]
+        )
         user_info_service = build(
-            serviceName='oauth2', version='v2', credentials=credentials)
+            serviceName="oauth2", version="v2", credentials=credentials
+        )
         user_info = None
         user_info = user_info_service.userinfo().get().execute()
         print(user_info)

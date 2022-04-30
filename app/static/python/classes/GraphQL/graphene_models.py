@@ -61,6 +61,3 @@ class Announcement(MongoengineObjectType):
 class Grades(MongoengineObjectType):
     class Meta:
         model = GradesModel
-
-
-

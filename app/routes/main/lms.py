@@ -13,18 +13,19 @@ from .utils import logged_in
 
 
 def credentials_to_dict(credentials):
-    return {'token': credentials.token,
-            'refresh_token': credentials.refresh_token,
-            'token_uri': credentials.token_uri,
-            'client_id': credentials.client_id,
-            'client_secret': credentials.client_secret,
-            'scopes': credentials.scopes}
+    return {
+        "token": credentials.token,
+        "refresh_token": credentials.refresh_token,
+        "token_uri": credentials.token_uri,
+        "client_id": credentials.client_id,
+        "client_secret": credentials.client_secret,
+        "scopes": credentials.scopes,
+    }
 
 
 def getGclassroomcourses():
     # Load credentials from the session.
-    credentials = google.oauth2.credentials.Credentials(
-        **session['credentials'])
+    credentials = google.oauth2.credentials.Credentials(**session["credentials"])
 
     service = build("classroom", "v1", credentials=credentials)
 
@@ -35,7 +36,7 @@ def getGclassroomcourses():
     # Save credentials back to session in case access token was refreshed.
     # ACTION ITEM: In a production app, you likely want to save these
     #              credentials in a persistent database instead.
-    flask.session['credentials'] = credentials_to_dict(credentials)
+    flask.session["credentials"] = credentials_to_dict(credentials)
     for i in range(0, len(courses)):
         courses[i] = courses[i]["descriptionHeading"]
 
@@ -58,6 +59,7 @@ def lms():
     canvascourses = []
     try:
         from canvasapi import Canvas
+
         API_URL = session["canvas_link"]
         API_KEY = session["canvas_key"]
         canvas = Canvas(API_URL, API_KEY)
@@ -70,6 +72,7 @@ def lms():
 
     schoologycourses = []
     import schoolopy
+
     try:
         request_token = session["request_token"]
         request_token_secret = session["request_token_secret"]
@@ -116,5 +119,5 @@ def lms():
         announcements=events[0],
         events=events[1],
         today=datetime.date.today(),
-        strftime=utils.strftime
+        strftime=utils.strftime,
     )
