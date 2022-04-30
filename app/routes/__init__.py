@@ -28,6 +28,6 @@ def init_app():
     app.register_blueprint(api.api_blueprint)
     app.register_blueprint(static_blueprint)
     mail = Mail(app)
-    print("Paths:", *sorted(app.url_map.iter_rules(), key=str), sep="\n")
+    #print("Paths:", *sorted(app.url_map.iter_rules(), key=str), sep="\n")
 
     return app
