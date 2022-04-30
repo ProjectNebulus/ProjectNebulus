@@ -1,6 +1,6 @@
 from flask import render_template, session, request
 
-from static.python.mongodb import read
+from ...static.python.mongodb import read
 from . import main_blueprint, utils
 from .utils import logged_in
 
