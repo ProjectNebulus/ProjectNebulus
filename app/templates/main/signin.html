@@ -16,7 +16,9 @@
     </head>
     <body>
     <script>
-        function plsscroll(amount, final){
+        function plsscroll(){
+            let amount = window.amount;
+            let final = window.final;
 
             if (amount < final){
                 document.getElementById("scrolldis").scroll(0, 10);
@@ -28,9 +30,10 @@
         }
 
         window.onload = function() {
-            let amount = 0;
-            let final = screen.height;
-            setInterval(plsscroll, 500, amount, final);
+            var amount = 0;
+
+            var final = screen.height;
+            setInterval(plsscroll, 500);
 
 
         }
