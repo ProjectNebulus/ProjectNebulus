@@ -16,9 +16,8 @@ function createUser() {
             age: document.getElementById("bday").value,
             language: document.getElementById("languages").value,
             theme: document.getElementById("theme").value,
-            avatar: {
-                avatar_url: siteName + "/"+document.getElementById("chosen").innerText
-            }
+            avatar:  document.getElementById("chosen").innerText
+
         }),
 
         contentType: 'application/json; charset=utf-8',
