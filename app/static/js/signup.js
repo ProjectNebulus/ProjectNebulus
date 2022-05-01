@@ -17,8 +17,7 @@ function createUser() {
             language: document.getElementById("languages").value,
             theme: document.getElementById("theme").value,
             avatar: {
-                parent: "User",
-                avatar_url: siteName + document.getElementById("chosen").innerText
+                avatar_url: siteName + "/"+document.getElementById("chosen").innerText
             }
         }),
 
@@ -415,7 +414,11 @@ function signUp() {
         JSON.stringify({
             username: document.querySelector('#username').value,
             password: document.querySelector('#password').value,
-            email: document.querySelector('#email').value
+            email: document.querySelector('#email').value,
+            age: document.querySelector('#bday').value,
+            theme:document.querySelector('#themes').value,
+            language:document.querySelector('#languages').value,
+            avatar:document.querySelector('#chosen').value
         })
     );
 }
