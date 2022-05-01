@@ -45,7 +45,7 @@
         <div style="text-align: center; height:10%;">
             <h1 class="text-black text-3xl dark:text-white">Good Afternoon, {{ user }}</h1>
         </div>
-        <div class="grid grid-cols-2 gap-8 p-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 p-6">
             <div class="pb-2">
                 <table id="scroll1"
                        class=" rounded-lg text-sm text-left text-gray-500 dark:text-gray-400 px w-full h-full"
@@ -73,7 +73,7 @@
                     <tbody>
                     {% for event in events %}
                         {% if event._cls == "Event" %}
-                            <tr class="bg-white dark:bg-gray-800">
+                            <tr style="vertical-align: baseline;" class="bg-white dark:bg-gray-800">
                                 <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
                                     <span class="material-icons-outlined">event</span>{{ event.title }}
                                 </td>
@@ -91,7 +91,7 @@
                                 </td>
                             </tr>
                         {% else %}
-                            <tr class="bg-white dark:bg-gray-800">
+                            <tr  style="vertical-align: baseline;" class="bg-white dark:bg-gray-800">
                                 <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
                                     <span class="material-icons-outlined">description</span>{{ event.title }}
                                 </td>
@@ -163,14 +163,14 @@
         </div>
         <br>
         <br>
-        <div id="scroll3" style="height:45%;float:left;width:95%;margin-left:2%; overflow: visible;" class="pb-2">
+        <div id="scroll3" style="height:45%;float:left;width:100%;margin-left:2%; overflow: visible;" class="pb-2">
             <h2 class="text-black dark:text-white text-2xl">Recent Courses</h2>
             <br>
             <div style="text-align: left;"
-                 class=" grid grid-cols-4 gap-4">
+                 class=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                 {% for course in user_courses %}
                     <a href="/course/{{ course.id }}">
-                        <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                        <div style="width:300px; margin:20px;" class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                             <img class="rounded-t-lg"
                                  src="https://bins.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg?"
                                  alt="Course Image"/>
