@@ -281,12 +281,12 @@ function reqListener2() {
     if (this.responseText === 'true') {
         let status = document.getElementById('fail');
         status.style.color = 'yellowgreen';
-        status.innerHTML = 'Login was successful!';
+        status.innerHTML = 'Login Successful. Logging you in...';
         window.location.href = '/dashboard';
     }
     else {
         let status = document.getElementById('fail');
         status.style.color = 'red';
-        status.innerHTML = 'Login failed!';
+        status.innerHTML = 'Oh no! A super rare bug occured on our end! Please contact support immediately!';
     }
 }
