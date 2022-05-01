@@ -126,6 +126,7 @@
                 <div class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-2 "
                      style="display: inline-block">
                     {% for course in user_courses %}
+                        <a href="/course/{{ course.id }}">
                         <div class=" max-w-sm bg-gray-100 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 p-2"
                              style="float:left;margin:20px;height:13rem;width:22rem;">
                             <div style="text-align: left;">
@@ -225,6 +226,7 @@
                             </div>
 
                         </div>
+                        </a>
                     {% endfor %}
                 </div>
             </div>
