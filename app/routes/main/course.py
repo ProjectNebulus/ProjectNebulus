@@ -1,4 +1,4 @@
-import requests
+import requests, datetime
 from flask import render_template, session, request
 from flask_cors import cross_origin
 from jinja2 import TemplateNotFound
@@ -18,12 +18,15 @@ def course_home(**kwargs):
 def course_page(page, **kwargs):
     courses = read.get_user_courses(session["id"])
     course_id = kwargs["id"]
-
+    #return str(read.sort_course_events(session["id"], int(course_id)))
+    #return str(read.sort_user_events(session["id"]))
+    print(read.sort_course_events(session["id"], int(course_id))[1])
     for course in courses:
         if course.id == course_id:
             try:
                 return render_template(
                     f"courses/{page}.html",
+                    today=datetime.date.today(),
                     page="Nebulus - " + course.name,
                     read=read,
                     course=course,
@@ -32,6 +35,7 @@ def course_page(page, **kwargs):
                     user=session.get("username"),
                     email=session.get("email"),
                     disableWidget=(page != "course"),
+                    events = read.sort_course_events(session["id"], int(course_id))[1]
                 )
 
             except TemplateNotFound:

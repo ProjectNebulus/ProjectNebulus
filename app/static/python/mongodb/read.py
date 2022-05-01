@@ -155,6 +155,47 @@ def sortByDate(obj):
 def sortByDateTime(obj):
     return obj.date if obj._cls == "Event" else obj.due
 
+def sort_course_events(user_id: str, course_id: int) -> List[List]:
+    courses = get_user_courses(user_id)
+    course = None
+    for i in courses:
+        if str(i.id) == str(course_id):
+            course = i
+            break
+    courses = [course]
+
+    events = Event.objects(course__in=courses)
+    announcements = Announcement.objects(course__in=courses)
+    assignments = Assignment.objects(course__in=courses)
+    assessments = Assessment.objects(course__in=courses)
+    from itertools import chain, groupby
+
+    events_assessments_assignments = list(chain(events, assignments, assessments))
+    sorted_events = sorted(
+        events_assessments_assignments, key=lambda obj: sortByDateTime(obj)
+    )
+    dates = dict(
+        {
+            key: list(result)
+            for key, result in groupby(sorted_events, key=lambda obj: sortByDate(obj))
+        }
+    )
+
+    sorted_announcements = sorted(announcements, key=lambda obj: obj.date)
+    announcements = dict(
+        reversed(
+            list(
+                {
+                    key: list(result)
+                    for key, result in groupby(
+                    sorted_announcements, key=lambda obj: obj.date.date()
+                )
+                }.items()
+            )
+        )
+    )
+
+    return [announcements, dates]
 
 def sort_user_events(user_id: str) -> List[List]:
     courses = get_user_courses(user_id)

@@ -108,7 +108,7 @@ def lms():
             schoologycourses = list(sc.get_sections())
         except:
             schoologycourses = []
-
+    print(events[1])
     return render_template(
         "lms.html",
         user=session["username"],
