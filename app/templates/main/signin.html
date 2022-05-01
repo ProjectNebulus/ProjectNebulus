@@ -15,7 +15,36 @@
         </style>
     </head>
     <body>
-    <div style="z-index: -1; height:100%;overflow-y:scroll;user-select: none;pointer-events: none;" class="blur">
+    <script>
+        function plsscroll(amount, final){
+
+            if (amount < final){
+                document.getElementById("scrolldis").scroll({
+                    top: 10,
+                    left: 0,
+                    behavior: 'smooth'
+                });
+                amount+=10;
+            }else{
+                document.getElementById("scrolldis").scroll({
+                    top: -10,
+                    left: 0,
+                    behavior: 'smooth'
+                });
+                amount-=10;
+            }
+        }
+
+        window.onload = function(){
+            let amount = 0
+            let final = screen.height
+            setInterval(plsscroll, 1, amount, final)
+
+
+
+        }
+    </script>
+    <div id="scrolldis" style="z-index: -1; filter:blur(1rem); height:100%;overflow-y:scroll;user-select: none;pointer-events: none;">
         {% include "lms.html" %}
     </div>
     <div class="container mx-auto p-4 bg-white/[0.9] rounded-lg w-1/2 pb-1/2"
