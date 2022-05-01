@@ -9,6 +9,7 @@ class Textbook(Snowflake):
     - name: extension name
     - link: NEBULUS URL to the Extension
     - image: CDN URL to the Extension's icon
+     - author: who wrote the book
     """
 
     meta = {"collection": "Courses"}
@@ -16,3 +17,4 @@ class Textbook(Snowflake):
     link = URLField(required=True)
     avatar = EmbeddedDocumentField(Avatar, required=False, default="")
     provider = StringField()  # Pearson, Cambrdige, ...
+    author = StringField()

@@ -51,6 +51,7 @@ class Course(Snowflake):
     teacher = StringField(required=True)
     created_at = DateTimeField(default=datetime.now())
     template = StringField(default=None)
+    #sub_template = StringField(default=None)
     authorizedUsers = ListField(ReferenceField("User"))
     assignments = ListField(ReferenceField("Assignment"))
     teacherAccount = ReferenceField("User", default=None, null=True)
