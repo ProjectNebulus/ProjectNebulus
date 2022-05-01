@@ -19,30 +19,22 @@
         function plsscroll(amount, final){
 
             if (amount < final){
-                document.getElementById("scrolldis").scroll({
-                    top: 10,
-                    left: 0,
-                    behavior: 'smooth'
-                });
+                document.getElementById("scrolldis").scroll(0, 10);
                 amount+=10;
             }else{
-                document.getElementById("scrolldis").scroll({
-                    top: -10,
-                    left: 0,
-                    behavior: 'smooth'
-                });
+                document.getElementById("scrolldis").scroll(0, -10);
                 amount-=10;
             }
         }
 
-        window.onload = function(){
-            let amount = 0
-            let final = screen.height
-            setInterval(plsscroll, 1, amount, final)
-
+        window.onload = function() {
+            let amount = 0;
+            let final = screen.height;
+            setInterval(plsscroll, 500, amount, final);
 
 
         }
+
     </script>
     <div id="scrolldis" style="z-index: -1; filter:blur(1rem); height:100%;overflow-y:scroll;user-select: none;pointer-events: none;">
         {% include "lms.html" %}
