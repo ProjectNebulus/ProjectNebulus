@@ -911,6 +911,20 @@ html.dark body {
   background: #111926;
 }
 
+::-webkit-scrollbar, ::-webkit-scrollbar-thumb {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 10px;
+}
+
+html.dark ::-webkit-scrollbar {
+  background: lightgray;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: dimgray;
+}
+
 *, ::before, ::after {
   --tw-translate-x: 0;
   --tw-translate-y: 0;

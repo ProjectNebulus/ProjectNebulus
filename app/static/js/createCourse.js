@@ -8,7 +8,7 @@ let screens = modal.getElementsByClassName('CoursePage');
 let btn = document.getElementById('create');
 
 for (let screen of screens)
-    screen.className += " relative px-4 w-full max-w-2xl h-full md:h-auto relative bg-white rounded-lg shadow dark:bg-gray-700 text-black dark:text-white"
+    screen.className += " relative px-4 w-full max-w-2xl relative bg-white rounded-lg shadow dark:bg-gray-700 text-black dark:text-white"
 
 for (let h3 of modal.getElementsByTagName("h3"))
     h3.className += " flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white"
@@ -45,7 +45,7 @@ let courseName = document.getElementById('course-name');
 let courseTeacher = document.getElementById('course-teacher');
 
 for (const element of modal.getElementsByClassName('CoursePage'))
-    element.className += ' hidden overflow-visible fixed right-0 left-0 top-4 z-50 justify-center items-center h-modal md:h-full md:inset-0';
+    element.className += ' hidden overflow-visible fixed right-0 left-0 top-4 z-50 justify-center items-center h-72 md:inset-0';
 
 function createCourse(subtemplate) {
     document.getElementById('create-course-status').innerHTML = 'Creating course...';

@@ -1,24 +1,27 @@
-
 {% if not disablebar %}
-    <nav class="w-full sticky backdrop-blur-sm top-0 z-40 bg-white border-gray-200 px-2 py-2 rounded-lg bg-gray-300/30 dark:bg-gray-800/30  h-auto" id="navbar">
+    <nav class="w-full sticky backdrop-blur-sm top-0 z-40 bg-white border-gray-200 px-2 py-2 rounded-lg bg-gray-300/30 dark:bg-gray-800/30  h-auto"
+         id="navbar">
         <div class="container flex flex-wrap justify-between items-center mx-auto">
             <div style="float:left;" class="flex">
                 <div class="flex">
-                    <button type="button" id="sidenav-toggle" class="text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300 block md:hidden" data-modal-toggle="sidenav">
+                    <button type="button" id="sidenav-toggle"
+                            class="text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300 block md:hidden"
+                            data-modal-toggle="sidenav">
                         <span class="sr-only">Navigation</span>
                         <svg width="24" height="24">
-                            <path d="M5 6h14M5 12h14M5 18h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                            <path d="M5 6h14M5 12h14M5 18h14" fill="none" stroke="currentColor" stroke-width="2"
+                                  stroke-linecap="round"></path>
                         </svg>
-                     </button>
+                    </button>
                     <a href="/" class="flex items-center">
-                        <img src="/static/images/nebulusCats/v3.gif" class="mr-3 h-6 sm:h-9" alt="Nebulus Logo" />
+                        <img src="/static/images/nebulusCats/v3.gif" class="mr-3 h-9 lg:h-12" alt="Nebulus Logo"/>
                         <span class="self-center text-xl whitespace-nowrap dark:text-white">
-                            <span class="font-bold text-2xl" style="float:left;">Nebulus</span> <span class="mt-1 ml-2 text-blue-600 hidden lg:block" style="float:left;/*display:inline-block;*/">Learning</span>
+                            <span class="font-bold text-2xl block" style="float:left;">Nebulus</span>
+                            <span class="text-blue-600 hidden lg:block"
+                                  style="margin-top: 2rem; font-size: 1.05rem; transform: translate(0, -0.4rem)">Learning</span>
                         </span>
                     </a>
                 </div>
-
-
 
                 <div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="mobile-menu-2"
                      style="margin-left:5rem;margin-top:0.1rem">
@@ -114,11 +117,12 @@
             </div>
         </div>
     </nav>
-    <div id="sidenav" data-modal-placement="top-left" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full h-full h-modal ">
-     <div class="relative p-4 w-full max-w-2xl h-full ">
-    {%  include "navbar_mobile.html" %}
+    <div id="sidenav" data-modal-placement="top-left" tabindex="-1"
+         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full h-full h-modal ">
+        <div class="relative p-4 w-full max-w-2xl h-full ">
+            {% include "navbar_mobile.html" %}
+        </div>
     </div>
-</div>
 
 
 {% endif %}

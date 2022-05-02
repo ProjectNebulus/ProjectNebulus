@@ -1,4 +1,5 @@
-import requests, datetime
+import datetime
+import requests
 from flask import render_template, session, request
 from flask_cors import cross_origin
 from jinja2 import TemplateNotFound
@@ -32,7 +33,7 @@ def course_page(page, **kwargs):
                     user=session.get("username"),
                     email=session.get("email"),
                     disableWidget=(page != "course"),
-                    events = read.sort_course_events(session["id"], int(course_id))[1]
+                    events=read.sort_course_events(session["id"], int(course_id))[1]
                 )
 
             except TemplateNotFound:
@@ -61,7 +62,7 @@ def getResource(courseID, documentID):
         filter(lambda c: c.id == courseID, read.get_user_courses(session["id"]))
     )
     if not len(courses) or not len(
-        [user for user in courses[0].authorizedUsers if user.id == session["id"]]
+            [user for user in courses[0].authorizedUsers if user.id == session["id"]]
     ):
         return render_template("errors/404.html")
 

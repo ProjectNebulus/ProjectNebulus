@@ -3,43 +3,39 @@
     <head>
         <script src="/static/js/signin.js"></script>
         <style>
-            .bg-signin-bg{
+            .bg-signin-bg {
                 background: url("/static/images/background-images/signin-background.png") no-repeat center center fixed !important;
                 -webkit-background-size: cover;
                 -moz-background-size: cover;
                 -o-background-size: cover;
                 background-size: cover;
-                top:0px;
-                left:0px;
+                top: 0;
+                left: 0;
             }
         </style>
     </head>
     <body>
     <script>
-        function plsscroll(){
-            let amount = window.amount;
-            let final = window.final;
+        let bgImage;
+        let forwards = true;
 
-            if (amount < final){
-                document.getElementById("scrolldis").scroll(0, 10);
-                amount+=10;
-            }else{
-                document.getElementById("scrolldis").scroll(0, -10);
-                amount-=10;
-            }
+        window.addEventListener("load", () => bgImage = document.getElementById("scrolldis"))
+
+        function autoScroll() {
+            if (bgImage.offsetHeight + bgImage.scrollTop >= bgImage.scrollHeight && forwards)
+                forwards = false;
+
+            if (bgImage.scrollTop <= 0 && !forwards)
+                forwards = true;
+
+            bgImage.scrollBy(0, forwards ? 5 : -5);
         }
 
-        window.onload = function() {
-            var amount = 0;
-
-            var final = screen.height;
-            setInterval(plsscroll, 500);
-
-
-        }
+        setInterval(autoScroll, 50);
 
     </script>
-    <div id="scrolldis" style="z-index: -1; filter:blur(1rem); height:100%;overflow-y:scroll;user-select: none;pointer-events: none;">
+    <div id="scrolldis"
+         style="z-index: -1; filter:blur(1rem); height:100%;overflow-y:scroll;user-select: none;pointer-events: none;">
         {% include "lms.html" %}
     </div>
     <div class="container mx-auto p-4 bg-white/[0.9] rounded-lg w-1/2 pb-1/2"

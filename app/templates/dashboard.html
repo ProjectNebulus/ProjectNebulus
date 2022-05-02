@@ -48,8 +48,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 p-6">
             <div class="pb-2">
                 <table id="scroll1"
-                       class=" rounded-lg text-sm text-left text-gray-500 dark:text-gray-400 px w-full h-full"
-                       style="overflow: hidden;">
+                       class=" rounded-lg text-sm text-left text-gray-500 dark:text-gray-400 px w-full h-full">
 
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
@@ -73,9 +72,12 @@
                     <tbody>
                     {% for event in events %}
                         {% if event._cls == "Event" %}
-                            <tr style="vertical-align: baseline;" class="bg-white dark:bg-gray-800">
+                            <tr style="vertical-align: top;"
+                                class="bg-white dark:bg-gray-800 border-b border-gray-200">
                                 <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
-                                    <span class="material-icons-outlined">event</span>{{ event.title }}
+                                    <span class="material-icons-outlined mr-2"
+                                          style="vertical-align: bottom">event</span>
+                                    {{ event.title }}
                                 </td>
                                 <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
                                     {{ strftime(event.date.date(), "%m/%d/%Y") }}
@@ -91,9 +93,12 @@
                                 </td>
                             </tr>
                         {% else %}
-                            <tr  style="vertical-align: baseline;" class="bg-white dark:bg-gray-800">
+                            <tr style="vertical-align: top;"
+                                class="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
                                 <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
-                                    <span class="material-icons-outlined">description</span>{{ event.title }}
+                                    <span class="material-icons-outlined mr-2"
+                                          style="vertical-align: bottom">description</span>
+                                    {{ event.title }}
                                 </td>
                                 <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
                                     {{ strftime(event.due.date(), "%m/%d/%Y") }}
@@ -166,17 +171,15 @@
         <div id="scroll3" style="height:45%;float:left;width:100%;margin-left:2%; overflow: visible;" class="pb-2">
             <h2 class="text-black dark:text-white text-2xl">Recent Courses</h2>
             <br>
-            <div style="text-align: left;"
-                 class=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+            <div class="text-left grid" style="grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));">
                 {% for course in user_courses %}
-                    <a href="/course/{{ course.id }}">
-                        <div style="width:300px; margin:20px;" class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-                            <img class="rounded-t-lg"
-                                 src="https://bins.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg?"
-                                 alt="Course Image"/>
-                            <div class="p-5">
-                                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white truncate">{{ course.name }}</h5>
-                            </div>
+                    <a href="/course/{{ course.id }}" style="width:18rem; margin:1rem;"
+                       class="max-w-sm bg-gray-800 hover:bg-gray-50 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:hover:bg-gray-600 dark:border-gray-700">
+                        <img class="rounded-t-lg"
+                             src="https://bins.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg?"
+                             alt="Course Image"/>
+                        <div class="p-5">
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white truncate">{{ course.name }}</h5>
                         </div>
                     </a>
                 {% endfor %}

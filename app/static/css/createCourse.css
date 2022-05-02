@@ -24,6 +24,7 @@
     color: white;
     border-radius: 10px;
     position: absolute;
+    height: 40rem;
 }
 
 h3 {
@@ -120,7 +121,7 @@ input[type='submit'] {
 
 .scroll {
     height: 45%;
-    overflow: scroll;
+    overflow: auto;
 }
 
 ::-webkit-scrollbar {

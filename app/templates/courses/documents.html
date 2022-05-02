@@ -1,12 +1,12 @@
 {% extends "layout.html" %}
 {% block main %}
-
+    <body style="overflow-x: hidden">
     <link rel="stylesheet"
           href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/default.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script>
     <nav class="flex py-3 px-5 text-gray-700 bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700"
          aria-label="Breadcrumb">
-        <ol class="inline-flex items-center space-x-1 md:space-x-3" id="breadcrumy">
+        <ol class="inline-flex items-center space-x-1 md:space-x-3 -mx-1" id="breadcrumy">
             <li class="inline-flex items-center">
                 <a onclick="location.reload();"
                    class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
@@ -52,48 +52,6 @@
                 </a>
             {% endfor %}
         </div>
-        <div style="width:30%;float:left;border-style:none none none solid; border-color:white;border-width:1px;height:100%;overflow-y:scroll;">
-            <div style="text-align: center;">
-                <h1 class="text-black dark:text-white text-3xl">Upcoming Events</h1>
-            <br><br>
-                <div class="flex flex-col overflow-x-auto sm:rounded-lg min-w-full align-middle overflow-auto inline-block">
-                    {% if events|length == 0 %}
-                        <p class="text-gray-300 dark:text-gray-700">No Events!</p>
-                    {% else %}
-                        {% for date, assignments in events.items() %}
-                            {% for a in assignments[:15] %}
-                                {% if a.submitDate == None or date > today %}
-                                    <a href="/assignment/{{ a.id }}" class="flex text-black dark:text-white text-left
-                            bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 rounded-lg p-6 ml-3 shadow-md dark:border-gray-700 text-xl mb-5">
-                                        <div class="mr-4 material-icons ml-2"
-                                             style="transform: translate(0, 50%) scale(1.75)">event
-                                        </div>
-                                        <div class="truncate">
-                                        <span class="text-ellipses">{{ a.title }}
-                                        </span>
-
-                                            <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">{{ a.course.name }}</span>
-                                            <div class="text-xs text-gray-700 uppercase dark:text-gray-400">
-                                                Due: {{ date.strftime("%D") }}
-                                                {% if date < today %}
-                                                    •
-                                                    <span class="text-red-600 dark:text-red-500">Overdue</span>
-                                                {% elif a.grade != None and a.grade / a.points < 0.6 %}
-                                                    <span class="text-black dark:text-white"> • </span>
-                                                    <span class="text-gray-300 dark:text-gray-700">{{ a.grade }}/{{ a.points }}</span>
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                    </a>
-                                {% endif %}
-                            {% endfor %}
-                        {% endfor %}
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-
-
     </div>
     <div id="pdf-viewer" style="display:none;">
         <style>
@@ -307,97 +265,6 @@
         </code>
     </pre>
         <style>
-            .hljs {
-                display: block;
-                overflow-x: auto;
-                padding: .5em;
-                background: #1d1f21
-            }
-
-            .hljs,
-            .hljs-subst {
-                color: #c5c8c6
-            }
-
-            .hljs-comment {
-                color: #888
-            }
-
-            .hljs-attribute,
-            .hljs-doctag,
-            .hljs-keyword,
-            .hljs-meta-keyword,
-            .hljs-name,
-            .hljs-selector-tag {
-                font-weight: 700;
-                color: #FF7B72;
-            }
-
-            .hljs-tag,
-            .hljs-name {
-                color: #79DC83 !important;
-
-            }
-
-            .hljs-attr {
-                color: #78C1FF !important;
-            }
-
-
-            .hljs-deletion,
-            .hljs-number,
-            .hljs-quote,
-            .hljs-selector-class,
-            .hljs-selector-id,
-            .hljs-string,
-            .hljs-template-tag,
-            .hljs-type {
-                color: #9ECFF6;
-            }
-
-            .hljs-section,
-            .hljs-title {
-                color: #99cc99;
-                font-weight: 700;
-            }
-
-            .hljs-link,
-            .hljs-regexp,
-            .hljs-selector-attr,
-            .hljs-selector-pseudo,
-            .hljs-symbol,
-            .hljs-template-variable,
-            .hljs-variable {
-                color: #bc6060
-            }
-
-            .hljs-literal {
-                color: #78a960
-            }
-
-            .hljs-addition,
-            .hljs-built_in,
-            .hljs-bullet,
-            .hljs-code {
-                color: #D1A8FE;
-            }
-
-            .hljs-meta {
-                color: #1f7199
-            }
-
-            .hljs-meta-string {
-                color: #9ECFF6
-            }
-
-            .hljs-emphasis {
-                font-style: italic
-            }
-
-            .hljs-strong {
-                font-weight: 700
-            }
-
             /* Hide scrollbar for Chrome, Safari and Opera */
             code::-webkit-scrollbar {
                 display: none;
@@ -408,40 +275,26 @@
                 -ms-overflow-style: none; /* IE and Edge */
                 scrollbar-width: none; /* Firefox */
             }
-
-
         </style>
     </div>
     <div id="video-viewer" style="display:none; ">
         <link href="https://vjs.zencdn.net/7.18.1/video-js.css" rel="stylesheet"/>
-        <link
-                href="https://unpkg.com/video.js@7/dist/video-js.min.css"
-                rel="stylesheet"
-        />
-        <link
-                href="https://unpkg.com/@videojs/themes@1/dist/fantasy/index.css"
-                rel="stylesheet"
-        />
-        <video
-                id="my-video"
-                class="video-js  vjs-theme-fantasy"
-                controls
-                preload="auto"
-                width="640"
-                height="264"
-                poster="https://media.discordapp.net/attachments/951319765820002384/956401024162217984/adexportnebulus.ml.mp4?format=jpeg&width=800&height=450"
-                data-setup="{}"
-        >
+        <link href="https://unpkg.com/video.js@7/dist/video-js.min.css" rel="stylesheet"/>
+        <link href="https://unpkg.com/@videojs/themes@1/dist/fantasy/index.css" rel="stylesheet"/>
+        <video id="my-video" class="video-js vjs-theme-fantasy" controls preload="auto" width="640" height="264"
+               data-setup="{}"
+               poster="https://media.discordapp.net/attachments/951319765820002384/956401024162217984/adexportnebulus.ml.mp4?format=jpeg&width=800&height=450">
+
             <source src="https://cdn.discordapp.com/attachments/951319765820002384/956401024162217984/adexportnebulus.ml.mp4"
                     type="video/mp4"/>
+
             <source src="https://cdn.discordapp.com/attachments/951319765820002384/956401024162217984/adexportnebulus.ml.mp4"
                     type="video/webm"/>
+
             <p class="vjs-no-js">
                 To view this video please enable JavaScript, and consider upgrading to a
                 web browser that
-                <a href="https://videojs.com/html5-video-support/" target="_blank"
-                >supports HTML5 video</a
-                >
+                <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
             </p>
         </video>
 
@@ -641,9 +494,7 @@
             audio.addEventListener(
                 "loadeddata",
                 () => {
-                    audioPlayer.querySelector(".time .length").textContent = getTimeCodeFromNum(
-                        audio.duration
-                    );
+                    audioPlayer.querySelector(".time .length").textContent = getTimeCodeFromNum(audio.duration);
                     audio.volume = .75;
                 },
                 false
@@ -715,12 +566,12 @@
                 const hours = parseInt(minutes / 60);
                 minutes -= hours * 60;
 
-                if (hours === 0) return `${minutes}:${String(seconds % 60).padStart(2, 0)}`;
-                return `${String(hours).padStart(2, 0)}:${minutes}:${String(
-                    seconds % 60
-                ).padStart(2, 0)}`;
-            }
+                if (hours === 0)
+                    return `${minutes}:${String(seconds % 60).padStart(2, 0)}`;
 
+                return `${String(hours).padStart(2, 0)}:${minutes}:${String(seconds % 60).padStart(2, 0)}`;
+            }
         </script>
     </div>
-{% endblock %}}}
+    </body>
+{% endblock %}
