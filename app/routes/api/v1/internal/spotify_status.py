@@ -6,12 +6,22 @@ from .....static.python.spotify import get_song
 @internal.route("/spotify-status", methods=["POST"])
 def spotify_status():
     song = get_song()
-    if len(song) == 4:
-        the_song = song[0]
-        artist = song[1]
-        art = song[2]
-        art2 = song[3]
-        string = the_song + " • " + artist + " • " + art + " • " + art2
+    if len(song) == 8:
+        name, artists2, album, explicit, image, playing, timestamp, total = song
+        if explicit:
+            explicit = "[Explicit]"
+        else:
+            explicit = ""
+        artists = ""
+        count = 0
+        for i in artists:
+            artists += i
+            count += 1
+            if count != len(artists2):
+                artists += ", "
+
+        string = name + " • " + artists + " • " + album + " • " + explicit + " • " \
+                 + image + " • " + playing + " • " + timestamp + " • " + total
     else:
         string = "You aren't listening to anything!"
     return string

@@ -145,7 +145,8 @@ def currently_playing():
 
     if not track is None:
         import time
-        timestamp =  int(time.time()) - int(track["timestamp"]//1000)
+        timestamp =  int(track["progress_ms"]//1000)
+        total = int(track["item"]["duration_ms"]//1000)
         print(timestamp)
         name = track["item"]["name"]
         artists = []
@@ -156,17 +157,48 @@ def currently_playing():
         album = track["item"]["album"]["name"]
 
         playing = track["is_playing"]
-        return f"""
-        {name} by {artists} on {album}
-        Explicit: {explicit}<br>
-        <img src="{image}" style="height:100px;border-radius:10%;"><br>
-        
-        Track is playing? {playing}
-        {timestamp/10} seconds remaining!
-        """
+        return [name, artists, album, explicit, image, playing, timestamp, total]
+
+
+    return "No"
+
+def GET_currently_playing():
+    cache_handler = FlaskSessionCacheHandler(CacheHandler)
+    SPOTIPY_REDIRECT_URI = generate_redirect(request.root_url)
+    auth_manager = spotipy.oauth2.SpotifyOAuth(
+        scope="user-read-currently-playing playlist-modify-private",
+        cache_handler=cache_handler,
+        show_dialog=True,
+        client_id=SPOTIPY_CLIENT_ID,
+        client_secret=SPOTIPY_CLIENT_SECRET,
+        redirect_uri=SPOTIPY_REDIRECT_URI,
+    )
+
+    if not auth_manager.validate_token(cache_handler.get_cached_token()):
+        return redirect("/spotify")
+    spotify = spotipy.Spotify(auth_manager=auth_manager)
+    track = spotify.current_user_playing_track()
+
+
+    if not track is None:
+        import time
+        timestamp =  int(track["progress_ms"]//1000)
+        total = int(track["item"]["duration_ms"]//1000)
+        print(timestamp)
+        name = track["item"]["name"]
+        artists = []
+        explicit = track["item"]["explicit"]
+        for i in track["item"]["artists"]:
+            artists.append(i["name"])
+        image = track["item"]["album"]["images"][0]["url"]
+        album = track["item"]["album"]["name"]
+
+        playing = track["is_playing"]
+        return [name, artists, album, explicit, image, playing, timestamp, total]
+
+
 
     return "No track currently playing."
-
 
 @main_blueprint.route("/spotify/current_user")
 def spotify_current_user():
