@@ -46,11 +46,11 @@ function fetchStatus() {
                 <p class="text-2xl text-black dark:text-white"><i style="display:inline-block; color:#1BD661; margin-right:10px;" class="fab fa-spotify"></i> ${name} ${explicit}</p>
                 <p class="text-xl text-gray-600 dark:text-gray-300">${artists}</p>
                 <p class="text-xl text-gray-600 dark:text-gray-300">${album}</p>
-                <center><span style="text-align: center;font-size:24px;" class="text-xl text-gray-600 dark:text-gray-300"><i style="font-size:24px !important;" class="material-icons">shuffle</i> 
-                <i style="font-size:24px !important;" class="material-icons">skip_previous</i>
+                <center><span style="text-align: center;font-size:35px;" class="text-xl text-gray-600 dark:text-gray-300"><i style="font-size:35px !important;" class="material-icons">shuffle</i> 
+                <i style="font-size:35px !important;" class="material-icons">skip_previous</i>
                 <span style="font-size:48px !important;" class="text-2xl text-black dark:text-white">${playing}</span>
-                 <i style="font-size:24px !important;" class="material-icons">skip_next</i>
-                <i style="font-size:24px !important;" class="material-icons">loop</i>
+                 <i style="font-size:35px !important;" class="material-icons">skip_next</i>
+                <i style="font-size:35px !important;" class="material-icons">loop</i>
                 </span></center> <br>
                   <div class="flex justify-between mb-1">
                   <span class="text-base font-medium text-blue-700 dark:text-white">${timestamp}</span>
