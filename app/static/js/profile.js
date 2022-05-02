@@ -5,7 +5,7 @@ function fetchStatus() {
     });
 
     request.done((data) => {
-        if (data === "You aren't listening to anything!") {
+        if (data === "<i style=\"display:inline-block; color:greenyellow; margin-right:10px;\" class=\"fab fa-spotify\"></i> You aren't listening to anything!") {
             data = 'Music Paused';
             document.getElementById('song').innerHTML = '<p>' + data + '</p>';
         } else {
@@ -20,7 +20,7 @@ function fetchStatus() {
             let timestamp = songs[6]
             let total = songs[7]
             document.getElementById('song').innerHTML = `<div class="p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-            <p> ${name} ${explicit} by <u>${artists}</u> <br>on <u>${album}</u><br>
+            <p><i style="display:inline-block; color:greenyellow; margin-right:10px;" class="fab fa-spotify"></i>  ${name} ${explicit} by <u>${artists}</u> <br>on <u>${album}</u><br>
             Playing? ${playing} <br>
               <div class="flex justify-between mb-1">
               <span class="text-base font-medium text-blue-700 dark:text-white">${timestamp} Seconds</span>
@@ -42,4 +42,4 @@ function fetchStatus() {
 }
 
 fetchStatus();
-setInterval(fetchStatus, 5000);
+setInterval(fetchStatus, 1000);
