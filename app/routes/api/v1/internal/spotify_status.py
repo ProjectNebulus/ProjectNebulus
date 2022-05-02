@@ -14,14 +14,14 @@ def spotify_status():
             explicit = ""
         artists = ""
         count = 0
-        for i in artists:
+        for i in artists2:
             artists += i
             count += 1
             if count != len(artists2):
                 artists += ", "
 
-        string = name + " • " + artists + " • " + album + " • " + explicit + " • " \
-                 + image + " • " + playing + " • " + timestamp + " • " + total
+        string = name + " • " + artists + " • " + album + " • " + str(explicit) + " • " \
+                 + image + " • " + str(playing) + " • " + str(timestamp) + " • " + str(total)
     else:
         string = "You aren't listening to anything!"
     return string

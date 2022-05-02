@@ -20,11 +20,18 @@ function fetchStatus() {
             let timestamp = songs[6]
             let total = songs[7]
             document.getElementById('song').innerHTML = `<div class="p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-            <p> ${name}[${explicit}] by <u>${artists}</u> <br>on <u>${album}</u><br>
+            <p> ${name} ${explicit} by <u>${artists}</u> <br>on <u>${album}</u><br>
             Playing? ${playing} <br>
-            ${timestamp}  secs/ ${total}  secs
+              <div class="flex justify-between mb-1">
+              <span class="text-base font-medium text-blue-700 dark:text-white">${timestamp} Seconds</span>
+              <span class="text-sm font-medium text-blue-700 dark:text-white">${total} Seconds</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+              <div class="bg-blue-600 h-2.5 rounded-full" style="width: ${Math.round(timestamp/total*100)}%;"></div>
+            </div>
+              
             <br>
-            <img style="display: inline-block; margin:20px;" class="mb-3 w-24 h-24 rounded-full shadow-lg" src="${image}">
+            <img style="display: inline-block; margin:20px;" class="mb-3 w-24 h-24 shadow-lg" src="${image}">
             
             </div>
             `;
