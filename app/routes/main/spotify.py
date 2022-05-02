@@ -183,7 +183,6 @@ def GET_currently_playing():
         import time
         timestamp =  int(track["progress_ms"]//1000)
         total = int(track["item"]["duration_ms"]//1000)
-        print(timestamp)
         name = track["item"]["name"]
         artists = []
         explicit = track["item"]["explicit"]

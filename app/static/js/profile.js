@@ -19,21 +19,24 @@ function fetchStatus() {
             let playing = songs[5]
             let timestamp = songs[6]
             let total = songs[7]
-            document.getElementById('song').innerHTML = `<div class="p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-            <p><i style="display:inline-block; color:greenyellow; margin-right:10px;" class="fab fa-spotify"></i>  ${name} ${explicit} by <u>${artists}</u> <br>on <u>${album}</u><br>
-            Playing? ${playing} <br>
-              <div class="flex justify-between mb-1">
-              <span class="text-base font-medium text-blue-700 dark:text-white">${timestamp} Seconds</span>
-              <span class="text-sm font-medium text-blue-700 dark:text-white">${total} Seconds</span>
+            let ratio = songs[8]
+            document.getElementById('song').innerHTML = `
+            <div style="float:Left;width:30%;"> 
+                <img style="display: inline-block; margin:20px;" class="mb-3 w-24 h-24 shadow-lg" src="${image}">
             </div>
-            <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-              <div class="bg-blue-600 h-2.5 rounded-full" style="width: ${Math.round(timestamp/total*100)}%;"></div>
+            <div style="float:left;width:70%;">
+                <p><i style="display:inline-block; color:greenyellow; margin-right:10px;" class="fab fa-spotify"></i>  ${name} ${explicit} by <u>${artists}</u> <br>on <u>${album}</u><br>
+                <center>${playing}</center> <br>
+                  <div class="flex justify-between mb-1">
+                  <span class="text-base font-medium text-blue-700 dark:text-white">${timestamp}</span>
+                  <span class="text-sm font-medium text-blue-700 dark:text-white">${total}</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                  <div class="bg-blue-600 h-2.5 rounded-full" style="width: ${Math.round(ratio)}%;"></div>
+                </div>
             </div>
               
-            <br>
-            <img style="display: inline-block; margin:20px;" class="mb-3 w-24 h-24 shadow-lg" src="${image}">
-            
-            </div>
+          
             `;
 
 
