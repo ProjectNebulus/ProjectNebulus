@@ -238,7 +238,24 @@ def loop_spotify():
         return redirect("/spotify")
     spotify = spotipy.Spotify(auth_manager=auth_manager)
     spotify.repeat("track")
-def loop1_spotify(currentstate):
+def skip_spotify():
+    if "uuid" not in session.keys() or "token_info" not in session.keys():
+        return 2
+    cache_handler = FlaskSessionCacheHandler(CacheHandler)
+    SPOTIPY_REDIRECT_URI = generate_redirect(request.root_url)
+    auth_manager = spotipy.oauth2.SpotifyOAuth(
+        scope="user-read-currently-playing playlist-modify-private",
+        cache_handler=cache_handler,
+        show_dialog=True,
+        client_id=SPOTIPY_CLIENT_ID,
+        client_secret=SPOTIPY_CLIENT_SECRET,
+        redirect_uri=SPOTIPY_REDIRECT_URI,
+    )
+
+    if not auth_manager.validate_token(cache_handler.get_cached_token()):
+        return redirect("/spotify")
+    spotify = spotipy.Spotify(auth_manager=auth_manager)
+def loop1_spotify():
     if "uuid" not in session.keys() or "token_info" not in session.keys():
         return 2
     cache_handler = FlaskSessionCacheHandler(CacheHandler)
@@ -256,7 +273,7 @@ def loop1_spotify(currentstate):
         return redirect("/spotify")
     spotify = spotipy.Spotify(auth_manager=auth_manager)
     spotify.repeat("context")
-def loop2_spotify(currentstate):
+def loop2_spotify():
     if "uuid" not in session.keys() or "token_info" not in session.keys():
         return 2
     cache_handler = FlaskSessionCacheHandler(CacheHandler)
@@ -274,7 +291,7 @@ def loop2_spotify(currentstate):
         return redirect("/spotify")
     spotify = spotipy.Spotify(auth_manager=auth_manager)
     spotify.repeat('off')
-def shuffle_spotify(currentstate):
+def shuffle_spotify():
     if "uuid" not in session.keys() or "token_info" not in session.keys():
         return 2
     cache_handler = FlaskSessionCacheHandler(CacheHandler)
@@ -292,7 +309,7 @@ def shuffle_spotify(currentstate):
         return redirect("/spotify")
     spotify = spotipy.Spotify(auth_manager=auth_manager)
     spotify.shuffle("true")
-def shuffle2_spotify(currentstate):
+def shuffle2_spotify():
     if "uuid" not in session.keys() or "token_info" not in session.keys():
         return 2
     cache_handler = FlaskSessionCacheHandler(CacheHandler)
@@ -348,7 +365,24 @@ def GET_currently_playing():
     return 1
 
 
+def resume_spotify():
+    if "uuid" not in session.keys() or "token_info" not in session.keys():
+        return 2
+    cache_handler = FlaskSessionCacheHandler(CacheHandler)
+    SPOTIPY_REDIRECT_URI = generate_redirect(request.root_url)
+    auth_manager = spotipy.oauth2.SpotifyOAuth(
+        scope="user-read-currently-playing playlist-modify-private",
+        cache_handler=cache_handler,
+        show_dialog=True,
+        client_id=SPOTIPY_CLIENT_ID,
+        client_secret=SPOTIPY_CLIENT_SECRET,
+        redirect_uri=SPOTIPY_REDIRECT_URI,
+    )
 
+    if not auth_manager.validate_token(cache_handler.get_cached_token()):
+        return redirect("/spotify")
+    spotify = spotipy.Spotify(auth_manager=auth_manager)
+    spotify.start_playback()
 
 @main_blueprint.route("/spotify/current_user")
 def spotify_current_user():

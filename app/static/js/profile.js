@@ -68,6 +68,15 @@ function fetchStatus() {
         }
     });
 }
+function sendRQ(link){
+    const request = $.ajax({
+        type: 'POST',
+        url: link
+    });
+    request.done((data) => {
+        return data;
+    });
 
+}
 fetchStatus();
 setInterval(fetchStatus, 1000);

@@ -1,6 +1,8 @@
 from . import internal
 from ....main.utils import private_endpoint
 from .....static.python.spotify import get_song
+from .....routes.main.spotify import shuffle_spotify, shuffle2_spotify, loop_spotify, \
+    loop1_spotify, loop2_spotify, pause_spotify, next_spotify, prev_spotify
 
 def convert(secs):
     part1 = str(secs//60)
@@ -42,3 +44,40 @@ def spotify_status():
     else:
         string = "You aren't listening to anything!"
     return string
+@internal.route("/spotify/skip-f", methods=["POST"])
+def spotifyskipf():
+    next_spotify()
+    return "Success"
+@internal.route("/spotify/skip-b", methods=["POST"])
+def spotifyskipb():
+    prev_spotify()
+    return "Success"
+@internal.route("/spotify/shuffle", methods=["POST"])
+def spotifyshuffle():
+    shuffle_spotify()
+    return "Success"
+@internal.route("/spotify/stopshuffle", methods=["POST"])
+def spotifystopshuffle():
+    shuffle2_spotify()
+    return "Success"
+@internal.route("/spotify/loop_small", methods=["POST"])
+def spotifyloop():
+    loop_spotify()
+    return "Success"
+@internal.route("/spotify/loop_big", methods=["POST"])
+def spotifyloop1():
+    loop1_spotify()
+    return "Success"
+@internal.route("/spotify/loop_big", methods=["POST"])
+def spotifystoploop():
+    loop2_spotify()
+    return "Success"
+@internal.route("/spotify/pause", methods=["POST"])
+def spotifypause():
+    pause_spotify()
+    return "Success"
+
+@internal.route("/spotify/resume", methods=["POST"])
+def spotifyresume():
+    spotifyresume()
+    return "Success"
