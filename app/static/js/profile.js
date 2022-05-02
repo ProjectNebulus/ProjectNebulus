@@ -44,6 +44,7 @@ function fetchStatus() {
             </div>
             <div style="float:left;width:calc(100% - 150px);">
                 <p class="text-2xl text-black dark:text-white"><i style="display:inline-block; color:#1BD661; margin-right:10px;" class="fab fa-spotify"></i> ${name} ${explicit}</p>
+                <p>Please Note: Spotify requires users to have Premium to be controlled from Nebulus.</p>
                 <p class="text-xl text-gray-600 dark:text-gray-300">${artists}</p>
                 <p class="text-xl text-gray-600 dark:text-gray-300">${album}</p>
                 <center><span style="text-align: center;font-size:35px;" class="text-xl text-gray-600 dark:text-gray-300"><i style="font-size:35px !important;" class="material-icons">shuffle</i> 

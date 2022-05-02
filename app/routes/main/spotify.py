@@ -13,8 +13,8 @@ import uuid
 
 # In order to get Spotipy to work, you must install the latest version with cloning the repo with the following command:
 # pip3 install git+https://github.com/plamere/spotipy
-SPOTIPY_CLIENT_ID = "846095b9ce934b0da3e0aaf3adbf600c"
-SPOTIPY_CLIENT_SECRET = "1d79c77cee124d8f8e20b16f720d65e8"
+SPOTIPY_CLIENT_ID = "9eb38c31d84b43e5a2557a6f98c5a064"
+SPOTIPY_CLIENT_SECRET = "eddbab5eb3b2434694af122a8f99bf87"
 # SPOTIPY_REDIRECT_URI = "http://localhost:8080/spotify"
 
 caches_folder = "./.spotify_caches/"
@@ -70,7 +70,7 @@ def spotify():
     cache_handler = FlaskSessionCacheHandler(CacheHandler())
     SPOTIPY_REDIRECT_URI = generate_redirect(request.root_url)
     auth_manager = spotipy.oauth2.SpotifyOAuth(
-        scope="user-read-currently-playing playlist-modify-private",
+        scope="user-read-currently-playing playlist-modify-private app-remote-control streaming",
         cache_handler=cache_handler,
         show_dialog=True,
         client_id=SPOTIPY_CLIENT_ID,
@@ -109,7 +109,7 @@ def spotify_playlists():
     cache_handler = FlaskSessionCacheHandler(CacheHandler())
     SPOTIPY_REDIRECT_URI = generate_redirect(request.root_url)
     auth_manager = spotipy.oauth2.SpotifyOAuth(
-        scope="user-read-currently-playing playlist-modify-private",
+        scope="user-read-currently-playing playlist-modify-private app-remote-control streaming",
         cache_handler=cache_handler,
         show_dialog=True,
         client_id=SPOTIPY_CLIENT_ID,
@@ -131,7 +131,7 @@ def currently_playing():
     cache_handler = FlaskSessionCacheHandler(CacheHandler)
     SPOTIPY_REDIRECT_URI = generate_redirect(request.root_url)
     auth_manager = spotipy.oauth2.SpotifyOAuth(
-        scope="user-read-currently-playing playlist-modify-private",
+        scope="user-read-currently-playing playlist-modify-private app-remote-control streaming",
         cache_handler=cache_handler,
         show_dialog=True,
         client_id=SPOTIPY_CLIENT_ID,
@@ -168,7 +168,7 @@ def pause_spotify():
     cache_handler = FlaskSessionCacheHandler(CacheHandler)
     SPOTIPY_REDIRECT_URI = generate_redirect(request.root_url)
     auth_manager = spotipy.oauth2.SpotifyOAuth(
-        scope="user-read-currently-playing playlist-modify-private",
+        scope="user-read-currently-playing playlist-modify-private app-remote-control streaming",
         cache_handler=cache_handler,
         show_dialog=True,
         client_id=SPOTIPY_CLIENT_ID,
@@ -186,7 +186,7 @@ def next_spotify():
     cache_handler = FlaskSessionCacheHandler(CacheHandler)
     SPOTIPY_REDIRECT_URI = generate_redirect(request.root_url)
     auth_manager = spotipy.oauth2.SpotifyOAuth(
-        scope="user-read-currently-playing playlist-modify-private",
+        scope="user-read-currently-playing playlist-modify-private app-remote-control streaming",
         cache_handler=cache_handler,
         show_dialog=True,
         client_id=SPOTIPY_CLIENT_ID,
@@ -206,7 +206,7 @@ def prev_spotify():
     cache_handler = FlaskSessionCacheHandler(CacheHandler)
     SPOTIPY_REDIRECT_URI = generate_redirect(request.root_url)
     auth_manager = spotipy.oauth2.SpotifyOAuth(
-        scope="user-read-currently-playing playlist-modify-private",
+        scope="user-read-currently-playing playlist-modify-private app-remote-control streaming",
         cache_handler=cache_handler,
         show_dialog=True,
         client_id=SPOTIPY_CLIENT_ID,
@@ -226,7 +226,7 @@ def loop_spotify():
     cache_handler = FlaskSessionCacheHandler(CacheHandler)
     SPOTIPY_REDIRECT_URI = generate_redirect(request.root_url)
     auth_manager = spotipy.oauth2.SpotifyOAuth(
-        scope="user-read-currently-playing playlist-modify-private",
+        scope="user-read-currently-playing playlist-modify-private app-remote-control streaming",
         cache_handler=cache_handler,
         show_dialog=True,
         client_id=SPOTIPY_CLIENT_ID,
@@ -244,7 +244,7 @@ def skip_spotify():
     cache_handler = FlaskSessionCacheHandler(CacheHandler)
     SPOTIPY_REDIRECT_URI = generate_redirect(request.root_url)
     auth_manager = spotipy.oauth2.SpotifyOAuth(
-        scope="user-read-currently-playing playlist-modify-private",
+        scope="user-read-currently-playing playlist-modify-private app-remote-control streaming",
         cache_handler=cache_handler,
         show_dialog=True,
         client_id=SPOTIPY_CLIENT_ID,
@@ -261,7 +261,7 @@ def loop1_spotify():
     cache_handler = FlaskSessionCacheHandler(CacheHandler)
     SPOTIPY_REDIRECT_URI = generate_redirect(request.root_url)
     auth_manager = spotipy.oauth2.SpotifyOAuth(
-        scope="user-read-currently-playing playlist-modify-private",
+        scope="user-read-currently-playing playlist-modify-private app-remote-control streaming",
         cache_handler=cache_handler,
         show_dialog=True,
         client_id=SPOTIPY_CLIENT_ID,
@@ -279,7 +279,7 @@ def loop2_spotify():
     cache_handler = FlaskSessionCacheHandler(CacheHandler)
     SPOTIPY_REDIRECT_URI = generate_redirect(request.root_url)
     auth_manager = spotipy.oauth2.SpotifyOAuth(
-        scope="user-read-currently-playing playlist-modify-private",
+        scope="user-read-currently-playing playlist-modify-private app-remote-control streaming",
         cache_handler=cache_handler,
         show_dialog=True,
         client_id=SPOTIPY_CLIENT_ID,
@@ -297,7 +297,7 @@ def shuffle_spotify():
     cache_handler = FlaskSessionCacheHandler(CacheHandler)
     SPOTIPY_REDIRECT_URI = generate_redirect(request.root_url)
     auth_manager = spotipy.oauth2.SpotifyOAuth(
-        scope="user-read-currently-playing playlist-modify-private",
+        scope="user-read-currently-playing playlist-modify-private app-remote-control streaming",
         cache_handler=cache_handler,
         show_dialog=True,
         client_id=SPOTIPY_CLIENT_ID,
@@ -315,7 +315,7 @@ def shuffle2_spotify():
     cache_handler = FlaskSessionCacheHandler(CacheHandler)
     SPOTIPY_REDIRECT_URI = generate_redirect(request.root_url)
     auth_manager = spotipy.oauth2.SpotifyOAuth(
-        scope="user-read-currently-playing playlist-modify-private",
+        scope="user-read-currently-playing playlist-modify-private app-remote-control streaming",
         cache_handler=cache_handler,
         show_dialog=True,
         client_id=SPOTIPY_CLIENT_ID,
@@ -333,7 +333,7 @@ def GET_currently_playing():
     cache_handler = FlaskSessionCacheHandler(CacheHandler)
     SPOTIPY_REDIRECT_URI = generate_redirect(request.root_url)
     auth_manager = spotipy.oauth2.SpotifyOAuth(
-        scope="user-read-currently-playing playlist-modify-private",
+        scope="user-read-currently-playing playlist-modify-private app-remote-control streaming",
         cache_handler=cache_handler,
         show_dialog=True,
         client_id=SPOTIPY_CLIENT_ID,
@@ -371,7 +371,7 @@ def resume_spotify():
     cache_handler = FlaskSessionCacheHandler(CacheHandler)
     SPOTIPY_REDIRECT_URI = generate_redirect(request.root_url)
     auth_manager = spotipy.oauth2.SpotifyOAuth(
-        scope="user-read-currently-playing playlist-modify-private",
+        scope="user-read-currently-playing playlist-modify-private app-remote-control streaming",
         cache_handler=cache_handler,
         show_dialog=True,
         client_id=SPOTIPY_CLIENT_ID,
@@ -389,7 +389,7 @@ def spotify_current_user():
     cache_handler = FlaskSessionCacheHandler(CacheHandler)
     SPOTIPY_REDIRECT_URI = generate_redirect(request.root_url)
     auth_manager = spotipy.oauth2.SpotifyOAuth(
-        scope="user-read-currently-playing playlist-modify-private",
+        scope="user-read-currently-playing playlist-modify-private app-remote-control streaming",
         cache_handler=cache_handler,
         show_dialog=True,
         client_id=SPOTIPY_CLIENT_ID,

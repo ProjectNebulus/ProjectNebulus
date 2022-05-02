@@ -2,7 +2,7 @@ from . import internal
 from ....main.utils import private_endpoint
 from .....static.python.spotify import get_song
 from .....routes.main.spotify import shuffle_spotify, shuffle2_spotify, loop_spotify, \
-    loop1_spotify, loop2_spotify, pause_spotify, next_spotify, prev_spotify
+    loop1_spotify, loop2_spotify, pause_spotify, next_spotify, prev_spotify, resume_spotify
 
 def convert(secs):
     part1 = str(secs//60)
@@ -35,9 +35,11 @@ def spotify_status():
         timestamp = convert(timestamp)
         total = convert(total)
         if not playing:
-            playing = '<i style="font-size:48px !important;" class="material-icons">play_circle</i>'
+            playing = '<i onclick="sendRQ(\'/api/v1/internal/spotify/resume\')" style="font-size:48px !important;" ' \
+                      'class="material-icons">play_circle</i> '
         else:
-            playing = '<i style="font-size:48px !important;" class="material-icons">pause_circle</i>'
+            playing = '<i onclick="sendRQ(\'/api/v1/internal/spotify/pause\')" style="font-size:48px !important;" ' \
+                      'class="material-icons">pause_circle</i> '
         string = name + " • " + artists + " • " + album + " • " + str(explicit) + " • " \
                  + image + " • " + str(playing) + " • " + str(timestamp) + " • " + str(total) \
                  + " • " + str(ratio)
@@ -79,5 +81,5 @@ def spotifypause():
 
 @internal.route("/spotify/resume", methods=["POST"])
 def spotifyresume():
-    spotifyresume()
+    resume_spotify()
     return "Success"
