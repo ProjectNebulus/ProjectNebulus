@@ -1,3 +1,5 @@
+import datetime
+
 from flask import render_template, redirect, session
 from spotipy import CacheHandler
 
@@ -139,8 +141,30 @@ def currently_playing():
         return redirect("/spotify")
     spotify = spotipy.Spotify(auth_manager=auth_manager)
     track = spotify.current_user_playing_track()
+
+
     if not track is None:
-        return track
+        import time
+        timestamp =  int(time.time()) - int(track["timestamp"]//1000)
+        print(timestamp)
+        name = track["item"]["name"]
+        artists = []
+        explicit = track["item"]["explicit"]
+        for i in track["item"]["artists"]:
+            artists.append(i["name"])
+        image = track["item"]["album"]["images"][0]["url"]
+        album = track["item"]["album"]["name"]
+
+        playing = track["is_playing"]
+        return f"""
+        {name} by {artists} on {album}
+        Explicit: {explicit}<br>
+        <img src="{image}" style="height:100px;border-radius:10%;"><br>
+        
+        Track is playing? {playing}
+        {timestamp/10} seconds remaining!
+        """
+
     return "No track currently playing."
 
 
