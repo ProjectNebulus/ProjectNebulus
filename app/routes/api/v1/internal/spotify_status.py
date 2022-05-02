@@ -33,9 +33,9 @@ def spotify_status():
         timestamp = convert(timestamp)
         total = convert(total)
         if not playing:
-            playing = '<i class="material-icons">play_circle</i>'
+            playing = '<i style="font-size:48px !important;" class="material-icons">play_circle</i>'
         else:
-            playing = '<i class="material-icons">pause_circle</i>'
+            playing = '<i style="font-size:48px !important;" class="material-icons">pause_circle</i>'
         string = name + " • " + artists + " • " + album + " • " + str(explicit) + " • " \
                  + image + " • " + str(playing) + " • " + str(timestamp) + " • " + str(total) \
                  + " • " + str(ratio)

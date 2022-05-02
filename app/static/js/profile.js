@@ -38,15 +38,20 @@ function fetchStatus() {
             let total = songs[7]
             let ratio = songs[8]
             document.getElementById('song').innerHTML = `
-            <i style="display:inline-block; color:#1BD661; margin-right:10px;" class="fab fa-spotify"></i>
-            <div style="float:Left;width:30%;"> 
-                <img style="display: inline-block; margin:20px;" class="mb-3 w-24 h-24 shadow-lg" src="${image}">
+            
+            <div style="float:Left;width:150px;"> 
+                <img style="display: inline-block; margin:20px; border-radius:10px;" class="mb-3 w-24 h-24 shadow-lg" src="${image}">
             </div>
-            <div style="float:left;width:70%;">
-                <p class="text-2xl text-black dark:text-white">${name} ${explicit}</p>
+            <div style="float:left;width:calc(100% - 150px);">
+                <p class="text-2xl text-black dark:text-white"><i style="display:inline-block; color:#1BD661; margin-right:10px;" class="fab fa-spotify"></i> ${name} ${explicit}</p>
                 <p class="text-xl text-gray-600 dark:text-gray-300">${artists}</p>
                 <p class="text-xl text-gray-600 dark:text-gray-300">${album}</p>
-                <center>${playing}</center> <br>
+                <center><span style="text-align: center;font-size:24px;" class="text-xl text-gray-600 dark:text-gray-300"><i style="font-size:24px !important;" class="material-icons">shuffle</i> 
+                <i style="font-size:24px !important;" class="material-icons">skip_previous</i>
+                <span style="font-size:48px !important;" class="text-2xl text-black dark:text-white">${playing}</span>
+                 <i style="font-size:24px !important;" class="material-icons">skip_next</i>
+                <i style="font-size:24px !important;" class="material-icons">loop</i>
+                </span></center> <br>
                   <div class="flex justify-between mb-1">
                   <span class="text-base font-medium text-blue-700 dark:text-white">${timestamp}</span>
                   <span class="text-sm font-medium text-blue-700 dark:text-white">${total}</span>
