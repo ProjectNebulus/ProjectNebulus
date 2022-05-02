@@ -126,6 +126,8 @@ def spotify_playlists():
 
 @main_blueprint.route("/spotify/currently_playing")
 def currently_playing():
+    if "uuid" not in session.keys() or "token_info" not in session.keys():
+        return 2
     cache_handler = FlaskSessionCacheHandler(CacheHandler)
     SPOTIPY_REDIRECT_URI = generate_redirect(request.root_url)
     auth_manager = spotipy.oauth2.SpotifyOAuth(
@@ -159,9 +161,11 @@ def currently_playing():
         return [name, artists, album, explicit, image, playing, timestamp, total]
 
 
-    return "No"
+    return 1
 
 def GET_currently_playing():
+    if "uuid" not in session.keys() or "token_info" not in session.keys():
+        return 2
     cache_handler = FlaskSessionCacheHandler(CacheHandler)
     SPOTIPY_REDIRECT_URI = generate_redirect(request.root_url)
     auth_manager = spotipy.oauth2.SpotifyOAuth(
@@ -196,7 +200,7 @@ def GET_currently_playing():
 
 
 
-    return "No track currently playing."
+    return 1
 
 @main_blueprint.route("/spotify/current_user")
 def spotify_current_user():

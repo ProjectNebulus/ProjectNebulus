@@ -12,10 +12,14 @@ def convert(secs):
 @internal.route("/spotify-status", methods=["POST"])
 def spotify_status():
     song = get_song()
+    if song[0] == 1:
+        return "1" #Spotify Not Detected
+    if song[0] == 2:
+        return "2" #Spotify Isn't Connected
     if len(song) == 8:
         name, artists2, album, explicit, image, playing, timestamp, total = song
         if explicit:
-            explicit = "[Explicit]"
+            explicit = '<i class="material-icons">explicit</i>'
         else:
             explicit = ""
         artists = ""
