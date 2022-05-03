@@ -10,9 +10,30 @@
             }
         }
     </style>
+    <script>
+        let bgImage;
+        let forwards = true;
+
+        window.addEventListener("load", () => bgImage = document.getElementById("scrolldis"))
+
+        function autoScroll() {
+            if (bgImage.offsetHeight + bgImage.scrollTop >= bgImage.scrollHeight && forwards)
+                forwards = false;
+
+            if (bgImage.scrollTop <= 0 && !forwards)
+                forwards = true;
+
+            bgImage.scrollBy(0, forwards ? 5 : -5);
+        }
+
+        setInterval(autoScroll, 50);
+
+    </script>
     <body>
+
     <script src="https://unpkg.com/flowbite@1.4.1/dist/datepicker.js"></script>
-    <div style="z-index: -1; height:100%;overflow-y:scroll;user-select: none;pointer-events: none;" class="blur">
+    <div id="scrolldis"
+         style="z-index: -1; filter:blur(1rem); height:100%;overflow-y:scroll;user-select: none;pointer-events: none;">
         {% include "lms.html" %}
     </div>
     <div class=" container mx-auto bg-white signupbody"
