@@ -1,43 +1,6 @@
 <!--Extend with Jinja!-->
 {% extends "layout.html" %}
 {% block main %}
-    <head>
-        <style>
-            /* Hide scrollbar for Chrome, Safari and Opera */
-            #scroll1::-webkit-scrollbar {
-                display: none;
-            }
-
-            /* Hide scrollbar for IE, Edge and Firefox */
-            #scroll1 {
-                -ms-overflow-style: none; /* IE and Edge */
-                scrollbar-width: none; /* Firefox */
-            }
-
-            /* Hide scrollbar for Chrome, Safari and Opera */
-            #scroll2::-webkit-scrollbar {
-                display: none;
-            }
-
-            /* Hide scrollbar for IE, Edge and Firefox */
-            #scroll2 {
-                -ms-overflow-style: none; /* IE and Edge */
-                scrollbar-width: none; /* Firefox */
-            }
-
-            /* Hide scrollbar for Chrome, Safari and Opera */
-            #scroll3::-webkit-scrollbar {
-                display: none;
-            }
-
-            /* Hide scrollbar for IE, Edge and Firefox */
-            #scroll3 {
-                -ms-overflow-style: none; /* IE and Edge */
-                scrollbar-width: none; /* Firefox */
-            }
-        </style>
-        <link rel="stylesheet" href="../static/css/fonts.css">
-    </head>
     <body>
     {% include "navbar.html" %}
     <br>
@@ -47,10 +10,8 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 p-6">
             <div class="pb-2">
-                <table id="scroll1"
-                       class=" rounded-lg text-sm text-left text-gray-500 dark:text-gray-400 px w-full h-full">
-
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <table class="block rounded-lg text-sm text-left text-gray-500 dark:text-gray-400 px w-full h-full bg-gray-300 dark:bg-gray-800">
+                    <thead class="block w-full text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">
                             Event
@@ -69,12 +30,12 @@
                         </th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody style="height: 20rem;" class="overflow-auto block w-full">
                     {% for event in events %}
                         {% if event._cls == "Event" %}
                             <tr style="vertical-align: top;"
                                 class="bg-white dark:bg-gray-800 border-b border-gray-200">
-                                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4 w-full">
                                     <span class="material-icons-outlined mr-2"
                                           style="vertical-align: bottom">event</span>
                                     {{ event.title }}
@@ -94,14 +55,14 @@
                             </tr>
                         {% else %}
                             <tr style="vertical-align: top;"
-                                class="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+                                class="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 w-full">
                                 <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
                                     <span class="material-icons-outlined mr-2"
                                           style="vertical-align: bottom">description</span>
                                     {{ event.title }}
                                 </td>
                                 <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
-                                    {{ strftime(event.due.date(), "%m/%d/%Y") }}
+                                    {{ strftime(event.due.date(), "%B %-d, %Y") }}
                                 </td>
                                 <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
                                     {{ strftime(event.due.time(), "%I:%M %p") }}
@@ -118,7 +79,7 @@
                     </tbody>
                 </table>
             </div>
-            <div id="scroll2" class="grid grid-cols-2 gap-4 pl-4" style="height:100%;">
+            <div class="grid grid-cols-2 gap-4 pl-4" style="height:100%;">
                 <a href="/lms" class="text-blue-500">View All Announcements</a><br><br>
                 {% if announcements|length == 0 %}
                     <p class="text-black dark:text-white">No Announcements!</p>
@@ -161,20 +122,20 @@
                             </button>
                         </div>
                         <br>
-                        <p class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">{{ announcement.date }}</p>
+                        <p class="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">{{ strftime(announcement.date, "%-I:%M %p on %B %-d, %Y") }}</p>
                     </div>
                 {% endfor %}
             </div>
         </div>
         <br>
         <br>
-        <div id="scroll3" style="height:45%;float:left;width:100%;margin-left:2%; overflow: visible;" class="pb-2">
-            <h2 class="text-black dark:text-white text-2xl">Recent Courses</h2>
+        <div style="height: 45%; float:left; width:calc(100% - 3rem); margin-left: 2%; overflow: visible;" class="pb-2">
+            <h2 class="text-black dark:text-white text-2xl ml-4">Recent Courses</h2>
             <br>
             <div class="text-left grid" style="grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));">
                 {% for course in user_courses %}
                     <a href="/course/{{ course.id }}" style="width:18rem; margin:1rem;"
-                       class="max-w-sm bg-gray-800 hover:bg-gray-50 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:hover:bg-gray-600 dark:border-gray-700">
+                       class="max-w-sm bg-gray-100 hover:bg-gray-600 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:hover:bg-gray-600 dark:border-gray-700">
                         <img class="rounded-t-lg"
                              src="https://bins.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg?"
                              alt="Course Image"/>

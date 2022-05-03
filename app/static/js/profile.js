@@ -14,10 +14,9 @@ function fetchStatus() {
                 Go to Spotify <i style="display:grid; grid-auto-flow: column; align-content: center; justify-content: center;" class="material-icons">open_in_newt</i>
                 </button>
             </a>
-            </div>
-            
-            `
-        } else if (data === "2"){
+            </div>    `
+        }
+        else if (data === "2") {
             document.getElementById('song').innerHTML = `
             <div style="float:right;display: grid; grid-auto-flow: column; align-content: center;">
             <i style="display:inline-block; color:#1BD661; margin-right:10px;" class="fab fa-spotify"></i> Spotify isn't Connected!
@@ -26,10 +25,20 @@ function fetchStatus() {
                 Connect Spotify <i style="display:grid; grid-auto-flow: column; align-content: center; justify-content: center;" class="material-icons">open_in_newt</i>
                 </button>
             </a>
-            </div>
-            
-            `
-        }else {
+            </div>  `
+        }
+        else if (data === "3") {
+            document.getElementById('song').innerHTML = `
+            <div style="float:right;display: grid; grid-auto-flow: column; align-content: center;">
+                <i style="display:inline-block; color:#1BD661; margin-right:10px;" class="fab fa-spotify"></i> Your Spotify Account is not registered in the developer dashboard!
+                    <a target="_blank" href="https://developer.spotify.com/dashboard">
+                    <button style="margin-left: 10px; display:grid; grid-auto-flow: column; align-content: center; justify-content: center;" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                    Go to Spotify <i style="display:grid; grid-auto-flow: column; align-content: center; justify-content: center;" class="material-icons">open_in_newt</i>
+                    </button>
+                </a>
+            </div>  `
+        }
+        else {
             let songs = data.split(" • ");
 
             let name = songs[0]
@@ -79,7 +88,8 @@ function fetchStatus() {
         }
     });
 }
-function sendRQ(link){
+
+function sendRQ(link) {
     const request = $.ajax({
         type: 'POST',
         url: link
@@ -89,6 +99,7 @@ function sendRQ(link){
     });
 
 }
+
 fetchStatus();
 //setInterval(fetchStatus, 500);
 setInterval(fetchStatus, 100);

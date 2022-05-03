@@ -68,7 +68,10 @@ def settings():
     if not spotify_auth_manager.validate_token(cache_handler.get_cached_token()):
         spotify = None
     else:
-        spotify = spotify.current_user()
+        try:
+            spotify = spotify.current_user()
+        except SpotifyException:
+            spotify = None
 
     try:
         discord = (session["discord_user"], session["discord_avatar"])

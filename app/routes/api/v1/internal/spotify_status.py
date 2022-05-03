@@ -1,24 +1,30 @@
 from . import internal
-from ....main.utils import private_endpoint
-from .....static.python.spotify import get_song
+from ....main.spotify import get_song
 from .....routes.main.spotify import shuffle_spotify, shuffle2_spotify, loop_spotify, \
     loop1_spotify, loop2_spotify, pause_spotify, next_spotify, prev_spotify, resume_spotify
 
+
 def convert(secs):
-    part1 = str(secs//60)
+    part1 = str(secs // 60)
     part2 = str(secs % 60)
     if len(part2) == 1:
-        part2 = "0"+part2
+        part2 = "0" + part2
     return f"{part1}:{part2}"
+
 
 @internal.route("/spotify-status", methods=["POST"])
 def spotify_status():
     song = get_song()
     if song[0] == 1:
-        return "1" #Spotify Not Detected
-    if song[0] == 2:
-        return "2" #Spotify Isn't Connected
-    if len(song) == 8:
+        return "1"  # Spotify Not Detected
+
+    elif song[0] == 2:
+        return "2"  # Spotify Isn't Connected
+
+    elif song[0] == 3:
+        return "3"  # Spotify Not Registered in Developer Dashboard
+
+    elif len(song) == 8:
         name, artists2, album, explicit, image, playing, timestamp, total = song
         if explicit:
             explicit = '<i class="material-icons">explicit</i>'
@@ -31,7 +37,7 @@ def spotify_status():
             count += 1
             if count != len(artists2):
                 artists += ", "
-        ratio = round(timestamp/total*100)
+        ratio = round(timestamp / total * 100)
         timestamp = convert(timestamp)
         total = convert(total)
         if not playing:
@@ -46,38 +52,55 @@ def spotify_status():
     else:
         string = "You aren't listening to anything!"
     return string
+
+
 @internal.route("/spotify/skip-f", methods=["POST"])
 def spotifyskipf():
     next_spotify()
     return "Success"
+
+
 @internal.route("/spotify/skip-b", methods=["POST"])
 def spotifyskipb():
     prev_spotify()
     return "Success"
+
+
 @internal.route("/spotify/shuffle", methods=["POST"])
 def spotifyshuffle():
     shuffle_spotify()
     return "Success"
+
+
 @internal.route("/spotify/stopshuffle", methods=["POST"])
 def spotifystopshuffle():
     shuffle2_spotify()
     return "Success"
+
+
 @internal.route("/spotify/loop_small", methods=["POST"])
 def spotifyloop():
     loop_spotify()
     return "Success"
+
+
 @internal.route("/spotify/loop_big", methods=["POST"])
 def spotifyloop1():
     loop1_spotify()
     return "Success"
+
+
 @internal.route("/spotify/loop_big", methods=["POST"])
 def spotifystoploop():
     loop2_spotify()
     return "Success"
+
+
 @internal.route("/spotify/pause", methods=["POST"])
 def spotifypause():
     pause_spotify()
     return "Success"
+
 
 @internal.route("/spotify/resume", methods=["POST"])
 def spotifyresume():
