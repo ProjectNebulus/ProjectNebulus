@@ -76,6 +76,7 @@ function fetchStatus() {
             let timestamp = songs[6]
             let total = songs[7]
             let ratio = songs[8]
+            document.getElementById("songname").innerText = name;
             document.getElementById('song').innerHTML = `
             <div> <!--class="grid grid-cols-2"!-->
             <div style="width:150px;float:left;"> 
@@ -119,9 +120,9 @@ function fetchStatus() {
                     "song": name
                 }
             });
-            request.done(data => {
+            request.done(data => function (){
                 document.getElementById("lyricshere").innerHTML = data;
-                //ocument.getElementById("songname").innerText = name;
+
             })
 
 
