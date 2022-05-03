@@ -10,7 +10,7 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 p-6">
             <div class="pb-2">
-                <table class="block rounded-lg text-sm text-left text-gray-500 dark:text-gray-400 px w-full h-full bg-gray-300 dark:bg-gray-800">
+                <table class="block rounded-lg text-sm text-left text-gray-500 dark:text-gray-400 px w-full h-full white dark:bg-gray-800">
                     <thead class="block w-full text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">
@@ -135,7 +135,7 @@
             <div class="text-left grid" style="grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));">
                 {% for course in user_courses %}
                     <a href="/course/{{ course.id }}" style="width:18rem; margin:1rem;"
-                       class="max-w-sm bg-gray-100 hover:bg-gray-600 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:hover:bg-gray-600 dark:border-gray-700">
+                       class="max-w-sm bg-gray-100 hover:bg-gray-200 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:hover:bg-gray-600 dark:border-gray-700">
                         <img class="rounded-t-lg"
                              src="https://bins.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg?"
                              alt="Course Image"/>

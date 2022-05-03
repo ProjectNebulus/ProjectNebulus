@@ -1,5 +1,5 @@
 {% if not disablebar %}
-    <nav class="w-full sticky backdrop-blur-sm top-0 z-40 bg-white border-gray-200 px-2 py-2 rounded-lg bg-gray-300/30 dark:bg-gray-800/30  h-auto"
+    <nav class="w-full sticky backdrop-blur-sm top-0 z-40 bg-white/30 border-gray-200 px-2 py-2 rounded-lg bg-gray-300/30 dark:bg-gray-800/30  h-auto"
          id="navbar">
         <div class="container flex flex-wrap justify-between items-center mx-auto">
             <div style="float:left;" class="flex">
@@ -63,16 +63,16 @@
                     <dropdown-menu style="display: grid; grid-auto-flow: column; align-content: center;">
                         <trigger id="user-menu-button"
                                  class="rounded-full my-2 mx-2 w-8 h-8 lg:w-12 lg:h-12 dark:bg-gray-900 dark:hover:bg-gray-800">
-                            <logo no-revert class="h-5 lg:h-7" style="margin-left: 20%; margin-top: 20%"></logo>
+                            <logo image="newRed.png" no-revert class="h-5 lg:h-7" style="margin-left: 20%; margin-top: 20%"></logo>
                         </trigger>
                         <!-- Dropdown menu -->
                         <contents class="my-4 text-base bg-white dark:bg-gray-700 dark:divide-gray-600">
-                            <item class="text-gray-300">
+                            <item class="dark:text-gray-300 text-gray-600">
                                 <span class="block text-sm text-gray-900 dark:text-white">{{ user }}</span>
                                 <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">{{ email }}</span>
                             </item>
-                            <item class="text-gray-300" href="/dashboard">Dashboard</item>
-                            <item class="text-gray-300" href="/points">0
+                            <item class="dark:text-gray-300 text-gray-600" href="/dashboard">Dashboard</item>
+                            <item class="dark:text-gray-300 text-gray-600" href="/points">0
                                 <svg style="display:inline-block;horizontal-align:middle;" class="w-6 h-6"
                                      fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"></path>
@@ -81,9 +81,9 @@
                                           clip-rule="evenodd"></path>
                                 </svg>
                             </item>
-                            <item class="text-gray-300" href="/settings">Settings</item>
-                            <item class="text-gray-300" href="/profile">Profile</item>
-                            <item class="text-gray-300" href="/logout">Sign Out</item>
+                            <item class="dark:text-gray-300 text-gray-600" href="/settings">Settings</item>
+                            <item class="dark:text-gray-300 text-gray-600" href="/profile">Profile</item>
+                            <item class="dark:text-gray-300 text-gray-600" href="/logout">Sign Out</item>
                         </contents>
                     </dropdown-menu>
                 {% else %}
