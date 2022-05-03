@@ -5,8 +5,12 @@
     {% include "navbar.html" %}
     <div class="overflow-hidden text-center">
         <h1 class="text-3xl text-black dark:text-white">What's Nebulus?</h1>
-        <p class="text-xl text-black dark:text-white">Nebulus' mission is to help students with Education. [to be
-            continued]</p><br>
+        <p class="text-xl text-black dark:text-white">With Nebulus, have your whole learning experience organized and simple!
+            All it takes is one Nebulus Account.
+            No more switching between websites. Get your Schoology, Google Classroom, and Canvas account connected today.
+            With Nebulus, there is no need to have your papers, documents, assignments, and events be all over the place. With Nebulus, every thing is organized for you in an easy-to-use way!
+            We have tools to organize your studying, organize your materials, and keep you focused!
+        </p><br>
         <hr class="dark:text-white">
         <br>
         <h1 class="text-3xl text-black dark:text-white">Our Team</h1><br>
@@ -16,84 +20,110 @@
     </div>
 
     <script>
-        const peopleDiv = document.getElementById("people");
+        window.onload = function(){
+            const peopleDiv = document.getElementById("people");
 
-        const people = [
-            {
-                image: "nicholas.png",
-                name: "Nicholas Wang",
-                title: "CEO",
-                profileLink: ""
-            },
-            {
-                image: "neel.gif",
-                name: "Neel Parpia",
-                title: "CTO",
-                profileLink: ""
-            },
-            {
-                image: "kevin.gif",
-                name: "Kevin Ma",
-                title: "COO",
-                profileLink: ""
-            },
-            {
-                image: "vedh.jpeg",
-                name: "Vedh Reddy",
-                title: "COO",
-                profileLink: ""
-            },
-            {
-                image: "rishaan.jpeg",
-                name: "Rishaan Desai",
-                title: "CIO",
-                profileLink: ""
-            },
-        ]
+            const people = [
+                {
+                    image: "nicholas.png",
+                    name: "Nicholas Wang",
+                    title: "Chief Executive Officer",
+                    profileLink: ""
+                },
+                {
+                    image: "neel.gif",
+                    name: "Neel Parpia",
+                    title: "Chief Technology Officer",
+                    profileLink: ""
+                },
+                {
+                    image: "kevin.gif",
+                    name: "Kevin Ma",
+                    title: "Co-Chief Operation Officer",
+                    profileLink: ""
+                },
+                {
+                    image: "vedh.jpeg",
+                    name: "Vedh Reddy",
+                    title: "Co-Chief Operation Officer",
+                    profileLink: ""
+                },
+                {
+                    image: "rishaan.jpeg",
+                    name: "Rishaan Desai",
+                    title: "Chief Product Officer",
+                    profileLink: ""
+                },
+                {
+                    image: "timothy1.webp",
+                    name: "Timothy Liu",
+                    title: "VP of Developing",
+                    profileLink: ""
+                },
+                {
+                    image: "timothy2.webp",
+                    name: "Timothy Hu",
+                    title: "VP of Developing",
+                    profileLink: ""
+                },
+                {
+                    image: "vivian.webp",
+                    name: "Vivian Liao",
+                    title: "VP of Graphic Design",
+                    profileLink: ""
+                },
+                {
+                    image: "rhyley.webp",
+                    name: "Rhyley Plant",
+                    title: "Senior Developer",
+                    profileLink: ""
+                },
+            ]
 
-        people.innerHTML += '<h1 class="text-3xl text-black dark:text-white">Executives</h1>'
+            people.innerHTML += '<h1 class="text-3xl text-black dark:text-white">Executives</h1>'
 
-        for (const person of people) {
-            const bgDiv = document.createElement("div");
-            bgDiv.className = "max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700";
-            bgDiv.style.margin = "1.5rem";
-            bgDiv.style.padding = "1rem";
-            bgDiv.style.float = "left";
+            for (const person of people) {
+                const bgDiv = document.createElement("div");
+                bgDiv.className = "max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700";
+                bgDiv.style.margin = "1.5rem";
+                bgDiv.style.padding = "1rem";
+                bgDiv.style.float = "left";
 
-            const bodyDiv = document.createElement("div");
-            bodyDiv.className = "flex flex-col items-center pb-5 mt-5";
+                const bodyDiv = document.createElement("div");
+                bodyDiv.className = "flex flex-col items-center pb-5 mt-5";
 
-            const img = document.createElement("img");
-            img.className = "mb-3 w-24 h-24 rounded-full shadow-lg";
-            img.src = "/static/people/" + person.image;
+                const img = document.createElement("img");
+                img.className = "mb-3 w-24 h-24 rounded-full shadow-lg";
+                img.src = "/static/people/" + person.image;
 
-            const name = document.createElement("h3");
-            name.className = "mb-1 text-xl font-medium text-gray-900 dark:text-white";
-            name.innerHTML = person.name;
+                const name = document.createElement("h3");
+                name.className = "mb-1 text-xl font-medium text-gray-900 dark:text-white";
+                name.innerHTML = person.name;
 
-            const title = document.createElement("span");
-            title.className = "text-sm text-gray-500 dark:text-gray-400";
-            title.innerHTML = person.title;
+                const title = document.createElement("span");
+                title.className = "text-sm text-gray-500 dark:text-gray-400";
+                title.innerHTML = person.title;
 
-            bodyDiv.append(img, name, title);
-            bgDiv.append(bodyDiv);
+                bodyDiv.append(img, name, title);
+                bgDiv.append(bodyDiv);
 
-            const buttons = document.createElement("div");
-            buttons.className = "flex mt-4 space-x-3 lg:mt-6";
+                const buttons = document.createElement("div");
+                buttons.className = "flex mt-4 space-x-3 lg:mt-6";
 
-            const viewProfile = document.createElement("a");
-            viewProfile.className = "inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800";
-            viewProfile.href = person.profileLink;
-            viewProfile.innerHTML = "View Profile";
+                const viewProfile = document.createElement("a");
+                viewProfile.className = "inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800";
+                viewProfile.href = person.profileLink;
+                viewProfile.innerHTML = "View Profile";
 
-            const message = document.createElement("a");
-            message.className = "inline-flex items-center py-2 px-4 text-sm font-medium text-center text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-800";
-            message.href = person.profileLink;
-            message.innerHTML = "Message";
+                const message = document.createElement("a");
+                message.className = "inline-flex items-center py-2 px-4 text-sm font-medium text-center text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-800";
+                message.href = person.profileLink;
+                message.innerHTML = "Message";
 
-            buttons.append(viewProfile, message);
-            bgDiv.append(buttons);
-            people.append(bgDiv);
+                buttons.append(viewProfile, message);
+                bgDiv.append(buttons);
+                peopleDiv.append(bgDiv);
+            }
         }
     </script>
 
