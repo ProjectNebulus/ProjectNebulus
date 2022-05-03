@@ -35,7 +35,7 @@ def create_user():
         21: "newRed.png",
         22: "newYellow.png",
     }
-    data["age"] = datetime.strptime(data["age"], "%m-%d-%Y")
+
     data["avatar"] = "https://localhost:8080/"+cats[int(data["avatar"].replace("cat", ""))]
     data["avatar"] = Avatar(avatar_url=data["avatar"], parent="User")
     data["age"] = datetime.strptime(data["age"], '%m/%d/%y')
