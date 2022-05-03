@@ -12,7 +12,7 @@ jobs:
           command: |
             cd ProjectNebulus
             git pull
-            pm2 restart ProjectNebulus
+            pm2 restart 0
             echo "Job Completed"
           host: ${{ secrets.SSH_HOST }}
           key: ${{ secrets.SSH_KEY}}
