@@ -42,7 +42,7 @@ class User(Snowflake):
     username = StringField(required=True)
     password = StringField(required=True)
     email = EmailField(required=True)
-    age = DateField(required=True)
+    age = DateTimeField(required=True)
     theme = StringField(required=True, default="System Default")
     language = StringField(required=True, default="English (United States)")
     created_at = DateTimeField(default=datetime.now())
