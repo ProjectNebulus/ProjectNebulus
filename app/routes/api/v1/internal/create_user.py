@@ -38,7 +38,7 @@ def create_user():
     data["age"] = datetime.strptime(data["age"], "%m-%d-%Y")
     data["avatar"] = "https://localhost:8080/"+cats[int(data["avatar"].replace("cat", ""))]
     data["avatar"] = Avatar(avatar_url=data["avatar"], parent="User")
-    data["age"] = datetime.date(data["age"])
+    data["age"] = datetime.strptime(data["age"], '%m/%d/%y')
     validation = create.create_user(data)
     if validation[0] == "0":
         session["username"] = validation[1].username
