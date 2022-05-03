@@ -1,9 +1,8 @@
 def connectCanvas(url, key):
+    from canvasapi import Canvas
+    API_URL = url
+    API_KEY = key
     try:
-        from canvasapi import Canvas
-
-        API_URL = url
-        API_KEY = key
         canvas = Canvas(API_URL, API_KEY)
         account = canvas.get_user(user="self")
         return account
