@@ -111,7 +111,12 @@ def get_lyrics():
 
     musixmatch = Musixmatch('bbd8cc3d9f6c1444e01d9d66b44f0f49')
     result = musixmatch.track_search(q_track='PTT Paint the Town', page_size=1, page=1, s_track_rating='desc')
-    result = result["message"]["body"]["track_list"][0]["track"]["track_id"]
     print(result)
-    result = musixmatch.track_lyrics_get(track_id=result)
+    result1 = result["message"]["body"]["track_list"][0]["track"]["track_id"]
+    result2 = result["message"]["body"]["track_list"][0]["track"]["commontrack_id"]
+    print(result1)
+    result = musixmatch.track_lyrics_get(track_id=int(result1), commontrack_id=int(result2))
+    #result = musixmatch.track_richsync_get(track_id=int(result1))
+    print(result)
+    result = result["message"]["body"]["lyrics"]["lyrics_body"].replace("\n", "<br>")
     return str(result)
