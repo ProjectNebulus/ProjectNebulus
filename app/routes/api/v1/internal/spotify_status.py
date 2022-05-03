@@ -2,7 +2,7 @@ from . import internal
 from ....main.spotify import get_song
 from .....routes.main.spotify import shuffle_spotify, shuffle2_spotify, loop_spotify, \
     loop1_spotify, loop2_spotify, pause_spotify, next_spotify, prev_spotify, resume_spotify
-
+from flask import request
 from .....static.python.musixmatch import Musixmatch
 def convert(secs):
     part1 = str(secs // 60)
@@ -106,17 +106,29 @@ def spotifypause():
 def spotifyresume():
     resume_spotify()
     return "Success"
-@internal.route("/get_lyrics/")
+@internal.route("/get_lyrics")
 def get_lyrics():
 
     musixmatch = Musixmatch('bbd8cc3d9f6c1444e01d9d66b44f0f49')
-    result = musixmatch.track_search(q_track='PTT Paint the Town', page_size=1, page=1, s_track_rating='desc')
-    print(result)
-    result1 = result["message"]["body"]["track_list"][0]["track"]["track_id"]
-    result2 = result["message"]["body"]["track_list"][0]["track"]["commontrack_id"]
-    print(result1)
-    result = musixmatch.track_lyrics_get(track_id=int(result1), commontrack_id=int(result2))
-    #result = musixmatch.track_richsync_get(track_id=int(result1))
-    print(result)
-    result = result["message"]["body"]["lyrics"]["lyrics_body"].replace("\n", "<br>")
+    artist = request.args.get("artist")
+    song = request.args.get("song")
+    try:
+        result = musixmatch.track_search(q_track=f"{song}", q_artist=f"{artist}", page_size=1, page=1, s_track_rating='desc')
+        #print(result)
+        result1 = result["message"]["body"]["track_list"][0]["track"]["track_id"]
+        result2 = result["message"]["body"]["track_list"][0]["track"]["commontrack_id"]
+        #print(result1)
+        #print(result2)
+    except:
+        return "Search Failed"
+
+    try:
+        result = musixmatch.track_lyrics_get(track_id=int(result1), commontrack_id=int(result2))
+        #result = musixmatch.track_richsync_get(track_id=int(result1))
+        result = result["message"]["body"]["lyrics"]["lyrics_body"].replace("\n", "<br>")
+        #print(result)
+    except:
+        return "Lyric Finding Failed"
+
+
     return str(result)

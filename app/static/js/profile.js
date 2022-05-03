@@ -1,3 +1,29 @@
+function openModal(object_id) {
+    let targetEl = document.getElementById(object_id);
+    const options = {
+        placement: 'bottom-right',
+        backdropClasses: 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40'
+    };
+    const modal = new Modal(targetEl, options);
+    modal.show();
+    return true;
+}
+
+function closeModal(object_id) {
+    let targetEl = document.getElementById(object_id);
+    const options = {
+        placement: 'bottom-right',
+        backdropClasses: 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40'
+    };
+    const modal = new Modal(targetEl, options);
+    modal.hide();
+    let elements = document.querySelectorAll('[modal-backdrop]');
+    for (let i = 0; i < elements.length; i++) {
+        elements[i].style.display = "none";
+    }
+    return true;
+}
+
 function fetchStatus() {
     const request = $.ajax({
         type: 'POST',
@@ -67,6 +93,8 @@ function fetchStatus() {
             <span style="font-size:48px !important;" class="text-2xl text-black dark:text-white">${playing}</span>
              <i style="font-size:35px !important;" class="material-icons">skip_next</i>
             <i style="font-size:35px !important;" class="material-icons">loop</i>
+            <i  type="button" data-modal-toggle="lyricModal" onclick="openModal('lyricModal');" style="font-size:35px !important;" class="material-icons">lyrics</i>
+            
             </span> <br>
               <div class="flex justify-between mb-1">
               <span class="text-sm font-medium text-blue-700 dark:text-white">${timestamp}</span>
@@ -83,6 +111,18 @@ function fetchStatus() {
               
           
             `;
+            const request = $.ajax({
+                type: 'GET',
+                url: '/api/v1/internal/get_lyrics',
+                data:{
+                    "artist": artists,
+                    "song": name
+                }
+            });
+            request.done(data => {
+                document.getElementById("lyricshere").innerHTML = data;
+                //ocument.getElementById("songname").innerText = name;
+            })
 
 
         }
