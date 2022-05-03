@@ -60,11 +60,11 @@ function fetchStatus() {
             <i style="font-size:35px !important;" class="material-icons">loop</i>
             </span> <br>
               <div class="flex justify-between mb-1">
-              <span class="text-base font-medium text-blue-700 dark:text-white">${timestamp}</span>
+              <span class="text-sm font-medium text-blue-700 dark:text-white">${timestamp}</span>
               <span class="text-sm font-medium text-blue-700 dark:text-white">${total}</span>
             </div>
-            <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-              <div class="bg-green-400 h-2.5 rounded-full" style="width: ${Math.round(ratio)}%;"></div>
+            <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700" style="text-align:left;">
+              <div class="bg-green-400 h-2.5 rounded-full" style="text-align:left;width: ${Math.round(ratio)}%;"></div>
             </div>
             <p class="text-sm text-gray-600 dark:text-gray-300">⚠️ Please Note: Spotify requires users to have Premium to be controlled from Nebulus.</p>
             </center>
