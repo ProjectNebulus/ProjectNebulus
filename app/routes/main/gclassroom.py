@@ -8,7 +8,7 @@ from . import main_blueprint
 from .utils import logged_in
 from ...static.python.gclassroomcom import *
 
-# from googleapiclient.discovery import build
+from googleapiclient.discovery import build
 
 # -*- coding: utf-8 -*-
 
@@ -48,7 +48,7 @@ API_VERSION = "v1"
 
 @main_blueprint.route("/gclassroom")
 @logged_in
-def test_api_request():
+def gtest_api_request():
     if "credentials" not in flask.session:
         return flask.redirect("/gclassroom/authorize")
     try:
@@ -126,6 +126,7 @@ def oauth2callback():
     )
     # flow.redirect_uri = flask.url_for('gclassroom/oauth2callback', _external=True)
     flow.redirect_uri = flask.url_for("main_blueprint.oauth2callback", _external=True)
+    print( flow.redirect_uri)
     # Use the authorization server's response to fetch the OAuth 2.0 tokens.
     authorization_response = flask.request.url
     flow.fetch_token(authorization_response=authorization_response)
@@ -136,7 +137,8 @@ def oauth2callback():
     credentials = flow.credentials
     flask.session["credentials"] = credentials_to_dict(credentials)
 
-    return flask.redirect(flask.url_for("gclassroom"))
+    #return flask.redirect(flask.url_for("main_blueprint.g_classroom_auth"))
+    return flask.redirect(flask.url_for("main_blueprint.gtest_api_request"))
 
 
 @main_blueprint.route("/gclassroom/revoke")

@@ -1,3 +1,4 @@
+import httplib2
 import schoolopy
 from flask import render_template, session, request
 from google.auth.transport.requests import Request
@@ -6,6 +7,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 
 from . import main_blueprint
 from ...static.python.mongodb import getClassroom
+from googleapiclient.discovery import build
 
 
 @main_blueprint.route("/connections/schoology")
@@ -51,11 +53,18 @@ def g_classroom_auth():
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
-            flow = InstalledAppFlow.from_client_secrets_file("credentials.json", scope)
+            flow = InstalledAppFlow.from_client_secrets_file("app/static/python/credentials.json", scope)
             flow.redirect_uri = ""
             print(flow)
             creds = flow.authorization_url()
             creds = str(creds).replace("(", "").replace(")", "").replace("'", "")
             print(creds)
+    user_info_service = build(
+        serviceName='oauth2', version='v2',
+        http=creds.authorize(httplib2.Http()))
+    user_info = None
+    user_info = user_info_service.userinfo().get().execute()
+    print(user_info)
+    user_info = [user_info["name"], user_info["picture"]]
 
-    return render_template("connectClassroom.html", link=creds)
+    return render_template("connectClassroom.html", link=creds, data=user_info)

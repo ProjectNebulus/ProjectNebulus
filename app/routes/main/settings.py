@@ -5,7 +5,8 @@ from .spotify import *
 from ...static.python.mongodb import read
 
 
-# from googleapiclient.discovery import build
+from googleapiclient.discovery import build
+from . import main_blueprint
 
 
 def generate_redirect(url):
@@ -45,6 +46,7 @@ def settings():
         user_info = user_info_service.userinfo().get().execute()
         print(user_info)
         user_info = [user_info["name"], user_info["picture"]]
+        googleclassroom = user_info
 
     except:
         user_info = None
