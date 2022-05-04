@@ -26,20 +26,17 @@
             <br>
             <p class="text-2xl text-gray-900 dark:text-white">
                 With Nebulus, have your whole learning experience
-                <span class="gradient-text">organized</span>
+                <span class="gradient-text changable-gradient">organized</span>
                 and
-                <span class="gradient-text">simple</span>
+                <span class="gradient-text changable-gradient">simple</span>. All it takes is one
+                <span class="gradient-text changable-gradient">Nebulus Account</span>.
             </p>
-            <p class="text-2xl text-gray-900 dark:text-white">
-                All it takes is one
-                <span class="gradient-text">Nebulus Account</span>.
-            </p>
-            <br><br>
+            <br>
             {% if user %}
                 <a href="/dashboard">
                     <button type="button"
                             class="text-base text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                        Launch App
+                        Launch Nebulus
                     </button>
                 </a>
             {% else %}
@@ -160,7 +157,7 @@
     <script>
     window.onload = function (){
         if (localStorage.getItem("color-theme") === "dark"){
-            let daelements = document.getElementsByClassName("gradient-text");
+            let daelements = document.getElementsByClassName("changable-gradient");
             console.log(daelements);
             for (let element of daelements){
                 element.classList.remove("gradient-text");

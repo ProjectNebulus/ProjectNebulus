@@ -157,7 +157,7 @@
         for (const a of document.getElementsByClassName("nav-link-2"))
             a.className += " block py-2 pr-4 pl-3 text-white bg-black-700 rounded md:bg-transparent md:text-black md:p-0 dark:text-white";
         if (localStorage.getItem("color-theme") === "dark"){
-            let daelements = document.getElementsByClassName("gradient-text");
+            let daelements = document.getElementsByClassName("changable-gradient");
             console.log(daelements);
             for (let element of daelements){
                 element.classList.remove("gradient-text");
@@ -165,7 +165,7 @@
 
             }
         }else{
-            let daelements = document.getElementsByClassName("gradient-text-dark");
+            let daelements = document.getElementsByClassName("changable-gradient");
             console.log(daelements);
             for (let element of daelements){
                 element.classList.remove("gradient-text-dark");

@@ -17,6 +17,7 @@ if __name__ == "__main__":
         port = 80
     else: #macos (darwin) or windows (windows)
         port = 8080
-    serve(app, host="0.0.0.0", port=port)
     print(f"Started Running: http://localhost:{port}")
+    serve(app, host="0.0.0.0", port=port)
+
 

@@ -116,7 +116,7 @@ input[type='submit'] {
     margin-bottom: 10px;
     width: 500px;
     cursor: pointer;
-    background-image: linear-gradient(to bottom right, #239B56, #58D68D);
+    background-color: #6B7280;
 }
 
 .scroll {
