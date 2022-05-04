@@ -81,6 +81,11 @@ for (let i = 0; i < pageCounters.length; i++) {
     }
 
     pageCounters[i].style.marginLeft = "38%";
+    //position: absolute;
+    //     bottom: 0;
+    pageCounters[i].style.position = "absolute";
+    pageCounters[i].style.bottom ="0";
+
 }
 
 /*
