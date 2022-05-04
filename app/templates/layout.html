@@ -59,5 +59,37 @@
     const menu = document.getElementById("context-menu");
     const user = "{{ user }}";
 </script>
+<style>
+    body{
+        cursor: url('/static/images/nebulusCats/newRed.png'), /*auto*/ pointer;
+    }
+    /* width */
+    ::-webkit-scrollbar {
+        width: 3px;
+
+    }
+    ::-webkit-scrollbar:hover {
+        width: 3px;
+
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #121926;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius:10px;
+        width: 3px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+        width: 10px;
+    }
+</style>
 {% block main %}
 {% endblock %}
