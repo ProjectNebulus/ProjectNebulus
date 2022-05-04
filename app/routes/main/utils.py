@@ -25,7 +25,7 @@ def private_endpoint(func):
             print("computer ip")
 
         # the first parameter should be the flask server ip address, so change it to what the ip is for your server
-
+        print(user_ip)
         if str(user_ip) == "127.0.0.1":
             return func(*args, **kwargs)
         else:
