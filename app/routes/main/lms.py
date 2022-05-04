@@ -9,7 +9,7 @@ from . import main_blueprint, utils
 from .utils import logged_in
 
 
-# from googleapiclient.discovery import build
+from googleapiclient.discovery import build
 
 
 def credentials_to_dict(credentials):
@@ -112,11 +112,14 @@ def lms():
         "lms.html",
         user=session["username"],
         user_acc=user_acc,
-        user_courses=list(user_courses) + list(gcourses) + list(schoologycourses),
+        user_courses=list(user_courses),
         read=read,
         page="Nebulus - Learning",
         announcements=events[0],
         events=events[1],
         today=datetime.date.today(),
         strftime=utils.strftime,
+        gcourses = gcourses,
+        canvascourses = canvascourses,
+        schoologycourses = schoologycourses,
     )
