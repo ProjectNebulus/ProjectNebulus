@@ -1,5 +1,5 @@
 <!--Style Sheets!-->
-<html lang="en">
+<html lang="en" oncontextmenu="return false">
 <head>
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta name="google-site-verification" content="5RLtqNU5_UuQAcLqyee0ZoaLyNQ9-6VF0qfJsABVhm4"/>
@@ -58,8 +58,23 @@
 <script>
     const menu = document.getElementById("context-menu");
     const user = "{{ user }}";
+    document.onkeydown = function(e) {
+        //alert(e);
+        if(e.ctrlKey && e.altKey && e.keyCode === 'I'.charCodeAt(0)) {
+            return false;
+        }
+    }
 </script>
 <style>
+    ::-moz-selection { /* Code for Firefox */
+        color: white;
+        background: rgba(0,0,0,0.5);
+    }
+
+    ::selection {
+        color: white;
+        background: rgba(0,0,0,0.5);
+    }
     body{
         cursor: url('/static/images/nebulusCats/newRed.png'), /*auto*/ pointer;
     }
