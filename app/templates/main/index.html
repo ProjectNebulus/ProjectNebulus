@@ -8,6 +8,12 @@
             -webkit-text-fill-color: transparent;
             font-weight: bolder;
         }
+        .gradient-text-dark {
+            background: -webkit-linear-gradient(left, #ff91d8, #c081ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bolder;
+        }
     </style>
     <body>
     {% include "navbar.html" %}
@@ -151,5 +157,18 @@
         </div>
     </div>
     </body>
+    <script>
+    window.onload = function (){
+        if (localStorage.getItem("color-theme") === "dark"){
+            let daelements = document.getElementsByClassName("gradient-text");
+            console.log(daelements);
+            for (let element of daelements){
+                element.classList.remove("gradient-text");
+                element.classList.add("gradient-text-dark");
+
+            }
+        }
+    }
+    </script>
     {% include "footer.html" %}
 {% endblock %}
