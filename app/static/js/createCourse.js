@@ -2,6 +2,7 @@ let modal = document.getElementById('CourseModal');
 
 // set up templates
 let templateLists = modal.getElementsByClassName('scroll');
+//let smalltemplateLists = modal.getElementsByClassName('small-scroll');
 let screens = modal.getElementsByClassName('CoursePage');
 
 // set up button
@@ -223,6 +224,7 @@ for (const template of templates) {
 
     button.appendChild(description);
 
+    //smalltemplateLists[0].appendChild(button);
     templateLists[0].appendChild(button);
 }
 
