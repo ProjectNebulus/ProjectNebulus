@@ -120,7 +120,8 @@ function fetchStatus() {
                     "song": name
                 }
             });
-            request.done(data => function (){
+            request.done(data => {
+                //alert(data);
                 document.getElementById("lyricshere").innerHTML = data;
 
             })
@@ -143,4 +144,4 @@ function sendRQ(link) {
 
 fetchStatus();
 //setInterval(fetchStatus, 500);
-setInterval(fetchStatus, 100);
+setInterval(fetchStatus, 500);
