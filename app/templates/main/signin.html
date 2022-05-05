@@ -34,8 +34,8 @@
         setInterval(autoScroll, 50);
 
     </script>
-    <div id="scrolldis"
-         style="z-index: -1; filter:blur(1rem); height:100%;overflow-y:scroll;user-select: none;pointer-events: none;">
+    <div id="scrolldis" class="noselect"
+         style="z-index: -1; filter:blur(1rem); height:100%;overflow-y:scroll;pointer-events: none;">
         {% include "lms.html" %}
     </div>
     <div class="container mx-auto p-4 bg-white/[0.9] rounded-lg w-1/2 pb-1/2"
