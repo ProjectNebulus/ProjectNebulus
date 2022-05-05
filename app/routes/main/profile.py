@@ -1,10 +1,13 @@
 from flask import render_template, session
 
 from . import main_blueprint
+from .utils import logged_in
 from ...static.python.mongodb import read
 
 
+
 @main_blueprint.route("/profile")
+@logged_in
 def profile():
     return render_template(
         "user/profile.html",

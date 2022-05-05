@@ -1,6 +1,6 @@
 import datetime
 from functools import wraps
-
+from ...static.python.mongodb import read
 from flask import session, redirect, request, render_template
 
 
@@ -9,8 +9,14 @@ def logged_in(func):
     def wrapper(*args, **kwargs):
         if session.get("username"):
             return func(*args, **kwargs)
+
         else:
-            return redirect("/signin")
+            try:
+                read.find_user(username=session.get("username"))
+                return redirect("/signin")
+            except:
+                return redirect("/logout")
+
 
     return wrapper
 

@@ -28,6 +28,15 @@ def init_app():
     app.register_blueprint(main_blueprint)
     app.register_blueprint(api.api_blueprint)
     app.register_blueprint(static_blueprint)
+    @app.before_request
+    def before_rq():
+            #log out users who have deleted accounts
+            if "username" in session.keys():
+                try:
+                    read.find_user(username=session.get("username"))
+                except:
+                    return redirect("/logout")
+
     mail = Mail(app)
     #print("Paths:", *sorted(app.url_map.iter_rules(), key=str), sep="\n")
 
