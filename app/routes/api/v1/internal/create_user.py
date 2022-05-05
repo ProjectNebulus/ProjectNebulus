@@ -45,4 +45,5 @@ def create_user():
         session["email"] = validation[1].email
         session["pswLen"] = len(data.get("password"))
         session["id"] = validation[1].id
+        session["avatar"] = data["avatar"].avatar_url.replace("https://localhost:8080/", "")
     return validation[0]

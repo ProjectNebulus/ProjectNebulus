@@ -86,7 +86,7 @@ def settings():
         session=session,
         user=session.get("username"),
         pswHashes="*" * session.get("pswLen"),
-        email=session.get("email"),
+        email=session.get("email"), avatar=session.get("avatar"),
         schoology=the_schoology,
         classroom=the_google_classroom,
         googleclassroom=user_info,

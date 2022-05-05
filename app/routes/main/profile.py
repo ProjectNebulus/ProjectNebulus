@@ -10,7 +10,7 @@ def profile():
         "user/profile.html",
         page="Nebulus - Profile",
         user=session.get("username"),
-        email=session.get("email"),
+        email=session.get("email"), avatar=session.get("avatar"),
         read=read,
     )
 
@@ -20,7 +20,7 @@ def pubProfile(id):
     return render_template(
         "user/pubProfile.html",
         user=session.get("username"),
-        email=session.get("email"),
+        email=session.get("email"), avatar=session.get("avatar"),
         # page=f"{session.get('username')} - Nebulus",
         # db=db,
     )

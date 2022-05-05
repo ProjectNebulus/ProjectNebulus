@@ -31,7 +31,7 @@ def course_page(page, **kwargs):
                     teacher=course.teacher,
                     course_id=course_id,
                     user=session.get("username"),
-                    email=session.get("email"),
+                    email=session.get("email"), avatar=session.get("avatar"),
                     disableWidget=(page != "course"),
                     events=read.sort_course_events(session["id"], int(course_id))[1]
                 )
@@ -43,7 +43,7 @@ def course_page(page, **kwargs):
         "errors/404.html",
         page="404 Not Found",
         user=session.get("username"),
-        email=session.get("email"),
+        email=session.get("email"), avatar=session.get("avatar"),
     )
 
 

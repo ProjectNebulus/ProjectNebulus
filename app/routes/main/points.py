@@ -10,7 +10,7 @@ def points():
         "points.html",
         page="Point - Nebulus",
         user=session.get("username"),
-        email=session.get("email"),
+        email=session.get("email"), avatar=session.get("avatar"),
         read=read,
         points=read.find_user(username=session.get("username")).points,
     )

@@ -19,7 +19,7 @@ def dashboard():
         user_courses = user_courses[len(user_courses) - 8 :]
     return render_template(
         "dashboard.html",
-        user=session["username"],
+        user=session["username"], avatar= session["avatar"],
         email=session["email"],
         user_courses=user_courses,
         read=read,

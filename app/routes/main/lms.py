@@ -110,7 +110,7 @@ def lms():
             schoologycourses = []
     return render_template(
         "lms.html",
-        user=session["username"],
+        user=session["username"], avatar= session["avatar"],
         user_acc=user_acc,
         user_courses=list(user_courses),
         read=read,
