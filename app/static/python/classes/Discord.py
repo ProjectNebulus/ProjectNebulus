@@ -1,7 +1,7 @@
 from mongoengine import *
 
 
-class Discord(EmbeddedDocument):
+class Discord(DynamicEmbeddedDocument):
     """ "
     Stores a user's Discord credentials.
     """

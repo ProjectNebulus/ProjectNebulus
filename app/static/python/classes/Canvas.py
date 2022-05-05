@@ -1,7 +1,7 @@
 from mongoengine import *
 
 
-class Canvas(EmbeddedDocument):
+class Canvas(DynamicEmbeddedDocument):
     """
     Stores a user's Canvas credentials.
     """

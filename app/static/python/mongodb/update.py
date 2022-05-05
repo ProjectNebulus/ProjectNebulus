@@ -9,6 +9,7 @@ def schoologyLogin(_id: str, schoology: dict):
         raise KeyError("User not found")
     schoology = Schoology(**schoology)
     user.schoology.append(schoology)
+    user.save()
 
 
 def logout_from_schoology(_id: str):

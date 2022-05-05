@@ -1,7 +1,7 @@
 from mongoengine import *
 
 
-class Schoology(EmbeddedDocument):
+class Schoology(DynamicEmbeddedDocument):
     """
     A class representing a user's Schoology account
     """
