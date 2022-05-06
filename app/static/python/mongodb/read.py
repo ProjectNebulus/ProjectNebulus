@@ -50,7 +50,6 @@ def find_user(**kwargs) -> User | None:
     data = {k: v for k, v in kwargs.items() if v is not None}
     user = User.objects(**data).first()
     if not user:
-        print(user)
         raise KeyError("User not found")
     return user
 

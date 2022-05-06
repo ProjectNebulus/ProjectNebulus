@@ -7,16 +7,15 @@ from flask import session, redirect, request, render_template
 def logged_in(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
+        print(session)
         if session.get("username"):
-            return func(*args, **kwargs)
-
-        else:
             try:
                 read.find_user(username=session.get("username"))
-                return redirect("/signin")
-            except:
-                return redirect("/logout")
-
+                return func(*args, **kwargs)
+            except KeyError:
+                return redirect("logout")
+        else:
+            return redirect("/")
 
     return wrapper
 

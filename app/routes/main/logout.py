@@ -5,7 +5,7 @@ from .utils import logged_in
 
 
 @main_blueprint.route("/logout", methods=["GET"])
-@logged_in
 def logout():
     session.clear()
+    print("Logged out")
     return redirect("/")

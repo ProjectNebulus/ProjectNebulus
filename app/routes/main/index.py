@@ -6,7 +6,6 @@ from . import main_blueprint
 @main_blueprint.route("/", methods=["GET"])
 def index():
     # return "hi"
-    print(request.remote_addr)
     return render_template(
         "main/index.html",
         page="Nebulus - Learning, All In One",

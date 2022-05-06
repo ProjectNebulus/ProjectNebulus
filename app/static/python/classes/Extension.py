@@ -9,6 +9,6 @@ class Extension(Snowflake):
     - link: NEBULUS URL to the Extension
     """
 
-    meta = {"collection": "Courses"}
+    meta = {"collection": "Extensions"}
     name = StringField(required=True)
     link = URLField(required=True)
