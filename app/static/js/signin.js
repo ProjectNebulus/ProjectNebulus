@@ -285,8 +285,9 @@ function getRedirectParam(){
         //(k in qd) ? qd[k].push(v) : qd[k] = [v]
         (qd[k] = qd[k] || []).push(v) // null-coalescing / short-circuit
     })
-    if (qd.redirect) {
-        return qd.redirect[0];
+    console.log(qd);
+    if (qd['redirect']) {
+        return qd['redirect'][0];
     }
     return '/dashboard'
 }
@@ -296,7 +297,7 @@ function reqListener2() {
         let status = document.getElementById('fail');
         status.style.color = 'yellowgreen';
         status.innerHTML = 'Login Successful. Logging you in...';
-        window.location.href = '/dashboard';
+        window.location.href = getRedirectParam();
     }
     else {
         let status = document.getElementById('fail');
