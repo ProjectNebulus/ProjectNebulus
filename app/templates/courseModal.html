@@ -22,15 +22,16 @@
 
                 <span class='createSelectButton text-white focus:ring-4 shadow-lg font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2'
                       onclick="skipTemplates()">
-            <img src="/static/images/icons/new.svg" style="visibility:visible;width:20px;height:20px;float:left;" alt>
-            Create course
-            <img src="/static/images/icons/next.svg" style="visibility:visible;width:20px;height:20px;float:right;"
-                 alt="Next">
-          </span>
+                    <img src="/static/images/icons/new.svg"
+                         style="visibility:visible;width:20px;height:20px;float:left;" alt="Create course image">
+                    Create course
+                    <img src="/static/images/icons/next.svg"
+                         style="visibility:visible;width:20px;height:20px;float:right;" alt="Next">
+                  </span>
 
-                <h2 style="font-size:1.4vw">Or choose a subject</h2>
+                <h2 class="text-3xl">Or choose a subject</h2>
 
-                <div class='scroll small-scroll'></div>
+                <div class='scroll'></div>
             </div>
         </div>
         <!-- Modal footer -->
@@ -44,6 +45,8 @@
                 <span class="close"></span>
             </h3>
 
+            <p class="text-gray-400 dark:text-gray-600">Choose a template from the subject you chose.</p>
+
             <div class="scroll"></div>
             <div class="pageCount"></div>
         </div>
@@ -55,49 +58,42 @@
                 Step 3: Customize your Course
                 <span class="close"></span>
             </h3>
-            <div class="scroll">
-                <form id="create-course">
-                    <div class="mb-6">
-                        <label for="course-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Course
-                            Name</label>
-                        <input type="text" id="course-name" style="width: 100%"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                               placeholder="name@flowbite.com" required>
-                    </div>
-                    <br><br><br>
-                    <div class="mb-6">
-                        <label for="course-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Course
-                            Teacher</label>
-                        <input id="course-teacher"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                               placeholder="nicholaswang's class" required>
-                    </div>
-                    <br>
-                    <button type="submit" class="text-createSelectButtonwhite bg-gradient-to-r from-red-400 via-red-500
+            <form id="create-course">
+                <label for="course-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Course
+                    Name</label>
+                <input type="text" id="course-name" style="width: 100%"
+                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                       required>
+                <br>
+                <label for="course-teacher" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                    Course Teacher
+                </label>
+                <input id="course-teacher"
+                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                       required>
+                <br>
+                <button type="submit" class="text-createSelectButtonwhite bg-gradient-to-r from-red-400 via-red-500
                 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                        Create Your Course
-                    </button>
+                    Create Your Course
+                </button>
 
-                    <p class="text-green-900 text-3xl" id="create-course-status"></p>
-                </form>
+                <p class="text-green-900 text-3xl" id="create-course-status"></p>
+            </form>
 
-                <h1>Or import from another LMS</h1>
-                <button class="createSelectButton text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-                        id="import-schoology">
-                    Import from Schoology
-                </button>
-                <button class="createSelectButton text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-                        id="import-classroom">
-                    Import from Google Classroom
-                </button>
-                <button class="createSelectButton text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-                        id="import-canvas">
-                    Import from Canvas
-                </button>
-            </div>
-            <div class="pageCount"></div>
+            <h1>Or import from another LMS</h1>
+            <button class="createSelectButton text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                    id="import-schoology">
+                Import from Schoology
+            </button>
+            <button class="createSelectButton text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                    id="import-classroom">
+                Import from Google Classroom
+            </button>
+            <button class="createSelectButton text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                    id="import-canvas">
+                Import from Canvas
+            </button>
         </div>
-
     </div>
 
     <div class="CoursePage">
@@ -105,91 +101,80 @@
             Import from Schoology
             <span class="close"></span>
         </h3>
-        <div class="scroll">
-            <h4 class="dark:text-white">Unfortunately, Schoology API's endpoint to get User Courses is currently broken. You
-                will have to enter your course link.</h4>
-            <form id="schoology-create-course">
-                <div class="mb-6">
-                    <label for="course-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Course
-                        Schoology Course ID</label>
-                    <input type="text" id="schoology-course-id"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                           placeholder="https://app.schoology.com/course/5131176437/materials" required>
-                </div>
-                <br>
+        <h4 class="dark:text-white">Unfortunately, Schoology API's endpoint to get User Courses is currently broken. You
+            will have to enter your course link.</h4>
+        <form id="schoology-create-course">
+            <div class="mb-6">
+                <label for="course-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                    Schoology Course ID
+                </label>
+                <input type="text" id="schoology-course-id"
+                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                       placeholder="https://app.schoology.com/course/5131176437/materials" required>
+            </div>
+            <br>
 
-                <button type="submit"
-                        class="text-createSelectButtonwhite bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                    Next Step ->
-                </button>
+            <button type="submit"
+                    class="createSelectButton bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                Next Step ->
+            </button>
 
-                <p style="color:yellowgreen;font-size:1.5vw;font-weight:700;" id="create-course-status"></p>
-            </form>
-        </div>
-        <div class="pageCount"></div>
-
+            <p class="text-3xl text-green-500" id="create-course-status"></p>
+        </form>
     </div>
     <div class="CoursePage">
         <h3 class="flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white">
             Import from Google Classroom
             <span class="close"></span>
-        </h3><br>
-        <div class="scroll">
-            {% if gcourses|length == 0 %}
-                <p class="text-black dark:text-white text-xl">We coudn't find any courses! Is your Google Classroom account
-                    linked? <a href="/settings#connections"><button style="margin-left: 10px; display:grid; grid-auto-flow: column; align-content: center; justify-content: center;" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                        Connect Google Classroom <i style="display:grid; grid-auto-flow: column; align-content: center; justify-content: center;" class="material-icons">open_in_newt</i>
-                    </button></a></p>
-            {% else %}
-                <p class="text-black dark:text-white text-3xl">Select a Google Classroom Course</p>
+        </h3>
+        {% if gcourses|length == 0 %}
+            <p class="text-black dark:text-white text-3xl">
+                We coudn't find any courses!
+                Is your Google Classroom account linked?
+                <a href="/settings">Open Settings</a>.
+            </p>
+        {% else %}
+            <p class="text-black dark:text-white text-3xl">Select a Google Classroom Course</p>
 
-                {% for course in gcourses %}
-                    <button type="button" style="width:90%;"
-                            class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                        {{ course }}
-                        <svg style="display:inline-block;float:right;" class="w-6 h-6" fill="none" stroke="currentColor"
-                             viewBox="0 0 24 24"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                        </svg>
-                    </button>
-                    <br><br>
-                {% endfor %}
-            {% endif %}
-        </div>
-        <div class="pageCount"></div>
+            {% for course in gcourses %}
+                <button type="button"
+                        class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                    {{ course }}
+                    <svg class="inline-block w-6 h-6" fill="none" stroke="currentColor"
+                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </button>
+                <br><br>
+            {% endfor %}
+        {% endif %}
     </div>
     <div class="CoursePage">
         <h3 class="flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white">
             Import from Canvas
             <span class="close"></span>
-        </h3><br>
-        <div class="scroll">
-            {% if canvascourses|length == 0 %}
-                <h1 class="text-black dark:text-white text-xl">We coudn't find any courses! Is your Canvas account
-                    connected? <a href="/settings#connections"><button style="margin-left: 10px; display:grid; grid-auto-flow: column; align-content: center; justify-content: center;" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                        Connect Canvas <i style="display:grid; grid-auto-flow: column; align-content: center; justify-content: center;" class="material-icons">open_in_newt</i>
-                    </button></a></h1>
-            {% else %}
-                <h1 class="text-black dark:text-white text-3xl">Select a Canvas Course</h1>
+        </h3>
+        {% if canvascourses|length == 0 %}
+            <h1 class="text-black dark:text-white text-3xl">We coudn't find any courses! Is your Canvas account
+                connected? <a href="/settings">Open Settings</a>!</h1>
+        {% else %}
+            <h1 class="text-black dark:text-white text-3xl">Select a Canvas Course</h1>
 
-                {% for course in canvascourses %}
-                    <button type="button" style="width:90%;text-align:left;"
-                            class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                        {{ course }}
-                        <svg style="display:inline-block;float:right;" class="w-6 h-6" fill="none" stroke="currentColor"
-                             viewBox="0 0 24 24"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                        </svg>
-                    </button>
-                    <br><br>
-                {% endfor %}
-            {% endif %}
-        </div>
-        <div class="pageCount"></div>
+            {% for course in canvascourses %}
+                <button type="button"
+                        class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                    {{ course }}
+                    <svg style="display:inline-block;" class="w-6 h-6" fill="none" stroke="currentColor"
+                         viewBox="0 0 24 24"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </button>
+                <br><br>
+            {% endfor %}
+        {% endif %}
     </div>
 </div>
 

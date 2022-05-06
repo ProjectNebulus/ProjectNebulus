@@ -3,6 +3,8 @@ from __future__ import annotations
 import re
 from typing import List
 
+from flask import Response
+
 from ..classes import *
 from ..security import valid_password
 
@@ -46,11 +48,12 @@ def find_courses(_id: str):
     return course[0]
 
 
-def find_user(**kwargs) -> User | None:
+def find_user(**kwargs) -> User | Response | None:
     data = {k: v for k, v in kwargs.items() if v is not None}
     user = User.objects(**data).first()
     if not user:
         raise KeyError("User not found")
+
     return user
 
 
@@ -77,9 +80,7 @@ def getSchoology(**kwargs) -> List[Schoology] | None:
         return
 
 
-def getClassroom(
-    userID: str = None, username: str = None, email: str = None
-) -> GoogleClassroom:
+def getClassroom(userID: str = None, username: str = None, email: str = None) -> GoogleClassroom:
     return find_user(id=userID, username=username, email=email).gclassroom
 
 
@@ -88,7 +89,7 @@ def getSpotify(userID: str = None, username: str = None, email: str = None) -> S
 
 
 def getSpotifyCache(
-    userID: str = None, username: str = None, email: str = None
+        userID: str = None, username: str = None, email: str = None
 ) -> Spotify | None:
     try:
         return find_user(
@@ -154,6 +155,7 @@ def sortByDate(obj):
 def sortByDateTime(obj):
     return obj.date if obj._cls == "Event" else obj.due
 
+
 def sort_course_events(user_id: str, course_id: int) -> List[List]:
     courses = get_user_courses(user_id)
     course = None
@@ -196,6 +198,7 @@ def sort_course_events(user_id: str, course_id: int) -> List[List]:
 
     return [announcements, dates]
 
+
 def sort_user_events(user_id: str) -> List[List]:
     courses = get_user_courses(user_id)
     events = Event.objects(course__in=courses)
@@ -222,8 +225,8 @@ def sort_user_events(user_id: str) -> List[List]:
                 {
                     key: list(result)
                     for key, result in groupby(
-                        sorted_announcements, key=lambda obj: obj.date.date()
-                    )
+                    sorted_announcements, key=lambda obj: obj.date.date()
+                )
                 }.items()
             )
         )

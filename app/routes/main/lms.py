@@ -1,15 +1,12 @@
 import datetime
 
-import flask
 import google.oauth2.credentials
-from flask import render_template, session, request
+from flask import render_template, session
+from googleapiclient.discovery import build
 
-from ...static.python.mongodb import read
 from . import main_blueprint, utils
 from .utils import logged_in
-
-
-from googleapiclient.discovery import build
+from ...static.python.mongodb import read
 
 
 def credentials_to_dict(credentials):
@@ -36,7 +33,7 @@ def getGclassroomcourses():
     # Save credentials back to session in case access token was refreshed.
     # ACTION ITEM: In a production app, you likely want to save these
     #              credentials in a persistent database instead.
-    flask.session["credentials"] = credentials_to_dict(credentials)
+    session["credentials"] = credentials_to_dict(credentials)
     for i in range(0, len(courses)):
         courses[i] = courses[i]["descriptionHeading"]
 
@@ -46,7 +43,6 @@ def getGclassroomcourses():
 @main_blueprint.route("/lms", methods=["GET"])
 @logged_in
 def lms():
-    new_user = request.args.get("new_user", default="false", type=str)
     user_acc = read.find_user(id=session["id"])
     user_courses = read.get_user_courses(session["id"])
     events = read.sort_user_events(session["id"])
@@ -110,7 +106,7 @@ def lms():
             schoologycourses = []
     return render_template(
         "lms.html",
-        user=session["username"], avatar= session["avatar"],
+        user=session["username"], avatar=session.get("avatar", "v3.gif"),
         user_acc=user_acc,
         user_courses=list(user_courses),
         read=read,
@@ -119,7 +115,7 @@ def lms():
         events=events[1],
         today=datetime.date.today(),
         strftime=utils.strftime,
-        gcourses = gcourses,
-        canvascourses = canvascourses,
-        schoologycourses = schoologycourses,
+        gcourses=gcourses,
+        canvascourses=canvascourses,
+        schoologycourses=schoologycourses,
     )

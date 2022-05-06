@@ -907,10 +907,6 @@ html {
   font-family: SpotifyFont;
 }
 
-html.dark body {
-  background: #111926;
-}
-
 *, ::before, ::after {
   --tw-translate-x: 0;
   --tw-translate-y: 0;

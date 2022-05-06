@@ -119,12 +119,8 @@ input[type='submit'] {
     background-color: #6B7280;
 }
 
-.small-scroll {
-    height: 45% !important;
-    overflow: auto;
-}
 .scroll {
-    height: 70%;
+    height: 45%;
     overflow: auto;
 }
 

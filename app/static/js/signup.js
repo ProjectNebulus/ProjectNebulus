@@ -16,8 +16,7 @@ function createUser() {
             age: document.getElementById("bday").value,
             language: document.getElementById("languages").value,
             theme: document.getElementById("theme").value,
-            avatar:  document.getElementById("chosen").innerText
-
+            avatar: document.getElementById("chosen").innerText
         }),
 
         contentType: 'application/json; charset=utf-8',
@@ -325,15 +324,15 @@ window.addEventListener('load', function () {
             return false;
 
         }
-        if (value.length < 6){
+        if (value.length < 6) {
             status.innerHTML = 'Password must be at least 6 characters long';
-        password.classList.remove(...GREEN_BORDER);
-        password.classList.add(...RED_BORDER);
-        validationIcons[2].style.color = 'red';
-        validationIcons[2].innerHTML =
-            '<i class="material-icons">close</i>';
-        return false;
-    }
+            password.classList.remove(...GREEN_BORDER);
+            password.classList.add(...RED_BORDER);
+            validationIcons[2].style.color = 'red';
+            validationIcons[2].innerHTML =
+                '<i class="material-icons">close</i>';
+            return false;
+        }
         else if (!HAS_NUMBER.test(value))
             status.innerHTML = 'Password must include at least 1 number';
         else {
@@ -415,9 +414,9 @@ function signUp() {
             password: document.querySelector('#password').value,
             email: document.querySelector('#email').value,
             age: document.querySelector('#bday').value,
-            theme:document.querySelector('#themes').value,
-            language:document.querySelector('#languages').value,
-            avatar:document.querySelector('#chosen').value
+            theme: document.querySelector('#themes').value,
+            language: document.querySelector('#languages').value,
+            avatar: document.querySelector('#chosen').value
         })
     );
 }

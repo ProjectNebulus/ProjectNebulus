@@ -32,11 +32,10 @@ function invertSite() {
         }
     }
     else {
-        if (window.location.href.endsWith("/")){
+        if (window.location.href.endsWith("/")) {
             document.body.style.backgroundColor = "white";
             document.body.style.backgroundImage = "";
         }
-
 
 
         if (banner) banner.style.filter = "invert(1)";
@@ -60,21 +59,20 @@ function invertSite() {
             innerDoc.body.style.background = "white";
         }
     }
-    if (localStorage.getItem("color-theme") === "dark"){
-        let daelements = document.getElementsByClassName("changable-gradient");
-        console.log(daelements);
-        for (let element of daelements){
+    if (localStorage.getItem("color-theme") === "dark") {
+        let elements = document.getElementsByClassName("changable-gradient");
+        console.log(elements);
+        for (let element of elements) {
             element.classList.remove("gradient-text");
             element.classList.add("gradient-text-dark");
-
         }
-    }else{
-        let daelements = document.getElementsByClassName("changable-gradient");
-        console.log(daelements);
-        for (let element of daelements){
+    }
+    else {
+        let elements = document.getElementsByClassName("changable-gradient");
+        console.log(elements);
+        for (let element of elements) {
             element.classList.remove("gradient-text-dark");
             element.classList.add("gradient-text");
-
         }
     }
 }

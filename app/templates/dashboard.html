@@ -8,123 +8,130 @@
         <div style="text-align: center; height:10%;">
             <h1 class="text-black text-3xl dark:text-white">Good Afternoon, {{ user }}</h1>
         </div>
+
+        <h2 class="text-black dark:text-white text-2xl ml-6">Recent Activity</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 p-6">
-            <div class="pb-2">
-                <table class="block rounded-lg text-sm text-left text-gray-500 dark:text-gray-400 px w-full h-full white dark:bg-gray-800">
-                    <thead style="border-radius:10px 10px 0 0;" class="block w-full text-xs text-gray-700 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
+            <div class="pb-2 overflow-hidden" style="height: 20rem">
+                <table class="rounded-lg text-sm text-left text-gray-500 dark:text-gray-400 px w-full bg-gray-300 dark:bg-gray-800"
+                       style="height: 17rem">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                        <th scope="col" class="px-6 py-3">
-                            Event
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Date
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Time
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Course
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            <span class="sr-only">Edit</span>
-                        </th>
+                        <th scope="col" class="px-6 py-3">Event</th>
+                        <th scope="col" class="px-6 py-3">Date</th>
+                        <th scope="col" class="px-6 py-3">Time</th>
+                        <th scope="col" class="px-6 py-3">Course</th>
+                        <th scope="col" class="px-6 py-3"><span class="sr-only">Edit</span></th>
                     </tr>
                     </thead>
-                    <tbody style="border-radius:0 0 10px 10px;" style="height: 20rem;" class="overflow-auto block w-full bg-gray-200 dark:bg-gray-600">
-                    {% for event in events %}
-                        {% if event._cls == "Event" %}
-                            <tr style="vertical-align: top;"
-                                class="bg-white dark:bg-gray-800 border-b border-gray-200">
-                                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4 w-full">
+                    <tbody>
+                    {% if events|length == 0 %}
+                        <p class="mx-auto my-auto text-gray-300 dark:text-gray-700 absolute">No Events</p>
+                    {% else %}
+                        {% for event in events[:5] %}
+                            {% if event._cls == "Event" %}
+                                <tr style="vertical-align: top;" class="border-b border-gray-200">
+                                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
                                     <span class="material-icons-outlined mr-2"
                                           style="vertical-align: bottom">event</span>
-                                    {{ event.title }}
-                                </td>
-                                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
-                                    {{ strftime(event.date.date(), "%m/%d/%Y") }}
-                                </td>
-                                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
-                                    {{ strftime(event.date.time(), "%I:%M %p") }}
-                                </td>
-                                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
-                                    {{ event.course.name }}
-                                </td>
-                                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
-                                    <a href="/edit/{{ event.id }}" class="text-blue-500 hover:text-blue-700">Edit</a>
-                                </td>
-                            </tr>
-                        {% else %}
-                            <tr style="vertical-align: top;"
-                                class="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 w-full">
-                                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                                        {{ event.title }}
+                                    </td>
+                                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                                        {{ strftime(event.date.date(), "%m/%d/%Y") }}
+                                    </td>
+                                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                                        {{ strftime(event.date.time(), "%I:%M %p") }}
+                                    </td>
+                                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                                        {{ event.course.name }}
+                                    </td>
+                                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                                        <a href="/edit/{{ event.id }}"
+                                           class="text-blue-500 hover:text-blue-700">Edit</a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr style="vertical-align: top;"
+                                    class="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+                                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
                                     <span class="material-icons-outlined mr-2"
                                           style="vertical-align: bottom">description</span>
-                                    {{ event.title }}
-                                </td>
-                                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
-                                    {{ strftime(event.due.date(), "%B %-d, %Y") }}
-                                </td>
-                                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
-                                    {{ strftime(event.due.time(), "%I:%M %p") }}
-                                </td>
-                                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
-                                    {{ event.course.name }}
-                                </td>
-                                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
-                                    <a href="/edit/{{ event.id }}" class="text-blue-500 hover:text-blue-700">Edit</a>
-                                </td>
-                            </tr>
-                        {% endif %}
-                    {% endfor %}
+                                        {{ event.title }}
+                                    </td>
+                                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                                        {{ strftime(event.due.date(), "%m/%d/%Y") }}
+                                    </td>
+                                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                                        {{ strftime(event.due.time(), "%I:%M %p") }}
+                                    </td>
+                                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                                        {{ event.course.name }}
+                                    </td>
+                                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                                        <a href="/edit/{{ event.id }}"
+                                           class="text-blue-500 hover:text-blue-700">Edit</a>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
                     </tbody>
                 </table>
+
+                <div class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <button class="material-icons mx-2 my-2 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-500">
+                        navigate_before
+                    </button>
+                    <button class="material-icons mx-2 my-2 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-500"
+                            style="float: right">
+                        navigate_next
+                    </button>
+                </div>
             </div>
-            <div class="grid grid-cols-2 gap-4 pl-4" style="height:100%;">
-                <a href="/lms" class="text-blue-500">View All Announcements</a><br><br>
-                {% if announcements|length == 0 %}
-                    <p class="text-black dark:text-white">No Announcements!</p>
-                {% endif %}
-                {% for announcement in announcements %}
-                    <div id="alert-additional-content-5" class="p-4 mb-4 bg-gray-100 rounded-lg dark:bg-gray-700"
-                         role="alert">
-                        <div class="flex items-center">
-                            <svg class="mr-2 w-5 h-5 text-gray-700 dark:text-gray-300" fill="currentColor"
-                                 viewBox="0 0 20 20"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                                      clip-rule="evenodd"></path>
-                            </svg>
-                            <h3 class="text-lg font-medium text-gray-700 dark:text-gray-300">{{ announcement.title }}</h3>
-                        </div>
-                        <p class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">{{ announcement.course.name }}
-                            > {{ announcement.author }}</p>
-                        <div class="mt-2 mb-4 text-sm text-gray-700 dark:text-gray-300">
-                            {{ announcement.content }}
-                        </div>
-                        <br>
-                        <div class="flex">
-                            <button type="button"
-                                    class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-xs px-3 py-1.5 mr-2 text-center inline-flex items-center dark:bg-gray-600 dark:hover:bg-gray-500 dark:focus:ring-gray-600">
-                                <svg class="-ml-0.5 mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20"
+            <div class="overflow-hidden pb-2" style="margin-top: -3rem">
+                <h2 class="text-black dark:text-white text-2xl ml-4">Recent Announcements</h2>
+                <div class="grid grid-cols-2 gap-4 pl-4" style="height:100%;">
+                    {% for announcement in announcements %}
+                        <div id="alert-additional-content-5" class="p-4 mb-4 bg-gray-100 rounded-lg dark:bg-gray-700"
+                             role="alert">
+                            <div class="flex items-center">
+                                <svg class="mr-2 w-5 h-5 text-gray-700 dark:text-gray-300" fill="currentColor"
+                                     viewBox="0 0 20 20"
                                      xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
                                     <path fill-rule="evenodd"
-                                          d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                                          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
                                           clip-rule="evenodd"></path>
                                 </svg>
-                                View more
-                            </button>
-                            <button type="button"
-                                    class="text-gray-700 bg-transparent border border-gray-700 hover:bg-gray-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:border-gray-600 dark:hover:bg-gray-600 focus:ring-gray-600 dark:text-gray-300 dark:hover:text-white"
-                                    data-dismiss-target="#alert-additional-content-5" aria-label="Close">
-                                Dismiss
-                            </button>
+                                <h3 class="text-lg font-medium text-gray-700 dark:text-gray-300">{{ announcement.title }}</h3>
+                            </div>
+                            <p class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">{{ announcement.course.name }}
+                                > {{ announcement.author }}</p>
+                            <div class="mt-2 mb-4 text-sm text-gray-700 dark:text-gray-300">
+                                {{ announcement.content }}
+                            </div>
+                            <br>
+                            <div class="flex">
+                                <button type="button"
+                                        class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-xs px-3 py-1.5 mr-2 text-center inline-flex items-center dark:bg-gray-600 dark:hover:bg-gray-500 dark:focus:ring-gray-600">
+                                    <svg class="-ml-0.5 mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                                        <path fill-rule="evenodd"
+                                              d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                                              clip-rule="evenodd"></path>
+                                    </svg>
+                                    View more
+                                </button>
+                                <button type="button"
+                                        class="text-gray-700 bg-transparent border border-gray-700 hover:bg-gray-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:border-gray-600 dark:hover:bg-gray-600 focus:ring-gray-600 dark:text-gray-300 dark:hover:text-white"
+                                        data-dismiss-target="#alert-additional-content-5" aria-label="Close">
+                                    Dismiss
+                                </button>
+                            </div>
+                            <br>
+                            <p class="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">{{ strftime(announcement.date, "%-I:%M %p on %B %-d, %Y") }}</p>
                         </div>
-                        <br>
-                        <p class="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">{{ strftime(announcement.date, "%-I:%M %p on %B %-d, %Y") }}</p>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
         </div>
         <br>
@@ -132,10 +139,10 @@
         <div style="height: 45%; float:left; width:calc(100% - 3rem); margin-left: 2%; overflow: visible;" class="pb-2">
             <h2 class="text-black dark:text-white text-2xl ml-4">Recent Courses</h2>
             <br>
-            <div class="text-left grid" style="grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));">
+            <div class="text-left grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                 {% for course in user_courses %}
                     <a href="/course/{{ course.id }}" style="width:18rem; margin:1rem;"
-                       class="max-w-sm bg-gray-100 hover:bg-gray-200 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:hover:bg-gray-600 dark:border-gray-700">
+                       class="max-w-sm bg-gray-100 hover:bg-gray-600 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:hover:bg-gray-600 dark:border-gray-700">
                         <img class="rounded-t-lg"
                              src="https://bins.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg?"
                              alt="Course Image"/>
