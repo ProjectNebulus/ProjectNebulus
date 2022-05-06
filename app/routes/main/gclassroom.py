@@ -54,7 +54,9 @@ def gtest_api_request():
         )
 
         service = build("classroom", "v1", credentials=credentials)
-
+        user_info_service = build(
+            serviceName="oauth2", version="v2", credentials=credentials
+        )
         # Call the Classroom API
 
         results = service.courses().list(pageSize=10).execute()
@@ -62,15 +64,14 @@ def gtest_api_request():
         # Save credentials back to session in case access token was refreshed.
         # ACTION ITEM: In a production app, you likely want to save these
         #              credentials in a persistent database instead.
-        user_info_service = build(
-            serviceName="oauth2", version="v2", credentials=credentials
-        )
+
         user_info = None
         user_info = user_info_service.userinfo().get().execute()
         print(user_info)
         user_info = [user_info["name"], user_info["picture"]]
         flask.session["credentials"] = credentials_to_dict(credentials)
-    except:  # TokenExpired
+    except Exception as e:  # TokenExpired
+        print(e)
         return flask.redirect("/gclassroom/authorize")
     #try:
     # credentials = google.oauth2.credentials.Credentials(**flask.session["credentials"])
