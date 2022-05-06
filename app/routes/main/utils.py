@@ -15,7 +15,7 @@ def logged_in(func):
             except KeyError:
                 return redirect("logout")
         else:
-            return redirect("/")
+            return redirect("/signin?redirect=" + request.path)
 
     return wrapper
 

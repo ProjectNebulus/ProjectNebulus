@@ -1,4 +1,4 @@
-from flask import session, redirect
+from flask import session, redirect, request
 
 from . import main_blueprint
 from .utils import logged_in
@@ -8,4 +8,4 @@ from .utils import logged_in
 def logout():
     session.clear()
     print("Logged out")
-    return redirect("/")
+    return redirect('/')
