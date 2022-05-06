@@ -41,7 +41,7 @@ def getGclassroomcourses():
 
     # Call the Classroom API
 
-    results = service.courses().list(pageSize=10).execute()
+    results = service.courses().list(pageSize=1000).execute()
 
     courses = results.get("courses", [])
     return courses
@@ -52,19 +52,32 @@ def getAssignments(id):
 
     return str(service.courses().courseWork().list(courseId=id).execute())
 
+def getTopics(id):
+    credentials = google.oauth2.credentials.Credentials(**session["credentials"])
+
+    service = build("classroom", "v1", credentials=credentials)
+
+    return str(service.courses().topics().list(courseId=id).execute())
+def getAnnouncements(id):
+    pass
+def getStudents(id):
+    pass
+
 @internal.route("/createGcourse")
 def create_google_course():
     name = request.args.get("name")
     courses = getGclassroomcourses()
     course = None
     assignments = None
+    topics = None
     for i in courses:
         if i["descriptionHeading"] == name:
             course = i
             assignments = getAssignments(i["id"])
+            topics = getTopics(i["id"])
             break
     if course == None:
         return "404"
 
 
-    return str(course)+"\n\n"+str(assignments)
+    return str(course)+"<br><br>"+str(assignments)+"<br><br>"+str(topics)
