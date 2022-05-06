@@ -21,9 +21,8 @@ def signin():
     user_courses = read.get_user_courses("1522035789121323008")
     events = read.sort_user_events("1522035789121323008")
 
-    redirect_url = request.args.get("redirect", "/dashboard")
     if session.get("username"):
-        return redirect(redirect_url)
+        return redirect('/dashboard')
     return render_template("main/signin.html", page="Nebulus - Log In", disablebar=True, user="1522035789121323008",
                            user_acc=user_acc,
                            user_courses=list(user_courses),

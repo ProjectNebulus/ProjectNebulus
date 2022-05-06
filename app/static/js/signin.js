@@ -276,6 +276,20 @@ function loginUser() {
     );
 }
 
+function getRedirectParam(){
+    let qd = {};
+    if (location.search) location.search.substr(1).split("&").forEach(function(item) {
+        let s = item.split("="),
+            k = s[0],
+            v = s[1] && decodeURIComponent(s[1]); //  null-coalescing / short-circuit
+        //(k in qd) ? qd[k].push(v) : qd[k] = [v]
+        (qd[k] = qd[k] || []).push(v) // null-coalescing / short-circuit
+    })
+    if (qd.redirect) {
+        return qd.redirect[0];
+    }
+    return '/dashboard'
+}
 
 function reqListener2() {
     if (this.responseText === 'true') {
