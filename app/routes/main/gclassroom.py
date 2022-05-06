@@ -21,20 +21,16 @@ CLIENT_SECRETS_FILE = "app/static/python/credentials.json"
 
 # This OAuth 2.0 access scope allows for full read/write access to the
 # authenticated user's account and requires requests to use an SSL connection.
-SCOPES = [
-    "https://www.googleapis.com/auth/classroom.courses.readonly",
-    "https://www.googleapis.com/auth/classroom.rosters.readonly",
-    "https://www.googleapis.com/auth/classroom.coursework.me",
-    "https://www.googleapis.com/auth/classroom.coursework.me.readonly",
-    "https://www.googleapis.com/auth/classroom.coursework.students",
-    "https://www.googleapis.com/auth/classroom.coursework.students.readonly",
-    "https://www.googleapis.com/auth/classroom.announcements",
-    "https://www.googleapis.com/auth/classroom.announcements.readonly",
-    "https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly",
-    "https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly",
-    "https://www.googleapis.com/auth/classroom.push-notifications",
-    "https://www.googleapis.com/auth/userinfo.profile",
-]
+SCOPES = ["https://www.googleapis.com/auth/classroom.courses.readonly",
+          "https://www.googleapis.com/auth/classroom.courses.readonly",
+          "https://www.googleapis.com/auth/classroom.rosters.readonly",
+          "https://www.googleapis.com/auth/classroom.coursework.me.readonly",
+          "https://www.googleapis.com/auth/classroom.coursework.students.readonly",
+          "https://www.googleapis.com/auth/classroom.announcements.readonly",
+          "https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly",
+          "https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly"
+          ]
+
 API_SERVICE_NAME = "classroom"
 API_VERSION = "v1"
 
@@ -66,17 +62,30 @@ def gtest_api_request():
         # Save credentials back to session in case access token was refreshed.
         # ACTION ITEM: In a production app, you likely want to save these
         #              credentials in a persistent database instead.
+        user_info_service = build(
+            serviceName="oauth2", version="v2", credentials=credentials
+        )
+        user_info = None
+        user_info = user_info_service.userinfo().get().execute()
+        print(user_info)
+        user_info = [user_info["name"], user_info["picture"]]
         flask.session["credentials"] = credentials_to_dict(credentials)
     except:  # TokenExpired
         return flask.redirect("/gclassroom/authorize")
-    credentials = google.oauth2.credentials.Credentials(**flask.session["credentials"])
-    user_info_service = build(
-        serviceName="oauth2", version="v2", credentials=credentials
-    )
-    user_info = None
-    user_info = user_info_service.userinfo().get().execute()
-    print(user_info)
-    user_info = [user_info["name"], user_info["picture"]]
+    #try:
+    # credentials = google.oauth2.credentials.Credentials(**flask.session["credentials"])
+    # user_info_service = build(
+    #     serviceName="oauth2", version="v2", credentials=credentials
+    # )
+    # user_info = None
+    # user_info = user_info_service.userinfo().get().execute()
+    # print(user_info)
+    # user_info = [user_info["name"], user_info["picture"]]
+    # except Exception as e:
+    #     print(e)
+    #     session.pop("state")
+    #     session.pop("credentials")
+    #     return redirect("/gclassroom")
     return render_template("connectClassroom.html", data=user_info)
     # return flask.jsonify(courses)
 
@@ -84,6 +93,7 @@ def gtest_api_request():
 @main_blueprint.route("/gclassroom/authorize")
 @logged_in
 def authorize():
+    #try:
     # Create flow instance to manage the OAuth 2.0 Authorization Grant Flow steps.
     flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
         CLIENT_SECRETS_FILE, scopes=SCOPES
@@ -110,6 +120,10 @@ def authorize():
 
     # Store the state so the callback can verify the auth server response.
     session["state"] = state
+    # except:
+    #     session.pop("state")
+    #     session.pop("credentials")
+    #     return redirect("/gclassroom")
 
     return redirect(authorization_url)
 
