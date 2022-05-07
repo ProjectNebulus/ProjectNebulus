@@ -9,6 +9,8 @@ import google.oauth2.credentials
 from googleapiclient.discovery import build
 from .....static.python.classes import User
 import schoolopy
+from datetime import datetime
+
 @internal.route("/create-course", methods=["POST"])
 def create_course():
     data = request.get_json()
@@ -82,11 +84,10 @@ def create_google_course():
 
     return str(course)+"<br><br>"+str(assignments)+"<br><br>"+str(topics)
 
-@internal.route("/createSchoologycourse")
+@internal.route("/createSchoologycourse", methods=["POST"])
 def create_schoology_course():
-    link = request.args.get("link")
-    if ".schoology.com" not in link:
-        return "Invalid"
+    post_data = request.get_json()
+    link = post_data["link"]
     link.replace("https://", "")
     link.replace("http", "")
     index = link.index(".schoology.com")+len(".schoology.com")
@@ -98,8 +99,11 @@ def create_schoology_course():
     link=link[0:len("5131176032")]
     #schoology = User.objects(ussername=session["username"])
     #schoology = schoology[0]
+
     schoology=read.getSchoology(username=session["username"])
     print(schoology)
+    if len(schoology) == 0:
+        return "1"
     schoology = schoology[0]
     key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
     secret = "59ccaaeb93ba02570b1281e1b0a90e18"
@@ -116,11 +120,11 @@ def create_schoology_course():
     url = auth.request_authorization(
         callback_url=(request.url_root + "/closeSchoology")
     )
-    #return str(url)
+    # return str(url)
     auth.authorize()
     auth.authorize()
-    #auth.authorized = True
-    #return str(auth.authorized)
+    # auth.authorized = True
+    # return str(auth.authorized)
     sc = schoolopy.Schoology(auth)
     sc.limit = 100
     section = dict(sc.get_section(link))
@@ -128,47 +132,61 @@ def create_schoology_course():
     # print(section)
     course["id"] = section["id"]
     course["name"] = section["course_title"]
-    course["import"] = "Schoology"
-    course["image"] = section["profile_url"]
+    course["description"] = section["description"]
+    course["imported_from"] = "Schoology"
+    course["authorizedUsers"] = [session["id"]]
+    course['teacher'] = post_data["teacher"]
+    course_obj = create.create_course(course)
+
+    create.createAvatar({
+        "avatar_url": section["profile_url"],
+        "parent": "Course",
+        "parent_id": course_obj.id,
+    })
     scupdates = sc.get_section_updates(link)
-    updates = []
     for update in scupdates:
-        updates.append(
+        author = sc.get_user(update['uid'])
+        create.createAnnouncement(
             {
-                "body": update["body"],
+                "content": update["body"],
+                "course": course_obj.id,
                 "id": update["id"],
+                "author": update['display_name'],
+                "author_pic": author["profile_url"],
                 "likes": update["likes"],
-                "liked": update["user_like_action"],
-                "comments": update["num_comments"],
+                "comment_number": update["num_comments"],
+                "imported_from": "Schoology",
+                "date": datetime.fromtimestamp(update["last_updated"]),
+                "title": "",
             }
         )
-        course["updates"] = updates
-        scdocuments = sc.get_section_documents(link)
-        documents = []
-        for scdocument in scdocuments:
-            document = {}
-            document["id"] = scdocument["id"]
-            document["name"] = scdocument["title"]
-            document["attachment"] = scdocument["attachments"]
-            documents.append(document)
-        course["documents"] = documents
-        scgrades = sc.get_user_grades_by_section(sc.get_me()["id"], link)
-        print(scgrades)
-        scevents = sc.get_section_events(link)
-        print(scevents)
-        scassignments = sc.get_assignments(link)
-        assignments = []
-        for assignment in scassignments:
-            assignments.append(
-                {
-                    "id": assignment["id"],
-                    "name": assignment["title"],
-                    "info": assignment["description"],
-                    "url": assignment["web_url"],
-                    "completed": assignment["completed"],
-                    "due": assignment["due"],
-                }
-            )
+    """
+    scdocuments = sc.get_section_documents(link)
+    documents = []
+    for scdocument in scdocuments:
+        document = {}
+        document["id"] = scdocument["id"]
+        document["name"] = scdocument["title"]
+        # document["attachment"] = scdocument["attachments"] (Won't work until we have CDN!)
+        documents.append(document)
+    """
+    scgrades = sc.get_user_grades_by_section(sc.get_me()["id"], link)
+    print(scgrades)
+    scevents = sc.get_section_events(link)
+    print(scevents)
+    scassignments = sc.get_assignments(link)
+    assignments = []
+    for assignment in scassignments:
+        assignments.append(
+            {
+                "id": assignment["id"],
+                "name": assignment["title"],
+                "info": assignment["description"],
+                "url": assignment["web_url"],
+                "completed": assignment["completed"],
+                "due": assignment["due"],
+            }
+        )
         course["assignments"] = assignments
-        return str(course)
-    return str(section)
+
+    return "success"

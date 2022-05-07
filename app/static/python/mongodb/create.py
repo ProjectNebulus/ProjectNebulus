@@ -39,11 +39,15 @@ def generateSchoologyObject(_id: str) -> schoolopy.Schoology:
 
 
 def create_course(data: dict) -> Course:
-    user = read.find_user(username=data["username"])
-    del data["username"]
+    if data["authorizedUsers"]:
+        user = read.find_user(id=data["authorizedUsers"][0])
+    else:
+        user = read.find_user(username=data["username"])
+        del data["username"]
 
     course = Course(**data)
-    course.authorizedUsers.append(user)
+    if not data["authorizedUsers"]:
+        course.authorizedUsers.append(user)
     course.save(force_insert=True)
     return course
 

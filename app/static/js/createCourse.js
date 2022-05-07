@@ -299,41 +299,54 @@ function importSchoology() {
     screens[3].style.display = 'block';
 
     const status = document.getElementById('create-course-status');
-    const input = document.getElementById('schoology-id');
+    const input = document.getElementById('schoology-course-id');
+    const teacher = document.getElementById('schoology-course-teacher');
 
-    document.getElementById('schoology_import').onsubmit = function () {
-        // todo: maybe this needs regex instead of whatever this is
-        const index = input.value.indexOf('.schoology.com/course/');
+    // todo: maybe this needs regex instead of whatever this is
+    const index = input.value.indexOf('.schoology.com/course/');
 
-        if (index === -1) {
-            status.style.color = 'red';
-            status.innerHTML = 'Invalid Course Link!';
-            return;
-        }
+    if (index === -1) {
+        status.style.color = 'red';
+        status.innerHTML = 'Invalid Course Link!';
+        return;
+    }
 
-        let endIndex;
-        for (endIndex = index + 22; endIndex < input.value.length; endIndex++) {
-            if (isNaN(parseInt(input.value.charAt(endIndex)))) break;
-        }
+    let endIndex;
+    for (endIndex = index + 22; endIndex < input.value.length; endIndex++) {
+        if (isNaN(parseInt(input.value.charAt(endIndex)))) break;
+    }
 
-        if (endIndex - index < 1) {
-            status.style.color = 'red';
-            status.innerHTML = 'Invalid Course Link!';
-            return;
-        }
+    if (endIndex - index < 1) {
+        status.style.color = 'red';
+        status.innerHTML = 'Invalid Course Link!';
+        return;
+    }
 
-        const id = input.value.substring(index, endIndex);
+    const id = input.value.substring(index, endIndex);
 
-        status.innerHTML;
-        status.innerHTML = 'Creating course...';
+    status.innerHTML;
+    status.innerHTML = 'Creating course...';
 
-        const xhttp = new XMLHttpRequest();
-        xhttp.open('POST', '/createCourseSchoology', true);
-        xhttp.setRequestHeader('Content-type', 'application/json');
-        xhttp.send(
-            JSON.stringify({
-                schoology: id
-            })
-        );
-    };
+    const xhttp = new XMLHttpRequest();
+    xhttp.open('POST', '/api/v1/internal/createSchoologycourse', true);
+    xhttp.setRequestHeader('Content-type', 'application/json');
+    xhttp.addEventListener('load', schoologyCourseReq);
+    xhttp.send(
+        JSON.stringify({
+            link: input.value,
+            teacher: teacher.value,
+        })
+    );
+
+}
+function schoologyCourseReq() {
+    const status = document.getElementById('create-course-status');
+    if(this.responseText === '1'){
+        status.style.color = 'red';
+        status.innerHTML = 'You have not connected your schoology account! Please connect a schoology account to import courses from Schoology.';
+    }
+    else {
+        status.style.color = 'green';
+        status.innerHTML = 'Course created!';
+    }
 }
