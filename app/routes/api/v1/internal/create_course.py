@@ -131,7 +131,7 @@ def create_schoology_course():
     course = {}
     # print(section)
     course["id"] = section["id"]
-    course["name"] = section["course_title"]
+    course["name"] = f'{section["course_title"]} ({section["title"]})'
     course["description"] = section["description"]
     course["imported_from"] = "Schoology"
     course["authorizedUsers"] = [session["id"]]
