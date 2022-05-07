@@ -137,7 +137,7 @@ def create_schoology_course():
     course = {}
     # print(section)
     course["id"] = section["id"]
-    course["name"] = f'{section["course_title"]} ({section["title"]})'
+    course["name"] = f'{section["course_title"]} ({section["section_title"]})'
     course["description"] = section["description"]
     course["imported_from"] = "Schoology"
     course["authorizedUsers"] = [session["id"]]
@@ -157,13 +157,13 @@ def create_schoology_course():
             {
                 "content": update["body"],
                 "course": course_obj.id,
-                "id": update["id"],
-                "author": author['display_name'],
-                "author_pic": author["profile_url"],
+                "id": str(update["id"]),
+                "author": author['name_display'],
+                "author_pic": author["picture_url"],
                 "likes": update["likes"],
                 "comment_number": update["num_comments"],
                 "imported_from": "Schoology",
-                "date": datetime.fromtimestamp(update["last_updated"]),
+                "date": datetime.fromtimestamp(int(update["last_updated"])),
                 "title": "",
             }
         )
