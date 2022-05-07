@@ -147,7 +147,8 @@ def createAvatar(data: dict) -> Avatar:
     file_ending = data["file_ending"]
     del data["parent_id"], data["file_ending"]
     avatar = Avatar(**data)
-    avatar.avatar_url += "." + file_ending
+    if data['file_ending']:
+        avatar.avatar_url += "." + file_ending
     parent.avatar = avatar
     parent.save()
     return avatar
