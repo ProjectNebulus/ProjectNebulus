@@ -12,6 +12,10 @@ def connect_schoology():
 
     key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
     secret = "59ccaaeb93ba02570b1281e1b0a90e18"
+    if request.form.get("key"):
+        key = request.form.get("key")
+    if request.form.get("secret"):
+        secret = request.form.get("key")
     sc = schoolopy.Schoology(schoolopy.Auth(key, secret))
 
     sc.limit = 100
@@ -59,6 +63,8 @@ def connect_schoology():
         "schoologyName": session["Schoologyname"],
         "schoologyEmail": session["Schoologyemail"],
         "schoologyDomain": session["Schoologydomain"],
+        "apikey": key,
+        "apisecret": secret
     }
 
     update.schoologyLogin(session["id"], schoology)

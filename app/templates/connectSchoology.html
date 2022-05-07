@@ -10,7 +10,14 @@
             <span style="float:left;"></span>.schoology.com</span>
         </p>
         <p class="text-black dark:text-white">What this? It's the link where you login to Schoology. Every school has a
-            different link.</p>
+            different link.</p><br><br>
+        <input style="float:left;" value="API KEY" type="text" id="key"
+               class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+               required><br><br><br>
+        <input style="float:left;" value="API Secret" type="text" id="secret"
+               class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+               required><br><br><br>
+
 
     </form>
     <button id="launchBTN" onclick="startSchoology()" type="button"
@@ -49,7 +56,9 @@
                     type: "POST",
                     url: "/api/v1/internal/signin-with-schoology",
                     data: {
-                        "link": "https://" + document.getElementById("domain").value + ".schoology.com/"
+                        "link": "https://" + document.getElementById("domain").value + ".schoology.com/",
+                        "key":document.getElementById("key").value,
+                        "secret":document.getElementById("secret").value
                     }
                 });
                 request.done(function (data) {
@@ -115,7 +124,9 @@
                 type: "POST",
                 url: "/api/v1/internal/connect-to-schoology",
                 data: {
-                    "link": "https://" + document.getElementById("domain").value + ".schoology.com/"
+                    "link": "https://" + document.getElementById("domain").value + ".schoology.com/",
+                    "key":document.getElementById("key").value,
+                    "secret":document.getElementById("secret").value
                 }
 
             })
