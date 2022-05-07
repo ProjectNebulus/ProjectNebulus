@@ -32,6 +32,14 @@ def connect_schoology():
     auth.authorize()
     if not auth.authorized:
         return "error!!!"
+    request_token = auth.request_token
+    request_token_secret = auth.request_token_secret
+    access_token_secret = auth.access_token_secret
+    access_token = auth.access_token
+    session["request_token"] = request_token
+    session["request_token_secret"] = request_token_secret
+    session["access_token_secret"] = access_token_secret
+    session["access_token"] = access_token
     sc = schoolopy.Schoology(auth)
     sc.limit = 100
     session["Schoologyname"] = sc.get_me().name_display

@@ -9,11 +9,6 @@ import google.oauth2.credentials
 from googleapiclient.discovery import build
 from .....static.python.classes import User
 import schoolopy
-
-
-@internal.route("/create-course", methods=["POST"])
-
-
 @internal.route("/create-course", methods=["POST"])
 def create_course():
     data = request.get_json()
@@ -118,6 +113,10 @@ def create_schoology_course():
         access_token=schoology.Schoology_access_token,
         access_token_secret=schoology.Schoology_access_secret,
     )
+    url = auth.request_authorization(
+        callback_url=(request.url_root + "/closeSchoology")
+    )
+    #return str(url)
     auth.authorize()
     auth.authorize()
     #auth.authorized = True
