@@ -144,11 +144,15 @@ def createAvatar(data: dict) -> Avatar:
         parent = Course.objects(id=data["parent_id"]).first()
     else:
         parent = Textbook.objects(id=data["parent_id"]).first()
-    file_ending = data["file_ending"]
-    del data["parent_id"], data["file_ending"]
+    file_ending = ''
+    if data.get("file_ending"):
+        file_ending = data["file_ending"]
+        del data["file_ending"]
+
+    del data["parent_id"]
     avatar = Avatar(**data)
-    if data['file_ending']:
-        avatar.avatar_url += "." + file_ending
+    avatar.avatar_url += "." + file_ending
+
     parent.avatar = avatar
     parent.save()
     return avatar
