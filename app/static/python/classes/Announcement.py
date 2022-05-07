@@ -17,6 +17,7 @@ class Announcement(Snowflake):
     dislikes = IntField(default=0)
     comment_number = IntField(default=0)
     imported_from = StringField(default="Nebulus")
+    schoology_id = StringField(default=None, null=True)
     """
     [
         ["User": "Message"],

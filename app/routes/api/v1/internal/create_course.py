@@ -107,8 +107,8 @@ def create_schoology_course():
     if len(schoology) == 0:
         return "1"
     schoology = schoology[0]
-    key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
-    secret = "59ccaaeb93ba02570b1281e1b0a90e18"
+    key = "dd5ade7edf776156229f94cca6418518061f5e84a"
+    secret = "cb07a31ea77a47409130683b9eb7737b"
     auth = schoolopy.Auth(
         key,
         secret,
@@ -130,10 +130,11 @@ def create_schoology_course():
     sc = schoolopy.Schoology(auth)
     sc.limit = 100
     section = dict(sc.get_section(link))
+    print(section)
     course = {}
     # print(section)
-    course["id"] = section["id"]
-    course["name"] = f'{section["course_title"]} ({section["title"]})'
+    course["schoology_id"] = link
+    course["name"] = f'{section["course_title"]} ({section["section_title"]})'
     course["description"] = section["description"]
     course["imported_from"] = "Schoology"
     course["authorizedUsers"] = [session["id"]]
@@ -153,13 +154,13 @@ def create_schoology_course():
             {
                 "content": update["body"],
                 "course": course_obj.id,
-                "id": update["id"],
-                "author": author['display_name'],
-                "author_pic": author["profile_url"],
+                "schoology_id": str(update["id"]),
+                "author": author['name_display'],
+                "author_pic": author["picture_url"],
                 "likes": update["likes"],
                 "comment_number": update["num_comments"],
                 "imported_from": "Schoology",
-                "date": datetime.fromtimestamp(update["last_updated"]),
+                "date": datetime.fromtimestamp(int(update["last_updated"])),
                 "title": "",
             }
         )
