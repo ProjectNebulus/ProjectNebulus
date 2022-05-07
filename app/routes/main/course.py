@@ -4,7 +4,7 @@ from flask import render_template, session, request
 from flask_cors import cross_origin
 from jinja2 import TemplateNotFound
 
-from . import main_blueprint
+from . import main_blueprint, utils
 from .utils import logged_in, private_endpoint
 from ...static.python.mongodb import read, create
 
@@ -33,7 +33,8 @@ def course_page(page, **kwargs):
                     user=session.get("username"),
                     email=session.get("email"), avatar=session.get("avatar"),
                     disableWidget=(page != "course"),
-                    events=read.sort_course_events(session["id"], int(course_id))[1]
+                    events=read.sort_course_events(session["id"], int(course_id))[1],
+                    strftime=utils.strftime,
                 )
 
             except TemplateNotFound:

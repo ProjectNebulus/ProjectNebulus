@@ -14,7 +14,7 @@
                 <img class="mb-3 w-12 h-12 rounded-full shadow-lg" alt="{{ a.author }}'s Profile Pic"
                      src="{{ a.author_pic }}">
                 <h3 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ a.author }}</h3>
-                <span class="text-sm text-gray-500 dark:text-gray-400">{{ a.course.name }}<br>{{ a.date.time().strftime("%a %b %-d, %-I:%M %p") }}</span>
+                <span class="text-sm text-gray-500 dark:text-gray-400">{{ a.course.name }}<br>{{ strftime(a.date.time(), "%-I:%-M %p") }}</span>
             </div>
 
             <p class="font-normal text-gray-700 dark:text-gray-400">{{ a.content }}</p>
@@ -30,9 +30,9 @@
                       clip-rule="evenodd"></path>
             </svg>
             <br><br>
-            <span style="float:left;color:grey;">7 Likes, 1 Dislike, 6 Comments</span><br><br>
+            <span style="float:left;color:grey;">{{ a.likes }} Likes, {{ a.dislikes }} Dislike, {{ a.comment_number }} Comments</span><br><br>
             <br>
-            <span class="text-blue-600 dark:text-blue-300">Show Comments</span>
+{#            <span class="text-blue-600 dark:text-blue-300">Show Comments</span>#}
         </a>
 
     {% endfor %}

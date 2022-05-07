@@ -11,13 +11,13 @@ def dashboard():
     user_courses = read.get_user_courses(session.get("id"))
     sorted = read.unsorted_user_events(session["id"])
     if len(sorted[0]) > 4:
-        sorted[0] = sorted[0][-4:]
+        sorted[0] = sorted[0][len(sorted[0])-4:]
 
     if len(sorted[1]) > 4:
-        sorted[1] = sorted[1][-4:]
+        sorted[1] = sorted[1][len(sorted[1])-4:]
 
     if len(user_courses) > 8:
-        user_courses = user_courses[-8:]
+        user_courses = user_courses[len(sorted[2])-8:]
 
     return render_template(
         "dashboard.html",
