@@ -3,10 +3,15 @@ import flask
 
 from . import internal
 from ....main.utils import private_endpoint
-from .....static.python.mongodb import create
+from .....static.python.mongodb import create, read
 import google.oauth2.credentials
-from googleapiclient.discovery import build
 
+from googleapiclient.discovery import build
+from .....static.python.classes import User
+import schoolopy
+
+
+@internal.route("/create-course", methods=["POST"])
 
 
 @internal.route("/create-course", methods=["POST"])
@@ -81,3 +86,43 @@ def create_google_course():
 
 
     return str(course)+"<br><br>"+str(assignments)+"<br><br>"+str(topics)
+
+@internal.route("/createSchoologycourse")
+def create_schoology_course():
+    link = request.args.get("link")
+    if ".schoology.com" not in link:
+        return "Invalid"
+    link.replace("https://", "")
+    link.replace("http", "")
+    index = link.index(".schoology.com")+len(".schoology.com")
+    link = link[index:len(link)]
+    if "/course/" not in link:
+        return "Invalid"
+    index = len("/course/")
+    link = link[index:len(link)]
+    link=link[0:len("5131176032")]
+    #schoology = User.objects(ussername=session["username"])
+    #schoology = schoology[0]
+    schoology=read.getSchoology(username=session["username"])
+    print(schoology)
+    schoology = schoology[0]
+    key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
+    secret = "59ccaaeb93ba02570b1281e1b0a90e18"
+    auth = schoolopy.Auth(
+        key,
+        secret,
+        domain=schoology.schoologyDomain,
+        three_legged=True,
+        request_token=schoology.Schoology_request_token,
+        request_token_secret=schoology.Schoology_request_secret,
+        access_token=schoology.Schoology_access_token,
+        access_token_secret=schoology.Schoology_access_secret,
+    )
+    auth.authorize()
+    auth.authorize()
+    #auth.authorized = True
+    #return str(auth.authorized)
+    sc = schoolopy.Schoology(auth)
+    sc.limit = 100
+    section = sc.get_section(link)
+    return str(section)
