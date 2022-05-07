@@ -3,7 +3,7 @@ import time
 from ..snowflake_generator import make_snowflake
 
 
-class Avatar(DynamicEmbeddedDocument):
+class Avatar(EmbeddedDocument):
     """
     Class to represent an Avatar.
     Is not a subclass of snowflake because it is embedded in a User, and does not have a snowflake id.

@@ -1,7 +1,7 @@
 from mongoengine import *
 
 
-class GoogleClassroom(DynamicEmbeddedDocument):
+class GoogleClassroom(EmbeddedDocument):
     """
     A class representing a user's Google Classroom account
     """

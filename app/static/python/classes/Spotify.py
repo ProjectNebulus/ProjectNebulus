@@ -1,7 +1,7 @@
 from mongoengine import *
 
 
-class Spotify(DynamicEmbeddedDocument):
+class Spotify(EmbeddedDocument):
     """
     A class representing a user's Spotify account
     """

@@ -1,5 +1,4 @@
 from ..classes.Schoology import Schoology
-from ..classes.Spotify import Spotify
 from .read import find_user
 
 
@@ -19,3 +18,7 @@ def logout_from_schoology(_id: str):
     user.schoology = None
     user.save()
     return "true"
+
+
+def resolve_updated_object(obj, attr, value):
+    obj.objects.update(attr=value)
