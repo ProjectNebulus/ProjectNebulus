@@ -3,7 +3,7 @@ from flask import session, request
 
 from . import internal
 from ....main.utils import private_endpoint
-from .....static.python.mongodb import update
+from .....static.python.mongodb import update, read
 
 
 @internal.route("/connect-to-schoology", methods=["POST"])
@@ -36,7 +36,12 @@ def connect_schoology():
     sc.limit = 100
     session["Schoologyname"] = sc.get_me().name_display
     session["Schoologyemail"] = sc.get_me().primary_email
-    session["Schoologydomain"] = request.form.get("link")  # auth.domain
+    session["Schoologydomain"] = request.form.get("link")
+    session["Schoologyid"] = sc.get_me().id
+    if read.check_duplicate_schoology(session["id"], session["Schoologyemail"]) == "false":
+        return "2"
+
+    # auth.domain
     # session["theschoology"] = sc
     schoology = {
         "Schoology_request_token": request_token,

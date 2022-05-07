@@ -38,6 +38,7 @@
         </button>
     </div>
     <span style="color:red;display:none" id="error">Something went wrong! Please try again and make sure to click "Accept" in the Schoology popup.</span>
+    <span style="color:red;display:none" id="error2">Login Failed. Reason: This Schoology account is already connected.</span>
     <script>
         $('#confirmBTN').on('click', function () {
             var $this = $(this);
@@ -124,6 +125,11 @@
 
                     document.getElementById("launchBTN").style.display = "block";
                     document.getElementById("error").style.display = "block";
+
+                } else if (data === "2") {
+                    document.getElementById("launchBTN").style.display = "block";
+                    document.getElementById("error2").style.display = "block";
+
 
                 } else {
                     let email = data.split("•")[1];

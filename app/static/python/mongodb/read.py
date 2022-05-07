@@ -262,3 +262,8 @@ def check_signup_email(email) -> str:
     if User.objects(email=email):
         return "false"
     return "true"
+
+def check_duplicate_schoology(user_id, schoologyemail) -> str:
+    if User.objects(schoology__schoologyEmail=schoologyemail):
+        return "false"
+    return "true"
