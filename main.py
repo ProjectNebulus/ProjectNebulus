@@ -14,7 +14,7 @@ app.secret_key = os.getenv("MONGOPASS")
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 
 """
-IMPORTANT!
+IMPORTANT!=
 IF YOU HAVE CHANGED A FIELD IN ONE OF THE MONGODB OBJECTS, YOU MUST UPDATE THE EXISTING DOCUMENTS!
 Do that by calling this function:
 
