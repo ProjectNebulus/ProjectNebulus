@@ -84,9 +84,11 @@ def create_google_course():
 
     return str(course)+"<br><br>"+str(assignments)+"<br><br>"+str(topics)
 
-@internal.route("/createSchoologycourse", methods=["POST"])
+@internal.route("/createSchoologycourse", methods=["GET", "POST"])
 def create_schoology_course():
     post_data = request.get_json()
+    if request.method == "GET":
+        post_data = request.args
     link = post_data["link"]
     link.replace("https://", "")
     link.replace("http", "")
@@ -136,6 +138,7 @@ def create_schoology_course():
     course["imported_from"] = "Schoology"
     course["authorizedUsers"] = [session["id"]]
     course['teacher'] = post_data["teacher"]
+
     course_obj = create.create_course(course)
 
     create.createAvatar({
@@ -151,7 +154,7 @@ def create_schoology_course():
                 "content": update["body"],
                 "course": course_obj.id,
                 "id": update["id"],
-                "author": update['display_name'],
+                "author": author['display_name'],
                 "author_pic": author["profile_url"],
                 "likes": update["likes"],
                 "comment_number": update["num_comments"],
