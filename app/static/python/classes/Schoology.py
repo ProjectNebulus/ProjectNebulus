@@ -12,3 +12,4 @@ class Schoology(DynamicEmbeddedDocument):
     Schoology_access_secret = StringField()
     schoologyName = StringField(required=True)
     schoologyEmail = EmailField(required=True)
+    schoologyDomain = StringField(required=True)

@@ -1,9 +1,12 @@
+"""
 from flask import session, request
 import schoolopy
 from . import internal
 from .....static.python.mongodb import read
+"""
 
-
+# Schoology Oauth will only work if with a schoology application, which we do NOT have right now.
+"""
 @internal.route("/signin-with-schoology", methods=["POST"])
 def signin_with_schoology():
     session["token"] = None
@@ -11,42 +14,31 @@ def signin_with_schoology():
     key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
     secret = "59ccaaeb93ba02570b1281e1b0a90e18"
     sc = schoolopy.Schoology(schoolopy.Auth(key, secret))
-
+    user_schoology = read.getSchoology()
+    if not user_schoology:
+        return "2"
     sc.limit = 100
-    request_token = session["request_token"]
-    request_token_secret = session["request_token_secret"]
-    access_token_secret = session["access_token_secret"]
-    access_token = session["access_token"]
     auth = schoolopy.Auth(
         key,
         secret,
-        domain=request.form.get("link"),
+        domain=user_schoology[0].schoologyDomain,
         three_legged=True,
-        request_token=request_token,
-        request_token_secret=request_token_secret,
-        access_token=access_token,
-        access_token_secret=access_token_secret,
+        request_token=user_schoology[0].Schoology_request_token,
+        request_token_secret=user_schoology[0].Schoology_request_secret,
+        access_token=user_schoology[0].Schoology_access_token,
+        access_token_secret=user_schoology[0].Schoology_access_secret,
     )
     auth.authorize()
     if not auth.authorized:
         return "1"
     sc = schoolopy.Schoology(auth)
     sc.limit = 100
-    session["Schoologyname"] = sc.get_me().name_display
-    session["Schoologyemail"] = sc.get_me().primary_email
-    try:
-        user = read.find_user(schoology__schoologyEmail=session["Schoologyemail"])
-    except KeyError:
-        return "2"
+    user = read.find_user(schoology=user_schoology)
 
     session["id"] = user.pk
     session["username"] = user.username
     session["email"] = user.email
-    session["Schoologydomain"] = request.form.get("link")  # auth.domain
-    # session["Schoologykey"] = key
-    # session["Schoologyrequesttoken"] = auth.request_token
-    # session["Schoologyaccesstoken"] = auth.access_token
-    # session["Schoologyrequesttokensecret"] = auth.request_token_secret
-    # session["Schoologyaccesstokensecret"] = auth.access_token_secret
+    session["logged_in"] = True
 
-    return str(sc.get_me().name_display + "•" + sc.get_me().primary_email)
+    return "success"
+"""

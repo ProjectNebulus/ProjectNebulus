@@ -45,6 +45,7 @@ def connect_schoology():
         "Schoology_access_secret": access_token_secret,
         "schoologyName": session["Schoologyname"],
         "schoologyEmail": session["Schoologyemail"],
+        "schoologyDomain": session["Schoologydomain"],
     }
 
     update.schoologyLogin(session["id"], schoology)
