@@ -107,8 +107,8 @@ def create_schoology_course():
     if len(schoology) == 0:
         return "1"
     schoology = schoology[0]
-    key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
-    secret = "59ccaaeb93ba02570b1281e1b0a90e18"
+    key = schoology.apikey
+    secret = schoology.apisecret
     if schoology.apikey:
         key = schoology.apikey
     if schoology.apisecret:
