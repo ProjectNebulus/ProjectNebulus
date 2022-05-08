@@ -10,6 +10,7 @@ from googleapiclient.discovery import build
 from .....static.python.classes import User
 import schoolopy
 from datetime import datetime
+from .....static.python.colors import getcolor
 
 @internal.route("/create-course", methods=["POST"])
 def create_course():
@@ -138,8 +139,12 @@ def create_schoology_course():
         "parent_id": course_obj.id,
     })
     scupdates = sc.get_section_updates(link)
+
     for update in scupdates:
         author = sc.get_user(update['uid'])
+        color = getcolor(author["picture_url"])
+        school = sc.get_school(author["school_id"])["title"]
+
         create.createAnnouncement(
             {
                 "content": update["body"],
@@ -152,6 +157,9 @@ def create_schoology_course():
                 "imported_from": "Schoology",
                 "date": datetime.fromtimestamp(int(update["last_updated"])),
                 "title": "",
+                "author_color": color,
+                "author_email": author["primary_email"],
+                "author_school": school,
             }
         )
 

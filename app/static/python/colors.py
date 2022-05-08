@@ -13,3 +13,4 @@ def getcolor(url):
     color_thief = ColorThief('testing.png')
     dominant_color = color_thief.get_color(quality=1)
     os.remove("testing.png")
+    return str(dominant_color)
