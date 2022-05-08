@@ -167,7 +167,7 @@ def create_schoology_course():
                 "title": "",
             }
         )
-    """
+
     scdocuments = sc.get_section_documents(link)
     documents = []
     for scdocument in scdocuments:
@@ -176,7 +176,7 @@ def create_schoology_course():
         document["name"] = scdocument["title"]
         # document["attachment"] = scdocument["attachments"] (Won't work until we have CDN!)
         documents.append(document)
-    """
+
     scgrades = sc.get_user_grades_by_section(sc.get_me()["id"], link)
     print(scgrades)
     scevents = sc.get_section_events(link)
