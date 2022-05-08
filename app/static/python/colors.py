@@ -17,27 +17,19 @@ def getcolor(url):
     extension = ending[dot+1:len(ending)]
     file = f'testing.{extension}'
     urllib.request.urlretrieve(url, file)
-    if extension.lower() != "png" and extension.lower != "svg":
+    if extension.lower() != "png" and extension.lower() != "svg":
         from PIL import Image
         im1 = Image.open(file)
         im1.save(f"testing.png")
         os.remove(file)
         file = "testing.png"
     if extension.lower() == "svg":
-        import cairo
-        import rsvg
 
-        img = cairo.ImageSurface(cairo.FORMAT_ARGB32, 640,480)
+        from svglib.svglib import svg2rlg
+        from reportlab.graphics import renderPM
 
-        ctx = cairo.Context(img)
-
-        ## handle = rsvg.Handle(<svg filename>)
-        # or, for in memory SVG data:
-        handle= rsvg.Handle(None, str(<svg data>))
-
-        handle.render_cairo(ctx)
-
-        img.write_to_png("testing.png")
+        drawing = svg2rlg('testing.svg')
+        renderPM.drawToFile(drawing, 'output/testing.png', fmt='PNG')
 
 
     color_thief = ColorThief(file)
