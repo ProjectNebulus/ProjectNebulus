@@ -21,6 +21,7 @@ update.resolve_updated_object(cls, field, value):
 
 cls is the class of the object, field is the field that was changed, value is the the default value
 """
+"https://files-cdn.schoology.com/5bc1ce116299156188bd2f3d8f15302f?content-type=application%2Fpdf&content-disposition=attachment%3B%2Bfilename%3D%2213.0_Week13_Schedule_corrected.pdf%22&Expires=1651983347&Signature=QXg64qTO4T5moj61eo21PDJFkCFfs-DUjMNKgsEvkHVPQfddCEyaBMww3Qii6Z~wXQLuDK-YOFFkvU~KS7AfNpreYuhkRuWTYIT3qQPPupzl-VEJ4kV8w4srhCUeQdj5lGz~Y5uwekOFTL8ehhNop7z~32Q~8IZpJKGYd~z2JULeyXbOE0JOsyeGsYcWffSiel1xjqu08coHCNJ-MH7z1hS~PRy6HygWQaz4TJBD~LVQyNxINxFGK-MVTQKRNKUmTTmWF699SDhakG9k04tPOwHYILakSwlAsOpBozUkr3wfC6MLkSFzvMFgyLLJCPPSEy7OWJHYLZ28E0TQxcexzw__&Key-Pair-Id=APKAJ6LPJQLQJLURLVDQ"
 
 if __name__ == "__main__":
     if platform.system().lower() == "linux":
