@@ -118,4 +118,5 @@ def lms():
         gcourses=gcourses,
         canvascourses=canvascourses,
         schoologycourses=schoologycourses,
+        enumerate = enumerate,
     )

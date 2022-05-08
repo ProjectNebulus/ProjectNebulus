@@ -24,8 +24,8 @@
                     </div>
 
                     <ol class="relative border-l border-gray-200 dark:border-gray-700 lg:ml-0">
-                        {% for i in range(0, announcements.items()|length) %}
-                            {%  set announcement_date, announcement_list =  announcements.items()[i] %}
+                        {% for i, announcement_tuple in enumerate(announcements.items()) %}
+                            {%  set announcement_date, announcement_list =  announcement_tuple %}
                             <li class="mb-10 ml-4">
                                 <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
                                 <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
@@ -40,7 +40,7 @@
                                              role="alert">
                                             <h4 class="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2 text-ellipses">{{ announcement.title }}</h4>
                                             <div class="flex items-center mb-3">
-                                                <img  data-dropdown-toggle="userDropdown{{ count }}_{{ external_count }}" id="avatar{{ count }}_{{ external_count }}" data-dropdown-placement="bottom-start"  class="w-6 h-6 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 ursor-pointer mb-3 rounded-full shadow-lg"
+                                                <img  data-dropdown-toggle="userDropdown{{ i }}_{{ j }}" id="avatar{{ i }}_{{ j }}" data-dropdown-placement="bottom-start"  class="w-6 h-6 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 ursor-pointer mb-3 rounded-full shadow-lg"
                                                      src="{{ announcement.author_pic }}"
                                                      alt="{{ announcement.author }} profile picture">
                                                 <br>
@@ -72,7 +72,7 @@
                                             </div>
                                         </div>
                                         <!-- Dropdown menu -->
-                                        <div id="userDropdown{{ count }}_{{ external_count }}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600">
+                                        <div id="userDropdown{{ i }}_{{ j }}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600">
                                             <div style="border-radius:10px 10px 0px 0px; height:60px;background:rgba{{ announcement.author_color }};"></div>
                                             <div class="px-4 py-3 text-xl text-gray-900 dark:text-white" style="border-radius:0px 0px 10px 10px;">
                                                 <center>
