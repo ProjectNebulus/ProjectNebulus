@@ -1,45 +1,35 @@
-import matplotlib.image as img
-import matplotlib.pyplot as plt
-from scipy.cluster.vq import whiten
-from scipy.cluster.vq import kmeans
-import pandas as pd
+import binascii
+import struct
+from PIL import Image
+import numpy as np
+import scipy
+import scipy.misc
+import scipy.cluster
+import requests
+from io import BytesIO
 
-#batman_image = img.imread('https://media.geeksforgeeks.org/wp-content/uploads/20200712190340/d3-200x126.PNG')
-batman_image = img.imread("https://asset-cdn.schoology.com/system/files/imagecache/profile_reg/pictures/picture-9deb20954709c7c99c41a9810ea6b3f5_5f2e29135adb5.png")
-r = []
-g = []
-b = []
-for row in batman_image:
-    for temp_r, temp_g, temp_b, temp in row:
-        r.append(temp_r)
-        g.append(temp_g)
-        b.append(temp_b)
+NUM_CLUSTERS = 5
 
-batman_df = pd.DataFrame({'red' : r,
-                          'green' : g,
-                          'blue' : b})
+print('reading image')
+#url = 'https://asset-cdn.schoology.com/system/files/imagecache/profile_reg/pictures/picture-9deb20954709c7c99c41a9810ea6b3f5_5f2e29135adb5.png'
+#url = "https://colourlex.com/wp-content/uploads/2021/02/Chrome-red-painted-swatch-N-300x300.jpg"
+url = "https://upload.wikimedia.org/wikipedia/commons/b/b9/Solid_red.png"
+response = requests.get(url)
+im = Image.open(BytesIO(response.content))
+# im = Image.open(url)
+im = im.resize((150, 150))      # optional, to reduce time
+ar = np.asarray(im)
+shape = ar.shape
+ar = ar.reshape(scipy.product(shape[:2]), shape[2]).astype(float)
 
-batman_df['scaled_color_red'] = whiten(batman_df['red'])
-batman_df['scaled_color_blue'] = whiten(batman_df['blue'])
-batman_df['scaled_color_green'] = whiten(batman_df['green'])
+print('finding clusters')
+codes, dist = scipy.cluster.vq.kmeans(ar, NUM_CLUSTERS)
+print('cluster centres:\n', codes)
 
-cluster_centers, _ = kmeans(batman_df[['scaled_color_red',
-                                       'scaled_color_blue',
-                                       'scaled_color_green']], 3)
+vecs, dist = scipy.cluster.vq.vq(ar, codes)         # assign codes
+counts, bins = scipy.histogram(vecs, len(codes))    # count occurrences
 
-dominant_colors = []
-
-red_std, green_std, blue_std = batman_df[['red',
-                                          'green',
-                                          'blue']].std()
-
-for cluster_center in cluster_centers:
-    red_scaled, green_scaled, blue_scaled = cluster_center
-    dominant_colors.append((
-        red_scaled * red_std / 255,
-        green_scaled * green_std / 255,
-        blue_scaled * blue_std / 255
-    ))
-print([dominant_colors])
-plt.imshow([dominant_colors])
-plt.show()
+index_max = scipy.argmax(counts)                    # find most frequent
+peak = codes[index_max]
+colour = binascii.hexlify(bytearray(int(c) for c in peak)).decode('ascii')
+print('most frequent is %s (#%s)' % (peak, colour))
