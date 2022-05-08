@@ -151,7 +151,8 @@ def createAvatar(data: dict) -> Avatar:
 
     del data["parent_id"]
     avatar = Avatar(**data)
-    avatar.avatar_url += "." + file_ending
+    if file_ending != "":
+        avatar.avatar_url += "." + file_ending
 
     parent.avatar = avatar
     parent.save()

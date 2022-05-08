@@ -98,10 +98,7 @@ def create_schoology_course():
         return "Invalid"
     index = len("/course/")
     link = link[index:len(link)]
-    link=link[0:len("5131176032")]
-    #schoology = User.objects(ussername=session["username"])
-    #schoology = schoology[0]
-
+    link = link[0:len("5131176032")]
     schoology=read.getSchoology(username=session["username"])
     print(schoology)
     if len(schoology) == 0:
@@ -123,25 +120,15 @@ def create_schoology_course():
         access_token=schoology.Schoology_access_token,
         access_token_secret=schoology.Schoology_access_secret,
     )
-    url = auth.request_authorization(
+    auth.request_authorization(
         callback_url=(request.url_root + "/closeSchoology")
     )
-    # return str(url)
     auth.authorize()
-    auth.authorize()
-    # auth.authorized = True
-    # return str(auth.authorized)
     sc = schoolopy.Schoology(auth)
     sc.limit = 1000
     section = dict(sc.get_section(link))
-    course = {}
-    # print(section)
-    #course["id"] = section["id"]
-    course["name"] = f'{section["course_title"]} ({section["section_title"]})'
-    course["description"] = section["description"]
-    course["imported_from"] = "Schoology"
-    course["authorizedUsers"] = [session["id"]]
-    course['teacher'] = post_data["teacher"]
+    course = {"name": f'{section["course_title"]} ({section["section_title"]})', "description": section["description"],
+              "imported_from": "Schoology", "authorizedUsers": [session["id"]], 'teacher': post_data["teacher"]}
 
     course_obj = create.create_course(course)
 
@@ -174,8 +161,14 @@ def create_schoology_course():
         document = {}
         document["id"] = scdocument["id"]
         document["name"] = scdocument["title"]
+        document["link"] = scdocument["attachments"]["files"]["file"][0]["download_path"]
+        document["extension"] = scdocument["attachments"]["files"]["file"][0]["extension"]
+        document["converted-link"] = scdocument["attachments"]["files"]["file"][0]["converted_download_path"]
+        document["converted-extension"] = scdocument["attachments"]["files"]["file"][0]["converted_extension"]
+        print(document)
         # document["attachment"] = scdocument["attachments"] (Won't work until we have CDN!)
         documents.append(document)
+    print(documents)
 
     scgrades = sc.get_user_grades_by_section(sc.get_me()["id"], link)
     print(scgrades)
