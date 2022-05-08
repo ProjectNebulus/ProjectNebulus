@@ -390,7 +390,8 @@
                                                         {% if date < today %}
                                                             •
                                                             <span class="text-red-600 dark:text-red-500">Overdue</span>
-                                                        {% elif a.grade != None and a.grade / a.points < 0.6 %}
+                                                        {#  a is not Event #}
+                                                        {% elif 'Assignment' in a.__class__.__name__ and a.grade != None and a.grade / a.points < 0.6 %}
                                                             <span class="text-black dark:text-white"> • </span>
                                                             <span class="text-gray-300 dark:text-gray-700">{{ a.grade }}/{{ a.points }}</span>
                                                         {% endif %}
