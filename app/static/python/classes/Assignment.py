@@ -1,3 +1,5 @@
+import datetime
+
 from mongoengine import *
 
 from .Snowflake import Snowflake
@@ -18,7 +20,7 @@ class Assignment(Snowflake):
     course = ReferenceField(
         "Course", required=True, description="The course that this assignment is in."
     )
-    due = DateTimeField(escription="The due date of the assignment.")
+    due = DateTimeField(escription="The due date of the assignment.", default=datetime.datetime.max)
     title = StringField(required=True, description="The title of the assignment.")
     points = FloatField(
         default=10, description="The number of points the assignment is worth."

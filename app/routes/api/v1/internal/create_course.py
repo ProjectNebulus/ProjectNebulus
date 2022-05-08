@@ -132,11 +132,11 @@ def create_schoology_course():
     # auth.authorized = True
     # return str(auth.authorized)
     sc = schoolopy.Schoology(auth)
-    sc.limit = 100
+    sc.limit = 1000
     section = dict(sc.get_section(link))
     course = {}
     # print(section)
-    course["id"] = section["id"]
+    #course["id"] = section["id"]
     course["name"] = f'{section["course_title"]} ({section["section_title"]})'
     course["description"] = section["description"]
     course["imported_from"] = "Schoology"
@@ -156,8 +156,8 @@ def create_schoology_course():
         create.createAnnouncement(
             {
                 "content": update["body"],
-                "course": course_obj.id,
-                "id": str(update["id"]),
+                "course": str(course_obj.id),
+                #"id": str(update["id"]),
                 "author": author['name_display'],
                 "author_pic": author["picture_url"],
                 "likes": update["likes"],
@@ -182,7 +182,7 @@ def create_schoology_course():
     scevents = sc.get_section_events(link)
     print(scevents)
     scassignments = sc.get_assignments(link)
-    assignments = []
+
     for assignment in scassignments:
         due = assignment["due"]
         if due != "":
@@ -193,11 +193,12 @@ def create_schoology_course():
         create.createAssignment(
 
             {
-                "id": str(assignment["id"]),
+                #"id": str(assignment["id"]),
                 "title": assignment["title"],
                 "description": assignment["description"]+f"\n\nView On Schoology: {assignment['web_url']}",
                 #"submitDate": assignment["dropbox_last_submission"],
                 "due": due,
+                #"course": str(course_obj.id),
                 "course": course_obj,
                 "points": assignment["max_points"]
             }
