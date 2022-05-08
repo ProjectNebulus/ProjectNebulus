@@ -189,7 +189,7 @@ def create_schoology_course():
                 "due": due,
                 #"course": str(course_obj.id),
                 "course": str(course_obj.id),
-                "points": assignment["max_points"]
+                "points": float(assignment["max_points"]),
             }
         )
 
