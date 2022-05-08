@@ -7,6 +7,7 @@ from googleapiclient.discovery import build
 from . import main_blueprint, utils
 from .utils import logged_in
 from ...static.python.mongodb import read
+from ...static.python.classes import Event
 
 
 def credentials_to_dict(credentials):
@@ -119,4 +120,5 @@ def lms():
         canvascourses=canvascourses,
         schoologycourses=schoologycourses,
         enumerate = enumerate,
+        Event = Event,
     )
