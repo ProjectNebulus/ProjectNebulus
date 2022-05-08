@@ -160,35 +160,16 @@ def create_schoology_course():
             }
         )
 
-    scdocuments = sc.get_section_documents(link)
-    def get_doc_link(sc, url):
-        rq = sc.schoology_auth.oauth.get(
-            url=url,
-             headers=sc.schoology_auth._request_header(),
-            auth=sc.schoology_auth.oauth.auth)
-        return rq.url #rq["url"]
-
-    documents = []
-    for scdocument in scdocuments:
-        document = {}
-        document["id"] = scdocument["id"]
-        document["name"] = scdocument["title"]
-        document["link"] = scdocument["attachments"]["files"]["file"][0]["download_path"]
-        document["link"] = get_doc_link(sc, document["link"])
-        document["extension"] = scdocument["attachments"]["files"]["file"][0]["extension"]
-        document["converted-link"] = scdocument["attachments"]["files"]["file"][0]["converted_download_path"]
-        document["converted-link"] = get_doc_link(sc, document["converted-link"])
-        document["converted-extension"] = scdocument["attachments"]["files"]["file"][0]["converted_extension"]
-        print(document)
-
-        # document["attachment"] = scdocument["attachments"] (Won't work until we have CDN!)
-        documents.append(document)
-    print(documents)
-
     scgrades = sc.get_user_grades_by_section(sc.get_me()["id"], link)
     print(scgrades)
     scevents = sc.get_section_events(link)
-    print(scevents)
+    for event in scevents:
+        create.createEvent({
+            "course": str(course_obj.id),
+            "title": event["title"],
+            "description": event["description"],
+            "date": datetime.strptime(event["start"], "%Y-%m-%d %H:%M:%S"),
+        })
     scassignments = sc.get_assignments(link)
 
     for assignment in scassignments:
@@ -207,10 +188,36 @@ def create_schoology_course():
                 #"submitDate": assignment["dropbox_last_submission"],
                 "due": due,
                 #"course": str(course_obj.id),
-                "course": course_obj,
+                "course": str(course_obj.id),
                 "points": assignment["max_points"]
             }
         )
 
+
+    scdocuments = sc.get_section_documents(link)
+    def get_doc_link(sc, url):
+        rq = sc.schoology_auth.oauth.get(
+            url=url,
+             headers=sc.schoology_auth._request_header(),
+            auth=sc.schoology_auth.oauth.auth)
+        return rq.url #rq["url"]
+
+    print(scdocuments)
+    documents = []
+    for scdocument in scdocuments:
+        document = {}
+        document["id"] = scdocument["id"]
+        document["name"] = scdocument["title"]
+        document["link"] = scdocument["attachments"]["files"]["file"][0]["download_path"]
+        document["link"] = get_doc_link(sc, document["link"])
+        document["extension"] = scdocument["attachments"]["files"]["file"][0]["extension"]
+        document["converted-link"] = scdocument["attachments"]["files"]["file"][0]["converted_download_path"]
+        document["converted-link"] = get_doc_link(sc, document["converted-link"])
+        document["converted-extension"] = scdocument["attachments"]["files"]["file"][0]["converted_extension"]
+        print(document)
+
+        # document["attachment"] = scdocument["attachments"] (Won't work until we have CDN!)
+        documents.append(document)
+    print(documents)
 
     return "success"

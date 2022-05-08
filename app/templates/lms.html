@@ -152,11 +152,12 @@
                             {% else %}
                                 {% for date, assignments in events.items() %}
                                     {% for a in assignments[:15] %}
+                                        {% if a._cls == "Assignment" %}
                                         {% if a.submitDate == None or date > today %}
                                             <a href="/assignment/{{ a.id }}" class="flex text-black dark:text-white text-left
                             bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 rounded-lg p-6 ml-3 shadow-md dark:border-gray-700 text-xl mb-5">
                                                 <div class="mr-4 material-icons ml-2"
-                                                     style="transform: translate(0, 50%) scale(1.75)">event
+                                                     style="transform: translate(0, 50%) scale(1.75)">assignment
                                                 </div>
                                                 <div class="truncate">
                                         <span class="text-ellipses">{{ a.title }}
@@ -176,9 +177,27 @@
                                                 </div>
                                             </a>
                                         {% endif %}
+                                        {% else %}
+                                        <a href="/assignment/{{ a.id }}" class="flex text-black dark:text-white text-left
+                            bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 rounded-lg p-6 ml-3 shadow-md dark:border-gray-700 text-xl mb-5">
+                                                <div class="mr-4 material-icons ml-2"
+                                                     style="transform: translate(0, 50%) scale(1.75)">event
+                                                </div>
+                                                <div class="truncate">
+                                        <span class="text-ellipses">{{ a.title }}
+                                        </span>
+
+                                                    <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">{{ a.course.name }}</span>
+                                                    <div class="text-xs text-gray-700 uppercase dark:text-gray-400 line-clamp-2">
+                                                        {{ a.description }}
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        {% endif %}
                                     {% endfor %}
                                 {% endfor %}
                             {% endif %}
+
                         </div>
                     </div>
                 </div>
