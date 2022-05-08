@@ -37,14 +37,17 @@
 {#            <span class="text-blue-600 dark:text-blue-300">Show Comments</span>#}
         </a>
         <!-- Dropdown menu -->
-        <div id="userDropdown{{ i }}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-            <div style="height:40px;background:rgba{{ a.author_color }};"></div>
-            <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+        <div id="userDropdown{{ i }}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600">
+            <div style="border-radius:10px 10px 0px 0px; height:60px;background:rgba{{ a.author_color }};"></div>
+            <div class="px-4 py-3 text-xl text-gray-900 dark:text-white" style="border-radius:0px 0px 10px 10px;">
                 <center>
-                <img style="margin-top:-40px;" src="{{ a.author_pic }}" class="w-10 h-10 rounded-full">
+                <img style="margin-top:-60px;background:rgb(18,25,38);border-style:solid;border-color:white;border-width:2px;" src="{{ a.author_pic }}" class="w-24 h-24 rounded-full">
                 <div>{{ a.author }}</div>
-                <div class="font-medium">{{ a.author_email }}</div>
-                <div class="font-medium">Instructor at {{ a.author_school }}</div>
+                <div class="text-sm text-gray-400">{{ a.author_email }}</div>
+                <div class="text-sm text-gray-400">Instructor at {{ a.author_school }}</div>
+                    <div class="mb-6">
+                        <input type="text" id="msg" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Message @{{ a.author }}" required>
+                    </div>
                 </center>
             </div>
 
