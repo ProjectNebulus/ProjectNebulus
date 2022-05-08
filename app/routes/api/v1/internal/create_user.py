@@ -1,11 +1,11 @@
-from flask import session, request
 import datetime
+from datetime import datetime
+
+from flask import session, request
 
 from . import internal
-from ....main.utils import private_endpoint
 from .....static.python.classes.Avatar import Avatar
 from .....static.python.mongodb import create
-from datetime import datetime
 
 
 @internal.route("/create-user", methods=["POST"])
@@ -36,8 +36,8 @@ def create_user():
         22: "newYellow.png",
     }
 
-    data["avatar"] = "https://localhost:8080/"+cats[int(data["avatar"].replace("cat", ""))]
-    data["avatar"] = Avatar(avatar_url=data["avatar"], parent="User")
+    data["avatar"] = "https://localhost:8080/" + cats[int(data["avatar"].replace("cat", ""))]
+    data["avatar"] = Avatar(url=data["avatar"], parent="User")
     data["age"] = datetime.strptime(data["age"].strip(), '%m/%d/%Y')
     validation = create.create_user(data)
     if validation[0] == "0":

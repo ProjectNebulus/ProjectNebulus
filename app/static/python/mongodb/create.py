@@ -39,16 +39,19 @@ def generateSchoologyObject(_id: str) -> schoolopy.Schoology:
 
 
 def create_course(data: dict) -> Course:
-    if data["authorizedUsers"]:
+    if data.get("authorizedUsers"):
         user = read.find_user(id=data["authorizedUsers"][0])
     else:
         user = read.find_user(username=data["username"])
         del data["username"]
 
+    if data.get("avatar"):
+        data["avatar"] = Avatar(avatar_url=data["avatar"])
+
     course = Course(**data)
-    if not data["authorizedUsers"]:
+    if not data.get("authorizedUsers"):
         course.authorizedUsers.append(user)
-    course.save(force_insert=True)
+    course.save(force_insert=True, validate=False)
     return course
 
 
@@ -133,7 +136,7 @@ def createAnnouncement(data: dict) -> Announcement:
     announcement.save(force_insert=True)
     course = announcement.course
     course.announcements.append(announcement)
-    course.save()
+    course.save(validate=False)
     return announcement
 
 

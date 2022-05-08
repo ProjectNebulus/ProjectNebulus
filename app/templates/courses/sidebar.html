@@ -1,7 +1,6 @@
 <aside style="float:left;" class="w-64 h-full" aria-label="Sidebar">
     <div class="px-3 py-4 overflow-y-auto rounded bg-gray-100 dark:bg-gray-800 h-full">
-        <span style="text-align: center;"
-              class="self-center text-lg whitespace-nowrap w-full overflow-hidden block font-semibold text-black dark:text-white text-black truncate">
+        <span class="self-center text-lg whitespace-nowrap w-full overflow-hidden block font-semibold text-black dark:text-white text-black truncate">
             <img src="{{ course.avatar.avatar_url }}"
                  alt="Course Icon"
                  style="object-fit: cover; width:40px; height:40px; border-radius:10px;display: inline-block; margin: 10px;">
@@ -73,7 +72,8 @@
                     <li>
                         <a href="/course/{{ course_id }}/extensions" target="frame"
                            class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-                            <p class="dark:text-gray-400"><i class="material-icons">add_circle</i></p><span class="ml-3">Add an Extension</span></a>
+                            <p class="dark:text-gray-400"><i class="material-icons">add_circle</i></p><span
+                                class="ml-3">Add an Extension</span></a>
                     </li>
                 </ul>
             </li>
@@ -90,7 +90,7 @@
 </aside>
 
 <script>
-    let sidebarLinks = document.getElementsByClassName("space-y-2")[0].getElementsByTagName("a");
+    const sidebarLinks = document.getElementsByClassName("space-y-2")[0].getElementsByTagName("a");
 
     for (const a of sidebarLinks) {
         a.onclick = () => {
@@ -106,6 +106,7 @@
             let title = a.href.substring(a.href.indexOf(document.documentURI)).split("/")[5];
             title = title[0].toUpperCase() + title.substring(1);
             pageTitle.innerHTML = title;
+            setCreateButton(title);
 
             a.style.pointerEvents = "none";
             a.style.cursor = "default";
@@ -113,5 +114,44 @@
 
             localStorage.setItem("{{ course_id }}", title);
         }
+    }
+
+    function setCreateButton(title) {
+        for (const a of actions)
+            a.innerHTML = "";
+
+        switch (title.toLowerCase()) {
+            case "documents":
+                actions[0].innerHTML = "Upload File";
+                actions[0].onclick = () => openModal("createDocument");
+                actions[1].innerHTML = "Create File";
+                actions[1].onclick = () => openModal("createDocument2");
+                actions[2].innerHTML = "Create Assignment";
+                actions[2].onclick = () => openModal("createAssignment");
+                break;
+
+            case "announcements":
+                actions[0].innerHTML = "Create Announcement";
+                actions[0].onclick = () => openModal("createAnnouncement");
+                break;
+
+            case "textbook":
+                actions[0].innerHTML = "Create Textbook";
+                actions[0].onclick = () => openModal("createTextbook");
+                break;
+        }
+
+        let hideButton = true;
+        for (const a of actions) {
+            if (a.innerHTML !== "") {
+                a.innerHTML = '<span class="material-icons mr-1.5" style="vertical-align: bottom">add</span>' + a.innerHTML;
+                a.parentElement.classList.remove("hidden");
+                hideButton = false;
+            }
+            else
+                a.parentElement.classList.add("hidden");
+        }
+
+        createButton.style.display = hideButton ? "none" : "inline";
     }
 </script>

@@ -8,22 +8,22 @@ main_blueprint = Blueprint(
     url_prefix="/",
 )
 
-from .about import *
-from .connections import *
-from .course import *
-from .dashboard import *
-from .index import *
-from .lms import *
-from .logout import *
-from .points import *
-from .pricing import *
-from .profile import *
-from .settings import *
-from .signin import *
-from .signup import *
-from .calendar import *
-from .spotify import *
-from .discordauth import *
-from .schoology import *
-from .gclassroom import *
-from .canvas import *
+from app.routes.main.about import *
+from app.routes.main.connections import *
+from app.routes.main.course import *
+from app.routes.main.dashboard import *
+from app.routes.main.index import *
+from app.routes.main.lms import *
+from app.routes.main.logout import *
+from app.routes.main.points import *
+from app.routes.main.pricing import *
+from app.routes.main.profile import *
+from app.routes.main.settings import *
+from app.routes.main.signin import *
+from app.routes.main.signup import *
+from app.routes.main.calendar import *
+from app.routes.main.spotify import *
+from app.routes.main.discordauth import *
+from app.routes.main.schoology import *
+from app.routes.main.gclassroom import *
+from app.routes.main.canvas import *

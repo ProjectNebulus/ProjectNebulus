@@ -2,7 +2,6 @@ import schoolopy
 from flask import session, request
 
 from . import internal
-from ....main.utils import private_endpoint
 from .....static.python.mongodb import update, read
 
 

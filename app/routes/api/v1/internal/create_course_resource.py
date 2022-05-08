@@ -3,9 +3,8 @@ import datetime
 from flask import request
 
 from . import internal
-from .....static.python.mongodb.create import *
 
-log_data = False
+log_data = True
 
 
 @internal.route("/create-announcement", methods=["POST"])
@@ -13,6 +12,8 @@ def create_announcement():
     """
     Create an announcement.
     """
+    from app.static.python.mongodb.create import createAnnouncement
+
     data = request.get_json()
 
     if log_data:
@@ -27,6 +28,8 @@ def create_assignment():
     """
     Create an assignment.
     """
+    from app.static.python.mongodb.create import createAssignment
+
     # Get the data from the request.
     data = request.get_json()
     data["points"] = int(data["points"])
@@ -48,6 +51,8 @@ def create_assignment():
 
 @internal.route("/create-folder", methods=["POST"])
 def create_folder():
+    from app.static.python.mongodb.create import createFolder
+
     createFolder(request.json())
     return "success", 200
 

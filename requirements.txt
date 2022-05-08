@@ -11,6 +11,7 @@ certifi
 chardet
 charset-normalizer
 click
+colorthief
 dacite
 discord
 dnspython

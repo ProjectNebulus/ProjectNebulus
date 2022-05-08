@@ -56,80 +56,65 @@
 
     <style>
         body {
-            cursor: url('/static/images/nebulusCats/newRed.png'), /*auto*/ auto;
+            cursor: url('/static/images/nebulusCats/newRed.png'), auto;
         }
 
         html.dark body {
             background: #111926;
         }
 
+        .noselect {
+            user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -webkit-user-select: none;
+            pointer-events: none;
+        }
+
         /* width */
         ::-webkit-scrollbar, ::-webkit-scrollbar-thumb {
             width: 3px;
+            height: 3px;
         }
 
         /* Track */
-        ::-webkit-scrollbar-track {
-            background: #121926;
+        ::-webkit-scrollbar-track-piece {
+            background: #9CA3AF;
         }
 
         /* Handle */
         ::-webkit-scrollbar-thumb {
             background: #888;
-            border-radius: 10px;
-            width: 3px;
+            border-radius: 20px;
+        }
+
+        .dark ::-webkit-scrollbar-thumb {
+            background: #555555;
+        }
+
+        .dark ::-webkit-scrollbar-track-piece {
+            background: #888;
         }
 
         /* Handle on hover */
         ::-webkit-scrollbar-thumb:hover {
             background: #555;
             width: 10px;
-        }
-        .noselect{
-            -webkit-touch-callout: none; /* iOS Safari */
-            -webkit-user-select: none; /* Safari */
-            -khtml-user-select: none; /* Konqueror HTML */
-            -moz-user-select: none; /* Old versions of Firefox */
-            -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome, Edge, Opera and Firefox */
-        }
-        body{
-            -webkit-touch-callout: none; /* iOS Safari */
-            -webkit-user-select: none; /* Safari */
-            -khtml-user-select: none; /* Konqueror HTML */
-            -moz-user-select: none; /* Old versions of Firefox */
-            -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome, Edge, Opera and Firefox */
+            height: 10px;
         }
 
-        img{
-            -webkit-touch-callout: none; /* iOS Safari */
-            -webkit-user-select: none; /* Safari */
-            -khtml-user-select: none; /* Konqueror HTML */
-            -moz-user-select: none; /* Old versions of Firefox */
-            -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome, Edge, Opera and Firefox */
+        .hover-scroll::-webkit-scrollbar {
+            display: none;
+            transition-duration: 0.5s;
         }
-        input{
-            -webkit-touch-callout: none; /* iOS Safari */
-            -webkit-user-select: none; /* Safari */
-            -khtml-user-select: none; /* Konqueror HTML */
-            -moz-user-select: none; /* Old versions of Firefox */
-            -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome, Edge, Opera and Firefox */
+
+        .hover-scroll:hover::-webkit-scrollbar {
+            display: block;
         }
-        button{
-            -webkit-touch-callout: none; /* iOS Safari */
-            -webkit-user-select: none; /* Safari */
-            -khtml-user-select: none; /* Konqueror HTML */
-            -moz-user-select: none; /* Old versions of Firefox */
-            -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome, Edge, Opera and Firefox */
+
+        .hover-scroll {
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
         }
     </style>
 </head>
@@ -138,7 +123,6 @@
     const menu = document.getElementById("context-menu");
     const user = "{{ user }}";
     document.onkeydown = function (e) {
-        //alert(e);
         if (e.ctrlKey && e.altKey && e.keyCode === 'I'.charCodeAt(0)) {
             return false;
         }

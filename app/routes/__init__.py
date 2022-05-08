@@ -2,6 +2,7 @@
 from flask_cors import CORS
 from flask_mail import Mail
 
+from app.static.python.mongodb import read
 from .api import *
 from .main import *
 from .static import *
@@ -14,6 +15,9 @@ def init_app():
     """
     Creates a flask application.
     """
+    from flask import Flask
+    import os
+
     app = Flask(__name__)
     app.config["SECRET_KEY"] = os.environ.get("MONGOPASS")
     CORS(app, resources={r"/api/*": {"origins": "*"}})
@@ -28,16 +32,19 @@ def init_app():
     app.register_blueprint(main_blueprint)
     app.register_blueprint(api.api_blueprint)
     app.register_blueprint(static_blueprint)
+
+    print(app.url_map)
+
     @app.before_request
     def before_rq():
-            #log out users who have deleted accounts
-            if "username" in session.keys():
-                try:
-                    read.find_user(username=session.get("username"))
-                except:
-                    return redirect("/logout")
+        # log out users who have deleted accounts
+        if "username" in session.keys():
+            try:
+                read.find_user(username=session.get("username"))
+            except KeyError:
+                return redirect("/logout")
 
     mail = Mail(app)
-    #print("Paths:", *sorted(app.url_map.iter_rules(), key=str), sep="\n")
+    # print("Paths:", *sorted(app.url_map.iter_rules(), key=str), sep="\n")
 
     return app

@@ -1,4 +1,5 @@
 import datetime
+
 import requests
 from flask import render_template, session, request
 from flask_cors import cross_origin
@@ -28,7 +29,6 @@ def course_page(page, **kwargs):
                     page="Nebulus - " + course.name,
                     read=read,
                     course=course,
-                    teacher=course.teacher,
                     course_id=course_id,
                     user=session.get("username"),
                     email=session.get("email"), avatar=session.get("avatar"),

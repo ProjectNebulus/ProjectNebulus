@@ -3,10 +3,11 @@ function createAnnouncement() {
         title: document.getElementById("announcementname").value,
         content: document.getElementById("message").value,
         author: document.getElementById("author").value,
+        author_pic: document.querySelector("#navbar trigger logo").getAttribute("image"),
         course: document.getElementById("course_id").innerText,
     };
 
-    let request = $.ajax({
+    $.ajax({
         type: "POST",
         url: "/api/v1/internal/create-announcement",
         data: JSON.stringify(announcement),

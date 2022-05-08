@@ -1,8 +1,9 @@
 from ..classes.Schoology import Schoology
-from .read import find_user
 
 
 def schoologyLogin(_id: str, schoology: dict):
+    from .read import find_user
+
     user = find_user(pk=_id)
     print(user.password)
     if not user:
@@ -13,7 +14,10 @@ def schoologyLogin(_id: str, schoology: dict):
     user.save(clean=False)
     print(user.password)
 
+
 def logout_from_schoology(_id: str, schoology_obj: Schoology):
+    from .read import find_user
+
     user = find_user(id=_id)
     if not user:
         raise KeyError("User not found")
@@ -23,4 +27,4 @@ def logout_from_schoology(_id: str, schoology_obj: Schoology):
 
 
 def resolve_updated_object(obj, attr, value):
-    obj.objects.update(attr=value)
+    obj.objects.update(**{attr: value})

@@ -13,13 +13,16 @@
                 -ms-overflow-style: none; /* IE and Edge */
                 scrollbar-width: none; /* Firefox */
             }
+
             ::marker {
-                display:none !important;
+                display: none !important;
             }
+
             ul {
                 list-style-type: none;
             }
-            li{
+
+            li {
                 list-style-type: none;
             }
 
@@ -38,9 +41,11 @@
             <br>
 
             <h2 id="general" class="text-4xl text-black dark:text-white">General Settings </h2><br>
-            <label style="margin-bottom:-10px;" class="hidden md:block block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+            <label style="margin-bottom:-10px;"
+                   class="hidden md:block block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                 Your Username
             </label>
+
             <div class="settingItem" style="display: inline-block;">
                 <div class="relative mt-1" style="display: inline-block;">
                     <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -61,8 +66,12 @@
                 </button>
 
             </div>
-            <label style="margin-bottom:-10px;" class="hidden md:block block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your
-                Password</label>
+
+            <label style="margin-bottom:-10px;"
+                   class="hidden md:block block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                Your Password
+            </label>
+
             <div class="settingItem" style="display: inline-block;">
                 <div class="relative mt-1" style="display: inline-block;">
                     <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -73,18 +82,22 @@
                         </svg>
                     </div>
                     <input style="width:400px;" disabled type="password" value="{{ session.get('pswLen') * '*' }}"
-
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                            placeholder="name@flowbite.com">
                 </div>
+
                 <button id="change2" onclick="change2()" style="margin-top: 20px;" type="button"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     Change
                 </button>
 
             </div>
-            <label style="margin-bottom:-10px;" class="hidden md:block block mb-2 text-sm font-medium text-gray-900
-        dark:text-gray-300">Your Email</label>
+
+            <label style="margin-bottom:-10px;"
+                   class="hidden md:block block mb-2 text-sm font-medium text-gray-900dark:text-gray-300">
+                Your Email
+            </label>
+
             <div class="settingItem" style="display: inline-block;">
                 <div class="relative mt-1" style="display: inline-block;">
                     <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -94,7 +107,6 @@
                         </svg>
                     </div>
                     <input style="width:400px;" disabled type="text" value="{{ session.get('email') }}"
-
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                            placeholder="name@flowbite.com">
                 </div>
@@ -106,14 +118,17 @@
 
             <hr class="border-gray-300 dark:border-gray-700 my-8">
             <h2 id="connections" class="text-4xl mt-2 text-black dark:text-white">Connections</h2><br>
-            <a style="overflow-y:scroll;" class="block h-64 p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700">
+            <a style="overflow-y:scroll;"
+               class="block h-64 p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700">
                 <p class="text-black dark:text-white">Connections can unlock <span
                         class="font-bold text-yellow-400">SPECIAL</span>
                     integrations for Nebulus!</p>
+
                 <div onclick="newwindow=window.open('/gclassroom','Authorize with Google','height=400,width=900')"
                      style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default"
-                     type="button"
-                     class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+                     type="button" class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300
+                     dark:hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg
+                      text-sm text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                     <img src="/static/images/logos/classroom.png" alt="Google Classroom Image"
                          style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
                 </div>
@@ -312,7 +327,7 @@
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Schoology Account
                         Connected</h5>
                     <ul class="w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                        {%  for schoology_acc in schoology %}
+                        {% for schoology_acc in schoology %}
                             <li class="w-full px-4 py-2 border-b border-gray-200 rounded-t-lg dark:border-gray-600">
                                 <p class="font-normal text-gray-700 dark:text-gray-400">{{ schoology_acc.schoologyName }}
                                     ({{ schoology_acc.schoologyEmail }})</p>
@@ -341,7 +356,8 @@
                             class="block p-6 w-1/2 bg-white rounded-t-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                         <div>
                             <div style="float:left;margin-right:15px;">
-                                <img src="/static/images/logos/canvas.png" style="width:30px;height:30px;overflow:hidden;"
+                                <img src="/static/images/logos/canvas.png"
+                                     style="width:30px;height:30px;overflow:hidden;"
                                      alt="Canvas Image">
                             </div>
                             <div style="float:left;">
@@ -384,7 +400,8 @@
                     <a class="block p-6 w-1/2 bg-white rounded-t-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                         <div>
                             <div style="float:left;margin-right:15px;">
-                                <img src="/static/images/logos/spotify.png" style="width:30px;height:30px;overflow:hidden;"
+                                <img src="/static/images/logos/spotify.png"
+                                     style="width:30px;height:30px;overflow:hidden;"
                                      alt="Spotify Image">
                             </div>
                             <div style="float:left;">
@@ -428,7 +445,8 @@
                 <a class="block p-6 w-1/2 bg-white rounded-t-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                     <div>
                         <div style="float:left;margin-right:15px;">
-                            <img src="/static/images/logos/classroom.png" style="width:30px;height:30px;overflow:hidden;"
+                            <img src="/static/images/logos/classroom.png"
+                                 style="width:30px;height:30px;overflow:hidden;"
                                  alt="Google Classroom Image">
                         </div>
                         <div style="float:left;">
@@ -524,7 +542,8 @@
             </button>
             <hr class="border-gray-300 dark:border-gray-700 my-8">
             <h2 id="request" class="text-4xl text-black dark:text-white">Submit a Feature Request</h2><br>
-            <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Your Bug</label>
+            <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Your
+                Bug</label>
             <textarea id="message" rows="4"
                       class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Leave a comment..."></textarea>
@@ -543,7 +562,8 @@
                 </svg>
                 <div class="ml-3 text-sm font-medium text-blue-700 rounded-lg">
                     <span class="font-medium">Did you know?</span> You can earn up to 20 points for submitting feature
-                    requests or bugs! A developer will manually review your request and if it is valid, they will decide how
+                    requests or bugs! A developer will manually review your request and if it is valid, they will decide
+                    how
                     much to award you based on how good quality/how important it is!
                 </div>
                 <button type="button"
@@ -601,11 +621,23 @@
             <li class="mt-12 lg:mt-8">
                 <h5 class="mb-8 lg:mb-3 text-3xl font-semibold text-slate-900 dark:text-slate-200">Settings</h5>
                 <ul class="space-y-6 lg:space-y-2 border-l border-slate-100 dark:border-slate-800">
-                    <li><a class="block border-l pl-4 -ml-px text-sky-500 border-current font-semibold dark:text-sky-400" href="#general">General Settings</a></li>
-                    <li><a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300" href="#connections">Connections</a></li>
-                    <li><a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300" href="#bug">Submit a Bug Report</a></li>
-                    <li><a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300" href="#request">Submit a Feature Request</a></li>
-                    <li><a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300" href="#danger">Danger Zone</a></li></ul></li>
+                    <li>
+                        <a class="block border-l pl-4 -ml-px text-sky-500 border-current font-semibold dark:text-sky-400"
+                           href="#general">General Settings</a></li>
+                    <li>
+                        <a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                           href="#connections">Connections</a></li>
+                    <li>
+                        <a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                           href="#bug">Submit a Bug Report</a></li>
+                    <li>
+                        <a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                           href="#request">Submit a Feature Request</a></li>
+                    <li>
+                        <a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                           href="#danger">Danger Zone</a></li>
+                </ul>
+            </li>
         </div>
         <div id="authentication-modal" aria-hidden="true"
              class="hidden overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center h-modal md:h-full md:inset-0">
@@ -616,7 +648,8 @@
                         <button type="button"
                                 class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
                                 data-modal-toggle="authentication-modal">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
                                       d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
                                       clip-rule="evenodd"></path>
@@ -633,14 +666,16 @@
                                    placeholder="••••••••" required>
                         </div>
                         <div>
-                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">New
+                            <label for="password"
+                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">New
                                 Password</label>
                             <input type="password" name="password" id="password" placeholder="••••••••"
                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                    required>
                         </div>
                         <div>
-                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Confirm
+                            <label for="password"
+                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Confirm
                                 New Password</label>
                             <input type="password" name="password" id="password" placeholder="••••••••"
                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
@@ -658,7 +693,8 @@
                                         me</label>
                                 </div>
                             </div>
-                            <a href="#" class="text-sm text-blue-700 hover:underline dark:text-blue-500">Lost Password?</a>
+                            <a href="#" class="text-sm text-blue-700 hover:underline dark:text-blue-500">Lost
+                                Password?</a>
                         </div>
                         <button type="submit"
                                 class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">

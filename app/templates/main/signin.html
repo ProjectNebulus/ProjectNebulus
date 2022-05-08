@@ -2,17 +2,6 @@
 {% block main %}
     <head>
         <script src="/static/js/signin.js"></script>
-        <style>
-            .bg-signin-bg {
-                background: url("/static/images/background-images/signin-background.png") no-repeat center center fixed !important;
-                -webkit-background-size: cover;
-                -moz-background-size: cover;
-                -o-background-size: cover;
-                background-size: cover;
-                top: 0;
-                left: 0;
-            }
-        </style>
     </head>
     <body>
     <script>
@@ -32,10 +21,9 @@
         }
 
         setInterval(autoScroll, 50);
-
     </script>
-    <div id="scrolldis" class="noselect"
-         style="z-index: -1; filter:blur(1rem); height:100%;overflow-y:scroll;pointer-events: none;">
+    <div id="scrolldis" class="noselect h-full overflow-y-auto overflow-x-hidden"
+         style="z-index: -1; filter: blur(1rem);">
         {% include "lms.html" %}
     </div>
     <div class="container mx-auto p-4 bg-white/[0.9] rounded-lg w-1/2 pb-1/2"
@@ -118,13 +106,13 @@
                                   d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path>
                         </svg>
                         <button id="confirmButton">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 14l9-5-9-5-9 5 9 5z"></path>
-                            <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"></path>
-                        </svg>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                                <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"></path>
+                            </svg>
                         </button>
                     </div>
                 </div>

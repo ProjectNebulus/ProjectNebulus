@@ -1,4 +1,5 @@
 <!-- Main modal -->
+<div style="display:none" id="course_id">{{ course.id }}</div>
 <div id="searchModal" tabindex="-1" aria-hidden="true"
      class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
     <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
@@ -180,9 +181,9 @@
 </div>
 <div id="createDocument" tabindex="-1" aria-hidden="true" style="overflow: scroll;"
      class="hidden fixed z-50 w-full md:inset-0 h-modal md:h-full">
-    <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+    <div class="relative p-4 w-full max-w-2xl h-full md:h-auto bg-gray-50 dark:bg-gray-700 rounded-lg shadow">
         <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <div class="relative">
             <!-- Modal header -->
             <div class="flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600">
                 <button onclick="closeModal('createDocument');" type="button"
@@ -198,41 +199,20 @@
             <!-- Modal body -->
             <div class="p-6 space-y-6">
                 <h1 class="text-2xl dark:text-white">Upload a File</h1>
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="file">Upload
-                    file</label>
-                <input name="file"
-                       class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                       aria-describedby="user_avatar_help" id="file" type="file"><br>
-                <input onclick="the_upload()" id="upload-file" value="Import File" type="submit"
-                       class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                <div style="display:none" id="course_id">{{ course.id }}</div>
-                <h1 class="text-2xl dark:text-white">Add a Link</h1>
-                <div class="mb-6">
-                    <label for="thelink"
-                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Link</label>
-                    <input type="url" id="thelink"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                           placeholder="https://example.url/document.pdf" required>
-                </div>
-                <br>
-                <button onclick="the_upload_link()" type="button"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                    Create Document with Link
-                </button>
-
-
+                <input name="file" aria-describedby="user_avatar_help" id="file" type="file"
+                       class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"><br>
             </div>
-            <!-- Modal footer -->
-            <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-                <button data-modal-toggle="createDocument" type="button"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    I accept
-                </button>
-                <button data-modal-toggle="createDocument" type="button"
-                        class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
-                    Decline
-                </button>
-            </div>
+        </div>
+        <!-- Modal footer -->
+        <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+            <button data-modal-toggle="createDocument" type="button" onclick="the_upload()"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Create Document
+            </button>
+            <button data-modal-toggle="createDocument" type="button"
+                    class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                Cancel
+            </button>
         </div>
     </div>
 </div>
@@ -254,34 +234,31 @@
                 </button>
             </div>
             <!-- Modal body -->
+            <div class="p-6 space-y-6">
+                <h1 class="text-2xl dark:text-white">Add a Link</h1>
+                <div class="mb-6">
+                    <label for="thelink"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Link</label>
+                    <input type="url" id="thelink"
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                           placeholder="https://example.url/document.pdf" required>
+                </div>
+                <br>
 
-            <h1 class="text-2xl dark:text-white">Create a Nebulus Document</h1>
-            <div class="mb-6">
-                <label for="doclink" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Document
-                    Name</label>
-                <input id="doclink"
-                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                       placeholder="name@flowbite.com" required><br>
-                <button type="button"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                    Create Document
-                </button>
             </div>
-
         </div>
         <!-- Modal footer -->
         <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
             <button data-modal-toggle="createDocument" type="button"
                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                I accept
+                Create Document
             </button>
             <button data-modal-toggle="createDocument" type="button"
                     class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
-                Decline
+                Cancel
             </button>
         </div>
     </div>
-</div>
 </div>
 <div id="createAnnouncement" tabindex="-1" aria-hidden="true"
      class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
@@ -320,7 +297,7 @@
             </div>
             <!-- Modal footer -->
             <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-                <button onclick="createAnnouncement()" -modal-toggle="createAnnouncement" type="button"
+                <button onclick="createAnnouncement(); closeModal('createAnnouncement')" type="button"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     Create Announcement
                 </button>
@@ -392,7 +369,7 @@
             </div>
             <!-- Modal footer -->
             <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-                <button onclick="createAssignment(); return false;" -modal-toggle="createAssignment" type="button"
+                <button onclick="createAssignment()" -modal-toggle="createAssignment" type="button"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     Create Assignment
                 </button>

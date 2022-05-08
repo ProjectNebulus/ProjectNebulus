@@ -59,6 +59,7 @@ function createCourse(subtemplate) {
             username: user,
             name: document.getElementById('course-name').value,
             teacher: document.getElementById('course-teacher').value,
+            avatar: "https://app.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg",
             template: subtemplate
         })
     );
@@ -85,7 +86,7 @@ for (let i = 0; i < pageCounters.length; i++) {
     //position: absolute;
     //     bottom: 0;
     pageCounters[i].style.position = "absolute";
-    pageCounters[i].style.bottom ="0";
+    pageCounters[i].style.bottom = "0";
 
 }
 
@@ -339,9 +340,10 @@ function importSchoology() {
     );
 
 }
+
 function schoologyCourseReq() {
     const status = document.getElementById('create-course-status');
-    if(this.responseText === '1'){
+    if (this.responseText === '1') {
         status.style.color = 'red';
         status.innerHTML = 'You have not connected your schoology account! Please connect a schoology account to import courses from Schoology.';
     }

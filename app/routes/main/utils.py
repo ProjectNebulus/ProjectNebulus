@@ -3,13 +3,17 @@ from functools import wraps
 
 from flask import session, redirect, request, render_template
 
-from ...static.python.mongodb import read
+try:
+    from ...static.python.mongodb import read
+except ImportError:
+    ...
+
+SCHOOLOGY_COURSE_ICON = "https://app.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg"
 
 
 def logged_in(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
-        print("User logged in:", dict(session))
         if session.get("username"):
             try:
                 read.find_user(username=session.get("username"))

@@ -11,10 +11,10 @@
 
         <h2 class="text-black dark:text-white text-2xl ml-6">Recent Activity</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 p-6">
-            <div class="pb-2 overflow-hidden" style="">
+            <div class="pb-2 overflow-hidden" style="height: 20rem">
                 <table class="rounded-lg text-sm text-left text-gray-500 dark:text-gray-400 px w-full bg-gray-300 dark:bg-gray-800"
-                       style="border-radius:10px;">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400" style="border-radius:10px 10px 0 0 !important;">
+                       style="height: 17rem" id="recent-activity">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">Event</th>
                         <th scope="col" class="px-6 py-3">Date</th>
@@ -23,9 +23,12 @@
                         <th scope="col" class="px-6 py-3"><span class="sr-only">Edit</span></th>
                     </tr>
                     </thead>
-                    <tbody style="border-radius:0 0 10px 10px !important;">
+
+                    <tbody>
                     {% if events|length == 0 %}
-                        <p class="mx-auto my-auto text-gray-300 dark:text-gray-700 absolute">No Events</p>
+                        <tr class="text-gray-400 dark:text-gray-400">
+                            <td id="no-events">No Events</td>
+                        </tr>
                     {% else %}
                         {% for event in events[:5] %}
                             {% if event._cls == "Event" %}
@@ -77,65 +80,76 @@
                     </tbody>
                 </table>
 
-                <div class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <button class="material-icons mx-2 my-2 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-500">
+                <div class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
+                    <button class="material-icons mx-2 my-2 rounded hover:bg-gray-300 dark:hover:bg-gray-500">
                         navigate_before
                     </button>
-                    <button class="material-icons mx-2 my-2 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-500"
+                    <button class="material-icons mx-2 my-2 rounded hover:bg-gray-300 dark:hover:bg-gray-500"
                             style="float: right">
                         navigate_next
                     </button>
                 </div>
             </div>
-            <div class="overflow-hidden pb-2" style="margin-top: -3rem">
+            <div class="pb-2" style="margin-top: -3rem; height: 20rem">
                 <h2 class="text-black dark:text-white text-2xl ml-4">Recent Announcements</h2>
-                <div class="grid grid-cols-2 gap-4 pl-4" style="">
-                    {% for announcement in announcements %}
-                        <div id="alert-additional-content-5" class="p-4 mb-4 bg-gray-100 rounded-lg dark:bg-gray-700"
-                             role="alert">
-                            <div class="flex items-center">
-                                <svg class="mr-2 w-5 h-5 text-gray-700 dark:text-gray-300" fill="currentColor"
-                                     viewBox="0 0 20 20"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                                          clip-rule="evenodd"></path>
-                                </svg>
-                                <h3 class="text-lg font-medium text-gray-700 dark:text-gray-300">{{ announcement.title }}</h3>
-                            </div>
-                            <p class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">{{ announcement.course.name }}
-                                > {{ announcement.author }}</p>
-                            <div class="mt-2 mb-4 text-sm text-gray-700 dark:text-gray-300">
-                                {% if announcement.content|length <= 300 %}
-                                {{ announcement.content }}
-
-                            {% else %}
-                                {{ announcement.content[0:300] }}...
-                            {% endif %}
-                            </div>
-                            <br>
-                            <div class="flex">
-                                <button type="button"
-                                        class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-xs px-3 py-1.5 mr-2 text-center inline-flex items-center dark:bg-gray-600 dark:hover:bg-gray-500 dark:focus:ring-gray-600">
-                                    <svg class="-ml-0.5 mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20"
+                <div class="overflow-x-hidden overflow-y-auto hover-scroll h-full">
+                    <div class="grid gap-4 pl-4 mt-5"
+                         style="grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));">
+                        {% for a in announcements %}
+                            <div id="announcement-{{ a.id }}" role="alert"
+                                 class="p-4 mb-4 bg-gray-100 rounded-lg dark:bg-gray-700 w-72 h-64 mt-5">
+                                <div class="flex items-center">
+                                    <svg class="mr-2 w-5 h-5 text-gray-700 dark:text-gray-300" fill="currentColor"
+                                         viewBox="0 0 20 20"
                                          xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
                                         <path fill-rule="evenodd"
-                                              d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                                              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
                                               clip-rule="evenodd"></path>
                                     </svg>
-                                    View more
-                                </button>
-                                <button type="button"
-                                        class="text-gray-700 bg-transparent border border-gray-700 hover:bg-gray-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:border-gray-600 dark:hover:bg-gray-600 focus:ring-gray-600 dark:text-gray-300 dark:hover:text-white"
-                                        data-dismiss-target="#alert-additional-content-5" aria-label="Close">
-                                    Dismiss
-                                </button>
+
+                                    {% if a.title != "" %}
+                                        <h3 class="text-lg font-medium text-black dark:text-white">{{ a.title }}</h3>
+                                    {% endif %}
+                                </div>
+                                <p class="text-xs text-gray-700 uppercase dark:text-gray-400"
+                                   style="margin-left: 1.8rem">
+                                    {{ a.course.name }} > {{ a.author }}
+                                </p>
+                                <div class="mt-4 text-sm text-gray-500 dark:text-gray-300">
+                                    {% for line in a.content.split("\n") %}
+                                        {% if line != "" %}
+                                            <p>{{ line }}</p>
+                                        {% else %}
+                                            <br>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                <br>
+                                <div class="flex">
+                                    <button type="button" class="text-white bg-gray-600 dark:bg-gray-700
+                                    hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium
+                                     rounded-lg text-xs px-3 py-1.5 mr-2 text-center inline-flex items-center
+                                     dark:bg-gray-600 dark:hover:bg-gray-500 dark:focus:ring-gray-600">
+                                        <svg class="-ml-0.5 mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                                            <path fill-rule="evenodd"
+                                                  d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                                                  clip-rule="evenodd"></path>
+                                        </svg>
+                                        View more
+                                    </button>
+                                    <button type="button"
+                                            class="text-gray-700 bg-transparent border border-gray-700 hover:bg-gray-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:border-gray-600 dark:hover:bg-gray-600 focus:ring-gray-600 dark:text-gray-300 dark:hover:text-white"
+                                            data-dismiss-target="#announcement-{{ a.id }}" aria-label="Close">
+                                        Dismiss
+                                    </button>
+                                </div>
+                                <br>
+                                <p class="text-xs text-gray-400 dark:text-gray-400">{{ strftime(a.date, "%-I:%M %p on %B %-d, %Y") }}</p>
                             </div>
-                            <br>
-                            <p class="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">{{ strftime(announcement.date, "%-I:%M %p on %B %-d, %Y") }}</p>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -146,11 +160,9 @@
             <br>
             <div class="text-left grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                 {% for course in user_courses %}
-                    <a href="/course/{{ course.id }}" style="width:25rem; height: 15rem; margin:1rem;"
-                       class="max-w-md bg-gray-100 hover:bg-gray-600 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:hover:bg-gray-600 dark:border-gray-700">
-                        <img class="rounded-t-lg"
-                             src="{{ course.avatar.avatar_url }}" style="width:100%;height:50%;object-fit: cover;"
-                             alt="Course Image"/>
+                    <a href="/course/{{ course.id }}" style="width:18rem; margin:1rem;"
+                       class="max-w-sm bg-gray-50 hover:bg-gray-200 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:hover:bg-gray-600 dark:border-gray-700">
+                        <img class="rounded-t-lg w-full" src="{{ course.avatar.avatar_url }}" alt="Course Image">
                         <div class="p-5">
                             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white truncate">{{ course.name }}</h5>
                         </div>

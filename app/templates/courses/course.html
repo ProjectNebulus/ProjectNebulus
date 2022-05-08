@@ -16,53 +16,27 @@
             <span style="float:left" class="text-5xl text-black dark:text-white text-black" id="page-title"></span>
 
             <div style="float: right; margin-right: 3rem">
-                <button type="button" id="search" onclick="openModal('searchModal');"
-                        style="width:64px;height:44px" title="Search Course"
-                        class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                    <span class="material-icons">search</span></button>
+                <button type="button" id="search" onclick="openModal('searchModal');" style="width:64px;height:44px"
+                        title="Search Course" class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600
+                         hover:bg-gradient-to-br focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg
+                          shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5
+                           py-2.5 text-center mr-2 mb-2">
+                    <span class="material-icons">search</span>
+                </button>
 
                 <button data-dropdown-toggle="adddropdown" type="button" id="create" style="width:64px;height:44px"
-                        class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                        class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br
+                         focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 mr-2 mb-2
+                          dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                     <span class="material-icons">add</span></button>
                 <!-- Dropdown menu -->
                 <div id="adddropdown"
                      class="hidden z-10 w-50 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
                     <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="adddropdownDefault">
-                        <li>
-                            <a style="display: grid; grid-auto-flow: column; align-content: center;" onclick="openModal('createDocument');"
-                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><span
-                                    class="material-icons text-blue-500">add</span> Upload Document</a>
-                        </li>
-                        <li>
-                            <a style="display: grid; grid-auto-flow: column; align-content: center;" onclick="openModal('createDocument2');"
-                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><span
-                                    class="material-icons text-blue-500">add</span> Create Document</a>
-                        </li>
-                        <li>
-                            <a style="display: grid; grid-auto-flow: column; align-content: center;" onclick="openModal('createFolder');"
-                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><span
-                                    class="material-icons text-blue-500">add</span> <span style="float:left;margin-left:3px;">New Folder</span></a>
-                        </li>
-                        <li>
-                            <a style="display: grid; grid-auto-flow: column; align-content: center;" onclick="openModal('createAnnouncement');"
-                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><span
-                                    class="material-icons text-blue-500">add</span> New Announcement</a>
-                        </li>
-                        <li>
-                            <a style="display: grid; grid-auto-flow: column; align-content: center;" onclick="openModal('createAssignment');"
-                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><span
-                                    class="material-icons text-blue-500">add</span> New Assignment</a>
-                        </li>
-                        <li>
-                            <a style="display: grid; grid-auto-flow: column; align-content: center;" onclick="openModal('createTextbook');"
-                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><span
-                                    class="material-icons text-blue-500">add</span> New Textbook</a>
-                        </li>
-                        <li>
-                            <a onclick="openModal('createGrade');"
-                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><span
-                                    class="material-icons text-blue-500">add</span> New Grade</a>
-                        </li>
+                        <li><a class="link"></a></li>
+                        <li><a class="link"></a></li>
+                        <li><a class="link"></a></li>
+                        <li><a class="link"></a></li>
                     </ul>
                 </div>
             </div>
@@ -120,6 +94,8 @@
     <script>
         const iframe = document.getElementsByName("frame")[0];
         const upcoming = document.getElementById("upcoming-events");
+        const actions = document.getElementsByClassName("link");
+        const createButton = document.getElementById("create");
 
         const pageTitle = document.getElementById("page-title");
         let removed = true;
@@ -137,6 +113,11 @@
                 break;
             }
         }
+
+        for (const action of actions)
+            action.classList.add('block', 'py-2', 'px-4', 'hover:bg-gray-100', 'dark:hover:bg-gray-600', 'dark:hover:text-white');
+
+        setCreateButton(pageTitle.innerHTML)
     </script>
     {% include "courses/searchModals.html" %}
     </body>

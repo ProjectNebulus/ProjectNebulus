@@ -156,7 +156,7 @@ def sortByDateTime(obj):
     return obj.date if obj._cls == "Event" else obj.due
 
 
-def sort_course_events(user_id: str, course_id: int) -> List[List]:
+def sort_course_events(user_id: str, course_id: int):
     courses = get_user_courses(user_id)
     course = None
     for i in courses:
@@ -199,7 +199,7 @@ def sort_course_events(user_id: str, course_id: int) -> List[List]:
     return [announcements, dates]
 
 
-def sort_user_events(user_id: str) -> List[List]:
+def sort_user_events(user_id: str):
     courses = get_user_courses(user_id)
     events = Event.objects(course__in=courses)
     announcements = Announcement.objects(course__in=courses)
@@ -208,9 +208,8 @@ def sort_user_events(user_id: str) -> List[List]:
     from itertools import chain, groupby
 
     events_assessments_assignments = list(chain(events, assignments, assessments))
-    sorted_events = sorted(
-        events_assessments_assignments, key=lambda obj: sortByDateTime(obj)
-    )
+    sorted_events = sorted(events_assessments_assignments, key=lambda obj: sortByDateTime(obj))
+
     dates = dict(
         {
             key: list(result)
@@ -262,6 +261,7 @@ def check_signup_email(email) -> str:
     if User.objects(email=email):
         return "false"
     return "true"
+
 
 def check_duplicate_schoology(user_id, schoologyemail) -> str:
     if User.objects(schoology__schoologyEmail=schoologyemail):

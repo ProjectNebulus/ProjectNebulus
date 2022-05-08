@@ -5,7 +5,7 @@ from graphene.types import generic
 
 
 class AvatarInput(graphene.InputObjectType):
-    avatar_url = graphene.String(required=True)
+    url = graphene.String(required=True)
 
 
 class CourseInput(graphene.InputObjectType):
