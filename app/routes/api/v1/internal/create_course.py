@@ -184,16 +184,24 @@ def create_schoology_course():
     scassignments = sc.get_assignments(link)
     assignments = []
     for assignment in scassignments:
-        assignments.append(
+        due = assignment["due"]
+        if due != "":
+            due = datetime.fromisoformat(due)
+        else:
+            due = None
+
+        create.createAssignment(
+
             {
-                "id": assignment["id"],
-                "name": assignment["title"],
-                "info": assignment["description"],
-                "url": assignment["web_url"],
-                "completed": assignment["completed"],
-                "due": assignment["due"],
+                "id": str(assignment["id"]),
+                "title": assignment["title"],
+                "description": assignment["description"]+f"\n\nView On Schoology: {assignment['web_url']}",
+                #"submitDate": assignment["dropbox_last_submission"],
+                "due": due,
+                "course": course_obj,
+                "points": assignment["max_points"]
             }
         )
-        course["assignments"] = assignments
+
 
     return "success"
