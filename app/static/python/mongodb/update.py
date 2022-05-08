@@ -13,11 +13,11 @@ def schoologyLogin(_id: str, schoology: dict):
     user.save(clean=False)
     print(user.password)
 
-def logout_from_schoology(_id: str):
+def logout_from_schoology(_id: str, schoology_obj: Schoology):
     user = find_user(id=_id)
     if not user:
         raise KeyError("User not found")
-    user.schoology = None
+    user.schoology.remove(schoology_obj)
     user.save(clean=False)
     return "true"
 

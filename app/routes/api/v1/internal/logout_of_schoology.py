@@ -35,5 +35,7 @@ def logout_from_schoology2():
         session.pop("access_token")
     except:
         pass
-    update.logout_from_schoology(read.find_user(username=session["username"]).id)
+    user = read.find_user(username=session["username"])
+
+    update.logout_from_schoology(user.id, user.schoology[0] )
     return redirect("/settings")
