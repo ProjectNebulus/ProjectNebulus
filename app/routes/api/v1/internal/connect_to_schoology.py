@@ -9,15 +9,10 @@ from .....static.python.mongodb import update, read
 @internal.route("/connect-to-schoology", methods=["POST"])
 def connect_schoology():
     session["token"] = None
-
+    data = request.get_json()
     key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
     secret = "59ccaaeb93ba02570b1281e1b0a90e18"
-    if request.form.get("key"):
-        key = request.form.get("key")
-    if request.form.get("secret"):
-        secret = request.form.get("key")
     sc = schoolopy.Schoology(schoolopy.Auth(key, secret))
-
     sc.limit = 100
     request_token = session["request_token"]
     request_token_secret = session["request_token_secret"]
@@ -36,6 +31,7 @@ def connect_schoology():
     auth.authorize()
     if not auth.authorized:
         return "error!!!"
+
     request_token = auth.request_token
     request_token_secret = auth.request_token_secret
     access_token_secret = auth.access_token_secret
@@ -48,7 +44,7 @@ def connect_schoology():
     sc.limit = 100
     session["Schoologyname"] = sc.get_me().name_display
     session["Schoologyemail"] = sc.get_me().primary_email
-    session["Schoologydomain"] = request.form.get("link")
+    session["Schoologydomain"] = data['link']
     session["Schoologyid"] = sc.get_me().id
     if read.check_duplicate_schoology(session["id"], session["Schoologyemail"]) == "false":
         return "2"
@@ -63,8 +59,8 @@ def connect_schoology():
         "schoologyName": session["Schoologyname"],
         "schoologyEmail": session["Schoologyemail"],
         "schoologyDomain": session["Schoologydomain"],
-        "apikey": key,
-        "apisecret": secret
+        "apikey": data['key'],
+        "apisecret": data['secret']
     }
 
     update.schoologyLogin(session["id"], schoology)

@@ -107,10 +107,7 @@ def create_schoology_course():
     schoology = schoology[0]
     key = schoology.apikey
     secret = schoology.apisecret
-    if schoology.apikey:
-        key = schoology.apikey
-    if schoology.apisecret:
-        secret = schoology.apisecret
+
     auth = schoolopy.Auth(
         key,
         secret,

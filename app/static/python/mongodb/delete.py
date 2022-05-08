@@ -8,6 +8,22 @@ def delete_course(course_id: int) -> None:
     Deletes a user from the database.
     """
     course = Course.objects.get(pk=course_id)
+    for announcement in course.announcements:
+        announcement.delete()
+
+    for event in course.events:
+        event.delete()
+
+    for folder in course.folders:
+        folder.delete()
+
+    for document in course.documents:
+        document.delete()
+
+    for assignmnent in course.assignments:
+        assignmnent.delete()
+
+
     for i in course.AuthorizedUsers:
         i.courses.remove(course)
     course.delete()

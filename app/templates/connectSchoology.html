@@ -54,7 +54,7 @@
 
                 var request = $.ajax({
                     type: "POST",
-                    url: "/api/v1/internal/signin-with-schoology",
+                    url: "/api/v1/internal/connect-to-schoology",
                     data: {
                         "link": "https://" + document.getElementById("domain").value + ".schoology.com/",
                         "key":document.getElementById("key").value,
@@ -123,11 +123,13 @@
             var request = $.ajax({
                 type: "POST",
                 url: "/api/v1/internal/connect-to-schoology",
-                data: {
-                    "link": "https://" + document.getElementById("domain").value + ".schoology.com/",
-                    "key":document.getElementById("key").value,
-                    "secret":document.getElementById("secret").value
-                }
+                data: JSON.stringify({
+                    link: "https://" + document.getElementById("domain").value + ".schoology.com/",
+                    key:document.getElementById("key").value,
+                    secret:document.getElementById("secret").value
+                }),
+                dataType: "json",
+                contentType: "application/json"
 
             })
             request.done(function (data) {
