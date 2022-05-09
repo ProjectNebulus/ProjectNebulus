@@ -6,7 +6,219 @@
 
         <div class="grid grid-cols-1 divide-y divide-gray-700 hidden lg:block"
              style="height:100%;width:100%;float:left;padding-left:2rem;padding-right:1rem">
-        <div id="middle2" style="float:left;overflow:auto" class="w-full">
+            <div class="flex flex-row">
+                <div id="middle" style="padding-left:2rem;padding-right:1rem;flex:0 0 75%;overflow:auto">
+                    <div class="flex flex-row w-full mb-4">
+                        <h1 class="text-4xl text-black dark:text-white mt-5 text-left overflow-auto"
+                            style="flex-grow: 1;">
+                            Recent Activity
+                        </h1>
+                        <br>
+                        <button class="p-1.5 hover:bg-blue-200 dark:hover:bg-gray-700 rounded-lg mt-5 text-black dark:text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8"
+                                 fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                      d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <ol class="relative border-l border-gray-200 dark:border-gray-700 lg:ml-0">
+                        {% for i, tuple in enumerate(announcements.items()) %}
+                            {% set date,list = tuple %}
+                            <li class="mb-10 ml-4">
+                                <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                                <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+                                    {{ strftime(date, "%a, %B %-d, %Y") }}
+                                </time>
+                                <br>
+                                <div class="grid grid-cols-4 gap-2 pt-2">
+                                    {% for j in range(list|length) %}
+                                        {% set a = list[j] %}
+                                        <div id="toast-notification"
+                                             class="w-full max-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 overflow-hidden"
+                                             role="alert">
+                                            <h4 class="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2 text-ellipses">
+                                                {{ a.title }}{{ a.author * (a.title == "")|int }}</h4>
+                                            <div class="flex items-center mb-3">
+                                                <img data-dropdown-toggle="userDropdown{{ i }}_{{ j }}"
+                                                     id="avatar{{ i }}_{{ j }}" data-dropdown-placement="bottom-start"
+                                                     class="w-6 h-6 rounded-full ring-2 ring-gray-300 dark:ring-gray-500
+                                                     cursor-pointer mb-3 rounded-full shadow-lg
+                                                     {% if "black" in avatar %} bg-gray-300
+                                                     {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}"
+                                                     width="20" height="20"
+                                                     src="{{ a.author_pic }}"
+                                                     alt="{{ a.author }} profile picture">
+                                                <br>
+
+                                                <div class="text-xs text-gray-700 dark:text-gray-400 pl-2 line-clamp-2">
+                                                    {% if a.title != "" %}
+                                                        <span class="uppercase font-bold text-black dark:text-white ">{{ a.author }}</span>
+                                                        >
+                                                    {% endif %}
+                                                    <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase
+                                                     mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">
+                                                        {{ a.course.name }}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <div class="text-sm text-gray-900 dark:text-white font-normal">
+                                                    <div class="text-sm text-gray-900 dark:text-white font-normal line-clamp-3">
+                                                        {% for line in a.content.split("\n") %}
+                                                            {% if line != "" %}
+                                                                <p>{{ line }}</p>
+                                                            {% else %}
+                                                                <br>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </div>
+                                                    <time class="text-xs font-medium text-blue-600 dark:text-blue-500">
+                                                        {{ strftime(a.date.time(), "%-I:%M %p") }}
+                                                    </time>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Dropdown menu -->
+                                        <div id="userDropdown{{ i }}_{{ j }}"
+                                             class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600">
+                                            <div style="border-radius:10px 10px 0 0; height:60px;background:rgba{{ a.author_color }};"></div>
+                                            <div class="px-4 py-3 text-xl text-gray-900 dark:text-white"
+                                                 style="border-radius:0 0 10px 10px;">
+                                                <div style="text-align: center;">
+                                                    <img style="margin-top:-60px;background:rgb(18,25,38);border-style:solid;border-color:white;border-width:2px;"
+                                                         src="{{ a.author_pic }}"
+                                                         class="w-24 h-24 rounded-full"
+                                                         alt="{{ a.author }}'s Profile Picture">
+                                                    <div>{{ a.author }}</div>
+                                                    <div class="text-sm text-gray-400">{{ a.author_email }}</div>
+                                                    <div class="text-sm text-gray-400">Instructor
+                                                        at {{ a.author_school }}</div>
+                                                    <div class="mb-6">
+                                                        <input type="text" id="msg"
+                                                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                               placeholder="Message @{{ a.author }}"
+                                                               required>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </li>
+                        {% endfor %}
+                        {% if announcements.items()|length == 0 %}
+                            <li class="mb-10 ml-4">
+                                <div class="absolute w-3 h-3 bg-gray-200 rounded-full -mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                                <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+                                    {{ strftime(user_acc.created_at, "%a, %B %-d, %Y") }}
+                                </time>
+                                <br>
+                                <div class="grid grid-cols-4 gap-2 pt-2">
+
+                                    <div id="toast-notification"
+                                         class="w-full max-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 overflow-hidden"
+                                         role="alert">
+                                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2 text-ellipses">
+                                            Welcome to Nebulus</h4>
+                                        <div class="flex items-center mb-3">
+                                            <img class="w-6 h-6 rounded-full ring-2 ring-gray-300 dark:ring-gray-500
+                                                 {% if "black" in avatar %} bg-gray-300
+                                                 {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}"
+                                                 src="{{ avatar }}" alt="Nebulus profile picture"><br>
+
+                                            <p class="text-xs text-gray-700 dark:text-gray-400 pl-2 line-clamp-1">
+                                                <span class="uppercase font-bold text-black dark:text-white ">Nebulus</span>
+                                                in
+                                                <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase
+                                                     mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">
+                                                        Nebulus Auto-Generator
+                                                    </span>
+                                            </p>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <div class="text-sm text-gray-900 dark:text-white font-normal">
+                                                <div class="text-sm text-gray-900 dark:text-white font-normal line-clamp-3">
+                                                    Welcome to your Nebulus account! Get started by adding your courses
+                                                    - school & extracurricular!
+                                                </div>
+                                                <time class="text-xs font-medium text-blue-600 dark:text-blue-500">
+                                                    {{ strftime(user_acc.created_at, "%-I:%M %p") }}
+                                                </time>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endif %}
+                    </ol>
+                </div>
+
+
+                <div id="right" style="float:right;flex: 0 0 25%"
+                     class="border-gray-200 dark:border-gray-700 border-l text-center overflow-auto h-full">
+                    <p class="text-2xl text-black dark:text-white">Upcoming Events</p><br>
+                    <div style="text-align: center;">
+                        <div class="flex flex-col overflow-x-auto sm:rounded-lg min-w-full align-middle overflow-auto inline-block">
+                            {% if events|length == 0 %}
+                                <p class="text-gray-300 dark:text-gray-700 mx-4">No Events, Assignments, or Quizzes! To
+                                    add events on to your Nebulus dashboard, please add it within a Course!</p>
+                            {% else %}
+                                {% for date, assignments in events.items() %}
+                                    {% for a in assignments[:15] %}
+                                        {% if a._cls == "Assignment" %}
+                                            {% if a.submitDate == None or date > today %}
+                                                <a href="/assignment/{{ a.id }}" class="flex text-black dark:text-white text-left
+                            bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 rounded-lg p-6 ml-3 shadow-md dark:border-gray-700 text-xl mb-5">
+                                                    <div class="mr-4 material-icons ml-2"
+                                                         style="transform: translate(0, 50%) scale(1.75)">assignment
+                                                    </div>
+                                                    <div class="truncate">
+                                        <span class="text-ellipses">{{ a.title }}
+                                        </span>
+
+                                                        <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">{{ a.course.name }}</span>
+                                                        <div class="text-xs text-gray-700 uppercase dark:text-gray-400">
+                                                            Due: {{ date.strftime("%D") }}
+                                                            {% if date < today %}
+                                                                •
+                                                                <span class="text-red-600 dark:text-red-500">Overdue</span>
+                                                            {% elif a.grade != None and a.grade / a.points < 0.6 %}
+                                                                <span class="text-black dark:text-white"> • </span>
+                                                                <span class="text-gray-300 dark:text-gray-700">{{ a.grade }}/{{ a.points }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            {% endif %}
+                                        {% else %}
+                                            <a href="/assignment/{{ a.id }}" class="flex text-black dark:text-white text-left
+                            bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 rounded-lg p-6 ml-3 shadow-md dark:border-gray-700 text-xl mb-5">
+                                                <div class="mr-4 material-icons ml-2"
+                                                     style="transform: translate(0, 50%) scale(1.75)">event
+                                                </div>
+                                                <div class="truncate">
+                                        <span class="text-ellipses">{{ a.title }}
+                                        </span>
+
+                                                    <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">{{ a.course.name }}</span>
+                                                    <div class="text-xs text-gray-700 uppercase dark:text-gray-400 line-clamp-2">
+                                                        {{ a.description }}
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="middle2" style="float:left;overflow:auto" class="w-full">
                 <br>
                 <h1 style="float:left" class="text-4xl pr-4 text-black dark:text-white">Your Courses</h1>
 
@@ -27,8 +239,9 @@
                                  style="float:left;margin:20px;height:13rem;width:40rem;">
                                 <div style="text-align: left;">
                                     <div style="margin-bottom:10px">
-                                        <img src="https://beta.nebulus.ml/static/images/nebulusCats/{{ avatar }}"
-                                             style="object-fit: cover; width:50px; height:50px; border-radius:10px;display: inline-block; margin: 10px;">
+                                        <img src="/static/images/nebulusCats/{{ avatar }}"
+                                             style="object-fit: cover; width:50px; height:50px; border-radius:10px;display: inline-block; margin: 10px;"
+                                             alt="Course Avatar">
 
 
                                         <div style="float:right;width:70%;margin-top:6px;">
@@ -120,7 +333,7 @@
                     {% for course in user_courses %}
                         <a href="/course/{{ course.id }}">
                             <div class="max-w-sm bg-gray-100 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 p-2"
-                                 style="float:left;margin:20px;height:13rem;width:23rem;">
+                                 style="float:left;margin:20px;height:13rem;width:22rem;">
                                 <div style="text-align: left;">
                                     <div style="margin-bottom:10px">
                                         <img src="{{ course.avatar.avatar_url }}"
@@ -227,204 +440,7 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class="flex flex-row">
-                <div id="middle" style="padding-left:2rem;padding-right:1rem;flex:0 0 75%;overflow:auto">
-                    <div class="flex flex-row w-full mb-4">
-                        <h1 class="text-4xl text-black dark:text-white mt-5 text-left overflow-auto"
-                            style="flex-grow: 1;">
-                            Recent Activity
-                        </h1>
-                        <br>
-                        <button class="p-1.5 hover:bg-blue-200 dark:hover:bg-gray-700 rounded-lg mt-5 text-black dark:text-white">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8"
-                                 fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                      d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-                            </svg>
-                        </button>
-                    </div>
-
-                    <ol class="relative border-l border-gray-200 dark:border-gray-700 lg:ml-0">
-                        {% for i, announcement_tuple in enumerate(announcements.items()) %}
-                            {%  set announcement_date, announcement_list =  announcement_tuple %}
-                            <li class="mb-10 ml-4">
-                                <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
-                                <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-                                    {{ strftime(announcement_date, "%a, %B %-d, %Y") }}
-                                </time>
-                                <br>
-                                <div class="grid grid-cols-4 gap-2 pt-2">
-                                    {% for j in range(announcement_list|length) %}
-                                        {% set announcement = announcement_list[j] %}
-                                        <div id="toast-notification"
-                                             class="w-full max-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 overflow-hidden"
-                                             role="alert">
-                                            <h4 class="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2 text-ellipses">{{ announcement.title }}</h4>
-                                            <div class="flex items-center mb-3">
-                                                <img  data-dropdown-toggle="userDropdown{{ i }}_{{ j }}" id="avatar{{ i }}_{{ j }}" data-dropdown-placement="bottom-start"  class="w-6 h-6 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 ursor-pointer mb-3 rounded-full shadow-lg"
-                                                     src="{{ announcement.author_pic }}"
-                                                     alt="{{ announcement.author }} profile picture">
-                                                <br>
-
-                                                <p class="text-xs text-gray-700 dark:text-gray-400 pl-2 line-clamp-2">
-                                                    <span class="uppercase font-bold text-black dark:text-white ">{{ announcement.author }}</span>
-                                                    in
-                                                    <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase
-                                                     mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">
-                                                        {{ announcement.course.name }}
-                                                    </span>
-                                                </p>
-                                            </div>
-                                            <div class="flex items-center">
-                                                <div class="text-sm text-gray-900 dark:text-white font-normal">
-                                                    <div class="text-sm text-gray-900 dark:text-white font-normal line-clamp-3">
-                                                        {% for line in announcement.content.split("\n") %}
-                                                            {% if line != "" %}
-                                                                <p>{{ line }}</p>
-                                                            {% else %}
-                                                                <br>
-                                                            {% endif %}
-                                                        {% endfor %}
-                                                    </div>
-                                                    <time class="text-xs font-medium text-blue-600 dark:text-blue-500">
-                                                        {{ strftime(announcement.date.time(), "%-I:%-M %p") }}
-                                                    </time>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Dropdown menu -->
-                                        <div id="userDropdown{{ i }}_{{ j }}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600">
-                                            <div style="border-radius:10px 10px 0px 0px; height:60px;background:rgba{{ announcement.author_color }};"></div>
-                                            <div class="px-4 py-3 text-xl text-gray-900 dark:text-white" style="border-radius:0px 0px 10px 10px;">
-                                                <center>
-                                                    <img style="margin-top:-60px;background:rgb(18,25,38);border-style:solid;border-color:white;border-width:2px;" src="{{ announcement.author_pic }}" class="w-24 h-24 rounded-full">
-                                                    <div>{{ announcement.author }}</div>
-                                                    <div class="text-sm text-gray-400">{{ announcement.author_email }}</div>
-                                                    <div class="text-sm text-gray-400">Instructor at {{ announcement.author_school }}</div>
-                                                    <div class="mb-6">
-                                                        <input type="text" id="msg" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Message @{{ announcement.author }}" required>
-                                                    </div>
-                                                </center>
-                                            </div>
-
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                            </li>
-                        {% endfor %}
-                        {% if announcements.items()|length == 0 %}
-                            <li class="mb-10 ml-4">
-                                <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
-                                <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-                                    {{ strftime(user_acc.created_at, "%a, %B %-d, %Y") }}
-                                </time>
-                                <br>
-                                <div class="grid grid-cols-4 gap-2 pt-2">
-
-                                    <div id="toast-notification"
-                                         class="w-full max-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 overflow-hidden"
-                                         role="alert">
-                                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2 text-ellipses">
-                                            Welcome to Nebulus</h4>
-                                        <div class="flex items-center mb-3">
-                                            <img class="w-6 h-6 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
-                                                 src="https://beta.nebulus.ml/static/images/nebulusCats/{{ avatar }}"
-                                                 alt="Nebulus profile picture">
-                                            <br>
-
-                                            <p class="text-xs text-gray-700 dark:text-gray-400 pl-2 line-clamp-1">
-                                                <span class="uppercase font-bold text-black dark:text-white ">Nebulus</span>
-                                                in
-                                                <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase
-                                                     mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">
-                                                        Nebulus Auto-Generator
-                                                    </span>
-                                            </p>
-                                        </div>
-                                        <div class="flex items-center">
-                                            <div class="text-sm text-gray-900 dark:text-white font-normal">
-                                                <div class="text-sm text-gray-900 dark:text-white font-normal line-clamp-3">
-                                                    Welcome to your Nebulus account! Get started by adding your courses
-                                                    - school & extracurricular!
-                                                </div>
-                                                <time class="text-xs font-medium text-blue-600 dark:text-blue-500">
-                                                    {{ strftime(user_acc.created_at, "%-I:%-M %p") }}
-                                                </time>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </li>
-                        {% endif %}
-                    </ol>
-                </div>
-
-
-                <div id="right" style="float:right;flex: 0 0 25%"
-                     class="border-gray-200 dark:border-gray-700 border-l text-center overflow-auto h-full">
-                    <p class="text-2xl text-black dark:text-white">Upcoming Events</p><br>
-                    <div style="text-align: center;">
-                        <div class="flex flex-col overflow-x-auto sm:rounded-lg min-w-full align-middle overflow-auto inline-block">
-                            {% if events|length == 0 %}
-                                <p class="text-gray-300 dark:text-gray-700 mx-4">No Events, Assignments, or Quizzes! To
-                                    add events on to your Nebulus dashboard, please add it within a Course!</p>
-                            {% else %}
-                                {% for date, assignments in events.items() %}
-                                    {% for a in assignments[:15] %}
-                                        {% if a._cls == "Assignment" %}
-                                        {% if a.submitDate == None or date > today %}
-                                            <a href="/assignment/{{ a.id }}" class="flex text-black dark:text-white text-left
-                            bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 rounded-lg p-6 ml-3 shadow-md dark:border-gray-700 text-xl mb-5">
-                                                <div class="mr-4 material-icons ml-2"
-                                                     style="transform: translate(0, 50%) scale(1.75)">assignment
-                                                </div>
-                                                <div class="truncate">
-                                        <span class="text-ellipses">{{ a.title }}
-                                        </span>
-
-                                                    <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">{{ a.course.name }}</span>
-                                                    <div class="text-xs text-gray-700 uppercase dark:text-gray-400">
-                                                        Due: {{ date.strftime("%D") }}
-                                                        {% if date < today %}
-                                                            •
-                                                            <span class="text-red-600 dark:text-red-500">Overdue</span>
-                                                        {#  a is not Event #}
-                                                        {% elif 'Assignment' in a.__class__.__name__ and a.grade != None and a.grade / a.points < 0.6 %}
-                                                            <span class="text-black dark:text-white"> • </span>
-                                                            <span class="text-gray-300 dark:text-gray-700">{{ a.grade }}/{{ a.points }}</span>
-                                                        {% endif %}
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        {% endif %}
-                                        {% else %}
-                                        <a href="/assignment/{{ a.id }}" class="flex text-black dark:text-white text-left
-                            bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 rounded-lg p-6 ml-3 shadow-md dark:border-gray-700 text-xl mb-5">
-                                                <div class="mr-4 material-icons ml-2"
-                                                     style="transform: translate(0, 50%) scale(1.75)">event
-                                                </div>
-                                                <div class="truncate">
-                                        <span class="text-ellipses">{{ a.title }}
-                                        </span>
-
-                                                    <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">{{ a.course.name }}</span>
-                                                    <div class="text-xs text-gray-700 uppercase dark:text-gray-400 line-clamp-2">
-                                                        {{ a.description }}
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        {% endif %}
-                                    {% endfor %}
-                                {% endfor %}
-                            {% endif %}
-
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
-
         <div class="block lg:hidden flex flex-row">
             <br>
             <div class="p-4 hidden sm:block">
@@ -462,7 +478,7 @@
                     <ol class="relative border-l border-gray-200 dark:border-gray-700 lg:ml-0 p-6">
                         {% for date, list in announcements.items() %}
                             <li class="mb-10 ml-4">
-                                <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                                <div class="absolute w-3 h-3 bg-gray-200 rounded-full -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
                                 <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
                                     {{ strftime(date, "%a, %B %-d, %Y") }}
                                 </time>
@@ -525,8 +541,6 @@
                         swaps classes to control the content visibility and styling.</p>
                 </div>
             </div>
-
-
         </div>
     </div>
     {% include "courseModal.html" %}

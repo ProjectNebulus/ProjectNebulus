@@ -7,7 +7,6 @@ from googleapiclient.discovery import build
 from . import main_blueprint, utils
 from .utils import logged_in
 from ...static.python.mongodb import read
-from ...static.python.classes import Event
 
 
 def credentials_to_dict(credentials):
@@ -44,6 +43,8 @@ def getGclassroomcourses():
 @main_blueprint.route("/lms", methods=["GET"])
 @logged_in
 def lms():
+    from ...static.python.classes import Event
+
     user_acc = read.find_user(id=session["id"])
     user_courses = read.get_user_courses(session["id"])
     events = read.sort_user_events(session["id"])
@@ -105,9 +106,11 @@ def lms():
             schoologycourses = list(sc.get_sections())
         except:
             schoologycourses = []
+
     return render_template(
         "lms.html",
-        user=session["username"], avatar=session.get("avatar", "v3.gif"),
+        user=session["username"],
+        avatar="/static/images/nebulusCats" + session.get("avatar", "v3.gif"),
         user_acc=user_acc,
         user_courses=list(user_courses),
         read=read,
@@ -119,6 +122,6 @@ def lms():
         gcourses=gcourses,
         canvascourses=canvascourses,
         schoologycourses=schoologycourses,
-        enumerate = enumerate,
-        Event = Event,
+        enumerate=enumerate,
+        Event=Event,
     )

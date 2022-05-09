@@ -27,7 +27,7 @@ def signin_username():
         session["username"] = user.username
         session["pswLen"] = len(json.get("password"))
         session["email"] = user.email
-        session["avatar"] = user.avatar.avatar_url.replace("https://localhost:8080/", "")
+        session["avatar"] = user.avatar.avatar_url.replace("https://localhost:8080", "")
         session["id"] = user.id
 
     return validation

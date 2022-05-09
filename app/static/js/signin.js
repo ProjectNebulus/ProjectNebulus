@@ -276,9 +276,9 @@ function loginUser() {
     );
 }
 
-function getRedirectParam(){
+function getRedirectParam() {
     let qd = {};
-    if (location.search) location.search.substr(1).split("&").forEach(function(item) {
+    if (location.search) location.search.substr(1).split("&").forEach(function (item) {
         let s = item.split("="),
             k = s[0],
             v = s[1] && decodeURIComponent(s[1]); //  null-coalescing / short-circuit
@@ -305,3 +305,19 @@ function reqListener2() {
         status.innerHTML = 'Oh no! A super rare bug occured on our end! Please contact support immediately!';
     }
 }
+
+let forwards = true;
+
+window.addEventListener("load", () => {
+    const bgImage = document.getElementById("scrolldis");
+
+    setInterval(() => {
+        if (bgImage.offsetHeight + bgImage.scrollTop >= bgImage.scrollHeight && forwards)
+            forwards = false;
+
+        if (bgImage.scrollTop <= 0 && !forwards)
+            forwards = true;
+
+        bgImage.scrollBy(0, forwards ? 5 : -5);
+    }, 100)
+});

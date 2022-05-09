@@ -100,7 +100,7 @@ window.addEventListener("load", function () {
             logo.style.height = size;
         }
 
-        logo.innerHTML = '<img alt="logo" style="' + logo.getAttribute("style") + '" class="' + logo.className + '" src="/static/images/nebulusCats/' + img + '">';
+        logo.innerHTML = '<img alt="logo" style="' + logo.getAttribute("style") + '" class="' + logo.className + '" src="' + img + '">';
 
         logo.removeAttribute("style");
         logo.removeAttribute("class");

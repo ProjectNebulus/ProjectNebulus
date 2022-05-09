@@ -36,7 +36,7 @@ def create_user():
         22: "newYellow.png",
     }
 
-    data["avatar"] = "https://localhost:8080/" + cats[int(data["avatar"].replace("cat", ""))]
+    data["avatar"] = cats[int(data["avatar"].replace("cat", ""))]
     data["avatar"] = Avatar(url=data["avatar"], parent="User")
     data["age"] = datetime.strptime(data["age"].strip(), '%m/%d/%Y')
     validation = create.create_user(data)
@@ -45,5 +45,6 @@ def create_user():
         session["email"] = validation[1].email
         session["pswLen"] = len(data.get("password"))
         session["id"] = validation[1].id
-        session["avatar"] = data["avatar"].avatar_url.replace("https://localhost:8080/", "")
+        session["avatar"] = data["avatar"].avatar_url
+
     return validation[0]

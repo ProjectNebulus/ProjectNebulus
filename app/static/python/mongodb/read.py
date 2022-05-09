@@ -199,7 +199,7 @@ def sort_course_events(user_id: str, course_id: int):
     return [announcements, dates]
 
 
-def sort_user_events(user_id: str):
+def sort_user_events(user_id: str, maxDays=8, maxEvents=16):
     courses = get_user_courses(user_id)
     events = Event.objects(course__in=courses)
     announcements = Announcement.objects(course__in=courses)
@@ -208,7 +208,7 @@ def sort_user_events(user_id: str):
     from itertools import chain, groupby
 
     events_assessments_assignments = list(chain(events, assignments, assessments))
-    sorted_events = sorted(events_assessments_assignments, key=lambda obj: sortByDateTime(obj))
+    sorted_events = sorted(events_assessments_assignments[:maxEvents], key=lambda obj: sortByDateTime(obj))
 
     dates = dict(
         {
@@ -227,7 +227,7 @@ def sort_user_events(user_id: str):
                     sorted_announcements, key=lambda obj: obj.date.date()
                 )
                 }.items()
-            )
+            )[-maxDays:]
         )
     )
 
