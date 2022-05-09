@@ -2,7 +2,7 @@ from datetime import datetime
 
 from mongoengine import *
 
-from routes.main import utils
+from ....routes.main import utils
 from .Avatar import Avatar
 from .Snowflake import Snowflake
 

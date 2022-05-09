@@ -1,5 +1,6 @@
 def connectCanvas(url, key):
     from canvasapi import Canvas
+
     API_URL = url
     API_KEY = key
     try:

@@ -43,9 +43,12 @@ def connect_schoology():
     sc.limit = 100
     session["Schoologyname"] = sc.get_me().name_display
     session["Schoologyemail"] = sc.get_me().primary_email
-    session["Schoologydomain"] = data['link']
+    session["Schoologydomain"] = data["link"]
     session["Schoologyid"] = sc.get_me().id
-    if read.check_duplicate_schoology(session["id"], session["Schoologyemail"]) == "false":
+    if (
+        read.check_duplicate_schoology(session["id"], session["Schoologyemail"])
+        == "false"
+    ):
         return "2"
 
     # auth.domain
@@ -58,8 +61,8 @@ def connect_schoology():
         "schoologyName": session["Schoologyname"],
         "schoologyEmail": session["Schoologyemail"],
         "schoologyDomain": session["Schoologydomain"],
-        "apikey": data['key'],
-        "apisecret": data['secret']
+        "apikey": data["key"],
+        "apisecret": data["secret"],
     }
 
     update.schoologyLogin(session["id"], schoology)

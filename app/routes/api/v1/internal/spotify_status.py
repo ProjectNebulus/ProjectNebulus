@@ -1,9 +1,20 @@
 from . import internal
 from ....main.spotify import get_song
-from .....routes.main.spotify import shuffle_spotify, shuffle2_spotify, loop_spotify, \
-    loop1_spotify, loop2_spotify, pause_spotify, next_spotify, prev_spotify, resume_spotify
+from .....routes.main.spotify import (
+    shuffle_spotify,
+    shuffle2_spotify,
+    loop_spotify,
+    loop1_spotify,
+    loop2_spotify,
+    pause_spotify,
+    next_spotify,
+    prev_spotify,
+    resume_spotify,
+)
 from flask import request
 from .....static.python.musixmatch import Musixmatch
+
+
 def convert(secs):
     part1 = str(secs // 60)
     part2 = str(secs % 60)
@@ -41,14 +52,34 @@ def spotify_status():
         timestamp = convert(timestamp)
         total = convert(total)
         if not playing:
-            playing = '<i onclick="sendRQ(\'/api/v1/internal/spotify/resume\')" style="font-size:48px !important;" ' \
-                      'class="material-icons">play_circle</i> '
+            playing = (
+                '<i onclick="sendRQ(\'/api/v1/internal/spotify/resume\')" style="font-size:48px !important;" '
+                'class="material-icons">play_circle</i> '
+            )
         else:
-            playing = '<i onclick="sendRQ(\'/api/v1/internal/spotify/pause\')" style="font-size:48px !important;" ' \
-                      'class="material-icons">pause_circle</i> '
-        string = name + " • " + artists + " • " + album + " • " + str(explicit) + " • " \
-                 + image + " • " + str(playing) + " • " + str(timestamp) + " • " + str(total) \
-                 + " • " + str(ratio)
+            playing = (
+                '<i onclick="sendRQ(\'/api/v1/internal/spotify/pause\')" style="font-size:48px !important;" '
+                'class="material-icons">pause_circle</i> '
+            )
+        string = (
+            name
+            + " • "
+            + artists
+            + " • "
+            + album
+            + " • "
+            + str(explicit)
+            + " • "
+            + image
+            + " • "
+            + str(playing)
+            + " • "
+            + str(timestamp)
+            + " • "
+            + str(total)
+            + " • "
+            + str(ratio)
+        )
     else:
         string = "You aren't listening to anything!"
     return string
@@ -106,29 +137,40 @@ def spotifypause():
 def spotifyresume():
     resume_spotify()
     return "Success"
+
+
 @internal.route("/get_lyrics")
 def get_lyrics():
 
-    musixmatch = Musixmatch('bbd8cc3d9f6c1444e01d9d66b44f0f49')
+    musixmatch = Musixmatch("bbd8cc3d9f6c1444e01d9d66b44f0f49")
     artist = request.args.get("artist")
     song = request.args.get("song")
     try:
-        result = musixmatch.track_search(q_track=f"{song}", q_artist=f"{artist}", page_size=1, page=1, s_track_rating='desc')
-        #print(result)
+        result = musixmatch.track_search(
+            q_track=f"{song}",
+            q_artist=f"{artist}",
+            page_size=1,
+            page=1,
+            s_track_rating="desc",
+        )
+        # print(result)
         result1 = result["message"]["body"]["track_list"][0]["track"]["track_id"]
         result2 = result["message"]["body"]["track_list"][0]["track"]["commontrack_id"]
-        #print(result1)
-        #print(result2)
+        # print(result1)
+        # print(result2)
     except:
         return "Search Failed"
 
     try:
-        result = musixmatch.track_lyrics_get(track_id=int(result1), commontrack_id=int(result2))
-        #result = musixmatch.track_richsync_get(track_id=int(result1))
-        result = result["message"]["body"]["lyrics"]["lyrics_body"].replace("\n", "<br>")
-        #print(result)
+        result = musixmatch.track_lyrics_get(
+            track_id=int(result1), commontrack_id=int(result2)
+        )
+        # result = musixmatch.track_richsync_get(track_id=int(result1))
+        result = result["message"]["body"]["lyrics"]["lyrics_body"].replace(
+            "\n", "<br>"
+        )
+        # print(result)
     except:
         return "Lyric Finding Failed"
-
 
     return str(result)

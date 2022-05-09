@@ -64,7 +64,9 @@ class Musixmatch(object):
         )
         return request
 
-    def track_search(self, q_track, page_size, page, s_track_rating, q_artist=None, _format="json"):
+    def track_search(
+        self, q_track, page_size, page, s_track_rating, q_artist=None, _format="json"
+    ):
         """Search for track in our database.
         Parameters:
         q_track - The song title.

@@ -37,7 +37,9 @@ def private_endpoint(func):
 
         # the first parameter should be the flask server ip address, so change it to what the ip is for your server
 
-        if str(user_ip) == "127.0.0.1" or "2600:1700:5450:7b08:9806:a9a9:a039:e92e":  # server ip
+        if (
+            str(user_ip) == "127.0.0.1" or "2600:1700:5450:7b08:9806:a9a9:a039:e92e"
+        ):  # server ip
             return func(*args, **kwargs)
         else:
             return render_template("errors/404.html", error="Unauthorized Access")

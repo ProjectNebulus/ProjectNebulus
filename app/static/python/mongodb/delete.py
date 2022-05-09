@@ -23,7 +23,6 @@ def delete_course(course_id: int) -> None:
     for assignmnent in course.assignments:
         assignmnent.delete()
 
-
     for i in course.AuthorizedUsers:
         i.courses.remove(course)
     course.delete()

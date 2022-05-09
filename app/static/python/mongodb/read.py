@@ -80,7 +80,9 @@ def getSchoology(**kwargs) -> List[Schoology] | None:
         return
 
 
-def getClassroom(userID: str = None, username: str = None, email: str = None) -> GoogleClassroom:
+def getClassroom(
+    userID: str = None, username: str = None, email: str = None
+) -> GoogleClassroom:
     return find_user(id=userID, username=username, email=email).gclassroom
 
 
@@ -89,7 +91,7 @@ def getSpotify(userID: str = None, username: str = None, email: str = None) -> S
 
 
 def getSpotifyCache(
-        userID: str = None, username: str = None, email: str = None
+    userID: str = None, username: str = None, email: str = None
 ) -> Spotify | None:
     try:
         return find_user(
@@ -189,8 +191,8 @@ def sort_course_events(user_id: str, course_id: int):
                 {
                     key: list(result)
                     for key, result in groupby(
-                    sorted_announcements, key=lambda obj: obj.date.date()
-                )
+                        sorted_announcements, key=lambda obj: obj.date.date()
+                    )
                 }.items()
             )
         )
@@ -208,7 +210,9 @@ def sort_user_events(user_id: str, maxDays=8, maxEvents=16):
     from itertools import chain, groupby
 
     events_assessments_assignments = list(chain(events, assignments, assessments))
-    sorted_events = sorted(events_assessments_assignments[:maxEvents], key=lambda obj: sortByDateTime(obj))
+    sorted_events = sorted(
+        events_assessments_assignments[:maxEvents], key=lambda obj: sortByDateTime(obj)
+    )
 
     dates = dict(
         {
@@ -224,8 +228,8 @@ def sort_user_events(user_id: str, maxDays=8, maxEvents=16):
                 {
                     key: list(result)
                     for key, result in groupby(
-                    sorted_announcements, key=lambda obj: obj.date.date()
-                )
+                        sorted_announcements, key=lambda obj: obj.date.date()
+                    )
                 }.items()
             )[-maxDays:]
         )

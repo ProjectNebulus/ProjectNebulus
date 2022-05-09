@@ -13,7 +13,7 @@ def signin():
     events = read.sort_user_events("1522048621565050880")
 
     if session.get("username"):
-        return redirect('/dashboard')
+        return redirect("/dashboard")
 
     return render_template(
         "main/signin.html",
@@ -22,10 +22,9 @@ def signin():
         user_acc=user_acc,
         user_courses=list(user_courses),
         read=read,
-
         announcements=events[0],
         events=events[1],
         today=datetime.date.today(),
         strftime=utils.strftime,
-        enumerate=enumerate
+        enumerate=enumerate,
     )

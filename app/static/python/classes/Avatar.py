@@ -15,7 +15,9 @@ class Avatar(EmbeddedDocument):
     meta = {"collection": "Avatars"}
     parent = StringField(required=True, choices=["User", "Course", "Textbook"])
     avatar_url = URLField(required=False, description="Avatar URL")
-    id = StringField(required=False, default=lambda: str(make_snowflake(time.time() * 1000, 1, 0, 0)))
+    id = StringField(
+        required=False, default=lambda: str(make_snowflake(time.time() * 1000, 1, 0, 0))
+    )
 
     def clean(self):
         if not self.avatar_url:

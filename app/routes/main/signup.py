@@ -25,18 +25,18 @@ def signup():
     user_courses = read.get_user_courses("1522048621565050880")
     events = read.sort_user_events("1522048621565050880")
 
-
     if session.get("username"):
         return redirect("/dashboard")
     if session.get("username"):
         return redirect("/dashboard")
     return render_template(
-        "main/signup.html", page="Nebulus - Sign Up", disablebar=True,
+        "main/signup.html",
+        page="Nebulus - Sign Up",
+        disablebar=True,
         user="1522048621565050880",
         user_acc=user_acc,
         user_courses=list(user_courses),
         read=read,
-
         announcements=events[0],
         events=events[1],
         today=datetime.date.today(),

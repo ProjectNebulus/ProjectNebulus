@@ -11,9 +11,9 @@
 
         <h2 class="text-black dark:text-white text-2xl ml-6">Recent Activity</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 p-6">
-            <div class="pb-2 overflow-hidden" style="height: 20rem">
+            <div class="pb-2 overflow-hidden" style="">
                 <table class="rounded-lg text-sm text-left text-gray-500 dark:text-gray-400 px w-full bg-gray-300 dark:bg-gray-800"
-                       style="height: 17rem" id="recent-activity">
+                       style="" id="recent-activity">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">Event</th>
@@ -90,14 +90,14 @@
                     </button>
                 </div>
             </div>
-            <div class="pb-2" style="margin-top: -3rem; height: 20rem">
+            <div class="pb-2" style="margin-top: -3rem;">
                 <h2 class="text-black dark:text-white text-2xl ml-4">Recent Announcements</h2>
-                <div class="overflow-x-hidden overflow-y-auto hover-scroll h-full">
+                <div class="h-full">
                     <div class="grid gap-4 pl-4 mt-5"
                          style="grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));">
                         {% for a in announcements %}
                             <div id="announcement-{{ a.id }}" role="alert"
-                                 class="p-4 mb-4 bg-gray-100 rounded-lg dark:bg-gray-700 w-72 h-64 mt-5">
+                                 class="p-4 mb-4 bg-gray-100 rounded-lg dark:bg-gray-700 w-72 h-72 mt-5">
                                 <div class="flex items-center">
                                     <svg class="mr-2 w-5 h-5 text-gray-700 dark:text-gray-300" fill="currentColor"
                                          viewBox="0 0 20 20"
@@ -116,6 +116,7 @@
                                     {{ a.course.name }} > {{ a.author }}
                                 </p>
                                 <div class="mt-4 text-sm text-gray-500 dark:text-gray-300">
+                                {% if content|length <= 300 %}
                                     {% for line in a.content.split("\n") %}
                                         {% if line != "" %}
                                             <p>{{ line }}</p>
@@ -123,6 +124,16 @@
                                             <br>
                                         {% endif %}
                                     {% endfor %}
+                                {% else %}
+                                    {% for line in a.content[0:300].split("\n") %}
+                                        {% if line != "" %}
+                                            <p>{{ line }}</p>
+                                        {% else %}
+                                            <br>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+
                                 </div>
                                 <br>
                                 <div class="flex">
@@ -155,12 +166,12 @@
         </div>
         <br>
         <br>
-        <div style="height: 45%; float:left; width:calc(100% - 3rem); margin-left: 2%; overflow: visible;" class="pb-2">
+        <div style="float:left; width:calc(100% - 3rem); margin-left: 2%; overflow: visible;" class="pb-2">
             <h2 class="text-black dark:text-white text-2xl ml-4">Recent Courses</h2>
             <br>
             <div class="text-left grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                 {% for course in user_courses %}
-                    <a href="/course/{{ course.id }}" style="width:18rem; margin:1rem;"
+                    <a href="/course/{{ course.id }}" style="width:25rem; height:15rem; margin:1rem;"
                        class="max-w-sm bg-gray-50 hover:bg-gray-200 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:hover:bg-gray-600 dark:border-gray-700">
                         <img class="rounded-t-lg w-full" src="{{ course.avatar.avatar_url }}" alt="Course Image">
                         <div class="p-5">

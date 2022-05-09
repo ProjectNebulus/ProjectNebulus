@@ -21,15 +21,16 @@ CLIENT_SECRETS_FILE = "app/static/python/credentials.json"
 
 # This OAuth 2.0 access scope allows for full read/write access to the
 # authenticated user's account and requires requests to use an SSL connection.
-SCOPES = ["https://www.googleapis.com/auth/classroom.courses.readonly",
-          "https://www.googleapis.com/auth/classroom.courses.readonly",
-          "https://www.googleapis.com/auth/classroom.rosters.readonly",
-          "https://www.googleapis.com/auth/classroom.coursework.me.readonly",
-          "https://www.googleapis.com/auth/classroom.coursework.students.readonly",
-          "https://www.googleapis.com/auth/classroom.announcements.readonly",
-          "https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly",
-          "https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly"
-          ]
+SCOPES = [
+    "https://www.googleapis.com/auth/classroom.courses.readonly",
+    "https://www.googleapis.com/auth/classroom.courses.readonly",
+    "https://www.googleapis.com/auth/classroom.rosters.readonly",
+    "https://www.googleapis.com/auth/classroom.coursework.me.readonly",
+    "https://www.googleapis.com/auth/classroom.coursework.students.readonly",
+    "https://www.googleapis.com/auth/classroom.announcements.readonly",
+    "https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly",
+    "https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly",
+]
 
 API_SERVICE_NAME = "classroom"
 API_VERSION = "v1"
@@ -73,7 +74,7 @@ def gtest_api_request():
     except Exception as e:  # TokenExpired
         print(e)
         return flask.redirect("/gclassroom/authorize")
-    #try:
+    # try:
     # credentials = google.oauth2.credentials.Credentials(**flask.session["credentials"])
     # user_info_service = build(
     #     serviceName="oauth2", version="v2", credentials=credentials
@@ -94,7 +95,7 @@ def gtest_api_request():
 @main_blueprint.route("/gclassroom/authorize")
 @logged_in
 def authorize():
-    #try:
+    # try:
     # Create flow instance to manage the OAuth 2.0 Authorization Grant Flow steps.
     flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
         CLIENT_SECRETS_FILE, scopes=SCOPES
@@ -141,7 +142,7 @@ def oauth2callback():
     )
     # flow.redirect_uri = flask.url_for('gclassroom/oauth2callback', _external=True)
     flow.redirect_uri = flask.url_for("main_blueprint.oauth2callback", _external=True)
-    print( flow.redirect_uri)
+    print(flow.redirect_uri)
     # Use the authorization server's response to fetch the OAuth 2.0 tokens.
     authorization_response = flask.request.url
     flow.fetch_token(authorization_response=authorization_response)
@@ -152,7 +153,7 @@ def oauth2callback():
     credentials = flow.credentials
     flask.session["credentials"] = credentials_to_dict(credentials)
 
-    #return flask.redirect(flask.url_for("main_blueprint.g_classroom_auth"))
+    # return flask.redirect(flask.url_for("main_blueprint.g_classroom_auth"))
     return flask.redirect(flask.url_for("main_blueprint.gtest_api_request"))
 
 

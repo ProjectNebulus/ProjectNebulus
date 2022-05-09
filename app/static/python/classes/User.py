@@ -48,11 +48,15 @@ class User(Snowflake):
 
     # optional params
     schoology = ListField(EmbeddedDocumentField(Schoology, default=None, null=True))
-    gclassroom = ListField(EmbeddedDocumentField(GoogleClassroom, default=None, null=True))
+    gclassroom = ListField(
+        EmbeddedDocumentField(GoogleClassroom, default=None, null=True)
+    )
     spotify = ListField(EmbeddedDocumentField(Spotify, default=None, null=True))
     discord = ListField(EmbeddedDocumentField(Discord, default=None, null=True))
     canvas = ListField(EmbeddedDocumentField(Canvas, default=None, null=True))
-    avatar = EmbeddedDocumentField(Avatar, default=Avatar(avatar_url="/static/images/nebulusCats/v3.gif"))
+    avatar = EmbeddedDocumentField(
+        Avatar, default=Avatar(avatar_url="/static/images/nebulusCats/v3.gif")
+    )
     bio = StringField(default="", null=True)
     premium_expiration = DateTimeField(required=False, default=None, null=True)
     status = StringField(default="", null=True)

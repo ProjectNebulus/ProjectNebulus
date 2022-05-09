@@ -38,8 +38,16 @@
                                         <div id="toast-notification"
                                              class="w-full max-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 overflow-hidden"
                                              role="alert">
+
+                                            {% if a.title == "" %}
+                                            <h4 data-dropdown-toggle="userDropdown{{ i }}_{{ j }}" class="hover:underline text-lg font-semibold text-gray-900 dark:text-white line-clamp-2 text-ellipses">
+                                                {{ a.author }}</h4>
+                                            {% else %}
                                             <h4 class="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2 text-ellipses">
-                                                {{ a.title }}{{ a.author * (a.title == "")|int }}</h4>
+                                                {{ a.title }}</h4>
+
+                                        {% endif %}
+
                                             <div class="flex items-center mb-3">
                                                 <img data-dropdown-toggle="userDropdown{{ i }}_{{ j }}"
                                                      id="avatar{{ i }}_{{ j }}" data-dropdown-placement="bottom-start"
@@ -54,7 +62,7 @@
 
                                                 <div class="text-xs text-gray-700 dark:text-gray-400 pl-2 line-clamp-2">
                                                     {% if a.title != "" %}
-                                                        <span class="uppercase font-bold text-black dark:text-white ">{{ a.author }}</span>
+                                                        <span class="uppercase font-bold text-black dark:text-white hover:underline" data-dropdown-toggle="userDropdown{{ i }}_{{ j }}">{{ a.author }}</span>
                                                         >
                                                     {% endif %}
                                                     <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase
@@ -83,14 +91,22 @@
                                         <!-- Dropdown menu -->
                                         <div id="userDropdown{{ i }}_{{ j }}"
                                              class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600">
-                                            <div style="border-radius:10px 10px 0 0; height:60px;background:rgba{{ a.author_color }};"></div>
+                                            <div style="border-radius:10px 10px 0 0; height:60px;background:rgba{{ a.author_color }};">
+                                                <div data-tooltip-target="tooltip-default{{ i }}_{{ j }}"  style="float:right;margin:5px;"><img src="/static/images/logos/schoology.png" class="w-5 h-5">
+                                                    <div id="tooltip-default{{ i }}_{{ j }}" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                                                        User Imported from Schoology
+                                                        <div class="tooltip-arrow" data-popper-arrow></div>
+                                                    </div>
+                                                    </div>
+                                            </div>
                                             <div class="px-4 py-3 text-xl text-gray-900 dark:text-white"
                                                  style="border-radius:0 0 10px 10px;">
-                                                <div style="text-align: center;">
-                                                    <img style="margin-top:-60px;background:rgb(18,25,38);border-style:solid;border-color:white;border-width:2px;"
-                                                         src="{{ a.author_pic }}"
-                                                         class="w-24 h-24 rounded-full"
-                                                         alt="{{ a.author }}'s Profile Picture">
+
+                                                <div style="text-align: left; margin-left:3px;">
+                                                    <div style="margin-top:-60px;">
+                                                        <img style="background:rgb(18,25,38);border-style:solid;border-width:2px;" src="{{ a.author_pic }}" class="w-24 h-24 rounded-full border-white dark:border-gray-700" alt="Ms. Nagami's Profile Picture">
+                                                        <span class="absolute  w-5 h-5 bg-green-400 border-2 border-white dark:border-gray-700 rounded-full" style="left:90px;top:90px;"></span>
+                                                    </div>
                                                     <div>{{ a.author }}</div>
                                                     <div class="text-sm text-gray-400">{{ a.author_email }}</div>
                                                     <div class="text-sm text-gray-400">Instructor
@@ -281,8 +297,7 @@
                                                           d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z"
                                                           clip-rule="evenodd"></path>
                                                 </svg>
-                                                ?
-                                                Announcements
+                                                ? Announcements
                                             </p>
                                         </div>
                                         <div>
@@ -383,7 +398,7 @@
                                             </p>
                                         </div>
                                         <div>
-                                            <p class="text-sm text-gray-700 dark:text-gray-400">
+                                            <p class="text-sm text-gray-700 dark:text-gray-400 truncate">
                                                 <svg style="display: inline-block;" class="w-5 h-5" fill="currentColor"
                                                      viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                                     <path fill-rule="evenodd"

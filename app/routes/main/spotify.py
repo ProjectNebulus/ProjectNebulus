@@ -228,7 +228,7 @@ def loop2_spotify():
     elif spotify == 1:
         return redirect("/spotify")
 
-    spotify.repeat('off')
+    spotify.repeat("off")
 
 
 def shuffle_spotify():

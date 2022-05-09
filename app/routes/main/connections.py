@@ -52,15 +52,17 @@ def g_classroom_auth():
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
-            flow = InstalledAppFlow.from_client_secrets_file("app/static/python/credentials.json", scope)
+            flow = InstalledAppFlow.from_client_secrets_file(
+                "app/static/python/credentials.json", scope
+            )
             flow.redirect_uri = ""
             print(flow)
             creds = flow.authorization_url()
             creds = str(creds).replace("(", "").replace(")", "").replace("'", "")
             print(creds)
     user_info_service = build(
-        serviceName='oauth2', version='v2',
-        http=creds.authorize(httplib2.Http()))
+        serviceName="oauth2", version="v2", http=creds.authorize(httplib2.Http())
+    )
     user_info = None
     user_info = user_info_service.userinfo().get().execute()
     print(user_info)

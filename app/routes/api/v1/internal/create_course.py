@@ -12,6 +12,7 @@ import schoolopy
 from datetime import datetime
 from .....static.python.colors import getcolor
 
+
 @internal.route("/create-course", methods=["POST"])
 def create_course():
     data = request.get_json()
@@ -25,6 +26,8 @@ def create_course():
     data["authorizedUsers"] = [session.get("id")]
     create.create_course(data)
     return "Course Created"
+
+
 def credentials_to_dict(credentials):
     return {
         "token": credentials.token,
@@ -48,6 +51,8 @@ def getGclassroomcourses():
 
     courses = results.get("courses", [])
     return courses
+
+
 def getAssignments(id):
     credentials = google.oauth2.credentials.Credentials(**session["credentials"])
 
@@ -55,16 +60,22 @@ def getAssignments(id):
 
     return str(service.courses().courseWork().list(link=id).execute())
 
+
 def getTopics(id):
     credentials = google.oauth2.credentials.Credentials(**session["credentials"])
 
     service = build("classroom", "v1", credentials=credentials)
 
     return str(service.courses().topics().list(link=id).execute())
+
+
 def getAnnouncements(id):
     pass
+
+
 def getStudents(id):
     pass
+
 
 @internal.route("/createGcourse")
 def create_google_course():
@@ -82,8 +93,8 @@ def create_google_course():
     if course == None:
         return "404"
 
+    return str(course) + "<br><br>" + str(assignments) + "<br><br>" + str(topics)
 
-    return str(course)+"<br><br>"+str(assignments)+"<br><br>"+str(topics)
 
 @internal.route("/createSchoologycourse", methods=["GET", "POST"])
 def create_schoology_course():
@@ -93,14 +104,14 @@ def create_schoology_course():
     link = post_data["link"]
     link.replace("https://", "")
     link.replace("http", "")
-    index = link.index(".schoology.com")+len(".schoology.com")
-    link = link[index:len(link)]
+    index = link.index(".schoology.com") + len(".schoology.com")
+    link = link[index : len(link)]
     if "/course/" not in link:
         return "Invalid"
     index = len("/course/")
-    link = link[index:len(link)]
-    link = link[0:len("5131176032")]
-    schoology=read.getSchoology(username=session["username"])
+    link = link[index : len(link)]
+    link = link[0 : len("5131176032")]
+    schoology = read.getSchoology(username=session["username"])
     print(schoology)
     if len(schoology) == 0:
         return "1"
@@ -118,27 +129,32 @@ def create_schoology_course():
         access_token=schoology.Schoology_access_token,
         access_token_secret=schoology.Schoology_access_secret,
     )
-    auth.request_authorization(
-        callback_url=(request.url_root + "/closeSchoology")
-    )
+    auth.request_authorization(callback_url=(request.url_root + "/closeSchoology"))
     auth.authorize()
     sc = schoolopy.Schoology(auth)
     sc.limit = 1000
     section = dict(sc.get_section(link))
-    course = {"name": f'{section["course_title"]} ({section["section_title"]})', "description": section["description"],
-              "imported_from": "Schoology", "authorizedUsers": [session["id"]], 'teacher': post_data["teacher"]}
+    course = {
+        "name": f'{section["course_title"]} ({section["section_title"]})',
+        "description": section["description"],
+        "imported_from": "Schoology",
+        "authorizedUsers": [session["id"]],
+        "teacher": post_data["teacher"],
+    }
 
     course_obj = create.create_course(course)
 
-    create.createAvatar({
-        "avatar_url": section["profile_url"],
-        "parent": "Course",
-        "parent_id": course_obj.id,
-    })
+    create.createAvatar(
+        {
+            "avatar_url": section["profile_url"],
+            "parent": "Course",
+            "parent_id": course_obj.id,
+        }
+    )
     scupdates = sc.get_section_updates(link)
 
     for update in scupdates:
-        author = sc.get_user(update['uid'])
+        author = sc.get_user(update["uid"])
         color = getcolor(author["picture_url"])
         school = sc.get_school(author["school_id"])["title"]
 
@@ -146,8 +162,8 @@ def create_schoology_course():
             {
                 "content": update["body"],
                 "course": str(course_obj.id),
-                #"id": str(update["id"]),
-                "author": author['name_display'],
+                # "id": str(update["id"]),
+                "author": author["name_display"],
                 "author_pic": author["picture_url"],
                 "likes": update["likes"],
                 "comment_number": update["num_comments"],
@@ -164,12 +180,14 @@ def create_schoology_course():
     print(scgrades)
     scevents = sc.get_section_events(link)
     for event in scevents:
-        create.createEvent({
-            "course": str(course_obj.id),
-            "title": event["title"],
-            "description": event["description"],
-            "date": datetime.strptime(event["start"], "%Y-%m-%d %H:%M:%S"),
-        })
+        create.createEvent(
+            {
+                "course": str(course_obj.id),
+                "title": event["title"],
+                "description": event["description"],
+                "date": datetime.strptime(event["start"], "%Y-%m-%d %H:%M:%S"),
+            }
+        )
     scassignments = sc.get_assignments(link)
 
     for assignment in scassignments:
@@ -180,27 +198,28 @@ def create_schoology_course():
             due = None
 
         create.createAssignment(
-
             {
-                #"id": str(assignment["id"]),
+                # "id": str(assignment["id"]),
                 "title": assignment["title"],
-                "description": assignment["description"]+f"\n\nView On Schoology: {assignment['web_url']}",
-                #"submitDate": assignment["dropbox_last_submission"],
+                "description": assignment["description"]
+                + f"\n\nView On Schoology: {assignment['web_url']}",
+                # "submitDate": assignment["dropbox_last_submission"],
                 "due": due,
-                #"course": str(course_obj.id),
+                # "course": str(course_obj.id),
                 "course": str(course_obj.id),
                 "points": float(assignment["max_points"]),
             }
         )
 
-
     scdocuments = sc.get_section_documents(link)
+
     def get_doc_link(sc, url):
         rq = sc.schoology_auth.oauth.get(
             url=url,
-             headers=sc.schoology_auth._request_header(),
-            auth=sc.schoology_auth.oauth.auth)
-        return rq.url #rq["url"]
+            headers=sc.schoology_auth._request_header(),
+            auth=sc.schoology_auth.oauth.auth,
+        )
+        return rq.url  # rq["url"]
 
     print(scdocuments)
     documents = []
@@ -208,12 +227,20 @@ def create_schoology_course():
         document = {}
         document["id"] = scdocument["id"]
         document["name"] = scdocument["title"]
-        document["link"] = scdocument["attachments"]["files"]["file"][0]["download_path"]
+        document["link"] = scdocument["attachments"]["files"]["file"][0][
+            "download_path"
+        ]
         document["link"] = get_doc_link(sc, document["link"])
-        document["extension"] = scdocument["attachments"]["files"]["file"][0]["extension"]
-        document["converted-link"] = scdocument["attachments"]["files"]["file"][0]["converted_download_path"]
+        document["extension"] = scdocument["attachments"]["files"]["file"][0][
+            "extension"
+        ]
+        document["converted-link"] = scdocument["attachments"]["files"]["file"][0][
+            "converted_download_path"
+        ]
         document["converted-link"] = get_doc_link(sc, document["converted-link"])
-        document["converted-extension"] = scdocument["attachments"]["files"]["file"][0]["converted_extension"]
+        document["converted-extension"] = scdocument["attachments"]["files"]["file"][0][
+            "converted_extension"
+        ]
         print(document)
 
         # document["attachment"] = scdocument["attachments"] (Won't work until we have CDN!)
