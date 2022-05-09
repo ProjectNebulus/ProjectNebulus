@@ -241,6 +241,13 @@ def create_schoology_course():
         document["converted-extension"] = scdocument["attachments"]["files"]["file"][0][
             "converted_extension"
         ]
+        create.createDocumentFile(
+            {
+                "name": document["name"],
+                "link": document["link"],
+                "course": course_obj.id,
+            }
+        )
         print(document)
 
         # document["attachment"] = scdocument["attachments"] (Won't work until we have CDN!)

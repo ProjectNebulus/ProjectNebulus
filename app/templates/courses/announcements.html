@@ -80,7 +80,7 @@
                 <p class="text-gray-400 dark:text-gray-600">{{ strftime(a.date.time(), "%-I:%M %p on %B %-d, %Y") }}</p>
             </div>
             <!-- Dropdown menu -->
-            <div id="userDropdown{{ i }}"
+            <div id="userDropdown{{ i }}" style="border-radius:10px"
                  class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600">
                 <div style="border-radius:10px 10px 0 0; height:60px;background:rgba{{ a.author_color }};">
                     <div data-tooltip-target="tooltip-default{{ i }}"  style="float:right;margin:5px;"><img src="/static/images/logos/schoology.png" class="w-5 h-5">
@@ -96,7 +96,7 @@
                     <div style="text-align: left; margin-left:3px;">
                         <div style="margin-top:-60px;">
                             <img style="background:rgb(18,25,38);border-style:solid;border-width:2px;" src="{{ a.author_pic }}" class="w-24 h-24 rounded-full border-white dark:border-gray-700" alt="Ms. Nagami's Profile Picture">
-                            <span class="absolute  w-5 h-5 bg-green-400 border-2 border-white dark:border-gray-700 rounded-full" style="left:90px;top:90px;"></span>
+                            <span class="absolute  w-5 h-5 bg-green-400 border-2 border-white dark:border-gray-700 rounded-full" style="left:90px;top:85px;"></span>
                         </div>
                         <div>{{ a.author }}</div>
                         <div class="text-sm text-gray-400">{{ a.author_email }}</div>
