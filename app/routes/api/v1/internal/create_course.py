@@ -79,24 +79,19 @@ def getStudents(id):
 
 @internal.route("/createGcourse")
 def create_google_course():
-    name = request.args.get("name")
-    courses = getGclassroomcourses()
-    course = None
-    assignments = None
-    topics = None
-    for i in courses:
-        if i["descriptionHeading"] == name:
-            course = i
-            assignments = getAssignments(i["id"])
-            topics = getTopics(i["id"])
-            break
-    if course == None:
-        return "404"
+    link = request.args.get("link")
+    index = link.index("?id=")+4
+    link = link[index:len(link)]
+    print(f"I'm at Google Classroom Creation. The ID is: {link}")
+    return "success"
 
-    return str(course) + "<br><br>" + str(assignments) + "<br><br>" + str(topics)
 
 @internal.route("/createCanvascourse", methods=["POST"])
 def create_canvas_course():
+    link = request.args.get("link")
+    index = link.index("/courses/")+9
+    link = link[index:len(link)]
+    print(f"I'm at Canvas Creation. The ID is: {link}")
     return "success"
 @internal.route("/createSchoologycourse", methods=["GET", "POST"])
 def create_schoology_course():

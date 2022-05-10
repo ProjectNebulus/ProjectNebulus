@@ -289,11 +289,11 @@ function importGClassroom() {
     screens[2].style.display = 'none';
     screens[4].style.display = 'block';
     const status = document.getElementById('create-course-status');
-    const input = document.getElementById('schoology-course-id');
-    const teacher = document.getElementById('schoology-course-teacher');
+    const input = document.getElementById('google-course-id');
+    const teacher = document.getElementById('google-course-teacher');
 
     // todo: maybe this needs regex instead of whatever this is
-    const index = input.value.indexOf('.schoology.com/course/');
+    const index = input.value.indexOf('classroom.google.com/c/');
 
     if (index === -1) {
         status.style.color = 'red';
@@ -318,7 +318,7 @@ function importGClassroom() {
     status.innerHTML = 'Creating course...';
 
     const xhttp = new XMLHttpRequest();
-    xhttp.open('POST', '/api/v1/internal/createGooglecourse', true);
+    xhttp.open('POST', '/api/v1/internal/createGcourse', true);
     xhttp.setRequestHeader('Content-type', 'application/json');
     xhttp.addEventListener('load', googleCourseReq);
     xhttp.send(
@@ -333,11 +333,11 @@ function importCanvas() {
     screens[2].style.display = 'none';
     screens[5].style.display = 'block';
     const status = document.getElementById('create-course-status');
-    const input = document.getElementById('schoology-course-id');
-    const teacher = document.getElementById('schoology-course-teacher');
+    const input = document.getElementById('canvas-course-id');
+    const teacher = document.getElementById('canvas-course-teacher');
 
     // todo: maybe this needs regex instead of whatever this is
-    const index = input.value.indexOf('.schoology.com/course/');
+    const index = input.value.indexOf('/courses/');
 
     if (index === -1) {
         status.style.color = 'red';

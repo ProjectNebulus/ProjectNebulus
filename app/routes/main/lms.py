@@ -36,7 +36,7 @@ def getGclassroomcourses():
     session["credentials"] = credentials_to_dict(credentials)
     for i in range(0, len(courses)):
         courseid = courses[i]["id"]
-        courses[i] = [courses[i]["descriptionHeading"], f'https://classroom.google.com/u/0/c/{courses[i]["id"]}']
+        courses[i] = [courses[i]["descriptionHeading"], f'{courses[i]["alternateLink"]}?id={courses[i]["id"]}']
 
         #teachers = service.courses().teachers(courseId=courseid).list(pageSize=10).execute()
         rawteachers = service.courses().teachers().list(pageSize=10, courseId=courseid).execute()
