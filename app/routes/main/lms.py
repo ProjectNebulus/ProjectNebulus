@@ -40,12 +40,12 @@ def getGclassroomcourses():
 
         #teachers = service.courses().teachers(courseId=courseid).list(pageSize=10).execute()
         rawteachers = service.courses().teachers().list(pageSize=10, courseId=courseid).execute()
-        teachers = []
-        for i in rawteachers["teachers"]:
-            teachers.append(i["profile"]["name"]["fullName"])
-        teachers = str(teachers).strip("[").strip("]").replace("'","")
+        theteachers = []
+        for j in rawteachers["teachers"]:
+            theteachers.append(j["profile"]["name"]["fullName"])
+        theteachers = str(theteachers).strip("[").strip("]").replace("'","")
         #print(teachers)
-        courses[i].append(teachers)
+        courses[i].append(theteachers)
 
     return courses
 

@@ -136,7 +136,7 @@
             Import from Google Classroom
             <span class="close"></span>
         </h3><br>
-        <div class="scroll">
+        <div>
             {% if gcourses|length == 0 %}
             <p class="text-black dark:text-white text-xl">We coudn't find any courses! Is your Google Classroom account
                 linked? <a href="/settings#connections"><button style="margin-left: 10px; display:grid; grid-auto-flow: column; align-content: center; justify-content: center;" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
@@ -159,7 +159,7 @@
                 <br><br>
             {% endfor %}
                 </div>
-                <form class="scroll" id="google-create-course" onsubmit="importGClassroom(); return false;">
+                <form id="google-create-course" onsubmit="importGClassroom(); return false;">
                     <div class="mb-6">
                         <label for="course-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                             Google Course Link (Automatically Filled)
@@ -217,7 +217,7 @@
                     {% endif %}
 
                 </div>
-        <form class="scroll" id="canvas-create-course" onsubmit="importCanvas(); return false;">
+        <form id="canvas-create-course" onsubmit="importCanvas(); return false;">
             <div class="mb-6">
                 <label for="course-name" class="">
                     Canvas Course Link (Automatically Filled)
