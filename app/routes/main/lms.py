@@ -35,7 +35,17 @@ def getGclassroomcourses():
     #              credentials in a persistent database instead.
     session["credentials"] = credentials_to_dict(credentials)
     for i in range(0, len(courses)):
+        courseid = courses[i]["id"]
         courses[i] = [courses[i]["descriptionHeading"], f'https://classroom.google.com/u/0/c/{courses[i]["id"]}']
+
+        #teachers = service.courses().teachers(courseId=courseid).list(pageSize=10).execute()
+        rawteachers = service.courses().teachers().list(pageSize=10, courseId=courseid).execute()
+        teachers = []
+        for i in rawteachers["teachers"]:
+            teachers.append(i["profile"]["name"]["fullName"])
+        teachers = str(teachers).strip("[").strip("]").replace("'","")
+        #print(teachers)
+        courses[i].append(teachers)
 
     return courses
 
@@ -65,7 +75,8 @@ def lms():
         courses = account.get_courses()
         for course in courses:
             canvascourses.append([course.name, f"{API_URL}/courses/{course.id}"])
-    except:
+    except Exception as e:
+        print(e)
         canvascourses = []
 
     schoologycourses = []

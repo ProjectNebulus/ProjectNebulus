@@ -146,7 +146,7 @@
             <p class="text-black dark:text-white text-3xl">Select a Google Classroom Course</p>
                 <div class="scroll">
             {% for course in gcourses %}
-            <button type="button" style="width:90%;" onclick="updateGoogleLink('{{ course[1] }}');"
+            <button type="button" style="width:90%;" onclick="updateGoogleLink('{{ course[1] }}', '{{ course[2] }}');"
                     class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
                 {{ course[0] }}
                 <svg style="display:inline-block;float:right;" class="w-6 h-6" fill="none" stroke="currentColor"
@@ -162,17 +162,17 @@
                 <form class="scroll" id="google-create-course" onsubmit="importGClassroom(); return false;">
                     <div class="mb-6">
                         <label for="course-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                            Google Course Link (It will automatically be filled from Buttons above!)
+                            Google Course Link (Automatically Filled)
                         </label>
                         <input disabled type="text" id="google-course-id"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                               placeholder="The Link will be Automatically Filled from the buttons Above." required>
+                               class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="The link will be Filled when you click the buttons Above!" required>
                         <label for="course-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                            Google Course Teacher
+                            Google Course Teacher (Automatically Filled)
                         </label>
-                        <input type="text" id="canvas-course-teacher"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                               placeholder="Ms. Nagami" required>
+                        <input type="text" id="google-course-teacher"
+                               class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="Your teacher will be Filled when you click the buttons Above!" required>
                     </div>
                     <br>
 
@@ -219,11 +219,11 @@
                 </div>
         <form class="scroll" id="canvas-create-course" onsubmit="importCanvas(); return false;">
             <div class="mb-6">
-                <label for="course-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                    Canvas Course Link (It will automatically be filled from Buttons above!)
+                <label for="course-name" class="">
+                    Canvas Course Link (Automatically Filled)
                 </label>
                 <input disabled type="text" id="canvas-course-id"
-                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                       class=""
                        placeholder="The Link will be Automatically Filled from the buttons Above." required>
                 <label for="course-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                     Canvas Course Teacher

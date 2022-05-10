@@ -355,6 +355,7 @@ function schoologyCourseReq() {
 function updateCanvasLink(link){
     document.getElementById("canvas-course-id").value = link;
 }
-function updateGoogleLink(link){
+function updateGoogleLink(link, teacher){
     document.getElementById("google-course-id").value = link;
+    document.getElementById("google-course-teacher").value =  teacher;
 }
