@@ -35,7 +35,7 @@ def getGclassroomcourses():
     #              credentials in a persistent database instead.
     session["credentials"] = credentials_to_dict(credentials)
     for i in range(0, len(courses)):
-        courses[i] = courses[i]["descriptionHeading"]
+        courses[i] = [courses[i]["descriptionHeading"], f'https://classroom.google.com/u/0/c/{courses[i]["id"]}']
 
     return courses
 
@@ -64,7 +64,7 @@ def lms():
         account = canvas.get_user(user="self")
         courses = account.get_courses()
         for course in courses:
-            canvascourses.append(course.name)
+            canvascourses.append([course.name, f"{API_URL}/courses/{course.id}"])
     except:
         canvascourses = []
 

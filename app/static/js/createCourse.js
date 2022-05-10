@@ -352,3 +352,9 @@ function schoologyCourseReq() {
         status.innerHTML = 'Course created!';
     }
 }
+function updateCanvasLink(link){
+    document.getElementById("canvas-course-id").value = link;
+}
+function updateGoogleLink(link){
+    document.getElementById("google-course-id").value = link;
+}

@@ -95,7 +95,9 @@ def create_google_course():
 
     return str(course) + "<br><br>" + str(assignments) + "<br><br>" + str(topics)
 
-
+@internal.route("/createCanvascourse", methods=["POST"])
+def create_canvas_course():
+    return "success"
 @internal.route("/createSchoologycourse", methods=["GET", "POST"])
 def create_schoology_course():
     post_data = request.get_json()

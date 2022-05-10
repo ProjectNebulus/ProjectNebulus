@@ -23,15 +23,18 @@ CLIENT_SECRETS_FILE = "app/static/python/credentials.json"
 # authenticated user's account and requires requests to use an SSL connection.
 SCOPES = [
     "https://www.googleapis.com/auth/classroom.courses.readonly",
-    "https://www.googleapis.com/auth/classroom.courses.readonly",
     "https://www.googleapis.com/auth/classroom.rosters.readonly",
+    "https://www.googleapis.com/auth/classroom.coursework.me",
     "https://www.googleapis.com/auth/classroom.coursework.me.readonly",
+    "https://www.googleapis.com/auth/classroom.coursework.students",
     "https://www.googleapis.com/auth/classroom.coursework.students.readonly",
+    "https://www.googleapis.com/auth/classroom.announcements",
     "https://www.googleapis.com/auth/classroom.announcements.readonly",
     "https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly",
     "https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly",
+    "https://www.googleapis.com/auth/classroom.push-notifications",
+    "https://www.googleapis.com/auth/userinfo.profile",
 ]
-
 API_SERVICE_NAME = "classroom"
 API_VERSION = "v1"
 
@@ -55,9 +58,7 @@ def gtest_api_request():
         )
 
         service = build("classroom", "v1", credentials=credentials)
-        user_info_service = build(
-            serviceName="oauth2", version="v2", credentials=credentials
-        )
+
         # Call the Classroom API
 
         results = service.courses().list(pageSize=10).execute()
@@ -65,29 +66,17 @@ def gtest_api_request():
         # Save credentials back to session in case access token was refreshed.
         # ACTION ITEM: In a production app, you likely want to save these
         #              credentials in a persistent database instead.
-
-        user_info = None
-        user_info = user_info_service.userinfo().get().execute()
-        print(user_info)
-        user_info = [user_info["name"], user_info["picture"]]
         flask.session["credentials"] = credentials_to_dict(credentials)
-    except Exception as e:  # TokenExpired
-        print(e)
+    except:  # TokenExpired
         return flask.redirect("/gclassroom/authorize")
-    # try:
-    # credentials = google.oauth2.credentials.Credentials(**flask.session["credentials"])
-    # user_info_service = build(
-    #     serviceName="oauth2", version="v2", credentials=credentials
-    # )
-    # user_info = None
-    # user_info = user_info_service.userinfo().get().execute()
-    # print(user_info)
-    # user_info = [user_info["name"], user_info["picture"]]
-    # except Exception as e:
-    #     print(e)
-    #     session.pop("state")
-    #     session.pop("credentials")
-    #     return redirect("/gclassroom")
+    credentials = google.oauth2.credentials.Credentials(**flask.session["credentials"])
+    user_info_service = build(
+        serviceName="oauth2", version="v2", credentials=credentials
+    )
+    user_info = None
+    user_info = user_info_service.userinfo().get().execute()
+    print(user_info)
+    user_info = [user_info["name"], user_info["picture"]]
     return render_template("connectClassroom.html", data=user_info)
     # return flask.jsonify(courses)
 
@@ -95,7 +84,6 @@ def gtest_api_request():
 @main_blueprint.route("/gclassroom/authorize")
 @logged_in
 def authorize():
-    # try:
     # Create flow instance to manage the OAuth 2.0 Authorization Grant Flow steps.
     flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
         CLIENT_SECRETS_FILE, scopes=SCOPES
@@ -107,7 +95,7 @@ def authorize():
     # error.
     if "local" not in request.root_url:
         flow.redirect_uri = (
-            request.root_url.replace("http", "https") + "gclassroom/oauth2callback"
+                request.root_url.replace("http", "https") + "gclassroom/oauth2callback"
         )
     else:
         flow.redirect_uri = request.root_url + "gclassroom/oauth2callback"
@@ -122,10 +110,6 @@ def authorize():
 
     # Store the state so the callback can verify the auth server response.
     session["state"] = state
-    # except:
-    #     session.pop("state")
-    #     session.pop("credentials")
-    #     return redirect("/gclassroom")
 
     return redirect(authorization_url)
 
@@ -142,7 +126,7 @@ def oauth2callback():
     )
     # flow.redirect_uri = flask.url_for('gclassroom/oauth2callback', _external=True)
     flow.redirect_uri = flask.url_for("main_blueprint.oauth2callback", _external=True)
-    print(flow.redirect_uri)
+    print( flow.redirect_uri)
     # Use the authorization server's response to fetch the OAuth 2.0 tokens.
     authorization_response = flask.request.url
     flow.fetch_token(authorization_response=authorization_response)
@@ -153,7 +137,7 @@ def oauth2callback():
     credentials = flow.credentials
     flask.session["credentials"] = credentials_to_dict(credentials)
 
-    # return flask.redirect(flask.url_for("main_blueprint.g_classroom_auth"))
+    #return flask.redirect(flask.url_for("main_blueprint.g_classroom_auth"))
     return flask.redirect(flask.url_for("main_blueprint.gtest_api_request"))
 
 
@@ -162,8 +146,8 @@ def oauth2callback():
 def revoke():
     if "credentials" not in flask.session:
         return (
-            'You need to <a href="/authorize">authorize</a> before '
-            + "testing the code to revoke credentials."
+                'You need to <a href="/authorize">authorize</a> before '
+                + "testing the code to revoke credentials."
         )
 
     credentials = google.oauth2.credentials.Credentials(**flask.session["credentials"])
@@ -202,25 +186,25 @@ def credentials_to_dict(credentials):
 
 def print_index_table():
     return (
-        "<table>"
-        + '<tr><td><a href="/test">Test an API request</a></td>'
-        + "<td>Submit an API request and see a formatted JSON response. "
-        + "    Go through the authorization flow if there are no stored "
-        + "    credentials for the user.</td></tr>"
-        + '<tr><td><a href="/authorize">Test the auth flow directly</a></td>'
-        + "<td>Go directly to the authorization flow. If there are stored "
-        + "    credentials, you still might not be prompted to reauthorize "
-        + "    the application.</td></tr>"
-        + '<tr><td><a href="/revoke">Revoke current credentials</a></td>'
-        + "<td>Revoke the access token associated with the current user "
-        + "    session. After revoking credentials, if you go to the test "
-        + "    page, you should see an <code>invalid_grant</code> error."
-        + "</td></tr>"
-        + '<tr><td><a href="/clear">Clear Flask session credentials</a></td>'
-        + "<td>Clear the access token currently stored in the user session. "
-        + '    After clearing the token, if you <a href="/test">test the '
-        + "    API request</a> again, you should go back to the auth flow."
-        + "</td></tr></table>"
+            "<table>"
+            + '<tr><td><a href="/test">Test an API request</a></td>'
+            + "<td>Submit an API request and see a formatted JSON response. "
+            + "    Go through the authorization flow if there are no stored "
+            + "    credentials for the user.</td></tr>"
+            + '<tr><td><a href="/authorize">Test the auth flow directly</a></td>'
+            + "<td>Go directly to the authorization flow. If there are stored "
+            + "    credentials, you still might not be prompted to reauthorize "
+            + "    the application.</td></tr>"
+            + '<tr><td><a href="/revoke">Revoke current credentials</a></td>'
+            + "<td>Revoke the access token associated with the current user "
+            + "    session. After revoking credentials, if you go to the test "
+            + "    page, you should see an <code>invalid_grant</code> error."
+            + "</td></tr>"
+            + '<tr><td><a href="/clear">Clear Flask session credentials</a></td>'
+            + "<td>Clear the access token currently stored in the user session. "
+            + '    After clearing the token, if you <a href="/test">test the '
+            + "    API request</a> again, you should go back to the auth flow."
+            + "</td></tr></table>"
     )
 
 
