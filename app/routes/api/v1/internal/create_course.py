@@ -39,7 +39,7 @@ def credentials_to_dict(credentials):
     }
 
 
-def getGclassroomcourses():
+def getGclassroomcourse(cid):
     # Load credentials from the session.
     credentials = google.oauth2.credentials.Credentials(**session["credentials"])
 
@@ -47,10 +47,9 @@ def getGclassroomcourses():
 
     # Call the Classroom API
 
-    results = service.courses().list(pageSize=1000).execute()
+    results = service.courses().get(id=cid).execute()
 
-    courses = results.get("courses", [])
-    return courses
+    return results
 
 
 def getAssignments(id):
@@ -75,7 +74,17 @@ def getAnnouncements(id):
 
 def getStudents(id):
     pass
+def getPFP(courseid):
+    credentials = google.oauth2.credentials.Credentials(**session["credentials"])
 
+    service = build("classroom", "v1", credentials=credentials)
+
+    rawteachers = service.courses().teachers().list(pageSize=10, courseId=courseid).execute()
+    try:
+        pfp = rawteachers["teachers"][0]["profile"]["photoUrl"]
+        return pfp
+    except:
+        return None
 
 @internal.route("/createGcourse", methods=["POST"])
 def create_google_course():
@@ -83,10 +92,27 @@ def create_google_course():
     if request.method == "GET":
         post_data = request.args
     link = post_data["link"]
-    link = request.args.get("link")
     index = link.index("?id=")+4
     link = link[index:len(link)]
-    print(f"I'm at Google Classroom Creation. The ID is: {link}")
+    #print(f"I'm at Google Classroom Creation. The ID is: {link}")
+    course = getGclassroomcourse(link)
+    createcourse = {
+        "name": f'{course["name"]}',
+        "description": course["alternateLink"],
+        "imported_from": "Google Classroom",
+        "authorizedUsers": [session["id"]],
+        "teacher": post_data["teacher"],
+    }
+    course_obj = create.create_course(createcourse)
+    image = getPFP(course["id"])
+    if image:
+        create.createAvatar(
+            {
+                "avatar_url": image,
+                "parent": "Course",
+                "parent_id": course_obj.id,
+            }
+        )
     return "success"
 
 
@@ -98,8 +124,53 @@ def create_canvas_course():
     link = post_data["link"]
     teacher = post_data["teacher"]
     index = link.index("/courses/")+9
-    link = link[index:len(link)]
-    print(f"I'm at Canvas Creation. The ID is: {link}")
+    course_id = link[index:len(link)]
+    #print(f"I'm at Canvas Creation. The ID is: {link}")
+    from canvasapi import Canvas
+
+    API_URL = session["canvas_link"]
+    API_KEY = session["canvas_key"]
+    canvas = Canvas(API_URL, API_KEY)
+    course = canvas.get_course(course=course_id )
+    createcourse = {
+        "name": f'{course.name} ({course.original_name})',
+        "description": link,
+        "imported_from": "Canvas",
+        "authorizedUsers": [session["id"]],
+        "teacher": post_data["teacher"],
+    }
+
+    course_obj = create.create_course(createcourse)
+    image = course.get_settings()["image"]
+    if image:
+        create.createAvatar(
+            {
+                "avatar_url": image,
+                "parent": "Course",
+                "parent_id": course_obj.id,
+            }
+        )
+
+    announcements = canvas.get_announcements(context_codes=[course.id])
+    for announcement in announcements:
+        create.createAnnouncement(
+            {
+                "content": announcement["message"],
+                "course": str(course_obj.id),
+                # "id": str(update["id"]),
+                "author": announcement["user_name"],
+                # "author_pic": author["picture_url"],
+                # "likes": update["likes"],
+                # "comment_number": update["num_comments"],
+                "imported_from": "Schoology",
+                "date": datetime.fromtimestamp((announcement["posted_at"])),
+                "title": announcement["title"],
+                # "author_color": color,
+                # "author_email": author["primary_email"],
+                # "author_school": school,
+            }
+        )
+
     return "success"
 @internal.route("/createSchoologycourse", methods=["GET", "POST"])
 def create_schoology_course():
