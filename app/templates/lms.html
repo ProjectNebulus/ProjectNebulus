@@ -89,7 +89,7 @@
                                             </div>
                                         </div>
                                         <!-- Dropdown menu -->
-                                        <div id="userDropdown{{ i }}_{{ j }}" style="border-radius:10px;"
+                                        <div id="userDropdown{{ i }}_{{ j }}" style="border-radius:10px"
                                              class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600">
                                             <div style="border-radius:10px 10px 0 0; height:60px;background:{% if a.author_color %}rgba{{ a.author_color }}{% else %}#515A67{% endif %};">
                                                 {% if a.imported_from|lower == "schoology" %}
@@ -100,12 +100,13 @@
                                                         </div>
                                                     </div>
                                                 {% endif %}
+                                            </div>
                                             <div class="px-4 py-3 text-xl text-gray-900 dark:text-white"
                                                  style="border-radius:0 0 10px 10px;">
 
                                                 <div style="text-align: left; margin-left:3px;">
                                                     <div style="margin-top:-60px;">
-                                                        <img style="background:rgb(18,25,38);border-style:solid;border-width:2px;" src="{{ a.author_pic }}" class="w-24 h-24 rounded-full border-white dark:border-gray-700" alt="Ms. Nagami's Profile Picture">
+                                                        <img style="background:rgb(18,25,38);border-style:solid;border-width:2px;" src="{{ a.author_pic }}" class="w-24 h-24 rounded-full border-white dark:border-gray-700" alt="{{ a.author }}'s Profile Picture">
                                                         <span class="absolute  w-5 h-5 bg-green-400 border-2 border-white dark:border-gray-700 rounded-full" style="left:90px;top:85px;"></span>
                                                     </div>
                                                     <div>{{ a.author }}</div>
@@ -113,9 +114,9 @@
                                                         <div class="text-sm text-gray-400">{{ a.author_email }}</div>
                                                     {% endif %}
                                                     {% if a.author_school %}
-                                                    <div class="text-sm text-gray-400">Instructor
-                                                        at {{ a.author_school }}</div>
-                                                {% endif %}
+                                                        <div class="text-sm text-gray-400">Instructor
+                                                            at {{ a.author_school }}</div>
+                                                    {% endif %}
                                                     <div class="mb-6">
                                                         <input type="text" id="msg"
                                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -244,13 +245,12 @@
                 <h1 style="float:left" class="text-4xl pr-4 text-black dark:text-white">Your Courses</h1>
 
                 <div style="float:left" id="course-nav">
-                    <button type="button" id="create" style="float:left;margin:10px;width:64px;height:44px" title="Create New Course"
-                            class="hidden sm:flex items-center text-left space-x-3 px-4 h-12 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700 text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                    <button type="button" id="join" style="width:64px;height:44px" title="Search for Courses"
+                            class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                        <span class="material-icons">search</span></button>
+                    <button type="button" id="create" style="width:64px;height:44px" title="Create New Course"
+                            class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
                         <span class="material-icons">add</span></button>
-                    <button data-modal-toggle="searchModal" id="join" style="float:left;" title="Search for Courses" type="button" class="hidden sm:flex items-center w-72 text-left space-x-3 px-4 h-12 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700">
-                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-none text-slate-300 dark:text-slate-400" aria-hidden="true"><path d="m19 19-3.5-3.5"></path>
-                            <circle cx="11" cy="11" r="6"></circle></svg><span class="flex-auto">Quick search...</span><kbd class="font-sans font-semibold dark:text-slate-500">
-                        <abbr title="Command" class="no-underline text-slate-300 dark:text-slate-500">⌘</abbr> K</kbd></button>
                 </div>
                 <br><br>
                 <div class="w-full grid inline-block"
