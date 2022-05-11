@@ -91,14 +91,15 @@
                                         <!-- Dropdown menu -->
                                         <div id="userDropdown{{ i }}_{{ j }}" style="border-radius:10px;"
                                              class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600">
-                                            <div style="border-radius:10px 10px 0 0; height:60px;background:rgba{{ a.author_color }};">
-                                                <div data-tooltip-target="tooltip-default{{ i }}_{{ j }}"  style="float:right;margin:5px;"><img src="/static/images/logos/schoology.png" class="w-5 h-5">
-                                                    <div id="tooltip-default{{ i }}_{{ j }}" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
-                                                        User Imported from Schoology
-                                                        <div class="tooltip-arrow" data-popper-arrow></div>
+                                            <div style="border-radius:10px 10px 0 0; height:60px;background:{% if a.author_color %}rgba{{ a.author_color }}{% else %}#515A67{% endif %};">
+                                                {% if a.imported_from|lower == "schoology" %}
+                                                    <div data-tooltip-target="tooltip-default{{ i }}"  style="float:right;margin:5px;"><img src="/static/images/logos/schoology.png" class="w-5 h-5">
+                                                        <div id="tooltip-default{{ i }}" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                                                            User Imported from Schoology
+                                                            <div class="tooltip-arrow" data-popper-arrow></div>
+                                                        </div>
                                                     </div>
-                                                    </div>
-                                            </div>
+                                                {% endif %}
                                             <div class="px-4 py-3 text-xl text-gray-900 dark:text-white"
                                                  style="border-radius:0 0 10px 10px;">
 
@@ -108,9 +109,13 @@
                                                         <span class="absolute  w-5 h-5 bg-green-400 border-2 border-white dark:border-gray-700 rounded-full" style="left:90px;top:85px;"></span>
                                                     </div>
                                                     <div>{{ a.author }}</div>
-                                                    <div class="text-sm text-gray-400">{{ a.author_email }}</div>
+                                                    {% if a.author_email %}
+                                                        <div class="text-sm text-gray-400">{{ a.author_email }}</div>
+                                                    {% endif %}
+                                                    {% if a.author_school %}
                                                     <div class="text-sm text-gray-400">Instructor
                                                         at {{ a.author_school }}</div>
+                                                {% endif %}
                                                     <div class="mb-6">
                                                         <input type="text" id="msg"
                                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"

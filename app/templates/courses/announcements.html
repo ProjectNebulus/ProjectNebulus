@@ -37,8 +37,8 @@
                     <img class="mb-3 w-12 h-12 p-1.5 border-gray-200 dark:border-gray-500 border-2 rounded-full shadow-lg
                          {% if "black" in avatar %} bg-gray-300 dark:bg-gray-400
                          {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}" data-dropdown-toggle="userDropdown{{ i }}"
-                         alt="{{ a.author }}'s Profile Pic" src="{{ a.author_pic }}">
-
+                         alt="{{ a.author }}'s Profile Pic" src="{{ a.author_pic | replace('//', '/') }}">
+=
                     <div class="ml-4">
                         <h3 class="text-xl font-medium text-gray-900 dark:text-white">
                             {{ a.title }}{{ a.author * (a.title == "")|int }}</h3>
@@ -82,26 +82,32 @@
             <!-- Dropdown menu -->
             <div id="userDropdown{{ i }}" style="border-radius:10px"
                  class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600">
-                <div style="border-radius:10px 10px 0 0; height:60px;background:rgba{{ a.author_color }};">
+                <div style="border-radius:10px 10px 0 0; height:60px;background:{% if a.author_color %}rgba{{ a.author_color }}{% else %}#515A67{% endif %};">
+                    {% if a.imported_from|lower == "schoology" %}
                     <div data-tooltip-target="tooltip-default{{ i }}"  style="float:right;margin:5px;"><img src="/static/images/logos/schoology.png" class="w-5 h-5">
                         <div id="tooltip-default{{ i }}" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
                             User Imported from Schoology
                             <div class="tooltip-arrow" data-popper-arrow></div>
                         </div>
                     </div>
+                    {% endif %}
                 </div>
                 <div class="px-4 py-3 text-xl text-gray-900 dark:text-white"
                      style="border-radius:0 0 10px 10px;">
 
                     <div style="text-align: left; margin-left:3px;">
                         <div style="margin-top:-60px;">
-                            <img style="background:rgb(18,25,38);border-style:solid;border-width:2px;" src="{{ a.author_pic }}" class="w-24 h-24 rounded-full border-white dark:border-gray-700" alt="Ms. Nagami's Profile Picture">
+                            <img style="background:rgb(18,25,38);border-style:solid;border-width:2px;" src="{{ a.author_pic | replace('//', '/') }}" class="w-24 h-24 rounded-full border-white dark:border-gray-700" alt="{{ a.author }}'s Profile Picture">
                             <span class="absolute  w-5 h-5 bg-green-400 border-2 border-white dark:border-gray-700 rounded-full" style="left:90px;top:85px;"></span>
                         </div>
                         <div>{{ a.author }}</div>
+                        {% if a.author_email %}
                         <div class="text-sm text-gray-400">{{ a.author_email }}</div>
+                        {% endif %}
+                        {% if a.author_school %}
                         <div class="text-sm text-gray-400">Instructor
                             at {{ a.author_school }}</div>
+                    {% endif %}
                         <div class="mb-6">
                             <input type="text" id="msg"
                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"

@@ -41,4 +41,5 @@ def signup():
         events=events[1],
         today=datetime.date.today(),
         strftime=utils.strftime,
+        enumerate=enumerate,
     )
