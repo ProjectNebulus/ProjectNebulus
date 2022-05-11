@@ -77,8 +77,12 @@ def getStudents(id):
     pass
 
 
-@internal.route("/createGcourse")
+@internal.route("/createGcourse", methods=["POST"])
 def create_google_course():
+    post_data = request.get_json()
+    if request.method == "GET":
+        post_data = request.args
+    link = post_data["link"]
     link = request.args.get("link")
     index = link.index("?id=")+4
     link = link[index:len(link)]
@@ -88,7 +92,11 @@ def create_google_course():
 
 @internal.route("/createCanvascourse", methods=["POST"])
 def create_canvas_course():
-    link = request.args.get("link")
+    post_data = request.get_json()
+    if request.method == "GET":
+        post_data = request.args
+    link = post_data["link"]
+    teacher = post_data["teacher"]
     index = link.index("/courses/")+9
     link = link[index:len(link)]
     print(f"I'm at Canvas Creation. The ID is: {link}")

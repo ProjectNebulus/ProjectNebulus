@@ -173,7 +173,7 @@
                 {% for course in user_courses %}
                     <a href="/course/{{ course.id }}" style="width:25rem; height:15rem; margin:1rem;"
                        class="max-w-sm bg-gray-50 hover:bg-gray-200 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:hover:bg-gray-600 dark:border-gray-700">
-                        <img class="rounded-t-lg w-full" src="{{ course.avatar.avatar_url }}" alt="Course Image">
+                        <img class="rounded-t-lg w-full" src="{{ course.avatar.avatar_url }}" style="" alt="Course Image">
                         <div class="p-5">
                             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white truncate">{{ course.name }}</h5>
                         </div>
