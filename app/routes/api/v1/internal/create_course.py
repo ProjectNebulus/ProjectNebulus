@@ -74,17 +74,22 @@ def getAnnouncements(id):
 
 def getStudents(id):
     pass
+
+
 def getPFP(courseid):
     credentials = google.oauth2.credentials.Credentials(**session["credentials"])
 
     service = build("classroom", "v1", credentials=credentials)
 
-    rawteachers = service.courses().teachers().list(pageSize=10, courseId=courseid).execute()
+    rawteachers = (
+        service.courses().teachers().list(pageSize=10, courseId=courseid).execute()
+    )
     try:
         pfp = rawteachers["teachers"][0]["profile"]["photoUrl"]
         return pfp
     except:
         return None
+
 
 @internal.route("/createGcourse", methods=["POST"])
 def create_google_course():
@@ -92,9 +97,9 @@ def create_google_course():
     if request.method == "GET":
         post_data = request.args
     link = post_data["link"]
-    index = link.index("?id=")+4
-    link = link[index:len(link)]
-    #print(f"I'm at Google Classroom Creation. The ID is: {link}")
+    index = link.index("?id=") + 4
+    link = link[index : len(link)]
+    # print(f"I'm at Google Classroom Creation. The ID is: {link}")
     course = getGclassroomcourse(link)
     createcourse = {
         "name": f'{course["name"]}',
@@ -123,17 +128,17 @@ def create_canvas_course():
         post_data = request.args
     link = post_data["link"]
     teacher = post_data["teacher"]
-    index = link.index("/courses/")+9
-    course_id = link[index:len(link)]
-    #print(f"I'm at Canvas Creation. The ID is: {link}")
+    index = link.index("/courses/") + 9
+    course_id = link[index : len(link)]
+    # print(f"I'm at Canvas Creation. The ID is: {link}")
     from canvasapi import Canvas
 
     API_URL = session["canvas_link"]
     API_KEY = session["canvas_key"]
     canvas = Canvas(API_URL, API_KEY)
-    course = canvas.get_course(course=course_id )
+    course = canvas.get_course(course=course_id)
     createcourse = {
-        "name": f'{course.name} ({course.original_name})',
+        "name": f"{course.name} ({course.original_name})",
         "description": link,
         "imported_from": "Canvas",
         "authorizedUsers": [session["id"]],
@@ -172,6 +177,8 @@ def create_canvas_course():
         )
 
     return "success"
+
+
 @internal.route("/createSchoologycourse", methods=["GET", "POST"])
 def create_schoology_course():
     post_data = request.get_json()
