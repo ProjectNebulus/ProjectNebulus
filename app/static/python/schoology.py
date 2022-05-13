@@ -116,7 +116,7 @@ def getCourseJson(courseid, sc, user):
             created_at=created_at,
             authorizedUsers=user,
         )
-        image = Avatar(url=json_course["image"])
+        image = Avatar(avatar_url=json_course["image"])
         assignments = []
         for assignment in json_course["assignments"]:
             newassignment = Assignment(
