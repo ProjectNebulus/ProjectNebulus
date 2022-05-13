@@ -39,7 +39,8 @@ def chat_Schoology():
     )
     auth.authorize()
     sc = schoolopy.Schoology(auth)
-    sc.limit = 100000
+    #sc.limit = 100000
+    sc.limit = 10
     messages = sc.get_inbox_messages()
     newmessages = []
 
@@ -69,9 +70,10 @@ def chat_Schoology():
         temp["author"] = author
         temp["updated"] = datetime.fromtimestamp(int(i["last_updated"]))
         print(temp)
+        newmessages.append(temp)
 
 
 
 
 
-    return str(newmessages)
+    return render_template("chat.html", messages = newmessages)

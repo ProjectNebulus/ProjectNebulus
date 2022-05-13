@@ -1,14 +1,62 @@
 <!--Extend with Jinja!-->
 {% extends "layout.html" %}
 {% block main %}
-    <div id='homePageBanner'>
-        <br>
-        <h1><strong>Chat with friends on Nebulus!</strong></h1>
-        <span class='smaller'>
-    Find servers to chat with like-minded individuals or fun communities
-  </span>
-    </div>
-    <div id='chat_options'>
-        <a class="button">Join a Server</a>
+    {% include "navbar.html"  %}
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Inbox
+                </th>
+                <th scope="col" class="px-6 py-3">
+
+                </th>
+                <th scope="col" class="px-6 py-3">
+
+                </th>
+                <th scope="col" class="px-6 py-3">
+
+                </th>
+                <th scope="col" class="px-6 py-3">
+
+                </th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for i in messages %}
+                <tr class="{% if i["status"] == "read" %} bg-white dark:bg-gray-800 {% else %} bg-gray-100 dark:bg-gray-700 {% endif %}border-b  dark:border-gray-700">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                        <div class="flex mb-5 -space-x-4">
+                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="{{i["author"][1]}}" alt="">
+                        {% for recipient in i["recipients"] %}
+                            <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="{{recipient["avatar"]}}" alt="">
+                        {% endfor %}
+                        </div>
+                    </th>
+                    <td class="px-6 py-4">
+                        {{ i["author"][0]  }} to
+                        {% for recipient in range(i["recipients"]|length) %}
+                            {{ i["recipients"][recipient]["name"] }}
+                            {% if recipient < (i["recipients"]|length - 1) %}
+                                ,
+                            {% endif %}
+                            {% endfor %}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ i["subject"] }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ i["message"] }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ i["updated"].strftime("%m/%d/%Y, %H:%M:%S") }}
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
     </div>
 {% endblock %}
