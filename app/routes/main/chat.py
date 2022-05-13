@@ -79,6 +79,8 @@ def chat_Schoology():
         }
         temp["subject"] = i["subject"]
         temp["status"] = i["message_status"]
+        thread = sc.get_message(message_id=i["id"])
+        print(thread)
         temp["message"] = i["message"]
         temp["recipients"] = recipients
         temp["author"] = author

@@ -66,7 +66,7 @@
 
                             {% for recipientid in range(i["recipients"]|length) %}
                             {% set recipient = i["recipients"][recipientid] %}
-                            <img data-dropdown-toggle="userDropdown{{ identifier }}_r{{ recipientid }}" class="hover:underline w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="{{recipient["avatar"]}}" alt="">
+                            <img data-dropdown-toggle="userDropdown{{ identifier }}_r{{ recipientid }}" class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="{{recipient["avatar"]}}" alt="">
 
                             <!-- Dropdown menu -->
                             <div id="userDropdown{{ identifier }}_r{{ recipientid }}" style="border-radius:10px"
@@ -105,9 +105,9 @@
                         </div>
                     </th>
                     <td class="px-6 py-4">
-                        {{ i["author"]["name"]  }} to
+                        <span data-dropdown-toggle="userDropdown_a{{ identifier }}" class="hover:underline"> {{ i["author"]["name"]  }}</span> to
                         {% for recipient in range(i["recipients"]|length) %}
-                            {{ i["recipients"][recipient]["name"] }}
+                            <span class="hover:underline" data-dropdown-toggle="userDropdown{{ identifier }}_r{{ recipient }}">{{ i["recipients"][recipient]["name"] }}</span>
                             {% if recipient < (i["recipients"]|length - 1) %}
                                 <span>,</span>
                             {% endif %}
