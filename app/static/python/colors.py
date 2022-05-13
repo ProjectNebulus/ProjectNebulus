@@ -32,8 +32,11 @@ def getcolor(url):
     if extension.lower() == "svg":
 
         return None
+    try:
+        color_thief = ColorThief(file)
+        dominant_color = color_thief.get_color(quality=1)
 
-    color_thief = ColorThief(file)
-    dominant_color = color_thief.get_color(quality=1)
-    os.remove(file)
-    return str(dominant_color)
+        os.remove(file)
+        return str(dominant_color)
+    except:
+        return str(dominant_color)

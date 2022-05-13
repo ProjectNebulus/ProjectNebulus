@@ -1,17 +1,22 @@
+import schoolopy
+from flask import request, session
+
+from . import internal
+from ....main.utils import private_endpoint
 from datetime import datetime
 from flask import render_template, session, request, redirect
 
-from . import main_blueprint
-from .utils import logged_in
-from ...static.python.mongodb import read
+from .....static.python.mongodb import read
 import schoolopy
-from ...static.python.canvas import *
-from ...static.python.colors import *
+from .....static.python.canvas import *
+from .....static.python.colors import *
 
 
-@main_blueprint.route("/chat", methods=["GET"])
-@logged_in
-def chat_Schoology():
+@internal.route("/get_schoology_messages", methods=["GET"])
+@private_endpoint
+def get_schoology_messages():
+    amount = int(request.args.get("amount"))
+    start = int(request.args.get("start"))
     theschoology = read.getSchoology(username=session.get("username"))[0]
     request_token = theschoology.Schoology_request_token
     request_token_secret = theschoology.Schoology_request_secret
@@ -32,7 +37,7 @@ def chat_Schoology():
     )
     auth.authorize()
     sc = schoolopy.Schoology(auth)
-    sc.limit = 1
+    sc.limit = amount+start
     messages = sc.get_inbox_messages()
     newmessages = []
 
@@ -98,6 +103,5 @@ def chat_Schoology():
         temp["updated"] = datetime.fromtimestamp(int(i["last_updated"]))
         #print(temp)
         newmessages.append(temp)
+    return str(newmessages[start-1:start+amount-1])
 
-
-    return render_template("chat.html", messages = newmessages)
