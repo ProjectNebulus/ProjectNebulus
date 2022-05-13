@@ -81,7 +81,24 @@ def chat_Schoology():
         temp["status"] = i["message_status"]
         thread = sc.get_message(message_id=i["id"])
         print(thread)
-        temp["message"] = i["message"]
+        temp["message"] = thread[-1]["message"]
+        newthread = []
+        for i in thread:
+            thread_author_id = i["author_id"]
+            thread_author = sc.get_user(thread_author_id)
+            thread_author_pfp = thread_author["picture_url"]
+            thread_author_name = thread_author["name_display"]
+            thread_author_email = thread_author["primary_email"]
+            newthread.append(
+                {
+                    "message": i["message"],
+                    "author": thread_author_name,
+                    "author_pic": thread_author_pfp,
+                    "author_email": thread_author_email
+
+                }
+            )
+        temp["thread"] = newthread
         temp["recipients"] = recipients
         temp["author"] = author
         temp["updated"] = datetime.fromtimestamp(int(i["last_updated"]))

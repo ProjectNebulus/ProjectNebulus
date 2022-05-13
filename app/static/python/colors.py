@@ -20,12 +20,15 @@ def getcolor(url):
     file = f"testing.{extension}"
     urllib.request.urlretrieve(url, file)
     if extension.lower() != "png" and extension.lower() != "svg":
-        from PIL import Image
+        try:
+            from PIL import Image
 
-        im1 = Image.open(file)
-        im1.save(f"testing.png")
-        os.remove(file)
-        file = "testing.png"
+            im1 = Image.open(file)
+            im1.save(f"testing.png")
+            os.remove(file)
+            file = "testing.png"
+        except:
+            return None
     if extension.lower() == "svg":
 
         return None

@@ -1,4 +1,5 @@
 <!--Extend with Jinja!-->
+<script src="https://unpkg.com/flowbite@1.4.5/dist/flowbite.js"></script>
 {% extends "layout.html" %}
 {% block main %}
     {% include "navbar.html"  %}
@@ -27,7 +28,7 @@
             <tbody>
             {% for identifier in range(messages|length) %}
                 {% set i = messages[identifier] %}
-                <tr class="{% if i["status"] == "read" %} bg-white dark:bg-gray-800 {% else %} bg-gray-100 dark:bg-gray-700 {% endif %}border-b  dark:border-gray-700">
+                <tr data-modal-toggle="thread_{{ identifier }}" onclick="changeModal(1, 'thread_{{ identifier }}')" class="{% if i["status"] == "read" %} bg-white dark:bg-gray-800 {% else %} bg-gray-100 dark:bg-gray-700 {% endif %}border-b  dark:border-gray-700">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
                         <div class="flex mb-5 -space-x-4">
                         <img data-dropdown-toggle="userDropdown_a{{ identifier }}" class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="{{i["author"]["avatar"]}}" alt="">
@@ -42,7 +43,7 @@
 
                                     <div style="text-align: left; margin-left:3px;">
                                         <div style="margin-top:-60px;">
-                                            <img style="background:rgb(18,25,38);border-style:solid;border-width:2px;" src="{{ author["avatar"]}}" class="w-24 h-24 rounded-full border-white dark:border-gray-700" alt="{{ author["name"] }}'s Profile Picture">
+                                            <img style="background:rgb(18,25,38);border-style:solid;border-width:2px; object-fit: cover;" src="{{ author["avatar"]}}" class="w-24 h-24 rounded-full border-white dark:border-gray-700" alt="{{ author["name"] }}'s Profile Picture">
                                             <span class="absolute  w-5 h-5 bg-green-400 border-2 border-white dark:border-gray-700 rounded-full" style="left:90px;top:85px;"></span>
                                         </div>
                                         <div>{{ author["name"] }}</div>
@@ -79,7 +80,7 @@
 
                                     <div style="text-align: left; margin-left:3px;">
                                         <div style="margin-top:-60px;">
-                                            <img style="background:rgb(18,25,38);border-style:solid;border-width:2px;" src="{{ recipient["avatar"]}}" class="w-24 h-24 rounded-full border-white dark:border-gray-700" alt="{{ recipient["name"] }}'s Profile Picture">
+                                            <img style="background:rgb(18,25,38);border-style:solid;border-width:2px; object-fit: cover;" src="{{ recipient["avatar"]}}" class="w-24 h-24 rounded-full border-white dark:border-gray-700" alt="{{ recipient["name"] }}'s Profile Picture">
                                             <span class="absolute  w-5 h-5 bg-green-400 border-2 border-white dark:border-gray-700 rounded-full" style="left:90px;top:85px;"></span>
                                         </div>
                                         <div>{{ recipient["name"] }}</div>
@@ -123,11 +124,82 @@
                         {{ i["updated"].strftime("%m/%d/%Y, %H:%M:%S") }}
                     </td>
                 </tr>
+                <!-- Main modal -->
+                <div id="thread_{{ identifier }}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+                    <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+                        <!-- Modal content -->
+                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                            <!-- Modal header -->
+                            <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
+                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                    {{ i["subject"] }}
+                                </h3>
+                                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="defaultModal">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                </button>
+                            </div>
+                            <!-- Modal body -->
+                            <div class="p-6 space-y-6">
+                                {% for thread in messages[identifier]["thread"] %}
+                                    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                                    <div class="flex items-center space-x-4">
+                                        <img class="w-10 h-10 rounded-full" src="{{thread["author_pic"]}}" alt="">
+                                        <div class="space-y-1 font-medium dark:text-white">
+                                            <div>{{ thread["author"] }}</div>
+                                            <div class="text-sm text-gray-500 dark:text-gray-400">{{ thread["author_email"] }}</div>
+                                        </div>
+                                    </div>
+                                    </p>
+                                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                                    {{ thread["message"] }}
+                                </p><br style="color:white;">
+                                    {% endfor %}
 
+                            </div>
+                            <!-- Modal footer -->
+                            <div class=" w-full flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+                                <form>
+                                    <label for="chat" class="sr-only">Reply to @{{ messages[identifier]["author"] }}</label>
+                                    <div class="w-full flex items-center py-2 px-3 bg-gray-50 rounded-lg dark:bg-gray-700">
+                                        <button type="button" class="inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path></svg>
+                                        </button>
+                                        <button type="button" class="p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-.464 5.535a1 1 0 10-1.415-1.414 3 3 0 01-4.242 0 1 1 0 00-1.415 1.414 5 5 0 007.072 0z" clip-rule="evenodd"></path></svg>
+                                        </button>
+                                        <textarea id="chat" rows="1" class="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your message..."></textarea>
+                                        <button type="submit" class="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600">
+                                           <i class="material-icons">send</i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             {% endfor %}
 
             </tbody>
         </table>
 
     </div>
+    <script>
+    function changeModal(option, target){
+        //show = 1
+        //hide = 2
+        //target
+        target = document.getElementById(target);
+        const modal = new Modal(target);
+        if (option === 1) {
+            modal.show();
+            //}else{
+        } else if (option === 2){
+            modal.hide();
+        } else{
+            modal.toggle();
+        }
+
+
+    }
+    </script>
 {% endblock %}
