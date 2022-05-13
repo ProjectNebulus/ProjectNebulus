@@ -37,7 +37,7 @@ def create_user():
     }
 
     data["avatar"] = cats[int(data["avatar"].replace("cat", ""))]
-    data["avatar"] = Avatar(avatar_url=data["avatar"], parent="User")
+    data["avatar"] = Avatar(avatar_url="https://beta.nebulus.ml/static/images/nebulusCats/"+data["avatar"], parent="User")
     data["age"] = datetime.strptime(data["age"].strip(), "%m/%d/%Y")
     validation = create.create_user(data)
     if validation[0] == "0":
