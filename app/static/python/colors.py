@@ -28,11 +28,7 @@ def getcolor(url):
         file = "testing.png"
     if extension.lower() == "svg":
 
-        from svglib.svglib import svg2rlg
-        from reportlab.graphics import renderPM
-
-        drawing = svg2rlg("testing.svg")
-        renderPM.drawToFile(drawing, "output/testing.png", fmt="PNG")
+        return None
 
     color_thief = ColorThief(file)
     dominant_color = color_thief.get_color(quality=1)

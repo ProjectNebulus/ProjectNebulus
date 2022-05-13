@@ -7,6 +7,7 @@ from .utils import logged_in
 from ...static.python.mongodb import read
 import schoolopy
 from ...static.python.canvas import *
+from ...static.python.colors import *
 
 
 @main_blueprint.route("/chat", methods=["GET"])
@@ -39,7 +40,6 @@ def chat_Schoology():
     )
     auth.authorize()
     sc = schoolopy.Schoology(auth)
-    #sc.limit = 100000
     sc.limit = 10
     messages = sc.get_inbox_messages()
     newmessages = []
@@ -50,30 +50,41 @@ def chat_Schoology():
         authorname = author["name_display"]
         authorpfp = author["picture_url"]
         authoremail = author["primary_email"]
-        oldrecipients = i["recipient_ids"].split(",") #author["recipient_ids"].split(",")
+        authorschool = sc.get_school(author["school_id"])["title"]
+        authorcolor = getcolor(authorpfp)
+        oldrecipients = i["recipient_ids"].split(",")
         recipients = []
         for j in oldrecipients: #recipients:
             recipient = sc.get_user(j)
+            school = sc.get_school(recipient["school_id"])["title"]
+            color = getcolor(recipient["picture_url"])
             recipients.append(
                 {
                     "name":recipient["name_display"],
                     "avatar":recipient["picture_url"],
-                    "email": recipient["primary_email"]
+                    "email": recipient["primary_email"],
+                    "school": school,
+                    "color": color
+
                 }
             )
-        author = [
-            authorname, authorpfp, authoremail
-        ]
+
+        author = {
+            "name":authorname,
+            "avatar":authorpfp,
+            "email": authoremail,
+            "school": authorschool,
+            "color": authorcolor
+
+        }
         temp["subject"] = i["subject"]
         temp["status"] = i["message_status"]
+        temp["message"] = i["message"]
         temp["recipients"] = recipients
         temp["author"] = author
         temp["updated"] = datetime.fromtimestamp(int(i["last_updated"]))
-        print(temp)
+        #print(temp)
         newmessages.append(temp)
-
-
-
 
 
     return render_template("chat.html", messages = newmessages)
