@@ -32,7 +32,7 @@ def chat_Schoology():
     )
     auth.authorize()
     sc = schoolopy.Schoology(auth)
-    sc.limit = 1
+    sc.limit = 5
     messages = sc.get_inbox_messages()
     newmessages = []
 

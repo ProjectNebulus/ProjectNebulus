@@ -102,9 +102,33 @@
         <h3 class="flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white">
             Import from Schoology
             <span class="close"></span>
-        </h3>
-        <h4 class="dark:text-white">Unfortunately, Schoology API's endpoint to get User Courses is currently broken. You
-            will have to enter your course link.</h4>
+        </h3><br>
+        <div class="scroll">
+            {% if schoologycourses|length == 0 %}
+                <h1 class="text-black dark:text-white text-xl">We coudn't find any courses! Is your Schoology account
+                    connected? <a href="/settings#connections"><button style="margin-left: 10px; display:grid; grid-auto-flow: column; align-content: center; justify-content: center;" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                        Connect Schoology <i style="display:grid; grid-auto-flow: column; align-content: center; justify-content: center;" class="material-icons">open_in_newt</i>
+                    </button></a></h1>
+            {% else %}
+                <h1 class="text-black dark:text-white text-3xl">Select a Canvas Course</h1>
+
+                {% for course in schoologycourses %}
+                    <button onclick="updateCanvasLink('{{ course[1] }}')" type="button" style="width:90%;text-align:left;"
+                            class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                        {{ course[0] }}
+                        <svg style="display:inline-block;float:right;" class="w-6 h-6" fill="none" stroke="currentColor"
+                             viewBox="0 0 24 24"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                    </button>
+                    <br><br>
+                {% endfor %}
+            {% endif %}
+
+        </div>
+
         <form id="schoology-create-course" onsubmit="importSchoology(); return false;">
             <div class="mb-6">
                 <label for="course-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
