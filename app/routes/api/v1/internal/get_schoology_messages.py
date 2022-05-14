@@ -103,5 +103,9 @@ def get_schoology_messages():
         temp["updated"] = datetime.fromtimestamp(int(i["last_updated"]))
         #print(temp)
         newmessages.append(temp)
-    return str(newmessages[start-1:start+amount-1])
+    #current = 1
+    #amount = 5
+    #0:5
+    #should be 1:5
+    return str(newmessages[start:start+amount-1])
 

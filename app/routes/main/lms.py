@@ -49,7 +49,6 @@ def getGclassroomcourses():
         for j in rawteachers["teachers"]:
             theteachers.append(j["profile"]["name"]["fullName"])
         theteachers = str(theteachers).strip("[").strip("]").replace("'", "")
-        # print(teachers)
         courses[i].append(theteachers)
 
     return courses
@@ -88,40 +87,42 @@ def lms():
     import schoolopy
 
     try:
-        request_token = session["request_token"]
-        request_token_secret = session["request_token_secret"]
-        access_token_secret = session["access_token_secret"]
-        access_token = session["access_token"]
-        key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
-        secret = "59ccaaeb93ba02570b1281e1b0a90e18"
-        link = session["Schoologydomain"]
+        schoology = read.getSchoology(username=session["username"])
+        print(schoology)
+        if len(schoology) == 0:
+            return "1"
+        schoology = schoology[0]
+        key = schoology.apikey
+        secret = schoology.apisecret
+        if not key or not secret:
+            key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
+            secret = "59ccaaeb93ba02570b1281e1b0a90e18"
+
         auth = schoolopy.Auth(
             key,
             secret,
-            domain=link,
+            domain=schoology.schoologyDomain,
             three_legged=True,
-            request_token=request_token,
-            request_token_secret=request_token_secret,
-            access_token=access_token,
-            access_token_secret=access_token_secret,
+            request_token=schoology.Schoology_request_token,
+            request_token_secret=schoology.Schoology_request_secret,
+            access_token=schoology.Schoology_access_token,
+            access_token_secret=schoology.Schoology_access_secret,
         )
-        # auth.authorize()
-        # if not auth.authorized:
-        #     schoologycourses = []
-        #     print("Not Authorized")
-        # else:
         auth.authorize()
-        auth.authorized = True
         sc = schoolopy.Schoology(auth)
-        print(sc.get_sections())
-        schoologycourses = list(sc.get_sections())
-    except:
-        try:
-            sc = session["theschoology"]
-            print(sc.get_sections())
-            schoologycourses = list(sc.get_sections())
-        except:
-            schoologycourses = []
+        print(sc.get_user_sections(user_id=sc.get_me().id))
+        oldschoologycourses = list(sc.get_user_sections(user_id=sc.get_me().id) )#list(sc.get_sections())
+        schoologycourses = []
+        for i in oldschoologycourses:
+            schoologycourses.append(
+                [
+                    i["course_title"],
+                    i["id"]
+                ]
+            )
+    except Exception as e:
+        print(e)
+        schoologycourses = []
 
     return render_template(
         "lms.html",
