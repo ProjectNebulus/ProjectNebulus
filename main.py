@@ -6,6 +6,7 @@ import platform
 
 from waitress import serve
 from app.static.python.mongodb import delete
+from app.static.python.classes.Announcement import Announcement
 
 from app.routes import init_app
 
@@ -30,6 +31,7 @@ if __name__ == "__main__":
     else:  # macos (darwin) or windows (windows)
         port = 8080
         host = "localhost"
+
 
     print(f"Started Running: http://{host}:{port}")
     serve(app, host=host, port=port)

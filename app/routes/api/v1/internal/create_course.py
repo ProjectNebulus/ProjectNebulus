@@ -216,6 +216,7 @@ def create_schoology_course():
     auth.authorize()
     sc = schoolopy.Schoology(auth)
     sc.limit = 1000
+    print(sc.get_user_sections(sc.get_me()["id"]))
     section = dict(sc.get_section(link))
     course = {
         "name": f'{section["course_title"]} ({section["section_title"]})',
@@ -223,7 +224,7 @@ def create_schoology_course():
         "imported_from": "Schoology",
         "authorizedUsers": [session["id"]],
         "teacher": post_data["teacher"],
-        "imported_id": section["id"],
+        "imported_id": str(section["id"]),
     }
 
     course_obj = create.create_course(course)
@@ -257,7 +258,7 @@ def create_schoology_course():
                 "author_color": color,
                 "author_email": author["primary_email"],
                 "author_school": school,
-                "imported_id": update["id"],
+                "imported_id": str(update["id"]),
             }
         )
 
@@ -285,7 +286,7 @@ def create_schoology_course():
                     "course": str(course_obj.id),
                     "points": float(assignment["max_points"]),
                     "imported_from": "Schoology",
-                    "imported_id": assignment["id"],
+                    "imported_id": str(assignment["id"]),
                 }
             )
         else:
@@ -296,7 +297,7 @@ def create_schoology_course():
                     "description": event["description"],
                     "date": datetime.strptime(event["start"], "%Y-%m-%d %H:%M:%S"),
                     "imported_from": "Schoology",
-                    "imported_id": event["id"],
+                    "imported_id": str(event["id"]),
                 }
             )
 
@@ -322,7 +323,7 @@ def create_schoology_course():
         document["upload_date"] = datetime.fromtimestamp(scdocument["timestamp"])
         document["course"] = str(course_obj.id)
         document["imported_from"] = "Schoology"
-        document["imported_id"] = scdocument["id"]
+        document["imported_id"] = str(scdocument["id"])
         create.createDocumentFile(
             document
         )

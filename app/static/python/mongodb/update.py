@@ -28,3 +28,5 @@ def logout_from_schoology(_id: str, schoology_obj: Schoology):
 
 def resolve_updated_object(obj, attr, value):
     obj.objects.update(**{attr: value})
+
+
