@@ -117,7 +117,8 @@ def lms():
             schoologycourses.append(
                 [
                     i["course_title"],
-                    i["id"]
+                    f'{schoology.schoologyDomain}course/{i["id"]}/materials'
+
                 ]
             )
     except Exception as e:
