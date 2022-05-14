@@ -103,17 +103,17 @@
             Import from Schoology
             <span class="close"></span>
         </h3><br>
-        <div class="scroll">
+        <div style="width:90%;height:90%;"  id="slist" class="scroll">
             {% if schoologycourses|length == 0 %}
                 <h1 class="text-black dark:text-white text-xl">We coudn't find any courses! Is your Schoology account
                     connected? <a href="/settings#connections"><button style="margin-left: 10px; display:grid; grid-auto-flow: column; align-content: center; justify-content: center;" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                         Connect Schoology <i style="display:grid; grid-auto-flow: column; align-content: center; justify-content: center;" class="material-icons">open_in_newt</i>
                     </button></a></h1>
             {% else %}
-                <h1 class="text-black dark:text-white text-3xl">Select a Canvas Course</h1>
+                <h1 class="text-black dark:text-white text-3xl">Select a Schoology Course</h1>
 
                 {% for course in schoologycourses %}
-                    <button onclick="updateCanvasLink('{{ course[1] }}')" type="button" style="width:90%;text-align:left;"
+                    <button onclick="updateSchoologyLink('{{ course[1] }}')" type="button" style="width:90%;text-align:left;"
                             class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
                         {{ course[0] }}
                         <svg style="display:inline-block;float:right;" class="w-6 h-6" fill="none" stroke="currentColor"
@@ -129,7 +129,7 @@
 
         </div>
 
-        <form id="schoology-create-course" onsubmit="importSchoology(); return false;">
+        <form id="schoology-create-course" style="width:90%;height:90%;display:none;" onsubmit="importSchoology(); return false;">
             <div class="mb-6">
                 <label for="course-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                     Schoology Course Link
@@ -168,7 +168,7 @@
                 </button></a></p>
             {% else %}
             <p class="text-black dark:text-white text-3xl">Select a Google Classroom Course</p>
-                <div class="scroll">
+                <div class="scroll" id="glist" style="height:90%;">
             {% for course in gcourses %}
             <button type="button" style="width:90%;" onclick="updateGoogleLink('{{ course[1] }}', '{{ course[2] }}');"
                     class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
@@ -183,7 +183,7 @@
                 <br><br>
             {% endfor %}
                 </div>
-                <form id="google-create-course" onsubmit="importGClassroom(); return false;">
+                <form id="google-create-course" style="width:90%;height:90%;display:none;"  onsubmit="importGClassroom(); return false;">
                     <div class="mb-6">
                         <label for="course-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                             Google Course Link (Automatically Filled)
@@ -216,7 +216,7 @@
                     Import from Canvas
                     <span class="close"></span>
                     </h3><br>
-                    <div class="scroll">
+                    <div class="scroll" id="clist" style="height:90%;width:90%;">
                         {% if canvascourses|length == 0 %}
                             <h1 class="text-black dark:text-white text-xl">We coudn't find any courses! Is your Canvas account
                                 connected? <a href="/settings#connections"><button style="margin-left: 10px; display:grid; grid-auto-flow: column; align-content: center; justify-content: center;" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
@@ -241,7 +241,7 @@
                     {% endif %}
 
                 </div>
-        <form id="canvas-create-course" onsubmit="importCanvas(); return false;">
+        <form id="canvas-create-course" onsubmit="importCanvas(); return false;" style="height:90%;width:90%;display:none;">
             <div class="mb-6">
                 <label for="course-name" class="">
                     Canvas Course Link (Automatically Filled)

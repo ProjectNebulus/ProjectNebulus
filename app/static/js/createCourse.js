@@ -454,8 +454,17 @@ function canvasCourseReq() {
 }
 function updateCanvasLink(link){
     document.getElementById("canvas-course-id").value = link;
+    document.getElementById("clist").style.display = "none";
+    document.getElementById("canvas-create-course").style.display = "block";
 }
 function updateGoogleLink(link, teacher){
     document.getElementById("google-course-id").value = link;
     document.getElementById("google-course-teacher").value =  teacher;
+    document.getElementById("glist").style.display = "none";
+    document.getElementById("google-create-course").style.display = "block";
+}
+function updateSchoologyLink(link){
+    document.getElementById("schoology-course-id").value = link;
+    document.getElementById("slist").style.display = "none";
+    document.getElementById("schoology-create-course").style.display = "block";
 }
