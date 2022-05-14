@@ -110,10 +110,13 @@ def lms():
         )
         auth.authorize()
         sc = schoolopy.Schoology(auth)
-        print(sc.get_user_sections(user_id=sc.get_me().id))
-        schoologycourses = list(sc.get_user_sections(user_id=sc.get_me().id) )#list(sc.get_sections())
+        sc.limit = "100&include_past=1"
+        pastschoologycourses = list(sc.get_user_sections(user_id=sc.get_me().id) )
+        sc.limit = 100
+        schoologycourses = list(sc.get_user_sections(user_id=sc.get_me().id) )
         schoology_school = sc.get_school(schoologycourses[0]["school_id"])
         schoologycourses.append(schoology_school)
+        pastschoologycourses.append(schoology_school)
     except Exception as e:
         print(e)
         schoologycourses = []
