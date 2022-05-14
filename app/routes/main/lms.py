@@ -78,7 +78,7 @@ def lms():
         account = canvas.get_user(user="self")
         courses = account.get_courses()
         for course in courses:
-            canvascourses.append([course.name, f"{API_URL}/courses/{course.id}"])
+            canvascourses.append([course.name, f"{API_URL}/courses/{course.id}"], course.original_name)
     except Exception as e:
         print(e)
         canvascourses = []
@@ -114,6 +114,9 @@ def lms():
         pastschoologycourses = list(sc.get_user_sections(user_id=sc.get_me().id) )
         sc.limit = 100
         schoologycourses = list(sc.get_user_sections(user_id=sc.get_me().id) )
+        for i in range(0, len(schoologycourses)):
+            schoologycourses[i] = dict(schoologycourses[i])
+            schoologycourses[i]["link"] = schoology.schoologyDomain+"courses/"+schoologycourses[i]["id"]+"/materials"
         schoology_school = sc.get_school(schoologycourses[0]["school_id"])
         schoologycourses.append(schoology_school)
         pastschoologycourses.append(schoology_school)
@@ -139,4 +142,5 @@ def lms():
         schoologycourses=schoologycourses,
         enumerate=enumerate,
         Event=Event,
+        pastschoologycourses = pastschoologycourses,
     )

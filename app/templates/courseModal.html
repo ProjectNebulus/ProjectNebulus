@@ -114,15 +114,15 @@
                 <div class="flex flex-col ">
                 {% for course in pastschoologycourses[:-1] %}
                     <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700" style="height:16rem; width:34rem;">
-    <a href="#" class="overflow-hidden" style="width:382px; height:186px;">
-        <img style="width:382px; height:130px;" class="rounded-t-lg w-full object-cover" src="{{ course.profile_url }}" alt="" />
+    <a onclick="updateSchoologyLink('{{  course["link"]}}');" class="overflow-hidden" style="width:382px; height:186px;">
+        <img style="width:382px; height:130px;" class="rounded-t-lg w-full object-cover" src="{{ course["profile_url"] }}" alt="" />
     </a>
     <div class="p-4">
         <a href="#">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ course.course_title }} <span class="mb-3 text-lg  text-gray-700 dark:text-gray-400">{{ course.section_title }}</span></h5>
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ course["course_title"] }} <span class="mb-3 text-lg  text-gray-700 dark:text-gray-400">{{ course.section_title }}</span></h5>
         </a>
 
-        <p class="text-gray-700 text-xs uppercase dark:text-gray-400">{{ schoologycourses[-1].title }}</p>
+        <p class="text-gray-700 text-xs uppercase dark:text-gray-400">{{ schoologycourses[-1]["title"] }}</p>
 
 
     </div>
@@ -175,16 +175,11 @@
             <p class="text-black dark:text-white text-3xl">Select a Google Classroom Course</p>
                 <div class="scroll" id="glist" style="height:90%;">
             {% for course in gcourses %}
-            <button type="button" style="width:90%;" onclick="updateGoogleLink('{{ course[1] }}', '{{ course[2] }}');"
-                    class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                {{ course[0] }}
-                <svg style="display:inline-block;float:right;" class="w-6 h-6" fill="none" stroke="currentColor"
-                     viewBox="0 0 24 24"
-                     xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                </svg>
-            </button>
+                <a onclick="updateGoogleLink('{{ course[1] }}', '{{ course[2] }}');" class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ course[0] }}</h5>
+                    <p class="font-normal text-gray-700 dark:text-gray-400">{{ course[2] }}</p>
+                </a>
+
                 <br><br>
             {% endfor %}
                 </div>
@@ -231,14 +226,11 @@
                             <h1 class="text-black dark:text-white text-3xl">Select a Canvas Course</h1>
 
                             {% for course in canvascourses %}
-                                <button onclick="updateCanvasLink('{{ course[1] }}')" type="button" style="width:90%;text-align:left;"
-                                        class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                                    {{ course[0] }}
-                                    <svg style="display:inline-block;float:right;" class="w-6 h-6" fill="none" stroke="currentColor"
-                                         viewBox="0 0 24 24"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                <a onclick="updateCanvasLink('{{ course[1] }}')" class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ course[0] }}</h5>
+                                    <p class="font-normal text-gray-700 dark:text-gray-400">{{ course[2] }}</p>
+                                </a>
+
                     </svg>
                 </button>
                 <br><br>
