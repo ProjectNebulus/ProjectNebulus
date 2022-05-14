@@ -111,20 +111,14 @@ def lms():
         auth.authorize()
         sc = schoolopy.Schoology(auth)
         print(sc.get_user_sections(user_id=sc.get_me().id))
-        oldschoologycourses = list(sc.get_user_sections(user_id=sc.get_me().id) )#list(sc.get_sections())
-        schoologycourses = []
-        for i in oldschoologycourses:
-            schoologycourses.append(
-                [
-                    i["course_title"],
-                    f'{schoology.schoologyDomain}course/{i["id"]}/materials'
-
-                ]
-            )
+        schoologycourses = list(sc.get_user_sections(user_id=sc.get_me().id) )#list(sc.get_sections())
+        schoology_school = sc.get_school(schoologycourses[0]["school_id"])
+        schoologycourses.append(schoology_school)
     except Exception as e:
         print(e)
         schoologycourses = []
 
+    print(schoologycourses)
     return render_template(
         "lms.html",
         user=session["username"],
