@@ -87,7 +87,7 @@ def createAssignment(data: dict) -> Assignment:
     assignment = Assignment(**data)
     assignment.save(force_insert=True)
     course = assignment.course
-    course.events.append(assignment)
+    course.assignments.append(assignment)
     course.save()
     return assignment
 

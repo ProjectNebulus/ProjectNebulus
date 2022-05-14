@@ -24,8 +24,9 @@ def delete_course(course_id: str) -> None:
         delete_assignment(assignmnent.id)
 
     for i in course.authorizedUsers:
-        i.courses.remove(course)
-        i.save()
+        if course in i.courses:
+            i.courses.remove(course)
+            i.save()
 
     course.delete()
 
@@ -55,7 +56,7 @@ def delete_user(user_id: str) -> None:
     user.delete()
 
 
-def delete_folder(folder_id: int) -> None:
+def delete_folder(folder_id: str) -> None:
     """
     Deletes a folder from the database.
     """
@@ -69,7 +70,7 @@ def delete_folder(folder_id: int) -> None:
     folder.delete()
 
 
-def delete_assignment(assignment_id: int) -> None:
+def delete_assignment(assignment_id: str) -> None:
     """
     Deletes an assignment from the database.
     """
@@ -79,7 +80,7 @@ def delete_assignment(assignment_id: int) -> None:
     assignment.delete()
 
 
-def delete_event(event_id: int) -> None:
+def delete_event(event_id: str) -> None:
     """
     Deletes an event from the database.
     """
@@ -89,7 +90,7 @@ def delete_event(event_id: int) -> None:
     event.delete()
 
 
-def delete_document(document_id: int) -> None:
+def delete_document(document_id: str) -> None:
     """
     Deletes a document from the database.
     """
@@ -103,7 +104,7 @@ def delete_document(document_id: int) -> None:
     document.delete()
 
 
-def delete_grade(grade_id: int) -> None:
+def delete_grade(grade_id: str) -> None:
     """
     Deletes a grade from the database.
     """
@@ -113,7 +114,7 @@ def delete_grade(grade_id: int) -> None:
     grade.delete()
 
 
-def delete_schoology(user_id: int, schoology_object: Schoology) -> None:
+def delete_schoology(user_id: str, schoology_object: Schoology) -> None:
     """
     Deletes a user from the database.
     """
@@ -122,7 +123,7 @@ def delete_schoology(user_id: int, schoology_object: Schoology) -> None:
     user.save()
 
 
-def delete_avatar(user_id: int = None, course_id: int = None) -> None:
+def delete_avatar(user_id: str = None, course_id: str = None) -> None:
     if not user_id and not course_id:
         raise ValueError("Must provide either a user_id or a course_id")
 
@@ -136,7 +137,7 @@ def delete_avatar(user_id: int = None, course_id: int = None) -> None:
         course.save()
 
 
-def delete_discord_connection(user_id: int, discord_object: Discord) -> None:
+def delete_discord_connection(user_id: str, discord_object: Discord) -> None:
     """
     Deletes a discord connection object  from the database.
     """
@@ -145,7 +146,7 @@ def delete_discord_connection(user_id: int, discord_object: Discord) -> None:
     user.save()
 
 
-def delete_canvas_connection(user_id: int, canvas_object: Canvas) -> None:
+def delete_canvas_connection(user_id: str, canvas_object: Canvas) -> None:
     """
     Deletes a canvas connection object  from the database.
     """
@@ -155,7 +156,7 @@ def delete_canvas_connection(user_id: int, canvas_object: Canvas) -> None:
 
 
 def delete_google_classroom_connection(
-    user_id: int, google_classroom_object: GoogleClassroom
+    user_id: str, google_classroom_object: GoogleClassroom
 ) -> None:
     """
     Deletes a Google Classroom connection object  from the database.
@@ -165,7 +166,7 @@ def delete_google_classroom_connection(
     user.save()
 
 
-def delete_spotify_connection(user_id: int, spotify_object: Spotify) -> None:
+def delete_spotify_connection(user_id: str, spotify_object: Spotify) -> None:
     """
     Deletes a Spotify connection object  from the database.
     """
