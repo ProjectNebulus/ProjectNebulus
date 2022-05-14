@@ -126,7 +126,7 @@ def lms():
     return render_template(
         "lms.html",
         user=session["username"],
-        avatar="/static/images/nebulusCats/" + session.get("avatar", "v3.gif"),
+        avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
         user_acc=user_acc,
         user_courses=list(user_courses),
         read=read,

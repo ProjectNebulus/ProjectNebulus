@@ -10,7 +10,7 @@ def calendar():
     return render_template(
         "calendar.html",
         user=session["username"],
-        avatar=session["avatar"],
+        avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
         email=session["email"],
         page="Nebulus - Calendar",
     )

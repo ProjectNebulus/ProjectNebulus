@@ -39,33 +39,31 @@
                                              class="w-full max-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 overflow-hidden"
                                              role="alert">
 
-                                            {% if a.title == "" %}
-                                            <h4 data-dropdown-toggle="userDropdown{{ i }}_{{ j }}" class="hover:underline text-lg font-semibold text-gray-900 dark:text-white line-clamp-2 text-ellipses">
-                                                {{ a.author }}</h4>
-                                            {% else %}
-                                            <h4 class="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2 text-ellipses">
-                                                {{ a.title }}</h4>
-
-                                        {% endif %}
+                                            {% if a.title != "" %}
+                                                <h4 class="text-lg font-semibold text-gray-900 dark:text-white truncate">
+                                                    {{ a.title }}</h4>
+                                            {% endif %}
 
                                             <div class="flex items-center mb-3">
-                                                <img data-dropdown-toggle="userDropdown{{ i }}_{{ j }}"
+                                                <img data-dropdown-toggle="userDropdown-{{ i }}_{{ j }}"
                                                      id="avatar{{ i }}_{{ j }}" data-dropdown-placement="bottom-start"
-                                                     class="w-6 h-6 rounded-full ring-2 ring-gray-300 dark:ring-gray-500
+                                                     class="rounded-full ring-2 ring-gray-300 dark:ring-gray-500
                                                      cursor-pointer mb-3 rounded-full shadow-lg
                                                      {% if "black" in avatar %} bg-gray-300
-                                                     {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}"
-                                                     width="20" height="20"
+                                                     {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}
+                                                     {% if a.title == "" %} w-8 h-8 mt-4 {% else %} w-6 h-6 {% endif %}"
                                                      src="{{ a.author_pic }}"
-                                                     alt="{{ a.author }} profile picture">
+                                                     alt="{{ a.author }}'s profile picture">
                                                 <br>
 
-                                                <div class="text-xs text-gray-700 dark:text-gray-400 pl-2 line-clamp-2">
-                                                    {% if a.title != "" %}
-                                                        <span class="uppercase font-bold text-black dark:text-white hover:underline" data-dropdown-toggle="userDropdown{{ i }}_{{ j }}">{{ a.author }}</span>
-                                                        >
-                                                    {% endif %}
-                                                    <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase
+                                                <div class="text-xs text-gray-700 dark:text-gray-400 pl-2">
+                                                    <h4 data-dropdown-toggle="userDropdown-{{ i }}_{{ j }}"
+                                                        class="hover:underline text-lg font-semibold text-gray-900 dark:text-white line-clamp-2 text-ellipses mb-2">
+                                                        {{ a.author }}</h4>
+
+                                                    {% if a.title != "" %} > {% endif %}
+
+                                                    <span class="bg-gray-300 text-gray-800 text-xs font-normal uppercase
                                                      mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">
                                                         {{ a.course.name }}
                                                     </span>
@@ -89,12 +87,18 @@
                                             </div>
                                         </div>
                                         <!-- Dropdown menu -->
-                                        <div id="userDropdown{{ i }}_{{ j }}" style="border-radius:10px"
-                                             class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600">
-                                            <div style="border-radius:10px 10px 0 0; height:60px;background:{% if a.author_color %}rgba{{ a.author_color }}{% else %}#515A67{% endif %};">
+                                        <div id="userDropdown-{{ i }}_{{ j }}" class="z-10 absolute hidden bg-gray-50
+                                         divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600">
+                                            <div style="border-radius:10px 10px 0 0; height:60px;background:{% if a.author_color %}rgba
+                                                {{ a.author_color }}{% else %}#515A67{% endif %};">
                                                 {% if a.imported_from|lower == "schoology" %}
-                                                    <div data-tooltip-target="tooltip-default{{ i }}"  style="float:right;margin:5px;"><img src="/static/images/logos/schoology.png" class="w-5 h-5">
-                                                        <div id="tooltip-default{{ i }}" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                                                    <div data-tooltip-target="tooltip-default-{{ i }}"
+                                                         style="float:right;margin:5px;">
+                                                        <img alt="Schoology Image"
+                                                             src="/static/images/logos/schoology.png" class="w-5 h-5">
+
+                                                        <div id="tooltip-default-{{ i }}" role="tooltip"
+                                                             class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
                                                             User Imported from Schoology
                                                             <div class="tooltip-arrow" data-popper-arrow></div>
                                                         </div>
@@ -106,16 +110,26 @@
 
                                                 <div style="text-align: left; margin-left:3px;">
                                                     <div style="margin-top:-60px;">
-                                                        <img style="background:rgb(18,25,38);border-style:solid;border-width:2px; object-fit: cover;" src="{{ a.author_pic }}" class="w-24 h-24 rounded-full border-white dark:border-gray-700" alt="{{ a.author }}'s Profile Picture">
-                                                        <span class="absolute  w-5 h-5 bg-green-400 border-2 border-white dark:border-gray-700 rounded-full" style="left:90px;top:85px;"></span>
+                                                        <img style="border: solid 2px"
+                                                             src="{{ a.author_pic }}"
+                                                             class="w-24 h-24 rounded-full border-white dark:border-gray-700
+                                                            {% if "black" in avatar %} bg-gray-300
+                                                             {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}"
+                                                             alt="{{ a.author }}'s Profile Picture">
+                                                        <span class="absolute  w-5 h-5 bg-green-400 border-2 border-white dark:border-gray-700 rounded-full"
+                                                              style="left:90px;top:85px;"></span>
                                                     </div>
+
                                                     <div>{{ a.author }}</div>
+
                                                     {% if a.author_email %}
                                                         <div class="text-sm text-gray-400">{{ a.author_email }}</div>
                                                     {% endif %}
+
                                                     {% if a.author_school %}
                                                         <div class="text-sm text-gray-400">Instructor
                                                             at {{ a.author_school }}</div>
+
                                                     {% endif %}
                                                     <div class="mb-6">
                                                         <input type="text" id="msg"

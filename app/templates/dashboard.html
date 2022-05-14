@@ -1,60 +1,67 @@
 <!--Extend with Jinja!-->
 {% extends "layout.html" %}
 {% block main %}
+    <head>
+        <style>
+            .announcement:hover .hover-buttons {
+                visibility: visible
+            }
+        </style>
+    </head>
+
     <body>
     {% include "navbar.html" %}
     <br>
     <div style="height:100%;overflow:visible;">
         <div style="text-align: center; height:10%;">
-            <h1 class="text-black text-3xl dark:text-white">Good Afternoon, {{ user }}</h1>
+            <h1 class="text-black text-4xl dark:text-white">Good Afternoon, {{ user }}</h1>
         </div>
 
         <h2 class="text-black dark:text-white text-2xl ml-6">Recent Activity</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 p-6">
-            <div class="pb-2 overflow-hidden" style="">
-                <table class="rounded-lg text-sm text-left text-gray-500 dark:text-gray-400 px w-full bg-gray-300 dark:bg-gray-800"
-                       style="" id="recent-activity">
+            <div class="pb-2 overflow-hidden" style="height: 20rem">
+                <table class="text-gray-500 dark:text-gray-400 bg-gray-300 dark:bg-gray-800 w-full text-sm rounded-lg"
+                       style="height: 17rem;">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                        <th scope="col" class="px-6 py-3">Event</th>
-                        <th scope="col" class="px-6 py-3">Date</th>
-                        <th scope="col" class="px-6 py-3">Time</th>
-                        <th scope="col" class="px-6 py-3">Course</th>
-                        <th scope="col" class="px-6 py-3"><span class="sr-only">Edit</span></th>
+                        <th class="px-6 py-3 text-left">Event</th>
+                        <th class="px-6 py-3 text-left">Date</th>
+                        <th class="px-6 py-3 text-left">Time</th>
+                        <th class="px-6 py-3 text-left">Course</th>
+                        <th class="px-6 py-3 text-left"><span class="sr-only">Edit</span></th>
                     </tr>
                     </thead>
 
                     <tbody>
                     {% if events|length == 0 %}
                         <tr class="text-gray-400 dark:text-gray-400">
-                            <td id="no-events">No Events</td>
+                            <td style="transform: translate(180%)">No Events</td>
                         </tr>
                     {% else %}
                         {% for event in events[:5] %}
                             {% if event._cls == "Event" %}
-                                <tr style="vertical-align: top;" class="border-b border-gray-200">
+                                <tr class="border-b border-gray-200">
                                     <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
-                                    <span class="material-icons-outlined mr-2"
-                                          style="vertical-align: bottom">event</span>
+                                        <span class="material-icons-outlined mr-2"
+                                              style="vertical-align: bottom">event</span>
                                         {{ event.title }}
                                     </td>
-                                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-1">
                                         {{ strftime(event.date.date(), "%m/%d/%Y") }}
                                     </td>
-                                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-1">
                                         {{ strftime(event.date.time(), "%I:%M %p") }}
                                     </td>
-                                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-1">
                                         {{ event.course.name }}
                                     </td>
-                                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
-                                        <a href="/edit/{{ event.id }}"
-                                           class="text-blue-500 hover:text-blue-700">Edit</a>
+                                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-1">
+                                        <span class="text-blue-500 hover:text-blue-700">Edit</span>
                                     </td>
                                 </tr>
                             {% else %}
                                 <tr style="vertical-align: top;"
-                                    class="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+                                    class="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 h-4">
                                     <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
                                     <span class="material-icons-outlined mr-2"
                                           style="vertical-align: bottom">description</span>
@@ -70,8 +77,7 @@
                                         {{ event.course.name }}
                                     </td>
                                     <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
-                                        <a href="/edit/{{ event.id }}"
-                                           class="text-blue-500 hover:text-blue-700">Edit</a>
+                                        <span class="text-blue-500 hover:text-blue-700">Edit</span>
                                     </td>
                                 </tr>
                             {% endif %}
@@ -90,14 +96,13 @@
                     </button>
                 </div>
             </div>
-            <div class="pb-2" style="margin-top: -3rem;">
+            <div class="pb-2" style="margin-top: -3rem; height: 20rem">
                 <h2 class="text-black dark:text-white text-2xl ml-4">Recent Announcements</h2>
-                <div class="h-full">
-                    <div class="grid gap-4 pl-4 mt-5"
-                         style="grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));">
+                <div class="overflow-x-hidden overflow-y-auto hover-scroll h-full">
+                    <div class="grid gap-4 pl-4 mt-5" style="grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));">
                         {% for a in announcements %}
                             <div id="announcement-{{ a.id }}" role="alert"
-                                 class="p-4 mb-4 bg-gray-100 rounded-lg dark:bg-gray-700 w-72 h-72 mt-5">
+                                 class="announcement p-4 mb-4 bg-gray-100 rounded-lg dark:bg-gray-700 w-72 h-64 mt-5">
                                 <div class="flex items-center">
                                     <svg class="mr-2 w-5 h-5 text-gray-700 dark:text-gray-300" fill="currentColor"
                                          viewBox="0 0 20 20"
@@ -107,57 +112,33 @@
                                               clip-rule="evenodd"></path>
                                     </svg>
 
-                                    {% if a.title != "" %}
-                                        <h3 class="text-lg font-medium text-black dark:text-white">{{ a.title }}</h3>
-                                    {% endif %}
+                                    <h3 class="text-lg font-medium text-black dark:text-white truncate"
+                                        style="width: 10.9rem">
+                                        {{ a.title }}{{ a.author * (a.title == "")|int }}
+                                    </h3>
+
+                                    <div class="text-gray-500 invisible hover-buttons cursor-pointer"
+                                         style="transform: translate(1rem, -0.75rem);">
+                                        <p class="material-icons hover:text-blue-600">visibility</p>
+                                        <p class="material-icons hover:text-blue-600"
+                                           data-dismiss-target="announcement-{{ a.id }}">close</p>
+                                    </div>
                                 </div>
                                 <p class="text-xs text-gray-700 uppercase dark:text-gray-400"
                                    style="margin-left: 1.8rem">
-                                    {{ a.course.name }} > {{ a.author }}
+                                    {{ a.course.name }} {{ (" > " + a.author) * (a.title != "")|int }}
                                 </p>
-                                <div class="mt-4 text-sm text-gray-500 dark:text-gray-300">
-                                {% if content|length <= 300 %}
-                                    {% for line in a.content.split("\n") %}
+                                <div class="mt-2.5 text-sm text-gray-500 dark:text-gray-300 line-clamp-6"
+                                     style="height: 7.5rem">
+                                    {% for line in a.content.split("\n")[:7] %}
                                         {% if line != "" %}
                                             <p>{{ line }}</p>
                                         {% else %}
                                             <br>
                                         {% endif %}
                                     {% endfor %}
-                                {% else %}
-                                    {% for line in a.content[0:300].split("\n") %}
-                                        {% if line != "" %}
-                                            <p>{{ line }}</p>
-                                        {% else %}
-                                            <br>
-                                        {% endif %}
-                                    {% endfor %}
-                                {% endif %}
-
                                 </div>
-                                <br>
-                                <div class="flex">
-                                    <button type="button" class="text-white bg-gray-600 dark:bg-gray-700
-                                    hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium
-                                     rounded-lg text-xs px-3 py-1.5 mr-2 text-center inline-flex items-center
-                                     dark:bg-gray-600 dark:hover:bg-gray-500 dark:focus:ring-gray-600">
-                                        <svg class="-ml-0.5 mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
-                                            <path fill-rule="evenodd"
-                                                  d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
-                                                  clip-rule="evenodd"></path>
-                                        </svg>
-                                        View more
-                                    </button>
-                                    <button type="button"
-                                            class="text-gray-700 bg-transparent border border-gray-700 hover:bg-gray-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:border-gray-600 dark:hover:bg-gray-600 focus:ring-gray-600 dark:text-gray-300 dark:hover:text-white"
-                                            data-dismiss-target="#announcement-{{ a.id }}" aria-label="Close">
-                                        Dismiss
-                                    </button>
-                                </div>
-                                <br>
-                                <p class="text-xs text-gray-400 dark:text-gray-400">{{ strftime(a.date, "%-I:%M %p on %B %-d, %Y") }}</p>
+                                <p class="mt-6 text-xs text-gray-400 dark:text-gray-400">{{ strftime(a.date, "%-I:%M %p on %B %-d, %Y") }}</p>
                             </div>
                         {% endfor %}
                     </div>
@@ -166,14 +147,15 @@
         </div>
         <br>
         <br>
-        <div style="float:left; width:calc(100% - 3rem); margin-left: 2%; overflow: visible;" class="pb-2">
+        <div style="height: 45%; float:left; width:calc(100% - 3rem); margin-left: 2%; overflow: visible;" class="pb-2">
             <h2 class="text-black dark:text-white text-2xl ml-4">Recent Courses</h2>
             <br>
             <div class="text-left grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                 {% for course in user_courses %}
-                    <a href="/course/{{ course.id }}" style="width:25rem; height:15rem; margin:1rem;"
+                    <a href="/course/{{ course.id }}" style="width:18rem; margin:1rem;"
                        class="max-w-sm bg-gray-50 hover:bg-gray-200 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:hover:bg-gray-600 dark:border-gray-700">
-                        <img class="rounded-t-lg w-full" src="{{ course.avatar.avatar_url }}" style="" alt="Course Image">
+                        <img class="rounded-t-lg w-full" src="{{ course.avatar.avatar_url }}" style=""
+                             alt="Course Image">
                         <div class="p-5">
                             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white truncate">{{ course.name }}</h5>
                         </div>

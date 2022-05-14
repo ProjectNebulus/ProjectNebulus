@@ -1,8 +1,7 @@
 import json
 from urllib.request import urlopen
 
-import requests
-from flask import render_template, session, redirect, request, jsonify
+from flask import render_template, session, redirect, request
 
 from . import main_blueprint
 
@@ -10,8 +9,8 @@ from . import main_blueprint
 @main_blueprint.route("/", methods=["GET"])
 def index():
     # return "hi"
-    #ip = request.remote_addr
-    #return jsonify({'ip': request.remote_addr}), 200
+    # ip = request.remote_addr
+    # return jsonify({'ip': request.remote_addr}), 200
 
     if request.headers.getlist("X-Forwarded-For"):
         ip = request.headers.getlist("X-Forwarded-For")[0]
@@ -22,11 +21,11 @@ def index():
         response = urlopen(url)
         data = json.load(response)
         return str(data)
-        IP=data['ip']
-        org=data['org']
+        IP = data['ip']
+        org = data['org']
         city = data['city']
-        country=data['country']
-        region=data['region']
+        country = data['country']
+        region = data['region']
     except:
         country = "US"
 
@@ -35,7 +34,7 @@ def index():
         page="Nebulus - Learning, All In One",
         user=session.get("username"),
         email=session.get("email"),
-        avatar=session.get("avatar"),
+        avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
     )
 
 
