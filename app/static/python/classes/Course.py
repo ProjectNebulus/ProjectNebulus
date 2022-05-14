@@ -16,15 +16,6 @@ templates = (
     "Music",
     "Other",
 )
-lms_choices = (
-    "Canvas",
-    "Google Classroom",
-    "Microsoft Teams",
-    "Schoology",
-    "Moodle",
-    "Blackboard Learn",
-    "Other",
-)
 
 
 class Course(Snowflake):
@@ -44,12 +35,10 @@ class Course(Snowflake):
     created_at = DateTimeField(default=datetime.now())
     template = StringField(default=None)
     # sub_template = StringField(default=None)
-    schoology_id = StringField(default=None)
     authorizedUsers = ListField(ReferenceField("User"))
     assignments = ListField(ReferenceField("Assignment"))
     teacherAccount = ReferenceField("User", default=None, null=True)
     folders = ListField(ReferenceField("Folder"))
-    imported_from = StringField(default=None, choices=lms_choices, null=True)
     description = StringField(default="", null=True)
     documents = ListField(ReferenceField("DocumentFile"))
     grades = ReferenceField("Grades")

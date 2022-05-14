@@ -223,6 +223,7 @@ def create_schoology_course():
         "imported_from": "Schoology",
         "authorizedUsers": [session["id"]],
         "teacher": post_data["teacher"],
+        "imported_id": section["id"],
     }
 
     course_obj = create.create_course(course)
@@ -256,6 +257,7 @@ def create_schoology_course():
                 "author_color": color,
                 "author_email": author["primary_email"],
                 "author_school": school,
+                "imported_id": update["id"],
             }
         )
 
@@ -282,6 +284,8 @@ def create_schoology_course():
                     # "course": str(course_obj.id),
                     "course": str(course_obj.id),
                     "points": float(assignment["max_points"]),
+                    "imported_from": "Schoology",
+                    "imported_id": assignment["id"],
                 }
             )
         else:
@@ -291,30 +295,10 @@ def create_schoology_course():
                     "title": event["title"],
                     "description": event["description"],
                     "date": datetime.strptime(event["start"], "%Y-%m-%d %H:%M:%S"),
+                    "imported_from": "Schoology",
+                    "imported_id": event["id"],
                 }
             )
-    scassignments = sc.get_assignments(link)
-
-    for assignment in scassignments:
-        due = assignment["due"]
-        if due != "":
-            due = datetime.fromisoformat(due)
-        else:
-            due = None
-
-        create.createAssignment(
-            {
-                # "id": str(assignment["id"]),
-                "title": assignment["title"],
-                "description": assignment["description"]
-                + f"\n\nView On Schoology: {assignment['web_url']}",
-                # "submitDate": assignment["dropbox_last_submission"],
-                "due": due,
-                # "course": str(course_obj.id),
-                "course": str(course_obj.id),
-                "points": float(assignment["max_points"]),
-            }
-        )
 
     scdocuments = sc.get_section_documents(link)
 
@@ -330,28 +314,17 @@ def create_schoology_course():
     documents = []
     for scdocument in scdocuments:
         document = {}
-        document["id"] = scdocument["id"]
+        document["schoology_id"] = scdocument["id"]
         document["name"] = scdocument["title"]
-        document["link"] = scdocument["attachments"]["files"]["file"][0][
-            "download_path"
-        ]
-        document["link"] = get_doc_link(sc, document["link"])
-        document["extension"] = scdocument["attachments"]["files"]["file"][0][
+        document["file_ending"] = scdocument["attachments"]["files"]["file"][0][
             "extension"
         ]
-        document["converted-link"] = scdocument["attachments"]["files"]["file"][0][
-            "converted_download_path"
-        ]
-        document["converted-link"] = get_doc_link(sc, document["converted-link"])
-        document["converted-extension"] = scdocument["attachments"]["files"]["file"][0][
-            "converted_extension"
-        ]
+        document["upload_date"] = datetime.fromtimestamp(scdocument["timestamp"])
+        document["course"] = str(course_obj.id)
+        document["imported_from"] = "Schoology"
+        document["imported_id"] = scdocument["id"]
         create.createDocumentFile(
-            {
-                "name": document["name"],
-                "link": document["link"],
-                "course": course_obj.id,
-            }
+            document
         )
         print(document)
 
