@@ -14,12 +14,13 @@ SCHOOLOGY_COURSE_ICON = "https://app.schoology.com/sites/all/themes/schoology_th
 def logged_in(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
+        print(session)
         if session.get("username"):
             try:
                 read.find_user(username=session.get("username"))
                 return func(*args, **kwargs)
             except KeyError:
-                return redirect("logout")
+                return redirect("/logout")
         else:
             return redirect("/signin?redirect=" + request.path)
 

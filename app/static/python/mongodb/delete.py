@@ -3,28 +3,30 @@ from __future__ import annotations
 from ..classes import *
 
 
-def delete_course(course_id: int) -> None:
+def delete_course(course_id: str) -> None:
     """
     Deletes a user from the database.
     """
     course = Course.objects.get(pk=course_id)
     for announcement in course.announcements:
-        announcement.delete()
+        delete_announcement(announcement.id)
 
     for event in course.events:
-        event.delete()
+        delete_event(event.id)
 
     for folder in course.folders:
-        folder.delete()
+        delete_folder(folder.id)
 
     for document in course.documents:
-        document.delete()
+        delete_document(document.id)
 
     for assignmnent in course.assignments:
-        assignmnent.delete()
+        delete_assignment(assignmnent.id)
 
-    for i in course.AuthorizedUsers:
+    for i in course.authorizedUsers:
         i.courses.remove(course)
+        i.save()
+
     course.delete()
 
 
@@ -32,20 +34,24 @@ def delete_announcement(announcement_id) -> None:
     """
     Deletes an announcement from the database.
     """
+
     announcement = Announcement.objects.get(pk=announcement_id)
-    announcement.course.events.remove(announcement)
+    announcement.course.announcements.remove(announcement)
+    announcement.course.save()
     announcement.delete()
 
 
-def delete_user(user_id: int) -> None:
+def delete_user(user_id: str) -> None:
     """
     Deletes a user from the database.
     """
     user = User.objects.get(pk=user_id)
     for i in user.courses:
-        i.AuthorizedUsers.remove(user)
-        if i.AuthorizedUsers.count() == 0:
+
+        if i.AuthorizedUsers.count() == 1:
             delete_course(i.id)
+        else:
+            i.authorizedUsers.remove(user)
     user.delete()
 
 
@@ -56,8 +62,10 @@ def delete_folder(folder_id: int) -> None:
     folder = Folder.objects.get(pk=folder_id)
     if folder.course:
         folder.course.folders.remove(folder)
+        folder.course.course.save()
     else:
         folder.parent.subfolders.remove(folder)
+        folder.parent.course.save()
     folder.delete()
 
 
@@ -67,6 +75,7 @@ def delete_assignment(assignment_id: int) -> None:
     """
     assignment = Assignment.objects.get(pk=assignment_id)
     assignment.course.events.remove(assignment)
+    assignment.course.save()
     assignment.delete()
 
 
@@ -76,6 +85,7 @@ def delete_event(event_id: int) -> None:
     """
     event = Event.objects.get(pk=event_id)
     event.course.events.remove(event)
+    event.course.save()
     event.delete()
 
 
@@ -86,8 +96,10 @@ def delete_document(document_id: int) -> None:
     document = DocumentFile.objects.get(pk=document_id)
     if not document.folder:
         document.course.documents.remove(document)
+        document.course.save()
     else:
         document.folder.documents.remove(document)
+        document.folder.save()
     document.delete()
 
 
@@ -97,6 +109,7 @@ def delete_grade(grade_id: int) -> None:
     """
     grade = Grades.objects.get(pk=grade_id)
     grade.course.grades.remove(grade)
+    grade.course.save()
     grade.delete()
 
 
@@ -159,3 +172,4 @@ def delete_spotify_connection(user_id: int, spotify_object: Spotify) -> None:
     user = User.objects.get(pk=user_id)
     user.spotify.remove(spotify_object)
     user.save()
+

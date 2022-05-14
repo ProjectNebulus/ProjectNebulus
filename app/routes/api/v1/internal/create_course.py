@@ -262,15 +262,37 @@ def create_schoology_course():
     scgrades = sc.get_user_grades_by_section(sc.get_me()["id"], link)
     print(scgrades)
     scevents = sc.get_section_events(link)
+    print(scevents)
     for event in scevents:
-        create.createEvent(
-            {
-                "course": str(course_obj.id),
-                "title": event["title"],
-                "description": event["description"],
-                "date": datetime.strptime(event["start"], "%Y-%m-%d %H:%M:%S"),
-            }
-        )
+        if event['type'] == 'assignment':
+            assignment = sc.get_assignment(section['id'], event['assignment_id'])
+            due = assignment["due"]
+            if due != "":
+                due = datetime.fromisoformat(due)
+            else:
+                due = None
+            create.createAssignment(
+                {
+                    # "id": str(assignment["id"]),
+                    "title": assignment["title"],
+                    "description": assignment["description"]
+                                   + f"\n\nView On Schoology: {assignment['web_url']}",
+                    # "submitDate": assignment["dropbox_last_submission"],
+                    "due": due,
+                    # "course": str(course_obj.id),
+                    "course": str(course_obj.id),
+                    "points": float(assignment["max_points"]),
+                }
+            )
+        else:
+            create.createEvent(
+                {
+                    "course": str(course_obj.id),
+                    "title": event["title"],
+                    "description": event["description"],
+                    "date": datetime.strptime(event["start"], "%Y-%m-%d %H:%M:%S"),
+                }
+            )
     scassignments = sc.get_assignments(link)
 
     for assignment in scassignments:

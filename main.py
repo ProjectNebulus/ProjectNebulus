@@ -5,6 +5,7 @@ import os
 import platform
 
 from waitress import serve
+from app.static.python.mongodb import delete
 
 from app.routes import init_app
 
@@ -29,5 +30,6 @@ if __name__ == "__main__":
     else:  # macos (darwin) or windows (windows)
         port = 8080
         host = "localhost"
+    delete.delete_course("1525276976959586304")
     print(f"Started Running: http://{host}:{port}")
     serve(app, host=host, port=port)
