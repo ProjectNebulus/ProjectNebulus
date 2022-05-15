@@ -45,9 +45,7 @@
                         <button data-dropdown-toggle="dropdowndashboard">
                             <i class="material-icons">dashboard</i>
                         </button>
-                        <div id="dropdowndashboard" class="sticky backdrop-blur-sm  bg-gray-400/30 dark:bg-gray-800/30 z-50 hidden rounded shadow w-80 h-64">
-                            {% include "control.html" %}
-                        </div>
+
                     </ul>
                 </div>
             </div>
@@ -119,7 +117,9 @@
             {% include "navbar_mobile.html" %}
         </div>
     </div>
-
+    <div id="dropdowndashboard" class="sticky backdrop-blur-sm bg-gray-300/30 dark:bg-gray-800/30 z-50 hidden rounded shadow w-80 h-64">
+        {% include "control.html" %}
+    </div>
     <script>
         const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
         const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
@@ -171,4 +171,5 @@
             }
         }
     </script>
+
 {% endif %}
