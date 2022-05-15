@@ -34,6 +34,7 @@ SCOPES = [
     "https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly",
     "https://www.googleapis.com/auth/classroom.push-notifications",
     "https://www.googleapis.com/auth/userinfo.profile",
+    "https://www.googleapis.com/auth/classroom.profile.photos",
 ]
 API_SERVICE_NAME = "classroom"
 API_VERSION = "v1"
