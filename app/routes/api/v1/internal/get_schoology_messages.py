@@ -4,7 +4,7 @@ from flask import request, session
 from . import internal
 from ....main.utils import private_endpoint
 from datetime import datetime
-from flask import render_template, session, request, redirect
+from flask import render_template, session, request, redirect, jsonify
 
 from .....static.python.mongodb import read
 import schoolopy
@@ -78,7 +78,7 @@ def get_schoology_messages():
         temp["status"] = i["message_status"]
         thread = sc.get_message(message_id=i["id"])
         #print(thread)
-        temp["message"] = thread[-1]["message"]
+        temp["message"] = thread[-1]["message"].replace('\n', '<br />')
         if len(temp["message"])>100:
             temp["message"] = temp["message"][0:100]+"..."
         newthread = []
@@ -90,7 +90,7 @@ def get_schoology_messages():
             thread_author_email = thread_author["primary_email"]
             newthread.append(
                 {
-                    "message": i["message"],
+                    "message": i["message"].replace('\n', '<br />'),
                     "author": thread_author_name,
                     "author_pic": thread_author_pfp,
                     "author_email": thread_author_email
@@ -107,5 +107,6 @@ def get_schoology_messages():
     #amount = 5
     #0:5
     #should be 1:5
-    return str(newmessages[start:start+amount-1])
+    print(jsonify(newmessages).json)
+    return jsonify(newmessages)
 

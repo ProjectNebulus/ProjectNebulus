@@ -39,4 +39,4 @@ def getcolor(url):
         os.remove(file)
         return str(dominant_color)
     except:
-        return str(dominant_color)
+        return None
