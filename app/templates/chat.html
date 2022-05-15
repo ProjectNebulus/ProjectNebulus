@@ -197,20 +197,21 @@
             dataType: "json"
         })
         request.done(function (data){
-            alert(data);
-            //JSON.parse(data);
             for (let i = current_index; i<amount+i;i++){
                 let object = data[i]
+                console.log(object);
                 let readbg = ""
-                if (object["status"] === "read"){
+                if (object.status === "read"){
                     readbg = "bg-white dark:bg-gray-800"
                 }else{
                     readbg = "bg-gray-100 dark:bg-gray-700"
                 }
                 let author = object.author;
+                console.log(author);
+                console.log(Object.getOwnPropertyNames(author));
                 let author_color = "";
                 try{
-                    let author_color = author.color;
+                    let author_color = author["name"]
                 }catch(e){
                     let author_color = "#515A67";
                 }
@@ -218,12 +219,12 @@
                 if (!author_color){
                     let author_color = "#515A67";
                 }
-                let author_name = author.name;
+                let author_name = author["name"]
 
 
-                let author_email = author.email;
-                let author_school = author.school;
-                let author_avatar = author.avatar;
+                let author_email = author["email"]
+                let author_school = author["school"]
+                let author_avatar = author["avatar"]
                 data = `
             <tr data-modal-toggle="thread_${i}" onclick="changeModal(1, 'thread_${i}')" class=" ${readbg} border-b  dark:border-gray-700">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
