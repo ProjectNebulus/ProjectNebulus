@@ -1,5 +1,6 @@
 <!--Extend with Jinja!-->
 {% extends "layout.html" %}
+
 {% block main %}
     <div style="height:100%;width:100%">
         {% include "navbar.html" %}
@@ -32,11 +33,11 @@
                                     {{ strftime(date, "%a, %B %-d, %Y") }}
                                 </time>
                                 <br>
-                                <div class="grid grid-cols-4 gap-2 pt-2">
+                                <div class="grid grid-cols-1 gap-2 pt-2">
                                     {% for j in range(list|length) %}
                                         {% set a = list[j] %}
                                         <div id="toast-notification"
-                                             class="w-full max-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 overflow-hidden"
+                                             class="w-full min-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 overflow-hidden"
                                              role="alert">
 
                                             {% if a.title != "" %}
@@ -71,7 +72,8 @@
                                             </div>
                                             <div class="flex items-center">
                                                 <div class="text-sm text-gray-900 dark:text-white font-normal">
-                                                    <div class="text-sm text-gray-900 dark:text-white font-normal line-clamp-3">
+                                                    <div id="description_{{ i }}" class="text-sm text-gray-900 dark:text-white font-normal line-clamp-3">
+                                                    <p>
                                                         {% for line in a.content.split("\n") %}
                                                             {% if line != "" %}
                                                                 <p>{{ line }}</p>
@@ -79,6 +81,7 @@
                                                                 <br>
                                                             {% endif %}
                                                         {% endfor %}
+                                                    </p>
                                                     </div>
                                                     <time class="text-xs font-medium text-blue-600 dark:text-blue-500">
                                                         {{ strftime(a.date.time(), "%-I:%M %p") }}
@@ -86,6 +89,9 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <script>
+                                        document.getElementById('description_{{ i }}').innerHTML = replaceURLs(document.getElementById('description_{{ i }}').innerHTML);
+                                        </script>
                                         <!-- Dropdown menu -->
                                         <div id="userDropdown-{{ i }}_{{ j }}" class="z-10 absolute hidden bg-gray-50
                                          divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600">

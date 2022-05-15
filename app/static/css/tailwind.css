@@ -3769,6 +3769,15 @@ html.dark body {
           text-decoration-color: #6B7280;
 }
 
+.decoration-yellow-500 {
+  -webkit-text-decoration-color: #C27803;
+          text-decoration-color: #C27803;
+}
+
+.decoration-\[0\.25rem\] {
+  text-decoration-thickness: 0.25rem;
+}
+
 .placeholder-red-700::-moz-placeholder {
   --tw-placeholder-opacity: 1;
   color: rgb(200 30 30 / var(--tw-placeholder-opacity));
@@ -4451,6 +4460,15 @@ html.dark body {
           text-decoration-line: underline;
 }
 
+.hover\:decoration-yellow-500\/50:hover {
+  -webkit-text-decoration-color: rgb(194 120 3 / 0.5);
+          text-decoration-color: rgb(194 120 3 / 0.5);
+}
+
+.hover\:decoration-\[0\.5rem\]:hover {
+  text-decoration-thickness: 0.5rem;
+}
+
 .hover\:ring-slate-300:hover {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(203 213 225 / var(--tw-ring-opacity));
@@ -4492,6 +4510,15 @@ html.dark body {
 .focus\:text-blue-700:focus {
   --tw-text-opacity: 1;
   color: rgb(26 86 219 / var(--tw-text-opacity));
+}
+
+.focus\:decoration-yellow-500\/50:focus {
+  -webkit-text-decoration-color: rgb(194 120 3 / 0.5);
+          text-decoration-color: rgb(194 120 3 / 0.5);
+}
+
+.focus\:decoration-\[0\.5rem\]:focus {
+  text-decoration-thickness: 0.5rem;
 }
 
 .focus\:outline-none:focus {
@@ -4730,6 +4757,18 @@ html.dark body {
 .peer:focus ~ .peer-focus\:ring-blue-300 {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(164 202 254 / var(--tw-ring-opacity));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .motion-safe\:transition-all {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+
+  .motion-safe\:duration-200 {
+    transition-duration: 200ms;
+  }
 }
 
 .dark .dark\:divide-gray-600 > :not([hidden]) ~ :not([hidden]) {
