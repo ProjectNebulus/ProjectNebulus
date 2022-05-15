@@ -112,7 +112,7 @@
             {% else %}
                 <h1 class="text-black dark:text-white text-3xl">Select a Schoology Course</h1>
                 <div class="flex flex-col ">
-                {% for course in pastschoologycourses[:-1] %}
+                {% for course in schoologycourses[:-1] %}
                     <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700" style="height:16rem; width:34rem;">
     <a onclick="updateSchoologyLink('{{  course["link"]}}');" class="overflow-hidden" style="width:382px; height:186px;">
         <img style="width:382px; height:130px;" class="rounded-t-lg w-full object-cover" src="{{ course["profile_url"] }}" alt="" />
