@@ -136,7 +136,10 @@ function offline() {
 function navfetchStatus() {
     const request = $.ajax({
         type: 'POST',
-        url: '/api/v1/internal/spotify-status'
+        url: '/api/v1/internal/spotify-status',
+        data:{
+            "special":"a"
+        }
     });
 
     request.done((data) => {

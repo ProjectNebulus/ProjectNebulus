@@ -52,15 +52,26 @@ def spotify_status():
         timestamp = convert(timestamp)
         total = convert(total)
         if not playing:
-            playing = (
-                '<i onclick="sendRQ(\'/api/v1/internal/spotify/resume\')" style="font-size:48px !important;" '
-                'class="material-icons">play_circle</i> '
-            )
+            if not request.form.get("special"):
+                playing = (
+                    '<i onclick="sendRQ(\'/api/v1/internal/spotify/pause\')" style="font-size:48px !important;" '
+                    'class="material-icons">pause_circle</i> '
+                )
+            else:
+                playing = (
+                '<i onclick="sendRQ(\'/api/v1/internal/spotify/resume\')" style="margin-left:20px;color:white;" class="material-icons">play</i>'
+                )
         else:
-            playing = (
-                '<i onclick="sendRQ(\'/api/v1/internal/spotify/pause\')" style="font-size:48px !important;" '
-                'class="material-icons">pause_circle</i> '
-            )
+            if not request.form.get("special"):
+                playing = (
+                    '<i onclick="sendRQ(\'/api/v1/internal/spotify/pause\')" style="font-size:48px !important;" '
+                    'class="material-icons">pause_circle</i> '
+                )
+            else:
+                playing = (
+                    '<i onclick="sendRQ(\'/api/v1/internal/spotify/resume\')" style="margin-left:20px;color:white;" '
+                    'class="material-icons">pause</i> '
+                )
         string = (
             name
             + " • "
