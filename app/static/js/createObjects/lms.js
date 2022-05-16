@@ -19,8 +19,8 @@ function replaceURLs(message) {
         if (!hyperlink.match('^https?:\/\/')) {
           hyperlink = 'http://' + hyperlink;
         }
-        hyperlink.replace("<p>","");
-        hyperlink.replace("</p>","")
+        hyperlink = hyperlink.replace("<p>","");
+        hyperlink = hyperlink.replace("</p>","")
         return `<a 
                    target="_blank"
                    class="

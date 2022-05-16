@@ -72,7 +72,7 @@
                                             </div>
                                             <div class="flex items-center">
                                                 <div class="text-sm text-gray-900 dark:text-white font-normal">
-                                                    <div id="description_{{ i }}" class="text-sm text-gray-900 dark:text-white font-normal line-clamp-3">
+                                                    <div id="description_{{ i }}_{{ j }}" class="text-sm text-gray-900 dark:text-white font-normal line-clamp-3">
                                                     <p>
                                                         {% for line in a.content.split("\n") %}
                                                             {% if line != "" %}
@@ -90,7 +90,7 @@
                                             </div>
                                         </div>
                                         <script>
-                                        document.getElementById('description_{{ i }}').innerHTML = replaceURLs(document.getElementById('description_{{ i }}').innerHTML);
+                                        document.getElementById('description_{{ i }}_{{ j }}').innerHTML = replaceURLs(document.getElementById('description_{{ i }}_{{ j }}').innerHTML);
                                         </script>
                                         <!-- Dropdown menu -->
                                         <div id="userDropdown-{{ i }}_{{ j }}" class="z-10 absolute hidden bg-gray-50
