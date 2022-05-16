@@ -132,3 +132,59 @@ function online() {
 function offline() {
 
 }
+
+function navfetchStatus() {
+    const request = $.ajax({
+        type: 'POST',
+        url: '/api/v1/internal/spotify-status'
+    });
+
+    request.done((data) => {
+        if (data === "1") {
+            document.getElementById("songhere").innerHTML = "";
+        }
+        else if (data === "2") {
+            document.getElementById("songhere").innerHTML = "";
+        }
+        else if (data === "3") {
+            document.getElementById("songhere").innerHTML = "";
+        }
+        else {
+            let songs = data.split(" • ");
+
+            let name = songs[0]
+            let artists = songs[1]
+            let album = songs[2]
+            let explicit = songs[3]
+            let image = songs[4]
+            let playing = songs[5]
+            let timestamp = songs[6]
+            let total = songs[7]
+            let ratio = songs[8]
+            let html = `
+            
+            <div style="width:150px;float:left;">
+                <img style="display: inline-block; margin:20px; border-radius:10px;" class="mb-3 w-20 h-20 shadow-lg" src="${image}">
+            </div>
+            <div style="width: calc(100% - 150px);float:left;">
+                <div style="margin-top:20px;">
+                <p class="truncate text-lg text-black dark:text-white"><i style="display:inline-block; color:#1BD661; margin-right:10px;" class="fab fa-spotify"></i> ${name} ${explicit} </p>
+
+                    <p class="truncate text-sm text-gray-600 dark:text-gray-300">${artists} - ${album}</p></div>
+                <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700 h-1">
+                    <div class="bg-white text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full h-1" style="width: ${Math.round(ratio)}%"> </div>
+                </div>
+                <p class="truncate text-sm text-gray-600 dark:text-gray-300">${timestamp} of ${total}
+                    ${playing}
+                    <i style="margin-left:20px;color:white;" class="material-icons">skip_next</i>
+                </p></div>
+            
+          
+            `;
+            document.getElementById("songhere").innerHTML = html;
+
+
+
+        }
+    });
+}
