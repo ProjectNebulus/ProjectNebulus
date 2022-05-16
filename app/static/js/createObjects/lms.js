@@ -1,16 +1,29 @@
 
 function replaceURLs(message) {
+    if(!message) return message;//return;
     console.log(message);
-    if(!message) return;
-
+    // if (!message.includes("\"http\"")) {
+    if (!message.includes("http")) {
+        console.log("returned. no link detected");
+        return message;//return;
+    }
+    if (message.includes("href=\"http")){
+        console.log("returned. recursive detected");
+        return message;//return;
+    }
     var urlRegex = /(((https?:\/\/)|(www\.))[^\s]+)/g;
+
     let result = message.replace(urlRegex, function (url) {
         var hyperlink = url;
         console.log(hyperlink);
         if (!hyperlink.match('^https?:\/\/')) {
           hyperlink = 'http://' + hyperlink;
         }
-        return `<a class="
+        hyperlink.replace("<p>","");
+        hyperlink.replace("</p>","")
+        return `<a 
+                   target="_blank"
+                   class="
                    underline 
                    decoration-yellow-500 decoration-[0.25rem] 
                    motion-safe:transition-all motion-safe:duration-200 
