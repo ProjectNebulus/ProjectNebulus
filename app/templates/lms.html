@@ -5,10 +5,10 @@
     <div style="height:100%;width:100%">
         {% include "navbar.html" %}
 
-        <div class="grid grid-cols-1 divide-y divide-gray-700 hidden lg:block"
-             style="height:100%;width:100%;float:left;padding-left:2rem;padding-right:1rem">
+        <div class="grid grid-cols-1 divide-y divide-gray-700 hidden lg:block h-full w-full pl-8 pr-4">
             <div class="flex flex-row">
-                <div id="middle" style="padding-left:2rem;padding-right:1rem;flex:0 0 75%;overflow:auto">
+                <div id="middle" style="flex:0 0 75%;"
+                     class="pl-8 pr-4 overflow-auto border-r border-gray-200 dark:border-gray-700">
                     <div class="flex flex-row w-full mb-4">
                         <h1 class="text-4xl text-black dark:text-white mt-5 text-left overflow-auto"
                             style="flex-grow: 1;">
@@ -36,13 +36,13 @@
                                 <div class="grid grid-cols-1 gap-2 pt-2">
                                     {% for j in range(list|length) %}
                                         {% set a = list[j] %}
-                                        <div id="toast-notification"
-                                             class="w-full min-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 overflow-hidden"
+                                        <div class="w-72 min-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 overflow-hidden"
                                              role="alert">
 
                                             {% if a.title != "" %}
                                                 <h4 class="text-lg font-semibold text-gray-900 dark:text-white truncate">
-                                                    {{ a.title }}</h4>
+                                                    {{ a.title }}
+                                                </h4>
                                             {% endif %}
 
                                             <div class="flex items-center mb-3">
@@ -57,31 +57,36 @@
                                                      alt="{{ a.author }}'s profile picture">
                                                 <br>
 
-                                                <div class="text-xs text-gray-700 dark:text-gray-400 pl-2">
-                                                    <h4 data-dropdown-toggle="userDropdown-{{ i }}_{{ j }}"
-                                                        class="hover:underline text-lg font-semibold text-gray-900 dark:text-white line-clamp-2 text-ellipses mb-2">
-                                                        {{ a.author }}</h4>
-
-                                                    {% if a.title != "" %} > {% endif %}
-
-                                                    <span class="bg-gray-300 text-gray-800 text-xs font-normal uppercase
-                                                     mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">
-                                                        {{ a.course.name }}
-                                                    </span>
+                                                <div class="flex flex-col text-xs text-gray-700 dark:text-gray-400 pl-2">
+                                                    {% if a.title == "" %}
+                                                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white truncate mb-1">
+                                                            {{ a.author }}
+                                                        </h4>
+                                                    {% endif %}
+                                                    <div>
+                                                        {% if a.title != "" %}
+                                                            <span class="text-xl">{{ a.author }} > </span>
+                                                        {% endif %}
+                                                        <span class="bg-gray-300 text-gray-800 text-xs font-normal uppercase
+                                                         mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300 -mt-1">
+                                                            {{ a.course.name }}
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="flex items-center">
                                                 <div class="text-sm text-gray-900 dark:text-white font-normal">
-                                                    <div id="description_{{ i }}_{{ j }}" class="text-sm text-gray-900 dark:text-white font-normal line-clamp-3">
-                                                    <p>
-                                                        {% for line in a.content.split("\n") %}
-                                                            {% if line != "" %}
-                                                                <p>{{ line }}</p>
-                                                            {% else %}
-                                                                <br>
-                                                            {% endif %}
-                                                        {% endfor %}
-                                                    </p>
+                                                    <div id="description_{{ i }}"
+                                                         class="text-sm text-gray-900 dark:text-white font-normal line-clamp-3">
+                                                        <p>
+                                                            {% for line in a.content.split("\n") %}
+                                                                {% if line != "" %}
+                                                                    <p>{{ line }}</p>
+                                                                {% else %}
+                                                                    <br>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        </p>
                                                     </div>
                                                     <time class="text-xs font-medium text-blue-600 dark:text-blue-500">
                                                         {{ strftime(a.date.time(), "%-I:%M %p") }}
@@ -90,7 +95,7 @@
                                             </div>
                                         </div>
                                         <script>
-                                        document.getElementById('description_{{ i }}_{{ j }}').innerHTML = replaceURLs(document.getElementById('description_{{ i }}_{{ j }}').innerHTML);
+                                            document.getElementById('description_{{ i }}').innerHTML = replaceURLs(document.getElementById('description_{{ i }}').innerHTML);
                                         </script>
                                         <!-- Dropdown menu -->
                                         <div id="userDropdown-{{ i }}_{{ j }}" class="z-10 absolute hidden bg-gray-50
@@ -145,7 +150,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
                                     {% endfor %}
                                 </div>
@@ -163,7 +167,7 @@
                                     <div id="toast-notification"
                                          class="w-full max-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 overflow-hidden"
                                          role="alert">
-                                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2 text-ellipses">
+                                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2 truncate">
                                             Welcome to Nebulus</h4>
                                         <div class="flex items-center mb-3">
                                             <img class="w-6 h-6 rounded-full ring-2 ring-gray-300 dark:ring-gray-500
@@ -199,64 +203,61 @@
                 </div>
 
 
-                <div id="right" style="float:right;flex: 0 0 25%"
+                <div id="right" style="flex: 0 0 25%"
                      class="border-gray-200 dark:border-gray-700 border-l text-center overflow-auto h-full">
                     <p class="text-2xl text-black dark:text-white">Upcoming Events</p><br>
-                    <div style="text-align: center;">
-                        <div class="flex flex-col overflow-x-auto sm:rounded-lg min-w-full align-middle overflow-auto inline-block">
-                            {% if events|length == 0 %}
-                                <p class="text-gray-300 dark:text-gray-700 mx-4">No Events, Assignments, or Quizzes! To
-                                    add events on to your Nebulus dashboard, please add it within a Course!</p>
-                            {% else %}
-                                {% for date, assignments in events.items() %}
-                                    {% for a in assignments[:15] %}
-                                        {% if a._cls == "Assignment" %}
-                                            {% if a.submitDate == None or date > today %}
-                                                <a href="/assignment/{{ a.id }}" class="flex text-black dark:text-white text-left
-                            bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 rounded-lg p-6 ml-3 shadow-md dark:border-gray-700 text-xl mb-5">
-                                                    <div class="mr-4 material-icons ml-2"
-                                                         style="transform: translate(0, 50%) scale(1.75)">assignment
-                                                    </div>
-                                                    <div class="truncate">
-                                        <span class="text-ellipses">{{ a.title }}
-                                        </span>
-
-                                                        <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">{{ a.course.name }}</span>
-                                                        <div class="text-xs text-gray-700 uppercase dark:text-gray-400">
-                                                            Due: {{ date.strftime("%D") }}
-                                                            {% if date < today %}
-                                                                •
-                                                                <span class="text-red-600 dark:text-red-500">Overdue</span>
-                                                            {% elif a.grade != None and a.grade / a.points < 0.6 %}
-                                                                <span class="text-black dark:text-white"> • </span>
-                                                                <span class="text-gray-300 dark:text-gray-700">{{ a.grade }}/{{ a.points }}</span>
-                                                            {% endif %}
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            {% endif %}
-                                        {% else %}
+                    <div class="flex flex-col overflow-x-auto sm:rounded-lg min-w-full align-middle overflow-auto inline-block">
+                        {% if events|length == 0 %}
+                            <p class="text-gray-300 dark:text-gray-700 mx-4">No Events, Assignments, or Quizzes! To
+                                add events on to your Nebulus dashboard, please add it within a Course!</p>
+                        {% else %}
+                            {% for date, assignments in events.items() %}
+                                {% for a in assignments[:15] %}
+                                    {% if a._cls == "Assignment" %}
+                                        {% if a.submitDate == None or date > today %}
                                             <a href="/assignment/{{ a.id }}" class="flex text-black dark:text-white text-left
                             bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 rounded-lg p-6 ml-3 shadow-md dark:border-gray-700 text-xl mb-5">
                                                 <div class="mr-4 material-icons ml-2"
-                                                     style="transform: translate(0, 50%) scale(1.75)">event
+                                                     style="transform: translate(0, 50%) scale(1.75)">assignment
                                                 </div>
-                                                <div class="truncate">
-                                        <span class="text-ellipses">{{ a.title }}
-                                        </span>
 
+                                                <div>
+                                                    <span class="truncate">{{ a.title }}</span>
                                                     <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">{{ a.course.name }}</span>
-                                                    <div class="text-xs text-gray-700 uppercase dark:text-gray-400 line-clamp-2">
-                                                        {{ a.description }}
+                                                    <div class="text-xs text-gray-700 uppercase dark:text-gray-400">
+                                                        Due: {{ date.strftime("%D") }}
+                                                        {% if date < today %}
+                                                            •
+                                                            <span class="text-red-600 dark:text-red-500">Overdue</span>
+                                                        {% elif a.grade != None and a.grade / a.points < 0.6 %}
+                                                            <span class="text-black dark:text-white"> • </span>
+                                                            <span class="text-gray-300 dark:text-gray-700">{{ a.grade }}/{{ a.points }}</span>
+                                                        {% endif %}
                                                     </div>
                                                 </div>
                                             </a>
                                         {% endif %}
-                                    {% endfor %}
-                                {% endfor %}
-                            {% endif %}
+                                    {% else %}
+                                        <a href="/assignment/{{ a.id }}" class="flex text-black dark:text-white text-left
+                            bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 rounded-lg p-6 ml-3 shadow-md dark:border-gray-700 text-xl mb-5">
+                                            <div class="mr-4 material-icons ml-2"
+                                                 style="transform: translate(0, 50%) scale(1.75)">event
+                                            </div>
+                                            <div class="truncate">
+                                        <span class="truncate">{{ a.title }}
+                                        </span>
 
-                        </div>
+                                                <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">{{ a.course.name }}</span>
+                                                <div class="text-xs text-gray-700 uppercase dark:text-gray-400 line-clamp-2">
+                                                    {{ a.description }}
+                                                </div>
+                                            </div>
+                                        </a>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                        {% endif %}
+
                     </div>
                 </div>
             </div>
@@ -519,7 +520,7 @@
                     <ol class="relative border-l border-gray-200 dark:border-gray-700 lg:ml-0 p-6">
                         {% for date, list in announcements.items() %}
                             <li class="mb-10 ml-4">
-                                <div class="absolute w-3 h-3 bg-gray-200 rounded-full -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                                <div class="absolute w-3 h-3 bg-gray-200 rounded-full -mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
                                 <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
                                     {{ strftime(date, "%a, %B %-d, %Y") }}
                                 </time>

@@ -30,6 +30,7 @@
         <h1 class="mx-4 my-4 text-2xl text-black dark:text-white">You have no announcements! Try creating one!</h1>
     {% else %}
         {% for i, a in enumerate(course.announcements|list) %}
+            {% set a = Announcement(**(a|tojson)) %}
             <div class="block p-6 ml-4 my-4 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
                  style="width: 90%">
                 <div class="flex flex-row items-left">

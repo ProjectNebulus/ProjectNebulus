@@ -133,12 +133,12 @@ function offline() {
 
 }
 
-function navfetchStatus() {
+function navFetchStatus() {
     const request = $.ajax({
         type: 'POST',
         url: '/api/v1/internal/spotify-status',
-        data:{
-            "special":"a"
+        data: {
+            "special": "a"
         }
     });
 
@@ -185,7 +185,6 @@ function navfetchStatus() {
           
             `;
             document.getElementById("songhere").innerHTML = html;
-
 
 
         }

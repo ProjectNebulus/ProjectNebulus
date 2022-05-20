@@ -5,6 +5,7 @@ from flask import render_template, session, request
 from flask_cors import cross_origin
 from jinja2 import TemplateNotFound
 
+from static.python.classes import Announcement
 from . import main_blueprint, utils
 from .utils import logged_in, private_endpoint
 from ...static.python.mongodb import read, create
@@ -36,7 +37,8 @@ def course_page(page, **kwargs):
                     disableWidget=(page != "course"),
                     events=read.sort_course_events(session["id"], int(course_id))[1],
                     strftime=utils.strftime,
-                    enumerate=enumerate
+                    enumerate=enumerate,
+                    Announcement=Announcement
                 )
 
             except TemplateNotFound:

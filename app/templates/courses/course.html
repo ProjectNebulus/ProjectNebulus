@@ -16,13 +16,22 @@
             <span style="float:left" class="text-5xl text-black dark:text-white text-black" id="page-title"></span>
 
             <div style="float: right; margin-right: 3rem">
-                <button  style="float:left;margin-right:10px;" data-dropdown-toggle="adddropdown" type="button" id="create" style="width:64px;height:44px"
+                <button style="float:left;margin-right:10px;" data-dropdown-toggle="adddropdown" type="button"
+                        id="create" style="width:64px;height:44px"
                         class="hidden sm:flex items-center text-left space-x-3 px-4 h-12 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700 text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                     <span style="font-size:30px;" class="material-icons">add</span></button>
-                <button data-modal-toggle="searchModal" id="search" style="float:left;" type="button" class="hidden sm:flex items-center w-72 text-left space-x-3 px-4 h-12 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700">
-                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-none text-slate-300 dark:text-slate-400" aria-hidden="true"><path d="m19 19-3.5-3.5"></path>
-                        <circle cx="11" cy="11" r="6"></circle></svg><span class="flex-auto">Quick search...</span><kbd class="font-sans font-semibold dark:text-slate-500">
-                    <abbr title="Command" class="no-underline text-slate-300 dark:text-slate-500">⌘</abbr> K</kbd></button>
+                <button data-modal-toggle="searchModal" id="search" style="float:left;" type="button"
+                        class="hidden sm:flex items-center w-72 text-left space-x-3 px-4 h-12 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round"
+                         class="flex-none text-slate-300 dark:text-slate-400" aria-hidden="true">
+                        <path d="m19 19-3.5-3.5"></path>
+                        <circle cx="11" cy="11" r="6"></circle>
+                    </svg>
+                    <span class="flex-auto">Quick search...</span><kbd
+                        class="font-sans font-semibold dark:text-slate-500">
+                    <abbr title="Command" class="no-underline text-slate-300 dark:text-slate-500">⌘</abbr> K</kbd>
+                </button>
 
                 <!-- Dropdown menu -->
                 <div id="adddropdown"
@@ -39,49 +48,47 @@
 
             <br><br><br>
             <hr class="dark:text-white text-black">
-            <iframe id="frame" name="frame" style="background-image: url('/static/images/nebulusCats/v3.gif');
-             background-size: 20%; background-position:45%; background-repeat: no-repeat; width: 100%; height: 100%; overflow-x: hidden"></iframe>
+            <iframe id="frame" name="frame"
+                    style="background-image: url('/static/images/nebulusCats/v3.gif'); background-size: 20%; background-position:45%; background-repeat: no-repeat; width: 100%; height: 100%; overflow-x: hidden"></iframe>
         </div>
 
-        <div style="width:20%" class="hidden lg:block border-l border-gray-200 dark:border-gray-700"
-             id="upcoming-events">
-            <div style="text-align: center;">
-                <h1 class="text-black dark:text-white text-2xl">Upcoming Events</h1>
-                <br>
-                <div class="flex flex-col overflow-x-auto sm:rounded-lg min-w-full align-middle overflow-auto inline-block">
-                    {% if events|length == 0 %}
-                        <p class="text-gray-300 dark:text-gray-700">No Events!</p>
-                    {% else %}
-                        {% for date, assignments in events.items() %}
-                            {% for a in assignments[:15] %}
-                                {% if a.course.id == course.id %}
-                                    {% if a.submitDate == None or date > today %}
-                                        <a href="/assignment/{{ a.id }}" class="flex text-black dark:text-white text-left
+        <div class="hidden xl:block border-l border-gray-200 dark:border-gray-700 text-center"
+             id="upcoming-events" style="width:20%">
+            <h1 class="text-black dark:text-white text-2xl">Upcoming Events</h1>
+            <br>
+            <div class="flex flex-col overflow-x-auto sm:rounded-lg min-w-full align-middle overflow-auto inline-block">
+                {% if events|length == 0 %}
+                    <p class="text-gray-300 dark:text-gray-700">No Events!</p>
+                {% else %}
+                    {% for date, assignments in events.items() %}
+                        {% for a in assignments[:15] %}
+                            {% if a.course.id == course.id %}
+                                {% if a.submitDate == None or date > today %}
+                                    <a href="/assignment/{{ a.id }}" class="flex text-black dark:text-white text-left
                                 bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 rounded-lg p-6 ml-3 shadow-md
                                 dark:border-gray-700 text-xl mb-5" style="max-width: 90%">
-                                            <div class="mr-4 material-icons ml-2"
-                                                 style="transform: translate(0, 50%) scale(1.75)">event
-                                            </div>
-                                            <div class="truncate">
-                                            <span class="text-ellipses">{{ a.title }}
+                                        <div class="mr-4 material-icons ml-2"
+                                             style="transform: translate(0, 50%) scale(1.75)">event
+                                        </div>
+                                        <div class="truncate">
+                                            <span class="truncate">{{ a.title }}
                                             </span>
-                                                <div class="text-xs text-gray-700 uppercase dark:text-gray-400">
-                                                    Due: {{ date.strftime("%D") }}
-                                                    {% if date < today %}
-                                                        • <span class="text-red-600 dark:text-red-500">Overdue</span>
-                                                    {% elif a.grade != None and a.grade / a.points < 0.6 %}
-                                                        <span class="text-black dark:text-white"> • </span>
-                                                        <span class="text-gray-300 dark:text-gray-700">{{ a.grade }}/{{ a.points }}</span>
-                                                    {% endif %}
-                                                </div>
+                                            <div class="text-xs text-gray-700 uppercase dark:text-gray-400">
+                                                Due: {{ date.strftime("%D") }}
+                                                {% if date < today %}
+                                                    • <span class="text-red-600 dark:text-red-500">Overdue</span>
+                                                {% elif a.grade != None and a.grade / a.points < 0.6 %}
+                                                    <span class="text-black dark:text-white"> • </span>
+                                                    <span class="text-gray-300 dark:text-gray-700">{{ a.grade }}/{{ a.points }}</span>
+                                                {% endif %}
                                             </div>
-                                        </a>
-                                    {% endif %}
+                                        </div>
+                                    </a>
                                 {% endif %}
-                            {% endfor %}
+                            {% endif %}
                         {% endfor %}
-                    {% endif %}
-                </div>
+                    {% endfor %}
+                {% endif %}
             </div>
         </div>
     </div>

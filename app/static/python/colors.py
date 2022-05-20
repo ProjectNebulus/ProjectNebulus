@@ -1,6 +1,8 @@
-from colorthief import ColorThief
-import urllib.request
 import os
+import urllib.request
+
+from colorthief import ColorThief
+
 
 # url = "https://asset-cdn.schoology.com/system/files/imagecache/profile_reg/pictures/picture-9deb20954709c7c99c41a9810ea6b3f5_5f2e29135adb5.png"
 # urllib.request.urlretrieve(url, 'testing.png')
@@ -16,7 +18,7 @@ def getcolor(url):
         q = ending.index("?")
         ending = ending[0:q]
     dot = ending.index(".")
-    extension = ending[dot + 1 : len(ending)]
+    extension = ending[dot + 1:]
     file = f"testing.{extension}"
     urllib.request.urlretrieve(url, file)
     if extension.lower() != "png" and extension.lower() != "svg":
@@ -30,7 +32,6 @@ def getcolor(url):
         except:
             return None
     if extension.lower() == "svg":
-
         return None
     try:
         color_thief = ColorThief(file)

@@ -32,7 +32,7 @@
                                 <div id="toast-notification"
                                      class="w-full max-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 overflow-hidden"
                                      role="alert">
-                                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2 text-ellipses">{{ announcement.title }}</h4>
+                                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2 truncate">{{ announcement.title }}</h4>
                                     <div class="flex items-center mb-3">
                                         <img data-dropdown-toggle="userDropdown{{ i }}_{{ j }}"
                                              id="avatar{{ i }}_{{ j }}" data-dropdown-placement="bottom-start"
@@ -105,7 +105,7 @@
                             <div id="toast-notification"
                                  class="w-full max-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 overflow-hidden"
                                  role="alert">
-                                <h4 class="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2 text-ellipses">
+                                <h4 class="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2 truncate">
                                     Welcome to Nebulus</h4>
                                 <div class="flex items-center mb-3">
                                     <img class="w-6 h-6 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
@@ -161,7 +161,7 @@
                                                  style="transform: translate(0, 50%) scale(1.75)">assignment
                                             </div>
                                             <div class="truncate">
-                                        <span class="text-ellipses">{{ a.title }}
+                                        <span class="truncate">{{ a.title }}
                                         </span>
 
                                                 <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">{{ a.course.name }}</span>
@@ -185,7 +185,7 @@
                                              style="transform: translate(0, 50%) scale(1.75)">event
                                         </div>
                                         <div class="truncate">
-                                        <span class="text-ellipses">{{ a.title }}
+                                        <span class="truncate">{{ a.title }}
                                         </span>
 
                                             <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">{{ a.course.name }}</span>

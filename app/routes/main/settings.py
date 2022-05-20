@@ -1,12 +1,10 @@
 import flask
 import google.oauth2.credentials
+from googleapiclient.discovery import build
 
+from . import main_blueprint
 from .spotify import *
 from ...static.python.mongodb import read
-
-
-from googleapiclient.discovery import build
-from . import main_blueprint
 
 
 def generate_redirect(url):
@@ -87,7 +85,7 @@ def settings():
         user=session.get("username"),
         pswHashes="*" * session.get("pswLen"),
         email=session.get("email"),
-        avatar=session.get("avatar"),
+        avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
         schoology=the_schoology,
         classroom=the_google_classroom,
         googleclassroom=user_info,

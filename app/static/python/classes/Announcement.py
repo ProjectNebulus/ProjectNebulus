@@ -8,6 +8,7 @@ from .Snowflake import Snowflake
 class Announcement(Snowflake):
     meta = {"collection": "Announcements"}
     course = ReferenceField("Course", required=True)
+    imported_id = IntField(default=None, null=True)
     title = StringField(required=True)
     content = StringField(required=True)
     date = DateTimeField(default=datetime.datetime.now())

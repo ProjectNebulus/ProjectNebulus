@@ -20,7 +20,7 @@
         <h2 class="text-black dark:text-white text-2xl ml-6">Recent Activity</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 p-6">
             <div class="pb-2 overflow-hidden" style="height: 20rem">
-                <table class="text-gray-500 dark:text-gray-400 bg-gray-300 dark:bg-gray-800 w-full text-sm rounded-lg"
+                <table class="text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 w-full text-sm rounded-lg"
                        style="height: 17rem;">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
@@ -40,7 +40,8 @@
                     {% else %}
                         {% for event in events[:5] %}
                             {% if event._cls == "Event" %}
-                                <tr class="border-b border-gray-200">
+                                <tr style="vertical-align: top;"
+                                    class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 h-4">
                                     <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
                                         <span class="material-icons-outlined mr-2"
                                               style="vertical-align: bottom">event</span>
@@ -61,10 +62,9 @@
                                 </tr>
                             {% else %}
                                 <tr style="vertical-align: top;"
-                                    class="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 h-4">
+                                    class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 h-4">
                                     <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
-                                    <span class="material-icons-outlined mr-2"
-                                          style="vertical-align: bottom">description</span>
+                                        <span class="material-icons-outlined mr-2" style="vertical-align: bottom">description</span>
                                         {{ event.title }}
                                     </td>
                                     <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">

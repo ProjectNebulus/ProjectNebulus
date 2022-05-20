@@ -29,7 +29,7 @@
         </style>
     </head>
 
-    <body style="overflow:hidden">
+    <body>
     {% include "navbar.html" %}
     <script src="/static/js/settings.js"></script>
     <div style="height:100%;overflow-y:scroll;">
@@ -40,11 +40,9 @@
             </div>
             <br>
 
-            <h2 id="general" class="text-4xl text-black dark:text-white">General Settings </h2><br>
-            <label style="margin-bottom:-10px;"
-                   class="hidden md:block block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                Your Username
-            </label>
+            <h2 id="general" class="text-4xl text-black dark:text-white">General Settings</h2><br>
+            <label class="hidden md:block block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                   style="margin-bottom:-10px;">Your Username</label>
 
             <div class="settingItem" style="display: inline-block;">
                 <div class="relative mt-1" style="display: inline-block;">
@@ -118,11 +116,12 @@
 
             <hr class="border-gray-300 dark:border-gray-700 my-8">
             <h2 id="connections" class="text-4xl mt-2 text-black dark:text-white">Connections</h2><br>
-            <a style="overflow-y:scroll;"
-               class="block h-64 p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700">
-                <p class="text-black dark:text-white">Connections can unlock <span
-                        class="font-bold text-yellow-400">SPECIAL</span>
-                    integrations for Nebulus!</p>
+            <a class="block h-72 p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700">
+                <p class="text-black dark:text-white">
+                    Connections can unlock
+                    <span class="font-bold text-yellow-400">SPECIAL</span>
+                    integrations for Nebulus!
+                </p>
 
                 <div onclick="newwindow=window.open('/gclassroom','Authorize with Google','height=400,width=900')"
                      style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default"
@@ -371,7 +370,7 @@
                     <a
                             class="block p-6 w-1/2 bg-white rounded-b-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-700 dark:border-gray-700 dark:hover:bg-gray-700">
                         <div><a href="/api/v1/internal/logout-of-schoology"
-                           class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             Disconnect Canvas
                             <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -380,18 +379,19 @@
                                       clip-rule="evenodd"></path>
                             </svg>
                         </a>
-                        <br><br>
-                        <label for="toggle-example-checked" class="flex relative items-center mb-4 cursor-pointer">
-                            <input type="checkbox" id="toggle-example-checked" class="sr-only" checked>
-                            <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
-                            <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Show in Profile</span>
-                        </label>
-                        <label for="toggle-example-checked1" class="flex relative items-center mb-4 cursor-pointer">
-                            <input type="checkbox" id="toggle-example-checked1" class="sr-only" checked>
-                            <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
-                            <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Use in Courses</span>
-                        </label>
-                        </div></a>
+                            <br><br>
+                            <label for="toggle-example-checked" class="flex relative items-center mb-4 cursor-pointer">
+                                <input type="checkbox" id="toggle-example-checked" class="sr-only" checked>
+                                <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
+                                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Show in Profile</span>
+                            </label>
+                            <label for="toggle-example-checked1" class="flex relative items-center mb-4 cursor-pointer">
+                                <input type="checkbox" id="toggle-example-checked1" class="sr-only" checked>
+                                <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
+                                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Use in Courses</span>
+                            </label>
+                        </div>
+                    </a>
                 </div>
                 <br>
 
@@ -415,8 +415,8 @@
                     </a>
                     <a
                             class="block p-6 w-1/2 bg-white rounded-b-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-700 dark:border-gray-700 dark:hover:bg-gray-700">
-                       <div> <a href="/spotify/sign_out"
-                           class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        <div><a href="/spotify/sign_out"
+                                class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             Disconnect Spotify
                             <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -425,18 +425,19 @@
                                       clip-rule="evenodd"></path>
                             </svg>
                         </a>
-                        <br><br>
-                        <label for="toggle-example-checked" class="flex relative items-center mb-4 cursor-pointer">
-                            <input type="checkbox" id="toggle-example-checked" class="sr-only" checked>
-                            <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
-                            <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Show in Profile</span>
-                        </label>
-                        <label for="toggle-example-checked1" class="flex relative items-center mb-4 cursor-pointer">
-                            <input type="checkbox" id="toggle-example-checked1" class="sr-only" checked>
-                            <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
-                            <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Use in Courses</span>
-                        </label>
-                       </div></a>
+                            <br><br>
+                            <label for="toggle-example-checked" class="flex relative items-center mb-4 cursor-pointer">
+                                <input type="checkbox" id="toggle-example-checked" class="sr-only" checked>
+                                <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
+                                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Show in Profile</span>
+                            </label>
+                            <label for="toggle-example-checked1" class="flex relative items-center mb-4 cursor-pointer">
+                                <input type="checkbox" id="toggle-example-checked1" class="sr-only" checked>
+                                <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
+                                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Use in Courses</span>
+                            </label>
+                        </div>
+                    </a>
                 </div>
                 <br>
 
@@ -617,8 +618,8 @@
             </div>
         </div>
 
-        <div id="sidebar" class="mt-4 hidden lg:block" style="margin:1%; float:left; width:10%;text-align:right;position: sticky;
-    top: 0;">
+        <div id="sidebar" class="mt-4 hidden lg:block text-right absolute"
+             style="margin:1%; float:left; width:10%; top: 45; left: 13">
             <li class="mt-12 lg:mt-8">
                 <h5 class="mb-8 lg:mb-3 text-3xl font-semibold text-slate-900 dark:text-slate-200">Settings</h5>
                 <ul class="space-y-6 lg:space-y-2 border-l border-slate-100 dark:border-slate-800">

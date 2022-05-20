@@ -1,16 +1,13 @@
+from datetime import datetime
+
+import google.oauth2.credentials
+import schoolopy
 from flask import session, request
-import flask
+from googleapiclient.discovery import build
 
 from . import internal
-from ....main.utils import private_endpoint
-from .....static.python.mongodb import create, read
-import google.oauth2.credentials
-
-from googleapiclient.discovery import build
-from .....static.python.classes import User
-import schoolopy
-from datetime import datetime
 from .....static.python.colors import getcolor
+from .....static.python.mongodb import create, read
 
 
 @internal.route("/create-course", methods=["POST"])
@@ -98,7 +95,7 @@ def create_google_course():
         post_data = request.args
     link = post_data["link"]
     index = link.index("?id=") + 4
-    link = link[index : len(link)]
+    link = link[index: len(link)]
     # print(f"I'm at Google Classroom Creation. The ID is: {link}")
     course = getGclassroomcourse(link)
     createcourse = {
@@ -129,7 +126,7 @@ def create_canvas_course():
     link = post_data["link"]
     teacher = post_data["teacher"]
     index = link.index("/courses/") + 9
-    course_id = link[index : len(link)]
+    course_id = link[index: len(link)]
     # print(f"I'm at Canvas Creation. The ID is: {link}")
     from canvasapi import Canvas
 
@@ -185,17 +182,15 @@ def create_schoology_course():
     if request.method == "GET":
         post_data = request.args
     link = post_data["link"]
-    link.replace("https://", "")
-    link.replace("http", "")
+    link.replace("https://", "").replace("http", "")
     index = link.index(".schoology.com") + len(".schoology.com")
-    link = link[index : len(link)]
+    link = link[index:]
     if "/course/" not in link:
         return "Invalid"
     index = len("/course/")
-    link = link[index : len(link)]
-    link = link[0 : len("5131176032")]
+    link = link[index:]
+    link = link[:len("5131176032")]
     schoology = read.getSchoology(username=session["username"])
-    print(schoology)
     if len(schoology) == 0:
         return "1"
     schoology = schoology[0]
@@ -213,10 +208,13 @@ def create_schoology_course():
         access_token_secret=schoology.Schoology_access_secret,
     )
     auth.request_authorization(callback_url=(request.url_root + "/closeSchoology"))
-    auth.authorize()
+    while not auth.authorized:
+        auth.authorize()
     sc = schoolopy.Schoology(auth)
     sc.limit = 1000
-    print(sc.get_user_sections(sc.get_me()["id"]))
+    print("Courses:",
+          *(f'{sec["course_title"]}: {sec["section_title"]}' for sec in sc.get_user_sections(sc.get_me()["id"])),
+          sep="\n")
     section = dict(sc.get_section(link))
     course = {
         "name": f'{section["course_title"]} ({section["section_title"]})',
@@ -263,7 +261,6 @@ def create_schoology_course():
         )
 
     scgrades = sc.get_user_grades_by_section(sc.get_me()["id"], link)
-    print(scgrades)
     scevents = sc.get_section_events(link)
     print(scevents)
     for event in scevents:

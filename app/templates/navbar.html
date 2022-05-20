@@ -41,45 +41,18 @@
                             <li><a href="/pricing" class="nav-link">Pricing</a></li>
                             <li><a href="/api/developers" class="nav-link">API</a></li>
                         {% endif %}
-
-                        <button data-dropdown-toggle="dropdowndashboard">
-                            <i class="material-icons">dashboard</i>
-                        </button>
-
                     </ul>
                 </div>
             </div>
 
             <div style="float:right;display: grid; grid-auto-flow: column; align-content: center;">
                 {% if user %}
-                    <dropdown-menu style="display: grid; grid-auto-flow: column; align-content: center;">
-                        <trigger id="user-menu-button" class="rounded-full my-2 mx-2 w-8 h-8 lg:w-12 lg:h-12
-                         {% if "black" in avatar %} bg-gray-300
-                         {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}">
-                            <logo image="{{ avatar }}" no-revert class="h-5 lg:h-8"
-                                  style="margin-left: 20%; margin-top: 20%"></logo>
-                        </trigger>
-                        <!-- Dropdown menu -->
-                        <contents class="my-4 text-base bg-gray-100 dark:bg-gray-700 dark:divide-gray-600">
-                            <item class="dark:text-gray-300 text-gray-600">
-                                <span class="block text-sm text-gray-900 dark:text-white">{{ user }}</span>
-                                <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">{{ email }}</span>
-                            </item>
-                            <item class="dark:text-gray-300 text-gray-600" href="/dashboard">Dashboard</item>
-                            <item class="dark:text-gray-300 text-gray-600" href="/points">0
-                                <svg class="w-6 h-6 inline-block" fill="currentColor" viewBox="0 0 20 20"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"></path>
-                                    <path fill-rule="evenodd"
-                                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z"
-                                          clip-rule="evenodd"></path>
-                                </svg>
-                            </item>
-                            <item class="dark:text-gray-300 text-gray-600" href="/settings">Settings</item>
-                            <item class="dark:text-gray-300 text-gray-600" href="/profile">Profile</item>
-                            <item class="dark:text-gray-300 text-gray-600" href="/logout">Sign Out</item>
-                        </contents>
-                    </dropdown-menu>
+                    <button data-dropdown-toggle="control-center" class="rounded-full border-gray-300 border-2 w-12 h-12
+                        {% if "black" in avatar %} bg-gray-300
+                        {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}">
+                        <logo image="{{ avatar }}" no-revert class="h-5 lg:h-8"
+                              style="margin-left: 15%; margin-top: 10%"></logo>
+                    </button>
                 {% else %}
                     <button id="theme-toggle" type="button"
                             class="text-gray-500 dark:text-gray-400  dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
@@ -110,15 +83,13 @@
                 {% endif %}
             </div>
         </div>
+        <div id="control-center" class="hidden backdrop-blur-sm">{% include "control.html" %}</div>
     </nav>
     <div id="sidenav" data-modal-placement="top-left" tabindex="-1"
          class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full h-full h-modal ">
         <div class="relative p-4 w-full max-w-2xl h-full ">
             {% include "navbar_mobile.html" %}
         </div>
-    </div>
-    <div id="dropdowndashboard" class="sticky backdrop-blur-sm bg-gray-300/30 dark:bg-gray-800/30 z-50 hidden rounded shadow w-96 h-80">
-        {% include "control.html" %}
     </div>
     <script>
         const themeToggleLightIcon = document.getElementById('theme-toggle-dark-icon');
@@ -170,9 +141,7 @@
 
             }
         }
-        navfetchStatus();
-        //setInterval(fetchStatus, 500);
-        setInterval(navfetchStatus, 500);
+        // setInterval(navFetchStatus, 500);
     </script>
 
 

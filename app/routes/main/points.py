@@ -8,10 +8,9 @@ from ...static.python.mongodb import read
 def points():
     return render_template(
         "points.html",
-        page="Point - Nebulus",
+        page="Nebulus - Points",
         user=session.get("username"),
-        email=session.get("email"),
-        avatar=session.get("avatar"),
+        avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
         read=read,
         points=read.find_user(username=session.get("username")).points,
     )

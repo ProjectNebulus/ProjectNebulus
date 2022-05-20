@@ -57,7 +57,7 @@ def getGclassroomcourses():
 @main_blueprint.route("/lms", methods=["GET"])
 @logged_in
 def lms():
-    from ...static.python.classes import Event
+    from app.static.python.classes import Event
 
     user_acc = read.find_user(id=session["id"])
     user_courses = read.get_user_courses(session["id"])
@@ -115,10 +115,11 @@ def lms():
         auth.authorize()
         sc = schoolopy.Schoology(auth)
         sc.limit = "100&include_past=1"
-        schoologycourses = list(sc.get_user_sections(user_id=sc.get_me().id) )
+        schoologycourses = list(sc.get_user_sections(user_id=sc.get_me().id))
         for i in range(0, len(schoologycourses)):
             schoologycourses[i] = dict(schoologycourses[i])
-            schoologycourses[i]["link"] = schoology.schoologyDomain+"courses/"+schoologycourses[i]["id"]+"/materials"
+            schoologycourses[i]["link"] = schoology.schoologyDomain + "courses/" + schoologycourses[i][
+                "id"] + "/materials"
         schoology_school = sc.get_school(schoologycourses[0]["school_id"])
         schoologycourses.append(schoology_school)
     except Exception as e:
@@ -143,5 +144,5 @@ def lms():
         schoologycourses=schoologycourses,
         enumerate=enumerate,
         Event=Event,
-        pastschoologycourses = schoologycourses,
+        pastschoologycourses=schoologycourses,
     )
