@@ -4,8 +4,7 @@ import requests
 from flask import render_template, session, request
 from flask_cors import cross_origin
 from jinja2 import TemplateNotFound
-
-from static.python.classes import Announcement
+from ...static.python.classes import Announcement
 from . import main_blueprint, utils
 from .utils import logged_in, private_endpoint
 from ...static.python.mongodb import read, create

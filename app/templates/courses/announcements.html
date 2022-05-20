@@ -38,7 +38,7 @@
                          {% if "black" in avatar %} bg-gray-300 dark:bg-gray-400
                          {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}"
                          data-dropdown-toggle="userDropdown-{{ i }}"
-                         alt="{{ a.author }}'s Profile Pic" src="{{ a.author_pic | replace('//', '/') }}">
+                         alt="{{ a.author }}'s Profile Pic" src="{{ a.author_pic  }}">
                     =
                     <div class="ml-4">
                         <h3 class="text-xl font-medium text-gray-900 dark:text-white">
@@ -102,7 +102,7 @@
                     <div style="text-align: left; margin-left:3px;">
                         <div style="margin-top:-60px;">
                             <img style="background:rgb(18,25,38);border-style:solid;border-width:2px;"
-                                 src="{{ a.author_pic | replace('//', '/') }}"
+                                 src="{{ a.author_pic  }}"
                                  class="w-24 h-24 rounded-full border-white dark:border-gray-700"
                                  alt="{{ a.author }}'s Profile Picture">
                             <span class="absolute  w-5 h-5 bg-green-400 border-2 border-white dark:border-gray-700 rounded-full"
