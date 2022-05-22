@@ -1,8 +1,9 @@
-import os
+from pathlib import Path
+
 from werkzeug.utils import secure_filename
+
 from .utils import *
 from ..mongodb import create
-from pathlib import Path
 
 """
 Status Codes:

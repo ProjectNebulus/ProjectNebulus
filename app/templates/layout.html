@@ -113,22 +113,7 @@
         .hover-scroll:hover::-webkit-scrollbar {
             display: block;
         }
-
-        .hover-scroll {
-            -ms-overflow-style: none; /* IE and Edge */
-            scrollbar-width: none; /* Firefox */
-        }
     </style>
 </head>
-
-<script>
-    const menu = document.getElementById("context-menu");
-    const user = "{{ user }}";
-    document.onkeydown = function (e) {
-        if (e.ctrlKey && e.altKey && e.keyCode === 'I'.charCodeAt(0)) {
-            return false;
-        }
-    }
-</script>
 {% block main %}
 {% endblock %}

@@ -50,7 +50,7 @@
                     <button data-dropdown-toggle="control-center" class="rounded-full border-gray-300 border-2 w-12 h-12
                         {% if "black" in avatar %} bg-gray-300
                         {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}">
-                        <logo image="/static/images/nebulusCats{{ avatar }}" no-revert class="h-5 lg:h-8"
+                        <logo image="{{ avatar }}" no-revert class="h-5 lg:h-8"
                               style="margin-left: 15%; margin-top: 10%"></logo>
                     </button>
                 {% else %}

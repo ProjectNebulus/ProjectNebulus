@@ -2,7 +2,7 @@
 function openModal(object_id) {
     let targetEl = document.getElementById(object_id);
     const options = {
-        placement: 'bottom-right',
+        placement: 'center',
         backdropClasses: 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40'
     };
     const modal = new Modal(targetEl, options);
@@ -18,10 +18,10 @@ function closeModal(object_id) {
     };
     const modal = new Modal(targetEl, options);
     modal.hide();
-    let elements = document.querySelectorAll('[modal-backdrop]');
-    for (let i = 0; i < elements.length; i++) {
-        elements[i].style.display = "none";
-    }
+
+    for (const element of document.querySelectorAll("[modal-backdrop]"))
+        element.parentElement.removeChild(element);
+
     return true;
 }
 
