@@ -70,4 +70,5 @@ $ python3 main.py
 
 wip
 ## Website
-Go to [this link](https://project-nebulus.nicholasxwang.repl.co/)!
+Main Site [this link](https://beta.nebulus.ml/)!
+Repl.it Site [this link](https://project-nebulus.nicholasxwang.repl.co/)!
