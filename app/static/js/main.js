@@ -17,10 +17,10 @@ function invertSite() {
 
     if (localStorage.getItem("color-theme") === "dark") {
         if (window.location.pathname === "/") {
-            document.body.style.backgroundImage = "url(\"/static/images/darkwallpaper.png\")";
+            //document.body.style.backgroundImage = "url(\"/static/images/darkwallpaper.png\")";
             document.body.style.backgroundSize = "cover";
-            document.body.style.background = "url(\"static/images/darkwallpaper.png\") no-repeat center center fixed";
-            document.body.style.backgroundImage = "url(\"/static/images/darkwallpaper.png\")";
+            document.body.style.background = "linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2) ), url('/static/images/darkwallpaper.png') no-repeat center center fixed";
+            //document.body.style.backgroundImage = "url(\"/static/images/darkwallpaper.png\")";
             document.body.style.backgroundSize = "cover";
 
         }
