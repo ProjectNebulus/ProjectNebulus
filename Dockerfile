@@ -64,3 +64,4 @@ EXPOSE 8080:8080
 #CMD ["stdbuf", "-oL", "ls /opt/nebulus"]
 
 #CMD ["stdbuf", "-oL", "python3", "/opt/app/main.py"]
+ENTRYPOINT ["python3", "main.py"]
