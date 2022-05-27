@@ -1,4 +1,21 @@
 const siteName = window.location.protocol + "//" + window.location.host;
+if ('serviceWorker' in navigator) {
+    // we are checking here to see if the browser supports the service worker api
+    window.addEventListener('load', async function () {
+        await navigator.serviceWorker.register('../sw.js', {scope: "/"}).then(
+            function (registration) {
+                // Registration was successful
+                console.log(
+                    'Service Worker registration was successful with scope: ',
+                    registration.scope
+                );
+            },
+            function (error) {
+                console.log('ServiceWorker registration failed: ', error);
+            }
+        );
+    });
+}
 
 function detectTheme() {
     if (!localStorage.getItem('color-theme')) {
@@ -110,7 +127,7 @@ window.addEventListener("load", function () {
 if ('serviceWorker' in navigator) {
     // we are checking here to see if the browser supports the service worker api
     window.addEventListener('load', async function () {
-        await navigator.serviceWorker.register('/static/js/sw.js', {scope: "/"}).then(
+        await navigator.serviceWorker.register('../sw.js', {scope: "/"}).then(
             function (registration) {
                 // Registration was successful
                 console.log(

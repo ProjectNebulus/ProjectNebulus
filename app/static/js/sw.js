@@ -16,6 +16,9 @@ const urlsToCache = [
     '/dashboard',
     '/settings',
     '/profile',
+    'login',
+    'logout',
+    'signup',
 
     'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'
 ];

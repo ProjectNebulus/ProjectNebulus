@@ -72,3 +72,7 @@ def page_not_found(e):
 def internal_error(e):
     # note that we set the 404 status explicitly
     return render_template("errors/500.html"), 500
+
+@main_blueprint.route("/sw.js")
+def swjs():
+    return redirect("/static/js/sw.js")
