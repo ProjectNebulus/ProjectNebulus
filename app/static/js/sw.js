@@ -38,11 +38,15 @@ self.addEventListener('fetch', function (event) {
     event.respondWith(
         // check all the caches in the browser and find
         // out whether our request is in any of them
+
         caches.match(event.request).then(function (response) {
             if (response) {
+                if (!(response.redirected)){
+                    return response;
+                }
                 // if we are here, that means there's a match
                 //return the response stored in browser
-                return response;
+
             }
 
             // no match in cache, use the network instead
