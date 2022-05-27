@@ -1,26 +1,21 @@
 const CACHE_NAME = 'nebulus-offline';
 const urlsToCache = [
     '/',
-    // '/static/tailwind.css',
-    // '/static/fonts.css',
-    // '/static/createCourse.css',
-    // '/static/createCourse.js',
-    // '/static/main.js',
-    // '/static/dashboard.js',
-    // '/static/profile.js',
-    // '/static/signin.js',
-    // '/static/signup.js',
-    // '/signin',
-    // '/signup',
     '/lms',
     '/dashboard',
     '/settings',
-    '/profile',
-    // 'login',
-    // 'logout',
-    // 'signup',
-    //
-    // 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'
+    'https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp',
+    "/static/css/tailwind.css",
+    "/static/css/common-menus.css",
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css",
+    "/static/flowbite/dist/flowbite.js",
+    "/static/js/common-menus.js",
+    "/static/js/main.js",
+    "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js",
+    "/static/js/createObjects/lms.js",
+    '/profile'
 ];
 
 self.addEventListener('install', function (event) {
