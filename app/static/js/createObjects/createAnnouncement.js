@@ -5,7 +5,7 @@ function createAnnouncement() {
         title: name,
         content: document.getElementById("message").value,
         author: teacher,
-        author_pic: document.querySelector("#navbar trigger logo").getAttribute("image"),
+        author_pic: document.querySelector("#navbar button logo").getAttribute("image"),
         course: document.getElementById("course_id").innerText,
     };
 
