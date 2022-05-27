@@ -176,20 +176,12 @@ def create_canvas_course():
     return "success"
 
 
-@internal.route("/createSchoologycourse", methods=["GET", "POST"])
+@internal.route("/createSchoologyCourse", methods=["GET", "POST"])
 def create_schoology_course():
     post_data = request.get_json()
     if request.method == "GET":
         post_data = request.args
     link = post_data["link"]
-    link.replace("https://", "").replace("http", "")
-    index = link.index(".schoology.com") + len(".schoology.com")
-    link = link[index:]
-    if "/course/" not in link:
-        return "Invalid"
-    index = len("/course/")
-    link = link[index:]
-    link = link[:len("5131176032")]
     schoology = read.getSchoology(username=session["username"])
     if len(schoology) == 0:
         return "1"
@@ -262,7 +254,6 @@ def create_schoology_course():
 
     scgrades = sc.get_user_grades_by_section(sc.get_me()["id"], link)
     scevents = sc.get_section_events(link)
-    print(scevents)
     for event in scevents:
         if event['type'] == 'assignment':
             assignment = sc.get_assignment(section['id'], event['assignment_id'])
@@ -308,7 +299,6 @@ def create_schoology_course():
         )
         return rq.url  # rq["url"]
 
-    print(scdocuments)
     documents = []
     for scdocument in scdocuments:
         document = {}

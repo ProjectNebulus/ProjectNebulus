@@ -5,7 +5,7 @@
     <body class="overflow-hidden">
     {% include "navbar.html" %}
 
-    <div class="grid grid-cols-1 divide-y divide-gray-700 hidden lg:block w-full pl-8">
+    <div class="grid grid-cols-1 divide-y divide-gray-300 dark:divide-gray-700 hidden lg:block w-full pl-8">
         <div class="flex flex-row" style="">
             <div id="middle" style="flex:0 0 75%" class="pl-8 pr-4 border-r border-gray-200 dark:border-gray-700">
                 <div class="flex flex-row w-full mb-4">
@@ -13,7 +13,8 @@
                         Recent Activity
                     </h1>
                     <br>
-                    <button class="p-1.5 hover:bg-blue-200 dark:hover:bg-gray-700 rounded-lg mt-5 text-black dark:text-white">
+                    <button class="p-1.5 hover:bg-blue-200 dark:hover:bg-gray-700 rounded-lg mt-5 text-black dark:text-white"
+                            aria-label="Filter Events" title="Filter Events">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8"
                              fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -26,7 +27,7 @@
                     <ol class="relative border-l border-gray-200 dark:border-gray-700 ml-2">
                         {% for i, tuple in enumerate(announcements.items()) %}
                             {% set date,list = tuple %}
-                            <li class="mb-10 ml-4">
+                            <li class="mb-10 ml-4" aria-label="Events on {{ strftime(date, "%D") }}">
                                 <div class="absolute w-3 h-3 bg-gray-200 rounded-full -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
                                 <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
                                     {{ strftime(date, "%a, %B %-d, %Y") }}
@@ -79,7 +80,7 @@
                                                     <div id="description_{{ i }}"
                                                          class="text-sm text-gray-900 dark:text-white font-normal line-clamp-3">
                                                         <p>
-                                                            {% for line in a.content.split("\n") %}
+                                                            {% for line in a.content.strip().split("\n") %}
                                                                 {% if line != "" %}
                                                                     <p>{{ line }}</p>
                                                                 {% else %}
@@ -376,7 +377,7 @@
                         </a>
                     {% endif %}
                     {% for course in user_courses %}
-                        <a href="/course/{{ course.id }}">
+                        <a href="/course/{{ course.id }}" aria-label="Course: {{ course.name }}">
                             <div class="max-w-sm bg-gray-100 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 p-2"
                                  style="float:left;margin:20px;height:13rem;width:22rem;">
                                 <div style="text-align: left;">
@@ -387,7 +388,8 @@
 
                                         <dropdown-menu>
                                             <trigger style="float:right;padding:0" class="dark:text-gray-200 material-icons bg-transparent
-                                            dark:hover:bg-gray-700 rounded cursor-pointer focus:outline-none">
+                                            dark:hover:bg-gray-700 rounded cursor-pointer focus:outline-none"
+                                                     onclick="(e) => e.preventDefault()">
                                                 more_horiz
                                             </trigger>
                                             <contents class="dark:bg-gray-700 rounded p-1">

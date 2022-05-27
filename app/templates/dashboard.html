@@ -12,158 +12,154 @@
     <body>
     {% include "navbar.html" %}
     <br>
-    <div style="height:100%;overflow:visible;">
-        <div style="text-align: center; height:10%;">
-            <h1 class="text-black text-4xl dark:text-white">Good Afternoon, {{ user }}</h1>
-        </div>
+    <div style="text-align: center; height:10%;">
+        <h1 class="text-black text-4xl dark:text-white">Good Afternoon, {{ user }}</h1>
+    </div>
 
-        <h2 class="text-black dark:text-white text-2xl ml-6">Recent Activity</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 p-6">
-            <div class="pb-2 overflow-hidden" style="height: 20rem">
-                <table class="text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 w-full text-sm rounded-lg"
-                       style="height: 17rem;">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        <th class="px-6 py-3 text-left">Event</th>
-                        <th class="px-6 py-3 text-left">Date</th>
-                        <th class="px-6 py-3 text-left">Time</th>
-                        <th class="px-6 py-3 text-left">Course</th>
-                        <th class="px-6 py-3 text-left"><span class="sr-only">Edit</span></th>
+    <h2 class="text-black dark:text-white text-2xl ml-6">Recent Activity</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 p-6" aria-label="Recent Activity">
+        <div class="pb-2 overflow-hidden" style="height: 20rem">
+            <table class="text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 w-full text-sm rounded-lg"
+                   style="height: 17rem;">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th class="px-6 py-3 text-left">Event</th>
+                    <th class="px-6 py-3 text-left">Date</th>
+                    <th class="px-6 py-3 text-left">Time</th>
+                    <th class="px-6 py-3 text-left">Course</th>
+                    <th class="px-6 py-3 text-left"><span class="sr-only">Edit</span></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% if events|length == 0 %}
+                    <tr class="text-gray-400 dark:text-gray-400">
+                        <td style="transform: translate(180%)">No Events</td>
                     </tr>
-                    </thead>
-
-                    <tbody>
-                    {% if events|length == 0 %}
-                        <tr class="text-gray-400 dark:text-gray-400">
-                            <td style="transform: translate(180%)">No Events</td>
-                        </tr>
-                    {% else %}
-                        {% for event in events[:5] %}
-                            {% if event._cls == "Event" %}
-                                <tr style="vertical-align: top;"
-                                    class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 h-4">
-                                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                {% else %}
+                    {% for event in events[:5] %}
+                        {% if event._cls == "Event" %}
+                            <tr style="vertical-align: top;" aria-label="Event"
+                                class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 h-4">
+                                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
                                         <span class="material-icons-outlined mr-2"
                                               style="vertical-align: bottom">event</span>
-                                        {{ event.title }}
-                                    </td>
-                                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-1">
-                                        {{ strftime(event.date.date(), "%m/%d/%Y") }}
-                                    </td>
-                                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-1">
-                                        {{ strftime(event.date.time(), "%I:%M %p") }}
-                                    </td>
-                                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-1">
-                                        {{ event.course.name }}
-                                    </td>
-                                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-1">
-                                        <span class="text-blue-500 hover:text-blue-700">Edit</span>
-                                    </td>
-                                </tr>
-                            {% else %}
-                                <tr style="vertical-align: top;"
-                                    class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 h-4">
-                                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
-                                        <span class="material-icons-outlined mr-2" style="vertical-align: bottom">description</span>
-                                        {{ event.title }}
-                                    </td>
-                                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
-                                        {{ strftime(event.due.date(), "%m/%d/%Y") }}
-                                    </td>
-                                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
-                                        {{ strftime(event.due.time(), "%I:%M %p") }}
-                                    </td>
-                                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
-                                        {{ event.course.name }}
-                                    </td>
-                                    <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
-                                        <span class="text-blue-500 hover:text-blue-700">Edit</span>
-                                    </td>
-                                </tr>
-                            {% endif %}
-                        {% endfor %}
-                    {% endif %}
-                    </tbody>
-                </table>
+                                    {{ event.title }}
+                                </td>
+                                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-1">
+                                    {{ strftime(event.date.date(), "%m/%d/%Y") }}
+                                </td>
+                                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-1">
+                                    {{ strftime(event.date.time(), "%I:%M %p") }}
+                                </td>
+                                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-1">
+                                    {{ event.course.name }}
+                                </td>
+                                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-1">
+                                    <span class="text-blue-500 hover:text-blue-700">Edit</span>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr style="vertical-align: top;" aria-label="Assignment"
+                                class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 h-4">
+                                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                                    <span class="material-icons-outlined mr-2" style="vertical-align: bottom">description</span>
+                                    {{ event.title }}
+                                </td>
+                                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                                    {{ strftime(event.due.date(), "%m/%d/%Y") }}
+                                </td>
+                                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                                    {{ strftime(event.due.time(), "%I:%M %p") }}
+                                </td>
+                                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                                    {{ event.course.name }}
+                                </td>
+                                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                                    <span class="text-blue-500 hover:text-blue-700">Edit</span>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                </tbody>
+            </table>
 
-                <div class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
-                    <button class="material-icons mx-2 my-2 rounded hover:bg-gray-300 dark:hover:bg-gray-500">
-                        navigate_before
-                    </button>
-                    <button class="material-icons mx-2 my-2 rounded hover:bg-gray-300 dark:hover:bg-gray-500"
-                            style="float: right">
-                        navigate_next
-                    </button>
-                </div>
+            <div class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
+                <button class="material-icons mx-2 my-2 rounded hover:bg-gray-300 dark:hover:bg-gray-500">
+                    navigate_before
+                </button>
+                <button class="material-icons mx-2 my-2 rounded hover:bg-gray-300 dark:hover:bg-gray-500"
+                        style="float: right">
+                    navigate_next
+                </button>
             </div>
-            <div class="pb-2" style="margin-top: -3rem; height: 20rem">
-                <h2 class="text-black dark:text-white text-2xl ml-4">Recent Announcements</h2>
-                <div class="overflow-x-hidden overflow-y-auto  h-full">
-                    <div class="grid gap-4 pl-4 mt-5" style="grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));">
-                        {% for a in announcements %}
-                            <div id="announcement-{{ a.id }}" role="alert"
-                                 class="announcement p-4 mb-4 bg-gray-100 rounded-lg dark:bg-gray-700 w-72 h-64 mt-5">
-                                <div class="flex items-center">
-                                    <svg class="mr-2 w-5 h-5 text-gray-700 dark:text-gray-300" fill="currentColor"
-                                         viewBox="0 0 20 20"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                                              clip-rule="evenodd"></path>
-                                    </svg>
+        </div>
+        <div class="pb-2" style="margin-top: -3rem; height: 20rem">
+            <h2 class="text-black dark:text-white text-2xl ml-4">Recent Announcements</h2>
+            <div class="overflow-x-hidden overflow-y-auto hover-scroll h-full" aria-label="Recent Announcements">
+                <div class="grid gap-4 pl-4 mt-5" style="grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));">
+                    {% for a in announcements %}
+                        <div id="announcement-{{ a.id }}" role="alert"
+                             class="announcement p-4 mb-4 bg-gray-100 rounded-lg dark:bg-gray-700 w-72 h-64 mt-5">
+                            <div class="flex items-center">
+                                <svg class="mr-2 w-5 h-5 text-gray-700 dark:text-gray-300" fill="currentColor"
+                                     viewBox="0 0 20 20"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
 
-                                    <h3 class="text-lg font-medium text-black dark:text-white truncate"
-                                        style="width: 10.9rem">
-                                        {{ a.title }}{{ a.author * (a.title == "")|int }}
-                                    </h3>
+                                <h3 class="text-lg font-medium text-black dark:text-white truncate"
+                                    style="width: 10.9rem">
+                                    {{ a.title }}{{ a.author * (a.title == "")|int }}
+                                </h3>
 
-                                    <div class="text-gray-500 invisible hover-buttons cursor-pointer"
-                                         style="transform: translate(1rem, -0.75rem);">
-                                        <p class="material-icons hover:text-blue-600">visibility</p>
-                                        <p class="material-icons hover:text-blue-600"
-                                           data-dismiss-target="announcement-{{ a.id }}">close</p>
-                                    </div>
+                                <div class="text-gray-500 invisible hover-buttons cursor-pointer"
+                                     style="transform: translate(1rem, -0.75rem);">
+                                    <p class="material-icons hover:text-blue-600">visibility</p>
+                                    <p class="material-icons hover:text-blue-600"
+                                       data-dismiss-target="announcement-{{ a.id }}">close</p>
                                 </div>
-                                <p class="text-xs text-gray-700 uppercase dark:text-gray-400"
-                                   style="margin-left: 1.8rem">
-                                    {{ a.course.name }} {{ (" > " + a.author) * (a.title != "")|int }}
-                                </p>
-                                <div class="mt-2.5 text-sm text-gray-500 dark:text-gray-300 line-clamp-6"
-                                     style="height: 7.5rem">
-                                    {% for line in a.content.split("\n")[:7] %}
-                                        {% if line != "" %}
-                                            <p>{{ line }}</p>
-                                        {% else %}
-                                            <br>
-                                        {% endif %}
-                                    {% endfor %}
-                                </div>
-                                <p class="mt-6 text-xs text-gray-400 dark:text-gray-400">{{ strftime(a.date, "%-I:%M %p on %B %-d, %Y") }}</p>
                             </div>
-                        {% endfor %}
-                    </div>
+                            <p class="text-xs text-gray-700 uppercase dark:text-gray-400"
+                               style="margin-left: 1.8rem">
+                                {{ a.course.name }} {{ (" > " + a.author) * (a.title != "")|int }}
+                            </p>
+                            <div class="mt-2.5 text-sm text-gray-500 dark:text-gray-300 line-clamp-6"
+                                 style="height: 7.5rem">
+                                {% for line in a.content.strip().split("\n")[:7] %}
+                                    {% if line != "" %}
+                                        <p>{{ line }}</p>
+                                    {% else %}
+                                        <br>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <p class="mt-6 text-xs text-gray-400 dark:text-gray-400">{{ strftime(a.date, "%-I:%M %p on %B %-d, %Y") }}</p>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
-        <br>
-        <br>
-        <div style="height: 45%; float:left; width:calc(100% - 3rem); margin-left: 2%; overflow: visible;" class="pb-2">
-            <h2 class="text-black dark:text-white text-2xl ml-4">Recent Courses</h2>
-            <br>
-            <div class="text-left grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                {% for course in user_courses %}
-                    <a href="/course/{{ course.id }}" style="width:18rem; margin:1rem;"
-                       class="max-w-sm bg-gray-50 hover:bg-gray-200 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:hover:bg-gray-600 dark:border-gray-700">
-                        {% if course.avatar.avatar_url %}
-                        <img class="rounded-t-lg w-full" src="{{ course.avatar.avatar_url }}" style=""
-                             alt="Course Image">
-                        {% endif %}
-                        <div class="p-5">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white truncate">{{ course.name }}</h5>
-                        </div>
-                    </a>
-                {% endfor %}
-            </div>
+    </div>
+    <br>
+    <br>
+    <div style="height: 45%; float:left; width:calc(100% - 3rem); margin-left: 2%; overflow: visible;" class="pb-2">
+        <h2 class="text-black dark:text-white text-2xl">Recent Courses</h2>
+        <div class="text-left grid justify-start" style="grid-template-columns: repeat(auto-fit, 23rem)"
+             aria-label="Recent Courses">
+            {% for course in user_courses %}
+                <a href="/course/{{ course.id }}" style="width:18rem; margin-top: 2.5rem; margin-bottom: 2.5rem"
+                   aria-label="Course: {{ course.name }}"
+                   class="max-w-sm bg-gray-50 hover:bg-gray-200 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:hover:bg-gray-600 dark:border-gray-700">
+                    <img class="rounded-t-lg w-full" src="{{ course.avatar.avatar_url }}" alt="Course Image">
+                    <div class="p-5">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white truncate">{{ course.name }}</h5>
+                    </div>
+                </a>
+            {% endfor %}
         </div>
     </div>
 

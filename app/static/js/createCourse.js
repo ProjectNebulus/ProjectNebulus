@@ -2,17 +2,19 @@ let modal = document.getElementById('CourseModal');
 
 // set up templates
 let templateLists = modal.getElementsByClassName('scroll');
-//let smalltemplateLists = modal.getElementsByClassName('small-scroll');
 let screens = modal.getElementsByClassName('CoursePage');
 
 // set up button
 let btn = document.getElementById('create');
 
-for (let screen of screens)
-    screen.className += " relative px-4 w-full max-w-2xl relative bg-white rounded-lg shadow dark:bg-gray-700 text-black dark:text-white"
+for (const screen of screens)
+    screen.className += " relative px-4 w-full max-w-2xl relative bg-gray-200 rounded-lg shadow dark:bg-gray-700 text-black dark:text-white"
 
-for (let h3 of modal.getElementsByTagName("h3"))
-    h3.className += " flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white"
+for (const h3 of modal.getElementsByTagName("h3"))
+    h3.className += " flex justify-between items-start p-5 rounded-t border-b border-gray-300 dark:border-gray-600 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white"
+
+for (const list of templateLists)
+    list.classList.add("hover-scroll");
 
 btn.onclick = function () {
     modal.style.display = 'block';
@@ -56,7 +58,6 @@ function createCourse(subtemplate) {
     xhttp.setRequestHeader('Content-type', 'application/json');
     xhttp.send(
         JSON.stringify({
-            username: user,
             name: document.getElementById('course-name').value,
             teacher: document.getElementById('course-teacher').value,
             avatar: "https://app.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg",
@@ -73,21 +74,20 @@ function skipTemplates() {
 }
 
 const pageCounters = modal.getElementsByClassName("pageCount");
-for (let i = 0; i < pageCounters.length; i++) {
-    pageCounters[i].className += " flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600";
-    for (let j = 0; j < 5; j++) {
-        if (j <= i)
-            pageCounters[i].innerHTML += "<svg width=\"10\" height=\"10\"><circle cx=\"3\" cy=\"3\" r=\"3\" fill=\"lightgray\"></circle></svg>"
+
+for (const i in pageCounters) {
+    pageCounters[i].className += " flex items-center p-6 space-x-2 absolute bottom-0";
+    for (let j = 0; j < 3; j++) {
+        if (j == i)
+            pageCounters[i].innerHTML += "<div class='rounded-full w-2 h-2 bg-gray-400 dark:bg-gray-500'></div>"
         else
-            pageCounters[i].innerHTML += "<svg width=\"10\" height=\"10\"><circle cx=\"3\" cy=\"3\" r=\"3\" fill=\"gray\"></circle></svg>"
+            pageCounters[i].innerHTML += "<div class='rounded-full w-2 h-2 bg-gray-300 dark:bg-gray-400'></div>"
     }
 
-    pageCounters[i].style.marginLeft = "38%";
-    //position: absolute;
-    //     bottom: 0;
-    pageCounters[i].style.position = "absolute";
-    pageCounters[i].style.bottom = "0";
-
+    try {
+        pageCounters[i].setAttribute("style", "transform: translate(300%)")
+    }
+    catch (e) {}
 }
 
 /*
@@ -179,8 +179,8 @@ const templates = [
 ];
 
 for (const template of templates) {
-    let button = document.createElement('span');
-    button.className = 'createSelectButton text-white focus:ring-4 shadow-lg font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2';
+    let button = document.createElement('div');
+    button.className = 'createSelectButton text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 text-xl';
     button.onclick = () => chooseTemplate(template);
 
     // TODO: fix duplicate code fragments
@@ -211,9 +211,7 @@ for (const template of templates) {
     button.appendChild(document.createElement('br'));
 
     let description = document.createElement('span');
-    description.classList.add('text-gray-600', 'dark:text-gray-300');
-    description.style.fontSize = '0.8em';
-    description.innerHTML = '';
+    description.classList.add('text-gray-300', 'text-xs');
 
     for (let i = 0; i < Math.min(template.subtemplates.length, 4); i++)
         description.innerHTML += template.subtemplates[i] + ', ';
@@ -235,8 +233,8 @@ function chooseTemplate(template) {
 
     templateLists[1].innerHTML = '';
     for (const subtemplate of template.subtemplates) {
-        let button = document.createElement('span');
-        button.className = 'createSelectButton text-white focus:ring-4 shadow-lg font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2';
+        let button = document.createElement('div');
+        button.className = 'createSelectButton text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 text-xl';
         button.onclick = function () {
             const name = template.name;
             customize(name, subtemplate);
@@ -407,7 +405,7 @@ function importSchoology() {
     status.innerHTML = 'Creating course...';
 
     const xhttp = new XMLHttpRequest();
-    xhttp.open('POST', '/api/v1/internal/createSchoologycourse', true);
+    xhttp.open('POST', '/api/v1/internal/createSchoologyCourse', true);
     xhttp.setRequestHeader('Content-type', 'application/json');
     xhttp.addEventListener('load', schoologyCourseReq);
     xhttp.send(
@@ -430,6 +428,7 @@ function schoologyCourseReq() {
         status.innerHTML = 'Course created!';
     }
 }
+
 function googleCourseReq() {
     const status = document.getElementById('create-course-status');
     if (this.responseText === '1') {
@@ -441,6 +440,7 @@ function googleCourseReq() {
         status.innerHTML = 'Course created!';
     }
 }
+
 function canvasCourseReq() {
     const status = document.getElementById('create-course-status');
     if (this.responseText === '1') {
@@ -452,18 +452,21 @@ function canvasCourseReq() {
         status.innerHTML = 'Course created!';
     }
 }
-function updateCanvasLink(link){
+
+function updateCanvasLink(link) {
     document.getElementById("canvas-course-id").value = link;
     document.getElementById("clist").style.display = "none";
     document.getElementById("canvas-create-course").style.display = "block";
 }
-function updateGoogleLink(link, teacher){
+
+function updateGoogleLink(link, teacher) {
     document.getElementById("google-course-id").value = link;
-    document.getElementById("google-course-teacher").value =  teacher;
+    document.getElementById("google-course-teacher").value = teacher;
     document.getElementById("glist").style.display = "none";
     document.getElementById("google-create-course").style.display = "block";
 }
-function updateSchoologyLink(link){
+
+function updateSchoologyLink(link) {
     document.getElementById("schoology-course-id").value = link;
     document.getElementById("slist").style.display = "none";
     document.getElementById("schoology-create-course").style.display = "block";

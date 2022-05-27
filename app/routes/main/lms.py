@@ -88,45 +88,46 @@ def lms():
         print(e)
         canvascourses = []
 
-    schoologycourses = []
+    scCourses = []
     import schoolopy
 
     try:
         schoology = read.getSchoology(username=session["username"])
-        if len(schoology) == 0:
-            return "1"
-        schoology = schoology[0]
-        key = schoology.apikey
-        secret = schoology.apisecret
-        if not key or not secret:
-            key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
-            secret = "59ccaaeb93ba02570b1281e1b0a90e18"
+        if len(schoology) > 0:
+            schoology = schoology[0]
+            key = schoology.apikey
+            secret = schoology.apisecret
+            if not key or not secret:
+                key = session.get("request_token")
+                secret = session.get("request_token_secret")
 
-        auth = schoolopy.Auth(
-            key,
-            secret,
-            domain=schoology.schoologyDomain,
-            three_legged=True,
-            request_token=schoology.Schoology_request_token,
-            request_token_secret=schoology.Schoology_request_secret,
-            access_token=schoology.Schoology_access_token,
-            access_token_secret=schoology.Schoology_access_secret,
-        )
-        auth.authorize()
-        sc = schoolopy.Schoology(auth)
-        sc.limit = "100&include_past=1"
-        schoologycourses = list(sc.get_user_sections(user_id=sc.get_me().id))
-        for i in range(0, len(schoologycourses)):
-            schoologycourses[i] = dict(schoologycourses[i])
-            schoologycourses[i]["link"] = schoology.schoologyDomain + "courses/" + schoologycourses[i][
-                "id"] + "/materials"
-        schoology_school = sc.get_school(schoologycourses[0]["school_id"])
-        schoologycourses.append(schoology_school)
+            if not key or not secret:
+                print("Key or Secret missing for user", session["username"])
+
+            auth = schoolopy.Auth(
+                key,
+                secret,
+                domain=schoology.schoologyDomain,
+                three_legged=True,
+                request_token=schoology.Schoology_request_token,
+                request_token_secret=schoology.Schoology_request_secret,
+                access_token=schoology.Schoology_access_token,
+                access_token_secret=schoology.Schoology_access_secret,
+            )
+            auth.authorize()
+            sc = schoolopy.Schoology(auth)
+            sc.limit = 100
+            scCourses = list(sc.get_user_sections(user_id=sc.get_me().id))
+            for i in range(0, len(scCourses)):
+                scCourses[i] = dict(scCourses[i])
+                scCourses[i]["link"] = schoology.schoologyDomain + "courses/" + scCourses[i]["id"] + "/materials"
+            scSchool = sc.get_school(scCourses[0]["school_id"])
+            scCourses.append(scSchool)
     except Exception as e:
+        print(session)
         print(e)
-        schoologycourses = []
+        scCourses = []
 
-    print(schoologycourses)
     return render_template(
         "lms.html",
         user=session["username"],
@@ -142,8 +143,8 @@ def lms():
         strftime=utils.strftime,
         gcourses=gcourses,
         canvascourses=canvascourses,
-        schoologycourses=schoologycourses,
+        schoologycourses=scCourses,
         enumerate=enumerate,
         Event=Event,
-        pastschoologycourses=schoologycourses,
+        pastschoologycourses=scCourses,
     )

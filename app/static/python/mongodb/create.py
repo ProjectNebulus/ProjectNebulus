@@ -39,11 +39,7 @@ def generateSchoologyObject(_id: str) -> schoolopy.Schoology:
 
 
 def create_course(data: dict) -> Course:
-    if data.get("authorizedUsers"):
-        user = read.find_user(id=data["authorizedUsers"][0])
-    else:
-        user = read.find_user(username=data["username"])
-        del data["username"]
+    user = read.find_user(id=session["id"])
 
     if data.get("avatar"):
         data["avatar"] = Avatar(avatar_url=data["avatar"])

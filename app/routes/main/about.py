@@ -10,5 +10,5 @@ def about():
         page="Nebulus - Learning, All In One",
         user=session.get("username"),
         email=session.get("email"),
-        avatar=session.get("avatar"),
+        avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
     )

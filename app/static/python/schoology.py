@@ -87,9 +87,7 @@ def getCourseJson(courseid, sc, user):
             documents.append(document)
         course["documents"] = documents
         scgrades = sc.get_user_grades_by_section(user, courseid)
-        print(scgrades)
         scevents = sc.get_section_events(courseid)
-        print(scevents)
         scassignments = sc.get_assignments(courseid)
         assignments = []
         for assignment in scassignments:

@@ -22,6 +22,7 @@ const urlsToCache = [
     //
     // 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'
 ];
+
 self.addEventListener('install', function (event) {
     // install files needed offline
     event.waitUntil(
