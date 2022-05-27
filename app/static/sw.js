@@ -15,7 +15,13 @@ const urlsToCache = [
     "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js",
     "https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js",
     "/static/js/createObjects/lms.js",
-    '/profile'
+    '/profile',
+    "/static/images/darkwallpaper.png",
+    "/static/images/nebulusCats/v3.gif",
+    "/static/images/imageHome.png",
+    "/about",
+    "points",
+    "pricing"
 ];
 
 self.addEventListener('install', function (event) {
