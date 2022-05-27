@@ -8,4 +8,12 @@ from .utils import logged_in
 def logout():
     session.clear()
     print("Logged out")
-    return redirect("/")
+    return """
+    <script>navigator.serviceWorker.getRegistrations().then(function(registrations) {
+ for(let registration of registrations) {
+      registration.unregister()
+    } })
+    window.location.replace("/");
+</script>
+    """
+

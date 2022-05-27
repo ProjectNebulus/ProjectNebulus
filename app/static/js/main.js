@@ -207,3 +207,6 @@ function navFetchStatus() {
         }
     });
 }
+
+navFetchStatus();
+setInterval(navFetchStatus, 500);
