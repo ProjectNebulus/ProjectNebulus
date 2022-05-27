@@ -77,3 +77,11 @@ def getResource(courseID, documentID):
 
     req = requests.get(read.find_document(id=documentID).url)
     return req.content
+@main_blueprint.route("/course/<id>/extensions/<extension>")
+@logged_in
+def course_page_ex(id, extension):
+
+    try:
+        return render_template(f"courses/extensions/{extension}.html")
+    except Exception as e:
+        return render_template("errors/404.html")
