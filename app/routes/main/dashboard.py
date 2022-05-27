@@ -17,7 +17,7 @@ def dashboard():
         sorted[1] = sorted[1][len(sorted[1]) - 4:]
 
     if len(user_courses) > 8:
-        user_courses = user_courses[len(user_courses) - 8:]
+        user_courses = user_courses[len(user_courses) - 18:]
 
     return render_template(
         "dashboard.html",
