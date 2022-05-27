@@ -1,7 +1,7 @@
 import json
 from urllib.request import urlopen
 
-from flask import render_template, session, redirect, request, send_from_directory
+from flask import render_template, session, redirect, request, send_file
 
 from . import main_blueprint
 
@@ -73,11 +73,6 @@ def internal_error(e):
     # note that we set the 404 status explicitly
     return render_template("errors/500.html"), 500
 
-# @main_blueprint.route("/sw.js")
-# def swjs():
-#     #return send_from_directory('static', "/js/sw.js")
-#     return send_from_directory('static/js', "sw.js")
-
 @main_blueprint.route("/sw.js")
 def swjs():
-    return send_from_directory('app/static', "sw.js")
+    return send_file("../static/sw.js")#"app/static/sw.js")

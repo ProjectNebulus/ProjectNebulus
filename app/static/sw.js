@@ -1,26 +1,26 @@
 const CACHE_NAME = 'nebulus-offline';
 const urlsToCache = [
     '/',
-    '/static/tailwind.css',
-    '/static/fonts.css',
-    '/static/createCourse.css',
-    '/static/createCourse.js',
-    '/static/main.js',
-    '/static/dashboard.js',
-    '/static/profile.js',
-    '/static/signin.js',
-    '/static/signup.js',
-    '/signin',
-    '/signup',
-    '/lms',
-    '/dashboard',
-    '/settings',
-    '/profile',
-    'login',
-    'logout',
-    'signup',
-
-    'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'
+    // '/static/tailwind.css',
+    // '/static/fonts.css',
+    // '/static/createCourse.css',
+    // '/static/createCourse.js',
+    // '/static/main.js',
+    // '/static/dashboard.js',
+    // '/static/profile.js',
+    // '/static/signin.js',
+    // '/static/signup.js',
+    // '/signin',
+    // '/signup',
+    // '/lms',
+    // '/dashboard',
+    // '/settings',
+    // '/profile',
+    // 'login',
+    // 'logout',
+    // 'signup',
+    //
+    // 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'
 ];
 self.addEventListener('install', function (event) {
     // install files needed offline
