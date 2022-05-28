@@ -1,10 +1,13 @@
 import json
+import re
 
 from flask import render_template, request
 
 from . import main_blueprint
 from .utils import logged_in
 
+def urlEncodeNonAscii(b):
+    return re.sub('[\x80-\xFF]', lambda c: '%%%02x' % ord(c.group(0)), b).encode()
 
 @main_blueprint.route("/music", methods=["GET"])
 @logged_in
@@ -73,6 +76,7 @@ def music_post():
     with open('app/static/json/cache.json', 'w') as out:
         file = json.dump(file, out, indent=4)
     import urllib.request
+    import urllib.parse
     import re
     search_keyword = processed_text
     while ' ' in search_keyword:
@@ -81,9 +85,13 @@ def music_post():
                 search_keyword = search_keyword[0:i] + '%20' + search_keyword[
                                                                i + 1:len(search_keyword)]
                 break
-
+    search_keyword = urllib.parse.quote(search_keyword,encoding='UTF-8')
     html = urllib.request.urlopen(
-        "https://www.youtube.com/results?search_query=" + search_keyword)
+        # urlEncodeNonAscii(
+        #     "https://www.youtube.com/results?search_query=" + search_keyword
+        # )
+        "https://www.youtube.com/results?search_query=" + search_keyword
+        )
 
     video_ids = re.findall(r"watch\?v=(\S{11})", html.read().decode())
 
