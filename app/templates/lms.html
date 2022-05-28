@@ -2,7 +2,7 @@
 {% extends "layout.html" %}
 
 {% block main %}
-    <body class="overflow-hidden">
+    <body>
     {% include "navbar.html" %}
 
     <div class="grid grid-cols-1 divide-y divide-gray-300 dark:divide-gray-700 hidden lg:block w-full pl-8">
@@ -33,10 +33,10 @@
                                     {{ strftime(date, "%a, %B %-d, %Y") }}
                                 </time>
                                 <br>
-                                <div class="grid gap-2 pt-2" style="grid-template-columns: repeat(auto-fit, 19rem)">
+                                <div class="grid gap-2 pt-2 grid-cols-1">
                                     {% for j in range(list|length) %}
                                         {% set a = list[j] %}
-                                        <div class="w-72 min-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 overflow-hidden"
+                                        <div class="w-full p-4 text-gray-900 bg-gray-100 rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 overflow-hidden"
                                              role="alert">
 
                                             {% if a.title != "" %}
@@ -280,7 +280,7 @@
                     <span class="material-icons">add</span>
                 </button>
             </div>
-            <div class="overflow-auto" style="height: 80%">
+            <div style="height: 80%">
                 <div class="w-full grid justify-center"
                      style="grid-template-columns: repeat(auto-fit, 24rem);">
                     {% if user_courses|length == 0 %}

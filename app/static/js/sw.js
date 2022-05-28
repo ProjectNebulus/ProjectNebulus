@@ -24,8 +24,10 @@ const urlsToCache = [
 ];
 self.addEventListener('install', function (event) {
     // install files needed offline
+
+
     event.waitUntil(
-        caches.open(CACHE_NAME).then(function (cache) {
+        Promise.all[caches.open(CACHE_NAME), self.skipWaiting()].then(function (cache) {
             console.log('Opened cache');
             return cache.addAll(urlsToCache);
         })
