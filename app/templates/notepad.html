@@ -1,43 +1,304 @@
-<link id="theme" rel="stylesheet" type="text/css" href="/static/stylesheets/darkblue.css" />
-<div id="banner"><center>Welcome to Collaboration Group Beta 1.0</center></div>
-<div style="margin-left:20%;">
-    <h1>Quick Notes by Collab Group</h1>
-    <h2><i>Beta</i></h2>
-    <input class="notepadInput" placeholder="Name..."><br><br>
-    <div class='bar'><strong id="b" onclick="change('b')" class='buttonSelect'>B</strong><i id="i" onclick="change('i')"class='buttonSelect'>I</i><u id="u" onclick="change('u')" class='buttonSelect'>U</u><span style='color:red;' class='buttonSelect' id="a" onclick="change('a')">A</span><span class='buttonSelect' id="hl" "change('hl')"><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"><i class="material-icons" style="color:white;font-size:1em;">mode</i></span></div>
-    <br><br>
-    <div contenteditable="true" class='notepadInput2'>Welcome to <span style="color: lightgreen">Collaboration Group</span>: Quick Notes. Type <strong>Bold</strong> with the buttons above or <strong>Command B</strong>. Type <i>Italics</i> with the buttons above or <i>Command I</i>.
+{% extends "layout.html" %}
+{% block main %}
+    <link id="theme" rel="stylesheet" type="text/css" href="/static/stylesheets/darkblue.css" />
+    {% include "navbar.html" %}
+    <div style="margin-left:20%;">
+        <h1>Nebulus Documents</h1>
+        <h2><i>Beta</i></h2>
+        <input class="notepadInput" placeholder="Name..."><br><br>
+        <div class='bar'><strong id="b" onclick="change('b')" class='buttonSelect'>B</strong><i id="i" onclick="change('i')"class='buttonSelect'>I</i><u id="u" onclick="change('u')" class='buttonSelect'>U</u><span style='color:red;' class='buttonSelect' id="a" onclick="change('a')">A</span><span class='buttonSelect' id="hl" "change('hl')"><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"><i class="material-icons" style="color:white;font-size:1em;">mode</i></span></div>
+        <br><br>
+        <div contenteditable="true" class='notepadInput2'>Welcome to <span style="color: lightgreen">Nebulus</span> Docs. Type <strong>Bold</strong> with the buttons above or <strong>Command B</strong>. Type <i>Italics</i> with the buttons above or <i>Command I</i>.
+        </div>
     </div>
-</div>
 
-<script>
-    function change(i) {
-        if (document.getElementById(i).style.backgroundColor=="rgba(100, 152, 237, 0.3)"){
-            document.getElementById(i).style.backgroundColor="";
+    <script>
+        function change(i) {
+            if (document.getElementById(i).style.backgroundColor=="rgba(100, 152, 237, 0.3)"){
+                document.getElementById(i).style.backgroundColor="";
+            }
+            else{
+                document.getElementById(i).style.backgroundColor="rgba(100, 152, 237, 0.3)";
+            }
         }
-        else{
-            document.getElementById(i).style.backgroundColor="rgba(100, 152, 237, 0.3)";
-        }
-    }
-</script>
+    </script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-    function getRandomInt(max) {
-        return Math.floor(Math.random() * max);
-    }
-    function swapStyleSheet() {
-        var sheet = "";
-        var request =  $.ajax({
-            type: "GET",
-            url: "/getTheme"
-        });
-        request.done(function(data){
-            document.getElementById("theme").setAttribute("href", data+"?version="+String.valueOf(getRandomInt(1000000)));
-        });
-        request.fail(function (jqXHR, textStatus) {
-            alert('bruh')
-        });
-    }
-    window.onload = swapStyleSheet;
-</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * max);
+        }
+        function swapStyleSheet() {
+            var sheet = "";
+            var request =  $.ajax({
+                type: "GET",
+                url: "/getTheme"
+            });
+            request.done(function(data){
+                document.getElementById("theme").setAttribute("href", data+"?version="+String.valueOf(getRandomInt(1000000)));
+            });
+            request.fail(function (jqXHR, textStatus) {
+                alert('bruh')
+            });
+        }
+        window.onload = swapStyleSheet;
+    </script>
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+        body{
+            font-family: 'Roboto', sans-serif !important;
+        }
+        #customBtn {
+            display: inline-block;
+            background: #00bfff;
+            color: black;
+            padding-left:30px;
+            padding-right:30px;
+            padding-top:20px;
+            padding-bottom:20px;
+            font-size:2em;
+            border-radius: 5px;
+            border-style:none;
+
+
+        }
+        #customBtn:hover {
+            cursor: pointer;
+        }
+        .customBtn2 {
+            display: inline-block;
+            background: #00bfff;
+            color: black;
+            padding-left:30px;
+            padding-right:30px;
+            padding-top:20px;
+            padding-bottom:20px;
+            font-size:2em;
+            border-radius: 5px;
+            border-style:none;
+
+
+        }
+        .customBtn2:hover {
+            cursor: pointer;
+        }
+        a{
+            color:#039dfc;
+            text-decoration:none;
+        }
+        a:hover{
+            color:#0788d9;
+        }
+
+        #banner{
+            width:100%;
+            background:#00bfff;margin-bottom:7px;
+            font-size:1.3em;
+            padding-top:7px;
+            padding-bottom:7px;
+        }
+
+        input[type=email]:disabled {
+            border-color:#424040;
+            color:#424040;
+            background:rgba(66, 64, 64,0.2);
+        }
+        input[type=password]:disabled {
+            border-color:#424040;
+            color:#424040;
+            background:rgba(66, 64, 64,0.2);
+        }
+        input[type=number]:disabled {
+            border-color:#424040;
+            color:#424040;
+            background:rgba(66, 64, 64,0.2);
+        }
+        input[type=text]:disabled {
+            border-color:#424040;
+            color:#424040;
+            background:rgba(66, 64, 64,0.2);
+        }
+        input[type=email]{
+            height:2.3em;
+            background:transparent;
+            color:white;
+            width:70%;
+            border-style: none none solid none;
+            border-width:2px;
+            border-color:white;
+            outline:none;
+            font-size:1em;
+        }
+        input[type=password]{
+            height:2.3em;
+            background:transparent;
+            color:white;
+            width:70%;
+            border-style: none none solid none;
+            border-width:2px;
+            border-color:white;
+            outline:none;
+            font-size:1em;
+        }
+
+        input[type=number]{
+            height:2.3em;
+            background:transparent;
+            color:white;
+            width:70%;
+            border-style: none none solid none;
+            border-width:2px;
+            border-color:white;
+            outline:none;
+            font-size:1em;
+        }
+
+        input[type=password]{
+            height:2.3em;
+            background:transparent;
+            color:white;
+            width:70%;
+            border-style: none none solid none;
+            border-width:2px;
+            border-color:white;
+            outline:none;
+            font-size:1em;
+        }
+        input[type=text]{
+            height:2.3em;
+            background:transparent;
+            color:white;
+            width:70%;
+            border-style: none none solid none;
+            border-width:2px;
+            border-color:white;
+            outline:none;
+            font-size:1em;
+        }
+        .button{
+            float:left;
+            padding:10px;
+            font-size:1.5em;
+            border-radius:10px;background:#009dffff;
+            color:white;
+        }
+        .outerDiv{
+            float:left;padding:30px;width:50px;height:100px;
+        }
+        .icon{
+            font-size:3em;background-color:rgba(0, 157, 255,0.2);color:rgb(0, 157, 255);border-radius:50%;padding:10px;
+        }
+        .divtext{
+            color:rgb(0, 157, 255);
+        }
+        .textbook{
+            background: #FEFEFE;
+            border-radius:25px;
+            color:black;
+            width:400px;
+            height:550px;
+            padding:20px;
+            margin:20px;
+            float:left;
+        }
+        .textbook-image{
+            height:300px;
+        }
+
+        .textbook-button{
+            border-radius:15px;
+            color:white;
+            background:#00bfff;
+            font-size:1.5em;
+            border-style:none;
+            padding:10px;
+        }
+        .textbook-button:hover{
+            background:#067094;
+        }
+        .bar{
+            padding-right:20px;
+            padding-left:20px;
+            padding-top:20px;
+            height:50px;
+            border-style:solid;
+            border-color:grey;
+            border-width:1px;
+            border-radius:10px;
+            background:transparent;
+            outline:none;
+            color:white;
+        }
+
+        .buttonSelect{
+            padding:15px;
+            cursor: -webkit-grab;
+            cursor: grab;
+            border-radius:10px;
+        }
+        div.editable {
+            width: 300px;
+            height: 200px;
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
+        .notepadInput{
+            width:60%;
+            border-style:solid;
+            border-color:grey;
+            border-width:1px;
+            border-radius:10px;
+            background:transparent;
+            height:30px;padding:20px;
+            outline:none;
+            color:white;
+        }
+        .notepadInput:focus{
+            border-color:#0492cf;
+        }
+        .notepadInput2{
+            padding:10px;
+            height:500px;
+            border-style:solid;
+            border-color:grey;
+            border-width:1px;
+            border-radius:10px;
+            background:transparent;
+            outline:none;
+            color:white;
+        }
+        .notepadInput2:focus{
+            border-color:#0492cf;
+        }
+        .graderoomInput[type=password]{
+            height:2.3em;
+            background:transparent;
+            color:white;
+            width:50%;
+            border-style: none none solid none;
+            border-width:2px;
+            border-color:white;
+            outline:none;
+            font-size:1.5em;
+            font-family: 'Lato', sans-serif;
+        }
+
+        .graderoomInput[type=text]{
+            height:2.3em;
+            background:transparent;
+            color:white;
+            width:50%;
+            border-style: none none solid none;
+            border-width:2px;
+            border-color:white;
+            outline:none;
+            font-size:1.5em;
+            font-family: 'Lato', sans-serif;
+        }
+
+        input[type=submit]{
+            padding:10px;font-size:1.5em;border-radius:10px;background:#009dffff;color:white;border-style:none;display:none;
+        }
+    </style>
+{% endblock %}
