@@ -28,3 +28,4 @@ from app.routes.main.schoology import *
 from app.routes.main.gclassroom import *
 from app.routes.main.canvas import *
 from app.routes.main.chat import *
+from app.routes.main.music import *
