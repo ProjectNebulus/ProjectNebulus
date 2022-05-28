@@ -181,11 +181,11 @@ def music_video(id_:str):
             return data[param]
 
     youtube = f'https://www.youtube.com/watch?v={id_}'
-    link = f'https://testpreparer.gq/play/{id_}'
+    link = f'https://nebulus.ml/play/{id_}'
     author = find_data(id_,'author_name')
     author_url = find_data(id_,'author_url')
     sub = author_url+'?sub_confirmation=1'
     thumbnail_url = find_data(id_,'thumbnail_url')
     title = find_data(id_,'title')
-    content = f'Listen to {title} by {author} on TestPreparer!'
+    content = f'Listen to {title} by {author} on Nebulus!'
     return render_template('musicvideo.html',author=author,author_url=author_url,thumbnail_url=thumbnail_url,title=title,id=id_,content=content,youtube=youtube,sub=sub,link=link)
