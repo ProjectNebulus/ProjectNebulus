@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block main %}
-    <body>
+    <div>
     <form method="POST" style="width:50%;margin:auto;padding-top:15px;">
         <div class="flex">
             <label for="location-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Your Email</label>
@@ -52,10 +52,11 @@
     {% if noresults== True %}
         <h1>No Results 😭</h1>
     {% endif %}
+    <div class="w-full grid gap-4 p-6 ml-6" style="grid-template-columns: repeat(auto-fit, 26rem);">
     {% if noresults== False %}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         {% for i in spotify_arr %}
-            <div style="float:left; margin:20px; height:800px;" class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+            <div style=" width:400px;" class="m-4 h-fit bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                 <a href="{{'play/spotify/'+i["code"]}}">
                     <img class="rounded-t-lg" src="{{i["image"]}}" alt="" />
                 </a>
@@ -65,7 +66,7 @@
                     </a>
                     <a href="{{i["author_url"]}}"><p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{i["author"]}}</p></a>
                     <a href="{{i["link"]}}" style="background:#1DB954;" class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        <i class="fa fa-spotify"></i> Open Song on Spotify
+                        <i class="fa fa-spotify px-2"></i> Open Song on Spotify
                         <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                     </a>
                 </div>
@@ -74,7 +75,7 @@
 
         {% endfor %}
         {% for i in mylist %}
-            <div style="float:left; margin:20px; height:800px;" class="max-w-s bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+            <div style="width:400px;" class="m-4 h-fit bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                 <a href="{{'play/'+i["id"]}}">
                     <img class="rounded-t-lg" src="{{i["thumbnail_url"]}}" alt="" />
                 </a>
@@ -84,7 +85,7 @@
                     </a>
                     <a href="{{i["author_url"]}}"><p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{i["author_name"]}}</p></a>
                     <a href="{{i["link"]}}" style="background:#c4302b" class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        <i class="fa fa-youtube-play"></i> Open Video on YouTube
+                        <i class="fa fa-youtube-play px-2"></i> Open Video on YouTube
                         <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                     </a>
                 </div>
@@ -94,5 +95,5 @@
         {% endfor %}
         </div>
     {% endif %}
-    </body>
+    </div>
 {% endblock %}
