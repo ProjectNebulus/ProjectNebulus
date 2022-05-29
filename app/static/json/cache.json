@@ -1666,5 +1666,77 @@
         "link": "https://open.spotify.com/track/4iflUxfXgIvtDXGifGW5Xi",
         "code": "4iflUxfXgIvtDXGifGW5Xi",
         "uri": "spotify:track:4iflUxfXgIvtDXGifGW5Xi"
+    },
+    {
+        "image": "https://i.scdn.co/image/ab67616d0000b27349b78c28aef8adc355c98baf",
+        "author": "The Score",
+        "author_url": "https://open.spotify.com/artist/2q3GG88dVwuQPF4FmySr9I",
+        "album": "Bulletproof",
+        "explicit": false,
+        "name": "Bulletproof (with XYL\u00d8)",
+        "preview": null,
+        "link": "https://open.spotify.com/track/2xVyWv5f31wI37XeYbXjWJ",
+        "code": "2xVyWv5f31wI37XeYbXjWJ",
+        "uri": "spotify:track:2xVyWv5f31wI37XeYbXjWJ"
+    },
+    {
+        "image": "https://i.scdn.co/image/ab67616d0000b273f669128e4f690714d26b9ff7",
+        "author": "The Score",
+        "author_url": "https://open.spotify.com/artist/2q3GG88dVwuQPF4FmySr9I",
+        "album": "Breathe You Got This",
+        "explicit": false,
+        "name": "Bulletproof",
+        "preview": null,
+        "link": "https://open.spotify.com/track/3CJS60ZjV3hOwbwrjsadJh",
+        "code": "3CJS60ZjV3hOwbwrjsadJh",
+        "uri": "spotify:track:3CJS60ZjV3hOwbwrjsadJh"
+    },
+    {
+        "image": "https://i.scdn.co/image/ab67616d0000b273946a4e71f46289d6eab7713f",
+        "author": "Tareebi the Terrible",
+        "author_url": "https://open.spotify.com/artist/4etXNj1jFpusXIBFVLgSO5",
+        "album": "BULLETPROOF",
+        "explicit": false,
+        "name": "Love Score",
+        "preview": "https://p.scdn.co/mp3-preview/985a20411b8f38984abfa9a550ac6bdc8fee5554?cid=846095b9ce934b0da3e0aaf3adbf600c",
+        "link": "https://open.spotify.com/track/2wEY7RH024Gdo6iKJGtMwD",
+        "code": "2wEY7RH024Gdo6iKJGtMwD",
+        "uri": "spotify:track:2wEY7RH024Gdo6iKJGtMwD"
+    },
+    {
+        "image": "https://i.scdn.co/image/ab67616d0000b273baaa069b0636670838c92929",
+        "author": "Elmer Bernstein",
+        "author_url": "https://open.spotify.com/artist/7sXdMnZeR5MsLKToZKpR2c",
+        "album": "Bulletproof (Original Motion Picture Score)",
+        "explicit": false,
+        "name": "The Bust",
+        "preview": null,
+        "link": "https://open.spotify.com/track/1pcMmH74FhXXSg4iYqBPyi",
+        "code": "1pcMmH74FhXXSg4iYqBPyi",
+        "uri": "spotify:track:1pcMmH74FhXXSg4iYqBPyi"
+    },
+    {
+        "image": "https://i.scdn.co/image/ab67616d0000b273baaa069b0636670838c92929",
+        "author": "Elmer Bernstein",
+        "author_url": "https://open.spotify.com/artist/7sXdMnZeR5MsLKToZKpR2c",
+        "album": "Bulletproof (Original Motion Picture Score)",
+        "explicit": false,
+        "name": "In The Desert",
+        "preview": null,
+        "link": "https://open.spotify.com/track/6TM5Nr9y1lRSCHzm3MFE2A",
+        "code": "6TM5Nr9y1lRSCHzm3MFE2A",
+        "uri": "spotify:track:6TM5Nr9y1lRSCHzm3MFE2A"
+    },
+    {
+        "image": "https://i.scdn.co/image/ab67616d0000b273c2293dd39cc43616aefb7e69",
+        "author": "Ceiri Torjussen",
+        "author_url": "https://open.spotify.com/artist/0FYS1JQi3joUCeKC1VWhQL",
+        "album": "Becoming Bulletproof (Original Film Score)",
+        "explicit": false,
+        "name": "Behind the Villain",
+        "preview": "https://p.scdn.co/mp3-preview/a284c9ac61e03c0c039caca3992cb33a6bb2666a?cid=846095b9ce934b0da3e0aaf3adbf600c",
+        "link": "https://open.spotify.com/track/1rtc9VB7Q0NQOXsGWdIBKr",
+        "code": "1rtc9VB7Q0NQOXsGWdIBKr",
+        "uri": "spotify:track:1rtc9VB7Q0NQOXsGWdIBKr"
     }
 ]
