@@ -671,7 +671,7 @@ def music_post():
             for i in range(0,len(songs)):
                 songs[i] = songs[i]['track']
 
-            return render_template("recording.html",songs=songs, id_ = search(songs[0]["track_name"]+" by "+songs[0]["artist_name"]))
+            return render_template("musixmatch.html",songs=songs, id_ = search(songs[0]["track_name"]+" by "+songs[0]["artist_name"]))
     text = request.form['search']
     type = request.form['type']
     youtube_needed = True
