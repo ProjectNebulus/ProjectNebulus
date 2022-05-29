@@ -65,11 +65,11 @@ function invertSite() {
             document.body.style.backgroundSize = "cover";
 
         }
-        if (banner) banner.style.filter = "invert(0)";
+        if (banner) banner.style.filter = "brightness(100%)";
 
         for (const logo of document.getElementsByTagName("logo")) {
             if (!logo.getAttribute("no-revert"))
-                logo.style.filter = "invert(0)";
+                logo.style.filter = "brightness(100%)";
         }
     }
     else {
@@ -79,11 +79,11 @@ function invertSite() {
         }
 
 
-        if (banner) banner.style.filter = "invert(1)";
+        if (banner) banner.style.filter = "brightness(70%)";
 
         for (const logo of document.getElementsByTagName("logo")) {
             if (logo.getAttribute("no-revert") === null)
-                logo.style.filter = "invert(1)";
+                logo.style.filter = "brightness(70%)";
         }
     }
 
