@@ -582,7 +582,7 @@ class Musixmatch(object):
 def main_program(file_name):
     import io
     import os
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="./festive-freedom-309323-0124a1c976ae.json"
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="festive-freedom-309323-0124a1c976ae.json"
     from google.cloud import vision
     client = vision.ImageAnnotatorClient()
     file_name = os.path.abspath(file_name)
