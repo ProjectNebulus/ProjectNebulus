@@ -3,7 +3,7 @@
     <link id="theme" rel="stylesheet" type="text/css" href="/static/stylesheets/darkblue.css" />
     {% include "navbar.html" %}
     <div style="margin-left:20%;">
-        <p class="text-4xl dark:text-white">Nebulus Documents</p>
+        <p class="text-4xl dark:text-white">Nebulus Documents</p><br><br>
         <label for="website-admin" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Document Name</label>
         <div class="flex">
   <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
@@ -80,7 +80,7 @@
                     <div contenteditable="true" id="editor" rows="8" class="block px-0 w-full text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Write an article...">Welcome to <span style="color: lightgreen">Nebulus</span> Docs. Type <strong>Bold</strong> with the buttons above or <strong>Command B</strong>. Type <i>Italics</i> with the buttons above or <i>Command I</i>.
 
                     </div>
-            </div>
+            </div><br><br>
             <button type="submit" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
                 Download Document as PDF
             </button>
@@ -125,56 +125,10 @@
         #editor{
             font-family: 'Roboto', sans-serif !important;
             height:500px;
-        }
-        #customBtn {
-            display: inline-block;
-            background: #00bfff;
-            color: black;
-            padding-left:30px;
-            padding-right:30px;
-            padding-top:20px;
-            padding-bottom:20px;
-            font-size:2em;
-            border-radius: 5px;
-            border-style:none;
-
-
-        }
-        #customBtn:hover {
-            cursor: pointer;
-        }
-        .customBtn2 {
-            display: inline-block;
-            background: #00bfff;
-            color: black;
-            padding-left:30px;
-            padding-right:30px;
-            padding-top:20px;
-            padding-bottom:20px;
-            font-size:2em;
-            border-radius: 5px;
-            border-style:none;
-
-
-        }
-        .customBtn2:hover {
-            cursor: pointer;
-        }
-        a{
-            color:#039dfc;
-            text-decoration:none;
-        }
-        a:hover{
-            color:#0788d9;
+            outline-color: #1A56DB;
+            padding:15px;
         }
 
-        #banner{
-            width:100%;
-            background:#00bfff;margin-bottom:7px;
-            font-size:1.3em;
-            padding-top:7px;
-            padding-bottom:7px;
-        }
 
         input[type=email]:disabled {
             border-color:#424040;
@@ -309,10 +263,8 @@
         }
 
         .buttonSelect{
-            padding:15px;
             cursor: -webkit-grab;
             cursor: grab;
-            border-radius:10px;
         }
         div.editable {
             width: 300px;
@@ -320,62 +272,6 @@
             border: 1px solid #ccc;
             padding: 5px;
         }
-        .notepadInput{
-            width:60%;
-            border-style:solid;
-            border-color:grey;
-            border-width:1px;
-            border-radius:10px;
-            background:transparent;
-            height:30px;padding:20px;
-            outline:none;
-            color:white;
-        }
-        .notepadInput:focus{
-            border-color:#0492cf;
-        }
-        .notepadInput2{
-            padding:10px;
-            height:500px;
-            border-style:solid;
-            border-color:grey;
-            border-width:1px;
-            border-radius:10px;
-            background:transparent;
-            outline:none;
-            color:white;
-        }
-        .notepadInput2:focus{
-            border-color:#0492cf;
-        }
-        .graderoomInput[type=password]{
-            height:2.3em;
-            background:transparent;
-            color:white;
-            width:50%;
-            border-style: none none solid none;
-            border-width:2px;
-            border-color:white;
-            outline:none;
-            font-size:1.5em;
-            font-family: 'Lato', sans-serif;
-        }
 
-        .graderoomInput[type=text]{
-            height:2.3em;
-            background:transparent;
-            color:white;
-            width:50%;
-            border-style: none none solid none;
-            border-width:2px;
-            border-color:white;
-            outline:none;
-            font-size:1.5em;
-            font-family: 'Lato', sans-serif;
-        }
-
-        input[type=submit]{
-            padding:10px;font-size:1.5em;border-radius:10px;background:#009dffff;color:white;border-style:none;display:none;
-        }
     </style>
 {% endblock %}

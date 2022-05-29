@@ -1,8 +1,7 @@
 {% extends "layout.html" %}
 {% block main %}
+    {% include "navbar.html" %}
 <link id="theme" rel="stylesheet" type="text/css" href="/static/stylesheets/darkblue.css" />
-<div style="margin-left:5%;">
-    <a href="/resources" style="color:white;text-decoration:none;">
 
 
     <title>Nebulus Planner</title>
@@ -23,17 +22,6 @@
             height:50px;
         }
 
-        button {
-            background-color: transparent;
-            color: white;
-            padding: 15px;
-            margin-top: 10px;
-            border-style:solid;
-            border-color:#00bfff;
-            border-width:2.5px;
-            border-radius:10px;
-            font-size:1.5em;
-        }
 
         textarea {
             font-family: 'Lato', sans-serif;
@@ -49,37 +37,31 @@
             box-sizing: border-box; /* Chrome, IE8, Opera, Safari 5.1*/
             outline:none;
 
-            /*background-attachment: local;
-              background-image:
-                  linear-gradient(to right, transparent 10px, transparent 10px),
-                  linear-gradient(to left, transparent 10px, transparent 10px),
-                  repeating-linear-gradient(transparent, transparent 30px, #ccc 10px, #ccc 11px, transparent 31px);
-               line-height: 31px;
-               padding: 8px 10px;
 
-            background-attachment: local;
-            background-attachment: local;
-            background-image: repeating-linear-gradient(transparent, transparent 30px, #555 10px, #555 11px transparent 30px);
-            padding: 10px 10px;*/
         }
 
     </style>
+    <br><br>
+    <div style="width:90%;margin:auto;border-color:white;">
+        <h1>
+            <span id="month" class="text-4xl text-black dark:text-white">Error Finding Month</span>
+            <span class="text-4xl text-black dark:text-white" style='float:right'><input type="text" id="planner_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-2xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="My Agenda" placeholder="Planner Name" required></span>
+        </h1><br>
 
-    <h1>
-        <span id="month">If the script crashes, this will be displayed.</span>
-        <span style='float:right'>Digital CJ</span>
-    </h1><br>
+        <span id="dates"></span>
+        <div style="border-radius:15px;overflow: hidden;">
+            <table id="table"></table>
+        </div>
 
-    <span id="dates"></span>
+        <button id="prevpage" type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Previous Page</button>
+        <button style="float:right;" id="nextpage" type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Next Page</button>
+        <center>
+            <span id="savestate" style="color:#b8b8b8;text-decoration:underline">Synced to Cloud | Last Edit was seconds ago</span><br>
+            <span id="error" style="color:green;">Connected to Nebulus</span><br>
+            <button id="today" type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Jump to Today</button>
 
-    <table id="table"></table>
-
-    <button id="prevpage">Prev Page</button>
-    <button id="nextpage" style="float:right">Next Page</button>
-    <center>
-        <span id="savestate" style="color:#b8b8b8;text-decoration:underline">Synced to Cloud | Last Edit was seconds ago</span><br>
-        <button id="today">Today</button>
-    </center>
+        </center>
+    </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
@@ -250,7 +232,8 @@
                 });
 
                 request.fail(function (jqXHR, textStatus) {
-                    alert('Error: Loading CJ Data failed. Please try again later.')
+                    document.getElementById("error").innerText = "Error Loading Planner Data!";
+                    document.getElementById("error").style.color = "red";
                 });
             }
 
@@ -260,7 +243,7 @@
                 save["lastedited"] = new Date().toString();
                 save["savedata"] = saveData;
 
-                saveState.innerHTML = "Saving";
+                saveState.innerHTML = "Syncing... | Please wait...";
 
                 var request = $.ajax({
                     type: "GET",
@@ -269,11 +252,11 @@
                 });
 
                 request.done(function (ignored) {
-                    saveState.innerHTML = "Saving successful!";
+                    saveState.innerHTML = "Synced to Cloud | Last Edit was seconds ago";
                 });
 
                 request.fail(function (ignored, alsoignored) {
-                    saveState.innerHTML = "Saving failed!";
+                    saveState.innerHTML = "Sync Unsuccessful | Retrying to Sync...";
                 });
             }
 
@@ -281,25 +264,5 @@
             alert("An error has occured:\n" + e + "\n\nStack trace:\n" + e.stack);
         }
     </script>
-    <script>
-        function getRandomInt(max) {
-            return Math.floor(Math.random() * max);
-        }
-
-        function swapStyleSheet() {
-            var sheet = "";
-            var request =  $.ajax({
-                type: "GET",
-                url: "/getTheme"
-            });
-            request.done(function(data){
-                document.getElementById("theme").setAttribute("href", data+"?version="+String.valueOf(getRandomInt(1000000)));
-            });
-            request.fail(function (jqXHR, textStatus) {
-                alert('Error: Changing theme failed. Please try again later')
-            });
-
-        }
-        window.onload = swapStyleSheet;
     </script>
     {% endblock %}
