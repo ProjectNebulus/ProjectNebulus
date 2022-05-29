@@ -8,7 +8,7 @@ from werkzeug.utils import secure_filename
 
 from . import main_blueprint
 from .utils import logged_in
-UPLOAD_FOLDER = './static/images'
+UPLOAD_FOLDER = './app/static'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'heic', 'webm'}
 def allowed_file(filename):
     return '.' in filename and \
@@ -618,6 +618,7 @@ def main_program(file_name):
     for label in labels:
         general_list.append(label.description)
 
+
     return general_list
 
 @main_blueprint.route("/music", methods=["GET"])
@@ -630,15 +631,11 @@ def music():
 @logged_in
 def music_post():
 
-    text = request.form['search']
-    type = request.form['type']
-    youtube_needed = True
-    spotify_needed = True
-    if str(type) == "4":
-        if 'file1' not in request.files:
+    if str(request.form['type']) == "4":
+        if 'search' not in request.files:
             print("1")
             return redirect(request.url)
-        file = request.files['file1']
+        file = request.files['search']
         # If the user does not select a file, the browser submits an
         # empty file without a filename.
         if file.filename == '':
@@ -649,6 +646,7 @@ def music_post():
             filename = secure_filename(file.filename)
             file.save(os.path.join(UPLOAD_FOLDER, filename))
             a = main_program(os.path.join(UPLOAD_FOLDER, filename))
+            os.remove(os.path.join(UPLOAD_FOLDER, filename))
             musixmatch = Musixmatch('bbd8cc3d9f6c1444e01d9d66b44f0f49')
             songs= []
             for i in a:
@@ -657,6 +655,10 @@ def music_post():
             for i in range(0,len(songs)):
                 songs[i] = songs[i]['track']
             return str(songs)
+    text = request.form['search']
+    type = request.form['type']
+    youtube_needed = True
+    spotify_needed = True
     if str(type) == "2":
         youtube_needed = False
     if str(type) == "3":
