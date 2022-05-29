@@ -3,7 +3,7 @@ from datetime import datetime
 from flask import render_template, session
 from schoolopy import Schoology
 
-from static.python.colors import getColor
+from ...static.python.colors import getColor
 from . import main_blueprint, utils
 from .utils import logged_in
 
