@@ -46,13 +46,13 @@ def connect_schoology():
     session["Schoologydomain"] = data["link"]
     session["Schoologyid"] = sc.get_me().id
     if (
-        read.check_duplicate_schoology(session["id"], session["Schoologyemail"])
-        == "false"
+            read.check_duplicate_schoology(session["id"], session["Schoologyemail"])
+            == "false"
     ):
         return "2"
 
     # auth.domain
-    # session["theschoology"] = sc
+    # session["schoology"] = sc
     schoology = {
         "Schoology_request_token": request_token,
         "Schoology_request_secret": request_token_secret,

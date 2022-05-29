@@ -1,112 +1,79 @@
-import schoolopy
-from flask import request, session
+from datetime import datetime
+
+from flask import jsonify
+from schoolopy import Schoology
 
 from . import internal
+from ....main import utils
 from ....main.utils import private_endpoint
-from datetime import datetime
-from flask import render_template, session, request, redirect, jsonify
-
-from .....static.python.mongodb import read
-import schoolopy
-from .....static.python.canvas import *
 from .....static.python.colors import *
 
 
 @internal.route("/get_schoology_messages", methods=["GET"])
 @private_endpoint
 def get_schoology_messages():
-    amount = int(request.args.get("amount"))
-    start = int(request.args.get("start"))
-    theschoology = read.getSchoology(username=session.get("username"))[0]
-    request_token = theschoology.Schoology_request_token
-    request_token_secret = theschoology.Schoology_request_secret
-    access_token = theschoology.Schoology_access_token
-    access_token_secret = theschoology.Schoology_access_secret
-    link = theschoology.schoologyDomain
-    key = theschoology.apikey
-    secret = theschoology.apisecret
-    auth = schoolopy.Auth(
-        key,
-        secret,
-        domain=link,
-        three_legged=True,
-        request_token=request_token,
-        request_token_secret=request_token_secret,
-        access_token=access_token,
-        access_token_secret=access_token_secret,
-    )
-    auth.authorize()
-    sc = schoolopy.Schoology(auth)
-    sc.limit = amount+start
-    messages = sc.get_inbox_messages()
-    newmessages = []
+    sc = utils.getSchoologyAuth()
 
-    for i in messages:
-        temp = {}
-        author = sc.get_user(i["author_id"])
-        authorname = author["name_display"]
-        authorpfp = author["picture_url"]
-        authoremail = author["primary_email"]
-        authorschool = sc.get_school(author["school_id"])["title"]
-        authorcolor = getcolor(authorpfp)
-        oldrecipients = i["recipient_ids"].split(",")
+    if type(sc) is not Schoology:  # then it's an exception
+        return str(sc)
+
+    messages = sc.get_inbox_messages()
+    newMessages = []
+
+    for message in messages:
+        info = {}
+        author = sc.get_user(message["author_id"])
+        authorName = author["name_display"]
+        authorPfp = author["picture_url"]
+        authorEmail = author["primary_email"]
+        authorSchool = sc.get_school(author["school_id"])["title"]
+        authorColor = getColor(authorPfp)
+        oldRecipients = message["recipient_ids"].split(",")
         recipients = []
-        for j in oldrecipients: #recipients:
-            recipient = sc.get_user(j)
+        for recipient in oldRecipients:  # recipients:
+            recipient = sc.get_user(recipient)
             school = sc.get_school(recipient["school_id"])["title"]
-            color = getcolor(recipient["picture_url"])
+            color = getColor(recipient["picture_url"])
             recipients.append(
                 {
-                    "name":recipient["name_display"],
-                    "avatar":recipient["picture_url"],
+                    "name": recipient["name_display"],
+                    "avatar": recipient["picture_url"],
                     "email": recipient["primary_email"],
                     "school": school,
                     "color": color
-
                 }
             )
 
         author = {
-            "name":authorname,
-            "avatar":authorpfp,
-            "email": authoremail,
-            "school": authorschool,
-            "color": authorcolor
-
+            "name": authorName,
+            "avatar": authorPfp,
+            "email": authorEmail,
+            "school": authorSchool,
+            "color": authorColor
         }
-        temp["subject"] = i["subject"]
-        temp["status"] = i["message_status"]
-        thread = sc.get_message(message_id=i["id"])
-        #print(thread)
-        temp["message"] = thread[-1]["message"].replace('\n', '<br />')
-        if len(temp["message"])>100:
-            temp["message"] = temp["message"][0:100]+"..."
-        newthread = []
-        for i in thread:
-            thread_author_id = i["author_id"]
+        info["subject"] = message["subject"]
+        info["status"] = message["message_status"]
+        thread = sc.get_message(message_id=message["id"])
+        # print(thread)
+        info["message"] = thread[-1]["message"]
+        info["message"] = info["message"][:100] + "..." * (len(info["message"]) > 100)
+        newThread = []
+        for threadItem in thread:
+            thread_author_id = threadItem["author_id"]
             thread_author = sc.get_user(thread_author_id)
-            thread_author_pfp = thread_author["picture_url"]
-            thread_author_name = thread_author["name_display"]
-            thread_author_email = thread_author["primary_email"]
-            newthread.append(
+            newThread.append(
                 {
-                    "message": i["message"].replace('\n', '<br />'),
-                    "author": thread_author_name,
-                    "author_pic": thread_author_pfp,
-                    "author_email": thread_author_email
-
+                    "message": threadItem["message"],
+                    "author": thread_author["name_display"],
+                    "author_pic": thread_author["picture_url"],
+                    "author_email": thread_author["primary_email"]
                 }
             )
-        temp["thread"] = newthread
-        temp["recipients"] = recipients
-        temp["author"] = author
-        temp["updated"] = datetime.fromtimestamp(int(i["last_updated"]))
-        #print(temp)
-        newmessages.append(temp)
-    #current = 1
-    #amount = 5
-    #0:5
-    #should be 1:5
-    print(jsonify(newmessages).json)
-    return jsonify(newmessages)
+        info["thread"] = newThread
+        info["recipients"] = recipients
+        info["author"] = author
+        info["updated"] = datetime.fromtimestamp(int(message["last_updated"]))
+        # print(temp)
+        newMessages.append(info)
 
+    return jsonify(newMessages)

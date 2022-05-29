@@ -1,11 +1,10 @@
-import flask_discord
-from flask_discord import DiscordOAuth2Session, requires_authorization, Unauthorized
-from flask import current_app
-from flask import Flask, request, redirect, session, render_template
-import discord
-import requests
-from . import main_blueprint
 import json
+
+import requests
+from flask import Flask, request, redirect, session, render_template
+from flask_discord import DiscordOAuth2Session
+
+from . import main_blueprint
 
 app = Flask(__name__)
 app.config["DISCORD_CLIENT_ID"] = 955153343020429343  # Discord client ID.
@@ -70,28 +69,21 @@ def getMe(access_token):  # this works
 @main_blueprint.route("/discord")
 def discord_auth():
     app.config["DISCORD_REDIRECT_URI"] = generate_redirect(request.root_url)
-    thediscord = DiscordOAuth2Session(app)
+    discordAuth = DiscordOAuth2Session(app)
 
-    return thediscord.create_session()
+    return discordAuth.create_session()
 
 
 @main_blueprint.route("/discord/receive")
 def recieve():
-    import json
-
     if "code" in request.args:
         try:
             code = request.args["code"]
-
             data = exchange_code(code, request.root_url)
-
             access_token = data["access_token"]
-
             data = getMe(access_token)
 
-            avatar_link = (
-                f"https://cdn.discordapp.com/avatars/{data['id']}/{data['avatar']}.png"
-            )
+            avatar_link = f"https://cdn.discordapp.com/avatars/{data['id']}/{data['avatar']}.png"
 
             user = f"{data['username']}#{data['discriminator']}"
 
@@ -101,6 +93,7 @@ def recieve():
             session["discord_avatar"] = avatar_link
             session["discord_user"] = user
             session["discord_id"] = data[1]
+
             return render_template("connectDiscord.html", data=data)
 
         except Exception as e:

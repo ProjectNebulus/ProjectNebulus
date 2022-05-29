@@ -6,7 +6,7 @@ from flask import session, request
 from googleapiclient.discovery import build
 
 from . import internal
-from .....static.python.colors import getcolor
+from .....static.python.colors import getColor
 from .....static.python.mongodb import create, read
 
 
@@ -230,7 +230,7 @@ def create_schoology_course():
 
     for update in scupdates:
         author = sc.get_user(update["uid"])
-        color = getcolor(author["picture_url"])
+        color = getColor(author["picture_url"])
         school = sc.get_school(author["school_id"])["title"]
 
         create.createAnnouncement(

@@ -29,24 +29,6 @@ $("#search").click(function () {
     openModal("searchModal");
 });
 
-
-// $("#upload-file").click(function () {
-//         alert("a");
-//         let formData = new FormData();
-//         let fileupload = document.getElementById("file")
-//         formData.append("file", fileupload.files[0]);
-//         formData.append("course", document.getElementById("course_id").innerText);
-//         formData.append("folder", "0");
-//         // await fetch('/api/v1/internal/upload_file', {
-//         //     method: "POST",
-//         //     body: formData
-//         // });
-//         alert('The file has been uploaded successfully.');
-//     }
-// )
-//
-//
-
 $("#upload-file").click(function () {
     alert('Uploaded');
     var formData = new FormData();

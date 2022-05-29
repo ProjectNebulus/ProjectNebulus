@@ -41,8 +41,9 @@
             <br>
 
             <h2 id="general" class="text-4xl text-black dark:text-white">General Settings</h2><br>
-            <label class="hidden md:block block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                   style="margin-bottom:-10px;">Your Username</label>
+            <label class="hidden md:block block mt-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                Your Username
+            </label>
 
             <div class="settingItem" style="display: inline-block;">
                 <div class="relative mt-1" style="display: inline-block;">
@@ -58,15 +59,14 @@
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                            placeholder="name@flowbite.com">
                 </div>
-                <button id="change1" onclick="change1()" style="margin-top: 20px;" type="button"
+                <button data-modal-toggle="" onclick="change1()" style="margin-top: 20px;"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     Change
                 </button>
 
             </div>
 
-            <label style="margin-bottom:-10px;"
-                   class="hidden md:block block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+            <label class="hidden md:block block mt-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                 Your Password
             </label>
 
@@ -84,15 +84,14 @@
                            placeholder="name@flowbite.com">
                 </div>
 
-                <button id="change2" onclick="change2()" style="margin-top: 20px;" type="button"
+                <button data-modal-toggle="authentication-modal" style="margin-top: 20px;"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     Change
                 </button>
 
             </div>
 
-            <label style="margin-bottom:-10px;"
-                   class="hidden md:block block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+            <label class="hidden md:block block mt-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                 Your Email
             </label>
 
@@ -108,7 +107,7 @@
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                            placeholder="name@flowbite.com">
                 </div>
-                <button id="change3" onclick="change3()" style="margin-top: 20px;" type="button"
+                <button data-modal-toggle="" style="margin-top: 20px;"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     Change
                 </button>
@@ -122,10 +121,11 @@
                     <span class="font-bold text-yellow-400">SPECIAL</span>
                     integrations for Nebulus!
                 </p>
+                <p class="text-gray-500 dark:text-gray-400 text-lg">Note: Some of them don't work yet.</p>
 
                 <div onclick="newwindow=window.open('/gclassroom','Authorize with Google','height=400,width=900')"
                      style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default"
-                     type="button" class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300
+                     class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300
                      dark:hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg
                       text-sm text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                     <img src="/static/images/logos/classroom.png" alt="Google Classroom Image"
@@ -138,7 +138,6 @@
                 </div>
                 <div onclick="newwindow=window.open('/schoology','Authorize with Schoology','height=400,width=900')"
                      style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default2"
-                     type="button"
                      class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
                     <img src="/static/images/logos/schoology.png" alt="Schoology Image"
                          style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
@@ -150,7 +149,6 @@
                 </div>
                 <div onclick="newwindow=window.open('/canvas','Authorize with Canvas','height=400,width=900')"
                      style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default3"
-                     type="button"
                      class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
                     <img src="/static/images/logos/canvas.png" alt="Canvas Image"
                          style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
@@ -161,7 +159,6 @@
                     <div class="tooltip-arrow" data-popper-arrow></div>
                 </div>
                 <div style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default4"
-                     type="button"
                      class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
                     <img src="/static/images/logos/github.png" alt="Github Image"
                          style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
@@ -171,9 +168,8 @@
                     Github
                     <div class="tooltip-arrow" data-popper-arrow></div>
                 </div>
-                <div onclick="newwindow=window.open('/discord','Authorize with Discord','height=400,width=900')"
+                <div onclick="newwindow=window.open('/discord','Authorize with Discord','height=900,width=600')"
                      style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default5"
-                     type="button"
                      class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
                     <img src="/static/images/logos/discord.png" alt="Discord Image"
                          style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
@@ -185,7 +181,6 @@
                 </div>
                 <div onclick="newwindow=window.open('/spotify','Authorize with Spotify','height=400,width=900')"
                      style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default6"
-                     type="button"
                      class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
                     <img src="/static/images/logos/spotify.png" alt="Spotify Image"
                          style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
@@ -196,7 +191,6 @@
                     <div class="tooltip-arrow" data-popper-arrow></div>
                 </div>
                 <div style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default7"
-                     type="button"
                      class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
                     <img src="/static/images/logos/dropbox.png" alt="Dropbox Image"
                          style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
@@ -207,7 +201,6 @@
                     <div class="tooltip-arrow" data-popper-arrow></div>
                 </div>
                 <div style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default8"
-                     type="button"
                      class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
                     <img src="/static/images/logos/docs.png" alt="Google Docs Image"
                          style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
@@ -218,7 +211,6 @@
                     <div class="tooltip-arrow" data-popper-arrow></div>
                 </div>
                 <div style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default9"
-                     type="button"
                      class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
                     <img src="/static/images/logos/slides.png" alt="Google Slides Image"
                          style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; height:40px; display: inline-block;">
@@ -229,7 +221,6 @@
                     <div class="tooltip-arrow" data-popper-arrow></div>
                 </div>
                 <div style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default10"
-                     type="button"
                      class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
                     <img src="/static/images/logos/sheets.png" alt="Google Sheets Image"
                          style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; height:40px; display: inline-block;">
@@ -240,7 +231,6 @@
                     <div class="tooltip-arrow" data-popper-arrow></div>
                 </div>
                 <div style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default11"
-                     type="button"
                      class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
                     <img src="/static/images/logos/drive.png" alt="Google Drive Image"
                          style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
@@ -251,7 +241,6 @@
                     <div class="tooltip-arrow" data-popper-arrow></div>
                 </div>
                 <div style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default12"
-                     type="button"
                      class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
                     <img src="/static/images/logos/gmail.png" alt="Gmail Image"
                          style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; height:40px; display: inline-block;">
@@ -262,7 +251,6 @@
                     <div class="tooltip-arrow" data-popper-arrow></div>
                 </div>
                 <div style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default13"
-                     type="button"
                      class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
                     <img src="/static/images/logos/calendar.png" alt="Google Calendar Image"
                          style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
@@ -273,7 +261,6 @@
                     <div class="tooltip-arrow" data-popper-arrow></div>
                 </div>
                 <div style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default14"
-                     type="button"
                      class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
                     <img src="/static/images/logos/meet.png" alt="Google Meet Image"
                          style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
@@ -284,7 +271,6 @@
                     <div class="tooltip-arrow" data-popper-arrow></div>
                 </div>
                 <div style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default15"
-                     type="button"
                      class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
                     <img src="/static/images/logos/replit.png" alt="Replit Image"
                          style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
@@ -295,7 +281,6 @@
                     <div class="tooltip-arrow" data-popper-arrow></div>
                 </div>
                 <div style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default16"
-                     type="button"
                      class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
                     <img src="/static/images/logos/twitter.png" alt="Twitter Image"
                          style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
@@ -306,7 +291,6 @@
                     <div class="tooltip-arrow" data-popper-arrow></div>
                 </div>
                 <div style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default17"
-                     type="button"
                      class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
                     <img src="/static/images/logos/facebook.png" alt="Facebook Image"
                          style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
@@ -335,13 +319,12 @@
                                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ schoology_acc.schoologyName }}
                                     </h5>
                                     <p class="font-sm text-sm text-gray-700 dark:text-gray-400">{{ schoology_acc.schoologyEmail }}</p>
-                                    <p class="font-normal text-gray-700 dark:text-gray-400">Schoology</p>
                                 </div>
                             </div>
                             <br><br>
                         </a>
-                        <div
-                                class="block p-6 w-1/2 bg-white rounded-b-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-700 dark:border-gray-700 dark:hover:bg-gray-700">
+                        <div class="block p-6 w-1/2 bg-white rounded-b-lg border border-gray-200 shadow-md
+                         hover:bg-gray-100 dark:bg-gray-700 dark:border-gray-700 dark:hover:bg-gray-700">
                             <div>
                                 <a href="/api/v1/internal/logout-of-schoology"
                                    class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -354,12 +337,14 @@
                                     </svg>
                                 </a>
                                 <br><br>
-                                <label for="toggle-example-checked" class="flex relative items-center mb-4 cursor-pointer">
+                                <label for="toggle-example-checked"
+                                       class="flex relative items-center mb-4 cursor-pointer">
                                     <input type="checkbox" id="toggle-example-checked" class="sr-only" checked>
                                     <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
                                     <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Show in Profile</span>
                                 </label>
-                                <label for="toggle-example-checked1" class="flex relative items-center mb-4 cursor-pointer">
+                                <label for="toggle-example-checked1"
+                                       class="flex relative items-center mb-4 cursor-pointer">
                                     <input type="checkbox" id="toggle-example-checked1" class="sr-only" checked>
                                     <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
                                     <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Use in Courses</span>
@@ -561,7 +546,7 @@
             <textarea id="message" rows="4"
                       class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Leave a comment..."></textarea>
-            <button style="margin-top: 20px;" type="button"
+            <button style="margin-top: 20px;"
                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 Submit
             </button>
@@ -572,7 +557,7 @@
             <textarea id="message" rows="4"
                       class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Leave a comment..."></textarea>
-            <button style="margin-top: 20px;" type="button"
+            <button style="margin-top: 20px;"
                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 Submit
             </button>
@@ -591,7 +576,7 @@
                     how
                     much to award you based on how good quality/how important it is!
                 </div>
-                <button type="button"
+                <button
                         class="ml-auto -mx-1.5 -my-1.5 bg-blue-100 dark:bg-blue-200 text-blue-500 rounded-lg focus:ring-2 focus:ring-blue-400 p-1.5 hover:bg-blue-200 dark:hover:bg-blue-300 inline-flex h-8 w-8"
                         data-collapse-toggle="alert-border-1" aria-label="Close">
                     <span class="sr-only">Dismiss</span>
@@ -618,17 +603,17 @@
                     These are very dangerous actions!
                 </div>
                 <div class="flex">
-                    <button type="button"
+                    <button
                             class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 mr-2 text-center inline-flex items-center dark:bg-red-800 dark:hover:bg-red-900">
                         Delete Account
                     </button>
-                    <button type="button"
+                    <button
                             class="text-red-700 bg-transparent border border-red-700 hover:bg-red-800 hover:text-white focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:border-red-800 dark:text-red-800 dark:hover:text-white"
                             data-collapse-toggle="alert-additional-content-2" aria-label="Close">
                         Disable Account
                     </button>
                     <a href="/logout">
-                        <button type="button"
+                        <button
                                 style="margin-left:10px !important;"
                                 class="text-red-700 bg-transparent border border-red-700 hover:bg-red-800 hover:text-white focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:border-red-800 dark:text-red-800 dark:hover:text-white"
                                 data-collapse-toggle="alert-additional-content-2" aria-label="Close">
@@ -670,8 +655,8 @@
                 <!-- Modal content -->
                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                     <div class="flex justify-end p-2">
-                        <button type="button"
-                                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+                        <button class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg
+                         text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
                                 data-modal-toggle="authentication-modal">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                                  xmlns="http://www.w3.org/2000/svg">

@@ -1,7 +1,9 @@
 import datetime
 from functools import wraps
 
+import schoolopy
 from flask import session, redirect, request, render_template
+from schoolopy import Schoology
 
 try:
     from ...static.python.mongodb import read
@@ -37,14 +39,42 @@ def private_endpoint(func):
 
         # the first parameter should be the flask server ip address, so change it to what the ip is for your server
 
-        if (
-                str(user_ip) == "127.0.0.1" or "2600:1700:5450:7b08:9806:a9a9:a039:e92e"
-        ):  # server ip
+        if str(user_ip) == "127.0.0.1" or "2600:1700:5450:7b08:9806:a9a9:a039:e92e":  # server ip
             return func(*args, **kwargs)
         else:
-            return render_template("errors/404.html", error="Unauthorized Access")
+            return render_template("errors/404.html", error="Unauthorized Access"), 405
 
     return wrapper
+
+
+def getSchoologyAuth() -> Schoology | Exception:
+    try:
+        schoology = read.getSchoology(username=session.get("username"))[0]
+        request_token = schoology.Schoology_request_token
+        request_token_secret = schoology.Schoology_request_secret
+        access_token = schoology.Schoology_access_token
+        access_token_secret = schoology.Schoology_access_secret
+        link = schoology.schoologyDomain
+        key = schoology.apikey
+        secret = schoology.apisecret
+        auth = schoolopy.Auth(
+            key,
+            secret,
+            domain=link,
+            three_legged=True,
+            request_token=request_token,
+            request_token_secret=request_token_secret,
+            access_token=access_token,
+            access_token_secret=access_token_secret,
+        )
+        auth.authorize()
+        sc = schoolopy.Schoology(auth)
+        sc.limit = 5
+
+        return sc
+
+    except Exception as e:
+        return e
 
 
 def strftime(time: datetime.date, fmt) -> str:

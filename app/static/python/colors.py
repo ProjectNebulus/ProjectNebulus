@@ -12,7 +12,7 @@ from colorthief import ColorThief
 # # print(dominant_color)
 
 
-def getcolor(url):
+def getColor(url):
     ending = url.split("/")[-1]
     if "?" in ending:
         q = ending.index("?")

@@ -26,6 +26,7 @@ def index():
         city = data['city']
         country = data['country']
         region = data['region']
+
     except:
         country = "US"
 
@@ -70,9 +71,10 @@ def page_not_found(e):
 
 @main_blueprint.app_errorhandler(500)
 def internal_error(e):
-    # note that we set the 404 status explicitly
+    # note that we set the 500 status explicitly
     return render_template("errors/500.html"), 500
 
+
 @main_blueprint.route("/sw.js")
-def swjs():
-    return send_file("../static/sw.js")#"app/static/sw.js")
+def sw():
+    return send_file("../static/sw.js")
