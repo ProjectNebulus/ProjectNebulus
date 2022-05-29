@@ -8,8 +8,9 @@ from ...static.python.mongodb import read
 def planner():
     return render_template(
         "planner.html",
-        page="Nebulus - Points",
+        page="Nebulus - Planner",
         user=session.get("username"),
+        email=session.get("email"),
         avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
         read=read,
     )

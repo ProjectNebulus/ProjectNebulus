@@ -8,7 +8,7 @@ from ...static.python.mongodb import read
 def notepad():
     return render_template(
         "notepad.html",
-        page="Nebulus - Points",
+        page="Nebulus - Notepad",
         user=session.get("username"),
         avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
         read=read,

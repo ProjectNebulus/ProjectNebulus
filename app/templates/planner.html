@@ -1,268 +1,279 @@
 {% extends "layout.html" %}
 {% block main %}
     {% include "navbar.html" %}
-<link id="theme" rel="stylesheet" type="text/css" href="/static/stylesheets/darkblue.css" />
-
-
-    <title>Nebulus Planner</title>
 
     <style>
         table {
             font-family: 'Lato', sans-serif;
             border-collapse: collapse;
             width: 100%;
-            color:white;
+            border-radius: 10px;
+            overflow: hidden;
         }
 
         td {
-            border: 1px solid #dddddd;
+            border: 1px solid black;
             text-align: left;
             padding: 8px;
             position: relative;
-            height:50px;
+            height: 50px;
         }
 
 
         textarea {
             font-family: 'Lato', sans-serif;
             position: absolute;
-            background:transparent;
-            color:white;
+            background: transparent;
+            color: black;
             width: 100%;
-            top: 0; left: 0; right: 0; bottom: 0;
-            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             resize: none;
             -webkit-box-sizing: border-box; /* <=iOS4, <= Android  2.3 */
             -moz-box-sizing: border-box; /* FF1+ */
             box-sizing: border-box; /* Chrome, IE8, Opera, Safari 5.1*/
-            outline:none;
-
-
+            outline: none;
         }
 
+        .dark textarea {
+            color: white;
+        }
+
+        .dark td {
+            border: 1px solid #DDDD;
+            color: white;
+        }
     </style>
     <br><br>
     <div style="width:90%;margin:auto;border-color:white;">
-        <h1>
+        <div class="flex flex-row justify-between">
             <span id="month" class="text-4xl text-black dark:text-white">Error Finding Month</span>
-            <span class="text-4xl text-black dark:text-white" style='float:right'><input type="text" id="planner_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-2xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="My Agenda" placeholder="Planner Name" required></span>
-        </h1><br>
+
+            <div class="text-center">
+                <span id="savestate" style="color:#b8b8b8;text-decoration:underline">Synced to Cloud | Last Edit was seconds ago</span><br>
+                <span id="error" style="color:green;">Connected to Nebulus</span><br>
+            </div>
+
+            <span class="text-4xl text-black dark:text-white" style='float:right'>
+                <label for="planner_name" class="text-gray-500 dark:text-gray-400 text-xl">Planner Name</label>
+                <input type="text" id="planner_name" placeholder="My Agenda" required
+                       class="bg-gray-50 border border-gray-300 text-gray-900 text-2xl rounded-lg focus:ring-blue-500
+                        focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
+                         dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            </span>
+        </div>
+        <br>
 
         <span id="dates"></span>
-        <div style="border-radius:15px;overflow: hidden;">
-            <table id="table"></table>
+        <table></table>
+
+        <div class="mt-6 flex flex-row justify-between">
+            <button id="prevpage" style="float:left;"
+                    class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                Previous Page
+            </button>
+            <button id="today"
+                    class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                Jump to Today
+            </button>
+            <button style="float:right;" id="nextpage"
+                    class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                Next Page
+            </button>
         </div>
-
-        <button id="prevpage" type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Previous Page</button>
-        <button style="float:right;" id="nextpage" type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Next Page</button>
-        <center>
-            <span id="savestate" style="color:#b8b8b8;text-decoration:underline">Synced to Cloud | Last Edit was seconds ago</span><br>
-            <span id="error" style="color:green;">Connected to Nebulus</span><br>
-            <button id="today" type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Jump to Today</button>
-
-        </center>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-        try {
+        const d = new Date();
+        let month = d.getMonth();
+        let year = d.getFullYear();
+        const oneWeek = 1000 * 60 * 60 * 24 * 7;
+        let page = Math.floor(Date.now() / oneWeek);
 
-            var d = new Date();
-            var month = d.getMonth();
-            var year = d.getFullYear();
-            var oneWeek = 1000 * 60 * 60 * 24 * 7;
-            var page = Math.floor(Date.now() / oneWeek);
+        const nextPage = document.getElementById("nextpage");
+        const today = document.getElementById("today");
+        const prevPage = document.getElementById("prevpage");
 
-            var nextPage = document.getElementById("nextpage");
-            var today = document.getElementById("today");
-            var prevPage = document.getElementById("prevpage");
+        const saveState = document.getElementById("savestate");
 
-            var saveState = document.getElementById("savestate");
+        let startDate = d.getDate() - d.getDay();
+        const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        const daysInMonths = [31, d.getFullYear() % 4 === 0 ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
-            var startDate = d.getDate() - d.getDay();
-            var weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-            var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-            var daysInMonths = [31, d.getFullYear() % 4 == 0 ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        const table = document.getElementsByTagName("table")[0];
 
-            var table = document.getElementById("table");
+        let saveData = {};
 
-            var saveData = {};
+        table.addEventListener("keyup", save);
 
-            table.addEventListener("keyup", save);
+        loadFromServer();
 
-            loadFromServer();
+        nextPage.onclick = function () {
+            page++;
+            load(page);
 
-            nextPage.onclick = function() {
-                page++;
-                load(page);
+            nextPage.disabled = year >= 2030 && month === 11 && startDate >= daysInMonths[month] - 7;
+            prevPage.disabled = false;
 
-                nextPage.disabled = year >= 2030 && month == 11 && startDate >= daysInMonths[month] - 7;
-                prevPage.disabled = false;
+            startDate += 7;
+            if (startDate > daysInMonths[month]) {
+                startDate -= daysInMonths[month]
+                month++;
 
-                startDate += 7;
-                if (startDate > daysInMonths[month]) {
-                    startDate -= daysInMonths[month]
-                    month++;
-
-                    if (month > 11) {
-                        month = 0;
-                        year++;
-                    }
+                if (month > 11) {
+                    month = 0;
+                    year++;
                 }
-
-                changeDate();
-                save();
             }
-
-            prevPage.onclick = function() {
-                page--;
-                load(page);
-
-                prevPage.disabled = year <= 1970 && month == 0 && startDate <= 7;
-                nextPage.disabled = false;
-
-                startDate -= 7;
-                if (startDate < 0) {
-                    month--;
-
-                    if (month < 0) {
-                        year--;
-                        month = 11;
-                    }
-
-                    startDate += daysInMonths[month];
-                }
-
-                changeDate();
-                save();
-            }
-
-            today.onclick = function() {
-                page = Math.floor(Date.now() / oneWeek);
-                load(page);
-                startDate = d.getDate() - d.getDay();
-                year = d.getFullYear();
-                month = d.getMonth();
-                changeDate();
-                nextPage.disabled = false;
-                prevPage.disabled = false;
-            }
-
-            document.getElementById("month").innerHTML = months[month] + " " + d.getFullYear();
-
-            var daysRow = table.insertRow();
-            for (var i = 0; i < 7; i++)
-                daysRow.insertCell();
 
             changeDate();
+            save();
+        }
 
-            for(var i = 1; i <= 8; i++) {
-                var row = table.insertRow();
+        prevPage.onclick = function () {
+            page--;
+            load(page);
 
-                var smallCell = row.insertCell();
-                smallCell.style.width = "20px";
+            prevPage.disabled = year <= 1970 && month === 0 && startDate <= 7;
+            nextPage.disabled = false;
 
-                var textarea = document.createElement("TEXTAREA");
-                textarea.innerHTML = i;
-                textarea.style.padding = "15px 12px";
-                textarea.style.fontsize = "1.5em";
-                smallCell.appendChild(textarea);
+            startDate -= 7;
+            if (startDate < 0) {
+                month--;
 
-                for (var j = 0; j < 6; j++) {
-                    var cell = row.insertCell();
-
-                    textarea = document.createElement("TEXTAREA");
-                    textarea.className = "note";
-                    //textarea.placeholder = "_".repeat(105);
-                    cell.appendChild(textarea);
+                if (month < 0) {
+                    year--;
+                    month = 11;
                 }
+
+                startDate += daysInMonths[month];
             }
 
-            function changeDate()
-            {
-                document.getElementById("month").innerHTML = months[month] + " " + year;
+            changeDate();
+            save();
+        }
 
-                var day;
-                for (var i = 1; i < 7; i++) {
-                    day = startDate + i;
-                    if (day > daysInMonths[month])
-                        day -= daysInMonths[month];
+        today.onclick = function () {
+            page = Math.floor(Date.now() / oneWeek);
+            load(page);
+            startDate = d.getDate() - d.getDay();
+            year = d.getFullYear();
+            month = d.getMonth();
+            changeDate();
+            nextPage.disabled = false;
+            prevPage.disabled = false;
+        }
 
-                    table.rows[0].cells[i].innerHTML = day.toString() + " " + weekDays[i-1];
-                }
+        document.getElementById("month").innerHTML = months[month] + " " + d.getFullYear();
 
-                day = startDate + 7;
+        const daysRow = table.insertRow();
+        for (let i = 0; i < 7; i++)
+            daysRow.insertCell();
+
+        changeDate();
+
+        for (let i = 1; i <= 8; i++) {
+            const row = table.insertRow();
+            const smallCell = row.insertCell();
+
+            let textarea = document.createElement("textarea");
+            textarea.innerHTML = i + "";
+            textarea.style.fontsize = "1.5rem";
+            smallCell.appendChild(textarea);
+
+            for (let j = 0; j < 6; j++) {
+                const cell = row.insertCell();
+
+                textarea = document.createElement("textarea");
+                textarea.className = "note";
+                //textarea.placeholder = "_".repeat(105);
+                cell.appendChild(textarea);
+            }
+        }
+
+        function changeDate() {
+            document.getElementById("month").innerHTML = months[month] + " " + year;
+
+            let day;
+            for (let i = 1; i < 7; i++) {
+                day = startDate + i;
                 if (day > daysInMonths[month])
                     day -= daysInMonths[month];
-                table.rows[0].cells[6].innerHTML += "/" + day.toString() + " Sunday";
+
+                table.rows[0].cells[i].innerHTML = day.toString() + " " + weekDays[i - 1];
             }
 
-            function save()
-            {
-                var notes = document.getElementsByClassName("note");
-                saveData[page] = {};
-                for (var i = 0; i < notes.length; i++) {
-                    if (notes[i].value != "")
-                        saveData[page][i] = notes[i].value;
-                }
+            day = startDate + 7;
+            if (day > daysInMonths[month])
+                day -= daysInMonths[month];
+            table.rows[0].cells[6].innerHTML += "/" + day.toString() + " Sunday";
+        }
 
-                saveToServer();
+        function save(e) {
+            const code = String.fromCharCode(e.keyCode);
+
+            if (!(/[a-zA-Z0-9-_ ]/.test(code) && code === code.toUpperCase()))
+                return;
+
+            const notes = document.getElementsByClassName("note");
+            saveData[page] = {};
+            for (let i = 0; i < notes.length; i++) {
+                if (notes[i].value !== "")
+                    saveData[page][i] = notes[i].value;
             }
 
-            function load(page)
-            {
-                var notes = document.getElementsByClassName("note");
-                for (var i = 0; i < notes.length; i++) {
-                    if (saveData[page] && saveData[page][i])
-                        notes[i].value = saveData[page][i];
-                    else
-                        notes[i].value = "";
-                }
+            saveToServer();
+        }
+
+        function load(page) {
+            const notes = document.getElementsByClassName("note");
+            for (let i = 0; i < notes.length; i++) {
+                if (saveData[page] && saveData[page][i])
+                    notes[i].value = saveData[page][i];
+                else
+                    notes[i].value = "";
             }
+        }
 
-            function loadFromServer()
-            {
-                var request = $.ajax({
-                    type: "GET",
-                    url: "/getCJ"
-                });
+        function loadFromServer() {
+            const request = $.ajax({
+                type: "GET",
+                url: "/getCJ"
+            });
 
-                request.done(function(data) {
-                    saveData = data["savedata"];
-                });
+            request.done(function (data) {
+                saveData = data["savedata"];
+            });
 
-                request.fail(function (jqXHR, textStatus) {
-                    document.getElementById("error").innerText = "Error Loading Planner Data!";
-                    document.getElementById("error").style.color = "red";
-                });
-            }
+            request.fail(function (jqXHR, textStatus) {
+                document.getElementById("error").innerText = "Error Loading Planner Data!";
+                document.getElementById("error").style.color = "red";
+            });
+        }
 
-            function saveToServer()
-            {
-                var save = {};
-                save["lastedited"] = new Date().toString();
-                save["savedata"] = saveData;
+        function saveToServer() {
+            const save = {};
+            save["lastedited"] = new Date().toString();
+            save["savedata"] = saveData;
 
-                saveState.innerHTML = "Syncing... | Please wait...";
+            saveState.innerHTML = "Syncing... | Please wait...";
 
-                var request = $.ajax({
-                    type: "GET",
-                    url: "/saveCJ",
-                    data: JSON.stringify(save)
-                });
+            const request = $.ajax({
+                type: "GET",
+                url: "/internal/savePlanner",
+                data: JSON.stringify(save)
+            });
 
-                request.done(function (ignored) {
-                    saveState.innerHTML = "Synced to Cloud | Last Edit was seconds ago";
-                });
+            request.done(function (ignored) {
+                saveState.innerHTML = "Synced to Cloud | Last Edit was seconds ago";
+            });
 
-                request.fail(function (ignored, alsoignored) {
-                    saveState.innerHTML = "Sync Unsuccessful | Retrying to Sync...";
-                });
-            }
-
-        } catch (e) {
-            alert("An error has occured:\n" + e + "\n\nStack trace:\n" + e.stack);
+            request.fail(function (ignored, alsoignored) {
+                saveState.innerHTML = "Sync Unsuccessful | Retrying Sync...";
+            });
         }
     </script>
-    </script>
-    {% endblock %}
+{% endblock %}

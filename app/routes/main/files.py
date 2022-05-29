@@ -8,7 +8,7 @@ from ...static.python.mongodb import read
 def files():
     return render_template(
         "files.html",
-        page="Nebulus - Points",
+        page="Nebulus - Files",
         user=session.get("username"),
         avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
         read=read,

@@ -30,3 +30,11 @@ def resolve_updated_object(obj, attr, value):
     obj.objects.update(**{attr: value})
 
 
+def savePlanner(data: dict, user_id):
+    from read import find_user
+
+    user = find_user(id=user_id)
+    for k, v in data.items():
+        user.planner[k] = v
+    user.save()
+    return "true"

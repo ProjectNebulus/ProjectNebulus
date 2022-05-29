@@ -61,6 +61,7 @@ class User(Snowflake):
     premium_expiration = DateTimeField(required=False, default=None, null=True)
     status = StringField(default="", null=True)
     courses = ListField(ReferenceField("Course"), default=[])
+    planner = DictField(default={})
     points = IntField(default=0)
     premium = BooleanField(default=False)
     is_staff = BooleanField(default=False)
