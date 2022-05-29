@@ -15,7 +15,23 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 def urlEncodeNonAscii(b):
     return re.sub('[\x80-\xFF]', lambda c: '%%%02x' % ord(c.group(0)), b).encode()
+def search(query):
+    import urllib.request
+    import re
+    search_keyword = query
+    while ' ' in search_keyword:
+        for i in range(0, len(search_keyword)):
+            if ' ' == search_keyword[i]:
+                search_keyword = search_keyword[0:i] + '%20' + search_keyword[
+                                                               i + 1:len(search_keyword)]
+                break
 
+    html = urllib.request.urlopen(
+        "https://www.youtube.com/results?search_query=" + str(search_keyword.encode('utf-8')))
+
+    video_ids = re.findall(r"watch\?v=(\S{11})", html.read().decode())
+
+    return video_ids[0]
 class Musixmatch(object):
     def __init__(self, apikey):
         """Define objects of type Musixmatch.
@@ -654,7 +670,8 @@ def music_post():
                 songs += musicdata["message"]["body"]["track_list"]
             for i in range(0,len(songs)):
                 songs[i] = songs[i]['track']
-            return str(songs)
+
+            return render_template("recording.html",songs=songs, id_ = search(songs[0]["track_name"]+" by "+songs[0]["artist_name"]))
     text = request.form['search']
     type = request.form['type']
     youtube_needed = True
