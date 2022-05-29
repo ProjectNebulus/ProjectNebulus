@@ -153,7 +153,7 @@ window.addEventListener("load", function () {
 if ('serviceWorker' in navigator) {
     // we are checking here to see if the browser supports the service worker api
     window.addEventListener('load', async function () {
-        await navigator.serviceWorker.register(/*'../static/js/sw.js'*/ '../sw.js', {scope: "/"}).then(
+        await navigator.serviceWorker.register(/*'../static/js/sw.js'*/ '../sw.js?2', {scope: "/"}).then(
             function (registration) {
                 // Registration was successful
                 console.log(

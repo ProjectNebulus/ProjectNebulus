@@ -1,5 +1,7 @@
 import json
 from urllib.request import urlopen
+from pathlib import Path
+import os
 
 from flask import render_template, session, redirect, request, send_file
 
@@ -77,4 +79,6 @@ def internal_error(e):
 
 @main_blueprint.route("/sw.js")
 def sw():
-    return send_file("../static/sw.js")
+    path = Path(__file__)
+    print(path.parent.parent.parent)
+    return send_file(str(path.parent.parent.parent)+'/static/js/sw.js')
