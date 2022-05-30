@@ -55,7 +55,7 @@ class User(Snowflake):
     discord = ListField(EmbeddedDocumentField(Discord, default=None, null=True))
     canvas = ListField(EmbeddedDocumentField(Canvas, default=None, null=True))
     avatar = EmbeddedDocumentField(
-        Avatar, default=Avatar(avatar_url="/static/images/nebulusCats/v3.gif")
+        Avatar, default=Avatar(avatar_url="/static/images/nebulusCats/v3.gif", parent="User")
     )
     bio = StringField(default="", null=True)
     premium_expiration = DateTimeField(required=False, default=None, null=True)
