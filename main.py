@@ -18,7 +18,6 @@ IMPORTANT!
 IF YOU HAVE CHANGED A FIELD IN ONE OF THE MONGODB OBJECTS, YOU MUST UPDATE THE EXISTING DOCUMENTS!
 Do that by calling this function
 
-update.resolve_updated_object(cls, field, value): 
 
 cls is the class of the object, field is the field that was changed, value is the the default value
 """
