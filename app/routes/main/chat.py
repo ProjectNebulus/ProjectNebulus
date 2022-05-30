@@ -18,7 +18,7 @@ def chat():
 @logged_in
 def chatPage(page):
     newMessages = None
-    if page == "privatechat":
+    if page == "email":
         sc = utils.getSchoologyAuth()
 
         if type(sc) is not Schoology:  # then it's an exception
