@@ -174,3 +174,11 @@ def delete_spotify_connection(user_id: str, spotify_object: Spotify) -> None:
     user.spotify.remove(spotify_object)
     user.save()
 
+
+def deleteChat(chat_id: str):
+    chat = Chat.objects(pk=chat_id)
+    for member in chat.members:
+        member.chats.remove(chat)
+        member.save()
+
+    chat.delete()

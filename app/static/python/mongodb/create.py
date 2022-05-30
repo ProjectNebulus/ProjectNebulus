@@ -184,3 +184,15 @@ def createGoogleClassroomConnection(user_id: str, data: dict) -> GoogleClassroom
     user.gclassroom.append(GoogleClassroom(**data))
     user.save()
     return user.gclassroom[-1]
+
+
+def createChat(data: dict) -> Chat:
+    chat = Chat(data)
+    chat.save(force_insert=True)
+    for member in chat.members:
+        member.chats.append(chat)
+        member.save()
+
+    return chat
+
+

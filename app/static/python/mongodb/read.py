@@ -271,3 +271,11 @@ def check_duplicate_schoology(user_id, schoologyemail) -> str:
     if User.objects(schoology__schoologyEmail=schoologyemail):
         return "false"
     return "true"
+
+
+def getChat(chat_id: str):
+    chat = Chat.objects(pk=chat_id)
+    if not chat:
+        raise KeyError('Invalid Chat ID')
+
+    return chat

@@ -66,6 +66,7 @@ class User(Snowflake):
     is_staff = BooleanField(default=False)
     student = BooleanField(default=True)
     teacher = BooleanField(default=False)
+    chats = ListField(ReferenceField('Chat'), default=[])
 
     def clean(self):
         self.password = hash256(self.password)

@@ -14,3 +14,4 @@ from .Schoology import Schoology
 from .Spotify import Spotify
 from .Textbook import Textbook
 from .User import User
+from .Chat import Chat
