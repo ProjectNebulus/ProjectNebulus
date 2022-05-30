@@ -5,9 +5,9 @@
     {% include "navbar.html" %}
 
     <div class="border-b border-gray-200 dark:border-gray-700">
-        <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 dark:text-gray-400 mb-5">
-            <a href="/chat/email" target="cooliframe"><li class="mr-2">
-                <a class="inline-flex p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active dark:text-blue-500 dark:border-blue-500 group"
+        <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 dark:text-gray-400 mb-5" id="chat-tab" data-tabs-toggle="#chat-tab-content" role="tablist">
+           <li class="mr-2" id="email-tab" data-tabs-target="#email" type="button" role="tab" aria-controls="profile" aria-selected="false">
+                <a class="inline-flex p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group"
                    aria-current="page">
                     <svg class="mr-2 w-5 h-5 text-blue-600 dark:text-blue-500" fill="currentColor" viewBox="0 0 20 20"
                          xmlns="http://www.w3.org/2000/svg">
@@ -15,9 +15,9 @@
                     </svg>
                     Email
                 </a>
-            </li></a>
+            </li>
 
-            <a href="/chat/privatechat" target="cooliframe"><li class="mr-2">
+            <li class="mr-2" id="DM-tab" data-tabs-target="#DM" type="button" role="tab" aria-controls="profile" aria-selected="false">
                 <a class="inline-flex p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group">
                     <svg class="mr-2 w-5 h-5 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300"
                          fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -27,8 +27,8 @@
                     </svg>
                     Private Chat
                 </a>
-            </li></a>
-            <a href="/chat/groupchat" target="cooliframe"><li class="mr-2">
+            </li>
+            <li class="mr-2" id="group-chat-tab" data-tabs-target="#groupchat" type="button" role="tab" aria-controls="profile" aria-selected="false">
                 <a class="inline-flex p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group">
                     <svg class="mr-2 w-5 h-5 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300"
                          fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -36,8 +36,8 @@
                     </svg>
                     Group Chats
                 </a>
-            </li></a>
-            <a href="/chat/communities" target="cooliframe"><li class="mr-2">
+            </li>
+            <li class="mr-2" id="communities-tab" data-tabs-target="#communities" type="button" role="tab" aria-controls="profile" aria-selected="false">
                 <a class="inline-flex p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group">
                     <svg class="mr-2 w-5 h-5 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300"
                          fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -48,8 +48,8 @@
                     </svg>
                     Communities
                 </a>
-            </li></a>
-            <a href="/chat/settings" target="cooliframe"><li class="mr-2">
+            </li>
+            <li class="mr-2" id="settings-tab" data-tabs-target="#settings" type="button" role="tab" aria-controls="profile" aria-selected="false">
                 <a class="inline-flex p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group">
                     <svg class="mr-2 w-5 h-5 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300"
                          fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -60,11 +60,26 @@
                     </svg>
                     Settings
                 </a>
-            </li></a>
+            </li>
 
         </ul>
     </div>
 
-    <iframe src="/chat/email" id="cooliframe" class="w-full overflow-x-hidden"
-            style="background-image: url('/static/images/nebulusCats/v3.gif'); height: 80%; background-size: 10%; background-position:45%; background-repeat: no-repeat;"></iframe>
+    <div id="chat-tab-content">
+    <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="email" role="tabpanel" aria-labelledby="email-tab">
+       {% include "/chat/email.html" %}
+    </div>
+    <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="DM" role="tabpanel" aria-labelledby="DM-tab">
+        {% include "/chat/privatechat.html" %}
+    </div>
+    <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="groupchat" role="tabpanel" aria-labelledby="group-chat-tab">
+        <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Settings tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
+    </div>
+    <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="communities" role="tabpanel" aria-labelledby="communities-tab">
+        <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Contacts tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
+    </div>
+    <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+        <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Contacts tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
+    </div>
+</div>
 {% endblock %}
