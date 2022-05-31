@@ -44,7 +44,7 @@ def search_user(query: str) -> List[User]:
     import re
 
     regex = re.compile(f'{query}+')
-    return User.objects(name=regex)
+    return User.objects(username=regex)
 
 
 
