@@ -22,11 +22,7 @@ function loadingIcon(sizeX, sizeY) {
         </g>
     </svg>`;
 }
-navigator.serviceWorker.getRegistrations().then(function(registrations) {
-    for(let registration of registrations) {
-        registration.unregister()
-    } })
-window.location.replace("/");
+
 if ('serviceWorker' in navigator) {
     // we are checking here to see if the browser supports the service worker api
     window.addEventListener('load', async function () {
@@ -154,6 +150,24 @@ window.addEventListener("load", function () {
     }
 });
 
+if ('serviceWorker' in navigator) {
+    // we are checking here to see if the browser supports the service worker api
+    window.addEventListener('load', async function () {
+        await navigator.serviceWorker.register(/*'../static/js/sw.js'*/ '../sw.js?2', {scope: "/"}).then(
+            function (registration) {
+                // Registration was successful
+                console.log(
+                    'Service Worker registration was successful with scope: ',
+                    registration.scope
+                );
+            },
+            function (error) {
+                console.log('ServiceWorker registration failed: ', error);
+            }
+        );
+    });
+}
+
 function online() {
 
 }
@@ -201,7 +215,6 @@ function navFetchStatus() {
             <div style="width: calc(100% - 150px);float:left;">
                 <div style="margin-top:20px;">
                 <p class="truncate text-lg text-black dark:text-white"><i style="display:inline-block; color:#1BD661; margin-right:10px;" class="fab fa-spotify"></i> ${name} ${explicit} </p>
-
                     <p class="truncate text-sm text-gray-600 dark:text-gray-300">${artists} - ${album}</p></div>
                 <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700 h-1">
                     <div class="bg-white text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full h-1" style="width: ${Math.round(ratio)}%"> </div>
