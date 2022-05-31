@@ -5,7 +5,7 @@ from flask import session, request
 
 from . import internal
 from .....static.python.classes.Avatar import Avatar
-from .....static.python.mongodb import create
+from .....static.python.mongodb import create, read
 
 
 @internal.route("/create-user", methods=["POST"])
@@ -48,3 +48,15 @@ def create_user():
         session["avatar"] = data["avatar"].avatar_url
 
     return validation[0]
+
+@internal.route("/search-user", methods=["POST"])
+def search_user():
+    data = request.get_json()
+    data = data["search"]
+    users = read.search_user(data)
+    finaldata = ""
+    for i in users:
+        finaldata+="i.username"
+        if i != users[-1]:
+            finaldata+="•"
+    return finaldata

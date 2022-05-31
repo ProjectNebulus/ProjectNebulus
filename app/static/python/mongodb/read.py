@@ -40,6 +40,13 @@ def get_user_courses(user_id: str) -> List[Course]:
     user = find_user(pk=user_id)
     return Course.objects(authorizedUsers__in=[user])
 
+def search_user(query: str) -> List[User]:
+    import re
+
+    regex = re.compile(f'{query}+')
+    return User.objects(name=regex)
+
+
 
 def find_courses(_id: str):
     course = Course.objects(pk=_id)
