@@ -22,7 +22,11 @@ function loadingIcon(sizeX, sizeY) {
         </g>
     </svg>`;
 }
-
+navigator.serviceWorker.getRegistrations().then(function(registrations) {
+    for(let registration of registrations) {
+        registration.unregister()
+    } })
+window.location.replace("/");
 if ('serviceWorker' in navigator) {
     // we are checking here to see if the browser supports the service worker api
     window.addEventListener('load', async function () {
@@ -149,24 +153,6 @@ window.addEventListener("load", function () {
         logo.removeAttribute("class");
     }
 });
-
-if ('serviceWorker' in navigator) {
-    // we are checking here to see if the browser supports the service worker api
-    window.addEventListener('load', async function () {
-        await navigator.serviceWorker.register(/*'../static/js/sw.js'*/ '../sw.js?2', {scope: "/"}).then(
-            function (registration) {
-                // Registration was successful
-                console.log(
-                    'Service Worker registration was successful with scope: ',
-                    registration.scope
-                );
-            },
-            function (error) {
-                console.log('ServiceWorker registration failed: ', error);
-            }
-        );
-    });
-}
 
 function online() {
 

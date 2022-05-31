@@ -43,7 +43,7 @@ def get_user_courses(user_id: str) -> List[Course]:
 def search_user(query: str) -> List[User]:
     import re
 
-    regex = re.compile(f'{query}+')
+    regex = re.compile(f'(?i) {query}+')
     return User.objects(username=regex)
 
 
