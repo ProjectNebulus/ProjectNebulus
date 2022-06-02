@@ -1,15 +1,17 @@
 {% extends "layout.html" %}
 {% block main %}
-    <link id="theme" rel="stylesheet" type="text/css" href="/static/stylesheets/darkblue.css" />
     {% include "navbar.html" %}
     <div style="margin-left:20%;">
         <p class="text-4xl dark:text-white">Nebulus Documents</p><br><br>
-        <label for="website-admin" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Document Name</label>
+        <label for="website-admin" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Document
+            Name</label>
         <div class="flex">
   <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
         <i class="material-icons">article</i>
   </span>
-            <input type="text" id="website-admin" class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="My Document">
+            <input type="text" id="website-admin"
+                   class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                   placeholder="My Document">
         </div>
 
         <br><br>
@@ -18,254 +20,319 @@
                 <div class="flex justify-between items-center py-2 px-3 border-b dark:border-gray-600">
                     <div class="flex flex-wrap items-center divide-gray-200 sm:divide-x dark:divide-gray-600">
                         <div class="flex items-center space-x-1 sm:pr-4">
-                            <button type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd"></path></svg>
+                            <button type="button"
+                                    class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
                             </button>
-                            <button type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
+                            <button type="button"
+                                    class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
                             </button>
-                            <button type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path></svg>
+                            <button type="button"
+                                    class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
                             </button>
-                            <button type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                            <button type="button"
+                                    class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
                             </button>
-                            <button type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-.464 5.535a1 1 0 10-1.415-1.414 3 3 0 01-4.242 0 1 1 0 00-1.415 1.414 5 5 0 007.072 0z" clip-rule="evenodd"></path></svg>
+                            <button type="button"
+                                    class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-.464 5.535a1 1 0 10-1.415-1.414 3 3 0 01-4.242 0 1 1 0 00-1.415 1.414 5 5 0 007.072 0z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
                             </button>
                         </div>
                         <div class="flex items-center space-x-1 sm:pr-4">
-                            <button type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                            <button type="button"
+                                    class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
                                 <strong id="b" onclick="change('b')" class='buttonSelect'>B</strong>
                             </button>
-                            <button type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                            <button type="button"
+                                    class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
                                 <i id="i" onclick="change('i')" class='buttonSelect'>I</i>
                             </button>
-                            <button type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                            <button type="button"
+                                    class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
                                 <u id="u" onclick="change('u')" class='buttonSelect'>U</u>
                             </button>
-                            <button type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                            <button type="button"
+                                    class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
                                 <span style='color:red;' class='buttonSelect' id="a" onclick="change('a')">A</span>
                             </button>
-                            <button type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                <span class='buttonSelect' id="hl" onclick="change('hl')"><i class="material-icons" style="color:white;font-size:1em;">mode</i>
+                            <button type="button"
+                                    class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                <span class='buttonSelect' id="hl" onclick="change('hl')"><i class="material-icons"
+                                                                                             style="color:white;font-size:1em;">mode</i>
                             </button>
                         </div>
                         <div class="flex flex-wrap items-center space-x-1 sm:pl-4">
-                            <button type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                            <button type="button"
+                                    class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
                             </button>
-                            <button type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path></svg>
+                            <button type="button"
+                                    class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
                             </button>
-                            <button type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                            <button type="button"
+                                    class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
                             </button>
-                            <button type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                            <button type="button"
+                                    class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
                             </button>
                         </div>
                     </div>
-                    <button type="button" data-tooltip-target="tooltip-fullscreen" class="p-2 text-gray-500 rounded cursor-pointer sm:ml-auto hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 4a1 1 0 011-1h4a1 1 0 010 2H6.414l2.293 2.293a1 1 0 11-1.414 1.414L5 6.414V8a1 1 0 01-2 0V4zm9 1a1 1 0 010-2h4a1 1 0 011 1v4a1 1 0 01-2 0V6.414l-2.293 2.293a1 1 0 11-1.414-1.414L13.586 5H12zm-9 7a1 1 0 012 0v1.586l2.293-2.293a1 1 0 111.414 1.414L6.414 15H8a1 1 0 010 2H4a1 1 0 01-1-1v-4zm13-1a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 010-2h1.586l-2.293-2.293a1 1 0 111.414-1.414L15 13.586V12a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                    <button type="button" data-tooltip-target="tooltip-fullscreen"
+                            class="p-2 text-gray-500 rounded cursor-pointer sm:ml-auto hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M3 4a1 1 0 011-1h4a1 1 0 010 2H6.414l2.293 2.293a1 1 0 11-1.414 1.414L5 6.414V8a1 1 0 01-2 0V4zm9 1a1 1 0 010-2h4a1 1 0 011 1v4a1 1 0 01-2 0V6.414l-2.293 2.293a1 1 0 11-1.414-1.414L13.586 5H12zm-9 7a1 1 0 012 0v1.586l2.293-2.293a1 1 0 111.414 1.414L6.414 15H8a1 1 0 010 2H4a1 1 0 01-1-1v-4zm13-1a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 010-2h1.586l-2.293-2.293a1 1 0 111.414-1.414L15 13.586V12a1 1 0 011-1z"
+                                  clip-rule="evenodd"></path>
+                        </svg>
                     </button>
-                    <div id="tooltip-fullscreen" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                    <div id="tooltip-fullscreen" role="tooltip"
+                         class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
                         Show full screen
                         <div class="tooltip-arrow" data-popper-arrow></div>
                     </div>
                 </div>
                 <div class="py-2 px-4 bg-white rounded-b-lg dark:bg-gray-800">
                     <label for="editor" class="sr-only">Publish post</label>
-{#                    <textarea id="editor" rows="8" class="block px-0 w-full text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Write an article..." required></textarea>#}
-                    <div contenteditable="true" id="editor" rows="8" class="block px-0 w-full text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Write an article...">Welcome to <span style="color: lightgreen">Nebulus</span> Docs. Type <strong>Bold</strong> with the buttons above or <strong>Command B</strong>. Type <i>Italics</i> with the buttons above or <i>Command I</i>.
-
+                    <div contenteditable="true" id="editor" class="block px-0 w-full text-sm text-gray-800 bg-white
+                     border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400">
+                        Welcome to <span style="color: lightgreen">Nebulus</span> Docs.
+                        Type <b>Bold</b> with the <b>B</b> button above or <strong>Command B</strong>.
+                        Type <i>Italics</i> with the <b>I</b> button above or <i>Command I</i>.
                     </div>
-            </div><br><br>
-            <button type="submit" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
-                Download Document as PDF
-            </button>
+                </div>
+                <br><br>
+                <button type="submit"
+                        class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
+                    Download Document as PDF
+                </button>
         </form>
-        </div>
+    </div>
     </div>
 
     <script>
-        function change(i) {
-            if (document.getElementById(i).style.backgroundColor=="rgba(100, 152, 237, 0.3)"){
-                document.getElementById(i).style.backgroundColor="";
-            }
-            else{
-                document.getElementById(i).style.backgroundColor="rgba(100, 152, 237, 0.3)";
-            }
+        function change(id) {
+            const button = document.getElementById(id);
+            button.style.background = button.style.background === "" ? "rgba(100, 152, 237, 0.3)" : "";
         }
     </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
-        function getRandomInt(max) {
-            return Math.floor(Math.random() * max);
-        }
-        function swapStyleSheet() {
-            var sheet = "";
-            var request =  $.ajax({
-                type: "GET",
-                url: "/getTheme"
-            });
-            request.done(function(data){
-                document.getElementById("theme").setAttribute("href", data+"?version="+String.valueOf(getRandomInt(1000000)));
-            });
-            request.fail(function (jqXHR, textStatus) {
-                alert('bruh')
-            });
-        }
-        window.onload = swapStyleSheet;
-    </script>
     <style>
-
         @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-        #editor{
+
+        #editor {
             font-family: 'Roboto', sans-serif !important;
-            height:500px;
+            height: 500px;
             outline-color: #1A56DB;
-            padding:15px;
+            padding: 15px;
         }
 
 
         input[type=email]:disabled {
-            border-color:#424040;
-            color:#424040;
-            background:rgba(66, 64, 64,0.2);
+            border-color: #424040;
+            color: #424040;
+            background: rgba(66, 64, 64, 0.2);
         }
+
         input[type=password]:disabled {
-            border-color:#424040;
-            color:#424040;
-            background:rgba(66, 64, 64,0.2);
+            border-color: #424040;
+            color: #424040;
+            background: rgba(66, 64, 64, 0.2);
         }
+
         input[type=number]:disabled {
-            border-color:#424040;
-            color:#424040;
-            background:rgba(66, 64, 64,0.2);
+            border-color: #424040;
+            color: #424040;
+            background: rgba(66, 64, 64, 0.2);
         }
+
         input[type=text]:disabled {
-            border-color:#424040;
-            color:#424040;
-            background:rgba(66, 64, 64,0.2);
-        }
-        input[type=email]{
-            height:2.3em;
-            background:transparent;
-            color:white;
-            width:70%;
-            border-style: none none solid none;
-            border-width:2px;
-            border-color:white;
-            outline:none;
-            font-size:1em;
-        }
-        input[type=password]{
-            height:2.3em;
-            background:transparent;
-            color:white;
-            width:70%;
-            border-style: none none solid none;
-            border-width:2px;
-            border-color:white;
-            outline:none;
-            font-size:1em;
+            border-color: #424040;
+            color: #424040;
+            background: rgba(66, 64, 64, 0.2);
         }
 
-        input[type=number]{
-            height:2.3em;
-            background:transparent;
-            color:white;
-            width:70%;
+        input[type=email] {
+            height: 2.3em;
+            background: transparent;
+            color: white;
+            width: 70%;
             border-style: none none solid none;
-            border-width:2px;
-            border-color:white;
-            outline:none;
-            font-size:1em;
+            border-width: 2px;
+            border-color: white;
+            outline: none;
+            font-size: 1em;
         }
 
-        input[type=password]{
-            height:2.3em;
-            background:transparent;
-            color:white;
-            width:70%;
+        input[type=password] {
+            height: 2.3em;
+            background: transparent;
+            color: white;
+            width: 70%;
             border-style: none none solid none;
-            border-width:2px;
-            border-color:white;
-            outline:none;
-            font-size:1em;
+            border-width: 2px;
+            border-color: white;
+            outline: none;
+            font-size: 1em;
         }
-        input[type=text]{
-            height:2.3em;
-            background:transparent;
-            color:white;
-            width:70%;
+
+        input[type=number] {
+            height: 2.3em;
+            background: transparent;
+            color: white;
+            width: 70%;
             border-style: none none solid none;
-            border-width:2px;
-            border-color:white;
-            outline:none;
-            font-size:1em;
+            border-width: 2px;
+            border-color: white;
+            outline: none;
+            font-size: 1em;
         }
-        .button{
-            float:left;
-            padding:10px;
-            font-size:1.5em;
-            border-radius:10px;background:#009dffff;
-            color:white;
+
+        input[type=password] {
+            height: 2.3em;
+            background: transparent;
+            color: white;
+            width: 70%;
+            border-style: none none solid none;
+            border-width: 2px;
+            border-color: white;
+            outline: none;
+            font-size: 1em;
         }
-        .outerDiv{
-            float:left;padding:30px;width:50px;height:100px;
+
+        input[type=text] {
+            height: 2.3em;
+            background: transparent;
+            color: white;
+            width: 70%;
+            border-style: none none solid none;
+            border-width: 2px;
+            border-color: white;
+            outline: none;
+            font-size: 1em;
         }
-        .icon{
-            font-size:3em;background-color:rgba(0, 157, 255,0.2);color:rgb(0, 157, 255);border-radius:50%;padding:10px;
+
+        .button {
+            float: left;
+            padding: 10px;
+            font-size: 1.5em;
+            border-radius: 10px;
+            background: #009dffff;
+            color: white;
         }
-        .divtext{
-            color:rgb(0, 157, 255);
+
+        .outerDiv {
+            float: left;
+            padding: 30px;
+            width: 50px;
+            height: 100px;
         }
-        .textbook{
+
+        .icon {
+            font-size: 3em;
+            background-color: rgba(0, 157, 255, 0.2);
+            color: rgb(0, 157, 255);
+            border-radius: 50%;
+            padding: 10px;
+        }
+
+        .divtext {
+            color: rgb(0, 157, 255);
+        }
+
+        .textbook {
             background: #FEFEFE;
-            border-radius:25px;
-            color:black;
-            width:400px;
-            height:550px;
-            padding:20px;
-            margin:20px;
-            float:left;
-        }
-        .textbook-image{
-            height:300px;
+            border-radius: 25px;
+            color: black;
+            width: 400px;
+            height: 550px;
+            padding: 20px;
+            margin: 20px;
+            float: left;
         }
 
-        .textbook-button{
-            border-radius:15px;
-            color:white;
-            background:#00bfff;
-            font-size:1.5em;
-            border-style:none;
-            padding:10px;
-        }
-        .textbook-button:hover{
-            background:#067094;
-        }
-        .bar{
-            padding-right:20px;
-            padding-left:20px;
-            padding-top:20px;
-            height:50px;
-            border-style:solid;
-            border-color:grey;
-            border-width:1px;
-            border-radius:10px;
-            background:transparent;
-            outline:none;
-            color:white;
+        .textbook-image {
+            height: 300px;
         }
 
-        .buttonSelect{
-            cursor: -webkit-grab;
-            cursor: grab;
+        .textbook-button {
+            border-radius: 15px;
+            color: white;
+            background: #00bfff;
+            font-size: 1.5em;
+            border-style: none;
+            padding: 10px;
         }
+
+        .textbook-button:hover {
+            background: #067094;
+        }
+
+        .bar {
+            padding-right: 20px;
+            padding-left: 20px;
+            padding-top: 20px;
+            height: 50px;
+            border-style: solid;
+            border-color: grey;
+            border-width: 1px;
+            border-radius: 10px;
+            background: transparent;
+            outline: none;
+            color: white;
+        }
+
         div.editable {
             width: 300px;
             height: 200px;

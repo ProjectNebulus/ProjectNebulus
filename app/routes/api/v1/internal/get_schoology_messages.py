@@ -1,10 +1,9 @@
 from datetime import datetime
 
 from flask import jsonify
-from schoolopy import Schoology
 
+from static.python.mongodb import read
 from . import internal
-from ....main import utils
 from ....main.utils import private_endpoint
 from .....static.python.colors import *
 
@@ -12,10 +11,7 @@ from .....static.python.colors import *
 @internal.route("/get_schoology_messages", methods=["GET"])
 @private_endpoint
 def get_schoology_messages():
-    sc = utils.getSchoologyAuth()
-
-    if type(sc) is not Schoology:  # then it's an exception
-        return str(sc)
+    sc = read.getSchoologyAuth()
 
     messages = sc.get_inbox_messages()
     newMessages = []

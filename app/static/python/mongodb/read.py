@@ -3,7 +3,8 @@ from __future__ import annotations
 import re
 from typing import List
 
-from flask import Response
+import schoolopy
+from flask import Response, session
 
 from ..classes import *
 from ..security import valid_password
@@ -88,7 +89,7 @@ def getSchoology(**kwargs) -> List[Schoology] | None:
 
 
 def getClassroom(
-    userID: str = None, username: str = None, email: str = None
+        userID: str = None, username: str = None, email: str = None
 ) -> GoogleClassroom:
     return find_user(id=userID, username=username, email=email).gclassroom
 
@@ -98,7 +99,7 @@ def getSpotify(userID: str = None, username: str = None, email: str = None) -> S
 
 
 def getSpotifyCache(
-    userID: str = None, username: str = None, email: str = None
+        userID: str = None, username: str = None, email: str = None
 ) -> Spotify | None:
     try:
         return find_user(
@@ -198,8 +199,8 @@ def sort_course_events(user_id: str, course_id: int):
                 {
                     key: list(result)
                     for key, result in groupby(
-                        sorted_announcements, key=lambda obj: obj.date.date()
-                    )
+                    sorted_announcements, key=lambda obj: obj.date.date()
+                )
                 }.items()
             )
         )
@@ -235,8 +236,8 @@ def sort_user_events(user_id: str, maxDays=8, maxEvents=16):
                 {
                     key: list(result)
                     for key, result in groupby(
-                        sorted_announcements, key=lambda obj: obj.date.date()
-                    )
+                    sorted_announcements, key=lambda obj: obj.date.date()
+                )
                 }.items()
             )[-maxDays:]
         )
@@ -260,6 +261,32 @@ def unsorted_user_events(user_id: str) -> List[List]:
         announcements,
         sorted(events_assessments_assignments, key=lambda obj: sortByDateTime(obj)),
     ]
+
+
+def getSchoologyAuth() -> schoolopy.Schoology:
+    schoology = getSchoology(username=session.get("username"))[0]
+    request_token = schoology.Schoology_request_token
+    request_token_secret = schoology.Schoology_request_secret
+    access_token = schoology.Schoology_access_token
+    access_token_secret = schoology.Schoology_access_secret
+    link = schoology.schoologyDomain
+    key = schoology.apikey
+    secret = schoology.apisecret
+    auth = schoolopy.Auth(
+        key,
+        secret,
+        domain=link,
+        three_legged=True,
+        request_token=request_token,
+        request_token_secret=request_token_secret,
+        access_token=access_token,
+        access_token_secret=access_token_secret,
+    )
+    auth.authorize()
+    sc = schoolopy.Schoology(auth)
+    sc.limit = 5
+
+    return sc
 
 
 def check_signup_user(username) -> str:

@@ -1,20 +1,27 @@
 import json
 import os
 import re
-import requests
 
+import requests
 from flask import render_template, request, redirect
 from werkzeug.utils import secure_filename
 
 from . import main_blueprint
 from .utils import logged_in
+
 UPLOAD_FOLDER = './app/static'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'heic', 'webm'}
+
+
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
 def urlEncodeNonAscii(b):
     return re.sub('[\x80-\xFF]', lambda c: '%%%02x' % ord(c.group(0)), b).encode()
+
+
 def search(query):
     import urllib.request
     import re
@@ -32,6 +39,8 @@ def search(query):
     video_ids = re.findall(r"watch\?v=(\S{11})", html.read().decode())
 
     return video_ids[0]
+
+
 class Musixmatch(object):
     def __init__(self, apikey):
         """Define objects of type Musixmatch.
@@ -595,10 +604,11 @@ class Musixmatch(object):
         )
         return data
 
+
 def main_program(file_name):
     import io
     import os
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="./app/routes/main/festive-freedom-309323-0124a1c976ae.json"
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "./app/routes/main/festive-freedom-309323-0124a1c976ae.json"
     from google.cloud import vision
     client = vision.ImageAnnotatorClient()
     file_name = os.path.abspath(file_name)
@@ -607,14 +617,14 @@ def main_program(file_name):
         content = image_file.read()
     image = vision.Image(content=content)
 
-    #Logos
+    # Logos
     logo_list = []
     response = client.logo_detection(image=image)
     logos = response.logo_annotations
     for logo in logos:
         logo_list.append(logo.description)
 
-    if (len(logo_list)>0):
+    if (len(logo_list) > 0):
         return logo_list
     response = client.landmark_detection(image=image)
     landmarks = response.landmark_annotations
@@ -622,11 +632,10 @@ def main_program(file_name):
     for landmark in landmarks:
         landmark_list.append(landmark.description)
 
-
-    if (len(landmark_list)>0):
+    if (len(landmark_list) > 0):
         return landmark_list
 
-    #General
+    # General
     response = client.label_detection(image=image)
     labels = response.label_annotations
     general_list = []
@@ -634,8 +643,8 @@ def main_program(file_name):
     for label in labels:
         general_list.append(label.description)
 
-
     return general_list
+
 
 @main_blueprint.route("/music", methods=["GET"])
 @logged_in
@@ -646,17 +655,18 @@ def music():
 @main_blueprint.route('/music', methods=['POST'])
 @logged_in
 def music_post():
-
     if str(request.form['type']) == "4":
         if 'search' not in request.files:
             print("1")
             return redirect(request.url)
+
         file = request.files['search']
         # If the user does not select a file, the browser submits an
         # empty file without a filename.
         if file.filename == '':
             print("2")
             return redirect(request.url)
+
         if file and allowed_file(file.filename):
             print("3")
             filename = secure_filename(file.filename)
@@ -664,14 +674,19 @@ def music_post():
             a = main_program(os.path.join(UPLOAD_FOLDER, filename))
             os.remove(os.path.join(UPLOAD_FOLDER, filename))
             musixmatch = Musixmatch('bbd8cc3d9f6c1444e01d9d66b44f0f49')
-            songs= []
+            songs = []
             for i in a:
-                musicdata = musixmatch.track_search(q_track = i,page_size=10,page=1, s_track_rating='desc')
+                musicdata = musixmatch.track_search(q_track=i, page_size=10, page=1, s_track_rating='desc')
                 songs += musicdata["message"]["body"]["track_list"]
-            for i in range(0,len(songs)):
+            for i in range(0, len(songs)):
                 songs[i] = songs[i]['track']
 
-            return render_template("musixmatch.html",songs=songs, id_ = search(songs[0]["track_name"]+" by "+songs[0]["artist_name"]))
+            return render_template(
+                "musixmatch.html",
+                songs=songs,
+                id_=search(songs[0]["track_name"] + " by " + songs[0]["artist_name"])
+            )
+
     text = request.form['search']
     type = request.form['type']
     youtube_needed = True
@@ -707,70 +722,67 @@ def music_post():
             headers={
                 'Authorization': f'Bearer {access_token}',
                 'Content-Type': 'application/json'
-            }).json()
-        #print(artist_info)
+            }
+        ).json()
+        # print(artist_info)
         print(access_token)
 
         spotify_arr = []
-        with open('app/static/json/cache.json', 'r') as file:
-            file = json.load(file)
-        for i in range(0, len(artist_info['tracks']['items'])):
-            if i < 10:
-                mydict = {}
-                mydict['image'] = str(
-                    artist_info['tracks']['items'][i]['album']['images'][0]['url'])
-                mydict['author'] = (artist_info['tracks']['items'][i]['album']
-                ['artists'][0]['name'])
-                mydict['author_url'] = artist_info['tracks']['items'][i]['album'][
-                    'artists'][0]['external_urls']["spotify"]
-                mydict['album'] = (
-                    artist_info['tracks']['items'][i]['album']['name'])
-                mydict['explicit'] = artist_info['tracks']['items'][i]['explicit']
-                mydict['name'] = (artist_info['tracks']['items'][i]['name'])
-                mydict['preview'] = (
-                    artist_info['tracks']['items'][i]['preview_url'])
-                mydict['link'] = (
-                    artist_info['tracks']['items'][i]['external_urls']['spotify'])
-                mydict['code'] = mydict['link'][31:len(mydict['link'])]
-                mydict['uri'] = (artist_info['tracks']['items'][i]['uri'])
-                spotify_arr.insert(0, mydict)
-                file.append(mydict)
+        file = json.load(open('app/static/json/cache.json', 'r'))
+        for song in artist_info["tracks"]["items"][:10]:
+            mydict = {}
+
+            mydict['image'] = str(song['album']['images'][0]['url'])
+            mydict['author'] = (song['album']['artists'][0]['name'])
+            mydict['author_url'] = song['album']['artists'][0]['external_urls']["spotify"]
+            mydict['album'] = (song['album']['name'])
+            mydict['explicit'] = song['explicit']
+            mydict['name'] = (song['name'])
+            mydict['preview'] = (song['preview_url'])
+            mydict['link'] = (song['external_urls']['spotify'])
+            mydict['code'] = mydict['link'][31:]
+            mydict['uri'] = (song['uri'])
+            spotify_arr.insert(0, mydict)
+            file.append(mydict)
+
         processed_text = text.upper()
         with open('app/static/json/cache.json', 'w') as out:
-            file = json.dump(file, out, indent=4)
+            json.dump(file, out, indent=4)
+
     if youtube_needed:
         import urllib.request
         import urllib.parse
         import re
-        processed_text =  text.upper()
+        processed_text = text.upper()
         search_keyword = processed_text
+
         while ' ' in search_keyword:
             for i in range(0, len(search_keyword)):
                 if ' ' == search_keyword[i]:
                     search_keyword = search_keyword[0:i] + '%20' + search_keyword[
                                                                    i + 1:len(search_keyword)]
                     break
-        search_keyword = urllib.parse.quote(search_keyword,encoding='UTF-8')
+        search_keyword = urllib.parse.quote(search_keyword, encoding='UTF-8')
         html = urllib.request.urlopen(
             # urlEncodeNonAscii(
             #     "https://www.youtube.com/results?search_query=" + search_keyword
             # )
             "https://www.youtube.com/results?search_query=" + search_keyword
-            )
+        )
 
         video_ids = re.findall(r"watch\?v=(\S{11})", html.read().decode())
 
         def find_data(link, param):
-            #author_name
-            #author_url
-            #thumbnail_url
-            #title
+            # author_name
+            # author_url
+            # thumbnail_url
+            # title
             import urllib.request
             import json
             import urllib
             import pprint
 
-            #change to yours VideoID or change url inparams
+            # change to yours VideoID or change url inparams
             VideoID = link
 
             params = {
@@ -784,7 +796,7 @@ def music_post():
             with urllib.request.urlopen(url) as response:
                 response_text = response.read()
                 data = json.loads(response_text.decode())
-                #pprint.pprint(data)
+                # pprint.pprint(data)
                 return data[param]
 
     if len(video_ids) == 0 and len(spotify_arr) == 0:
@@ -794,16 +806,16 @@ def music_post():
         mylist = []
         for i in range(0, len(video_ids)):
             if i < 10:
-                #author_name
-                #author_url
-                #thumbnail_url
-                #title
+                # author_name
+                # author_url
+                # thumbnail_url
+                # title
 
                 try:
                     my_dict = {"id": video_ids[i]}
                     my_dict["author_name"] = find_data(video_ids[i], "author_name")
                     my_dict["author_url"] = find_data(video_ids[i], "author_url")
-                    my_dict["thumbnail_url"] = find_data(video_ids[i],"thumbnail_url")
+                    my_dict["thumbnail_url"] = find_data(video_ids[i], "thumbnail_url")
                     my_dict["title"] = find_data(video_ids[i], "title")
                     mylist.append(my_dict)
                 except:
@@ -831,17 +843,17 @@ def music_spotify(smth):
 
 @main_blueprint.route('/play/<id_>')
 @logged_in
-def music_video(id_:str):
+def music_video(id_: str):
     def find_data(link, param):
-        #author_name
-        #author_url
-        #thumbnail_url
-        #title
+        # author_name
+        # author_url
+        # thumbnail_url
+        # title
         import urllib.request
         import json
         import urllib
         import pprint
-        #change to yours VideoID or change url inparams
+        # change to yours VideoID or change url inparams
         VideoID = link
         params = {"format": "json", "url": "https://www.youtube.com/watch?v=%s" % VideoID}
         url = "https://www.youtube.com/oembed"
@@ -855,10 +867,11 @@ def music_video(id_:str):
 
     youtube = f'https://www.youtube.com/watch?v={id_}'
     link = f'https://nebulus.ml/play/{id_}'
-    author = find_data(id_,'author_name')
-    author_url = find_data(id_,'author_url')
-    sub = author_url+'?sub_confirmation=1'
-    thumbnail_url = find_data(id_,'thumbnail_url')
-    title = find_data(id_,'title')
+    author = find_data(id_, 'author_name')
+    author_url = find_data(id_, 'author_url')
+    sub = author_url + '?sub_confirmation=1'
+    thumbnail_url = find_data(id_, 'thumbnail_url')
+    title = find_data(id_, 'title')
     content = f'Listen to {title} by {author} on Nebulus!'
-    return render_template('musicvideo.html',author=author,author_url=author_url,thumbnail_url=thumbnail_url,title=title,id=id_,content=content,youtube=youtube,sub=sub,link=link)
+    return render_template('musicvideo.html', author=author, author_url=author_url, thumbnail_url=thumbnail_url,
+                           title=title, id=id_, content=content, youtube=youtube, sub=sub, link=link)

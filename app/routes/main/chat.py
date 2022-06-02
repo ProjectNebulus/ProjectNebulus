@@ -1,11 +1,11 @@
 from datetime import datetime
 
 from flask import render_template, session
-from schoolopy import Schoology
 
-from ...static.python.colors import getColor
-from . import main_blueprint, utils
+from static.python.mongodb import read
+from . import main_blueprint
 from .utils import logged_in
+from ...static.python.colors import getColor
 
 
 @main_blueprint.route("/chat")
@@ -19,10 +19,7 @@ def chat():
 def chatPage(page):
     newMessages = None
     if page == "email":
-        sc = utils.getSchoologyAuth()
-
-        if type(sc) is not Schoology:  # then it's an exception
-            return str(sc)
+        sc = read.getSchoologyAuth()
 
         messages = sc.get_inbox_messages()
         newMessages = []

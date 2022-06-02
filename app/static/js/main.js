@@ -103,7 +103,7 @@ function invertSite() {
     }
 
     if (localStorage.getItem("color-theme") === "dark") {
-        let elements = document.getElementsByClassName("changable-gradient");
+        let elements = document.getElementsByClassName("changeable-gradient");
         console.log(elements);
         for (let element of elements) {
             element.classList.remove("gradient-text");
@@ -111,7 +111,7 @@ function invertSite() {
         }
     }
     else {
-        let elements = document.getElementsByClassName("changable-gradient");
+        let elements = document.getElementsByClassName("changeable-gradient");
         console.log(elements);
         for (let element of elements) {
             element.classList.remove("gradient-text-dark");
