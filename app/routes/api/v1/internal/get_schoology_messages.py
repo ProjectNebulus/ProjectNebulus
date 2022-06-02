@@ -2,7 +2,7 @@ from datetime import datetime
 
 from flask import jsonify
 
-from static.python.mongodb import read
+from .....static.python.mongodb import read
 from . import internal
 from ....main.utils import private_endpoint
 from .....static.python.colors import *

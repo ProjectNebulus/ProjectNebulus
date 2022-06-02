@@ -2,7 +2,7 @@ from datetime import datetime
 
 from flask import render_template, session
 
-from static.python.mongodb import read
+from ...static.python.mongodb import read
 from . import main_blueprint
 from .utils import logged_in
 from ...static.python.colors import getColor
