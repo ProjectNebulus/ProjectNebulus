@@ -1,6 +1,49 @@
 {% extends "layout.html" %}
 {% block main %}
     {% include "navbar.html" %}
+    <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
+    <script>
+
+        function change(id) {
+            if (id === "b") {
+                document.execCommand('bold');
+            }
+            if (id === "i") {
+                document.execCommand('italic');
+            }
+            if (i === "u") {
+                document.execCommand('underline');
+            }
+            document.getElementById("editor").focus();
+        }
+        function fullscreen(){
+            let css = "width:100vw;height:100vh;z-index:50;position: absolute; top: 0; left: 0;";
+            let element = document.getElementById("daform");//("editor");
+            if (element.style.height !== "100vh") {
+                element.style.cssText = css;
+            } else {
+                element.style.cssText = "";
+            }
+        }
+        function parse(){
+            var div = document.getElementById("editor");
+
+            twemoji.parse(div);
+
+            var img = div.querySelector('img');
+
+            // note the div is preserved
+            img.parentNode === div; // true
+
+            img.src;        // https://twemoji.maxcdn.com/v/latest/72x72/2764.png
+            img.alt;        // \u2764\uFE0F
+            img.className;  // emoji
+            img.draggable;  // false
+        }
+        parse();
+        var div = document.getElementById("editor");
+        div.onchange = parse;
+    </script>
     <div style="margin-left:20%;">
         <p class="text-4xl dark:text-white">Nebulus Documents</p><br><br>
         <label for="website-admin" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Document
@@ -15,7 +58,7 @@
         </div>
 
         <br><br>
-        <form>
+        <form id="daform">
             <div class="mb-4 w-full bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600">
                 <div class="flex justify-between items-center py-2 px-3 border-b dark:border-gray-600">
                     <div class="flex flex-wrap items-center divide-gray-200 sm:divide-x dark:divide-gray-600">
@@ -128,7 +171,7 @@
                             </button>
                         </div>
                     </div>
-                    <button type="button" data-tooltip-target="tooltip-fullscreen"
+                    <button type="button" data-tooltip-target="tooltip-fullscreen" onclick="fullscreen();"
                             class="p-2 text-gray-500 rounded cursor-pointer sm:ml-auto hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -144,7 +187,7 @@
                 </div>
                 <div class="py-2 px-4 bg-white rounded-b-lg dark:bg-gray-800">
                     <label for="editor" class="sr-only">Publish post</label>
-                    <div contenteditable="true" id="editor" class="block px-0 w-full text-sm text-gray-800 bg-white
+                    <div contenteditable="true" tabindex="0" id="editor" class="block px-0 w-full text-sm text-gray-800 bg-white
                      border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400">
                         Welcome to <span style="color: lightgreen">Nebulus</span> Docs.
                         Type <b>Bold</b> with the <b>B</b> button above or <strong>Command B</strong>.
@@ -160,19 +203,6 @@
     </div>
     </div>
 
-    <script>
-        function change(id) {
-            const button = document.getElementById(id);
-            if (id === "b"){
-                document.execCommand('bold');
-            }
-            if (id === "i"){
-                document.execCommand('italic');
-            }
-            if (i === "u"){
-                document.execCommand('underline');
-            }
-    </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <style>
