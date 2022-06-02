@@ -1,3 +1,4 @@
+import $ from 'jquery';
 const siteName = window.location.protocol + "//" + window.location.host;
 
 function loadingIcon(sizeX, sizeY) {
