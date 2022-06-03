@@ -7,8 +7,20 @@
         display: inline-block;
         height: 16px;
     }
+    #editor{
+        background: white;
+        color: black;
+        width: 80%;
+        margin: auto;
+        margin-top: 30px;
+        padding:40px;
+    }
     </style><script>
-
+        function changeheight(){
+            var w = document.getElementById("editor").offsetWidth;
+            w = w/8.5*11;
+            document.getElementById("editor").style.height = w + "px";
+        }
         function change(id) {
             if (id === "b") {
                 document.execCommand('bold');
@@ -45,33 +57,23 @@
                                       // it replaces .size info, if any
             });
 
-            var img = div.querySelector('img');
-
-            // note the div is preserved
-            img.parentNode === div; // true
-
-            img.src;        // https://twemoji.maxcdn.com/v/latest/72x72/2764.png
-            img.alt;        // \u2764\uFE0F
-            img.className;  // emoji
-            img.draggable;  // false
+            {#var img = div.querySelector('img');#}
+            {##}
+            {#// note the div is preserved#}
+            {#img.parentNode === div; // true#}
+            {##}
+            {#img.src;        // https://twemoji.maxcdn.com/v/latest/72x72/2764.png#}
+            {#img.alt;        // \u2764\uFE0F#}
+            {#img.className;  // emoji#}
+            {#img.draggable;  // false#}
         }
+        changeheight();
         parse();
-        setInterval(parse, 100)
+    </script>
+    <script>
+        setInterval(parse, 100);
     </script>
     <div style="margin:auto;width:90%;">
-        <p class="text-4xl dark:text-white">Nebulus Documents</p><br><br>
-        <label for="website-admin" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Document
-            Name</label>
-        <div class="flex">
-  <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
-        <i class="material-icons">article</i>
-  </span>
-            <input type="text" id="website-admin"
-                   class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                   placeholder="My Document">
-        </div>
-
-        <br><br>
         <form id="daform">
             <div class="mb-4 w-full bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600">
                 <div class="flex justify-between items-center py-2 px-3 border-b dark:border-gray-600">
@@ -199,7 +201,20 @@
                         <div class="tooltip-arrow" data-popper-arrow></div>
                     </div>
                 </div>
-                <div class="py-2 px-4 bg-white rounded-b-lg dark:bg-gray-800">
+                <div class="py-2 px-4 bg-white rounded-b-lg dark:bg-gray-800" style="overflow-y:scroll;height:100%;">
+                    <p class="text-4xl dark:text-white">Nebulus Documents</p><br><br>
+                    <label for="website-admin" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Document
+                        Name</label>
+                    <div class="flex">
+  <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+        <i class="material-icons">article</i>
+  </span>
+                        <input type="text" id="website-admin"
+                               class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="My Document">
+                    </div>
+
+                    <br><br>
                     <label for="editor" class="sr-only">Publish post</label>
                     <div contenteditable="true" tabindex="0" id="editor" class="block px-0 w-full text-sm text-gray-800 bg-white
                      border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400">
@@ -225,7 +240,7 @@
         #editor {
             font-family: 'Roboto', sans-serif !important;
             height: 500px;
-            outline-color: #1A56DB;
+            outline: none;
             padding: 15px;
         }
 
