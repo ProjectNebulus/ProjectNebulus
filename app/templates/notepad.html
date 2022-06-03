@@ -2,7 +2,12 @@
 {% block main %}
     {% include "navbar.html" %}
     <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
-    <script>
+    <style>
+    .twemoji{
+        display: inline-block;
+        height: 16px;
+    }
+    </style><script>
 
         function change(id) {
             if (id === "b") {
@@ -11,7 +16,7 @@
             if (id === "i") {
                 document.execCommand('italic');
             }
-            if (i === "u") {
+            if (id === "u") {
                 document.execCommand('underline');
             }
             document.getElementById("editor").focus();
@@ -28,7 +33,17 @@
         function parse(){
             var div = document.getElementById("editor");
 
-            twemoji.parse(div);
+            twemoji.parse(div,   {
+                //callback: Function,   // default the common replacer
+                //attributes: Function, // default returns {}
+                //base: string,         // default MaxCDN
+                ext: ".svg",          // default ".png"
+                className: "twemoji",    // default "emoji"
+                size: "36x36",  // default "72x72"
+                folder: "svg"
+                //folder: string        // in case it's specified
+                                      // it replaces .size info, if any
+            });
 
             var img = div.querySelector('img');
 
@@ -41,10 +56,9 @@
             img.draggable;  // false
         }
         parse();
-        var div = document.getElementById("editor");
-        div.onchange = parse;
+        setInterval(parse, 100)
     </script>
-    <div style="margin-left:20%;">
+    <div style="margin:auto;width:90%;">
         <p class="text-4xl dark:text-white">Nebulus Documents</p><br><br>
         <label for="website-admin" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Document
             Name</label>
