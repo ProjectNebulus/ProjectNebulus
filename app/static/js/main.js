@@ -58,6 +58,9 @@ function invertSite() {
     const banner = document.getElementById("homeBanner");
 
     if (localStorage.getItem("color-theme") === "dark") {
+        if (window.location.href.endsWith("/notepad")){
+            document.getElementById("editor").style.filter = "invert(1)";
+        }
         if (window.location.pathname === "/") {
             //document.body.style.backgroundImage = "url(\"/static/images/darkwallpaper.png\")";
             document.body.style.backgroundSize = "cover";
@@ -74,6 +77,9 @@ function invertSite() {
         }
     }
     else {
+        if (window.location.href.endsWith("/notepad")){
+            document.getElementById("editor").style.filter = "invert(0)";
+        }
         if (window.location.href.endsWith("/")) {
             document.body.style.backgroundColor = "white";
             document.body.style.backgroundImage = "";

@@ -24,6 +24,13 @@
             if (id === "u") {
                 document.execCommand('underline');
             }
+            if (id === "c") {
+                document.execCommand('foreColor');
+            }
+            if (id === "h") {
+                document.execCommand('hiliteColor');
+            }
+            document.getElementById("editor").focus();
             document.getElementById("editor").focus();
         }
         function fullscreen(){
@@ -62,6 +69,15 @@
         }
         changeheight();
         parse();
+        //window.onload = invertSite;
+        window.onload = function (){
+            alert("Hello");
+            if (localStorage.getItem("color-theme") === "dark"){
+                document.getElementById("editor").style.filter = "invert(1)";
+            }else{
+                document.getElementById("editor").style.filter = "invert(0)";
+            }
+        }
     </script>
     <script>
         setInterval(parse, 100);
@@ -146,11 +162,11 @@
                             </button>
                             <button type="button"
                                     class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                <span style='color:red;' class='buttonSelect' id="a" onclick="change('a')">A</span>
+                                <span style='color:red;' class='buttonSelect' id="c" onclick="change('c')">A</span>
                             </button>
                             <button type="button"
                                     class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                <span class='buttonSelect' id="hl" onclick="change('hl')"><i class="material-icons"
+                                <span class='buttonSelect' id="h" onclick="change('h')"><i class="material-icons"
                                                                                              style="color:white;font-size:1em;">mode</i>
                             </button>
                         </div>
@@ -210,10 +226,10 @@
                 <div id="part3" class="py-2 px-4 bg-white rounded-b-lg dark:bg-gray-800" style="overflow-y:scroll;height:100%;">
 
                     <label for="editor" class="sr-only">Publish post</label>
-                    <div contenteditable="true" tabindex="0" id="editor" class="block px-0 w-full text-sm text-gray-800 bg-white
+                    <div contenteditable="true" tabindex="0" id="editor" class=" block px-0 w-full text-sm text-gray-800 bg-white
                      border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400">
-                        Welcome to <span style="color: lightgreen">Nebulus</span> Docs.
-                        Type <b>Bold</b> with the <b>B</b> button above or <strong>Command B</strong>.
+                        <h1>Welcome to <span style="color: lightgreen">Nebulus</span> Docs.</h1>
+                        Type <b>Bold</b> with the <b>B</b> button above or <strong>Command B</strong>.<br>
                         Type <i>Italics</i> with the <b>I</b> button above or <i>Command I</i>.
                     </div>
                 </div>
