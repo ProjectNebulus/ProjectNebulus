@@ -1,6 +1,9 @@
 {% extends "layout.html" %}
 {% block main %}
     {% include "navbar.html" %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <style>
@@ -271,6 +274,10 @@
             w = w/8.5*11;
             document.getElementById("editor").style.minHeight = w + "px";
         }
+        function changeFont(num){
+            document.execCommand('fontSize', false, num);
+            document.getElementById("numFont").value = num;
+        }
         function change(id) {
             if (id === "b") {
                 document.execCommand('bold');
@@ -310,6 +317,12 @@
             }
             if (id === "ln") {
                 document.execCommand('insertOrderedList');
+            }
+            if (id === "redo") {
+                document.execCommand('redo');
+            }
+            if (id === "undo") {
+                document.execCommand('undo');
             }
             document.getElementById("editor").focus();
             document.getElementById("editor").focus();
@@ -400,15 +413,15 @@
                 <div id="part2" class="flex justify-between items-center py-2 px-3 border-b dark:border-gray-600">
                     <div class="flex flex-wrap items-center divide-gray-200 sm:divide-x dark:divide-gray-600">
                         <div class="flex items-center space-x-1 sm:pr-4">
-                            <button type="button"
+                            <button onclick="change('undo');" type="button"
                                     class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
                                 <span class='buttonSelect'><i class="material-icons">undo</i></span>
                             </button>
-                            <button type="button"
+                            <button onclick="change('redo');" type="button"
                                     class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
                                 <span class='buttonSelect'><i class="material-icons">redo</i></span>
                             </button>
-                            <button type="button"
+                            <button onclick="window.print();return false;" type="button"
                                     class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
                                 <span class='buttonSelect'><i class="material-icons">print</i></span>
                             </button>
@@ -449,21 +462,30 @@
                                     class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
                                 <span class='buttonSelect'><i class="material-icons">remove</i></span>
                             </button>
-                            <button id="dropdownFonts1" data-dropdown-toggle="dropdownFonts" class="text-white font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center" type="button">12 <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+                            <button id="dropdownFonts1" data-dropdown-toggle="dropdownFonts" class="text-white font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center" type="button" id="numFont">3 <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
                             <!-- Dropdown menu -->
                             <div id="dropdownFonts" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
                                 <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault">
-                                    <li>
-                                        <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">11</a>
+                                    <li onclick="changeFont(1);">
+                                        <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">1</a>
                                     </li>
-                                    <li>
-                                        <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">12</a>
+                                    <li onclick="changeFont(2);">
+                                        <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">2</a>
                                     </li>
-                                    <li>
-                                        <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">14</a>
+                                    <li onclick="changeFont(3);">
+                                        <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">3</a>
                                     </li>
-                                    <li>
-                                        <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">18</a>
+                                    <li onclick="changeFont(4);">
+                                        <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">4</a>
+                                    </li>
+                                    <li onclick="changeFont(5);">
+                                        <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">5</a>
+                                    </li>
+                                    <li onclick="changeFont(6);">
+                                        <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">6</a>
+                                    </li>
+                                    <li onclick="changeFont(7);">
+                                        <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">7</a>
                                     </li>
                                 </ul>
                             </div>
