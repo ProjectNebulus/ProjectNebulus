@@ -276,7 +276,13 @@
         }
         function changeFont(num){
             document.execCommand('fontSize', false, num);
-            document.getElementById("numFont").value = num;
+            document.getElementById("dropdownFonts1").innerText = num;
+            document.execCommand('fontSize', false, num);
+        }
+        function changeFontName(name){
+            document.execCommand('fontName', false, name);
+            document.getElementById("dropdownFont1").innerText = name;
+            document.execCommand('fontName', false, name);
         }
         function change(id) {
             if (id === "b") {
@@ -462,30 +468,30 @@
                                     class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
                                 <span class='buttonSelect'><i class="material-icons">remove</i></span>
                             </button>
-                            <button id="dropdownFonts1" data-dropdown-toggle="dropdownFonts" class="text-white font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center" type="button" id="numFont">3 <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+                            <button id="dropdownFonts1" data-dropdown-toggle="dropdownFonts" class="text-white font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center" type="button">3 <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
                             <!-- Dropdown menu -->
                             <div id="dropdownFonts" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
                                 <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault">
                                     <li onclick="changeFont(1);">
-                                        <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">1</a>
+                                        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">1</span>
                                     </li>
                                     <li onclick="changeFont(2);">
-                                        <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">2</a>
+                                        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">2</span>
                                     </li>
                                     <li onclick="changeFont(3);">
-                                        <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">3</a>
+                                        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">3</span>
                                     </li>
                                     <li onclick="changeFont(4);">
-                                        <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">4</a>
+                                        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">4</span>
                                     </li>
                                     <li onclick="changeFont(5);">
-                                        <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">5</a>
+                                        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">5</span>
                                     </li>
                                     <li onclick="changeFont(6);">
-                                        <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">6</a>
+                                        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">6</span>
                                     </li>
                                     <li onclick="changeFont(7);">
-                                        <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">7</a>
+                                        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">7</span>
                                     </li>
                                 </ul>
                             </div>
@@ -498,17 +504,17 @@
                             <!-- Dropdown menu -->
                             <div id="dropdownFont" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
                                 <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault">
-                                    <li>
-                                        <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Arial</a>
+                                    <li onclick="changeFontName('Arial');">
+                                        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Arial</span>
                                     </li>
-                                    <li>
-                                        <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Times New Roman</a>
+                                    <li onclick="changeFontName('Times New Roman');">
+                                        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Times New Roman</span>
                                     </li>
-                                    <li>
-                                        <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Comic Sans MS</a>
+                                    <li onclick="changeFontName('Comic Sans MS');">
+                                        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Comic Sans MS</span>
                                     </li>
-                                    <li>
-                                        <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Pacifico</a>
+                                    <li onclick="changeFontName('Pacifico');">
+                                        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Pacifico</span>
                                     </li>
                                 </ul>
                             </div>
