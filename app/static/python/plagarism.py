@@ -30,12 +30,12 @@ training_data = list(pad_sequence(word_tokenize(train_text), n,
 
 # generate ngrams
 ngrams = list(everygrams(training_data, max_len=n))
-print("Number of ngrams:", len(ngrams))
+#print("Number of ngrams:", len(ngrams))
 
 # build ngram language models
 model = WittenBellInterpolated(n)
 model.fit([ngrams], vocabulary_text=training_data)
-print(model.vocab)
+#print(model.vocab)
 
 # testing data file
 test_data_file = "testing2.txt"
@@ -49,7 +49,7 @@ test_text = re.sub(r'[^\w\s]', "", test_text)
 testing_data = list(pad_sequence(word_tokenize(test_text), n,
                                  pad_left=True,
                                  left_pad_symbol="<s>"))
-print("Length of test data:", len(testing_data))
+#print("Length of test data:", len(testing_data))
 
 # assign scores
 scores = []
@@ -62,32 +62,36 @@ scores_np = np.array(scores)
 # set width and height
 width = 8
 height = np.ceil(len(testing_data)/width).astype("int32")
-print("Width, Height:", width, ",", height)
+#print("Width, Height:", width, ",", height)
 
+score = sum(scores_np)/len(scores_np)*100
+score = round(score, 4)
+plagarized = score>20
+print("Plagarism Score: "+str(score)+"%\nPlagarized: "+str(plagarized))
 # copy scores to rectangular blank array
-a = np.zeros(width*height)
-a[:len(scores_np)] = scores_np
-diff = len(a) - len(scores_np)
-
-# apply gaussian smoothing for aesthetics
-a = gaussian_filter(a, sigma=1.0)
-
-# reshape to fit rectangle
-a = a.reshape(-1, width)
-
-# format labels
-labels = [" ".join(testing_data[i:i+width]) for i in range(n-1, len(testing_data), width)]
-labels_individual = [x.split() for x in labels]
-labels_individual[-1] += [""]*diff
-labels = [f"{x:60.60}" for x in labels]
-
-# create heatmap
-fig = go.Figure(data=go.Heatmap(
-    z=a, x0=0, dx=1,
-    y=labels, zmin=0, zmax=1,
-    customdata=labels_individual,
-    hovertemplate='%{customdata} <br><b>Score:%{z:.3f}<extra></extra>',
-    colorscale="burg"))
-fig.update_layout({"height":height*28, "width":1000, "font":{"family":"Courier New"}})
-fig['layout']['yaxis']['autorange'] = "reversed"
-fig.show()
+# a = np.zeros(width*height)
+# a[:len(scores_np)] = scores_np
+# diff = len(a) - len(scores_np)
+#
+# # apply gaussian smoothing for aesthetics
+# a = gaussian_filter(a, sigma=1.0)
+#
+# # reshape to fit rectangle
+# a = a.reshape(-1, width)
+#
+# # format labels
+# labels = [" ".join(testing_data[i:i+width]) for i in range(n-1, len(testing_data), width)]
+# labels_individual = [x.split() for x in labels]
+# labels_individual[-1] += [""]*diff
+# labels = [f"{x:60.60}" for x in labels]
+#
+# # create heatmap
+# fig = go.Figure(data=go.Heatmap(
+#     z=a, x0=0, dx=1,
+#     y=labels, zmin=0, zmax=1,
+#     customdata=labels_individual,
+#     hovertemplate='%{customdata} <br><b>Score:%{z:.3f}<extra></extra>',
+#     colorscale="burg"))
+# fig.update_layout({"height":height*28, "width":1000, "font":{"family":"Courier New"}})
+# fig['layout']['yaxis']['autorange'] = "reversed"
+# fig.show()
