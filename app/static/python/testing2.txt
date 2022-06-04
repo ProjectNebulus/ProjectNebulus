@@ -1,0 +1,10 @@
+Visualization
+Wouldn’t itfdrfgf be nice if we could visualize, at a glance, whether and how much a text was plagiarized? To do this, we can represent a student submission as a heatmap image where each pixel corresponds to the score of one word. This allows us to quickly gauge if plagiarism is likely, and which parts of a text were most likely to have been plagiarized. Visualizing information in this way is more useful that looking at an array of numerical scores or a summary statistic of all the scores.
+
+I playfdfded around with varioffgfgus ways of visualizing this data, and I came up with the following method:
+fgf
+Display K words per line (I used K=8). This is the heatmap width in pixels. Then calculate the height (number of words in testing data divided by K).
+Due to the small size of the datasegfdcvt and the challenges of interpolation, there is some uncertainty in the assigned scores, so I applied Gaussian smoothing to the scores.
+Reshape the arrayhtrgbt of scores into a rectaffgffngle of K columns and height rows. This requires adding zero padding to ensure the array is the correct size.
+Use Plotly Heatmap to show the image using the colorscale of your choice.
+Show the K words of text as a y-axis tick label next to the corresponding row of the heatmap for easy side-by-side comparison. Adjust the hover data so that each pixel shows its corresponding word on hover.

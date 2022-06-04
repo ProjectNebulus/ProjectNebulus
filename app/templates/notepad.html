@@ -304,6 +304,13 @@
 
     </style><script>
         function changeheight(){
+            if (localStorage.getItem("color-theme") === "dark"){
+                document.getElementById("editor").style.background = "#EEE7D8";
+                document.getElementById("editor").style.filter = "invert(1)";
+            }else{
+                document.getElementById("editor").style.background = "white";
+                document.getElementById("editor").style.filter = "invert(0)";
+            }
             var w = document.getElementById("editor").offsetWidth;
             w = w/8.5*11;
             document.getElementById("editor").style.minHeight = w + "px";
@@ -391,14 +398,7 @@
         }
         changeheight();
         parse();
-        window.onload = function (){
-            alert("Hello");
-            if (localStorage.getItem("color-theme") === "dark"){
-                document.getElementById("editor").style.filter = "invert(1)";
-            }else{
-                document.getElementById("editor").style.filter = "invert(0)";
-            }
-        }
+
         function color(){
             let dacolor = document.getElementById("colorpicker").value;
             //document.getElementsByClassName("buttonSelect")[10].style.background = dacolor;
