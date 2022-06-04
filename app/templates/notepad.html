@@ -293,6 +293,18 @@
             {#document.getElementById("dropdownFont1").onclick = `changeFontName("${name}")`;#}
             document.getElementById("dropdownFont1").onclick = function(){changeFontName(name)};
         }
+        function changeHeader(name){
+            //document.execCommand('fontName', false, name);
+            document.getElementById("dropdownHeader2").innerText = name;
+            //alert(`document.execCommand('fontName', false, ${name});`);
+            //let resp = document.execCommand('fontName', false, name);
+            //let resp = document.execCommand('fontName', false, `'${name}'`);
+            let resp = document.execCommand('heading', false, name);
+
+            //alert(resp);
+            {#document.getElementById("dropdownFont1").onclick = `changeFontName("${name}")`;#}
+            document.getElementById("dropdownFont1").onclick = function(){changeHeader(name)};
+        }
         function change(id) {
             if (id === "b") {
                 document.execCommand('bold');
@@ -448,28 +460,28 @@
                         </div>
                         <div class="flex items-center space-x-1 sm:pr-4">
 
-                            <button id="dropdownHeader2" data-dropdown-toggle="dropdownHeader" class="text-white font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center" type="button">Normal Text <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+                            <button id="dropdownHeader2" onclick="changeHeader('p')" data-dropdown-toggle="dropdownHeader" class="text-white font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center" type="button">Normal Text <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
 
                             <!-- Dropdown menu -->
                             <div id="dropdownHeader" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
                                 <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault">
-                                    <li>
-                                        <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Normal Text</a>
+                                    <li onclick="changeHeader('p')">
+                                        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Normal Text</span>
                                     </li>
-                                    <li>
-                                        <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Title</a>
+                                    <li onclick="changeHeader('h1')">
+                                        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Title</span>
                                     </li>
-                                    <li>
-                                        <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Subtitle</a>
+                                    <li onclick="changeHeader('h2')">
+                                        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Subtitle</span>
                                     </li>
-                                    <li>
-                                        <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Heading 1</a>
+                                    <li onclick="changeHeader('h2')">
+                                        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Heading 1</span>
                                     </li>
-                                    <li>
-                                        <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Heading 2</a>
+                                    <li onclick="changeHeader('h3')">
+                                        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Heading 2</span>
                                     </li>
-                                    <li>
-                                        <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Heading 3</a>
+                                    <li onclick="changeHeader('h4')">
+                                        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Heading 3</span>
                                     </li>
                                 </ul>
                             </div>
@@ -509,9 +521,9 @@
                                 <span class='buttonSelect'><i class="material-icons">add</i></span>
                             </button>
 
-                            <button id="dropdownFont1" data-dropdown-toggle="dropdownFont" class="text-white font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center" type="button">Arial <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+                            <button onclick="changeFontName('Arial');" id="dropdownFont1" data-dropdown-toggle="dropdownFont" class="text-white font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center" type="button">Arial <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
                             <!-- Dropdown menu -->
-                            <div onclick="changeFontName('Arial');" id="dropdownFont" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
+                            <div id="dropdownFont" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
                                 <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault">
                                     <li onclick="changeFontName('Arial');">
                                         <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Arial</span>
