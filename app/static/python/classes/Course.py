@@ -46,7 +46,7 @@ class Course(Snowflake):
     avatar = EmbeddedDocumentField(Avatar, required=False)
     announcements = ListField(ReferenceField("Announcement"))
     archived = BooleanField(default=False)
-    extensions = ListField(ReferenceField("Extension"))
+    integrations = ListField(ReferenceField("Integration"))
     textbooks = ListField(ReferenceField("Textbook"))
 
     def clean(self):

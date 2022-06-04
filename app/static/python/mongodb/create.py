@@ -196,3 +196,15 @@ def createChat(data: dict) -> Chat:
     return chat
 
 
+def createIntegration(data: dict) -> Integration:
+    integration = Integration(**data)
+    integration.save(force_insert=True)
+    return integration
+
+
+def installIntegration(courseID: int, integrationID: int):
+    course = Course.objects(pk=courseID)
+    integration = Integration.objects(pk=integrationID)
+    course.integrations.append(integration)
+
+
