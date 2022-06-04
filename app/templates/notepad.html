@@ -278,7 +278,8 @@
             document.execCommand('fontSize', false, num);
             document.getElementById("dropdownFonts1").innerText = num;
             document.execCommand('fontSize', false, num);
-            document.getElementById("dropdownFonts1").onclick = `changeFont(${num})`;
+            //document.getElementById("dropdownFonts1").onclick = `changeFont(${num})`;
+            document.getElementById("dropdownFonts1").onclick = function(){changeFont(num)};
         }
         function changeFontName(name){
             //document.execCommand('fontName', false, name);
@@ -289,7 +290,8 @@
             let resp = document.execCommand('fontName', false, name);
 
             //alert(resp);
-            document.getElementById("dropdownFont1").onclick = `changeFontName("${name}")`;
+            {#document.getElementById("dropdownFont1").onclick = `changeFontName("${name}")`;#}
+            document.getElementById("dropdownFont1").onclick = function(){changeFontName(name)};
         }
         function change(id) {
             if (id === "b") {
