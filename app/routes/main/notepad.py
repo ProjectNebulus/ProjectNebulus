@@ -18,6 +18,22 @@ def notepad():
         "Raleway",
         "Roboto Condensed",
         "Open Sans",
+        "Roboto Slab",
+        "Merriweather",
+        "Ubuntu",
+        "PT Sans",
+        "PT Serif",
+        "Ubuntu Condensed",
+        "Droid Sans",
+        "Droid Serif",
+        "Roboto Mono",
+        "Roboto Mono Condensed",
+        "Roboto Mono Slashed",
+        "Roboto Mono Slashed Condensed",
+        "Roboto Mono Slashed Slashed",
+        "Roboto Mono Slashed Slashed Condensed",
+
+
     ]
     return render_template(
         "notepad.html",

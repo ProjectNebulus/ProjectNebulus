@@ -10,6 +10,41 @@
     <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <style>
+    h1{
+        isplay: block;
+        font-size: 2em;
+        margin-block-start: 0.67em;
+        margin-block-end: 0.67em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        font-weight: bold;
+    }
+
+    h2{
+        font-size: 1.5em;
+        margin-block-start: 0.67em;
+        margin-block-end: 0.67em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        font-weight: bold;
+    }
+
+    h3{
+        font-size: 1.2em;
+        margin-block-start: 0.67em;
+        margin-block-end: 0.67em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        font-weight: bold;
+    }
+    h4{
+        font-size: 1.1em;
+        margin-block-start: 0.67em;
+        margin-block-end: 0.67em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        font-weight: bold;
+    }
         #editor ol, menu {
             list-style: decimal !important;
         }
@@ -281,28 +316,15 @@
             document.getElementById("dropdownFonts1").onclick = function(){changeFont(num)};
         }
         function changeFontName(name){
-            //document.execCommand('fontName', false, name);
             document.getElementById("dropdownFont1").innerText = name;
-            //alert(`document.execCommand('fontName', false, ${name});`);
-            //let resp = document.execCommand('fontName', false, name);
-            //let resp = document.execCommand('fontName', false, `'${name}'`);
             let resp = document.execCommand('fontName', false, name);
-
-            //alert(resp);
-            {#document.getElementById("dropdownFont1").onclick = `changeFontName("${name}")`;#}
             document.getElementById("dropdownFont1").onclick = function(){changeFontName(name)};
         }
         function changeHeader(name){
-            //document.execCommand('fontName', false, name);
             document.getElementById("dropdownHeader2").innerText = name;
-            //alert(`document.execCommand('fontName', false, ${name});`);
-            //let resp = document.execCommand('fontName', false, name);
-            //let resp = document.execCommand('fontName', false, `'${name}'`);
-            let resp = document.execCommand('heading', false, name);
-
-            //alert(resp);
-            {#document.getElementById("dropdownFont1").onclick = `changeFontName("${name}")`;#}
-            document.getElementById("dropdownFont1").onclick = function(){changeHeader(name)};
+            document.execCommand('insertHTML', false, `<${name}>` + window.getSelection().toString() + `</${name}>`)
+            {#let resp = document.execCommand('heading', false, name);#}
+            document.getElementById("dropdownHeader2").onclick = function(){changeHeader(name)};
         }
         function change(id) {
             if (id === "b") {
@@ -314,15 +336,9 @@
             if (id === "u") {
                 document.execCommand('underline');
             }
-            /*if (id === "c") {
-                document.execCommand('foreColor', false, "red");
-            }*/
             if (id === "c") {
                 document.execCommand('foreColor', false, document.getElementById("changediscolor").style.color);
             }
-            /*(if (id === "h") {
-                document.execCommand('hiliteColor', false, "yellow");
-            }*/
             if (id === "h") {
                 document.execCommand('hiliteColor', false, document.getElementById("changediscolor2").style.color);
             }
@@ -366,30 +382,15 @@
             var div = document.getElementById("editor");
 
             twemoji.parse(div,   {
-                //callback: Function,   // default the common replacer
-                //attributes: Function, // default returns {}
-                //base: string,         // default MaxCDN
                 ext: ".svg",          // default ".png"
                 className: "twemoji",    // default "emoji"
                 size: "36x36",  // default "72x72"
                 folder: "svg"
-                //folder: string        // in case it's specified
-                                      // it replaces .size info, if any
             });
 
-            {#var img = div.querySelector('img');#}
-            {##}
-            {#// note the div is preserved#}
-            {#img.parentNode === div; // true#}
-            {##}
-            {#img.src;        // https://twemoji.maxcdn.com/v/latest/72x72/2764.png#}
-            {#img.alt;        // \u2764\uFE0F#}
-            {#img.className;  // emoji#}
-            {#img.draggable;  // false#}
         }
         changeheight();
         parse();
-        //window.onload = invertSite;
         window.onload = function (){
             alert("Hello");
             if (localStorage.getItem("color-theme") === "dark"){
@@ -418,6 +419,69 @@
     <script>
         setInterval(parse, 100);
         setInterval(changeheight, 100);
+        $(document).ready(function() {
+            var handleDrag = function(e) {
+                //kill any default behavior
+                e.stopPropagation();
+                e.preventDefault();
+            };
+            var handleDrop = function(e) {
+                //kill any default behavior
+                e.stopPropagation();
+                e.preventDefault();
+                //console.log(e);
+                //get x and y coordinates of the dropped item
+                x = e.clientX;
+                y = e.clientY;
+                //drops are treated as multiple files. Only dealing with single files right now, so assume its the first object you're interested in
+                var file = e.dataTransfer.files[0];
+                //don't try to mess with non-image files
+                if (file.type.match('image.*')) {
+                    //then we have an image,
+
+                    //we have a file handle, need to read it with file reader!
+                    var reader = new FileReader();
+
+                    // Closure to capture the file information.
+                    reader.onload = (function(theFile) {
+                        //get the data uri
+                        var dataURI = theFile.target.result;
+                        //make a new image element with the dataURI as the source
+                        var img = document.createElement("img");
+                        img.src = dataURI;
+
+                        //Insert the image at the carat
+
+                        // Try the standards-based way first. This works in FF
+                        if (document.caretPositionFromPoint) {
+                            var pos = document.caretPositionFromPoint(x, y);
+                            range = document.createRange();
+                            range.setStart(pos.offsetNode, pos.offset);
+                            range.collapse();
+                            range.insertNode(img);
+                        }
+                        // Next, the WebKit way. This works in Chrome.
+                        else if (document.caretRangeFromPoint) {
+                            range = document.caretRangeFromPoint(x, y);
+                            range.insertNode(img);
+                        }
+                        else
+                        {
+                            //not supporting IE right now.
+                            console.log('could not find carat');
+                        }
+
+
+                    });
+                    //this reads in the file, and the onload event triggers, which adds the image to the div at the carat
+                    reader.readAsDataURL(file);
+                }
+            };
+
+            var dropZone = document.getElementById('editor');
+            dropZone.addEventListener('dragover', handleDrag, false);
+            dropZone.addEventListener('drop', handleDrop, false);
+        });
     </script>
     <div style="margin:auto;width:90%; overflow:hidden;">
         <form id="daform" style="height: calc(100% - 80px);">
@@ -641,11 +705,8 @@
 
                     <label for="editor" class="sr-only">Publish post</label>
                     <div contenteditable="true" tabindex="0" id="editor" class=" block px-0 w-full text-sm text-gray-800 bg-white
-                     border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400">
-                        <h1>Welcome to <span style="color: lightgreen">Nebulus</span> Docs.</h1>
-                        Type <b>Bold</b> with the <b>B</b> button above or <strong>Command B</strong>.<br>
-                        Type <i>Italics</i> with the <b>I</b> button above or <i>Command I</i>.
-                    </div>
+                     border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" style="min-height: 968px;" spellcheck="false">
+                        <h1 style="text-align: center; "><font color="#ffdd00" style="" face="Roboto Slab">Welcome</font> <font face="Open Sans">to </font><font color="#bb00ff" style="" face="Pacifico"><i style="">Nebulus</i></font><font face="Open Sans"> Docs.</font></h1><div><h2><font face="Open Sans" style="" color="#454545"><u><i>Instructions</i></u></font></h2></div><div><ul><li><font face="Open Sans">Use the <b><u>Menu</u></b> above for formatting!</font></li><li><font face="Open Sans">Keyboard Shortcuts: </font><font face="Times New Roman"><b><i>Command/Control + B</i></b></font><font face="Open Sans"> for Bold, </font><i style=""><font face="Times New Roman">Command/Control + I</font></i><font face="Open Sans"> for Italics</font></li><li><font face="Open Sans">Help? Contact us at&nbsp;<u style=""><font color="#00fbff">https://discord.gg/dAhHZWxCge</font></u><font color="#454545">!</font></font></li></ul></div></div>
                 </div>
         </form>
     </div>
