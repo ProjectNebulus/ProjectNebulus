@@ -278,11 +278,18 @@
             document.execCommand('fontSize', false, num);
             document.getElementById("dropdownFonts1").innerText = num;
             document.execCommand('fontSize', false, num);
+            document.getElementById("dropdownFonts1").onclick = `changeFont(${num})`;
         }
         function changeFontName(name){
-            document.execCommand('fontName', false, name);
+            //document.execCommand('fontName', false, name);
             document.getElementById("dropdownFont1").innerText = name;
-            document.execCommand('fontName', false, name);
+            //alert(`document.execCommand('fontName', false, ${name});`);
+            //let resp = document.execCommand('fontName', false, name);
+            //let resp = document.execCommand('fontName', false, `'${name}'`);
+            let resp = document.execCommand('fontName', false, name);
+
+            //alert(resp);
+            document.getElementById("dropdownFont1").onclick = `changeFontName("${name}")`;
         }
         function change(id) {
             if (id === "b") {
@@ -468,7 +475,7 @@
                                     class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
                                 <span class='buttonSelect'><i class="material-icons">remove</i></span>
                             </button>
-                            <button id="dropdownFonts1" data-dropdown-toggle="dropdownFonts" class="text-white font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center" type="button">3 <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+                            <button id="dropdownFonts1"  onclick="changeFont(3);" data-dropdown-toggle="dropdownFonts" class="text-white font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center" type="button">3 <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
                             <!-- Dropdown menu -->
                             <div id="dropdownFonts" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
                                 <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault">
@@ -502,7 +509,7 @@
 
                             <button id="dropdownFont1" data-dropdown-toggle="dropdownFont" class="text-white font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center" type="button">Arial <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
                             <!-- Dropdown menu -->
-                            <div id="dropdownFont" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
+                            <div onclick="changeFontName('Arial');" id="dropdownFont" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
                                 <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault">
                                     <li onclick="changeFontName('Arial');">
                                         <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Arial</span>
