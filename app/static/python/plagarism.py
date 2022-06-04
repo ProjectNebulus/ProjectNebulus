@@ -68,6 +68,8 @@ score = sum(scores_np)/len(scores_np)*100
 score = round(score, 4)
 plagarized = score>20
 print("Plagarism Score: "+str(score)+"%\nPlagarized: "+str(plagarized))
+for i in test_text.words():
+    print(i)
 # copy scores to rectangular blank array
 # a = np.zeros(width*height)
 # a[:len(scores_np)] = scores_np
