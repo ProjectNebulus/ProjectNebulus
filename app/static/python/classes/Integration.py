@@ -11,8 +11,10 @@ class Integration(Snowflake):
 
     meta = {"collection": "Integration"}
     name = StringField(required=True)
-    link = URLField(required=True)
+    link = StringField(required=True) #nickname, for example: ptable for Periodic Table
     developer = StringField(required=True)
     premium = BooleanField(default=False)
+    icon = StringField(required=True) #Google Material Icon
+    image = URLField(required=True)
 
 

@@ -184,6 +184,9 @@ function offline() {
 }
 
 function navFetchStatus() {
+    if  (document.getElementById("songhere") === null) {
+        return;
+    }
     const request = $.ajax({
         type: 'POST',
         url: '/api/v1/internal/spotify-status',

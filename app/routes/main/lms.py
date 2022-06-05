@@ -102,6 +102,8 @@ def lms():
                 secret = session.get("request_token_secret")
 
             if not key or not secret:
+                key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
+                secret = "59ccaaeb93ba02570b1281e1b0a90e18"
                 print("Key or Secret missing for user", session["username"])
 
             auth = schoolopy.Auth(
