@@ -8,7 +8,8 @@
     body{
         font-family: 'Lato', sans-serif;
         color:white;
-        background:#282836;
+        background:#0E1016;
+        margin:0;
     }
     .avatar{
         border-radius:50%;
@@ -70,10 +71,16 @@
             </script>
 
             <style>
-                @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+                @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap');
                 .CodeMirror {
-                    font-family: 'Lato' !important;
+                    font-family: 'Courier Prime', monospace;
                     font-size: 16px;
+                    background: #0E1016 !important;
+                }
+                .CodeMirror-gutters{
+                    font-family: 'Courier Prime', monospace;
+                    font-size: 16px;
+                    background: #0E1016 !important;
                 }
                 .run{
                     background:transparent;
@@ -85,12 +92,37 @@
                     border-color:grey;
                     border-width:1px;
                     z-index:50;
-                    margin-top:0;
-                    margin-left:0;
+                    top:0;
+                    right:0;
+                    position: absolute;
                 }
                 .run:active{
                     outline:none;
 
+                }
+                .cm-string{
+                    color:#A4D6FE !important;
+                }
+                .cm-keyword{
+                    color:#FF7A73 !important;
+                }
+                .cm-variable{
+                    color:#C8D0D8 !important;
+                }
+                .cm-comment{
+                    color:#8B949E !important;
+                }
+                .cm-comment{
+                    color:#8B949E !important;
+                }
+                .cm-property{
+                    color:#FEA757 !important;
+                }
+                .cm-builtin{
+                    color:#CCA4F9  !important;
+                }
+                .cm-operator{
+                    color:#A4D6FE !important;
                 }
                 .run:hover{
                     color:white;
@@ -105,24 +137,14 @@
 
             </style>
         </form>
-        <link rel="stylesheet"
-              href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.css">
-        </link>
-        <script type="text/javascript"
-                src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/mode/python/python.min.js">
-        </script>
-        <script type="text/javascript"
-                src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/mode/python/htmlmixed.min.js">
-        </script>
-        <script type="text/javascript"
-                src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.js">
-        </script>
-        <link rel="stylesheet"
-              href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/theme/midnight.min.css">
-        </link>
-        <link rel="stylesheet"
-              href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/lib/codemirror.css">
-        </link>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js" integrity="sha512-hG/Qw6E14LsVUaQRSgw0RrFA1wl5QPG1a4bCOUgwzkGPIVFsOPUPpbr90DFavEEqFMwFXPVI0NS4MzKsInlKxQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css" integrity="sha512-uf06llspW44/LZpHzHT6qBOIVODjWtv4MxCricRxkzvopAlSWnTf6hpZTFxuuZcuNE9CBQhqE0Seu1CoRk84nQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/keymap/emacs.min.js" integrity="sha512-vkAJFl6fSbUY4MDhe50ATyWN/8jLYZPtxqELsXbbxA+bSxk8n/0iVBeGQqCJJYv2mn1bhBKs7du3A0HbtgrLEA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/keymap/sublime.min.js" integrity="sha512-SV3qeFFtzcmGtUQPLM7HLy/7GKJ/x3c2PdiF5GZQnbHzIlI2q7r77y0IgLLbBDeHiNfCSBYDQt898Xp0tcZOeA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/keymap/vim.min.js" integrity="sha512-v2ud5hEJ+CD2N20EuKBhlN93edH0iFunpVrKf9V1pnwTe/Z8S5JfJOknGZDnQkACo/Pxy8C9htQliBLeDbbnog==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/meta.min.js" integrity="sha512-/2x+sfL5ERHfoViXm/UncFBzaD54f2bkjEui6w2IheEUafG2gcHJv3gQ4VDIqNr+LuApQwpnsjjrEMXI43nPzg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/theme/midnight.min.css" integrity="sha512-ZTF0X2l7PXEFDyP+MSOK0QM3Qh+C+lQ70Tqx4vQb3+6Uxh2lYkwmbSbpDmksZaX8w0sSz8ctVBnPSzAR1TQlzA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/python/python.min.js" integrity="sha512-2M0GdbU5OxkGYMhakED69bw0c1pW3Nb0PeF3+9d+SnwN1ryPx3wiDdNqK3gSM7KAU/pEV+2tFJFbMKjKAahOkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
         <script>
             let cm = new CodeMirror.fromTextArea(document.getElementById("editor"), {
