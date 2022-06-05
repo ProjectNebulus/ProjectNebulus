@@ -33,3 +33,4 @@ from app.routes.api.v1.internal.get_verification_code import *
 from app.routes.api.v1.internal.create_user import *
 from app.routes.api.v1.internal.check_signup import *
 from app.routes.api.v1.internal.get_schoology_messages import *
+from app.routes.api.v1.internal.plagarism import *
