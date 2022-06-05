@@ -27,7 +27,7 @@ if __name__ == "__main__":
     if platform.system().lower() == "linux":
         port = 80
         host = "0.0.0.0"
-    else:  # macos (darwin) or windows (windows)
+    else:   # macos (darwin) or windows (windows)
         port = 8080
         host = "localhost"
 

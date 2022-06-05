@@ -1,0 +1,535 @@
+<link rel="stylesheet" href="/path/to/styles/default.css">
+<script src="/path/to/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+
+<style>
+
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap,900&display=swap');
+    body{
+        font-family: 'Lato', sans-serif;
+        color:white;
+        background:#282836;
+    }
+    .avatar{
+        border-radius:50%;
+        margin:5px;
+    }
+
+    .b{
+        font-family: 'Lato', sans-serif;
+        font-weight:900;
+    }
+    .collapsible {
+        font-family: 'Lato', sans-serif;
+        background-color: rgba(0, 0, 0,0.2);
+        color: white;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+    }
+
+    .active, .collapsible:hover {
+        background-color: rgba(0, 0, 0,0.1);
+    }
+
+    .content {
+        padding: 0 18px;
+        display: none;
+        overflow: hidden;
+        background-color: transparent;
+    }
+    a{
+        color:yellow;
+        text-decoration:none;
+    }
+    a:hover{
+        color:#14FF00;
+    }
+    select{
+        font-family: 'Lato', sans-serif;
+        color:white;
+        background:transparent;
+        font-size:2em;
+    }
+</style>
+
+<center>
+
+    <h1>Welcome to Python!</h1>
+    <h2><i>The World's Most Popular Coding Language</i></h2>
+    <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/768px-Python-logo-notext.svg.png' width=20%>
+
+    <pre><code>print('Hello World!')</code></pre>
+</center>
+<div id='main' style='width:75%'>
+    <button type="button" class="collapsible">Show Python Editor</button>
+    <div class="content">
+        <form method='POST' action='/try' id='formID'>
+            <textarea id='editor' name='mycode'>&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;</textarea>
+
+
+            <input type='submit' class='run' value='Run!'>
+            <script>
+                var myForm = document.getElementById('formID');
+                myForm.onsubmit = function() {
+                    var w = window.open('about:blank','Popup_Window','toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=400,height=300,left = 312,top = 234');
+                    this.target = 'Popup_Window';
+                };
+            </script>
+
+
+            <style>
+                @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100&display=swap');
+                .run{
+                    background:transparent;
+                    height:60px;
+                    width:100px;
+                    border-radius:10px;
+                    color:green;
+                    border-style:solid;
+                    border-color:grey;
+                    border-width:1px;
+
+                }
+                .run:active{
+                    outline:none;
+
+                }
+                .run:hover{
+                    color:white;
+                    background:green;
+                    border-color:green;
+                }
+
+                code {
+                    font-family: 'JetBrains Mono', monospace;
+                    size:1.5em;
+                }
+
+            </style>
+        </form>
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.css">
+        </link>
+        <script type="text/javascript"
+                src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/mode/python/python.min.js">
+        </script>
+        <script type="text/javascript"
+                src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.js">
+        </script>
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/theme/dracula.min.css">
+        </link>
+
+        <script>
+            let cm = new CodeMirror.fromTextArea(document.getElementById("editor"), {
+                lineNumbers: true,
+                mode: "python",
+                theme: "dracula",
+                lineWrapping: false,
+                parserConfig: {'pythonVersion': 2, 'strictErrors': true}
+
+            });
+            CodeMirror.commands.autocomplete = function(cm) {
+                CodeMirror.simpleHint(cm, CodeMirror.pythonHint);
+            }
+        </script>
+
+    </div>
+    <button type="button" class="collapsible">Show Lesson 1</button>
+    <div class="content">
+        <h1>Lesson 1a: The print statement</h1>
+        <h2>What is printing?</h2>
+        • Printing is when you print something to the counsole<br>
+        <h3>For example:</h3>
+        <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background-color: rgb(240, 240, 240); color: rgb(68, 68, 68);"><span class="hljs-function"><span class="hljs-title" style="color: rgb(136, 0, 0); font-weight: 700;">print</span><span class="hljs-params">(<span class="hljs-string" style="color: rgb(136, 0, 0);">'Hello World'</span>)</span></span></pre><br>
+        • Print uses a  <code>str</code>, or a <b>string</b>
+        <h1>Lesson 1b: Variables</h1>
+        <h2>What are variables?</h2>
+        • You use variables to store data<br>
+        <h2>Data types</h2>
+        <code> int, str, list, dict, tuple</code>, etc.
+        <h2>Example</h2>
+        <code>integer=1</code><br>
+        Note, we used <code>int</code> or <b>numbers</b>
+        <h3>If we use this code</h3>
+        <code>print(integer)</code><br>
+        • The console will say<br>
+        <code>>>>1</code>
+    </div>
+    <button type="button" class="collapsible">Show Lesson 1 Quiz#1</button>
+    <div class="content">
+        <h1>Lesson 1 Quiz#1</h1>
+        <form onsubmit="return checkForm()"  name="quizOne">
+            <h3>Finish this statement</h3>
+            <h1><input type='text' name='answer' placeholder='(Type Here)' id='question' style='border-radius:5px;padding:10px;border-width:3px;border-style:none;'>("Hello World")</h1>
+            <input type='submit' value='Check your Work!'>
+            <script>
+                function  checkForm() {
+                    var x = document.forms["quizOne"]["answer"].value;
+                    document.getElementById("question").style.borderStyle = 'solid'
+                    if (x != "print") {
+                        alert("Incorrect!!!");
+                        document.getElementById("question").style.borderColor = 'red'
+                        return false;
+                    }
+                    else{
+                        alert("Correct!!!");
+                        document.getElementById("question").style.borderColor = 'green';
+                        return false;
+                    }
+                }
+            </script>
+    </div>
+    <button type="button" class="collapsible">Show Lesson 1 Quiz#2</button>
+    <div class="content">
+        <form onsubmit="return checkForm2()"  name="quizTwo">
+            <h1>Lesson 1 Quiz#2</h1>
+            <h3>Finish this statement</h3>
+            <h1><input type='text' name='answer2' placeholder='(Type Here)' id='question2' style='border-radius:5px;padding:10px;border-width:3px;border-style:none;'> = 1</h1>
+            <h1>print(integer)</h1>
+            <input type='submit' value='Check your Work!'>
+            <script>
+                function  checkForm2() {
+                    var x = document.forms["quizTwo"]["answer2"].value;
+                    document.getElementById("question2").style.borderStyle = 'solid'
+                    console.log(x)
+                    if (x != "integer") {
+                        alert("Incorrect!!!");
+                        document.getElementById("question2").style.borderColor = 'red'
+                        return false;
+                    }
+                    else{
+                        alert("Correct!!!");
+                        document.getElementById("question2").style.borderColor = 'green';
+                        return false;
+                    }
+            </script>
+    </div>
+    <button type="button" class="collapsible">Show Lesson 2</button>
+    <div class="content">
+        <h1>Lesson 2: Data Structures</h1>
+        <h2>This lesson is very long so read it through slowly.</h2>
+        <b>⚠️Warning this lesson requires running code to fully understand it</b><br>
+        • Free IDE online software: <a href='https://repl.it'>https://repl.it</a><br><br>
+        <h2>Data Structures</h2>
+        • <code>int</code> | Numbers<br>
+        • <code>boolean</code> | True/False<br>
+        • <code>string</code> | Text, for example <code>"hello"</code> or <code>'hello'</code><br>
+        • <code>list</code> | an array or list of <b>other</b> data structures <code>[1,2,'hi'3]</code><br>
+        • <code>dict</code> | Dictionary <code>{'key':'value'}</code><br>
+        • <code>tuple</code> | Tuple: (1,2,3)<br><br>
+        External Reference: <a href='https://www.w3schools.com/python/python_datatypes.asp'>Click Me!</a><br><br>
+        <h2>Using Ints</h2>
+        • Arithmetic<br>
+        • Keeping numbers<br><br>
+        <h2>Using booleans</h2>
+        In discord.py, sometimes you want to know if something is `True` or `False`. For example, does everyone have permission to view this channel? Does you message want to be hidden?<br><br>
+        <h2>Using Strings</h2>
+        This keeps track of `text`. For example discord.py's `message.content` and any other text<br><br>
+        <h2>Using dicts, lists, and tuples</h2>
+        When your organize many other datatypes organized together<br>
+    </div>
+    <button type="button" class="collapsible">Show Lesson 3</button>
+    <div class="content">
+        <h1>Lesson 3: Working with integers & strings</h1>
+        <h2>Part 1: Integers</h2>
+        • <u>Addition:</u> 1 **+** 2 ` = 3`<br>
+        • <u>Subtraction:</u> 2 **-** 1 ` = 1`<br>
+        • <u>Multiplication:</u> 1 ***** 2 ` = 2`<br>
+        • <u>Division:</u> 2 **/** 1 ` = 2.0`<br>
+        • <u>Integer Division:</u> 2 **//**1 ` = 2`<br>
+        • <u>Modulus</u> (Remainder when division, modular arithmetic) <br><br>
+
+        3 **%** 2  ` = 1` because `3/2` would equal to 1 remainder 1 if you don't make it decimal or fraction.<br>
+        • ```sum(1,2)```
+        This returns the sum of 2 numbers<br>
+        • ```abs(1-2)```
+        This returns the absolute value of a number so we get `abs(-1)` which is `1`.<br>
+        • ```max(1,2)```
+        This finds the bigger of the two numbers<br>
+        • ```min(1,2)```
+        This finds the bigger of the two numbers<br><br>
+        <h2>Part 2: Strings</h2>
+        Strings use `"` or `'` in front and after them
+        <h3>For example:</h3>
+        <code>"This is a string"
+            'This is a string'</code><br>
+        You can use many operators with strings.
+        • For example, in Discord.py, <code> message.content</code> is a string.<br>
+        • You can find the first letter of a string by doing.<code>
+        string="abcabcd"
+        print(string[0]) #Note Python starts from 0
+        #Your answer would be "a"</code><br>
+        When would you want to find the first letter of a string? Sometimes there is a command to input an age.
+        You input:
+        <code>"8 is my age"</code>
+        However, you only care about the `8`. When you do the `[0]` of that string you get 8.
+        ```Part2b: String's \n Operator```
+        ```python
+        "The \n operator"```
+        That would return
+        ```The
+        operator```
+        > **Reason:** The ```python
+        > \n``` just means new line and it indents.
+        >
+        For example a discord.py input has
+        > ```Apples are great
+        > Oranges are awesome```
+        Python would read it as
+        ```python
+        "Apples are great \nOranges are awesome```
+        Thanks!
+        Please complete your homework with `/homework`
+    </div>
+    <button type="button" class="collapsible">Show Lesson 4</button>
+    <div class="content">
+        <h1>Lesson 4: Working with Lists</h1>
+        Lists are a type of data structure
+        <br><br>
+        They are self explanatory, they store a list of items
+        <br><br>
+        Lists are specified with square brackets
+        <br><br>
+        Ex.
+
+        <pre><code>
+  mylist = [1, 2, 3, 4, 5]
+  </pre></code>
+
+        <br><br>
+        Lists can store: Strings, other lists, dictionaries, integers, variables
+        <br><br>
+        Lists with lists inside them are called: Nested Lists
+        <br><br>
+        Basic list methods
+
+
+
+
+        1. Adding an item to a list:
+        </pre></code>
+        <br><br>
+        mylist = []
+        <br><br>
+        mylist.append('hello')
+        <br><br>
+        print(mylist)
+        <br><br>
+        >>> ['hello']
+        </pre></code>
+
+        2. Deleting items from a list
+
+        <pre><code>
+  mylist = ['hello']
+  <br><br>
+  mylist.pop(0)
+  <br><br>
+
+  print(mylist)
+  >>> []<br><br>
+  </pre></code>
+
+
+        <h3>You may be thinking what the 0 in the pop function is.</h3> <br><br>
+        <h4>0 is the index of the item that you want to delete from the list.</h4>
+        <br><br>
+
+        List indecies start with 0. So the first item will have an index of 0, the second will have 1, and so on.
+        <br><br>
+
+        There is another method to delete items from a list.
+        <br><br>
+
+        <h3>This is using the del keyword</h3>
+        <pre><code>
+
+  mylist = ['hello']
+  <br><br>
+  del mylist['hello']
+  <br><br>
+  print(mylist)
+  <br><br>
+  >>>[]
+  </pre></code>
+
+    </div>
+
+
+
+    <button type="button" class="collapsible">Show Lesson 2 Quiz</button>
+    <div class="content">
+        <form onsubmit="return checkFormLesson2()"  name="quiz3">
+            <h1>Lesson 2 Quiz</h1>
+            <h3>Finish this statement</h3>
+            <h1>(1, 2, 3) is a</h1><input type='text' name='answer3' placeholder='(Type Here)' id='question3' style='border-radius:5px;padding:10px;border-width:3px;border-style:none;'>
+
+            <input type='submit' value='Check your Work!'>
+
+    </div>
+
+    <button type="button" class="collapsible">Show Lesson 3 Quiz</button>
+    <div class="content">
+        <form onsubmit="return checkFormLesson3()"  name="quiz4">
+            <h1>Lesson 3 Quiz</h1>
+            <h3>Finish this statement</h3>
+            <h1>10 % 3 =</h1><input type='text' name='answer4' placeholder='(Type Here)' id='question4' style='border-radius:5px;padding:10px;border-width:3px;border-style:none;'>
+
+            <input type='submit' value='Check your Work!'>
+
+    </div>
+
+
+    <button type="button" class="collapsible">Show Lesson 4 Quiz</button>
+    <div class="content">
+        <form onsubmit="return checkFormLesson4()"  name="quiz5">
+            <h1>Lesson 4 Quiz</h1>
+            <h3>Finish this statement</h3>
+            <h1>mylist = ['hello', 'world'] </h1><br><br><h1>mylist.pop(<input type='text' name='answer4' placeholder='(Type Here)' id='question4' style='border-radius:5px;padding:10px;border-width:3px;border-style:none;'>)</h1><br><br><h1>print(mylist)</h1><br><br><h1>>>>['hello']</h1>
+
+            <input type='submit' value='Check your Work!'>
+
+    </div>
+
+
+    <script>
+        function  checkFormLesson2() {
+            var x = document.forms["quiz3"]["answer3"].value;
+            document.getElementById("question3").style.borderStyle = 'solid'
+            console.log(x)
+            if (x != "tuple") {
+                alert("Incorrect!!!");
+                document.getElementById("question3").style.borderColor = 'red'
+                return false;
+            }
+            else{
+                alert("Correct!!!");
+                document.getElementById("question3").style.borderColor = 'green';
+                return false;
+            }
+    </script>
+
+    <script>
+        function  checkFormLesson3() {
+            var x = document.forms["quiz4"]["answer4"].value;
+            document.getElementById("question4").style.borderStyle = 'solid'
+            console.log(x)
+            if (x != "1") {
+                alert("Incorrect!!!");
+                document.getElementById("question4").style.borderColor = 'red'
+                return false;
+            }
+            else{
+                alert("Correct!!!");
+                document.getElementById("question4").style.borderColor = 'green';
+                return false;
+            }
+    </script>
+
+    <script>
+        function  checkFormLesson4() {
+            var x = document.forms["quiz5"]["answer5"].value;
+            document.getElementById("question5").style.borderStyle = 'solid'
+
+            if (x == "1") {
+                alert("Correct!!!");
+                document.getElementById("question5").style.borderColor = 'green';
+                return false;
+            }
+            else{
+                alert("Incorrect!!!");
+                document.getElementById("question5").style.borderColor = 'red'
+                return false;
+            }
+    </script>
+    <button type="button" class="collapsible">Show Lesson 5</button>
+    <div class="content">
+        <h1>Creating a simple game!</h1>
+        <h2>Guess the Number</h2>
+        <h3>In this lesson, we will code the game: Guess the number</h3>
+        <code>print('Welcome to Guess the number')</code>
+        <p>This step basically just prints something to the console</p>
+        <code>name = input('What is your name?')</code>
+        <p>Input is a question that popups in the screen of the console. You can type anything in that box. Then, you press <code>Enter</code> and it saves to the variable <code>name</code> as a <code>str</code></p>
+        <code>print('Hello, '+name)</code>
+        <p>Here, we combine <code>Hello, </code> with whatever is stored in <code>name</code>. For example, I put my name is <code>Bob</code> Then, it would print <code>Hello, Bob</code>.</p>
+        <code>import random</code>
+        <p>What this does is add another <code>"section"</code> of python that does <code>random</code> things.</p>
+        <code>number = random.randint(0,100)</code>
+        <p>This code chooses a number from 0 to 100. The definition for randint is as follows: <br> <code>Return a random integer N such that a &lt= N &lt= b. Alias for randrange(a, b+1).</code></p>
+        <code>guess=int(input('Please guess a number!'))</code>
+        <p>This is where the numbers they guess are stored. We will find out what happens to them in a second</p>
+        <code>while guess != number:</code>
+        <code><blockquote>guess=int(input('That number is incorrect! Please guess another number!'))</blockquote></code>
+        <p>In this step, if while they are <code>WRONG</code>. They will be asked to reguess it. We added <code>int()</code> to change their <code>str</code> to a number, or an <code>int</code>!
+        <h1>Final Code</h1>
+        <code>
+            print('Welcome to Guess the number')<br>
+            name = input('What is your name?')<br>
+            print('Hello, '+name)<br>
+            import random<br>
+            number = random.randint(0,100)<br>
+            guess=int(input('Please guess a number!'))<br>
+            while guess != number:<br>
+            <blockquote>guess=int(input('That number is incorrect! Please guess another number!'))</blockquote>
+        </code>
+    </div>
+    <button type="button" class="collapsible">Lesson 5 Project</button>
+    <div class="content">
+
+        <button type="button" class="collapsible">Python Assessment</button>
+        <div class="content">
+            <h1>Python Assessment</h1>
+            <form onsubmit="return checkTest()"  name="test">
+                <h1>Part One:
+                    <h2>1) <select name='t1'><option value='str'>str</option><option value='int'>int</option><option value='dict'>dict</option><option value='list'>list</option><option value='tuple'>tuple</option></select> is the data type you use for numbers.</h2>
+                    <h2>2) <select name='t2'><option value='str'>str</option><option value='int'>int</option><option value='dict'>dict</option><option value='list'>list</option><option value='tuple'>tuple</option></select> is the data type you use for this type of data: {'Discord':'chatting','Google Classroom':'LMS'}.</h2>
+                    <h2>3) <select name='t3'><option value='str'>str</option><option value='int'>int</option><option value='dict'>dict</option><option value='list'>list</option><option value='tuple'>tuple</option></select> is the data type you use for this type of data: [1,2,3,4].</h2>
+                    <h2>4) <select name='t4'><option value='str'>str</option><option value='int'>int</option><option value='dict'>dict</option><option value='list'>list</option><option value='tuple'>tuple</option></select> is the data type you use for this type of data: ('car','truck','train','plane').</h2>
+                    <h2>5) <select name='t5'><option value='str'>str</option><option value='int'>int</option><option value='dict'>dict</option><option value='list'>list</option><option value='tuple'>tuple</option></select> is the data type which you put alphanumeric or any other characters in quotation marks.</h2>
+                    <h1>Part Two: Built-In Functions</h1>
+                    <h2>6) Fill in the blank: <select name='t6'><option value='print'>print</option><option value='input'>input</option><option value='max'>max</option><option value='min'>min</option><option value='sum'>sum</option></select>('Hello')<br> That Returns: <code style='color:blue;'>Hello</cmode></h2>
+                    <input type='submit' style='background:red;color:yellow;padding:10px;border-radius:20%;font-size:2em;'>
+                    <script>
+                        function  checkTest() {
+                            var x = document.forms["test"]["answer"].value;
+                            document.getElementById("question").style.borderStyle = 'solid'
+                            if (x != "print") {
+                                alert("Incorrect!!!");
+                                document.getElementById("question").style.borderColor = 'red'
+                                return false;
+                            }
+                            else{
+                                alert("Correct!!!");
+                                document.getElementById("question").style.borderColor = 'green';
+                                return false;
+                            }
+                        }
+                    </script>
+                    <script>
+                        var coll = document.getElementsByClassName("collapsible");
+                        var i;
+
+                        for (i = 0; i < coll.length; i++) {
+                            coll[i].addEventListener("click", function() {
+                                this.classList.toggle("active");
+                                var content = this.nextElementSibling;
+                                if (content.style.display === "block") {
+                                    content.style.display = "none";
+                                } else {
+                                    content.style.display = "block";
+
+                                }
+                            });
+                        }
+                    </script>
+        </div>
+        <div style="float:right;width:10%;" class='side'>
+            <h1>hi</h1>
+        </div>
