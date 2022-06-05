@@ -11,12 +11,15 @@ def daplagarism(data1, data2):
     nltk.download('punkt')
 
     # Training data file
-    # train_data_file = "testing.txt"
+    train_data_file = "testing.txt"
     #
+    with open(train_data_file, "w") as out:
+        out.write(data1)
+
     # # read training data
-    # with open(train_data_file) as f:
-    #     train_text = f.read().lower()
-    train_text = data1.lower()
+    with open(train_data_file) as f:
+        train_text = f.read().lower()
+    #train_text = data1.lower()
 
     # apply preprocessing (remove text inside square and curly brackets and rem punc)
     train_text = re.sub(r"\[.*\]|\{.*\}", "", train_text)
@@ -41,11 +44,12 @@ def daplagarism(data1, data2):
 
     # testing data file
     test_data_file = "testing2.txt"
-
+    with open(test_data_file, "w") as out:
+        out.write(data2)
     # Read testing data
-    # with open(test_data_file) as f:
-    #     test_text = f.read().lower()
-    test_text = data2.lower()
+    with open(test_data_file) as f:
+        test_text = f.read().lower()
+    #test_text = data2.lower()
     test_text = re.sub(r'[^\w\s]', "", test_text)
 
     # Tokenize and pad the text
@@ -112,3 +116,5 @@ def daplagarism(data1, data2):
     # import webbrowser
     # webbrowser.open(encoded)
     return [score, plagarized, encoded]
+
+#daplagarism("Hedsdsdsdsdsdsdsdsdsdsdsdsllo", "sdsdssdsdsdsHello")

@@ -12,5 +12,8 @@ def plagarism():
     data = request.form
     text1 = data["text1"]
     text2 = data["text2"]
-    result = daplagarism(text1, text2)
+    try:
+        result = daplagarism(text1, text2)
+    except:
+        return "short"
     return f"{result[0]}•{result[1]}•{result[2]}"
