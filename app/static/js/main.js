@@ -150,7 +150,7 @@ window.addEventListener("load", function () {
             logo.style.height = size;
         }
 
-        logo.innerHTML = '<img alt="logo" style="' + logo.getAttribute("style") + '" class="' + logo.className + '" src="' + img + '">';
+        logo.innerHTML = '<div style="padding:10px;"><img alt="logo" style="' + logo.getAttribute("style") + '" class="' + logo.className + '" src="' + img + '"></div>';
 
         logo.removeAttribute("style");
         logo.removeAttribute("class");
