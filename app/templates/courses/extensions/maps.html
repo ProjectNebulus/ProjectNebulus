@@ -1,9 +1,24 @@
-<iframe
+<div id="here">
+
+</div>
+<script>
+    fetch('https://api.ipregistry.co/?key=tryout')
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (payload) {
+            let country = payload.location.country.name;
+            let lang = payload.location.country.languages[0].code;
+            console.log( + ', ' + payload.location.city);
+            document.getElementById('here').innerHTML = `
+            <iframe
         width="100%"
         height="100%"
         style="border:0"
         loading="lazy"
         allowfullscreen
         referrerpolicy="no-referrer-when-downgrade"
-        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD2J7jrDxcTklceXZ8-dbLvsNYFMOrqEOs&q=USA">
-</iframe>
+        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD2J7jrDxcTklceXZ8-dbLvsNYFMOrqEOs&q=${country}&language=${lang}">
+</iframe>`
+        });
+</script>

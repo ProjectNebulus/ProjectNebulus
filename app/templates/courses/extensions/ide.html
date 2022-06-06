@@ -2,11 +2,11 @@
 {% block main %}
 <script>hljs.highlightAll();
     function switchEditor(id) {
-        document.getElementById("pythoneditor").style.display = "none";
-        document.getElementById("htmleditor").style.display = "none";
-        document.getElementById("javaeditor").style.display = "none";
-        document.getElementById("cppeditor").style.display = "none";
-        document.getElementById(id).style.display = "block";
+        document.getElementsByClassName("CodeMirror")[0].style.display = "none";
+        document.getElementsByClassName("CodeMirror")[1].style.display = "none";
+        document.getElementsByClassName("CodeMirror")[2].style.display = "none";
+        document.getElementsByClassName("CodeMirror")[3].style.display = "none";
+        document.getElementsByClassName("CodeMirror")[id].style.display = "block";
     }
 </script>
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
@@ -54,22 +54,22 @@
     <div class="border-b border-gray-200 dark:border-gray-700">
         <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
             <li class="mr-2">
-                <a onclick="switchEditor('htmleditor')" class="inline-flex p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group">
+                <a onclick="switchEditor(2)" class="inline-flex p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group">
                     <i class='fab fa-html5 mr-2 w-5 h-5 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300'></i>index.html
                 </a>
             </li>
             <li class="mr-2">
-                <a onclick="switchEditor('pythoneditor')" class="inline-flex p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active dark:text-blue-500 dark:border-blue-500 group" aria-current="page">
+                <a onclick="switchEditor(0)" class="inline-flex p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active dark:text-blue-500 dark:border-blue-500 group" aria-current="page">
                     <i class='fab fa-python mr-2 w-5 h-5 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300'></i> main.py
                 </a>
             </li>
             <li class="mr-2">
-                <a onclick="switchEditor('javaeditor')" class="inline-flex p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group">
+                <a onclick="switchEditor(1)" class="inline-flex p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group">
                     <i class='fab fa-java mr-2 w-5 h-5 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300'></i>main.java
                 </a>
             </li>
             <li class="mr-2">
-                <a onclick="switchEditor('cppeditor')" class="inline-flex p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group">
+                <a onclick="switchEditor(3)" class="inline-flex p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group">
                     <i class='fab fa-circle-c mr-2 w-5 h-5 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300'></i>main.cpp
                 </a>
             </li>
@@ -163,6 +163,8 @@ int main() {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/meta.min.js" integrity="sha512-/2x+sfL5ERHfoViXm/UncFBzaD54f2bkjEui6w2IheEUafG2gcHJv3gQ4VDIqNr+LuApQwpnsjjrEMXI43nPzg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/theme/midnight.min.css" integrity="sha512-ZTF0X2l7PXEFDyP+MSOK0QM3Qh+C+lQ70Tqx4vQb3+6Uxh2lYkwmbSbpDmksZaX8w0sSz8ctVBnPSzAR1TQlzA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/python/python.min.js" integrity="sha512-2M0GdbU5OxkGYMhakED69bw0c1pW3Nb0PeF3+9d+SnwN1ryPx3wiDdNqK3gSM7KAU/pEV+2tFJFbMKjKAahOkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script type="text/javascript"
+                src="/site.com/js/libs/codemirror/mode/xml/xml.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/htmlmixed/htmlmixed.min.js" integrity="sha512-2M0GdbU5OxkGYMhakED69bw0c1pW3Nb0PeF3+9d+SnwN1ryPx3wiDdNqK3gSM7KAU/pEV+2tFJFbMKjKAahOkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/clike/clike.min.js" integrity="sha512-l8ZIWnQ3XHPRG3MQ8+hT1OffRSTrFwrph1j1oc1Fzc9UKVGef5XN9fdO0vm3nW0PRgQ9LJgck6ciG59m69rvfg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://codemirror.net/addon/search/search.js"  integrity="sha512-2M0GdbU5OxkGYMhakED69bw0c1pW3Nb0PeF3+9d+SnwN1ryPx3wiDdNqK3gSM7KAU/pEV+2tFJFbMKjKAahOkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -195,7 +197,8 @@ int main() {
             let cm2 = new CodeMirror.fromTextArea(document.getElementById("htmleditor"), {
                 value: "<h1>Hello World</h1>",
                 lineNumbers: true,
-                mode: "htmlmixed",
+                //mode: "text/html",
+                mode: "xml",
                 theme: "midnight",
                 indentUnit: 4,
                 smartIndent: true,
@@ -213,7 +216,7 @@ int main() {
             let cm3 = new CodeMirror.fromTextArea(document.getElementById("javaeditor"), {
                 value: "System.println('Hello World');",
                 lineNumbers: true,
-                mode: "java",
+                mode: "text/x-java",
                 theme: "midnight",
                 indentUnit: 4,
                 smartIndent: true,
@@ -231,7 +234,7 @@ int main() {
             let cm4 = new CodeMirror.fromTextArea(document.getElementById("cppeditor"), {
                 value: "<h1>Hello World</h1>",
                 lineNumbers: true,
-                mode: "c++",
+                mode: "text/x-c++src",
                 theme: "midnight",
                 indentUnit: 4,
                 smartIndent: true,
@@ -246,6 +249,12 @@ int main() {
                 autofocus: true,
             });
             cm4.setSize("100%", "100%");
+            document.getElementsByClassName("CodeMirror")[0].style.display = "none";
+            document.getElementsByClassName("CodeMirror")[1].style.display = "none";
+            document.getElementsByClassName("CodeMirror")[2].style.display = "none";
+            document.getElementsByClassName("CodeMirror")[3].style.display = "none";
+            document.getElementsByClassName("CodeMirror")[0].style.display = "block";
+
         </script>
 
     </div>
