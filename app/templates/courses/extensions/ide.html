@@ -1,12 +1,18 @@
 {%  extends "layout.html" %}
 {% block main %}
-<script>hljs.highlightAll();</script>
+<script>hljs.highlightAll();
+    function switchEditor(id) {
+        document.getElementById("pythoneditor").style.display = "none";
+        document.getElementById("htmleditor").style.display = "none";
+        document.getElementById("javaeditor").style.display = "none";
+        document.getElementById("cppeditor").style.display = "none";
+        document.getElementById(id).style.display = "block";
+    }
+</script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 
 <style>
-
-    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap,900&display=swap');
     body{
-        font-family: 'Lato', sans-serif;
         color:white;
         background:#121926;
         margin:0;
@@ -37,45 +43,58 @@
 
 
     }
-    .b{
-        font-family: 'Lato', sans-serif;
-        font-weight:900;
-    }
-    .collapsible {
-        font-family: 'Lato', sans-serif;
-        background-color: rgba(0, 0, 0,0.2);
-        color: white;
-        cursor: pointer;
-        padding: 18px;
-        width: 100%;
-        border: none;
-        text-align: left;
-        outline: none;
-        font-size: 15px;
-    }
 
     .active, .collapsible:hover {
         background-color: rgba(0, 0, 0,0.1);
     }
 
-    a{
-        color:yellow;
-        text-decoration:none;
-    }
-    a:hover{
-        color:#14FF00;
-    }
-    select{
-        font-family: 'Lato', sans-serif;
-        color:white;
-        background:transparent;
-        font-size:2em;
-    }
+
 </style>
 
+    <div class="border-b border-gray-200 dark:border-gray-700">
+        <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
+            <li class="mr-2">
+                <a onclick="switchEditor('htmleditor')" class="inline-flex p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group">
+                    <i class='fab fa-html5 mr-2 w-5 h-5 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300'></i>index.html
+                </a>
+            </li>
+            <li class="mr-2">
+                <a onclick="switchEditor('pythoneditor')" class="inline-flex p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active dark:text-blue-500 dark:border-blue-500 group" aria-current="page">
+                    <i class='fab fa-python mr-2 w-5 h-5 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300'></i> main.py
+                </a>
+            </li>
+            <li class="mr-2">
+                <a onclick="switchEditor('javaeditor')" class="inline-flex p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group">
+                    <i class='fab fa-java mr-2 w-5 h-5 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300'></i>main.java
+                </a>
+            </li>
+            <li class="mr-2">
+                <a onclick="switchEditor('cppeditor')" class="inline-flex p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group">
+                    <i class='fab fa-circle-c mr-2 w-5 h-5 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300'></i>main.cpp
+                </a>
+            </li>
+        </ul>
+    </div>
     <div class="content">
+
         <form method='POST' action='/try' id='formID'>
-            <textarea id='editor' name='mycode'>print('Hello, World!')</textarea>
+            <textarea id='pythoneditor' name='pythoncode'>print('Hello, World!')</textarea>
+            <textarea id='javaeditor' style="display:none;" name='javacode'>
+                public class Main {
+                    public static void main(String[] args) {
+                        System.out.println("Hello, World!");
+                    }
+                }
+            </textarea>
+            <textarea id='htmleditor' style="display:none;" name='htmlcode'><h1>Hello World</h1></textarea>
+            <textarea id='cppeditor' style="display:none;" name='cppcode'>
+#include <iostream>
+
+int main() {
+    std::cout << "Hello World!";
+    return 0;
+}
+            </textarea>
 
             <button type="submit"  class="run relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
   <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
@@ -144,13 +163,15 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/meta.min.js" integrity="sha512-/2x+sfL5ERHfoViXm/UncFBzaD54f2bkjEui6w2IheEUafG2gcHJv3gQ4VDIqNr+LuApQwpnsjjrEMXI43nPzg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/theme/midnight.min.css" integrity="sha512-ZTF0X2l7PXEFDyP+MSOK0QM3Qh+C+lQ70Tqx4vQb3+6Uxh2lYkwmbSbpDmksZaX8w0sSz8ctVBnPSzAR1TQlzA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/python/python.min.js" integrity="sha512-2M0GdbU5OxkGYMhakED69bw0c1pW3Nb0PeF3+9d+SnwN1ryPx3wiDdNqK3gSM7KAU/pEV+2tFJFbMKjKAahOkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/htmlmixed/htmlmixed.min.js" integrity="sha512-2M0GdbU5OxkGYMhakED69bw0c1pW3Nb0PeF3+9d+SnwN1ryPx3wiDdNqK3gSM7KAU/pEV+2tFJFbMKjKAahOkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/clike/clike.min.js" integrity="sha512-l8ZIWnQ3XHPRG3MQ8+hT1OffRSTrFwrph1j1oc1Fzc9UKVGef5XN9fdO0vm3nW0PRgQ9LJgck6ciG59m69rvfg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://codemirror.net/addon/search/search.js"  integrity="sha512-2M0GdbU5OxkGYMhakED69bw0c1pW3Nb0PeF3+9d+SnwN1ryPx3wiDdNqK3gSM7KAU/pEV+2tFJFbMKjKAahOkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://codemirror.net/addon/search/searchcursor.js"  integrity="sha512-2M0GdbU5OxkGYMhakED69bw0c1pW3Nb0PeF3+9d+SnwN1ryPx3wiDdNqK3gSM7KAU/pEV+2tFJFbMKjKAahOkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://codemirror.net/addon/search/jump-to-line.js"  integrity="sha512-2M0GdbU5OxkGYMhakED69bw0c1pW3Nb0PeF3+9d+SnwN1ryPx3wiDdNqK3gSM7KAU/pEV+2tFJFbMKjKAahOkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://codemirror.net/addon/dialog/dialog.js"  integrity="sha512-2M0GdbU5OxkGYMhakED69bw0c1pW3Nb0PeF3+9d+SnwN1ryPx3wiDdNqK3gSM7KAU/pEV+2tFJFbMKjKAahOkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <link rel="stylesheet" href="https://codemirror.net/addon/dialog/dialog.css" integrity="sha512-ZTF0X2l7PXEFDyP+MSOK0QM3Qh+C+lQ70Tqx4vQb3+6Uxh2lYkwmbSbpDmksZaX8w0sSz8ctVBnPSzAR1TQlzA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <script>
-            let cm = new CodeMirror.fromTextArea(document.getElementById("editor"), {
+            let cm = new CodeMirror.fromTextArea(document.getElementById("pythoneditor"), {
                 value: "print('Hello, World!')",
                 lineNumbers: true,
                 mode: "python",
@@ -171,6 +192,60 @@
                 CodeMirror.simpleHint(cm, CodeMirror.pythonHint);
             }
             cm.setSize("100%", "100%");
+            let cm2 = new CodeMirror.fromTextArea(document.getElementById("htmleditor"), {
+                value: "<h1>Hello World</h1>",
+                lineNumbers: true,
+                mode: "htmlmixed",
+                theme: "midnight",
+                indentUnit: 4,
+                smartIndent: true,
+                tabSize: 4,
+                indentWithTabs:true,
+                electricChars: true,
+                lineWrapping: false,
+                firstLineNumber: 1,
+                fixedGutter: true,
+                scrollbarStyle: "native",
+                screenReaderLabel: "Code editor",
+                autofocus: true,
+            });
+            cm2.setSize("100%", "100%");
+            let cm3 = new CodeMirror.fromTextArea(document.getElementById("javaeditor"), {
+                value: "System.println('Hello World');",
+                lineNumbers: true,
+                mode: "java",
+                theme: "midnight",
+                indentUnit: 4,
+                smartIndent: true,
+                tabSize: 4,
+                indentWithTabs:true,
+                electricChars: true,
+                lineWrapping: false,
+                firstLineNumber: 1,
+                fixedGutter: true,
+                scrollbarStyle: "native",
+                screenReaderLabel: "Code editor",
+                autofocus: true,
+            });
+            cm3.setSize("100%", "100%");
+            let cm4 = new CodeMirror.fromTextArea(document.getElementById("cppeditor"), {
+                value: "<h1>Hello World</h1>",
+                lineNumbers: true,
+                mode: "c++",
+                theme: "midnight",
+                indentUnit: 4,
+                smartIndent: true,
+                tabSize: 4,
+                indentWithTabs:true,
+                electricChars: true,
+                lineWrapping: false,
+                firstLineNumber: 1,
+                fixedGutter: true,
+                scrollbarStyle: "native",
+                screenReaderLabel: "Code editor",
+                autofocus: true,
+            });
+            cm4.setSize("100%", "100%");
         </script>
 
     </div>
