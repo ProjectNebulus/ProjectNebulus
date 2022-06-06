@@ -93,6 +93,10 @@ def create_google_course():
     post_data = request.get_json()
     if request.method == "GET":
         post_data = request.args
+    if not post_data["link"]:
+        return "No Link"
+    if not post_data["teacher"]:
+        post_data["teacher"] = "Unknown Teacher"
     link = post_data["link"]
     index = link.index("?id=") + 4
     link = link[index: len(link)]
@@ -178,10 +182,14 @@ def create_canvas_course():
 
 @internal.route("/createSchoologyCourse", methods=["GET", "POST"])
 def create_schoology_course():
-    post_data = request.get_json()
+    post_data = request.form
     if request.method == "GET":
         post_data = request.args
     link = post_data["link"]
+    if "schoology" in link:
+        index = link.index("/course/") + 8
+        link = link[index: index+10]
+
     schoology = read.getSchoology(username=session["username"])
     if len(schoology) == 0:
         return "1"
@@ -204,10 +212,12 @@ def create_schoology_course():
         auth.authorize()
     sc = schoolopy.Schoology(auth)
     sc.limit = 1000
-    print("Courses:",
-          *(f'{sec["course_title"]}: {sec["section_title"]}' for sec in sc.get_user_sections(sc.get_me()["id"])),
-          sep="\n")
+    #sec = sc.get_section(section_id=link)
+    # print("Courses:",
+    #       *(f'{sec["course_title"]}: {sec["section_title"]}' for sec in sc.get_user_sections(sc.get_me()["id"])),
+    #       sep="\n")
     section = dict(sc.get_section(link))
+    print(section)
     course = {
         "name": f'{section["course_title"]} ({section["section_title"]})',
         "description": section["description"],

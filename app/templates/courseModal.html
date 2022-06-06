@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="../static/css/createCourse.css">
+    <link rel="stylesheet" href="/static/css/createCourse.css">
     <title>Create Course</title>
 </head>
 <body>
@@ -20,7 +20,7 @@
                     your learning experience. All you have to do is create a course
                     and fill it in with content!</p><br>
 
-                <span class='createSelectButton text-white focus:ring-4 shadow-lg font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2'
+                <span class='createSelectButton text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 text-xl'
                       onclick="skipTemplates()">
                     <img src="/static/images/icons/new.svg"
                          style="visibility:visible;width:20px;height:20px;float:left;" alt="Create course image">
@@ -82,15 +82,15 @@
             </form>
 
             <h1>Or import from another LMS</h1>
-            <button class="createSelectButton text-white focus:ring-4 shadow-lg font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+            <button class="createSelectButton text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 text-xl"
                     id="import-schoology">
                 Import from Schoology
             </button>
-            <button class="createSelectButton text-white focus:ring-4 shadow-lg font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-22"
+            <button class="createSelectButton text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 text-xl2"
                     id="import-classroom">
                 Import from Google Classroom
             </button>
-            <button class="createSelectButton text-white focus:ring-4 shadow-lg font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+            <button class="createSelectButton text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 text-xl"
                     id="import-canvas">
                 Import from Canvas
             </button>
@@ -134,7 +134,7 @@
 
         </div>
 
-        <form id="schoology-create-course" style="width:90%;height:90%;display:none;" onsubmit="importSchoology(); return false;">
+        <form id="schoology-create-course" style="width:90%;height:90%;display:none;" onsubmit="importSchoology(); ">
             <div class="mb-6">
                 <label for="course-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                     Schoology Course Link

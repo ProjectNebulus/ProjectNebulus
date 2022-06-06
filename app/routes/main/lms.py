@@ -118,7 +118,7 @@ def lms():
             )
             auth.authorize()
             sc = schoolopy.Schoology(auth)
-            sc.limit = 100
+            sc.limit = "100&include_past=1"
             scCourses = list(sc.get_user_sections(user_id=sc.get_me().id))
             for i in range(0, len(scCourses)):
                 scCourses[i] = dict(scCourses[i])

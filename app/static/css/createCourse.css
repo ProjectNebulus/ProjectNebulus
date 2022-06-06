@@ -112,7 +112,7 @@
     cursor: pointer;
 }
 
-#CourseModal.scroll {
+.scroll {
     height: 40%;
     overflow: auto;
 }

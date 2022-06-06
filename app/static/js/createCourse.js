@@ -69,7 +69,7 @@ function createCourse(subtemplate) {
 function skipTemplates() {
     screens[0].style.display = 'none';
     customize(null, user + "'s class");
-    const h1 = modal.getElementById('change-if-skip-templates');
+    const h1 = document.getElementById('change-if-skip-templates');
     h1.innerHTML = h1.innerHTML.replace('Step 3: ', '');
 }
 
@@ -180,7 +180,7 @@ const templates = [
 
 for (const template of templates) {
     let button = document.createElement('div');
-    button.className = 'createSelectButton text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 text-xl';
+    button.className = 'createSelectButton text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 text-xl';
     button.onclick = () => chooseTemplate(template);
 
     // TODO: fix duplicate code fragments
@@ -234,7 +234,7 @@ function chooseTemplate(template) {
     templateLists[1].innerHTML = '';
     for (const subtemplate of template.subtemplates) {
         let button = document.createElement('div');
-        button.className = 'createSelectButton text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 text-xl';
+        button.className = 'createSelectButton text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 text-xl';
         button.onclick = function () {
             const name = template.name;
             customize(name, subtemplate);

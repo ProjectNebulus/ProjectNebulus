@@ -8,7 +8,7 @@ from .....static.python.mongodb import update, read
 @internal.route("/connect-to-schoology", methods=["POST"])
 def connect_schoology():
     session["token"] = None
-    data = request.get_json()
+    data = request.form
     key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
     secret = "59ccaaeb93ba02570b1281e1b0a90e18"
     sc = schoolopy.Schoology(schoolopy.Auth(key, secret))
