@@ -2,13 +2,13 @@
 
 </div>
 <script>
-    fetch('https://api.ipregistry.co/?key=tryout')
+    fetch('https://api.ipregistry.co/?key=fu91jwv1c895vpw9')
         .then(function (response) {
             return response.json();
         })
         .then(function (payload) {
             let country = payload.location.country.name;
-            let lang = payload.location.country.languages[0].code;
+            let lang = payload.location.language.code;
             console.log( + ', ' + payload.location.city);
             document.getElementById('here').innerHTML = `
             <iframe
