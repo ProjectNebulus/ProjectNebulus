@@ -1,5 +1,5 @@
 {% if not disablebar %}
-    <nav class="w-full sticky backdrop-blur-sm top-0 z-10 border-gray-200 px-2 py-2 rounded-lg bg-gray-300/30 dark:bg-gray-800/30 h-auto"
+    <nav class="noselect w-full sticky backdrop-blur-sm top-0 z-10 border-gray-200 px-2 py-2 rounded-lg bg-gray-300/30 dark:bg-gray-800/30 h-auto"
          id="navbar" aria-label="Navigation Bar">
         <div class="container flex flex-wrap justify-between items-center mx-auto">
             <div style="float:left;" class="flex">
@@ -162,7 +162,7 @@
             {% include "navbar_mobile.html" %}
         </div>
     </div>
-    <div id="control-center" class="hidden backdrop-blur-sm z-10">{% include "control.html" %}</div>
+    <div id="control-center" class="bg-gray-300/30 dark:bg-gray-800/30 p-4 rounded-lg dark:border-gray-700 border hidden backdrop-blur-sm z-10">{% include "control.html" %}</div>
     <script>
         function detectTheme() {
             if (!localStorage.getItem('color-theme')) {

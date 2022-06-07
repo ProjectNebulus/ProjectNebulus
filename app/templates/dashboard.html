@@ -13,14 +13,14 @@
     {% include "navbar.html" %}
     <br>
     <div style="text-align: center; height:10%;">
-        <h1 class="text-black text-4xl dark:text-white">Good Afternoon, {{ user }}</h1>
+        <h1 class="noselect text-black text-4xl dark:text-white">Good Afternoon, {{ user }}</h1>
     </div>
 
-    <h2 class="text-black dark:text-white text-2xl ml-6">Recent Activity</h2>
+    <h2 class="noselect text-black dark:text-white text-2xl ml-6">Recent Activity</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 p-6" aria-label="Recent Activity">
-        <div class="pb-2 overflow-hidden" style="height: 20rem">
-            <table class="text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 w-full text-sm rounded-lg"
-                   style="height: 17rem;">
+        <div class="pb-2" style="/*overflow-y:scroll; height: 20rem*/">
+            <table class="text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 w-full text-sm rounded-lg" style="overflow: hidden !important;">
+
                 <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th class="px-6 py-3 text-left">Event</th>
@@ -31,13 +31,15 @@
                 </tr>
                 </thead>
 
-                <tbody>
+                <div style="height: 17em;       /* Just for the demo          */ overflow-y: auto;    /* Trigger vertical scroll    */ overflow-x: hidden;  /* Hide the horizontal scroll */">
                 {% if events|length == 0 %}
                     <tr class="text-gray-400 dark:text-gray-400">
                         <td style="transform: translate(180%)">No Events</td>
                     </tr>
                 {% else %}
-                    {% for event in events[:5] %}
+                    {% set count = -1 %}
+                    {% for event in events %}
+                        {% set count = count + 1 %}
                         {% if event._cls == "Event" %}
                             <tr style="vertical-align: top;" aria-label="Event"
                                 class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 h-4">
@@ -52,11 +54,15 @@
                                 <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-1">
                                     {{ strftime(event.date.time(), "%I:%M %p") }}
                                 </td>
-                                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-1">
+                                <td data-tooltip-target="eventCourseName{{ count }}" class="truncate border-t-2 border-gray-200 dark:border-gray-700 px-6 py-1">
                                     {{ event.course.name }}
                                 </td>
+                                <div id="eventCourseName{{ count }}" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                                    {{ event.course.name }}
+                                    <div class="tooltip-arrow" data-popper-arrow></div>
+                                </div>
                                 <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-1">
-                                    <span class="text-blue-500 hover:text-blue-700">Edit</span>
+                                    <span class="noselect text-blue-500 hover:text-blue-700">Edit</span>
                                 </td>
                             </tr>
                         {% else %}
@@ -82,21 +88,13 @@
                         {% endif %}
                     {% endfor %}
                 {% endif %}
-                </tbody>
+                </div>
             </table>
 
-            <div class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
-                <button class="material-icons mx-2 my-2 rounded hover:bg-gray-300 dark:hover:bg-gray-500">
-                    navigate_before
-                </button>
-                <button class="material-icons mx-2 my-2 rounded hover:bg-gray-300 dark:hover:bg-gray-500"
-                        style="float: right">
-                    navigate_next
-                </button>
-            </div>
+
         </div>
         <div class="pb-2" style="margin-top: -3rem; height: 20rem">
-            <h2 class="text-black dark:text-white text-2xl ml-4">Recent Announcements</h2>
+            <h2 class="noselect text-black dark:text-white text-2xl ml-4">Recent Announcements</h2>
             <div class="overflow-x-hidden overflow-y-auto hover-scroll h-full" aria-label="Recent Announcements">
                 <div class="grid gap-4 pl-4 mt-5" style="grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));">
                     {% for a in announcements %}
@@ -123,7 +121,7 @@
                                        data-dismiss-target="announcement-{{ a.id }}">close</p>
                                 </div>
                             </div>
-                            <p class="text-xs text-gray-700 uppercase dark:text-gray-400"
+                            <p class="noselect text-xs text-gray-700 uppercase dark:text-gray-400"
                                style="margin-left: 1.8rem">
                                 {{ a.course.name }} {{ (" > " + a.author) * (a.title != "")|int }}
                             </p>
@@ -137,7 +135,7 @@
                                     {% endif %}
                                 {% endfor %}
                             </div>
-                            <p class="mt-6 text-xs text-gray-400 dark:text-gray-400">{{ strftime(a.date, "%-I:%M %p on %B %-d, %Y") }}</p>
+                            <p class="noselect mt-6 text-xs text-gray-400 dark:text-gray-400">{{ strftime(a.date, "%-I:%M %p on %B %-d, %Y") }}</p>
                         </div>
                     {% endfor %}
                 </div>
@@ -147,7 +145,7 @@
     <br>
     <br>
     <div style="height: 45%; float:left; width:calc(100% - 3rem); margin-left: 2%; overflow: visible;" class="pb-2">
-        <h2 class="text-black dark:text-white text-2xl">Recent Courses</h2>
+        <h2 class="noselect text-black dark:text-white text-2xl">Recent Courses</h2>
         <div class="text-left grid justify-start" style="grid-template-columns: repeat(auto-fit, 23rem)"
              aria-label="Recent Courses">
             {% for course in user_courses %}

@@ -257,6 +257,7 @@ def unsorted_user_events(user_id: str) -> List[List]:
     from itertools import chain
 
     events_assessments_assignments = list(chain(events, assignments, assessments))
+    announcements = list(reversed(announcements))
     return [
         announcements,
         sorted(events_assessments_assignments, key=lambda obj: sortByDateTime(obj)),

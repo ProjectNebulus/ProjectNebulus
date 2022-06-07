@@ -149,11 +149,16 @@ window.addEventListener("load", function () {
             logo.style.width = size;
             logo.style.height = size;
         }
-
-        logo.innerHTML = '<div style="padding:10px;"><img alt="logo" style="' + logo.getAttribute("style") + '" class="' + logo.className + '" src="' + img + '"></div>';
+        let newsize = Math.min(logo.offsetHeight, logo.offsetWidth) - 10;
+        logo.innerHTML = `<div id="incorrecth" style="width:${newsize}px;height:${newsize}px;margin:auto;"><img alt="logo" style="` + logo.getAttribute("style") + '" class="' + logo.className + '" src="' + img + '"></div>';
 
         logo.removeAttribute("style");
         logo.removeAttribute("class");
+
+        newsize = Math.min(logo.offsetHeight, logo.offsetWidth) - 10;
+        document.getElementById("incorrecth").style.height = newsize;
+        document.getElementById("incorrecth").style.width = newsize;
+
     }
 });
 

@@ -13,7 +13,7 @@ def profile():
         page="Nebulus - Profile",
         user=session.get("username"),
         email=session.get("email"),
-        avatar=session.get("avatar"),
+        avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
         read=read,
     )
 
@@ -24,7 +24,7 @@ def pubProfile(id):
         "user/pubProfile.html",
         user=session.get("username"),
         email=session.get("email"),
-        avatar=session.get("avatar"),
+        avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
         # page=f"{session.get('username')} - Nebulus",
         # db=db,
     )

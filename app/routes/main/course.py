@@ -46,7 +46,7 @@ def course_page(page, **kwargs):
         page="404 Not Found",
         user=session.get("username"),
         email=session.get("email"),
-        avatar=session.get("avatar"),
+        avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
     )
 
 
