@@ -335,7 +335,7 @@ function importCanvas() {
     const teacher = document.getElementById('canvas-course-teacher');
 
     // todo: maybe this needs regex instead of whatever this is
-    const index = input.value.indexOf('/courses/');
+    const index = input.value.indexOf('/course/');
 
     if (index === -1) {
         status.style.color = 'red';

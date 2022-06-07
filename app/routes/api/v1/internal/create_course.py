@@ -129,7 +129,7 @@ def create_canvas_course():
         post_data = request.args
     link = post_data["link"]
     teacher = post_data["teacher"]
-    index = link.index("/courses/") + 9
+    index = link.index("/course/") + 9
     course_id = link[index: len(link)]
     # print(f"I'm at Canvas Creation. The ID is: {link}")
     from canvasapi import Canvas

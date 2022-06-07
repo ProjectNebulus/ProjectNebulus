@@ -26,6 +26,7 @@ cls is the class of the object, field is the field that was changed, value is th
 debug = True
 if __name__ == "__main__":
     if platform.system().lower() == "linux":
+        debug = False
         port = 80
         host = "0.0.0.0"
     else:   # macos (darwin) or windows (windows)
