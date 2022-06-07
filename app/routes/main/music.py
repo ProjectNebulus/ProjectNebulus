@@ -3,7 +3,7 @@ import os
 import re
 
 import requests
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, session
 from werkzeug.utils import secure_filename
 
 from . import main_blueprint
@@ -649,7 +649,8 @@ def main_program(file_name):
 @main_blueprint.route("/music", methods=["GET"])
 @logged_in
 def music():
-    return render_template("music.html")
+    return render_template("music.html",user=session.get("username"),
+                           avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),)
 
 
 @main_blueprint.route('/music', methods=['POST'])
@@ -684,7 +685,9 @@ def music_post():
             return render_template(
                 "musixmatch.html",
                 songs=songs,
-                id_=search(songs[0]["track_name"] + " by " + songs[0]["artist_name"])
+                id_=search(songs[0]["track_name"] + " by " + songs[0]["artist_name"]),
+                user=session.get("username"),
+                avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
             )
 
     text = request.form['search']
@@ -800,7 +803,8 @@ def music_post():
                 return data[param]
 
     if len(video_ids) == 0 and len(spotify_arr) == 0:
-        return render_template('musicresults.html', noresults=True)
+        return render_template('musicresults.html', noresults=True, user=session.get("username"),
+                               avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),)
 
     else:
         mylist = []
@@ -827,7 +831,8 @@ def music_post():
     return render_template('musicresults.html',
                            noresults=False,
                            mylist=mylist,
-                           spotify_arr=spotify_arr)
+                           spotify_arr=spotify_arr, user=session.get("username"),
+                           avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),)
 
 
 @main_blueprint.route('/play/spotify/<smth>')
@@ -838,7 +843,8 @@ def music_spotify(smth):
         file = json.load(file)
     for i in file:
         if i['code'] == smth:
-            return render_template('musictrack.html', i=i)
+            return render_template('musictrack.html', i=i, user=session.get("username"),
+                                   avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),)
 
 
 @main_blueprint.route('/play/<id_>')
@@ -874,4 +880,5 @@ def music_video(id_: str):
     title = find_data(id_, 'title')
     content = f'Listen to {title} by {author} on Nebulus!'
     return render_template('musicvideo.html', author=author, author_url=author_url, thumbnail_url=thumbnail_url,
-                           title=title, id=id_, content=content, youtube=youtube, sub=sub, link=link)
+                           title=title, id=id_, content=content, youtube=youtube, sub=sub, link=link, user=session.get("username"),
+                           avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),)

@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block main %}
+    {% include "navbar.html" %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <body style="text-align:center;">
     <form method="POST" enctype="multipart/form-data" style="width:50%;margin:auto;padding-top:calc(20% - 42px);">
@@ -87,7 +88,6 @@
             <input type="hidden" name="type" value="1">
         </div>
     </form>
-    </body>
     <script>
         function changeDropdown(value) {
             document.getElementsByName("type")[0].value = value;
@@ -100,4 +100,6 @@
             }
         }
     </script>
+    </body>
+
 {% endblock %}
