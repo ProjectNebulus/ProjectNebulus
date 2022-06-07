@@ -149,15 +149,17 @@ window.addEventListener("load", function () {
             logo.style.width = size;
             logo.style.height = size;
         }
-        let newsize = Math.min(logo.offsetHeight, logo.offsetWidth) - 10;
-        logo.innerHTML = `<div id="incorrecth" style="width:${newsize}px;height:${newsize}px;margin:auto;"><img alt="logo" style="` + logo.getAttribute("style") + '" class="' + logo.className + '" src="' + img + '"></div>';
+        logo.innerHTML = `<div id="incorrecth" style="margin:auto;"><img alt="logo" style="` + logo.getAttribute("style") + '" class="' + logo.className + '" src="' + img + '"></div>';
 
         logo.removeAttribute("style");
         logo.removeAttribute("class");
 
-        newsize = Math.min(logo.offsetHeight, logo.offsetWidth) - 10;
-        document.getElementById("incorrecth").style.height = newsize;
-        document.getElementById("incorrecth").style.width = newsize;
+        // let newsize1 = logo.offsetHeight - 20;
+        // let newsize2 = logo.offsetWidth - 20;
+        let newsize1 = logo.offsetHeight/2;
+        let newsize2 = logo.offsetWidth/2;
+        document.getElementById("incorrecth").style.height = newsize1;
+        document.getElementById("incorrecth").style.width = newsize2;
 
     }
 });

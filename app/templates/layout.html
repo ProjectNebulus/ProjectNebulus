@@ -1,6 +1,6 @@
 <!--Style Sheets!-->
 <html lang="en">
-<head>
+<head >
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.1"></script>
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta name="google-site-verification" content="5RLtqNU5_UuQAcLqyee0ZoaLyNQ9-6VF0qfJsABVhm4"/>
@@ -36,7 +36,14 @@
             document.documentElement.classList.remove('dark');
     }
 
-    detectTheme();</script>
+    detectTheme();
+
+        window.onload = function(){
+            //get body object
+            //Document.body.oncontextmenu = function(){return false;}
+            document.body.setAttribute("oncontextmenu", "return false;")
+        }
+    </script>
 
     <!--discord embeds!-->
     <meta property="og:title" content="Nebulus | Learning, All in One."/>
@@ -177,5 +184,6 @@
         }
     </style>
 </head>
+<body oncontextmenu="return false;">
 {% block main %}
 {% endblock %}

@@ -43,15 +43,15 @@
                         {% if event._cls == "Event" %}
                             <tr style="vertical-align: top;" aria-label="Event"
                                 class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 h-4">
-                                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                                <td class="truncate border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
                                         <span class="material-icons-outlined mr-2"
                                               style="vertical-align: bottom">event</span>
                                     {{ event.title }}
                                 </td>
-                                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-1">
+                                <td class="truncate border-t-2 border-gray-200 dark:border-gray-700 px-6 py-1">
                                     {{ strftime(event.date.date(), "%m/%d/%Y") }}
                                 </td>
-                                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-1">
+                                <td class="truncate border-t-2 border-gray-200 dark:border-gray-700 px-6 py-1">
                                     {{ strftime(event.date.time(), "%I:%M %p") }}
                                 </td>
                                 <td data-tooltip-target="eventCourseName{{ count }}" class="truncate border-t-2 border-gray-200 dark:border-gray-700 px-6 py-1">
@@ -61,27 +61,27 @@
                                     {{ event.course.name }}
                                     <div class="tooltip-arrow" data-popper-arrow></div>
                                 </div>
-                                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-1">
+                                <td class="truncate border-t-2 border-gray-200 dark:border-gray-700 px-6 py-1">
                                     <span class="noselect text-blue-500 hover:text-blue-700">Edit</span>
                                 </td>
                             </tr>
                         {% else %}
                             <tr style="vertical-align: top;" aria-label="Assignment"
                                 class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 h-4">
-                                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                                <td class="truncate border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
                                     <span class="material-icons-outlined mr-2" style="vertical-align: bottom">description</span>
                                     {{ event.title }}
                                 </td>
-                                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                                <td class="truncate border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
                                     {{ strftime(event.due.date(), "%m/%d/%Y") }}
                                 </td>
-                                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                                <td class="truncate border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
                                     {{ strftime(event.due.time(), "%I:%M %p") }}
                                 </td>
-                                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                                <td class="truncate border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
                                     {{ event.course.name }}
                                 </td>
-                                <td class="border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
+                                <td class="truncate border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
                                     <span class="text-blue-500 hover:text-blue-700">Edit</span>
                                 </td>
                             </tr>
