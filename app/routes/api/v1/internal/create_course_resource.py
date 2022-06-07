@@ -57,11 +57,3 @@ def create_folder():
     return "success", 200
 
 
-@internal.route("/create-schoology-course")
-def import_schoology():
-    return "success"
-
-
-@internal.route("/create-textbook", methods=["POST"])
-def create_textbook():
-    return "success"

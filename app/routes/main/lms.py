@@ -83,9 +83,8 @@ def lms():
                 original_name = course.original_name
             except:
                 original_name = course.name
-            canvascourses.append([course.name, f"{API_URL}/courses/{course.id}", original_name])
+            canvascourses.append([course.name, f"{API_URL}/course/{course.id}", original_name])
     except Exception as e:
-        print(e)
         canvascourses = []
 
     scCourses = []

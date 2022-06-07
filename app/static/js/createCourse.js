@@ -286,7 +286,7 @@ function customize(template, subtemplate) {
 function importGClassroom() {
     screens[2].style.display = 'none';
     screens[4].style.display = 'block';
-    const status = document.getElementById('create-course-status');
+    const status = document.getElementById('create-course-status2');
     const input = document.getElementById('google-course-id');
     const teacher = document.getElementById('google-course-teacher');
 
@@ -330,7 +330,7 @@ function importGClassroom() {
 function importCanvas() {
     screens[2].style.display = 'none';
     screens[5].style.display = 'block';
-    const status = document.getElementById('create-course-status');
+    const status = document.getElementById('create-course-status2');
     const input = document.getElementById('canvas-course-id');
     const teacher = document.getElementById('canvas-course-teacher');
 
@@ -375,7 +375,7 @@ function importSchoology() {
     screens[2].style.display = 'none';
     screens[3].style.display = 'block';
 
-    const status = document.getElementById('create-course-status');
+    const status = document.getElementById('create-course-status2');
     const input = document.getElementById('schoology-course-id');
     const teacher = document.getElementById('schoology-course-teacher');
 
@@ -418,7 +418,7 @@ function importSchoology() {
 }
 
 function schoologyCourseReq() {
-    const status = document.getElementById('create-course-status');
+    const status = document.getElementById('create-course-status2');
     if (this.responseText === '1') {
         status.style.color = 'red';
         status.innerHTML = 'You have not connected your schoology account! Please connect a schoology account to import courses from Schoology.';
@@ -430,7 +430,7 @@ function schoologyCourseReq() {
 }
 
 function googleCourseReq() {
-    const status = document.getElementById('create-course-status');
+    const status = document.getElementById('create-course-status2');
     if (this.responseText === '1') {
         status.style.color = 'red';
         status.innerHTML = 'You have not connected your google account! Please connect a schoology account to import courses from Schoology.';
@@ -442,7 +442,7 @@ function googleCourseReq() {
 }
 
 function canvasCourseReq() {
-    const status = document.getElementById('create-course-status');
+    const status = document.getElementById('create-course-status2');
     if (this.responseText === '1') {
         status.style.color = 'red';
         status.innerHTML = 'You have not connected your canvas account! Please connect a schoology account to import courses from Schoology.';

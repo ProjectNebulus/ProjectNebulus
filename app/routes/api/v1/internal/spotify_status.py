@@ -36,6 +36,7 @@ def spotify_status():
         return "3"  # Spotify Not Registered in Developer Dashboard
 
     elif len(song) == 8:
+        #TODO: support advertisements, returns 500 currently
         name, artists2, album, explicit, image, playing, timestamp, total = song
         if explicit:
             explicit = '<i class="material-icons">explicit</i>'

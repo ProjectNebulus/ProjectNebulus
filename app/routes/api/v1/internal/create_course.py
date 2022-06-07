@@ -182,7 +182,9 @@ def create_canvas_course():
 
 @internal.route("/createSchoologyCourse", methods=["GET", "POST"])
 def create_schoology_course():
-    post_data = request.form
+    #post_data = request.form
+    post_data = request.json
+    print("Request Recieved `/createSchoologyCourse`")
     if request.method == "GET":
         post_data = request.args
     link = post_data["link"]
