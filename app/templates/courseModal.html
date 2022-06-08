@@ -185,7 +185,7 @@
                     </button></a></p>
             {% else %}
                 <p class="text-black dark:text-white text-3xl">Select a Google Classroom Course</p>
-                <div class="scroll" id="glist" style="height:90%;">
+                <center><div class="scroll" id="glist" style="height:90%;">
                     {% for course in gcourses %}
                         <a onclick="updateGoogleLink('{{ course[1] }}', '{{ course[2] }}');" class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ course[0] }}</h5>
@@ -194,7 +194,7 @@
 
                         <br><br>
                     {% endfor %}
-                </div>
+                </div></center>
                 <form id="google-create-course" style="width:90%;height:90%;display:none;"  onsubmit="importGClassroom(); return false;">
                     <div class="mb-6">
                         <label for="course-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
@@ -228,7 +228,7 @@
             Import from Canvas
             <span class="close"></span>
         </h3><br>
-        <div class="scroll" id="clist" style="height:90%;width:90%;">
+        <center><div class="scroll" id="clist" style="height:90%;width:90%;">
             {% if canvascourses|length == 0 %}
                 <h1 class="text-black dark:text-white text-xl">We coudn't find any courses! Is your Canvas account
                     connected? <a href="/settings#connections"><button style="margin-left: 10px; display:grid; grid-auto-flow: column; align-content: center; justify-content: center;" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
@@ -249,7 +249,7 @@
                 {% endfor %}
             {% endif %}
 
-        </div>
+        </div></center>
         <form id="canvas-create-course" onsubmit="importCanvas(); return false;" style="height:90%;width:90%;display:none;">
             <div class="mb-6">
                 <label for="course-name" class="">
