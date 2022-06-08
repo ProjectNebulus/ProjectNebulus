@@ -6,7 +6,7 @@
     {% include "navbar.html" %}
 
     <div class="grid grid-cols-1 divide-y divide-gray-300 dark:divide-gray-700 hidden lg:block w-full pl-8">
-        <div class="flex flex-row" style="height: 50%; overflow:hidden;">
+        <div class="flex flex-row" style="height: 65%; overflow:hidden;">
             <div id="middle" style="flex:0 0 75%" class="pl-8 pr-4 border-r border-gray-200 dark:border-gray-700">
                 <div class="flex flex-row w-full mb-4">
                     <h1 class="text-4xl text-black dark:text-white mt-5 text-left" style="flex-grow: 1;">
@@ -211,7 +211,7 @@
             </div>
 
 
-            <div id="right" style="flex: 0 0 25%"
+            <div id="right" style="flex: 0 0 25%;overflow:auto;"
                  class="border-gray-200 dark:border-gray-700 border-l text-center h-full">
                 <p class="text-2xl text-black dark:text-white">Upcoming Events</p><br>
                 <div class="flex flex-col sm:rounded-lg min-w-full align-middle overflow-auto inline-block hover-scroll"
@@ -225,7 +225,7 @@
                                 {% if a._cls == "Assignment" %}
                                     {% if a.submitDate == None or date > today %}
                                         <div class="flex text-black dark:text-white text-left bg-gray-100 rounded-lg
-                                             shadow dark:bg-gray-800 dark:text-gray-300 rounded-lg p-6 ml-3 shadow-md
+                                             shadow dark:bg-gray-800 dark:text-gray-300 rounded-lg p-6 ml-3 mr-3 shadow-md
                                               dark:border-gray-700 text-xl mb-5 mr-4">
                                             <div class="mr-4 material-icons ml-2"
                                                  style="transform: translate(0, 50%) scale(1.75)">assignment
@@ -250,7 +250,7 @@
                                 {% else %}
                                     <div class="flex text-black dark:text-white text-left bg-gray-100 rounded-lg
                                         shadow dark:bg-gray-800 dark:text-gray-300 rounded-lg p-6 ml-3 shadow-md
-                                         dark:border-gray-700 text-xl mb-5">
+                                         dark:border-gray-700 text-xl mb-5 mr-4">
                                         <div class="mr-4 material-icons ml-2"
                                              style="transform: translate(0, 50%) scale(1.75)">event
                                         </div>
@@ -271,7 +271,7 @@
                 </div>
             </div>
         </div>
-        <div id="middle2" style="float: left; width: 100%; height: 42%; overflow-y:scroll; ">
+        <div id="middle2" style="float: left; width: 100%; height: 27%; overflow-y:scroll; ">
             <br>
         <div class="grid justify-center">
             <div class="text-center text-4xl pr-4 text-black dark:text-white flex">
@@ -330,13 +330,13 @@
                                             </p>
                                         </div>
                                         <div>
-                                            <p class="text-sm  text-gray-700 dark:text-gray-400">
+                                            <pf class="text-sm  text-gray-700 dark:text-gray-400">
                                                 <svg style="display: inline-block;" class="w-5 h-5" fill="currentColor"
                                                      viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
                                                 </svg>
                                                 ? Assignments
-                                            </p>
+                                            </pf>
                                         </div>
                                         <div>
                                             <p class="text-sm text-gray-700 dark:text-gray-400">

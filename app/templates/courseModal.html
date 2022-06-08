@@ -20,14 +20,14 @@
                     your learning experience. All you have to do is create a course
                     and fill it in with content!</p><br>
 
-                <span class='createSelectButton text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 text-xl'
+                <div class='createSelectButton text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 text-xl'
                       onclick="skipTemplates()">
                     <img src="/static/images/icons/new.svg"
                          style="visibility:visible;width:20px;height:20px;float:left;" alt="Create course image">
                     Create course
                     <img src="/static/images/icons/next.svg"
                          style="visibility:visible;width:20px;height:20px;float:right;" alt="Next">
-                  </span>
+                  </div>
 
                 <h2 class="text-3xl">Or choose a subject</h2>
 
@@ -82,18 +82,30 @@
             </form>
 
             <h1>Or import from another LMS</h1>
-            <button class="createSelectButton text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 text-xl"
-                    id="import-schoology">
+            <div class='createSelectButton text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 text-xl'
+                 id="import-schoology">
+                <img src="/static/images/logos/schoology.png"
+                     style="visibility:visible;width:20px;height:20px;float:left;" alt="Create course image">
                 Import from Schoology
-            </button>
-            <button class="createSelectButton text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 text-xl2"
-                    id="import-classroom">
+                <img src="/static/images/icons/next.svg"
+                     style="visibility:visible;width:20px;height:20px;float:right;" alt="Next">
+            </div>
+            <div class='createSelectButton text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 text-xl'
+                 id="import-classroom">
+                <img src="/static/images/logos/classroom.png"
+                     style="visibility:visible;width:20px;height:20px;float:left;" alt="Create course image">
                 Import from Google Classroom
-            </button>
-            <button class="createSelectButton text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 text-xl"
-                    id="import-canvas">
+                <img src="/static/images/icons/next.svg"
+                     style="visibility:visible;width:20px;height:20px;float:right;" alt="Next">
+            </div>
+            <div class='createSelectButton text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 text-xl'
+                 id="import-canvas">
+                <img src="/static/images/logos/canvas.png"
+                     style="visibility:visible;width:20px;height:20px;float:left;" alt="Create course image">
                 Import from Canvas
-            </button>
+                <img src="/static/images/icons/next.svg"
+                     style="visibility:visible;width:20px;height:20px;float:right;" alt="Next">
+            </div>
         </div>
         <div class="pageCount"></div>
     </div>
@@ -102,7 +114,7 @@
         <h3 class="flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white">
             Import from Schoology
             <span class="close"></span>
-        </h3><br>
+        </h3><br><br>
         <div style="width:90%;height:90%;"  id="slist" class="scroll">
             {% if schoologycourses|length == 0 %}
                 <h1 class="text-black dark:text-white text-xl">We coudn't find any courses! Is your Schoology account
@@ -111,7 +123,7 @@
                     </button></a></h1>
             {% else %}
                 <h1 class="text-black dark:text-white text-3xl">Select a Schoology Course</h1>
-                <div class="flex flex-col ">
+                <div class="flex flex-col " style="align-items: center; justify-content: center;">
                     {% for course in schoologycourses[:-1] %}
                         <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700" style="height:16rem; width:34rem;">
                             <a onclick="updateSchoologyLink('{{  course["link"]}}');" class="overflow-hidden" style="width:382px; height:186px;">
