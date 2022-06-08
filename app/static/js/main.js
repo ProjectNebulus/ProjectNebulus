@@ -1,12 +1,12 @@
-
 const siteName = window.location.protocol + "//" + window.location.host;
 
-function loadingIcon(sizeX, sizeY) {
-    if (sizeY === undefined)
-        sizeY = sizeX;
+/** Returns a string containing a loading icon, with the parameters defining length and width. */
+function loadingIcon(length, width) {
+    if (width === undefined)
+        width = length;
 
     return `<!-- By Sam Herbert (@sherb), for everyone. More @ http://goo.gl/7AJzbL -->
-    <svg width="38" height="38" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff" style="width: ${sizeX}; height: ${sizeY}">
+    <svg width="38" height="38" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff" style="width: ${length}; height: ${width}">
         <g fill="none" fill-rule="evenodd">
             <g transform="translate(1 1)" stroke-width="2">
                 <circle stroke-opacity=".5" cx="18" cy="18" r="18"/>
@@ -22,6 +22,47 @@ function loadingIcon(sizeX, sizeY) {
             </g>
         </g>
     </svg>`;
+}
+
+/**
+ * This class calls a function once an input's value has not been changed for a certain amount of time.
+ * @param func The function to be called.
+ * @param duration The duration in milliseconds of the input value not changing, before it calls the function.
+ * @param querySelector The CSS selector to the element used.
+ * */
+class KeyUpTimer {
+    constructor(func, duration, querySelector) {
+        this.func = func;
+        this.duration = duration;
+        this.selector = querySelector;
+        this.lastKeyUpTime = 0;
+        this.recheck = false;
+    }
+
+    enable() {
+        this.element = document.querySelector(this.selector);
+        this.onKeyUp = () => {
+            this.lastKeyUpTime = Date.now();
+            this.recheck = true;
+        }
+
+        this.element.addEventListener("keyup", this.onKeyUp)
+
+        this.interval = setInterval(() => {
+            if (!this.recheck)
+                return;
+
+            if (Date.now() - this.lastKeyUpTime > this.duration) {
+                this.func();
+                this.recheck = false;
+            }
+        });
+    }
+
+    disable() {
+        this.element.removeEventListener("keyup", this.onKeyUp)
+        clearInterval(this.interval);
+    }
 }
 
 if ('serviceWorker' in navigator) {
@@ -58,7 +99,7 @@ function invertSite() {
     const banner = document.getElementById("homeBanner");
 
     if (localStorage.getItem("color-theme") === "dark") {
-        if (window.location.href.endsWith("/notepad")){
+        if (window.location.href.endsWith("/notepad")) {
             document.getElementById("editor").style.filter = "invert(1)";
         }
         if (window.location.pathname === "/") {
@@ -77,7 +118,7 @@ function invertSite() {
         }
     }
     else {
-        if (window.location.href.endsWith("/notepad")){
+        if (window.location.href.endsWith("/notepad")) {
             document.getElementById("editor").style.filter = "invert(0)";
         }
         if (window.location.href.endsWith("/")) {
@@ -96,7 +137,7 @@ function invertSite() {
 
     const frame = document.getElementsByTagName("iframe")[0];
 
-    if (frame && frame.src.includes(siteName)) {
+    if (frame && (frame.src.includes(siteName) || !frame.src.includes("http"))) {
         const innerDoc = frame.contentDocument || frame.contentWindow.document;
 
         if (document.documentElement.classList.contains("dark")) {
@@ -189,7 +230,7 @@ function offline() {
 }
 
 function navFetchStatus() {
-    if  (document.getElementById("songhere") === null) {
+    if (document.getElementById("songhere") === null) {
         return;
     }
     const request = $.ajax({

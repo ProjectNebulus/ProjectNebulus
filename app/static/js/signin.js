@@ -185,23 +185,7 @@ window.addEventListener('load', function () {
         );
     }
 
-    function checkStuff() {
-        if (recheck && Date.now() - lastKeyUpTime > 500) {
-            checkCredentials();
-            recheck = false;
-        }
-    }
-
-    username.onkeyup = function () {
-        lastKeyUpTime = Date.now();
-        recheck = true;
-    };
-    password.onkeyup = function () {
-        lastKeyUpTime = Date.now();
-        recheck = true;
-    };
-
-    setInterval(checkStuff, 200);
+    new KeyUpTimer(checkCredentials, 500, "#usrname, #psw").enable();
 });
 
 
