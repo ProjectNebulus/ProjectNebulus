@@ -82,3 +82,16 @@ def sw():
     path = Path(__file__)
     print(path.parent.parent.parent)
     return send_file(str(path.parent.parent.parent)+'/static/js/sw.js')
+
+@main_blueprint.route("/global/<country>", methods=["GET"])
+def international(country):
+
+    page = "Nebulus - Learning, All In One"
+
+    return render_template(
+        f"main/global/{country}.html",
+        page=page,
+        user=session.get("username"),
+        email=session.get("email"),
+        avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
+    )
