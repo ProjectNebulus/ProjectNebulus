@@ -38,3 +38,6 @@ def savePlanner(data: dict, user_id):
         user.planner[k] = v
     user.save()
     return "true"
+
+
+
