@@ -101,7 +101,7 @@
 
         const pageTitle = document.getElementById("page-title");
         let removed = true;
-        let saveData = localStorage.getItem("{{ course_id }}");
+        let saveData = sessionStorage.getItem("{{ course_id }}");
         if (saveData === null)
             saveData = "Documents";
 

@@ -1,3 +1,5 @@
+from flask import request
+
 from . import internal
 from ....main.spotify import get_song
 from .....routes.main.spotify import (
@@ -11,7 +13,6 @@ from .....routes.main.spotify import (
     prev_spotify,
     resume_spotify,
 )
-from flask import request
 from .....static.python.musixmatch import Musixmatch
 
 
@@ -36,7 +37,7 @@ def spotify_status():
         return "3"  # Spotify Not Registered in Developer Dashboard
 
     elif len(song) == 8:
-        #TODO: support advertisements, returns 500 currently
+        # TODO: support advertisements, returns 500 currently
         name, artists2, album, explicit, image, playing, timestamp, total = song
         if explicit:
             explicit = '<i class="material-icons">explicit</i>'
@@ -53,17 +54,17 @@ def spotify_status():
         timestamp = convert(timestamp)
         total = convert(total)
         if not playing:
-            if not request.form.get("special"):
+            if not request.form.get("paused"):
                 playing = (
                     '<i onclick="sendRQ(\'/api/v1/internal/spotify/pause\')" style="font-size:48px !important;" '
                     'class="material-icons">pause_circle</i> '
                 )
             else:
                 playing = (
-                '<i onclick="sendRQ(\'/api/v1/internal/spotify/resume\')" style="margin-left:20px;color:white;" class="material-icons">play</i>'
+                    '<i onclick="sendRQ(\'/api/v1/internal/spotify/resume\')" style="margin-left:20px;color:white;" class="material-icons">play</i>'
                 )
         else:
-            if not request.form.get("special"):
+            if not request.form.get("paused"):
                 playing = (
                     '<i onclick="sendRQ(\'/api/v1/internal/spotify/pause\')" style="font-size:48px !important;" '
                     'class="material-icons">pause_circle</i> '
@@ -74,23 +75,23 @@ def spotify_status():
                     'class="material-icons">pause</i> '
                 )
         string = (
-            name
-            + " • "
-            + artists
-            + " • "
-            + album
-            + " • "
-            + str(explicit)
-            + " • "
-            + image
-            + " • "
-            + str(playing)
-            + " • "
-            + str(timestamp)
-            + " • "
-            + str(total)
-            + " • "
-            + str(ratio)
+                name
+                + " • "
+                + artists
+                + " • "
+                + album
+                + " • "
+                + str(explicit)
+                + " • "
+                + image
+                + " • "
+                + str(playing)
+                + " • "
+                + str(timestamp)
+                + " • "
+                + str(total)
+                + " • "
+                + str(ratio)
         )
     else:
         string = "You aren't listening to anything!"
@@ -153,7 +154,6 @@ def spotifyresume():
 
 @internal.route("/get_lyrics")
 def get_lyrics():
-
     musixmatch = Musixmatch("bbd8cc3d9f6c1444e01d9d66b44f0f49")
     artist = request.args.get("artist")
     song = request.args.get("song")

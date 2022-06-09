@@ -24,6 +24,10 @@ function loadingIcon(length, width) {
     </svg>`;
 }
 
+function keyUpDelay(querySelector, duration, func) {
+    new KeyUpTimer(querySelector, duration, func).enable();
+}
+
 /**
  * This class calls a function once an input's value has not been changed for a certain amount of time.
  * @param func The function to be called.
@@ -31,36 +35,40 @@ function loadingIcon(length, width) {
  * @param querySelector The CSS selector to the element used.
  * */
 class KeyUpTimer {
-    constructor(func, duration, querySelector) {
-        this.func = func;
-        this.duration = duration;
+    constructor(querySelector, duration, func) {
         this.selector = querySelector;
+        this.duration = duration;
+        this.func = func;
         this.lastKeyUpTime = 0;
         this.recheck = false;
     }
 
     enable() {
-        this.element = document.querySelector(this.selector);
-        this.onKeyUp = () => {
+        this.elements = document.querySelectorAll(this.selector);
+        this.onKeyUp = (e) => {
             this.lastKeyUpTime = Date.now();
             this.recheck = true;
+            this.lastKeyEvent = e;
         }
 
-        this.element.addEventListener("keyup", this.onKeyUp)
+        for (const element of this.elements)
+            element.addEventListener("keyup", this.onKeyUp)
 
         this.interval = setInterval(() => {
             if (!this.recheck)
                 return;
 
             if (Date.now() - this.lastKeyUpTime > this.duration) {
-                this.func();
+                this.func(this.lastKeyEvent);
                 this.recheck = false;
             }
         });
     }
 
     disable() {
-        this.element.removeEventListener("keyup", this.onKeyUp)
+        for (const element of this.elements)
+            element.removeEventListener("keyup", this.onKeyUp)
+
         clearInterval(this.interval);
     }
 }
@@ -168,10 +176,12 @@ function invertSite() {
     }
 }
 
+let isOnline = true;
 window.addEventListener("load", function () {
     invertSite();
 
-    if (navigator.onLine)
+    isOnline = navigator.onLine;
+    if (isOnline)
         online();
     else
         offline();
@@ -182,7 +192,7 @@ window.addEventListener("load", function () {
     for (const logo of document.getElementsByTagName("logo")) {
         let img = logo.getAttribute("image");
         if (img === null)
-            img = "/static/images/nebulusCats/cat1.png";
+            img = "/static/images/nebulusCats/v3.gif";
 
         let size = logo.getAttribute("size");
 
@@ -190,16 +200,10 @@ window.addEventListener("load", function () {
             logo.style.width = size;
             logo.style.height = size;
         }
-        logo.innerHTML = `<div id="incorrecth" style="height: auto; width: auto; margin:auto;"><img alt="logo" style="` + logo.getAttribute("style") + '" class="' + logo.className + '" src="' + img + '"></div>';
+        logo.innerHTML = `<img alt="logo" style="` + logo.getAttribute("style") + '" class="' + logo.className + '" src="' + img + '">';
 
         logo.removeAttribute("style");
         logo.removeAttribute("class");
-
-        // let newsize1 = logo.offsetHeight - 20;
-        // let newsize2 = logo.offsetWidth - 20;
-        let newsize1 = logo.offsetWidth / 2;
-        document.getElementById("incorrecth").style.maxWidth = newsize1;
-
     }
 });
 
@@ -221,52 +225,65 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-function online() {
+let interval = 0;
+let shouldGetSpotify = true;
+let requestAttempts = 0;
 
+function onFailedRequest() {
+    if (requestAttempts > 5) {
+        if (isOnline) {
+            isOnline = false;
+            offline();
+        }
+    }
+
+    requestAttempts++;
+}
+
+function online() {
+    isOnline = true;
+    requestAttempts = 0;
+    if (shouldGetSpotify)
+        interval = setInterval(navFetchStatus, 1000);
 }
 
 function offline() {
-
+    isOnline = false;
+    if (shouldGetSpotify)
+        clearInterval(interval);
 }
 
 function navFetchStatus() {
-    if (document.getElementById("songhere") === null) {
+    if (!document.getElementById("songhere"))
         return;
-    }
+
     const request = $.ajax({
         type: 'POST',
         url: '/api/v1/internal/spotify-status',
-        data: {
-            "special": "a"
-        }
     });
 
     request.done((data) => {
-        if (data === "1") {
+        if (parseInt(data)) {
             document.getElementById("songhere").innerHTML = "";
+            shouldGetSpotify = false;
+            return;
         }
-        else if (data === "2") {
-            document.getElementById("songhere").innerHTML = "";
-        }
-        else if (data === "3") {
-            document.getElementById("songhere").innerHTML = "";
-        }
-        else {
-            let songs = data.split(" • ");
 
-            let name = songs[0]
-            let artists = songs[1]
-            let album = songs[2]
-            let explicit = songs[3]
-            let image = songs[4]
-            let playing = songs[5]
-            let timestamp = songs[6]
-            let total = songs[7]
-            let ratio = songs[8]
-            let html = `
-            
+        let songs = data.split(" • ");
+
+        let name = songs[0]
+        let artists = songs[1]
+        let album = songs[2]
+        let explicit = songs[3]
+        let image = songs[4]
+        let playing = songs[5]
+        let timestamp = songs[6]
+        let total = songs[7]
+        let ratio = songs[8]
+
+        document.getElementById("songhere").innerHTML = `
             <div style="width:150px;float:left;">
-                <img style="display: inline-block; margin:20px; border-radius:10px;" class="mb-3 w-20 h-20 shadow-lg" src="${image}">
+                <img style="display: inline-block; margin:20px; border-radius:10px;" class="mb-3 w-20 h-20 shadow-lg" src="${image}" alt="Song Title">
             </div>
             <div style="width: calc(100% - 150px);float:left;">
                 <div style="margin-top:20px;">
@@ -278,16 +295,8 @@ function navFetchStatus() {
                 <p class="truncate text-sm text-gray-600 dark:text-gray-300">${timestamp} of ${total}
                     ${playing}
                     <i style="margin-left:20px;color:white;" class="material-icons">skip_next</i>
-                </p></div>
-            
-          
-            `;
-            document.getElementById("songhere").innerHTML = html;
-
-
-        }
+                </p></div>`;
     });
-}
 
-navFetchStatus();
-setInterval(navFetchStatus, 500);
+    request.fail(onFailedRequest);
+}

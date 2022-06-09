@@ -3,6 +3,20 @@
     {% include "navbar.html" %}
 
     <style>
+        [modal-backdrop] {
+            backdrop-filter: blur(4px);
+        }
+
+        .dark [modal-backdrop] {
+            background-color: rgb(156 163 175 / var(--tw-bg-opacity));
+        }
+
+        #timePeriods {
+            height: 12%;
+            overflow: auto;
+            padding-right: 1rem;
+        }
+
         table {
             font-family: 'Lato', sans-serif;
             border-collapse: collapse;
@@ -19,7 +33,6 @@
             height: 50px;
         }
 
-
         textarea {
             font-family: 'Lato', sans-serif;
             position: absolute;
@@ -35,10 +48,6 @@
             -moz-box-sizing: border-box; /* FF1+ */
             box-sizing: border-box; /* Chrome, IE8, Opera, Safari 5.1*/
             outline: none;
-        }
-
-        [modal-backdrop] {
-            backdrop-filter: blur(10px);
         }
 
         .dark textarea {
@@ -89,7 +98,72 @@
         </div>
     </div>
 
+    <div id="configureModal" tabindex="-1" aria-hidden="true" style="object-position: center;"
+         class="hidden z-40 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+        <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+            <!-- Modal content -->
+            <div class="relative bg-gray-50 rounded-lg shadow dark:bg-gray-600">
+                <!-- Modal header -->
+                <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                        Configure Your Planner
+                    </h3>
+                    <button
+                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                            data-modal-toggle="configureModal">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                  clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <div class="p-6 space-y-6">
+                    <form>
+                        <div class="mb-6">
+                            <label for="configName"
+                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                Planner Name</label>
+                            <input type="text" id="configName" autocomplete="off"
+                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                   placeholder="My Agenda" required>
+                        </div>
+                        <div class="mb-6">
+                            <label for="period1" class="block text-sm font-medium text-gray-900 dark:text-gray-300">
+                                Configure your Periods / Time Intervals
+                            </label><br>
+                            <div id="timePeriods"></div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Modal footer -->
+                <div class="flex items-center p-6 pt-0 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+                    <button data-modal-toggle="configureModal"
+                            onclick="plannerName.value = document.getElementById('configName').value;"
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Save Configuration
+                    </button>
+                    <button data-modal-toggle="configureModal"
+                            class="text-gray-500 bg-gray-50 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="hidden" data-modal-toggle="configureModal" id="openModal"></button>
+
     <script>
+        window.addEventListener("load", () => {
+            addTimePeriod();
+            addTimePeriod();
+            document.getElementById("openModal").click();
+        });
+
+        const times = document.getElementById("timePeriods");
+
         const d = new Date();
         let month = d.getMonth();
         let year = d.getFullYear();
@@ -112,7 +186,10 @@
 
         let saveData = {};
 
-        table.addEventListener("keyup", save);
+        keyUpDelay("table", 500, save);
+        keyUpDelay("#planner_name", 500, save);
+
+        window.addEventListener("load", () => document.getElementById("showModal").click())
 
         loadFromServer();
 
@@ -199,21 +276,18 @@
             }
         }
 
-        function adddis() {
-            var i = $("#addhere input").length + 1;
-            //console.log(i);
-
+        function addTimePeriod() {
             let data = `
-<div style="width:100%;margin:10px;" class="flex">
-            <span onclick="adddis()" class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
-    +
-  </span>
-            <input type="text" id="period${i}" class="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-</div>
+            <div class="flex w-full mb-4">
+                <span onclick="addTimePeriod()" class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border
+                border-r-0 border-gray-300 rounded-l-md dark:bg-gray-500 dark:text-gray-400 dark:border-gray-600">+</span>
+                <input type="text" class="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900
+                focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5 dark:bg-gray-700
+                dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            </div>
             `;
-            document.getElementById("addhere").innerHTML += data;
-
-
+            times.innerHTML += data;
+            times.scrollTo(0, times.scrollHeight)
         }
 
         function changeDate() {
@@ -296,79 +370,6 @@
             request.fail(function (ignored, alsoignored) {
                 saveState.innerHTML = "Sync Unsuccessful | Retrying Sync...";
             });
-        }
-    </script>
-    <button id="toggle"
-            class="hidden block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            type="button" data-modal-toggle="configureModal">
-        Toggle modal
-    </button>
-    <div id="configureModal" tabindex="-1" aria-hidden="true" style="object-position: center;"
-         class="hidden z-40 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
-        <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
-            <!-- Modal content -->
-            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                <!-- Modal header -->
-                <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                        Configure Your Planner
-                    </h3>
-                    <button type="button"
-                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                            data-modal-toggle="configureModal">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                  clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
-                </div>
-                <!-- Modal body -->
-                <div class="p-6 space-y-6">
-                    <form>
-                        <div class="mb-6">
-                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Planner
-                                Name</label>
-                            <input type="text" id="name" autocomplete="off"
-                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                   placeholder="My Agenda" required>
-                        </div>
-                        <div class="mb-6">
-                            <label for="period1"
-                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Configure
-                                your Periods / Time Intervals</label><br>
-                            <div class="block" id="addhere">
-                                <div style="width:100%;margin:10px;" class="flex">
-                                   <span onclick="adddis()"
-                                         class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
-    +
-  </span>
-                                    <input type="text" id="period1"
-                                           class="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <!-- Modal footer -->
-                <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-                    <button data-modal-toggle="configureModal" type="button" onclick="saveConfig()"
-                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        Save Configuration
-                    </button>
-                    <a onclick="history.back()">
-                        <button data-modal-toggle="configureModal" type="button"
-                                class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
-                            Cancel
-                        </button>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script>
-        window.onload = function () {
-            document.getElementById("toggle").click();
         }
     </script>
 {% endblock %}

@@ -14,9 +14,9 @@
                         </svg>
                     </button>
                     <a href="/" class="flex items-center" aria-label="Home Page">
-                        <img src="/static/images/nebulusCats/v3.gif" class="mr-3 h-9 lg:h-12" alt="Nebulus Logo"/>
+                        <logo class="mr-3 h-9 lg:h-12" alt="Nebulus Logo"></logo>
                         <span class="self-center text-xl whitespace-nowrap dark:text-white">
-                            <span id="company" class="text-2xl block" style="float:left;">Nebulus</span>
+                            <span class="text-2xl" style="float:left;">Nebulus</span>
                             <span class="text-blue-600 hidden lg:block"
                                   id="country" style="margin-top: 2rem; font-size: 1.05rem; transform: translate(0, -0.4rem)">
                                 Learning
@@ -137,7 +137,7 @@
                             class="rounded-full border-gray-300 border-2 w-12 h-12
                             {% if "black" in avatar %} bg-gray-300
                             {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}">
-                        <logo image="{{ avatar }}" no-revert class="h-5 lg:h-8"
+                        <logo image="{{ avatar }}" no-revert class="h-8"
                               style="margin-left: 15%; margin-top: 10%"></logo>
                     </button>
                 {% else %}
@@ -165,7 +165,8 @@
             {% include "navbar_mobile.html" %}
         </div>
     </div>
-    <div id="control-center" class="bg-gray-300/30 dark:bg-gray-800/30 p-4 rounded-lg dark:border-gray-700 border hidden backdrop-blur-sm z-10">{% include "control.html" %}</div>
+    <div id="control-center" class="bg-gray-300/30 dark:bg-gray-800/30 p-4 rounded-lg dark:border-gray-700 border hidden
+     backdrop-blur-sm z-10">{% include "control.html" %}</div>
     <script>
         function detectTheme() {
             if (!localStorage.getItem('color-theme')) {
@@ -178,6 +179,7 @@
             else
                 document.documentElement.classList.remove('dark');
         }
+
         function invertSite() {
             const banner = document.getElementById("homeBanner");
 
@@ -245,8 +247,6 @@
             }
         }
 
-
-
         const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
         const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
 
@@ -278,6 +278,7 @@
 
         for (const a of document.getElementsByClassName("nav-link-2"))
             a.className += " block py-2 pr-4 pl-3 text-black bg-black-700 rounded md:bg-transparent md:text-black md:p-0 dark:text-white";
+
         if (localStorage.getItem("color-theme") === "dark") {
             let daelements = document.getElementsByClassName("changeable-gradient");
             console.log(daelements);
@@ -288,17 +289,22 @@
             }
         }
         else {
-            let daelements = document.getElementsByClassName("changeable-gradient");
-            console.log(daelements);
-            for (let element of daelements) {
+            let gradient = document.getElementsByClassName("changeable-gradient");
+            console.log(gradient);
+            for (const element of gradient) {
                 element.classList.remove("gradient-text-dark");
                 element.classList.add("gradient-text");
-
             }
         }
         // setInterval(navFetchStatus, 500);
 
         document.querySelector("#navbar [data-dropdown-toggle='control-center']").oncontextmenu = (e) => e.preventDefault();
+
+        const resize = () => document.getElementById("mobile-navbar-scroll").style.height = (window.innerHeight -
+            document.getElementById("logo").getBoundingClientRect().height - 48) + "px";
+
+        window.addEventListener("load", resize)
+        window.addEventListener("resize", resize);
     </script>
 
 

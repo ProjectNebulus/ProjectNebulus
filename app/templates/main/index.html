@@ -18,26 +18,26 @@
     </style>
     <body>
     {% include "navbar.html" %}
-    <div id="alert-additional-content-1" class="p-4 mt-4 ml-4 mr-4 mb-4 bg-blue-100 rounded-lg dark:bg-blue-200" role="alert">
-        <div class="flex items-center">
-            <svg class="mr-2 w-5 h-5 text-blue-700 dark:text-blue-800" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-            <h3 class="text-lg font-medium text-blue-700 dark:text-blue-800">Join Our Discord Server</h3>
+    <div id="join-discord-alert" style="border-bottom-width: 5px" role="alert"
+         class="p-2 w-full bg-blue-100 border-blue-500 dark:bg-blue-200 flex justify-between absolute">
+        <div class="flex text-sm text-blue-700 dark:text-blue-800">
+            <svg class="mr-2 w-6 h-6 text-blue-700 dark:text-blue-800" fill="currentColor" viewBox="0 0 20 20"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0
+                 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+            </svg>
+            <span style="margin-top: 2px">
+                <a href=https://discord.gg/dAhHZWxCge class="text-blue-500 hover:underline">Join our Discord server</a>
+                to get the latest news and updates, and chill in a friendly, inclusive community.
+            </span>
         </div>
-        <div class="mt-2 mb-4 text-sm text-blue-700 dark:text-blue-800">
-            Join our Discord server to get the latest news, updates, and chill in a friendly inclusive community.
-        </div>
-        <div class="flex">
-            <a href="https://discord.gg/dAhHZWxCge"><button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-1.5 mr-2 text-center inline-flex items-center dark:bg-blue-800 dark:hover:bg-blue-900">
-                <svg class="-ml-0.5 mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
-            Join Server
-            </button></a>
-        </div>
+
+        <span class="material-icons text-gray-600" data-dismiss-target="#join-discord-alert">close</span>
     </div>
-    <div id="homePageBanner" class="hidden lg:block"
-         style="padding-left: 7%; margin-top: -2rem; width: 100%; justify-content: left; text-align: left; ">
+    <div id="homePageBanner" class="hidden lg:block w-full text-left mt-5" style="padding-left: 7%">
         <br><br>
-        <img id="homeBanner" src="/static/images/imageHome.png" style="width:40%;float:left;" alt="Home Page Image">
-        <div style="margin-top: 4%;width:60%;float:left;">
+        <div style="background-image: url('/static/images/imageHome.png'); background-repeat: no-repeat; background-size: 100%; width: 40%; height: 50vh; float: left"></div>
+        <div style="margin-top: 2%; width: 60%; float: left; margin-bottom: 6%">
             <p class="text-7xl text-gray-600 dark:text-white ml-6">Learning, All In One</p>
             <br>
             <p class="text-2xl text-gray-900 dark:text-white  ml-6">
@@ -50,15 +50,17 @@
             <br>
             {% if user %}
                 <a href="/dashboard" class="ml-6">
-                    <button type="button"
-                            class="text-base text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                    <button class="text-base text-white bg-gradient-to-r from-purple-500 to-pink-500
+                     hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200
+                      dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
                         Launch Nebulus / Lancer Nébuleuse
                     </button>
                 </a>
             {% else %}
                 <a href="/signup">
-                    <button type="button"
-                            class="text-base text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                    <button class="text-base text-white bg-gradient-to-r from-purple-500 to-pink-500
+                     hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200
+                      dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
                         Get Started / Commencer
                     </button>
                 </a>

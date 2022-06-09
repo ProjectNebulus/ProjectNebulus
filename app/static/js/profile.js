@@ -87,35 +87,31 @@ function fetchStatus() {
      
                 <p class="text-xl text-gray-600 dark:text-gray-300">${artists}</p>
                 <p class="text-xl text-gray-600 dark:text-gray-300">${album}</p>
-                
             </div><br><br>
-            <center><span style="text-align: center;font-size:35px;" class="text-xl text-gray-600 dark:text-gray-300"><i style="font-size:35px !important;" class="material-icons">shuffle</i> 
-            <i style="font-size:35px !important;" class="material-icons">skip_previous</i>
-            <span style="font-size:48px !important;" class="text-2xl text-black dark:text-white">${playing}</span>
-             <i style="font-size:35px !important;" class="material-icons">skip_next</i>
-            <i style="font-size:35px !important;" class="material-icons">loop</i>
-            <i  type="button" data-modal-toggle="lyricModal" onclick="openModal('lyricModal');" style="font-size:35px !important;" class="material-icons">lyrics</i>
-            
-            </span> <br>
-              <div class="flex justify-between mb-1">
-              <span class="text-sm font-medium text-blue-700 dark:text-white">${timestamp}</span>
-              <span class="text-sm font-medium text-blue-700 dark:text-white">${total}</span>
+            <div class="text-center">
+                <span style="text-align: center;font-size:35px;" class="text-xl text-gray-600 dark:text-gray-300"><i style="font-size:35px !important;" class="material-icons">shuffle</i> 
+                <i style="font-size:35px !important;" class="material-icons">skip_previous</i>
+                <span style="font-size:48px !important;" class="text-2xl text-black dark:text-white">${playing}</span>
+                 <i style="font-size:35px !important;" class="material-icons">skip_next</i>
+                <i style="font-size:35px !important;" class="material-icons">loop</i>
+                <i data-modal-toggle="lyricModal" onclick="openModal('lyricModal');" style="font-size:35px !important;" class="material-icons">lyrics</i>
+                
+                </span> <br>
+                  <div class="flex justify-between mb-1">
+                  <span class="text-sm font-medium text-blue-700 dark:text-white">${timestamp}</span>
+                  <span class="text-sm font-medium text-blue-700 dark:text-white">${total}</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700" style="text-align:left;">
+                  <div class="bg-green-400 h-2.5 rounded-full" style="text-align:left;width: ${Math.round(ratio)}%;"></div>
+                </div>
+                <p class="text-sm text-gray-600 dark:text-gray-300">⚠️ Please Note: Spotify requires users to have Premium to be controlled from Nebulus.</p>
             </div>
-            <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700" style="text-align:left;">
-              <div class="bg-green-400 h-2.5 rounded-full" style="text-align:left;width: ${Math.round(ratio)}%;"></div>
-            </div>
-            <p class="text-sm text-gray-600 dark:text-gray-300">⚠️ Please Note: Spotify requires users to have Premium to be controlled from Nebulus.</p>
-            </center>
             
-</div>
-            
-              
-          
-            `;
+</div>`;
             const request = $.ajax({
                 type: 'GET',
                 url: '/api/v1/internal/get_lyrics',
-                data:{
+                data: {
                     "artist": artists,
                     "song": name
                 }
@@ -123,10 +119,7 @@ function fetchStatus() {
             request.done(data => {
                 //alert(data);
                 document.getElementById("lyricshere").innerHTML = data;
-
-            })
-
-
+            });
         }
     });
 }
@@ -139,9 +132,4 @@ function sendRQ(link) {
     request.done((data) => {
         return data;
     });
-
 }
-
-fetchStatus();
-//setInterval(fetchStatus, 500);
-setInterval(fetchStatus, 500);

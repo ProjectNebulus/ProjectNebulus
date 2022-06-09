@@ -185,7 +185,7 @@ window.addEventListener('load', function () {
         );
     }
 
-    new KeyUpTimer(checkCredentials, 500, "#usrname, #psw").enable();
+    keyUpDelay("#usrname, #psw", 500, checkCredentials);
 });
 
 
