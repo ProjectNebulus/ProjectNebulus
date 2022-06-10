@@ -72,13 +72,21 @@ def page_not_found(e):
     if len(path.strip("/")) == 2:
         return redirect(f"/global/{path}")
     # note that we set the 404 status explicitly
-    return render_template("errors/404.html"), 404
+    return render_template("errors/404.html",
+                           page="Not Found",
+                           user=session.get("username"),
+                           email=session.get("email"),
+                           avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),), 404
 
 
 @main_blueprint.app_errorhandler(500)
 def internal_error(e):
     # note that we set the 500 status explicitly
-    return render_template("errors/500.html"), 500
+    return render_template("errors/500.html",
+                           page="Nebulus is Down",
+                           user=session.get("username"),
+                           email=session.get("email"),
+                           avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),), 500
 
 
 @main_blueprint.route("/sw.js")

@@ -32,3 +32,4 @@ from app.routes.main.music import *
 from app.routes.main.files import *
 from app.routes.main.notepad import *
 from app.routes.main.planner import *
+from app.routes.main.study import *
