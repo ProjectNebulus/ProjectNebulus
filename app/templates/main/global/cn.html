@@ -191,6 +191,11 @@
             document.getElementById("signup").innerText = "报名";
             document.getElementById("country").classList.remove("text-blue-600");
             document.getElementById("country").classList.add("text-red-600");
+            document.querySelector('meta[property="og:title"]').setAttribute("content",
+                `${document.getElementById("company").innerText} (${document.getElementById("country").innerText})| ${document.getElementsByClassName("text-7xl")[0].innerHTML}`);
+            document.querySelector('meta[property="og:description"]').setAttribute("content",
+                `${document.getElementsByClassName("text-7xl")[0].innerHTML} | ${document.getElementsByClassName("text-2xl")[3].innerText.replaceAll(" ","").replaceAll("\n", " ")}`);
+
         }
     </script>
     {% include "footer.html" %}
