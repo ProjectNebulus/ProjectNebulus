@@ -14,7 +14,7 @@ for (const h3 of modal.getElementsByTagName("h3"))
     h3.className += " flex justify-between items-start p-5 rounded-t border-b border-gray-300 dark:border-gray-600 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white"
 
 for (const list of templateLists)
-    list.classList.add("hover-scroll");
+    list.classList.add("hover:scroll");
 
 btn.onclick = function () {
     modal.style.display = 'block';

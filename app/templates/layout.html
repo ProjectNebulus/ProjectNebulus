@@ -14,8 +14,6 @@
     <link rel="stylesheet" href="/static/css/tailwind.css">
     <link rel="stylesheet" href="/static/css/common-menus.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
-    <!-- <script src="../path/to/flowbite/dist/flowbite.js"></script> -->
-    <link rel="stylesheet" href="/static/flowbite/dist/flowbite.css"/>
     <!--Jquery!-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -73,17 +71,7 @@
             cursor: url('/static/images/nebulusCats/newRed.png'), auto;
         }
 
-        html.dark body {
-            background: #111926;
-        }
-
-        img {
-            user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-        }
-
-        .noselect {
+        .noselect, img, svg, thead, button, input {
             user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
@@ -101,42 +89,15 @@
             -webkit-user-select: none;
         }
 
-        svg {
-            user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            -webkit-user-select: none;
-        }
-
-        thead {
-            user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            -webkit-user-select: none;
-        }
-
         hr {
             border: 1px solid gray;
-        }
-
-        button {
-            user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            -webkit-user-select: none;
-        }
-
-        input {
-            user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            -webkit-user-select: none;
         }
 
         /* width */
         ::-webkit-scrollbar, ::-webkit-scrollbar-thumb {
             width: 3px;
             height: 3px;
+            border-radius: 5px;
         }
 
         /* Track */
@@ -147,7 +108,6 @@
         /* Handle */
         ::-webkit-scrollbar-thumb {
             background: #888;
-            border-radius: 20px;
         }
 
         .dark ::-webkit-scrollbar-thumb {
@@ -165,11 +125,15 @@
             height: 10px;
         }
 
-        .hover-scroll::-webkit-scrollbar {
+        .hover\:scroll {
+            padding-right: 3px;
+        }
+
+        .hover\:scroll::-webkit-scrollbar {
             display: none;
         }
 
-        .hover-scroll:hover::-webkit-scrollbar {
+        .hover\:scroll:hover::-webkit-scrollbar {
             display: block;
         }
 

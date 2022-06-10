@@ -1,7 +1,7 @@
 const CACHE_NAME = 'nebulus-offline';
 const urlsToCache = [
     '/',
-    '/static/tailwind.css',
+    '/static/flowbite.css',
     '/static/fonts.css',
     '/static/createCourse.css',
     '/static/createCourse.js',
@@ -43,7 +43,7 @@ self.addEventListener('fetch', function (event) {
 
         caches.match(event.request).then(function (response) {
             if (response) {
-                if (!(response.redirected)){
+                if (!(response.redirected)) {
                     return response;
                 }
                 // if we are here, that means there's a match

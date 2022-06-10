@@ -6,7 +6,7 @@
     {% include "navbar.html" %}
 
     <div class="grid grid-cols-1 divide-y divide-gray-300 dark:divide-gray-700 hidden lg:block w-full pl-8">
-        <div class="flex flex-row" style="height: 65%; overflow:hidden;">
+        <div class="flex flex-row" style="height: 55%; overflow:hidden;">
             <div id="middle" style="flex:0 0 75%" class="pl-8 pr-4 border-r border-gray-200 dark:border-gray-700">
                 <div class="flex flex-row w-full mb-4">
                     <h1 class="text-4xl text-black dark:text-white mt-5 text-left" style="flex-grow: 1;">
@@ -23,7 +23,7 @@
                     </button>
                 </div>
 
-                <div class="overflow-auto hover-scroll" style="height: 80%">
+                <div class="overflow-auto hover:scroll" style="height: 87%">
                     <ol class="relative border-l border-gray-200 dark:border-gray-700 ml-2">
                         {% for i, tuple in enumerate(announcements.items()) %}
                             {% set date,list = tuple %}
@@ -33,15 +33,14 @@
                                     {{ strftime(date, "%a, %B %-d, %Y") }}
                                 </time>
                                 <br>
-                                <div class="grid gap-2 pt-2" style="grid-template-columns: repeat(auto-fit, 19rem)">
+                                <div class="grid gap-4 pt-2" style="grid-template-columns: repeat(auto-fit, 23rem)">
                                     {% for j in range(list|length) %}
                                         {% set a = list[j] %}
-                                        <div class="w-72 min-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 overflow-hidden"
-                                             role="alert">
-
+                                        <div class="min-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg shadow mb-4
+                                        dark:bg-gray-800 dark:text-gray-300 overflow-hidden" role="alert"
+                                             style="height: min-content">
                                             {% if a.title != "" %}
-                                                <h4 class="text-lg font-semibold text-gray-900 dark:text-white truncate cursor-pointer hover:underline"
-                                                    data-dropdown-toggle="userDropdown-{{ i }}_{{ j }}">
+                                                <h4 class="text-lg font-semibold text-gray-900 dark:text-white truncate">
                                                     {{ a.title }}
                                                 </h4>
                                             {% endif %}
@@ -66,9 +65,9 @@
                                                             {{ a.author }}
                                                         </h4>
                                                     {% endif %}
-                                                    <div>
+                                                    <div {% if a.title != "" %} class="-mt-1.5" {% endif %}>
                                                         {% if a.title != "" %}
-                                                            <span class="text-xl cursor-pointer hover:underline"
+                                                            <span class="text-lg cursor-pointer hover:underline"
                                                                   data-dropdown-toggle="userDropdown-{{ i }}_{{ j }}">{{ a.author }}</span>
                                                             <span class="text-lg"> > </span>
                                                         {% endif %}
@@ -79,10 +78,10 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="flex items-center">
+                                            <div class="flex items-center mb-3">
                                                 <div class="text-sm text-gray-900 dark:text-white font-normal">
                                                     <div id="description_{{ i }}"
-                                                         class="text-sm text-gray-900 dark:text-white font-normal line-clamp-3">
+                                                         class="text-sm text-gray-900 dark:text-white font-normal line-clamp-5">
                                                         <p>
                                                             {% for line in a.content.strip().split("\n") %}
                                                                 {% if line != "" %}
@@ -93,11 +92,11 @@
                                                             {% endfor %}
                                                         </p>
                                                     </div>
-                                                    <time class="text-xs font-medium text-blue-600 dark:text-blue-500">
-                                                        {{ strftime(a.date.time(), "%-I:%M %p") }}
-                                                    </time>
                                                 </div>
                                             </div>
+                                            <time class="text-xs font-medium text-blue-600 dark:text-blue-500">
+                                                {{ strftime(a.date.time(), "%-I:%M %p") }}
+                                            </time>
                                         </div>
                                         <script>
                                             document.getElementById('description_{{ i }}').innerHTML = replaceURLs(document.getElementById('description_{{ i }}').innerHTML);
@@ -214,10 +213,10 @@
             <div id="right" style="flex: 0 0 25%;overflow:auto;"
                  class="border-gray-200 dark:border-gray-700 border-l text-center h-full">
                 <p class="text-2xl text-black dark:text-white">Upcoming Events</p><br>
-                <div class="flex flex-col sm:rounded-lg min-w-full align-middle overflow-auto inline-block hover-scroll"
-                     style="height: 88%">
+                <div class="flex flex-col sm:rounded-lg min-w-full align-middle overflow-auto inline-block hover:scroll"
+                     style="height: 80%">
                     {% if events|length == 0 %}
-                        <p class="text-gray-300 dark:text-gray-700 mx-4">No Events, Assignments, or Quizzes! To
+                        <p class="text-gray-300 dark:text-gray-500 mx-4">No Events, Assignments, or Quizzes! To
                             add events on to your Nebulus dashboard, please add it within a Course!</p>
                     {% else %}
                         {% for date, assignments in events.items() %}
@@ -271,46 +270,49 @@
                 </div>
             </div>
         </div>
-        <div id="middle2" style="float: left; width: 100%; height: 27%; overflow-y:scroll; ">
+        <div id="middle2" style="float: left; width: 100%; height: 35%;">
             <br>
-        <div class="grid justify-center">
-            <div class="text-center text-4xl pr-4 text-black dark:text-white flex">
-                Your Courses
-                <button style="float:left;margin-right:10px;width:64px;" data-dropdown-toggle="addDropdown"
-                        id="create"
-                        class="  mx-4 hidden sm:flex items-center text-left space-x-3 h-12 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700 text-white font-medium rounded-lg text-sm  pl-4 py-2.5 text-center">
-                    <span style="font-size:30px;" class="material-icons">add</span></button>
-                <button data-modal-toggle="searchModal" id="search" style="float:left;" type="button"
-                        class="hidden sm:flex items-center w-72 text-left space-x-3 px-4 h-12 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700">
-                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
-                         stroke-linecap="round" stroke-linejoin="round"
-                         class="flex-none text-slate-300 dark:text-slate-400" aria-hidden="true">
-                        <path d="m19 19-3.5-3.5"></path>
-                        <circle cx="11" cy="11" r="6"></circle>
-                    </svg>
-                    <span class="flex-auto text-sm">Quick search...</span><kbd
-                        class="text-sm font-sans font-semibold dark:text-slate-500">
-                    <abbr title="Command" class="no-underline text-slate-300 dark:text-slate-500">⌘</abbr> K</kbd>
-                </button>
+            <div class="grid justify-center mb-3">
+                <div class="text-center text-4xl pr-4 text-black dark:text-white flex">
+                    Your Courses
+                    <button style="float:left;margin-right:10px;width:64px;" data-dropdown-toggle="addDropdown"
+                            id="create" class="mx-4 hidden sm:flex items-center text-left space-x-3 h-12 bg-white ring-1
+                            ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500
+                            shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300
+                            dark:highlight-white/5 dark:hover:bg-slate-700 text-white font-medium rounded-lg text-sm
+                            pl-4 py-2.5 text-center">
+                        <span style="font-size:30px;" class="material-icons">add</span></button>
+                    <button data-modal-toggle="searchModal" id="search" style="float:left;" type="button"
+                            class="hidden sm:flex items-center w-72 text-left space-x-3 px-4 h-12 bg-white ring-1
+                            ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500
+                            shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300
+                            dark:highlight-white/5 dark:hover:bg-slate-700">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round"
+                             class="flex-none text-slate-300 dark:text-slate-400" aria-hidden="true">
+                            <path d="m19 19-3.5-3.5"></path>
+                            <circle cx="11" cy="11" r="6"></circle>
+                        </svg>
+                        <span class="flex-auto text-sm">Quick search...</span><kbd
+                            class="text-sm font-sans font-semibold dark:text-slate-500">
+                        <abbr title="Command" class="no-underline text-slate-300 dark:text-slate-500">⌘</abbr> K</kbd>
+                    </button>
+                </div>
+            </div>
 
-
-        </div>
-        </div>
-
-            <div style="height: 80%">
-                <div class="w-full grid justify-center"
-                     style="grid-template-columns: repeat(auto-fit, 24rem);">
+            <div style="height: 77%" class="overflow-auto pr-4 hover:scroll">
+                <div class="w-full grid gap-4 justify-center" style="grid-template-columns: repeat(auto-fit, 24rem)">
                     {% if user_courses|length == 0 %}
                         <a onclick="document.getElementById('create').click()">
-                            <div class="bg-gray-100 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 p-2"
-                                 style="float:left;margin:20px;height:13rem;width:40rem;">
+                            <div class="bg-gray-100 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 p-2 mb-3"
+                                 style="height:13rem;width:40rem;">
                                 <div style="text-align: left;">
                                     <div style="margin-bottom:10px">
-                                        <img src="{{ avatar }}"
-                                             style="object-fit: cover; width:50px; height:50px; border-radius:10px;display: inline-block; margin: 10px;"
-                                             alt="Course Avatar">
+                                        <img src="{{ avatar }}" alt="Course Avatar"
+                                             class="object-cover inline-block rounded-lg"
+                                             style="width: 50px; height: 50px; margin: 10px;">
 
-                                        <div style="float:right;width:70%;margin-top:6px;">
+                                        <div style="float:right; width:70%; margin-top:6px;">
                                             <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white truncate">
                                                 {{ user }}'s Next Course
                                             </h5>
@@ -330,13 +332,13 @@
                                             </p>
                                         </div>
                                         <div>
-                                            <pf class="text-sm  text-gray-700 dark:text-gray-400">
+                                            <p class="text-sm  text-gray-700 dark:text-gray-400">
                                                 <svg style="display: inline-block;" class="w-5 h-5" fill="currentColor"
                                                      viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
                                                 </svg>
                                                 ? Assignments
-                                            </pf>
+                                            </p>
                                         </div>
                                         <div>
                                             <p class="text-sm text-gray-700 dark:text-gray-400">
