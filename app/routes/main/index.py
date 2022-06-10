@@ -88,6 +88,15 @@ def international(country):
 
     page = "Nebulus - Learning, All In One"
 
+    if country == "kr":
+        page = "Nebulus - 학습, 올인원"
+    if country == "cn":
+        page = "难不来 - 学习，多合一"
+    if country == "hk" or country == "mo" or country == "tw":
+        page = "難不來 - 學習，多合一"
+    if country == "jp":
+        page = "Nebulus - 学習、オールインワン"
+
     return render_template(
         f"main/global/{country}.html",
         page=page,
