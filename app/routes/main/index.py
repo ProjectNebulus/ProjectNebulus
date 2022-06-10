@@ -87,7 +87,18 @@ def sw():
 def international(country):
 
     page = "Nebulus - Learning, All In One"
-
+    spanish_country = [
+        "ar",
+        "co",
+        "cr",
+        "cu",
+        "do",
+        "ec",
+        "es",
+        "mx",
+        "pa",
+        "sv"
+    ]
     if country == "kr":
         page = "Nebulus - 학습, 올인원"
     if country == "cn":
