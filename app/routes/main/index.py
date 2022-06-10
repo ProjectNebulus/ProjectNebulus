@@ -99,6 +99,10 @@ def international(country):
         "pa",
         "sv"
     ]
+    if country in spanish_country:
+        page = "Nebulus - Aprendizaje, todo en uno"
+    if country == "th":
+        page = "Nebulus - การเรียนรู้ ทั้งหมดในที่เดียว"
     if country == "kr":
         page = "Nebulus - 학습, 올인원"
     if country == "cn":
@@ -107,7 +111,8 @@ def international(country):
         page = "難不來 - 學習，多合一"
     if country == "jp":
         page = "Nebulus - 学習、オールインワン"
-
+    if country == 'us':
+        return redirect("/")
     return render_template(
         f"main/global/{country}.html",
         page=page,
