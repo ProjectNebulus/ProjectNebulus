@@ -318,6 +318,9 @@ def getChat(chat_id: str):
 
 def getPlanner(user_id: str):
     planner = find_user(id=user_id).planner
+    if not planner:
+        return {}
+
     return {
         "name": planner.name,
         "saveData": planner.saveData,
