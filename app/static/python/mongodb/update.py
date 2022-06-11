@@ -1,19 +1,27 @@
 from ..classes.Schoology import Schoology
-
+from ..classes.Planner import Planner
 
 def schoologyLogin(_id: str, schoology: dict):
     from .read import find_user
 
     user = find_user(pk=_id)
-    print(user.password)
     if not user:
         raise KeyError("User not found")
 
     schoology = Schoology(**schoology)
     user.schoology.append(schoology)
     user.save(clean=False)
-    print(user.password)
 
+def createPlanner(_id: str, planner: dict):
+    from .read import find_user
+
+    user = find_user(pk=_id)
+    if not user:
+        raise KeyError("User not found")
+
+    planner = Planner(**planner)
+    user.planner.append(planner)
+    user.save(clean=False)
 
 def logout_from_schoology(_id: str, schoology_obj: Schoology):
     from .read import find_user

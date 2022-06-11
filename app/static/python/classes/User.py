@@ -10,7 +10,7 @@ from .GoogleClassroom import GoogleClassroom
 from .Schoology import Schoology
 from .Snowflake import Snowflake
 from .Spotify import Spotify
-
+from .Planner import Planner
 
 class User(Snowflake):
     """
@@ -61,7 +61,7 @@ class User(Snowflake):
     premium_expiration = DateTimeField(required=False, default=None, null=True)
     status = StringField(default="", null=True)
     courses = ListField(ReferenceField("Course"), default=[])
-    planner = DictField(default={})
+    planner = EmbeddedDocumentField(Planner, default=None, null=True)
     points = IntField(default=0)
     premium = BooleanField(default=False)
     is_staff = BooleanField(default=False)

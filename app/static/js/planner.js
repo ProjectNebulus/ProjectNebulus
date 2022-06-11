@@ -2,8 +2,8 @@ let exitTime;
 let loadingModal;
 
 window.addEventListener("load", () => {
-    addTimePeriod();
-    addTimePeriod();
+    addTimePeriod(1);
+    addTimePeriod(2);
     loadingModal = new Modal(document.getElementById("loading"));
     loadingModal.show();
     document.querySelector("#loading p").innerHTML += loadingIcon(30);
@@ -131,17 +131,20 @@ for (let i = 1; i <= 8; i++) {
 }
 
 function addTimePeriod() {
+    let periods = document.getElementById("numberOfPeriods").value;
+    document.getElementById("numberOfPeriods").value = parseInt(periods)+1;
     let data = `
             <div class="flex w-full mb-4">
                 <span onclick="addTimePeriod()" class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border
                 border-r-0 border-gray-300 rounded-l-md dark:bg-gray-500 dark:text-gray-400 dark:border-gray-600">+</span>
-                <input type="text" class="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900
+                <input type="text" name="period${periods}"  class="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900
                 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5 dark:bg-gray-700
                 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             </div>
             `;
     times.innerHTML += data;
     times.scrollTo(0, times.scrollHeight)
+
 }
 
 function changeDate() {
@@ -203,7 +206,7 @@ function loadFromServer() {
             Math.max(0, exitTime - Date.now()) + 1000
         );
 
-        if (!data) {
+        if (data === "0") {
             new Modal(document.getElementById("configureModal")).show();
             return;
         }
@@ -249,4 +252,32 @@ function saveToServer() {
     request.fail(function (ignored, alsoignored) {
         saveState.innerHTML = "Sync Unsuccessful | Retrying Sync...";
     });
+}
+
+function createPlanner(){
+    let daplannerName = document.getElementById('configName').value;
+    plannerName.value = daplannerName;
+    let arr = [];
+    let count = 0;
+    while (true){
+        let name = "period"+count.toString();
+        if (document.body.contains(document.getElementsByName(name)[0])){
+            arr.push(document.getElementsByName(name)[0].value);
+        }else{
+            break;
+        }
+    }
+    const save = {};
+    save["name"] = daplannerName;
+    save["periods"] = arr;
+    const request = $.ajax({
+        type: "POST",
+        url: "/api/v1/internal/planner/create",
+        data: JSON.stringify(save)
+    });
+
+    request.done(function (ignored) {
+        location.reload();
+    });
+
 }

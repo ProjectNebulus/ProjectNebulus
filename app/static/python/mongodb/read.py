@@ -317,4 +317,4 @@ def getChat(chat_id: str):
 
 
 def getPlanner(user_id: str):
-    return dict(find_user(id=user_id).planner)
+    return find_user(id=user_id).planner
