@@ -41,7 +41,7 @@
         <div id="form">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">New Study Session</h5>
             <p class="font-normal text-gray-700 dark:text-gray-400">Create your first Study Session!</p>
-            <form>
+            <div>
                 <div class="mb-6">
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Study Session Name</label>
                     <input type="text" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required>
@@ -57,12 +57,12 @@
                 </div>
 
                 <button onclick="startform();" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Start Study Session</button>
-            </form>
+            </div>
         </div>
     <div id="timer" style="display:none;">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" id="timer1">0:00</h5>
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><span id="timer2">0:00</span> left in your "<span id="timername">Homework</span>" timer. </h5>
-        <span class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white" id="message">Keep Up the Hard Work!</span>
+        <h5 class="mb-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-white" id="timer1">0:00</h5>
+        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-800 dark:text-gray-200" id="progress"><span id="timer2">0:00</span> left in your "<span id="timername">Homework</span>" timer. </h5>
+        <span class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-gray-200" id="message">Keep Up the Hard Work!</span>
     </div>
     </div>
     <script>
@@ -84,19 +84,35 @@
     function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
         }
-    function timer(hh, mm, ss){
+    async function timer(hh, mm, ss){
         document.getElementById("form").style.display = "none";
         document.getElementById("timer").style.display = "block";
         let sec = hh*60*60 + mm*60 + ss;
         let dname = document.getElementById("name").value;
+        let messages = [
+            "Keep up the good work!",
+            "You could do it!",
+            "You're almost there!",
+            "Let's go, you go it!",
+            "Sooo close!!!",
+            "Keep studying!"
+        ]
         for (let i = 0; i<sec;i++){
-            let text = `${sec} seconds`;
+            let text = `${sec-i} seconds`;
             document.getElementById("timer1").innerHTML = text;
             document.getElementById("timer2").innerHTML = text;
             document.getElementById("timername").innerHTML = dname;
-            sleep(1000);
+            if (i % 20 === 0){
+                document.getElementById("message").innerText = messages[Math.floor(Math.random()*messages.length)];
+            }
+            await sleep(1000);
 
         }
+        document.getElementById("progress").style.display = "none";
+        document.getElementById("message").style.display = "none";
+        document.getElementById("timer1").classList.remove("text-gray-900", "dark:text-white")
+        document.getElementById("timer1").style.color = "#61DA02";
+        document.getElementById("timer1").innerText = "Timer Complete!";
     }
     function getsixnumbers(){
         let n1 = document.getElementsByClassName("within")[0].value;
