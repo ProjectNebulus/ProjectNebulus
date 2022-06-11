@@ -55,14 +55,17 @@
                         <input type="number" class="text-2xl within" placeholder="00"></input> seconds
                     </div>
                 </div>
-
+                <center>
                 <button onclick="startform();" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Start Study Session</button>
+                </center>
             </div>
         </div>
     <div id="timer" style="display:none;">
         <h5 class="mb-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-white" id="timer1">0:00</h5>
         <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-800 dark:text-gray-200" id="progress"><span id="timer2">0:00</span> left in your "<span id="timername">Homework</span>" timer. </h5>
         <span class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-gray-200" id="message">Keep Up the Hard Work!</span>
+
+        <button onclick="configure()"  id="restart" style="display:none;" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Start Another Session</button>
     </div>
     </div>
     <script>
@@ -84,11 +87,29 @@
     function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
         }
+    function configure(){
+        document.getElementById("timer").style.display = "none";
+        document.getElementById("timer").innerHTML = `
+        <h5 class="mb-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-white" id="timer1">0:00</h5>
+        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-800 dark:text-gray-200" id="progress"><span id="timer2">0:00</span> left in your "<span id="timername">Homework</span>" timer. </h5>
+        <span class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-gray-200" id="message">Keep Up the Hard Work!</span>
+
+`
+        document.getElementById("form").style.display = "block";
+        document.getElementsByClassName("within")[0].value = "";
+        document.getElementsByClassName("within")[1].value = "";
+        document.getElementsByClassName("within")[2].value = "";
+        document.getElementById("name").value = "";
+
+    }
     async function timer(hh, mm, ss){
         document.getElementById("form").style.display = "none";
         document.getElementById("timer").style.display = "block";
         let sec = hh*60*60 + mm*60 + ss;
         let dname = document.getElementById("name").value;
+        if (dname === ""){
+            dname = "Untitled Timer";
+        }
         let messages = [
             "Keep up the good work!",
             "You could do it!",
@@ -97,6 +118,7 @@
             "Sooo close!!!",
             "Keep studying!"
         ]
+       document.getElementById("restart").style.display = "none";
         for (let i = 0; i<sec;i++){
             let text = `${sec-i} seconds`;
             document.getElementById("timer1").innerHTML = text;
@@ -113,6 +135,7 @@
         document.getElementById("timer1").classList.remove("text-gray-900", "dark:text-white")
         document.getElementById("timer1").style.color = "#61DA02";
         document.getElementById("timer1").innerText = "Timer Complete!";
+        document.getElementById("restart").style.display = "block";
     }
     function getsixnumbers(){
         let n1 = document.getElementsByClassName("within")[0].value;
