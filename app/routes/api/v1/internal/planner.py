@@ -33,4 +33,5 @@ def createPlanner():
 @internal.route("/planner/save", methods=["POST"])
 @private_endpoint
 def savePlanner():
-    return update.savePlanner(loads(list(request.form.items())[0][0]), session["id"])
+    data = list(request.form.items())[0][0]
+    return update.savePlanner(loads(data), session["id"])

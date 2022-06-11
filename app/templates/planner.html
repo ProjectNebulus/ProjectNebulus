@@ -21,8 +21,6 @@
             font-family: 'Lato', sans-serif;
             border-collapse: collapse;
             width: 100%;
-            border-radius: 10px;
-            overflow: hidden;
         }
 
         td {
@@ -43,6 +41,8 @@
             left: 0;
             right: 0;
             bottom: 0;
+            font-size: 0.9rem;
+            line-height: 1rem;
             resize: none;
             -webkit-box-sizing: border-box; /* <=iOS4, <= Android  2.3 */
             -moz-box-sizing: border-box; /* FF1+ */
@@ -60,7 +60,7 @@
         }
     </style>
     <br><br>
-    <div style="width:90%;margin:auto;border-color:white;">
+    <div style="width:90%;margin:auto">
         <div class="flex flex-row justify-between">
             <span id="month" class="text-4xl text-black dark:text-white">Error Finding Month</span>
 
@@ -121,7 +121,6 @@
                 <!-- Modal body -->
                 <div class="p-6 space-y-6">
                     <form>
-                        <input type="hidden" value="0" id="numberOfPeriods">
                         <div class="mb-6">
                             <label for="configName"
                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
@@ -140,9 +139,10 @@
                 </div>
                 <!-- Modal footer -->
                 <div class="flex items-center p-6 pt-0 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-                    <button data-modal-toggle="configureModal"
-                            onclick="createPlanner();"
-                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <button data-modal-toggle="configureModal" class="text-white bg-blue-700 hover:bg-blue-800
+                     focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5
+                      text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            onclick="plannerName.value = document.getElementById('configName').value; save()">
                         Save Configuration
                     </button>
                     <button data-modal-toggle="configureModal"
@@ -160,8 +160,8 @@
             <!-- Modal content -->
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                 <div class="text-center p-8">
-                    <p style="float: left"></p>
-                    <span class="text-black dark:text-white">Loading Planner...</span>
+                    <p style="float: left; margin-top: -0.25rem"></p>
+                    <span class="text-black dark:text-white -ml-1">Loading Planner...</span>
                 </div>
             </div>
         </div>

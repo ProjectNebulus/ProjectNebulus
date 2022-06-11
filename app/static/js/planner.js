@@ -2,277 +2,160 @@ let exitTime;
 let loadingModal;
 
 window.addEventListener("load", () => {
-    addTimePeriod(1);
-    addTimePeriod(2);
+    addTimePeriod();
+    addTimePeriod();
     loadingModal = new Modal(document.getElementById("loading"));
     loadingModal.show();
     document.querySelector("#loading p").innerHTML += loadingIcon(30);
-    exitTime = Date.now() + 500;
+    exitTime = Date.now() + 300;
 });
 
-function init_table(){
-    document.getElementsByTagName("table")[0].innerHTML = "";
-    const times = document.getElementById("timePeriods");
+const times = document.getElementById("timePeriods");
 
-    let d, month, year, page, startDate;
+let d, month, year, page, startDate;
 
-    const nextPage = document.getElementById("nextpage");
-    const today = document.getElementById("today");
-    const prevPage = document.getElementById("prevpage");
+const nextPage = document.getElementById("nextpage");
+const today = document.getElementById("today");
+const prevPage = document.getElementById("prevpage");
 
-    const saveState = document.getElementById("savestate");
-    const plannerName = document.getElementById("planner_name");
+const saveState = document.getElementById("savestate");
+const error = document.getElementById("error");
+const plannerName = document.getElementById("planner_name");
 
-    const oneWeek = 1000 * 60 * 60 * 24 * 7;
+const oneWeek = 1000 * 60 * 60 * 24 * 7;
 
-    function updateDate() {
-        d = new Date();
-        month = d.getMonth();
-        year = d.getFullYear();
-        page = Math.floor(Date.now() / oneWeek);
+function updateDate() {
+    d = new Date();
+    month = d.getMonth();
+    year = d.getFullYear();
+    page = Math.floor(Date.now() / oneWeek);
 
-        startDate = d.getDate() - d.getDay();
-    }
-
-    updateDate();
-
-    const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    const daysInMonths = [31, d.getFullYear() % 4 === 0 ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-
-    const table = document.getElementsByTagName("table")[0];
-
-    let saveData = {};
-
-    keyUpDelay("table", 500, save);
-    keyUpDelay("#planner_name", 500, save);
-
-    loadFromServer();
-
-    nextPage.onclick = function () {
-        page++;
-        load(page);
-
-        nextPage.disabled = year >= 2030 && month === 11 && startDate >= daysInMonths[month] - 7;
-        prevPage.disabled = false;
-
-        startDate += 7;
-        if (startDate > daysInMonths[month]) {
-            startDate -= daysInMonths[month]
-            month++;
-
-            if (month > 11) {
-                month = 0;
-                year++;
-            }
-        }
-
-        changeDate();
-        save();
-    }
-
-    prevPage.onclick = function () {
-        page--;
-        load(page);
-
-        prevPage.disabled = year <= 1970 && month === 0 && startDate <= 7;
-        nextPage.disabled = false;
-
-        startDate -= 7;
-        if (startDate < 0) {
-            month--;
-
-            if (month < 0) {
-                year--;
-                month = 11;
-            }
-
-            startDate += daysInMonths[month];
-        }
-
-        changeDate();
-        save();
-    }
-
-    today.onclick = function () {
-        page = Math.floor(Date.now() / oneWeek);
-        load(page);
-        startDate = d.getDate() - d.getDay();
-        year = d.getFullYear();
-        month = d.getMonth();
-        changeDate();
-        nextPage.disabled = false;
-        prevPage.disabled = false;
-    }
-
-    document.getElementById("month").innerHTML = months[month] + " " + d.getFullYear();
-
-    const daysRow = table.insertRow();
-    for (let i = 0; i < 7; i++)
-        daysRow.insertCell();
-
-    changeDate();
-
-    for (let i = 1; i <= 8; i++) {
-        const row = table.insertRow();
-        const smallCell = row.insertCell();
-
-        let textarea = document.createElement("textarea");
-        textarea.innerHTML = i + "";
-        textarea.style.fontsize = "1.5rem";
-        smallCell.appendChild(textarea);
-
-        for (let j = 0; j < 6; j++) {
-            const cell = row.insertCell();
-
-            textarea = document.createElement("textarea");
-            textarea.className = "note";
-            //textarea.placeholder = "_".repeat(105);
-            cell.appendChild(textarea);
-        }
-    }
-
+    startDate = d.getDate() - d.getDay();
 }
 
-function init_table_with_periods(periods){
-    document.getElementsByTagName("table")[0].innerHTML = "";
-    const times = document.getElementById("timePeriods");
+updateDate();
 
-    let d, month, year, page, startDate;
+const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const daysInMonths = [31, d.getFullYear() % 4 === 0 ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
-    const nextPage = document.getElementById("nextpage");
-    const today = document.getElementById("today");
-    const prevPage = document.getElementById("prevpage");
+const table = document.getElementsByTagName("table")[0];
 
-    const saveState = document.getElementById("savestate");
-    const plannerName = document.getElementById("planner_name");
+let saveData = {};
 
-    const oneWeek = 1000 * 60 * 60 * 24 * 7;
+keyUpDelay("table", 500, saveToServer);
+keyUpDelay("#planner_name", 500, saveToServer);
 
-    function updateDate() {
-        d = new Date();
-        month = d.getMonth();
-        year = d.getFullYear();
-        page = Math.floor(Date.now() / oneWeek);
-
-        startDate = d.getDate() - d.getDay();
+document.addEventListener("keyup", (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey) {
+        if (e.key === "ArrowLeft")
+            prevPage.click();
+        else if (e.key === "ArrowRight")
+            nextPage.click();
+        else if (e.key === "ArrowUp")
+            today.click();
     }
+});
 
-    updateDate();
+loadFromServer();
 
-    const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    const daysInMonths = [31, d.getFullYear() % 4 === 0 ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+nextPage.onclick = function () {
+    save()
 
-    const table = document.getElementsByTagName("table")[0];
+    page++;
+    load(page);
 
-    let saveData = {};
+    nextPage.disabled = year >= 2030 && month === 11 && startDate >= daysInMonths[month] - 7;
+    prevPage.disabled = false;
 
-    keyUpDelay("table", 500, save);
-    keyUpDelay("#planner_name", 500, save);
+    startDate += 7;
+    if (startDate > daysInMonths[month]) {
+        startDate -= daysInMonths[month]
+        month++;
 
-    loadFromServer();
-
-    nextPage.onclick = function () {
-        page++;
-        load(page);
-
-        nextPage.disabled = year >= 2030 && month === 11 && startDate >= daysInMonths[month] - 7;
-        prevPage.disabled = false;
-
-        startDate += 7;
-        if (startDate > daysInMonths[month]) {
-            startDate -= daysInMonths[month]
-            month++;
-
-            if (month > 11) {
-                month = 0;
-                year++;
-            }
+        if (month > 11) {
+            month = 0;
+            year++;
         }
-
-        changeDate();
-        save();
     }
-
-    prevPage.onclick = function () {
-        page--;
-        load(page);
-
-        prevPage.disabled = year <= 1970 && month === 0 && startDate <= 7;
-        nextPage.disabled = false;
-
-        startDate -= 7;
-        if (startDate < 0) {
-            month--;
-
-            if (month < 0) {
-                year--;
-                month = 11;
-            }
-
-            startDate += daysInMonths[month];
-        }
-
-        changeDate();
-        save();
-    }
-
-    today.onclick = function () {
-        page = Math.floor(Date.now() / oneWeek);
-        load(page);
-        startDate = d.getDate() - d.getDay();
-        year = d.getFullYear();
-        month = d.getMonth();
-        changeDate();
-        nextPage.disabled = false;
-        prevPage.disabled = false;
-    }
-
-    document.getElementById("month").innerHTML = months[month] + " " + d.getFullYear();
-
-    const daysRow = table.insertRow();
-    for (let i = 0; i < 7; i++)
-        daysRow.insertCell();
 
     changeDate();
+}
 
-    for (let i = 0; i < 8; i++) {
-        const row = table.insertRow();
-        const smallCell = row.insertCell();
+prevPage.onclick = function () {
+    save();
 
-        let textarea = document.createElement("textarea");
-        textarea.innerHTML = periods[i] + "";
-        textarea.style.fontsize = "1.5rem";
-        smallCell.appendChild(textarea);
+    page--;
+    load(page);
 
-        for (let j = 0; j < 6; j++) {
-            const cell = row.insertCell();
+    prevPage.disabled = year <= 1970 && month === 0 && startDate <= 7;
+    nextPage.disabled = false;
 
-            textarea = document.createElement("textarea");
-            textarea.className = "note";
-            //textarea.placeholder = "_".repeat(105);
-            cell.appendChild(textarea);
+    startDate -= 7;
+    if (startDate < 0) {
+        month--;
+
+        if (month < 0) {
+            year--;
+            month = 11;
         }
+
+        startDate += daysInMonths[month];
     }
 
+    changeDate();
 }
-init_table();
+
+today.onclick = function () {
+    page = Math.floor(Date.now() / oneWeek);
+    load(page);
+    startDate = d.getDate() - d.getDay();
+    year = d.getFullYear();
+    month = d.getMonth();
+    changeDate();
+    nextPage.disabled = false;
+    prevPage.disabled = false;
+}
+
+document.getElementById("month").innerHTML = months[month] + " " + d.getFullYear();
+
+const daysRow = table.insertRow();
+for (let i = 0; i < 7; i++)
+    daysRow.insertCell();
+
+changeDate();
+
+for (let i = 1; i <= 8; i++) {
+    const row = table.insertRow();
+    const smallCell = row.insertCell();
+
+    let textarea = document.createElement("textarea");
+    textarea.innerHTML = i + "";
+    textarea.style.fontsize = "1.5rem";
+    smallCell.appendChild(textarea);
+
+    for (let j = 0; j < 6; j++) {
+        const cell = row.insertCell();
+
+        textarea = document.createElement("textarea");
+        textarea.className = "note";
+        //textarea.placeholder = "_".repeat(105);
+        cell.appendChild(textarea);
+    }
+}
+
 function addTimePeriod() {
-    let periods = document.getElementById("numberOfPeriods").value;
-    document.getElementById("numberOfPeriods").value = parseInt(periods)+1;
     let data = `
             <div class="flex w-full mb-4">
                 <span onclick="addTimePeriod()" class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border
                 border-r-0 border-gray-300 rounded-l-md dark:bg-gray-500 dark:text-gray-400 dark:border-gray-600">+</span>
-                <input type="text" name="period${periods}"  class="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900
+                <input type="text" class="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900
                 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5 dark:bg-gray-700
                 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             </div>
             `;
     times.innerHTML += data;
     times.scrollTo(0, times.scrollHeight)
-
 }
 
 function changeDate() {
@@ -294,29 +177,39 @@ function changeDate() {
 }
 
 function save(e) {
-    const code = String.fromCharCode(e.keyCode);
+    if (e) {
+        const code = String.fromCharCode(e.keyCode);
 
-    if (!(/[a-zA-Z0-9-_ ]/.test(code) && code === code.toUpperCase()))
-        return;
+        if (!(/[a-zA-Z0-9-_ ]/.test(code) && code === code.toUpperCase()))
+            return;
+    }
 
     const notes = document.getElementsByClassName("note");
     saveData[page] = {};
     for (let i = 0; i < notes.length; i++) {
         if (notes[i].value !== "")
-            saveData[page][i] = notes[i].value;
+            saveData[page][i] = notes[i].value.replaceAll("=", ":::::");
     }
-
-    saveToServer();
 }
 
 function load(page) {
     const notes = document.getElementsByClassName("note");
-    for (let i = 0; i < notes.length; i++) {
+    for (let i in notes) {
         if (saveData[page] && saveData[page][i])
-            notes[i].value = saveData[page][i];
+            notes[i].value = saveData[page][i].replaceAll(":::::", "=");
         else
             notes[i].value = "";
     }
+}
+
+function fadeOut(func) {
+    setTimeout(() => {
+            document.getElementById("loading").classList.add("fade-out");
+            document.querySelector("[modal-backdrop]").classList.add("fade-out");
+            setTimeout(func, 500);
+        },
+        Math.max(0, exitTime - Date.now()) + 1000
+    );
 }
 
 function loadFromServer() {
@@ -326,45 +219,19 @@ function loadFromServer() {
     });
 
     request.done(data => {
-        setTimeout(() => {
-                document.getElementById("loading").classList.add("fade-out");
-                document.querySelector("[modal-backdrop]").classList.add("fade-out");
-                setTimeout(() => loadingModal.hide(), 500);
-            },
-            Math.max(0, exitTime - Date.now()) + 1000
-        );
+        fadeOut(() => loadingModal.hide());
 
-        if (data === "0") {
-            new Modal(document.getElementById("configureModal")).show();
+        if (Object.keys(data).length === 0) {
+            setTimeout(() => {
+                loadingModal.hide();
+                setTimeout(() => document.getElementById("openModal").click(), 200);
+            }, Math.max(0, exitTime - Date.now()) + 1000);
             return;
         }
 
         document.getElementById("planner_name").value = data["name"];
-        let periods = data["periods"];
-        // let table = document.getElementsByTagName("table")[0]
-        // table.innerHTML = "";
-        // for (let i = 0; i < periods.length; i++) {
-        //     const row = table.insertRow();
-        //     const smallCell = row.insertCell();
-        //
-        //     let textarea = document.createElement("textarea");
-        //     textarea.innerHTML = periods[i] + "";
-        //     textarea.style.fontsize = "1.5rem";
-        //     smallCell.appendChild(textarea);
-        //
-        //     for (let j = 0; j < 6; j++) {
-        //         const cell = row.insertCell();
-        //
-        //         textarea = document.createElement("textarea");
-        //         textarea.className = "note";
-        //         //textarea.placeholder = "_".repeat(105);
-        //         cell.appendChild(textarea);
-        //     }
-        // }
 
-
-        //init_table_with_periods(periods);
-        saveData = data["data"];
+        saveData = data["saveData"];
 
         for (const key of Object.keys(saveData)) {
             if (page.toString() === key) {
@@ -375,61 +242,58 @@ function loadFromServer() {
     });
 
     request.fail(function (jqXHR, textStatus) {
-        document.getElementById("error").innerText = "Error Loading Planner Data!";
-        document.getElementById("error").style.color = "red";
+        error.innerText = "Error Loading Planner Data!";
+        error.style.color = "red";
     });
 }
 
-function saveToServer() {
-    updateDate();
+let resetRequestNum = true;
+let requestInterval;
 
-    const save = {};
-    save["name"] = document.getElementById("planner_name").value;
-    save["saveData"] = saveData;
-    save["lastEdited"] = [year, month, d.getDate(), d.getHours(), d.getMinutes()];
-
+function recursiveRequest(saveDict, count) {
     saveState.innerHTML = "Syncing... | Please wait...";
 
     const request = $.ajax({
         type: "POST",
         url: "/api/v1/internal/planner/save",
-        data: JSON.stringify(save)
+        data: JSON.stringify(saveDict)
     });
 
-    request.done(function (ignored) {
+    request.done(ignored => {
         saveState.innerHTML = "Synced to Cloud | Last Edit was seconds ago";
+        error.innerHTML = "Connected to Nebulus";
+        error.style.color = "green";
+        resetRequestNum = true;
+        if (requestInterval) clearInterval(requestInterval);
     });
 
-    request.fail(function (ignored, alsoignored) {
-        saveState.innerHTML = "Sync Unsuccessful | Retrying Sync...";
+    request.fail((ignored, ignored2) => {
+        if (count < (resetRequestNum ? 3 : 1)) {
+            saveState.innerHTML = "Sync Unsuccessful | Retrying Sync...";
+            error.innerHTML = "Connecting...";
+            error.style.color = "lightgray";
+            recursiveRequest(saveDict, count + 1);
+        }
+        else {
+            saveState.innerHTML = "Sync Unsuccessful | Retrying soon...";
+            error.innerHTML = "Could not connect to Nebulus";
+            error.style.color = "red";
+            resetRequestNum = false;
+
+            if (!requestInterval) requestInterval = setInterval(() => recursiveRequest(saveDict, 1), 1000 * 60)
+        }
     });
 }
 
-function createPlanner(){
-    let daplannerName = document.getElementById('configName').value;
-    plannerName.value = daplannerName;
-    let arr = [];
-    let count = 0;
-    while (true){
-        let name = "period"+count.toString();
-        if (document.body.contains(document.getElementsByName(name)[0])){
-            arr.push(document.getElementsByName(name)[0].value);
-            count+=1;
-        }else{
-            break;
-        }
-    }
-    const save = {};
-    save["name"] = daplannerName;
-    save["periods"] = arr;
-    const request = $.ajax({
-        type: "POST",
-        url: "/api/v1/internal/planner/create",
-        data: JSON.stringify(save)
-    });
+function saveToServer() {
+    save();
 
-    request.done(function (ignored) {
-        location.reload();
-    });
+    updateDate();
 
+    const saveDict = {};
+    saveDict["name"] = document.getElementById("planner_name").value;
+    saveDict["saveData"] = saveData;
+    saveDict["lastEdited"] = [year, month, d.getDate(), d.getHours(), d.getMinutes()];
+
+    recursiveRequest(saveDict, 1);
 }
