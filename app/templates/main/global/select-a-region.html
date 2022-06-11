@@ -9,7 +9,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
         <style>
-
+            #selectlang{
+                width:600px;
+            }
             input {
                 background-color: rgba(48, 51, 56,0.7);
                 padding: 15px;
@@ -68,23 +70,29 @@
                 display:inline-block;
             }
 
+
         </style>
     </head>
     <body>
     <center>
         <div id = "selectlang"  class="block p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700" style="display:block;">
-            <h1><span class="text-black dark:text-white text-2xl txt-rotate" data-period="1000" data-rotate='["选择你的语言", "Select your Language", "選擇你的語言", "Elige tu idioma", "Choisissez votre langue", "言語を選択", "언어 선택"]'></span></h1>
+            <h1><span class="text-black dark:text-white text-2xl txt-rotate mb-4" data-period="1000" data-rotate='["选择你的语言", "Select your Language", "選擇你的語言", "Elige tu idioma", "Choisissez votre langue", "言語を選択", "언어 선택"]'></span></h1>
             <p style="color:red;display:none;" id="error">This language isn't supported!</p>
             <p style="color:green;display:none;" id="success">ok</p>
-            <span id="english" onclick="select_lang(1);" class='button'><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/281/flag-united-states_1f1fa-1f1f8.png" class="image">American English</span><br>
-            <span onclick="select_lang(2);" class='button'><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/154/flag-for-united-kingdom_1f1ec-1f1e7.png" class="image">British English</span><br>
-            <span onclick="select_lang(3);" class='button'><img src="https://images.emojiterra.com/twitter/512px/1f1e6-1f1fa.png" class="image">Australian English</span><br>
-            <span onclick="select_lang(4);" class='button'><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/53/flag-for-spain_1f1ea-1f1f8.png" class="image">Español</span><br>
-            <span onclick="select_lang(5);" class='button'><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/154/flag-for-france_1f1eb-1f1f7.png" class="image">Français</span><br>
-            <span id="chinese" onclick="select_lang(6);" class='button'><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/154/flag-for-china_1f1e8-1f1f3.png" class="image">简体中文</span><br>
-            <span onclick="select_lang(7);" class='button'><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/53/flag-for-taiwan_1f1f9-1f1fc.png" class="image">繁體中文</span><br>
-            <span onclick="select_lang(8);" class='button'><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/77/flag-for-japan_1f1ef-1f1f5.png" class="image">日本語</span><br>
-            <span onclick="select_lang(9);" class='button'><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/53/flag-for-south-korea_1f1f0-1f1f7.png" class="image">한국어</span><br>
+            <span onclick="select_lang('us');" class='button'><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/281/flag-united-states_1f1fa-1f1f8.png" class="image">English (United States)</span><br>
+            <span onclick="select_lang('uk');" class='button'><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/154/flag-for-united-kingdom_1f1ec-1f1e7.png" class="image">English (United Kingdom)</span><br>
+            <span onclick="select_lang('au');" class='button'><img src="https://images.emojiterra.com/twitter/512px/1f1e6-1f1fa.png" class="image">English (Australia)</span><br>
+            <span onclick="select_lang('es');" class='button'><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/53/flag-for-spain_1f1ea-1f1f8.png" class="image">Español (españa)</span><br>
+            <span onclick="select_lang('fr');" class='button'><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/154/flag-for-france_1f1eb-1f1f7.png" class="image">Français</span><br>
+            <span onclick="select_lang('cn');" class='button'><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/154/flag-for-china_1f1e8-1f1f3.png" class="image">简体中文</span><br>
+            <span onclick="select_lang('tw');" class='button'><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/53/flag-for-taiwan_1f1f9-1f1fc.png" class="image">繁體中文（台灣）</span><br>
+            <span onclick="select_lang('hk');" class='button'><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/322/flag-hong-kong-sar-china_1f1ed-1f1f0.png" class="image">繁體中文（香港）</span><br>
+            <span onclick="select_lang('mo');" class='button'><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/322/flag-macao-sar-china_1f1f2-1f1f4.png" class="image">繁體中文（澳門）</span><br>
+            <span onclick="select_lang('jp');" class='button'><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/77/flag-for-japan_1f1ef-1f1f5.png" class="image">日本語（日本）</span><br>
+            <span onclick="select_lang('kr');" class='button'><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/53/flag-for-south-korea_1f1f0-1f1f7.png" class="image">한국어 (대한민국)</span><br>
+            <span onclick="select_lang('vn');" class='button'><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/322/flag-vietnam_1f1fb-1f1f3.png" class="image">Tiếng việt (việt nam)</span><br>
+            <span onclick="select_lang('th');" class='button'><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/322/flag-thailand_1f1f9-1f1ed.png" class="image">ไทย (ประเทศไทย)</span><br>
+            <span onclick="select_lang('ru');" class='button'><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/322/flag-russia_1f1f7-1f1fa.png" class="image">Русский (Россия)</span><br>
         </div>
     </center>
 
@@ -145,91 +153,11 @@
             css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #666 }";
             document.body.appendChild(css);
         };
-        function select_lang(num){
-            if (num == 1){
-                document.getElementById("error").style.display = "none";
-                document.getElementById("english").setAttribute("class", "button_selected");
-                try{
-                    document.getElementById("chinese").removeAttribute("class", "button_selected");
-                    document.getElementById("chinese").setAttribute("class", "button");
-                }catch{}
-                document.getElementById("success").style.display = "block";
-                document.getElementById("success").innerHTML = "Successfully chosen English as your language! Please click <b>Continue</b>!";
-                document.getElementById("mybtn").innerHTML = "Continue";
-            }
-            if (num == 6){
-                document.getElementById("error").style.display = "none";
-                try{
-                    document.getElementById("english").removeAttribute("class", "button_selected");
-                    document.getElementById("english").setAttribute("class", "button");
-                }catch{}
-                document.getElementById("chinese").setAttribute("class", "button_selected");
-                document.getElementById("success").style.display = "block";
-                document.getElementById("success").innerHTML = "成功选择英语作为您的语言！ 请点击<b>继续</b>！";
-                document.getElementById("mybtn").innerHTML = "继续";
-                document.getElementById("h1").innerHTML = "拉斯维加斯/死亡谷之旅仪表板";
-                document.getElementById("p").innerHTML = "实时监控我们的旅行仪表板！";
-            }
-            if (num==2){
-                document.getElementById("success").style.display = "none";
-                document.getElementById("error").style.display = "block";
-                document.getElementById("error").innerHTML = "British English isn't supported! Try American English or Simplified Chinese please!";
-            }
-            if (num==3){
-                document.getElementById("success").style.display = "none";
-                document.getElementById("error").style.display = "block";
-                document.getElementById("error").innerHTML = "Australian English isn't supported! Try American English or Simplified Chinese please!";
-            }
-            if (num==4){
-                document.getElementById("success").style.display = "none";
-                document.getElementById("error").style.display = "block";
-                document.getElementById("error").innerHTML = "¡El español no es compatible! ¡Pruebe inglés americano o chino simplificado, por favor!";
-            }
-            if (num==5){
-                document.getElementById("success").style.display = "none";
-                document.getElementById("error").style.display = "block";
-                document.getElementById("error").innerHTML = "Le français n'est pas pris en charge ! Essayez l'anglais américain ou le chinois simplifié s'il vous plaît !";
-            }
-            if (num==7){
-                document.getElementById("success").style.display = "none";
-                document.getElementById("error").style.display = "block";
-                document.getElementById("error").innerHTML = "不支持繁體中文！ 請嘗試美式英語或簡體中文！";
-            }
-            if (num==8){
-                document.getElementById("success").style.display = "none";
-                document.getElementById("error").style.display = "block";
-                document.getElementById("error").innerHTML = "日本語はサポートされていません！ アメリカ英語または簡体字中国語をお試しください！";
-            }
-            if (num==9){
-                document.getElementById("success").style.display = "none";
-                document.getElementById("error").style.display = "block";
-                document.getElementById("error").innerHTML = "한국어는 지원하지 않습니다! 미국식 영어나 중국어 간체를 사용해 보세요!";
-            }
+        function select_lang(loc){
+            //window.location.replace("/"+loc);
+            window.location.href = "/"+loc;
         }
-        $('#mybtn').on('click', function() {
-            var $this = $(this);
-            $this.button('loading');
-            setTimeout(function() {
 
-
-                if (document.getElementById("english").classList.contains("button_selected")){
-                    document.getElementById("selectlang").style.display = "none";
-                    document.getElementById("login").style.display = "block";
-                }
-                if (document.getElementById("chinese").classList.contains("button_selected")){
-                    document.getElementById("selectlang").style.display = "none";
-                    document.getElementById("login1").style.display = "block";
-                }
-
-                $this.button('reset');
-
-            }, 1000);
-
-            // setTimeout(function() {
-
-            //   }, 1000);
-
-        });
     </script>
     </body>
 {% endblock %}
