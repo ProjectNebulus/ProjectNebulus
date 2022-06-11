@@ -2,8 +2,8 @@ from json import loads
 
 from flask import request, session
 
-from routes import private_endpoint
-from static.python.mongodb import update, read
+from .....routes.main import private_endpoint
+from .....static.python.mongodb import update, read
 from . import internal
 
 
