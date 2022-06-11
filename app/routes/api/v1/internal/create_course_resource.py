@@ -55,5 +55,3 @@ def create_folder():
 
     createFolder(request.json())
     return "success", 200
-
-

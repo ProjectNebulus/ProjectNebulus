@@ -26,4 +26,3 @@ class Snowflake(Document):
     )
     imported_from = StringField(default="Nebulus", choices=lms_choices)
     imported_id = StringField(default=None, null=True)
-

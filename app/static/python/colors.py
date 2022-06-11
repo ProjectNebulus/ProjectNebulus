@@ -18,7 +18,7 @@ def getColor(url):
         q = ending.index("?")
         ending = ending[0:q]
     dot = ending.index(".")
-    extension = ending[dot + 1:]
+    extension = ending[dot + 1 :]
     file = f"testing.{extension}"
     urllib.request.urlretrieve(url, file)
     if extension.lower() != "png" and extension.lower() != "svg":

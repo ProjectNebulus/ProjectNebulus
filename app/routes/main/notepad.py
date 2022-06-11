@@ -32,8 +32,6 @@ def notepad():
         "Roboto Mono Slashed Condensed",
         "Roboto Mono Slashed Slashed",
         "Roboto Mono Slashed Slashed Condensed",
-
-
     ]
     return render_template(
         "notepad.html",
@@ -41,5 +39,5 @@ def notepad():
         user=session.get("username"),
         avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
         read=read,
-        fonts = fonts,
+        fonts=fonts,
     )

@@ -10,126 +10,254 @@ window.addEventListener("load", () => {
     exitTime = Date.now() + 500;
 });
 
-const times = document.getElementById("timePeriods");
+function init_table(){
+    document.getElementsByTagName("table")[0].innerHTML = "";
+    const times = document.getElementById("timePeriods");
 
-let d, month, year, page, startDate;
+    let d, month, year, page, startDate;
 
-const nextPage = document.getElementById("nextpage");
-const today = document.getElementById("today");
-const prevPage = document.getElementById("prevpage");
+    const nextPage = document.getElementById("nextpage");
+    const today = document.getElementById("today");
+    const prevPage = document.getElementById("prevpage");
 
-const saveState = document.getElementById("savestate");
-const plannerName = document.getElementById("planner_name");
+    const saveState = document.getElementById("savestate");
+    const plannerName = document.getElementById("planner_name");
 
-const oneWeek = 1000 * 60 * 60 * 24 * 7;
+    const oneWeek = 1000 * 60 * 60 * 24 * 7;
 
-function updateDate() {
-    d = new Date();
-    month = d.getMonth();
-    year = d.getFullYear();
-    page = Math.floor(Date.now() / oneWeek);
+    function updateDate() {
+        d = new Date();
+        month = d.getMonth();
+        year = d.getFullYear();
+        page = Math.floor(Date.now() / oneWeek);
 
-    startDate = d.getDate() - d.getDay();
-}
+        startDate = d.getDate() - d.getDay();
+    }
 
-updateDate();
+    updateDate();
 
-const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-const daysInMonths = [31, d.getFullYear() % 4 === 0 ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const daysInMonths = [31, d.getFullYear() % 4 === 0 ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
-const table = document.getElementsByTagName("table")[0];
+    const table = document.getElementsByTagName("table")[0];
 
-let saveData = {};
+    let saveData = {};
 
-keyUpDelay("table", 500, save);
-keyUpDelay("#planner_name", 500, save);
+    keyUpDelay("table", 500, save);
+    keyUpDelay("#planner_name", 500, save);
 
-loadFromServer();
+    loadFromServer();
 
-nextPage.onclick = function () {
-    page++;
-    load(page);
+    nextPage.onclick = function () {
+        page++;
+        load(page);
 
-    nextPage.disabled = year >= 2030 && month === 11 && startDate >= daysInMonths[month] - 7;
-    prevPage.disabled = false;
+        nextPage.disabled = year >= 2030 && month === 11 && startDate >= daysInMonths[month] - 7;
+        prevPage.disabled = false;
 
-    startDate += 7;
-    if (startDate > daysInMonths[month]) {
-        startDate -= daysInMonths[month]
-        month++;
+        startDate += 7;
+        if (startDate > daysInMonths[month]) {
+            startDate -= daysInMonths[month]
+            month++;
 
-        if (month > 11) {
-            month = 0;
-            year++;
+            if (month > 11) {
+                month = 0;
+                year++;
+            }
+        }
+
+        changeDate();
+        save();
+    }
+
+    prevPage.onclick = function () {
+        page--;
+        load(page);
+
+        prevPage.disabled = year <= 1970 && month === 0 && startDate <= 7;
+        nextPage.disabled = false;
+
+        startDate -= 7;
+        if (startDate < 0) {
+            month--;
+
+            if (month < 0) {
+                year--;
+                month = 11;
+            }
+
+            startDate += daysInMonths[month];
+        }
+
+        changeDate();
+        save();
+    }
+
+    today.onclick = function () {
+        page = Math.floor(Date.now() / oneWeek);
+        load(page);
+        startDate = d.getDate() - d.getDay();
+        year = d.getFullYear();
+        month = d.getMonth();
+        changeDate();
+        nextPage.disabled = false;
+        prevPage.disabled = false;
+    }
+
+    document.getElementById("month").innerHTML = months[month] + " " + d.getFullYear();
+
+    const daysRow = table.insertRow();
+    for (let i = 0; i < 7; i++)
+        daysRow.insertCell();
+
+    changeDate();
+
+    for (let i = 1; i <= 8; i++) {
+        const row = table.insertRow();
+        const smallCell = row.insertCell();
+
+        let textarea = document.createElement("textarea");
+        textarea.innerHTML = i + "";
+        textarea.style.fontsize = "1.5rem";
+        smallCell.appendChild(textarea);
+
+        for (let j = 0; j < 6; j++) {
+            const cell = row.insertCell();
+
+            textarea = document.createElement("textarea");
+            textarea.className = "note";
+            //textarea.placeholder = "_".repeat(105);
+            cell.appendChild(textarea);
         }
     }
 
-    changeDate();
-    save();
 }
 
-prevPage.onclick = function () {
-    page--;
-    load(page);
+function init_table_with_periods(periods){
+    document.getElementsByTagName("table")[0].innerHTML = "";
+    const times = document.getElementById("timePeriods");
 
-    prevPage.disabled = year <= 1970 && month === 0 && startDate <= 7;
-    nextPage.disabled = false;
+    let d, month, year, page, startDate;
 
-    startDate -= 7;
-    if (startDate < 0) {
-        month--;
+    const nextPage = document.getElementById("nextpage");
+    const today = document.getElementById("today");
+    const prevPage = document.getElementById("prevpage");
 
-        if (month < 0) {
-            year--;
-            month = 11;
+    const saveState = document.getElementById("savestate");
+    const plannerName = document.getElementById("planner_name");
+
+    const oneWeek = 1000 * 60 * 60 * 24 * 7;
+
+    function updateDate() {
+        d = new Date();
+        month = d.getMonth();
+        year = d.getFullYear();
+        page = Math.floor(Date.now() / oneWeek);
+
+        startDate = d.getDate() - d.getDay();
+    }
+
+    updateDate();
+
+    const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const daysInMonths = [31, d.getFullYear() % 4 === 0 ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+    const table = document.getElementsByTagName("table")[0];
+
+    let saveData = {};
+
+    keyUpDelay("table", 500, save);
+    keyUpDelay("#planner_name", 500, save);
+
+    loadFromServer();
+
+    nextPage.onclick = function () {
+        page++;
+        load(page);
+
+        nextPage.disabled = year >= 2030 && month === 11 && startDate >= daysInMonths[month] - 7;
+        prevPage.disabled = false;
+
+        startDate += 7;
+        if (startDate > daysInMonths[month]) {
+            startDate -= daysInMonths[month]
+            month++;
+
+            if (month > 11) {
+                month = 0;
+                year++;
+            }
         }
 
-        startDate += daysInMonths[month];
+        changeDate();
+        save();
     }
 
-    changeDate();
-    save();
-}
+    prevPage.onclick = function () {
+        page--;
+        load(page);
 
-today.onclick = function () {
-    page = Math.floor(Date.now() / oneWeek);
-    load(page);
-    startDate = d.getDate() - d.getDay();
-    year = d.getFullYear();
-    month = d.getMonth();
-    changeDate();
-    nextPage.disabled = false;
-    prevPage.disabled = false;
-}
+        prevPage.disabled = year <= 1970 && month === 0 && startDate <= 7;
+        nextPage.disabled = false;
 
-document.getElementById("month").innerHTML = months[month] + " " + d.getFullYear();
+        startDate -= 7;
+        if (startDate < 0) {
+            month--;
 
-const daysRow = table.insertRow();
-for (let i = 0; i < 7; i++)
-    daysRow.insertCell();
+            if (month < 0) {
+                year--;
+                month = 11;
+            }
 
-changeDate();
+            startDate += daysInMonths[month];
+        }
 
-for (let i = 1; i <= 8; i++) {
-    const row = table.insertRow();
-    const smallCell = row.insertCell();
-
-    let textarea = document.createElement("textarea");
-    textarea.innerHTML = i + "";
-    textarea.style.fontsize = "1.5rem";
-    smallCell.appendChild(textarea);
-
-    for (let j = 0; j < 6; j++) {
-        const cell = row.insertCell();
-
-        textarea = document.createElement("textarea");
-        textarea.className = "note";
-        //textarea.placeholder = "_".repeat(105);
-        cell.appendChild(textarea);
+        changeDate();
+        save();
     }
-}
 
+    today.onclick = function () {
+        page = Math.floor(Date.now() / oneWeek);
+        load(page);
+        startDate = d.getDate() - d.getDay();
+        year = d.getFullYear();
+        month = d.getMonth();
+        changeDate();
+        nextPage.disabled = false;
+        prevPage.disabled = false;
+    }
+
+    document.getElementById("month").innerHTML = months[month] + " " + d.getFullYear();
+
+    const daysRow = table.insertRow();
+    for (let i = 0; i < 7; i++)
+        daysRow.insertCell();
+
+    changeDate();
+
+    for (let i = 0; i < 8; i++) {
+        const row = table.insertRow();
+        const smallCell = row.insertCell();
+
+        let textarea = document.createElement("textarea");
+        textarea.innerHTML = periods[i] + "";
+        textarea.style.fontsize = "1.5rem";
+        smallCell.appendChild(textarea);
+
+        for (let j = 0; j < 6; j++) {
+            const cell = row.insertCell();
+
+            textarea = document.createElement("textarea");
+            textarea.className = "note";
+            //textarea.placeholder = "_".repeat(105);
+            cell.appendChild(textarea);
+        }
+    }
+
+}
+init_table();
 function addTimePeriod() {
     let periods = document.getElementById("numberOfPeriods").value;
     document.getElementById("numberOfPeriods").value = parseInt(periods)+1;
@@ -212,8 +340,29 @@ function loadFromServer() {
         }
 
         document.getElementById("planner_name").value = data["name"];
-
-        saveData = data["saveData"];
+        let periods = data["periods"];
+        // let table = document.getElementsByTagName("table")[0]
+        // table.innerHTML = "";
+        // for (let i = 0; i < periods.length; i++) {
+        //     const row = table.insertRow();
+        //     const smallCell = row.insertCell();
+        //
+        //     let textarea = document.createElement("textarea");
+        //     textarea.innerHTML = periods[i] + "";
+        //     textarea.style.fontsize = "1.5rem";
+        //     smallCell.appendChild(textarea);
+        //
+        //     for (let j = 0; j < 6; j++) {
+        //         const cell = row.insertCell();
+        //
+        //         textarea = document.createElement("textarea");
+        //         textarea.className = "note";
+        //         //textarea.placeholder = "_".repeat(105);
+        //         cell.appendChild(textarea);
+        //     }
+        // }
+        init_table_with_periods(periods);
+        saveData = data["data"];
 
         for (const key of Object.keys(saveData)) {
             if (page.toString() === key) {

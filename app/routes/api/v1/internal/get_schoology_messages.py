@@ -36,7 +36,7 @@ def get_schoology_messages():
                     "avatar": recipient["picture_url"],
                     "email": recipient["primary_email"],
                     "school": school,
-                    "color": color
+                    "color": color,
                 }
             )
 
@@ -45,7 +45,7 @@ def get_schoology_messages():
             "avatar": authorPfp,
             "email": authorEmail,
             "school": authorSchool,
-            "color": authorColor
+            "color": authorColor,
         }
         info["subject"] = message["subject"]
         info["status"] = message["message_status"]
@@ -62,7 +62,7 @@ def get_schoology_messages():
                     "message": threadItem["message"],
                     "author": thread_author["name_display"],
                     "author_pic": thread_author["picture_url"],
-                    "author_email": thread_author["primary_email"]
+                    "author_email": thread_author["primary_email"],
                 }
             )
         info["thread"] = newThread

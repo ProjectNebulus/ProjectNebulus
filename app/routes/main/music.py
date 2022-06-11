@@ -9,32 +9,37 @@ from werkzeug.utils import secure_filename
 from . import main_blueprint
 from .utils import logged_in
 
-UPLOAD_FOLDER = './app/static'
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'heic', 'webm'}
+UPLOAD_FOLDER = "./app/static"
+ALLOWED_EXTENSIONS = {"txt", "pdf", "png", "jpg", "jpeg", "gif", "heic", "webm"}
 
 
 def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 def urlEncodeNonAscii(b):
-    return re.sub('[\x80-\xFF]', lambda c: '%%%02x' % ord(c.group(0)), b).encode()
+    return re.sub("[\x80-\xFF]", lambda c: "%%%02x" % ord(c.group(0)), b).encode()
 
 
 def search(query):
     import urllib.request
     import re
+
     search_keyword = query
-    while ' ' in search_keyword:
+    while " " in search_keyword:
         for i in range(0, len(search_keyword)):
-            if ' ' == search_keyword[i]:
-                search_keyword = search_keyword[0:i] + '%20' + search_keyword[
-                                                               i + 1:len(search_keyword)]
+            if " " == search_keyword[i]:
+                search_keyword = (
+                    search_keyword[0:i]
+                    + "%20"
+                    + search_keyword[i + 1 : len(search_keyword)]
+                )
                 break
 
     html = urllib.request.urlopen(
-        "https://www.youtube.com/results?search_query=" + str(search_keyword.encode('utf-8')))
+        "https://www.youtube.com/results?search_query="
+        + str(search_keyword.encode("utf-8"))
+    )
 
     video_ids = re.findall(r"watch\?v=(\S{11})", html.read().decode())
 
@@ -85,7 +90,7 @@ class Musixmatch(object):
         return request
 
     def chart_tracks_get(
-            self, page, page_size, f_has_lyrics, country="us", _format="json"
+        self, page, page_size, f_has_lyrics, country="us", _format="json"
     ):
         """This api provides you the list
         of the top songs of a given country.
@@ -103,9 +108,7 @@ class Musixmatch(object):
         )
         return request
 
-    def track_search(
-            self, q_track, page_size, page, s_track_rating, _format="json"
-    ):
+    def track_search(self, q_track, page_size, page, s_track_rating, _format="json"):
         """Search for track in our database.
         Parameters:
         q_track - The song title.
@@ -148,12 +151,12 @@ class Musixmatch(object):
         return data
 
     def track_get(
-            self,
-            track_id,
-            commontrack_id=None,
-            track_isrc=None,
-            track_mbid=None,
-            _format="json",
+        self,
+        track_id,
+        commontrack_id=None,
+        track_isrc=None,
+        track_mbid=None,
+        _format="json",
     ):
         """Get a track info from our database:
         title, artist, instrumental flag and cover art.
@@ -205,13 +208,13 @@ class Musixmatch(object):
         return data
 
     def track_subtitle_get(
-            self,
-            track_id,
-            track_mbid=None,
-            subtitle_format=None,
-            f_subtitle_length=None,
-            f_subtitle_length_max_deviation=None,
-            _format="json",
+        self,
+        track_id,
+        track_mbid=None,
+        subtitle_format=None,
+        f_subtitle_length=None,
+        f_subtitle_length_max_deviation=None,
+        _format="json",
     ):
         """Retreive the subtitle of a track.
         Return the subtitle of a track in LRC or DFXP format.
@@ -247,11 +250,11 @@ class Musixmatch(object):
         return data
 
     def track_richsync_get(
-            self,
-            track_id,
-            f_sync_length=None,
-            f_sync_length_max_deviation=None,
-            _format="json",
+        self,
+        track_id,
+        f_sync_length=None,
+        f_sync_length_max_deviation=None,
+        _format="json",
     ):
         """Get the Rich sync for a track.
         A rich sync is an enhanced version of the
@@ -371,13 +374,13 @@ class Musixmatch(object):
         return data
 
     def matcher_subtitle_get(
-            self,
-            q_track,
-            q_artist,
-            f_subtitle_length,
-            f_subtitle_length_max_deviation,
-            track_isrc=None,
-            _format="json",
+        self,
+        q_track,
+        q_artist,
+        f_subtitle_length,
+        f_subtitle_length_max_deviation,
+        track_isrc=None,
+        _format="json",
     ):
         """Get the subtitles for a song given his title,artist and duration.
         You can use the f_subtitle_length_max_deviation to fetch subtitles
@@ -426,7 +429,7 @@ class Musixmatch(object):
         return data
 
     def artist_search(
-            self, q_artist, page, page_size, f_artist_id, f_artist_mbid, _format="json"
+        self, q_artist, page, page_size, f_artist_id, f_artist_mbid, _format="json"
     ):
         """Search for artists in our database.
         Parameters:
@@ -455,14 +458,14 @@ class Musixmatch(object):
         return data
 
     def artist_albums_get(
-            self,
-            artist_id,
-            g_album_name,
-            page,
-            page_size,
-            s_release_date,
-            artist_mbid=None,
-            _format="json",
+        self,
+        artist_id,
+        g_album_name,
+        page,
+        page_size,
+        s_release_date,
+        artist_mbid=None,
+        _format="json",
     ):
         """Get the album discography of an artist.
         Parameters:
@@ -494,7 +497,7 @@ class Musixmatch(object):
         return data
 
     def artist_related_get(
-            self, artist_id, page, page_size, artist_mbid=None, _format="json"
+        self, artist_id, page, page_size, artist_mbid=None, _format="json"
     ):
         """Get a list of artists somehow related to a given one.
         Parameters:
@@ -510,7 +513,11 @@ class Musixmatch(object):
                 "artist.related.get?artist_id={}"
                 "&artist_mbid={}&page={}"
                 "&page_size={}&format={}".format(
-                    artist_id, artist_mbid, page, self._set_page_size(page_size), _format
+                    artist_id,
+                    artist_mbid,
+                    page,
+                    self._set_page_size(page_size),
+                    _format,
                 )
             )
         )
@@ -529,7 +536,7 @@ class Musixmatch(object):
         return data
 
     def album_tracks_get(
-            self, album_id, page, page_size, album_mbid, f_has_lyrics=None, _format="json"
+        self, album_id, page, page_size, album_mbid, f_has_lyrics=None, _format="json"
     ):
         """This api provides you the list of the songs of an album.
         Parameters:
@@ -608,12 +615,16 @@ class Musixmatch(object):
 def main_program(file_name):
     import io
     import os
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "./app/routes/main/festive-freedom-309323-0124a1c976ae.json"
+
+    os.environ[
+        "GOOGLE_APPLICATION_CREDENTIALS"
+    ] = "./app/routes/main/festive-freedom-309323-0124a1c976ae.json"
     from google.cloud import vision
+
     client = vision.ImageAnnotatorClient()
     file_name = os.path.abspath(file_name)
     # Loads the image into memory
-    with io.open(file_name, 'rb') as image_file:
+    with io.open(file_name, "rb") as image_file:
         content = image_file.read()
     image = vision.Image(content=content)
 
@@ -624,7 +635,7 @@ def main_program(file_name):
     for logo in logos:
         logo_list.append(logo.description)
 
-    if (len(logo_list) > 0):
+    if len(logo_list) > 0:
         return logo_list
     response = client.landmark_detection(image=image)
     landmarks = response.landmark_annotations
@@ -632,7 +643,7 @@ def main_program(file_name):
     for landmark in landmarks:
         landmark_list.append(landmark.description)
 
-    if (len(landmark_list) > 0):
+    if len(landmark_list) > 0:
         return landmark_list
 
     # General
@@ -649,22 +660,25 @@ def main_program(file_name):
 @main_blueprint.route("/music", methods=["GET"])
 @logged_in
 def music():
-    return render_template("music.html",user=session.get("username"),
-                           avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),)
+    return render_template(
+        "music.html",
+        user=session.get("username"),
+        avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
+    )
 
 
-@main_blueprint.route('/music', methods=['POST'])
+@main_blueprint.route("/music", methods=["POST"])
 @logged_in
 def music_post():
-    if str(request.form['type']) == "4":
-        if 'search' not in request.files:
+    if str(request.form["type"]) == "4":
+        if "search" not in request.files:
             print("1")
             return redirect(request.url)
 
-        file = request.files['search']
+        file = request.files["search"]
         # If the user does not select a file, the browser submits an
         # empty file without a filename.
-        if file.filename == '':
+        if file.filename == "":
             print("2")
             return redirect(request.url)
 
@@ -674,13 +688,15 @@ def music_post():
             file.save(os.path.join(UPLOAD_FOLDER, filename))
             a = main_program(os.path.join(UPLOAD_FOLDER, filename))
             os.remove(os.path.join(UPLOAD_FOLDER, filename))
-            musixmatch = Musixmatch('bbd8cc3d9f6c1444e01d9d66b44f0f49')
+            musixmatch = Musixmatch("bbd8cc3d9f6c1444e01d9d66b44f0f49")
             songs = []
             for i in a:
-                musicdata = musixmatch.track_search(q_track=i, page_size=10, page=1, s_track_rating='desc')
+                musicdata = musixmatch.track_search(
+                    q_track=i, page_size=10, page=1, s_track_rating="desc"
+                )
                 songs += musicdata["message"]["body"]["track_list"]
             for i in range(0, len(songs)):
-                songs[i] = songs[i]['track']
+                songs[i] = songs[i]["track"]
 
             return render_template(
                 "musixmatch.html",
@@ -690,8 +706,8 @@ def music_post():
                 avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
             )
 
-    text = request.form['search']
-    type = request.form['type']
+    text = request.form["search"]
+    type = request.form["type"]
     youtube_needed = True
     spotify_needed = True
     if str(type) == "2":
@@ -703,74 +719,83 @@ def music_post():
     if spotify_needed:
         import requests
 
-        CLIENT_ID = '846095b9ce934b0da3e0aaf3adbf600c'
-        CLIENT_SECRET = '1d79c77cee124d8f8e20b16f720d65e8'
-        AUTH_URL = 'https://accounts.spotify.com/api/token'
+        CLIENT_ID = "846095b9ce934b0da3e0aaf3adbf600c"
+        CLIENT_SECRET = "1d79c77cee124d8f8e20b16f720d65e8"
+        AUTH_URL = "https://accounts.spotify.com/api/token"
         # POST
         auth_response = requests.post(
-            AUTH_URL, {
-                'grant_type': 'client_credentials',
-                'client_id': CLIENT_ID,
-                'client_secret': CLIENT_SECRET,
-            })
+            AUTH_URL,
+            {
+                "grant_type": "client_credentials",
+                "client_id": CLIENT_ID,
+                "client_secret": CLIENT_SECRET,
+            },
+        )
 
         # convert the response to JSON
         auth_response_data = auth_response.json()
 
         # save the access token
-        access_token = auth_response_data['access_token']
+        access_token = auth_response_data["access_token"]
 
         artist_info = requests.get(
-            f'https://api.spotify.com/v1/search?q={text}&type=track',
+            f"https://api.spotify.com/v1/search?q={text}&type=track",
             headers={
-                'Authorization': f'Bearer {access_token}',
-                'Content-Type': 'application/json'
-            }
+                "Authorization": f"Bearer {access_token}",
+                "Content-Type": "application/json",
+            },
         ).json()
         # print(artist_info)
         print(access_token)
 
         spotify_arr = []
-        file = json.load(open('app/static/json/cache.json', 'r'))
+        file = json.load(open("app/static/json/cache.json", "r"))
         for song in artist_info["tracks"]["items"][:10]:
             mydict = {}
 
-            mydict['image'] = str(song['album']['images'][0]['url'])
-            mydict['author'] = (song['album']['artists'][0]['name'])
-            mydict['author_url'] = song['album']['artists'][0]['external_urls']["spotify"]
-            mydict['album'] = (song['album']['name'])
-            mydict['explicit'] = song['explicit']
-            mydict['name'] = (song['name'])
-            mydict['preview'] = (song['preview_url'])
-            mydict['link'] = (song['external_urls']['spotify'])
-            mydict['code'] = mydict['link'][31:]
-            mydict['uri'] = (song['uri'])
+            mydict["image"] = str(song["album"]["images"][0]["url"])
+            mydict["author"] = song["album"]["artists"][0]["name"]
+            mydict["author_url"] = song["album"]["artists"][0]["external_urls"][
+                "spotify"
+            ]
+            mydict["album"] = song["album"]["name"]
+            mydict["explicit"] = song["explicit"]
+            mydict["name"] = song["name"]
+            mydict["preview"] = song["preview_url"]
+            mydict["link"] = song["external_urls"]["spotify"]
+            mydict["code"] = mydict["link"][31:]
+            mydict["uri"] = song["uri"]
             spotify_arr.insert(0, mydict)
             file.append(mydict)
 
         processed_text = text.upper()
-        with open('app/static/json/cache.json', 'w') as out:
+        with open("app/static/json/cache.json", "w") as out:
             json.dump(file, out, indent=4)
 
     if youtube_needed:
         import urllib.request
         import urllib.parse
         import re
+
         processed_text = text.upper()
         search_keyword = processed_text
 
-        while ' ' in search_keyword:
+        while " " in search_keyword:
             for i in range(0, len(search_keyword)):
-                if ' ' == search_keyword[i]:
-                    search_keyword = search_keyword[0:i] + '%20' + search_keyword[
-                                                                   i + 1:len(search_keyword)]
+                if " " == search_keyword[i]:
+                    search_keyword = (
+                        search_keyword[0:i]
+                        + "%20"
+                        + search_keyword[i + 1 : len(search_keyword)]
+                    )
                     break
-        search_keyword = urllib.parse.quote(search_keyword, encoding='UTF-8')
+        search_keyword = urllib.parse.quote(search_keyword, encoding="UTF-8")
         html = urllib.request.urlopen(
             # urlEncodeNonAscii(
             #     "https://www.youtube.com/results?search_query=" + search_keyword
             # )
-            "https://www.youtube.com/results?search_query=" + search_keyword
+            "https://www.youtube.com/results?search_query="
+            + search_keyword
         )
 
         video_ids = re.findall(r"watch\?v=(\S{11})", html.read().decode())
@@ -790,7 +815,7 @@ def music_post():
 
             params = {
                 "format": "json",
-                "url": "https://www.youtube.com/watch?v={}".format(VideoID)
+                "url": "https://www.youtube.com/watch?v={}".format(VideoID),
             }
             url = "https://www.youtube.com/oembed"
             query_string = urllib.parse.urlencode(params)
@@ -803,8 +828,12 @@ def music_post():
                 return data[param]
 
     if len(video_ids) == 0 and len(spotify_arr) == 0:
-        return render_template('musicresults.html', noresults=True, user=session.get("username"),
-                               avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),)
+        return render_template(
+            "musicresults.html",
+            noresults=True,
+            user=session.get("username"),
+            avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
+        )
 
     else:
         mylist = []
@@ -828,26 +857,33 @@ def music_post():
             else:
                 break
 
-    return render_template('musicresults.html',
-                           noresults=False,
-                           mylist=mylist,
-                           spotify_arr=spotify_arr, user=session.get("username"),
-                           avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),)
+    return render_template(
+        "musicresults.html",
+        noresults=False,
+        mylist=mylist,
+        spotify_arr=spotify_arr,
+        user=session.get("username"),
+        avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
+    )
 
 
-@main_blueprint.route('/play/spotify/<smth>')
+@main_blueprint.route("/play/spotify/<smth>")
 @logged_in
 def music_spotify(smth):
-    extra = ''
-    with open('app/static/json/cache.json', 'r') as file:
+    extra = ""
+    with open("app/static/json/cache.json", "r") as file:
         file = json.load(file)
     for i in file:
-        if i['code'] == smth:
-            return render_template('musictrack.html', i=i, user=session.get("username"),
-                                   avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),)
+        if i["code"] == smth:
+            return render_template(
+                "musictrack.html",
+                i=i,
+                user=session.get("username"),
+                avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
+            )
 
 
-@main_blueprint.route('/play/<id_>')
+@main_blueprint.route("/play/<id_>")
 @logged_in
 def music_video(id_: str):
     def find_data(link, param):
@@ -859,9 +895,13 @@ def music_video(id_: str):
         import json
         import urllib
         import pprint
+
         # change to yours VideoID or change url inparams
         VideoID = link
-        params = {"format": "json", "url": "https://www.youtube.com/watch?v=%s" % VideoID}
+        params = {
+            "format": "json",
+            "url": "https://www.youtube.com/watch?v=%s" % VideoID,
+        }
         url = "https://www.youtube.com/oembed"
         query_string = urllib.parse.urlencode(params)
         url = url + "?" + query_string
@@ -871,14 +911,25 @@ def music_video(id_: str):
             pprint.pprint(data)
             return data[param]
 
-    youtube = f'https://www.youtube.com/watch?v={id_}'
-    link = f'https://nebulus.ml/play/{id_}'
-    author = find_data(id_, 'author_name')
-    author_url = find_data(id_, 'author_url')
-    sub = author_url + '?sub_confirmation=1'
-    thumbnail_url = find_data(id_, 'thumbnail_url')
-    title = find_data(id_, 'title')
-    content = f'Listen to {title} by {author} on Nebulus!'
-    return render_template('musicvideo.html', author=author, author_url=author_url, thumbnail_url=thumbnail_url,
-                           title=title, id=id_, content=content, youtube=youtube, sub=sub, link=link, user=session.get("username"),
-                           avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),)
+    youtube = f"https://www.youtube.com/watch?v={id_}"
+    link = f"https://nebulus.ml/play/{id_}"
+    author = find_data(id_, "author_name")
+    author_url = find_data(id_, "author_url")
+    sub = author_url + "?sub_confirmation=1"
+    thumbnail_url = find_data(id_, "thumbnail_url")
+    title = find_data(id_, "title")
+    content = f"Listen to {title} by {author} on Nebulus!"
+    return render_template(
+        "musicvideo.html",
+        author=author,
+        author_url=author_url,
+        thumbnail_url=thumbnail_url,
+        title=title,
+        id=id_,
+        content=content,
+        youtube=youtube,
+        sub=sub,
+        link=link,
+        user=session.get("username"),
+        avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
+    )

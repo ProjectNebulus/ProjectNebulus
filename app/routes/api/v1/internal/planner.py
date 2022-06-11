@@ -1,6 +1,6 @@
 from json import loads
 
-from flask import request, session
+from flask import request, session, jsonify
 
 from .....routes.main.utils import private_endpoint
 from .....static.python.mongodb import update, read
@@ -13,7 +13,13 @@ def getPlanner():
     # if len(read.getPlanner(session["id"])) == 0:
     if read.getPlanner(session["id"]) == None:
         return "0"
-    return read.getPlanner(session["id"])
+    planner = read.getPlanner(session["id"])
+    plannerdict = {
+        "name": planner.name,
+        "periods": list(planner.periods),
+        "data": dict(planner.data),
+        }
+    return jsonify(plannerdict)
 
 
 @internal.route("/planner/create", methods=["POST"])

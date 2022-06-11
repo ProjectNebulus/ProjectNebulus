@@ -1,5 +1,5 @@
 def daplagarism(data1, data2):
-    #https://towardsdatascience.com/simple-plagiarism-detection-in-python-2314ac3aee88
+    # https://towardsdatascience.com/simple-plagiarism-detection-in-python-2314ac3aee88
     import re
     from nltk.util import ngrams, pad_sequence, everygrams
     from nltk.tokenize import word_tokenize
@@ -8,7 +8,8 @@ def daplagarism(data1, data2):
     import plotly.graph_objects as go
     from scipy.ndimage import gaussian_filter
     import nltk
-    nltk.download('punkt')
+
+    nltk.download("punkt")
 
     # Training data file
     train_data_file = "testing.txt"
@@ -19,28 +20,28 @@ def daplagarism(data1, data2):
     # # read training data
     with open(train_data_file) as f:
         train_text = f.read().lower()
-    #train_text = data1.lower()
+    # train_text = data1.lower()
 
     # apply preprocessing (remove text inside square and curly brackets and rem punc)
     train_text = re.sub(r"\[.*\]|\{.*\}", "", train_text)
-    train_text = re.sub(r'[^\w\s]', "", train_text)
+    train_text = re.sub(r"[^\w\s]", "", train_text)
 
     # set ngram number
     n = 4
 
     # pad the text and tokenize
-    training_data = list(pad_sequence(word_tokenize(train_text), n,
-                                      pad_left=True,
-                                      left_pad_symbol="<s>"))
+    training_data = list(
+        pad_sequence(word_tokenize(train_text), n, pad_left=True, left_pad_symbol="<s>")
+    )
 
     # generate ngrams
     ngrams = list(everygrams(training_data, max_len=n))
-    #print("Number of ngrams:", len(ngrams))
+    # print("Number of ngrams:", len(ngrams))
 
     # build ngram language models
     model = WittenBellInterpolated(n)
     model.fit([ngrams], vocabulary_text=training_data)
-    #print(model.vocab)
+    # print(model.vocab)
 
     # testing data file
     test_data_file = "testing2.txt"
@@ -49,36 +50,36 @@ def daplagarism(data1, data2):
     # Read testing data
     with open(test_data_file) as f:
         test_text = f.read().lower()
-    #test_text = data2.lower()
-    test_text = re.sub(r'[^\w\s]', "", test_text)
+    # test_text = data2.lower()
+    test_text = re.sub(r"[^\w\s]", "", test_text)
 
     # Tokenize and pad the text
-    testing_data = list(pad_sequence(word_tokenize(test_text), n,
-                                     pad_left=True,
-                                     left_pad_symbol="<s>"))
-    #print("Length of test data:", len(testing_data))
+    testing_data = list(
+        pad_sequence(word_tokenize(test_text), n, pad_left=True, left_pad_symbol="<s>")
+    )
+    # print("Length of test data:", len(testing_data))
 
     # assign scores
     scores = []
-    for i, item in enumerate(testing_data[n-1:]):
-        s = model.score(item, testing_data[i:i+n-1])
+    for i, item in enumerate(testing_data[n - 1 :]):
+        s = model.score(item, testing_data[i : i + n - 1])
         scores.append(s)
 
     scores_np = np.array(scores)
 
     # set width and height
     width = 8
-    height = np.ceil(len(testing_data)/width).astype("int32")
-    #print("Width, Height:", width, ",", height)
+    height = np.ceil(len(testing_data) / width).astype("int32")
+    # print("Width, Height:", width, ",", height)
 
-    score = sum(scores_np)/len(scores_np)*100
+    score = sum(scores_np) / len(scores_np) * 100
     score = round(score, 4)
-    plagarized = score>20
-    #print("Plagarism Score: "+str(score)+"%\nPlagarized: "+str(plagarized))
+    plagarized = score > 20
+    # print("Plagarism Score: "+str(score)+"%\nPlagarized: "+str(plagarized))
 
-    #copy scores to rectangular blank array
-    a = np.zeros(width*height)
-    a[:len(scores_np)] = scores_np
+    # copy scores to rectangular blank array
+    a = np.zeros(width * height)
+    a[: len(scores_np)] = scores_np
     diff = len(a) - len(scores_np)
 
     # apply gaussian smoothing for aesthetics
@@ -88,33 +89,48 @@ def daplagarism(data1, data2):
     a = a.reshape(-1, width)
 
     # format labels
-    labels = [" ".join(testing_data[i:i+width]) for i in range(n-1, len(testing_data), width)]
+    labels = [
+        " ".join(testing_data[i : i + width])
+        for i in range(n - 1, len(testing_data), width)
+    ]
     labels_individual = [x.split() for x in labels]
-    labels_individual[-1] += [""]*diff
+    labels_individual[-1] += [""] * diff
     labels = [f"{x:60.60}" for x in labels]
 
     # create heatmap
-    fig = go.Figure(data=go.Heatmap(
-        z=a, x0=0, dx=1,
-        y=labels, zmin=0, zmax=1,
-        customdata=labels_individual,
-        hovertemplate='%{customdata} <br><b>Score:%{z:.3f}<extra></extra>',
-        colorscale="burg"))
-    fig.update_layout({"height":height*28, "width":1000, "font":{"family":"Courier New"}})
-    fig['layout']['yaxis']['autorange'] = "reversed"
-    #fig.show()
+    fig = go.Figure(
+        data=go.Heatmap(
+            z=a,
+            x0=0,
+            dx=1,
+            y=labels,
+            zmin=0,
+            zmax=1,
+            customdata=labels_individual,
+            hovertemplate="%{customdata} <br><b>Score:%{z:.3f}<extra></extra>",
+            colorscale="burg",
+        )
+    )
+    fig.update_layout(
+        {"height": height * 28, "width": 1000, "font": {"family": "Courier New"}}
+    )
+    fig["layout"]["yaxis"]["autorange"] = "reversed"
+    # fig.show()
     fig.write_image("plagarism.png")
     import base64
+
     # encoded = base64.b64encode(open("plagarism.png", "rb").read())
     # print('data:image/png;base64,{}'.format(str(encoded)))
     image_data = open("plagarism.png", "rb").read()
-    encoded = base64.b64encode(image_data) # Creates a bytes object
-    encoded = 'data:image/png;base64,{}'.format(str(encoded).strip("b'").strip( "'"))
-    #delete file
+    encoded = base64.b64encode(image_data)  # Creates a bytes object
+    encoded = "data:image/png;base64,{}".format(str(encoded).strip("b'").strip("'"))
+    # delete file
     import os
+
     os.remove("plagarism.png")
     # import webbrowser
     # webbrowser.open(encoded)
     return [score, plagarized, encoded]
 
-#daplagarism("Hedsdsdsdsdsdsdsdsdsdsdsdsllo", "sdsdssdsdsdsHello")
+
+# daplagarism("Hedsdsdsdsdsdsdsdsdsdsdsdsllo", "sdsdssdsdsdsHello")

@@ -37,7 +37,11 @@ def create_user():
     }
 
     data["avatar"] = cats[int(data["avatar"].replace("cat", ""))]
-    data["avatar"] = Avatar(avatar_url="https://beta.nebulus.ml/static/images/nebulusCats/"+data["avatar"], parent="User")
+    data["avatar"] = Avatar(
+        avatar_url="https://beta.nebulus.ml/static/images/nebulusCats/"
+        + data["avatar"],
+        parent="User",
+    )
     data["age"] = datetime.strptime(data["age"].strip(), "%m/%d/%Y")
     validation = create.create_user(data)
     if validation[0] == "0":
@@ -45,9 +49,14 @@ def create_user():
         session["email"] = validation[1].email
         session["pswLen"] = len(data.get("password"))
         session["id"] = validation[1].id
-        session["avatar"] = data["avatar"].avatar_url.replace("https://localhost:8080", "").replace("https://beta.nebulus.ml", "")
+        session["avatar"] = (
+            data["avatar"]
+            .avatar_url.replace("https://localhost:8080", "")
+            .replace("https://beta.nebulus.ml", "")
+        )
 
     return validation[0]
+
 
 @internal.route("/search-user", methods=["POST"])
 def search_user():
@@ -57,7 +66,7 @@ def search_user():
     finaldata = ""
     print(users)
     for i in users:
-        finaldata+=i.username
-        if i != users[len(users)-1]:
-            finaldata+="•"
+        finaldata += i.username
+        if i != users[len(users) - 1]:
+            finaldata += "•"
     return finaldata

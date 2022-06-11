@@ -83,7 +83,9 @@ def recieve():
             access_token = data["access_token"]
             data = getMe(access_token)
 
-            avatar_link = f"https://cdn.discordapp.com/avatars/{data['id']}/{data['avatar']}.png"
+            avatar_link = (
+                f"https://cdn.discordapp.com/avatars/{data['id']}/{data['avatar']}.png"
+            )
 
             user = f"{data['username']}#{data['discriminator']}"
 

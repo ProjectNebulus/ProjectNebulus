@@ -16,4 +16,3 @@ def logout():
     window.location.replace("/");
 </script>
     """
-

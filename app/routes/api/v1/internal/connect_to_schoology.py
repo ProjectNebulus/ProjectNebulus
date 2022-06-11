@@ -46,8 +46,8 @@ def connect_schoology():
     session["Schoologydomain"] = data["link"]
     session["Schoologyid"] = sc.get_me().id
     if (
-            read.check_duplicate_schoology(session["id"], session["Schoologyemail"])
-            == "false"
+        read.check_duplicate_schoology(session["id"], session["Schoologyemail"])
+        == "false"
     ):
         return "2"
 

@@ -83,7 +83,9 @@ def lms():
                 original_name = course.original_name
             except:
                 original_name = course.name
-            canvascourses.append([course.name, f"{API_URL}/course/{course.id}", original_name])
+            canvascourses.append(
+                [course.name, f"{API_URL}/course/{course.id}", original_name]
+            )
     except Exception as e:
         canvascourses = []
 
@@ -121,7 +123,12 @@ def lms():
             scCourses = list(sc.get_user_sections(user_id=sc.get_me().id))
             for i in range(0, len(scCourses)):
                 scCourses[i] = dict(scCourses[i])
-                scCourses[i]["link"] = schoology.schoologyDomain + "course/" + scCourses[i]["id"] + "/materials"
+                scCourses[i]["link"] = (
+                    schoology.schoologyDomain
+                    + "course/"
+                    + scCourses[i]["id"]
+                    + "/materials"
+                )
             scSchool = sc.get_school(scCourses[0]["school_id"])
             scCourses.append(scSchool)
     except Exception as e:

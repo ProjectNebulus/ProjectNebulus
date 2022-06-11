@@ -23,11 +23,11 @@ def index():
         response = urlopen(url)
         data = json.load(response)
         return str(data)
-        IP = data['ip']
-        org = data['org']
-        city = data['city']
-        country = data['country']
-        region = data['region']
+        IP = data["ip"]
+        org = data["org"]
+        city = data["city"]
+        country = data["country"]
+        region = data["region"]
 
     except:
         country = "US"
@@ -72,46 +72,45 @@ def page_not_found(e):
     if len(path.strip("/")) == 2:
         return redirect(f"/global/{path}")
     # note that we set the 404 status explicitly
-    return render_template("errors/404.html",
-                           page="Not Found",
-                           user=session.get("username"),
-                           email=session.get("email"),
-                           avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),), 404
+    return (
+        render_template(
+            "errors/404.html",
+            page="Not Found",
+            user=session.get("username"),
+            email=session.get("email"),
+            avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
+        ),
+        404,
+    )
 
 
 @main_blueprint.app_errorhandler(500)
 def internal_error(e):
     # note that we set the 500 status explicitly
-    return render_template("errors/500.html",
-                           page="Nebulus is Down",
-                           user=session.get("username"),
-                           email=session.get("email"),
-                           avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),), 500
+    return (
+        render_template(
+            "errors/500.html",
+            page="Nebulus is Down",
+            user=session.get("username"),
+            email=session.get("email"),
+            avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
+        ),
+        500,
+    )
 
 
 @main_blueprint.route("/sw.js")
 def sw():
     path = Path(__file__)
     print(path.parent.parent.parent)
-    return send_file(str(path.parent.parent.parent)+'/static/js/sw.js')
+    return send_file(str(path.parent.parent.parent) + "/static/js/sw.js")
 
 
 @main_blueprint.route("/global/<country>", methods=["GET"])
 def international(country):
 
     page = "Nebulus - Learning, All In One"
-    spanish_country = [
-        "ar",
-        "co",
-        "cr",
-        "cu",
-        "do",
-        "ec",
-        "es",
-        "mx",
-        "pa",
-        "sv"
-    ]
+    spanish_country = ["ar", "co", "cr", "cu", "do", "ec", "es", "mx", "pa", "sv"]
     if country in spanish_country:
         page = "Nebulus - Aprendizaje, todo en uno"
     if country == "th":
@@ -124,7 +123,7 @@ def international(country):
         page = "難不來 - 學習，多合一"
     if country == "jp":
         page = "Nebulus - 学習、オールインワン"
-    if country == 'us':
+    if country == "us":
         return redirect("/")
     try:
         return render_template(

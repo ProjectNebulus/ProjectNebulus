@@ -99,7 +99,7 @@ def create_google_course():
         post_data["teacher"] = "Unknown Teacher"
     link = post_data["link"]
     index = link.index("?id=") + 4
-    link = link[index: len(link)]
+    link = link[index : len(link)]
     # print(f"I'm at Google Classroom Creation. The ID is: {link}")
     course = getGclassroomcourse(link)
     createcourse = {
@@ -130,7 +130,7 @@ def create_canvas_course():
     link = post_data["link"]
     teacher = post_data["teacher"]
     index = link.index("/course/") + 9
-    course_id = link[index: len(link)]
+    course_id = link[index : len(link)]
     # print(f"I'm at Canvas Creation. The ID is: {link}")
     from canvasapi import Canvas
 
@@ -182,7 +182,7 @@ def create_canvas_course():
 
 @internal.route("/createSchoologyCourse", methods=["GET", "POST"])
 def create_schoology_course():
-    #post_data = request.form
+    # post_data = request.form
     post_data = request.json
     print("Request Recieved `/createSchoologyCourse`")
     if request.method == "GET":
@@ -190,7 +190,7 @@ def create_schoology_course():
     link = post_data["link"]
     if "schoology" in link:
         index = link.index("/course/") + 8
-        link = link[index: index+10]
+        link = link[index : index + 10]
 
     schoology = read.getSchoology(username=session["username"])
     if len(schoology) == 0:
@@ -214,7 +214,7 @@ def create_schoology_course():
         auth.authorize()
     sc = schoolopy.Schoology(auth)
     sc.limit = 1000
-    #sec = sc.get_section(section_id=link)
+    # sec = sc.get_section(section_id=link)
     # print("Courses:",
     #       *(f'{sec["course_title"]}: {sec["section_title"]}' for sec in sc.get_user_sections(sc.get_me()["id"])),
     #       sep="\n")
@@ -267,8 +267,8 @@ def create_schoology_course():
     scgrades = sc.get_user_grades_by_section(sc.get_me()["id"], link)
     scevents = sc.get_section_events(link)
     for event in scevents:
-        if event['type'] == 'assignment':
-            assignment = sc.get_assignment(section['id'], event['assignment_id'])
+        if event["type"] == "assignment":
+            assignment = sc.get_assignment(section["id"], event["assignment_id"])
             due = assignment["due"]
             if due != "":
                 due = datetime.fromisoformat(due)
@@ -279,7 +279,7 @@ def create_schoology_course():
                     # "id": str(assignment["id"]),
                     "title": assignment["title"],
                     "description": assignment["description"]
-                                   + f"\n\nView On Schoology: {assignment['web_url']}",
+                    + f"\n\nView On Schoology: {assignment['web_url']}",
                     # "submitDate": assignment["dropbox_last_submission"],
                     "due": due,
                     # "course": str(course_obj.id),
@@ -323,9 +323,7 @@ def create_schoology_course():
         document["course"] = str(course_obj.id)
         document["imported_from"] = "Schoology"
         document["imported_id"] = str(scdocument["id"])
-        create.createDocumentFile(
-            document
-        )
+        create.createDocumentFile(document)
         print(document)
 
         # document["attachment"] = scdocument["attachments"] (Won't work until we have CDN!)

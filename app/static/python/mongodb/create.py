@@ -206,5 +206,3 @@ def installIntegration(courseID: int, integrationID: int):
     course = Course.objects(pk=courseID)
     integration = Integration.objects(pk=integrationID)
     course.integrations.append(integration)
-
-

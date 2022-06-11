@@ -22,8 +22,9 @@ def createPlanner(_id: str, planner: dict):
         raise KeyError("User not found")
 
     planner = Planner(**planner)
-    user.planner.append(planner)
+    user.planner = planner
     user.save(clean=False)
+    return "true"
 
 
 def logout_from_schoology(_id: str, schoology_obj: Schoology):

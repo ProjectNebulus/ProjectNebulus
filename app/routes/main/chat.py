@@ -45,7 +45,7 @@ def chatPage(page):
                             "avatar": recipient["picture_url"],
                             "email": recipient["primary_email"],
                             "school": school,
-                            "color": color
+                            "color": color,
                         }
                     )
 
@@ -54,14 +54,16 @@ def chatPage(page):
                     "avatar": authorPfp,
                     "email": authorEmail,
                     "school": authorSchool,
-                    "color": authorColor
+                    "color": authorColor,
                 }
                 info["subject"] = message["subject"]
                 info["status"] = message["message_status"]
                 thread = sc.get_message(message_id=message["id"])
                 # print(thread)
                 info["message"] = thread[-1]["message"]
-                info["message"] = info["message"][:100] + "..." * (len(info["message"]) > 100)
+                info["message"] = info["message"][:100] + "..." * (
+                    len(info["message"]) > 100
+                )
                 newThread = []
                 for threadItem in thread:
                     thread_author_id = threadItem["author_id"]
@@ -71,7 +73,7 @@ def chatPage(page):
                             "message": threadItem["message"],
                             "author": thread_author["name_display"],
                             "author_pic": thread_author["picture_url"],
-                            "author_email": thread_author["primary_email"]
+                            "author_email": thread_author["primary_email"],
                         }
                     )
                 info["thread"] = newThread

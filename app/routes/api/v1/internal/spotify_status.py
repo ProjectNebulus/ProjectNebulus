@@ -60,9 +60,7 @@ def spotify_status():
                     'class="material-icons">pause_circle</i> '
                 )
             else:
-                playing = (
-                    '<i onclick="sendRQ(\'/api/v1/internal/spotify/resume\')" style="margin-left:20px;color:white;" class="material-icons">play</i>'
-                )
+                playing = '<i onclick="sendRQ(\'/api/v1/internal/spotify/resume\')" style="margin-left:20px;color:white;" class="material-icons">play</i>'
         else:
             if not request.form.get("paused"):
                 playing = (
@@ -75,23 +73,23 @@ def spotify_status():
                     'class="material-icons">pause</i> '
                 )
         string = (
-                name
-                + " • "
-                + artists
-                + " • "
-                + album
-                + " • "
-                + str(explicit)
-                + " • "
-                + image
-                + " • "
-                + str(playing)
-                + " • "
-                + str(timestamp)
-                + " • "
-                + str(total)
-                + " • "
-                + str(ratio)
+            name
+            + " • "
+            + artists
+            + " • "
+            + album
+            + " • "
+            + str(explicit)
+            + " • "
+            + image
+            + " • "
+            + str(playing)
+            + " • "
+            + str(timestamp)
+            + " • "
+            + str(total)
+            + " • "
+            + str(ratio)
         )
     else:
         string = "You aren't listening to anything!"

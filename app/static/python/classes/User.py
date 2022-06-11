@@ -12,6 +12,7 @@ from .Snowflake import Snowflake
 from .Spotify import Spotify
 from .Planner import Planner
 
+
 class User(Snowflake):
     """
     A class representing a user.
@@ -55,7 +56,8 @@ class User(Snowflake):
     discord = ListField(EmbeddedDocumentField(Discord, default=None, null=True))
     canvas = ListField(EmbeddedDocumentField(Canvas, default=None, null=True))
     avatar = EmbeddedDocumentField(
-        Avatar, default=Avatar(avatar_url="/static/images/nebulusCats/v3.gif", parent="User")
+        Avatar,
+        default=Avatar(avatar_url="/static/images/nebulusCats/v3.gif", parent="User"),
     )
     bio = StringField(default="", null=True)
     premium_expiration = DateTimeField(required=False, default=None, null=True)
@@ -67,7 +69,7 @@ class User(Snowflake):
     is_staff = BooleanField(default=False)
     student = BooleanField(default=True)
     teacher = BooleanField(default=False)
-    chats = ListField(ReferenceField('Chat'), default=[])
+    chats = ListField(ReferenceField("Chat"), default=[])
 
     def clean(self):
         self.password = hash256(self.password)

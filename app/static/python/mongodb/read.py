@@ -45,7 +45,7 @@ def get_user_courses(user_id: str) -> List[Course]:
 def search_user(query: str) -> List[User]:
     import re
 
-    regex = re.compile(f'(?i) {query}+')
+    regex = re.compile(f"(?i) {query}+")
     return User.objects(username=regex)
 
 
@@ -89,7 +89,7 @@ def getSchoology(**kwargs) -> List[Schoology] | None:
 
 
 def getClassroom(
-        userID: str = None, username: str = None, email: str = None
+    userID: str = None, username: str = None, email: str = None
 ) -> GoogleClassroom:
     return find_user(id=userID, username=username, email=email).gclassroom
 
@@ -99,7 +99,7 @@ def getSpotify(userID: str = None, username: str = None, email: str = None) -> S
 
 
 def getSpotifyCache(
-        userID: str = None, username: str = None, email: str = None
+    userID: str = None, username: str = None, email: str = None
 ) -> Spotify | None:
     try:
         return find_user(
@@ -199,8 +199,8 @@ def sort_course_events(user_id: str, course_id: int):
                 {
                     key: list(result)
                     for key, result in groupby(
-                    sorted_announcements, key=lambda obj: obj.date.date()
-                )
+                        sorted_announcements, key=lambda obj: obj.date.date()
+                    )
                 }.items()
             )
         )
@@ -236,8 +236,8 @@ def sort_user_events(user_id: str, maxDays=8, maxEvents=16):
                 {
                     key: list(result)
                     for key, result in groupby(
-                    sorted_announcements, key=lambda obj: obj.date.date()
-                )
+                        sorted_announcements, key=lambda obj: obj.date.date()
+                    )
                 }.items()
             )[-maxDays:]
         )
@@ -311,7 +311,7 @@ def check_duplicate_schoology(user_id, schoology_email) -> str:
 def getChat(chat_id: str):
     chat = Chat.objects(pk=chat_id)
     if not chat:
-        raise KeyError('Invalid Chat ID')
+        raise KeyError("Invalid Chat ID")
 
     return chat
 
