@@ -263,6 +263,7 @@ function createPlanner(){
         let name = "period"+count.toString();
         if (document.body.contains(document.getElementsByName(name)[0])){
             arr.push(document.getElementsByName(name)[0].value);
+            count+=1;
         }else{
             break;
         }

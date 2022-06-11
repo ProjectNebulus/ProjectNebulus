@@ -1,6 +1,7 @@
 from ..classes.Schoology import Schoology
 from ..classes.Planner import Planner
 
+
 def schoologyLogin(_id: str, schoology: dict):
     from .read import find_user
 
@@ -12,6 +13,7 @@ def schoologyLogin(_id: str, schoology: dict):
     user.schoology.append(schoology)
     user.save(clean=False)
 
+
 def createPlanner(_id: str, planner: dict):
     from .read import find_user
 
@@ -22,6 +24,7 @@ def createPlanner(_id: str, planner: dict):
     planner = Planner(**planner)
     user.planner.append(planner)
     user.save(clean=False)
+
 
 def logout_from_schoology(_id: str, schoology_obj: Schoology):
     from .read import find_user

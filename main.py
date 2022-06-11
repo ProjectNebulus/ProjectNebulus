@@ -29,10 +29,9 @@ if __name__ == "__main__":
         debug = False
         port = 80
         host = "0.0.0.0"
-    else:   # macos (darwin) or windows (windows)
+    else:  # macos (darwin) or windows (windows)
         port = 8080
         host = "localhost"
-
 
     print(f"Started Running: http://{host}:{port}")
     if not debug:
