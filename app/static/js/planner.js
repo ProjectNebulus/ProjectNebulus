@@ -361,7 +361,9 @@ function loadFromServer() {
         //         cell.appendChild(textarea);
         //     }
         // }
-        init_table_with_periods(periods);
+
+
+        //init_table_with_periods(periods);
         saveData = data["data"];
 
         for (const key of Object.keys(saveData)) {
