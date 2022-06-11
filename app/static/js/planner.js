@@ -12,7 +12,11 @@ window.addEventListener("load", () => {
 
 const times = document.getElementById("timePeriods");
 
-let d, month, year, page, startDate;
+let d, month, year, startDate;
+
+const oneWeek = 1000 * 60 * 60 * 24 * 7;
+
+let page = Math.floor(Date.now() / oneWeek);
 
 const nextPage = document.getElementById("nextpage");
 const today = document.getElementById("today");
@@ -22,13 +26,10 @@ const saveState = document.getElementById("savestate");
 const error = document.getElementById("error");
 const plannerName = document.getElementById("planner_name");
 
-const oneWeek = 1000 * 60 * 60 * 24 * 7;
-
 function updateDate() {
     d = new Date();
     month = d.getMonth();
     year = d.getFullYear();
-    page = Math.floor(Date.now() / oneWeek);
 
     startDate = d.getDate() - d.getDay();
 }
@@ -129,18 +130,20 @@ for (let i = 1; i <= 8; i++) {
     const row = table.insertRow();
     const smallCell = row.insertCell();
 
-    let textarea = document.createElement("textarea");
-    textarea.innerHTML = i + "";
-    textarea.style.fontsize = "1.5rem";
-    smallCell.appendChild(textarea);
+    let div = document.createElement("div");
+    div.setAttribute("contenteditable", "true")
+    div.innerHTML = i + "";
+    div.style.fontsize = "1.5rem";
+    smallCell.appendChild(div);
 
     for (let j = 0; j < 6; j++) {
         const cell = row.insertCell();
 
-        textarea = document.createElement("textarea");
-        textarea.className = "note";
+        div = document.createElement("div");
+        div.setAttribute("contenteditable", "true");
+        div.className = "note";
         //textarea.placeholder = "_".repeat(105);
-        cell.appendChild(textarea);
+        cell.appendChild(div);
     }
 }
 
@@ -186,9 +189,9 @@ function save(e) {
 
     const notes = document.getElementsByClassName("note");
     saveData[page] = {};
-    for (let i = 0; i < notes.length; i++) {
-        if (notes[i].value !== "")
-            saveData[page][i] = notes[i].value.replaceAll("=", ":::::");
+    for (let i in notes) {
+        if (notes[i].innerHTML !== "")
+            saveData[page][i] = notes[i].innerHTML.replaceAll("=", ":::::");
     }
 }
 
@@ -196,9 +199,9 @@ function load(page) {
     const notes = document.getElementsByClassName("note");
     for (let i in notes) {
         if (saveData[page] && saveData[page][i])
-            notes[i].value = saveData[page][i].replaceAll(":::::", "=");
+            notes[i].innerHTML = saveData[page][i].replaceAll(":::::", "=");
         else
-            notes[i].value = "";
+            notes[i].innerHTML = "";
     }
 }
 
@@ -214,7 +217,7 @@ function fadeOut(func) {
 
 function loadFromServer() {
     const request = $.ajax({
-        type: "POST",
+        type: "GET",
         url: "/api/v1/internal/planner/load"
     });
 
@@ -229,7 +232,7 @@ function loadFromServer() {
             return;
         }
 
-        document.getElementById("planner_name").value = data["name"];
+        plannerName.value = data["name"];
 
         saveData = data["saveData"];
 
@@ -291,9 +294,9 @@ function saveToServer() {
     updateDate();
 
     const saveDict = {};
-    saveDict["name"] = document.getElementById("planner_name").value;
+    saveDict["name"] = plannerName.value;
     saveDict["saveData"] = saveData;
-    saveDict["lastEdited"] = [year, month, d.getDate(), d.getHours(), d.getMinutes()];
+    saveDict["lastEdited"] = [year, month + 1, d.getDate(), d.getHours(), d.getMinutes()];
 
     recursiveRequest(saveDict, 1);
 }

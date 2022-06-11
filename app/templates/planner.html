@@ -31,7 +31,7 @@
             height: 50px;
         }
 
-        textarea {
+        div[contenteditable=true] {
             font-family: 'Lato', sans-serif;
             position: absolute;
             background: transparent;
@@ -43,6 +43,7 @@
             bottom: 0;
             font-size: 0.9rem;
             line-height: 1rem;
+            padding: 0.5rem;
             resize: none;
             -webkit-box-sizing: border-box; /* <=iOS4, <= Android  2.3 */
             -moz-box-sizing: border-box; /* FF1+ */
@@ -50,7 +51,12 @@
             outline: none;
         }
 
-        .dark textarea {
+        div[contenteditable=true]:focus {
+            border: 2px solid blue;
+            padding: calc(0.5rem - 2px);
+        }
+
+        .dark div[contenteditable=true] {
             color: white;
         }
 
