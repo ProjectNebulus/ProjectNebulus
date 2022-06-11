@@ -41,12 +41,12 @@ def get_user_courses(user_id: str) -> List[Course]:
     user = find_user(pk=user_id)
     return Course.objects(authorizedUsers__in=[user])
 
+
 def search_user(query: str) -> List[User]:
     import re
 
     regex = re.compile(f'(?i) {query}+')
     return User.objects(username=regex)
-
 
 
 def find_courses(_id: str):
@@ -302,8 +302,8 @@ def check_signup_email(email) -> str:
     return "true"
 
 
-def check_duplicate_schoology(user_id, schoologyemail) -> str:
-    if User.objects(schoology__schoologyEmail=schoologyemail):
+def check_duplicate_schoology(user_id, schoology_email) -> str:
+    if User.objects(schoology__schoologyEmail=schoology_email):
         return "false"
     return "true"
 
@@ -314,3 +314,7 @@ def getChat(chat_id: str):
         raise KeyError('Invalid Chat ID')
 
     return chat
+
+
+def getPlanner(user_id: str):
+    return dict(find_user(id=user_id).planner)

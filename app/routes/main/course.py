@@ -47,7 +47,7 @@ def course_page(page, **kwargs):
         user=session.get("username"),
         email=session.get("email"),
         avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
-    )
+    ), 404
 
 
 @main_blueprint.route("/createCourse", methods=["POST"])
@@ -67,18 +67,19 @@ def getResource(courseID, documentID):
     if not len(courses) or not len(
             [user for user in courses[0].authorizedUsers if user.id == session["id"]]
     ):
-        return render_template("errors/404.html")
+        return render_template("errors/404.html"), 404
 
     documents = list(filter(lambda d: d.id == documentID, courses[0].documents))
     if not len(documents):
-        return render_template("errors/404.html")
+        return render_template("errors/404.html"), 404
 
     req = requests.get(read.find_document(id=documentID).url)
     return req.content
+
+
 @main_blueprint.route("/course/<id>/extensions/<extension>")
 @logged_in
 def course_page_ex(id, extension):
-
     try:
         return render_template(f"courses/extensions/{extension}.html")
     except Exception as e:

@@ -2,7 +2,6 @@
 from flask_cors import CORS
 from flask_mail import Mail
 
-from app.static.python.mongodb import read
 from .api import *
 from .main import *
 from .static import *
@@ -45,6 +44,5 @@ def init_app():
                 return redirect("/logout")
 
     mail = Mail(app)
-    # print("Paths:", *sorted(app.url_map.iter_rules(), key=str), sep="\n")
 
     return app

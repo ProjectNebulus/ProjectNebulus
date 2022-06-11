@@ -6,7 +6,7 @@ function loadingIcon(length, width) {
         width = length;
 
     return `<!-- By Sam Herbert (@sherb), for everyone. More @ http://goo.gl/7AJzbL -->
-    <svg width="38" height="38" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff" style="width: ${length}; height: ${width}">
+    <svg width="38" height="38" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff" style="width: ${length}; height: ${width}; display: inline">
         <g fill="none" fill-rule="evenodd">
             <g transform="translate(1 1)" stroke-width="2">
                 <circle stroke-opacity=".5" cx="18" cy="18" r="18"/>
@@ -59,10 +59,10 @@ class KeyUpTimer {
                 return;
 
             if (Date.now() - this.lastKeyUpTime > this.duration) {
-                this.func(this.lastKeyEvent);
                 this.recheck = false;
+                this.func(this.lastKeyEvent);
             }
-        });
+        }, 100);
     }
 
     disable() {
@@ -266,6 +266,7 @@ function navFetchStatus() {
         if (parseInt(data)) {
             document.getElementById("songhere").innerHTML = "";
             shouldGetSpotify = false;
+            clearInterval(interval);
             return;
         }
 

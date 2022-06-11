@@ -31,13 +31,11 @@ def resolve_updated_object(obj, attr, value):
 
 
 def savePlanner(data: dict, user_id):
-    from read import find_user
+    from .read import find_user
 
     user = find_user(id=user_id)
     for k, v in data.items():
         user.planner[k] = v
     user.save()
+
     return "true"
-
-
-

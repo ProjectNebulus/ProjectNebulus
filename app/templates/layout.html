@@ -71,6 +71,12 @@
             cursor: url('/static/images/nebulusCats/newRed.png'), auto;
         }
 
+        .fade-out {
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s 0.5s, opacity 0.5s linear;
+        }
+
         .noselect, img, svg, thead, button, input {
             user-select: none;
             -moz-user-select: none;
