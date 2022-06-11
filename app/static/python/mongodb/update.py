@@ -1,5 +1,5 @@
-from ..classes.Schoology import Schoology
 from ..classes.Planner import Planner
+from ..classes.Schoology import Schoology
 
 
 def schoologyLogin(_id: str, schoology: dict):
@@ -46,8 +46,14 @@ def savePlanner(data: dict, user_id):
     from .read import find_user
 
     user = find_user(id=user_id)
-    for k, v in data.items():
-        user.planner[k] = v
-    user.save()
+
+    if not user.planner:
+        user.planner = Planner()
+
+    user.planner.name = data["name"]
+    user.planner.saveData = data["saveData"]
+    user.planner.lastEdited = data["lastEdited"]
+
+    user.save(validate=False)
 
     return "true"

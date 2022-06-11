@@ -189,7 +189,7 @@ function save(e) {
 
     const notes = document.getElementsByClassName("note");
     saveData[page] = {};
-    for (let i in notes) {
+    for (let i = 0; i < notes.length; i++) {
         if (notes[i].innerHTML !== "")
             saveData[page][i] = notes[i].innerHTML.replaceAll("=", ":::::");
     }
@@ -197,7 +197,7 @@ function save(e) {
 
 function load(page) {
     const notes = document.getElementsByClassName("note");
-    for (let i in notes) {
+    for (let i = 0; i < notes.length; i++) {
         if (saveData[page] && saveData[page][i])
             notes[i].innerHTML = saveData[page][i].replaceAll(":::::", "=");
         else
@@ -226,9 +226,10 @@ function loadFromServer() {
 
         if (Object.keys(data).length === 0) {
             setTimeout(() => {
-                loadingModal.hide();
-                setTimeout(() => document.getElementById("openModal").click(), 200);
-            }, Math.max(0, exitTime - Date.now()) + 1000);
+                    loadingModal.hide();
+                    document.getElementById("openModal").click();
+                },
+                Math.max(0, exitTime - Date.now()) + 1000);
             return;
         }
 
@@ -296,7 +297,7 @@ function saveToServer() {
     const saveDict = {};
     saveDict["name"] = plannerName.value;
     saveDict["saveData"] = saveData;
-    saveDict["lastEdited"] = [year, month + 1, d.getDate(), d.getHours(), d.getMinutes()];
+    saveDict["lastEdited"] = [year, month + 1, d.getDate()].join("-") + " " + [d.getHours(), d.getMinutes(), d.getSeconds()].join(":");
 
     recursiveRequest(saveDict, 1);
 }

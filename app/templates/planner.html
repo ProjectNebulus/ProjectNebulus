@@ -37,6 +37,7 @@
             background: transparent;
             color: black;
             width: 100%;
+            overflow: auto;
             top: 0;
             left: 0;
             right: 0;
@@ -49,6 +50,12 @@
             -moz-box-sizing: border-box; /* FF1+ */
             box-sizing: border-box; /* Chrome, IE8, Opera, Safari 5.1*/
             outline: none;
+        }
+
+        div[contenteditable=true]:not(.note) {
+            font-size: 1.2rem;
+            padding-top: 1rem;
+            padding-left: 40%;
         }
 
         div[contenteditable=true]:focus {
@@ -75,13 +82,13 @@
                 <span id="error" style="color:green;">Connected to Nebulus</span><br>
             </div>
 
-            <span class="text-4xl text-black dark:text-white" style='float:right'>
+            <div class="text-4xl text-black dark:text-white" style='float:right; margin-top: -2.5rem'>
                 <label for="planner_name" class="text-gray-500 dark:text-gray-400 text-xl">Planner Name</label>
                 <input type="text" id="planner_name" placeholder="My Agenda" required
                        class="bg-gray-50 border border-gray-300 text-gray-900 text-2xl rounded-lg focus:ring-blue-500
                         focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
                          dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            </span>
+            </div>
         </div>
         <br>
 

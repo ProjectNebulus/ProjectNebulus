@@ -17,5 +17,4 @@ def getPlanner():
 @private_endpoint
 def savePlanner():
     data = list(request.form.items())[0][0]
-    print(data)
     return update.savePlanner(loads(data), session["id"])
