@@ -5,7 +5,7 @@ module.exports = {
     content: ['./app/templates/**/*.html', './app/static/**/*.{js,css}', './app/static/flowbite/**/*.js'],
     theme: {
             fontFamily: {
-                sans: ['Spotify-Font', "Roboto", "sans-serif"],
+                sans: ['Spotify-Font', "Noto Sans", "Noto Sans SC", "Noto Sans TC", "Noto Sans JP",  "Noto Sans KR",  "Noto Sans Thai", "sans-serif"],
             },
         extend: {
                 backgroundImage: {
