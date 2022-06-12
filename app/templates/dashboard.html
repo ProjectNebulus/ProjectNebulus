@@ -108,7 +108,7 @@
             <h2 class="noselect text-black dark:text-white text-2xl">Recent Announcements</h2>
             <div class="hover:scroll h-full" aria-label="Recent Announcements">
                 <div class="grid gap-4 pl-4 mt-5 block p-6 bg-white rounded-lg border border-gray-200 shadow-md  dark:bg-gray-800 dark:border-gray-700 "
-                     style="grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));height:360px">
+                     style="grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));height:360px; overflow-y:scroll;">
                     {% for a in announcements %}
                         <div id="announcement-{{ a.id }}" role="alert"
                              class="announcement p-4 mb-4 bg-gray-100 rounded-lg dark:bg-gray-700 w-72 h-64 mt-5">
@@ -158,19 +158,22 @@
     <br>
     <div style="height: 45%; float:left; width:calc(100% - 3rem); margin-left: 2%; overflow: visible;" class="pb-2">
         <h2 class="noselect text-black dark:text-white text-2xl">Recent Courses</h2>
-        <div class="text-left grid justify-start"
-             style="grid-template-columns: repeat(auto-fit, 23rem); align-items: center; justify-content: center;"
-             aria-label="Recent Courses">
-            {% for course in user_courses %}
-                <a href="/course/{{ course.id }}" style="width:18rem; margin-top: 2.5rem; margin-bottom: 2.5rem"
-                   aria-label="Course: {{ course.name }}"
-                   class="max-w-sm bg-gray-50 hover:bg-gray-200 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:hover:bg-gray-600 dark:border-gray-700">
-                    <img class="rounded-t-lg w-full" src="{{ course.avatar.avatar_url }}" alt="Course Image">
-                    <div class="p-5">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white truncate">{{ course.name }}</h5>
-                    </div>
-                </a>
-            {% endfor %}
+        <div style="height:360px; overflow-y:scroll;" class="block p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+
+            <div class="text-left grid justify-start"
+                 style="grid-template-columns: repeat(auto-fit, 23rem); align-items: center; justify-content: center;"
+                 aria-label="Recent Courses">
+                {% for course in user_courses %}
+                    <a href="/course/{{ course.id }}" style="width:18rem; margin-top: 2.5rem; margin-bottom: 2.5rem"
+                       aria-label="Course: {{ course.name }}"
+                       class="max-w-sm bg-gray-50 hover:bg-gray-200 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:hover:bg-gray-600 dark:border-gray-700">
+                        <img class="rounded-t-lg w-full" src="{{ course.avatar.avatar_url }}" alt="Course Image">
+                        <div class="p-5">
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white truncate">{{ course.name }}</h5>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
         </div>
     </div>
 
