@@ -7,6 +7,10 @@ module.exports = {
             fontFamily: {
                 sans: ['Spotify-Font', "Noto Sans", "Noto Sans SC", "Noto Sans TC", "Noto Sans JP",  "Noto Sans KR",  "Noto Sans Thai", "sans-serif"],
             },
+            fontSize: {
+                'body-lg': '1rem',
+                'body': '.875rem',
+            },
         extend: {
                 backgroundImage: {
                     'signin-bg': "url('/static/images/background-images/signin-background.png')",
