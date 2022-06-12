@@ -54,6 +54,10 @@ function reloadTable() {
             const div = document.createElement("div");
             div.setAttribute("contenteditable", "true");
             div.className = "note";
+            div.innerHTML = `
+            <ul>
+              <li> hi </li>
+              </ul>      `
             cell.appendChild(div);
         }
     }
