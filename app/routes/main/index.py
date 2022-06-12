@@ -65,7 +65,12 @@ def tos():
 
 @main_blueprint.route("/select-a-region")
 def selectregion():
-    return render_template("main/global/select-a-region.html")
+    return render_template("main/global/select-a-region.html",
+                           user=session.get("username"),
+                           email=session.get("email"),
+                           avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
+                           page ="Select a Region"
+                           )
 @main_blueprint.app_errorhandler(404)
 @main_blueprint.app_errorhandler(400)
 def page_not_found(e):
