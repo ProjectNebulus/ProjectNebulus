@@ -1,5 +1,7 @@
+{% extends "layout.html" %}
 {% block main %}
-{% include "layout.html" %}
+
+    {% include "navbar.html" %}
     <style>
         /* Chrome, Safari, Edge, Opera */
         input::-webkit-outer-spin-button,
@@ -11,152 +13,90 @@
         /* Firefox */
         input[type=number] {
             -moz-appearance: textfield;
+            text-align: right;
         }
 
-    .within{
-        background:transparent;
-        width:5ch;
-        outline:none;
-        border:none;
-    }
+        #time input {
+            background: transparent;
+            width: 4ch;
+            outline: none;
+            border: none;
+        }
+
+        #time span {
+            margin-left: -0.5rem;
+            margin-top: -0.5rem;
+        }
 
         -webkit-datetime-edit-ampm-field {
             display: none;
         }
+
         input[type=time]::-webkit-clear-button {
             -webkit-appearance: none;
             -moz-appearance: none;
             -o-appearance: none;
-            -ms-appearance:none;
+            -ms-appearance: none;
             appearance: none;
             margin: -10px;
         }
-        .within:focus{
-            outline:none;
-            border:none;
-        }
 
     </style>
-    <div style="margin:auto;text-align: center;margin-top:calc(10%); height:400px; width:800px;" class="block p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+    <div style="margin-top: 10%; height: 25rem; width: 30rem;" class="block p-6 bg-white rounded-lg border border-gray-200 shadow-md
+     dark:bg-gray-800 dark:border-gray-700 text-center mx-auto my-auto">
         <div id="form">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">New Study Session</h5>
             <p class="font-normal text-gray-700 dark:text-gray-400">Create your first Study Session!</p>
             <div>
-                <div class="mb-6">
-                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Study Session Name</label>
-                    <input type="text" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required>
+                <div class="mt-4 mb-6">
+                    <label for="name" class="mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Study Session Name</label>
+                    <input type="text" id="name" name="study-session-name" required
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500
+                            focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 text-center
+                             dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
                 <div class="mb-6">
-                    <label for="time" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Study Time</label>
-                    <div id="time" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <input type="number" class="text-2xl within" max="99" min="00" placeholder="00"></input> hours
-                        <input type="number" class="text-2xl within" max="99" min="00" placeholder="00"></input> minutes
-                        {#                    <input type="number" class="text-2xl within" max="99" min="00" placeholder="00"></input> #}
-                        <input type="number" class="text-2xl within" placeholder="00"></input> seconds
+                    <label for="time" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Study
+                        Time</label>
+                    <div id="time" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                     focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
+                      dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <input type="number" class="-ml-1 text-2xl" max="99" min="0" placeholder="00"/>
+                        <span>hours</span>
+                        <input type="number" class="ml-4 text-2xl" max="99" min="0" placeholder="00"/>
+                        <span>minutes</span>
+                        <input type="number" class="ml-4 text-2xl" placeholder="00"/>
+                        <span>seconds</span>
                     </div>
                 </div>
                 <center>
-                <button onclick="startform();" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Start Study Session</button>
+                    <button onclick="startForm();" type="submit"
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Start Study Session
+                    </button>
                 </center>
             </div>
         </div>
-    <div id="timer" style="display:none;">
-        <h5 class="mb-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-white" id="timer1">0:00</h5>
-        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-800 dark:text-gray-200" id="progress"><span id="timer2">0:00</span> left in your "<span id="timername">Homework</span>" timer. </h5>
-        <span class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-gray-200" id="message">Keep Up the Hard Work!</span>
+        <div id="timer" style="display:none;">
+            <h5 class="mb-2 text-4xl font-bold tracking-tight text-gray-900 dark:text-white" id="timer1">0:00</h5>
+            <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-800 dark:text-gray-200" id="progress">
+                Left in your "<span id="timername">Homework</span>" timer.</h5>
+            <span class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-gray-200" id="message">Keep It Up!</span>
 
-        <button onclick="configure()"  id="restart" style="display:none;" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Start Another Session</button>
-    </div>
+            <button onclick="configure()" id="restart" style="display:none;" type="submit"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Start Another Session
+            </button>
+        </div>
     </div>
     <script>
-    function startform(){
-        let n1 = document.getElementsByClassName("within")[0].value;
-        if (n1 === null){
-            n1 = "00";
-        }
-        let n2 = document.getElementsByClassName("within")[1].value;
-        if (n2 === null){
-            n2 = "00";
-        }
-        let n3 = document.getElementsByClassName("within")[2].value;
-        if (n3 === null){
-            n3 = "01";
-        }
-        timer(parseInt(n1), parseInt(n2), parseInt(n3));
-    }
-    function sleep(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-        }
-    function configure(){
-        document.getElementById("timer").style.display = "none";
-        document.getElementById("timer").innerHTML = `
-        <h5 class="mb-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-white" id="timer1">0:00</h5>
-        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-800 dark:text-gray-200" id="progress"><span id="timer2">0:00</span> left in your "<span id="timername">Homework</span>" timer. </h5>
-        <span class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-gray-200" id="message">Keep Up the Hard Work!</span>
+        const inputs = document.querySelectorAll("#time input")
 
-`
-        document.getElementById("form").style.display = "block";
-        document.getElementsByClassName("within")[0].value = "";
-        document.getElementsByClassName("within")[1].value = "";
-        document.getElementsByClassName("within")[2].value = "";
-        document.getElementById("name").value = "";
-
-    }
-    async function timer(hh, mm, ss){
-        document.getElementById("form").style.display = "none";
-        document.getElementById("timer").style.display = "block";
-        let sec = hh*60*60 + mm*60 + ss;
-        let dname = document.getElementById("name").value;
-        if (dname === ""){
-            dname = "Untitled Timer";
+        function startForm() {
+            let hours = parseInt(inputs[0].value);
+            let minutes = parseInt(inputs[1].value);
+            let seconds = parseInt(inputs[2].value);
         }
-        let messages = [
-            "Keep up the good work!",
-            "You could do it!",
-            "You're almost there!",
-            "Let's go, you go it!",
-            "Sooo close!!!",
-            "Keep studying!"
-        ]
-       document.getElementById("restart").style.display = "none";
-        for (let i = 0; i<sec;i++){
-            let text = `${sec-i} seconds`;
-            document.getElementById("timer1").innerHTML = text;
-            document.getElementById("timer2").innerHTML = text;
-            document.getElementById("timername").innerHTML = dname;
-            if (i % 20 === 0){
-                document.getElementById("message").innerText = messages[Math.floor(Math.random()*messages.length)];
-            }
-            await sleep(1000);
-
-        }
-        document.getElementById("progress").style.display = "none";
-        document.getElementById("message").style.display = "none";
-        document.getElementById("timer1").classList.remove("text-gray-900", "dark:text-white")
-        document.getElementById("timer1").style.color = "#61DA02";
-        document.getElementById("timer1").innerText = "Timer Complete!";
-        document.getElementById("restart").style.display = "block";
-    }
-    function getsixnumbers(){
-        let n1 = document.getElementsByClassName("within")[0].value;
-        let n2 = document.getElementsByClassName("within")[1].value;
-        let n3 = document.getElementsByClassName("within")[2].value;
-        let f = n1+n2+n3;
-        if (f.length  < 6)
-            return;
-        f = f.substring(f.length-7, f.length);
-        document.getElementsByClassName("within")[0].value = f.substring(0, 2);
-        document.getElementsByClassName("within")[1].value = f.substring(2, 4);
-        document.getElementsByClassName("within")[2].value = f.substring(4, 6);
-
-    }
-        $('.within').on('input', function(){
-            if($(this).val().length >= 2){
-
-                $(this).next('input').focus();
-                getsixnumbers();
-            }
-        });
-
     </script>
 {% endblock %}

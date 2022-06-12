@@ -7,7 +7,7 @@ function loadingIcon(length, width) {
     if (width === undefined)
         width = length;
 
-    return `<!-- By Sam Herbert (@sherb), for everyone. More @ http://goo.gl/7AJzbL -->
+    return `<!-- By Sam Herbert (@sherb), for everyone. More @ https://goo.gl/7AJzbL -->
     <svg width="38" height="38" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff" style="width: ${length}; height: ${width}; display: inline">
         <g fill="none" fill-rule="evenodd">
             <g transform="translate(1 1)" stroke-width="2">

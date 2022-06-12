@@ -57,3 +57,17 @@ def savePlanner(data: dict, user_id):
     user.save(validate=False)
 
     return "true"
+
+
+def saveConfig(configs: list, user_id):
+    from .read import find_user
+
+    user = find_user(id=user_id)
+
+    if not user.planner:
+        user.planner = Planner()
+
+    user.planner.periods = configs
+    user.save(validate=False)
+
+    return "true"

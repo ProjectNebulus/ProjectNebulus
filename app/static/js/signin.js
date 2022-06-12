@@ -293,7 +293,7 @@ function reqListener2() {
 let forwards = true;
 
 window.addEventListener("load", () => {
-    const bgImage = document.getElementById("scrolldis");
+    const bgImage = document.getElementById("bgLms");
 
     setInterval(() => {
         if (bgImage.offsetHeight + bgImage.scrollTop >= bgImage.scrollHeight && forwards)
@@ -302,6 +302,6 @@ window.addEventListener("load", () => {
         if (bgImage.scrollTop <= 0 && !forwards)
             forwards = true;
 
-        bgImage.scrollBy(0, forwards ? 5 : -5);
-    }, 100)
+        bgImage.scrollBy(0, forwards ? 10 : -10);
+    }, 200)
 });

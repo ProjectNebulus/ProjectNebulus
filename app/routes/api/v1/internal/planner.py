@@ -2,9 +2,9 @@ from json import loads
 
 from flask import request, session
 
+from . import internal
 from .....routes.main import private_endpoint
 from .....static.python.mongodb import update, read
-from . import internal
 
 
 @internal.route("/planner/load")
@@ -16,5 +16,12 @@ def getPlanner():
 @internal.route("/planner/save", methods=["POST"])
 @private_endpoint
 def savePlanner():
-    data = list(request.form.items())[0][0]
+    data = next(request.form.items())[0]
     return update.savePlanner(loads(data), session["id"])
+
+
+@internal.route("/planner/saveConfig", methods=["POST"])
+@private_endpoint
+def saveConfig():
+    data = next(request.form.items())[0]
+    return update.saveConfig(loads(data), session["id"])
