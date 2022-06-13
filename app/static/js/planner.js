@@ -508,13 +508,29 @@ function checktime(){
     var currentDateTime = new Date();
     var seconds = Math.floor(currentDateTime.getTime() / 1000 - syncedTime);
     let minutes = false;
+    let hours = false;
+    let days = true;
     if (seconds > 60){
         minutes = true;
         seconds = Math.floor(seconds/60);
     }
+    if (seconds > 60){
+        hours = true;
+        seconds = Math.floor(seconds/60)
+    }
+    if (seconds > 24){
+        days = true;
+        seconds = Math.floor(seconds/24);
+    }
     if (saveState.innerHTML.includes("Last Edit")){
         let newmsg = "";
-        if (minutes){
+        if (days){
+            newmsg = `Last Edit was ${seconds} days ago`;
+        }
+        else if (hours){
+            newmsg = `Last Edit was ${seconds} hours ago`;
+        }
+        else if (minutes){
             newmsg = `Last Edit was ${seconds} minutes ago`;
         }else{
             newmsg = `Last Edit was ${seconds} seconds ago`;
