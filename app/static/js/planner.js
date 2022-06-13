@@ -348,6 +348,11 @@ let resetRequestNum = true;
 let requestInterval;
 
 function recursiveSave(saveDict, count) {
+    saveDict["name"] = plannerName.value;
+    saveDict["saveData"] = saveData;
+    saveDict["lastEdited"] = [year, month + 1, d.getDate()].join("-") + " " + [d.getHours(), d.getMinutes(), d.getSeconds()].join(":");
+
+    saveDict["periods"] = [];
     saveState.innerHTML = "Syncing... | Please wait...";
 
     const request = $.ajax({
@@ -397,4 +402,67 @@ function saveToServer() {
     saveDict["periods"] = [];
 
     recursiveSave(saveDict, 1);
+}
+
+function change(id) {
+    if (id === "b") {
+        document.execCommand('bold');
+    }
+    if (id === "i") {
+        document.execCommand('italic');
+    }
+    if (id === "u") {
+        document.execCommand('underline');
+    }
+    if (id === "c") {
+        document.execCommand('foreColor', false, document.getElementById("changediscolor").style.color);
+    }
+    if (id === "h") {
+        document.execCommand('hiliteColor', false, document.getElementById("changediscolor2").style.color);
+    }
+    if (id === "al") {
+        document.execCommand('justifyLeft');
+    }
+    if (id === "ar") {
+        document.execCommand('justifyRight');
+    }
+    if (id === "ac") {
+        document.execCommand('justifyCenter');
+    }
+    if (id === "af") {
+        document.execCommand('justifyFull');
+    }
+    if (id === "lb") {
+        document.execCommand('insertUnorderedList');
+    }
+    if (id === "ln") {
+        document.execCommand('insertOrderedList');
+    }
+    if (id === "redo") {
+        document.execCommand('redo');
+    }
+    if (id === "undo") {
+        document.execCommand('undo');
+    }
+    document.getElementById("editor").focus();
+    document.getElementById("editor").focus();
+}
+
+function color() {
+    let dacolor = document.getElementById("colorpicker").value;
+    //document.getElementsByClassName("buttonSelect")[10].style.background = dacolor;
+    document.getElementById("changediscolor").style.color = dacolor;
+    document.execCommand('foreColor', false, dacolor);
+}
+
+function hilite() {
+    let dacolor = document.getElementById("colorpicker2").value;
+    //document.getElementsByClassName("buttonSelect")[10].style.background = dacolor;
+    document.getElementById("changediscolor2").style.color = dacolor;
+    document.execCommand('hiliteColor', false, dacolor);
+}
+
+document.getElementById("colorpicker").onchange = function () {
+    color();
+
 }

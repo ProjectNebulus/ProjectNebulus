@@ -3,6 +3,14 @@
     {% include "navbar.html" %}
 
     <style>
+    tbody{
+        display: block;
+    }
+    thead, tr{
+        display:table;
+        width: 100%;
+        table-layout: fixed;/* even columns width , fix width of table too*/
+    }
         .note li{
             border-bottom: 1px solid gray;
             width: 100%;
@@ -34,9 +42,12 @@
         table {
             table-layout: fixed;
             font-family: 'Lato', sans-serif;
-            border-collapse: separate;
+            /*border-collapse: separate;*/
+            border-collapse: collapse;
             width: 100%;
             border-radius:6px;
+            overflow: auto;
+            height:80%;
         }
         td{
             border: 1px solid;
@@ -126,6 +137,45 @@
         <br>
 
         <span id="dates"></span>
+        <div class="block p-6 w-full center text-center bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <button type="button"
+                    class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                <span id="b" onclick="change('b')" class='buttonSelect'><i class="material-icons">format_bold</i></span>
+            </button>
+            <button type="button"
+                    class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                <span id="i" onclick="change('i')" class='buttonSelect'><i class="material-icons">format_italic</i></span>
+            </button>
+            <button type="button"
+                    class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                <span id="u" onclick="change('u')" class='buttonSelect'><i class="material-icons">format_underlined</i></span>
+            </button>
+            <button data-dropdown-toggle="dropdownColor" type="button"
+                    class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                <span style='color:black;' class='buttonSelect' id="c" onclick="change('c')"><i
+                                        class="material-icons" id="changediscolor">format_color_text</i></span>
+            </button>
+            <!-- Dropdown menu -->
+            <div id="dropdownColor"
+                 class="z-10 hidden bg-gray-300 divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
+                <input id="colorpicker" onchange="color()" type="color" value="#000000"
+                       style="background:transparent;margin:auto;padding:10px;">
+
+            </div>
+
+            <button data-dropdown-toggle="dropdownColor2" type="button"
+                    class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                <span style='color:white;' class='buttonSelect' id="h" onclick="change('h')"><i
+                                        class="material-icons" id="changediscolor2">edit</i></span>
+            </button>
+            <!-- Dropdown menu -->
+            <div id="dropdownColor2"
+                 class="z-10 hidden bg-gray-300 divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
+                <input id="colorpicker2" onchange="hilite()" type="color" value="#ffffff"
+                       style="background:transparent;margin:auto;padding:10px;">
+
+            </div>
+        </div>
         <table></table>
 
         <div class="mt-6 flex flex-row justify-between">
