@@ -509,16 +509,16 @@ function checktime(){
     var seconds = Math.floor(currentDateTime.getTime() / 1000 - syncedTime);
     let minutes = false;
     let hours = false;
-    let days = true;
+    let days = false;
     if (seconds > 60){
         minutes = true;
         seconds = Math.floor(seconds/60);
     }
-    if (seconds > 60){
+    if (minutes === true && seconds > 60){
         hours = true;
         seconds = Math.floor(seconds/60)
     }
-    if (seconds > 24){
+    if (hours === true && seconds > 24){
         days = true;
         seconds = Math.floor(seconds/24);
     }
