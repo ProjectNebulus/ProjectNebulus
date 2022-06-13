@@ -56,7 +56,9 @@ function reloadTable() {
             div.className = "note";
             div.innerHTML = `
             <ul>
-              <li> hi </li>
+              <li><br></li>
+              <li><br></li>
+              <li><br></li>
               </ul>      `
             cell.appendChild(div);
         }
