@@ -297,6 +297,7 @@ function save(e) {
     for (let i = 0; i < notes.length; i++) {
         if (notes[i].innerHTML !== "")
             saveData[page][i] = notes[i].innerHTML.replaceAll("=", ":::::");
+        saveData[page][i] = saveData[page][i].replaceAll(":","&#58;").replaceAll("'","&#39;").replaceAll('"',"&#34;")
     }
 }
 

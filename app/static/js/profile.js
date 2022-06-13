@@ -133,3 +133,5 @@ function sendRQ(link) {
         return data;
     });
 }
+
+setInterval(fetchStatus, 500);
