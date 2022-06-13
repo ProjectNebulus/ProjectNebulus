@@ -40,13 +40,9 @@
         }
 
         table {
-            table-layout: fixed;
             font-family: 'Lato', sans-serif;
-            /*border-collapse: separate;*/
             border-collapse: collapse;
             width: 100%;
-            border-radius:6px;
-            overflow: auto;
             height:80%;
         }
         td{
@@ -56,18 +52,21 @@
             position: relative;
             height: 50px;
         }
-        td, th {
-            border-left:solid 1px;
-            border-top:solid 1px;
+        .dark tr, tr td{
+            background-color:#1F2937 !Important;
         }
+     tr:first-child, tr:first-child td{
+         border-style:none;
+         color:gray;
+         text-transform: capitalize;
 
-        th {
-            border-top: none;
-        }
+     }
+     .dark tr:first-child{
+         background-color:#1F2937 !Important;
+         color:gray !Important;
+         text-transform: capitalize !Important;
+     }
 
-        td:first-child, th:first-child {
-            border-left: none;
-        }
 
 
         div[contenteditable=true] {
@@ -116,7 +115,7 @@
             <span id="month" class="text-4xl text-black dark:text-white">Error Finding Month</span>
 
             <div class="text-center">
-                <span id="savestate" style="color:#b8b8b8;text-decoration:underline">Synced to Cloud | Last Edit was seconds ago</span><br>
+                <span id="savestate" style="color:#b8b8b8;text-decoration:underline">No New Edits</span><br>
                 <span id="error" style="color:green;">Connected to Nebulus</span><br>
             </div>
 

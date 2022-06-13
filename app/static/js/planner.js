@@ -1,6 +1,6 @@
 let exitTime;
 let loadingModal;
-
+let syncedTime;
 window.addEventListener("load", () => {
     for (let i = 0; i < 6; i++)
         addTimePeriod();
@@ -29,6 +29,16 @@ const saveState = document.getElementById("savestate");
 const error = document.getElementById("error");
 const plannerName = document.getElementById("planner_name");
 
+function errorExpire(){
+    setTimeout(() => {
+        //error.style.display = 'none';
+        error.style.visibility = "hidden";
+    }, 1500);
+}
+function errorShow(){
+    //error.style.display = 'block';
+    error.style.visibility = "visible";
+}
 function updateDate() {
     d = new Date();
     month = d.getMonth();
@@ -58,7 +68,6 @@ function reloadTable() {
             <ul>
               <li><br></li>
               <li><br></li>
-              <li><br></li>
               </ul>      `
             cell.appendChild(div);
         }
@@ -66,7 +75,8 @@ function reloadTable() {
 }
 
 updateDate();
-
+errorShow();
+errorExpire();
 const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const daysInMonths = [31, d.getFullYear() % 4 === 0 ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
@@ -226,10 +236,19 @@ function saveConfig() {
     });
 
     request.done(() => {
-        saveState.innerHTML = "Configuration Saved";
+        errorShow();
+        error.innerHTML = "Configuration Saved";
+        error.style.color = "green";
+        errorExpire();
         configSaved = true;
     });
-    request.fail(() => saveState.innerHTML = "Configuration Saving Failed | Retrying soon...")
+    request.fail(() => {
+        errorShow();
+        saveState.innerHTML = "Retrying Configuration Save";
+        error.innerHTML = "Configuration Saving Failed";
+        error.style.color = "red";
+        errorExpire();
+    })
 }
 
 let showIcons = false;
@@ -287,7 +306,11 @@ function load(page) {
         if (saveData[page] && saveData[page][i])
             notes[i].innerHTML = saveData[page][i].replaceAll(":::::", "=");
         else
-            notes[i].innerHTML = "";
+            notes[i].innerHTML = `
+            <ul>
+              <li><br></li>
+              <li><br></li>
+              </ul>      `;
     }
 }
 
@@ -339,8 +362,10 @@ function loadFromServer() {
     });
 
     request.fail(function (jqXHR, textStatus) {
+        errorShow();
         error.innerText = "Error Loading Planner Data!";
         error.style.color = "red";
+        errorExpire();
     });
 }
 
@@ -353,7 +378,11 @@ function recursiveSave(saveDict, count) {
     saveDict["lastEdited"] = [year, month + 1, d.getDate()].join("-") + " " + [d.getHours(), d.getMinutes(), d.getSeconds()].join(":");
 
     saveDict["periods"] = [];
-    saveState.innerHTML = "Syncing... | Please wait...";
+    errorShow();
+    saveState.innerHTML = "Edits are being Synced";
+    error.innerHTML = "Syncing to Cloud..."
+    error.style.color = "lightgray";
+    errorExpire();
 
     const request = $.ajax({
         type: "POST",
@@ -362,24 +391,32 @@ function recursiveSave(saveDict, count) {
     });
 
     request.done(() => {
-        saveState.innerHTML = "Synced to Cloud | Last Edit was seconds ago";
-        error.innerHTML = "Connected to Nebulus";
+        errorShow();
+        var currentDateTime = new Date();
+        syncedTime= Math.floor(currentDateTime.getTime() / 1000);
+        saveState.innerHTML = "Last Edit was seconds ago";
+        error.innerHTML = "Synced to Cloud";
         error.style.color = "green";
+        errorExpire();
         resetRequestNum = true;
         if (requestInterval) clearInterval(requestInterval);
     });
 
     request.fail(() => {
         if (count < (resetRequestNum ? 3 : 1)) {
+            errorShow();
             saveState.innerHTML = "Sync Unsuccessful | Retrying Sync...";
             error.innerHTML = "Connecting...";
             error.style.color = "lightgray";
+            errorExpire();
             recursiveSave(saveDict, count + 1);
         }
         else {
+            errorShow();
             saveState.innerHTML = "Sync Unsuccessful | Retrying soon...";
             error.innerHTML = "Could not connect to Nebulus";
             error.style.color = "red";
+            errorExpire();
             resetRequestNum = false;
 
             if (!requestInterval) requestInterval = setInterval(() => recursiveSave(saveDict, 1), 1000 * 60)
@@ -466,3 +503,24 @@ document.getElementById("colorpicker").onchange = function () {
     color();
 
 }
+
+function checktime(){
+    var currentDateTime = new Date();
+    var seconds = Math.floor(currentDateTime.getTime() / 1000 - syncedTime);
+    let minutes = false;
+    if (seconds > 60){
+        minutes = true;
+        seconds = Math.floor(seconds/60);
+    }
+    if (saveState.innerHTML.includes("Last Edit")){
+        let newmsg = "";
+        if (minutes){
+            newmsg = `Last Edit was ${seconds} minutes ago`;
+        }else{
+            newmsg = `Last Edit was ${seconds} seconds ago`;
+        }
+        saveState.innerHTML = newmsg;
+    }
+}
+
+setInterval(checktime, 2000);
