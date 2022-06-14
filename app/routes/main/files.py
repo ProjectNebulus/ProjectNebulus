@@ -10,6 +10,6 @@ def files():
         "files.html",
         page="Nebulus - Files",
         user=session.get("username"),
-        avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         read=read,
     )

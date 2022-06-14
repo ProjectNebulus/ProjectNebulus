@@ -145,9 +145,7 @@ let username, password;
 window.addEventListener('load', function () {
     username = document.getElementById('usrname');
     password = document.getElementById('psw');
-
-    let lastKeyUpTime = Date.now();
-    let recheck = true;
+    
     let loginButton = document.getElementById('log_in');
     loginButton.style.color = 'gray';
     loginButton.style.backgroundColor = '#006097';

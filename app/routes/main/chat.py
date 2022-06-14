@@ -2,10 +2,10 @@ from datetime import datetime
 
 from flask import render_template, session
 
-from ...static.python.mongodb import read
 from . import main_blueprint
 from .utils import logged_in
 from ...static.python.colors import getColor
+from ...static.python.mongodb import read
 
 
 @main_blueprint.route("/chat")
@@ -62,7 +62,7 @@ def chatPage(page):
                 # print(thread)
                 info["message"] = thread[-1]["message"]
                 info["message"] = info["message"][:100] + "..." * (
-                    len(info["message"]) > 100
+                        len(info["message"]) > 100
                 )
                 newThread = []
                 for threadItem in thread:
@@ -91,7 +91,7 @@ def chatPage(page):
         f"/chat/{page}.html",
         page="Nebulus - Chat",
         user=session.get("username"),
-        avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         email=session.get("email"),
         messages=newMessages,
         disableWidget=page != "chat",

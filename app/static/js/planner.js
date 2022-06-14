@@ -1,6 +1,6 @@
 let exitTime;
 let loadingModal;
-let syncedTime;
+
 window.addEventListener("load", () => {
     for (let i = 0; i < 6; i++)
         addTimePeriod();
@@ -29,16 +29,6 @@ const saveState = document.getElementById("savestate");
 const error = document.getElementById("error");
 const plannerName = document.getElementById("planner_name");
 
-function errorExpire(){
-    setTimeout(() => {
-        //error.style.display = 'none';
-        error.style.visibility = "hidden";
-    }, 1500);
-}
-function errorShow(){
-    //error.style.display = 'block';
-    error.style.visibility = "visible";
-}
 function updateDate() {
     d = new Date();
     month = d.getMonth();
@@ -64,19 +54,19 @@ function reloadTable() {
             const div = document.createElement("div");
             div.setAttribute("contenteditable", "true");
             div.className = "note";
-            div.innerHTML = `
-            <ul>
-              <li><br></li>
-              <li><br></li>
-              </ul>      `
+
+            if (saveData[page] && saveData[page][i])
+                div.innerHTML = saveData[page][i].replaceAll(":::::", "=");
+            else
+                div.innerHTML = "";
+
             cell.appendChild(div);
         }
     }
 }
 
 updateDate();
-errorShow();
-errorExpire();
+
 const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const daysInMonths = [31, d.getFullYear() % 4 === 0 ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
@@ -236,19 +226,10 @@ function saveConfig() {
     });
 
     request.done(() => {
-        errorShow();
-        error.innerHTML = "Configuration Saved";
-        error.style.color = "green";
-        errorExpire();
+        saveState.innerHTML = "Configuration Saved";
         configSaved = true;
     });
-    request.fail(() => {
-        errorShow();
-        saveState.innerHTML = "Retrying Configuration Save";
-        error.innerHTML = "Configuration Saving Failed";
-        error.style.color = "red";
-        errorExpire();
-    })
+    request.fail(() => saveState.innerHTML = "Configuration Saving Failed | Retrying soon...")
 }
 
 let showIcons = false;
@@ -297,7 +278,6 @@ function save(e) {
     for (let i = 0; i < notes.length; i++) {
         if (notes[i].innerHTML !== "")
             saveData[page][i] = notes[i].innerHTML.replaceAll("=", ":::::");
-        saveData[page][i] = saveData[page][i].replaceAll(":","&#58;").replaceAll("'","&#39;").replaceAll('"',"&#34;")
     }
 }
 
@@ -307,11 +287,7 @@ function load(page) {
         if (saveData[page] && saveData[page][i])
             notes[i].innerHTML = saveData[page][i].replaceAll(":::::", "=");
         else
-            notes[i].innerHTML = `
-            <ul>
-              <li><br></li>
-              <li><br></li>
-              </ul>      `;
+            notes[i].innerHTML = "";
     }
 }
 
@@ -363,10 +339,8 @@ function loadFromServer() {
     });
 
     request.fail(function (jqXHR, textStatus) {
-        errorShow();
         error.innerText = "Error Loading Planner Data!";
         error.style.color = "red";
-        errorExpire();
     });
 }
 
@@ -374,16 +348,7 @@ let resetRequestNum = true;
 let requestInterval;
 
 function recursiveSave(saveDict, count) {
-    saveDict["name"] = plannerName.value;
-    saveDict["saveData"] = saveData;
-    saveDict["lastEdited"] = [year, month + 1, d.getDate()].join("-") + " " + [d.getHours(), d.getMinutes(), d.getSeconds()].join(":");
-
-    saveDict["periods"] = [];
-    errorShow();
-    saveState.innerHTML = "Edits are being Synced";
-    error.innerHTML = "Syncing to Cloud..."
-    error.style.color = "lightgray";
-    errorExpire();
+    saveState.innerHTML = "Syncing... | Please wait...";
 
     const request = $.ajax({
         type: "POST",
@@ -392,32 +357,24 @@ function recursiveSave(saveDict, count) {
     });
 
     request.done(() => {
-        errorShow();
-        var currentDateTime = new Date();
-        syncedTime= Math.floor(currentDateTime.getTime() / 1000);
-        saveState.innerHTML = "Last Edit was seconds ago";
-        error.innerHTML = "Synced to Cloud";
+        saveState.innerHTML = "Synced to Cloud | Last Edit was seconds ago";
+        error.innerHTML = "Connected to Nebulus";
         error.style.color = "green";
-        errorExpire();
         resetRequestNum = true;
         if (requestInterval) clearInterval(requestInterval);
     });
 
     request.fail(() => {
         if (count < (resetRequestNum ? 3 : 1)) {
-            errorShow();
             saveState.innerHTML = "Sync Unsuccessful | Retrying Sync...";
             error.innerHTML = "Connecting...";
             error.style.color = "lightgray";
-            errorExpire();
             recursiveSave(saveDict, count + 1);
         }
         else {
-            errorShow();
             saveState.innerHTML = "Sync Unsuccessful | Retrying soon...";
             error.innerHTML = "Could not connect to Nebulus";
             error.style.color = "red";
-            errorExpire();
             resetRequestNum = false;
 
             if (!requestInterval) requestInterval = setInterval(() => recursiveSave(saveDict, 1), 1000 * 60)
@@ -441,103 +398,3 @@ function saveToServer() {
 
     recursiveSave(saveDict, 1);
 }
-
-function change(id) {
-    if (id === "b") {
-        document.execCommand('bold');
-    }
-    if (id === "i") {
-        document.execCommand('italic');
-    }
-    if (id === "u") {
-        document.execCommand('underline');
-    }
-    if (id === "c") {
-        document.execCommand('foreColor', false, document.getElementById("changediscolor").style.color);
-    }
-    if (id === "h") {
-        document.execCommand('hiliteColor', false, document.getElementById("changediscolor2").style.color);
-    }
-    if (id === "al") {
-        document.execCommand('justifyLeft');
-    }
-    if (id === "ar") {
-        document.execCommand('justifyRight');
-    }
-    if (id === "ac") {
-        document.execCommand('justifyCenter');
-    }
-    if (id === "af") {
-        document.execCommand('justifyFull');
-    }
-    if (id === "lb") {
-        document.execCommand('insertUnorderedList');
-    }
-    if (id === "ln") {
-        document.execCommand('insertOrderedList');
-    }
-    if (id === "redo") {
-        document.execCommand('redo');
-    }
-    if (id === "undo") {
-        document.execCommand('undo');
-    }
-    document.getElementById("editor").focus();
-    document.getElementById("editor").focus();
-}
-
-function color() {
-    let dacolor = document.getElementById("colorpicker").value;
-    //document.getElementsByClassName("buttonSelect")[10].style.background = dacolor;
-    document.getElementById("changediscolor").style.color = dacolor;
-    document.execCommand('foreColor', false, dacolor);
-}
-
-function hilite() {
-    let dacolor = document.getElementById("colorpicker2").value;
-    //document.getElementsByClassName("buttonSelect")[10].style.background = dacolor;
-    document.getElementById("changediscolor2").style.color = dacolor;
-    document.execCommand('hiliteColor', false, dacolor);
-}
-
-document.getElementById("colorpicker").onchange = function () {
-    color();
-
-}
-
-function checktime(){
-    var currentDateTime = new Date();
-    var seconds = Math.floor(currentDateTime.getTime() / 1000 - syncedTime);
-    let minutes = false;
-    let hours = false;
-    let days = false;
-    if (seconds > 60){
-        minutes = true;
-        seconds = Math.floor(seconds/60);
-    }
-    if (minutes === true && seconds > 60){
-        hours = true;
-        seconds = Math.floor(seconds/60)
-    }
-    if (hours === true && seconds > 24){
-        days = true;
-        seconds = Math.floor(seconds/24);
-    }
-    if (saveState.innerHTML.includes("Last Edit")){
-        let newmsg = "";
-        if (days){
-            newmsg = `Last Edit was ${seconds} days ago`;
-        }
-        else if (hours){
-            newmsg = `Last Edit was ${seconds} hours ago`;
-        }
-        else if (minutes){
-            newmsg = `Last Edit was ${seconds} minutes ago`;
-        }else{
-            newmsg = `Last Edit was ${seconds} seconds ago`;
-        }
-        saveState.innerHTML = newmsg;
-    }
-}
-
-setInterval(checktime, 2000);

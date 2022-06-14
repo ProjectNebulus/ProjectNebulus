@@ -3,26 +3,6 @@
     {% include "navbar.html" %}
 
     <style>
-    tbody{
-        display: block;
-    }
-    thead, tr{
-        display:table;
-        width: 100%;
-        table-layout: fixed;/* even columns width , fix width of table too*/
-    }
-        .note li{
-            border-bottom: 1px solid gray;
-            width: 100%;
-            display: block;
-        }
-        .note::-webkit-scrollbar {
-            display: none;
-        }
-        .note {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-        }
         [modal-backdrop] {
             backdrop-filter: blur(4px);
         }
@@ -43,31 +23,15 @@
             font-family: 'Lato', sans-serif;
             border-collapse: collapse;
             width: 100%;
-            height:80%;
         }
-        td{
-            border: 1px solid;
+
+        td {
+            border: 1px solid black;
             text-align: left;
             padding: 8px;
             position: relative;
             height: 50px;
         }
-        .dark tr, tr td{
-            background-color:#1F2937 !Important;
-        }
-     tr:first-child, tr:first-child td{
-         border-style:none;
-         color:gray;
-         text-transform: capitalize;
-
-     }
-     .dark tr:first-child{
-         background-color:#1F2937 !Important;
-         color:gray !Important;
-         text-transform: capitalize !Important;
-     }
-
-
 
         div[contenteditable=true] {
             font-family: 'Lato', sans-serif;
@@ -89,8 +53,8 @@
             outline: none;
         }
 
-        div[contenteditable=true]:not(.note) {
-            font-size: 1.2rem;
+        div[contenteditable=true] {
+            font-size: 0.9rem;
             padding-top: 1rem;
             padding-left: 35%;
         }
@@ -115,7 +79,7 @@
             <span id="month" class="text-4xl text-black dark:text-white">Error Finding Month</span>
 
             <div class="text-center">
-                <span id="savestate" style="color:#b8b8b8;text-decoration:underline">No New Edits</span><br>
+                <span id="savestate" style="color:#b8b8b8;text-decoration:underline">Synced to Cloud | Last Edit was seconds ago</span><br>
                 <span id="error" style="color:green;">Connected to Nebulus</span><br>
             </div>
 
@@ -136,45 +100,6 @@
         <br>
 
         <span id="dates"></span>
-        <div class="block p-6 w-full center text-center bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <button type="button"
-                    class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                <span id="b" onclick="change('b')" class='buttonSelect'><i class="material-icons">format_bold</i></span>
-            </button>
-            <button type="button"
-                    class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                <span id="i" onclick="change('i')" class='buttonSelect'><i class="material-icons">format_italic</i></span>
-            </button>
-            <button type="button"
-                    class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                <span id="u" onclick="change('u')" class='buttonSelect'><i class="material-icons">format_underlined</i></span>
-            </button>
-            <button data-dropdown-toggle="dropdownColor" type="button"
-                    class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                <span style='color:black;' class='buttonSelect' id="c" onclick="change('c')"><i
-                                        class="material-icons" id="changediscolor">format_color_text</i></span>
-            </button>
-            <!-- Dropdown menu -->
-            <div id="dropdownColor"
-                 class="z-10 hidden bg-gray-300 divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
-                <input id="colorpicker" onchange="color()" type="color" value="#000000"
-                       style="background:transparent;margin:auto;padding:10px;">
-
-            </div>
-
-            <button data-dropdown-toggle="dropdownColor2" type="button"
-                    class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                <span style='color:white;' class='buttonSelect' id="h" onclick="change('h')"><i
-                                        class="material-icons" id="changediscolor2">edit</i></span>
-            </button>
-            <!-- Dropdown menu -->
-            <div id="dropdownColor2"
-                 class="z-10 hidden bg-gray-300 divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
-                <input id="colorpicker2" onchange="hilite()" type="color" value="#ffffff"
-                       style="background:transparent;margin:auto;padding:10px;">
-
-            </div>
-        </div>
         <table></table>
 
         <div class="mt-6 flex flex-row justify-between">
@@ -221,10 +146,9 @@
                         <label for="configName" class="mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                             Planner Name</label>
                         <input type="text" id="configName" name="planner-name" placeholder="My Agenda" required
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
-                                   focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700
-                                   dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
-                                   dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5
+                               focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500
+                               dark:border-gray-600 dark:placeholder-gray-400 dark:text-white w-full dark:bg-gray-700">
                     </div>
                     <div class="mb-6">
                         <label for="period1" class="block text-sm font-medium text-gray-900 dark:text-gray-300">
@@ -248,8 +172,10 @@
                             onclick="plannerName.value = document.getElementById('configName').value; saveConfig()">
                         Save Configuration
                     </button>
-                    <button data-modal-toggle="configureModal"
-                            class="text-gray-500 bg-gray-50 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                    <button data-modal-toggle="configureModal" class="text-gray-500 bg-gray-50 hover:bg-gray-100
+                     focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm
+                     font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300
+                     dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                         Cancel
                     </button>
                 </div>

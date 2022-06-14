@@ -85,7 +85,7 @@ def settings():
         user=session.get("username"),
         pswHashes="*" * session.get("pswLen"),
         email=session.get("email"),
-        avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         schoology=the_schoology,
         classroom=the_google_classroom,
         googleclassroom=user_info,

@@ -10,7 +10,7 @@ def points():
         "points.html",
         page="Nebulus - Points",
         user=session.get("username"),
-        avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         read=read,
         points=read.find_user(username=session.get("username")).points,
     )

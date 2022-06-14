@@ -1,3 +1,4 @@
+from ..classes import Announcement, Course
 from ..classes.Planner import Planner
 from ..classes.Schoology import Schoology
 
@@ -71,3 +72,10 @@ def saveConfig(configs: list, user_id):
     user.save(validate=False)
 
     return "true"
+
+
+def cleanDB():
+    for a in Announcement.objects():
+        if not len(Course.objects(id=a.course.id)):
+            a.delete()
+

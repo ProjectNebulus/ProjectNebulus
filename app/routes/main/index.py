@@ -1,7 +1,6 @@
 import json
-from urllib.request import urlopen
 from pathlib import Path
-import os
+from urllib.request import urlopen
 
 from flask import render_template, session, redirect, request, send_file
 
@@ -37,7 +36,7 @@ def index():
         page="Nebulus - Learning, All In One",
         user=session.get("username"),
         email=session.get("email"),
-        avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
     )
 
 
@@ -63,14 +62,17 @@ def tos():
         "https://docs.google.com/document/d/1XjNHjBRS2xJWKObo_zuQ2oPVSKQ8EK8Y_o8e77VPZf4/edit"
     )
 
+
 @main_blueprint.route("/select-a-region")
 def selectregion():
     return render_template("main/global/select-a-region.html",
                            user=session.get("username"),
                            email=session.get("email"),
-                           avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
-                           page ="Select a Region"
+                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+                           page="Select a Region"
                            )
+
+
 @main_blueprint.app_errorhandler(404)
 @main_blueprint.app_errorhandler(400)
 def page_not_found(e):
@@ -85,7 +87,7 @@ def page_not_found(e):
             page="Not Found",
             user=session.get("username"),
             email=session.get("email"),
-            avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
+            avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         ),
         404,
     )
@@ -100,7 +102,7 @@ def internal_error(e):
             page="Nebulus is Down",
             user=session.get("username"),
             email=session.get("email"),
-            avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
+            avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         ),
         500,
     )
@@ -115,7 +117,6 @@ def sw():
 
 @main_blueprint.route("/global/<country>", methods=["GET"])
 def international(country):
-
     page = "Nebulus - Learning, All In One"
     spanish_country = ["ar", "co", "cr", "cu", "do", "ec", "es", "mx", "pa", "sv"]
     if country in spanish_country:
@@ -138,7 +139,7 @@ def international(country):
             page=page,
             user=session.get("username"),
             email=session.get("email"),
-            avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
+            avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         )
     except:
         return "This country doesn't exist yet :( Contact norachai on Discord and request this country to be made."

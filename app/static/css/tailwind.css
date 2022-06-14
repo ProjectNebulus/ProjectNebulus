@@ -4388,6 +4388,16 @@ html.dark body {
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-green-200:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(188 240 218 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-green-800:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(3 84 63 / var(--tw-bg-opacity));
+}
+
 .hover\:bg-yellow-500:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(194 120 3 / var(--tw-bg-opacity));

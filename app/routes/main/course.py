@@ -33,7 +33,7 @@ def course_page(page, **kwargs):
                     user=session.get("username"),
                     email=session.get("email"),
                     avatar="/static/images/nebulusCats"
-                    + session.get("avatar", "/v3.gif"),
+                           + session.get("avatar", "/v3.gif"),
                     disableWidget=(page != "course"),
                     events=read.sort_course_events(session["id"], int(course_id))[1],
                     strftime=utils.strftime,
@@ -48,7 +48,7 @@ def course_page(page, **kwargs):
             page="404 Not Found",
             user=session.get("username"),
             email=session.get("email"),
-            avatar="/static/images/nebulusCats" + session.get("avatar", "/v3.gif"),
+            avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         ),
         404,
     )
@@ -69,7 +69,7 @@ def getResource(courseID, documentID):
         filter(lambda c: c.id == courseID, read.get_user_courses(session["id"]))
     )
     if not len(courses) or not len(
-        [user for user in courses[0].authorizedUsers if user.id == session["id"]]
+            [user for user in courses[0].authorizedUsers if user.id == session["id"]]
     ):
         return render_template("errors/404.html"), 404
 
