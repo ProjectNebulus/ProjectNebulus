@@ -16,3 +16,4 @@ from .Textbook import Textbook
 from .User import User
 from .Chat import Chat
 from .Integration import Integration
+from .NebulusDocuments import NebulusDocument

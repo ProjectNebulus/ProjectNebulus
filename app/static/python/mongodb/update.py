@@ -79,3 +79,15 @@ def cleanDB():
         if not len(Course.objects(id=a.course.id)):
             a.delete()
 
+
+def changeNebulusDocument(_id: str, document: dict):
+    from .read import find_user
+
+    user = find_user(pk=_id)
+    if not user:
+        raise KeyError("User not found")
+
+    planner = NebulusDocument(**document)
+    user.nebulus_documents = planner
+    user.save(clean=False)
+    return "true"

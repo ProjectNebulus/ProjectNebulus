@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from flask import session
 
 from . import read
+from ..classes.NebulusDocuments import NebulusDocument
 
 load_dotenv()
 import schoolopy
@@ -77,6 +78,14 @@ def createEvent(data: dict) -> Event:
     course.events.append(event)
     course.save()
     return event
+
+def createNebulusDocument(data: dict) ->  NebulusDocument:
+    doc = NebulusDocument(**data)
+    doc.save(force_insert=True)
+    user = read.find_user(id=session["id"])
+    user.nebulus_documents.append(doc)
+    user.save()
+    return doc
 
 
 def createAssignment(data: dict) -> Assignment:

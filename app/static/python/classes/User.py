@@ -11,6 +11,7 @@ from .Planner import Planner
 from .Schoology import Schoology
 from .Snowflake import Snowflake
 from .Spotify import Spotify
+from .NebulusDocuments import NebulusDocument
 
 
 class User(Snowflake):
@@ -64,6 +65,7 @@ class User(Snowflake):
     status = StringField(default="", null=True)
     courses = ListField(ReferenceField("Course"), default=[])
     planner = EmbeddedDocumentField(Planner, null=True, default=None)
+    nebulus_documents = ListField(ReferenceField(NebulusDocument), default=[])
     points = IntField(default=0)
     premium = BooleanField(default=False)
     is_staff = BooleanField(default=False)

@@ -327,3 +327,9 @@ def getPlanner(user_id: str):
         "periods": planner.periods,
         "lastEdited": planner.lastEdited
     }
+
+def getDocument(document_id:str):
+    doc = NebulusDocument.objects(pk = document_id)
+    if not doc:
+        raise KeyError("Invalid Document ID")
+    return chat
