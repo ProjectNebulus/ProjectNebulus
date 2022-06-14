@@ -3,6 +3,12 @@
 
     {% include "navbar.html" %}
     <style>
+        .within{
+            background:transparent;
+            width:5ch;
+            outline:none;
+            border:none;
+        }
         /* Chrome, Safari, Edge, Opera */
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
@@ -62,11 +68,11 @@
                     <div id="time" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                      focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
                       dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <input type="number" class="-ml-1 text-2xl" max="99" min="0" placeholder="00"/>
+                        <input type="number" class="within ml-1 text-2xl" max="99" min="0" placeholder="00"/>
                         <span>hours</span>
-                        <input type="number" class="ml-4 text-2xl" max="99" min="0" placeholder="00"/>
+                        <input type="number" class="within ml-4 text-2xl" max="99" min="0" placeholder="00"/>
                         <span>minutes</span>
-                        <input type="number" class="ml-4 text-2xl" placeholder="00"/>
+                        <input type="number" class="with ml-4 text-2xl" placeholder="10"/>
                         <span>seconds</span>
                     </div>
                 </div>
@@ -82,7 +88,7 @@
         <div id="timer" class="hidden text-center">
             <h5 class="mb-2 text-4xl font-bold tracking-tight text-gray-900 dark:text-white" id="timerDisplay">0:00</h5>
             <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-800 dark:text-gray-200" id="progress">
-                left in your "<span id="timerName">Homework</span>" timer.</h5>
+                left in your <span id="timerName" class="text-red-500">Homework</span> timer.</h5>
             <span class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-gray-200" id="message">Keep It Up!</span>
 
             <div class="absolute bottom-0 left-0 text-center w-full mb-8 text-black dark:text-white">
@@ -95,7 +101,7 @@
             </div>
         </div>
         <div id="timerEnd" class="hidden text-center text-black dark:text-white">
-            <h5 class="text-3xl">Your timer has ended!</h5>
+            <h5 class="text-3xl" style="color:greenyellow;">Your timer has ended!</h5>
             <p class="text-gray-500 dark:text-gray-400 my-2">
                 Break time!
                 <br><br>
@@ -210,9 +216,13 @@
             display.innerHTML = padWith0(minutes) + ":" + padWith0(seconds);
             if (hours > 0)
                 display.innerHTML = hours + ":" + display.innerHTML;
+
+            let message = "Focusing on "+document.getElementById("timerName").innerText+" for "+display.innerText;
+            window.localStorage.setItem("focus", message);
         }
 
         function onTimerEnd() {
+            window.localStorage.setItem("focus", "idling");
             timer.classList.add("hidden");
             timerEnd.classList.remove("hidden");
 
@@ -225,5 +235,12 @@
                 string = "0" + string;
             return string
         }
+        $('.within').on('input', function(){
+            if($(this).val().length >= 2){
+
+                $(this).next('input').focus();
+
+            }
+        });
     </script>
 {% endblock %}

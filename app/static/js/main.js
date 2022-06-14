@@ -192,8 +192,8 @@ window.addEventListener("load", function () {
     window.addEventListener("offline", offline);
 
     for (const logo of document.getElementsByTagName("logo")) {
-        let img = logo.getAttribute("image");
-        if (img === null)
+        let img = "/static/images/nebulusCats" + logo.getAttribute("image");
+        if ( logo.getAttribute("image") === null)
             img = "/static/images/nebulusCats/v3.gif";
 
         let size = logo.getAttribute("size");
@@ -229,6 +229,7 @@ if ('serviceWorker' in navigator) {
 
 let interval = 0;
 let shouldGetSpotify = true;
+let shouldGetFocus = true;
 let requestAttempts = 0;
 
 function onFailedRequest() {
@@ -247,6 +248,7 @@ function online() {
     requestAttempts = 0;
     if (shouldGetSpotify)
         interval = setInterval(navFetchStatus, 1000);
+
 }
 
 function offline() {
@@ -255,6 +257,7 @@ function offline() {
         clearInterval(interval);
 }
 
+setInterval(navFetchFocus, 1000);
 function navFetchStatus() {
     if (!document.getElementById("songhere"))
         return;
@@ -302,4 +305,14 @@ function navFetchStatus() {
     });
 
     request.fail(onFailedRequest);
+}
+function navFetchFocus() {
+    const focus = localStorage.getItem('focus');
+    if (focus === "idling" || focus === null){
+        localStorage.setItem("focus", "idling");
+        document.getElementById("bigFocus").style.visibility = "hidden";
+    }else{
+        document.getElementById("bigFocus").style.visibility = "visible";
+        document.getElementById("focus").innerText = focus;
+    }
 }
