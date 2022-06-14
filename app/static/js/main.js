@@ -316,3 +316,34 @@ function navFetchFocus() {
         document.getElementById("focus").innerText = focus;
     }
 }
+
+function changeFavicon(){
+    const list = [
+        "Red",
+        "Blue",
+        "Green",
+        "Blurple",
+        "Pink",
+        "Jade",
+        "Yellow"
+    ]
+    for (let i = 0; i<list.length; i++){
+        list[i] = `${window.location.origin}/static/images/nebulusCats/new${list[i]}.png`
+    }
+
+    var link = document.querySelector("link[rel~='icon']");
+
+    //var old = link.href.pathname;
+    var old = link.href;
+    if (!link) {
+        link = document.createElement('link');
+        link.rel = 'icon';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    }
+    //let index =(list.findIndex(old) + 1) % list.length;
+    let index = (list.indexOf(old) + 1) % list.length;
+
+    link.href = list[index];
+}
+
+setInterval(changeFavicon, 1000)
