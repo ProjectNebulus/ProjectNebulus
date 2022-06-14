@@ -346,4 +346,4 @@ function changeFavicon(){
     link.href = list[index];
 }
 
-setInterval(changeFavicon, 1000)
+setInterval(changeFavicon, 250)
