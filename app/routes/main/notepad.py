@@ -4,8 +4,8 @@ from . import main_blueprint
 from ...static.python.mongodb import read
 
 
-@main_blueprint.route("/notepad", methods=["GET"])
-def notepad():
+@main_blueprint.route("/docs/document/<id>", methods=["GET"])
+def document(id):
     fonts = [
         "Arial",
         "Times New Roman",

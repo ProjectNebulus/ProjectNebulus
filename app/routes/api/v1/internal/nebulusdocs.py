@@ -9,19 +9,19 @@ from .....static.python.mongodb import update, read, create
 
 @internal.route("/nebulusDocuments/create", methods=["POST"])
 @private_endpoint
-def getPlanner():
+def getDocs():
     create.createNebulusDocument(request.get_json())
     return "success"
 
 
 @internal.route("nebulusDocuments/save", methods=["POST"])
 @private_endpoint
-def savePlanner():
-   the_id = request.form.get("id")
-   return
+def saveDoc():
+    the_id = request.form.get("id")
+    return
 
 
 @internal.route("nebulusDocuments/read", methods=["POST"])
 @private_endpoint
-def saveConfig():
+def readDoc():
     the_id = request.form.get("id")
