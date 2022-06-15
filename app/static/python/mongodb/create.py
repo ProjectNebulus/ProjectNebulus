@@ -81,11 +81,16 @@ def createEvent(data: dict) -> Event:
 
 
 def createNebulusDocument(data: dict, user_id: str) ->  NebulusDocument:
+    data['owner'] = user_id
     doc = NebulusDocument(**data)
+
     doc.save(force_insert=True)
-    user = read.find_user(id=user_id)
-    user.nebulus_documents.append(doc)
-    user.save()
+    for user in doc.authorizedUsers:
+        user.nebulus_documents.append(doc)
+        user.save()
+
+    doc.owner.nebulus_documents.append(doc)
+    doc.owner.save()
     return doc
 
 

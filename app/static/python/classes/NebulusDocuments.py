@@ -6,6 +6,8 @@ class NebulusDocument(Snowflake):
     A class representing a user's Nebulus Document
     """
     meta = {"collection": "NebulusDocument"}
-    name = StringField(default="")
+    owner = ReferenceField('User', required=True)
+    name = StringField(default="Untitled Document")
     Data = StringField()
+    authorizedUsers = ListField(ReferenceField('User'))
     lastEdited = DateTimeField(null=True, default=None)

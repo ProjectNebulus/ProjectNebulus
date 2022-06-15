@@ -33,3 +33,9 @@ def saveDoc():
 @private_endpoint
 def readDoc():
     the_id = request.form.get("id")
+
+
+@internal.route("nebulusDocuments/share", methods=['POST']) # For sharing a document with another user
+@private_endpoint
+def shareDoc():
+    pass
