@@ -24,7 +24,8 @@ def saveDoc():
         return 'false'
 
     document.lastEdited = datetime.datetime.now()
-    document.Data = data['Data']
+    for key, value in data.items():
+        document.setattr(key, value)
     document.save()
     return
 
