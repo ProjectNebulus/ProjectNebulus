@@ -79,10 +79,11 @@ def createEvent(data: dict) -> Event:
     course.save()
     return event
 
-def createNebulusDocument(data: dict) ->  NebulusDocument:
+
+def createNebulusDocument(data: dict, user_id: str) ->  NebulusDocument:
     doc = NebulusDocument(**data)
     doc.save(force_insert=True)
-    user = read.find_user(id=session["id"])
+    user = read.find_user(id=user_id)
     user.nebulus_documents.append(doc)
     user.save()
     return doc

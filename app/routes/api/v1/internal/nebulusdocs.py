@@ -1,7 +1,7 @@
 from json import loads
 
 from flask import request, session
-
+import datetime
 from . import internal
 from .....routes.main import private_endpoint
 from .....static.python.mongodb import update, read, create
@@ -10,14 +10,22 @@ from .....static.python.mongodb import update, read, create
 @internal.route("/nebulusDocuments/create", methods=["POST"])
 @private_endpoint
 def getDocs():
-    create.createNebulusDocument(request.get_json())
+    create.createNebulusDocument(request.get_json(), session['id'])
     return "success"
 
 
 @internal.route("nebulusDocuments/save", methods=["POST"])
 @private_endpoint
 def saveDoc():
-    the_id = request.form.get("id")
+    data = request.get_json()
+    try:
+        document = read.getDocument(data['id'])
+    except KeyError:
+        return 'false'
+
+    document.lastEdited = datetime.datetime.now()
+    document.Data = data['Data']
+    document.save()
     return
 
 
