@@ -12,7 +12,7 @@ def signin():
     user_courses = read.get_user_courses("1522048621565050880")
     events = read.sort_user_events("1522048621565050880")
 
-    if session.get("username"):
+    if session.get("logged_in"):
         return redirect("/dashboard")
 
     return render_template(

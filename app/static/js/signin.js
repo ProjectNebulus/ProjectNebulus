@@ -218,7 +218,7 @@ function reqListener1() {
         usernameErrorMsg.style.color = 'red';
         usernameErrorMsg.innerHTML = 'Incorrect Username!';
 
-        username.classList.add(...GREEN_BORDER);
+        username.classList.remove(...GREEN_BORDER);
         username.classList.add(...RED_BORDER);
 
     }
@@ -227,7 +227,7 @@ function reqListener1() {
         passwordError.innerHTML = '<p class="material-icons">error</p>';
         passwordErrorMsg.style.color = 'red';
         passwordErrorMsg.innerHTML = 'Incorrect Password!';
-        password.classList.add(...GREEN_BORDER);
+        password.classList.remove(...GREEN_BORDER);
         password.classList.add(...RED_BORDER);
     }
 
@@ -239,6 +239,8 @@ function reqListener1() {
         loginButton.style.color = '#eff6ff';
         loginButton.style.backgroundColor = '3';
         loginButton.classList.add('hover:bg-blue-800');
+        // usernameInput.disabled = true;
+        // passwordInput.disabled = true;
     }
 }
 

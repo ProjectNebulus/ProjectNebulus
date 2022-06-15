@@ -14,7 +14,7 @@ SCHOOLOGY_COURSE_ICON = "https://app.schoology.com/sites/all/themes/schoology_th
 def logged_in(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
-        if session.get("username"):
+        if session.get("logged_in"):
             try:
                 read.find_user(username=session.get("username"))
                 return func(*args, **kwargs)
