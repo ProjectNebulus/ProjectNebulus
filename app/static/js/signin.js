@@ -239,8 +239,6 @@ function reqListener1() {
         loginButton.style.color = '#eff6ff';
         loginButton.style.backgroundColor = '3';
         loginButton.classList.add('hover:bg-blue-800');
-        usernameInput.disabled = true;
-        passwordInput.disabled = true;
     }
 }
 
