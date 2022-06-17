@@ -27,9 +27,7 @@ def checkSignin():
         session["username"] = user.username
         session["pswLen"] = len(json.get("password"))
         session["email"] = user.email
-        session["avatar"] = user.avatar.avatar_url.replace(
-            "https://localhost:8080", ""
-        ).replace("https://beta.nebulus.ml", "")
+        session["avatar"] = user.avatar.avatar_url
         session["id"] = user.id
 
     return validation

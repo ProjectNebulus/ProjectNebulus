@@ -18,12 +18,9 @@
                 display: none !important;
             }
 
-            ul {
+            #sidebar ul, #sidebar li {
                 list-style-type: none;
-            }
-
-            li {
-                list-style-type: none;
+                margin-top: 1rem;
             }
 
         </style>
@@ -32,9 +29,72 @@
     <body>
     {% include "navbar.html" %}
     <script src="/static/js/settings.js"></script>
-    <div style="height:100%;overflow-y:scroll;" class="noselect">
-        <div id="account"
-             style="overflow-y: scroll; height: calc(100% - 80px); float:right; margin-left: 8%; font-size: 1.2em; width:80%;">
+    <div class="flex overflow-auto" style="height: calc(100% - 80px)">
+        <div id="sidebar" class="mx-4 my-4 hidden lg:block lg:sticky text-right"
+             style="flex: 0 0 10%; top: 0; align-self: flex-start">
+            <div class="mt-12 lg:mt-8">
+                <h5 class="mb-8 lg:mb-3 text-3xl font-semibold text-slate-900 dark:text-slate-200">Settings</h5>
+                <ul class="space-y-6 lg:space-y-2 border-l border-slate-100 dark:border-slate-800">
+                    <li>
+                        <a class="block border-l pl-4 -ml-px text-sky-500 border-current font-semibold dark:text-sky-400"
+                           href="#general">General Settings</a></li>
+                    <li>
+                        <a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                           href="#connections">Connections</a></li>
+                    <li>
+                        <a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                           href="#bug">Submit a Bug Report</a></li>
+                    <li>
+                        <a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                           href="#request">Submit a Feature Request</a></li>
+                    <li>
+                        <a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                           href="#danger">Danger Zone</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="change-password" aria-hidden="true"
+             class="hidden overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center h-modal md:h-full md:inset-0">
+            <div class="relative px-4 w-full max-w-md h-full md:h-auto">
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <div class="flex justify-end p-2">
+                        <button class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg
+                         text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+                                data-modal-toggle="#change-password">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <form class="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8" action="#">
+                        <h3 class="text-xl font-medium text-gray-900 dark:text-white">Change your Password</h3>
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Old
+                            Password</label>
+                        <input type="password" name="email" id="email"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                               placeholder="••••••••" required>
+                        <label for="password"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">New
+                            Password</label>
+                        <input type="password" name="password" id="password" placeholder="••••••••"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                               required>
+                        <label for="password"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Confirm
+                            New Password</label>
+                        <input type="password" name="password" id="password" placeholder="••••••••"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                               required>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="account" style="flex: 0 0 0 90%; margin-left: 8%;">
             <div class="text-center mt-6">
                 <h1 class="text-5xl text-black dark:text-white">{{ session.get('username') }}'s Nebulus Account</h1>
             </div>
@@ -47,23 +107,23 @@
 
             <div class="settingItem" style="display: inline-block;">
                 <div class="relative mt-1" style="display: inline-block;">
-                    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                    <div class="flex inset-y-0 left-0 absolute items-center pl-3 pointer-events-none">
                         <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20"
                              xmlns="http://www.w3.org/2000/svg">
                             <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
                             <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
                         </svg>
                     </div>
-                    <input style="width:400px;" disabled type="text" value="{{ session.get('username') }}"
-
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                           placeholder="">
+                    <input style="width:400px" disabled type="text" value="{{ session.get('username') }}"
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500
+                           focus:border-blue-500 block dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500
+                           dark:placeholder-gray-400 dark:text-white w-full pl-10 p-2.5 dark:focus:ring-blue-500">
                 </div>
-                <button data-modal-toggle="" onclick="change1()" style="margin-top: 20px;"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <button data-modal-toggle="" style="margin-top: 20px;" class="text-white bg-blue-700 hover:bg-blue-800
+                focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2
+                dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     Change
                 </button>
-
             </div>
 
             <label class="hidden md:block block mt-2 text-sm font-medium text-gray-900 dark:text-gray-300">
@@ -72,7 +132,7 @@
 
             <div class="settingItem" style="display: inline-block;">
                 <div class="relative mt-1" style="display: inline-block;">
-                    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                    <div class="flex inset-y-0 left-0 absolute items-center pl-3 pointer-events-none">
                         <svg class="w-6 h-6" fill="#9BA2AE" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
                                   d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -84,7 +144,7 @@
                            placeholder="">
                 </div>
 
-                <button data-modal-toggle="authentication-modal" style="margin-top: 20px;"
+                <button data-modal-toggle="#change-password" style="margin-top: 20px;"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     Change
                 </button>
@@ -97,7 +157,7 @@
 
             <div class="settingItem" style="display: inline-block;">
                 <div class="relative mt-1" style="display: inline-block;">
-                    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                    <div class="flex inset-y-0 left-0 absolute items-center pl-3 pointer-events-none">
                         <svg class="w-6 h-6" fill="#9BA2AE" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
                                   clip-rule="evenodd"></path>
@@ -114,8 +174,8 @@
             </div>
 
             <hr class="border-gray-300 dark:border-gray-700 my-8">
-            <h2 id="connections" class="text-4xl mt-2 text-black dark:text-white">Connections</h2><br>
-            <a class="block h-72 p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700">
+            <h1 class="text-4xl mt-2 text-black dark:text-white" id="connections">Connections</h1><br>
+            <div class="block p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700">
                 <p class="text-black dark:text-white">
                     Connections can unlock
                     <span class="font-bold text-yellow-400">SPECIAL</span>
@@ -123,185 +183,202 @@
                 </p>
                 <p class="text-gray-500 dark:text-gray-400 text-lg">Note: Some of them don't work yet.</p>
 
-                <div onclick="newwindow=window.open('/gclassroom','Authorize with Google','height=400,width=900')"
-                     style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default"
-                     class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300
+                <div style="max-height: 25rem; overflow: auto">
+                    <div onclick="newwindow=window.open('/gclassroom','Authorize with Google','height=400,width=900')"
+                         style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default"
+                         class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300
                      dark:hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg
                       text-sm text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
-                    <img src="/static/images/logos/classroom.png" alt="Google Classroom Image"
-                         style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
+                        <img src="/static/images/logos/classroom.png" alt="Google Classroom Image"
+                             style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
+                    </div>
+                    <div id="tooltip-default" role="tooltip"
+                         class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                        Google Classroom
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                    <div onclick="newwindow=window.open('/schoology','Authorize with Schoology','height=400,width=900')"
+                         style="float:left; margin:10px; width:80px; height:80px;"
+                         data-tooltip-target="tooltip-default2"
+                         class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
+                        <img src="/static/images/logos/schoology.png" alt="Schoology Image"
+                             style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
+                    </div>
+                    <div id="tooltip-default2" role="tooltip"
+                         class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                        Schoology
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                    <div onclick="newwindow=window.open('/canvas','Authorize with Canvas','height=400,width=900')"
+                         style="float:left; margin:10px; width:80px; height:80px;"
+                         data-tooltip-target="tooltip-default3"
+                         class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
+                        <img src="/static/images/logos/canvas.png" alt="Canvas Image"
+                             style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
+                    </div>
+                    <div id="tooltip-default3" role="tooltip"
+                         class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                        Canvas
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                    <div style="float:left; margin:10px; width:80px; height:80px;"
+                         data-tooltip-target="tooltip-default4"
+                         class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
+                        <img src="/static/images/logos/github.png" alt="Github Image"
+                             style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
+                    </div>
+                    <div id="tooltip-default4" role="tooltip"
+                         class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                        Github
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                    <div onclick="newwindow=window.open('/discord','Authorize with Discord','height=900,width=600')"
+                         style="float:left; margin:10px; width:80px; height:80px;"
+                         data-tooltip-target="tooltip-default5"
+                         class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
+                        <img src="/static/images/logos/discord.png" alt="Discord Image"
+                             style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
+                    </div>
+                    <div id="tooltip-default5" role="tooltip"
+                         class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                        Discord
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                    <div onclick="newwindow=window.open('/spotify','Authorize with Spotify','height=950,width=570')"
+                         style="float:left; margin:10px; width:80px; height:80px;"
+                         data-tooltip-target="tooltip-default6"
+                         class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
+                        <img src="/static/images/logos/spotify.png" alt="Spotify Image"
+                             style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
+                    </div>
+                    <div id="tooltip-default6" role="tooltip"
+                         class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                        Spotify
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                    <div style="float:left; margin:10px; width:80px; height:80px;"
+                         data-tooltip-target="tooltip-default7"
+                         class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
+                        <img src="/static/images/logos/dropbox.png" alt="Dropbox Image"
+                             style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
+                    </div>
+                    <div id="tooltip-default7" role="tooltip"
+                         class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                        Dropbox
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                    <div style="float:left; margin:10px; width:80px; height:80px;"
+                         data-tooltip-target="tooltip-default8"
+                         class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
+                        <img src="/static/images/logos/docs.png" alt="Google Docs Image"
+                             style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
+                    </div>
+                    <div id="tooltip-default8" role="tooltip"
+                         class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                        Google Docs
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                    <div style="float:left; margin:10px; width:80px; height:80px;"
+                         data-tooltip-target="tooltip-default9"
+                         class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
+                        <img src="/static/images/logos/slides.png" alt="Google Slides Image"
+                             style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; height:40px; display: inline-block;">
+                    </div>
+                    <div id="tooltip-default9" role="tooltip"
+                         class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                        Google Slides
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                    <div style="float:left; margin:10px; width:80px; height:80px;"
+                         data-tooltip-target="tooltip-default10"
+                         class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
+                        <img src="/static/images/logos/sheets.png" alt="Google Sheets Image"
+                             style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; height:40px; display: inline-block;">
+                    </div>
+                    <div id="tooltip-default10" role="tooltip"
+                         class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                        Google Sheets
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                    <div style="float:left; margin:10px; width:80px; height:80px;"
+                         data-tooltip-target="tooltip-default11"
+                         class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
+                        <img src="/static/images/logos/drive.png" alt="Google Drive Image"
+                             style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
+                    </div>
+                    <div id="tooltip-default11" role="tooltip"
+                         class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                        Google Drive
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                    <div style="float:left; margin:10px; width:80px; height:80px;"
+                         data-tooltip-target="tooltip-default12"
+                         class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
+                        <img src="/static/images/logos/gmail.png" alt="Gmail Image"
+                             style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; height:40px; display: inline-block;">
+                    </div>
+                    <div id="tooltip-default12" role="tooltip"
+                         class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                        Gmail
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                    <div style="float:left; margin:10px; width:80px; height:80px;"
+                         data-tooltip-target="tooltip-default13"
+                         class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
+                        <img src="/static/images/logos/calendar.png" alt="Google Calendar Image"
+                             style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
+                    </div>
+                    <div id="tooltip-default13" role="tooltip"
+                         class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                        Google Calendar
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                    <div style="float:left; margin:10px; width:80px; height:80px;"
+                         data-tooltip-target="tooltip-default14"
+                         class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
+                        <img src="/static/images/logos/meet.png" alt="Google Meet Image"
+                             style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
+                    </div>
+                    <div id="tooltip-default14" role="tooltip"
+                         class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                        Google Meet
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                    <div style="float:left; margin:10px; width:80px; height:80px;"
+                         data-tooltip-target="tooltip-default15"
+                         class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
+                        <img src="/static/images/logos/replit.png" alt="Replit Image"
+                             style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
+                    </div>
+                    <div id="tooltip-default15" role="tooltip"
+                         class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                        Replit
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                    <div style="float:left; margin:10px; width:80px; height:80px;"
+                         data-tooltip-target="tooltip-default16"
+                         class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
+                        <img src="/static/images/logos/twitter.png" alt="Twitter Image"
+                             style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
+                    </div>
+                    <div id="tooltip-default16" role="tooltip"
+                         class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                        Twitter
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                    <div style="float:left; margin:10px; width:80px; height:80px;"
+                         data-tooltip-target="tooltip-default17"
+                         class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
+                        <img src="/static/images/logos/facebook.png" alt="Facebook Image"
+                             style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
+                    </div>
+                    <div id="tooltip-default17" role="tooltip"
+                         class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                        Facebook
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
                 </div>
-                <div id="tooltip-default" role="tooltip"
-                     class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
-                    Google Classroom
-                    <div class="tooltip-arrow" data-popper-arrow></div>
-                </div>
-                <div onclick="newwindow=window.open('/schoology','Authorize with Schoology','height=400,width=900')"
-                     style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default2"
-                     class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                    <img src="/static/images/logos/schoology.png" alt="Schoology Image"
-                         style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
-                </div>
-                <div id="tooltip-default2" role="tooltip"
-                     class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
-                    Schoology
-                    <div class="tooltip-arrow" data-popper-arrow></div>
-                </div>
-                <div onclick="newwindow=window.open('/canvas','Authorize with Canvas','height=400,width=900')"
-                     style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default3"
-                     class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                    <img src="/static/images/logos/canvas.png" alt="Canvas Image"
-                         style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
-                </div>
-                <div id="tooltip-default3" role="tooltip"
-                     class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
-                    Canvas
-                    <div class="tooltip-arrow" data-popper-arrow></div>
-                </div>
-                <div style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default4"
-                     class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                    <img src="/static/images/logos/github.png" alt="Github Image"
-                         style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
-                </div>
-                <div id="tooltip-default4" role="tooltip"
-                     class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
-                    Github
-                    <div class="tooltip-arrow" data-popper-arrow></div>
-                </div>
-                <div onclick="newwindow=window.open('/discord','Authorize with Discord','height=900,width=600')"
-                     style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default5"
-                     class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                    <img src="/static/images/logos/discord.png" alt="Discord Image"
-                         style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
-                </div>
-                <div id="tooltip-default5" role="tooltip"
-                     class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
-                    Discord
-                    <div class="tooltip-arrow" data-popper-arrow></div>
-                </div>
-                <div onclick="newwindow=window.open('/spotify','Authorize with Spotify','height=400,width=900')"
-                     style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default6"
-                     class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                    <img src="/static/images/logos/spotify.png" alt="Spotify Image"
-                         style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
-                </div>
-                <div id="tooltip-default6" role="tooltip"
-                     class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
-                    Spotify
-                    <div class="tooltip-arrow" data-popper-arrow></div>
-                </div>
-                <div style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default7"
-                     class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                    <img src="/static/images/logos/dropbox.png" alt="Dropbox Image"
-                         style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
-                </div>
-                <div id="tooltip-default7" role="tooltip"
-                     class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
-                    Dropbox
-                    <div class="tooltip-arrow" data-popper-arrow></div>
-                </div>
-                <div style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default8"
-                     class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                    <img src="/static/images/logos/docs.png" alt="Google Docs Image"
-                         style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
-                </div>
-                <div id="tooltip-default8" role="tooltip"
-                     class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
-                    Google Docs
-                    <div class="tooltip-arrow" data-popper-arrow></div>
-                </div>
-                <div style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default9"
-                     class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                    <img src="/static/images/logos/slides.png" alt="Google Slides Image"
-                         style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; height:40px; display: inline-block;">
-                </div>
-                <div id="tooltip-default9" role="tooltip"
-                     class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
-                    Google Slides
-                    <div class="tooltip-arrow" data-popper-arrow></div>
-                </div>
-                <div style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default10"
-                     class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                    <img src="/static/images/logos/sheets.png" alt="Google Sheets Image"
-                         style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; height:40px; display: inline-block;">
-                </div>
-                <div id="tooltip-default10" role="tooltip"
-                     class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
-                    Google Sheets
-                    <div class="tooltip-arrow" data-popper-arrow></div>
-                </div>
-                <div style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default11"
-                     class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                    <img src="/static/images/logos/drive.png" alt="Google Drive Image"
-                         style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
-                </div>
-                <div id="tooltip-default11" role="tooltip"
-                     class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
-                    Google Drive
-                    <div class="tooltip-arrow" data-popper-arrow></div>
-                </div>
-                <div style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default12"
-                     class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                    <img src="/static/images/logos/gmail.png" alt="Gmail Image"
-                         style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; height:40px; display: inline-block;">
-                </div>
-                <div id="tooltip-default12" role="tooltip"
-                     class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
-                    Gmail
-                    <div class="tooltip-arrow" data-popper-arrow></div>
-                </div>
-                <div style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default13"
-                     class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                    <img src="/static/images/logos/calendar.png" alt="Google Calendar Image"
-                         style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
-                </div>
-                <div id="tooltip-default13" role="tooltip"
-                     class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
-                    Google Calendar
-                    <div class="tooltip-arrow" data-popper-arrow></div>
-                </div>
-                <div style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default14"
-                     class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                    <img src="/static/images/logos/meet.png" alt="Google Meet Image"
-                         style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
-                </div>
-                <div id="tooltip-default14" role="tooltip"
-                     class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
-                    Google Meet
-                    <div class="tooltip-arrow" data-popper-arrow></div>
-                </div>
-                <div style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default15"
-                     class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                    <img src="/static/images/logos/replit.png" alt="Replit Image"
-                         style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
-                </div>
-                <div id="tooltip-default15" role="tooltip"
-                     class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
-                    Replit
-                    <div class="tooltip-arrow" data-popper-arrow></div>
-                </div>
-                <div style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default16"
-                     class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                    <img src="/static/images/logos/twitter.png" alt="Twitter Image"
-                         style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
-                </div>
-                <div id="tooltip-default16" role="tooltip"
-                     class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
-                    Twitter
-                    <div class="tooltip-arrow" data-popper-arrow></div>
-                </div>
-                <div style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default17"
-                     class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                    <img src="/static/images/logos/facebook.png" alt="Facebook Image"
-                         style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
-                </div>
-                <div id="tooltip-default17" role="tooltip"
-                     class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
-                    Facebook
-                    <div class="tooltip-arrow" data-popper-arrow></div>
-                </div>
-
-            </a>
+            </div>
 
             <br>
             {% if schoology %}
@@ -327,7 +404,7 @@
                          hover:bg-gray-100 dark:bg-gray-700 dark:border-gray-700 dark:hover:bg-gray-700">
                             <div>
                                 <a href="/api/v1/internal/logout-of-schoology"
-                                   class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                   class="inline- items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                     Disconnect Schoology
                                     <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
                                          xmlns="http://www.w3.org/2000/svg">
@@ -625,100 +702,6 @@
 
             </div>
         </div>
-
-        <div id="sidebar" class="mt-4 hidden lg:block text-right absolute"
-             style="margin:1%; float:left; width:10%; top: 45; left: 13">
-            <li class="mt-12 lg:mt-8">
-                <h5 class="mb-8 lg:mb-3 text-3xl font-semibold text-slate-900 dark:text-slate-200">Settings</h5>
-                <ul class="space-y-6 lg:space-y-2 border-l border-slate-100 dark:border-slate-800">
-                    <li>
-                        <a class="block border-l pl-4 -ml-px text-sky-500 border-current font-semibold dark:text-sky-400"
-                           href="#general">General Settings</a></li>
-                    <li>
-                        <a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
-                           href="#connections">Connections</a></li>
-                    <li>
-                        <a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
-                           href="#bug">Submit a Bug Report</a></li>
-                    <li>
-                        <a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
-                           href="#request">Submit a Feature Request</a></li>
-                    <li>
-                        <a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
-                           href="#danger">Danger Zone</a></li>
-                </ul>
-            </li>
-        </div>
-        <div id="authentication-modal" aria-hidden="true"
-             class="hidden overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center h-modal md:h-full md:inset-0">
-            <div class="relative px-4 w-full max-w-md h-full md:h-auto">
-                <!-- Modal content -->
-                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                    <div class="flex justify-end p-2">
-                        <button class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg
-                         text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
-                                data-modal-toggle="authentication-modal">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                      clip-rule="evenodd"></path>
-                            </svg>
-                        </button>
-                    </div>
-                    <form class="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8" action="#">
-                        <h3 class="text-xl font-medium text-gray-900 dark:text-white">Change your Password</h3>
-                        <div>
-                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Old
-                                Password</label>
-                            <input type="password" name="email" id="email"
-                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                   placeholder="••••••••" required>
-                        </div>
-                        <div>
-                            <label for="password"
-                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">New
-                                Password</label>
-                            <input type="password" name="password" id="password" placeholder="••••••••"
-                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                   required>
-                        </div>
-                        <div>
-                            <label for="password"
-                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Confirm
-                                New Password</label>
-                            <input type="password" name="password" id="password" placeholder="••••••••"
-                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                   required>
-                        </div>
-                        <div class="flex justify-between">
-                            <div class="flex items-start">
-                                <div class="flex items-center h-5">
-                                    <input id="remember" aria-describedby="remember" type="checkbox"
-                                           class="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
-                                           required>
-                                </div>
-                                <div class="ml-3 text-sm">
-                                    <label for="remember" class="font-medium text-gray-900 dark:text-gray-300">Remember
-                                        me</label>
-                                </div>
-                            </div>
-                            <a href="#" class="text-sm text-blue-700 hover:underline dark:text-blue-500">Lost
-                                Password?</a>
-                        </div>
-                        <button type="submit"
-                                class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Login to your account
-                        </button>
-                        <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
-                            Not registered? <a href="#" class="text-blue-700 hover:underline dark:text-blue-500">Create
-                            account</a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
     </div>
     </body>
 

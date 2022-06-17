@@ -1,4 +1,4 @@
-import { createPopper } from '@popperjs/core';
+import {createPopper} from '@popperjs/core';
 
 const Default = {
     placement: 'bottom',
@@ -11,8 +11,8 @@ class Dropdown {
     constructor(targetElement = null, triggerElement = null, options = {}) {
         this._targetEl = targetElement
         this._triggerEl = triggerElement
-        this._options = { ...Default, ...options }
-        this._popperInstance = this._createPopperInstace()
+        this._options = {...Default, ...options}
+        this._popperInstance = this._createPopperInstance()
         this._visible = false
         this._init()
     }
@@ -25,7 +25,7 @@ class Dropdown {
         }
     }
 
-    _createPopperInstace() {
+    _createPopperInstance() {
         return createPopper(this._triggerEl, this._targetEl, {
             placement: this._options.placement,
             modifiers: [
@@ -51,7 +51,8 @@ class Dropdown {
         if (this._visible) {
             this.hide()
             document.body.removeEventListener('click', this._handleClickOutside, true)
-        } else {
+        }
+        else {
             this.show()
         }
     }
@@ -65,7 +66,7 @@ class Dropdown {
             ...options,
             modifiers: [
                 ...options.modifiers,
-                { name: 'eventListeners', enabled: true },
+                {name: 'eventListeners', enabled: true},
             ],
         }));
 
@@ -88,7 +89,7 @@ class Dropdown {
             ...options,
             modifiers: [
                 ...options.modifiers,
-                { name: 'eventListeners', enabled: false },
+                {name: 'eventListeners', enabled: false},
             ],
         }))
 
