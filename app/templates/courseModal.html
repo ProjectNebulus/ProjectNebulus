@@ -328,12 +328,12 @@
                 </button>
             </div>
             <!-- Modal body -->
-            <div class="p-6 space-y-6">
+            <div class="p-6 space-y-6 dark:text-white text-black">
                 <div class="mb-6">
                     <input type="text" id="sear"
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                            placeholder="Type here..." required>
-                    <ul id="search_items">
+                    <ul id="search_items" class="scroll">
                     <li>
                         <div class="py-2.5 rounded-lg mx-auto block px-4 py-2 mx-2 dark:hover:text-white">
                             <svg role="status" class="inline w-4 h-4 mr-3 text-white animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -394,22 +394,44 @@
                     let datas = data.split("•");
                     for (let i = 0; i < datas.length; i++) {
 
-                        if (i % 3 === 0) {
+                        if (i % 4 === 0) {
                             temp_arr = [];
                             temp_arr.push(datas[i]);
                         }
-                        if (i % 3 === 1) {
+                        if (i % 4 === 1) {
                             temp_arr.push(datas[i]);
                         }
-                        if (i % 3 === 2) {
+                        if (i % 4 === 2) {
+                            temp_arr.push(datas[i]);
+                        }
+                        if (i % 4 === 3) {
                             temp_arr.push(datas[i]);
                             let element = temp_arr;
-                            console.log(element);
+                            //console.log(element);
+                            let pic = `<img src="${element[3]}" class="inline-block w-10 h-10 rounded-full">`;
+                            if (temp_arr[0] === "document"){
+                                pic = `<i class="material-icons">description</i>`
+                            }
+                            if (temp_arr[0] === "NebDoc"){
+                                pic = `<i class="material-icons">draft</i>`
+                            }
+                            if (temp_arr[0] === "event"){
+                                pic = `<i class="material-icons">event</i>`
+                            }
+                            if (temp_arr[0] === "assignment"){
+                                pic = `<i class="material-icons">assignment</i>`
+                            }
+                            if (temp_arr[0] === "chat"){
+                                pic = `<i class="material-icons">forum</i>`
+                            }
+                            if (temp_arr[0] === "announcement"){
+                                pic = `<i class="material-icons">campaign</i>`
+                            }
 
                             document.getElementById("search_items").innerHTML += `
                     <li>
                         <span class="truncate py-2.5 rounded-lg mx-auto block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 mx-2 dark:hover:text-white" style="text-align:left;">
-                <img src="${element[0]}" class="inline-block w-10 h-10 rounded-full">
+                ${pic}
                 ${element[1]} <span class="text-gray-500 ml-2">${element[2]}</span></span>
                     </li>
 `

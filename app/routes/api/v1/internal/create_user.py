@@ -102,7 +102,7 @@ def search_within_user():
             "document", #type
             document.name, #name
             document.description, #description
-            ""
+            "a"
         ])
     for chat in chats:
         everything.append([
@@ -114,23 +114,23 @@ def search_within_user():
     for event in events:
         everything.append([
             "event", #type
-            event.title, #name
-            event.description, #description
-            ""
+            event["title"], #name
+            event["description"], #description
+            "a"
         ])
     for assignment in assignments:
         everything.append([
             "assignment", #type
             assignment.title, #name
             assignment.description, #description
-            ""
+            "a"
         ])
     for announcement in announcements:
         everything.append([
             "announcement", #type
             announcement.title, #name
             announcement.content, #description
-            ""
+            "a"
         ])
 
     for nebdoc in NebulusDocuments:
@@ -138,10 +138,10 @@ def search_within_user():
             "NebDoc", #type
             nebdoc.title, #name
             nebdoc.Data, #description
-            ""
+            "a"
         ])
 
-    for i in everything
+    for i in everything:
         count += 1
         string += i[0]
         string += "•"
