@@ -4,7 +4,7 @@ from . import main_blueprint
 
 
 @main_blueprint.route("/ComingSoon", methods=["GET"])
-def about():
+def soon():
     return render_template(
         "ComingSoon.html",
         page="Nebulus - Learning, All In One",
