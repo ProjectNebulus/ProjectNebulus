@@ -3,9 +3,8 @@ App entrypoint.
 """
 import os
 import platform
-
 from waitress import serve
-from app.static.python.mongodb import delete
+from app.static.python.mongodb import read
 from app.static.python.classes.Announcement import Announcement
 
 from app.routes import init_app
@@ -38,3 +37,4 @@ if __name__ == "__main__":
         serve(app, host=host, port=port)
     else:
         app.run(host=host, port=port)
+

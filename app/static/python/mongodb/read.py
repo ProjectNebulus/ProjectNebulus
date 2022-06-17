@@ -43,7 +43,7 @@ def get_user_courses(user_id: str) -> List[Course]:
 
 
 def search_user(query: str) -> List[User]:
-    return User.objects(username__contains=query)
+    return User.objects(username__icontains=query)[:10]
 
 
 def find_courses(_id: str):
