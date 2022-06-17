@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import re
 from typing import List
+from mongoengine import Q
 
 import schoolopy
 from flask import Response, session
@@ -332,3 +333,16 @@ def getDocument(document_id:str): # Nebulus Document
     if not doc:
         raise KeyError("Invalid Document ID")
     return doc
+
+
+def search(keyword: str, id:str):
+    user = User.objects(pk=id).first()
+    courses = Course.objects(Q(authorizedUsers=user.id) & Q(name__istartswith=keyword))[:10]
+    documents = DocumentFile.objects(Q(course__authorizedUsers=user.id) & Q(name__istartswith=keyword))[:10]
+    chats = Chat.objects(Q(owner=user.id) & Q(title__istartswith=keyword))[:10]
+    events = Event.objects(Q(course__authorizedUsers=user.id) & Q(title__istartswith=keyword))[:10]
+    assignments = Assignment.objects(Q(course__authorizedUsers=user.id) & Q(title__istartswith=keyword))[:10]
+    announcements = Announcement.objects(Q(course__authorizedUsers=user.id) & Q(title__istartswith=keyword))[:10]
+    NebulusDocuments = NebulusDocument.objects(Q(authorized__users=user.id) & Q(name__istartswith=keyword))[:10]
+    return courses, documents, chats, events, assignments, announcements, NebulusDocuments
+

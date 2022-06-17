@@ -14,7 +14,7 @@ class Avatar(EmbeddedDocument):
 
     meta = {"collection": "Avatars"}
     parent = StringField(required=True, choices=["User", "Course", "Textbook", "Chat"])
-    avatar_url = URLField(required=False, description="Avatar URL")
+    avatar_url = StringField(required=False, description="Avatar URL")
     id = StringField(
         required=False, default=lambda: str(make_snowflake(time.time() * 1000, 1, 0, 0))
     )
