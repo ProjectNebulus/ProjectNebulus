@@ -43,10 +43,7 @@ def get_user_courses(user_id: str) -> List[Course]:
 
 
 def search_user(query: str) -> List[User]:
-    import re
-
-    regex = re.compile(f"(?i) {query}+")
-    return User.objects(username=regex)
+    return User.objects(username__contains=query)
 
 
 def find_courses(_id: str):
