@@ -13,6 +13,7 @@ from ..security import valid_password
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 
 
+
 def getAssignment(assignment_id: str) -> Assignment:
     assignment = Assignment.objects(id=assignment_id).first()
     return assignment
@@ -94,7 +95,7 @@ def getSchoology(**kwargs) -> List[Schoology] | None:
 
 
 def getClassroom(
-    userID: str = None, username: str = None, email: str = None
+        userID: str = None, username: str = None, email: str = None
 ) -> GoogleClassroom:
     return find_user(id=userID, username=username, email=email).gclassroom
 
@@ -104,7 +105,7 @@ def getSpotify(userID: str = None, username: str = None, email: str = None) -> S
 
 
 def getSpotifyCache(
-    userID: str = None, username: str = None, email: str = None
+        userID: str = None, username: str = None, email: str = None
 ) -> Spotify | None:
     try:
         return find_user(
@@ -204,8 +205,8 @@ def sort_course_events(user_id: str, course_id: int):
                 {
                     key: list(result)
                     for key, result in groupby(
-                        sorted_announcements, key=lambda obj: obj.date.date()
-                    )
+                    sorted_announcements, key=lambda obj: obj.date.date()
+                )
                 }.items()
             )
         )
@@ -241,8 +242,8 @@ def sort_user_events(user_id: str, maxDays=8, maxEvents=16):
                 {
                     key: list(result)
                     for key, result in groupby(
-                        sorted_announcements, key=lambda obj: obj.date.date()
-                    )
+                    sorted_announcements, key=lambda obj: obj.date.date()
+                )
                 }.items()
             )[-maxDays:]
         )
@@ -343,19 +344,10 @@ def getDocument(document_id: str):  # Nebulus Document
 
 def search(keyword: str, username: str):
     user = User.objects(username=username).first()
-    courses = Course.objects(Q(authorizedUsers=user.id) & Q(name__istartswith=keyword))[
-        :10
-    ]
-    chats = Chat.objects(Q(owner=user.id) & Q(title__istartswith=keyword))[:10]
-    NebulusDocuments = NebulusDocument.objects(
-        Q(authorized__users=user.id) & Q(name__istartswith=keyword)
-    )[:10]
-
-    events = Event.objects().aggregate(
-        [
+    pipeline1 = [
             {"$match":
                  {"title":
-                      { "$regex": f'^{keyword}', '$options': 'i' }
+                      {"$regex": f'^{keyword}', '$options': 'i'}
                   }
              },
             {
@@ -369,23 +361,39 @@ def search(keyword: str, username: str):
             {"$match":
                  {"course.authorizedUsers": user.pk}
              },
+            {"$project":
+                 {
+                     "title": 1,
+                     "_id": 1
+                 }
+            }
         ]
+    courses = Course.objects(Q(authorizedUsers=user.id) & Q(name__istartswith=keyword))[
+              :10
+              ]
+    chats = Chat.objects(Q(owner=user.id) & Q(title__istartswith=keyword))[:10]
+    NebulusDocuments = NebulusDocument.objects(
+        Q(authorizedUsers=user.id) & Q(name__istartswith=keyword)
     )[:10]
-    assignments = Assignment.objects(
-        Q(course__authorizedUsers=user.id) & Q(title__istartswith=keyword)
-    )[:10]
-    announcements = Announcement.objects(
-        Q(course__authorizedUsers=user.id) & Q(title__istartswith=keyword)
-    )[:10]
-    documents = DocumentFile.objects(
-        Q(course__authorizedUsers=user.id) & Q(name__istartswith=keyword)
-    )[:10]
-    return (
-        courses,
-        documents,
-        chats,
-        events,
-        assignments,
-        announcements,
-        NebulusDocuments,
+
+    events = list(Event.objects().aggregate(
+        pipeline1
+    ))
+    assignments = list(Assignment.objects().aggregate(
+        pipeline1
+    ))
+    announcements = list(Announcement.objects().aggregate(
+        pipeline1
+    ))
+    documents = list(DocumentFile.objects.aggregate(
+        pipeline1
+    ))
+    return {
+        'courses': courses,
+        'documents': documents,
+        'chats': chats,
+        'events': events,
+        'assignments': assignments,
+        'announcements':announcements,
+        'NebulusDocuments': NebulusDocuments,
     )
