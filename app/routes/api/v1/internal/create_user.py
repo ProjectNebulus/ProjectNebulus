@@ -68,7 +68,7 @@ def search_user():
     count = 0
     for i in users:
         count+=1
-        string+=i.avatar
+        string+=(request.root_url+i.avatar.avatar_url)
         string+="•"
         string+=i.username
         string+="•"
