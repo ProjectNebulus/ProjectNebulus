@@ -45,7 +45,7 @@ def get_user_courses(user_id: str) -> List[Course]:
 
 
 def search_user(query: str) -> List[User]:
-    return User.objects(username__contains=query)[:10]
+    return User.objects(username__icontains=query)[:10]
     # return User.objects.filter(username__contains=query)._query
 
 
