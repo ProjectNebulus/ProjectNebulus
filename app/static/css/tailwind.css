@@ -901,7 +901,7 @@ input:checked + .toggle-bg {
   visibility: hidden;
 }
 
-input {
+.input {
   --webkit-user-select: text;
 }
 
@@ -1113,10 +1113,6 @@ html.dark body {
   top: 1rem;
 }
 
-.right-auto {
-  right: auto;
-}
-
 .top-12 {
   top: 3rem;
 }
@@ -1251,11 +1247,6 @@ html.dark body {
   margin-bottom: -0.25rem;
 }
 
-.my-12 {
-  margin-top: 3rem;
-  margin-bottom: 3rem;
-}
-
 .my-3 {
   margin-top: 0.75rem;
   margin-bottom: 0.75rem;
@@ -1269,6 +1260,11 @@ html.dark body {
 .my-6 {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
+}
+
+.my-12 {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 }
 
 .mb-2 {
@@ -1565,6 +1561,14 @@ html.dark body {
   height: 4rem;
 }
 
+.h-72 {
+  height: 18rem;
+}
+
+.h-1 {
+  height: 0.25rem;
+}
+
 .h-36 {
   height: 9rem;
 }
@@ -1581,20 +1585,8 @@ html.dark body {
   height: 3.5rem;
 }
 
-.h-1 {
-  height: 0.25rem;
-}
-
 .h-0 {
   height: 0px;
-}
-
-.h-72 {
-  height: 18rem;
-}
-
-.h-screen {
-  height: 100vh;
 }
 
 .w-24 {
@@ -1912,10 +1904,6 @@ html.dark body {
   grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
-.grid-cols-3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
 .grid-rows-3 {
   grid-template-rows: repeat(3, minmax(0, 1fr));
 }
@@ -1930,10 +1918,6 @@ html.dark body {
 
 .flex-wrap {
   flex-wrap: wrap;
-}
-
-.place-items-center {
-  place-items: center;
 }
 
 .items-start {
@@ -2104,11 +2088,6 @@ html.dark body {
   border-color: rgb(229 231 235 / var(--tw-divide-opacity));
 }
 
-.divide-gray-700 > :not([hidden]) ~ :not([hidden]) {
-  --tw-divide-opacity: 1;
-  border-color: rgb(55 65 81 / var(--tw-divide-opacity));
-}
-
 .self-center {
   align-self: center;
 }
@@ -2214,14 +2193,14 @@ html.dark body {
   border-bottom-left-radius: 0.25rem;
 }
 
-.rounded-t-xl {
-  border-top-left-radius: 0.75rem;
-  border-top-right-radius: 0.75rem;
-}
-
 .rounded-r-md {
   border-top-right-radius: 0.375rem;
   border-bottom-right-radius: 0.375rem;
+}
+
+.rounded-t-xl {
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
 }
 
 .rounded-l {
@@ -2288,10 +2267,6 @@ html.dark body {
 
 .border-b-0 {
   border-bottom-width: 0px;
-}
-
-.border-l-0 {
-  border-left-width: 0px;
 }
 
 .border-t-0 {
@@ -2366,11 +2341,6 @@ html.dark body {
   border-color: rgb(28 100 242 / var(--tw-border-opacity));
 }
 
-.border-gray-700 {
-  --tw-border-opacity: 1;
-  border-color: rgb(55 65 81 / var(--tw-border-opacity));
-}
-
 .border-green-500 {
   --tw-border-opacity: 1;
   border-color: rgb(14 159 110 / var(--tw-border-opacity));
@@ -2389,6 +2359,11 @@ html.dark body {
 .border-yellow-700 {
   --tw-border-opacity: 1;
   border-color: rgb(142 75 16 / var(--tw-border-opacity));
+}
+
+.border-gray-700 {
+  --tw-border-opacity: 1;
+  border-color: rgb(55 65 81 / var(--tw-border-opacity));
 }
 
 .border-gray-900 {
@@ -2533,9 +2508,14 @@ html.dark body {
   background-color: rgb(253 242 242 / var(--tw-bg-opacity));
 }
 
-.bg-gray-700 {
+.bg-gray-400 {
   --tw-bg-opacity: 1;
-  background-color: rgb(55 65 81 / var(--tw-bg-opacity));
+  background-color: rgb(156 163 175 / var(--tw-bg-opacity));
+}
+
+.bg-red-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(224 36 36 / var(--tw-bg-opacity));
 }
 
 .bg-green-100 {
@@ -2556,6 +2536,11 @@ html.dark body {
 .bg-yellow-700 {
   --tw-bg-opacity: 1;
   background-color: rgb(142 75 16 / var(--tw-bg-opacity));
+}
+
+.bg-gray-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity));
 }
 
 .bg-red-400 {
@@ -2598,11 +2583,6 @@ html.dark body {
   background-color: rgb(243 250 247 / var(--tw-bg-opacity));
 }
 
-.bg-red-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(224 36 36 / var(--tw-bg-opacity));
-}
-
 .bg-blue-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(235 245 255 / var(--tw-bg-opacity));
@@ -2631,11 +2611,6 @@ html.dark body {
 .bg-orange-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(254 236 220 / var(--tw-bg-opacity));
-}
-
-.bg-gray-400 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(156 163 175 / var(--tw-bg-opacity));
 }
 
 .bg-red-200 {
@@ -2857,10 +2832,6 @@ html.dark body {
 
 .bg-gradient-to-r {
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
-}
-
-.bg-signin-bg {
-  background-image: url('/static/images/background-images/signin-background.png');
 }
 
 .from-green-400 {
@@ -3101,18 +3072,6 @@ html.dark body {
   fill: #7E3AF2;
 }
 
-.fill-violet-400 {
-  fill: #a78bfa;
-}
-
-.fill-white {
-  fill: #ffffff;
-}
-
-.fill-violet-200 {
-  fill: #ddd6fe;
-}
-
 .stroke-blue-50 {
   stroke: #EBF5FF;
 }
@@ -3339,10 +3298,6 @@ html.dark body {
   padding-bottom: 2.5rem;
 }
 
-.pr-1 {
-  padding-right: 0.25rem;
-}
-
 .pt-6 {
   padding-top: 1.5rem;
 }
@@ -3465,10 +3420,6 @@ html.dark body {
 
 .tracking-tight {
   letter-spacing: -0.025em;
-}
-
-.tracking-wider {
-  letter-spacing: 0.05em;
 }
 
 .tracking-wide {
@@ -3806,12 +3757,6 @@ html.dark body {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.shadow-xl {
-  --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
 .shadow-cyan-500\/50 {
   --tw-shadow-color: rgb(6 182 212 / 0.5);
   --tw-shadow: var(--tw-shadow-colored);
@@ -3878,11 +3823,6 @@ html.dark body {
 
 .blur {
   --tw-blur: blur(8px);
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-
-.blur-sm {
-  --tw-blur: blur(4px);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
@@ -3995,13 +3935,6 @@ html.dark body {
   -webkit-line-clamp: 3;
 }
 
-.line-clamp-4 {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
-}
-
 .line-clamp-5 {
   overflow: hidden;
   display: -webkit-box;
@@ -4035,13 +3968,6 @@ html.dark body {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
-}
-
-.line-clamp-4 {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
 }
 
 .line-clamp-5 {
