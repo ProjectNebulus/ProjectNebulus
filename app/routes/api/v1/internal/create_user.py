@@ -26,8 +26,8 @@ def create_user():
         12: "mountains.png",
         13: "pizza.png",
         14: "popTart.png",
-        15: "v3",
-        16: "v2",
+        15: "v3.gif",
+        16: "v2.gif",
         17: "newBlue.png",
         18: "newGreen.png",
         19: "newJade.png",
@@ -75,6 +75,7 @@ def search_user():
         string+=i.email
         if len(users) - 1 != count:
             string+="•"
+    print(string)
 
 
     return string

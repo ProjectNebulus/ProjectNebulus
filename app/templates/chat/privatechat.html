@@ -94,22 +94,21 @@
 
     </div>
     <script>
-    document.onload = function(){
-        function changeSearch(){
-            let value = document.getElementById("sear").value;
-            if (value.length > 0){
-                const request = $.ajax({
-                    type: "POST",
-                    url: "/api/v1/internal/search-user",
-                    data: JSON.stringify({
-                        search: value
-                    }),
+    function changeSearch(){
+        let value = document.getElementById("sear").value;
+        if (value.length > 0){
+            const request = $.ajax({
+                type: "POST",
+                url: "/api/v1/internal/search-user",
+                data: JSON.stringify({
+                    search: value
+                }),
 
-                    contentType: 'application/json; charset=utf-8',
-                });
-                request.done((data) => {
-                    let datas = data.split("•");
-                    document.getElementById("dalist").innerHTML = `
+                contentType: 'application/json; charset=utf-8',
+            });
+            request.done((data) => {
+                let datas = data.split("•");
+                document.getElementById("dalist").innerHTML = `
                     <li>
                         <form class="w-72 mx-auto my-auto">
                             <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Search</label>
@@ -123,56 +122,58 @@
                         </form>
                     </li>
 `;
-                    let temp_arr = []
-                    if (datas.length === 0) {
-                        document.getElementById("dalist").innerHTML += `
+                console.log(data);
+                let temp_arr = []
+                if (datas.length === 0) {
+                    document.getElementById("dalist").innerHTML += `
                     <li>
-                        <span class="py-2.5 rounded-lg mx-auto block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 w-1/2 dark:hover:text-white" style="text-align:center;">No Results Found!</span>
+                        <span class="py-2.5 rounded-lg mx-auto block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 mx-2 dark:hover:text-white" style="text-align:center;">No Results Found!</span>
                     </li>`
-                    }
-                    else {
-                        for (let i = 0; i < data.length; i++) {
-                            if (i % 3 === 0) {
-                                temp_arr = [];
-                                temp_arr.push(data[i]);
-                            }
-                            if (i % 3 === 1) {
-                                temp_arr.push(data[i]);
-                            }
-                            if (i % 3 === 2) {
-                                temp_arr.push(data[i]);
+                }
+                else {
+                    for (let i = 0; i < datas.length; i++) {
 
-                                document.getElementById("dalist").innerHTML += `
+                        if (i % 3 === 0) {
+                            temp_arr = [];
+                            temp_arr.push(datas[i]);
+                        }
+                        if (i % 3 === 1) {
+                            temp_arr.push(datas[i]);
+                        }
+                        if (i % 3 === 2) {
+                            temp_arr.push(datas[i]);
+                            let element = temp_arr;
+                            console.log(element);
+
+                            document.getElementById("dalist").innerHTML += `
                     <li>
-                        <span class="truncate py-2.5 rounded-lg mx-auto block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 w-1/2 dark:hover:text-white" style="text-align:center;">
+                        <span class="truncate py-2.5 rounded-lg mx-auto block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 mx-2 dark:hover:text-white" style="text-align:left;">
                 <img src="${element[0]}" class="inline-block w-10 h-10 rounded-full">
-                ${element[1]} <span class="text-gray-500 ml-6">${element[2]}</span></span>
+                ${element[1]} <span class="text-gray-500 ml-2">${element[2]}</span></span>
                     </li>
 `
-                            }
                         }
                     }
-                });
                 }
-
-
+            });
         }
-        //setup before functions
-        var typingTimer;                //timer identifier
-        var doneTypingInterval = 3000;  //time in ms, 3 seconds for example
-        var $input = $('#sear');
 
-//on keyup, start the countdown
-        $input.on('keyup', function () {
-            clearTimeout(typingTimer);
-            typingTimer = setTimeout(changeSearch, doneTypingInterval);
-        });
-
-//on keydown, clear the countdown
-        $input.on('keydown', function () {
-            clearTimeout(typingTimer);
-        });
 
     }
+    //setup before functions
+    var typingTimer;                //timer identifier
+    var doneTypingInterval = 3000;  //time in ms, 3 seconds for example
+    var $input = $('#sear');
+
+    //on keyup, start the countdown
+    $input.on('keyup', function () {
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(changeSearch, doneTypingInterval);
+    });
+
+    //on keydown, clear the countdown
+    $input.on('keydown', function () {
+        clearTimeout(typingTimer);
+    });
     </script>
 {% endblock %}
