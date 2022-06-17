@@ -1,4 +1,4 @@
-window.onload = function(){
+
     const siteName = window.location.protocol + "//" + window.location.host;
 
     Array.prototype.insert = (index, item) => this.splice(index, 0, item);
@@ -347,5 +347,4 @@ window.onload = function(){
         link.href = list[index];
     }
 
-    setInterval(changeFavicon, 250)
-}
+    setInterval(changeFavicon, 250);
