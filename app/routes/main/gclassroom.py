@@ -33,6 +33,8 @@ SCOPES = [
 ]
 API_SERVICE_NAME = "classroom"
 API_VERSION = "v1"
+
+
 @main_blueprint.route("/gclassroom")
 @logged_in
 def gtest_api_request():
@@ -71,7 +73,7 @@ def gtest_api_request():
 @main_blueprint.route("/gclassroom/authorize")
 @logged_in
 def authorize():
-    print(flask.request.args.get('state'), flask.session.get('_google_authlib_state_'))
+    print(flask.request.args.get("state"), flask.session.get("_google_authlib_state_"))
 
     # Create flow instance to manage the OAuth 2.0 Authorization Grant Flow steps.
     flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
@@ -82,11 +84,11 @@ def authorize():
     # for the OAuth 2.0 client, which you configured in the API Console. If this
     # value doesn't match an authorized URI, you will get a 'redirect_uri_mismatch'
     # error.
-    flow.redirect_uri = (
-            request.root_url + "gclassroom/oauth2callback"
-    )
+    flow.redirect_uri = request.root_url + "gclassroom/oauth2callback"
     if "http://beta.nebulus.ml" in flow.redirect_uri:
-        flow.redirect_uri = str(flow.redirect_uri).replace("http://beta.nebulus.ml", "https://beta.nebulus.ml")
+        flow.redirect_uri = str(flow.redirect_uri).replace(
+            "http://beta.nebulus.ml", "https://beta.nebulus.ml"
+        )
     print(request.root_url.replace("http", "https") + "gclassroom/oauth2callback")
     authorization_url, state = flow.authorization_url(
         # Enable offline access so that you can refresh an access token without
@@ -116,11 +118,13 @@ def oauth2callback():
     flow.redirect_uri = flask.url_for("main_blueprint.oauth2callback", _external=True)
     print(flow.redirect_uri)
     # Use the authorization server's response to fetch the OAuth 2.0 tokens.
-    #authorization_response = flask.request.url
-    authorization_response = session["redirect_url_g"]+"&code="+request.args.get("code")
+    # authorization_response = flask.request.url
+    authorization_response = (
+        session["redirect_url_g"] + "&code=" + request.args.get("code")
+    )
     if "http://beta.nebulus.ml" in authorization_response:
         authorization_response = authorization_response.replace("http", "https")
-    #flow.fetch_token(authorization_response=authorization_response)
+    # flow.fetch_token(authorization_response=authorization_response)
     flow.fetch_token(authorization_response=authorization_response)
     # Store credentials in the session.
     # ACTION ITEM: In a production app, you likely want to save these

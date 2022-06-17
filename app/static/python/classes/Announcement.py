@@ -26,4 +26,4 @@ class Announcement(Snowflake):
         ["User#2: "Message"]
     ]
     """
-    comments = ListField(ListField(ReferenceField('User'), StringField()))
+    comments = ListField(ListField(ReferenceField("User"), StringField()))

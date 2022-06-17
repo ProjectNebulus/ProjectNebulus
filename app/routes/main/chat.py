@@ -62,7 +62,7 @@ def chatPage(page):
                 # print(thread)
                 info["message"] = thread[-1]["message"]
                 info["message"] = info["message"][:100] + "..." * (
-                        len(info["message"]) > 100
+                    len(info["message"]) > 100
                 )
                 newThread = []
                 for threadItem in thread:

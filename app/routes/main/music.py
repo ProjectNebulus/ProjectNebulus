@@ -30,9 +30,9 @@ def search(query):
         for i in range(0, len(search_keyword)):
             if " " == search_keyword[i]:
                 search_keyword = (
-                        search_keyword[0:i]
-                        + "%20"
-                        + search_keyword[i + 1: len(search_keyword)]
+                    search_keyword[0:i]
+                    + "%20"
+                    + search_keyword[i + 1 : len(search_keyword)]
                 )
                 break
 
@@ -90,7 +90,7 @@ class Musixmatch(object):
         return request
 
     def chart_tracks_get(
-            self, page, page_size, f_has_lyrics, country="us", _format="json"
+        self, page, page_size, f_has_lyrics, country="us", _format="json"
     ):
         """This api provides you the list
         of the top songs of a given country.
@@ -151,12 +151,12 @@ class Musixmatch(object):
         return data
 
     def track_get(
-            self,
-            track_id,
-            commontrack_id=None,
-            track_isrc=None,
-            track_mbid=None,
-            _format="json",
+        self,
+        track_id,
+        commontrack_id=None,
+        track_isrc=None,
+        track_mbid=None,
+        _format="json",
     ):
         """Get a track info from our database:
         title, artist, instrumental flag and cover art.
@@ -208,13 +208,13 @@ class Musixmatch(object):
         return data
 
     def track_subtitle_get(
-            self,
-            track_id,
-            track_mbid=None,
-            subtitle_format=None,
-            f_subtitle_length=None,
-            f_subtitle_length_max_deviation=None,
-            _format="json",
+        self,
+        track_id,
+        track_mbid=None,
+        subtitle_format=None,
+        f_subtitle_length=None,
+        f_subtitle_length_max_deviation=None,
+        _format="json",
     ):
         """Retreive the subtitle of a track.
         Return the subtitle of a track in LRC or DFXP format.
@@ -250,11 +250,11 @@ class Musixmatch(object):
         return data
 
     def track_richsync_get(
-            self,
-            track_id,
-            f_sync_length=None,
-            f_sync_length_max_deviation=None,
-            _format="json",
+        self,
+        track_id,
+        f_sync_length=None,
+        f_sync_length_max_deviation=None,
+        _format="json",
     ):
         """Get the Rich sync for a track.
         A rich sync is an enhanced version of the
@@ -374,13 +374,13 @@ class Musixmatch(object):
         return data
 
     def matcher_subtitle_get(
-            self,
-            q_track,
-            q_artist,
-            f_subtitle_length,
-            f_subtitle_length_max_deviation,
-            track_isrc=None,
-            _format="json",
+        self,
+        q_track,
+        q_artist,
+        f_subtitle_length,
+        f_subtitle_length_max_deviation,
+        track_isrc=None,
+        _format="json",
     ):
         """Get the subtitles for a song given his title,artist and duration.
         You can use the f_subtitle_length_max_deviation to fetch subtitles
@@ -429,7 +429,7 @@ class Musixmatch(object):
         return data
 
     def artist_search(
-            self, q_artist, page, page_size, f_artist_id, f_artist_mbid, _format="json"
+        self, q_artist, page, page_size, f_artist_id, f_artist_mbid, _format="json"
     ):
         """Search for artists in our database.
         Parameters:
@@ -458,14 +458,14 @@ class Musixmatch(object):
         return data
 
     def artist_albums_get(
-            self,
-            artist_id,
-            g_album_name,
-            page,
-            page_size,
-            s_release_date,
-            artist_mbid=None,
-            _format="json",
+        self,
+        artist_id,
+        g_album_name,
+        page,
+        page_size,
+        s_release_date,
+        artist_mbid=None,
+        _format="json",
     ):
         """Get the album discography of an artist.
         Parameters:
@@ -497,7 +497,7 @@ class Musixmatch(object):
         return data
 
     def artist_related_get(
-            self, artist_id, page, page_size, artist_mbid=None, _format="json"
+        self, artist_id, page, page_size, artist_mbid=None, _format="json"
     ):
         """Get a list of artists somehow related to a given one.
         Parameters:
@@ -536,7 +536,7 @@ class Musixmatch(object):
         return data
 
     def album_tracks_get(
-            self, album_id, page, page_size, album_mbid, f_has_lyrics=None, _format="json"
+        self, album_id, page, page_size, album_mbid, f_has_lyrics=None, _format="json"
     ):
         """This api provides you the list of the songs of an album.
         Parameters:
@@ -784,9 +784,9 @@ def music_post():
             for i in range(0, len(search_keyword)):
                 if " " == search_keyword[i]:
                     search_keyword = (
-                            search_keyword[0:i]
-                            + "%20"
-                            + search_keyword[i + 1: len(search_keyword)]
+                        search_keyword[0:i]
+                        + "%20"
+                        + search_keyword[i + 1 : len(search_keyword)]
                     )
                     break
         search_keyword = urllib.parse.quote(search_keyword, encoding="UTF-8")

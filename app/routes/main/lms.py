@@ -124,10 +124,10 @@ def lms():
             for i in range(0, len(scCourses)):
                 scCourses[i] = dict(scCourses[i])
                 scCourses[i]["link"] = (
-                        schoology.schoologyDomain
-                        + "course/"
-                        + scCourses[i]["id"]
-                        + "/materials"
+                    schoology.schoologyDomain
+                    + "course/"
+                    + scCourses[i]["id"]
+                    + "/materials"
                 )
             scSchool = sc.get_school(scCourses[0]["school_id"])
             scCourses.append(scSchool)

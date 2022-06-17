@@ -80,8 +80,8 @@ def createEvent(data: dict) -> Event:
     return event
 
 
-def createNebulusDocument(data: dict, user_id: str) ->  NebulusDocument:
-    data['owner'] = user_id
+def createNebulusDocument(data: dict, user_id: str) -> NebulusDocument:
+    data["owner"] = user_id
     doc = NebulusDocument(**data)
 
     doc.save(force_insert=True)

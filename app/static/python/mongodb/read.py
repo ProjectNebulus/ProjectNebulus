@@ -45,12 +45,13 @@ def get_user_courses(user_id: str) -> List[Course]:
 
 def search_user(query: str) -> List[User]:
     return User.objects(username__contains=query)
-    #return User.objects.filter(username__contains=query)._query
+    # return User.objects.filter(username__contains=query)._query
 
-def search_within_course(query:str, course_id:str):
-    assignments = Assignment.objects(course_id = course_id, title__contains = query)
-    events = Event.objects(course_id = course_id, title__contains = query)
-    document_file = DocumentFile.objects(course_id = course_id, title__contains = query)
+
+def search_within_course(query: str, course_id: str):
+    assignments = Assignment.objects(course_id=course_id, title__contains=query)
+    events = Event.objects(course_id=course_id, title__contains=query)
+    document_file = DocumentFile.objects(course_id=course_id, title__contains=query)
 
 
 def find_courses(_id: str):
@@ -58,7 +59,6 @@ def find_courses(_id: str):
     if not course:
         raise KeyError("Course not found")
     return course[0]
-
 
 
 def find_user(**kwargs) -> User | Response | None:
@@ -94,7 +94,7 @@ def getSchoology(**kwargs) -> List[Schoology] | None:
 
 
 def getClassroom(
-        userID: str = None, username: str = None, email: str = None
+    userID: str = None, username: str = None, email: str = None
 ) -> GoogleClassroom:
     return find_user(id=userID, username=username, email=email).gclassroom
 
@@ -104,7 +104,7 @@ def getSpotify(userID: str = None, username: str = None, email: str = None) -> S
 
 
 def getSpotifyCache(
-        userID: str = None, username: str = None, email: str = None
+    userID: str = None, username: str = None, email: str = None
 ) -> Spotify | None:
     try:
         return find_user(
@@ -204,8 +204,8 @@ def sort_course_events(user_id: str, course_id: int):
                 {
                     key: list(result)
                     for key, result in groupby(
-                    sorted_announcements, key=lambda obj: obj.date.date()
-                )
+                        sorted_announcements, key=lambda obj: obj.date.date()
+                    )
                 }.items()
             )
         )
@@ -241,8 +241,8 @@ def sort_user_events(user_id: str, maxDays=8, maxEvents=16):
                 {
                     key: list(result)
                     for key, result in groupby(
-                    sorted_announcements, key=lambda obj: obj.date.date()
-                )
+                        sorted_announcements, key=lambda obj: obj.date.date()
+                    )
                 }.items()
             )[-maxDays:]
         )
@@ -330,37 +330,62 @@ def getPlanner(user_id: str):
         "name": planner.name,
         "saveData": planner.saveData,
         "periods": planner.periods,
-        "lastEdited": planner.lastEdited
+        "lastEdited": planner.lastEdited,
     }
 
 
-def getDocument(document_id:str): # Nebulus Document
+def getDocument(document_id: str):  # Nebulus Document
     doc = NebulusDocument.objects(pk=document_id)
     if not doc:
         raise KeyError("Invalid Document ID")
     return doc
 
 
-def search(keyword: str, username:str):
+def search(keyword: str, username: str):
     user = User.objects(username=username).first()
-    courses = Course.objects(Q(authorizedUsers=user.id) & Q(name__istartswith=keyword))[:10]
+    courses = Course.objects(Q(authorizedUsers=user.id) & Q(name__istartswith=keyword))[
+        :10
+    ]
     chats = Chat.objects(Q(owner=user.id) & Q(title__istartswith=keyword))[:10]
-    NebulusDocuments = NebulusDocument.objects(Q(authorized__users=user.id) & Q(name__istartswith=keyword))[:10]
+    NebulusDocuments = NebulusDocument.objects(
+        Q(authorized__users=user.id) & Q(name__istartswith=keyword)
+    )[:10]
 
-    events = Event.objects().aggregate([
-    {"$match":{}},
-    {"$lookup":{
-        "from": TickDocument._get_collection_name(),
-        "localField": "tick_data",
-        "foreignField": "_id",
-        "as": "tick"
-    }},
-    {"$match":{
-        "tick.update_time":{"$lt":datetime.datetime(2013,9,3)}
-    }}
-])
-    assignments = Assignment.objects(Q(course__authorizedUsers=user.id) & Q(title__istartswith=keyword))[:10]
-    announcements = Announcement.objects(Q(course__authorizedUsers=user.id) & Q(title__istartswith=keyword))[:10]
-    documents = DocumentFile.objects(Q(course__authorizedUsers=user.id) & Q(name__istartswith=keyword))[:10]
-    return courses, documents, chats, events, assignments, announcements, NebulusDocuments
-
+    events = Event.objects().aggregate(
+        [
+            {"$match":
+                 {"title":
+                      { "$regex": f'^{keyword}', '$options': 'i' }
+                  }
+             },
+            {
+                "$lookup": {
+                    "from": Course._get_collection_name(),
+                    "localField": "course",
+                    "foreignField": "_id",
+                    "as": "course",
+                }
+            },
+            {"$match":
+                 {"course.authorizedUsers": user.pk}
+             },
+        ]
+    )[:10]
+    assignments = Assignment.objects(
+        Q(course__authorizedUsers=user.id) & Q(title__istartswith=keyword)
+    )[:10]
+    announcements = Announcement.objects(
+        Q(course__authorizedUsers=user.id) & Q(title__istartswith=keyword)
+    )[:10]
+    documents = DocumentFile.objects(
+        Q(course__authorizedUsers=user.id) & Q(name__istartswith=keyword)
+    )[:10]
+    return (
+        courses,
+        documents,
+        chats,
+        events,
+        assignments,
+        announcements,
+        NebulusDocuments,
+    )
