@@ -1,5 +1,7 @@
 from datetime import datetime
+from pathlib import Path
 
+import os
 import google.oauth2.credentials
 import schoolopy
 from flask import session, request
@@ -312,6 +314,7 @@ def create_schoology_course():
         return rq.url  # rq["url"]
 
     documents = []
+    from .....static.python.cdn.utils import upload_file_link
     for scdocument in scdocuments:
         document = {}
         document["schoology_id"] = scdocument["id"]
@@ -323,10 +326,21 @@ def create_schoology_course():
         document["course"] = str(course_obj.id)
         document["imported_from"] = "Schoology"
         document["imported_id"] = str(scdocument["id"])
-        create.createDocumentFile(document)
-        print(document)
 
-        # document["attachment"] = scdocument["attachments"] (Won't work until we have CDN!)
+        upload_file_link(document["attachments"])
+        filename = link.split("/")[-1]
+        mongo_document = create.createDocumentFile(
+            {
+                "name": document["name"],
+                "course": document["course"],
+                "file_ending": document["file_ending"],
+                "imported_from": "Schoology",
+                "imported_id": document["imported_id"],
+                "url": "https://nebulus-cdn.sfo3.cdn.digitaloceanspaces.com/" + filename,
+
+            }
+        )
+        print(document)
         documents.append(document)
     print(documents)
 

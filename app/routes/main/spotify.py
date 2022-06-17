@@ -268,7 +268,7 @@ def GET_currently_playing():
     if spotify == 0:
         return 2
     elif spotify == 1:
-        return redirect("/spotify")
+        return 3
 
     track = spotify.current_user_playing_track()
     if track is not None:
