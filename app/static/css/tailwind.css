@@ -5694,6 +5694,11 @@ html.dark body {
     display: block;
   }
 
+  .lg\:sticky {
+      position: -webkit-sticky;
+      position: sticky;
+  }
+
   .lg\:flex {
     display: flex;
   }

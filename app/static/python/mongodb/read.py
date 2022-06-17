@@ -2,16 +2,15 @@ from __future__ import annotations
 
 import re
 from typing import List
-from mongoengine import Q
 
 import schoolopy
 from flask import Response, session
+from mongoengine import DoesNotExist, Q
 
 from ..classes import *
 from ..security import valid_password
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
-
 
 
 def getAssignment(assignment_id: str) -> Assignment:
@@ -45,14 +44,8 @@ def get_user_courses(user_id: str) -> List[Course]:
 
 
 def search_user(query: str) -> List[User]:
-    return User.objects(username__contains=query)[:10]
+    return User.objects(username__contains=query)
     # return User.objects.filter(username__contains=query)._query
-
-
-def search_within_course(query: str, course_id: str):
-    assignments = Assignment.objects(course_id=course_id, title__contains=query)
-    events = Event.objects(course_id=course_id, title__contains=query)
-    document_file = DocumentFile.objects(course_id=course_id, title__contains=query)
 
 
 def find_courses(_id: str):
@@ -65,6 +58,7 @@ def find_courses(_id: str):
 def find_user(**kwargs) -> User | Response | None:
     data = {k: v for k, v in kwargs.items() if v is not None}
     user = User.objects(**data).first()
+
     if not user:
         raise KeyError("User not found")
 
@@ -169,6 +163,7 @@ def sortByDate(obj):
 
 
 def sortByDateTime(obj):
+    cleanDB()
     return obj.date if obj._cls == "Event" else obj.due
 
 
@@ -331,8 +326,35 @@ def getPlanner(user_id: str):
         "name": planner.name,
         "saveData": planner.saveData,
         "periods": planner.periods,
-        "lastEdited": planner.lastEdited,
+        "lastEdited": planner.lastEdited
     }
+
+
+def cleanDB(options=("announcements", "avatars")):
+    """Put this function in one that is called after database initialization, such as the getPlanner function above."""
+
+    if "announcements" in options:
+        for a in Announcement.objects():
+            try:
+                Course.objects(id=a.course.id)
+            except DoesNotExist:
+                a.delete()
+
+    if "avatars" in options:
+        for user in User.objects():
+            save = False
+
+            if "http" in user.avatar.avatar_url:
+                user.avatar.avatar_url = user.avatar.avatar_url.replace("http://localhost:8080", "") \
+                    .replace("https://localhost:8080", "").replace("https://beta.nebulus.ml", "")
+                save = True
+
+            if "static/images/nebulusCats" not in user.avatar.avatar_url:
+                user.avatar.avatar_url = "static/images/nebulusCats" + user.avatar.avatar_url
+                save = True
+
+            if save:
+                user.save(validate=False)
 
 
 def getDocument(document_id: str):  # Nebulus Document
@@ -346,49 +368,39 @@ def search(keyword: str, username: str):
     user = User.objects(username=username).first()
     users = search_user(keyword)
     pipeline1 = [
-            {"$match":
-                 {"title":
-                      {"$regex": f'^{keyword}', '$options': 'i'}
-                  }
-             },
-            {
-                "$lookup": {
-                    "from": Course._get_collection_name(),
-                    "localField": "course",
-                    "foreignField": "_id",
-                    "as": "course",
-                }
-            },
-            {"$match":
-                 {"course.authorizedUsers": user.pk}
-             },
-            {"$project":
-                 {
-                     "title": 1,
-                     "_id": 1
-                 }
+        {"$match":
+             {"title":
+                  {"$regex": f'^{keyword}', '$options': 'i'}
+              }
+         },
+        {
+            "$lookup": {
+                "from": Course._get_collection_name(),
+                "localField": "course",
+                "foreignField": "_id",
+                "as": "course",
             }
-        ]
-    courses = Course.objects(Q(authorizedUsers=user.id) & Q(name__istartswith=keyword))[
-              :10
-              ]
+        },
+        {"$match":
+             {"course.authorizedUsers": user.pk}
+         },
+        {"$project":
+            {
+                "title": 1,
+                "_id": 1
+            }
+        }
+    ]
+    courses = Course.objects(Q(authorizedUsers=user.id) & Q(name__istartswith=keyword))[:10]
     chats = Chat.objects(Q(owner=user.id) & Q(title__istartswith=keyword))[:10]
     NebulusDocuments = NebulusDocument.objects(
         Q(authorizedUsers=user.id) & Q(name__istartswith=keyword)
     )[:10]
 
-    events = list(Event.objects().aggregate(
-        pipeline1
-    ))
-    assignments = list(Assignment.objects().aggregate(
-        pipeline1
-    ))
-    announcements = list(Announcement.objects().aggregate(
-        pipeline1
-    ))
-    documents = list(DocumentFile.objects.aggregate(
-        pipeline1
-    ))
+    events = list(Event.objects().aggregate(pipeline1))
+    assignments = list(Assignment.objects().aggregate(pipeline1))
+    announcements = list(Announcement.objects().aggregate(pipeline1))
+    documents = list(DocumentFile.objects().aggregate(pipeline1))
     return (
         courses,
         documents,
@@ -401,5 +413,5 @@ def search(keyword: str, username: str):
     )
 
 
-def search_course(keyword:str, course_id:str):
+def search_course(keyword: str, course_id: str):
     pass

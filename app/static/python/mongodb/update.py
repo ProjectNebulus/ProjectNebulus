@@ -1,6 +1,5 @@
-from ..classes import Announcement, Course
-from ..classes.Planner import Planner
-from ..classes.Schoology import Schoology
+from ..classes import *
+from ..classes import Schoology
 
 
 def schoologyLogin(_id: str, schoology: dict):
@@ -62,7 +61,6 @@ def savePlanner(data: dict, user_id):
 
 def saveConfig(configs: list, user_id):
     from .read import find_user
-
     user = find_user(id=user_id)
 
     if not user.planner:
@@ -72,13 +70,6 @@ def saveConfig(configs: list, user_id):
     user.save(validate=False)
 
     return "true"
-
-
-def cleanDB():
-    for a in Announcement.objects():
-        if not len(Course.objects(id=a.course.id)):
-            a.delete()
-
 
 def changeNebulusDocument(_id: str, document: dict):
     from .read import find_user
