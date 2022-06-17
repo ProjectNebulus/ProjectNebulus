@@ -409,22 +409,25 @@
                             let element = temp_arr;
                             //console.log(element);
                             let pic = `<img src="${element[3]}" class="inline-block w-10 h-10 rounded-full">`;
-                            if (temp[0] === "course"){
+                            if (temp_arr[0] === "account"){
+                                pic = `<img src="${element[3]}" class="inline-block w-10 h-10 rounded-full">`;
+                            }
+                        else if (temp_arr[0] === "course"){
                                 pic = `<img src="${element[3]}" style="object-fit: cover; border-radius:10px;display: inline-block;" class="inline-block w-10 h-10 rounded-full">`;
                             }
-                            if (temp_arr[0] === "document"){
+                            else if (temp_arr[0] === "document"){
                                 pic = `<i class="material-icons">description</i>`
                             }
-                            if (temp_arr[0] === "NebDoc"){
+                            else if (temp_arr[0] === "NebDoc"){
                                 pic = `<i class="material-icons">draft</i>`
                             }
-                            if (temp_arr[0] === "event"){
+                            else if (temp_arr[0] === "event"){
                                 pic = `<i class="material-icons">event</i>`
                             }
-                            if (temp_arr[0] === "assignment"){
+                            else if (temp_arr[0] === "assignment"){
                                 pic = `<i class="material-icons">assignment</i>`
                             }
-                            if (temp_arr[0] === "chat"){
+                            else if (temp_arr[0] === "chat"){
                                 pic = `<i class="material-icons">forum</i>`
                             }
                             if (temp_arr[0] === "announcement"){

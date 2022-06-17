@@ -98,13 +98,7 @@ def search_within_user():
             course.avatar.avatar_url
         ])
 
-    for account in accounts:
-        everything.append([
-            "NebDoc", #type
-            account.username, #name
-            account.email, #description
-            account.avatar.avatar_url
-        ])
+
     for document in documents:
         everything.append([
             "document", #type
@@ -157,6 +151,13 @@ def search_within_user():
             "a"
         ])
 
+    for account in accounts:
+        everything.append([
+            "account", #type
+            account.username, #name
+            account.email, #description
+            account.avatar.avatar_url
+        ])
 
 
     for i in everything:
@@ -168,9 +169,9 @@ def search_within_user():
         string += i[2]
         string += "•"
         string += i[3]
-        if len(users) != count:
+        if len(everything) != count:
             string += "•"
-    if len(users) == 0:
+    if len(everything) == 0:
         return "0"
 
     return string
