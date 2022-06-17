@@ -335,14 +335,26 @@ def getDocument(document_id:str): # Nebulus Document
     return doc
 
 
-def search(keyword: str, id:str):
-    user = User.objects(pk=id).first()
+def search(keyword: str, username:str):
+    user = User.objects(username=username).first()
     courses = Course.objects(Q(authorizedUsers=user.id) & Q(name__istartswith=keyword))[:10]
-    documents = DocumentFile.objects(Q(course__authorizedUsers=user.id) & Q(name__istartswith=keyword))[:10]
     chats = Chat.objects(Q(owner=user.id) & Q(title__istartswith=keyword))[:10]
-    events = Event.objects(Q(course__authorizedUsers=user.id) & Q(title__istartswith=keyword))[:10]
+    NebulusDocuments = NebulusDocument.objects(Q(authorized__users=user.id) & Q(name__istartswith=keyword))[:10]
+
+    events = Event.objects().aggregate([
+    {"$match":{}},
+    {"$lookup":{
+        "from": TickDocument._get_collection_name(),
+        "localField": "tick_data",
+        "foreignField": "_id",
+        "as": "tick"
+    }},
+    {"$match":{
+        "tick.update_time":{"$lt":datetime.datetime(2013,9,3)}
+    }}
+])
     assignments = Assignment.objects(Q(course__authorizedUsers=user.id) & Q(title__istartswith=keyword))[:10]
     announcements = Announcement.objects(Q(course__authorizedUsers=user.id) & Q(title__istartswith=keyword))[:10]
-    NebulusDocuments = NebulusDocument.objects(Q(authorized__users=user.id) & Q(name__istartswith=keyword))[:10]
+    documents = DocumentFile.objects(Q(course__authorizedUsers=user.id) & Q(name__istartswith=keyword))[:10]
     return courses, documents, chats, events, assignments, announcements, NebulusDocuments
 
