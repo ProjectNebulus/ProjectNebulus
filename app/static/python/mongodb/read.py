@@ -45,7 +45,7 @@ def get_user_courses(user_id: str) -> List[Course]:
 
 
 def search_user(query: str) -> List[User]:
-    return User.objects(username__contains=query)
+    return User.objects(username__contains=query)[:10]
     # return User.objects.filter(username__contains=query)._query
 
 
@@ -344,6 +344,7 @@ def getDocument(document_id: str):  # Nebulus Document
 
 def search(keyword: str, username: str):
     user = User.objects(username=username).first()
+    users = search_user(keyword)
     pipeline1 = [
             {"$match":
                  {"title":
@@ -396,4 +397,9 @@ def search(keyword: str, username: str):
         assignments,
         announcements,
         NebulusDocuments,
+        users
     )
+
+
+def search_course(keyword:str, course_id:str):
+    pass
