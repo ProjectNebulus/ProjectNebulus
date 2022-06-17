@@ -63,7 +63,6 @@ def search_user():
     data = request.get_json()
     data = data["search"]
     users = read.search_user(data)
-    print(users)
     string = ""
     count = 0
     for i in users:
@@ -73,9 +72,10 @@ def search_user():
         string+=i.username
         string+="•"
         string+=i.email
-        if len(users) - 1 != count:
+        if len(users) != count:
             string+="•"
-    print(string)
+    if len(users) == 0:
+        return "0"
 
 
     return string
