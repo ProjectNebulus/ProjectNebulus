@@ -112,17 +112,25 @@ def search_within_user():
             chat.avatar.avatar_url
         ])
     for event in events:
+        try:
+            de = event["description"]
+        except:
+            de = ""
         everything.append([
             "event", #type
             event["title"], #name
-            event["description"], #description
+            de, #description
             "a"
         ])
     for assignment in assignments:
+        try:
+            de = assignment["description"]
+        except:
+            de = ""
         everything.append([
             "assignment", #type
-            assignment.title, #name
-            assignment.description, #description
+            assignment["title"], #name
+            de, #description
             "a"
         ])
     for announcement in announcements:

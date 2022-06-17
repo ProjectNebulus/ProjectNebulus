@@ -388,12 +388,12 @@ def search(keyword: str, username: str):
     documents = list(DocumentFile.objects.aggregate(
         pipeline1
     ))
-    return {
-        'courses': courses,
-        'documents': documents,
-        'chats': chats,
-        'events': events,
-        'assignments': assignments,
-        'announcements':announcements,
-        'NebulusDocuments': NebulusDocuments,
-    }
+    return (
+        courses,
+        documents,
+        chats,
+        events,
+        assignments,
+        announcements,
+        NebulusDocuments,
+    )
