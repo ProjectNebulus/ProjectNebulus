@@ -79,3 +79,26 @@ def search_user():
 
 
     return string
+
+@internal.route("/search-within_course", methods=["POST"])
+def search_within_course():
+    data = request.get_json()
+    data = data["search"]
+    course = data["course_id"]
+    users = read.search_within_course(data)
+    string = ""
+    count = 0
+    for i in users:
+        count+=1
+        string+=(request.root_url+i.avatar.avatar_url)
+        string+="•"
+        string+=i.username
+        string+="•"
+        string+=i.email
+        if len(users) != count:
+            string+="•"
+    if len(users) == 0:
+        return "0"
+
+
+    return string

@@ -47,12 +47,18 @@ def search_user(query: str) -> List[User]:
     return User.objects(username__contains=query)
     #return User.objects.filter(username__contains=query)._query
 
+def search_within_course(query:str, course_id:str):
+    assignments = Assignment.objects(course_id = course_id, title__contains = query)
+    events = Event.objects(course_id = course_id, title__contains = query)
+    document_file = DocumentFile.objects(course_id = course_id, title__contains = query)
+
 
 def find_courses(_id: str):
     course = Course.objects(pk=_id)
     if not course:
         raise KeyError("Course not found")
     return course[0]
+
 
 
 def find_user(**kwargs) -> User | Response | None:
