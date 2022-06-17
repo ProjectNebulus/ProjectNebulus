@@ -33,3 +33,4 @@ from app.routes.main.files import *
 from app.routes.main.notepad import *
 from app.routes.main.planner import *
 from app.routes.main.study import *
+from app.routes.main.soon import *
