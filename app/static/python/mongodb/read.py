@@ -396,4 +396,4 @@ def search(keyword: str, username: str):
         'assignments': assignments,
         'announcements':announcements,
         'NebulusDocuments': NebulusDocuments,
-    )
+    }
