@@ -348,38 +348,38 @@ def search(keyword: str, username: str):
     ]
     chats = Chat.objects(Q(owner=user.id) & Q(title__istartswith=keyword))[:10]
     NebulusDocuments = NebulusDocument.objects(
-        Q(authorized__users=user.id) & Q(name__istartswith=keyword)
+        Q(authorizedUsers=user.id) & Q(name__istartswith=keyword)
     )[:10]
-
-    events = Event.objects().aggregate(
-        [
-            {"$match":
-                 {"title":
-                      { "$regex": f'^{keyword}', '$options': 'i' }
-                  }
-             },
-            {
-                "$lookup": {
-                    "from": Course._get_collection_name(),
-                    "localField": "course",
-                    "foreignField": "_id",
-                    "as": "course",
-                }
-            },
-            {"$match":
-                 {"course.authorizedUsers": user.pk}
-             },
-        ]
+    aggregation_query = [
+        {"$match":
+             {"title":
+                  { "$regex": f'^{keyword}', '$options': 'i' }
+              }
+         },
+        {
+            "$lookup": {
+                "from": Course._get_collection_name(),
+                "localField": "course",
+                "foreignField": "_id",
+                "as": "course",
+            }
+        },
+        {"$match":
+             {"course.authorizedUsers": user.pk}
+         },
+    ]
+    events = list(Event.objects().aggregate(
+        aggregation_query)
     )[:10]
     assignments = Assignment.objects(
-        Q(course__authorizedUsers=user.id) & Q(title__istartswith=keyword)
-    )[:10]
+         Q(title__istartswith=keyword)
+    )[:10] #Q(course__authorizedUsers=user.id) &
     announcements = Announcement.objects(
-        Q(course__authorizedUsers=user.id) & Q(title__istartswith=keyword)
-    )[:10]
+         Q(title__istartswith=keyword)
+    )[:10] #Q(course__authorizedUsers=user.id) &
     documents = DocumentFile.objects(
-        Q(course__authorizedUsers=user.id) & Q(name__istartswith=keyword)
-    )[:10]
+         Q(name__istartswith=keyword)
+    )[:10] #Q(course__authorizedUsers=user.id) &
     return (
         courses,
         documents,
