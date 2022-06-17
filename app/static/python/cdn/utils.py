@@ -1,15 +1,38 @@
 import os
+import zlib
 
 import requests
 
-# from spaces import Client
+from spaces import Client
 
-ACCESS_ID = "VCRH4QOPCDEQR5PFNPQM"
-SECRET_KEY = "Vx3pqPbLTGlSvNAhfxPFDto8CskcWOXOjvcW0ziwXys"
+ACCESS_ID = "5POV4IR5H2XWALCF7KWY"
+SECRET_KEY = "j7k9MO7SXueLeEbkXdYBAlaZ7XfC1EMdqV3w9KrceHQ"
 
 
 def upload_file(path, filename, bucket_folder):
     # Initiate session
+    import zlib, sys
+
+    filename_in = path
+    filename_out = path
+
+    with open(filename_in, mode="rb") as fin, open(filename_out, mode="wb") as fout:
+        data = fin.read()
+        compressed_data = zlib.compress(data, zlib.Z_BEST_COMPRESSION)
+        print(f"Original size: {sys.getsizeof(data)}")
+        # Original size: 1000033
+        print(f"Compressed size: {sys.getsizeof(compressed_data)}")
+        # Compressed size: 1024
+
+        fout.write(compressed_data)
+
+    with open(filename_out, mode="rb") as fin:
+        data = fin.read()
+        compressed_data = zlib.decompress(data)
+        print(f"Compressed size: {sys.getsizeof(data)}")
+        # Compressed size: 1024
+        print(f"Decompressed size: {sys.getsizeof(compressed_data)}")
+        # Decompressed size: 1000033
     client = Client(
         region_name="sfo3",
         space_name="nebulus-cdn",

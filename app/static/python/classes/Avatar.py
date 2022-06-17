@@ -21,4 +21,4 @@ class Avatar(EmbeddedDocument):
 
     def clean(self):
         if not self.avatar_url:
-            self.avatar_url = f"https://cdn.nebulus.ml/Avatars/{self.parent}/{self.id}"
+            self.avatar_url = f"https://nebulus-cdn.sfo3.cdn.digitaloceanspaces.com/Avatars/{self.parent}/{self.id}"

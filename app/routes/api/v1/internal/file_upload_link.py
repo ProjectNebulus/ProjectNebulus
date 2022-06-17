@@ -30,7 +30,7 @@ def upload_file_link():
         create.createDocumentFile(
             {
                 "name": filename,
-                "url": "https://cdn.nebulus.ml/" + filename,
+                "url": "https://nebulus-cdn.sfo3.cdn.digitaloceanspaces.com/" + filename,
                 "course": course,
             }
         )
@@ -38,7 +38,7 @@ def upload_file_link():
         create.createDocumentFile(
             {
                 "name": filename,
-                "url": "https://cdn.nebulus.ml/" + filename,
+                "url": "https://nebulus-cdn.sfo3.cdn.digitaloceanspaces.com/" + filename,
                 "course": course,
                 "folder": folder,
             }

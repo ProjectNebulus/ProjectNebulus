@@ -26,7 +26,7 @@ class DocumentFile(Snowflake):
         Validates the Document.
         """
         if not self.url:
-            self.url = f"https://cdn.nebulus.ml/Documents/{self.pk}"
+            self.url = f"https://nebulus-cdn.sfo3.cdn.digitaloceanspaces.com/Documents/{self.pk}"
         if self.folder is not None and self.course is not None:
             raise ValidationError(
                 "Document cannot be linked to both a folder and a course."
