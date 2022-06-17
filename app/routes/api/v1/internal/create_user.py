@@ -64,4 +64,17 @@ def search_user():
     data = data["search"]
     users = read.search_user(data)
     print(users)
-    return users
+    string = ""
+    count = 0
+    for i in users:
+        count+=1
+        string+=i.avatar
+        string+="•"
+        string+=i.username
+        string+="•"
+        string+=i.email
+        if len(users) - 1 != count:
+            string+="•"
+
+
+    return string
