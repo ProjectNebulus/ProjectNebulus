@@ -91,3 +91,11 @@ def changeNebulusDocument(_id: str, document: dict):
     user.nebulus_documents = planner
     user.save(clean=False)
     return "true"
+
+def changeCourse(course_id, course_name, course_teacher):
+    from .read import find_courses
+    course = find_courses(course_id)
+    course.name = course_name
+    course.teacher = course_teacher
+    course.save(clean=False)
+    return "true"

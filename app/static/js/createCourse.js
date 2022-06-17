@@ -14,7 +14,7 @@ for (const h3 of modal.getElementsByTagName("h3"))
     h3.className += " flex justify-between items-start p-5 rounded-t border-b border-gray-300 dark:border-gray-600 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white"
 
 for (const list of templateLists)
-    list.classList.add("hover:scroll");
+    list.classList.add("scroll");
 
 btn.onclick = function () {
     modal.style.display = 'block';
@@ -180,7 +180,7 @@ const templates = [
 
 for (const template of templates) {
     let button = document.createElement('div');
-    button.className = 'createSelectButton text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 text-xl';
+    button.className = 'createSelectButton text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 text-2xl';
     button.onclick = () => chooseTemplate(template);
 
     // TODO: fix duplicate code fragments
@@ -211,7 +211,7 @@ for (const template of templates) {
     button.appendChild(document.createElement('br'));
 
     let description = document.createElement('span');
-    description.classList.add('text-gray-300', 'text-xs');
+    description.classList.add('text-gray-300', 'text-xl');
 
     for (let i = 0; i < Math.min(template.subtemplates.length, 4); i++)
         description.innerHTML += template.subtemplates[i] + ', ';
@@ -234,7 +234,7 @@ function chooseTemplate(template) {
     templateLists[1].innerHTML = '';
     for (const subtemplate of template.subtemplates) {
         let button = document.createElement('div');
-        button.className = 'createSelectButton text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 text-xl';
+        button.className = 'createSelectButton text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 text-2xl';
         button.onclick = function () {
             const name = template.name;
             customize(name, subtemplate);

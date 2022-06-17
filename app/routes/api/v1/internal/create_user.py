@@ -179,21 +179,66 @@ def search_within_user():
 @internal.route("/search-within_course", methods=["POST"])
 def search_within_course():
     data = request.get_json()
+    course = data["course"]
     data = data["search"]
-    course = data["course_id"]
-    users = read.search_within_course(data)
+    users = read.search_course(data, course)
     string = ""
     count = 0
-    for i in users:
+
+    documents,events,assignments,announcements,NebulusDocuments = users
+
+    everything = []
+
+
+    for document in documents:
+        everything.append([
+            "document", #type
+            document.name, #name
+            document.description, #description
+            "a"
+        ])
+    for event in events:
+        try:
+            de = event["description"]
+        except:
+            de = ""
+        everything.append([
+            "event", #type
+            event["title"], #name
+            de, #description
+            "a"
+        ])
+    for assignment in assignments:
+        try:
+            de = assignment["description"]
+        except:
+            de = ""
+        everything.append([
+            "assignment", #type
+            assignment["title"], #name
+            de, #description
+            "a"
+        ])
+    for announcement in announcements:
+        everything.append([
+            "announcement", #type
+            announcement.title, #name
+            announcement.content, #description
+            "a"
+        ])
+
+    for i in everything:
         count += 1
-        string += request.root_url + i.avatar.avatar_url
+        string += i[0]
         string += "•"
-        string += i.username
+        string += i[1]
         string += "•"
-        string += i.email
-        if len(users) != count:
+        string += i[2]
+        string += "•"
+        string += i[3]
+        if len(everything) != count:
             string += "•"
-    if len(users) == 0:
+    if len(everything) == 0:
         return "0"
 
     return string

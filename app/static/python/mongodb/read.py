@@ -401,5 +401,52 @@ def search(keyword: str, username: str):
     )
 
 
-def search_course(keyword:str, course_id:str):
-    pass
+
+def search_course(keyword: str, course: str):
+    course = Course.objects(id=course).first()
+    pipeline1 = [
+        {"$match":
+             {"title":
+                  {"$regex": f'^{keyword}', '$options': 'i'}
+              }
+         },
+        {
+            "$lookup": {
+                "from": Course._get_collection_name(),
+                "localField": "course",
+                "foreignField": "_id",
+                "as": "course",
+            }
+        },
+        {"$match":
+             {"course.id":course}
+         },
+        {"$project":
+            {
+                "title": 1,
+                "_id": 1
+            }
+        }
+    ]
+
+    events = list(Event.objects().aggregate(
+        pipeline1
+    ))
+    assignments = list(Assignment.objects().aggregate(
+        pipeline1
+    ))
+    announcements = list(Announcement.objects().aggregate(
+        pipeline1
+    ))
+    documents = list(DocumentFile.objects.aggregate(
+        pipeline1
+    ))
+    return (
+        documents,
+        events,
+        assignments,
+        announcements,
+        NebulusDocuments,
+    )
+
+
