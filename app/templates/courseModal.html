@@ -409,6 +409,9 @@
                             let element = temp_arr;
                             //console.log(element);
                             let pic = `<img src="${element[3]}" class="inline-block w-10 h-10 rounded-full">`;
+                            if (temp[0] === "course"){
+                                pic = `<img src="${element[3]}" style="object-fit: cover; border-radius:10px;display: inline-block;" class="inline-block w-10 h-10 rounded-full">`;
+                            }
                             if (temp_arr[0] === "document"){
                                 pic = `<i class="material-icons">description</i>`
                             }

@@ -87,7 +87,7 @@ def search_within_user():
     string = ""
     count = 0
 
-    courses,documents,chats,events,assignments,announcements,NebulusDocuments, = users
+    courses,documents,chats,events,assignments,announcements,NebulusDocuments, accounts = users
 
     everything = []
     for course in courses:
@@ -96,6 +96,14 @@ def search_within_user():
             course.name, #name
             course.teacher, #description
             course.avatar.avatar_url
+        ])
+
+    for account in accounts:
+        everything.append([
+            "NebDoc", #type
+            account.username, #name
+            account.email, #description
+            account.avatar.avatar_url
         ])
     for document in documents:
         everything.append([
@@ -148,6 +156,8 @@ def search_within_user():
             nebdoc.Data, #description
             "a"
         ])
+
+
 
     for i in everything:
         count += 1
