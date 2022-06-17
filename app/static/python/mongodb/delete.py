@@ -1,7 +1,7 @@
 from __future__ import annotations
 from ..classes import Announcement, Course
 #from ..classes import *
-#from .read import *
+from .read import *
 #from .read import getChat, getGrades, getEvent, getFolder, getDocument, getAssignment, get_announcement, find_user, find_courses
 
 
@@ -9,7 +9,6 @@ def delete_course(course_id: str) -> None:
     """
     Deletes a user from the database.
     """
-    from .read import find_courses
     course = find_courses(course_id)
     for announcement in course.announcements:
         delete_announcement(announcement.id)
