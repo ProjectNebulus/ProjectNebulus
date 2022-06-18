@@ -24,10 +24,9 @@ def upload_file_link():
     course = request.form.get("course")
     folder = request.form.get("folder")
     link = request.form.get("link")
-    status = cdn.upload_file_link(link)
     filename = link.split("/")[-1]
     if folder == "0":
-        create.createDocumentFile(
+        mongo = create.createDocumentFile(
             {
                 "name": filename,
                 "url": "https://nebulus-cdn.sfo3.cdn.digitaloceanspaces.com/" + filename,
@@ -35,7 +34,7 @@ def upload_file_link():
             }
         )
     else:
-        create.createDocumentFile(
+        mongo = create.createDocumentFile(
             {
                 "name": filename,
                 "url": "https://nebulus-cdn.sfo3.cdn.digitaloceanspaces.com/" + filename,
@@ -43,7 +42,7 @@ def upload_file_link():
                 "folder": folder,
             }
         )
-
+    status = cdn.upload_file_link(link, mongo.id+filename.split(".")[-1])
     print(status)
 
     return str(status)

@@ -27,13 +27,12 @@ def upload_file(path, filename, bucket_folder):
     )
 
 
-def upload_file_link(url):
+def upload_file_link(url, file_name):
     try:
-        name = url.split("/")[-1]
         r = requests.get(url, allow_redirects=True)
-        open(name, "wb").write(r.content)
-        upload_file(name, name)
-        os.remove(name)
+        open(file_name, "wb").write(r.content)
+        upload_file(file_name, file_name, "Documents")
+        os.remove(file_name)
         return True
 
     except Exception as e:

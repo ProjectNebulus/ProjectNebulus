@@ -160,6 +160,7 @@ def create_canvas_course():
         )
 
     announcements = canvas.get_announcements(context_codes=[course.id])
+
     for announcement in announcements:
         create.createAnnouncement(
             {
@@ -322,12 +323,16 @@ def create_schoology_course():
         document["file_ending"] = scdocument["attachments"]["files"]["file"][0][
             "extension"
         ]
-        document["upload_date"] = datetime.fromtimestamp(scdocument["timestamp"])
+        try:
+            document["upload_date"] = datetime.fromtimestamp(scdocument["timestamp"])
+        except:
+            print("can't find timestamp")
         document["course"] = str(course_obj.id)
         document["imported_from"] = "Schoology"
         document["imported_id"] = str(scdocument["id"])
+        document["attachments"] = get_doc_link(sc,  scdocument["attachments"]["files"]["file"][0]["download_path"])
 
-        upload_file_link(document["attachments"])
+        #upload_file_link(document["attachments"])
         filename = link.split("/")[-1]
         mongo_document = create.createDocumentFile(
             {
@@ -335,11 +340,11 @@ def create_schoology_course():
                 "course": document["course"],
                 "file_ending": document["file_ending"],
                 "imported_from": "Schoology",
-                "imported_id": document["imported_id"],
-                "url": "https://nebulus-cdn.sfo3.cdn.digitaloceanspaces.com/" + filename,
+                "imported_id": document["imported_id"]
 
             }
         )
+        upload_file_link(document["attachments"],   f'{mongo_document.id}.{document["file_ending"]}')
         print(document)
         documents.append(document)
     print(documents)
