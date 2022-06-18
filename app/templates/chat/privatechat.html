@@ -1,14 +1,14 @@
 {% extends "layout.html" %}
 {% block main %}
     <aside style="float:left;" class="w-64 h-full" aria-label="Sidebar">
-        <div style="margin-bottom:10px;"
-             class="flex items-center space-x-4 dark:bg-gray-600 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg">
-            <i class="material-icons" style="font-size:40px;">group</i>
-            <div class="space-y-1 font-medium dark:text-white">
-                <div>Friends</div>
-            </div>
-        </div>
         <div class="px-3 py-4 overflow-y-auto rounded bg-gray-100 dark:bg-gray-800 h-full">
+            <div style="margin-bottom:10px;"
+                 class="flex items-center space-x-4 dark:bg-gray-600 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg">
+                <i class="material-icons text-black dark:text-white" style="font-size:40px;margin:10px;">group</i>
+                <div class="space-y-1 font-medium dark:text-white">
+                    <div>Friends</div>
+                </div>
+            </div>
             <div class="uppercase text-lg text-gray-600 cursor-pointer">Private Messages
                 <div style="float:right;" data-dropdown-toggle="dropdown">+</div>
             </div>
