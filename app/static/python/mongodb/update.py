@@ -61,6 +61,7 @@ def savePlanner(data: dict, user_id):
 
 def saveConfig(configs: list, user_id):
     from .read import find_user
+
     user = find_user(id=user_id)
 
     if not user.planner:
@@ -70,6 +71,7 @@ def saveConfig(configs: list, user_id):
     user.save(validate=False)
 
     return "true"
+
 
 def changeNebulusDocument(_id: str, document: dict):
     from .read import find_user
@@ -83,8 +85,10 @@ def changeNebulusDocument(_id: str, document: dict):
     user.save(clean=False)
     return "true"
 
+
 def changeCourse(course_id, course_name, course_teacher):
     from .read import find_courses
+
     course = find_courses(course_id)
     course.name = course_name
     course.teacher = course_teacher

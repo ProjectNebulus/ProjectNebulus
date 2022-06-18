@@ -18,6 +18,7 @@ def deleteCourse():
 
     return "success"
 
+
 @internal.route("/change-course", methods=["POST"])
 @private_endpoint
 def changeCourse():

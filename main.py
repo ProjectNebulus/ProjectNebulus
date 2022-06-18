@@ -32,7 +32,7 @@ if __name__ == "__main__":
     else:  # macos (darwin) or windows (windows)
         port = 8080
         host = "localhost"
-    print(read.search('t', 'nicholaswang'))
+    print(read.search("t", "nicholaswang"))
     print(f"Started Running: http://{host}:{port}")
     if not debug:
         serve(app, host=host, port=port)

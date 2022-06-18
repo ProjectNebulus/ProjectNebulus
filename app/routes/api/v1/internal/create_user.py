@@ -79,6 +79,7 @@ def search_user():
 
     return string
 
+
 @internal.route("/search-within_user", methods=["POST"])
 def search_within_user():
     data = request.get_json()
@@ -87,78 +88,86 @@ def search_within_user():
     string = ""
     count = 0
 
-    courses,documents,chats,events,assignments,announcements,NebulusDocuments, accounts = users
+    (
+        courses,
+        documents,
+        chats,
+        events,
+        assignments,
+        announcements,
+        NebulusDocuments,
+        accounts,
+    ) = users
 
     everything = []
     for course in courses:
-        everything.append([
-            "course", #type
-            course.name, #name
-            course.teacher, #description
-            course.avatar.avatar_url
-        ])
-
+        everything.append(
+            [
+                "course",  # type
+                course.name,  # name
+                course.teacher,  # description
+                course.avatar.avatar_url,
+            ]
+        )
 
     for document in documents:
-        everything.append([
-            "document", #type
-            document.name, #name
-            document.description, #description
-            "a"
-        ])
+        everything.append(
+            [
+                "document",  # type
+                document.name,  # name
+                document.description,  # description
+                "a",
+            ]
+        )
     for chat in chats:
-        everything.append([
-            "chat", #type
-            chat.title, #name
-            "", #description
-            chat.avatar.avatar_url
-        ])
+        everything.append(
+            [
+                "chat",  # type
+                chat.title,  # name
+                "",  # description
+                chat.avatar.avatar_url,
+            ]
+        )
     for event in events:
         try:
             de = event["description"]
         except:
             de = ""
-        everything.append([
-            "event", #type
-            event["title"], #name
-            de, #description
-            "a"
-        ])
+        everything.append(
+            ["event", event["title"], de, "a"]  # type  # name  # description
+        )
     for assignment in assignments:
         try:
             de = assignment["description"]
         except:
             de = ""
-        everything.append([
-            "assignment", #type
-            assignment["title"], #name
-            de, #description
-            "a"
-        ])
+        everything.append(
+            ["assignment", assignment["title"], de, "a"]  # type  # name  # description
+        )
     for announcement in announcements:
-        everything.append([
-            "announcement", #type
-            announcement.title, #name
-            announcement.content, #description
-            "a"
-        ])
+        everything.append(
+            [
+                "announcement",  # type
+                announcement.title,  # name
+                announcement.content,  # description
+                "a",
+            ]
+        )
 
     for nebdoc in NebulusDocuments:
-        everything.append([
-            "NebDoc", #type
-            nebdoc.title, #name
-            nebdoc.Data, #description
-            "a"
-        ])
+        everything.append(
+            ["NebDoc", nebdoc.title, nebdoc.Data, "a"]  # type  # name  # description
+        )
 
     for account in accounts:
-        everything.append([
-            "account", #type
-            account.username, #name
-            account.email, #description
-            account.avatar.avatar_url
-        ])
-
+        everything.append(
+            [
+                "account",  # type
+                account.username,  # name
+                account.email,  # description
+                account.avatar.avatar_url,
+            ]
+        )
 
     for i in everything:
         count += 1
@@ -176,6 +185,7 @@ def search_within_user():
 
     return string
 
+
 @internal.route("/search-within_course", methods=["POST"])
 def search_within_course():
     data = request.get_json()
@@ -185,47 +195,44 @@ def search_within_course():
     string = ""
     count = 0
 
-    documents,events,assignments,announcements,NebulusDocuments = users
+    documents, events, assignments, announcements, NebulusDocuments = users
 
     everything = []
 
-
     for document in documents:
-        everything.append([
-            "document", #type
-            document.name, #name
-            document.description, #description
-            "a"
-        ])
+        everything.append(
+            [
+                "document",  # type
+                document.name,  # name
+                document.description,  # description
+                "a",
+            ]
+        )
     for event in events:
         try:
             de = event["description"]
         except:
             de = ""
-        everything.append([
-            "event", #type
-            event["title"], #name
-            de, #description
-            "a"
-        ])
+        everything.append(
+            ["event", event["title"], de, "a"]  # type  # name  # description
+        )
     for assignment in assignments:
         try:
             de = assignment["description"]
         except:
             de = ""
-        everything.append([
-            "assignment", #type
-            assignment["title"], #name
-            de, #description
-            "a"
-        ])
+        everything.append(
+            ["assignment", assignment["title"], de, "a"]  # type  # name  # description
+        )
     for announcement in announcements:
-        everything.append([
-            "announcement", #type
-            announcement.title, #name
-            announcement.content, #description
-            "a"
-        ])
+        everything.append(
+            [
+                "announcement",  # type
+                announcement.title,  # name
+                announcement.content,  # description
+                "a",
+            ]
+        )
 
     for i in everything:
         count += 1
