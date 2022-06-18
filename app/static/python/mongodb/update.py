@@ -94,3 +94,29 @@ def changeCourse(course_id, course_name, course_teacher):
     course.teacher = course_teacher
     course.save(clean=False)
     return "true"
+
+def changeStatus(user_id:str, status:str, status_emoji:str=''):
+    user = User.objects(pk=user_id)
+    user.chatProfile.status = status
+    user.chatProfile.status_emoji=status_emoji
+    user.save()
+
+def block(user_id:str, other_id:str):
+    user = User.objects(pk=user_id)
+    other = User.objects(pk=other_id)
+    if user in other.chatProfile.friends:
+        user.chatProfile.friends.remove(other)
+        other.chatProfile.friends.remove(user)
+
+    user.chatProfile.blocked.append(other)
+    other.chatProfile.blocked.append(user)
+    other.save()
+    user.save()
+
+def mute_chat(user_id, chat_id):
+    chat = Chat.objects(pk=chat_id)
+    user = User.objects(pk=user_id)
+
+    user.chatProfile.mutedDMS.append(chat)
+    user.save()
+
