@@ -2,11 +2,32 @@
 {% block main %}
     <aside style="float:left;" class="w-64 h-full" aria-label="Sidebar">
         <div class="px-3 py-4 overflow-y-auto rounded bg-gray-100 dark:bg-gray-800 h-full">
-            <div style="margin-bottom:10px;"
-                 class="flex items-center space-x-4 dark:bg-gray-600 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg">
+            <div style="margin-bottom:4px;"
+                 class="flex items-center space-x-4 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg">
                 <i class="material-icons text-black dark:text-white" style="font-size:40px;margin:10px;">group</i>
                 <div class="space-y-1 font-medium dark:text-white">
                     <div>Friends</div>
+                </div>
+            </div>
+            <div style="margin-bottom:4px;"
+                 class="flex items-center space-x-4 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg">
+                <i class="material-icons text-black dark:text-white" style="font-size:40px;margin:10px;">pending</i>
+                <div class="space-y-1 font-medium dark:text-white">
+                    <div>Friend Requests</div>
+                </div>
+            </div>
+            <div style="margin-bottom:4px;"
+                 class="flex items-center space-x-4 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg">
+                <i class="material-icons text-black dark:text-white" style="font-size:40px;margin:10px;">block</i>
+                <div class="space-y-1 font-medium dark:text-white">
+                    <div>Blocked</div>
+                </div>
+            </div>
+            <div style="margin-bottom:4px;"
+                 class="flex items-center space-x-4 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg">
+                <i class="material-icons text-black dark:text-white" style="font-size:40px;margin:10px;">mood</i>
+                <div class="space-y-1 font-medium dark:text-white">
+                    <div>Emojis</div>
                 </div>
             </div>
             <div class="uppercase text-lg text-gray-600 cursor-pointer">Private Messages
@@ -39,7 +60,7 @@
                     </li>
                 </ul>
             </div>
-            <div style="margin-bottom:10px;"
+            <div style="margin-bottom:4px;"
                  class="flex items-center space-x-4 dark:bg-gray-600 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg">
                 <img style="margin:10px;" class="w-10 h-10 rounded-full"
                      src="https://cdn.discordapp.com/avatars/808435152270917654/a878a29a6dc653493d76b65d2893fc88.webp?size=160"
@@ -49,7 +70,7 @@
                     <div class="text-sm text-gray-500 dark:text-gray-400">Comps Studying :c</div>
                 </div>
             </div>
-            <div style="margin-bottom:10px;"
+            <div style="margin-bottom:4px;"
                  class="flex items-center space-x-4 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg">
                 <img style="margin:10px;" class="w-10 h-10 rounded-full"
                      src="https://cdn.discordapp.com/avatars/751594192739893298/03a0281d67484e9b1c95205fd5f81c2a.webp?size=64"
@@ -247,6 +268,9 @@
 
     </div>
     <script>
+    function createChat(username){
+        document.getElementById("dropdown").style.display = "none";
+    }
         function changeSearch() {
             let value = document.getElementById("search").value;
             if (value.length > 0) {
