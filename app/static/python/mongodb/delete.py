@@ -187,6 +187,10 @@ def deleteChat(chat_id: str):
 
     chat.delete()
 
+def deleteCommunity(community_id: str):
+    pass
+
+
 def deleteFriendRequest(reciever_id, sender_id):
     reciever = User.objects(pk=reciever_id)
     sender = User.objects(pk=sender_id)
@@ -195,6 +199,7 @@ def deleteFriendRequest(reciever_id, sender_id):
     reciever.save()
     sender.save()
 
+
 def removeFriend(user_id, old_friend_id):
     user = User.objects(pk=user_id)
     old_friend = User.objects(pk=old_friend_id)
@@ -202,3 +207,17 @@ def removeFriend(user_id, old_friend_id):
     old_friend.chatProfile.friends.remove(user)
     user.save()
     old_friend.save()
+
+
+def deleteMessage(message_id:str, community_id:str=None, chat_id:str=None):
+    if not community_id and not chat_id:
+        raise Exception('Must specify a community or a chat')
+
+    if not community_id:
+        chat = Chat.objects(pk=chat_id)
+        chat.messages.remove(message_id)
+        chat.save()
+    else:
+        community = Community.objects(pk=community_id)
+        community.messages.remove(message_id)
+        community.save()

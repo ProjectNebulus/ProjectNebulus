@@ -95,13 +95,19 @@ def changeCourse(course_id, course_name, course_teacher):
     course.save(clean=False)
     return "true"
 
-def changeStatus(user_id:str, status:str, status_emoji:str=''):
+
+def changeStatus(user_id: str, status, text_status: str=None, status_emoji: str = None):
     user = User.objects(pk=user_id)
-    user.chatProfile.status = status
-    user.chatProfile.status_emoji=status_emoji
+    if text_status:
+        user.chatProfile.text_status = status
+    if status_emoji:
+        user.chatProfile.status_emoji = status_emoji
+
+    user.chatProfile.status=status
     user.save()
 
-def block(user_id:str, other_id:str):
+
+def block(user_id: str, other_id: str):
     user = User.objects(pk=user_id)
     other = User.objects(pk=other_id)
     if user in other.chatProfile.friends:
@@ -113,6 +119,7 @@ def block(user_id:str, other_id:str):
     other.save()
     user.save()
 
+
 def mute_chat(user_id, chat_id):
     chat = Chat.objects(pk=chat_id)
     user = User.objects(pk=user_id)
@@ -120,3 +127,10 @@ def mute_chat(user_id, chat_id):
     user.chatProfile.mutedDMS.append(chat)
     user.save()
 
+
+def muteCommunity(user_id, community_id):
+    community = Community.objects(pk=community_id)
+    user = User.objects(pk=user_id)
+
+    user.chatProfile.mutedCommunities.append(community)
+    user.save()

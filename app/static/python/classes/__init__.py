@@ -20,4 +20,4 @@ from .User import User
 from .NebulusDocuments import NebulusDocument
 from .Message import Message
 from .ChatProfile import ChatProfile
-
+from .Community import Community

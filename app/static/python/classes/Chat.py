@@ -14,9 +14,9 @@ class Chat(Snowflake):
         Avatar,
         default=Avatar(avatar_url="/static/images/nebulusCats/v3.gif", parent="Chat"),
     )
-    type = StringField() #Nebulus, Schoology, etc.
-    messages = ListField(EmbeddedDocumentField('Message'))
-    pinned_messages = ListField(EmbeddedDocumentField('Message'))
+    type = StringField()  # Nebulus, Schoology, etc.
+    messages = ListField(EmbeddedDocumentField("Message"))
+    pinned_messages = ListField(EmbeddedDocumentField("Message"))
 
     def clean(self):
         if not self.title:

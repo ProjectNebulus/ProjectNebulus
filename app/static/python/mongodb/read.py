@@ -13,7 +13,6 @@ from ..security import valid_password
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 
 
-
 def getAssignment(assignment_id: str) -> Assignment:
     assignment = Assignment.objects(id=assignment_id).first()
     return assignment
@@ -45,7 +44,9 @@ def get_user_courses(user_id: str) -> List[Course]:
 
 
 def search_user(query: str) -> List[User]:
-    return User.objects(username__istartswith=query).only('id', 'username','email', 'avatar', '_cls')[:10]
+    return User.objects(username__istartswith=query).only(
+        "id", "username", "email", "avatar", "_cls"
+    )[:10]
     # return User.objects.filter(username__contains=query)._query
 
 
@@ -95,7 +96,7 @@ def getSchoology(**kwargs) -> List[Schoology] | None:
 
 
 def getClassroom(
-        userID: str = None, username: str = None, email: str = None
+    userID: str = None, username: str = None, email: str = None
 ) -> GoogleClassroom:
     return find_user(id=userID, username=username, email=email).gclassroom
 
@@ -105,7 +106,7 @@ def getSpotify(userID: str = None, username: str = None, email: str = None) -> S
 
 
 def getSpotifyCache(
-        userID: str = None, username: str = None, email: str = None
+    userID: str = None, username: str = None, email: str = None
 ) -> Spotify | None:
     try:
         return find_user(
@@ -205,8 +206,8 @@ def sort_course_events(user_id: str, course_id: int):
                 {
                     key: list(result)
                     for key, result in groupby(
-                    sorted_announcements, key=lambda obj: obj.date.date()
-                )
+                        sorted_announcements, key=lambda obj: obj.date.date()
+                    )
                 }.items()
             )
         )
@@ -242,8 +243,8 @@ def sort_user_events(user_id: str, maxDays=8, maxEvents=16):
                 {
                     key: list(result)
                     for key, result in groupby(
-                    sorted_announcements, key=lambda obj: obj.date.date()
-                )
+                        sorted_announcements, key=lambda obj: obj.date.date()
+                    )
                 }.items()
             )[-maxDays:]
         )
@@ -346,71 +347,7 @@ def search(keyword: str, username: str):
     user = User.objects(username=username).first()
     users = search_user(keyword)
     pipeline1 = [
-            {"$match":
-                 {"title":
-                      {"$regex": f'^{keyword}', '$options': 'i'}
-                  }
-             },
-            {
-                "$lookup": {
-                    "from": Course._get_collection_name(),
-                    "localField": "course",
-                    "foreignField": "_id",
-                    "as": "course",
-                }
-            },
-            {"$match":
-                 {"course.authorizedUsers": user.pk}
-             },
-            {"$project":
-                 {
-                     "title": 1,
-                     "_id": 1,
-                     "_cls": 1
-                 }
-            }
-        ]
-    courses = Course.objects(Q(authorizedUsers=user.id) & Q(name__istartswith=keyword))[
-              :10
-              ]
-    chats = Chat.objects(Q(owner=user.id) & Q(title__istartswith=keyword))[:10]
-    NebulusDocuments = NebulusDocument.objects(
-        Q(authorizedUsers=user.id) & Q(name__istartswith=keyword)
-    )[:10]
-
-    events = list(Event.objects().aggregate(
-        pipeline1
-    ))
-    assignments = list(Assignment.objects().aggregate(
-        pipeline1
-    ))
-    announcements = list(Announcement.objects().aggregate(
-        pipeline1
-    ))
-    documents = list(DocumentFile.objects.aggregate(
-        pipeline1
-    ))
-    return (
-        courses,
-        documents,
-        chats,
-        events,
-        assignments,
-        announcements,
-        NebulusDocuments,
-        users
-    )
-
-
-
-def search_course(keyword: str, course: str):
-    course = Course.objects(id=course).first()
-    pipeline1 = [
-        {"$match":
-             {"title":
-                  {"$regex": f'^{keyword}', '$options': 'i'}
-              }
-         },
+        {"$match": {"title": {"$regex": f"^{keyword}", "$options": "i"}}},
         {
             "$lookup": {
                 "from": Course._get_collection_name(),
@@ -419,30 +356,53 @@ def search_course(keyword: str, course: str):
                 "as": "course",
             }
         },
-        {"$match":
-             {"course.id":course}
-         },
-        {"$project":
-            {
-                "title": 1,
-                "_id": 1,
-                "_cls": 1
+        {"$match": {"course.authorizedUsers": user.pk}},
+        {"$project": {"title": 1, "_id": 1, "_cls": 1}},
+    ]
+    courses = Course.objects(Q(authorizedUsers=user.id) & Q(name__istartswith=keyword))[
+        :10
+    ]
+    chats = Chat.objects(Q(owner=user.id) & Q(title__istartswith=keyword))[:10]
+    NebulusDocuments = NebulusDocument.objects(
+        Q(authorizedUsers=user.id) & Q(name__istartswith=keyword)
+    )[:10]
+
+    events = list(Event.objects().aggregate(pipeline1))
+    assignments = list(Assignment.objects().aggregate(pipeline1))
+    announcements = list(Announcement.objects().aggregate(pipeline1))
+    documents = list(DocumentFile.objects.aggregate(pipeline1))
+    return (
+        courses,
+        documents,
+        chats,
+        events,
+        assignments,
+        announcements,
+        NebulusDocuments,
+        users,
+    )
+
+
+def search_course(keyword: str, course: str):
+    course = Course.objects(id=course).first()
+    pipeline1 = [
+        {"$match": {"title": {"$regex": f"^{keyword}", "$options": "i"}}},
+        {
+            "$lookup": {
+                "from": Course._get_collection_name(),
+                "localField": "course",
+                "foreignField": "_id",
+                "as": "course",
             }
-        }
+        },
+        {"$match": {"course.id": course}},
+        {"$project": {"title": 1, "_id": 1, "_cls": 1}},
     ]
 
-    events = list(Event.objects().aggregate(
-        pipeline1
-    ))
-    assignments = list(Assignment.objects().aggregate(
-        pipeline1
-    ))
-    announcements = list(Announcement.objects().aggregate(
-        pipeline1
-    ))
-    documents = list(DocumentFile.objects.aggregate(
-        pipeline1
-    ))
+    events = list(Event.objects().aggregate(pipeline1))
+    assignments = list(Assignment.objects().aggregate(pipeline1))
+    announcements = list(Announcement.objects().aggregate(pipeline1))
+    documents = list(DocumentFile.objects.aggregate(pipeline1))
     return (
         documents,
         events,
@@ -450,5 +410,3 @@ def search_course(keyword: str, course: str):
         announcements,
         NebulusDocuments,
     )
-
-
