@@ -7,6 +7,9 @@ class ChatProfile(EmbeddedDocument):
     """
 
     friends = ListField(ReferenceField("User"))
+    acceptingFriendRequests = BooleanField(default=True)
+    incomingFriendRequests = ListField(ReferenceField('User'))
+    outgoingFriendRequests = ListField(ReferenceField('User'))
     blocked = ListField(ReferenceField("User"))
     muted = ListField(ReferenceField("User"))
     DM_Open = ListField(ReferenceField("User"))

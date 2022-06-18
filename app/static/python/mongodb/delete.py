@@ -186,3 +186,19 @@ def deleteChat(chat_id: str):
         member.save()
 
     chat.delete()
+
+def deleteFriendRequest(reciever_id, sender_id)
+    reciever = User.objects(pk=reciever_id)
+    sender = User.objects(pk=sender_id)
+    sender.chatProfile.outgoingFriendRequests.remove(reciever)
+    reciever.chatProfile.incomingFriendRequests.remove(sender)
+    reciever.save()
+    sender.save()
+
+def removeFriend(user_id, old_friend_id):
+    user = User.objects(pk=user_id)
+    old_friend = User.objects(pk=old_friend_id)
+    user.chatProfile.friends.remove(old_friend)
+    old_friend.chatProfile.friends.remove(user)
+    user.save()
+    old_friend.save()
