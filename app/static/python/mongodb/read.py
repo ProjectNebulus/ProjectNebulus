@@ -45,7 +45,7 @@ def get_user_courses(user_id: str) -> List[Course]:
 
 
 def search_user(query: str) -> List[User]:
-    return User.objects(username__icontains=query)[:10]
+    return User.objects(username__istartswith=query).only('id', 'username','email', 'avatar', '_cls')[:10]
     # return User.objects.filter(username__contains=query)._query
 
 
@@ -365,7 +365,8 @@ def search(keyword: str, username: str):
             {"$project":
                  {
                      "title": 1,
-                     "_id": 1
+                     "_id": 1,
+                     "_cls": 1
                  }
             }
         ]
@@ -424,7 +425,8 @@ def search_course(keyword: str, course: str):
         {"$project":
             {
                 "title": 1,
-                "_id": 1
+                "_id": 1,
+                "_cls": 1
             }
         }
     ]
