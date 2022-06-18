@@ -1,5 +1,4 @@
 from mongoengine import *
-from .User import User
 
 
 class ChatProfile(EmbeddedDocument):
@@ -9,14 +8,14 @@ class ChatProfile(EmbeddedDocument):
 
     friends = ListField(ReferenceField("User"))
     acceptingFriendRequests = BooleanField(default=True)
-    incomingFriendRequests = ListField(ReferenceField("User"))
-    outgoingFriendRequests = ListField(ReferenceField("User"))
+    incomingFriendRequests = ListField(ReferenceField('User'))
+    outgoingFriendRequests = ListField(ReferenceField('User'))
     blocked = ListField(ReferenceField("User"))
     mutedDMS = ListField(ReferenceField("Chat"))
     # TODO: mutedThreads
     mutedCommunities = ListField(ReferenceField("Community"))
     DM_Open = ListField(ReferenceField("User"))
-    text_status = StringField()
-    status_emoji = StringField()  # twemoji
-    status = StringField()  # Online, Idle, Do Not Disturb, Offline
-    custom_emojis = ListField(StringField())
+    text_status = StringField(default="")
+    status_emoji = StringField(default="")  # twemoji
+    status = StringField(default="")  # Online, Idle, Do Not Disturb, Offline
+    custom_emojis = ListField(StringField(), default=[])

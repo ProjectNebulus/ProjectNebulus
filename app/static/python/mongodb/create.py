@@ -258,4 +258,3 @@ def acceptFriendRequest(reciever_id, sender_id):
     sender.save()
     reciever.save()
 
-
