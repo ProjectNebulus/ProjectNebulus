@@ -238,7 +238,7 @@ def pinMessage(message_id, chat_id):
 def sendFriendRequest(user_id, reciever_id):
     user = User.objects(pk=user_id)
     reciever = User.objects(pk=reciever_id)
-    if reciever.chatProfile.acceptingFriendRequests = False:
+    if not reciever.chatProfile.acceptingFriendRequests:
         return '0'
     user.chatProfile.outgoingFriendRequests.append(reciever)
     reciever.incomingFriendrequests.append(user)

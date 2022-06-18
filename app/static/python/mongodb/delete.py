@@ -187,7 +187,7 @@ def deleteChat(chat_id: str):
 
     chat.delete()
 
-def deleteFriendRequest(reciever_id, sender_id)
+def deleteFriendRequest(reciever_id, sender_id):
     reciever = User.objects(pk=reciever_id)
     sender = User.objects(pk=sender_id)
     sender.chatProfile.outgoingFriendRequests.remove(reciever)
