@@ -10,11 +10,11 @@ from ...static.python.mongodb import read
 def dashboard():
     user_courses = read.get_user_courses(session.get("id"))
     sorted = read.unsorted_user_events(session["id"])
-    sorted[0] = sorted[0][-8:]
+    sorted[0] = sorted[0][(-8):]
     sorted[1] = sorted[1][-12:]
 
     if len(user_courses) > 8:
-        user_courses = user_courses[-18:]
+        user_courses = list(user_courses)[-18:]
 
     return render_template(
         "dashboard.html",
