@@ -31,8 +31,6 @@ def init_app():
     app.register_blueprint(main_blueprint)
     app.register_blueprint(api.api_blueprint)
     app.register_blueprint(static_blueprint)
-    socketio.init_app(app)
-    return app
 
     @app.before_request
     def before_rq():
@@ -45,4 +43,5 @@ def init_app():
 
     mail = Mail(app)
 
+    socketio.init_app(app)
     return app
