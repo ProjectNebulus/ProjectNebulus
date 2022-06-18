@@ -1,14 +1,14 @@
 # Imports
 from flask_cors import CORS
 from flask_mail import Mail
-
+from flask_socketio import SocketIO
 from .api import *
 from .main import *
 from .static import *
 
 
 # import app.routes.error_handlers
-
+socketio = SocketIO()
 
 def init_app():
     """
@@ -31,8 +31,8 @@ def init_app():
     app.register_blueprint(main_blueprint)
     app.register_blueprint(api.api_blueprint)
     app.register_blueprint(static_blueprint)
-
-    print(app.url_map)
+    socketio.init_app(app)
+    return app
 
     @app.before_request
     def before_rq():

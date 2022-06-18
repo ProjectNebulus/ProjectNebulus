@@ -69,6 +69,6 @@ yarl
 google-api-python-client
 google-auth-httplib2 
 google-auth-oauthlib
-
+Flask-SocketIO==5.2.0
 DateTime~=4.4
 httplib2~=0.20.4

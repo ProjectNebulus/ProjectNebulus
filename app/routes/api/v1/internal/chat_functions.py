@@ -1,11 +1,39 @@
 import re
 
 from flask import session, request
-
+from flask_socketio import join_room, leave_room
 from . import internal
-from .....static.python.mongodb import read
+from .....static.python.mongodb import create, read, update
+from .... import socketio
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
+
+
+@socketio.event('new message')
+def new_message(json):
+    print('new message: '+json)
+    if json['chatType'] == 'chat':
+        chatID = json['chatID']
+        del json['chatID'], json['chatType']
+        create.sendMessage(json, chatID)
+        sender = read.find_user(id=json['sender'])
+        socketio.emit('message', {'author': [sender.id, sender.username, sender.avatar.avatar_url], 'content': json['content']}, room=chatID)
+    else:
+        #TODO: Create message for communities
+        pass
+
+@socketio.event('user joined')
+def user_joined(json):
+    print('user joined: '+json)
+    if json['chatType'] == 'chat':
+        chatID = json['chatID']
+        join_room(chatID)
+        update.joinChat(json['user'], chatID)
+        user = read.find_user(id=json['user'])
+        socketio.emit('message', {'user': [user.id, user.username, user.avatar.avatar_url], 'msg': f'{user.username} has joined'}, room=chatID)
+
+
+
 
 
 @internal.route("/change-status", methods=["POST"])

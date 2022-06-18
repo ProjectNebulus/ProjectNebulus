@@ -134,3 +134,12 @@ def muteCommunity(user_id, community_id):
 
     user.chatProfile.mutedCommunities.append(community)
     user.save()
+
+
+def joinChat(user_id, chat_id):
+    chat = Chat.objects(pk=chat_id)
+    user = User.objects(pk=user_id)
+    user.chats.append(chat)
+    chat.members.append(user)
+    chat.save()
+    user.save()

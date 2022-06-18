@@ -7,7 +7,7 @@ from waitress import serve
 from app.static.python.mongodb import read
 from app.static.python.classes.Announcement import Announcement
 
-from app.routes import init_app
+from app.routes import init_app, socketio
 from app.static.python.classes import User
 
 app = init_app()
@@ -32,9 +32,5 @@ if __name__ == "__main__":
     else:  # macos (darwin) or windows (windows)
         port = 8080
         host = "localhost"
-    print(read.search("t", "nicholaswang"))
     print(f"Started Running: http://{host}:{port}")
-    if not debug:
-        serve(app, host=host, port=port)
-    else:
-        app.run(host=host, port=port)
+    socketio.run(app, host=host, port=port)
