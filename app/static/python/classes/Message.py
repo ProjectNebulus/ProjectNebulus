@@ -2,10 +2,9 @@ from datetime import datetime
 
 from mongoengine import *
 
-from .Snowflake import Snowflake
 
 
-class Message(Snowflake):
+class Message(EmbeddedDocument):
     """
     Class to represent a message.
     """
