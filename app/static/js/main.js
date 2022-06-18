@@ -186,7 +186,7 @@ window.addEventListener("load", function () {
         else
             img = logo.getAttribute("image");
 
-        if (!img.includes("/static/images/nebulusCats")) img += "/static/images/nebulusCats";
+        //if (!img.includes("/static/images/nebulusCats")) img += "/static/images/nebulusCats";
 
         let size = logo.getAttribute("size");
 

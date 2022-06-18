@@ -38,3 +38,4 @@ from app.routes.api.v1.internal.planner import *
 from app.routes.api.v1.internal.nebulusdocs import *
 from app.routes.api.v1.internal.search import *
 from app.routes.api.v1.internal.change_course import *
+from app.routes.api.v1.internal.chat_functions import *
