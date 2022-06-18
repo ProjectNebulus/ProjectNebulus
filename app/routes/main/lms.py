@@ -77,7 +77,7 @@ def lms():
         canvas = Canvas(API_URL, API_KEY)
         account = canvas.get_user(user="self")
         courses = account.get_courses()
-        for course in courses:
+        for course in courses[:5]:
             original_name = ""
             try:
                 original_name = course.original_name
@@ -120,7 +120,7 @@ def lms():
             auth.authorize()
             sc = schoolopy.Schoology(auth)
             sc.limit = "100&include_past=1"
-            scCourses = list(sc.get_user_sections(user_id=sc.get_me().id))
+            scCourses = list(sc.get_user_sections(user_id=sc.get_me().id))[:5]
             for i in range(0, len(scCourses)):
                 scCourses[i] = dict(scCourses[i])
                 scCourses[i]["link"] = (
@@ -142,7 +142,7 @@ def lms():
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         user_acc=user_acc,
-        user_courses=list(user_courses),
+        user_courses=list(user_courses)[:5],
         read=read,
         page="Nebulus - Learning",
         announcements=events[0],
