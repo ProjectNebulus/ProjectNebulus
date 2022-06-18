@@ -6,7 +6,8 @@
     <title>Create Course</title>
 </head>
 <body>
-<div id="CourseModal" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+<div id="CourseModal"
+     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
     <div class="CoursePage">
         <!-- Modal header -->
         <h3>
@@ -21,13 +22,13 @@
                     and fill it in with content!</p><br>
 
                 <div class='createSelectButton text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 text-2xl'
-                      onclick="skipTemplates()">
+                     onclick="skipTemplates()">
                     <img src="/static/images/icons/new.svg"
                          style="visibility:visible;width:20px;height:20px;float:left;" alt="Create course image">
                     Create course
                     <img src="/static/images/icons/next.svg"
                          style="visibility:visible;width:20px;height:20px;float:right;" alt="Next">
-                  </div>
+                </div>
 
                 <h2 class="text-3xl">Or choose a subject</h2>
 
@@ -115,23 +116,34 @@
             Import from Schoology
             <span class="close"></span>
         </h3><br><br>
-        <div style="width:90%;height:90%;"  id="slist" class="scroll">
+        <div style="width:90%;height:90%;" id="slist" class="scroll">
             {% if schoologycourses|length == 0 %}
                 <h1 class="text-black dark:text-white text-xl">We coudn't find any courses! Is your Schoology account
-                    connected? <a href="/settings#connections"><button style="margin-left: 10px; display:grid; grid-auto-flow: column; align-content: center; justify-content: center;" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                        Connect Schoology <i style="display:grid; grid-auto-flow: column; align-content: center; justify-content: center;" class="material-icons">open_in_newt</i>
-                    </button></a></h1>
+                    connected? <a href="/settings#connections">
+                        <button style="margin-left: 10px; display:grid; grid-auto-flow: column; align-content: center; justify-content: center;"
+                                type="button"
+                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                            Connect Schoology <i
+                                style="display:grid; grid-auto-flow: column; align-content: center; justify-content: center;"
+                                class="material-icons">open_in_newt</i>
+                        </button>
+                    </a></h1>
             {% else %}
                 <h1 class="text-black dark:text-white text-3xl">Select a Schoology Course</h1>
                 <div class="flex flex-col " style="align-items: center; justify-content: center;">
                     {% for course in schoologycourses[:-1] %}
-                        <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700" style="height:16rem; width:34rem;">
-                            <a onclick="updateSchoologyLink('{{  course["link"]}}');" class="overflow-hidden" style="width:382px; height:186px;">
-                                <img style="width:382px; height:130px;" class="rounded-t-lg w-full object-cover" src="{{ course["profile_url"] }}" alt="" />
+                        <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
+                             style="height:16rem; width:34rem;">
+                            <a onclick="updateSchoologyLink('{{ course["link"] }}');" class="overflow-hidden"
+                               style="width:382px; height:186px;">
+                                <img style="width:382px; height:130px;" class="rounded-t-lg w-full object-cover"
+                                     src="{{ course["profile_url"] }}" alt=""/>
                             </a>
                             <div class="p-4">
                                 <a href="#">
-                                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ course["course_title"] }} <span class="mb-3 text-lg  text-gray-700 dark:text-gray-400">{{ course.section_title }}</span></h5>
+                                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ course["course_title"] }}
+                                        <span class="mb-3 text-lg  text-gray-700 dark:text-gray-400">{{ course.section_title }}</span>
+                                    </h5>
                                 </a>
 
                                 <p class="text-gray-700 text-xs uppercase dark:text-gray-400">{{ schoologycourses[-1]["title"] }}</p>
@@ -179,31 +191,44 @@
         </h3><br>
         <div>
             {% if gcourses|length == 0 %}
-                <p class="text-black dark:text-white text-xl">We coudn't find any courses! Is your Google Classroom account
-                    linked? <a href="/settings#connections"><button style="margin-left: 10px; display:grid; grid-auto-flow: column; align-content: center; justify-content: center;" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                        Connect Google Classroom <i style="display:grid; grid-auto-flow: column; align-content: center; justify-content: center;" class="material-icons">open_in_newt</i>
-                    </button></a></p>
+                <p class="text-black dark:text-white text-xl">We coudn't find any courses! Is your Google Classroom
+                    account
+                    linked? <a href="/settings#connections">
+                        <button style="margin-left: 10px; display:grid; grid-auto-flow: column; align-content: center; justify-content: center;"
+                                type="button"
+                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                            Connect Google Classroom <i
+                                style="display:grid; grid-auto-flow: column; align-content: center; justify-content: center;"
+                                class="material-icons">open_in_newt</i>
+                        </button>
+                    </a></p>
             {% else %}
                 <p class="text-black dark:text-white text-3xl">Select a Google Classroom Course</p>
-                <center><div class="scroll" id="glist" style="height:90%;">
-                    {% for course in gcourses %}
-                        <a onclick="updateGoogleLink('{{ course[1] }}', '{{ course[2] }}');" class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ course[0] }}</h5>
-                            <p class="font-normal text-gray-700 dark:text-gray-400">{{ course[2] }}</p>
-                        </a>
+                <center>
+                    <div class="scroll" id="glist" style="height:90%;">
+                        {% for course in gcourses %}
+                            <a onclick="updateGoogleLink('{{ course[1] }}', '{{ course[2] }}');"
+                               class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ course[0] }}</h5>
+                                <p class="font-normal text-gray-700 dark:text-gray-400">{{ course[2] }}</p>
+                            </a>
 
-                        <br><br>
-                    {% endfor %}
-                </div></center>
-                <form id="google-create-course" style="width:90%;height:90%;display:none;"  onsubmit="importGClassroom(); return false;">
+                            <br><br>
+                        {% endfor %}
+                    </div>
+                </center>
+                <form id="google-create-course" style="width:90%;height:90%;display:none;"
+                      onsubmit="importGClassroom(); return false;">
                     <div class="mb-6">
-                        <label for="course-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        <label for="course-name"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                             Google Course Link (Automatically Filled)
                         </label>
                         <input disabled type="text" id="google-course-id"
                                class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                placeholder="The link will be Filled when you click the buttons Above!" required>
-                        <label for="course-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        <label for="course-name"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                             Google Course Teacher (Automatically Filled)
                         </label>
                         <input type="text" id="google-course-teacher"
@@ -228,29 +253,39 @@
             Import from Canvas
             <span class="close"></span>
         </h3><br>
-        <center><div class="scroll" id="clist" style="height:90%;width:90%;">
-            {% if canvascourses|length == 0 %}
-                <h1 class="text-black dark:text-white text-xl">We coudn't find any courses! Is your Canvas account
-                    connected? <a href="/settings#connections"><button style="margin-left: 10px; display:grid; grid-auto-flow: column; align-content: center; justify-content: center;" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                        Connect Canvas <i style="display:grid; grid-auto-flow: column; align-content: center; justify-content: center;" class="material-icons">open_in_newt</i>
-                    </button></a></h1>
-            {% else %}
-                <h1 class="text-black dark:text-white text-3xl">Select a Canvas Course</h1>
+        <center>
+            <div class="scroll" id="clist" style="height:90%;width:90%;">
+                {% if canvascourses|length == 0 %}
+                    <h1 class="text-black dark:text-white text-xl">We coudn't find any courses! Is your Canvas account
+                        connected? <a href="/settings#connections">
+                            <button style="margin-left: 10px; display:grid; grid-auto-flow: column; align-content: center; justify-content: center;"
+                                    type="button"
+                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                Connect Canvas <i
+                                    style="display:grid; grid-auto-flow: column; align-content: center; justify-content: center;"
+                                    class="material-icons">open_in_newt</i>
+                            </button>
+                        </a></h1>
+                {% else %}
+                    <h1 class="text-black dark:text-white text-3xl">Select a Canvas Course</h1>
 
-                {% for course in canvascourses %}
-                    <a onclick="updateCanvasLink('{{ course[1] }}')" class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ course[0] }}</h5>
-                        <p class="font-normal text-gray-700 dark:text-gray-400">{{ course[2] }}</p>
-                    </a>
+                    {% for course in canvascourses %}
+                        <a onclick="updateCanvasLink('{{ course[1] }}')"
+                           class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ course[0] }}</h5>
+                            <p class="font-normal text-gray-700 dark:text-gray-400">{{ course[2] }}</p>
+                        </a>
 
-                    </svg>
-                    </button>
-                    <br><br>
-                {% endfor %}
-            {% endif %}
+                        </svg>
+                        </button>
+                        <br><br>
+                    {% endfor %}
+                {% endif %}
 
-        </div></center>
-        <form id="canvas-create-course" onsubmit="importCanvas(); return false;" style="height:90%;width:90%;display:none;">
+            </div>
+        </center>
+        <form id="canvas-create-course" onsubmit="importCanvas(); return false;"
+              style="height:90%;width:90%;display:none;">
             <div class="mb-6">
                 <label for="course-name" class="">
                     Canvas Course Link (Automatically Filled)
@@ -330,19 +365,23 @@
             <!-- Modal body -->
             <div class="p-6 space-y-6 dark:text-white text-black">
                 <div class="mb-6">
-                    <input type="text" id="sear"
+                    <input type="text" id="search"
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                            placeholder="Type here..." required>
                     <ul id="search_items" class="scroll">
-                    <li>
-                        <div class="py-2.5 rounded-lg mx-auto block px-4 py-2 mx-2 dark:hover:text-white">
-                            <svg role="status" class="inline w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
-                                <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
-                            </svg>
-                            No Results Found
-                        </div>
-                    </li>
+                        <li>
+                            <div class="py-2.5 rounded-lg mx-auto block px-4 py-2 mx-2 dark:hover:text-white">
+                                <svg role="status"
+                                     class="inline w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                                     viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                          fill="currentColor"/>
+                                    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                          fill="currentFill"/>
+                                </svg>
+                                No Results Found
+                            </div>
+                        </li>
 
                     </ul>
                 </div>
@@ -352,9 +391,9 @@
 </div>
 <script src="../static/js/createCourse.js"></script>
 <script>
-    function changeSearch(){
-        let value = document.getElementById("sear").value;
-        if (value.length > 0){
+    function changeSearch() {
+        let value = document.getElementById("search").value;
+        if (value.length > 0) {
             document.getElementById("search_items").innerHTML = `
 <li>
 <div class="py-2.5 rounded-lg mx-auto block px-4 py-2 mx-2 dark:hover:text-white">
@@ -378,7 +417,7 @@
             request.done((data) => {
                 document.getElementById("search_items").innerHTML = "";
                 let temp_arr = []
-                if (data=== "0") {
+                if (data === "0") {
                     document.getElementById("search_items").innerHTML += `
                     <li>
                             <div class="py-2.5 rounded-lg mx-auto block px-4 py-2 mx-2 dark:hover:text-white">
@@ -409,28 +448,28 @@
                             let element = temp_arr;
                             //console.log(element);
                             let pic = `<img src="${element[3]}" class="inline-block w-10 h-10 rounded-full">`;
-                            if (temp_arr[0] === "account"){
+                            if (temp_arr[0] === "account") {
                                 pic = `<img src="${element[3]}" class="inline-block w-10 h-10 rounded-full">`;
                             }
-                        else if (temp_arr[0] === "course"){
+                            else if (temp_arr[0] === "course") {
                                 pic = `<img src="${element[3]}" style="object-fit: cover; border-radius:10px;display: inline-block;" class="inline-block w-10 h-10 rounded-full">`;
                             }
-                            else if (temp_arr[0] === "document"){
+                            else if (temp_arr[0] === "document") {
                                 pic = `<i class="material-icons">description</i>`
                             }
-                            else if (temp_arr[0] === "NebDoc"){
+                            else if (temp_arr[0] === "NebDoc") {
                                 pic = `<i class="material-icons">draft</i>`
                             }
-                            else if (temp_arr[0] === "event"){
+                            else if (temp_arr[0] === "event") {
                                 pic = `<i class="material-icons">event</i>`
                             }
-                            else if (temp_arr[0] === "assignment"){
+                            else if (temp_arr[0] === "assignment") {
                                 pic = `<i class="material-icons">assignment</i>`
                             }
-                            else if (temp_arr[0] === "chat"){
+                            else if (temp_arr[0] === "chat") {
                                 pic = `<i class="material-icons">forum</i>`
                             }
-                            if (temp_arr[0] === "announcement"){
+                            if (temp_arr[0] === "announcement") {
                                 pic = `<i class="material-icons">campaign</i>`
                             }
 
@@ -449,6 +488,7 @@
 
 
     }
+
     //setup before functions
     var typingTimer;
     var doneTypingInterval = 1000;
