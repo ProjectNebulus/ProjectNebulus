@@ -7,11 +7,11 @@ from .Avatar import Avatar
 from .Canvas import Canvas
 from .Discord import Discord
 from .GoogleClassroom import GoogleClassroom
+from .NebulusDocuments import NebulusDocument
 from .Planner import Planner
 from .Schoology import Schoology
 from .Snowflake import Snowflake
 from .Spotify import Spotify
-from .NebulusDocuments import NebulusDocument
 
 
 class User(Snowflake):
@@ -76,3 +76,8 @@ class User(Snowflake):
 
     def clean(self):
         self.password = hash256(self.password)
+        self.avatar.avatar_url = self.avatar.avatar_url.replace("http://localhost:8080", "").replace(
+            "https://localhost:8080", "").replace("https://beta.nebulus.ml", "")
+
+        if "static/images/nebulusCats" not in self.avatar.avatar_url:
+            self.avatar.avatar_url = "/static/images/nebulusCats" + self.avatar.avatar_url

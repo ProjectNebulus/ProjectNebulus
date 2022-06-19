@@ -1,9 +1,8 @@
 import os
-import zlib
 
 import requests
 
-from spaces import Client
+# from spaces import Client
 
 ACCESS_ID = "5POV4IR5H2XWALCF7KWY"
 SECRET_KEY = "j7k9MO7SXueLeEbkXdYBAlaZ7XfC1EMdqV3w9KrceHQ"

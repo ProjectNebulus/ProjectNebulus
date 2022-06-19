@@ -77,23 +77,18 @@
                                 {% set recipient = message["recipients"][recipientId] %}
                                 <img data-dropdown-toggle="userDropdown{{ id }}_r{{ recipientId }}"
                                      class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
-                                     src="{{ recipient["avatar"] }}" alt="">
+                                     src="{{ recipient["avatar"] }}" alt="{{ recipient["name"] }}'s Profile Picture">
 
                                 <!-- Dropdown menu -->
                                 <div id="userDropdown{{ id }}_r{{ recipientId }}"
                                      class="z-50 hidden bg-white divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600 rounded-lg">
                                     <div style="border-radius:10px 10px 0 0; height:60px;background:{% if recipient["color"] %}rgba
-                                        {{ recipient["color"] }}{% else %}#515A67{% endif %};">
-
-                                    </div>
-                                    <div class="px-4 py-3 text-xl text-gray-900 dark:text-white"
-                                         style="border-radius:0 0 10px 10px;">
-
+                                        {{ recipient["color"] }}{% else %}#515A67{% endif %};"></div>
+                                    <div class="px-4 py-3 text-xl text-gray-900 dark:text-white border-b border-l">
                                         <div style="text-align: left; margin-left:3px;">
                                             <div style="margin-top:-60px;">
-                                                <img style="background:rgb(18,25,38);border-style:solid;border-width:2px; object-fit: cover;"
-                                                     src="{{ recipient["avatar"] }}"
-                                                     class="w-24 h-24 rounded-full border-white dark:border-gray-700"
+                                                <img style="background:rgb(18,25,38)" src="{{ recipient["avatar"] }}"
+                                                     class="w-24 h-24 rounded-full border-white dark:border-gray-700 border-2 object-cover"
                                                      alt="{{ recipient["name"] }}'s Profile Picture">
                                                 <span class="absolute  w-5 h-5 bg-green-400 border-2 border-white dark:border-gray-700 rounded-full"
                                                       style="left:90px;top:85px;"></span>
@@ -106,40 +101,38 @@
                                                 <div class="text-sm text-gray-400">User
                                                     at {{ recipient["school"] }}</div>
                                             {% endif %}
-                                            <div class="mb-6">
-                                                <input type="text" id="msg"
-                                                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                       placeholder="Message @{{ recipient["name"] }}"
-                                                       required>
-                                            </div>
+                                            <input id="msg" placeholder="Message @{{ recipient["name"] }}" required
+                                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm
+                                                       mb-6 rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5
+                                                       dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400
+                                                       dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                         </div>
                                     </div>
-
                                 </div>
-
+                                </div>
                             {% endfor %}
-                        </div>
-                    </th>
-                    <td class="px-6 py-4">
+                </div>
+                </th>
+                <td class="px-6 py-4">
                         <span data-dropdown-toggle="userDropdown_a{{ id }}"
                               class="hover:underline"> {{ message["author"]["name"] }}</span> to
-                        {% for recipient in range(message["recipients"]|length) %}
-                            <span class="hover:underline"
-                                  data-dropdown-toggle="userDropdown{{ id }}_r{{ recipient }}">{{ message["recipients"][recipient]["name"] }}</span>
-                            {% if recipient < (message["recipients"]|length - 1) %}
-                                <span>,</span>
-                            {% endif %}
-                        {% endfor %}
-                    </td>
-                    <td class="px-6 py-4">
-                        {{ message["subject"] }}
-                    </td>
-                    <td class="px-6 py-4">
-                        {{ message["message"] }}
-                    </td>
-                    <td class="px-6 py-4">
-                        {{ message["updated"].strftime("%m/%d/%Y, %H:%M:%S") }}
-                    </td>
+                    {% for recipient in range(message["recipients"]|length) %}
+                        <span class="hover:underline"
+                              data-dropdown-toggle="userDropdown{{ id }}_r{{ recipient }}">{{ message["recipients"][recipient]["name"] }}</span>
+                        {% if recipient < (message["recipients"]|length - 1) %}
+                            <span>,</span>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td class="px-6 py-4">
+                    {{ message["subject"] }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ message["message"] }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ message["updated"].strftime("%m/%d/%Y, %H:%M:%S") }}
+                </td>
                 </tr>
                 <!-- Main modal -->
                 <div id="thread_{{ id }}" tabindex="-1" aria-hidden="true"
@@ -218,7 +211,7 @@
                     </div>
                 </div>
             {% endfor %}
-            </tbody>
-        </table>
+    </tbody>
+    </table>
     </div>
 {% endblock %}

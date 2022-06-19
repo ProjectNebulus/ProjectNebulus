@@ -1,8 +1,7 @@
 from mongoengine import *
-from .Snowflake import Snowflake
+
 from .Avatar import Avatar
-from .Message import Message
-from .Chat import Chat
+from .Snowflake import Snowflake
 
 
 class Community(Snowflake):
@@ -16,7 +15,7 @@ class Community(Snowflake):
         default=Avatar(avatar_url="/static/images/nebulusCats/v3.gif", parent="Chat"),
     )
     type = StringField()  # Nebulus, Schoology, etc.
-    channels = ListField
+    channels = ListField(ReferenceField("Chat"), default=[])
 
     def clean(self):
         if not self.title:

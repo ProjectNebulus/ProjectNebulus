@@ -24,7 +24,7 @@ def createPlanner(_id: str, planner: dict):
     planner = Planner(**planner)
     user.planner = planner
     user.save(clean=False)
-    return "true"
+    return "0"
 
 
 def logout_from_schoology(_id: str, schoology_obj: Schoology):
@@ -35,7 +35,7 @@ def logout_from_schoology(_id: str, schoology_obj: Schoology):
         raise KeyError("User not found")
     user.schoology.remove(schoology_obj)
     user.save(clean=False)
-    return "true"
+    return "0"
 
 
 def resolve_updated_object(obj, attr, value):
@@ -54,9 +54,9 @@ def savePlanner(data: dict, user_id):
     user.planner.saveData = data["saveData"]
     user.planner.lastEdited = data["lastEdited"]
 
-    user.save(validate=False)
+    user.save(validate=False, clean=False)
 
-    return "true"
+    return "0"
 
 
 def saveConfig(configs: list, user_id):
@@ -68,9 +68,9 @@ def saveConfig(configs: list, user_id):
         user.planner = Planner()
 
     user.planner.periods = configs
-    user.save(validate=False)
+    user.save(validate=False, clean=False)
 
-    return "true"
+    return "0"
 
 
 def changeNebulusDocument(_id: str, document: dict):
@@ -83,7 +83,7 @@ def changeNebulusDocument(_id: str, document: dict):
     planner = NebulusDocument(**document)
     user.nebulus_documents = planner
     user.save(clean=False)
-    return "true"
+    return "0"
 
 
 def changeCourse(course_id, course_name, course_teacher):
@@ -93,39 +93,68 @@ def changeCourse(course_id, course_name, course_teacher):
     course.name = course_name
     course.teacher = course_teacher
     course.save(clean=False)
-    return "true"
+    return "0"
 
 
-def changeStatus(user_id: str, status, text_status: str=None, status_emoji: str = None):
+def sendMessage(user_id: str, **kwargs):
+    user = User.objects(pk=user_id)
+    community = Community.objects(pk=kwargs["user_id"])
+    chat = Chat.objects(pk=kwargs["chat_id"])
+    message = kwargs["message"]
+
+    if chat not in community.channels:
+        return "1"
+
+    chat.messages.append(Message(sender=user, content=message))
+
+    return "0"
+
+
+def changeStatus(user_id: str, **kwargs):
+    status = kwargs["status"]
+    text_status = kwargs["text_status"]
+    status_emoji = kwargs["status_emoji"]
+
     user = User.objects.get(pk=user_id)
     if text_status:
         user.chatProfile.text_status = status
     if status_emoji:
         user.chatProfile.status_emoji = status_emoji
 
-    user.chatProfile.status=status
-    user.save()
+    user.chatProfile.status = status
+    user.save(clean=False)
+
+    return "0"
 
 
-def block(user_id: str, other_id: str):
+def blockUser(user_id: str, other_id: str):
     user = User.objects.get(pk=user_id)
     other = User.objects.get(pk=other_id)
-    if user in other.chatProfile.friends:
+
+    try:
         user.chatProfile.friends.remove(other)
         other.chatProfile.friends.remove(user)
 
+    except ValueError:
+        pass
+
     user.chatProfile.blocked.append(other)
     other.chatProfile.blocked.append(user)
-    other.save()
+
     user.save()
+    other.save()
+
+    return "0"
 
 
-def mute_chat(user_id, chat_id):
+def muteChat(user_id, chat_id):
     chat = Chat.objects.get(pk=chat_id)
     user = User.objects.get(pk=user_id)
 
     user.chatProfile.mutedDMS.append(chat)
     user.save()
+
+    return "0"
 
 
 def muteCommunity(user_id, community_id):
@@ -134,6 +163,8 @@ def muteCommunity(user_id, community_id):
 
     user.chatProfile.mutedCommunities.append(community)
     user.save()
+
+    return "0"
 
 
 def joinChat(user_id, chat_id):
@@ -144,6 +175,8 @@ def joinChat(user_id, chat_id):
     chat.save()
     user.save()
 
+    return "0"
+
 
 def leaveChat(user_id, chat_id):
     chat = Chat.objects.get(pk=chat_id)
@@ -153,14 +186,30 @@ def leaveChat(user_id, chat_id):
     chat.save()
     user.save()
 
+    return "0"
 
-def editMessage(chatID, message_id, content):
-    chat = Chat.objects.get(pk=chatID)
-    message = list(filter(lambda x: x.id == message_id, Chat.messages))[0]
+
+def editMessage(chat_id, message_id, content):
+    chat = Chat.objects.get(pk=chat_id)
+    message = list(filter(lambda x: x.id == message_id, chat.messages))
+
+    if not len(message):
+        return "1"
+    message = message[0]
+
     message.content = content
     chat.messages[chat.messages.index(message)] = message
     chat.save()
 
+    return "0"
 
 
+def deleteMessage(chat_id, message_id):
+    chat = Chat.objects.get(pk=chat_id)
+    message = list(filter(lambda x: x.id == message_id, chat.messages))
 
+    if not len(message):
+        return "1"
+    message = message[0]
+
+    message.delete()

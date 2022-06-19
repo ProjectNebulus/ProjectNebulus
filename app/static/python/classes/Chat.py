@@ -1,22 +1,27 @@
+from datetime import datetime
+
 from mongoengine import *
-from .Snowflake import Snowflake
+
 from .Avatar import Avatar
 from .Message import Message
+from .Snowflake import Snowflake
+
+Message  # so pycharm optimize imports doesn't remove it
 
 
 class Chat(Snowflake):
     meta = {"collection": "Chats"}
-    members = ListField(ReferenceField("User"), required=True)
+    members = ListField(ReferenceField("User"), default=[])
     owner = ReferenceField("User", required=True)
-    created = DateTimeField(required=True)
+    created = DateTimeField(default=datetime.now())
     title = StringField()
     avatar = EmbeddedDocumentField(
         Avatar,
         default=Avatar(avatar_url="/static/images/nebulusCats/v3.gif", parent="Chat"),
     )
-    type = StringField()  # Nebulus, Schoology, etc.
-    messages = ListField(EmbeddedDocumentField("Message"))
-    pinned_messages = ListField(EmbeddedDocumentField("Message"))
+    type = StringField(default="Nebulus")  # Nebulus, Schoology, etc.
+    messages = ListField(EmbeddedDocumentField("Message"), default=[])
+    pinned_messages = ListField(EmbeddedDocumentField("Message"), default=[])
 
     def clean(self):
         if not self.title:

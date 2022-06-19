@@ -2,10 +2,10 @@ from __future__ import annotations
 
 import re
 from typing import List
-from mongoengine import Q
 
 import schoolopy
 from flask import Response, session
+from mongoengine import Q
 
 from ..classes import *
 from ..security import valid_password
@@ -96,7 +96,7 @@ def getSchoology(**kwargs) -> List[Schoology] | None:
 
 
 def getClassroom(
-    userID: str = None, username: str = None, email: str = None
+        userID: str = None, username: str = None, email: str = None
 ) -> GoogleClassroom:
     return find_user(id=userID, username=username, email=email).gclassroom
 
@@ -106,7 +106,7 @@ def getSpotify(userID: str = None, username: str = None, email: str = None) -> S
 
 
 def getSpotifyCache(
-    userID: str = None, username: str = None, email: str = None
+        userID: str = None, username: str = None, email: str = None
 ) -> Spotify | None:
     try:
         return find_user(
@@ -206,8 +206,8 @@ def sort_course_events(user_id: str, course_id: int):
                 {
                     key: list(result)
                     for key, result in groupby(
-                        sorted_announcements, key=lambda obj: obj.date.date()
-                    )
+                    sorted_announcements, key=lambda obj: obj.date.date()
+                )
                 }.items()
             )
         )
@@ -243,8 +243,8 @@ def sort_user_events(user_id: str, maxDays=8, maxEvents=16):
                 {
                     key: list(result)
                     for key, result in groupby(
-                        sorted_announcements, key=lambda obj: obj.date.date()
-                    )
+                    sorted_announcements, key=lambda obj: obj.date.date()
+                )
                 }.items()
             )[-maxDays:]
         )
@@ -359,13 +359,9 @@ def search(keyword: str, username: str):
         {"$match": {"course.authorizedUsers": user.pk}},
         {"$project": {"title": 1, "_id": 1, "_cls": 1}},
     ]
-    courses = Course.objects(Q(authorizedUsers=user.id) & Q(name__istartswith=keyword))[
-        :10
-    ]
+    courses = Course.objects(Q(authorizedUsers=user.id) & Q(name__istartswith=keyword))[:10]
     chats = Chat.objects(Q(owner=user.id) & Q(title__istartswith=keyword))[:10]
-    NebulusDocuments = NebulusDocument.objects(
-        Q(authorizedUsers=user.id) & Q(name__istartswith=keyword)
-    )[:10]
+    NebulusDocuments = NebulusDocument.objects(Q(authorizedUsers=user.id) & Q(name__istartswith=keyword))[:10]
 
     events = list(Event.objects().aggregate(pipeline1))
     assignments = list(Assignment.objects().aggregate(pipeline1))

@@ -1,14 +1,25 @@
 # Imports
+from logging import LogRecord
+
+from flask.logging import logging
 from flask_cors import CORS
 from flask_mail import Mail
 from flask_socketio import SocketIO
+
+socketio = SocketIO()
+
 from .api import *
 from .main import *
 from .static import *
 
 
-# import app.routes.error_handlers
-socketio = SocketIO()
+class _LogFilter(logging.Filter):
+    def filter(self, record: LogRecord) -> bool:
+        message = record.getMessage()
+        codes = ("200", "304")
+
+        return all((code not in message for code in codes))
+
 
 def init_app():
     """
@@ -42,6 +53,7 @@ def init_app():
                 return redirect("/logout")
 
     mail = Mail(app)
+    socketio.init_app(app, logging=False)
+    logging.getLogger("werkzeug").addFilter(_LogFilter())
 
-    socketio.init_app(app)
     return app
