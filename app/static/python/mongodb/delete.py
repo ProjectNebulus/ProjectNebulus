@@ -187,13 +187,14 @@ def deleteChat(chat_id: str):
 
     chat.delete()
 
+
 def deleteCommunity(community_id: str):
     pass
 
 
 def deleteFriendRequest(reciever_id, sender_id):
-    reciever = User.objects(pk=reciever_id)
-    sender = User.objects(pk=sender_id)
+    reciever = User.objects.get(pk=reciever_id)
+    sender = User.objects.get(pk=sender_id)
     sender.chatProfile.outgoingFriendRequests.remove(reciever)
     reciever.chatProfile.incomingFriendRequests.remove(sender)
     reciever.save()
@@ -201,8 +202,8 @@ def deleteFriendRequest(reciever_id, sender_id):
 
 
 def removeFriend(user_id, old_friend_id):
-    user = User.objects(pk=user_id)
-    old_friend = User.objects(pk=old_friend_id)
+    user = User.objects.get(pk=user_id)
+    old_friend = User.objects.get(pk=old_friend_id)
     user.chatProfile.friends.remove(old_friend)
     old_friend.chatProfile.friends.remove(user)
     user.save()
@@ -214,10 +215,12 @@ def deleteMessage(message_id:str, community_id:str=None, chat_id:str=None):
         raise Exception('Must specify a community or a chat')
 
     if not community_id:
-        chat = Chat.objects(pk=chat_id)
-        chat.messages.remove(message_id)
+        chat = Chat.objects.get(pk=chat_id)
+        message = list(filter(lambda x: x.id == message_id, Chat.messages))[0]
+        chat.messages.remove(message)
         chat.save()
     else:
-        community = Community.objects(pk=community_id)
-        community.messages.remove(message_id)
+        community = Community.objects.get(pk=community_id)
+        message = list(filter(lambda x: x.id == message_id, Chat.messages))[0]
+        community.messages.remove(message)
         community.save()

@@ -218,28 +218,28 @@ def createIntegration(data: dict) -> Integration:
 
 
 def installIntegration(courseID: int, integrationID: int):
-    course = Course.objects(pk=courseID)
-    integration = Integration.objects(pk=integrationID)
+    course = Course.objects.get(pk=courseID)
+    integration = Integration.objects.get(pk=integrationID)
     course.integrations.append(integration)
 
 
 def sendMessage(data: dict, chat_id: str):
     message = Message(**data)
-    chat = Chat.objects(pk=chat_id)
+    chat = Chat.objects.get(pk=chat_id)
     chat.messages.append(message)
     chat.save()
 
 
 def pinMessage(message_id, chat_id):
-    message = Message.objects(pk=message_id)
     chat = Chat.objects(pk=chat_id)
+    message = list(filter(lambda x: x.id==message_id, Chat.messages))[0]
     chat.pinned_messages.append(message)
     chat.save()
 
 
 def sendFriendRequest(user_id, reciever_id):
-    user = User.objects(pk=user_id)
-    reciever = User.objects(pk=reciever_id)
+    user = User.objects.get(pk=user_id)
+    reciever = User.objects.get(pk=reciever_id)
     if not reciever.chatProfile.acceptingFriendRequests:
         return "0"
     user.chatProfile.outgoingFriendRequests.append(reciever)
@@ -249,8 +249,8 @@ def sendFriendRequest(user_id, reciever_id):
 
 
 def acceptFriendRequest(reciever_id, sender_id):
-    reciever = User.objects(pk=reciever_id)
-    sender = User.objects(pk=sender_id)
+    reciever = User.objects.get(pk=reciever_id)
+    sender = User.objects.get(pk=sender_id)
     reciever.chatProfile.incomingFriendRequests.remove(sender)
     sender.chatProfile.outgoingFriendRequests.remove(reciever)
     reciever.chatProfile.friends.append(sender)

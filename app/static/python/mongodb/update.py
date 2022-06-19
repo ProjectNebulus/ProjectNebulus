@@ -97,7 +97,7 @@ def changeCourse(course_id, course_name, course_teacher):
 
 
 def changeStatus(user_id: str, status, text_status: str=None, status_emoji: str = None):
-    user = User.objects(pk=user_id)
+    user = User.objects.get(pk=user_id)
     if text_status:
         user.chatProfile.text_status = status
     if status_emoji:
@@ -108,8 +108,8 @@ def changeStatus(user_id: str, status, text_status: str=None, status_emoji: str 
 
 
 def block(user_id: str, other_id: str):
-    user = User.objects(pk=user_id)
-    other = User.objects(pk=other_id)
+    user = User.objects.get(pk=user_id)
+    other = User.objects.get(pk=other_id)
     if user in other.chatProfile.friends:
         user.chatProfile.friends.remove(other)
         other.chatProfile.friends.remove(user)
@@ -121,25 +121,46 @@ def block(user_id: str, other_id: str):
 
 
 def mute_chat(user_id, chat_id):
-    chat = Chat.objects(pk=chat_id)
-    user = User.objects(pk=user_id)
+    chat = Chat.objects.get(pk=chat_id)
+    user = User.objects.get(pk=user_id)
 
     user.chatProfile.mutedDMS.append(chat)
     user.save()
 
 
 def muteCommunity(user_id, community_id):
-    community = Community.objects(pk=community_id)
-    user = User.objects(pk=user_id)
+    community = Community.objects.get(pk=community_id)
+    user = User.objects.get(pk=user_id)
 
     user.chatProfile.mutedCommunities.append(community)
     user.save()
 
 
 def joinChat(user_id, chat_id):
-    chat = Chat.objects(pk=chat_id)
-    user = User.objects(pk=user_id)
+    chat = Chat.objects.get(pk=chat_id)
+    user = User.objects.get(pk=user_id)
     user.chats.append(chat)
     chat.members.append(user)
     chat.save()
     user.save()
+
+
+def leaveChat(user_id, chat_id):
+    chat = Chat.objects.get(pk=chat_id)
+    user = User.objects.get(pk=user_id)
+    user.chats.remove(chat)
+    chat.members.remove(user)
+    chat.save()
+    user.save()
+
+
+def editMessage(chatID, message_id, content):
+    chat = Chat.objects.get(pk=chatID)
+    message = list(filter(lambda x: x.id == message_id, Chat.messages))[0]
+    message.content = content
+    chat.messages[chat.messages.index(message)] = message
+    chat.save()
+
+
+
+

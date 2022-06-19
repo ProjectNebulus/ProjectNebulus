@@ -3,7 +3,7 @@ import re
 from flask import session, request
 from flask_socketio import join_room, leave_room
 from . import internal
-from .....static.python.mongodb import create, read, update
+from .....static.python.mongodb import create, read, update, delete
 from .... import socketio
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
@@ -22,6 +22,7 @@ def new_message(json):
         #TODO: Create message for communities
         pass
 
+
 @socketio.event('user joined')
 def user_joined(json):
     print('user joined: '+json)
@@ -31,9 +32,38 @@ def user_joined(json):
         update.joinChat(json['user'], chatID)
         user = read.find_user(id=json['user'])
         socketio.emit('message', {'user': [user.id, user.username, user.avatar.avatar_url], 'msg': f'{user.username} has joined'}, room=chatID)
+    else:
+        pass
 
 
+@socketio.event('user left')
+def user_left(json):
+    print('user left: ' + json)
+    if json['chatType'] == 'chat':
+        chatID = json['chatID']
+        leave_room(chatID)
+        update.leaveChat(json['user'], chatID)
+        user = read.find_user(id=json['user'])
+        socketio.emit('message',
+                      {'user': [user.id, user.username, user.avatar.avatar_url], 'msg': f'{user.username} has left'},
+                      room=chatID)
+    else:
+        pass
 
+
+@socketio.event('message edited')
+def message_edited(json):
+    print('new message: ' + json)
+    if json['chatType'] == 'chat':
+        chatID = json['chatID']
+        del json['chatID'], json['chatType']
+        update.editMessage(json['messageID'], chatID, json['content'])
+        socketio.emit('message',
+                      {'new_content': json['content']},
+                      room=chatID)
+    else:
+        # TODO: Edit message for communities
+        pass
 
 
 @internal.route("/change-status", methods=["POST"])

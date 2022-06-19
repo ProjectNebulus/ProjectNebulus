@@ -40,7 +40,7 @@ def getFolder(folder_id: str) -> Folder:
 
 def get_user_courses(user_id: str) -> List[Course]:
     user = find_user(pk=user_id)
-    return Course.objects(authorizedUsers__in=[user])
+    return Course.objects(authorizedUsers=user)
 
 
 def search_user(query: str) -> List[User]:
@@ -257,7 +257,7 @@ def sort_user_events(user_id: str, maxDays=8, maxEvents=16):
 
 def unsorted_user_events(user_id: str) -> List[List]:
     courses = get_user_courses(user_id)
-    events = Event.objects(course__in=courses)
+    events = Event.objects.get(course__in=courses)
     announcements = Announcement.objects(course__in=courses)
     assignments = Assignment.objects(course__in=courses)
     assessments = Assessment.objects(course__in=courses)
@@ -316,7 +316,7 @@ def check_duplicate_schoology(user_id, schoology_email) -> str:
 
 
 def getChat(chat_id: str):
-    chat = Chat.objects(pk=chat_id)
+    chat = Chat.objects.get(pk=chat_id)
     if not chat:
         raise KeyError("Invalid Chat ID")
 
