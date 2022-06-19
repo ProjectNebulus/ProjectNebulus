@@ -257,7 +257,7 @@ def sort_user_events(user_id: str, maxDays=8, maxEvents=16):
 
 def unsorted_user_events(user_id: str) -> List[List]:
     courses = get_user_courses(user_id)
-    events = Event.objects.get(course__in=courses)
+    events = Event.objects(course__in=courses)
     announcements = Announcement.objects(course__in=courses)
     assignments = Assignment.objects(course__in=courses)
     assessments = Assessment.objects(course__in=courses)
