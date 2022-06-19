@@ -6,9 +6,10 @@ import platform
 from waitress import serve
 from app.static.python.mongodb import read
 from app.static.python.classes.Announcement import Announcement
+import json
 
 from app.routes import init_app, socketio
-from app.static.python.classes import User
+from app.static.python.classes import User, ChatProfile
 
 app = init_app()
 app.secret_key = os.getenv("MONGOPASS")
@@ -32,5 +33,6 @@ if __name__ == "__main__":
     else:  # macos (darwin) or windows (windows)
         port = 8080
         host = "localhost"
+
     print(f"Started Running: http://{host}:{port}")
     socketio.run(app, host=host, port=port)

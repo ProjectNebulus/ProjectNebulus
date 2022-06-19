@@ -12,7 +12,7 @@ from .Planner import Planner
 from .Schoology import Schoology
 from .Snowflake import Snowflake
 from .Spotify import Spotify
-
+from .ChatProfile import ChatProfile
 
 class User(Snowflake):
     """
@@ -72,7 +72,7 @@ class User(Snowflake):
     student = BooleanField(default=True)
     teacher = BooleanField(default=False)
     chats = ListField(ReferenceField("Chat"), default=[])
-    chatProfile = ReferenceField("ChatProfile")
+    chatProfile = EmbeddedDocumentField(ChatProfile)
 
     def clean(self):
         self.password = hash256(self.password)

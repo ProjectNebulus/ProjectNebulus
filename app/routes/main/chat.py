@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from flask import render_template, session
+import json
 
 from . import main_blueprint
 from .utils import logged_in
@@ -87,10 +88,11 @@ def chatPage(page):
         except:
             newMessages = enumerate([])
 
+    user = read.find_user(pk=session['id'])
     return render_template(
         f"/chat/{page}.html",
         page="Nebulus - Chat",
-        user=session.get("username"),
+        user=json.loads(user.to_json()),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         email=session.get("email"),
         messages=newMessages,
