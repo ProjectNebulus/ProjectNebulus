@@ -1,0 +1,367 @@
+<!--Extend with Jinja!-->
+<script src="https://unpkg.com/flowbite@1.4.5/dist/flowbite.js"></script>
+<script type="text/javascript" src="//cdn.socket.io/4.4.1/socket.io.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+{% extends "layout.html" %}
+{% block main %}
+    <div id="user-data" class="w-0 h-0 invisible">{{ user_obj._id }}</div>
+    <div class="flex flex-row w-full h-full">
+        <div style="float:left;" class="w-45 h-full" aria-label="Sidebar" id="chat-sidebar">
+            <div class="px-3 py-4 overflow-y-auto rounded bg-gray-100 dark:bg-gray-800 h-full">
+                <form>
+                    <label for="default-search" class="mb-2 text-xs text-gray-900 sr-only dark:text-stone-400">Search or
+                        start a conversation</label>
+                    <div class="relative">
+                        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor"
+                                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                        </div>
+                        <input type="search" id="default-search"
+                               class="block p-2 pl-10 pr-0 w-full text-2xs text-gray-900 bg-gray-50 rounded-md border border-gray-300 focus:ring-slate-900 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="Search or start a conversation" style="font-size:15px;" required>
+                    </div>
+                </form>
+                <div class="flex flex-col w-full rounded-sm ">
+                    <div class="flex flex-row dark:hover:bg-zinc-700 hover:bg-gray-200 rounded-lg">
+                        <div style="margin-bottom:0px;"
+                             class="flex items-center space-x-4">
+                            <i class="material-icons text-black dark:text-stone-400"
+                               style="font-size:40px;margin:10px;">group</i>
+                            <div class="space-y-1 text-lg dark:text-stone-400">
+                                <div>Friends</div>
+                            </div>
+                        </div>
+                        <div class="inline-flex items-center mt-5 p-1 ml-32 mr-3 h-5 w-5 text-sm font-semibold text-white rounded-full bg-red-500">
+                            {{ user_obj.chatProfile.incomingFriendRequests|length }}
+
+                        </div>
+                    </div>
+                    <div style="margin-bottom:0px;"
+                         class="flex items-center space-x-4 dark:hover:bg-zinc-700 hover:bg-gray-200 rounded-lg">
+                        <i class="material-icons text-black dark:text-stone-400" style="font-size:40px;margin:10px;">block</i>
+                        <div class="space-y-1 text-lg dark:text-stone-400">
+                            <div>Blocked</div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom:0px;"
+                         class="flex items-center space-x-4 dark:hover:bg-zinc-700 hover:bg-gray-200 rounded-lg">
+                        <i class="material-icons text-black dark:text-stone-400" style="font-size:40px;margin:10px;">mood</i>
+                        <div class="space-y-1 text-lg dark:text-stone-400">
+                            <div>Emojis</div>
+                        </div>
+                    </div>
+                    <div class="flex flex-row">
+                        <div class="uppercase text-xl text-gray-600 cursor-pointer" style="font-size:20px;">Direct Messages</div>
+                        <div style="float:right;font-size:20px;margin-left:80px;" class="text-gray-600"
+                             data-dropdown-toggle="dropdown">+
+                        </div>
+                    </div>
+                    <div id="user-chats"></div>
+                    <div id="dropdown"
+                         class="z-10 hidden bg-white rounded shadow w-96 dark:bg-gray-700">
+                        <form class="mx-4">
+                            <label for="default-search"
+                                   class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Search</label>
+                            <div class="relative">
+                                <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                                    <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none"
+                                         stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                    </svg>
+                                </div>
+                                <input id="search" type="search" placeholder="Search by username" autocomplete="off"
+                                       class="block mt-6 mb-6 p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50
+                                           rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500
+                                           dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
+                                           dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            </div>
+                        </form>
+                        <ul id="search_items" class="hover:scroll overflow-auto text-black dark:text-white"
+                            style="max-height: 20rem">
+                            <li class="py-2.5 rounded-lg text-center px-4 py-2 mx-2 mb-5">
+                                Start typing to search
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-left: 325px; float:left;position: fixed;bottom: 10px;width:calc(100% - 256px);">
+            <div style="overflow-y:scroll; height:800px;">
+                <div style="margin:20px;display:flex;flex-direction: column-reverse;overflow-y:scroll;" id="chat">
+
+
+
+                    </div>
+
+                </div>
+
+            <div>
+                <form style="width:90%;">
+                    <label for="chat" class="sr-only">Your message</label>
+                    <div class="flex items-center py-2 px-3 bg-gray-50 rounded-lg dark:bg-gray-700">
+                        <button type="button"
+                                class="hidden md:block inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                        <button type="button"
+                                class="hidden md:block p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-.464 5.535a1 1 0 10-1.415-1.414 3 3 0 01-4.242 0 1 1 0 00-1.415 1.414 5 5 0 007.072 0z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                        <textarea id="chat" rows="1"
+                                  class="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                  placeholder="Your message..."></textarea>
+                        <button type="submit"
+                                class="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600">
+                            <svg class="w-6 h-6 rotate-90" fill="currentColor" viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function createChat(username) {
+            document.getElementById("dropdown").style.display = "none";
+        }
+
+        function changeSearch() {
+            let value = document.getElementById("search").value;
+            if (value.length > 0) {
+                document.getElementById("search_items").innerHTML = `
+<li>
+<div class="py-2.5 rounded-lg mx-auto block px-4 py-2 mx-2 dark:hover:text-white">
+                <svg role="status" class="inline w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+</svg>
+    Searching...
+</div>
+</li>
+            `;
+                const request = $.ajax({
+                    type: "POST",
+                    url: "/api/v1/internal/search-user",
+                    data: JSON.stringify({
+                        search: value
+                    }),
+
+                    contentType: 'application/json; charset=utf-8',
+                });
+                request.done((data) => {
+                    document.getElementById("search_items").innerHTML = "";
+                    let temp_arr = []
+                    if (data === "0") {
+                        document.getElementById("search_items").innerHTML += `
+                    <li class="text-center mb-5">
+                        No Results Found
+                    </li>`
+                    }
+                    else {
+                        let datas = data.split("•");
+                        for (let i = 0; i < datas.length; i++) {
+
+                            if (i % 3 === 0) {
+                                temp_arr = [];
+                                temp_arr.push(datas[i]);
+                            }
+                            if (i % 3 === 1) {
+                                temp_arr.push(datas[i]);
+                            }
+                            if (i % 3 === 2) {
+                                temp_arr.push(datas[i]);
+                                let element = temp_arr;
+                                console.log(element);
+
+                                document.getElementById("search_items").innerHTML += `
+                    <div>
+                        <span onclick="createChat('${element[1]}');" class="truncate py-2.5 rounded-lg mx-auto block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 mx-2 dark:hover:text-white" style="text-align:left;">
+                <img src="${element[0]}" class="inline-block w-10 h-10 rounded-full" alt="dates">
+                ${element[1]} <span class="text-gray-500 ml-2">${element[2]}</span></span>
+                    </div>
+`
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        keyUpDelay("#search", 500, changeSearch)
+
+        function makeCall() {
+            let chatAmount = $('#user-chats > div').length;
+            $.ajax({
+                url: '/api/v1/internal/fetch-chats',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    index: chatAmount
+                })
+
+
+            }).done(load);
+        }
+
+        $(document).ready(function () {
+            makeCall();
+        })
+
+        $('#chat-sidebar').on('scroll', function () {
+                let div = $(this).get(0);
+
+                if (div.scrollTop + div.clientHeight >= div.scrollHeight) {
+                    makeCall();
+                }
+            }
+        );
+
+
+        function load(data) {
+            s = ``
+            let userID = document.getElementById('user-data').textContent
+            let div = document.getElementById('user-chats')
+            data.forEach(function (chat) {
+                s += `
+<a href="javascript:getChat(${chat['_id']})">
+            <div style="margin-bottom:4px;"
+             class="p-2 flex items-center space-x-4 dark:bg-gray-600 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" >`
+                if (chat['members'].length === 2) {
+                    let other = chat['members'].filter(function (user) {
+                        return (user['_id'] != userID)
+                    })[0]
+
+                    if (other['chatProfile']['status'] === 'Online') {
+                        s += `<div class="relative">
+    <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
+    <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+</div>`
+                    }
+                    else if (other['chatProfile']['status'] === 'Do Not Disturb') {
+                        s += `<div class="relative">
+    <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
+    <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-red-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
+</div>`
+                    }
+                    else {
+                        s += `<div class="relative">
+    <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
+    <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-gray-700 border-2 border-white dark:border-gray-800 rounded-full"></span>
+</div>`
+                    }
+                    let status_emoji = other['chatProfile']['status_emoji']
+                    if (!(status_emoji)) {
+                        status_emoji = ''
+                    }
+                    let status_text = other['chatProfile']['status_text']
+                    if (!(status_emoji)) {
+                        status_text = ''
+                    }
+                    s +=
+                        `
+            <div class="space-y-1 font-medium dark:text-white">
+                <div class="dark:text-gray-300" style="font-size:20px">${other['username']}</div>
+                <div class="text-sm text-gray-500 dark:text-gray-400" style="font-size:13px;">${status_emoji} ${status_text}</div>
+            </div>
+        </div>
+</a>
+        `
+
+                }
+                else {
+                    s += `
+               <div class="flex items-center space-x-4">
+    <img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src="${chat['avatar']['avatar_url']}" alt="Bordered avatar">
+                `
+
+                    if (!(chat['title'])) {
+                        chat['title'] = `${chat['owner']['username']}'s Chat`
+                    }
+
+                    s +=
+                        `<div class="space-y-1 font-medium dark:text-white">
+        <div style="font-size:20px;" class="dark:text-gray-300">${chat["title"]}</div>
+        <div style="font-size:13px;" class="text-sm text-gray-500 dark:text-gray-400">${chat['members'].length} Members</div>
+    </div>
+</div>
+</a>`
+                }
+            });
+
+            div.insertAdjacentHTML('beforeend', s);
+
+            let selected = document.getElementById('user-chats');
+            selected.children[0].click();
+
+        }
+
+    function changeStatus(status){
+        $.ajax({
+            url: '/api/v1/internal/set-status',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                status: status
+            })
+    });
+    }
+
+    window.onunload = function(){
+        changeStatus("Offline")
+    }
+    window.addEventListener("load", function(){
+        changeStatus('Online');
+    });
+    function getChat(chatID){
+            console.log('hi');
+            $.ajax({
+                url: '/api/v1/internal/get-chat',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                        chatID: chatID.toString()
+                    }
+                ),
+                success: function (chat) {
+                    let chat_el = document.getElementById('chat');
+                    console.log(chat);
+                    s = ``
+                    chat['messages'].forEach(function (message) {
+                        s += `<div class="flex items-top space-x-4 mt-2">
+                        <img class="mt-1 w-10 h-10 rounded-full"
+                             src="${message['sender']['avatar']['avatar_url']}"
+                             alt="">
+                        <div class="space-y-1 font-medium dark:text-white">
+                            <div>${message['sender']['username']}</div>
+                            <div class="text-sm text-gray-500 dark:text-gray-400">${message['content']}</div>
+                        </div>
+                    </div>`
+                    });
+
+                    chat_el.insertAdjacentHTML('beforeend', s)
+                }
+            });
+
+            }
+    </script>
+{% endblock %}

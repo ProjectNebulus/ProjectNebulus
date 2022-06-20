@@ -5,6 +5,7 @@ import json
 from . import internal
 from .... import socketio
 from .....static.python.mongodb import create, read, update, delete
+from .....static.python.classes import User
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 
@@ -100,6 +101,9 @@ def message_deleted(json_data):
         pass
 
 
+@socketio.event('online')
+
+
 @internal.route("/change-status", methods=["POST"])
 def changeStatus():
     json_data = request.get_json()
@@ -147,5 +151,32 @@ def fetchChats():
 def getChat():
     data = request.get_json()
     chatID = data["chatID"]
-    chat = read.getChat(chatID)
-    return json.loads(chat.to_json())
+    chat = json.loads(read.getChat(chatID).to_json())
+    chat['messages'] = chat['messages'][:30]
+    return jsonify(chat)
+
+
+@internal.route("/fetch-messages", methods=['POST'])
+def fetchMessages():
+    data = request.get_json()
+    chatID = data["chatID"]
+    chat = json.loads(read.getChat(chatID).to_json())
+    if len(chat['messages']) < data['current_index']+30:
+        chat['messages'] = chat['messages'][data['current_index']:(len(chat['messages'])-data['current_index'])]
+    else:
+        chat['messages'] = chat['messages'][data['current_index']:(data['current_index']+30)]
+
+    for message in chat['messages']:
+        message["sender"] = json.loads(User.objects.only('_id', 'username', 'avatar.avatar_url').get(pk=message["sender"]).to_json())
+
+    return jsonify(chat['messages'])
+
+
+
+
+@internal.route("/set-status", methods=['POST'])
+def set_offline_status():
+    data = request.get_json()
+    print(data)
+    update.set_status(session['id'], data['status'])
+    return 'success'

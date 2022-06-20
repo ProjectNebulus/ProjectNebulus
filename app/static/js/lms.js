@@ -43,7 +43,7 @@ let templateLists = modal.getElementsByClassName('scroll');
 let screens = modal.getElementsByClassName('CoursePage');
 
 // set up button
-let btn = document.getElementById('create');
+let btn = document.getElementById('course');
 
 for (const screen of screens)
     screen.className += " relative px-4 w-full max-w-2xl relative bg-gray-200 rounded-lg shadow dark:bg-gray-700 text-black dark:text-white"
@@ -89,7 +89,7 @@ for (const element of modal.getElementsByClassName('CoursePage'))
     element.className += ' hidden overflow-visible fixed right-0 left-0 top-4 z-50 justify-center items-center h-72 md:inset-0';
 
 function lms(subtemplate) {
-    document.getElementById('create-course-status').innerHTML = 'Creating course...';
+    document.getElementById('course-course-status').innerHTML = 'Creating course...';
 
     const xhttp = new XMLHttpRequest();
     xhttp.open('POST', '/lms', true);
@@ -130,7 +130,7 @@ for (const i in pageCounters) {
 
 /*
 
-To create a new template, add a new dictionary and put the parameters:
+To course a new template, add a new dictionary and put the parameters:
 
 name (e.g. Science)
 icon (e.g. science.svg)
@@ -314,7 +314,7 @@ function customize(template, subtemplate) {
     courseName.placeholder = subtemplate;
     courseTeacher.placeholder = user;
 
-    document.getElementById('create-course').onsubmit = () => lms(subtemplate);
+    document.getElementById('course-course').onsubmit = () => lms(subtemplate);
 
     document.getElementById('import-schoology').onclick = importSchoology;
     document.getElementById('import-classroom').onclick = importGClassroom;
@@ -324,7 +324,7 @@ function customize(template, subtemplate) {
 function importGClassroom() {
     screens[2].style.display = 'none';
     screens[4].style.display = 'block';
-    const status = document.getElementById('create-course-status2');
+    const status = document.getElementById('course-course-status2');
     const input = document.getElementById('google-course-id');
     const teacher = document.getElementById('google-course-teacher');
 
@@ -368,7 +368,7 @@ function importGClassroom() {
 function importCanvas() {
     screens[2].style.display = 'none';
     screens[5].style.display = 'block';
-    const status = document.getElementById('create-course-status2');
+    const status = document.getElementById('course-course-status2');
     const input = document.getElementById('canvas-course-id');
     const teacher = document.getElementById('canvas-course-teacher');
 
@@ -413,7 +413,7 @@ function importSchoology() {
     screens[2].style.display = 'none';
     screens[3].style.display = 'block';
 
-    const status = document.getElementById('create-course-status2');
+    const status = document.getElementById('course-course-status2');
     const input = document.getElementById('schoology-course-id');
     const teacher = document.getElementById('schoology-course-teacher');
 
@@ -456,7 +456,7 @@ function importSchoology() {
 }
 
 function schoologyCourseReq() {
-    const status = document.getElementById('create-course-status2');
+    const status = document.getElementById('course-course-status2');
     if (this.responseText === '1') {
         status.style.color = 'red';
         status.innerHTML = 'You have not connected your schoology account! Please connect a schoology account to import courses from Schoology.';
@@ -468,7 +468,7 @@ function schoologyCourseReq() {
 }
 
 function googleCourseReq() {
-    const status = document.getElementById('create-course-status2');
+    const status = document.getElementById('course-course-status2');
     if (this.responseText === '1') {
         status.style.color = 'red';
         status.innerHTML = 'You have not connected your google account! Please connect a schoology account to import courses from Schoology.';
@@ -480,7 +480,7 @@ function googleCourseReq() {
 }
 
 function canvasCourseReq() {
-    const status = document.getElementById('create-course-status2');
+    const status = document.getElementById('course-course-status2');
     if (this.responseText === '1') {
         status.style.color = 'red';
         status.innerHTML = 'You have not connected your canvas account! Please connect a schoology account to import courses from Schoology.';
@@ -494,18 +494,18 @@ function canvasCourseReq() {
 function updateCanvasLink(link) {
     document.getElementById("canvas-course-id").value = link;
     document.getElementById("clist").style.display = "none";
-    document.getElementById("canvas-create-course").style.display = "block";
+    document.getElementById("canvas-course-course").style.display = "block";
 }
 
 function updateGoogleLink(link, teacher) {
     document.getElementById("google-course-id").value = link;
     document.getElementById("google-course-teacher").value = teacher;
     document.getElementById("glist").style.display = "none";
-    document.getElementById("google-create-course").style.display = "block";
+    document.getElementById("google-course-course").style.display = "block";
 }
 
 function updateSchoologyLink(link) {
     document.getElementById("schoology-course-id").value = link;
     document.getElementById("slist").style.display = "none";
-    document.getElementById("schoology-create-course").style.display = "block";
+    document.getElementById("schoology-course-course").style.display = "block";
 }

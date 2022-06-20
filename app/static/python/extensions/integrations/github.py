@@ -1,6 +1,6 @@
 from github import Github, ApplicationOAuth
 
-# First create a Github instance:
+# First course a Github instance:
 
 
 g = Github("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")

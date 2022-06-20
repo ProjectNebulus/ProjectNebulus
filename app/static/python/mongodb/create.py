@@ -128,7 +128,7 @@ def createDocumentFile(data: dict) -> DocumentFile:
         folder.documents.append(document_file)
         folder.save()
     else:
-        raise Exception("Cannot create document file without either course or folder")
+        raise Exception("Cannot course document file without either course or folder")
 
     return document_file
 

@@ -6,8 +6,6 @@ def hash256(password):
     return str(hashed)
 
 
-print(hash256("12345*"))
-
 
 def valid_password(hashed, unhashed):
     # print(
