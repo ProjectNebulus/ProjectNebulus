@@ -433,7 +433,7 @@ def loadChats(user_id:str, current_index, initial_amount, required_fields):
     for chat in chats:
         for x, member in enumerate(chat['members']):
             chat['members'][x] = json.loads(User.objects(pk=member).only('id', 'chatProfile', 'username').first().to_json())
-        chat['owner'] = list(filter(lambda x: x['id']==chat['owner'], chat['members']))[0]
+        chat['owner'] = list(filter(lambda x: x['_id']==chat['owner'], chat['members']))[0]
 
     print(chats)
     return chats

@@ -5,50 +5,50 @@
 {% block main %}
     {% include "utils/navbar.html" %}
     <div id="user-data" user-id="{{ user_obj.id }}"></div>
-    <div>
-    <aside style="float:left;" class="w-55 h-full" aria-label="Sidebar" id="chat-sidebar">
+    <div class="flex flex-row w-full h-full">
+    <div style="float:left;" class="w-45 h-full" aria-label="Sidebar" id="chat-sidebar">
         <div class="px-3 py-4 overflow-y-auto rounded bg-gray-100 dark:bg-stone-800 h-full" >
              <form>
-    <label for="default-search" class="mb-2 text-sm text-xs text-gray-900 sr-only dark:text-stone-400">Search or start a conversation</label>
+    <label for="default-search" class="mb-2 text-xs text-gray-900 sr-only dark:text-stone-400">Search or start a conversation</label>
     <div class="relative">
         <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
             <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
         </div>
-        <input type="search" id="default-search" class="block p-2 pl-10 pr-10 w-full text-2xs text-gray-900 bg-gray-50 rounded-md border border-gray-300 focus:ring-slate-900 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search or start a conversation" required>
+        <input type="search" id="default-search" class="block p-2 pl-10 pr-0 w-full text-2xs text-gray-900 bg-gray-50 rounded-md border border-gray-300 focus:ring-slate-900 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search or start a conversation" style="font-size:15px;" required>
     </div>
 </form>
-            <div class="flex flex-row w-full dark:hover:bg-zinc-700 rounded-sm hover:bg-gray-200">
+            <div class="flex flex-col w-full rounded-sm ">
+                <div class="flex flex-row dark:hover:bg-zinc-700 hover:bg-gray-200 rounded-lg">
             <div style="margin-bottom:0px;"
-                 class="flex items-center space-x-4 rounded-md">
-                <i class="material-icons text-black dark:text-stone-400" style="font-size:40px;margin:2px;">group</i>
-                <div class="space-y-1 text-sm dark:text-stone-400">
+                 class="flex items-center space-x-4">
+                <i class="material-icons text-black dark:text-stone-400" style="font-size:40px;margin:10px;">group</i>
+                <div class="space-y-1 text-lg dark:text-stone-400">
                     <div>Friends</div>
                 </div>
             </div>
-            <div style="margin-bottom:4px;"
-                 class="flex items-center space-x-4 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg">
-                <i class="material-icons text-black dark:text-white" style="font-size:40px;margin:10px;">pending</i>
-                <div class="space-y-1 font-medium dark:text-white">
-                    <div>Friend Requests</div>
+                    <div class="inline-flex items-center mt-5 p-1 ml-32 mr-3 h-5 w-5 text-sm font-semibold text-white rounded-full bg-red-500">
+                        {{ user_obj.chatProfile.incomingFriendRequests|length }}
+
+</div>
                 </div>
-            </div>
-            <div style="margin-bottom:4px;"
-                 class="flex items-center space-x-4 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg">
-                <i class="material-icons text-black dark:text-white" style="font-size:40px;margin:10px;">block</i>
-                <div class="space-y-1 font-medium dark:text-white">
+            <div style="margin-bottom:0px;"
+                 class="flex items-center space-x-4 dark:hover:bg-zinc-700 hover:bg-gray-200 rounded-lg">
+                <i class="material-icons text-black dark:text-stone-400" style="font-size:40px;margin:10px;">block</i>
+                <div class="space-y-1 text-lg dark:text-stone-400">
                     <div>Blocked</div>
                 </div>
             </div>
-            <div style="margin-bottom:4px;"
-                 class="flex items-center space-x-4 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg">
-                <i class="material-icons text-black dark:text-white" style="font-size:40px;margin:10px;">mood</i>
-                <div class="space-y-1 font-medium dark:text-white">
+            <div style="margin-bottom:0px;"
+                 class="flex items-center space-x-4 dark:hover:bg-zinc-700 hover:bg-gray-200 rounded-lg">
+                <i class="material-icons text-black dark:text-stone-400" style="font-size:40px;margin:10px;">mood</i>
+                <div class="space-y-1 text-lg dark:text-stone-400">
                     <div>Emojis</div>
                 </div>
             </div>
-            <div class="uppercase text-lg text-gray-600 cursor-pointer">Private Messages
-                <div style="float:right;" data-dropdown-toggle="dropdown">+</div>
-            </div>
+                <div class="flex flex-row">
+                    <div class="uppercase text-xl text-gray-600 cursor-pointer">Private Messages</div>
+                <div style="float:right;font-size:25px;"  class="ml-25 mb-4 text-gray-600" data-dropdown-toggle="dropdown">+</div>
+                </div>
                 <div id="user-chats"></div>
             <div id="dropdown"
                  class="z-10 hidden bg-white rounded shadow w-96 dark:bg-gray-700">
@@ -84,8 +84,11 @@
 
         </div>
 
-    </aside>
-    <div style="margin-left: 256px; float:left;position: fixed;bottom: 10px;width:calc(100% - 256px);">
+    </div>
+        </div>
+    </div>
+
+    <div style="margin-left: 325px; float:left;position: fixed;bottom: 10px;width:calc(100% - 256px);">
         <div style="overflow-y:scroll; height:800px;">
             <img style="margin:10px;" class="w-48 h-48 rounded-full"
                  src="https://cdn.discordapp.com/avatars/751594192739893298/03a0281d67484e9b1c95205fd5f81c2a.webp?size=64"
@@ -266,9 +269,8 @@
             </form>
         </div>
     </div>
-
-
     </div>
+
     <script>
     function createChat(username){
         document.getElementById("dropdown").style.display = "none";
@@ -342,7 +344,7 @@
         $.ajax({
             url: '/api/v1/internal/fetch-chats',
             type: 'POST',
-            dataType: 'JSON',
+            contentType: 'application/json',
             data: JSON.stringify({
                 index: chatAmount
             })
@@ -369,12 +371,12 @@
     function load(data){
         s = ``
         let userID = document.getElementById('user-data').getAttribute('user-id')
-        let div = document.getElementById('user-chat')
+        let div = document.getElementById('user-chats')
         data.forEach(function (chat){
             s += `
             <div style="margin-bottom:4px;"
              class="flex items-center space-x-4 dark:bg-gray-600 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg">`
-            if (item['members'].length === 2){
+            if (chat['members'].length === 2){
                 let other = chat['members'].filter(user => user['id'] != userID)
                 s+=
            ` <img style="margin:10px;" class="w-12 h-12 rounded-full"
@@ -401,7 +403,7 @@
             s+=
                 `<div class="space-y-1 font-medium dark:text-white">
                     <div>${chat['title']}</div>
-                    <div class="text-sm text-gray-500 dark:text-gray-400">${chat['members'].length}} Members</div>
+                    <div class="text-sm text-gray-500 dark:text-gray-400">${chat['members'].length} Members</div>
                 </div>
             </div>`
             }
