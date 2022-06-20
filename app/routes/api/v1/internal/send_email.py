@@ -15,20 +15,7 @@ app.config["MAIL_USE_TLS"] = False
 app.config["MAIL_USE_SSL"] = True
 mail = Mail(app)
 
-
-# todo: Finish email sending blueprint
-@internal.route("/send-email", methods=["POST"])
 def send_email():
-    """
-    POST /api/internal/send-email
-    Args
-    - recipients
-    - message-head
-    - message-body
-    - message-html-file
-    :return:
-    """
-
     code = random.randint(10000000, 99999999)
     session["verificationCode"] = str(code)
     print(code)
@@ -49,4 +36,18 @@ def send_email():
     msg.html = htmlform
     print("sending email")
     mail.send(msg)
+# todo: Finish email sending blueprint
+@internal.route("/send-email", methods=["POST"])
+def send_email():
+    """
+    POST /api/internal/send-email
+    Args
+    - recipients
+    - message-head
+    - message-body
+    - message-html-file
+    :return:
+    """
+
+    send_email()
     return "success"
