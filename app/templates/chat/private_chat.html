@@ -3,7 +3,7 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 {% extends "layout.html" %}
 {% block main %}
-    {% include "utils/navbar.html" %}
+    {% include "navbar.html" %}
     <div id="user-data" user-id="{{ user.id }}"></div>
     <div>
     <aside style="float:left;" class="w-55 h-full" aria-label="Sidebar" id="chat-sidebar">
@@ -46,7 +46,7 @@
                     <div>Emojis</div>
                 </div>
             </div>
-            <div class="uppercase text-lg text-gray-600 cursor-pointer">Direct Messages
+            <div class="uppercase text-lg text-gray-600 cursor-pointer">Private Messages
                 <div style="float:right;" data-dropdown-toggle="dropdown">+</div>
             </div>
                 <div id="user-chats"></div>
@@ -342,7 +342,7 @@
         $.ajax({
             url: '/api/v1/internal/fetch-chats',
             type: 'POST',
-            contentType: 'application/json; charset=utf-8',
+            dataType: 'JSON',
             data: JSON.stringify({
                 index: chatAmount
             })
@@ -369,12 +369,12 @@
     function load(data){
         s = ``
         let userID = document.getElementById('user-data').getAttribute('user-id')
-        let div = document.getElementById('user-chats')
+        let div = document.getElementById('user-chat')
         data.forEach(function (chat){
             s += `
             <div style="margin-bottom:4px;"
              class="flex items-center space-x-4 dark:bg-gray-600 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg">`
-            if (chat['members'].length === 2){
+            if (item['members'].length === 2){
                 let other = chat['members'].filter(user => user['id'] != userID)
                 s+=
            ` <img style="margin:10px;" class="w-12 h-12 rounded-full"

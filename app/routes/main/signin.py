@@ -9,7 +9,7 @@ from ...static.python.mongodb import read
 @main_blueprint.route("/signin", methods=["GET"])
 def signin():
     user_acc = read.find_user(id="1522048621565050880")
-    user_courses = read.get_user_courses("1522048621565050880")
+    user_courses = read.get_user_courses("1522048621565050880")[:5]
     events = read.sort_user_events("1522048621565050880")
 
     if session.get("logged_in"):

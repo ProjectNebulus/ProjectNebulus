@@ -1,5 +1,16 @@
 from . import internal
-from ....main.spotify import *
+from ....main.spotify import get_song
+from .....routes.main.spotify import (
+    shuffle_spotify,
+    shuffle2_spotify,
+    loop_spotify,
+    loop1_spotify,
+    loop2_spotify,
+    pause_spotify,
+    next_spotify,
+    prev_spotify,
+    resume_spotify,
+)
 from app.static.python.music.musixmatch import Musixmatch
 
 
