@@ -17,11 +17,8 @@ def chat():
 def chatPage(page):
     if page == "email":
         newMessages = get_schoology_emails()
-<<<<<<< HEAD
     else:
         newMessages = None
-=======
->>>>>>> rewrite
     user = read.find_user(pk=session["id"])
     user_chats = read.loadChats(
         session["id"],
