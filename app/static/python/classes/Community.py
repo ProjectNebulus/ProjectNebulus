@@ -5,7 +5,7 @@ from .Snowflake import Snowflake
 
 
 class Community(Snowflake):
-    meta = {"collection": "Chats"}
+    meta = {"collection": "Communities"}
     members = ListField(ReferenceField("User"), required=True)
     owner = ReferenceField("User", required=True)
     created = DateTimeField(required=True)

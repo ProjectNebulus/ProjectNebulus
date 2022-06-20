@@ -1,7 +1,8 @@
 # Imports
 from logging import LogRecord
 
-from flask.logging import logging
+from flask import has_request_context
+from flask.logging import logging, default_handler
 from flask_cors import CORS
 from flask_mail import Mail
 from flask_socketio import SocketIO
@@ -16,9 +17,34 @@ from .static import *
 class _LogFilter(logging.Filter):
     def filter(self, record: LogRecord) -> bool:
         message = record.getMessage()
-        codes = ("200", "304")
+        keywords = ("200", "304")
 
-        return all((code not in message for code in codes))
+        return all((word not in message for word in keywords))
+
+
+class _LogFormatter(logging.Formatter):
+    prevMessage = ""
+    occurrences = 1
+
+    def format(self, record: LogRecord) -> str:
+        occurring = (message := record.getMessage()) == self.prevMessage
+        if occurring:
+            self.occurrences += 1
+        else:
+            self.prevMessage = message
+            self.occurrences = 1
+
+        if has_request_context():
+            record.url = request.url
+            record.remote_addr = request.remote_addr
+        else:
+            record.url = None
+            record.remote_addr = None
+
+        if occurring:
+            return f"\n[{self.occurrences}x occurred]"
+        else:
+            return super().format(record)
 
 
 def init_app():
@@ -46,15 +72,15 @@ def init_app():
     @app.before_request
     def before_rq():
         # log out users who have deleted accounts
-        if "username" in session.keys():
+        if "id" in session.keys():
             try:
-                read.find_user(username=session.get("username"))
+                read.find_user(id=session.get("id"))
             except KeyError:
                 return redirect("/logout")
 
     mail = Mail(app)
     socketio.init_app(app, logging=False)
     logging.getLogger("werkzeug").addFilter(_LogFilter())
-    print(app.url_map)
+    default_handler.setFormatter(_LogFormatter())
 
     return app

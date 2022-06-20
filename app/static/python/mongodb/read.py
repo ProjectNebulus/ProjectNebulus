@@ -5,7 +5,7 @@ import json
 from typing import List
 
 import schoolopy
-from flask import Response, session
+from flask import session
 from mongoengine import Q
 
 from ..classes import *
@@ -64,7 +64,7 @@ def find_courses(_id: str):
     return course[0]
 
 
-def find_user(**kwargs) -> User | Response | None:
+def find_user(**kwargs) -> User | None:
     data = {k: v for k, v in kwargs.items() if v is not None}
     user = User.objects(**data).first()
     if not user:
@@ -77,7 +77,7 @@ def find_folder(**kwargs) -> Folder | None:
     folder = Folder.objects(**kwargs).first()
     if not folder:
         print(folder)
-        raise KeyError("User not found")
+        raise KeyError("Folder not found")
     return folder
 
 

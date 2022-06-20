@@ -48,17 +48,35 @@
         class="w-full my-4 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
     Logout
 </button>
-<div id="bigFocus" class="w-full text-center bg-blue-100 text-blue-800 text-xs font-medium px-3 py-2 rounded
+<div id="focus" class="w-full text-center bg-blue-100 text-blue-800 text-xs font-medium px-3 py-2 rounded
      dark:bg-blue-200 dark:text-blue-800">
     <svg class="mr-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0
              00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"></path>
     </svg>
-    <span id="focus" class="align-middle">Focusing on My Homework for 10 minutes</span>
+    <span id="focusText" class="align-middle truncate" style="max-width: 5rem"></span>
 </div>
 <div id="spotifyStatus"></div>
 <script>
     const controlCenter = document.getElementById("control-center");
+    const focus = document.getElementById("focus");
+    const focusText = document.getElementById("focusText");
+
+    setInterval(() => {
+        let original = localStorage.getItem("originalTimer");
+
+        if (!original) {
+            focus.classList.add("hidden");
+            return;
+        }
+        original = original.split(" ");
+
+        focus.classList.remove("hidden");
+        const current = localStorage.getItem("currentTimer").split(" ");
+
+        focusText.innerHTML = "Focusing on " + current[0]
+
+    }, 1000);
 
     for (const div of controlCenter.querySelectorAll("div > div > div"))
         div.className += " bg-gray-300/30 dark:bg-gray-900/60 mx-2 text-left flex flex-col rounded-lg";
