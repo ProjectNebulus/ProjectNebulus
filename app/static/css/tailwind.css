@@ -1419,6 +1419,18 @@ html.dark body {
   margin-left: 0px;
 }
 
+.ml-16 {
+  margin-left: 4rem;
+}
+
+.ml-28 {
+  margin-left: 7rem;
+}
+
+.ml-32 {
+  margin-left: 8rem;
+}
+
 .block {
   display: block;
 }

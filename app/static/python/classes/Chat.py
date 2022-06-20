@@ -6,7 +6,7 @@ from .Avatar import Avatar
 from .Message import Message
 from .Snowflake import Snowflake
 
-Message  # so pycharm optimize imports doesn't remove it
+# so pycharm optimize imports doesn't remove it
 
 
 class Chat(Snowflake):
@@ -22,6 +22,7 @@ class Chat(Snowflake):
     type = StringField(default="Nebulus")  # Nebulus, Schoology, etc.
     messages = ListField(EmbeddedDocumentField("Message"), default=[])
     pinned_messages = ListField(EmbeddedDocumentField("Message"), default=[])
+    lastEdited = DateTimeField(default=datetime.now())
 
     def clean(self):
         if not self.title:

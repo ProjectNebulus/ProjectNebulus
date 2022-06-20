@@ -15,7 +15,7 @@ from googleapiclient.discovery import build
 os.environ["OAUTHLIB_RELAX_TOKEN_SCOPE"] = "None"
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 
-CLIENT_SECRETS_FILE = "app/static/python/credentials.json"
+CLIENT_SECRETS_FILE = "app/static/python/credentials.json_data"
 SCOPES = [
     "https://www.googleapis.com/auth/classroom.courses.readonly",
     "https://www.googleapis.com/auth/classroom.rosters.readonly",

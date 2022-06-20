@@ -3,7 +3,7 @@ function setUpStuff() {}
 function newCourse() {
     const xhttp = new XMLHttpRequest();
     xhttp.open('POST', '/new', true);
-    xhttp.setRequestHeader('Content-type', 'application/json');
+    xhttp.setRequestHeader('Content-type', 'application/json_data');
     xhttp.addEventListener('load', reqListener);
     xhttp.send(
         JSON.stringify({

@@ -41,7 +41,7 @@ def g_classroom_auth():
     if classroom_object:
         import random, json, os
 
-        filename = "token_" + str(random.randrange(1000000000, 9999999999)) + ".json"
+        filename = "token_" + str(random.randrange(1000000000, 9999999999)) + ".json_data"
         tokeninfo2 = classroom_object.to_json()
         with open(filename, "w") as out:
             json.dump(tokeninfo2, out, indent=4)
@@ -53,7 +53,7 @@ def g_classroom_auth():
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                "app/static/python/credentials.json", scope
+                "app/static/python/credentials.json_data", scope
             )
             flow.redirect_uri = ""
             print(flow)

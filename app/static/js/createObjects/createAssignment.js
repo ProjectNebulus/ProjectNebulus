@@ -18,7 +18,7 @@ function createAssignment(){
         url: "/api/v1/internal/create-assignment",
         data: JSON.stringify(assignment),
         dataType: "json",
-        contentType: "application/json",
+        contentType: "application/json_data",
         done: function(data){
             alert("Successfully created assignment");
         },

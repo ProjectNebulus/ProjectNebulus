@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import re
+import json
 from typing import List
 
 import schoolopy
@@ -406,3 +407,23 @@ def search_course(keyword: str, course: str):
         announcements,
         NebulusDocuments,
     )
+
+
+def getUserChats(user_id:str, required_fields:list):
+    user = find_user(pk=user_id)
+    chats = Chat.objects(members=user).only(*required_fields)
+    return chats
+
+
+def loadChats(user_id:str, current_index, initial_amount, required_fields):
+    chats = json.loads(
+        getUserChats(user_id, required_fields).to_json()
+    )
+    chats = sorted(chats, key=lambda x: x['lastEdited'])
+
+    if len(chats) < current_index + initial_amount:
+        initial_amount = len(chats) - current_index
+
+    chats = chats[current_index:(current_index + initial_amount)]
+
+    return chats

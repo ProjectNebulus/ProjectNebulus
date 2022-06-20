@@ -55,7 +55,7 @@ function createCourse(subtemplate) {
 
     const xhttp = new XMLHttpRequest();
     xhttp.open('POST', '/createCourse', true);
-    xhttp.setRequestHeader('Content-type', 'application/json');
+    xhttp.setRequestHeader('Content-type', 'application/json_data');
     xhttp.send(
         JSON.stringify({
             name: document.getElementById('course-name').value,
@@ -317,7 +317,7 @@ function importGClassroom() {
 
     const xhttp = new XMLHttpRequest();
     xhttp.open('POST', '/api/v1/internal/createGcourse', true);
-    xhttp.setRequestHeader('Content-type', 'application/json');
+    xhttp.setRequestHeader('Content-type', 'application/json_data');
     xhttp.addEventListener('load', googleCourseReq);
     xhttp.send(
         JSON.stringify({
@@ -361,7 +361,7 @@ function importCanvas() {
 
     const xhttp = new XMLHttpRequest();
     xhttp.open('POST', '/api/v1/internal/createCanvascourse', true);
-    xhttp.setRequestHeader('Content-type', 'application/json');
+    xhttp.setRequestHeader('Content-type', 'application/json_data');
     xhttp.addEventListener('load', canvasCourseReq);
     xhttp.send(
         JSON.stringify({
@@ -406,7 +406,7 @@ function importSchoology() {
 
     const xhttp = new XMLHttpRequest();
     xhttp.open('POST', '/api/v1/internal/createSchoologyCourse', true);
-    xhttp.setRequestHeader('Content-type', 'application/json');
+    xhttp.setRequestHeader('Content-type', 'application/json_data');
     xhttp.addEventListener('load', schoologyCourseReq);
     xhttp.send(
         JSON.stringify({

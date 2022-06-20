@@ -202,7 +202,7 @@ def createGoogleClassroomConnection(user_id: str, data: dict) -> GoogleClassroom
 
 
 def createChat(data: dict) -> Chat:
-    chat = Chat(data)
+    chat = Chat(**data)
     chat.save(force_insert=True)
     for member in chat.members:
         member.chats.append(chat)

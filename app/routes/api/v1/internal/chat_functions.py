@@ -1,6 +1,6 @@
 from flask import session, request
 from flask_socketio import join_room, leave_room
-
+import json
 from . import internal
 from .... import socketio
 from .....static.python.mongodb import create, read, update, delete
@@ -9,15 +9,15 @@ regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 
 
 @socketio.event('new message')
-def new_message(json):
-    print('new message: ' + json)
-    if json['chatType'] == 'chat':
-        chatID = json['chatID']
-        del json['chatID'], json['chatType']
-        create.sendMessage(json, chatID)
-        sender = read.find_user(id=json['sender'])
+def new_message(json_data):
+    print('new message: ' + json_data)
+    if json_data['chatType'] == 'chat':
+        chatID = json_data['chatID']
+        del json_data['chatID'], json_data['chatType']
+        create.sendMessage(json_data, chatID)
+        sender = read.find_user(id=json_data['sender'])
         socketio.emit('new message',
-                      {'author': [sender.id, sender.username, sender.avatar.avatar_url], 'content': json['content']},
+                      {'author': [sender.id, sender.username, sender.avatar.avatar_url], 'content': json_data['content']},
                       room=chatID)
     else:
         # TODO: Create message for communities
@@ -25,13 +25,13 @@ def new_message(json):
 
 
 @socketio.event('user joined')
-def user_joined(json):
-    print('user joined: ' + json)
-    if json['chatType'] == 'chat':
-        chatID = json['chatID']
+def user_joined(json_data):
+    print('user joined: ' + json_data)
+    if json_data['chatType'] == 'chat':
+        chatID = json_data['chatID']
         join_room(chatID)
-        update.joinChat(json['user_id'], chatID)
-        user = read.find_user(pk=json['user'])
+        update.joinChat(json_data['user_id'], chatID)
+        user = read.find_user(pk=json_data['user'])
         socketio.emit('user joined',
                       {'user': [user.id, user.username, user.avatar.avatar_url], 'msg': f'{user.username} has joined'},
                       room=chatID)
@@ -40,13 +40,13 @@ def user_joined(json):
 
 
 @socketio.event('user left')
-def user_left(json):
-    print('user left: ' + json)
-    if json['chatType'] == 'chat':
-        chatID = json['chatID']
+def user_left(json_data):
+    print('user left: ' + json_data)
+    if json_data['chatType'] == 'chat':
+        chatID = json_data['chatID']
         leave_room(chatID)
-        update.leaveChat(json['user_id'], chatID)
-        user = read.find_user(id=json['user'])
+        update.leaveChat(json_data['user_id'], chatID)
+        user = read.find_user(id=json_data['user'])
         socketio.emit('user left',
                       {'user': [user.id, user.username, user.avatar.avatar_url], 'msg': f'{user.username} has left'},
                       room=chatID)
@@ -55,14 +55,14 @@ def user_left(json):
 
 
 @socketio.event('message edited')
-def message_edited(json):
-    print('message edited: ' + json)
-    if json['chatType'] == 'chat':
-        chatID = json['chatID']
-        del json['chatID'], json['chatType']
-        update.editMessage(chatID, json['message_id'], json['content'])
+def message_edited(json_data):
+    print('message edited: ' + json_data)
+    if json_data['chatType'] == 'chat':
+        chatID = json_data['chatID']
+        del json_data['chatID'], json_data['chatType']
+        update.editMessage(chatID, json_data['message_id'], json_data['content'])
         socketio.emit('message edited',
-                      {'new_content': json['content']},
+                      {'new_content': json_data['content']},
                       room=chatID)
     else:
         # TODO: Edit message for communities
@@ -70,14 +70,14 @@ def message_edited(json):
 
 
 @socketio.event('message deleted')
-def message_deleted(json):
-    print('message deleted: '+json)
-    if json['chatType'] == 'chat':
-        chatID = json['chatID']
-        del json['chatID'], json['chatType']
-        delete.deleteMessage(message_id=json['messageID'], chat_id=chatID)
+def message_deleted(json_data):
+    print('message deleted: '+json_data)
+    if json_data['chatType'] == 'chat':
+        chatID = json_data['chatID']
+        del json_data['chatID'], json_data['chatType']
+        delete.deleteMessage(message_id=json_data['messageID'], chat_id=chatID)
         socketio.emit('message deleted',
-                      {'message_id': json['messageID']},
+                      {'message_id': json_data['messageID']},
                       room=chatID)
     else:
         # TODO: Edit message for communities
@@ -86,35 +86,45 @@ def message_deleted(json):
 
 @internal.route("/change-status", methods=["POST"])
 def changeStatus():
-    json = request.get_json()
-    return update.changeStatus(session["id"], **json)
+    json_data = request.get_json()
+    return update.changeStatus(session["id"], **json_data)
 
 
 @internal.route("/friend-request", methods=["POST"])
 def friendRequest():
-    json = request.get_json()
-    return create.sendFriendRequest(session["id"], json["reciever_id"])
+    json_data = request.get_json()
+    return create.sendFriendRequest(session["id"], json_data["reciever_id"])
 
 
 @internal.route("/block", methods=["POST"])
 def block():
-    json = request.get_json()
-    return update.blockUser(json["user_id"], json["other_id"])
+    json_data = request.get_json()
+    return update.blockUser(json_data["user_id"], json_data["other_id"])
 
 
 @internal.route("/mute", methods=["POST"])
 def mute():
-    json = request.get_json()
-    return update.muteChat(session["id"], json["chat_id"])
-
-
-@internal.route("/delete-message", methods=["POST"])
-def deleteMessage():
-    json = request.get_json()
-    return update.deleteMessage(json["chat_id"], json["message_id"])
+    json_data = request.get_json()
+    return update.muteChat(session["id"], json_data["chat_id"])
 
 
 @internal.route("/create-chat", methods=["POST"])
 def createChat():
-    json = request.get_json()
-    return create.createChat(**json)
+    json_data = request.get_json()
+    return create.createChat(**json_data)
+
+
+@internal.route("/fetch-chats")
+def fetchChats():
+    data = request.get_json()
+    current_index = data['index']
+    chats = read.loadChats(session['id'], current_index, 30, ['id', 'title', 'avatar.avatar_url', 'members', 'lastEdited'])
+    return chats
+
+
+@internal.route("/get-chat")
+def getChat():
+    data = request.get_json()
+    chatID = data['chatID']
+    chat = read.getChat(chatID)
+    return json.loads(chat.to_json())

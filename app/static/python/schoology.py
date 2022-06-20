@@ -44,7 +44,7 @@ def scrapeSchoology():
 
 def getcourse(courseid, sc, user, jsonEnabled):
     """
-    jsonEnabled = True | returns json
+    jsonEnabled = True | returns json_data
     jsonEnabled = False | returns objects
     """
     # print("Getting Course")
