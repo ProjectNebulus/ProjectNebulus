@@ -6,7 +6,6 @@ from flask import render_template, session, request, redirect
 import os
 from . import main_blueprint
 from .utils import logged_in
-from ...static.python.gclassroomcom import *
 
 from googleapiclient.discovery import build
 
@@ -66,7 +65,7 @@ def gtest_api_request():
     user_info = user_info_service.userinfo().get().execute()
     print(user_info)
     user_info = [user_info["name"], user_info["picture"]]
-    return render_template("connectClassroom.html", data=user_info)
+    return render_template("connections/connectClassroom.html", data=user_info)
     # return flask.jsonify(courses)
 
 

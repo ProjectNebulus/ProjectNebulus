@@ -1,6 +1,6 @@
 from datetime import datetime
 import time
-from ..snowflake_generator import make_snowflake
+from app.static.python.utils.snowflake_generator import make_snowflake
 from mongoengine import *
 
 

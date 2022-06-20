@@ -115,7 +115,7 @@ def spotify_route():
 
     # Step 4. Signed in, display data
     spotify = spotipy.Spotify(auth_manager=auth_manager)
-    return render_template("connectSpotify.html", spotify=spotify, auth=False)
+    return render_template("connections/connectSpotify.html", spotify=spotify, auth=False)
 
 
 @main_blueprint.route("/spotify/sign_out")

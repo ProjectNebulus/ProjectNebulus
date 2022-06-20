@@ -1,7 +1,7 @@
 <!--Extend with Jinja!-->
 {% extends "layout.html" %}
 {% block main %}
-    {% include "navbar.html" %}
+    {% include "utils/navbar.html" %}
     <script src="/static/js/profile.js"></script>
     <h1 class="dark:text-white text-4xl noselect">Your Profile</h1><br>
     <div style="margin:20px;"
@@ -85,5 +85,5 @@
             </div>
         </div>
     </div>
-    {% include "footer.html" %}
+    {% include "utils/footer.html" %}
 {% endblock %}  

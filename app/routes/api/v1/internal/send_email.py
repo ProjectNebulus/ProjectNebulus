@@ -40,7 +40,7 @@ def send_email():
     )
     import codecs
 
-    htmlform = str(codecs.open("app/templates/email.html", "r").read()).replace(
+    htmlform = str(codecs.open("app/templates/utils/email.html", "r").read()).replace(
         "123456", str(code)
     )
 

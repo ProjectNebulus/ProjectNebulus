@@ -2,7 +2,7 @@ import time
 
 from mongoengine import *
 
-from ..snowflake_generator import make_snowflake
+from app.static.python.utils.snowflake_generator import make_snowflake
 
 
 class Avatar(EmbeddedDocument):

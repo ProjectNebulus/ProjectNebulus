@@ -137,7 +137,7 @@ def lms():
         scCourses = []
 
     return render_template(
-        "lms.html",
+        "learning/learning.html",
         user=session["username"],
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),

@@ -4,7 +4,7 @@ from flask import render_template, session
 
 from . import main_blueprint
 from .utils import logged_in
-from ...static.python.colors import getColor
+from app.static.python.utils.colors import getColor
 from ...static.python.mongodb import read
 
 

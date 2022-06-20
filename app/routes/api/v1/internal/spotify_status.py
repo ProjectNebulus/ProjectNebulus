@@ -13,7 +13,7 @@ from .....routes.main.spotify import (
     prev_spotify,
     resume_spotify,
 )
-from .....static.python.musixmatch import Musixmatch
+from app.static.python.music.musixmatch import Musixmatch
 
 
 def convert(secs):

@@ -17,7 +17,7 @@ def dashboard():
         user_courses = list(user_courses)[-18:]
 
     return render_template(
-        "dashboard.html",
+        "user/dashboard.html",
         user=session["username"],
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         email=session["email"],

@@ -1,6 +1,6 @@
-from flask import request, flash
+from flask import request
 from . import internal
-from .....static.python.plagarism import daplagarism
+from app.static.python.extensions.custom.plagarism import daplagarism
 
 
 @internal.route("/plagarism", methods=["POST"])

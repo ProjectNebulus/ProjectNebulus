@@ -21,7 +21,7 @@ def profile():
 @main_blueprint.route("/community/profile/<id>")
 def pubProfile(id):
     return render_template(
-        "user/pubProfile.html",
+        "user/profile.html",
         user=session.get("username"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),

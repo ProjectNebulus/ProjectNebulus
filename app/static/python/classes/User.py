@@ -2,7 +2,7 @@ from datetime import datetime
 
 from mongoengine import *
 
-from app.static.python.security import hash256
+from app.static.python.utils.security import hash256
 from .Avatar import Avatar
 from .Canvas import Canvas
 from .Discord import Discord
