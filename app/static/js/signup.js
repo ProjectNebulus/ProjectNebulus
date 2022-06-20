@@ -19,7 +19,7 @@ function createUser() {
             avatar: document.getElementById("chosen").innerText
         }),
 
-        contentType: 'application/json_data; charset=utf-8',
+        contentType: 'application/json; charset=utf-8',
         dataType: 'json',
     });
 
@@ -406,7 +406,7 @@ function signUp() {
 
     const xhttp = new XMLHttpRequest();
     xhttp.open('POST', '/signup', true);
-    xhttp.setRequestHeader('Content-type', 'application/json_data');
+    xhttp.setRequestHeader('Content-type', 'application/json');
     xhttp.addEventListener('load', reqListener);
     xhttp.send(
         JSON.stringify({

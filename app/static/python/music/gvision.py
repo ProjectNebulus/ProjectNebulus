@@ -8,7 +8,7 @@ import os
 def detect_image(file_name):
     os.environ[
         "GOOGLE_APPLICATION_CREDENTIALS"
-    ] = "./static/json_data/festive-freedom-309323-0124a1c976ae.json_data"
+    ] = "./static/json/festive-freedom-309323-0124a1c976ae.json"
     client = vision.ImageAnnotatorClient()
     file_name = os.path.abspath(file_name)
     # Loads the image into memory

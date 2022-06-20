@@ -80,7 +80,7 @@ class Musixmatch(object):
         page - Define the page number for paginated results.
         page_size - Define the page size for paginated results (range 1 - 100).
         country - A valid country code (default US).
-        format - Decide the output type json_data or xml (default json_data).
+        format - Decide the output type json or xml (default json).
         """
         request = self._request(
             self._get_url(
@@ -99,7 +99,7 @@ class Musixmatch(object):
         page_size - Define the page size for paginated results (range 1 - 100).
         f_has_lyrics - When set, filter only contents with lyrics.
         country - A valid country code (default US).
-        format - Decide the output type json_data or xml (default json_data).
+        format - Decide the output type json or xml (default json).
         """
         request = self._request(
             self._get_url(
@@ -109,7 +109,7 @@ class Musixmatch(object):
         return request
 
     def track_search(
-        self, q_track, page_size, page, s_track_rating, _format="json_data"
+        self, q_track, page_size, page, s_track_rating, _format="json"
     ):
         """Search for track in our database.
         Parameters:
@@ -132,7 +132,7 @@ class Musixmatch(object):
         page_size - Define the page size for paginated results.
         Range is 1 to 100.
         callback - jsonp callback.
-        format - Decide the output type json_data or xml (default json_data).
+        format - Decide the output type json or xml (default json).
         Note: This method requires a commercial plan.
         """
         data = self._request(
@@ -167,7 +167,7 @@ class Musixmatch(object):
         commontrack_id - The musiXmatch commontrack id.
         track_isrc - A valid ISRC identifier.
         track_mbid - The musicbrainz recording id.
-        format - Decide the output type json_data or xml (default json_data).
+        format - Decide the output type json or xml (default json).
         """
         data = self._request(
             self._get_url(
@@ -186,7 +186,7 @@ class Musixmatch(object):
         Parameters:
         track_id - The musiXmatch track id.
         track_mbid - The musicbrainz track id.
-        format - Decide the output type json_data or xml (default json_data).
+        format - Decide the output type json or xml (default json).
         """
         data = self._request(
             self._get_url(
@@ -202,7 +202,7 @@ class Musixmatch(object):
         extracting a sequence of words from the lyrics.
         Parameters:
         track_id - The musiXmatch track id.
-        format - Decide the output type json_data or xml (default json_data).
+        format - Decide the output type json or xml (default json).
         """
         data = self._request(
             self._get_url(f"track.snippet.get?track_id={track_id}&format={_format}")
@@ -230,7 +230,7 @@ class Musixmatch(object):
         f_subtitle_length - The desired length of the subtitle (seconds).
         f_subtitle_length_max_deviation - The maximum deviation allowed.
         from the f_subtitle_length (seconds).
-        format - Decide the output type json_data or xml (default json_data).
+        format - Decide the output type json or xml (default json).
         """
         data = self._request(
             self._get_url(
@@ -297,7 +297,7 @@ class Musixmatch(object):
         Parameters:
         track_id - A valid country code (default US)
         lyrics_body - The lyrics
-        formatDecide the output type json_data or xml (default json_data)
+        formatDecide the output type json or xml (default json)
         """
         data = self._request(
             self._get_url(
@@ -308,7 +308,7 @@ class Musixmatch(object):
         return data
 
     def track_lyrics_feedback_post(
-        self, track_id, lyrics_id, feedback, _format="json_data"
+        self, track_id, lyrics_id, feedback, _format="json"
     ):
         """This API method provides you the opportunity to help
         us improving our catalogue.
@@ -326,7 +326,7 @@ class Musixmatch(object):
         feedback - The feedback to be reported, possible values are:
         wrong_lyrics, wrong_attribution, bad_characters,
         lines_too_long, wrong_verses, wrong_formatting
-        format - Decide the output type json_data or xml (default json_data)
+        format - Decide the output type json or xml (default json)
         """
         data = self._request(
             self._get_url(
@@ -344,7 +344,7 @@ class Musixmatch(object):
         q_artist - The song artist
         track_isrc - If you have an available isrc id in your catalogue
         you can query using this id only (optional)
-        format - Decide the output type json_data or xml (default json_data)
+        format - Decide the output type json or xml (default json)
         """
         data = self._request(
             self._get_url(
@@ -354,7 +354,7 @@ class Musixmatch(object):
         )
         return data
 
-    def matcher_track_get(self, q_track, q_artist, _format="json_data"):
+    def matcher_track_get(self, q_track, q_artist, _format="json"):
         """Match your song against our database.
         In some cases you already have some informations
         about the track title, artist name, album etc.
@@ -397,7 +397,7 @@ class Musixmatch(object):
         length in seconds.
         track_isrc - If you have an available isrc id in your catalogue
         you can query using this id only (optional).
-        format - Decide the output type json_data or xml (default json_data).
+        format - Decide the output type json or xml (default json).
         Note: This method requires a commercial plan.
         """
         data = self._request(
@@ -422,7 +422,7 @@ class Musixmatch(object):
         Parameters:
         artist_id - Musixmatch artist id.
         artist_mbid - Musicbrainz artist id.
-        format - Decide the output type json_data or xml (default json_data).
+        format - Decide the output type json or xml (default json).
         """
         data = self._request(
             self._get_url(
@@ -443,7 +443,7 @@ class Musixmatch(object):
         page - Define the page number for paginated results.
         page_size - Define the page size for paginated results
         (Range is 1 to 100).
-        format - Decide the output type json_data or xml (default json_data).
+        format - Decide the output type json or xml (default json).
         """
         data = self._request(
             self._get_url(
@@ -480,7 +480,7 @@ class Musixmatch(object):
         page - Define the page number for paginated results.
         page_size - Define the page size for paginated results
         (range is 1 to 100).
-        format - Decide the output type json_data or xml (default json_data).
+        format - Decide the output type json or xml (default json).
         """
         data = self._request(
             self._get_url(
@@ -510,7 +510,7 @@ class Musixmatch(object):
         page - Define the page number for paginated results.
         page_size - Define the page size for paginated results.
         (range is 1 to 100).
-        format - Decide the output type json_data or xml (default json_data).
+        format - Decide the output type json or xml (default json).
         """
         data = self._request(
             self._get_url(
@@ -532,7 +532,7 @@ class Musixmatch(object):
         name, release_date, release_type, cover art.
         Parameters:
         album_id - The musiXmatch album id.
-        format - Decide the output type json_data or xml (default json_data)
+        format - Decide the output type json or xml (default json)
         """
         data = self._request(
             self._get_url("album.get?album_id={}&format={}".format(album_id, _format))
@@ -546,7 +546,7 @@ class Musixmatch(object):
         page_size,
         album_mbid,
         f_has_lyrics=None,
-        _format="json_data",
+        _format="json",
     ):
         """This api provides you the list of the songs of an album.
         Parameters:
@@ -556,7 +556,7 @@ class Musixmatch(object):
         page - Define the page number for paginated results.
         page_size - Define the page size for paginated results.
         (range is 1 to 100).
-        format - Decide the output type json_data or xml (default json_data).
+        format - Decide the output type json or xml (default json).
         """
         data = self._request(
             self._get_url(
@@ -584,7 +584,7 @@ class Musixmatch(object):
         called track.lyrics.get you don’t need to implement this API call.
         Parameters:
         domain - Your domain name.
-        format - Decide the output type json_data or xml (default json_data).
+        format - Decide the output type json or xml (default json).
         """
         data = self._request(
             self._get_url(
@@ -614,7 +614,7 @@ class Musixmatch(object):
         """Get the list of the music genres of our catalogue:
         music_genre_id, music_genre_parent_id, music_genre_name, music_genre_name_extended, music_genre_vanity
         Parameters:
-        format - Decide the output type json_data or xml (default json_data)
+        format - Decide the output type json or xml (default json)
         """
         data = self._request(
             self._get_url("music.genres.get?" "format={}".format(_format))
@@ -824,7 +824,7 @@ def music_post():
             VideoID = link
 
             params = {
-                "format": "json_data",
+                "format": "json",
                 "url": "https://www.youtube.com/watch?v={}".format(VideoID),
             }
             url = "https://www.youtube.com/oembed"
@@ -909,7 +909,7 @@ def music_video(id_: str):
         # change to yours VideoID or change url inparams
         VideoID = link
         params = {
-            "format": "json_data",
+            "format": "json",
             "url": "https://www.youtube.com/watch?v=%s" % VideoID,
         }
         url = "https://www.youtube.com/oembed"

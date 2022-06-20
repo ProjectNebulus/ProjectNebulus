@@ -14,7 +14,7 @@ function create_announcement() {
         url: "/api/v1/internal/create-announcement",
         data: JSON.stringify(announcement),
         dataType: "json",
-        contentType: "application/json_data",
+        contentType: "application/json",
         done: function (data) {
             alert('Successfully created announcement');
 
