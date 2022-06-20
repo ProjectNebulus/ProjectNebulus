@@ -74,7 +74,7 @@ class KeyUpTimer {
         clearInterval(this.interval);
     }
 }
-
+```
 if ('serviceWorker' in navigator) {
     // we are checking here to see if the browser supports the service worker api
     window.addEventListener('load', async function () {
@@ -92,7 +92,7 @@ if ('serviceWorker' in navigator) {
         );
     });
 }
-
+```
 function invertSite() {
     const banner = document.getElementById("homeBanner");
 
@@ -200,7 +200,7 @@ window.addEventListener("load", function () {
         logo.removeAttribute("class");
     }
 });
-
+```
 if ('serviceWorker' in navigator) {
     // we are checking here to see if the browser supports the service worker api
     window.addEventListener('load', async function () {
@@ -218,7 +218,7 @@ if ('serviceWorker' in navigator) {
         );
     });
 }
-
+```
 let statusInterval = 0;
 let shouldGetSpotify = true;
 let shouldGetFocus = true;

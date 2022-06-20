@@ -1,10 +1,12 @@
 <!--Extend with Jinja!-->
 <script src="https://unpkg.com/flowbite@1.4.5/dist/flowbite.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 {% extends "layout.html" %}
 {% block main %}
     {% include "navbar.html" %}
+    <div id="user-data" user-id="{{ user.id }}"></div>
     <div>
-    <aside style="float:left;" class="w-55 h-full" aria-label="Sidebar">
+    <aside style="float:left;" class="w-55 h-full" aria-label="Sidebar" id="chat-sidebar">
         <div class="px-3 py-4 overflow-y-auto rounded bg-gray-100 dark:bg-stone-800 h-full" >
              <form>
     <label for="default-search" class="mb-2 text-sm text-xs text-gray-900 sr-only dark:text-stone-400">Search or start a conversation</label>
@@ -73,29 +75,10 @@
                 </ul>
             </div>
 
-            {% for chat in user_chats %}
 
-            <div style="margin-bottom:4px;"
-                 class="flex items-center space-x-4 dark:bg-gray-600 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg">
-                {% if chat.members|length == 2 %}
-                <img style="margin:10px;" class="w-12 h-12 rounded-full"
-                     src="{{ chat.members[1].avatar.avatar_url }}"
-                     alt="Profile Picture">
-                <div class="space-y-1 font-medium dark:text-white">
-                    <div>{{ chat.members[1].username }}</div>
-                    <div class="text-sm text-gray-500 dark:text-gray-400">{{ chat.members[1].chatProfile.status_emoji }} {{ chat.members[1].chatProfile.status_text }}</div>
-                </div>
-                {% else %}
-                <img style="margin:10px;" class="w-12 h-12 rounded-full"
-                     src="{{ chat.avatar.avatar_url }}"
-                     alt="Profile Picture">
-                <div class="space-y-1 font-medium dark:text-white">
-                    <div>{{ chat.title }}</div>
-                    <div class="text-sm text-gray-500 dark:text-gray-400">{{ chat.members|length }} Members</div>
-                </div>
-                {% endif %}
-            </div>
-        {%  endfor %}
+            <div id="user-chats">
+
+
         </div>
 
     </aside>
@@ -351,6 +334,80 @@
         }
 
         keyUpDelay("#search", 500, changeSearch)
+
+    function makeCall(){
+        let chatAmount = $('#user-chats > div').length;
+        $.ajax({
+            url: '/api/v1/internal/fetch-chats',
+            type: 'POST',
+            dataType: 'JSON',
+            data: JSON.stringify({
+                index: chatAmount
+            })
+
+
+
+        }).done(load);
+    }
+
+    $(document).ready(function(){
+        makeCall();
+    })
+
+    $('#chat-sidebar').on('scroll', function() {
+        let div = $(this).get(0);
+
+        if (div.scrollTop + div.clientHeight >= div.scrollHeight) {
+            makeCall();
+        }
+    }
+    );
+
+
+    function load(data){
+        s = ``
+        let userID = document.getElementById('user-data').getAttribute('user-id')
+        let div = document.getElementById('user-chat')
+        data.forEach(function (chat){
+            s += `
+            <div style="margin-bottom:4px;"
+             class="flex items-center space-x-4 dark:bg-gray-600 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg">`
+            if (item['members'].length === 2){
+                let other = chat['members'].filter(user => user['id'] != userID)
+                s+=
+           ` <img style="margin:10px;" class="w-12 h-12 rounded-full"
+                 src="${other['avatar']['avatar_url']}"
+                 alt="Profile Picture">
+            <div class="space-y-1 font-medium dark:text-white">
+                <div>${other['username']}</div>
+                <div class="text-sm text-gray-500 dark:text-gray-400">${other['chatProfile']['status_emoji']} ${other['chatProfile']['status_text']}</div>
+            </div>
+        </div>
+        `
+
+            }
+            else{
+                s += `
+                <img style="margin:10px;" class="w-12 h-12 rounded-full"
+                     src="${chat['avatar']['avatar_url']}"
+                     alt="Profile Picture">`
+
+                    if (!(chat['title'])){
+                        chat['title'] = `${chat['owner']}'s Chat`
+                    }
+
+            s+=
+                `<div class="space-y-1 font-medium dark:text-white">
+                    <div>${chat['title']}</div>
+                    <div class="text-sm text-gray-500 dark:text-gray-400">${chat['members'].length}} Members</div>
+                </div>
+            </div>`
+            }
+        });
+
+        div.insertAdjacentHTML( 'beforeend', s );
+
+    }
     </script>
 
 {% endblock %}

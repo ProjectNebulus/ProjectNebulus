@@ -114,7 +114,7 @@ def createChat():
     return create.createChat(**json_data)
 
 
-@internal.route("/fetch-chats")
+@internal.route("/fetch-chats", methods=['POST'])
 def fetchChats():
     data = request.get_json()
     current_index = data['index']
@@ -122,7 +122,7 @@ def fetchChats():
     return chats
 
 
-@internal.route("/get-chat")
+@internal.route("/get-chat", methods=['POST'])
 def getChat():
     data = request.get_json()
     chatID = data['chatID']

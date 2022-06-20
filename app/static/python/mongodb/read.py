@@ -419,11 +419,17 @@ def loadChats(user_id:str, current_index, initial_amount, required_fields):
     chats = json.loads(
         getUserChats(user_id, required_fields).to_json()
     )
-    chats = sorted(chats, key=lambda x: x['lastEdited'])
+
+    chats = sorted(chats, key=lambda x: x['lastEdited']['$date'])
 
     if len(chats) < current_index + initial_amount:
         initial_amount = len(chats) - current_index
 
     chats = chats[current_index:(current_index + initial_amount)]
+    for chat in chats:
+        if len(chat['members']) == 2:
+            for x, member in enumerate(chat['members']):
+                chat['members'][x] = json.loads(User.objects(pk=member).only('id', 'chatProfile', 'username').first().to_json())
 
+    print(chats)
     return chats
