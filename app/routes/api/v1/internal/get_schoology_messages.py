@@ -5,7 +5,7 @@ from flask import jsonify
 from .....static.python.mongodb import read
 from . import internal
 from ....main.utils import private_endpoint
-from .....static.python.colors import *
+from app.static.python.utils.colors import *
 
 
 @internal.route("/get_schoology_messages", methods=["GET"])

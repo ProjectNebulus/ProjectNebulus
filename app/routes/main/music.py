@@ -661,7 +661,7 @@ def main_program(file_name):
 @logged_in
 def music():
     return render_template(
-        "music.html",
+        "music/music.html",
         user=session.get("username"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
     )
@@ -699,7 +699,7 @@ def music_post():
                 songs[i] = songs[i]["track"]
 
             return render_template(
-                "musixmatch.html",
+                "music/music_image_results.html",
                 songs=songs,
                 id_=search(songs[0]["track_name"] + " by " + songs[0]["artist_name"]),
                 user=session.get("username"),
@@ -829,7 +829,7 @@ def music_post():
 
     if len(video_ids) == 0 and len(spotify_arr) == 0:
         return render_template(
-            "musicresults.html",
+            "music/music_results.html",
             noresults=True,
             user=session.get("username"),
             avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
@@ -858,7 +858,7 @@ def music_post():
                 break
 
     return render_template(
-        "musicresults.html",
+        "music/music_results.html",
         noresults=False,
         mylist=mylist,
         spotify_arr=spotify_arr,
@@ -876,7 +876,7 @@ def music_spotify(smth):
     for i in file:
         if i["code"] == smth:
             return render_template(
-                "musictrack.html",
+                "music/spotify_preview.html",
                 i=i,
                 user=session.get("username"),
                 avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
@@ -920,7 +920,7 @@ def music_video(id_: str):
     title = find_data(id_, "title")
     content = f"Listen to {title} by {author} on Nebulus!"
     return render_template(
-        "musicvideo.html",
+        "music/youtube_preview.html",
         author=author,
         author_url=author_url,
         thumbnail_url=thumbnail_url,

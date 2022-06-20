@@ -9,7 +9,7 @@ from ...static.python.mongodb import read
 @logged_in
 def planner():
     return render_template(
-        "planner.html",
+        "tools/planner.html",
         page="Nebulus - Planner",
         user=session.get("username"),
         email=session.get("email"),

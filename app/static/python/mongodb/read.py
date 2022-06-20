@@ -9,7 +9,7 @@ from flask import Response, session
 from mongoengine import Q
 
 from ..classes import *
-from ..security import valid_password
+from app.static.python.utils.security import valid_password
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 
