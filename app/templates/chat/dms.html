@@ -4,7 +4,7 @@
 {% extends "layout.html" %}
 {% block main %}
     {% include "utils/navbar.html" %}
-    <div id="user-data" user-id="{{ user.id }}"></div>
+    <div id="user-data" user-id="{{ user_obj.id }}"></div>
     <div>
     <aside style="float:left;" class="w-55 h-full" aria-label="Sidebar" id="chat-sidebar">
         <div class="px-3 py-4 overflow-y-auto rounded bg-gray-100 dark:bg-stone-800 h-full" >
@@ -395,7 +395,7 @@
                      alt="Profile Picture">`
 
                     if (!(chat['title'])){
-                        chat['title'] = `${chat['owner']}'s Chat`
+                        chat['title'] = `${chat['owner']['username']}'s Chat`
                     }
 
             s+=

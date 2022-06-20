@@ -20,19 +20,14 @@ def chatPage(page):
     else:
         newMessages = None
     user = read.find_user(pk=session["id"])
-    user_chats = read.loadChats(
-        session["id"],
-        0,
-        30,
-        ["id", "title", "avatar.avatar_url", "members", "lastEdited"],
-    )
+    user = json.loads(user.to_json())
     return render_template(
         f"/chat/{page}.html",
         page="Nebulus - Chat",
-        user=json.loads(user.to_json()),
+        user=user['username'],
+        user_obj=user,
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         email=session.get("email"),
         messages=newMessages,
         disableArc=page != "chat",
-        user_chats=user_chats,
     )
