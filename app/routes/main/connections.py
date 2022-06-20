@@ -70,6 +70,10 @@ def g_classroom_auth():
     print(user_info)
     user_info = [user_info["name"], user_info["picture"]]
 
+<<<<<<< HEAD
     return render_template(
         "connections/connectClassroom.html", link=creds, data=user_info
     )
+=======
+    return render_template("connections/connectClassroom.html", link=creds, data=user_info)
+>>>>>>> 45ab117298fcd5ff84e54a5354f949106d5a4d3c

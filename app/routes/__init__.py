@@ -55,5 +55,6 @@ def init_app():
     mail = Mail(app)
     socketio.init_app(app, logging=False)
     logging.getLogger("werkzeug").addFilter(_LogFilter())
+    print(app.url_map)
 
     return app
