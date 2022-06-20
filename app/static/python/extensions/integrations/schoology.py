@@ -1,13 +1,10 @@
-from datetime import datetime
-
+import datetime
+import schoolopy
 import mechanize
 import requests
 from bs4 import BeautifulSoup
-
-from app.static.python.classes import Avatar
 from app.static.python.mongodb import *
-
-
+from flask import session
 def scrapeSchoology():
     print("attempting login")
 
@@ -41,106 +38,93 @@ def scrapeSchoology():
 
     return soup.prettify()
 
+def get_schoology_emails():
+    try:
+        sc = read.getSchoologyAuth()
 
-def getcourse(courseid, sc, user, jsonEnabled):
-    """
-    jsonEnabled = True | returns json_data
-    jsonEnabled = False | returns objects
-    """
-    # print("Getting Course")
-    # print("Getting Course")
-    if jsonEnabled():
-        getCourseJson(courseid, sc, user)
-    else:
-        getCourseObject(courseid, sc, user)
+        messages = sc.get_inbox_messages()
+        newMessages = []
 
+        for message in messages:
+            info = {}
+            author = sc.get_user(message["author_id"])
+            authorName = author["name_display"]
+            authorPfp = author["picture_url"]
+            authorEmail = author["primary_email"]
+            authorSchool = sc.get_school(author["school_id"])["title"]
+            authorColor = getColor(authorPfp)
+            oldRecipients = message["recipient_ids"].split(",")
+            recipients = []
+            for recipient in oldRecipients:  # recipients:
+                recipient = sc.get_user(recipient)
+                school = sc.get_school(recipient["school_id"])["title"]
+                color = getColor(recipient["picture_url"])
+                recipients.append(
+                    {
+                        "name": recipient["name_display"],
+                        "avatar": recipient["picture_url"],
+                        "email": recipient["primary_email"],
+                        "school": school,
+                        "color": color,
+                    }
+                )
 
-def getCourseJson(courseid, sc, user):
-    # Main
-    section = dict(sc.get_section(courseid))
-    course = {}
-    # print(section)
-    course["id"] = section["id"]
-    course["name"] = section["course_title"]
-    course["import"] = "Schoology"
-    course["image"] = section["profile_url"]
-    scupdates = sc.get_section_updates(courseid)
-    updates = []
-    for update in scupdates:
-        updates.append(
-            {
-                "body": update["body"],
-                "id": update["id"],
-                "likes": update["likes"],
-                "liked": update["user_like_action"],
-                "comments": update["num_commentxs"],
+            author = {
+                "name": authorName,
+                "avatar": authorPfp,
+                "email": authorEmail,
+                "school": authorSchool,
+                "color": authorColor,
             }
-        )
-        course["updates"] = updates
-        scdocuments = sc.get_section_documents(courseid)
-        documents = []
-        for scdocument in scdocuments:
-            document = {}
-            document["id"] = scdocument["id"]
-            document["name"] = scdocument["title"]
-            document["attachment"] = scdocument["attachments"]
-            documents.append(document)
-        course["documents"] = documents
-        scgrades = sc.get_user_grades_by_section(user, courseid)
-        scevents = sc.get_section_events(courseid)
-        scassignments = sc.get_assignments(courseid)
-        assignments = []
-        for assignment in scassignments:
-            assignments.append(
-                {
-                    "id": assignment["id"],
-                    "name": assignment["title"],
-                    "info": assignment["description"],
-                    "url": assignment["web_url"],
-                    "completed": assignment["completed"],
-                    "due": assignment["due"],
-                }
+            info["subject"] = message["subject"]
+            info["status"] = message["message_status"]
+            thread = sc.get_message(message_id=message["id"])
+            # print(thread)
+            info["message"] = thread[-1]["message"]
+            info["message"] = info["message"][:100] + "..." * (
+                    len(info["message"]) > 100
             )
-        course["assignments"] = assignments
-        return course
+            newThread = []
+            for threadItem in thread:
+                thread_author_id = threadItem["author_id"]
+                thread_author = sc.get_user(thread_author_id)
+                newThread.append(
+                    {
+                        "message": threadItem["message"],
+                        "author": thread_author["name_display"],
+                        "author_pic": thread_author["picture_url"],
+                        "author_email": thread_author["primary_email"],
+                    }
+                )
+            info["thread"] = newThread
+            info["recipients"] = recipients
+            info["author"] = author
+            info["updated"] = datetime.fromtimestamp(int(message["last_updated"]))
+            # print(temp)
+            newMessages.append(info)
 
-    def getCourseObject(courseid, template, teacher, created_at, sc, user):
-        json_course = getCourseJson(courseid, sc, user)
-        course = Course(
-            name=json_course["name"],
-            teacher="Unknown Teacher",
-            imported_from="Schoology",
-            template=template,
-            created_at=created_at,
-            authorizedUsers=user,
-        )
-        image = Avatar(avatar_url=json_course["image"])
-        assignments = []
-        for assignment in json_course["assignments"]:
-            newassignment = Assignment(
-                due=datetime(assignment["due"]),
-                title=assignment["name"],
-                points=-1,
-                description=assignment["info"],
-            )
+        newMessages = enumerate(newMessages)
+    except:
+        newMessages = enumerate([])
+    return newMessages
 
-        grades = []
-        for grade in json_course["grades"]:
-            newgrade = Grades()
-        folders = []
-
-        course = Course(
-            name=json_course["name"],
-            template=template,
-            created_at=created_at,
-            teacher=teacher,
-            imported_from="Schoology",
-            description="",
-            grades=[],
-            teacherAccountID=None,
-            assignments=[],
-            folders=[],
-            image=image,
-            events=None,
-            authorizedUserIDs=None,
-        )
+def create_schoology(key, secret):
+    sc = schoolopy.Schoology(schoolopy.Auth(key, secret))
+    return sc
+def generate_auth(authorize, key,secret,domain,three_legged,request_token,request_token_secret,access_token,access_token_secret):
+    auth = schoolopy.Auth(
+        key,
+        secret,
+        domain=domain,
+        three_legged=three_legged,
+        request_token=request_token,
+        request_token_secret=request_token_secret,
+        access_token=access_token,
+        access_token_secret=access_token_secret,
+    )
+    if (authorize):
+        auth.authorize()
+    return auth
+def create_schoology_auth(auth):
+    sc = schoolopy.Schoology(auth)
+    return sc

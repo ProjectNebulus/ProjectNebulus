@@ -23,7 +23,7 @@ from app.routes.main.signin import *
 from app.routes.main.signup import *
 from app.routes.main.calendar import *
 from app.routes.main.spotify import *
-from app.routes.main.discordauth import *
+from app.routes.main.discord import *
 from app.routes.main.schoology import *
 from app.routes.main.gclassroom import *
 from app.routes.main.canvas import *

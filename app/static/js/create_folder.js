@@ -1,4 +1,4 @@
-function createFolder() {
+function create_folder() {
     const foldername = document.getElementById("foldername").value;
     const folderstatus = document.getElementById("folderstatus").value;
     if (foldername === "") {

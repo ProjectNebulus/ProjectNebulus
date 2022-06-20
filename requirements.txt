@@ -72,3 +72,4 @@ google-auth-oauthlib
 Flask-SocketIO==5.2.0
 DateTime~=4.4
 httplib2~=0.20.4
+bs4==0.0.1

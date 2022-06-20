@@ -5,7 +5,7 @@ document.addEventListener('load', function(){
 }
 );
 
-function createAssignment(){
+function create_assignment(){
    let assignment = {
         title: document.getElementById("assignmentname").value,
         points: document.getElementById("points").value,

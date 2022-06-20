@@ -18,6 +18,5 @@ if __name__ == "__main__":
     else:  # macos (darwin) or windows (windows)
         port = 8080
         host = "localhost"
-
     print(f"Started Running: http://{host}:{port}")
     socketio.run(app, host=host, port=port)

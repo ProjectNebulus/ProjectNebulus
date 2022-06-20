@@ -97,7 +97,7 @@ def getSchoology(**kwargs) -> List[Schoology] | None:
 
 
 def getClassroom(
-        userID: str = None, username: str = None, email: str = None
+    userID: str = None, username: str = None, email: str = None
 ) -> GoogleClassroom:
     return find_user(id=userID, username=username, email=email).gclassroom
 
@@ -107,7 +107,7 @@ def getSpotify(userID: str = None, username: str = None, email: str = None) -> S
 
 
 def getSpotifyCache(
-        userID: str = None, username: str = None, email: str = None
+    userID: str = None, username: str = None, email: str = None
 ) -> Spotify | None:
     try:
         return find_user(
@@ -207,8 +207,8 @@ def sort_course_events(user_id: str, course_id: int):
                 {
                     key: list(result)
                     for key, result in groupby(
-                    sorted_announcements, key=lambda obj: obj.date.date()
-                )
+                        sorted_announcements, key=lambda obj: obj.date.date()
+                    )
                 }.items()
             )
         )
@@ -244,8 +244,8 @@ def sort_user_events(user_id: str, maxDays=8, maxEvents=16):
                 {
                     key: list(result)
                     for key, result in groupby(
-                    sorted_announcements, key=lambda obj: obj.date.date()
-                )
+                        sorted_announcements, key=lambda obj: obj.date.date()
+                    )
                 }.items()
             )[-maxDays:]
         )
@@ -360,9 +360,13 @@ def search(keyword: str, username: str):
         {"$match": {"course.authorizedUsers": user.pk}},
         {"$project": {"title": 1, "_id": 1, "_cls": 1}},
     ]
-    courses = Course.objects(Q(authorizedUsers=user.id) & Q(name__istartswith=keyword))[:10]
+    courses = Course.objects(Q(authorizedUsers=user.id) & Q(name__istartswith=keyword))[
+        :10
+    ]
     chats = Chat.objects(Q(owner=user.id) & Q(title__istartswith=keyword))[:10]
-    NebulusDocuments = NebulusDocument.objects(Q(authorizedUsers=user.id) & Q(name__istartswith=keyword))[:10]
+    NebulusDocuments = NebulusDocument.objects(
+        Q(authorizedUsers=user.id) & Q(name__istartswith=keyword)
+    )[:10]
 
     events = list(Event.objects().aggregate(pipeline1))
     assignments = list(Assignment.objects().aggregate(pipeline1))
@@ -409,7 +413,7 @@ def search_course(keyword: str, course: str):
     )
 
 
-def getUserChats(user_id:str, required_fields:list):
+def getUserChats(user_id: str, required_fields: list):
     user = find_user(pk=user_id)
     chats = Chat.objects(members=user).only(*required_fields)
     return chats
@@ -425,7 +429,7 @@ def loadChats(user_id:str, current_index, initial_amount, required_fields):
     if len(chats) < current_index + initial_amount:
         initial_amount = len(chats) - current_index
 
-    chats = chats[current_index:(current_index + initial_amount)]
+    chats = chats[current_index : (current_index + initial_amount)]
     for chat in chats:
         if len(chat['members']) == 2:
             for x, member in enumerate(chat['members']):

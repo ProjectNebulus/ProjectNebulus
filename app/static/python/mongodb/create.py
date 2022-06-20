@@ -232,7 +232,7 @@ def sendMessage(data: dict, chat_id: str):
 
 def pinMessage(message_id, chat_id):
     chat = Chat.objects(pk=chat_id)
-    message = list(filter(lambda x: x.id==message_id, Chat.messages))[0]
+    message = list(filter(lambda x: x.id == message_id, Chat.messages))[0]
     chat.pinned_messages.append(message)
     chat.save()
 
@@ -257,4 +257,3 @@ def acceptFriendRequest(reciever_id, sender_id):
     sender.chatProfile.friends.append(reciever)
     sender.save()
     reciever.save()
-

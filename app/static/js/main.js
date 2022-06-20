@@ -2,6 +2,16 @@ const siteName = window.location.protocol + "//" + window.location.host;
 
 Array.prototype.insert = (index, item) => this.splice(index, 0, item);
 
+if (!localStorage.getItem('color-theme')) {
+    const darkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    localStorage.setItem('color-theme', darkTheme ? 'dark' : 'light');
+}
+
+if (localStorage.getItem("color-theme") === "dark")
+    document.documentElement.classList.add('dark');
+else
+    document.documentElement.classList.remove('dark');
+
 /** Returns a string containing a loading icon, with the parameters defining length and width. */
 function loadingIcon(length, width) {
     if (width === undefined)
