@@ -8,8 +8,8 @@ class ChatProfile(EmbeddedDocument):
 
     friends = ListField(ReferenceField("User"))
     acceptingFriendRequests = BooleanField(default=True)
-    incomingFriendRequests = ListField(ReferenceField('User'))
-    outgoingFriendRequests = ListField(ReferenceField('User'))
+    incomingFriendRequests = ListField(ReferenceField("User"))
+    outgoingFriendRequests = ListField(ReferenceField("User"))
     blocked = ListField(ReferenceField("User"))
     mutedDMS = ListField(ReferenceField("Chat"))
     # TODO: mutedThreads
@@ -17,5 +17,7 @@ class ChatProfile(EmbeddedDocument):
     DM_Open = ListField(ReferenceField("User"))
     text_status = StringField(default="")
     status_emoji = StringField(default="")  # twemoji
-    status = StringField(default="Online", options=['Online', 'Do Not Disturb', 'Idle', 'Offline'])  # Online, Idle, Do Not Disturb, Offline
+    status = StringField(
+        default="Online", options=["Online", "Do Not Disturb", "Idle", "Offline"]
+    )  # Online, Idle, Do Not Disturb, Offline
     custom_emojis = ListField(StringField(), default=[])

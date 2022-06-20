@@ -12,9 +12,6 @@ module.exports = {
                 'body': '.875rem',
             },
         extend: {
-                backgroundImage: {
-                    'signin-bg': "url('/static/images/background-images/signin-background.png')",
-                }
         }
 
     },

@@ -210,9 +210,9 @@ def removeFriend(user_id, old_friend_id):
     old_friend.save()
 
 
-def deleteMessage(message_id:str, community_id:str=None, chat_id:str=None):
+def deleteMessage(message_id: str, community_id: str = None, chat_id: str = None):
     if not community_id and not chat_id:
-        raise Exception('Must specify a community or a chat')
+        raise Exception("Must specify a community or a chat")
 
     if not community_id:
         chat = Chat.objects.get(pk=chat_id)

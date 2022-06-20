@@ -7,7 +7,7 @@ from ...static.python.mongodb import read
 @main_blueprint.route("/files", methods=["GET"])
 def files():
     return render_template(
-        "files.html",
+        "tools/files.html",
         page="Nebulus - Files",
         user=session.get("username"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),

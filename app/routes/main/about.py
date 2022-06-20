@@ -6,7 +6,7 @@ from . import main_blueprint
 @main_blueprint.route("/about", methods=["GET"])
 def about():
     return render_template(
-        "about.html",
+        "main/about.html",
         page="Nebulus - Learning, All In One",
         user=session.get("username"),
         email=session.get("email"),

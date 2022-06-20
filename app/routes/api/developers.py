@@ -9,7 +9,7 @@ from ...static.python.mongodb import read
 @logged_in
 def api():
     return render_template(
-        "developerportal.html",
+        "developers_api/dev_portal.html",
         user=session.get("username"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),

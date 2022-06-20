@@ -21,4 +21,4 @@ def aschoology():
     session["request_token_secret"] = auth.request_token_secret
     session["access_token_secret"] = auth.access_token_secret
     session["access_token"] = auth.access_token
-    return render_template("connectSchoology.html", url=url)
+    return render_template("connections/connectSchoology.html", url=url)

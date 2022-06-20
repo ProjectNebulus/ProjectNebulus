@@ -1,0 +1,382 @@
+{% extends "layout.html" %}
+{% block main %}
+
+    {% include "utils/navbar.html" %}
+    <style>
+        .within {
+            background: transparent;
+            width: 5ch;
+            outline: none;
+            border: none;
+        }
+
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+            text-align: right;
+        }
+
+        #time input, #addTime {
+            background: transparent;
+            width: 4ch;
+            outline: none;
+            border: none;
+        }
+
+        #time span {
+            margin-left: -0.5rem;
+            margin-top: -0.5rem;
+        }
+
+        #start:disabled {
+            background: #3F83F8;
+            color: lightgray;
+        }
+
+        -webkit-datetime-edit-ampm-field {
+            display: none;
+        }
+
+        input[type=time]::-webkit-clear-button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            -o-appearance: none;
+            -ms-appearance: none;
+            appearance: none;
+            margin: -10px;
+        }
+
+    </style>
+    <div style="margin-top: 10%; height: 25rem; width: 30rem;" class="block p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700
+     text-center mx-auto my-auto relative">
+        <button class="material-icons text-gray-500 dark:text-gray-400 absolute top-5 right-5 p-2 hover:bg-gray-200
+         dark:hover:bg-gray-500 rounded-lg" id="popup">open_in_new
+        </button>
+        <div id="config">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">New Study Session</h5>
+            <p class="font-normal text-gray-700 dark:text-gray-400">Create your first Study Session!</p>
+            <div class="mt-4 mb-6">
+                <label for="name" class="text-sm font-medium text-gray-900 dark:text-gray-300">
+                    Study Session Name</label>
+                <input id="name" name="study-session-name" maxlength="50" placeholder="Can be left blank"
+                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500
+                           focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 text-center mt-3
+                           dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            </div>
+            <div class="mb-6">
+                <label for="time" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Study
+                    Time</label>
+                <div id="time" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                     focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
+                      dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <input type="number" class="ml-1 text-2xl" max="99" min="0" placeholder="00"/>
+                    <span>hours</span>
+                    <input type="number" class="ml-4 text-2xl" max="59" min="0" placeholder="00"/>
+                    <span>minutes</span>
+                    <input type="number" class="ml-4 text-2xl" max="59" min="0" placeholder="10"/>
+                    <span>seconds</span>
+                </div>
+            </div>
+            <div class="text-center">
+                <button id="start" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
+                     focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center
+                     dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Start Study Session
+                </button>
+            </div>
+        </div>
+        <div id="timer" class="hidden text-center">
+            <h5 class="mb-2 text-4xl font-bold tracking-tight text-gray-900 dark:text-white" id="timerDisplay">0:00</h5>
+            <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-800 dark:text-gray-200" id="progress">
+                left in your <span id="timerName" class="text-red-500">Homework</span> timer.</h5>
+            <p class="mb-2 text-lg tracking-tight text-gray-900 dark:text-gray-200" id="message">Keep It Up!</p>
+
+            <button class="p-2 mt-8 hover:bg-gray-200 dark:hover:bg-gray-500 text-black dark:text-white rounded hidden">
+                + 1 minutes
+            </button>
+
+            <div class="absolute bottom-0 left-0 text-center w-full mb-8 text-black dark:text-white">
+                <button id="pause"
+                        class="px-4 py-2 border border-2 rounded-lg hover:text-gray-600 dark:hover:text-gray-300 mb-2"></button>
+                <button id="cancel" class="px-4 py-2 rounded-lg border border-2 border-gray-300 dark:border-gray-700
+                 hover:bg-gray-200 dark:hover:bg-gray-500 hover:text-gray-600 dark:hover:text-gray-300">
+                    Cancel
+                </button>
+            </div>
+        </div>
+        <div id="timerEnd" class="hidden text-center text-black dark:text-white">
+            <h5 class="text-3xl" style="color:greenyellow;">Your timer has ended!</h5>
+            <p class="text-gray-500 dark:text-gray-400 my-2">
+                Break time!
+                <br><br>
+                Or, if you want to, you could...
+            </p>
+            <button id="restart" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
+                focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center
+                dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-2">
+                Start another session
+            </button>
+        </div>
+    </div>
+
+    <span id="updateVariable"></span>
+    <script>
+        const inputs = document.querySelectorAll("#time input");
+        const labels = document.querySelectorAll("#time span");
+        const config = document.getElementById("config");
+        const timer = document.getElementById("timer");
+        const timerEnd = document.getElementById("timerEnd");
+        const display = document.getElementById("timerDisplay");
+        const start = document.getElementById("start");
+        const timerName = document.getElementById("timerName");
+        const pauseButton = document.getElementById("pause");
+        const popupButton = document.getElementById("popup");
+
+        const pauseClasses = ['bg-yellow-300', 'border-yellow-400', 'hover:bg-yellow-500'];
+        const resumeClasses = ['bg-green-500', 'border-green-700', 'hover:bg-green-800'];
+
+        let hours, minutes, seconds, interval;
+        let paused = false;
+        let timerStarted = localStorage.getItem("currentTimer") !== null;
+        let bypassUnload = false;
+        let isPopup = localStorage.getItem("popup") !== null;
+        const updateVariable = document.getElementById("updateVariable");
+        updateVariable.classList.add("hidden");
+
+        window.addEventListener("beforeunload", () => {
+            if (interval) clearInterval(interval);
+
+            if (bypassUnload) {
+                bypassUnload = false;
+                return;
+            }
+            localStorage.removeItem("currentTimer");
+            localStorage.removeItem("popup");
+        });
+
+        if (localStorage.getItem("popup")) {
+            popupButton.innerHTML = "open_in_browser";
+            document.getElementById("navbar").classList.add("hidden");
+        }
+
+        function loadTimer() {
+            if (interval) clearInterval(interval);
+
+            const data = localStorage.getItem("currentTimer").split(" ");
+            timerName.innerHTML = data[0];
+            paused = parseInt(data[1]) === 1;
+            hours = parseInt(data[2]);
+            minutes = parseInt(data[3]);
+            seconds = parseInt(data[4]) + isPopup;
+
+            config.classList.add("hidden");
+            timer.classList.remove("hidden");
+
+            subtractTime();
+
+            if (paused)
+                pause();
+            else
+                resume();
+        }
+
+        const saveTimer = () => localStorage.setItem("currentTimer", [timerName.innerHTML, paused + 0, hours, minutes, seconds].join(" "));
+
+        if (localStorage.getItem("currentTimer")) loadTimer();
+
+        document.addEventListener("keydown", () => {
+            let focused = false;
+
+            if (document.activeElement === document.getElementById("name"))
+                focused = true;
+            else
+                for (let i = 0; i < 3; i++) {
+                    if (document.activeElement === inputs[i]) {
+                        focused = true;
+                        break;
+                    }
+                }
+
+            if (!focused)
+                inputs[2].focus();
+        });
+
+        for (let i = 0; i < 3; i++)
+            inputs[i].oninput = () => {
+                inputs[i].value = inputs[i].value.replaceAll("-", "");
+                if (inputs[i].value.length >= 2) inputs[i].value = inputs[i].value.substring(0, 2);
+
+                const max = parseInt(inputs[i].getAttribute("max"));
+                if (max < 99 && parseInt(inputs[i].value) > max)
+                    inputs[i].value = max + "";
+
+                if (parseInt(inputs[i].value) !== 1) {
+                    if (!labels[i].innerHTML.endsWith("s"))
+                        labels[i].innerHTML += "s";
+                }
+                else {
+                    if (labels[i].innerHTML.endsWith("s"))
+                        labels[i].innerHTML = labels[i].innerHTML.substring(0, labels[i].innerHTML.length - 1);
+                }
+
+                inputs[i].addEventListener("keyup", (e) => {
+                    if (e.key === "Enter")
+                        start.click();
+                });
+
+                start.disabled = disableTimer();
+
+                if (i > 0) {
+                    if (inputs[i].value.length === 2)
+                        inputs[i - 1].focus();
+                }
+            };
+
+        start.disabled = disableTimer();
+
+        function disableTimer() {
+            for (let i = 0; i < 3; i++) {
+                if (inputs[i].value !== "" && parseInt(inputs[i].value) > 0)
+                    return false;
+            }
+            return true;
+        }
+
+        document.getElementById("start").onclick = function () {
+            timerStarted = true;
+
+            hours = parseInt(inputs[0].value);
+            minutes = parseInt(inputs[1].value);
+            seconds = parseInt(inputs[2].value) + 1;
+            timerName.innerHTML = document.getElementById("name").value;
+
+            if (!seconds) seconds = 1;
+            if (!minutes) minutes = 0;
+            if (!hours) hours = 0;
+
+            config.classList.add("hidden");
+            timer.classList.remove("hidden");
+
+            subtractTime();
+            resume();
+        }
+
+        pauseButton.onclick = () => {
+            if (paused)
+                resume();
+            else
+                pause();
+        }
+
+        document.getElementById("cancel").onclick = () => {
+            if (!confirm("Are you sure you want to cancel the timer?")) return;
+
+            onTimerEnd();
+            configure();
+        }
+
+        document.getElementById("restart").onclick = configure;
+
+
+        function resume() {
+            paused = false;
+            interval = setInterval(subtractTime, 1000);
+            pauseButton.classList.remove(...resumeClasses);
+            pauseButton.classList.add(...pauseClasses);
+            pauseButton.innerHTML = "Pause";
+        }
+
+        function pause() {
+            paused = true;
+            clearInterval(interval);
+            pauseButton.classList.remove(...pauseClasses);
+            pauseButton.classList.add(...resumeClasses);
+            pauseButton.innerHTML = "Resume";
+        }
+
+        function configure() {
+            for (let i = 0; i < 3; i++)
+                inputs[i].value = "";
+
+            config.classList.remove("hidden");
+            timerEnd.classList.add("hidden")
+            start.disabled = disableTimer();
+        }
+
+        function subtractTime() {
+            seconds--;
+
+            if (hours === minutes && minutes === seconds && seconds === 0)
+                onTimerEnd();
+
+            if (seconds < 0) {
+                seconds = 59;
+                minutes--;
+
+                if (minutes < 0) {
+                    minutes = 59;
+                    hours--;
+                }
+            }
+
+            display.innerHTML = padWith0(minutes) + ":" + padWith0(seconds);
+            if (hours > 0)
+                display.innerHTML = hours + ":" + display.innerHTML;
+        }
+
+        function onTimerEnd() {
+            timerStarted = false;
+            localStorage.removeItem("currentTimer");
+            timer.classList.add("hidden");
+            timerEnd.classList.remove("hidden");
+
+            if (interval) clearInterval(interval);
+        }
+
+        function padWith0(num) {
+            let string = num.toString();
+            if (num < 10)
+                string = "0" + string;
+            return string
+        }
+
+        popupButton.onclick = () => {
+            bypassUnload = true;
+            if (!isPopup && !localStorage.getItem("popup")) {
+                saveTimer();
+                localStorage.setItem("popup", "true");
+                window.open('/study', 'Study Timer', 'width=600,height=600');
+            }
+            else {
+                saveTimer();
+                localStorage.removeItem("popup");
+                window.close();
+            }
+        }
+
+        let popupInterval = setInterval(() => {
+            if ((popupButton.innerHTML.includes("new") && !localStorage.getItem("popup")) ||
+                (popupButton.innerHTML.includes("browser") && localStorage.getItem("popup"))) {
+                if (config.classList.contains("invisible")) {
+                    loadTimer();
+                    config.classList.remove("invisible");
+                    timer.classList.remove("invisible");
+                    timerEnd.classList.remove("invisible");
+                    popupButton.classList.remove("invisible");
+                }
+            }
+            else {
+                config.classList.add("invisible");
+                timer.classList.add("invisible");
+                timerEnd.classList.add("invisible");
+                popupButton.classList.add("invisible");
+            }
+        }, 200);
+    </script>
+{% endblock %}

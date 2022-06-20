@@ -11,4 +11,4 @@ api_blueprint = Blueprint(
 from app.routes.api import v1
 from app.routes.api import developers
 
-# from .graphql import *
+# from app.routes.api import graphql

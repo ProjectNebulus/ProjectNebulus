@@ -29,7 +29,7 @@ def schoology():
     session["access_token"] = auth.access_token
 
     # Open OAuth authorization webpage. Give time to authorize.
-    return render_template("connectSchoology.html", url=url)
+    return render_template("connections/connectSchoology.html", url=url)
 
 
 @main_blueprint.route("/connections/google-classroom")
@@ -41,7 +41,9 @@ def g_classroom_auth():
     if classroom_object:
         import random, json, os
 
-        filename = "token_" + str(random.randrange(1000000000, 9999999999)) + ".json_data"
+        filename = (
+            "token_" + str(random.randrange(1000000000, 9999999999)) + ".json_data"
+        )
         tokeninfo2 = classroom_object.to_json()
         with open(filename, "w") as out:
             json.dump(tokeninfo2, out, indent=4)
@@ -68,4 +70,6 @@ def g_classroom_auth():
     print(user_info)
     user_info = [user_info["name"], user_info["picture"]]
 
-    return render_template("connectClassroom.html", link=creds, data=user_info)
+    return render_template(
+        "connections/connectClassroom.html", link=creds, data=user_info
+    )
