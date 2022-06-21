@@ -3,7 +3,10 @@ from datetime import datetime
 from mongoengine import *
 
 from .Avatar import Avatar
+from .Message import Message
 from .Snowflake import Snowflake
+
+Message
 
 
 class Chat(Snowflake):
