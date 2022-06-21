@@ -4,10 +4,10 @@
 {% extends "layout.html" %}
 {% block main %}
     {% include "utils/navbar.html" %}
-    <div id="user-data" user-id="{{ user_obj.id }}"></div>
+    <div id="user-data" class="invisible">{{ user_obj._id }}</div>
     <div class="flex flex-row w-full h-full">
     <div style="float:left;" class="w-45 h-full" aria-label="Sidebar" id="chat-sidebar">
-        <div class="px-3 py-4 overflow-y-auto rounded bg-gray-100 dark:bg-stone-800 h-full" >
+        <div class="px-3 py-4 overflow-y-auto rounded bg-gray-100 dark:bg-gray-800 h-full" >
              <form>
     <label for="default-search" class="mb-2 text-xs text-gray-900 sr-only dark:text-stone-400">Search or start a conversation</label>
     <div class="relative">
@@ -370,21 +370,48 @@
 
     function load(data){
         s = ``
-        let userID = document.getElementById('user-data').getAttribute('user-id')
+        let userID = document.getElementById('user-data').textContent
         let div = document.getElementById('user-chats')
         data.forEach(function (chat){
             s += `
             <div style="margin-bottom:4px;"
-             class="flex items-center space-x-4 dark:bg-gray-600 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg">`
+             class="p-2 flex items-center space-x-4 dark:bg-gray-600 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg">`
             if (chat['members'].length === 2){
-                let other = chat['members'].filter(user => user['id'] != userID)
+                let other = chat['members'].filter(function(user){
+                    return (user['_id'] != userID)
+                })[0]
+
+                if (other['chatProfile']['status'] === 'Online'){
+                    s+= `<div class="relative">
+    <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
+    <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+</div>`
+                }
+                else if (other['chatProfile']['status'] === 'Do Not Disturb'){
+                    s+= `<div class="relative">
+    <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
+    <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-red-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
+</div>`
+                }
+                else{
+                   s+= `<div class="relative">
+    <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
+    <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-gray-700 border-2 border-white dark:border-gray-800 rounded-full"></span>
+</div>`
+                }
+                let status_emoji = other['chatProfile']['status_emoji']
+                if (!(status_emoji)) {
+                    status_emoji = ''
+                }
+                let status_text = other['chatProfile']['status_text']
+                if (!(status_emoji)) {
+                    status_text = ''
+                }
                 s+=
-           ` <img style="margin:10px;" class="w-12 h-12 rounded-full"
-                 src="${other['avatar']['avatar_url']}"
-                 alt="Profile Picture">
+           `
             <div class="space-y-1 font-medium dark:text-white">
                 <div>${other['username']}</div>
-                <div class="text-sm text-gray-500 dark:text-gray-400">${other['chatProfile']['status_emoji']} ${other['chatProfile']['status_text']}</div>
+                <div class="text-sm text-gray-500 dark:text-gray-400" style="font-size:13px;">${status_emoji} ${status_text}</div>
             </div>
         </div>
         `
@@ -392,9 +419,9 @@
             }
             else{
                 s += `
-                <img style="margin:10px;" class="w-12 h-12 rounded-full"
-                     src="${chat['avatar']['avatar_url']}"
-                     alt="Profile Picture">`
+               <div class="flex items-center space-x-4">
+    <img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src="${chat['avatar']['avatar_url']}" alt="Bordered avatar">
+                `
 
                     if (!(chat['title'])){
                         chat['title'] = `${chat['owner']['username']}'s Chat`
@@ -402,10 +429,10 @@
 
             s+=
                 `<div class="space-y-1 font-medium dark:text-white">
-                    <div>${chat['title']}</div>
-                    <div class="text-sm text-gray-500 dark:text-gray-400">${chat['members'].length} Members</div>
-                </div>
-            </div>`
+        <div>${chat["title"]}</div>
+        <div style="font-size:13px;" class="text-sm text-gray-500 dark:text-gray-400">${chat['members'].length} Members</div>
+    </div>
+</div>`
             }
         });
 

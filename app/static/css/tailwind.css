@@ -1589,6 +1589,10 @@ html.dark body {
   height: 100vh;
 }
 
+.h-3\.5 {
+  height: 0.875rem;
+}
+
 .w-5 {
   width: 1.25rem;
 }
@@ -1703,6 +1707,10 @@ html.dark body {
 
 .w-40 {
   width: 10rem;
+}
+
+.w-3\.5 {
+  width: 0.875rem;
 }
 
 .min-w-full {
