@@ -439,5 +439,23 @@
         div.insertAdjacentHTML( 'beforeend', s );
 
     }
+
+    function changeStatus(status){
+        $.ajax({
+            url: '/api/v1/internal/set-status',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                status: status
+            })
+    });
+    window.onbeforeunload = function(){
+        changeStatus("Offline");
+    }
+    window.onload = function(){
+        changeStatus('Online');
+    }
+
+};
     </script>
 {% endblock %}

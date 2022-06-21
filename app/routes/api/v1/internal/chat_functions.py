@@ -149,3 +149,9 @@ def getChat():
     chatID = data["chatID"]
     chat = read.getChat(chatID)
     return json.loads(chat.to_json())
+
+
+@internal.route("/set-status", methods=['POST'])
+def set_offline_status():
+    data = request.get_json()
+    update.set_status(session['id'], data['status'])
