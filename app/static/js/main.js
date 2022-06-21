@@ -84,25 +84,7 @@ class KeyUpTimer {
         clearInterval(this.interval);
     }
 }
-```
-if ('serviceWorker' in navigator) {
-    // we are checking here to see if the browser supports the service worker api
-    window.addEventListener('load', async function () {
-        await navigator.serviceWorker.register(/*'../static/js/sw.js'*/ '../sw.js', {scope: "/"}).then(
-            function (registration) {
-                // Registration was successful
-                console.log(
-                    'Service Worker registration was successful with scope: ',
-                    registration.scope
-                );
-            },
-            function (error) {
-                console.log('ServiceWorker registration failed: ', error);
-            }
-        );
-    });
-}
-```
+
 function invertSite() {
     const banner = document.getElementById("homeBanner");
 
@@ -116,7 +98,6 @@ function invertSite() {
             document.body.style.background = "linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2) ), url('/static/images/darkwallpaper.png') no-repeat center center fixed";
             //document.body.style.backgroundImage = "url(\"/static/images/darkwallpaper.png\")";
             document.body.style.backgroundSize = "cover";
-
         }
         if (banner) banner.style.filter = "brightness(100%)";
 
@@ -210,25 +191,7 @@ window.addEventListener("load", function () {
         logo.removeAttribute("class");
     }
 });
-```
-if ('serviceWorker' in navigator) {
-    // we are checking here to see if the browser supports the service worker api
-    window.addEventListener('load', async function () {
-        await navigator.serviceWorker.register(/*'../static/js/sw.js'*/ '../sw.js?2', {scope: "/"}).then(
-            function (registration) {
-                // Registration was successful
-                console.log(
-                    'Service Worker registration was successful with scope: ',
-                    registration.scope
-                );
-            },
-            function (error) {
-                console.log('ServiceWorker registration failed: ', error);
-            }
-        );
-    });
-}
-```
+
 let statusInterval = 0;
 let shouldGetSpotify = true;
 let shouldGetFocus = true;

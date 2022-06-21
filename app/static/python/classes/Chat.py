@@ -3,10 +3,7 @@ from datetime import datetime
 from mongoengine import *
 
 from .Avatar import Avatar
-from .Message import Message
 from .Snowflake import Snowflake
-
-# so pycharm optimize imports doesn't remove it
 
 
 class Chat(Snowflake):
