@@ -1,4 +1,3 @@
-import schoolopy
 from flask import session, request
 
 from . import internal

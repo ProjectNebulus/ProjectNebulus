@@ -24,7 +24,6 @@ from app.routes.api.v1.internal.send_email import *
 from app.routes.api.v1.internal.signup_post import *
 from app.routes.api.v1.internal.signin_post import *
 from app.routes.api.v1.internal.spotify_status import *
-from app.routes.api.v1.internal.signin_with_schoology import *
 from app.routes.api.v1.internal.create_course_resource import *
 from app.routes.api.v1.internal.file_upload import *
 from app.routes.api.v1.internal.file_upload_link import *
