@@ -20,6 +20,10 @@ def chatPage(page):
     else:
         newMessages = None
     user = read.find_user(pk=session["id"])
+    try:
+        status = user.chatProfile.text_status
+    except:
+        status = user.email
     user = json.loads(user.to_json())
     return render_template(
         f"/chat/{page}.html",
@@ -30,4 +34,5 @@ def chatPage(page):
         email=session.get("email"),
         messages=newMessages,
         disableArc=page != "chat",
+        status=status,
     )
