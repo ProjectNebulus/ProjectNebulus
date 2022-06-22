@@ -5,6 +5,7 @@ import json
 from . import internal
 from .... import socketio
 from .....static.python.mongodb import create, read, update, delete
+from .....static.python.classes import User
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 
@@ -164,6 +165,9 @@ def fetchMessages():
         chat['messages'] = chat['messages'][data['current_index']:(len(chat['messages'])-data['current_index'])]
     else:
         chat['messages'] = chat['messages'][data['current_index']:(data['current_index']+30)]
+
+    for message in chat['messages']:
+        message["sender"] = json.loads(User.objects.only('_id', 'username', 'avatar.avatar_url').get(pk=message["sender"]).to_json())
 
     return jsonify(chat['messages'])
 
