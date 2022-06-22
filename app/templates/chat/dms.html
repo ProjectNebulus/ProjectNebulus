@@ -25,7 +25,7 @@
                     </div>
                 </form>
                 <div class="flex flex-col w-full rounded-sm ">
-                    <div class="flex flex-row dark:hover:bg-zinc-700 hover:bg-gray-200 rounded-lg">
+                    <div id="friends" onclick="openFriends()" class="flex flex-row dark:hover:bg-zinc-700 hover:bg-gray-200 rounded-lg">
                         <div style="margin-bottom:0px;"
                              class="flex items-center space-x-4">
                             <i class="material-icons text-black dark:text-stone-400"
@@ -39,14 +39,14 @@
 
                         </div>
                     </div>
-                    <div style="margin-bottom:0px;"
+                    <div id="blocked"  style="margin-bottom:0px;"
                          class="flex items-center space-x-4 dark:hover:bg-zinc-700 hover:bg-gray-200 rounded-lg">
                         <i class="material-icons text-black dark:text-stone-400" style="font-size:40px;margin:10px;">block</i>
                         <div class="space-y-1 text-lg dark:text-stone-400">
                             <div>Blocked</div>
                         </div>
                     </div>
-                    <div style="margin-bottom:0px;"
+                    <div id="emojis"  style="margin-bottom:0px;"
                          class="flex items-center space-x-4 dark:hover:bg-zinc-700 hover:bg-gray-200 rounded-lg">
                         <i class="material-icons text-black dark:text-stone-400" style="font-size:40px;margin:10px;">mood</i>
                         <div class="space-y-1 text-lg dark:text-stone-400">
@@ -92,7 +92,7 @@
             </div>
         </div>
 
-        <div style="margin-left: 325px; float:left;position: fixed;bottom: 10px;width:calc(100% - 256px);">
+        <div style="margin-left: 325px; float:left;position: fixed;bottom: 10px;width:calc(100% - 256px);" id="main-area">
             <div style="overflow-y:scroll; height:800px;">
                 <div style="margin:20px;display:flex;flex-direction: column-reverse;overflow-y:scroll;" id="chat">
 
@@ -137,12 +137,33 @@
                     </div>
                 </form>
             </div>
-        </div>
+        </div  id>
     </div>
 
     <script>
         function createChat(username) {
             document.getElementById("dropdown").style.display = "none";
+            const request = $.ajax({
+                type: "POST",
+                url: "/api/v1/internal/create-chat-dm",
+                data: JSON.stringify({
+                    member: username
+                }),
+
+                contentType: 'application/json; charset=utf-8',
+            });
+            //refresh bar
+            document.getElementById("user-chats").innerHTML = "";
+            $.ajax({
+                url: '/api/v1/internal/fetch-chats',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    index: chatAmount
+                })
+
+
+            }).done(load);
         }
 
         function changeSearch() {
@@ -363,5 +384,33 @@
             });
 
             }
+
+        function openFriends(){
+            $.ajax({
+                url: '/api/v1/internal/get-friends',
+                type: 'GET',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                })
+
+
+            }).done(
+                document.getElementById("main-area").innerHTML = "<h1>Your Friends</h1>"
+            );
+        }
+        function openBlocked(){
+            $.ajax({
+                url: '/api/v1/internal/get-blocks',
+                type: 'GET',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                })
+
+
+            }).done(
+                document.getElementById("main-area").innerHTML = "<h1>Blocked</h1>"
+            );
+        }
+        }
     </script>
 {% endblock %}

@@ -437,3 +437,18 @@ def loadChats(user_id:str, current_index, initial_amount, required_fields):
 
     print(chats)
     return chats
+
+def get_friends(user_id):
+    user = find_user(pk=user_id)
+    try:
+        friends = user.chatProfile.friends
+    except:
+        friends = None
+    return friends
+def get_blocks(user_id):
+    user = find_user(pk=user_id)
+    try:
+        blocked = user.chatProfile.blocked
+    except:
+        blocked = None
+    return blocked

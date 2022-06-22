@@ -7,7 +7,6 @@ from .Message import Message
 from .Snowflake import Snowflake
 from .Message import Message
 
-Message
 
 
 class Chat(Snowflake):

@@ -132,7 +132,17 @@ def mute():
 def createChat():
     json_data = request.get_json()
     return create.createChat(**json_data)
-
+@internal.route("/create-chat-dm", methods=["POST"])
+def createChatDms():
+    json_data = request.get_json()
+    data = {
+        "owner": session["username"],
+        "members": [
+            session["username"],
+            json_data["member"]
+        ]
+    }
+    return create.createChat(**data)
 
 @internal.route("/fetch-chats", methods=['POST'])
 def fetchChats():
@@ -180,3 +190,13 @@ def set_offline_status():
     print(data)
     update.set_status(session['id'], data['status'])
     return 'success'
+
+@internal.route("/get-friends", methods=['GET'])
+def get_friends():
+    friends = read.get_friends(session["id"])
+    return str(friends)
+
+@internal.route("/get-blocks", methods=['POST'])
+def get_blocked():
+    blocked = read.get_blocks(session["id"])
+    return str(blocked)
