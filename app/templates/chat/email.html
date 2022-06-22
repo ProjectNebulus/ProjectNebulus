@@ -235,8 +235,11 @@
                 let date = message["updated"]
                 let subject = message["subject"]
                 let recipients = message["recipients"]
-                let address = author + " to ";
-                let images = "";
+                let address = author["name"] + " to ";
+                let images = "<div class='flex mb-5 -space-x-4'>";
+                images += `
+                 <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="${author["avatar"]}" alt="">
+                `;
                 for (let i = 0; i<recipients.length; i++){
                     address+= recipients[i]["name"]
                     if (i !== (recipients.length - 1)){
@@ -246,7 +249,7 @@
                  <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="${recipients[i]["avatar"]}" alt="">
                 `;
                 }
-                //document.getElementsByTagName("tbody")[0].innerHTML
+                images += "</div>";
                 document.getElementById('tbody').innerHTML+= `
             <tr data-modal-toggle="thread_0" class="bg-white dark:bg-gray-800 border-b  dark:border-gray-700">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
