@@ -2,7 +2,7 @@
 {% block main %}
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg h-full mx-4">
         <div class="absolute w-full h-full bg-gray-100 dark:bg-gray-800 -z-10"></div>
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <table id="table" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
@@ -26,7 +26,7 @@
                 </th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="tbody">
             {% for id, message in messages %}
                 <tr data-modal-toggle="thread_{{ id }}"
                     class="{% if message["status"] == "read" %}bg-white dark:bg-gray-800 {% else %} bg-gray-100 dark:bg-gray-700 {% endif %}border-b  dark:border-gray-700">
@@ -214,4 +214,64 @@
     </tbody>
     </table>
     </div>
+    <script>
+    window.onload = function(){
+        loadMoreEmail();
+    }
+    function loadMoreEmail(){
+        let start = $('#table tr').length - 1;
+        let request = $.ajax({
+            type: "POST",
+            url: "/api/v1/internal/get_schoology_messages",
+            data: {
+                "start": start
+            }
+        });
+        request.done(function (data) {
+            console.log(data);
+            for (let message of data){
+                let author = message["author"]
+                let dmessage = message["message"]
+                let date = message["updated"]
+                let subject = message["subject"]
+                let recipients = message["recipients"]
+                let address = author + " to ";
+                let images = "";
+                for (let i = 0; i<recipients.length; i++){
+                    address+= recipients[i]["name"]
+                    if (i !== (recipients.length - 1)){
+                        address += ", "
+                    }
+                    images += `
+                 <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="${recipients[i]["avatar"]}" alt="">
+                `;
+                }
+                //document.getElementsByTagName("tbody")[0].innerHTML
+                document.getElementById('tbody').innerHTML+= `
+            <tr data-modal-toggle="thread_0" class="bg-white dark:bg-gray-800 border-b  dark:border-gray-700">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                        ${images}
+                </th>
+                <td class="px-6 py-4">
+                        ${address}
+
+
+                </td>
+                <td class="px-6 py-4">
+                   ${subject}
+                </td>
+                <td class="px-6 py-4">
+                    ${dmessage}
+                </td>
+                <td class="px-6 py-4">
+                    ${date}
+                </td>
+                </tr>`;
+            }
+            loadMoreEmail();
+
+        })
+
+    }
+    </script>
 {% endblock %}

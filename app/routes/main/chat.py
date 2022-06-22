@@ -15,17 +15,18 @@ def chat():
 @main_blueprint.route("/chat/<page>")
 @logged_in
 def chatPage(page):
+    user = read.find_user(pk=session["id"])
+    newMessages = None
+    status = None
     if page == "email":
         newMessages = get_schoology_emails()
-    else:
-        newMessages = None
-    user = read.find_user(pk=session["id"])
-    try:
-        status = user.chatProfile.text_status
-    except:
-        status = session.get("email")
-    if user.chatProfile.text_status == "":
-        status = session.get("email")
+    if page == "dm":
+        try:
+            status = user.chatProfile.text_status
+        except:
+            status = session.get("email")
+        if user.chatProfile.text_status == "":
+            status = session.get("email")
     user = json.loads(user.to_json())
     return render_template(
         f"/chat/{page}.html",

@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from flask import jsonify
+from flask import jsonify, request
 
 from .....static.python.mongodb import read
 from . import internal
@@ -8,15 +8,16 @@ from ....main.utils import private_endpoint
 from app.static.python.utils.colors import *
 
 
-@internal.route("/get_schoology_messages", methods=["GET"])
+@internal.route("/get_schoology_messages", methods=["POST"])
 @private_endpoint
 def get_schoology_messages():
     sc = read.getSchoologyAuth()
-
+    start_at = int(request.form.get("start"))-1
+    end_at = int(request.form.get("start"))+5-1
     messages = sc.get_inbox_messages()
     newMessages = []
-
-    for message in messages:
+    sc.limit = end_at+1
+    for message in messages[start_at:end_at]:
         info = {}
         author = sc.get_user(message["author_id"])
         authorName = author["name_display"]
@@ -50,7 +51,6 @@ def get_schoology_messages():
         info["subject"] = message["subject"]
         info["status"] = message["message_status"]
         thread = sc.get_message(message_id=message["id"])
-        # print(thread)
         info["message"] = thread[-1]["message"]
         info["message"] = info["message"][:100] + "..." * (len(info["message"]) > 100)
         newThread = []
@@ -69,7 +69,6 @@ def get_schoology_messages():
         info["recipients"] = recipients
         info["author"] = author
         info["updated"] = datetime.fromtimestamp(int(message["last_updated"]))
-        # print(temp)
         newMessages.append(info)
 
     return jsonify(newMessages)
