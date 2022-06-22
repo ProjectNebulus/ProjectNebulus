@@ -150,9 +150,9 @@ def fetchChats():
 def getChat():
     data = request.get_json()
     chatID = data["chatID"]
-    chat = json.loads(read.getChat(chatID).to_json)
+    chat = json.loads(read.getChat(chatID).to_json())
     chat['messages'] = chat['messages'][:30]
-    return chat
+    return jsonify(chat)
 
 
 @internal.route("/fetch-messages", methods=['POST'])

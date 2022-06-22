@@ -88,17 +88,11 @@
                         </ul>
                     </div>
 
-
-                    <div id="user-chats">
-
-
-                    </div>
-
                 </div>
             </div>
         </div>
 
-        <div style="margin-left: 325px; float:left;position: fixed;bottom: 10px;width:calc(100% - 256px);">
+        <div style="margin-left: 325px; float:left;position: fixed;bottom: 10px;width:calc(100% - 256px);" id="chat">
             <div style="overflow-y:scroll; height:800px;">
                 <img style="margin:10px;" class="w-48 h-48 rounded-full"
                      src="https://cdn.discordapp.com/avatars/751594192739893298/03a0281d67484e9b1c95205fd5f81c2a.webp?size=64"
@@ -118,6 +112,11 @@
                         class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                     Mute
                 </button>
+                <div class="relative flex py-5 items-center">
+    <div class="flex-grow border-t border-gray-400"></div>
+    <span class="flex-shrink mx-4 text-gray-400">Content</span>
+    <div class="flex-grow border-t border-gray-400"></div>
+</div>
 
                 <div style="margin:20px;display:flex;flex-direction: column-reverse;overflow-y:scroll;">
                     <div style="margin:3px;" class="flex items-center space-x-4">
@@ -366,8 +365,6 @@
 
         $(document).ready(function () {
             makeCall();
-
-            $('#user-chats div:first-child').click();
         })
 
         $('#chat-sidebar').on('scroll', function () {
@@ -453,10 +450,12 @@
 
             div.insertAdjacentHTML('beforeend', s);
 
+            let selected = document.getElementById('user-chats');
+            selected.children[0].click();
+
         }
 
     function changeStatus(status){
-        console.log('status');
         $.ajax({
             url: '/api/v1/internal/set-status',
             type: 'POST',
@@ -467,15 +466,28 @@
     });
     }
 
-    function getChat(chatID){
-            return false;
-    }
-
     window.onunload = function(){
         changeStatus("Offline")
     }
     window.addEventListener("load", function(){
-        changeStatus('Online')
+        changeStatus('Online');
     });
+    function getChat(chatID){
+            console.log('hi');
+            $.ajax({
+                url: '/api/v1/internal/get-chat',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                        chatID: chatID.toString()
+                    }
+                ),
+                success: function(chat){
+                    console.log(chat);
+
+
+                }
+            });
+    }
     </script>
 {% endblock %}
