@@ -384,6 +384,7 @@
 
         function makeCall() {
             let chatAmount = $('#user-chats > div').length;
+            console.log(chatAmount);
             $.ajax({
                 url: '/api/v1/internal/fetch-chats',
                 type: 'POST',
