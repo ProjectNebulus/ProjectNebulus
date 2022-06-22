@@ -1,5 +1,6 @@
 <!--Extend with Jinja!-->
 <script src="https://unpkg.com/flowbite@1.4.5/dist/flowbite.js"></script>
+<script type="text/javascript" src="//cdn.socket.io/4.4.1/socket.io.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 {% extends "layout.html" %}
 {% block main %}
@@ -365,6 +366,8 @@
 
         $(document).ready(function () {
             makeCall();
+
+            $('#user-chats div:first-child').click();
         })
 
         $('#chat-sidebar').on('scroll', function () {
@@ -383,8 +386,9 @@
             let div = document.getElementById('user-chats')
             data.forEach(function (chat) {
                 s += `
+<a href="javascript:getChat(${chat['_id']})">
             <div style="margin-bottom:4px;"
-             class="p-2 flex items-center space-x-4 dark:bg-gray-600 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg">`
+             class="p-2 flex items-center space-x-4 dark:bg-gray-600 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" >`
                 if (chat['members'].length === 2) {
                     let other = chat['members'].filter(function (user) {
                         return (user['_id'] != userID)
@@ -423,6 +427,7 @@
                 <div class="text-sm text-gray-500 dark:text-gray-400" style="font-size:13px;">${status_emoji} ${status_text}</div>
             </div>
         </div>
+</a>
         `
 
                 }
@@ -441,7 +446,8 @@
         <div>${chat["title"]}</div>
         <div style="font-size:13px;" class="text-sm text-gray-500 dark:text-gray-400">${chat['members'].length} Members</div>
     </div>
-</div>`
+</div>
+</a>`
                 }
             });
 
@@ -449,22 +455,23 @@
 
         }
 
-        function changeStatus(status) {
-            $.ajax({
-                url: '/api/v1/internal/set-status',
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify({
-                    status: status
-                })
-            });
-            window.onbeforeunload = function () {
-                changeStatus("Offline");
-            }
-            window.onload = function () {
-                changeStatus('Online');
-            }
+    function changeStatus(status){
+        console.log('status');
+        $.ajax({
+            url: '/api/v1/internal/set-status',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                status: status
+            })
+    });
+    }
 
-        };
+    window.onunload = function(){
+        changeStatus("Offline")
+    }
+    window.addEventListener("load", function(){
+        changeStatus('Online')
+    });
     </script>
 {% endblock %}

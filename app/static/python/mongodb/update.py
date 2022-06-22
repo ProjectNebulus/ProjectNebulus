@@ -217,7 +217,7 @@ def deleteMessage(chat_id, message_id):
 
 def set_status(user_id: str, status: str):
     user = User.objects.get(pk=user_id)
-    if status == 'Online' and user.chatProfile.status == 'Do Not Disturb':
+    if status == 'Online' and user.chatProfile.status == 'Offline':
         pass
     else:
         user.chatProfile.status = status
