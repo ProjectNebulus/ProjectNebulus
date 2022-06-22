@@ -4,7 +4,7 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 {% extends "layout.html" %}
 {% block main %}
-    <div id="user-data" class="invisible">{{ user_obj._id }}</div>
+    <div id="user-data" class="w-0 h-0 invisible">{{ user_obj._id }}</div>
     <div class="flex flex-row w-full h-full">
         <div style="float:left;" class="w-45 h-full" aria-label="Sidebar" id="chat-sidebar">
             <div class="px-3 py-4 overflow-y-auto rounded bg-gray-100 dark:bg-gray-800 h-full">
@@ -54,8 +54,8 @@
                         </div>
                     </div>
                     <div class="flex flex-row">
-                        <div class="uppercase text-xl text-gray-600 cursor-pointer">Private Messages</div>
-                        <div style="float:right;font-size:25px;" class="ml-25 mb-4 text-gray-600"
+                        <div class="uppercase text-xl text-gray-600 cursor-pointer" style="font-size:20px;">Direct Messages</div>
+                        <div style="float:right;font-size:20px;margin-left:80px;" class="text-gray-600"
                              data-dropdown-toggle="dropdown">+
                         </div>
                     </div>
@@ -423,7 +423,7 @@
                     s +=
                         `
             <div class="space-y-1 font-medium dark:text-white">
-                <div>${other['username']}</div>
+                <div class="dark:text-gray-300" style="font-size:20px">${other['username']}</div>
                 <div class="text-sm text-gray-500 dark:text-gray-400" style="font-size:13px;">${status_emoji} ${status_text}</div>
             </div>
         </div>
@@ -443,7 +443,7 @@
 
                     s +=
                         `<div class="space-y-1 font-medium dark:text-white">
-        <div>${chat["title"]}</div>
+        <div style="font-size:20px;" class="dark:text-gray-300">${chat["title"]}</div>
         <div style="font-size:13px;" class="text-sm text-gray-500 dark:text-gray-400">${chat['members'].length} Members</div>
     </div>
 </div>
@@ -465,6 +465,10 @@
                 status: status
             })
     });
+    }
+
+    function getChat(chatID){
+            return false;
     }
 
     window.onunload = function(){
