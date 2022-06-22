@@ -6,7 +6,7 @@
 {% block main %}
     <div id="user-data" class="w-0 h-0 invisible">{{ user_obj._id }}</div>
     <div class="flex flex-row w-full h-full">
-        <div style="float:left;" class="w-45 h-full" aria-label="Sidebar" id="chat-sidebar">
+        <div style="float:left;flex:0 0 315px;width:315px;" class="h-full justify-start" aria-label="Sidebar" id="chat-sidebar">
             <div class="px-3 py-4 overflow-y-auto rounded bg-gray-100 dark:bg-gray-800 h-full">
                 <form>
                     <label for="default-search" class="mb-2 text-xs text-gray-900 sr-only dark:text-stone-400">Search or
@@ -89,9 +89,9 @@
                     </div>
 
                 </div>
-            <div style="position: absolute; bottom: 0; width:319.984px; left:0; margin:0 !important;" class="bg-gray-200 dark:bg-gray-700 flex flex-row">
+            <div style="position: absolute; bottom: 0; width:315px; left:0; margin:0 !important;" class="bg-gray-200 dark:bg-gray-700 flex flex-row">
                 <div style="display: inline-block;  margin:5px;" id="dropdownTopButton" data-dropdown-toggle="dropdownTop" data-dropdown-placement="top">
-                    <logo image="/{{ avatar }}" no-revert class="h-8"></logo>
+                    <logo image="/{{ user_obj.avatar.avatar_url }}" no-revert class="h-8"></logo>
                 </div>
                 <div style="display: inline-block; margin:5px; " class="p-6 flex flex-col w-full">
                     <span class="text-xl text-black dark:text-white">{{ user }}</span>
@@ -127,18 +127,16 @@
             </div>
         </div>
 
-        <div style="margin-left: 325px; float:left;position: fixed;bottom: 10px;width:calc(100% - 256px);" id="main-area">
-            <div style="overflow-y:scroll; height:800px;">
-                <div style="margin:20px;display:flex;flex-direction: column-reverse;overflow-y:scroll;" id="chat">
+        <div class="justify-center" style="width: calc(100% - 630px);" id="main-area">
+                <div style="margin:20px;display:flex;flex-direction: column-reverse;overflow-y:scroll; height:86%;" id="chat">
 
 
 
                     </div>
 
-                </div>
 
             <div>
-                <form style="width:90%;">
+                <form style="width:100%;">
                     <label for="chat" class="sr-only">Your message</label>
                     <div class="flex items-center py-2 px-3 bg-gray-50 rounded-lg dark:bg-gray-700">
                         <button type="button"
@@ -172,6 +170,65 @@
                     </div>
                 </form>
             </div>
+        </div>
+
+        <div style="float:left;flex:0 0 315px;width:315px;" class="h-full justify-start" aria-label="Sidebar" id="members-sidebar">
+            <div class="px-3 py-4 overflow-y-auto rounded bg-gray-100 dark:bg-gray-800 h-full">
+                <form>
+                    <label for="default-search" class="mb-2 text-xs text-gray-900 sr-only dark:text-stone-400">Search or
+                        start a conversation</label>
+                    <div class="relative">
+                        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor"
+                                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                        </div>
+                        <input type="search" id="default-search"
+                               class="block p-2 pl-10 pr-0 w-full text-2xs text-gray-900 bg-gray-50 rounded-md border border-gray-300 focus:ring-slate-900 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="Search or start a conversation" style="font-size:15px;" required>
+                    </div>
+                </form>
+                <div class="flex flex-col w-full rounded-sm ">
+                    <div id="friends_btn" onclick="openFriends()" class="flex flex-row dark:hover:bg-zinc-700 hover:bg-gray-200 rounded-lg">
+                        <div style="margin-bottom:0px;"
+                             class="flex items-center space-x-4">
+                            <i class="material-icons text-black dark:text-stone-400"
+                               style="font-size:40px;margin:10px;">group</i>
+                            <div class="space-y-1 text-lg dark:text-stone-400">
+                                <div>Friends</div>
+                            </div>
+                        </div>
+                        <div class="inline-flex items-center mt-5 p-1 ml-32 mr-3 h-5 w-5 text-sm font-semibold text-white rounded-full bg-red-500">
+                            {{ user_obj.chatProfile.incomingFriendRequests|length }}
+
+                        </div>
+                    </div>
+                    <div id="blocked_btn"  style="margin-bottom:0px;"
+                         class="flex items-center space-x-4 dark:hover:bg-zinc-700 hover:bg-gray-200 rounded-lg">
+                        <i class="material-icons text-black dark:text-stone-400" style="font-size:40px;margin:10px;">block</i>
+                        <div class="space-y-1 text-lg dark:text-stone-400">
+                            <div>Blocked</div>
+                        </div>
+                    </div>
+                    <div id="emojis_btn"  style="margin-bottom:0px;"
+                         class="flex items-center space-x-4 dark:hover:bg-zinc-700 hover:bg-gray-200 rounded-lg">
+                        <i class="material-icons text-black dark:text-stone-400" style="font-size:40px;margin:10px;">mood</i>
+                        <div class="space-y-1 text-lg dark:text-stone-400">
+                            <div>Emojis</div>
+                        </div>
+                    </div>
+                    <div class="flex flex-row">
+                        <div class="uppercase text-xl text-gray-600 cursor-pointer" style="font-size:20px;">Direct Messages</div>
+                        <div style="float:right;font-size:20px;margin-left:80px;" class="text-gray-600"
+                             data-dropdown-toggle="dropdown">+
+                        </div>
+                    </div>
+                <!-- Dropdown menu -->
+
+            </div>
+        </div>
         </div>
 
         <div style="margin-left: 325px; float:left;position: fixed;width:calc(100% - 256px); display:none;" id="friends">
