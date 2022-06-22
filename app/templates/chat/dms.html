@@ -89,17 +89,41 @@
                     </div>
 
                 </div>
-
-            <div style="position: absolute; bottom: 0;" class="bg-gray-200 dark:bg-gray-700">
-                <div style="float:left; margin:5px;">
+            <div style="position: absolute; bottom: 0; width:319.984px; left:0; margin:0 !important;" class="bg-gray-200 dark:bg-gray-700 flex flex-row">
+                <div style="display: inline-block;  margin:5px;" id="dropdownTopButton" data-dropdown-toggle="dropdownTop" data-dropdown-placement="top">
                     <logo image="/{{ avatar }}" no-revert class="h-8"></logo>
                 </div>
-                <div style="float:left; margin:5px; " class="p-6 flex flex-col w-full">
+                <div style="display: inline-block; margin:5px; " class="p-6 flex flex-col w-full">
                     <span class="text-xl text-black dark:text-white">{{ user }}</span>
                     <span class="text-sm text-gray-400 dark:text-gray-200">{{ status }}</span>
                 </div>
 
             </div>
+                <!-- Dropdown menu -->
+                <div id="dropdownTop" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
+                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownTopButton">
+                        <li>
+                            <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                <span class="inline-block w-6 h-6 bg-green-400 rounded-full"></span>
+                                Online</span>
+                        </li>
+                        <li>
+                            <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                <svg class="inline-block w-6 h-6" fill="#FAA91B" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                                Idle</span>
+                        </li>
+                        <li>
+                            <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                <svg class="inline-block w-6 h-6" fill="#EC4144" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                Do Not Disturb</span>
+                        </li>
+                        <li>
+                            <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                <span class="inline-block w-6 h-6 border-2 border-gray-500 rounded-full"></span>
+                                Invisible</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
 

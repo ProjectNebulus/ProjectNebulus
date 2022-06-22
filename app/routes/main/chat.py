@@ -23,7 +23,9 @@ def chatPage(page):
     try:
         status = user.chatProfile.text_status
     except:
-        status = user.email
+        status = session.get("email")
+    if user.chatProfile.text_status == "":
+        status = session.get("email")
     user = json.loads(user.to_json())
     return render_template(
         f"/chat/{page}.html",
