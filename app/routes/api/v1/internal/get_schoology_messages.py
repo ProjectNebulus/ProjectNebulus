@@ -1,4 +1,5 @@
 from datetime import datetime
+import time
 
 from flask import jsonify, request
 
@@ -15,7 +16,11 @@ def get_schoology_messages():
     start_at = int(request.form.get("start"))
     end_at = int(request.form.get("start"))+5
     sc.limit = end_at+1
-    messages = sc.get_inbox_messages()
+    try:
+        messages = sc.get_inbox_messages()
+    except:
+        time.sleep(15)
+        messages = sc.get_inbox_messages()
     newMessages = []
     for message in messages[start_at:end_at]:
         info = {}

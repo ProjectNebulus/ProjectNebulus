@@ -20,13 +20,15 @@ def chatPage(page):
     status = None
     if page == "email":
         newMessages = get_schoology_emails()
-    if page == "dm":
-        try:
-            status = user.chatProfile.text_status
-        except:
-            status = session.get("email")
-        if user.chatProfile.text_status == "":
-            status = session.get("email")
+
+    try:
+        status = user.chatProfile.text_status
+    except:
+        status = session.get("email")
+    if user.chatProfile.text_status == "":
+        status = session.get("email")
+    if len(status) > 18:
+        status = status[0:15] + "..."
     user = json.loads(user.to_json())
     return render_template(
         f"/chat/{page}.html",
