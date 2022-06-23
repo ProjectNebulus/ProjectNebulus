@@ -1,17 +1,13 @@
+let actions, pageTitle;
 window.onload = () => {
-    const iframe = document.getElementsByName("frame")[0];
-    const upcoming = document.getElementById("upcoming-events");
-    const actions = document.getElementsByClassName("link");
-    const createButton = document.getElementById("course");
+    actions = document.getElementsByClassName("link");
+    pageTitle = document.getElementById("page-title");
 
-    const pageTitle = document.getElementById("page-title");
-    let removed = true;
-    let saveData = sessionStorage.getItem(course_id);
-    if (saveData === null)
-        saveData = "Documents";
+    const path = window.location.pathname.split("/");
+    let saveData = path.reverse()[0];
+    if (path.length < 4) saveData = "documents";
 
-    iframe.src = "/course/" + course_id + "/" + saveData.toLowerCase();
-    pageTitle.innerHTML = saveData;
+    pageTitle.innerHTML = saveData[0].toUpperCase() + saveData.substring(1);
 
     for (const link of sidebarLinks) {
         if (link.innerHTML.includes(saveData)) {

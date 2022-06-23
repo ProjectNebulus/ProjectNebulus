@@ -26,10 +26,6 @@ body {
     -webkit-user-select: none;
 }
 
-hr {
-    border: 1px solid gray;
-}
-
 /* width */
 ::-webkit-scrollbar, ::-webkit-scrollbar-thumb {
     width: 5px;

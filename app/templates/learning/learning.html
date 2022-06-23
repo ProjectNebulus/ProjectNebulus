@@ -402,21 +402,6 @@
                                     <div style="margin-bottom:10px">
                                         <img src="{{ course.avatar.avatar_url }}" alt="Course Image"
                                              style="object-fit: cover; width:50px; height:50px; border-radius:10px;display: inline-block; margin: 10px;">
-
-                                        <dropdown-menu>
-                                            <trigger style="float:right;padding:0" class="dark:text-gray-200 material-icons bg-transparent
-                                            dark:hover:bg-gray-700 rounded cursor-pointer focus:outline-none"
-                                                     onclick="(e) => e.preventDefault()">
-                                                more_horiz
-                                            </trigger>
-                                            <contents class="dark:bg-gray-700 rounded p-1">
-                                                <item class="dark:text-white cursor-pointer hover:bg-blue-800 text-xs p-0.5"
-                                                      onclick="navigator.clipboard.writeText(siteName + '/course/{{ course.id }}')">
-                                                    Copy Link
-                                                </item>
-                                            </contents>
-                                        </dropdown-menu>
-
                                         <div style="float:right;width:70%;margin-top:6px;">
                                             <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white truncate">
                                                 {{ course.name }}
@@ -606,6 +591,6 @@
         </div>
     </div>
     <script src="/static/js/lms.js"></script>
-    {% include" learning/lms-modal.html" %}
+    {% include "learning/lms-modal.html" %}
 {% endblock %}
 </body>

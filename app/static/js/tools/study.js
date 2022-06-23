@@ -80,7 +80,7 @@ document.addEventListener("keydown", () => {
         inputs[2].focus();
 });
 
-for (let i = 0; i < 3; i++)
+for (let i = 0; i < 3; i++) {
     inputs[i].oninput = () => {
         inputs[i].value = inputs[i].value.replaceAll("-", "");
         if (inputs[i].value.length >= 2) inputs[i].value = inputs[i].value.substring(0, 2);
@@ -98,18 +98,19 @@ for (let i = 0; i < 3; i++)
                 labels[i].innerHTML = labels[i].innerHTML.substring(0, labels[i].innerHTML.length - 1);
         }
 
-        inputs[i].addEventListener("keyup", (e) => {
-            if (e.key === "Enter")
-                start.click();
-        });
-
         start.disabled = disableTimer();
+    };
+
+    inputs[i].addEventListener("keyup", (e) => {
+        if (e.key === "Enter")
+            start.click();
 
         if (i > 0) {
             if (inputs[i].value.length === 2)
                 inputs[i - 1].focus();
         }
-    };
+    });
+}
 
 start.disabled = disableTimer();
 

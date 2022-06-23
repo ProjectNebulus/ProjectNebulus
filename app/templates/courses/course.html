@@ -63,8 +63,7 @@
             </div>
             <br>
             <hr class="dark:text-white text-black">
-            <iframe id="frame" name="frame"
-                    style=""></iframe>
+            <iframe id="frame" name="frame" src="{{ iframe }}"></iframe>
         </div>
 
         <div class="hidden xl:block border-l border-gray-200 dark:border-gray-700 text-center overflow-auto hover:scroll"
@@ -107,8 +106,6 @@
             </div>
         </div>
     </div>
-
-    <script>const course_id = "{{ course_id }}"</script>
 
     {% include "courses/searchModals.html" %}
     </body>
