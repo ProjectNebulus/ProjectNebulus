@@ -38,6 +38,6 @@ def chatPage(page):
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         email=session.get("email"),
         messages=newMessages,
-        disableArc=page != "chat",
+        disableArc=True,
         status=status,
     )

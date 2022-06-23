@@ -10,7 +10,9 @@
             background-size: 20%;
             background-position: 45%;
             background-repeat: no-repeat;
-            overflow-x: hidden
+            overflow-x: hidden;
+            width:100%;
+            height:100%;
         }
     </style>
     <div id="user-data" class="w-0 h-0 invisible">{{ user_obj._id }}</div>
@@ -48,14 +50,14 @@
 
                         </div>
                     </div>
-                    <div id="blocked_btn"  style="margin-bottom:0px;"
+                    <div id="blocked_btn"  onclick="openBlocked()" style="margin-bottom:0px;"
                          class="flex items-center space-x-4 dark:hover:bg-zinc-700 hover:bg-gray-200 rounded-lg">
                         <i class="material-icons text-black dark:text-stone-400" style="font-size:40px;margin:10px;">block</i>
                         <div class="space-y-1 text-lg dark:text-stone-400">
                             <div>Blocked</div>
                         </div>
                     </div>
-                    <div id="emojis_btn"  style="margin-bottom:0px;"
+                    <div id="emojis_btn" onclick="toggleEmoji()"  style="margin-bottom:0px;"
                          class="flex items-center space-x-4 dark:hover:bg-zinc-700 hover:bg-gray-200 rounded-lg">
                         <i class="material-icons text-black dark:text-stone-400" style="font-size:40px;margin:10px;">mood</i>
                         <div class="space-y-1 text-lg dark:text-stone-400">
@@ -106,10 +108,10 @@
 
                 </div>
                 <div style="position: absolute; bottom: 0; width:315px; left:0; margin:0 !important;" class="bg-gray-300 dark:bg-gray-600 flex flex-row">
-                    <div class="p-6 flex flex-col w-full" style="display: inline-block;  margin:5px;" id="dropdownTopButton" data-dropdown-toggle="dropdownTop" data-dropdown-placement="top">
+                    <div class="p-2 flex flex-col w-full" style="display: inline-block;  margin:5px;" id="dropdownTopButton" data-dropdown-toggle="dropdownTop" data-dropdown-placement="top">
                         <logo image="/{{ user_obj.avatar.avatar_url }}" no-revert style="border-radius:50%;padding:5px;" class="h-12 hover:bg-gray-200 dark:hover:bg-gray-800"></logo>
                     </div>
-                    <div style="display: inline-block; margin:5px; " class="p-6 flex flex-col w-full">
+                    <div style="display: inline-block; margin:5px; " class="p-2 flex flex-col w-full">
                         <span class="text-xl text-black dark:text-white">{{ user }}</span><br>
                         <span class="text-sm text-gray-400 dark:text-gray-200">{{ status }}</span>
                     </div>
@@ -193,6 +195,79 @@
             </div>
         </div>
 
+        <div class="justify-center" style="width: calc(100% - 330px); display:none;" id="friends">
+            <form class="mx-4">
+                <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Search</label>
+                <div class="relative">
+                    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                        <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                    <input id="search" type="search" placeholder="Search by username" autocomplete="off" class="block mt-6 mb-6 p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50
+                                           rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500
+                                           dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
+                                           dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                </div>
+                <a href="javascript:getChat(1538912503336140800)">
+                    <div style="margin-bottom:4px;" class="p-2 flex items-center space-x-4 dark:bg-gray-600 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg"><div class="relative">
+                        <img class="w-10 h-10 rounded-full" src="/static/images/nebulusCats/v3.gif" alt="">
+                        <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                    </div>
+                        <div class="space-y-1 font-medium dark:text-white">
+                            <div class="dark:text-gray-300" style="font-size:20px">Coder N</div>
+                            <div class="text-sm text-gray-500 dark:text-gray-400" style="font-size:13px;"> </div>
+                        </div>
+                    </div>
+                </a>
+            </form>
+        </div>
+        <div class="justify-center" style="width: calc(100% - 330px); display:none;" id="blocked">
+            <form class="mx-4">
+                <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Search</label>
+                <div class="relative">
+                    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                        <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                    <input id="search" type="search" placeholder="Search by username" autocomplete="off" class="block mt-6 mb-6 p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50
+                                           rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500
+                                           dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
+                                           dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                </div>
+                <a>
+                    <div style="margin-bottom:4px;" class="p-2 flex items-center space-x-4 dark:bg-gray-600 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg"><div class="relative">
+                        <img class="w-10 h-10 rounded-full" src="/static/images/nebulusCats/v3.gif" alt="">
+                        <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                    </div>
+                        <div class="space-y-1 font-medium dark:text-white">
+                            <div class="dark:text-gray-300" style="font-size:20px">Coder N</div>
+                            <div class="text-sm text-gray-500 dark:text-gray-400" style="font-size:13px;"> </div>
+                        </div>
+                    </div>
+                </a>
+            </form>
+        </div>
+        <div class="justify-center" style="width: calc(100% - 330px); display:none;" id="emojis">
+            <div class="m-6">
+                <h1 class="text-black dark:text-white text-3xl">Custom Emojis</h1>
+                <p class="text-black dark:text-white">You have 15 slots for custom static emojis and 5 animated ones. Premium accounts have up to 30 slots.</p>
+                <br>
+                <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Upload Emoji</button>
+
+                <h2 class="text-black dark:text-white text-2xl">Your Own Custom Emojis - 15 slots Available</h2>
+                <p class="text-black dark:text-white">No emojis yet! :(</p><br><br>
+
+                <h2 class="text-black dark:text-white text-2xl">Your Own Animated Custom Emojis - 5 slots Available</h2>
+                <p class="text-black dark:text-white">No emojis yet! :(</p>
+
+
+            </div>
+        </div>
+        <div class="justify-center" style="width: calc(100% - 330px); display:none;" id="emails">
+           <iframe id="email_iframe"></iframe>
+        </div>
         <div style="flex: 0 0 280px; width: 280px;" id="members-sidebar">
             <div class="px-3 py-4 overflow-y-auto rounded bg-gray-100 dark:bg-gray-800 h-full">
                 <form>
@@ -224,68 +299,6 @@
             </div>
         </div>
 
-        <div class="justify-center" style="width: calc(100% - 630px); display:none;" id="friends">
-            <form class="mx-4">
-                <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Search</label>
-                <div class="relative">
-                    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                        <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
-                    </div>
-                    <input id="search" type="search" placeholder="Search by username" autocomplete="off" class="block mt-6 mb-6 p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50
-                                           rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500
-                                           dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
-                                           dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                </div>
-                <a href="javascript:getChat(1538912503336140800)">
-                    <div style="margin-bottom:4px;" class="p-2 flex items-center space-x-4 dark:bg-gray-600 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg"><div class="relative">
-                        <img class="w-10 h-10 rounded-full" src="/static/images/nebulusCats/v3.gif" alt="">
-                        <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
-                    </div>
-                        <div class="space-y-1 font-medium dark:text-white">
-                            <div class="dark:text-gray-300" style="font-size:20px">Coder N</div>
-                            <div class="text-sm text-gray-500 dark:text-gray-400" style="font-size:13px;"> </div>
-                        </div>
-                    </div>
-                </a>
-            </form>
-        </div>
-        <div class="justify-center" style="width: calc(100% - 630px); display:none;" id="blocked">
-            <form class="mx-4">
-                <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Search</label>
-                <div class="relative">
-                    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                        <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
-                    </div>
-                    <input id="search" type="search" placeholder="Search by username" autocomplete="off" class="block mt-6 mb-6 p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50
-                                           rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500
-                                           dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
-                                           dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                </div>
-                <a>
-                    <div style="margin-bottom:4px;" class="p-2 flex items-center space-x-4 dark:bg-gray-600 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg"><div class="relative">
-                        <img class="w-10 h-10 rounded-full" src="/static/images/nebulusCats/v3.gif" alt="">
-                        <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
-                    </div>
-                        <div class="space-y-1 font-medium dark:text-white">
-                            <div class="dark:text-gray-300" style="font-size:20px">Coder N</div>
-                            <div class="text-sm text-gray-500 dark:text-gray-400" style="font-size:13px;"> </div>
-                        </div>
-                    </div>
-                </a>
-            </form>
-        </div>
-        <div class="justify-center" style="width: calc(100% - 630px); display:none;" id="emojis">
-            <h1 class="text-black dark:text-white text-3xl">Custom Emojis</h1>
-            <p class="text-black dark:text-white">You have 15 slots for custom emojis. Premium accounts have up to 30 slots.</p>
-
-        </div>
-        <div class="justify-center" style="width: calc(100% - 630px); display:none;" id="emails">
-           <iframe src="/chat/email"></iframe>
-        </div>
     </div>
 
     <script>
@@ -592,10 +605,12 @@
 
 
             }).done((data) =>  {
+                document.getElementById("members-sidebar").style.display= "none";
                 document.getElementById("main-area").style.display = "none";
                 document.getElementById("blocked").style.display = "none";
                 document.getElementById("friends").style.display = "block";
                 document.getElementById("emojis").style.display = "none";
+                document.getElementById("emails").style.display = "none";
             });
         }
         function openBlocked(){
@@ -608,11 +623,40 @@
 
 
             }).done((data) =>  {
+                document.getElementById("members-sidebar").style.display= "none";
                 document.getElementById("main-area").style.display = "none";
                 document.getElementById("blocked").style.display = "block";
                 document.getElementById("friends").style.display = "none";
                 document.getElementById("emojis").style.display = "none";
+                document.getElementById("emails").style.display = "none";
             });
+        }
+        function toggleEmail(){
+                document.getElementById("members-sidebar").style.display= "none";
+                document.getElementById("main-area").style.display = "none";
+                document.getElementById("blocked").style.display = "none";
+                document.getElementById("friends").style.display = "none";
+                document.getElementById("emojis").style.display = "none";
+                document.getElementById("emails").style.display = "block";
+                document.getElementById("email_iframe").src = '/chat/email';
+        }
+
+        function toggleEmoji(){
+            document.getElementById("members-sidebar").style.display= "none";
+            document.getElementById("main-area").style.display = "none";
+            document.getElementById("blocked").style.display = "none";
+            document.getElementById("friends").style.display = "none";
+            document.getElementById("emojis").style.display = "block";
+            document.getElementById("emails").style.display = "none";
+        }
+
+        function toggleChat(){
+            document.getElementById("members-sidebar").style.display= "block";
+            document.getElementById("main-area").style.display = "block";
+            document.getElementById("blocked").style.display = "none";
+            document.getElementById("friends").style.display = "none";
+            document.getElementById("emojis").style.display = "none";
+            document.getElementById("emails").style.display = "none";
         }
     </script>
     <style>
