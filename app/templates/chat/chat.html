@@ -143,7 +143,7 @@
             </div>
         </div>
 
-        <div class="justify-center" style="width: calc(100% - 595px);" id="main-area">
+        <div class="justify-center" style="width: calc(100% - 595px);-ms-overflow-style: none; " id="main-area">
             <div style="margin:20px;display:flex;flex-direction: column-reverse;overflow-y:scroll; height:86%;" id="chat">
 
 
@@ -407,10 +407,16 @@
             let userID = document.getElementById('user-data').textContent
             let div = document.getElementById('user-chats')
             data.forEach(function (chat) {
-                s += `
-<a href="javascript:getChat(${chat['_id']})">
+                if (data.indexOf(chat) === 0){
+                    s+= `<a href="javascript:getChat(${chat['_id']})">
             <div style="margin-bottom:4px;"
              class="p-2 flex items-center space-x-4 dark:bg-gray-600 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" >`
+                }else {
+                    s += `
+<a href="javascript:getChat(${chat['_id']})">
+            <div style="margin-bottom:4px;"
+             class="p-2 flex items-center space-x-4 dark:bg-gray-800 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" >`
+                }
                 if (chat['members'].length === 2) {
                     let other = chat['members'].filter(function (user) {
                         return (user['_id'] != userID)
@@ -513,6 +519,7 @@
                     console.log(chat);
                     let chatContent = ``
                     let chatMembers = ``;
+
                     chat['messages'].forEach(function (message) {
                         s+= `<div class="flex items-top space-x-4 mt-2">
                         <img class="mt-1 w-10 h-10 rounded-full"
@@ -525,7 +532,8 @@
                     </div>`;
                     });
                     chat['members'].forEach(function (other) {
-
+                    chatMembers += `<div style="margin-bottom:4px;"
+             class="p-2 flex items-center space-x-4 dark:bg-gray-800 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" >`
                         if (other['chatProfile']['status'] === 'Online') {
                             chatMembers += `<div class="relative">
     <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
@@ -602,4 +610,9 @@
             });
         }
     </script>
+    <style>
+    div::-webkit-scrollbar {
+        display: none;
+    }
+    </style>
 {% endblock %}

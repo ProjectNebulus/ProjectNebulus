@@ -21,6 +21,5 @@ if __name__ == "__main__":
         port = 8080
         host = "localhost"
 
-    create.createChat({"owner": "1525271219891470336", "members": ["1522048621565050880", "1525271219891470336"]})
     print(f"Started Running: http://{host}:{port}")
     socketio.run(app, host=host, port=port)
