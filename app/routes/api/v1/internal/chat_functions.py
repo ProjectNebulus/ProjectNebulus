@@ -200,7 +200,7 @@ def get_friends():
     friends = read.get_friends(session["id"])
     return str(friends)
 
-@internal.route("/get-blocks", methods=['POST'])
+@internal.route("/get-blocks", methods=['GET'])
 def get_blocked():
     blocked = read.get_blocks(session["id"])
     return str(blocked)

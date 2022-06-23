@@ -229,29 +229,87 @@
         });
         request.done(function (data) {
             console.log(data);
+            let count = start-1;
             for (let message of data){
                 let author = message["author"]
                 let dmessage = message["message"]
                 let date = message["updated"]
                 let subject = message["subject"]
                 let recipients = message["recipients"]
-                let address = author["name"] + " to ";
+                let address = `<span data-dropdown-toggle="userDropdown_a${count}" class="hover:underline">${author["name"]}</span> to `
                 let images = "<div class='flex mb-5 -space-x-4'>";
+                let profiles = "";
+                profiles += `
+                    <div id="userDropdown_a${count}" class="z-50 bg-white divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600 rounded-lg block" data-popper-placement="bottom" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 109.5px, 0px);">
+                                <div style="border-radius:10px 10px 0 0; height:60px;background:rgb${author["color"]};">
+
+                                </div>
+                                <div class="px-4 py-3 text-xl text-gray-900 dark:text-white" style="border-radius:0 0 10px 10px;">
+
+                                    <div style="text-align: left; margin-left:3px;">
+                                        <div style="margin-top:-60px;">
+                                            <img style="background:rgb(18,25,38);border-style:solid;border-width:2px; object-fit: cover;" src="https://asset-cdn.schoology.com/system/files/imagecache/profile_reg/pictures/picture-945029648977365ae6414b4e488f19f9_5f2c2665c0759.jpg" alt="Ms. Odell's Profile Picture" class="w-24 h-24 rounded-full border-white dark:border-gray-700">
+                                            <span class="absolute w-5 h-5 bg-green-400 border-2 border-white dark:border-gray-700 rounded-full" style="left:90px;top:85px;"></span>
+                                        </div>
+                                        <div>${author["name"]}</div>
+
+                                            <div class="text-sm text-gray-400">${author["email"]}</div>
+
+
+                                            <div class="text-sm text-gray-400">User
+                                                at ${author["school"]} </div>
+
+                                        <div class="mb-6">
+                                            <input type="text" id="msg" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Message @Ms. Odell" required="">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>`
+
                 images += `
-                 <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="${author["avatar"]}" alt="">
+                 <img data-dropdown-toggle="userDropdown_a${count}" class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="${author["avatar"]}" alt="">
                 `;
                 for (let i = 0; i<recipients.length; i++){
-                    address+= recipients[i]["name"]
+                    address+= `<span data-dropdown-toggle="userDropdown${count}_r${i}" class="hover:underline">${recipients[i]["name"]}</span>`
                     if (i !== (recipients.length - 1)){
                         address += ", "
                     }
                     images += `
-                 <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="${recipients[i]["avatar"]}" alt="">
+                 <img data-dropdown-toggle="userDropdown1_${count}${i}" class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="${recipients[i]["avatar"]}" alt="">
                 `;
+                    profiles += `
+                    <div id="userDropdown${count}_r${i}" class="z-50 bg-white divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600 rounded-lg block" data-popper-placement="bottom" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 109.5px, 0px);">
+                                <div style="border-radius:10px 10px 0 0; height:60px;background:rgb${recipients[i]["color"]};">
+
+                                </div>
+                                <div class="px-4 py-3 text-xl text-gray-900 dark:text-white" style="border-radius:0 0 10px 10px;">
+
+                                    <div style="text-align: left; margin-left:3px;">
+                                        <div style="margin-top:-60px;">
+                                            <img style="background:rgb(18,25,38);border-style:solid;border-width:2px; object-fit: cover;" src="https://asset-cdn.schoology.com/system/files/imagecache/profile_reg/pictures/picture-945029648977365ae6414b4e488f19f9_5f2c2665c0759.jpg" alt="Ms. Odell's Profile Picture" class="w-24 h-24 rounded-full border-white dark:border-gray-700">
+                                            <span class="absolute w-5 h-5 bg-green-400 border-2 border-white dark:border-gray-700 rounded-full" style="left:90px;top:85px;"></span>
+                                        </div>
+                                        <div>${recipients[i]["name"]}</div>
+
+                                            <div class="text-sm text-gray-400">${recipients[i]["email"]}</div>
+
+
+                                            <div class="text-sm text-gray-400">User
+                                                at ${recipients[i]["school"]} </div>
+
+                                        <div class="mb-6">
+                                            <input type="text" id="msg" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Message @Ms. Odell" required="">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>`
+
                 }
                 images += "</div>";
                 document.getElementById('tbody').innerHTML+= `
-            <tr data-modal-toggle="thread_0" class="bg-white dark:bg-gray-800 border-b  dark:border-gray-700">
+            <tr data-modal-toggle="thread_${count}" class="bg-white dark:bg-gray-800 border-b  dark:border-gray-700">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
                         ${images}
                 </th>
@@ -269,7 +327,9 @@
                 <td class="px-6 py-4">
                     ${date}
                 </td>
+
                 </tr>`;
+                count += 1;
             }
             loadMoreEmail();
 
