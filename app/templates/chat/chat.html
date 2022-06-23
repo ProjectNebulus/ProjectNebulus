@@ -4,6 +4,15 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 {% extends "layout.html" %}
 {% block main %}
+    <style>
+        iframe {
+            background-image: url('/static/images/nebulusCats/v3.gif');
+            background-size: 20%;
+            background-position: 45%;
+            background-repeat: no-repeat;
+            overflow-x: hidden
+        }
+    </style>
     <div id="user-data" class="w-0 h-0 invisible">{{ user_obj._id }}</div>
     <div class="flex flex-row w-full h-full">
         <div style="float:left;flex:0 0 315px;width:315px;" class="h-full justify-start" aria-label="Sidebar" id="chat-sidebar">
@@ -51,6 +60,13 @@
                         <i class="material-icons text-black dark:text-stone-400" style="font-size:40px;margin:10px;">mood</i>
                         <div class="space-y-1 text-lg dark:text-stone-400">
                             <div>Emojis</div>
+                        </div>
+                    </div>
+                    <div id="email_btn" onclick="toggleEmail();"  style="margin-bottom:0px;"
+                         class="flex items-center space-x-4 dark:hover:bg-zinc-700 hover:bg-gray-200 rounded-lg">
+                        <i class="material-icons text-black dark:text-stone-400" style="font-size:40px;margin:10px;">mail</i>
+                        <div class="space-y-1 text-lg dark:text-stone-400">
+                            <div>Emails</div>
                         </div>
                     </div>
                     <div class="flex flex-row">
@@ -191,41 +207,12 @@
                     </div>
                 </form>
                 <div class="flex flex-col w-full rounded-sm ">
-                    <div id="friends_btn" onclick="openFriends()" class="flex flex-row dark:hover:bg-zinc-700 hover:bg-gray-200 rounded-lg">
-                        <div style="margin-bottom:0px;"
-                             class="flex items-center space-x-4">
-                            <i class="material-icons text-black dark:text-stone-400"
-                               style="font-size:40px;margin:10px;">group</i>
-                            <div class="space-y-1 text-lg dark:text-stone-400">
-                                <div>Friends</div>
-                            </div>
-                        </div>
-                        <div class="inline-flex items-center mt-5 p-1 ml-32 mr-3 h-5 w-5 text-sm font-semibold text-white rounded-full bg-red-500">
-                            {{ user_obj.chatProfile.incomingFriendRequests|length }}
-
-                        </div>
-                    </div>
-                    <div id="blocked_btn"  style="margin-bottom:0px;"
-                         class="flex items-center space-x-4 dark:hover:bg-zinc-700 hover:bg-gray-200 rounded-lg">
-                        <i class="material-icons text-black dark:text-stone-400" style="font-size:40px;margin:10px;">block</i>
-                        <div class="space-y-1 text-lg dark:text-stone-400">
-                            <div>Blocked</div>
-                        </div>
-                    </div>
-                    <div id="emojis_btn"  style="margin-bottom:0px;"
-                         class="flex items-center space-x-4 dark:hover:bg-zinc-700 hover:bg-gray-200 rounded-lg">
-                        <i class="material-icons text-black dark:text-stone-400" style="font-size:40px;margin:10px;">mood</i>
-                        <div class="space-y-1 text-lg dark:text-stone-400">
-                            <div>Emojis</div>
-                        </div>
-                    </div>
                     <div class="flex flex-row">
-                        <div class="uppercase text-xl text-gray-600 cursor-pointer" style="font-size:20px;">Direct Messages</div>
+                        <div class="uppercase text-xl text-gray-600 cursor-pointer" style="font-size:20px;">Members</div>
                         <div style="float:right;font-size:20px;margin-left:80px;" class="text-gray-600"
                              data-dropdown-toggle="dropdown">+
                         </div>
                     </div>
-                    <!-- Dropdown menu -->
 
                 </div>
             </div>
@@ -285,10 +272,13 @@
                 </a>
             </form>
         </div>
-        <div style="margin-left: 325px; float:left;position: fixed;width:calc(100% - 256px); display:none;" id="emoji">
+        <div style="margin-left: 325px; float:left;position: fixed;width:calc(100% - 256px); display:none;" id="emojis">
             <h1 class="text-black dark:text-white text-3xl">Custom Emojis</h1>
             <p class="text-black dark:text-white">You have 15 slots for custom emojis. Premium accounts have up to 30 slots.</p>
 
+        </div>
+        <div style="margin-left: 325px; float:left;position: fixed;width:calc(100% - 256px); display:none;" id="emails">
+           <iframe src="/chat/email"></iframe>
         </div>
     </div>
 
