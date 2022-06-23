@@ -154,6 +154,7 @@ def fetchChats():
         30,
         ["id", "title", "avatar.avatar_url", "members", "lastEdited", "owner"],
     )
+    print(chats)
     return jsonify(chats)
 
 
@@ -161,6 +162,7 @@ def fetchChats():
 def getChat():
     data = request.get_json()
     chatID = data["chatID"]
+    print(chatID)
     chat = json.loads(read.getChat(chatID).to_json())
     chat['messages'] = chat['messages'][:30]
     for n, member in enumerate(chat['members']):

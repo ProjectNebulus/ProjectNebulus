@@ -408,12 +408,12 @@
             let div = document.getElementById('user-chats')
             data.forEach(function (chat) {
                 if (data.indexOf(chat) === 0){
-                    s+= `<a href="javascript:getChat(${chat['_id']})">
+                    s+= `<a href="javascript:getChat('${chat['_id']}')">
             <div style="margin-bottom:4px;"
              class="p-2 flex items-center space-x-4 dark:bg-gray-600 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" >`
                 }else {
                     s += `
-<a href="javascript:getChat(${chat['_id']})">
+<a href="javascript:getChat('${chat['_id']}')">
             <div style="margin-bottom:4px;"
              class="p-2 flex items-center space-x-4 dark:bg-gray-800 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" >`
                 }
@@ -504,13 +504,13 @@
             changeStatus('Online');
         });
         function getChat(chatID){
-            console.log('hi');
+            console.log(chatID);
             $.ajax({
                 url: '/api/v1/internal/get-chat',
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify({
-                        chatID: chatID.toString()
+                        chatID: chatID
                     }
                 ),
                 success: function (chat) {
