@@ -18,7 +18,7 @@
 
     <h2 class="noselect text-black dark:text-white text-2xl ml-6">Recent Activity</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 p-6" aria-label="Recent Activity">
-        <div class="pb-2" style="/*overflow-y:scroll; height: 20rem*/">
+        <div class="pb-2">
             <table class="text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 w-full text-sm rounded-lg"
                    style="table-layout: fixed; overflow: hidden !important;">
 
@@ -57,7 +57,7 @@
                                     <span data-tooltip-placement="top"
                                           data-tooltip-target="eventCourseName{{ event.id }}">{{ event.course.name }}</span>
                                     <div id="eventCourseName{{ event.id }}" role="tooltip"
-                                         class="inline-block absolute z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm tooltip dark:bg-gray-700 opacity-0 invisible"
+                                         class="inline-flex items-center absolute z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm tooltip dark:bg-gray-700 opacity-0 invisible"
                                          style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(263px, 1472.5px, 0px);"
                                          data-popper-placement="top">
                                         {{ event.course.name }}
@@ -107,8 +107,8 @@
         <div class="pb-2" style="margin-top: -3rem; height: 20rem">
             <h2 class="noselect text-black dark:text-white text-2xl">Recent Announcements</h2>
             <div class="scroll h-full" aria-label="Recent Announcements">
-                <div class="grid gap-4 pl-4 mt-5 block p-6 bg-white rounded-lg border border-gray-200 shadow-md  dark:bg-gray-800 dark:border-gray-700 "
-                     style="grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));height:360px; overflow-y:scroll;">
+                <div class="grid gap-4 pl-4 mt-5 block p-6 bg-white rounded-lg border border-gray-200 shadow-md overflow-auto dark:bg-gray-800 dark:border-gray-700 hover:scroll"
+                     style="grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));height:360px">
                     {% for a in announcements %}
                         <div id="announcement-{{ a.id }}" role="alert"
                              class="announcement p-4 mb-4 bg-gray-100 rounded-lg dark:bg-gray-700 w-72 h-64 mt-5">
@@ -158,9 +158,8 @@
     <br>
     <div style="height: 45%; float:left; width:calc(100% - 3rem); margin-left: 2%; overflow: visible;" class="pb-2">
         <h2 class="noselect text-black dark:text-white text-2xl">Recent Courses</h2>
-        <div style="height:360px; overflow-y:scroll;"
-             class="block p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-
+        <div style="height:360px" class="block p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800
+         dark:border-gray-700 hover:scroll overflow-auto">
             <div class="text-left grid justify-start"
                  style="grid-template-columns: repeat(auto-fit, 23rem); align-items: center; justify-content: center;"
                  aria-label="Recent Courses">
@@ -181,54 +180,54 @@
     <br><br><br>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 p-6" aria-label="Recent Activity">
-        <div class="pb-2" style="/*overflow-y:scroll; height: 20rem*/">
+        <div class="pb-2">
             <h2 class="noselect text-black dark:text-white text-2xl">Your Apps</h2>
             <div class="scroll h-full" aria-label="Your Apps">
                 <div class="pl-4 mt-5 block p-6 bg-white rounded-lg border border-gray-200 shadow-md  dark:bg-gray-800 dark:border-gray-700 "
-                     style="grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));height:360px; overflow-y:scroll;">
+                     style="grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));height:360px;">
                     <a href="/notepad">
-                        <div class="inline-block mb-3 ml-3 mr-3 mt-3 rounded-lg bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 w-20 h-20 text-center">
-                            <i class="material-icons" style="font-size: 60px;color:white;">description</i>
+                        <div class="inline-flex items-center mb-3 ml-3 mr-3 mt-3 rounded-lg bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 w-20 h-20 text-center">
+                            <i class="material-icons text-white w-full" style="font-size: 60px;">description</i>
                         </div>
                     </a>
                     <a href="/planner">
-                        <div class="inline-block mb-3 ml-3 mr-3 mt-3 r rounded-lg bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 w-20 h-20 text-center">
-                            <i class="material-icons" style="font-size: 60px;color:white;">calendar_month</i>
+                        <div class="inline-flex items-center mb-3 ml-3 mr-3 mt-3 r rounded-lg bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 w-20 h-20 text-center">
+                            <i class="material-icons text-white w-full" style="font-size: 60px;">calendar_month</i>
                         </div>
                     </a>
                     <a href="/study">
-                        <div class="inline-block mb-3 ml-3 mr-3 mt-3 r rounded-lg bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 w-20 h-20 text-center">
-                            <i class="material-icons" style="font-size: 60px;color:white;">timer</i>
+                        <div class="inline-flex items-center mb-3 ml-3 mr-3 mt-3 r rounded-lg bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 w-20 h-20 text-center">
+                            <i class="material-icons text-white w-full" style="font-size: 60px;">timer</i>
                         </div>
                     </a>
                     <a href="/api">
-                        <div class="inline-block mb-3 ml-3 mr-3 mt-3 r rounded-lg bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 w-20 h-20 text-center">
-                            <i class="material-icons" style="font-size: 60px;color:white;">code</i>
+                        <div class="inline-flex items-center mb-3 ml-3 mr-3 mt-3 r rounded-lg bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 w-20 h-20 text-center">
+                            <i class="material-icons text-white w-full" style="font-size: 60px;">code</i>
                         </div>
                     </a>
                     <a href="/music">
-                        <div class="inline-block mb-3 ml-3 mr-3 mt-3 r rounded-lg bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 w-20 h-20 text-center">
-                            <i class="material-icons" style="font-size: 60px;color:white;">music_note</i>
+                        <div class="inline-flex items-center mb-3 ml-3 mr-3 mt-3 r rounded-lg bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 w-20 h-20 text-center">
+                            <i class="material-icons text-white w-full" style="font-size: 60px;">music_note</i>
                         </div>
                     </a>
                     <a href="/chat">
-                        <div class="inline-block mb-3 ml-3 mr-3 mt-3 r rounded-lg bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 w-20 h-20 text-center">
-                            <i class="material-icons" style="font-size: 60px;color:white;">forum</i>
+                        <div class="inline-flex items-center mb-3 ml-3 mr-3 mt-3 r rounded-lg bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 w-20 h-20 text-center">
+                            <i class="material-icons text-white w-full" style="font-size: 60px;">forum</i>
                         </div>
                     </a>
                     <a href="/files">
-                        <div class="inline-block mb-3 ml-3 mr-3 mt-3 r rounded-lg bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 w-20 h-20 text-center">
-                            <i class="material-icons" style="font-size: 60px;color:white;">folder_open</i>
+                        <div class="inline-flex items-center mb-3 ml-3 mr-3 mt-3 r rounded-lg bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 w-20 h-20 text-center">
+                            <i class="material-icons text-white w-full" style="font-size: 60px;">folder_open</i>
                         </div>
                     </a>
                     <a href="/lms">
-                        <div class="inline-block mb-3 ml-3 mr-3 mt-3 r rounded-lg bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 to-blue-700 w-20 h-20 text-center">
-                            <i class="material-icons" style="font-size: 60px;color:white;">school</i>
+                        <div class="inline-flex items-center mb-3 ml-3 mr-3 mt-3 r rounded-lg bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 to-blue-700 w-20 h-20 text-center">
+                            <i class="material-icons text-white w-full" style="font-size: 60px;">school</i>
                         </div>
                     </a>
                     <a href="/settings">
-                        <div class="inline-block mb-3 ml-3 mr-3 mt-3 r rounded-lg bg-gradient-to-r from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 w-20 h-20 text-center">
-                            <i class="material-icons" style="font-size: 60px;color:white;">settings</i>
+                        <div class="inline-flex items-center mb-3 ml-3 mr-3 mt-3 r rounded-lg bg-gradient-to-r from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 w-20 h-20 text-center">
+                            <i class="material-icons text-white w-full" style="font-size: 60px;">settings</i>
                         </div>
                     </a>
                 </div>
@@ -238,29 +237,26 @@
         <div class="pb-2" style="height: 20rem">
             <h2 class="noselect text-black dark:text-white text-2xl">Your Documents</h2>
             <div class="scroll h-full" aria-label="Recent Announcements">
-                <div class="grid gap-4 pl-4 mt-5 block p-6 bg-white rounded-lg border border-gray-200 shadow-md  dark:bg-gray-800 dark:border-gray-700 "
-                     style="grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));height:360px; overflow-y:scroll;">
-
+                <div class="grid gap-4 pl-4 mt-5 block p-6 bg-white rounded-lg border border-gray-200 shadow-md  dark:bg-gray-800 dark:border-gray-700 overflow-auto hover:scroll"
+                     style="grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));height:360px;">
                 </div>
             </div>
         </div>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 p-6" aria-label="Recent Activity">
-        <div class="pb-2" style="/*overflow-y:scroll; height: 20rem*/">
+        <div class="pb-2">
             <h2 class="noselect text-black dark:text-white text-2xl">Your Recent Emails</h2>
             <div class="scroll h-full" aria-label="Your Apps">
-                <div class="pl-4 mt-5 block p-6 bg-white rounded-lg border border-gray-200 shadow-md  dark:bg-gray-800 dark:border-gray-700 "
-                     style="height:360px; overflow-y:scroll;">
-
+                <div class="pl-4 mt-5 block p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 hover:scroll overflow-auto"
+                     style="height:360px">
                 </div>
             </div>
-
         </div>
         <div class="pb-2" style="height: 20rem">
             <h2 class="noselect text-black dark:text-white text-2xl">Your Planner Events for Today</h2>
             <div class="scroll h-full" aria-label="Recent Announcements">
-                <div class="grid gap-4 pl-4 mt-5 block p-6 bg-white rounded-lg border border-gray-200 shadow-md  dark:bg-gray-800 dark:border-gray-700 "
-                     style="grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));height:360px; overflow-y:scroll;">
+                <div class="grid gap-4 pl-4 mt-5 block p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:scroll overflow-auto dark:bg-gray-800 dark:border-gray-700 "
+                     style="grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));height:360px">
                 </div>
             </div>
         </div>

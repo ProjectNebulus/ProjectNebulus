@@ -28,7 +28,9 @@ window.addEventListener("beforeunload", () => {
         return;
     }
     localStorage.removeItem("popup");
-    onTimerEnd();
+    localStorage.removeItem("currentTimer");
+    localStorage.removeItem("originalTimer");
+    localStorage.removeItem("startTimer");
 });
 
 if (localStorage.getItem("popup")) {
@@ -121,11 +123,11 @@ function disableTimer() {
 
 document.getElementById("start").onclick = function () {
     timerStarted = true;
-    localStorage.setItem("originalTimer", (hours * 3600 + minutes * 60 + seconds) + "")
 
     hours = parseInt(inputs[0].value);
     minutes = parseInt(inputs[1].value);
     seconds = parseInt(inputs[2].value) + 1;
+
     timerName.innerHTML = document.getElementById("name").value;
 
     if (!seconds) seconds = 1;
@@ -137,6 +139,8 @@ document.getElementById("start").onclick = function () {
 
     subtractTime();
     resume();
+
+    localStorage.setItem("originalTimer", (hours * 3600 + minutes * 60 + seconds) + "");
 }
 
 pauseButton.onclick = () => {
@@ -201,7 +205,7 @@ function subtractTime() {
     if (hours > 0)
         display.innerHTML = hours + ":" + display.innerHTML;
 
-    localStorage.setItem("currentTimer", [hours, minutes, seconds].join(" "));
+    saveTimer();
 }
 
 function onTimerEnd() {
@@ -213,13 +217,6 @@ function onTimerEnd() {
     timerEnd.classList.remove("hidden");
 
     if (interval) clearInterval(interval);
-}
-
-function padWith0(num) {
-    let string = num.toString();
-    if (num < 10)
-        string = "0" + string;
-    return string
 }
 
 popupButton.onclick = () => {
