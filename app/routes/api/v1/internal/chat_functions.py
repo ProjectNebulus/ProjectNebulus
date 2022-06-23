@@ -163,6 +163,8 @@ def getChat():
     chatID = data["chatID"]
     chat = json.loads(read.getChat(chatID).to_json())
     chat['messages'] = chat['messages'][:30]
+    for n, member in enumerate(chat['members']):
+        chat['members'][n] = json.loads((User.objects.only('id', 'username', 'chatProfile', 'avatar.avatar_url').get(pk=member)).to_json())
     return jsonify(chat)
 
 

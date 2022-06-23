@@ -143,7 +143,7 @@
             </div>
         </div>
 
-        <div class="justify-center" style="width: calc(100% - 630px);" id="main-area">
+        <div class="justify-center" style="width: calc(100% - 595px);" id="main-area">
             <div style="margin:20px;display:flex;flex-direction: column-reverse;overflow-y:scroll; height:86%;" id="chat">
 
 
@@ -188,11 +188,10 @@
             </div>
         </div>
 
-        <div class="justify-center" style="width: calc(100% - 630px);" id="members-sidebar">
+        <div style="flex: 0 0 280px; width: 280px;" id="members-sidebar">
             <div class="px-3 py-4 overflow-y-auto rounded bg-gray-100 dark:bg-gray-800 h-full">
                 <form>
-                    <label for="default-search" class="mb-2 text-xs text-gray-900 sr-only dark:text-stone-400">Search or
-                        start a conversation</label>
+                    <label for="default-search" class="mb-2 text-xs text-gray-900 sr-only dark:text-stone-400">Search</label>
                     <div class="relative">
                         <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                             <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor"
@@ -209,10 +208,12 @@
                 <div class="flex flex-col w-full rounded-sm ">
                     <div class="flex flex-row">
                         <div class="uppercase text-xl text-gray-600 cursor-pointer" style="font-size:20px;">Members</div>
-                        <div style="float:right;font-size:20px;margin-left:80px;" class="text-gray-600"
+                        <div style="float:right;font-size:20px;margin-left:140px;" class="text-gray-600"
                              data-dropdown-toggle="dropdown">+
                         </div>
                     </div>
+
+                    <div id="chat-members"></div>
 
                 </div>
             </div>
@@ -259,7 +260,7 @@
                                            dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
                                            dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
-                <a href="javascript:getChat(1538912503336140800)">
+                <a>
                     <div style="margin-bottom:4px;" class="p-2 flex items-center space-x-4 dark:bg-gray-600 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg"><div class="relative">
                         <img class="w-10 h-10 rounded-full" src="/static/images/nebulusCats/v3.gif" alt="">
                         <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
@@ -508,10 +509,12 @@
                 ),
                 success: function (chat) {
                     let chat_el = document.getElementById('chat');
+                    let members = document.getElementById('chat-members')
                     console.log(chat);
-                    s = ``;
+                    let chatContent = ``
+                    let chatMembers = ``;
                     chat['messages'].forEach(function (message) {
-                        s += `<div class="flex items-top space-x-4 mt-2">
+                        s+= `<div class="flex items-top space-x-4 mt-2">
                         <img class="mt-1 w-10 h-10 rounded-full"
                              src="${message['sender']['avatar']['avatar_url']}"
                              alt="">
@@ -521,8 +524,46 @@
                         </div>
                     </div>`;
                     });
+                    chat['members'].forEach(function (other) {
 
-                    chat_el.insertAdjacentHTML('beforeend', s);
+                        if (other['chatProfile']['status'] === 'Online') {
+                            chatMembers += `<div class="relative">
+    <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
+    <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+</div>`
+                        } else if (other['chatProfile']['status'] === 'Do Not Disturb') {
+                            chatMembers += `<div class="relative">
+    <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
+    <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-red-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
+</div>`
+                        } else {
+                            chatMembers += `<div class="relative">
+    <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
+    <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-gray-700 border-2 border-white dark:border-gray-800 rounded-full"></span>
+</div>`
+                        }
+                        let status_emoji = other['chatProfile']['status_emoji']
+                        if (!(status_emoji)) {
+                            status_emoji = ''
+                        }
+                        let status_text = other['chatProfile']['status_text']
+                        if (!(status_emoji)) {
+                            status_text = ''
+                        }
+                        chatMembers +=
+                            `
+            <div class="space-y-1 font-medium dark:text-white">
+                <div class="dark:text-gray-300" style="font-size:20px">${other['username']}</div>
+                <div class="text-sm text-gray-500 dark:text-gray-400" style="font-size:13px;">${status_emoji} ${status_text}</div>
+            </div>
+        </div>
+        `
+                    });
+
+                    chat_el.innerHTML = "";
+                    chat_el.insertAdjacentHTML('beforeend', chatContent);
+                    members.innerHTML = "";
+                    members.insertAdjacentHTML('beforeend', chatMembers);
                 }
             });
 
