@@ -88,7 +88,27 @@ function changeSearch() {
     }
 }
 
-keyUpDelay("#search", 500, changeSearch)
+//setInterval(changeSearch, 500)
+//setup before functions
+var typingTimer;                //timer identifier
+var doneTypingInterval = 5000;  //time in ms, 5 seconds for example
+var $input = $('#search');
+
+//on keyup, start the countdown
+$input.on('keyup', function () {
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(doneTyping, doneTypingInterval);
+});
+
+//on keydown, clear the countdown
+$input.on('keydown', function () {
+    clearTimeout(typingTimer);
+});
+
+//user is "finished typing," do something
+function doneTyping () {
+    changeSearch();
+}
 
 function makeCall() {
     let chatAmount = $('#user-chats > div').length;
@@ -358,7 +378,34 @@ function rightClick(clickEvent) {
     clickEvent.preventDefault();
     // return false;
 }
+function profile(node){
+    function insertAfter(referenceNode, newNode) {
+        referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+    }
 
+    var el = document.createElement("span");
+    el.innerHTML = `
+                <div id="dropdown" class="absolute z-10 bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
+    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault">
+      <li>
+        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile</span>
+      </li>
+      <li>
+        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Close DM</a>
+      </li>
+      <li>
+        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Add Friend</a>
+      </li>
+      <li>
+        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mute @Coder N</a>
+      </li>
+      <li>
+        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Block</a>
+      </li>
+    </ul>
+</div>`
+    insertAfter(node, el);
+}
 function getChat(chatID){
     console.log(chatID);
     $.ajax({
@@ -380,37 +427,39 @@ function getChat(chatID){
 
             chat['messages'].forEach(function (message) {
                 chatContent+= `<div class="flex items-top space-x-4 mt-2" id="${message['id']}">
-                        <img class="mt-1 w-10 h-10 rounded-full"
+                        <img class="mt-1 w-10 h-10 rounded-full " data-dropdown-toggle="user_${message['id']}"
                              src="${message['sender']['avatar']['avatar_url']}"
                              alt="">
                         <div class="space-y-1 font-medium dark:text-white">
-                            <div>${message['sender']['username']} <span class="ml-3 text-sm text-gray-400">${message['send_date']}</span></div>
+                            <div><span  data-dropdown-toggle="user_${message['id']}" class="hover:underline">${message['sender']['username']}</span> <span class="ml-3 text-sm text-gray-400">${message['send_date']}</span></div>
                             <div class="text-sm text-gray-500 dark:text-gray-400">${message['content']}</div>
                         </div>
-                    </div>`;
+                    </div>
+                    <div id="user_${message['id']}" class="z-50 hidden bg-white divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600 rounded-lg block" data-popper-placement="bottom" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 215px, 0px);">
+                                    <div style="border-radius:10px 10px 0 0; height:60px;background:rgba
+                                        (191, 198, 205);"></div>
+                                    <div class="px-4 py-3 text-xl text-gray-900 dark:text-white border-b border-l">
+                                        <div style="text-align: left; margin-left:3px;">
+                                            <div style="margin-top:-60px;">
+                                                <img style="background:rgb(18,25,38)" src="${message['sender']["avatar"]['avatar_url']}" class="w-24 h-24 rounded-full border-white dark:border-gray-700 border-2 object-cover" alt="${message['sender']['username']}'s Profile Picture">
+                                                <span class="absolute  w-5 h-5 bg-green-400 border-2 border-white dark:border-gray-700 rounded-full" style="left:90px;top:85px;"></span>
+                                            </div>
+                                            <div>${message['sender']['username']}</div>
+                                           
+                                            
+                                            <input id="msg" placeholder="Message @${message['sender']['username']}" required="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm
+                                                       mb-6 rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5
+                                                       dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400
+                                                       dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        </div>
+                                    </div>
+                                </div>
+`;
             });
+
             chat['members'].forEach(function (other) {
                 chatMembers += `<div 
-        oncontextmenu='
-<div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
-    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault">
-      <li>
-        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile</span>
-      </li>
-      <li>
-        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Close DM</a>
-      </li>
-      <li>
-        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Add Friend</a>
-      </li>
-      <li>
-        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mute @Coder N</a>
-      </li>
-      <li>
-        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Block</a>
-      </li>
-    </ul>
-</div>'
+        oncontextmenu='profile(this)'
         style="margin-bottom:4px;"
              class="p-2 flex items-center space-x-4 dark:bg-gray-800 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" >`
                 if (other['chatProfile']['status'] === 'Online') {
