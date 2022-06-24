@@ -10,7 +10,7 @@ from .....static.python.classes import User
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 
 
-@socketio.event("new message")
+@socketio.event(namespace="/chat")
 def new_message(json_data):
     print("new message: " + json_data)
     if json_data["chatType"] == "chat":
@@ -31,7 +31,7 @@ def new_message(json_data):
         pass
 
 
-@socketio.event("user joined")
+@socketio.event(namespace="/chat")
 def user_joined(json_data):
     print("user joined: " + json_data)
     if json_data["chatType"] == "chat":
@@ -51,7 +51,7 @@ def user_joined(json_data):
         pass
 
 
-@socketio.event("user left")
+@socketio.event(namespace="/chat")
 def user_left(json_data):
     print("user left: " + json_data)
     if json_data["chatType"] == "chat":
@@ -71,7 +71,7 @@ def user_left(json_data):
         pass
 
 
-@socketio.event('user-loaded')
+@socketio.event(namespace="/chat")
 def user_loaded(json_data):
     print('loaded user')
     for chat in read.find_user(pk=session["id"]).chats:
@@ -79,7 +79,7 @@ def user_loaded(json_data):
     socketio.emit('user-loaded', {'msg': 'User loaded into rooms'})
 
 
-@socketio.event('user-unloaded')
+@socketio.event(namespace="/chat")
 def user_unloaded(json_data):
     print('unloaded user')
     for chat in read.find_user(pk=session["id"]).chats:
@@ -88,8 +88,7 @@ def user_unloaded(json_data):
     socketio.emit('user-unloaded', {'msg': 'User unloaded from rooms'})
 
 
-
-@socketio.event("message edited")
+@socketio.event(namespace="/chat")
 def message_edited(json_data):
     print("message edited: " + json_data)
     if json_data["chatType"] == "chat":
@@ -104,7 +103,7 @@ def message_edited(json_data):
         pass
 
 
-@socketio.event("message deleted")
+@socketio.event(namespace="/chat")
 def message_deleted(json_data):
     print("message deleted: " + json_data)
     if json_data["chatType"] == "chat":

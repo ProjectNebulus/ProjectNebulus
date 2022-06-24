@@ -109,10 +109,10 @@ $(document).ready(function () {
     const socket = io.connect('http://' + document.domain + ':' + location.port + '/chat');
     socket.on('connect', function() {
         console.log('socket emitting');
-        socket.emit('user-loaded', {});
+        socket.emit('user_loaded', {});
     });
     window.onunload = function(){
-        socket.emit('user-unloaded', {});
+        socket.emit('user_unloaded', {});
     }
 });
 
