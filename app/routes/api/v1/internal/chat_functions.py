@@ -1,3 +1,5 @@
+import datetime
+
 from flask import session, request
 from flask.json import jsonify
 from flask_socketio import join_room, leave_room
@@ -175,6 +177,7 @@ def fetchChats():
 
 @internal.route("/get-chat", methods=['POST'])
 def getChat():
+    import datetime
     data = request.get_json()
     chatID = data["chatID"]
     print(chatID)
@@ -183,6 +186,10 @@ def getChat():
     for message in chat['messages']:
         message["sender"] = json.loads(
             User.objects.only('id', 'username', 'avatar.avatar_url').get(pk=message["sender"]).to_json())
+        message["send_date"] = datetime.datetime.fromtimestamp(message["send_date"]["$date"]/1000).strftime("%m/%d/%Y at %H:%M:%S")
+    (chat["messages"]).reverse()
+
+
     for n, member in enumerate(chat['members']):
         chat['members'][n] = json.loads((User.objects.only('id', 'username', 'chatProfile', 'avatar.avatar_url').get(pk=member)).to_json())
     chat['members'] = sorted(chat['members'], key=lambda x: x["username"])

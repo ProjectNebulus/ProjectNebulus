@@ -1,5 +1,6 @@
 io = window.io
 
+
 function createChat(username) {
     document.getElementById("dropdown").style.display = "none";
     const request = $.ajax({
@@ -165,7 +166,7 @@ function load(data) {
             if (other['chatProfile']['status'] === 'Online') {
                 s += `<div class="relative">
     <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
-    <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+    <span class="bottom-0 left-7 absolute  w-3 h-3 bg-green-400 border-white dark:border-gray-800 rounded-full"></span>
 </div>`
             }
             else if (other['chatProfile']['status'] === 'Do Not Disturb') {
@@ -332,6 +333,7 @@ function getChat(chatID){
                 chatID: chatID
             }
         ),
+        //right click: Profile, Close DM, Add Friend, Block, Mute @Coder N, Copy ID
         success: function (chat) {
             let chat_el = document.getElementById('chat');
             let members = document.getElementById('chat-members')
@@ -346,18 +348,39 @@ function getChat(chatID){
                              src="${message['sender']['avatar']['avatar_url']}"
                              alt="">
                         <div class="space-y-1 font-medium dark:text-white">
-                            <div>${message['sender']['username']}</div>
+                            <div>${message['sender']['username']} <span class="ml-3 text-sm text-gray-400">${message['send_date']}</span></div>
                             <div class="text-sm text-gray-500 dark:text-gray-400">${message['content']}</div>
                         </div>
                     </div>`;
             });
             chat['members'].forEach(function (other) {
-                chatMembers += `<div style="margin-bottom:4px;"
+                chatMembers += `<div 
+        oncontextmenu='
+<div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
+    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault">
+      <li>
+        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile</span>
+      </li>
+      <li>
+        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Close DM</a>
+      </li>
+      <li>
+        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Add Friend</a>
+      </li>
+      <li>
+        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mute @Coder N</a>
+      </li>
+      <li>
+        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Block</a>
+      </li>
+    </ul>
+</div>'
+        style="margin-bottom:4px;"
              class="p-2 flex items-center space-x-4 dark:bg-gray-800 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" >`
                 if (other['chatProfile']['status'] === 'Online') {
                     chatMembers += `<div class="relative">
     <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
-    <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+    <span class="bottom-0 left-7 absolute  w-3 h-3 bg-green-400 border-white dark:border-gray-800 rounded-full"></span>
 </div>`
                 } else if (other['chatProfile']['status'] === 'Do Not Disturb') {
                     chatMembers += `<div class="relative">
@@ -404,4 +427,18 @@ function sendMessage(){
         chatID: chatID,
         content: el.value
     });
+}
+
+window.onload = function(){
+    const tx = document.getElementsByTagName("textarea");
+    for (let i = 0; i < tx.length; i++) {
+        tx[i].setAttribute("style", "height:" + (tx[i].scrollHeight) + "px;overflow-y:hidden;");
+        tx[i].addEventListener("input", OnInput, false);
+    }
+
+    function OnInput() {
+        this.style.height = "auto";
+        this.style.height = (this.scrollHeight) + "px";
+    }
+
 }
