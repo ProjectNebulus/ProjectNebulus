@@ -436,6 +436,8 @@ def loadChats(user_id:str, current_index, initial_amount, required_fields):
                 chat['members'][x] = json.loads(User.objects.only('id', 'chatProfile', 'username', 'avatar.avatar_url').get(pk=member).to_json())
             chat['owner'] = list(filter(lambda x: x['_id']==chat['owner'], chat['members']))[0]
 
+
+
     print(chats)
     return chats
 

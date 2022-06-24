@@ -2,7 +2,7 @@
 <script src="https://unpkg.com/flowbite@1.4.5/dist/flowbite.js"></script>
 <script type="text/javascript" src="//cdn.socket.io/4.4.1/socket.io.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script type="text/javascript" src="/static/js/chat.js"></script>
+<script type="module" src="/static/js/chat.js"></script>
 {% extends "layout.html" %}
 {% block main %}
 {#    {% include "utils/navbar.html" %}#}
@@ -306,6 +306,81 @@
         </div>
 
     </div>
+    <script>
+    function getChat(chatID){
+    console.log(chatID);
+    $.ajax({
+        url: '/api/v1/internal/get-chat',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({
+                chatID: chatID
+            }
+        ),
+        success: function (chat) {
+            let chat_el = document.getElementById('chat');
+            let members = document.getElementById('chat-members')
+            console.log(chat);
+            let chatContent = ``
+            let chatMembers = ``;
+
+            chat['messages'].forEach(function (message) {
+                s+= `<div class="flex items-top space-x-4 mt-2">
+                        <img class="mt-1 w-10 h-10 rounded-full"
+                             src="${message['sender']['avatar']['avatar_url']}"
+                             alt="">
+                        <div class="space-y-1 font-medium dark:text-white">
+                            <div>${message['sender']['username']}</div>
+                            <div class="text-sm text-gray-500 dark:text-gray-400">${message['content']}</div>
+                        </div>
+                    </div>`;
+            });
+            chat['members'].forEach(function (other) {
+                chatMembers += `<div style="margin-bottom:4px;"
+             class="p-2 flex items-center space-x-4 dark:bg-gray-800 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" >`
+                if (other['chatProfile']['status'] === 'Online') {
+                    chatMembers += `<div class="relative">
+    <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
+    <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+</div>`
+                } else if (other['chatProfile']['status'] === 'Do Not Disturb') {
+                    chatMembers += `<div class="relative">
+    <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
+    <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-red-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
+</div>`
+                } else {
+                    chatMembers += `<div class="relative">
+    <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
+    <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-gray-700 border-2 border-white dark:border-gray-800 rounded-full"></span>
+</div>`
+                }
+                let status_emoji = other['chatProfile']['status_emoji']
+                if (!(status_emoji)) {
+                    status_emoji = ''
+                }
+                let status_text = other['chatProfile']['status_text']
+                if (!(status_emoji)) {
+                    status_text = ''
+                }
+                chatMembers +=
+                    `
+            <div class="space-y-1 font-medium dark:text-white">
+                <div class="dark:text-gray-300" style="font-size:20px">${other['username']}</div>
+                <div class="text-sm text-gray-500 dark:text-gray-400" style="font-size:13px;">${status_emoji} ${status_text}</div>
+            </div>
+        </div>
+        `
+            });
+
+            chat_el.innerHTML = "";
+            chat_el.insertAdjacentHTML('beforeend', chatContent);
+            members.innerHTML = "";
+            members.insertAdjacentHTML('beforeend', chatMembers);
+        }
+    });
+
+}
+    </script>
 
     {% include "utils/navbar.html" %}
 {% endblock %}

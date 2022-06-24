@@ -71,6 +71,24 @@ def user_left(json_data):
         pass
 
 
+@socketio.event('user-loaded')
+def user_loaded(json_data):
+    print('loaded user')
+    for chat in read.find_user(pk=session["id"]).chats:
+        join_room(chat)
+    socketio.emit('user-loaded', {'msg': 'User loaded into rooms'})
+
+
+@socketio.event('user-unloaded')
+def user_unloaded(json_data):
+    print('unloaded user')
+    for chat in read.find_user(pk=session["id"]).chats:
+        leave_room(chat)
+
+    socketio.emit('user-unloaded', {'msg': 'User unloaded from rooms'})
+
+
+
 @socketio.event("message edited")
 def message_edited(json_data):
     print("message edited: " + json_data)
@@ -100,8 +118,6 @@ def message_deleted(json_data):
         # TODO: Edit message for communities
         pass
 
-
-@socketio.event('online')
 
 
 @internal.route("/change-status", methods=["POST"])
@@ -167,6 +183,7 @@ def getChat():
     chat['messages'] = chat['messages'][:30]
     for n, member in enumerate(chat['members']):
         chat['members'][n] = json.loads((User.objects.only('id', 'username', 'chatProfile', 'avatar.avatar_url').get(pk=member)).to_json())
+    chat['members'] = sorted(chat['members'], key=lambda x: x["username"])
     return jsonify(chat)
 
 
