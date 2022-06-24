@@ -12,7 +12,6 @@ regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 
 @socketio.event(namespace="/chat")
 def new_message(json_data):
-    print("new message: " + json_data)
     if json_data["chatType"] == "chat":
         chatID = json_data["chatID"]
         del json_data["chatID"], json_data["chatType"]
@@ -20,13 +19,13 @@ def new_message(json_data):
         message = create.sendMessage(json_data, chatID)
         sender = read.find_user(id=json_data["sender"])
         socketio.emit(
-            "new_message",
+            "new_message_frontend",
             {
                 "author": [sender.id, sender.username, sender.avatar.avatar_url],
                 "content": json_data["content"],
                 "id": message.id
             },
-            room=chatID,
+            room=chatID
         )
     else:
         # TODO: Create message for communities
@@ -35,7 +34,6 @@ def new_message(json_data):
 
 @socketio.event(namespace="/chat")
 def user_joined(json_data):
-    print("user joined: " + json_data)
     if json_data["chatType"] == "chat":
         chatID = json_data["chatID"]
         join_room(chatID)
@@ -55,7 +53,6 @@ def user_joined(json_data):
 
 @socketio.event(namespace="/chat")
 def user_left(json_data):
-    print("user left: " + json_data)
     if json_data["chatType"] == "chat":
         chatID = json_data["chatID"]
         leave_room(chatID)
@@ -107,7 +104,6 @@ def message_edited(json_data):
 
 @socketio.event(namespace="/chat")
 def message_deleted(json_data):
-    print("message deleted: " + json_data)
     if json_data["chatType"] == "chat":
         chatID = json_data["chatID"]
         del json_data["chatID"], json_data["chatType"]
@@ -184,6 +180,9 @@ def getChat():
     print(chatID)
     chat = json.loads(read.getChat(chatID).to_json())
     chat['messages'] = chat['messages'][:30]
+    for message in chat['messages']:
+        message["sender"] = json.loads(
+            User.objects.only('id', 'username', 'avatar.avatar_url').get(pk=message["sender"]).to_json())
     for n, member in enumerate(chat['members']):
         chat['members'][n] = json.loads((User.objects.only('id', 'username', 'chatProfile', 'avatar.avatar_url').get(pk=member)).to_json())
     chat['members'] = sorted(chat['members'], key=lambda x: x["username"])
