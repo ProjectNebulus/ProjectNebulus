@@ -2,7 +2,7 @@ import datetime
 
 from flask import session, request
 from flask.json import jsonify
-from flask_socketio import join_room, leave_room
+from flask_socketio import join_room, leave_room, emit
 import json
 from . import internal
 from .... import socketio
@@ -20,8 +20,8 @@ def new_message(json_data):
         json_data['sender'] = session['id']
         message = create.sendMessage(json_data, chatID)
         sender = read.find_user(id=json_data["sender"])
-        print('socketo')
-        socketio.emit(
+
+        emit(
             "new_message_frontend",
             {
                 "author": [sender.id, sender.username, sender.avatar.avatar_url],
@@ -42,7 +42,7 @@ def user_joined(json_data):
         join_room(chatID)
         update.joinChat(json_data["user_id"], chatID)
         user = read.find_user(pk=json_data["user"])
-        socketio.emit(
+        emit(
             "user joined",
             {
                 "user": [user.id, user.username, user.avatar.avatar_url],
@@ -61,7 +61,7 @@ def user_left(json_data):
         leave_room(chatID)
         update.leaveChat(json_data["user_id"], chatID)
         user = read.find_user(id=json_data["user"])
-        socketio.emit(
+        emit(
             "user left",
             {
                 "user": [user.id, user.username, user.avatar.avatar_url],
@@ -78,7 +78,7 @@ def user_loaded(json_data):
     print('loaded user')
     for chat in read.find_user(pk=session["id"]).chats:
         join_room(chat)
-    socketio.emit('user_loaded', {'msg': 'User loaded into rooms'})
+    emit('user_loaded', {'msg': 'User loaded into rooms'})
 
 
 @socketio.event(namespace="/chat")
@@ -87,7 +87,7 @@ def user_unloaded(json_data):
     for chat in read.find_user(pk=session["id"]).chats:
         leave_room(chat)
 
-    socketio.emit('user-_nloaded', {'msg': 'User unloaded from rooms'})
+    emit('user-_nloaded', {'msg': 'User unloaded from rooms'})
 
 
 @socketio.event(namespace="/chat")
@@ -97,7 +97,7 @@ def message_edited(json_data):
         chatID = json_data["chatID"]
         del json_data["chatID"], json_data["chatType"]
         update.editMessage(chatID, json_data["message_id"], json_data["content"])
-        socketio.emit(
+        emit(
             "message edited", {"new_content": json_data["content"]}, room=chatID
         )
     else:
@@ -111,7 +111,7 @@ def message_deleted(json_data):
         chatID = json_data["chatID"]
         del json_data["chatID"], json_data["chatType"]
         delete.deleteMessage(message_id=json_data["messageID"], chat_id=chatID)
-        socketio.emit(
+        emit(
             "message deleted", {"message_id": json_data["messageID"]}, room=chatID
         )
     else:
@@ -183,17 +183,18 @@ def getChat():
     chatID = data["chatID"]
     print(chatID)
     chat = json.loads(read.getChat(chatID).to_json())
-    chat['messages'] = chat['messages'][:30]
+    chat['messages'] = list(reversed(chat['messages']))[:20]
     for message in chat['messages']:
         message["sender"] = json.loads(
             User.objects.only('id', 'username', 'avatar.avatar_url').get(pk=message["sender"]).to_json())
         message["send_date"] = datetime.datetime.fromtimestamp(message["send_date"]["$date"]/1000).strftime("%m/%d/%Y at %H:%M:%S")
     (chat["messages"]).reverse()
 
-
     for n, member in enumerate(chat['members']):
         chat['members'][n] = json.loads((User.objects.only('id', 'username', 'chatProfile', 'avatar.avatar_url').get(pk=member)).to_json())
     chat['members'] = sorted(chat['members'], key=lambda x: x["username"])
+
+    chat['messages'] = list(reversed(chat['messages']))
     return jsonify(chat)
 
 
@@ -202,13 +203,13 @@ def fetchMessages():
     data = request.get_json()
     chatID = data["chatID"]
     chat = json.loads(read.getChat(chatID).to_json())
-    if len(chat['messages']) < data['current_index']+30:
-        chat['messages'] = chat['messages'][data['current_index']:(len(chat['messages'])-data['current_index'])]
+    if len(chat['messages']) < data['current_index']+20:
+        chat['messages'] = list(reversed(chat['messages']))[data['current_index']:(len(chat['messages'])-data['current_index'])]
     else:
-        chat['messages'] = chat['messages'][data['current_index']:(data['current_index']+30)]
+        chat['messages'] = list(reversed(chat['messages']))[data['current_index']:(data['current_index']+30)]
 
     for message in chat['messages']:
-        message["sender"] = json.loads(User.objects.only('_id', 'username', 'avatar.avatar_url').get(pk=message["sender"]).to_json())
+        message["sender"] = json.loads(User.objects.only('id', 'username', 'avatar.avatar_url').get(pk=message["sender"]).to_json())
 
     return jsonify(chat['messages'])
 

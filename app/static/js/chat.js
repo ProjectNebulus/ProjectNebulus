@@ -135,6 +135,36 @@ $(document).ready(function () {
                     socket.disconnect();
         });
     }
+    $('#chat').on('scroll', function(){
+     console.log('chat is scrolling');
+     let chat_index = $(this).children.length;
+        if($(this).scrollTop()===-553){
+         let chatID = document.getElementById('chatID').getAttribute('data-id');
+         $.ajax({
+             url: '/api/v1/internal/fetch-messages',
+             type: 'POST',
+             contentType: 'application/json',
+             data: JSON.stringify({
+                 chatID: chatID,
+                 current_index: chat_index
+             })
+         }).done(function (messages) {
+             let chatContent = ``;
+             messages.forEach(function (message) {
+                 chatContent += `<div class="flex items-top space-x-4 mt-2" id="${message['id']}">
+                        <img class="mt-1 w-10 h-10 rounded-full"
+                             src="${message['sender']['avatar']['avatar_url']}"
+                             alt="">
+                        <div class="space-y-1 font-medium dark:text-white">
+                            <div>${message['sender']['username']} <span class="ml-3 text-sm text-gray-400">${message['send_date']}</span></div>
+                            <div class="text-sm text-gray-500 dark:text-gray-400">${message['content']}</div>
+                        </div>
+                    </div>`;
+             });
+             let chat = document.getElementById('chat');
+             chat.insertAdjacentHTML('afterbegin', chatContent);
+         });
+     }
 });
 
 $('#chat-sidebar').on('scroll', function () {
@@ -145,6 +175,8 @@ $('#chat-sidebar').on('scroll', function () {
         }
     }
 );
+});
+
 
 
 function load(data) {
