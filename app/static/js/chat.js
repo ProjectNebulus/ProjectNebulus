@@ -103,18 +103,43 @@ function makeCall() {
 
     }).done(load);
 }
-
+let socket;
 $(document).ready(function () {
     makeCall();
-    const socket = io.connect('http://' + document.domain + ':' + location.port + '/chat');
+    socket = io.connect('http://' + document.domain + ':' + location.port + '/chat');
     socket.on('connect', function() {
         console.log('socket emitting');
         socket.emit('user_loaded', {});
     });
+    socket.on('new_message', function(data){
+        let chat_el = document.getElementById('chat')
+        chat_el.insertAdjacentHTML('beforeend', `<div class="flex items-top space-x-4 mt-2" id="${data['id']}" data-author="${data['author'][0]}">
+                        <img class="mt-1 w-10 h-10 rounded-full"
+                             src="${data['author'][2]}"
+                             alt="">
+                        <div class="space-y-1 font-medium dark:text-white">
+                            <div>${data['author'][1]}</div>
+                            <div class="text-sm text-gray-500 dark:text-gray-400">$data['content']}</div>
+                        </div>
+                    </div>`);
+    });
+
     window.onunload = function(){
-        socket.emit('user_unloaded', {});
+        socket.emit('user_onloaded', {}, function() {
+                    socket.disconnect();
+        });
     }
 });
+
+function sendMessage(){
+    let el = document.getElementById('msg_content');
+    let chatID = document.getElementById('chatID').getAttribute('data-id');
+    socket.emit('new_message', {
+        chatType: 'chat',
+        chatID: chatID,
+        content: el.value
+    })
+}
 
 $('#chat-sidebar').on('scroll', function () {
         let div = $(this).get(0);

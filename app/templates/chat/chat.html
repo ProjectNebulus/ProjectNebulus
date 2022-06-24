@@ -165,7 +165,7 @@
 
 
             <div>
-                <form id="msg" style="width:100%;">
+                <form id="msg" style="width:100%;" onsubmit="sendMessage(); return false;">
                     <label for="chat" class="sr-only">Your message</label>
                     <div class="flex items-center py-2 px-3 bg-gray-50 rounded-lg dark:bg-gray-700">
                         <button type="button"
@@ -186,7 +186,7 @@
                                       clip-rule="evenodd"></path>
                             </svg>
                         </button>
-                        <textarea id="chat" rows="1"
+                        <textarea id="msg_content" rows="1"
                                   class="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                   placeholder="Your message..."></textarea>
                         <button type="submit"
@@ -323,9 +323,10 @@
             console.log(chat);
             let chatContent = ``
             let chatMembers = ``;
+            chatContent += `<div id="chatID" data-id="${chat['_id']}" class="w-0 h-0"></div>`
 
             chat['messages'].forEach(function (message) {
-                s+= `<div class="flex items-top space-x-4 mt-2">
+                chatContent+= `<div class="flex items-top space-x-4 mt-2" id="${message['id']}">
                         <img class="mt-1 w-10 h-10 rounded-full"
                              src="${message['sender']['avatar']['avatar_url']}"
                              alt="">

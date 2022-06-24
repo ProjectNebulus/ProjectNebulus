@@ -16,13 +16,15 @@ def new_message(json_data):
     if json_data["chatType"] == "chat":
         chatID = json_data["chatID"]
         del json_data["chatID"], json_data["chatType"]
-        create.sendMessage(json_data, chatID)
+        json_data['sender'] = session['id']
+        message = create.sendMessage(json_data, chatID)
         sender = read.find_user(id=json_data["sender"])
         socketio.emit(
-            "new message",
+            "new_message",
             {
                 "author": [sender.id, sender.username, sender.avatar.avatar_url],
                 "content": json_data["content"],
+                "id": message.id
             },
             room=chatID,
         )
@@ -76,7 +78,7 @@ def user_loaded(json_data):
     print('loaded user')
     for chat in read.find_user(pk=session["id"]).chats:
         join_room(chat)
-    socketio.emit('user-loaded', {'msg': 'User loaded into rooms'})
+    socketio.emit('user_loaded', {'msg': 'User loaded into rooms'})
 
 
 @socketio.event(namespace="/chat")
@@ -85,7 +87,7 @@ def user_unloaded(json_data):
     for chat in read.find_user(pk=session["id"]).chats:
         leave_room(chat)
 
-    socketio.emit('user-unloaded', {'msg': 'User unloaded from rooms'})
+    socketio.emit('user-_nloaded', {'msg': 'User unloaded from rooms'})
 
 
 @socketio.event(namespace="/chat")
@@ -147,6 +149,8 @@ def mute():
 def createChat():
     json_data = request.get_json()
     return create.createChat(**json_data)
+
+
 @internal.route("/create-chat-dm", methods=["POST"])
 def createChatDms():
     json_data = request.get_json()

@@ -228,6 +228,7 @@ def sendMessage(data: dict, chat_id: str):
     chat = Chat.objects.get(pk=chat_id)
     chat.messages.append(message)
     chat.save()
+    return message
 
 
 def pinMessage(message_id, chat_id):
