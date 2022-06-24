@@ -209,7 +209,11 @@ def fetchMessages():
         chat['messages'] = list(reversed(chat['messages']))[data['current_index']:(data['current_index']+30)]
 
     for message in chat['messages']:
-        message["sender"] = json.loads(User.objects.only('id', 'username', 'avatar.avatar_url').get(pk=message["sender"]).to_json())
+        message["sender"] = json.loads(
+            User.objects.only('id', 'username', 'avatar.avatar_url').get(pk=message["sender"]).to_json())
+        message["send_date"] = datetime.datetime.fromtimestamp(message["send_date"]["$date"] / 1000).strftime(
+            "%m/%d/%Y at %H:%M:%S")
+
 
     return jsonify(chat['messages'])
 
