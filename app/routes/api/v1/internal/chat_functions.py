@@ -20,6 +20,7 @@ def new_message(json_data):
         json_data['sender'] = session['id']
         message = create.sendMessage(json_data, chatID)
         sender = read.find_user(id=json_data["sender"])
+        print('socketo')
         socketio.emit(
             "new_message_frontend",
             {
