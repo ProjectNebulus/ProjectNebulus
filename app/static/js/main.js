@@ -12,6 +12,9 @@ if (localStorage.getItem("color-theme") === "dark")
 else
     document.documentElement.classList.remove('dark');
 
+function checkOnline(){
+    return navigator.onLine;
+}
 /** Returns a string containing a loading icon, with the parameters defining length and width. */
 function loadingIcon(length, width) {
     if (width === undefined)
@@ -220,7 +223,26 @@ function offline() {
     if (shouldGetSpotify)
         clearInterval(statusInterval);
 }
+function checkWifi(){
+    if (checkOnline()){
+        document.getElementById("wifi").innerText = "wifi";
+        document.getElementById("wifi").classList.add(
+            "bg-blue-600"
+        )
+        document.getElementById("wifi").classList.remove(
+            "bg-red-600"
+        )
 
+    }else{
+        document.getElementById("wifi").innerText = "wifi_off";
+        document.getElementById("wifi").classList.remove(
+            "bg-blue-600"
+        );
+        document.getElementById("wifi").classList.add(
+            "bg-red-600"
+        );
+    }
+}
 function navFetchStatus() {
     if (!document.getElementById("spotifyStatus"))
         return;
@@ -299,3 +321,4 @@ function changeFavicon() {
 }
 
 setInterval(changeFavicon, 250);
+setInterval(checkWifi, 250);
