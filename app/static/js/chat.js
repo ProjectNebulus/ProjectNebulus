@@ -158,7 +158,7 @@ $(document).ready(function () {
     $('#chat').on('scroll', function(){
      console.log('chat is scrolling');
      let el = document.getElementById('chat');
-     let chat_index = el.children.length;
+     let chat_index = el.children.length - (Math.floor(el.children.length/2))
      console.log(Math.floor(el.scrollHeight-$(this).height())*-1)
         if($(this).scrollTop()===Math.floor(el.scrollHeight-$(this).height())*-1){
          let chatID = document.getElementById('chatID').getAttribute('data-id');
