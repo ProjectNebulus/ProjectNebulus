@@ -8,12 +8,11 @@ from .Snowflake import Snowflake
 from .Message import Message
 
 
-
 class Chat(Snowflake):
     meta = {"collection": "Chats"}
     members = ListField(ReferenceField("User"), default=[])
     owner = ReferenceField("User", required=True)
-    created = DateTimeField(default=datetime.now())
+    created = DateTimeField(default=lambda: datetime.now())
     title = StringField()
     avatar = EmbeddedDocumentField(
         Avatar,
@@ -22,7 +21,7 @@ class Chat(Snowflake):
     type = StringField(default="Nebulus")  # Nebulus, Schoology, etc.
     messages = ListField(EmbeddedDocumentField("Message"), default=[])
     pinned_messages = ListField(EmbeddedDocumentField(Message), default=[])
-    lastEdited = DateTimeField(default=datetime.now())
+    lastEdited = DateTimeField(default=lambda: datetime.now())
 
     def clean(self):
         if not self.title:

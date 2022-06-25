@@ -13,4 +13,4 @@ class Message(EmbeddedDocument):
     sender = ReferenceField("User", required=True)
     content = StringField(required=True)
     reactions = ListField(StringField())  # list of emojis
-    send_date = DateTimeField(default=datetime.now())
+    send_date = DateTimeField(default=lambda: datetime.now())

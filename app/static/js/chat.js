@@ -153,10 +153,11 @@ $(document).ready(function () {
         console.log('socketio recieved event!');
         let userChats = document.getElementById('user-chats');
         let el = document.getElementById(`sidechat_${data['chatID']}`);
+        let chatID = document.getElementById('chatID').getAttribute('data-id')
         userChats.prepend(el);
-
-
-        updateToMessage(data);
+        if (chatID === data['chatID']) {
+            updateToMessage(data);
+        }
     });
 
     window.onunload = function(){
@@ -169,7 +170,7 @@ $(document).ready(function () {
      let el = document.getElementById('chat');
      let chat_index = el.children.length - (Math.floor(el.children.length/2))
      console.log(Math.floor(el.scrollHeight-$(this).height())*-1)
-        if($(this).scrollTop()===Math.floor(el.scrollHeight-$(this).height())*-1+100){
+        if($(this).scrollTop()===Math.floor(el.scrollHeight-$(this).height())*-1){
          let chatID = document.getElementById('chatID').getAttribute('data-id');
          $.ajax({
              url: '/api/v1/internal/fetch-messages',
