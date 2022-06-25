@@ -7,6 +7,7 @@
 {% extends "layout.html" %}
 {% block main %}
     <style>
+    textarea:focus { outline: none !important; }
         iframe {
             background-image: url('/static/images/nebulusCats/v3.gif');
             background-size: 20%;
@@ -116,11 +117,11 @@
 
                 </div>
                 <div style="position: absolute; bottom: 0; width:315px; left:0; margin:0 !important;" class="bg-gray-300 dark:bg-gray-600 flex flex-row">
-                    <div class="pt-2 pb-2 flex flex-col w-full" style="display: inline-block;  margin:5px;">
+                    <div class="pt-2 pb-2 flex flex-col" style="display: inline-block;  margin:5px;">
                         <logo image="/{{ user_obj.avatar.avatar_url }}" no-revert style="border-radius:50%;padding:5px;" class="h-12 hover:bg-gray-200 dark:hover:bg-gray-800"id="dropdownTopButton" data-dropdown-toggle="dropdownTop" data-dropdown-placement="top"></logo>
                         <!--<i class="material-icons m-6 text-xl inline-block text-black dark:text-white rounded-lg hover:bg-gray-300">settings</i>!-->
                     </div>
-                    <div style="display: inline-block; margin:5px; " class="pt-2 pb-2 flex flex-col w-full">
+                    <div style="display: inline-block; margin:5px; " class="pt-2 pb-2 flex flex-col">
                         <span class="text-xl text-black dark:text-white">{{ user }}</span><br>
                         <span class="text-sm text-gray-400 dark:text-gray-200">{{ status }}</span>
                     </div>
@@ -160,7 +161,7 @@
         </div>
 
         <div class="justify-center" style="width: calc(100% - 595px);-ms-overflow-style: none; " id="main-area">
-            <div class="flex items-center py-2 px-3 bg-gray-50 dark:bg-gray-700 dark:text-white text-black py-3 " id="chat-top">
+            <div class="flex items-center py-2 px-3 bg-gray-50 dark:bg-gray-700 dark:text-white text-black py-3 noselect ">
                 <i class="material-icons text-gray-400">alternate_email</i>
                 <span class="mx-4">Coder N</span>
                 <span class="inline-block w-3 h-3 bg-green-400 rounded-full"></span>
@@ -218,7 +219,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
                     </div>
-                    <input id="search" type="search" placeholder="Search by username" autocomplete="off" class="block mt-6 mb-6 p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50
+                    <input id="search_fr" type="search" placeholder="Search by username" autocomplete="off" class="block mt-6 mb-6 p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50
                                            rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500
                                            dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
                                            dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -245,7 +246,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
                     </div>
-                    <input id="search" type="search" placeholder="Search by username" autocomplete="off" class="block mt-6 mb-6 p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50
+                    <input id="search_bk" type="search" placeholder="Search by username" autocomplete="off" class="block mt-6 mb-6 p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50
                                            rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500
                                            dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
                                            dark:focus:ring-blue-500 dark:focus:border-blue-500">
