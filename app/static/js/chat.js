@@ -168,9 +168,9 @@ $(document).ready(function () {
     $('#chat').on('scroll', function(){
      console.log('chat is scrolling');
      let el = document.getElementById('chat');
-     let chat_index = el.children.length - (Math.floor(el.children.length/2))
-     console.log(Math.floor(el.scrollHeight-$(this).height())*-1)
-        if($(this).scrollTop()===Math.floor(el.scrollHeight-$(this).height())*-1){
+     let chat_index = el.children.length - (Math.floor(el.children.length/2)) - 1
+     console.log(Math.floor(el.scrollHeight-$(this).height())*-1, $(this).scrollTop())
+        if($(this).scrollTop()+Math.floor(el.scrollHeight-$(this).height())===0){
          let chatID = document.getElementById('chatID').getAttribute('data-id');
          $.ajax({
              url: '/api/v1/internal/fetch-messages',
@@ -191,7 +191,26 @@ $(document).ready(function () {
                             <div>${message['sender']['username']} <span class="ml-3 text-sm text-gray-400">${message['send_date']}</span></div>
                             <div class="text-sm text-gray-500 dark:text-gray-400">${message['content']}</div>
                         </div>
-                    </div>`;
+                    </div>
+                    <div id="user_${message['id']}" class="z-50 hidden bg-white divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600 rounded-lg block" data-popper-placement="bottom" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 215px, 0px);">
+                                    <div style="border-radius:10px 10px 0 0; height:60px;background:rgba
+                                        (191, 198, 205);"></div>
+                                    <div class="px-4 py-3 text-xl text-gray-900 dark:text-white border-b border-l">
+                                        <div style="text-align: left; margin-left:3px;">
+                                            <div style="margin-top:-60px;">
+                                                <img style="background:rgb(18,25,38)" src="${message['sender']["avatar"]['avatar_url']}" class="w-24 h-24 rounded-full border-white dark:border-gray-700 border-2 object-cover" alt="${message['sender']['username']}'s Profile Picture">
+                                                <span class="absolute  w-5 h-5 bg-green-400 border-2 border-white dark:border-gray-700 rounded-full" style="left:90px;top:85px;"></span>
+                                            </div>
+                                            <div>${message['sender']['username']}</div>
+                                           
+                                            
+                                            <input id="msg" placeholder="Message @${message['sender']['username']}" required="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm
+                                                       mb-6 rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5
+                                                       dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400
+                                                       dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        </div>
+                                    </div>
+                                </div>`;
              });
              let chat = document.getElementById('chat');
              chat.insertAdjacentHTML('beforeend', chatContent);

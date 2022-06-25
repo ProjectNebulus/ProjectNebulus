@@ -213,7 +213,8 @@ def fetchMessages():
     chatID = data["chatID"]
     chat = json.loads(read.getChat(chatID).to_json())
     if len(chat['messages']) < data['current_index']+20:
-        chat['messages'] = list(reversed(chat['messages']))[data['current_index']:(len(chat['messages'])-data['current_index'])]
+        print(len(chat['messages']))
+        chat['messages'] = list(reversed(chat['messages']))[data['current_index']:len(chat['messages'])]
     else:
         chat['messages'] = list(reversed(chat['messages']))[data['current_index']:(data['current_index']+30)]
 
@@ -223,6 +224,7 @@ def fetchMessages():
         message["send_date"] = datetime.datetime.fromtimestamp(message["send_date"]["$date"] / 1000).strftime(
             "%m/%d/%Y at %H:%M:%S")
 
+    print(len(chat['messages']))
 
     return jsonify(chat['messages'])
 
