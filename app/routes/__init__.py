@@ -9,7 +9,7 @@ from flask_mail import Mail
 from flask_socketio import SocketIO
 
 socketio = SocketIO()
-
+mail = Mail()
 from .api import *
 from .main import *
 from .static import *
@@ -79,7 +79,7 @@ def init_app():
             except KeyError:
                 return redirect("/logout")
 
-    mail = Mail(app)
+    mail.init_app(app)
     logging.getLogger("werkzeug").addFilter(_LogFilter())
     default_handler.setFormatter(_LogFormatter())
     socketio.init_app(app, async_mode="eventlet")

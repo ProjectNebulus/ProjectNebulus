@@ -4,7 +4,7 @@ from datetime import datetime
 from flask import session, request
 
 from . import internal
-from .....static.python.classes.Avatar import Avatar
+from .....static.python.classes import Avatar, ChatProfile
 from .....static.python.mongodb import create, read
 
 
@@ -43,6 +43,7 @@ def create_user():
         parent="User",
     )
     data["age"] = datetime.strptime(data["age"].strip(), "%m/%d/%Y")
+    data["chatProfile"] = ChatProfile()
     validation = create.create_user(data)
     if validation[0] == "0":
         session["username"] = validation[1].username

@@ -2,20 +2,12 @@ import random
 
 from flask import Flask
 from flask import session, request
-from flask_mail import Mail, Message
-
+from flask_mail import Message
 from . import internal
+from .... import mail
 
-app = Flask(__name__)
-app.config["MAIL_SERVER"] = "smtp.gmail.com"
-app.config["MAIL_PORT"] = 465
-app.config["MAIL_USERNAME"] = "help.nebulus@gmail.com"
-app.config["MAIL_PASSWORD"] = "dnymukujvfaxtlnn"
-app.config["MAIL_USE_TLS"] = False
-app.config["MAIL_USE_SSL"] = True
-mail = Mail(app)
 
-def send_email():
+def send_email(data):
     code = random.randint(10000000, 99999999)
     session["verificationCode"] = str(code)
     print(code)
@@ -23,7 +15,7 @@ def send_email():
     msg = Message(
         f"Your Nebulus Email Verification Code [{code}] ",
         sender=f"Nebulus <help.nebulus@gmail.com>",
-        recipients=[request.form.get("email")],
+        recipients=[data['email']],
     )
     import codecs
 
@@ -31,14 +23,17 @@ def send_email():
         "123456", str(code)
     )
 
-    htmlform = htmlform.replace("Nicholas Wang", request.form.get("username"))
+    htmlform = htmlform.replace("Nicholas Wang", data["username"])
 
     msg.html = htmlform
     print("sending email")
     mail.send(msg)
+
+
 # todo: Finish email sending blueprint
+
 @internal.route("/send-email", methods=["POST"])
-def send_email():
+def send_email_route():
     """
     POST /api/internal/send-email
     Args
@@ -48,6 +43,7 @@ def send_email():
     - message-html-file
     :return:
     """
-
-    send_email()
+    data = request.get_json()
+    print(data)
+    send_email(data)
     return "success"
