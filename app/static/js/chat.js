@@ -124,19 +124,20 @@ function makeCall() {
 
     }).done(load);
 }
-function updateToMessage(data){
+function updateToMessage(message){
     let chat_el = document.getElementById('chat');
-        chat_el.insertAdjacentHTML('afterbegin', `<div class="flex items-top space-x-4 mt-2" id="${data['id']}" data-author="${data['author'][0]}">
+        chat_el.insertAdjacentHTML('afterbegin', `<div class="flex items-top space-x-4 mt-2" id="${message['id']}">
                         <img class="mt-1 w-10 h-10 rounded-full"
-                             src="${data['author'][2]}"
+                             src="${message['author'][2]}"
                              alt="">
                         <div class="space-y-1 font-medium dark:text-white">
-                            <div>${data['author'][1]}</div>
-                            <div class="text-sm text-gray-500 dark:text-gray-400">${data['content']}</div>
+                            <div>${message['author'][1]} <span class="ml-3 text-sm text-gray-400">${message['send_date']}</span></div>
+                            <div class="text-sm text-gray-500 dark:text-gray-400">${message['content']}</div>
                         </div>
                     </div>`);
 
     $('#chat').children().last().remove();
+    $('#chat').scrollTop(0);
 }
 let socket;
 $(document).ready(function () {
