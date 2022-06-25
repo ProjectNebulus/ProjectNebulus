@@ -135,6 +135,8 @@ function updateToMessage(data){
                             <div class="text-sm text-gray-500 dark:text-gray-400">${data['content']}</div>
                         </div>
                     </div>`);
+
+    $('#chat').children().last().remove();
 }
 let socket;
 $(document).ready(function () {
