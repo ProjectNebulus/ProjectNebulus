@@ -125,8 +125,8 @@ function makeCall() {
     }).done(load);
 }
 function updateToMessage(data){
-    let chat_el = document.getElementById('chat')
-        chat_el.insertAdjacentHTML('beforeend', `<div class="flex items-top space-x-4 mt-2" id="${data['id']}" data-author="${data['author'][0]}">
+    let chat_el = document.getElementById('chat');
+        chat_el.insertAdjacentHTML('afterbegin', `<div class="flex items-top space-x-4 mt-2" id="${data['id']}" data-author="${data['author'][0]}">
                         <img class="mt-1 w-10 h-10 rounded-full"
                              src="${data['author'][2]}"
                              alt="">
@@ -144,7 +144,7 @@ $(document).ready(function () {
         console.log('socket emitting');
         socket.emit('user_loaded', {});
     });
-    socket.on('new_message_frontend', function(data){
+    socket.on('new_message', function(data){
 
         console.log('socketio recieved event!');
         updateToMessage(data);

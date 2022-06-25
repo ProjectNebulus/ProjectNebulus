@@ -20,9 +20,9 @@ def new_message(json_data):
         json_data['sender'] = session['id']
         message = create.sendMessage(json_data, chatID)
         sender = read.find_user(id=json_data["sender"])
-
+        print("user sent a message")
         emit(
-            "new_message_frontend",
+            "new_message",
             {
                 "author": [sender.id, sender.username, sender.avatar.avatar_url],
                 "content": json_data["content"],
@@ -76,7 +76,8 @@ def user_left(json_data):
 @socketio.event(namespace="/chat")
 def user_loaded(json_data):
     print('loaded user')
-    for chat in read.find_user(pk=session["id"]).chats:
+    chats = [x.id for x in read.find_user(pk=session["id"]).chats]
+    for chat in chats:
         join_room(chat)
     emit('user_loaded', {'msg': 'User loaded into rooms'})
 
@@ -84,10 +85,11 @@ def user_loaded(json_data):
 @socketio.event(namespace="/chat")
 def user_unloaded(json_data):
     print('unloaded user')
-    for chat in read.find_user(pk=session["id"]).chats:
+    chats = [x.id for x in read.find_user(pk=session["id"]).chats]
+    for chat in chats:
         leave_room(chat)
 
-    emit('user-_nloaded', {'msg': 'User unloaded from rooms'})
+    emit('user_unloaded', {'msg': 'User unloaded from rooms'})
 
 
 @socketio.event(namespace="/chat")

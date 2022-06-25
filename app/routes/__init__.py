@@ -82,6 +82,6 @@ def init_app():
     mail = Mail(app)
     logging.getLogger("werkzeug").addFilter(_LogFilter())
     default_handler.setFormatter(_LogFormatter())
-    socketio.init_app(app, logging=False, async_mode="eventlet")
+    socketio.init_app(app, async_mode="eventlet")
 
     return app
