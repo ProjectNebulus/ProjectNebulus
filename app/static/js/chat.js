@@ -88,6 +88,10 @@ function changeSearch() {
     }
 }
 
+$.fn.scrollBottom = function() {
+  return $(document).height() - this.scrollTop() - this.height();
+};
+
 keyUpDelay("#search", 500, changeSearch)
 
 function makeCall() {
@@ -137,8 +141,10 @@ $(document).ready(function () {
     }
     $('#chat').on('scroll', function(){
      console.log('chat is scrolling');
-     let chat_index = $(this).children.length;
-        if($(this).scrollTop()===-553){
+     let el = document.getElementById('chat');
+     let chat_index = el.children.length;
+     console.log(Math.floor(el.scrollHeight-$(this).height())*-1)
+        if($(this).scrollTop()===Math.floor(el.scrollHeight-$(this).height())*-1){
          let chatID = document.getElementById('chatID').getAttribute('data-id');
          $.ajax({
              url: '/api/v1/internal/fetch-messages',
@@ -162,7 +168,7 @@ $(document).ready(function () {
                     </div>`;
              });
              let chat = document.getElementById('chat');
-             chat.insertAdjacentHTML('afterbegin', chatContent);
+             chat.insertAdjacentHTML('beforeend', chatContent);
          });
      }
 });

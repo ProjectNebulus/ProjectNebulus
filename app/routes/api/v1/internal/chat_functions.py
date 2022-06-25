@@ -184,23 +184,23 @@ def getChat():
     print(chatID)
     chat = json.loads(read.getChat(chatID).to_json())
     chat['messages'] = list(reversed(chat['messages']))[:20]
+
     for message in chat['messages']:
         message["sender"] = json.loads(
             User.objects.only('id', 'username', 'avatar.avatar_url').get(pk=message["sender"]).to_json())
         message["send_date"] = datetime.datetime.fromtimestamp(message["send_date"]["$date"]/1000).strftime("%m/%d/%Y at %H:%M:%S")
-    (chat["messages"]).reverse()
 
     for n, member in enumerate(chat['members']):
         chat['members'][n] = json.loads((User.objects.only('id', 'username', 'chatProfile', 'avatar.avatar_url').get(pk=member)).to_json())
     chat['members'] = sorted(chat['members'], key=lambda x: x["username"])
 
-    chat['messages'] = list(reversed(chat['messages']))
     return jsonify(chat)
 
 
 @internal.route("/fetch-messages", methods=['POST'])
 def fetchMessages():
     data = request.get_json()
+    print(data)
     chatID = data["chatID"]
     chat = json.loads(read.getChat(chatID).to_json())
     if len(chat['messages']) < data['current_index']+20:
