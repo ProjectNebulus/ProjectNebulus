@@ -6,7 +6,6 @@ def hash256(password):
     return str(hashed)
 
 
-
 def valid_password(hashed, unhashed):
     # print(
     #     f"check_password_hash('{hashed}', '{unhashed}' = {check_password_hash(hashed, unhashed)}"

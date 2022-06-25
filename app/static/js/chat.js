@@ -324,9 +324,9 @@ function changeStatus(status){
     });
 }
 
-window.onunload = function(){
+window.onbeforeunload = function(){
     changeStatus("Offline");
-}
+};
 window.addEventListener("load", function(){
     changeStatus('Online');
 });
