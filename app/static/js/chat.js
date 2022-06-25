@@ -136,6 +136,7 @@ function updateToMessage(message){
                         </div>
                     </div>`);
 
+
     $('#chat').children().last().remove();
     $('#chat').scrollTop(0);
 }
@@ -150,11 +151,16 @@ $(document).ready(function () {
     socket.on('new_message', function(data){
 
         console.log('socketio recieved event!');
+        let userChats = document.getElementById('user-chats');
+        let el = document.getElementById(`sidechat_${data['chatID']}`);
+        userChats.prepend(el);
+
+
         updateToMessage(data);
     });
 
     window.onunload = function(){
-        socket.emit('user_onloaded', {}, function() {
+        socket.emit('user_loaded', {}, function() {
                     socket.disconnect();
         });
     }
@@ -210,13 +216,12 @@ function load(data) {
     let div = document.getElementById('user-chats')
     data.forEach(function (chat) {
         if (data.indexOf(chat) === 0){
-            s+= `<a href="#" onclick="getChat('${chat['_id']}')">
-            <div style="margin-bottom:4px;"
+            s+= `
+            <div onclick="getChat('${chat['_id']}')" id="sidechat_${chat['_id']}" style="margin-bottom:4px;"
              class="p-2 flex items-center space-x-4 dark:bg-gray-600 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" >`
         }else {
             s += `
-<a href="#" onclick="getChat('${chat['_id']}')">
-            <div style="margin-bottom:4px;"
+            <div onclick="getChat('${chat['_id']}')" id="sidechat_${chat['_id']}" style="margin-bottom:4px;"
              class="p-2 flex items-center space-x-4 dark:bg-gray-800 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" >`
         }
         if (chat['members'].length === 2) {
@@ -257,7 +262,7 @@ function load(data) {
                 <div class="text-sm text-gray-500 dark:text-gray-400" style="font-size:13px;">${status_emoji} ${status_text}</div>
             </div>
         </div>
-</a>
+
         `
 
         }
@@ -276,8 +281,7 @@ function load(data) {
         <div style="font-size:20px;" class="dark:text-gray-300">${chat["title"]}</div>
         <div style="font-size:13px;" class="text-sm text-gray-500 dark:text-gray-400">${chat['members'].length} Members</div>
     </div>
-</div>
-</a>`
+</div>`
         }
     });
 
@@ -428,6 +432,16 @@ function getChat(chatID){
             console.log(chat);
             let chatContent = ``
             let chatMembers = ``;
+            let el = document.getElementById(`sidechat_${chat['_id']}`);
+            let userChats = document.getElementById('user-chats');
+            userChats = [...userChats.children];
+            userChats.map(function(elem){
+                elem.classList.remove('dark:bg-gray-600');
+                elem.classList.add('dark:bg-gray-800');
+                }
+            );
+            el.classList.add('dark:bg-gray-600');
+            el.classList.remove('dark:bg-gray-800');
             chatContent += `<div id="chatID" data-id="${chat['_id']}" class="w-0 h-0"></div>`
 
             chat['messages'].forEach(function (message) {

@@ -19,6 +19,9 @@ def new_message(json_data):
         del json_data["chatID"], json_data["chatType"]
         json_data['sender'] = session['id']
         message = create.sendMessage(json_data, chatID)
+        chat = read.getChat(chatID)
+        chat.lastEdited = datetime.datetime.now()
+        chat.save()
         send_date = message.send_date.strftime(
             "%m/%d/%Y at %H:%M:%S")
         sender = read.find_user(id=json_data["sender"])
@@ -29,7 +32,8 @@ def new_message(json_data):
                 "author": [sender.id, sender.username, sender.avatar.avatar_url],
                 "content": json_data["content"],
                 "id": message.id,
-                "send_date": send_date
+                "send_date": send_date,
+                "chatID": chatID
             },
             room=chatID
         )
