@@ -12,6 +12,13 @@ from .....static.python.classes import User
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 
 
+@socketio.event(namespace='/chat')
+def user_status_change(data):
+    print(data)
+    if data['chatType'] == 'chat':
+        update.set_status(session['id'], data['status'])
+        socketio.emit('user_status_change', {'status': data['status'], 'userID': session['id']})
+
 @socketio.event(namespace="/chat")
 def new_message(json_data):
     if json_data["chatType"] == "chat":
@@ -127,6 +134,18 @@ def message_deleted(json_data):
         # TODO: Edit message for communities
         pass
 
+@socketio.event(namespace='/chat')
+def new_chat(data):
+    chat_data = {
+        "owner": session["username"],
+        "members": [
+            session["username"],
+            data["member"]
+        ]
+    }
+    chat = create.createChat(chat_data)
+
+    socketio.emit('new_chat', {"id":chat.id})
 
 
 @internal.route("/change-status", methods=["POST"])
@@ -170,6 +189,12 @@ def createChatDms():
         ]
     }
     return create.createChat(**data)
+
+
+@socketio.event(namespace='/chat')
+def join_a_room(data):
+    join_room(data['id'])
+
 
 @internal.route("/fetch-chats", methods=['POST'])
 def fetchChats():
@@ -228,15 +253,6 @@ def fetchMessages():
 
     return jsonify(chat['messages'])
 
-
-
-
-@internal.route("/set-status", methods=['POST'])
-def set_offline_status():
-    data = request.get_json()
-    print(data)
-    update.set_status(session['id'], data['status'])
-    return 'success'
 
 @internal.route("/get-friends", methods=['GET'])
 def get_friends():

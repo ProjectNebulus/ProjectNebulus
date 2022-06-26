@@ -122,7 +122,11 @@ function makeCall() {
         })
 
 
-    }).done(load);
+    }).done(function(){
+        load();
+        let selected = document.getElementById('user-chats');
+        selected.children[0].click();
+    });
 }
 function updateToMessage(message){
     let chat_el = document.getElementById('chat');
@@ -148,6 +152,12 @@ $(document).ready(function () {
         console.log('socket emitting');
         socket.emit('user_loaded', {});
     });
+    socket.on('new_chat', function(data){
+        let el = document.getElementById('user-chats');
+        el.innerHTML = "";
+        load();
+        socket.emit('join_a_room', data['id'])
+    })
     socket.on('new_message', function(data){
 
         console.log('socketio recieved event!');
@@ -160,17 +170,33 @@ $(document).ready(function () {
         }
     });
 
+    socket.on('user_status_change', function(data){
+        let user = $(`member_${data['userID']}`)
+        let user_img = user.children('span')[0];
+        if (data['status'] === 'Online'){
+            user_img.classList.add('bg-green-400');
+        }
+        else if (data['status'] === 'Do Not Disturb'){
+            user_img.classList.add('bg-red-500')
+        }
+        else{
+           user_img.classList.add('bg-gray-700');
+        }
+
+
+    })
+
     window.onunload = function(){
-        socket.emit('user_loaded', {}, function() {
+        socket.emit('user_unloaded', {}, function() {
                     socket.disconnect();
         });
-    }
+    };
     $('#chat').on('scroll', function(){
      console.log('chat is scrolling');
      let el = document.getElementById('chat');
      let chat_index = el.children.length - (Math.floor(el.children.length/2)) - 1
      console.log(Math.floor(el.scrollHeight-$(this).height())*-1, $(this).scrollTop())
-        if($(this).scrollTop()+Math.floor(el.scrollHeight-$(this).height())===0){
+        if($(this).scrollTop()+Math.floor(el.scrollHeight-$(this).height())===-0.5){
          let chatID = document.getElementById('chatID').getAttribute('data-id');
          $.ajax({
              url: '/api/v1/internal/fetch-messages',
@@ -307,25 +333,15 @@ function load(data) {
 
     div.insertAdjacentHTML('beforeend', s);
 
-
-
-    let selected = document.getElementById('user-chats');
-    selected.children[0].click();
 }
 
 function changeStatus(status){
-    $.ajax({
-        url: '/api/v1/internal/set-status',
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify({
-            status: status
-        })
-    });
+    socket.emit('user_status_change', {'chatType': 'chat', 'status': status});
 }
 
 window.onbeforeunload = function(){
     changeStatus("Offline");
+
 };
 window.addEventListener("load", function(){
     changeStatus('Online');
@@ -500,7 +516,7 @@ function getChat(chatID){
                 chatMembers += `<div 
         oncontextmenu='profile(this)'
         style="margin-bottom:4px;"
-             class="p-2 flex items-center space-x-4 dark:bg-gray-800 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" >`
+             class="p-2 flex items-center space-x-4 dark:bg-gray-800 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" id="member_${other['_id']}">`
                 if (other['chatProfile']['status'] === 'Online') {
                     chatMembers += `<div class="relative">
     <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
