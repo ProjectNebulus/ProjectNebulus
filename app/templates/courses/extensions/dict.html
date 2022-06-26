@@ -1,0 +1,7 @@
+{% extends "layout.html" %}
+{% block main %}
+    <form action="/search" method="post">
+        <input type="text" name="word" placeholder="Search">
+        <input type="submit" value="Search">
+    </form>
+{% endblock %}

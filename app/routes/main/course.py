@@ -86,6 +86,26 @@ def getResource(courseID, documentID):
     return req.content
 
 
+def search(word):
+    API_KEY = 'ae81dea0-30bd-4397-9ba3-d58726256214'
+    r = requests.get(f'https://dictionaryapi.com/api/v3/references/collegiate/json/{word}?key=ae81dea0-30bd-4397-9ba3-d58726256214')
+    return r.json()
+
+
+@main_blueprint.route('/course/<id>/extensions/dict/search', methods=["POST"])
+def search_word(id):
+    word = request.form['word']
+    word = word.lower()
+    definition = search(word)
+    try:
+        shortdef = definition[0]['shortdef'][0]
+        shortdef = shortdef[0].upper() + shortdef[1:]
+        partofspeech = definition[0]['fl']
+        word = word[0].upper() + word[1:]
+    except:
+        return f"<h1>No definition found for '{word}'</h1>"
+    return render_template('courses/extensions/dict_results.html', definition=shortdef, word=word, partofspeech=partofspeech)
+
 @main_blueprint.route("/course/<id>/extensions/<extension>")
 @logged_in
 def course_page_ex(id, extension):
