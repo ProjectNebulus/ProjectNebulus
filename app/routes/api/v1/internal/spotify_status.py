@@ -1,5 +1,3 @@
-from flask import request
-
 from . import internal
 from ....main.spotify import get_song
 from .....routes.main.spotify import (
@@ -13,7 +11,7 @@ from .....routes.main.spotify import (
     prev_spotify,
     resume_spotify,
 )
-from .....static.python.musixmatch import Musixmatch
+from app.static.python.music.musixmatch import Musixmatch
 
 
 def convert(secs):
@@ -73,23 +71,23 @@ def spotify_status():
                     'class="material-icons">pause</i> '
                 )
         string = (
-            name
-            + " • "
-            + artists
-            + " • "
-            + album
-            + " • "
-            + str(explicit)
-            + " • "
-            + image
-            + " • "
-            + str(playing)
-            + " • "
-            + str(timestamp)
-            + " • "
-            + str(total)
-            + " • "
-            + str(ratio)
+                name
+                + " • "
+                + artists
+                + " • "
+                + album
+                + " • "
+                + str(explicit)
+                + " • "
+                + image
+                + " • "
+                + str(playing)
+                + " • "
+                + str(timestamp)
+                + " • "
+                + str(total)
+                + " • "
+                + str(ratio)
         )
     else:
         string = "You aren't listening to anything!"

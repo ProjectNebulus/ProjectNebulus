@@ -1,13 +1,15 @@
 from __future__ import annotations
 
 import re
+import json
 from typing import List
 
 import schoolopy
-from flask import Response, session
+from flask import session
+from mongoengine import Q
 
 from ..classes import *
-from ..security import valid_password
+from app.static.python.utils.security import valid_password
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 
@@ -39,14 +41,20 @@ def getFolder(folder_id: str) -> Folder:
 
 def get_user_courses(user_id: str) -> List[Course]:
     user = find_user(pk=user_id)
-    return Course.objects(authorizedUsers__in=[user])
+    return Course.objects(authorizedUsers=user)
 
 
 def search_user(query: str) -> List[User]:
-    import re
+    return User.objects(username__istartswith=query).only(
+        "id", "username", "email", "avatar", "_cls"
+    )[:10]
+    # return User.objects.filter(username__contains=query)._query
 
-    regex = re.compile(f"(?i) {query}+")
-    return User.objects(username=regex)
+
+def search_within_course(query: str, course_id: str):
+    assignments = Assignment.objects(course_id=course_id, title__contains=query)
+    events = Event.objects(course_id=course_id, title__contains=query)
+    document_file = DocumentFile.objects(course_id=course_id, title__contains=query)
 
 
 def find_courses(_id: str):
@@ -56,7 +64,7 @@ def find_courses(_id: str):
     return course[0]
 
 
-def find_user(**kwargs) -> User | Response | None:
+def find_user(**kwargs) -> User | None:
     data = {k: v for k, v in kwargs.items() if v is not None}
     user = User.objects(**data).first()
     if not user:
@@ -69,7 +77,7 @@ def find_folder(**kwargs) -> Folder | None:
     folder = Folder.objects(**kwargs).first()
     if not folder:
         print(folder)
-        raise KeyError("User not found")
+        raise KeyError("Folder not found")
     return folder
 
 
@@ -89,7 +97,7 @@ def getSchoology(**kwargs) -> List[Schoology] | None:
 
 
 def getClassroom(
-        userID: str = None, username: str = None, email: str = None
+    userID: str = None, username: str = None, email: str = None
 ) -> GoogleClassroom:
     return find_user(id=userID, username=username, email=email).gclassroom
 
@@ -99,7 +107,7 @@ def getSpotify(userID: str = None, username: str = None, email: str = None) -> S
 
 
 def getSpotifyCache(
-        userID: str = None, username: str = None, email: str = None
+    userID: str = None, username: str = None, email: str = None
 ) -> Spotify | None:
     try:
         return find_user(
@@ -199,8 +207,8 @@ def sort_course_events(user_id: str, course_id: int):
                 {
                     key: list(result)
                     for key, result in groupby(
-                    sorted_announcements, key=lambda obj: obj.date.date()
-                )
+                        sorted_announcements, key=lambda obj: obj.date.date()
+                    )
                 }.items()
             )
         )
@@ -236,8 +244,8 @@ def sort_user_events(user_id: str, maxDays=8, maxEvents=16):
                 {
                     key: list(result)
                     for key, result in groupby(
-                    sorted_announcements, key=lambda obj: obj.date.date()
-                )
+                        sorted_announcements, key=lambda obj: obj.date.date()
+                    )
                 }.items()
             )[-maxDays:]
         )
@@ -309,7 +317,7 @@ def check_duplicate_schoology(user_id, schoology_email) -> str:
 
 
 def getChat(chat_id: str):
-    chat = Chat.objects(pk=chat_id)
+    chat = Chat.objects.get(pk=chat_id)
     if not chat:
         raise KeyError("Invalid Chat ID")
 
@@ -325,12 +333,125 @@ def getPlanner(user_id: str):
         "name": planner.name,
         "saveData": planner.saveData,
         "periods": planner.periods,
-        "lastEdited": planner.lastEdited
+        "lastEdited": planner.lastEdited,
     }
 
 
-def getDocument(document_id:str): # Nebulus Document
+def getDocument(document_id: str):  # Nebulus Document
     doc = NebulusDocument.objects(pk=document_id)
     if not doc:
         raise KeyError("Invalid Document ID")
     return doc
+
+
+def search(keyword: str, username: str):
+    user = User.objects(username=username).first()
+    users = search_user(keyword)
+    pipeline1 = [
+        {"$match": {"title": {"$regex": f"^{keyword}", "$options": "i"}}},
+        {
+            "$lookup": {
+                "from": Course._get_collection_name(),
+                "localField": "course",
+                "foreignField": "_id",
+                "as": "course",
+            }
+        },
+        {"$match": {"course.authorizedUsers": user.pk}},
+        {"$project": {"title": 1, "_id": 1, "_cls": 1}},
+    ]
+    courses = Course.objects(Q(authorizedUsers=user.id) & Q(name__istartswith=keyword))[
+        :10
+    ]
+    chats = Chat.objects(Q(owner=user.id) & Q(title__istartswith=keyword))[:10]
+    NebulusDocuments = NebulusDocument.objects(
+        Q(authorizedUsers=user.id) & Q(name__istartswith=keyword)
+    )[:10]
+
+    events = list(Event.objects().aggregate(pipeline1))
+    assignments = list(Assignment.objects().aggregate(pipeline1))
+    announcements = list(Announcement.objects().aggregate(pipeline1))
+    documents = list(DocumentFile.objects.aggregate(pipeline1))
+    return (
+        courses,
+        documents,
+        chats,
+        events,
+        assignments,
+        announcements,
+        NebulusDocuments,
+        users,
+    )
+
+
+def search_course(keyword: str, course: str):
+    course = Course.objects(id=course).first()
+    pipeline1 = [
+        {"$match": {"title": {"$regex": f"^{keyword}", "$options": "i"}}},
+        {
+            "$lookup": {
+                "from": Course._get_collection_name(),
+                "localField": "course",
+                "foreignField": "_id",
+                "as": "course",
+            }
+        },
+        {"$match": {"course.id": course}},
+        {"$project": {"title": 1, "_id": 1, "_cls": 1}},
+    ]
+
+    events = list(Event.objects().aggregate(pipeline1))
+    assignments = list(Assignment.objects().aggregate(pipeline1))
+    announcements = list(Announcement.objects().aggregate(pipeline1))
+    documents = list(DocumentFile.objects.aggregate(pipeline1))
+    return (
+        documents,
+        events,
+        assignments,
+        announcements,
+        NebulusDocuments,
+    )
+
+
+def getUserChats(user_id: str, required_fields: list):
+    user = find_user(pk=user_id)
+    chats = Chat.objects(members=user).only(*required_fields)
+    return chats
+
+
+def loadChats(user_id:str, current_index, initial_amount, required_fields):
+    chats = json.loads(
+        getUserChats(user_id, required_fields).to_json()
+    )
+
+    chats = sorted(chats, key=lambda x: x['lastEdited']['$date'])
+
+    if len(chats) < current_index + initial_amount:
+        initial_amount = len(chats) - current_index
+
+    chats = chats[current_index : (current_index + initial_amount)]
+    for chat in chats:
+        if len(chat["members"]) == 2:
+            for x, member in enumerate(chat['members']):
+                chat['members'][x] = json.loads(User.objects.only('id', 'chatProfile', 'username', 'avatar.avatar_url').get(pk=member).to_json())
+            chat['owner'] = list(filter(lambda x: x['_id']==chat['owner'], chat['members']))[0]
+
+
+
+    print(chats)
+    return chats
+
+def get_friends(user_id):
+    user = find_user(pk=user_id)
+    try:
+        friends = user.chatProfile.friends
+    except:
+        friends = None
+    return friends
+def get_blocks(user_id):
+    user = find_user(pk=user_id)
+    try:
+        blocked = user.chatProfile.blocked
+    except:
+        blocked = None
+    return blocked

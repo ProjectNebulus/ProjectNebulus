@@ -7,7 +7,7 @@ from ...static.python.mongodb import read
 @main_blueprint.route("/points", methods=["GET"])
 def points():
     return render_template(
-        "points.html",
+        "user/points.html",
         page="Nebulus - Points",
         user=session.get("username"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),

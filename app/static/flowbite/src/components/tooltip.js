@@ -1,4 +1,4 @@
-import { createPopper } from '@popperjs/core';
+import {createPopper} from '@popperjs/core';
 
 const Default = {
     placement: 'top',
@@ -11,28 +11,20 @@ class Tooltip {
     constructor(targetEl = null, triggerEl = null, options = {}) {
         this._targetEl = targetEl
         this._triggerEl = triggerEl
-        this._options = { ...Default, ...options }
-        this._popperInstance = this._createPopperInstace()
+        this._options = {...Default, ...options}
+        this._popperInstance = this._createPopperInstance()
         this._init()
     }
 
     _init() {
         if (this._triggerEl) {
             const triggerEvents = this._getTriggerEvents()
-            triggerEvents.showEvents.forEach(ev => {
-                this._triggerEl.addEventListener(ev, () => {
-                    this.show()
-                })
-            })
-            triggerEvents.hideEvents.forEach(ev => {
-                this._triggerEl.addEventListener(ev, () => {
-                    this.hide()
-                })
-            })
+            triggerEvents.showEvents.forEach(ev => this._triggerEl.addEventListener(ev, this.show))
+            triggerEvents.hideEvents.forEach(ev => this._triggerEl.addEventListener(ev, this.hide))
         }
     }
 
-    _createPopperInstace() {
+    _createPopperInstance() {
         return createPopper(this._triggerEl, this._targetEl, {
             placement: this._options.placement,
             modifiers: [
@@ -75,7 +67,7 @@ class Tooltip {
             ...options,
             modifiers: [
                 ...options.modifiers,
-                { name: 'eventListeners', enabled: true },
+                {name: 'eventListeners', enabled: true},
             ],
         }));
 
@@ -95,7 +87,7 @@ class Tooltip {
             ...options,
             modifiers: [
                 ...options.modifiers,
-                { name: 'eventListeners', enabled: false },
+                {name: 'eventListeners', enabled: false},
             ],
         }));
 
@@ -113,8 +105,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const placement = triggerEl.getAttribute('data-tooltip-placement');
 
         new Tooltip(targetEl, triggerEl, {
-            placement: placement ? placement : Default.placement,
-            triggerType: triggerType ? triggerType : Default.triggerType
+            placement: placement || Default.placement,
+            triggerType: triggerType || Default.triggerType
         })
     })
 })

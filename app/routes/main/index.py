@@ -43,7 +43,7 @@ def index():
 @main_blueprint.route("/google34d8c04c4b82b69a.html")
 def googleVerification():
     # GOOGLE VERIFICATION FILE
-    return render_template("google34d8c04c4b82b69a.html")
+    return render_template("utils/google34d8c04c4b82b69a.html")
 
 
 @main_blueprint.route("/arc-sw.js")
@@ -65,12 +65,13 @@ def tos():
 
 @main_blueprint.route("/select-a-region")
 def selectregion():
-    return render_template("main/global/select-a-region.html",
-                           user=session.get("username"),
-                           email=session.get("email"),
-                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-                           page="Select a Region"
-                           )
+    return render_template(
+        "main/global/select-a-region.html",
+        user=session.get("username"),
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        page="Select a Region",
+    )
 
 
 @main_blueprint.app_errorhandler(404)

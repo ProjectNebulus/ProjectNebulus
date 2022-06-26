@@ -11,7 +11,7 @@ class Announcement(Snowflake):
     imported_id = IntField(default=None, null=True)
     title = StringField(required=True)
     content = StringField(required=True)
-    date = DateTimeField(default=datetime.datetime.now())
+    date = DateTimeField(default=lambda: datetime.datetime.now())
     author = StringField(required=True)
     author_pic = StringField(default="/static/images/nebulusCats/v3.gif")
     author_color = StringField()
@@ -26,4 +26,4 @@ class Announcement(Snowflake):
         ["User#2: "Message"]
     ]
     """
-    comments = ListField(ListField(StringField()))
+    comments = ListField(ListField(ReferenceField("User"), StringField()))

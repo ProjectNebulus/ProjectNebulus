@@ -4,7 +4,7 @@ from datetime import datetime
 from flask import session, request
 
 from . import internal
-from .....static.python.classes.Avatar import Avatar
+from .....static.python.classes import Avatar, ChatProfile
 from .....static.python.mongodb import create, read
 
 
@@ -26,8 +26,8 @@ def create_user():
         12: "mountains.png",
         13: "pizza.png",
         14: "popTart.png",
-        15: "v3",
-        16: "v2",
+        15: "v3.gif",
+        16: "v2.gif",
         17: "newBlue.png",
         18: "newGreen.png",
         19: "newJade.png",
@@ -43,6 +43,7 @@ def create_user():
         parent="User",
     )
     data["age"] = datetime.strptime(data["age"].strip(), "%m/%d/%Y")
+    data["chatProfile"] = ChatProfile()
     validation = create.create_user(data)
     if validation[0] == "0":
         session["username"] = validation[1].username
@@ -63,10 +64,189 @@ def search_user():
     data = request.get_json()
     data = data["search"]
     users = read.search_user(data)
-    finaldata = ""
-    print(users)
+    string = ""
+    count = 0
     for i in users:
-        finaldata += i.username
-        if i != users[len(users) - 1]:
-            finaldata += "•"
-    return finaldata
+        count += 1
+        string += request.root_url + i.avatar.avatar_url
+        string += "•"
+        string += i.username
+        string += "•"
+        string += i.email
+        if len(users) != count:
+            string += "•"
+    if len(users) == 0:
+        return "0"
+
+    return string
+
+
+@internal.route("/search-within_user", methods=["POST"])
+def search_within_user():
+    data = request.get_json()
+    data = data["search"]
+    users = read.search(data, session["username"])
+    string = ""
+    count = 0
+
+    (
+        courses,
+        documents,
+        chats,
+        events,
+        assignments,
+        announcements,
+        NebulusDocuments,
+        accounts,
+    ) = users
+
+    everything = []
+    for course in courses:
+        everything.append(
+            [
+                "course",  # type
+                course.name,  # name
+                course.teacher,  # description
+                course.avatar.avatar_url,
+            ]
+        )
+
+    for document in documents:
+        everything.append(
+            [
+                "document",  # type
+                document.name,  # name
+                document.description,  # description
+                "a",
+            ]
+        )
+    for chat in chats:
+        everything.append(
+            [
+                "chat",  # type
+                chat.title,  # name
+                "",  # description
+                chat.avatar.avatar_url,
+            ]
+        )
+    for event in events:
+        try:
+            de = event["description"]
+        except:
+            de = ""
+        everything.append(
+            ["event", event["title"], de, "a"]  # type  # name  # description
+        )
+    for assignment in assignments:
+        try:
+            de = assignment["description"]
+        except:
+            de = ""
+        everything.append(
+            ["assignment", assignment["title"], de, "a"]  # type  # name  # description
+        )
+    for announcement in announcements:
+        everything.append(
+            [
+                "announcement",  # type
+                announcement.title,  # name
+                announcement.content,  # description
+                "a",
+            ]
+        )
+
+    for nebdoc in NebulusDocuments:
+        everything.append(
+            ["NebDoc", nebdoc.title, nebdoc.Data, "a"]  # type  # name  # description
+        )
+
+    for account in accounts:
+        everything.append(
+            [
+                "account",  # type
+                account.username,  # name
+                account.email,  # description
+                account.avatar.avatar_url,
+            ]
+        )
+
+    for i in everything:
+        count += 1
+        string += i[0]
+        string += "•"
+        string += i[1]
+        string += "•"
+        string += i[2]
+        string += "•"
+        string += i[3]
+        if len(everything) != count:
+            string += "•"
+    if len(everything) == 0:
+        return "0"
+
+    return string
+
+
+@internal.route("/search-within_course", methods=["POST"])
+def search_within_course():
+    data = request.get_json()
+    course = data["course"]
+    data = data["search"]
+    users = read.search_course(data, course)
+    string = ""
+    count = 0
+
+    documents, events, assignments, announcements, NebulusDocuments = users
+
+    everything = []
+
+    for document in documents:
+        everything.append(
+            [
+                "document",  # type
+                document.name,  # name
+                document.description,  # description
+                "a",
+            ]
+        )
+    for event in events:
+        try:
+            de = event["description"]
+        except:
+            de = ""
+        everything.append(
+            ["event", event["title"], de, "a"]  # type  # name  # description
+        )
+    for assignment in assignments:
+        try:
+            de = assignment["description"]
+        except:
+            de = ""
+        everything.append(
+            ["assignment", assignment["title"], de, "a"]  # type  # name  # description
+        )
+    for announcement in announcements:
+        everything.append(
+            [
+                "announcement",  # type
+                announcement.title,  # name
+                announcement.content,  # description
+                "a",
+            ]
+        )
+
+    for i in everything:
+        count += 1
+        string += i[0]
+        string += "•"
+        string += i[1]
+        string += "•"
+        string += i[2]
+        string += "•"
+        string += i[3]
+        if len(everything) != count:
+            string += "•"
+    if len(everything) == 0:
+        return "0"
+
+    return string

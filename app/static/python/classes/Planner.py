@@ -10,4 +10,4 @@ class Planner(EmbeddedDocument):
     saveData = DictField(default={})
     lastEdited = DateTimeField(null=True, default=None)
     # Fetch by data["DD-MM-YYYY-PN"] (PN - P0, P1, etc.)
-    periods = ListField(StringField(), default=["Period " + str(i) for i in range(1, 7)])
+    periods = ListField(StringField(), default=["" for _ in range(7)])

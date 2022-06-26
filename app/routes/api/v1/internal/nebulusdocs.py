@@ -10,7 +10,7 @@ from .....static.python.mongodb import update, read, create
 @internal.route("/nebulusDocuments/create", methods=["POST"])
 @private_endpoint
 def getDocs():
-    create.createNebulusDocument(request.get_json(), session['id'])
+    create.createNebulusDocument(request.get_json(), session["id"])
     return "success"
 
 
@@ -19,9 +19,9 @@ def getDocs():
 def saveDoc():
     data = request.get_json()
     try:
-        document = read.getDocument(data['id'])
+        document = read.getDocument(data["id"])
     except KeyError:
-        return 'false'
+        return "false"
 
     document.lastEdited = datetime.datetime.now()
     for key, value in data.items():
@@ -36,7 +36,9 @@ def readDoc():
     the_id = request.form.get("id")
 
 
-@internal.route("nebulusDocuments/share", methods=['POST']) # For sharing a document with another user
+@internal.route(
+    "nebulusDocuments/share", methods=["POST"]
+)  # For sharing a document with another user
 @private_endpoint
 def shareDoc():
     pass

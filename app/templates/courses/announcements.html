@@ -29,7 +29,7 @@
     {% if course.announcements|length == 0 %}
         <h1 class="mx-4 my-4 text-2xl text-black dark:text-white">You have no announcements! Try creating one!</h1>
     {% else %}
-        {% for i, a in course.announcements.to_python(dict) %}
+        {% for i in course.announcements %}
             <div class="block p-6 ml-4 my-4 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
                  style="width: 90%">
                 <div class="flex flex-row items-left">
@@ -37,17 +37,17 @@
                          {% if "black" in avatar %} bg-gray-300 dark:bg-gray-400
                          {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}"
                          data-dropdown-toggle="userDropdown-{{ i }}"
-                         alt="{{ a.author }}'s Profile Pic" src="{{ a.author_pic }}">
-                    =
+                         alt="{{ i.author }}'s Profile Pic" src="{{ i.author_pic }}">
+
                     <div class="ml-4">
                         <h3 class="text-xl font-medium text-gray-900 dark:text-white">
-                            {{ a.title }}{{ a.author * (a.title == "")|int }}</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">{{ (a.author + " >") * (a.title != "")|int }} {{ a.course.name }}</p>
+                            {{ i.title }}{{ i.author * (i.title == "")|int }}</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">{{ (i.author + " >") * (i.title != "")|int }} {{ i.course.name }}</p>
                     </div>
                 </div>
 
                 <div class="font-normal text-gray-700 dark:text-gray-400 my-4">
-                    {% for line in a.content.strip().split("\n") %}
+                    {% for line in i.content.strip().split("\n") %}
                         {% if line != "" %}
                             <p>{{ line }}</p>
                         {% else %}
@@ -61,30 +61,30 @@
                          style="margin-left: 0">
                         <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z"></path>
                     </svg>
-                    {{ a.likes }}
+                    {{ i.likes }}
 
                     <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path d="M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667v-5.43a2 2 0 00-1.105-1.79l-.05-.025A4 4 0 0011.055 2H5.64a2 2 0 00-1.962 1.608l-1.2 6A2 2 0 004.44 12H8v4a2 2 0 002 2 1 1 0 001-1v-.667a4 4 0 01.8-2.4l1.4-1.866a4 4 0 00.8-2.4z"></path>
                     </svg>
-                    {{ a.dislikes }}
+                    {{ i.dislikes }}
 
                     <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
                               d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z"
                               clip-rule="evenodd"></path>
                     </svg>
-                    {{ a.comments|length }}
+                    {{ i.comments|length }}
 
                     <br><br>
                 </div>
-                <p class="text-gray-400 dark:text-gray-600">{{ strftime(a.date.time(), "%-I:%M %p on %B %-d, %Y") }}</p>
+                <p class="text-gray-400 dark:text-gray-600">{{ strftime(i.date.time(), "%-I:%M %p on %B %-d, %Y") }}</p>
             </div>
             <!-- Dropdown menu -->
             <div id="userDropdown-{{ i }}" style="border-radius:10px"
                  class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600">
-                <div style="border-radius:10px 10px 0 0; height:60px;background:{% if a.author_color %}rgba
-                    {{ a.author_color }}{% else %}#515A67{% endif %};">
-                    {% if a.imported_from|lower == "schoology" %}
+                <div style="border-radius:10px 10px 0 0; height:60px;background:{% if i.author_color %}rgba
+                    {{ i.author_color }}{% else %}#515A67{% endif %};">
+                    {% if i.imported_from|lower == "schoology" %}
                         <div data-tooltip-target="tooltip-default{{ i }}" style="float:right;margin:5px;"><img
                                 src="/static/images/logos/schoology.png" class="w-5 h-5">
                             <div id="tooltip-default{{ i }}" role="tooltip"
@@ -101,24 +101,24 @@
                     <div style="text-align: left; margin-left:3px;">
                         <div style="margin-top:-60px;">
                             <img style="background:rgb(18,25,38);border-style:solid;border-width:2px;"
-                                 src="{{ a.author_pic }}"
+                                 src="{{ i.author_pic }}"
                                  class="w-24 h-24 rounded-full border-white dark:border-gray-700"
-                                 alt="{{ a.author }}'s Profile Picture">
+                                 alt="{{ i.author }}'s Profile Picture">
                             <span class="absolute  w-5 h-5 bg-green-400 border-2 border-white dark:border-gray-700 rounded-full"
                                   style="left:90px;top:85px;"></span>
                         </div>
-                        <div>{{ a.author }}</div>
-                        {% if a.author_email %}
-                            <div class="text-sm text-gray-400">{{ a.author_email }}</div>
+                        <div>{{ i.author }}</div>
+                        {% if i.author_email %}
+                            <div class="text-sm text-gray-400">{{ i.author_email }}</div>
                         {% endif %}
-                        {% if a.author_school %}
+                        {% if i.author_school %}
                             <div class="text-sm text-gray-400">Instructor
-                                at {{ a.author_school }}</div>
+                                at {{ i.author_school }}</div>
                         {% endif %}
                         <div class="mb-6">
                             <input type="text" id="msg"
                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                   placeholder="Message @{{ a.author }}"
+                                   placeholder="Message @{{ i.author }}"
                                    required>
                         </div>
                     </div>

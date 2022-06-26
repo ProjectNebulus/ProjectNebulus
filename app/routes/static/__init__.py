@@ -9,5 +9,5 @@ static_blueprint = Blueprint(
     static_folder="../static",
 )
 
-from .folder_file import *
-from .folder_folder2_file import *
+from .static_1layer import *
+from .static_2layer import *

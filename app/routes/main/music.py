@@ -30,9 +30,9 @@ def search(query):
         for i in range(0, len(search_keyword)):
             if " " == search_keyword[i]:
                 search_keyword = (
-                        search_keyword[0:i]
-                        + "%20"
-                        + search_keyword[i + 1: len(search_keyword)]
+                    search_keyword[0:i]
+                    + "%20"
+                    + search_keyword[i + 1 : len(search_keyword)]
                 )
                 break
 
@@ -90,7 +90,7 @@ class Musixmatch(object):
         return request
 
     def chart_tracks_get(
-            self, page, page_size, f_has_lyrics, country="us", _format="json"
+        self, page, page_size, f_has_lyrics, country="us", _format="json"
     ):
         """This api provides you the list
         of the top songs of a given country.
@@ -108,7 +108,9 @@ class Musixmatch(object):
         )
         return request
 
-    def track_search(self, q_track, page_size, page, s_track_rating, _format="json"):
+    def track_search(
+        self, q_track, page_size, page, s_track_rating, _format="json"
+    ):
         """Search for track in our database.
         Parameters:
         q_track - The song title.
@@ -151,12 +153,12 @@ class Musixmatch(object):
         return data
 
     def track_get(
-            self,
-            track_id,
-            commontrack_id=None,
-            track_isrc=None,
-            track_mbid=None,
-            _format="json",
+        self,
+        track_id,
+        commontrack_id=None,
+        track_isrc=None,
+        track_mbid=None,
+        _format="json",
     ):
         """Get a track info from our database:
         title, artist, instrumental flag and cover art.
@@ -208,13 +210,13 @@ class Musixmatch(object):
         return data
 
     def track_subtitle_get(
-            self,
-            track_id,
-            track_mbid=None,
-            subtitle_format=None,
-            f_subtitle_length=None,
-            f_subtitle_length_max_deviation=None,
-            _format="json",
+        self,
+        track_id,
+        track_mbid=None,
+        subtitle_format=None,
+        f_subtitle_length=None,
+        f_subtitle_length_max_deviation=None,
+        _format="json",
     ):
         """Retreive the subtitle of a track.
         Return the subtitle of a track in LRC or DFXP format.
@@ -250,11 +252,11 @@ class Musixmatch(object):
         return data
 
     def track_richsync_get(
-            self,
-            track_id,
-            f_sync_length=None,
-            f_sync_length_max_deviation=None,
-            _format="json",
+        self,
+        track_id,
+        f_sync_length=None,
+        f_sync_length_max_deviation=None,
+        _format="json",
     ):
         """Get the Rich sync for a track.
         A rich sync is an enhanced version of the
@@ -305,7 +307,9 @@ class Musixmatch(object):
         )
         return data
 
-    def track_lyrics_feedback_post(self, track_id, lyrics_id, feedback, _format="json"):
+    def track_lyrics_feedback_post(
+        self, track_id, lyrics_id, feedback, _format="json"
+    ):
         """This API method provides you the opportunity to help
         us improving our catalogue.
         We aim to provide you with the best quality service imaginable,
@@ -374,13 +378,13 @@ class Musixmatch(object):
         return data
 
     def matcher_subtitle_get(
-            self,
-            q_track,
-            q_artist,
-            f_subtitle_length,
-            f_subtitle_length_max_deviation,
-            track_isrc=None,
-            _format="json",
+        self,
+        q_track,
+        q_artist,
+        f_subtitle_length,
+        f_subtitle_length_max_deviation,
+        track_isrc=None,
+        _format="json",
     ):
         """Get the subtitles for a song given his title,artist and duration.
         You can use the f_subtitle_length_max_deviation to fetch subtitles
@@ -429,7 +433,7 @@ class Musixmatch(object):
         return data
 
     def artist_search(
-            self, q_artist, page, page_size, f_artist_id, f_artist_mbid, _format="json"
+        self, q_artist, page, page_size, f_artist_id, f_artist_mbid, _format="json"
     ):
         """Search for artists in our database.
         Parameters:
@@ -458,14 +462,14 @@ class Musixmatch(object):
         return data
 
     def artist_albums_get(
-            self,
-            artist_id,
-            g_album_name,
-            page,
-            page_size,
-            s_release_date,
-            artist_mbid=None,
-            _format="json",
+        self,
+        artist_id,
+        g_album_name,
+        page,
+        page_size,
+        s_release_date,
+        artist_mbid=None,
+        _format="json",
     ):
         """Get the album discography of an artist.
         Parameters:
@@ -497,7 +501,7 @@ class Musixmatch(object):
         return data
 
     def artist_related_get(
-            self, artist_id, page, page_size, artist_mbid=None, _format="json"
+        self, artist_id, page, page_size, artist_mbid=None, _format="json"
     ):
         """Get a list of artists somehow related to a given one.
         Parameters:
@@ -536,7 +540,13 @@ class Musixmatch(object):
         return data
 
     def album_tracks_get(
-            self, album_id, page, page_size, album_mbid, f_has_lyrics=None, _format="json"
+        self,
+        album_id,
+        page,
+        page_size,
+        album_mbid,
+        f_has_lyrics=None,
+        _format="json",
     ):
         """This api provides you the list of the songs of an album.
         Parameters:
@@ -661,7 +671,7 @@ def main_program(file_name):
 @logged_in
 def music():
     return render_template(
-        "music.html",
+        "music/music.html",
         user=session.get("username"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
     )
@@ -699,7 +709,7 @@ def music_post():
                 songs[i] = songs[i]["track"]
 
             return render_template(
-                "musixmatch.html",
+                "music/music_image_results.html",
                 songs=songs,
                 id_=search(songs[0]["track_name"] + " by " + songs[0]["artist_name"]),
                 user=session.get("username"),
@@ -784,9 +794,9 @@ def music_post():
             for i in range(0, len(search_keyword)):
                 if " " == search_keyword[i]:
                     search_keyword = (
-                            search_keyword[0:i]
-                            + "%20"
-                            + search_keyword[i + 1: len(search_keyword)]
+                        search_keyword[0:i]
+                        + "%20"
+                        + search_keyword[i + 1 : len(search_keyword)]
                     )
                     break
         search_keyword = urllib.parse.quote(search_keyword, encoding="UTF-8")
@@ -829,7 +839,7 @@ def music_post():
 
     if len(video_ids) == 0 and len(spotify_arr) == 0:
         return render_template(
-            "musicresults.html",
+            "music/music_results.html",
             noresults=True,
             user=session.get("username"),
             avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
@@ -858,7 +868,7 @@ def music_post():
                 break
 
     return render_template(
-        "musicresults.html",
+        "music/music_results.html",
         noresults=False,
         mylist=mylist,
         spotify_arr=spotify_arr,
@@ -876,7 +886,7 @@ def music_spotify(smth):
     for i in file:
         if i["code"] == smth:
             return render_template(
-                "musictrack.html",
+                "music/spotify_preview.html",
                 i=i,
                 user=session.get("username"),
                 avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
@@ -920,7 +930,7 @@ def music_video(id_: str):
     title = find_data(id_, "title")
     content = f"Listen to {title} by {author} on Nebulus!"
     return render_template(
-        "musicvideo.html",
+        "music/youtube_preview.html",
         author=author,
         author_url=author_url,
         thumbnail_url=thumbnail_url,

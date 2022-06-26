@@ -80,8 +80,8 @@ def createEvent(data: dict) -> Event:
     return event
 
 
-def createNebulusDocument(data: dict, user_id: str) ->  NebulusDocument:
-    data['owner'] = user_id
+def createNebulusDocument(data: dict, user_id: str) -> NebulusDocument:
+    data["owner"] = user_id
     doc = NebulusDocument(**data)
 
     doc.save(force_insert=True)
@@ -128,7 +128,7 @@ def createDocumentFile(data: dict) -> DocumentFile:
         folder.documents.append(document_file)
         folder.save()
     else:
-        raise Exception("Cannot create document file without either course or folder")
+        raise Exception("Cannot course document file without either course or folder")
 
     return document_file
 
@@ -202,7 +202,7 @@ def createGoogleClassroomConnection(user_id: str, data: dict) -> GoogleClassroom
 
 
 def createChat(data: dict) -> Chat:
-    chat = Chat(data)
+    chat = Chat(**data)
     chat.save(force_insert=True)
     for member in chat.members:
         member.chats.append(chat)
@@ -218,6 +218,43 @@ def createIntegration(data: dict) -> Integration:
 
 
 def installIntegration(courseID: int, integrationID: int):
-    course = Course.objects(pk=courseID)
-    integration = Integration.objects(pk=integrationID)
+    course = Course.objects.get(pk=courseID)
+    integration = Integration.objects.get(pk=integrationID)
     course.integrations.append(integration)
+
+
+def sendMessage(data: dict, chat_id: str):
+    message = Message(**data)
+    chat = Chat.objects.get(pk=chat_id)
+    chat.messages.append(message)
+    chat.save()
+    return message
+
+
+def pinMessage(message_id, chat_id):
+    chat = Chat.objects(pk=chat_id)
+    message = list(filter(lambda x: x.id == message_id, Chat.messages))[0]
+    chat.pinned_messages.append(message)
+    chat.save()
+
+
+def sendFriendRequest(user_id, reciever_id):
+    user = User.objects.get(pk=user_id)
+    reciever = User.objects.get(pk=reciever_id)
+    if not reciever.chatProfile.acceptingFriendRequests:
+        return "0"
+    user.chatProfile.outgoingFriendRequests.append(reciever)
+    reciever.incomingFriendrequests.append(user)
+    user.save()
+    reciever.save()
+
+
+def acceptFriendRequest(reciever_id, sender_id):
+    reciever = User.objects.get(pk=reciever_id)
+    sender = User.objects.get(pk=sender_id)
+    reciever.chatProfile.incomingFriendRequests.remove(sender)
+    sender.chatProfile.outgoingFriendRequests.remove(reciever)
+    reciever.chatProfile.friends.append(sender)
+    sender.chatProfile.friends.append(reciever)
+    sender.save()
+    reciever.save()

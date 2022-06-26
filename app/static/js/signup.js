@@ -32,10 +32,11 @@ function next(num) {
             const request = $.ajax({
                 type: "POST",
                 url: "/api/v1/internal/send-email",
-                data: {
-                    "email": document.getElementById("email").value,
-                    "username": document.getElementById("username").value
-                }
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    email: document.getElementById("email").value,
+                    username: document.getElementById("username").value
+                })
             });
             document.getElementById("step" + num.toString()).style.display = "none";
             document.getElementById("step" + (num + 1).toString()).style.display = "block";

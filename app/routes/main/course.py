@@ -22,19 +22,27 @@ def course_page(page, **kwargs):
     course_id = kwargs["id"]
     for course in courses:
         if course.id == course_id:
+            iframeSrc = "/course/" + course_id + "/"
+            if not request.args.get("iframe"):
+                if page == "course":
+                    page = "documents"
+
+                iframeSrc += page + "?iframe=true"
+                page = "course"
+
             try:
                 return render_template(
                     f"courses/{page}.html",
                     today=datetime.date.today(),
                     page="Nebulus - " + course.name,
+                    iframe=iframeSrc,
                     read=read,
                     course=course,
                     course_id=course_id,
                     user=session.get("username"),
                     email=session.get("email"),
-                    avatar="/static/images/nebulusCats"
-                           + session.get("avatar", "/v3.gif"),
-                    disableWidget=(page != "course"),
+                    avatar=session.get("avatar", "/v3.gif"),
+                    disableArc=(page != "course"),
                     events=read.sort_course_events(session["id"], int(course_id))[1],
                     strftime=utils.strftime,
                 )
@@ -42,16 +50,13 @@ def course_page(page, **kwargs):
             except TemplateNotFound:
                 break
 
-    return (
-        render_template(
-            "errors/404.html",
-            page="404 Not Found",
-            user=session.get("username"),
-            email=session.get("email"),
-            avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-        ),
-        404,
-    )
+    return render_template(
+        "errors/404.html",
+        page="404 Not Found",
+        user=session.get("username"),
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+    ), 404
 
 
 @main_blueprint.route("/createCourse", methods=["POST"])

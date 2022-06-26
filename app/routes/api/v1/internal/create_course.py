@@ -6,7 +6,7 @@ from flask import session, request
 from googleapiclient.discovery import build
 
 from . import internal
-from .....static.python.colors import getColor
+from app.static.python.utils.colors import getColor
 from .....static.python.mongodb import create, read
 
 
@@ -158,6 +158,7 @@ def create_canvas_course():
         )
 
     announcements = canvas.get_announcements(context_codes=[course.id])
+
     for announcement in announcements:
         create.createAnnouncement(
             {
@@ -312,6 +313,8 @@ def create_schoology_course():
         return rq.url  # rq["url"]
 
     documents = []
+    from .....static.python.cdn.utils import upload_file_link
+
     for scdocument in scdocuments:
         document = {}
         document["schoology_id"] = scdocument["id"]
@@ -319,14 +322,32 @@ def create_schoology_course():
         document["file_ending"] = scdocument["attachments"]["files"]["file"][0][
             "extension"
         ]
-        document["upload_date"] = datetime.fromtimestamp(scdocument["timestamp"])
+        try:
+            document["upload_date"] = datetime.fromtimestamp(scdocument["timestamp"])
+        except:
+            print("can't find timestamp")
         document["course"] = str(course_obj.id)
         document["imported_from"] = "Schoology"
         document["imported_id"] = str(scdocument["id"])
-        create.createDocumentFile(document)
-        print(document)
+        document["attachments"] = get_doc_link(
+            sc, scdocument["attachments"]["files"]["file"][0]["download_path"]
+        )
 
-        # document["attachment"] = scdocument["attachments"] (Won't work until we have CDN!)
+        # upload_file_link(document["attachments"])
+        filename = link.split("/")[-1]
+        mongo_document = create.createDocumentFile(
+            {
+                "name": document["name"],
+                "course": document["course"],
+                "file_ending": document["file_ending"],
+                "imported_from": "Schoology",
+                "imported_id": document["imported_id"],
+            }
+        )
+        upload_file_link(
+            document["attachments"], f'{mongo_document.id}.{document["file_ending"]}'
+        )
+        print(document)
         documents.append(document)
     print(documents)
 

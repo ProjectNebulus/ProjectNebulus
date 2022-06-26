@@ -1,10 +1,10 @@
 const CACHE_NAME = 'nebulus-offline';
 const urlsToCache = [
     '/',
-    '/static/flowbite.css',
+    '/static/tailwind.css',
     '/static/fonts.css',
-    '/static/createCourse.css',
-    '/static/createCourse.js',
+    '/static/lms.css',
+    '/static/lms.js',
     '/static/main.js',
     '/static/dashboard.js',
     '/static/profile.js',

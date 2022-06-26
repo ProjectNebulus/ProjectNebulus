@@ -4,7 +4,7 @@
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.1"></script>
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta name="google-site-verification" content="5RLtqNU5_UuQAcLqyee0ZoaLyNQ9-6VF0qfJsABVhm4"/>
-    {% if not disableWidget %}
+    {% if not disableArc %}
         <script async src="https://arc.io/widget.min.js#MAqsJqoN"></script>
     {% endif %}
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7084604546168550"
@@ -12,29 +12,18 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
           rel="stylesheet">
     <link rel="stylesheet" href="/static/css/tailwind.css">
-    <link rel="stylesheet" href="/static/css/common-menus.css">
+    <link rel="stylesheet" href="/static/css/extra_classes.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
     <!--Jquery!-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="/static/js/createObjects/lms.js"></script>
     <!--Javascript!-->
     <script src="/static/flowbite/dist/flowbite.js"></script>
-    <script src="/static/js/common-menus.js"></script>
     <script src="/static/js/main.js"></script>
-    <script>
-        if (!localStorage.getItem('color-theme')) {
-            const darkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            localStorage.setItem('color-theme', darkTheme ? 'dark' : 'light');
-        }
 
-        if (localStorage.getItem("color-theme") === "dark")
-            document.documentElement.classList.add('dark');
-        else
-            document.documentElement.classList.remove('dark');
-    </script>
-
-    <!--discord embeds!-->
+    <!--discord embeds and google search!-->
+    <meta name="description"
+          content="Learning, All In One | With Nebulus, have your whole learning experience organized and simple. All it takes is one Nebulus Account."/>
     <meta property="og:title" content="Nebulus | Learning, All in One."/>
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="https://nebulus.ml"/>
@@ -53,104 +42,6 @@
         const user = "{{ user }}";
     </script>
 
-    <!--Twemoji!-->
-    <!--
-    <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
-    <script>
-      window.onload = function() {
-          twemoji.parse(document.body,
-                  {folder: 'svg', ext: '.svg',size: "32x32"},
-          );
-      }
-
-    </script>
-    !-->
-
-    <style>
-        body {
-            cursor: url('/static/images/nebulusCats/newRed.png'), auto;
-        }
-
-        .fade-out {
-            visibility: hidden;
-            opacity: 0;
-            transition: visibility 0s 0.5s, opacity 0.5s linear;
-        }
-
-        .noselect, img, svg, thead, button, input {
-            user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            -webkit-user-select: none;
-        }
-
-        .noclick {
-            pointer-events: none;
-        }
-
-        .material-icons {
-            user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            -webkit-user-select: none;
-        }
-
-        hr {
-            border: 1px solid gray;
-        }
-
-        /* width */
-        ::-webkit-scrollbar, ::-webkit-scrollbar-thumb {
-            width: 5px;
-            height: 5px;
-            border-radius: 5px;
-        }
-
-        /* Track */
-        ::-webkit-scrollbar-track-piece {
-            background: #9CA3AF;
-        }
-
-        /* Handle */
-        ::-webkit-scrollbar-thumb {
-            background: #888;
-        }
-
-        .dark ::-webkit-scrollbar-thumb {
-            background: #555555;
-        }
-
-        .dark ::-webkit-scrollbar-track-piece {
-            background: #888;
-        }
-
-        /* Handle on hover */
-        ::-webkit-scrollbar-thumb:hover {
-            background: #555;
-            width: 10px;
-            height: 10px;
-        }
-
-        .hover\:scroll {
-            padding-right: 3px;
-        }
-
-        .hover\:scroll::-webkit-scrollbar {
-            display: none;
-        }
-
-        .hover\:scroll:hover::-webkit-scrollbar {
-            display: block;
-        }
-
-        .dark ::selection {
-            background: #3498DB;
-        }
-
-        ::selection {
-            background: #AED6F1;
-        }
-    </style>
 </head>
 <body>
 {% block main %}

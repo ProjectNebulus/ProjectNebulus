@@ -115,7 +115,9 @@ def spotify_route():
 
     # Step 4. Signed in, display data
     spotify = spotipy.Spotify(auth_manager=auth_manager)
-    return render_template("connectSpotify.html", spotify=spotify, auth=False)
+    return render_template(
+        "connections/connectSpotify.html", spotify=spotify, auth=False
+    )
 
 
 @main_blueprint.route("/spotify/sign_out")
@@ -268,7 +270,7 @@ def GET_currently_playing():
     if spotify == 0:
         return 2
     elif spotify == 1:
-        return redirect("/spotify")
+        return 3
 
     track = spotify.current_user_playing_track()
     if track is not None:

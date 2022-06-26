@@ -2,6 +2,19 @@ const siteName = window.location.protocol + "//" + window.location.host;
 
 Array.prototype.insert = (index, item) => this.splice(index, 0, item);
 
+if (!localStorage.getItem('color-theme')) {
+    const darkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    localStorage.setItem('color-theme', darkTheme ? 'dark' : 'light');
+}
+
+if (localStorage.getItem("color-theme") === "dark")
+    document.documentElement.classList.add('dark');
+else
+    document.documentElement.classList.remove('dark');
+
+function checkOnline(){
+    return navigator.onLine;
+}
 /** Returns a string containing a loading icon, with the parameters defining length and width. */
 function loadingIcon(length, width) {
     if (width === undefined)
@@ -75,36 +88,6 @@ class KeyUpTimer {
     }
 }
 
-if ('serviceWorker' in navigator) {
-    // we are checking here to see if the browser supports the service worker api
-    window.addEventListener('load', async function () {
-        await navigator.serviceWorker.register(/*'../static/js/sw.js'*/ '../sw.js', {scope: "/"}).then(
-            function (registration) {
-                // Registration was successful
-                console.log(
-                    'Service Worker registration was successful with scope: ',
-                    registration.scope
-                );
-            },
-            function (error) {
-                console.log('ServiceWorker registration failed: ', error);
-            }
-        );
-    });
-}
-
-function detectTheme() {
-    if (!localStorage.getItem('color-theme')) {
-        const darkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        localStorage.setItem('color-theme', darkTheme ? 'dark' : 'light');
-    }
-
-    if (localStorage.getItem("color-theme") === "dark")
-        document.documentElement.classList.add('dark');
-    else
-        document.documentElement.classList.remove('dark');
-}
-
 function invertSite() {
     const banner = document.getElementById("homeBanner");
 
@@ -113,12 +96,10 @@ function invertSite() {
             document.getElementById("editor").style.filter = "invert(1)";
         }
         if (window.location.pathname === "/") {
-            //document.body.style.backgroundImage = "url(\"/static/images/darkwallpaper.png\")";
             document.body.style.backgroundSize = "cover";
             document.body.style.background = "linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2) ), url('/static/images/darkwallpaper.png') no-repeat center center fixed";
-            //document.body.style.backgroundImage = "url(\"/static/images/darkwallpaper.png\")";
-            document.body.style.backgroundSize = "cover";
 
+            document.body.style.backgroundSize = "cover";
         }
         if (banner) banner.style.filter = "brightness(100%)";
 
@@ -192,9 +173,13 @@ window.addEventListener("load", function () {
     window.addEventListener("offline", offline);
 
     for (const logo of document.getElementsByTagName("logo")) {
-        let img = "/static/images/nebulusCats" + logo.getAttribute("image");
-        if ( logo.getAttribute("image") === null)
+        let img;
+        if (!logo.getAttribute("image"))
             img = "/static/images/nebulusCats/v3.gif";
+        else
+            img = logo.getAttribute("image");
+
+        //if (!img.includes("/static/images/nebulusCats")) img += "/static/images/nebulusCats";
 
         let size = logo.getAttribute("size");
 
@@ -209,25 +194,7 @@ window.addEventListener("load", function () {
     }
 });
 
-if ('serviceWorker' in navigator) {
-    // we are checking here to see if the browser supports the service worker api
-    window.addEventListener('load', async function () {
-        await navigator.serviceWorker.register(/*'../static/js/sw.js'*/ '../sw.js?2', {scope: "/"}).then(
-            function (registration) {
-                // Registration was successful
-                console.log(
-                    'Service Worker registration was successful with scope: ',
-                    registration.scope
-                );
-            },
-            function (error) {
-                console.log('ServiceWorker registration failed: ', error);
-            }
-        );
-    });
-}
-
-let interval = 0;
+let statusInterval = 0;
 let shouldGetSpotify = true;
 let shouldGetFocus = true;
 let requestAttempts = 0;
@@ -247,19 +214,37 @@ function online() {
     isOnline = true;
     requestAttempts = 0;
     if (shouldGetSpotify)
-        interval = setInterval(navFetchStatus, 1000);
+        statusInterval = setInterval(navFetchStatus, 1000);
 
 }
 
 function offline() {
     isOnline = false;
     if (shouldGetSpotify)
-        clearInterval(interval);
+        clearInterval(statusInterval);
 }
+function checkWifi(){
+    if (checkOnline()){
+        document.getElementById("wifi").innerText = "wifi";
+        document.getElementById("wifi").classList.add(
+            "bg-blue-600"
+        )
+        document.getElementById("wifi").classList.remove(
+            "bg-red-600"
+        )
 
-setInterval(navFetchFocus, 1000);
+    }else{
+        document.getElementById("wifi").innerText = "wifi_off";
+        document.getElementById("wifi").classList.remove(
+            "bg-blue-600"
+        );
+        document.getElementById("wifi").classList.add(
+            "bg-red-600"
+        );
+    }
+}
 function navFetchStatus() {
-    if (!document.getElementById("songhere"))
+    if (!document.getElementById("spotifyStatus"))
         return;
 
     const request = $.ajax({
@@ -269,9 +254,9 @@ function navFetchStatus() {
 
     request.done((data) => {
         if (parseInt(data)) {
-            document.getElementById("songhere").innerHTML = "";
+            document.getElementById("spotifyStatus").innerHTML = "";
             shouldGetSpotify = false;
-            clearInterval(interval);
+            clearInterval(statusInterval);
             return;
         }
 
@@ -287,7 +272,7 @@ function navFetchStatus() {
         let total = songs[7]
         let ratio = songs[8]
 
-        document.getElementById("songhere").innerHTML = `
+        document.getElementById("spotifyStatus").innerHTML = `
             <div style="width:150px;float:left;">
                 <img style="display: inline-block; margin:20px; border-radius:10px;" class="mb-3 w-20 h-20 shadow-lg" src="${image}" alt="Song Title">
             </div>
@@ -306,18 +291,8 @@ function navFetchStatus() {
 
     request.fail(onFailedRequest);
 }
-function navFetchFocus() {
-    const focus = localStorage.getItem('focus');
-    if (focus === "idling" || focus === null){
-        localStorage.setItem("focus", "idling");
-        document.getElementById("bigFocus").style.visibility = "hidden";
-    }else{
-        document.getElementById("bigFocus").style.visibility = "visible";
-        document.getElementById("focus").innerText = focus;
-    }
-}
 
-function changeFavicon(){
+function changeFavicon() {
     const list = [
         "Red",
         "Blue",
@@ -327,18 +302,17 @@ function changeFavicon(){
         "Jade",
         "Yellow"
     ]
-    for (let i = 0; i<list.length; i++){
+    for (let i = 0; i < list.length; i++)
         list[i] = `${window.location.origin}/static/images/nebulusCats/new${list[i]}.png`
-    }
 
-    var link = document.querySelector("link[rel~='icon']");
+    let link = document.querySelector("link[rel~='icon']");
 
     //var old = link.href.pathname;
-    var old = link.href;
+    const old = link.href;
     if (!link) {
         link = document.createElement('link');
         link.rel = 'icon';
-        document.getElementsByTagName('head')[0].appendChild(link);
+        document.head.appendChild(link);
     }
     //let index =(list.findIndex(old) + 1) % list.length;
     let index = (list.indexOf(old) + 1) % list.length;
@@ -346,4 +320,5 @@ function changeFavicon(){
     link.href = list[index];
 }
 
-setInterval(changeFavicon, 250)
+setInterval(changeFavicon, 250);
+setInterval(checkWifi, 250);

@@ -6,7 +6,7 @@ from . import main_blueprint
 @main_blueprint.route("/pricing", methods=["GET"])
 def pricing():
     return render_template(
-        "pricing.html",
+        "main/pricing.html",
         page="Pricing - Nebulus",
         user=session.get("username"),
         email=session.get("email"),

@@ -32,7 +32,7 @@ class Course(Snowflake):
     meta = {"collection": "Courses"}
     name = StringField(required=True)
     teacher = StringField(required=True)
-    created_at = DateTimeField(default=datetime.now())
+    created_at = DateTimeField(default=lambda: datetime.now())
     template = StringField(default=None)
     # sub_template = StringField(default=None)
     authorizedUsers = ListField(ReferenceField("User"))

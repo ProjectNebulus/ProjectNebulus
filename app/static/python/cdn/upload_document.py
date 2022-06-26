@@ -44,7 +44,7 @@ def upload_document(file, course, folder):
         ]
         print(root_path)
         file_path = os.path.join(
-            f"{root_path}/app/static/UserContent/Documents/",
+            f"{root_path}/app/static/",
             str(mongo_document.pk) + "." + filename.split(".")[-1],
         )
         file.save(file_path)

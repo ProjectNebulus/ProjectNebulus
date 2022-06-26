@@ -1,64 +1,78 @@
 {% extends "layout.html" %}
 {% block main %}
     <head>
-        <script src="/static/js/course.js" type='text/javascript'></script>
-        <script src="/static/js/createObjects/createDocument.js" type='text/javascript'></script>
-        <script src="/static/js/createObjects/createAnnouncement.js" type='text/javascript'></script>
-        <script src="/static/js/createObjects/createAssignment.js" type='text/javascript'></script>
+        <script src="/static/js/course/course.js" type='text/javascript'></script>
+        <script src="/static/js/course/createDocument.js" type='text/javascript'></script>
+        <script src="/static/js/course/createAnnouncement.js" type='text/javascript'></script>
+        <script src="/static/js/course/createAssignment.js" type='text/javascript'></script>
         <script src="https://unpkg.com/flowbite@1.4.1/dist/datepicker.js"></script>
+        <style>
+            iframe {
+                background-image: url('/static/images/nebulusCats/v3.gif');
+                background-size: 20%;
+                background-position: 45%;
+                background-repeat: no-repeat;
+                width: 100%;
+                height: 91%;
+                overflow-x: hidden
+            }
+        </style>
     </head>
-    <body>
-    {% include "navbar.html" %}
-    {% include "courses/sidebar.html" %}
-    <br><br>
-    <div class="flex flex-row" style="width:calc(100% - 16rem); height:80%;">
-        <div style="margin-left:10px;width:75%;float:left" id="main">
-            <span style="float:left" class="text-5xl text-black dark:text-white text-black" id="page-title"></span>
+    <body style="overflow: hidden">
+    {% include "utils/navbar.html" %}
+    <div class="flex" style="height: 92%">
+        {% include "courses/sidebar.html" %}
+        <div class="w-full ml-4 mt-4">
+            <div class="flex justify-between">
+                <span class="text-5xl text-black dark:text-white text-black" id="page-title"></span>
 
-            <div style="float: right; margin-right: 3rem">
-                <button style="float:left;margin-right:10px;width:64px;height:44px" data-dropdown-toggle="addDropdown"
-                        id="create"
-                        class="hidden sm:flex items-center text-left space-x-3 px-4 h-12 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700 text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                    <span style="font-size:30px;" class="material-icons">add</span></button>
-                <button data-modal-toggle="searchModal" id="search" style="float:left;" type="button"
-                        class="hidden sm:flex items-center w-72 text-left space-x-3 px-4 h-12 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700">
-                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
-                         stroke-linecap="round" stroke-linejoin="round"
-                         class="flex-none text-slate-300 dark:text-slate-400" aria-hidden="true">
-                        <path d="m19 19-3.5-3.5"></path>
-                        <circle cx="11" cy="11" r="6"></circle>
-                    </svg>
-                    <span class="flex-auto">Quick search...</span><kbd
-                        class="font-sans font-semibold dark:text-slate-500">
-                    <abbr title="Command" class="no-underline text-slate-300 dark:text-slate-500">⌘</abbr> K</kbd>
-                </button>
+                <div style="margin-right: 3rem">
+                    <button style="float:left; margin-right:10px;width:64px;height:44px"
+                            data-dropdown-toggle="addDropdown"
+                            id="create" class="hidden sm:flex items-center text-left space-x-3 px-4 h-12 bg-white ring-1
+                     ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm
+                      rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5
+                       dark:hover:bg-slate-700 text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                        <span style="font-size:30px;" class="material-icons">add</span></button>
+                    <button data-modal-toggle="searchModal" id="search" style="float:left;" type="button" class="hidden sm:flex
+             items-center w-72 text-left space-x-3 px-4 h-12 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300
+              focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800
+               dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round"
+                             class="flex-none text-slate-300 dark:text-slate-400" aria-hidden="true">
+                            <path d="m19 19-3.5-3.5"></path>
+                            <circle cx="11" cy="11" r="6"></circle>
+                        </svg>
+                        <span class="flex-auto">Quick search...</span><kbd
+                            class="font-sans font-semibold dark:text-slate-500">
+                        <abbr title="Command" class="no-underline text-slate-300 dark:text-slate-500">⌘</abbr> K</kbd>
+                    </button>
 
-                <!-- Dropdown menu -->
-                <div id="addDropdown"
-                     class="hidden z-10 w-50 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
-                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="addDropdownDefault">
-                        <li><a class="link"></a></li>
-                        <li><a class="link"></a></li>
-                        <li><a class="link"></a></li>
-                        <li><a class="link"></a></li>
-                    </ul>
+                    <!-- Dropdown menu -->
+                    <div id="addDropdown"
+                         class="hidden z-10 w-50 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
+                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="addDropdownDefault">
+                            <li><a class="link"></a></li>
+                            <li><a class="link"></a></li>
+                            <li><a class="link"></a></li>
+                            <li><a class="link"></a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-
-
-            <br><br><br>
+            <br>
             <hr class="dark:text-white text-black">
-            <iframe id="frame" name="frame"
-                    style="background-image: url('/static/images/nebulusCats/v3.gif'); background-size: 20%; background-position:45%; background-repeat: no-repeat; width: 100%; height: 100%; overflow-x: hidden"></iframe>
+            <iframe id="frame" name="frame" src="{{ iframe }}"></iframe>
         </div>
 
-        <div class="hidden xl:block border-l border-gray-200 dark:border-gray-700 text-center"
-             id="upcoming-events" style="width:25%; overflow-y:scroll;">
+        <div class="hidden xl:block border-l border-gray-200 dark:border-gray-700 text-center overflow-auto hover:scroll"
+             id="upcoming-events" style="width:25%">
             <h1 class="text-black dark:text-white text-2xl">Upcoming Events</h1>
             <br>
             <div class="flex flex-col overflow-x-auto sm:rounded-lg min-w-full align-middle overflow-auto inline-block">
                 {% if events|length == 0 %}
-                    <p class="text-gray-300 dark:text-gray-700">No Events!</p>
+                    <p class="text-gray-500 dark:text-gray-400">No Events!</p>
                 {% else %}
                     {% for date, assignments in events.items() %}
                         {% for a in assignments[:15] %}
@@ -93,34 +107,6 @@
         </div>
     </div>
 
-    <script>
-        const iframe = document.getElementsByName("frame")[0];
-        const upcoming = document.getElementById("upcoming-events");
-        const actions = document.getElementsByClassName("link");
-        const createButton = document.getElementById("create");
-
-        const pageTitle = document.getElementById("page-title");
-        let removed = true;
-        let saveData = sessionStorage.getItem("{{ course_id }}");
-        if (saveData === null)
-            saveData = "Documents";
-
-        iframe.src = "/course/{{ course_id }}/" + saveData.toLowerCase();
-        pageTitle.innerHTML = saveData;
-
-        for (const link of sidebarLinks) {
-            if (link.innerHTML.includes(saveData)) {
-                link.classList.add("dark:bg-gray-600", "light:bg-gray-600");
-                link.style.pointerEvents = "none";
-                break;
-            }
-        }
-
-        for (const action of actions)
-            action.classList.add('block', 'py-2', 'px-4', 'hover:bg-gray-100', 'dark:hover:bg-gray-600', 'dark:hover:text-white');
-
-        setCreateButton(pageTitle.innerHTML)
-    </script>
     {% include "courses/searchModals.html" %}
     </body>
 {% endblock %}
