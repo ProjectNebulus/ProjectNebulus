@@ -15,6 +15,7 @@ def chat():
 @main_blueprint.route("/chat/<page>")
 @logged_in
 def chatPage(page):
+
     user = read.find_user(pk=session["id"])
     newMessages = None
     status = None

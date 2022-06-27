@@ -212,6 +212,7 @@ def fetchChats():
 @internal.route("/get-chat", methods=["POST"])
 def getChat():
     import datetime
+    print(read.find_user(pk=session["id"]).password)
 
     data = request.get_json()
     chatID = data["chatID"]

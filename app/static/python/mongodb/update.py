@@ -221,4 +221,4 @@ def set_status(user_id: str, status: str):
         pass
     else:
         user.chatProfile.status = status
-        user.save()
+        user.save(clean=False)

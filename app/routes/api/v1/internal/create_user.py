@@ -6,6 +6,7 @@ from flask import session, request
 from . import internal
 from .....static.python.classes import Avatar, ChatProfile
 from .....static.python.mongodb import create, read
+from .....static.python.utils.security import hash256
 
 
 @internal.route("/create-user", methods=["POST"])
@@ -44,6 +45,7 @@ def create_user():
     )
     data["age"] = datetime.strptime(data["age"].strip(), "%m/%d/%Y")
     data["chatProfile"] = ChatProfile()
+    data["password"] = str(hash256(data["password"]))
     validation = create.create_user(data)
     if validation[0] == "0":
         session["username"] = validation[1].username

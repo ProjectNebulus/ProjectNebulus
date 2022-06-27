@@ -76,7 +76,6 @@ class User(Snowflake):
     chatProfile = EmbeddedDocumentField(ChatProfile)
 
     def clean(self):
-        self.password = hash256(self.password)
         self.avatar.avatar_url = (
             self.avatar.avatar_url.replace("http://localhost:8080", "")
             .replace("https://localhost:8080", "")

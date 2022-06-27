@@ -272,8 +272,12 @@ def unsorted_user_events(user_id: str) -> List[List]:
     ]
 
 
-def getSchoologyAuth() -> schoolopy.Schoology:
-    schoology = getSchoology(username=session.get("username"))[0]
+def getSchoologyAuth(username) -> schoolopy.Schoology | None:
+    schoology = getSchoology(username=username)
+    if not schoology:
+        return
+    else:
+        schoology = schoology[0]
     request_token = schoology.Schoology_request_token
     request_token_secret = schoology.Schoology_request_secret
     access_token = schoology.Schoology_access_token

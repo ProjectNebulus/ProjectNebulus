@@ -1,8 +1,5 @@
 # Imports
 from logging import LogRecord
-import eventlet
-
-eventlet.monkey_patch()
 from flask import has_request_context
 from flask.logging import logging, default_handler
 from flask_cors import CORS
@@ -83,6 +80,6 @@ def init_app():
     mail.init_app(app)
     logging.getLogger("werkzeug").addFilter(_LogFilter())
     default_handler.setFormatter(_LogFormatter())
-    socketio.init_app(app, async_mode="eventlet")
+    socketio.init_app(app)
 
     return app
