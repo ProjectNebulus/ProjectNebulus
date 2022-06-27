@@ -141,22 +141,20 @@ def new_chat(data):
     }
     chat = create.createChat(data)
     chat_data = {
-            "id": chat.id,
-            "avatar": {"avatar_url": chat.avatar.avatar_url},
-            "title": chat.title,
-            "lastEdited": chat.lastEdited,
-            "owner": chat.owner
-            "members": chat.members
-        }
+        "id": chat.id,
+        "avatar": {"avatar_url": chat.avatar.avatar_url},
+        "title": chat.title,
+        "lastEdited": chat.lastEdited,
+        "owner": chat.owner,
+        "members": chat.members,
+    }
 
     if len(chat.members) == 2:
         for x, member in enumerate(chat["members"]):
             chat["members"][x] = json.loads(
-                User.objects.only(
-                    "id", "chatProfile", "username", "avatar.avatar_url"
-                )
-                    .get(pk=member)
-                    .to_json()
+                User.objects.only("id", "chatProfile", "username", "avatar.avatar_url")
+                .get(pk=member)
+                .to_json()
             )
         chat["owner"] = list(
             filter(lambda x: x["_id"] == chat["owner"], chat["members"])
