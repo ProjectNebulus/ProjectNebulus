@@ -155,7 +155,6 @@ $(document).ready(function () {
     socket.on('new_chat', function(data){
         let el = document.getElementById('user-chats');
         el.innerHTML = "";
-        load();
         socket.emit('join_a_room', data['id'])
     })
     socket.on('new_message', function(data){
