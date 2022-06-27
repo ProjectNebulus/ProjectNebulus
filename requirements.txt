@@ -32,7 +32,7 @@ graphql-core==3.2.1
 graphql-relay==3.2.0
 graphql-server==3.0.0b5
 graphql-server-core==2.0.0
-idna==3.2
+idna==3.3
 iso8601==1.0.2
 itsdangerous==2.1.2
 discord==1.7.3
