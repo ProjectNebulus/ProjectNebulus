@@ -1,5 +1,52 @@
 io = window.io
 
+function replaceURLs(message) {
+    if (!message)
+        return message;
+
+    if (!message.includes("http")) {
+        console.log("returned. no link detected");
+        return message;
+    }
+    if (message.includes("href=\"http")) {
+        console.log("returned. recursive detected");
+        return message;
+    }
+
+    const urlRegex = /(((https?:\/\/)|(www\.))[^\s]+)/g;
+
+    return message.replace(urlRegex, function (url) {
+        let hyperlink = url;
+
+        if (!hyperlink.match('^https?:\/\/'))
+            hyperlink = 'http://' + hyperlink;
+
+        hyperlink = hyperlink.replace("<p>", "");
+        hyperlink = hyperlink.replace("</p>", "");
+        //youtube iframe
+        let iframe = ""
+        if (hyperlink.includes("youtube.com/watch")){
+            let location = hyperlink.indexOf("v=");
+            let id = hyperlink.substr(location+2, location+14);
+            iframe = `
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/${id}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+
+        }
+        if (hyperlink.includes("youtube.be/")){
+            let location = hyperlink.indexOf("/");
+            let id = hyperlink.substr(location+1, location+13);
+            iframe = `
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/${id}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+
+        }
+        if (iframe !== ""){
+            return `<a target="_blank"
+                   class="text-sky-500 underline" href="${hyperlink}">${hyperlink}</a><br> ${iframe}`
+        }
+        return `<a target="_blank"
+                   class="text-sky-500 underline" href="${hyperlink}">${hyperlink}</a>`;
+    });
+}
 
 function createChat(members) {
     document.getElementById("dropdown").style.display = "none";
@@ -530,7 +577,7 @@ function getChat(chatID){
                              alt="">
                         <div class="space-y-1 font-medium dark:text-white">
                             <div><span  data-dropdown-toggle="user_${message['id']}" class="hover:underline">${message['sender']['username']}</span> <span class="ml-3 text-sm text-gray-400">${message['send_date']}</span></div>
-                            <div class="text-sm text-gray-500 dark:text-gray-400">${message['content']}</div>
+                            <div class="text-sm text-gray-500 dark:text-gray-400">${replaceURLs(message['content'])}</div>
                         </div>
                     </div>
                     <div id="user_${message['id']}" class="z-50 hidden bg-white divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600 rounded-lg block" data-popper-placement="bottom" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 215px, 0px);">
