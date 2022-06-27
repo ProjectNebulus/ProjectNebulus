@@ -1,8 +1,10 @@
 io = window.io
 
 function replaceURLs(message) {
-    if (!message)
+    console.log(message);
+    if (!message) {
         return message;
+    }
 
     if (!message.includes("http")) {
         console.log("returned. no link detected");
@@ -75,8 +77,7 @@ function changeSearch() {
             }),
 
             contentType: 'application/json; charset=utf-8',
-        });
-        request.done((data) => {
+        }).done(function(data){
             document.getElementById("search_items").innerHTML = "";
             let temp_arr = []
             if (data === "0") {
@@ -163,9 +164,15 @@ function updateToMessage(message){
                              alt="">
                         <div class="space-y-1 font-medium dark:text-white">
                             <div>${message['author'][1]} <span class="ml-3 text-sm text-gray-400">${message['send_date']}</span></div>
-                            <div class="text-sm text-gray-500 dark:text-gray-400">${message['content']}</div>
+                            <div id="content_${message["id"]}" class="text-sm text-gray-500 dark:text-gray-400">${message['content']}</div>
                         </div>
                     </div>`);
+
+        let url = replaceURLs(message["content"]);
+        console.log(url);
+        $(`#content_${message["id"]}`).html(url);
+
+
 
 
     $('#chat').children().last().remove();
