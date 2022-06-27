@@ -1,17 +1,9 @@
 from datetime import datetime
-from typing import List, Optional
 
 from mongoengine import *
 
-from .Assignment import Assignment
-from .Textbook import Textbook
-from .Extension import Extension
+from app.routes.main import utils
 from .Avatar import Avatar
-from .Events import Event
-
-# Relative imports (because this directory is a module
-from .Folder import Folder
-from .Grades import Grades
 from .Snowflake import Snowflake
 
 templates = (
@@ -22,15 +14,6 @@ templates = (
     "History",
     "Art",
     "Music",
-    "Other",
-)
-lms_choices = (
-    "Canvas",
-    "Google Classroom",
-    "Microsoft Teams",
-    "Schoology",
-    "Moodle",
-    "Blackboard Learn",
     "Other",
 )
 
@@ -49,19 +32,23 @@ class Course(Snowflake):
     meta = {"collection": "Courses"}
     name = StringField(required=True)
     teacher = StringField(required=True)
-    created_at = DateTimeField(default=datetime.now())
+    created_at = DateTimeField(default=lambda: datetime.now())
     template = StringField(default=None)
+    # sub_template = StringField(default=None)
     authorizedUsers = ListField(ReferenceField("User"))
     assignments = ListField(ReferenceField("Assignment"))
     teacherAccount = ReferenceField("User", default=None, null=True)
     folders = ListField(ReferenceField("Folder"))
-    imported_from = StringField(default=None, choices=lms_choices, null=True)
     description = StringField(default="", null=True)
     documents = ListField(ReferenceField("DocumentFile"))
     grades = ReferenceField("Grades")
     events = ListField(ReferenceField("Event"))
-    avatar = EmbeddedDocumentField(Avatar)
+    avatar = EmbeddedDocumentField(Avatar, required=False)
     announcements = ListField(ReferenceField("Announcement"))
     archived = BooleanField(default=False)
-    extensions = ListField(ReferenceField("Extension"))
+    integrations = ListField(ReferenceField("Integration"))
     textbooks = ListField(ReferenceField("Textbook"))
+
+    def clean(self):
+        if not self.avatar:
+            self.avatar = Avatar(avatar_url=utils.SCHOOLOGY_COURSE_ICON)

@@ -2,7 +2,7 @@
 
 node_modules/
 
-
+!flowbite/
 
 
 
@@ -17,7 +17,7 @@ __pycache__/
 .Python
 build/
 develop-eggs/
-dist/
+
 downloads/
 eggs/
 .eggs/
@@ -51,13 +51,14 @@ pip-delete-this-directory.txt
 __pypackages__/
 
 # Environments
-.env
 .venv
 env/
-venv/
+venv2/
 ENV/
 env.bak/
 venv.bak/
+
+#Custom Needed Folders
 
 
 

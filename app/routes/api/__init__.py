@@ -8,6 +8,7 @@ api_blueprint = Blueprint(
     static_folder="static",
 )
 
-from . import v1
-from . import developers
-#from .graphql import *
+from app.routes.api import v1
+from app.routes.api import developers
+
+# from app.routes.api import graphql

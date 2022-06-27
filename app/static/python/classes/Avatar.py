@@ -1,6 +1,8 @@
-from mongoengine import *
 import time
-from ..snowflake_generator import make_snowflake
+
+from mongoengine import *
+
+from app.static.python.utils.snowflake_generator import make_snowflake
 
 
 class Avatar(EmbeddedDocument):
@@ -11,11 +13,12 @@ class Avatar(EmbeddedDocument):
     """
 
     meta = {"collection": "Avatars"}
-    parent = StringField(required=True, choices=["User", "Course", "Textbook"])
-    avatar_url = URLField(required=False, description="Avatar URL")
+    parent = StringField(required=True, choices=["User", "Course", "Textbook", "Chat"])
+    avatar_url = StringField(required=False, description="Avatar URL")
     id = StringField(
         required=False, default=lambda: str(make_snowflake(time.time() * 1000, 1, 0, 0))
     )
 
     def clean(self):
-        self.avatar_url = f"https://cdn.nebulus.ml/Avatars/{self.parent}/{self.id}"
+        if not self.avatar_url:
+            self.avatar_url = f"https://nebulus-cdn.sfo3.cdn.digitaloceanspaces.com/Avatars/{self.parent}/{self.id}"

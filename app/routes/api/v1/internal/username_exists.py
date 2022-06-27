@@ -1,7 +1,7 @@
-from . import internal
-from .....static.python.mongodb.read import find_user
-from .....static.python.classes.User import User
 from flask import request
+
+from . import internal
+from .....static.python.classes.User import User
 
 
 @internal.route("/username-exists", methods=["POST"])

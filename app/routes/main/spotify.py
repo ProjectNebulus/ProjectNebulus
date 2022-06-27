@@ -1,18 +1,18 @@
-from flask import render_template, redirect, session
-from spotipy import CacheHandler
+import os
+import uuid
+
+import spotipy
+from flask import render_template
+from flask import session, request, redirect
+from spotipy import CacheHandler, SpotifyException
 
 from . import main_blueprint
-import os
-from flask import Flask, session, request, redirect
-from flask_session import Session
-import spotipy
 from .utils import logged_in
-import uuid
 
 # In order to get Spotipy to work, you must install the latest version with cloning the repo with the following command:
 # pip3 install git+https://github.com/plamere/spotipy
-SPOTIPY_CLIENT_ID = "846095b9ce934b0da3e0aaf3adbf600c"
-SPOTIPY_CLIENT_SECRET = "1d79c77cee124d8f8e20b16f720d65e8"
+SPOTIPY_CLIENT_ID = "9eb38c31d84b43e5a2557a6f98c5a064"
+SPOTIPY_CLIENT_SECRET = "eddbab5eb3b2434694af122a8f99bf87"
 # SPOTIPY_REDIRECT_URI = "http://localhost:8080/spotify"
 
 caches_folder = "./.spotify_caches/"
@@ -25,6 +25,7 @@ def generate_redirect(url):
         if "https" not in url:
             return url.replace("http", "https") + "spotify"
     return url + "spotify"
+
 
 class FlaskSessionCacheHandler(CacheHandler):
     """
@@ -44,7 +45,7 @@ class FlaskSessionCacheHandler(CacheHandler):
     def get_cached_token(self):
         token_info = None
         try:
-            token_info = session['token_info']
+            token_info = session["token_info"]
         except KeyError:
             print("Token not found in the session")
 
@@ -52,14 +53,41 @@ class FlaskSessionCacheHandler(CacheHandler):
 
     def save_token_to_cache(self, token_info):
         try:
-            session['token_info'] = token_info
+            session["token_info"] = token_info
         except Exception as e:
             print("Error saving token to cache: " + str(e))
 
 
+def get_spotify_auth():
+    try:
+        if "uuid" not in session.keys() or "token_info" not in session.keys():
+            return 0
+
+        cache_handler = FlaskSessionCacheHandler(CacheHandler)
+        SPOTIPY_REDIRECT_URI = generate_redirect(request.root_url)
+        auth_manager = spotipy.oauth2.SpotifyOAuth(
+            scope="user-read-currently-playing playlist-modify-private app-remote-control streaming",
+            cache_handler=cache_handler,
+            show_dialog=True,
+            client_id=SPOTIPY_CLIENT_ID,
+            client_secret=SPOTIPY_CLIENT_SECRET,
+            redirect_uri=SPOTIPY_REDIRECT_URI,
+        )
+
+        if not auth_manager.validate_token(cache_handler.get_cached_token()):
+            return 1
+
+        spotify = spotipy.Spotify(auth_manager=auth_manager)
+        return spotify
+
+    except SpotifyException as e:
+        if "not registered" in str(e):
+            return 3
+
+
 @main_blueprint.route("/spotify")
 @logged_in
-def spotify():
+def spotify_route():
     if not session.get("uuid"):
         # Step 1. Visitor is unknown, give random ID
         session["uuid"] = str(uuid.uuid4())
@@ -67,7 +95,7 @@ def spotify():
     cache_handler = FlaskSessionCacheHandler(CacheHandler())
     SPOTIPY_REDIRECT_URI = generate_redirect(request.root_url)
     auth_manager = spotipy.oauth2.SpotifyOAuth(
-        scope="user-read-currently-playing playlist-modify-private",
+        scope="user-read-currently-playing playlist-modify-private app-remote-control streaming",
         cache_handler=cache_handler,
         show_dialog=True,
         client_id=SPOTIPY_CLIENT_ID,
@@ -83,11 +111,14 @@ def spotify():
     if not auth_manager.validate_token(cache_handler.get_cached_token()):
         # Step 2. Display sign in link when no token
         auth_url = auth_manager.get_authorize_url()
-        return render_template("connectSpotify.html", auth=True, auth_url=auth_url)
+        return redirect(auth_url)
 
     # Step 4. Signed in, display data
     spotify = spotipy.Spotify(auth_manager=auth_manager)
-    return render_template("connectSpotify.html", spotify=spotify, auth=False)
+    return render_template(
+        "connections/connectSpotify.html", spotify=spotify, auth=False
+    )
+
 
 @main_blueprint.route("/spotify/sign_out")
 def spotify_sign_out():
@@ -102,10 +133,12 @@ def spotify_sign_out():
 
 @main_blueprint.route("/spotify/playlists")
 def spotify_playlists():
+    if "uuid" not in session.keys() or "token_info" not in session.keys():
+        return 2
     cache_handler = FlaskSessionCacheHandler(CacheHandler())
     SPOTIPY_REDIRECT_URI = generate_redirect(request.root_url)
     auth_manager = spotipy.oauth2.SpotifyOAuth(
-        scope="user-read-currently-playing playlist-modify-private",
+        scope="user-read-currently-playing playlist-modify-private app-remote-control streaming",
         cache_handler=cache_handler,
         show_dialog=True,
         client_id=SPOTIPY_CLIENT_ID,
@@ -122,24 +155,150 @@ def spotify_playlists():
 
 @main_blueprint.route("/spotify/currently_playing")
 def currently_playing():
-    cache_handler = FlaskSessionCacheHandler(CacheHandler)
-    SPOTIPY_REDIRECT_URI = generate_redirect(request.root_url)
-    auth_manager = spotipy.oauth2.SpotifyOAuth(
-        scope="user-read-currently-playing playlist-modify-private",
-        cache_handler=cache_handler,
-        show_dialog=True,
-        client_id=SPOTIPY_CLIENT_ID,
-        client_secret=SPOTIPY_CLIENT_SECRET,
-        redirect_uri=SPOTIPY_REDIRECT_URI,
-    )
+    return GET_currently_playing()
 
-    if not auth_manager.validate_token(cache_handler.get_cached_token()):
+
+def pause_spotify():
+    spotify = get_spotify_auth()
+
+    if spotify == 0:
+        return 2
+    elif spotify == 1:
         return redirect("/spotify")
-    spotify = spotipy.Spotify(auth_manager=auth_manager)
+
+    spotify.pause_playback()
+
+
+def next_spotify():
+    spotify = get_spotify_auth()
+
+    if spotify == 0:
+        return 2
+    elif spotify == 1:
+        return redirect("/spotify")
+
+    spotify.next_track()
+
+
+def prev_spotify():
+    spotify = get_spotify_auth()
+
+    if spotify == 0:
+        return 2
+    elif spotify == 1:
+        return redirect("/spotify")
+
+    spotify.previous_track()
+
+
+def loop_spotify():
+    spotify = get_spotify_auth()
+
+    if spotify == 0:
+        return 2
+    elif spotify == 1:
+        return redirect("/spotify")
+
+    spotify.repeat("track")
+
+
+def skip_spotify():
+    spotify = get_spotify_auth()
+
+    if spotify == 0:
+        return 2
+    elif spotify == 1:
+        return redirect("/spotify")
+
+
+def loop1_spotify():
+    spotify = get_spotify_auth()
+
+    if spotify == 0:
+        return 2
+    elif spotify == 1:
+        return redirect("/spotify")
+
+    spotify.repeat("context")
+
+
+def loop2_spotify():
+    spotify = get_spotify_auth()
+
+    if spotify == 0:
+        return 2
+    elif spotify == 1:
+        return redirect("/spotify")
+
+    spotify.repeat("off")
+
+
+def shuffle_spotify():
+    spotify = get_spotify_auth()
+
+    if spotify == 0:
+        return 2
+    elif spotify == 1:
+        return redirect("/spotify")
+
+    spotify.shuffle("true")
+
+
+def shuffle2_spotify():
+    spotify = get_spotify_auth()
+
+    if spotify == 0:
+        return 2
+    elif spotify == 1:
+        return redirect("/spotify")
+
+    spotify.shuffle("false")
+
+
+def get_song():
+    answer = GET_currently_playing()
+    if answer == 1:
+        return [1]
+    elif answer == 2:
+        return [2]
+    return answer
+
+
+def GET_currently_playing():
+    spotify = get_spotify_auth()
+
+    if spotify == 0:
+        return 2
+    elif spotify == 1:
+        return 3
+
     track = spotify.current_user_playing_track()
-    if not track is None:
-        return track
-    return "No track currently playing."
+    if track is not None:
+        timestamp = int(track["progress_ms"] // 1000)
+        total = int(track["item"]["duration_ms"] // 1000)
+        name = track["item"]["name"]
+        artists = []
+        explicit = track["item"]["explicit"]
+        for i in track["item"]["artists"]:
+            artists.append(i["name"])
+        image = track["item"]["album"]["images"][0]["url"]
+        album = track["item"]["album"]["name"]
+
+        playing = track["is_playing"]
+        return [name, artists, album, explicit, image, playing, timestamp, total]
+
+    return 1
+
+
+def resume_spotify():
+    spotify = get_spotify_auth()
+
+    if spotify == 0:
+        return 2
+    elif spotify == 1:
+        return redirect("/spotify")
+
+    spotify.start_playback()
 
 
 @main_blueprint.route("/spotify/current_user")
@@ -147,7 +306,7 @@ def spotify_current_user():
     cache_handler = FlaskSessionCacheHandler(CacheHandler)
     SPOTIPY_REDIRECT_URI = generate_redirect(request.root_url)
     auth_manager = spotipy.oauth2.SpotifyOAuth(
-        scope="user-read-currently-playing playlist-modify-private",
+        scope="user-read-currently-playing playlist-modify-private app-remote-control streaming",
         cache_handler=cache_handler,
         show_dialog=True,
         client_id=SPOTIPY_CLIENT_ID,
@@ -158,4 +317,5 @@ def spotify_current_user():
     if not auth_manager.validate_token(cache_handler.get_cached_token()):
         return redirect("/spotify")
     spotify = spotipy.Spotify(auth_manager=auth_manager)
+
     return spotify.current_user()

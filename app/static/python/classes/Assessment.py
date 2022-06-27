@@ -14,7 +14,7 @@ class Assessment(Snowflake):
 
     """
 
-    meta = {"collection": "assessments"}
+    meta = {"collection": "Assessments"}
     course = ReferenceField(
         "Course", required=True, description="The course that this assignment is in."
     )

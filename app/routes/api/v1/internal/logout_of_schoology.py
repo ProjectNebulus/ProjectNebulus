@@ -7,12 +7,35 @@ from .....static.python.mongodb import update, read
 
 @internal.route("/logout-of-schoology")
 def logout_from_schoology2():
-    session["schoologyEmail"] = None
-    session["schoologyName"] = None
-    session["token"] = None
-    session["request_token"] = None
-    session["request_token_secret"] = None
-    session["access_token_secret"] = None
-    session["access_token"] = None
-    update.logout_from_schoology(read.find_user(username=session["username"]).id)
+    try:
+        session.pop("schoologyEmail")
+    except:
+        pass
+    try:
+        session.pop("schoologyName")
+    except:
+        pass
+    try:
+        session.pop("token")
+    except:
+        pass
+    try:
+        session.pop("request_token")
+    except:
+        pass
+    try:
+        session.pop("request_token_secret")
+    except:
+        pass
+    try:
+        session.pop("access_token_secret")
+    except:
+        pass
+    try:
+        session.pop("access_token")
+    except:
+        pass
+    user = read.find_user(username=session["username"])
+
+    update.logout_from_schoology(user.id, user.schoology[0])
     return redirect("/settings")

@@ -5,7 +5,7 @@ from graphene.types import generic
 
 
 class UpdateAvatarInput(graphene.InputObjectType):
-    avatar_url = graphene.String()
+    url = graphene.String()
 
 
 class UpdateCourseInput(graphene.InputObjectType):

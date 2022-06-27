@@ -3,15 +3,13 @@ import re
 from flask import session, request
 
 from . import internal
-from ....main.utils import private_endpoint
 from .....static.python.mongodb import read
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 
 
 @internal.route("/check-signin", methods=["POST"])
-def signin_username():
-    # print("I'm here")
+def checkSignin():
     json = request.get_json()
     validation = read.check_password_username(
         json.get("username"), json.get("password")
@@ -27,8 +25,9 @@ def signin_username():
             user = read.find_user(username=json.get("username"))
 
         session["username"] = user.username
+        session["pswLen"] = len(json.get("password"))
         session["email"] = user.email
-        session["password"] = json.get("password")
+        session["avatar"] = user.avatar.avatar_url
         session["id"] = user.id
 
     return validation

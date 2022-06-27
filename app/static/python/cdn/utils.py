@@ -1,13 +1,15 @@
-from spaces import Client
-import requests
 import os
 
-ACCESS_ID = "VCRH4QOPCDEQR5PFNPQM"
-SECRET_KEY = "Vx3pqPbLTGlSvNAhfxPFDto8CskcWOXOjvcW0ziwXys"
+import requests
+
+# from spaces import Client
+
+ACCESS_ID = "5POV4IR5H2XWALCF7KWY"
+SECRET_KEY = "j7k9MO7SXueLeEbkXdYBAlaZ7XfC1EMdqV3w9KrceHQ"
 
 
 def upload_file(path, filename, bucket_folder):
-    # Initiate session
+
     client = Client(
         region_name="sfo3",
         space_name="nebulus-cdn",
@@ -24,15 +26,16 @@ def upload_file(path, filename, bucket_folder):
     )
 
 
-def upload_file_link(url):
+def upload_file_link(url, file_name):
     try:
-        name = url.split("/")[-1]
         r = requests.get(url, allow_redirects=True)
-        open(name, "wb").write(r.content)
-        upload_file(name, name)
-        os.remove(name)
+        open(file_name, "wb").write(r.content)
+        upload_file(file_name, file_name, "Documents")
+        os.remove(file_name)
         return True
-    except:
+
+    except Exception as e:
+        print(e)
         return False
 
 

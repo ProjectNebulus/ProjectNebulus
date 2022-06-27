@@ -36,28 +36,40 @@ $ brew install python@3.10
 
 #### Linux
 
+## Ubuntu / Debian
+
 ```bash
-$ sudo apt install software-properties-common -y
-$ sudo add-apt-repository ppa:deadsnakes/ppa -y
-$ sudo apt install python3.10
+$ sudo apt install python3
 ```
 
-### [Install Poetry](https://python-poetry.org/docs/#installation)
+## Arch Linux
+
+```bash
+$ sudo pacman -S python3
+```
+
+## Other Distros
+
+Install using preferred package manager.
+
+### [Install Poetry](https://python-poetry.org/docs/#installation) (Not needed currently, but might be needed later)
 
 ### Install Dependencies
 
 ```bash
-$ poetry install
+$ pip install -r requirements.txt
 ```
 
 ### Run
 
 ```bash
-$ python3 oldmain.py
+$ python3 main.py
 ```
 
 ## Setup (docker)
 
-wip
+You can grab the [pre-built version](https://github.com/ProjectNebulus/ProjectNebulus/actions/workflows/docker-image.yml) or build the docker container from scratch. You can build it just like any other docker container, but you **must** remember to turn off cache. The website should automatically start on port 8080. If you encounter any problems, file an issue.
+
 ## Website
-Go to [this link](https://project-nebulus.nicholasxwang.repl.co/)!
+Main Site [this link](https://beta.nebulus.ml/)!
+Repl.it Site [this link](https://project-nebulus.nicholasxwang.repl.co/)!

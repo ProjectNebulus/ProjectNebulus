@@ -1,9 +1,5 @@
-from flask import Blueprint, session, request
-import codecs
-import random
-import os
-import smtplib
-from flask_mail import Mail, Message
+from flask import session
+
 from . import internal
 
 

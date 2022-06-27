@@ -1,38 +1,28 @@
-from flask import render_template, session, request
-
-from . import main_blueprint
-from .utils import logged_in
-from ...static.python.mongodb import read
-import os
-import flask
-import requests
+import datetime
 
 import google.oauth2.credentials
-import google_auth_oauthlib.flow
-import googleapiclient.discovery
-
-import os.path
-
-from google.auth.transport.requests import Request
-from google.oauth2.credentials import Credentials
-from google_auth_oauthlib.flow import InstalledAppFlow
+from flask import render_template, session
 from googleapiclient.discovery import build
-from googleapiclient.errors import HttpError
+
+from . import main_blueprint, utils
+from .utils import logged_in
+from ...static.python.mongodb import read
 
 
 def credentials_to_dict(credentials):
-    return {'token': credentials.token,
-            'refresh_token': credentials.refresh_token,
-            'token_uri': credentials.token_uri,
-            'client_id': credentials.client_id,
-            'client_secret': credentials.client_secret,
-            'scopes': credentials.scopes}
+    return {
+        "token": credentials.token,
+        "refresh_token": credentials.refresh_token,
+        "token_uri": credentials.token_uri,
+        "client_id": credentials.client_id,
+        "client_secret": credentials.client_secret,
+        "scopes": credentials.scopes,
+    }
 
 
 def getGclassroomcourses():
     # Load credentials from the session.
-    credentials = google.oauth2.credentials.Credentials(
-        **session['credentials'])
+    credentials = google.oauth2.credentials.Credentials(**session["credentials"])
 
     service = build("classroom", "v1", credentials=credentials)
 
@@ -43,22 +33,36 @@ def getGclassroomcourses():
     # Save credentials back to session in case access token was refreshed.
     # ACTION ITEM: In a production app, you likely want to save these
     #              credentials in a persistent database instead.
-    flask.session['credentials'] = credentials_to_dict(credentials)
+    session["credentials"] = credentials_to_dict(credentials)
     for i in range(0, len(courses)):
-        courses[i] = courses[i]["descriptionHeading"]
+        courseid = courses[i]["id"]
+        courses[i] = [
+            courses[i]["descriptionHeading"],
+            f'{courses[i]["alternateLink"]}?id={courses[i]["id"]}',
+        ]
+
+        # teachers = service.courses().teachers(courseId=courseid).list(pageSize=10).execute()
+        rawteachers = (
+            service.courses().teachers().list(pageSize=10, courseId=courseid).execute()
+        )
+        theteachers = []
+        for j in rawteachers["teachers"]:
+            theteachers.append(j["profile"]["name"]["fullName"])
+        theteachers = str(theteachers).strip("[").strip("]").replace("'", "")
+        courses[i].append(theteachers)
 
     return courses
+
+
 @main_blueprint.route("/lms", methods=["GET"])
 @logged_in
 def lms():
-    new_user = request.args.get("new_user", default="false", type=str)
+    from app.static.python.classes import Event
+
     user_acc = read.find_user(id=session["id"])
     user_courses = read.get_user_courses(session["id"])
-    # print(str(read.sort_user_events(session["id"])))
-    # return str(read.sort_user_events(session["id"]))
-    sorted = read.sort_user_events(session["id"])
-    print(sorted)
-    print(sorted[0])
+    events = read.sort_user_events(session["id"])
+
     try:
         gcourses = getGclassroomcourses()
     except:
@@ -67,67 +71,88 @@ def lms():
     canvascourses = []
     try:
         from canvasapi import Canvas
+
         API_URL = session["canvas_link"]
         API_KEY = session["canvas_key"]
         canvas = Canvas(API_URL, API_KEY)
         account = canvas.get_user(user="self")
         courses = account.get_courses()
-        for course in courses:
-            canvascourses.append(course.name)
-    except:
+        for course in courses[:5]:
+            original_name = ""
+            try:
+                original_name = course.original_name
+            except:
+                original_name = course.name
+            canvascourses.append(
+                [course.name, f"{API_URL}/course/{course.id}", original_name]
+            )
+    except Exception as e:
         canvascourses = []
 
-    schoologycourses = []
+    scCourses = []
     import schoolopy
+
     try:
-        request_token = session["request_token"]
-        request_token_secret = session["request_token_secret"]
-        access_token_secret = session["access_token_secret"]
-        access_token = session["access_token"]
-        key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
-        secret = "59ccaaeb93ba02570b1281e1b0a90e18"
-        link = session["Schoologydomain"]
-        auth = schoolopy.Auth(
-            key,
-            secret,
-            domain=link,
-            three_legged=True,
-            request_token=request_token,
-            request_token_secret=request_token_secret,
-            access_token=access_token,
-            access_token_secret=access_token_secret,
-        )
-        # auth.authorize()
-        # if not auth.authorized:
-        #     schoologycourses = []
-        #     print("Not Authorized")
-        # else:
-        auth.authorize()
-        auth.authorize()
-        auth.authorized = True
-        sc = schoolopy.Schoology(auth)
-        print(sc.get_sections())
-        schoologycourses = list(sc.get_sections())
-    except:
-        try:
-            sc = session["theschoology"]
-            print(sc.get_sections())
-            schoologycourses = list(sc.get_sections())
-        except:
-            schoologycourses = []
+        schoology = read.getSchoology(username=session["username"])
+        if len(schoology) > 0:
+            schoology = schoology[0]
+            key = schoology.apikey
+            secret = schoology.apisecret
+            if not key or not secret:
+                key = session.get("request_token")
+                secret = session.get("request_token_secret")
+
+            if not key or not secret:
+                key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
+                secret = "59ccaaeb93ba02570b1281e1b0a90e18"
+                print("Key or Secret missing for user", session["username"])
+
+            auth = schoolopy.Auth(
+                key,
+                secret,
+                domain=schoology.schoologyDomain,
+                three_legged=True,
+                request_token=schoology.Schoology_request_token,
+                request_token_secret=schoology.Schoology_request_secret,
+                access_token=schoology.Schoology_access_token,
+                access_token_secret=schoology.Schoology_access_secret,
+            )
+            auth.authorize()
+            sc = schoolopy.Schoology(auth)
+            sc.limit = "100&include_past=1"
+            scCourses = list(sc.get_user_sections(user_id=sc.get_me().id))[:5]
+            for i in range(0, len(scCourses)):
+                scCourses[i] = dict(scCourses[i])
+                scCourses[i]["link"] = (
+                    schoology.schoologyDomain
+                    + "course/"
+                    + scCourses[i]["id"]
+                    + "/materials"
+                )
+            scSchool = sc.get_school(scCourses[0]["school_id"])
+            scCourses.append(scSchool)
+    except Exception as e:
+        print(session)
+        print(e)
+        scCourses = []
 
     return render_template(
-        "lms.html",
-        password=session["password"],
+        "learning/learning.html",
         user=session["username"],
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         user_acc=user_acc,
-        user_courses=user_courses,
+        user_courses=list(user_courses)[:5],
         read=read,
         page="Nebulus - Learning",
-        new_account=new_user == "true",
-        announcements=sorted[0][0],
-        events=sorted[1][0],
+        announcements=events[0],
+        events=events[1],
+        today=datetime.date.today(),
+        strftime=utils.strftime,
         gcourses=gcourses,
         canvascourses=canvascourses,
-        schoologycourses=schoologycourses
+        schoologycourses=scCourses,
+        enumerate=enumerate,
+        Event=Event,
+        pastschoologycourses=scCourses,
     )

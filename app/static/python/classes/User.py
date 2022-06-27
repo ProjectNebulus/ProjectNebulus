@@ -2,15 +2,17 @@ from datetime import datetime
 
 from mongoengine import *
 
-from app.static.python.security import hash256
-
+from app.static.python.utils.security import hash256
 from .Avatar import Avatar
-from .Schoology import Schoology
-from .GoogleClassroom import GoogleClassroom
-from .Spotify import Spotify
-from .Discord import Discord
 from .Canvas import Canvas
+from .Discord import Discord
+from .GoogleClassroom import GoogleClassroom
+from .NebulusDocuments import NebulusDocument
+from .Planner import Planner
+from .Schoology import Schoology
 from .Snowflake import Snowflake
+from .Spotify import Spotify
+from .ChatProfile import ChatProfile
 
 
 class User(Snowflake):
@@ -45,23 +47,43 @@ class User(Snowflake):
     age = DateTimeField(required=True)
     theme = StringField(required=True, default="System Default")
     language = StringField(required=True, default="English (United States)")
-    created_at = DateTimeField(default=datetime.now())
+    created_at = DateTimeField(default=lambda: datetime.now())
+
     # optional params
     schoology = ListField(EmbeddedDocumentField(Schoology, default=None, null=True))
-    gclassroom = ListField(EmbeddedDocumentField(GoogleClassroom, default=None, null=True))
+    gclassroom = ListField(
+        EmbeddedDocumentField(GoogleClassroom, default=None, null=True)
+    )
     spotify = ListField(EmbeddedDocumentField(Spotify, default=None, null=True))
     discord = ListField(EmbeddedDocumentField(Discord, default=None, null=True))
     canvas = ListField(EmbeddedDocumentField(Canvas, default=None, null=True))
-    avatar = EmbeddedDocumentField(Avatar, default=None, null=True)
+    avatar = EmbeddedDocumentField(
+        Avatar,
+        default=Avatar(avatar_url="/static/images/nebulusCats/v3.gif", parent="User"),
+    )
     bio = StringField(default="", null=True)
     premium_expiration = DateTimeField(required=False, default=None, null=True)
     status = StringField(default="", null=True)
-    courses = ListField(ReferenceField("Course"), default=[], null=True)
+    courses = ListField(ReferenceField("Course"), default=[])
+    planner = EmbeddedDocumentField(Planner, null=True, default=None)
+    nebulus_documents = ListField(ReferenceField(NebulusDocument), default=[])
     points = IntField(default=0)
     premium = BooleanField(default=False)
     is_staff = BooleanField(default=False)
     student = BooleanField(default=True)
     teacher = BooleanField(default=False)
+    chats = ListField(ReferenceField("Chat"), default=[])
+    chatProfile = EmbeddedDocumentField(ChatProfile)
 
     def clean(self):
         self.password = hash256(self.password)
+        self.avatar.avatar_url = (
+            self.avatar.avatar_url.replace("http://localhost:8080", "")
+            .replace("https://localhost:8080", "")
+            .replace("https://beta.nebulus.ml", "")
+        )
+
+        if "static/images/nebulusCats" not in self.avatar.avatar_url:
+            self.avatar.avatar_url = (
+                "/static/images/nebulusCats" + self.avatar.avatar_url
+            )

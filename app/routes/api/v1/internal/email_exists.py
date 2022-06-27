@@ -1,7 +1,7 @@
-from . import internal
-from .....static.python.mongodb.read import find_user
-from .....static.python.classes.User import User
 from flask import request
+
+from . import internal
+from .....static.python.classes.User import User
 
 
 @internal.route("/email-exists", methods=["POST"])
@@ -11,6 +11,5 @@ def email_exists():
     user = User.objects(email=user)
     print(user)
     print(len(user) == 1)
-    if len(user) == 1:
-        return "True"
-    return "False"
+
+    return str(len(user) == 1)

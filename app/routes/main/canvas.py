@@ -1,17 +1,15 @@
-from flask import render_template, session, request
+from flask import render_template, session, request, redirect
 
 from . import main_blueprint
 from .utils import logged_in
-from ...static.python.mongodb import read
-import schoolopy
-from ...static.python.canvas import *
+from app.static.python.extensions.integrations.canvas import *
 
 
 @main_blueprint.route("/canvas", methods=["GET"])
 @logged_in
 def canvasConnect():
     # Open OAuth authorization webpage. Give time to authorize.
-    return render_template("connectCanvas.html")
+    return render_template("connections/connectCanvas.html")
 
 
 @main_blueprint.route("/canvas", methods=["POST"])
@@ -22,4 +20,6 @@ def canvasConnect2():
         session["canvas"] = str(a)
         session["canvas_key"] = request.form.get("key")
         session["canvas_link"] = request.form.get("link")
-    return "<script>window.close();</script>"
+    else:
+        return redirect("/canvas")
+    return render_template("connections/connectCanvas.html", done=str(a))

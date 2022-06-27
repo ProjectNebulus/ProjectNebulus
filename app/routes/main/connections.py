@@ -1,10 +1,12 @@
-from . import main_blueprint
-from flask import render_template, session, request
-from ...static.python.mongodb import getClassroom
+import httplib2
 import schoolopy
+from flask import render_template, session, request
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
+
+from . import main_blueprint
 
 
 @main_blueprint.route("/connections/schoology")
@@ -27,7 +29,7 @@ def schoology():
     session["access_token"] = auth.access_token
 
     # Open OAuth authorization webpage. Give time to authorize.
-    return render_template("connectSchoology.html", url=url)
+    return render_template("connections/connectSchoology.html", url=url)
 
 
 @main_blueprint.route("/connections/google-classroom")
@@ -50,11 +52,21 @@ def g_classroom_auth():
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
-            flow = InstalledAppFlow.from_client_secrets_file("credentials.json", scope)
-            flow.redirect_uri = "http://localhost:8080"
+            flow = InstalledAppFlow.from_client_secrets_file(
+                "app/static/python/credentials.json", scope
+            )
+            flow.redirect_uri = ""
             print(flow)
             creds = flow.authorization_url()
             creds = str(creds).replace("(", "").replace(")", "").replace("'", "")
             print(creds)
-
-    return render_template("connectClassroom.html", link=creds)
+    user_info_service = build(
+        serviceName="oauth2", version="v2", http=creds.authorize(httplib2.Http())
+    )
+    user_info = None
+    user_info = user_info_service.userinfo().get().execute()
+    print(user_info)
+    user_info = [user_info["name"], user_info["picture"]]
+    return render_template(
+        "connections/connectClassroom.html", link=creds, data=user_info
+    )

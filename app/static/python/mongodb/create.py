@@ -1,29 +1,15 @@
-from __future__ import annotations
-
 from typing import List
 
 from dotenv import load_dotenv
 from flask import session
 
 from . import read
+from ..classes.NebulusDocuments import NebulusDocument
 
 load_dotenv()
 import schoolopy
 
-from ..classes.Announcement import Announcement
-from ..classes.Assignment import Assignment
-from ..classes.Course import Course
-from ..classes.Document import DocumentFile
-from ..classes.Events import Event
-from ..classes.Folder import Folder
-from ..classes.Grades import Grades
-from ..classes.User import User
-from ..classes.Avatar import Avatar
-from ..classes.Textbook import Textbook
-from ..classes.Discord import Discord
-from ..classes.Canvas import Canvas
-from ..classes.Spotify import Spotify
-from ..classes.GoogleClassroom import GoogleClassroom
+from ..classes import *
 from .read import find_user
 
 
@@ -54,12 +40,15 @@ def generateSchoologyObject(_id: str) -> schoolopy.Schoology:
 
 
 def create_course(data: dict) -> Course:
-    user = read.find_user(username=data["username"])
-    del data["username"]
+    user = read.find_user(id=session["id"])
+
+    if data.get("avatar"):
+        data["avatar"] = Avatar(avatar_url=data["avatar"])
 
     course = Course(**data)
-    course.authorizedUsers.append(user)
-    course.save(force_insert=True)
+    if not data.get("authorizedUsers"):
+        course.authorizedUsers.append(user)
+    course.save(force_insert=True, validate=False)
     return course
 
 
@@ -71,7 +60,6 @@ def create_user(data: dict) -> str | List[str | User]:
     2: Username already exists
     3: Email already exists
     """
-    # password = hash256(password)
     user = User(**data)
     if User.objects(username=user.username, email=user.email):
         return "1"
@@ -90,6 +78,20 @@ def createEvent(data: dict) -> Event:
     course.events.append(event)
     course.save()
     return event
+
+
+def createNebulusDocument(data: dict, user_id: str) -> NebulusDocument:
+    data["owner"] = user_id
+    doc = NebulusDocument(**data)
+
+    doc.save(force_insert=True)
+    for user in doc.authorizedUsers:
+        user.nebulus_documents.append(doc)
+        user.save()
+
+    doc.owner.nebulus_documents.append(doc)
+    doc.owner.save()
+    return doc
 
 
 def createAssignment(data: dict) -> Assignment:
@@ -126,7 +128,7 @@ def createDocumentFile(data: dict) -> DocumentFile:
         folder.documents.append(document_file)
         folder.save()
     else:
-        raise Exception("Cannot create document file without either course or folder")
+        raise Exception("Cannot course document file without either course or folder")
 
     return document_file
 
@@ -145,7 +147,7 @@ def createAnnouncement(data: dict) -> Announcement:
     announcement.save(force_insert=True)
     course = announcement.course
     course.announcements.append(announcement)
-    course.save()
+    course.save(validate=False)
     return announcement
 
 
@@ -156,10 +158,16 @@ def createAvatar(data: dict) -> Avatar:
         parent = Course.objects(id=data["parent_id"]).first()
     else:
         parent = Textbook.objects(id=data["parent_id"]).first()
-    file_ending = data["file_ending"]
-    del data["parent_id"], data["file_ending"]
+    file_ending = ""
+    if data.get("file_ending"):
+        file_ending = data["file_ending"]
+        del data["file_ending"]
+
+    del data["parent_id"]
     avatar = Avatar(**data)
-    avatar.avatar_url += "." + file_ending
+    if file_ending != "":
+        avatar.avatar_url += "." + file_ending
+
     parent.avatar = avatar
     parent.save()
     return avatar
@@ -193,3 +201,60 @@ def createGoogleClassroomConnection(user_id: str, data: dict) -> GoogleClassroom
     return user.gclassroom[-1]
 
 
+def createChat(data: dict) -> Chat:
+    chat = Chat(**data)
+    chat.save(force_insert=True)
+    for member in chat.members:
+        member.chats.append(chat)
+        member.save()
+
+    return chat
+
+
+def createIntegration(data: dict) -> Integration:
+    integration = Integration(**data)
+    integration.save(force_insert=True)
+    return integration
+
+
+def installIntegration(courseID: int, integrationID: int):
+    course = Course.objects.get(pk=courseID)
+    integration = Integration.objects.get(pk=integrationID)
+    course.integrations.append(integration)
+
+
+def sendMessage(data: dict, chat_id: str):
+    message = Message(**data)
+    chat = Chat.objects.get(pk=chat_id)
+    chat.messages.append(message)
+    chat.save()
+    return message
+
+
+def pinMessage(message_id, chat_id):
+    chat = Chat.objects(pk=chat_id)
+    message = list(filter(lambda x: x.id == message_id, Chat.messages))[0]
+    chat.pinned_messages.append(message)
+    chat.save()
+
+
+def sendFriendRequest(user_id, reciever_id):
+    user = User.objects.get(pk=user_id)
+    reciever = User.objects.get(pk=reciever_id)
+    if not reciever.chatProfile.acceptingFriendRequests:
+        return "0"
+    user.chatProfile.outgoingFriendRequests.append(reciever)
+    reciever.incomingFriendrequests.append(user)
+    user.save()
+    reciever.save()
+
+
+def acceptFriendRequest(reciever_id, sender_id):
+    reciever = User.objects.get(pk=reciever_id)
+    sender = User.objects.get(pk=sender_id)
+    reciever.chatProfile.incomingFriendRequests.remove(sender)
+    sender.chatProfile.outgoingFriendRequests.remove(reciever)
+    reciever.chatProfile.friends.append(sender)
+    sender.chatProfile.friends.append(reciever)
+    sender.save()
+    reciever.save()

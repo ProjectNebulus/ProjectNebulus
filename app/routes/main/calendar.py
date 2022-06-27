@@ -8,9 +8,9 @@ from .utils import logged_in
 @logged_in
 def calendar():
     return render_template(
-        "calendar.html",
-        password=session["password"],
+        "tools/calendar.html",
         user=session["username"],
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         email=session["email"],
         page="Nebulus - Calendar",
     )

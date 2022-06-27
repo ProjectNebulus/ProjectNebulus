@@ -1,14 +1,26 @@
+
 module.exports = {
+    purge: false,
     darkMode: 'class',
-    content: ['./templates/**/*.html', './static/**/*.{js,css}', './node_modules/flowbite/**/*.js'],
+    content: ['./app/templates/**/*.html', './app/static/**/*.{js,css}', './app/static/flowbite/**/*.js'],
     theme: {
-        extend: {}
+            fontFamily: {
+                sans: ['Spotify-Font', "Noto Sans", "Noto Sans SC", "Noto Sans TC", "Noto Sans JP",  "Noto Sans KR",  "Noto Sans Thai", "sans-serif"],
+            },
+            fontSize: {
+                'body-lg': '1rem',
+                'body': '.875rem',
+            },
+        extend: {
+        }
+
     },
     plugins: [
         require('@tailwindcss/typography'),
         require('@tailwindcss/forms'),
         require('@tailwindcss/line-clamp'),
         require('@tailwindcss/aspect-ratio'),
-        require('flowbite/plugin')
+        require('./app/static/flowbite/plugin'),
+        require('@tailwindcss/line-clamp'),
     ]
 };

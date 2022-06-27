@@ -1,4 +1,5 @@
 import flask
+
 from .. import api_blueprint
 
 v1 = flask.Blueprint(
@@ -10,4 +11,4 @@ v1 = flask.Blueprint(
 )
 api_blueprint.register_blueprint(v1)
 
-from . import internal
+from .internal import *
