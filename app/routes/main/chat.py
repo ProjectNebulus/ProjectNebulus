@@ -33,7 +33,7 @@ def chatPage(page):
     return render_template(
         f"/chat/{page}.html",
         page="Nebulus - Chat",
-        user=user['username'],
+        user=user["username"],
         user_obj=user,
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         email=session.get("email"),

@@ -1,29 +1,9 @@
 io = window.io
 
 
-function createChat(username) {
+function createChat(members) {
     document.getElementById("dropdown").style.display = "none";
-    const request = $.ajax({
-        type: "POST",
-        url: "/api/v1/internal/create-chat-dm",
-        data: JSON.stringify({
-            member: username
-        }),
-
-        contentType: 'application/json; charset=utf-8',
-    });
-    //refresh bar
-    document.getElementById("user-chats").innerHTML = "";
-    $.ajax({
-        url: '/api/v1/internal/fetch-chats',
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify({
-            index: chatAmount
-        })
-
-
-    }).done(load);
+    socket.emit('new_chat', {'members': members})
 }
 
 function changeSearch() {
@@ -155,6 +135,7 @@ $(document).ready(function () {
     socket.on('new_chat', function(data){
         let el = document.getElementById('user-chats');
         el.innerHTML = "";
+
         socket.emit('join_a_room', data['id'])
     })
     socket.on('new_message', function(data){

@@ -12,25 +12,27 @@ from .....static.python.classes import User
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 
 
-@socketio.event(namespace='/chat')
+@socketio.event(namespace="/chat")
 def user_status_change(data):
     print(data)
-    if data['chatType'] == 'chat':
-        update.set_status(session['id'], data['status'])
-        socketio.emit('user_status_change', {'status': data['status'], 'userID': session['id']})
+    if data["chatType"] == "chat":
+        update.set_status(session["id"], data["status"])
+        socketio.emit(
+            "user_status_change", {"status": data["status"], "userID": session["id"]}
+        )
+
 
 @socketio.event(namespace="/chat")
 def new_message(json_data):
     if json_data["chatType"] == "chat":
         chatID = json_data["chatID"]
         del json_data["chatID"], json_data["chatType"]
-        json_data['sender'] = session['id']
+        json_data["sender"] = session["id"]
         message = create.sendMessage(json_data, chatID)
         chat = read.getChat(chatID)
         chat.lastEdited = datetime.datetime.now()
         chat.save()
-        send_date = message.send_date.strftime(
-            "%m/%d/%Y at %H:%M:%S")
+        send_date = message.send_date.strftime("%m/%d/%Y at %H:%M:%S")
         sender = read.find_user(id=json_data["sender"])
         print("user sent a message")
         emit(
@@ -40,9 +42,9 @@ def new_message(json_data):
                 "content": json_data["content"],
                 "id": message.id,
                 "send_date": send_date,
-                "chatID": chatID
+                "chatID": chatID,
             },
-            room=chatID
+            room=chatID,
         )
     else:
         # TODO: Create message for communities
@@ -89,21 +91,21 @@ def user_left(json_data):
 
 @socketio.event(namespace="/chat")
 def user_loaded(json_data):
-    print('loaded user')
+    print("loaded user")
     chats = [x.id for x in read.find_user(pk=session["id"]).chats]
     for chat in chats:
         join_room(chat)
-    emit('user_loaded', {'msg': 'User loaded into rooms'})
+    emit("user_loaded", {"msg": "User loaded into rooms"})
 
 
 @socketio.event(namespace="/chat")
 def user_unloaded(json_data):
-    print('unloaded user')
+    print("unloaded user")
     chats = [x.id for x in read.find_user(pk=session["id"]).chats]
     for chat in chats:
         leave_room(chat)
 
-    emit('user_unloaded', {'msg': 'User unloaded from rooms'})
+    emit("user_unloaded", {"msg": "User unloaded from rooms"})
 
 
 @socketio.event(namespace="/chat")
@@ -113,9 +115,7 @@ def message_edited(json_data):
         chatID = json_data["chatID"]
         del json_data["chatID"], json_data["chatType"]
         update.editMessage(chatID, json_data["message_id"], json_data["content"])
-        emit(
-            "message edited", {"new_content": json_data["content"]}, room=chatID
-        )
+        emit("message edited", {"new_content": json_data["content"]}, room=chatID)
     else:
         # TODO: Edit message for communities
         pass
@@ -127,25 +127,45 @@ def message_deleted(json_data):
         chatID = json_data["chatID"]
         del json_data["chatID"], json_data["chatType"]
         delete.deleteMessage(message_id=json_data["messageID"], chat_id=chatID)
-        emit(
-            "message deleted", {"message_id": json_data["messageID"]}, room=chatID
-        )
+        emit("message deleted", {"message_id": json_data["messageID"]}, room=chatID)
     else:
         # TODO: Edit message for communities
         pass
 
-@socketio.event(namespace='/chat')
-def new_chat(data):
-    chat_data = {
-        "owner": session["username"],
-        "members": [
-            session["username"],
-            data["member"]
-        ]
-    }
-    chat = create.createChat(chat_data)
 
-    socketio.emit('new_chat', {"id":chat.id})
+@socketio.event(namespace="/chat")
+def new_chat(data):
+    data = {
+        "owner": session["username"],
+        "members": [session["username"], *data["members"]],
+    }
+    chat = create.createChat(data)
+    chat_data = {
+            "id": chat.id,
+            "avatar": {"avatar_url": chat.avatar.avatar_url},
+            "title": chat.title,
+            "lastEdited": chat.lastEdited,
+            "owner": chat.owner
+            "members": chat.members
+        }
+
+    if len(chat.members) == 2:
+        for x, member in enumerate(chat["members"]):
+            chat["members"][x] = json.loads(
+                User.objects.only(
+                    "id", "chatProfile", "username", "avatar.avatar_url"
+                )
+                    .get(pk=member)
+                    .to_json()
+            )
+        chat["owner"] = list(
+            filter(lambda x: x["_id"] == chat["owner"], chat["members"])
+        )[0]
+
+    socketio.emit(
+        "new_chat",
+        chat_data,
+    )
 
 
 @internal.route("/change-status", methods=["POST"])
@@ -172,31 +192,12 @@ def mute():
     return update.muteChat(session["id"], json_data["chat_id"])
 
 
-@internal.route("/create-chat", methods=["POST"])
-def createChat():
-    json_data = request.get_json()
-    return create.createChat(**json_data)
-
-
-@internal.route("/create-chat-dm", methods=["POST"])
-def createChatDms():
-    json_data = request.get_json()
-    data = {
-        "owner": session["username"],
-        "members": [
-            session["username"],
-            json_data["member"]
-        ]
-    }
-    return create.createChat(**data)
-
-
-@socketio.event(namespace='/chat')
+@socketio.event(namespace="/chat")
 def join_a_room(data):
-    join_room(data['id'])
+    join_room(data["id"])
 
 
-@internal.route("/fetch-chats", methods=['POST'])
+@internal.route("/fetch-chats", methods=["POST"])
 def fetchChats():
     data = request.get_json()
     current_index = data["index"]
@@ -210,56 +211,77 @@ def fetchChats():
     return jsonify(chats)
 
 
-@internal.route("/get-chat", methods=['POST'])
+@internal.route("/get-chat", methods=["POST"])
 def getChat():
     import datetime
+
     data = request.get_json()
     chatID = data["chatID"]
     print(chatID)
     chat = json.loads(read.getChat(chatID).to_json())
-    chat['messages'] = list(reversed(chat['messages']))[:20]
+    chat["messages"] = list(reversed(chat["messages"]))[:20]
 
-    for message in chat['messages']:
+    for message in chat["messages"]:
         message["sender"] = json.loads(
-            User.objects.only('id', 'username', 'avatar.avatar_url').get(pk=message["sender"]).to_json())
-        message["send_date"] = datetime.datetime.fromtimestamp(message["send_date"]["$date"]/1000).strftime("%m/%d/%Y at %H:%M:%S")
+            User.objects.only("id", "username", "avatar.avatar_url")
+            .get(pk=message["sender"])
+            .to_json()
+        )
+        message["send_date"] = datetime.datetime.fromtimestamp(
+            message["send_date"]["$date"] / 1000
+        ).strftime("%m/%d/%Y at %H:%M:%S")
 
-    for n, member in enumerate(chat['members']):
-        chat['members'][n] = json.loads((User.objects.only('id', 'username', 'chatProfile', 'avatar.avatar_url').get(pk=member)).to_json())
-    chat['members'] = sorted(chat['members'], key=lambda x: x["username"])
+    for n, member in enumerate(chat["members"]):
+        chat["members"][n] = json.loads(
+            (
+                User.objects.only(
+                    "id", "username", "chatProfile", "avatar.avatar_url"
+                ).get(pk=member)
+            ).to_json()
+        )
+    chat["members"] = sorted(chat["members"], key=lambda x: x["username"])
 
     return jsonify(chat)
 
 
-@internal.route("/fetch-messages", methods=['POST'])
+@internal.route("/fetch-messages", methods=["POST"])
 def fetchMessages():
     data = request.get_json()
     print(data)
     chatID = data["chatID"]
     chat = json.loads(read.getChat(chatID).to_json())
-    if len(chat['messages']) < data['current_index']+20:
-        print(len(chat['messages']))
-        chat['messages'] = list(reversed(chat['messages']))[data['current_index']:len(chat['messages'])]
+    if len(chat["messages"]) < data["current_index"] + 20:
+        print(len(chat["messages"]))
+        chat["messages"] = list(reversed(chat["messages"]))[
+            data["current_index"] : len(chat["messages"])
+        ]
     else:
-        chat['messages'] = list(reversed(chat['messages']))[data['current_index']:(data['current_index']+30)]
+        chat["messages"] = list(reversed(chat["messages"]))[
+            data["current_index"] : (data["current_index"] + 30)
+        ]
 
-    for message in chat['messages']:
+    for message in chat["messages"]:
         message["sender"] = json.loads(
-            User.objects.only('id', 'username', 'avatar.avatar_url').get(pk=message["sender"]).to_json())
-        message["send_date"] = datetime.datetime.fromtimestamp(message["send_date"]["$date"] / 1000).strftime(
-            "%m/%d/%Y at %H:%M:%S")
+            User.objects.only("id", "username", "avatar.avatar_url")
+            .get(pk=message["sender"])
+            .to_json()
+        )
+        message["send_date"] = datetime.datetime.fromtimestamp(
+            message["send_date"]["$date"] / 1000
+        ).strftime("%m/%d/%Y at %H:%M:%S")
 
-    print(len(chat['messages']))
+    print(len(chat["messages"]))
 
-    return jsonify(chat['messages'])
+    return jsonify(chat["messages"])
 
 
-@internal.route("/get-friends", methods=['GET'])
+@internal.route("/get-friends", methods=["GET"])
 def get_friends():
     friends = read.get_friends(session["id"])
     return str(friends)
 
-@internal.route("/get-blocks", methods=['GET'])
+
+@internal.route("/get-blocks", methods=["GET"])
 def get_blocked():
     blocked = read.get_blocks(session["id"])
     return str(blocked)

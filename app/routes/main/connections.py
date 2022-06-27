@@ -41,9 +41,7 @@ def g_classroom_auth():
     if classroom_object:
         import random, json, os
 
-        filename = (
-            "token_" + str(random.randrange(1000000000, 9999999999)) + ".json"
-        )
+        filename = "token_" + str(random.randrange(1000000000, 9999999999)) + ".json"
         tokeninfo2 = classroom_object.to_json()
         with open(filename, "w") as out:
             json.dump(tokeninfo2, out, indent=4)

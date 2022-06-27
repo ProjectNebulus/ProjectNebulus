@@ -61,8 +61,8 @@ def daplagarism(data1, data2):
 
     # assign scores
     scores = []
-    for i, item in enumerate(testing_data[n - 1:]):
-        s = model.score(item, testing_data[i: i + n - 1])
+    for i, item in enumerate(testing_data[n - 1 :]):
+        s = model.score(item, testing_data[i : i + n - 1])
         scores.append(s)
 
     scores_np = np.array(scores)
@@ -90,7 +90,7 @@ def daplagarism(data1, data2):
 
     # format labels
     labels = [
-        " ".join(testing_data[i: i + width])
+        " ".join(testing_data[i : i + width])
         for i in range(n - 1, len(testing_data), width)
     ]
     labels_individual = [x.split() for x in labels]
@@ -131,5 +131,6 @@ def daplagarism(data1, data2):
     # import webbrowser
     # webbrowser.open(encoded)
     return [score, plagarized, encoded]
+
 
 # daplagarism("Hedsdsdsdsdsdsdsdsdsdsdsdsllo", "sdsdssdsdsdsHello")

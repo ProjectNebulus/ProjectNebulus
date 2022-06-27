@@ -50,13 +50,16 @@ def course_page(page, **kwargs):
             except TemplateNotFound:
                 break
 
-    return render_template(
-        "errors/404.html",
-        page="404 Not Found",
-        user=session.get("username"),
-        email=session.get("email"),
-        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-    ), 404
+    return (
+        render_template(
+            "errors/404.html",
+            page="404 Not Found",
+            user=session.get("username"),
+            email=session.get("email"),
+            avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        ),
+        404,
+    )
 
 
 @main_blueprint.route("/createCourse", methods=["POST"])
@@ -74,7 +77,7 @@ def getResource(courseID, documentID):
         filter(lambda c: c.id == courseID, read.get_user_courses(session["id"]))
     )
     if not len(courses) or not len(
-            [user for user in courses[0].authorizedUsers if user.id == session["id"]]
+        [user for user in courses[0].authorizedUsers if user.id == session["id"]]
     ):
         return render_template("errors/404.html"), 404
 
@@ -87,24 +90,32 @@ def getResource(courseID, documentID):
 
 
 def search(word):
-    API_KEY = 'ae81dea0-30bd-4397-9ba3-d58726256214'
-    r = requests.get(f'https://dictionaryapi.com/api/v3/references/collegiate/json/{word}?key=ae81dea0-30bd-4397-9ba3-d58726256214')
+    API_KEY = "ae81dea0-30bd-4397-9ba3-d58726256214"
+    r = requests.get(
+        f"https://dictionaryapi.com/api/v3/references/collegiate/json/{word}?key=ae81dea0-30bd-4397-9ba3-d58726256214"
+    )
     return r.json()
 
 
-@main_blueprint.route('/course/<id>/extensions/dict/search', methods=["POST"])
+@main_blueprint.route("/course/<id>/extensions/dict/search", methods=["POST"])
 def search_word(id):
-    word = request.form['word']
+    word = request.form["word"]
     word = word.lower()
     definition = search(word)
     try:
-        shortdef = definition[0]['shortdef'][0]
+        shortdef = definition[0]["shortdef"][0]
         shortdef = shortdef[0].upper() + shortdef[1:]
-        partofspeech = definition[0]['fl']
+        partofspeech = definition[0]["fl"]
         word = word[0].upper() + word[1:]
     except:
         return f"<h1>No definition found for '{word}'</h1>"
-    return render_template('courses/extensions/dict_results.html', definition=shortdef, word=word, partofspeech=partofspeech)
+    return render_template(
+        "courses/extensions/dict_results.html",
+        definition=shortdef,
+        word=word,
+        partofspeech=partofspeech,
+    )
+
 
 @main_blueprint.route("/course/<id>/extensions/<extension>")
 @logged_in

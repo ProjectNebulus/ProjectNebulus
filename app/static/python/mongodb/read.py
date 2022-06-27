@@ -419,12 +419,10 @@ def getUserChats(user_id: str, required_fields: list):
     return chats
 
 
-def loadChats(user_id:str, current_index, initial_amount, required_fields):
-    chats = json.loads(
-        getUserChats(user_id, required_fields).to_json()
-    )
+def loadChats(user_id: str, current_index, initial_amount, required_fields):
+    chats = json.loads(getUserChats(user_id, required_fields).to_json())
 
-    chats = sorted(chats, key=lambda x: x['lastEdited']['$date'])
+    chats = sorted(chats, key=lambda x: x["lastEdited"]["$date"])
 
     if len(chats) < current_index + initial_amount:
         initial_amount = len(chats) - current_index
@@ -432,14 +430,21 @@ def loadChats(user_id:str, current_index, initial_amount, required_fields):
     chats = chats[current_index : (current_index + initial_amount)]
     for chat in chats:
         if len(chat["members"]) == 2:
-            for x, member in enumerate(chat['members']):
-                chat['members'][x] = json.loads(User.objects.only('id', 'chatProfile', 'username', 'avatar.avatar_url').get(pk=member).to_json())
-            chat['owner'] = list(filter(lambda x: x['_id']==chat['owner'], chat['members']))[0]
-
-
+            for x, member in enumerate(chat["members"]):
+                chat["members"][x] = json.loads(
+                    User.objects.only(
+                        "id", "chatProfile", "username", "avatar.avatar_url"
+                    )
+                    .get(pk=member)
+                    .to_json()
+                )
+            chat["owner"] = list(
+                filter(lambda x: x["_id"] == chat["owner"], chat["members"])
+            )[0]
 
     print(chats)
     return chats
+
 
 def get_friends(user_id):
     user = find_user(pk=user_id)
@@ -448,6 +453,8 @@ def get_friends(user_id):
     except:
         friends = None
     return friends
+
+
 def get_blocks(user_id):
     user = find_user(pk=user_id)
     try:

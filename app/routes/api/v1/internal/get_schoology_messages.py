@@ -14,8 +14,8 @@ from app.static.python.utils.colors import *
 def get_schoology_messages():
     sc = read.getSchoologyAuth()
     start_at = int(request.form.get("start"))
-    end_at = int(request.form.get("start"))+5
-    sc.limit = end_at+1
+    end_at = int(request.form.get("start")) + 5
+    sc.limit = end_at + 1
     try:
         messages = sc.get_inbox_messages()
     except:
@@ -73,7 +73,9 @@ def get_schoology_messages():
         info["thread"] = newThread
         info["recipients"] = recipients
         info["author"] = author
-        info["updated"] = datetime.fromtimestamp(int(message["last_updated"])).strftime("%m/%d/%Y, %H:%M:%S")
+        info["updated"] = datetime.fromtimestamp(int(message["last_updated"])).strftime(
+            "%m/%d/%Y, %H:%M:%S"
+        )
         newMessages.append(info)
 
     return jsonify(newMessages)

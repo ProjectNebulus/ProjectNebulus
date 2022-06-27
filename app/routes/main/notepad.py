@@ -3,11 +3,16 @@ from flask import render_template, session
 from . import main_blueprint
 from ...static.python.mongodb import read
 
+
 @main_blueprint.route("/docs", methods=["GET"])
 def docs():
-    return render_template("tools/docs.html",
-                           user=session.get("username"),
-                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),)
+    return render_template(
+        "tools/docs.html",
+        user=session.get("username"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+    )
+
+
 @main_blueprint.route("/docs/document/<id>", methods=["GET"])
 def document(id):
     fonts = [

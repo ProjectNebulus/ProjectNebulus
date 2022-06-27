@@ -271,9 +271,7 @@ class Musixmatch(object):
         )
         return data
 
-    def track_lyrics_feedback_post(
-        self, track_id, lyrics_id, feedback, _format="json"
-    ):
+    def track_lyrics_feedback_post(self, track_id, lyrics_id, feedback, _format="json"):
         """This API method provides you the opportunity to help
         us improving our catalogue.
         We aim to provide you with the best quality service imaginable,

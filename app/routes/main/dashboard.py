@@ -77,7 +77,9 @@ def dashboard():
         info["thread"] = newThread
         info["recipients"] = recipients
         info["author"] = author
-        info["updated"] = datetime.fromtimestamp(int(message["last_updated"])).strftime("%m/%d/%Y, %H:%M:%S")
+        info["updated"] = datetime.fromtimestamp(int(message["last_updated"])).strftime(
+            "%m/%d/%Y, %H:%M:%S"
+        )
         newMessages.append(info)
 
     return render_template(

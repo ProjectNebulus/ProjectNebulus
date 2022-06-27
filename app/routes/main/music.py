@@ -108,9 +108,7 @@ class Musixmatch(object):
         )
         return request
 
-    def track_search(
-        self, q_track, page_size, page, s_track_rating, _format="json"
-    ):
+    def track_search(self, q_track, page_size, page, s_track_rating, _format="json"):
         """Search for track in our database.
         Parameters:
         q_track - The song title.
@@ -307,9 +305,7 @@ class Musixmatch(object):
         )
         return data
 
-    def track_lyrics_feedback_post(
-        self, track_id, lyrics_id, feedback, _format="json"
-    ):
+    def track_lyrics_feedback_post(self, track_id, lyrics_id, feedback, _format="json"):
         """This API method provides you the opportunity to help
         us improving our catalogue.
         We aim to provide you with the best quality service imaginable,

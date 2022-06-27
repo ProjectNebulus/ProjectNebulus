@@ -7,6 +7,8 @@ from app.static.python.mongodb import *
 from app.static.python.mongodb import read
 from flask import session
 from app.static.python.utils.colors import getColor
+
+
 def scrapeSchoology():
     print("attempting login")
 
@@ -39,6 +41,7 @@ def scrapeSchoology():
     soup = BeautifulSoup(req.content, "html.parser")
 
     return soup.prettify()
+
 
 def get_schoology_emails():
     try:
@@ -84,7 +87,7 @@ def get_schoology_emails():
             # print(thread)
             info["message"] = thread[-1]["message"]
             info["message"] = info["message"][:100] + "..." * (
-                    len(info["message"]) > 100
+                len(info["message"]) > 100
             )
             newThread = []
             for threadItem in thread:
@@ -110,10 +113,23 @@ def get_schoology_emails():
         newMessages = enumerate([])
     return newMessages
 
+
 def create_schoology(key, secret):
     sc = schoolopy.Schoology(schoolopy.Auth(key, secret))
     return sc
-def generate_auth(authorize, key,secret,domain,three_legged,request_token,request_token_secret,access_token,access_token_secret):
+
+
+def generate_auth(
+    authorize,
+    key,
+    secret,
+    domain,
+    three_legged,
+    request_token,
+    request_token_secret,
+    access_token,
+    access_token_secret,
+):
     auth = schoolopy.Auth(
         key,
         secret,
@@ -124,12 +140,15 @@ def generate_auth(authorize, key,secret,domain,three_legged,request_token,reques
         access_token=access_token,
         access_token_secret=access_token_secret,
     )
-    if (authorize):
+    if authorize:
         auth.authorize()
     return auth
+
+
 def create_schoology_auth(auth):
     sc = schoolopy.Schoology(auth)
     return sc
+
 
 def generate_schoology_url(link):
     key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"

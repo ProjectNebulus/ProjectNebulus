@@ -18,6 +18,7 @@ class ChatProfile(EmbeddedDocument):
     text_status = StringField(default="")
     status_emoji = StringField(default="")  # twemoji
     status = StringField(
-        default="Offline", options=["Online", "Do Not Disturb", "Idle", "Offline", "Invisible"]
+        default="Offline",
+        options=["Online", "Do Not Disturb", "Idle", "Offline", "Invisible"],
     )  # Online, Idle, Do Not Disturb, Offline
     custom_emojis = ListField(StringField(), default=[])

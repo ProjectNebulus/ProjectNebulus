@@ -15,7 +15,7 @@ def send_email(data):
     msg = Message(
         f"Your Nebulus Email Verification Code [{code}] ",
         sender=f"Nebulus <help.nebulus@gmail.com>",
-        recipients=[data['email']],
+        recipients=[data["email"]],
     )
     import codecs
 
@@ -31,6 +31,7 @@ def send_email(data):
 
 
 # todo: Finish email sending blueprint
+
 
 @internal.route("/send-email", methods=["POST"])
 def send_email_route():

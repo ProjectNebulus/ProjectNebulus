@@ -1,6 +1,7 @@
 # Imports
 from logging import LogRecord
 import eventlet
+
 eventlet.monkey_patch()
 from flask import has_request_context
 from flask.logging import logging, default_handler
