@@ -28,6 +28,7 @@ def new_message(json_data):
         chatID = json_data["chatID"]
         del json_data["chatID"], json_data["chatType"]
         json_data["sender"] = session["id"]
+        json_data["content"] = json_data["content"].replace("\n", "<br>")
         message = create.sendMessage(json_data, chatID)
         chat = read.getChat(chatID)
         chat.lastEdited = datetime.datetime.now()
