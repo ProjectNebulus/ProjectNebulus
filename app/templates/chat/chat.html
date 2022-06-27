@@ -3,7 +3,8 @@
 <script type="text/javascript" src="//cdn.socket.io/4.4.1/socket.io.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript" src="/static/js/main.js"></script>
-<script type="text/javascript" src="https://unpkg.com/textarea-markdown@1.3.1/src/textarea-markdown.js"></script>
+<script type="module" src="https://unpkg.com/whatwg-fetch@3.6.2/fetch.js"></script>
+<script type="module" src="https://unpkg.com/textarea-markdown@1.3.1/src/textarea-markdown.js"></script>
 <script type="text/javascript" src="/static/js/chat.js"></script>
 {% extends "layout.html" %}
 {% block main %}
@@ -200,7 +201,8 @@
                                       clip-rule="evenodd"></path>
                             </svg>
                         </button>
-                        <textarea id="msg_content" rows="1"
+                        <div id="preview"></div>
+                        <textarea  data-preview="#preview" id="msg_content" rows="1"
                                   class="block mx-4 p-2.5 w-full text-sm text-gray-900 dark:border-gray-700 border-white dark:bg-gray-700 bg-white dark:text-white"
                                   placeholder="Message @Coder N" required></textarea>
                         <button type="submit"
