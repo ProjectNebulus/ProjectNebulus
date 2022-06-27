@@ -122,8 +122,8 @@ function makeCall() {
         })
 
 
-    }).done(function(){
-        load();
+    }).done(function(data){
+        load(data);
         let selected = document.getElementById('user-chats');
         selected.children[0].click();
     });
