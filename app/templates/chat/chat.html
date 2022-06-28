@@ -207,7 +207,7 @@
                             </svg>
                         </button>
                         <div id="preview"></div>
-                        <textarea  oninput="updateEditor(document.getElementById('msg_content'),document.getElementById('preview') );" id="msg_content" rows="1"
+                        <textarea id="msg_content" rows="1"
                                   class="block mx-4 p-2.5 w-full text-sm text-gray-900 dark:border-gray-700 border-white dark:bg-gray-700 bg-white dark:text-white"
                                   placeholder="Message @Coder N" required></textarea>
                         <button type="submit"
@@ -326,7 +326,12 @@
         </div>
 
     </div>
-<script>
+<script type="module">
+import smile2emoji from 'https://cdn.skypack.dev/smile2emoji';
+let textarea_el = document.getElementById('msg_content');
+textarea_el.oninput = function(){
+    updateEditor(textarea_el,document.getElementById('preview'));
+};
 function updateEditor(input, preview) {
     input.value =  smile2emoji.checkText(input.value);
 
