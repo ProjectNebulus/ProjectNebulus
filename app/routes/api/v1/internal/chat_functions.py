@@ -33,7 +33,7 @@ def new_message(json_data):
         chat = read.getChat(chatID)
         chat.lastEdited = datetime.datetime.now()
         chat.save()
-        send_date = message.send_date.strftime("%m/%d/%Y at %H:%M:%S")
+        send_date = message.send_date.strftime("%m/%d/%Y at %I:%M:%S %p")
         sender = read.find_user(id=json_data["sender"])
         print("user sent a message")
         emit(
@@ -229,7 +229,7 @@ def getChat():
         )
         message["send_date"] = datetime.datetime.fromtimestamp(
             message["send_date"]["$date"] / 1000
-        ).strftime("%m/%d/%Y at %H:%M:%S")
+        ).strftime("%m/%d/%Y at %I:%M:%S %p")
 
     for n, member in enumerate(chat["members"]):
         chat["members"][n] = json.loads(
@@ -268,7 +268,7 @@ def fetchMessages():
         )
         message["send_date"] = datetime.datetime.fromtimestamp(
             message["send_date"]["$date"] / 1000
-        ).strftime("%m/%d/%Y at %H:%M:%S")
+        ).strftime("%m/%d/%Y at %I:%M:%S %p")
 
     print(len(chat["messages"]))
 

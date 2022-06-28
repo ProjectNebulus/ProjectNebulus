@@ -586,13 +586,13 @@ function getChat(chatID){
             chatContent += `<div id="chatID" data-id="${chat['_id']}" class="w-0 h-0"></div>`
 
             chat['messages'].forEach(function (message) {
-                chatContent+= `<div class="flex items-top space-x-4 mt-2" id="${message['id']}" style="font-family: 'Roboto', sans-serif;">
+                chatContent+= `<div class="flex items-top space-x-4 mt-2" id="${message['id']}">
                         <img class="mt-1 w-10 h-10 rounded-full " data-dropdown-toggle="user_${message['id']}"
                              src="${message['sender']['avatar']['avatar_url']}"
                              alt="">
                         <div class="space-y-1 font-medium dark:text-white">
                             <div><span  data-dropdown-toggle="user_${message['id']}" class="hover:underline">${message['sender']['username']}</span> <span class="ml-3 text-sm text-gray-400">${message['send_date']}</span></div>
-                            <div class="text-sm text-gray-500 dark:text-gray-400">${replaceURLs(message['content'])}</div>
+                            <div style="font-family: 'Roboto', sans-serif;" class="hover:bg-gray-100 dark:hover:bg-gray-700 text-sm text-gray-500 dark:text-gray-400">${replaceURLs(message['content'])}</div>
                         </div>
                     </div>
                     <div id="user_${message['id']}" class="z-50 hidden bg-white divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600 rounded-lg block" data-popper-placement="bottom" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 215px, 0px);">
