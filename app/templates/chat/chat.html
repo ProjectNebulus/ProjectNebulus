@@ -6,6 +6,9 @@
 <script type="module" src="https://unpkg.com/whatwg-fetch@3.6.2/fetch.js"></script>
 <script src="/static/markdown-js-0.5.0/lib/markdown.js"></script>
 <script type="text/javascript" src="/static/js/chat.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 {% extends "layout.html" %}
 {% block main %}
     {% include "utils/navbar.html" %}
@@ -180,7 +183,7 @@
             </div>
 
 
-                <form id="msg" style="width:100%;" onsubmit="sendMessage(); return false;">
+                <form id="msg" style="width:100%;font-family: 'Roboto', sans-serif;" onsubmit="sendMessage(); return false;" >
                     <label for="chat" class="sr-only">Your message</label>
                     <div class="flex items-center py-2 px-3 bg-gray-50 rounded-lg dark:bg-gray-700 m-6 ">
                         <button type="button"

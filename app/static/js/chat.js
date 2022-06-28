@@ -166,7 +166,7 @@ function makeCall() {
 }
 function updateToMessage(message){
     let chat_el = document.getElementById('chat');
-        chat_el.insertAdjacentHTML('afterbegin', `<div class="flex items-top space-x-4 mt-2" id="${message['id']}">
+        chat_el.insertAdjacentHTML('afterbegin', `<div class="flex items-top space-x-4 mt-2" id="${message['id']}" style="font-family: 'Roboto', sans-serif;">
                         <img class="mt-1 w-10 h-10 rounded-full"
                              src="${message['author'][2]}"
                              alt="">
@@ -586,7 +586,7 @@ function getChat(chatID){
             chatContent += `<div id="chatID" data-id="${chat['_id']}" class="w-0 h-0"></div>`
 
             chat['messages'].forEach(function (message) {
-                chatContent+= `<div class="flex items-top space-x-4 mt-2" id="${message['id']}">
+                chatContent+= `<div class="flex items-top space-x-4 mt-2" id="${message['id']}" style="font-family: 'Roboto', sans-serif;">
                         <img class="mt-1 w-10 h-10 rounded-full " data-dropdown-toggle="user_${message['id']}"
                              src="${message['sender']['avatar']['avatar_url']}"
                              alt="">
