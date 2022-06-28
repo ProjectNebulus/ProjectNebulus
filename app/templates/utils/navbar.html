@@ -138,20 +138,21 @@
                             class="rounded-full border-gray-300 border-2 w-12 h-12
                             {% if "black" in avatar %} bg-gray-300
                             {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}">
-                        <logo image="{{ avatar }}" no-revert class="h-8"
-                              style="margin-left: 15%; margin-top: 10%"></logo>
+                        <logo image="{{ avatar }}" no-revert class="h-8" style="margin-left:15%; margin-top:10%"></logo>
                     </button>
                 {% else %}
                     <div class="flex md:order-2">
                         <a href="/signin">
-                            <button style="margin-right:10px;" type="button" id="login"
-                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            <button id="login" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
+                            focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0
+                            dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                 Login
                             </button>
                         </a>
                         <a href="/signup">
-                            <button type="button" id="signup"
-                                    class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                            <button id="signup" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4
+                            focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0
+                            dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                                 Sign Up
                             </button>
                         </a>
@@ -161,7 +162,7 @@
         </div>
     </nav>
     <div id="sidenav" data-modal-placement="top-left" tabindex="-1"
-         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full h-full h-modal ">
+         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full h-full h-modal">
         <div class="relative p-4 w-full max-w-2xl h-full ">
             {% include "utils/navbar_mobile.html" %}
         </div>

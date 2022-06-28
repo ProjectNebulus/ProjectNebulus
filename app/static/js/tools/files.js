@@ -1,3 +1,5 @@
+addHTML();
+
 // pdf viewer
 let pdf;
 let canvas;
@@ -19,7 +21,7 @@ function startFile(file, link, isPDF) {
             `
     if (isPDF) {
         document.getElementById("pdf-viewer").style.display = "block";
-        startPDF(link)
+        startPDF(link);
     }
     else {
         document.getElementById("code-viewer").style.display = "block";
@@ -244,8 +246,8 @@ function getTimeCodeFromNum(num) {
     return `${String(hours).padStart(2, 0)}:${minutes}:${String(seconds % 60).padStart(2, 0)}`;
 }
 
-// add html
-document.body.innerHTML += `
+function addHTML() {
+    document.body.innerHTML += `
 <div id="pdf-viewer" style="display:none;">
     <style>
         canvas {
@@ -269,12 +271,12 @@ document.body.innerHTML += `
 
     <div id="loader" class="text-black dark:text-white">Loading ......</div>
     <div class="container">
-        <button id="prev_page" type="button"
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+        <button id="prev_page" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium
+         rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
             Previous Page
         </button>
-        <button id="next_page" type="button"
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+        <button id="next_page" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium
+         rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
             Next Page
         </button>
         <span class="text-white dark:text-white">
@@ -292,10 +294,6 @@ document.body.innerHTML += `
         </button>
     </div>
     <canvas id="pdf_canvas"></canvas>
-
-
-    <!-- Replace pdf.js with downloaded pdf.js file -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"></script>
 </div>
 
 
@@ -387,7 +385,7 @@ document.body.innerHTML += `
                 width: 350px;
                 background: #444;
                 box-shadow: 0 0 20px 0 #000a;
-                font-family: arial;
+                font-family: arial,serif;
                 color: white;
                 font-size: 0.75em;
                 overflow: hidden;
@@ -405,7 +403,7 @@ document.body.innerHTML += `
 
             .audio-player .timeline .progress {
                 background: coral;
-                width: 0%;
+                width: 0;
                 height: 100%;
                 transition: 0.25s;
             }
@@ -447,7 +445,7 @@ document.body.innerHTML += `
             .audio-player .controls .toggle-play.pause:before {
                 position: absolute;
                 top: 0;
-                left: 0px;
+                left: 0;
                 background: white;
                 content: "";
                 height: 15px;
@@ -515,5 +513,5 @@ document.body.innerHTML += `
                 width: 120px;
             }
         </style>
-    </div>
-`
+    </div>`
+}

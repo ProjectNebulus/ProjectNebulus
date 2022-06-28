@@ -1,7 +1,6 @@
+from flask import Flask, request
+
 from . import internal
-import os
-from flask import Flask, flash, request, redirect, url_for
-from werkzeug.utils import secure_filename
 from .....static.python import cdn
 from .....static.python.mongodb import create
 
@@ -30,7 +29,7 @@ def upload_file_link():
             {
                 "name": filename,
                 "url": "https://nebulus-cdn.sfo3.cdn.digitaloceanspaces.com/"
-                + filename,
+                       + filename,
                 "course": course,
             }
         )
@@ -38,8 +37,7 @@ def upload_file_link():
         mongo = create.createDocumentFile(
             {
                 "name": filename,
-                "url": "https://nebulus-cdn.sfo3.cdn.digitaloceanspaces.com/"
-                + filename,
+                "url": "https://nebulus-cdn.sfo3.cdn.digitaloceanspaces.com/" + filename,
                 "course": course,
                 "folder": folder,
             }

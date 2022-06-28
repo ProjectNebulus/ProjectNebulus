@@ -40,7 +40,6 @@ def settings():
         user_info_service = build(
             serviceName="oauth2", version="v2", credentials=credentials
         )
-        user_info = None
         user_info = user_info_service.userinfo().get().execute()
         print(user_info)
         user_info = [user_info["name"], user_info["picture"]]
@@ -48,11 +47,8 @@ def settings():
 
     except:
         user_info = None
-    try:
-        canvas = session["canvas"]
 
-    except:
-        canvas = None
+    canvas = session.get("canvas")
 
     cache_handler = FlaskSessionCacheHandler(CacheHandler)
     spotify_auth_manager = spotipy.oauth2.SpotifyOAuth(

@@ -1,4 +1,4 @@
-function create_announcement() {
+function createAnnouncement() {
     let name = document.getElementById("announcementname").value;
     let teacher = document.getElementById("author").value
     const announcement = {

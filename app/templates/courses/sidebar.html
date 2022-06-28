@@ -6,7 +6,7 @@
                  style="object-fit: cover; width:40px; height:40px; border-radius:10px;display: inline-block; margin: 10px;">
             {{ course.name }}
         </span>
-        <ul class="space-y-2">
+        <ul class="space-y-2 cursor-pointer">
             <li>
                 <a href="/course/{{ course_id }}/documents" target="frame"
                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -54,9 +54,16 @@
                     <span class="flex-1 ml-3 whitespace-nowrap">Textbook</span>
                 </a>
             </li>
+
             <li>
-                <button type="button"
-                        class="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                <a href="/course/{{ course_id }}/learning" target="frame"
+                   class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <p class="dark:text-gray-400 material-icons">school</p>
+                    <span class="flex-1 ml-3 whitespace-nowrap">Learning</span>
+                </a>
+            </li>
+            <li>
+                <button class="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                         aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                     <p class="dark:text-gray-400 material-icons">extension</p>
                     <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Extensions</span>
@@ -67,129 +74,53 @@
                               clip-rule="evenodd"></path>
                     </svg>
                 </button>
-                <ul id="dropdown-example" class="hidden py-2 space-y-2">
+                <ul id="dropdown-example" class="hidden py-2 pl-8 space-y-2">
                     <li>
                         <a href="/course/{{ course_id }}/extensions/ptable" target="frame"
-                           class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                           class="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                             <p class="dark:text-gray-400 material-icons">science</p><span
                                 class="ml-3">Periodic Table</span></a>
                     </li>
                     <li>
                         <a href="/course/{{ course_id }}/extensions/ide" target="frame"
-                           class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                           class="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                             <p class="dark:text-gray-400 material-icons">code</p><span
                                 class="ml-3">Code Editor</span></a>
                     </li>
                     <li>
                         <a href="/course/{{ course_id }}/extensions/plagarism" target="frame"
-                           class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                           class="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                             <p class="dark:text-gray-400 material-icons">description</p><span
-                                class="ml-3">Plagarism Detecter</span></a>
+                                class="ml-3">Plagiarism Detecter</span></a>
                     </li>
                     <li>
                         <a href="/course/{{ course_id }}/extensions/maps" target="frame"
-                           class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                           class="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                             <p class="dark:text-gray-400 material-icons">public</p><span
                                 class="ml-3">World Map</span></a>
                     </li>
                     <li>
                         <a href="/course/{{ course_id }}/extensions/graph" target="frame"
-                           class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                           class="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                             <p class="dark:text-gray-400 material-icons">trending_up</p><span
                                 class="ml-3">Graphing Calculator</span></a>
                     </li>
                     <li>
                         <a href="/course/{{ course_id }}/extensions/dict" target="frame"
-                           class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                           class="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                             <p class="dark:text-gray-400 material-icons">auto_stories</p><span
                                 class="ml-3">Dictionary</span></a>
                     </li>
                     <li>
                         <a href="/course/{{ course_id }}/extensions" target="frame"
-                           class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                           class="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                             <p class="dark:text-gray-400 material-icons">add_circle</p><span
                                 class="ml-3">Add an Extension</span></a>
                     </li>
                 </ul>
             </li>
-
-            <li>
-                <a href="/course/{{ course_id }}/learning" target="frame"
-                   class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <p class="dark:text-gray-400 material-icons">school</p>
-                    <span class="flex-1 ml-3 whitespace-nowrap">Learning</span>
-                </a>
-            </li>
         </ul>
     </div>
 </aside>
 
-<script>
-    const sidebarLinks = document.getElementsByClassName("space-y-2")[0].getElementsByTagName("a");
-
-    for (const a of sidebarLinks) {
-        a.href += "?iframe=true";
-        a.onclick = () => {
-            window.history.pushState(null, "", a.href.replace("?iframe=true", ""))
-
-            for (const link of sidebarLinks) {
-                if (link === a)
-                    continue;
-
-                link.style.pointerEvents = "auto";
-                link.style.cursor = "pointer";
-                link.classList.remove("dark:bg-gray-600", "light:bg-gray-600")
-            }
-
-            let title = a.href.substring(a.href.indexOf(document.documentURI)).split("/")[5].replace("?iframe=true", "");
-            title = title[0].toUpperCase() + title.substring(1);
-            pageTitle.innerHTML = title;
-            setCreateButton(title);
-
-            a.style.pointerEvents = "none";
-            a.style.cursor = "default";
-            a.classList.add("dark:bg-gray-600", "light:bg-gray-600");
-
-            sessionStorage.setItem("{{ course_id }}", title);
-        }
-    }
-
-    function setCreateButton(title) {
-        for (const a of actions)
-            a.innerHTML = "";
-
-        switch (title.toLowerCase()) {
-            case "documents":
-                actions[0].innerHTML = "Upload File";
-                actions[0].onclick = () => openModal("createDocument");
-                actions[1].innerHTML = "Create File";
-                actions[1].onclick = () => openModal("createDocument2");
-                actions[2].innerHTML = "Create Assignment";
-                actions[2].onclick = () => openModal("createAssignment");
-                break;
-
-            case "announcements":
-                actions[0].innerHTML = "Create Announcement";
-                actions[0].onclick = () => openModal("createAnnouncement");
-                break;
-
-            case "textbook":
-                actions[0].innerHTML = "Create Textbook";
-                actions[0].onclick = () => openModal("createTextbook");
-                break;
-        }
-
-        let hideButton = true;
-        for (const a of actions) {
-            if (a.innerHTML !== "") {
-                a.innerHTML = '<span class="material-icons mr-1.5" style="vertical-align: bottom">add</span>' + a.innerHTML;
-                a.parentElement.classList.remove("hidden");
-                hideButton = false;
-            }
-            else
-                a.parentElement.classList.add("hidden");
-        }
-
-        createButton.style.display = hideButton ? "none" : "inline";
-    }
-</script>
+<script src="/static/js/course/sidebar.js"></script>

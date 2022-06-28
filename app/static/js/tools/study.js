@@ -104,11 +104,6 @@ for (let i = 0; i < 3; i++) {
     inputs[i].addEventListener("keyup", (e) => {
         if (e.key === "Enter")
             start.click();
-
-        if (i > 0) {
-            if (inputs[i].value.length === 2)
-                inputs[i - 1].focus();
-        }
     });
 }
 

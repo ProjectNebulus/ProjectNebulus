@@ -1,5 +1,6 @@
 const siteName = window.location.protocol + "//" + window.location.host;
 
+setInterval(changeFavicon, 250);
 Array.prototype.insert = (index, item) => this.splice(index, 0, item);
 
 if (!localStorage.getItem('color-theme')) {
@@ -12,9 +13,6 @@ if (localStorage.getItem("color-theme") === "dark")
 else
     document.documentElement.classList.remove('dark');
 
-function checkOnline(){
-    return navigator.onLine;
-}
 /** Returns a string containing a loading icon, with the parameters defining length and width. */
 function loadingIcon(length, width) {
     if (width === undefined)
@@ -88,6 +86,18 @@ class KeyUpTimer {
     }
 }
 
+function detectTheme() {
+    if (!localStorage.getItem('color-theme')) {
+        const darkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        localStorage.setItem('color-theme', darkTheme ? 'dark' : 'light');
+    }
+
+    if (localStorage.getItem("color-theme") === "dark")
+        document.documentElement.classList.add('dark');
+    else
+        document.documentElement.classList.remove('dark');
+}
+
 function invertSite() {
     const banner = document.getElementById("homeBanner");
 
@@ -126,18 +136,18 @@ function invertSite() {
         }
     }
 
-    const frame = document.getElementsByTagName("iframe")[0];
+    for (const frame of document.getElementsByTagName("iframe")) {
+        if (frame && (frame.src.includes(siteName) || !frame.src.includes("http"))) {
+            const innerDoc = frame.contentDocument || frame.contentWindow.document;
 
-    if (frame && (frame.src.includes(siteName) || !frame.src.includes("http"))) {
-        const innerDoc = frame.contentDocument || frame.contentWindow.document;
-
-        if (document.documentElement.classList.contains("dark")) {
-            innerDoc.documentElement.classList.add("dark");
-            innerDoc.body.style.background = "#111926";
-        }
-        else {
-            innerDoc.documentElement.classList.remove("dark");
-            innerDoc.body.style.background = "white";
+            if (document.documentElement.classList.contains("dark")) {
+                innerDoc.documentElement.classList.add("dark");
+                innerDoc.body.style.background = "#111926";
+            }
+            else {
+                innerDoc.documentElement.classList.remove("dark");
+                innerDoc.body.style.background = "white";
+            }
         }
     }
 
@@ -196,7 +206,6 @@ window.addEventListener("load", function () {
 
 let statusInterval = 0;
 let shouldGetSpotify = true;
-let shouldGetFocus = true;
 let requestAttempts = 0;
 
 function onFailedRequest() {
@@ -216,33 +225,21 @@ function online() {
     if (shouldGetSpotify)
         statusInterval = setInterval(navFetchStatus, 1000);
 
+    document.getElementById("wifi").innerHTML = "wifi";
+    document.getElementById("wifi").classList.add("bg-blue-600");
+    document.getElementById("wifi").classList.remove("bg-red-600");
 }
 
 function offline() {
     isOnline = false;
     if (shouldGetSpotify)
         clearInterval(statusInterval);
-}
-function checkWifi(){
-    if (checkOnline()){
-        document.getElementById("wifi").innerText = "wifi";
-        document.getElementById("wifi").classList.add(
-            "bg-blue-600"
-        )
-        document.getElementById("wifi").classList.remove(
-            "bg-red-600"
-        )
 
-    }else{
-        document.getElementById("wifi").innerText = "wifi_off";
-        document.getElementById("wifi").classList.remove(
-            "bg-blue-600"
-        );
-        document.getElementById("wifi").classList.add(
-            "bg-red-600"
-        );
-    }
+    document.getElementById("wifi").innerHTML = "wifi_off";
+    document.getElementById("wifi").classList.remove("bg-blue-600");
+    document.getElementById("wifi").classList.add("bg-red-600");
 }
+
 function navFetchStatus() {
     if (!document.getElementById("spotifyStatus"))
         return;
@@ -292,33 +289,49 @@ function navFetchStatus() {
     request.fail(onFailedRequest);
 }
 
+const list = [
+    "Red",
+    "Blue",
+    "Green",
+    "Blurple",
+    "Pink",
+    "Jade",
+    "Yellow"
+]
+
+let index = 0;
+
+for (let i = 0; i < list.length; i++)
+    list[i] = `/static/images/nebulusCats/new${list[i]}.png`;
+
 function changeFavicon() {
-    const list = [
-        "Red",
-        "Blue",
-        "Green",
-        "Blurple",
-        "Pink",
-        "Jade",
-        "Yellow"
-    ]
-    for (let i = 0; i < list.length; i++)
-        list[i] = `${window.location.origin}/static/images/nebulusCats/new${list[i]}.png`
-
     let link = document.querySelector("link[rel~='icon']");
-
-    //var old = link.href.pathname;
-    const old = link.href;
-    if (!link) {
-        link = document.createElement('link');
-        link.rel = 'icon';
-        document.head.appendChild(link);
-    }
-    //let index =(list.findIndex(old) + 1) % list.length;
-    let index = (list.indexOf(old) + 1) % list.length;
-
+    index = (index + 1) % list.length;
     link.href = list[index];
 }
 
-setInterval(changeFavicon, 250);
-setInterval(checkWifi, 250);
+function openModal(object_id) {
+    let targetEl = document.getElementById(object_id);
+    const options = {
+        placement: 'bottom-right',
+        backdropClasses: 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40'
+    };
+    const modal = new Modal(targetEl);
+    modal.show();
+    return true;
+}
+
+function closeModal(object_id) {
+    let targetEl = document.getElementById(object_id);
+    const options = {
+        placement: 'bottom-right',
+        backdropClasses: 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40'
+    };
+    const modal = new Modal(targetEl, options);
+    modal.hide();
+    let elements = document.querySelectorAll('[modal-backdrop]');
+    for (let i = 0; i < elements.length; i++) {
+        elements[i].style.display = "none";
+    }
+    return true;
+}

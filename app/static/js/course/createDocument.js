@@ -1,4 +1,4 @@
-function the_upload_link() {
+function uploadLink() {
     let request = $.ajax({
         type: "POST",
         url: "/api/v1/internal/upload_file_link",
@@ -13,7 +13,7 @@ function the_upload_link() {
     })
 }
 
-function the_upload() {
+function uploadFile() {
     alert('Uploaded');
 
     const formData = new FormData();

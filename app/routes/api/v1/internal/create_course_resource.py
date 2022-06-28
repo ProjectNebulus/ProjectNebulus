@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 
 from flask import request
 
@@ -33,11 +33,7 @@ def create_assignment():
     # Get the data from the request.
     data = request.get_json()
     data["points"] = int(data["points"])
-    date = datetime.datetime.strptime(
-        data["due_date"], "%m/%d/%Y"
-    ) - datetime.timedelta(days=1)
-    del data["due_date"]
-    data["due"] = datetime.datetime.combine(date, datetime.time(11, 59, 59))
+    data["due"] = datetime.strptime(data["due"], "%m/%d/%Y %I:%M %p")
 
     if log_data:
         print(data)

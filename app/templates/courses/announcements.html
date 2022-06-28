@@ -46,7 +46,7 @@
                     </div>
                 </div>
 
-                <div class="font-normal text-gray-700 dark:text-gray-400 my-4">
+                <div class="text-gray-700 dark:text-gray-400 my-4 line-clamp-1" style="-webkit-line-clamp: 12">
                     {% for line in i.content.strip().split("\n") %}
                         {% if line != "" %}
                             <p>{{ line }}</p>

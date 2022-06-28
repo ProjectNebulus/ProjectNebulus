@@ -1,7 +1,8 @@
-let actions, pageTitle;
+let actions, pageTitle, createButton;
 window.onload = () => {
     actions = document.getElementsByClassName("link");
     pageTitle = document.getElementById("page-title");
+    createButton = document.getElementById("create");
 
     const path = window.location.pathname.split("/");
     let saveData = path.reverse()[0];
@@ -18,7 +19,7 @@ window.onload = () => {
     }
 
     for (const action of actions)
-        action.classList.add('block', 'py-2', 'px-4', 'hover:bg-gray-100', 'dark:hover:bg-gray-600', 'dark:hover:text-white');
+        action.classList.add('block', 'py-2', 'px-4', 'hover:bg-gray-100', 'dark:hover:bg-gray-600', 'dark:hover:text-white', 'cursor-pointer');
 
     setCreateButton(pageTitle.innerHTML);
 

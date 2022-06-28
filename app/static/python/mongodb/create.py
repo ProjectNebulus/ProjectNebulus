@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 from flask import session
 
 from . import read
-from ..classes.NebulusDocuments import NebulusDocument
 
 load_dotenv()
 import schoolopy
@@ -99,7 +98,7 @@ def createAssignment(data: dict) -> Assignment:
     assignment.save(force_insert=True)
     course = assignment.course
     course.assignments.append(assignment)
-    course.save()
+    course.save(validate=False)
     return assignment
 
 
@@ -113,8 +112,11 @@ def createGrades(data: dict) -> Grades:
 
 
 def createDocumentFile(data: dict) -> DocumentFile:
-    file_ending = data["file_ending"]
-    del data["file_ending"]
+    file_ending = ""
+    if data.get("file_ending"):
+        file_ending = data["file_ending"]
+        del data["file_ending"]
+
     document_file = DocumentFile(**data)
     document_file.save(force_insert=True)
     document_file.url += "." + file_ending
@@ -123,7 +125,7 @@ def createDocumentFile(data: dict) -> DocumentFile:
     course = document_file.course
     if not folder:
         course.documents.append(document_file)
-        course.save()
+        course.save(validate=False)
     elif not course:
         folder.documents.append(document_file)
         folder.save()
