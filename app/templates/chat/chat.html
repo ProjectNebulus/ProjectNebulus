@@ -4,7 +4,7 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript" src="/static/js/main.js"></script>
 <script type="module" src="https://unpkg.com/whatwg-fetch@3.6.2/fetch.js"></script>
-<script src="/static/markdown-js-0.5.0/lib/index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script type="text/javascript" src="/static/js/chat.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -205,7 +205,7 @@
                             </svg>
                         </button>
                         <div id="preview"></div>
-                        <textarea  oninput="this.editor.update()" id="msg_content" rows="1"
+                        <textarea  oninput="updateEditor(document.getElementById('msg_content'),document.getElementById('preview') );" id="msg_content" rows="1"
                                   class="block mx-4 p-2.5 w-full text-sm text-gray-900 dark:border-gray-700 border-white dark:bg-gray-700 bg-white dark:text-white"
                                   placeholder="Message @Coder N" required></textarea>
                         <button type="submit"
@@ -325,13 +325,9 @@
 
     </div>
 <script>
-function Editor(input, preview) {
-        this.update = function () {
-          preview.innerHTML = markdown.toHTML(input.value);
-        };
-        input.editor = this;
-        this.update();
+function updateEditor(input, preview) {
+    preview.innerHTML =
+        marked.parse(input.value);
 }
-new Editor(document.getElementById("msg_content"), document.getElementById("preview"));
 </script>
 {% endblock %}
