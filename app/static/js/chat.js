@@ -1,15 +1,3 @@
-//import TextareaMarkdown from 'textarea-markdown'
-
-//const TextareaMarkdown = window.TextareaMarkdown;
-
-window.onload = function(){
-    document.addEventListener('DOMContentLoaded', () => {
-        const textarea = document.querySelector('#msg_content');
-
-        new TextareaMarkdown(textarea,
-        )
-    });
-}
 io = window.io
 
 function replaceURLs(message) {
@@ -677,8 +665,8 @@ function getChat(chatID){
 
 }
 function sendMessage(){
-    let el = document.getElementById('msg_content');
-    let val = el.value;
+    let el = document.getElementById('preview');
+    let val = el.innerHTML;
     el.value = '';
     let chatID = document.getElementById('chatID').getAttribute('data-id');
     socket.emit('new_message', {
