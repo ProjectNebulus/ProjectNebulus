@@ -13,7 +13,7 @@
         "flowbite": "^1.4.7",
         "npx": "^10.2.2",
         "postcss-cli": "^9.1.0",
-        "prettier": "^2.6.2",
+        "prettier": "^2.7.1",
         "socket.io-client": "^4.5.1"
     },
     "devDependencies": {
