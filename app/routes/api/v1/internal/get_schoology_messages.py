@@ -1,18 +1,18 @@
-from datetime import datetime
 import time
+from datetime import datetime
 
-from flask import jsonify, request
+from flask import jsonify, request, session
 
-from .....static.python.mongodb import read
+from app.static.python.utils.colors import *
 from . import internal
 from ....main.utils import private_endpoint
-from app.static.python.utils.colors import *
+from .....static.python.mongodb import read
 
 
 @internal.route("/get_schoology_messages", methods=["POST"])
 @private_endpoint
 def get_schoology_messages():
-    sc = read.getSchoologyAuth()
+    sc = read.getSchoologyAuth(session["id"])
     start_at = int(request.form.get("start"))
     end_at = int(request.form.get("start")) + 5
     sc.limit = end_at + 1

@@ -1,10 +1,11 @@
-from flask import render_template, session
+import time
 from datetime import datetime
+
+from flask import render_template, session
+
 from . import main_blueprint, utils
 from .utils import logged_in
 from ...static.python.mongodb import read
-import time
-
 from ...static.python.utils.colors import getColor
 
 
@@ -18,7 +19,7 @@ def dashboard():
 
     if len(user_courses) > 8:
         user_courses = list(user_courses)[-18:]
-    sc = read.getSchoologyAuth(username=session["username"])
+    sc = read.getSchoologyAuth(user_id=session["username"])
     if sc:
         sc.limit = 5
         try:

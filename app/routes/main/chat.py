@@ -1,9 +1,11 @@
-from flask import render_template, session
 import json
+
+from flask import render_template, session
+
 from . import main_blueprint
 from .utils import logged_in
-from ...static.python.mongodb import read
 from ...static.python.extensions.integrations.schoology import get_schoology_emails
+from ...static.python.mongodb import read
 
 
 @main_blueprint.route("/chat")
@@ -15,7 +17,6 @@ def chat():
 @main_blueprint.route("/chat/<page>")
 @logged_in
 def chatPage(page):
-
     user = read.find_user(pk=session["id"])
     newMessages = None
     status = None

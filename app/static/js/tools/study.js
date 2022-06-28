@@ -41,12 +41,23 @@ if (localStorage.getItem("popup")) {
 function loadTimer() {
     if (interval) clearInterval(interval);
 
-    const data = localStorage.getItem("currentTimer").split(" ");
+    const currentTimer = localStorage.getItem("currentTimer");
+    if (!currentTimer) {
+        onTimerEnd();
+        configure();
+        return;
+    }
+    const data = currentTimer.split(" ");
     timerName.innerHTML = data[0];
     paused = parseInt(data[1]) === 1;
     hours = parseInt(data[2]);
     minutes = parseInt(data[3]);
     seconds = parseInt(data[4]) + isPopup;
+
+    if (hours < 0) {
+        onTimerEnd();
+        return;
+    }
 
     config.classList.add("hidden");
     timer.classList.remove("hidden");
@@ -218,7 +229,9 @@ function onTimerEnd() {
 popupButton.onclick = () => {
     bypassUnload = true;
     if (!isPopup && !localStorage.getItem("popup")) {
-        saveTimer();
+        if (timerStarted)
+            saveTimer();
+
         localStorage.setItem("popup", "true");
         window.open('/study', 'Study Timer', 'width=600,height=600');
     }
