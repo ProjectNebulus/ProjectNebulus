@@ -1,8 +1,10 @@
 import datetime
 
+import flask
 from flask import session, request
 from flask.json import jsonify
 from flask_socketio import join_room, leave_room, emit
+import requests
 import json
 from . import internal
 from .... import socketio
@@ -154,8 +156,8 @@ def new_chat(data):
         for x, member in enumerate(chat["members"]):
             chat["members"][x] = json.loads(
                 User.objects.only("id", "chatProfile", "username", "avatar.avatar_url")
-                .get(pk=member)
-                .to_json()
+                    .get(pk=member)
+                    .to_json()
             )
         chat["owner"] = list(
             filter(lambda x: x["_id"] == chat["owner"], chat["members"])
@@ -171,6 +173,47 @@ def new_chat(data):
 def changeStatus():
     json_data = request.get_json()
     return update.changeStatus(session["id"], **json_data)
+
+
+@internal.route("/get-embed", methods=["GET"])
+def get_embed():
+    from bs4 import BeautifulSoup
+    link = flask.request.args.get("link")
+    request = requests.get(link)
+    soup = BeautifulSoup(request.content, "html.parser")
+    try:
+        title = soup.find("meta", property="og:title")['content']
+    except:
+        title = ""
+    try:
+        url = soup.find("meta", property="og:url")['content']
+    except:
+        url = ""
+    try:
+        descrip = soup.find("meta", property="og:description")['content']
+    except:
+        descrip = ""
+    try:
+        site = soup.find("meta", property="og:site_name")['content']
+    except:
+        site = ""
+    try:
+        image = soup.find("meta", property="og:image")['content']
+    except:
+        image = ""
+    try:
+        color = soup.find("meta", property="theme-color")['content']
+    except:
+        color = ""
+    embed = f"""
+    <div style="border-style: none none none solid; border-width:3px; border-color:{color}" class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+    <a href="{url}"><h5 class="mb-2 text-md hover:underline font-bold tracking-tight text-black dark:text-white">{site}</h5></a>
+    <a href="{link}"><h5 class="mb-2 text-xl hover:underline font-bold tracking-tight text-sky-500">{title}</h5></a>
+    <p class="font-normal text-gray-700 dark:text-gray-400">{descrip}</p>
+    <img src="{image}" style="width:90%; margin:auto; margin-top:10px;">
+</div>
+"""
+    return embed
 
 
 @internal.route("/friend-request", methods=["POST"])
@@ -224,8 +267,8 @@ def getChat():
     for message in chat["messages"]:
         message["sender"] = json.loads(
             User.objects.only("id", "username", "avatar.avatar_url")
-            .get(pk=message["sender"])
-            .to_json()
+                .get(pk=message["sender"])
+                .to_json()
         )
         message["send_date"] = datetime.datetime.fromtimestamp(
             message["send_date"]["$date"] / 1000
@@ -253,18 +296,18 @@ def fetchMessages():
     if len(chat["messages"]) < data["current_index"] + 20:
         print(len(chat["messages"]))
         chat["messages"] = list(reversed(chat["messages"]))[
-            data["current_index"] : len(chat["messages"])
-        ]
+                           data["current_index"]: len(chat["messages"])
+                           ]
     else:
         chat["messages"] = list(reversed(chat["messages"]))[
-            data["current_index"] : (data["current_index"] + 30)
-        ]
+                           data["current_index"]: (data["current_index"] + 30)
+                           ]
 
     for message in chat["messages"]:
         message["sender"] = json.loads(
             User.objects.only("id", "username", "avatar.avatar_url")
-            .get(pk=message["sender"])
-            .to_json()
+                .get(pk=message["sender"])
+                .to_json()
         )
         message["send_date"] = datetime.datetime.fromtimestamp(
             message["send_date"]["$date"] / 1000

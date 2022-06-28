@@ -5,6 +5,8 @@
 <script type="text/javascript" src="/static/js/main.js"></script>
 <script type="module" src="https://unpkg.com/whatwg-fetch@3.6.2/fetch.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.skypack.dev/smile2emoji"></script>
+{#<script src="https://cdn.jsdelivr.net/npm/smile2emoji@2.9.0/lib/index.min.js"></script>#}
 <script type="text/javascript" src="/static/js/chat.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -326,8 +328,14 @@
     </div>
 <script>
 function updateEditor(input, preview) {
+    input.value =  smile2emoji.checkText(input.value);
+
     preview.innerHTML =
         marked.parse(input.value);
+    const manageInput = (e) => {
+        e.target.value = checkText(e.target.value);
+    };
+
 }
 </script>
 {% endblock %}
