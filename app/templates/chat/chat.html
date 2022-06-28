@@ -10,6 +10,7 @@
 <script type="text/javascript" src="/static/js/chat.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 {% extends "layout.html" %}
 {% block main %}
@@ -333,7 +334,8 @@ textarea_el.oninput = function(){
     updateEditor(textarea_el,document.getElementById('preview'));
 };
 function updateEditor(input, preview) {
-    input.value =  smile2emoji.checkText(input.value);
+    input.value =  twemoji.parse(smile2emoji.checkText(input.value));
+
 
     preview.innerHTML =
         marked.parse(input.value);

@@ -34,8 +34,10 @@ function replaceURLs(message) {
             }
         });
         request.done(function (data) {
-            return `<a target="_blank"
+            if (data != "invalid") {
+                return `<a target="_blank"
                    class="text-sky-500 underline" href="${hyperlink}">${hyperlink}</a><br>${data}<br><br>`;
+            }
         })
     });
 }
@@ -296,13 +298,16 @@ $(document).ready(function () {
          }).done(function (messages) {
              let chatContent = ``;
              messages.forEach(function (message) {
+                 console.log(message["content"]);
+                 let content = replaceURLs(message['content']);
+                 console.log(content);
                  chatContent += `<div class="flex items-top space-x-4 mt-2" id="${message['id']}">
                         <img class="mt-1 w-10 h-10 rounded-full"
                              src="${message['sender']['avatar']['avatar_url']}"
                              alt="">
                         <div class="space-y-1 font-medium dark:text-white">
                             <div>${message['sender']['username']} <span class="ml-3 text-sm text-gray-400">${message['send_date']}</span></div>
-                            <div class="text-sm text-gray-500 dark:text-gray-400">${message['content']}</div>
+                            <div class="text-sm text-gray-500 dark:text-gray-400">${content}</div>
                         </div>
                     </div>
                     <div id="user_${message['id']}" class="z-50 hidden bg-white divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600 rounded-lg block" data-popper-placement="bottom" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 215px, 0px);">
@@ -568,13 +573,16 @@ function getChat(chatID){
             chatContent += `<div id="chatID" data-id="${chat['_id']}" class="w-0 h-0"></div>`
 
             chat['messages'].forEach(function (message) {
+
+                message["content"] = replaceURLs(message['content']);
+
                 chatContent+= `<div class="flex items-top space-x-4 mt-2" id="${message['id']}">
                         <img class="mt-1 w-10 h-10 rounded-full " data-dropdown-toggle="user_${message['id']}"
                              src="${message['sender']['avatar']['avatar_url']}"
                              alt="">
                         <div class="space-y-1 font-medium dark:text-white">
                             <div><span  data-dropdown-toggle="user_${message['id']}" class="hover:underline">${message['sender']['username']}</span> <span class="ml-3 text-sm text-gray-400">${message['send_date']}</span></div>
-                            <div style="font-family: 'Roboto', sans-serif;" class="hover:bg-gray-100 dark:hover:bg-gray-700 text-sm text-gray-500 dark:text-gray-400">${replaceURLs(message['content'])}</div>
+                            <div style="font-family: 'Roboto', sans-serif;" class="hover:bg-gray-100 dark:hover:bg-gray-700 text-sm text-gray-500 dark:text-gray-400">${message["content"]}</div>
                         </div>
                     </div>
                     <div id="user_${message['id']}" class="z-50 hidden bg-white divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600 rounded-lg block" data-popper-placement="bottom" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 215px, 0px);">

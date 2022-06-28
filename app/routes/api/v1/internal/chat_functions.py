@@ -179,7 +179,10 @@ def changeStatus():
 def get_embed():
     from bs4 import BeautifulSoup
     link = flask.request.args.get("link")
-    request = requests.get(link)
+    try:
+        request = requests.get(link)
+    except:
+        return "invalid"
     soup = BeautifulSoup(request.content, "html.parser")
     try:
         title = soup.find("meta", property="og:title")['content']
@@ -231,6 +234,10 @@ def get_embed():
         """
     else:
         embed = ""
+
+    print(embed)
+
+
     return embed
 
 
