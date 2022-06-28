@@ -25,36 +25,18 @@ function replaceURLs(message) {
 
         hyperlink = hyperlink.replace("<p>", "");
         hyperlink = hyperlink.replace("</p>", "");
-        //youtube iframe
-        let iframe = ""
-        if (hyperlink.includes("youtube.com/watch")){
-            let location = hyperlink.indexOf("v=");
-            let id = hyperlink.substr(location+2, location+14);
-            iframe = `
-<div class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-    <a href="${hyperlink}"><h5 class="mb-2 text-xl font-bold tracking-tight text-sky-500">Youtube</h5></a>
-   
-           <iframe width="560" height="315" src="https://www.youtube.com/embed/${id}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>`
-
-        }
-        if (hyperlink.includes("youtube.be/")){
-            let location = hyperlink.indexOf("/");
-            let id = hyperlink.substr(location+1, location+13);
-            iframe = `
-<div class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-    <a href="${hyperlink}"><h5 class="mb-2 text-xl font-bold tracking-tight text-sky-500">Youtube</h5></a>
-   
-           <iframe width="560" height="315" src="https://www.youtube.com/embed/${id}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>`
-
-        }
-        if (iframe !== ""){
+        //youtube iframe / embed for everything else
+        let request = $.ajax({
+            type: "GET",
+            url: "/api/v1/internal/get-embed",
+            data: {
+                "link": hyperlink
+            }
+        });
+        request.done(function (data) {
             return `<a target="_blank"
-                   class="text-sky-500 underline" href="${hyperlink}">${hyperlink}</a><br> ${iframe}`
-        }
-        return `<a target="_blank"
-                   class="text-sky-500 underline" href="${hyperlink}">${hyperlink}</a>`;
+                   class="text-sky-500 underline" href="${hyperlink}">${hyperlink}</a><br>${data}<br><br>`;
+        })
     });
 }
 

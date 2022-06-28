@@ -198,21 +198,39 @@ def get_embed():
     except:
         site = ""
     try:
-        image = soup.find("meta", property="og:image")['content']
+        if "youtube.com/watch" in link:
+            location = link.index("v=")
+            id = link[location+2:location+14]
+            image = """
+            
+           <iframe width="560" height="315" src="https://www.youtube.com/embed/${id}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>"""
+
+        if "youtu.be/" in link:
+            location = link.index("/")
+            id = link[location+1: location+13]
+            image = """
+            
+           <iframe width="560" height="315" src="https://www.youtube.com/embed/${id}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>"""
+
+        else:
+            image = soup.find("meta", property="og:image")['content']
     except:
         image = ""
     try:
         color = soup.find("meta", property="theme-color")['content']
     except:
         color = ""
-    embed = f"""
-    <div style="border-style: none none none solid; border-width:3px; border-color:{color}" class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-    <a href="{url}"><h5 class="mb-2 text-md hover:underline font-bold tracking-tight text-black dark:text-white">{site}</h5></a>
-    <a href="{link}"><h5 class="mb-2 text-xl hover:underline font-bold tracking-tight text-sky-500">{title}</h5></a>
-    <p class="font-normal text-gray-700 dark:text-gray-400">{descrip}</p>
-    <img src="{image}" style="width:90%; margin:auto; margin-top:10px;">
-</div>
-"""
+    if title != "" or url!="" or color!= "" or image!= "" or site!= "" or descrip!="":
+        embed = f"""
+        <div style="border-style: none none none solid; border-width:3px; border-color:{color}" class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        <a href="{url}"><h5 class="mb-2 text-md hover:underline font-bold tracking-tight text-black dark:text-white">{site}</h5></a>
+        <a href="{link}"><h5 class="mb-2 text-xl hover:underline font-bold tracking-tight text-sky-500">{title}</h5></a>
+        <p class="font-normal text-gray-700 dark:text-gray-400">{descrip}</p>
+        <img src="{image}" style="width:90%; margin:auto; margin-top:10px;">
+        </div>
+        """
+    else:
+        embed = ""
     return embed
 
 
