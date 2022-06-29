@@ -16,7 +16,7 @@ from .Canvas import Canvas
 from .ChatProfile import ChatProfile
 from .Discord import Discord
 from .GoogleClassroom import GoogleClassroom
-from .NebulusDocuments import NebulusDocument
+from .NebulusDocument import NebulusDocument
 from .Planner import Planner
 from .Schoology import Schoology
 from .Snowflake import Snowflake

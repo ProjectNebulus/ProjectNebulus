@@ -5,7 +5,7 @@ from ..Assignment import Assignment as AssignmentModel
 from ..Avatar import Avatar as AvatarModel
 from ..Course import Course as CourseModel
 from ..Document import DocumentFile as DocumentModel
-from ..Events import Event as EventModel
+from ..Event import Event as EventModel
 from ..Folder import Folder as FolderModel
 from ..Grades import Grades as GradesModel
 from ..Schoology import Schoology as SchoologyModel
