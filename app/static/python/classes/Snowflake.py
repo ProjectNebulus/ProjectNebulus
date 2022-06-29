@@ -1,6 +1,6 @@
 import time
 
-from mongoengine import *
+from mongoengine import Document, StringField
 
 from app.static.python.utils.snowflake_generator import make_snowflake
 

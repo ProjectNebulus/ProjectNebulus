@@ -1,4 +1,10 @@
-from mongoengine import *
+from mongoengine import (
+    BooleanField,
+    EmbeddedDocument,
+    ListField,
+    ReferenceField,
+    StringField,
+)
 
 
 class ChatProfile(EmbeddedDocument):

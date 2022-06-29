@@ -1,4 +1,5 @@
 import graphene
+
 from app.static.python.mongodb import delete
 
 

@@ -1,7 +1,15 @@
-from datetime import datetime
 import time
+from datetime import datetime
+
+from mongoengine import (
+    DateTimeField,
+    EmbeddedDocument,
+    ListField,
+    ReferenceField,
+    StringField,
+)
+
 from app.static.python.utils.snowflake_generator import make_snowflake
-from mongoengine import *
 
 
 class Message(EmbeddedDocument):

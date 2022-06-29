@@ -1,12 +1,12 @@
 import datetime
 from datetime import datetime
 
-from flask import session, request
+from flask import request, session
 
-from . import internal
 from .....static.python.classes import Avatar, ChatProfile
 from .....static.python.mongodb import create, read
 from .....static.python.utils.security import hash256
+from . import internal
 
 
 @internal.route("/create-user", methods=["POST"])

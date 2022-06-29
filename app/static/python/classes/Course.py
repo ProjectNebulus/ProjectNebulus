@@ -1,8 +1,16 @@
 from datetime import datetime
 
-from mongoengine import *
+from mongoengine import (
+    BooleanField,
+    DateTimeField,
+    EmbeddedDocumentField,
+    ListField,
+    ReferenceField,
+    StringField,
+)
 
 from app.routes.main import utils
+
 from .Avatar import Avatar
 from .Snowflake import Snowflake
 

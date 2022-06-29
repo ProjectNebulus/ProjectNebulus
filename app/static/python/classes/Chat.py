@@ -1,11 +1,16 @@
 from datetime import datetime
 
-from mongoengine import *
+from mongoengine import (
+    DateTimeField,
+    EmbeddedDocumentField,
+    ListField,
+    ReferenceField,
+    StringField,
+)
 
 from .Avatar import Avatar
 from .Message import Message
 from .Snowflake import Snowflake
-from .Message import Message
 
 
 class Chat(Snowflake):

@@ -1,7 +1,6 @@
 from datetime import datetime
 
 import graphene
-from graphene.types import generic
 
 
 class AvatarInput(graphene.InputObjectType):

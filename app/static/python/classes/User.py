@@ -1,10 +1,19 @@
 from datetime import datetime
 
-from mongoengine import *
+from mongoengine import (
+    BooleanField,
+    DateTimeField,
+    EmailField,
+    EmbeddedDocumentField,
+    IntField,
+    ListField,
+    ReferenceField,
+    StringField,
+)
 
-from app.static.python.utils.security import hash256
 from .Avatar import Avatar
 from .Canvas import Canvas
+from .ChatProfile import ChatProfile
 from .Discord import Discord
 from .GoogleClassroom import GoogleClassroom
 from .NebulusDocuments import NebulusDocument
@@ -12,7 +21,6 @@ from .Planner import Planner
 from .Schoology import Schoology
 from .Snowflake import Snowflake
 from .Spotify import Spotify
-from .ChatProfile import ChatProfile
 
 
 class User(Snowflake):

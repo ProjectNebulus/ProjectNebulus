@@ -1,4 +1,3 @@
-import io
 import os
 
 # from google.cloud import vision
@@ -12,7 +11,7 @@ def detect_image(file_name):
     client = vision.ImageAnnotatorClient()
     file_name = os.path.abspath(file_name)
     # Loads the image into memory
-    with io.open(file_name, "rb") as image_file:
+    with open(file_name, "rb") as image_file:
         content = image_file.read()
     image = vision.Image(content=content)
 

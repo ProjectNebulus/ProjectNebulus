@@ -2,9 +2,9 @@ from json import loads
 
 from flask import request, session
 
-from . import internal
 from .....routes.main import private_endpoint
-from .....static.python.mongodb import update, read
+from .....static.python.mongodb import read, update
+from . import internal
 
 
 @internal.route("/planner/load")

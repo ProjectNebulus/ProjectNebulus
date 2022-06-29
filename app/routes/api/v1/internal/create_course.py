@@ -2,12 +2,13 @@ from datetime import datetime
 
 import google.oauth2.credentials
 import schoolopy
-from flask import session, request
+from flask import request, session
 from googleapiclient.discovery import build
 
-from . import internal
 from app.static.python.utils.colors import getColor
+
 from .....static.python.mongodb import create, read
+from . import internal
 
 
 @internal.route("/create-course", methods=["POST"])
@@ -170,7 +171,7 @@ def create_canvas_course():
                 # "likes": update["likes"],
                 # "comment_number": update["num_comments"],
                 "imported_from": "Schoology",
-                "date": datetime.fromtimestamp((announcement["posted_at"])),
+                "date": datetime.fromtimestamp(announcement["posted_at"]),
                 "title": announcement["title"],
                 # "author_color": color,
                 # "author_email": author["primary_email"],

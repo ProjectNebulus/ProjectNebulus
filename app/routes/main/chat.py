@@ -2,10 +2,10 @@ import json
 
 from flask import render_template, session
 
-from . import main_blueprint
-from .utils import logged_in
 from ...static.python.extensions.integrations.schoology import get_schoology_emails
 from ...static.python.mongodb import read
+from . import main_blueprint
+from .utils import logged_in
 
 
 @main_blueprint.route("/chat")

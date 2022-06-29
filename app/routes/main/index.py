@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 from urllib.request import urlopen
 
-from flask import render_template, session, redirect, request, send_file
+from flask import redirect, render_template, request, send_file, session
 
 from . import main_blueprint
 

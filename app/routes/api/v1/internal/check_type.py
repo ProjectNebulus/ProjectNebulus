@@ -1,8 +1,8 @@
 """Check folder or document"""
 
-from . import internal
-from ....main.utils import private_endpoint
 from .....static.python.mongodb import read
+from ....main.utils import private_endpoint
+from . import internal
 
 
 @internal.route("/connect-type/<id>", methods=["POST"])

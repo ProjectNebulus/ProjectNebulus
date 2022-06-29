@@ -1,7 +1,7 @@
 import json
 
 import requests
-from flask import Flask, request, redirect, session, render_template
+from flask import Flask, redirect, render_template, request, session
 from flask_discord import DiscordOAuth2Session
 
 from . import main_blueprint
@@ -52,7 +52,7 @@ def getHeaders(access_token):
 
 
 def getRequest(access_token, endpoint, asJson=True, additional=None):
-    url = "{}/{}".format(baseUrl, endpoint)
+    url = f"{baseUrl}/{endpoint}"
     req = requests.get(url, headers=getHeaders(access_token))
 
     if asJson:

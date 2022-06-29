@@ -1,4 +1,5 @@
 import json
+
 from zoomus import ZoomClient
 
 client = ZoomClient("lLUCahkeRIS_KN8Ilo5hvQ", "HO1uKHXfEy4mx2ZKOrYy1J8JH2yEMCLj")

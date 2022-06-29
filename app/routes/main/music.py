@@ -3,7 +3,7 @@ import os
 import re
 
 import requests
-from flask import render_template, request, redirect, session
+from flask import redirect, render_template, request, session
 from werkzeug.utils import secure_filename
 
 from . import main_blueprint
@@ -22,8 +22,8 @@ def urlEncodeNonAscii(b):
 
 
 def search(query):
-    import urllib.request
     import re
+    import urllib.request
 
     search_keyword = query
     while " " in search_keyword:
@@ -46,7 +46,7 @@ def search(query):
     return video_ids[0]
 
 
-class Musixmatch(object):
+class Musixmatch:
     def __init__(self, apikey):
         """Define objects of type Musixmatch.
         Parameters:
@@ -531,7 +531,7 @@ class Musixmatch(object):
         format - Decide the output type json or xml (default json)
         """
         data = self._request(
-            self._get_url("album.get?album_id={}&format={}".format(album_id, _format))
+            self._get_url(f"album.get?album_id={album_id}&format={_format}")
         )
         return data
 
@@ -619,7 +619,6 @@ class Musixmatch(object):
 
 
 def main_program(file_name):
-    import io
     import os
 
     os.environ[
@@ -630,7 +629,7 @@ def main_program(file_name):
     client = vision.ImageAnnotatorClient()
     file_name = os.path.abspath(file_name)
     # Loads the image into memory
-    with io.open(file_name, "rb") as image_file:
+    with open(file_name, "rb") as image_file:
         content = image_file.read()
     image = vision.Image(content=content)
 
@@ -755,7 +754,7 @@ def music_post():
         print(access_token)
 
         spotify_arr = []
-        file = json.load(open("app/static/json/cache.json", "r"))
+        file = json.load(open("app/static/json/cache.json"))
         for song in artist_info["tracks"]["items"][:10]:
             mydict = {}
 
@@ -779,9 +778,9 @@ def music_post():
             json.dump(file, out, indent=4)
 
     if youtube_needed:
-        import urllib.request
-        import urllib.parse
         import re
+        import urllib.parse
+        import urllib.request
 
         processed_text = text.upper()
         search_keyword = processed_text
@@ -811,17 +810,16 @@ def music_post():
             # author_url
             # thumbnail_url
             # title
-            import urllib.request
             import json
             import urllib
-            import pprint
+            import urllib.request
 
             # change to yours VideoID or change url inparams
             VideoID = link
 
             params = {
                 "format": "json",
-                "url": "https://www.youtube.com/watch?v={}".format(VideoID),
+                "url": f"https://www.youtube.com/watch?v={VideoID}",
             }
             url = "https://www.youtube.com/oembed"
             query_string = urllib.parse.urlencode(params)
@@ -877,7 +875,7 @@ def music_post():
 @logged_in
 def music_spotify(smth):
     extra = ""
-    with open("app/static/json/cache.json", "r") as file:
+    with open("app/static/json/cache.json") as file:
         file = json.load(file)
     for i in file:
         if i["code"] == smth:
@@ -897,10 +895,10 @@ def music_video(id_: str):
         # author_url
         # thumbnail_url
         # title
-        import urllib.request
         import json
-        import urllib
         import pprint
+        import urllib
+        import urllib.request
 
         # change to yours VideoID or change url inparams
         VideoID = link

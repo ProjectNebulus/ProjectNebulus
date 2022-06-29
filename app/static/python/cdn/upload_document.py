@@ -2,8 +2,8 @@ from pathlib import Path
 
 from werkzeug.utils import secure_filename
 
-from .utils import *
 from ..mongodb import create
+from .utils import allowed_file, os, upload_file
 
 """
 Status Codes:

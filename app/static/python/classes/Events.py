@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from mongoengine import *
+from mongoengine import DateTimeField, ReferenceField, StringField
 
 # local imports
 from .Snowflake import Snowflake
