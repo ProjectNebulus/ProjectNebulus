@@ -3,6 +3,8 @@ import os
 import certifi
 from mongoengine import connect
 
+print(os.environ)
+
 ca = certifi.where()
 db = connect(
     db="Nebulus",
