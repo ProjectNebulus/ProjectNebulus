@@ -13,6 +13,7 @@ from .....routes.main.spotify import (
 )
 from ....main.spotify import get_song
 from . import internal
+from flask import request
 
 
 def convert(secs):

@@ -615,13 +615,13 @@ function getChat(chatID) {
 
                 message["content"] = replaceURLs(message['content']);
 
-                chatContent += `<div class="flex items-top space-x-4 mt-2" id="${message['id']}">
+                chatContent += `<div class="flex items-top space-x-4 mt-2 hover:bg-gray-100 dark:hover:bg-gray-700 " id="${message['id']}">
                         <img class="mt-1 w-10 h-10 rounded-full " data-dropdown-toggle="user_${message['id']}"
                              src="${message['sender']['avatar']['avatar_url']}"
                              alt="">
                         <div class="space-y-1 font-medium dark:text-white">
                             <div><span  data-dropdown-toggle="user_${message['id']}" class="hover:underline">${message['sender']['username']}</span> <span class="ml-3 text-sm text-gray-400">${message['send_date']}</span></div>
-                            <div style="font-family: 'Roboto', sans-serif;" class="hover:bg-gray-100 dark:hover:bg-gray-700 text-sm text-gray-500 dark:text-gray-400">${message["content"]}</div>
+                            <div style="font-family: 'Roboto', sans-serif;" class="text-sm text-gray-500 dark:text-gray-400">${message["content"]}</div>
                         </div>
                     </div>
                     <div id="user_${message['id']}" class="z-50 hidden bg-white divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600 rounded-lg block" data-popper-placement="bottom" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 215px, 0px);">
