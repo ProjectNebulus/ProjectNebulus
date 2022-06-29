@@ -11,9 +11,10 @@ from ..static.python.mongodb import read
 
 socketio = SocketIO()
 mail = Mail()
-from .api import *
-from .main import *
-from .static import *
+from .api import api_blueprint
+from .main import main_blueprint
+from .static import static_blueprint
+from ..static.python.mongodb import read
 
 
 class _LogFilter(logging.Filter):
@@ -69,7 +70,7 @@ def init_app():
     app.config["MAIL_USE_SSL"] = True
     app.config["SECRET_KEY"] = os.getenv("MONGOPASS")
     app.register_blueprint(main_blueprint)
-    app.register_blueprint(api.api_blueprint)
+    app.register_blueprint(api_blueprint)
     app.register_blueprint(static_blueprint)
 
     @app.before_request

@@ -8,5 +8,8 @@ api_blueprint = Blueprint(
     static_folder="static",
 )
 
+# Importing routes for this blueprint
 
+from .v1 import *
+from .developers import *
 # from app.routes.api import graphql

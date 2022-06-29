@@ -3,7 +3,8 @@ App entrypoint.
 """
 import os
 import platform
-
+from dotenv import load_dotenv
+load_dotenv()
 from app.routes import init_app, socketio
 
 app = init_app()
@@ -19,6 +20,8 @@ if __name__ == "__main__":
     else:  # macos (darwin) or windows (windows)
         port = 8080
         host = "localhost"
+
+    print(app.url_map)
 
     print(f"Started Running: http://{host}:{port}")
     socketio.run(app, host=host, port=port)

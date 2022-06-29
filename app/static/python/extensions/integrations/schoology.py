@@ -6,7 +6,8 @@ import schoolopy
 from bs4 import BeautifulSoup
 from flask import session
 
-from app.static.python.mongodb import create, read
+from app.static.python.mongodb import read
+from app.static.python.mongodb import create
 from app.static.python.utils.colors import getColor
 
 

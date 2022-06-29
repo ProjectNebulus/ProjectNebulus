@@ -9,7 +9,6 @@ from mongoengine import (
     StringField,
 )
 
-from app.routes.main import utils
 
 from .Avatar import Avatar
 from .Snowflake import Snowflake
@@ -59,4 +58,4 @@ class Course(Snowflake):
 
     def clean(self):
         if not self.avatar:
-            self.avatar = Avatar(avatar_url=utils.SCHOOLOGY_COURSE_ICON)
+            self.avatar = Avatar(avatar_url="https://app.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg")

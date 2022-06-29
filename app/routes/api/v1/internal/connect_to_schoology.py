@@ -10,7 +10,7 @@ from . import internal
 
 
 @internal.route("/connect-to-schoology", methods=["POST"])
-def connect_schoology():
+def user_connect_to_schoology_route():
     key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
     secret = "59ccaaeb93ba02570b1281e1b0a90e18"
     session["token"] = None

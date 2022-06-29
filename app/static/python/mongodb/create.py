@@ -8,14 +8,13 @@ from . import read
 load_dotenv()
 import schoolopy
 
-from ..classes import *
-from .read import find_user
+from ..classes import  *
 
 
 def generateSchoologyObject(_id: str) -> schoolopy.Schoology:
     key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
     secret = "59ccaaeb93ba02570b1281e1b0a90e18"
-    user = find_user(id=_id)
+    user = read.find_user(id=_id)
 
     if not user:
         raise KeyError("User not found")
@@ -176,21 +175,21 @@ def createAvatar(data: dict) -> Avatar:
 
 
 def createDiscordConnection(user_id, data: dict) -> Discord:
-    user = find_user(pk=user_id)
+    user = read.find_user(pk=user_id)
     user.discord.append(Discord(**data))
     user.save()
     return user.discord[-1]
 
 
 def createCanvasConnection(user_id, data: dict) -> Canvas:
-    user = find_user(pk=user_id)
+    user = read.find_user(pk=user_id)
     user.canvas.append(Canvas(**data))
     user.save()
     return user.canvas[-1]
 
 
 def createSpotifyConnection(user_id: str, data: dict) -> Spotify:
-    user = find_user(pk=user_id)
+    user = read.find_user(pk=user_id)
     user.spotify.append(Spotify(**data))
     user.save()
     return user.spotify[-1]

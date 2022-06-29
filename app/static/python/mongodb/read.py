@@ -8,22 +8,7 @@ from mongoengine import Q
 
 from app.static.python.utils.security import valid_password
 
-from ..classes import (
-    Announcement,
-    Assessment,
-    Assignment,
-    Chat,
-    Course,
-    Document,
-    Event,
-    Folder,
-    GoogleClassroom,
-    Grades,
-    NebulusDocument,
-    Schoology,
-    Spotify,
-    User,
-)
+from ..classes import *
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 

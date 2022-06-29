@@ -10,3 +10,7 @@ v1 = flask.Blueprint(
     template_folder="templates",
 )
 api_blueprint.register_blueprint(v1)
+
+# Importing routes for this blueprint
+
+from .internal import *
