@@ -14,6 +14,11 @@ function replaceURLs(message) {
         console.log("returned. recursive detected");
         return message;
     }
+    if (message.includes("src=\"http")) {
+        console.log("returned. recursive detected");
+        return message;
+    }
+
 
     const urlRegex = /(((https?:\/\/)|(www\.))[^\s]+)/g;
 
@@ -662,8 +667,10 @@ function getChat(chatID) {
 
 function sendMessage() {
     let el = document.getElementById('preview');
+    let el2 = document.getElementById('msg_content');
+    el2.value = "";
     let val = el.innerHTML;
-    el.value = '';
+    el.innerHTML = "";
     let chatID = document.getElementById('chatID').getAttribute('data-id');
     socket.emit('new_message', {
         chatType: 'chat',

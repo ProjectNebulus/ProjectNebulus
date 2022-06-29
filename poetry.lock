@@ -385,7 +385,7 @@ singledispatch = ">=3.4.0.3"
 
 [[package]]
 name = "graphql-core"
-version = "3.1.7"
+version = "3.2.1"
 description = "GraphQL implementation for Python, a port of GraphQL.js, the JavaScript reference implementation for GraphQL."
 category = "main"
 optional = false
@@ -393,14 +393,14 @@ python-versions = ">=3.6,<4"
 
 [[package]]
 name = "graphql-relay"
-version = "3.1.5"
+version = "3.2.0"
 description = "Relay library for graphql-core"
 category = "main"
 optional = false
 python-versions = ">=3.6,<4"
 
 [package.dependencies]
-graphql-core = ">=3.1,<3.2"
+graphql-core = ">=3.2,<3.3"
 
 [[package]]
 name = "html5lib"
@@ -1304,12 +1304,12 @@ graphene-mongo = [
     {file = "graphene-mongo-0.2.14.tar.gz", hash = "sha256:30caca1c9a01b463f1127345c902d30197ec2cd5eb6d9a002f9ff77685960dbd"},
 ]
 graphql-core = [
-    {file = "graphql-core-3.1.7.tar.gz", hash = "sha256:62ec192150ccecd9a18cfb79e3e72eb7d1fd68fb594ef19c40099b6deec8ef0c"},
-    {file = "graphql_core-3.1.7-py3-none-any.whl", hash = "sha256:9b460f60320be01c7f3b1766cf3e406933003008055079b9d983b8f3988f4400"},
+    {file = "graphql-core-3.2.1.tar.gz", hash = "sha256:9d1bf141427b7d54be944587c8349df791ce60ade2e3cccaf9c56368c133c201"},
+    {file = "graphql_core-3.2.1-py3-none-any.whl", hash = "sha256:f83c658e4968998eed1923a2e3e3eddd347e005ac0315fbb7ca4d70ea9156323"},
 ]
 graphql-relay = [
-    {file = "graphql-relay-3.1.5.tar.gz", hash = "sha256:127f40913f11cb847452ef794931261aae3b222eaaf976f7c8430298534e54d3"},
-    {file = "graphql_relay-3.1.5-py3-none-any.whl", hash = "sha256:d1455316182e1017d06f0b4d4a2ce8bafad38253a6c7c5666fc80d5d516ee5c8"},
+    {file = "graphql-relay-3.2.0.tar.gz", hash = "sha256:1ff1c51298356e481a0be009ccdff249832ce53f30559c1338f22a0e0d17250c"},
+    {file = "graphql_relay-3.2.0-py3-none-any.whl", hash = "sha256:c9b22bd28b170ba1fe674c74384a8ff30a76c8e26f88ac3aa1584dd3179953e5"},
 ]
 html5lib = [
     {file = "html5lib-1.1-py2.py3-none-any.whl", hash = "sha256:0d78f8fde1c230e99fe37986a60526d7049ed4bf8a9fadbad5f00e22e58e041d"},
