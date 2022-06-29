@@ -47,6 +47,7 @@ COPY * /opt/nebulus
 #COPY app/templates/ /opt/app/templates
 #COPY app/static/ /opt/app/static
 
+RUN poetry lock
 RUN poetry export --without-hashes > requirements.txt
 RUN ["stdbuf", "-oL", "pip", "install", "-r", "requirements.txt"]
 
