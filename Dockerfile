@@ -7,7 +7,7 @@ ENV PATH="$PATH:/root/.local/bin"
 
 RUN curl -sSL 'https://install.python-poetry.org' | python - && poetry --version
 
-WORKDIR /opt/nebulus/app
+COPY . .
 RUN poetry install
 
 EXPOSE 8080:8080
