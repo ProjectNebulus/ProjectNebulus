@@ -1,50 +1,42 @@
+import codecs
 import random
 
-from flask import request, session
+from flask import session, request
 from flask_mail import Message
 
-from .... import mail
 from . import internal
+from .... import mail
 
 
-def send_email(data):
-    code = random.randint(10000000, 99999999)
-    session["verificationCode"] = str(code)
-    print(code)
-
+def send_email(subject, recipients, message):
     msg = Message(
-        f"Your Nebulus Email Verification Code [{code}] ",
+        subject,
         sender=f"Nebulus <help.nebulus@gmail.com>",
-        recipients=[data["email"]],
-    )
-    import codecs
-
-    htmlform = str(codecs.open("app/templates/utils/email.html", "r").read()).replace(
-        "123456", str(code)
+        recipients=recipients,
     )
 
-    htmlform = htmlform.replace("Nicholas Wang", data["username"])
-
-    msg.html = htmlform
+    msg.html = message
     print("sending email")
     mail.send(msg)
 
 
-# todo: Finish email sending blueprint
-
-
-@internal.route("/send-email", methods=["POST"])
-def send_email_route():
-    """
-    POST /api/internal/send-email
-    Args
-    - recipients
-    - message-head
-    - message-body
-    - message-html-file
-    :return:
-    """
+@internal.route("/signup-email", methods=["POST"])
+def signup_email():
     data = request.get_json()
-    print(data)
-    send_email(data)
+
+    code = random.randint(10000000, 99999999)
+    session["verificationCode"] = str(code)
+    print(code)
+
+    htmlform = str(codecs.open("app/templates/utils/email.html", "r").read()).replace("123456", str(code)) \
+        .replace("Nicholas Wang", data["username"])
+
+    send_email(f"Your Nebulus Email Verification Code", [data["email"]], htmlform)
+
     return "success"
+
+
+@internal.route("/reset-email", methods=["POST"])
+def reset_email():
+    data = request.get_json()
+    send_email(f"Your Nebulus Password Reset Code", [data["email"]], htmlform)

@@ -12,7 +12,7 @@ setInterval(() => {
     original = parseInt(original);
 
     focus.classList.remove("hidden");
-    const current = localStorage.getItem("currentTimer").split(" ");
+    const current = localStorage.getItem("currentTimer").split("\n");
     const secondsPast = original - (parseInt(current[2]) * 3600 + parseInt(current[3]) * 60 + parseInt(current[4]));
 
     let timeText = "Focusing " + (current[0] !== "" ? "on " + current[0] : "") + " for ";

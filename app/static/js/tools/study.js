@@ -70,7 +70,7 @@ function loadTimer() {
         resume();
 }
 
-const saveTimer = () => localStorage.setItem("currentTimer", [timerName.innerHTML, paused + 0, hours, minutes, seconds].join(" "));
+const saveTimer = () => localStorage.setItem("currentTimer", [timerName.innerHTML, paused + 0, hours, minutes, seconds].join("\n"));
 
 if (localStorage.getItem("currentTimer")) loadTimer();
 

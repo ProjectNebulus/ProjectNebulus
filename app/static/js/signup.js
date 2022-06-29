@@ -31,7 +31,7 @@ function next(num) {
         if (checks[0].innerText === "check" && checks[1].innerText === "check" && checks[2].innerText === "check" && checks[3].innerText === "check") {
             const request = $.ajax({
                 type: "POST",
-                url: "/api/v1/internal/send-email",
+                url: "/api/v1/internal/signup-email",
                 contentType: 'application/json',
                 data: JSON.stringify({
                     email: document.getElementById("email").value,

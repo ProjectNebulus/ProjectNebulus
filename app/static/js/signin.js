@@ -1,3 +1,10 @@
+let main, reset;
+
+function resetScreen() {
+    main.classList.toggle("hidden");
+    reset.classList.toggle("hidden");
+}
+
 function selectChanged() {
     document.getElementById('schoolName').innerText = 'Your ' + document.getElementById('selection').value + ' account';
     document.getElementById('schoolInput').placeholder = 'Your ' + document.getElementById('selection').value + ' Username';
@@ -145,7 +152,9 @@ let username, password;
 window.addEventListener('load', function () {
     username = document.getElementById('usrname');
     password = document.getElementById('psw');
-    
+    main = document.getElementById("main");
+    reset = document.getElementById("reset");
+
     let loginButton = document.getElementById('log_in');
     loginButton.style.color = 'gray';
     loginButton.style.backgroundColor = '#006097';
@@ -287,19 +296,3 @@ function reqListener2() {
         status.innerHTML = 'Oh no! A super rare bug occured on our end! Please contact support immediately!';
     }
 }
-
-let forwards = true;
-
-window.addEventListener("load", () => {
-    const bgImage = document.getElementById("bgLms");
-
-    setInterval(() => {
-        if (bgImage.offsetHeight + bgImage.scrollTop >= bgImage.scrollHeight && forwards)
-            forwards = false;
-
-        if (bgImage.scrollTop <= 0 && !forwards)
-            forwards = true;
-
-        bgImage.scrollBy(0, forwards ? 10 : -10);
-    }, 200)
-});
