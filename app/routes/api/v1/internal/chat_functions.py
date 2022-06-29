@@ -1,15 +1,16 @@
 import datetime
+import json
 
 import flask
-from flask import session, request
-from flask.json import jsonify
-from flask_socketio import join_room, leave_room, emit
 import requests
-import json
-from . import internal
-from .... import socketio
-from .....static.python.mongodb import create, read, update, delete
+from flask import request, session
+from flask.json import jsonify
+from flask_socketio import emit, join_room, leave_room
+
 from .....static.python.classes import User
+from .....static.python.mongodb import create, delete, read, update
+from .... import socketio
+from . import internal
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 
@@ -156,8 +157,8 @@ def new_chat(data):
         for x, member in enumerate(chat["members"]):
             chat["members"][x] = json.loads(
                 User.objects.only("id", "chatProfile", "username", "avatar.avatar_url")
-                    .get(pk=member)
-                    .to_json()
+                .get(pk=member)
+                .to_json()
             )
         chat["owner"] = list(
             filter(lambda x: x["_id"] == chat["owner"], chat["members"])
@@ -178,6 +179,7 @@ def changeStatus():
 @internal.route("/get-embed", methods=["GET"])
 def get_embed():
     from bs4 import BeautifulSoup
+
     link = flask.request.args.get("link")
     try:
         request = requests.get(link)
@@ -185,45 +187,52 @@ def get_embed():
         return "invalid"
     soup = BeautifulSoup(request.content, "html.parser")
     try:
-        title = soup.find("meta", property="og:title")['content']
+        title = soup.find("meta", property="og:title")["content"]
     except:
         title = ""
     try:
-        url = soup.find("meta", property="og:url")['content']
+        url = soup.find("meta", property="og:url")["content"]
     except:
         url = ""
     try:
-        descrip = soup.find("meta", property="og:description")['content']
+        descrip = soup.find("meta", property="og:description")["content"]
     except:
         descrip = ""
     try:
-        site = soup.find("meta", property="og:site_name")['content']
+        site = soup.find("meta", property="og:site_name")["content"]
     except:
         site = ""
     try:
         if "youtube.com/watch" in link:
             location = link.index("v=")
-            id = link[location+2:location+14]
+            id = link[location + 2 : location + 14]
             image = """
             
            <iframe width="560" height="315" src="https://www.youtube.com/embed/${id}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>"""
 
         if "youtu.be/" in link:
             location = link.index("/")
-            id = link[location+1: location+13]
+            id = link[location + 1 : location + 13]
             image = """
             
            <iframe width="560" height="315" src="https://www.youtube.com/embed/${id}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>"""
 
         else:
-            image = soup.find("meta", property="og:image")['content']
+            image = soup.find("meta", property="og:image")["content"]
     except:
         image = ""
     try:
-        color = soup.find("meta", property="theme-color")['content']
+        color = soup.find("meta", property="theme-color")["content"]
     except:
         color = ""
-    if title != "" or url!="" or color!= "" or image!= "" or site!= "" or descrip!="":
+    if (
+        title != ""
+        or url != ""
+        or color != ""
+        or image != ""
+        or site != ""
+        or descrip != ""
+    ):
         embed = f"""
         <div style="border-style: none none none solid; border-width:3px; border-color:{color}" class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
         <a href="{url}"><h5 class="mb-2 text-md hover:underline font-bold tracking-tight text-black dark:text-white">{site}</h5></a>
@@ -236,7 +245,6 @@ def get_embed():
         embed = ""
 
     print(embed)
-
 
     return embed
 
@@ -281,6 +289,7 @@ def fetchChats():
 @internal.route("/get-chat", methods=["POST"])
 def getChat():
     import datetime
+
     print(read.find_user(pk=session["id"]).password)
 
     data = request.get_json()
@@ -292,8 +301,8 @@ def getChat():
     for message in chat["messages"]:
         message["sender"] = json.loads(
             User.objects.only("id", "username", "avatar.avatar_url")
-                .get(pk=message["sender"])
-                .to_json()
+            .get(pk=message["sender"])
+            .to_json()
         )
         message["send_date"] = datetime.datetime.fromtimestamp(
             message["send_date"]["$date"] / 1000
@@ -321,18 +330,18 @@ def fetchMessages():
     if len(chat["messages"]) < data["current_index"] + 20:
         print(len(chat["messages"]))
         chat["messages"] = list(reversed(chat["messages"]))[
-                           data["current_index"]: len(chat["messages"])
-                           ]
+            data["current_index"] : len(chat["messages"])
+        ]
     else:
         chat["messages"] = list(reversed(chat["messages"]))[
-                           data["current_index"]: (data["current_index"] + 30)
-                           ]
+            data["current_index"] : (data["current_index"] + 30)
+        ]
 
     for message in chat["messages"]:
         message["sender"] = json.loads(
             User.objects.only("id", "username", "avatar.avatar_url")
-                .get(pk=message["sender"])
-                .to_json()
+            .get(pk=message["sender"])
+            .to_json()
         )
         message["send_date"] = datetime.datetime.fromtimestamp(
             message["send_date"]["$date"] / 1000

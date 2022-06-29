@@ -2,8 +2,8 @@ import datetime
 
 from flask import redirect, render_template, session
 
-from . import main_blueprint, utils
 from ...static.python.mongodb import read
+from . import main_blueprint, utils
 
 
 @main_blueprint.route("/signin", methods=["GET"])

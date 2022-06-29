@@ -1,4 +1,5 @@
-from mongoengine import *
+from mongoengine import BooleanField, StringField, URLField
+
 from .Snowflake import Snowflake
 
 

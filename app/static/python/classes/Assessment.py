@@ -1,4 +1,4 @@
-from mongoengine import *
+from mongoengine import DateTimeField, IntField, ReferenceField, StringField
 
 from .Snowflake import Snowflake
 

@@ -1,5 +1,12 @@
-from ..classes import *
-from ..classes import Schoology
+from ..classes import (
+    Chat,
+    Community,
+    Message,
+    NebulusDocument,
+    Planner,
+    Schoology,
+    User,
+)
 
 
 def schoologyLogin(_id: str, schoology: dict):

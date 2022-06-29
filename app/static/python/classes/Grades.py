@@ -1,6 +1,4 @@
-from typing import Dict, List
-
-from mongoengine import *
+from mongoengine import DictField, FloatField, ReferenceField
 
 from .Snowflake import Snowflake
 

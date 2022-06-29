@@ -1,9 +1,8 @@
 """Find Folders"""
 
-from . import internal
-from ....main.utils import private_endpoint
 from .....static.python.mongodb import read
-from .....static.python.classes import Folder, Course
+from ....main.utils import private_endpoint
+from . import internal
 
 
 @internal.route("/find-folders/<id>", methods=["POST"])

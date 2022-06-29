@@ -1,4 +1,4 @@
-from github import Github, ApplicationOAuth
+from github import ApplicationOAuth, Github
 
 # First course a Github instance:
 

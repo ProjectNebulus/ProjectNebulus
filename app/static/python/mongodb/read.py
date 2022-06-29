@@ -2,13 +2,30 @@ from __future__ import annotations
 
 import json
 import re
-from typing import List
 
 import schoolopy
 from mongoengine import Q
 
 from app.static.python.utils.security import valid_password
-from ..classes import *
+
+from ..classes import (
+    Announcement,
+    Assessment,
+    Assignment,
+    Chat,
+    Course,
+    Document,
+    DocumentFile,
+    Event,
+    Folder,
+    GoogleClassroom,
+    Grades,
+    NebulusDocument,
+    NebulusDocuments,
+    Schoology,
+    Spotify,
+    User,
+)
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 
@@ -38,12 +55,12 @@ def getFolder(folder_id: str) -> Folder:
     return folder
 
 
-def get_user_courses(user_id: str) -> List[Course]:
+def get_user_courses(user_id: str) -> list[Course]:
     user = find_user(pk=user_id)
     return Course.objects(authorizedUsers=user)
 
 
-def search_user(query: str) -> List[User]:
+def search_user(query: str) -> list[User]:
     return User.objects(username__istartswith=query).only(
         "id", "username", "email", "avatar", "_cls"
     )[:10]
@@ -88,7 +105,7 @@ def find_document(**kwargs) -> Document | None:
     return document
 
 
-def getSchoology(**kwargs) -> List[Schoology] | None:
+def getSchoology(**kwargs) -> list[Schoology] | None:
     try:
         return find_user(**kwargs).schoology
     except KeyError:
@@ -96,7 +113,7 @@ def getSchoology(**kwargs) -> List[Schoology] | None:
 
 
 def getClassroom(
-        userID: str = None, username: str = None, email: str = None
+    userID: str = None, username: str = None, email: str = None
 ) -> GoogleClassroom:
     return find_user(id=userID, username=username, email=email).gclassroom
 
@@ -106,7 +123,7 @@ def getSpotify(userID: str = None, username: str = None, email: str = None) -> S
 
 
 def getSpotifyCache(
-        userID: str = None, username: str = None, email: str = None
+    userID: str = None, username: str = None, email: str = None
 ) -> Spotify | None:
     try:
         return find_user(
@@ -155,7 +172,7 @@ def get_announcement(announcement_id: str) -> Announcement:
     return announcement
 
 
-def get_folders(parent_id: int = None, course_id: int = None) -> List[Folder]:
+def get_folders(parent_id: int = None, course_id: int = None) -> list[Folder]:
     if not parent_id and not course_id:
         raise ValueError("Must provide either parent_id or course_id")
 
@@ -206,8 +223,8 @@ def sort_course_events(user_id: str, course_id: int):
                 {
                     key: list(result)
                     for key, result in groupby(
-                    sorted_announcements, key=lambda obj: obj.date.date()
-                )
+                        sorted_announcements, key=lambda obj: obj.date.date()
+                    )
                 }.items()
             )
         )
@@ -243,8 +260,8 @@ def sort_user_events(user_id: str, maxDays=8, maxEvents=16):
                 {
                     key: list(result)
                     for key, result in groupby(
-                    sorted_announcements, key=lambda obj: obj.date.date()
-                )
+                        sorted_announcements, key=lambda obj: obj.date.date()
+                    )
                 }.items()
             )[-maxDays:]
         )
@@ -255,7 +272,7 @@ def sort_user_events(user_id: str, maxDays=8, maxEvents=16):
     # events_assessments_assignments = events | assignments | assessments
 
 
-def unsorted_user_events(user_id: str) -> List[List]:
+def unsorted_user_events(user_id: str) -> list[list]:
     courses = get_user_courses(user_id)
     events = Event.objects(course__in=courses)
     announcements = Announcement.objects(course__in=courses)
@@ -364,8 +381,8 @@ def search(keyword: str, username: str):
         {"$project": {"title": 1, "_id": 1, "_cls": 1}},
     ]
     courses = Course.objects(Q(authorizedUsers=user.id) & Q(name__istartswith=keyword))[
-              :10
-              ]
+        :10
+    ]
     chats = Chat.objects(Q(owner=user.id) & Q(title__istartswith=keyword))[:10]
     NebulusDocuments = NebulusDocument.objects(
         Q(authorizedUsers=user.id) & Q(name__istartswith=keyword)
@@ -430,7 +447,7 @@ def loadChats(user_id: str, current_index, initial_amount, required_fields):
     if len(chats) < current_index + initial_amount:
         initial_amount = len(chats) - current_index
 
-    chats = chats[current_index: (current_index + initial_amount)]
+    chats = chats[current_index : (current_index + initial_amount)]
     for chat in chats:
         if len(chat["members"]) == 2:
             for x, member in enumerate(chat["members"]):
@@ -438,8 +455,8 @@ def loadChats(user_id: str, current_index, initial_amount, required_fields):
                     User.objects.only(
                         "id", "chatProfile", "username", "avatar.avatar_url"
                     )
-                        .get(pk=member)
-                        .to_json()
+                    .get(pk=member)
+                    .to_json()
                 )
             chat["owner"] = list(
                 filter(lambda x: x["_id"] == chat["owner"], chat["members"])

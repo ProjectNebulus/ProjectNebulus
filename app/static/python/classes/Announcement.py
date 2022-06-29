@@ -1,6 +1,13 @@
 import datetime
 
-from mongoengine import *
+from mongoengine import (
+    DateTimeField,
+    EmailField,
+    IntField,
+    ListField,
+    ReferenceField,
+    StringField,
+)
 
 from .Snowflake import Snowflake
 

@@ -1,4 +1,4 @@
-from mongoengine import *
+from mongoengine import EmailField, EmbeddedDocument, StringField
 
 
 class Schoology(EmbeddedDocument):

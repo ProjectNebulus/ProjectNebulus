@@ -3,11 +3,6 @@ import os
 import certifi
 from mongoengine import connect
 
-from . import create
-from . import delete
-from . import read
-from . import update
-
 ca = certifi.where()
 db = connect(
     db="Nebulus",

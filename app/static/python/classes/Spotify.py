@@ -1,4 +1,4 @@
-from mongoengine import *
+from mongoengine import DictField, EmbeddedDocument, StringField
 
 
 class Spotify(EmbeddedDocument):

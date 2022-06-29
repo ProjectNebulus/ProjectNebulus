@@ -1,4 +1,10 @@
-from mongoengine import *
+from mongoengine import (
+    DateTimeField,
+    DictField,
+    EmbeddedDocument,
+    ListField,
+    StringField,
+)
 
 
 class Planner(EmbeddedDocument):

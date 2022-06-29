@@ -1,6 +1,6 @@
 from ...Document import DocumentFile as DocumentFileModel
-from ..graphene_models import *
 from ...User import User as UserModel
+from ..graphene_models import *
 from ..graphql_inputs.update_inputs import *
 
 

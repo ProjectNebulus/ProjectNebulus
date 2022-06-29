@@ -1,11 +1,12 @@
 from datetime import datetime
-import schoolopy
+
 import mechanize
 import requests
+import schoolopy
 from bs4 import BeautifulSoup
-from app.static.python.mongodb import *
-from app.static.python.mongodb import read
 from flask import session
+
+from app.static.python.mongodb import create, read
 from app.static.python.utils.colors import getColor
 
 

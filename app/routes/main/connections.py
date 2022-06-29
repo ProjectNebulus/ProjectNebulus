@@ -1,6 +1,6 @@
 import httplib2
 import schoolopy
-from flask import render_template, session, request
+from flask import render_template, request, session
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -39,7 +39,9 @@ def g_classroom_auth():
     classroom_object = getClassroom(username=session["username"])
 
     if classroom_object:
-        import random, json, os
+        import json
+        import os
+        import random
 
         filename = "token_" + str(random.randrange(1000000000, 9999999999)) + ".json"
         tokeninfo2 = classroom_object.to_json()

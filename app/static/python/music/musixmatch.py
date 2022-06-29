@@ -2,7 +2,7 @@
 import requests
 
 
-class Musixmatch(object):
+class Musixmatch:
     def __init__(self, apikey):
         """Define objects of type Musixmatch.
         Parameters:
@@ -497,7 +497,7 @@ class Musixmatch(object):
         format - Decide the output type json or xml (default json)
         """
         data = self._request(
-            self._get_url("album.get?album_id={}&format={}".format(album_id, _format))
+            self._get_url(f"album.get?album_id={album_id}&format={_format}")
         )
         return data
 

@@ -1,13 +1,14 @@
 def daplagarism(data1, data2):
     # https://towardsdatascience.com/simple-plagiarism-detection-in-python-2314ac3aee88
     import re
-    from nltk.util import ngrams, pad_sequence, everygrams
-    from nltk.tokenize import word_tokenize
-    from nltk.lm import MLE, WittenBellInterpolated
+
+    import nltk
     import numpy as np
     import plotly.graph_objects as go
+    from nltk.lm import WittenBellInterpolated
+    from nltk.tokenize import word_tokenize
+    from nltk.util import everygrams, ngrams, pad_sequence
     from scipy.ndimage import gaussian_filter
-    import nltk
 
     nltk.download("punkt")
 

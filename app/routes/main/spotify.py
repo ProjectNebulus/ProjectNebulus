@@ -2,8 +2,7 @@ import os
 import uuid
 
 import spotipy
-from flask import render_template
-from flask import session, request, redirect
+from flask import redirect, render_template, request, session
 from spotipy import CacheHandler, SpotifyException
 
 from . import main_blueprint
@@ -127,7 +126,7 @@ def spotify_sign_out():
         session.pop("token_info")
         session.pop("uuid")
     except OSError as e:
-        print("Error: %s - %s." % (e.filename, e.strerror))
+        print(f"Error: {e.filename} - {e.strerror}.")
     return redirect("/spotify")
 
 

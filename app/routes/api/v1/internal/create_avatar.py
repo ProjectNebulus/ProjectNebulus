@@ -1,6 +1,7 @@
-from flask import request, flash
-from . import internal
+from flask import flash, request
+
 from .....static.python.cdn.upload_avatar import upload_avatar
+from . import internal
 
 
 @internal.route("/create_avatar", methods=["POST"])

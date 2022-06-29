@@ -10,5 +10,3 @@ v1 = flask.Blueprint(
     template_folder="templates",
 )
 api_blueprint.register_blueprint(v1)
-
-from .internal import *
