@@ -26,13 +26,12 @@ RUN apt-get update && apt-get upgrade -y \
     curl \
     gettext \
     git \
-     libdbus-glib-1-dev libgirepository1.0-dev
+     libdbus-glib-1-dev libgirepository1.0-dev && \
   # Installing `poetry` package manager:
   # https://github.com/python-poetry/poetry
-  #  && curl -sSL 'https://install.python-poetry.org' | python - \
-  #  && poetry --version \
+   curl -sSL 'https://install.python-poetry.org' | python - && poetry --version
   # Cleaning cache:
-  #&& apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
+ #  && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
  # && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /opt/nebulus
@@ -48,7 +47,8 @@ COPY * /opt/nebulus
 #COPY app/templates/ /opt/app/templates
 #COPY app/static/ /opt/app/static
 
-RUN ["stdbuf", "-oL", "pip", "install", "."]
+RUN poetry export --without-hashes > requirements.txt
+RUN ["stdbuf", "-oL", "pip", "install", "-r", "requirements.txt"]
 
 RUN ["stdbuf", "-oL", "mkdir", "/opt/nebulus/app"]
 RUN ["stdbuf", "-oL", "mv", "/opt/nebulus/__init__.py", "/opt/nebulus/app"]
