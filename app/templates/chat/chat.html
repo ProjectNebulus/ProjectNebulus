@@ -395,7 +395,9 @@
     textarea_el.oninput = function () {
         updateEditor(textarea_el, document.getElementById('preview'));
     };
-    console.log('hi');
+
+    marked.use({gfm: false});
+
 
     function updateEditor(input, preview) {
         console.log('hi');
@@ -411,7 +413,6 @@
     }
 
     import { createPicker } from 'https://unpkg.com/picmo@5.1.0/dist/index.js';
-    import 'https://unpkg.com/@picmo/renderer-twemoji@5.1.0/dist/umd/picmo-twemoji.js';
 // The picker must have a root element to insert itself into
     const rootElement = document.querySelector('#emojiPicker');
 

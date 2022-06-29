@@ -48,7 +48,7 @@ def new_message(json_data):
                 "send_date": send_date,
                 "chatID": chatID,
             },
-            room=chatID,
+            room=chatID
         )
     else:
         # TODO: Create message for communities
@@ -186,22 +186,8 @@ def get_embed():
     except:
         return "invalid"
     soup = BeautifulSoup(request.content, "html.parser")
-    try:
-        title = soup.find("meta", property="og:title")["content"]
-    except:
-        title = ""
-    try:
-        url = soup.find("meta", property="og:url")["content"]
-    except:
-        url = ""
-    try:
-        descrip = soup.find("meta", property="og:description")["content"]
-    except:
-        descrip = ""
-    try:
-        site = soup.find("meta", property="og:site_name")["content"]
-    except:
-        site = ""
+    metas = soup.find_all('meta')
+    print(metas)
     try:
         if "youtube.com/watch" in link:
             location = link.index("v=")

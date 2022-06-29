@@ -33,7 +33,7 @@ function replaceURLs(message) {
         //youtube iframe / embed for everything else
         let txt = "";
       $.ajax({
-          url: "https://jsfiddle.net/",
+          url: "https://cors-anywhere.herokuapp.com/https://beta.nebulus.ml",
           error: function() {
             return false;
           },
@@ -680,6 +680,7 @@ function sendMessage() {
     el2.value = "";
     let val = el.innerHTML;
     el.innerHTML = "";
+    console.log(val);
     let chatID = document.getElementById('chatID').getAttribute('data-id');
     socket.emit('new_message', {
         chatType: 'chat',
