@@ -1,10 +1,10 @@
+import os
+
 import flask
 import google.oauth2.credentials
 import google_auth_oauthlib.flow
 import requests
-from flask import render_template, session, request, redirect
-import os
-
+from flask import redirect, render_template, request, session
 from googleapiclient.discovery import build
 
 # -*- coding: utf-8 -*-

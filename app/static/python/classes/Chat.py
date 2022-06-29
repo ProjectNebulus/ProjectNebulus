@@ -5,7 +5,6 @@ from mongoengine import *
 from .Avatar import Avatar
 from .Message import Message
 from .Snowflake import Snowflake
-from .Message import Message
 
 
 class Chat(Snowflake):

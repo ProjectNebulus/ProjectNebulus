@@ -1,7 +1,7 @@
 import datetime
 from functools import wraps
 
-from flask import session, redirect, request, render_template
+from flask import redirect, render_template, request, session
 
 try:
     from ...static.python.mongodb import read

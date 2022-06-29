@@ -1,8 +1,8 @@
 import graphene
-from .graphql_query import Query
-from .graphql_mutations.core import DBMutations
-from . import graphene_models as gm
 
+from . import graphene_models as gm
+from .graphql_mutations.core import DBMutations
+from .graphql_query import Query
 
 schema = graphene.Schema(
     query=Query,

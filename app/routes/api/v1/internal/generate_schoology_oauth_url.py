@@ -1,8 +1,8 @@
-from .....static.python.extensions.integrations.schoology import generate_schoology_url
 from flask import request, session
 
-from . import internal
+from .....static.python.extensions.integrations.schoology import generate_schoology_url
 from ....main.utils import private_endpoint
+from . import internal
 
 
 @internal.route("/generate-schoology-oauth-url", methods=["GET"])

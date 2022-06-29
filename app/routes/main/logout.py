@@ -1,4 +1,4 @@
-from flask import session, redirect
+from flask import redirect, session
 
 from . import main_blueprint
 
@@ -7,7 +7,7 @@ from . import main_blueprint
 def logout():
     print(session["username"], "logged out")
     session.clear()
-    return redirect('/')
+    return redirect("/")
     '''
     return """
     <script>navigator.serviceWorker.getRegistrations().then(function(registrations) {

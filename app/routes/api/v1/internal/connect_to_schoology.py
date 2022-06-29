@@ -1,12 +1,12 @@
-from flask import session, request
+from flask import request, session
 
-from . import internal
-from .....static.python.mongodb import update, read
 from .....static.python.extensions.integrations.schoology import (
     create_schoology,
-    generate_auth,
     create_schoology_auth,
+    generate_auth,
 )
+from .....static.python.mongodb import read, update
+from . import internal
 
 
 @internal.route("/connect-to-schoology", methods=["POST"])

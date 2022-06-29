@@ -1,17 +1,8 @@
-from flask import render_template, redirect, session
-
-from . import main_blueprint
-
-from flask import render_template, redirect, session, request
-
-from ...static.python.mongodb import read
-
-from . import main_blueprint
 import datetime
 
 import flask
 import google.oauth2.credentials
-from flask import render_template, session, request
+from flask import redirect, render_template, request, session
 
 from ...static.python.mongodb import read
 from . import main_blueprint, utils

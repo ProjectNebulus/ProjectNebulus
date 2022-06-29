@@ -1,8 +1,8 @@
-from flask import session, redirect
+from flask import redirect, session
 
-from . import internal
+from .....static.python.mongodb import read, update
 from ....main.utils import private_endpoint
-from .....static.python.mongodb import update, read
+from . import internal
 
 
 @internal.route("/logout-of-schoology")

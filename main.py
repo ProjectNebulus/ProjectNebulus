@@ -3,9 +3,10 @@ App entrypoint.
 """
 import os
 import platform
+
 from app.routes import init_app, socketio
-from app.static.python.mongodb import create
 from app.static.python.classes import User
+from app.static.python.mongodb import create
 
 app = init_app()
 app.secret_key = os.getenv("MONGOPASS")

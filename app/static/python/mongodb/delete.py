@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 from ..classes import Announcement, Course
 
 # from ..classes import *

@@ -3,10 +3,7 @@ import os
 import certifi
 from mongoengine import connect
 
-from . import create
-from . import delete
-from . import read
-from . import update
+from . import create, delete, read, update
 
 ca = certifi.where()
 db = connect(

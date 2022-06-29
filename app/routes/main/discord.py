@@ -1,7 +1,7 @@
 import json
 
 import requests
-from flask import Flask, request, redirect, session, render_template
+from flask import Flask, redirect, render_template, request, session
 from flask_discord import DiscordOAuth2Session
 
 from . import main_blueprint

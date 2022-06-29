@@ -2,8 +2,7 @@ import os
 import uuid
 
 import spotipy
-from flask import render_template
-from flask import session, request, redirect
+from flask import redirect, render_template, request, session
 from spotipy import CacheHandler, SpotifyException
 
 from . import main_blueprint

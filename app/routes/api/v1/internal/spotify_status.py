@@ -1,17 +1,18 @@
-from . import internal
-from ....main.spotify import get_song
+from app.static.python.music.musixmatch import Musixmatch
+
 from .....routes.main.spotify import (
-    shuffle_spotify,
-    shuffle2_spotify,
-    loop_spotify,
     loop1_spotify,
     loop2_spotify,
-    pause_spotify,
+    loop_spotify,
     next_spotify,
+    pause_spotify,
     prev_spotify,
     resume_spotify,
+    shuffle2_spotify,
+    shuffle_spotify,
 )
-from app.static.python.music.musixmatch import Musixmatch
+from ....main.spotify import get_song
+from . import internal
 
 
 def convert(secs):

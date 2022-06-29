@@ -1,10 +1,10 @@
 import re
 
-from flask import session, request
+from flask import request, session
 
-from . import internal
-from ....main.utils import private_endpoint
 from .....static.python.mongodb import delete, update
+from ....main.utils import private_endpoint
+from . import internal
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 

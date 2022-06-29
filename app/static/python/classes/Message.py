@@ -1,7 +1,9 @@
-from datetime import datetime
 import time
-from app.static.python.utils.snowflake_generator import make_snowflake
+from datetime import datetime
+
 from mongoengine import *
+
+from app.static.python.utils.snowflake_generator import make_snowflake
 
 
 class Message(EmbeddedDocument):

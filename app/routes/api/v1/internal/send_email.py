@@ -1,10 +1,10 @@
 import random
 
-from flask import Flask
-from flask import session, request
+from flask import Flask, request, session
 from flask_mail import Message
-from . import internal
+
 from .... import mail
+from . import internal
 
 
 def send_email(data):

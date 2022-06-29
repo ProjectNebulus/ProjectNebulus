@@ -1,7 +1,8 @@
 # Imports
 from logging import LogRecord
+
 from flask import has_request_context
-from flask.logging import logging, default_handler
+from flask.logging import default_handler, logging
 from flask_cors import CORS
 from flask_mail import Mail
 from flask_socketio import SocketIO
@@ -50,8 +51,9 @@ def init_app():
     """
     Creates a flask application.
     """
-    from flask import Flask
     import os
+
+    from flask import Flask
 
     app = Flask(__name__)
     app.config["SECRET_KEY"] = os.environ.get("MONGOPASS")

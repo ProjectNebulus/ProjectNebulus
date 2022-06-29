@@ -17,13 +17,27 @@ class Assignment(Snowflake):
     """
 
     meta = {"collection": "Assignments"}
-    course = ReferenceField("Course", required=True, description="The course that this assignment is in.")
-    due = DateTimeField(description="The due date of the assignment.", default=datetime.max)
+    course = ReferenceField(
+        "Course", required=True, description="The course that this assignment is in."
+    )
+    due = DateTimeField(
+        description="The due date of the assignment.", default=datetime.max
+    )
     title = StringField(required=True, description="The title of the assignment.")
-    points = FloatField(default=10, description="The number of points the assignment is worth.")
-    grade = FloatField(default=None, null=True, description="The number of points the teacher assigned.")
-    submitDate = DateTimeField(default=None, null=True, description="The time the assignment was submitted.")
-    description = StringField(default="", null=True, description="The description of the assignment.")
+    points = FloatField(
+        default=10, description="The number of points the assignment is worth."
+    )
+    grade = FloatField(
+        default=None,
+        null=True,
+        description="The number of points the teacher assigned.",
+    )
+    submitDate = DateTimeField(
+        default=None, null=True, description="The time the assignment was submitted."
+    )
+    description = StringField(
+        default="", null=True, description="The description of the assignment."
+    )
 
     def __str__(self):
         return f'Assignment(title="{self.title}", grade={self.grade}, points={self.points}, due="{self.due.date()}")'

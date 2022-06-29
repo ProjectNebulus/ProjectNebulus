@@ -2,9 +2,9 @@ import flask
 import google.oauth2.credentials
 from googleapiclient.discovery import build
 
+from ...static.python.mongodb import read
 from . import main_blueprint
 from .spotify import *
-from ...static.python.mongodb import read
 
 
 def generate_redirect(url):

@@ -2,12 +2,13 @@ from datetime import datetime
 
 import google.oauth2.credentials
 import schoolopy
-from flask import session, request
+from flask import request, session
 from googleapiclient.discovery import build
 
-from . import internal
 from app.static.python.utils.colors import getColor
+
 from .....static.python.mongodb import create, read
+from . import internal
 
 
 @internal.route("/create-course", methods=["POST"])

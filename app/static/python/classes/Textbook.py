@@ -1,6 +1,7 @@
 from mongoengine import *
-from .Snowflake import Snowflake
+
 from .Avatar import Avatar
+from .Snowflake import Snowflake
 
 
 class Textbook(Snowflake):

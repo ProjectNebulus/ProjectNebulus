@@ -4,9 +4,9 @@ import google.oauth2.credentials
 from flask import render_template, session
 from googleapiclient.discovery import build
 
+from ...static.python.mongodb import read
 from . import main_blueprint, utils
 from .utils import logged_in
-from ...static.python.mongodb import read
 
 
 def credentials_to_dict(credentials):

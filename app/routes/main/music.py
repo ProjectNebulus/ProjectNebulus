@@ -3,7 +3,7 @@ import os
 import re
 
 import requests
-from flask import render_template, request, redirect, session
+from flask import redirect, render_template, request, session
 from werkzeug.utils import secure_filename
 
 from . import main_blueprint
@@ -22,8 +22,8 @@ def urlEncodeNonAscii(b):
 
 
 def search(query):
-    import urllib.request
     import re
+    import urllib.request
 
     search_keyword = query
     while " " in search_keyword:
@@ -779,9 +779,9 @@ def music_post():
             json.dump(file, out, indent=4)
 
     if youtube_needed:
-        import urllib.request
-        import urllib.parse
         import re
+        import urllib.parse
+        import urllib.request
 
         processed_text = text.upper()
         search_keyword = processed_text
@@ -811,10 +811,10 @@ def music_post():
             # author_url
             # thumbnail_url
             # title
-            import urllib.request
             import json
-            import urllib
             import pprint
+            import urllib
+            import urllib.request
 
             # change to yours VideoID or change url inparams
             VideoID = link
@@ -897,10 +897,10 @@ def music_video(id_: str):
         # author_url
         # thumbnail_url
         # title
-        import urllib.request
         import json
-        import urllib
         import pprint
+        import urllib
+        import urllib.request
 
         # change to yours VideoID or change url inparams
         VideoID = link

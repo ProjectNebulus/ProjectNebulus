@@ -1,8 +1,9 @@
-from flask import render_template, session, request, redirect
+from flask import redirect, render_template, request, session
+
+from app.static.python.extensions.integrations.canvas import *
 
 from . import main_blueprint
 from .utils import logged_in
-from app.static.python.extensions.integrations.canvas import *
 
 
 @main_blueprint.route("/canvas", methods=["GET"])

@@ -1,8 +1,8 @@
 from flask import Flask, request
 
-from . import internal
 from .....static.python import cdn
 from .....static.python.mongodb import create
+from . import internal
 
 UPLOAD_FOLDER = "app/static/"
 UPLOAD_FOLDER_CDN = "../"
@@ -29,7 +29,7 @@ def upload_file_link():
             {
                 "name": filename,
                 "url": "https://nebulus-cdn.sfo3.cdn.digitaloceanspaces.com/"
-                       + filename,
+                + filename,
                 "course": course,
             }
         )
@@ -37,7 +37,8 @@ def upload_file_link():
         mongo = create.createDocumentFile(
             {
                 "name": filename,
-                "url": "https://nebulus-cdn.sfo3.cdn.digitaloceanspaces.com/" + filename,
+                "url": "https://nebulus-cdn.sfo3.cdn.digitaloceanspaces.com/"
+                + filename,
                 "course": course,
                 "folder": folder,
             }

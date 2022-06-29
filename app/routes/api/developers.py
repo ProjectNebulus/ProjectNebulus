@@ -1,8 +1,8 @@
 from flask import render_template, session
 
-from . import api_blueprint
-from ..main.utils import logged_in
 from ...static.python.mongodb import read
+from ..main.utils import logged_in
+from . import api_blueprint
 
 
 @api_blueprint.route("/developers", methods=["GET"])

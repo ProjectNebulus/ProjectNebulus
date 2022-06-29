@@ -1,7 +1,7 @@
-from flask import session, request
+from flask import request, session
 
-from . import internal
 from .....static.python.mongodb import create
+from . import internal
 
 
 @internal.route("/signup", methods=["POST"])

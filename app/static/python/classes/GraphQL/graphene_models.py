@@ -1,7 +1,8 @@
 from graphene_mongo import MongoengineObjectType
 
-
+from ..Announcement import Announcement as AnnouncementModel
 from ..Assignment import Assignment as AssignmentModel
+from ..Avatar import Avatar as AvatarModel
 from ..Course import Course as CourseModel
 from ..Document import DocumentFile as DocumentModel
 from ..Events import Event as EventModel
@@ -9,8 +10,6 @@ from ..Folder import Folder as FolderModel
 from ..Grades import Grades as GradesModel
 from ..Schoology import Schoology as SchoologyModel
 from ..User import User as UserModel
-from ..Avatar import Avatar as AvatarModel
-from ..Announcement import Announcement as AnnouncementModel
 
 
 class Avatar(MongoengineObjectType):
