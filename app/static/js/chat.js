@@ -184,7 +184,7 @@ $(document).ready(function () {
         let s = ``;
         s += `
         <div onclick="getChat('${chat['_id']}')" id="sidechat_${chat['_id']}" style="margin-bottom:4px;"
-         class="p-2 flex items-center space-x-4 dark:bg-gray-800 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" >`
+         class="p-2 flex items-center space-x-4 dark:bg-gray-800 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200  rounded-lg" >`
         if (chat['members'].length === 2) {
             let other = chat['members'].filter(function (user) {
                 return (user['_id'] != userID)
