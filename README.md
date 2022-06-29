@@ -50,20 +50,20 @@ $ sudo pacman -S python3
 
 ## Other Distros
 
-Install using preferred package manager.
+Install using poetry.
 
-### [Install Poetry](https://python-poetry.org/docs/#installation) (Not needed currently, but might be needed later)
+### [Install Poetry](https://python-poetry.org/docs/#installation)
 
 ### Install Dependencies
 
 ```bash
-$ pip install -r requirements.txt
+$ poetry install
 ```
 
 ### Run
 
 ```bash
-$ python3 main.py
+$ poetryr run python main.py
 ```
 
 ## Setup (docker)
