@@ -10,6 +10,7 @@
     "keywords": [],
     "license": "MPL-2.0",
     "dependencies": {
+        "@picmo/renderer-twemoji": "^5.2.0",
         "dompurify": "^2.3.8",
         "flowbite": "^1.4.7",
         "npx": "^10.2.2",

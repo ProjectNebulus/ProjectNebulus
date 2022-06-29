@@ -254,7 +254,7 @@
                                       clip-rule="evenodd"></path>
                             </svg>
                         </button>
-                        <button type="button"
+                        <button data-dropdown-toggle="emojiPicker" data-dropdown-placement="top"  type="button"
                                 class="hidden md:block p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -263,6 +263,8 @@
                                       clip-rule="evenodd"></path>
                             </svg>
                         </button>
+                        <div id="emojiPicker" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
+                        </div>
                         <div class="block mx-4 p-2.5 w-full">
                         <div id="preview" class="roboto text-black dark:text-white"></div><br><br>
                         <textarea id="msg_content" rows="1"
@@ -402,5 +404,21 @@ function updateEditor(input, preview) {
     };
 
 }
+import { createPicker } from 'picmo';
+import { TwemojiRenderer } from '@picmo/renderer-twemoji';
+
+// The picker must have a root element to insert itself into
+const rootElement = document.querySelector('#emojiPicker');
+
+// Create the picker
+const picker = createPicker({
+    rootElement,
+    renderer: new TwemojiRenderer()
+});
+
+// The picker emits an event when an emoji is selected. Do with it as you will!
+picker.addEventListener('emoji:select', event => {
+    console.log('Emoji selected:', event.emoji);
+});
 </script>
 {% endblock %}
