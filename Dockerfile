@@ -48,7 +48,7 @@ COPY * /opt/nebulus
 #COPY app/templates/ /opt/app/templates
 #COPY app/static/ /opt/app/static
 
-RUN ["stdbuf", "-oL", "pip", "install", "-r", "/opt/nebulus/requirements.txt"]
+RUN ["stdbuf", "-oL", "pip", "install", "."]
 
 RUN ["stdbuf", "-oL", "mkdir", "/opt/nebulus/app"]
 RUN ["stdbuf", "-oL", "mv", "/opt/nebulus/__init__.py", "/opt/nebulus/app"]
