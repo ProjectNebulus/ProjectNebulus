@@ -31,27 +31,49 @@ function replaceURLs(message) {
         hyperlink = hyperlink.replace("<p>", "");
         hyperlink = hyperlink.replace("</p>", "");
         //youtube iframe / embed for everything else
-        let txt = "";
+        let txt = {};
       $.ajax({
-          url: "https://cors-anywhere.herokuapp.com/https://beta.nebulus.ml",
-          error: function() {
-            return false;
+          url: "https://cors-anywhere.herokuapp.com/" + url,
+          type: "GET",
+          headers: {"X-Requested-With": "XMLHttpRequest",
+          "Access-Control-Allow-Origin": "*"},
+          error: function () {
+              return false;
           },
-          success: function(response){
+          success: function (response) {
               // will get the output here in string format
               // used $.parseHTML to get DOM elements from the retrieved HTML string. Reference: https://api.jquery.com/jquery.parsehtml/
               response = $.parseHTML(response);
-              $.each(response, function(i, el){
-                  if(el.nodeName.toString().toLowerCase() == 'meta' && $(el).attr("name") != null && typeof $(el).attr("name") != "undefined"){
-                      txt += $(el).attr("name") +"="+ ($(el).attr("content")?$(el).attr("content"):($(el).attr("value")?$(el).attr("value"):"")) +"<br>";
-                      console.log($(el).attr("name") ,"=", ($(el).attr("content")?$(el).attr("content"):($(el).attr("value")?$(el).attr("value"):"")), el);
+              $.each(response, function (i, el) {
+                  if (el.nodeName.toString().toLowerCase() == 'meta' && $(el).attr("name") != null && typeof $(el).attr("name") != "undefined") {
+                      txt[$(el).attr("name")] = ($(el).attr("content") ? $(el).attr("content") : ($(el).attr("value") ? $(el).attr("value") : "")) + "<br>";
+                      console.log($(el).attr("name"), "=", ($(el).attr("content") ? $(el).attr("content") : ($(el).attr("value") ? $(el).attr("value") : "")), el);
                   }
               });
           },
-          complete: function(){
-              console.log(txt);
+          complete: function () {
+              let result = ``;
+              result += ```
+<div style="border-style: none none none solid; border-width:3px; border-color:${txt['color']}"
+                   className="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                  <a href="${url}"><h5
+                      className="mb-2 text-md hover:underline font-bold tracking-tight text-black dark:text-white">{site}</h5>
+                  </a>
+                  <a href="{link}"><h5
+                      className="mb-2 text-xl hover:underline font-bold tracking-tight text-sky-500">{title}</h5></a>
+                  <p className="font-normal text-gray-700 dark:text-gray-400">{txt["description"]}</p>
+                  ```;
+              if (txt["image"]) {
+                  result += `<img src="${txt["image"]}" style="width:90%; margin:auto; margin-top:10px;">`;
+              }
+              result += ` </div>`;
+
+              return result;
+
+
           }
       });
+
 
             });
     }
