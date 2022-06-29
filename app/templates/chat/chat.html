@@ -11,6 +11,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/picmo@5.1.0/dist/umd/picmo.js"></script>
+<script src="https://unpkg.com/@picmo/renderer-twemoji@5.1.0/dist/umd/picmo-twemoji.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 {% extends "layout.html" %}
 {% block main %}
@@ -388,37 +390,41 @@
 
     </div>
 <script type="module">
-import smile2emoji from 'https://cdn.skypack.dev/smile2emoji';
-let textarea_el = document.getElementById('msg_content');
-textarea_el.oninput = function(){
-    updateEditor(textarea_el,document.getElementById('preview'));
-};
-function updateEditor(input, preview) {
-    input.value =  smile2emoji.checkText(input.value);
-
-
-    preview.innerHTML =
-        DOMPurify.sanitize(twemoji.parse(marked.parse(input.value)));
-    const manageInput = (e) => {
-        e.target.value = checkText(e.target.value);
+    import smile2emoji from 'https://cdn.skypack.dev/smile2emoji';
+    let textarea_el = document.getElementById('msg_content');
+    textarea_el.oninput = function () {
+        updateEditor(textarea_el, document.getElementById('preview'));
     };
+    console.log('hi');
 
-}
-import { createPicker } from 'picmo';
-import { TwemojiRenderer } from '@picmo/renderer-twemoji';
+    function updateEditor(input, preview) {
+        console.log('hi');
+        input.value = smile2emoji.checkText(input.value);
 
+
+        preview.innerHTML =
+            DOMPurify.sanitize(twemoji.parse(marked.parse(input.value)));
+        const manageInput = (e) => {
+            e.target.value = checkText(e.target.value);
+        };
+
+    }
+
+    import { createPicker } from 'https://unpkg.com/picmo@5.1.0/dist/index.js';
+    import 'https://unpkg.com/@picmo/renderer-twemoji@5.1.0/dist/umd/picmo-twemoji.js';
 // The picker must have a root element to insert itself into
-const rootElement = document.querySelector('#emojiPicker');
+    const rootElement = document.querySelector('#emojiPicker');
 
 // Create the picker
-const picker = createPicker({
-    rootElement,
-    renderer: new TwemojiRenderer()
-});
+    const picker = createPicker({
+        rootElement,
+        renderer: new TwemojiRenderer()
+    });
 
 // The picker emits an event when an emoji is selected. Do with it as you will!
-picker.addEventListener('emoji:select', event => {
-    console.log('Emoji selected:', event.emoji);
-});
+    picker.addEventListener('emoji:select', event => {
+        console.log('Emoji selected:', event.emoji);
+    });
+
 </script>
 {% endblock %}

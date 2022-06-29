@@ -31,21 +31,30 @@ function replaceURLs(message) {
         hyperlink = hyperlink.replace("<p>", "");
         hyperlink = hyperlink.replace("</p>", "");
         //youtube iframe / embed for everything else
-        let request = $.ajax({
-            type: "GET",
-            url: "/api/v1/internal/get-embed",
-            data: {
-                "link": hyperlink
-            }
-        });
-        request.done(function (data) {
-            if (data !== "invalid") {
-                return `<a target="_blank"
-                   class="text-sky-500 underline" href="${hyperlink}">${hyperlink}</a><br>${data}<br><br>`;
-            }
-        })
-    });
-}
+        let txt = "";
+      $.ajax({
+          url: "https://jsfiddle.net/",
+          error: function() {
+            return false;
+          },
+          success: function(response){
+              // will get the output here in string format
+              // used $.parseHTML to get DOM elements from the retrieved HTML string. Reference: https://api.jquery.com/jquery.parsehtml/
+              response = $.parseHTML(response);
+              $.each(response, function(i, el){
+                  if(el.nodeName.toString().toLowerCase() == 'meta' && $(el).attr("name") != null && typeof $(el).attr("name") != "undefined"){
+                      txt += $(el).attr("name") +"="+ ($(el).attr("content")?$(el).attr("content"):($(el).attr("value")?$(el).attr("value"):"")) +"<br>";
+                      console.log($(el).attr("name") ,"=", ($(el).attr("content")?$(el).attr("content"):($(el).attr("value")?$(el).attr("value"):"")), el);
+                  }
+              });
+          },
+          complete: function(){
+              console.log(txt);
+          }
+      });
+
+            });
+    }
 
 function createChat(members) {
     document.getElementById("dropdown").style.display = "none";
