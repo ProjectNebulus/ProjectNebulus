@@ -35,7 +35,7 @@ from .file_upload_link import *
 from .find_folders import *
 from .generate_schoology_oauth_url import *
 from .get_schoology_messages import *
-from .get_verification_code import *
+from .check_verification_code import *
 from .logout_of_schoology import *
 from .nebulusdocs import *
 from .plagarism import *

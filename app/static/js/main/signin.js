@@ -1,4 +1,4 @@
-let main, reset;
+let main, reset, code;
 
 function resetScreen() {
     main.classList.toggle("hidden");
@@ -154,6 +154,7 @@ window.addEventListener('load', function () {
     password = document.getElementById('psw');
     main = document.getElementById("main");
     reset = document.getElementById("reset");
+    code = document.getElementById("resetCode");
 
     let loginButton = document.getElementById('log_in');
     loginButton.style.color = 'gray';

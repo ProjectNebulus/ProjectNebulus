@@ -1,10 +1,10 @@
 d{% extends "layout.html" %}
 {% block main %}
     <head>
-        <script src="/static/js/signin.js"></script>
+        <script src="/static/js/main/signin.js"></script>
     </head>
     <body>
-    <div id="bgLms" class="noselect noclick h-full overflow-y-auto overflow-x-hidden"
+    <div id="bgLms" class="noselect noclick overflow-y-auto overflow-x-hidden"
          style="z-index: -1; filter: blur(1rem);">
         {% include "main/signin-bg.html" %}
     </div>
@@ -13,8 +13,11 @@ d{% extends "layout.html" %}
         <div class="w-full">
             <h1 class="text-lg font-bold">Login</h1>
             <div class="flex justify-between mt-3 text-xs font-light text-gray-500">
-                <p> New to Nebulus? <a href='/signup' class="ml-1 font-medium text-blue-400">Sign up now</a></p>
-                <p onclick="resetScreen()" class="text-blue-400 hover:text-blue-600 cursor-pointer">Forgot password?</p>
+                <p>New to Nebulus? <a href='/signup' class="ml-1 font-medium text-blue-400">Sign up now</a></p>
+                <p>
+                    Forgot password?
+                    <span onclick="resetScreen()" class="text-blue-400 hover:text-blue-600 cursor-pointer">Reset</span>
+                </p>
             </div>
             <form class="flex flex-col mt-4" action="#" onsubmit="loginUser()">
                 <div class="relative">

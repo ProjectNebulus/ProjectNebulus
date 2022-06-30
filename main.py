@@ -3,6 +3,7 @@ App entrypoint.
 """
 import os
 import platform
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -24,5 +25,5 @@ if __name__ == "__main__":
 
     print(app.url_map)
 
-    print(f"Started Running: http://{host}:{port}")
+    print(f"Started Running: https://{host}:{port}")
     socketio.run(app, host=host, port=port)

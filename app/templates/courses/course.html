@@ -17,6 +17,12 @@
                 height: 91%;
                 overflow-x: hidden;
             }
+
+            @media (min-width: 1420px) {
+                #upcoming-events {
+                    display: block;
+                }
+            }
         </style>
     </head>
     <body style="overflow: hidden">
@@ -66,10 +72,11 @@
             <iframe id="frame" name="frame" src="{{ iframe }}"></iframe>
         </div>
 
-        <div class="hidden xl:block border-l border-gray-200 dark:border-gray-700 text-center overflow-auto hover:scroll"
+        <div class="hidden border-l border-gray-200 dark:border-gray-700 text-center"
              id="upcoming-events" style="width:25%">
             <h1 class="text-black dark:text-white text-2xl mx-4 my-4">Upcoming Events</h1>
-            <div class="flex flex-col sm:rounded-lg min-w-full align-middle overflow-auto inline-block">
+            <div class="flex flex-col sm:rounded-lg min-w-full align-middle overflow-auto hover:scroll inline-block"
+                 style="max-height: 90%">
                 {% if events|length == 0 %}
                     <p class="text-gray-500 dark:text-gray-400">No Events!</p>
                 {% else %}

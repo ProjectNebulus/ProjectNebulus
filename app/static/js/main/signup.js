@@ -243,14 +243,13 @@ window.addEventListener('load', function () {
         let status = errorMessages[4];
         status.style.color = 'red';
         status.innerHTML = '<br>';
-        let value = verification.value;
         const request = $.ajax({
             type: "POST",
-            url: "/api/v1/internal/get-verification-code",
-            data: {}
+            url: "/api/v1/internal/check-verification-code",
+            data: {value: verification.value}
         });
         request.done(function (data) {
-            if (value === data) {
+            if (data === "true") {
                 validationIcons[4].style.color = 'green';
                 validationIcons[4].innerHTML = '<i class="material-icons">check</i>';
                 verification.classList.remove(...RED_BORDER);
