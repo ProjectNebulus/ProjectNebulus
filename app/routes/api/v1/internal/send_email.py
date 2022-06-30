@@ -4,7 +4,7 @@ import random
 from flask import session, request
 from flask_mail import Message
 
-from static.python.mongodb import read
+from .....static.python.mongodb import read
 from . import internal
 from .... import mail
 from ....main import private_endpoint

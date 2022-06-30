@@ -75,7 +75,7 @@ def init_app():
 
     @app.before_request
     def before_rq():
-        # log out users who have deleted accounts
+        # log out users who have deleted account
         if "id" in session.keys():
             try:
                 read.find_user(id=session.get("id"))
