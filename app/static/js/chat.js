@@ -207,7 +207,7 @@ function updateToMessage(message) {
                     </div>
                 </div>`);
 
-    let url = replaceURLs(message["content"]);
+    let url = replaceURLs(message["content"], message["id"]);
     console.log(url);
     $(`#content_${message["id"]}`).html(url);
 
@@ -341,7 +341,7 @@ $(document).ready(function () {
                 let chat = document.getElementById('chat');
                 messages.forEach(function (message) {
                     console.log(message["content"]);
-                    let content = replaceURLs(message['content']);
+                    let content = replaceURLs(message['content'], message["id"]);
                     console.log(content);
                     chatContent += `<div class="flex items-top space-x-4 mt-2" id="${message['id']}">
                     <img class="mt-1 w-10 h-10 rounded-full"
