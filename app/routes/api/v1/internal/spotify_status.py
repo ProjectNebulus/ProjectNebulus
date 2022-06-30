@@ -11,7 +11,7 @@ from .....routes.main.spotify import (
     shuffle2_spotify,
     shuffle_spotify,
 )
-from ....main.spotify import get_song
+from ....main.spotify import get_currently_playing
 from . import internal
 from flask import request
 
@@ -26,7 +26,7 @@ def convert(secs):
 
 @internal.route("/spotify-status", methods=["POST"])
 def spotify_status():
-    song = get_song()
+    song = get_currently_playing()
     if song[0] == 1:
         return "1"  # Spotify Not Detected
 

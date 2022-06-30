@@ -14,11 +14,6 @@ SPOTIPY_CLIENT_ID = "9eb38c31d84b43e5a2557a6f98c5a064"
 SPOTIPY_CLIENT_SECRET = "eddbab5eb3b2434694af122a8f99bf87"
 # SPOTIPY_REDIRECT_URI = "http://localhost:8080/spotify"
 
-caches_folder = "./.spotify_caches/"
-if not os.path.exists(caches_folder):
-    os.makedirs(caches_folder)
-
-
 def generate_redirect(url):
     if "nebulus" in url:
         if "https" not in url:
@@ -154,7 +149,7 @@ def spotify_playlists():
 
 @main_blueprint.route("/spotify/currently_playing")
 def currently_playing():
-    return GET_currently_playing()
+    return str(get_currently_playing())
 
 
 def pause_spotify():
@@ -254,22 +249,13 @@ def shuffle2_spotify():
     spotify.shuffle("false")
 
 
-def get_song():
-    answer = GET_currently_playing()
-    if answer == 1:
-        return [1]
-    elif answer == 2:
-        return [2]
-    return answer
-
-
-def GET_currently_playing():
+def get_currently_playing():
     spotify = get_spotify_auth()
 
     if spotify == 0:
-        return 2
+        return [2]
     elif spotify == 1:
-        return 3
+        return [3]
 
     track = spotify.current_user_playing_track()
     if track is not None:
@@ -286,7 +272,7 @@ def GET_currently_playing():
         playing = track["is_playing"]
         return [name, artists, album, explicit, image, playing, timestamp, total]
 
-    return 1
+    return [1]
 
 
 def resume_spotify():

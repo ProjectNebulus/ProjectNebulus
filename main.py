@@ -19,11 +19,13 @@ if __name__ == "__main__":
         debug = False
         port = 80
         host = "0.0.0.0"
+        type = "s"
     else:  # macos (darwin) or windows (windows)
         port = 8080
         host = "localhost"
+        type = ""
 
     print(app.url_map)
 
-    print(f"Started Running: https://{host}:{port}")
+    print(f"Started Running: http{type}://{host}:{port}")
     socketio.run(app, host=host, port=port)
