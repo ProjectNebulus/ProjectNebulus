@@ -511,7 +511,8 @@ function updateSchoologyLink(link) {
 }
 
 function changeSearch() {
-    let value = document.getElementById("search").value;
+    let value = document.getElementById("search_input").value;
+    console.log(value);
     if (value.length > 0) {
         document.getElementById("search_items").innerHTML = `
 <li>
@@ -547,8 +548,7 @@ function changeSearch() {
                         No Results Found
                             </div>
                         </li>`
-            }
-            else {
+            } else {
                 let datas = data.split("•");
                 for (let i = 0; i < datas.length; i++) {
                     temp_arr.push(datas[i]);
@@ -586,7 +586,10 @@ function changeSearch() {
                 }
             }
         });
+
+        document.getElementById("search_items").innerHTML = "";
+
+
     }
 }
-
-keyUpDelay("#sear", 1000, changeSearch)
+keyUpDelay("#sear", 1000, changeSearch);
