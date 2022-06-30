@@ -58,4 +58,6 @@ class Course(Snowflake):
 
     def clean(self):
         if not self.avatar:
-            self.avatar = Avatar(avatar_url="https://app.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg")
+            self.avatar = Avatar(
+                avatar_url="https://app.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg"
+            )

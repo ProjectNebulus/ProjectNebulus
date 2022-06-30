@@ -28,8 +28,11 @@ def signup_email():
     session["verificationCode"] = str(code)
     print(code)
 
-    htmlform = str(codecs.open("app/templates/utils/email.html", "r").read()).replace("123456", str(code)) \
+    htmlform = (
+        str(codecs.open("app/templates/utils/email.html", "r").read())
+        .replace("123456", str(code))
         .replace("Nicholas Wang", data["username"])
+    )
 
     send_email(f"Your Nebulus Email Verification Code", [data["email"]], htmlform)
 

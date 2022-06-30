@@ -38,7 +38,7 @@ from .get_schoology_messages import *
 from .get_verification_code import *
 from .logout_of_schoology import *
 from .nebulusdocs import *
-from .plagarism import*
+from .plagarism import *
 from .planner import *
 from .schoology_callback import *
 from .search import *

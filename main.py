@@ -4,6 +4,7 @@ App entrypoint.
 import os
 import platform
 from dotenv import load_dotenv
+
 load_dotenv()
 from app.routes import init_app, socketio
 

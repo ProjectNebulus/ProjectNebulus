@@ -48,7 +48,7 @@ def new_message(json_data):
                 "send_date": send_date,
                 "chatID": chatID,
             },
-            room=chatID
+            room=chatID,
         )
     else:
         # TODO: Create message for communities

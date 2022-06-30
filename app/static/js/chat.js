@@ -71,6 +71,8 @@ function replaceURLs(message, message_id) {
 
             result+= `</div>`;
 
+            document.getElementById(`content_${message_id}`).insertAdjacentHTML('beforeend', result);
+
             }
 
         )
@@ -336,6 +338,7 @@ $(document).ready(function () {
                 })
             }).done(function (messages) {
                 let chatContent = ``;
+                let chat = document.getElementById('chat');
                 messages.forEach(function (message) {
                     console.log(message["content"]);
                     let content = replaceURLs(message['content']);
@@ -346,7 +349,7 @@ $(document).ready(function () {
                          alt="">
                     <div class="space-y-1 font-medium dark:text-white">
                         <div>${message['sender']['username']} <span class="ml-3 text-sm text-gray-400">${message['send_date']}</span></div>
-                        <div class="text-sm text-gray-500 dark:text-gray-400">${content}</div>
+                        <div id="content_${message["id"]}" class="text-sm text-gray-500 dark:text-gray-400">${content}</div>
                     </div>
                 </div>
                 <div id="user_${message['id']}" class="z-50 hidden bg-white divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600 rounded-lg block" data-popper-placement="bottom" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 215px, 0px);">
@@ -368,9 +371,11 @@ $(document).ready(function () {
                                     </div>
                                 </div>
                             </div>`;
+                    chat.insertAdjacentHTML('beforeend', chatContent);
+                    chatContent = ``;
                 });
-                let chat = document.getElementById('chat');
-                chat.insertAdjacentHTML('beforeend', chatContent);
+
+
             });
         }
     });
@@ -609,10 +614,12 @@ function getChat(chatID) {
             el.classList.add('dark:bg-gray-600');
             el.classList.remove('dark:bg-gray-800');
             chatContent += `<div id="chatID" data-id="${chat['_id']}" class="w-0 h-0"></div>`
-
+            chat_el.innerHTML = "";
+            chat_el.insertAdjacentHTML('beforeend', chatContent);
+            chatContent = ``;
             chat['messages'].forEach(function (message) {
 
-                message["content"] = replaceURLs(message['content']);
+                message["content"] = replaceURLs(message['content'], message["id"]);
 
                 chatContent += `<div class="flex items-top space-x-4 mt-2 hover:bg-gray-100 dark:hover:bg-gray-700 " id="${message['id']}">
                         <img class="mt-1 w-10 h-10 rounded-full " data-dropdown-toggle="user_${message['id']}"
@@ -620,7 +627,8 @@ function getChat(chatID) {
                              alt="">
                         <div class="space-y-1 font-medium dark:text-white">
                             <div><span  data-dropdown-toggle="user_${message['id']}" class="hover:underline">${message['sender']['username']}</span> <span class="ml-3 text-sm text-gray-400">${message['send_date']}</span></div>
-                            <div style="font-family: 'Roboto', sans-serif;" class="text-sm text-gray-500 dark:text-gray-400">${message["content"]}</div>
+                            <div id="content_${message["id"]}" style="font-family: 'Roboto', sans-serif;" class="text-sm text-gray-500 dark:text-gray-400">${message["content"]}</div>
+                            
                         </div>
                     </div>
                 </div>
@@ -644,6 +652,8 @@ function getChat(chatID) {
                                 </div>
                             </div>
 `;
+                chat_el.insertAdjacentHTML('beforeend', chatContent);
+                chatContent = ``;
             });
 
             chat['members'].forEach(function (other) {
@@ -685,8 +695,8 @@ function getChat(chatID) {
     `
             });
 
-            chat_el.innerHTML = "";
-            chat_el.insertAdjacentHTML('beforeend', chatContent);
+
+
             members.innerHTML = "";
             members.insertAdjacentHTML('beforeend', chatMembers);
         }

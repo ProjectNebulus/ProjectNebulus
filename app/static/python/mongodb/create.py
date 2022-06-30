@@ -8,7 +8,7 @@ from . import read
 load_dotenv()
 import schoolopy
 
-from ..classes import  *
+from ..classes import *
 
 
 def generateSchoologyObject(_id: str) -> schoolopy.Schoology:
