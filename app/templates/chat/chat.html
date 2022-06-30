@@ -13,6 +13,8 @@
 <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/picmo@5.1.0/dist/umd/picmo.js"></script>
 <script src="https://unpkg.com/@picmo/renderer-twemoji@5.1.0/dist/umd/picmo-twemoji.js"></script>
+
+
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 {% extends "layout.html" %}
 {% block main %}
@@ -391,6 +393,7 @@
     </div>
 <script type="module">
     import smile2emoji from 'https://cdn.skypack.dev/smile2emoji';
+
     let textarea_el = document.getElementById('msg_content');
     textarea_el.oninput = function () {
         updateEditor(textarea_el, document.getElementById('preview'));

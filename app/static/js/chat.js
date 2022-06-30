@@ -1,6 +1,22 @@
-io = window.io
 
-function replaceURLs(message) {
+io = window.io;
+function getEmbed(hyperlink){
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: 'http://url-metadata.herokuapp.com/api/metadata?url=' + hyperlink,
+            type: 'GET',
+            success: function(data){
+                resolve(data);
+            },
+            error: function(data){
+                reject(data);
+            }
+
+        })
+    });
+}
+
+function replaceURLs(message, message_id) {
     console.log(message);
     if (!message) {
         return message;
@@ -30,53 +46,46 @@ function replaceURLs(message) {
 
         hyperlink = hyperlink.replace("<p>", "");
         hyperlink = hyperlink.replace("</p>", "");
+        hyperlink = hyperlink.replace("<br>", "");
+
+        let result = ``;
+
+        getEmbed(hyperlink).then((data) => {
+            console.log(data);
+            data = data["data"];
+            if (data["themeColor"] === null){
+                data["themeColor"] = '#534F4E';
+            }
+            result += `<div style="border-style: none none none solid; border-width:3px; border-color:${data["themeColor"]}"
+                     class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                    <a href="${hyperlink}"><h5
+                        class="mb-2 text-md hover:underline font-bold tracking-tight text-black dark:text-white">${siteName}</h5>
+                    </a>
+                    <a href="${hyperlink}"><h5
+                        class="mb-2 text-xl hover:underline font-bold tracking-tight text-sky-500">${data["title"]}</h5></a>
+                    <p class="font-normal text-gray-700 dark:text-gray-400">${data["description"]}</p>
+                    `;
+            if (data["image"] != null){
+                result += ` <img src="${data["image"]}" style="width:90%; margin:auto; margin-top:10px;" class="rounded-md">`;
+            }
+
+            result+= `</div>`;
+
+            }
+
+        )
+
+
+                    return  `<a class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600" href="${hyperlink}">${hyperlink}</a>${result}`;
+
+
+
+        });
+
         //youtube iframe / embed for everything else
-        let txt = {};
-      $.ajax({
-          url: "https://cors-anywhere.herokuapp.com/" + url,
-          type: "GET",
-          headers: {"X-Requested-With": "XMLHttpRequest",
-          "Access-Control-Allow-Origin": "*"},
-          error: function () {
-              return false;
-          },
-          success: function (response) {
-              // will get the output here in string format
-              // used $.parseHTML to get DOM elements from the retrieved HTML string. Reference: https://api.jquery.com/jquery.parsehtml/
-              response = $.parseHTML(response);
-              $.each(response, function (i, el) {
-                  if (el.nodeName.toString().toLowerCase() == 'meta' && $(el).attr("name") != null && typeof $(el).attr("name") != "undefined") {
-                      txt[$(el).attr("name")] = ($(el).attr("content") ? $(el).attr("content") : ($(el).attr("value") ? $(el).attr("value") : "")) + "<br>";
-                      console.log($(el).attr("name"), "=", ($(el).attr("content") ? $(el).attr("content") : ($(el).attr("value") ? $(el).attr("value") : "")), el);
-                  }
-              });
-          },
-          complete: function () {
-              let result = ``;
-              result += ```
-<div style="border-style: none none none solid; border-width:3px; border-color:${txt['color']}"
-                   className="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                  <a href="${url}"><h5
-                      className="mb-2 text-md hover:underline font-bold tracking-tight text-black dark:text-white">{site}</h5>
-                  </a>
-                  <a href="{link}"><h5
-                      className="mb-2 text-xl hover:underline font-bold tracking-tight text-sky-500">{title}</h5></a>
-                  <p className="font-normal text-gray-700 dark:text-gray-400">{txt["description"]}</p>
-                  ```;
-              if (txt["image"]) {
-                  result += `<img src="${txt["image"]}" style="width:90%; margin:auto; margin-top:10px;">`;
-              }
-              result += ` </div>`;
-
-              return result;
 
 
-          }
-      });
-
-
-            });
-    }
+}
 
 function createChat(members) {
     document.getElementById("dropdown").style.display = "none";
@@ -89,14 +98,14 @@ function changeSearch() {
         document.getElementById("search_items").innerHTML = `
 <li>
 <div class="py-2.5 rounded-lg mx-auto block px-4 py-2 mx-2 dark:hover:text-white">
-                <svg class="inline w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
-    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+            <svg class="inline w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+<path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
 </svg>
-    Searching...
+Searching...
 </div>
 </li>
-            `;
+        `;
         const request = $.ajax({
             type: "POST",
             url: "/api/v1/internal/search-user",
@@ -110,11 +119,10 @@ function changeSearch() {
             let temp_arr = []
             if (data === "0") {
                 document.getElementById("search_items").innerHTML += `
-                    <li class="text-center mb-5">
-                        No Results Found
-                    </li>`
-            }
-            else {
+                <li class="text-center mb-5">
+                    No Results Found
+                </li>`
+            } else {
                 let datas = data.split("•");
                 for (let i = 0; i < datas.length; i++) {
 
@@ -131,11 +139,11 @@ function changeSearch() {
                         console.log(element);
 
                         document.getElementById("search_items").innerHTML += `
-                    <div>
-                        <span onclick="createChat('${element[1]}');" class="truncate py-2.5 rounded-lg mx-auto block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 mx-2 dark:hover:text-white" style="text-align:left;">
-                <img src="${element[0]}" class="inline-block w-10 h-10 rounded-full" alt="dates">
-                ${element[1]} <span class="text-gray-500 ml-2">${element[2]}</span></span>
-                    </div>
+                <div>
+                    <span onclick="createChat('${element[1]}');" class="truncate py-2.5 rounded-lg mx-auto block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 mx-2 dark:hover:text-white" style="text-align:left;">
+            <img src="${element[0]}" class="inline-block w-10 h-10 rounded-full" alt="dates">
+            ${element[1]} <span class="text-gray-500 ml-2">${element[2]}</span></span>
+                </div>
 `
                     }
                 }
@@ -188,14 +196,14 @@ function makeCall() {
 function updateToMessage(message) {
     let chat_el = document.getElementById('chat');
     chat_el.insertAdjacentHTML('afterbegin', `<div class="flex items-top space-x-4 mt-2" id="${message['id']}" style="font-family: 'Roboto', sans-serif;">
-                        <img class="mt-1 w-10 h-10 rounded-full"
-                             src="${message['author'][2]}"
-                             alt="">
-                        <div class="space-y-1 font-medium dark:text-white">
-                            <div>${message['author'][1]} <span class="ml-3 text-sm text-gray-400">${message['send_date']}</span></div>
-                            <div id="content_${message["id"]}" class="text-sm text-gray-500 dark:text-gray-400">${message['content']}</div>
-                        </div>
-                    </div>`);
+                    <img class="mt-1 w-10 h-10 rounded-full"
+                         src="${message['author'][2]}"
+                         alt="">
+                    <div class="space-y-1 font-medium dark:text-white">
+                        <div>${message['author'][1]} <span class="ml-3 text-sm text-gray-400">${message['send_date']}</span></div>
+                        <div id="content_${message["id"]}" class="text-sm text-gray-500 dark:text-gray-400">${message['content']}</div>
+                    </div>
+                </div>`);
 
     let url = replaceURLs(message["content"]);
     console.log(url);
@@ -219,8 +227,8 @@ $(document).ready(function () {
         el.innerHTML = "";
         let s = ``;
         s += `
-        <div onclick="getChat('${chat['_id']}')" id="sidechat_${chat['_id']}" style="margin-bottom:4px;"
-         class="p-2 flex items-center space-x-4 dark:bg-gray-800 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200  rounded-lg" >`
+    <div onclick="getChat('${chat['_id']}')" id="sidechat_${chat['_id']}" style="margin-bottom:4px;"
+     class="p-2 flex items-center space-x-4 dark:bg-gray-800 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200  rounded-lg" >`
         if (chat['members'].length === 2) {
             let other = chat['members'].filter(function (user) {
                 return (user['_id'] != userID)
@@ -228,20 +236,18 @@ $(document).ready(function () {
 
             if (other['chatProfile']['status'] === 'Online') {
                 s += `<div class="relative">
-    <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
-    <span class="bottom-0 left-7 absolute  w-3 h-3 bg-green-400 border-white dark:border-gray-800 rounded-full"></span>
+<img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
+<span class="bottom-0 left-7 absolute  w-3 h-3 bg-green-400 border-white dark:border-gray-800 rounded-full"></span>
 </div>`
-            }
-            else if (other['chatProfile']['status'] === 'Do Not Disturb') {
+            } else if (other['chatProfile']['status'] === 'Do Not Disturb') {
                 s += `<div class="relative">
-    <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
-    <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-red-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
+<img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
+<span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-red-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
 </div>`
-            }
-            else {
+            } else {
                 s += `<div class="relative">
-    <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
-    <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-gray-700 border-2 border-white dark:border-gray-800 rounded-full"></span>
+<img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
+<span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-gray-700 border-2 border-white dark:border-gray-800 rounded-full"></span>
 </div>`
             }
             let status_emoji = other['chatProfile']['status_emoji']
@@ -254,20 +260,19 @@ $(document).ready(function () {
             }
             s +=
                 `
-            <div class="space-y-1 font-medium dark:text-white">
-                <div class="dark:text-gray-300" style="font-size:20px">${other['username']}</div>
-                <div class="text-sm text-gray-500 dark:text-gray-400" style="font-size:13px;">${status_emoji} ${status_text}</div>
-            </div>
+        <div class="space-y-1 font-medium dark:text-white">
+            <div class="dark:text-gray-300" style="font-size:20px">${other['username']}</div>
+            <div class="text-sm text-gray-500 dark:text-gray-400" style="font-size:13px;">${status_emoji} ${status_text}</div>
         </div>
+    </div>
 
-        `
+    `
 
-        }
-        else {
+        } else {
             s += `
-               <div class="flex items-center space-x-4">
-    <img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src="${chat['avatar']['avatar_url']}" alt="Bordered avatar">
-                `;
+           <div class="flex items-center space-x-4">
+<img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src="${chat['avatar']['avatar_url']}" alt="Bordered avatar">
+            `;
 
             if (!(chat['title'])) {
                 chat['title'] = `${chat['owner']['username']}'s Chat`;
@@ -275,9 +280,9 @@ $(document).ready(function () {
 
             s +=
                 `<div class="space-y-1 font-medium dark:text-white">
-        <div style="font-size:20px;" class="dark:text-gray-300">${chat["title"]}</div>
-        <div style="font-size:13px;" class="text-sm text-gray-500 dark:text-gray-400">${chat['members'].length} Members</div>
-    </div>
+    <div style="font-size:20px;" class="dark:text-gray-300">${chat["title"]}</div>
+    <div style="font-size:13px;" class="text-sm text-gray-500 dark:text-gray-400">${chat['members'].length} Members</div>
+</div>
 </div>`
         }
         socket.emit('join_a_room', data['id']);
@@ -300,11 +305,9 @@ $(document).ready(function () {
         let user_img = user.children('span')[0];
         if (data['status'] === 'Online') {
             user_img.classList.add('bg-green-400');
-        }
-        else if (data['status'] === 'Do Not Disturb') {
+        } else if (data['status'] === 'Do Not Disturb') {
             user_img.classList.add('bg-red-500')
-        }
-        else {
+        } else {
             user_img.classList.add('bg-gray-700');
         }
 
@@ -338,33 +341,33 @@ $(document).ready(function () {
                     let content = replaceURLs(message['content']);
                     console.log(content);
                     chatContent += `<div class="flex items-top space-x-4 mt-2" id="${message['id']}">
-                        <img class="mt-1 w-10 h-10 rounded-full"
-                             src="${message['sender']['avatar']['avatar_url']}"
-                             alt="">
-                        <div class="space-y-1 font-medium dark:text-white">
-                            <div>${message['sender']['username']} <span class="ml-3 text-sm text-gray-400">${message['send_date']}</span></div>
-                            <div class="text-sm text-gray-500 dark:text-gray-400">${content}</div>
-                        </div>
+                    <img class="mt-1 w-10 h-10 rounded-full"
+                         src="${message['sender']['avatar']['avatar_url']}"
+                         alt="">
+                    <div class="space-y-1 font-medium dark:text-white">
+                        <div>${message['sender']['username']} <span class="ml-3 text-sm text-gray-400">${message['send_date']}</span></div>
+                        <div class="text-sm text-gray-500 dark:text-gray-400">${content}</div>
                     </div>
-                    <div id="user_${message['id']}" class="z-50 hidden bg-white divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600 rounded-lg block" data-popper-placement="bottom" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 215px, 0px);">
-                                    <div style="border-radius:10px 10px 0 0; height:60px;background:rgba
-                                        (191, 198, 205);"></div>
-                                    <div class="px-4 py-3 text-xl text-gray-900 dark:text-white border-b border-l">
-                                        <div style="text-align: left; margin-left:3px;">
-                                            <div style="margin-top:-60px;">
-                                                <img style="background:rgb(18,25,38)" src="${message['sender']["avatar"]['avatar_url']}" class="w-24 h-24 rounded-full border-white dark:border-gray-700 border-2 object-cover" alt="${message['sender']['username']}'s Profile Picture">
-                                                <span class="absolute  w-5 h-5 bg-green-400 border-2 border-white dark:border-gray-700 rounded-full" style="left:90px;top:85px;"></span>
-                                            </div>
-                                            <div>${message['sender']['username']}</div>
-                                           
-                                            
-                                            <input id="msg" placeholder="Message @${message['sender']['username']}" required="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm
-                                                       mb-6 rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5
-                                                       dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400
-                                                       dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                </div>
+                <div id="user_${message['id']}" class="z-50 hidden bg-white divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600 rounded-lg block" data-popper-placement="bottom" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 215px, 0px);">
+                                <div style="border-radius:10px 10px 0 0; height:60px;background:rgba
+                                    (191, 198, 205);"></div>
+                                <div class="px-4 py-3 text-xl text-gray-900 dark:text-white border-b border-l">
+                                    <div style="text-align: left; margin-left:3px;">
+                                        <div style="margin-top:-60px;">
+                                            <img style="background:rgb(18,25,38)" src="${message['sender']["avatar"]['avatar_url']}" class="w-24 h-24 rounded-full border-white dark:border-gray-700 border-2 object-cover" alt="${message['sender']['username']}'s Profile Picture">
+                                            <span class="absolute  w-5 h-5 bg-green-400 border-2 border-white dark:border-gray-700 rounded-full" style="left:90px;top:85px;"></span>
                                         </div>
+                                        <div>${message['sender']['username']}</div>
+                                       
+                                        
+                                        <input id="msg" placeholder="Message @${message['sender']['username']}" required="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm
+                                                   mb-6 rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5
+                                                   dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400
+                                                   dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     </div>
-                                </div>`;
+                                </div>
+                            </div>`;
                 });
                 let chat = document.getElementById('chat');
                 chat.insertAdjacentHTML('beforeend', chatContent);
@@ -390,13 +393,12 @@ function load(data) {
     data.forEach(function (chat) {
         if (data.indexOf(chat) === 0) {
             s += `
-            <div onclick="getChat('${chat['_id']}')" id="sidechat_${chat['_id']}" style="margin-bottom:4px;"
-             class="p-2 flex items-center space-x-4 dark:bg-gray-600 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" >`
-        }
-        else {
+        <div onclick="getChat('${chat['_id']}')" id="sidechat_${chat['_id']}" style="margin-bottom:4px;"
+         class="p-2 flex items-center space-x-4 dark:bg-gray-600 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" >`
+        } else {
             s += `
-            <div onclick="getChat('${chat['_id']}')" id="sidechat_${chat['_id']}" style="margin-bottom:4px;"
-             class="p-2 flex items-center space-x-4 dark:bg-gray-800 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" >`
+        <div onclick="getChat('${chat['_id']}')" id="sidechat_${chat['_id']}" style="margin-bottom:4px;"
+         class="p-2 flex items-center space-x-4 dark:bg-gray-800 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" >`
         }
         if (chat['members'].length === 2) {
             let other = chat['members'].filter(function (user) {
@@ -405,20 +407,18 @@ function load(data) {
 
             if (other['chatProfile']['status'] === 'Online') {
                 s += `<div class="relative">
-    <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
-    <span class="bottom-0 left-7 absolute  w-3 h-3 bg-green-400 border-white dark:border-gray-800 rounded-full"></span>
+<img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
+<span class="bottom-0 left-7 absolute  w-3 h-3 bg-green-400 border-white dark:border-gray-800 rounded-full"></span>
 </div>`
-            }
-            else if (other['chatProfile']['status'] === 'Do Not Disturb') {
+            } else if (other['chatProfile']['status'] === 'Do Not Disturb') {
                 s += `<div class="relative">
-    <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
-    <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-red-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
+<img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
+<span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-red-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
 </div>`
-            }
-            else {
+            } else {
                 s += `<div class="relative">
-    <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
-    <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-gray-700 border-2 border-white dark:border-gray-800 rounded-full"></span>
+<img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
+<span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-gray-700 border-2 border-white dark:border-gray-800 rounded-full"></span>
 </div>`
             }
             let status_emoji = other['chatProfile']['status_emoji']
@@ -431,20 +431,19 @@ function load(data) {
             }
             s +=
                 `
-            <div class="space-y-1 font-medium dark:text-white">
-                <div class="dark:text-gray-300" style="font-size:20px">${other['username']}</div>
-                <div class="text-sm text-gray-500 dark:text-gray-400" style="font-size:13px;">${status_emoji} ${status_text}</div>
-            </div>
+        <div class="space-y-1 font-medium dark:text-white">
+            <div class="dark:text-gray-300" style="font-size:20px">${other['username']}</div>
+            <div class="text-sm text-gray-500 dark:text-gray-400" style="font-size:13px;">${status_emoji} ${status_text}</div>
         </div>
+    </div>
 
-        `
+    `
 
-        }
-        else {
+        } else {
             s += `
-               <div class="flex items-center space-x-4">
-    <img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src="${chat['avatar']['avatar_url']}" alt="Bordered avatar">
-                `;
+           <div class="flex items-center space-x-4">
+<img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src="${chat['avatar']['avatar_url']}" alt="Bordered avatar">
+            `;
 
             if (!(chat['title'])) {
                 chat['title'] = `${chat['owner']['username']}'s Chat`;
@@ -452,9 +451,9 @@ function load(data) {
 
             s +=
                 `<div class="space-y-1 font-medium dark:text-white">
-        <div style="font-size:20px;" class="dark:text-gray-300">${chat["title"]}</div>
-        <div style="font-size:13px;" class="text-sm text-gray-500 dark:text-gray-400">${chat['members'].length} Members</div>
-    </div>
+    <div style="font-size:20px;" class="dark:text-gray-300">${chat["title"]}</div>
+    <div style="font-size:13px;" class="text-sm text-gray-500 dark:text-gray-400">${chat['members'].length} Members</div>
+</div>
 </div>`
         }
     });
@@ -560,24 +559,24 @@ function profile(node) {
 
     var el = document.createElement("span");
     el.innerHTML = `
-                <div id="dropdown" class="absolute z-10 bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
-    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault">
-      <li>
-        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile</span>
-      </li>
-      <li>
-        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Close DM</a>
-      </li>
-      <li>
-        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Add Friend</a>
-      </li>
-      <li>
-        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mute @Coder N</a>
-      </li>
-      <li>
-        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Block</a>
-      </li>
-    </ul>
+            <div id="dropdown" class="absolute z-10 bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
+<ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault">
+  <li>
+    <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile</span>
+  </li>
+  <li>
+    <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Close DM</a>
+  </li>
+  <li>
+    <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Add Friend</a>
+  </li>
+  <li>
+    <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mute @Coder N</a>
+  </li>
+  <li>
+    <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Block</a>
+  </li>
+</ul>
 </div>`
     insertAfter(node, el);
 }
@@ -624,49 +623,48 @@ function getChat(chatID) {
                             <div style="font-family: 'Roboto', sans-serif;" class="text-sm text-gray-500 dark:text-gray-400">${message["content"]}</div>
                         </div>
                     </div>
-                    <div id="user_${message['id']}" class="z-50 hidden bg-white divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600 rounded-lg block" data-popper-placement="bottom" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 215px, 0px);">
-                                    <div style="border-radius:10px 10px 0 0; height:60px;background:rgba
-                                        (191, 198, 205);"></div>
-                                    <div class="px-4 py-3 text-xl text-gray-900 dark:text-white border-b border-l">
-                                        <div style="text-align: left; margin-left:3px;">
-                                            <div style="margin-top:-60px;">
-                                                <img style="background:rgb(18,25,38)" src="${message['sender']["avatar"]['avatar_url']}" class="w-24 h-24 rounded-full border-white dark:border-gray-700 border-2 object-cover" alt="${message['sender']['username']}'s Profile Picture">
-                                                <span class="absolute  w-5 h-5 bg-green-400 border-2 border-white dark:border-gray-700 rounded-full" style="left:90px;top:85px;"></span>
-                                            </div>
-                                            <div>${message['sender']['username']}</div>
-                                           
-                                            
-                                            <input id="msg" placeholder="Message @${message['sender']['username']}" required="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm
-                                                       mb-6 rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5
-                                                       dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400
-                                                       dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                </div>
+                <div id="user_${message['id']}" class="z-50 hidden bg-white divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600 rounded-lg block" data-popper-placement="bottom" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 215px, 0px);">
+                                <div style="border-radius:10px 10px 0 0; height:60px;background:rgba
+                                    (191, 198, 205);"></div>
+                                <div class="px-4 py-3 text-xl text-gray-900 dark:text-white border-b border-l">
+                                    <div style="text-align: left; margin-left:3px;">
+                                        <div style="margin-top:-60px;">
+                                            <img style="background:rgb(18,25,38)" src="${message['sender']["avatar"]['avatar_url']}" class="w-24 h-24 rounded-full border-white dark:border-gray-700 border-2 object-cover" alt="${message['sender']['username']}'s Profile Picture">
+                                            <span class="absolute  w-5 h-5 bg-green-400 border-2 border-white dark:border-gray-700 rounded-full" style="left:90px;top:85px;"></span>
                                         </div>
+                                        <div>${message['sender']['username']}</div>
+                                       
+                                        
+                                        <input id="msg" placeholder="Message @${message['sender']['username']}" required="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm
+                                                   mb-6 rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5
+                                                   dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400
+                                                   dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     </div>
                                 </div>
+                            </div>
 `;
             });
 
             chat['members'].forEach(function (other) {
                 chatMembers += `<div 
-        oncontextmenu='profile(this)'
-        style="margin-bottom:4px;"
-             class="p-2 flex items-center space-x-4 dark:bg-gray-800 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" id="member_${other['_id']}">`
+    oncontextmenu='profile(this)'
+    style="margin-bottom:4px;"
+         class="p-2 flex items-center space-x-4 dark:bg-gray-800 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" id="member_${other['_id']}">`
                 if (other['chatProfile']['status'] === 'Online') {
                     chatMembers += `<div class="relative">
-    <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
-    <span class="bottom-0 left-7 absolute  w-3 h-3 bg-green-400 border-white dark:border-gray-800 rounded-full"></span>
+<img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
+<span class="bottom-0 left-7 absolute  w-3 h-3 bg-green-400 border-white dark:border-gray-800 rounded-full"></span>
 </div>`
-                }
-                else if (other['chatProfile']['status'] === 'Do Not Disturb') {
+                } else if (other['chatProfile']['status'] === 'Do Not Disturb') {
                     chatMembers += `<div class="relative">
-    <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
-    <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-red-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
+<img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
+<span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-red-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
 </div>`
-                }
-                else {
+                } else {
                     chatMembers += `<div class="relative">
-    <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
-    <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-gray-700 border-2 border-white dark:border-gray-800 rounded-full"></span>
+<img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
+<span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-gray-700 border-2 border-white dark:border-gray-800 rounded-full"></span>
 </div>`
                 }
                 let status_emoji = other['chatProfile']['status_emoji']
@@ -679,12 +677,12 @@ function getChat(chatID) {
                 }
                 chatMembers +=
                     `
-            <div class="space-y-1 font-medium dark:text-white">
-                <div class="dark:text-gray-300" style="font-size:20px">${other['username']}</div>
-                <div class="text-sm text-gray-500 dark:text-gray-400" style="font-size:13px;">${status_emoji} ${status_text}</div>
-            </div>
+        <div class="space-y-1 font-medium dark:text-white">
+            <div class="dark:text-gray-300" style="font-size:20px">${other['username']}</div>
+            <div class="text-sm text-gray-500 dark:text-gray-400" style="font-size:13px;">${status_emoji} ${status_text}</div>
         </div>
-        `
+    </div>
+    `
             });
 
             chat_el.innerHTML = "";

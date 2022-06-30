@@ -13,6 +13,7 @@
         "@picmo/renderer-twemoji": "^5.2.0",
         "dompurify": "^2.3.8",
         "flowbite": "^1.4.7",
+        "html-metadata-parser": "^2.0.4",
         "npx": "^10.2.2",
         "picmo": "^5.2.0",
         "postcss-cli": "^9.1.0",
