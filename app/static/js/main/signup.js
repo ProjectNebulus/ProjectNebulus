@@ -322,7 +322,6 @@ window.addEventListener('load', function () {
             validationIcons[2].innerHTML =
                 '<i class="material-icons">close</i>';
             return false;
-
         }
         if (value.length < 6) {
             status.innerHTML = 'Password must be at least 6 characters long';
@@ -370,7 +369,7 @@ window.addEventListener('load', function () {
     username.onkeyup = changeUser;
     bday.onkeyup = confirmDate;
     bday.onclick = confirmDate;
-    verification.onkeyup = confirmVerification;
+    keyUpDelay("#verification", 1000, confirmVerification)
 });
 
 

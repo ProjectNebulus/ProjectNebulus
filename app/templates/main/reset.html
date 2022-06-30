@@ -40,16 +40,18 @@
         </div>
         <input id="code" class="pl-11 p-2.5 px-4 py-3 w-full rounded-md bg-gray-100 border-transparent text-sm
              focus:border-gray-500 focus:bg-white focus:ring-0" placeholder="Code" style="-webkit-user-select: text;">
-        <p class="text-sm text-red-500 error"></p>
     </div>
+    <p class="text-sm text-red-500 error"></p>
 
     <div class="relative mt-4">
         <div class="flex absolute inset-y-0 left-0 items-center pl-3 pb-2 pointer-events-none material-icons
          text-gray-500 mt-1 transform rotate-45">key
         </div>
         <input id="newPsw" class="pl-11 p-2.5 px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:bg-white
-             focus:border-gray-500 focus:ring-0 text-sm" placeholder="New Password" style="-webkit-user-select: text;">
+             focus:border-gray-500 focus:ring-0 text-sm" placeholder="New Password" style="-webkit-user-select: text;"
+               autocomplete="new-password">
     </div>
+    <p class="text-sm text-red-500 error"></p>
 
     <div class="flex items-center mt-6">
         <button onclick="codeScreen()" style="margin-right:10px"

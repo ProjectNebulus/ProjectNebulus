@@ -4,10 +4,10 @@ import random
 from flask import session, request
 from flask_mail import Message
 
-from .....static.python.mongodb import read
 from . import internal
 from .... import mail
 from ....main import private_endpoint
+from .....static.python.mongodb import read
 
 
 def send_email(subject, recipients, message):
@@ -33,8 +33,7 @@ def signup_email():
 
     htmlform = (
         str(codecs.open("app/templates/utils/email.html", "r").read())
-            .replace("123456", str(code))
-            .replace("Nicholas Wang", data["username"])
+            .replace("123456", str(code)).replace("Nicholas Wang", data["username"])
     )
 
     send_email(f"Your Nebulus Email Verification Code", [data["email"]], htmlform)
@@ -46,15 +45,20 @@ def signup_email():
 @private_endpoint
 def reset_email():
     data = request.get_json()
-    email = read.find_user(username=data["username"]).email
+    try:
+        email = read.find_user(username=data["username"]).email
+    except KeyError:
+        return "0"
 
     code = random.randint(10000000, 99999999)
     session["verificationCode"] = str(code)
     print(code)
 
-    htmlform = str(codecs.open("app/templates/utils/email.html", "r").read()).replace("123456", str(code)) \
-        .replace(" <strong>Nicholas Wang</strong>", "").replace("signed up", "requested a password reset") \
-        .replace("sign up", "do so").replace("Signup", "Reset")
+    htmlform = (
+        str(codecs.open("app/templates/utils/email.html", "r").read()).replace("123456", str(code))
+            .replace("Nicholas Wang", data["username"]).replace("signed up", "requested a password reset")
+            .replace("sign up", "do so").replace("Signup", "Reset")
+    )
 
     send_email(f"Your Nebulus Password Reset Code", [email], htmlform)
 
