@@ -34,7 +34,7 @@
                             <li><a href="/dashboard" class="nav-link-2" aria-current="page" style="margin-top: 8px">
                                 Dashboard</a></li>
                             <li><a href="/lms" class="nav-link">Learning</a></li>
-                            <li><a href="/about" class="nav-link">About Nebulus</a></li>
+                            <li><a href="/about" class="nav-link">About</a></li>
                             <li style="margin-left: 1rem">
                                 <button id="dropdownNavbarLink" class="nav-link"
                                         data-dropdown-toggle="dropdownNavbar">
@@ -52,7 +52,7 @@
                                     <ul class="py-1 text-sm text-gray-700 dark:text-gray-400"
                                         aria-labelledby="dropdownLargeButton">
                                         <li>
-                                            <a href="/api/developers"
+                                            <a href="/api/developers" style="display:none"
                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">API</a>
                                         </li>
                                         <li>
@@ -60,15 +60,15 @@
                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Planner</a>
                                         </li>
                                         <li>
-                                            <a href="/notepad"
+                                            <a href="/notepad" style="display:none"
                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Notepad</a>
                                         </li>
                                         <li>
-                                            <a href="/calendar"
+                                            <a href="/calendar" style="display:none"
                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Calendar</a>
                                         </li>
                                         <li>
-                                            <a href="/files"
+                                            <a href="/files" style="display:none"
                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Files</a>
                                         </li>
                                         <li>
@@ -80,7 +80,7 @@
                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Music</a>
                                         </li>
                                         <li>
-                                            <a href="/scheduler"
+                                            <a href="/scheduler" style="display:none"
                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Scheduler</a>
                                         </li>
                                         <li>
@@ -89,12 +89,12 @@
                                                 Session</a>
                                         </li>
                                         <li>
-                                            <a href="/study-plan"
+                                            <a href="/study-plan" style="display:none"
                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Study
                                                 Plan</a>
                                         </li>
                                         <li>
-                                            <a href="/analyze"
+                                            <a href="/analyze" style="display:none"
                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Analyze
                                                 Image or PDF (with AI)</a>
                                         </li>
@@ -107,11 +107,9 @@
                                 </div>
                             </li>
                         {% else %}
-                            <li><a href="/" class="nav-link-2" aria-current="page" style="margin-top: 8px;">Home</a>
-                            </li>
-                            <li><a href="/about" class="nav-link">What Is Nebulus?</a></li>
+                            <li><a href="/about" class="nav-link">About</a></li>
                             <li><a href="/pricing" class="nav-link">Pricing</a></li>
-                            <li><a href="/api/developers" class="nav-link">API</a></li>
+                            <li><a href="/select-a-region" class="nav-link">Change Language</a></li>
 
                             <button id="theme-toggle" type="button"
                                     class="text-gray-500 dark:text-gray-400 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
