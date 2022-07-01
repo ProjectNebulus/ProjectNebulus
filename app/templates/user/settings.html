@@ -4,12 +4,12 @@
     <head>
         <style>
             /* Hide scrollbar for Chrome, Safari and Opera */
-            #account::-webkit-scrollbar {
+            body::-webkit-scrollbar {
                 display: none;
             }
 
             /* Hide scrollbar for IE, Edge and Firefox */
-            #account {
+            body {
                 -ms-overflow-style: none; /* IE and Edge */
                 scrollbar-width: none; /* Firefox */
             }
@@ -29,7 +29,7 @@
     <body>
     {% include "utils/navbar.html" %}
     <script src="/static/js/user/settings.js"></script>
-    <div class="flex overflow-auto" style="height: calc(100% - 80px)">
+    <div class="flex" style="height: calc(100% - 80px)">
         <div id="sidebar" class="mx-4 my-4 hidden lg:block lg:sticky text-right"
              style="flex: 0 0 10%; top: 0; align-self: flex-start">
             <div class="mt-12 lg:mt-8">
@@ -94,13 +94,13 @@
             </div>
         </div>
 
-        <div id="account" style="flex: 0 0 0 90%; margin-left: 8%;">
-            <div class="text-center mt-6">
-                <h1 class="text-5xl text-black dark:text-white">{{ session.get('username') }}'s Nebulus Account</h1>
+        <div id="account" style="flex: 0 0 0 90%; margin-left: 8%; margin-right:8%;">
+            <div class="mt-6">
+                <h1 class="text-3xl text-black dark:text-white">My Account</h1>
             </div>
             <br>
 
-            <h2 id="general" class="text-4xl text-black dark:text-white">General Settings</h2><br>
+            <h2 id="general" class="text-2xl text-black dark:text-white">General Settings</h2><br>
             <label class="hidden md:block block mt-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                 Your Username
             </label>
@@ -174,7 +174,7 @@
             </div>
 
             <hr class="border-gray-300 dark:border-gray-700 my-8">
-            <h1 class="text-4xl mt-2 text-black dark:text-white" id="connections">Connections</h1><br>
+            <h1 class="text-2xl mt-2 text-black dark:text-white" id="connections">Connections</h1><br>
             <div class="block p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700">
                 <p class="text-black dark:text-white">
                     Connections can unlock
@@ -614,7 +614,7 @@
             {% endif %}
 
             <hr class="border-gray-300 dark:border-gray-700 my-8">
-            <h2 id="bug" class="text-4xl text-black dark:text-white">Submit a Bug Report</h2><br>
+            <h2 id="bug" class="text-2xl text-black dark:text-white">Submit a Bug Report</h2><br>
             <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Your Bug
                 Report</label>
             <textarea id="message" rows="4"
@@ -625,7 +625,7 @@
                 Submit
             </button>
             <hr class="border-gray-300 dark:border-gray-700 my-8">
-            <h2 id="request" class="text-4xl text-black dark:text-white">Submit a Feature Request</h2><br>
+            <h2 id="request" class="text-2xl text-black dark:text-white">Submit a Feature Request</h2><br>
             <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Your
                 Bug</label>
             <textarea id="message" rows="4"
