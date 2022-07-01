@@ -301,10 +301,10 @@ def fetchChats():
     chats = read.loadChats(
         session["id"],
         current_index,
-        30,
+        10,
         ["id", "title", "avatar.avatar_url", "members", "lastEdited", "owner"],
     )
-    print(chats)
+    print('im fetching chats')
     return jsonify(chats)
 
 
