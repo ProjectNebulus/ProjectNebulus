@@ -3,6 +3,7 @@ App entrypoint.
 """
 import os
 import platform
+from app.static.python.classes import User
 
 from dotenv import load_dotenv
 
@@ -11,6 +12,7 @@ from app.routes import init_app, socketio
 
 app = init_app()
 app.secret_key = os.getenv("MONGOPASS")
+
 
 # Debug mode logs errors in more detail. Best used for testing, not production
 debug = False
