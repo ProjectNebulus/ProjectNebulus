@@ -2,6 +2,7 @@ import datetime
 from datetime import datetime
 
 from flask import request, session
+from flask.json import jsonify
 
 from app.static.python.classes import Avatar, ChatProfile
 from app.static.python.mongodb import create, read
@@ -65,22 +66,14 @@ def create_user():
 def search_user():
     data = request.get_json()
     data = data["search"]
-    users = read.search_user(data)
-    string = ""
-    count = 0
-    for i in users:
-        count += 1
-        string += request.root_url + i.avatar.avatar_url
-        string += "•"
-        string += i.username
-        string += "•"
-        string += i.email
-        if len(users) != count:
-            string += "•"
+    users = list(read.search_user(data))
+
+    for n, user in enumerate(users):
+        users[n] = [user.id, request.root_url+user.avatar.avatar_url, user.username, user.email]
     if len(users) == 0:
         return "0"
 
-    return string
+    return jsonify(users)
 
 
 @internal.route("/search-within_user", methods=["POST"])

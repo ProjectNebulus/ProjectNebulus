@@ -91,11 +91,11 @@ function replaceURLs(message, message_id) {
 
 function createChat(members) {
     document.getElementById("dropdown").style.display = "none";
-    socket.emit('new_chat', {'members': members})
+    socket.emit('new_chat', {'members': [members]})
 }
 
 function changeSearch() {
-    let value = document.getElementById("search").value;
+    let value = document.getElementById("search_input").value;
     if (value.length > 0) {
         document.getElementById("search_items").innerHTML = `
 <li>
@@ -125,32 +125,19 @@ Searching...
                     No Results Found
                 </li>`
             } else {
-                let datas = data.split("•");
-                for (let i = 0; i < datas.length; i++) {
-
-                    if (i % 3 === 0) {
-                        temp_arr = [];
-                        temp_arr.push(datas[i]);
-                    }
-                    if (i % 3 === 1) {
-                        temp_arr.push(datas[i]);
-                    }
-                    if (i % 3 === 2) {
-                        temp_arr.push(datas[i]);
-                        let element = temp_arr;
-                        console.log(element);
+                data.forEach(function(element){
 
                         document.getElementById("search_items").innerHTML += `
                 <div>
-                    <span onclick="createChat('${element[1]}');" class="truncate py-2.5 rounded-lg mx-auto block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 mx-2 dark:hover:text-white" style="text-align:left;">
-            <img src="${element[0]}" class="inline-block w-10 h-10 rounded-full" alt="dates">
-            ${element[1]} <span class="text-gray-500 ml-2">${element[2]}</span></span>
+                    <span onclick="createChat('${element[0]}');" class="truncate py-2.5 rounded-lg mx-auto block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 mx-2 dark:hover:text-white"  id="user_option_${element[0]}" style="text-align:left;">
+            <img src="${element[1]}" class="inline-block w-10 h-10 rounded-full" alt="dates">
+            ${element[2]} <span class="text-gray-500 ml-2">${element[3]}</span></span>
                 </div>
 `
-                    }
+                    });
                 }
             }
-        });
+        );
     }
 }
 
@@ -210,9 +197,9 @@ function updateToMessage(message) {
     let url = replaceURLs(message["content"], message["id"]);
     console.log(url);
     $(`#content_${message["id"]}`).html(url);
-
-
-    $('#chat').children().last().remove();
+    if ($('#chat').children().length >= 40) {
+        $('#chat').children().last().remove();
+    }
     $('#chat').scrollTop(0);
 }
 

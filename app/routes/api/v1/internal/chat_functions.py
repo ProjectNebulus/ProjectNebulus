@@ -140,9 +140,11 @@ def message_deleted(json_data):
 @socketio.event(namespace="/chat")
 def new_chat(data):
     data = {
-        "owner": session["username"],
-        "members": [session["username"], *data["members"]],
+        "owner": session["id"],
+        "members": [session["id"], *data["members"]],
     }
+
+    print(data)
     chat = create.createChat(data)
     chat_data = {
         "id": chat.id,
