@@ -89,7 +89,6 @@ keyUpDelay("#code", 1000, () => {
     const request = $.ajax({
         type: "POST",
         url: "/api/v1/internal/check-verification-code",
-        contentType: "application/json",
         data: JSON.stringify({value: codeInput.value})
     });
 
