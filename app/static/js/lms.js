@@ -592,4 +592,4 @@ function changeSearch() {
 
     }
 }
-keyUpDelay("#sear", 1000, changeSearch);
+keyUpDelay("#search", 1000, changeSearch);
