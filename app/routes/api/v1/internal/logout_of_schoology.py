@@ -1,6 +1,6 @@
 from flask import redirect, session
 
-from .....static.python.mongodb import read, update
+from app.static.python.mongodb import read, update
 from . import internal
 
 
@@ -8,31 +8,31 @@ from . import internal
 def logout_from_schoology2():
     try:
         session.pop("schoologyEmail")
-    except:
+    except ValueError:
         pass
     try:
         session.pop("schoologyName")
-    except:
+    except ValueError:
         pass
     try:
         session.pop("token")
-    except:
+    except ValueError:
         pass
     try:
         session.pop("request_token")
-    except:
+    except ValueError:
         pass
     try:
         session.pop("request_token_secret")
-    except:
+    except ValueError:
         pass
     try:
         session.pop("access_token_secret")
-    except:
+    except ValueError:
         pass
     try:
         session.pop("access_token")
-    except:
+    except ValueError:
         pass
     user = read.find_user(username=session["username"])
 

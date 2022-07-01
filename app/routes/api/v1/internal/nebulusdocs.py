@@ -2,8 +2,8 @@ import datetime
 
 from flask import request, session
 
-from .....routes.main import private_endpoint
-from .....static.python.mongodb import create, read
+from app.routes.main import private_endpoint
+from app.static.python.mongodb import create, read
 from . import internal
 
 

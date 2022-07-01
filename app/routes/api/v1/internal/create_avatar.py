@@ -1,6 +1,6 @@
 from flask import flash, request
 
-from .....static.python.cdn.upload_avatar import upload_avatar
+from app.static.python.cdn.upload_avatar import upload_avatar
 from . import internal
 
 

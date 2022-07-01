@@ -2,14 +2,19 @@ const send = document.getElementById("send");
 const confirm = document.getElementById("resetPsw");
 const codeInput = document.getElementById("code");
 const newPsw = document.getElementById("newPsw");
+const usernameInput = document.getElementById("reset-username");
+const usernameForReset = document.getElementById("username-email");
 let icons, errors;
+
+const r_l = ',<.>/?;:\'"\\|[{]}=+-_`!@#$%^&*()_+';
+const HAS_NUMBER = /\d/;
 
 function codeScreen(email) {
     code.classList.toggle("hidden");
     reset.classList.toggle("hidden");
 
     if (email)
-        document.getElementById("username-email").innerHTML = document.getElementById("username-email").innerHTML.replace("[email]", email);
+        usernameForReset.innerHTML = usernameForReset.innerHTML.replace("[email]", email);
 }
 
 function sendEmail() {
@@ -20,7 +25,7 @@ function sendEmail() {
         type: "POST",
         url: "/api/v1/internal/reset-email",
         contentType: "application/json",
-        data: JSON.stringify({username: document.getElementById("reset-username").value})
+        data: JSON.stringify({username: usernameInput.value})
     });
 
     request.done((email) => {
@@ -52,12 +57,32 @@ window.addEventListener("load", () => {
             else
                 pageCounters[i].innerHTML += "<div class='rounded-full w-2 h-2 bg-gray-300 dark:bg-gray-400'></div>"
         }
-        pageCounters[i].style.width = "calc(100% - 4rem)";
+
+        try {pageCounters[i].style.width = "calc(100% - 4rem)";}
+        catch (e) {}
     }
 });
 
 confirm.addEventListener("click", () => {
-    
+    confirm.innerHTML = "Resetting...";
+
+    const request = $.ajax({
+        type: "POST",
+        url: "/api/v1/internal/reset-psw",
+        contentType: "application/json",
+        data: JSON.stringify({
+            username: usernameInput.value,
+            password: newPsw.value
+        })
+    });
+
+
+    request.done(() => {
+        confirm.innerHTML = "Done!";
+        window.location.href = "/dashboard";
+    });
+
+    request.fail(() => confirm.innerHTML = "Error - Retry")
 });
 
 keyUpDelay("#code", 1000, () => {
@@ -96,14 +121,13 @@ keyUpDelay("#code", 1000, () => {
 keyUpDelay("#newPsw", 1000, checkPassword)
 
 function checkPassword() {
-    errors[1].classList.remove("rotate-45");
+    icons[1].classList.remove("rotate-45");
     errors[1].style.color = 'red';
     errors[1].innerHTML = '<br>';
     const value = newPsw.value;
     if (value === "") {
         // User hasn't entered a password
-        errors[1].innerHTML =
-            'Please enter a password!';
+        errors[1].innerHTML = 'Please enter a password!';
         newPsw.classList.remove(...GREEN_BORDER);
         newPsw.classList.add(...RED_BORDER);
         icons[1].style.color = 'red';
@@ -133,8 +157,7 @@ function checkPassword() {
         }
 
         if (!hasSpecialCharacter) {
-            errors[1].innerHTML =
-                'Password must include at least 1 special character!';
+            errors[1].innerHTML = 'Password must include at least 1 special character!';
             newPsw.classList.remove(...GREEN_BORDER);
             newPsw.classList.add(...RED_BORDER);
             icons[1].style.color = 'red';

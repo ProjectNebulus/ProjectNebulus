@@ -5,9 +5,8 @@ import schoolopy
 from flask import request, session
 from googleapiclient.discovery import build
 
+from app.static.python.mongodb import create, read
 from app.static.python.utils.colors import getColor
-
-from .....static.python.mongodb import create, read
 from . import internal
 
 
@@ -100,7 +99,7 @@ def create_google_course():
         post_data["teacher"] = "Unknown Teacher"
     link = post_data["link"]
     index = link.index("?id=") + 4
-    link = link[index : len(link)]
+    link = link[index: len(link)]
     # print(f"I'm at Google Classroom Creation. The ID is: {link}")
     course = getGclassroomcourse(link)
     createcourse = {
@@ -131,7 +130,7 @@ def create_canvas_course():
     link = post_data["link"]
     teacher = post_data["teacher"]
     index = link.index("/course/") + 9
-    course_id = link[index : len(link)]
+    course_id = link[index: len(link)]
     # print(f"I'm at Canvas Creation. The ID is: {link}")
     from canvasapi import Canvas
 
@@ -192,7 +191,7 @@ def create_schoology_course():
     link = post_data["link"]
     if "schoology" in link:
         index = link.index("/course/") + 8
-        link = link[index : index + 10]
+        link = link[index: index + 10]
 
     schoology = read.getSchoology(username=session["username"])
     if len(schoology) == 0:
@@ -281,7 +280,7 @@ def create_schoology_course():
                     # "id": str(assignment["id"]),
                     "title": assignment["title"],
                     "description": assignment["description"]
-                    + f"\n\nView On Schoology: {assignment['web_url']}",
+                                   + f"\n\nView On Schoology: {assignment['web_url']}",
                     # "submitDate": assignment["dropbox_last_submission"],
                     "due": due,
                     # "course": str(course_obj.id),

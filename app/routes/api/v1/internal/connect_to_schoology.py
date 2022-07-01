@@ -1,11 +1,11 @@
 from flask import request, session
 
-from .....static.python.extensions.integrations.schoology import (
+from app.static.python.extensions.integrations.schoology import (
     create_schoology,
     create_schoology_auth,
     generate_auth,
 )
-from .....static.python.mongodb import read, update
+from app.static.python.mongodb import read, update
 from . import internal
 
 
@@ -48,8 +48,8 @@ def user_connect_to_schoology_route():
     session["Schoologydomain"] = data["link"]
     session["Schoologyid"] = sc.get_me().id
     if (
-        read.check_duplicate_schoology(session["id"], session["Schoologyemail"])
-        == "false"
+            read.check_duplicate_schoology(session["id"], session["Schoologyemail"])
+            == "false"
     ):
         return "2"
     schoology = {

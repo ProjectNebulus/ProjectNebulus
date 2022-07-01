@@ -3,10 +3,9 @@ from datetime import datetime
 
 from flask import jsonify, request, session
 
+from app.routes.main.utils import private_endpoint
+from app.static.python.mongodb import read
 from app.static.python.utils.colors import getColor
-
-from .....static.python.mongodb import read
-from ....main.utils import private_endpoint
 from . import internal
 
 

@@ -7,14 +7,12 @@ from flask_cors import CORS
 from flask_mail import Mail
 from flask_socketio import SocketIO
 
-from ..static.python.mongodb import read
-
 socketio = SocketIO()
 mail = Mail()
 from .api import api_blueprint
 from .main import main_blueprint
 from .static import static_blueprint
-from ..static.python.mongodb import read
+from app.static.python.mongodb import read
 
 
 class _LogFilter(logging.Filter):

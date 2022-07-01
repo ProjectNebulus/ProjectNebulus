@@ -7,10 +7,10 @@ from flask import request, session
 from flask.json import jsonify
 from flask_socketio import emit, join_room, leave_room
 
-from .....static.python.classes import User
-from .....static.python.mongodb import create, delete, read, update
-from .... import socketio
+from app.static.python.classes import User
+from app.static.python.mongodb import create, delete, read, update
 from . import internal
+from .... import socketio
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 
@@ -157,8 +157,8 @@ def new_chat(data):
         for x, member in enumerate(chat["members"]):
             chat["members"][x] = json.loads(
                 User.objects.only("id", "chatProfile", "username", "avatar.avatar_url")
-                .get(pk=member)
-                .to_json()
+                    .get(pk=member)
+                    .to_json()
             )
         chat["owner"] = list(
             filter(lambda x: x["_id"] == chat["owner"], chat["members"])
@@ -205,14 +205,14 @@ def get_embed():
     try:
         if "youtube.com/watch" in link:
             location = link.index("v=")
-            id = link[location + 2 : location + 14]
+            id = link[location + 2: location + 14]
             image = """
             
            <iframe width="560" height="315" src="https://www.youtube.com/embed/${id}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>"""
 
         if "youtu.be/" in link:
             location = link.index("/")
-            id = link[location + 1 : location + 13]
+            id = link[location + 1: location + 13]
             image = """
             
            <iframe width="560" height="315" src="https://www.youtube.com/embed/${id}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>"""
@@ -226,12 +226,12 @@ def get_embed():
     except:
         color = ""
     if (
-        title != ""
-        or url != ""
-        or color != ""
-        or image != ""
-        or site != ""
-        or descrip != ""
+            title != ""
+            or url != ""
+            or color != ""
+            or image != ""
+            or site != ""
+            or descrip != ""
     ):
         embed = f"""
         <div style="border-style: none none none solid; border-width:3px; border-color:{color}" class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
@@ -301,8 +301,8 @@ def getChat():
     for message in chat["messages"]:
         message["sender"] = json.loads(
             User.objects.only("id", "username", "avatar.avatar_url")
-            .get(pk=message["sender"])
-            .to_json()
+                .get(pk=message["sender"])
+                .to_json()
         )
         message["send_date"] = datetime.datetime.fromtimestamp(
             message["send_date"]["$date"] / 1000
@@ -330,18 +330,18 @@ def fetchMessages():
     if len(chat["messages"]) < data["current_index"] + 20:
         print(len(chat["messages"]))
         chat["messages"] = list(reversed(chat["messages"]))[
-            data["current_index"] : len(chat["messages"])
-        ]
+                           data["current_index"]: len(chat["messages"])
+                           ]
     else:
         chat["messages"] = list(reversed(chat["messages"]))[
-            data["current_index"] : (data["current_index"] + 30)
-        ]
+                           data["current_index"]: (data["current_index"] + 30)
+                           ]
 
     for message in chat["messages"]:
         message["sender"] = json.loads(
             User.objects.only("id", "username", "avatar.avatar_url")
-            .get(pk=message["sender"])
-            .to_json()
+                .get(pk=message["sender"])
+                .to_json()
         )
         message["send_date"] = datetime.datetime.fromtimestamp(
             message["send_date"]["$date"] / 1000

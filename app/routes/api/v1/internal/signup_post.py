@@ -1,6 +1,6 @@
 from flask import request, session
 
-from .....static.python.mongodb import create
+from app.static.python.mongodb import create
 from . import internal
 
 

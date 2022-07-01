@@ -1,3 +1,5 @@
+from flask import session
+
 from ..classes import (
     Chat,
     Community,
@@ -7,6 +9,7 @@ from ..classes import (
     Schoology,
     User,
 )
+from ..utils.security import hash256
 
 
 def schoologyLogin(_id: str, schoology: dict):
@@ -229,3 +232,15 @@ def set_status(user_id: str, status: str):
     else:
         user.chatProfile.status = status
         user.save(clean=False)
+
+
+def resetPassword(username: str, psw: str):
+    user = User.objects.get(username=username)
+    user.password = hash256(psw)
+    user.save(clean=False)
+
+    session["username"] = username
+    session["pswLen"] = len(psw)
+    session["email"] = user.email
+    session["avatar"] = user.avatar.avatar_url
+    session["id"] = user.id

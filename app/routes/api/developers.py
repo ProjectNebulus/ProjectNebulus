@@ -1,7 +1,7 @@
 from flask import render_template, session
 
-from ...static.python.mongodb import read
-from ..main.utils import logged_in
+from app.routes.main.utils import logged_in
+from app.static.python.mongodb import read
 from . import api_blueprint
 
 

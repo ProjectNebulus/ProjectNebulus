@@ -4,10 +4,10 @@ import random
 from flask import session, request
 from flask_mail import Message
 
+from app.routes.main import private_endpoint
+from app.static.python.mongodb import read
 from . import internal
 from .... import mail
-from ....main import private_endpoint
-from .....static.python.mongodb import read
 
 
 def send_email(subject, recipients, message):

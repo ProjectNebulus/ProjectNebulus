@@ -4,7 +4,7 @@ import google.oauth2.credentials
 from flask import render_template, session
 from googleapiclient.discovery import build
 
-from ...static.python.mongodb import read
+from app.static.python.mongodb import read
 from . import main_blueprint, utils
 from .utils import logged_in
 
@@ -124,10 +124,10 @@ def lms():
             for i in range(0, len(scCourses)):
                 scCourses[i] = dict(scCourses[i])
                 scCourses[i]["link"] = (
-                    schoology.schoologyDomain
-                    + "course/"
-                    + scCourses[i]["id"]
-                    + "/materials"
+                        schoology.schoologyDomain
+                        + "course/"
+                        + scCourses[i]["id"]
+                        + "/materials"
                 )
             scSchool = sc.get_school(scCourses[0]["school_id"])
             scCourses.append(scSchool)

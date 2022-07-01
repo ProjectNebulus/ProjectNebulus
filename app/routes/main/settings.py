@@ -2,7 +2,7 @@ import flask
 import google.oauth2.credentials
 from googleapiclient.discovery import build
 
-from ...static.python.mongodb import read
+from app.static.python.mongodb import read
 from . import main_blueprint
 from .spotify import (
     SPOTIPY_CLIENT_ID,

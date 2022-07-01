@@ -3,8 +3,8 @@ from datetime import datetime
 
 from flask import render_template, session
 
-from ...static.python.mongodb import read
-from ...static.python.utils.colors import getColor
+from app.static.python.mongodb import read
+from app.static.python.utils.colors import getColor
 from . import main_blueprint, utils
 from .utils import logged_in
 
@@ -64,7 +64,7 @@ def dashboard():
             thread = sc.get_message(message_id=message["id"])
             info["message"] = thread[-1]["message"]
             info["message"] = info["message"][:100] + "..." * (
-                len(info["message"]) > 100
+                    len(info["message"]) > 100
             )
             newThread = []
             for threadItem in thread:

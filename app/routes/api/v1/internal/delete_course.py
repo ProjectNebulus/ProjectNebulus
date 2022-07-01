@@ -1,6 +1,6 @@
 from flask import request
 
-from .....static.python.mongodb import delete
+from app.static.python.mongodb import delete
 from . import internal
 
 

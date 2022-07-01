@@ -3,6 +3,7 @@ let main, reset, code;
 function resetScreen() {
     main.classList.toggle("hidden");
     reset.classList.toggle("hidden");
+    usernameInput.value = username.value;
 }
 
 function selectChanged() {

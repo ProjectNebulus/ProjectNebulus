@@ -1,6 +1,6 @@
 from flask import request
 
-from .....static.python.classes.User import User
+from app.static.python.classes.User import User
 from . import internal
 
 

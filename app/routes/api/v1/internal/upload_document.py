@@ -1,6 +1,6 @@
 from flask import flash, request
 
-from .....static.python.cdn.upload_document import upload_document
+from app.static.python.cdn.upload_document import upload_document
 from . import internal
 
 
