@@ -425,7 +425,7 @@ def getUserChats(user_id: str, required_fields: list):
 def loadChats(user_id: str, current_index, initial_amount, required_fields):
     chats = json.loads(getUserChats(user_id, required_fields).to_json())
 
-    chats = sorted(chats, key=lambda x: x["lastEdited"]["$date"])
+    chats = reversed(sorted(chats, key=lambda x: x["lastEdited"]["$date"]))
 
     if len(chats) < current_index + initial_amount:
         initial_amount = len(chats) - current_index

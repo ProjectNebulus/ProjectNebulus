@@ -18,6 +18,7 @@ class ChatProfile(EmbeddedDocument):
     outgoingFriendRequests = ListField(ReferenceField("User"))
     blocked = ListField(ReferenceField("User"))
     mutedDMS = ListField(ReferenceField("Chat"))
+    sid = StringField()
     # TODO: mutedThreads
     mutedCommunities = ListField(ReferenceField("Community"))
     DM_Open = ListField(ReferenceField("User"))

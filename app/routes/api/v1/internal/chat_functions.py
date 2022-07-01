@@ -99,6 +99,10 @@ def user_loaded(json_data):
     chats = [x.id for x in read.find_user(pk=session["id"]).chats]
     for chat in chats:
         join_room(chat)
+
+    user = read.find_user(pk=session["id"])
+    user.chatProfile.sid = request.sid
+
     emit("user_loaded", {"msg": "User loaded into rooms"})
 
 
