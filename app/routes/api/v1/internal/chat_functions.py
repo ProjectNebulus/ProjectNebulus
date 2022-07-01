@@ -148,6 +148,7 @@ def new_chat(data):
         "members": [session["id"], *data["members"]],
     }
 
+
     print(data)
     chat = create.createChat(data)
     chat_data = {
@@ -159,21 +160,32 @@ def new_chat(data):
         "members": chat.members,
     }
 
-    if len(chat.members) == 2:
-        for x, member in enumerate(chat["members"]):
-            chat["members"][x] = json.loads(
+    sid_list = []
+
+    for x, member in enumerate(chat["members"]):
+        if len(chat["members"]) == 2:
+            user_dict = json.loads(
                 User.objects.only("id", "chatProfile", "username", "avatar.avatar_url")
                     .get(pk=member)
                     .to_json()
             )
-        chat["owner"] = list(
-            filter(lambda x: x["_id"] == chat["owner"], chat["members"])
-        )[0]
+            chat["members"][x] = user_dict
+            sid_list += user_dict["chatProfile"]["sid"]
+            chat["owner"] = list(
+                filter(lambda x: x["_id"] == chat["owner"], chat["members"])
+            )[0]
 
-    socketio.emit(
-        "new_chat",
-        chat_data,
-    )
+        else:
+            sid_list += User.objects.only("chatProfile.sid").get(pk=member).sid
+
+
+
+    for sid in sid_list:
+        socketio.emit(
+            "new_chat",
+            chat_data,
+            room=sid
+        )
 
 
 @internal.route("/change-status", methods=["POST"])
