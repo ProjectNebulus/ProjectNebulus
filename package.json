@@ -16,7 +16,7 @@
         "html-metadata-parser": "^2.0.4",
         "npx": "^10.2.2",
         "picmo": "^5.2.0",
-        "postcss-cli": "^9.1.0",
+        "postcss-cli": "^10.0.0",
         "prettier": "^2.7.1",
         "socket.io-client": "^4.5.1",
         "twemoji": "^14.0.2"
