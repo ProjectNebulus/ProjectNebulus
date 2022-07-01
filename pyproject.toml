@@ -41,7 +41,7 @@ graphene-mongo = "^0.2.14"
 python-dotenv = "^0.20.0"
 
 [tool.poetry.dev-dependencies]
-pylint = "^2.14.3"
+pylint = "^2.14.4"
 mypy = "^0.961"
 
 [build-system]
