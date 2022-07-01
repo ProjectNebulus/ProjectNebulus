@@ -28,6 +28,5 @@ if __name__ == "__main__":
         type = ""
 
     print(app.url_map)
-
     print(f"Started Running: http{type}://{host}:{port}")
     socketio.run(app, host=host, port=port)
