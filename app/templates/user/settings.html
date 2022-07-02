@@ -30,26 +30,26 @@
     {% include "utils/navbar.html" %}
     <script src="/static/js/user/settings.js"></script>
     <div class="flex" style="height: calc(100% - 80px)">
-        <div id="sidebar" class="mx-4 my-4 hidden lg:block lg:sticky text-right"
-             style="flex: 0 0 10%; top: 0; align-self: flex-start">
+        <div id="sidebar" class="px-8 py-4 hidden lg:block lg:sticky h-full text-left dark:bg-gray-700 bg-gray-200"
+             style="position:fixed; flex: 0 0 10%; top: 76px; align-self: flex-start">
             <div class="mt-12 lg:mt-8">
                 <h5 class="mb-8 lg:mb-3 text-3xl font-semibold text-slate-900 dark:text-slate-200">Settings</h5>
                 <ul class="space-y-6 lg:space-y-2 border-l border-slate-100 dark:border-slate-800">
                     <li>
                         <a class="block border-l pl-4 -ml-px text-sky-500 border-current font-semibold dark:text-sky-400"
-                           href="#general">General Settings</a></li>
+                           href="#general">General</a></li>
                     <li>
                         <a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
                            href="#connections">Connections</a></li>
                     <li>
                         <a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
-                           href="#bug">Submit a Bug Report</a></li>
+                           href="#bug">Reports</a></li>
                     <li>
                         <a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
-                           href="#request">Submit a Feature Request</a></li>
+                           href="#request">Requests</a></li>
                     <li>
                         <a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
-                           href="#danger">Danger Zone</a></li>
+                           href="#danger">Advanced</a></li>
                 </ul>
             </div>
         </div>
@@ -94,7 +94,7 @@
             </div>
         </div>
 
-        <div id="account" style="flex: 0 0 0 90%; margin-left: 8%; margin-right:8%;">
+        <div id="account" style="flex: 0 0 0 90%; margin-left: calc(8% + 200px);; margin-right:8%;">
             <div class="mt-6">
                 <h1 class="text-3xl text-black dark:text-white">My Account</h1>
             </div>
