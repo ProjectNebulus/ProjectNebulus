@@ -100,8 +100,12 @@ def user_loaded(json_data):
     for chat in chats:
         join_room(chat)
 
+
+
     user = read.find_user(pk=session["id"])
     user.chatProfile.sid = request.sid
+    user.save()
+    join_room(request.sid)
 
     emit("user_loaded", {"msg": "User loaded into rooms"})
 
@@ -150,30 +154,42 @@ def new_chat(data):
 
     print(data)
     chat = create.createChat(data)
-    chat_data = {
+    chat = {
         "id": chat.id,
         "avatar": {"avatar_url": chat.avatar.avatar_url},
         "title": chat.title,
         "lastEdited": chat.lastEdited,
-        "owner": chat.owner,
-        "members": chat.members,
+        "owner": session["id"],
+        "members": [session["id"], *data["members"]],
     }
 
-    if len(chat.members) == 2:
-        for x, member in enumerate(chat["members"]):
-            chat["members"][x] = json.loads(
-                User.objects.only("id", "chatProfile", "username", "avatar.avatar_url")
-                    .get(pk=member)
-                    .to_json()
-            )
-        chat["owner"] = list(
-            filter(lambda x: x["_id"] == chat["owner"], chat["members"])
-        )[0]
+    sid_list = []
 
-    socketio.emit(
-        "new_chat",
-        chat_data,
-    )
+    for x, member in enumerate(chat["members"]):
+        if len(chat["members"]) == 2:
+            print(member)
+            user_dict = User.objects.only("id", "chatProfile", "username", "avatar.avatar_url").get(pk=member)
+
+            print(user_dict)
+            user_dict = json.loads(user_dict.to_json())
+            chat["members"][x] = user_dict
+            sid_list.append(user_dict["chatProfile"]["sid"])
+            chat["owner"] = list(
+                filter(lambda x: x["_id"] == chat["owner"], chat["members"])
+            )[0]
+
+        else:
+            sid_list.append(User.objects.only("chatProfile.sid").get(pk=member).chatProfile.sid)
+
+    print(sid_list)
+
+    for sid in sid_list:
+        if sid:
+            socketio.emit(
+                "new_chat",
+                chat,
+                room=sid
+            )
 
 
 @internal.route("/change-status", methods=["POST"])
@@ -285,10 +301,10 @@ def fetchChats():
     chats = read.loadChats(
         session["id"],
         current_index,
-        30,
+        10,
         ["id", "title", "avatar.avatar_url", "members", "lastEdited", "owner"],
     )
-    print(chats)
+    print('im fetching chats')
     return jsonify(chats)
 
 

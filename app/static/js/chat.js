@@ -213,11 +213,9 @@ let socket;
 $(document).ready(function () {
     makeCall();
     socket = io.connect('http://' + document.domain + ':' + location.port + '/chat');
-    socket.on('connect', function () {
-        console.log('socket emitting');
-        socket.emit('user_loaded', {});
-    });
+    socket.emit('user_loaded', {});
     socket.on('new_chat', function (chat) {
+        console.log('new chat!');
         let el = document.getElementById('user-chats');
         el.innerHTML = "";
         let s = ``;

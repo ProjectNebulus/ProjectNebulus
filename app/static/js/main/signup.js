@@ -246,7 +246,9 @@ window.addEventListener('load', function () {
         const request = $.ajax({
             type: "POST",
             url: "/api/v1/internal/check-verification-code",
+            contentType: "application/json",
             data: JSON.stringify({value: verification.value})
+
         });
         request.done(function (data) {
             if (data === "true") {
