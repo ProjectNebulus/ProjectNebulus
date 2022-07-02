@@ -47,7 +47,7 @@ function loadTimer() {
         configure();
         return;
     }
-    const data = currentTimer.split(" ");
+    const data = currentTimer.split("\n");
     timerName.innerHTML = data[0];
     paused = parseInt(data[1]) === 1;
     hours = parseInt(data[2]);
