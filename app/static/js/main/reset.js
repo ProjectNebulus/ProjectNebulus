@@ -71,15 +71,20 @@ confirm.addEventListener("click", () => {
         url: "/api/v1/internal/reset-psw",
         contentType: "application/json",
         data: JSON.stringify({
+            code: codeInput.value,
             username: usernameInput.value,
             password: newPsw.value
         })
     });
 
 
-    request.done(() => {
-        confirm.innerHTML = "Done!";
-        window.location.href = "/dashboard";
+    request.done((data) => {
+        if (data === "true") {
+            confirm.innerHTML = "Done!";
+            window.location.href = "/dashboard";
+        }
+        else
+            confirm.innerHTML = "Nice try buddy";
     });
 
     request.fail(() => confirm.innerHTML = "Error - Retry")
@@ -89,6 +94,7 @@ keyUpDelay("#code", 1000, () => {
     const request = $.ajax({
         type: "POST",
         url: "/api/v1/internal/check-verification-code",
+        contentType: "application/json",
         data: JSON.stringify({value: codeInput.value})
     });
 

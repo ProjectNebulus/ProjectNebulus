@@ -1,21 +1,10 @@
 let exitTime;
 let loadingModal;
-
-window.addEventListener("load", () => {
-    for (let i = 0; i < 6; i++)
-        addTimePeriod();
-
-    loadingModal = new Modal(document.getElementById("loading"));
-    loadingModal.show();
-    document.querySelector("#loading p").innerHTML += loadingIcon(30);
-    exitTime = Date.now() + 300;
-
-    reloadTable();
-});
+let empty = false;
 
 const times = document.getElementById("timePeriods");
 
-let d, month, year, startDate;
+let d = new Date(), month, year, startDate;
 
 const oneWeek = 1000 * 60 * 60 * 24 * 7;
 
@@ -29,12 +18,43 @@ const saveState = document.getElementById("savestate");
 const error = document.getElementById("error");
 const plannerName = document.getElementById("planner_name");
 
+const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const daysInMonths = [31, d.getFullYear() % 4 === 0 ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+const table = document.getElementsByTagName("table")[0];
+
+let saveData = {};
+
+window.addEventListener("load", () => {
+    if (empty) {
+        for (let i = 0; i < 6; i++)
+            addTimePeriod();
+    }
+
+    loadingModal = new Modal(document.getElementById("loading"));
+    loadingModal.show();
+    document.querySelector("#loading p").innerHTML += loadingIcon(30);
+    exitTime = Date.now() + 300;
+
+    reloadTable();
+});
+
 function updateDate() {
     d = new Date();
     month = d.getMonth();
     year = d.getFullYear();
 
     startDate = d.getDate() - d.getDay();
+
+    if (startDate < 1) {
+        month--;
+        if (month < 0) {
+            month = 11;
+            year--;
+        }
+        startDate = daysInMonths[month] + startDate;
+    }
 }
 
 function reloadTable() {
@@ -66,14 +86,6 @@ function reloadTable() {
 }
 
 updateDate();
-
-const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-const daysInMonths = [31, d.getFullYear() % 4 === 0 ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-
-const table = document.getElementsByTagName("table")[0];
-
-let saveData = {};
 
 keyUpDelay("table", 500, saveToServer);
 keyUpDelay("#planner_name", 500, saveToServer);
@@ -215,7 +227,7 @@ function saveConfig() {
     configSaved = false;
     reloadTable();
     let inputs = document.querySelectorAll("#configureModal #timePeriods .timePeriod input");
-    let values = []
+    let values = [];
     for (const element of inputs)
         values.push(element.value);
 
@@ -300,10 +312,8 @@ function loadFromServer() {
     request.done(data => {
         setTimeout(() => {
                 document.getElementById("loading").classList.add("fade-out");
-                setTimeout(() => {
-                    loadingModal.hide();
-                    document.querySelector("[modal-backdrop]").classList.add("fade-out");
-                }, 500);
+                document.querySelector("[modal-backdrop]").classList.add("fade-out");
+                setTimeout(() => loadingModal.hide(), 500);
             },
             Math.max(0, exitTime - Date.now()) + 1000
         );
@@ -312,6 +322,7 @@ function loadFromServer() {
             setTimeout(() => {
                     loadingModal.hide();
                     document.getElementById("openModal").click();
+                    empty = true;
                 },
                 Math.max(0, exitTime - Date.now()) + 1000);
             return;
@@ -320,15 +331,15 @@ function loadFromServer() {
         plannerName.value = data["name"];
         saveData = data["saveData"];
 
-        let inputs = document.querySelectorAll("#configureModal #timePeriods .timePeriod input");
-
-        for (let i = 0; i < data["periods"].length - inputs.length; i++)
+        for (let i = 0; i < data["periods"].length; i++)
             addTimePeriod();
 
-        inputs = document.querySelectorAll("#configureModal #timePeriods .timePeriod input");
+        let inputs = document.querySelectorAll("#configureModal #timePeriods .timePeriod input");
 
         for (let i = 0; i < inputs.length; i++)
             inputs[i].value = data["periods"][i];
+
+        reloadTable();
 
         for (const key of Object.keys(saveData)) {
             if (page.toString() === key) {
@@ -338,7 +349,7 @@ function loadFromServer() {
         }
     });
 
-    request.fail(function (jqXHR, textStatus) {
+    request.fail(() => {
         error.innerText = "Error Loading Planner Data!";
         error.style.color = "red";
     });
