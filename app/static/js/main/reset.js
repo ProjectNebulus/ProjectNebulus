@@ -3,18 +3,14 @@ const confirm = document.getElementById("resetPsw");
 const codeInput = document.getElementById("code");
 const newPsw = document.getElementById("newPsw");
 const usernameInput = document.getElementById("reset-username");
-const usernameForReset = document.getElementById("username-email");
 let icons, errors;
 
 const r_l = ',<.>/?;:\'"\\|[{]}=+-_`!@#$%^&*()_+';
 const HAS_NUMBER = /\d/;
 
-function codeScreen(email) {
+function codeScreen() {
     code.classList.toggle("hidden");
     reset.classList.toggle("hidden");
-
-    if (email)
-        usernameForReset.innerHTML = usernameForReset.innerHTML.replace("[email]", email);
 }
 
 function sendEmail() {
@@ -28,10 +24,10 @@ function sendEmail() {
         data: JSON.stringify({username: usernameInput.value})
     });
 
-    request.done((email) => {
+    request.done((data) => {
         send.disabled = false;
-        if (email !== "0")
-            codeScreen(email);
+        if (data === "success")
+            codeScreen();
         else
             send.innerHTML = "Invalid input";
     });

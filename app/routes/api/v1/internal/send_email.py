@@ -62,4 +62,4 @@ def reset_email():
 
     send_email(f"Your Nebulus Password Reset Code", [email], htmlform)
 
-    return email
+    return "success"
