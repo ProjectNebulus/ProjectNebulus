@@ -36,6 +36,8 @@ def create_user():
         20: "newPink.png",
         21: "newRed.png",
         22: "newYellow.png",
+        23: "ukraine.png",
+        24: "pride.png",
     }
 
     data["avatar"] = cats[int(data["avatar"].replace("cat", ""))]
