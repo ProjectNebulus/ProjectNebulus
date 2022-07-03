@@ -1,7 +1,8 @@
 name: Automatic Pull
-on:
-  release:
-    types: [published]
+on: 
+  push:
+    branches:
+      - alpha
 jobs:
   ssh:
     runs-on: ubuntu-latest
