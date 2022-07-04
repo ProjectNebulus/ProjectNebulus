@@ -4,7 +4,7 @@ from datetime import datetime
 from flask import request, session
 from flask.json import jsonify
 
-from app.static.python.classes import Avatar, ChatProfile
+from app.static.python.classes import Avatar, ChatProfile, Chat, User
 from app.static.python.mongodb import create, read
 from app.static.python.utils.security import hash256
 from . import internal
@@ -71,8 +71,15 @@ def search_user():
     users = list(read.search_user(data, session["id"]))
 
     for n, user in enumerate(users):
-        users[n] = [user.id, request.root_url+user.avatar.avatar_url, user.username, user.email]
+        chats = Chat.objects(members=user.id, owner=session["id"])
+        if len(chats) > 0:
+            del users[n]
+            continue
 
+        else:
+
+            users[n] = [user.id, request.root_url+user.avatar.avatar_url, user.username, user.email]
+    users = list(filter(lambda x: not isinstance(x, User), users))
     if not users:
         return "0"
 

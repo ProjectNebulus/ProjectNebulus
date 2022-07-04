@@ -54,7 +54,6 @@ def search_user(query: str, ignore_id: str=None) -> list[User]:
         )[:10]
     # return User.objects.filter(username__contains=query)._query
 
-
 def search_within_course(query: str, course_id: str):
     assignments = Assignment.objects(course_id=course_id, title__contains=query)
     events = Event.objects(course_id=course_id, title__contains=query)

@@ -153,7 +153,8 @@ Searching...
 keyUpDelay("#search", 1000, changeSearch)
 
 function makeCall() {
-    let chatAmount = $('#user-chats > div').length;
+    let chatAmount = $('#user-chats div').length;
+    console.log(chatAmount);
     console.log(chatAmount);
     $.ajax({
         url: '/api/v1/internal/fetch-chats',
@@ -361,7 +362,8 @@ $(document).ready(function () {
     $('#chat-sidebar').on('scroll', function () {
             let div = $(this).get(0);
 
-            if (div.scrollTop + div.clientHeight >= div.scrollHeight) {
+            console.log(div.scrollTop+div.clientHeight+1, div.scrollHeight)
+            if (div.scrollTop + div.clientHeight + 1 >= div.scrollHeight) {
                 makeCall();
             }
         }

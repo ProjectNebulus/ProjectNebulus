@@ -304,6 +304,8 @@ def fetchChats():
         10,
         ["id", "title", "avatar.avatar_url", "members", "lastEdited", "owner"],
     )
+    print(current_index,
+          chats)
     print('im fetching chats')
     return jsonify(chats)
 
