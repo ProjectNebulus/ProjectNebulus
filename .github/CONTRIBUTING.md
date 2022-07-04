@@ -214,24 +214,30 @@ Just committing to the main branch can be really disorganized, it makes commit h
 ### The workflow
 
 
-#### Main branch
+#### Stable branch
 
-Branch that is being deployed, only merge branches with this. The only branches that can be merged directly with main are either hotfixes, or the development branch (as follow) for a new release.
+Branch that is being deployed, only merge branches with this. The only branches that can be merged directly with main are either `hotfixes`, or `release branches` for a new release.
 
 
-#### __Development branch__
+#### Alpha Branch
 
-The only branch that is never deleted. This is for development and it only gets merged with the main branch once all the features are in it, tested, and ready for deployment.
+1 of 2 branches that are never deleted. This is for alpha development and releases for this branch are merged into beta.  A release branch is created out of the alpha branch once all the features are in it are tested a bit and have few bugs.
 
+#### Beta Branch
+
+1 of 2 branches that are never deleted. This is for beta development and releases for this branch are merged into stable. A release branch is created out of the beta branch once all the features are thoroughly tested and have almost no bugs. 
+
+#### Release Branches
+A branch used for merging releases from `alpha` or `beta` into `beta` or `stable`. These should always be prefixed with `release-` and should be be an exact copy of one of the development branches when created. To merge these into `stable`/`beta` create a pull request (which we will review), and once merged a GitHub release will be created. Release branches made from `alpha` merge into `beta` and `beta` into `stable`
 
 #### Feature Branches
 
-Branched off the development branches. Let's say I want to implement another kind of Oath. I branch it off development, commit over the course of a few weeks, and then merge it back with the development branch. These should be named with the prefix `feat-`
+Branched off the alpha branch. Let's say I want to implement another kind of Oath. I branch it off alpha, commit over the course of a few weeks, and then merge it back with the development branch. These should be named with the prefix `feat-`
 
 
 #### Hotfix Branches
 
-Branches that can be branched directly off the main branch or can be branched off the development branch. If it's off the main branch, it means that there’s a bug after deployment that we did not catch in testing. It's off development, it's just a generic bug that may need to be fixed immediately for future development of the project. These should be named with the prefix `hotfix-`
+Branches that can be branched directly off the main branch or can be branched off the development branch. If it's off the main branch, it means that there’s a bug after deployment that we did not catch in testing. It's off development, it's just a generic bug that may need to be fixed immediately for future development of the project. These should be named with the prefix `hotfix-`. These hotfix branches should always be merged to the branches under the branch it is branched off of. For example, if a hotfix branch is branched off of `stable`, it should be merged into `stable`, `beta`, and `alpha`
 
 
 ### Essential Git commands
