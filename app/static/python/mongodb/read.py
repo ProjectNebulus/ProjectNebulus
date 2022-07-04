@@ -43,10 +43,15 @@ def get_user_courses(user_id: str) -> list[Course]:
     return Course.objects(authorizedUsers=user)
 
 
-def search_user(query: str) -> list[User]:
-    return User.objects(username__istartswith=query).only(
-        "id", "username", "email", "avatar", "_cls"
-    )[:10]
+def search_user(query: str, ignore_id: str=None) -> list[User]:
+    if ignore_id:
+        return User.objects(username__istartswith=query, id__ne=ignore_id).only(
+            "id", "username", "email", "avatar", "_cls"
+        )[:10]
+    else:
+        return User.objects(username__istartswith=query).only(
+            "id", "username", "email", "avatar", "_cls"
+        )[:10]
     # return User.objects.filter(username__contains=query)._query
 
 

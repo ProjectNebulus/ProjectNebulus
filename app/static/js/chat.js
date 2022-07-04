@@ -124,6 +124,9 @@ Searching...
         }).done(function (data) {
                 document.getElementById("search_items").innerHTML = "";
                 let temp_arr = []
+
+
+
                 if (data === "0") {
                     document.getElementById("search_items").innerHTML += `
                 <li class="text-center mb-5">

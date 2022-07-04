@@ -68,11 +68,12 @@ def create_user():
 def search_user():
     data = request.get_json()
     data = data["search"]
-    users = list(read.search_user(data))
+    users = list(read.search_user(data, session["id"]))
 
     for n, user in enumerate(users):
         users[n] = [user.id, request.root_url+user.avatar.avatar_url, user.username, user.email]
-    if len(users) == 0:
+
+    if not users:
         return "0"
 
     return jsonify(users)
