@@ -34,7 +34,7 @@ function replaceURLs(message) {
     });
 }
 
-let modal = document.getElementById('CourseModal');
+let modal = document.getElementById('courseModal');
 
 // set up templates
 let templateLists = modal.getElementsByClassName('scroll');
