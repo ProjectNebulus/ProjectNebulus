@@ -1,14 +1,24 @@
-["html",
-  ["p",
-    { "id" : "none" },
+[
+  "html",
+  [
+    "p",
+    {
+      "id": "none"
+    },
     "We can have no whitespace"
   ],
-  ["p",
-    { "id" : "one" },
+  [
+    "p",
+    {
+      "id": "one"
+    },
     "Or a single whitespace"
   ],
-  ["p",
-    { "id" : "lots" },
+  [
+    "p",
+    {
+      "id": "lots"
+    },
     "And even lots of whitespace"
   ]
 ]

@@ -1,34 +1,50 @@
-[ "html",
-  [ "table",
-    [ "thead",
-      [ "tr",
-        [ "th",
+[
+  "html",
+  [
+    "table",
+    [
+      "thead",
+      [
+        "tr",
+        [
+          "th",
           "Function name"
         ],
-        [ "th",
+        [
+          "th",
           "Description"
         ]
       ]
     ],
-    [ "tbody",
-      [ "tr",
-        [ "td",
-          [ "code",
+    [
+      "tbody",
+      [
+        "tr",
+        [
+          "td",
+          [
+            "code",
             "help()"
           ]
         ],
-        [ "td",
+        [
+          "td",
           "Display the help window."
         ]
       ],
-      [ "tr",
-        [ "td",
-          [ "code",
+      [
+        "tr",
+        [
+          "td",
+          [
+            "code",
             "destroy()"
           ]
         ],
-        [ "td",
-          [ "strong",
+        [
+          "td",
+          [
+            "strong",
             "Destroy your computer!"
           ]
         ]

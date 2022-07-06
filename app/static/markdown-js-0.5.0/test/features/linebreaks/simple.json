@@ -1,7 +1,11 @@
-["html",
-  ["p",
+[
+  "html",
+  [
+    "p",
     "The quick brown fox",
-    ["br"],
+    [
+      "br"
+    ],
     "jumps over the lazy dog."
   ]
 ]

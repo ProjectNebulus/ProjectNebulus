@@ -33,7 +33,8 @@ def signup_email():
 
     htmlform = (
         str(codecs.open("app/templates/utils/email.html", "r").read())
-            .replace("123456", str(code)).replace("Nicholas Wang", data["username"])
+            .replace("123456", str(code))
+            .replace("Nicholas Wang", data["username"])
     )
 
     send_email(f"Your Nebulus Email Verification Code", [data["email"]], htmlform)
@@ -55,9 +56,12 @@ def reset_email():
     print(code)
 
     htmlform = (
-        str(codecs.open("app/templates/utils/email.html", "r").read()).replace("123456", str(code))
-            .replace("Nicholas Wang", data["username"]).replace("signed up", "requested a password reset")
-            .replace("sign up", "do so").replace("Signup", "Reset")
+        str(codecs.open("app/templates/utils/email.html", "r").read())
+            .replace("123456", str(code))
+            .replace("Nicholas Wang", data["username"])
+            .replace("signed up", "requested a password reset")
+            .replace("sign up", "do so")
+            .replace("Signup", "Reset")
     )
 
     send_email(f"Your Nebulus Password Reset Code", [email], htmlform)

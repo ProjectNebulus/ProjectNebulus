@@ -1,13 +1,18 @@
-["html",
-  ["p",
+[
+  "html",
+  [
+    "p",
     "Paragraph above"
   ],
-  ["pre",
-    ["code",
+  [
+    "pre",
+    [
+      "code",
       "Code block"
     ]
   ],
-  ["p",
+  [
+    "p",
     "Paragraph below"
   ]
 ]

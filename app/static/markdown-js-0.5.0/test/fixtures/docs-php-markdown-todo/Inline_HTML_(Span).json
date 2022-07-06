@@ -1,11 +1,31 @@
-["html", ["p", ["abbr", {
-    "title": "` **Attribute Content Is Not A Code Span** `"
-},
-"ACINACS"]],
-    ["p", ["abbr", {
+[
+  "html",
+  [
+    "p",
+    [
+      "abbr",
+      {
+        "title": "` **Attribute Content Is Not A Code Span** `"
+      },
+      "ACINACS"
+    ]
+  ],
+  [
+    "p",
+    [
+      "abbr",
+      {
         "title": "`first backtick!"
-    },
-    "SB"], " \u000a", ["abbr", {
+      },
+      "SB"
+    ],
+    " \u000a",
+    [
+      "abbr",
+      {
         "title": "`second backtick!"
-    },
-    "SB"]]]
+      },
+      "SB"
+    ]
+  ]
+]

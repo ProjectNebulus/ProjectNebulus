@@ -1,7 +1,18 @@
-[ "html",
-  [ "blockquote",
-    [ "p", "this is" ],
-    [ "p", "three" ],
-    [ "p", "quotes" ]
+[
+  "html",
+  [
+    "blockquote",
+    [
+      "p",
+      "this is"
+    ],
+    [
+      "p",
+      "three"
+    ],
+    [
+      "p",
+      "quotes"
+    ]
   ]
 ]

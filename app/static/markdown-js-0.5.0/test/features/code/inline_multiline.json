@@ -1,7 +1,10 @@
-["html",
-  ["p",
+[
+  "html",
+  [
+    "p",
     "foo ",
-    ["code",
+    [
+      "code",
       "code\ncode"
     ],
     " bar"

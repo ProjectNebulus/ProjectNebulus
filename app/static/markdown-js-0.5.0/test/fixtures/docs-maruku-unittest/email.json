@@ -1,4 +1,14 @@
-["html", ["p", "This is an email address: ", ["a", {
-    "href": "mailto:andrea@invalid.it"
-},
-"andrea@invalid.it"]]]
+[
+  "html",
+  [
+    "p",
+    "This is an email address: ",
+    [
+      "a",
+      {
+        "href": "mailto:andrea@invalid.it"
+      },
+      "andrea@invalid.it"
+    ]
+  ]
+]

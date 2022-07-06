@@ -1,7 +1,22 @@
-["html", ["p", ["a", {
-    "href": "http://www.google.com/"
-},
-"Google"], " is fast ", ["img", {
-    "src": "/img/star.png",
-    "alt": "star"
-}], "."]]
+[
+  "html",
+  [
+    "p",
+    [
+      "a",
+      {
+        "href": "http://www.google.com/"
+      },
+      "Google"
+    ],
+    " is fast ",
+    [
+      "img",
+      {
+        "src": "/img/star.png",
+        "alt": "star"
+      }
+    ],
+    "."
+  ]
+]

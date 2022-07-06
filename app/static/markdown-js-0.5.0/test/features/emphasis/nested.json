@@ -1,20 +1,27 @@
-["html",
-  ["p",
+[
+  "html",
+  [
+    "p",
     "You can ",
-    ["strong",
+    [
+      "strong",
       "nest ",
-      ["em",
+      [
+        "em",
         "em"
       ],
       " inside strong"
     ],
     "."
   ],
-  ["p",
+  [
+    "p",
     "You can ",
-    ["em",
+    [
+      "em",
       "nest ",
-      ["strong",
+      [
+        "strong",
         "strong"
       ],
       " inside em"

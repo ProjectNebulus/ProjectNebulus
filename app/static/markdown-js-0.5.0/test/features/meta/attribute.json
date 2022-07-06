@@ -1,6 +1,10 @@
-["html",
-  ["p",
-    { "foo" : "bar" },
+[
+  "html",
+  [
+    "p",
+    {
+      "foo": "bar"
+    },
     "A paragraph with an\narbitrary attribute."
   ]
 ]

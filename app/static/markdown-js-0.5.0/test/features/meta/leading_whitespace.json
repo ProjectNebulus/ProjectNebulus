@@ -1,21 +1,35 @@
-["html",
-  ["p",
-    { "id" : "zero" },
+[
+  "html",
+  [
+    "p",
+    {
+      "id": "zero"
+    },
     "Zero"
   ],
-  ["p",
-    { "id" : "one" },
+  [
+    "p",
+    {
+      "id": "one"
+    },
     "One"
   ],
-  ["p",
-    { "id" : "two" },
+  [
+    "p",
+    {
+      "id": "two"
+    },
     "Two"
   ],
-  ["p",
-    { "id" : "three" },
+  [
+    "p",
+    {
+      "id": "three"
+    },
     "Three"
   ],
-  ["p",
+  [
+    "p",
     "Four\n    {: #four}"
   ]
 ]

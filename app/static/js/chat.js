@@ -11,8 +11,7 @@ function getEmbed(hyperlink) {
             error: function (data) {
                 reject(data);
             }
-
-        })
+        });
     });
 }
 
@@ -22,87 +21,79 @@ function replaceURLs(message, message_id) {
         return message;
     }
 
-    if (!message.includes("http")) {
-        console.log("returned. no link detected");
+    if (!message.includes('http')) {
+        console.log('returned. no link detected');
         return message;
     }
-    if (message.includes("href=\"http")) {
-        console.log("returned. recursive detected");
+    if (message.includes('href="http')) {
+        console.log('returned. recursive detected');
         return message;
     }
-    if (message.includes("src=\"http")) {
-        console.log("returned. recursive detected");
+    if (message.includes('src="http')) {
+        console.log('returned. recursive detected');
         return message;
     }
-
 
     const urlRegex = /(((https?:\/\/)|(www\.))[^\s]+)/g;
 
     return message.replace(urlRegex, function (url) {
         let hyperlink = url;
 
-        if (!hyperlink.match('^https?:\/\/'))
-            hyperlink = 'http://' + hyperlink;
+        if (!hyperlink.match('^https?://')) hyperlink = 'http://' + hyperlink;
 
-        hyperlink = hyperlink.replace("<p>", "");
-        hyperlink = hyperlink.replace("</p>", "");
-        hyperlink = hyperlink.replace("<br>", "");
+        hyperlink = hyperlink.replace('<p>', '');
+        hyperlink = hyperlink.replace('</p>', '');
+        hyperlink = hyperlink.replace('<br>', '');
 
         let result = ``;
 
         getEmbed(hyperlink).then((data) => {
-                console.log(data);
-                data = data["data"];
-                if (data["themeColor"] === null) {
-                    data["themeColor"] = '#534F4E';
-                }
-                let topsmall = "";
-                if (data["siteName"] === null) {
-                    topsmall = siteName;
-                }
-                else {
-                    topsmall = data["siteName"];
-                }
-                result += `<div style="border-style: none none none solid; border-width:8px; border-color:${data["themeColor"]}"
+            console.log(data);
+            data = data['data'];
+            if (data['themeColor'] === null) {
+                data['themeColor'] = '#534F4E';
+            }
+            let topsmall = '';
+            if (data['siteName'] === null) {
+                topsmall = siteName;
+            } else {
+                topsmall = data['siteName'];
+            }
+            result += `<div style="border-style: none none none solid; border-width:8px; border-color:${data['themeColor']}"
                      class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100/75 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700/75">
                     <a href="${hyperlink}"><h5
                         class="mb-2 text-md hover:underline font-bold tracking-tight text-black dark:text-white">${topsmall}</h5>
                     </a>
                     <a href="${hyperlink}"><h5
-                        class="mb-2 text-xl hover:underline font-bold tracking-tight text-sky-500">${data["title"]}</h5></a>
-                    <p class="font-normal text-gray-700 dark:text-gray-400">${data["description"]}</p>
+                        class="mb-2 text-xl hover:underline font-bold tracking-tight text-sky-500">${data['title']}</h5></a>
+                    <p class="font-normal text-gray-700 dark:text-gray-400">${data['description']}</p>
                     `;
-                if (data["image"] != null) {
-                    result += ` <img src="${data["image"]}" style="width:90%; margin:auto; margin-top:10px;" class="rounded-md">`;
-                }
-
-                result += `</div>`;
-
-                document.getElementById(`content_${message_id}`).insertAdjacentHTML('beforeend', result);
-
+            if (data['image'] != null) {
+                result += ` <img src="${data['image']}" style="width:90%; margin:auto; margin-top:10px;" class="rounded-md">`;
             }
-        )
 
+            result += `</div>`;
+
+            document
+                .getElementById(`content_${message_id}`)
+                .insertAdjacentHTML('beforeend', result);
+        });
 
         return `<a class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600" href="${hyperlink}">${hyperlink}</a>${result}`;
-
-
     });
 
     //youtube iframe / embed for everything else
-
-
 }
 
 function createChat(members) {
-    document.getElementById("dropdown").style.display = "none";
-    socket.emit('new_chat', {'members': [members]})
+    document.getElementById('dropdown').style.display = 'none';
+    socket.emit('new_chat', {members: [members]});
 }
 
 function changeSearch() {
-    let value = document.getElementById("search_input").value;
+    let value = document.getElementById('search_input').value;
     if (value.length > 0) {
-        document.getElementById("search_items").innerHTML = `
+        document.getElementById('search_items').innerHTML = `
 <li>
 <div class="py-2.5 rounded-lg mx-auto block px-4 py-2 mx-2 dark:hover:text-white">
             <svg class="inline w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -114,43 +105,38 @@ Searching...
 </li>
         `;
         const request = $.ajax({
-            type: "POST",
-            url: "/api/v1/internal/search-user",
+            type: 'POST',
+            url: '/api/v1/internal/search-user',
             data: JSON.stringify({
                 search: value
             }),
 
-            contentType: 'application/json; charset=utf-8',
+            contentType: 'application/json; charset=utf-8'
         }).done(function (data) {
-                document.getElementById("search_items").innerHTML = "";
-                let temp_arr = []
+            document.getElementById('search_items').innerHTML = '';
+            let temp_arr = [];
 
-
-
-                if (data === "0") {
-                    document.getElementById("search_items").innerHTML += `
+            if (data === '0') {
+                document.getElementById('search_items').innerHTML += `
                 <li class="text-center mb-5">
                     No Results Found
-                </li>`
-                }
-                else {
-                    data.forEach(function (element) {
-
-                        document.getElementById("search_items").innerHTML += `
+                </li>`;
+            } else {
+                data.forEach(function (element) {
+                    document.getElementById('search_items').innerHTML += `
                 <div>
                     <span onclick="createChat('${element[0]}');" class="truncate py-2.5 rounded-lg mx-auto block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 mx-2 dark:hover:text-white"  id="user_option_${element[0]}" style="text-align:left;">
             <img src="${element[1]}" class="inline-block w-10 h-10 rounded-full" alt="dates">
             ${element[2]} <span class="text-gray-500 ml-2">${element[3]}</span></span>
                 </div>
-`
-                    });
-                }
+`;
+                });
             }
-        );
+        });
     }
 }
 
-keyUpDelay("#search", 1000, changeSearch)
+keyUpDelay('#search', 1000, changeSearch);
 
 function makeCall() {
     let chatAmount = $('#user-chats div').length;
@@ -163,29 +149,31 @@ function makeCall() {
         data: JSON.stringify({
             index: chatAmount
         })
-    })
-        .done(function (data) {
-            load(data);
-            let selected = document.getElementById('user-chats');
-            selected.children[0].click();
-        });
+    }).done(function (data) {
+        load(data);
+        let selected = document.getElementById('user-chats');
+        selected.children[0].click();
+    });
 }
 
 function updateToMessage(message) {
     let chat_el = document.getElementById('chat');
-    chat_el.insertAdjacentHTML('afterbegin', `<div class="flex items-top space-x-4 mt-2" id="${message['id']}" style="font-family: 'Roboto', sans-serif;">
+    chat_el.insertAdjacentHTML(
+        'afterbegin',
+        `<div class="flex items-top space-x-4 mt-2" id="${message['id']}" style="font-family: 'Roboto', sans-serif;">
                     <img class="mt-1 w-10 h-10 rounded-full"
                          src="${message['author'][2]}"
                          alt="">
                     <div class="space-y-1 font-medium dark:text-white">
                         <div>${message['author'][1]} <span class="ml-3 text-sm text-gray-400">${message['send_date']}</span></div>
-                        <div id="content_${message["id"]}" class="text-sm text-gray-500 dark:text-gray-400">${message['content']}</div>
+                        <div id="content_${message['id']}" class="text-sm text-gray-500 dark:text-gray-400">${message['content']}</div>
                     </div>
-                </div>`);
+                </div>`
+    );
 
-    let url = replaceURLs(message["content"], message["id"]);
+    let url = replaceURLs(message['content'], message['id']);
     console.log(url);
-    $(`#content_${message["id"]}`).html(url);
+    $(`#content_${message['id']}`).html(url);
     if ($('#chat').children().length >= 40) {
         $('#chat').children().last().remove();
     }
@@ -200,79 +188,72 @@ $(document).ready(function () {
     socket.on('new_chat', function (chat) {
         console.log('new chat!');
         let el = document.getElementById('user-chats');
-        el.innerHTML = "";
+        el.innerHTML = '';
         let s = ``;
         s += `
     <div onclick="getChat('${chat['_id']}')" id="sidechat_${chat['_id']}" style="margin-bottom:4px;"
-     class="p-2 flex items-center space-x-4 dark:bg-gray-800 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200  rounded-lg" >`
+     class="p-2 flex items-center space-x-4 dark:bg-gray-800 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200  rounded-lg" >`;
         if (chat['members'].length === 2) {
             let other = chat['members'].filter(function (user) {
-                return (user['_id'] != userID)
-            })[0]
+                return user['_id'] != userID;
+            })[0];
 
             if (other['chatProfile']['status'] === 'Online') {
                 s += `<div class="relative">
 <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
 <span class="bottom-0 left-7 absolute  w-3 h-3 bg-green-400 border-white dark:border-gray-800 rounded-full"></span>
-</div>`
-            }
-            else if (other['chatProfile']['status'] === 'Do Not Disturb') {
+</div>`;
+            } else if (other['chatProfile']['status'] === 'Do Not Disturb') {
                 s += `<div class="relative">
 <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
 <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-red-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
-</div>`
-            }
-            else {
+</div>`;
+            } else {
                 s += `<div class="relative">
 <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
 <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-gray-700 border-2 border-white dark:border-gray-800 rounded-full"></span>
-</div>`
+</div>`;
             }
-            let status_emoji = other['chatProfile']['status_emoji']
-            if (!(status_emoji)) {
-                status_emoji = ''
+            let status_emoji = other['chatProfile']['status_emoji'];
+            if (!status_emoji) {
+                status_emoji = '';
             }
-            let status_text = other['chatProfile']['status_text']
-            if (!(status_emoji)) {
-                status_text = ''
+            let status_text = other['chatProfile']['status_text'];
+            if (!status_emoji) {
+                status_text = '';
             }
-            s +=
-                `
+            s += `
         <div class="space-y-1 font-medium dark:text-white">
             <div class="dark:text-gray-300" style="font-size:20px">${other['username']}</div>
             <div class="text-sm text-gray-500 dark:text-gray-400" style="font-size:13px;">${status_emoji} ${status_text}</div>
         </div>
     </div>
 
-    `
-
-        }
-        else {
+    `;
+        } else {
             s += `
            <div class="flex items-center space-x-4">
 <img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src="${chat['avatar']['avatar_url']}" alt="Bordered avatar">
             `;
 
-            if (!(chat['title'])) {
+            if (!chat['title']) {
                 chat['title'] = `${chat['owner']['username']}'s Chat`;
             }
 
-            s +=
-                `<div class="space-y-1 font-medium dark:text-white">
-    <div style="font-size:20px;" class="dark:text-gray-300">${chat["title"]}</div>
+            s += `<div class="space-y-1 font-medium dark:text-white">
+    <div style="font-size:20px;" class="dark:text-gray-300">${chat['title']}</div>
     <div style="font-size:13px;" class="text-sm text-gray-500 dark:text-gray-400">${chat['members'].length} Members</div>
 </div>
-</div>`
+</div>`;
         }
         socket.emit('join_a_room', data['id']);
     });
 
     socket.on('new_message', function (data) {
-
         console.log('socketio recieved event!');
         let userChats = document.getElementById('user-chats');
         let el = document.getElementById(`sidechat_${data['chatID']}`);
-        let chatID = document.getElementById('chatID').getAttribute('data-id')
+        let chatID = document.getElementById('chatID').getAttribute('data-id');
         userChats.prepend(el);
         if (chatID === data['chatID']) {
             updateToMessage(data);
@@ -280,20 +261,16 @@ $(document).ready(function () {
     });
 
     socket.on('user_status_change', function (data) {
-        let user = $(`member_${data['userID']}`)
+        let user = $(`member_${data['userID']}`);
         let user_img = user.children('span')[0];
         if (data['status'] === 'Online') {
             user_img.classList.add('bg-green-400');
-        }
-        else if (data['status'] === 'Do Not Disturb') {
-            user_img.classList.add('bg-red-500')
-        }
-        else {
+        } else if (data['status'] === 'Do Not Disturb') {
+            user_img.classList.add('bg-red-500');
+        } else {
             user_img.classList.add('bg-gray-700');
         }
-
-
-    })
+    });
 
     window.onunload = function () {
         socket.emit('user_unloaded', {}, function () {
@@ -303,8 +280,8 @@ $(document).ready(function () {
     $('#chat').on('scroll', function () {
         console.log('chat is scrolling');
         let el = document.getElementById('chat');
-        let chat_index = el.children.length - (Math.floor(el.children.length / 2)) - 1
-        console.log(Math.floor(el.scrollHeight - $(this).height()) * -1, $(this).scrollTop())
+        let chat_index = el.children.length - Math.floor(el.children.length / 2) - 1;
+        console.log(Math.floor(el.scrollHeight - $(this).height()) * -1, $(this).scrollTop());
         if ($(this).scrollTop() + Math.floor(el.scrollHeight - $(this).height()) === -0.5) {
             let chatID = document.getElementById('chatID').getAttribute('data-id');
             $.ajax({
@@ -319,8 +296,8 @@ $(document).ready(function () {
                 let chatContent = ``;
                 let chat = document.getElementById('chat');
                 messages.forEach(function (message) {
-                    console.log(message["content"]);
-                    let content = replaceURLs(message['content'], message["id"]);
+                    console.log(message['content']);
+                    let content = replaceURLs(message['content'], message['id']);
                     console.log(content);
                     chatContent += `<div class="flex items-top space-x-4 mt-2" id="${message['id']}">
                     <img class="mt-1 w-10 h-10 rounded-full"
@@ -328,7 +305,7 @@ $(document).ready(function () {
                          alt="">
                     <div class="space-y-1 font-medium dark:text-white">
                         <div>${message['sender']['username']} <span class="ml-3 text-sm text-gray-400">${message['send_date']}</span></div>
-                        <div id="content_${message["id"]}" class="text-sm text-gray-500 dark:text-gray-400">${content}</div>
+                        <div id="content_${message['id']}" class="text-sm text-gray-500 dark:text-gray-400">${content}</div>
                     </div>
                 </div>
                 <div id="user_${message['id']}" class="z-50 hidden bg-white divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600 rounded-lg block" data-popper-placement="bottom" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 215px, 0px);">
@@ -337,7 +314,7 @@ $(document).ready(function () {
                                 <div class="px-4 py-3 text-xl text-gray-900 dark:text-white border-b border-l">
                                     <div style="text-align: left; margin-left:3px;">
                                         <div style="margin-top:-60px;">
-                                            <img style="background:rgb(18,25,38)" src="${message['sender']["avatar"]['avatar_url']}" class="w-24 h-24 rounded-full border-white dark:border-gray-700 border-2 object-cover" alt="${message['sender']['username']}'s Profile Picture">
+                                            <img style="background:rgb(18,25,38)" src="${message['sender']['avatar']['avatar_url']}" class="w-24 h-24 rounded-full border-white dark:border-gray-700 border-2 object-cover" alt="${message['sender']['username']}'s Profile Picture">
                                             <span class="absolute  w-5 h-5 bg-green-400 border-2 border-white dark:border-gray-700 rounded-full" style="left:90px;top:85px;"></span>
                                         </div>
                                         <div>${message['sender']['username']}</div>
@@ -353,116 +330,102 @@ $(document).ready(function () {
                     chat.insertAdjacentHTML('beforeend', chatContent);
                     chatContent = ``;
                 });
-
-
             });
         }
     });
 
     $('#chat-sidebar').on('scroll', function () {
-            let div = $(this).get(0);
+        let div = $(this).get(0);
 
-            console.log(div.scrollTop+div.clientHeight+1, div.scrollHeight)
-            if (div.scrollTop + div.clientHeight + 1 >= div.scrollHeight) {
-                makeCall();
-            }
+        console.log(div.scrollTop + div.clientHeight + 1, div.scrollHeight);
+        if (div.scrollTop + div.clientHeight + 1 >= div.scrollHeight) {
+            makeCall();
         }
-    );
+    });
 });
 
-
 function load(data) {
-    let s = ``
-    let userID = document.getElementById('user-data').textContent
-    let div = document.getElementById('user-chats')
+    let s = ``;
+    let userID = document.getElementById('user-data').textContent;
+    let div = document.getElementById('user-chats');
     data.forEach(function (chat) {
         if (data.indexOf(chat) === 0) {
             s += `
         <div onclick="getChat('${chat['_id']}')" id="sidechat_${chat['_id']}" style="margin-bottom:4px;"
-         class="p-2 flex items-center space-x-4 dark:bg-gray-600 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" >`
-        }
-        else {
+         class="p-2 flex items-center space-x-4 dark:bg-gray-600 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" >`;
+        } else {
             s += `
         <div onclick="getChat('${chat['_id']}')" id="sidechat_${chat['_id']}" style="margin-bottom:4px;"
-         class="p-2 flex items-center space-x-4 dark:bg-gray-800 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" >`
+         class="p-2 flex items-center space-x-4 dark:bg-gray-800 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" >`;
         }
         if (chat['members'].length === 2) {
             let other = chat['members'].filter(function (user) {
-                return (user['_id'] != userID)
-            })[0]
+                return user['_id'] != userID;
+            })[0];
 
             if (other['chatProfile']['status'] === 'Online') {
                 s += `<div class="relative">
 <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
 <span class="bottom-0 left-7 absolute  w-3 h-3 bg-green-400 border-white dark:border-gray-800 rounded-full"></span>
-</div>`
-            }
-            else if (other['chatProfile']['status'] === 'Do Not Disturb') {
+</div>`;
+            } else if (other['chatProfile']['status'] === 'Do Not Disturb') {
                 s += `<div class="relative">
 <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
 <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-red-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
-</div>`
-            }
-            else {
+</div>`;
+            } else {
                 s += `<div class="relative">
 <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
 <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-gray-700 border-2 border-white dark:border-gray-800 rounded-full"></span>
-</div>`
+</div>`;
             }
-            let status_emoji = other['chatProfile']['status_emoji']
-            if (!(status_emoji)) {
-                status_emoji = ''
+            let status_emoji = other['chatProfile']['status_emoji'];
+            if (!status_emoji) {
+                status_emoji = '';
             }
-            let status_text = other['chatProfile']['status_text']
-            if (!(status_emoji)) {
-                status_text = ''
+            let status_text = other['chatProfile']['status_text'];
+            if (!status_emoji) {
+                status_text = '';
             }
-            s +=
-                `
+            s += `
         <div class="space-y-1 font-medium dark:text-white">
             <div class="dark:text-gray-300" style="font-size:20px">${other['username']}</div>
             <div class="text-sm text-gray-500 dark:text-gray-400" style="font-size:13px;">${status_emoji} ${status_text}</div>
         </div>
     </div>
 
-    `
-
-        }
-        else {
+    `;
+        } else {
             s += `
            <div class="flex items-center space-x-4">
 <img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src="${chat['avatar']['avatar_url']}" alt="Bordered avatar">
             `;
 
-            if (!(chat['title'])) {
+            if (!chat['title']) {
                 chat['title'] = `${chat['owner']['username']}'s Chat`;
             }
 
-            s +=
-                `<div class="space-y-1 font-medium dark:text-white">
-    <div style="font-size:20px;" class="dark:text-gray-300">${chat["title"]}</div>
+            s += `<div class="space-y-1 font-medium dark:text-white">
+    <div style="font-size:20px;" class="dark:text-gray-300">${chat['title']}</div>
     <div style="font-size:13px;" class="text-sm text-gray-500 dark:text-gray-400">${chat['members'].length} Members</div>
 </div>
-</div>`
+</div>`;
         }
     });
 
     div.insertAdjacentHTML('beforeend', s);
-
 }
 
 function changeStatus(status) {
-    socket.emit('user_status_change', {'chatType': 'chat', 'status': status});
+    socket.emit('user_status_change', {chatType: 'chat', status: status});
 }
 
 window.onbeforeunload = function () {
-    changeStatus("Offline");
-
+    changeStatus('Offline');
 };
-window.addEventListener("load", function () {
+window.addEventListener('load', function () {
     changeStatus('Online');
 });
-
 
 function openFriends() {
     $.ajax({
@@ -470,15 +433,13 @@ function openFriends() {
         type: 'GET',
         contentType: 'application/json',
         data: JSON.stringify({})
-
-
     }).done((data) => {
-        document.getElementById("members-sidebar").style.display = "none";
-        document.getElementById("main-area").style.display = "none";
-        document.getElementById("blocked").style.display = "none";
-        document.getElementById("friends").style.display = "block";
-        document.getElementById("emojis").style.display = "none";
-        document.getElementById("emails").style.display = "none";
+        document.getElementById('members-sidebar').style.display = 'none';
+        document.getElementById('main-area').style.display = 'none';
+        document.getElementById('blocked').style.display = 'none';
+        document.getElementById('friends').style.display = 'block';
+        document.getElementById('emojis').style.display = 'none';
+        document.getElementById('emails').style.display = 'none';
     });
 }
 
@@ -488,48 +449,46 @@ function openBlocked() {
         type: 'GET',
         contentType: 'application/json',
         data: JSON.stringify({})
-
-
     }).done((data) => {
-        document.getElementById("members-sidebar").style.display = "none";
-        document.getElementById("main-area").style.display = "none";
-        document.getElementById("blocked").style.display = "block";
-        document.getElementById("friends").style.display = "none";
-        document.getElementById("emojis").style.display = "none";
-        document.getElementById("emails").style.display = "none";
+        document.getElementById('members-sidebar').style.display = 'none';
+        document.getElementById('main-area').style.display = 'none';
+        document.getElementById('blocked').style.display = 'block';
+        document.getElementById('friends').style.display = 'none';
+        document.getElementById('emojis').style.display = 'none';
+        document.getElementById('emails').style.display = 'none';
     });
 }
 
 function toggleEmail() {
-    document.getElementById("members-sidebar").style.display = "none";
-    document.getElementById("main-area").style.display = "none";
-    document.getElementById("blocked").style.display = "none";
-    document.getElementById("friends").style.display = "none";
-    document.getElementById("emojis").style.display = "none";
-    document.getElementById("emails").style.display = "block";
-    document.getElementById("email_iframe").src = '/chat/email';
+    document.getElementById('members-sidebar').style.display = 'none';
+    document.getElementById('main-area').style.display = 'none';
+    document.getElementById('blocked').style.display = 'none';
+    document.getElementById('friends').style.display = 'none';
+    document.getElementById('emojis').style.display = 'none';
+    document.getElementById('emails').style.display = 'block';
+    document.getElementById('email_iframe').src = '/chat/email';
 }
 
 function toggleEmoji() {
-    document.getElementById("members-sidebar").style.display = "none";
-    document.getElementById("main-area").style.display = "none";
-    document.getElementById("blocked").style.display = "none";
-    document.getElementById("friends").style.display = "none";
-    document.getElementById("emojis").style.display = "block";
-    document.getElementById("emails").style.display = "none";
+    document.getElementById('members-sidebar').style.display = 'none';
+    document.getElementById('main-area').style.display = 'none';
+    document.getElementById('blocked').style.display = 'none';
+    document.getElementById('friends').style.display = 'none';
+    document.getElementById('emojis').style.display = 'block';
+    document.getElementById('emails').style.display = 'none';
 }
 
 function toggleChat() {
-    document.getElementById("members-sidebar").style.display = "block";
-    document.getElementById("main-area").style.display = "block";
-    document.getElementById("blocked").style.display = "none";
-    document.getElementById("friends").style.display = "none";
-    document.getElementById("emojis").style.display = "none";
-    document.getElementById("emails").style.display = "none";
+    document.getElementById('members-sidebar').style.display = 'block';
+    document.getElementById('main-area').style.display = 'block';
+    document.getElementById('blocked').style.display = 'none';
+    document.getElementById('friends').style.display = 'none';
+    document.getElementById('emojis').style.display = 'none';
+    document.getElementById('emails').style.display = 'none';
 }
 
-window.addEventListener("keydown", function (event) {
-    let form = document.getElementById("msg");
+window.addEventListener('keydown', function (event) {
+    let form = document.getElementById('msg');
     if (event.keyCode === 13 && !event.shiftKey) {
         form.submit();
     }
@@ -546,7 +505,7 @@ function profile(node) {
         referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
     }
 
-    var el = document.createElement("span");
+    var el = document.createElement('span');
     el.innerHTML = `
             <div id="dropdown" class="absolute z-10 bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
 <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault">
@@ -566,7 +525,7 @@ function profile(node) {
     <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Block</a>
   </li>
 </ul>
-</div>`
+</div>`;
     insertAfter(node, el);
 }
 
@@ -577,33 +536,30 @@ function getChat(chatID) {
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify({
-                chatID: chatID
-            }
-        ),
+            chatID: chatID
+        }),
         //right click: Profile, Close DM, Add Friend, Block, Mute @Coder N, Copy ID
         success: function (chat) {
             let chat_el = document.getElementById('chat');
-            let members = document.getElementById('chat-members')
+            let members = document.getElementById('chat-members');
             console.log(chat);
-            let chatContent = ``
+            let chatContent = ``;
             let chatMembers = ``;
             let el = document.getElementById(`sidechat_${chat['_id']}`);
             let userChats = document.getElementById('user-chats');
             userChats = [...userChats.children];
             userChats.map(function (elem) {
-                    elem.classList.remove('dark:bg-gray-600');
-                    elem.classList.add('dark:bg-gray-800');
-                }
-            );
+                elem.classList.remove('dark:bg-gray-600');
+                elem.classList.add('dark:bg-gray-800');
+            });
             el.classList.add('dark:bg-gray-600');
             el.classList.remove('dark:bg-gray-800');
-            chatContent += `<div id="chatID" data-id="${chat['_id']}" class="w-0 h-0"></div>`
-            chat_el.innerHTML = "";
+            chatContent += `<div id="chatID" data-id="${chat['_id']}" class="w-0 h-0"></div>`;
+            chat_el.innerHTML = '';
             chat_el.insertAdjacentHTML('beforeend', chatContent);
             chatContent = ``;
             chat['messages'].forEach(function (message) {
-
-                message["content"] = replaceURLs(message['content'], message["id"]);
+                message['content'] = replaceURLs(message['content'], message['id']);
 
                 chatContent += `<div class="flex items-top space-x-4 mt-2 hover:bg-gray-100 dark:hover:bg-gray-700 " id="${message['id']}">
                         <img class="mt-1 w-10 h-10 rounded-full " data-dropdown-toggle="user_${message['id']}"
@@ -611,7 +567,7 @@ function getChat(chatID) {
                              alt="">
                         <div class="space-y-1 font-medium dark:text-white">
                             <div><span  data-dropdown-toggle="user_${message['id']}" class="hover:underline">${message['sender']['username']}</span> <span class="ml-3 text-sm text-gray-400">${message['send_date']}</span></div>
-                            <div id="content_${message["id"]}" style="font-family: 'Roboto', sans-serif;" class="text-sm text-gray-500 dark:text-gray-400">${message["content"]}</div>
+                            <div id="content_${message['id']}" style="font-family: 'Roboto', sans-serif;" class="text-sm text-gray-500 dark:text-gray-400">${message['content']}</div>
                             
                         </div>
                     </div>
@@ -622,7 +578,7 @@ function getChat(chatID) {
                                 <div class="px-4 py-3 text-xl text-gray-900 dark:text-white border-b border-l">
                                     <div style="text-align: left; margin-left:3px;">
                                         <div style="margin-top:-60px;">
-                                            <img style="background:rgb(18,25,38)" src="${message['sender']["avatar"]['avatar_url']}" class="w-24 h-24 rounded-full border-white dark:border-gray-700 border-2 object-cover" alt="${message['sender']['username']}'s Profile Picture">
+                                            <img style="background:rgb(18,25,38)" src="${message['sender']['avatar']['avatar_url']}" class="w-24 h-24 rounded-full border-white dark:border-gray-700 border-2 object-cover" alt="${message['sender']['username']}'s Profile Picture">
                                             <span class="absolute  w-5 h-5 bg-green-400 border-2 border-white dark:border-gray-700 rounded-full" style="left:90px;top:85px;"></span>
                                         </div>
                                         <div>${message['sender']['username']}</div>
@@ -644,57 +600,52 @@ function getChat(chatID) {
                 chatMembers += `<div 
     oncontextmenu='profile(this)'
     style="margin-bottom:4px;"
-         class="p-2 flex items-center space-x-4 dark:bg-gray-800 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" id="member_${other['_id']}">`
+         class="p-2 flex items-center space-x-4 dark:bg-gray-800 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" id="member_${other['_id']}">`;
                 if (other['chatProfile']['status'] === 'Online') {
                     chatMembers += `<div class="relative">
 <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
 <span class="bottom-0 left-7 absolute  w-3 h-3 bg-green-400 border-white dark:border-gray-800 rounded-full"></span>
-</div>`
-                }
-                else if (other['chatProfile']['status'] === 'Do Not Disturb') {
+</div>`;
+                } else if (other['chatProfile']['status'] === 'Do Not Disturb') {
                     chatMembers += `<div class="relative">
 <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
 <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-red-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
-</div>`
-                }
-                else {
+</div>`;
+                } else {
                     chatMembers += `<div class="relative">
 <img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
 <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-gray-700 border-2 border-white dark:border-gray-800 rounded-full"></span>
-</div>`
+</div>`;
                 }
-                let status_emoji = other['chatProfile']['status_emoji']
-                if (!(status_emoji)) {
-                    status_emoji = ''
+                let status_emoji = other['chatProfile']['status_emoji'];
+                if (!status_emoji) {
+                    status_emoji = '';
                 }
-                let status_text = other['chatProfile']['status_text']
-                if (!(status_emoji)) {
-                    status_text = ''
+                let status_text = other['chatProfile']['status_text'];
+                if (!status_emoji) {
+                    status_text = '';
                 }
-                chatMembers +=
-                    `
+                chatMembers += `
         <div class="space-y-1 font-medium dark:text-white">
             <div class="dark:text-gray-300" style="font-size:20px">${other['username']}</div>
             <div class="text-sm text-gray-500 dark:text-gray-400" style="font-size:13px;">${status_emoji} ${status_text}</div>
         </div>
     </div>
-    `
+    `;
             });
 
-
-            members.innerHTML = "";
+            members.innerHTML = '';
             members.insertAdjacentHTML('beforeend', chatMembers);
         }
     });
-
 }
 
 function sendMessage() {
     let el = document.getElementById('preview');
     let el2 = document.getElementById('msg_content');
-    el2.value = "";
+    el2.value = '';
     let val = el.innerHTML;
-    el.innerHTML = "";
+    el.innerHTML = '';
     console.log(val);
     let chatID = document.getElementById('chatID').getAttribute('data-id');
     socket.emit('new_message', {
@@ -702,21 +653,18 @@ function sendMessage() {
         chatID: chatID,
         content: val
     });
-
-
 }
 
 window.onload = function () {
     console.log('hi');
-    const tx = document.getElementsByTagName("textarea");
+    const tx = document.getElementsByTagName('textarea');
     for (let i = 0; i < tx.length; i++) {
-        tx[i].setAttribute("style", "height:" + (tx[i].scrollHeight) + "px;overflow-y:hidden;");
-        tx[i].addEventListener("input", OnInput, false);
+        tx[i].setAttribute('style', 'height:' + tx[i].scrollHeight + 'px;overflow-y:hidden;');
+        tx[i].addEventListener('input', OnInput, false);
     }
 
     function OnInput() {
-        this.style.height = "auto";
-        this.style.height = (this.scrollHeight) + "px";
+        this.style.height = 'auto';
+        this.style.height = this.scrollHeight + 'px';
     }
-
-}
+};

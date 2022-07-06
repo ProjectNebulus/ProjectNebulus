@@ -1,36 +1,51 @@
-["html",
-  ["ol",
-    ["li",
+[
+  "html",
+  [
+    "ol",
+    [
+      "li",
       "one",
-      ["ul",
-        ["li",
+      [
+        "ul",
+        [
+          "li",
           "alpha",
-          ["ul",
-            ["li",
+          [
+            "ul",
+            [
+              "li",
               "almond"
             ],
-            ["li",
+            [
+              "li",
               "brazil"
             ]
           ]
         ],
-        ["li",
+        [
+          "li",
           "beta",
-          ["ul",
-            ["li",
+          [
+            "ul",
+            [
+              "li",
               "cashew"
             ]
           ]
         ]
       ]
     ],
-    ["li",
+    [
+      "li",
       "two"
     ],
-    ["li",
+    [
+      "li",
       "three",
-      ["ul",
-        ["li",
+      [
+        "ul",
+        [
+          "li",
           "gamma"
         ]
       ]

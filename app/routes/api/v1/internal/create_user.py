@@ -78,7 +78,12 @@ def search_user():
 
         else:
 
-            users[n] = [user.id, request.root_url+user.avatar.avatar_url, user.username, user.email]
+            users[n] = [
+                user.id,
+                request.root_url + user.avatar.avatar_url,
+                user.username,
+                user.email,
+            ]
     users = list(filter(lambda x: not isinstance(x, User), users))
     if not users:
         return "0"

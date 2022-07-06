@@ -77,7 +77,7 @@ def getResource(courseID, documentID):
         filter(lambda c: c.id == courseID, read.get_user_courses(session["id"]))
     )
     if not len(courses) or not len(
-            [user for user in courses[0].authorizedUsers if user.id == session["id"]]
+        [user for user in courses[0].authorizedUsers if user.id == session["id"]]
     ):
         return render_template("errors/404.html"), 404
 

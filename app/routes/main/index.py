@@ -1,19 +1,17 @@
-import json
 from pathlib import Path
-from urllib.request import urlopen
 
 from flask import redirect, render_template, request, send_file, session
 
 from . import main_blueprint
+from .. import babel
 
-from .. import babel, gettext
 
 @babel.localeselector
 def get_locale():
-    if session.get('lang') == 'es':
-        return 'es'
+    if session.get("lang") == "es":
+        return "es"
     else:
-        return 'en'
+        return "en"
 
 
 @main_blueprint.route("/", methods=["GET"])

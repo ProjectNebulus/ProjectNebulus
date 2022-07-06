@@ -1,4 +1,3 @@
-import os
 import uuid
 
 import spotipy
@@ -13,6 +12,7 @@ from .utils import logged_in
 SPOTIPY_CLIENT_ID = "9eb38c31d84b43e5a2557a6f98c5a064"
 SPOTIPY_CLIENT_SECRET = "eddbab5eb3b2434694af122a8f99bf87"
 # SPOTIPY_REDIRECT_URI = "http://localhost:8080/spotify"
+
 
 def generate_redirect(url):
     if "nebulus" in url:

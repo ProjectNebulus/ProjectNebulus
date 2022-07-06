@@ -1,9 +1,13 @@
-["html",
-  ["blockquote",
-    ["p",
+[
+  "html",
+  [
+    "blockquote",
+    [
+      "p",
       "If you're too lazy\nto wrap your code nicely"
     ],
-    ["p",
+    [
+      "p",
       "This will still work"
     ]
   ]

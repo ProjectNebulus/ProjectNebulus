@@ -1,4 +1,4 @@
-const siteName = window.location.protocol + "//" + window.location.host;
+const siteName = window.location.protocol + '//' + window.location.host;
 
 setInterval(changeFavicon, 250);
 Array.prototype.insert = (index, item) => this.splice(index, 0, item);
@@ -8,15 +8,12 @@ if (!localStorage.getItem('color-theme')) {
     localStorage.setItem('color-theme', darkTheme ? 'dark' : 'light');
 }
 
-if (localStorage.getItem("color-theme") === "dark")
-    document.documentElement.classList.add('dark');
-else
-    document.documentElement.classList.remove('dark');
+if (localStorage.getItem('color-theme') === 'dark') document.documentElement.classList.add('dark');
+else document.documentElement.classList.remove('dark');
 
 /** Returns a string containing a loading icon, with the parameters defining length and width. */
 function loadingIcon(length, width) {
-    if (width === undefined)
-        width = length;
+    if (width === undefined) width = length;
 
     return `<!-- By Sam Herbert (@sherb), for everyone. More @ https://goo.gl/7AJzbL -->
     <svg width="38" height="38" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff" style="width: ${length}; height: ${width}; display: inline">
@@ -62,14 +59,12 @@ class KeyUpTimer {
             this.lastKeyUpTime = Date.now();
             this.recheck = true;
             this.lastKeyEvent = e;
-        }
+        };
 
-        for (const element of this.elements)
-            element.addEventListener("keyup", this.onKeyUp)
+        for (const element of this.elements) element.addEventListener('keyup', this.onKeyUp);
 
         this.interval = setInterval(() => {
-            if (!this.recheck)
-                return;
+            if (!this.recheck) return;
 
             if (Date.now() - this.lastKeyUpTime > this.duration) {
                 this.recheck = false;
@@ -79,8 +74,7 @@ class KeyUpTimer {
     }
 
     disable() {
-        for (const element of this.elements)
-            element.removeEventListener("keyup", this.onKeyUp)
+        for (const element of this.elements) element.removeEventListener('keyup', this.onKeyUp);
 
         clearInterval(this.interval);
     }
@@ -92,150 +86,146 @@ function detectTheme() {
         localStorage.setItem('color-theme', darkTheme ? 'dark' : 'light');
     }
 
-    if (localStorage.getItem("color-theme") === "dark")
+    if (localStorage.getItem('color-theme') === 'dark')
         document.documentElement.classList.add('dark');
-    else
-        document.documentElement.classList.remove('dark');
+    else document.documentElement.classList.remove('dark');
 }
 
 function invertSite() {
-    const banner = document.getElementById("homeBanner");
+    const banner = document.getElementById('homeBanner');
 
-    if (localStorage.getItem("color-theme") === "dark") {
-        if (window.location.href.endsWith("/notepad")) {
-            document.getElementById("editor").style.filter = "invert(1)";
+    if (localStorage.getItem('color-theme') === 'dark') {
+        if (window.location.href.endsWith('/notepad')) {
+            document.getElementById('editor').style.filter = 'invert(1)';
         }
-        if (window.location.pathname === "/") {
-            let wallpaper = "/static/images/darkwallpaper.png";
-            if (localStorage.getItem("wallpaper") !==  null){
-                wallpaper = localStorage.getItem("wallpaper");
+        if (window.location.pathname === '/') {
+            let wallpaper = '/static/images/darkwallpaper.png';
+            if (localStorage.getItem('wallpaper') !== null) {
+                wallpaper = localStorage.getItem('wallpaper');
             }
-            document.body.style.backgroundSize = "cover";
+            document.body.style.backgroundSize = 'cover';
             document.body.style.background = `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2) ), url('${wallpaper}') no-repeat center center fixed`;
-            document.getElementById("chart").innerHTML = `
+            document.getElementById('chart').innerHTML = `
             <div id="chart">
         <center>
         <iframe style="background: rgba(0, 0,0 , 0.5); border-radius:10px;border: none; margin:10px; " width="80%" height="580" src="https://charts.mongodb.com/charts-project-0-dixeb/embed/charts?id=62c4eb23-6d77-4441-8174-0fc61c500111&maxDataAge=3600&theme=dark&autoRefresh=true"></iframe>
         </center>
-    </div>`
-            document.body.style.backgroundSize = "cover";
+    </div>`;
+            document.body.style.backgroundSize = 'cover';
         }
-        if (banner) banner.style.filter = "brightness(100%)";
+        if (banner) banner.style.filter = 'brightness(100%)';
 
-        for (const logo of document.getElementsByTagName("logo")) {
-            if (!logo.getAttribute("no-revert"))
-                logo.style.filter = "brightness(100%)";
+        for (const logo of document.getElementsByTagName('logo')) {
+            if (!logo.getAttribute('no-revert')) logo.style.filter = 'brightness(100%)';
         }
-    }
-    else {
-        if (window.location.href.endsWith("/notepad")) {
-            document.getElementById("editor").style.filter = "invert(0)";
+    } else {
+        if (window.location.href.endsWith('/notepad')) {
+            document.getElementById('editor').style.filter = 'invert(0)';
         }
-        if (window.location.href.endsWith("/")) {
-            let wallpaper = localStorage.getItem("wallpaper");
-            if (wallpaper === null){
-                document.body.style.backgroundColor = "white";
-                document.body.style.backgroundImage = "";
-            }else{
-                document.body.style.backgroundSize = "cover";
+        if (window.location.href.endsWith('/')) {
+            let wallpaper = localStorage.getItem('wallpaper');
+            if (wallpaper === null) {
+                document.body.style.backgroundColor = 'white';
+                document.body.style.backgroundImage = '';
+            } else {
+                document.body.style.backgroundSize = 'cover';
                 document.body.style.background = `linear-gradient( rgba(256, 256, 256, 0.5), rgba(256, 256, 256, 0.2) ), url('${wallpaper}') no-repeat center center fixed`;
-                document.body.style.backgroundSize = "cover";
+                document.body.style.backgroundSize = 'cover';
             }
-            document.getElementById("chart").innerHTML = `<div id="chart">
+            document.getElementById('chart').innerHTML = `<div id="chart">
         <center>
         <iframe style="background: rgba(255, 255, 255, 0.5); border-radius:10px;border: none; margin:10px; " width="80%" height="580" src="https://charts.mongodb.com/charts-project-0-dixeb/embed/charts?id=62c4eb23-6d77-4441-8174-0fc61c500111&maxDataAge=3600&theme=lightk&autoRefresh=true"></iframe>
         </center>
-    </div>`
+    </div>`;
         }
 
+        if (banner) banner.style.filter = 'brightness(70%)';
 
-        if (banner) banner.style.filter = "brightness(70%)";
-
-        for (const logo of document.getElementsByTagName("logo")) {
-            if (logo.getAttribute("no-revert") === null)
-                logo.style.filter = "brightness(70%)";
+        for (const logo of document.getElementsByTagName('logo')) {
+            if (logo.getAttribute('no-revert') === null) logo.style.filter = 'brightness(70%)';
         }
     }
 
-    for (const frame of document.getElementsByTagName("iframe")) {
-        if (frame && (frame.src.includes(siteName) || !frame.src.includes("http"))) {
+    for (const frame of document.getElementsByTagName('iframe')) {
+        if (frame && (frame.src.includes(siteName) || !frame.src.includes('http'))) {
             const innerDoc = frame.contentDocument || frame.contentWindow.document;
 
-            if (document.documentElement.classList.contains("dark")) {
-                innerDoc.documentElement.classList.add("dark");
-                let wallpaper = localStorage.getItem("wallpaper");
-                if (wallpaper === null){
-                    innerDoc.body.style.background = "#111926";
-                }else{
-                    document.body.style.backgroundSize = "cover";
+            if (document.documentElement.classList.contains('dark')) {
+                innerDoc.documentElement.classList.add('dark');
+                let wallpaper = localStorage.getItem('wallpaper');
+                if (wallpaper === null) {
+                    innerDoc.body.style.background = '#111926';
+                } else {
+                    document.body.style.backgroundSize = 'cover';
                     document.body.style.background = `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2) ), url('${wallpaper}') no-repeat center center fixed`;
-                    document.body.style.backgroundSize = "cover";
+                    document.body.style.backgroundSize = 'cover';
                 }
-            }
-            else {
-                innerDoc.documentElement.classList.remove("dark");
-                let wallpaper = localStorage.getItem("wallpaper");
-                if (wallpaper === null){
-                    innerDoc.body.style.background = "white";
-                }else{
-                    document.body.style.backgroundSize = "cover";
+            } else {
+                innerDoc.documentElement.classList.remove('dark');
+                let wallpaper = localStorage.getItem('wallpaper');
+                if (wallpaper === null) {
+                    innerDoc.body.style.background = 'white';
+                } else {
+                    document.body.style.backgroundSize = 'cover';
                     document.body.style.background = `linear-gradient( rgba(256, 256, 256, 0.5), rgba(256, 256, 256, 0.2) ), url('${wallpaper}') no-repeat center center fixed`;
-                    document.body.style.backgroundSize = "cover";
+                    document.body.style.backgroundSize = 'cover';
                 }
             }
         }
     }
 
-    if (localStorage.getItem("color-theme") === "dark") {
-        let elements = document.getElementsByClassName("changeable-gradient");
+    if (localStorage.getItem('color-theme') === 'dark') {
+        let elements = document.getElementsByClassName('changeable-gradient');
         console.log(elements);
         for (let element of elements) {
-            element.classList.remove("gradient-text");
-            element.classList.add("gradient-text-dark");
+            element.classList.remove('gradient-text');
+            element.classList.add('gradient-text-dark');
         }
-    }
-    else {
-        let elements = document.getElementsByClassName("changeable-gradient");
+    } else {
+        let elements = document.getElementsByClassName('changeable-gradient');
         console.log(elements);
         for (let element of elements) {
-            element.classList.remove("gradient-text-dark");
-            element.classList.add("gradient-text");
+            element.classList.remove('gradient-text-dark');
+            element.classList.add('gradient-text');
         }
     }
 }
 
 let isOnline = true;
-window.addEventListener("load", function () {
+window.addEventListener('load', function () {
     invertSite();
 
     isOnline = navigator.onLine;
-    if (isOnline)
-        online();
-    else
-        offline();
+    if (isOnline) online();
+    else offline();
 
-    window.addEventListener("online", online);
-    window.addEventListener("offline", offline);
+    window.addEventListener('online', online);
+    window.addEventListener('offline', offline);
 
-    for (const logo of document.getElementsByTagName("logo")) {
+    for (const logo of document.getElementsByTagName('logo')) {
         let img;
-        if (!logo.getAttribute("image"))
-            img = "/static/images/nebulusCats/v3.gif";
-        else
-            img = logo.getAttribute("image");
+        if (!logo.getAttribute('image')) img = '/static/images/nebulusCats/v3.gif';
+        else img = logo.getAttribute('image');
 
         //if (!img.includes("/static/images/nebulusCats")) img += "/static/images/nebulusCats";
 
-        let size = logo.getAttribute("size");
+        let size = logo.getAttribute('size');
 
         if (size === null) {
             logo.style.width = size;
             logo.style.height = size;
         }
-        logo.innerHTML = `<img alt="logo" style="` + logo.getAttribute("style") + '" class="' + logo.className + '" src="' + img + '">';
+        logo.innerHTML =
+            `<img alt="logo" style="` +
+            logo.getAttribute('style') +
+            '" class="' +
+            logo.className +
+            '" src="' +
+            img +
+            '">';
 
-        logo.removeAttribute("style");
-        logo.removeAttribute("class");
+        logo.removeAttribute('style');
+        logo.removeAttribute('class');
     }
 });
 
@@ -257,54 +247,51 @@ function onFailedRequest() {
 function online() {
     isOnline = true;
     requestAttempts = 0;
-    if (shouldGetSpotify)
-        statusInterval = setInterval(navFetchStatus, 1000);
+    if (shouldGetSpotify) statusInterval = setInterval(navFetchStatus, 1000);
 
-    document.getElementById("wifi").innerHTML = "wifi";
-    document.getElementById("wifi").classList.add("bg-blue-600");
-    document.getElementById("wifi").classList.remove("bg-red-600");
+    document.getElementById('wifi').innerHTML = 'wifi';
+    document.getElementById('wifi').classList.add('bg-blue-600');
+    document.getElementById('wifi').classList.remove('bg-red-600');
 }
 
 function offline() {
     isOnline = false;
-    if (shouldGetSpotify)
-        clearInterval(statusInterval);
+    if (shouldGetSpotify) clearInterval(statusInterval);
 
-    document.getElementById("wifi").innerHTML = "wifi_off";
-    document.getElementById("wifi").classList.remove("bg-blue-600");
-    document.getElementById("wifi").classList.add("bg-red-600");
+    document.getElementById('wifi').innerHTML = 'wifi_off';
+    document.getElementById('wifi').classList.remove('bg-blue-600');
+    document.getElementById('wifi').classList.add('bg-red-600');
 }
 
 function navFetchStatus() {
-    if (!document.getElementById("spotifyStatus"))
-        return;
+    if (!document.getElementById('spotifyStatus')) return;
 
     const request = $.ajax({
         type: 'POST',
-        url: '/api/v1/internal/spotify-status',
+        url: '/api/v1/internal/spotify-status'
     });
 
     request.done((data) => {
         if (parseInt(data)) {
-            document.getElementById("spotifyStatus").innerHTML = "";
+            document.getElementById('spotifyStatus').innerHTML = '';
             shouldGetSpotify = false;
             clearInterval(statusInterval);
             return;
         }
 
-        let songs = data.split(" • ");
+        let songs = data.split(' • ');
 
-        let name = songs[0]
-        let artists = songs[1]
-        let album = songs[2]
-        let explicit = songs[3]
-        let image = songs[4]
-        let playing = songs[5]
-        let timestamp = songs[6]
-        let total = songs[7]
-        let ratio = songs[8]
+        let name = songs[0];
+        let artists = songs[1];
+        let album = songs[2];
+        let explicit = songs[3];
+        let image = songs[4];
+        let playing = songs[5];
+        let timestamp = songs[6];
+        let total = songs[7];
+        let ratio = songs[8];
 
-        document.getElementById("spotifyStatus").innerHTML = `
+        document.getElementById('spotifyStatus').innerHTML = `
             <div style="width:150px;float:left;">
                 <img style="display: inline-block; margin:20px; border-radius:10px;" class="mb-3 w-20 h-20 shadow-lg" src="${image}" alt="Song Title">
             </div>
@@ -313,7 +300,9 @@ function navFetchStatus() {
                 <p class="truncate text-lg text-black dark:text-white"><i style="display:inline-block; color:#1BD661; margin-right:10px;" class="fab fa-spotify"></i> ${name} ${explicit} </p>
                     <p class="truncate text-sm text-gray-600 dark:text-gray-300">${artists} - ${album}</p></div>
                 <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700 h-1">
-                    <div class="bg-white text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full h-1" style="width: ${Math.round(ratio)}%"> </div>
+                    <div class="bg-white text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full h-1" style="width: ${Math.round(
+            ratio
+        )}%"> </div>
                 </div>
                 <p class="truncate text-sm text-gray-600 dark:text-gray-300">${timestamp} of ${total}
                     ${playing}
@@ -324,20 +313,11 @@ function navFetchStatus() {
     request.fail(onFailedRequest);
 }
 
-const list = [
-    "Red",
-    "Blue",
-    "Green",
-    "Blurple",
-    "Pink",
-    "Jade",
-    "Yellow"
-]
+const list = ['Red', 'Blue', 'Green', 'Blurple', 'Pink', 'Jade', 'Yellow'];
 
 let index = 0;
 
-for (let i = 0; i < list.length; i++)
-    list[i] = `/static/images/nebulusCats/new${list[i]}.png`;
+for (let i = 0; i < list.length; i++) list[i] = `/static/images/nebulusCats/new${list[i]}.png`;
 
 function changeFavicon() {
     let link = document.querySelector("link[rel~='icon']");
@@ -366,7 +346,7 @@ function closeModal(object_id) {
     modal.hide();
     let elements = document.querySelectorAll('[modal-backdrop]');
     for (let i = 0; i < elements.length; i++) {
-        elements[i].style.display = "none";
+        elements[i].style.display = 'none';
     }
     return true;
 }

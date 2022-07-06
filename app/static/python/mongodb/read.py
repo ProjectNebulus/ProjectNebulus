@@ -7,7 +7,6 @@ import schoolopy
 from mongoengine import Q
 
 from app.static.python.utils.security import valid_password
-
 from ..classes import *
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
@@ -43,7 +42,7 @@ def get_user_courses(user_id: str) -> list[Course]:
     return Course.objects(authorizedUsers=user)
 
 
-def search_user(query: str, ignore_id: str=None) -> list[User]:
+def search_user(query: str, ignore_id: str = None) -> list[User]:
     if ignore_id:
         return User.objects(username__istartswith=query, id__ne=ignore_id).only(
             "id", "username", "email", "avatar", "_cls"
@@ -53,6 +52,7 @@ def search_user(query: str, ignore_id: str=None) -> list[User]:
             "id", "username", "email", "avatar", "_cls"
         )[:10]
     # return User.objects.filter(username__contains=query)._query
+
 
 def search_within_course(query: str, course_id: str):
     assignments = Assignment.objects(course_id=course_id, title__contains=query)

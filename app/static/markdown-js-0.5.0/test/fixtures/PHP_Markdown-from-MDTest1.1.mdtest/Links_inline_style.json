@@ -1,4 +1,14 @@
-["html", ["p", ["a", {
-    "href": "?}]*+|&)"
-},
-"silly URL w/ angle brackets"], "."]]
+[
+  "html",
+  [
+    "p",
+    [
+      "a",
+      {
+        "href": "?}]*+|&)"
+      },
+      "silly URL w/ angle brackets"
+    ],
+    "."
+  ]
+]

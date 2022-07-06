@@ -1,7 +1,10 @@
-["html",
-  ["p",
+[
+  "html",
+  [
+    "p",
     "Autolinks don't happen inside code: ",
-    ["code",
+    [
+      "code",
       "<http://google.com>"
     ]
   ]

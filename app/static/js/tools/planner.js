@@ -2,39 +2,67 @@ let exitTime;
 let loadingModal;
 let empty = false;
 
-const times = document.getElementById("timePeriods");
+const times = document.getElementById('timePeriods');
 
-let d = new Date(), month, year, startDate;
+let d = new Date(),
+    month,
+    year,
+    startDate;
 
 const oneWeek = 1000 * 60 * 60 * 24 * 7;
 
 let page = Math.floor(Date.now() / oneWeek);
 
-const nextPage = document.getElementById("nextPage");
-const today = document.getElementById("today");
-const prevPage = document.getElementById("prevPage");
+const nextPage = document.getElementById('nextPage');
+const today = document.getElementById('today');
+const prevPage = document.getElementById('prevPage');
 
-const saveState = document.getElementById("savestate");
-const error = document.getElementById("error");
-const plannerName = document.getElementById("planner_name");
+const saveState = document.getElementById('savestate');
+const error = document.getElementById('error');
+const plannerName = document.getElementById('planner_name');
 
-const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-const daysInMonths = [31, d.getFullYear() % 4 === 0 ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+];
+const daysInMonths = [
+    31,
+    d.getFullYear() % 4 === 0 ? 29 : 28,
+    31,
+    30,
+    31,
+    30,
+    31,
+    31,
+    30,
+    31,
+    30,
+    31
+];
 
-const table = document.getElementsByTagName("table")[0];
+const table = document.getElementsByTagName('table')[0];
 
 let saveData = {};
 
-window.addEventListener("load", () => {
+window.addEventListener('load', () => {
     if (empty) {
-        for (let i = 0; i < 6; i++)
-            addTimePeriod();
+        for (let i = 0; i < 6; i++) addTimePeriod();
     }
 
-    loadingModal = new Modal(document.getElementById("loading"));
+    loadingModal = new Modal(document.getElementById('loading'));
     loadingModal.show();
-    document.querySelector("#loading p").innerHTML += loadingIcon(30);
+    document.querySelector('#loading p').innerHTML += loadingIcon(30);
     exitTime = Date.now() + 300;
 
     reloadTable();
@@ -58,27 +86,30 @@ function updateDate() {
 }
 
 function reloadTable() {
-    table.innerHTML = "";
+    table.innerHTML = '';
     changeDate();
-    for (let i = 1; i <= document.querySelectorAll("#configureModal #timePeriods .timePeriod").length; i++) {
+    for (
+        let i = 1;
+        i <= document.querySelectorAll('#configureModal #timePeriods .timePeriod').length;
+        i++
+    ) {
         const row = table.insertRow();
         const smallCell = row.insertCell();
 
-        smallCell.innerHTML = i + "";
-        smallCell.style.textAlign = "center";
-        smallCell.style.width = "2.5rem";
+        smallCell.innerHTML = i + '';
+        smallCell.style.textAlign = 'center';
+        smallCell.style.width = '2.5rem';
 
         for (let j = 0; j < 7; j++) {
             const cell = row.insertCell();
 
-            const div = document.createElement("div");
-            div.setAttribute("contenteditable", "true");
-            div.className = "note";
+            const div = document.createElement('div');
+            div.setAttribute('contenteditable', 'true');
+            div.className = 'note';
 
             if (saveData[page] && saveData[page][i])
-                div.innerHTML = saveData[page][i].replaceAll(":::::", "=");
-            else
-                div.innerHTML = "";
+                div.innerHTML = saveData[page][i].replaceAll(':::::', '=');
+            else div.innerHTML = '';
 
             cell.appendChild(div);
         }
@@ -87,24 +118,21 @@ function reloadTable() {
 
 updateDate();
 
-keyUpDelay("table", 500, saveToServer);
-keyUpDelay("#planner_name", 500, saveToServer);
+keyUpDelay('table', 500, saveToServer);
+keyUpDelay('#planner_name', 500, saveToServer);
 
-document.addEventListener("keyup", (e) => {
+document.addEventListener('keyup', (e) => {
     if ((e.ctrlKey || e.metaKey) && e.shiftKey) {
-        if (e.key === "ArrowLeft")
-            prevPage.click();
-        else if (e.key === "ArrowRight")
-            nextPage.click();
-        else if (e.key === "ArrowUp")
-            today.click();
+        if (e.key === 'ArrowLeft') prevPage.click();
+        else if (e.key === 'ArrowRight') nextPage.click();
+        else if (e.key === 'ArrowUp') today.click();
     }
 });
 
 loadFromServer();
 
 nextPage.onclick = function () {
-    save()
+    save();
 
     page++;
     load(page);
@@ -114,7 +142,7 @@ nextPage.onclick = function () {
 
     startDate += 7;
     if (startDate > daysInMonths[month]) {
-        startDate -= daysInMonths[month]
+        startDate -= daysInMonths[month];
         month++;
 
         if (month > 11) {
@@ -124,7 +152,7 @@ nextPage.onclick = function () {
     }
 
     changeDate();
-}
+};
 
 prevPage.onclick = function () {
     save();
@@ -148,7 +176,7 @@ prevPage.onclick = function () {
     }
 
     changeDate();
-}
+};
 
 today.onclick = function () {
     page = Math.floor(Date.now() / oneWeek);
@@ -159,25 +187,23 @@ today.onclick = function () {
     changeDate();
     nextPage.disabled = false;
     prevPage.disabled = false;
-}
+};
 
-document.getElementById("month").innerHTML = months[month] + " " + d.getFullYear();
+document.getElementById('month').innerHTML = months[month] + ' ' + d.getFullYear();
 
 changeDate();
 
 let num = 1;
 
 function addTimePeriod() {
-    if (num >= 20)
-        return
+    if (num >= 20) return;
 
-    const roundedText = showIcons ? "" : "rounded-r-lg";
-    const hiddenText = showIcons ? "" : "hidden";
+    const roundedText = showIcons ? '' : 'rounded-r-lg';
+    const hiddenText = showIcons ? '' : 'hidden';
 
-    let inputs = document.querySelectorAll("#configureModal #timePeriods .timePeriod input");
+    let inputs = document.querySelectorAll('#configureModal #timePeriods .timePeriod input');
     const timePeriods = [];
-    for (let a of inputs)
-        timePeriods.push(a.value);
+    for (let a of inputs) timePeriods.push(a.value);
 
     let data = `
             <div class="flex w-full mb-4 timePeriod">
@@ -193,30 +219,28 @@ function addTimePeriod() {
             </div>
             `;
     times.innerHTML += data;
-    times.scrollTo(0, times.scrollHeight)
+    times.scrollTo(0, times.scrollHeight);
     num++;
 
-    inputs = document.querySelectorAll("#configureModal #timePeriods .timePeriod input");
-    for (let i = 0; i < timePeriods.length; i++)
-        inputs[i].value = timePeriods[i];
+    inputs = document.querySelectorAll('#configureModal #timePeriods .timePeriod input');
+    for (let i = 0; i < timePeriods.length; i++) inputs[i].value = timePeriods[i];
 }
 
 function removePeriod(element) {
     num--;
-    element.classList.add("fade-out");
+    element.classList.add('fade-out');
     setTimeout(() => {
         element.parentElement.removeChild(element);
 
-        let inputs = document.querySelectorAll("#configureModal #timePeriods .timePeriod");
+        let inputs = document.querySelectorAll('#configureModal #timePeriods .timePeriod');
         const timePeriods = [];
-        for (let a of inputs)
-            timePeriods.push(a.value);
+        for (let a of inputs) timePeriods.push(a.value);
 
         for (let i = parseInt(element.children[0].innerHTML); i <= timePeriods.length; i++) {
             const number = inputs[i - 1].children[0];
-            number.innerHTML = (parseInt(number.innerHTML) - 1) + "";
+            number.innerHTML = parseInt(number.innerHTML) - 1 + '';
             const input = inputs[i - 1].children[1];
-            input.placeholder = "Period " + parseInt(number.innerHTML);
+            input.placeholder = 'Period ' + parseInt(number.innerHTML);
         }
     }, 750);
 }
@@ -226,54 +250,50 @@ let configSaved = true;
 function saveConfig() {
     configSaved = false;
     reloadTable();
-    let inputs = document.querySelectorAll("#configureModal #timePeriods .timePeriod input");
+    let inputs = document.querySelectorAll('#configureModal #timePeriods .timePeriod input');
     let values = [];
-    for (const element of inputs)
-        values.push(element.value);
+    for (const element of inputs) values.push(element.value);
 
     const request = $.ajax({
-        type: "POST",
-        url: "/api/v1/internal/planner/saveConfig",
+        type: 'POST',
+        url: '/api/v1/internal/planner/saveConfig',
         data: JSON.stringify(values)
     });
 
     request.done(() => {
-        saveState.innerHTML = "Configuration Saved";
+        saveState.innerHTML = 'Configuration Saved';
         configSaved = true;
     });
-    request.fail(() => saveState.innerHTML = "Configuration Saving Failed | Retrying soon...")
+    request.fail(() => (saveState.innerHTML = 'Configuration Saving Failed | Retrying soon...'));
 }
 
 let showIcons = false;
 
 function toggleRemoveIcons() {
-    if (num <= 1)
-        return
+    if (num <= 1) return;
 
     showIcons = !showIcons;
-    for (const element of document.getElementsByClassName("timePeriod")) {
-        element.getElementsByTagName("input")[0].classList.toggle("rounded-r-lg");
-        element.getElementsByClassName("removeIcon")[0].classList.toggle("hidden");
+    for (const element of document.getElementsByClassName('timePeriod')) {
+        element.getElementsByTagName('input')[0].classList.toggle('rounded-r-lg');
+        element.getElementsByClassName('removeIcon')[0].classList.toggle('hidden');
     }
 }
 
 function settings() {
-    document.getElementById("configName").value = document.getElementById("planner_name").value;
+    document.getElementById('configName').value = document.getElementById('planner_name').value;
 }
 
 function changeDate() {
     const daysRow = table.insertRow();
-    for (let i = 0; i <= 7; i++)
-        daysRow.insertCell();
+    for (let i = 0; i <= 7; i++) daysRow.insertCell();
 
-    document.getElementById("month").innerHTML = months[month] + " " + year;
+    document.getElementById('month').innerHTML = months[month] + ' ' + year;
 
     for (let i = 1; i <= 7; i++) {
         let day = startDate + i;
-        if (day > daysInMonths[month])
-            day -= daysInMonths[month];
+        if (day > daysInMonths[month]) day -= daysInMonths[month];
 
-        table.rows[0].cells[i].innerHTML = day.toString() + " " + weekDays[i - 1];
+        table.rows[0].cells[i].innerHTML = day.toString() + ' ' + weekDays[i - 1];
     }
 }
 
@@ -281,63 +301,56 @@ function save(e) {
     if (e) {
         const code = String.fromCharCode(e.keyCode);
 
-        if (!(/[a-zA-Z0-9-_ ]/.test(code) && code === code.toUpperCase()))
-            return;
+        if (!(/[a-zA-Z0-9-_ ]/.test(code) && code === code.toUpperCase())) return;
     }
 
-    const notes = document.getElementsByClassName("note");
+    const notes = document.getElementsByClassName('note');
     saveData[page] = {};
     for (let i = 0; i < notes.length; i++) {
-        if (notes[i].innerHTML !== "")
-            saveData[page][i] = notes[i].innerHTML.replaceAll("=", ":::::");
+        if (notes[i].innerHTML !== '')
+            saveData[page][i] = notes[i].innerHTML.replaceAll('=', ':::::');
     }
 }
 
 function load(page) {
-    const notes = document.getElementsByClassName("note");
+    const notes = document.getElementsByClassName('note');
     for (let i = 0; i < notes.length; i++) {
         if (saveData[page] && saveData[page][i])
-            notes[i].innerHTML = saveData[page][i].replaceAll(":::::", "=");
-        else
-            notes[i].innerHTML = "";
+            notes[i].innerHTML = saveData[page][i].replaceAll(':::::', '=');
+        else notes[i].innerHTML = '';
     }
 }
 
 function loadFromServer() {
     const request = $.ajax({
-        type: "GET",
-        url: "/api/v1/internal/planner/load"
+        type: 'GET',
+        url: '/api/v1/internal/planner/load'
     });
 
-    request.done(data => {
+    request.done((data) => {
         setTimeout(() => {
-                document.getElementById("loading").classList.add("fade-out");
-                document.querySelector("[modal-backdrop]").classList.add("fade-out");
-                setTimeout(() => loadingModal.hide(), 500);
-            },
-            Math.max(0, exitTime - Date.now()) + 1000
-        );
+            document.getElementById('loading').classList.add('fade-out');
+            document.querySelector('[modal-backdrop]').classList.add('fade-out');
+            setTimeout(() => loadingModal.hide(), 500);
+        }, Math.max(0, exitTime - Date.now()) + 1000);
 
         if (Object.keys(data).length === 0) {
             setTimeout(() => {
-                    loadingModal.hide();
-                    document.getElementById("openModal").click();
-                    empty = true;
-                },
-                Math.max(0, exitTime - Date.now()) + 1000);
+                loadingModal.hide();
+                document.getElementById('openModal').click();
+                empty = true;
+            }, Math.max(0, exitTime - Date.now()) + 1000);
             return;
         }
 
-        plannerName.value = data["name"];
-        saveData = data["saveData"];
+        plannerName.value = data['name'];
+        saveData = data['saveData'];
 
-        for (let i = 0; i < data["periods"].length; i++)
-            addTimePeriod();
+        for (let i = 0; i < data['periods'].length; i++) addTimePeriod();
 
-        let inputs = document.querySelectorAll("#configureModal #timePeriods .timePeriod input");
+        let inputs = document.querySelectorAll('#configureModal #timePeriods .timePeriod input');
 
-        for (let i = 0; i < inputs.length; i++)
-            inputs[i].value = data["periods"][i];
+        for (let i = 0; i < inputs.length; i++) inputs[i].value = data['periods'][i];
 
         reloadTable();
 
@@ -350,8 +363,8 @@ function loadFromServer() {
     });
 
     request.fail(() => {
-        error.innerText = "Error Loading Planner Data!";
-        error.style.color = "red";
+        error.innerText = 'Error Loading Planner Data!';
+        error.style.color = 'red';
     });
 }
 
@@ -359,36 +372,36 @@ let resetRequestNum = true;
 let requestInterval;
 
 function recursiveSave(saveDict, count) {
-    saveState.innerHTML = "Syncing... | Please wait...";
+    saveState.innerHTML = 'Syncing... | Please wait...';
 
     const request = $.ajax({
-        type: "POST",
-        url: "/api/v1/internal/planner/save",
+        type: 'POST',
+        url: '/api/v1/internal/planner/save',
         data: JSON.stringify(saveDict)
     });
 
     request.done(() => {
-        saveState.innerHTML = "Synced to Cloud | Last Edit was seconds ago";
-        error.innerHTML = "Connected to Nebulus";
-        error.style.color = "green";
+        saveState.innerHTML = 'Synced to Cloud | Last Edit was seconds ago';
+        error.innerHTML = 'Connected to Nebulus';
+        error.style.color = 'green';
         resetRequestNum = true;
         if (requestInterval) clearInterval(requestInterval);
     });
 
     request.fail(() => {
         if (count < (resetRequestNum ? 3 : 1)) {
-            saveState.innerHTML = "Sync Unsuccessful | Retrying Sync...";
-            error.innerHTML = "Connecting...";
-            error.style.color = "lightgray";
+            saveState.innerHTML = 'Sync Unsuccessful | Retrying Sync...';
+            error.innerHTML = 'Connecting...';
+            error.style.color = 'lightgray';
             recursiveSave(saveDict, count + 1);
-        }
-        else {
-            saveState.innerHTML = "Sync Unsuccessful | Retrying soon...";
-            error.innerHTML = "Could not connect to Nebulus";
-            error.style.color = "red";
+        } else {
+            saveState.innerHTML = 'Sync Unsuccessful | Retrying soon...';
+            error.innerHTML = 'Could not connect to Nebulus';
+            error.style.color = 'red';
             resetRequestNum = false;
 
-            if (!requestInterval) requestInterval = setInterval(() => recursiveSave(saveDict, 1), 1000 * 60)
+            if (!requestInterval)
+                requestInterval = setInterval(() => recursiveSave(saveDict, 1), 1000 * 60);
         }
     });
 }
@@ -397,15 +410,17 @@ function saveToServer() {
     save();
     updateDate();
 
-    if (!configSaved)
-        saveConfig();
+    if (!configSaved) saveConfig();
 
     const saveDict = {};
-    saveDict["name"] = plannerName.value;
-    saveDict["saveData"] = saveData;
-    saveDict["lastEdited"] = [year, month + 1, d.getDate()].join("-") + " " + [d.getHours(), d.getMinutes(), d.getSeconds()].join(":");
+    saveDict['name'] = plannerName.value;
+    saveDict['saveData'] = saveData;
+    saveDict['lastEdited'] =
+        [year, month + 1, d.getDate()].join('-') +
+        ' ' +
+        [d.getHours(), d.getMinutes(), d.getSeconds()].join(':');
 
-    saveDict["periods"] = [];
+    saveDict['periods'] = [];
 
     recursiveSave(saveDict, 1);
 }
