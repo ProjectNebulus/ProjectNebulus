@@ -148,8 +148,8 @@ window.addEventListener('load', function () {
             usrname.classList.add(...RED_BORDER);
             return false;
         }
-        if (usrname.length < 6) {
-            usernameStatus.innerHTML = 'Your username must be at least 6 characters long!';
+        if (usrname.length < 3) {
+            usernameStatus.innerHTML = 'Your username must be at least 3 characters long!';
             validationIcons[1].style.color = 'red';
             validationIcons[1].innerHTML = '<i class="material-icons">close</i>';
             username.classList.add(...RED_BORDER);
