@@ -224,7 +224,7 @@
                                 {% if a._cls == "Assignment" %}
                                     {% if a.submitDate == None or today < date %}
                                         {# today is before the due date ^ #}
-                                        <div class="flex bg-gray-100 shadow dark:bg-gray-800 rounded-lg p-6 ml-3 mr-3
+                                        <div class="flex bg-gray-100/75 shadow dark:bg-gray-800/75 rounded-lg p-6 ml-3 mr-3
                                          shadow-md dark:border-gray-700 text-sm mb-5 mr-4 text-left">
                                             <div class="mr-4 material-icons ml-2 text-black dark:text-white"
                                                  style="transform: translate(0, 50%) scale(1.75)">assignment
@@ -279,9 +279,9 @@
                 <div class="text-center text-4xl pr-4 text-black dark:text-white flex">
                     Your Courses
                     <button style="float:left;margin-right:10px;width:64px;" data-dropdown-toggle="addDropdown"
-                            id="create" class="mx-4 hidden sm:flex items-center text-left space-x-3 h-12 bg-white ring-1
+                            id="create" class="mx-4 hidden sm:flex items-center text-left space-x-3 h-12 bg-white/75 ring-1
                             ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500
-                            shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300
+                            shadow-sm rounded-lg text-slate-400 dark:bg-slate-800/75 dark:ring-0 dark:text-slate-300
                             dark:highlight-white/5 dark:hover:bg-slate-700 text-white font-medium rounded-lg text-sm
                             pl-4 py-2.5 text-center">
                         <span style="font-size:30px;" class="material-icons">add</span></button>
@@ -539,7 +539,7 @@
                             <div class="grid gap-2" style="grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr))">
                                 {% for a in list %}
                                     <div id="{{ a.id }}" role="alert"
-                                         class="peer w-full max-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 mb-4 mt-4">
+                                         class="peer w-full max-w-xs p-4 text-gray-900 bg-gray-100/75 rounded-lg shadow dark:bg-gray-800/75 dark:text-gray-300 mb-4 mt-4">
                                         <div class="flex">
                                             <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-blue-500 bg-transparent text-slate-800 rounded-lg dark:bg-transparent dark:text-slate-400">
                                                 <span class="material-icons">info</span>

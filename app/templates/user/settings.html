@@ -30,7 +30,7 @@
     {% include "utils/navbar.html" %}
     <script src="/static/js/user/settings.js"></script>
     <div class="flex" style="height: 100%;">
-        <div id="sidebar" class="px-8 py-4 hidden lg:block lg:sticky h-full text-left dark:bg-gray-700 bg-gray-200"
+        <div id="sidebar" class="px-8 py-4 hidden lg:block lg:sticky h-full text-left dark:bg-gray-700/75 bg-gray-200/75"
              style="position:fixed; flex: 0 0 10%; top: 76px; align-self: flex-start; width:250px;">
             <div class="mt-12 lg:mt-8">
                 <h5 class="mb-8 lg:mb-3 text-3xl font-semibold text-slate-900 dark:text-slate-200">Settings</h5>
@@ -95,8 +95,8 @@
                         </svg>
                     </div>
                     <input style="width:400px" disabled type="text" value="{{ session.get('username') }}"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500
-                           focus:border-blue-500 block dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500
+                           class="bg-gray-50/75 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500
+                           focus:border-blue-500 block dark:bg-gray-700/75 dark:border-gray-600 dark:focus:border-blue-500
                            dark:placeholder-gray-400 dark:text-white w-full pl-10 p-2.5 dark:focus:ring-blue-500">
                 </div>
                 <button data-modal-toggle="" style="margin-top: 20px;" class="text-white bg-blue-700 hover:bg-blue-800
@@ -120,7 +120,7 @@
                         </svg>
                     </div>
                     <input style="width:400px;" disabled type="password" value="{{ session.get('pswLen') * '*' }}"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                           class="bg-gray-50/75 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700/75 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                            placeholder="">
                 </div>
 
@@ -144,7 +144,7 @@
                         </svg>
                     </div>
                     <input style="width:400px;" disabled type="text" value="{{ session.get('email') }}"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                           class="bg-gray-50/75 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700/75 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                            placeholder="">
                 </div>
                 <button data-modal-toggle="" style="margin-top: 20px;"
@@ -237,7 +237,7 @@
                 <div style="max-height: 25rem; overflow: auto">
                     <div onclick="newwindow=window.open('/gclassroom','Authorize with Google','height=400,width=900')"
                          style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default"
-                         class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300
+                         class="text-white dark:bg-gray-700/75 bg-gray-200/75 hover:bg-gray-300
                      dark:hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg
                       text-sm text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                         <img src="/static/images/logos/classroom.png" alt="Google Classroom Image"
