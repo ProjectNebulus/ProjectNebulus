@@ -6,31 +6,18 @@ from flask import redirect, render_template, request, send_file, session
 
 from . import main_blueprint
 
+from .. import babel, gettext
+
+@babel.localeselector
+def get_locale():
+    if session.get('lang') == 'es':
+        return 'es'
+    else:
+        return 'en'
+
 
 @main_blueprint.route("/", methods=["GET"])
 def index():
-    # return "hi"
-    # ip = request.remote_addr
-    # return jsonify({'ip': request.remote_addr}), 200
-
-    if request.headers.getlist("X-Forwarded-For"):
-        ip = request.headers.getlist("X-Forwarded-For")[0]
-    else:
-        ip = request.remote_addr
-    try:
-        url = f"freegeoip.net/{ip}/json"
-        response = urlopen(url)
-        data = json.load(response)
-        return str(data)
-        IP = data["ip"]
-        org = data["org"]
-        city = data["city"]
-        country = data["country"]
-        region = data["region"]
-
-    except:
-        country = "US"
-
     return render_template(
         "main/index.html",
         page="Nebulus - Learning, All In One",
