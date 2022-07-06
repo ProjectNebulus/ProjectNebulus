@@ -163,11 +163,25 @@ function invertSite() {
 
             if (document.documentElement.classList.contains("dark")) {
                 innerDoc.documentElement.classList.add("dark");
-                innerDoc.body.style.background = "#111926";
+                let wallpaper = localStorage.getItem("wallpaper");
+                if (wallpaper === null){
+                    innerDoc.body.style.background = "#111926";
+                }else{
+                    document.body.style.backgroundSize = "cover";
+                    document.body.style.background = `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2) ), url('${wallpaper}') no-repeat center center fixed`;
+                    document.body.style.backgroundSize = "cover";
+                }
             }
             else {
                 innerDoc.documentElement.classList.remove("dark");
-                innerDoc.body.style.background = "white";
+                let wallpaper = localStorage.getItem("wallpaper");
+                if (wallpaper === null){
+                    innerDoc.body.style.background = "white";
+                }else{
+                    document.body.style.backgroundSize = "cover";
+                    document.body.style.background = `linear-gradient( rgba(256, 256, 256, 0.5), rgba(256, 256, 256, 0.2) ), url('${wallpaper}') no-repeat center center fixed`;
+                    document.body.style.backgroundSize = "cover";
+                }
             }
         }
     }
