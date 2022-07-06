@@ -317,10 +317,10 @@ def check_signup_email(email) -> str:
     return "true"
 
 
-def check_duplicate_schoology(user_id, schoology_email) -> str:
+def check_duplicate_schoology(schoology_email) -> str:
     if User.objects(schoology__schoologyEmail=schoology_email):
-        return "false"
-    return "true"
+        return "true"
+    return "false"
 
 
 def getChat(chat_id: str):
