@@ -36,8 +36,8 @@
                                 <div class="grid gap-4 pt-2" style="grid-template-columns: repeat(auto-fit, 23rem)">
                                     {% for j in range(list|length) %}
                                         {% set a = list[j] %}
-                                        <div class="min-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg shadow mb-4
-                                        dark:bg-gray-800 dark:text-gray-300 overflow-hidden" role="alert"
+                                        <div class="min-w-xs p-4 text-gray-900 bg-gray-100/75 rounded-lg shadow mb-4
+                                        dark:bg-gray-800/75 dark:text-gray-300 overflow-hidden" role="alert"
                                              style="height: min-content">
                                             {% if a.title != "" %}
                                                 <h4 class="text-lg font-semibold text-gray-900 dark:text-white truncate">
@@ -250,8 +250,8 @@
                                         </div>
                                     {% endif %}
                                 {% else %}
-                                    <div class="flex text-black dark:text-white text-left bg-gray-100 rounded-lg
-                                        shadow dark:bg-gray-800 dark:text-gray-300 rounded-lg p-6 ml-3 shadow-md
+                                    <div class="flex text-black dark:text-white text-left bg-gray-100/75 rounded-lg
+                                        shadow dark:bg-gray-800/75 dark:text-gray-300 rounded-lg p-6 ml-3 shadow-md
                                          dark:border-gray-700 text-xl mb-5 mr-4">
                                         <div class="mr-4 material-icons ml-2"
                                              style="transform: translate(0, 50%) scale(1.75)">event
@@ -278,7 +278,7 @@
             <div class="grid justify-center mb-3">
                 <div class="text-center text-4xl pr-4 text-black dark:text-white flex">
                     Your Courses
-                    <button style="float:left;margin-right:10px;width:64px;"
+                    <button style="float:left;margin-right:10px;width:64px;" data-modal-toggle="courseModal"
                             id="create" class="mx-4 hidden sm:flex items-center text-left space-x-3 h-12 bg-white/75 ring-1
                             ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500
                             shadow-sm rounded-lg text-slate-400 dark:bg-slate-800/75 dark:ring-0 dark:text-slate-300
@@ -286,9 +286,9 @@
                             pl-4 py-2.5 text-center">
                         <span style="font-size:30px;" class="material-icons">add</span></button>
                     <button data-modal-toggle="searchModal" id="search" style="float:left;" type="button"
-                            class="hidden sm:flex items-center w-72 text-left space-x-3 px-4 h-12 bg-white ring-1
+                            class="hidden sm:flex items-center w-72 text-left space-x-3 px-4 h-12 bg-white/75 ring-1
                             ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500
-                            shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300
+                            shadow-sm rounded-lg text-slate-400 dark:bg-slate-800/75 dark:ring-0 dark:text-slate-300
                             dark:highlight-white/5 dark:hover:bg-slate-700">
                         <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
                              stroke-linecap="round" stroke-linejoin="round"
@@ -399,7 +399,7 @@
                     {% endif %}
                     {% for course in user_courses %}
                         <a href="/course/{{ course.id }}">
-                            <div class="max-w-sm bg-gray-50 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 p-2"
+                            <div class="max-w-sm bg-gray-50/75 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800/75  dark:border-gray-700 p-2"
                                  style="float:left;margin:20px;height:13rem;width:22rem;">
                                 <div class="text-left">
                                     <div class="p-4 flex">
@@ -593,8 +593,7 @@
             </div>
         </div>
     </div>
-
-    {% include "learning/lms-modal.html" %}
     <script src="/static/js/lms.js"></script>
+    {% include "learning/lms-modal.html" %}
 {% endblock %}
 </body>

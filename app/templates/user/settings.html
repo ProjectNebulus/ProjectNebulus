@@ -30,7 +30,8 @@
     {% include "utils/navbar.html" %}
     <script src="/static/js/user/settings.js"></script>
     <div class="flex" style="height: 100%;">
-        <div id="sidebar" class="px-8 py-4 hidden lg:block lg:sticky h-full text-left dark:bg-gray-700/75 bg-gray-200/75"
+        <div id="sidebar"
+             class="px-8 py-4 hidden lg:block lg:sticky h-full text-left dark:bg-gray-900/75 bg-gray-200/75"
              style="position:fixed; flex: 0 0 10%; top: 76px; align-self: flex-start; width:250px;">
             <div class="mt-12 lg:mt-8">
                 <h5 class="mb-8 lg:mb-3 text-3xl font-semibold text-slate-900 dark:text-slate-200">Settings</h5>
@@ -96,7 +97,7 @@
                     </div>
                     <input style="width:400px" disabled type="text" value="{{ session.get('username') }}"
                            class="bg-gray-50/75 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500
-                           focus:border-blue-500 block dark:bg-gray-700/75 dark:border-gray-600 dark:focus:border-blue-500
+                           focus:border-blue-500 block dark:bg-gray-900/75 dark:border-gray-600 dark:focus:border-blue-500
                            dark:placeholder-gray-400 dark:text-white w-full pl-10 p-2.5 dark:focus:ring-blue-500">
                 </div>
                 <button data-modal-toggle="" style="margin-top: 20px;" class="text-white bg-blue-700 hover:bg-blue-800
@@ -120,7 +121,7 @@
                         </svg>
                     </div>
                     <input style="width:400px;" disabled type="password" value="{{ session.get('pswLen') * '*' }}"
-                           class="bg-gray-50/75 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700/75 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                           class="bg-gray-50/75 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-900/75 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                            placeholder="">
                 </div>
 
@@ -144,14 +145,15 @@
                         </svg>
                     </div>
                     <input style="width:400px;" disabled type="text" value="{{ session.get('email') }}"
-                           class="bg-gray-50/75 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700/75 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                           class="bg-gray-50/75 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-900/75 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                            placeholder="">
                 </div>
                 <button data-modal-toggle="" style="margin-top: 20px;"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     Change
                 </button>
-            </div><br><br>
+            </div>
+            <br><br>
             <span style="display:none;" id="chosen">cat1</span>
             <div style="">
                 <img style="float:left; margin:10px;"
@@ -226,7 +228,7 @@
 
             <hr class="border-gray-300 dark:border-gray-700 my-8">
             <h1 class="text-2xl mt-2 text-black dark:text-white" id="connections">Connections</h1><br>
-            <div class="block p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700">
+            <div class="block p-6 bg-white/75 rounded-lg border border-gray-200 shadow-md hover:bg-gray-100/75 dark:bg-gray-800/75 dark:border-gray-700">
                 <p class="text-black dark:text-white">
                     Connections can unlock
                     <span class="font-bold text-yellow-400">SPECIAL</span>
@@ -237,7 +239,7 @@
                 <div style="max-height: 25rem; overflow: auto">
                     <div onclick="newwindow=window.open('/gclassroom','Authorize with Google','height=400,width=900')"
                          style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default"
-                         class="text-white dark:bg-gray-700/75 bg-gray-200/75 hover:bg-gray-300
+                         class="text-white dark:bg-gray-900/75 bg-gray-200/75 hover:bg-gray-300
                      dark:hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg
                       text-sm text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                         <img src="/static/images/logos/classroom.png" alt="Google Classroom Image"
@@ -436,7 +438,7 @@
                 {% for schoology_acc in schoology %}
                     <div>
                         <a
-                                class="block p-6 w-1/2 bg-white rounded-t-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                                class="block p-6 w-1/2 bg-white/75 rounded-t-lg border border-gray-200 shadow-md dark:bg-gray-800/75 dark:border-gray-700">
                             <div>
                                 <div style="float:left;margin-right:15px;">
                                     <img src="/static/images/logos/schoology.png"
@@ -451,14 +453,18 @@
                             </div>
                             <br><br>
                         </a>
-                        <div class="block p-6 w-1/2 bg-white rounded-b-lg border border-gray-200 shadow-md
-                         hover:bg-gray-100 dark:bg-gray-700 dark:border-gray-700 dark:hover:bg-gray-700">
+                        <div class="block p-6 w-1/2 bg-white/75 rounded-b-lg border border-gray-200 shadow-md
+                         hover:bg-gray-100 dark:bg-gray-700/[.75] dark:border-gray-700 dark:hover:bg-gray-900/75">
                             <div>
 
-                                <a href=/api/v1/internal/logout-of-schoology" class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                <a href=/api/v1/internal/logout-of-schoology"
+                                   class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                     Disconnect Schoology
-                                    <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                                    <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                              clip-rule="evenodd"></path>
                                     </svg>
                                 </a>
                                 <br><br>
@@ -486,7 +492,7 @@
             {% if canvas %}
                 <div>
                     <a
-                            class="block p-6 w-1/2 bg-white rounded-t-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                            class="block p-6 w-1/2 bg-white/75 rounded-t-lg border border-gray-200 shadow-md dark:bg-gray-800/75 dark:border-gray-700">
                         <div>
                             <div style="float:left;margin-right:15px;">
                                 <img src="/static/images/logos/canvas.png"
@@ -531,7 +537,7 @@
             {% endif %}
             {% if spotify %}
                 <div>
-                    <a class="block p-6 w-1/2 bg-white rounded-t-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                    <a class="block p-6 w-1/2 bg-white/75 rounded-t-lg border border-gray-200 shadow-md dark:bg-gray-800/75 dark:border-gray-700">
                         <div>
                             <div style="float:left;margin-right:15px;">
                                 <img src="/static/images/logos/spotify.png"
@@ -577,7 +583,7 @@
             {% endif %}
             <br>
             {% if googleclassroom %}
-                <a class="block p-6 w-1/2 bg-white rounded-t-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                <a class="block p-6 w-1/2 bg-white/75 rounded-t-lg border border-gray-200 shadow-md dark:bg-gray-800/75 dark:border-gray-700">
                     <div>
                         <div style="float:left;margin-right:15px;">
                             <img src="/static/images/logos/classroom.png"
@@ -624,7 +630,7 @@
                 <br>
             {% endif %}
             {% if discord %}
-                <a class="block p-6 w-1/2 bg-white rounded-t-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                <a class="block p-6 w-1/2 bg-white/75 rounded-t-lg border border-gray-200 shadow-md dark:bg-gray-800/75 dark:border-gray-700">
                     <div style="float:left;margin-right:15px;">
                         <img src="/static/images/logos/discord.png" style="width:30px;height:30px;overflow:hidden;">
                     </div>
@@ -664,73 +670,163 @@
                 <br>
             {% endif %}
             <hr class="border-gray-300 dark:border-gray-700 my-8">
+            <style>
+
+                #myInput {
+                    box-sizing: border-box;
+                    background-image: url('searchicon.png');
+                    background-position: 14px 12px;
+                    background-repeat: no-repeat;
+                    font-size: 16px;
+                    padding: 14px 20px 12px 45px;
+                    border: none;
+                    border-bottom: 1px solid #ddd;
+                }
+
+                #myInput:focus {
+                    outline: 3px solid #ddd;
+                }
+
+                .dropdown {
+                    position: relative;
+                    display: inline-block;
+                }
+
+                .dropdown-content {
+                    position: absolute;
+                    background-color: #f6f6f6;
+                    min-width: 230px;
+                    overflow: auto;
+                    border: 1px solid #ddd;
+                    z-index: 1;
+                }
+
+                .dropdown-content a {
+                    color: black;
+                    padding: 12px 16px;
+                    text-decoration: none;
+                    display: block;
+                }
+
+                .dropdown a:hover {
+                    background-color: #ddd;
+                }
+
+                .show {
+                    display: block;
+                }
+            </style>
+            </head>
+            <body>
+
+            <h1 class="text-2xl mt-2 text-black dark:text-white" id="school">School</h1><br>
+            <div class="dropdown">
+                <div id="myDropdown" class="dropdown-content">
+                    <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                    <a href="#about">About</a>
+                    <a href="#base">Base</a>
+                    <a href="#blog">Blog</a>
+                    <a href="#contact">Contact</a>
+                    <a href="#custom">Custom</a>
+                    <a href="#support">Support</a>
+                    <a href="#tools">Tools</a>
+                </div>
+            </div>
+
+            <script>
+                /* When the user clicks on the button,
+                toggle between hiding and showing the dropdown content */
+                function myFunction() {
+                    document.getElementById("myDropdown").classList.toggle("show");
+                }
+
+                function filterFunction() {
+                    var input, filter, ul, li, a, i;
+                    input = document.getElementById("myInput");
+                    filter = input.value.toUpperCase();
+                    div = document.getElementById("myDropdown");
+                    a = div.getElementsByTagName("a");
+                    for (i = 0; i < a.length; i++) {
+                        txtValue = a[i].textContent || a[i].innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            a[i].style.display = "";
+                        } else {
+                            a[i].style.display = "none";
+                        }
+                    }
+                }
+            </script>
+
             <h1 class="text-2xl mt-2 text-black dark:text-white" id="appearance">Appearance</h1><br>
-    <div class="main">
-    <style>
-        .imagecard{
-            height:100px;
-            margin:5px;
-            border-radius:5px;
+            <p class="text-black dark:text-white">Select your wallpaper.</p>
+            <div class="main">
+                <style>
+                    .imagecard {
+                        height: 100px;
+                        margin: 5px;
+                        border-radius: 5px;
 
-        }
-        .imagecard:hover{
-            filter: brightness(0.5) blur(1px);
-            height:105px;
-        }
-        .card{
-            float:left;
-            height:140px;
+                    }
 
-        }
-    </style>
+                    .imagecard:hover {
+                        filter: brightness(0.5) blur(1px);
+                        height:105px;
+                    }
+
+                    .card{
+                        float:left;
+                        height:140px;
+
+                    }
+                </style>
 
 
-    <h1 class="text-xl mt-2 text-gray-500">US National Parks</h1>
+                <h1 class="text-xl mt-2 text-gray-500">US National Parks</h1>
 
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/craterLake1.jpeg"></div>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/craterLake2.jpeg"></div>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/deathValley.jpeg"></div>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/jtree.jpeg"></div>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/lassenVolcanic.jpeg"></div>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/olympic1.jpeg"></div>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/olympic2.jpeg"></div>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/olympic3.jpeg"></div>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/pinnacles.jpeg"></div>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/sequoia.jpeg"></div>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/grandCanyon.jpeg"></div>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/costal_island.jpeg"></div>
-    <h1 style="clear:both;" class="text-xl mt-2 text-gray-500">US Cities</h1>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/newYork.jpeg"></div>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/losAngeles.jpeg"></div>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/sanFrancisco.jpeg"></div>
-    <h1 style="clear:both;" class="text-xl mt-2 text-gray-500">Tech</h1>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/techy1.jpeg"></div>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/techy2.jpeg"></div>
-    <h1 style="clear:both;" class="text-xl mt-2 text-gray-500">International (Out of US)</h1>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/china1.jpeg"></div>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/china2.jpeg"></div>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/china3.jpeg"></div>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/china4.jpeg"></div>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/china5.jpeg"></div>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/shanghai1.jpeg"></div>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/shanghai2.jpeg"></div>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/costaRica.jpeg"></div>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/italy1.jpeg"></div>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/italy2.jpeg"></div>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/italy3.jpeg"></div>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/venice.jpeg"></div>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/japan1.jpeg"></div>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/japan2.jpeg"></div>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/japan3.jpeg"></div>
-    <h1 style="clear:both;" class="text-xl mt-2 text-gray-500">Extras</h1>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/northernLights1.jpeg"></div>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/northernLights2.jpeg"></div>
-    <div class="card"><img class="imagecard" src="/static/images/wallpaper/northernLights3.jpeg"></div>
-        <div class="card"><img class="imagecard" src="/static/images/wallpaper/jumpys_nebula.jpeg"></div>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/craterLake1.jpeg"></div>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/craterLake2.jpeg"></div>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/deathValley.jpeg"></div>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/jtree.jpeg"></div>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/lassenVolcanic.jpeg"></div>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/olympic1.jpeg"></div>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/olympic2.jpeg"></div>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/olympic3.jpeg"></div>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/pinnacles.jpeg"></div>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/sequoia.jpeg"></div>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/grandCanyon.jpeg"></div>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/costal_island.jpeg"></div>
+                <h1 style="clear:both;" class="text-xl mt-2 text-gray-500">US Cities</h1>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/newYork.jpeg"></div>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/losAngeles.jpeg"></div>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/sanFrancisco.jpeg"></div>
+                <h1 style="clear:both;" class="text-xl mt-2 text-gray-500">Tech</h1>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/techy1.jpeg"></div>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/techy2.jpeg"></div>
+                <h1 style="clear:both;" class="text-xl mt-2 text-gray-500">International (Out of US)</h1>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/china1.jpeg"></div>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/china2.jpeg"></div>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/china3.jpeg"></div>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/china4.jpeg"></div>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/china5.jpeg"></div>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/shanghai1.jpeg"></div>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/shanghai2.jpeg"></div>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/costaRica.jpeg"></div>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/italy1.jpeg"></div>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/italy2.jpeg"></div>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/italy3.jpeg"></div>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/venice.jpeg"></div>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/japan1.jpeg"></div>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/japan2.jpeg"></div>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/japan3.jpeg"></div>
+                <h1 style="clear:both;" class="text-xl mt-2 text-gray-500">Extras</h1>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/northernLights1.jpeg"></div>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/northernLights2.jpeg"></div>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/northernLights3.jpeg"></div>
+                <div class="card"><img class="imagecard" src="/static/images/wallpaper/jumpys_nebula.jpeg"></div>
 
-    <h1 style="clear:both"></h1>
+                <h1 style="clear:both"></h1>
 
-</div>
+            </div>
             <hr class="border-gray-300 dark:border-gray-700 my-8">
             <h2 id="bug" class="text-2xl text-black dark:text-white">Submit a Bug Report</h2><br>
             <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Your Bug
