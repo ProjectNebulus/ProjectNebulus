@@ -162,40 +162,48 @@ window.addEventListener('load', function () {
             username.classList.add(...RED_BORDER);
             return false;
         }
-        let validChars = 'abcdefghijklmnopqrstuvwxyz0123456789_- ';
-        for (let i = 0; i < usrname.length; i++) {
-            if (!validChars.includes(usrname[i].toLowerCase())) {
-                usernameStatus.innerHTML =
-                    'Your username can only contain letters, numbers, underscores, dashes, and spaces!';
-                validationIcons[1].style.color = 'red';
-                validationIcons[1].innerHTML = '<i class="material-icons">close</i>';
-                username.classList.add(...RED_BORDER);
-                return false;
+        
+        let regex = /^[A-Za-z][a-zA-Z0-9\.\-_]{7,29}$/
+
+        if (regex.test(usrname)) {
+
+            const request = $.ajax({
+                type: 'POST',
+                url: '/api/v1/internal/check-signup-user',
+                data: {
+                    username: usrname
+                }
+            });
+
+            request.done(function (data) {
+                if (data === 'false') {
+                    validationIcons[1].style.color = 'red';
+                    validationIcons[1].innerHTML = '<i class="material-icons">close</i>';
+                    usernameStatus.innerHTML = 'This username already exists!';
+                    username.classList.remove(...GREEN_BORDER);
+                    username.classList.add(...RED_BORDER);
+                    return false;
+                } else {
+                    validationIcons[1].style.color = 'green';
+                    validationIcons[1].innerHTML = '<i class="material-icons">check</i>';
+                    username.classList.remove(...RED_BORDER);
+                    username.classList.add(...GREEN_BORDER);
+                    usernameStatus.innerHTML = '<br>';
+                }
+            });
+        } else {
+          let validChars = 'abcdefghijklmnopqrstuvwxyz0123456789_- ';
+            for (let i = 0; i < usrname.length; i++) {
+                if (!validChars.includes(usrname[i].toLowerCase())) {
+                    usernameStatus.innerHTML =
+                        'Your username can only contain letters, numbers, underscores, dashes, and spaces!';
+                    validationIcons[1].style.color = 'red';
+                    validationIcons[1].innerHTML = '<i class="material-icons">close</i>';
+                    username.classList.add(...RED_BORDER);
+                    return false;
+                }
             }
         }
-        const request = $.ajax({
-            type: 'POST',
-            url: '/api/v1/internal/check-signup-user',
-            data: {
-                username: usrname
-            }
-        });
-        request.done(function (data) {
-            if (data === 'false') {
-                validationIcons[1].style.color = 'red';
-                validationIcons[1].innerHTML = '<i class="material-icons">close</i>';
-                usernameStatus.innerHTML = 'This username already exists!';
-                username.classList.remove(...GREEN_BORDER);
-                username.classList.add(...RED_BORDER);
-                return false;
-            } else {
-                validationIcons[1].style.color = 'green';
-                validationIcons[1].innerHTML = '<i class="material-icons">check</i>';
-                username.classList.remove(...RED_BORDER);
-                username.classList.add(...GREEN_BORDER);
-                usernameStatus.innerHTML = '<br>';
-            }
-        });
     }
 
     function changeEmail() {
