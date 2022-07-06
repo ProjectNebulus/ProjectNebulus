@@ -159,6 +159,13 @@ function invertSite() {
                     document.body.style.backgroundSize = 'cover';
                     document.body.style.background = `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2) ), url('${wallpaper}') no-repeat center center fixed`;
                     document.body.style.backgroundSize = 'cover';
+                    for (let header of document.getElementsByClassName("modalheader")) {
+                        header.style =
+                            `background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)) 0% 0% / cover, url("${wallpaper}") ;
+                    background-position: center top;
+                    background-size: 100% auto;`
+                    }
+
                 }
             } else {
                 innerDoc.documentElement.classList.remove('dark');
@@ -169,6 +176,12 @@ function invertSite() {
                     document.body.style.backgroundSize = 'cover';
                     document.body.style.background = `linear-gradient( rgba(256, 256, 256, 0.5), rgba(256, 256, 256, 0.2) ), url('${wallpaper}') no-repeat center center fixed`;
                     document.body.style.backgroundSize = 'cover';
+                    for (let header of document.getElementsByClassName("modalheader")) {
+                        header.style =
+                            `background: linear-gradient(rgba(256, 256, 256, 0.5), rgba(256, 256, 256, 0.2)) 0% 0% / cover, url("${wallpaper}") ;
+                    background-position: center top;
+                    background-size: 100% auto;`
+                    }
                 }
             }
         }
