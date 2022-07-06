@@ -1,6 +1,7 @@
 function expand(message) {
 }
 
+
 function replaceURLs(message) {
     if (!message) return message;
 
@@ -37,10 +38,11 @@ let modal = document.getElementById('CourseModal');
 
 // set up templates
 let templateLists = modal.getElementsByClassName('scroll');
+
 let screens = modal.getElementsByClassName('CoursePage');
 
 // set up button
-let btn = document.getElementById('course');
+let btn = document.getElementById('create');
 
 for (const screen of screens)
     screen.className +=
@@ -53,6 +55,7 @@ for (const h3 of modal.getElementsByTagName('h3'))
 for (const list of templateLists) list.classList.add('scroll');
 
 btn.onclick = function () {
+    console.log('button clicked');
     modal.style.display = 'block';
 
     screens[0].style.top = '-1000px';
