@@ -192,7 +192,7 @@ $(document).ready(function () {
         let s = ``;
         s += `
     <div onclick="getChat('${chat['_id']}')" id="sidechat_${chat['_id']}" style="margin-bottom:4px;"
-     class="p-2 flex items-center space-x-4 dark:bg-gray-800 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200  rounded-lg" >`;
+     class="p-2 flex items-center space-x-4 dark:bg-gray-800/50 bg-gray-30/500 dark:hover:bg-gray-700/50 hover:bg-gray-200/50  rounded-lg" >`;
         if (chat['members'].length === 2) {
             let other = chat['members'].filter(function (user) {
                 return user['_id'] != userID;
@@ -552,8 +552,8 @@ function getChat(chatID) {
                 elem.classList.remove('dark:bg-gray-600');
                 elem.classList.add('dark:bg-gray-800');
             });
-            el.classList.add('dark:bg-gray-600');
-            el.classList.remove('dark:bg-gray-800');
+            el.classList.add('dark:bg-gray-600/50');
+            el.classList.remove('dark:bg-gray-800/50');
             chatContent += `<div id="chatID" data-id="${chat['_id']}" class="w-0 h-0"></div>`;
             chat_el.innerHTML = '';
             chat_el.insertAdjacentHTML('beforeend', chatContent);
@@ -561,7 +561,7 @@ function getChat(chatID) {
             chat['messages'].forEach(function (message) {
                 message['content'] = replaceURLs(message['content'], message['id']);
 
-                chatContent += `<div class="flex items-top space-x-4 mt-2 hover:bg-gray-100 dark:hover:bg-gray-700 " id="${message['id']}">
+                chatContent += `<div class="flex items-top space-x-4 mt-2 hover:bg-gray-100/50 dark:hover:bg-gray-700/50 " id="${message['id']}">
                         <img class="mt-1 w-10 h-10 rounded-full " data-dropdown-toggle="user_${message['id']}"
                              src="${message['sender']['avatar']['avatar_url']}"
                              alt="">
