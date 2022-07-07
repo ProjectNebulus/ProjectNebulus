@@ -269,6 +269,18 @@ function online() {
     document.getElementById('wifi').innerHTML = 'wifi';
     document.getElementById('wifi').classList.add('bg-blue-600');
     document.getElementById('wifi').classList.remove('bg-red-600');
+}
+
+function offline() {
+    isOnline = false;
+    if (shouldGetSpotify) clearInterval(statusInterval);
+
+    document.getElementById('wifi').innerHTML = 'wifi_off';
+    document.getElementById('wifi').classList.remove('bg-blue-600');
+    document.getElementById('wifi').classList.add('bg-red-600');
+}
+
+function navFetchStatus() {
     for (const logo of document.getElementsByTagName('logo')) {
         if (logo.classList.contains("parsed")) {
             continue;
@@ -298,18 +310,6 @@ function online() {
         logo.removeAttribute('class');
         logo.classList.add("parsed");
     }
-}
-
-function offline() {
-    isOnline = false;
-    if (shouldGetSpotify) clearInterval(statusInterval);
-
-    document.getElementById('wifi').innerHTML = 'wifi_off';
-    document.getElementById('wifi').classList.remove('bg-blue-600');
-    document.getElementById('wifi').classList.add('bg-red-600');
-}
-
-function navFetchStatus() {
     if (!document.getElementById('spotifyStatus')) return;
 
     const request = $.ajax({
