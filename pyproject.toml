@@ -50,4 +50,4 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-script = "ProjectNebulus.main:start"
+script = "ProjectNebulus.main"
