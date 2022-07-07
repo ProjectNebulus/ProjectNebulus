@@ -3,8 +3,8 @@ import datetime
 import requests
 from flask import render_template, request, session
 from flask_cors import cross_origin
-from jinja2 import TemplateNotFound
 
+from app.static.python.classes import Course, User
 from app.static.python.mongodb import create, read
 from . import main_blueprint, utils
 from .utils import logged_in, private_endpoint
@@ -18,48 +18,46 @@ def course_home(**kwargs):
 @main_blueprint.route("/course/<id>/<page>")
 @logged_in
 def course_page(page, **kwargs):
-    courses = read.get_user_courses(session["id"])
+    user = User.objects(username=session.get("username"))[0]
     course_id = kwargs["id"]
-    for course in courses:
-        if course.id == course_id:
-            iframeSrc = "/course/" + course_id + "/"
-            if not request.args.get("iframe"):
-                if page == "course":
-                    page = "documents"
+    course = Course.objects(pk=course_id)[0]
+    if (user not in course.authorizedUsers):
+        return (
+            render_template(
+                "errors/404.html",
+                page="404 Not Found",
+                user=session.get("username"),
+                email=session.get("email"),
+                avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+            ),
+            404,
+        )
+    iframeSrc = "/course/" + course_id + "/"
+    if not request.args.get("iframe"):
+        if page == "course":
+            page = "documents"
 
-                iframeSrc += page + "?iframe=true"
-                page = "course"
+        iframeSrc += page + "?iframe=true"
+        page = "course"
 
-            try:
-                return render_template(
-                    f"courses/{page}.html",
-                    today=datetime.date.today(),
-                    page="Nebulus - " + course.name,
-                    iframe=iframeSrc,
-                    read=read,
-                    course=course,
-                    course_id=course_id,
-                    user=session.get("username"),
-                    email=session.get("email"),
-                    avatar=session.get("avatar", "/v3.gif"),
-                    disableArc=(page != "course"),
-                    events=read.sort_course_events(session["id"], int(course_id))[1],
-                    strftime=utils.strftime,
-                )
-
-            except TemplateNotFound:
-                break
-
-    return (
-        render_template(
-            "errors/404.html",
-            page="404 Not Found",
+        return render_template(
+            f"courses/{page}.html",
+            today=datetime.date.today(),
+            page="Nebulus - " + course.name,
+            iframe=iframeSrc,
+            course=course,
+            course_id=course_id,
             user=session.get("username"),
             email=session.get("email"),
-            avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-        ),
-        404,
-    )
+            avatar=session.get("avatar", "/v3.gif"),
+            disableArc=(page != "course"),
+            events=[],
+            # read.sort_course_events(session["id"], int(course_id))[1],d.sort_course_events(session["id"], int(course_id))[1],
+            strftime=utils.strftime,
+            read=read
+        )
+
+
 
 
 @main_blueprint.route("/createCourse", methods=["POST"])
