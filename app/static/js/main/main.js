@@ -216,6 +216,9 @@ window.addEventListener('load', function () {
     window.addEventListener('offline', offline);
 
     for (const logo of document.getElementsByTagName('logo')) {
+        if (logo.classList.contains("parsed")) {
+            continue;
+        }
         let img;
         if (!logo.getAttribute('image')) img = '/static/images/nebulusCats/v3.gif';
         else img = logo.getAttribute('image');
@@ -239,6 +242,7 @@ window.addEventListener('load', function () {
 
         logo.removeAttribute('style');
         logo.removeAttribute('class');
+        logo.classList.add("parsed");
     }
 });
 
@@ -265,6 +269,35 @@ function online() {
     document.getElementById('wifi').innerHTML = 'wifi';
     document.getElementById('wifi').classList.add('bg-blue-600');
     document.getElementById('wifi').classList.remove('bg-red-600');
+    for (const logo of document.getElementsByTagName('logo')) {
+        if (logo.classList.contains("parsed")) {
+            continue;
+        }
+        let img;
+        if (!logo.getAttribute('image')) img = '/static/images/nebulusCats/v3.gif';
+        else img = logo.getAttribute('image');
+
+        //if (!img.includes("/static/images/nebulusCats")) img += "/static/images/nebulusCats";
+
+        let size = logo.getAttribute('size');
+
+        if (size === null) {
+            logo.style.width = size;
+            logo.style.height = size;
+        }
+        logo.innerHTML =
+            `<img alt="logo" style="` +
+            logo.getAttribute('style') +
+            '" class="' +
+            logo.className +
+            '" src="' +
+            img +
+            '">';
+
+        logo.removeAttribute('style');
+        logo.removeAttribute('class');
+        logo.classList.add("parsed");
+    }
 }
 
 function offline() {
