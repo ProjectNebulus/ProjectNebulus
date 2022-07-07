@@ -108,7 +108,7 @@ function invertSite() {
             document.getElementById('chart').innerHTML = `
             <div id="chart">
         <center>
-        <iframe style="background: rgba(0, 0,0 , 0.5); border-radius:10px;border: none; margin:10px; " width="80%" height="580" src="https://charts.mongodb.com/charts-project-0-dixeb/embed/charts?id=62c4eb23-6d77-4441-8174-0fc61c500111&maxDataAge=3600&theme=dark&autoRefresh=true"></iframe>
+        <iframe style="background: rgba(0, 0,0 , 0.5); border-radius:10px;border: none; margin:10px; " width="80%" height="580" src="https://charts.mongodb.com/charts-project-0-dixeb/embed/charts?id=62c4eb23-6d77-4441-8174-0fc61c500111&maxDataAge=10&theme=dark&autoRefresh=true"></iframe>
         </center>
     </div>`;
             document.body.style.backgroundSize = 'cover';
@@ -134,7 +134,7 @@ function invertSite() {
             }
             document.getElementById('chart').innerHTML = `<div id="chart">
         <center>
-        <iframe style="background: rgba(255, 255, 255, 0.5); border-radius:10px;border: none; margin:10px; " width="80%" height="580" src="https://charts.mongodb.com/charts-project-0-dixeb/embed/charts?id=62c4eb23-6d77-4441-8174-0fc61c500111&maxDataAge=3600&theme=lightk&autoRefresh=true"></iframe>
+        <iframe style="background: rgba(255, 255, 255, 0.5); border-radius:10px;border: none; margin:10px; " width="80%" height="580" src="https://charts.mongodb.com/charts-project-0-dixeb/embed/charts?id=62c4eb23-6d77-4441-8174-0fc61c500111&maxDataAge=10&theme=lightk&autoRefresh=true"></iframe>
         </center>
     </div>`;
         }
