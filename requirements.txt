@@ -15,6 +15,7 @@ dacite==1.6.0
 discord~=1.7.3
 dnspython==2.2.1
 Flask~=2.0.3
+flask_babel
 flask_cors==3.0.10
 Flask-GraphQL==2.0.0
 flask_discord==0.1.68

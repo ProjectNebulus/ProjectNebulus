@@ -95,30 +95,25 @@ function invertSite() {
     const banner = document.getElementById('homeBanner');
 
     if (localStorage.getItem('color-theme') === 'dark') {
-        if (window.location.href.endsWith('/notepad')) {
-            document.getElementById('editor').style.filter = 'invert(1)';
-        }
+        if (window.location.href.endsWith('/notepad')) document.getElementById('editor').style.filter = 'invert(1)';
         if (window.location.pathname === '/') {
-            let wallpaper = '/static/images/darkwallpaper.png';
-            if (localStorage.getItem('wallpaper') !== null) {
-                wallpaper = localStorage.getItem('wallpaper');
-            }
+            let wallpaper = localStorage.getItem('wallpaper');
+            if (!wallpaper) wallpaper = '/static/images/darkwallpaper.png';
+
             document.body.style.backgroundSize = 'cover';
             document.body.style.background = `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2) ), url('${wallpaper}') no-repeat center center fixed`;
             document.getElementById('chart').innerHTML = `
-            <div id="chart">
-        <center>
-        <iframe style="background: rgba(0, 0,0 , 0.5); border-radius:10px;border: none; margin:10px; " width="80%" height="580" src="https://charts.mongodb.com/charts-project-0-dixeb/embed/charts?id=62c4eb23-6d77-4441-8174-0fc61c500111&maxDataAge=10&theme=dark&autoRefresh=true"></iframe>
-        </center>
+    <div id="chart" class="text-center">
+        <iframe style="background: rgba(0, 0,0 , 0.5); border-radius:10px;border: none; margin:10px; " width="80%" height="580" src="https://charts.mongodb.com/charts-project-0-dixeb/embed/charts?id=62c4eb23-6d77-4441-8174-0fc61c500111&maxDataAge=3600&theme=dark&autoRefresh=true"></iframe>
     </div>`;
-            document.body.style.backgroundSize = 'cover';
         }
         if (banner) banner.style.filter = 'brightness(100%)';
 
-        for (const logo of document.getElementsByTagName('logo')) {
-            if (!logo.getAttribute('no-revert')) logo.style.filter = 'brightness(100%)';
-        }
-    } else {
+        for (const logo of document.getElementsByTagName('logo'))
+            if (!logo.getAttribute('no-revert'))
+                logo.style.filter = 'brightness(100%)';
+    }
+    else {
         if (window.location.href.endsWith('/notepad')) {
             document.getElementById('editor').style.filter = 'invert(0)';
         }
@@ -127,16 +122,12 @@ function invertSite() {
             if (wallpaper === null) {
                 document.body.style.backgroundColor = 'white';
                 document.body.style.backgroundImage = '';
-            } else {
-                document.body.style.backgroundSize = 'cover';
+            }
+            else {
                 document.body.style.background = `linear-gradient( rgba(256, 256, 256, 0.5), rgba(256, 256, 256, 0.2) ), url('${wallpaper}') no-repeat center center fixed`;
                 document.body.style.backgroundSize = 'cover';
             }
-            document.getElementById('chart').innerHTML = `<div id="chart">
-        <center>
-        <iframe style="background: rgba(255, 255, 255, 0.5); border-radius:10px;border: none; margin:10px; " width="80%" height="580" src="https://charts.mongodb.com/charts-project-0-dixeb/embed/charts?id=62c4eb23-6d77-4441-8174-0fc61c500111&maxDataAge=10&theme=lightk&autoRefresh=true"></iframe>
-        </center>
-    </div>`;
+            document.getElementById('chart').innerHTML = `<iframe style="background: rgba(255, 255, 255, 0.5); border-radius:10px;border: none; margin:10px; " width="80%" height="580" src="https://charts.mongodb.com/charts-project-0-dixeb/embed/charts?id=62c4eb23-6d77-4441-8174-0fc61c500111&maxDataAge=3600&theme=lightk&autoRefresh=true"></iframe>;`
         }
 
         if (banner) banner.style.filter = 'brightness(70%)';
@@ -155,7 +146,8 @@ function invertSite() {
                 let wallpaper = localStorage.getItem('wallpaper');
                 if (wallpaper === null) {
                     innerDoc.body.style.background = '#111926';
-                } else {
+                }
+                else {
                     document.body.style.backgroundSize = 'cover';
                     document.body.style.background = `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2) ), url('${wallpaper}') no-repeat center center fixed`;
                     document.body.style.backgroundSize = 'cover';
@@ -167,12 +159,14 @@ function invertSite() {
                     }
 
                 }
-            } else {
+            }
+            else {
                 innerDoc.documentElement.classList.remove('dark');
                 let wallpaper = localStorage.getItem('wallpaper');
                 if (wallpaper === null) {
                     innerDoc.body.style.background = 'white';
-                } else {
+                }
+                else {
                     document.body.style.backgroundSize = 'cover';
                     document.body.style.background = `linear-gradient( rgba(256, 256, 256, 0.5), rgba(256, 256, 256, 0.2) ), url('${wallpaper}') no-repeat center center fixed`;
                     document.body.style.backgroundSize = 'cover';
@@ -194,7 +188,8 @@ function invertSite() {
             element.classList.remove('gradient-text');
             element.classList.add('gradient-text-dark');
         }
-    } else {
+    }
+    else {
         let elements = document.getElementsByClassName('changeable-gradient');
         console.log(elements);
         for (let element of elements) {
@@ -216,9 +211,6 @@ window.addEventListener('load', function () {
     window.addEventListener('offline', offline);
 
     for (const logo of document.getElementsByTagName('logo')) {
-        if (logo.classList.contains("parsed")) {
-            continue;
-        }
         let img;
         if (!logo.getAttribute('image')) img = '/static/images/nebulusCats/v3.gif';
         else img = logo.getAttribute('image');
@@ -242,7 +234,6 @@ window.addEventListener('load', function () {
 
         logo.removeAttribute('style');
         logo.removeAttribute('class');
-        logo.classList.add("parsed");
     }
 });
 
@@ -281,35 +272,6 @@ function offline() {
 }
 
 function navFetchStatus() {
-    for (const logo of document.getElementsByTagName('logo')) {
-        if (logo.classList.contains("parsed")) {
-            continue;
-        }
-        let img;
-        if (!logo.getAttribute('image')) img = '/static/images/nebulusCats/v3.gif';
-        else img = logo.getAttribute('image');
-
-        //if (!img.includes("/static/images/nebulusCats")) img += "/static/images/nebulusCats";
-
-        let size = logo.getAttribute('size');
-
-        if (size === null) {
-            logo.style.width = size;
-            logo.style.height = size;
-        }
-        logo.innerHTML =
-            `<img alt="logo" style="` +
-            logo.getAttribute('style') +
-            '" class="' +
-            logo.className +
-            '" src="' +
-            img +
-            '">';
-
-        logo.removeAttribute('style');
-        logo.removeAttribute('class');
-        logo.classList.add("parsed");
-    }
     if (!document.getElementById('spotifyStatus')) return;
 
     const request = $.ajax({
