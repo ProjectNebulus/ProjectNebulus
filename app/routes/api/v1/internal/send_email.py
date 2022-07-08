@@ -1,13 +1,19 @@
 import codecs
 import random
 
-from flask import session, request
+from flask import session, request, current_app
 from flask_mail import Message
+from threading import Thread
 
 from app.routes.main import private_endpoint
 from app.static.python.mongodb import read
 from . import internal
 from .... import mail
+
+
+def send_async_email(app, msg):
+    with app.app_context():
+        mail.send(msg)
 
 
 def send_email(subject, recipients, message):
@@ -20,6 +26,8 @@ def send_email(subject, recipients, message):
     msg.html = message
     print("sending email")
     mail.send(msg)
+    app = current_app._get_current_object()
+    Thread(target=send_async_email, args=(app, msg)).start()
 
 
 @internal.route("/signup-email", methods=["POST"])
