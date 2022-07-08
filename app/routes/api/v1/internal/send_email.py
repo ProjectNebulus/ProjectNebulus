@@ -4,6 +4,7 @@ import random
 from flask import session, request, current_app
 from flask_mail import Message
 from threading import Thread
+from pathlib import Path
 
 from app.routes.main import private_endpoint
 from app.static.python.mongodb import read
@@ -39,8 +40,13 @@ def signup_email():
     session["verificationCode"] = str(code)
     print(code)
 
+    current_dir = Path(__file__)
+    root_path = [p for p in current_dir.parents if p.parts[-1] == "ProjectNebulus"][
+        0
+    ]
+
     htmlform = (
-        str(codecs.open("app/templates/utils/email.html", "r").read())
+        str(codecs.open(str(root_path)+"/app/templates/utils/email.html", "r").read())
             .replace("123456", str(code))
             .replace("Nicholas Wang", data["username"])
     )
