@@ -12,9 +12,13 @@
     <body>
     {% include "utils/navbar.html" %}
     <br>
-    <div style="text-align: center; height:10%;">
-        <h1 class="noselect text-black text-4xl dark:text-white">Good Afternoon, {{ user }}</h1>
+    <div style="margin-left:20px; height:10%;">
+        <h1 class="noselect text-black text-4xl dark:text-white">Good Afternoon, {{ user }}<span
+                style="float:right;margin-right:20px;" class="text-6xl">5:02</span></h1>
+
+
     </div>
+    <br><br>
 
     <h2 class="noselect text-black dark:text-white text-2xl ml-6">Recent Activity</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 p-6" aria-label="Recent Activity">
@@ -150,8 +154,8 @@
     </div>
     <br>
     <br>
-    <div style="height: 45%; float:left; width:calc(100% - 3rem); margin-left: 2%; overflow: visible;" class="pb-2">
-        <h2 class="noselect text-black dark:text-white text-2xl">Recent Courses</h2>
+    <div style="width:calc(100% - 3rem); margin-left: 2%; overflow: visible;" class="pb-2">
+        <h2 class="noselect text-black dark:text-white text-2xl mb-5">Recent Courses</h2>
         <div style="height:360px" class="block p-6 bg-white/75 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800/75
          dark:border-gray-700 hover:scroll overflow-auto">
             <div class="text-left grid justify-start"
@@ -180,47 +184,53 @@
                 <div class="pl-4 mt-5 block p-6 bg-white/75 rounded-lg border border-gray-200 shadow-md  dark:bg-gray-800/75 dark:border-gray-700 "
                      style="grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));height:360px;">
                     <a href="/notepad">
-                        <div class="inline-flex items-center mb-3 ml-3 mr-3 mt-3 rounded-lg bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 w-20 h-20 text-center">
+                        <div class="inline-flex items-center mb-3 ml-3 mr-3 mt-3 rounded-lg opacity-75 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 w-20 h-20 text-center">
                             <i class="material-icons text-white w-full" style="font-size: 60px;">description</i>
                         </div>
                     </a>
                     <a href="/planner">
-                        <div class="inline-flex items-center mb-3 ml-3 mr-3 mt-3 r rounded-lg bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 w-20 h-20 text-center">
+                        <div style="margin-left:20px; height:10%;">
+                            <h1 class="noselect text-black text-4xl dark:text-white">Good Afternoon, nicholaswang <span
+                                    style="float:right;margin-right:20px;" class="text-6xl">5:02</span></h1>
+
+
+                        </div>
+                        <div class="inline-flex items-center mb-3 ml-3 mr-3 mt-3 r rounded-lg opacity-75 bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 w-20 h-20 text-center">
                             <i class="material-icons text-white w-full" style="font-size: 60px;">calendar_month</i>
                         </div>
                     </a>
                     <a href="/study">
-                        <div class="inline-flex items-center mb-3 ml-3 mr-3 mt-3 r rounded-lg bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 w-20 h-20 text-center">
+                        <div class="inline-flex items-center mb-3 ml-3 mr-3 mt-3 r rounded-lg opacity-75 bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 w-20 h-20 text-center">
                             <i class="material-icons text-white w-full" style="font-size: 60px;">timer</i>
                         </div>
                     </a>
                     <a href="/api">
-                        <div class="inline-flex items-center mb-3 ml-3 mr-3 mt-3 r rounded-lg bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 w-20 h-20 text-center">
+                        <div class="inline-flex items-center mb-3 ml-3 mr-3 mt-3 r rounded-lg opacity-75 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 w-20 h-20 text-center">
                             <i class="material-icons text-white w-full" style="font-size: 60px;">code</i>
                         </div>
                     </a>
                     <a href="/music">
-                        <div class="inline-flex items-center mb-3 ml-3 mr-3 mt-3 r rounded-lg bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 w-20 h-20 text-center">
+                        <div class="inline-flex items-center mb-3 ml-3 mr-3 mt-3 r rounded-lg opacity-75 bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 w-20 h-20 text-center">
                             <i class="material-icons text-white w-full" style="font-size: 60px;">music_note</i>
                         </div>
                     </a>
                     <a href="/chat">
-                        <div class="inline-flex items-center mb-3 ml-3 mr-3 mt-3 r rounded-lg bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 w-20 h-20 text-center">
+                        <div class="inline-flex items-center mb-3 ml-3 mr-3 mt-3 r rounded-lg opacity-75 bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 w-20 h-20 text-center">
                             <i class="material-icons text-white w-full" style="font-size: 60px;">forum</i>
                         </div>
                     </a>
                     <a href="/files">
-                        <div class="inline-flex items-center mb-3 ml-3 mr-3 mt-3 r rounded-lg bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 w-20 h-20 text-center">
+                        <div class="inline-flex items-center mb-3 ml-3 mr-3 mt-3 r rounded-lg opacity-75 bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 w-20 h-20 text-center">
                             <i class="material-icons text-white w-full" style="font-size: 60px;">folder_open</i>
                         </div>
                     </a>
                     <a href="/lms">
-                        <div class="inline-flex items-center mb-3 ml-3 mr-3 mt-3 r rounded-lg bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 to-blue-700 w-20 h-20 text-center">
+                        <div class="inline-flex items-center mb-3 ml-3 mr-3 mt-3 r rounded-lg opacity-75 bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 to-blue-700 w-20 h-20 text-center">
                             <i class="material-icons text-white w-full" style="font-size: 60px;">school</i>
                         </div>
                     </a>
                     <a href="/settings">
-                        <div class="inline-flex items-center mb-3 ml-3 mr-3 mt-3 r rounded-lg bg-gradient-to-r from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 w-20 h-20 text-center">
+                        <div class="inline-flex items-center mb-3 ml-3 mr-3 mt-3 r rounded-lg opacity-75 bg-gradient-to-r from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 w-20 h-20 text-center">
                             <i class="material-icons text-white w-full" style="font-size: 60px;">settings</i>
                         </div>
                     </a>
