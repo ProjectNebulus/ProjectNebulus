@@ -1,5 +1,6 @@
 from pandas import *
 def get_school():
+
     xls = ExcelFile("/app/static/school_db.xlsx")
     df = xls.parse(xls.sheet_names[0])
     # print(df.transpose().to_dict())

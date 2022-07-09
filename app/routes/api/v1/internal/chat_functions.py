@@ -6,12 +6,30 @@ import requests
 from flask import request, session
 from flask.json import jsonify
 from flask_socketio import emit, join_room, leave_room
+from pandas import *
 
 from app.static.python.classes import User
 from app.static.python.mongodb import create, delete, read, update
-from app.static.python.school import get_school
+# from app.static.python.school import get_school
 from . import internal
 from .... import socketio
+
+
+def get_school():
+    # xls = ExcelFile("..../static/school_db.xlsx")
+    # xls = ExcelFile("./school_db.xlsx")
+    # ls = ExcelFile("/school_db.xlsx")
+    ls = ExcelFile("school_db.xlsx")
+    df = xls.parse(xls.sheet_names[0])
+    # print(df.transpose().to_dict())
+    schools = []
+    df = df.transpose().to_dict()
+    for i in range(0, len(df)):
+        schools.append(
+            [str(df[i]["Unnamed: 3"]) + "  (" + str(df[i]["Unnamed: 15"]) + ", " + str(df[i]["Unnamed: 16"]) + ")", i])
+    # print(schools)
+    return schools
+
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 
