@@ -19,7 +19,7 @@ def get_school():
     # xls = ExcelFile("..../static/school_db.xlsx")
     # xls = ExcelFile("./school_db.xlsx")
     # ls = ExcelFile("/school_db.xlsx")
-    ls = ExcelFile("school_db.xlsx")
+    xls = ExcelFile("school_db.xlsx")
     df = xls.parse(xls.sheet_names[0])
     # print(df.transpose().to_dict())
     schools = []
