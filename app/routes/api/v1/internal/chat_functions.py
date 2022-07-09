@@ -9,6 +9,7 @@ from flask_socketio import emit, join_room, leave_room
 
 from app.static.python.classes import User
 from app.static.python.mongodb import create, delete, read, update
+from app.static.python.school import get_school
 from . import internal
 from .... import socketio
 
@@ -188,6 +189,12 @@ def new_chat(data):
     for sid in sid_list:
         if sid:
             socketio.emit("new_chat", chat, room=sid)
+
+
+@internal.route("/get_schools", methods=["POST"])
+def get_schools():
+    from flask import jsonify
+    return jsonify(get_school())
 
 
 @internal.route("/change-status", methods=["POST"])
