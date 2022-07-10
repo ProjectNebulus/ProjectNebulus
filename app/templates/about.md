@@ -40,9 +40,71 @@ The objective of this folder is to store HTML Files
 * `developers_api`
   * dev_portal.html
 * `errors`
+  * 404.html
+  * 500.html
+  * coming_soon.html
+  * offline.html
+  * soon.html
 * `learning`
+  * learning.html
+  * lms-modal.html
 * `main`
+ * global
+      * ar.html
+	  * au.html
+	  * bz.html
+	  * ca.html
+	  * cn.html
+	  * co.html
+	  * cr.html
+	  * cu.html
+	  * do.html
+	  * ec.html
+	  * es.html
+	  * hk.html
+	  * in.html
+	  * it.html
+	  * jp.html
+	  * kr.html
+	  * mo.html
+	  * mx.html
+	  * pa.html
+	  * ru.html
+	  * select-a-region.html
+	  * sv.html
+	  * th.html
+	  * tw.html
+	  * uk.html
+	  * vn.html
+  * about.html
+  * index.html
+  * pricing.html
+  * reset.html
+  * signin-bg.html
+  * signin.html
+  * signup.html
 * `music`
+  * music.html
+  * music_image_results.html
+  * music_results.html
+  * spotify_preview.html
+  * youtube_preview.html
 * `tools`
+  * calendar.html
+  * docs.html
+  * files.html
+  * notepad.html
+  * planner.html
+  * study.html
 * `user`
+  * dashboard.html
+  * points.html
+  * profile.html
+  * settings.html
 * `utils`
+   * control.html
+  * email.html
+  * footer.html
+  * google34d8c04c4b82b69a.html
+  * navbar.html
+  * navbar_mobile.html
