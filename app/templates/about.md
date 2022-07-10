@@ -38,6 +38,7 @@ The objective of this folder is to store HTML Files
   * sidebar.html
   * textbook.html
 * `developers_api`
+  * dev_portal.html
 * `errors`
 * `learning`
 * `main`
