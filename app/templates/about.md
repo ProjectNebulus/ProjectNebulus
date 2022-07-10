@@ -11,6 +11,11 @@ The objective of this folder is to store HTML Files
   * email.html
   * private_chat.html
 * `connections`
+  * connectCanvas.html
+  * connectClassroom.html
+  * connectDiscord.html
+  * connectSchoology.html
+  * connectSpotify.html
 * `courses`
 * `developers_api`
 * `errors`
