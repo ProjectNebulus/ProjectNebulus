@@ -49,8 +49,8 @@ The objective of this folder is to store HTML Files
   * learning.html
   * lms-modal.html
 * `main`
- * global
-      * ar.html
+  * global
+          * ar.html
 	  * au.html
 	  * bz.html
 	  * ca.html
