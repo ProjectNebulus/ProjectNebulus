@@ -36,9 +36,8 @@
     </div>
     <div class="hidden lg:block w-full text-left mt-5" style="padding-left: 7%">
         <br><br>
-        <img id="homePageBanner" src="/static/images/Nebulus Overview.png" style="width: 40%;"
-             alt="Home Page Image"><br>
-        <div style="margin-top: 2%; width: 58%; float: left; margin-bottom: 6%" class="ml-6">
+
+        <div style="margin-top: 2%; width: 40%; float: left; margin-bottom: 6%" class="ml-6">
             <p class="text-7xl text-gray-600 dark:text-white">Learning, All In One</p>
             <br>
             <p class="text-2xl text-gray-900 dark:text-white">
@@ -72,6 +71,8 @@
                 </button>
             </a>
         </div>
+        <img id="homePageBanner" src="/static/images/Nebulus Overview.png" style="width: 50%; float:left;"
+             alt="Home Page Image"><br>
     </div>
     <div class="block lg:hidden"
          style="padding-left: 7%; margin-top: 5rem; width: 100%; justify-content: left; text-align: left; ">
@@ -224,7 +225,7 @@
             return true;
         }
 
-        setInterval(changeImage, 5000);
+        setInterval(changeImage, 3000);
 
     </script>
     {% include "utils/footer.html" %}
