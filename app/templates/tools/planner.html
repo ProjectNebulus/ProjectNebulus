@@ -25,6 +25,22 @@
             width: 100%;
         }
 
+        th:first-of-type {
+            border-top-left-radius: 10px;
+        }
+
+        th:last-of-type {
+            border-top-right-radius: 10px;
+        }
+
+        tr:last-of-type td:first-of-type {
+            border-bottom-left-radius: 10px;
+        }
+
+        tr:last-of-type td:last-of-type {
+            border-bottom-right-radius: 10px;
+        }
+
         td {
             border: 1px solid black;
             text-align: left;
@@ -100,7 +116,7 @@
         <br>
 
         <span id="dates"></span>
-        <table></table>
+        <table class="bg-gray-800/50"></table>
 
         <div class="mt-6 flex flex-row justify-between">
             <button id="prevPage" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br
