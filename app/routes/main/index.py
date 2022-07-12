@@ -147,5 +147,41 @@ def international(country):
 
 
 @main_blueprint.route("scheduler")
-def scheduler():
+def scheduler(): #scheduler
     return render_template("scheduler.html")
+
+@main_blueprint.route("study")
+def study(): #study planner
+    return render_template("study.html")
+
+@main_blueprint.route("lunch")
+def lunch(): #lunch planner
+    return render_template("lunch.html")
+
+@main_blueprint.route("vacation")
+def vacation(): #vacation mode
+    return render_template("vacation.html")
+
+@main_blueprint.route("extra-curricular")
+def extracurricular(): #extra curricular stuff
+    return render_template("extra-curricular.html")
+
+@main_blueprint.route("analysis")
+def analysis(): #image analyzer
+    return render_template("analysis")
+
+@main_blueprint.route("upgrade")
+def upgrade(): #upgrade
+    return render_template("upgrade")
+
+@main_blueprint.route("blog")
+def blog(): #blog
+    return render_template("blog")
+
+@main_blueprint.route("support")
+def support(): #customer support
+    return render_template("support")
+
+
+
+
