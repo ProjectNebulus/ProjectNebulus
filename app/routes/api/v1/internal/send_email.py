@@ -69,8 +69,14 @@ def reset_email():
     session["verificationCode"] = str(code)
     print(code)
 
+    current_dir = Path(__file__)
+
+    root_path = [p for p in current_dir.parents if p.parts[-1] == "ProjectNebulus"][
+        0
+    ]
+
     htmlform = (
-        str(codecs.open("app/templates/utils/email.html", "r").read())
+        str(codecs.open(str(root_path)+"/app/templates/utils/email.html", "r").read())
             .replace("123456", str(code))
             .replace("Nicholas Wang", data["username"])
             .replace("signed up", "requested a password reset")

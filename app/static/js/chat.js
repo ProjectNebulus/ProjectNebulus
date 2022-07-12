@@ -1,5 +1,6 @@
 io = window.io;
-
+smile2emoji = window.smile2emoji
+picmo = window.picmo
 function getEmbed(hyperlink) {
     return new Promise((resolve, reject) => {
         $.ajax({
@@ -183,6 +184,8 @@ function updateToMessage(message) {
 let socket;
 $(document).ready(function () {
     makeCall();
+
+    // The picker emits an event when an emoji is selected. Do with it as you will!
     socket = io.connect('http://' + document.domain + ':' + location.port + '/chat');
     socket.emit('user_loaded', {});
     socket.on('new_chat', function (chat) {
@@ -687,7 +690,43 @@ function getChat(chatID) {
                 </div>
             </form>`);
 
-            chat['members'].forEach(function (other) {
+            let textarea_el = document.getElementById('msg_content');
+            console.log(textarea_el);
+        textarea_el.oninput = function () {
+                updateEditor(textarea_el, document.getElementById('preview'));
+            };
+
+        marked.use({gfm: false});
+
+
+
+        function updateEditor(input, preview) {
+            console.log('hi');
+            input.value = smile2emoji.checkText(input.value);
+
+
+            preview.innerHTML =
+                DOMPurify.sanitize(twemoji.parse(marked.parse(input.value)));
+            const manageInput = (e) => {
+                e.target.value = smile2emoji.checkText(e.target.value);
+            };
+
+        }
+
+        // The picker must have a root element to insert itself into
+        const rootElement = document.querySelector('#emojiPicker');
+
+        // Create the picker
+        const picker = createPicker({
+            rootElement,
+            renderer: new TwemojiRenderer()
+        });
+
+        picker.addEventListener('emoji:select', event => {
+                console.log('Emoji selected:', event.emoji);
+            });
+
+        chat['members'].forEach(function (other) {
                 chatMembers += `<div 
     oncontextmenu='profile(this)'
     style="margin-bottom:4px;"
