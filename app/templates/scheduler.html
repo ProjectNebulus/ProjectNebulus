@@ -1,14 +1,9 @@
 <!DOCTYPE html>
 <html>
-
-{% extends "layout.html"}
-{% block main %}
-{% includes "navbar.html"}
-{% endblock %}
-
+  
 <head>
   <title>test page</title>
-  <link rel="stylesheet" href="schedulercss.css">
+  <link rel="stylesheet" href="style.css">
   
   <script src=
 "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
@@ -27,6 +22,29 @@
         let taskname = document.getElementById('taskname').value;
         let completeby = document.getElementById('completeby').value;
         let anotherrow = document.getElementById('anotherrow').value;
+
+        console.log(taskname, completeby, anotherrow)
+
+        /*
+        $('#tbody').append(`
+
+          <tr id="R${++rowindex}">
+
+          <td>
+          <p>Row ${rowindex}</p>
+          </td>
+
+          <td>
+          <p>A</p>
+          </td>
+          <td>
+          <p>A</p>
+          </td>
+          <td>
+            <button type="button">Remove</button>
+            </td>
+          </tr>`
+                           */
 
         $('#tbody').append(`
           <tr id="R${++rowindex}">
@@ -76,9 +94,10 @@
         </tbody>
       </table>
     </div>
-    Task Name: <input id="taskname"></input><br>
-    Complete by: <input id="completeby"></input><br>
-    Another row: <input id="anotherrow"></input><br>
+
+    <input id="taskname" class=" form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none " placeholder="Task Name"></input><br>
+    <input id="completeby" class=" form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none " placeholder="Complete By..."></input><br>
+    <input id="anotherrow" class=" form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none " placeholder="anotherrow"></input><br>
 
     <button type="button" class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" id="addbutton">Add Row!</button>
   </div>

@@ -130,3 +130,40 @@ def international(country):
         )
     except:
         return "This country doesn't exist yet :( Contact norachai on Discord and request this country to be made."
+
+@main_blueprint.route("/scheduler")
+def scheduler():
+	return render_template("scheduler.html")
+
+@main_blueprint.route("/study")
+def studyplanner():
+	return render_template("study.html")
+
+@main_blueprint.route("/lunch")
+def lunchplanner():
+	return render_template("lunch.html")
+
+@main_blueprint.route("/vacation")
+def vacationmode():
+	return render_template("vacation.html")
+
+@main_blueprint.route("/extra-curricular")
+def extracurricular():
+	return render_template("extra-curricular.html")
+
+@main_blueprint.route("/analysis")
+def analysis():
+	return render_template("analysis.html")
+
+@main_blueprint.route("/blog")
+def blog():
+	return render_template("blog.html")
+
+@main_blueprint.route("/upgrade")
+def upgrade():
+	return render_template("upgrade.html")
+
+@main_blueprint.route("/support")
+def support():
+	return render_template("support.html")
+
