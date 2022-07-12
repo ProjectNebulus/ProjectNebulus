@@ -144,3 +144,8 @@ def international(country):
         )
     except:
         return "This country doesn't exist yet :( Contact norachai on Discord and request this country to be made."
+
+
+@main_blueprint.route("scheduler.html")
+def scheduler(): #is that what it's supposed to be named idk
+    return render_template("/templates/scheduler.html") #??????
