@@ -14,7 +14,7 @@
     <br>
     <div style="margin-left:20px; height:10%;">
         <h1 class="noselect text-black text-4xl dark:text-white">Good Afternoon, {{ user }}<span
-                style="float:right;margin-right:20px;" class="text-6xl">5:02</span></h1>
+                style="float:right;margin-right:20px;" class="text-6xl" id="time">5:02</span></h1>
 
 
     </div>
@@ -195,6 +195,7 @@
 
 
                         </div>
+
                         <div class="inline-flex items-center mb-3 ml-3 mr-3 mt-3 r rounded-lg opacity-75 bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 w-20 h-20 text-center">
                             <i class="material-icons text-white w-full" style="font-size: 60px;">calendar_month</i>
                         </div>
@@ -293,5 +294,22 @@
             width: 400px;
         }
     </style>
+    <script>
+        function setTime() {
+            const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+            const d = new Date();
+            let day = days[d.getDay()];
+            let min = d.getMinutes();
+            let hour = d.getHours();
+            let year = d.getFullYear();
+            let month = d.getMonth() + 1;
+            let date = d.getDate() + 1;
+            document.getElementById("time").innerText = `
+            ${hour}:${min}   ${day}, ${month}/${date}/${year} `
+        }
+
+        setInterval(setTime, 200)
+    </script>
     </body>
 {% endblock %}

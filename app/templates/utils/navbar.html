@@ -48,90 +48,120 @@
                                 </button>
                                 <!-- Dropdown menu -->
                                 <div id="dropdownNavbar"
-                                     class="z-20 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-400"
-                                        aria-labelledby="dropdownLargeButton">
-                                        <li>
-                                            <a href="/api/developers"
-                                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">API</a>
-                                        </li>
-                                        <li>
-                                            <a href="/planner"
-                                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Planner</a>
-                                        </li>
-                                        <li>
-                                            <a href="/notepad"
-                                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Notepad</a>
-                                        </li>
-                                        <li>
-                                            <a href="/calendar"
-                                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Calendar</a>
-                                        </li>
-                                        <li>
-                                            <a href="/files"
-                                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Files</a>
-                                        </li>
-                                        <li>
-                                            <a href="/chat"
-                                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Chat</a>
-                                        </li>
-                                        <li>
-                                            <a href="/music"
-                                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Music</a>
-                                        </li>
-                                        <li>
-                                            <a href="/scheduler"
-                                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Scheduler</a>
-                                        </li>
-                                        <li>
-                                            <a href="/study"
-                                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Study
-                                                Timer</a>
-                                        </li>
-                                        <li>
-                                            <a href="/study-plan"
-                                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Study
-                                                Planner</a>
-                                        </li>
-                                        <li>
-                                            <a href="/lunch"
-                                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Study
-                                                Lunch Planner</a>
-                                        </li>
-                                        <li>
-                                            <a href="/vacation"
-                                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Study
-                                                Vacation Mode</a>
-                                        </li>
-                                        <li>
-                                            <a href="/extracurricular"
-                                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Study
-                                                Extra Curricular Mode</a>
-                                        </li>
-                                        <li>
-                                            <a href="/analyze"
-                                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Analyze
-                                                Image or PDF (with AI)</a>
-                                        </li>
+                                     class="grid hidden absolute z-10 grid-cols-4 w-auto text-sm bg-white rounded-lg border border-gray-100 shadow-md dark:border-gray-700 lg:grid-cols-3 dark:bg-gray-700">
+                                    <div class="p-4 pb-0 text-gray-900 lg:pb-4 dark:text-white">
+                                        <ul class="space-y-4">
+                                            <li>
+                                                <a href="/planner"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-lg">
+                                                    Planner
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/notepad"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-lg">
+                                                    Notepad
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/calendar"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-lg">
+                                                    Calendar
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/files"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-lg">
+                                                    Files
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="p-4 pb-0 text-gray-900 lg:pb-4 dark:text-white">
+                                        <ul class="space-y-4">
+                                            <li>
+                                                <a href="/chat"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-lg">
+                                                    Chat
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/music"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-lg">
+                                                    Music
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/scheduler"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-lg">
+                                                    Scheduler
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/study"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-lg">
+                                                    Timer
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="p-4 pb-0 text-gray-900 lg:pb-4 dark:text-white">
+                                        <ul class="space-y-4">
+                                            <li>
+                                                <a href="/study-planner"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-lg">
+                                                    Study Planner
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/lunch"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-lg">
+                                                    Lunch Planner
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/vacation"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-lg">
+                                                    Vacation Mode
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/extra-curricular"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-lg">
+                                                    Extra Curricular Mode
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="p-4 pb-0 text-gray-900 lg:pb-4 dark:text-white">
+                                        <ul class="space-y-4">
+                                            <li>
+                                                <a href="/analysis"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-lg">
+                                                    Image Analyzer
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/upgrade"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-lg">
+                                                    Upgrade
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/blog"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-lg">
+                                                    Blog
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/support"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-lg">
+                                                    Support
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
 
-                                    </ul>
-                                    <div class="py-1">
-                                        <a href="/pricing" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100
-                                         dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">Upgrade</a>
-                                    </div>
-                                    <div class="py-1">
-                                        <a href="/blog" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100
-                                         dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">Blog</a>
-                                    </div>
-                                    <div class="py-1">
-                                        <a href="/support" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100
-                                         dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">Support</a>
-                                    </div>
-                                    <div class="py-1">
-                                        <a href="/docs" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100
-                                         dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">Upgrade</a>
-                                    </div>
-                                </div>
                             </li>
                         {% else %}
                             <li><a href="/about" class="nav-link">About</a></li>
