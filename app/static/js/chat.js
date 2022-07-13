@@ -622,10 +622,11 @@ function getChat(chatID) {
                 chatContent = ``;
             });
             let tx;
-            let ms = document.getElementById(`${chat['id']}_title`).innerText;
+            $("#chat-header").remove();
+            let ms = document.getElementById(`${chat['_id']}_title`).innerText;
             if (chat['members'].length == 2){
                 tx = `
-            <div class = "flex items-center py-2 px-3 bg-gray-50/50 dark:bg-gray-700/50 backdrop-blur-sm dark:text-white text-black py-3 noselect " >
+            <div id="chat-header" class = "flex items-center py-2 px-3 bg-gray-50/50 dark:bg-gray-700/50 backdrop-blur-sm dark:text-white text-black py-3 noselect " >
                 <i class="material-icons text-gray-400"> alternate_email </i>
             <span class="mx-4">${ms}</span>
             <span class="inline-block w-3 h-3 bg-green-400 rounded-full"></span>
@@ -635,7 +636,7 @@ function getChat(chatID) {
             } else {
                 tx = `
             <div
-            class = "flex items-center py-2 px-3 bg-gray-50/50 dark:bg-gray-700/50 backdrop-blur-sm dark:text-white text-black py-3 noselect " >
+            id="chat-header" class = "flex items-center py-2 px-3 bg-gray-50/50 dark:bg-gray-700/50 backdrop-blur-sm dark:text-white text-black py-3 noselect " >
             <span class="mx-4">${ms}</span>
         </div>
         `;
