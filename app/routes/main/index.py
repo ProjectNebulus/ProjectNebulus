@@ -135,9 +135,9 @@ def international(country):
 def scheduler():
 	return render_template("scheduler.html")
 
-@main_blueprint.route("/study")
+@main_blueprint.route("/study-planner")
 def studyplanner():
-	return render_template("study.html")
+	return render_template("study-planner.html")
 
 @main_blueprint.route("/lunch")
 def lunchplanner():
