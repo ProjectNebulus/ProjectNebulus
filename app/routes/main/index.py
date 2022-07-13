@@ -133,37 +133,80 @@ def international(country):
 
 @main_blueprint.route("/scheduler")
 def scheduler():
-	return render_template("scheduler.html")
+    return render_template("scheduler.html",
+                           user=session.get("username"),
+                           email=session.get("email"),
+                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+                           page="Scheduler", )
+
 
 @main_blueprint.route("/study-planner")
 def studyplanner():
-	return render_template("study-planner.html")
+    return render_template("study-planner.html",
+                           user=session.get("username"),
+                           email=session.get("email"),
+                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+                           page="Study Planner", )
+
 
 @main_blueprint.route("/lunch")
 def lunchplanner():
-	return render_template("lunch.html")
+    return render_template("lunch.html",
+                           user=session.get("username"),
+                           email=session.get("email"),
+                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+                           page="Lunch Planner", )
+
 
 @main_blueprint.route("/vacation")
 def vacationmode():
-	return render_template("vacation.html")
+    return render_template("vacation.html",
+                           user=session.get("username"),
+                           email=session.get("email"),
+                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+                           page="Vacation Mode", )
+
 
 @main_blueprint.route("/extra-curricular")
 def extracurricular():
-	return render_template("extra-curricular.html")
+    return render_template("extra-curricular.html",
+                           user=session.get("username"),
+                           email=session.get("email"),
+                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+                           page="Extracurricular Mode", )
+
 
 @main_blueprint.route("/analysis")
 def analysis():
-	return render_template("analysis.html")
+    return render_template("analysis.html",
+                           user=session.get("username"),
+                           email=session.get("email"),
+                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+                           page="Study Planner", )
+
 
 @main_blueprint.route("/blog")
 def blog():
-	return render_template("blog.html")
+    return render_template("blog.html",
+                           user=session.get("username"),
+                           email=session.get("email"),
+                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+                           page="Blog", )
+
 
 @main_blueprint.route("/upgrade")
 def upgrade():
-	return render_template("upgrade.html")
+    return render_template("upgrade.html",
+                           user=session.get("username"),
+                           email=session.get("email"),
+                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+                           page="Upgrade", )
+
 
 @main_blueprint.route("/support")
 def support():
-	return render_template("support.html")
-
+    return render_template("support.html",
+                           user=session.get("username"),
+                           email=session.get("email"),
+                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+                           page="Support", )
