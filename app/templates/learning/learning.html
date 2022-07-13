@@ -29,7 +29,7 @@
                             {% set date,list = tuple %}
                             <li class="mb-10 ml-4" aria-label="Events on {{ strftime(date, "%D") }}">
                                 <div class="absolute w-3 h-3 bg-gray-200 rounded-full -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
-                                <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+                                <time class="mb-1 text-sm font-normal leading-none text-gray-600 dark:text-gray-400">
                                     {{ strftime(date, "%a, %B %-d, %Y") }}
                                 </time>
                                 <br>
@@ -399,7 +399,7 @@
                     {% endif %}
                     {% for course in user_courses %}
                         <a href="/course/{{ course.id }}">
-                            <div class="max-w-sm bg-gray-50/75 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800/75  dark:border-gray-700 p-2"
+                            <div class="max-w-sm bg-gray-100/75 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800/75  dark:border-gray-700 p-2"
                                  style="float:left;margin:20px;height:13rem;width:22rem;">
                                 <div class="text-left">
                                     <div class="p-4 flex">
@@ -408,7 +408,10 @@
                                              style="width: 50px; height: 50px">
                                         <div class="-mt-1">
                                             <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white truncate">
-                                                {{ course.name }}
+                                                {% if course.name|length <= 16 %}
+                                                {{course.name}}
+                                                {% else %} {{course.name[0:16]}}...
+                                                 {% endif %}
                                             </h5>
                                             <span class="font-normal text-gray-700 dark:text-gray-400">{{ course.teacher }}</span>
                                         </div>
