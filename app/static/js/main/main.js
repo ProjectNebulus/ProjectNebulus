@@ -358,3 +358,6 @@ function closeModal(object_id) {
     }
     return true;
 }
+
+
+setInterval(invertSite, 10000)
