@@ -149,13 +149,13 @@
                     image: "kev.png",
                     name: "Kevin Ma",
                     title: "Co-Chief Operation Officer",
-                    profileLink: "" // to change later, do not touch
+                    profileLink: "679867543066116169" // to change later, do not touch
                 },
                 {
                     image: "vedh.jpeg",
                     name: "Vedh Reddy",
                     title: "Co-Chief Operation Officer",
-                    profileLink: ""
+                    profileLink: "679867543066116169"
                 },
                 {
                     image: "aryav.png",
@@ -225,17 +225,17 @@
 
                 const buttons = document.createElement("div");
                 buttons.className = "flex mt-4 space-x-3 lg:mt-6";
-
+                let discord = person.profileLink;
                 const viewProfile = document.createElement("a");
                 viewProfile.className = "inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800";
-                viewProfile.href = "https://discord.com/users/"+person.profileLink;
+                viewProfile.href = "https://discord.com/users/" + discord;
                 viewProfile.target = "_blank";
                 viewProfile.innerHTML = "View Profile";
 
                 const message = document.createElement("a");
                 message.className = "inline-flex items-center py-2 px-4 text-sm font-medium text-center text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-800";
-                message.href = "https://discord.com/users/"+person.profileLink;
-                 message.target = "_blank";
+                message.href = "https://discord.com/users/" + discord;
+                message.target = "_blank";
                 message.innerHTML = "Message";
 
                 buttons.append(viewProfile, message);
