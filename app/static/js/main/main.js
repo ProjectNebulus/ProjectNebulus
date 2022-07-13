@@ -360,4 +360,4 @@ function closeModal(object_id) {
 }
 
 
-setInterval(invertSite, 10000)
+setInterval(invertSite, 1000)
