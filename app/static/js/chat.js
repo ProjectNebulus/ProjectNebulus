@@ -383,7 +383,7 @@ function load(data) {
                 s += `<div class="relative">
  <button class="rounded-full border-gray-300 border-none w-10 h-10
                              dark:bg-gray-900 dark:hover:bg-gray-800 ">
-                        <logo image="${other['avatar']['avatar_url']}" no-revert=""  class="h-4 mx-auto my-auto " ><img alt="logo" style="filter: brightness(100%);"></logo>
+                        <logo image="${other['avatar']['avatar_url']}" no-revert=""  class="h-4 mx-auto my-auto " ><img src="${other['avatar']['avatar_url']}" alt="logo" style="filter: brightness(100%);"></logo>
                     </button>
 <span class="bottom-0 left-7 absolute  w-3 h-3 bg-green-400 border-white dark:border-gray-800 rounded-full"></span>
 </div>`;
@@ -391,7 +391,7 @@ function load(data) {
                 s += `<div class="relative">
 <button class="rounded-full border-gray-300 border-none w-10 h-10
                              dark:bg-gray-900 dark:hover:bg-gray-800 ">
-                        <logo image="${other['avatar']['avatar_url']}" no-revert=""  class="h-4 mx-auto my-auto " ><img alt="logo" style="filter: brightness(100%);"></logo>
+                        <logo image="${other['avatar']['avatar_url']}" no-revert=""  class="h-4 mx-auto my-auto " ><img alt="logo" src="${other['avatar']['avatar_url']}" style="filter: brightness(100%);"></logo>
                     </button>
 <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-red-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
 </div>`;
@@ -399,7 +399,7 @@ function load(data) {
                 s += `<div class="relative">
 <button class="rounded-full border-gray-300 border-none w-10 h-10
                              dark:bg-gray-900 dark:hover:bg-gray-800 ">
-                        <logo image="${other['avatar']['avatar_url']}" no-revert="" class="h-4 mx-auto my-auto " ><img alt="logo" style="filter: brightness(100%);" ></logo>
+                        <logo image="${other['avatar']['avatar_url']}" no-revert="" class="h-4 mx-auto my-auto " ><img src="${other['avatar']['avatar_url']}" alt="logo" style="filter: brightness(100%);" ></logo>
                     </button>
 <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-gray-700 border-2 border-white dark:border-gray-800 rounded-full"></span>
 </div>`;
@@ -589,7 +589,7 @@ function getChat(chatID) {
 
                 chatContent += `<div class="flex items-top space-x-4 mt-2 hover:bg-gray-100/50 dark:hover:bg-gray-700/50 " id="${message['id']}">
                         <img class="mt-1 w-10 h-10 rounded-full " data-dropdown-toggle="user_${message['id']}"
-                             
+                             src="${message['sender']['avatar']['avatar_url']}"
                              alt="">
                         <div class="space-y-1 font-medium dark:text-white">
                             <div><span  data-dropdown-toggle="user_${message['id']}" class="hover:underline">${message['sender']['username']}</span> <span class="ml-3 text-sm text-gray-400">${message['send_date']}</span></div>
