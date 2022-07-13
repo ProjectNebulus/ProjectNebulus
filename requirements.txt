@@ -63,7 +63,7 @@ thefuzz~=0.19.0
 tomli
 typing-extensions
 urllib3
-waitress==2.1.1
+waitress==2.1.2
 Werkzeug==2.0.3
 yarl
 google-api-python-client
