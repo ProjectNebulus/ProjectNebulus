@@ -383,7 +383,7 @@ function load(data) {
                 s += `<div class="relative">
  <button class="rounded-full border-gray-300 border-none w-10 h-10
                              dark:bg-gray-900 dark:hover:bg-gray-800 ">
-                        <logo image="${other['avatar']['avatar_url']}" no-revert=""  class="h-4 mx-auto my-auto " ><img src="${other['avatar']['avatar_url']}" alt="logo" style="filter: brightness(100%);"></logo>
+                        <logo image="${other['avatar']['avatar_url']}" no-revert=""  class="h-4 mx-auto my-auto " ><img class="ml-2 h-6 w-6" src="${other['avatar']['avatar_url']}" alt="logo" style="filter: brightness(100%);"></logo>
                     </button>
 <span class="bottom-0 left-7 absolute  w-3 h-3 bg-green-400 border-white dark:border-gray-800 rounded-full"></span>
 </div>`;
@@ -391,7 +391,7 @@ function load(data) {
                 s += `<div class="relative">
 <button class="rounded-full border-gray-300 border-none w-10 h-10
                              dark:bg-gray-900 dark:hover:bg-gray-800 ">
-                        <logo image="${other['avatar']['avatar_url']}" no-revert=""  class="h-4 mx-auto my-auto " ><img alt="logo" src="${other['avatar']['avatar_url']}" style="filter: brightness(100%);"></logo>
+                        <logo image="${other['avatar']['avatar_url']}" no-revert=""  class="h-4 mx-auto my-auto " ><img class="ml-2 h-6 w-6" alt="logo" src="${other['avatar']['avatar_url']}" style="filter: brightness(100%);"></logo>
                     </button>
 <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-red-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
 </div>`;
@@ -399,7 +399,7 @@ function load(data) {
                 s += `<div class="relative">
 <button class="rounded-full border-gray-300 border-none w-10 h-10
                              dark:bg-gray-900 dark:hover:bg-gray-800 ">
-                        <logo image="${other['avatar']['avatar_url']}" no-revert="" class="h-4 mx-auto my-auto " ><img src="${other['avatar']['avatar_url']}" alt="logo" style="filter: brightness(100%);" ></logo>
+                        <logo image="${other['avatar']['avatar_url']}" no-revert="" class="h-4 mx-auto my-auto " ><img class="ml-2 h-6 w-6" src="${other['avatar']['avatar_url']}" alt="logo" style="filter: brightness(100%);" ></logo>
                     </button>
 <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-gray-700 border-2 border-white dark:border-gray-800 rounded-full"></span>
 </div>`;
@@ -414,7 +414,7 @@ function load(data) {
             }
             s += `
         <div class="space-y-1 font-medium dark:text-white">
-            <div class="dark:text-gray-300" style="font-size:20px" id="${chat['id']}_title" >${other['username']}</div>
+            <div class="dark:text-gray-300" style="font-size:20px" id="${chat['_id']}_title" >${other['username']}</div>
             <div class="text-sm text-gray-500 dark:text-gray-400" style="font-size:13px;">${status_emoji} ${status_text}</div>
         </div>
     </div>
@@ -660,17 +660,17 @@ function getChat(chatID) {
          class="p-2 flex items-center space-x-4 dark:bg-gray-800 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" id="member_${other['_id']}">`;
                 if (other['chatProfile']['status'] === 'Online') {
                     chatMembers += `<div class="relative">
-<img class="w-10 h-10 rounded-full"  alt="">
+<img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
 <span class="bottom-0 left-7 absolute  w-3 h-3 bg-green-400 border-white dark:border-gray-800 rounded-full"></span>
 </div>`;
                 } else if (other['chatProfile']['status'] === 'Do Not Disturb') {
                     chatMembers += `<div class="relative">
-<img class="w-10 h-10 rounded-full"  alt="">
+<img class="w-10 h-10 rounded-full" src="${other['avatar']['avatar_url']}" alt="">
 <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-red-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
 </div>`;
                 } else {
                     chatMembers += `<div class="relative">
-<img class="w-10 h-10 rounded-full"  alt="">
+<img class="w-10 h-10 rounded-full"  src="${other['avatar']['avatar_url']}" alt="">
 <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-gray-700 border-2 border-white dark:border-gray-800 rounded-full"></span>
 </div>`;
                 }
