@@ -95,7 +95,7 @@ function reloadTable() {
     ) {
         const row = table.insertRow();
         row.classList.add(
-            "bg-white", "border-b", "dark:bg-gray-800", "dark:border-gray-700",
+            "bg-white/75", "border-b", "dark:bg-gray-800/75", "dark:border-gray-700",
         )
         const smallCell = row.insertCell();
 
@@ -112,7 +112,11 @@ function reloadTable() {
 
             if (saveData[page] && saveData[page][i])
                 div.innerHTML = saveData[page][i].replaceAll(':::::', '=');
-            else div.innerHTML = '';
+            else div.innerHTML = `
+            <ul>
+              <li><br></li>
+              <li><br></li>
+              </ul>      `;
 
             cell.appendChild(div);
         }
@@ -156,7 +160,7 @@ nextPage.onclick = function () {
         }
     }
 
-    changeDate(true);
+    changeDate(false);
 };
 
 prevPage.onclick = function () {
@@ -180,7 +184,7 @@ prevPage.onclick = function () {
         startDate += daysInMonths[month];
     }
 
-    changeDate(true);
+    changeDate(false);
 };
 
 today.onclick = function () {
@@ -327,7 +331,11 @@ function load(page) {
     for (let i = 0; i < notes.length; i++) {
         if (saveData[page] && saveData[page][i])
             notes[i].innerHTML = saveData[page][i].replaceAll(':::::', '=');
-        else notes[i].innerHTML = '';
+        else notes[i].innerHTML = `
+            <ul>
+              <li><br></li>
+              <li><br></li>
+              </ul>      `;
     }
 }
 

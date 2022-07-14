@@ -3,6 +3,21 @@
     {% include "utils/navbar.html" %}
 
     <style>
+        .note li {
+            border-bottom: 1px solid gray;
+            width: 100%;
+            display: block;
+        }
+
+        .note::-webkit-scrollbar {
+            display: none;
+        }
+
+        .note {
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
+        }
+
         [modal-backdrop] {
             backdrop-filter: blur(6px);
 
@@ -100,24 +115,20 @@
             <div class="text-4xl text-black dark:text-white" style='float:right; margin-top: -2.5rem'>
                 <div class="flex justify-between text-xl">
                     <label for="planner_name" class="text-gray-500 dark:text-gray-400">Planner Name</label>
-                    <button class="material-icons text-gray-500 dark:text-gray-400 hover:bg-gray-200 p-1 rounded
+                    <button class="material-icons text-gray-50 dark:text-gray-400 hover:bg-gray-200 p-1 rounded
                      dark:hover:bg-gray-500 mb-3" data-modal-toggle="configureModal" onclick="settings()">settings
                     </button>
                 </div>
 
                 <input type="text" id="planner_name" name="planner-name" placeholder="My Agenda" required
-                       class="bg-gray-50 border border-gray-300 text-gray-900 text-2xl rounded-lg focus:ring-blue-500
-                        focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
+                       class="bg-gray-50/75 border border-gray-300 text-gray-900 text-2xl rounded-lg focus:ring-blue-500
+                        focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800/75 dark:border-gray-600
                          dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             </div>
         </div>
         <br>
 
         <span id="dates"></span>
-        <div style="border-style: solid; border-radius: 15px !Important; overflow: hidden !important; border-color: gray; border-width: 2px;">
-            <table class="bg-gray-800/50 text-sm text-left text-gray-500 dark:text-gray-400"></table>
-        </div>
-
         <div class="mt-6 flex flex-row justify-between">
             <button id="prevPage" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br
              focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm
@@ -134,6 +145,11 @@
               px-5 py-2.5 text-center mr-2 mb-2">Next Page
             </button>
         </div>
+        <div style="border-style: solid; border-radius: 15px !Important; overflow: hidden !important; border-color: gray; border-width: 2px;">
+            <table class="bg-gray-800/50 text-sm text-left text-gray-500 dark:text-gray-400"></table>
+        </div>
+
+
     </div>
 
     <div id="configureModal" tabindex="-1" aria-hidden="true" style="object-position: center;"
