@@ -21,25 +21,29 @@
             <form class="flex flex-col mt-4" action="#" onsubmit="loginUser()">
                 <div class="relative">
                     <div class="flex absolute inset-y-0 left-0 items-center pl-3 pb-2 pointer-events-none">
-                        <p id="error" class="material-icons" style="color: red; vertical-align: middle;">error</p>
+                        <p id="error" class="material-icons" style="color: gray; vertical-align: middle;">pending</p>
                     </div>
                     <input id="usrname" class="pl-10 p-2.5 px-4 py-3 mt-4 w-full rounded-md bg-gray-100 border-transparent
                      focus:border-gray-500 focus:bg-white focus:ring-0 text-sm" placeholder="Username/Email"
                            style="-webkit-user-select: text;">
-                    <p id="error-msg" class="mt-2 text-sm text-red-600 dark:text-red-500"><span
-                            class="font-medium">Hey!</span> Please enter a username</p>
+                    <p id="error-msg" class="mt-2 text-sm text-red-600 dark:text-red-500" style="
+    color: gray !important;
+"><span
+                            class="font-medium">Welcome back</span> to Nebulus! Enter your username please.</p>
                 </div>
 
                 <div class="relative">
                     <div class="flex absolute inset-y-0 left-0 items-center pl-3 pb-2 pointer-events-none">
-                        <p id="password-error" class="material-icons" style="color: red; vertical-align: middle;">
-                            error</p>
+                        <p id="password-error" class="material-icons" style="color: gray; vertical-align: middle;">
+                            pending</p>
                     </div>
                     <input type="password" id="psw"
                            class="pl-10 p-2.5 px-4 py-3 mt-4 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm "
                            placeholder="Password" style="-webkit-user-select: text;">
-                    <p id="password-error-msg" class="mt-2 text-sm text-red-600 dark:text-red-500"><span
-                            class="font-medium">Hey!</span> Please
+                    <p id="password-error-msg" class="mt-2 text-sm text-red-600 dark:text-red-500" style="
+    color: gray !important;
+"><span
+                            class="font-medium">Welcome back</span> Please
                         enter a password!</p>
                 </div>
                 <button id="log_in" type="submit"
