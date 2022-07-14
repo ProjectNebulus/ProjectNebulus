@@ -295,11 +295,11 @@
                     <div class="block mx-4 p-2.5 w-full">
                         <div id="preview" class="roboto text-black dark:text-white"></div>
                         <br><br>
-                        <textarea id="msg_content" rows="1"
+                        <textarea onkeyup="inputKeyUp(event)" id="msg_content" rows="1"
                                   class="block p-2.5 w-full text-sm text-gray-900 dark:border-gray-700 border-white dark:bg-gray-700 bg-white dark:text-white"
                                   placeholder="" required></textarea>
                     </div>
-                    <button type="submit"
+                    <button type="submit" id="pressMe"
                             class="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600">
                         <svg class="w-6 h-6 rotate-90" fill="currentColor" viewBox="0 0 20 20"
                              xmlns="http://www.w3.org/2000/svg">
@@ -432,16 +432,16 @@
     </div>
 
     <script type="module">
-     import { createPicker } from 'https://unpkg.com/picmo@5.1.0/dist/index.js';
-     import smile2emoji from "https://cdn.skypack.dev/smile2emoji";
-     let textarea_el = document.getElementById('msg_content');
-            console.log(textarea_el);
+        import {createPicker} from 'https://unpkg.com/picmo@5.1.0/dist/index.js';
+        import smile2emoji from "https://cdn.skypack.dev/smile2emoji";
+
+        let textarea_el = document.getElementById('msg_content');
+        console.log(textarea_el);
         textarea_el.oninput = function () {
-                updateEditor(textarea_el, document.getElementById('preview'));
-            };
+            updateEditor(textarea_el, document.getElementById('preview'));
+        };
 
         marked.use({gfm: false});
-
 
 
         function updateEditor(input, preview) {

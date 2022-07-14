@@ -725,3 +725,11 @@ window.onload = function () {
         this.style.height = this.scrollHeight + 'px';
     }
 };
+
+
+function inputKeyUp(e) {
+    e.which = e.which || e.keyCode;
+    if (e.which == 13) {
+        document.getElementById("pressMe").click();
+    }
+}
