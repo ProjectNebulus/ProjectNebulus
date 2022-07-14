@@ -293,7 +293,7 @@ $(document).ready(function () {
         let el = document.getElementById('chat');
         let chat_index = el.children.length - Math.floor(el.children.length / 2) - 1;
         console.log(Math.floor(el.scrollHeight - $(this).height()) * -1, $(this).scrollTop());
-        if ($(this).scrollTop() + Math.floor(el.scrollHeight - $(this).height()) === -0.5) {
+        if ($(this).scrollTop() + Math.floor(el.scrollHeight - $(this).height()) === 1) {
             let chatID = document.getElementById('chatID').getAttribute('data-id');
             $.ajax({
                 url: '/api/v1/internal/fetch-messages',
