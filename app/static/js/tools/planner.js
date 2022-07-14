@@ -87,13 +87,16 @@ function updateDate() {
 
 function reloadTable() {
     table.innerHTML = '';
-    changeDate();
+    changeDate(true);
     for (
         let i = 1;
         i <= document.querySelectorAll('#configureModal #timePeriods .timePeriod').length;
         i++
     ) {
         const row = table.insertRow();
+        row.classList.add(
+            "bg-white", "border-b", "dark:bg-gray-800", "dark:border-gray-700",
+        )
         const smallCell = row.insertCell();
 
         smallCell.innerHTML = i + '';
@@ -128,8 +131,10 @@ document.addEventListener('keyup', (e) => {
         else if (e.key === 'ArrowUp') today.click();
     }
 });
+window.onload = function () {
+    loadFromServer();
+}
 
-loadFromServer();
 
 nextPage.onclick = function () {
     save();
@@ -151,7 +156,7 @@ nextPage.onclick = function () {
         }
     }
 
-    changeDate();
+    changeDate(true);
 };
 
 prevPage.onclick = function () {
@@ -175,7 +180,7 @@ prevPage.onclick = function () {
         startDate += daysInMonths[month];
     }
 
-    changeDate();
+    changeDate(true);
 };
 
 today.onclick = function () {
@@ -184,14 +189,14 @@ today.onclick = function () {
     startDate = d.getDate() - d.getDay();
     year = d.getFullYear();
     month = d.getMonth();
-    changeDate();
+    changeDate(false);
     nextPage.disabled = false;
     prevPage.disabled = false;
 };
 
 document.getElementById('month').innerHTML = months[month] + ' ' + d.getFullYear();
 
-changeDate();
+changeDate(true);
 
 let num = 1;
 
@@ -283,9 +288,14 @@ function settings() {
     document.getElementById('configName').value = document.getElementById('planner_name').value;
 }
 
-function changeDate() {
-    const daysRow = table.insertRow();
-    for (let i = 0; i <= 7; i++) daysRow.insertCell();
+function changeDate(insert) {
+    if (insert === true) {
+        const daysRow = table.insertRow();
+        daysRow.classList.add(
+            "text-xs", "text-gray-700", "uppercase", "bg-gray-50", "dark:bg-gray-700", "dark:text-gray-400",
+        )
+        for (let i = 0; i <= 7; i++) daysRow.insertCell();
+    }
 
     document.getElementById('month').innerHTML = months[month] + ' ' + year;
 
@@ -381,22 +391,22 @@ function recursiveSave(saveDict, count) {
     });
 
     request.done(() => {
-        saveState.innerHTML = 'Synced to Cloud | Last Edit was seconds ago';
-        error.innerHTML = 'Connected to Nebulus';
-        error.style.color = 'green';
+        saveState.innerHTML = 'Last Edit was seconds ago';
+        error.innerHTML = 'Synced to Cloud';
+        error.style.color = 'skyblue';
         resetRequestNum = true;
         if (requestInterval) clearInterval(requestInterval);
     });
 
     request.fail(() => {
         if (count < (resetRequestNum ? 3 : 1)) {
-            saveState.innerHTML = 'Sync Unsuccessful | Retrying Sync...';
-            error.innerHTML = 'Connecting...';
+            saveState.innerHTML = 'Retrying Sync...';
+            error.innerHTML = 'Syncing Failed';
             error.style.color = 'lightgray';
             recursiveSave(saveDict, count + 1);
         } else {
-            saveState.innerHTML = 'Sync Unsuccessful | Retrying soon...';
-            error.innerHTML = 'Could not connect to Nebulus';
+            saveState.innerHTML = 'Retrying soon...';
+            error.innerHTML = 'Syncing Failed, Cannot Connect to Nebulus';
             error.style.color = 'red';
             resetRequestNum = false;
 

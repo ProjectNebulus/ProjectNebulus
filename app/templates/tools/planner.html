@@ -4,7 +4,8 @@
 
     <style>
         [modal-backdrop] {
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(6px);
+
         }
 
         .dark [modal-backdrop] {
@@ -42,7 +43,7 @@
         }
 
         td {
-            border: 1px solid black;
+            border: none;
             text-align: left;
             padding: 8px;
             position: relative;
@@ -71,12 +72,10 @@
 
         div[contenteditable=true] {
             font-size: 0.9rem;
-            padding-top: 1rem;
-            padding-left: 35%;
         }
 
         div[contenteditable=true]:focus {
-            border: 2px solid blue;
+            border: 2px solid deepskyblue;
             padding: calc(0.5rem - 2px);
         }
 
@@ -85,8 +84,7 @@
         }
 
         .dark td {
-            border: 1px solid #DDDD;
-            color: white;
+            border: 1px solid gray;
         }
     </style>
     <br><br>
@@ -116,7 +114,9 @@
         <br>
 
         <span id="dates"></span>
-        <table class="bg-gray-800/50"></table>
+        <div style="border-style: solid; border-radius: 15px !Important; overflow: hidden !important; border-color: gray; border-width: 2px;">
+            <table class="bg-gray-800/50 text-sm text-left text-gray-500 dark:text-gray-400"></table>
+        </div>
 
         <div class="mt-6 flex flex-row justify-between">
             <button id="prevPage" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br
