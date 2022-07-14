@@ -1,21 +1,29 @@
-["html",
-  ["dl",
-    ["dt",
+[
+  "html",
+  [
+    "dl",
+    [
+      "dt",
       "one"
     ],
-    ["dd",
+    [
+      "dd",
       "alpha"
     ],
-    ["dt",
+    [
+      "dt",
       "two"
     ],
-    ["dd",
+    [
+      "dd",
       "beta"
     ],
-    ["dt",
+    [
+      "dt",
       "three"
     ],
-    ["dd",
+    [
+      "dd",
       "gamma"
     ]
   ]

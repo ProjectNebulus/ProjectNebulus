@@ -1,7 +1,10 @@
-["html",
-  ["p",
+[
+  "html",
+  [
+    "p",
     "You can ",
-    ["em",
+    [
+      "em",
       "start emphasis on one line,\nand finish it"
     ],
     " on another."

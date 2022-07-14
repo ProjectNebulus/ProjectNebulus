@@ -1,17 +1,16 @@
 function expand(message) {
-
 }
 
-function replaceURLs(message) {
-    if (!message)
-        return message;
 
-    if (!message.includes("http")) {
-        console.log("returned. no link detected");
+function replaceURLs(message) {
+    if (!message) return message;
+
+    if (!message.includes('http')) {
+        console.log('returned. no link detected');
         return message;
     }
-    if (message.includes("href=\"http")) {
-        console.log("returned. recursive detected");
+    if (message.includes('href="http')) {
+        console.log('returned. recursive detected');
         return message;
     }
 
@@ -20,11 +19,10 @@ function replaceURLs(message) {
     return message.replace(urlRegex, function (url) {
         let hyperlink = url;
 
-        if (!hyperlink.match('^https?:\/\/'))
-            hyperlink = 'http://' + hyperlink;
+        if (!hyperlink.match('^https?://')) hyperlink = 'http://' + hyperlink;
 
-        hyperlink = hyperlink.replace("<p>", "");
-        hyperlink = hyperlink.replace("</p>", "");
+        hyperlink = hyperlink.replace('<p>', '');
+        hyperlink = hyperlink.replace('</p>', '');
 
         return `<a target="_blank"
                    class="
@@ -36,49 +34,51 @@ function replaceURLs(message) {
     });
 }
 
-let modal = document.getElementById('CourseModal');
+let modal = document.getElementById('courseModal');
 
 // set up templates
 let templateLists = modal.getElementsByClassName('scroll');
+
 let screens = modal.getElementsByClassName('CoursePage');
 
 // set up button
-let btn = document.getElementById('course');
+let btn = document.getElementById('create');
 
 for (const screen of screens)
-    screen.className += " relative px-4 w-full max-w-2xl relative bg-gray-200 rounded-lg shadow dark:bg-gray-700 text-black dark:text-white"
+    screen.className +=
+        ' relative px-4 w-full max-w-2xl relative bg-gray-200 rounded-lg shadow dark:bg-gray-700 text-black dark:text-white';
 
-for (const h3 of modal.getElementsByTagName("h3"))
-    h3.className += " flex justify-between items-start p-5 rounded-t border-b border-gray-300 dark:border-gray-600 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white"
+for (const h3 of modal.getElementsByTagName('h3'))
+    h3.className +=
+        ' flex justify-between items-start p-5 rounded-t border-b border-gray-300 dark:border-gray-600 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white';
 
-for (const list of templateLists)
-    list.classList.add("scroll");
+for (const list of templateLists) list.classList.add('scroll');
 
 btn.onclick = function () {
+    console.log('button clicked');
     modal.style.display = 'block';
 
-    screens[0].style.top = "-1000px";
-    screens[0].style.animation = "0.5s movein";
+    screens[0].style.top = '-1000px';
+    screens[0].style.animation = '0.5s movein';
 
     for (let screen of screens) {
         screen.style.display = 'none';
-        screen.style.animationFillMode = "forwards";
-        screen.style.webkitAnimationFillMode = "forwards";
+        screen.style.animationFillMode = 'forwards';
+        screen.style.webkitAnimationFillMode = 'forwards';
     }
 
     screens[0].style.display = 'block';
 };
 
 window.onclick = function (event) {
-    if (event.target === modal)
-        modal.style.display = 'none';
+    if (event.target === modal) modal.style.display = 'none';
 };
 
 // set up close button
 for (let close of modal.getElementsByClassName('close')) {
     close.className += ' material-icons dark:text-white';
     close.innerHTML = 'close';
-    close.onclick = () => modal.style.display = "none";
+    close.onclick = () => (modal.style.display = 'none');
 }
 
 // set up course stuff
@@ -86,10 +86,11 @@ let courseName = document.getElementById('course-name');
 let courseTeacher = document.getElementById('course-teacher');
 
 for (const element of modal.getElementsByClassName('CoursePage'))
-    element.className += ' hidden overflow-visible fixed right-0 left-0 top-4 z-50 justify-center items-center h-72 md:inset-0';
+    element.className +=
+        ' hidden overflow-visible fixed right-0 left-0 top-4 z-50 justify-center items-center h-72 md:inset-0';
 
 function lms(subtemplate) {
-    document.getElementById('course-course-status').innerHTML = 'Creating course...';
+    document.getElementById('create-course-status').innerHTML = 'Creating course...';
 
     const xhttp = new XMLHttpRequest();
     xhttp.open('POST', '/lms', true);
@@ -98,7 +99,7 @@ function lms(subtemplate) {
         JSON.stringify({
             name: document.getElementById('course-name').value,
             teacher: document.getElementById('course-teacher').value,
-            avatar: "https://app.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg",
+            avatar: 'https://app.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg',
             template: subtemplate
         })
     );
@@ -111,21 +112,23 @@ function skipTemplates() {
     h1.innerHTML = h1.innerHTML.replace('Step 3: ', '');
 }
 
-const pageCounters = modal.getElementsByClassName("pageCount");
+const pageCounters = modal.getElementsByClassName('pageCount');
 
 for (const i in pageCounters) {
-    pageCounters[i].className += " flex items-center p-6 space-x-2 absolute bottom-0";
+    pageCounters[i].className += ' flex items-center p-6 space-x-2 absolute bottom-0';
     for (let j = 0; j < 3; j++) {
         if (j == i)
-            pageCounters[i].innerHTML += "<div class='rounded-full w-2 h-2 bg-gray-400 dark:bg-gray-500'></div>"
+            pageCounters[i].innerHTML +=
+                "<div class='rounded-full w-2 h-2 bg-gray-400 dark:bg-gray-500'></div>";
         else
-            pageCounters[i].innerHTML += "<div class='rounded-full w-2 h-2 bg-gray-300 dark:bg-gray-400'></div>"
+            pageCounters[i].innerHTML +=
+                "<div class='rounded-full w-2 h-2 bg-gray-300 dark:bg-gray-400'></div>";
     }
 
     try {
-        pageCounters[i].setAttribute("style", "transform: translate(300%)")
+        pageCounters[i].setAttribute('style', 'transform: translate(300%)');
+    } catch (e) {
     }
-    catch (e) {}
 }
 
 /*
@@ -218,7 +221,8 @@ const templates = [
 
 for (const template of templates) {
     let button = document.createElement('div');
-    button.className = 'createSelectButton text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 text-2xl';
+    button.className =
+        'createSelectButton text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 text-2xl';
     button.onclick = () => chooseTemplate(template);
 
     // TODO: fix duplicate code fragments
@@ -254,10 +258,12 @@ for (const template of templates) {
     for (let i = 0; i < Math.min(template.subtemplates.length, 4); i++)
         description.innerHTML += template.subtemplates[i] + ', ';
 
-    if (template.subtemplates.length > 4)
-        description.innerHTML += "etc."
+    if (template.subtemplates.length > 4) description.innerHTML += 'etc.';
     else
-        description.innerHTML = description.innerHTML.substring(0, description.innerHTML.length - 2);
+        description.innerHTML = description.innerHTML.substring(
+            0,
+            description.innerHTML.length - 2
+        );
 
     button.appendChild(description);
 
@@ -272,7 +278,8 @@ function chooseTemplate(template) {
     templateLists[1].innerHTML = '';
     for (const subtemplate of template.subtemplates) {
         let button = document.createElement('div');
-        button.className = 'createSelectButton text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 text-2xl';
+        button.className =
+            'createSelectButton text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 text-2xl';
         button.onclick = function () {
             const name = template.name;
             customize(name, subtemplate);
@@ -300,7 +307,7 @@ function chooseTemplate(template) {
         next.height = 20;
         next.width = 20;
         next.src = 'static/images/icons/next.svg';
-        next.alt = "Next";
+        next.alt = 'Next';
         button.appendChild(next);
 
         templateLists[1].appendChild(button);
@@ -314,7 +321,7 @@ function customize(template, subtemplate) {
     courseName.placeholder = subtemplate;
     courseTeacher.placeholder = user;
 
-    document.getElementById('course-course').onsubmit = () => lms(subtemplate);
+    document.getElementById('create-course').onsubmit = () => lms(subtemplate);
 
     document.getElementById('import-schoology').onclick = importSchoology;
     document.getElementById('import-classroom').onclick = importGClassroom;
@@ -324,7 +331,7 @@ function customize(template, subtemplate) {
 function importGClassroom() {
     screens[2].style.display = 'none';
     screens[4].style.display = 'block';
-    const status = document.getElementById('course-course-status2');
+    const status = document.getElementById('create-course-status2');
     const input = document.getElementById('google-course-id');
     const teacher = document.getElementById('google-course-teacher');
 
@@ -360,7 +367,7 @@ function importGClassroom() {
     xhttp.send(
         JSON.stringify({
             link: input.value,
-            teacher: teacher.value,
+            teacher: teacher.value
         })
     );
 }
@@ -368,7 +375,7 @@ function importGClassroom() {
 function importCanvas() {
     screens[2].style.display = 'none';
     screens[5].style.display = 'block';
-    const status = document.getElementById('course-course-status2');
+    const status = document.getElementById('create-course-status2');
     const input = document.getElementById('canvas-course-id');
     const teacher = document.getElementById('canvas-course-teacher');
 
@@ -404,16 +411,17 @@ function importCanvas() {
     xhttp.send(
         JSON.stringify({
             link: input.value,
-            teacher: teacher.value,
+            teacher: teacher.value
         })
     );
 }
 
 function importSchoology() {
+    console.log('hi');
     screens[2].style.display = 'none';
     screens[3].style.display = 'block';
 
-    const status = document.getElementById('course-course-status2');
+    const status = document.getElementById('create-course-status2');
     const input = document.getElementById('schoology-course-id');
     const teacher = document.getElementById('schoology-course-teacher');
 
@@ -449,72 +457,71 @@ function importSchoology() {
     xhttp.send(
         JSON.stringify({
             link: input.value,
-            teacher: teacher.value,
+            teacher: teacher.value
         })
     );
-
 }
 
 function schoologyCourseReq() {
-    const status = document.getElementById('course-course-status2');
+    const status = document.getElementById('create-course-status2');
     if (this.responseText === '1') {
         status.style.color = 'red';
-        status.innerHTML = 'You have not connected your schoology account! Please connect a schoology account to import courses from Schoology.';
-    }
-    else {
+        status.innerHTML =
+            'You have not connected your schoology account! Please connect a schoology account to import courses from Schoology.';
+    } else {
         status.style.color = 'green';
         status.innerHTML = 'Course created!';
     }
 }
 
 function googleCourseReq() {
-    const status = document.getElementById('course-course-status2');
+    const status = document.getElementById('create-course-status2');
     if (this.responseText === '1') {
         status.style.color = 'red';
-        status.innerHTML = 'You have not connected your google account! Please connect a schoology account to import courses from Schoology.';
-    }
-    else {
+        status.innerHTML =
+            'You have not connected your google account! Please connect a schoology account to import courses from Schoology.';
+    } else {
         status.style.color = 'green';
         status.innerHTML = 'Course created!';
     }
 }
 
 function canvasCourseReq() {
-    const status = document.getElementById('course-course-status2');
+    const status = document.getElementById('create-course-status2');
     if (this.responseText === '1') {
         status.style.color = 'red';
-        status.innerHTML = 'You have not connected your canvas account! Please connect a schoology account to import courses from Schoology.';
-    }
-    else {
+        status.innerHTML =
+            'You have not connected your canvas account! Please connect a schoology account to import courses from Schoology.';
+    } else {
         status.style.color = 'green';
         status.innerHTML = 'Course created!';
     }
 }
 
 function updateCanvasLink(link) {
-    document.getElementById("canvas-course-id").value = link;
-    document.getElementById("clist").style.display = "none";
-    document.getElementById("canvas-course-course").style.display = "block";
+    document.getElementById('canvas-course-id').value = link;
+    document.getElementById('clist').style.display = 'none';
+    document.getElementById('canvas-create-course').style.display = 'block';
 }
 
 function updateGoogleLink(link, teacher) {
-    document.getElementById("google-course-id").value = link;
-    document.getElementById("google-course-teacher").value = teacher;
-    document.getElementById("glist").style.display = "none";
-    document.getElementById("google-course-course").style.display = "block";
+    document.getElementById('google-course-id').value = link;
+    document.getElementById('google-course-teacher').value = teacher;
+    document.getElementById('glist').style.display = 'none';
+    document.getElementById('google-create-course').style.display = 'block';
 }
 
 function updateSchoologyLink(link) {
-    document.getElementById("schoology-course-id").value = link;
-    document.getElementById("slist").style.display = "none";
-    document.getElementById("schoology-course-course").style.display = "block";
+    document.getElementById('schoology-course-id').value = link;
+    document.getElementById('slist').style.display = 'none';
+    document.getElementById('schoology-create-course').style.display = 'block';
 }
 
 function changeSearch() {
-    let value = document.getElementById("search_input").value;
+    let value = document.getElementById('search_input').value;
     console.log(value);
     if (value.length > 0) {
-        document.getElementById("search_items").innerHTML = `
+        document.getElementById('search_items').innerHTML = `
 <li>
 <div class="py-2.5 rounded-lg mx-auto block px-4 py-2 mx-2 dark:hover:text-white">
                 <svg class="inline w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -526,19 +533,19 @@ function changeSearch() {
 </li>
             `;
         const request = $.ajax({
-            type: "POST",
-            url: "/api/v1/internal/search-within_user",
+            type: 'POST',
+            url: '/api/v1/internal/search-within_user',
             data: JSON.stringify({
                 search: value
             }),
 
-            contentType: 'application/json; charset=utf-8',
+            contentType: 'application/json; charset=utf-8'
         });
         request.done((data) => {
-            document.getElementById("search_items").innerHTML = "";
-            let temp_arr = []
-            if (data === "0") {
-                document.getElementById("search_items").innerHTML += `
+            document.getElementById('search_items').innerHTML = '';
+            let temp_arr = [];
+            if (data === '0') {
+                document.getElementById('search_items').innerHTML += `
                     <li>
                             <div class="py-2.5 rounded-lg mx-auto block px-4 py-2 mx-2 dark:hover:text-white">
                         <svg class="inline w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -547,49 +554,48 @@ function changeSearch() {
 </svg>
                         No Results Found
                             </div>
-                        </li>`
+                        </li>`;
             } else {
-                let datas = data.split("•");
+                let datas = data.split('•');
                 for (let i = 0; i < datas.length; i++) {
                     temp_arr.push(datas[i]);
                     if (i % 4 === 3) {
                         let pic = `<img src="${temp_arr[3]}" class="inline-block w-10 h-10 rounded-full">`;
                         switch (temp_arr[0]) {
-                            case "document":
-                                pic = `<i class="material-icons">description</i>`
+                            case 'document':
+                                pic = `<i class="material-icons">description</i>`;
                                 break;
-                            case "NebDoc":
-                                pic = `<i class="material-icons">draft</i>`
+                            case 'NebDoc':
+                                pic = `<i class="material-icons">draft</i>`;
                                 break;
-                            case "event":
-                                pic = `<i class="material-icons">event</i>`
+                            case 'event':
+                                pic = `<i class="material-icons">event</i>`;
                                 break;
-                            case "assignment":
-                                pic = `<i class="material-icons">assignment</i>`
+                            case 'assignment':
+                                pic = `<i class="material-icons">assignment</i>`;
                                 break;
-                            case "chat":
-                                pic = `<i class="material-icons">forum</i>`
+                            case 'chat':
+                                pic = `<i class="material-icons">forum</i>`;
                                 break;
-                            case "announcement":
+                            case 'announcement':
                                 pic = `<i class="material-icons">campaign</i>`;
                                 break;
                         }
 
-                        document.getElementById("search_items").innerHTML += `
+                        document.getElementById('search_items').innerHTML += `
                     <li>
                         <span class="truncate py-2.5 rounded-lg mx-auto block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 mx-2 dark:hover:text-white" style="text-align:left;">
                 ${pic}
                 ${temp_arr[1]} <span class="text-gray-500 ml-2">${temp_arr[2]}</span></span>
                     </li>
-`
+`;
                     }
                 }
             }
         });
 
-        document.getElementById("search_items").innerHTML = "";
-
-
+        document.getElementById('search_items').innerHTML = '';
     }
 }
-keyUpDelay("#search", 1000, changeSearch);
+
+keyUpDelay('#search', 1000, changeSearch);

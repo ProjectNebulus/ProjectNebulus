@@ -1,5 +1,5 @@
 module.exports = {
-    content: ["./layouts/**/*.html", "./content/**/*.md", "./content/**/*.html", "./src/**/*.js"],
+    content: ['./layouts/**/*.html', './content/**/*.md', './content/**/*.html', './src/**/*.js'],
     safelist: [
         'w-64',
         'w-1/2',
@@ -23,9 +23,50 @@ module.exports = {
                 '8xl': '90rem'
             },
             fontFamily: {
-                'sans': ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'],
-                'body': ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'],
-                'mono': ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace']
+                sans: [
+                    'Inter',
+                    'ui-sans-serif',
+                    'system-ui',
+                    '-apple-system',
+                    'system-ui',
+                    'Segoe UI',
+                    'Roboto',
+                    'Helvetica Neue',
+                    'Arial',
+                    'Noto Sans',
+                    'sans-serif',
+                    'Apple Color Emoji',
+                    'Segoe UI Emoji',
+                    'Segoe UI Symbol',
+                    'Noto Color Emoji'
+                ],
+                body: [
+                    'Inter',
+                    'ui-sans-serif',
+                    'system-ui',
+                    '-apple-system',
+                    'system-ui',
+                    'Segoe UI',
+                    'Roboto',
+                    'Helvetica Neue',
+                    'Arial',
+                    'Noto Sans',
+                    'sans-serif',
+                    'Apple Color Emoji',
+                    'Segoe UI Emoji',
+                    'Segoe UI Symbol',
+                    'Noto Color Emoji'
+                ],
+                mono: [
+                    'ui-monospace',
+                    'SFMono-Regular',
+                    'Menlo',
+                    'Monaco',
+                    'Consolas',
+                    'Liberation Mono',
+                    'Courier New',
+                    'monospace'
+                ]
             },
             fontSize: {
                 '2xs': '0.625rem'
@@ -34,11 +75,8 @@ module.exports = {
     },
     variants: {
         extend: {
-            backgroundColor: ['active'],
-        },
+            backgroundColor: ['active']
+        }
     },
-    plugins: [
-        require('./plugin'),
-        require('@tailwindcss/line-clamp')
-    ]
-}
+    plugins: [require('./plugin'), require('@tailwindcss/line-clamp')]
+};

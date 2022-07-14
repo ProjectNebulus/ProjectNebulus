@@ -1,4 +1,13 @@
-["html", ["p", ["img", {
-    "src": "/foo.jpg",
-    "alt": "bar"
-}]]]
+[
+  "html",
+  [
+    "p",
+    [
+      "img",
+      {
+        "src": "/foo.jpg",
+        "alt": "bar"
+      }
+    ]
+  ]
+]

@@ -6,11 +6,11 @@
     <title>Create Course</title>
 </head>
 <body>
-<div id="CourseModal"
+<div id="courseModal"
      class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
     <div class="CoursePage">
         <!-- Modal header -->
-        <h3>
+        <h3 class="modalheader">
             Step 1: Create a Course
             <span class="close"></span>
         </h3>
@@ -41,7 +41,7 @@
 
     <div class="CoursePage">
         <div style="text-align: center;">
-            <h3>
+            <h3 class="modalheader">
                 Step 2: Choose a Template
                 <span class="close"></span>
             </h3>
@@ -56,7 +56,7 @@
 
     <div class="CoursePage">
         <div style="text-align: center;">
-            <h3 id="change-if-skip-templates">
+            <h3 id="change-if-skip-templates" class="modalheader">
                 Step 3: Customize your Course
                 <span class="close"></span>
             </h3>
@@ -111,8 +111,8 @@
         <div class="pageCount"></div>
     </div>
 
-    <div class="CoursePage">
-        <h3 class="flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white">
+    <div class="CoursePage" id="schoology-create-page">
+        <h3 class="modalheader flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white">
             Import from Schoology
             <span class="close"></span>
         </h3><br><br>
@@ -184,8 +184,8 @@
         </form>
         <div class="pageCount"></div>
     </div>
-    <div class="CoursePage">
-        <h3 class="flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white">
+    <div class="CoursePage" id="create-gclass-page">
+        <h3 class="modalheader flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white">
             Import from Google Classroom
             <span class="close"></span>
         </h3><br>
@@ -248,8 +248,8 @@
         </div>
         <div class="pageCount"></div>
     </div>
-    <div class="CoursePage">
-        <h3 class="flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white">
+    <div class="CoursePage" id="create-canvas-page">
+        <h3 class="modalheader flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white">
             Import from Canvas
             <span class="close"></span>
         </h3><br>
@@ -312,7 +312,7 @@
         <div class="pageCount"></div>
     </div>
     <div class="CoursePage">
-        <h3 class="flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white">
+        <h3 class="modalheader flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white">
             Import from Canvas
             <span class="close"></span>
         </h3>
@@ -348,7 +348,7 @@
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <!-- Modal header -->
-            <div class="flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600">
+            <div class="modalheader flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600">
                 <h3 class="text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white">
                     Search Globally
                 </h3>
@@ -389,6 +389,5 @@
         </div>
     </div>
 </div>
-<script src="../../static/js/lms.js"></script>
 </body>
 </html>

@@ -7,11 +7,9 @@ from mongoengine import (
     ListField,
     ReferenceField,
     StringField,
-    EmbeddedDocumentField
 )
 
 from app.static.python.utils.snowflake_generator import make_snowflake
-
 
 
 class Message(EmbeddedDocument):

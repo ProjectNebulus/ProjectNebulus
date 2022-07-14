@@ -1,1 +1,16 @@
-["html", ["p", ["code", "This"], " is a code span.\u000aAnd ", ["code", "This is one with an `embedded backtick`"], "."]]
+[
+  "html",
+  [
+    "p",
+    [
+      "code",
+      "This"
+    ],
+    " is a code span.\u000aAnd ",
+    [
+      "code",
+      "This is one with an `embedded backtick`"
+    ],
+    "."
+  ]
+]

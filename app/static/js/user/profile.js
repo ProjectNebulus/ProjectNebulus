@@ -5,7 +5,7 @@ function fetchStatus() {
     });
 
     request.done((data) => {
-        if (data === "1") {
+        if (data === '1') {
             document.getElementById('song').innerHTML = `
             <div style="float:right;display: grid; grid-auto-flow: column; align-content: center;">
             <i style="display:inline-block; color:#1BD661; margin-right:10px;" class="fab fa-spotify"></i> Spotify isn't Detected!
@@ -14,9 +14,8 @@ function fetchStatus() {
                 Go to Spotify <i style="display:grid; grid-auto-flow: column; align-content: center; justify-content: center;" class="material-icons">open_in_newt</i>
                 </button>
             </a>
-            </div>    `
-        }
-        else if (data === "2") {
+            </div>    `;
+        } else if (data === '2') {
             document.getElementById('song').innerHTML = `
             <div style="float:right;display: grid; grid-auto-flow: column; align-content: center;">
             <i style="display:inline-block; color:#1BD661; margin-right:10px;" class="fab fa-spotify"></i> Spotify isn't Connected!
@@ -25,9 +24,8 @@ function fetchStatus() {
                 Connect Spotify <i style="display:grid; grid-auto-flow: column; align-content: center; justify-content: center;" class="material-icons">open_in_newt</i>
                 </button>
             </a>
-            </div>  `
-        }
-        else if (data === "3") {
+            </div>  `;
+        } else if (data === '3') {
             document.getElementById('song').innerHTML = `
             <div style="float:right;display: grid; grid-auto-flow: column; align-content: center;">
                 <i style="display:inline-block; color:#1BD661; margin-right:10px;" class="fab fa-spotify"></i> Your Spotify Account is not registered in the developer dashboard!
@@ -36,21 +34,20 @@ function fetchStatus() {
                     Go to Spotify <i style="display:grid; grid-auto-flow: column; align-content: center; justify-content: center;" class="material-icons">open_in_newt</i>
                     </button>
                 </a>
-            </div>  `
-        }
-        else {
-            let songs = data.split(" • ");
+            </div>  `;
+        } else {
+            let songs = data.split(' • ');
 
-            let name = songs[0]
-            let artists = songs[1]
-            let album = songs[2]
-            let explicit = songs[3]
-            let image = songs[4]
-            let playing = songs[5]
-            let timestamp = songs[6]
-            let total = songs[7]
-            let ratio = songs[8]
-            document.getElementById("songname").innerText = name;
+            let name = songs[0];
+            let artists = songs[1];
+            let album = songs[2];
+            let explicit = songs[3];
+            let image = songs[4];
+            let playing = songs[5];
+            let timestamp = songs[6];
+            let total = songs[7];
+            let ratio = songs[8];
+            document.getElementById('songname').innerText = name;
             document.getElementById('song').innerHTML = `
             <div> <!--class="grid grid-cols-2"!-->
             <div style="width:150px;float:left;"> 
@@ -76,7 +73,9 @@ function fetchStatus() {
                   <span class="text-sm font-medium text-blue-700 dark:text-white">${total}</span>
                 </div>
                 <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700" style="text-align:left;">
-                  <div class="bg-green-400 h-2.5 rounded-full" style="text-align:left;width: ${Math.round(ratio)}%;"></div>
+                  <div class="bg-green-400 h-2.5 rounded-full" style="text-align:left;width: ${Math.round(
+                ratio
+            )}%;"></div>
                 </div>
                 <p class="text-sm text-gray-600 dark:text-gray-300">⚠️ Please Note: Spotify requires users to have Premium to be controlled from Nebulus.</p>
             </div>
@@ -86,13 +85,13 @@ function fetchStatus() {
                 type: 'GET',
                 url: '/api/v1/internal/get_lyrics',
                 data: {
-                    "artist": artists,
-                    "song": name
+                    artist: artists,
+                    song: name
                 }
             });
-            request.done(data => {
+            request.done((data) => {
                 //alert(data);
-                document.getElementById("lyricshere").innerHTML = data;
+                document.getElementById('lyricshere').innerHTML = data;
             });
         }
     });

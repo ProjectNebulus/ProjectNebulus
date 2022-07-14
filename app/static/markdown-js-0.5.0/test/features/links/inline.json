@@ -1,8 +1,13 @@
-["html",
-  ["p",
+[
+  "html",
+  [
+    "p",
     "An ",
-    ["a",
-      { "href" : "http://inline.com" },
+    [
+      "a",
+      {
+        "href": "http://inline.com"
+      },
       "inline"
     ],
     " link."

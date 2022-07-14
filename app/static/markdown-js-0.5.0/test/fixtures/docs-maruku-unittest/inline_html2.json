@@ -1,2 +1,22 @@
-["html", ["div", ["p", "Test ", ["strong", "bold"]]],
-    ["p", "Test ", ["strong", "bold"]]]
+[
+  "html",
+  [
+    "div",
+    [
+      "p",
+      "Test ",
+      [
+        "strong",
+        "bold"
+      ]
+    ]
+  ],
+  [
+    "p",
+    "Test ",
+    [
+      "strong",
+      "bold"
+    ]
+  ]
+]

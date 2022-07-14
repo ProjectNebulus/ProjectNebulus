@@ -6,11 +6,30 @@ import requests
 from flask import request, session
 from flask.json import jsonify
 from flask_socketio import emit, join_room, leave_room
+from pandas import *
 
 from app.static.python.classes import User
 from app.static.python.mongodb import create, delete, read, update
+# from app.static.python.school import get_school
 from . import internal
 from .... import socketio
+
+
+def get_school():
+    # xls = ExcelFile("..../static/school_db.xlsx")
+    # xls = ExcelFile("./school_db.xlsx")
+    # ls = ExcelFile("/school_db.xlsx")
+    xls = ExcelFile("school_db.xlsx")
+    df = xls.parse(xls.sheet_names[0])
+    # print(df.transpose().to_dict())
+    schools = []
+    df = df.transpose().to_dict()
+    for i in range(0, len(df)):
+        schools.append(
+            [str(df[i]["Unnamed: 3"]) + "  (" + str(df[i]["Unnamed: 15"]) + ", " + str(df[i]["Unnamed: 16"]) + ")", i])
+    # print(schools)
+    return schools
+
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 
@@ -102,6 +121,8 @@ def user_loaded(json_data):
 
     user = read.find_user(pk=session["id"])
     user.chatProfile.sid = request.sid
+    user.save()
+    join_room(request.sid)
 
     emit("user_loaded", {"msg": "User loaded into rooms"})
 
@@ -148,44 +169,50 @@ def new_chat(data):
         "members": [session["id"], *data["members"]],
     }
 
-
     print(data)
     chat = create.createChat(data)
-    chat_data = {
+    chat = {
         "id": chat.id,
         "avatar": {"avatar_url": chat.avatar.avatar_url},
         "title": chat.title,
         "lastEdited": chat.lastEdited,
-        "owner": chat.owner,
-        "members": chat.members,
+        "owner": session["id"],
+        "members": [session["id"], *data["members"]],
     }
 
     sid_list = []
 
     for x, member in enumerate(chat["members"]):
         if len(chat["members"]) == 2:
-            user_dict = json.loads(
-                User.objects.only("id", "chatProfile", "username", "avatar.avatar_url")
-                    .get(pk=member)
-                    .to_json()
-            )
+            print(member)
+            user_dict = User.objects.only(
+                "id", "chatProfile", "username", "avatar.avatar_url"
+            ).get(pk=member)
+
+            print(user_dict)
+            user_dict = json.loads(user_dict.to_json())
             chat["members"][x] = user_dict
-            sid_list += user_dict["chatProfile"]["sid"]
+            sid_list.append(user_dict["chatProfile"]["sid"])
             chat["owner"] = list(
                 filter(lambda x: x["_id"] == chat["owner"], chat["members"])
             )[0]
 
         else:
-            sid_list += User.objects.only("chatProfile.sid").get(pk=member).sid
+            sid_list.append(
+                User.objects.only("chatProfile.sid").get(pk=member).chatProfile.sid
+            )
 
-
+    print(sid_list)
 
     for sid in sid_list:
-        socketio.emit(
-            "new_chat",
-            chat_data,
-            room=sid
-        )
+        if sid:
+            socketio.emit("new_chat", chat, room=sid)
+
+
+@internal.route("/get_schools", methods=["POST"])
+def get_schools():
+    from flask import jsonify
+    return jsonify(get_school())
 
 
 @internal.route("/change-status", methods=["POST"])
@@ -297,10 +324,11 @@ def fetchChats():
     chats = read.loadChats(
         session["id"],
         current_index,
-        30,
+        10,
         ["id", "title", "avatar.avatar_url", "members", "lastEdited", "owner"],
     )
-    print(chats)
+    print(current_index, chats)
+    print("im fetching chats")
     return jsonify(chats)
 
 

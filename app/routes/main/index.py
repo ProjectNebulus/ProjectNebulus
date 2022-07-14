@@ -1,42 +1,28 @@
-import json
 from pathlib import Path
-from urllib.request import urlopen
 
 from flask import redirect, render_template, request, send_file, session
 
 from . import main_blueprint
+from .. import babel
+
+
+@babel.localeselector
+def get_locale():
+    if session.get("lang") == "es":
+        return "es"
+    else:
+        return "en"
 
 
 @main_blueprint.route("/", methods=["GET"])
 def index():
-    # return "hi"
-    # ip = request.remote_addr
-    # return jsonify({'ip': request.remote_addr}), 200
-
-    if request.headers.getlist("X-Forwarded-For"):
-        ip = request.headers.getlist("X-Forwarded-For")[0]
-    else:
-        ip = request.remote_addr
-    try:
-        url = f"freegeoip.net/{ip}/json"
-        response = urlopen(url)
-        data = json.load(response)
-        return str(data)
-        IP = data["ip"]
-        org = data["org"]
-        city = data["city"]
-        country = data["country"]
-        region = data["region"]
-
-    except:
-        country = "US"
-
     return render_template(
         "main/index.html",
         page="Nebulus - Learning, All In One",
         user=session.get("username"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+
     )
 
 
@@ -145,43 +131,82 @@ def international(country):
     except:
         return "This country doesn't exist yet :( Contact norachai on Discord and request this country to be made."
 
-
-@main_blueprint.route("scheduler")
-def scheduler(): #scheduler
-    return render_template("scheduler.html")
-
-@main_blueprint.route("study")
-def study(): #study planner
-    return render_template("study.html")
-
-@main_blueprint.route("lunch")
-def lunch(): #lunch planner
-    return render_template("lunch.html")
-
-@main_blueprint.route("vacation")
-def vacation(): #vacation mode
-    return render_template("vacation.html")
-
-@main_blueprint.route("extra-curricular")
-def extracurricular(): #extra curricular stuff
-    return render_template("extra-curricular.html")
-
-@main_blueprint.route("analysis")
-def analysis(): #image analyzer
-    return render_template("analysis")
-
-@main_blueprint.route("upgrade")
-def upgrade(): #upgrade
-    return render_template("upgrade")
-
-@main_blueprint.route("blog")
-def blog(): #blog
-    return render_template("blog")
-
-@main_blueprint.route("support")
-def support(): #customer support
-    return render_template("support")
+@main_blueprint.route("/scheduler")
+def scheduler():
+    return render_template("scheduler.html",
+                           user=session.get("username"),
+                           email=session.get("email"),
+                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+                           page="Scheduler", )
 
 
+@main_blueprint.route("/study-planner")
+def studyplanner():
+    return render_template("study-planner.html",
+                           user=session.get("username"),
+                           email=session.get("email"),
+                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+                           page="Study Planner", )
 
 
+@main_blueprint.route("/lunch")
+def lunchplanner():
+    return render_template("lunch.html",
+                           user=session.get("username"),
+                           email=session.get("email"),
+                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+                           page="Lunch Planner", )
+
+
+@main_blueprint.route("/vacation")
+def vacationmode():
+    return render_template("vacation.html",
+                           user=session.get("username"),
+                           email=session.get("email"),
+                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+                           page="Vacation Mode", )
+
+
+@main_blueprint.route("/extra-curricular")
+def extracurricular():
+    return render_template("extra-curricular.html",
+                           user=session.get("username"),
+                           email=session.get("email"),
+                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+                           page="Extracurricular Mode", )
+
+
+@main_blueprint.route("/analysis")
+def analysis():
+    return render_template("analysis.html",
+                           user=session.get("username"),
+                           email=session.get("email"),
+                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+                           page="Study Planner", )
+
+
+@main_blueprint.route("/blog")
+def blog():
+    return render_template("blog.html",
+                           user=session.get("username"),
+                           email=session.get("email"),
+                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+                           page="Blog", )
+
+
+@main_blueprint.route("/upgrade")
+def upgrade():
+    return render_template("upgrade.html",
+                           user=session.get("username"),
+                           email=session.get("email"),
+                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+                           page="Upgrade", )
+
+
+@main_blueprint.route("/support")
+def support():
+    return render_template("support.html",
+                           user=session.get("username"),
+                           email=session.get("email"),
+                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+                           page="Support", )

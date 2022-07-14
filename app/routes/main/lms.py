@@ -77,7 +77,7 @@ def lms():
         canvas = Canvas(API_URL, API_KEY)
         account = canvas.get_user(user="self")
         courses = account.get_courses()
-        for course in courses[:5]:
+        for course in courses:
             original_name = ""
             try:
                 original_name = course.original_name
@@ -96,16 +96,8 @@ def lms():
         schoology = read.getSchoology(username=session["username"])
         if len(schoology) > 0:
             schoology = schoology[0]
-            key = schoology.apikey
-            secret = schoology.apisecret
-            if not key or not secret:
-                key = session.get("request_token")
-                secret = session.get("request_token_secret")
-
-            if not key or not secret:
-                key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
-                secret = "59ccaaeb93ba02570b1281e1b0a90e18"
-                print("Key or Secret missing for user", session["username"])
+            key = schoology.apikey or session.get("request_token") or "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
+            secret = schoology.apisecret or session.get("request_token_secret") or "59ccaaeb93ba02570b1281e1b0a90e18"
 
             auth = schoolopy.Auth(
                 key,
@@ -120,7 +112,7 @@ def lms():
             auth.authorize()
             sc = schoolopy.Schoology(auth)
             sc.limit = "100&include_past=1"
-            scCourses = list(sc.get_user_sections(user_id=sc.get_me().id))[:5]
+            scCourses = list(sc.get_user_sections(user_id=sc.get_me().id))
             for i in range(0, len(scCourses)):
                 scCourses[i] = dict(scCourses[i])
                 scCourses[i]["link"] = (
@@ -142,7 +134,7 @@ def lms():
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         user_acc=user_acc,
-        user_courses=list(user_courses)[:5],
+        user_courses=list(user_courses),
         read=read,
         page="Nebulus - Learning",
         announcements=events[0],

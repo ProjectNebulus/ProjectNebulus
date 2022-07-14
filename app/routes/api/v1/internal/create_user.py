@@ -4,7 +4,7 @@ from datetime import datetime
 from flask import request, session
 from flask.json import jsonify
 
-from app.static.python.classes import Avatar, ChatProfile
+from app.static.python.classes import Avatar, ChatProfile, Chat, User
 from app.static.python.mongodb import create, read
 from app.static.python.utils.security import hash256
 from . import internal
@@ -36,6 +36,8 @@ def create_user():
         20: "newPink.png",
         21: "newRed.png",
         22: "newYellow.png",
+        23: "ukraine.png",
+        24: "pride.png",
     }
 
     data["avatar"] = cats[int(data["avatar"].replace("cat", ""))]
@@ -66,11 +68,24 @@ def create_user():
 def search_user():
     data = request.get_json()
     data = data["search"]
-    users = list(read.search_user(data))
+    users = list(read.search_user(data, session["id"]))
 
     for n, user in enumerate(users):
-        users[n] = [user.id, request.root_url+user.avatar.avatar_url, user.username, user.email]
-    if len(users) == 0:
+        chats = Chat.objects(members=user.id, owner=session["id"])
+        if len(chats) > 0:
+            del users[n]
+            continue
+
+        else:
+
+            users[n] = [
+                user.id,
+                request.root_url + user.avatar.avatar_url,
+                user.username,
+                user.email,
+            ]
+    users = list(filter(lambda x: not isinstance(x, User), users))
+    if not users:
         return "0"
 
     return jsonify(users)

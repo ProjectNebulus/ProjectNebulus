@@ -8,7 +8,13 @@ body {
     transition: visibility 0s 0.5s, opacity 0.5s linear;
 }
 
-.noselect, img, svg, thead, button, input, br {
+.noselect,
+img,
+svg,
+thead,
+button,
+input,
+br {
     user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -31,7 +37,8 @@ hr {
 }
 
 /* width */
-::-webkit-scrollbar, ::-webkit-scrollbar-thumb {
+::-webkit-scrollbar,
+::-webkit-scrollbar-thumb {
     width: 5px;
     height: 5px;
     border-radius: 5px;
@@ -39,7 +46,7 @@ hr {
 
 /* Track */
 ::-webkit-scrollbar-track-piece {
-    background: #9CA3AF;
+    background: #9ca3af;
 }
 
 /* Handle */
@@ -75,9 +82,9 @@ hr {
 }
 
 .dark ::selection {
-    background: #3498DB;
+    background: #3498db;
 }
 
 ::selection {
-    background: #AED6F1;
+    background: #aed6f1;
 }

@@ -1,17 +1,24 @@
-["html",
-  ["p",
+[
+  "html",
+  [
+    "p",
     "Amy wrote:"
   ],
-  ["blockquote",
-    ["p",
+  [
+    "blockquote",
+    [
+      "p",
       "No wai?"
     ]
   ],
-  ["p",
+  [
+    "p",
     "Bob wrote:"
   ],
-  ["blockquote",
-    ["p",
+  [
+    "blockquote",
+    [
+      "p",
       "Ya rly!"
     ]
   ]

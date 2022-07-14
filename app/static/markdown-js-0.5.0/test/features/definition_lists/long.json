@@ -1,15 +1,21 @@
-["html",
-  ["dl",
-    ["dt",
+[
+  "html",
+  [
+    "dl",
+    [
+      "dt",
       "first term"
     ],
-    ["dd",
+    [
+      "dd",
       "the quick brown fox jumps\nover the lazy dog"
     ],
-    ["dt",
+    [
+      "dt",
       "second term"
     ],
-    ["dd",
+    [
+      "dd",
       "pack my box with five\ndozen liquor jugs"
     ]
   ]

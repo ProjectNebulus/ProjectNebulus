@@ -1,8 +1,13 @@
-["html",
-  ["p",
-    ["img", {
-      "src": "",
-      "alt": "Empty"
-    } ]
+[
+  "html",
+  [
+    "p",
+    [
+      "img",
+      {
+        "src": "",
+        "alt": "Empty"
+      }
+    ]
   ]
 ]

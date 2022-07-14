@@ -8,14 +8,15 @@ from app.static.python.extensions.integrations.schoology import (
 from app.static.python.mongodb import read, update
 from . import internal
 
+auth = None
+key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
+secret = "59ccaaeb93ba02570b1281e1b0a90e18"
 
-@internal.route("/connect-to-schoology", methods=["POST"])
+
+@internal.route("/get-schoology", methods=["POST"])
 def user_connect_to_schoology_route():
-    key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
-    secret = "59ccaaeb93ba02570b1281e1b0a90e18"
+    global auth
     session["token"] = None
-    data = request.form
-    create_schoology(key, secret)
     request_token = session["request_token"]
     request_token_secret = session["request_token_secret"]
     access_token_secret = session["access_token_secret"]
@@ -31,9 +32,14 @@ def user_connect_to_schoology_route():
         access_token=access_token,
         access_token_secret=access_token_secret,
     )
+    return auth.request_authorization()
 
+@internal.route('/connect-to-schoology', methods=['POST'])
+def connect_to_schoology():
+    auth.authorize()
     if not auth.authorized:
         return "error!!!"
+    data = request.form
     request_token = auth.request_token
     request_token_secret = auth.request_token_secret
     access_token_secret = auth.access_token_secret
@@ -42,14 +48,14 @@ def user_connect_to_schoology_route():
     session["request_token_secret"] = request_token_secret
     session["access_token_secret"] = access_token_secret
     session["access_token"] = access_token
-    sc = create_schoology_auth(key, secret, auth)
+    sc = create_schoology_auth(auth)
     session["Schoologyname"] = sc.get_me().name_display
     session["Schoologyemail"] = sc.get_me().primary_email
     session["Schoologydomain"] = data["link"]
     session["Schoologyid"] = sc.get_me().id
     if (
-            read.check_duplicate_schoology(session["id"], session["Schoologyemail"])
-            == "false"
+            read.check_duplicate_schoology(session["Schoologyemail"])
+            == "true"
     ):
         return "2"
     schoology = {

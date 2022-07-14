@@ -7,7 +7,6 @@ import schoolopy
 from mongoengine import Q
 
 from app.static.python.utils.security import valid_password
-
 from ..classes import *
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
@@ -43,10 +42,15 @@ def get_user_courses(user_id: str) -> list[Course]:
     return Course.objects(authorizedUsers=user)
 
 
-def search_user(query: str) -> list[User]:
-    return User.objects(username__istartswith=query).only(
-        "id", "username", "email", "avatar", "_cls"
-    )[:10]
+def search_user(query: str, ignore_id: str = None) -> list[User]:
+    if ignore_id:
+        return User.objects(username__istartswith=query, id__ne=ignore_id).only(
+            "id", "username", "email", "avatar", "_cls"
+        )[:10]
+    else:
+        return User.objects(username__istartswith=query).only(
+            "id", "username", "email", "avatar", "_cls"
+        )[:10]
     # return User.objects.filter(username__contains=query)._query
 
 
@@ -313,10 +317,10 @@ def check_signup_email(email) -> str:
     return "true"
 
 
-def check_duplicate_schoology(user_id, schoology_email) -> str:
+def check_duplicate_schoology(schoology_email) -> str:
     if User.objects(schoology__schoologyEmail=schoology_email):
-        return "false"
-    return "true"
+        return "true"
+    return "false"
 
 
 def getChat(chat_id: str):

@@ -1,13 +1,20 @@
 import codecs
 import random
 
-from flask import session, request
+from flask import session, request, current_app
 from flask_mail import Message
+from threading import Thread
+from pathlib import Path
 
 from app.routes.main import private_endpoint
 from app.static.python.mongodb import read
 from . import internal
 from .... import mail
+
+
+def send_async_email(app, msg):
+    with app.app_context():
+        mail.send(msg)
 
 
 def send_email(subject, recipients, message):
@@ -20,6 +27,8 @@ def send_email(subject, recipients, message):
     msg.html = message
     print("sending email")
     mail.send(msg)
+    app = current_app._get_current_object()
+    Thread(target=send_async_email, args=(app, msg)).start()
 
 
 @internal.route("/signup-email", methods=["POST"])
@@ -31,9 +40,15 @@ def signup_email():
     session["verificationCode"] = str(code)
     print(code)
 
+    current_dir = Path(__file__)
+    root_path = [p for p in current_dir.parents if p.parts[-1] == "ProjectNebulus"][
+        0
+    ]
+
     htmlform = (
-        str(codecs.open("app/templates/utils/email.html", "r").read())
-            .replace("123456", str(code)).replace("Nicholas Wang", data["username"])
+        str(codecs.open(str(root_path)+"/app/templates/utils/email.html", "r").read())
+            .replace("123456", str(code))
+            .replace("Nicholas Wang", data["username"])
     )
 
     send_email(f"Your Nebulus Email Verification Code", [data["email"]], htmlform)
@@ -54,12 +69,21 @@ def reset_email():
     session["verificationCode"] = str(code)
     print(code)
 
+    current_dir = Path(__file__)
+
+    root_path = [p for p in current_dir.parents if p.parts[-1] == "ProjectNebulus"][
+        0
+    ]
+
     htmlform = (
-        str(codecs.open("app/templates/utils/email.html", "r").read()).replace("123456", str(code))
-            .replace("Nicholas Wang", data["username"]).replace("signed up", "requested a password reset")
-            .replace("sign up", "do so").replace("Signup", "Reset")
+        str(codecs.open(str(root_path)+"/app/templates/utils/email.html", "r").read())
+            .replace("123456", str(code))
+            .replace("Nicholas Wang", data["username"])
+            .replace("signed up", "requested a password reset")
+            .replace("sign up", "do so")
+            .replace("Signup", "Reset")
     )
 
     send_email(f"Your Nebulus Password Reset Code", [email], htmlform)
 
-    return email
+    return "success"

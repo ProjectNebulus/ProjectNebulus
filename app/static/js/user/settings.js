@@ -1,10 +1,24 @@
 window.addEventListener('load', function () {
-    // document.getElementById("change1").onclick = change1();
-    // document.getElementById("change2").onclick = change2();
-    // document.getElementById("change3").onclick = change3();
-    let inputs = document.getElementsByTagName("input");
-    for (let input = 0; input < 3; input++) {
-        inputs[input].classList.remove("bg-gray-50", "dark:border-gray-600", "dark:placeholder-gray-400", "dark:text-white")
-        inputs[input].classList.add("bg-gray-100", "cursor-not-allowed", "dark:border-gray-600", "dark:placeholder-gray-500", "dark:text-gray-500")
+    const bgCards = document.querySelectorAll(".card img");
+    const wallpaper = localStorage.getItem("wallpaper");
+
+    for (const card of bgCards) {
+        if (card.src === wallpaper)
+            card.parentElement.classList.add("selected_card");
+
+        card.addEventListener("click", () => {
+            if (card.classList.contains("selected_card")) return;
+
+            localStorage.setItem('wallpaper', card.src);
+            document.body.style.background = `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('${card.src}') no-repeat center center fixed`;
+            document.body.style.backgroundSize = 'cover';
+            document.querySelector(".selected_card").classList.remove(".selected_card");
+        });
     }
+
+    document.getElementById("no-filter").addEventListener("click", () => {
+        localStorage.removeItem('wallpaper');
+        document.body.style.backgroundImage = '';
+        document.body.style.background = document.documentElement.classList.contains("dark") ? "#111926" : "white";
+    });
 });

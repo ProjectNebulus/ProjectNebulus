@@ -1,14 +1,20 @@
-["html",
-  ["blockquote",
-    ["p",
+[
+  "html",
+  [
+    "blockquote",
+    [
+      "p",
       "There's a code block in here:"
     ],
-    ["pre",
-      ["code",
+    [
+      "pre",
+      [
+        "code",
         "SET foo = TRUE\n\nIF foo GOTO 10"
       ]
     ],
-    ["p",
+    [
+      "p",
       "Wasn't that nice?"
     ]
   ]

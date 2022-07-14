@@ -2,7 +2,6 @@ import Datepicker from '@themesberg/tailwind-datepicker/Datepicker';
 import DateRangePicker from '@themesberg/tailwind-datepicker/DateRangePicker';
 
 const getDatepickerOptions = (datepickerEl) => {
-
     const buttons = datepickerEl.hasAttribute('datepicker-buttons');
     const autohide = datepickerEl.hasAttribute('datepicker-autohide');
     const format = datepickerEl.hasAttribute('datepicker-format');
@@ -28,17 +27,17 @@ const getDatepickerOptions = (datepickerEl) => {
     }
 
     return options;
-}
+};
 
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('[datepicker]').forEach(function (datepickerEl) {
         new Datepicker(datepickerEl, getDatepickerOptions(datepickerEl));
     });
-    
+
     document.querySelectorAll('[inline-datepicker]').forEach(function (datepickerEl) {
         new Datepicker(datepickerEl, getDatepickerOptions(datepickerEl));
     });
-    
+
     document.querySelectorAll('[date-rangepicker]').forEach(function (datepickerEl) {
         new DateRangePicker(datepickerEl, getDatepickerOptions(datepickerEl));
     });

@@ -1,6 +1,9 @@
-["html",
-  ["blockquote",
-    ["p",
+[
+  "html",
+  [
+    "blockquote",
+    [
+      "p",
       "Blockquote"
     ]
   ]

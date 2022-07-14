@@ -4,10 +4,10 @@
     <form id="selectdomain">
         <p class="text-black text-5xl dark:text-white">
             <span style="float:left;">https://</span>
-            <input style="float:left;" value="app" type="text" id="domain"
+            <input style="float:left;" value="app.schoology.com" type="text" id="domain"
                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                    required>
-            <span style="float:left;"></span>.schoology.com</span>
+            <span style="float:left;"></span></span>
         </p>
         <p class="text-black dark:text-white">What this? It's the link where you login to Schoology. Every school has a
             different link.</p><br><br>
@@ -20,11 +20,11 @@
 
 
     </form>
-    <button id="launchBTN" onclick="startSchoology()" type="button"
+    <button id="launchBTN" type="button"
             class="text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">
         Connect Schoology
     </button>
-    <button id="confirmBTN" onclick="confirmSchoology()" style="display:none;" type="button"
+    <button id="confirmBTN" style="display:none;" type="button"
             class="text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">
         I Confirm I want to Connect this Schoology Accounts
     </button>
@@ -47,6 +47,7 @@
     <span style="color:red;display:none" id="error">Something went wrong! Please try again and make sure to click "Accept" in the Schoology popup.</span>
     <span style="color:red;display:none" id="error2">Login Failed. Reason: This Schoology account is already connected.</span>
     <script>
+
         $('#confirmBTN').on('click', function () {
             var $this = $(this);
             $this.button('loading');
@@ -56,7 +57,7 @@
                     type: "POST",
                     url: "/api/v1/internal/connect-to-schoology",
                     data: {
-                        "link": "https://" + document.getElementById("domain").value + ".schoology.com/",
+                        "link": "https://" + document.getElementById("domain").value ,
                         "key":document.getElementById("key").value,
                         "secret":document.getElementById("secret").value
                     }
@@ -64,18 +65,24 @@
                 request.done(function (data) {
                     $this.button('reset');
                     resp = document.getElementById("error")
-                    if (data === "1") {
-                        resp.style.color = "red";
-                        resp.innerHTML = "Login Failed. Reason: Clicked Deny on Schoology or closed Schoology popup window. Make sure Popups are enabled on your browser. Click Authorize again and click Approve this time!";
-                        document.getElementById('auth').style.display = 'inline';
-                        document.getElementById('connectbtn').style.display = 'none';
+                    if (data === "error!!!") {
+
+                        document.getElementById("launchBTN").style.display = "block";
+                        document.getElementById("error").style.display = "block";
+
+                    } else if (data === "2") {
+                        document.getElementById("launchBTN").style.display = "block";
+                        document.getElementById("error2").style.display = "block";
+
 
                     } else {
-                        resp.style.color = "green";
-                        resp.innerHTML = "Successfully linked your Schoology Account!";
-                        //window.location.replace("/settings");
-                    }
+                        let email = data.split("•")[1];
+                        let name = data.split("•")[0];
+                        document.getElementById("confirmation").style.display = "block";
+                        document.getElementById("name").innerHTML = name;
+                        document.getElementById("email").innerHTML = email;
 
+                    }
                 });
 
             }, 1000);
@@ -83,78 +90,49 @@
 
         });
 
-        function startSchoology() {
-            let domain = document.getElementById("domain").value;
-            newwindow2 = window.open('{{url}}'.replace('bins', domain), 'Authorize with Schoology2', 'height=400,width=800')
-            document.getElementById("launchBTN").style.display = "none";
-            document.getElementById("confirmBTN").style.display = "none";
-            document.getElementById("selectdomain").style.display = "none";
 
-            function checkIfDone() {
-                var request = $.ajax({
-                    type: "GET",
-                    url: "/api/v1/internal/check-schoology-connection",
-                    data: {}
-                });
-                request.done(function (data) {
-                        if (data === "False") {
-                            checkIfDone();
-                        } else {
-                            return;
+
+        $('#launchBTN').on('click', function () {
+            $.ajax({
+                type: 'POST',
+                url: '/api/v1/internal/get-schoology',
+                data: {
+                    "link": "https://" + document.getElementById("domain").value
+                }
+
+            }).done(function (data) {
+                newwindow2 = window.open(data, 'Authorize with Schoology2', 'height=400,width=800');
+                document.getElementById("launchBTN").style.display = "none";
+                document.getElementById("confirmBTN").style.display = "none";
+                document.getElementById("selectdomain").style.display = "none";
+
+                function checkIfDone() {
+                    $.ajax({
+                        type: "GET",
+                        url: "/api/v1/internal/check-schoology-connection",
+                        data: {}
+                    }).done(function (data) {
+                            if (data === "False") {
+                                checkIfDone();
+                            } else {
+                                return;
+                            }
                         }
-                    }
-                )
-            }
+                    );
+                }
 
-            checkIfDone();
-            document.getElementById("confirmBTN").style.display = "block";
+                checkIfDone();
+                document.getElementById("confirmBTN").style.display = "block";
 
-        }
+            });
+        });
 
-        var input = document.querySelector('domain'); // get the input element
+        var input = document.getElementById('domain'); // get the input element
         input.addEventListener('input', resizeInput); // bind the "resizeInput" callback on "input" event
         resizeInput.call(input); // immediately call the function
 
         function resizeInput() {
             this.style.width = this.value.length + "ch";
-        }
-
-        function confirmSchoology() {
-            var request = $.ajax({
-                type: "POST",
-                url: "/api/v1/internal/connect-to-schoology",
-                data: JSON.stringify({
-                    link: "https://" + document.getElementById("domain").value + ".schoology.com/",
-                    key:document.getElementById("key").value,
-                    secret:document.getElementById("secret").value
-                }),
-                dataType: "json",
-                contentType: "application/json"
-
-            })
-            request.done(function (data) {
-                document.getElementById("confirmBTN").style.display = "none";
-                if (data === "error!!!") {
-
-                    document.getElementById("launchBTN").style.display = "block";
-                    document.getElementById("error").style.display = "block";
-
-                } else if (data === "2") {
-                    document.getElementById("launchBTN").style.display = "block";
-                    document.getElementById("error2").style.display = "block";
-
-
-                } else {
-                    let email = data.split("•")[1];
-                    let name = data.split("•")[0];
-                    document.getElementById("confirmation").style.display = "block";
-                    document.getElementById("name").innerHTML = name;
-                    document.getElementById("email").innerHTML = email;
-
-                }
-
-            })
-
         }
     </script>
 

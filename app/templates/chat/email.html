@@ -1,9 +1,9 @@
 {% extends "layout.html" %}
 {% block main %}
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg h-full mx-4">
-        <div class="absolute w-full h-full bg-gray-100 dark:bg-gray-800 -z-10"></div>
+        <div class="absolute w-full h-full bg-gray-100/75 dark:bg-gray-800/75 -z-10"></div>
         <table id="table" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-200/75 dark:bg-gray-700/75 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
                     Inbox
@@ -29,15 +29,15 @@
             <tbody id="tbody">
             {% for id, message in messages %}
                 <tr data-modal-toggle="thread_{{ id }}"
-                    class="{% if message["status"] == "read" %}bg-white dark:bg-gray-800 {% else %} bg-gray-100 dark:bg-gray-700 {% endif %}border-b  dark:border-gray-700">
+                    class="{% if message["status"] == "read" %}bg-white/75 dark:bg-gray-800/75 {% else %} bg-gray-100/75 dark:bg-gray-700/75 {% endif %}border-b  dark:border-gray-700">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
                         <div class="flex mb-5 -space-x-4">
                             <img data-dropdown-toggle="userDropdown_a{{ id }}"
                                  class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800 z-10"
                                  src="{{ message["author"]["avatar"] }}" alt="">
                             {% set author = message["author"] %}
-                            <div id="userDropdown_a{{ id }}" class="z-50 hidden bg-white divide-y divide-gray-100
-                             rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600 rounded-lg">
+                            <div id="userDropdown_a{{ id }}" class="z-50 hidden bg-white/75 divide-y divide-gray-100
+                             rounded shadow w-80 dark:bg-gray-700/75 dark:divide-gray-600 rounded-lg">
                                 <div style="border-radius:10px 10px 0 0; height:60px;background:{% if author["color"] %}rgba
                                     {{ author["color"] }}{% else %}#515A67{% endif %};">
 

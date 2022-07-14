@@ -1,10 +1,10 @@
 /******/
-(() => { // webpackBootstrap
+(() => {
+    // webpackBootstrap
     /******/
-    "use strict";
-    var __webpack_exports__ = {};
+    'use strict';
+    var __webpack_exports__ = {}; // CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/lib/utils.js
 
-    ;// CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/lib/utils.js
     function hasProperty(obj, prop) {
         return Object.prototype.hasOwnProperty.call(obj, prop);
     }
@@ -13,7 +13,7 @@
         return arr[arr.length - 1];
     }
 
-// push only the items not included in the array
+    // push only the items not included in the array
     function pushUnique(arr, ...items) {
         items.forEach((item) => {
             if (arr.includes(item)) {
@@ -56,18 +56,15 @@
         html += `<${openTagSrc}></${tagName}>`;
 
         const next = index + 1;
-        return next < repeat
-            ? createTagRepeat(tagName, repeat, attributes, next, html)
-            : html;
+        return next < repeat ? createTagRepeat(tagName, repeat, attributes, next, html) : html;
     }
 
-// Remove the spacing surrounding tags for HTML parser not to course text nodes
-// before/after elements
+    // Remove the spacing surrounding tags for HTML parser not to course text nodes
+    // before/after elements
     function optimizeTemplateHTML(html) {
         return html.replace(/>\s+/g, '>').replace(/\s+</, '<');
-    }
+    } // CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/lib/date.js
 
-    ;// CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/lib/date.js
     function stripTime(timeValue) {
         return new Date(timeValue).setHours(0, 0, 0, 0);
     }
@@ -76,7 +73,7 @@
         return new Date().setHours(0, 0, 0, 0);
     }
 
-// Get the time value of the start of given date or year, month and day
+    // Get the time value of the start of given date or year, month and day
     function dateValue(...args) {
         switch (args.length) {
             case 0:
@@ -123,18 +120,18 @@
         return expectedMonth === 1 && newDate.getMonth() === 2 ? newDate.setDate(0) : time;
     }
 
-// Calculate the distance bettwen 2 days of the week
+    // Calculate the distance bettwen 2 days of the week
     function dayDiff(day, from) {
         return (day - from + 7) % 7;
     }
 
-// Get the date of the specified day of the week of given base date
+    // Get the date of the specified day of the week of given base date
     function dayOfTheWeekOf(baseDate, dayOfWeek, weekStart = 0) {
         const baseDay = new Date(baseDate).getDay();
         return addDays(baseDate, dayDiff(dayOfWeek, weekStart) - dayDiff(baseDay, weekStart));
     }
 
-// Get the ISO week of a date
+    // Get the ISO week of a date
     function getWeek(date) {
         // start of ISO week is Monday
         const thuOfTheWeek = dayOfTheWeekOf(date, 4, 1);
@@ -143,24 +140,21 @@
         return Math.round((thuOfTheWeek - firstThu) / 604800000) + 1;
     }
 
-// Get the start year of the period of years that includes given date
-// years: length of the year period
+    // Get the start year of the period of years that includes given date
+    // years: length of the year period
     function startOfYearPeriod(date, years) {
         /* @see https://en.wikipedia.org/wiki/Year_zero#ISO_8601 */
         const year = new Date(date).getFullYear();
         return Math.floor(year / years) * years;
-    }
+    } // CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/lib/date-format.js
 
-    ;// CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/lib/date-format.js
-
-
-// pattern for format parts
+    // pattern for format parts
     const reFormatTokens = /dd?|DD?|mm?|MM?|yy?(?:yy)?/;
-// pattern for non date parts
+    // pattern for non date parts
     const reNonDateParts = /[\s!-/:-@[-`{-~年月日]+/;
-// cache for persed formats
+    // cache for persed formats
     let knownFormats = {};
-// parse funtions for date parts
+    // parse funtions for date parts
     const parseFns = {
         y(date, year) {
             return new Date(date).setFullYear(parseInt(year, 10));
@@ -175,7 +169,7 @@
                 }
 
                 const monthName = month.toLowerCase();
-                const compareNames = name => name.toLowerCase().startsWith(monthName);
+                const compareNames = (name) => name.toLowerCase().startsWith(monthName);
                 // compare with both short and full names because some locales have periods
                 // in the short names (not equal to the first X letters of the full names)
                 monthIndex = locale.monthsShort.findIndex(compareNames);
@@ -194,9 +188,9 @@
         },
         d(date, day) {
             return new Date(date).setDate(parseInt(day, 10));
-        },
+        }
     };
-// format functions for date parts
+    // format functions for date parts
     const formatFns = {
         d(date) {
             return date.getDate();
@@ -230,10 +224,10 @@
         },
         yyyy(date) {
             return padZero(date.getFullYear(), 4);
-        },
+        }
     };
 
-// get month index in normal range (0 - 11) from any number
+    // get month index in normal range (0 - 11) from any number
     function normalizeMonth(monthIndex) {
         return monthIndex > -1 ? monthIndex % 12 : normalizeMonth(monthIndex + 12);
     }
@@ -244,7 +238,7 @@
 
     function parseFormatString(format) {
         if (typeof format !== 'string') {
-            throw new Error("Invalid date format.");
+            throw new Error('Invalid date format.');
         }
         if (format in knownFormats) {
             return knownFormats[format];
@@ -254,31 +248,30 @@
         const separators = format.split(reFormatTokens);
         const parts = format.match(new RegExp(reFormatTokens, 'g'));
         if (separators.length === 0 || !parts) {
-            throw new Error("Invalid date format.");
+            throw new Error('Invalid date format.');
         }
 
         // collect format functions used in the format
-        const partFormatters = parts.map(token => formatFns[token]);
+        const partFormatters = parts.map((token) => formatFns[token]);
 
         // collect parse function keys used in the format
         // iterate over parseFns' keys in order to keep the order of the keys.
         const partParserKeys = Object.keys(parseFns).reduce((keys, key) => {
-            const token = parts.find(part => part[0] !== 'D' && part[0].toLowerCase() === key);
+            const token = parts.find((part) => part[0] !== 'D' && part[0].toLowerCase() === key);
             if (token) {
                 keys.push(key);
             }
             return keys;
         }, []);
 
-        return knownFormats[format] = {
+        return (knownFormats[format] = {
             parser(dateStr, locale) {
                 const dateParts = dateStr.split(reNonDateParts).reduce((dtParts, part, index) => {
                     if (part.length > 0 && parts[index]) {
                         const token = parts[index][0];
                         if (token === 'M') {
                             dtParts.m = part;
-                        }
-                        else if (token !== 'D') {
+                        } else if (token !== 'D') {
                             dtParts[token] = part;
                         }
                     }
@@ -296,12 +289,12 @@
             },
             formatter(date, locale) {
                 let dateStr = partFormatters.reduce((str, fn, index) => {
-                    return str += `${separators[index]}${fn(date, locale)}`;
+                    return (str += `${separators[index]}${fn(date, locale)}`);
                 }, '');
                 // separators' length is always parts' length + 1,
-                return dateStr += lastItemOf(separators);
-            },
-        };
+                return (dateStr += lastItemOf(separators));
+            }
+        });
     }
 
     function parseDate(dateStr, format, locale) {
@@ -336,16 +329,15 @@
         }
 
         return parseFormatString(format).formatter(dateObj, locale);
-    }
+    } // CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/lib/event.js
 
-    ;// CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/lib/event.js
     const listenerRegistry = new WeakMap();
     const {addEventListener, removeEventListener} = EventTarget.prototype;
 
-// Register event listeners to a key object
-// listeners: array of listener definitions;
-//   - each definition must be a flat array of event target and the arguments
-//     used to call addEventListener() on the target
+    // Register event listeners to a key object
+    // listeners: array of listener definitions;
+    //   - each definition must be a flat array of event target and the arguments
+    //     used to call addEventListener() on the target
     function registerListeners(keyObj, listeners) {
         let registered = listenerRegistry.get(keyObj);
         if (!registered) {
@@ -369,8 +361,8 @@
         listenerRegistry.delete(keyObj);
     }
 
-// Event.composedPath() polyfill for Edge
-// based on https://gist.github.com/kleinfreund/e9787d73776c0e3750dcfcdc89f100ec
+    // Event.composedPath() polyfill for Edge
+    // based on https://gist.github.com/kleinfreund/e9787d73776c0e3750dcfcdc89f100ec
     if (!Event.prototype.composedPath) {
         const getComposedPath = (node, path = []) => {
             path.push(node);
@@ -378,11 +370,11 @@
             let parent;
             if (node.parentNode) {
                 parent = node.parentNode;
-            }
-            else if (node.host) { // ShadowRoot
+            } else if (node.host) {
+                // ShadowRoot
                 parent = node.host;
-            }
-            else if (node.defaultView) {  // Document
+            } else if (node.defaultView) {
+                // Document
                 parent = node.defaultView;
             }
             return parent ? getComposedPath(parent, path) : path;
@@ -397,37 +389,60 @@
         const el = path[index];
         if (criteria(el)) {
             return el;
-        }
-        else if (el === currentTarget || !el.parentElement) {
+        } else if (el === currentTarget || !el.parentElement) {
             // stop when reaching currentTarget or <html>
             return;
         }
         return findFromPath(path, criteria, currentTarget, index + 1);
     }
 
-// Search for the actual target of a delegated event
+    // Search for the actual target of a delegated event
     function findElementInEventPath(ev, selector) {
-        const criteria = typeof selector === 'function' ? selector : el => el.matches(selector);
+        const criteria = typeof selector === 'function' ? selector : (el) => el.matches(selector);
         return findFromPath(ev.composedPath(), criteria, ev.currentTarget);
-    }
+    } // CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/i18n/base-locales.js
 
-    ;// CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/i18n/base-locales.js
-// default locales
+    // default locales
     const locales = {
         en: {
-            days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-            daysShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-            daysMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
-            months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-            monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-            today: "Today",
-            clear: "Clear",
-            titleFormat: "MM y"
+            days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            daysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+            daysMin: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+            months: [
+                'January',
+                'February',
+                'March',
+                'April',
+                'May',
+                'June',
+                'July',
+                'August',
+                'September',
+                'October',
+                'November',
+                'December'
+            ],
+            monthsShort: [
+                'Jan',
+                'Feb',
+                'Mar',
+                'Apr',
+                'May',
+                'Jun',
+                'Jul',
+                'Aug',
+                'Sep',
+                'Oct',
+                'Nov',
+                'Dec'
+            ],
+            today: 'Today',
+            clear: 'Clear',
+            titleFormat: 'MM y'
         }
-    };
+    }; // CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/options/defaultOptions.js
 
-    ;// CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/options/defaultOptions.js
-// config options updatable by setOptions() and their default values
+    // config options updatable by setOptions() and their default values
     const defaultOptions = {
         autohide: false,
         beforeShowDay: null,
@@ -448,10 +463,12 @@
         maxNumberOfDates: 1,
         maxView: 3,
         minDate: null,
-        nextArrow: '<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>',
+        nextArrow:
+            '<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>',
         orientation: 'auto',
         pickLevel: 0,
-        prevArrow: '<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd"></path></svg>',
+        prevArrow:
+            '<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd"></path></svg>',
         showDaysOfWeek: true,
         showOnClick: true,
         showOnFocus: true,
@@ -461,20 +478,19 @@
         todayBtnMode: 0,
         todayHighlight: false,
         updateOnBlur: true,
-        weekStart: 0,
+        weekStart: 0
     };
 
     /* harmony default export */
-    const options_defaultOptions = (defaultOptions);
+    const options_defaultOptions = defaultOptions; // CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/lib/dom.js
 
-    ;// CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/lib/dom.js
     const range = document.createRange();
 
     function parseHTML(html) {
         return range.createContextualFragment(html);
     }
 
-// equivalent to jQuery's :visble
+    // equivalent to jQuery's :visble
     function isVisible(el) {
         return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
     }
@@ -498,8 +514,7 @@
             // restore backed-up dispay property
             el.style.display = el.dataset.styleDisplay;
             delete el.dataset.styleDisplay;
-        }
-        else {
+        } else {
             el.style.display = '';
         }
     }
@@ -515,50 +530,43 @@
         emptyChildNodes(el);
         if (newChildNodes instanceof DocumentFragment) {
             el.appendChild(newChildNodes);
-        }
-        else if (typeof newChildNodes === 'string') {
+        } else if (typeof newChildNodes === 'string') {
             el.appendChild(parseHTML(newChildNodes));
-        }
-        else if (typeof newChildNodes.forEach === 'function') {
+        } else if (typeof newChildNodes.forEach === 'function') {
             newChildNodes.forEach((node) => {
                 el.appendChild(node);
             });
         }
-    }
-
-    ;// CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/options/processOptions.js
-
+    } // CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/options/processOptions.js
 
     const {
         language: defaultLang,
         format: defaultFormat,
-        weekStart: defaultWeekStart,
+        weekStart: defaultWeekStart
     } = options_defaultOptions;
 
-// Reducer function to filter out invalid day-of-week from the input
+    // Reducer function to filter out invalid day-of-week from the input
     function sanitizeDOW(dow, day) {
-        return dow.length < 6 && day >= 0 && day < 7
-            ? pushUnique(dow, day)
-            : dow;
+        return dow.length < 6 && day >= 0 && day < 7 ? pushUnique(dow, day) : dow;
     }
 
     function calcEndOfWeek(startOfWeek) {
         return (startOfWeek + 6) % 7;
     }
 
-// validate input date. if invalid, fallback to the original value
+    // validate input date. if invalid, fallback to the original value
     function validateDate(value, format, locale, origValue) {
         const date = parseDate(value, format, locale);
         return date !== undefined ? date : origValue;
     }
 
-// Validate viewId. if invalid, fallback to the original value
+    // Validate viewId. if invalid, fallback to the original value
     function validateViewId(value, origValue, max = 3) {
         const viewId = parseInt(value, 10);
         return viewId >= 0 && viewId <= max ? viewId : origValue;
     }
 
-// Create Datepicker configuration to set
+    // Create Datepicker configuration to set
     function processOptions(options, datepicker) {
         const inOpts = Object.assign({}, options);
         const config = {};
@@ -572,7 +580,7 @@
             minDate,
             pickLevel,
             startView,
-            weekStart,
+            weekStart
         } = datepicker.config || {};
 
         if (inOpts.language) {
@@ -580,8 +588,7 @@
             if (inOpts.language !== language) {
                 if (locales[inOpts.language]) {
                     lang = inOpts.language;
-                }
-                else {
+                } else {
                     // Check if langauge + region tag can fallback to the one without
                     // region (e.g. fr-CA → fr)
                     lang = inOpts.language.split('-')[0];
@@ -597,10 +604,13 @@
                 // update locale as well when updating language
                 const origLocale = locale || locales[defaultLang];
                 // use default language's properties for the fallback
-                locale = Object.assign({
-                    format: defaultFormat,
-                    weekStart: defaultWeekStart
-                }, locales[defaultLang]);
+                locale = Object.assign(
+                    {
+                        format: defaultFormat,
+                        weekStart: defaultWeekStart
+                    },
+                    locales[defaultLang]
+                );
                 if (language !== defaultLang) {
                     Object.assign(locale, locales[language]);
                 }
@@ -634,22 +644,23 @@
         let minDt = minDate;
         let maxDt = maxDate;
         if (inOpts.minDate !== undefined) {
-            minDt = inOpts.minDate === null
-                ? dateValue(0, 0, 1)  // set 0000-01-01 to prevent negative values for year
-                : validateDate(inOpts.minDate, format, locale, minDt);
+            minDt =
+                inOpts.minDate === null
+                    ? dateValue(0, 0, 1) // set 0000-01-01 to prevent negative values for year
+                    : validateDate(inOpts.minDate, format, locale, minDt);
             delete inOpts.minDate;
         }
         if (inOpts.maxDate !== undefined) {
-            maxDt = inOpts.maxDate === null
-                ? undefined
-                : validateDate(inOpts.maxDate, format, locale, maxDt);
+            maxDt =
+                inOpts.maxDate === null
+                    ? undefined
+                    : validateDate(inOpts.maxDate, format, locale, maxDt);
             delete inOpts.maxDate;
         }
         if (maxDt < minDt) {
             minDate = config.minDate = maxDt;
             maxDate = config.maxDate = minDt;
-        }
-        else {
+        } else {
             if (minDate !== minDt) {
                 minDate = config.minDate = minDt;
             }
@@ -734,8 +745,7 @@
         // ensure pick level <= start view <= max view
         if (newStartView < pickLevel) {
             newStartView = pickLevel;
-        }
-        else if (newStartView > maxView) {
+        } else if (newStartView > maxView) {
             newStartView = maxView;
         }
         if (newStartView !== startView) {
@@ -760,14 +770,15 @@
 
         //*** misc ***//
         if (inOpts.disableTouchKeyboard !== undefined) {
-            config.disableTouchKeyboard = 'ontouchstart' in document && !!inOpts.disableTouchKeyboard;
+            config.disableTouchKeyboard =
+                'ontouchstart' in document && !!inOpts.disableTouchKeyboard;
             delete inOpts.disableTouchKeyboard;
         }
         if (inOpts.orientation) {
             const orientation = inOpts.orientation.toLowerCase().split(/\s+/g);
             config.orientation = {
-                x: orientation.find(x => (x === 'left' || x === 'right')) || 'auto',
-                y: orientation.find(y => (y === 'top' || y === 'bottom')) || 'auto',
+                x: orientation.find((x) => x === 'left' || x === 'right') || 'auto',
+                y: orientation.find((y) => y === 'top' || y === 'bottom') || 'auto'
             };
             delete inOpts.orientation;
         }
@@ -788,10 +799,7 @@
         });
 
         return config;
-    }
-
-    ;// CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/picker/templates/pickerTemplate.js
-
+    } // CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/picker/templates/pickerTemplate.js
 
     const pickerTemplate = optimizeTemplateHTML(`<div class="datepicker hidden">
   <div class="datepicker-picker inline-block rounded-lg bg-white dark:bg-gray-700 shadow-lg p-4">
@@ -814,40 +822,37 @@
 </div>`);
 
     /* harmony default export */
-    const templates_pickerTemplate = (pickerTemplate);
-
-    ;// CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/picker/templates/daysTemplate.js
-
+    const templates_pickerTemplate = pickerTemplate; // CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/picker/templates/daysTemplate.js
 
     const daysTemplate = optimizeTemplateHTML(`<div class="days">
-  <div class="days-of-week grid grid-cols-7 mb-1">${createTagRepeat('span', 7, {class: 'dow block flex-1 leading-9 border-0 rounded-lg cursor-default text-center text-gray-900 font-semibold text-sm'})}</div>
-  <div class="datepicker-grid w-64 grid grid-cols-7">${createTagRepeat('span', 42, {class: 'block flex-1 leading-9 border-0 rounded-lg cursor-default text-center text-gray-900 font-semibold text-sm h-6 leading-6 text-sm font-medium text-gray-500 dark:text-gray-400'})}</div>
+  <div class="days-of-week grid grid-cols-7 mb-1">${createTagRepeat('span', 7, {
+        class: 'dow block flex-1 leading-9 border-0 rounded-lg cursor-default text-center text-gray-900 font-semibold text-sm'
+    })}</div>
+  <div class="datepicker-grid w-64 grid grid-cols-7">${createTagRepeat('span', 42, {
+        class: 'block flex-1 leading-9 border-0 rounded-lg cursor-default text-center text-gray-900 font-semibold text-sm h-6 leading-6 text-sm font-medium text-gray-500 dark:text-gray-400'
+    })}</div>
 </div>`);
 
     /* harmony default export */
-    const templates_daysTemplate = (daysTemplate);
-
-    ;// CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/picker/templates/calendarWeeksTemplate.js
-
+    const templates_daysTemplate = daysTemplate; // CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/picker/templates/calendarWeeksTemplate.js
 
     const calendarWeeksTemplate = optimizeTemplateHTML(`<div class="calendar-weeks">
   <div class="days-of-week flex"><span class="dow h-6 leading-6 text-sm font-medium text-gray-500 dark:text-gray-400"></span></div>
-  <div class="weeks">${createTagRepeat('span', 6, {class: 'week block flex-1 leading-9 border-0 rounded-lg cursor-default text-center text-gray-900 font-semibold text-sm'})}</div>
+  <div class="weeks">${createTagRepeat('span', 6, {
+        class: 'week block flex-1 leading-9 border-0 rounded-lg cursor-default text-center text-gray-900 font-semibold text-sm'
+    })}</div>
 </div>`);
 
     /* harmony default export */
-    const templates_calendarWeeksTemplate = (calendarWeeksTemplate);
+    const templates_calendarWeeksTemplate = calendarWeeksTemplate; // CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/picker/views/View.js
 
-    ;// CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/picker/views/View.js
-
-
-// Base class of the view classes
+    // Base class of the view classes
     class View {
         constructor(picker, config) {
             Object.assign(this, config, {
                 picker,
                 element: parseHTML(`<div class="datepicker-view flex"></div>`).firstChild,
-                selected: [],
+                selected: []
             });
             this.init(this.picker.datepicker.config);
         }
@@ -892,17 +897,14 @@
                 }
             }
         }
-    }
-
-    ;// CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/picker/views/DaysView.js
-
+    } // CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/picker/views/DaysView.js
 
     class DaysView extends View {
         constructor(picker) {
             super(picker, {
                 id: 0,
                 name: 'days',
-                cellClass: 'day',
+                cellClass: 'day'
             });
         }
 
@@ -944,15 +946,14 @@
                 updateDOW = true;
             }
             if (options.locale) {
-                const locale = this.locale = options.locale;
+                const locale = (this.locale = options.locale);
                 this.dayNames = locale.daysMin;
                 this.switchLabelFormat = locale.titleFormat;
                 updateDOW = true;
             }
             if (options.beforeShowDay !== undefined) {
-                this.beforeShow = typeof options.beforeShowDay === 'function'
-                    ? options.beforeShowDay
-                    : undefined;
+                this.beforeShow =
+                    typeof options.beforeShowDay === 'function' ? options.beforeShowDay : undefined;
             }
 
             if (options.calendarWeeks !== undefined) {
@@ -961,11 +962,10 @@
                     this.calendarWeeks = {
                         element: weeksElem,
                         dow: weeksElem.firstChild,
-                        weeks: weeksElem.lastChild,
+                        weeks: weeksElem.lastChild
                     };
                     this.element.insertBefore(weeksElem, this.element.firstChild);
-                }
-                else if (this.calendarWeeks && !options.calendarWeeks) {
+                } else if (this.calendarWeeks && !options.calendarWeeks) {
                     this.element.removeChild(this.calendarWeeks.element);
                     this.calendarWeeks = null;
                 }
@@ -976,8 +976,7 @@
                     if (this.calendarWeeks) {
                         showElement(this.calendarWeeks.dow);
                     }
-                }
-                else {
+                } else {
                     hideElement(this.dow);
                     if (this.calendarWeeks) {
                         hideElement(this.calendarWeeks.dow);
@@ -990,7 +989,9 @@
                 Array.from(this.dow.children).forEach((el, index) => {
                     const dow = (this.weekStart + index) % 7;
                     el.textContent = this.dayNames[dow];
-                    el.className = this.daysOfWeekDisabled.includes(dow) ? 'dow disabled text-center h-6 leading-6 text-sm font-medium text-gray-500 dark:text-gray-400 cursor-not-allowed' : 'dow text-center h-6 leading-6 text-sm font-medium text-gray-500 dark:text-gray-400';
+                    el.className = this.daysOfWeekDisabled.includes(dow)
+                        ? 'dow disabled text-center h-6 leading-6 text-sm font-medium text-gray-500 dark:text-gray-400 cursor-not-allowed'
+                        : 'dow text-center h-6 leading-6 text-sm font-medium text-gray-500 dark:text-gray-400';
                 });
             }
         }
@@ -1050,14 +1051,17 @@
 
                 if (current < this.first) {
                     classList.add('prev', 'text-gray-500', 'dark:text-white');
-                }
-                else if (current > this.last) {
+                } else if (current > this.last) {
                     classList.add('next', 'text-gray-500', 'dark:text-white');
                 }
                 if (this.today === current) {
                     classList.add('today', 'bg-gray-100', 'dark:bg-gray-600', 'dark:bg-gray-600');
                 }
-                if (current < this.minDate || current > this.maxDate || this.disabled.includes(current)) {
+                if (
+                    current < this.minDate ||
+                    current > this.maxDate ||
+                    this.disabled.includes(current)
+                ) {
                     classList.add('disabled', 'cursor-not-allowed');
                 }
                 if (this.daysOfWeekDisabled.includes(day)) {
@@ -1071,20 +1075,42 @@
                     const [rangeStart, rangeEnd] = this.range;
                     if (current > rangeStart && current < rangeEnd) {
                         classList.add('range', 'bg-gray-200', 'dark:bg-gray-600');
-                        classList.remove('rounded-lg', 'rounded-l-lg', 'rounded-r-lg')
+                        classList.remove('rounded-lg', 'rounded-l-lg', 'rounded-r-lg');
                     }
                     if (current === rangeStart) {
-                        classList.add('range-start', 'bg-gray-100', 'dark:bg-gray-600', 'rounded-l-lg');
+                        classList.add(
+                            'range-start',
+                            'bg-gray-100',
+                            'dark:bg-gray-600',
+                            'rounded-l-lg'
+                        );
                         classList.remove('rounded-lg', 'rounded-r-lg');
                     }
                     if (current === rangeEnd) {
-                        classList.add('range-end', 'bg-gray-100', 'dark:bg-gray-600', 'rounded-r-lg');
+                        classList.add(
+                            'range-end',
+                            'bg-gray-100',
+                            'dark:bg-gray-600',
+                            'rounded-r-lg'
+                        );
                         classList.remove('rounded-lg', 'rounded-l-lg');
                     }
                 }
                 if (this.selected.includes(current)) {
-                    classList.add('selected', 'bg-blue-700', 'text-white', 'dark:bg-blue-600', 'dark:text-white');
-                    classList.remove('text-gray-900', 'text-gray-500', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600');
+                    classList.add(
+                        'selected',
+                        'bg-blue-700',
+                        'text-white',
+                        'dark:bg-blue-600',
+                        'dark:text-white'
+                    );
+                    classList.remove(
+                        'text-gray-900',
+                        'text-gray-500',
+                        'hover:bg-gray-100',
+                        'dark:text-white',
+                        'dark:hover:bg-gray-600'
+                    );
                 }
                 if (current === this.focused) {
                     classList.add('focused');
@@ -1102,7 +1128,19 @@
             this.grid
                 .querySelectorAll('.range, .range-start, .range-end, .selected, .focused')
                 .forEach((el) => {
-                    el.classList.remove('range', 'range-start', 'range-end', 'selected', 'bg-blue-700', 'text-white', 'dark:bg-blue-600', 'dark:text-white', 'focused', 'bg-gray-100', 'dark:bg-gray-600');
+                    el.classList.remove(
+                        'range',
+                        'range-start',
+                        'range-end',
+                        'selected',
+                        'bg-blue-700',
+                        'text-white',
+                        'dark:bg-blue-600',
+                        'dark:text-white',
+                        'focused',
+                        'bg-gray-100',
+                        'dark:bg-gray-600'
+                    );
                     el.classList.add('text-gray-900', 'rounded-lg', 'dark:text-white');
                 });
             Array.from(this.grid.children).forEach((el) => {
@@ -1121,8 +1159,19 @@
                     classList.remove('rounded-lg', 'rounded-l-lg');
                 }
                 if (this.selected.includes(current)) {
-                    classList.add('selected', 'bg-blue-700', 'text-white', 'dark:bg-blue-600', 'dark:text-white');
-                    classList.remove('text-gray-900', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600');
+                    classList.add(
+                        'selected',
+                        'bg-blue-700',
+                        'text-white',
+                        'dark:bg-blue-600',
+                        'dark:text-white'
+                    );
+                    classList.remove(
+                        'text-gray-900',
+                        'hover:bg-gray-100',
+                        'dark:text-white',
+                        'dark:hover:bg-gray-600'
+                    );
                 }
                 if (current === this.focused) {
                     classList.add('focused', 'bg-gray-100', 'dark:bg-gray-600');
@@ -1138,10 +1187,7 @@
             });
             this.grid.children[index].classList.add('focused', 'bg-gray-100', 'dark:bg-gray-600');
         }
-    }
-
-    ;// CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/picker/views/MonthsView.js
-
+    } // CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/picker/views/MonthsView.js
 
     function computeMonthRange(range, thisYear) {
         if (!range || !range[0] || !range[1]) {
@@ -1152,10 +1198,7 @@
         if (startY > thisYear || endY < thisYear) {
             return;
         }
-        return [
-            startY === thisYear ? startM : -1,
-            endY === thisYear ? endM : 12,
-        ];
+        return [startY === thisYear ? startM : -1, endY === thisYear ? endM : 12];
     }
 
     class MonthsView extends View {
@@ -1163,15 +1206,23 @@
             super(picker, {
                 id: 1,
                 name: 'months',
-                cellClass: 'month',
+                cellClass: 'month'
             });
         }
 
         init(options, onConstruction = true) {
             if (onConstruction) {
                 this.grid = this.element;
-                this.element.classList.add('months', 'datepicker-grid', 'w-64', 'grid', 'grid-cols-4');
-                this.grid.appendChild(parseHTML(createTagRepeat('span', 12, {'data-month': ix => ix})));
+                this.element.classList.add(
+                    'months',
+                    'datepicker-grid',
+                    'w-64',
+                    'grid',
+                    'grid-cols-4'
+                );
+                this.grid.appendChild(
+                    parseHTML(createTagRepeat('span', 12, {'data-month': (ix) => ix}))
+                );
             }
             super.init(options);
         }
@@ -1183,8 +1234,7 @@
             if (hasProperty(options, 'minDate')) {
                 if (options.minDate === undefined) {
                     this.minYear = this.minMonth = this.minDate = undefined;
-                }
-                else {
+                } else {
                     const minDateObj = new Date(options.minDate);
                     this.minYear = minDateObj.getFullYear();
                     this.minMonth = minDateObj.getMonth();
@@ -1194,8 +1244,7 @@
             if (hasProperty(options, 'maxDate')) {
                 if (options.maxDate === undefined) {
                     this.maxYear = this.maxMonth = this.maxDate = undefined;
-                }
-                else {
+                } else {
                     const maxDateObj = new Date(options.maxDate);
                     this.maxYear = maxDateObj.getFullYear();
                     this.maxMonth = maxDateObj.getMonth();
@@ -1203,9 +1252,10 @@
                 }
             }
             if (options.beforeShowMonth !== undefined) {
-                this.beforeShow = typeof options.beforeShowMonth === 'function'
-                    ? options.beforeShowMonth
-                    : undefined;
+                this.beforeShow =
+                    typeof options.beforeShowMonth === 'function'
+                        ? options.beforeShowMonth
+                        : undefined;
             }
         }
 
@@ -1225,14 +1275,13 @@
                 const month = date.getMonth();
                 if (selected[year] === undefined) {
                     selected[year] = [month];
-                }
-                else {
+                } else {
                     pushUnique(selected[year], month);
                 }
                 return selected;
             }, {});
             if (rangepicker && rangepicker.dates) {
-                this.range = rangepicker.dates.map(timeValue => {
+                this.range = rangepicker.dates.map((timeValue) => {
                     const date = new Date(timeValue);
                     return isNaN(date) ? undefined : [date.getFullYear(), date.getMonth()];
                 });
@@ -1268,9 +1317,9 @@
                 el.textContent = this.monthNames[index];
 
                 if (
-                    yrOutOfRange
-                    || isMinYear && index < this.minMonth
-                    || isMaxYear && index > this.maxMonth
+                    yrOutOfRange ||
+                    (isMinYear && index < this.minMonth) ||
+                    (isMaxYear && index > this.maxMonth)
                 ) {
                     classList.add('disabled');
                 }
@@ -1287,8 +1336,19 @@
                     }
                 }
                 if (selected.includes(index)) {
-                    classList.add('selected', 'bg-blue-700', 'text-white', 'dark:bg-blue-600', 'dark:text-white');
-                    classList.remove('text-gray-900', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600');
+                    classList.add(
+                        'selected',
+                        'bg-blue-700',
+                        'text-white',
+                        'dark:bg-blue-600',
+                        'dark:text-white'
+                    );
+                    classList.remove(
+                        'text-gray-900',
+                        'hover:bg-gray-100',
+                        'dark:text-white',
+                        'dark:hover:bg-gray-600'
+                    );
                 }
                 if (index === this.focused) {
                     classList.add('focused', 'bg-gray-100', 'dark:bg-gray-600');
@@ -1307,8 +1367,25 @@
             this.grid
                 .querySelectorAll('.range, .range-start, .range-end, .selected, .focused')
                 .forEach((el) => {
-                    el.classList.remove('range', 'range-start', 'range-end', 'selected', 'bg-blue-700', 'dark:bg-blue-600', 'dark:text-white', 'text-white', 'focused', 'bg-gray-100', 'dark:bg-gray-600');
-                    el.classList.add('text-gray-900', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600');
+                    el.classList.remove(
+                        'range',
+                        'range-start',
+                        'range-end',
+                        'selected',
+                        'bg-blue-700',
+                        'dark:bg-blue-600',
+                        'dark:text-white',
+                        'text-white',
+                        'focused',
+                        'bg-gray-100',
+                        'dark:bg-gray-600'
+                    );
+                    el.classList.add(
+                        'text-gray-900',
+                        'hover:bg-gray-100',
+                        'dark:text-white',
+                        'dark:hover:bg-gray-600'
+                    );
                 });
             Array.from(this.grid.children).forEach((el, index) => {
                 const classList = el.classList;
@@ -1322,8 +1399,19 @@
                     classList.add('range-end');
                 }
                 if (selected.includes(index)) {
-                    classList.add('selected', 'bg-blue-700', 'text-white', 'dark:bg-blue-600', 'dark:text-white');
-                    classList.remove('text-gray-900', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600');
+                    classList.add(
+                        'selected',
+                        'bg-blue-700',
+                        'text-white',
+                        'dark:bg-blue-600',
+                        'dark:text-white'
+                    );
+                    classList.remove(
+                        'text-gray-900',
+                        'hover:bg-gray-100',
+                        'dark:text-white',
+                        'dark:hover:bg-gray-600'
+                    );
                 }
                 if (index === this.focused) {
                     classList.add('focused', 'bg-gray-100', 'dark:bg-gray-600');
@@ -1336,17 +1424,18 @@
             this.grid.querySelectorAll('.focused').forEach((el) => {
                 el.classList.remove('focused', 'bg-gray-100'), 'dark:bg-gray-600';
             });
-            this.grid.children[this.focused].classList.add('focused', 'bg-gray-100', 'dark:bg-gray-600');
+            this.grid.children[this.focused].classList.add(
+                'focused',
+                'bg-gray-100',
+                'dark:bg-gray-600'
+            );
         }
-    }
-    ;// CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/picker/views/YearsView.js
-
-
+    } // CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/picker/views/YearsView.js
     function toTitleCase(word) {
-        return [...word].reduce((str, ch, ix) => str += ix ? ch : ch.toUpperCase(), '');
+        return [...word].reduce((str, ch, ix) => (str += ix ? ch : ch.toUpperCase()), '');
     }
 
-// Class representing the years and decades view elements
+    // Class representing the years and decades view elements
     class YearsView extends View {
         constructor(picker, config) {
             super(picker, config);
@@ -1357,7 +1446,13 @@
                 this.navStep = this.step * 10;
                 this.beforeShowOption = `beforeShow${toTitleCase(this.cellClass)}`;
                 this.grid = this.element;
-                this.element.classList.add(this.name, 'datepicker-grid', 'w-64', 'grid', 'grid-cols-4');
+                this.element.classList.add(
+                    this.name,
+                    'datepicker-grid',
+                    'w-64',
+                    'grid',
+                    'grid-cols-4'
+                );
                 this.grid.appendChild(parseHTML(createTagRepeat('span', 12)));
             }
             super.init(options);
@@ -1367,8 +1462,7 @@
             if (hasProperty(options, 'minDate')) {
                 if (options.minDate === undefined) {
                     this.minYear = this.minDate = undefined;
-                }
-                else {
+                } else {
                     this.minYear = startOfYearPeriod(options.minDate, this.step);
                     this.minDate = dateValue(this.minYear, 0, 1);
                 }
@@ -1376,8 +1470,7 @@
             if (hasProperty(options, 'maxDate')) {
                 if (options.maxDate === undefined) {
                     this.maxYear = this.maxDate = undefined;
-                }
-                else {
+                } else {
                     this.maxYear = startOfYearPeriod(options.maxDate, this.step);
                     this.maxDate = dateValue(this.maxYear, 11, 31);
                 }
@@ -1407,7 +1500,7 @@
                 return pushUnique(years, startOfYearPeriod(timeValue, this.step));
             }, []);
             if (rangepicker && rangepicker.dates) {
-                this.range = rangepicker.dates.map(timeValue => {
+                this.range = rangepicker.dates.map((timeValue) => {
                     if (timeValue !== undefined) {
                         return startOfYearPeriod(timeValue, this.step);
                     }
@@ -1427,7 +1520,7 @@
 
             Array.from(this.grid.children).forEach((el, index) => {
                 const classList = el.classList;
-                const current = this.start + (index * this.step);
+                const current = this.start + index * this.step;
                 const date = dateValue(current, 0, 1);
 
                 el.className = `datepicker-cell hover:bg-gray-100 dark:hover:bg-gray-600 block flex-1 leading-9 border-0 rounded-lg cursor-pointer text-center text-gray-900 dark:text-white font-semibold text-sm ${this.cellClass}`;
@@ -1438,8 +1531,7 @@
 
                 if (index === 0) {
                     classList.add('prev');
-                }
-                else if (index === 11) {
+                } else if (index === 11) {
                     classList.add('next');
                 }
                 if (current < this.minYear || current > this.maxYear) {
@@ -1458,8 +1550,19 @@
                     }
                 }
                 if (this.selected.includes(current)) {
-                    classList.add('selected', 'bg-blue-700', 'text-white', 'dark:bg-blue-600', 'dark:text-white');
-                    classList.remove('text-gray-900', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600');
+                    classList.add(
+                        'selected',
+                        'bg-blue-700',
+                        'text-white',
+                        'dark:bg-blue-600',
+                        'dark:text-white'
+                    );
+                    classList.remove(
+                        'text-gray-900',
+                        'hover:bg-gray-100',
+                        'dark:text-white',
+                        'dark:hover:bg-gray-600'
+                    );
                 }
                 if (current === this.focused) {
                     classList.add('focused', 'bg-gray-100', 'dark:bg-gray-600');
@@ -1477,7 +1580,19 @@
             this.grid
                 .querySelectorAll('.range, .range-start, .range-end, .selected, .focused')
                 .forEach((el) => {
-                    el.classList.remove('range', 'range-start', 'range-end', 'selected', 'bg-blue-700', 'text-white', 'dark:bg-blue-600', 'dark:text-white', 'focused', 'bg-gray-100', 'dark:bg-gray-600');
+                    el.classList.remove(
+                        'range',
+                        'range-start',
+                        'range-end',
+                        'selected',
+                        'bg-blue-700',
+                        'text-white',
+                        'dark:bg-blue-600',
+                        'dark:text-white',
+                        'focused',
+                        'bg-gray-100',
+                        'dark:bg-gray-600'
+                    );
                 });
             Array.from(this.grid.children).forEach((el) => {
                 const current = Number(el.textContent);
@@ -1492,8 +1607,19 @@
                     classList.add('range-end');
                 }
                 if (this.selected.includes(current)) {
-                    classList.add('selected', 'bg-blue-700', 'text-white', 'dark:bg-blue-600', 'dark:text-white');
-                    classList.remove('text-gray-900', 'hover:bg-gray-100', 'dark:text-white', 'dark:hover:bg-gray-600');
+                    classList.add(
+                        'selected',
+                        'bg-blue-700',
+                        'text-white',
+                        'dark:bg-blue-600',
+                        'dark:text-white'
+                    );
+                    classList.remove(
+                        'text-gray-900',
+                        'hover:bg-gray-100',
+                        'dark:text-white',
+                        'dark:hover:bg-gray-600'
+                    );
                 }
                 if (current === this.focused) {
                     classList.add('focused', 'bg-gray-100', 'dark:bg-gray-600');
@@ -1509,22 +1635,19 @@
             });
             this.grid.children[index].classList.add('focused', 'bg-gray-100', 'dark:bg-gray-600');
         }
-    }
-
-    ;// CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/events/functions.js
-
+    } // CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/events/functions.js
 
     function triggerDatepickerEvent(datepicker, type) {
         const detail = {
             date: datepicker.getDate(),
             viewDate: new Date(datepicker.picker.viewDate),
             viewId: datepicker.picker.currentView.id,
-            datepicker,
+            datepicker
         };
         datepicker.element.dispatchEvent(new CustomEvent(type, {detail}));
     }
 
-// direction: -1 (to previous), 1 (to next)
+    // direction: -1 (to previous), 1 (to next)
     function goToPrevOrNext(datepicker, direction) {
         const {minDate, maxDate} = datepicker.config;
         const {currentView, viewDate} = datepicker.picker;
@@ -1554,25 +1677,25 @@
     function unfocus(datepicker) {
         if (datepicker.config.updateOnBlur) {
             datepicker.update({autohide: true});
-        }
-        else {
+        } else {
             datepicker.refresh('input');
             datepicker.hide();
         }
-    }
-
-    ;// CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/events/pickerListeners.js
-
+    } // CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/events/pickerListeners.js
 
     function goToSelectedMonthOrYear(datepicker, selection) {
         const picker = datepicker.picker;
         const viewDate = new Date(picker.viewDate);
         const viewId = picker.currentView.id;
-        const newDate = viewId === 1
-            ? addMonths(viewDate, selection - viewDate.getMonth())
-            : addYears(viewDate, selection - viewDate.getFullYear());
+        const newDate =
+            viewId === 1
+                ? addMonths(viewDate, selection - viewDate.getMonth())
+                : addYears(viewDate, selection - viewDate.getFullYear());
 
-        picker.changeFocus(newDate).changeView(viewId - 1).render();
+        picker
+            .changeFocus(newDate)
+            .changeView(viewId - 1)
+            .render();
     }
 
     function onClickTodayBtn(datepicker) {
@@ -1608,7 +1731,7 @@
         goToPrevOrNext(datepicker, 1);
     }
 
-// For the picker's main block to delegete the events from `datepicker-cell`s
+    // For the picker's main block to delegete the events from `datepicker-cell`s
     function onClickView(datepicker, ev) {
         const target = findElementInEventPath(ev, '.datepicker-cell');
         if (!target || target.classList.contains('disabled')) {
@@ -1618,11 +1741,9 @@
         const {id, isMinView} = datepicker.picker.currentView;
         if (isMinView) {
             datepicker.setDate(Number(target.dataset.date));
-        }
-        else if (id === 1) {
+        } else if (id === 1) {
             goToSelectedMonthOrYear(datepicker, Number(target.dataset.month));
-        }
-        else {
+        } else {
             goToSelectedMonthOrYear(datepicker, Number(target.dataset.year));
         }
     }
@@ -1631,18 +1752,14 @@
         if (!datepicker.inline && !datepicker.config.disableTouchKeyboard) {
             datepicker.inputField.focus();
         }
-    }
-
-    ;// CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/picker/Picker.js
-
+    } // CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/picker/Picker.js
 
     function processPickerOptions(picker, options) {
         if (options.title !== undefined) {
             if (options.title) {
                 picker.controls.title.textContent = options.title;
                 showElement(picker.controls.title);
-            }
-            else {
+            } else {
                 picker.controls.title.textContent = '';
                 hideElement(picker.controls.title);
             }
@@ -1668,8 +1785,7 @@
         if (options.todayBtn !== undefined) {
             if (options.todayBtn) {
                 showElement(picker.controls.todayBtn);
-            }
-            else {
+            } else {
                 hideElement(picker.controls.todayBtn);
             }
         }
@@ -1680,23 +1796,22 @@
         if (options.clearBtn !== undefined) {
             if (options.clearBtn) {
                 showElement(picker.controls.clearBtn);
-            }
-            else {
+            } else {
                 hideElement(picker.controls.clearBtn);
             }
         }
     }
 
-// Compute view date to reset, which will be...
-// - the last item of the selected dates or defaultViewDate if no selection
-// - limitted to minDate or maxDate if it exceeds the range
+    // Compute view date to reset, which will be...
+    // - the last item of the selected dates or defaultViewDate if no selection
+    // - limitted to minDate or maxDate if it exceeds the range
     function computeResetViewDate(datepicker) {
         const {dates, config} = datepicker;
         const viewDate = dates.length > 0 ? lastItemOf(dates) : config.defaultViewDate;
         return limitToRange(viewDate, config.minDate, config.maxDate);
     }
 
-// Change current view's view date
+    // Change current view's view date
     function setViewDate(picker, newDate) {
         const oldViewDate = new Date(picker.viewDate);
         const newViewDate = new Date(newDate);
@@ -1728,13 +1843,16 @@
         return window.getComputedStyle(el).direction;
     }
 
-// Class representing the picker UI
+    // Class representing the picker UI
     class Picker {
         constructor(datepicker) {
             this.datepicker = datepicker;
 
-            const template = templates_pickerTemplate.replace(/%buttonClass%/g, datepicker.config.buttonClass);
-            const element = this.element = parseHTML(template).firstChild;
+            const template = templates_pickerTemplate.replace(
+                /%buttonClass%/g,
+                datepicker.config.buttonClass
+            );
+            const element = (this.element = parseHTML(template).firstChild);
             const [header, main, footer] = element.firstChild.children;
             const title = header.firstElementChild;
             const [prevBtn, viewSwitch, nextBtn] = header.lastElementChild.children;
@@ -1745,14 +1863,16 @@
                 viewSwitch,
                 nextBtn,
                 todayBtn,
-                clearBtn,
+                clearBtn
             };
             this.main = main;
             this.controls = controls;
 
             const elementClass = datepicker.inline ? 'inline' : 'dropdown';
             element.classList.add(`datepicker-${elementClass}`);
-            elementClass === 'dropdown' ? element.classList.add('dropdown', 'absolute', 'top-0', 'left-0', 'z-20', 'pt-2') : null;
+            elementClass === 'dropdown'
+                ? element.classList.add('dropdown', 'absolute', 'top-0', 'left-0', 'z-20', 'pt-2')
+                : null;
 
             processPickerOptions(this, datepicker.config);
             this.viewDate = computeResetViewDate(datepicker);
@@ -1765,7 +1885,7 @@
                 [controls.prevBtn, 'click', onClickPrevBtn.bind(null, datepicker)],
                 [controls.nextBtn, 'click', onClickNextBtn.bind(null, datepicker)],
                 [controls.todayBtn, 'click', onClickTodayBtn.bind(null, datepicker)],
-                [controls.clearBtn, 'click', onClickClearBtn.bind(null, datepicker)],
+                [controls.clearBtn, 'click', onClickClearBtn.bind(null, datepicker)]
             ]);
 
             // set up views
@@ -1773,7 +1893,7 @@
                 new DaysView(this),
                 new MonthsView(this),
                 new YearsView(this, {id: 2, name: 'years', cellClass: 'year', step: 1}),
-                new YearsView(this, {id: 3, name: 'decades', cellClass: 'decade', step: 10}),
+                new YearsView(this, {id: 3, name: 'decades', cellClass: 'decade', step: 10})
             ];
             this.currentView = this.views[datepicker.config.startView];
 
@@ -1808,8 +1928,7 @@
                 const inputDirection = getTextDirection(datepicker.inputField);
                 if (inputDirection !== getTextDirection(datepicker.config.container)) {
                     this.element.dir = inputDirection;
-                }
-                else if (this.element.dir) {
+                } else if (this.element.dir) {
                     this.element.removeAttribute('dir');
                 }
 
@@ -1836,14 +1955,12 @@
             const {classList, style} = this.element;
             const {config, inputField} = this.datepicker;
             const container = config.container;
-            const {
-                width: calendarWidth,
-                height: calendarHeight,
-            } = this.element.getBoundingClientRect();
+            const {width: calendarWidth, height: calendarHeight} =
+                this.element.getBoundingClientRect();
             const {
                 left: containerLeft,
                 top: containerTop,
-                width: containerWidth,
+                width: containerWidth
             } = container.getBoundingClientRect();
             const {
                 left: inputLeft,
@@ -1860,8 +1977,7 @@
                 scrollTop = window.scrollY;
                 left = inputLeft + window.scrollX;
                 top = inputTop + scrollTop;
-            }
-            else {
+            } else {
                 scrollTop = container.scrollTop;
                 left = inputLeft - containerLeft;
                 top = inputTop - containerTop + scrollTop;
@@ -1872,12 +1988,10 @@
                     // align to the left and move into visible area if input's left edge < window's
                     orientX = 'left';
                     left = 10;
-                }
-                else if (left + calendarWidth > containerWidth) {
+                } else if (left + calendarWidth > containerWidth) {
                     // align to the right if canlendar's right edge > container's
                     orientX = 'right';
-                }
-                else {
+                } else {
                     orientX = getTextDirection(inputField) === 'rtl' ? 'right' : 'left';
                 }
             }
@@ -1890,8 +2004,7 @@
             }
             if (orientY === 'top') {
                 top -= calendarHeight;
-            }
-            else {
+            } else {
                 top += inputHeight;
             }
 
@@ -1958,18 +2071,15 @@
 
             this.currentView[renderMethod]();
         }
-    }
+    } // CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/events/inputFieldListeners.js
 
-    ;// CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/events/inputFieldListeners.js
-
-
-// Find the closest date that doesn't meet the condition for unavailable date
-// Returns undefined if no available date is found
-// addFn: function to calculate the next date
-//   - args: time value, amount
-// increase: amount to pass to addFn
-// testFn: function to test the unavailablity of the date
-//   - args: time value; retun: true if unavailable
+    // Find the closest date that doesn't meet the condition for unavailable date
+    // Returns undefined if no available date is found
+    // addFn: function to calculate the next date
+    //   - args: time value, amount
+    // increase: amount to pass to addFn
+    // testFn: function to test the unavailablity of the date
+    //   - args: time value; retun: true if unavailable
     function findNextAvailableOne(date, addFn, increase, testFn, min, max) {
         if (!isInRange(date, min, max)) {
             return;
@@ -1981,8 +2091,8 @@
         return date;
     }
 
-// direction: -1 (left/up), 1 (right/down)
-// vertical: true for up/down, false for left/right
+    // direction: -1 (left/up), 1 (right/down)
+    // vertical: true for up/down, false for left/right
     function moveByArrowKey(datepicker, ev, direction, vertical) {
         const picker = datepicker.picker;
         const currentView = picker.currentView;
@@ -1994,11 +2104,9 @@
             case 0:
                 if (vertical) {
                     viewDate = addDays(viewDate, direction * 7);
-                }
-                else if (ev.ctrlKey || ev.metaKey) {
+                } else if (ev.ctrlKey || ev.metaKey) {
                     viewDate = addYears(viewDate, direction);
-                }
-                else {
+                } else {
                     viewDate = addDays(viewDate, direction);
                 }
                 addFn = addDays;
@@ -2016,7 +2124,7 @@
             default:
                 viewDate = addYears(viewDate, direction * (vertical ? 4 : 1) * step);
                 addFn = addYears;
-                testFn = date => currentView.disabled.includes(startOfYearPeriod(date, step));
+                testFn = (date) => currentView.disabled.includes(startOfYearPeriod(date, step));
         }
         viewDate = findNextAvailableOne(
             viewDate,
@@ -2051,8 +2159,7 @@
                 default:
                     return;
             }
-        }
-        else if (datepicker.editMode) {
+        } else if (datepicker.editMode) {
             switch (ev.key) {
                 case 'Escape':
                     picker.hide();
@@ -2063,8 +2170,7 @@
                 default:
                     return;
             }
-        }
-        else {
+        } else {
             switch (ev.key) {
                 case 'Escape':
                     picker.hide();
@@ -2072,36 +2178,30 @@
                 case 'ArrowLeft':
                     if (ev.ctrlKey || ev.metaKey) {
                         goToPrevOrNext(datepicker, -1);
-                    }
-                    else if (ev.shiftKey) {
+                    } else if (ev.shiftKey) {
                         datepicker.enterEditMode();
                         return;
-                    }
-                    else {
+                    } else {
                         moveByArrowKey(datepicker, ev, -1, false);
                     }
                     break;
                 case 'ArrowRight':
                     if (ev.ctrlKey || ev.metaKey) {
                         goToPrevOrNext(datepicker, 1);
-                    }
-                    else if (ev.shiftKey) {
+                    } else if (ev.shiftKey) {
                         datepicker.enterEditMode();
                         return;
-                    }
-                    else {
+                    } else {
                         moveByArrowKey(datepicker, ev, 1, false);
                     }
                     break;
                 case 'ArrowUp':
                     if (ev.ctrlKey || ev.metaKey) {
                         switchView(datepicker);
-                    }
-                    else if (ev.shiftKey) {
+                    } else if (ev.shiftKey) {
                         datepicker.enterEditMode();
                         return;
-                    }
-                    else {
+                    } else {
                         moveByArrowKey(datepicker, ev, -1, true);
                     }
                     break;
@@ -2115,8 +2215,7 @@
                 case 'Enter':
                     if (isMinView) {
                         datepicker.setDate(picker.viewDate);
-                    }
-                    else {
+                    } else {
                         picker.changeView(id - 1).render();
                     }
                     break;
@@ -2141,7 +2240,7 @@
         }
     }
 
-// for the prevention for entering edit mode while getting focus on click
+    // for the prevention for entering edit mode while getting focus on click
     function onMousedown(datepicker, ev) {
         const el = ev.target;
         if (datepicker.picker.active || datepicker.config.showOnClick) {
@@ -2175,37 +2274,31 @@
         if (ev.clipboardData.types.includes('text/plain')) {
             datepicker.enterEditMode();
         }
-    }
+    } // CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/events/otherListeners.js
 
-    ;// CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/events/otherListeners.js
-
-
-// for the `document` to delegate the events from outside the picker/input field
+    // for the `document` to delegate the events from outside the picker/input field
     function onClickOutside(datepicker, ev) {
         const element = datepicker.element;
         if (element !== document.activeElement) {
             return;
         }
         const pickerElem = datepicker.picker.element;
-        if (findElementInEventPath(ev, el => el === element || el === pickerElem)) {
+        if (findElementInEventPath(ev, (el) => el === element || el === pickerElem)) {
             return;
         }
         unfocus(datepicker);
-    }
-
-    ;// CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/Datepicker.js
-
+    } // CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/Datepicker.js
 
     function stringifyDates(dates, config) {
         return dates
-            .map(dt => formatDate(dt, config.format, config.locale))
+            .map((dt) => formatDate(dt, config.format, config.locale))
             .join(config.dateDelimiter);
     }
 
-// parse input dates and course an array of time values for selection
-// returns undefined if there are no valid dates in inputDates
-// when origDates (current selection) is passed, the function works to mix
-// the input dates into the current selection
+    // parse input dates and course an array of time values for selection
+    // returns undefined if there are no valid dates in inputDates
+    // when origDates (current selection) is passed, the function works to mix
+    // the input dates into the current selection
     function processInputDates(datepicker, inputDates, clear = false) {
         const {config, dates: origDates, rangepicker} = datepicker;
         if (inputDates.length === 0) {
@@ -2225,21 +2318,18 @@
                 // is the range-end picker of a rangepicker
                 const dt = new Date(date);
                 if (config.pickLevel === 1) {
-                    date = rangeEnd
-                        ? dt.setMonth(dt.getMonth() + 1, 0)
-                        : dt.setDate(1);
-                }
-                else {
+                    date = rangeEnd ? dt.setMonth(dt.getMonth() + 1, 0) : dt.setDate(1);
+                } else {
                     date = rangeEnd
                         ? dt.setFullYear(dt.getFullYear() + 1, 0, 0)
                         : dt.setMonth(0, 1);
                 }
             }
             if (
-                isInRange(date, config.minDate, config.maxDate)
-                && !dates.includes(date)
-                && !config.datesDisabled.includes(date)
-                && !config.daysOfWeekDisabled.includes(new Date(date).getDay())
+                isInRange(date, config.minDate, config.maxDate) &&
+                !dates.includes(date) &&
+                !config.datesDisabled.includes(date) &&
+                !config.daysOfWeekDisabled.includes(new Date(date).getDay())
             ) {
                 dates.push(date);
             }
@@ -2250,12 +2340,15 @@
         }
         if (config.multidate && !clear) {
             // get the synmetric difference between origDates and newDates
-            newDates = newDates.reduce((dates, date) => {
-                if (!origDates.includes(date)) {
-                    dates.push(date);
-                }
-                return dates;
-            }, origDates.filter(date => !newDates.includes(date)));
+            newDates = newDates.reduce(
+                (dates, date) => {
+                    if (!origDates.includes(date)) {
+                        dates.push(date);
+                    }
+                    return dates;
+                },
+                origDates.filter((date) => !newDates.includes(date))
+            );
         }
         // do length check always because user can input multiple dates regardless of the mode
         return config.maxNumberOfDates && newDates.length > config.maxNumberOfDates
@@ -2263,8 +2356,8 @@
             : newDates;
     }
 
-// refresh the UI elements
-// modes: 1: input only, 2, picker only, 3 both
+    // refresh the UI elements
+    // modes: 1: input only, 2, picker only, 3 both
     function refreshUI(datepicker, mode = 3, quickRender = true) {
         const {config, picker, inputField} = datepicker;
         if (mode & 2) {
@@ -2283,8 +2376,7 @@
         }
         if (!render) {
             autohide = false;
-        }
-        else if (autohide === undefined) {
+        } else if (autohide === undefined) {
             autohide = datepicker.config.autohide;
         }
 
@@ -2296,8 +2388,7 @@
             datepicker.dates = newDates;
             refreshUI(datepicker, render ? 3 : 1);
             triggerDatepickerEvent(datepicker, 'changeDate');
-        }
-        else {
+        } else {
             refreshUI(datepicker, 1);
         }
         if (autohide) {
@@ -2322,18 +2413,21 @@
             this.element = element;
 
             // set up config
-            const config = this.config = Object.assign({
-                buttonClass: (options.buttonClass && String(options.buttonClass)) || 'button',
-                container: document.body,
-                defaultViewDate: today(),
-                maxDate: undefined,
-                minDate: undefined,
-            }, processOptions(options_defaultOptions, this));
+            const config = (this.config = Object.assign(
+                {
+                    buttonClass: (options.buttonClass && String(options.buttonClass)) || 'button',
+                    container: document.body,
+                    defaultViewDate: today(),
+                    maxDate: undefined,
+                    minDate: undefined
+                },
+                processOptions(options_defaultOptions, this)
+            ));
             this._options = options;
             Object.assign(config, processOptions(options, this));
 
             // configure by type
-            const inline = this.inline = element.tagName !== 'INPUT';
+            const inline = (this.inline = element.tagName !== 'INPUT');
             let inputField;
             let initialDates;
 
@@ -2341,9 +2435,10 @@
                 config.container = element;
                 initialDates = stringToArray(element.dataset.date, config.dateDelimiter);
                 delete element.dataset.date;
-            }
-            else {
-                const container = options.container ? document.querySelector(options.container) : null;
+            } else {
+                const container = options.container
+                    ? document.querySelector(options.container)
+                    : null;
                 if (container) {
                     config.container = container;
                 }
@@ -2366,7 +2461,7 @@
                 Object.defineProperty(this, 'rangepicker', {
                     get() {
                         return rangepicker;
-                    },
+                    }
                 });
             }
 
@@ -2381,12 +2476,11 @@
                 inputField.value = stringifyDates(this.dates, config);
             }
 
-            const picker = this.picker = new Picker(this);
+            const picker = (this.picker = new Picker(this));
 
             if (inline) {
                 this.show();
-            }
-            else {
+            } else {
                 // set up event listeners in other modes
                 const onMousedownDocument = onClickOutside.bind(null, this);
                 const listeners = [
@@ -2418,7 +2512,7 @@
          * @return {String} formatted date
          */
         static formatDate(date, format, lang) {
-            return formatDate(date, format, lang && locales[lang] || locales.en);
+            return formatDate(date, format, (lang && locales[lang]) || locales.en);
         }
 
         /**
@@ -2437,7 +2531,7 @@
          * @return {Number} time value of parsed date
          */
         static parseDate(dateStr, format, lang) {
-            return parseDate(dateStr, format, lang && locales[lang] || locales.en);
+            return parseDate(dateStr, format, (lang && locales[lang]) || locales.en);
         }
 
         /**
@@ -2533,8 +2627,8 @@
          */
         getDate(format = undefined) {
             const callback = format
-                ? date => formatDate(date, format, this.config.locale)
-                : date => new Date(date);
+                ? (date) => formatDate(date, format, this.config.locale)
+                : (date) => new Date(date);
 
             if (this.config.multidate) {
                 return this.dates.map(callback);
@@ -2588,10 +2682,10 @@
             const opts = {};
             const lastArg = lastItemOf(args);
             if (
-                typeof lastArg === 'object'
-                && !Array.isArray(lastArg)
-                && !(lastArg instanceof Date)
-                && lastArg
+                typeof lastArg === 'object' &&
+                !Array.isArray(lastArg) &&
+                !(lastArg instanceof Date) &&
+                lastArg
             ) {
                 Object.assign(opts, dates.pop());
             }
@@ -2636,11 +2730,9 @@
             let mode;
             if (target === 'picker') {
                 mode = 2;
-            }
-            else if (target === 'input') {
+            } else if (target === 'input') {
                 mode = 1;
-            }
-            else {
+            } else {
                 mode = 3;
             }
             refreshUI(this, mode, !forceRender);
@@ -2677,12 +2769,9 @@
                 this.update(opts);
             }
         }
-    }
+    } // CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/DateRangePicker.js
 
-    ;// CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/DateRangePicker.js
-
-
-// filter out the config options inapproprite to pass to Datepicker
+    // filter out the config options inapproprite to pass to Datepicker
     function filterOptions(options) {
         const newOpts = Object.assign({}, options);
 
@@ -2694,9 +2783,7 @@
     }
 
     function setupDatepicker(rangepicker, changeDateListener, el, options) {
-        registerListeners(rangepicker, [
-            [el, 'changeDate', changeDateListener],
-        ]);
+        registerListeners(rangepicker, [[el, 'changeDate', changeDateListener]]);
         new Datepicker(el, options, rangepicker);
     }
 
@@ -2724,13 +2811,11 @@
             if (changedSide === 0 && changedDate > otherDate) {
                 datepickers[0].setDate(otherDate, setDateOptions);
                 datepickers[1].setDate(changedDate, setDateOptions);
-            }
-            else if (changedSide === 1 && changedDate < otherDate) {
+            } else if (changedSide === 1 && changedDate < otherDate) {
                 datepickers[0].setDate(changedDate, setDateOptions);
                 datepickers[1].setDate(otherDate, setDateOptions);
             }
-        }
-        else if (!rangepicker.allowOneSidedRange) {
+        } else if (!rangepicker.allowOneSidedRange) {
             // to prevent the range from becoming one-sided, copy changed side's
             // selection (no matter if it's empty) to the other side
             if (changedDate !== undefined || otherDate !== undefined) {
@@ -2773,7 +2858,7 @@
             Object.defineProperty(this, 'datepickers', {
                 get() {
                     return datepickers;
-                },
+                }
             });
             setupDatepicker(this, changeDateListener, this.inputs[0], cleanOptions);
             setupDatepicker(this, changeDateListener, this.inputs[1], cleanOptions);
@@ -2781,8 +2866,7 @@
             // normalize the range if inital dates are given
             if (datepickers[0].dates.length > 0) {
                 onChangeDate(this, {target: this.inputs[0]});
-            }
-            else if (datepickers[1].dates.length > 0) {
+            } else if (datepickers[1].dates.length > 0) {
                 onChangeDate(this, {target: this.inputs[1]});
             }
         }
@@ -2792,10 +2876,7 @@
          */
         get dates() {
             return this.datepickers.length === 2
-                ? [
-                    this.datepickers[0].dates[0],
-                    this.datepickers[1].dates[0],
-                ]
+                ? [this.datepickers[0].dates[0], this.datepickers[1].dates[0]]
                 : undefined;
         }
 
@@ -2838,10 +2919,10 @@
          */
         getDates(format = undefined) {
             const callback = format
-                ? date => formatDate(date, format, this.datepickers[0].config.locale)
-                : date => new Date(date);
+                ? (date) => formatDate(date, format, this.datepickers[0].config.locale)
+                : (date) => new Date(date);
 
-            return this.dates.map(date => date === undefined ? date : callback(date));
+            return this.dates.map((date) => (date === undefined ? date : callback(date)));
         }
 
         /**
@@ -2886,15 +2967,11 @@
 
             if (datepicker1.dates[0] !== origDates[1]) {
                 onChangeDate(this, {target: this.inputs[1]});
-            }
-            else if (datepicker0.dates[0] !== origDates[0]) {
+            } else if (datepicker0.dates[0] !== origDates[0]) {
                 onChangeDate(this, {target: this.inputs[0]});
             }
         }
-    }
-
-    ;// CONCATENATED MODULE: ./src/plugins/datepicker.js
-
+    } // CONCATENATED MODULE: ./src/plugins/datepicker.js
 
     var getDatepickerOptions = function getDatepickerOptions(datepickerEl) {
         var buttons = datepickerEl.hasAttribute('datepicker-buttons');
@@ -2940,6 +3017,5 @@
         });
     });
     /******/
-})()
-;
+})();
 //# sourceMappingURL=datepicker.js.map

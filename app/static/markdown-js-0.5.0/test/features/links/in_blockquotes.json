@@ -1,9 +1,13 @@
-["html",
-  ["blockquote",
-    ["p",
+[
+  "html",
+  [
+    "blockquote",
+    [
+      "p",
       "Let's fork this repo!"
     ],
-    ["p",
+    [
+      "p",
       "[markdown][]"
     ]
   ]

@@ -1,29 +1,42 @@
-[ "html",
-  [ "table",
-    [ "thead",
-      [ "tr",
-        [ "th",
+[
+  "html",
+  [
+    "table",
+    [
+      "thead",
+      [
+        "tr",
+        [
+          "th",
           "First Header"
         ],
-        [ "th",
+        [
+          "th",
           "Second Header"
         ]
       ]
     ],
-    [ "tbody",
-      [ "tr",
-        [ "td",
+    [
+      "tbody",
+      [
+        "tr",
+        [
+          "td",
           "Content 1"
         ],
-        [ "td",
+        [
+          "td",
           "Content 2"
         ]
       ],
-      [ "tr",
-        [ "td",
+      [
+        "tr",
+        [
+          "td",
           "Content 3"
         ],
-        [ "td",
+        [
+          "td",
           "Content 4"
         ]
       ]

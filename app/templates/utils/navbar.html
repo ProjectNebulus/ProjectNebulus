@@ -34,7 +34,7 @@
                             <li><a href="/dashboard" class="nav-link-2" aria-current="page" style="margin-top: 8px">
                                 Dashboard</a></li>
                             <li><a href="/lms" class="nav-link">Learning</a></li>
-                            <li><a href="/about" class="nav-link">About Nebulus</a></li>
+                            <li><a href="/about" class="nav-link">About</a></li>
                             <li style="margin-left: 1rem">
                                 <button id="dropdownNavbarLink" class="nav-link"
                                         data-dropdown-toggle="dropdownNavbar">
@@ -48,70 +48,125 @@
                                 </button>
                                 <!-- Dropdown menu -->
                                 <div id="dropdownNavbar"
-                                     class="z-20 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-400"
-                                        aria-labelledby="dropdownLargeButton">
-                                        <li>
-                                            <a href="/api/developers"
-                                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">API</a>
-                                        </li>
-                                        <li>
-                                            <a href="/planner"
-                                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Planner</a>
-                                        </li>
-                                        <li>
-                                            <a href="/notepad"
-                                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Notepad</a>
-                                        </li>
-                                        <li>
-                                            <a href="/calendar"
-                                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Calendar</a>
-                                        </li>
-                                        <li>
-                                            <a href="/files"
-                                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Files</a>
-                                        </li>
-                                        <li>
-                                            <a href="/chat"
-                                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Chat</a>
-                                        </li>
-                                        <li>
-                                            <a href="/music"
-                                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Music</a>
-                                        </li>
-                                        <li>
-                                            <a href="/scheduler"
-                                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Scheduler</a>
-                                        </li>
-                                        <li>
-                                            <a href="/study"
-                                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Study
-                                                Session</a>
-                                        </li>
-                                        <li>
-                                            <a href="/study-plan"
-                                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Study
-                                                Plan</a>
-                                        </li>
-                                        <li>
-                                            <a href="/analyze"
-                                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Analyze
-                                                Image or PDF (with AI)</a>
-                                        </li>
-
-                                    </ul>
-                                    <div class="py-1">
-                                        <a href="/pricing" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100
-                                         dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">Upgrade</a>
+                                     class="grid hidden absolute z-10 grid-cols-2 w-auto text-sm bg-white rounded-lg border border-gray-100 shadow-md dark:border-gray-700 lg:grid-cols-3 dark:bg-gray-700">
+                                    <div class="p-4 pb-0 text-gray-900 lg:pb-4 dark:text-white">
+                                        <ul class="space-y-4">
+                                            <li>
+                                                <a href="/planner"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-lg">
+                                                    Planner
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/notepad"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-lg">
+                                                    Notepad
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/calendar"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-lg">
+                                                    Calendar
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/files"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-lg">
+                                                    Files
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </div>
-                                </div>
+                                    <div class="p-4 pb-0 text-gray-900 lg:pb-4 dark:text-white">
+                                        <ul class="space-y-4">
+                                            <li>
+                                                <a href="/chat"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-lg">
+                                                    Chat
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/music"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-lg">
+                                                    Music
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/scheduler"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-lg">
+                                                    Scheduler
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/study"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-lg">
+                                                    Timer
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="p-4 pb-0 text-gray-900 lg:pb-4 dark:text-white">
+                                        <ul class="space-y-4">
+                                            <li>
+                                                <a href="/study-planner"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-lg">
+                                                    Study Planner
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/lunch"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-lg">
+                                                    Lunch Planner
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/vacation"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-lg">
+                                                    Vacation Mode
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/extra-curricular"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-lg">
+                                                    Extra Curricular Mode
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="p-4 pb-0 text-gray-900 lg:pb-4 dark:text-white">
+                                        <ul class="space-y-4">
+                                            <li>
+                                                <a href="/analysis"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-lg">
+                                                    Image Analyzer
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/upgrade"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-lg">
+                                                    Upgrade
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/blog"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-lg">
+                                                    Blog
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/support"
+                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-lg">
+                                                    Support
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
                             </li>
                         {% else %}
-                            <li><a href="/" class="nav-link-2" aria-current="page" style="margin-top: 8px;">Home</a>
-                            </li>
-                            <li><a href="/about" class="nav-link">What Is Nebulus?</a></li>
+                            <li><a href="/about" class="nav-link">About</a></li>
                             <li><a href="/pricing" class="nav-link">Pricing</a></li>
-                            <li><a href="/api/developers" class="nav-link">API</a></li>
+                            <li><a href="/select-a-region" class="nav-link">Change Language</a></li>
 
                             <button id="theme-toggle" type="button"
                                     class="text-gray-500 dark:text-gray-400 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
@@ -135,10 +190,10 @@
             <div style="float:right;display: grid; grid-auto-flow: column; align-content: center;">
                 {% if user %}
                     <button data-dropdown-toggle="control-center" aria-label="Control Center"
-                            class="rounded-full border-gray-300 border-2 w-12 h-12
+                            class="rounded-full border-gray-300 border-none w-12 h-12
                             {% if "black" in avatar %} bg-gray-300
                             {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}">
-                        <logo image="{{ avatar }}" no-revert class="h-8" style="margin-left:15%; margin-top:10%"></logo>
+                        <logo image="{{ avatar }}" no-revert class="h-6 mx-auto my-auto "></logo>
                     </button>
                 {% else %}
                     <div class="flex md:order-2">
@@ -167,7 +222,7 @@
             {% include "utils/navbar_mobile.html" %}
         </div>
     </div>
-    <div id="control-center" class="bg-gray-300/30 dark:bg-gray-800/30 p-4 rounded-lg dark:border-gray-700 border hidden
+    <div id="control-center" class=" w-96 bg-gray-300/30 dark:bg-gray-800/30 p-4 rounded-lg dark:border-gray-700 border hidden
      backdrop-blur-sm z-10">{% include "utils/control.html" %}</div>
     
     <script src="/static/js/utils/navbar.js"></script>

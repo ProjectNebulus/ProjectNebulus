@@ -1,12 +1,33 @@
-["html", ["p", ["img", {
-    "src": "/url/",
-    "alt": "alt text"
-}]],
-    ["p", ["img", {
+[
+  "html",
+  [
+    "p",
+    [
+      "img",
+      {
         "src": "/url/",
         "alt": "alt text"
-    }]],
-    ["p", ["img", {
+      }
+    ]
+  ],
+  [
+    "p",
+    [
+      "img",
+      {
         "src": "/url/",
         "alt": "alt text"
-    }]]]
+      }
+    ]
+  ],
+  [
+    "p",
+    [
+      "img",
+      {
+        "src": "/url/",
+        "alt": "alt text"
+      }
+    ]
+  ]
+]

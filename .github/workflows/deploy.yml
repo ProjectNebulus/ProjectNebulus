@@ -1,7 +1,8 @@
 name: Automatic Pull
-on:
-  release:
-    types: [published]
+on: 
+  push:
+    branches:
+      - alpha
 jobs:
   ssh:
     runs-on: ubuntu-latest
@@ -11,6 +12,7 @@ jobs:
         with:
           command: |
             cd ProjectNebulus
+            source venv/bin/activate
             git pull
             pm2 restart 0
             echo "Job Completed"

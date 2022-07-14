@@ -1,6 +1,9 @@
-["html",
-  ["p",
-    ["code",
+[
+  "html",
+  [
+    "p",
+    [
+      "code",
       "This"
     ],
     " is a code span."

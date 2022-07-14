@@ -1,1 +1,19 @@
-["html", ["p", "Paragraph one."], "\u000a\u000a", "\u000a\u000a", ["p", "Paragraph two."], "\u000a\u000a", "\u000a\u000a", ["p", "The end."]]
+[
+  "html",
+  [
+    "p",
+    "Paragraph one."
+  ],
+  "\u000a\u000a",
+  "\u000a\u000a",
+  [
+    "p",
+    "Paragraph two."
+  ],
+  "\u000a\u000a",
+  "\u000a\u000a",
+  [
+    "p",
+    "The end."
+  ]
+]

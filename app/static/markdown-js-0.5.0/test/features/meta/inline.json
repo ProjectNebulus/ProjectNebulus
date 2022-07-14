@@ -1,13 +1,21 @@
-["html",
-  ["p",
+[
+  "html",
+  [
+    "p",
     "An ",
-    ["em",
-      { "class" : "foo" },
+    [
+      "em",
+      {
+        "class": "foo"
+      },
       "em"
     ],
     " and ",
-    ["strong",
-      { "class" : "bar" },
+    [
+      "strong",
+      {
+        "class": "bar"
+      },
       "strong"
     ],
     "\nwith attached attributes."

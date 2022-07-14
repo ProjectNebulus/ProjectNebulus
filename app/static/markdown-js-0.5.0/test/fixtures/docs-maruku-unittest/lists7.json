@@ -1,4 +1,25 @@
-["html", ["p", "Ciao"],
-    ["ul", ["li", "Tab * Tab * Tab"]],
-    ["p", "Ciao"],
-    ["ul", ["li", "Tab * Tab * Tab"]]]
+[
+  "html",
+  [
+    "p",
+    "Ciao"
+  ],
+  [
+    "ul",
+    [
+      "li",
+      "Tab * Tab * Tab"
+    ]
+  ],
+  [
+    "p",
+    "Ciao"
+  ],
+  [
+    "ul",
+    [
+      "li",
+      "Tab * Tab * Tab"
+    ]
+  ]
+]

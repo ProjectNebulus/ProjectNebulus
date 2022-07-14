@@ -1,1 +1,27 @@
-["html", ["p", "This is ", ["em", "italic"], " and this is ", ["strong", "bold"], ".\u000aThis is also ", ["em", "italic"], " and this is ", ["strong", "bold"], "."]]
+[
+  "html",
+  [
+    "p",
+    "This is ",
+    [
+      "em",
+      "italic"
+    ],
+    " and this is ",
+    [
+      "strong",
+      "bold"
+    ],
+    ".\u000aThis is also ",
+    [
+      "em",
+      "italic"
+    ],
+    " and this is ",
+    [
+      "strong",
+      "bold"
+    ],
+    "."
+  ]
+]
