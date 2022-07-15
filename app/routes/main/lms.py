@@ -140,6 +140,7 @@ def lms():
         announcements=events[0],
         events=events[1],
         today=datetime.date.today(),
+        now=datetime.datetime.now(),
         strftime=utils.strftime,
         gcourses=gcourses,
         canvascourses=canvascourses,

@@ -199,7 +199,7 @@ def sort_course_events(user_id: str, course_id: int):
     dates = dict(
         {
             key: list(result)
-            for key, result in groupby(sorted_events, key=lambda obj: sortByDate(obj))
+            for key, result in groupby(sorted_events, key=lambda obj: sortByDateTime(obj))
         }
     )
 
@@ -229,14 +229,14 @@ def sort_user_events(user_id: str, maxDays=5, maxEvents=16):
     from itertools import chain, groupby
 
     events_assessments_assignments = list(chain(events, assignments, assessments))
-    sorted_events = sorted(
+    sorted_events = reversed(sorted(
         events_assessments_assignments[:maxEvents], key=lambda obj: sortByDateTime(obj)
-    )
+    ))
 
     dates = dict(
         {
             key: list(result)
-            for key, result in groupby(sorted_events, key=lambda obj: sortByDate(obj))
+            for key, result in groupby(sorted_events, key=lambda obj: sortByDateTime(obj))
         }
     )
 

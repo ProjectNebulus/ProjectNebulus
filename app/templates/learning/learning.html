@@ -220,9 +220,22 @@
                             add events on to your Nebulus dashboard, please add it within a Course!</p>
                     {% else %}
                         {% for date, assignments in events.items() %}
+                            <h1>{% set diff = date - now %}</h1>
+                            {% if diff.days < 0 %}
+                                <h1 style="text-align: left; background: -webkit-linear-gradient(left,#ff78ed,#ffb378); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 10px;"> {{ strftime(date, "%a, %B %-d, %Y") }}</h1>
+                            {% elif diff.days < 1 %}
+                                <h1 style="text-align: left; background: -webkit-linear-gradient(left,#ff7878,#ffb078); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 10px;"> {{ strftime(date, "%a, %B %-d, %Y") }}</h1>
+                            {% elif diff.days < 3 %}
+                                <h1 style="text-align: left; background: -webkit-linear-gradient(left,#ffc578,#fff878); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 10px;"> {{ strftime(date, "%a, %B %-d, %Y") }}</h1>
+                            {% elif diff.days < 5 %}
+                                <h1 style="text-align: left; background: -webkit-linear-gradient(left,#ffd978,#ddff78); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 10px;"> {{ strftime(date, "%a, %B %-d, %Y") }}</h1>
+                            {% else %}
+                                <h1 style="text-align: left; background: -webkit-linear-gradient(left,#d9ff78,#78ffb7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 10px;"> {{ strftime(date, "%a, %B %-d, %Y") }}</h1>
+                            {% endif %}
+
                             {% for a in assignments[:15] %}
                                 {% if a._cls == "Assignment" %}
-                                    {% if a.submitDate == None or today < date %}
+                                    {% if a.submitDate == None or now < date %}
                                         {# today is before the due date ^ #}
                                         <div class="flex bg-gray-100/75 shadow dark:bg-gray-800/75 rounded-lg p-6 ml-3 mr-3
                                          shadow-md dark:border-gray-700 text-sm mb-5 mr-4 text-left">
