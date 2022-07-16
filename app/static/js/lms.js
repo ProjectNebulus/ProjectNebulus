@@ -2,6 +2,15 @@ function expand(message) {
 }
 
 
+function openAnnouncementsModal(content, title) {
+    const targetEl = document.getElementById('announcementModal');
+    document.getElementById("announcementBody").innerText = content;
+    document.getElementById("announcement__Name").innerText = title;
+    const modal = new Modal(targetEl);
+    modal.toggle();
+
+}
+
 function replaceURLs(message) {
     if (!message) return message;
 

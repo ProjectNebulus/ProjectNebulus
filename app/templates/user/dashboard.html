@@ -29,10 +29,8 @@
                 <thead class="text-xs text-gray-700 uppercase bg-gray-200/59 dark:bg-gray-700/59 dark:text-gray-400">
                 <tr>
                     <th class="px-6 py-3 text-left">Event</th>
-                    <th class="px-6 py-3 text-left">Date</th>
-                    <th class="px-6 py-3 text-left">Time</th>
+                    <th class="px-6 py-3 text-left">Due</th>
                     <th class="px-6 py-3 text-left">Course</th>
-                    <th class="px-6 py-3 text-left"><span class="sr-only">Edit</span></th>
                 </tr>
                 </thead>
 
@@ -52,14 +50,13 @@
                                     {{ event.title }}
                                 </td>
                                 <td class="truncate w-1/3 border-t-2 border-gray-200 dark:border-gray-700 px-6 py-1">
-                                    {{ strftime(event.date.date(), "%m/%d/%Y") }}
+                                    {{ strftime(event.date.date(), "%m/%d/%Y") }} {{ strftime(event.date.time(), "%I:%M %p") }}
                                 </td>
                                 <td class="truncate w-1/3 border-t-2 border-gray-200 dark:border-gray-700 px-6 py-1">
-                                    {{ strftime(event.date.time(), "%I:%M %p") }}
-                                </td>
-                                <td class="truncate w-1/3 border-t-2 border-gray-200 dark:border-gray-700 px-6 py-1">
-                                    <span data-tooltip-placement="top" data-tooltip-target="eventCourseName{{ event.id }}">{{ event.course.name }}</span>
-                                    <div id="eventCourseName{{ event.id }}" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                    <span data-tooltip-placement="top"
+                                          data-tooltip-target="eventCourseName{{ event.id }}">{{ event.course.name }}</span>
+                                    <div id="eventCourseName{{ event.id }}" role="tooltip"
+                                         class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
                                         {{ event.course.name }}
                                         <div class="tooltip-arrow" data-popper-arrow></div>
                                     </div>
@@ -70,9 +67,7 @@
                                     </style>
                                 </td>
 
-                                <td class="truncate w-1/3 border-t-2 border-gray-200 dark:border-gray-700 px-6 py-1">
-                                    <span class="noselect text-blue-500 hover:text-blue-700">Edit</span>
-                                </td>
+
                             </tr>
                         {% else %}
                             <tr style="display: table; vertical-align: top;" aria-label="Assignment"
@@ -82,17 +77,12 @@
                                     {{ event.title }}
                                 </td>
                                 <td class="truncate w-1/3 border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
-                                    {{ strftime(event.due.date(), "%m/%d/%Y") }}
-                                </td>
-                                <td class="truncate w-1/3 border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
-                                    {{ strftime(event.due.time(), "%I:%M %p") }}
+                                    {{ strftime(event.due.date(), "%m/%d/%Y") }} {{ strftime(event.due.time(), "%I:%M %p") }}
                                 </td>
                                 <td class="truncate w-1/3 border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
                                     {{ event.course.name }}
                                 </td>
-                                <td class="truncate w-1/3 border-t-2 border-gray-200 dark:border-gray-700 px-6 py-4">
-                                    <span class="text-blue-500 hover:text-blue-700">Edit</span>
-                                </td>
+
                             </tr>
                         {% endif %}
                     {% endfor %}
@@ -261,7 +251,6 @@
         </div>
     </div>
 
-
     <script src="../../static/js/user/dashboard.js"></script>
     <style>
         table, tr td {
@@ -302,6 +291,7 @@
             document.getElementById("time").innerText = `
             ${hour}:${min}   ${day}, ${month}/${date}/${year} `
         }
+
 
         setInterval(setTime, 200)
     </script>
