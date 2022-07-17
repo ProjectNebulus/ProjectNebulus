@@ -63,7 +63,7 @@ $ poetry install
 ### Run
 
 ```bash
-$ poetryr run python main.py
+$ poetry run python main.py
 ```
 
 ## Setup (docker)
