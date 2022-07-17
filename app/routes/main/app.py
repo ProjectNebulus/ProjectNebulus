@@ -129,7 +129,7 @@ def app():
         scCourses = []
 
     return render_template(
-        "learning/../../templates/user/../../templates/learning/app.html",
+        "learning/app.html",
         user=session["username"],
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
