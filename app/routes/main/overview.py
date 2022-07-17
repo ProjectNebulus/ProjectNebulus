@@ -9,7 +9,7 @@ from . import main_blueprint, utils
 from .utils import logged_in
 
 
-@main_blueprint.route("/dashboard", methods=["GET"])
+@main_blueprint.route("/overview", methods=["GET"])
 @logged_in
 def dashboard():
     user_courses = read.get_user_courses(session.get("id"))
@@ -87,7 +87,7 @@ def dashboard():
             newMessages.append(info)
 
     return render_template(
-        "user/dashboard.html",
+        "user/overview.html",
         user=session["username"],
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         email=session["email"],

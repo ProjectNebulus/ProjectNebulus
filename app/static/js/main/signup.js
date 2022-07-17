@@ -24,7 +24,7 @@ function createUser() {
         dataType: 'json'
     });
 
-    request.done((data) => (window.location.href = '/dashboard'));
+    request.done((data) => (window.location.href = '/app'));
 }
 
 function next(num) {

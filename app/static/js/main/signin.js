@@ -313,7 +313,7 @@ function getRedirectParam() {
     if (qd['redirect']) {
         return qd['redirect'][0];
     }
-    return '/dashboard';
+    return '/app';
 }
 
 function reqListener2() {

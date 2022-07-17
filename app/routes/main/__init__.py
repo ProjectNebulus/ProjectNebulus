@@ -15,12 +15,12 @@ from .canvas import *
 from .chat import *
 from .connections import *
 from .course import *
-from .dashboard import *
+from .overview import *
 from .discord import *
 from .files import *
 from .gclassroom import *
 from .index import *
-from .lms import *
+from .app import *
 from .logout import *
 from .music import *
 from .notepad import *

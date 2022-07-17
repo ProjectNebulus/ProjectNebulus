@@ -79,7 +79,7 @@ confirm.addEventListener('click', () => {
     request.done((data) => {
         if (data === 'true') {
             confirm.innerHTML = 'Done!';
-            window.location.href = '/dashboard';
+            window.location.href = '/app';
         } else confirm.innerHTML = 'Nice try buddy';
     });
 

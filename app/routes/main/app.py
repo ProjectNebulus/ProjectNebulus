@@ -54,9 +54,9 @@ def getGclassroomcourses():
     return courses
 
 
-@main_blueprint.route("/lms", methods=["GET"])
+@main_blueprint.route("/app", methods=["GET"])
 @logged_in
-def lms():
+def app():
     from app.static.python.classes import Event
 
     user_acc = read.find_user(id=session["id"])
@@ -129,7 +129,7 @@ def lms():
         scCourses = []
 
     return render_template(
-        "learning/learning.html",
+        "learning/../../templates/user/../../templates/learning/app.html",
         user=session["username"],
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
