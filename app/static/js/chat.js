@@ -559,6 +559,15 @@ function getChat(chatID) {
     $.ajax({
         url: '/api/v1/internal/get-chat',
         type: 'POST',
+        beforeSend: function(){
+            $('#chat').hide()
+            $('#chat-loading').show();
+        },
+        complete: function (){
+            console.log('complete');
+            $('#chat-loading').hide();
+            $('#chat').show()
+        },
         contentType: 'application/json',
         data: JSON.stringify({
             chatID: chatID
