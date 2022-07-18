@@ -1,3 +1,15 @@
+<style>
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+    }
+</style>
 {% if not disablebar %}
     <nav class="noselect w-full sticky backdrop-blur-sm top-0 z-10 border-gray-200 px-2 py-2 rounded-lg bg-gray-300/30 dark:bg-gray-800/30 h-auto"
          id="navbar" aria-label="Navigation Bar">
@@ -97,6 +109,179 @@
     </div>
     <div id="control-center" class=" w-96 bg-gray-300/30 dark:bg-gray-800/30 p-4 rounded-lg dark:border-gray-700 border hidden
      backdrop-blur-sm z-10">{% include "utils/control.html" %}</div>
-    
+
     <script src="/static/js/utils/navbar.js"></script>
 {% endif %}
+
+<div id="styling">
+    <style>
+        .text_nav {
+            display: none;
+        }
+    </style>
+</div>
+{% if not disablesidebar %}
+    {% if user %}
+        <aside onmouseenter="changeNav(true);" onmouseleave="changeNav(false);" class="" aria-label="Sidebar"
+               style="overflow-y: scroll; height: calc(100% - 80px); display: inline-block; z-index: 100;">
+            <div class="overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-gray-800">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">home</p>
+                            <span class="ml-3 text_nav">App</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">temp_preferences_customn</p>
+                            <span class="ml-3 text_nav">Overview</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">school</p>
+                            <span class="ml-3 text_nav">Courses</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">calendar_month</p>
+                            <span class="ml-3 text_nav">Calendar</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">article</p>
+                            <span class="ml-3 text_nav">Files</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">forum</p>
+                            <span class="ml-3 text_nav">Chat</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">email</p>
+                            <span class="ml-3 text_nav">Email</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">music_note</p>
+                            <span class="ml-3 text_nav">Music</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">timer</p>
+                            <span class="ml-3 text_nav">Study Timer</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">history</p>
+                            <span class="ml-3 text_nav">Scheduler</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">menu_book</p>
+                            <span class="ml-3 text_nav">Study Planner</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">description</p>
+                            <span class="ml-3 text_nav">Documents</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">edit</p>
+                            <span class="ml-3 text_nav">Notepad</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">event_note</p>
+                            <span class="ml-3 text_nav">Planner</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">sports_basketball</p>
+                            <span class="ml-3 text_nav">Extra-curricular</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">villa</p>
+                            <span class="ml-3 text_nav">Vacation Mode</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">upgrade</p>
+                            <span class="ml-3 text_nav">Upgrade</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">sms</p>
+                            <span class="ml-3 text_nav">Blog</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">support_agent</p>
+                            <span class="ml-3 text_nav">Support</span>
+                        </a>
+                    </li>
+
+
+                </ul>
+            </div>
+        </aside>
+    {% endif %}
+{% endif %}
+<script>
+    function changeNav(boolean) {
+        if (boolean) {
+            document.getElementById("styling").innerHTML = `
+            <style>
+        .text_nav{
+            display:block;
+        }
+    </style>`
+        } else {
+            document.getElementById("styling").innerHTML = `
+            <style>
+        .text_nav{
+            display:none;
+        }
+    </style>`
+        }
+    }
+</script>
