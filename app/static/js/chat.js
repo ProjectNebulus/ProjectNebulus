@@ -144,6 +144,14 @@ function makeCall() {
     $.ajax({
         url: '/api/v1/internal/fetch-chats',
         type: 'POST',
+        beforeSend: function(){
+            $('#user-chats').hide();
+            $('#chat-list-loading').show();
+        },
+        complete: function(){
+            $('#chat-list-loading').hide();
+            $('#user-chats').show();
+        },
         contentType: 'application/json',
         data: JSON.stringify({
             index: chatAmount
