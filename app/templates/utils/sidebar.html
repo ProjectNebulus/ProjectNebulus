@@ -1,0 +1,156 @@
+{% if not disablesidebar %}
+    {% if user %}
+        <aside id="sidebar_" onmouseenter="changeNav(true);" onmouseleave="changeNav(false);" class="overflow-y-auto"
+               aria-label="Sidebar"
+               style="overflow-y: scroll; height: calc(100% - 80px); display: inline-block; z-index: 100;">
+            <div class="overflow-y-auto py-4 px-3 backdrop-blur-sm t bg-gray-100/50 rounded dark:bg-gray-800/50">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="/app"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">home</p>
+                            <span class="ml-3 text_nav">App</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/overview"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">flare</p>
+                            <span class="ml-3 text_nav">Overview</span>
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="/courses"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">school</p>
+                            <span class="ml-3 text_nav">Courses</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/calendar"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">calendar_month</p>
+                            <span class="ml-3 text_nav">Calendar</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/files"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">article</p>
+                            <span class="ml-3 text_nav">Files</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/chat"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">forum</p>
+                            <span class="ml-3 text_nav">Chat</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/email"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">email</p>
+                            <span class="ml-3 text_nav">Email</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/music"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">music_note</p>
+                            <span class="ml-3 text_nav">Music</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/study"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">timer</p>
+                            <span class="ml-3 text_nav">Study Timer</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/scheduler"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">history</p>
+                            <span class="ml-3 text_nav">Scheduler</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/study-planner"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">menu_book</p>
+                            <span class="ml-3 text_nav">Study Planner</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/documents"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">description</p>
+                            <span class="ml-3 text_nav">Documents</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/notepad"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">edit</p>
+                            <span class="ml-3 text_nav">Notepad</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/planner"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">event_note</p>
+                            <span class="ml-3 text_nav">Planner</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/lunch"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">lunch_dining</p>
+                            <span class="ml-3 text_nav">Lunch Planner</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/extra-curricular"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">sports_basketball</p>
+                            <span class="ml-3 text_nav">Extra-curricular</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/vacation"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">villa</p>
+                            <span class="ml-3 text_nav">Vacation Mode</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/upgrade"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">upgrade</p>
+                            <span class="ml-3 text_nav">Upgrade</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/blog"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">sms</p>
+                            <span class="ml-3 text_nav">Blog</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/support"
+                           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="dark:text-gray-400 material-icons">support_agent</p>
+                            <span class="ml-3 text_nav">Support</span>
+                        </a>
+                    </li>
+
+
+                </ul>
+            </div>
+        </aside>
+    {% endif %}
+{% endif %}

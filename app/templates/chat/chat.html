@@ -16,7 +16,10 @@
       rel="stylesheet">
 {% extends "layout.html" %}
 {% block main %}
+
     {% include "utils/navbar.html" %}
+    <div class="flex flex-row" style="height:100%;">
+    {%  include "utils/sidebar.html" %}
     <style>
         img.emoji {
             display: inline-block;
@@ -107,7 +110,7 @@
         }
     </style>
     <div id="user-data" class="w-0 h-0 invisible">{{ user_obj._id }}</div>
-    <div class="flex flex-row w-full bg-white/50 dark:bg-gray-900/50" style="height:89%;">
+    <div class="flex flex-row w-full bg-white/50 dark:bg-gray-900/50" style="height: calc(100% - 80px);">
         <div style="float:left;flex:0 0 315px;width:315px;" class="noselect h-full justify-start" aria-label="Sidebar">
             <div class="px-3 py-4 overflow-y-auto rounded bg-gray-100/75 dark:bg-gray-800/75 h-full" id="chat-sidebar">
                 <form>
@@ -259,7 +262,7 @@
                     </div>
 
                 </div>
-                <div style="position: absolute; bottom: 0; width:315px; left:0; margin:0 !important;"
+                <div style=" bottom: 0; width:315px; left:0; margin:0 !important;"
                      class="bg-gray-300 dark:bg-gray-600 flex flex-row">
                     <div class="pt-2 pb-2 flex flex-col" style="display: inline-block;  margin:5px;">
                         <button class="rounded-full border-gray-300 border-none w-12 h-12
@@ -588,6 +591,7 @@
             </div>
         </div>
 
+    </div>
     </div>
 
     <script type="module">
