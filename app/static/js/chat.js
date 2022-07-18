@@ -137,7 +137,7 @@ Searching...
 
 keyUpDelay('#search', 1000, changeSearch);
 
-function makeCall() {
+function makeCall(getFirst=true) {
     let chatAmount = $('#user-chats div').length;
     console.log(chatAmount);
     console.log(chatAmount);
@@ -158,8 +158,10 @@ function makeCall() {
         })
     }).done(function (data) {
         load(data);
-        let selected = document.getElementById('user-chats');
-        selected.children[0].click();
+        if (getFirst) {
+            let selected = document.getElementById('user-chats');
+            selected.children[0].click();
+        }
     });
 }
 
@@ -363,7 +365,7 @@ $(document).ready(function () {
 
         console.log(div.scrollTop + div.clientHeight + 1, div.scrollHeight);
         if (div.scrollTop + div.clientHeight + 1 >= div.scrollHeight) {
-            makeCall();
+            makeCall(getFirst=false);
         }
     });
 });
