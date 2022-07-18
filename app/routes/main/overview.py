@@ -9,7 +9,7 @@ from . import main_blueprint, utils
 from .utils import logged_in
 
 
-@main_blueprint.route("/overview", methods=["GET"])
+@main_blueprint.route("/dashboard", methods=["GET"])
 @logged_in
 def dashboard():
     user_courses = read.get_user_courses(session.get("id"))
