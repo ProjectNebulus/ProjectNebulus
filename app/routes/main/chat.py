@@ -1,6 +1,7 @@
 import json
 
 from flask import render_template, session
+import datetime
 
 from app.static.python.extensions.integrations.schoology import get_schoology_emails
 from app.static.python.mongodb import read
@@ -32,6 +33,8 @@ def chatPage(page):
     if len(status) > 18:
         status = status[0:15] + "..."
     user = json.loads(user.to_json())
+    today = datetime.datetime.now()
+    date_time = today.strftime("%H:%M")
     return render_template(
         f"/chat/{page}.html",
         page="Nebulus - Chat",
@@ -42,4 +45,5 @@ def chatPage(page):
         messages=newMessages,
         disableArc=True,
         status=status,
+        date=date_time
     )
