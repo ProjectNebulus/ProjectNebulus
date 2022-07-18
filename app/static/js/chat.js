@@ -568,13 +568,16 @@ function getChat(chatID) {
         url: '/api/v1/internal/get-chat',
         type: 'POST',
         beforeSend: function(){
-            $('#chat').hide()
+            $('#chat').hide();
+            $('#chat-members').hide();
             $('#chat-loading').show();
+            $('#chat-member-loading').show()
         },
         complete: function (){
-            console.log('complete');
             $('#chat-loading').hide();
-            $('#chat').show()
+            $('#chat-member-loading').hide();
+            $('#chat').show();
+            $('#chat-members').show();
         },
         contentType: 'application/json',
         data: JSON.stringify({
