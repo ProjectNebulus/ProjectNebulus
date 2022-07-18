@@ -1,11 +1,11 @@
 <style>
     /* Hide scrollbar for Chrome, Safari and Opera */
-    .no-scrollbar::-webkit-scrollbar {
+    #sidebar_::-webkit-scrollbar {
         display: none;
     }
 
     /* Hide scrollbar for IE, Edge and Firefox */
-    .no-scrollbar {
+    #sidebar_ {
         -ms-overflow-style: none; /* IE and Edge */
         scrollbar-width: none; /* Firefox */
     }
@@ -122,7 +122,8 @@
 </div>
 {% if not disablesidebar %}
     {% if user %}
-        <aside onmouseenter="changeNav(true);" onmouseleave="changeNav(false);" class="" aria-label="Sidebar"
+        <aside id="sidebar_" onmouseenter="changeNav(true);" onmouseleave="changeNav(false);" class=""
+               aria-label="Sidebar"
                style="overflow-y: scroll; height: calc(100% - 80px); display: inline-block; z-index: 100;">
             <div class="overflow-y-auto py-4 px-3 backdrop-blur-sm t bg-gray-100/50 rounded dark:bg-gray-800/50">
                 <ul class="space-y-2">
@@ -136,10 +137,11 @@
                     <li>
                         <a href="#"
                            class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                            <p class="dark:text-gray-400 material-icons">temp_preferences_custom</p>
+                            <p class="dark:text-gray-400 material-icons">flare</p>
                             <span class="ml-3 text_nav">Overview</span>
                         </a>
                     </li>
+
 
                     <li>
                         <a href="#"
