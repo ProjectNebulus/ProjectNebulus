@@ -233,6 +233,19 @@
 </div>
 
                 </div>
+                    <div style="bottom: -15; width:350px; " class=" rounded-md mt-2 sticky bg-gray-300 dark:bg-gray-600 flex flex-row">
+                    <div class="pt-2 pb-0 flex flex-col" style="display: inline-block;  margin:5px;">
+                        <button class="rounded-full border-gray-300 border-none w-12 h-12
+                             dark:bg-gray-900 dark:hover:bg-gray-800 ">
+                            <logo image="{{ user_obj.avatar.avatar_url }}" no-revert="" style="filter: brightness(100%);"><img alt="logo" style="filter: brightness(100%);" class="h-6 mx-auto my-auto"></logo>
+                        </button>
+                    </div>
+                    <div style="display: inline-block; margin:5px; " class="pt-2 pb-2 flex flex-col">
+                        <span class="text-xl text-black dark:text-white">{{ user }}</span><br>
+                        <span class="text-sm text-gray-400 dark:text-gray-200">{{ user_obj.email }}</span>
+                    </div>
+
+                </div>
                     <div id="dropdown"
                          class="z-10 hidden bg-white rounded shadow w-96 dark:bg-gray-700">
                         <form class="mx-4">
