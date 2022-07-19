@@ -170,7 +170,7 @@ function togglePreview(){
             let chat = document.getElementById('chat');
             if (preview.style.display === 'none'){
                 preview.style.display = "block";
-                chat.style.height = "65%";
+                chat.style.height = "64%";
             } else {
                 preview.style.display = "none";
                 chat.style.height = "80%";

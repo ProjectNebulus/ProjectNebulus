@@ -18,7 +18,7 @@
 {% block main %}
 
     {% include "utils/navbar.html" %}
-    <div class="flex flex-row" style="height:100%;">
+    <div class="flex flex-row" style="height:calc(100% - 80px);">
     {%  include "utils/sidebar.html" %}
     <style>
         img.emoji {
@@ -110,7 +110,7 @@
         }
     </style>
     <div id="user-data" class="w-0 h-0 invisible">{{ user_obj._id }}</div>
-    <div class="flex flex-row w-full bg-white/50 dark:bg-gray-900/50" style="height: calc(100% - 80px);margin-left:64px;">
+    <div class="flex flex-row w-full bg-white/50 dark:bg-gray-900/50" style="height: 100%;margin-left:64px;">
         <div style="float:left;flex:0 0 270px;width:270px;" class="noselect h-full justify-start" aria-label="Sidebar">
             <div class="px-3 py-4 overflow-y-auto rounded bg-gray-100/75 dark:bg-gray-800/75 h-full" id="chat-sidebar">
                 <form>
@@ -397,7 +397,7 @@
                                                                                                         class="sr-only">Your
                 message</label>
                 <div class="flex items-center py-2 px-3 bg-gray-50 rounded-lg dark:bg-gray-700 m-6 " style="height:100%;">
-                    <button onclick="togglePreview()" class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">Preview</button>
+                    <span onclick="togglePreview()" class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">Preview</span>
                     <button type="button"
                             class="hidden md:block inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
