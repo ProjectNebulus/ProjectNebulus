@@ -28,7 +28,10 @@
 
     <body>
     {% include "utils/navbar.html" %}
+
     <script src="/static/js/user/settings.js"></script>
+    <div class="flex flex-row">
+    {%  include "utils/sidebar.html" %}
     <div class="flex">
         <div id="sidebar"
              class="px-8 py-4 hidden lg:block lg:sticky h-full text-left dark:bg-gray-900/75 bg-gray-200/75"
@@ -913,6 +916,7 @@
 
             </div>
         </div>
+    </div>
     </div>
     </body>
 

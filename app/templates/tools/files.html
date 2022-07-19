@@ -1,10 +1,14 @@
 {% extends "layout.html" %}
 {% block main %}
     {% include "utils/navbar.html" %}
-    <body style="overflow-x: hidden">
+    <div class="flex flex-row">
+    {%  include "utils/sidebar.html" %}
+
+    <div style="overflow-x: hidden">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script>
+
     <nav class="flex py-3 px-5 text-gray-700 bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700"
          aria-label="Breadcrumb">
         <ol class="inline-flex items-center space-x-1 md:space-x-3 -mx-1" id="breadcrumy">
@@ -469,5 +473,6 @@
             }
         </script>
     </div>
-    </body>
+     </div>
+    </div>
 {% endblock %}

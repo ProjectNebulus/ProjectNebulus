@@ -4,6 +4,7 @@
 {% block main %}
     <body class="overflow-hidden">
     {% include "utils/navbar.html" %}
+    <div class="flex flex-row">
     {% include "utils/sidebar.html" %}
 
     <div class="grid grid-cols-1 divide-y divide-gray-300 dark:divide-gray-700 hidden lg:inline w-full pl-8">
@@ -692,5 +693,6 @@
 
     {% include "learning/lms-modal.html" %}
     <script src="/static/js/lms.js"></script>
+    </div>
 {% endblock %}
 </body>

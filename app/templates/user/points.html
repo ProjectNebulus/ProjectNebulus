@@ -1,6 +1,9 @@
 {% extends "layout.html" %}
 {% block main %}
 {% include "utils/navbar.html" %}
+    <div class="flex flex-row">
+
+    {% include "utils/sidebar.html" %}
 <br>
 <a href="#" class="block p-6 bg-white/75 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800/75 dark:border-gray-700"
    style="margin:10px;width:100%;">
@@ -107,5 +110,5 @@
     Beg for Them<br>
 
 </a>
-
+    </div>
 {% endblock %}

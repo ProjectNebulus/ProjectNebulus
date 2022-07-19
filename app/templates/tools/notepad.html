@@ -1,7 +1,8 @@
 {% extends "layout.html" %}
 {% block main %}
     {% include "utils/navbar.html" %}
-    {% include "utils/sidebar.html" %}
+     <div class="flex flex-row">
+    {%  include "utils/sidebar.html" %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     {% for font in fonts %}
@@ -826,5 +827,6 @@
             </div>
         </form>
     </div>
+     </div>
 
 {% endblock %}

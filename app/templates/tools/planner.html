@@ -1,7 +1,8 @@
 {% extends "layout.html" %}
 {% block main %}
     {% include "utils/navbar.html" %}
-    {% include "utils/sidebar.html" %}
+     <div class="flex flex-row">
+    {%  include "utils/sidebar.html" %}
 
     <style>
         .note li {
@@ -232,4 +233,5 @@
     <button class="hidden" data-modal-toggle="configureModal" id="openModal"></button>
 
     <script src="/static/js/tools/planner.js"></script>
+     </div>
 {% endblock %}

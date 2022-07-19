@@ -3,6 +3,8 @@
 {% block main %}
     {% include "utils/navbar.html" %}
     <script src="/static/js/user/profile.js"></script>
+    <div class="flex flex-row">
+    {% include "utils/sidebar.html" %}
     <h1 class="dark:text-white text-4xl noselect">Your Profile</h1><br>
     <div style="margin:20px;"
          class="w-full md:w-1/2 bg-white/75 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800/75 dark:border-gray-700">
@@ -97,4 +99,5 @@
         </div>
     </div>
     {% include "utils/footer.html" %}
+    </div>
 {% endblock %}  
