@@ -111,7 +111,7 @@
     </style>
     <div id="user-data" class="w-0 h-0 invisible">{{ user_obj._id }}</div>
     <div class="flex flex-row w-full bg-white/50 dark:bg-gray-900/50" style="height: calc(100% - 80px);margin-left:64px;">
-        <div style="float:left;flex:0 0 315px;width:315px;" class="noselect h-full justify-start" aria-label="Sidebar">
+        <div style="float:left;flex:0 0 270px;width:270px;" class="noselect h-full justify-start" aria-label="Sidebar">
             <div class="px-3 py-4 overflow-y-auto rounded bg-gray-100/75 dark:bg-gray-800/75 h-full" id="chat-sidebar">
                 <form>
                     <label for="default-search" class="mb-2 text-xs text-gray-900 sr-only dark:text-stone-400">Search or
@@ -140,7 +140,7 @@
                                 <div>Friends</div>
                             </div>
                         </div>
-                        <div class="inline-flex items-center mt-5 p-1 ml-32 mr-3 h-5 w-5 text-sm font-semibold text-white rounded-full bg-red-500">
+                        <div class="inline-flex items-center mt-4 p-1 mr-3 h-5 w-5 text-sm font-semibold text-white rounded-full bg-red-500" style="margin-left: 100px;">
                             {{ user_obj.chatProfile.incomingFriendRequests|length }}
 
                         </div>
@@ -232,17 +232,23 @@
     </div><span class="sr-only">Loading...</span>
 </div>
 
+
+
                 </div>
-                    <div style="bottom: -15; width:350px; " class=" rounded-md mt-2 sticky bg-gray-300 dark:bg-gray-600 flex flex-row">
-                    <div class="pt-2 pb-0 flex flex-col" style="display: inline-block;  margin:5px;">
+                        <div style=" bottom: -16; width:236px; left:0; margin:0 !important;"
+                     class="bg-gray-300 dark:bg-gray-600 flex flex-row">
+                    <div class="pt-2 pb-2 flex flex-col" style="display: inline-block;  margin:5px;">
                         <button class="rounded-full border-gray-300 border-none w-12 h-12
                              dark:bg-gray-900 dark:hover:bg-gray-800 ">
-                            <logo image="{{ user_obj.avatar.avatar_url }}" no-revert="" style="filter: brightness(100%);"><img alt="logo" style="filter: brightness(100%);" class="h-6 mx-auto my-auto"></logo>
-                        </button>
-                    </div>
-                    <div style="display: inline-block; margin:5px; " class="pt-2 pb-2 flex flex-col">
+                            <logo image="{{ user_obj.avatar.avatar_url }}" no-revert="" class="h-6 mx-auto my-auto ">
+                                <img alt="logo"
+                                     style="filter: brightness(100%);">
+                            </logo>
+                            <div style="display: inline-block; margin:5px; " class="pt-2 pb-2 flex flex-col">
                         <span class="text-xl text-black dark:text-white">{{ user }}</span><br>
-                        <span class="text-sm text-gray-400 dark:text-gray-200">{{ user_obj.email }}</span>
+                        <span class="text-sm text-gray-400 dark:text-gray-200">{{ status }}</span>
+                    </div>
+                        </button>
                     </div>
 
                 </div>
@@ -275,23 +281,7 @@
                     </div>
 
                 </div>
-                <div style=" bottom: 0; width:315px; left:0; margin:0 !important;"
-                     class="bg-gray-300 dark:bg-gray-600 flex flex-row">
-                    <div class="pt-2 pb-2 flex flex-col" style="display: inline-block;  margin:5px;">
-                        <button class="rounded-full border-gray-300 border-none w-12 h-12
-                             dark:bg-gray-900 dark:hover:bg-gray-800 ">
-                            <logo image="{{ user_obj.avatar.avatar_url }}" no-revert="" class="h-6 mx-auto my-auto ">
-                                <img alt="logo"
-                                     style="filter: brightness(100%);">
-                            </logo>
-                        </button>
-                    </div>
-                    <div style="display: inline-block; margin:5px; " class="pt-2 pb-2 flex flex-col">
-                        <span class="text-xl text-black dark:text-white">{{ user }}</span><br>
-                        <span class="text-sm text-gray-400 dark:text-gray-200">{{ status }}</span>
-                    </div>
 
-                </div>
                 <style>
                     #dropdownTop {
                         margin-left: 10px !important;
@@ -334,7 +324,7 @@
             </div>
         </div>
 
-        <div class="justify-center" style="width: calc(100% - 595px);-ms-overflow-style: none; " id="main-area">
+        <div class="justify-center" style="width: calc(100% - 400px);-ms-overflow-style: none; " id="main-area">
 
             <div style="padding-left:20px;display:flex;flex-direction: column-reverse;overflow-y:scroll; height:80%;" id="chat">
 
@@ -535,7 +525,7 @@
         <div class="justify-center" style="width: calc(100% - 330px); display:none;" id="emails">
             <iframe id="email_iframe"></iframe>
         </div>
-        <div style="flex: 0 0 280px; width: 280px;" class="noselect" id="members-sidebar">
+        <div style="flex: 0 0 240px; width: 240px;" class="noselect" id="members-sidebar">
             <div class="px-3 py-4 overflow-y-auto rounded bg-gray-100/75 dark:bg-gray-800/75 h-full">
                 <form>
                     <label for="default-search"
@@ -570,8 +560,8 @@
         <svg class="w-14 h-14 text-gray-200 dark:text-gray-700" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"></path></svg>
         <div class="mt-2">
             <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32 mb-2"></div>
-            <div class="w-48 mb-1 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-            <div class="w-48 mb-1 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+            <div class="w-36 mb-1 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+            <div class="w-36 mb-1 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
 
         </div>
     </div>
@@ -580,10 +570,10 @@
         <svg class="w-14 h-14 text-gray-200 dark:text-gray-700" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"></path></svg>
         <div class="mt-2">
             <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32 mb-2"></div>
-            <div class="w-48 mb-2 mb-1 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+            <div class="w-36 mb-2 mb-1 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
 
 
-            <div class="w-48  h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+            <div class="w-36  h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
         </div>
     </div>
 
@@ -593,28 +583,28 @@
         <svg class="w-14 h-14 text-gray-200 dark:text-gray-700" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"></path></svg>
         <div class="mt-2">
             <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32 mb-2"></div>
-            <div class="w-48 mb-2 mb-1 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+            <div class="w-36 mb-2 mb-1 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
 
 
-            <div class="w-48  h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+            <div class="w-36  h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
         </div>
     </div><div class="flex items-top mt-2 space-x-3">
         <svg class="w-14 h-14 text-gray-200 dark:text-gray-700" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"></path></svg>
         <div class="mt-2">
             <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32 mb-2"></div>
-            <div class="w-48 mb-2 mb-1 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+            <div class="w-36 mb-2 mb-1 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
 
 
-            <div class="w-48  h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+            <div class="w-36  h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
         </div>
     </div><div class="flex items-top mt-2 space-x-3">
         <svg class="w-14 h-14 text-gray-200 dark:text-gray-700" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"></path></svg>
         <div class="mt-2">
             <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32 mb-2"></div>
-            <div class="w-48 mb-2 mb-1 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+            <div class="w-36 mb-2 mb-1 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
 
 
-            <div class="w-48  h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+            <div class="w-36  h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
         </div>
     </div><span class="sr-only">Loading...</span>
 </div>
