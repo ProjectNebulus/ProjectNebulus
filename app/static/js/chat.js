@@ -164,6 +164,19 @@ function makeCall(getFirst=true) {
         }
     });
 }
+function togglePreview(){
+            let preview = document.getElementById('preview_border');
+            console.log(preview.style.display);
+            let chat = document.getElementById('chat');
+            if (preview.style.display === 'none'){
+                preview.style.display = "block";
+                chat.style.height = "65%";
+            } else {
+                preview.style.display = "none";
+                chat.style.height = "80%";
+            }
+
+        }
 
 function updateToMessage(message) {
     let chat_el = document.getElementById('chat');

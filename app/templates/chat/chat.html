@@ -236,7 +236,7 @@
 
                 </div>
                         <div style=" bottom: -16; width:236px; left:0; margin:0 !important;"
-                     class="bg-gray-300 dark:bg-gray-600 flex flex-row">
+                     class="bg-gray-300 dark:bg-gray-600 flex flex-row rounded-md">
                     <div class="pt-2 pb-2 flex flex-col" style="display: inline-block;  margin:5px;">
                         <button class="rounded-full border-gray-300 border-none w-12 h-12
                              dark:bg-gray-900 dark:hover:bg-gray-800 ">
@@ -244,11 +244,12 @@
                                 <img alt="logo"
                                      style="filter: brightness(100%);">
                             </logo>
-                            <div style="display: inline-block; margin:5px; " class="pt-2 pb-2 flex flex-col">
+
+                        </button>
+                         <div style="display: inline-block; margin:5px; " class="pt-2 pb-2 flex flex-col">
                         <span class="text-xl text-black dark:text-white">{{ user }}</span><br>
                         <span class="text-sm text-gray-400 dark:text-gray-200">{{ status }}</span>
                     </div>
-                        </button>
                     </div>
 
                 </div>
@@ -375,13 +376,8 @@
 
                 </div>
 
-            <label for="green-toggle" class="inline-flex relative items-center mr-5 cursor-pointer">
-                <input type="checkbox" value="" id="green-toggle" class="sr-only peer" checked>
-                <div class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600"></div>
-                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Green</span>
-            </label>
-            <div id="preview_border" style="display:inline-block;width:93%;filter: brightness(.5)"
-                 class="flex flex-col p-3 m-4 rounded-lg bg-gray-200 dark:bg-gray-800  roboto text-black dark:text-white">
+            <div id="preview_border" style="display:none;width:92%;filter: brightness(.5)"
+                 class="flex flex-col p-3 mb-2 ml-6 mx-2 rounded-lg bg-gray-200 dark:bg-gray-800  roboto text-black dark:text-white">
                 <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">Message Preview</span>
                 <br>
                 <span style="display:inline-block;">
@@ -401,6 +397,7 @@
                                                                                                         class="sr-only">Your
                 message</label>
                 <div class="flex items-center py-2 px-3 bg-gray-50 rounded-lg dark:bg-gray-700 m-6 " style="height:100%;">
+                    <button onclick="togglePreview()" class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">Preview</button>
                     <button type="button"
                             class="hidden md:block inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
@@ -621,6 +618,8 @@
     <script type="module">
         import {createPicker} from 'https://unpkg.com/picmo@5.1.0/dist/index.js';
         import smile2emoji from "https://cdn.skypack.dev/smile2emoji";
+
+
 
         let textarea_el = document.getElementById('msg_content');
         console.log(textarea_el);
