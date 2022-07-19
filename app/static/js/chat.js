@@ -590,8 +590,9 @@ function getChat(chatID) {
         },
         complete: function (){
             $('#chat-loading').hide();
+            document.getElementById("chat").style.height = "80%";
             $('#chat-member-loading').hide();
-            $('#chat').show();
+            document.getElementById("chat").style.display = "block";
             $('#chat-members').show();
         },
         contentType: 'application/json',
