@@ -7,7 +7,10 @@ from . import static_blueprint
 
 @static_blueprint.route("/<folder>/<folder2>/<file>")
 def static_2layer(folder, folder2, file):
-    path = Path(__file__)
+    current_dir = Path(__file__)
+    root_path = [p for p in current_dir.parents if p.parts[-1] == "ProjectNebulus"][
+        0
+    ]
     return send_from_directory(
-        f"{path.parent.parent.parent}/static/{folder}/{folder2}", file
+        f"{root_path}/app/static/{folder}/{folder2}", file
     )

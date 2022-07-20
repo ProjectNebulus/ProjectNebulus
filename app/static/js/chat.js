@@ -178,6 +178,7 @@ function togglePreview(){
 
         }
 
+
 function updateToMessage(message) {
     let chat_el = document.getElementById('chat');
     chat_el.insertAdjacentHTML(
@@ -583,6 +584,7 @@ function getChat(chatID) {
         url: '/api/v1/internal/get-chat',
         type: 'POST',
         beforeSend: function(){
+            $('#msg').style.display = "none";
             $('#chat').hide();
             $('#chat-members').hide();
             $('#chat-loading').show();
@@ -594,6 +596,8 @@ function getChat(chatID) {
             $('#chat-member-loading').hide();
             document.getElementById("chat").style.display = "block";
             $('#chat-members').show();
+
+            document.getElementById('msg').style.display = "block";
         },
         contentType: 'application/json',
         data: JSON.stringify({
