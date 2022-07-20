@@ -138,7 +138,7 @@ Searching...
 keyUpDelay('#search', 1000, changeSearch);
 
 function makeCall(getFirst=true) {
-    let chatAmount = $('#user-chats div').length;
+    let chatAmount = document.getElementById('user-chats').childElementCount;
     console.log(chatAmount);
     console.log(chatAmount);
     $.ajax({
@@ -147,10 +147,6 @@ function makeCall(getFirst=true) {
         beforeSend: function(){
             $('#user-chats').hide();
             $('#chat-list-loading').show();
-        },
-        complete: function(){
-            $('#chat-list-loading').hide();
-            $('#user-chats').show();
         },
         contentType: 'application/json',
         data: JSON.stringify({
@@ -162,6 +158,8 @@ function makeCall(getFirst=true) {
             let selected = document.getElementById('user-chats');
             selected.children[0].click();
         }
+        $('#chat-list-loading').hide();
+        $('#user-chats').show();
     });
 }
 function togglePreview(){
@@ -380,6 +378,7 @@ $(document).ready(function () {
         console.log(div.scrollTop + div.clientHeight + 1, div.scrollHeight);
         if (div.scrollTop + div.clientHeight + 1 >= div.scrollHeight) {
             makeCall(getFirst=false);
+            div.scrollTop = div.scrollHeight;
         }
     });
 });
@@ -584,20 +583,11 @@ function getChat(chatID) {
         url: '/api/v1/internal/get-chat',
         type: 'POST',
         beforeSend: function(){
-            $('#msg').style.display = "none";
-            $('#chat').hide();
+            document.getElementById('msg').classList.add('hidden');
+            document.getElementById('chat').classList.add('hidden')
             $('#chat-members').hide();
             $('#chat-loading').show();
             $('#chat-member-loading').show()
-        },
-        complete: function (){
-            $('#chat-loading').hide();
-            document.getElementById("chat").style.height = "80%";
-            $('#chat-member-loading').hide();
-            document.getElementById("chat").style.display = "block";
-            $('#chat-members').show();
-
-            document.getElementById('msg').style.display = "block";
         },
         contentType: 'application/json',
         data: JSON.stringify({
@@ -733,7 +723,16 @@ function getChat(chatID) {
 
             members.innerHTML = '';
             members.insertAdjacentHTML('beforeend', chatMembers);
+
+            $('#chat-loading').hide();
+            document.getElementById("chat").style.height = "80%";
+            document.getElementById("chat").classList.remove('hidden');
+            document.getElementById('msg').classList.remove('hidden');
+            $('#chat-member-loading').hide();
+            $('#chat-members').show();
+
         }
+
     });
 }
 
