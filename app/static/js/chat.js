@@ -583,7 +583,10 @@ function getChat(chatID) {
         url: '/api/v1/internal/get-chat',
         type: 'POST',
         beforeSend: function(){
-            document.getElementById('msg').classList.add('hidden');
+            if ($('hidden' in document.getElementById('msg').classList)) {
+                document.getElementById('msg').classList.add('hidden');
+            }
+
             document.getElementById('chat').classList.add('hidden')
             $('#chat-members').hide();
             $('#chat-loading').show();
@@ -725,7 +728,12 @@ function getChat(chatID) {
             members.insertAdjacentHTML('beforeend', chatMembers);
 
             $('#chat-loading').hide();
-            document.getElementById("chat").style.height = "80%";
+            let preview = document.getElementById('preview_border');
+            if (preview.style.display == "none") {
+                document.getElementById("chat").style.height = "80%";
+            } else {
+                document.getElementById("chat").style.height = "64%";
+            }
             document.getElementById("chat").classList.remove('hidden');
             document.getElementById('msg').classList.remove('hidden');
             $('#chat-member-loading').hide();
