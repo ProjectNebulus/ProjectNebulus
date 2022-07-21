@@ -74,10 +74,12 @@ function replaceURLs(message, message_id) {
             }
 
             result += `</div>`;
+
+            document
+                .getElementById(`content_${message_id}`)
+                .insertAdjacentHTML('beforeend', result);
         });
-        document
-            .getElementById(`content_${message_id}`)
-            .insertAdjacentHTML('beforeend', result);
+
 
 
         return `<a class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600" href="${hyperlink}">${hyperlink}</a>${result}`;

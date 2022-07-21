@@ -387,8 +387,6 @@ def fetchMessages():
                 .get(pk=message["sender"])
                 .to_json()
         )
-        print(message['send_date'])
-        message["send_date"] = message["send_date"]["$date"]
 
     print(len(chat["messages"]))
 
