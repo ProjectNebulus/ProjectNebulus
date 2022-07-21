@@ -46,6 +46,8 @@ function replaceURLs(message, message_id) {
 
         let result = ``;
 
+        if (hyperlink)
+
         getEmbed(hyperlink).then((data) => {
             console.log(data);
             data = data['data'];
@@ -72,11 +74,10 @@ function replaceURLs(message, message_id) {
             }
 
             result += `</div>`;
+        document
+            .getElementById(`content_${message_id}`)
+            .insertAdjacentHTML('beforeend', result);
 
-            document
-                .getElementById(`content_${message_id}`)
-                .insertAdjacentHTML('beforeend', result);
-        });
 
         return `<a class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600" href="${hyperlink}">${hyperlink}</a>${result}`;
     });
@@ -623,8 +624,8 @@ function getChat(chatID) {
         url: '/api/v1/internal/get-chat',
         type: 'POST',
         beforeSend: function(){
-            if ($('hidden' in document.getElementById('msg').classList)) {
-                document.getElementById('msg').classList.add('hidden');
+            if (!('hidden' in document.getElementById('msg_form').classList)) {
+                document.getElementById('msg_form').classList.add('hidden');
             }
 
             document.getElementById('chat').classList.add('hidden')
@@ -807,7 +808,9 @@ function getChat(chatID) {
                 document.getElementById("chat").style.height = "64%";
             }
             document.getElementById("chat").classList.remove('hidden');
-            document.getElementById('msg').classList.remove('hidden');
+
+            console.log(document.getElementById('msg_form').classList);
+            document.getElementById('msg_form').classList.remove('hidden');
             $('#chat-member-loading').hide();
             $('#chat-members').show();
 
