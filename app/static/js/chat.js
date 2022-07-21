@@ -74,6 +74,7 @@ function replaceURLs(message, message_id) {
             }
 
             result += `</div>`;
+        });
         document
             .getElementById(`content_${message_id}`)
             .insertAdjacentHTML('beforeend', result);
@@ -329,8 +330,9 @@ $(document).ready(function () {
             }).done(function (messages) {
                 let chatContent = ``;
                 let chat = document.getElementById('chat');
+
                 messages.forEach(function (message) {
-                    console.log(message['content']);
+                    var time = formatTime(message['send_date']);
                     let content = replaceURLs(message['content'], message['id']);
                     console.log(content);
                     chatContent += `<div class="flex items-top space-x-4 mt-2" id="${message['id']}">
@@ -340,7 +342,7 @@ $(document).ready(function () {
                         <logo image="${message['sender']['avatar']['avatar_url']}" no-revert=""><img alt="logo" style="filter: brightness(100%);" class="h-4 mx-auto my-auto " ></logo>
                     </button>
                     <div class="space-y-1 font-medium dark:text-white">
-                        <div>${message['sender']['username']} <span class="ml-3 text-sm text-gray-400">${message['send_date']}</span></div>
+                        <div>${message['sender']['username']} <span class="ml-3 text-sm text-gray-400">${time}</span></div>
                         <div id="content_${message['id']}" class="text-sm text-gray-500 dark:text-gray-400">${content}</div>
                     </div>
                 </div>
@@ -618,6 +620,36 @@ function changeTimezone(date, ianatz) {
     return hours + ':' + minutes + ' ' + ampm;
 }
 
+function formatTime(time_input){
+    let date = new Date(time_input.split(" ").join('T'));
+
+    var timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    let new_date = changeTimezone(date, timezone);
+    const today_date = new Date();
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+
+    let date_str = '';
+    let time_str = '';
+
+    if (today_date.toDateString() === new_date.toDateString()) {
+        date_str = 'Today';
+    } else if (yesterday.toDateString() === new_date.toDateString()){
+        date_str = 'Yesterday';
+    } else {
+        date_str = new_date.toDateString();
+    }
+
+    let time = '';
+    if (!(date_str === new_date.toString())){
+        time_str = formatAMPM(new_date);
+        time = date_str + ' at ' + time_str
+    } else {
+        time = date_str
+    }
+    return time
+}
+
 function getChat(chatID) {
     console.log(chatID);
     $.ajax({
@@ -661,34 +693,8 @@ function getChat(chatID) {
             chat['messages'].forEach(function (message) {
                 message['content'] = replaceURLs(message['content'], message['id']);
 
-                console.log(message['send_date']);
+                var time = formatTime(message['send_date']);
 
-                let date = new Date(message['send_date'].split(" ").join('T'));
-                console.log(message['send_date'].split(" ").join('T'));
-                var timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-                let new_date = changeTimezone(date, timezone);
-                const today_date = new Date();
-                const yesterday = new Date();
-                yesterday.setDate(yesterday.getDate() - 1);
-
-                let date_str = '';
-                let time_str = '';
-
-                if (today_date.toDateString() === new_date.toDateString()) {
-                    date_str = 'Today';;
-                } else if (yesterday.toDateString() === new_date.toDateString()){
-                    date_str = 'Yesterday';
-                } else {
-                    date_str = new_date.toDateString();
-                }
-
-                let time = '';
-                if (!(date_str === new_date.toString())){
-                    time_str = formatAMPM(new_date);
-                    time = date_str + ' at ' + time_str
-                } else {
-                    time = date_str
-                }
 
 
 
