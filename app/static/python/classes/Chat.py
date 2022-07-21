@@ -1,5 +1,6 @@
 from datetime import datetime
 
+
 from mongoengine import (
     DateTimeField,
     EmbeddedDocumentField,
@@ -26,7 +27,7 @@ class Chat(Snowflake):
     type = StringField(default="Nebulus")  # Nebulus, Schoology, etc.
     messages = ListField(EmbeddedDocumentField("Message"), default=[])
     pinned_messages = ListField(EmbeddedDocumentField(Message), default=[])
-    lastEdited = DateTimeField(default=lambda: datetime.now())
+    lastEdited = DateTimeField(default=lambda: datetime.utcnow())
 
     def clean(self):
         if not self.title:

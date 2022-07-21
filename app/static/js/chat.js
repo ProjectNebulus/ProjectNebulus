@@ -576,6 +576,46 @@ function profile(node) {
 </div>`;
     insertAfter(node, el);
 }
+function toIsoString(date) {
+  var tzo = -date.getTimezoneOffset(),
+      dif = tzo >= 0 ? '+' : '-',
+      pad = function(num) {
+          return (num < 10 ? '0' : '') + num;
+      };
+
+  return date.getFullYear() +
+      '-' + pad(date.getMonth() + 1) +
+      '-' + pad(date.getDate()) +
+      'T' + pad(date.getHours()) +
+      ':' + pad(date.getMinutes()) +
+      ':' + pad(date.getSeconds()) +
+      dif + pad(Math.floor(Math.abs(tzo) / 60)) +
+      ':' + pad(Math.abs(tzo) % 60);
+}
+
+function changeTimezone(date, ianatz) {
+
+  // suppose the date is 12:00 UTC
+  var invdate = new Date(date.toLocaleString('en-US', {
+    timeZone: ianatz
+  }));
+
+  // then invdate will be 07:00 in Toronto
+  // and the diff is 5 hours
+  var diff = date.getTime() - invdate.getTime();
+
+  // so 12:00 in Toronto is 17:00 UTC
+  return new Date(date.getTime() - diff); // needs to substract
+
+}function formatAMPM(date) {
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var ampm = hours >= 12 ? 'pm' : 'am';
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  minutes = minutes < 10 ? '0'+minutes : minutes;
+    return hours + ':' + minutes + ' ' + ampm;
+}
 
 function getChat(chatID) {
     console.log(chatID);
@@ -620,12 +660,44 @@ function getChat(chatID) {
             chat['messages'].forEach(function (message) {
                 message['content'] = replaceURLs(message['content'], message['id']);
 
+                console.log(message['send_date']);
+
+                let date = new Date(message['send_date'].split(" ").join('T'));
+                console.log(message['send_date'].split(" ").join('T'));
+                var timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                let new_date = changeTimezone(date, timezone);
+                const today_date = new Date();
+                const yesterday = new Date();
+                yesterday.setDate(yesterday.getDate() - 1);
+
+                let date_str = '';
+                let time_str = '';
+
+                if (today_date.toDateString() === new_date.toDateString()) {
+                    date_str = 'Today';;
+                } else if (yesterday.toDateString() === new_date.toDateString()){
+                    date_str = 'Yesterday';
+                } else {
+                    date_str = new_date.toDateString();
+                }
+
+                let time = '';
+                if (!(date_str === new_date.toString())){
+                    time_str = formatAMPM(new_date);
+                    time = date_str + ' at ' + time_str
+                } else {
+                    time = date_str
+                }
+
+
+
+
                 chatContent += `<div class="flex items-top space-x-4 mt-2 hover:bg-gray-100/50 dark:hover:bg-gray-700/50 " id="${message['id']}">
                         <img class="mt-1 w-10 h-10 rounded-full " data-dropdown-toggle="user_${message['id']}"
                              src="${message['sender']['avatar']['avatar_url']}"
                              alt="">
                         <div class="space-y-1 font-medium dark:text-white">
-                            <div><span  data-dropdown-toggle="user_${message['id']}" class="hover:underline">${message['sender']['username']}</span> <span class="ml-3 text-sm text-gray-400">${message['send_date']}</span></div>
+                            <div><span  data-dropdown-toggle="user_${message['id']}" class="hover:underline">${message['sender']['username']}</span> <span class="ml-3 text-sm text-gray-400">${time}</span></div>
                             <div id="content_${message['id']}" style="font-family: 'Roboto', sans-serif;" class="text-sm text-gray-500 dark:text-gray-400">${message['content']}</div>
                             
                         </div>
@@ -751,11 +823,15 @@ function sendMessage() {
     let val = el.innerHTML;
     el.innerHTML = '';
     console.log(val);
+    let send_date = new Date();
+    send_date = toIsoString(send_date);
     let chatID = document.getElementById('chatID').getAttribute('data-id');
     socket.emit('new_message', {
         chatType: 'chat',
         chatID: chatID,
-        content: val
+        content: val,
+        send_date: send_date
+
     });
 }
 
