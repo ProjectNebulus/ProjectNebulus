@@ -183,6 +183,7 @@ function togglePreview(){
 
 function updateToMessage(message) {
     let chat_el = document.getElementById('chat');
+    message['send_date'] = formatTime(message['send_date']);
     chat_el.insertAdjacentHTML(
         'afterbegin',
         `<div class="flex items-top space-x-4 mt-2" id="${message['id']}" style="font-family: 'Roboto', sans-serif;">
@@ -651,15 +652,20 @@ function formatTime(time_input){
     }
     return time
 }
+let show_preview = false;
 
 function getChat(chatID) {
-    console.log(chatID);
     $.ajax({
         url: '/api/v1/internal/get-chat',
         type: 'POST',
         beforeSend: function(){
             if (!('hidden' in document.getElementById('msg_form').classList)) {
                 document.getElementById('msg_form').classList.add('hidden');
+            }
+
+            if (!('hidden' in document.getElementById('preview_border').classList)){
+                document.getElementById('preview_border').classList.add('hidden');
+                show_preview = true;
             }
 
             document.getElementById('chat').classList.add('hidden')
@@ -816,6 +822,10 @@ function getChat(chatID) {
                 document.getElementById("chat").style.height = "64%";
             }
             document.getElementById("chat").classList.remove('hidden');
+
+            if (show_preview){
+                document.getElementById('preview_border').classList.remove('hidden')
+            }
 
             console.log(document.getElementById('msg_form').classList);
             document.getElementById('msg_form').classList.remove('hidden');
