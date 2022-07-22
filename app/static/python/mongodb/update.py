@@ -12,6 +12,14 @@ from ..classes import (
 from ..utils.security import hash256
 
 
+def update_unread(data, userID):
+    for chat, unread in data.items():
+        chat_obj = Chat.objects().get(pk=chat)
+        user = list(filter(lambda x: x.user.id == userID, chat_obj.members))[0]
+        user.unread += unread
+        chat.save()
+
+
 def schoologyLogin(_id: str, schoology: dict):
     from .read import find_user
 

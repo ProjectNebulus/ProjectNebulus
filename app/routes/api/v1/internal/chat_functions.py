@@ -11,8 +11,10 @@ from pandas import *
 from app.static.python.classes import User
 from app.static.python.mongodb import create, delete, read, update
 # from app.static.python.school import get_school
+
 from . import internal
 from .... import socketio
+from .....static.python.classes import ChatMember
 
 
 def get_school():
@@ -115,7 +117,7 @@ def user_left(json_data):
 @socketio.event(namespace="/chat")
 def user_loaded(json_data):
     print("loaded user")
-    chats = [x.id for x in read.find_user(pk=session["id"]).chats]
+    chats = [x for x in User.objects.no_dereference().get(pk=session["id"]).chats]
     for chat in chats:
         join_room(chat)
 
@@ -164,20 +166,22 @@ def message_deleted(json_data):
 
 @socketio.event(namespace="/chat")
 def new_chat(data):
+    data["members"] = list(map(lambda x: ChatMember(user=x), data["members"]))
     data = {
         "owner": session["id"],
-        "members": [session["id"], *data["members"]],
+        "members": [ChatMember(user=session["id"]), *data["members"]],
     }
 
     print(data)
     chat = create.createChat(data)
+    members = list(map(lambda x: x.to_json(), chat.members))
     chat = {
         "id": chat.id,
         "avatar": {"avatar_url": chat.avatar.avatar_url},
         "title": chat.title,
         "lastEdited": chat.lastEdited,
         "owner": session["id"],
-        "members": [session["id"], *data["members"]],
+        "members": members,
     }
 
     sid_list = []
@@ -353,16 +357,23 @@ def getChat():
         )
 
     for n, member in enumerate(chat["members"]):
-        chat["members"][n] = json.loads(
+        chat["members"][n]['user'] = json.loads(
             (
                 User.objects.only(
                     "id", "username", "chatProfile", "avatar.avatar_url"
-                ).get(pk=member)
+                ).get(pk=member['user'])
             ).to_json()
         )
-    chat["members"] = sorted(chat["members"], key=lambda x: x["username"])
+    chat["members"] = sorted(chat["members"], key=lambda x: x["user"]["username"])
 
     return jsonify(chat)
+
+
+@internal.route('/update-unread', methods=["POST"])
+def update_unread():
+    data = request.get_json()
+    update.update_unread(data, session['id'])
+    return 'success'
 
 
 @internal.route("/fetch-messages", methods=["POST"])

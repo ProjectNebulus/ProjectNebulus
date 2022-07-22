@@ -420,9 +420,8 @@ def search_course(keyword: str, course: str):
     )
 
 
-def getUserChats(user_id: str, required_fields: list):
-    user = find_user(pk=user_id)
-    chats = Chat.objects(members=user).only(*required_fields)
+def getUserChats(user_id, required_fields: list):
+    chats = Chat.objects(members__user=user_id).only(*required_fields)
     return chats
 
 
@@ -438,15 +437,16 @@ def loadChats(user_id: str, current_index, initial_amount, required_fields):
     for chat in chats:
         if len(chat["members"]) == 2:
             for x, member in enumerate(chat["members"]):
-                chat["members"][x] = json.loads(
+                chat["members"][x]['user'] = json.loads(
                     User.objects.only(
                         "id", "chatProfile", "username", "avatar.avatar_url"
                     )
-                    .get(pk=member)
+                    .get(pk=member['user'])
                     .to_json()
                 )
+                chat["members"][x]['unread'] = str(chat["members"][x]['unread'])
             chat["owner"] = list(
-                filter(lambda x: x["_id"] == chat["owner"], chat["members"])
+                filter(lambda x: x["user"]["_id"] == chat["owner"], chat["members"])
             )[0]
 
     print(chats)

@@ -6,9 +6,10 @@ import platform
 
 from dotenv import load_dotenv
 import pytz
+
 load_dotenv()
 from app.routes import init_app, socketio
-from app.static.python.classes import Chat
+from app.static.python.classes import Chat, ChatMember, User
 from dateutil import parser
 
 app = init_app()
@@ -26,6 +27,9 @@ if __name__ == "__main__":
         port = 8080
         host = "localhost"
         protocol = ""
+
+    col = Chat._get_collection()
+
 
 
     print(str(app.url_map).replace("Map([", " ", 1).replace("])", "\n"), sep="\n")

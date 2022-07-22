@@ -4,9 +4,11 @@ from datetime import datetime
 from mongoengine import (
     DateTimeField,
     EmbeddedDocumentField,
+    EmbeddedDocument,
     ListField,
     ReferenceField,
     StringField,
+    IntField
 )
 
 from .Avatar import Avatar
@@ -14,9 +16,14 @@ from .Message import Message
 from .Snowflake import Snowflake
 
 
+class ChatMember(EmbeddedDocument):
+    user = ReferenceField('User')
+    unread = IntField(default=0)
+
+
 class Chat(Snowflake):
     meta = {"collection": "Chats"}
-    members = ListField(ReferenceField("User"), default=[])
+    members = ListField(EmbeddedDocumentField(ChatMember))
     owner = ReferenceField("User", required=True)
     created = DateTimeField(default=lambda: datetime.now())
     title = StringField()
