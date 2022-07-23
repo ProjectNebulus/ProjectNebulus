@@ -99,9 +99,9 @@ function invertSite(reloadChart) {
         if (window.location.pathname === '/') {
             let wallpaper = localStorage.getItem('wallpaper');
             if (!wallpaper) wallpaper = '/static/images/darkwallpaper.png';
-
-            document.body.style += "-webkit-background-size: cover !important; -moz-background-size: cover !important; -o-background-size: cover !important; background-size: cover !important;";
             document.body.style.background = `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)) 0% 0% / cover, url("${wallpaper}") center center no-repeat fixed`;
+            document.body.style += "-webkit-background-size: cover !important; -moz-background-size: cover !important; -o-background-size: cover !important; background-size: cover !important;";
+
             if (reloadChart) {
                 document.getElementById('chart').innerHTML = `
    
