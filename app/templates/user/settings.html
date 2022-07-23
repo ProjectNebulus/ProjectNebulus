@@ -32,82 +32,118 @@
     <script src="/static/js/user/settings.js"></script>
     <div class="flex flex-row">
     {%  include "utils/sidebar.html" %}
-    <div class="flex" style="margin-left:64px;">
-        <div id="sidebar"
-             class="px-8 py-4 hidden lg:block lg:sticky h-full text-left dark:bg-gray-900/75 bg-gray-200/75"
-             style="position:fixed; flex: 0 0 10%; top: 76px; align-self: flex-start; width:250px;">
-            <div class="mt-12 lg:mt-8">
-                <h5 class="mb-8 lg:mb-3 text-3xl font-semibold text-slate-900 dark:text-slate-200">Settings</h5>
-                <ul class="space-y-6 lg:space-y-2 border-l border-slate-100 dark:border-slate-800">
-                    <li>
-                        <a class="block border-l pl-4 -ml-px text-sky-500 border-current font-semibold dark:text-sky-400"
-                           href="#general">General</a></li>
-                    <li>
-                        <a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
-                           href="#connections">Connections</a></li>
-                    <li>
-                    <li>
-                        <a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
-                           href="#school">School</a></li>
-                    <li>
-                    <li>
-                        <a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
-                           href="#appearance">Appearance</a></li>
-                    <li>
-                    <li>
-                        <a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
-                           href="#themes">Themes</a></li>
-                    <li>
-                    <li>
-                        <a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
-                           href="#chat">Chat</a></li>
-                    <li>
-                    <li>
-                        <a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
-                           href="#badges">Badges</a></li>
-                    <li>
-                    <li>
-                        <a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
-                           href="#achievements">Achievements</a></li>
-                    <li>
-                    <li>
-                        <a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
-                           href="#time">Screen Time</a></li>
-                    <li>
-                    <li>
-                        <a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
-                           href="#security">Security</a></li>
-                    <li>
-                    <li>
-                        <a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
-                           href="#psw">Password Manager</a></li>
-                    <li>
-                        <a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
-                           href="#bug">Reports</a></li>
-                    <li>
-                        <a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
-                           href="#request">Requests</a></li>
-                    <li>
-                        <a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
-                           href="#danger">Advanced</a></li>
-                    <li>
-                        <a class="block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
-                           href="#log">Change-log</a></li>
-                    <li>
-                </ul>
+        <div class="flex" style="margin-left:64px;">
+            <aside class="w-64" aria-label="Sidebar">
+                <div class="w-64 h-full overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-gray-800" style="
+    position: fixed;
+    overflow-y: scroll;
+">
+                    <h1 class="text-3xl text-black dark:text-white">Settings</h1><br>
 
-            </div>
-        </div>
-        <div id="account" style="flex: 0 0 0 90%; margin-left: calc(8% + 250px); margin-right:8%;">
-            <div class="mt-6">
-                <h1 class="text-3xl text-black dark:text-white">My Account</h1>
-            </div>
-            <br>
+                    <ul class="w-64 space-y-2">
+                        <li>
+                            <a href="#general"
+                               class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <span class="ml-3">General</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#connections"
+                               class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <span class="ml-3">Connections</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#school"
+                               class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <span class="ml-3">School</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#appearance"
+                               class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <span class="ml-3">Appearance</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#themes"
+                               class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <span class="ml-3">Themes</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#chat"
+                               class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <span class="ml-3">Chat</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#badges"
+                               class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <span class="ml-3">Badges</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#achievements"
+                               class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <span class="ml-3">Achievements</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#time"
+                               class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <span class="ml-3">Screen Time</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#security"
+                               class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <span class="ml-3">Security</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#psw"
+                               class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <span class="ml-3">Password Manager</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#bug"
+                               class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <span class="ml-3">Reports</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#request"
+                               class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <span class="ml-3">Requests</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#danger"
+                               class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <span class="ml-3">Advanced</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#log"
+                               class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <span class="ml-3">Change Log</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+            <div id="account" style="flex: 0 0 0 90%; margin-left: calc(8% + 250px); margin-right:8%;">
+                <div class="mt-6">
+                    <h1 class="text-3xl text-black dark:text-white">My Account</h1>
+                </div>
+                <br>
 
-            <h2 id="general" class="text-2xl text-black dark:text-white">General Settings</h2><br>
-            <label class="hidden md:block block mt-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                Your Username
-            </label>
+                <h2 id="general" class="text-2xl text-black dark:text-white">General Settings</h2><br>
+                <label class="hidden md:block block mt-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                    Your Username
+                </label>
 
             <div class="settingItem" style="display: inline-block;">
                 <div class="relative mt-1" style="display: inline-block;">
