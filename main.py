@@ -28,8 +28,6 @@ if __name__ == "__main__":
         host = "localhost"
         protocol = ""
 
-    col = Chat._get_collection()
-
 
 
     print(str(app.url_map).replace("Map([", " ", 1).replace("])", "\n"), sep="\n")

@@ -17,7 +17,7 @@ def update_unread(data, userID):
         chat_obj = Chat.objects().get(pk=chat)
         user = list(filter(lambda x: x.user.id == userID, chat_obj.members))[0]
         user.unread += unread
-        chat.save()
+        chat_obj.save()
 
 
 def schoologyLogin(_id: str, schoology: dict):

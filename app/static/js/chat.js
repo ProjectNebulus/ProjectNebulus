@@ -490,6 +490,7 @@ function changeStatus(status) {
 
 window.onbeforeunload = function () {
     changeStatus('Offline');
+    console.log(unread_list);
     $.ajax({
         url: '/api/v1/internal/update-unread',
         type: 'POST',
