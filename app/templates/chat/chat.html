@@ -11,7 +11,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="/static/js/chat.js"></script>
-
+<script>
+    window.onload = function () {
+        if (window.location.search.substr(1).includes("email=ema")) {
+            toggleEmail();
+        }
+    }
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500;1,700&display=swap"
       rel="stylesheet">
 {% extends "layout.html" %}
@@ -665,10 +671,12 @@
         const rootElement = document.querySelector('#emojiPicker');
 
         // Create the picker
-            const picker = createPicker({
+        const picker = createPicker({
             rootElement,
             renderer: new TwemojiRenderer()
         });
+
+
     </script>
 
 {% endblock %}
