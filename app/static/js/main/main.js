@@ -100,7 +100,7 @@ function invertSite(reloadChart) {
             let wallpaper = localStorage.getItem('wallpaper');
             if (!wallpaper) wallpaper = '/static/images/darkwallpaper.png';
 
-            document.body.style.backgroundSize = 'cover';
+            document.body.style += "-webkit-background-size: cover !important; -moz-background-size: cover !important; -o-background-size: cover !important; background-size: cover !important;";
             document.body.style.background = `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)) 0% 0% / cover, url("${wallpaper}") center center no-repeat fixed`;
             if (reloadChart) {
                 document.getElementById('chart').innerHTML = `
@@ -126,7 +126,8 @@ function invertSite(reloadChart) {
                 document.body.style.backgroundImage = '';
             } else {
                 document.body.style.background = `linear-gradient( rgba(256, 256, 256, 0.5), rgba(256, 256, 256, 0.2) ), url('${wallpaper}') no-repeat center center fixed`;
-                document.body.style.backgroundSize = 'cover';
+                document.body.style += "-webkit-background-size: cover !important; -moz-background-size: cover !important; -o-background-size: cover !important; background-size: cover !important;";
+
             }
             if (reloadChart) {
                 document.getElementById('chart').innerHTML = `<iframe style="background: rgba(255, 255, 255, 0.5); border-radius:10px;border: none; margin:10px; " width="80%" height="580" src="https://charts.mongodb.com/charts-project-0-dixeb/embed/charts?id=62c4eb23-6d77-4441-8174-0fc61c500111&maxDataAge=10&theme=lightk&autoRefresh=true"></iframe>;`
@@ -151,9 +152,9 @@ function invertSite(reloadChart) {
                     innerDoc.body.style.background = '#111926';
                 }
                 else {
-                    document.body.style.backgroundSize = 'cover';
                     document.body.style.background = `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2) ), url('${wallpaper}') no-repeat center center fixed`;
-                    document.body.style.backgroundSize = 'cover';
+                    document.body.style += "-webkit-background-size: cover !important; -moz-background-size: cover !important; -o-background-size: cover !important; background-size: cover !important;";
+
                     for (let header of document.getElementsByClassName("modalheader")) {
                         header.style =
                             `background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)) 0% 0% / cover, url("${wallpaper}") ;
@@ -170,9 +171,9 @@ function invertSite(reloadChart) {
                     innerDoc.body.style.background = 'white';
                 }
                 else {
-                    document.body.style.backgroundSize = 'cover';
                     document.body.style.background = `linear-gradient( rgba(256, 256, 256, 0.5), rgba(256, 256, 256, 0.2) ), url('${wallpaper}') no-repeat center center fixed`;
-                    document.body.style.backgroundSize = 'cover';
+                    document.body.style += "-webkit-background-size: cover !important; -moz-background-size: cover !important; -o-background-size: cover !important; background-size: cover !important;";
+
                     for (let header of document.getElementsByClassName("modalheader")) {
                         header.style =
                             `background: linear-gradient(rgba(256, 256, 256, 0.5), rgba(256, 256, 256, 0.2)) 0% 0% / cover, url("${wallpaper}") ;
