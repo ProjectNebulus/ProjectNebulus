@@ -16,7 +16,7 @@ def update_unread(data, userID):
     for chat, unread in data.items():
         chat_obj = Chat.objects().get(pk=chat)
         user = list(filter(lambda x: x.user.id == userID, chat_obj.members))[0]
-        user.unread += unread
+        user.unread = unread
         chat_obj.save()
 
 
