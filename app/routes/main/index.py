@@ -31,12 +31,13 @@ def index():
 @main_blueprint.route("/google34d8c04c4b82b69a.html")
 def googleVerification():
     # GOOGLE VERIFICATION FILE
-    return render_template("utils/google34d8c04c4b82b69a.html")
+    return render_template("utils/google34d8c04c4b82b69a.html",
+                           translate=getText, )
 
 
 @main_blueprint.route("/arc-sw.js")
 def arcstuff():
-    return redirect("https://arc.io/arc-sw.js")
+    return redirect("https://arc.io/arc-sw.js", )
 
 
 @main_blueprint.route("/privacy-policy")
@@ -59,6 +60,7 @@ def selectregion():
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         page="Select a Region",
+        translate=getText,
     )
 
 
@@ -77,6 +79,7 @@ def page_not_found(e):
             user=session.get("username"),
             email=session.get("email"),
             avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+            translate=getText,
         ),
         404,
     )
@@ -92,6 +95,7 @@ def internal_error(e):
             user=session.get("username"),
             email=session.get("email"),
             avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+            translate=getText,
         ),
         500,
     )
@@ -115,7 +119,8 @@ def scheduler():
                            user=session.get("username"),
                            email=session.get("email"),
                            avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-                           page="Scheduler", )
+                           page="Scheduler",
+                           translate=getText, )
 
 
 @main_blueprint.route("/study-planner")
@@ -124,7 +129,8 @@ def studyplanner():
                            user=session.get("username"),
                            email=session.get("email"),
                            avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-                           page="Study Planner", )
+                           page="Study Planner",
+                           translate=getText, )
 
 
 @main_blueprint.route("/lunch")
@@ -133,7 +139,8 @@ def lunchplanner():
                            user=session.get("username"),
                            email=session.get("email"),
                            avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-                           page="Lunch Planner", )
+                           page="Lunch Planner",
+                           translate=getText, )
 
 
 @main_blueprint.route("/vacation")
