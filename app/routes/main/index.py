@@ -4,6 +4,7 @@ from flask import redirect, render_template, request, send_file, session
 
 from . import main_blueprint
 from .. import babel
+from ...static.python.mongodb.read import getText
 
 
 @babel.localeselector
@@ -21,7 +22,8 @@ def index():
         page="Nebulus - Learning, All In One",
         user=session.get("username"),
         email=session.get("email"),
-        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif", ),
+        translate=getText,
 
     )
 
@@ -104,32 +106,8 @@ def sw():
 
 @main_blueprint.route("/global/<country>", methods=["GET"])
 def international(country):
-    page = "Nebulus - Learning, All In One"
-    spanish_country = ["ar", "co", "cr", "cu", "do", "ec", "es", "mx", "pa", "sv"]
-    if country in spanish_country:
-        page = "Nebulus - Aprendizaje, todo en uno"
-    if country == "th":
-        page = "Nebulus - การเรียนรู้ ทั้งหมดในที่เดียว"
-    if country == "kr":
-        page = "Nebulus - 학습, 올인원"
-    if country == "cn":
-        page = "难不来 - 学习，多合一"
-    if country == "hk" or country == "mo" or country == "tw":
-        page = "難不來 - 學習，多合一"
-    if country == "jp":
-        page = "Nebulus - 学習、オールインワン"
-    if country == "us":
-        return redirect("/")
-    try:
-        return render_template(
-            f"main/global/{country}.html",
-            page=page,
-            user=session.get("username"),
-            email=session.get("email"),
-            avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-        )
-    except:
-        return "This country doesn't exist yet :( Contact norachai on Discord and request this country to be made."
+    session["global"] = country
+    return redirect("/")
 
 @main_blueprint.route("/scheduler")
 def scheduler():

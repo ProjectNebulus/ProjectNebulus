@@ -9,7 +9,7 @@ from . import main_blueprint, utils
 @main_blueprint.route("/signin", methods=["GET"])
 def signin():
     if session.get("logged_in"):
-        return redirect("/dashboard")
+        return redirect("/app")
 
     return render_template(
         "main/signin.html",

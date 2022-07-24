@@ -9,9 +9,9 @@ from . import main_blueprint, utils
 @main_blueprint.route("/signup", methods=["GET"])
 def signup():
     if session.get("username"):
-        return redirect("/dashboard")
+        return redirect("/app")
     if session.get("username"):
-        return redirect("/dashboard")
+        return redirect("/app")
     return render_template(
         "main/signup.html",
         page="Nebulus - Sign Up",

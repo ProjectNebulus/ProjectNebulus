@@ -4,12 +4,44 @@ import json
 import re
 
 import schoolopy
+from flask import session
 from mongoengine import Q
 
 from app.static.python.utils.security import valid_password
 from ..classes import *
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
+
+
+def getLocal():
+    if not session["global"]:
+        session["global"] = "us"
+    return session["global"]
+
+
+def getText(query):
+    dictionary = {"Nebulus": {
+        "us": "Nebulus",
+        "uk": "Nebulus",
+        "au": "Nebulus",
+        "es": "Nébulus",
+        "mx": "Nébulus",
+        "cr": "Nébulus",
+        "cu": "Nébulus",
+        "co": "Nébulus",
+        "ar": "Nébulus",
+        "it": "Nèbulo",
+        "cn": "难不来",
+        "tw": "難不來",
+        "hk": "難不來",
+        "mo": "難不來",
+        "jp": "ネビュラス",
+        "kr": "네뷸러스",
+    }}
+    try:
+        return dictionary[query][getLocal()]
+    except:
+        return query
 
 
 def getAssignment(assignment_id: str) -> Assignment:
