@@ -55,6 +55,9 @@ def new_message(json_data):
         json_data["content"] = json_data["content"].replace("\n", "<br>")
         message = create.sendMessage(json_data, chatID)
         chat = read.getChat(chatID)
+        members = chat.to_json()["members"]
+        for x, user in enumerate(chat.members):
+            members[x]['user']['offline'] = user.chatProfile.offline
         chat.lastEdited = datetime.datetime.now()
         chat.save()
         send_date = str(message.send_date)
@@ -68,6 +71,8 @@ def new_message(json_data):
                 "id": message.id,
                 "send_date": send_date,
                 "chatID": chatID,
+                "members": members
+
             },
             room=chatID,
         )
@@ -372,7 +377,7 @@ def getChat():
 @internal.route('/update-unread', methods=["POST"])
 def update_unread():
     data = request.get_json()
-    update.update_unread(data, session['id'])
+    update.update_unread(data)
     return 'success'
 
 

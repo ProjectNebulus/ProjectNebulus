@@ -12,11 +12,13 @@ from ..classes import (
 from ..utils.security import hash256
 
 
-def update_unread(data, userID):
+def update_unread(data):
+    print(data)
     for chat, unread in data.items():
         chat_obj = Chat.objects().get(pk=chat)
-        user = list(filter(lambda x: x.user.id == userID, chat_obj.members))[0]
-        user.unread = unread
+        users = list(filter(lambda x: x.user.id in unread.keys(), chat_obj.members))
+        for user in users:
+            user.unread = unread[user.user.id]
         chat_obj.save()
 
 
@@ -235,11 +237,14 @@ def deleteMessage(chat_id, message_id):
 
 def set_status(user_id: str, status: str):
     user = User.objects.get(pk=user_id)
-    if status == "Online" and user.chatProfile.status != "Offline":
-        pass
+    if status == "Online":
+        user.chatProfile.offline = False
+    elif status == "Offline":
+        user.chatProfile.offline = True
     else:
         user.chatProfile.status = status
-        user.save(clean=False)
+
+    user.save()
 
 
 def resetPassword(username: str, psw: str):

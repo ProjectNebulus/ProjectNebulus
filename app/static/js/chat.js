@@ -1,6 +1,7 @@
 io = window.io;
 
 let unread_list = {};
+
 function getEmbed(hyperlink) {
     return new Promise((resolve, reject) => {
         $.ajax({
@@ -288,9 +289,9 @@ $(document).ready(function () {
     });
 
     socket.on('new_message', function (data) {
-        console.log('socketio recieved event!');
         let userChats = document.getElementById('user-chats');
         let el = document.getElementById(`sidechat_${data['chatID']}`);
+        let userID = document.getElementById('user-data').textContent;
         let chatID = document.getElementById('chatID').getAttribute('data-id');
         userChats.prepend(el);
         if (chatID === data['chatID']) {
@@ -301,7 +302,12 @@ $(document).ready(function () {
                 el_notifs.classList.remove('hidden');
             }
             el_notifs.innerText = (parseInt(el_notifs.innerText) + 1).toString();
-            unread_list[data['chatID']] += 1;
+            unread_list[data['chatID']][userID] += 1
+            data['members'].forEach(function(user){
+                if (user['offline'] && user['user'] != userID){
+                    unread_list[data['chatID']][user['user']] += 1
+                }
+            });
 
         }
     });
@@ -403,12 +409,25 @@ function load(data, getFirst=false) {
     let div = document.getElementById('user-chats');
     data.forEach(function (chat) {
         let unread = chat['members'].filter(function(user){
-            console.log(user);
             return user['user']['_id'] === userID;
         })[0]['unread'];
 
+        chat['members'].forEach(function(user){
+
+            let user_id = user['user']['_id'];
+            if (!(chat['_id'] in unread_list)){
+
+                let d = {};
+                d[user_id] = user["unread"];
+                unread_list[chat['_id']] = d;
+            } else {
+                unread_list[chat["_id"]][user_id] = user["unread"];
+            }
+
+        })
+
         unread_list[chat['_id']] = parseInt(unread);
-        if (data.indexOf(chat) === 0 && getFirst === true) {
+        if (data.indexOf(chat) === 0 && getFirst) {
             s += `
         <div onclick="getChat('${chat['_id']}')" id="sidechat_${chat['_id']}" style="margin-bottom:4px;"
          class="p-2 flex items-center space-x-4 dark:bg-gray-600 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" >`;
@@ -424,12 +443,16 @@ function load(data, getFirst=false) {
 
 
             let color;
-            if (other['chatProfile']['status'] === 'Online') {
+            if (!(other['chatProfile']['offline']) && other['chatProfile']['status'] === 'None') {
                 color = 'bg-green-400';
 
             } else if (other['chatProfile']['status'] === 'Do Not Disturb') {
                 color = 'bg-red-500';
-            } else {
+
+            } else if (other['chatProfile']['status'] === 'Idle'){
+                color = "bg-amber-500"
+            }
+            else {
                 color = 'bg-gray-700';
             }
             let visibility;
@@ -676,6 +699,7 @@ function formatTime(time_input){
 let show_preview = false;
 
 function getChat(chatID) {
+    toggleChat();
     document.getElementById(`notification_${chatID}`).classList.add('hidden');
     $.ajax({
         url: '/api/v1/internal/get-chat',
@@ -796,6 +820,24 @@ function getChat(chatID) {
 
 
         chat['members'].forEach(function (other) {
+            let status;
+            if (other['user']['_id'] === userID){
+                if (other['user']['chatProfile']['status'] === 'None'){
+                    status = "Online";
+                } else {
+                    status = other['user']['chatProfile']['status'];
+                }
+            } else {
+                if (other['user']['chatProfile']['status'] === "None"){
+                    if (other['user']['chatProfile']['offline']){
+                        status = "Offline"
+                    } else {
+                        status = "Online"
+                    }
+                } else {
+                    status = other["user"]["chatProfile"]["status"]
+                }
+            }
             chatMembers += `<div 
     oncontextmenu='profile(this)'
     style="margin-bottom:4px;"
