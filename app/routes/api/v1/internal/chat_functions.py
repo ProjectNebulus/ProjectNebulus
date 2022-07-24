@@ -55,9 +55,9 @@ def new_message(json_data):
         json_data["content"] = json_data["content"].replace("\n", "<br>")
         message = create.sendMessage(json_data, chatID)
         chat = read.getChat(chatID)
-        members = chat.to_json()["members"]
+        members = json.loads(chat.to_json())["members"]
         for x, user in enumerate(chat.members):
-            members[x]['user']['offline'] = user.chatProfile.offline
+            members[x]['offline'] = user.user.chatProfile.offline
         chat.lastEdited = datetime.datetime.now()
         chat.save()
         send_date = str(message.send_date)
@@ -179,7 +179,7 @@ def new_chat(data):
 
     print(data)
     chat = create.createChat(data)
-    members = list(map(lambda x: x.to_json(), chat.members))
+    members = list(map(lambda x: json.loads(x.to_json()), chat.members))
     chat = {
         "id": chat.id,
         "avatar": {"avatar_url": chat.avatar.avatar_url},
