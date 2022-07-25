@@ -56,6 +56,23 @@ def getText(query):
             "jp": "日本",
             "kr": "대한민국 사람"
         },
+        "A Learning, All In One Experience": {
+            "us": "A Learning, All In One Experience",
+            "uk": "A Learning, All In One Experience",
+            "au": "A Learning, All In One Experience",
+            "es": "Una Experiencia de Aprendizaje todo en Uno",
+            "mx": "Una Experiencia de Aprendizaje todo en Uno",
+            "cr": "Una Experiencia de Aprendizaje todo en Uno",
+            "cu": "Una Experiencia de Aprendizaje todo en Uno",
+            "co": "Una Experiencia de Aprendizaje todo en Uno",
+            "ar": "Una Experiencia de Aprendizaje todo en Uno",
+            "cn": "一个有趣，全面的学习平台",
+            "tw": "一个有趣，全面的学习平台",
+            "hk": "一个有趣，全面的学习平台",
+            "mo": "一个有趣，全面的学习平台",
+            "kr": "하나의 경험에서 배우는 학습",
+
+        },
         "Nebulus. Education. Redefined.": {
             "us": "Nebulus. Education. Redefined",
             "uk": "Nebulus. Education. Redefined",
