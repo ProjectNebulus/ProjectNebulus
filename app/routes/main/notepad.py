@@ -2,6 +2,7 @@ from flask import render_template, session
 
 from app.static.python.mongodb import read
 from . import main_blueprint
+from ...static.python.mongodb.read import getText
 
 
 @main_blueprint.route("/docs", methods=["GET"])
@@ -10,6 +11,7 @@ def docs():
         "tools/docs.html",
         user=session.get("username"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        translate=getText,
     )
 
 

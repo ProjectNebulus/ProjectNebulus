@@ -149,7 +149,8 @@ def vacationmode():
                            user=session.get("username"),
                            email=session.get("email"),
                            avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-                           page="Vacation Mode", )
+                           page="Vacation Mode",
+                           translate=getText, )
 
 
 @main_blueprint.route("/extra-curricular")
@@ -158,7 +159,8 @@ def extracurricular():
                            user=session.get("username"),
                            email=session.get("email"),
                            avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-                           page="Extracurricular Mode", )
+                           page="Extracurricular Mode",
+                           translate=getText, )
 
 
 @main_blueprint.route("/analysis")
@@ -167,7 +169,8 @@ def analysis():
                            user=session.get("username"),
                            email=session.get("email"),
                            avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-                           page="Study Planner", )
+                           page="Study Planner",
+                           translate=getText, )
 
 
 @main_blueprint.route("/blog")
@@ -185,7 +188,8 @@ def upgrade():
                            user=session.get("username"),
                            email=session.get("email"),
                            avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-                           page="Upgrade", )
+                           page="Upgrade",
+                           translate=getText, )
 
 
 @main_blueprint.route("/support")
@@ -194,4 +198,5 @@ def support():
                            user=session.get("username"),
                            email=session.get("email"),
                            avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-                           page="Support", )
+                           page="Support",
+                           translate=getText, )

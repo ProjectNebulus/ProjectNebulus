@@ -3,6 +3,7 @@ from flask import render_template, request, session
 
 from . import main_blueprint
 from .utils import logged_in
+from ...static.python.mongodb.read import getText
 
 
 @main_blueprint.route("/schoology", methods=["GET"])
@@ -20,4 +21,5 @@ def aschoology():
     session["request_token_secret"] = auth.request_token_secret
     session["access_token_secret"] = auth.access_token_secret
     session["access_token"] = auth.access_token
-    return render_template("connections/connectSchoology.html", url=url)
+    return render_template("connections/connectSchoology.html", url=url,
+                           translate=getText, )

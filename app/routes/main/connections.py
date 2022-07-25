@@ -7,6 +7,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 
 from . import main_blueprint
+from ...static.python.mongodb.read import getText
 
 
 @main_blueprint.route("/connections/schoology")
@@ -29,7 +30,8 @@ def schoology():
     session["access_token"] = auth.access_token
 
     # Open OAuth authorization webpage. Give time to authorize.
-    return render_template("connections/connectSchoology.html", url=url)
+    return render_template("connections/connectSchoology.html", url=url,
+                           translate=getText, )
 
 
 @main_blueprint.route("/connections/google-classroom")
@@ -70,5 +72,6 @@ def g_classroom_auth():
     print(user_info)
     user_info = [user_info["name"], user_info["picture"]]
     return render_template(
-        "connections/connectClassroom.html", link=creds, data=user_info
+        "connections/connectClassroom.html", link=creds, data=user_info,
+        translate=getText,
     )

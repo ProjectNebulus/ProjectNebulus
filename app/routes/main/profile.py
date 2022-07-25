@@ -3,6 +3,7 @@ from flask import render_template, session
 from app.static.python.mongodb import read
 from . import main_blueprint
 from .utils import logged_in
+from ...static.python.mongodb.read import getText
 
 
 @main_blueprint.route("/profile")
@@ -25,6 +26,5 @@ def pubProfile(id):
         user=session.get("username"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-        # page=f"{session.get('username')} - Nebulus",
-        # db=db,
+        translate=getText,
     )

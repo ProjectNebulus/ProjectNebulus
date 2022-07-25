@@ -7,6 +7,7 @@ from app.static.python.mongodb import read
 from app.static.python.utils.colors import getColor
 from . import main_blueprint, utils
 from .utils import logged_in
+from ...static.python.mongodb.read import getText
 
 
 @main_blueprint.route("/overview", methods=["GET"])
@@ -97,4 +98,5 @@ def dashboard():
         announcements=sorted[0],
         events=sorted[1],
         strftime=utils.strftime,
+        translate=getText,
     )

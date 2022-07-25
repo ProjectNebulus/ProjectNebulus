@@ -8,6 +8,7 @@ from app.static.python.classes import Course, User
 from app.static.python.mongodb import create, read
 from . import main_blueprint, utils
 from .utils import logged_in, private_endpoint
+from ...static.python.mongodb.read import getText
 
 
 @main_blueprint.route("/course/<id>")
@@ -54,7 +55,8 @@ def course_page(page, **kwargs):
             events=[],
             # read.sort_course_events(session["id"], int(course_id))[1],d.sort_course_events(session["id"], int(course_id))[1],
             strftime=utils.strftime,
-            read=read
+            read=read,
+            translate=getText,
         )
 
 
@@ -112,6 +114,7 @@ def search_word(id):
         definition=shortdef,
         word=word,
         partofspeech=partofspeech,
+        translate=getText,
     )
 
 
@@ -119,6 +122,8 @@ def search_word(id):
 @logged_in
 def course_page_ex(id, extension):
     try:
-        return render_template(f"courses/extensions/{extension}.html")
+        return render_template(f"courses/extensions/{extension}.html",
+                               translate=getText, )
     except Exception as e:
-        return render_template("errors/404.html")
+        return render_template("errors/404.html",
+                               translate=getText, )

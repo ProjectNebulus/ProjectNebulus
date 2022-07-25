@@ -16,6 +16,7 @@ from .spotify import (
     session,
     spotipy,
 )
+from ...static.python.mongodb.read import getText
 
 
 def generate_redirect(url):
@@ -99,4 +100,5 @@ def settings():
         canvas=canvas,
         spotify=spotify,
         discord=discord,
+        translate=getText,
     )
