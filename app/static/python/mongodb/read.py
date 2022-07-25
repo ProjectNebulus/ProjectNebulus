@@ -38,6 +38,24 @@ def getText(query):
         "jp": "ネビュラス",
         "kr": "네뷸러스"
     },
+        "Learning": {
+            "us": "Learning",
+            "uk": "United Kingdom",
+            "au": "Australia",
+            "es": "España",
+            "mx": "México",
+            "cr": "Costa Rica",
+            "cu": "Cuba",
+            "co": "Colombia",
+            "ar": "Argentina",
+            "it": "Italia",
+            "cn": "中国",
+            "tw": "台灣",
+            "hk": "香港",
+            "mo": "澳門",
+            "jp": "日本",
+            "kr": "대한민국 사람"
+        },
         "Nebulus. Education. Redefined.": {
             "us": "Nebulus. Education. Redefined",
             "uk": "Nebulus. Education. Redefined",
