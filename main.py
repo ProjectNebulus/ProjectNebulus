@@ -5,18 +5,15 @@ import os
 import platform
 
 from dotenv import load_dotenv
-import pytz
 
 load_dotenv()
 from app.routes import init_app, socketio
-from app.static.python.classes import Chat, ChatMember, User
-from dateutil import parser
 
 app = init_app()
 app.secret_key = os.getenv("MONGOPASS")
 
 # Debug mode logs errors in more detail. Best used for testing, not production
-debug = False
+debug = True
 if __name__ == "__main__":
     if platform.system().lower() == "linux":  # linux - used for VPS (like DigitalOcean)
         debug = False
