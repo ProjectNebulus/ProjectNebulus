@@ -74,8 +74,8 @@ class KeyUpTimer {
     }
 
     disable() {
-        for (const element of this.elements) element.removeEventListener('keyup', this.onKeyUp);
-
+        for (const element of this.elements)
+            element.removeEventListener('keyup', this.onKeyUp);
         clearInterval(this.interval);
     }
 }
@@ -91,7 +91,7 @@ function detectTheme() {
     else document.documentElement.classList.remove('dark');
 }
 
-function invertSite(reloadChart) {
+function invertSite() {
     const banner = document.getElementById('homeBanner');
 
     if (localStorage.getItem('color-theme') === 'dark') {
@@ -99,15 +99,13 @@ function invertSite(reloadChart) {
         if (window.location.pathname === '/') {
             let wallpaper = localStorage.getItem('wallpaper');
             if (!wallpaper) wallpaper = '/static/images/darkwallpaper.png';
-            document.body.style.background = `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)) 0% 0% / cover, url("${wallpaper}") center center no-repeat fixed`;
-            document.body.style += "-webkit-background-size: cover !important; -moz-background-size: cover !important; -o-background-size: cover !important; background-size: cover !important;";
 
-            if (reloadChart) {
-                document.getElementById('chart').innerHTML = `
+            document.body.style.background = `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)) 0% 0% / cover, url("${wallpaper}") center center no-repeat fixed`;
+            document.body.style.backgroundSize = 'cover';
+            document.getElementById('chart').innerHTML = `
    
         <iframe style="background: rgba(0, 0,0 , 0.5); border-radius:10px;border: none; margin:10px; " width="80%" height="580" src="https://charts.mongodb.com/charts-project-0-dixeb/embed/charts?id=62c4eb23-6d77-4441-8174-0fc61c500111&maxDataAge=10&theme=dark&autoRefresh=true"></iframe>
    `;
-            }
         }
         if (banner) banner.style.filter = 'brightness(100%)';
 
@@ -124,14 +122,12 @@ function invertSite(reloadChart) {
             if (wallpaper === null) {
                 document.body.style.backgroundColor = 'white';
                 document.body.style.backgroundImage = '';
-            } else {
+            }
+            else {
                 document.body.style.background = `linear-gradient( rgba(256, 256, 256, 0.5), rgba(256, 256, 256, 0.2) ), url('${wallpaper}') no-repeat center center fixed`;
-                document.body.style += "-webkit-background-size: cover !important; -moz-background-size: cover !important; -o-background-size: cover !important; background-size: cover !important;";
-
+                document.body.style.backgroundSize = 'cover';
             }
-            if (reloadChart) {
-                document.getElementById('chart').innerHTML = `<iframe style="background: rgba(255, 255, 255, 0.5); border-radius:10px;border: none; margin:10px; " width="80%" height="580" src="https://charts.mongodb.com/charts-project-0-dixeb/embed/charts?id=62c4eb23-6d77-4441-8174-0fc61c500111&maxDataAge=10&theme=lightk&autoRefresh=true"></iframe>;`
-            }
+            document.getElementById('chart').innerHTML = `<iframe style="background: rgba(255, 255, 255, 0.5); border-radius:10px;border: none; margin:10px; " width="80%" height="580" src="https://charts.mongodb.com/charts-project-0-dixeb/embed/charts?id=62c4eb23-6d77-4441-8174-0fc61c500111&maxDataAge=10&theme=lightk&autoRefresh=true"></iframe>;`
         }
 
         if (banner) banner.style.filter = 'brightness(70%)';
@@ -152,9 +148,9 @@ function invertSite(reloadChart) {
                     innerDoc.body.style.background = '#111926';
                 }
                 else {
+                    document.body.style.backgroundSize = 'cover';
                     document.body.style.background = `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2) ), url('${wallpaper}') no-repeat center center fixed`;
-                    document.body.style += "-webkit-background-size: cover !important; -moz-background-size: cover !important; -o-background-size: cover !important; background-size: cover !important;";
-
+                    document.body.style.backgroundSize = 'cover';
                     for (let header of document.getElementsByClassName("modalheader")) {
                         header.style =
                             `background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)) 0% 0% / cover, url("${wallpaper}") ;
@@ -171,9 +167,9 @@ function invertSite(reloadChart) {
                     innerDoc.body.style.background = 'white';
                 }
                 else {
+                    document.body.style.backgroundSize = 'cover';
                     document.body.style.background = `linear-gradient( rgba(256, 256, 256, 0.5), rgba(256, 256, 256, 0.2) ), url('${wallpaper}') no-repeat center center fixed`;
-                    document.body.style += "-webkit-background-size: cover !important; -moz-background-size: cover !important; -o-background-size: cover !important; background-size: cover !important;";
-
+                    document.body.style.backgroundSize = 'cover';
                     for (let header of document.getElementsByClassName("modalheader")) {
                         header.style =
                             `background: linear-gradient(rgba(256, 256, 256, 0.5), rgba(256, 256, 256, 0.2)) 0% 0% / cover, url("${wallpaper}") ;
@@ -205,7 +201,7 @@ function invertSite(reloadChart) {
 
 let isOnline = true;
 window.addEventListener('load', function () {
-    invertSite(true);
+    invertSite();
 
     isOnline = navigator.onLine;
     if (isOnline) online();
@@ -362,6 +358,3 @@ function closeModal(object_id) {
     }
     return true;
 }
-
-
-setInterval(invertSite, 1000, false)

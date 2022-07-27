@@ -148,3 +148,15 @@ input {
     font-size: 8rem;
     line-height: 1;
 }
+
+input {
+  -webkit-user-select: text;
+}
+
+html {
+  font-family: SpotifyFont, serif;
+}
+
+html.dark body {
+  background: #111926;
+}
