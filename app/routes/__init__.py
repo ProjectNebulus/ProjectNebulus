@@ -1,4 +1,7 @@
 # Imports
+import eventlet
+
+eventlet.monkey_patch()
 from logging import LogRecord
 
 from flask import has_request_context, session, request, redirect
@@ -7,6 +10,7 @@ from flask_cors import CORS
 from flask_mail import Mail
 from flask_socketio import SocketIO
 from flask_babel import Babel, gettext
+
 
 socketio = SocketIO()
 mail = Mail()
@@ -75,7 +79,6 @@ def init_app():
 
     @app.before_request
     def before_rq():
-        print(session)
         # log out users who have deleted account
         if "id" in session.keys():
             try:
@@ -86,6 +89,6 @@ def init_app():
     mail.init_app(app)
     logging.getLogger("werkzeug").addFilter(_LogFilter())
     default_handler.setFormatter(_LogFormatter())
-    socketio.init_app(app)
+    socketio.init_app(app, async_mode="eventlet")
 
     return app
