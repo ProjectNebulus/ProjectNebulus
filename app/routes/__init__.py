@@ -11,10 +11,10 @@ from flask_mail import Mail
 from flask_socketio import SocketIO
 from flask_babel import Babel, gettext
 
-
 socketio = SocketIO()
 mail = Mail()
 babel = Babel()
+
 from .api import api_blueprint
 from .main import main_blueprint
 from .static import static_blueprint

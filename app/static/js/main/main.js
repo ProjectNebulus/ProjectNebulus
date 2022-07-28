@@ -112,8 +112,7 @@ function invertSite() {
         for (const logo of document.getElementsByTagName('logo'))
             if (!logo.getAttribute('no-revert'))
                 logo.style.filter = 'brightness(100%)';
-    }
-    else {
+    } else {
         if (window.location.href.endsWith('/notepad')) {
             document.getElementById('editor').style.filter = 'invert(0)';
         }
@@ -122,8 +121,7 @@ function invertSite() {
             if (wallpaper === null) {
                 document.body.style.backgroundColor = 'white';
                 document.body.style.backgroundImage = '';
-            }
-            else {
+            } else {
                 document.body.style.background = `linear-gradient( rgba(256, 256, 256, 0.5), rgba(256, 256, 256, 0.2) ), url('${wallpaper}') no-repeat center center fixed`;
                 document.body.style.backgroundSize = 'cover';
             }
@@ -146,8 +144,7 @@ function invertSite() {
                 let wallpaper = localStorage.getItem('wallpaper');
                 if (wallpaper === null) {
                     innerDoc.body.style.background = '#111926';
-                }
-                else {
+                } else {
                     document.body.style.backgroundSize = 'cover';
                     document.body.style.background = `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2) ), url('${wallpaper}') no-repeat center center fixed`;
                     document.body.style.backgroundSize = 'cover';
@@ -159,14 +156,12 @@ function invertSite() {
                     }
 
                 }
-            }
-            else {
+            } else {
                 innerDoc.documentElement.classList.remove('dark');
                 let wallpaper = localStorage.getItem('wallpaper');
                 if (wallpaper === null) {
                     innerDoc.body.style.background = 'white';
-                }
-                else {
+                } else {
                     document.body.style.backgroundSize = 'cover';
                     document.body.style.background = `linear-gradient( rgba(256, 256, 256, 0.5), rgba(256, 256, 256, 0.2) ), url('${wallpaper}') no-repeat center center fixed`;
                     document.body.style.backgroundSize = 'cover';
@@ -188,8 +183,7 @@ function invertSite() {
             element.classList.remove('gradient-text');
             element.classList.add('gradient-text-dark');
         }
-    }
-    else {
+    } else {
         let elements = document.getElementsByClassName('changeable-gradient');
         console.log(elements);
         for (let element of elements) {
@@ -325,7 +319,11 @@ const list = ['Red', 'Blue', 'Green', 'Blurple', 'Pink', 'Jade', 'Yellow'];
 
 let index = 0;
 
-for (let i = 0; i < list.length; i++) list[i] = `/static/images/nebulusCats/new${list[i]}.png`;
+for (let i = 0; i < list.length; i++) {
+    fetch(`/static/images/nebulusCats/new${list[i]}.png`)
+        .then(response => response.blob())
+        .then(imageBlob => list[i] = URL.createObjectURL(imageBlob));
+}
 
 function changeFavicon() {
     let link = document.querySelector("link[rel~='icon']");
