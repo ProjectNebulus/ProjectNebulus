@@ -122,7 +122,7 @@ def user_left(json_data):
 @socketio.event(namespace="/chat")
 def user_loaded(json_data):
     print("loaded user")
-    chats = [x for x in User.objects.no_dereference().get(pk=session["id"]).chats]
+    chats = [x.id for x in User.objects.no_dereference().get(pk=session["id"]).chats]
     for chat in chats:
         join_room(chat)
 
