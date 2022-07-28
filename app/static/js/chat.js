@@ -699,8 +699,10 @@ function formatTime(time_input){
 let show_preview = false;
 
 function getChat(chatID) {
-    if (chatID === document.getElementById('chatID').getAttribute('data-id')){
-        return false;
+    if (document.body.contains(document.getElementById('chatID'))){
+        if (chatID === document.getElementById('chatID').getAttribute('data-id')) {
+            return false;
+        }
     }
     toggleChat();
     document.getElementById(`notification_${chatID}`).classList.add('hidden');
