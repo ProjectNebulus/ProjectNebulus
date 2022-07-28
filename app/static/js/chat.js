@@ -333,8 +333,8 @@ $(document).ready(function () {
         console.log('chat is scrolling');
         let el = document.getElementById('chat');
         let chat_index = el.children.length - Math.floor(el.children.length / 2) - 1;
-        console.log(Math.abs((Math.floor(el.scrollHeight - $(this).height()) * -1) - $(this.scrollTop())));
-        if (Math.abs((Math.floor(el.scrollHeight - $(this).height()) * -1) - $(this.scrollTop())) < 2) {
+        console.log(Math.abs((Math.floor(el.scrollHeight - $(this).height()) * -1) - $(this).scrollTop()));
+        if (Math.abs((Math.floor(el.scrollHeight - $(this).height()) * -1) - $(this).scrollTop()) < 2) {
             let chatID = document.getElementById('chatID').getAttribute('data-id');
             $.ajax({
                 url: '/api/v1/internal/fetch-messages',
@@ -699,7 +699,7 @@ function formatTime(time_input){
 let show_preview = false;
 
 function getChat(chatID) {
-    if (chatID === document.getElementById('chat').id){
+    if (chatID === document.getElementById('chatID').getAttribute('data-id')){
         return false;
     }
     toggleChat();
