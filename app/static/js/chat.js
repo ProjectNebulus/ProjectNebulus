@@ -298,9 +298,8 @@ $(document).ready(function () {
             updateToMessage(data);
         } else {
             let el_notifs = document.getElementById(`notification_${data['chatID']}`);
-            if ('hidden' in el_notifs.classList){
-                el_notifs.classList.remove('hidden');
-            }
+            el_notifs.classList.remove('hidden');
+            console.log(el_notifs.classList);
             el_notifs.innerText = (parseInt(el_notifs.innerText) + 1).toString();
             unread_list[data['chatID']][userID] += 1;
             data['members'].forEach(function(user){
