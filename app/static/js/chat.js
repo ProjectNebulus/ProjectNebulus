@@ -425,8 +425,6 @@ function load(data, getFirst=false) {
             }
 
         })
-
-        unread_list[chat['_id']] = parseInt(unread);
         if (data.indexOf(chat) === 0 && getFirst) {
             s += `
         <div onclick="getChat('${chat['_id']}')" id="sidechat_${chat['_id']}" style="margin-bottom:4px;"
@@ -901,7 +899,6 @@ function getChat(chatID) {
             let el_notifs = document.getElementById(`notification_${chat['_id']}`);
             el_notifs.classList.add('hidden');
             el_notifs.innerText = '0';
-            unread_list[chat['_id']] = 0;
             $('#chat-member-loading').hide();
             $('#chat-members').show();
 
