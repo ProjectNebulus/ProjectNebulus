@@ -297,7 +297,7 @@ function navFetchStatus() {
             <div style="width:150px;float:left;">
                 <img style="display: inline-block; margin:20px; border-radius:10px;" class="mb-3 w-20 h-20 shadow-lg" src="${image}" alt="Song Title">
             </div>
-            <div style="width: calc(100% - 150px);float:left;">
+            <div style="width: calc(90% - 150px);float:left;">
                 <div style="margin-top:20px;">
                 <p class="truncate text-lg text-black dark:text-white"><i style="display:inline-block; color:#1BD661; margin-right:10px;" class="fab fa-spotify"></i> ${name} ${explicit} </p>
                     <p class="truncate text-sm text-gray-600 dark:text-gray-300">${artists} - ${album}</p></div>
@@ -310,6 +310,8 @@ function navFetchStatus() {
                     ${playing}
                     <i style="margin-left:20px;color:white;" class="material-icons">skip_next</i>
                 </p></div>`;
+        document.getElementById('spotifyStatus').classList.remove("flex-col");
+        //document.getElementById('spotifyStatus').classList.remove("flex");
     });
 
     request.fail(onFailedRequest);

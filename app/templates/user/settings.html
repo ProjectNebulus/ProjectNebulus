@@ -42,19 +42,19 @@
 
                     <ul class="w-64 space-y-2">
                         <li>
-                            <a onclick="toggle_display('generalSettings')"
+                            <a onclick="open('generalSettings')"
                                class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <span class="ml-3">General</span>
                             </a>
                         </li>
                         <li>
-                            <a onclick="toggle_display('profileSettings')"
+                            <a onclick="open('profileSettings')"
                                class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <span class="ml-3">Profile</span>
                             </a>
                         </li>
                         <li>
-                            <a onclick="toggle_display('connectionSettings')"
+                            <a onclick="open('connectionSettings')"
                                class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <span class="ml-3">Connections</span>
                             </a>
@@ -66,7 +66,7 @@
                             </a>
                         </li>
                         <li>
-                            <a onclick="toggle_display('appearanceSettings')"
+                            <a onclick="open('appearanceSettings')"
                                class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <span class="ml-3">Appearance</span>
                             </a>
@@ -980,7 +980,7 @@
         }
 
         function opposite_toggle_display(id_name) {
-            document.getElementById(id_name).style.display = "none";
+            document.getElementById(id_name).style.display = "block";
         }
 
         function open(id_name) {

@@ -1,10 +1,19 @@
 <div>
-    <div class="pt-2 pb-6">
+    <div class="pt-2 pb-6" style="
+    padding: 15px;
+    margin: 10px;
+">
         <h1 class="dark:text-white text-xl">{{ user }}</h1>
         <p class="text-gray-800 dark:text-gray-400">{{ email }}</p>
     </div>
-    <div class="flex flex-row">
-        <div>
+    <div style="
+    padding: 15px;
+    margin: 10px;
+" id="controlcenter2"
+         class="bg-gray-300/30 dark:bg-gray-800/30 p-4 rounded-lg dark:border-gray-700 border backdrop-blur z-10 block">
+        <div style="
+    margin:auto;
+">
             <a id="theme-toggle">
                 <i id="theme-toggle-dark-icon" class="hidden">light_mode</i>
                 <svg id="theme-toggle-light-icon" fill="currentColor" viewBox="0 0 20 20"
@@ -26,7 +35,9 @@
                 <span>Notifications</span>
             </a>
         </div>
-        <div>
+        <div style="
+    margin:auto;
+">
             <a href="/points">
                 <i>monetization_on</i>
                 <span>Points</span>
@@ -58,7 +69,8 @@
         </svg>
         <span id="focusText" class="align-middle"></span>
     </div>
-    <div id="spotifyStatus"></div>
+    <div id="spotifyStatus"
+         class="pt-2 pb-6 bg-gray-300/30 dark:bg-gray-900/60 mx-2 text-left flex flex-col rounded-lg"></div>
     <script src="/static/js/utils/control.js"></script>
 </div>
 <div style="display:none;">

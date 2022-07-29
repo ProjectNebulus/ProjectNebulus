@@ -1,4 +1,5 @@
 const controlCenter = document.getElementById('control-center');
+const controlCenter2 = document.getElementById('controlcenter2');
 const focus = document.getElementById('focus');
 const focusText = document.getElementById('focusText');
 
@@ -39,3 +40,6 @@ for (const icon of controlCenter.getElementsByTagName('i'))
 for (const a of controlCenter.getElementsByTagName('a'))
     a.className +=
         ' text-gray-500 dark:text-gray-400 focus:outline-none hover:bg-blue-200 dark:hover:bg-blue-700 text-left text-sm rounded-lg p-2.5 w-36 cursor-pointer';
+
+controlCenter2.classList.add("grid-cols-2");
+controlCenter2.classList.remove("flex-col")
