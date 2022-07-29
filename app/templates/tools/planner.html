@@ -22,6 +22,7 @@
 
         [modal-backdrop] {
             backdrop-filter: blur(6px);
+            z-index: 200;
 
         }
 
@@ -104,18 +105,18 @@
             border: 1px solid gray;
         }
     </style>
-    <br><br>
-    <div style="width:90%;margin:auto;margin-left:64px;">
-        <div class="flex flex-row justify-between">
-            <span id="month" class="text-4xl text-black dark:text-white">Error Finding Month</span>
+         <br><br>
+         <div style="padding:15px; width:calc(100% - 70px);margin:auto;margin-left:64px;">
+             <div class="flex flex-row justify-between">
+                 <span id="month" class="text-4xl text-black dark:text-white">Error Finding Month</span>
 
-            <div class="text-center">
-                <span id="savestate" style="color:#b8b8b8;text-decoration:underline">Synced to Cloud | Last Edit was seconds ago</span><br>
-                <span id="error" style="color:green;">Connected to Nebulus</span><br>
-            </div>
+                 <div class="text-center">
+                     <span id="savestate" style="color:#b8b8b8;text-decoration:underline">Synced to Cloud | Last Edit was seconds ago</span><br>
+                     <span id="error" style="color:green;">Connected to Nebulus</span><br>
+                 </div>
 
-            <div class="text-4xl text-black dark:text-white" style='float:right; margin-top: -2.5rem'>
-                <div class="flex justify-between text-xl">
+                 <div class="text-4xl text-black dark:text-white" style='float:right; margin-top: -2.5rem'>
+                     <div class="flex justify-between text-xl">
                     <label for="planner_name" class="text-gray-500 dark:text-gray-400">Planner Name</label>
                     <button class="material-icons text-gray-50 dark:text-gray-400 hover:bg-gray-200 p-1 rounded
                      dark:hover:bg-gray-500 mb-3" data-modal-toggle="configureModal" onclick="settings()">settings
@@ -147,24 +148,24 @@
               px-5 py-2.5 text-center mr-2 mb-2">Next Page
             </button>
         </div>
-        <div style="border-style: solid; border-radius: 15px !Important; overflow: hidden !important; border-color: gray; border-width: 2px;">
-            <table class="bg-gray-800/50 text-sm text-left text-gray-500 dark:text-gray-400"></table>
-        </div>
+             <div style="border-style: solid; border-radius: 15px !Important; overflow: hidden !important; border-color: gray; border-width: 2px;">
+                 <table class="bg-gray-800/50 text-sm text-left text-gray-500 dark:text-gray-400"></table>
+             </div>
 
 
-    </div>
+         </div>
 
-    <div id="configureModal" tabindex="-1" aria-hidden="true" style="object-position: center;"
-         class="hidden z-50 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 w-full md:inset-0 h-modal md:h-full">
-        <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
-            <!-- Modal content -->
-            <div class="relative bg-gray-50 rounded-lg shadow dark:bg-gray-600">
-                <!-- Modal header -->
-                <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                        Configure Your Planner
-                    </h3>
-                    <button class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm
+         <div id="configureModal" tabindex="-1" aria-hidden="true" style="object-position: center; z-index:300;"
+              class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 w-full md:inset-0 h-modal md:h-full">
+             <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+                 <!-- Modal content -->
+                 <div class="relative bg-gray-50 rounded-lg shadow dark:bg-gray-600">
+                     <!-- Modal header -->
+                     <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
+                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                             Configure Your Planner
+                         </h3>
+                         <button class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm
                      p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
                             data-modal-toggle="configureModal">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -213,22 +214,23 @@
                         Cancel
                     </button>
                 </div>
-            </div>
-        </div>
-    </div>
+                 </div>
+             </div>
+         </div>
 
-    <div id="loading" tabindex="-1" aria-hidden="true"
-         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
-        <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
-            <!-- Modal content -->
-            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                <div class="text-center p-8">
-                    <p style="float: left; margin-top: -0.25rem"></p>
-                    <span class="text-black dark:text-white -ml-1">Loading Planner...</span>
-                </div>
-            </div>
-        </div>
-    </div>
+         <div id="loading" tabindex="-1" aria-hidden="true"
+              class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 w-full md:inset-0 h-modal md:h-full"
+              style="z-index:300;">
+             <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+                 <!-- Modal content -->
+                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                     <div class="text-center p-8">
+                         <p style="float: left; margin-top: -0.25rem"></p>
+                         <span class="text-black dark:text-white -ml-1">Loading Planner...</span>
+                     </div>
+                 </div>
+             </div>
+         </div>
 
     <button class="hidden" data-modal-toggle="configureModal" id="openModal"></button>
 

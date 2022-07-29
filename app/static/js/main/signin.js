@@ -145,7 +145,7 @@ function confirmSchoology() {
             document.getElementById('name').innerHTML = name;
             document.getElementById('email').innerHTML = email;
 
-            window.location.href = '/dashboard';
+            window.location.href = '/app';
         }
     });
 }

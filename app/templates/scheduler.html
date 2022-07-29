@@ -36,7 +36,7 @@
                 <p>${anotherrow}</p>
             </td>
             <td class="py-4 px-6">
-                <button type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">✕</button>
+                <button type="#button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">✕</button>
 
             </td>
 </td>
@@ -45,7 +45,7 @@
         `);
         });
 
-        $('table').on('click', 'button', function (e) {
+        $('table').on('click', '#button', function (e) {
             $(this).closest('tr').remove()
         })
 
@@ -53,79 +53,142 @@
     });
   </script>
 
-<body>
-<div class="overflow-x-auto relative shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-        <tr>
-            <th scope="col" class="py-3 px-6">
-                Task Name
-            </th>
-            <th scope="col" class="py-3 px-6">
-                Completed By
-            </th>
-            <th scope="col" class="py-3 px-6">
-                Another Row
-            </th>
-            <th scope="col" class="py-3 px-6">
-                Remove Row
-            </th>
+    <body>
+    <div class="relative shadow-md sm:rounded-lg" style="width: calc(100% - 90px);margin-left:70px;">
 
-        </tr>
-        </thead>
-        <tbody>
-        <tr class="border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700">
-            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                <input id="taskname"
-                       class=" form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none "
-                       placeholder="Task Name"></input><br>
-
-            </th>
-            <td class="py-4 px-6">
-                <input id="completeby"
-                       class=" form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none "
-                       placeholder="Complete By..."></input><br>
-
-            </td>
-            <td class="py-4 px-6">
-                <input id="anotherrow"
-                       class=" form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none "
-                       placeholder="anotherrow"></input><br>
-
-            </td>
-            <td class="py-4 px-6">
-                <button type="button"
-                        class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
-                    ✕
-                </button>
-
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-
-<div>
-    <div>
-        <table>
-            <thead>
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-                <th>Task Name</th>
-                <th>Complete By</th>
-                <th>Another row</th>
-                <th>Remove Row</th>
-          </tr>
-        </thead>
-        <tbody id="tbody">
-  
-        </tbody>
-      </table>
+                <th scope="col" class="py-3 px-6">
+                    Task Name
+                </th>
+                <th scope="col" class="py-3 px-6">
+                    Time
+                </th>
+                <th scope="col" class="py-3 px-6">
+                    Category
+                </th>
+                <th scope="col" class="py-3 px-6">
+                    Delete
+                </th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700">
+                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <div>
+                        <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Task
+                            Name</label>
+                        <input type="text" id="first_name"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="Science Homework" required>
+                    </div>
+
+                </th>
+                <td class="py-4 px-6">
+                    <button style="border-radius: 20px;" id="dropdownChoose" data-dropdown-toggle="dropdown_choose"
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            type="button">Homework
+                        <svg class="ml-2 w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor"
+                             viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <!-- Dropdown menu -->
+                    <div id="dropdown_choose"
+                         class="scroll hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
+                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" style="text-align:center;"
+                            aria-labelledby="dropdownChoose">
+                            <li>
+                                <button style="text-align: center; border-radius: 20px; width: 90%; margin: 10px;"
+                                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                        type="button">Homework
+                                </button>
+
+                            </li>
+                            <li>
+                                <button style="text-align: center; border-radius: 20px; width: 90%; margin: 10px;"
+                                        class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+                                        type="button">Study
+                                </button>
+
+                            </li>
+                            <li>
+                                <button style="text-align: center; border-radius: 20px; width: 90%; margin: 10px;"
+                                        class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                                        type="button">Project
+                                </button>
+                            </li>
+                            <li>
+                                <button style="text-align: center; border-radius: 20px; width: 90%; margin: 10px;"
+                                        class="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
+                                        type="button">Reviewing
+                                </button>
+                            </li>
+                            <li>
+                                <button style="text-align: center; border-radius: 20px; width: 90%; margin: 10px;"
+                                        class="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800"
+                                        type="button">Reading
+                                </button>
+                            </li>
+                            <li>
+                                <button style="text-align: center; border-radius: 20px; width: 90%; margin: 10px;"
+                                        class="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800"
+                                        type="button">Eating
+                                </button>
+                            </li>
+                            <li>
+                                <button style="text-align: center; border-radius: 20px; width: 90%; margin: 10px;"
+                                        class="text-white bg-pink-700 hover:bg-pink-800 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800"
+                                        type="button">Shower
+                                </button>
+                            </li>
+                            <li>
+                                <button style="text-align: center; border-radius: 20px; width: 90%; margin: 10px;"
+                                        class="text-white bg-lime-700 hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-lime-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800"
+                                        type="button">Extracurricular Class
+                                </button>
+                            </li>
+                            <li>
+                                <button style="text-align: center; border-radius: 20px; width: 90%; margin: 10px;"
+                                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                        type="button">School Club
+                                </button>
+                            </li>
+                            <li>
+                                <button style="text-align: center; border-radius: 20px; width: 90%; margin: 10px;"
+                                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                        type="button">School Class
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+
+                </td>
+                <td class="py-4 px-6">
+                    <div>
+                        <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Time
+                            Needed</label>
+                        <input type="text" id="first_name"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="John" required>
+                    </div>
+                </td>
+                <td class="py-4 px-6">
+                    <button id="button" type="button"
+                            class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+                        ✕
+                    </button>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 
-
-    <button type="button" class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" id="addbutton">Add Row!</button>
-  </div>
-</body>
+    </body>
 <style>
 
 #container {

@@ -446,7 +446,7 @@ function reqListener() {
     else {
         status.style.color = 'yellowgreen';
         status.innerHTML = 'Sign up successful!';
-        window.location.href = '/dashboard';
+        window.location.href = '/app';
     }
 
     submit.disabled = false;
