@@ -43,19 +43,19 @@
 
                     <ul class="w-64 space-y-2">
                         <li>
-                            <span onclick="open('generalSettings')"
+                            <span onclick="open_pls('generalSettings')"
                                   class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <span class="ml-3">General</span>
                             </span>
                         </li>
                         <li>
-                            <span onclick="open('profileSettings')"
+                            <span onclick="open_pls('profileSettings')"
                                   class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <span class="ml-3">Profile</span>
                             </span>
                         </li>
                         <li>
-                            <span onclick="open('connectionSettings')"
+                            <span onclick="open_pls('connectionSettings')"
                                   class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <span class="ml-3">Connections</span>
                             </span>
@@ -67,7 +67,7 @@
                             </a>
                         </li>
                         <li>
-                            <span onclick="open('appearanceSettings')"
+                            <span onclick="open_pls('appearanceSettings')"
                                   class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <span class="ml-3">Appearance</span>
                             </span>
@@ -984,7 +984,7 @@
             document.getElementById(id_name).style.display = "block";
         }
 
-        function open(id_name) {
+        function open_pls(id_name) {
             toggle_display("generalSettings");
             toggle_display("connectionSettings");
             toggle_display("appearanceSettings");
