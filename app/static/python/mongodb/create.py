@@ -206,8 +206,8 @@ def createChat(data: dict) -> Chat:
     chat = Chat(**data)
     chat.save(force_insert=True)
     for member in chat.members:
-        member.chats.append(chat)
-        member.save()
+        member.user.chats.append(chat)
+        member.user.save()
 
     return chat
 
