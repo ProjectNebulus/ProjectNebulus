@@ -43,11 +43,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/chat"
+                        <div class="relative" id="chat-icon-sidebar">
+                        <a  href="/chat"
                            class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                             <p class="dark:text-gray-400 material-icons">forum</p>
                             <span class="ml-3 text_nav">Chat</span>
                         </a>
+                        </div>
                     </li>
                     <li>
                         <a href="/chat?email=email"
@@ -152,5 +154,40 @@
                 </ul>
             </div>
         </aside>
+
     {% endif %}
+
 {% endif %}
+<script>
+    let page = window.location.pathname;
+    console.log(page);
+    if (page != "/chat"){
+        io = window.io;
+
+        let chat_sidebar = document.getElementById('chat-icon-sidebar');
+        chat_sidebar.insertAdjacentHTML('beforeend', `
+            <span id="notification_chat_sidebar" class="hidden overflow-hidden flex flex-grow left-5 absolute text-sm pl-2 pb-1 bg-red-500 border-4 border-white dark:border-gray-800 rounded-full" style="top:-9;width:auto; height:auto;min-width:1.25rem;min-height:1.25rem;padding-left:7px;padding-right:7px;">0</span>
+        `);
+
+        let chat_notif_sidebar = document.getElementById('notification_chat_sidebar');
+
+
+
+        $(document).on('ready', function(){
+            let socket = io.connect('http://' + document.domain + ':' + location.port + '/chat');
+            socket.emit('user_loaded', {});
+
+            socket.on('new_message', function(){
+                console.log('NEW MESSAGE YAY');
+                chat_notif_sidebar.classList.remove('hidden');
+                chat_notif_sidebar.innerHTML = (parseInt(chat_notif_sidebar.innerHTML)+1).toString();
+            });
+        });
+
+        window.onunload = function () {
+            socket.disconnect();
+        };
+    }
+
+
+</script>

@@ -380,7 +380,7 @@ def getChat():
 @internal.route('/update-unread', methods=["POST"])
 def update_unread():
     data = request.get_json()
-    update.update_unread(data)
+    update.update_unread(data, session["id"])
     return 'success'
 
 
