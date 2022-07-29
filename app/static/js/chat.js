@@ -1,6 +1,6 @@
 io = window.io;
 
-let unread_list = {};
+console.log()
 
 function getEmbed(hyperlink) {
     return new Promise((resolve, reject) => {
@@ -299,14 +299,18 @@ $(document).ready(function () {
         } else {
             let el_notifs = document.getElementById(`notification_${data['chatID']}`);
             el_notifs.classList.remove('hidden');
-            console.log(el_notifs.classList);
             el_notifs.innerText = (parseInt(el_notifs.innerText) + 1).toString();
-            unread_list[data['chatID']][userID] += 1;
-            data['members'].forEach(function(user){
-                if (user['offline'] && user['user'] != userID){
-                    unread_list[data['chatID']][user['user']] += 1
-                }
+
+            $.ajax({
+                url: '/api/v1/internal/udate-unread',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    chat_id: chatID
+                })
             });
+
+
 
         }
     });
@@ -411,19 +415,6 @@ function load(data, getFirst=false) {
             return user['user']['_id'] === userID;
         })[0]['unread'];
 
-        chat['members'].forEach(function(user){
-
-            let user_id = user['user']['_id'];
-            if (!(chat['_id'] in unread_list)){
-
-                let d = {};
-                d[user_id] = user["unread"];
-                unread_list[chat['_id']] = d;
-            } else {
-                unread_list[chat["_id"]][user_id] = user["unread"];
-            }
-
-        })
         if (data.indexOf(chat) === 0 && getFirst) {
             s += `
         <div onclick="getChat('${chat['_id']}')" id="sidechat_${chat['_id']}" style="margin-bottom:4px;"
@@ -510,13 +501,6 @@ function changeStatus(status) {
 
 window.onbeforeunload = function () {
     changeStatus('Offline');
-    console.log(unread_list);
-    $.ajax({
-        url: '/api/v1/internal/update-unread',
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify(unread_list)
-    });
 };
 window.addEventListener('load', function () {
     changeStatus('Online');
@@ -729,7 +713,6 @@ function getChat(chatID) {
         success: function (chat) {
             let chat_el = document.getElementById('chat');
             let members = document.getElementById('chat-members');
-            console.log(chat);
             let chatContent = ``;
             let chatMembers = ``;
             let el = document.getElementById(`sidechat_${chat['_id']}`);

@@ -57,7 +57,10 @@ def new_message(json_data):
         chat = read.getChat(chatID)
         members = json.loads(chat.to_json())["members"]
         for x, user in enumerate(chat.members):
+            if user.user.chatProfile.offline == True:
+                user.unread += 1
             members[x]['offline'] = user.user.chatProfile.offline
+        print()
         chat.lastEdited = datetime.datetime.now()
         chat.save()
         send_date = str(message.send_date)
@@ -343,14 +346,14 @@ def fetchChats():
 
 @internal.route("/get-chat", methods=["POST"])
 def getChat():
-    import datetime
-
-    print(read.find_user(pk=session["id"]).password)
-
     data = request.get_json()
     chatID = data["chatID"]
-    print(chatID)
-    chat = json.loads(read.getChat(chatID).to_json())
+    chat_obj = read.getChat(chatID)
+    chat = json.loads(chat_obj.to_json())
+
+    current_user = list(filter(lambda x: x.user.id==session["id"], chat_obj.members))[0]
+    current_user.unread = 0
+    chat_obj.save()
 
     chat["messages"] = list(reversed(chat["messages"]))[:20]
 
