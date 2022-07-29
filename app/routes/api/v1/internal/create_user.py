@@ -71,7 +71,7 @@ def search_user():
     users = list(read.search_user(data, session["id"]))
 
     for n, user in enumerate(users):
-        chats = Chat.objects(members=user.id, owner=session["id"])
+        chats = Chat.objects(members__user=user, owner=session["id"])
         if len(chats) > 0:
             del users[n]
             continue
