@@ -302,7 +302,7 @@ $(document).ready(function () {
             el_notifs.innerText = (parseInt(el_notifs.innerText) + 1).toString();
 
             $.ajax({
-                url: '/api/v1/internal/udate-unread',
+                url: '/api/v1/internal/update-unread',
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify({
