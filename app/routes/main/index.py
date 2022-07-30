@@ -24,20 +24,18 @@ def index():
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif", ),
         translate=getText,
-
     )
 
 
 @main_blueprint.route("/google34d8c04c4b82b69a.html")
 def googleVerification():
     # GOOGLE VERIFICATION FILE
-    return render_template("utils/google34d8c04c4b82b69a.html",
-                           translate=getText, )
+    return render_template("utils/google34d8c04c4b82b69a.html", translate=getText)
 
 
 @main_blueprint.route("/arc-sw.js")
 def arcstuff():
-    return redirect("https://arc.io/arc-sw.js", )
+    return send_file("app/static/js/arc-sw.js")
 
 
 @main_blueprint.route("/privacy-policy")
@@ -112,6 +110,7 @@ def sw():
 def international(country):
     session["global"] = country
     return redirect("/")
+
 
 @main_blueprint.route("/scheduler")
 def scheduler():
