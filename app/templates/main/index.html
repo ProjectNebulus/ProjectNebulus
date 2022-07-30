@@ -40,6 +40,28 @@
     </div>
     {% include "utils/navbar.html" %}
     {% include "utils/sidebar.html" %}
+    <div id="v2-alert" data-aos="fade-left"
+         style="position: fixed; right:0; border-width: 1px; width:400px; padding:10px; float:right; border-radius:10px; margin:10px;"
+         role="alert" class="p-2 bg-white/75 backdrop-blur-sm border-gray-500 flex justify-between sticky z-50">
+        <div class="flex text-sm text-gray-700 dark:text-gray-800">
+            <svg class="mr-2 w-6 h-6 text-blue-700 dark:text-blue-800" fill="currentColor" viewBox="0 0 20 20"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0
+                 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+            </svg>
+            <span style="margin-top: 2px">
+<a href="https://discord.gg/4tANVhXdeK" class="text-blue-500 hover:underline"
+   target="_blank">Join our Discord server</a>
+to get the latest news and updates, and chill in a friendly, inclusive community.
+</span>
+        </div>
+        <div class="flex text-sm text-gray-700 dark:text-gray-800">
+            <button data-dismiss-target="#v2-alert" aria-label="Close" type="button"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                Dismiss
+            </button>
+        </div>
+    </div>
     <div id="join-discord-alert" style="border-bottom-width: 5px; top: 4.75rem" role="alert"
          class="ml-16 p-2 w-full bg-blue-300 backdrop-blur-sm border-blue-500 flex justify-between sticky z-40">
         <div class="flex text-sm text-blue-700 dark:text-blue-800">
