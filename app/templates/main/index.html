@@ -37,27 +37,28 @@
     ">
     </div>
     {% include "utils/navbar.html" %}
-    <div id="join-discord-alert" style="border-bottom-width: 5px; top: 4.75rem" role="alert"
-         class="p-2 w-full bg-blue-300 backdrop-blur-sm border-blue-500 flex justify-between sticky z-50">
-        <div class="flex text-sm text-blue-700 dark:text-blue-800">
+    <div id="join-discord-alert" data-aos="fade-left"
+         style="border-bottom-width: 5px; top: 4.75rem; width:25%; padding:5px; float:right; border-radius:10px; margin:10px;"
+         role="alert" class="p-2 bg-white/75 backdrop-blur-sm border-gray-500 flex justify-between sticky z-50">
+        <div class="flex text-sm text-gray-700 dark:text-gray-800">
             <svg class="mr-2 w-6 h-6 text-blue-700 dark:text-blue-800" fill="currentColor" viewBox="0 0 20 20"
                  xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0
                  000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
             </svg>
             <span style="margin-top: 2px">
-                <a href=https://discord.gg/4tANVhXdeK class="text-blue-500 hover:underline" target="_blank">Join our Discord server</a>
-                to get the latest news and updates, and chill in a friendly, inclusive community.
-            </span>
+<a href="https://discord.gg/4tANVhXdeK" class="text-blue-500 hover:underline"
+   target="_blank">Join our Discord server</a>
+to get the latest news and updates, and chill in a friendly, inclusive community.
+</span>
         </div>
 
-        <span class="material-icons text-gray-600" data-dismiss-target="#join-discord-alert">close</span>
     </div>
     <div class="hidden lg:flex w-full text-left mt-5" style="padding-left: 7%; height: 85vh;" data-aos-duration="2000">
         <br><br>
 
         <div style="margin-top: 5vw" class="ml-6 w-full" data-aos="fade-left">
-            <p class="text-7xl text-gray-600 dark:text-white" >Learning, All In One</p>
+            <p class="text-7xl text-gray-600 dark:text-white">Learning, All In One</p>
             <br>
             <p class="text-2xl text-gray-900 dark:text-white">
                 With Nebulus, have your whole learning experience
