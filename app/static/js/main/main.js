@@ -201,23 +201,14 @@ window.addEventListener('load', function () {
         let img;
         if (!logo.getAttribute('image')) img = '/static/images/nebulusCats/v3.gif';
         else img = logo.getAttribute('image');
-
-        //if (!img.includes("/static/images/nebulusCats")) img += "/static/images/nebulusCats";
-
+        
         let size = logo.getAttribute('size');
 
         if (size === null) {
             logo.style.width = size;
             logo.style.height = size;
         }
-        logo.innerHTML =
-            `<img alt="logo" style="` +
-            logo.getAttribute('style') +
-            '" class="' +
-            logo.className +
-            '" src="' +
-            img +
-            '">';
+        logo.innerHTML = `<img alt="logo" style="${logo.getAttribute('style')}" class="${logo.className}" src="${img}">`;
 
         logo.removeAttribute('style');
         logo.removeAttribute('class');
