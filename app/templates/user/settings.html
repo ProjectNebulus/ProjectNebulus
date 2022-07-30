@@ -61,8 +61,8 @@
                             </span>
                         </li>
                         <li>
-                            <a
-                                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <a onclick="open_pls('schoolSettings')"
+                               class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <span class="ml-3">School</span>
                             </a>
                         </li>
@@ -73,59 +73,54 @@
                             </span>
                         </li>
                         <li>
-                            <a
-                                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <a onclick="open_pls('themeSettings')"
+                               class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <span class="ml-3">Themes</span>
                             </a>
                         </li>
                         <li>
-                            <a
-                                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <a onclick="open_pls('chatSettings')"
+                               class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <span class="ml-3">Chat</span>
                             </a>
                         </li>
                         <li>
-                            <a
-                                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <a onclick="open_pls('badgeSettings')"
+                               class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <span class="ml-3">Badges</span>
                             </a>
                         </li>
                         <li>
-                            <a
-                                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <a onclick="open_pls('achievementSettings')"
+                               class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <span class="ml-3">Achievements</span>
                             </a>
                         </li>
                         <li>
-                            <a
-                                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <a onclick="open_pls('screentimeSettings')"
+                               class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <span class="ml-3">Screen Time</span>
                             </a>
                         </li>
                         <li>
-                            <a
-                                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <a onclick="open_pls('securitySettings')"
+                               class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <span class="ml-3">Security</span>
                             </a>
                         </li>
                         <li>
-                            <a
-                                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <a onclick="open_pls('passwordSettings')"
+                               class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <span class="ml-3">Password Manager</span>
                             </a>
                         </li>
                         <li>
-                            <a
-                                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <a onclick="open_pls('reportSettings')"
+                               class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <span class="ml-3">Reports</span>
                             </a>
                         </li>
-                        <li>
-                            <a
-                                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                <span class="ml-3">Requests</span>
-                            </a>
-                        </li>
+
                         <li>
                             <a
                                     class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -141,7 +136,7 @@
                     </ul>
                 </div>
             </aside>
-            <div id="account" style="flex: 0 0 0 90%; margin-left: calc(8% + 250px); margin-right:8%;">
+            <div id="account" style="flex: 0 0 0 90%; margin-left: calc(8% + 250px); margin-right:8%;width:100%;">
                 <div id="generalSettings">
                     <div class="mt-6">
                         <h1 class="text-3xl text-black dark:text-white">My Account</h1>
@@ -222,6 +217,12 @@
                     </div>
                 </div>
                 <div style="display:none;" id="profileSettings">
+                    <div class="mt-6">
+                        <h1 class="text-3xl text-black dark:text-white">My Account</h1>
+                    </div>
+                    <br>
+
+                    <h2 id="general" class="text-2xl text-black dark:text-white">Profile Settings</h2><br>
                     <span style="display:none;" id="chosen">cat1</span>
                     <div style="">
                         <img style="float:left; margin:10px;"
@@ -267,50 +268,55 @@
                      height="50" width="50" src="/static/images/nebulusCats/newPink.png" alt="Pfp selection"/>
                 <img style="float:left; margin:10px;" class="cat21 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
                      height="50" width="50" src="/static/images/nebulusCats/newRed.png" alt="Pfp selection"/>
-                <img style="float:left; margin:10px;" class="cat22 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
-                     height="50" width="50" src="/static/images/nebulusCats/newYellow.png"
-                     alt="Pfp selection"/>
-                <img style="float:left; margin:10px;" class="cat23 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
-                     height="50" width="50" src="/static/images/nebulusCats/ukraine.png"
-                     alt="Pfp selection"/>
-                <img style="float:left; margin:10px;" class="cat24 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
-                     height="50" width="50" src="/static/images/nebulusCats/pride.png"
-                     alt="Pfp selection"/><br><br style="clear: left;">
-            </div>
-            <style>
-                .pfp_selected {
-                    background: #eee0ff;
-                    border-color: purple;
-                    border-style: block;
-                    border-width: 2px;
-                }
+                        <img style="float:left; margin:10px;" class="cat22 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
+                             height="50" width="50" src="/static/images/nebulusCats/newYellow.png"
+                             alt="Pfp selection"/>
+                        <img style="float:left; margin:10px;" class="cat23 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
+                             height="50" width="50" src="/static/images/nebulusCats/ukraine.png"
+                             alt="Pfp selection"/>
+                        <img style="float:left; margin:10px;" class="cat24 pfp mb-3 w-16 h-16 rounded-full shadow-lg"
+                             height="50" width="50" src="/static/images/nebulusCats/pride.png"
+                             alt="Pfp selection"/><br><br style="clear: left;">
+                    </div>
+                    <style>
+                        .pfp_selected {
+                            background: #eee0ff;
+                            border-color: purple;
+                            border-style: solid;
+                            border-width: 2px;
+                        }
 
-                .pfp:hover {
-                    filter: brightness(0.5) blur(1px);
-                    border-color: blue;
-                    border-style: block;
-                    border-width: 2px;
-                }
-            </style>
+                        .pfp:hover {
+                            filter: brightness(0.5) blur(1px);
+                            border-color: blue;
+                            border-style: solid;
+                            border-width: 2px;
+                        }
+                    </style>
                 </div>
 
                 <div style="display:none;" id="connectionSettings">
-                    <hr class="border-gray-300 dark:border-gray-700 my-8">
-                    <h1 class="text-2xl mt-2 text-black dark:text-white" id="connections">Connections</h1><br>
+                    <div class="mt-6">
+                        <h1 class="text-3xl text-black dark:text-white">My Account</h1>
+                    </div>
+                    <br>
+
+                    <h2 id="general" class="text-2xl text-black dark:text-white">Connection Settings</h2><br>
                     <div class="block p-6 bg-white/75 rounded-lg border border-gray-200 shadow-md hover:bg-gray-100/75 dark:bg-gray-800/75 dark:border-gray-700">
                         <p class="text-black dark:text-white">
                             Connections can unlock
-                            <span class="font-bold text-yellow-400">SPECIAL</span>
+                            <span class="font-bold text-yellow-400">special</span>
                             integrations for Nebulus!
                         </p>
                         <p class="text-gray-500 dark:text-gray-400 text-lg">Note: Some of them don't work yet.</p>
 
                         <div style="max-height: 25rem; overflow: auto">
-                    <div onclick="newwindow=window.open('/gclassroom','Authorize with Google','height=400,width=900')"
-                         style="float:left; margin:10px; width:80px; height:80px;" data-tooltip-target="tooltip-default"
-                         class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                        <img src="/static/images/logos/classroom.png" alt="Google Classroom Image"
-                             style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
+                            <div onclick="newwindow=window.open('/gclassroom','Authorize with Google','height=400,width=900')"
+                                 style="float:left; margin:10px; width:80px; height:80px;"
+                                 data-tooltip-target="tooltip-default"
+                                 class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
+                                <img src="/static/images/logos/classroom.png" alt="Google Classroom Image"
+                                     style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
                     </div>
                     <div id="tooltip-default" role="tooltip"
                          class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
@@ -492,45 +498,45 @@
                         <img src="/static/images/logos/facebook.png" alt="Facebook Image"
                              style="margin-top: calc(50% - 20px); margin-bottom: calc(50% - 20px);object-fit: cover; width:40px; height:40px; display: inline-block;">
                     </div>
-                    <div id="tooltip-default17" role="tooltip"
-                         class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
-                        Facebook
-                        <div class="tooltip-arrow" data-popper-arrow></div>
+                            <div id="tooltip-default17" role="tooltip"
+                                 class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                                Facebook
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
 
-            <br>
-            {% if schoology %}
-                {% for schoology_acc in schoology %}
-                    <div>
-                        <a
-                                class="block p-6 w-1/2 bg-white/75 rounded-t-lg border border-gray-200 shadow-md dark:bg-gray-800/75 dark:border-gray-700">
+                    <br>
+                    {% if schoology %}
+                        {% for schoology_acc in schoology %}
                             <div>
-                                <div style="float:left;margin-right:15px;">
-                                    <img src="/static/images/logos/schoology.png"
-                                         style="width:30px;height:30px;overflow:hidden;"
-                                         alt="Schoology Image">
-                                </div>
-                                <div style="float:left;width:50%;">
-                                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ schoology_acc.schoologyName }}
+                                <a
+                                        class="block p-6 w-3/4 bg-white/75 rounded-t-lg border border-gray-200 shadow-md dark:bg-gray-800/75 dark:border-gray-700">
+                                    <div>
+                                        <div style="float:left;margin-right:15px;">
+                                            <img src="/static/images/logos/schoology.png"
+                                                 style="width:30px;height:30px;overflow:hidden;"
+                                                 alt="Schoology Image">
+                                        </div>
+                                        <div style="float:left;width:50%;">
+                                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ schoology_acc.schoologyName }}
                                     </h5>
                                     <p class="font-sm text-sm text-gray-700 dark:text-gray-400">{{ schoology_acc.schoologyEmail }}</p>
-                                </div>
-                            </div>
-                            <br><br>
-                        </a>
-                        <div class="block p-6 w-1/2 bg-white rounded-b-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-700 dark:border-gray-700 dark:hover:bg-gray-700">
-                            <div>
+                                        </div>
+                                    </div>
+                                    <br><br>
+                                </a>
+                                <div class="block p-6 w-3/4 bg-white rounded-b-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-700 dark:border-gray-700 dark:hover:bg-gray-700">
+                                    <div>
 
-                                <a href=/api/v1/internal/logout-of-schoology"
-                                   class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                    Disconnect Schoology
-                                    <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                              clip-rule="evenodd"></path>
+                                        <a href=/api/v1/internal/logout-of-schoology"
+                                           class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                            Disconnect Schoology
+                                            <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                                      clip-rule="evenodd"></path>
                                     </svg>
                                 </a>
                                 <br><br>
@@ -546,228 +552,450 @@
                                     <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
                                     <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Use in Courses</span>
                                 </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+
+                        {% endfor %}
+                    {% endif %}
+
+                    <br>
+                    {% if canvas %}
+                        <div>
+                            <a
+                                    class="block p-6 w-3/4 bg-white/75 rounded-t-lg border border-gray-200 shadow-md dark:bg-gray-800/75 dark:border-gray-700">
+                                <div>
+                                    <div style="float:left;margin-right:15px;">
+                                        <img src="/static/images/logos/canvas.png"
+                                             style="width:30px;height:30px;overflow:hidden;"
+                                             alt="Canvas Image">
+                                    </div>
+                                    <div style="float:left;">
+                                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ canvas }}</h5>
+                                        <p class="font-normal text-gray-700 dark:text-gray-400">Canvas</p>
+                                    </div>
+                                </div>
+                                <br><br>
+                            </a>
+                            <div
+                                    class="block p-6 w-3/4 bg-white rounded-b-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-700 dark:border-gray-700 dark:hover:bg-gray-700">
+                                <div><a href="/api/v1/internal/logout-of-schoology"
+                                        class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                    Disconnect Canvas
+                                    <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                              clip-rule="evenodd"></path>
+                                    </svg>
+                                </a>
+                            <br><br>
+                            <label for="toggle-example-checked" class="flex relative items-center mb-4 cursor-pointer">
+                                <input type="checkbox" id="toggle-example-checked" class="sr-only" checked>
+                                <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
+                                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Show in Profile</span>
+                            </label>
+                                    <label for="toggle-example-checked1"
+                                           class="flex relative items-center mb-4 cursor-pointer">
+                                        <input type="checkbox" id="toggle-example-checked1" class="sr-only" checked>
+                                        <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
+                                        <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Use in Courses</span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
+                        <br>
+
+                    {% endif %}
+                    {% if spotify %}
+                        <div>
+                            <a class="block p-6 w-3/4 bg-white/75 rounded-t-lg border border-gray-200 shadow-md dark:bg-gray-800/75 dark:border-gray-700">
+                                <div>
+                                    <div style="float:left;margin-right:15px;">
+                                        <img src="/static/images/logos/spotify.png"
+                                             style="width:30px;height:30px;overflow:hidden;"
+                                             alt="Spotify Image">
+                                    </div>
+                                    <div style="float:left;">
+                                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                            {{ spotify["display_name"] }}</h5>
+                                        <p class="font-normal text-gray-700 dark:text-gray-400">Spotify</p>
+                                    </div>
+                                </div>
+                                <br><br>
+                            </a>
+                            <div
+                                    class="block p-6 w-3/4 bg-white rounded-b-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-700 dark:border-gray-700 dark:hover:bg-gray-700">
+                                <div><a href="/spotify/sign_out"
+                                        class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                    Disconnect Spotify
+                                    <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                              clip-rule="evenodd"></path>
+                                    </svg>
+                                </a>
+                            <br><br>
+                            <label for="toggle-example-checked" class="flex relative items-center mb-4 cursor-pointer">
+                                <input type="checkbox" id="toggle-example-checked" class="sr-only" checked>
+                                <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
+                                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Show in Profile</span>
+                            </label>
+                                    <label for="toggle-example-checked1"
+                                           class="flex relative items-center mb-4 cursor-pointer">
+                                        <input type="checkbox" id="toggle-example-checked1" class="sr-only" checked>
+                                        <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
+                                        <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Use in Courses</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                    {% endif %}
+                    <br>
+                    {% if googleclassroom %}
+                        <a class="block p-6 w-3/4 bg-white/75 rounded-t-lg border border-gray-200 shadow-md dark:bg-gray-800/75 dark:border-gray-700">
+                            <div>
+                                <div style="float:left;margin-right:15px;">
+                                    <img src="/static/images/logos/classroom.png"
+                                         style="width:30px;height:30px;overflow:hidden;"
+                                         alt="Google Classroom Image">
+                                </div>
+                                <div style="float:left;">
+                                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                        <img src="{{ googleclassroom[1] }}" class="w-10 h-10 rounded-full"
+                                             alt="Google Classroom Image"
+                                     style="display: inline-block;margin-right:10px;">
+                                {{ googleclassroom[0] }}
+                                    </h5>
+                                    <p class="font-normal text-gray-700 dark:text-gray-400">Classroom</p>
+                                </div>
+                            </div>
+                            <br><br>
+                        </a>
+                        <div
+                                class="block p-6 w-3/4 bg-white rounded-b-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-700 dark:border-gray-700 dark:hover:bg-gray-700">
+                            <a href="/gclassroom/clear"
+                               class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Disconnect Google Classroom
+                                <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                            </a>
+                    <br><br>
+                    <label for="toggle-example-checked" class="flex relative items-center mb-4 cursor-pointer">
+                        <input type="checkbox" id="toggle-example-checked" class="sr-only" checked>
+                        <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
+                        <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Show in Profile</span>
+                    </label>
+                            <label for="toggle-example-checked1" class="flex relative items-center mb-4 cursor-pointer">
+                                <input type="checkbox" id="toggle-example-checked1" class="sr-only" checked>
+                                <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
+                                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Use in Courses</span>
+                            </label>
+                        </div>
+
+                        <br>
+                    {% endif %}
+                    {% if discord %}
+                        <a class="block p-6 w-3/4 bg-white/75 rounded-t-lg border border-gray-200 shadow-md dark:bg-gray-800/75 dark:border-gray-700">
+                            <div style="float:left;margin-right:15px;">
+                                <img src="/static/images/logos/discord.png"
+                                     style="width:30px;height:30px;overflow:hidden;">
+                            </div>
+                            <div style="float:left;">
+                                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><img
+                                        style="margin-right:10px;display: inline-block;"
+                                        src="{{ discord[1] }}"
+                                        class="w-10 h-10 rounded-full">{{ discord[0] }}</h5>
+                                <p class="font-normal text-gray-700 dark:text-gray-400">Discord</p>
+                            </div>
+                            <br><br>
+                        </a>
+                        <div class="block p-6 w-3/4 bg-white rounded-b-lg border border-gray-200 shadow-md hover:bg-gray-100
+                 dark:bg-gray-700 dark:border-gray-700 dark:hover:bg-gray-700">
+                            <a href="/discord/clear"
+                               class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Disconnect Discord
+                                <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                    </a>
+                    <br><br>
+                    <label for="toggle-example-checked" class="flex relative items-center mb-4 cursor-pointer">
+                        <input type="checkbox" id="toggle-example-checked" class="sr-only" checked>
+                        <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
+                        <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Show in Profile</span>
+                    </label>
+                            <label for="toggle-example-checked1" class="flex relative items-center mb-4 cursor-pointer">
+                                <input type="checkbox" id="toggle-example-checked1" class="sr-only" checked>
+                                <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
+                                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Use in Courses</span>
+                            </label>
+                        </div>
+                        <br>
+                    {% endif %}
+                    <hr class="border-gray-300 dark:border-gray-700 my-8">
+                </div>
+                <div style="display:none;" id="schoolSettings">
+
+                    <div class="mt-6">
+                        <h1 class="text-3xl text-black dark:text-white">My Account</h1>
                     </div>
                     <br>
 
-                {% endfor %}
-            {% endif %}
+                    <h2 id="general" class="text-2xl text-black dark:text-white">School Settings</h2><br>
 
-            <br>
-            {% if canvas %}
-                <div>
-                    <a
-                            class="block p-6 w-1/2 bg-white/75 rounded-t-lg border border-gray-200 shadow-md dark:bg-gray-800/75 dark:border-gray-700">
-                        <div>
-                            <div style="float:left;margin-right:15px;">
-                                <img src="/static/images/logos/canvas.png"
-                                     style="width:30px;height:30px;overflow:hidden;"
-                                     alt="Canvas Image">
-                            </div>
-                            <div style="float:left;">
-                                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ canvas }}</h5>
-                                <p class="font-normal text-gray-700 dark:text-gray-400">Canvas</p>
-                            </div>
-                        </div>
-                        <br><br>
-                    </a>
-                    <div
-                            class="block p-6 w-1/2 bg-white rounded-b-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-700 dark:border-gray-700 dark:hover:bg-gray-700">
-                        <div><a href="/api/v1/internal/logout-of-schoology"
-                                class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Disconnect Canvas
-                            <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                      clip-rule="evenodd"></path>
-                            </svg>
-                        </a>
-                            <br><br>
-                            <label for="toggle-example-checked" class="flex relative items-center mb-4 cursor-pointer">
-                                <input type="checkbox" id="toggle-example-checked" class="sr-only" checked>
-                                <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
-                                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Show in Profile</span>
-                            </label>
-                            <label for="toggle-example-checked1" class="flex relative items-center mb-4 cursor-pointer">
-                                <input type="checkbox" id="toggle-example-checked1" class="sr-only" checked>
-                                <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
-                                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Use in Courses</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <br>
-
-            {% endif %}
-            {% if spotify %}
-                <div>
-                    <a class="block p-6 w-1/2 bg-white/75 rounded-t-lg border border-gray-200 shadow-md dark:bg-gray-800/75 dark:border-gray-700">
-                        <div>
-                            <div style="float:left;margin-right:15px;">
-                                <img src="/static/images/logos/spotify.png"
-                                     style="width:30px;height:30px;overflow:hidden;"
-                                     alt="Spotify Image">
-                            </div>
-                            <div style="float:left;">
-                                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                    {{ spotify["display_name"] }}</h5>
-                                <p class="font-normal text-gray-700 dark:text-gray-400">Spotify</p>
-                            </div>
-                        </div>
-                        <br><br>
-                    </a>
-                    <div
-                            class="block p-6 w-1/2 bg-white rounded-b-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-700 dark:border-gray-700 dark:hover:bg-gray-700">
-                        <div><a href="/spotify/sign_out"
-                                class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Disconnect Spotify
-                            <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                      clip-rule="evenodd"></path>
-                            </svg>
-                        </a>
-                            <br><br>
-                            <label for="toggle-example-checked" class="flex relative items-center mb-4 cursor-pointer">
-                                <input type="checkbox" id="toggle-example-checked" class="sr-only" checked>
-                                <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
-                                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Show in Profile</span>
-                            </label>
-                            <label for="toggle-example-checked1" class="flex relative items-center mb-4 cursor-pointer">
-                                <input type="checkbox" id="toggle-example-checked1" class="sr-only" checked>
-                                <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
-                                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Use in Courses</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <br>
-
-            {% endif %}
-            <br>
-            {% if googleclassroom %}
-                <a class="block p-6 w-1/2 bg-white/75 rounded-t-lg border border-gray-200 shadow-md dark:bg-gray-800/75 dark:border-gray-700">
+                    <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()"
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                           required>
+                    <!-- Dropdown menu -->
                     <div>
-                        <div style="float:left;margin-right:15px;">
-                            <img src="/static/images/logos/classroom.png"
-                                 style="width:30px;height:30px;overflow:hidden;"
-                                 alt="Google Classroom Image">
-                        </div>
-                        <div style="float:left;">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                <img src="{{ googleclassroom[1] }}" class="w-10 h-10 rounded-full"
-                                     alt="Google Classroom Image"
-                                     style="display: inline-block;margin-right:10px;">
-                                {{ googleclassroom[0] }}
-                            </h5>
-                            <p class="font-normal text-gray-700 dark:text-gray-400">Classroom</p>
+                        <div class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
+                            <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" id="school_results"
+                                aria-labelledby="dropdownDefault">
+
+                                <li>
+                                    <a href=""
+                                       class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Loading
+                                        Schools...</a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                    <br><br>
-                </a>
-                <div
-                        class="block p-6 w-1/2 bg-white rounded-b-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-700 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <a href="/gclassroom/clear"
-                       class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        Disconnect Google Classroom
-                        <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                </div>
+                <div id="themeSettings" style="display:none;">
+                    <div class="mt-6">
+                        <h1 class="text-3xl text-black dark:text-white">My Account</h1>
+                    </div>
+                    <br>
+
+                    <h2 id="general" class="text-2xl text-black dark:text-white">Theme Settings</h2><br>
+                </div>
+                <div style="display:none;" id="appearanceSettings">
+                    <div class="mt-6">
+                        <h1 class="text-3xl text-black dark:text-white">My Account</h1>
+                    </div>
+                    <br>
+
+                    <h2 id="general" class="text-2xl text-black dark:text-white">Appearance Settings</h2><br>
+                    <p class="text-black dark:text-white">Select your wallpaper.</p>
+                    <div class="main">
+                        <style>
+                            .imagecard {
+                                height: 100px;
+                                margin: 5px;
+                                border-radius: 5px;
+
+                            }
+
+                            .imagecard:hover {
+                                filter: brightness(0.5) blur(1px);
+                                height: 105px;
+                            }
+
+                            .card {
+                                float: left;
+                                height: 140px;
+
+                            }
+                        </style>
+
+
+                        <h1 class="text-xl mt-2 text-gray-500">US National Parks</h1>
+
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/craterLake1.jpeg"></div>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/craterLake2.jpeg"></div>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/deathValley.jpeg"></div>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/jtree.jpeg"></div>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/lassenVolcanic.jpeg">
+                        </div>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/olympic1.jpeg"></div>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/olympic2.jpeg"></div>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/olympic3.jpeg"></div>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/pinnacles.jpeg"></div>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/sequoia.jpeg"></div>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/grandCanyon.jpeg"></div>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/costal_island.jpeg">
+                        </div>
+                        <h1 style="clear:both;" class="text-xl mt-2 text-gray-500">US Cities</h1>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/newYork.jpeg"></div>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/losAngeles.jpeg"></div>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/sanFrancisco.jpeg"></div>
+                        <h1 style="clear:both;" class="text-xl mt-2 text-gray-500">Tech</h1>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/techy1.jpeg"></div>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/techy2.jpeg"></div>
+                        <h1 style="clear:both;" class="text-xl mt-2 text-gray-500">International (Out of US)</h1>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/china1.jpeg"></div>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/china2.jpeg"></div>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/china3.jpeg"></div>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/china4.jpeg"></div>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/china5.jpeg"></div>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/shanghai1.jpeg"></div>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/shanghai2.jpeg"></div>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/costaRica.jpeg"></div>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/italy1.jpeg"></div>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/italy2.jpeg"></div>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/italy3.jpeg"></div>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/venice.jpeg"></div>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/japan1.jpeg"></div>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/japan2.jpeg"></div>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/japan3.jpeg"></div>
+                        <h1 style="clear:both;" class="text-xl mt-2 text-gray-500">Extras</h1>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/northernLights1.jpeg">
+                        </div>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/northernLights2.jpeg">
+                        </div>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/northernLights3.jpeg">
+                        </div>
+                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/jumpys_nebula.jpeg">
+                        </div>
+
+                        <h1 style="clear:both"></h1>
+
+                    </div>
+                </div>
+                <div style="display:none;" id="reportSettings">
+                    <div class="mt-6">
+                        <h1 class="text-3xl text-black dark:text-white">My Account</h1>
+                    </div>
+                    <br>
+
+                    <h2 id="general" class="text-2xl text-black dark:text-white">Submit a Bug Report or Feature
+                        Request</h2><br>
+                    <button onclick="window.open('https://forms.gle/Ym7JVk3QHqAKwYFj7/','Report a Bug or Submit a Feature','height=500,width=1200,status=yes');"
+                            class="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+                        Open Form
+                    </button>
+
+                    <div id="alert-border-1"
+                         class="flex p-4 mb-4 bg-blue-100 border-t-4 border-blue-500 dark:bg-blue-200 mt-2"
+                         role="alert">
+                        <svg class="flex-shrink-0 w-5 h-5 text-blue-700" fill="currentColor" viewBox="0 0 20 20"
                              xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
-                                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
                                   clip-rule="evenodd"></path>
                         </svg>
-                    </a>
-                    <br><br>
-                    <label for="toggle-example-checked" class="flex relative items-center mb-4 cursor-pointer">
-                        <input type="checkbox" id="toggle-example-checked" class="sr-only" checked>
-                        <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
-                        <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Show in Profile</span>
-                    </label>
-                    <label for="toggle-example-checked1" class="flex relative items-center mb-4 cursor-pointer">
-                        <input type="checkbox" id="toggle-example-checked1" class="sr-only" checked>
-                        <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
-                        <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Use in Courses</span>
-                    </label>
-                </div>
-
-                <br>
-            {% endif %}
-            {% if discord %}
-                <a class="block p-6 w-1/2 bg-white/75 rounded-t-lg border border-gray-200 shadow-md dark:bg-gray-800/75 dark:border-gray-700">
-                    <div style="float:left;margin-right:15px;">
-                        <img src="/static/images/logos/discord.png" style="width:30px;height:30px;overflow:hidden;">
+                        <div class="ml-3 text-sm font-medium text-blue-700 rounded-lg">
+                            <span class="font-medium">Did you know?</span> You can earn up to 20 points for submitting
+                            feature
+                            requests or bugs! A developer will manually review your request and if it is valid, they
+                            will decide
+                            how
+                            much to award you based on how good quality/how important it is!
+                        </div>
+                        <button
+                                class="ml-auto -mx-1.5 -my-1.5 bg-blue-100 dark:bg-blue-200 text-blue-500 rounded-lg focus:ring-2 focus:ring-blue-400 p-1.5 hover:bg-blue-200 dark:hover:bg-blue-300 inline-flex h-8 w-8"
+                                data-collapse-toggle="alert-border-1" aria-label="Close">
+                            <span class="sr-only">Dismiss</span>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
                     </div>
-                    <div style="float:left;">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><img
-                                style="margin-right:10px;display: inline-block;"
-                                src="{{ discord[1] }}"
-                                class="w-10 h-10 rounded-full">{{ discord[0] }}</h5>
-                        <p class="font-normal text-gray-700 dark:text-gray-400">Discord</p>
+
+                </div>
+                <div style="display:none;" id="dangerSettings">
+
+                    <div id="danger" class="p-4 mb-4 bg-red-100 rounded-lg dark:bg-red-200 mt-4" role="alert">
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6" fill="#9F2826" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                            <h3 class="text-lg font-medium text-red-700 dark:text-red-800">Danger Zone</h3>
+                        </div>
+                        <div class="mt-2 mb-4 text-sm text-red-700 dark:text-red-800">
+                            These are very dangerous actions!
+                        </div>
+                        <div class="flex">
+                            <button
+                                    class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 mr-2 text-center inline-flex items-center dark:bg-red-800 dark:hover:bg-red-900">
+                                Delete Account
+                            </button>
+                            <button
+                                    class="text-red-700 bg-transparent border border-red-700 hover:bg-red-800 hover:text-white focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:border-red-800 dark:text-red-800 dark:hover:text-white"
+                                    data-collapse-toggle="alert-additional-content-2" aria-label="Close">
+                                Disable Account
+                            </button>
+                            <a href="/logout">
+                                <button
+                                        style="margin-left:10px !important;"
+                                        class="text-red-700 bg-transparent border border-red-700 hover:bg-red-800 hover:text-white focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:border-red-800 dark:text-red-800 dark:hover:text-white"
+                                        data-collapse-toggle="alert-additional-content-2" aria-label="Close">
+                                    Log Out
+
+                                </button>
+                            </a>
+                        </div>
+
+
                     </div>
-                    <br><br>
-                </a>
-                <div class="block p-6 w-1/2 bg-white rounded-b-lg border border-gray-200 shadow-md hover:bg-gray-100
-                 dark:bg-gray-700 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <a href="/discord/clear"
-                       class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        Disconnect Discord
-                        <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                  clip-rule="evenodd"></path>
-                        </svg>
-                    </a>
-                    <br><br>
-                    <label for="toggle-example-checked" class="flex relative items-center mb-4 cursor-pointer">
-                        <input type="checkbox" id="toggle-example-checked" class="sr-only" checked>
-                        <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
-                        <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Show in Profile</span>
-                    </label>
-                    <label for="toggle-example-checked1" class="flex relative items-center mb-4 cursor-pointer">
-                        <input type="checkbox" id="toggle-example-checked1" class="sr-only" checked>
-                        <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
-                        <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Use in Courses</span>
-                    </label>
                 </div>
-                <br>
-            {% endif %}
-            <hr class="border-gray-300 dark:border-gray-700 my-8">
+                <div id="chatSettings" style="display:none;">
+                    <div class="mt-6">
+                        <h1 class="text-3xl text-black dark:text-white">My Account</h1>
+                    </div>
+                    <br>
 
-            </head>
-            <body>
-
-            <h1 class="text-2xl mt-2 text-black dark:text-white" id="school">School</h1><br>
-            <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()"
-                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                   required>
-            <!-- Dropdown menu -->
-            <div>
-                <div class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
-                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" id="school_results"
-                        aria-labelledby="dropdownDefault">
-
-                        <li>
-                            <a href=""
-                               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Loading
-                                Schools...</a>
-                        </li>
-                    </ul>
+                    <h2 id="general" class="text-2xl text-black dark:text-white">Chat Settings</h2><br>
                 </div>
-            </div>
+                <div id="badgeSettings" style="display:none;">
+                    <div class="mt-6">
+                        <h1 class="text-3xl text-black dark:text-white">My Account</h1>
+                    </div>
+                    <br>
+
+                    <h2 id="general" class="text-2xl text-black dark:text-white">Badge Settings</h2><br>
+                </div>
+                <div id="achievementSettings" style="display:none;">
+                    <div class="mt-6">
+                        <h1 class="text-3xl text-black dark:text-white">My Account</h1>
+                    </div>
+                    <br>
+
+                    <h2 id="general" class="text-2xl text-black dark:text-white">Achievements</h2><br>
+                </div>
+                <div id="screentimeSettings" style="display:none;">
+                    <div class="mt-6">
+                        <h1 class="text-3xl text-black dark:text-white">My Account</h1>
+                    </div>
+                    <br>
+
+                    <h2 id="general" class="text-2xl text-black dark:text-white">Screen Time</h2><br>
+                </div>
+                <div id="passwordSettings" style="display:none;">
+                    <div class="mt-6">
+                        <h1 class="text-3xl text-black dark:text-white">My Account</h1>
+                    </div>
+                    <br>
+
+                    <h2 id="general" class="text-2xl text-black dark:text-white">Password Manager</h2><br>
+                </div>
 
 
-            <script>
-                window.onload = function () {
-                    let link = "/api/v1/internal/get_schools";
-                    const request = $.ajax({
-                        type: 'POST',
-                        url: link,
-                        dataType: 'json',
-                    });
+                <script>
+                    window.onload = function () {
+                        let link = "/api/v1/internal/get_schools";
+                        const request = $.ajax({
+                            type: 'POST',
+                            url: link,
+                            dataType: 'json',
+                        });
                     request.done((data) => {
                         let element = document.getElementById("school_results");
                         let string = "";
@@ -806,171 +1034,7 @@
                 }
             </script>
                 </div>
-                <div style="display:none;" id="appearanceSettings">
-                    <h1 class="text-2xl mt-2 text-black dark:text-white" id="appearance">Appearance</h1><br>
-                    <p class="text-black dark:text-white">Select your wallpaper.</p>
-                    <div class="main">
-                        <style>
-                            .imagecard {
-                                height: 100px;
-                                margin: 5px;
-                                border-radius: 5px;
 
-                            }
-
-                    .imagecard:hover {
-                        filter: brightness(0.5) blur(1px);
-                        height: 105px;
-                    }
-
-                    .card {
-                        float: left;
-                        height: 140px;
-
-                    }
-                </style>
-
-
-                <h1 class="text-xl mt-2 text-gray-500">US National Parks</h1>
-
-                <div class="card"><img class="imagecard" src="/static/images/wallpaper/craterLake1.jpeg"></div>
-                <div class="card"><img class="imagecard" src="/static/images/wallpaper/craterLake2.jpeg"></div>
-                <div class="card"><img class="imagecard" src="/static/images/wallpaper/deathValley.jpeg"></div>
-                <div class="card"><img class="imagecard" src="/static/images/wallpaper/jtree.jpeg"></div>
-                <div class="card"><img class="imagecard" src="/static/images/wallpaper/lassenVolcanic.jpeg"></div>
-                <div class="card"><img class="imagecard" src="/static/images/wallpaper/olympic1.jpeg"></div>
-                <div class="card"><img class="imagecard" src="/static/images/wallpaper/olympic2.jpeg"></div>
-                <div class="card"><img class="imagecard" src="/static/images/wallpaper/olympic3.jpeg"></div>
-                <div class="card"><img class="imagecard" src="/static/images/wallpaper/pinnacles.jpeg"></div>
-                <div class="card"><img class="imagecard" src="/static/images/wallpaper/sequoia.jpeg"></div>
-                <div class="card"><img class="imagecard" src="/static/images/wallpaper/grandCanyon.jpeg"></div>
-                <div class="card"><img class="imagecard" src="/static/images/wallpaper/costal_island.jpeg"></div>
-                <h1 style="clear:both;" class="text-xl mt-2 text-gray-500">US Cities</h1>
-                <div class="card"><img class="imagecard" src="/static/images/wallpaper/newYork.jpeg"></div>
-                <div class="card"><img class="imagecard" src="/static/images/wallpaper/losAngeles.jpeg"></div>
-                <div class="card"><img class="imagecard" src="/static/images/wallpaper/sanFrancisco.jpeg"></div>
-                <h1 style="clear:both;" class="text-xl mt-2 text-gray-500">Tech</h1>
-                <div class="card"><img class="imagecard" src="/static/images/wallpaper/techy1.jpeg"></div>
-                <div class="card"><img class="imagecard" src="/static/images/wallpaper/techy2.jpeg"></div>
-                <h1 style="clear:both;" class="text-xl mt-2 text-gray-500">International (Out of US)</h1>
-                <div class="card"><img class="imagecard" src="/static/images/wallpaper/china1.jpeg"></div>
-                <div class="card"><img class="imagecard" src="/static/images/wallpaper/china2.jpeg"></div>
-                <div class="card"><img class="imagecard" src="/static/images/wallpaper/china3.jpeg"></div>
-                <div class="card"><img class="imagecard" src="/static/images/wallpaper/china4.jpeg"></div>
-                <div class="card"><img class="imagecard" src="/static/images/wallpaper/china5.jpeg"></div>
-                <div class="card"><img class="imagecard" src="/static/images/wallpaper/shanghai1.jpeg"></div>
-                <div class="card"><img class="imagecard" src="/static/images/wallpaper/shanghai2.jpeg"></div>
-                <div class="card"><img class="imagecard" src="/static/images/wallpaper/costaRica.jpeg"></div>
-                <div class="card"><img class="imagecard" src="/static/images/wallpaper/italy1.jpeg"></div>
-                <div class="card"><img class="imagecard" src="/static/images/wallpaper/italy2.jpeg"></div>
-                <div class="card"><img class="imagecard" src="/static/images/wallpaper/italy3.jpeg"></div>
-                <div class="card"><img class="imagecard" src="/static/images/wallpaper/venice.jpeg"></div>
-                <div class="card"><img class="imagecard" src="/static/images/wallpaper/japan1.jpeg"></div>
-                <div class="card"><img class="imagecard" src="/static/images/wallpaper/japan2.jpeg"></div>
-                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/japan3.jpeg"></div>
-                        <h1 style="clear:both;" class="text-xl mt-2 text-gray-500">Extras</h1>
-                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/northernLights1.jpeg">
-                        </div>
-                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/northernLights2.jpeg">
-                        </div>
-                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/northernLights3.jpeg">
-                        </div>
-                        <div class="card"><img class="imagecard" src="/static/images/wallpaper/jumpys_nebula.jpeg">
-                        </div>
-
-                        <h1 style="clear:both"></h1>
-
-                    </div>
-                </div>
-                <div style="display:none;" id="reportSettings">
-                    <h2 id="bug" class="text-2xl text-black dark:text-white">Submit a Bug Report</h2><br>
-                    <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Your
-                        Bug
-                        Report</label>
-                    <textarea id="message" rows="4"
-                              class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                              placeholder="Leave a comment..."></textarea>
-                    <button style="margin-top: 20px;"
-                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        Submit
-                    </button>
-            <hr class="border-gray-300 dark:border-gray-700 my-8">
-            <h2 id="request" class="text-2xl text-black dark:text-white">Submit a Feature Request</h2><br>
-            <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Your
-                Bug</label>
-            <textarea id="message" rows="4"
-                      class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder="Leave a comment..."></textarea>
-            <button style="margin-top: 20px;"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                Submit
-            </button>
-
-            <div id="alert-border-1" class="flex p-4 mb-4 bg-blue-100 border-t-4 border-blue-500 dark:bg-blue-200 mt-2"
-                 role="alert">
-                <svg class="flex-shrink-0 w-5 h-5 text-blue-700" fill="currentColor" viewBox="0 0 20 20"
-                     xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                          clip-rule="evenodd"></path>
-                </svg>
-                <div class="ml-3 text-sm font-medium text-blue-700 rounded-lg">
-                    <span class="font-medium">Did you know?</span> You can earn up to 20 points for submitting feature
-                    requests or bugs! A developer will manually review your request and if it is valid, they will decide
-                    how
-                    much to award you based on how good quality/how important it is!
-                </div>
-                <button
-                        class="ml-auto -mx-1.5 -my-1.5 bg-blue-100 dark:bg-blue-200 text-blue-500 rounded-lg focus:ring-2 focus:ring-blue-400 p-1.5 hover:bg-blue-200 dark:hover:bg-blue-300 inline-flex h-8 w-8"
-                        data-collapse-toggle="alert-border-1" aria-label="Close">
-                    <span class="sr-only">Dismiss</span>
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                              clip-rule="evenodd"></path>
-                    </svg>
-                </button>
-            </div>
-
-                </div>
-                <div style="display:none;" id="dangerSettings">
-
-                    <div id="danger" class="p-4 mb-4 bg-red-100 rounded-lg dark:bg-red-200 mt-4" role="alert">
-                        <div class="flex items-center">
-                            <svg class="w-6 h-6" fill="#9F2826" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                      d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-                                      clip-rule="evenodd"></path>
-                            </svg>
-                            <h3 class="text-lg font-medium text-red-700 dark:text-red-800">Danger Zone</h3>
-                        </div>
-                <div class="mt-2 mb-4 text-sm text-red-700 dark:text-red-800">
-                    These are very dangerous actions!
-                </div>
-                <div class="flex">
-                    <button
-                            class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 mr-2 text-center inline-flex items-center dark:bg-red-800 dark:hover:bg-red-900">
-                        Delete Account
-                    </button>
-                    <button
-                            class="text-red-700 bg-transparent border border-red-700 hover:bg-red-800 hover:text-white focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:border-red-800 dark:text-red-800 dark:hover:text-white"
-                            data-collapse-toggle="alert-additional-content-2" aria-label="Close">
-                        Disable Account
-                    </button>
-                    <a href="/logout">
-                        <button
-                                style="margin-left:10px !important;"
-                                class="text-red-700 bg-transparent border border-red-700 hover:bg-red-800 hover:text-white focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:border-red-800 dark:text-red-800 dark:hover:text-white"
-                                data-collapse-toggle="alert-additional-content-2" aria-label="Close">
-                            Log Out
-
-                        </button>
-                    </a>
-                </div>
-
-
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -986,10 +1050,19 @@
 
         function open_pls(id_name) {
             toggle_display("generalSettings");
+            toggle_display("profileSettings");
             toggle_display("connectionSettings");
+            toggle_display("schoolSettings");
+            toggle_display("themeSettings");
             toggle_display("appearanceSettings");
             toggle_display("reportSettings");
             toggle_display("dangerSettings");
+            toggle_display("chatSettings");
+            toggle_display("badgeSettings");
+            toggle_display("achievementSettings");
+            toggle_display("screentimeSettings");
+            toggle_display("passwordSettings");
+
             opposite_toggle_display(id_name);
         }
     </script>
