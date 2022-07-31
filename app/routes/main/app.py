@@ -140,7 +140,7 @@ def app():
         page="Nebulus - Learning",
         announcements=events[0],
         events=events[1],
-        today=datetime.now(),
+        now=datetime.now(),
         strftime=utils.strftime,
         gcourses=gcourses,
         canvascourses=canvascourses,
@@ -236,5 +236,6 @@ def courses():
         canvascourses=canvascourses,
         schoologycourses=scCourses,
         pastschoologycourses=scCourses,
+        now=datetime.now(),
         translate=getText,
     )
