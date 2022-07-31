@@ -233,7 +233,7 @@ function onFailedRequest() {
 function online() {
     isOnline = true;
     requestAttempts = 0;
-    if (shouldGetSpotify) statusInterval = setInterval(navFetchStatus, 1000);
+    if (shouldGetSpotify) statusInterval = setInterval(navFetchStatus, 350);
 
     document.getElementById('wifi').innerHTML = 'wifi';
     document.getElementById('wifi').classList.add('bg-blue-600');
