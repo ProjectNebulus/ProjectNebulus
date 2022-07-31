@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 
 import google.oauth2.credentials
 from flask import render_template, session
@@ -140,8 +140,7 @@ def app():
         page="Nebulus - Learning",
         announcements=events[0],
         events=events[1],
-        today=datetime.date.today(),
-        now=datetime.datetime.now(),
+        today=datetime.now(),
         strftime=utils.strftime,
         gcourses=gcourses,
         canvascourses=canvascourses,

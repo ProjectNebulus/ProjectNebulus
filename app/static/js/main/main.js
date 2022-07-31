@@ -1,6 +1,6 @@
 const siteName = window.location.protocol + '//' + window.location.host;
 
-const interval = setInterval(changeFavicon, 1000);
+const faviconInterval = setInterval(changeFavicon, 1000);
 Array.prototype.insert = (index, item) => this.splice(index, 0, item);
 
 window.addEventListener("beforeunload", () => clearInterval(interval));
@@ -16,6 +16,7 @@ else document.documentElement.classList.remove('dark');
 /** Returns a string containing a loading icon, with the parameters defining length and width. */
 function loadingIcon(length, width, fill) {
     if (width === undefined) width = length;
+    if (fill === undefined) fill = "blue-600";
 
     return `
     <div role="status">
@@ -201,7 +202,7 @@ window.addEventListener('load', function () {
         let img;
         if (!logo.getAttribute('image')) img = '/static/images/nebulusCats/v3.gif';
         else img = logo.getAttribute('image');
-        
+
         let size = logo.getAttribute('size');
 
         if (size === null) {

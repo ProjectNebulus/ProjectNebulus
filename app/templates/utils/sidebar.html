@@ -2,7 +2,7 @@
     <style>
         #sidebar_ > div {
             width: 4rem;
-            transition: 0.5s;
+            transition: width 0.5s;
         }
 
         #sidebar_:hover > div {
@@ -169,8 +169,6 @@
                             <span class="ml-3 text_nav">Support</span>
                         </a>
                     </li>
-
-
                 </ul>
             </div>
         </aside>
@@ -179,9 +177,7 @@
 
 {% endif %}
 <script>
-    let page = window.location.pathname;
-    console.log(page);
-    if (page != "/chat") {
+    if (window.location.pathname !== "/chat") {
         io = window.io;
 
         let chat_sidebar = document.getElementById('chat-icon-sidebar');
@@ -203,8 +199,6 @@
             });
         });
 
-        window.onunload = function () {
-            socket.disconnect();
-        };
+        window.onunload = socket.disconnect;
     }
 </script>
