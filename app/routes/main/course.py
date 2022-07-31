@@ -58,6 +58,23 @@ def course_page(page, **kwargs):
             read=read,
             translate=getText,
         )
+    return render_template(
+        f"courses/{page}.html",
+        today=datetime.date.today(),
+        page="Nebulus - " + course.name,
+        iframe=iframeSrc,
+        course=course,
+        course_id=course_id,
+        user=session.get("username"),
+        email=session.get("email"),
+        avatar=session.get("avatar", "/v3.gif"),
+        disableArc=(page != "course"),
+        events=[],
+        # read.sort_course_events(session["id"], int(course_id))[1],d.sort_course_events(session["id"], int(course_id))[1],
+        strftime=utils.strftime,
+        read=read,
+        translate=getText,
+    )
 
 
 

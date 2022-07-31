@@ -35,7 +35,7 @@ def googleVerification():
 
 @main_blueprint.route("/arc-sw.js")
 def arcstuff():
-    return send_file("/static/js/arc-sw.js")
+    return redirect("https://arc.io/arc-sw.js")
 
 
 @main_blueprint.route("/privacy-policy")

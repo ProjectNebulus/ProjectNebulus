@@ -8,27 +8,82 @@
     <head>
         <title>Whiteboard</title>
         <style>
-            html, body { width:100%; height:100%; } /* just to be sure these are full screen*/
+            html, body {
+                width: 100%;
+                height: 100%;
+            }
 
-            canvas{
+            /* just to be sure these are full screen*/
+
+            canvas {
                 cursor: crosshair;
             }
         </style>
     </head>
     <body>
     <!-- make a canvas element. width and height should be the same as the window. -->
-    <button id="lineWidth">Line Width</button>
-    <button id="clear"><i class="material-icons">delete</i></button>
-    <button id="save"><i class="material-icons">download</i></button>
-    <button value="pen" id="pen"><i class="material-icons">edit</i></button>
-    <button value="eraser" id="eraser"><i class="material-icons">backspace</i></button>
-    <button value="insert-text" id="insert-text"><i class="material-icons">keyboard</i></button>
-    <input type="color" id="color" value="#000000">
-    <canvas id="whiteboard" width="100" height="1000"></canvas>
+    <div style="width: 80%;position: absolute;z-index: 300;background-color:gray;border-radius: 10px;padding: 10px;margin: 20px;text-align: center;">
+        <button type="button" id="lineWidth"
+                class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+
+            Change Line Width
+        </button>
+        <button id="clear" type="button"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <i class="material-icons">delete</i>
+        </button>
+        <button id="save" type="button"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <i class="material-icons">download</i>
+        </button>
+        <button id=pen" type="button"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <i class="material-icons">edit</i>
+        </button>
+        <button id="eraser" type="button"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <i class="material-icons">backspace</i>
+        </button>
+        <button id="insert-text" type="button"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <i class="material-icons">keyboard</i>
+        </button>
+        <button type="button"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <input type="color" id="color" value="#000000">
+        </button>
+
+        <style>
+
+            #color {
+                -webkit-appearance: none;
+                padding: 0;
+                border: none;
+                border-radius: 10px;
+                width: 20px !important;
+                height: 20px !important;
+                background: gray;
+
+            }
+
+            #color::-webkit-color-swatch {
+                border: none;
+                border-radius: 10px;
+                padding: 0;
+            }
+
+            #color::-webkit-color-swatch-wrapper {
+                border: none;
+                border-radius: 10px;
+                padding: 0;
+            }
+        </style>
+    </div>
+    <canvas id="whiteboard" width="100%" height="100%" style="background:white; border-radius:10px;"></canvas>
     <script>
         var canvas = document.getElementById('whiteboard');
         canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight-50;
+        canvas.height = window.innerHeight - 50;
         var ctx = canvas.getContext('2d');
         var mouseDown = false;
         var lastX = 0;
