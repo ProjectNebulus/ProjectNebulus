@@ -38,7 +38,7 @@ def generateSchoologyObject(_id: str) -> schoolopy.Schoology:
 
 
 def create_course(data: dict) -> Course:
-    user = read.find_user(id=session["id"])
+    user = read.find_user(id=session[   "id"])
 
     if data.get("avatar"):
         data["avatar"] = Avatar(avatar_url=data["avatar"])
@@ -50,7 +50,7 @@ def create_course(data: dict) -> Course:
     return course
 
 
-def create_user(data: dict) -> str | List[str | User]:
+def create_user(data: dict) -> str | list[str | User]:
     """
     Status Codes:
     0: Success

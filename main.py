@@ -13,7 +13,7 @@ app = init_app()
 app.secret_key = os.getenv("MONGOPASS")
 
 # Debug mode logs errors in more detail. Best used for testing, not production
-debug = True
+debug = False
 if __name__ == "__main__":
     if platform.system().lower() == "linux":  # linux - used for VPS (like DigitalOcean)
         debug = False
