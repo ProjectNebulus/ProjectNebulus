@@ -179,7 +179,7 @@ def search_within_user():
                 account.avatar.avatar_url,
             ]
         )
-
+    print(everything)
     for i in everything:
         count += 1
         string += i[0]
@@ -193,7 +193,7 @@ def search_within_user():
             string += "•"
     if len(everything) == 0:
         return "0"
-
+    print(string)
     return string
 
 

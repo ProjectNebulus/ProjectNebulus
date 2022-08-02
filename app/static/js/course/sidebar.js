@@ -1,4 +1,4 @@
-const sidebarLinks = document.getElementsByClassName('space-y-2')[0].getElementsByTagName('a');
+const sidebarLinks = document.getElementsByClassName('space-y-2')[1].getElementsByTagName('a');
 
 for (const a of sidebarLinks) {
     a.href += '?iframe=true';

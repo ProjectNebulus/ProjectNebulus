@@ -231,6 +231,7 @@ function onFailedRequest() {
     requestAttempts++;
 }
 
+
 function online() {
     isOnline = true;
     requestAttempts = 0;
@@ -279,17 +280,22 @@ function navFetchStatus() {
         let ratio = songs[8];
 
         document.getElementById('spotifyStatus').innerHTML = `
-            <div style="width:150px;float:left;">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <div style="width:110px;float:left;">
                 <img style="display: inline-block; margin:20px; border-radius:10px;" class="mb-3 w-20 h-20 shadow-lg" src="${image}" alt="Song Title">
             </div>
-            <div style="width: calc(90% - 150px);float:left;">
+            <div style="width: calc(90% - 110px);float:left;">
                 <div style="margin-top:20px;">
-                <p class="truncate text-lg text-black dark:text-white"><i style="display:inline-block; color:#1BD661; margin-right:10px;" class="fab fa-spotify"></i> ${name} ${explicit} </p>
+                <p class="truncate text-lg text-black dark:text-white"><i class="fa fa-spotify" style="display:inline-block; color:#1DB954;margin-right:10px;"></i> ${name} ${explicit} </p>
                     <p class="truncate text-sm text-gray-600 dark:text-gray-300">${artists} - ${album}</p></div>
-                <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700 h-1">
-                    <div class="bg-white text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full h-1" style="width: ${Math.round(
+               
+                
+                <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700 h-3" style="
+    margin: 10px;
+">
+                    <div class="text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full h-3" style="width: ${Math.round(
             ratio
-        )}%"> </div>
+        )}%;background: linear-gradient(45deg, green, orange);"> </div>
                 </div>
                 <p class="truncate text-sm text-gray-600 dark:text-gray-300">${timestamp} of ${total}
                     ${playing}

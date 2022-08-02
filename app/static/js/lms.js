@@ -5,12 +5,17 @@ function expand(message) {
 function openAnnouncementsModal(content, title, author, pic, course) {
     const targetEl = document.getElementById('announcementModal');
     document.getElementById("announcementBody").innerText = content;
-    document.getElementById("announcement__Name").innerText = title;
-    document.getElementById("announcement__Name").innerHTML += `
-    <img data-dropdown-toggle="userDropdown-0_0" id="avatar0_0" data-dropdown-placement="bottom-start" class="rounded-full ring-2 ring-gray-300 dark:ring-gray-500
+    if (title.length === 0) {
+        title = "Announcement from " + author;
+    }
+    document.getElementById("announcement__Name").innerText = `
+    <img data-dropdown-toggle="userDropdown-0_0" id="avatar0_0" data-dropdown-placement="bottom-start" class="mr-6 inline-block rounded-full ring-2 ring-gray-300 dark:ring-gray-500
                                                      cursor-pointer mb-3 rounded-full shadow-lg
                                                       dark:bg-gray-900 dark:hover:bg-gray-800 
-                                                      w-8 h-8 mt-4 " src="${pic}" alt="${author}'s profile picture">
+                                                      w-8 h-8 mt-4 " src="${pic}" alt="${author}'s profile picture">`
+    document.getElementById("announcement__Name").innerText = title;
+    document.getElementById("announcement__Name").innerHTML += `
+    
                                                       <div class="flex flex-col text-xs text-gray-700 dark:text-gray-400 pl-2">
                                                     
                                                         <h4 class="text-lg font-semibold text-gray-900 dark:text-white truncate mb-1 cursor-pointer hover:underline" data-dropdown-toggle="userDropdown-0_0">
@@ -621,7 +626,9 @@ function changeSearch() {
                 ${pic}
                 ${temp_arr[1]} <span class="text-gray-500 ml-2">${temp_arr[2]}</span></span>
                     </li>
+                    
 `;
+                        temp_arr = [];
                     }
                 }
             }
