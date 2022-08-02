@@ -4,7 +4,7 @@ function uploadLink() {
         url: '/api/v1/internal/upload_file_link',
         data: {
             link: document.getElementById('thelink').value,
-            course: document.getElementById('course_id').innerText,
+            course: course_id,
             folder: '0'
         }
     });

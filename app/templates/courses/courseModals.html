@@ -197,8 +197,8 @@
         <!-- Modal content -->
         <div class="relative">
             <!-- Modal header -->
-            <div class="modalheader flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600">
-                Create a document
+            <div class="text-xl text-gray-900 lg:text-2xl dark:text-white modalheader flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600">
+                Create a Document
                 <button onclick="closeModal('createDocument');" type="button"
                         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -234,8 +234,8 @@
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <!-- Modal header -->
-            <div class="modalheader flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600">
-                Post a link
+            <div class="text-xl text-gray-900 lg:text-2xl dark:text-white modalheader flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600">
+                Post a Document Link
                 <button onclick="closeModal('postLink')" type="button"
                         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm
                         p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
@@ -420,7 +420,8 @@
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <!-- Modal header -->
-            <div class="modalheader flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600">
+            <div class="text-xl text-gray-900 lg:text-2xl dark:text-white  modalheader flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600">
+                Create a Textbook
                 <button onclick="closeModal('createTextbook');" type="button"
                         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm
                          p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
@@ -437,12 +438,12 @@
                     Name</label>
                 <input type="url" id="textbookname"
                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                       placeholder="" required>
+                       placeholder="My Math Book" required>
                 <label for="textbookname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Textbook
                     Link</label>
-                <input type="url" id="textbookname"
+                <input type="url" id="textbookurl"
                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                       placeholder="" required>
+                       placeholder="https://mybooks.school/textbook/mymathbook" required>
             </div>
             <!-- Modal footer -->
             <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
