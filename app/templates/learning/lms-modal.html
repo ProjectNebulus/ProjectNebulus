@@ -21,8 +21,8 @@
                     your learning experience. All you have to do is create a course
                     and fill it in with content!</p><br>
 
-                <div class='createSelectButton text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 text-2xl'
-                     onclick="skipTemplates()">
+                <div class='createSelectButton text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5
+                 text-center mr-2 mb-2 text-2xl' id="skip-templates">
                     <img src="/static/images/icons/new.svg"
                          style="visibility:visible;width:20px;height:20px;float:left;" alt="Create course image">
                     Create course
@@ -32,7 +32,7 @@
 
                 <h2 class="text-3xl">Or choose a subject</h2>
 
-                <div class='scroll'></div>
+                <div class='scroll mt-2'></div>
             </div>
         </div>
         <!-- Modal footer -->
@@ -147,8 +147,6 @@
                                 </a>
 
                                 <p class="text-gray-700 text-xs uppercase dark:text-gray-400">{{ schoologycourses[-1]["title"] }}</p>
-
-
                             </div>
                         </div>
                         <br><br>
@@ -191,20 +189,19 @@
         </h3><br>
         <div>
             {% if gcourses|length == 0 %}
-                <p class="text-black dark:text-white text-xl">We coudn't find any courses! Is your Google Classroom
-                    account
-                    linked? <a href="/settings#connections">
+                <p class="text-black dark:text-white text-xl">
+                    We coudn't find any courses! Is your Google Classroom account linked?
+                    <a href="/settings#connections">
                         <button style="margin-left: 10px; display:grid; grid-auto-flow: column; align-content: center; justify-content: center;"
-                                type="button"
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                            Connect Google Classroom <i
-                                style="display:grid; grid-auto-flow: column; align-content: center; justify-content: center;"
-                                class="material-icons">open_in_newt</i>
+                            Connect Google Classroom
+                            <i style="display:grid; grid-auto-flow: column; align-content: center; justify-content: center;"
+                               class="material-icons">open_in_newt</i>
                         </button>
                     </a></p>
             {% else %}
                 <p class="text-black dark:text-white text-3xl">Select a Google Classroom Course</p>
-                <center>
+                <div style="text-align: center;">
                     <div class="scroll" id="glist" style="height:90%;">
                         {% for course in gcourses %}
                             <a onclick="updateGoogleLink('{{ course[1] }}', '{{ course[2] }}');"
@@ -216,7 +213,7 @@
                             <br><br>
                         {% endfor %}
                     </div>
-                </center>
+                </div>
                 <form id="google-create-course" style="width:90%;height:90%;display:none;"
                       onsubmit="importGClassroom(); return false;">
                     <div class="mb-6">
@@ -253,7 +250,7 @@
             Import from Canvas
             <span class="close"></span>
         </h3><br>
-        <center>
+        <div class="text-center">
             <div class="scroll" id="clist" style="height:90%;width:90%;">
                 {% if canvascourses|length == 0 %}
                     <h1 class="text-black dark:text-white text-xl">We coudn't find any courses! Is your Canvas account
@@ -275,15 +272,12 @@
                             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ course[0] }}</h5>
                             <p class="font-normal text-gray-700 dark:text-gray-400">{{ course[2] }}</p>
                         </a>
-
-                        </svg>
-                        </button>
                         <br><br>
                     {% endfor %}
                 {% endif %}
 
             </div>
-        </center>
+        </div>
         <form id="canvas-create-course" onsubmit="importCanvas(); return false;"
               style="height:90%;width:90%;display:none;">
             <div class="mb-6">
@@ -339,8 +333,6 @@
         <div class="pageCount"></div>
     </div>
     <span class="text-3xl text-green-500" id="create-course-status2"></span>
-
-</div>
 </div>
 <div id="searchModal" tabindex="-1" aria-hidden="true"
      class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
@@ -365,9 +357,10 @@
             <!-- Modal body -->
             <div class="p-6 space-y-6 dark:text-white text-black">
                 <div class="mb-6">
-                    <input type="text" oninput="changeSearch();" id="search_input"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                           placeholder="Type here..." required>
+                    <input oninput="changeSearch();" id="search_input" placeholder="Type here..." required
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500
+                            focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
+                             dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <ul id="search_items" class="scroll">
                         <li>
                             <div class="py-2.5 rounded-lg mx-auto block px-4 py-2 mx-2 dark:hover:text-white">
@@ -382,7 +375,6 @@
                                 No Results Found
                             </div>
                         </li>
-
                     </ul>
                 </div>
             </div>

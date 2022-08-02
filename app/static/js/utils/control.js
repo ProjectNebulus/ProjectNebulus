@@ -38,8 +38,7 @@ for (const icon of controlCenter.getElementsByTagName('i'))
         ' material-icons text-center text-sm text-white rounded-full bg-purple-600 w-5 h-5 mr-1';
 
 for (const a of controlCenter.getElementsByTagName('a'))
-    a.className +=
-        ' text-gray-500 dark:text-gray-400 focus:outline-none hover:bg-purple-200 dark:hover:bg-purple-800 text-left text-sm rounded-lg p-2.5 w-36 cursor-pointer';
+    a.className += ' text-gray-500 dark:text-gray-400 focus:outline-none hover:bg-purple-800 text-left text-sm rounded-lg p-2.5 w-36 cursor-pointer';
 
 controlCenter2.classList.add("grid-cols-2");
 controlCenter2.classList.remove("flex-col")

@@ -5142,6 +5142,11 @@ html.dark body {
   color: rgb(28 100 242 / var(--tw-text-opacity));
 }
 
+.hover\:bg-purple-800:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(85 33 181 / var(--tw-bg-opacity));
+}
+
 .hover\:text-slate-900:hover {
   --tw-text-opacity: 1;
   color: rgb(15 23 42 / var(--tw-text-opacity));
