@@ -20,24 +20,25 @@ def getLocal():
 
 
 def getText(query):
-    dictionary = {"Nebulus": {
-        "us": "Nebulus",
-        "uk": "Nebulus",
-        "au": "Nebulus",
-        "es": "Nébulus",
-        "mx": "Nébulus",
-        "cr": "Nébulus",
-        "cu": "Nébulus",
-        "co": "Nébulus",
-        "ar": "Nébulus",
-        "it": "Nèbulo",
-        "cn": "耐博乐思",
-        "tw": "耐博樂思",
-        "hk": "耐博樂思",
-        "mo": "耐博樂思",
-        "jp": "ネビュラス",
-        "kr": "네뷸러스"
-    },
+    dictionary = {
+        "Nebulus": {
+            "us": "Nebulus",
+            "uk": "Nebulus",
+            "au": "Nebulus",
+            "es": "Nébulus",
+            "mx": "Nébulus",
+            "cr": "Nébulus",
+            "cu": "Nébulus",
+            "co": "Nébulus",
+            "ar": "Nébulus",
+            "it": "Nèbulo",
+            "cn": "耐博乐思",
+            "tw": "耐博樂思",
+            "hk": "耐博樂思",
+            "mo": "耐博樂思",
+            "jp": "ネビュラス",
+            "kr": "네뷸러스",
+        },
         "Learning": {
             "us": "Learning",
             "uk": "United Kingdom",
@@ -54,7 +55,7 @@ def getText(query):
             "hk": "香港",
             "mo": "澳門",
             "jp": "日本",
-            "kr": "대한민국 사람"
+            "kr": "대한민국 사람",
         },
         "A Learning, All In One Experience": {
             "us": "A Learning, All In One Experience",
@@ -71,7 +72,6 @@ def getText(query):
             "hk": "一个有趣，全面的学习平台",
             "mo": "一个有趣，全面的学习平台",
             "kr": "하나의 경험에서 배우는 학습",
-
         },
         "Nebulus. Education. Redefined.": {
             "us": "Nebulus. Education. Redefined",
@@ -129,68 +129,62 @@ def getText(query):
             "co": "Conecta todo tu aprendizaje",
             "ar": "Conecta todo tu aprendizaje",
         },
-        "No more switching between websites. Get your Schoology, Google Classroom, and Canvas accounts connected today.":
-            {
-                "us": "No more switching between websites. Get your Schoology, Google Classroom, and Canvas accounts connected today.",
-                "uk": "No more switching between websites. Get your Schoology, Google Classroom, and Canvas accounts connected today.",
-                "au": "No more switching between websites. Get your Schoology, Google Classroom, and Canvas accounts connected today.",
-                "es": "No cambies más entre sitios web. Conecta tus cuentas de Schoology, Google Classroom y Canvas hoy.",
-                "mx": "No cambies más entre sitios web. Conecta tus cuentas de Schoology, Google Classroom y Canvas hoy.",
-                "cr": "No cambies más entre sitios web. Conecta tus cuentas de Schoology, Google Classroom y Canvas hoy.",
-                "cu": "No cambies más entre sitios web. Conecta tus cuentas de Schoology, Google Classroom y Canvas hoy.",
-                "co": "No cambies más entre sitios web. Conecta tus cuentas de Schoology, Google Classroom y Canvas hoy.",
-                "ar": "No cambies más entre sitios web. Conecta tus cuentas de Schoology, Google Classroom y Canvas hoy.",
-            },
-        "Organize your learning experience":
-            {
-                "us": "Organize your learning experience",
-                "uk": "Organize your learning experience",
-                "au": "Organize your learning experience",
-                "es": "Organiza tu experiencia de aprendizaje",
-                "mx": "Organiza tu experiencia de aprendizaje",
-                "cr": "Organiza tu experiencia de aprendizaje",
-                "cu": "Organiza tu experiencia de aprendizaje",
-                "co": "Organiza tu experiencia de aprendizaje",
-                "ar": "Organiza tu experiencia de aprendizaje",
-            },
-        "With Nebulus, there is no need to have your papers, documents, assignments, textbooks, and events be all over the place. With Nebulus, everything is organized for you in an easy-to-use way!":
-            {
-                "us": "With Nebulus, there is no need to have your papers, documents, assignments, textbooks, and events be all over the place. With Nebulus, everything is organized for you in an easy-to-use way!",
-                "uk": "With Nebulus, there is no need to have your papers, documents, assignments, textbooks, and events be all over the place. With Nebulus, everything is organized for you in an easy-to-use way!",
-                "au": "With Nebulus, there is no need to have your papers, documents, assignments, textbooks, and events be all over the place. With Nebulus, everything is organized for you in an easy-to-use way!",
-                "es": "Con Nébulus, no hay necesidad de tener todos tus papeles, documentos, tareas, libros de texto y eventos por todos lados. ¡Con Nébulus, todo está organizado para ti de manera fácil de usar!",
-                "mx": "Con Nébulus, no hay necesidad de tener todos tus papeles, documentos, tareas, libros de texto y eventos por todos lados. ¡Con Nébulus, todo está organizado para ti de manera fácil de usar!",
-                "cr": "Con Nébulus, no hay necesidad de tener todos tus papeles, documentos, tareas, libros de texto y eventos por todos lados. ¡Con Nébulus, todo está organizado para ti de manera fácil de usar!",
-                "cu": "Con Nébulus, no hay necesidad de tener todos tus papeles, documentos, tareas, libros de texto y eventos por todos lados. ¡Con Nébulus, todo está organizado para ti de manera fácil de usar!",
-                "co": "Con Nébulus, no hay necesidad de tener todos tus papeles, documentos, tareas, libros de texto y eventos por todos lados. ¡Con Nébulus, todo está organizado para ti de manera fácil de usar!",
-                "ar": "Con Nébulus, no hay necesidad de tener todos tus papeles, documentos, tareas, libros de texto y eventos por todos lados. ¡Con Nébulus, todo está organizado para ti de manera fácil de usar!",
-            },
-        "Make Learning Easier":
-            {
-                "us": "Make Learning Easier",
-                "uk": "Make Learning Easier",
-                "au": "Make Learning Easier",
-                "es": "Haz tu aprendizaje más fácil",
-                "mx": "Haz tu aprendizaje más fácil",
-                "cr": "Haz tu aprendizaje más fácil",
-                "cu": "Haz tu aprendizaje más fácil",
-                "co": "Haz tu aprendizaje más fácil",
-                "ar": "Haz tu aprendizaje más fácil",
-            },
-        "We have tools to organize your studying, organize your materials, make learning fun, and keep you focused!":
-            {
-                "us": "We have tools to organize your studying, organize your materials, make learning fun, and keep you focused!",
-                "uk": "We have tools to organize your studying, organize your materials, make learning fun, and keep you focused!",
-                "au": "We have tools to organize your studying, organize your materials, make learning fun, and keep you focused!",
-                "es": "¡Tenemos herramientas para organizar tu estudio y tus materiales, hacer que aprender sea divertido y mantener tu concentración!",
-                "mx": "¡Tenemos herramientas para organizar tu estudio y tus materiales, hacer que aprender sea divertido y mantener tu concentración!",
-                "cr": "¡Tenemos herramientas para organizar tu estudio y tus materiales, hacer que aprender sea divertido y mantener tu concentración!",
-                "cu": "¡Tenemos herramientas para organizar tu estudio y tus materiales, hacer que aprender sea divertido y mantener tu concentración!",
-                "co": "¡Tenemos herramientas para organizar tu estudio y tus materiales, hacer que aprender sea divertido y mantener tu concentración!",
-                "ar": "¡Tenemos herramientas para organizar tu estudio y tus materiales, hacer que aprender sea divertido y mantener tu concentración!",
-            },
+        "No more switching between websites. Get your Schoology, Google Classroom, and Canvas accounts connected today.": {
+            "us": "No more switching between websites. Get your Schoology, Google Classroom, and Canvas accounts connected today.",
+            "uk": "No more switching between websites. Get your Schoology, Google Classroom, and Canvas accounts connected today.",
+            "au": "No more switching between websites. Get your Schoology, Google Classroom, and Canvas accounts connected today.",
+            "es": "No cambies más entre sitios web. Conecta tus cuentas de Schoology, Google Classroom y Canvas hoy.",
+            "mx": "No cambies más entre sitios web. Conecta tus cuentas de Schoology, Google Classroom y Canvas hoy.",
+            "cr": "No cambies más entre sitios web. Conecta tus cuentas de Schoology, Google Classroom y Canvas hoy.",
+            "cu": "No cambies más entre sitios web. Conecta tus cuentas de Schoology, Google Classroom y Canvas hoy.",
+            "co": "No cambies más entre sitios web. Conecta tus cuentas de Schoology, Google Classroom y Canvas hoy.",
+            "ar": "No cambies más entre sitios web. Conecta tus cuentas de Schoology, Google Classroom y Canvas hoy.",
+        },
+        "Organize your learning experience": {
+            "us": "Organize your learning experience",
+            "uk": "Organize your learning experience",
+            "au": "Organize your learning experience",
+            "es": "Organiza tu experiencia de aprendizaje",
+            "mx": "Organiza tu experiencia de aprendizaje",
+            "cr": "Organiza tu experiencia de aprendizaje",
+            "cu": "Organiza tu experiencia de aprendizaje",
+            "co": "Organiza tu experiencia de aprendizaje",
+            "ar": "Organiza tu experiencia de aprendizaje",
+        },
+        "With Nebulus, there is no need to have your papers, documents, assignments, textbooks, and events be all over the place. With Nebulus, everything is organized for you in an easy-to-use way!": {
+            "us": "With Nebulus, there is no need to have your papers, documents, assignments, textbooks, and events be all over the place. With Nebulus, everything is organized for you in an easy-to-use way!",
+            "uk": "With Nebulus, there is no need to have your papers, documents, assignments, textbooks, and events be all over the place. With Nebulus, everything is organized for you in an easy-to-use way!",
+            "au": "With Nebulus, there is no need to have your papers, documents, assignments, textbooks, and events be all over the place. With Nebulus, everything is organized for you in an easy-to-use way!",
+            "es": "Con Nébulus, no hay necesidad de tener todos tus papeles, documentos, tareas, libros de texto y eventos por todos lados. ¡Con Nébulus, todo está organizado para ti de manera fácil de usar!",
+            "mx": "Con Nébulus, no hay necesidad de tener todos tus papeles, documentos, tareas, libros de texto y eventos por todos lados. ¡Con Nébulus, todo está organizado para ti de manera fácil de usar!",
+            "cr": "Con Nébulus, no hay necesidad de tener todos tus papeles, documentos, tareas, libros de texto y eventos por todos lados. ¡Con Nébulus, todo está organizado para ti de manera fácil de usar!",
+            "cu": "Con Nébulus, no hay necesidad de tener todos tus papeles, documentos, tareas, libros de texto y eventos por todos lados. ¡Con Nébulus, todo está organizado para ti de manera fácil de usar!",
+            "co": "Con Nébulus, no hay necesidad de tener todos tus papeles, documentos, tareas, libros de texto y eventos por todos lados. ¡Con Nébulus, todo está organizado para ti de manera fácil de usar!",
+            "ar": "Con Nébulus, no hay necesidad de tener todos tus papeles, documentos, tareas, libros de texto y eventos por todos lados. ¡Con Nébulus, todo está organizado para ti de manera fácil de usar!",
+        },
+        "Make Learning Easier": {
+            "us": "Make Learning Easier",
+            "uk": "Make Learning Easier",
+            "au": "Make Learning Easier",
+            "es": "Haz tu aprendizaje más fácil",
+            "mx": "Haz tu aprendizaje más fácil",
+            "cr": "Haz tu aprendizaje más fácil",
+            "cu": "Haz tu aprendizaje más fácil",
+            "co": "Haz tu aprendizaje más fácil",
+            "ar": "Haz tu aprendizaje más fácil",
+        },
+        "We have tools to organize your studying, organize your materials, make learning fun, and keep you focused!": {
+            "us": "We have tools to organize your studying, organize your materials, make learning fun, and keep you focused!",
+            "uk": "We have tools to organize your studying, organize your materials, make learning fun, and keep you focused!",
+            "au": "We have tools to organize your studying, organize your materials, make learning fun, and keep you focused!",
+            "es": "¡Tenemos herramientas para organizar tu estudio y tus materiales, hacer que aprender sea divertido y mantener tu concentración!",
+            "mx": "¡Tenemos herramientas para organizar tu estudio y tus materiales, hacer que aprender sea divertido y mantener tu concentración!",
+            "cr": "¡Tenemos herramientas para organizar tu estudio y tus materiales, hacer que aprender sea divertido y mantener tu concentración!",
+            "cu": "¡Tenemos herramientas para organizar tu estudio y tus materiales, hacer que aprender sea divertido y mantener tu concentración!",
+            "co": "¡Tenemos herramientas para organizar tu estudio y tus materiales, hacer que aprender sea divertido y mantener tu concentración!",
+            "ar": "¡Tenemos herramientas para organizar tu estudio y tus materiales, hacer que aprender sea divertido y mantener tu concentración!",
+        },
         "Start Now!": {
-
             "us": "Start Now!",
             "uk": "Start Now!",
             "au": "Start Now!",
@@ -200,8 +194,7 @@ def getText(query):
             "cu": "¡Comienza ahora!",
             "co": "¡Comienza ahora!",
             "ar": "¡Comienza ahora!",
-        }
-
+        },
     }
     try:
         return dictionary[query][getLocal()]
@@ -396,7 +389,9 @@ def sort_course_events(user_id: str, course_id: int):
     dates = dict(
         {
             key: list(result)
-            for key, result in groupby(sorted_events, key=lambda obj: sortByDateTime(obj))
+            for key, result in groupby(
+            sorted_events, key=lambda obj: sortByDateTime(obj)
+        )
         }
     )
 
@@ -426,14 +421,19 @@ def sort_user_events(user_id: str, maxDays=5, maxEvents=16):
     from itertools import chain, groupby
 
     events_assessments_assignments = list(chain(events, assignments, assessments))
-    sorted_events = reversed(sorted(
-        events_assessments_assignments[:maxEvents], key=lambda obj: sortByDateTime(obj)
-    ))
+    sorted_events = reversed(
+        sorted(
+            events_assessments_assignments[:maxEvents],
+            key=lambda obj: sortByDateTime(obj),
+        )
+    )
 
     dates = dict(
         {
             key: list(result)
-            for key, result in groupby(sorted_events, key=lambda obj: sortByDateTime(obj))
+            for key, result in groupby(
+            sorted_events, key=lambda obj: sortByDateTime(obj)
+        )
         }
     )
 
@@ -634,14 +634,14 @@ def loadChats(user_id: str, current_index, initial_amount, required_fields):
     for chat in chats:
         if len(chat["members"]) == 2:
             for x, member in enumerate(chat["members"]):
-                chat["members"][x]['user'] = json.loads(
+                chat["members"][x]["user"] = json.loads(
                     User.objects.only(
                         "id", "chatProfile", "username", "avatar.avatar_url"
                     )
-                    .get(pk=member['user'])
-                    .to_json()
+                        .get(pk=member["user"])
+                        .to_json()
                 )
-                chat["members"][x]['unread'] = str(chat["members"][x]['unread'])
+                chat["members"][x]["unread"] = str(chat["members"][x]["unread"])
             chat["owner"] = list(
                 filter(lambda x: x["user"]["_id"] == chat["owner"], chat["members"])
             )[0]

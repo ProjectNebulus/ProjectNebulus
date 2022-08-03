@@ -1,5 +1,3 @@
-from typing import List
-
 from dotenv import load_dotenv
 from flask import session
 
@@ -38,7 +36,7 @@ def generateSchoologyObject(_id: str) -> schoolopy.Schoology:
 
 
 def create_course(data: dict) -> Course:
-    user = read.find_user(id=session[   "id"])
+    user = read.find_user(id=session["id"])
 
     if data.get("avatar"):
         data["avatar"] = Avatar(avatar_url=data["avatar"])

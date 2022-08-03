@@ -1,7 +1,6 @@
 from flask import request, session
 
 from app.static.python.extensions.integrations.schoology import (
-    create_schoology,
     create_schoology_auth,
     generate_auth,
 )
@@ -34,7 +33,8 @@ def user_connect_to_schoology_route():
     )
     return auth.request_authorization()
 
-@internal.route('/connect-to-schoology', methods=['POST'])
+
+@internal.route("/connect-to-schoology", methods=["POST"])
 def connect_to_schoology():
     auth.authorize()
     if not auth.authorized:
@@ -53,10 +53,7 @@ def connect_to_schoology():
     session["Schoologyemail"] = sc.get_me().primary_email
     session["Schoologydomain"] = data["link"]
     session["Schoologyid"] = sc.get_me().id
-    if (
-            read.check_duplicate_schoology(session["Schoologyemail"])
-            == "true"
-    ):
+    if read.check_duplicate_schoology(session["Schoologyemail"]) == "true":
         return "2"
     schoology = {
         "Schoology_request_token": request_token,

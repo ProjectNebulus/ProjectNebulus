@@ -10,9 +10,14 @@
     <div class="container mx-auto px-8 py-12 bg-white/[0.9] rounded-lg w-1/2 pb-1/2" id="main"
          style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
         <div class="w-full">
-            <h1 class="text-lg font-bold">Login</h1>
+            <h1 class="text-lg font-bold"><img src="/static/images/NebulusSpecialLogo.png" style="
+    display: inline-block;
+    width: 40px;
+    border-radius: 10px;
+    margin: 10px;
+"> Login</h1>
             <div class="flex justify-between mt-3 text-xs font-light text-gray-500">
-                <p>New to Nebulus? <a href='/signup' class="ml-1 font-medium text-blue-400">Sign up now</a></p>
+                <p>New to Nebulus? <a href='/signup' class="ml-1 font-medium text-blue-400">Sign up Now</a></p>
                 <p>
                     Forgot password?
                     <span onclick="resetScreen()" class="text-blue-400 hover:text-blue-600 cursor-pointer">Reset</span>
@@ -42,8 +47,7 @@
                            placeholder="Password" style="-webkit-user-select: text;">
                     <p id="password-error-msg" class="mt-2 text-sm text-red-600 dark:text-red-500" style="
     color: gray !important;
-"><span
-                            class="font-medium">Welcome back</span> Please
+"> Please
                         enter a password!</p>
                 </div>
                 <button id="log_in" type="submit"
@@ -58,33 +62,47 @@
                     </p>
 
                     <div class="text-black flex flex-row justify-center items-center" style="	flex-wrap: wrap;">
-                        <img class="w-6 h-6 mr-2 -ml-1" src="/static/images/logos/google.png" alt="Rounded avatar">
+                        <img class="oauth-button w-6 h-6 mr-2 -ml-1" src="/static/images/logos/google.png"
+                             alt="Rounded avatar">
 
-                        <img class="w-6 h-6 mr-2 -ml-1" src="/static/images/logos/facebook.png" alt="Rounded avatar">
+                        <img class="oauth-button w-6 h-6 mr-2 -ml-1" src="/static/images/logos/facebook.png"
+                             alt="Rounded avatar">
 
-                        <img class="w-6 h-6 mr-2 -ml-1" src="/static/images/logos/apple.png" alt="Rounded avatar">
+                        <img class="oauth-button w-6 h-6 mr-2 -ml-1" src="/static/images/logos/apple.png"
+                             alt="Rounded avatar">
 
-                        <img class="w-6 h-6 mr-2 -ml-1" src="/static/images/logos/discord.png" alt="Rounded avatar">
+                        <img class="oauth-button w-6 h-6 mr-2 -ml-1" src="/static/images/logos/discord.png"
+                             alt="Rounded avatar">
 
 
-                        <img class="w-6 h-6 mr-2 -ml-1" src="/static/images/logos/twitter.png" alt="Rounded avatar">
+                        <img class="oauth-button w-6 h-6 mr-2 -ml-1" src="/static/images/logos/twitter.png"
+                             alt="Rounded avatar">
 
-                        <img class="w-6 h-6 mr-2 -ml-1" src="/static/images/logos/microsoft.png" alt="Rounded avatar">
+                        <img class="oauth-button w-6 h-6 mr-2 -ml-1" src="/static/images/logos/microsoft.png"
+                             alt="Rounded avatar">
 
-                        <img class="w-6 h-6 mr-2 -ml-1" src="/static/images/logos/spotify.png" alt="Rounded avatar">
+                        <img class="oauth-button w-6 h-6 mr-2 -ml-1" src="/static/images/logos/spotify.png"
+                             alt="Rounded avatar">
 
-                        <img class="w-6 h-6 mr-2 -ml-1" src="/static/images/logos/github.png" alt="Rounded avatar">
+                        <img class="oauth-button w-6 h-6 mr-2 -ml-1" src="/static/images/logos/github.png"
+                             alt="Rounded avatar">
 
-                        <img class="w-6 h-6 mr-2 -ml-1" src="/static/images/logos/schoology.png" alt="Rounded avatar">
+                        <img class="oauth-button w-6 h-6 mr-2 -ml-1" src="/static/images/logos/schoology.png"
+                             alt="Rounded avatar">
 
-                        <img class="w-6 h-6 mr-2 -ml-1" src="/static/images/logos/canvas.png" alt="Rounded avatar">
+                        <img class="oauth-button w-6 h-6 mr-2 -ml-1" src="/static/images/logos/canvas.png"
+                             alt="Rounded avatar">
 
-                        <img class="w-6 h-6 mr-2 -ml-1" src="/static/images/logos/instagram.png" alt="Rounded avatar">
+                        <img class="oauth-button w-6 h-6 mr-2 -ml-1" src="/static/images/logos/instagram.png"
+                             alt="Rounded avatar">
 
-                        <img class="w-6 h-6 mr-2 -ml-1" src="/static/images/logos/reddit.png" alt="Rounded avatar">
+                        <img class="oauth-button w-6 h-6 mr-2 -ml-1" src="/static/images/logos/reddit.png"
+                             alt="Rounded avatar">
 
-                        <img class="w-6 h-6 mr-2 -ml-1" src="/static/images/logos/spotify.png" alt="Rounded avatar">
-                        <img class="w-6 h-6 mr-2 -ml-1" src="/static/images/logos/zoom.png" alt="Rounded avatar">
+                        <img class="oauth-button w-6 h-6 mr-2 -ml-1" src="/static/images/logos/wechat.png"
+                             alt="Rounded avatar">
+                        <img class="oauth-button w-6 h-6 mr-2 -ml-1" src="/static/images/logos/zoom.png"
+                             alt="Rounded avatar">
 
 
                     </div>
@@ -92,6 +110,22 @@
             </form>
         </div>
     </div>
+    <style>
+        .oauth-button {
+            margin: 5px;
+            padding: 5px;
+            height: 30px;
+            width: 30px;
+            border-radius: 10px;
+            background: lightgray;
+        }
+
+        .oauth-button:hover {
+
+            background: gray;
+        }
+    </style>
+
     {% include "main/reset.html" %}
     </body>
 {% endblock %}

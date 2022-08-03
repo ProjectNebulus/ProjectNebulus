@@ -22,7 +22,10 @@ def index():
         page="Nebulus - Learning, All In One",
         user=session.get("username"),
         email=session.get("email"),
-        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif", ),
+        avatar=session.get(
+            "avatar",
+            "/static/images/nebulusCats/v3.gif",
+        ),
         translate=getText,
     )
 
@@ -105,6 +108,7 @@ def sw():
     print(path.parent.parent.parent)
     return send_file(str(path.parent.parent.parent) + "/static/js/sw.js")
 
+
 @main_blueprint.route("/sitemap.xml")
 def sitemap():
     path = Path(__file__)
@@ -120,89 +124,107 @@ def international(country):
 
 @main_blueprint.route("/scheduler")
 def scheduler():
-    return render_template("scheduler.html",
-                           user=session.get("username"),
-                           email=session.get("email"),
-                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-                           page="Scheduler",
-                           translate=getText, )
+    return render_template(
+        "scheduler.html",
+        user=session.get("username"),
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        page="Scheduler",
+        translate=getText,
+    )
 
 
 @main_blueprint.route("/study-planner")
 def studyplanner():
-    return render_template("study-planner.html",
-                           user=session.get("username"),
-                           email=session.get("email"),
-                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-                           page="Study Planner",
-                           translate=getText, )
+    return render_template(
+        "study-planner.html",
+        user=session.get("username"),
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        page="Study Planner",
+        translate=getText,
+    )
 
 
 @main_blueprint.route("/lunch")
 def lunchplanner():
-    return render_template("lunch.html",
-                           user=session.get("username"),
-                           email=session.get("email"),
-                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-                           page="Lunch Planner",
-                           translate=getText, )
+    return render_template(
+        "lunch.html",
+        user=session.get("username"),
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        page="Lunch Planner",
+        translate=getText,
+    )
 
 
 @main_blueprint.route("/vacation")
 def vacationmode():
-    return render_template("vacation.html",
-                           user=session.get("username"),
-                           email=session.get("email"),
-                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-                           page="Vacation Mode",
-                           translate=getText, )
+    return render_template(
+        "vacation.html",
+        user=session.get("username"),
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        page="Vacation Mode",
+        translate=getText,
+    )
 
 
 @main_blueprint.route("/extra-curricular")
 def extracurricular():
-    return render_template("extra-curricular.html",
-                           user=session.get("username"),
-                           email=session.get("email"),
-                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-                           page="Extracurricular Mode",
-                           translate=getText, )
+    return render_template(
+        "extra-curricular.html",
+        user=session.get("username"),
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        page="Extracurricular Mode",
+        translate=getText,
+    )
 
 
 @main_blueprint.route("/analysis")
 def analysis():
-    return render_template("analysis.html",
-                           user=session.get("username"),
-                           email=session.get("email"),
-                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-                           page="Study Planner",
-                           translate=getText, )
+    return render_template(
+        "analysis.html",
+        user=session.get("username"),
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        page="Study Planner",
+        translate=getText,
+    )
 
 
 @main_blueprint.route("/blog")
 def blog():
-    return render_template("blog.html",
-                           user=session.get("username"),
-                           email=session.get("email"),
-                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-                           page="Blog",
-                           translate=getText, )
+    return render_template(
+        "blog.html",
+        user=session.get("username"),
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        page="Blog",
+        translate=getText,
+    )
 
 
 @main_blueprint.route("/upgrade")
 def upgrade():
-    return render_template("upgrade.html",
-                           user=session.get("username"),
-                           email=session.get("email"),
-                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-                           page="Upgrade",
-                           translate=getText, )
+    return render_template(
+        "upgrade.html",
+        user=session.get("username"),
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        page="Upgrade",
+        translate=getText,
+    )
 
 
 @main_blueprint.route("/support")
 def support():
-    return render_template("support.html",
-                           user=session.get("username"),
-                           email=session.get("email"),
-                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-                           page="Support",
-                           translate=getText, )
+    return render_template(
+        "support.html",
+        user=session.get("username"),
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        page="Support",
+        translate=getText,
+    )

@@ -1,6 +1,5 @@
 from datetime import datetime
 
-
 from mongoengine import (
     DateTimeField,
     EmbeddedDocumentField,
@@ -8,7 +7,7 @@ from mongoengine import (
     ListField,
     ReferenceField,
     StringField,
-    IntField
+    IntField,
 )
 
 from .Avatar import Avatar
@@ -17,7 +16,7 @@ from .Snowflake import Snowflake
 
 
 class ChatMember(EmbeddedDocument):
-    user = ReferenceField('User')
+    user = ReferenceField("User")
     unread = IntField(default=0)
 
 

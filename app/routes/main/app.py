@@ -97,8 +97,16 @@ def app():
         schoology = read.getSchoology(username=session["username"])
         if len(schoology) > 0:
             schoology = schoology[0]
-            key = schoology.apikey or session.get("request_token") or "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
-            secret = schoology.apisecret or session.get("request_token_secret") or "59ccaaeb93ba02570b1281e1b0a90e18"
+            key = (
+                    schoology.apikey
+                    or session.get("request_token")
+                    or "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
+            )
+            secret = (
+                    schoology.apisecret
+                    or session.get("request_token_secret")
+                    or "59ccaaeb93ba02570b1281e1b0a90e18"
+            )
 
             auth = schoolopy.Auth(
                 key,
@@ -192,8 +200,16 @@ def courses():
         schoology = read.getSchoology(username=session["username"])
         if len(schoology) > 0:
             schoology = schoology[0]
-            key = schoology.apikey or session.get("request_token") or "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
-            secret = schoology.apisecret or session.get("request_token_secret") or "59ccaaeb93ba02570b1281e1b0a90e18"
+            key = (
+                    schoology.apikey
+                    or session.get("request_token")
+                    or "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
+            )
+            secret = (
+                    schoology.apisecret
+                    or session.get("request_token_secret")
+                    or "59ccaaeb93ba02570b1281e1b0a90e18"
+            )
 
             auth = schoolopy.Auth(
                 key,

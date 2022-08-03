@@ -10,11 +10,12 @@ from pandas import *
 
 from app.static.python.classes import User
 from app.static.python.mongodb import create, delete, read, update
-# from app.static.python.school import get_school
-
 from . import internal
 from .... import socketio
 from .....static.python.classes import ChatMember
+
+
+# from app.static.python.school import get_school
 
 
 def get_school():
@@ -28,7 +29,16 @@ def get_school():
     df = df.transpose().to_dict()
     for i in range(0, len(df)):
         schools.append(
-            [str(df[i]["Unnamed: 3"]) + "  (" + str(df[i]["Unnamed: 15"]) + ", " + str(df[i]["Unnamed: 16"]) + ")", i])
+            [
+                str(df[i]["Unnamed: 3"])
+                + "  ("
+                + str(df[i]["Unnamed: 15"])
+                + ", "
+                + str(df[i]["Unnamed: 16"])
+                + ")",
+                i,
+            ]
+        )
     # print(schools)
     return schools
 
@@ -59,7 +69,7 @@ def new_message(json_data):
         for x, user in enumerate(chat.members):
             if user.user.chatProfile.offline == True:
                 user.unread += 1
-            members[x]['offline'] = user.user.chatProfile.offline
+            members[x]["offline"] = user.user.chatProfile.offline
         print()
         chat.lastEdited = datetime.datetime.now()
         chat.save()
@@ -74,8 +84,7 @@ def new_message(json_data):
                 "id": message.id,
                 "send_date": send_date,
                 "chatID": chatID,
-                "members": members
-
+                "members": members,
             },
             room=chatID,
         )
@@ -224,6 +233,7 @@ def new_chat(data):
 @internal.route("/get_schools", methods=["POST"])
 def get_schools():
     from flask import jsonify
+
     return jsonify(get_school())
 
 
@@ -351,7 +361,9 @@ def getChat():
     chat_obj = read.getChat(chatID)
     chat = json.loads(chat_obj.to_json())
 
-    current_user = list(filter(lambda x: x.user.id==session["id"], chat_obj.members))[0]
+    current_user = list(filter(lambda x: x.user.id == session["id"], chat_obj.members))[
+        0
+    ]
     current_user.unread = 0
     chat_obj.save()
 
@@ -365,11 +377,11 @@ def getChat():
         )
 
     for n, member in enumerate(chat["members"]):
-        chat["members"][n]['user'] = json.loads(
+        chat["members"][n]["user"] = json.loads(
             (
                 User.objects.only(
                     "id", "username", "chatProfile", "avatar.avatar_url"
-                ).get(pk=member['user'])
+                ).get(pk=member["user"])
             ).to_json()
         )
     chat["members"] = sorted(chat["members"], key=lambda x: x["user"]["username"])
@@ -377,11 +389,11 @@ def getChat():
     return jsonify(chat)
 
 
-@internal.route('/update-unread', methods=["POST"])
+@internal.route("/update-unread", methods=["POST"])
 def update_unread():
     data = request.get_json()
     update.update_unread(data, session["id"])
-    return 'success'
+    return "success"
 
 
 @internal.route("/fetch-messages", methods=["POST"])

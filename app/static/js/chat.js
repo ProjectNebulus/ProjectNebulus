@@ -1,6 +1,6 @@
 io = window.io;
 
-console.log()
+console.log();
 
 function getEmbed(hyperlink) {
     return new Promise((resolve, reject) => {
@@ -50,20 +50,19 @@ function replaceURLs(message, message_id) {
         let result = ``;
 
         if (hyperlink)
-
-        getEmbed(hyperlink).then((data) => {
-            console.log(data);
-            data = data['data'];
-            if (data['themeColor'] === null) {
-                data['themeColor'] = '#534F4E';
-            }
-            let topsmall = '';
-            if (data['siteName'] === null) {
-                topsmall = siteName;
-            } else {
-                topsmall = data['siteName'];
-            }
-            result += `<div style="border-style: none none none solid; border-width:8px; border-color:${data['themeColor']}"
+            getEmbed(hyperlink).then((data) => {
+                console.log(data);
+                data = data['data'];
+                if (data['themeColor'] === null) {
+                    data['themeColor'] = '#534F4E';
+                }
+                let topsmall = '';
+                if (data['siteName'] === null) {
+                    topsmall = siteName;
+                } else {
+                    topsmall = data['siteName'];
+                }
+                result += `<div style="border-style: none none none solid; border-width:8px; border-color:${data['themeColor']}"
                      class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100/75 dark:bg-gray-800/50 dark:border-gray-700 dark:hover:bg-gray-700/75">
                     <a href="${hyperlink}"><h5
                         class="mb-2 text-md hover:underline font-bold tracking-tight text-black dark:text-white">${topsmall}</h5>
@@ -72,18 +71,16 @@ function replaceURLs(message, message_id) {
                         class="mb-2 text-xl hover:underline font-bold tracking-tight text-sky-500">${data['title']}</h5></a>
                     <p class="font-normal text-gray-700 dark:text-gray-400">${data['description']}</p>
                     `;
-            if (data['image'] != null) {
-                result += ` <img src="${data['image']}" style="width:90%; margin:auto; margin-top:10px;" class="rounded-md">`;
-            }
+                if (data['image'] != null) {
+                    result += ` <img src="${data['image']}" style="width:90%; margin:auto; margin-top:10px;" class="rounded-md">`;
+                }
 
-            result += `</div>`;
+                result += `</div>`;
 
-            document
-                .getElementById(`content_${message_id}`)
-                .insertAdjacentHTML('beforeend', result);
-        });
-
-
+                document
+                    .getElementById(`content_${message_id}`)
+                    .insertAdjacentHTML('beforeend', result);
+            });
 
         return `<a class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600" href="${hyperlink}">${hyperlink}</a>${result}`;
     });
@@ -144,12 +141,12 @@ Searching...
 
 keyUpDelay('#search', 1000, changeSearch);
 
-function makeCall(getFirst=true) {
+function makeCall(getFirst = true) {
     let chatAmount = document.getElementById('user-chats').childElementCount;
     $.ajax({
         url: '/api/v1/internal/fetch-chats',
         type: 'POST',
-        beforeSend: function(){
+        beforeSend: function () {
             $('#user-chats').hide();
             $('#chat-list-loading').show();
         },
@@ -167,20 +164,19 @@ function makeCall(getFirst=true) {
         $('#user-chats').show();
     });
 }
-function togglePreview(){
-            let preview = document.getElementById('preview_border');
-            console.log(preview.style.display);
-            let chat = document.getElementById('chat');
-            if (preview.style.display === 'none'){
-                preview.style.display = "block";
-                chat.style.height = "64%";
-            } else {
-                preview.style.display = "none";
-                chat.style.height = "80%";
-            }
 
-        }
-
+function togglePreview() {
+    let preview = document.getElementById('preview_border');
+    console.log(preview.style.display);
+    let chat = document.getElementById('chat');
+    if (preview.style.display === 'none') {
+        preview.style.display = 'block';
+        chat.style.height = '64%';
+    } else {
+        preview.style.display = 'none';
+        chat.style.height = '80%';
+    }
+}
 
 function updateToMessage(message) {
     let chat_el = document.getElementById('chat');
@@ -309,9 +305,6 @@ $(document).ready(function () {
                     chat_id: chatID
                 })
             });
-
-
-
         }
     });
 
@@ -336,8 +329,12 @@ $(document).ready(function () {
         console.log('chat is scrolling');
         let el = document.getElementById('chat');
         let chat_index = el.children.length - Math.floor(el.children.length / 2) - 1;
-        console.log(Math.abs((Math.floor(el.scrollHeight - $(this).height()) * -1) - $(this).scrollTop()));
-        if (Math.abs((Math.floor(el.scrollHeight - $(this).height()) * -1) - $(this).scrollTop()) < 2) {
+        console.log(
+            Math.abs(Math.floor(el.scrollHeight - $(this).height()) * -1 - $(this).scrollTop())
+        );
+        if (
+            Math.abs(Math.floor(el.scrollHeight - $(this).height()) * -1 - $(this).scrollTop()) < 2
+        ) {
             let chatID = document.getElementById('chatID').getAttribute('data-id');
             $.ajax({
                 url: '/api/v1/internal/fetch-messages',
@@ -400,18 +397,18 @@ $(document).ready(function () {
 
         console.log(div.scrollTop + div.clientHeight + 1, div.scrollHeight);
         if (div.scrollTop + div.clientHeight + 1 >= div.scrollHeight) {
-            makeCall(getFirst=false);
+            makeCall((getFirst = false));
             div.scrollTop = div.scrollHeight;
         }
     });
 });
 
-function load(data, getFirst=false) {
+function load(data, getFirst = false) {
     let s = ``;
     let userID = document.getElementById('user-data').textContent;
     let div = document.getElementById('user-chats');
     data.forEach(function (chat) {
-        let unread = chat['members'].filter(function(user){
+        let unread = chat['members'].filter(function (user) {
             return user['user']['_id'] === userID;
         })[0]['unread'];
 
@@ -429,25 +426,21 @@ function load(data, getFirst=false) {
                 return user['user']['_id'] != userID;
             })[0]['user'];
 
-
             let color;
-            if (!(other['chatProfile']['offline']) && other['chatProfile']['status'] === 'None') {
+            if (!other['chatProfile']['offline'] && other['chatProfile']['status'] === 'None') {
                 color = 'bg-green-400';
-
             } else if (other['chatProfile']['status'] === 'Do Not Disturb') {
                 color = 'bg-red-500';
-
-            } else if (other['chatProfile']['status'] === 'Idle'){
-                color = "bg-amber-500"
-            }
-            else {
+            } else if (other['chatProfile']['status'] === 'Idle') {
+                color = 'bg-amber-500';
+            } else {
                 color = 'bg-gray-700';
             }
             let visibility;
-            if (unread === '0'){
-                visibility = "hidden";
+            if (unread === '0') {
+                visibility = 'hidden';
             } else {
-                visibility = "";
+                visibility = '';
             }
             s += `<div class="relative">
  <button class="rounded-full border-gray-300 border-none w-8 h-8
@@ -608,48 +601,59 @@ function profile(node) {
     insertAfter(node, el);
 }
 function toIsoString(date) {
-  var tzo = -date.getTimezoneOffset(),
-      dif = tzo >= 0 ? '+' : '-',
-      pad = function(num) {
-          return (num < 10 ? '0' : '') + num;
-      };
+    var tzo = -date.getTimezoneOffset(),
+        dif = tzo >= 0 ? '+' : '-',
+        pad = function (num) {
+            return (num < 10 ? '0' : '') + num;
+        };
 
-  return date.getFullYear() +
-      '-' + pad(date.getMonth() + 1) +
-      '-' + pad(date.getDate()) +
-      'T' + pad(date.getHours()) +
-      ':' + pad(date.getMinutes()) +
-      ':' + pad(date.getSeconds()) +
-      dif + pad(Math.floor(Math.abs(tzo) / 60)) +
-      ':' + pad(Math.abs(tzo) % 60);
+    return (
+        date.getFullYear() +
+        '-' +
+        pad(date.getMonth() + 1) +
+        '-' +
+        pad(date.getDate()) +
+        'T' +
+        pad(date.getHours()) +
+        ':' +
+        pad(date.getMinutes()) +
+        ':' +
+        pad(date.getSeconds()) +
+        dif +
+        pad(Math.floor(Math.abs(tzo) / 60)) +
+        ':' +
+        pad(Math.abs(tzo) % 60)
+    );
 }
 
 function changeTimezone(date, ianatz) {
+    // suppose the date is 12:00 UTC
+    var invdate = new Date(
+        date.toLocaleString('en-US', {
+            timeZone: ianatz
+        })
+    );
 
-  // suppose the date is 12:00 UTC
-  var invdate = new Date(date.toLocaleString('en-US', {
-    timeZone: ianatz
-  }));
+    // then invdate will be 07:00 in Toronto
+    // and the diff is 5 hours
+    var diff = date.getTime() - invdate.getTime();
 
-  // then invdate will be 07:00 in Toronto
-  // and the diff is 5 hours
-  var diff = date.getTime() - invdate.getTime();
+    // so 12:00 in Toronto is 17:00 UTC
+    return new Date(date.getTime() - diff); // needs to substract
+}
 
-  // so 12:00 in Toronto is 17:00 UTC
-  return new Date(date.getTime() - diff); // needs to substract
-
-}function formatAMPM(date) {
-  var hours = date.getHours();
-  var minutes = date.getMinutes();
-  var ampm = hours >= 12 ? 'pm' : 'am';
-  hours = hours % 12;
-  hours = hours ? hours : 12; // the hour '0' should be '12'
-  minutes = minutes < 10 ? '0'+minutes : minutes;
+function formatAMPM(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0' + minutes : minutes;
     return hours + ':' + minutes + ' ' + ampm;
 }
 
-function formatTime(time_input){
-    let date = new Date(time_input.split(" ").join('T'));
+function formatTime(time_input) {
+    let date = new Date(time_input.split(' ').join('T'));
 
     var timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     let new_date = changeTimezone(date, timezone);
@@ -662,25 +666,25 @@ function formatTime(time_input){
 
     if (today_date.toDateString() === new_date.toDateString()) {
         date_str = 'Today';
-    } else if (yesterday.toDateString() === new_date.toDateString()){
+    } else if (yesterday.toDateString() === new_date.toDateString()) {
         date_str = 'Yesterday';
     } else {
         date_str = new_date.toDateString();
     }
 
     let time = '';
-    if (!(date_str === new_date.toString())){
+    if (!(date_str === new_date.toString())) {
         time_str = formatAMPM(new_date);
-        time = date_str + ' at ' + time_str
+        time = date_str + ' at ' + time_str;
     } else {
-        time = date_str
+        time = date_str;
     }
-    return time
+    return time;
 }
 let show_preview = false;
 
 function getChat(chatID) {
-    if (document.body.contains(document.getElementById('chatID'))){
+    if (document.body.contains(document.getElementById('chatID'))) {
         if (chatID === document.getElementById('chatID').getAttribute('data-id')) {
             return false;
         }
@@ -690,20 +694,20 @@ function getChat(chatID) {
     $.ajax({
         url: '/api/v1/internal/get-chat',
         type: 'POST',
-        beforeSend: function(){
+        beforeSend: function () {
             if (!('hidden' in document.getElementById('msg_form').classList)) {
                 document.getElementById('msg_form').classList.add('hidden');
             }
 
-            if (!('hidden' in document.getElementById('preview_border').classList)){
+            if (!('hidden' in document.getElementById('preview_border').classList)) {
                 document.getElementById('preview_border').classList.add('hidden');
                 show_preview = true;
             }
 
-            document.getElementById('chat').classList.add('hidden')
+            document.getElementById('chat').classList.add('hidden');
             $('#chat-members').hide();
             $('#chat-loading').show();
-            $('#chat-member-loading').show()
+            $('#chat-member-loading').show();
         },
         contentType: 'application/json',
         data: JSON.stringify({
@@ -733,10 +737,6 @@ function getChat(chatID) {
                 message['content'] = replaceURLs(message['content'], message['id']);
 
                 var time = formatTime(message['send_date']);
-
-
-
-
 
                 chatContent += `<div class="flex items-top space-x-4 mt-2 hover:bg-gray-100/50 dark:hover:bg-gray-700/50 " id="${message['id']}">
                         <img class="mt-1 w-10 h-10 rounded-full " data-dropdown-toggle="user_${message['id']}"
@@ -773,9 +773,9 @@ function getChat(chatID) {
                 chatContent = ``;
             });
             let tx;
-            $("#chat-header").remove();
+            $('#chat-header').remove();
             let ms = document.getElementById(`${chat['_id']}_title`).innerText;
-            if (chat['members'].length == 2){
+            if (chat['members'].length == 2) {
                 tx = `
             <div id="chat-header" class = "flex items-center py-2 px-3 bg-gray-50/50 dark:bg-gray-700/50 backdrop-blur-sm dark:text-white text-black py-3 noselect " >
                 <i class="material-icons text-gray-400"> alternate_email </i>
@@ -783,7 +783,7 @@ function getChat(chatID) {
             <span class="inline-block w-3 h-3 bg-green-400 rounded-full"></span>
         </div>
         `;
-                ms = '@'+ms;
+                ms = '@' + ms;
             } else {
                 tx = `
             <div
@@ -793,37 +793,31 @@ function getChat(chatID) {
         `;
             }
 
-
-
-
-
             chat_el.insertAdjacentHTML('beforebegin', tx);
 
             let textarea_el = document.getElementById('msg_content');
             textarea_el.placeholder = `Message ${ms}`;
 
-
-
-        chat['members'].forEach(function (other) {
-            let status;
-            if (other['user']['_id'] === userID){
-                if (other['user']['chatProfile']['status'] === 'None'){
-                    status = "Online";
-                } else {
-                    status = other['user']['chatProfile']['status'];
-                }
-            } else {
-                if (other['user']['chatProfile']['status'] === "None"){
-                    if (other['user']['chatProfile']['offline']){
-                        status = "Offline"
+            chat['members'].forEach(function (other) {
+                let status;
+                if (other['user']['_id'] === userID) {
+                    if (other['user']['chatProfile']['status'] === 'None') {
+                        status = 'Online';
                     } else {
-                        status = "Online"
+                        status = other['user']['chatProfile']['status'];
                     }
                 } else {
-                    status = other["user"]["chatProfile"]["status"]
+                    if (other['user']['chatProfile']['status'] === 'None') {
+                        if (other['user']['chatProfile']['offline']) {
+                            status = 'Offline';
+                        } else {
+                            status = 'Online';
+                        }
+                    } else {
+                        status = other['user']['chatProfile']['status'];
+                    }
                 }
-            }
-            chatMembers += `<div 
+                chatMembers += `<div 
     oncontextmenu='profile(this)'
     style="margin-bottom:4px;"
          class="p-2 flex items-center space-x-4 dark:bg-gray-800/50 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" id="member_${other['_id']}">`;
@@ -865,15 +859,15 @@ function getChat(chatID) {
 
             $('#chat-loading').hide();
             let preview = document.getElementById('preview_border');
-            if (preview.style.display == "none") {
-                document.getElementById("chat").style.height = "80%";
+            if (preview.style.display == 'none') {
+                document.getElementById('chat').style.height = '80%';
             } else {
-                document.getElementById("chat").style.height = "64%";
+                document.getElementById('chat').style.height = '64%';
             }
-            document.getElementById("chat").classList.remove('hidden');
+            document.getElementById('chat').classList.remove('hidden');
 
-            if (show_preview){
-                document.getElementById('preview_border').classList.remove('hidden')
+            if (show_preview) {
+                document.getElementById('preview_border').classList.remove('hidden');
             }
 
             console.log(document.getElementById('msg_form').classList);
@@ -883,9 +877,7 @@ function getChat(chatID) {
             el_notifs.innerText = '0';
             $('#chat-member-loading').hide();
             $('#chat-members').show();
-
         }
-
     });
 }
 
@@ -904,7 +896,6 @@ function sendMessage() {
         chatID: chatID,
         content: val,
         send_date: send_date
-
     });
 }
 
@@ -922,10 +913,9 @@ window.onload = function () {
     }
 };
 
-
 function inputKeyUp(e) {
     e.which = e.which || e.keyCode;
     if (e.which == 13) {
-        document.getElementById("pressMe").click();
+        document.getElementById('pressMe').click();
     }
 }

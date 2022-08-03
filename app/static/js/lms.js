@@ -1,20 +1,19 @@
 function expand(message) {
 }
 
-
 function openAnnouncementsModal(content, title, author, pic, course) {
     const targetEl = document.getElementById('announcementModal');
-    document.getElementById("announcementBody").innerText = content;
+    document.getElementById('announcementBody').innerText = content;
     if (title.length === 0) {
-        title = "Announcement from " + author;
+        title = 'Announcement from ' + author;
     }
-    document.getElementById("announcement__Name").innerText = `
+    document.getElementById('announcement__Name').innerText = `
     <img data-dropdown-toggle="userDropdown-0_0" id="avatar0_0" data-dropdown-placement="bottom-start" class="mr-6 inline-block rounded-full ring-2 ring-gray-300 dark:ring-gray-500
                                                      cursor-pointer mb-3 rounded-full shadow-lg
                                                       dark:bg-gray-900 dark:hover:bg-gray-800 
-                                                      w-8 h-8 mt-4 " src="${pic}" alt="${author}'s profile picture">`
-    document.getElementById("announcement__Name").innerText = title;
-    document.getElementById("announcement__Name").innerHTML += `
+                                                      w-8 h-8 mt-4 " src="${pic}" alt="${author}'s profile picture">`;
+    document.getElementById('announcement__Name').innerText = title;
+    document.getElementById('announcement__Name').innerHTML += `
     
                                                       <div class="flex flex-col text-xs text-gray-700 dark:text-gray-400 pl-2">
                                                     
@@ -33,11 +32,10 @@ function openAnnouncementsModal(content, title, author, pic, course) {
                                                     </div>
                                                 </div>
 
-`
+`;
 
     const modal = new Modal(targetEl);
     modal.toggle();
-
 }
 
 function replaceURLs(message) {
@@ -72,15 +70,15 @@ function replaceURLs(message) {
     });
 }
 
-window.addEventListener("load", () => {
+window.addEventListener('load', () => {
     let modal = document.getElementById('courseModal');
 
-// set up templates
+    // set up templates
     let templateLists = modal.getElementsByClassName('scroll');
 
     let screens = modal.getElementsByClassName('CoursePage');
 
-// set up button
+    // set up button
     let btn = document.getElementById('create');
 
     for (const screen of screens)
@@ -113,14 +111,14 @@ window.addEventListener("load", () => {
         if (event.target === modal) modal.style.display = 'none';
     };
 
-// set up close button
+    // set up close button
     for (let close of modal.getElementsByClassName('close')) {
         close.className += ' material-icons dark:text-white';
         close.innerHTML = 'close';
         close.onclick = () => (modal.style.display = 'none');
     }
 
-// set up course stuff
+    // set up course stuff
     let courseName = document.getElementById('course-name');
     let courseTeacher = document.getElementById('course-teacher');
 
@@ -151,7 +149,7 @@ window.addEventListener("load", () => {
         h1.innerHTML = h1.innerHTML.replace('Step 3: ', '');
     }
 
-    document.getElementById("skip-templates").addEventListener("click", skipTemplates);
+    document.getElementById('skip-templates').addEventListener('click', skipTemplates);
 
     const pageCounters = modal.getElementsByClassName('pageCount');
 
@@ -300,7 +298,10 @@ window.addEventListener("load", () => {
 
         if (template.subtemplates.length > 4) description.innerHTML += 'etc.';
         else
-            description.innerHTML = description.innerHTML.substring(0, description.innerHTML.length - 2);
+            description.innerHTML = description.innerHTML.substring(
+                0,
+                description.innerHTML.length - 2
+            );
 
         button.appendChild(description);
 

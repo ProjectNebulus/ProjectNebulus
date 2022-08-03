@@ -22,7 +22,7 @@ def course_page(page, **kwargs):
     user = User.objects(username=session.get("username"))[0]
     course_id = kwargs["id"]
     course = Course.objects(pk=course_id)[0]
-    if (user not in course.authorizedUsers):
+    if user not in course.authorizedUsers:
         return (
             render_template(
                 "errors/404.html",
@@ -75,8 +75,6 @@ def course_page(page, **kwargs):
         read=read,
         translate=getText,
     )
-
-
 
 
 @main_blueprint.route("/createCourse", methods=["POST"])
@@ -139,8 +137,12 @@ def search_word(id):
 @logged_in
 def course_page_ex(id, extension):
     try:
-        return render_template(f"courses/extensions/{extension}.html",
-                               translate=getText, )
+        return render_template(
+            f"courses/extensions/{extension}.html",
+            translate=getText,
+        )
     except Exception as e:
-        return render_template("errors/404.html",
-                               translate=getText, )
+        return render_template(
+            "errors/404.html",
+            translate=getText,
+        )
