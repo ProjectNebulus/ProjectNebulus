@@ -3,7 +3,7 @@ import random
 from pathlib import Path
 from threading import Thread
 
-from flask import session, request, current_app
+from flask import current_app, request, session
 from flask_mail import Message
 
 from app.routes.main import private_endpoint

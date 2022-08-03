@@ -18,6 +18,7 @@ from .chat_functions import *
 from .check_signin import *
 from .check_signup import *
 from .check_type import *
+from .check_verification_code import *
 from .connect_to_schoology import *
 from .connected_to_schoology import *
 from .create_avatar import *
@@ -35,7 +36,6 @@ from .file_upload_link import *
 from .find_folders import *
 from .generate_schoology_oauth_url import *
 from .get_schoology_messages import *
-from .check_verification_code import *
 from .logout_of_schoology import *
 from .nebulusdocs import *
 from .plagarism import *

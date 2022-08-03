@@ -1,4 +1,4 @@
-from flask import session, request
+from flask import request, session
 
 from . import internal
 from .....routes.main import private_endpoint

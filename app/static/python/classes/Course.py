@@ -9,7 +9,6 @@ from mongoengine import (
     StringField,
 )
 
-
 from .Avatar import Avatar
 from .Snowflake import Snowflake
 

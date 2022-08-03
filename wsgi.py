@@ -6,7 +6,7 @@ debug = False
 if __name__ == "__main__":
     if __name__ == "__main__":
         if (
-                platform.system().lower() == "linux"
+            platform.system().lower() == "linux"
         ):  # linux - used for VPS (like DigitalOcean)
             debug = False
             port = 80

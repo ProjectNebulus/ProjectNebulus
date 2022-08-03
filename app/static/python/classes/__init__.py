@@ -31,9 +31,9 @@ from .Planner import Planner
 
 # from .Role import Role
 from .Schoology import Schoology
-from .Spotify import Spotify
 
 # from .ServerProfile import ServerProfile
 from .Snowflake import Snowflake
+from .Spotify import Spotify
 from .Textbook import Textbook
 from .User import User
