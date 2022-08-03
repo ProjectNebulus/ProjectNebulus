@@ -19,10 +19,11 @@
             opacity: 100;
         }
     </style>
-
     {% if user %}
-        <aside id="sidebar_" class="overflow-y-auto fixed z-50"
-               aria-label="Sidebar" style="height: calc(100% - 76px)">
+        <aside id="sidebar_"
+               class="overflow-y-auto fixed z-50"
+               aria-label="Sidebar"
+               style="height: calc(100% - 76px)">
             <div class="overflow-y-auto py-4 px-3 backdrop-blur-sm bg-gray-100/50 rounded dark:bg-gray-800/50">
                 <ul class="space-y-2">
                     <li>
@@ -39,8 +40,6 @@
                             <span class="ml-3 text_nav">Overview</span>
                         </a>
                     </li>
-
-
                     <li>
                         <a href="/courses"
                            class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -123,58 +122,70 @@
                     <li>
                         <a href="/planner"
                            class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                            <p class="dark:text-gray-400 material-icons">event_note</p>
+                            <p class="dark:text-gray-400 material-icons">
+                                event_note
+                            </p>
                             <span class="ml-3 text_nav">Planner</span>
                         </a>
                     </li>
                     <li>
                         <a href="/lunch"
                            class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                            <p class="dark:text-gray-400 material-icons">lunch_dining</p>
+                            <p class="dark:text-gray-400 material-icons">
+                                lunch_dining
+                            </p>
                             <span class="ml-3 text_nav">Lunch Planner</span>
                         </a>
                     </li>
                     <li>
                         <a href="/extra-curricular"
                            class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                            <p class="dark:text-gray-400 material-icons">sports_basketball</p>
+                            <p class="dark:text-gray-400 material-icons">
+                                sports_basketball
+                            </p>
                             <span class="ml-3 text_nav">Extra-curricular</span>
                         </a>
                     </li>
                     <li>
                         <a href="/vacation"
                            class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                            <p class="dark:text-gray-400 material-icons">villa</p>
+                            <p class="dark:text-gray-400 material-icons">
+                                villa
+                            </p>
                             <span class="ml-3 text_nav">Vacation Mode</span>
                         </a>
                     </li>
                     <li>
                         <a href="/upgrade"
                            class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                            <p class="dark:text-gray-400 material-icons">upgrade</p>
+                            <p class="dark:text-gray-400 material-icons">
+                                upgrade
+                            </p>
                             <span class="ml-3 text_nav">Upgrade</span>
                         </a>
                     </li>
                     <li>
                         <a href="/blog"
                            class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                            <p class="dark:text-gray-400 material-icons">sms</p>
+                            <p class="dark:text-gray-400 material-icons">
+                                sms
+                            </p>
                             <span class="ml-3 text_nav">Blog</span>
                         </a>
                     </li>
                     <li>
                         <a href="/support"
                            class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                            <p class="dark:text-gray-400 material-icons">support_agent</p>
+                            <p class="dark:text-gray-400 material-icons">
+                                support_agent
+                            </p>
                             <span class="ml-3 text_nav">Support</span>
                         </a>
                     </li>
                 </ul>
             </div>
         </aside>
-
     {% endif %}
-
 {% endif %}
 <script>
     if (window.location.pathname !== "/chat") {
