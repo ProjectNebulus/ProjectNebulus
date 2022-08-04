@@ -1,6 +1,6 @@
 from flask import Flask, request
 
-from app.static.python import cdn
+from app.static.python.cdn import utils
 from app.static.python.mongodb import create
 from . import internal
 
@@ -43,7 +43,7 @@ def upload_file_link():
                 "folder": folder,
             }
         )
-    status = cdn.upload_file_link(link, mongo.id + filename.split(".")[-1])
+    status = utils.upload_file_link(link, mongo.id + filename.split(".")[-1])
     print(status)
 
     return str(status)

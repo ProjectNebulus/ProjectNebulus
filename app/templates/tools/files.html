@@ -2,256 +2,327 @@
 {% block main %}
     {% include "utils/navbar.html" %}
     <div class="flex flex-row">
-    {%  include "utils/sidebar.html" %}
+        {% include "utils/sidebar.html" %}
+        <div style="overflow-x: hidden; margin-left:64px;">
+            <link rel="stylesheet"
+                  href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/default.min.css">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script>
+            <nav class="flex py-3 px-5 text-gray-700 bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700"
+                 aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-3 -mx-1"
+                    id="breadcrumy">
+                    <li class="inline-flex items-center">
+                        <a onclick="location.reload();"
+                           class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
+                            <svg class="mr-2 w-4 h-4"
+                                 fill="currentColor"
+                                 viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
+                                </path>
+                            </svg>
+                            My Files
+                        </a>
+                    </li>
+                </ol>
+            </nav>
+            <div style="margin-left:10px;
+                        width:calc(100%);
+                        float:left;"
+                 id="documentPage">
+                <div style="width:70%;float:left;">
+                    <br>
+                    <a class="truncate text-ellipsis overflow-hidden block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                        <p class="font-normal text-gray-700 dark:text-gray-400"
+                           style="white-space: nowrap;  ">
+                            <svg style="display: inline-block;
+                                        margin-right:15px;"
+                                 class="w-6 h-6"
+                                 fill="none"
+                                 stroke="red"
+                                 viewBox="0 0 24 24"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z">
+                                </path>
+                            </svg>
+                            <span>Folder 1</span>
+                        </p>
+                    </a>
+                    <br>
+                    <a class="truncate text-ellipsis overflow-hidden block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                        <p class="font-normal text-gray-700 dark:text-gray-400"
+                           style="white-space: nowrap;  ">
+                            <svg style="display: inline-block;
+                                        margin-right:15px;"
+                                 class="w-6 h-6"
+                                 fill="none"
+                                 stroke="yellow"
+                                 viewBox="0 0 24 24"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z">
+                                </path>
+                            </svg>
+                            <span>Folder 2</span>
+                        </p>
+                    </a>
+                    <br>
+                    <a class="truncate text-ellipsis overflow-hidden block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                        <p class="font-normal text-gray-700 dark:text-gray-400"
+                           style="white-space: nowrap;  ">
+                            <svg style="display: inline-block;
+                                        margin-right:15px;"
+                                 class="w-6 h-6"
+                                 fill="none"
+                                 stroke="blue"
+                                 viewBox="0 0 24 24"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z">
+                                </path>
+                            </svg>
+                            <span>Folder 3</span>
+                        </p>
+                    </a>
+                    <br>
+                    <a onclick="/*document.getElementById('documentPage').style.display = 'none';startFile('{ document.name }','/getResource/{ course.id }/{ document.id }}', { ('pdf' in document.url)|string|lower });*/"
+                       class="truncate text-ellipsis overflow-hidden block p-6 max-w-sm bg-white rounded-lg cursor-pointer border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                        <p class="font-normal text-gray-700 dark:text-gray-400"
+                           style="white-space: nowrap;  ">
+                            <svg style="display:inline-block;
+                                        margin-right:15px;"
+                                 class="w-6 h-6"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 viewBox="0 0 24 24"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                            <span>picture.jpeg</span>
+                        </p>
+                    </a>
+                    <br>
+                    <a onclick="/*document.getElementById('documentPage').style.display = 'none';startFile('{ document.name }','/getResource/{ course.id }/{ document.id }}', { ('pdf' in document.url)|string|lower });*/"
+                       class="truncate text-ellipsis overflow-hidden block p-6 max-w-sm bg-white rounded-lg cursor-pointer border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                        <p class="font-normal text-gray-700 dark:text-gray-400"
+                           style="white-space: nowrap;  ">
+                            <svg style="display:inline-block;
+                                        margin-right:15px;"
+                                 class="w-6 h-6"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 viewBox="0 0 24 24"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                            <span>main.pdf</span>
+                        </p>
+                    </a>
+                    <br>
+                    <a onclick="/*document.getElementById('documentPage').style.display = 'none';startFile('{ document.name }','/getResource/{ course.id }/{ document.id }}', { ('pdf' in document.url)|string|lower });*/"
+                       class="truncate text-ellipsis overflow-hidden block p-6 max-w-sm bg-white rounded-lg cursor-pointer border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                        <p class="font-normal text-gray-700 dark:text-gray-400"
+                           style="white-space: nowrap;  ">
+                            <svg style="display:inline-block;
+                                        margin-right:15px;"
+                                 class="w-6 h-6"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 viewBox="0 0 24 24"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                            <span>hello_world.py</span>
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div id="pdf-viewer" style="display:none;">
+                <style>
+                    canvas {
+                        width: 100%;
+                        border: 3px solid transparent;
+                        border-radius: 10px;
+                    }
 
-    <div style="overflow-x: hidden; margin-left:64px;">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/default.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script>
-
-    <nav class="flex py-3 px-5 text-gray-700 bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700"
-         aria-label="Breadcrumb">
-        <ol class="inline-flex items-center space-x-1 md:space-x-3 -mx-1" id="breadcrumy">
-            <li class="inline-flex items-center">
-                <a onclick="location.reload();"
-                   class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
-                    <svg class="mr-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
-                    </svg>
-                    My Files
-                </a>
-            </li>
-        </ol>
-    </nav>
-    <div style="margin-left:10px;width:calc(100%);float:left;" id="documentPage">
-        <div style="width:70%;float:left;">
-            <br>
-            <a class="truncate text-ellipsis overflow-hidden block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <p class="font-normal text-gray-700 dark:text-gray-400" style="white-space: nowrap;  ">
-                    <svg style="display: inline-block;margin-right:15px;" class="w-6 h-6" fill="none"
-                         stroke="red" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
-                    </svg>
-                    <span>Folder 1</span></p>
-            </a>
-            <br>
-            <a class="truncate text-ellipsis overflow-hidden block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <p class="font-normal text-gray-700 dark:text-gray-400" style="white-space: nowrap;  ">
-                    <svg style="display: inline-block;margin-right:15px;" class="w-6 h-6" fill="none"
-                         stroke="yellow" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
-                    </svg>
-                    <span>Folder 2</span></p>
-            </a>
-            <br>
-            <a class="truncate text-ellipsis overflow-hidden block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <p class="font-normal text-gray-700 dark:text-gray-400" style="white-space: nowrap;  ">
-                    <svg style="display: inline-block;margin-right:15px;" class="w-6 h-6" fill="none"
-                         stroke="blue" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
-                    </svg>
-                    <span>Folder 3</span></p>
-            </a>
-            <br>
-            <a onclick="/*document.getElementById('documentPage').style.display = 'none';startFile('{ document.name }','/getResource/{ course.id }/{ document.id }}', { ('pdf' in document.url)|string|lower });*/"
-               class="truncate text-ellipsis overflow-hidden block p-6 max-w-sm bg-white rounded-lg cursor-pointer border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <p class="font-normal text-gray-700 dark:text-gray-400" style="white-space: nowrap;  ">
-                    <svg style="display:inline-block;margin-right:15px;" class="w-6 h-6" fill="none"
-                         stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-                    </svg>
-                    <span>picture.jpeg</span></p>
-            </a>
-            <br>
-            <a onclick="/*document.getElementById('documentPage').style.display = 'none';startFile('{ document.name }','/getResource/{ course.id }/{ document.id }}', { ('pdf' in document.url)|string|lower });*/"
-               class="truncate text-ellipsis overflow-hidden block p-6 max-w-sm bg-white rounded-lg cursor-pointer border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <p class="font-normal text-gray-700 dark:text-gray-400" style="white-space: nowrap;  ">
-                    <svg style="display:inline-block;margin-right:15px;" class="w-6 h-6" fill="none"
-                         stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-                    </svg>
-                    <span>main.pdf</span></p>
-            </a>
-            <br>
-            <a onclick="/*document.getElementById('documentPage').style.display = 'none';startFile('{ document.name }','/getResource/{ course.id }/{ document.id }}', { ('pdf' in document.url)|string|lower });*/"
-               class="truncate text-ellipsis overflow-hidden block p-6 max-w-sm bg-white rounded-lg cursor-pointer border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <p class="font-normal text-gray-700 dark:text-gray-400" style="white-space: nowrap;  ">
-                    <svg style="display:inline-block;margin-right:15px;" class="w-6 h-6" fill="none"
-                         stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-                    </svg>
-                    <span>hello_world.py</span></p>
-            </a>
-        </div>
-    </div>
-    <div id="pdf-viewer" style="display:none;">
-        <style>
-            canvas {
-                width: 100%;
-                border: 3px solid transparent;
-                border-radius: 10px;
-            }
-
-            .container {
-                position: -webkit-sticky;
-                position: sticky;
-                top: 0;
-                background: #121926;
-                width: 90%;
-                margin-left: 5%;
-                border-radius: 10px;
-                padding: 10px;
-                text-align: center;
-            }
-        </style>
-        <script src="/static/js/tools/files.js"></script>
-
-        <div id="loader" class="text-">Loading ......</div>
-        <div class="container">
-            <button id="prev_page" type="button"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                Previous Page
-            </button>
-            <button id="next_page" type="button"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                Next Page
-            </button>
-            <span class="text-white dark:text-white">
-            <span class="text-red-500" id="current_page_num"></span>
-            of
-            <span id="total_page_num"></span>
-        </span>
-
-            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                   style="width:150px;margin-left:10px; margin-right:10px; display:inline-block;" type="text"
-                   id="page_num">
-            <button id="go_to_page" type="button"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                Go to Page
-            </button>
-        </div>
-        <canvas id="pdf_canvas"></canvas>
-
-
-        <!-- Replace pdf.js with downloaded pdf.js file -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"></script>
-    </div>
-    <div id="code-viewer" style="display:none;">
-        <script>
-            // // load the library and ALL languages
-            // hljs = require('highlight.js');
-            // html = hljs.highlightAuto('<h1>Hello World!</h1>').value
-            document.addEventListener('DOMContentLoaded', (event) => {
-                document.querySelectorAll('pre code').forEach((el) => {
-                    hljs.highlightElement(el);
-                });
-            });
-            setInterval(function () {
-                document.querySelectorAll('pre code').forEach((el) => {
-                    hljs.highlightElement(el);
-                });
-            }, 5000)
-        </script>
-        <pre onClick="this.contentEditable='true';" style="width:80%;border-radius:10px;margin-left:10%;">
+                    .container {
+                        position: -webkit-sticky;
+                        position: sticky;
+                        top: 0;
+                        background: #121926;
+                        width: 90%;
+                        margin-left: 5%;
+                        border-radius: 10px;
+                        padding: 10px;
+                        text-align: center;
+                    }
+                </style>
+                <script src="/static/js/tools/files.js"></script>
+                <div id="loader" class="text-">Loading ......</div>
+                <div class="container">
+                    <button id="prev_page"
+                            type="button"
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                        Previous Page
+                    </button>
+                    <button id="next_page"
+                            type="button"
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                        Next Page
+                    </button>
+                    <span class="text-white dark:text-white">
+                        <span class="text-red-500" id="current_page_num"></span>
+                        of
+                        <span id="total_page_num"></span>
+                    </span>
+                    <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                           style="width:150px;
+                                  margin-left:10px;
+                                  margin-right:10px;
+                                  display:inline-block;"
+                           type="text"
+                           id="page_num">
+                    <button id="go_to_page"
+                            type="button"
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                        Go to Page
+                    </button>
+                </div>
+                <canvas id="pdf_canvas"></canvas>
+                <!-- Replace pdf.js with downloaded pdf.js file -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"></script>
+            </div>
+            <div id="code-viewer" style="display:none;">
+                <script>
+                    // // load the library and ALL languages
+                    // hljs = require('highlight.js');
+                    // html = hljs.highlightAuto('<h1>Hello World!</h1>').value
+                    document.addEventListener('DOMContentLoaded', (event) => {
+                        document.querySelectorAll('pre code').forEach((el) => {
+                            hljs.highlightElement(el);
+                        });
+                    });
+                    setInterval(function () {
+                        document.querySelectorAll('pre code').forEach((el) => {
+                            hljs.highlightElement(el);
+                        });
+                    }, 5000)
+                </script>
+                <pre onClick="this.contentEditable='true';" style="width:80%;border-radius:10px;margin-left:10%;">
         <code id="code_loc" onClick="this.contentEditable='true';"
-              style="border-radius:10px; background:#1F2937;color:white;"
-              class="language-python">
+              style="border-radius:10px; background:#1F2937;color:white;" class="language-python">
         </code>
     </pre>
-        <style>
-            /* Hide scrollbar for Chrome, Safari and Opera */
-            code::-webkit-scrollbar {
-                display: none;
-            }
+                <style>
+                    /* Hide scrollbar for Chrome, Safari and Opera */
+                    code::-webkit-scrollbar {
+                        display: none;
+                    }
 
-            /* Hide scrollbar for IE, Edge and Firefox */
-            code {
-                -ms-overflow-style: none; /* IE and Edge */
-                scrollbar-width: none; /* Firefox */
-            }
-        </style>
-    </div>
-    <div id="video-viewer" style="display:none; ">
-        <link href="https://vjs.zencdn.net/7.18.1/video-js.css" rel="stylesheet"/>
-        <link href="https://unpkg.com/video.js@7/dist/video-js.min.css" rel="stylesheet"/>
-        <link href="https://unpkg.com/@videojs/themes@1/dist/fantasy/index.css" rel="stylesheet"/>
-        <video id="my-video" class="video-js vjs-theme-fantasy" controls preload="auto" width="640" height="264"
-               data-setup="{}"
-               poster="https://media.discordapp.net/attachments/951319765820002384/956401024162217984/adexportnebulus.ml.mp4?format=jpeg&width=800&height=450">
-
-            <source src="https://cdn.discordapp.com/attachments/951319765820002384/956401024162217984/adexportnebulus.ml.mp4"
-                    type="video/mp4"/>
-
-            <source src="https://cdn.discordapp.com/attachments/951319765820002384/956401024162217984/adexportnebulus.ml.mp4"
-                    type="video/webm"/>
-
-            <p class="vjs-no-js">
-                To view this video please enable JavaScript, and consider upgrading to a
-                web browser that
-                <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-            </p>
-        </video>
-
-        <script src="https://vjs.zencdn.net/7.18.1/video.min.js"></script>
-    </div>
-
-    <div id="office-viewer" style="display:none; ">
-        <iframe src="https://docs.google.com/gview?url=http://writing.engr.psu.edu/workbooks/formal_report_template.doc&embedded=true"
-                width='95%' height='100%'></iframe>
-        <iframe src='https://view.officeapps.live.com/op/embed.aspx?src=http://writing.engr.psu.edu/workbooks/formal_report_template.doc'
-                width='95%' height='100%' frameborder='0'>
-            This is an embedded <a target='_blank' href='http://office.com'>Microsoft Office</a> document, powered by
-            <a target='_blank' href='http://office.com/webapps'>Office Online</a>.
-        </iframe>
-    </div>
-    <div id="audio-viewer" style="display:none;">
-        <div style="width: 50px; height: 50px;"></div>
-        <div class="audio-player">
-            <div class="timeline">
-                <div class="progress"></div>
+                    /* Hide scrollbar for IE, Edge and Firefox */
+                    code {
+                        -ms-overflow-style: none; /* IE and Edge */
+                        scrollbar-width: none; /* Firefox */
+                    }
+                </style>
             </div>
-            <div class="controls">
-                <div class="play-container">
-                    <div class="toggle-play play">
-                    </div>
-                </div>
-                <div class="time">
-                    <div class="current">0:00</div>
-                    <div class="divider">/</div>
-                    <div class="length"></div>
-                </div>
-                <div class="name">Music Song</div>
-                <!--     credit for icon to https://saeedalipoor.github.io/icono/ -->
-                <div class="volume-container">
-                    <div class="volume-button">
-                        <div class="volume icono-volumeMedium"></div>
-                    </div>
-
-                    <div class="volume-slider">
-                        <div class="volume-percentage"></div>
-                    </div>
-                </div>
+            <div id="video-viewer" style="display:none; ">
+                <link href="https://vjs.zencdn.net/7.18.1/video-js.css" rel="stylesheet"/>
+                <link href="https://unpkg.com/video.js@7/dist/video-js.min.css"
+                      rel="stylesheet"/>
+                <link href="https://unpkg.com/@videojs/themes@1/dist/fantasy/index.css"
+                      rel="stylesheet"/>
+                <video id="my-video"
+                       class="video-js vjs-theme-fantasy"
+                       controls
+                       preload="auto"
+                       width="640"
+                       height="264"
+                       data-setup="{}"
+                       poster="https://media.discordapp.net/attachments/951319765820002384/956401024162217984/adexportnebulus.ml.mp4?format=jpeg&width=800&height=450">
+                    <source src="https://cdn.discordapp.com/attachments/951319765820002384/956401024162217984/adexportnebulus.ml.mp4"
+                            type="video/mp4"/>
+                    <source src="https://cdn.discordapp.com/attachments/951319765820002384/956401024162217984/adexportnebulus.ml.mp4"
+                            type="video/webm"/>
+                    <p class="vjs-no-js">
+                        To view this video please enable JavaScript, and consider upgrading to a
+                        web browser that
+                        <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                    </p>
+                </video>
+                <script src="https://vjs.zencdn.net/7.18.1/video.min.js"></script>
             </div>
-        </div>
-        <style>
-
-            .audio-player {
-                height: 50px;
-                width: 350px;
-                background: #444;
-                box-shadow: 0 0 20px 0 #000a;
-                font-family: arial;
-                color: white;
-                font-size: 0.75em;
-                overflow: hidden;
-                display: grid;
+            <div id="office-viewer" style="display:none; ">
+                <iframe src="https://docs.google.com/gview?url=http://writing.engr.psu.edu/workbooks/formal_report_template.doc&embedded=true"
+                        width='95%'
+                        height='100%'></iframe>
+                <iframe src='https://view.officeapps.live.com/op/embed.aspx?src=http://writing.engr.psu.edu/workbooks/formal_report_template.doc'
+                        width='95%'
+                        height='100%'
+                        frameborder='0'>
+                    This is an embedded <a target='_blank' href='http://office.com'>Microsoft Office</a> document,
+                    powered by
+                    <a target='_blank' href='http://office.com/webapps'>Office Online</a>.
+                </iframe>
+            </div>
+            <div id="audio-viewer" style="display:none;">
+                <div style="width: 50px; height: 50px;">
+                </div>
+                <div class="audio-player">
+                    <div class="timeline">
+                        <div class="progress">
+                        </div>
+                    </div>
+                    <div class="controls">
+                        <div class="play-container">
+                            <div class="toggle-play play">
+                            </div>
+                        </div>
+                        <div class="time">
+                            <div class="current">
+                                0:00
+                            </div>
+                            <div class="divider">
+                                /
+                            </div>
+                            <div class="length">
+                            </div>
+                        </div>
+                        <div class="name">
+                            Music Song
+                        </div>
+                        <!--     credit for icon to https://saeedalipoor.github.io/icono/ -->
+                        <div class="volume-container">
+                            <div class="volume-button">
+                                <div class="volume icono-volumeMedium">
+                                </div>
+                            </div>
+                            <div class="volume-slider">
+                                <div class="volume-percentage">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <style>
+                    .audio-player {
+                        height: 50px;
+                        width: 350px;
+                        background: #444;
+                        box-shadow: 0 0 20px 0 #000a;
+                        font-family: arial;
+                        color: white;
+                        font-size: 0.75em;
+                        overflow: hidden;
+                        display: grid;
                 grid-template-rows: 6px auto;
             }
 
@@ -370,23 +441,23 @@
                 width: 75%;
             }
 
-            .audio-player .controls .volume-container:hover .volume-slider {
-                left: -123px;
-                width: 120px;
-            }
+                    .audio-player .controls .volume-container:hover .volume-slider {
+                        left: -123px;
+                        width: 120px;
+                    }
 
-        </style>
-        <script>
-            // Possible improvements:
-            // - Change timeline and volume slider into input sliders, reskinned
-            // - Change into Vue or React component
-            // - Be able to grab a custom title instead of "Music Song"
-            // - Hover over sliders to see preview of timestamp/volume change
+                </style>
+                <script>
+                    // Possible improvements:
+                    // - Change timeline and volume slider into input sliders, reskinned
+                    // - Change into Vue or React component
+                    // - Be able to grab a custom title instead of "Music Song"
+                    // - Hover over sliders to see preview of timestamp/volume change
 
-            const audioPlayer = document.querySelector(".audio-player");
-            const audio = new Audio(
-                "https://ia800905.us.archive.org/19/items/FREE_background_music_dhalius/backsound.mp3"
-            );
+                    const audioPlayer = document.querySelector(".audio-player");
+                    const audio = new Audio(
+                        "https://ia800905.us.archive.org/19/items/FREE_background_music_dhalius/backsound.mp3"
+                    );
             //credit for song: Adrian kreativaweb@gmail.com
 
             console.dir(audio);
@@ -471,8 +542,8 @@
 
                 return `${String(hours).padStart(2, 0)}:${minutes}:${String(seconds % 60).padStart(2, 0)}`;
             }
-        </script>
-    </div>
-     </div>
+                </script>
+            </div>
+        </div>
     </div>
 {% endblock %}

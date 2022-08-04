@@ -1,4 +1,4 @@
-const sidebarLinks = document.getElementsByClassName('space-y-2')[0].getElementsByTagName('a');
+const sidebarLinks = document.getElementsByClassName('space-y-2')[1].getElementsByTagName('a');
 
 for (const a of sidebarLinks) {
     a.href += '?iframe=true';
@@ -36,14 +36,14 @@ function setCreateButton(title) {
         case 'documents':
             actions[0].innerHTML = 'Upload File';
             actions[0].onclick = () => openModal('createDocument');
-            actions[1].innerHTML = 'Post Link';
+            actions[1].innerHTML = 'Post a Document Link';
             actions[1].onclick = () => openModal('postLink');
-            actions[2].innerHTML = 'Create Assignment';
+            actions[2].innerHTML = 'Add Assignment';
             actions[2].onclick = () => openModal('createAssignment');
             break;
 
         case 'announcements':
-            actions[0].innerHTML = 'Create Announcement';
+            actions[0].innerHTML = 'Add Announcement';
             actions[0].onclick = () => openModal('createAnnouncement');
             break;
 

@@ -1,15 +1,33 @@
-import os
+import zlib
 
 import requests
-
-# from spaces import Client
+from spaces import *
 
 ACCESS_ID = "5POV4IR5H2XWALCF7KWY"
 SECRET_KEY = "j7k9MO7SXueLeEbkXdYBAlaZ7XfC1EMdqV3w9KrceHQ"
 
 
-def upload_file(path, filename, bucket_folder):
+def compress(filename):
+    with open(filename, mode="rb") as fin, open(filename, mode="wb") as fout:
+        data = fin.read()
+        compressed_data = zlib.compress(data, zlib.Z_BEST_COMPRESSION)
+        print(f"Original size: {sys.getsizeof(data)}")
+        # Original size: 1000033
+        print(f"Compressed size: {sys.getsizeof(compressed_data)}")
+        # Compressed size: 1024
 
+        fout.write(compressed_data)
+
+    with open(filename, mode="rb") as fin:
+        data = fin.read()
+        compressed_data = zlib.decompress(data)
+        print(f"Compressed size: {sys.getsizeof(data)}")
+        # Compressed size: 1024
+        print(f"Decompressed size: {sys.getsizeof(compressed_data)}")
+        # Decompressed size: 1000033
+
+
+def upload_file(path, filename, bucket_folder):
     client = Client(
         region_name="sfo3",
         space_name="nebulus-cdn",
@@ -27,16 +45,12 @@ def upload_file(path, filename, bucket_folder):
 
 
 def upload_file_link(url, file_name):
-    try:
-        r = requests.get(url, allow_redirects=True)
-        open(file_name, "wb.html").write(r.content)
-        upload_file(file_name, file_name, "Documents")
-        os.remove(file_name)
-        return True
-
-    except Exception as e:
-        print(e)
-        return False
+    r = requests.get(url, allow_redirects=True)
+    open(file_name, "wb").write(r.content)
+    upload_file(file_name, file_name, "Documents")
+    compress(file_name)
+    os.remove(file_name)
+    return True
 
 
 def allowed_file(filename):

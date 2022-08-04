@@ -3,7 +3,7 @@ const siteName = window.location.protocol + '//' + window.location.host;
 const faviconInterval = setInterval(changeFavicon, 1000);
 Array.prototype.insert = (index, item) => this.splice(index, 0, item);
 
-window.addEventListener("beforeunload", () => clearInterval(interval));
+window.addEventListener('beforeunload', () => clearInterval(interval));
 
 if (!localStorage.getItem('color-theme')) {
     const darkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -16,7 +16,7 @@ else document.documentElement.classList.remove('dark');
 /** Returns a string containing a loading icon, with the parameters defining length and width. */
 function loadingIcon(length, width, fill) {
     if (width === undefined) width = length;
-    if (fill === undefined) fill = "blue-600";
+    if (fill === undefined) fill = 'blue-600';
 
     return `
     <div role="status">
@@ -68,8 +68,7 @@ class KeyUpTimer {
     }
 
     disable() {
-        for (const element of this.elements)
-            element.removeEventListener('keyup', this.onKeyUp);
+        for (const element of this.elements) element.removeEventListener('keyup', this.onKeyUp);
         clearInterval(this.interval);
     }
 }
@@ -89,7 +88,8 @@ function invertSite() {
     const banner = document.getElementById('homeBanner');
 
     if (localStorage.getItem('color-theme') === 'dark') {
-        if (window.location.href.endsWith('/notepad')) document.getElementById('editor').style.filter = 'invert(1)';
+        if (window.location.href.endsWith('/notepad'))
+            document.getElementById('editor').style.filter = 'invert(1)';
         if (window.location.pathname === '/') {
             let wallpaper = localStorage.getItem('wallpaper');
             if (!wallpaper) wallpaper = '/static/images/darkwallpaper.png';
@@ -104,8 +104,7 @@ function invertSite() {
         if (banner) banner.style.filter = 'brightness(100%)';
 
         for (const logo of document.getElementsByTagName('logo'))
-            if (!logo.getAttribute('no-revert'))
-                logo.style.filter = 'brightness(100%)';
+            if (!logo.getAttribute('no-revert')) logo.style.filter = 'brightness(100%)';
     } else {
         if (window.location.href.endsWith('/notepad')) {
             document.getElementById('editor').style.filter = 'invert(0)';
@@ -119,7 +118,9 @@ function invertSite() {
                 document.body.style.background = `linear-gradient( rgba(256, 256, 256, 0.5), rgba(256, 256, 256, 0.2) ), url('${wallpaper}') no-repeat center center fixed`;
                 document.body.style.backgroundSize = 'cover';
             }
-            document.getElementById('chart').innerHTML = `<iframe style="background: rgba(255, 255, 255, 0.5); border-radius:10px;border: none; margin:10px; " width="80%" height="580" src="https://charts.mongodb.com/charts-project-0-dixeb/embed/charts?id=62c4eb23-6d77-4441-8174-0fc61c500111&maxDataAge=10&theme=lightk&autoRefresh=true"></iframe>;`
+            document.getElementById(
+                'chart'
+            ).innerHTML = `<iframe style="background: rgba(255, 255, 255, 0.5); border-radius:10px;border: none; margin:10px; " width="80%" height="580" src="https://charts.mongodb.com/charts-project-0-dixeb/embed/charts?id=62c4eb23-6d77-4441-8174-0fc61c500111&maxDataAge=10&theme=lightk&autoRefresh=true"></iframe>;`;
         }
 
         if (banner) banner.style.filter = 'brightness(70%)';
@@ -142,13 +143,11 @@ function invertSite() {
                     document.body.style.backgroundSize = 'cover';
                     document.body.style.background = `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2) ), url('${wallpaper}') no-repeat center center fixed`;
                     document.body.style.backgroundSize = 'cover';
-                    for (let header of document.getElementsByClassName("modalheader")) {
-                        header.style =
-                            `background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)) 0% 0% / cover, url("${wallpaper}") ;
+                    for (let header of document.getElementsByClassName('modalheader')) {
+                        header.style = `background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)) 0% 0% / cover, url("${wallpaper}") ;
                     background-position: center top;
-                    background-size: 100% auto;`
+                    background-size: 100% auto;`;
                     }
-
                 }
             } else {
                 innerDoc.documentElement.classList.remove('dark');
@@ -159,11 +158,10 @@ function invertSite() {
                     document.body.style.backgroundSize = 'cover';
                     document.body.style.background = `linear-gradient( rgba(256, 256, 256, 0.5), rgba(256, 256, 256, 0.2) ), url('${wallpaper}') no-repeat center center fixed`;
                     document.body.style.backgroundSize = 'cover';
-                    for (let header of document.getElementsByClassName("modalheader")) {
-                        header.style =
-                            `background: linear-gradient(rgba(256, 256, 256, 0.5), rgba(256, 256, 256, 0.2)) 0% 0% / cover, url("${wallpaper}") ;
+                    for (let header of document.getElementsByClassName('modalheader')) {
+                        header.style = `background: linear-gradient(rgba(256, 256, 256, 0.5), rgba(256, 256, 256, 0.2)) 0% 0% / cover, url("${wallpaper}") ;
                     background-position: center top;
-                    background-size: 100% auto;`
+                    background-size: 100% auto;`;
                     }
                 }
             }
@@ -209,7 +207,9 @@ window.addEventListener('load', function () {
             logo.style.width = size;
             logo.style.height = size;
         }
-        logo.innerHTML = `<img alt="logo" style="${logo.getAttribute('style')}" class="${logo.className}" src="${img}">`;
+        logo.innerHTML = `<img alt="logo" style="${logo.getAttribute('style')}" class="${
+            logo.className
+        }" src="${img}">`;
 
         logo.removeAttribute('style');
         logo.removeAttribute('class');
@@ -279,23 +279,28 @@ function navFetchStatus() {
         let ratio = songs[8];
 
         document.getElementById('spotifyStatus').innerHTML = `
-            <div style="width:150px;float:left;">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <div style="width:110px;float:left;">
                 <img style="display: inline-block; margin:20px; border-radius:10px;" class="mb-3 w-20 h-20 shadow-lg" src="${image}" alt="Song Title">
             </div>
-            <div style="width: calc(90% - 150px);float:left;">
+            <div style="width: calc(90% - 110px);float:left;">
                 <div style="margin-top:20px;">
-                <p class="truncate text-lg text-black dark:text-white"><i style="display:inline-block; color:#1BD661; margin-right:10px;" class="fab fa-spotify"></i> ${name} ${explicit} </p>
+                <p class="truncate text-lg text-black dark:text-white"><i class="fa fa-spotify" style="display:inline-block; color:#1DB954;margin-right:10px;"></i> ${name} ${explicit} </p>
                     <p class="truncate text-sm text-gray-600 dark:text-gray-300">${artists} - ${album}</p></div>
-                <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700 h-1">
-                    <div class="bg-white text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full h-1" style="width: ${Math.round(
+               
+                
+                <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700 h-3" style="
+    margin: 10px;
+">
+                    <div class="text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full h-3" style="width: ${Math.round(
             ratio
-        )}%"> </div>
+        )}%;background: linear-gradient(45deg, green, orange);"> </div>
                 </div>
                 <p class="truncate text-sm text-gray-600 dark:text-gray-300">${timestamp} of ${total}
                     ${playing}
                     <i style="margin-left:20px;color:white;" class="material-icons">skip_next</i>
                 </p></div>`;
-        document.getElementById('spotifyStatus').classList.remove("flex-col");
+        document.getElementById('spotifyStatus').classList.remove('flex-col');
         //document.getElementById('spotifyStatus').classList.remove("flex");
     });
 
@@ -308,8 +313,8 @@ let index = 0;
 
 for (let i = 0; i < list.length; i++) {
     fetch(`/static/images/nebulusCats/new${list[i]}.png`)
-        .then(response => response.blob())
-        .then(imageBlob => list[i] = URL.createObjectURL(imageBlob));
+        .then((response) => response.blob())
+        .then((imageBlob) => (list[i] = URL.createObjectURL(imageBlob)));
 }
 
 function changeFavicon() {

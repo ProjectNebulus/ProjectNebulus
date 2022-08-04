@@ -1,5 +1,10 @@
 let d = new Date();
-let month, year, startDate, exitTime, loadingModal, empty = false;
+let month,
+    year,
+    startDate,
+    exitTime,
+    loadingModal,
+    empty = false;
 
 const times = document.getElementById('timePeriods');
 
@@ -16,10 +21,36 @@ const error = document.getElementById('error');
 const plannerName = document.getElementById('planner_name');
 
 const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-const daysInMonths = [31, d.getFullYear() % 4 === 0 ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+];
+const daysInMonths = [
+    31,
+    d.getFullYear() % 4 === 0 ? 29 : 28,
+    31,
+    30,
+    31,
+    30,
+    31,
+    31,
+    30,
+    31,
+    30,
+    31
+];
 
-const table = document.querySelector("table");
+const table = document.querySelector('table');
 
 let saveData = {};
 
@@ -54,9 +85,13 @@ function updateDate() {
 function reloadTable() {
     table.innerHTML = '';
     changeDate(true);
-    for (let i = 1; i <= document.querySelectorAll('#configureModal #timePeriods .timePeriod').length; i++) {
+    for (
+        let i = 1;
+        i <= document.querySelectorAll('#configureModal #timePeriods .timePeriod').length;
+        i++
+    ) {
         const row = table.insertRow();
-        row.classList.add("bg-white/75", "border-b", "dark:bg-gray-800/75", "dark:border-gray-700")
+        row.classList.add('bg-white/75', 'border-b', 'dark:bg-gray-800/75', 'dark:border-gray-700');
         const smallCell = row.insertCell();
 
         smallCell.innerHTML = i + '';
@@ -91,8 +126,7 @@ document.addEventListener('keyup', (e) => {
 });
 window.onload = function () {
     loadFromServer();
-}
-
+};
 
 nextPage.onclick = function () {
     save();
@@ -250,8 +284,13 @@ function changeDate(insert) {
     if (insert === true) {
         const daysRow = table.insertRow();
         daysRow.classList.add(
-            "text-xs", "text-gray-700", "uppercase", "bg-gray-50", "dark:bg-gray-700", "dark:text-gray-400",
-        )
+            'text-xs',
+            'text-gray-700',
+            'uppercase',
+            'bg-gray-50',
+            'dark:bg-gray-700',
+            'dark:text-gray-400'
+        );
         for (let i = 0; i <= 7; i++) daysRow.insertCell();
     }
 
@@ -276,8 +315,7 @@ function save(e) {
     saveData[page] = {};
     for (let i = 0; i < notes.length; i++) {
         if (notes[i].innerHTML !== '')
-
-            saveData[page][i] = (notes[i].innerHTML.replaceAll('=', ':::::'));
+            saveData[page][i] = notes[i].innerHTML.replaceAll('=', ':::::');
     }
 }
 
@@ -286,8 +324,7 @@ function load(page) {
     for (let i = 0; i < notes.length; i++) {
         if (saveData[page] && saveData[page][i])
             notes[i].innerHTML = saveData[page][i].replaceAll(':::::', '=');
-        else
-            notes[i].innerHTML = "";
+        else notes[i].innerHTML = '';
     }
 }
 

@@ -940,5 +940,4 @@ def music_video(id_: str):
         user=session.get("username"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         translate=getText,
-
     )

@@ -165,7 +165,6 @@ window.addEventListener('load', function () {
         }
 
         if (VALID_USERNAME_REGEX.test(usrname)) {
-
             const request = $.ajax({
                 type: 'POST',
                 url: '/api/v1/internal/check-signup-user',
@@ -191,7 +190,8 @@ window.addEventListener('load', function () {
                 }
             });
         } else {
-            usernameStatus.innerHTML = 'Your username may only contain letters, numbers, underscores, dashes, and spaces!';
+            usernameStatus.innerHTML =
+                'Your username may only contain letters, numbers, underscores, dashes, and spaces!';
             validationIcons[1].style.color = 'red';
             validationIcons[1].innerHTML = '<i class="material-icons">close</i>';
             username.classList.add(...RED_BORDER);

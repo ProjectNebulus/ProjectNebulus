@@ -1,7 +1,7 @@
 from flask import request
 
-from app.routes.main.spotify import get_currently_playing
 from app.routes.main.spotify import (
+    get_currently_playing,
     loop1_spotify,
     loop2_spotify,
     loop_spotify,

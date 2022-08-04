@@ -347,6 +347,7 @@ def create_schoology_course():
         upload_file_link(
             document["attachments"], f'{mongo_document.id}.{document["file_ending"]}'
         )
+
         print(document)
         documents.append(document)
     print(documents)

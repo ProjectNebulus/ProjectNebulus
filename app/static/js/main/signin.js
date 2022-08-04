@@ -275,8 +275,8 @@ function reqListener1() {
         let usernameInput = username;
         let passwordInput = password;
         loginButton.disabled = false;
-        loginButton.style.color = '#eff6ff';
-        loginButton.style.backgroundColor = '3';
+        loginButton.style.color = 'white';
+        loginButton.style.backgroundColor = '#3E82F8';
         loginButton.classList.add('hover:bg-blue-800');
         // usernameInput.disabled = true;
         // passwordInput.disabled = true;
@@ -319,7 +319,7 @@ function getRedirectParam() {
 function reqListener2() {
     if (this.responseText === 'true') {
         let status = document.getElementById('fail');
-        status.style.color = 'yellowgreen';
+        status.style.color = 'green';
         status.innerHTML = 'Login Successful. Logging you in...';
         window.location.href = getRedirectParam();
     } else {

@@ -4,7 +4,7 @@ from datetime import datetime
 from flask import request, session
 from flask.json import jsonify
 
-from app.static.python.classes import Avatar, ChatProfile, Chat, User
+from app.static.python.classes import Avatar, Chat, ChatProfile, User
 from app.static.python.mongodb import create, read
 from app.static.python.utils.security import hash256
 from . import internal
@@ -179,7 +179,7 @@ def search_within_user():
                 account.avatar.avatar_url,
             ]
         )
-
+    print(everything)
     for i in everything:
         count += 1
         string += i[0]
@@ -193,7 +193,7 @@ def search_within_user():
             string += "•"
     if len(everything) == 0:
         return "0"
-
+    print(string)
     return string
 
 

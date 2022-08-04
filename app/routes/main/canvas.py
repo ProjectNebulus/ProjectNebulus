@@ -10,8 +10,7 @@ from ...static.python.mongodb.read import getText
 @logged_in
 def canvasConnect():
     # Open OAuth authorization webpage. Give time to authorize.
-    return render_template("connections/connectCanvas.html",
-                           translate=getText)
+    return render_template("connections/connectCanvas.html", translate=getText)
 
 
 @main_blueprint.route("/canvas", methods=["POST"])

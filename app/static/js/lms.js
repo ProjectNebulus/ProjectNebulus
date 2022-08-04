@@ -1,16 +1,20 @@
 function expand(message) {
 }
 
-
 function openAnnouncementsModal(content, title, author, pic, course) {
     const targetEl = document.getElementById('announcementModal');
-    document.getElementById("announcementBody").innerText = content;
-    document.getElementById("announcement__Name").innerText = title;
-    document.getElementById("announcement__Name").innerHTML += `
-    <img data-dropdown-toggle="userDropdown-0_0" id="avatar0_0" data-dropdown-placement="bottom-start" class="rounded-full ring-2 ring-gray-300 dark:ring-gray-500
+    document.getElementById('announcementBody').innerText = content;
+    if (title.length === 0) {
+        title = 'Announcement from ' + author;
+    }
+    document.getElementById('announcement__Name').innerText = `
+    <img data-dropdown-toggle="userDropdown-0_0" id="avatar0_0" data-dropdown-placement="bottom-start" class="mr-6 inline-block rounded-full ring-2 ring-gray-300 dark:ring-gray-500
                                                      cursor-pointer mb-3 rounded-full shadow-lg
                                                       dark:bg-gray-900 dark:hover:bg-gray-800 
-                                                      w-8 h-8 mt-4 " src="${pic}" alt="${author}'s profile picture">
+                                                      w-8 h-8 mt-4 " src="${pic}" alt="${author}'s profile picture">`;
+    document.getElementById('announcement__Name').innerText = title;
+    document.getElementById('announcement__Name').innerHTML += `
+    
                                                       <div class="flex flex-col text-xs text-gray-700 dark:text-gray-400 pl-2">
                                                     
                                                         <h4 class="text-lg font-semibold text-gray-900 dark:text-white truncate mb-1 cursor-pointer hover:underline" data-dropdown-toggle="userDropdown-0_0">
@@ -28,11 +32,10 @@ function openAnnouncementsModal(content, title, author, pic, course) {
                                                     </div>
                                                 </div>
 
-`
+`;
 
     const modal = new Modal(targetEl);
     modal.toggle();
-
 }
 
 function replaceURLs(message) {
@@ -67,256 +70,199 @@ function replaceURLs(message) {
     });
 }
 
-let modal = document.getElementById('courseModal');
+window.addEventListener('load', () => {
+    let modal = document.getElementById('courseModal');
 
-// set up templates
-let templateLists = modal.getElementsByClassName('scroll');
+    // set up templates
+    let templateLists = modal.getElementsByClassName('scroll');
 
-let screens = modal.getElementsByClassName('CoursePage');
+    let screens = modal.getElementsByClassName('CoursePage');
 
-// set up button
-let btn = document.getElementById('create');
+    // set up button
+    let btn = document.getElementById('create');
 
-for (const screen of screens)
-    screen.className +=
-        ' relative px-4 w-full max-w-2xl relative bg-gray-200 rounded-lg shadow dark:bg-gray-700 text-black dark:text-white';
+    for (const screen of screens)
+        screen.className +=
+            ' relative px-4 w-full max-w-2xl relative bg-gray-200 rounded-lg shadow dark:bg-gray-700 text-black dark:text-white';
 
-for (const h3 of modal.getElementsByTagName('h3'))
-    h3.className +=
-        ' flex justify-between items-start p-5 rounded-t border-b border-gray-300 dark:border-gray-600 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white';
+    for (const h3 of modal.getElementsByTagName('h3'))
+        h3.className +=
+            ' flex justify-between items-start p-5 rounded-t border-b border-gray-300 dark:border-gray-600 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white';
 
-for (const list of templateLists) list.classList.add('scroll');
+    for (const list of templateLists) list.classList.add('scroll');
 
-btn.onclick = function () {
-    console.log('button clicked');
-    modal.style.display = 'block';
+    btn.onclick = function () {
+        console.log('button clicked');
+        modal.style.display = 'block';
 
-    screens[0].style.top = '-1000px';
-    screens[0].style.animation = '0.5s movein';
+        screens[0].style.top = '-1000px';
+        screens[0].style.animation = '0.5s movein';
 
-    for (let screen of screens) {
-        screen.style.display = 'none';
-        screen.style.animationFillMode = 'forwards';
-        screen.style.webkitAnimationFillMode = 'forwards';
+        for (let screen of screens) {
+            screen.style.display = 'none';
+            screen.style.animationFillMode = 'forwards';
+            screen.style.webkitAnimationFillMode = 'forwards';
+        }
+
+        screens[0].style.display = 'block';
+    };
+
+    window.onclick = function (event) {
+        if (event.target === modal) modal.style.display = 'none';
+    };
+
+    // set up close button
+    for (let close of modal.getElementsByClassName('close')) {
+        close.className += ' material-icons dark:text-white';
+        close.innerHTML = 'close';
+        close.onclick = () => (modal.style.display = 'none');
     }
 
-    screens[0].style.display = 'block';
-};
+    // set up course stuff
+    let courseName = document.getElementById('course-name');
+    let courseTeacher = document.getElementById('course-teacher');
 
-window.onclick = function (event) {
-    if (event.target === modal) modal.style.display = 'none';
-};
+    for (const element of modal.getElementsByClassName('CoursePage'))
+        element.className +=
+            ' hidden overflow-visible fixed right-0 left-0 top-4 z-50 justify-center items-center h-72 md:inset-0';
 
-// set up close button
-for (let close of modal.getElementsByClassName('close')) {
-    close.className += ' material-icons dark:text-white';
-    close.innerHTML = 'close';
-    close.onclick = () => (modal.style.display = 'none');
-}
+    function lms(subtemplate) {
+        document.getElementById('create-course-status').innerHTML = 'Creating course...';
 
-// set up course stuff
-let courseName = document.getElementById('course-name');
-let courseTeacher = document.getElementById('course-teacher');
-
-for (const element of modal.getElementsByClassName('CoursePage'))
-    element.className +=
-        ' hidden overflow-visible fixed right-0 left-0 top-4 z-50 justify-center items-center h-72 md:inset-0';
-
-function lms(subtemplate) {
-    document.getElementById('create-course-status').innerHTML = 'Creating course...';
-
-    const xhttp = new XMLHttpRequest();
-    xhttp.open('POST', '/lms', true);
-    xhttp.setRequestHeader('Content-type', 'application/json');
-    xhttp.send(
-        JSON.stringify({
-            name: document.getElementById('course-name').value,
-            teacher: document.getElementById('course-teacher').value,
-            avatar: 'https://app.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg',
-            template: subtemplate
-        })
-    );
-}
-
-function skipTemplates() {
-    screens[0].style.display = 'none';
-    customize(null, user + "'s class");
-    const h1 = document.getElementById('change-if-skip-templates');
-    h1.innerHTML = h1.innerHTML.replace('Step 3: ', '');
-}
-
-const pageCounters = modal.getElementsByClassName('pageCount');
-
-for (const i in pageCounters) {
-    pageCounters[i].className += ' flex items-center p-6 space-x-2 absolute bottom-0';
-    for (let j = 0; j < 3; j++) {
-        if (j == i)
-            pageCounters[i].innerHTML +=
-                "<div class='rounded-full w-2 h-2 bg-gray-400 dark:bg-gray-500'></div>";
-        else
-            pageCounters[i].innerHTML +=
-                "<div class='rounded-full w-2 h-2 bg-gray-300 dark:bg-gray-400'></div>";
-    }
-
-    try {
-        pageCounters[i].setAttribute('style', 'transform: translate(300%)');
-    } catch (e) {
-    }
-}
-
-/*
-
-To course a new template, add a new dictionary and put the parameters:
-
-name (e.g. Science)
-icon (e.g. science.svg)
-description (e.g. Physics, Chemistry, Biology)
-
-as demonstrated below.
-
-*/
-const templates = [
-    {
-        name: 'Science',
-        icon: 'science.svg',
-        subtemplates: [
-            'Introduction to Science',
-            'Physics',
-            'Chemistry',
-            'Biology',
-            'Astronomy',
-            'Life Science',
-            'Earth Science',
-            'Physical Science',
-            'Physical Geography',
-            'Computer Science',
-            'Programming',
-            'Coding'
-        ]
-    },
-
-    {
-        name: 'Mathematics',
-        icon: 'math.svg',
-        subtemplates: [
-            'K-8th Math',
-            'Pre-Algebra',
-            'Algebra I',
-            'Algebra II',
-            'Pre-Calculus A/B/AB',
-            'Calculus AB/BC',
-            'AP Statistics',
-            'AP Calculus',
-            'Competitive Math'
-        ]
-    },
-
-    {
-        name: 'History',
-        icon: 'history.svg',
-        subtemplates: [
-            'Social Studies',
-            'World History I/II',
-            'US History',
-            'AP World History',
-            'AP US History'
-        ]
-    },
-
-    {
-        name: 'Art',
-        icon: 'art.svg',
-        subtemplates: ['Visual Arts', 'Music', 'Drama']
-    },
-
-    {
-        name: 'Language',
-        icon: 'language.svg',
-        subtemplates: ['English', 'Latin', 'Spanish', 'French', 'Mandarin', 'German']
-    },
-
-    {
-        name: 'Sports',
-        icon: 'sport.svg',
-        subtemplates: [
-            'PE',
-            'Basketball',
-            'Soccer',
-            'Ice Hockey',
-            'Volleyball',
-            'Track and Field',
-            'Football',
-            'Tennis',
-            'Dance'
-        ]
-    }
-];
-
-for (const template of templates) {
-    let button = document.createElement('div');
-    button.className =
-        'createSelectButton text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 text-2xl';
-    button.onclick = () => chooseTemplate(template);
-
-    // TODO: fix duplicate code fragments
-    let imageSpan = document.createElement('span');
-    imageSpan.style.float = 'left';
-
-    let image = document.createElement('img');
-    image.style.float = 'right';
-    image.height = 20;
-    image.width = 20;
-    image.src = 'static/images/icons/' + template.icon;
-    imageSpan.appendChild(image);
-
-    button.appendChild(imageSpan);
-
-    let templateName = document.createElement('span');
-    templateName.innerHTML = template.name;
-    button.appendChild(templateName);
-
-    let next = document.createElement('span');
-    next = document.createElement('img');
-    next.style.float = 'right';
-    next.height = 20;
-    next.width = 20;
-    next.src = 'static/images/icons/next.svg';
-    button.appendChild(next);
-
-    button.appendChild(document.createElement('br'));
-
-    let description = document.createElement('span');
-    description.classList.add('text-gray-300', 'text-xl');
-
-    for (let i = 0; i < Math.min(template.subtemplates.length, 4); i++)
-        description.innerHTML += template.subtemplates[i] + ', ';
-
-    if (template.subtemplates.length > 4) description.innerHTML += 'etc.';
-    else
-        description.innerHTML = description.innerHTML.substring(
-            0,
-            description.innerHTML.length - 2
+        const xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '/lms', true);
+        xhttp.setRequestHeader('Content-type', 'application/json');
+        xhttp.send(
+            JSON.stringify({
+                name: document.getElementById('course-name').value,
+                teacher: document.getElementById('course-teacher').value,
+                avatar: 'https://app.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg',
+                template: subtemplate
+            })
         );
+    }
 
-    button.appendChild(description);
+    function skipTemplates() {
+        screens[0].style.display = 'none';
+        customize(null, user + "'s class");
+        const h1 = document.getElementById('change-if-skip-templates');
+        h1.innerHTML = h1.innerHTML.replace('Step 3: ', '');
+    }
 
-    //smalltemplateLists[0].appendChild(button);
-    templateLists[0].appendChild(button);
-}
+    document.getElementById('skip-templates').addEventListener('click', skipTemplates);
 
-function chooseTemplate(template) {
-    screens[0].style.display = 'none';
-    screens[1].style.display = 'block';
+    const pageCounters = modal.getElementsByClassName('pageCount');
 
-    templateLists[1].innerHTML = '';
-    for (const subtemplate of template.subtemplates) {
+    for (const i in pageCounters) {
+        pageCounters[i].className += ' flex items-center p-6 space-x-2 absolute bottom-0';
+        for (let j = 0; j < 3; j++) {
+            if (j == i)
+                pageCounters[i].innerHTML +=
+                    "<div class='rounded-full w-2 h-2 bg-gray-400 dark:bg-gray-500'></div>";
+            else
+                pageCounters[i].innerHTML +=
+                    "<div class='rounded-full w-2 h-2 bg-gray-300 dark:bg-gray-400'></div>";
+        }
+
+        try {
+            pageCounters[i].setAttribute('style', 'transform: translate(300%)');
+        } catch (e) {
+        }
+    }
+
+    /*
+
+    To course a new template, add a new dictionary and put the parameters:
+
+    name (e.g. Science)
+    icon (e.g. science.svg)
+    description (e.g. Physics, Chemistry, Biology)
+
+    as demonstrated below.
+
+    */
+    const templates = [
+        {
+            name: 'Science',
+            icon: 'science.svg',
+            subtemplates: [
+                'Introduction to Science',
+                'Physics',
+                'Chemistry',
+                'Biology',
+                'Astronomy',
+                'Life Science',
+                'Earth Science',
+                'Physical Science',
+                'Physical Geography',
+                'Computer Science',
+                'Programming',
+                'Coding'
+            ]
+        },
+
+        {
+            name: 'Mathematics',
+            icon: 'math.svg',
+            subtemplates: [
+                'K-8th Math',
+                'Pre-Algebra',
+                'Algebra I',
+                'Algebra II',
+                'Pre-Calculus A/B/AB',
+                'Calculus AB/BC',
+                'AP Statistics',
+                'AP Calculus',
+                'Competitive Math'
+            ]
+        },
+
+        {
+            name: 'History',
+            icon: 'history.svg',
+            subtemplates: [
+                'Social Studies',
+                'World History I/II',
+                'US History',
+                'AP World History',
+                'AP US History'
+            ]
+        },
+
+        {
+            name: 'Art',
+            icon: 'art.svg',
+            subtemplates: ['Visual Arts', 'Music', 'Drama']
+        },
+
+        {
+            name: 'Language',
+            icon: 'language.svg',
+            subtemplates: ['English', 'Latin', 'Spanish', 'French', 'Mandarin', 'German']
+        },
+
+        {
+            name: 'Sports',
+            icon: 'sport.svg',
+            subtemplates: [
+                'PE',
+                'Basketball',
+                'Soccer',
+                'Ice Hockey',
+                'Volleyball',
+                'Track and Field',
+                'Football',
+                'Tennis',
+                'Dance'
+            ]
+        }
+    ];
+
+    for (const template of templates) {
         let button = document.createElement('div');
         button.className =
-            'createSelectButton text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 text-2xl';
-        button.onclick = function () {
-            const name = template.name;
-            customize(name, subtemplate);
-        };
+            'createSelectButton text-white bg-gray-500 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2';
+        button.onclick = () => chooseTemplate(template);
 
         let imageSpan = document.createElement('span');
         imageSpan.style.float = 'left';
@@ -331,7 +277,7 @@ function chooseTemplate(template) {
         button.appendChild(imageSpan);
 
         let templateName = document.createElement('span');
-        templateName.innerHTML = subtemplate;
+        templateName.innerHTML = template.name;
         button.appendChild(templateName);
 
         let next = document.createElement('span');
@@ -340,221 +286,277 @@ function chooseTemplate(template) {
         next.height = 20;
         next.width = 20;
         next.src = 'static/images/icons/next.svg';
-        next.alt = 'Next';
         button.appendChild(next);
 
-        templateLists[1].appendChild(button);
-    }
-}
+        button.appendChild(document.createElement('br'));
 
-function customize(template, subtemplate) {
-    screens[1].style.display = 'none';
-    screens[2].style.display = 'block';
+        let description = document.createElement('span');
+        description.classList.add('text-gray-300', 'text-sm');
 
-    courseName.placeholder = subtemplate;
-    courseTeacher.placeholder = user;
+        for (let i = 0; i < Math.min(template.subtemplates.length, 4); i++)
+            description.innerHTML += template.subtemplates[i] + ', ';
 
-    document.getElementById('create-course').onsubmit = () => lms(subtemplate);
+        if (template.subtemplates.length > 4) description.innerHTML += 'etc.';
+        else
+            description.innerHTML = description.innerHTML.substring(
+                0,
+                description.innerHTML.length - 2
+            );
 
-    document.getElementById('import-schoology').onclick = importSchoology;
-    document.getElementById('import-classroom').onclick = importGClassroom;
-    document.getElementById('import-canvas').onclick = importCanvas;
-}
+        button.appendChild(description);
 
-function importGClassroom() {
-    screens[2].style.display = 'none';
-    screens[4].style.display = 'block';
-    const status = document.getElementById('create-course-status2');
-    const input = document.getElementById('google-course-id');
-    const teacher = document.getElementById('google-course-teacher');
-
-    // todo: maybe this needs regex instead of whatever this is
-    const index = input.value.indexOf('classroom.google.com/c/');
-
-    if (index === -1) {
-        status.style.color = 'red';
-        status.innerHTML = 'Invalid Course Link!';
-        return;
+        //smalltemplateLists[0].appendChild(button);
+        templateLists[0].appendChild(button);
     }
 
-    let endIndex;
-    for (endIndex = index + 22; endIndex < input.value.length; endIndex++) {
-        if (isNaN(parseInt(input.value.charAt(endIndex)))) break;
+    function chooseTemplate(template) {
+        screens[0].style.display = 'none';
+        screens[1].style.display = 'block';
+
+        templateLists[1].innerHTML = '';
+        for (const subtemplate of template.subtemplates) {
+            let button = document.createElement('div');
+            button.className =
+                'createSelectButton text-white bg-gray-500 font-medium rounded-lg px-5 py-2.5 text-center mr-2 mb-2 text-xl';
+            button.onclick = function () {
+                const name = template.name;
+                customize(name, subtemplate);
+            };
+
+            let imageSpan = document.createElement('span');
+            imageSpan.style.float = 'left';
+
+            let image = document.createElement('img');
+            image.style.float = 'right';
+            image.height = 20;
+            image.width = 20;
+            image.src = 'static/images/icons/' + template.icon;
+            imageSpan.appendChild(image);
+
+            button.appendChild(imageSpan);
+
+            let templateName = document.createElement('span');
+            templateName.innerHTML = subtemplate;
+            button.appendChild(templateName);
+
+            let next = document.createElement('span');
+            next = document.createElement('img');
+            next.style.float = 'right';
+            next.height = 20;
+            next.width = 20;
+            next.src = 'static/images/icons/next.svg';
+            next.alt = 'Next';
+            button.appendChild(next);
+
+            templateLists[1].appendChild(button);
+        }
     }
 
-    if (endIndex - index < 1) {
-        status.style.color = 'red';
-        status.innerHTML = 'Invalid Course Link!';
-        return;
+    function customize(template, subtemplate) {
+        screens[1].style.display = 'none';
+        screens[2].style.display = 'block';
+
+        courseName.placeholder = subtemplate;
+        courseTeacher.placeholder = user;
+
+        document.getElementById('create-course').onsubmit = () => lms(subtemplate);
+
+        document.getElementById('import-schoology').onclick = importSchoology;
+        document.getElementById('import-classroom').onclick = importGClassroom;
+        document.getElementById('import-canvas').onclick = importCanvas;
     }
 
-    const id = input.value.substring(index, endIndex);
+    function importGClassroom() {
+        screens[2].style.display = 'none';
+        screens[4].style.display = 'block';
+        const status = document.getElementById('create-course-status2');
+        const input = document.getElementById('google-course-id');
+        const teacher = document.getElementById('google-course-teacher');
 
-    status.innerHTML;
-    status.innerHTML = 'Creating course...';
+        const index = input.value.indexOf('classroom.google.com/c/');
 
-    const xhttp = new XMLHttpRequest();
-    xhttp.open('POST', '/api/v1/internal/createGcourse', true);
-    xhttp.setRequestHeader('Content-type', 'application/json');
-    xhttp.addEventListener('load', googleCourseReq);
-    xhttp.send(
-        JSON.stringify({
-            link: input.value,
-            teacher: teacher.value
-        })
-    );
-}
+        if (index === -1) {
+            status.style.color = 'red';
+            status.innerHTML = 'Invalid Course Link!';
+            return;
+        }
 
-function importCanvas() {
-    screens[2].style.display = 'none';
-    screens[5].style.display = 'block';
-    const status = document.getElementById('create-course-status2');
-    const input = document.getElementById('canvas-course-id');
-    const teacher = document.getElementById('canvas-course-teacher');
+        let endIndex;
+        for (endIndex = index + 22; endIndex < input.value.length; endIndex++) {
+            if (isNaN(parseInt(input.value.charAt(endIndex)))) break;
+        }
 
-    // todo: maybe this needs regex instead of whatever this is
-    const index = input.value.indexOf('/course/');
+        if (endIndex - index < 1) {
+            status.style.color = 'red';
+            status.innerHTML = 'Invalid Course Link!';
+            return;
+        }
 
-    if (index === -1) {
-        status.style.color = 'red';
-        status.innerHTML = 'Invalid Course Link!';
-        return;
+        const id = input.value.substring(index, endIndex);
+
+        status.innerHTML;
+        status.innerHTML = 'Creating course...';
+
+        const xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '/api/v1/internal/createGcourse', true);
+        xhttp.setRequestHeader('Content-type', 'application/json');
+        xhttp.addEventListener('load', googleCourseReq);
+        xhttp.send(
+            JSON.stringify({
+                link: input.value,
+                teacher: teacher.value
+            })
+        );
     }
 
-    let endIndex;
-    for (endIndex = index + 22; endIndex < input.value.length; endIndex++) {
-        if (isNaN(parseInt(input.value.charAt(endIndex)))) break;
+    function importCanvas() {
+        screens[2].style.display = 'none';
+        screens[5].style.display = 'block';
+        const status = document.getElementById('create-course-status2');
+        const input = document.getElementById('canvas-course-id');
+        const teacher = document.getElementById('canvas-course-teacher');
+
+        const index = input.value.indexOf('/course/');
+
+        if (index === -1) {
+            status.style.color = 'red';
+            status.innerHTML = 'Invalid Course Link!';
+            return;
+        }
+
+        let endIndex;
+        for (endIndex = index + 22; endIndex < input.value.length; endIndex++) {
+            if (isNaN(parseInt(input.value.charAt(endIndex)))) break;
+        }
+
+        if (endIndex - index < 1) {
+            status.style.color = 'red';
+            status.innerHTML = 'Invalid Course Link!';
+            return;
+        }
+
+        const id = input.value.substring(index, endIndex);
+
+        status.innerHTML;
+        status.innerHTML = 'Creating course...';
+
+        const xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '/api/v1/internal/createCanvascourse', true);
+        xhttp.setRequestHeader('Content-type', 'application/json');
+        xhttp.addEventListener('load', canvasCourseReq);
+        xhttp.send(
+            JSON.stringify({
+                link: input.value,
+                teacher: teacher.value
+            })
+        );
     }
 
-    if (endIndex - index < 1) {
-        status.style.color = 'red';
-        status.innerHTML = 'Invalid Course Link!';
-        return;
+    function importSchoology() {
+        console.log('hi');
+        screens[2].style.display = 'none';
+        screens[3].style.display = 'block';
+
+        const status = document.getElementById('create-course-status2');
+        const input = document.getElementById('schoology-course-id');
+        const teacher = document.getElementById('schoology-course-teacher');
+
+        const index = input.value.indexOf('.schoology.com/course/');
+
+        if (index === -1) {
+            status.style.color = 'red';
+            status.innerHTML = 'Invalid Course Link!';
+            return;
+        }
+
+        let endIndex;
+        for (endIndex = index + 22; endIndex < input.value.length; endIndex++) {
+            if (isNaN(parseInt(input.value.charAt(endIndex)))) break;
+        }
+
+        if (endIndex - index < 1) {
+            status.style.color = 'red';
+            status.innerHTML = 'Invalid Course Link!';
+            return;
+        }
+
+        const id = input.value.substring(index, endIndex);
+
+        status.innerHTML;
+        status.innerHTML = 'Creating course...';
+
+        const xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '/api/v1/internal/createSchoologyCourse', true);
+        xhttp.setRequestHeader('Content-type', 'application/json');
+        xhttp.addEventListener('load', schoologyCourseReq);
+        xhttp.send(
+            JSON.stringify({
+                link: input.value,
+                teacher: teacher.value
+            })
+        );
     }
 
-    const id = input.value.substring(index, endIndex);
-
-    status.innerHTML;
-    status.innerHTML = 'Creating course...';
-
-    const xhttp = new XMLHttpRequest();
-    xhttp.open('POST', '/api/v1/internal/createCanvascourse', true);
-    xhttp.setRequestHeader('Content-type', 'application/json');
-    xhttp.addEventListener('load', canvasCourseReq);
-    xhttp.send(
-        JSON.stringify({
-            link: input.value,
-            teacher: teacher.value
-        })
-    );
-}
-
-function importSchoology() {
-    console.log('hi');
-    screens[2].style.display = 'none';
-    screens[3].style.display = 'block';
-
-    const status = document.getElementById('create-course-status2');
-    const input = document.getElementById('schoology-course-id');
-    const teacher = document.getElementById('schoology-course-teacher');
-
-    // todo: maybe this needs regex instead of whatever this is
-    const index = input.value.indexOf('.schoology.com/course/');
-
-    if (index === -1) {
-        status.style.color = 'red';
-        status.innerHTML = 'Invalid Course Link!';
-        return;
+    function schoologyCourseReq() {
+        const status = document.getElementById('create-course-status2');
+        if (this.responseText === '1') {
+            status.style.color = 'red';
+            status.innerHTML =
+                'You have not connected your schoology account! Please connect a schoology account to import courses from Schoology.';
+        } else {
+            status.style.color = 'green';
+            status.innerHTML = 'Course created!';
+        }
     }
 
-    let endIndex;
-    for (endIndex = index + 22; endIndex < input.value.length; endIndex++) {
-        if (isNaN(parseInt(input.value.charAt(endIndex)))) break;
+    function googleCourseReq() {
+        const status = document.getElementById('create-course-status2');
+        if (this.responseText === '1') {
+            status.style.color = 'red';
+            status.innerHTML =
+                'You have not connected your google account! Please connect a schoology account to import courses from Schoology.';
+        } else {
+            status.style.color = 'green';
+            status.innerHTML = 'Course created!';
+        }
     }
 
-    if (endIndex - index < 1) {
-        status.style.color = 'red';
-        status.innerHTML = 'Invalid Course Link!';
-        return;
+    function canvasCourseReq() {
+        const status = document.getElementById('create-course-status2');
+        if (this.responseText === '1') {
+            status.style.color = 'red';
+            status.innerHTML =
+                'You have not connected your canvas account! Please connect a schoology account to import courses from Schoology.';
+        } else {
+            status.style.color = 'green';
+            status.innerHTML = 'Course created!';
+        }
     }
 
-    const id = input.value.substring(index, endIndex);
-
-    status.innerHTML;
-    status.innerHTML = 'Creating course...';
-
-    const xhttp = new XMLHttpRequest();
-    xhttp.open('POST', '/api/v1/internal/createSchoologyCourse', true);
-    xhttp.setRequestHeader('Content-type', 'application/json');
-    xhttp.addEventListener('load', schoologyCourseReq);
-    xhttp.send(
-        JSON.stringify({
-            link: input.value,
-            teacher: teacher.value
-        })
-    );
-}
-
-function schoologyCourseReq() {
-    const status = document.getElementById('create-course-status2');
-    if (this.responseText === '1') {
-        status.style.color = 'red';
-        status.innerHTML =
-            'You have not connected your schoology account! Please connect a schoology account to import courses from Schoology.';
-    } else {
-        status.style.color = 'green';
-        status.innerHTML = 'Course created!';
+    function updateCanvasLink(link) {
+        document.getElementById('canvas-course-id').value = link;
+        document.getElementById('clist').style.display = 'none';
+        document.getElementById('canvas-create-course').style.display = 'block';
     }
-}
 
-function googleCourseReq() {
-    const status = document.getElementById('create-course-status2');
-    if (this.responseText === '1') {
-        status.style.color = 'red';
-        status.innerHTML =
-            'You have not connected your google account! Please connect a schoology account to import courses from Schoology.';
-    } else {
-        status.style.color = 'green';
-        status.innerHTML = 'Course created!';
+    function updateGoogleLink(link, teacher) {
+        document.getElementById('google-course-id').value = link;
+        document.getElementById('google-course-teacher').value = teacher;
+        document.getElementById('glist').style.display = 'none';
+        document.getElementById('google-create-course').style.display = 'block';
     }
-}
 
-function canvasCourseReq() {
-    const status = document.getElementById('create-course-status2');
-    if (this.responseText === '1') {
-        status.style.color = 'red';
-        status.innerHTML =
-            'You have not connected your canvas account! Please connect a schoology account to import courses from Schoology.';
-    } else {
-        status.style.color = 'green';
-        status.innerHTML = 'Course created!';
+    function updateSchoologyLink(link) {
+        document.getElementById('schoology-course-id').value = link;
+        document.getElementById('slist').style.display = 'none';
+        document.getElementById('schoology-create-course').style.display = 'block';
     }
-}
 
-function updateCanvasLink(link) {
-    document.getElementById('canvas-course-id').value = link;
-    document.getElementById('clist').style.display = 'none';
-    document.getElementById('canvas-create-course').style.display = 'block';
-}
-
-function updateGoogleLink(link, teacher) {
-    document.getElementById('google-course-id').value = link;
-    document.getElementById('google-course-teacher').value = teacher;
-    document.getElementById('glist').style.display = 'none';
-    document.getElementById('google-create-course').style.display = 'block';
-}
-
-function updateSchoologyLink(link) {
-    document.getElementById('schoology-course-id').value = link;
-    document.getElementById('slist').style.display = 'none';
-    document.getElementById('schoology-create-course').style.display = 'block';
-}
-
-function changeSearch() {
-    let value = document.getElementById('search_input').value;
-    console.log(value);
-    if (value.length > 0) {
-        document.getElementById('search_items').innerHTML = `
+    function changeSearch() {
+        let value = document.getElementById('search_input').value;
+        console.log(value);
+        if (value.length > 0) {
+            document.getElementById('search_items').innerHTML = `
 <li>
 <div class="py-2.5 rounded-lg mx-auto block px-4 py-2 mx-2 dark:hover:text-white">
                 <svg class="inline w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -565,20 +567,20 @@ function changeSearch() {
 </div>
 </li>
             `;
-        const request = $.ajax({
-            type: 'POST',
-            url: '/api/v1/internal/search-within_user',
-            data: JSON.stringify({
-                search: value
-            }),
+            const request = $.ajax({
+                type: 'POST',
+                url: '/api/v1/internal/search-within_user',
+                data: JSON.stringify({
+                    search: value
+                }),
 
-            contentType: 'application/json; charset=utf-8'
-        });
-        request.done((data) => {
-            document.getElementById('search_items').innerHTML = '';
-            let temp_arr = [];
-            if (data === '0') {
-                document.getElementById('search_items').innerHTML += `
+                contentType: 'application/json; charset=utf-8'
+            });
+            request.done((data) => {
+                document.getElementById('search_items').innerHTML = '';
+                let temp_arr = [];
+                if (data === '0') {
+                    document.getElementById('search_items').innerHTML += `
                     <li>
                             <div class="py-2.5 rounded-lg mx-auto block px-4 py-2 mx-2 dark:hover:text-white">
                         <svg class="inline w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -588,47 +590,50 @@ function changeSearch() {
                         No Results Found
                             </div>
                         </li>`;
-            } else {
-                let datas = data.split('•');
-                for (let i = 0; i < datas.length; i++) {
-                    temp_arr.push(datas[i]);
-                    if (i % 4 === 3) {
-                        let pic = `<img src="${temp_arr[3]}" class="inline-block w-10 h-10 rounded-full">`;
-                        switch (temp_arr[0]) {
-                            case 'document':
-                                pic = `<i class="material-icons">description</i>`;
-                                break;
-                            case 'NebDoc':
-                                pic = `<i class="material-icons">draft</i>`;
-                                break;
-                            case 'event':
-                                pic = `<i class="material-icons">event</i>`;
-                                break;
-                            case 'assignment':
-                                pic = `<i class="material-icons">assignment</i>`;
-                                break;
-                            case 'chat':
-                                pic = `<i class="material-icons">forum</i>`;
-                                break;
-                            case 'announcement':
-                                pic = `<i class="material-icons">campaign</i>`;
-                                break;
-                        }
+                } else {
+                    let datas = data.split('•');
+                    for (let i = 0; i < datas.length; i++) {
+                        temp_arr.push(datas[i]);
+                        if (i % 4 === 3) {
+                            let pic = `<img src="${temp_arr[3]}" class="inline-block w-10 h-10 rounded-full">`;
+                            switch (temp_arr[0]) {
+                                case 'document':
+                                    pic = `<i class="material-icons">description</i>`;
+                                    break;
+                                case 'NebDoc':
+                                    pic = `<i class="material-icons">draft</i>`;
+                                    break;
+                                case 'event':
+                                    pic = `<i class="material-icons">event</i>`;
+                                    break;
+                                case 'assignment':
+                                    pic = `<i class="material-icons">assignment</i>`;
+                                    break;
+                                case 'chat':
+                                    pic = `<i class="material-icons">forum</i>`;
+                                    break;
+                                case 'announcement':
+                                    pic = `<i class="material-icons">campaign</i>`;
+                                    break;
+                            }
 
-                        document.getElementById('search_items').innerHTML += `
+                            document.getElementById('search_items').innerHTML += `
                     <li>
                         <span class="truncate py-2.5 rounded-lg mx-auto block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 mx-2 dark:hover:text-white" style="text-align:left;">
                 ${pic}
                 ${temp_arr[1]} <span class="text-gray-500 ml-2">${temp_arr[2]}</span></span>
                     </li>
+                    
 `;
+                            temp_arr = [];
+                        }
                     }
                 }
-            }
-        });
+            });
 
-        document.getElementById('search_items').innerHTML = '';
+            document.getElementById('search_items').innerHTML = '';
+        }
     }
-}
 
-keyUpDelay('#search', 1000, changeSearch);
+    keyUpDelay('#search', 1000, changeSearch);
+});

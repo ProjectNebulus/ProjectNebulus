@@ -21,7 +21,7 @@ function createAnnouncement() {
             const iframeDoc = document.getElementsByTagName('iframe')[0].contentDocument;
             let announcement = iframeDoc.getElementsByClassName(
                 'block p-6 ml-4 my-4 bg-white rounded-lg ' +
-                'border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700'
+                    'border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700'
             )[0];
             announcement.getElementsByTagName('h3')[0].innerHTML = name === '' ? teacher : name;
         },

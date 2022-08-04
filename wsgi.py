@@ -1,10 +1,13 @@
-from main import app, socketio
 import platform
+
+from main import app, socketio
 
 debug = False
 if __name__ == "__main__":
     if __name__ == "__main__":
-        if platform.system().lower() == "linux":  # linux - used for VPS (like DigitalOcean)
+        if (
+            platform.system().lower() == "linux"
+        ):  # linux - used for VPS (like DigitalOcean)
             debug = False
             port = 80
             host = "0.0.0.0"

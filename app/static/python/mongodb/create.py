@@ -1,5 +1,3 @@
-from typing import List
-
 from dotenv import load_dotenv
 from flask import session
 
@@ -50,7 +48,7 @@ def create_course(data: dict) -> Course:
     return course
 
 
-def create_user(data: dict) -> str | List[str | User]:
+def create_user(data: dict) -> str | list[str | User]:
     """
     Status Codes:
     0: Success

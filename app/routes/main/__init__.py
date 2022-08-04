@@ -10,20 +10,20 @@ main_blueprint = Blueprint(
 # Importing routes for this blueprint
 
 from .about import *
+from .app import *
 from .calendar import *
 from .canvas import *
 from .chat import *
 from .connections import *
 from .course import *
-from .overview import *
 from .discord import *
 from .files import *
 from .gclassroom import *
 from .index import *
-from .app import *
 from .logout import *
 from .music import *
 from .notepad import *
+from .overview import *
 from .planner import *
 from .points import *
 from .pricing import *
