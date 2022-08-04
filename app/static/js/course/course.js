@@ -52,7 +52,7 @@ window.onload = () => {
         modal.hide();
 
         for (const element of document.querySelectorAll('[modal-backdrop]'))
-            element.parentElement.removeChild(element);
+            element.remove();
 
         return true;
     }

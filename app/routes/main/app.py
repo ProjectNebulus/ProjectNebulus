@@ -1,4 +1,5 @@
 from datetime import datetime
+from markupsafe import Markup
 
 import google.oauth2.credentials
 from flask import render_template, session
@@ -157,7 +158,18 @@ def app():
         Event=Event,
         pastschoologycourses=scCourses,
         translate=getText,
+        fmt=fmt
     )
+
+
+def fmt(content: str) -> str:
+    output = ""
+    for line in content.strip().split("\n"):
+        if line == "":
+            output += "<br>"
+        else:
+            output += "<p>" + line + "</p>"
+    return Markup(output)
 
 
 @main_blueprint.route("/courses", methods=["GET"])

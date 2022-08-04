@@ -1,41 +1,60 @@
-function expand(message) {
+const Default = {
+    placement: 'bottom',
+    triggerType: 'click',
+    onShow: () => {
+    },
+    onHide: () => {
+    }
+};
+
+for (const button of document.getElementsByClassName("expand-announcement")) {
+    const parent = button.parentElement;
+    button.addEventListener("click", () => openAnnouncementsModal(
+        parent.querySelector('div[id]').innerHTML,
+        parent.querySelector("h4").innerHTML,
+        parent.querySelector("span[data-dropdown-toggle]").innerHTML,
+        parent.querySelector("img").src,
+        parent.querySelector("span.uppercase").innerHTML
+    ));
 }
 
 function openAnnouncementsModal(content, title, author, pic, course) {
     const targetEl = document.getElementById('announcementModal');
-    document.getElementById('announcementBody').innerText = content;
-    if (title.length === 0) {
-        title = 'Announcement from ' + author;
-    }
-    document.getElementById('announcement__Name').innerText = `
-    <img data-dropdown-toggle="userDropdown-0_0" id="avatar0_0" data-dropdown-placement="bottom-start" class="mr-6 inline-block rounded-full ring-2 ring-gray-300 dark:ring-gray-500
-                                                     cursor-pointer mb-3 rounded-full shadow-lg
-                                                      dark:bg-gray-900 dark:hover:bg-gray-800 
-                                                      w-8 h-8 mt-4 " src="${pic}" alt="${author}'s profile picture">`;
-    document.getElementById('announcement__Name').innerText = title;
-    document.getElementById('announcement__Name').innerHTML += `
+
+    if (title.length === 0) title = 'Announcement from ' + author;
+
+    document.getElementById('announcement_name').innerHTML = `
+<h3>${title}</h3>
+<div class="flex mt-2">
+    <img data-dropdown-toggle="userDropdown-0_0" id="avatar0_0" data-dropdown-placement="bottom-start" class="mr-2 inline-block rounded-full ring-2 ring-gray-300 dark:ring-gray-500 cursor-pointer mt-2 rounded-full
+      shadow-lg dark:bg-gray-900 dark:hover:bg-gray-800 w-8 h-8" src="${pic}" alt="${author}'s profile picture">
     
-                                                      <div class="flex flex-col text-xs text-gray-700 dark:text-gray-400 pl-2">
-                                                    
-                                                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white truncate mb-1 cursor-pointer hover:underline" data-dropdown-toggle="userDropdown-0_0">
-                                                            ${author}
+    <div class="flex flex-col text-xs text-gray-700 dark:text-gray-400">
+        <h4 class="text-lg font-semibold text-gray-900 dark:text-white truncate cursor-pointer hover:underline" data-dropdown-toggle="userDropdown-0_0">
+            ${author}
+        </h4>
+        <span data-dropdown-toggle="courseDropdown-0_0" class="bg-gray-300 text-gray-800 text-xs font-normal uppercase
+         mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">${course}</span>
+    </div>
+</div>`;
 
-    <span data-dropdown-toggle="courseDropdown-0_0" class="bg-gray-300 text-gray-800 text-xs font-normal uppercase
-                                                         mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300 -mt-1">
-                                                            ${course}
-                                                        </span>
-                                                        </h4>
-                                                    
-                                                    <div>
-                                                        
-                                                        
-                                                    </div>
-                                                </div>
+    document.getElementById('announcementBody').innerHTML = content;
 
-`;
+    document.querySelectorAll('[data-dropdown-toggle]').forEach((triggerEl) => {
+        const targetEl = document.getElementById(triggerEl.getAttribute('data-dropdown-toggle'));
+        const placement = triggerEl.getAttribute('data-dropdown-placement');
+
+        new Dropdown(targetEl, triggerEl, {
+            placement: placement ? placement : Default.placement
+        });
+    });
 
     const modal = new Modal(targetEl);
     modal.toggle();
+}
+
+function removeBackdrop() {
+    document.querySelector("[modal-backdrop]").remove();
 }
 
 function replaceURLs(message) {
@@ -50,7 +69,7 @@ function replaceURLs(message) {
         return message;
     }
 
-    const urlRegex = /(((https?:\/\/)|(www\.))[^\s]+)/g;
+    const urlRegex = /(((https?:\/\/)|(www\.))\S+)/g;
 
     return message.replace(urlRegex, function (url) {
         let hyperlink = url;

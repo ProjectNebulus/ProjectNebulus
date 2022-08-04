@@ -1,7 +1,12 @@
 <!--Extend with Jinja!-->
 {% extends "layout.html" %}
 {% block main %}
-    <body class="overflow-hidden">
+    <style>
+        .announcement:hover .expand-announcement {
+            visibility: visible;
+        }
+    </style>
+
     {% include "utils/navbar.html" %}
     <div class="flex flex-row">
         {% include "utils/sidebar.html" %}
@@ -44,9 +49,13 @@
                                          style="grid-template-columns: repeat(auto-fit, 23rem)">
                                         {% for j in range(list|length) %}
                                             {% set a = list[j] %}
-                                            <div class="min-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg shadow mb-4 dark:bg-gray-800 dark:text-gray-300 overflow-hidden"
-                                                 role="alert"
-                                                 style="height: min-content">
+                                            <div class="announcement min-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg shadow mb-4 dark:bg-gray-800 dark:text-gray-300 relative"
+                                                 role="alert" style="height: min-content">
+
+                                                <button class="absolute top-0 right-0 text-xl mt-2 mr-3 material-icons expand-announcement invisible">
+                                                    open_in_new
+                                                </button>
+
                                                 {% if a.title != "" %}
                                                     <h4 class="text-lg font-semibold text-gray-900 dark:text-white truncate">{{ a.title }}</h4>
                                                 {% endif %}
@@ -55,7 +64,7 @@
                                                          id="avatar{{ i }}_{{ j }}"
                                                          data-dropdown-placement="bottom-start"
                                                          class="rounded-full ring-2 ring-gray-300 dark:ring-gray-500 cursor-pointer mb-3 rounded-full shadow-lg {% if "black" in avatar %} bg-gray-300 {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}
-                                                                 {% if a.title == "
+                                                                 {% if a.title == "" %}
                                                              w-8
                                                              h-8
                                                              mt-4
@@ -63,7 +72,8 @@
                                                              w-6
                                                              h-6
                                                              {% endif %}
-                                                             src="{{ a.author_pic }}"
+                                                             "
+                                                         src="{{ a.author_pic }}"
                                                          alt="{{ a.author }}'s profile picture">
                                                     <br>
                                                     <div class="flex flex-col text-xs text-gray-700 dark:text-gray-400 pl-2">
@@ -89,15 +99,7 @@
                                                     <div class="text-sm text-gray-900 dark:text-white font-normal">
                                                         <div id="description_{{ i }}"
                                                              class="text-sm text-gray-900 dark:text-white font-normal line-clamp-5">
-                                                            <p>
-                                                                {% for line in a.content.strip().split("\n") %}
-                                                                    {% if line != "" %}
-                                                                        <p>{{ line }}</p>
-                                                                    {% else %}
-                                                                        <br>
-                                                                    {% endif %}
-                                                                {% endfor %}
-                                                            </p>
+                                                            {{ fmt(a.content) }}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -175,9 +177,8 @@
                                     </time>
                                     <br>
                                     <div class="grid grid-cols-4 gap-2 pt-2">
-                                        <div id="toast-notification"
-                                             class="w-full max-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 overflow-hidden"
-                                             role="alert">
+                                        <div role="alert" class="w-full max-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg
+                                         shadow dark:bg-gray-800 dark:text-gray-300 overflow-hidden relative">
                                             <h4 class="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2 truncate">
                                                 Welcome to Nebulus</h4>
                                             <div class="flex items-center mb-3">
@@ -234,7 +235,7 @@
                                                    -webkit-text-fill-color: transparent;
                                                    margin: 13px;">
                                         {{ strftime(date, "%a, %B %-d, %Y") }}
-                                        ({{ -diff.days }}d ago)
+                                        ({{ -diff.days }}d Overdue)
                                     </h1>
                                 {% elif diff.days < 1 %}
                                     <h1 style="text-align: left;
@@ -598,148 +599,82 @@
                 </div>
             </div>
         </div>
-        <div class="block lg:hidden flex flex-row">
-            <br>
-            <div class="p-4 hidden sm:block">
-                <ul class="flex flex-col -mb-px text-xs font-medium"
-                    id="myTab"
-                    data-tabs-toggle="#myTabContent"
-                    role="tablist">
-                    <li class="mr-2" role="presentation">
-                        <button class="inline-block p-2 border-r-2 w-32 text-left"
-                                id="announcement-tab"
-                                data-tabs-target="#announcements"
-                                type="button"
-                                role="tab"
-                                aria-controls="announcements"
-                                aria-selected="false">
-                            Announcements
-                        </button>
-                    </li>
-                    <li class="mr-2" role="presentation">
-                        <button class="inline-block p-2 border-r-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 w-32 text-left"
-                                id="logs-tab"
-                                data-tabs-target="#logs"
-                                type="button"
-                                role="tab"
-                                aria-controls="logs"
-                                aria-selected="false">
-                            Logs
-                        </button>
-                    </li>
-                    <li class="mr-2" role="presentation">
-                        <button class="inline-block p-2 border-r-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 w-32 text-left"
-                                id="settings-tab"
-                                data-tabs-target="#settings"
-                                type="button"
-                                role="tab"
-                                aria-controls="settings"
-                                aria-selected="false">
-                            Events
-                        </button>
-                    </li>
-                    <li role="presentation">
-                        <button class="inline-block p-2 border-r-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 w-32 text-left"
-                                id="contacts-tab"
-                                data-tabs-target="#contacts"
-                                type="button"
-                                role="tab"
-                                aria-controls="contacts"
-                                aria-selected="false">
-                            Courses
-                        </button>
-                    </li>
-                </ul>
-            </div>
-            <div id="myTabContent">
-                <div class="p-6"
-                     id="announcements"
-                     role="tabpanel"
-                     aria-labelledby="profile-tab">
-                    <h1 class="text-xl text-black dark:text-white mt-2 text-center pb-4">
-                        Recent Activity
-                    </h1>
-                    <ol class="relative border-l border-gray-200 dark:border-gray-700 p-6">
-                        {% for date, list in announcements.items() %}
-                            <li class="mb-10 ml-4">
-                                <div class="absolute w-3 h-3 bg-gray-200 rounded-full -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700">
-                                </div>
-                                <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-                                    {{ strftime(date, "%a, %B %-d, %Y") }}
-                                </time>
-                                <br>
-                                <div class="grid gap-2"
-                                     style="grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr))">
-                                    {% for a in list %}
-                                        <div id="{{ a.id }}"
-                                             role="alert"
-                                             class="peer w-full max-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 mb-4 mt-4">
-                                            <div class="flex">
-                                                <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-blue-500 bg-transparent text-slate-800 rounded-lg dark:bg-transparent dark:text-slate-400">
-                                                    <span class="material-icons">info</span>
-                                                </div>
-                                                <div class="ml-3 text-sm font-normal">
-                                                    <span class="mb-1 text-sm font-semibold text-gray-900 dark:text-white">{{ a.title }}</span>
-                                                    <p class="text-xs text-gray-700 dark:text-gray-4000">
-                                                        <span class="uppercase font-bold text-white">{{ a.author }}</span>
-                                                        in
-                                                        <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">{{ a.course.name }}</span>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                            </li>
-                        {% endfor %}
-                    </ol>
-                </div>
-                <div class="p-6 text-center"
-                     id="logs"
-                     role="tabpanel"
-                     aria-labelledby="logs-tab">
-                    <p class="text-2xl text-black dark:text-white">
-                        Logs
-                    </p>
-                    <br>
-                    <div class="flex p-4 mb-4 text-sm text-blue-700 bg-blue-100 rounded-lg dark:bg-blue-200 dark:text-blue-800"
-                         role="alert">
-                        <svg class="inline flex-shrink-0 mr-3 w-5 h-5"
-                             fill="currentColor"
-                             viewBox="0 0 20 20"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                                  clip-rule="evenodd">
-                            </path>
-                        </svg>
-                        <div>
-                            <span class="font-medium">Logs are coming soon.</span> In the meantime, try creating a
-                            course
+        <div id="announcementModal" tabindex="-1" aria-hidden="true"
+             class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+            <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <!-- Modal header -->
+                    <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
+                        <div id="announcement_name" class="text-xl font-semibold text-gray-900 dark:text-white">
+                            Name
                         </div>
+                        <button class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                data-modal-toggle="announcementModal" onclick="removeBackdrop()">
+                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="sr-only">Close modal</span>
+                        </button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="p-6 space-y-6">
+                        <div id="announcementBody" class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                            stuff
+                        </div>
+                        <button data-modal-toggle="announcementModal" onclick="removeBackdrop()"
+                                class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                            <svg class="w-6 h-6 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Okay
+                        </button>
                     </div>
                 </div>
-                <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800"
-                     id="settings"
-                     role="tabpanel"
-                     aria-labelledby="settings-tab">
-                    <p class="text-sm text-gray-500 dark:text-gray-400">
-                        This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Settings
-                        tab's associated content</strong>.
-                        Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript
-                        swaps classes to control the content visibility and styling.
-                    </p>
-                </div>
-                <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800"
-                     id="contacts"
-                     role="tabpanel"
-                     aria-labelledby="contacts-tab">
-                    <p class="text-sm text-gray-500 dark:text-gray-400">
-                        This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Contacts
-                        tab's associated content</strong>.
-                        Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript
-                        swaps classes to control the content visibility and styling.
-                    </p>
+            </div>
+        </div>
+        <div id="eventModal" tabindex="-1" aria-hidden="true"
+             class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+            <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <!-- Modal header -->
+                    <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
+                        <h3 id="event_name" class="text-xl font-semibold text-gray-900 dark:text-white">
+                            Name
+                        </h3>
+                        <button type="button"
+                                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                data-modal-toggle="announcementModal">
+                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="sr-only">Close modal</span>
+                        </button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="p-6 space-y-6">
+                        <p id="announcementBody" class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                            stuff
+                        </p>
+                        <button data-modal-toggle="announcementModal" type="button"
+                                class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                            <svg class="w-6 h-6 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Okay
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -747,4 +682,3 @@
         {% include "learning/lms-modal.html" %}
     </div>
 {% endblock %}
-</body>

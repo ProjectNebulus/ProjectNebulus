@@ -227,7 +227,7 @@ function removePeriod(element) {
     num--;
     element.classList.add('fade-out');
     setTimeout(() => {
-        element.parentElement.removeChild(element);
+        element.remove();
 
         let inputs = document.querySelectorAll('#configureModal #timePeriods .timePeriod');
         const timePeriods = [];
@@ -314,8 +314,8 @@ function save(e) {
     const notes = document.getElementsByClassName('note');
     saveData[page] = {};
     for (let i = 0; i < notes.length; i++) {
-        if (notes[i].innerHTML !== '')
-            saveData[page][i] = notes[i].innerHTML.replaceAll('=', ':::::');
+        if (notes[i].innerText !== '')
+            saveData[page][i] = notes[i].innerText.replaceAll('=', ':::::');
     }
 }
 
@@ -323,8 +323,8 @@ function load(page) {
     const notes = document.getElementsByClassName('note');
     for (let i = 0; i < notes.length; i++) {
         if (saveData[page] && saveData[page][i])
-            notes[i].innerHTML = saveData[page][i].replaceAll(':::::', '=');
-        else notes[i].innerHTML = '';
+            notes[i].innerText = saveData[page][i].replaceAll(':::::', '=');
+        else notes[i].innerText = '';
     }
 }
 
