@@ -12,7 +12,7 @@ for (const button of document.getElementsByClassName("expand-announcement")) {
     button.addEventListener("click", () => openAnnouncementsModal(
         parent.querySelector('div[id]').innerHTML,
         parent.querySelector("h4").innerHTML,
-        parent.querySelector("span[data-dropdown-toggle]").innerHTML,
+        parent.querySelector("[data-dropdown-toggle]").innerHTML,
         parent.querySelector("img").src,
         parent.querySelector("span.uppercase").innerHTML
     ));

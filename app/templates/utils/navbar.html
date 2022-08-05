@@ -13,10 +13,6 @@
     li:hover {
         color: #AABFF5 !important;
     }
-
-    .material-icons:hover {
-        color: #AABFF5 !important;
-    }
 </style>
 {% if not disablebar %}
     <nav class="noselect w-full sticky backdrop-blur-sm top-0 z-10 border-gray-200 px-2 py-2 rounded-lg bg-gray-300/30 dark:bg-gray-800/30 h-auto"
@@ -38,8 +34,8 @@
                     <a href="/"
                        class="flex items-center"
                        aria-label="Home Page"
-                       onmouseover="this.children[0].src = '/static/images/nebulusCats/v3.gif';"
-                       onmouseout="this.children[0].src = '/static/images/nebulusCats/newBlurple.png';">
+                       onmouseover="this.children[0].src = v3Image;"
+                       onmouseout="this.children[0].src = list[3]">
                         <img src="/static/images/nebulusCats/newBlurple.png"
                              class="img_ mr-3 h-9 lg:h-12"
                              alt="Nebulus Logo">

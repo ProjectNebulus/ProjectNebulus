@@ -308,6 +308,7 @@ function navFetchStatus() {
 }
 
 const list = ['Red', 'Blue', 'Green', 'Blurple', 'Pink', 'Jade', 'Yellow'];
+let v3Image;
 
 let index = 0;
 
@@ -316,6 +317,10 @@ for (let i = 0; i < list.length; i++) {
         .then((response) => response.blob())
         .then((imageBlob) => (list[i] = URL.createObjectURL(imageBlob)));
 }
+
+fetch(`/static/images/nebulusCats/v3.gif`)
+    .then((response) => response.blob())
+    .then((imageBlob) => v3Image = URL.createObjectURL(imageBlob));
 
 function changeFavicon() {
     let link = document.querySelector("link[rel~='icon']");
