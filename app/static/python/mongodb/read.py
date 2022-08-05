@@ -50,7 +50,7 @@ def getText(query):
             "co": "Colombia",
             "ar": "Argentina",
             "it": "Italia",
-            "cn": "中国",
+            "cn": "中国大陆",
             "tw": "台灣",
             "hk": "香港",
             "mo": "澳門",
