@@ -327,24 +327,28 @@
         </style>
         <script>
             function changeHeight() {
-                if (localStorage.getItem("color-theme") === "dark") {
+                let w = document.getElementById("editor").offsetWidth / 8.5 * 11;
+                document.getElementById("editor").style.minHeight = w + "px";
+            }
+
+            function changeInvert() {
+                if (document.getElementById("editor").style.background === "white") {
                     document.getElementById("editor").style.background = "#EEE7D8";
                     document.getElementById("editor").style.filter = "invert(1)";
                 } else {
                     document.getElementById("editor").style.background = "white";
                     document.getElementById("editor").style.filter = "invert(0)";
                 }
-                let w = document.getElementById("editor").offsetWidth / 8.5 * 11;
-            document.getElementById("editor").style.minHeight = w + "px";
-        }
 
-        function changeFont(num) {
-            document.execCommand('fontSize', false, num);
-            document.getElementById("dropdownFonts1").innerText = num;
-            document.execCommand('fontSize', false, num);
-            //document.getElementById("dropdownFonts1").onclick = `changeFont(${num})`;
-            document.getElementById("dropdownFonts1").onclick = () => changeFont(num);
-        }
+            }
+
+            function changeFont(num) {
+                document.execCommand('fontSize', false, num);
+                document.getElementById("dropdownFonts1").innerText = num;
+                document.execCommand('fontSize', false, num);
+                //document.getElementById("dropdownFonts1").onclick = `changeFont(${num})`;
+                document.getElementById("dropdownFonts1").onclick = () => changeFont(num);
+            }
 
         function changeFontName(name) {
             document.getElementById("dropdownFont1").innerText = name;
@@ -513,7 +517,7 @@
         </script>
         <div style="margin-left:64px;;width:90%;margin:auto;">
             <form style="height: calc(100% - 80px);">
-                <div class="mb-4 w-full bg-gray-100 rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600">
+                <div class="mb-4 w-full bg-gray-100 rounded-lg border border-gray-200 dark:bg-gray-800/50 dark:border-gray-600">
                     <div id="part1" class="py-2 px-3 ">
                         <div class="flex w-1/3">
                             <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
@@ -521,7 +525,7 @@
                             </span>
                             <input type="text"
                                    id="name"
-                                   class="rounded-none rounded-r-lg bg-gray-50 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5 dark:bg-gray-800 dark:text-white"
+                                   class="rounded-none rounded-r-lg bg-gray-50 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5 dark:bg-gray-800/75 dark:text-white"
                                    placeholder="Untitled Document"
                                    style="border-style:none;">
                         </div>
@@ -529,9 +533,10 @@
                             <button type="button"
                                     style="margin:5px;"
                                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                <i class="material-icons"
+                                   style="vertical-align: middle; display:inline-block; margin-right:5px;">lock</i>
                                 Access
                             </button>
-                            Nebulus Documents
                         </p>
                     </div>
                     <hr style="margin-top:20px; border: 1px solid gray;">
@@ -563,7 +568,7 @@
                                 <button id="dropdownHeader2"
                                         onclick="changeHeader('p')"
                                         data-dropdown-toggle="dropdownHeader"
-                                        class="text-black dark:text-black dark:text-white font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
+                                        class="text-black dark:text-white dark:text-white font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
                                         type="button">
                                     Normal Text
                                     <svg class="w-4 h-4 ml-2"
@@ -607,7 +612,7 @@
                                 <button id="dropdownFonts1"
                                         onclick="changeFont(3);"
                                         data-dropdown-toggle="dropdownFonts"
-                                        class="text-black dark:text-black dark:text-white font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
+                                        class="text-black dark:text-white dark:text-white font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
                                         type="button">
                                     3
                                     <svg class="w-4 h-4 ml-2"
@@ -654,7 +659,7 @@
                                 <button onclick="changeFontName('Arial');"
                                         id="dropdownFont1"
                                         data-dropdown-toggle="dropdownFont"
-                                        class="text-black dark:text-black dark:text-white font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
+                                        class="text-black dark:text-white dark:text-white font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
                                         type="button">
                                     Arial
                                     <svg class="w-4 h-4 ml-2"
@@ -775,7 +780,7 @@
                                 </button>
                                 <!-- Dropdown menu -->
                                 <div id="expand"
-                                     class="z-10 hidden bg-gray-300 divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700"
+                                     class="z-10 hidden bg-gray-400 rounded shadow w-44 dark:bg-gray-800"
                                      style="padding:20px;
                                             position: absolute;
                                             inset: 0 auto auto 0;
@@ -792,6 +797,10 @@
                                     <button type="button"
                                             class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
                                         <span class='buttonSelect'><i class="material-icons">image</i></span>
+                                    </button>
+                                    <button type="button" onclick="changeInvert();"
+                                            class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                        <span class='buttonSelect'><i class="material-icons">nightlight</i></span>
                                     </button>
                                 </div>
                             </div>
