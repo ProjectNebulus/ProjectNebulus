@@ -324,6 +324,87 @@
                 padding: 5px;
             }
 
+
+            ul {
+
+                -webkit-transform: rotate(270deg);
+                -moz-transform: rotate(270deg);
+                -o-transform: rotate(270deg);
+                -ms-transform: rotate(270deg);
+                transform: rotate(270deg);
+                display: inline-block;
+                width: 1400px;
+                margin: 48px auto;
+                border-bottom: 1px solid #DAE0E7;
+                background: #F9F9F9;
+                list-style-type: none;
+                padding: 12px 12px 0;
+            }
+
+            a {
+                text-decoration: none;
+                color: #333;
+            }
+
+            .tab {
+                float: left;
+                height: 44px;
+                margin: 0 8px -1px 0;
+                border: 1px solid #DAE0E7;
+                background: #F9F9F9;
+                border-radius: 8px 8px 0 0;
+                overflow: hidden;
+            }
+
+            .tab, .tab a {
+                transition: all .25s;
+            }
+
+            .tab a {
+                display: inline-block;
+            }
+
+            .tab a:first-child {
+                padding: 12px 2px 12px 16px;
+                white-space: nowrap;
+            }
+
+            .tab.tabClosed, .tab.tabClosed a:first-child {
+                margin-right: 0;
+                border-width: 0;
+            }
+
+            .tab.tabClosed {
+                width: 0 !important; /* use important because we need to set the width of tabs in javascript in order to be able to animate them to 0 */
+            }
+
+            .tab.tabClosed a {
+                opacity: 0;
+            }
+
+            .tab:hover {
+                background: #fff;
+            }
+
+            .tabSelected {
+                height: 45px;
+                border-bottom: none;
+                background: #fff;
+            }
+
+            .closeTab {
+                width: 16px;
+                height: 16px;
+                margin: 0 14px 0 12px;
+                padding: 3px;
+                border-radius: 16px;
+                line-height: 16px;
+                text-align: center;
+            }
+
+            .closeTab:hover {
+                background: #DAE0E7;
+            }
         </style>
         <script>
             function changeHeight() {
@@ -831,7 +912,18 @@
                          style="overflow-y:scroll;
                                 height:100%;">
                         <label for="editor" class="sr-only">Publish post</label>
+                        <ul>
+                            <li style="background:#dc2626;" class="tab tabSelected"><a href="#">English</a><a
+                                    class="closeTab" href="">✕</a></li>
+                            <li class="tab selected"><a href="#">Math</a><a class="closeTab" href="">✕</a></li>
+                            <li class="tab selected"><a href="#">History</a><a class="closeTab" href="">✕</a></li>
+                            <li class="tab selected"><a href="#">Science</a><a class="closeTab" href="">✕</a></li>
+                            <li class="tab selected"><a href="#">Art</a><a class="closeTab" href="">✕</a></li>
+                            <li class="tab selected"><a href="#">Music</a><a class="closeTab" href="">✕</a></li>
+                            <li class="tab selected"><a href="#">Geography</a><a class="closeTab" href="">✕</a></li>
+                        </ul>
                         <div contenteditable="true"
+
                              tabindex="0"
                              id="editor"
                              class=" block px-0 w-full text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
