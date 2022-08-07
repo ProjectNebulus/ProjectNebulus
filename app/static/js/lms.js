@@ -1,5 +1,5 @@
 const Default = {
-    placement: 'bottom',
+    placement: 'bottom-right',
     triggerType: 'click',
     onShow: () => {
     },
@@ -9,28 +9,28 @@ const Default = {
 
 for (const button of document.getElementsByClassName("expand-announcement")) {
     const parent = button.parentElement;
-    button.addEventListener("click", () => openAnnouncementsModal(
+    button.addEventListener("click", () => expandAnnouncement(
         parent.querySelector('div[id]').innerHTML,
         parent.querySelector("h4").innerHTML,
-        parent.querySelector("span[data-dropdown-toggle]").innerHTML,
+        parent.querySelector(".text-lg[data-dropdown-toggle]").innerHTML,
         parent.querySelector("img").src,
         parent.querySelector("span.uppercase").innerHTML
     ));
 }
 
-function openAnnouncementsModal(content, title, author, pic, course) {
-    const targetEl = document.getElementById('announcementModal');
+function expandAnnouncement(content, title, author, pic, course) {
+    const targetEl = document.getElementById('modal');
 
     if (title.length === 0) title = 'Announcement from ' + author;
 
-    document.getElementById('announcement_name').innerHTML = `
-<h3>${title}</h3>
+    document.getElementById('header').innerHTML = `
+<h3 class="text-xl font-semibold text-gray-900 dark:text-white truncate h-full">${title}</h3>
 <div class="flex mt-2">
     <img data-dropdown-toggle="userDropdown-0_0" id="avatar0_0" data-dropdown-placement="bottom-start" class="mr-2 inline-block rounded-full ring-2 ring-gray-300 dark:ring-gray-500 cursor-pointer mt-2 rounded-full
       shadow-lg dark:bg-gray-900 dark:hover:bg-gray-800 w-8 h-8" src="${pic}" alt="${author}'s profile picture">
     
-    <div class="flex flex-col text-xs text-gray-700 dark:text-gray-400">
-        <h4 class="text-lg font-semibold text-gray-900 dark:text-white truncate cursor-pointer hover:underline" data-dropdown-toggle="userDropdown-0_0">
+    <div class="flex flex-col text-xs">
+        <h4 class="text-lg text-gray-900 dark:text-white truncate cursor-pointer hover:underline" data-dropdown-toggle="userDropdown-0_0">
             ${author}
         </h4>
         <span data-dropdown-toggle="courseDropdown-0_0" class="bg-gray-300 text-gray-800 text-xs font-normal uppercase

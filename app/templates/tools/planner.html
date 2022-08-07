@@ -4,6 +4,19 @@
     <div class="flex flex-row">
         {% include "utils/sidebar.html" %}
         <style>
+            table {
+                table-layout: fixed;
+            }
+
+            td {
+                border: 1px solid #000;
+                width: 30px;
+            }
+
+            td + td {
+                width: auto;
+            }
+
             .note li {
                 border-bottom: 1px solid gray;
                 width: 100%;

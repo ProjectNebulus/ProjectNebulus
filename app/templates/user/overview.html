@@ -14,13 +14,9 @@
         {% include "utils/sidebar.html" %}
         <br>
         <div style="margin-left:64px;">
-            <div style="margin-left:20px;height:10%;">
-                <h1 class="noselect text-black text-4xl dark:text-white">
-                    Good Afternoon, {{ user }}<span style="float:right;margin-right:20px;" class="text-4xl" id="time">5:02</span>
-                </h1>
-            </div>
-            <br>
-            <br>
+            <h1 class="noselect text-black text-4xl dark:text-white text-center mb-4">
+                Good Afternoon, {{ user }}
+            </h1>
             <h2 class="noselect text-black dark:text-white text-2xl ml-6">Recent Activity</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 p-6"
                  aria-label="Recent Activity">
@@ -63,10 +59,6 @@
                                                 {{ event.course.name }}
                                                 <div class="tooltip-arrow" data-popper-arrow></div>
                                             </div>
-                                            <style>
-                                                #eventCourseName{{ event.id }} {
-                                                }
-                                            </style>
                                         </td>
                                     </tr>
                                 {% else %}
@@ -172,8 +164,6 @@
             </div>
             <br>
             <br>
-            <br>
-            <br>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 p-6 w-full"
                  aria-label="Recent Activity">
                 <div class="pb-2">
@@ -264,50 +254,32 @@
                     </div>
                 </div>
             </div>
-            <script src="../../static/js/user/app.js"></script>
-            <style>
-                table, tr td {
-                    /*border: 1px solid red*/
-                }
-
-                tbody {
-                    display: block;
-                    height: 50px;
-                    overflow: auto;
-                }
-
-        thead, tbody tr {
-            display: table;
-            width: 100%;
-            table-layout: fixed; /* even columns width , fix width of table too*/
-        }
-
-                thead {
-                    width: calc(100% - 3px) /* scrollbar is average 1em/16px width, remove it from thead width */
-                }
-
-                table {
-                    width: 400px;
-                }
-            </style>
-            <script>
-                function setTime() {
-                    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-                    const d = new Date();
-                    let day = days[d.getDay()];
-                    let min = d.getMinutes();
-                    let hour = d.getHours();
-                    let year = d.getFullYear();
-                    let month = d.getMonth() + 1;
-                    let date = d.getDate();
-                    document.getElementById("time").innerText = `
-            ${hour}:${min}   ${day}, ${month}/${date}/${year} `
-                }
-
-
-                setInterval(setTime, 200)
-            </script>
         </div>
+        <style>
+            table, tr td {
+                /*border: 1px solid red*/
+            }
+
+            tbody {
+                display: block;
+                height: 50px;
+                overflow: auto;
+            }
+
+            thead, tbody tr {
+                display: table;
+                width: 100%;
+                table-layout: fixed; /* even columns width , fix width of table too*/
+            }
+
+            thead {
+                width: calc(100% - 3px) /* scrollbar is average 1em/16px width, remove it from thead width */
+            }
+
+            table {
+                width: 400px;
+            }
+        </style>
+    </div>
     </body>
 {% endblock %}

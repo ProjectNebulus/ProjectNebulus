@@ -158,7 +158,8 @@ def app():
         Event=Event,
         pastschoologycourses=scCourses,
         translate=getText,
-        fmt=fmt
+        fmt=fmt,
+        uniqueUsers=set(),
     )
 
 

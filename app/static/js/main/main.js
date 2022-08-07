@@ -88,8 +88,6 @@ function invertSite() {
     const banner = document.getElementById('homeBanner');
 
     if (localStorage.getItem('color-theme') === 'dark') {
-        if (window.location.href.endsWith('/notepad'))
-            document.getElementById('editor').style.filter = 'invert(1)';
         if (window.location.pathname === '/') {
             let wallpaper = localStorage.getItem('wallpaper');
             if (!wallpaper) wallpaper = '/static/images/darkwallpaper.png';
@@ -106,9 +104,6 @@ function invertSite() {
         for (const logo of document.getElementsByTagName('logo'))
             if (!logo.getAttribute('no-revert')) logo.style.filter = 'brightness(100%)';
     } else {
-        if (window.location.href.endsWith('/notepad')) {
-            document.getElementById('editor').style.filter = 'invert(0)';
-        }
         if (window.location.href.endsWith('/')) {
             let wallpaper = localStorage.getItem('wallpaper');
             if (wallpaper === null) {
@@ -308,6 +303,7 @@ function navFetchStatus() {
 }
 
 const list = ['Red', 'Blue', 'Green', 'Blurple', 'Pink', 'Jade', 'Yellow'];
+let v3Image;
 
 let index = 0;
 
@@ -316,6 +312,10 @@ for (let i = 0; i < list.length; i++) {
         .then((response) => response.blob())
         .then((imageBlob) => (list[i] = URL.createObjectURL(imageBlob)));
 }
+
+fetch(`/static/images/nebulusCats/v3.gif`)
+    .then((response) => response.blob())
+    .then((imageBlob) => v3Image = URL.createObjectURL(imageBlob));
 
 function changeFavicon() {
     let link = document.querySelector("link[rel~='icon']");
