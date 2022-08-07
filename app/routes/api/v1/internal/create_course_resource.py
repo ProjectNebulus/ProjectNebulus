@@ -34,6 +34,7 @@ def create_assignment():
     data = request.get_json()
     data["points"] = int(data["points"])
     data["due"] = datetime.strptime(data["due"], "%m/%d/%Y %I:%M %p")
+    data["creationDate"] = datetime.now()
 
     if log_data:
         print(data)

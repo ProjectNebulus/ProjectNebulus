@@ -2,7 +2,7 @@
 {% extends "layout.html" %}
 {% block main %}
     <style>
-        .announcement:hover .expand-announcement {
+        .expandable:hover .expand {
             visibility: visible;
         }
     </style>
@@ -13,7 +13,7 @@
         <div class="grid grid-cols-1 divide-y divide-gray-300 dark:divide-gray-700 hidden lg:inline w-full pl-8">
             <div class="flex flex-row overflow-hidden" style="height: 55%">
                 <div id="middle"
-                     style="flex:0 0 75%"
+                     style="flex: 0 0 68vw"
                      class="pl-8 pr-4 border-r border-gray-200 dark:border-gray-700">
                     <div class="flex flex-row w-full mb-4">
                         <h1 class="text-4xl text-black dark:text-white mt-5 text-left"
@@ -49,20 +49,22 @@
                                          style="grid-template-columns: repeat(auto-fit, 23rem)">
                                         {% for j in range(list|length) %}
                                             {% set a = list[j] %}
-                                            <div class="announcement min-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg shadow mb-4 dark:bg-gray-800/75 dark:text-gray-300 relative"
-                                                 role="alert" style="height: min-content">
+                                            <div class="expandable min-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg
+                                             shadow mb-4 dark:bg-gray-800/75 dark:text-gray-300 relative" role="alert"
+                                                 style="height: min-content">
 
                                                 <button class="absolute top-0 right-0 text-xl mt-2 mr-3 material-icons
-                                                 hover:bg-gray-50 dark:hover:bg-gray-600 px-2 py-1 rounded-lg expand-announcement invisible">
+                                                 hover:bg-gray-50 dark:hover:bg-gray-600 px-1 rounded-lg expand invisible">
                                                     open_in_new
                                                 </button>
 
                                                 {% if a.title != "" %}
-                                                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white truncate">{{ a.title }}</h4>
+                                                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white
+                                                     truncate" title-element>{{ a.title }}</h4>
                                                 {% endif %}
                                                 <div class="flex items-center mb-3">
                                                     <img data-dropdown-toggle="userDropdown-{{ i }}_{{ j }}"
-                                                         id="avatar{{ i }}_{{ j }}"
+                                                         id="avatar{{ i }}_{{ j }}" image-element
                                                          data-dropdown-placement="bottom-start"
                                                          class="rounded-full ring-2 ring-gray-300 dark:ring-gray-500 cursor-pointer mb-3 rounded-full shadow-lg {% if "black" in avatar %} bg-gray-300 {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}
                                                                  {% if a.title == "" %}
@@ -80,26 +82,30 @@
                                                     <div class="flex flex-col text-xs text-gray-700 dark:text-gray-400 pl-2">
                                                         {% if a.title == "" %}
                                                             <h4 class="text-lg font-semibold text-gray-900 dark:text-white truncate mb-1 cursor-pointer hover:underline"
-                                                                data-dropdown-toggle="userDropdown-{{ i }}_{{ j }}">
+                                                                data-dropdown-toggle="userDropdown-{{ i }}_{{ j }}"
+                                                                author-element>
                                                                 {{ a.author }}
                                                             </h4>
                                                         {% endif %}
                                                         <div {% if a.title != "" %} class="-mt-1.5"{% endif %}>
                                                             {% if a.title != "" %}
                                                                 <span class="text-lg cursor-pointer hover:underline"
+                                                                      author-element
                                                                       data-dropdown-toggle="userDropdown-{{ i }}_{{ j }}">{{ a.author }}</span>
                                                                 <span class="text-lg">></span>
                                                             {% endif %}
-                                                            <span class="bg-gray-300 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300 -mt-1">
-                                                                    {{ a.course.name }}
-                                                                </span>
+                                                            <span class="bg-gray-300 text-gray-800 text-xs font-normal
+                                                             uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600
+                                                              dark:text-gray-300 -mt-1" course-name-element>
+                                                                {{ a.course.name }}
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="flex items-center mb-3">
                                                     <div class="text-sm text-gray-900 dark:text-white font-normal">
-                                                        <div id="description_{{ i }}"
-                                                             class="text-sm text-gray-900 dark:text-white font-normal line-clamp-5">
+                                                        <div class="text-sm text-gray-900 dark:text-white font-normal line-clamp-5"
+                                                             content-element>
                                                             {{ fmt(a.content) }}
                                                         </div>
                                                     </div>
@@ -107,10 +113,10 @@
                                                 <time class="text-xs font-medium text-blue-600 dark:text-blue-500">
                                                     {{ strftime(a.date.time(), "%-I:%M %p") }}
                                                 </time>
+                                                <time post-time-element hidden class="hidden">Posted at
+                                                    {{ strftime(a.date.time(), "%-m/%-d/%y %-I:%M %p") }}</time>
+                                                <div due-time-element hidden class="hidden"></div>
                                             </div>
-                                            <script>
-                                                document.getElementById('description_{{ i }}').innerHTML = replaceURLs(document.getElementById('description_{{ i }}').innerHTML);
-                                            </script>
                                             <!-- Dropdown menu -->
                                             <div id="userDropdown-{{ i }}_{{ j }}"
                                                  class="absolute hidden bg-gray-50 divide-y divide-gray-100 rounded
@@ -144,8 +150,7 @@
                                                                  class="w-24 h-24 rounded-full border-white dark:border-gray-700 {% if "black" in avatar %} bg-gray-300 {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}"
                                                                  alt="{{ a.author }}'s Profile Picture">
                                                             <span class="absolute  w-5 h-5 bg-green-400 border-2 border-white dark:border-gray-700 rounded-full"
-                                                                  style="left:90px;
-                                                                             top:85px;"></span>
+                                                                  style="left:90px;top:85px;"></span>
                                                         </div>
                                                         <div>{{ a.author }}</div>
                                                         {% if a.author_email %}
@@ -216,7 +221,7 @@
                     </div>
                 </div>
                 <div id="right"
-                     style="flex: 0 0 25%"
+                     style="flex: 0 0 30vw"
                      class="border-gray-200 dark:border-gray-700 border-l text-center h-full overflow-auto">
                     <p class="text-2xl text-black dark:text-white">Upcoming Events</p>
                     <br>
@@ -229,67 +234,118 @@
                             </p>
                         {% else %}
                             {% for date, assignments in events.items() %}
-                                {% set diff = date - now %}
-                                {% if diff.days < 0 %}
+                                {% set diff = (date - now).days %}
+                                {% if diff < 0 %}
                                     <h1 style="text-align: left;
-                                                   background: -webkit-linear-gradient(left,#ff7878,#ffb078);
+                                                   background: orangered -webkit-linear-gradient(left,#ff7878,#ffb078);
                                                    -webkit-background-clip: text;
                                                    -webkit-text-fill-color: transparent;
                                                    margin: 13px;">
                                         {{ strftime(date, "%a, %B %-d, %Y") }}
-                                        ({{ -diff.days }}d Overdue)
+                                        ({{ -diff }}d Overdue)
                                     </h1>
-                                {% elif diff.days < 1 %}
+                                {% elif diff < 1 %}
                                     <h1 style="text-align: left;
-                                                   background: -webkit-linear-gradient(left,#ff78ed,#ffb378);
+                                                   background: orange -webkit-linear-gradient(left,#ff78ed,#ffb378);
                                                    -webkit-background-clip: text;
                                                    -webkit-text-fill-color: transparent;
                                                    margin: 13px;">
                                         {{ strftime(date, "%a, %B %-d, %Y") }}
-                                        ({{ diff.days }}d remaining)
+                                        ({{ diff }}d remaining)
                                     </h1>
-                                {% elif diff.days < 3 %}
+                                {% elif diff < 3 %}
                                     <h1 style="text-align: left;
-                                                   background: -webkit-linear-gradient(left,#ffc578,#fff878);
+                                                   background: yellow -webkit-linear-gradient(left,#ffc578,#fff878);
                                                    -webkit-background-clip: text;
                                                    -webkit-text-fill-color: transparent;
                                                    margin: 13px;">
                                         {{ strftime(date, "%a, %B %-d, %Y") }}
-                                        ({{ diff.days }}d remaining)
+                                        ({{ diff }}d remaining)
                                     </h1>
-                                {% elif diff.days < 5 %}
+                                {% elif diff < 5 %}
                                     <h1 style="text-align: left;
-                                                   background: -webkit-linear-gradient(left,#ffd978,#ddff78);
+                                                   background: green -webkit-linear-gradient(left,#ffd978,#ddff78);
                                                    -webkit-background-clip: text;
                                                    -webkit-text-fill-color: transparent;
                                                    margin: 13px;">
                                         {{ strftime(date, "%a, %B %-d, %Y") }}
-                                        ({{ diff.days }}d remaining)
+                                        ({{ diff }}d remaining)
                                     </h1>
                                 {% else %}
                                     <h1 style="text-align: left;
-                                                   background: -webkit-linear-gradient(left,#d9ff78,#78ffb7);
+                                                   background: greenyellow -webkit-linear-gradient(left,#d9ff78,#78ffb7);
                                                    -webkit-background-clip: text;
                                                    -webkit-text-fill-color: transparent;
                                                    margin: 13px;">
                                         {{ strftime(date, "%a, %B %-d, %Y") }}
-                                        ({{ diff.days }}d remaining)
+                                        ({{ diff }}d remaining)
                                     </h1>
                                 {% endif %}
                                 {% for a in assignments[:15] %}
-                                    {% if a._cls == "Assignment" %}
-                                        {% if a.submitDate == None or now < date %}
-                                            {# today is before the due date ^ #}
-                                            <div class="flex bg-gray-100 shadow dark:bg-gray-800/75 rounded-lg p-6 ml-3 mr-3 shadow-md dark:border-gray-700 text-sm mb-5 mr-4 text-left">
-                                                <div class="mr-4 material-icons ml-2 text-black dark:text-white"
-                                                     style="transform: translate(0, 50%) scale(1.75)">
-                                                    assignment
+                                    {% if (a._cls != "Assignment" or a.submitDate == None) or now < date %}
+                                        {# today is before the due date ^ #}
+                                        <div class="flex bg-gray-100 shadow dark:bg-gray-800/75 rounded-lg p-6 event
+                                            shadow-md dark:border-gray-700 text-sm mb-5 mx-4 text-left relative expandable">
+                                            <div class="absolute right-0 bottom-0 material-icons hover:bg-gray-50
+                                                 dark:hover:bg-gray-500 p-1 expand text-gray-200 cursor-pointer
+                                                  dark:text-gray-400 invisible rounded-lg mr-3 mb-3">
+                                                open_in_new
+                                            </div>
+
+                                            <div content-element hidden class="hidden">{{ a.description }}</div>
+                                            <div author-element hidden class="hidden">{{ a.course.teacher }}</div>
+                                            <img src="{% if "teacherAccount" in a.course %}
+                                            {{ a.course.teacher.avatar.avatar_url }}
+                                            {% else %}
+                                            https://app.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg
+                                            {% endif %}"
+                                                 image-element hidden class="hidden">
+
+                                            <div class="mr-4 material-icons ml-2 text-black dark:text-white"
+                                                 style="transform: translate(0, 50%) scale(1.75)">
+                                                assignment
+                                            </div>
+                                            <div class="text-gray-700 dark:text-gray-400 leading-relaxed w-full">
+                                                <h1 class="text-black dark:text-white text-xl truncate" title-element
+                                                    style="max-width: 90%">{{ a.title }}</h1>
+                                                <p class="truncate" style="max-width: 90%;"
+                                                   course-name-element>{{ a.course.name }}</p>
+
+                                                {% if a._cls == "Assignment" %}
+                                                    Due at
+                                                {% else %}
+                                                    Happening at
+                                                {% endif %}
+                                                {{ strftime(date, "%-I:%M %p") }}
+
+                                                <div due-time-element hidden class="hidden">
+                                                    {% if a._cls == "Assignment" %}
+                                                        Due at
+                                                    {% else %}
+                                                        Happening on
+                                                    {% endif %}
+                                                    {{ strftime(date, "%-m/%-d/%y %-I:%M %p") }} •
+                                                    {% if a.submitDate %}
+                                                        <span class="text-green-600 dark:text-green-500">Submitted</span>
+                                                    {% elif now > date %}
+                                                        <span class="text-red-600 dark:text-red-500">Overdue</span>
+                                                    {% elif a.grade != None and a.grade / a.points < 0.6 %}
+                                                        <span class="text-gray-300 dark:text-gray-700">{{ a.grade }}/{{ a.points }}</span>
+                                                    {% else %}
+                                                        <span class="text-orange-500">Not Submitted</span>
+                                                    {% endif %}
                                                 </div>
-                                                <div class="text-gray-700 dark:text-gray-400 leading-relaxed w-full">
-                                                    <h1 class="text-black dark:text-white text-xl truncate"
-                                                        style="max-width: 90%">{{ a.title }}</h1>
-                                                    <p class="truncate" style="max-width: 90%;">{{ a.course.name }}</p>
-                                                    Due at {{ strftime(date, "%-I:%M %p") }}
+
+                                                <div post-time-element hidden class="hidden">
+                                                    Posted at
+                                                    {% if "creationDate" in a %}
+                                                        {{ strftime(a.creationDate, "%-m/%-d/%y %-I:%m %p") }}
+                                                    {% else %}
+                                                        {{ strftime(a.get_timestamp(), "%-m/%-d/%y %-I:%m %p") }}
+                                                    {% endif %}
+                                                </div>
+
+                                                {% if a._cls == "Assignment" %}
                                                     <div class="text-black dark:text-white">
                                                         {% if a.submitDate %}
                                                             <span class="text-green-600 dark:text-green-500">Submitted</span>
@@ -301,21 +357,7 @@
                                                             <span class="text-orange-500">Not Submitted</span>
                                                         {% endif %}
                                                     </div>
-                                                </div>
-                                            </div>
-                                        {% endif %}
-                                    {% else %}
-                                        <div class="flex text-black dark:text-white text-left bg-gray-100 rounded-lg shadow dark:bg-gray-800/75 dark:text-gray-300 rounded-lg p-6 ml-3 shadow-md dark:border-gray-700 text-xl mb-5 mr-4">
-                                            <div class="mr-4 material-icons ml-2"
-                                                 style="transform: translate(0, 50%) scale(1.75)">
-                                                event
-                                            </div>
-                                            <div class="truncate">
-                                                <span class="truncate">{{ a.title }}</span>
-                                                <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">{{ a.course.name }}</span>
-                                                <div class="text-xs text-gray-700 uppercase dark:text-gray-400 line-clamp-2">
-                                                    {{ a.description }}
-                                                </div>
+                                                {% endif %}
                                             </div>
                                         </div>
                                     {% endif %}
@@ -369,16 +411,13 @@
                         {% if user_courses|length == 0 %}
                             <a onclick="document.getElementById('course').click()">
                                 <div class="bg-gray-100 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800/75 dark:border-gray-700 p-2 mb-3"
-                                     style="height:13rem;
-                                                width:40rem;">
+                                     style="height:13rem; width:40rem;">
                                     <div style="text-align: left;">
                                         <div style="margin-bottom:10px">
                                             <img src="{{ avatar }}"
                                                  alt="Course Avatar"
                                                  class="object-cover inline-block rounded-lg"
-                                                 style="width: 50px;
-                                                            height: 50px;
-                                                            margin: 10px;">
+                                                 style="width: 50px;height: 50px; margin: 10px;">
                                             <div style="float:right; width:70%; margin-top:6px;">
                                                 <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white truncate">
                                                     {{ user }}'s Next Course
@@ -389,9 +428,8 @@
                                         <div class="mt-4 ml-2 grid grid-cols-2 grid-rows-3 gap-2">
                                             <div>
                                                 <p class="text-sm text-gray-700 dark:text-gray-400">
-                                                    <svg style="display: inline-block;"
-                                                         xmlns="http://www.w3.org/2000/svg"
-                                                         class="h-5 w-5"
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                         class="h-5 w-5 inline-block"
                                                          viewBox="0 0 20 20"
                                                          fill="currentColor">
                                                         <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z">
@@ -609,8 +647,11 @@
             <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
                 <!-- Modal content -->
                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <div id="dueTime" class="absolute bottom-0 right-0 p-3 text-gray-200 dark:text-gray-500 text-sm">
+                        Due at 9:43 am
+                    </div>
                     <!-- Modal header -->
-                    <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
+                    <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600 relative">
                         <div id="header"></div>
                         <button class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
                                 data-modal-toggle="modal" onclick="removeBackdrop()">
@@ -622,10 +663,15 @@
                             </svg>
                             <span class="sr-only">Close modal</span>
                         </button>
+                        <div id="postTime"
+                             class="absolute bottom-0 right-0 p-3 text-gray-200 dark:text-gray-500 text-sm">
+                            Posted at 9:43 am
+                        </div>
                     </div>
                     <!-- Modal body -->
                     <div class="p-6 space-y-6">
-                        <div id="announcementBody" class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                        <div id="announcementBody"
+                             class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
                             stuff
                         </div>
                         <button data-modal-toggle="modal" onclick="removeBackdrop()"
@@ -642,7 +688,7 @@
             </div>
         </div>
 
-        <script src="/static/js/lms.js"></script>
+        <script src="/static/js/app.js"></script>
         {% include "learning/lms-modal.html" %}
     </div>
 {% endblock %}

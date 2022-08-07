@@ -7,21 +7,27 @@ const Default = {
     }
 };
 
-for (const button of document.getElementsByClassName("expand-announcement")) {
+for (const button of document.getElementsByClassName("expand")) {
     const parent = button.parentElement;
-    button.addEventListener("click", () => expandAnnouncement(
-        parent.querySelector('div[id]').innerHTML,
-        parent.querySelector("h4").innerHTML,
-        parent.querySelector(".text-lg[data-dropdown-toggle]").innerHTML,
-        parent.querySelector("img").src,
-        parent.querySelector("span.uppercase").innerHTML
+    button.addEventListener("click", () => openDetailsModal(
+        parent.querySelector("[content-element]").innerHTML,
+        parent.querySelector("[title-element]").innerHTML,
+        parent.querySelector("[author-element]").innerHTML,
+        parent.querySelector("[image-element]").src,
+        parent.querySelector("[course-name-element]").innerHTML,
+        parent.querySelector("[post-time-element]").innerHTML,
+        parent.querySelector("[due-time-element]").innerHTML
     ));
 }
 
-function expandAnnouncement(content, title, author, pic, course) {
+function openDetailsModal(content, title, author, pic, course, postTime, dueTime) {
     const targetEl = document.getElementById('modal');
 
-    if (title.length === 0) title = 'Announcement from ' + author;
+    if (title === author)
+        title = "Announcement from " + title;
+
+    if (dueTime === undefined)
+        dueTime = "";
 
     document.getElementById('header').innerHTML = `
 <h3 class="text-xl font-semibold text-gray-900 dark:text-white truncate h-full">${title}</h3>
@@ -38,9 +44,11 @@ function expandAnnouncement(content, title, author, pic, course) {
     </div>
 </div>`;
 
+    document.getElementById("dueTime").innerHTML = dueTime;
+
     document.getElementById('announcementBody').innerHTML = content;
 
-    document.querySelectorAll('[data-dropdown-toggle]').forEach((triggerEl) => {
+    targetEl.querySelectorAll('[data-dropdown-toggle]').forEach((triggerEl) => {
         const targetEl = document.getElementById(triggerEl.getAttribute('data-dropdown-toggle'));
         const placement = triggerEl.getAttribute('data-dropdown-placement');
 
