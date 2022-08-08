@@ -3,7 +3,7 @@ const urlsToCache = [
     '/',
     '/static/tailwind.css',
     '/static/lms.css',
-    '/static/lms.js',
+    '/static/app.js',
     '/static/main.js',
     '/static/app.js',
     '/static/profile.js',

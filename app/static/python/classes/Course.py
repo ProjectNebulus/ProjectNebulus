@@ -11,6 +11,7 @@ from mongoengine import (
 
 from .Avatar import Avatar
 from .Snowflake import Snowflake
+from ..mongodb import read
 
 templates = (
     "Sports",
@@ -38,12 +39,12 @@ class Course(Snowflake):
     meta = {"collection": "Courses"}
     name = StringField(required=True)
     teacher = StringField(required=True)
+    teacherAccount = ReferenceField("User")
     created_at = DateTimeField(default=lambda: datetime.now())
     template = StringField(default=None)
     # sub_template = StringField(default=None)
     authorizedUsers = ListField(ReferenceField("User"))
     assignments = ListField(ReferenceField("Assignment"))
-    teacherAccount = ReferenceField("User", default=None, null=True)
     folders = ListField(ReferenceField("Folder"))
     description = StringField(default="", null=True)
     documents = ListField(ReferenceField("DocumentFile"))

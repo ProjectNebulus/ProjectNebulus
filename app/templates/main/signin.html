@@ -19,16 +19,17 @@
             <h1 class="text-lg font-bold">
                 <img src="/static/images/NebulusSpecialLogo.png"
                      style=" display: inline-block; width: 40px; border-radius: 10px; margin: 10px; ">
-                Login
+                {{ translate("Login") }}
             </h1>
             <div class="flex justify-between mt-3 text-xs font-light text-gray-500">
                 <p>
-                    New to Nebulus? <a href='/signup' class="ml-1 font-medium text-blue-400">Sign up Now</a>
+                    {{ translate("New to Nebulus?") }} <a href='/signup'
+                                                          class="ml-1 font-medium text-blue-400">{{ translate("Sign up Now") }}</a>
                 </p>
                 <p>
-                    Forgot password?
+                    {{ translate("Forgot password?") }}
                     <span onclick="resetScreen()"
-                          class="text-blue-400 hover:text-blue-600 cursor-pointer">Reset</span>
+                          class="text-blue-400 hover:text-blue-600 cursor-pointer">{{ translate("Reset") }}</span>
                 </p>
             </div>
             <form class="flex flex-col mt-4" action="#" onsubmit="loginUser()">
@@ -41,12 +42,12 @@
                     </div>
                     <input id="usrname"
                            class="pl-10 p-2.5 px-4 py-3 mt-4 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
-                           placeholder="Username/Email"
+                           placeholder="{{ translate("Username") }}/{{ translate("Password") }}"
                            style="-webkit-user-select: text;">
                     <p id="error-msg"
                        class="mt-2 text-sm text-red-600 dark:text-red-500"
                        style=" color: gray !important; ">
-                        <span class="font-medium">Welcome back</span> to Nebulus! Enter your username please.
+                        {{ translate("Welcome back to Nebulus! Enter your username please.") }}
                     </p>
                 </div>
                 <div class="relative">
@@ -59,24 +60,23 @@
                     <input type="password"
                            id="psw"
                            class="pl-10 p-2.5 px-4 py-3 mt-4 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm "
-                           placeholder="Password"
+                           placeholder="{{ translate("Password") }}"
                            style="-webkit-user-select: text;">
                     <p id="password-error-msg"
                        class="mt-2 text-sm text-red-600 dark:text-red-500"
                        style=" color: gray !important; ">
-                        Please
-                        enter a password!
+                        {{ translate("Please enter a password") }}
                     </p>
                 </div>
                 <button id="log_in"
                         type="submit"
                         class="mt-4 px-4 py-3  leading-6 text-base rounded-md border border-transparent text-white focus:outline-none bg-blue-500 text-blue-100 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer inline-flex items-center w-full justify-center items-center font-medium focus:outline-none">
-                    Login
+                    {{ translate("Login") }}
                 </button>
                 <br>
                 <p id="fail" class="text-center"></p>
                 <div class="flex flex-col items-center mt-5">
-                    <p class="mt-1 text-xl font-light text-gray-500">Or, Sign in with Your Apps:</p>
+                    <p class="mt-1 text-xl font-light text-gray-500">{{ translate("Or, Sign in with Your Apps:") }}</p>
                     <div class="text-black flex flex-row justify-center items-center"
                          style="flex-wrap: wrap;">
                         <img class="oauth-button w-6 h-6 mr-2 -ml-1"

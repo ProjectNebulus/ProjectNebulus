@@ -107,6 +107,24 @@ def getText(query):
             "mo": "耐博樂思會讓您的整個學習體驗變得既簡單，又有秩序。首先，我們會給予許多網站聯繫。您不用再在網站之間反复閱覽了。比如，您可以在耐博樂思平台上輕鬆地連接像Schoology, Canvas, 或Google Classroom等各種學習網站。其次，您也可以在耐博樂思平台上有秩序地學習。您不再需要將文檔、論文、作業、教科書、時間表、事件等所有任務攤得到處都是了。所有元素都會為您整理成一個方便快捷的方式！您可以將所有學校需要的元素全都收集在同一個地方。除此之外，我們也十分理解學習可能會很枯燥。針對這個，我們也有許多工具可以幫您學習、整理資料、讓學習變快樂、同時也讓您專注於學習！您可以選擇使用我們的學習時鐘、考試週計劃表、等。我們也有許多擴展集成去豐富您的使用經歷。我們包括計算機集成、圖表計算機集成、字典擴展、抄襲檢查器擴展、世界地圖、元素週期表、集成代碼編輯器、可以跨編輯器編寫的文檔編輯器、等許多其他的工具！我們也會在12月23號即將發布的的穩定更新上增加更多的功能選項！",
             "kr": "네뷸러스 를 사용하면 전체 학습 경험을 체계적이고 간단하게 만들 수 있습니다. 첫째, 우리는 많은 연결을 제공합니다. 더 이상 웹사이트 간에 전환할 필요가 없습니다. 네뷸러스에 연결된 Schoology, Google 클래스룸 및 Canvas 계정을 연결하여 쉽게 액세스할 수 있습니다. 네뷸러스로 정리를 유지할 수도 있습니다. 서류, 문서, 과제, 교과서, 달력 및 이벤트를 여기저기에 둘 필요가 없습니다. 모든 것이 사용하기 쉬운 방식으로 구성되어 있습니다! 학교에 필요한 모든 것을 한 곳에서 받을 수 있습니다. 또한 우리는 공부와 학습이 어려울 수 있음을 이해합니다. 학습을 정리하고, 자료를 정리하고, 학습을 재미있게 만들고, 집중할 수 있는 도구가 있습니다! 학습 타이머, 시험 검토 계획 등을 사용할 수 있습니다. 경험을 풍부하게 하기 위해 많은 확장 및 통합이 있습니다. 계산기 통합, 그래프 계산기, 사전, 표절 검사기, 세계 지도, 주기율표, 내장 IDE(코드 편집기) 및 문서 편집기(Word 또는 Google 문서를 편집할 수 있음) 및 많은 기능이 있습니다. 더! 12월 23일 공개 버전 릴리스에 더 많은 기능을 추가하고 있습니다.",
         },
+        "Login": {
+            "cn": "登录",
+        },
+        "Signup": {
+            "cn": "注册",
+        },
+        "Sign Up": {
+            "cn": "注册",
+        },
+        "Launch Nebulus": {
+            "cn": "启动耐博乐思",
+        },
+        "Watch Our Event": {
+            "cn": "观看我们的活动",
+        },
+        "Get Started": {
+            "cn": "开始使用！",
+        },
         "Learning, All In One": {
             "us": "Learning, All In One",
             "uk": "Learning, All In One",
@@ -117,6 +135,7 @@ def getText(query):
             "cu": "Todo tu aprendizaje en un sitio",
             "co": "Todo tu aprendizaje en un sitio",
             "ar": "Todo tu aprendizaje en un sitio",
+            "cn": "有趣、全面地学习",
         },
         "Connect all of Learning": {
             "us": "Connect all of Learning",
@@ -128,6 +147,7 @@ def getText(query):
             "cu": "Conecta todo tu aprendizaje",
             "co": "Conecta todo tu aprendizaje",
             "ar": "Conecta todo tu aprendizaje",
+            "cn": "连接所有的学习方式",
         },
         "No more switching between websites. Get your Schoology, Google Classroom, and Canvas accounts connected today.": {
             "us": "No more switching between websites. Get your Schoology, Google Classroom, and Canvas accounts connected today.",
@@ -139,8 +159,9 @@ def getText(query):
             "cu": "No cambies más entre sitios web. Conecta tus cuentas de Schoology, Google Classroom y Canvas hoy.",
             "co": "No cambies más entre sitios web. Conecta tus cuentas de Schoology, Google Classroom y Canvas hoy.",
             "ar": "No cambies más entre sitios web. Conecta tus cuentas de Schoology, Google Classroom y Canvas hoy.",
+            "cn": "您不需要继续在网站之间切换。将您的Schoology. Google Classroom, 与 Canvas账户全部连接到耐博乐思就可以了。"
         },
-        "Organize your learning experience": {
+        "Organize your Learning Experience": {
             "us": "Organize your learning experience",
             "uk": "Organize your learning experience",
             "au": "Organize your learning experience",
@@ -150,6 +171,7 @@ def getText(query):
             "cu": "Organiza tu experiencia de aprendizaje",
             "co": "Organiza tu experiencia de aprendizaje",
             "ar": "Organiza tu experiencia de aprendizaje",
+            "cn": "规整您的学习经历",
         },
         "With Nebulus, there is no need to have your papers, documents, assignments, textbooks, and events be all over the place. With Nebulus, everything is organized for you in an easy-to-use way!": {
             "us": "With Nebulus, there is no need to have your papers, documents, assignments, textbooks, and events be all over the place. With Nebulus, everything is organized for you in an easy-to-use way!",
@@ -161,6 +183,7 @@ def getText(query):
             "cu": "Con Nébulus, no hay necesidad de tener todos tus papeles, documentos, tareas, libros de texto y eventos por todos lados. ¡Con Nébulus, todo está organizado para ti de manera fácil de usar!",
             "co": "Con Nébulus, no hay necesidad de tener todos tus papeles, documentos, tareas, libros de texto y eventos por todos lados. ¡Con Nébulus, todo está organizado para ti de manera fácil de usar!",
             "ar": "Con Nébulus, no hay necesidad de tener todos tus papeles, documentos, tareas, libros de texto y eventos por todos lados. ¡Con Nébulus, todo está organizado para ti de manera fácil de usar!",
+            "cn": "有了耐博乐思，您的论文、文档、作业、教科书和活动就不必到处乱窜了。 使用 耐博乐思，一切都以易于使用的方式为您安排妥当！",
         },
         "Make Learning Easier": {
             "us": "Make Learning Easier",
@@ -172,6 +195,7 @@ def getText(query):
             "cu": "Haz tu aprendizaje más fácil",
             "co": "Haz tu aprendizaje más fácil",
             "ar": "Haz tu aprendizaje más fácil",
+            "cn": "让学习更简单和轻松",
         },
         "We have tools to organize your studying, organize your materials, make learning fun, and keep you focused!": {
             "us": "We have tools to organize your studying, organize your materials, make learning fun, and keep you focused!",
@@ -183,6 +207,7 @@ def getText(query):
             "cu": "¡Tenemos herramientas para organizar tu estudio y tus materiales, hacer que aprender sea divertido y mantener tu concentración!",
             "co": "¡Tenemos herramientas para organizar tu estudio y tus materiales, hacer que aprender sea divertido y mantener tu concentración!",
             "ar": "¡Tenemos herramientas para organizar tu estudio y tus materiales, hacer que aprender sea divertido y mantener tu concentración!",
+            "cn": "我们拥有可以许多工具可以帮助您学习，整理资料，让学习变得有趣，并且帮助您保持专注！",
         },
         "Start Now!": {
             "us": "Start Now!",
@@ -194,8 +219,102 @@ def getText(query):
             "cu": "¡Comienza ahora!",
             "co": "¡Comienza ahora!",
             "ar": "¡Comienza ahora!",
+            "cn": "开始使用！",
         },
+        "About": {
+            "cn": "关于",
+        },
+        "Pricing": {
+            "cn": "价钱"
+        },
+        "Change Language": {
+            "cn": "改变语言"
+        },
+        "With Nebulus, have your whole learning experience": {
+            "cn": "耐博乐思会让您的学习经历既有"
+        },
+        "organized": {
+            "cn": "秩序",
+        },
+        "and": {
+            "cn": "、又",
+        },
+        "simple": {
+            "cn": "简单方便"
+        },
+        "All it takes is one": {
+            "cn": "您所需的仅仅是一个",
+        },
+        "Nebulus Account": {
+            "cn": "耐博乐思账号",
+        },
+
+        "New to Nebulus?": {
+            "cn": "新手指南?"
+        },
+        "Forgot password?": {
+            "cn": "忘记密码？"
+        },
+        "Reset": {
+            "cn": "重制"
+        },
+        "Or, Sign in with Your Apps:": {
+            "cn": "或者，使用其它应用登录："
+        },
+        "Sign up Now": {
+            "cn": "现在注册",
+        },
+        "Password": {
+            "cn": "密码",
+        },
+        "Please enter a password": {
+            "cn": "请输入您的密码！",
+        },
+        "Welcome back to Nebulus! Enter your username please.": {
+            "cn": "欢迎回到耐博乐思！请输入您的用户名。",
+        },
+        "Username": {
+            "cn": "用户名"
+        },
+        "Email": {
+            "cn": "邮箱",
+        },
+        "Existing Member?": {
+            "cn": "已注册账户？",
+        },
+        "Prepare for a brighter future in your education with Nebulus!  It's free and it always will be.": {
+            "cn": "准备好与耐博乐思一起在您的学习过程中开启一个更美好的未来！",
+        },
+        "Restart": {
+            "cn": "重新输入",
+        },
+        "Next": {
+            "cn": "下一步",
+        },
+        "Previous": {
+            "cn": "前一步",
+        },
+        "Join": {
+            "cn": "开始用耐博乐思！"
+        },
+        "Confirm Password": {
+            "cn": "确认密码",
+        },
+        "Welcome to Nebulus! Please enter an Email!": {
+            "cn": " 欢迎来到耐博乐思！请输入用户名。"
+        },
+        "Please enter a Username!": {
+            "cn": "请输入用户名。",
+        },
+        "Please enter a password!": {
+            "cn": "请输入密码！"
+        },
+        "Please confirm your password!": {
+            "cn": "请确认您的密码！",
+        }
+
     }
+
     try:
         return dictionary[query][getLocal()]
     except:
@@ -613,7 +732,7 @@ def search_course(keyword: str, course: str):
         events,
         assignments,
         announcements,
-        NebulusDocuments,
+        # NebulusDocuments,
     )
 
 

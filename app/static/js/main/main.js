@@ -255,7 +255,7 @@ function navFetchStatus() {
 
     request.done((data) => {
         if (parseInt(data)) {
-            document.getElementById('spotifyStatus').innerHTML = '';
+            document.getElementById('spotifyStatus').style.display = "none";
             shouldGetSpotify = false;
             clearInterval(statusInterval);
             return;
@@ -272,7 +272,7 @@ function navFetchStatus() {
         let timestamp = songs[6];
         let total = songs[7];
         let ratio = songs[8];
-
+        document.getElementById('spotifyStatus').style.display = "block";
         document.getElementById('spotifyStatus').innerHTML = `
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
             <div style="width:110px;float:left;">

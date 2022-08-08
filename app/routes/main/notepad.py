@@ -44,6 +44,8 @@ def notepad():
         "Roboto Mono Slashed Slashed",
         "Roboto Mono Slashed Slashed Condensed",
     ]
+    courses = read.get_user_courses(session["id"])
+    print(courses)
     return render_template(
         "tools/notepad.html",
         page="Nebulus - Notepad",
@@ -52,6 +54,7 @@ def notepad():
         read=read,
         fonts=fonts,
         translate=getText,
+        courses=courses,
     )
 
 
@@ -84,6 +87,7 @@ def document(id):
         "Roboto Mono Slashed Slashed",
         "Roboto Mono Slashed Slashed Condensed",
     ]
+
     return render_template(
         "tools/notepad.html",
         page="Nebulus - Notepad",
@@ -92,4 +96,5 @@ def document(id):
         read=read,
         fonts=fonts,
         translate=getText,
+
     )

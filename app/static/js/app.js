@@ -1,3 +1,87 @@
+function changeSearch() {
+    let value = document.getElementById('search_input').value;
+    console.log(value);
+    if (value.length > 0) {
+        document.getElementById('search_items').innerHTML = `
+<li>
+<div class="py-2.5 rounded-lg mx-auto block px-4 py-2 mx-2 dark:hover:text-white">
+                <svg class="inline w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+</svg>
+    Searching...
+</div>
+</li>
+            `;
+        const request = $.ajax({
+            type: 'POST',
+            url: '/api/v1/internal/search-within_user',
+            data: JSON.stringify({
+                search: value
+            }),
+
+            contentType: 'application/json; charset=utf-8'
+        });
+        request.done((data) => {
+            document.getElementById('search_items').innerHTML = '';
+            let temp_arr = [];
+            if (data === '0') {
+                document.getElementById('search_items').innerHTML += `
+                    <li>
+                            <div class="py-2.5 rounded-lg mx-auto block px-4 py-2 mx-2 dark:hover:text-white">
+                        <svg class="inline w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+</svg>
+                        No Results Found
+                            </div>
+                        </li>`;
+            } else {
+                let datas = data.split('•');
+                for (let i = 0; i < datas.length; i++) {
+                    temp_arr.push(datas[i]);
+                    if (i % 4 === 3) {
+                        let pic = `<img src="${temp_arr[3]}" class="inline-block w-10 h-10 rounded-full">`;
+                        switch (temp_arr[0]) {
+                            case 'document':
+                                pic = `<i class="material-icons">description</i>`;
+                                break;
+                            case 'NebDoc':
+                                pic = `<i class="material-icons">draft</i>`;
+                                break;
+                            case 'event':
+                                pic = `<i class="material-icons">event</i>`;
+                                break;
+                            case 'assignment':
+                                pic = `<i class="material-icons">assignment</i>`;
+                                break;
+                            case 'chat':
+                                pic = `<i class="material-icons">forum</i>`;
+                                break;
+                            case 'announcement':
+                                pic = `<i class="material-icons">campaign</i>`;
+                                break;
+                        }
+
+                        document.getElementById('search_items').innerHTML += `
+                    <li>
+                        <span class="truncate py-2.5 rounded-lg mx-auto block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 mx-2 dark:hover:text-white" style="text-align:left;">
+                ${pic}
+                ${temp_arr[1]} <span class="text-gray-500 ml-2">${temp_arr[2]}</span></span>
+                    </li>
+                    
+`;
+                        temp_arr = [];
+                    }
+                }
+            }
+        });
+
+        document.getElementById('search_items').innerHTML = '';
+    }
+}
+
+keyUpDelay('#search', 1000, changeSearch);
 const Default = {
     placement: 'bottom-right',
     triggerType: 'click',
@@ -7,21 +91,27 @@ const Default = {
     }
 };
 
-for (const button of document.getElementsByClassName("expand-announcement")) {
+for (const button of document.getElementsByClassName("expand")) {
     const parent = button.parentElement;
-    button.addEventListener("click", () => expandAnnouncement(
-        parent.querySelector('div[id]').innerHTML,
-        parent.querySelector("h4").innerHTML,
-        parent.querySelector(".text-lg[data-dropdown-toggle]").innerHTML,
-        parent.querySelector("img").src,
-        parent.querySelector("span.uppercase").innerHTML
+    button.addEventListener("click", () => openDetailsModal(
+        parent.querySelector("[content-element]").innerHTML,
+        parent.querySelector("[title-element]").innerHTML,
+        parent.querySelector("[author-element]").innerHTML,
+        parent.querySelector("[image-element]").src,
+        parent.querySelector("[course-name-element]").innerHTML,
+        parent.querySelector("[post-time-element]").innerHTML,
+        parent.querySelector("[due-time-element]").innerHTML
     ));
 }
 
-function expandAnnouncement(content, title, author, pic, course) {
+function openDetailsModal(content, title, author, pic, course, postTime, dueTime) {
     const targetEl = document.getElementById('modal');
 
-    if (title.length === 0) title = 'Announcement from ' + author;
+    if (title === author)
+        title = "Announcement from " + title;
+
+    if (dueTime === undefined)
+        dueTime = "";
 
     document.getElementById('header').innerHTML = `
 <h3 class="text-xl font-semibold text-gray-900 dark:text-white truncate h-full">${title}</h3>
@@ -38,9 +128,11 @@ function expandAnnouncement(content, title, author, pic, course) {
     </div>
 </div>`;
 
+    document.getElementById("dueTime").innerHTML = dueTime;
+
     document.getElementById('announcementBody').innerHTML = content;
 
-    document.querySelectorAll('[data-dropdown-toggle]').forEach((triggerEl) => {
+    targetEl.querySelectorAll('[data-dropdown-toggle]').forEach((triggerEl) => {
         const targetEl = document.getElementById(triggerEl.getAttribute('data-dropdown-toggle'));
         const placement = triggerEl.getAttribute('data-dropdown-placement');
 
@@ -571,88 +663,4 @@ window.addEventListener('load', () => {
         document.getElementById('schoology-create-course').style.display = 'block';
     }
 
-    function changeSearch() {
-        let value = document.getElementById('search_input').value;
-        console.log(value);
-        if (value.length > 0) {
-            document.getElementById('search_items').innerHTML = `
-<li>
-<div class="py-2.5 rounded-lg mx-auto block px-4 py-2 mx-2 dark:hover:text-white">
-                <svg class="inline w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
-    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
-</svg>
-    Searching...
-</div>
-</li>
-            `;
-            const request = $.ajax({
-                type: 'POST',
-                url: '/api/v1/internal/search-within_user',
-                data: JSON.stringify({
-                    search: value
-                }),
-
-                contentType: 'application/json; charset=utf-8'
-            });
-            request.done((data) => {
-                document.getElementById('search_items').innerHTML = '';
-                let temp_arr = [];
-                if (data === '0') {
-                    document.getElementById('search_items').innerHTML += `
-                    <li>
-                            <div class="py-2.5 rounded-lg mx-auto block px-4 py-2 mx-2 dark:hover:text-white">
-                        <svg class="inline w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
-    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
-</svg>
-                        No Results Found
-                            </div>
-                        </li>`;
-                } else {
-                    let datas = data.split('•');
-                    for (let i = 0; i < datas.length; i++) {
-                        temp_arr.push(datas[i]);
-                        if (i % 4 === 3) {
-                            let pic = `<img src="${temp_arr[3]}" class="inline-block w-10 h-10 rounded-full">`;
-                            switch (temp_arr[0]) {
-                                case 'document':
-                                    pic = `<i class="material-icons">description</i>`;
-                                    break;
-                                case 'NebDoc':
-                                    pic = `<i class="material-icons">draft</i>`;
-                                    break;
-                                case 'event':
-                                    pic = `<i class="material-icons">event</i>`;
-                                    break;
-                                case 'assignment':
-                                    pic = `<i class="material-icons">assignment</i>`;
-                                    break;
-                                case 'chat':
-                                    pic = `<i class="material-icons">forum</i>`;
-                                    break;
-                                case 'announcement':
-                                    pic = `<i class="material-icons">campaign</i>`;
-                                    break;
-                            }
-
-                            document.getElementById('search_items').innerHTML += `
-                    <li>
-                        <span class="truncate py-2.5 rounded-lg mx-auto block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 mx-2 dark:hover:text-white" style="text-align:left;">
-                ${pic}
-                ${temp_arr[1]} <span class="text-gray-500 ml-2">${temp_arr[2]}</span></span>
-                    </li>
-                    
-`;
-                            temp_arr = [];
-                        }
-                    }
-                }
-            });
-
-            document.getElementById('search_items').innerHTML = '';
-        }
-    }
-
-    keyUpDelay('#search', 1000, changeSearch);
 });

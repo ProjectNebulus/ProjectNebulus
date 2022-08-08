@@ -16,4 +16,5 @@ class Event(Snowflake):
     title = StringField(required=True)
     course = ReferenceField("Course", required=True)
     date = DateTimeField(default=lambda: datetime.now())
+    creationDate = DateTimeField(null=True, default=None)
     description = StringField(default="", null=True)
