@@ -113,6 +113,9 @@ def getText(query):
         "Signup": {
             "cn": "注册",
         },
+        "Sign Up": {
+            "cn": "注册",
+        },
         "Launch Nebulus": {
             "cn": "启动耐博乐思",
         },
@@ -180,6 +183,7 @@ def getText(query):
             "cu": "Con Nébulus, no hay necesidad de tener todos tus papeles, documentos, tareas, libros de texto y eventos por todos lados. ¡Con Nébulus, todo está organizado para ti de manera fácil de usar!",
             "co": "Con Nébulus, no hay necesidad de tener todos tus papeles, documentos, tareas, libros de texto y eventos por todos lados. ¡Con Nébulus, todo está organizado para ti de manera fácil de usar!",
             "ar": "Con Nébulus, no hay necesidad de tener todos tus papeles, documentos, tareas, libros de texto y eventos por todos lados. ¡Con Nébulus, todo está organizado para ti de manera fácil de usar!",
+            "cn": "有了耐博乐思，您的论文、文档、作业、教科书和活动就不必到处乱窜了。 使用 耐博乐思，一切都以易于使用的方式为您安排妥当！",
         },
         "Make Learning Easier": {
             "us": "Make Learning Easier",
@@ -244,6 +248,70 @@ def getText(query):
         "Nebulus Account": {
             "cn": "耐博乐思账号",
         },
+
+        "New to Nebulus?": {
+            "cn": "新手指南?"
+        },
+        "Forgot password?": {
+            "cn": "忘记密码？"
+        },
+        "Reset": {
+            "cn": "重制"
+        },
+        "Or, Sign in with Your Apps:": {
+            "cn": "或者，使用其它应用登录："
+        },
+        "Sign up Now": {
+            "cn": "现在注册",
+        },
+        "Password": {
+            "cn": "密码",
+        },
+        "Please enter a password": {
+            "cn": "请输入您的密码！",
+        },
+        "Welcome back to Nebulus! Enter your username please.": {
+            "cn": "欢迎回到耐博乐思！请输入您的用户名。",
+        },
+        "Username": {
+            "cn": "用户名"
+        },
+        "Email": {
+            "cn": "邮箱",
+        },
+        "Existing Member?": {
+            "cn": "已注册账户？",
+        },
+        "Prepare for a brighter future in your education with Nebulus!  It's free and it always will be.": {
+            "cn": "准备好与耐博乐思一起在您的学习过程中开启一个更美好的未来！",
+        },
+        "Restart": {
+            "cn": "重新输入",
+        },
+        "Next": {
+            "cn": "下一步",
+        },
+        "Previous": {
+            "cn": "前一步",
+        },
+        "Join": {
+            "cn": "开始用耐博乐思！"
+        },
+        "Confirm Password": {
+            "cn": "确认密码",
+        },
+        "Welcome to Nebulus! Please enter an Email!": {
+            "cn": " 欢迎来到耐博乐思！请输入用户名。"
+        },
+        "Please enter a Username!": {
+            "cn": "请输入用户名。",
+        },
+        "Please enter a password!": {
+            "cn": "请输入密码！"
+        },
+        "Please confirm your password!": {
+            "cn": "请确认您的密码！",
+        }
 
     }
 

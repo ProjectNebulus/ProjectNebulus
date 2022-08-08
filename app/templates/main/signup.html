@@ -25,19 +25,14 @@
             <h1 class="text-lg font-bold">
                 <img src="/static/images/NebulusSpecialLogo.png"
                      style=" display: inline-block; width: 40px; border-radius: 10px; margin: 10px; ">
-                Sign Up
+                {{ translate("Sign Up") }}
             </h1>
             <div class="flex flex-col items-left mt-5">
                 <p class="mt-1 text-xs font-light text-gray-500">
-                    Existing Member?<a href="/signin" class="ml-1 font-medium text-blue-400">Login!</a>
+                    {{ translate("Existing Member?") }}<a href="/signin"
+                                                          class="ml-1 font-medium text-blue-400">{{ translate("Login") }}!</a>
                     <br>
-                    Prepare for a brighter future in your education with
-                    <span class="text-lg"
-                          style="background:-webkit-linear-gradient(left, #34c0eb, #c081ff);
-                                     -webkit-background-clip: text;
-                                     -webkit-text-fill-color:transparent;
-                                     font-weight:bolder;">Nebulus</span>!
-                    It's free and it always will be.
+                    {{ translate("Prepare for a brighter future in your education with Nebulus!  It's free and it always will be.") }}
                 </p>
             </div>
             <div class="mt-4" id="step1" style="display:block;">
@@ -51,10 +46,11 @@
                            id="email"
                            autocomplete="new-email"
                            class=" text-sm rounded-lg  block w-full p-2.5 mt-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-blue-500 block w-full pl-10 p-2.5"
-                           placeholder="Email Address"
+                           placeholder="{{ translate("Email") }}"
                            style="-webkit-user-select: text;">
                 </div>
-                <p style="color:gray;" class="text-sm errormsg">Welcome to Nebulus! Please enter an Email!</p>
+                <p style="color:gray;"
+                   class="text-sm errormsg">{{ translate("Welcome to Nebulus! Please enter an Email!") }}</p>
                 <div class="relative">
                     <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                         <p class="validation-icon material-icons"
@@ -65,10 +61,10 @@
                            id="username"
                            autocomplete="new-username"
                            class=" border text-sm rounded-lg block w-full p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
-                           placeholder="Username"
+                           placeholder="{{ translate("Username") }}"
                            style="-webkit-user-select: text;">
                 </div>
-                <p style="color:gray;" class="text-sm errormsg">Welcome to Nebulus! Please enter a Username!</p>
+                <p style="color:gray;" class="text-sm errormsg">{{ translate("Please enter a Username!") }}</p>
                 <div class="relative">
                     <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                         <p class="validation-icon material-icons"
@@ -79,10 +75,10 @@
                            id="password"
                            autocomplete="new-password"
                            class="border text-sm rounded-lg block w-full p-2.5 mt-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
-                           placeholder="Password"
+                           placeholder="{{ translate("Password") }}"
                            style="-webkit-user-select: text;">
                 </div>
-                <p style="color:gray;" class="text-sm errormsg">Welcome to Nebulus! Please enter a password!</p>
+                <p style="color:gray;" class="text-sm errormsg">{{ translate("Please enter a password!") }}</p>
                 <div class="relative">
                     <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                         <p class="validation-icon material-icons"
@@ -93,10 +89,10 @@
                            id="confirm-password"
                            autocomplete="new-password"
                            class=" border text-sm rounded-lg block w-full p-2.5 mt-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
-                           placeholder="Confirm Password"
+                           placeholder="{{ translate("Confirm Password") }}"
                            style="-webkit-user-select: text;">
                 </div>
-                <p style="color:gray;" class="text-sm errormsg">Welcome to Nebulus! Please confirm your password!</p>
+                <p style="color:gray;" class="text-sm errormsg">{{ translate("Please confirm your password!") }}</p>
                 <button onclick="prev(1);"
                         style="margin-right:10px;
                                    float:left;"
@@ -110,12 +106,12 @@
                               clip-rule="evenodd">
                         </path>
                     </svg>
-                    Restart
+                    {{ translate("Restart") }}
                 </button>
                 <button onclick="next(1);"
                         style="float:left;"
                         class="mt-4 px-4 py-3  leading-6 text-base rounded-md border border-transparent text-white focus:outline-none bg-blue-500 text-blue-100 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer inline-flex items-center w-40 justify-center items-center font-medium focus:outline-none">
-                    Next
+                    {{ translate("Next") }}
                     <svg class="inline-block ml-2 -mr-1 w-5 h-5"
                          fill="currentColor"
                          viewBox="0 0 20 20"
@@ -178,12 +174,12 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                               d="M7 16l-4-4m0 0l4-4m-4 4h18"></path>
                     </svg>
-                    Previous
+                    {{ translate("Previous") }}
                 </button>
                 <button onclick="next(2);"
                         style="float:left;"
                         class="mt-4 px-4 py-3  leading-6 text-base rounded-md border border-transparent text-white focus:outline-none bg-blue-500 text-blue-100 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer inline-flex items-center w-40 justify-center items-center font-medium focus:outline-none">
-                    Next
+                    {{ translate("Next") }}
                     <svg class="inline-block ml-2 -mr-1 w-5 h-5"
                          fill="currentColor"
                          viewBox="0 0 20 20"
@@ -449,12 +445,12 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                               d="M7 16l-4-4m0 0l4-4m-4 4h18"></path>
                     </svg>
-                    Previous
+                    {{ translate("Previous") }}
                 </button>
                 <button onclick="next(3);"
                         style="float:left;"
                         class="mt-4 px-4 py-3  leading-6 text-base rounded-md border border-transparent text-white focus:outline-none bg-blue-500 text-blue-100 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer inline-flex items-center w-40 justify-center items-center font-medium focus:outline-none">
-                    Join
+                    {{ translate("Join") }}
                     <svg class="inline-block ml-2 -mr-1 w-5 h-5"
                          fill="currentColor"
                          viewBox="0 0 20 20"
