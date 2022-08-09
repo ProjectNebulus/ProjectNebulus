@@ -1,9 +1,7 @@
 const siteName = window.location.protocol + '//' + window.location.host;
 
-const faviconInterval = setInterval(changeFavicon, 1000);
+setInterval(changeFavicon, 1000);
 Array.prototype.insert = (index, item) => this.splice(index, 0, item);
-
-window.addEventListener('beforeunload', () => clearInterval(interval));
 
 if (!localStorage.getItem('color-theme')) {
     const darkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -128,6 +126,7 @@ function invertSite() {
     for (const frame of document.getElementsByTagName('iframe')) {
         if (frame && (frame.src.includes(siteName) || !frame.src.includes('http'))) {
             const innerDoc = frame.contentDocument || frame.contentWindow.document;
+            innerDoc.addEventListener("click", () => window.dispatchEvent(new Event("click")));
 
             if (document.documentElement.classList.contains('dark')) {
                 innerDoc.documentElement.classList.add('dark');

@@ -4,15 +4,20 @@ const config = document.getElementById('config');
 const timer = document.getElementById('timer');
 const timerEnd = document.getElementById('timerEnd');
 const display = document.getElementById('timerDisplay');
-const start = document.getElementById('start');
+const startTimer = document.getElementById('start');
 const timerName = document.getElementById('timerName');
 const pauseButton = document.getElementById('pause');
 const popupButton = document.getElementById('popup');
 
+if (localStorage.getItem("popup")) {
+    document.getElementById("sidebar_").classList.add("hidden");
+    document.getElementById("sidebar_").hidden = true;
+}
+
 const pauseClasses = ['bg-yellow-300', 'border-yellow-400', 'hover:bg-yellow-500'];
 const resumeClasses = ['bg-green-500', 'border-green-700', 'hover:bg-green-800'];
 
-let hours, minutes, seconds, interval;
+let hours, minutes, seconds, timerInterval;
 let paused = false;
 let timerStarted = localStorage.getItem('currentTimer') !== null;
 let bypassUnload = false;
@@ -21,12 +26,11 @@ const updateVariable = document.getElementById('updateVariable');
 updateVariable.classList.add('hidden');
 
 window.addEventListener('beforeunload', () => {
-    if (interval) clearInterval(interval);
-
     if (bypassUnload) {
         bypassUnload = false;
         return;
     }
+
     localStorage.removeItem('popup');
     localStorage.removeItem('currentTimer');
     localStorage.removeItem('originalTimer');
@@ -39,7 +43,7 @@ if (localStorage.getItem('popup')) {
 }
 
 function loadTimer() {
-    if (interval) clearInterval(interval);
+    if (timerInterval) clearInterval(timerInterval);
 
     const currentTimer = localStorage.getItem('currentTimer');
     if (!currentTimer) {
@@ -47,12 +51,19 @@ function loadTimer() {
         configure();
         return;
     }
+
     const data = currentTimer.split('\n');
     timerName.innerHTML = data[0];
     paused = parseInt(data[1]) === 1;
     hours = parseInt(data[2]);
     minutes = parseInt(data[3]);
     seconds = parseInt(data[4]) + isPopup;
+
+    if (isNaN(hours)) {
+        onTimerEnd();
+        configure();
+        return;
+    }
 
     if (hours < 0) {
         onTimerEnd();
@@ -80,6 +91,7 @@ document.addEventListener('keydown', () => {
     let focused = false;
 
     if (document.activeElement === document.getElementById('name')) focused = true;
+    else if (document.activeElement === startTimer) focused = true;
     else
         for (let i = 0; i < 3; i++) {
             if (document.activeElement === inputs[i]) {
@@ -88,7 +100,7 @@ document.addEventListener('keydown', () => {
             }
         }
 
-    if (!focused) inputs[2].focus();
+    if (!focused) document.getElementById("name").focus();
 });
 
 for (let i = 0; i < 3; i++) {
@@ -100,28 +112,27 @@ for (let i = 0; i < 3; i++) {
         if (max < 99 && parseInt(inputs[i].value) > max) inputs[i].value = max + '';
 
         if (parseInt(inputs[i].value) !== 1) {
-            if (!labels[i].innerHTML.endsWith('s')) labels[i].innerHTML += 's';
+            if (!labels[i].innerHTML.endsWith('s'))
+                labels[i].innerHTML += 's';
         } else {
             if (labels[i].innerHTML.endsWith('s'))
-                labels[i].innerHTML = labels[i].innerHTML.substring(
-                    0,
-                    labels[i].innerHTML.length - 1
-                );
+                labels[i].innerHTML = labels[i].innerHTML.substring(0, labels[i].innerHTML.length - 1);
         }
 
-        start.disabled = disableTimer();
+        startTimer.disabled = validTimer();
     };
 
     inputs[i].addEventListener('keyup', (e) => {
-        if (e.key === 'Enter') start.click();
+        if (e.key === 'Enter') startTimer.click();
     });
 }
 
-start.disabled = disableTimer();
+startTimer.disabled = validTimer();
 
-function disableTimer() {
+function validTimer() {
     for (let i = 0; i < 3; i++) {
-        if (inputs[i].value !== '' && parseInt(inputs[i].value) > 0) return false;
+        if (inputs[i].value !== '' && parseInt(inputs[i].value) > 0)
+            return false;
     }
     return true;
 }
@@ -164,7 +175,7 @@ document.getElementById('restart').onclick = configure;
 
 function resume() {
     paused = false;
-    interval = setInterval(subtractTime, 1000);
+    timerInterval = setInterval(subtractTime, 1000);
     pauseButton.classList.remove(...resumeClasses);
     pauseButton.classList.add(...pauseClasses);
     pauseButton.innerHTML = 'Pause';
@@ -172,7 +183,7 @@ function resume() {
 
 function pause() {
     paused = true;
-    clearInterval(interval);
+    clearInterval(timerInterval);
     pauseButton.classList.remove(...pauseClasses);
     pauseButton.classList.add(...resumeClasses);
     pauseButton.innerHTML = 'Resume';
@@ -183,7 +194,7 @@ function configure() {
 
     config.classList.remove('hidden');
     timerEnd.classList.add('hidden');
-    start.disabled = disableTimer();
+    startTimer.disabled = validTimer();
 }
 
 function subtractTime() {
@@ -208,14 +219,15 @@ function subtractTime() {
 }
 
 function onTimerEnd() {
+    for (let i = 0; i < 1000; i++)
+        clearInterval(i);
+
     timerStarted = false;
     localStorage.removeItem('currentTimer');
     localStorage.removeItem('originalTimer');
     localStorage.removeItem('startTimer');
     timer.classList.add('hidden');
     timerEnd.classList.remove('hidden');
-
-    if (interval) clearInterval(interval);
 }
 
 popupButton.onclick = () => {
@@ -224,7 +236,7 @@ popupButton.onclick = () => {
         if (timerStarted) saveTimer();
 
         localStorage.setItem('popup', 'true');
-        window.open('/study', 'Study Timer', 'width=600,height=600');
+        window.open('/study', 'Study Timer', 'width=600,height=550');
     } else {
         saveTimer();
         localStorage.removeItem('popup');

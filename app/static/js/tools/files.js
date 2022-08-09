@@ -23,7 +23,12 @@ function startFile(file, link, isPDF) {
             `;
     if (isPDF) {
         document.getElementById('pdf-viewer').style.display = 'block';
-        startPDF(link);
+
+        try {
+            startPDF(link);
+        } catch (e) {
+            document.getElementById("loading").innerHTML = "Error: " + e;
+        }
     } else {
         document.getElementById('code-viewer').style.display = 'block';
         const request = new XMLHttpRequest();
