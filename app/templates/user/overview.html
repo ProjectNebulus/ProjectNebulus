@@ -134,17 +134,12 @@
             </div>
             <br>
             <br>
-            <div style="width:calc(100% - 3rem);
-                            margin-left: 2%;
-                            overflow: visible;"
-                 class="pb-2">
+            <div style="width: calc(100% - 3rem); margin-left: 2%" class="pb-2 overflow-visible">
                 <h2 class="noselect text-black dark:text-white text-2xl mb-5">Recent Courses</h2>
                 <div style="height:360px"
                      class="block p-6 bg-white/75 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800/75 dark:border-gray-700 hover:scroll overflow-auto">
-                    <div class="text-left grid justify-start"
-                         style="grid-template-columns: repeat(auto-fit, 23rem);
-                                    align-items: center;
-                                    justify-content: center;"
+                    <div class="text-left grid align-center justify-center"
+                         style="grid-template-columns: repeat(auto-fit, 23rem);"
                          aria-label="Recent Courses">
                         {% for course in user_courses %}
                             <a href="/course/{{ course.id }}"
@@ -223,10 +218,10 @@
                 </div>
                 <div class="pb-2" style="height: 20rem">
                     <h2 class="noselect text-black dark:text-white text-2xl">Your Documents</h2>
-                    <div class="scroll h-full" aria-label="Recent Announcements">
-                        <div class="grid gap-4 pl-4 mt-5 block p-6 bg-white/75 rounded-lg border border-gray-200 shadow-md  dark:bg-gray-800/75 dark:border-gray-700 overflow-auto hover:scroll"
-                             style="grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));
-                                        height:360px;">
+                    <div class="scroll h-full" aria-label="Your Documents">
+                        <div class="grid gap-4 pl-4 mt-5 p-6 bg-white/75 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800/75 dark:border-gray-700 overflow-auto hover:scroll"
+                             style="grid-template-columns:repeat(auto-fit,minmax(16rem,1fr)); height: 22.5rem;">
+
                         </div>
                     </div>
                 </div>
@@ -247,7 +242,7 @@
                     <h2 class="noselect text-black dark:text-white text-2xl">
                         Your Planner Events for Today
                     </h2>
-                    <div class="scroll h-full" aria-label="Recent Announcements">
+                    <div class="scroll h-full" aria-label="Planner Events">
                         <div class="grid gap-4 pl-4 mt-5 block p-6 bg-white/75 rounded-lg border border-gray-200 shadow-md hover:scroll overflow-auto dark:bg-gray-800/75 dark:border-gray-700 "
                              style="grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));height:360px">
                         </div>

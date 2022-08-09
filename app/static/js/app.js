@@ -203,7 +203,6 @@ window.addEventListener('load', () => {
     for (const list of templateLists) list.classList.add('scroll');
 
     btn.onclick = function () {
-        console.log('button clicked');
         modal.style.display = 'block';
 
         screens[0].style.top = '-1000px';
@@ -564,7 +563,6 @@ window.addEventListener('load', () => {
     }
 
     function importSchoology() {
-        console.log('hi');
         screens[2].style.display = 'none';
         screens[3].style.display = 'block';
 
