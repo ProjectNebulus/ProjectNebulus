@@ -389,6 +389,18 @@ def getChat():
     return jsonify(chat)
 
 
+@internal.route('/get-total-unread', methods=["GET"])
+def get_total_unread():
+    chats = read.getUserChats(session["id"], ["members"])
+    sum = 0
+    for chat in chats:
+        member = list(filter(lambda x: x.user.id==session["id"], chat.members))[0]
+        sum += member.unread
+
+    return str(sum)
+
+
+
 @internal.route("/update-unread", methods=["POST"])
 def update_unread():
     data = request.get_json()
