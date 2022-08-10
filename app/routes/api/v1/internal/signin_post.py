@@ -5,7 +5,7 @@ from .....routes.main import private_endpoint
 from .....static.python.mongodb import update
 
 
-@internal.route("sign-in", methods=["POST"])
+@internal.route("/sign-in", methods=["POST"])
 def signin_post():
     session["logged_in"] = True
     return "true"
