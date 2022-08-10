@@ -466,7 +466,7 @@
                                 <div class="tooltip-arrow" data-popper-arrow>
                                 </div>
                             </div>
-                            <div onclick="newwindow=window.open('/schoology','Authorize with Schoology','height=400,width=900')"
+                            <div onclick="openModal('schoologyModal');"
                                  style="float:left;
                                             margin:10px;
                                             width:80px;
@@ -1556,4 +1556,362 @@
             opposite_toggle_display(id_name);
         }
     </script>
+
+    <div id="schoologyModal" tabindex="-1" aria-hidden="true"
+         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+        <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <!-- Modal header -->
+                <div class="modalheader flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                        Link Schoology
+                        <img class=" w-6 h-6 mr-2 -ml-1" src="/static/images/logos/schoology.png" alt="Rounded avatar"
+                             style="display: inline-block;padding: 5px;height: 90px;width: 90px;border-radius: 10px;background: lightgray;margin: 5px;margin-left: 30px;">
+                        <span style="
+    margin: 15px;
+    font-size: 1.5em;
+">X</span>
+                        <img class=" w-6 h-6 mr-2 -ml-1"
+                             src="http://localhost:8080/static/images/NebulusSpecialLogo.png" alt="Rounded avatar"
+                             style="display: inline-block;margin: 5px;height: 90px;width: 90px;border-radius: 10px;background: lightgray;">
+                    </h3>
+                    <button type="button"
+                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                            data-modal-toggle="schoologyModal">
+                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                  clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <div class="p-6 space-y-6">
+                    <div style="margin:15px;">
+                        <div id="step1">
+                            <h1 class="text-black dark:text-white text-3xl">
+                            <span class="text-6xl" style="
+    background: linear-gradient(to bottom right, #ffff80, #ffc3bf,  #ffc3bf, #e959ff,  transparent);
+    color: transparent;
+    background-clip: text;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+">Step 1.</span>
+                                Login to your Schoology Account Normally</h1>
+                            <br>
+                            <p class="text-black dark:text-white">Go to your Schoology website and log in. If you are
+                                logged in, you may click "Next Step".</p>
+                            <br><br>
+                            <button onclick="document.getElementById('step1').style.display = 'none'; document.getElementById('step2').style.display = 'block';"
+                                    type="button"
+                                    class="text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">
+                                Next Step
+                                <svg aria-hidden="true" class="ml-2 -mr-1 w-5 h-5" fill="currentColor"
+                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" style="
+    DISPLAY: inline-block;
+">
+                                    <path fill-rule="evenodd"
+                                          d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+
+                            </button>
+
+                            <br><br>
+                            <p class="text-black dark:text-white">Step 1<span class="text-gray-500">/4</span></p>
+                        </div>
+
+                        <div id="step2" style="display:none;">
+                            <h1 class="text-black dark:text-white text-3xl">
+                             <span class="text-6xl" style="
+    background: linear-gradient(to bottom right, #ffff80, #ffc3bf,  #ffc3bf, #e959ff,  transparent);
+    color: transparent;
+    background-clip: text;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+">Step 2.</span>
+                                Paste your Schoology Link</h1>
+                            <p class="text-black dark:text-white">Paste the Schoology Link you use normally here:</p>
+                            <div class="relative">
+                                <div class="flex absolute inset-y-0 left-0 items-center pl-3 pb-2 pointer-events-none">
+                                    <p id="error" class="material-icons" style="color: gray;
+                                      vertical-align: middle;">pending</p>
+                                </div>
+                                <input onchange="changeInput();" id="sgy_link"
+                                       class="pl-10 p-2.5 px-4 py-3 mt-4 w-full rounded-md bg-gray-100 dark:bg-gray-800 outline-none dark:text-white border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
+                                       placeholder="Schoology Link" style="-webkit-user-select: text;">
+                                <p id="error-msg" class="mt-2 text-sm text-red-600 dark:text-red-500"
+                                   style=" color: gray !important; ">
+                                    Enter your Schoology link please.
+
+                                </p>
+                            </div>
+                            <p class="text-black dark:text-white">
+                                <i class="material-icons" style="color:lightgreen;">check_circle</i>
+                                https://app.schoology.com/
+                            </p>
+                            <p class="text-black dark:text-white">
+                                <i class="material-icons" style="color:lightgreen;">check_circle</i>
+                                https://school.schoology.com/
+                            </p>
+                            <p class="text-black dark:text-white">
+                                <i class="material-icons" style="color:lightgreen;">check_circle</i>
+                                https://schoology.app.com/
+                            </p>
+                            <p class="text-black dark:text-white">
+                                <i class="material-icons" style="color:pink;">cancel</i> schoology.com/courses
+                            </p>
+                            <br><br>
+                            <button id="step_2_button" disabled
+                                    onclick="document.getElementById('step2').style.display = 'none'; document.getElementById('step3').style.display = 'block';"
+                                    type="button"
+                                    class="text-white disabled bg-yellow-700 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">
+                                Next Step
+                                <svg aria-hidden="true" class="ml-2 -mr-1 w-5 h-5" fill="currentColor"
+                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" style="
+    DISPLAY: inline-block;
+">
+                                    <path fill-rule="evenodd"
+                                          d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+
+                            </button>
+                            <br><br>
+                            <p class="text-black dark:text-white">Step 2<span class="text-gray-500">/4</span></p>
+                            <script>
+                                function changeInput() {
+                                    var link = document.getElementById('sgy_link').value;
+                                    if (!link.includes("https://")) {
+                                        document.getElementById('error').innerHTML = "cancel";
+                                        document.getElementById('error').style.color = "pink";
+                                        document.getElementById('step_2_button').disabled = true;
+                                        document.getElementById('step_2_button').classList.add('disabled', 'bg-yellow-700');
+                                        document.getElementById('step_2_button').classList.remove("bg-yellow-400", "hover:bg-yellow-500");
+                                    }
+                                    if (!link.includes("schoology.")) {
+                                        document.getElementById('error').innerHTML = "cancel";
+                                        document.getElementById('error').style.color = "pink";
+                                        document.getElementById('step_2_button').disabled = true;
+                                        document.getElementById('step_2_button').classList.add('disabled', 'bg-yellow-700');
+                                        document.getElementById('step_2_button').classList.remove("bg-yellow-400", "hover:bg-yellow-500");
+                                    } else {
+                                        document.getElementById('error').innerHTML = "check_circle";
+                                        document.getElementById('error').style.color = "lightgreen";
+                                        document.getElementById('step_2_button').disabled = false;
+                                        document.getElementById('step_2_button').classList.remove('disabled', 'bg-yellow-700');
+                                        document.getElementById('step_2_button').classList.add("bg-yellow-400", "hover:bg-yellow-500");
+                                        //convert whatever link to /api
+                                        //https://app.schoology.com/courses --> https://app.schoology.com/ap
+                                        //find how many slashes there are in link
+                                        let slashes = (link.match('/') || []).length;
+                                        // if 2 slashes
+                                        if (slashes === 3) {
+                                            //remove last slash
+                                            link = link.slice(0, -1);
+                                            //add /api
+                                            link = link + "/api";
+                                        } else {
+                                            //if 1 slash
+                                            //add /api
+                                            link = link + "/api";
+                                        }
+                                        document.getElementById("apikeylink").href = link;
+
+                                    }
+                                }
+                            </script>
+                        </div>
+                        <div id="step3" style="display:none;">
+                            <h1 class="text-black dark:text-white text-3xl">
+                             <span class="text-6xl" style="
+    background: linear-gradient(to bottom right, #ffff80, #ffc3bf,  #ffc3bf, #e959ff,  transparent);
+    color: transparent;
+    background-clip: text;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+">Step 3.</span>
+                                Paste your API Key</h1>
+                            <p class="text-black dark:text-white">Your API keys can be found <a
+                                    class="text-sky-500 hover:underline" id="apikeylink">here</a>. Please disable
+                                Schoology Plus or any Schoology extensions or this may not work properly. </p>
+                            <input style="float:left;"
+                                   placeholder="API KEY"
+                                   type="text"
+                                   id="key"
+                                   class="w-full bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-800 border-0 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                   required>
+                            <br>
+                            <br>
+                            <br>
+                            <input style="float:left;"
+                                   placeholder="API Secret"
+                                   type="text"
+                                   id="secret"
+                                   class="w-full bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-800 border-0 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                   required>
+                            <br>
+                            <button onclick="document.getElementById('step3').style.display = 'none'; document.getElementById('step4').style.display = 'block';"
+                                    type="button"
+                                    class="text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">
+                                Next Step
+                                <svg aria-hidden="true" class="ml-2 -mr-1 w-5 h-5" fill="currentColor"
+                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" style="
+    DISPLAY: inline-block;
+">
+                                    <path fill-rule="evenodd"
+                                          d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+
+                            </button>
+                            <br>
+
+                            <br><br>
+                            <p class="text-black dark:text-white">Step 3<span class="text-gray-500">/4</span></p>
+                        </div>
+                        <div id="step4" style="display:none;">
+                            <script>
+                                function check_approval() {
+                                    var $this = $(this);
+                                    $this.button('loading');
+                                    setTimeout(function () {
+
+                                        var request = $.ajax({
+                                            type: "POST",
+                                            url: "/api/v1/internal/connect-to-schoology",
+                                            data: {
+                                                "link": "https://" + document.getElementById("domain").value,
+                                                "key": document.getElementById("key").value,
+                                                "secret": document.getElementById("secret").value
+                                            }
+                                        });
+                                        request.done(function (data) {
+                                            $this.button('reset');
+                                            resp = document.getElementById("error")
+                                            if (data === "error!!!") {
+
+                                                document.getElementById("error").style.display = "block";
+
+                                            } else if (data === "2") {
+                                                document.getElementById("error2").style.display = "block";
+
+
+                                            } else {
+                                                let email = data.split("•")[1];
+                                                let name = data.split("•")[0];
+                                                document.getElementById("name").innerHTML = name;
+                                                document.getElementById("email").innerHTML = email;
+
+                                            }
+                                        });
+
+                                    }, 1000);
+
+
+                                }
+
+
+                                function launch_sgy() {
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: '/api/v1/internal/get-schoology',
+                                        data: {
+                                            "link": document.getElementById("sgy_link").value
+                                        }
+
+                                    }).done(function (data) {
+                                        newwindow2 = window.open(data, 'Authorize with Schoology2', 'height=400,width=800');
+                                        document.getElementById("launchBTN").style.display = "none";
+
+                                        function checkIfDone() {
+                                            $.ajax({
+                                                type: "GET",
+                                                url: "/api/v1/internal/check-schoology-connection",
+                                                data: {}
+                                            }).done(function (data) {
+                                                    if (data === "False") {
+                                                        checkIfDone();
+                                                    } else {
+                                                        check_approval();
+                                                    }
+                                                }
+                                            );
+                                        }
+
+                                        checkIfDone();
+
+                                    });
+                                }
+
+                                {#setInterval(check_approval, 1000);#}
+
+                            </script>
+                            <h1 class="text-black dark:text-white text-3xl">
+                             <span class="text-6xl" style="
+    background: linear-gradient(to bottom right, #ffff80, #ffc3bf,  #ffc3bf, #e959ff,  transparent);
+    color: transparent;
+    background-clip: text;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+">Step 4.</span>
+                                Launch Schoology</h1>
+                            <button onclick="launch_sgy()" id="launchBTN"
+                                    type="button"
+                                    class="text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">
+                                Launch Schoology
+                            </button>
+                            <div id="confirmation"
+                                 class="dark:text-white text-black"
+                                 style="display:none;">
+                                <p class="text-2xl">Successfully connected a Schoology account. The details are
+                                    below:</p>
+                                <p>
+                                    Name: <span id="name"></span>
+                                </p>
+                                <p>
+                                    Email: <span id="email"></span>
+                                </p>
+                                <button onclick="window.close();"
+                                        type="button"
+                                        class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+                                    <svg style="display:inline-block;"
+                                         class="w-6 h-6"
+                                         fill="currentColor"
+                                         viewBox="0 0 20 20"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                              clip-rule="evenodd">
+                                        </path>
+                                    </svg>
+                                    OK, Close Window
+                                </button>
+                            </div>
+                        </div>
+                        <span style="color:red;" id="error">
+                            Something went wrong! Please try again and make sure to click "Accept" in the Schoology popup.
+                        </span>
+                        <span style="color:red;display:none" id="error2">Login Failed. Reason: This Schoology account is already connected.</span>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+                    <button data-modal-toggle="defaultModal" type="button"
+                            class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
+
