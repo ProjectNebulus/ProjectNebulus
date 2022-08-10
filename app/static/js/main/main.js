@@ -88,7 +88,7 @@ function invertSite() {
     if (localStorage.getItem('color-theme') === 'dark') {
         if (window.location.pathname === '/') {
             let wallpaper = localStorage.getItem('wallpaper');
-            if (!wallpaper) wallpaper = '/static/images/darkwallpaper.png';
+            if (!wallpaper) wallpaper = 'https://media.discordapp.net/attachments/934282772657344562/1006709877034451024/cross_fade_ezgif-5-3a978299a9.gif';
 
             document.body.style.background = `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)) 0% 0% / cover, url("${wallpaper}") center center no-repeat fixed`;
             document.body.style.backgroundSize = 'cover';
