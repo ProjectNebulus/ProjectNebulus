@@ -44,7 +44,7 @@ def notepad():
         "Roboto Mono Slashed Slashed",
         "Roboto Mono Slashed Slashed Condensed",
     ]
-    courses = read.get_user_courses(session["id"])
+    courses = list(read.get_user_courses(session["id"]))
     print(courses)
     return render_template(
         "tools/notepad.html",

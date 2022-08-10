@@ -1,30 +1,42 @@
 {% extends "layout.html" %}
 {% block main %}
     <style>
+
     .document{
         background: white;
         height: 230px;
         width: 160px;
-        margin:40px;
+        margin: 40px 40px 20px;
         /*float:left;*/
         display:inline-block;
     }
+
     </style>
     {% include "utils/navbar.html" %}
     <div class="flex flex-row">
         {% include "utils/sidebar.html" %}
-        <div style="margin-left:64px;">
+        <div style="margin-left:64px;width:100%;">
             <div class="ml-3">
-                <h1 class="text-black dark:text-white text-3xl">Templates</h1>
-                <div class="document" style="
+                <h1 class="text-black dark:text-white text-3xl">Start a new document!</h1>
+                <div class="flex flex-col">
+                <div class="document rounded-md" style="
     text-align: center;
 ">
-                    <div style="margin: auto;padding-top: 30%;font-size: 70px;background: -webkit-linear-gradient(red,#fffcbd);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
+                    <div style="padding-top:38%;font-size: 70px;background: -webkit-linear-gradient(red,#fffcbd);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
                         +
                     </div>
                 </div>
+                    <p style="margin-left:80px;" class="uppercase text-gray-400">
+                        Blank
+                    </p>
 
             </div>
+
+<div class="relative flex py-5 items-center w-full">
+    <div class="flex-grow border-t border-gray-400"></div>
+    <span class="flex-shrink mx-4 text-gray-400 uppercase">Recent Documents</span>
+    <div class="flex-grow border-t border-gray-400"></div>
+</div>
             <div class=" ml-3">
                 <h1 class="text-black dark:text-white text-3xl">Recent Documents</h1>
                 <p class="text-black dark:text-white">No Documents Yet!</p>
