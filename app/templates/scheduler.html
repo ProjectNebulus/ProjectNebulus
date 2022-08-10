@@ -8,12 +8,42 @@
 		function addEvent() {
 		    document.getElementById("addNewEvent").classList.remove("hidden");
 		}
+
+		function go() {
+		    document.getElementById("addNewEvent").classList.add("hidden");
+		    //add other stuff here
+		}
 	</script>
 
 
 	<button onclick="addEvent()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-large rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add Task</button>
 
-	<div id="addNewEvent" class="text-white bg-white hover:bg-lightgray focus:outline-none focus:ring-4 focus:ring-blue-300 font-large rounded text-center dark:focus:ring-blue-800 p-6 hidden w-1/2 md:w-full" style="position: fixed;top: 50%;left: 50%;transform: translate(-50%, -50%);">
+	<table class="table-fixed w-full text-sm text-left text-gray-500 dark:text-gray-400">
+	  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+	    <tr>
+	      <th scope="col" class="py-3 px-6">Title</th>
+	      <th scope="col" class="py-3 px-6">Desc</th>
+	      <th scope="col" class="py-3 px-6">Date</th>
+	      <th scope="col" class="py-3 px-6">Priority</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+	      <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">Snack</td>
+	      <td class="py-4 px-6">yum</td>
+	      <td class="py-4 px-6">6-2-2022</td>
+	      <td class="py-4 px-6 text-red">Overdue</td>
+	    </tr>
+	    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+	      <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">Test</td>
+	      <td class="py-4 px-6">For school</td>
+	      <td class="py-4 px-6">6-8-2022</td>
+	      <td class="py-4 px-6 text-green">Upcoming</td>
+            </tr>
+	  </tbody>
+	</table>
+
+	<div id="addNewEvent" class="text-white bg-white hover:bg-lightgray focus:outline-none focus:ring-4 focus:ring-blue-300 font-large rounded text-center dark:focus:ring-blue-800 p-6 hidden w-1/2 md:w-full drop-shadow-lg" style="position: fixed;top: 50%;left: 50%;transform: translate(-50%, -50%);">
 
 		<h1 class="text-blue-600 text-lg mb-6">Add a New Event!</h1>
 		<input type="text" id="small-input" class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark-text-white dark_focus:ring-blue-500 dark:focus:border-blue-500 mb-2" placeholder="Event Name">
@@ -57,7 +87,12 @@
 		  </div>
 		  <input datepicker type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
 		</div>
-	
+
+		<button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-2" onclick="go()">
+		    go
+		    <svg aria-hidden="true" class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+		</button>
+		
 	</div>
 
 	</body>
