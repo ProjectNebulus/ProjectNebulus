@@ -1,8 +1,8 @@
+import schoolopy
 from flask import request, session
 
 from app.static.python.extensions.integrations.schoology import (
     create_schoology_auth,
-    generate_auth,
 )
 from app.static.python.mongodb import read, update
 from . import internal
@@ -14,28 +14,31 @@ secret = "59ccaaeb93ba02570b1281e1b0a90e18"
 
 @internal.route("/get-schoology", methods=["POST"])
 def user_connect_to_schoology_route():
-    global auth
-    session["token"] = None
-    request_token = session["request_token"]
-    request_token_secret = session["request_token_secret"]
-    access_token_secret = session["access_token_secret"]
-    access_token = session["access_token"]
-    auth = generate_auth(
-        authorize=True,
-        key=key,
-        secret=secret,
-        domain=request.form.get("link"),
-        three_legged=True,
-        request_token=request_token,
-        request_token_secret=request_token_secret,
-        access_token=access_token,
-        access_token_secret=access_token_secret,
-    )
+    print(request.form)
+    key = ""
+    secret = ""
+    if request.form.get("key") != None or request.form.get("key") != "":
+        session["key"] = request.form.get("key")
+        key = request.form.get("key")
+    if request.form.get("secret") != None or request.form.get("secret") != "":
+        session["secret"] = request.form.get("secret")
+        secret = request.form.get("secret")
+    session["link"] = request.form.get("link")
+    auth = schoolopy.Auth(key, secret, three_legged=True, domain=request.form.get("link"))
     return auth.request_authorization()
 
 
 @internal.route("/connect-to-schoology", methods=["POST"])
 def connect_to_schoology():
+    key = ""
+    secret = ""
+    if request.form.get("key") != None or request.form.get("key") != "":
+        session["key"] = request.form.get("key")
+        key = request.form.get("key")
+    if request.form.get("secret") != None or request.form.get("secret") != "":
+        session["secret"] = request.form.get("secret")
+        secret = request.form.get("secret")
+    auth = schoolopy.Auth(key, secret, three_legged=True, domain=request.form.get("link"))
     auth.authorize()
     if not auth.authorized:
         return "error!!!"

@@ -1566,12 +1566,13 @@
                 <div class="modalheader flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                         Link Schoology
-                        <img class=" w-6 h-6 mr-2 -ml-1" src="/static/images/logos/schoology.png" alt="Rounded avatar"
-                             style="display: inline-block;padding: 5px;height: 90px;width: 90px;border-radius: 10px;background: lightgray;margin: 5px;margin-left: 30px;">
+                        <img class=" w-6 h-6 mr-2 -ml-1 bg-gray-800" src="/static/images/logos/schoology.png"
+                             alt="Rounded avatar"
+                             style="display: inline-block;padding: 15px;height: 90px;width: 90px;border-radius: 10px;margin: 5px;margin-left: 30px;">
                         <span style="
     margin: 15px;
     font-size: 1.5em;
-">X</span>
+">x</span>
                         <img class=" w-6 h-6 mr-2 -ml-1"
                              src="http://localhost:8080/static/images/NebulusSpecialLogo.png" alt="Rounded avatar"
                              style="display: inline-block;margin: 5px;height: 90px;width: 90px;border-radius: 10px;background: lightgray;">
@@ -1779,79 +1780,46 @@
                         <div id="step4" style="display:none;">
                             <script>
                                 function check_approval() {
-                                    var $this = $(this);
-                                    $this.button('loading');
                                     setTimeout(function () {
 
                                         var request = $.ajax({
                                             type: "POST",
                                             url: "/api/v1/internal/connect-to-schoology",
-                                            data: {
-                                                "link": "https://" + document.getElementById("domain").value,
-                                                "key": document.getElementById("key").value,
-                                                "secret": document.getElementById("secret").value
-                                            }
-                                        });
-                                        request.done(function (data) {
-                                            $this.button('reset');
-                                            resp = document.getElementById("error")
-                                            if (data === "error!!!") {
+                                            data: {}
+                                        }).done(function (data) {
+                                                resp = document.getElementById("error")
+                                                if (data === "error!!!") {
+                                                    document.getElementById("error").style.display = "block";
+                                                } else if (data === "2") {
+                                                    document.getElementById("error2").style.display = "block";
 
-                                                document.getElementById("error").style.display = "block";
-
-                                            } else if (data === "2") {
-                                                document.getElementById("error2").style.display = "block";
-
-
-                                            } else {
-                                                let email = data.split("•")[1];
-                                                let name = data.split("•")[0];
-                                                document.getElementById("name").innerHTML = name;
-                                                document.getElementById("email").innerHTML = email;
+                                                } else {
+                                                    document.getElementById("name").innerHTML = data.split("•")[0];
+                                                    document.getElementById("email").innerHTML = data.split("•")[1];
+                                                }
 
                                             }
-                                        });
+                                        );
+
 
                                     }, 1000);
-
-
                                 }
-
 
                                 function launch_sgy() {
                                     $.ajax({
                                         type: 'POST',
                                         url: '/api/v1/internal/get-schoology',
                                         data: {
-                                            "link": document.getElementById("sgy_link").value
+                                            "link": document.getElementById("sgy_link").value,
+                                            "key": document.getElementById("key").value,
+                                            "secret": document.getElementById("secret").value
                                         }
 
                                     }).done(function (data) {
                                         newwindow2 = window.open(data, 'Authorize with Schoology2', 'height=400,width=800');
                                         document.getElementById("launchBTN").style.display = "none";
-
-                                        function checkIfDone() {
-                                            $.ajax({
-                                                type: "GET",
-                                                url: "/api/v1/internal/check-schoology-connection",
-                                                data: {}
-                                            }).done(function (data) {
-                                                    if (data === "False") {
-                                                        checkIfDone();
-                                                    } else {
-                                                        check_approval();
-                                                    }
-                                                }
-                                            );
-                                        }
-
-                                        checkIfDone();
-
                                     });
                                 }
-
-                                {#setInterval(check_approval, 1000);#}
-
                             </script>
                             <h1 class="text-black dark:text-white text-3xl">
                              <span class="text-6xl" style="
@@ -1863,6 +1831,9 @@
     color: transparent;
 ">Step 4.</span>
                                 Launch Schoology</h1>
+                            <p class="text-black dark:text-white">Please click the button below. When you click it,
+                                there will be a popup window to authorize with Schoology. Fill out the Captcha and click
+                                "Accept".</p>
                             <button onclick="launch_sgy()" id="launchBTN"
                                     type="button"
                                     class="text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">
@@ -1896,8 +1867,8 @@
                                 </button>
                             </div>
                         </div>
-                        <span style="color:red;" id="error">
-                            Something went wrong! Please try again and make sure to click "Accept" in the Schoology popup.
+                        <span style="color:red;display:none;" id="error">
+                            Something went wrong! Please try again and make sure to click "Approve" in the Schoology popup.
                         </span>
                         <span style="color:red;display:none" id="error2">Login Failed. Reason: This Schoology account is already connected.</span>
                     </div>
