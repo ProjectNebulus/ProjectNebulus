@@ -208,8 +208,41 @@
             let socket = io.connect('http://' + document.domain + ':' + location.port + '/chat');
             socket.emit('user_loaded', {});
 
+
+            function notifyMe(title, body, img) {
+    if (!window.Notification) {
+        console.log('Browser does not support notifications.');
+    } else {
+        // check if permission is already granted
+        if (Notification.permission === 'granted') {
+            // show notification here
+            var notify = new Notification(title, {
+                body: body,
+                icon: img,
+            });
+        } else {
+            // request permission from user
+            Notification.requestPermission().then(function (p) {
+                if (p === 'granted') {
+                    // show notification here
+                    var notify = new Notification(title, {
+                        body: body,
+                        icon: img,
+                    });
+                } else {
+                    console.log('User blocked notifications.');
+                }
+            }).catch(function (err) {
+                console.error(err);
+            });
+        }
+    }
+}
+
+
             socket.on('new_message', function (data) {
                 console.log('NEW MESSAGE YAY');
+                notifyMe(`New message from ${data['author'][1]}`, `${data['content']}`, data['author'][2]);
                 chat_notif_sidebar.classList.remove('hidden');
                 chat_notif_sidebar.innerHTML = (parseInt(chat_notif_sidebar.innerHTML) + 1).toString();
             });
