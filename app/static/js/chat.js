@@ -799,44 +799,25 @@ function getChat(chatID) {
             textarea_el.placeholder = `Message ${ms}`;
 
             chat['members'].forEach(function (other) {
-                let status;
-                if (other['user']['_id'] === userID) {
-                    if (other['user']['chatProfile']['status'] === 'None') {
-                        status = 'Online';
-                    } else {
-                        status = other['user']['chatProfile']['status'];
-                    }
-                } else {
-                    if (other['user']['chatProfile']['status'] === 'None') {
-                        if (other['user']['chatProfile']['offline']) {
-                            status = 'Offline';
-                        } else {
-                            status = 'Online';
-                        }
-                    } else {
-                        status = other['user']['chatProfile']['status'];
-                    }
-                }
+                 let color;
+            if (!other['user']['chatProfile']['offline'] && other['user']['chatProfile']['status'] === 'None') {
+                color = 'bg-green-400';
+            } else if (other['user']['chatProfile']['status'] === 'Do Not Disturb') {
+                color = 'bg-red-500';
+            } else if (other['user']['chatProfile']['status'] === 'Idle') {
+                color = 'bg-amber-500';
+            } else {
+                color = 'bg-gray-700';
+            }
                 chatMembers += `<div 
     oncontextmenu='profile(this)'
     style="margin-bottom:4px;"
          class="p-2 flex items-center space-x-4 dark:bg-gray-800/50 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" id="member_${other['_id']}">`;
-                if (other['user']['chatProfile']['status'] === 'Online') {
-                    chatMembers += `<div class="relative">
-<img class="w-10 h-10 rounded-full" src="${other['user']['avatar']['avatar_url']}" alt="">
-<span class="bottom-0 left-7 absolute  w-3 h-3 bg-green-400 border-white dark:border-gray-800 rounded-full"></span>
-</div>`;
-                } else if (other['user']['chatProfile']['status'] === 'Do Not Disturb') {
-                    chatMembers += `<div class="relative">
-<img class="w-10 h-10 rounded-full" src="${other['user']['avatar']['avatar_url']}" alt="">
-<span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-red-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
-</div>`;
-                } else {
                     chatMembers += `<div class="relative">
 <img class="w-10 h-10 rounded-full"  src="${other['user']['avatar']['avatar_url']}" alt="">
-<span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-gray-700 border-2 border-white dark:border-gray-800 rounded-full"></span>
+<span class="bottom-0 left-7 absolute  w-3.5 h-3.5 ${color} border-2 border-white dark:border-gray-800 rounded-full"></span>
 </div>`;
-                }
+
                 let status_emoji = other['user']['chatProfile']['status_emoji'];
                 if (!status_emoji) {
                     status_emoji = '';
