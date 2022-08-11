@@ -772,31 +772,10 @@ function getChat(chatID) {
                 chat_el.insertAdjacentHTML('beforeend', chatContent);
                 chatContent = ``;
             });
-            let tx;
-            $('#chat-header').remove();
-            let ms = document.getElementById(`${chat['_id']}_title`).innerText;
-            if (chat['members'].length == 2) {
-                tx = `
-            <div id="chat-header" class = "flex items-center py-2 px-3 bg-gray-50/50 dark:bg-gray-700/50 backdrop-blur-sm dark:text-white text-black py-3 noselect " >
-                <i class="material-icons text-gray-400"> alternate_email </i>
-            <span class="mx-4">${ms}</span>
-            <span class="inline-block w-3 h-3 bg-green-400 rounded-full"></span>
-        </div>
-        `;
-                ms = '@' + ms;
-            } else {
-                tx = `
-            <div
-            id="chat-header" class = "flex items-center py-2 px-3 bg-gray-50/50 dark:bg-gray-700/50 backdrop-blur-sm dark:text-white text-black py-3 noselect " >
-            <span class="mx-4">${ms}</span>
-        </div>
-        `;
-            }
 
-            chat_el.insertAdjacentHTML('beforebegin', tx);
 
-            let textarea_el = document.getElementById('msg_content');
-            textarea_el.placeholder = `Message ${ms}`;
+
+            let other_color;
 
             chat['members'].forEach(function (other) {
                  let color;
@@ -808,6 +787,10 @@ function getChat(chatID) {
                 color = 'bg-amber-500';
             } else {
                 color = 'bg-gray-700';
+            }
+
+            if (other['user']['_id'] != userID && chat['members'].length === 2){
+                other_color = color;
             }
                 chatMembers += `<div 
     oncontextmenu='profile(this)'
@@ -837,6 +820,31 @@ function getChat(chatID) {
 
             members.innerHTML = '';
             members.insertAdjacentHTML('beforeend', chatMembers);
+
+            let tx;
+            $('#chat-header').remove();
+            let ms = document.getElementById(`${chat['_id']}_title`).innerText;
+            if (chat['members'].length == 2) {
+                tx = `
+            <div id="chat-header" class = "flex items-center py-2 px-3 bg-gray-50/50 dark:bg-gray-700/50 backdrop-blur-sm dark:text-white text-black py-3 noselect " >
+                <i class="material-icons text-gray-400"> alternate_email </i>
+            <span class="mx-4">${ms}</span>
+            <span class="inline-block w-3 h-3 ${other_color} rounded-full"></span>
+        </div>
+        `;
+                ms = '@' + ms;
+            } else {
+                tx = `
+            <div
+            id="chat-header" class = "flex items-center py-2 px-3 bg-gray-50/50 dark:bg-gray-700/50 backdrop-blur-sm dark:text-white text-black py-3 noselect " >
+            <span class="mx-4">${ms}</span>
+        </div>
+        `;
+            }
+
+            chat_el.insertAdjacentHTML('beforebegin', tx);
+            let textarea_el = document.getElementById('msg_content');
+            textarea_el.placeholder = `Message ${ms}`;
 
             $('#chat-loading').hide();
             let preview = document.getElementById('preview_border');
