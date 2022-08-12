@@ -30,16 +30,12 @@ def user_connect_to_schoology_route():
 
 @internal.route("/connect-to-schoology", methods=["POST"])
 def connect_to_schoology():
-    key = ""
-    secret = ""
-    if request.form.get("key") != None or request.form.get("key") != "":
-        session["key"] = request.form.get("key")
-        key = request.form.get("key")
-    if request.form.get("secret") != None or request.form.get("secret") != "":
-        session["secret"] = request.form.get("secret")
-        secret = request.form.get("secret")
-    auth = schoolopy.Auth(key, secret, three_legged=True, domain=request.form.get("link"))
+    key = session["key"]
+    secret = session["secret"]
+    auth = schoolopy.Auth(key, secret, three_legged=True, domain=session["link"])
+    auth.request_authorization()
     auth.authorize()
+
     if not auth.authorized:
         return "error!!!"
     data = request.form
@@ -56,8 +52,10 @@ def connect_to_schoology():
     session["Schoologyemail"] = sc.get_me().primary_email
     session["Schoologydomain"] = data["link"]
     session["Schoologyid"] = sc.get_me().id
+    print("hi")
     if read.check_duplicate_schoology(session["Schoologyemail"]) == "true":
         return "2"
+        print("hi2")
     schoology = {
         "Schoology_request_token": request_token,
         "Schoology_request_secret": request_token_secret,
@@ -70,4 +68,5 @@ def connect_to_schoology():
         "apisecret": data["secret"],
     }
     update.schoologyLogin(session["id"], schoology)
+    print("hi3")
     return str(sc.get_me().name_display + "•" + sc.get_me().primary_email)
