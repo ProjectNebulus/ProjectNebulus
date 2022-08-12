@@ -404,16 +404,16 @@ def get_total_unread():
 def get_chat_status():
     user = read.find_user(id=session["id"])
     data = {}
-    if not user.chatProfile.offline and user.chatProfile.status == "None":
+    print(user.chatProfile.offline, user.chatProfile.status)
+    if user.chatProfile.status == "None":
         data["status"] = "Online"
-    elif user.chatProfile.offline:
-        data["status"] = "Offline"
     else:
         data["status"] = user.chatProfile.status
 
     data['statusText'] = user.chatProfile.text_status
     data['username'] = user.username
     data['avatar'] = user.avatar.avatar_url
+    print(data['status'])
 
     return data
 
