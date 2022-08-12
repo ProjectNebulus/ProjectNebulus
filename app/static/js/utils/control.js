@@ -75,6 +75,7 @@ if (window.location.pathname === "/chat") {
         document.getElementById('profile-status').style.backgroundColor = color;
         document.getElementById('status-name').innerText = data['status'];
         chatStatus.classList.remove('hidden');
+        document.getElementById('status-name').innerText = data['status'];
     });
 } else {
     chatStatus.classList.add('hidden');

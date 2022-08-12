@@ -262,13 +262,13 @@ function navFetchStatus() {
         document.getElementById('spotifyStatus').style.display = "block";
         document.getElementById('spotifyStatus').innerHTML = `
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-            <div style="width:110px;float:left;">
+            <div style="width:110px;vertical-align: middle; display:inline-block;">
                 <img style="display: inline-block; margin:20px; border-radius:10px;" class="mb-3 w-20 h-20 shadow-lg" src="${image}" alt="Song Title">
             </div>
-            <div style="width: calc(90% - 110px);float:left;">
+            <div style="width: calc(90% - 110px);vertical-align: middle;display:inline-block;">
                 <div style="margin-top:20px;">
-                <p class="truncate text-lg text-black dark:text-white"><i class="fa fa-spotify" style="display:inline-block; color:#1DB954;margin-right:10px;"></i> ${name} ${explicit} </p>
-                    <p class="truncate text-sm text-gray-600 dark:text-gray-300">${artists} - ${album}</p></div>
+                <p class="truncate text-lg text-black"><i class="fa fa-spotify" style="display:inline-block; color:#1DB954;margin-right:10px;"></i> ${name} ${explicit} </p>
+                    <p class="truncate text-sm text-gray-600">${artists} - ${album}</p></div>
                
                 
                 <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700 h-3" style="
@@ -278,7 +278,7 @@ function navFetchStatus() {
             ratio
         )}%;background: linear-gradient(45deg, green, orange);"> </div>
                 </div>
-                <p class="truncate text-sm text-gray-600 dark:text-gray-300">${timestamp} of ${total}
+                <p class="truncate text-sm text-gray-600">${timestamp} of ${total}
                     ${playing}
                     <i style="margin-left:20px;color:white;" class="material-icons">skip_next</i>
                 </p></div>`;
