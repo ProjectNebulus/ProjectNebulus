@@ -1,6 +1,16 @@
 const sidebar = document.getElementById("sidebar_");
+let override = false;
 sidebar.style.height = "calc(100%-" + document.getElementById("navbar").getBoundingClientRect().height + "px)";
-sidebar.onclick = () => sidebar.classList.toggle("expanded");
+sidebar.onclick = () => {
+    sidebar.classList.toggle("expanded");
+    override = true;
+};
+
+document.addEventListener("click", (ev) => {
+    if (!override)
+        sidebar.classList.remove("expanded");
+    override = false;
+});
 
 if (!(window.location.pathname === "/chat")) {
     let io = window.io;
