@@ -56,14 +56,15 @@ if (window.location.pathname === "/chat") {
         }
         chatStatus.value = data['statusText']
         let color;
-        if (data['status'] === "Online") {
-            color = 'bg-green-400';
-        } else if (data['status'] === "Do Not Disturb") {
+
+        if (data['status'] === "Do Not Disturb") {
             color = 'bg-red-500';
         } else if (data['status'] === "Idle") {
             color = "bg-amber-500";
-        } else {
+        } else if (data['status'] === "Invisible"){
             color = "bg-gray-700";
+        } else {
+            color = 'bg-green-400';
         }
 
         document.getElementById('status-color').classList.add(color);
