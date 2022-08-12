@@ -64414,6 +64414,10 @@ html.dark body {
   border-color: rgb(148 163 184 / var(--tw-border-opacity));
 }
 
+.hover\:border-transparent:hover {
+  --tw-border-opacity: 0;
+}
+
 .hover\:bg-gray-200:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));

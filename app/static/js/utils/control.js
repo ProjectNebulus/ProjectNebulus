@@ -44,3 +44,31 @@ for (const a of controlCenter.getElementsByTagName('a'))
 
 controlCenter2.classList.add('grid-cols-2');
 controlCenter2.classList.remove('flex-col');
+let chatStatus = document.getElementById('chatStatus')
+if (window.location.pathname === "/chat") {
+    $.ajax({
+        url: '/api/v1/internal/get-chat-status',
+        type: 'GET'
+    }).done(function (data) {
+
+        if (!(data['statusText'])) {
+            chatStatus.placeholder = "No status"
+        }
+        chatStatus.value = data['statusText']
+        let color;
+        if (data['status'] === "Online") {
+            color = 'bg-green-400';
+        } else if (data['status'] === "Do Not Disturb") {
+            color = 'bg-red-500';
+        } else if (data['status'] === "Idle") {
+            color = "bg-amber-500";
+        } else {
+            color = "bg-gray-700";
+        }
+
+        document.getElementById('status-color').classList.add(color);
+        chatStatus.classList.remove('hidden');
+    });
+} else {
+    chatStatus.classList.add('hidden');
+}

@@ -399,7 +399,20 @@ def get_total_unread():
 
     return str(sum)
 
+@internal.route('/get-chat-status', methods=['GET'])
+def get_chat_status():
+    user = read.find_user(id=session['id'])
+    data = {}
+    if not user.chatProfile.offline and user.chatProfile.status == "None":
+        data['status'] = "Online"
+    elif user.chatProfile.offline:
+        data['status'] = "Offline"
+    else:
+        data['status'] = user.chatProfile.status
 
+    data['statusText'] = user.chatProfile.text_status
+
+    return data
 
 @internal.route("/update-unread", methods=["POST"])
 def update_unread():
