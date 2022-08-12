@@ -411,6 +411,8 @@ def get_chat_status():
         data['status'] = user.chatProfile.status
 
     data['statusText'] = user.chatProfile.text_status
+    data['username'] = user.username
+    data['avatar'] = user.avatar.avatar_url
 
     return data
 

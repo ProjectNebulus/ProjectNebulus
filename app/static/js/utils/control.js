@@ -31,8 +31,7 @@ function padWith0(num) {
     return string;
 }
 
-for (const div of controlCenter.querySelectorAll('div > div > div'))
-    div.className += ' bg-gray-300/30 dark:bg-gray-900/60 mx-2 text-left flex flex-col rounded-lg';
+
 
 for (const icon of controlCenter.getElementsByTagName('i'))
     icon.className +=
@@ -50,24 +49,31 @@ if (window.location.pathname === "/chat") {
         url: '/api/v1/internal/get-chat-status',
         type: 'GET'
     }).done(function (data) {
-
+        let status_text = document.getElementById('profile-status-text');
+        let profile_username = document.getElementById('profile-username');
         if (!(data['statusText'])) {
-            chatStatus.placeholder = "No status"
+            status_text.innerText = "No status";
+        } else {
+            status_text.innerText = data['statusText'];
         }
-        chatStatus.value = data['statusText']
+        profile_username.innerText = data['username'];
+        let profile_avatar = document.getElementById('profile-avatar');
+        profile_avatar.src = data['avatar'];
         let color;
 
         if (data['status'] === "Do Not Disturb") {
-            color = 'bg-red-500';
+            color = '#ef4444';
         } else if (data['status'] === "Idle") {
-            color = "bg-amber-500";
+            color = "#f59e0b";
         } else if (data['status'] === "Invisible"){
-            color = "bg-gray-700";
+            color = "#374151";
         } else {
-            color = 'bg-green-400';
+            color = '#4ade80';
         }
 
-        document.getElementById('status-color').classList.add(color);
+        document.getElementById('status-color').style.backgroundColor = color;
+        document.getElementById('profile-status').style.backgroundColor = color;
+        document.getElementById('status-name').innerText = data['status'];
         chatStatus.classList.remove('hidden');
     });
 } else {
