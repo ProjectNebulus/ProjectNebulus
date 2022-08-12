@@ -6,9 +6,9 @@ import requests
 from flask import redirect, render_template, request, session
 from werkzeug.utils import secure_filename
 
+from ...static.python.mongodb.read import getText
 from . import main_blueprint
 from .utils import logged_in
-from ...static.python.mongodb.read import getText
 
 UPLOAD_FOLDER = "./app/static"
 ALLOWED_EXTENSIONS = {"txt", "pdf", "png", "jpg", "jpeg", "gif", "heic", "webm"}

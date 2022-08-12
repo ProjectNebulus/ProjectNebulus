@@ -2,8 +2,9 @@ from flask import render_template, session
 
 from app.routes.main.utils import logged_in
 from app.static.python.mongodb import read
-from . import main_blueprint
+
 from ...static.python.mongodb.read import getText
+from . import main_blueprint
 
 
 @main_blueprint.route("/planner", methods=["GET"])

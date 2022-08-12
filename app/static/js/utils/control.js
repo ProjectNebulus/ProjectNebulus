@@ -66,7 +66,7 @@ if (window.location.pathname === "/chat") {
         } else {
             color = 'bg-green-400';
         }
-
+        document.getElementById('status-color').classList.remove("bg-gray-300/30", "dark:bg-gray-900/60");
         document.getElementById('status-color').classList.add(color);
         chatStatus.classList.remove('hidden');
     });

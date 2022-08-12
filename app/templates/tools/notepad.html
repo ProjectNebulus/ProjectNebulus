@@ -519,7 +519,6 @@
         <div style="margin-left:64px;;width:90%;margin:auto;">
             <form style="height: calc(100% - 80px);">
                 <div class="mb-4 w-full bg-gray-100 rounded-lg border border-gray-200 dark:bg-gray-800/50 dark:border-gray-600">
-
                     <div id="part2"
                          class="flex justify-between items-center py-2 px-3 border-b dark:border-gray-600">
                         <div class="flex flex-wrap items-center divide-gray-200 sm:divide-x dark:divide-gray-600">
@@ -557,7 +556,7 @@
                                          viewBox="0 0 24 24"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                              d="M19 9l-7 7-7-7"></path>
+                                        d="M19 9l-7 7-7-7"></path>
                                     </svg>
                                 </button>
                                 <!-- Dropdown menu -->
@@ -601,7 +600,7 @@
                                          viewBox="0 0 24 24"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                              d="M19 9l-7 7-7-7"></path>
+                                        d="M19 9l-7 7-7-7"></path>
                                     </svg>
                                 </button>
                                 <!-- Dropdown menu -->
@@ -648,7 +647,7 @@
                                          viewBox="0 0 24 24"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                              d="M19 9l-7 7-7-7"></path>
+                                        d="M19 9l-7 7-7-7"></path>
                                     </svg>
                                 </button>
                                 <!-- Dropdown menu -->
@@ -778,7 +777,8 @@
                                             class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
                                         <span class='buttonSelect'><i class="material-icons">image</i></span>
                                     </button>
-                                    <button type="button" onclick="changeInvert();"
+                                    <button type="button"
+                                            onclick="changeInvert();"
                                             class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
                                         <span class='buttonSelect'><i class="material-icons">nightlight</i></span>
                                     </button>
@@ -794,8 +794,8 @@
                                  viewBox="0 0 20 20"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
-                                      d="M3 4a1 1 0 011-1h4a1 1 0 010 2H6.414l2.293 2.293a1 1 0 11-1.414 1.414L5 6.414V8a1 1 0 01-2 0V4zm9 1a1 1 0 010-2h4a1 1 0 011 1v4a1 1 0 01-2 0V6.414l-2.293 2.293a1 1 0 11-1.414-1.414L13.586 5H12zm-9 7a1 1 0 012 0v1.586l2.293-2.293a1 1 0 111.414 1.414L6.414 15H8a1 1 0 010 2H4a1 1 0 01-1-1v-4zm13-1a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 010-2h1.586l-2.293-2.293a1 1 0 111.414-1.414L15 13.586V12a1 1 0 011-1z"
-                                      clip-rule="evenodd">
+                                d="M3 4a1 1 0 011-1h4a1 1 0 010 2H6.414l2.293 2.293a1 1 0 11-1.414 1.414L5 6.414V8a1 1 0 01-2 0V4zm9 1a1 1 0 010-2h4a1 1 0 011 1v4a1 1 0 01-2 0V6.414l-2.293 2.293a1 1 0 11-1.414-1.414L13.586 5H12zm-9 7a1 1 0 012 0v1.586l2.293-2.293a1 1 0 111.414 1.414L6.414 15H8a1 1 0 010 2H4a1 1 0 01-1-1v-4zm13-1a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 010-2h1.586l-2.293-2.293a1 1 0 111.414-1.414L15 13.586V12a1 1 0 011-1z"
+                                clip-rule="evenodd">
                                 </path>
                             </svg>
                         </button>
@@ -812,33 +812,62 @@
                                 height:100%;">
                         <label for="editor" class="sr-only">Publish post</label>
                         <ul class="flex text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400"
-                            style="
-    overflow: auto;
-    white-space: nowrap;
-">
+                            style=" overflow: auto; white-space: nowrap; ">
                             {% set color = ["#ef4444", "#f97316", "#f59e0b", "#eab308", "#84cc16", "#22c55e", "#10b981", "#14b8a6", "#06b6d4", "#0ea5e9",
                             "#3b82f6", "#6366f1", "#8b5cf6", "#a855f7", "#d946ef", "#ec4899", "#f43f5e"] %}
                             {% for index in range(0, courses|length) %}
                                 {% set current = index % color|length %}
                                 <li class="mr-2">
-                                    <a href="#" class="inline-block p-4 rounded-t-lg text-black "
+                                    <a href="#"
+                                       class="inline-block p-4 rounded-t-lg text-black "
                                        style="background-color: {{ color[current] }}">{{ courses[index].name }}</a>
                                 </li>
                             {% endfor %}
-
                         </ul>
                         <div contenteditable="true"
-
                              tabindex="0"
                              id="editor"
                              class=" block px-0 w-full text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
                              style="min-height: 968px;">
-                            <span><p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;"><span
-                                    style="font-size: 30pt; font-family: Montserrat, sans-serif; background-color: transparent; font-variant-numeric: normal; font-variant-east-asian: normal; vertical-align: baseline; white-space: pre-wrap;">Welcome to your </span><span
-                                    style="font-size: 30pt; font-family: Montserrat, sans-serif; color: {{ color[0] }}; background-color: transparent; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; vertical-align: baseline; white-space: pre-wrap;">{{ courses[0].name }} Notes</span></p><p
-                                    dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;"><span
-                                    style="font-size: 10.5pt; font-family: Montserrat, sans-serif; color: rgb(163, 163, 163); font-variant-numeric: normal; font-variant-east-asian: normal; vertical-align: baseline; white-space: pre-wrap;">Type / to insert</span></p><div><span
-                                    style="font-size: 10.5pt; font-family: Montserrat, sans-serif; color: rgb(163, 163, 163); font-variant-numeric: normal; font-variant-east-asian: normal; vertical-align: baseline; white-space: pre-wrap;"><br></span></div></span>
+                            <span>
+                                <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">
+                                    <span style="font-size: 30pt;
+                                                 font-family: Montserrat, sans-serif;
+                                                 background-color: transparent;
+                                                 font-variant-numeric: normal;
+                                                 font-variant-east-asian: normal;
+                                                 vertical-align: baseline;
+                                                 white-space: pre-wrap;">Welcome to your </span><span style="font-size: 30pt;
+             font-family: Montserrat, sans-serif;
+             color: {{ color[0] }};
+             background-color: transparent;
+             font-weight: 700;
+             font-variant-numeric: normal;
+             font-variant-east-asian: normal;
+             vertical-align: baseline;
+             white-space: pre-wrap;">{{ courses[0].name }} Notes</span>
+                                </p>
+                                <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">
+                                    <span style="font-size: 10.5pt;
+                                                 font-family: Montserrat, sans-serif;
+                                                 color: rgb(163, 163, 163);
+                                                 font-variant-numeric: normal;
+                                                 font-variant-east-asian: normal;
+                                                 vertical-align: baseline;
+                                                 white-space: pre-wrap;">Type / to insert</span>
+                                </p>
+                                <div>
+                                    <span style="font-size: 10.5pt;
+                                                 font-family: Montserrat, sans-serif;
+                                                 color: rgb(163, 163, 163);
+                                                 font-variant-numeric: normal;
+                                                 font-variant-east-asian: normal;
+                                                 vertical-align: baseline;
+                                                 white-space: pre-wrap;">
+                                        <br>
+                                    </span>
+                                </div>
+                            </span>
                         </div>
                     </div>
                 </div>

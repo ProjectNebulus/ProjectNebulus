@@ -2,9 +2,9 @@ from pathlib import Path
 
 from flask import redirect, render_template, request, send_file, session
 
-from . import main_blueprint
-from .. import babel
 from ...static.python.mongodb.read import getText
+from .. import babel
+from . import main_blueprint
 
 
 @babel.localeselector

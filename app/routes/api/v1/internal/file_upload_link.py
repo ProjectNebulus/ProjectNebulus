@@ -2,6 +2,7 @@ from flask import Flask, request
 
 from app.static.python.cdn import utils
 from app.static.python.mongodb import create
+
 from . import internal
 
 UPLOAD_FOLDER = "app/static/"
@@ -29,7 +30,7 @@ def upload_file_link():
             {
                 "name": filename,
                 "url": "https://nebulus-cdn.sfo3.cdn.digitaloceanspaces.com/"
-                       + filename,
+                + filename,
                 "course": course,
             }
         )
@@ -38,7 +39,7 @@ def upload_file_link():
             {
                 "name": filename,
                 "url": "https://nebulus-cdn.sfo3.cdn.digitaloceanspaces.com/"
-                       + filename,
+                + filename,
                 "course": course,
                 "folder": folder,
             }

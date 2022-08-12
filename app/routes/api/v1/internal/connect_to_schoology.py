@@ -1,10 +1,9 @@
 import schoolopy
 from flask import request, session
 
-from app.static.python.extensions.integrations.schoology import (
-    create_schoology_auth,
-)
+from app.static.python.extensions.integrations.schoology import create_schoology_auth
 from app.static.python.mongodb import read, update
+
 from . import internal
 
 auth = None
@@ -24,7 +23,9 @@ def user_connect_to_schoology_route():
         session["secret"] = request.form.get("secret")
         secret = request.form.get("secret")
     session["link"] = request.form.get("link")
-    auth = schoolopy.Auth(key, secret, three_legged=True, domain=request.form.get("link"))
+    auth = schoolopy.Auth(
+        key, secret, three_legged=True, domain=request.form.get("link")
+    )
     return auth.request_authorization()
 
 

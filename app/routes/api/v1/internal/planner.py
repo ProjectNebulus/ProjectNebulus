@@ -4,6 +4,7 @@ from flask import request, session
 
 from app.routes.main import private_endpoint
 from app.static.python.mongodb import read, update
+
 from . import internal
 
 

@@ -1,8 +1,8 @@
 from flask import render_template, session
 
+from ...static.python.mongodb.read import getText
 from . import main_blueprint
 from .utils import logged_in
-from ...static.python.mongodb.read import getText
 
 
 @main_blueprint.route("/calendar", methods=["GET"])

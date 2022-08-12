@@ -8,6 +8,7 @@ from flask import session
 from mongoengine import Q
 
 from app.static.python.utils.security import valid_password
+
 from ..classes import *
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
@@ -159,7 +160,7 @@ def getText(query):
             "cu": "No cambies más entre sitios web. Conecta tus cuentas de Schoology, Google Classroom y Canvas hoy.",
             "co": "No cambies más entre sitios web. Conecta tus cuentas de Schoology, Google Classroom y Canvas hoy.",
             "ar": "No cambies más entre sitios web. Conecta tus cuentas de Schoology, Google Classroom y Canvas hoy.",
-            "cn": "您不需要继续在网站之间切换。将您的Schoology. Google Classroom, 与 Canvas账户全部连接到耐博乐思就可以了。"
+            "cn": "您不需要继续在网站之间切换。将您的Schoology. Google Classroom, 与 Canvas账户全部连接到耐博乐思就可以了。",
         },
         "Organize your Learning Experience": {
             "us": "Organize your learning experience",
@@ -224,43 +225,26 @@ def getText(query):
         "About": {
             "cn": "关于",
         },
-        "Pricing": {
-            "cn": "价钱"
-        },
-        "Change Language": {
-            "cn": "改变语言"
-        },
-        "With Nebulus, have your whole learning experience": {
-            "cn": "耐博乐思会让您的学习经历既有"
-        },
+        "Pricing": {"cn": "价钱"},
+        "Change Language": {"cn": "改变语言"},
+        "With Nebulus, have your whole learning experience": {"cn": "耐博乐思会让您的学习经历既有"},
         "organized": {
             "cn": "秩序",
         },
         "and": {
             "cn": "、又",
         },
-        "simple": {
-            "cn": "简单方便"
-        },
+        "simple": {"cn": "简单方便"},
         "All it takes is one": {
             "cn": "您所需的仅仅是一个",
         },
         "Nebulus Account": {
             "cn": "耐博乐思账号",
         },
-
-        "New to Nebulus?": {
-            "cn": "新手指南?"
-        },
-        "Forgot password?": {
-            "cn": "忘记密码？"
-        },
-        "Reset": {
-            "cn": "重制"
-        },
-        "Or, Sign in with Your Apps:": {
-            "cn": "或者，使用其它应用登录："
-        },
+        "New to Nebulus?": {"cn": "新手指南?"},
+        "Forgot password?": {"cn": "忘记密码？"},
+        "Reset": {"cn": "重制"},
+        "Or, Sign in with Your Apps:": {"cn": "或者，使用其它应用登录："},
         "Sign up Now": {
             "cn": "现在注册",
         },
@@ -273,9 +257,7 @@ def getText(query):
         "Welcome back to Nebulus! Enter your username please.": {
             "cn": "欢迎回到耐博乐思！请输入您的用户名。",
         },
-        "Username": {
-            "cn": "用户名"
-        },
+        "Username": {"cn": "用户名"},
         "Email": {
             "cn": "邮箱",
         },
@@ -294,25 +276,18 @@ def getText(query):
         "Previous": {
             "cn": "前一步",
         },
-        "Join": {
-            "cn": "开始用耐博乐思！"
-        },
+        "Join": {"cn": "开始用耐博乐思！"},
         "Confirm Password": {
             "cn": "确认密码",
         },
-        "Welcome to Nebulus! Please enter an Email!": {
-            "cn": " 欢迎来到耐博乐思！请输入用户名。"
-        },
+        "Welcome to Nebulus! Please enter an Email!": {"cn": " 欢迎来到耐博乐思！请输入用户名。"},
         "Please enter a Username!": {
             "cn": "请输入用户名。",
         },
-        "Please enter a password!": {
-            "cn": "请输入密码！"
-        },
+        "Please enter a password!": {"cn": "请输入密码！"},
         "Please confirm your password!": {
             "cn": "请确认您的密码！",
-        }
-
+        },
     }
 
     try:
@@ -509,8 +484,8 @@ def sort_course_events(user_id: str, course_id: int):
         {
             key: list(result)
             for key, result in groupby(
-            sorted_events, key=lambda obj: sortByDateTime(obj)
-        )
+                sorted_events, key=lambda obj: sortByDateTime(obj)
+            )
         }
     )
 
@@ -551,8 +526,8 @@ def sort_user_events(user_id: str, maxDays=5, maxEvents=16):
         {
             key: list(result)
             for key, result in groupby(
-            sorted_events, key=lambda obj: sortByDateTime(obj)
-        )
+                sorted_events, key=lambda obj: sortByDateTime(obj)
+            )
         }
     )
 
@@ -757,8 +732,8 @@ def loadChats(user_id: str, current_index, initial_amount, required_fields):
                     User.objects.only(
                         "id", "chatProfile", "username", "avatar.avatar_url"
                     )
-                        .get(pk=member["user"])
-                        .to_json()
+                    .get(pk=member["user"])
+                    .to_json()
                 )
                 chat["members"][x]["unread"] = str(chat["members"][x]["unread"])
             chat["owner"] = list(

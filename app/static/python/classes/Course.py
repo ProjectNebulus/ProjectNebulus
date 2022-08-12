@@ -9,9 +9,9 @@ from mongoengine import (
     StringField,
 )
 
+from ..mongodb import read
 from .Avatar import Avatar
 from .Snowflake import Snowflake
-from ..mongodb import read
 
 templates = (
     "Sports",

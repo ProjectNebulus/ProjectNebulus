@@ -1,6 +1,7 @@
 from flask import request
 
 from app.static.python.classes.User import User
+
 from . import internal
 
 
