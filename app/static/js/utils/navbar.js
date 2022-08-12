@@ -40,13 +40,3 @@ for (const element of document.getElementsByClassName('changeable-gradient')) {
 
 document.querySelector("#navbar [data-dropdown-toggle='control-center']").oncontextmenu = (e) =>
     e.preventDefault();
-
-const resize = () =>
-    (document.getElementById('mobile-navbar-scroll').style.height =
-        window.innerHeight -
-        document.getElementById('logo').getBoundingClientRect().height -
-        48 +
-        'px');
-
-window.addEventListener('load', resize);
-window.addEventListener('resize', resize);

@@ -92,6 +92,7 @@ function invertSite() {
 
             document.body.style.background = `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)) 0% 0% / cover, url("${wallpaper}") center center no-repeat fixed`;
             document.body.style.backgroundSize = 'cover';
+            document.body.style.backgroundColor = "#111926";
         }
         if (banner) banner.style.filter = 'brightness(100%)';
 
@@ -101,12 +102,12 @@ function invertSite() {
         if (window.location.href.endsWith('/')) {
             let wallpaper = localStorage.getItem('wallpaper');
             if (wallpaper === null) {
-                document.body.style.backgroundColor = 'white';
                 document.body.style.backgroundImage = '';
             } else {
                 document.body.style.background = `linear-gradient( rgba(256, 256, 256, 0.5), rgba(256, 256, 256, 0.2) ), url('${wallpaper}') no-repeat center center fixed`;
                 document.body.style.backgroundSize = 'cover';
             }
+            document.body.style.backgroundColor = 'white';
         }
 
         if (banner) banner.style.filter = 'brightness(70%)';
