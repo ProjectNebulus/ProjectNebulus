@@ -7,7 +7,10 @@
     <h1 class="dark:text-white text-xl">{{ user }}</h1>
     <p class="text-gray-800 dark:text-gray-400">{{ email }}</p>
 </div>
-<div id="controlcenter2"
+<div style="
+    margin-top: 10px;
+    margin-bottom: 10px;
+" id="controlcenter2"
      class="bg-gray-300/30 dark:bg-gray-800/30 p-4 mx-4 my-4 rounded-lg dark:border-gray-700 border backdrop-blur flex flex-col">
     <div class="bg-gray-300/30 dark:bg-gray-900/60 mx-2 text-left flex flex-col rounded-lg">
         <a id="theme-toggle">
@@ -53,7 +56,10 @@
     </div>
 </div>
 
-<div id="focus" class="flex p-4 mb-4 text-sm text-blue-700 bg-blue-100 rounded-lg dark:bg-blue-200 dark:text-blue-800"
+<div style="
+    margin-top: 10px;
+    margin-bottom: 10px;
+" id="focus" class="flex p-4 mb-4 text-sm text-blue-700 bg-blue-100 rounded-lg dark:bg-blue-200 dark:text-blue-800"
      role="alert">
 
     <i class="material-icons m-3">timer</i>
@@ -64,8 +70,11 @@
 </div>
 
 
-<div id="chatStatus"
-     class="dark:border-gray-700 border backdrop-blur bg-gray-300/30 h-40 w-full text-center  text-blue-800 text-xs font-medium px-3 py-2 rounded dark:bg-transparent dark:text-blue-800">
+<div style="
+    margin-top: 10px;
+    margin-bottom: 10px;
+" id="chatStatus"
+     class="dark:border-gray-700 border text-sm text-red-700 bg-red-100 rounded-lg h-40 w-full text-center text-blue-800 text-xs font-medium px-3 py-2 rounded">
     <div class="flex flex-col">
         <div class="flex items-center  mb-4">
             <div class="relative mr-4">
@@ -74,9 +83,10 @@
                       class="bottom-0 absolute  w-4 h-4 border-2 border-white dark:border-gray-800 rounded-full"
                       style="left:35px;"></span>
             </div>
-            <div class=" flex flex-col text-white" style="align-content: flex-start;flex-flow: column wrap;">
+            <div class=" flex flex-col" style="align-content: flex-start;flex-flow: column wrap;">
                 <div id="profile-username" class="my-3" style="font-size:30px;text-align: start;">Coder N</div>
-                <div id="profile-status-text" class=" text-sm text-gray-500 dark:text-gray-400"
+                <div id="profile-status-text" class=" text-sm text-gray-60
+                0"
                      style="text-align: start;">No status
                 </div>
             </div>
@@ -87,7 +97,7 @@
                  style="width:40%;">
                 <div id="status-color" data-dropdown-toggle="dropdownTop"
                      class="my-2 mr-4 w-7 h-7 rounded-full mx-2 text-left flex flex-col rounded-lg"></div>
-                <h3 id="status-name" class="my-2 mt-3 text-gray-400"></h3>
+                <h3 id="status-name" class="my-2 mt-3 text-black"></h3>
 
             </div>
             <div class=" flex  text-md mt-4 bg-gray-300/30 dark:border-gray-700 border backdrop-blur dark:bg-gray-800/30 rounded-md"
@@ -148,12 +158,15 @@
     </div>
 </div>
 
-
-<div id="spotifyStatus"
+<div style="
+    margin-top: 10px;
+    margin-bottom: 10px;
+" id="spotifyStatus"
      class="flex p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
      role="alert">
 
 </div>
+
 <script src="/static/js/utils/control.js"></script>
 {#<div style="display:none;">#}
 {#    <h1>Points</h1>#}
