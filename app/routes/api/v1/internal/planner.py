@@ -3,8 +3,7 @@ from json import loads
 from flask import request, session
 
 from app.routes.main import private_endpoint
-from app.static.python.mongodb import read, update
-
+from app.static.python.mongodb import read, update, create
 from . import internal
 
 
@@ -19,6 +18,24 @@ def getPlanner():
 def savePlanner():
     data = next(request.form.items())[0]
     return update.savePlanner(loads(data), session["id"])
+
+
+@internal.route("/nebulusdoc/create", methods=["POST"])
+@private_endpoint
+def newNebulusdoc():
+    data = {
+        "title": "Untitled Document",
+        "content": ""
+    }
+    id = create.create_nebulusdoc(data)
+    return str(id)  # /docs/document/"
+
+
+@internal.route("/nebulusdoc/save", methods=["POST"])
+@private_endpoint
+def saveNebulusdoc():
+    data = next(request.form.items())[0]
+    return create.create_nebulusdoc(loads(data))
 
 
 @internal.route("/planner/saveConfig", methods=["POST"])

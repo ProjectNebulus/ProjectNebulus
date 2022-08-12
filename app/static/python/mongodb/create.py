@@ -47,6 +47,14 @@ def create_course(data: dict) -> Course:
     course.save(force_insert=True, validate=False)
     return course
 
+def create_nebulusdoc(data: dict) -> NebulusDocument:
+    user = read.find_user(id=session["id"])
+
+    doc = NebulusDocument(**data)
+    if not data.get("authorizedUsers"):
+        doc.authorizedUsers.append(user)
+    doc.save(force_insert=True, validate=False)
+    return doc.id
 
 def create_user(data: dict) -> str | list[str | User]:
     """

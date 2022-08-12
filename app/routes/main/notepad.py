@@ -1,9 +1,8 @@
 from flask import render_template, session
 
 from app.static.python.mongodb import read
-
-from ...static.python.mongodb.read import getText
 from . import main_blueprint
+from ...static.python.mongodb.read import getText
 
 
 @main_blueprint.route("/documents", methods=["GET"])
@@ -88,13 +87,16 @@ def document(id):
         "Roboto Mono Slashed Slashed",
         "Roboto Mono Slashed Slashed Condensed",
     ]
-
-    return render_template(
-        "tools/notepad.html",
-        page="Nebulus - Notepad",
-        user=session.get("username"),
-        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-        read=read,
-        fonts=fonts,
-        translate=getText,
-    )
+    try:
+        document = read.get_nebulusdoc(id)
+        return render_template(
+            "tools/notepad.html",
+            page="Nebulus - Notepad",
+            user=session.get("username"),
+            avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+            read=read,
+            fonts=fonts,
+            translate=getText,
+        )
+    except:
+        return "404"

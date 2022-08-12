@@ -8,7 +8,6 @@ from flask import session
 from mongoengine import Q
 
 from app.static.python.utils.security import valid_password
-
 from ..classes import *
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
@@ -300,6 +299,9 @@ def getAssignment(assignment_id: str) -> Assignment:
     assignment = Assignment.objects(id=assignment_id).first()
     return assignment
 
+def getNebulusDocument(document_id: str) -> NebulusDocument:
+    document = NebulusDocument.objects(id=document_id).first()
+    return document
 
 def getEvent(event_id: str) -> Event:
     event = Event.objects(pk=event_id).first()
