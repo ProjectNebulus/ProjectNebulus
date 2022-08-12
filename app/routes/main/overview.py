@@ -5,9 +5,10 @@ from flask import render_template, session
 
 from app.static.python.mongodb import read
 from app.static.python.utils.colors import getColor
+
+from ...static.python.mongodb.read import getText
 from . import main_blueprint, utils
 from .utils import logged_in
-from ...static.python.mongodb.read import getText
 
 
 @main_blueprint.route("/overview", methods=["GET"])
@@ -65,7 +66,7 @@ def dashboard():
             thread = sc.get_message(message_id=message["id"])
             info["message"] = thread[-1]["message"]
             info["message"] = info["message"][:100] + "..." * (
-                    len(info["message"]) > 100
+                len(info["message"]) > 100
             )
             newThread = []
             for threadItem in thread:

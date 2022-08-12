@@ -10,10 +10,10 @@ from pandas import *
 
 from app.static.python.classes import User
 from app.static.python.mongodb import create, delete, read, update
-from . import internal
-from .... import socketio
-from .....static.python.classes import ChatMember
 
+from .....static.python.classes import ChatMember
+from .... import socketio
+from . import internal
 
 # from app.static.python.school import get_school
 
@@ -272,14 +272,14 @@ def get_embed():
     try:
         if "youtube.com/watch" in link:
             location = link.index("v=")
-            id = link[location + 2: location + 14]
+            id = link[location + 2 : location + 14]
             image = """
             
            <iframe width="560" height="315" src="https://www.youtube.com/embed/${id}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>"""
 
         if "youtu.be/" in link:
             location = link.index("/")
-            id = link[location + 1: location + 13]
+            id = link[location + 1 : location + 13]
             image = """
             
            <iframe width="560" height="315" src="https://www.youtube.com/embed/${id}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>"""
@@ -293,12 +293,12 @@ def get_embed():
     except:
         color = ""
     if (
-            title != ""
-            or url != ""
-            or color != ""
-            or image != ""
-            or site != ""
-            or descrip != ""
+        title != ""
+        or url != ""
+        or color != ""
+        or image != ""
+        or site != ""
+        or descrip != ""
     ):
         embed = f"""
         <div style="border-style: none none none solid; border-width:3px; border-color:{color}" class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
@@ -372,8 +372,8 @@ def getChat():
     for message in chat["messages"]:
         message["sender"] = json.loads(
             User.objects.only("id", "username", "avatar.avatar_url")
-                .get(pk=message["sender"])
-                .to_json()
+            .get(pk=message["sender"])
+            .to_json()
         )
 
     for n, member in enumerate(chat["members"]):
@@ -389,32 +389,34 @@ def getChat():
     return jsonify(chat)
 
 
-@internal.route('/get-total-unread', methods=["GET"])
+@internal.route("/get-total-unread", methods=["GET"])
 def get_total_unread():
     chats = read.getUserChats(session["id"], ["members"])
     sum = 0
     for chat in chats:
-        member = list(filter(lambda x: x.user.id==session["id"], chat.members))[0]
+        member = list(filter(lambda x: x.user.id == session["id"], chat.members))[0]
         sum += member.unread
 
     return str(sum)
 
-@internal.route('/get-chat-status', methods=['GET'])
+
+@internal.route("/get-chat-status", methods=["GET"])
 def get_chat_status():
-    user = read.find_user(id=session['id'])
+    user = read.find_user(id=session["id"])
     data = {}
     if not user.chatProfile.offline and user.chatProfile.status == "None":
-        data['status'] = "Online"
+        data["status"] = "Online"
     elif user.chatProfile.offline:
-        data['status'] = "Offline"
+        data["status"] = "Offline"
     else:
-        data['status'] = user.chatProfile.status
+        data["status"] = user.chatProfile.status
 
     data['statusText'] = user.chatProfile.text_status
     data['username'] = user.username
     data['avatar'] = user.avatar.avatar_url
 
     return data
+
 
 @internal.route("/update-unread", methods=["POST"])
 def update_unread():
@@ -432,18 +434,18 @@ def fetchMessages():
     if len(chat["messages"]) < data["current_index"] + 20:
         print(len(chat["messages"]))
         chat["messages"] = list(reversed(chat["messages"]))[
-                           data["current_index"]: len(chat["messages"])
-                           ]
+            data["current_index"] : len(chat["messages"])
+        ]
     else:
         chat["messages"] = list(reversed(chat["messages"]))[
-                           data["current_index"]: (data["current_index"] + 30)
-                           ]
+            data["current_index"] : (data["current_index"] + 30)
+        ]
 
     for message in chat["messages"]:
         message["sender"] = json.loads(
             User.objects.only("id", "username", "avatar.avatar_url")
-                .get(pk=message["sender"])
-                .to_json()
+            .get(pk=message["sender"])
+            .to_json()
         )
 
     print(len(chat["messages"]))

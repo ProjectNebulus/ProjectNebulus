@@ -8,8 +8,9 @@ from flask_mail import Message
 
 from app.routes.main import private_endpoint
 from app.static.python.mongodb import read
-from . import internal
+
 from .... import mail
+from . import internal
 
 
 def send_async_email(app, msg):
@@ -45,8 +46,8 @@ def signup_email():
 
     htmlform = (
         str(codecs.open(str(root_path) + "/app/templates/utils/email.html", "r").read())
-            .replace("123456", str(code))
-            .replace("Nicholas Wang", data["username"])
+        .replace("123456", str(code))
+        .replace("Nicholas Wang", data["username"])
     )
 
     send_email(f"Your Nebulus Email Verification Code", [data["email"]], htmlform)
@@ -73,11 +74,11 @@ def reset_email():
 
     htmlform = (
         str(codecs.open(str(root_path) + "/app/templates/utils/email.html", "r").read())
-            .replace("123456", str(code))
-            .replace("Nicholas Wang", data["username"])
-            .replace("signed up", "requested a password reset")
-            .replace("sign up", "do so")
-            .replace("Signup", "Reset")
+        .replace("123456", str(code))
+        .replace("Nicholas Wang", data["username"])
+        .replace("signed up", "requested a password reset")
+        .replace("sign up", "do so")
+        .replace("Signup", "Reset")
     )
 
     send_email(f"Your Nebulus Password Reset Code", [email], htmlform)

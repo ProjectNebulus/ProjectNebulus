@@ -6,6 +6,7 @@ from flask import jsonify, request, session
 from app.routes.main.utils import private_endpoint
 from app.static.python.mongodb import read
 from app.static.python.utils.colors import getColor
+
 from . import internal
 
 

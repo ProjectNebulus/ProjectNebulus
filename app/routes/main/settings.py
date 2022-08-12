@@ -3,6 +3,8 @@ import google.oauth2.credentials
 from googleapiclient.discovery import build
 
 from app.static.python.mongodb import read
+
+from ...static.python.mongodb.read import getText
 from . import main_blueprint
 from .spotify import (
     SPOTIPY_CLIENT_ID,
@@ -16,7 +18,6 @@ from .spotify import (
     session,
     spotipy,
 )
-from ...static.python.mongodb.read import getText
 
 
 def generate_redirect(url):

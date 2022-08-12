@@ -9,4 +9,5 @@ def check_email_code():
     var = request.get_json()["value"]
     return str(var == str(session["verificationCode"])).lower()
 
+
 # testing

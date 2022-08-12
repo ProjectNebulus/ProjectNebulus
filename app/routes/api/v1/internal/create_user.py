@@ -7,6 +7,7 @@ from flask.json import jsonify
 from app.static.python.classes import Avatar, Chat, ChatProfile, User
 from app.static.python.mongodb import create, read
 from app.static.python.utils.security import hash256
+
 from . import internal
 
 
@@ -43,7 +44,7 @@ def create_user():
     data["avatar"] = cats[int(data["avatar"].replace("cat", ""))]
     data["avatar"] = Avatar(
         avatar_url="https://beta.nebulus.ml/static/images/nebulusCats/"
-                   + data["avatar"],
+        + data["avatar"],
         parent="User",
     )
     data["age"] = datetime.strptime(data["age"].strip(), "%m/%d/%Y")
@@ -57,8 +58,8 @@ def create_user():
         session["id"] = validation[1].id
         session["avatar"] = (
             data["avatar"]
-                .avatar_url.replace("https://localhost:8080", "")
-                .replace("https://beta.nebulus.ml", "")
+            .avatar_url.replace("https://localhost:8080", "")
+            .replace("https://beta.nebulus.ml", "")
         )
 
     return validation[0]

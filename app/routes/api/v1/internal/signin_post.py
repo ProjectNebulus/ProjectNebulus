@@ -1,8 +1,8 @@
 from flask import request, session
 
-from . import internal
 from .....routes.main import private_endpoint
 from .....static.python.mongodb import update
+from . import internal
 
 
 @internal.route("/sign-in", methods=["POST"])
