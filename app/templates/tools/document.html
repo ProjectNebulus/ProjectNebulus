@@ -2,11 +2,7 @@
 {% block main %}
     {% include "utils/navbar.html" %}
     <div class="flex flex-row">
-        <script>
-            window.onload = function () {
-                document.getElementById("editor").innerHTML = `{{ content }}`;
-            }
-        </script>
+
         {% include "utils/sidebar.html" %}
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -845,7 +841,7 @@
                              id="editor"
                              class=" block px-0 w-full text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
                              style="min-height: 968px;">
-
+                            {{ content | safe }}
                         </div>
 
                     </div>

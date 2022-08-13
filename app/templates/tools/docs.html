@@ -126,7 +126,7 @@
                         <a href="/docs/document/{{ doc.id }}">
                             <div class="flex flex-col">
                                 <div class="document rounded-md" style=" text-align: center; ">
-                                    <span style="zoom: 40%; overflow:hidden;">{{ doc.content }}</span>
+                                    <span style="zoom: 20%;padding:20px; overflow:hidden;">{{ doc.content|safe }}</span>
                                 </div>
                                 <p style="padding-left:45px;
                                   margin-left:20px;
