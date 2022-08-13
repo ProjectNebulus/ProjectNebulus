@@ -2,6 +2,11 @@
 {% block main %}
     {% include "utils/navbar.html" %}
     <div class="flex flex-row">
+        <script>
+            window.onload = function () {
+                document.getElementById("editor").innerHTML = `{{ content }}`;
+            }
+        </script>
         {% include "utils/sidebar.html" %}
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -842,11 +847,7 @@
                              style="min-height: 968px;">
 
                         </div>
-                        <script>
-                            window.onload = function () {
-                                document.getElementById("editor").innerHTML = `{{ content }}`;
-                            }
-                        </script>
+
                     </div>
                 </div>
             </form>
@@ -859,11 +860,12 @@
             let request = $.ajax({
                 url: "/api/v1/internal/nebulusdoc/save",
                 method: "POST",
-                data: JSON.stringify({
+                data: {
                     "title": title,
-                    "content": content,
-                    "id": {{ id }}
-                }),
+                    "content": document.getElementById('editor').innerHTML,
+                    "id": {{ id }},
+                },
+                dataType: "json"
             });
             request.done(function (response) {
                 console.log(response);

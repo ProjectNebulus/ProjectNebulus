@@ -36,9 +36,16 @@ def newNebulusdoc():
 @internal.route("/nebulusdoc/save", methods=["POST"])
 @private_endpoint
 def saveNebulusdoc():
-    data = next(request.form.items())[0]
+    data1 = request.form.get("title")
+    data2 = request.form.get("content")
+    data3 = request.form.get("id")
+    data = {
+        "title": data1,
+        "content": data2,
+        "id": data3
+    }
     print(data)
-    create.update_nebulusdoc(loads(data))
+    create.update_nebulusdoc(data)
 
     return "success"
 

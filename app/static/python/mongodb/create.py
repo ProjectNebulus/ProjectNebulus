@@ -59,19 +59,16 @@ def create_nebulusdoc(data: dict) -> NebulusDocument:
     return doc.id
 
 
-def update_nebulusdoc(data: dict) -> NebulusDocument:
-    user = read.find_user(id=session["id"])
 
-    doc = NebulusDocument(**data)
-    if not data.get("authorizedUsers"):
-        doc.authorizedUsers.append(user)
-    user.nebulus_documents.append(doc)
-    if not data.get("owner"):
-        doc.owner = (user)
+def update_nebulusdoc(data: dict):
+    # doc = getNebulusDocument(data["id"])
+    doc = NebulusDocument.objects.get(id=data["id"])
+    # print(doc.__dict__)
+    doc.title = data["title"]
+    doc.content = data["content"]
     doc.save(clean=False)
-
+    # print(doc.__dict__)
     return doc.id
-
 
 def create_user(data: dict) -> str | list[str | User]:
     """
