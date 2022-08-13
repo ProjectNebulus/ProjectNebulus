@@ -183,7 +183,7 @@ function updateToMessage(message) {
     message['send_date'] = formatTime(message['send_date']);
     chat_el.insertAdjacentHTML(
         'afterbegin',
-        `<div class="flex items-top space-x-4 mt-2" id="${message['id']}" style="font-family: 'Roboto', sans-serif;">
+        `<div class="flex items-top space-x-4 mt-2" id="${message['id']}">
                     <img class="mt-1 w-10 h-10 rounded-full"
                          src="${message['author'][2]}"
                          alt="">
@@ -448,7 +448,7 @@ function load(data, getFirst = false) {
                               
                         <logo image="${other['avatar']['avatar_url']}" no-revert=""  class="h-4 mx-auto my-auto " ><img class="ml-2 h-4 w-4" src="${other['avatar']['avatar_url']}" alt="logo" style="filter: brightness(100%);"></logo>
                     </button>
-                    <span id="notification_${chat['_id']}" class="${visibility} overflow-hidden flex flex-grow left-5 absolute text-sm pl-2 pb-1  bg-red-500 border-4 border-white dark:border-gray-800 rounded-full" style="top:-9;width:auto; height:auto;min-width:1.25rem;min-height:1.25rem;padding-left:7px;padding-right:7px;">${unread}</span>
+                    <span id="notification_${chat['_id']}" class="${visibility} overflow-hidden flex flex-grow left-5 top-0 absolute text-sm bg-red-500 border-4 border-white dark:border-gray-800 rounded-full w-5 h-5" style="padding-left:7px;padding-right:7px">${unread}</span>
 <span class="bottom-0 left-7 absolute  w-3 h-3 ${color} border-white dark:border-gray-800 rounded-full"></span>
 </div>`;
             let status_emoji = other['chatProfile']['status_emoji'];
@@ -600,6 +600,7 @@ function profile(node) {
 </div>`;
     insertAfter(node, el);
 }
+
 function toIsoString(date) {
     var tzo = -date.getTimezoneOffset(),
         dif = tzo >= 0 ? '+' : '-',
@@ -681,6 +682,7 @@ function formatTime(time_input) {
     }
     return time;
 }
+
 let show_preview = false;
 
 function getChat(chatID) {
@@ -736,15 +738,15 @@ function getChat(chatID) {
             chat['messages'].forEach(function (message) {
                 message['content'] = replaceURLs(message['content'], message['id']);
 
-                var time = formatTime(message['send_date']);
+                const time = formatTime(message['send_date']);
 
                 chatContent += `<div class="flex items-top space-x-4 mt-2 hover:bg-gray-100/50 dark:hover:bg-gray-700/50 " id="${message['id']}">
                         <img class="mt-1 w-10 h-10 rounded-full " data-dropdown-toggle="user_${message['id']}"
                              src="${message['sender']['avatar']['avatar_url']}"
-                             alt="">
+                             alt="${message["sender"]}'s Profile Picture">
                         <div class="space-y-1 font-medium dark:text-white">
                             <div><span  data-dropdown-toggle="user_${message['id']}" class="hover:underline">${message['sender']['username']}</span> <span class="ml-3 text-sm text-gray-400">${time}</span></div>
-                            <div id="content_${message['id']}" style="font-family: 'Roboto', sans-serif;" class="text-sm text-gray-500 dark:text-gray-400">${message['content']}</div>
+                            <div id="content_${message['id']}" class="text-sm text-gray-500 dark:text-gray-400">${message['content']}</div>
                             
                         </div>
                     </div>
@@ -774,29 +776,28 @@ function getChat(chatID) {
             });
 
 
-
             let other_color;
 
             chat['members'].forEach(function (other) {
-                 let color;
-            if (!other['user']['chatProfile']['offline'] && other['user']['chatProfile']['status'] === 'None') {
-                color = 'bg-green-400';
-            } else if (other['user']['chatProfile']['status'] === 'Do Not Disturb') {
-                color = 'bg-red-500';
-            } else if (other['user']['chatProfile']['status'] === 'Idle') {
-                color = 'bg-amber-500';
-            } else {
-                color = 'bg-gray-700';
-            }
+                let color;
+                if (!other['user']['chatProfile']['offline'] && other['user']['chatProfile']['status'] === 'None') {
+                    color = 'bg-green-400';
+                } else if (other['user']['chatProfile']['status'] === 'Do Not Disturb') {
+                    color = 'bg-red-500';
+                } else if (other['user']['chatProfile']['status'] === 'Idle') {
+                    color = 'bg-amber-500';
+                } else {
+                    color = 'bg-gray-700';
+                }
 
-            if (other['user']['_id'] != userID && chat['members'].length === 2){
-                other_color = color;
-            }
+                if (other['user']['_id'] != userID && chat['members'].length === 2) {
+                    other_color = color;
+                }
                 chatMembers += `<div 
     oncontextmenu='profile(this)'
     style="margin-bottom:4px;"
          class="p-2 flex items-center space-x-4 dark:bg-gray-800/50 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" id="member_${other['_id']}">`;
-                    chatMembers += `<div class="relative">
+                chatMembers += `<div class="relative">
 <img class="w-10 h-10 rounded-full"  src="${other['user']['avatar']['avatar_url']}" alt="">
 <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 ${color} border-2 border-white dark:border-gray-800 rounded-full"></span>
 </div>`;
