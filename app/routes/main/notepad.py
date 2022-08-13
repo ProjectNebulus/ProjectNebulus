@@ -88,15 +88,23 @@ def document(id):
         "Roboto Mono Slashed Slashed Condensed",
     ]
     try:
-        document = read.get_nebulusdoc(id)
+        document = read.getNebulusDocument(id)
+        print(document)
+        # check authorized user
+
+        content = document["content"]
+        title = document["title"]
         return render_template(
-            "tools/notepad.html",
+            "tools/document.html",
             page="Nebulus - Notepad",
             user=session.get("username"),
             avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
             read=read,
             fonts=fonts,
             translate=getText,
+            content=content,
+            title=title,
         )
-    except:
+    except Exception as e:
+        print(e)
         return "404"

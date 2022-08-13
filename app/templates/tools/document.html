@@ -526,6 +526,7 @@
                                    id="name"
                                    class="rounded-none rounded-r-lg bg-gray-50 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5 dark:bg-gray-800/75 dark:text-white"
                                    placeholder="Untitled Document"
+                                   value="{{ title }}"
                                    style="border-style:none;">
                         </div>
                         <p style="float:right;margin-top:-30px;" class="text-xl dark:text-white">
@@ -832,13 +833,14 @@
                          class="py-2 px-4 bg-gray-200 rounded-b-lg dark:bg-gray-800"
                          style="overflow-y:scroll;
                                 height:100%;">
+                        <span id="savestate" style="color:#b8b8b8;text-decoration:underline">Synced to Cloud | Last Edit was seconds ago</span>
                         <label for="editor" class="sr-only">Publish post</label>
                         <div contenteditable="true"
                              tabindex="0"
                              id="editor"
                              class=" block px-0 w-full text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
                              style="min-height: 968px;">
-                            <font face="Montserrat" color="#a3a3a3"><b style="">Type / to insert</b></font>
+                            {{ content }}
                         </div>
                     </div>
                 </div>

@@ -25,7 +25,9 @@ def savePlanner():
 def newNebulusdoc():
     data = {
         "title": "Untitled Document",
-        "content": ""
+        "content": """
+        <font face="Montserrat" color="#a3a3a3"><b style="">Type / to insert</b></font>
+        """
     }
     id = create.create_nebulusdoc(data)
     return str(id)  # /docs/document/"
