@@ -37,7 +37,10 @@ def newNebulusdoc():
 @private_endpoint
 def saveNebulusdoc():
     data = next(request.form.items())[0]
-    return create.create_nebulusdoc(loads(data))
+    print(data)
+    create.create_nebulusdoc(loads(data))
+
+    return "success"
 
 
 @internal.route("/planner/saveConfig", methods=["POST"])

@@ -840,11 +840,45 @@
                              id="editor"
                              class=" block px-0 w-full text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
                              style="min-height: 968px;">
-                            {{ content }}
+
                         </div>
+                        <script>
+                            window.onload = function () {
+                                document.getElementById("editor").innerHTML = `{{ content }}`;
+                            }
+                        </script>
                     </div>
                 </div>
             </form>
         </div>
     </div>
+    <script>
+        function save_editor() {
+            let content = document.getElementById('editor').innerHTML;
+            let title = document.getElementById("name").value; //document.getElementById('title').value;
+            let dictionary = {
+                "title": title,
+                "content": content,
+                "id": {{ id }}
+            }
+            let request = $.ajax({
+                {#url: "/nebulusdoc/save",#}
+                {#url: "api/v1/internal/nebulusdoc/save",#}
+                url: "/api/v1/internal/nebulusdoc/save",
+                method: "POST",
+                data: dictionary,
+                {#dataType: "json"#}
+            });
+            request.done(function (response) {
+                console.log(response);
+                if (response.status === "success") {
+                    document.getElementById('savestate').innerHTML = "Synced to Cloud";
+                    document.getElementById("savestate").style.color = "white";
+                } else {
+                    document.getElementById('savestate').innerHTML = "Error";
+                    document.getElementById("savestate").style.color = "red";
+                }
+            });
+        }
+    </script>
 {% endblock %}

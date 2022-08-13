@@ -104,6 +104,7 @@ def document(id):
             translate=getText,
             content=content,
             title=title,
+            id=id,
         )
     except Exception as e:
         print(e)
