@@ -1,6 +1,23 @@
 io = window.io;
 
-console.log();
+let chatBox;
+window.addEventListener("load", () => {
+    chatBox = document.getElementById("msg_content");
+    chatBox.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            if (!(e.shiftKey || e.ctrlKey || e.metaKey)) {
+                sendMessage();
+                e.preventDefault();
+            } else
+                chatBox.rows = Math.min(3, parseInt(chatBox.rows) + 1) + "";
+        } else if (e.key === "Backspace") {
+            if (chatBox.value.charAt(chatBox.selectionStart) === "\n")
+                chatBox.rows = Math.max(1, parseInt(chatBox.rows))
+        }
+    });
+
+    if (window.location.search.substring(1).includes("email=ema")) toggleEmail();
+});
 
 function getEmbed(hyperlink) {
     return new Promise((resolve, reject) => {
@@ -18,10 +35,7 @@ function getEmbed(hyperlink) {
 }
 
 function replaceURLs(message, message_id) {
-    console.log(message);
-    if (!message) {
-        return message;
-    }
+    if (!message) return message;
 
     if (!message.includes('http')) {
         console.log('returned. no link detected');
@@ -53,27 +67,21 @@ function replaceURLs(message, message_id) {
             getEmbed(hyperlink).then((data) => {
                 console.log(data);
                 data = data['data'];
-                if (data['themeColor'] === null) {
-                    data['themeColor'] = '#534F4E';
-                }
-                let topsmall = '';
-                if (data['siteName'] === null) {
-                    topsmall = siteName;
-                } else {
-                    topsmall = data['siteName'];
-                }
+
+                data['themeColor'] = data["themeColor"] || '#534F4E';
+                let site = data['siteName'] || siteName;
+
                 result += `<div style="border-style: none none none solid; border-width:8px; border-color:${data['themeColor']}"
                      class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100/75 dark:bg-gray-800/50 dark:border-gray-700 dark:hover:bg-gray-700/75">
                     <a href="${hyperlink}"><h5
-                        class="mb-2 text-md hover:underline font-bold tracking-tight text-black dark:text-white">${topsmall}</h5>
+                        class="mb-2 text-md hover:underline font-bold tracking-tight text-black dark:text-white">${site}</h5>
                     </a>
                     <a href="${hyperlink}"><h5
                         class="mb-2 text-xl hover:underline font-bold tracking-tight text-sky-500">${data['title']}</h5></a>
                     <p class="font-normal text-gray-700 dark:text-gray-400">${data['description']}</p>
                     `;
-                if (data['image'] != null) {
-                    result += ` <img src="${data['image']}" style="width:90%; margin:auto; margin-top:10px;" class="rounded-md">`;
-                }
+
+                if (data['image'] != null) result += `<img src="${data['image']}" style="width:90%; margin:auto; margin-top:10px;" class="rounded-md">`;
 
                 result += `</div>`;
 
@@ -181,6 +189,7 @@ function togglePreview() {
 function updateToMessage(message) {
     let chat_el = document.getElementById('chat');
     message['send_date'] = formatTime(message['send_date']);
+
     chat_el.insertAdjacentHTML(
         'afterbegin',
         `<div class="flex items-top space-x-4 mt-2" id="${message['id']}">
@@ -197,8 +206,8 @@ function updateToMessage(message) {
     let url = replaceURLs(message['content'], message['id']);
     console.log(url);
     $(`#content_${message['id']}`).html(url);
-    if ($('#chat').children().length >= 40) {
-        $('#chat').children().last().remove();
+    if ($('#chat').children.length >= 40) {
+        $('#chat').children.last.remove();
     }
     $('#chat').scrollTop(0);
 }
@@ -351,7 +360,6 @@ $(document).ready(function () {
                 messages.forEach(function (message) {
                     var time = formatTime(message['send_date']);
                     let content = replaceURLs(message['content'], message['id']);
-                    console.log(content);
                     chatContent += `<div class="flex items-top space-x-4 mt-2" id="${message['id']}">
                    
                          <button class="rounded-full border-gray-300 border-none w-8 h-8
@@ -559,12 +567,6 @@ function toggleChat() {
     document.getElementById('emails').style.display = 'none';
 }
 
-window.addEventListener('keydown', function (event) {
-    let form = document.getElementById('msg');
-    if (event.keyCode === 13 && !event.shiftKey) {
-        form.submit();
-    }
-});
 document.oncontextmenu = rightClick;
 
 function rightClick(clickEvent) {
@@ -648,13 +650,13 @@ function formatAMPM(date) {
     var minutes = date.getMinutes();
     var ampm = hours >= 12 ? 'pm' : 'am';
     hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
+    hours = hours || 12; // the hour '0' should be '12'
     minutes = minutes < 10 ? '0' + minutes : minutes;
     return hours + ':' + minutes + ' ' + ampm;
 }
 
 function formatTime(time_input) {
-    let date = new Date(time_input.split(' ').join('T'));
+    let date = new Date(time_input.replaceAll(" ", "T"));
 
     var timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     let new_date = changeTimezone(date, timezone);
@@ -683,6 +685,11 @@ function formatTime(time_input) {
     return time;
 }
 
+function timeDiff(t1, t2) {
+    return new Date(t1["send_date"].replaceAll(" ", "T")).getTime() -
+        new Date(t2["send_date"].replaceAll(" ", "T")).getTime() > 1000 * 60 * 10;
+}
+
 let show_preview = false;
 
 function getChat(chatID) {
@@ -697,10 +704,6 @@ function getChat(chatID) {
         url: '/api/v1/internal/get-chat',
         type: 'POST',
         beforeSend: function () {
-            if (!('hidden' in document.getElementById('msg_form').classList)) {
-                document.getElementById('msg_form').classList.add('hidden');
-            }
-
             if (!('hidden' in document.getElementById('preview_border').classList)) {
                 document.getElementById('preview_border').classList.add('hidden');
                 show_preview = true;
@@ -717,6 +720,7 @@ function getChat(chatID) {
         }),
         //right click: Profile, Close DM, Add Friend, Block, Mute @Coder N, Copy ID
         success: function (chat) {
+            let dropdowns = [];
             let chat_el = document.getElementById('chat');
             let members = document.getElementById('chat-members');
             let chatContent = ``;
@@ -735,42 +739,55 @@ function getChat(chatID) {
             chat_el.innerHTML = '';
             chat_el.insertAdjacentHTML('beforeend', chatContent);
             chatContent = ``;
+
+            if (chat['messages'].length === 0)
+                return;
+
+            let prevMessage = chat['messages'][0];
             chat['messages'].forEach(function (message) {
                 message['content'] = replaceURLs(message['content'], message['id']);
 
-                const time = formatTime(message['send_date']);
-
-                chatContent += `<div class="flex items-top space-x-4 mt-2 hover:bg-gray-100/50 dark:hover:bg-gray-700/50 " id="${message['id']}">
-                        <img class="mt-1 w-10 h-10 rounded-full " data-dropdown-toggle="user_${message['id']}"
-                             src="${message['sender']['avatar']['avatar_url']}"
-                             alt="${message["sender"]}'s Profile Picture">
+                if (prevMessage['sender']['username'] !== message['sender']['username'] || timeDiff(prevMessage, message)) {
+                    document.getElementById("content_" + prevMessage["id"]).remove();
+                    chatContent += `
+                    <div class="flex items-top space-x-4 mt-6 hover:bg-gray-100/50 dark:hover:bg-gray-700/50">
+                        <img class="mt-1 w-10 h-10 rounded-full" data-dropdown-toggle="user_${prevMessage['sender']['username']}"
+                             src="${prevMessage["sender"]["avatar"]["avatar_url"]}"
+                             alt="${prevMessage["sender"]["username"]}'s Profile Picture">
                         <div class="space-y-1 font-medium dark:text-white">
-                            <div><span  data-dropdown-toggle="user_${message['id']}" class="hover:underline">${message['sender']['username']}</span> <span class="ml-3 text-sm text-gray-400">${time}</span></div>
-                            <div id="content_${message['id']}" class="text-sm text-gray-500 dark:text-gray-400">${message['content']}</div>
-                            
+                            <div>
+                                <span data-dropdown-toggle="user_${prevMessage['sender']['username']}" class="hover:underline cursor-pointer">${prevMessage['sender']['username']}</span>
+                                <span class="ml-3 text-sm text-gray-400">${formatTime(prevMessage['send_date'])}</span>
+                            </div>
+                            <div id="content_${prevMessage['id']}" class="text-sm text-gray-500 dark:text-gray-400">${prevMessage['content']}</div>
                         </div>
-                    </div>
-                </div>
-                <div id="user_${message['id']}" class="z-50 hidden bg-white divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600 rounded-lg block" data-popper-placement="bottom" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 215px, 0px);">
-                                <div style="border-radius:10px 10px 0 0; height:60px;background:rgba
-                                    (191, 198, 205);"></div>
-                                <div class="px-4 py-3 text-xl text-gray-900 dark:text-white border-b border-l">
-                                    <div style="text-align: left; margin-left:3px;">
-                                        <div style="margin-top:-60px;">
-                                            <img style="background:rgb(18,25,38)"  class="w-24 h-24 rounded-full border-white dark:border-gray-700 border-2 object-cover" alt="${message['sender']['username']}'s Profile Picture">
-                                            <span class="absolute  w-5 h-5 bg-green-400 border-2 border-white dark:border-gray-700 rounded-full" style="left:90px;top:85px;"></span>
-                                        </div>
-                                        <div>${message['sender']['username']}</div>
-                                       
-                                        
-                                        <input id="msg" placeholder="Message @${message['sender']['username']}" required="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm
-                                                   mb-6 rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5
-                                                   dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400
-                                                   dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    </div>`;
+                }
+
+                chatContent += `<div id="content_${message['id']}" class="text-sm text-gray-500 dark:text-gray-400 hover:bg-gray-100/50 dark:hover:bg-gray-700/50 mt-2" style="padding-left: 3.5rem">${message['content']}</div>`;
+                prevMessage = message;
+
+                if (!dropdowns.includes(message["sender"]["username"])) {
+                    chatContent += `
+                        <div id="user_${message['sender']['username']}" class="z-50 hidden bg-white divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600 rounded-lg block" data-popper-placement="bottom" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 215px, 0px);">
+                            <div style="border-radius:10px 10px 0 0; height:60px;background:rgba(191, 198, 205);"></div>
+                            <div class="px-4 py-3 text-xl text-gray-900 dark:text-white border-b border-l">
+                                <div style="text-align: left; margin-left:3px;">
+                                    <div style="margin-top:-60px;">
+                                        <img style="background:rgb(18,25,38)" class="w-24 h-24 rounded-full border-white dark:border-gray-700 border-2 object-cover" alt="${message['sender']['username']}'s Profile Picture">
+                                        <span class="absolute  w-5 h-5 bg-green-400 border-2 border-white dark:border-gray-700 rounded-full" style="left:90px;top:85px;"></span>
                                     </div>
+                                    <div>${message['sender']['username']}</div>
+                                    
+                                    <input id="msg" placeholder="Message @${message['sender']['username']}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm
+                                               mb-6 rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5
+                                               dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400
+                                               dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 </div>
                             </div>
-`;
+                        </div>`;
+                    dropdowns.push(message["sender"]["username"]);
+                }
                 chat_el.insertAdjacentHTML('beforeend', chatContent);
                 chatContent = ``;
             });
@@ -779,37 +796,27 @@ function getChat(chatID) {
             let other_color;
 
             chat['members'].forEach(function (other) {
-                let color;
-                if (!other['user']['chatProfile']['offline'] && other['user']['chatProfile']['status'] === 'None') {
-                    color = 'bg-green-400';
-                } else if (other['user']['chatProfile']['status'] === 'Do Not Disturb') {
-                    color = 'bg-red-500';
-                } else if (other['user']['chatProfile']['status'] === 'Idle') {
-                    color = 'bg-amber-500';
-                } else {
-                    color = 'bg-gray-700';
-                }
+                let color, chatProfile = other['user']['chatProfile'];
+                if (!chatProfile['offline'] && chatProfile['status'] === 'None') color = 'bg-green-400';
+                else if (chatProfile['status'] === 'Do Not Disturb') color = 'bg-red-500';
+                else if (chatProfile['status'] === 'Idle') color = 'bg-amber-500';
+                else color = 'bg-gray-700';
 
-                if (other['user']['_id'] != userID && chat['members'].length === 2) {
-                    other_color = color;
-                }
-                chatMembers += `<div 
-    oncontextmenu='profile(this)'
-    style="margin-bottom:4px;"
+                if (other['user']['_id'] !== userID && chat['members'].length === 2) other_color = color;
+                chatMembers += `
+<div oncontextmenu='profile(this)' style="margin-bottom:4px;"
          class="p-2 flex items-center space-x-4 dark:bg-gray-800/50 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" id="member_${other['_id']}">`;
                 chatMembers += `<div class="relative">
-<img class="w-10 h-10 rounded-full"  src="${other['user']['avatar']['avatar_url']}" alt="">
-<span class="bottom-0 left-7 absolute  w-3.5 h-3.5 ${color} border-2 border-white dark:border-gray-800 rounded-full"></span>
+<img class="w-10 h-10 rounded-full" src="${other['user']['avatar']['avatar_url']}" alt="${other["user"]["username"]}'s Profile Picture">
+<span class="bottom-0 left-7 absolute w-3.5 h-3.5 ${color} border-2 border-white dark:border-gray-800 rounded-full"></span>
 </div>`;
 
-                let status_emoji = other['user']['chatProfile']['status_emoji'];
-                if (!status_emoji) {
-                    status_emoji = '';
-                }
-                let status_text = other['user']['chatProfile']['status_text'];
-                if (!status_emoji) {
-                    status_text = '';
-                }
+                let status_emoji = chatProfile['status_emoji'];
+                if (!status_emoji) status_emoji = '';
+
+                let status_text = chatProfile['status_text'];
+                if (!status_emoji) status_text = '';
+
                 chatMembers += `
         <div class="space-y-1 font-medium dark:text-white">
             <div class="dark:text-gray-300" style="font-size:15px">${other['user']['username']}</div>
@@ -825,7 +832,7 @@ function getChat(chatID) {
             let tx;
             $('#chat-header').remove();
             let ms = document.getElementById(`${chat['_id']}_title`).innerText;
-            if (chat['members'].length == 2) {
+            if (chat['members'].length === 2) {
                 tx = `
             <div id="chat-header" class = "flex items-center py-2 px-3 bg-gray-50/50 dark:bg-gray-700/50 backdrop-blur-sm dark:text-white text-black py-3 noselect " >
                 <i class="material-icons text-gray-400"> alternate_email </i>
@@ -844,24 +851,15 @@ function getChat(chatID) {
             }
 
             chat_el.insertAdjacentHTML('beforebegin', tx);
-            let textarea_el = document.getElementById('msg_content');
-            textarea_el.placeholder = `Message ${ms}`;
+            chatBox.placeholder = `Message ${ms}`;
 
             $('#chat-loading').hide();
             let preview = document.getElementById('preview_border');
-            if (preview.style.display == 'none') {
-                document.getElementById('chat').style.height = '80%';
-            } else {
-                document.getElementById('chat').style.height = '64%';
-            }
+            document.getElementById('chat').style.height = preview.style.display === "none" ? "80%" : "64%";
             document.getElementById('chat').classList.remove('hidden');
 
-            if (show_preview) {
-                document.getElementById('preview_border').classList.remove('hidden');
-            }
+            if (show_preview) document.getElementById('preview_border').classList.remove('hidden');
 
-            console.log(document.getElementById('msg_form').classList);
-            document.getElementById('msg_form').classList.remove('hidden');
             let el_notifs = document.getElementById(`notification_${chat['_id']}`);
             el_notifs.classList.add('hidden');
             el_notifs.innerText = '0';
@@ -872,12 +870,18 @@ function getChat(chatID) {
 }
 
 function sendMessage() {
+    if (!(/\S/).test(chatBox.value))
+        return;
+
     let el = document.getElementById('preview');
-    let el2 = document.getElementById('msg_content');
-    el2.value = '';
+    el.classList.add("hidden");
+    chatBox.value = '';
     let val = el.innerHTML;
     el.innerHTML = '';
-    console.log(val);
+
+    if (val.endsWith("<br>"))
+        val = val.substring(0, val.length - 4);
+
     let send_date = new Date();
     send_date = toIsoString(send_date);
     let chatID = document.getElementById('chatID').getAttribute('data-id');
@@ -887,25 +891,4 @@ function sendMessage() {
         content: val,
         send_date: send_date
     });
-}
-
-window.onload = function () {
-    console.log('hi');
-    const tx = document.getElementsByTagName('textarea');
-    for (let i = 0; i < tx.length; i++) {
-        tx[i].setAttribute('style', 'height:' + tx[i].scrollHeight + 'px;overflow-y:hidden;');
-        tx[i].addEventListener('input', OnInput, false);
-    }
-
-    function OnInput() {
-        this.style.height = 'auto';
-        this.style.height = this.scrollHeight + 'px';
-    }
-};
-
-function inputKeyUp(e) {
-    e.which = e.which || e.keyCode;
-    if (e.which == 13) {
-        document.getElementById('pressMe').click();
-    }
 }

@@ -10,13 +10,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="/static/js/chat.js"></script>
-<script>
-    window.onload = function () {
-        if (window.location.search.substr(1).includes("email=ema")) {
-            toggleEmail();
-        }
-    }
-</script>
 {% extends "layout.html" %}
 {% block main %}
     {% include "utils/navbar.html" %}
@@ -73,7 +66,7 @@
             }
 
             h3 {
-                font-size: 18.72px;
+                font-size: 19px;
             }
 
             h4 {
@@ -126,8 +119,7 @@
         </style>
         <div id="user-data" class="w-0 h-0 invisible">{{ user_obj._id }}</div>
         <div class="flex flex-row w-full bg-white/50 dark:bg-gray-900/50"
-             style="height: 100%;
-                    margin-left:64px;">
+             style="margin-left:64px;">
             <div style="float:left;
                         flex:0 0 270px;
                         width:270px;"
@@ -138,8 +130,7 @@
                     <form>
                         <label for="default-search"
                                class="mb-2 text-xs text-gray-900 sr-only dark:text-stone-400">
-                            Search or
-                            start a conversation
+                            Search or start a conversation
                         </label>
                         <div class="relative">
                             <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -180,7 +171,7 @@
                         </div>
                         <div id="blocked_btn"
                              onclick="openBlocked()"
-                             style="margin-bottom:0px;"
+                             style="margin-bottom:0;"
                              class="flex items-center space-x-4 dark:hover:bg-zinc-700 hover:bg-gray-200 rounded-lg">
                             <i class="material-icons text-black dark:text-stone-400"
                                style="font-size:30px;
@@ -191,7 +182,7 @@
                         </div>
                         <div id="emojis_btn"
                              onclick="toggleEmoji()"
-                             style="margin-bottom:0px;"
+                             style="margin-bottom:0;"
                              class="flex items-center space-x-4 dark:hover:bg-zinc-700 hover:bg-gray-200 rounded-lg">
                             <i class="material-icons text-black dark:text-stone-400"
                                style="font-size:30px;
@@ -202,7 +193,7 @@
                         </div>
                         <div id="email_btn"
                              onclick="toggleEmail();"
-                             style="margin-bottom:0px;"
+                             style="margin-bottom:0;"
                              class="flex items-center space-x-4 dark:hover:bg-zinc-700 hover:bg-gray-200 rounded-lg">
                             <i class="material-icons text-black dark:text-stone-400"
                                style="font-size:30px;
@@ -214,8 +205,7 @@
                         <div class="flex flex-row">
                             <div class="uppercase text-xl text-gray-600 cursor-pointer"
                                  style="font-size:15px;">
-                                Direct
-                                Messages
+                                Direct Messages
                             </div>
                             <div style="float:right;
                                         font-size:15px;
@@ -332,8 +322,7 @@
                                         margin:5px;">
                                 <button class="rounded-full border-gray-300 border-none w-12 h-12 dark:bg-gray-900 dark:hover:bg-gray-800 ">
                                     <logo image="{{ user_obj.avatar.avatar_url }}" no-revert=""
-                                          class="h-6 mx-auto my-auto ">
-                                        <img alt="logo" style="filter: brightness(100%);">
+                                          class="h-6 mx-auto my-auto">
                                     </logo>
                                 </button>
                                 <div style="display: inline-block; margin:5px; "
@@ -581,67 +570,56 @@
                         </div>
                     </span>
                 </div>
-                <form id="msg_form"
-                      style="width:100%;
-                             height:8%;"
-                      class="hidden"
-                      onsubmit="sendMessage(); return false;">
-                    <label for="chat" class="sr-only">
-                        Your
-                        message
-                    </label>
-                    <div class="flex items-center py-2 px-3 bg-gray-50 rounded-lg dark:bg-gray-700 m-6 "
-                         style="height:100%;">
+                <label for="chat" class="sr-only">
+                    Your message
+                </label>
+                <div class="flex items-center py-2 px-3 bg-gray-50 rounded-lg dark:bg-gray-700 m-6">
                         <span onclick="togglePreview()"
                               class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">Preview</span>
-                        <button type="button"
-                                class="hidden md:block inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                            <svg class="w-6 h-6"
-                                 fill="currentColor"
-                                 viewBox="0 0 20 20"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                      d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-                                      clip-rule="evenodd">
-                                </path>
-                            </svg>
-                        </button>
-                        <button data-dropdown-toggle="emojiPicker"
-                                data-dropdown-placement="top"
-                                type="button"
-                                class="hidden md:block p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                            <svg class="w-6 h-6"
-                                 fill="currentColor"
-                                 viewBox="0 0 20 20"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                      d="M10 18a8 8 0 100-1 npx tailwindcss -i ./app/static/css/fonts.css -o ./app/static/css/tailwind.css --watch
+                    <button type="button"
+                            class="hidden md:block inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                        <svg class="w-6 h-6"
+                             fill="currentColor"
+                             viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                                  clip-rule="evenodd">
+                            </path>
+                        </svg>
+                    </button>
+                    <button data-dropdown-toggle="emojiPicker"
+                            data-dropdown-placement="top"
+                            type="button"
+                            class="hidden md:block p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                        <svg class="w-6 h-6"
+                             fill="currentColor"
+                             viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M10 18a8 8 0 100-1 npx tailwindcss -i ./app/static/css/fonts.css -o ./app/static/css/tailwind.css --watch
                                 6 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-.464 5.535a1 1 0 10-1.415-1.414 3 3 0 01-4.242 0 1 1 0 00-1.415 1.414 5 5 0 007.072 0z"
-                                      clip-rule="evenodd">
-                                </path>
-                            </svg>
-                        </button>
-                        <div id="emojiPicker"
-                             class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
-                        </div>
-                        <textarea id="msg_content"
-                                  rows="1"
-                                  class="block p-2.5 w-full text-sm text-gray-900 dark:border-gray-700 border-white dark:bg-gray-700 bg-white dark:text-white"
-                                  placeholder="Message @Coder N"
-                                  required></textarea>
-                        <button type="submit"
-                                id="pressMe"
-                                class="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600">
-                            <svg class="w-6 h-6 rotate-90"
-                                 fill="currentColor"
-                                 viewBox="0 0 20 20"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z">
-                                </path>
-                            </svg>
-                        </button>
+                                  clip-rule="evenodd">
+                            </path>
+                        </svg>
+                    </button>
+                    <div id="emojiPicker"
+                         class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
                     </div>
-                </form>
+                    <textarea id="msg_content" rows="1"
+                              class="p-2.5 w-full text-sm text-gray-900 outline-none border-0 dark:bg-gray-700 bg-white dark:text-white"
+                              placeholder="Message @Coder N"></textarea>
+                    <button id="pressMe" class="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer
+                     hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600">
+                        <svg class="w-6 h-6 rotate-90"
+                             fill="currentColor"
+                             viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
             </div>
             <div class="justify-center"
                  style="width: calc(100% - 330px);
@@ -942,20 +920,13 @@
 
         let textarea_el = document.getElementById('msg_content');
         console.log(textarea_el);
-        textarea_el.oninput = function () {
-            updateEditor(textarea_el, document.getElementById('preview'));
-        };
+        textarea_el.oninput = () => updateEditor(textarea_el, document.getElementById('preview'));
 
         marked.use({gfm: false});
 
 
         function updateEditor(input, preview) {
-            preview.innerHTML =
-                DOMPurify.sanitize(twemoji.parse(marked.parse(smile2emoji.checkText(input.value))));
-            const manageInput = (e) => {
-                e.target.value = smile2emoji.checkText(e.target.value);
-            };
-
+            preview.innerText = DOMPurify.sanitize(twemoji.parse(marked.parseInline(smile2emoji.checkText(input.value))));
         }
 
         // The picker must have a root element to insert itself into
