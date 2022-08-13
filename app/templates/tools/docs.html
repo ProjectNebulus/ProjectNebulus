@@ -109,16 +109,33 @@
                                   width:160px;"
                            class="uppercase text-gray-400">Blank</p>
                     </div>
-                </div>
-                <div class="relative flex py-5 items-center w-full">
-                    <div class="flex-grow border-t border-gray-400"></div>
-                    <span style="margin-left:65px;"
-                          class="flex-shrink mx-4 text-gray-400 uppercase">Recent Documents</span>
-                    <div style="margin-left:65px;" class="flex-grow border-t border-gray-400"></div>
-                </div>
+            </div>
+            <div class="relative flex py-5 items-center w-full">
+                <div class="flex-grow border-t border-gray-400"></div>
+                <span style="margin-left:65px;"
+                      class="flex-shrink mx-4 text-gray-400 uppercase">Recent Documents</span>
+                <div style="margin-left:65px;" class="flex-grow border-t border-gray-400"></div>
+            </div>
             <div>
                 <h1 style="margin-left:65px;" class="text-black dark:text-white text-3xl">Recent Documents</h1>
-                <p style="margin-left:65px;" class="text-black dark:text-white">No Documents Yet!</p>
+                {% if docs|length == 0 %}<br><br>
+                    <p style="margin-left:65px;" class="text-black dark:text-white">No Documents Yet!</p>
+                {% endif %}
+                <div class="w-full grid gap-4 justify-center" style="grid-template-columns: repeat(auto-fit, 13rem)">
+                    {% for doc in docs %}
+                        <a href="/docs/document/{{ doc.id }}">
+                            <div class="flex flex-col">
+                                <div class="document rounded-md" style=" text-align: center; ">
+                                    <span style="zoom: 40%; overflow:hidden;">{{ doc.content }}</span>
+                                </div>
+                                <p style="padding-left:45px;
+                                  margin-left:20px;
+                                  width:160px;"
+                                   class="uppercase text-gray-400">{{ doc.title }}</p>
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>

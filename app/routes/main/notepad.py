@@ -7,11 +7,13 @@ from ...static.python.mongodb.read import getText
 
 @main_blueprint.route("/documents", methods=["GET"])
 def docs():
+    docs = read.get_user_docs(session["id"])
     return render_template(
         "tools/docs.html",
         user=session.get("username"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         translate=getText,
+        docs=docs
     )
 
 

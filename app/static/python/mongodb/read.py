@@ -327,6 +327,9 @@ def get_user_courses(user_id: str) -> list[Course]:
     user = find_user(pk=user_id)
     return Course.objects(authorizedUsers=user)
 
+def get_user_docs(user_id: str) -> list[NebulusDocument]:
+    user = find_user(pk=user_id)
+    return NebulusDocument.objects(authorizedUsers=user)
 
 def search_user(query: str, ignore_id: str = None) -> list[User]:
     if ignore_id:
