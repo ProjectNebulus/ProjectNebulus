@@ -856,18 +856,14 @@
         function save_editor() {
             let content = document.getElementById('editor').innerHTML;
             let title = document.getElementById("name").value; //document.getElementById('title').value;
-            let dictionary = {
-                "title": title,
-                "content": content,
-                "id": {{ id }}
-            }
             let request = $.ajax({
-                {#url: "/nebulusdoc/save",#}
-                {#url: "api/v1/internal/nebulusdoc/save",#}
                 url: "/api/v1/internal/nebulusdoc/save",
                 method: "POST",
-                data: dictionary,
-                {#dataType: "json"#}
+                data: JSON.stringify({
+                    "title": title,
+                    "content": content,
+                    "id": {{ id }}
+                }),
             });
             request.done(function (response) {
                 console.log(response);
@@ -880,5 +876,7 @@
                 }
             });
         }
+
+        setInterval(save_editor, 1000);
     </script>
 {% endblock %}

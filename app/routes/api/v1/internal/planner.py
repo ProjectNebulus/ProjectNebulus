@@ -38,7 +38,7 @@ def newNebulusdoc():
 def saveNebulusdoc():
     data = next(request.form.items())[0]
     print(data)
-    create.create_nebulusdoc(loads(data))
+    create.update_nebulusdoc(loads(data))
 
     return "success"
 
