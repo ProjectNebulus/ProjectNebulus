@@ -8,7 +8,7 @@ class Notepad(Snowflake):
     A class representing a user's Nebulus Document
     """
 
-    meta = {"collection": "NebulusDocument"}
+    meta = {"collection": "Notepad"}
     owner = ReferenceField("User", required=True)
     data = DictField(StringField, default={})
     # Key: course ID, Value: document data

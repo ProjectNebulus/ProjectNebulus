@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import json
-import re
 
 import schoolopy
 from flask import session
@@ -488,3 +487,11 @@ def get_blocks(user_id):
     except:
         blocked = None
     return blocked
+
+
+def get_user_notepad(user):
+    try:
+        notepad = dict(user.notepad)
+    except:
+        notepad = {}
+    return notepad

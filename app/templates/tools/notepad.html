@@ -830,7 +830,8 @@
                              id="editor"
                              class=" block px-0 w-full text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
                              style="min-height: 968px;">
-                            <span>
+                            {% if not notepad[courses[0]] %}
+                                <span>
                                 <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">
                                     <span style="font-size: 30pt;
                                                  font-family: Montserrat, sans-serif;
@@ -838,15 +839,16 @@
                                                  font-variant-numeric: normal;
                                                  font-variant-east-asian: normal;
                                                  vertical-align: baseline;
-                                                 white-space: pre-wrap;">Welcome to your </span><span style="font-size: 30pt;
-             font-family: Montserrat, sans-serif;
-             color: {{ color[0] }};
-             background-color: transparent;
-             font-weight: 700;
-             font-variant-numeric: normal;
-             font-variant-east-asian: normal;
-             vertical-align: baseline;
-             white-space: pre-wrap;">{{ courses[0].name }} Notes</span>
+                                                 white-space: pre-wrap;">Welcome to your </span><span
+                                        style="font-size: 30pt;
+                                                font-family: Montserrat, sans-serif;
+                                                color: {{ color[0] }};
+                                                background-color: transparent;
+                                                font-weight: 700;
+                                                font-variant-numeric: normal;
+                                                font-variant-east-asian: normal;
+                                                vertical-align: baseline;
+                                                white-space: pre-wrap;">{{ courses[0].name }} Notes</span>
                                 </p>
                                 <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">
                                     <span style="font-size: 10.5pt;
@@ -869,6 +871,10 @@
                                     </span>
                                 </div>
                             </span>
+
+                            {% else %}
+                                {{ notepad[courses[0]] }}
+                            {% endif %}
                         </div>
                     </div>
                 </div>
