@@ -1,3 +1,5 @@
+import datetime
+
 from flask import session
 
 from ..classes import (
@@ -69,7 +71,7 @@ def savePlanner(data: dict, user_id):
 
     user.planner.name = data["name"]
     user.planner.saveData = data["saveData"]
-    user.planner.lastEdited = data["lastEdited"]
+    user.planner.lastEdited = datetime.datetime.utcnow().isoformat()
 
     user.save(validate=False, clean=False)
 

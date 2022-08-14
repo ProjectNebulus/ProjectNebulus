@@ -1,3 +1,5 @@
+import datetime
+
 from dotenv import load_dotenv
 from flask import session
 
@@ -47,6 +49,7 @@ def create_course(data: dict) -> Course:
     course.save(force_insert=True, validate=False)
     return course
 
+
 def create_nebulusdoc(data: dict) -> NebulusDocument:
     user = read.find_user(id=session["id"])
 
@@ -59,7 +62,6 @@ def create_nebulusdoc(data: dict) -> NebulusDocument:
     return doc.id
 
 
-
 def update_nebulusdoc(data: dict):
     # doc = getNebulusDocument(data["id"])
     doc = NebulusDocument.objects.get(id=data["id"])
@@ -69,6 +71,7 @@ def update_nebulusdoc(data: dict):
     doc.save(clean=False)
     # print(doc.__dict__)
     return doc.id
+
 
 def create_user(data: dict) -> str | list[str | User]:
     """

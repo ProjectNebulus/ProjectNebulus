@@ -12,6 +12,7 @@ from mongoengine import (
 )
 
 from .Avatar import Avatar
+from .Calendar import Calendar
 from .Canvas import Canvas
 from .ChatProfile import ChatProfile
 from .Discord import Discord
@@ -74,6 +75,7 @@ class User(Snowflake):
     status = StringField(default="", null=True)
     courses = ListField(ReferenceField("Course"), default=[])
     planner = EmbeddedDocumentField(Planner, null=True, default=None)
+    calendar = EmbeddedDocumentField(Calendar, null=True, default=None)
     nebulus_documents = ListField(ReferenceField(NebulusDocument), default=[])
     points = IntField(default=0)
     premium = BooleanField(default=False)
@@ -92,5 +94,5 @@ class User(Snowflake):
 
         if "static/images/nebulusCats" not in self.avatar.avatar_url:
             self.avatar.avatar_url = (
-                "/static/images/nebulusCats" + self.avatar.avatar_url
+                    "/static/images/nebulusCats" + self.avatar.avatar_url
             )
