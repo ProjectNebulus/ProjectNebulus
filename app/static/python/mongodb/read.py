@@ -157,22 +157,13 @@ def check_type(o):
         return "document"
 
 
-def check_password_username(username, password):
-    validuser = "false"
-    valid_pass = "false"
+def check_signin(email, password):
     try:
-        if re.fullmatch(regex, username):
-            user = find_user(email=username)
-            validuser = "true"
-        else:
-            user = find_user(username=username)
-            validuser = "true"
+        user = find_user(email=email)
     except KeyError:
-        return "false-false"
+        return False
 
-    if valid_password(user.password, password):
-        valid_pass = "true"
-    return f"{validuser}-{valid_pass}"
+    return valid_password(user.password, password)
 
 
 def get_announcement(announcement_id: str) -> Announcement:

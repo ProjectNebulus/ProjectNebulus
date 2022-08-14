@@ -3,14 +3,14 @@ let main, reset, code;
 function resetScreen() {
     main.classList.toggle('hidden');
     reset.classList.toggle('hidden');
-    usernameInput.value = username.value;
+    emailInput.value = email.value;
 }
 
 function selectChanged() {
     document.getElementById('schoolName').innerText =
         'Your ' + document.getElementById('selection').value + ' account';
     document.getElementById('schoolInput').placeholder =
-        'Your ' + document.getElementById('selection').value + ' Username';
+        'Your ' + document.getElementById('selection').value + ' Email';
     document.getElementById('typeHere').style.display = 'block';
 }
 
@@ -156,40 +156,32 @@ const RED_BORDER = [
     'border-red-500',
     'text-red-900',
     'placeholder-red-700',
-    'text-sm',
-    'rounded-lg',
     'focus:ring-red-500',
     'focus:border-red-500',
-    'block',
-    'w-full',
-    'p-2.5',
     'dark:bg-red-100',
     'dark:border-red-400'
 ];
 const GREEN_BORDER = [
-    'g-green-50',
+    'bg-green-50',
     'border',
     'border-green-500',
     'text-green-900',
     'placeholder-green-700',
-    'text-sm',
-    'rounded-lg',
     'focus:ring-green-500',
     'focus:border-green-500',
-    'block',
-    'w-full',
-    'p-2.5',
     'dark:bg-green-100',
     'dark:border-green-400'
 ];
-let username, password;
+let email, password;
 
 window.addEventListener('load', function () {
-    username = document.getElementById('usrname');
+    email = document.getElementById('email');
     password = document.getElementById('psw');
     main = document.getElementById('main');
     reset = document.getElementById('reset');
     code = document.getElementById('resetCode');
+
+    let loginAttempts = 0;
 
     let loginButton = document.getElementById('log_in');
     loginButton.style.color = 'gray';
@@ -197,52 +189,57 @@ window.addEventListener('load', function () {
     loginButton.disabled = true;
 
     function checkCredentials() {
-        const errorUsername = document.getElementsByClassName('error-msg');
-        const errorPassword = document.getElementsByClassName('password-error-msg');
+        const errorEmail = document.getElementById('error-msg');
+        const errorPassword = document.getElementById('password-error-msg');
 
-        if (username.value === '') {
-            errorUsername.innerHTML = 'Hey! Please enter a username!';
-            username.classList.add(...RED_BORDER);
-        } else errorUsername.innerHTML = '';
+        if (email.value === '')
+            errorEmail.innerHTML = 'Please enter your email!';
 
-        if (password.value === '') {
-            errorPassword.innerHTML = 'Hey! Please enter a password!';
-            password.classList.add(...RED_BORDER);
-        } else errorPassword.innerHTML = '';
+        else if (!/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}/.test(email.value))
+            errorEmail.innerHTML = 'Did you enter a valid email?';
 
-        if (username.value === '' && password.value === '') return false;
+        if (password.value === '')
+            errorPassword.innerHTML = 'Please enter a password!';
+
+        if (email.value === '' || password.value === '') return;
+
+        loginAttempts++;
+        if (loginAttempts >= 5) {
+
+
+            loginAttempts = 0;
+        }
 
         const xhttp = new XMLHttpRequest();
         xhttp.open('POST', '/api/v1/internal/check-signin', true);
         xhttp.setRequestHeader('Content-type', 'application/json');
-        xhttp.addEventListener('load', reqListener1);
+        xhttp.addEventListener('load', afterCheck);
         xhttp.send(
             JSON.stringify({
-                username: username.value,
+                email: email.value,
                 password: password.value
             })
         );
     }
 
-    keyUpDelay('#usrname, #psw', 500, checkCredentials);
+    keyUpDelay('#email, #psw', 500, checkCredentials);
 });
 
-function reqListener1() {
-    const usernameError = document.getElementById('error');
+function afterCheck() {
+    const emailError = document.getElementById('error');
     const passwordError = document.getElementById('password-error');
-    const usernameErrorMsg = document.getElementById('error-msg');
+    const emailErrorMsg = document.getElementById('error-msg');
     const passwordErrorMsg = document.getElementById('password-error-msg');
 
-    if (this.responseText.split('-')[0] === 'true') {
-        usernameError.style.color = 'green';
-        usernameError.innerHTML = '<p class="material-icons">check_circle</p>';
-        usernameErrorMsg.style.color = 'green';
-        usernameErrorMsg.innerHTML = 'Correct Username!';
+    if (this.responseText === 'True') {
+        emailError.style.color = 'green';
+        emailError.innerHTML = '<p class="material-icons">check_circle</p>';
+        emailErrorMsg.style.color = 'green';
+        emailErrorMsg.innerHTML = 'Correct Email!';
 
-        username.classList.remove(...RED_BORDER);
-        username.classList.add(...GREEN_BORDER);
-    }
-    if (this.responseText.split('-')[1] === 'true') {
+        email.classList.remove(...RED_BORDER);
+        email.classList.add(...GREEN_BORDER);
+
         passwordError.style.color = 'green';
         passwordError.innerHTML = '<p class="material-icons">check_circle</p>';
         passwordErrorMsg.style.color = 'green';
@@ -250,57 +247,41 @@ function reqListener1() {
 
         password.classList.remove(...RED_BORDER);
         password.classList.add(...GREEN_BORDER);
-    }
 
-    if (this.responseText.split('-')[0] === 'false' && username.value !== '') {
-        usernameError.style.color = 'red';
-        usernameError.innerHTML = '<p class="material-icons">error</p>';
-        usernameErrorMsg.style.color = 'red';
-        usernameErrorMsg.innerHTML = 'Incorrect Username!';
-
-        username.classList.remove(...GREEN_BORDER);
-        username.classList.add(...RED_BORDER);
-    }
-    if (this.responseText.split('-')[1] === 'false' && password.value !== '') {
-        passwordError.style.color = 'red';
-        passwordError.innerHTML = '<p class="material-icons">error</p>';
-        passwordErrorMsg.style.color = 'red';
-        passwordErrorMsg.innerHTML = 'Incorrect Password!';
-        password.classList.remove(...GREEN_BORDER);
-        password.classList.add(...RED_BORDER);
-    }
-
-    if (this.responseText.split('-')[1] === 'true' && this.responseText.split('-')[0] === 'true') {
         let loginButton = document.getElementById('log_in');
-        let usernameInput = username;
-        let passwordInput = password;
         loginButton.disabled = false;
         loginButton.style.color = 'white';
         loginButton.style.backgroundColor = '#3E82F8';
         loginButton.classList.add('hover:bg-blue-800');
-        // usernameInput.disabled = true;
-        // passwordInput.disabled = true;
+    } else {
+        emailError.style.color = 'red';
+        emailError.innerHTML = '<p class="material-icons">error</p>';
+        emailErrorMsg.style.color = 'red';
+        emailErrorMsg.innerHTML = 'Invalid email or password!';
+        email.classList.remove(...GREEN_BORDER);
+        email.classList.add(...RED_BORDER);
+
+        passwordError.style.color = 'red';
+        passwordError.innerHTML = '<p class="material-icons">error</p>';
+        passwordErrorMsg.style.color = 'red';
+        passwordErrorMsg.innerHTML = 'Invalid email or password!';
+        password.classList.remove(...GREEN_BORDER);
+        password.classList.add(...RED_BORDER);
+
+        let loginButton = document.getElementById('log_in');
+        loginButton.style.color = 'gray';
+        loginButton.style.backgroundColor = '#006097';
+        loginButton.disabled = true;
     }
 }
 
-function loginUser() {
-    const xhttp = new XMLHttpRequest();
-    xhttp.open('POST', '/api/v1/internal/sign-in', true);
-    xhttp.setRequestHeader('Content-type', 'application/json');
-    xhttp.addEventListener('load', reqListener2);
-    xhttp.send(
-        JSON.stringify({
-            username: username.value,
-            password: password.value
-        })
-    );
-}
+const loginUser = () => window.location.href = getRedirectParam();
 
 function getRedirectParam() {
     let qd = {};
     if (location.search)
         location.search
-            .substr(1)
+            .substring(1)
             .split('&')
             .forEach(function (item) {
                 let s = item.split('='),
@@ -309,23 +290,7 @@ function getRedirectParam() {
                 //(k in qd) ? qd[k].push(v) : qd[k] = [v]
                 (qd[k] = qd[k] || []).push(v); // null-coalescing / short-circuit
             });
-    console.log(qd);
-    if (qd['redirect']) {
-        return qd['redirect'][0];
-    }
-    return '/app';
-}
 
-function reqListener2() {
-    if (this.responseText === 'true') {
-        let status = document.getElementById('fail');
-        status.style.color = 'green';
-        status.innerHTML = 'Login Successful. Logging you in...';
-        window.location.href = getRedirectParam();
-    } else {
-        let status = document.getElementById('fail');
-        status.style.color = 'red';
-        status.innerHTML =
-            'Oh no! A super rare bug occured on our end! Please contact support immediately!';
-    }
+    if (qd['redirect']) return qd['redirect'][0];
+    return '/app';
 }

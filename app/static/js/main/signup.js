@@ -139,24 +139,24 @@ window.addEventListener('load', function () {
 
     function changeUser() {
         let usernameStatus = errorMessages[1];
-        const usrname = username.value;
+        const email = username.value;
         usernameStatus.style.color = 'red';
         usernameStatus.innerHTML = '<br>';
-        if (!usrname) {
+        if (!email) {
             usernameStatus.innerHTML = 'Please enter a username!';
             validationIcons[1].style.color = 'red';
             validationIcons[1].innerHTML = '<i class="material-icons">close</i>';
-            usrname.classList.add(...RED_BORDER);
+            email.classList.add(...RED_BORDER);
             return false;
         }
-        if (usrname.length < 3) {
+        if (email.length < 3) {
             usernameStatus.innerHTML = 'Your username must be at least 3 characters long!';
             validationIcons[1].style.color = 'red';
             validationIcons[1].innerHTML = '<i class="material-icons">close</i>';
             username.classList.add(...RED_BORDER);
             return false;
         }
-        if (usrname.length > 32) {
+        if (email.length > 32) {
             usernameStatus.innerHTML = 'Your username must be less than 32 characters long!';
             validationIcons[1].style.color = 'red';
             validationIcons[1].innerHTML = '<i class="material-icons">close</i>';
@@ -164,12 +164,12 @@ window.addEventListener('load', function () {
             return false;
         }
 
-        if (VALID_USERNAME_REGEX.test(usrname)) {
+        if (VALID_USERNAME_REGEX.test(email)) {
             const request = $.ajax({
                 type: 'POST',
                 url: '/api/v1/internal/check-signup-user',
                 data: {
-                    username: usrname
+                    username: email
                 }
             });
 
