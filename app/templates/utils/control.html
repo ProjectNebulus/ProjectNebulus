@@ -2,6 +2,63 @@
     input:focus {
         outline: none;
     }
+    .base-timer__path-remaining.green {
+  color: rgb(65, 184, 131);
+}
+
+.base-timer__path-remaining.orange {
+  color: orange;
+}
+
+.base-timer__path-remaining.red {
+  color: red;
+}
+.base-timer__label {
+  position: absolute;
+
+  /* Size should match the parent container */
+  width: 300px;
+  height: 300px;
+
+  /* Keep the label aligned to the top */
+  top: 0;
+
+  /* Create a flexible box that centers content vertically and horizontally */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Sort of an arbitrary number; adjust to your liking */
+  font-size: 48px;
+}
+
+.base-timer__path-remaining {
+  stroke-width: 7px;
+  stroke-linecap: round;
+  transform: rotate(90deg);
+  transform-origin: center;
+  transition: 1s linear all;
+  fill-rule: nonzero;
+  stroke: currentColor;
+}
+.base-timer__svg {
+  transform: scaleX(-1);
+}
+
+.base-timer__circle {
+  fill: none;
+  stroke: none;
+}
+
+.base-timer__path-elapsed {
+  stroke-width: 7px;
+  stroke: grey;
+}
+.base-timer {
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
 </style>
 <div class="mx-4 my-4 flex flex-col">
     <h1 class="dark:text-white text-xl">{{ user }}</h1>
@@ -11,7 +68,7 @@
     margin-top: 10px;
     margin-bottom: 10px;
 " id="controlcenter2"
-     class="bg-gray-300/30 dark:bg-gray-800/30 p-4 mx-4 my-4 rounded-lg dark:border-gray-700 border backdrop-blur flex flex-col">
+     class=" bg-gray-300/30 dark:bg-gray-800/30 p-4 mr-2 w-full my-4 rounded-lg dark:border-gray-700 border backdrop-blur flex flex-col">
     <div class="bg-gray-300/30 dark:bg-gray-900/60 mx-2 text-left flex flex-col rounded-lg">
         <a id="theme-toggle">
             <i id="theme-toggle-dark-icon" class="hidden">light_mode</i>
@@ -59,14 +116,28 @@
 <div style="
     margin-top: 10px;
     margin-bottom: 10px;
-" id="focus" class="flex p-4 mb-4 text-sm text-blue-700 bg-blue-100 rounded-lg dark:bg-blue-200 dark:text-blue-800"
+" id="focus" class="hidden flex p-4 mb-4 text-sm text-blue-700 bg-blue-100 rounded-lg dark:bg-blue-200 dark:text-blue-800"
      role="alert">
+    <div class="base-timer">
+  <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <g class="base-timer__circle">
+      <circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
+      <path
+        id="base-timer-path-remaining"
+        stroke-dasharray="283"
+        class="base-timer__path-remaining green"
+        d="
+          M 50, 50
+          m -45, 0
+          a 45,45 0 1,0 90,0
+          a 45,45 0 1,0 -90,0
+        "
+      ></path>
+    </g>
+  </svg>
+  <span id="base-timer-label" class="base-timer__label"></span>
+</div>
 
-    <i class="material-icons m-3">timer</i>
-    <span class="sr-only">Info</span>
-    <div>
-        <span id="focusText" class="font-medium"></span>
-    </div>
 </div>
 
 
@@ -74,7 +145,7 @@
     margin-top: 10px;
     margin-bottom: 10px;
 " id="chatStatus"
-     class="dark:border-gray-700 border text-sm text-red-700 bg-red-100 rounded-lg h-40 w-full text-center text-blue-800 text-xs font-medium px-3 py-2 rounded">
+     class="dark:border-gray-700 border text-sm  bg-gray-300/30 dark:bg-gray-800/30 rounded-lg h-40 w-full text-center  text-xs font-medium px-3 py-2 rounded">
     <div class="flex flex-col">
         <div class="flex items-center  mb-4">
             <div class="relative mr-4">
@@ -83,11 +154,10 @@
                       class="bottom-0 absolute  w-4 h-4 border-2 border-white dark:border-gray-800 rounded-full"
                       style="left:35px;"></span>
             </div>
-            <div class=" flex flex-col" style="align-content: flex-start;flex-flow: column wrap;">
-                <div id="profile-username" class="my-3" style="font-size:30px;text-align: start;">Coder N</div>
-                <div id="profile-status-text" class=" text-sm text-gray-60
-                0"
-                     style="text-align: start;">No status
+            <div class=" flex flex-col " style="align-content: flex-start;flex-flow: column wrap;">
+                <div id="profile-username" class="my-3 text-gray-400" style="font-size:30px;text-align: start;">Coder N</div>
+                <div id="profile-status-text" class=" text-sm text-gray-400"
+                     style="text-align: start;margin-left:2px;">No status
                 </div>
             </div>
         </div>
@@ -97,7 +167,7 @@
                  style="width:40%;">
                 <div id="status-color" data-dropdown-toggle="dropdownTop"
                      class="my-2 mr-4 w-7 h-7 rounded-full mx-2 text-left flex flex-col rounded-lg"></div>
-                <h3 id="status-name" class="my-2 mt-3 text-black"></h3>
+                <h3 id="status-name" class="my-2 mt-3 text-gray-400"></h3>
 
             </div>
             <div class=" flex  text-md mt-4 bg-gray-300/30 dark:border-gray-700 border backdrop-blur dark:bg-gray-800/30 rounded-md"
