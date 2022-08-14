@@ -33,6 +33,13 @@ def newNebulusdoc():
     return str(id)  # /docs/document/"
 
 
+@internal.route("/nebulusnotepad/change", methods=["POST"])
+def change_notepad():
+    course_id = request.form.get("course_id")
+    content = request.form.get("content")
+    return update.change_user_notepad(course_id, content, session["id"])
+
+
 @internal.route("/nebulusdoc/save", methods=["POST"])
 @private_endpoint
 def saveNebulusdoc():

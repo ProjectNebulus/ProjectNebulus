@@ -811,6 +811,7 @@
                          style="overflow-y:scroll;
                                 height:100%;">
                         <label for="editor" class="sr-only">Publish post</label>
+                        <div id="course_id" style="display:none;">{{ courses[0].id }}</div>
                         <ul class="flex text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400"
                             style=" overflow: auto; white-space: nowrap; ">
                             {% set color = ["#ef4444", "#f97316", "#f59e0b", "#eab308", "#84cc16", "#22c55e", "#10b981", "#14b8a6", "#06b6d4", "#0ea5e9",
@@ -818,7 +819,7 @@
                             {% for index in range(0, courses|length) %}
                                 {% set current = index % color|length %}
                                 <li class="mr-2">
-                                    <a onclick="changeCourse('{{ index }}', '{{ color[index] }}', '{{ courses[index].name }}');"
+                                    <a onclick="changeCourse('{{ courses[index].id }}', '{{ color[index] }}', '{{ courses[index].name }}');"
                                        class="inline-block p-4 rounded-t-lg text-black "
                                        style="background-color: {{ color[current] }}">{{ courses[index].name }}</a>
                                 </li>
@@ -876,6 +877,7 @@
     </div>
     <script>
         function changeCourse(index, color, course) {
+            document.getElementById("course_id").innerText = index;
             document.getElementById("editor").innerHTML = `
         <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">
                                     <span style="font-size: 30pt;
@@ -918,6 +920,18 @@
         }
 
         function saveEditor() {
+            let request = $.ajax({
+                {#url: "/api/v1/internal/nebulusdoc/save",#}
+                url: "/api/v1/internal/nebulusnotepad/save",
+                method: "POST",
+                data: {
+                    course_id: document.getElementById("course_id").innerText,
+                    content: document.getElementById('editor').innerHTML
+
+                },
+
+                dataType: "json"
+            });
 
 
         }

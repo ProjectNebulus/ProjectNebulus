@@ -256,3 +256,9 @@ def resetPassword(username: str, psw: str):
     session["email"] = user.email
     session["avatar"] = user.avatar.avatar_url
     session["id"] = user.id
+
+def change_user_notepad(course_id, content, user_id):
+    user = User.objects.get(pk=user_id)
+    user.notepad[course_id] = content
+    user.save(clean=False)
+    return "0"
