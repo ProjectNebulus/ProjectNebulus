@@ -3,7 +3,7 @@ from mongoengine import *
 from .Snowflake import *
 
 
-class Notepad(Snowflake):
+class Notepad(EmbeddedDocument):
     """
     A class representing a user's Nebulus Document
     """
