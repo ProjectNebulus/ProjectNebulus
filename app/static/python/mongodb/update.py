@@ -11,6 +11,7 @@ from ..classes import (
     Schoology,
     User
 )
+from ..classes.Notepad import Notepad
 from ..utils.security import hash256
 
 
@@ -260,8 +261,13 @@ def resetPassword(username: str, psw: str):
 def change_user_notepad(course_id, content, user_id):
     user = User.objects.get(pk=user_id)
     try:
-        user.notepad[course_id] = content
+        dictionary = dict(user.notepad)
+        dictionary[course_id] = content
+        # user.notepad = Planner(dictionary)
+        user.notepad = Notepad(dictionary)
     except:
-        user.notepad = {course_id: content}
+        # user.notepad = Planner({course_id= content})
+        # user.notepad = Planner(course_id= content)
+        user.notepad = Notepad(course_id=content)
     user.save(clean=False)
     return "0"
