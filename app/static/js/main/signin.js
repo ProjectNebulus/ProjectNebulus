@@ -1,9 +1,33 @@
-let main, reset, code;
+let main, reset, recaptcha, code;
 
 function resetScreen() {
     main.classList.toggle('hidden');
     reset.classList.toggle('hidden');
     emailInput.value = email.value;
+}
+
+let prevScreen;
+
+function recaptchaScreen() {
+    let screen;
+    for (screen of [main, reset, code]) {
+        if (!screen.classList.contains("hidden"))
+            break;
+    }
+
+    prevScreen = screen;
+    screen.classList.add("hidden");
+    recaptcha.classList.remove("hidden");
+}
+
+function recaptchaTimeout() {
+    setTimeout(recaptchaSuccess, 1000)
+}
+
+function recaptchaSuccess() {
+    recaptcha.classList.add("hidden");
+    prevScreen.classList.remove("hidden");
+    grecaptcha.reset();
 }
 
 function selectChanged() {
@@ -178,6 +202,7 @@ window.addEventListener('load', function () {
     email = document.getElementById('email');
     password = document.getElementById('psw');
     main = document.getElementById('main');
+    recaptcha = document.getElementById("recaptcha");
     reset = document.getElementById('reset');
     code = document.getElementById('resetCode');
 
@@ -189,6 +214,9 @@ window.addEventListener('load', function () {
     loginButton.disabled = true;
 
     function checkCredentials() {
+        if (!recaptcha.classList.contains("hidden"))
+            return;
+
         const errorEmail = document.getElementById('error-msg');
         const errorPassword = document.getElementById('password-error-msg');
 
@@ -203,12 +231,6 @@ window.addEventListener('load', function () {
 
         if (email.value === '' || password.value === '') return;
 
-        loginAttempts++;
-        if (loginAttempts >= 5) {
-
-
-            loginAttempts = 0;
-        }
 
         const xhttp = new XMLHttpRequest();
         xhttp.open('POST', '/api/v1/internal/check-signin', true);
@@ -220,60 +242,64 @@ window.addEventListener('load', function () {
                 password: password.value
             })
         );
+
+        function afterCheck() {
+            const emailError = document.getElementById('error');
+            const passwordError = document.getElementById('password-error');
+            const emailErrorMsg = document.getElementById('error-msg');
+            const passwordErrorMsg = document.getElementById('password-error-msg');
+
+            if (this.responseText === 'True') {
+                emailError.style.color = 'green';
+                emailError.innerHTML = '<p class="material-icons">check_circle</p>';
+                emailErrorMsg.style.color = 'green';
+                emailErrorMsg.innerHTML = 'Correct Email!';
+
+                email.classList.remove(...RED_BORDER);
+                email.classList.add(...GREEN_BORDER);
+
+                passwordError.style.color = 'green';
+                passwordError.innerHTML = '<p class="material-icons">check_circle</p>';
+                passwordErrorMsg.style.color = 'green';
+                passwordErrorMsg.innerHTML = 'Correct Password!';
+
+                password.classList.remove(...RED_BORDER);
+                password.classList.add(...GREEN_BORDER);
+
+                let loginButton = document.getElementById('log_in');
+                loginButton.disabled = false;
+                loginButton.style.color = 'white';
+                loginButton.style.backgroundColor = '#3E82F8';
+                loginButton.classList.add('hover:bg-blue-800');
+            } else {
+                emailError.style.color = 'red';
+                emailError.innerHTML = '<p class="material-icons">error</p>';
+                emailErrorMsg.style.color = 'red';
+                emailErrorMsg.innerHTML = 'Invalid email or password!';
+                email.classList.remove(...GREEN_BORDER);
+                email.classList.add(...RED_BORDER);
+
+                passwordError.style.color = 'red';
+                passwordError.innerHTML = '<p class="material-icons">error</p>';
+                passwordErrorMsg.style.color = 'red';
+                passwordErrorMsg.innerHTML = 'Invalid email or password!';
+                password.classList.remove(...GREEN_BORDER);
+                password.classList.add(...RED_BORDER);
+
+                let loginButton = document.getElementById('log_in');
+                loginButton.style.color = 'gray';
+                loginButton.style.backgroundColor = '#006097';
+                loginButton.disabled = true;
+
+                loginAttempts++;
+                if (loginAttempts % 3 === 0)
+                    recaptchaScreen();
+            }
+        }
     }
 
     keyUpDelay('#email, #psw', 500, checkCredentials);
 });
-
-function afterCheck() {
-    const emailError = document.getElementById('error');
-    const passwordError = document.getElementById('password-error');
-    const emailErrorMsg = document.getElementById('error-msg');
-    const passwordErrorMsg = document.getElementById('password-error-msg');
-
-    if (this.responseText === 'True') {
-        emailError.style.color = 'green';
-        emailError.innerHTML = '<p class="material-icons">check_circle</p>';
-        emailErrorMsg.style.color = 'green';
-        emailErrorMsg.innerHTML = 'Correct Email!';
-
-        email.classList.remove(...RED_BORDER);
-        email.classList.add(...GREEN_BORDER);
-
-        passwordError.style.color = 'green';
-        passwordError.innerHTML = '<p class="material-icons">check_circle</p>';
-        passwordErrorMsg.style.color = 'green';
-        passwordErrorMsg.innerHTML = 'Correct Password!';
-
-        password.classList.remove(...RED_BORDER);
-        password.classList.add(...GREEN_BORDER);
-
-        let loginButton = document.getElementById('log_in');
-        loginButton.disabled = false;
-        loginButton.style.color = 'white';
-        loginButton.style.backgroundColor = '#3E82F8';
-        loginButton.classList.add('hover:bg-blue-800');
-    } else {
-        emailError.style.color = 'red';
-        emailError.innerHTML = '<p class="material-icons">error</p>';
-        emailErrorMsg.style.color = 'red';
-        emailErrorMsg.innerHTML = 'Invalid email or password!';
-        email.classList.remove(...GREEN_BORDER);
-        email.classList.add(...RED_BORDER);
-
-        passwordError.style.color = 'red';
-        passwordError.innerHTML = '<p class="material-icons">error</p>';
-        passwordErrorMsg.style.color = 'red';
-        passwordErrorMsg.innerHTML = 'Invalid email or password!';
-        password.classList.remove(...GREEN_BORDER);
-        password.classList.add(...RED_BORDER);
-
-        let loginButton = document.getElementById('log_in');
-        loginButton.style.color = 'gray';
-        loginButton.style.backgroundColor = '#006097';
-        loginButton.disabled = true;
-    }
-}
 
 const loginUser = () => window.location.href = getRedirectParam();
 
