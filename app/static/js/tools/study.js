@@ -9,6 +9,12 @@ const timerName = document.getElementById('timerName');
 const pauseButton = document.getElementById('pause');
 const popupButton = document.getElementById('popup');
 
+function padWith0(num) {
+    let string = num.toString();
+    if (num < 10) string = '0' + string;
+    return string;
+}
+
 if (localStorage.getItem("popup")) {
     document.getElementById("sidebar_").classList.add("hidden");
     document.getElementById("sidebar_").hidden = true;
