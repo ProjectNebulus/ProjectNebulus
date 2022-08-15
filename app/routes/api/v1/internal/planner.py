@@ -41,7 +41,7 @@ def change_notepad():
     return update.change_user_notepad(course_id, content, session["id"])
 
 
-@internal.route("/nebulusdoc/save", methods=["PO ST"])
+@internal.route("/nebulusdoc/save", methods=["POST"])
 @private_endpoint
 def saveNebulusdoc():
     data1 = request.form.get("title")

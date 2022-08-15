@@ -859,7 +859,7 @@
                 data: {
                     "title": title,
                     "content": document.getElementById('editor').innerHTML,
-                    "id": {{ id }},
+                    "id": "{{ id }}",
                 },
                 dataType: "json"
             });
@@ -875,6 +875,6 @@
             });
         }
 
-        setInterval(save_editor, 1000);
+        setInterval(save_editor, 500);
     </script>
 {% endblock %}

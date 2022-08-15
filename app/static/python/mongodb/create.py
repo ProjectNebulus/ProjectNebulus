@@ -1,5 +1,3 @@
-import datetime
-
 from dotenv import load_dotenv
 from flask import session
 
@@ -64,10 +62,11 @@ def create_nebulusdoc(data: dict) -> NebulusDocument:
 
 def update_nebulusdoc(data: dict):
     # doc = getNebulusDocument(data["id"])
-    doc = NebulusDocument.objects.get(id=data["id"])
+    doc = NebulusDocument.objects.get(pk=data["id"])
     # print(doc.__dict__)
     doc.title = data["title"]
     doc.content = data["content"]
+    doc.owner = User.objects.get(username=session["username"])
     doc.save(clean=False)
     # print(doc.__dict__)
     return doc.id
