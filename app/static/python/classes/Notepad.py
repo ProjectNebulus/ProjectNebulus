@@ -13,4 +13,4 @@ class Notepad(EmbeddedDocument):
     data = DictField(StringField, default={})
     # Key: course ID, Value: document data
     authorizedUsers = ListField(ReferenceField("User"))
-    lastEdited = DateTimeField(null=True, default=None)
+    lastEdited = DateTimeField(null=True, default={})
