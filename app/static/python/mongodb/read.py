@@ -11,7 +11,7 @@ from ..classes import *
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 
-with open("app/static/python/dictionary.json") as f:
+with open("/app/static/python/dictionary.json") as f:
     dictionary = json.loads(f.read())
 
 
