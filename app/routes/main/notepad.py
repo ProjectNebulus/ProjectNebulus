@@ -51,7 +51,9 @@ def notepad():
     # print(courses)
     # print(notepad[courses[0]])
     # print(user_notepad["data"][courses[0].id])
-    print(user_notepad)
+    # print(user_notepad)
+    # print(user_notepad["data"])
+    # print(user_notepad.data)
     return render_template(
         "tools/notepad.html",
         page="Nebulus - Notepad",
