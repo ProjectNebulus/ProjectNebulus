@@ -490,8 +490,11 @@ def get_blocks(user_id):
 
 
 def get_user_notepad(user):
+    user = find_user(pk=user)
     try:
+        print(user.notepad)
         notepad = dict(user.notepad)
-    except:
+    except Exception as e:
+        print(e)
         notepad = {}
     return notepad

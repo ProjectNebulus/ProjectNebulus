@@ -262,12 +262,14 @@ def change_user_notepad(course_id, content, user_id):
     user = User.objects.get(pk=user_id)
     try:
         dictionary = dict(user.notepad)
-        dictionary[course_id] = content
-        # user.notepad = Planner(dictionary)
+        dictionary["data"][course_id] = content
         user.notepad = Notepad(dictionary)
     except:
-        # user.notepad = Planner({course_id= content})
-        # user.notepad = Planner(course_id= content)
-        user.notepad = Notepad(course_id=content)
+        dictionary = {"data": {
+            str(course_id): str(content)
+        }
+        }
+        user.notepad = Notepad(**dictionary)
+
     user.save(clean=False)
     return "0"

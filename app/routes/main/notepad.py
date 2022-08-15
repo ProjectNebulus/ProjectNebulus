@@ -48,7 +48,10 @@ def notepad():
     ]
     courses = list(read.get_user_courses(session["id"]))
     user_notepad = read.get_user_notepad(session["id"])
-    print(courses)
+    # print(courses)
+    # print(notepad[courses[0]])
+    # print(user_notepad["data"][courses[0].id])
+    print(user_notepad)
     return render_template(
         "tools/notepad.html",
         page="Nebulus - Notepad",
