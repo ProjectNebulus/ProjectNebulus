@@ -9,8 +9,7 @@ from ..classes import (
     NebulusDocument,
     Planner,
     Schoology,
-    User,
-    Notepad
+    User
 )
 from ..utils.security import hash256
 
@@ -263,11 +262,6 @@ def change_user_notepad(course_id, content, user_id):
     try:
         user.notepad[course_id] = content
     except:
-        user.notepad = Notepad.Notepad()
-        try:
-            user.notepad[course_id] = content
-        except:
-    # create course_id
-
+        user.notepad = {course_id: content}
     user.save(clean=False)
     return "0"
