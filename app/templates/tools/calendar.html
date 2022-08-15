@@ -14,23 +14,6 @@
 <div class="flex flex-row">
     {% include "utils/sidebar.html" %}
     <div class="container mx-auto mt-10">
-        <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 dark:text-gray-400">
-            <li class="mr-2">
-                <a href="/calendar"
-                   class="inline-block py-3 px-4 text-white bg-blue-600 rounded-lg active"
-                   aria-current="page">Calendar</a>
-            </li>
-            <li class="mr-2">
-                <a href="/planner"
-                   class="inline-block py-3 px-4 text-white bg-blue-600 rounded-lg active"
-                   aria-current="page">Planner</a>
-            </li>
-        </ul>
-        <button onclick="addEvent()"
-                type="button"
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus: ring -4 focus:ring-blue-300 font-large rounded-md text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark: focus: ring-blue-800 py-3 px-4 mt-2 ">
-            Add Event
-        </button>
         <div id="addNewEvent"
              class="text-white bg-white hover:bg-lightgray focus:outline-none focus:ring-4 focus:ring-blue-300 font-large rounded text-center dark:focus:ring-blue-800 p-6 hidden w-1/2 md:w-full drop-shadow-lg"
              style="position: fixed;
@@ -151,18 +134,54 @@
                 <span class="text-2xl font-bold" id="date">Error</span>
                 <div class="buttons">
                     <button class="material-icons pl-3 pr-1 py-1 rounded-full border border-gray-100 dark:border-gray-500 hover:bg-gray-50 dark:hover:bg-gray-500 dark:text-white text-lg"
-                            id="prevPage">
+                            id="prevPage" style="
+    vertical-align: middle;
+">
                         arrow_back_ios
                     </button>
-                    <button class="border border-gray-100 dark:border-gray-500 px-4 py-1 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-500 dark:text-white bg-gray-50 dark:bg-gray-700"
-                            id="today">
+                    <button class="border border-gray-100 dark:border-gray-500 px-4 py-1 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-500 dark:text-white bg-transparent "
+                            id="today" style="
+    vertical-align: middle;
+">
                         Today
                     </button>
                     <button class="material-icons px-2 py-1 rounded-full border border-gray-100 dark:border-gray-500 hover:bg-gray-50 dark:hover:bg-gray-500 dark:text-white text-lg"
-                            id="nextPage">
+                            id="nextPage" style="
+    vertical-align: middle;
+">
                         arrow_forward_ios
                     </button>
+                    <button id="togglePage" data-dropdown-toggle="dropdown"
+                            class="border border-gray-100 dark:border-gray-500 px-4 py-1 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-500 dark:text-white bg-transparent text-center inline-flex items-center"
+                            type="button">
+                        Calendar
+                        <svg class="ml-2 w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor"
+                             viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <!-- Dropdown menu -->
+                    <div id="dropdown"
+                         class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
+                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault">
+                            <li>
+                                <a href="/calendar"
+                                   class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Calendar</a>
+                            </li>
+                            <li>
+                                <a href="/planner"
+                                   class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Planner</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
+                <button class="px-2 py-1 rounded-full border border-gray-100 dark:border-gray-500 hover:bg-gray-50 dark:hover:bg-gray-500 dark:text-white text-lg"
+                        style="
+    vertical-align: middle;
+" onclick="addEvent()">
+                    Add an Event
+                </button>
             </div>
             <table class="w-full">
                 <thead>

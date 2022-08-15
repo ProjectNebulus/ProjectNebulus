@@ -493,9 +493,9 @@ def get_user_notepad(user):
     user = find_user(pk=user)
     try:
         # print(user.notepad)
-        notepad = dict(user.notepad)
+        notepad = dict(user.notepad.data)
     except Exception as e:
-        print(user.notepad.data)
+
         print(e)
         notepad = {}
     return notepad

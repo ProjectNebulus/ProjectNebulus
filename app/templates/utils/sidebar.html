@@ -44,9 +44,16 @@
         }
     </style>
     {% if user %}
-        <aside id="sidebar_"
-               aria-label="Sidebar"
-               class="overflow-y-auto fixed z-30 py-4 px-3 backdrop-blur-sm bg-gray-100/50 rounded dark:bg-gray-800/50">
+        <aside id="sidebar_" aria-label="Sidebar"
+               class="overflow-y-auto z-30 py-4 px-3 backdrop-blur-sm bg-gray-100/50 rounded dark:bg-gray-800/50"
+               style="
+    height: 100% !important;
+    overflow-y:
+    scroll;
+    overflow-x:
+    hidden;
+    position: fixed;
+    ">
             <ul class="space-y-2">
                 <li class="block lg:hidden text-gray-600 dark:text-gray-400 whitespace-nowrap h-10 flex items-center"
                     id="mobile-expand">
