@@ -25,7 +25,9 @@ function recaptchaTimeout() {
 }
 
 function recaptchaSuccess() {
-    recaptcha.classList.add("hidden");
+    if (grecaptcha.getResponse())
+
+        recaptcha.classList.add("hidden");
     prevScreen.classList.remove("hidden");
     grecaptcha.reset();
 }
