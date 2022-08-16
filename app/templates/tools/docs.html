@@ -125,7 +125,7 @@
                     {% for doc in docs %}
                         <a href="/docs/document/{{ doc.id }}">
                             <div class="flex flex-col">
-                                <div class="document rounded-md" style=" text-align: left; ">
+                                <div class="document rounded-md" style=" text-align: left;overflow:hidden; ">
                                     <div style="text-align: left; zoom: 20%;padding:40px; overflow:hidden;">{{ doc.content|safe }}</div>
                                 </div>
                                 <p style="
@@ -151,4 +151,13 @@
             });
         }
     </script>
+    <style>
+        img.twemoji {
+            height: 1em;
+            width: 1em;
+            margin: 0 0.05em 0 0.1em;
+            vertical-align: -0.1em;
+            display: inline-block;
+        }
+    </style>
 {% endblock %}
