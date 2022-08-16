@@ -468,23 +468,26 @@
         </div>
         <div id="step4" class="hidden flex items-center justify-center">
             <div class="g-recaptcha" data-sitekey="6LfBJHshAAAAAE3I3N8z6s9OyXXlqtdDG6ovf_sT"
-                 data-callback="recaptchaTimeout"></div>
+                 data-callback="onComplete"></div>
         </div>
     </div>
     <script src='/static/js/main/signup.js'></script>
     <style>
-        .pfp_selected {
-            background: #eee0ff;
-            border-color: purple;
-            border-style: block;
-            border-width: 2px;
+        .pfp {
+            padding: 2px;
+            transition: 0.25s;
         }
 
         .pfp:hover {
-            filter: brightness(0.5) blur(1px);
-            border-color: blue;
-            border-style: block;
-            border-width: 2px;
+            filter: brightness(0.5);
+            border: blue solid 2px;
+            padding: 0;
+        }
+
+        .pfp_selected {
+            background: #eee0ff;
+            border: purple solid 2px;
+            padding: 0;
         }
     </style>
     </body>

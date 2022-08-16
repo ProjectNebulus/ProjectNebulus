@@ -20,7 +20,7 @@ function recaptchaScreen() {
     recaptcha.classList.remove("hidden");
 }
 
-function recaptchaTimeout() {
+function onComplete() {
     setTimeout(recaptchaSuccess, 1000)
 }
 

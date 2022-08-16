@@ -61,7 +61,7 @@ function next(num) {
         nextModal(num);
 }
 
-function recaptchaTimeout() {
+function onComplete() {
     setTimeout(createUser, 1000);
 }
 
