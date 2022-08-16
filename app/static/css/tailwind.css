@@ -64582,6 +64582,11 @@ html.dark body {
   --tw-bg-opacity: 0;
 }
 
+
+.group:hover .group-hover\:opacity-100 {
+  opacity: 100;
+}
+
 .group:hover .group-hover\:block {
   display: block;
 }

@@ -727,11 +727,14 @@ function getChat(chatID) {
                 } else {
                     prevMessage = message;
                 }
-                if (prevMessage['sender']['username'] !== message['sender']['username'] || timeDiff(prevMessage, message)) {
+
+                if (prevMessage['sender']['username'] !== message['sender']['username'] || timeDiff(prevMessage, message) || index === 0) {
 
                     prevMessage['send_date'] = formatTime(prevMessage['send_date']);
                     prevMessage['content'] = prevMessage['content'].replace('<br>', '');
-                    document.getElementById("content_" + prevMessage["id"]).remove();
+                    if (index !== 0) {
+                        document.getElementById("content_" + prevMessage["id"]).remove();
+                    }
                     chatContent += `
                     <div class="flex mb-1 items-top space-x-4 mt-6 hover:bg-gray-100/50 dark:hover:bg-gray-700/50">
                         <img class="mt-1 w-10 h-10 rounded-full" data-dropdown-toggle="user_${prevMessage['sender']['username']}"
@@ -747,10 +750,8 @@ function getChat(chatID) {
                     </div>`;
                 }
 
-                if (prevMessage === message) {
-                    chatContent += `<div id="content_${message['id']}" class="text-sm hover:bg-gray-100/50 dark:hover:bg-gray-700/50 text-gray-500 dark:text-gray-400  mr-2"${message['content']}</div>`;
-                }else {
-                    chatContent += `<div class="group flex flex-row hover:bg-gray-100/50 dark:hover:bg-gray-700/50"><div class="hidden text-gray-600 uppercase mr-2 group-hover:block" style="margin-top:3px;font-size:10px;">
+                if (prevMessage !== message) {
+                    chatContent += `<div class="group flex flex-row hover:bg-gray-100/50 dark:hover:bg-gray-700/50"><div class="opacity-0 text-gray-600 uppercase mr-2 group-hover:opacity-100" style="margin-top:3px;font-size:10px;">
         ${formatTime(message['send_date'], true)}</div> <div id="content_${message['id']}" class="text-sm text-gray-500 dark:text-gray-400  mr-2"${message['content']}</div>`;
                 }
 
