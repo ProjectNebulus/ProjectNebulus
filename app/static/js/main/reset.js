@@ -2,7 +2,7 @@ const send = document.getElementById('send');
 const confirm = document.getElementById('resetPsw');
 const codeInput = document.getElementById('code');
 const newPsw = document.getElementById('newPsw');
-const usernameInput = document.getElementById('reset-username');
+const emailInput = document.getElementById('reset-username');
 let icons, errors;
 
 const r_l = ',<.>/?;:\'"\\|[{]}=+-_`!@#$%^&*()_+';
@@ -21,7 +21,7 @@ function sendEmail() {
         type: 'POST',
         url: '/api/v1/internal/reset-email',
         contentType: 'application/json',
-        data: JSON.stringify({username: usernameInput.value})
+        data: JSON.stringify({username: emailInput.value})
     });
 
     request.done((data) => {
@@ -71,7 +71,7 @@ confirm.addEventListener('click', () => {
         contentType: 'application/json',
         data: JSON.stringify({
             code: codeInput.value,
-            username: usernameInput.value,
+            username: emailInput.value,
             password: newPsw.value
         })
     });

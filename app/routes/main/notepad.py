@@ -1,18 +1,19 @@
 from flask import render_template, session
 
 from app.static.python.mongodb import read
-
-from ...static.python.mongodb.read import getText
 from . import main_blueprint
+from ...static.python.mongodb.read import getText
 
 
 @main_blueprint.route("/documents", methods=["GET"])
 def docs():
+    docs = read.get_user_docs(session["id"])
     return render_template(
         "tools/docs.html",
         user=session.get("username"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         translate=getText,
+        docs=docs
     )
 
 
@@ -46,7 +47,11 @@ def notepad():
         "Roboto Mono Slashed Slashed Condensed",
     ]
     courses = list(read.get_user_courses(session["id"]))
-    print(courses)
+    user_notepad = read.get_user_notepad(session["id"])
+    # print(user_notepad)
+    # print(courses[0])
+    # # print(user_notepad[courses[0].name])
+    # print(user_notepad[courses[0].id])
     return render_template(
         "tools/notepad.html",
         page="Nebulus - Notepad",
@@ -56,6 +61,7 @@ def notepad():
         fonts=fonts,
         translate=getText,
         courses=courses,
+        notepad=user_notepad
     )
 
 
@@ -88,13 +94,25 @@ def document(id):
         "Roboto Mono Slashed Slashed",
         "Roboto Mono Slashed Slashed Condensed",
     ]
+    try:
+        document = read.getNebulusDocument(id)
+        print(document)
+        # check authorized user
 
-    return render_template(
-        "tools/notepad.html",
-        page="Nebulus - Notepad",
-        user=session.get("username"),
-        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-        read=read,
-        fonts=fonts,
-        translate=getText,
-    )
+        content = document["content"]
+        title = document["title"]
+        return render_template(
+            "tools/document.html",
+            page="Nebulus - Notepad",
+            user=session.get("username"),
+            avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+            read=read,
+            fonts=fonts,
+            translate=getText,
+            content=content,
+            title=title,
+            id=id,
+        )
+    except Exception as e:
+        print(e)
+        return "404"

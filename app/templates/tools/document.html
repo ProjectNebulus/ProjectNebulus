@@ -2,6 +2,7 @@
 {% block main %}
     {% include "utils/navbar.html" %}
     <div class="flex flex-row">
+
         {% include "utils/sidebar.html" %}
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -526,6 +527,7 @@
                                    id="name"
                                    class="rounded-none rounded-r-lg bg-gray-50 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5 dark:bg-gray-800/75 dark:text-white"
                                    placeholder="Untitled Document"
+                                   value="{{ title }}"
                                    style="border-style:none;">
                         </div>
                         <p style="float:right;margin-top:-30px;" class="text-xl dark:text-white">
@@ -832,17 +834,47 @@
                          class="py-2 px-4 bg-gray-200 rounded-b-lg dark:bg-gray-800"
                          style="overflow-y:scroll;
                                 height:100%;">
+                        <span id="savestate" style="color:#b8b8b8;text-decoration:underline">Synced to Cloud | Last Edit was seconds ago</span>
                         <label for="editor" class="sr-only">Publish post</label>
                         <div contenteditable="true"
                              tabindex="0"
                              id="editor"
                              class=" block px-0 w-full text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
                              style="min-height: 968px;">
-                            <font face="Montserrat" color="#a3a3a3"><b style="">Type / to insert</b></font>
+                            {{ content | safe }}
                         </div>
+
                     </div>
                 </div>
             </form>
         </div>
     </div>
+    <script>
+        function save_editor() {
+            let content = document.getElementById('editor').innerHTML;
+            let title = document.getElementById("name").value; //document.getElementById('title').value;
+            let request = $.ajax({
+                url: "/api/v1/internal/nebulusdoc/save",
+                method: "POST",
+                data: {
+                    "title": title,
+                    "content": document.getElementById('editor').innerHTML,
+                    "id": "{{ id }}",
+                },
+                dataType: "json"
+            });
+            request.done(function (response) {
+                console.log(response);
+                if (response.status === "success") {
+                    document.getElementById('savestate').innerHTML = "Synced to Cloud";
+                    document.getElementById("savestate").style.color = "white";
+                } else {
+                    document.getElementById('savestate').innerHTML = "Error";
+                    document.getElementById("savestate").style.color = "red";
+                }
+            });
+        }
+
+        setInterval(save_editor, 500);
+    </script>
 {% endblock %}

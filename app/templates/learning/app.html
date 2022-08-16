@@ -6,14 +6,15 @@
             visibility: visible;
         }
     </style>
+
     {% include "utils/navbar.html" %}
     <div class="flex flex-row">
         {% include "utils/sidebar.html" %}
-        <div class="grid grid-cols-1 divide-y divide-gray-300 dark:divide-gray-700 hidden lg:inline w-full pl-8">
-            <div class="flex flex-row overflow-hidden" style="height: 55%">
+        <div class="grid grid-cols-1 divide-y divide-gray-300 dark:divide-gray-700 w-full pl-8">
+            <div class="flex flex-row overflow-hidden">
                 <div id="middle"
-                     style="flex: 0 0 49vw"
-                     class="pl-8 pr-4 border-gray-200 dark:border-gray-700">
+                     style="flex: 0 0 68vw"
+                     class="pl-8 pr-4 border-r border-gray-200 dark:border-gray-700">
                     <div class="flex flex-row w-full mb-4">
                         <h1 class="text-4xl text-black dark:text-white mt-5 text-left"
                             style="flex-grow: 1;">Recent Activity</h1>
@@ -28,56 +29,59 @@
                                  stroke="currentColor"
                                  stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z">
+                                      d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z">
                                 </path>
                             </svg>
                         </button>
                     </div>
-                    <div class="" style="height: 87%">
-                        <ol class="relative ml-2 border-l border-gray-500" style="border-left-width: 5px;">
+                    <div class="overflow-auto" style="height: 87%">
+                        <ol class="relative border-l border-gray-200 dark:border-gray-700 ml-2">
                             {% for i, tuple in enumerate(announcements.items()) %}
                                 {% set date,list = tuple %}
                                 <li class="mb-10 ml-4" aria-label="Events on {{ strftime(date, "%D") }}">
-                                    <div class="absolute w-8 h-8 dark:bg-gray-800/75 backdrop-blur-sm rounded-full -left-3 "></div>
+                                    <div class="absolute w-3 h-3 bg-gray-200 rounded-full -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700">
+                                    </div>
                                     <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
                                         {{ strftime(date, "%a, %B %-d, %Y") }}
                                     </time>
                                     <br>
-                                    <div class="gap-4 pt-2"
+                                    <div class="grid gap-4 pt-2"
                                          style="grid-template-columns: repeat(auto-fit, 23rem)">
                                         {% for j in range(list|length) %}
                                             {% set a = list[j] %}
-                                            <div class="expandable backdrop-blur-sm min-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg shadow mb-4 dark:bg-gray-800/75 dark:text-gray-300 relative"
-                                                 role="alert"
+                                            <div class="expandable min-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg
+                                             shadow mb-4 dark:bg-gray-800/75 dark:text-gray-300 relative" role="alert"
                                                  style="height: min-content">
-                                                <button class="absolute top-0 right-0 text-xl mt-2 mr-3 material-icons hover:bg-gray-50 dark:hover:bg-gray-600 px-1 rounded-lg expand invisible">
+
+                                                <button class="absolute top-0 right-0 text-xl mt-2 mr-3 material-icons
+                                                 hover:bg-gray-50 dark:hover:bg-gray-600 px-1 rounded-lg expand invisible">
                                                     open_in_new
                                                 </button>
+
                                                 {% if a.title != "" %}
-                                                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white truncate"
-                                                        title-element>{{ a.title }}</h4>
+                                                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white
+                                                     truncate" title-element>{{ a.title }}</h4>
                                                 {% endif %}
                                                 <div class="flex items-center mb-3">
                                                     <img data-dropdown-toggle="userDropdown-{{ i }}_{{ j }}"
-                                                         id="avatar{{ i }}_{{ j }}"
-                                                         image-element
+                                                         id="avatar{{ i }}_{{ j }}" image-element
                                                          data-dropdown-placement="bottom-start"
                                                          class="rounded-full ring-2 ring-gray-300 dark:ring-gray-500 cursor-pointer mb-3 rounded-full shadow-lg {% if "black" in avatar %} bg-gray-300 {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}
-                                            {% if a.title == "" %}
-                                                         w-8
-                                                         h-8
-                                                         mt-4
-                                                         {% else %}
-                                                         w-6
-                                                         h-6
-                                                         {% endif %}
-                                                         "
+                                                                 {% if a.title == "" %}
+                                                             w-8
+                                                             h-8
+                                                             mt-4
+                                                             {% else %}
+                                                             w-6
+                                                             h-6
+                                                             {% endif %}
+                                                             "
                                                          src="{{ a.author_pic }}"
                                                          alt="{{ a.author }}'s profile picture">
                                                     <br>
                                                     <div class="flex flex-col text-xs text-gray-700 dark:text-gray-400 pl-2">
                                                         {% if a.title == "" %}
-                                                            <h4 class="text-2xl font-semibold text-gray-900 dark:text-white truncate mb-1 cursor-pointer hover:underline"
+                                                            <h4 class="text-lg font-semibold text-gray-900 dark:text-white truncate mb-1 cursor-pointer hover:underline"
                                                                 data-dropdown-toggle="userDropdown-{{ i }}_{{ j }}"
                                                                 author-element>
                                                                 {{ a.author }}
@@ -90,8 +94,9 @@
                                                                       data-dropdown-toggle="userDropdown-{{ i }}_{{ j }}">{{ a.author }}</span>
                                                                 <span class="text-lg">></span>
                                                             {% endif %}
-                                                            <span class="bg-gray-300 text-gray-800 text-xl font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300 -mt-1"
-                                                                  course-name-element>
+                                                            <span class="bg-gray-300 text-gray-800 text-xs font-normal
+                                                             uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600
+                                                              dark:text-gray-300 -mt-1" course-name-element>
                                                                 {{ a.course.name }}
                                                             </span>
                                                         </div>
@@ -99,27 +104,31 @@
                                                 </div>
                                                 <div class="flex items-center mb-3">
                                                     <div class="text-sm text-gray-900 dark:text-white font-normal">
-                                                        <div class="text-md text-gray-900 dark:text-white font-normal line-clamp-5" style="font-size: 1rem; line-height: 1.5rem;"
-                                                             content-element>{{ fmt(a.content) }}</div>
+                                                        <div class="text-sm text-gray-900 dark:text-white font-normal line-clamp-5"
+                                                             content-element>
+                                                            {{ fmt(a.content) }}
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <time class="text-xs font-medium text-blue-600 dark:text-blue-500">
                                                     {{ strftime(a.date.time(), "%-I:%M %p") }}
                                                 </time>
                                                 <time post-time-element hidden class="hidden">Posted at
-                                                {{ strftime(a.date.time(), "%-m/%-d/%y %-I:%M %p") }}</time>
+                                                    {{ strftime(a.date.time(), "%-m/%-d/%y %-I:%M %p") }}</time>
                                                 <div due-time-element hidden class="hidden"></div>
                                             </div>
                                             <!-- Dropdown menu -->
                                             <div id="userDropdown-{{ i }}_{{ j }}"
-                                                 class="absolute hidden bg-gray-50 divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600">
+                                                 class="absolute hidden bg-gray-50 divide-y divide-gray-100 rounded
+                                                  shadow w-80 dark:bg-gray-700 dark:divide-gray-600">
                                                 <div style="border-radius:10px 10px 0 0;
-                                                            height:60px;
-                                                            background:{% if a.author_color %}rgba {{ a.author_color }}{% else %}#515A67{% endif %};">
+                                                        height:60px;
+                                                        background:{% if a.author_color %}rgba
+                                                    {{ a.author_color }}{% else %}#515A67{% endif %};">
                                                     {% if a.imported_from|lower == "schoology" %}
                                                         <div data-tooltip-target="tooltip-default-{{ i }}"
                                                              style="float:right;
-                                                                    margin:5px;">
+                                                                        margin:5px;">
                                                             <img alt="Schoology Image"
                                                                  src="/static/images/logos/schoology.png"
                                                                  class="w-5 h-5">
@@ -141,11 +150,11 @@
                                                                  class="w-24 h-24 rounded-full border-white dark:border-gray-700 {% if "black" in avatar %} bg-gray-300 {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}"
                                                                  alt="{{ a.author }}'s Profile Picture">
                                                             <span class="absolute  w-5 h-5 bg-green-400 border-2 border-white dark:border-gray-700 rounded-full"
-                                                                  style="left:90px;
-                                                                         top:85px;"></span>
+                                                                  style="left:90px;top:85px;"></span>
                                                         </div>
                                                         <div>{{ a.author }}</div>
-                                                        {% if a.author_email %}<div class="text-sm text-gray-400">{{ a.author_email }}</div>{% endif %}
+                                                        {% if a.author_email %}
+                                                            <div class="text-sm text-gray-400">{{ a.author_email }}</div>{% endif %}
                                                         {% if a.author_school %}
                                                             <div class="text-sm text-gray-400">
                                                                 Instructor
@@ -175,9 +184,10 @@
                                     </time>
                                     <br>
                                     <div class="grid grid-cols-4 gap-2 pt-2">
-                                        <div role="alert"
-                                             class="w-full max-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg shadow dark:bg-gray-800/75 dark:text-gray-300 overflow-hidden relative">
-                                            <h4 class="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2 truncate">Welcome to Nebulus</h4>
+                                        <div role="alert" class="w-full max-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg
+                                         shadow dark:bg-gray-800/75 dark:text-gray-300 overflow-hidden relative">
+                                            <h4 class="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2 truncate">
+                                                Welcome to Nebulus</h4>
                                             <div class="flex items-center mb-3">
                                                 <img class="w-6 h-6 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 {% if "black" in avatar %} bg-gray-300 {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}"
                                                      src="{{ avatar }}"
@@ -187,8 +197,8 @@
                                                     <span class="uppercase font-bold text-black dark:text-white ">Nebulus</span>
                                                     in
                                                     <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">
-                                                        Nebulus Auto-Generator
-                                                    </span>
+                                                            Nebulus Auto-Generator
+                                                        </span>
                                                 </p>
                                             </div>
                                             <div class="flex items-center">
@@ -211,11 +221,11 @@
                     </div>
                 </div>
                 <div id="right"
-                     style="flex: 0 0 49vw"
-                     class="border-gray-200 dark:border-gray-700 text-center h-full">
+                     style="flex: 0 0 30vw"
+                     class="border-gray-200 dark:border-gray-700 border-l text-center h-full overflow-auto">
                     <p class="text-2xl text-black dark:text-white">Upcoming Events</p>
                     <br>
-                    <div class="flex flex-col sm:rounded-lg min-w-full align-middle  inline-block scroll"
+                    <div class="flex flex-col sm:rounded-lg min-w-full align-middle overflow-auto inline-block"
                          style="height: 80%">
                         {% if events|length == 0 %}
                             <p class="text-gray-300 dark:text-gray-500 mx-4">
@@ -227,46 +237,46 @@
                                 {% set diff = (date - now).days %}
                                 {% if diff < 0 %}
                                     <h1 style="text-align: left;
-                                               background: orangered -webkit-linear-gradient(left,#ff7878,#ffb078);
-                                               -webkit-background-clip: text;
-                                               -webkit-text-fill-color: transparent;
-                                               margin: 13px;">
+                                                   background: orangered -webkit-linear-gradient(left,#ff7878,#ffb078);
+                                                   -webkit-background-clip: text;
+                                                   -webkit-text-fill-color: transparent;
+                                                   margin: 13px;">
                                         {{ strftime(date, "%a, %B %-d, %Y") }}
                                         ({{ -diff }}d Overdue)
                                     </h1>
                                 {% elif diff < 1 %}
                                     <h1 style="text-align: left;
-                                               background: orange -webkit-linear-gradient(left,#ff78ed,#ffb378);
-                                               -webkit-background-clip: text;
-                                               -webkit-text-fill-color: transparent;
-                                               margin: 13px;">
+                                                   background: orange -webkit-linear-gradient(left,#ff78ed,#ffb378);
+                                                   -webkit-background-clip: text;
+                                                   -webkit-text-fill-color: transparent;
+                                                   margin: 13px;">
                                         {{ strftime(date, "%a, %B %-d, %Y") }}
                                         ({{ diff }}d remaining)
                                     </h1>
                                 {% elif diff < 3 %}
                                     <h1 style="text-align: left;
-                                               background: yellow -webkit-linear-gradient(left,#ffc578,#fff878);
-                                               -webkit-background-clip: text;
-                                               -webkit-text-fill-color: transparent;
-                                               margin: 13px;">
+                                                   background: yellow -webkit-linear-gradient(left,#ffc578,#fff878);
+                                                   -webkit-background-clip: text;
+                                                   -webkit-text-fill-color: transparent;
+                                                   margin: 13px;">
                                         {{ strftime(date, "%a, %B %-d, %Y") }}
                                         ({{ diff }}d remaining)
                                     </h1>
                                 {% elif diff < 5 %}
                                     <h1 style="text-align: left;
-                                               background: green -webkit-linear-gradient(left,#ffd978,#ddff78);
-                                               -webkit-background-clip: text;
-                                               -webkit-text-fill-color: transparent;
-                                               margin: 13px;">
+                                                   background: green -webkit-linear-gradient(left,#ffd978,#ddff78);
+                                                   -webkit-background-clip: text;
+                                                   -webkit-text-fill-color: transparent;
+                                                   margin: 13px;">
                                         {{ strftime(date, "%a, %B %-d, %Y") }}
                                         ({{ diff }}d remaining)
                                     </h1>
                                 {% else %}
                                     <h1 style="text-align: left;
-                                               background: greenyellow -webkit-linear-gradient(left,#d9ff78,#78ffb7);
-                                               -webkit-background-clip: text;
-                                               -webkit-text-fill-color: transparent;
-                                               margin: 13px;">
+                                                   background: greenyellow -webkit-linear-gradient(left,#d9ff78,#78ffb7);
+                                                   -webkit-background-clip: text;
+                                                   -webkit-text-fill-color: transparent;
+                                                   margin: 13px;">
                                         {{ strftime(date, "%a, %B %-d, %Y") }}
                                         ({{ diff }}d remaining)
                                     </h1>
@@ -274,31 +284,40 @@
                                 {% for a in assignments[:15] %}
                                     {% if (a._cls != "Assignment" or a.submitDate == None) or now < date %}
                                         {# today is before the due date ^ #}
-                                        <div class="backdrop-blur-sm flex bg-gray-100 shadow dark:bg-gray-800/75 rounded-lg p-6 event shadow-md dark:border-gray-700 text-sm mb-5 mx-4 text-left relative expandable">
-                                            <div class="absolute right-0 bottom-0 material-icons hover:bg-gray-50 dark:hover:bg-gray-500 p-1 expand text-gray-200 cursor-pointer dark:text-gray-400 invisible rounded-lg mr-3 mb-3">
+                                        <div class="flex bg-gray-100 shadow dark:bg-gray-800/75 rounded-lg p-6 event
+                                            shadow-md dark:border-gray-700 text-sm mb-5 mx-4 text-left relative expandable">
+                                            <div class="absolute right-0 bottom-0 material-icons hover:bg-gray-50
+                                                 dark:hover:bg-gray-500 p-1 expand text-gray-200 cursor-pointer
+                                                  dark:text-gray-400 invisible rounded-lg mr-3 mb-3">
                                                 open_in_new
                                             </div>
+
                                             <div content-element hidden class="hidden">{{ a.description }}</div>
                                             <div author-element hidden class="hidden">{{ a.course.teacher }}</div>
-                                            <img src="{% if "teacherAccount" in a.course %} {{ a.course.teacher.avatar.avatar_url }} {% else %} https://app.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg {% endif %}"
-                                                 image-element
-                                                 hidden
-                                                 class="hidden">
+                                            <img src="{% if "teacherAccount" in a.course %}
+                                            {{ a.course.teacher.avatar.avatar_url }}
+                                            {% else %}
+                                            https://app.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg
+                                            {% endif %}"
+                                                 image-element hidden class="hidden">
+
                                             <div class="mr-4 material-icons ml-2 text-black dark:text-white"
                                                  style="transform: translate(0, 50%) scale(1.75)">
                                                 assignment
                                             </div>
                                             <div class="text-gray-700 dark:text-gray-400 leading-relaxed w-full">
-                                                <h1 class="text-black dark:text-white text-xl truncate"
-                                                    title-element
+                                                <h1 class="text-black dark:text-white text-xl truncate" title-element
                                                     style="max-width: 90%">{{ a.title }}</h1>
-                                                <p class="truncate" style="max-width: 90%;" course-name-element>{{ a.course.name }}</p>
+                                                <p class="truncate" style="max-width: 90%;"
+                                                   course-name-element>{{ a.course.name }}</p>
+
                                                 {% if a._cls == "Assignment" %}
                                                     Due at
                                                 {% else %}
                                                     Happening at
                                                 {% endif %}
                                                 {{ strftime(date, "%-I:%M %p") }}
+
                                                 <div due-time-element hidden class="hidden">
                                                     {% if a._cls == "Assignment" %}
                                                         Due at
@@ -316,6 +335,7 @@
                                                         <span class="text-orange-500">Not Submitted</span>
                                                     {% endif %}
                                                 </div>
+
                                                 <div post-time-element hidden class="hidden">
                                                     Posted at
                                                     {% if "creationDate" in a %}
@@ -324,6 +344,7 @@
                                                         {{ strftime(a.get_timestamp(), "%-m/%-d/%y %-I:%m %p") }}
                                                     {% endif %}
                                                 </div>
+
                                                 {% if a._cls == "Assignment" %}
                                                     <div class="text-black dark:text-white">
                                                         {% if a.submitDate %}
@@ -346,23 +367,26 @@
                     </div>
                 </div>
             </div>
-            <div id="middle2" style="float: left; width: 100%; height: 35%;border: none;">
+            <div id="middle2" style="float: left; width: 100%; height: 35%;">
                 <br>
                 <div class="grid justify-center mb-3">
                     <div class="text-center text-4xl pr-4 text-black dark:text-white flex">
                         Your Courses
-                        <button style="float:left;
-                                       margin-right:10px;
-                                       width:64px;"
-                                id="create"
-                                class="mx-4 hidden sm:flex items-center text-left space-x-3 h-12 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700 text-white font-medium rounded-lg text-sm pl-4 py-2.5 text-center">
+                        <button style="float:left;margin-right:10px;" id="create"
+                                class="mx-4 hidden sm:flex items-center text-left space-x-3 w-16 h-12 bg-white ring-1
+                                ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500
+                                shadow-sm rounded-lg text-slate-400 dark:bg-slate-800/75 dark:ring-0 dark:text-slate-300
+                                dark:highlight-white/5 dark:hover:bg-slate-700 text-white font-medium rounded-lg
+                                text-sm pl-4 py-2.5 text-center">
                             <span style="font-size:30px;" class="material-icons">add</span>
                         </button>
                         <button data-modal-toggle="searchModal"
                                 id="search"
                                 style="float:left;"
-                                type="button"
-                                class="hidden sm:flex items-center w-72 text-left space-x-3 px-4 h-12 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700">
+                                class="hidden sm:flex items-center w-72 text-left space-x-3 px-4 w-12 h-12 bg-white ring-1
+                                ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500
+                                shadow-sm rounded-lg text-slate-400 dark:bg-slate-800/75 dark:ring-0 dark:text-slate-300
+                                dark:highlight-white/5 dark:hover:bg-slate-700">
                             <svg width="24"
                                  height="24"
                                  fill="none"
@@ -384,22 +408,19 @@
                         </button>
                     </div>
                 </div>
-                <div style="height: 100%" class=" pr-4 scroll">
+                <div class="overflow-auto pr-4">
                     <div class="w-full grid gap-4 justify-center"
                          style="grid-template-columns: repeat(auto-fit, 24rem)">
                         {% if user_courses|length == 0 %}
                             <a onclick="document.getElementById('course').click()">
                                 <div class="bg-gray-100 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800/75 dark:border-gray-700 p-2 mb-3"
-                                     style="height:13rem;
-                                            width:40rem;">
+                                     style="height:13rem; width:40rem;">
                                     <div style="text-align: left;">
                                         <div style="margin-bottom:10px">
                                             <img src="{{ avatar }}"
                                                  alt="Course Avatar"
                                                  class="object-cover inline-block rounded-lg"
-                                                 style="width: 50px;
-                                                        height: 50px;
-                                                        margin: 10px;">
+                                                 style="width: 50px;height: 50px; margin: 10px;">
                                             <div style="float:right; width:70%; margin-top:6px;">
                                                 <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white truncate">
                                                     {{ user }}'s Next Course
@@ -441,8 +462,8 @@
                                                          viewBox="0 0 20 20"
                                                          xmlns="http://www.w3.org/2000/svg">
                                                         <path fill-rule="evenodd"
-                                                        d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z"
-                                                        clip-rule="evenodd">
+                                                              d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z"
+                                                              clip-rule="evenodd">
                                                         </path>
                                                     </svg>
                                                     ? Announcements
@@ -456,8 +477,8 @@
                                                          viewBox="0 0 20 20"
                                                          xmlns="http://www.w3.org/2000/svg">
                                                         <path fill-rule="evenodd"
-                                                        d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
-                                                        clip-rule="evenodd">
+                                                              d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
+                                                              clip-rule="evenodd">
                                                         </path>
                                                     </svg>
                                                     ? Documents
@@ -471,8 +492,8 @@
                                                          viewBox="0 0 20 20"
                                                          xmlns="http://www.w3.org/2000/svg">
                                                         <path fill-rule="evenodd"
-                                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                                        clip-rule="evenodd">
+                                                              d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                                              clip-rule="evenodd">
                                                         </path>
                                                     </svg>
                                                     ? Events
@@ -487,8 +508,8 @@
                                                          viewBox="0 0 24 24"
                                                          xmlns="http://www.w3.org/2000/svg">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                                                              stroke-width="2"
+                                                              d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
                                                         </path>
                                                     </svg>
                                                     ?
@@ -502,11 +523,11 @@
                         {% endif %}
                         {% for course in user_courses %}
                             <a href="/course/{{ course.id }}">
-                                <div class="backdrop-blur-sm max-w-sm bg-gray-50 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800/75 dark:border-gray-700 p-2"
+                                <div class="max-w-sm bg-gray-50 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800/75 dark:border-gray-700 p-2"
                                      style="float:left;
-                                            margin:20px;
-                                            height:13rem;
-                                            width:22rem;">
+                                                margin:20px;
+                                                height:13rem;
+                                                width:22rem;">
                                     <div class="text-left">
                                         <div class="p-4 flex">
                                             <img src="{{ course.avatar.avatar_url }}"
@@ -559,8 +580,8 @@
                                                          viewBox="0 0 20 20"
                                                          xmlns="http://www.w3.org/2000/svg">
                                                         <path fill-rule="evenodd"
-                                                        d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z"
-                                                        clip-rule="evenodd">
+                                                              d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z"
+                                                              clip-rule="evenodd">
                                                         </path>
                                                     </svg>
                                                     {{ course.announcements|length }}
@@ -575,8 +596,8 @@
                                                          viewBox="0 0 20 20"
                                                          xmlns="http://www.w3.org/2000/svg">
                                                         <path fill-rule="evenodd"
-                                                        d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
-                                                        clip-rule="evenodd">
+                                                              d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
+                                                              clip-rule="evenodd">
                                                         </path>
                                                     </svg>
                                                     {{ course.documents|length }}
@@ -591,8 +612,8 @@
                                                          viewBox="0 0 20 20"
                                                          xmlns="http://www.w3.org/2000/svg">
                                                         <path fill-rule="evenodd"
-                                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                                        clip-rule="evenodd">
+                                                              d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                                              clip-rule="evenodd">
                                                         </path>
                                                     </svg>
                                                     {{ course.events|length }}
@@ -607,8 +628,8 @@
                                                          viewBox="0 0 24 24"
                                                          xmlns="http://www.w3.org/2000/svg">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                                                              stroke-width="2"
+                                                              d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
                                                         </path>
                                                     </svg>
                                                     {{ course.authorizedUsers|length - 1 }}
@@ -624,33 +645,24 @@
                 </div>
             </div>
         </div>
-        <div id="modal"
-             tabindex="-1"
-             aria-hidden="true"
+        <div id="modal" tabindex="-1" aria-hidden="true"
              class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
             <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
                 <!-- Modal content -->
                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                    <div id="dueTime"
-                         class="absolute bottom-0 right-0 p-3 text-gray-200 dark:text-gray-500 text-sm">
+                    <div id="dueTime" class="absolute bottom-0 right-0 p-3 text-gray-200 dark:text-gray-500 text-sm">
                         Due at 9:43 am
                     </div>
                     <!-- Modal header -->
-                    <div class="flex justify-between items-start p-4 rounded-t dark:border-gray-600 relative">
-                        <div id="header">
-                        </div>
+                    <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600 relative">
+                        <div id="header"></div>
                         <button class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                data-modal-toggle="modal"
-                                onclick="removeBackdrop()">
-                            <svg aria-hidden="true"
-                                 class="w-5 h-5"
-                                 fill="currentColor"
-                                 viewBox="0 0 20 20"
+                                data-modal-toggle="modal" onclick="removeBackdrop()">
+                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
-                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                clip-rule="evenodd">
-                                </path>
+                                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                      clip-rule="evenodd"></path>
                             </svg>
                             <span class="sr-only">Close modal</span>
                         </button>
@@ -665,17 +677,12 @@
                              class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
                             stuff
                         </div>
-                        <button data-modal-toggle="modal"
-                                onclick="removeBackdrop()"
+                        <button data-modal-toggle="modal" onclick="removeBackdrop()"
                                 class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                            <svg class="w-6 h-6 inline-block"
-                                 fill="none"
-                                 stroke="currentColor"
-                                 viewBox="0 0 24 24"
+                            <svg class="w-6 h-6 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M5 13l4 4L19 7">
-                                </path>
+                                      d="M5 13l4 4L19 7"></path>
                             </svg>
                             Okay
                         </button>
@@ -683,6 +690,7 @@
                 </div>
             </div>
         </div>
+
         <script src="/static/js/app.js"></script>
         {% include "learning/lms-modal.html" %}
     </div>

@@ -10,21 +10,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="/static/js/chat.js"></script>
-<script>
-    window.onload = function () {
-        if (window.location.search.substr(1).includes("email=ema")) {
-            toggleEmail();
-        }
-    }
-</script>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500;1,700&display=swap"
-      rel="stylesheet">
 {% extends "layout.html" %}
 {% block main %}
     {% include "utils/navbar.html" %}
     <div class="flex flex-row" style="height:calc(100% - 80px);">
         {% include "utils/sidebar.html" %}
         <style>
+            div[id] p > strong {
+                font-weight: 900;
+            }
+
             img.emoji {
                 display: inline-block;
                 height: 1em;
@@ -33,88 +28,84 @@
                 vertical-align: -0.1em;
             }
 
-            .roboto {
-                font-family: 'Roboto', 'serif' !Important;
-        }
+            code {
+                background: #121926;
+                border-color: grey;
+                border-width: 1px;
+                margin: 10px;
+            }
 
-        code {
-            background: #121926;
-            border-color: grey;
-            border-width: 1px;
-            margin: 10px;
+            #main-area ul, #main-area menu, #preview ul, #preview menu {
+                list-style: disc;
+            }
 
-        }
+            #main-area ol, #main-area menu, #preview ol, #preview menu {
+                list-style: decimal;
+            }
 
-        #main-area ul, #main-area menu, #preview ul, #preview menu {
-            list-style: disc;
-        }
+            .animate-pulse {
+                --webkit-animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+                animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            }
 
-        #main-area ol, #main-area menu, #preview ol, #preview menu {
-            list-style: decimal;
-        }
-        .animate-pulse {
-            --webkit-animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
+            @keyframes pulse {
+                0%, 100% {
+                    opacity: 1;
+                }
+                50% {
+                    opacity: .5;
+                }
+            }
 
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: .5;
-  }
-}
+            h1 {
+                font-size: 32px;
+            }
 
-        h1 {
-            font-size: 32px;
-        }
+            h2 {
+                font-size: 24px;
+            }
 
-        h2 {
-            font-size: 24px;
-        }
+            h3 {
+                font-size: 19px;
+            }
 
-        h3 {
-            font-size: 18.72px;
-        }
+            h4 {
+                font-size: 16px;
+            }
 
-        h4 {
-            font-size: 16px;
-        }
+            h5 {
+                font-size: 13px;
+            }
 
-        h5 {
-            font-size: 13.28px;
-        }
+            h6 {
+                font-size: 11px;
 
-        h6 {
-            font-size: 10.72px;
+            }
 
-        }
+            blockquote {
+                border-style: none none none solid;
+                border-width: 3px;
+                padding: 5px;
+                border-color: grey;
+            }
 
-        blockquote {
-            border-style: none none none solid;
-            border-width: 3px;
-            padding: 5px;
-            border-color: grey;
-        }
+            textarea:focus {
+                outline: none !important;
+            }
 
-        textarea:focus {
-            outline: none !important;
-        }
+            iframe {
+                background-image: url('/static/images/nebulusCats/v3.gif');
+                background-size: 20%;
+                background-position: 45%;
+                background-repeat: no-repeat;
+                overflow-x: hidden;
+                width: 100%;
+                height: 100%;
+            }
 
-        iframe {
-            background-image: url('/static/images/nebulusCats/v3.gif');
-            background-size: 20%;
-            background-position: 45%;
-            background-repeat: no-repeat;
-            overflow-x: hidden;
-            width: 100%;
-            height: 100%;
-        }
-
-        textarea {
-            resize: none;
-        }
+            textarea {
+                resize: none;
+            }
 
             textarea:focus {
                 outline: none !important;
@@ -128,8 +119,7 @@
         </style>
         <div id="user-data" class="w-0 h-0 invisible">{{ user_obj._id }}</div>
         <div class="flex flex-row w-full bg-white/50 dark:bg-gray-900/50"
-             style="height: 100%;
-                    margin-left:64px;">
+             style="margin-left:64px;">
             <div style="float:left;
                         flex:0 0 270px;
                         width:270px;"
@@ -140,8 +130,7 @@
                     <form>
                         <label for="default-search"
                                class="mb-2 text-xs text-gray-900 sr-only dark:text-stone-400">
-                            Search or
-                            start a conversation
+                            Search or start a conversation
                         </label>
                         <div class="relative">
                             <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -151,7 +140,7 @@
                                      viewBox="0 0 24 24"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z">
+                                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z">
                                     </path>
                                 </svg>
                             </div>
@@ -167,7 +156,7 @@
                         <div id="friends_btn"
                              onclick="openFriends()"
                              class="flex flex-row dark:hover:bg-zinc-700 hover:bg-gray-200 rounded-lg">
-                            <div style="margin-bottom:0px;" class="flex items-center space-x-4">
+                            <div style="margin-bottom:0;" class="flex items-center space-x-4">
                                 <i class="material-icons text-black dark:text-stone-400"
                                    style="font-size:30px;
                                           margin:10px;">group</i>
@@ -182,7 +171,7 @@
                         </div>
                         <div id="blocked_btn"
                              onclick="openBlocked()"
-                             style="margin-bottom:0px;"
+                             style="margin-bottom:0;"
                              class="flex items-center space-x-4 dark:hover:bg-zinc-700 hover:bg-gray-200 rounded-lg">
                             <i class="material-icons text-black dark:text-stone-400"
                                style="font-size:30px;
@@ -193,7 +182,7 @@
                         </div>
                         <div id="emojis_btn"
                              onclick="toggleEmoji()"
-                             style="margin-bottom:0px;"
+                             style="margin-bottom:0;"
                              class="flex items-center space-x-4 dark:hover:bg-zinc-700 hover:bg-gray-200 rounded-lg">
                             <i class="material-icons text-black dark:text-stone-400"
                                style="font-size:30px;
@@ -204,7 +193,7 @@
                         </div>
                         <div id="email_btn"
                              onclick="toggleEmail();"
-                             style="margin-bottom:0px;"
+                             style="margin-bottom:0;"
                              class="flex items-center space-x-4 dark:hover:bg-zinc-700 hover:bg-gray-200 rounded-lg">
                             <i class="material-icons text-black dark:text-stone-400"
                                style="font-size:30px;
@@ -216,8 +205,7 @@
                         <div class="flex flex-row">
                             <div class="uppercase text-xl text-gray-600 cursor-pointer"
                                  style="font-size:15px;">
-                                Direct
-                                Messages
+                                Direct Messages
                             </div>
                             <div style="float:right;
                                         font-size:15px;
@@ -238,8 +226,8 @@
                                          viewBox="0 0 20 20"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd"
-                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
-                                        clip-rule="evenodd">
+                                              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                                              clip-rule="evenodd">
                                         </path>
                                     </svg>
                                     <div class="mt-2">
@@ -255,8 +243,8 @@
                                          viewBox="0 0 20 20"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd"
-                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
-                                        clip-rule="evenodd">
+                                              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                                              clip-rule="evenodd">
                                         </path>
                                     </svg>
                                     <div class="mt-2">
@@ -272,8 +260,8 @@
                                          viewBox="0 0 20 20"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd"
-                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
-                                        clip-rule="evenodd">
+                                              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                                              clip-rule="evenodd">
                                         </path>
                                     </svg>
                                     <div class="mt-2">
@@ -292,8 +280,8 @@
                                          viewBox="0 0 20 20"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd"
-                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
-                                        clip-rule="evenodd">
+                                              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                                              clip-rule="evenodd">
                                         </path>
                                     </svg>
                                     <div class="mt-2">
@@ -312,8 +300,8 @@
                                          viewBox="0 0 20 20"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd"
-                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
-                                        clip-rule="evenodd">
+                                              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                                              clip-rule="evenodd">
                                         </path>
                                     </svg>
                                     <div class="mt-2">
@@ -328,18 +316,13 @@
                                 <span class="sr-only">Loading...</span>
                             </div>
                         </div>
-                        <div style="bottom: -16;
-                                    width:236px;
-                                    left:0;
-                                    margin:0 !important;"
-                             class="bg-gray-300 dark:bg-gray-600 flex flex-row rounded-md">
+                        <div class="bg-gray-300 dark:bg-gray-600 flex flex-row rounded-md">
                             <div class="pt-2 pb-2 flex flex-col"
                                  style="display: inline-block;
                                         margin:5px;">
                                 <button class="rounded-full border-gray-300 border-none w-12 h-12 dark:bg-gray-900 dark:hover:bg-gray-800 ">
                                     <logo image="{{ user_obj.avatar.avatar_url }}" no-revert=""
-                                    class="h-6 mx-auto my-auto ">
-                                    <img alt="logo" style="filter: brightness(100%);">
+                                          class="h-6 mx-auto my-auto">
                                     </logo>
                                 </button>
                                 <div style="display: inline-block; margin:5px; "
@@ -365,7 +348,7 @@
                                              viewBox="0 0 24 24"
                                              xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z">
+                                                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z">
                                             </path>
                                         </svg>
                                     </div>
@@ -411,8 +394,8 @@
                                          xmlns="http://www.w3.org/2000/svg"
                                          stroke-width="0">
                                         <path
-                                        stroke-linecap="round" stroke-linejoin="round"
-                                        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
                                         </path>
                                     </svg>
                                 Idle</span>
@@ -425,8 +408,8 @@
                                          viewBox="0 0 24 24"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round"
-                                        stroke-linejoin="round" stroke-width="2"
-                                        d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z">
+                                              stroke-linejoin="round" stroke-width="2"
+                                              d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z">
                                         </path>
                                     </svg>
                                 Do Not Disturb</span>
@@ -464,8 +447,8 @@
                                  viewBox="0 0 20 20"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
-                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
-                                clip-rule="evenodd">
+                                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                                      clip-rule="evenodd">
                                 </path>
                             </svg>
                             <div class="mt-2 w-full">
@@ -495,8 +478,8 @@
                                      viewBox="0 0 20 20"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd"
-                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
-                                    clip-rule="evenodd">
+                                          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                                          clip-rule="evenodd">
                                     </path>
                                 </svg>
                                 <div class="w-full">
@@ -519,8 +502,8 @@
                                      viewBox="0 0 20 20"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd"
-                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
-                                    clip-rule="evenodd">
+                                          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                                          clip-rule="evenodd">
                                     </path>
                                 </svg>
                                 <div class="w-full">
@@ -549,20 +532,19 @@
                 </div>
                 <div id="preview_border"
                      style="display:none;width:92%;filter: brightness(.5)"
-                     class="flex flex-col p-3 mt-2 ml-6 mx-2 rounded-lg bg-gray-200 dark:bg-gray-800  roboto text-black dark:text-white">
+                     class="flex flex-col p-3 mt-2 ml-6 mx-2 rounded-lg bg-gray-200 dark:bg-gray-800 text-black dark:text-white">
                     <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">Message Preview</span>
                     <br>
                     <span style="display:inline-block;">
-                        <div class="flex items-top space-x-4 mt-2 hover:bg-gray-100/50 dark:hover:bg-gray-700/50 "
+                        <div class="flex items-top space-x-4 mt-2 hover:bg-gray-100/50 dark:hover:bg-gray-700/50"
                              id="1549028973562953728">
-                            <img class="mt-1 w-10 h-10 rounded-full " src={{ user_obj.avatar.avatar_url }} alt="">
+                            <img class="mt-1 w-10 h-10 rounded-full" src={{ user_obj.avatar.avatar_url }}>
                             <div class="space-y-1 font-medium dark:text-white">
                                 <div>
-                                    <span class="hover:underline">{{ user }}</span> <span class="ml-3 text-sm text-gray-400">Today at {{ date }}</span>
+                                    <span class="hover:underline">{{ user }}</span> <span
+                                        class="ml-3 text-sm text-gray-400">Today at {{ date }}</span>
                                 </div>
-                                <div id="preview"
-                                     style="font-family: 'Roboto', sans-serif;"
-                                     class="text-sm text-gray-500 dark:text-gray-400">
+                                <div id="preview" class="text-sm text-gray-500 dark:text-gray-400">
                                 </div>
                             </div>
                         </div>
@@ -570,7 +552,7 @@
                 </div>
                 <div id="slash-command"
                      style="display:none;width:92%;filter: brightness(.5)"
-                     class="flex flex-col p-3 mt-2 ml-6 mx-2 rounded-lg bg-gray-200 dark:bg-gray-800  roboto text-black dark:text-white">
+                     class="flex flex-col p-3 mt-2 ml-6 mx-2 rounded-lg bg-gray-200 dark:bg-gray-800 text-black dark:text-white">
                     <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">Message Preview</span>
                     <br>
                     <span style="display:inline-block;">
@@ -579,77 +561,65 @@
                             <img class="mt-1 w-10 h-10 rounded-full " src={{ user_obj.avatar.avatar_url }} alt="">
                             <div class="space-y-1 font-medium dark:text-white">
                                 <div>
-                                    <span class="hover:underline">{{ user }}</span> <span class="ml-3 text-sm text-gray-400">Today at {{ date }}</span>
+                                    <span class="hover:underline">{{ user }}</span> <span
+                                        class="ml-3 text-sm text-gray-400">Today at {{ date }}</span>
                                 </div>
-                                <div id="preview"
-                                     style="font-family: 'Roboto', sans-serif;"
-                                     class="text-sm text-gray-500 dark:text-gray-400">
+                                <div id="preview" class="text-sm text-gray-500 dark:text-gray-400">
                                 </div>
                             </div>
                         </div>
                     </span>
                 </div>
-                <form id="msg_form"
-                      style="width:100%;
-                             height:8%;"
-                      class="hidden"
-                      onsubmit="sendMessage(); return false;">
-                    <label for="chat" class="sr-only">
-                        Your
-                        message
-                    </label>
-                    <div class="flex items-center py-2 px-3 bg-gray-50 rounded-lg dark:bg-gray-700 m-6 "
-                         style="height:100%;">
+                <label for="chat" class="sr-only">
+                    Your message
+                </label>
+                <div class="flex items-center py-2 px-3 bg-gray-50 rounded-lg dark:bg-gray-700 m-6">
                         <span onclick="togglePreview()"
                               class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">Preview</span>
-                        <button type="button"
-                                class="hidden md:block inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                            <svg class="w-6 h-6"
-                                 fill="currentColor"
-                                 viewBox="0 0 20 20"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-                                clip-rule="evenodd">
-                                </path>
-                            </svg>
-                        </button>
-                        <button data-dropdown-toggle="emojiPicker"
-                                data-dropdown-placement="top"
-                                type="button"
-                                class="hidden md:block p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                            <svg class="w-6 h-6"
-                                 fill="currentColor"
-                                 viewBox="0 0 20 20"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                d="M10 18a8 8 0 100-1 npx tailwindcss -i ./app/static/css/fonts.css -o ./app/static/css/tailwind.css --watch
+                    <button type="button"
+                            class="hidden md:block inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                        <svg class="w-6 h-6"
+                             fill="currentColor"
+                             viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                                  clip-rule="evenodd">
+                            </path>
+                        </svg>
+                    </button>
+                    <button data-dropdown-toggle="emojiPicker"
+                            data-dropdown-placement="top"
+                            type="button"
+                            class="hidden md:block p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                        <svg class="w-6 h-6"
+                             fill="currentColor"
+                             viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M10 18a8 8 0 100-1 npx tailwindcss -i ./app/static/css/fonts.css -o ./app/static/css/tailwind.css --watch
                                 6 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-.464 5.535a1 1 0 10-1.415-1.414 3 3 0 01-4.242 0 1 1 0 00-1.415 1.414 5 5 0 007.072 0z"
-                                clip-rule="evenodd">
-                                </path>
-                            </svg>
-                        </button>
-                        <div id="emojiPicker"
-                             class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
-                        </div>
-                        <textarea id="msg_content"
-                                  rows="1"
-                                  class="block p-2.5 w-full text-sm text-gray-900 dark:border-gray-700 border-white dark:bg-gray-700 bg-white dark:text-white"
-                                  placeholder="Message @Coder N"
-                                  required></textarea>
-                        <button type="submit"
-                                id="pressMe"
-                                class="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600">
-                            <svg class="w-6 h-6 rotate-90"
-                                 fill="currentColor"
-                                 viewBox="0 0 20 20"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z">
-                                </path>
-                            </svg>
-                        </button>
+                                  clip-rule="evenodd">
+                            </path>
+                        </svg>
+                    </button>
+                    <div id="emojiPicker"
+                         class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
                     </div>
-                </form>
+                    <textarea id="msg_content" rows="1"
+                              class="p-2.5 w-full text-sm text-gray-900 outline-none border-0 dark:bg-gray-700 bg-white dark:text-white"
+                              placeholder="Message @Coder N"></textarea>
+                    <button id="pressMe" class="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer
+                     hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600">
+                        <svg class="w-6 h-6 rotate-90"
+                             fill="currentColor"
+                             viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
             </div>
             <div class="justify-center"
                  style="width: calc(100% - 330px);
@@ -668,7 +638,7 @@
                                  viewBox="0 0 24 24"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z">
+                                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z">
                                 </path>
                             </svg>
                         </div>
@@ -716,7 +686,7 @@
                                  viewBox="0 0 24 24"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z">
+                                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z">
                                 </path>
                             </svg>
                         </div>
@@ -804,7 +774,7 @@
                                      viewBox="0 0 24 24"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z">
+                                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z">
                                     </path>
                                 </svg>
                             </div>
@@ -842,8 +812,8 @@
                                          viewBox="0 0 20 20"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd"
-                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
-                                        clip-rule="evenodd">
+                                              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                                              clip-rule="evenodd">
                                         </path>
                                     </svg>
                                     <div class="mt-2">
@@ -862,8 +832,8 @@
                                          viewBox="0 0 20 20"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd"
-                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
-                                        clip-rule="evenodd">
+                                              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                                              clip-rule="evenodd">
                                         </path>
                                     </svg>
                                     <div class="mt-2">
@@ -882,8 +852,8 @@
                                          viewBox="0 0 20 20"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd"
-                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
-                                        clip-rule="evenodd">
+                                              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                                              clip-rule="evenodd">
                                         </path>
                                     </svg>
                                     <div class="mt-2">
@@ -902,8 +872,8 @@
                                          viewBox="0 0 20 20"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd"
-                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
-                                        clip-rule="evenodd">
+                                              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                                              clip-rule="evenodd">
                                         </path>
                                     </svg>
                                     <div class="mt-2">
@@ -922,8 +892,8 @@
                                          viewBox="0 0 20 20"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd"
-                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
-                                        clip-rule="evenodd">
+                                              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                                              clip-rule="evenodd">
                                         </path>
                                     </svg>
                                     <div class="mt-2">
@@ -950,20 +920,13 @@
 
         let textarea_el = document.getElementById('msg_content');
         console.log(textarea_el);
-        textarea_el.oninput = function () {
-            updateEditor(textarea_el, document.getElementById('preview'));
-        };
+        textarea_el.oninput = () => updateEditor(textarea_el, document.getElementById('preview'));
 
         marked.use({gfm: false});
 
 
         function updateEditor(input, preview) {
-            preview.innerHTML =
-                DOMPurify.sanitize(twemoji.parse(marked.parse(smile2emoji.checkText(input.value))));
-            const manageInput = (e) => {
-                e.target.value = smile2emoji.checkText(e.target.value);
-            };
-
+            preview.innerText = DOMPurify.sanitize(twemoji.parse(marked.parseInline(smile2emoji.checkText(input.value))));
         }
 
         // The picker must have a root element to insert itself into

@@ -811,6 +811,7 @@
                          style="overflow-y:scroll;
                                 height:100%;">
                         <label for="editor" class="sr-only">Publish post</label>
+                        <div id="course_id" style="display:none;">{{ courses[0].id }}</div>
                         <ul class="flex text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400"
                             style=" overflow: auto; white-space: nowrap; ">
                             {% set color = ["#ef4444", "#f97316", "#f59e0b", "#eab308", "#84cc16", "#22c55e", "#10b981", "#14b8a6", "#06b6d4", "#0ea5e9",
@@ -818,7 +819,7 @@
                             {% for index in range(0, courses|length) %}
                                 {% set current = index % color|length %}
                                 <li class="mr-2">
-                                    <a href="#"
+                                    <a onclick="changeCourse('{{ courses[index].id }}', '{{ color[index] }}', '{{ courses[index].name }}');"
                                        class="inline-block p-4 rounded-t-lg text-black "
                                        style="background-color: {{ color[current] }}">{{ courses[index].name }}</a>
                                 </li>
@@ -829,7 +830,8 @@
                              id="editor"
                              class=" block px-0 w-full text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
                              style="min-height: 968px;">
-                            <span>
+                            {% if not notepad[courses[0].id] %}
+                                <span>
                                 <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">
                                     <span style="font-size: 30pt;
                                                  font-family: Montserrat, sans-serif;
@@ -837,15 +839,16 @@
                                                  font-variant-numeric: normal;
                                                  font-variant-east-asian: normal;
                                                  vertical-align: baseline;
-                                                 white-space: pre-wrap;">Welcome to your </span><span style="font-size: 30pt;
-             font-family: Montserrat, sans-serif;
-             color: {{ color[0] }};
-             background-color: transparent;
-             font-weight: 700;
-             font-variant-numeric: normal;
-             font-variant-east-asian: normal;
-             vertical-align: baseline;
-             white-space: pre-wrap;">{{ courses[0].name }} Notes</span>
+                                                 white-space: pre-wrap;">Welcome to your </span><span
+                                        style="font-size: 30pt;
+                                                font-family: Montserrat, sans-serif;
+                                                color: {{ color[0] }};
+                                                background-color: transparent;
+                                                font-weight: 700;
+                                                font-variant-numeric: normal;
+                                                font-variant-east-asian: normal;
+                                                vertical-align: baseline;
+                                                white-space: pre-wrap;">{{ courses[0].name }} Notes</span>
                                 </p>
                                 <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">
                                     <span style="font-size: 10.5pt;
@@ -868,10 +871,81 @@
                                     </span>
                                 </div>
                             </span>
+
+                            {% else %}
+                                <script>
+                                    {#document.getElementById("editor").innerHTML = "{{ notepad[courses[0].id]  | safe }}";#}
+                                    document.getElementById("editor").innerHTML = `{{ notepad[courses[0].id]  | safe }}`;
+                                </script>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
             </form>
         </div>
     </div>
+    <script>
+        function changeCourse(index, color, course) {
+            document.getElementById("course_id").innerText = index;
+            document.getElementById("editor").innerHTML = `
+        <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">
+                                    <span style="font-size: 30pt;
+                                                 font-family: Montserrat, sans-serif;
+                                                 background-color: transparent;
+                                                 font-variant-numeric: normal;
+                                                 font-variant-east-asian: normal;
+                                                 vertical-align: baseline;
+                                                 white-space: pre-wrap;">Welcome to your </span><span style="font-size: 30pt;
+             font-family: Montserrat, sans-serif;
+             color: ${color};
+             background-color: transparent;
+             font-weight: 700;
+             font-variant-numeric: normal;
+             font-variant-east-asian: normal;
+             vertical-align: baseline;
+             white-space: pre-wrap;">${course} Notes</span>
+                                </p>
+                                <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">
+                                    <span style="font-size: 10.5pt;
+                                                 font-family: Montserrat, sans-serif;
+                                                 color: rgb(163, 163, 163);
+                                                 font-variant-numeric: normal;
+                                                 font-variant-east-asian: normal;
+                                                 vertical-align: baseline;
+                                                 white-space: pre-wrap;">Type / to insert</span>
+                                </p>
+                                <div>
+                                    <span style="font-size: 10.5pt;
+                                                 font-family: Montserrat, sans-serif;
+                                                 color: rgb(163, 163, 163);
+                                                 font-variant-numeric: normal;
+                                                 font-variant-east-asian: normal;
+                                                 vertical-align: baseline;
+                                                 white-space: pre-wrap;">
+                                        <br>
+                                    </span>
+                                </div>
+                                `
+        }
+
+        function saveEditor() {
+            let request = $.ajax({
+                {#url: "/api/v1/internal/nebulusdoc/save",#}
+                url: "/api/v1/internal/nebulusnotepad/save",
+                method: "POST",
+                data: {
+                    course_id: document.getElementById("course_id").innerText,
+                    content: document.getElementById('editor').innerHTML,
+
+                },
+
+                dataType: "json"
+            });
+
+
+        }
+
+
+        setInterval(saveEditor, 500)
+    </script>
 {% endblock %}

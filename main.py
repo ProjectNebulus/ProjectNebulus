@@ -20,7 +20,7 @@ if __name__ == "__main__":
         port = 80
         host = "0.0.0.0"
         protocol = "s"
-    else:  # macos (darwin) or windows (windows)
+    else:  # macos (darwi/n) or windows (windows)
         port = 8080
         host = "localhost"
         protocol = ""

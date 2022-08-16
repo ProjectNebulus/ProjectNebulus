@@ -7,7 +7,6 @@ from googleapiclient.discovery import build
 
 from app.static.python.mongodb import create, read
 from app.static.python.utils.colors import getColor
-
 from . import internal
 
 
@@ -221,6 +220,7 @@ def create_schoology_course():
     #       *(f'{sec["course_title"]}: {sec["section_title"]}' for sec in sc.get_user_sections(sc.get_me()["id"])),
     #       sep="\n")
     section = dict(sc.get_section(link))
+
     print(section)
     course = {
         "name": f'{section["course_title"]} ({section["section_title"]})',

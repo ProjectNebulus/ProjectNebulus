@@ -1,7 +1,7 @@
 const HAS_NUMBER = /\d/;
 const EMAIL_REGEX =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-const VALID_USERNAME_REGEX = /^[A-Za-z][a-zA-Z0-9\.\-_]{2,31}$/;
+const VALID_USERNAME_REGEX = /^[A-Za-z][a-zA-Z\d\-_]{2,31}$/;
 let email_valid = false;
 let validPassword = false;
 
@@ -27,6 +27,11 @@ function createUser() {
     request.done((data) => (window.location.href = '/app'));
 }
 
+function nextModal(num) {
+    document.getElementById('step' + num.toString()).style.display = 'none';
+    document.getElementById('step' + (num + 1).toString()).style.display = 'block';
+}
+
 function next(num) {
     if (num === 1) {
         if (
@@ -44,17 +49,22 @@ function next(num) {
                     username: document.getElementById('username').value
                 })
             });
-            document.getElementById('step' + num.toString()).style.display = 'none';
-            document.getElementById('step' + (num + 1).toString()).style.display = 'block';
+            nextModal(num)
         } else alert("You can't move on yet!");
     } else if (num === 2) {
         console.log(checks);
-        if (checks[4].innerHTML.includes('check') && checks[5].innerHTML.includes('check')) {
-            document.getElementById('step' + num.toString()).style.display = 'none';
-            document.getElementById('step' + (num + 1).toString()).style.display = 'block';
-        } else alert("You can't move on yet!");
-    } else if (num === 3) createUser();
+        if (checks[4].innerHTML.includes('check') && checks[5].innerHTML.includes('check'))
+            nextModal(num);
+        else
+            alert("You can't move on yet!");
+    } else if (num === 3)
+        nextModal(num);
 }
+
+function onComplete() {
+    setTimeout(createUser, 1000);
+}
+
 
 function prev(num) {
     if (num !== 1) {
@@ -139,24 +149,24 @@ window.addEventListener('load', function () {
 
     function changeUser() {
         let usernameStatus = errorMessages[1];
-        const usrname = username.value;
+        const value = username.value;
         usernameStatus.style.color = 'red';
         usernameStatus.innerHTML = '<br>';
-        if (!usrname) {
+        if (!value) {
             usernameStatus.innerHTML = 'Please enter a username!';
             validationIcons[1].style.color = 'red';
             validationIcons[1].innerHTML = '<i class="material-icons">close</i>';
-            usrname.classList.add(...RED_BORDER);
+            username.classList.add(...RED_BORDER);
             return false;
         }
-        if (usrname.length < 3) {
+        if (value.length < 3) {
             usernameStatus.innerHTML = 'Your username must be at least 3 characters long!';
             validationIcons[1].style.color = 'red';
             validationIcons[1].innerHTML = '<i class="material-icons">close</i>';
             username.classList.add(...RED_BORDER);
             return false;
         }
-        if (usrname.length > 32) {
+        if (value.length > 32) {
             usernameStatus.innerHTML = 'Your username must be less than 32 characters long!';
             validationIcons[1].style.color = 'red';
             validationIcons[1].innerHTML = '<i class="material-icons">close</i>';
@@ -164,12 +174,12 @@ window.addEventListener('load', function () {
             return false;
         }
 
-        if (VALID_USERNAME_REGEX.test(usrname)) {
+        if (VALID_USERNAME_REGEX.test(value)) {
             const request = $.ajax({
                 type: 'POST',
                 url: '/api/v1/internal/check-signup-user',
                 data: {
-                    username: usrname
+                    username: value
                 }
             });
 

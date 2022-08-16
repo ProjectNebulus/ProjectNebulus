@@ -55,6 +55,8 @@ const table = document.querySelector('table');
 let saveData = {};
 
 window.addEventListener('load', () => {
+    loadFromServer();
+
     if (empty) for (let i = 0; i < 6; i++) addTimePeriod();
 
     loadingModal = new Modal(document.getElementById('loading'));
@@ -124,10 +126,6 @@ document.addEventListener('keyup', (e) => {
         else if (e.key === 'ArrowUp') today.click();
     }
 });
-window.onload = function () {
-    loadFromServer();
-};
-
 nextPage.onclick = function () {
     save();
 
@@ -328,6 +326,17 @@ function load(page) {
     }
 }
 
+function formatAMPM(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+}
+
 function loadFromServer() {
     const request = $.ajax({
         type: 'GET',
@@ -352,6 +361,19 @@ function loadFromServer() {
 
         plannerName.value = data['name'];
         saveData = data['saveData'];
+        const lastEdit = new Date(data["lastEdited"]);
+        const timeSince = (Date.now() - new Date("2022-08-13T21:39:26.749+00:00").getTime()) / 1000 / 60;   // time since last edit in minutes
+
+        if (timeSince < 1)
+            saveState.innerHTML = "Last edit was seconds ago";
+        else if (timeSince < 60)
+            saveState.innerHTML = "Last edit was " + Math.floor(timeSince) + " minutes ago";
+        else if (timeSince < 60 * 9)
+            saveState.innerHTML = "Last edit was " + Math.floor(timeSince / 60) + " hours ago";
+        else if (timeSince < 60 * 24)
+            saveState.innerHTML = "Last edit was at " + formatAMPM(lastEdit);
+        else
+            saveState.innerHTML = "Last edit was on " + (lastEdit.getMonth() + 1) + "/" + lastEdit.getDate();
 
         for (let i = 0; i < data['periods'].length; i++) addTimePeriod();
 
@@ -422,10 +444,6 @@ function saveToServer() {
     const saveDict = {};
     saveDict['name'] = plannerName.value;
     saveDict['saveData'] = saveData;
-    saveDict['lastEdited'] =
-        [year, month + 1, d.getDate()].join('-') +
-        ' ' +
-        [d.getHours(), d.getMinutes(), d.getSeconds()].join(':');
 
     saveDict['periods'] = [];
 

@@ -14,22 +14,22 @@
     {% include "utils/navbar.html" %}
     <div class="flex flex-row">
         {% include "utils/sidebar.html" %}
-        <div style="margin-left:64px;width:100%;">
-            <div class="ml-3">
-                <h1 style="margin-left:65px;" class="text-black dark:text-white text-3xl">Start a new document!</h1>
-                <div class="w-full grid gap-4 justify-center"
-                     style="grid-template-columns: repeat(auto-fit, 13rem)">
-                    <div class="flex flex-col">
-                        <div class="document rounded-md" style=" text-align: center; ">
-                            <div style="padding-top:38%;
+    <div style="margin-left:64px;width:100%;">
+        <div class="pl-3 bg-gray-100/75 dark:bg-gray-800/75">
+            <h1 style="margin-left:35px;" class="text-black dark:text-white text-3xl">Start a new document!</h1>
+            <div class="w-full grid gap-4 justify-center"
+                 style="grid-template-columns: repeat(auto-fit, 13rem)">
+                <div class="flex flex-col">
+                    <div class="document rounded-md" style=" text-align: center; " onclick="click_doc()">
+                        <div style="padding-top:38%;
                                         font-size: 70px;
                                         background: -webkit-linear-gradient(red,#fffcbd);
                                         -webkit-background-clip: text;
                                         -webkit-text-fill-color: transparent;">
-                                +
-                            </div>
+                            +
                         </div>
-                        <p style="padding-left:45px;
+                    </div>
+                    <p style="padding-left:45px;
                                   margin-left:20px;
                                   width:160px;"
                            class="uppercase text-gray-400">Blank</p>
@@ -109,17 +109,55 @@
                                   width:160px;"
                            class="uppercase text-gray-400">Blank</p>
                     </div>
-                </div>
-                <div class="relative flex py-5 items-center w-full">
-                    <div class="flex-grow border-t border-gray-400"></div>
-                    <span style="margin-left:65px;"
-                          class="flex-shrink mx-4 text-gray-400 uppercase">Recent Documents</span>
-                    <div style="margin-left:65px;" class="flex-grow border-t border-gray-400"></div>
-                </div>
-                <div>
-                    <h1 style="margin-left:65px;" class="text-black dark:text-white text-3xl">Recent Documents</h1>
-                    <p style="margin-left:65px;" class="text-black dark:text-white">No Documents Yet!</p>
+            </div>
+            <div class="relative flex py-5 items-center w-full">
+                <div class="flex-grow border-t border-gray-400"></div>
+                <span style="margin-left:35px;"
+                      class="flex-shrink mx-4 text-gray-400 uppercase">Recent Documents</span>
+                <div style="margin-left:35px;" class="flex-grow border-t border-gray-400"></div>
+            </div>
+            <div>
+                <h1 style="margin-left:35px;" class="text-black dark:text-white text-3xl">Recent Documents</h1>
+                {% if docs|length == 0 %}<br><br>
+                    <p style="margin-left:35px;" class="text-black dark:text-white">No Documents Yet!</p>
+                {% endif %}
+                <div class="w-full grid gap-4 justify-center" style="grid-template-columns: repeat(auto-fit, 13rem)">
+                    {% for doc in docs %}
+                        <a href="/docs/document/{{ doc.id }}">
+                            <div class="flex flex-col">
+                                <div class="document rounded-md" style=" text-align: left;overflow:hidden; ">
+                                    <div style="text-align: left; zoom: 20%;padding:40px; overflow:hidden;">{{ doc.content|safe }}</div>
+                                </div>
+                                <p style="
+                                           width:160px;
+                                   margin: 20px;
+                                "
+                                   class="text-sm text-gray-400">{{ doc.title }}</p>
+                            </div>
+                        </a>
+                    {% endfor %}
                 </div>
             </div>
         </div>
-    {% endblock %}
+    </div>
+    <script>
+        function click_doc() {
+            let request = $.ajax({
+                url: "/api/v1/internal/nebulusdoc/create",
+                type: "POST",
+            });
+            request.done(function (msg) {
+                window.location.href = "/docs/document/" + msg;
+            });
+        }
+    </script>
+    <style>
+        img.twemoji {
+            height: 1em;
+            width: 1em;
+            margin: 0 0.05em 0 0.1em;
+            vertical-align: -0.1em;
+            display: inline-block;
+        }
+    </style>
+{% endblock %}

@@ -13,7 +13,6 @@ from app.routes.main.spotify import (
     shuffle_spotify,
 )
 from app.static.python.music.musixmatch import Musixmatch
-
 from . import internal
 
 
@@ -41,7 +40,7 @@ def spotify_status():
         # TODO: support advertisements, returns 500 currently
         name, artists2, album, explicit, image, playing, timestamp, total = song
         if explicit:
-            explicit = '<i class="material-icons">explicit</i>'
+            explicit = '<i class="material-icons" style="vertical-align: middle;">explicit</i>'
         else:
             explicit = ""
         artists = ""

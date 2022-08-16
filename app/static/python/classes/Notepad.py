@@ -1,16 +1,12 @@
-from mongoengine import *
+from mongoengine import (
+    DateTimeField,
+    DictField,
+    EmbeddedDocument,
+    StringField,
+)
 
-from .Snowflake import *
 
-
-class Notepad(Snowflake):
-    """
-    A class representing a user's Nebulus Document
-    """
-
-    meta = {"collection": "NebulusDocument"}
-    owner = ReferenceField("User", required=True)
-    data = DictField(StringField, default={})
+class Notepad(EmbeddedDocument):
+    data = DictField(StringField(), default={})
     # Key: course ID, Value: document data
-    authorizedUsers = ListField(ReferenceField("User"))
-    lastEdited = DateTimeField(null=True, default=None)
+    lastEdited = DateTimeField(null=True, default={})
