@@ -17,7 +17,7 @@ debug = False
 if __name__ == "__main__":
     if platform.system().lower() == "linux":  # linux - used for VPS (like DigitalOcean)
         debug = False
-        port = 8
+        port = 80
         host = "0.0.0.0"
         protocol = "s"
     else:  # macos (darwi/n) or windows (windows)

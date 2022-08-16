@@ -1,5 +1,7 @@
 io = window.io;
 
+
+
 let chatBox;
 window.addEventListener("load", () => {
     chatBox = document.getElementById("msg_content");
@@ -655,35 +657,7 @@ function formatAMPM(date) {
     return hours + ':' + minutes + ' ' + ampm;
 }
 
-function formatTime(time_input) {
-    let date = new Date(time_input.replaceAll(" ", "T"));
 
-    var timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    let new_date = changeTimezone(date, timezone);
-    const today_date = new Date();
-    const yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 1);
-
-    let date_str = '';
-    let time_str = '';
-
-    if (today_date.toDateString() === new_date.toDateString()) {
-        date_str = 'Today';
-    } else if (yesterday.toDateString() === new_date.toDateString()) {
-        date_str = 'Yesterday';
-    } else {
-        date_str = new_date.toDateString();
-    }
-
-    let time = '';
-    if (!(date_str === new_date.toString())) {
-        time_str = formatAMPM(new_date);
-        time = date_str + ' at ' + time_str;
-    } else {
-        time = date_str;
-    }
-    return time;
-}
 
 function timeDiff(t1, t2) {
     return new Date(t1["send_date"].replaceAll(" ", "T")).getTime() -
@@ -743,29 +717,42 @@ function getChat(chatID) {
             if (chat['messages'].length === 0)
                 return;
 
-            let prevMessage = chat['messages'][0];
-            chat['messages'].forEach(function (message) {
-                message['content'] = replaceURLs(message['content'], message['id']);
 
+            chat['messages'].forEach(function (message, index) {
+                message['content'] = replaceURLs(message['content'], message['id']);
+                message['content'] = message['content'].replace('<br>', '');
+                let prevMessage;
+                if (index > 0) {
+                    prevMessage = chat['messages'][index - 1];
+                } else {
+                    prevMessage = message;
+                }
                 if (prevMessage['sender']['username'] !== message['sender']['username'] || timeDiff(prevMessage, message)) {
+
+                    prevMessage['send_date'] = formatTime(prevMessage['send_date']);
+                    prevMessage['content'] = prevMessage['content'].replace('<br>', '');
                     document.getElementById("content_" + prevMessage["id"]).remove();
                     chatContent += `
-                    <div class="flex items-top space-x-4 mt-6 hover:bg-gray-100/50 dark:hover:bg-gray-700/50">
+                    <div class="flex mb-1 items-top space-x-4 mt-6 hover:bg-gray-100/50 dark:hover:bg-gray-700/50">
                         <img class="mt-1 w-10 h-10 rounded-full" data-dropdown-toggle="user_${prevMessage['sender']['username']}"
                              src="${prevMessage["sender"]["avatar"]["avatar_url"]}"
                              alt="${prevMessage["sender"]["username"]}'s Profile Picture">
                         <div class="space-y-1 font-medium dark:text-white">
                             <div>
                                 <span data-dropdown-toggle="user_${prevMessage['sender']['username']}" class="hover:underline cursor-pointer">${prevMessage['sender']['username']}</span>
-                                <span class="ml-3 text-sm text-gray-400">${formatTime(prevMessage['send_date'])}</span>
+                                <span class="ml-3 text-sm text-gray-400">${prevMessage['send_date']}</span>
                             </div>
-                            <div id="content_${prevMessage['id']}" class="text-sm text-gray-500 dark:text-gray-400">${prevMessage['content']}</div>
+                            <div id="content_${prevMessage['id']}" class="text-sm text-gray-500 dark:text-gray-400 mt-1">${prevMessage['content']}</div>
                         </div>
                     </div>`;
                 }
 
-                chatContent += `<div id="content_${message['id']}" class="text-sm text-gray-500 dark:text-gray-400 hover:bg-gray-100/50 dark:hover:bg-gray-700/50 mt-2" style="padding-left: 3.5rem">${message['content']}</div>`;
-                prevMessage = message;
+                if (prevMessage === message) {
+                    chatContent += `<div id="content_${message['id']}" class="text-sm hover:bg-gray-100/50 dark:hover:bg-gray-700/50 text-gray-500 dark:text-gray-400  mr-2"${message['content']}</div>`;
+                }else {
+                    chatContent += `<div class="group flex flex-row hover:bg-gray-100/50 dark:hover:bg-gray-700/50"><div class="hidden text-gray-600 uppercase mr-2 group-hover:block" style="margin-top:3px;font-size:10px;">
+        ${formatTime(message['send_date'], true)}</div> <div id="content_${message['id']}" class="text-sm text-gray-500 dark:text-gray-400  mr-2"${message['content']}</div>`;
+                }
 
                 if (!dropdowns.includes(message["sender"]["username"])) {
                     chatContent += `
@@ -891,4 +878,42 @@ function sendMessage() {
         content: val,
         send_date: send_date
     });
+
+
+}
+
+function formatTime(time_input, short=false) {
+    console.log(time_input);
+    let date = new Date(time_input.replaceAll(" ", "T"));
+
+    var timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    let new_date = changeTimezone(date, timezone);
+    const today_date = new Date();
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+
+    let date_str = '';
+    let time_str = '';
+
+    if (today_date.toDateString() === new_date.toDateString()) {
+        date_str = 'Today';
+    } else if (yesterday.toDateString() === new_date.toDateString()) {
+        date_str = 'Yesterday';
+    } else {
+        date_str = new_date.toDateString();
+    }
+    console.log(date_str);
+
+    let time = '';
+    if (!(date_str === new_date.toString())) {
+        time_str = formatAMPM(new_date);
+        time = date_str + ' at ' + time_str;
+    } else {
+        time = date_str;
+    }
+    if (short){
+        return time_str
+    } else {
+        return time;
+    }
 }

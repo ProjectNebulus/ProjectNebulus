@@ -31,7 +31,7 @@ setInterval(() => {
             let timeLeft = (parseInt(current[2]) * 3600 + parseInt(current[3]) * 60 + parseInt(current[4]));
             focus.classList.remove('hidden');
 
-            document.getElementById("base-timer-label").innerHTML = formatTime(
+            document.getElementById("base-timer-label").innerHTML = formatTime1(
                 timeLeft
             );
             const circleDasharray = `${(
@@ -72,7 +72,7 @@ setInterval(() => {
     1000);
 
 
-function formatTime(time) {
+function formatTime1(time) {
     let minutes = Math.floor(time / 60);
     const hours = Math.floor(minutes / 60);
     minutes = minutes % 60

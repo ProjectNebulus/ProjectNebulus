@@ -64582,6 +64582,11 @@ html.dark body {
   --tw-bg-opacity: 0;
 }
 
+.group:hover .group-hover\:block {
+  display: block;
+}
+
+
 .group:hover .group-hover\:from-green-400 {
   --tw-gradient-from: #31c48d;
   --tw-gradient-to: rgb(49 196 141 / 0);
