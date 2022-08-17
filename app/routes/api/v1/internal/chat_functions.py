@@ -1,4 +1,5 @@
 import datetime
+from datetime import timedelta
 import json
 
 import flask
@@ -63,8 +64,18 @@ def new_message(json_data):
         del json_data["chatID"], json_data["chatType"]
         json_data["sender"] = session["id"]
         json_data["content"] = json_data["content"].replace("\n", "<br>")
-        message = create.sendMessage(json_data, chatID)
         chat = read.getChat(chatID)
+        send_date = datetime.datetime.fromisoformat(json_data['send_date'])
+        last = chat.messages[-1]
+        send_date2 = datetime.datetime.fromisoformat(last.send_date)
+        difference = max(send_date, send_date2) - min(send_date, send_date2)
+
+        group = False
+        if difference <= timedelta(minutes=10) and last.sender.id == session['id']:
+            group = True
+        message = create.sendMessage(json_data, chatID)
+
+
         members = json.loads(chat.to_json())["members"]
         for x, user in enumerate(chat.members):
             if user.user.chatProfile.offline == True:
@@ -76,6 +87,7 @@ def new_message(json_data):
         send_date = str(message.send_date)
         sender = read.find_user(id=json_data["sender"])
         print("user sent a message")
+        print(group)
         emit(
             "new_message",
             {
@@ -85,6 +97,7 @@ def new_message(json_data):
                 "send_date": send_date,
                 "chatID": chatID,
                 "members": members,
+                "group": group
             },
             room=chatID,
         )

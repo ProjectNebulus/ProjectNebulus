@@ -191,10 +191,10 @@ function togglePreview() {
 function updateToMessage(message) {
     let chat_el = document.getElementById('chat');
     message['send_date'] = formatTime(message['send_date']);
-
-    chat_el.insertAdjacentHTML(
-        'afterbegin',
-        `<div class="flex items-top space-x-4 mt-2" id="${message['id']}">
+    if (!(message['group'])){
+        chat_el.insertAdjacentHTML(
+            'afterbegin',
+            `<div class="flex items-top space-x-4 mt-2" id="${message['id']}">
                     <img class="mt-1 w-10 h-10 rounded-full"
                          src="${message['author'][2]}"
                          alt="">
@@ -203,7 +203,12 @@ function updateToMessage(message) {
                         <div id="content_${message['id']}" class="text-sm text-gray-500 dark:text-gray-400">${message['content']}</div>
                     </div>
                 </div>`
+        );
+    }else{
+        chat_el.insertAdjacentHTML('afterbegin', `<div class="group flex flex-row hover:bg-gray-100/50 dark:hover:bg-gray-700/50"><div class="opacity-0 text-gray-600 uppercase mr-2 group-hover:opacity-100" style="margin-top:3px;font-size:10px;width:50px;">
+        ${formatTime(message['send_date'], true)}</div> <div id="content_${message['id']}" class="message text-sm text-gray-500 dark:text-gray-400  mr-2"${message['content']}</div>`
     );
+    }
 
     let url = replaceURLs(message['content'], message['id']);
     console.log(url);
