@@ -9,7 +9,7 @@ module.exports = {
     theme: {
         fontFamily: {
             sans: [
-                'Spotify-Font',
+                'SpotifyFont',
                 'Noto Sans',
                 'Noto Sans SC',
                 'Noto Sans TC',

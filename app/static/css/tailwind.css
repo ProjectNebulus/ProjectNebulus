@@ -44,7 +44,7 @@ html {
   -o-tab-size: 4;
   tab-size: 4;
   /* 3 */
-  font-family: Spotify-Font, Noto Sans, Noto Sans SC, Noto Sans TC, Noto Sans JP, Noto Sans KR,
+  font-family: SpotifyFont, Noto Sans, Noto Sans SC, Noto Sans TC, Noto Sans JP, Noto Sans KR,
   Noto Sans Thai, sans-serif;
   /* 4 */
 }
@@ -60358,7 +60358,8 @@ input {
 }
 
 html {
-  font-family: SpotifyFont;
+  font-family: SpotifyFont, Noto Sans, Noto Sans SC, Noto Sans TC, Noto Sans JP, Noto Sans KR,
+  Noto Sans Thai, sans-serif;
 }
 
 html.dark body {
@@ -63322,7 +63323,7 @@ html.dark body {
 }
 
 .font-sans {
-  font-family: Spotify-Font, Noto Sans, Noto Sans SC, Noto Sans TC, Noto Sans JP, Noto Sans KR,
+  font-family: SpotifyFont, Noto Sans, Noto Sans SC, Noto Sans TC, Noto Sans JP, Noto Sans KR,
   Noto Sans Thai, sans-serif;
 }
 

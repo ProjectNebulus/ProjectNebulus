@@ -3,7 +3,8 @@
 {% block main %}
     <style>
         .gradient-text {
-            background: -webkit-linear-gradient(left, #ff00a6, #8000ff);
+            background: -webkit-linear-gradient(left, #f59542, #42cbf5, #42f578);
+
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: bolder;
@@ -26,9 +27,9 @@
         }
     </style>
     <body>
-        <div style=" height: 100%; background: url('/static/images/wallpaper/jumpys_nebula.jpeg') center center; z-index: -1; top: 0; position: fixed; width: 30%; border-radius: 50% 0 0 50%; margin-left: 70%; background-size: cover; ">
-        </div>
-        {% include "utils/navbar.html" %}
+    <div style=" height: 100%; background: url('/static/images/wallpaper/jumpys_nebula.jpeg') center center; z-index: -1; top: 0; opacity:75%; filter:blur(5px); position: fixed; width: 30%; border-radius: 50% 0 0 50%; margin-left: 70%; background-size: cover; ">
+    </div>
+    {% include "utils/navbar.html" %}
         {% include "utils/sidebar.html" %}
         <div id="v2-alert"
              data-aos="fade-left"
@@ -52,46 +53,49 @@
                     to get the latest news and updates, and chill in a friendly, inclusive community.
                 </span>
                 <button data-dismiss-target="#v2-alert"
-                        class="material-icons absolute right-0 top-0 p-2">close</button>
+                        class="material-icons absolute right-0 top-0 p-2">close
+                </button>
             </div>
         </div>
-        <div class="hidden lg:flex w-full text-left mt-5"
-             style="padding-left: 7%;
+    <div class="hidden lg:flex w-full text-left mt-5"
+         style="padding-left: 7%;
                     height: 85vh;"
-             data-aos-duration="2000">
+         data-aos-duration="2000">
+        <br>
+        <br>
+        <div style="margin-top: 5vw" class="ml-6 w-full" data-aos="fade-left">
+            <p class="text-6xl text-gray-900 dark:text-white "
+               style="font-weight: 800;">{{ translate("Nebulus. Education. Redefined.") }}</p>
             <br>
-            <br>
-            <div style="margin-top: 5vw" class="ml-6 w-full" data-aos="fade-left">
-                <p class="text-7xl text-gray-600 dark:text-white">{{ translate("Learning, All In One") }}</p>
-                <br>
-                <p class="text-2xl text-gray-900 dark:text-white">
-                    {{ translate("With Nebulus, have your whole learning experience") }}
-                    <span class="gradient-text">{{ translate("organized") }}</span>
-                    {{ translate("and") }}
-                    <span class="gradient-text">{{ translate("simple") }}</span>.
-                </p>
-                <p class="text-2xl text-gray-900 dark:text-white">
-                    {{ translate("All it takes is one") }}
-                    <span class="gradient-text">{{ translate("Nebulus Account") }}</span>.
-                    Read more <a href="/about" class="text-sky-500 hover:underline">here</a>.
+            <p class="text-2xl text-gray-900 dark:text-white">Nebulus is a Learning Management System for students which
+                incorporates commonly used tools such as Schoology and Google Classroom.
+                Consisting of students from many regions of across the globe, our goal is to centralize everyone’s
+                learning experience in a single application.
+                {{ translate("With Nebulus, have your whole learning experience") }}
+                <span class="gradient-text">{{ translate("organized") }}</span>
+                {{ translate("and") }}
+                <span class="gradient-text">{{ translate("simple") }}</span>.
+                {{ translate("All it takes is one") }}
+                <span class="gradient-text">{{ translate("Nebulus Account") }}</span>.
+                Read more <a href="/about" class="text-sky-500 hover:underline">here</a>.
                 </p>
                 <br>
                 {% if user %}
                     <a href="/app">
-                        <button class="text-base text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                        <button class="text-base text-white bg-gradient-to-r from-green-400 via-blue-600 to-orange-400 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
                             {{ translate("Get Started") }}
                         </button>
                     </a>
                 {% else %}
                     <a href="/signup">
-                        <button class="text-base text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                        <button class="text-base text-white bg-gradient-to-r from-green-400 via-blue-600 to-orange-400 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
                             {{ translate("Get Started") }}
                         </button>
                     </a>
                 {% endif %}
-                <a href="https://www.youtube.com/watch?v=DHbSw9wxFe0">
-                    <button class="text-base text-white bg-red-600 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                        {{ translate("Watch Our Event") }}
+            <a href="https://www.youtube.com/watch?v=DHbSw9wxFe0">
+                <button class="text-base text-white bg-gradient-to-r from-red-400 to-pink-600 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                    {{ translate("Watch Our Event") }}
                     </button>
                 </a>
             </div>
@@ -196,24 +200,25 @@
                     </span>
                 </button>
             </div>
-        </div>
-        <div class="block lg:hidden w-full flex flex-col"
-             style="padding-left: 7%;
+    </div>
+    <div class="block lg:hidden w-full flex flex-col"
+         style="padding-left: 7%;
                     margin-top: 5rem;">
+        <br>
+        <br>
+        <div style="width:100%;margin-top: 4%">
+            <p class="text-7xl text-gray-900 dark:text-white "
+               style="font-weight: 800;">{{ translate("Nebulus. Education. Redefined.") }}</p>
             <br>
-            <br>
-            <div style="width:100%;margin-top: 4%">
-                <p class="text-7xl text-gray-900 dark:text-white ">{{ translate("Learning, All In One") }}</p>
-                <br>
-                <p class="text-2xl text-gray-900 dark:text-white">
-                    {{ translate("With Nebulus, have your whole learning experience") }}
-                    <span class="gradient-text">{{ translate("organized") }}</span>
-                    {{ translate("and") }}
-                    <span class="gradient-text">{{ translate("simple") }}</span>.
-                </p>
-                <p class="text-2xl text-gray-900 dark:text-white">
-                    {{ translate("All it takes is one") }}
-                    <span class="gradient-text">{{ translate("Nebulus Account") }}</span>.
+            <p class="text-2xl text-gray-900 dark:text-white">
+                {{ translate("With Nebulus, have your whole learning experience") }}
+                <span class="gradient-text">{{ translate("organized") }}</span>
+                {{ translate("and") }}
+                <span class="gradient-text">{{ translate("simple") }}</span>.
+            </p>
+            <p class="text-2xl text-gray-900 dark:text-white">
+                {{ translate("All it takes is one") }}
+                <span class="gradient-text">{{ translate("Nebulus Account") }}</span>.
                     Read more <a href="/about" class="text-sky-500 hover:underline">here</a>.
                 </p>
                 <br>
@@ -238,16 +243,16 @@
                         {{ translate("Watch our Event") }}
                     </button>
                 </a>
-            </div>
         </div>
-        <br>
-        <br>
-        <div class="flex flex-col items-center justify-center"
-             style="clear: left;">
-            <h1 class="text-5xl text-blue-600 dark:text-white"
-                data-aos="fade-left"
-                data-aos-duration="1000">
-                {{ translate("Nebulus. Education. Redefined.") }}
+    </div>
+    <br>
+    <br>
+    <div class="flex flex-col items-center justify-center"
+         style="clear: left;">
+        <h1 class="text-5xl text-blue-600 dark:text-gray-300 aos-init aos-animate italic"
+            data-aos="fade-left"
+            data-aos-duration="1000">
+            {{ translate("A Learning, All In One Experience") }}
             </h1>
             <br>
             <div class="flex flex-col lg:flex-row" id="feature-list">
