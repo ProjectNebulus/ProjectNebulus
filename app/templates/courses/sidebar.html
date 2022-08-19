@@ -1,30 +1,36 @@
 {% include "utils/sidebar.html" %}
 <style>
-    .text_nav_course {
-        display: none;
+    #floatbar {
+        width: 4rem;
+        transition: width 0.5s;
     }
 
-    .text_nav_course_display {
-        display: block !important;
+    #floatbar .text_nav_course {
+        opacity: 0;
+        transition: 0.75s;
+        white-space: nowrap;
     }
+
+    .material-icons {
+        transition: 0.5s;
+    }
+
+    #floatbar.expanded .text_nav {
+        opacity: 100;
+    }
+
+    #floatbar.expanded {
+        width: 13rem;
+    }
+
+    #floatbar.expanded .material-icons {
+        transform: rotate(180deg);
+        margin: 0.5rem;
+    }
+
 </style>
-<aside class="w-80 h-full" aria-label="Sidebar" onmouseenter="
-var elements = document.getElementsByClassName('text_nav_course');
-for (var i in elements) {
-  if (elements.hasOwnProperty(i)) {
-    elements[i].className = 'text_nav_course_display';
-  }
-}
-"
-       onmouseleave="
-var elements = document.getElementsByClassName('text_nav_course_display');
-for (var i in elements) {
-  if (elements.hasOwnProperty(i)) {
-    elements[i].className = 'text_nav_course';
-  }
-}
-">
-    <div style="margin-left:64px;"
+<aside class=" h-full" style="width:200px;" aria-label="Sidebar" id="floatbar">
+    <div style="margin-left:74px; height:75%; margin-top:50%; border-radius:30px;"
          class="px-3 py-4 overflow-y-auto rounded bg-gray-100/75 dark:bg-gray-800/75 h-full">
         <span class="self-center text-lg whitespace-nowrap w-full overflow-hidden block font-semibold text-black dark:text-white text-black truncate">
             <img src="{{ course.avatar.avatar_url }}"

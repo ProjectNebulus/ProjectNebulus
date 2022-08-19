@@ -41,33 +41,35 @@ function changeSearch() {
                 for (let i = 0; i < datas.length; i++) {
                     temp_arr.push(datas[i]);
                     if (i % 4 === 3) {
-                        let pic = `<img src="${temp_arr[3]}" class="inline-block w-10 h-10 rounded-full">`;
+                        let pic = `<img src="${temp_arr[3]}" class="inline-block w-10 h-10 rounded-md">`;
                         switch (temp_arr[0]) {
                             case 'document':
-                                pic = `<i class="material-icons">description</i>`;
+                                pic = `<i class="material-icons" style="font-size: 40px;vertical-align: middle;">description</i>`;
                                 break;
                             case 'NebDoc':
-                                pic = `<i class="material-icons">draft</i>`;
+                                pic = `<i class="material-icons" style="font-size: 40px;vertical-align: middle;">draft</i>`;
                                 break;
                             case 'event':
-                                pic = `<i class="material-icons">event</i>`;
+                                pic = `<i class="material-icons" style="font-size: 40px;vertical-align: middle;">event</i>`;
                                 break;
                             case 'assignment':
-                                pic = `<i class="material-icons">assignment</i>`;
+                                pic = `<i class="material-icons" style="font-size: 40px;vertical-align: middle;">assignment</i>`;
                                 break;
                             case 'chat':
-                                pic = `<i class="material-icons">forum</i>`;
+                                pic = `<i class="material-icons" style="font-size: 40px;vertical-align: middle;">forum</i>`;
                                 break;
                             case 'announcement':
-                                pic = `<i class="material-icons">campaign</i>`;
+                                pic = `<i class="material-icons" style="font-size: 40px;vertical-align: middle;">campaign</i>`;
                                 break;
                         }
 
                         document.getElementById('search_items').innerHTML += `
-                    <li>
-                        <span class="truncate py-2.5 rounded-lg mx-auto block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 mx-2 dark:hover:text-white" style="text-align:left;">
+                    <li style="margin:5px;">
+                        <div class="truncate py-2.5 rounded-lg mx-auto block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 mx-2 dark:hover:text-white" style="text-align:left;">
                 ${pic}
-                ${temp_arr[1]} <span class="text-gray-500 ml-2">${temp_arr[2]}</span></span>
+                <div style="display: inline-block; vertical-align: middle;">
+                ${temp_arr[1]} <br><span class="text-gray-500">${temp_arr[2]}</span></div>
+                </div>
                     </li>
                     
 `;

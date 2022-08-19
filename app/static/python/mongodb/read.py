@@ -390,7 +390,7 @@ def search(keyword: str, username: str):
               ]
     chats = Chat.objects(Q(owner=user.id) & Q(title__istartswith=keyword))[:10]
     NebulusDocuments = NebulusDocument.objects(
-        Q(authorizedUsers=user.id) & Q(name__istartswith=keyword)
+        Q(authorizedUsers=user.id) & Q(title__istartswith=keyword)
     )[:10]
 
     events = list(Event.objects().aggregate(pipeline1))
