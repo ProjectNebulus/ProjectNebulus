@@ -10,8 +10,8 @@ load_dotenv()
 from app.routes import init_app, socketio
 
 app = init_app()
-app.secret_key = os.getenv("MONGOPASS1")
-app.config["secret_key"] = os.getenv("MONGOPASS1")
+app.secret_key = os.getenv("MONGOPASS")
+app.config["secret_key"] = os.getenv("MONGOPASS")
 
 # Debug mode logs errors in more detail. Best used for testing, not production
 debug = False
