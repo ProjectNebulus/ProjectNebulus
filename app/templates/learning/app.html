@@ -46,8 +46,8 @@
                                         {{ strftime(date, "%a, %B %-d, %Y") }}
                                     </time>
                                     <br>
-                                    <div class="grid gap-4 pt-2"
-                                         style="grid-template-columns: repeat(auto-fit, 23rem)">
+                                    <div
+                                            style="grid-template-columns: repeat(auto-fit, 23rem)">
                                         {% for j in range(list|length) %}
                                             {% set a = list[j] %}
                                             <div class="expandable min-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg
