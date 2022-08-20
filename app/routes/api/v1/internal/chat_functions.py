@@ -84,7 +84,6 @@ def new_message(json_data):
         print()
         chat.lastEdited = datetime.datetime.now()
         chat.save()
-        send_date = str(message.send_date)
         sender = read.find_user(id=json_data["sender"])
         print("user sent a message")
         print(group)
@@ -94,7 +93,7 @@ def new_message(json_data):
                 "author": [sender.id, sender.username, sender.avatar.avatar_url],
                 "content": json_data["content"],
                 "id": message.id,
-                "send_date": send_date,
+                "send_date": json_data['send_date'],
                 "chatID": chatID,
                 "members": members,
                 "group": group

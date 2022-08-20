@@ -190,7 +190,16 @@ function togglePreview() {
 
 function updateToMessage(message) {
     let chat_el = document.getElementById('chat');
-    message['send_date'] = formatTime(message['send_date']);
+    let l = message['content'].match(/<img src="https:\/\/twemoji.maxcdn.com/);
+
+    if (!(l)){
+        l = 0;
+    } else {
+        l = l.length;
+    }
+    if (l === 1 && message['content'].slice(-1) === '>'){
+        message['content'] = message['content'].slice(0, -7)+'w-10 h-10">';
+    }
     if (!(message['group'])){
         chat_el.insertAdjacentHTML(
             'afterbegin',
@@ -199,14 +208,15 @@ function updateToMessage(message) {
                          src="${message['author'][2]}"
                          alt="">
                     <div class="space-y-1 font-medium dark:text-white">
-                        <div>${message['author'][1]} <span class="ml-3 text-sm text-gray-400">${message['send_date']}</span></div>
+                        <div>${message['author'][1]} <span class="ml-3 text-sm text-gray-400">${formatTime(message['send_date'])}</span></div>
                         <div id="content_${message['id']}" class="text-sm text-gray-500 dark:text-gray-400">${message['content']}</div>
                     </div>
                 </div>`
         );
     }else{
+        console.log(formatTime(message['send_date'], true));
         chat_el.insertAdjacentHTML('afterbegin', `<div class="group flex flex-row hover:bg-gray-100/50 dark:hover:bg-gray-700/50"><div class="opacity-0 text-gray-600 uppercase mr-2 group-hover:opacity-100" style="margin-top:3px;font-size:10px;width:50px;">
-        ${formatTime(message['send_date'], true)}</div> <div id="content_${message['id']}" class="message text-sm text-gray-500 dark:text-gray-400  mr-2"${message['content']}</div>`
+        ${formatTime(message['send_date'], true)}</div> <div id="content_${message['id']}" class="message text-sm text-gray-500 dark:text-gray-400  mr-2">${message['content']}</div>`
     );
     }
 
@@ -761,6 +771,16 @@ function getChat(chatID) {
 
 
             chat['messages'].forEach(function (message, index) {
+                let l = message['content'].match(/<img src="https:\/\/twemoji.maxcdn.com/);
+
+                if (!(l)){
+                    l = 0;
+                } else {
+                    l = l.length;
+                }
+                if (l === 1 && message['content'].slice(-1) === '>'){
+                    message['content'] = message['content'].slice(0, -7)+'w-10 h-10">';
+                }
                 message['content'] = replaceURLs(message['content'], message['id']);
                 message['content'] = message['content'].replace('<br>', '');
                 let prevMessage;
@@ -789,7 +809,7 @@ function getChat(chatID) {
                     </div>`;
                 } else {
                     chatContent += `<div class="group flex flex-row hover:bg-gray-100/50 dark:hover:bg-gray-700/50"><div class="opacity-0 text-gray-600 uppercase mr-2 group-hover:opacity-100" style="margin-top:3px;font-size:10px;width:50px;">
-        ${formatTime(message['send_date'], true)}</div> <div id="content_${message['id']}" class="message text-sm text-gray-500 dark:text-gray-400  mr-2"${message['content']}</div>`;
+        ${formatTime(message['send_date'], true)}</div> <div id="content_${message['id']}" class="message text-sm text-gray-500 dark:text-gray-400  mr-2">${message['content']}</div>`;
                 }
 
                 if (!dropdowns.includes(message["sender"]["username"])) {
