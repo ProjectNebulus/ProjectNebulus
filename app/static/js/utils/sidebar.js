@@ -21,7 +21,7 @@ if (!(window.location.pathname === "/chat")) {
     })
         .done(function (data) {
             let chat_sidebar = document.getElementById('chat-icon-sidebar');
-            chat_sidebar.insertAdjacentHTML('beforeend', `<span id="notification_chat_sidebar" class="${parseInt(data) > 0 ? "" : "hidden"} overflow-hidden flex flex-grow left-5 top-0 absolute text-sm bg-red-500 border-4 border-white dark:border-gray-800 rounded-full w-5 h-5" style="padding-left:7px;padding-right:7px">${data}</span>`);
+            chat_sidebar.insertAdjacentHTML('beforeend', `<span id="notification_chat_sidebar" class="${parseInt(data) > 0 ? "" : "hidden"} overflow-hidden pointer-events-none flex flex-grow left-5 top-0 absolute text-sm bg-red-500 border-4 border-white dark:border-gray-800 rounded-full w-5 h-5" style="padding-left:6px;padding-right:7px">${data}</span>`);
             let chat_notif_sidebar = document.getElementById('notification_chat_sidebar');
 
             let socket = io.connect('http://' + document.domain + ':' + location.port + '/chat');

@@ -25,11 +25,11 @@ function onComplete() {
 }
 
 function recaptchaSuccess() {
-    if (grecaptcha.getResponse())
+    if (!grecaptcha.getResponse())
+        return;
 
-        recaptcha.classList.add("hidden");
+    recaptcha.classList.add("hidden");
     prevScreen.classList.remove("hidden");
-    grecaptcha.reset();
 }
 
 function selectChanged() {
@@ -209,6 +209,7 @@ window.addEventListener('load', function () {
     code = document.getElementById('resetCode');
 
     let loginAttempts = 0;
+    let showRecaptcha = false;
 
     let loginButton = document.getElementById('log_in');
     loginButton.style.color = 'gray';
@@ -216,8 +217,12 @@ window.addEventListener('load', function () {
     loginButton.disabled = true;
 
     function checkCredentials() {
-        if (!recaptcha.classList.contains("hidden"))
-            return;
+        if (showRecaptcha) {
+            if (grecaptcha.getResponse()) {
+                showRecaptcha = false;
+                grecaptcha.reset();
+            } else return;
+        }
 
         const errorEmail = document.getElementById('error-msg');
         const errorPassword = document.getElementById('password-error-msg');
@@ -232,7 +237,6 @@ window.addEventListener('load', function () {
             errorPassword.innerHTML = 'Please enter a password!';
 
         if (email.value === '' || password.value === '') return;
-
 
         const xhttp = new XMLHttpRequest();
         xhttp.open('POST', '/api/v1/internal/check-signin', true);
@@ -294,8 +298,10 @@ window.addEventListener('load', function () {
                 loginButton.disabled = true;
 
                 loginAttempts++;
-                if (loginAttempts % 3 === 0)
+                if (loginAttempts % 3 === 0) {
+                    showRecaptcha = true;
                     recaptchaScreen();
+                }
             }
         }
     }
