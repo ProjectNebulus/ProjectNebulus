@@ -190,7 +190,7 @@ function togglePreview() {
 
 function updateToMessage(message) {
     let chat_el = document.getElementById('chat');
-    let l = message['content'].match(/<img src="https:\/\/twemoji.maxcdn.com/);
+    let l = message['content'].match(/<img src="https:\/\/twemoji.maxcdn.com/g);
 
     if (!(l)){
         l = 0;
@@ -771,13 +771,14 @@ function getChat(chatID) {
 
 
             chat['messages'].forEach(function (message, index) {
-                let l = message['content'].match(/<img src="https:\/\/twemoji.maxcdn.com/);
+                let l = message['content'].match(/<img src="https:\/\/twemoji.maxcdn.com/g);
 
                 if (!(l)){
                     l = 0;
                 } else {
                     l = l.length;
                 }
+
                 if (l === 1 && message['content'].slice(-1) === '>'){
                     message['content'] = message['content'].slice(0, -7)+'w-10 h-10">';
                 }
@@ -914,6 +915,7 @@ function getChat(chatID) {
     });
 }
 
+$('#pressMe').on('click', sendMessage);
 function sendMessage() {
     if (!(/\S/).test(chatBox.value))
         return;
