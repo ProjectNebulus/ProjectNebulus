@@ -31,7 +31,7 @@
             {% endif %}
             {% for folder in course.folders %}
                 <br>
-                <a class="truncate text-ellipsis overflow-hidden block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                <a class="truncate text-ellipsis overflow-hidden block p-4 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                     <p class="font-normal text-gray-700 dark:text-gray-400 whitespace-nowrap">
                         <svg class="w-6 h-6 inline-block mr-2 -mt-1.5"
                              fill="none"
@@ -45,16 +45,15 @@
                         <span>{{ folder.name }}</span>
                     </p>
                 </a>
-            {% endfor %}
+            {% endfor %}<br>
             {% for document in course.documents %}
-                <br>
                 <a onclick="document.getElementById('documentPage').style.display = 'none'; startFile('{{ document.name }}', siteName + '/getResource/{{ course.id }}/{{ document.id }}', {{ ("pdf" in document.url)|string|lower }})"
-                   class="truncate overflow-hidden block p-6 max-w-sm bg-white rounded-lg cursor-pointer border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-                   style="width: min-content">
-                    <p class="font-normal text-gray-700 dark:text-gray-400 whitespace-nowrap mr-2">
+                   class="block p-6 bg-white rounded-lg cursor-pointer border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+                   style="width: min-content;margin: /*20px*/ /*5*/10px;box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);float: left;">
+                    <p class="text-sm text-gray-700 dark:text-gray-400 whitespace-nowrap mr-2">
                         <svg class="inline-block w-6 h-6 mr-2 -mt-1.5"
-                             fill="none"
-                             stroke="currentColor"
+                             fill="white"
+                             stroke="white"
                              viewBox="0 0 24 24"
                              xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

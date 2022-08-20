@@ -24,8 +24,7 @@
             {% include "courses/sidebar.html" %}
             <div class="w-full ml-4 mt-4">
                 <div class="flex justify-between">
-                    <span class="text-5xl text-black dark:text-white text-black"
-                          id="page-title"></span>
+                    <span class="text-2xl uppercase text-gray-400 text-black" id="page-title"></span>
                     <div style="margin-right: 3rem" data-aos="fade">
                         <button style="float:left; margin-right:10px;width:64px;height:44px"
                                 data-dropdown-toggle="addDropdown"
@@ -73,52 +72,15 @@
                         </li>
                     </ul>
                 </div>
+                    </div>
+                </div>
+                <br>
+                <hr style="border-color:gray; margin:10px; border-width:2px; border-radius:10px;">
+                <iframe id="frame" name="frame" style=""></iframe>
             </div>
+
         </div>
-        <br>
-        <hr class="dark:text-white text-black">
-        <iframe id="frame" name="frame" style=""></iframe>
-    </div>
-    <div class="hidden xl:block border-l border-gray-200 dark:border-gray-700 text-center overflow-auto hover:scroll"
-         id="upcoming-events"
-         style="width:25%">
-        <h1 class="text-black dark:text-white text-2xl">Upcoming Events</h1>
-        <br>
-        <div class="flex flex-col overflow-x-auto sm:rounded-lg min-w-full align-middle overflow-auto inline-block">
-            {% if events|length == 0 %}
-                <p class="text-gray-500 dark:text-gray-400">No Events!</p>
-            {% else %}
-                {% for date, assignments in events.items() %}
-                    {% for a in assignments[:15] %}
-                        {% if a.course.id == course.id %}
-                            {% if a.submitDate == None or date > today %}
-                                <a href="/assignment/{{ a.id }}"
-                                   class="flex text-black dark:text-white text-left bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 rounded-lg p-6 ml-3 shadow-md dark:border-gray-700 text-xl mb-5"
-                                   style="max-width: 90%">
-                                    <div class="mr-4 material-icons ml-2"
-                                         style="transform: translate(0, 50%) scale(1.75)">event</div>
-                                    <div class="truncate">
-                                        <span class="truncate">{{ a.title }}</span>
-                                        <div class="text-xs text-gray-700 uppercase dark:text-gray-400">
-                                            Due: {{ date.strftime("%D") }}
-                                            {% if date < today %}
-                                                • <span class="text-red-600 dark:text-red-500">Overdue</span>
-                                            {% elif a.grade != None and a.grade / a.points < 0.6 %}
-                                                <span class="text-black dark:text-white">•</span>
-                                                <span class="text-gray-300 dark:text-gray-700">{{ a.grade }}/{{ a.points }}</span>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </a>
-                            {% endif %}
-                        {% endif %}
-                    {% endfor %}
-                {% endfor %}
-            {% endif %}
-        </div>
-    </div>
-</div>
-<script>const course_id = "{{ course_id }}"</script>
+        <script>const course_id = "{{ course_id }}"</script>
 {% include "courses/courseModals.html" %}
 </body>
 {% endblock %}
