@@ -379,7 +379,7 @@ def getChat():
     current_user.unread = 0
     chat_obj.save()
 
-    chat["messages"] = list(reversed(chat["messages"]))[:20]
+    chat["messages"] = list(reversed(chat["messages"]))[:50]
 
     for message in chat["messages"]:
         message["sender"] = json.loads(
@@ -443,14 +443,14 @@ def fetchMessages():
     print(data)
     chatID = data["chatID"]
     chat = json.loads(read.getChat(chatID).to_json())
-    if len(chat["messages"]) < data["current_index"] + 20:
+    if len(chat["messages"]) < data["current_index"] + 50:
         print(len(chat["messages"]))
         chat["messages"] = list(reversed(chat["messages"]))[
             data["current_index"] : len(chat["messages"])
         ]
     else:
         chat["messages"] = list(reversed(chat["messages"]))[
-            data["current_index"] : (data["current_index"] + 30)
+            data["current_index"] : (data["current_index"] + 50)
         ]
 
     for message in chat["messages"]:

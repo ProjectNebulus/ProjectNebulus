@@ -376,6 +376,7 @@ $(document).ready(function () {
                     current_index: chat_index
                 })
             }).done(function (messages) {
+                console.log(messages);
             let dropdowns = [];
 
             let chat_el = document.getElementById('chat');
@@ -384,11 +385,22 @@ $(document).ready(function () {
                 let chat = document.getElementById('chat');
 
                 messages.forEach(function (message, index) {
+                 let l = message['content'].match(/<img src="https:\/\/twemoji.maxcdn.com/g);
+
+                if (!(l)){
+                    l = 0;
+                } else {
+                    l = l.length;
+                }
+
+                if (l === 1 && message['content'].slice(-1) === '>'){
+                    message['content'] = message['content'].slice(0, -7)+'w-10 h-10">';
+                }
                 message['content'] = replaceURLs(message['content'], message['id']);
                 message['content'] = message['content'].replace('<br>', '');
                 let prevMessage;
                 if (index > 0) {
-                    prevMessage = chat['messages'][index - 1];
+                    prevMessage = messages[index - 1];
                 } else {
                     prevMessage = message;
                 }
@@ -397,9 +409,6 @@ $(document).ready(function () {
 
                     prevMessage['send_date'] = formatTime(prevMessage['send_date']);
                     prevMessage['content'] = prevMessage['content'].replace('<br>', '');
-                    if (index !== 0) {
-                        document.getElementById("content_" + prevMessage["id"]).remove();
-                    }
                     chatContent += `
                     <div class="flex mb-1 items-top space-x-4 mt-6 hover:bg-gray-100/50 dark:hover:bg-gray-700/50">
                         <img class="mt-1 w-10 h-10 rounded-full" data-dropdown-toggle="user_${prevMessage['sender']['username']}"
@@ -413,11 +422,9 @@ $(document).ready(function () {
                             <div id="content_${prevMessage['id']}" class="message text-sm text-gray-500 dark:text-gray-400 " style="margin-left:1.5px;">${prevMessage['content']}</div>
                         </div>
                     </div>`;
-                }
-
-                if (prevMessage !== message) {
+                } else {
                     chatContent += `<div class="group flex flex-row hover:bg-gray-100/50 dark:hover:bg-gray-700/50"><div class="opacity-0 text-gray-600 uppercase mr-2 group-hover:opacity-100" style="margin-top:3px;font-size:10px;width:50px;">
-        ${formatTime(message['send_date'], true)}</div> <div id="content_${message['id']}" class="message text-sm text-gray-500 dark:text-gray-400  mr-2"${message['content']}</div>`;
+        ${formatTime(message['send_date'], true)}</div> <div id="content_${message['id']}" class="message text-sm text-gray-500 dark:text-gray-400  mr-2">${message['content']}</div>`;
                 }
 
                 if (!dropdowns.includes(message["sender"]["username"])) {
@@ -443,6 +450,7 @@ $(document).ready(function () {
                 }
                 chat_el.insertAdjacentHTML('beforeend', chatContent);
                 chatContent = ``;
+            });
 
                  $('#chat-loading').hide();
                 let preview = document.getElementById('preview_border');
@@ -450,7 +458,7 @@ $(document).ready(function () {
                 document.getElementById('chat').classList.remove('hidden');
             });
 
-            });
+
         }
     });
 
