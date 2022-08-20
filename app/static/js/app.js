@@ -41,25 +41,25 @@ function changeSearch() {
                 for (let i = 0; i < datas.length; i++) {
                     temp_arr.push(datas[i]);
                     if (i % 4 === 3) {
-                        let pic = `<img src="${temp_arr[3]}" class="inline-block w-10 h-10 rounded-md">`;
+                        let pic = `<img src="${temp_arr[3]}" style="margin-right: 20px;" class="inline-block w-10 h-10 rounded-md">`;
                         switch (temp_arr[0]) {
                             case 'document':
-                                pic = `<i class="material-icons" style="font-size: 40px;vertical-align: middle;">description</i>`;
+                                pic = `<i class="material-icons" style="font-size: 40px;vertical-align: middle;margin-right: 20px;">description</i>`;
                                 break;
                             case 'NebDoc':
-                                pic = `<i class="material-icons" style="font-size: 40px;vertical-align: middle;">draft</i>`;
+                                pic = `<i class="material-icons" style="font-size: 40px;vertical-align: middle;margin-right: 20px;">draft</i>`;
                                 break;
                             case 'event':
-                                pic = `<i class="material-icons" style="font-size: 40px;vertical-align: middle;">event</i>`;
+                                pic = `<i class="material-icons" style="font-size: 40px;vertical-align: middle;margin-right: 20px;">event</i>`;
                                 break;
                             case 'assignment':
-                                pic = `<i class="material-icons" style="font-size: 40px;vertical-align: middle;">assignment</i>`;
+                                pic = `<i class="material-icons" style="font-size: 40px;vertical-align: middle;margin-right: 20px;">assignment</i>`;
                                 break;
                             case 'chat':
-                                pic = `<i class="material-icons" style="font-size: 40px;vertical-align: middle;">forum</i>`;
+                                pic = `<i class="material-icons" style="font-size: 40px;vertical-align: middle;margin-right: 20px;">forum</i>`;
                                 break;
                             case 'announcement':
-                                pic = `<i class="material-icons" style="font-size: 40px;vertical-align: middle;">campaign</i>`;
+                                pic = `<i class="material-icons" style="font-size: 40px;vertical-align: middle;margin-right: 20px;">campaign</i>`;
                                 break;
                         }
 
@@ -373,7 +373,7 @@ window.addEventListener('load', () => {
     for (const template of templates) {
         let button = document.createElement('div');
         button.className =
-            'createSelectButton text-white bg-gray-500 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2';
+            'createSelectButton text-white bg-gray-500 dark:hover:bg-gray-800 dark:bg-gray-900 font-medium rounded-lg text-lg px-5 py-5 text-center mr-2 mb-2';
         button.onclick = () => chooseTemplate(template);
 
         let imageSpan = document.createElement('span');
@@ -381,8 +381,8 @@ window.addEventListener('load', () => {
 
         let image = document.createElement('img');
         image.style.float = 'right';
-        image.height = 20;
-        image.width = 20;
+        image.height = 40;
+        image.width = 40;
         image.src = 'static/images/icons/' + template.icon;
         imageSpan.appendChild(image);
 
@@ -395,8 +395,8 @@ window.addEventListener('load', () => {
         let next = document.createElement('span');
         next = document.createElement('img');
         next.style.float = 'right';
-        next.height = 20;
-        next.width = 20;
+        next.height = 40;
+        next.width = 40;
         next.src = 'static/images/icons/next.svg';
         button.appendChild(next);
 
@@ -404,7 +404,7 @@ window.addEventListener('load', () => {
 
         let description = document.createElement('span');
         description.classList.add('text-gray-300', 'text-sm');
-
+        description.innerHTML += "Includes: "
         for (let i = 0; i < Math.min(template.subtemplates.length, 4); i++)
             description.innerHTML += template.subtemplates[i] + ', ';
 
@@ -429,7 +429,7 @@ window.addEventListener('load', () => {
         for (const subtemplate of template.subtemplates) {
             let button = document.createElement('div');
             button.className =
-                'createSelectButton text-white bg-gray-500 font-medium rounded-lg px-5 py-2.5 text-center mr-2 mb-2 text-xl';
+                'createSelectButton text-white bg-gray-500 dark:hover:bg-gray-800 dark:bg-gray-900 font-medium rounded-lg text-lg px-5 py-5 text-center mr-2 mb-2';
             button.onclick = function () {
                 const name = template.name;
                 customize(name, subtemplate);

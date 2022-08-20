@@ -23,16 +23,19 @@
                             and fill it in with content!
                         </p>
                         <br>
-                        <div class='createSelectButton text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 flex justify-between'
-                             id="skip-templates">
-                            <img src="/static/images/icons/new.svg"
-                                 width="20"
-                                 height="20"
-                                 alt="Create course image">
-                            Create course
-                            <img src="/static/images/icons/next.svg" width="20" height="20" alt="Next">
-                        </div>
-                        <h2 class="text-3xl">Or choose a subject</h2>
+                        <div id="skip-templates"
+                             class="createSelectButton text-white bg-gray-500 dark:hover:bg-gray-800 dark:bg-gray-900 font-medium rounded-lg text-lg px-5 py-5 text-center mr-2 mb-2">
+                            <span style="float: left;"><img height="40" width="40" src="static/images/icons/new.svg"
+                                                            style="float: right;"></span><span>Create a Course</span><img
+                                height="40" width="40" src="static/images/icons/next.svg" style="float: right;"></div>
+                        <h2 class="text-2xl" style="
+    margin: 30px;
+">Or, Choose your Subject
+                            <span class="text-base text-white bg-gradient-to-r from-green-400 via-blue-600 to-orange-400 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                                  style="margin: 20px;vertical-align: middle;">
+                            Recommended
+                        </span>
+                        </h2>
                         <div class='scroll mt-2'></div>
                     </div>
                 </div>
@@ -66,7 +69,7 @@
                         <input type="text"
                                id="course-name"
                                style="width: 100%"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               class="bg-gray-50 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:bg-gray-900"
                                required>
                         <br>
                         <label for="course-teacher"
@@ -74,7 +77,7 @@
                             Course Teacher
                         </label>
                         <input id="course-teacher"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               class="bg-gray-50 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:bg-gray-900"
                                required>
                         <br>
                         <button type="submit"
@@ -84,51 +87,51 @@
                         <p class="text-green-900 text-3xl" id="create-course-status"></p>
                     </form>
                     <p class="text-2xl my-4">Or import from another LMS</p>
-                    <div class='createSelectButton text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2'
+                    <div class='createSelectButton text-white bg-gray-500 dark:hover:bg-gray-800 dark:bg-gray-900 font-medium rounded-lg text-lg px-5 py-5 text-center mr-2 mb-2'
                          id="import-schoology">
                         <img src="/static/images/logos/schoology.png"
                              style="visibility:visible;
-                                    width:20px;
-                                    height:20px;
+                                    width:40px;
+                                    height:40px;
                                     float:left;"
                              alt="Create course image">
                         Import from Schoology
                         <img src="/static/images/icons/next.svg"
                              style="visibility:visible;
-                                    width:20px;
-                                    height:20px;
+                                    width:40px;
+                                    height:40px;
                                     float:right;"
                              alt="Next">
                     </div>
-                    <div class='createSelectButton text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2'
+                    <div class='createSelectButton text-white bg-gray-500 dark:hover:bg-gray-800 dark:bg-gray-900 font-medium rounded-lg text-lg px-5 py-5 text-center mr-2 mb-2'
                          id="import-classroom">
                         <img src="/static/images/logos/classroom.png"
                              style="visibility:visible;
-                                    width:20px;
-                                    height:20px;
+                                    width:40px;
+                                    height:40px;
                                     float:left;"
                              alt="Create course image">
                         Import from Google Classroom
                         <img src="/static/images/icons/next.svg"
                              style="visibility:visible;
-                                    width:20px;
-                                    height:20px;
+                                    width:40px;
+                                    height:40px;
                                     float:right;"
                              alt="Next">
                     </div>
-                    <div class='createSelectButton text-white bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2'
+                    <div class='createSelectButton text-white bg-gray-500 dark:hover:bg-gray-800 dark:bg-gray-900 font-medium rounded-lg text-lg px-5 py-5 text-center mr-2 mb-2'
                          id="import-canvas">
                         <img src="/static/images/logos/canvas.png"
                              style="visibility:visible;
-                                    width:20px;
-                                    height:20px;
+                                    width:40px;
+                                    height:40px;
                                     float:left;"
                              alt="Create course image">
                         Import from Canvas
                         <img src="/static/images/icons/next.svg"
                              style="visibility:visible;
-                                    width:20px;
-                                    height:20px;
+                                    width:40px;
+                                    height:40px;
                                     float:right;"
                              alt="Next">
                     </div>
@@ -461,8 +464,8 @@
                          viewBox="0 0 20 20"
                          xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
-                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                        clip-rule="evenodd">
+                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                              clip-rule="evenodd">
                         </path>
                     </svg>
                 </button>
@@ -470,11 +473,11 @@
             <!-- Modal body -->
             <div class="p-6 space-y-6 dark:text-white text-black">
                 <div class="mb-6">
-                    <input oninput="changeSearch();"
-                           id="search_input"
-                           placeholder="Type here..."
-                           required
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <input oninput="changeSearch();" id="search_input" placeholder="Type here..." required=""
+                           class="bg-gray-50 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-5 m-5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:bg-gray-900"
+                           style="
+    font-size: 1.5em;
+">
                     <ul id="search_items" class="scroll">
                         <li>
                             <div class="py-2.5 rounded-lg mx-auto block px-4 py-2 mx-2 dark:hover:text-white">
@@ -484,7 +487,7 @@
                                      fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                                    fill="currentColor"/>
+                                          fill="currentColor"/>
                                     <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
                                     fill="currentFill"/>
                                 </svg>
