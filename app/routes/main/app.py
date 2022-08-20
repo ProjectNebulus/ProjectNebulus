@@ -6,10 +6,9 @@ from googleapiclient.discovery import build
 from markupsafe import Markup
 
 from app.static.python.mongodb import read
-
-from ...static.python.mongodb.read import getText
 from . import main_blueprint, utils
 from .utils import logged_in
+from ...static.python.mongodb.read import getText
 
 
 def credentials_to_dict(credentials):
@@ -62,6 +61,34 @@ def getGclassroomcourses():
 def app():
     from app.static.python.classes import Event
 
+    user_acc = read.find_user(id=session["id"])
+    user_courses = read.get_user_courses(session["id"])
+    events = read.sort_user_events(session["id"])
+
+    return render_template(
+        "learning/app.html",
+        user=session["username"],
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        user_acc=user_acc,
+        user_courses=list(user_courses),
+        read=read,
+        page="Nebulus - Learning",
+        announcements=events[0],
+        events=events[1],
+        now=datetime.now(),
+        strftime=utils.strftime,
+        enumerate=enumerate,
+        Event=Event,
+        translate=getText,
+        fmt=fmt,
+        uniqueUsers=set(),
+    )
+
+
+@main_blueprint.route("/courses", methods=["GET"])
+@logged_in
+def courses():
     user_acc = read.find_user(id=session["id"])
     user_courses = read.get_user_courses(session["id"])
     events = read.sort_user_events(session["id"])
@@ -140,29 +167,22 @@ def app():
         scCourses = []
 
     return render_template(
-        "learning/app.html",
+        "courses.html",
         user=session["username"],
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         user_acc=user_acc,
         user_courses=list(user_courses),
         read=read,
-        page="Nebulus - Learning",
-        announcements=events[0],
-        events=events[1],
-        now=datetime.now(),
-        strftime=utils.strftime,
+        page="Nebulus - Courses",
         gcourses=gcourses,
         canvascourses=canvascourses,
         schoologycourses=scCourses,
-        enumerate=enumerate,
-        Event=Event,
         pastschoologycourses=scCourses,
         translate=getText,
         fmt=fmt,
         uniqueUsers=set(),
     )
-
 
 def fmt(content: str) -> str:
     output = ""
