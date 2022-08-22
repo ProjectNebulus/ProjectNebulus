@@ -22,4 +22,28 @@ window.addEventListener('load', function () {
             ? '#111926'
             : 'white';
     });
+
+    const sidebarOptions = document.querySelectorAll("aside:not(#sidebar_) li > span");
+    const search = location.href.split("#");
+
+    for (const option of sidebarOptions) {
+        let opensPage = option.getAttribute("onclick").substring(10);
+        opensPage = opensPage.substring(0, opensPage.length - 2);
+
+        option.addEventListener("click", () => {
+            if (!option.classList.contains("bg-gray-300"))
+                window.location = "#" + opensPage;
+
+            for (const op of sidebarOptions)
+                op.classList.remove("bg-gray-300", "dark:bg-gray-600");
+
+            option.classList.add("bg-gray-300", "dark:bg-gray-600");
+        });
+
+        if (sidebarOptions[0] !== option && search.length > 1 && opensPage === search[1]) {
+            sidebarOptions[0].classList.remove("bg-gray-300", "dark:bg-gray-600");
+            option.classList.add("bg-gray-300", "dark:bg-gray-600");
+            open_pls(opensPage);
+        }
+    }
 });

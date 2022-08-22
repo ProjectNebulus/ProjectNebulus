@@ -1,6 +1,6 @@
 const siteName = window.location.protocol + '//' + window.location.host;
 
-setInterval(changeFavicon, 1000);
+setInterval(changeFavicon, 3000);
 Array.prototype.insert = (index, item) => this.splice(index, 0, item);
 
 if (!localStorage.getItem('color-theme')) {
@@ -282,8 +282,6 @@ function navFetchStatus() {
                     ${playing}
                     <i style="margin-left:20px;color:white;" class="material-icons">skip_next</i>
                 </p></div>`;
-        document.getElementById('spotifyStatus').classList.remove('flex-col');
-        //document.getElementById('spotifyStatus').classList.remove("flex");
     });
 
     request.fail(onFailedRequest);

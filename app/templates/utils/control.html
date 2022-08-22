@@ -2,73 +2,73 @@
     input:focus {
         outline: none;
     }
+
     .base-timer__path-remaining.green {
-  color: rgb(65, 184, 131);
-}
+        color: rgb(65, 184, 131);
+    }
 
-.base-timer__path-remaining.orange {
-  color: orange;
-}
+    .base-timer__path-remaining.orange {
+        color: orange;
+    }
 
-.base-timer__path-remaining.red {
-  color: red;
-}
-.base-timer__label {
-  position: absolute;
+    .base-timer__path-remaining.red {
+        color: red;
+    }
 
-  /* Size should match the parent container */
-  width: 300px;
-  height: 300px;
+    .base-timer__label {
+        position: absolute;
 
-  /* Keep the label aligned to the top */
-  top: 0;
+        /* Size should match the parent container */
+        width: 300px;
+        height: 300px;
 
-  /* Create a flexible box that centers content vertically and horizontally */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+        /* Keep the label aligned to the top */
+        top: 0;
 
-  /* Sort of an arbitrary number; adjust to your liking */
-  font-size: 48px;
-}
+        /* Create a flexible box that centers content vertically and horizontally */
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-.base-timer__path-remaining {
-  stroke-width: 7px;
-  stroke-linecap: round;
-  transform: rotate(90deg);
-  transform-origin: center;
-  transition: 1s linear all;
-  fill-rule: nonzero;
-  stroke: currentColor;
-}
-.base-timer__svg {
-  transform: scaleX(-1);
-}
+        /* Sort of an arbitrary number; adjust to your liking */
+        font-size: 48px;
+    }
 
-.base-timer__circle {
-  fill: none;
-  stroke: none;
-}
+    .base-timer__path-remaining {
+        stroke-width: 7px;
+        stroke-linecap: round;
+        transform: rotate(90deg);
+        transform-origin: center;
+        transition: 1s linear all;
+        fill-rule: nonzero;
+        stroke: currentColor;
+    }
 
-.base-timer__path-elapsed {
-  stroke-width: 7px;
-  stroke: grey;
-}
-.base-timer {
-  position: relative;
-  width: 300px;
-  height: 300px;
-}
+    .base-timer__svg {
+        transform: scaleX(-1);
+    }
+
+    .base-timer__circle {
+        fill: none;
+        stroke: none;
+    }
+
+    .base-timer__path-elapsed {
+        stroke-width: 7px;
+        stroke: grey;
+    }
+
+    .base-timer {
+        position: relative;
+        width: 300px;
+        height: 300px;
+    }
 </style>
 <div class="mx-4 my-4 flex flex-col">
     <h1 class="dark:text-white text-xl">{{ user }}</h1>
     <p class="text-gray-800 dark:text-gray-400">{{ email }}</p>
 </div>
-<div style="
-    margin-top: 10px;
-    margin-bottom: 10px;
-" id="controlcenter2"
-     class=" bg-gray-300/30 dark:bg-gray-800/30 p-4 mr-2 w-full my-4 rounded-lg dark:border-gray-700 border backdrop-blur flex flex-col">
+<div class="bg-gray-300/30 dark:bg-gray-800/30 p-4 mr-2 w-full my-4 rounded-lg dark:border-gray-700 border backdrop-blur flex flex-col">
     <div class="bg-gray-300/30 dark:bg-gray-900/60 mx-2 text-left flex flex-col rounded-lg">
         <a id="theme-toggle">
             <i id="theme-toggle-dark-icon" class="hidden">light_mode</i>
@@ -116,27 +116,28 @@
 <div style="
     margin-top: 10px;
     margin-bottom: 10px;
-" id="focus" class="hidden flex p-4 mb-4 text-sm text-blue-700 bg-blue-100 rounded-lg dark:bg-blue-200 dark:text-blue-800"
+" id="focus"
+     class="hidden flex p-4 mb-4 text-sm text-blue-700 bg-blue-100 rounded-lg dark:bg-blue-200 dark:text-blue-800"
      role="alert">
     <div class="base-timer">
-  <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-    <g class="base-timer__circle">
-      <circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
-      <path
-        id="base-timer-path-remaining"
-        stroke-dasharray="283"
-        class="base-timer__path-remaining green"
-        d="
+        <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <g class="base-timer__circle">
+                <circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
+                <path
+                        id="base-timer-path-remaining"
+                        stroke-dasharray="283"
+                        class="base-timer__path-remaining green"
+                        d="
           M 50, 50
           m -45, 0
           a 45,45 0 1,0 90,0
           a 45,45 0 1,0 -90,0
         "
-      ></path>
-    </g>
-  </svg>
-  <span id="base-timer-label" class="base-timer__label"></span>
-</div>
+                ></path>
+            </g>
+        </svg>
+        <span id="base-timer-label" class="base-timer__label"></span>
+    </div>
 
 </div>
 
@@ -155,23 +156,25 @@
                       style="left:35px;"></span>
             </div>
             <div class=" flex flex-col " style="align-content: flex-start;flex-flow: column wrap;">
-                <div id="profile-username" class="my-3 text-gray-400" style="font-size:30px;text-align: start;">Coder N</div>
+                <div id="profile-username" class="my-3 text-gray-400" style="font-size:30px;text-align: start;">
+                    Coder N
+                </div>
                 <div id="profile-status-text" class=" text-sm text-gray-400"
-                     style="text-align: start;margin-left:2px;">No status
+                     style="text-align: start; margin-left:2px;">No status
                 </div>
             </div>
         </div>
         <hr style="background-color: #334155; height:2px;" class="border-0">
         <div class="flex flex-row">
             <div class="mr-2 flex flex-row mt-4 bg-gray-300/30 dark:border-gray-700 border backdrop-blur dark:bg-gray-800/30 rounded-md"
-                 style="width:40%;">
+                 style="width:40%">
                 <div id="status-color" data-dropdown-toggle="dropdownTop"
                      class="my-2 mr-4 w-7 h-7 rounded-full mx-2 text-left flex flex-col rounded-lg"></div>
                 <h3 id="status-name" class="my-2 mt-3 text-gray-400"></h3>
 
             </div>
-            <div class=" flex  text-md mt-4 bg-gray-300/30 dark:border-gray-700 border backdrop-blur dark:bg-gray-800/30 rounded-md"
-                 div="" style="width:58%;">
+            <div class="flex text-md mt-4 bg-gray-300/30 dark:border-gray-700 border backdrop-blur dark:bg-gray-800/30 rounded-md"
+                 style="width:58%;">
 
                 <input class="text-lg bg-transparent mx-4 my-1 mt-1 text-gray-400" placeholder="Click to edit status"
                        style="font-size: 15px;">
