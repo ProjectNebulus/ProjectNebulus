@@ -123,8 +123,8 @@ def courses():
     import schoolopy
 
     try:
-        schoology = read.getSchoology(username=session["username"])
-        if len(schoology) > 0:
+        schoology = read.getSchoology(id=session["id"])
+        if schoology:
             schoology = schoology[0]
             key = (
                     schoology.apikey
@@ -183,6 +183,7 @@ def courses():
         fmt=fmt,
         uniqueUsers=set(),
     )
+
 
 def fmt(content: str) -> str:
     output = ""

@@ -88,7 +88,7 @@ def get_schoology_emails():
             # print(thread)
             info["message"] = thread[-1]["message"]
             info["message"] = info["message"][:100] + "..." * (
-                len(info["message"]) > 100
+                    len(info["message"]) > 100
             )
             newThread = []
             for threadItem in thread:
@@ -121,15 +121,15 @@ def create_schoology(key, secret):
 
 
 def generate_auth(
-    authorize,
-    key,
-    secret,
-    domain,
-    three_legged,
-    request_token,
-    request_token_secret,
-    access_token,
-    access_token_secret,
+        authorize,
+        key,
+        secret,
+        domain,
+        three_legged,
+        request_token,
+        request_token_secret,
+        access_token,
+        access_token_secret,
 ):
     auth = schoolopy.Auth(
         key,
@@ -162,7 +162,7 @@ def generate_schoology_url(link):
     auth = schoolopy.Auth(key, secret, three_legged=True, domain=DOMAIN)
     # Request authorization URL to open in another window.
     url = auth.request_authorization(
-        callback_url=(link + "api/v1/internal/schoology-callback")
+        callback_url=(link + "/api/v1/internal/schoology-callback")
     )
     session["request_token"] = auth.request_token
     session["request_token_secret"] = auth.request_token_secret

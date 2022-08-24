@@ -15,7 +15,7 @@ def aschoology():
 
     auth = schoolopy.Auth(key, secret, three_legged=True, domain=DOMAIN)
     url = auth.request_authorization(
-        callback_url=(request.url_root + "/closeSchoology")
+        callback_url=(request.url_root + "/api/v1/internal/schoology-callback")
     )
     session["request_token"] = auth.request_token
     session["request_token_secret"] = auth.request_token_secret
