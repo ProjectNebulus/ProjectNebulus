@@ -564,61 +564,7 @@ window.addEventListener('load', () => {
         );
     }
 
-    function importSchoology() {
-        screens[2].style.display = 'none';
-        screens[3].style.display = 'block';
 
-        const status = document.getElementById('create-course-status2');
-        const input = document.getElementById('schoology-course-id');
-        const teacher = document.getElementById('schoology-course-teacher');
-
-        const index = input.value.indexOf('.schoology.com/course/');
-
-        if (index === -1) {
-            status.style.color = 'red';
-            status.innerHTML = 'Invalid Course Link!';
-            return;
-        }
-
-        let endIndex;
-        for (endIndex = index + 22; endIndex < input.value.length; endIndex++) {
-            if (isNaN(parseInt(input.value.charAt(endIndex)))) break;
-        }
-
-        if (endIndex - index < 1) {
-            status.style.color = 'red';
-            status.innerHTML = 'Invalid Course Link!';
-            return;
-        }
-
-        const id = input.value.substring(index, endIndex);
-
-        status.innerHTML;
-        status.innerHTML = 'Creating course...';
-
-        const xhttp = new XMLHttpRequest();
-        xhttp.open('POST', '/api/v1/internal/createSchoologyCourse', true);
-        xhttp.setRequestHeader('Content-type', 'application/json');
-        xhttp.addEventListener('load', schoologyCourseReq);
-        xhttp.send(
-            JSON.stringify({
-                link: input.value,
-                teacher: teacher.value
-            })
-        );
-    }
-
-    function schoologyCourseReq() {
-        const status = document.getElementById('create-course-status2');
-        if (this.responseText === '1') {
-            status.style.color = 'red';
-            status.innerHTML =
-                'You have not connected your schoology account! Please connect a schoology account to import courses from Schoology.';
-        } else {
-            status.style.color = 'green';
-            status.innerHTML = 'Course created!';
-        }
-    }
 
     function googleCourseReq() {
         const status = document.getElementById('create-course-status2');
@@ -644,23 +590,82 @@ window.addEventListener('load', () => {
         }
     }
 
-    function updateCanvasLink(link) {
-        document.getElementById('canvas-course-id').value = link;
-        document.getElementById('clist').style.display = 'none';
-        document.getElementById('canvas-create-course').style.display = 'block';
-    }
-
-    function updateGoogleLink(link, teacher) {
-        document.getElementById('google-course-id').value = link;
-        document.getElementById('google-course-teacher').value = teacher;
-        document.getElementById('glist').style.display = 'none';
-        document.getElementById('google-create-course').style.display = 'block';
-    }
-
-    function updateSchoologyLink(link) {
-        document.getElementById('schoology-course-id').value = link;
-        document.getElementById('slist').style.display = 'none';
-        document.getElementById('schoology-create-course').style.display = 'block';
-    }
-
 });
+
+function updateCanvasLink(link) {
+    document.getElementById('canvas-course-id').value = link;
+    document.getElementById('clist').style.display = 'none';
+    document.getElementById('canvas-create-course').style.display = 'block';
+}
+
+function updateGoogleLink(link, teacher) {
+    document.getElementById('google-course-id').value = link;
+    document.getElementById('google-course-teacher').value = teacher;
+    document.getElementById('glist').style.display = 'none';
+    document.getElementById('google-create-course').style.display = 'block';
+}
+
+function updateSchoologyLink(link) {
+    document.getElementById('schoology-course-id').value = link;
+    document.getElementById('slist').style.display = 'none';
+    document.getElementById('schoology-create-course').style.display = 'block';
+}
+
+function schoologyCourseReq() {
+    const status = document.getElementById('create-course-status2');
+    if (this.responseText === '1') {
+        status.style.color = 'red';
+        status.innerHTML =
+            'You have not connected your schoology account! Please connect a schoology account to import courses from Schoology.';
+    } else {
+        status.style.color = 'green';
+        status.innerHTML = 'Course created!';
+    }
+}
+
+function importSchoology() {
+    let modal = document.getElementById('courseModal');
+    let screens = modal.getElementsByClassName('CoursePage');
+    screens[2].style.display = 'none';
+    screens[3].style.display = 'block';
+
+    const status = document.getElementById('create-course-status2');
+    const input = document.getElementById('schoology-course-id');
+    const teacher = document.getElementById('schoology-course-teacher');
+
+    const index = input.value.indexOf('.schoology.com/course/');
+
+    if (index === -1) {
+        status.style.color = 'red';
+        status.innerHTML = 'Invalid Course Link!';
+        return;
+    }
+
+    let endIndex;
+    for (endIndex = index + 22; endIndex < input.value.length; endIndex++) {
+        if (isNaN(parseInt(input.value.charAt(endIndex)))) break;
+    }
+
+    if (endIndex - index < 1) {
+        status.style.color = 'red';
+        status.innerHTML = 'Invalid Course Link!';
+        return;
+    }
+
+    const id = input.value.substring(index, endIndex);
+
+    status.innerHTML;
+    status.innerHTML = 'Creating course...';
+
+    const xhttp = new XMLHttpRequest();
+    xhttp.open('POST', '/api/v1/internal/createSchoologyCourse', true);
+    xhttp.setRequestHeader('Content-type', 'application/json');
+    xhttp.addEventListener('load', schoologyCourseReq);
+    xhttp.send(
+        JSON.stringify({
+            link: input.value,
+            teacher: teacher.value
+        })
+    );
+}
+

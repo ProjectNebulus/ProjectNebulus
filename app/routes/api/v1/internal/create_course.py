@@ -267,6 +267,9 @@ def create_schoology_course():
         )
 
     scgrades = sc.get_user_grades_by_section(sc.get_me()["id"], link)
+
+    scdiscussions = sc.get_discussions(section_id=link) \
+ \
     scevents = sc.get_section_events(link)
     for event in scevents:
         if event["type"] == "assignment":

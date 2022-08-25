@@ -14,11 +14,9 @@ secret = "59ccaaeb93ba02570b1281e1b0a90e18"
 
 
 async def import_schoology():
-    schoology = read.getSchoology(id=session["id"])
-
+    schoology = read.getSchoology(username=session["username"])
     if len(schoology) == 0:
         return "1"
-
     schoology = schoology[0]
     key = schoology.apikey
     secret = schoology.apisecret
@@ -33,8 +31,9 @@ async def import_schoology():
         access_token=schoology.Schoology_access_token,
         access_token_secret=schoology.Schoology_access_secret,
     )
-    auth.request_authorization(callback_url=(request.url_root + "/api/v1/internal/schoology-callback"))
-    auth.authorize()
+    auth.request_authorization(callback_url=(request.url_root + "/closeSchoology"))
+    while not auth.authorized:
+        auth.authorize()
     sc = schoolopy.Schoology(auth)
     sc.limit = 1000
     sections = sc.get_user_sections(sc.get_me()["id"])
@@ -177,20 +176,19 @@ async def import_schoology():
 @internal.route("/get-schoology", methods=["POST"])
 def user_connect_to_schoology_route():
     print(request.form)
-    key = request.form.get("key")
-    secret = request.form.get("secret")
-
-    if not key or not secret:
-        return "error", 500
-
-    session["key"] = key
-    session["secret"] = secret
+    key = ""
+    secret = ""
+    if request.form.get("key") != None or request.form.get("key") != "":
+        session["key"] = request.form.get("key")
+        key = request.form.get("key")
+    if request.form.get("secret") != None or request.form.get("secret") != "":
+        session["secret"] = request.form.get("secret")
+        secret = request.form.get("secret")
     session["link"] = request.form.get("link")
-
     auth = schoolopy.Auth(
         key, secret, three_legged=True, domain=request.form.get("link")
     )
-    return auth.request_authorization(callback_url=request.url_root + "/api/v1/internal/schoology-callback")
+    return auth.request_authorization(callback_url=request.url_root + "/closeSchoology")
 
 
 @internal.route("/connect-to-schoology", methods=["POST"])
