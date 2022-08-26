@@ -1,4 +1,6 @@
-from mongoengine import ListField, ReferenceField, StringField, ValidationError
+from datetime import datetime
+
+from mongoengine import ListField, ReferenceField, StringField, ValidationError, DateTimeField
 
 from .Snowflake import Snowflake
 
@@ -24,10 +26,15 @@ class Folder(Snowflake):
 
     meta = {"collection": "Folders"}
     name = StringField(required=True)
-    course = ReferenceField("Course", required=False)
-    parent = ReferenceField("Folder", required=False)
+    description = StringField(default="", null=True)
+    create_date = DateTimeField(default=lambda: datetime.now)
+    course = ReferenceField("Course", required=True)
+    parent = ReferenceField("Folder", required=True)  # 0 if it's in the course, not any folder
     subfolders = ListField(ReferenceField("Folder", required=False))
+    discussions = ListField(ReferenceField("Discussion"))
+    nebdocs = ListField(ReferenceField("NebulusDocument"))
     documents = ListField(ReferenceField("DocumentFile"), required=False)
+
     color = StringField(validation=validate_color, required=False)
 
     def clean(self):

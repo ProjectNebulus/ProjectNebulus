@@ -183,7 +183,6 @@ def create_canvas_course():
 
 @internal.route("/createSchoologyCourse", methods=["GET", "POST"])
 def create_schoology_course():
-    # post_data = request.form
     post_data = request.json
     print("Request Recieved `/createSchoologyCourse`")
     if request.method == "GET":
@@ -214,11 +213,7 @@ def create_schoology_course():
     while not auth.authorized:
         auth.authorize()
     sc = schoolopy.Schoology(auth)
-    sc.limit = 1000
-    # sec = sc.get_section(section_id=link)
-    # print("Courses:",
-    #       *(f'{sec["course_title"]}: {sec["section_title"]}' for sec in sc.get_user_sections(sc.get_me()["id"])),
-    #       sep="\n")
+    sc.limit = 10000
     section = dict(sc.get_section(link))
 
     print(section)
@@ -268,8 +263,11 @@ def create_schoology_course():
 
     scgrades = sc.get_user_grades_by_section(sc.get_me()["id"], link)
 
-    scdiscussions = sc.get_discussions(section_id=link) \
- \
+    scdiscussions = sc.get_discussions(section_id=link)
+    for i in range(0, len(scdiscussions)):
+        scdiscussion = scdiscussions[i]
+        scdiscussionreplies = sc.get_discussion_replies(section_id=link, discussion_id=scdiscussion["id"])
+
     scevents = sc.get_section_events(link)
     for event in scevents:
         if event["type"] == "assignment":
@@ -305,6 +303,7 @@ def create_schoology_course():
                     "imported_id": str(event["id"]),
                 }
             )
+    folders = []
 
     scdocuments = sc.get_section_documents(link)
 
@@ -337,7 +336,6 @@ def create_schoology_course():
             sc, scdocument["attachments"]["files"]["file"][0]["download_path"]
         )
 
-        # upload_file_link(document["attachments"])
         filename = link.split("/")[-1]
         mongo_document = create.createDocumentFile(
             {
