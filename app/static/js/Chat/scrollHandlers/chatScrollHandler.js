@@ -1,4 +1,6 @@
 import replaceURLs from '../messageProcessing/replaceURLs.js';
+import timeDiff from "../timeUtils/timeDiff.js";
+import formatTime from "../timeUtils/formatTime.js";
 
 function chatScrollHandler() {
         console.log('chat is scrolling');
