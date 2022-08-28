@@ -16,7 +16,7 @@ def update_unread(data, user_id):
 
 
 def schoologyLogin(_id: str, schoology: dict):
-    from .read import find_user
+    from app.static.python.mongodb.read.read import find_user
 
     user = find_user(pk=_id)
     if not user:
@@ -28,7 +28,7 @@ def schoologyLogin(_id: str, schoology: dict):
 
 
 def createPlanner(_id: str, planner: dict):
-    from .read import find_user
+    from app.static.python.mongodb.read.read import find_user
 
     user = find_user(pk=_id)
     if not user:
@@ -41,7 +41,7 @@ def createPlanner(_id: str, planner: dict):
 
 
 def logout_from_schoology(_id: str, schoology_obj: Schoology):
-    from .read import find_user
+    from app.static.python.mongodb.read.read import find_user
 
     user = find_user(id=_id)
     if not user:
@@ -56,7 +56,7 @@ def resolve_updated_object(obj, attr, value):
 
 
 def savePlanner(data: dict, user_id):
-    from .read import find_user
+    from app.static.python.mongodb.read.read import find_user
 
     user = find_user(id=user_id)
 
@@ -73,7 +73,7 @@ def savePlanner(data: dict, user_id):
 
 
 def saveConfig(configs: list, user_id):
-    from .read import find_user
+    from app.static.python.mongodb.read.read import find_user
 
     user = find_user(id=user_id)
 
@@ -87,7 +87,7 @@ def saveConfig(configs: list, user_id):
 
 
 def changeNebulusDocument(_id: str, document: dict):
-    from .read import find_user
+    from app.static.python.mongodb.read.read import find_user
 
     user = find_user(pk=_id)
     if not user:
@@ -100,7 +100,7 @@ def changeNebulusDocument(_id: str, document: dict):
 
 
 def changeCourse(course_id, course_name, course_teacher):
-    from .read import find_courses
+    from app.static.python.mongodb.read.read import find_courses
 
     course = find_courses(course_id)
     course.name = course_name

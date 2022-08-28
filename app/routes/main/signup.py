@@ -3,8 +3,7 @@ import datetime
 from flask import redirect, render_template, session
 
 from app.static.python.mongodb import read
-
-from ...static.python.mongodb.read import getText
+from app.static.python.mongodb.read.read import getText
 from . import main_blueprint, utils
 
 

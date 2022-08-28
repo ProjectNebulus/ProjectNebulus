@@ -6,8 +6,7 @@ from googleapiclient.discovery import build
 from markupsafe import Markup
 
 from app.static.python.mongodb import read
-
-from ...static.python.mongodb.read import getText
+from app.static.python.mongodb.read.read import getText
 from . import main_blueprint, utils
 from .utils import logged_in
 
@@ -67,7 +66,7 @@ def app():
     events = read.sort_user_events(session["id"])
 
     return render_template(
-        "learning/app.html",
+        "learning/../../templates/user/app.html",
         user=session["username"],
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
@@ -128,14 +127,14 @@ def courses():
         if schoology:
             schoology = schoology[0]
             key = (
-                schoology.apikey
-                or session.get("request_token")
-                or "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
+                    schoology.apikey
+                    or session.get("request_token")
+                    or "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
             )
             secret = (
-                schoology.apisecret
-                or session.get("request_token_secret")
-                or "59ccaaeb93ba02570b1281e1b0a90e18"
+                    schoology.apisecret
+                    or session.get("request_token_secret")
+                    or "59ccaaeb93ba02570b1281e1b0a90e18"
             )
 
             auth = schoolopy.Auth(
@@ -155,10 +154,10 @@ def courses():
             for i in range(0, len(scCourses)):
                 scCourses[i] = dict(scCourses[i])
                 scCourses[i]["link"] = (
-                    schoology.schoologyDomain
-                    + "course/"
-                    + scCourses[i]["id"]
-                    + "/materials"
+                        schoology.schoologyDomain
+                        + "course/"
+                        + scCourses[i]["id"]
+                        + "/materials"
                 )
             scSchool = sc.get_school(scCourses[0]["school_id"])
             scCourses.append(scSchool)
@@ -168,7 +167,7 @@ def courses():
         scCourses = []
 
     return render_template(
-        "courses.html",
+        "learning/courses.html",
         user=session["username"],
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),

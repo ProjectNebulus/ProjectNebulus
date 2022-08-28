@@ -6,7 +6,7 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 
-from ...static.python.mongodb.read import getText
+from app.static.python.mongodb.read.read import getText
 from . import main_blueprint
 
 
@@ -31,7 +31,7 @@ def schoology():
 
     # Open OAuth authorization webpage. Give time to authorize.
     return render_template(
-        "connections/connectSchoology.html",
+        "user/connections/connectSchoology.html",
         url=url,
         translate=getText,
     )
@@ -75,7 +75,7 @@ def g_classroom_auth():
     print(user_info)
     user_info = [user_info["name"], user_info["picture"]]
     return render_template(
-        "connections/connectClassroom.html",
+        "user/connections/connectClassroom.html",
         link=creds,
         data=user_info,
         translate=getText,

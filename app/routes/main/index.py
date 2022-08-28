@@ -2,9 +2,9 @@ from pathlib import Path
 
 from flask import redirect, render_template, request, send_file, session
 
-from ...static.python.mongodb.read import getText
-from .. import babel
+from app.static.python.mongodb.read.read import getText
 from . import main_blueprint
+from .. import babel
 
 
 @babel.localeselector
@@ -125,7 +125,7 @@ def international(country):
 @main_blueprint.route("/scheduler")
 def scheduler():
     return render_template(
-        "scheduler.html",
+        "learning/tools/scheduler.html",
         user=session.get("username"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
@@ -137,7 +137,7 @@ def scheduler():
 @main_blueprint.route("/study-planner")
 def studyplanner():
     return render_template(
-        "study-planner.html",
+        "learning/tools/study-planner.html",
         user=session.get("username"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
@@ -149,7 +149,7 @@ def studyplanner():
 @main_blueprint.route("/lunch")
 def lunchplanner():
     return render_template(
-        "lunch.html",
+        "learning/tools/lunch.html",
         user=session.get("username"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
@@ -161,7 +161,7 @@ def lunchplanner():
 @main_blueprint.route("/vacation")
 def vacationmode():
     return render_template(
-        "vacation.html",
+        "learning/tools/vacation.html",
         user=session.get("username"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
@@ -173,7 +173,7 @@ def vacationmode():
 @main_blueprint.route("/extra-curricular")
 def extracurricular():
     return render_template(
-        "extra-curricular.html",
+        "learning/tools/extra-curricular.html",
         user=session.get("username"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
@@ -185,7 +185,7 @@ def extracurricular():
 @main_blueprint.route("/analysis")
 def analysis():
     return render_template(
-        "analysis.html",
+        "learning/tools/analysis.html",
         user=session.get("username"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
@@ -197,7 +197,7 @@ def analysis():
 @main_blueprint.route("/blog")
 def blog():
     return render_template(
-        "blog.html",
+        "main/blog.html",
         user=session.get("username"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
@@ -221,7 +221,7 @@ def upgrade():
 @main_blueprint.route("/support")
 def support():
     return render_template(
-        "support.html",
+        "main/support.html",
         user=session.get("username"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),

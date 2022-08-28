@@ -6,32 +6,30 @@ from flask_cors import cross_origin
 
 from app.static.python.classes import Course, User
 from app.static.python.mongodb import create, read
-
-from ...static.python.mongodb.read import getText
+from app.static.python.mongodb.read.read import getText
 from . import main_blueprint, utils
 from .utils import logged_in, private_endpoint
 
 
 @main_blueprint.route("/course/<id>")
 def course_home(**kwargs):
-    return course_page("course", id=kwargs["id"])
+    return course_page("course", id=kwargs["id"], translate=getText)
 
 
 @main_blueprint.route("/course/<id>/<page>")
 @logged_in
 def course_page(page, **kwargs):
-    user = User.objects(id=session["id"])[0]
+    user = User.objects(username=session.get("username"))[0]
     course_id = kwargs["id"]
     course = Course.objects(pk=course_id)[0]
-    if user.id not in [u.id for u in course.authorizedUsers]:
+    if user not in course.authorizedUsers:
         return (
             render_template(
                 "errors/404.html",
                 page="404 Not Found",
                 user=session.get("username"),
                 email=session.get("email"),
-                avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-                translate=getText,
+                avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"), translate=getText
             ),
             404,
         )
@@ -43,11 +41,28 @@ def course_page(page, **kwargs):
         iframeSrc += page + "?iframe=true"
         page = "course"
 
+        return render_template(
+            f"courses/{page}.html",
+            today=datetime.date.today(),
+            page="Nebulus - " + course.name,
+            iframe=iframeSrc,
+            course=course,
+            course_id=course_id,
+            user=session.get("username"),
+            email=session.get("email"),
+            avatar=session.get("avatar", "/v3.gif"),
+            disableArc=(page != "course"),
+            events=[],
+            # read.sort_course_events(session["id"], int(course_id))[1],d.sort_course_events(session["id"], int(course_id))[1],
+            strftime=utils.strftime,
+            read=read,
+            translate=getText,
+        )
     return render_template(
         f"courses/{page}.html",
         today=datetime.date.today(),
         page="Nebulus - " + course.name,
-        src=iframeSrc,
+        iframe=iframeSrc,
         course=course,
         course_id=course_id,
         user=session.get("username"),
@@ -77,7 +92,7 @@ def getResource(courseID, documentID):
         filter(lambda c: c.id == courseID, read.get_user_courses(session["id"]))
     )
     if not len(courses) or not len(
-            [user for user in courses[0].authorizedUsers if user.id == session["id"]]
+        [user for user in courses[0].authorizedUsers if user.id == session["id"]]
     ):
         return render_template("errors/404.html"), 404
 

@@ -1,7 +1,7 @@
 import schoolopy
 from flask import render_template, request, session
 
-from ...static.python.mongodb.read import getText
+from app.static.python.mongodb.read.read import getText
 from . import main_blueprint
 from .utils import logged_in
 
@@ -22,7 +22,7 @@ def aschoology():
     session["access_token_secret"] = auth.access_token_secret
     session["access_token"] = auth.access_token
     return render_template(
-        "connections/connectSchoology.html",
+        "user/connections/connectSchoology.html",
         url=url,
         translate=getText,
     )

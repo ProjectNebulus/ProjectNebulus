@@ -112,7 +112,7 @@ def spotify_route():
     # Step 4. Signed in, display data
     spotify = spotipy.Spotify(auth_manager=auth_manager)
     return render_template(
-        "connections/connectSpotify.html", spotify=spotify, auth=False
+        "user/connections/connectSpotify.html", spotify=spotify, auth=False
     )
 
 

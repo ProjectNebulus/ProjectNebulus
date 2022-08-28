@@ -1,10 +1,26 @@
 from __future__ import annotations
 
 # from ..classes import *
-from .read import (Canvas, Chat, Community, Discord, GoogleClassroom,
-                   Schoology, Spotify, User, find_courses, find_user,
-                   get_announcement, getAssignment, getChat, getDocument,
-                   getEvent, getFolder, getGrades)
+from app.static.python.mongodb.read.read import (
+    Canvas,
+    Chat,
+    Community,
+    Discord,
+    GoogleClassroom,
+    Schoology,
+    Spotify,
+    User,
+    find_courses,
+    find_user,
+    get_announcement,
+    getAssignment,
+    getChat,
+    getDocument,
+    getEvent,
+    getFolder,
+    getGrades,
+)
+
 
 # from .read import getChat, getGrades, getEvent, getFolder, getDocument, getAssignment, get_announcement, find_user, find_courses
 

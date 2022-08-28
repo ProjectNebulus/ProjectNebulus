@@ -96,7 +96,7 @@ def recieve():
             session["discord_user"] = user
             session["discord_id"] = data[1]
 
-            return render_template("connections/connectDiscord.html", data=data)
+            return render_template("user/connections/connectDiscord.html", data=data)
 
         except Exception as e:
             print(e)

@@ -1,8 +1,7 @@
 from flask import render_template, session
 
 from app.static.python.mongodb import read
-
-from ...static.python.mongodb.read import getText
+from app.static.python.mongodb.read.read import getText
 from . import main_blueprint
 
 
@@ -10,11 +9,11 @@ from . import main_blueprint
 def docs():
     docs = read.get_user_docs(session["id"])
     return render_template(
-        "tools/docs.html",
+        "learning/tools/docs.html",
         user=session.get("username"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         translate=getText,
-        docs=docs,
+        docs=docs
     )
 
 
@@ -54,7 +53,7 @@ def notepad():
     # # print(user_notepad[courses[0].name])
     # print(user_notepad[courses[0].id])
     return render_template(
-        "tools/notepad.html",
+        "learning/tools/notepad.html",
         page="Nebulus - Notepad",
         user=session.get("username"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
@@ -62,7 +61,7 @@ def notepad():
         fonts=fonts,
         translate=getText,
         courses=courses,
-        notepad=user_notepad,
+        notepad=user_notepad
     )
 
 
@@ -103,7 +102,7 @@ def document(id):
         content = document["content"]
         title = document["title"]
         return render_template(
-            "tools/document.html",
+            "learning/tools/document.html",
             page="Nebulus - Notepad",
             user=session.get("username"),
             avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
