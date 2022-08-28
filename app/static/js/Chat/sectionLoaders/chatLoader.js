@@ -53,36 +53,34 @@ function getChat(chatID) {
             chat_el.insertAdjacentHTML('beforeend', chatContent);
             chatContent = ``;
 
-            if (chat['messages'].length === 0)
-                return;
 
+            if (chat["messages"].length > 0) {
+                chat['messages'].forEach(function (message, index) {
+                    let l = message['content'].match(/<img src="https:\/\/twemoji.maxcdn.com/g);
 
-            chat['messages'].forEach(function (message, index) {
-                let l = message['content'].match(/<img src="https:\/\/twemoji.maxcdn.com/g);
+                    if (!(l)) {
+                        l = 0;
+                    } else {
+                        l = l.length;
+                    }
 
-                if (!(l)){
-                    l = 0;
-                } else {
-                    l = l.length;
-                }
+                    if (l === 1 && message['content'].slice(-1) === '>') {
+                        message['content'] = message['content'].slice(0, -7) + 'w-10 h-10">';
+                    }
+                    message['content'] = replaceURLs(message['content'], message['id']);
+                    message['content'] = message['content'].replace('<br>', '');
+                    let prevMessage;
+                    if (index > 0) {
+                        prevMessage = chat['messages'][index - 1];
+                    } else {
+                        prevMessage = message;
+                    }
 
-                if (l === 1 && message['content'].slice(-1) === '>'){
-                    message['content'] = message['content'].slice(0, -7)+'w-10 h-10">';
-                }
-                message['content'] = replaceURLs(message['content'], message['id']);
-                message['content'] = message['content'].replace('<br>', '');
-                let prevMessage;
-                if (index > 0) {
-                    prevMessage = chat['messages'][index - 1];
-                } else {
-                    prevMessage = message;
-                }
+                    if (prevMessage['sender']['username'] !== message['sender']['username'] || timeDiff(prevMessage, message) || index === 0) {
 
-                if (prevMessage['sender']['username'] !== message['sender']['username'] || timeDiff(prevMessage, message) || index === 0) {
-
-                    prevMessage['send_date'] = formatTime(prevMessage['send_date']);
-                    prevMessage['content'] = prevMessage['content'].replace('<br>', '');
-                    chatContent += `
+                        prevMessage['send_date'] = formatTime(prevMessage['send_date']);
+                        prevMessage['content'] = prevMessage['content'].replace('<br>', '');
+                        chatContent += `
                     <div class="flex mb-1 items-top space-x-4 mt-6 hover:bg-gray-100/50 dark:hover:bg-gray-700/50">
                         <img class="mt-1 w-10 h-10 rounded-full" data-dropdown-toggle="user_${prevMessage['sender']['username']}"
                              src="${prevMessage["sender"]["avatar"]["avatar_url"]}"
@@ -95,13 +93,13 @@ function getChat(chatID) {
                             <div id="content_${prevMessage['id']}" class="message text-sm text-gray-500 dark:text-gray-400 " style="margin-left:1.5px;">${prevMessage['content']}</div>
                         </div>
                     </div>`;
-                } else {
-                    chatContent += `<div class="group flex flex-row hover:bg-gray-100/50 dark:hover:bg-gray-700/50"><div class="opacity-0 text-gray-600 uppercase mr-2 group-hover:opacity-100" style="margin-top:3px;font-size:10px;width:50px;">
+                    } else {
+                        chatContent += `<div class="group flex flex-row hover:bg-gray-100/50 dark:hover:bg-gray-700/50"><div class="opacity-0 text-gray-600 uppercase mr-2 group-hover:opacity-100" style="margin-top:3px;font-size:10px;width:50px;">
         ${formatTime(message['send_date'], true)}</div> <div id="content_${message['id']}" class="message text-sm text-gray-500 dark:text-gray-400  mr-2">${message['content']}</div>`;
-                }
+                    }
 
-                if (!dropdowns.includes(message["sender"]["username"])) {
-                    chatContent += `
+                    if (!dropdowns.includes(message["sender"]["username"])) {
+                        chatContent += `
                         <div id="user_${message['sender']['username']}" class="z-50 hidden bg-white divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600 rounded-lg block" data-popper-placement="bottom" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 215px, 0px);">
                             <div style="border-radius:10px 10px 0 0; height:60px;background:rgba(191, 198, 205);"></div>
                             <div class="px-4 py-3 text-xl text-gray-900 dark:text-white border-b border-l">
@@ -119,11 +117,12 @@ function getChat(chatID) {
                                 </div>
                             </div>
                         </div>`;
-                    dropdowns.push(message["sender"]["username"]);
-                }
-                chat_el.insertAdjacentHTML('beforeend', chatContent);
-                chatContent = ``;
-            });
+                        dropdowns.push(message["sender"]["username"]);
+                    }
+                    chat_el.insertAdjacentHTML('beforeend', chatContent);
+                    chatContent = ``;
+                });
+            }
 
 
             let other_color;
