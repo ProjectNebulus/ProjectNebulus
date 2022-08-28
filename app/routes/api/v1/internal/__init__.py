@@ -29,6 +29,7 @@ from .create_integration import *
 from .create_schoology_course import *
 from .create_user import *
 from .delete_course import *
+from .delete_file import *
 from .delete_user import *
 from .email_exists import *
 from .file_upload import *

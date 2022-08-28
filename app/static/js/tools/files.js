@@ -1,3 +1,32 @@
+let override = false;
+
+function deleteMaterial(delete_button) {
+    override = true;
+
+    const mainElement = delete_button.parentElement.parentElement;
+    if (!confirm("Delete " + mainElement.querySelector("div.text-sm span.mr-8").innerText + "?")) return;
+
+    const contents = mainElement.getAttribute("onclick").split("/").slice(2, 4);
+    contents[1] = contents[1].replace("', true)", "");
+
+    const request = $.ajax({
+        type: 'POST',
+        url: '/api/v1/internal/delete-file',
+        contentType: 'application/json',
+        data: JSON.stringify({course_id: contents[0], document_id: contents[1]})
+    });
+    request.done((data) => {
+        if (data !== "success")
+            alert("The material was not found.");
+        else
+            mainElement.remove();
+    });
+    request.fail(() => alert("An error occurred while deleting the material."));
+}
+
+for (const action of document.querySelectorAll(".edit-controls span"))
+    action.classList.add("hover:bg-gray-200", "dark:hover:bg-gray-700", "p-2")
+
 addHTML();
 
 // pdf viewer
@@ -11,6 +40,11 @@ let currentPageNum = 1;
 
 // events
 function startFile(file, link, isPDF) {
+    if (override) {
+        override = false;
+        return;
+    }
+
     document.getElementById('breadcrumy').innerHTML =
         document.getElementById('breadcrumy').innerHTML +
         `

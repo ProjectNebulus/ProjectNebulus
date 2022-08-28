@@ -1,17 +1,6 @@
-const sidebar = document.getElementById("floatbar");
-let override = false;
-sidebar.style.height = "calc(100%-" + document.getElementById("navbar").getBoundingClientRect().height + "px)";
-sidebar.onclick = () => {
-    sidebar.classList.toggle("expanded");
-    override = true;
-};
+sidebar = document.querySelector("aside:not(#sidebar_)");
 
-document.addEventListener("click", (ev) => {
-    if (!override)
-        sidebar.classList.remove("expanded");
-    override = false;
-});
-const sidebarLinks = document.getElementsByClassName('space-y-2')[1].getElementsByTagName('a');
+let sidebarLinks = sidebar.getElementsByTagName('a');
 
 for (const a of sidebarLinks) {
     a.href += '?iframe=true';

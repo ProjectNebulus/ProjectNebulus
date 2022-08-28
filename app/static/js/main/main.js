@@ -1,4 +1,10 @@
 const siteName = window.location.protocol + '//' + window.location.host;
+const startLoad = Date.now();
+let loadTime;
+window.addEventListener("load", () => {
+    loadTime = Date.now() - startLoad;
+    console.log(loadTime);
+});
 
 setInterval(changeFavicon, 3000);
 Array.prototype.insert = (index, item) => this.splice(index, 0, item);

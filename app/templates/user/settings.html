@@ -1571,8 +1571,7 @@
                                 height: 90px;
                                 width: 90px;
                                 border-radius: 10px;
-                                margin: 5px;
-                                margin-left: 30px;">
+                                margin: 5px 5px 5px 30px;">
                         <span style=" margin: 15px; font-size: 1.5em; "><i class="material-icons">close</i></span>
                         <img class=" w-6 h-6 mr-2 -ml-1"
                              src="http://localhost:8080/static/images/NebulusSpecialLogo.png"
@@ -1606,7 +1605,7 @@
                         <div id="step1">
                             <h1 class="text-black dark:text-white text-3xl">
                             <span class="text-5xl"
-                                  style="background: linear-gradient(to bottom right, #ffff80, #ffc3bf,  #ffc3bf, #e959ff,  transparent); color: transparent; background-clip: text; background-clip: text; -webkit-background-clip: text; color: transparent; ">Step 1.</span>
+                                  style="background: linear-gradient(to bottom right, #ffff80, #ffc3bf,  #ffc3bf, #e959ff,  transparent); color: transparent; background-clip: text; -webkit-background-clip: text; color: transparent; ">Step 1.</span>
                                 Login to your Schoology Account Normally
                             </h1>
                             <br>
@@ -1657,7 +1656,7 @@
                         <div id="step2" style="display:none;">
                             <h1 class="text-black dark:text-white text-3xl">
                             <span class="text-5xl"
-                                  style=" background: linear-gradient(to bottom right, #ffff80, #ffc3bf,  #ffc3bf, #e959ff,  transparent); color: transparent; background-clip: text; background-clip: text; -webkit-background-clip: text; color: transparent; ">Step 2.</span>
+                                  style=" background: linear-gradient(to bottom right, #ffff80, #ffc3bf,  #ffc3bf, #e959ff,  transparent); color: transparent; background-clip: text; -webkit-background-clip: text; color: transparent; ">Step 2.</span>
                                 Paste your Schoology Link
                             </h1>
                             <p class="text-black dark:text-white mt-8">
@@ -1742,7 +1741,7 @@
                         <div id="step3" style="display:none;">
                             <h1 class="text-black dark:text-white text-3xl">
                             <span class="text-5xl"
-                                  style=" background: linear-gradient(to bottom right, #ffff80, #ffc3bf,  #ffc3bf, #e959ff,  transparent); color: transparent; background-clip: text; background-clip: text; -webkit-background-clip: text; color: transparent; ">Step 3.</span>
+                                  style=" background: linear-gradient(to bottom right, #ffff80, #ffc3bf,  #ffc3bf, #e959ff,  transparent); color: transparent; background-clip: text; -webkit-background-clip: text; color: transparent; ">Step 3.</span>
                                 Paste your API Key
                             </h1>
                             <p class="text-black dark:text-white my-8">
@@ -1807,7 +1806,7 @@
                         <div id="step4" style="display:none;">
                             <h1 class="text-black dark:text-white text-3xl">
                             <span class="text-5xl"
-                                  style=" background: linear-gradient(to bottom right, #ffff80, #ffc3bf,  #ffc3bf, #e959ff,  transparent); color: transparent; background-clip: text; background-clip: text; -webkit-background-clip: text; color: transparent; ">Step 4.</span>
+                                  style="background: linear-gradient(to bottom right, #ffff80, #ffc3bf,  #ffc3bf, #e959ff,  transparent); color: transparent; background-clip: text; -webkit-background-clip: text;">Step 4.</span>
                                 Launch Schoology
                             </h1>
                             <p class="text-black dark:text-white my-8">
@@ -1827,12 +1826,11 @@
                                     Something went wrong! Make sure you entered valid API credentials and clicked the
                                     "Approve" button in the popup.
                                 </div>
-                                <span style="color:red;display:none" id="error2">Login Failed. Reason: This Schoology account is already connected.</span>
+                                <span style="color:red;display:none" id="error2">This Schoology account is already connected!</span>
                             </div>
                             <div id="successconfirm" style="display: none;">
                                 <p class="text-2xl">
-                                    Successfully connected a Schoology account. The details are
-                                    below:
+                                    Successfully connected a Schoology account. The details are below:
                                 </p>
                                 <p>
                                     Name: <span id="name"></span>

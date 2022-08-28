@@ -33,7 +33,7 @@ async def import_schoology():
         access_token=schoology.Schoology_access_token,
         access_token_secret=schoology.Schoology_access_secret,
     )
-    auth.request_authorization(callback_url=(request.url_root + "/closeSchoology"))
+    auth.request_authorization(callback_url=(request.url_root + "/api/v1/internal/schoology-callback"))
     while not auth.authorized:
         auth.authorize()
     sc = schoolopy.Schoology(auth)
@@ -193,7 +193,7 @@ def user_connect_to_schoology_route():
     auth = schoolopy.Auth(
         key, secret, three_legged=True, domain=request.form.get("link")
     )
-    return auth.request_authorization(callback_url=request.url_root + "/closeSchoology")
+    return auth.request_authorization(callback_url=request.url_root + "/api/v1/internal/schoology-callback")
 
 
 @internal.route("/connect-to-schoology", methods=["POST"])

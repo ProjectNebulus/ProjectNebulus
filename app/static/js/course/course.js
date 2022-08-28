@@ -1,5 +1,5 @@
 let actions, pageTitle, createButton;
-window.onload = () => {
+window.addEventListener("click", () => {
     actions = document.getElementsByClassName('link');
     pageTitle = document.getElementById('page-title');
     createButton = document.getElementById('create');
@@ -81,4 +81,4 @@ window.onload = () => {
             alert(data);
         });
     });
-};
+});

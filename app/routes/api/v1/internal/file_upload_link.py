@@ -20,7 +20,6 @@ def allowed_file(filename):
 
 @internal.route("/upload_file_link", methods=["POST"])
 def upload_file_link():
-    print("arrived2")
     course = request.form.get("course")
     folder = request.form.get("folder")
     link = request.form.get("link")
@@ -29,8 +28,7 @@ def upload_file_link():
         mongo = create.createDocumentFile(
             {
                 "name": filename,
-                "url": "https://nebulus-cdn.sfo3.cdn.digitaloceanspaces.com/"
-                + filename,
+                "url": link,
                 "course": course,
             }
         )
@@ -38,8 +36,7 @@ def upload_file_link():
         mongo = create.createDocumentFile(
             {
                 "name": filename,
-                "url": "https://nebulus-cdn.sfo3.cdn.digitaloceanspaces.com/"
-                + filename,
+                "url": link,
                 "course": course,
                 "folder": folder,
             }
