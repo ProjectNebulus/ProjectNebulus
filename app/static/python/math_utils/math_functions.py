@@ -2,7 +2,7 @@ import math
 
 
 def pythagorean(a, b):
-    return math.sqrt(a**2 + b**2)
+    return math.sqrt(a ** 2 + b ** 2)
 
 
 def midpoint_formula(x1, y1, x2, y2):
@@ -14,7 +14,7 @@ def slope(x1, y1, x2, y2):
 
 
 def cube_volume(x):
-    return x**3
+    return x ** 3
 
 
 def overlap(a, b):
@@ -52,7 +52,7 @@ def choose(a, b):
 
 
 def exponent(a, b):
-    return a**b
+    return a ** b
 
 
 def square_root(a):

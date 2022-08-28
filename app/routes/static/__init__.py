@@ -11,3 +11,5 @@ static_blueprint = Blueprint(
 # Importing routes for this blueprint
 from .static_1layer import *
 from .static_2layer import *
+from .static_3layer import *
+from .static_4layer import *

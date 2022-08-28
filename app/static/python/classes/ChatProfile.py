@@ -1,10 +1,5 @@
-from mongoengine import (
-    BooleanField,
-    EmbeddedDocument,
-    ListField,
-    ReferenceField,
-    StringField,
-)
+from mongoengine import (BooleanField, EmbeddedDocument, ListField,
+                         ReferenceField, StringField)
 
 
 class ChatProfile(EmbeddedDocument):

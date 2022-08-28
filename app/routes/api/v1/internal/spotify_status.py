@@ -1,18 +1,12 @@
 from flask import request
 
-from app.routes.main.spotify import (
-    get_currently_playing,
-    loop1_spotify,
-    loop2_spotify,
-    loop_spotify,
-    next_spotify,
-    pause_spotify,
-    prev_spotify,
-    resume_spotify,
-    shuffle2_spotify,
-    shuffle_spotify,
-)
+from app.routes.main.spotify import (get_currently_playing, loop1_spotify,
+                                     loop2_spotify, loop_spotify, next_spotify,
+                                     pause_spotify, prev_spotify,
+                                     resume_spotify, shuffle2_spotify,
+                                     shuffle_spotify)
 from app.static.python.music.musixmatch import Musixmatch
+
 from . import internal
 
 
@@ -40,7 +34,9 @@ def spotify_status():
         # TODO: support advertisements, returns 500 currently
         name, artists2, album, explicit, image, playing, timestamp, total = song
         if explicit:
-            explicit = '<i class="material-icons" style="vertical-align: middle;">explicit</i>'
+            explicit = (
+                '<i class="material-icons" style="vertical-align: middle;">explicit</i>'
+            )
         else:
             explicit = ""
         artists = ""

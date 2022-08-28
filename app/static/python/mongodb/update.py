@@ -2,15 +2,8 @@ import datetime
 
 from flask import session
 
-from ..classes import (
-    Chat,
-    Community,
-    Message,
-    NebulusDocument,
-    Planner,
-    Schoology,
-    User
-)
+from ..classes import (Chat, Community, Message, NebulusDocument, Planner,
+                       Schoology, User)
 from ..classes.Notepad import Notepad
 from ..utils.security import hash256
 
@@ -258,6 +251,7 @@ def resetPassword(username: str, psw: str):
     session["avatar"] = user.avatar.avatar_url
     session["id"] = user.id
 
+
 def change_user_notepad(course_id, content, user_id):
     user = User.objects.get(pk=user_id)
     try:
@@ -265,10 +259,7 @@ def change_user_notepad(course_id, content, user_id):
         dictionary["data"][course_id] = content
         user.notepad = Notepad(dictionary)
     except:
-        dictionary = {"data": {
-            str(course_id): str(content)
-        }
-        }
+        dictionary = {"data": {str(course_id): str(content)}}
         user.notepad = Notepad(**dictionary)
 
     user.save(clean=False)

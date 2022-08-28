@@ -1,6 +1,7 @@
 from datetime import datetime
 
-from mongoengine import ListField, ReferenceField, StringField, ValidationError, DateTimeField
+from mongoengine import (DateTimeField, ListField, ReferenceField, StringField,
+                         ValidationError)
 
 from .Snowflake import Snowflake
 
@@ -29,7 +30,9 @@ class Folder(Snowflake):
     description = StringField(default="", null=True)
     create_date = DateTimeField(default=lambda: datetime.now)
     course = ReferenceField("Course", required=True)
-    parent = ReferenceField("Folder", required=True)  # 0 if it's in the course, not any folder
+    parent = ReferenceField(
+        "Folder", required=True
+    )  # 0 if it's in the course, not any folder
     subfolders = ListField(ReferenceField("Folder", required=False))
     discussions = ListField(ReferenceField("Discussion"))
     nebdocs = ListField(ReferenceField("NebulusDocument"))

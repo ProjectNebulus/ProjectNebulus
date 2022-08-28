@@ -7,6 +7,7 @@ from flask.json import jsonify
 from app.static.python.classes import Avatar, Chat, ChatProfile, User
 from app.static.python.mongodb import create, read
 from app.static.python.utils.security import hash256
+
 from . import internal
 
 
@@ -167,7 +168,12 @@ def search_within_user():
 
     for nebdoc in NebulusDocuments:
         everything.append(
-            ["NebDoc", nebdoc.title, nebdoc.content[0:100], "a"]  # type  # name  # description
+            [
+                "NebDoc",
+                nebdoc.title,
+                nebdoc.content[0:100],
+                "a",
+            ]  # type  # name  # description
         )
 
     for account in accounts:

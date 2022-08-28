@@ -26,10 +26,6 @@ if __name__ == "__main__":
         host = "localhost"
         protocol = ""
 
-
-
-
-
     print(str(app.url_map).replace("Map([", " ", 1).replace("])", "\n"), sep="\n")
     print(f"Started Running: http{protocol}://{host}:{port}")
     socketio.run(app, host=host, port=port, debug=debug)

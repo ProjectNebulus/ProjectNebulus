@@ -1,17 +1,10 @@
 import graphene
 
 from . import graphene_models as gm
-from .query_resolvers import (
-    resolve_announcement,
-    resolve_assignment,
-    resolve_course,
-    resolve_document,
-    resolve_event,
-    resolve_folder,
-    resolve_grades,
-    resolve_schoology,
-    resolve_user,
-)
+from .query_resolvers import (resolve_announcement, resolve_assignment,
+                              resolve_course, resolve_document, resolve_event,
+                              resolve_folder, resolve_grades,
+                              resolve_schoology, resolve_user)
 
 
 class Query(graphene.ObjectType):

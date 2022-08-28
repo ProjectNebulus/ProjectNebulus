@@ -6,9 +6,10 @@ from flask_cors import cross_origin
 
 from app.static.python.classes import Course, User
 from app.static.python.mongodb import create, read
+
+from ...static.python.mongodb.read import getText
 from . import main_blueprint, utils
 from .utils import logged_in, private_endpoint
-from ...static.python.mongodb.read import getText
 
 
 @main_blueprint.route("/course/<id>")
@@ -29,7 +30,8 @@ def course_page(page, **kwargs):
                 page="404 Not Found",
                 user=session.get("username"),
                 email=session.get("email"),
-                avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"), translate=getText
+                avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+                translate=getText,
             ),
             404,
         )

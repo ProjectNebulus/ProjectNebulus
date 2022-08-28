@@ -55,7 +55,7 @@ def create_nebulusdoc(data: dict) -> NebulusDocument:
     if not data.get("authorizedUsers"):
         doc.authorizedUsers.append(user)
     if not data.get("owner"):
-        doc.owner = (user)
+        doc.owner = user
     doc.save(force_insert=True, validate=False)
     return doc.id
 

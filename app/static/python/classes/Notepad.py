@@ -1,9 +1,4 @@
-from mongoengine import (
-    DateTimeField,
-    DictField,
-    EmbeddedDocument,
-    StringField,
-)
+from mongoengine import DateTimeField, DictField, EmbeddedDocument, StringField
 
 
 class Notepad(EmbeddedDocument):

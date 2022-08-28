@@ -1,4 +1,4 @@
-from mongoengine import StringField, ListField, EmbeddedDocument
+from mongoengine import EmbeddedDocument, ListField, StringField
 
 
 class DiscussionMessage(EmbeddedDocument):

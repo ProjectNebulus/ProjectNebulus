@@ -1,13 +1,7 @@
 from datetime import datetime
 
-from mongoengine import (
-    BooleanField,
-    DateTimeField,
-    EmbeddedDocumentField,
-    ListField,
-    ReferenceField,
-    StringField,
-)
+from mongoengine import (BooleanField, DateTimeField, EmbeddedDocumentField,
+                         ListField, ReferenceField, StringField)
 
 from ..mongodb import read
 from .Avatar import Avatar

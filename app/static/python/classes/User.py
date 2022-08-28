@@ -1,15 +1,8 @@
 from datetime import datetime
 
-from mongoengine import (
-    BooleanField,
-    DateTimeField,
-    EmailField,
-    EmbeddedDocumentField,
-    IntField,
-    ListField,
-    ReferenceField,
-    StringField,
-)
+from mongoengine import (BooleanField, DateTimeField, EmailField,
+                         EmbeddedDocumentField, IntField, ListField,
+                         ReferenceField, StringField)
 
 from .Avatar import Avatar
 from .Calendar import Calendar
@@ -96,5 +89,5 @@ class User(Snowflake):
 
         if "static/images/nebulusCats" not in self.avatar.avatar_url:
             self.avatar.avatar_url = (
-                    "/static/images/nebulusCats" + self.avatar.avatar_url
+                "/static/images/nebulusCats" + self.avatar.avatar_url
             )

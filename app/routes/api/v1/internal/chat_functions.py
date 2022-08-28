@@ -1,6 +1,6 @@
 import datetime
-from datetime import timedelta
 import json
+from datetime import timedelta
 
 import flask
 import requests
@@ -51,9 +51,20 @@ regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 def user_status_change(data):
     print(data)
     if data["chatType"] == "chat":
+
         update.set_status(session["id"], data["status"])
+        offline = ""
+        status = ""
+        if data["status"] == "Online":
+            offline = False
+        elif data["status"] == "Offline":
+            offline = True
+        else:
+            status = data["status"]
+
         socketio.emit(
-            "user_status_change", {"status": data["status"], "userID": session["id"]}
+            "user_status_change",
+            {"status": status, "offline": offline, "userID": session["id"]},
         )
 
 
@@ -65,16 +76,17 @@ def new_message(json_data):
         json_data["sender"] = session["id"]
         json_data["content"] = json_data["content"].replace("\n", "<br>")
         chat = read.getChat(chatID)
-        send_date = datetime.datetime.fromisoformat(json_data['send_date'])
-        last = chat.messages[-1]
-        send_date2 = datetime.datetime.fromisoformat(last.send_date)
-        difference = max(send_date, send_date2) - min(send_date, send_date2)
-
-        group = False
-        if difference <= timedelta(minutes=10) and last.sender.id == session['id']:
-            group = True
+        send_date = datetime.datetime.fromisoformat(json_data["send_date"])
+        if not chat.messages:
+            group = False
+        else:
+            last = chat.messages[-1]
+            send_date2 = datetime.datetime.fromisoformat(last.send_date)
+            difference = max(send_date, send_date2) - min(send_date, send_date2)
+            group = False
+            if difference <= timedelta(minutes=10) and last.sender.id == session["id"]:
+                group = True
         message = create.sendMessage(json_data, chatID)
-
 
         members = json.loads(chat.to_json())["members"]
         for x, user in enumerate(chat.members):
@@ -93,10 +105,10 @@ def new_message(json_data):
                 "author": [sender.id, sender.username, sender.avatar.avatar_url],
                 "content": json_data["content"],
                 "id": message.id,
-                "send_date": json_data['send_date'],
+                "send_date": json_data["send_date"],
                 "chatID": chatID,
                 "members": members,
-                "group": group
+                "group": group,
             },
             room=chatID,
         )
@@ -422,10 +434,10 @@ def get_chat_status():
     else:
         data["status"] = user.chatProfile.status
 
-    data['statusText'] = user.chatProfile.text_status
-    data['username'] = user.username
-    data['avatar'] = user.avatar.avatar_url
-    print(data['status'])
+    data["statusText"] = user.chatProfile.text_status
+    data["username"] = user.username
+    data["avatar"] = user.avatar.avatar_url
+    print(data["status"])
 
     return data
 

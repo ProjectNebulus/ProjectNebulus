@@ -17,7 +17,9 @@ class Assignment(Snowflake):
     """
 
     meta = {"collection": "Assignments"}
-    author = ReferenceField("User", description="The user that created this assignment.")
+    author = ReferenceField(
+        "User", description="The user that created this assignment."
+    )
     course = ReferenceField(
         "Course", required=True, description="The course that this assignment is in."
     )

@@ -3,9 +3,11 @@ from datetime import datetime
 import schoolopy
 from flask import request, session
 
-from app.static.python.extensions.integrations.schoology import create_schoology_auth
-from app.static.python.mongodb import read, update, create
+from app.static.python.extensions.integrations.schoology import \
+    create_schoology_auth
+from app.static.python.mongodb import create, read, update
 from app.static.python.utils.colors import getColor
+
 from . import internal
 
 auth = None
@@ -101,7 +103,7 @@ async def import_schoology():
                         # "id": str(assignment["id"]),
                         "title": assignment["title"],
                         "description": assignment["description"]
-                                       + f"\n\nView On Schoology: {assignment['web_url']}",
+                        + f"\n\nView On Schoology: {assignment['web_url']}",
                         # "submitDate": assignment["dropbox_last_submission"],
                         "due": due,
                         # "course": str(course_obj.id),
@@ -144,7 +146,9 @@ async def import_schoology():
                 "extension"
             ]
             try:
-                document["upload_date"] = datetime.fromtimestamp(scdocument["timestamp"])
+                document["upload_date"] = datetime.fromtimestamp(
+                    scdocument["timestamp"]
+                )
             except:
                 print("can't find timestamp")
             document["course"] = str(course_obj.id)
@@ -166,7 +170,8 @@ async def import_schoology():
                 }
             )
             upload_file_link(
-                document["attachments"], f'{mongo_document.id}.{document["file_ending"]}'
+                document["attachments"],
+                f'{mongo_document.id}.{document["file_ending"]}',
             )
 
         print(document)

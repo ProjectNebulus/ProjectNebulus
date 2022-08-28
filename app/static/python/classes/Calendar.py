@@ -1,10 +1,5 @@
-from mongoengine import (
-    DateTimeField,
-    DictField,
-    EmbeddedDocument,
-    ListField,
-    StringField,
-)
+from mongoengine import (DateTimeField, DictField, EmbeddedDocument, ListField,
+                         StringField)
 
 
 class Calendar(EmbeddedDocument):

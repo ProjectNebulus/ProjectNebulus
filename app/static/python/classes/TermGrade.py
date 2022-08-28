@@ -43,9 +43,9 @@ def get_median(grades_list):
     grades_list.sort()
     if len(grades_list) % 2 == 0:
         return (
-                       grades_list[int(len(grades_list) / 2)]
-                       + grades_list[int(len(grades_list) / 2) - 1]
-               ) / 2
+            grades_list[int(len(grades_list) / 2)]
+            + grades_list[int(len(grades_list) / 2) - 1]
+        ) / 2
     return grades_list[int(len(grades_list) / 2)]
 
 

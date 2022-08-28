@@ -3,7 +3,8 @@ import json
 
 from flask import render_template, session
 
-from app.static.python.extensions.integrations.schoology import get_schoology_emails
+from app.static.python.extensions.integrations.schoology import \
+    get_schoology_emails
 from app.static.python.mongodb import read
 
 from ...static.python.mongodb.read import getText
