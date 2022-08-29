@@ -1,7 +1,7 @@
 function fetchStatus() {
     const request = $.ajax({
         type: 'POST',
-        url: '/api/v1/internal/spotify-status'
+        url: '/api/v1/internal/get/spotify'
     });
 
     request.done((data) => {

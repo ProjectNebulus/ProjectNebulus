@@ -24,7 +24,7 @@ def convert(secs):
     return f"{part1}:{part2}"
 
 
-@internal.route("/spotify-status", methods=["POST"])
+@internal.route("/get/spotify", methods=["POST"])
 def spotify_status():
     song = get_currently_playing()
     if song[0] == 1:

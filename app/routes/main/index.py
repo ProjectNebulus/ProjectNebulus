@@ -56,7 +56,7 @@ def tos():
 @main_blueprint.route("/select-a-region")
 def selectregion():
     return render_template(
-        "main/global/select-a-region.html",
+        "main/select-a-region.html",
         user=session.get("username"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
