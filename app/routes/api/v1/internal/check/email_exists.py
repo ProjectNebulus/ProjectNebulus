@@ -1,8 +1,7 @@
 from flask import request
 
+from app.routes.api.v1.internal import internal
 from app.static.python.classes.User import User
-
-from . import internal
 
 
 @internal.route("/email-exists", methods=["POST"])

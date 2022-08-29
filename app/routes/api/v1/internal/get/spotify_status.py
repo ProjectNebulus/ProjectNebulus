@@ -1,13 +1,12 @@
 from flask import request
 
+from app.routes.api.v1.internal import internal
 from app.routes.main.spotify import (get_currently_playing, loop1_spotify,
                                      loop2_spotify, loop_spotify, next_spotify,
                                      pause_spotify, prev_spotify,
                                      resume_spotify, shuffle2_spotify,
                                      shuffle_spotify)
 from app.static.python.music.musixmatch import Musixmatch
-
-from . import internal
 
 
 def convert(secs):

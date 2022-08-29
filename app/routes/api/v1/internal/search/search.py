@@ -1,9 +1,8 @@
 # TODO
 from flask import request, session
 
+from app.routes.api.v1.internal import internal
 from app.static.python.mongodb import read
-
-from . import internal
 
 
 @internal.route("/search-object", methods=["POST"])

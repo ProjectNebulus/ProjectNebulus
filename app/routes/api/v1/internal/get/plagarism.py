@@ -1,8 +1,7 @@
 from flask import request
 
+from app.routes.api.v1.internal import internal
 from app.static.python.extensions.custom.plagarism import daplagarism
-
-from . import internal
 
 
 @internal.route("/plagarism", methods=["POST"])

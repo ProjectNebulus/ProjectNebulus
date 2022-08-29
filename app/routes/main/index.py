@@ -2,7 +2,7 @@ from pathlib import Path
 
 from flask import redirect, render_template, request, send_file, session
 
-from app.static.python.mongodb.read.read import getText
+from app.static.python.mongodb.read import getText
 from . import main_blueprint
 from .. import babel
 

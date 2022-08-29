@@ -6,7 +6,7 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 
-from app.static.python.mongodb.read.read import getText
+from app.static.python.mongodb.read import getText
 from . import main_blueprint
 
 

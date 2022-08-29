@@ -1,7 +1,7 @@
 from flask import redirect, render_template, request, session
 
 from app.static.python.extensions.integrations.canvas import connectCanvas
-from app.static.python.mongodb.read.read import getText
+from app.static.python.mongodb.read import getText
 from . import main_blueprint
 from .utils import logged_in
 

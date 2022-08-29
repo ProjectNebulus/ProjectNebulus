@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 # from ..classes import *
-from app.static.python.mongodb.read.read import (
+from app.static.python.mongodb.read import (
     Canvas,
     Chat,
     Community,

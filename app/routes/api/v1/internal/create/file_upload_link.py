@@ -1,9 +1,8 @@
 from flask import Flask, request
 
+from app.routes.api.v1.internal import internal
 from app.static.python.cdn import utils
 from app.static.python.mongodb import create
-
-from . import internal
 
 UPLOAD_FOLDER = "app/static/"
 UPLOAD_FOLDER_CDN = "../"

@@ -6,7 +6,7 @@ from flask_cors import cross_origin
 
 from app.static.python.classes import Course, User
 from app.static.python.mongodb import create, read
-from app.static.python.mongodb.read.read import getText
+from app.static.python.mongodb.read import getText
 from . import main_blueprint, utils
 from .utils import logged_in, private_endpoint
 

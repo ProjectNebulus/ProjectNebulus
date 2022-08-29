@@ -1,7 +1,7 @@
 from flask import request, session
-
 from static.python.classes import DocumentFile, Course
-from . import internal
+
+from app.routes.api.v1.internal import internal
 
 
 @internal.route("/delete-file", methods=["POST"])
