@@ -1,8 +1,6 @@
 let override = false;
 
 function deleteMaterial(delete_button) {
-    override = true;
-
     const mainElement = delete_button.parentElement.parentElement;
     if (!confirm("Delete " + mainElement.querySelector("div.text-sm span.mr-8").innerText + "?")) return;
 
@@ -44,6 +42,8 @@ function startFile(file, link, isPDF) {
         override = false;
         return;
     }
+
+    document.getElementById('documentPage').style.display = 'none';
 
     document.getElementById('breadcrumy').innerHTML =
         document.getElementById('breadcrumy').innerHTML +

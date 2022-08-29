@@ -102,7 +102,7 @@ async def import_schoology():
                         # "id": str(assignment["id"]),
                         "title": assignment["title"],
                         "description": assignment["description"]
-                        + f"\n\nView On Schoology: {assignment['web_url']}",
+                                       + f"\n\nView On Schoology: {assignment['web_url']}",
                         # "submitDate": assignment["dropbox_last_submission"],
                         "due": due,
                         # "course": str(course_obj.id),
@@ -135,7 +135,6 @@ async def import_schoology():
             return rq.url  # rq["url"]
 
         documents = []
-        from .....static.python.cdn.utils import upload_file_link
 
         for scdocument in scdocuments:
             document = {}
@@ -168,13 +167,9 @@ async def import_schoology():
                     "imported_id": document["imported_id"],
                 }
             )
-            upload_file_link(
-                document["attachments"],
-                f'{mongo_document.id}.{document["file_ending"]}',
-            )
 
-        print(document)
-        documents.append(document)
+            print(document)
+            documents.append(document)
 
 
 @internal.route("/get-schoology", methods=["POST"])

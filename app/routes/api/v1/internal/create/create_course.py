@@ -316,7 +316,6 @@ def create_schoology_course():
         return rq.url  # rq["url"]
 
     documents = []
-    from .....static.python.cdn.utils import upload_file_link
 
     for scdocument in scdocuments:
         document = {}
@@ -345,9 +344,6 @@ def create_schoology_course():
                 "imported_from": "Schoology",
                 "imported_id": document["imported_id"],
             }
-        )
-        upload_file_link(
-            document["attachments"], f'{mongo_document.id}.{document["file_ending"]}'
         )
 
         print(document)

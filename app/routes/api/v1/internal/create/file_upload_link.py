@@ -23,8 +23,8 @@ def upload_file_link():
     folder = request.form.get("folder")
     link = request.form.get("link")
     filename = link.split("/")[-1]
-    if folder == "0":
-        mongo = create.createDocumentFile(
+    if not folder or folder == "0":
+        create.createDocumentFile(
             {
                 "name": filename,
                 "url": link,
@@ -32,7 +32,7 @@ def upload_file_link():
             }
         )
     else:
-        mongo = create.createDocumentFile(
+        create.createDocumentFile(
             {
                 "name": filename,
                 "url": link,
@@ -40,7 +40,5 @@ def upload_file_link():
                 "folder": folder,
             }
         )
-    status = utils.upload_file_link(link, mongo.id + filename.split(".")[-1])
-    print(status)
 
-    return str(status)
+    return "success", 200

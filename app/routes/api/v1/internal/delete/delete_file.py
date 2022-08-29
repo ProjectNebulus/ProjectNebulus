@@ -15,9 +15,10 @@ def deleteFile():
     file = DocumentFile.objects(id=data["document_id"])[0]
 
     if file not in course.documents:
-        return "not found", 404
+        return "not found", 403
 
-    file.course.documents.remove(file.id)
+    file.course.documents.remove(file)
+    file.course.save(validate=False)
     file.delete()
 
     return "success"

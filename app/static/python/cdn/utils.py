@@ -44,14 +44,5 @@ def upload_file(path, filename, bucket_folder):
     )
 
 
-def upload_file_link(url, file_name):
-    r = requests.get(url, allow_redirects=True)
-    open(file_name, "wb").write(r.content)
-    upload_file(file_name, file_name, "Documents")
-    compress(file_name)
-    os.remove(file_name)
-    return True
-
-
 def allowed_file(filename):
     return True
