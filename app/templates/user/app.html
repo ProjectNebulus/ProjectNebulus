@@ -6,7 +6,6 @@
             visibility: visible;
         }
     </style>
-
     {% include "utils/navbar.html" %}
     <div class="flex flex-row">
         {% include "utils/sidebar.html" %}
@@ -17,7 +16,9 @@
                      class="pl-8 pr-4 border-gray-200 dark:border-gray-700">
                     <div class="flex flex-row w-full mb-4">
                         <h1 class="text-xl text-black dark:text-white mt-5 ml-2 text-left uppercase "
-                            style="flex-grow: 1;">Recent Activity</h1>
+                            style="flex-grow: 1;">
+                            Recent Activity
+                        </h1>
                         <br>
                         <button class="p-1.5 hover:bg-blue-200 dark:hover:bg-gray-700 rounded-lg mt-5 text-black dark:text-white"
                                 aria-label="Filter Events"
@@ -45,37 +46,33 @@
                                         {{ strftime(date, "%a, %B %-d, %Y") }}
                                     </time>
                                     <br>
-                                    <div
-                                            style="grid-template-columns: repeat(auto-fit, 23rem)">
+                                    <div style="grid-template-columns: repeat(auto-fit, 23rem)">
                                         {% for j in range(list|length) %}
                                             {% set a = list[j] %}
-                                            <div class="expandable min-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg
-                                             shadow mb-4 dark:bg-gray-800/75 dark:text-gray-300 relative" role="alert"
+                                            <div class="expandable min-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg shadow mb-4 dark:bg-gray-800/75 dark:text-gray-300 relative"
+                                                 role="alert"
                                                  style="height: min-content">
-
-                                                <button class="absolute top-0 right-0 text-xl mt-2 mr-3 material-icons
-                                                 hover:bg-gray-50 dark:hover:bg-gray-600 px-1 rounded-lg expand invisible">
+                                                <button class="absolute top-0 right-0 text-xl mt-2 mr-3 material-icons hover:bg-gray-50 dark:hover:bg-gray-600 px-1 rounded-lg expand invisible">
                                                     open_in_new
                                                 </button>
-
                                                 {% if a.title != "" %}
-                                                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white
-                                                     truncate" title-element>{{ a.title }}</h4>
+                                                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white truncate"
+                                                        title-element>{{ a.title }}</h4>
                                                 {% endif %}
                                                 <div class="flex items-center mb-3">
                                                     <img data-dropdown-toggle="userDropdown-{{ i }}_{{ j }}"
-                                                         id="avatar{{ i }}_{{ j }}" image-element
+                                                         id="avatar{{ i }}_{{ j }}"
+                                                         image-element
                                                          data-dropdown-placement="bottom-start"
                                                          class="rounded-full ring-2 ring-gray-300 dark:ring-gray-500 cursor-pointer mb-3 rounded-full shadow-lg {% if "black" in avatar %} bg-gray-300 {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}
-                                                                 {% if a.title == "" %}
-                                                             w-8
-                                                             h-8
-                                                             mt-4
-                                                             {% else %}
-                                                             w-6
-                                                             h-6
-                                                             {% endif %}
-                                                             "
+                                                                 {% if a.title == "
+                                                         w-8
+                                                         h-8
+                                                         mt-4
+                                                         {% else %}
+                                                         w-6
+                                                         h-6
+                                                         {% endif %}
                                                          src="{{ a.author_pic }}"
                                                          alt="{{ a.author }}'s profile picture">
                                                     <br>
@@ -94,9 +91,8 @@
                                                                       data-dropdown-toggle="userDropdown-{{ i }}_{{ j }}">{{ a.author }}</span>
                                                                 <span class="text-lg">></span>
                                                             {% endif %}
-                                                            <span class="bg-gray-300 text-gray-800 text-xs font-normal
-                                                             uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600
-                                                              dark:text-gray-300 -mt-1" course-name-element>
+                                                            <span class="bg-gray-300 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300 -mt-1"
+                                                                  course-name-element>
                                                                 {{ a.course.name }}
                                                             </span>
                                                         </div>
@@ -105,9 +101,7 @@
                                                 <div class="flex items-center mb-3">
                                                     <div class="text-sm text-gray-900 dark:text-white font-normal">
                                                         <div class="text-sm text-gray-900 dark:text-white font-normal line-clamp-5"
-                                                             content-element>
-                                                            {{ fmt(a.content) }}
-                                                        </div>
+                                                             content-element>{{ fmt(a.content) }}</div>
                                                     </div>
                                                 </div>
                                                 <time class="text-xs font-medium text-blue-600 dark:text-blue-500">
@@ -119,8 +113,7 @@
                                             </div>
                                             <!-- Dropdown menu -->
                                             <div id="userDropdown-{{ i }}_{{ j }}"
-                                                 class="absolute hidden bg-gray-50 divide-y divide-gray-100 rounded
-                                                  shadow w-80 dark:bg-gray-700 dark:divide-gray-600">
+                                                 class="absolute hidden bg-gray-50 divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600">
                                                 <div style="border-radius:10px 10px 0 0;
                                                         height:60px;
                                                         background:{% if a.author_color %}rgba
@@ -128,7 +121,7 @@
                                                     {% if a.imported_from|lower == "schoology" %}
                                                         <div data-tooltip-target="tooltip-default-{{ i }}"
                                                              style="float:right;
-                                                                        margin:5px;">
+                                                                    margin:5px;">
                                                             <img alt="Schoology Image"
                                                                  src="/static/images/logos/schoology.png"
                                                                  class="w-5 h-5">
@@ -150,7 +143,8 @@
                                                                  class="w-24 h-24 rounded-full border-white dark:border-gray-700 {% if "black" in avatar %} bg-gray-300 {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}"
                                                                  alt="{{ a.author }}'s Profile Picture">
                                                             <span class="absolute  w-5 h-5 bg-green-400 border-2 border-white dark:border-gray-700 rounded-full"
-                                                                  style="left:90px;top:85px;"></span>
+                                                                  style="left:90px;
+                                                                         top:85px;"></span>
                                                         </div>
                                                         <div>{{ a.author }}</div>
                                                         {% if a.author_email %}
@@ -184,8 +178,8 @@
                                     </time>
                                     <br>
                                     <div class="grid grid-cols-4 gap-2 pt-2">
-                                        <div role="alert" class="w-full max-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg
-                                         shadow dark:bg-gray-800/75 dark:text-gray-300  relative">
+                                        <div role="alert"
+                                             class="w-full max-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg shadow dark:bg-gray-800/75 dark:text-gray-300  relative">
                                             <h4 class="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2 truncate">
                                                 Welcome to Nebulus</h4>
                                             <div class="flex items-center mb-3">
@@ -197,8 +191,8 @@
                                                     <span class="uppercase font-bold text-black dark:text-white ">Nebulus</span>
                                                     in
                                                     <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">
-                                                            Nebulus Auto-Generator
-                                                        </span>
+                                                        Nebulus Auto-Generator
+                                                    </span>
                                                 </p>
                                             </div>
                                             <div class="flex items-center">
@@ -237,46 +231,46 @@
                                 {% set diff = (date - now).days %}
                                 {% if diff < 0 %}
                                     <h1 style="text-align: left;
-                                                   background: orangered -webkit-linear-gradient(left,#ff7878,#ffb078);
-                                                   -webkit-background-clip: text;
-                                                   -webkit-text-fill-color: transparent;
-                                                   margin: 13px;">
+                                               background: orangered -webkit-linear-gradient(left,#ff7878,#ffb078);
+                                               -webkit-background-clip: text;
+                                               -webkit-text-fill-color: transparent;
+                                               margin: 13px;">
                                         {{ strftime(date, "%a, %B %-d, %Y") }}
                                         ({{ -diff }}d Overdue)
                                     </h1>
                                 {% elif diff < 1 %}
                                     <h1 style="text-align: left;
-                                                   background: orange -webkit-linear-gradient(left,#ff78ed,#ffb378);
-                                                   -webkit-background-clip: text;
-                                                   -webkit-text-fill-color: transparent;
-                                                   margin: 13px;">
+                                               background: orange -webkit-linear-gradient(left,#ff78ed,#ffb378);
+                                               -webkit-background-clip: text;
+                                               -webkit-text-fill-color: transparent;
+                                               margin: 13px;">
                                         {{ strftime(date, "%a, %B %-d, %Y") }}
                                         ({{ diff }}d remaining)
                                     </h1>
                                 {% elif diff < 3 %}
                                     <h1 style="text-align: left;
-                                                   background: yellow -webkit-linear-gradient(left,#ffc578,#fff878);
-                                                   -webkit-background-clip: text;
-                                                   -webkit-text-fill-color: transparent;
-                                                   margin: 13px;">
+                                               background: yellow -webkit-linear-gradient(left,#ffc578,#fff878);
+                                               -webkit-background-clip: text;
+                                               -webkit-text-fill-color: transparent;
+                                               margin: 13px;">
                                         {{ strftime(date, "%a, %B %-d, %Y") }}
                                         ({{ diff }}d remaining)
                                     </h1>
                                 {% elif diff < 5 %}
                                     <h1 style="text-align: left;
-                                                   background: green -webkit-linear-gradient(left,#ffd978,#ddff78);
-                                                   -webkit-background-clip: text;
-                                                   -webkit-text-fill-color: transparent;
-                                                   margin: 13px;">
+                                               background: green -webkit-linear-gradient(left,#ffd978,#ddff78);
+                                               -webkit-background-clip: text;
+                                               -webkit-text-fill-color: transparent;
+                                               margin: 13px;">
                                         {{ strftime(date, "%a, %B %-d, %Y") }}
                                         ({{ diff }}d remaining)
                                     </h1>
                                 {% else %}
                                     <h1 style="text-align: left;
-                                                   background: greenyellow -webkit-linear-gradient(left,#d9ff78,#78ffb7);
-                                                   -webkit-background-clip: text;
-                                                   -webkit-text-fill-color: transparent;
-                                                   margin: 13px;">
+                                               background: greenyellow -webkit-linear-gradient(left,#d9ff78,#78ffb7);
+                                               -webkit-background-clip: text;
+                                               -webkit-text-fill-color: transparent;
+                                               margin: 13px;">
                                         {{ strftime(date, "%a, %B %-d, %Y") }}
                                         ({{ diff }}d remaining)
                                     </h1>
@@ -284,40 +278,32 @@
                                 {% for a in assignments[:15] %}
                                     {% if (a._cls != "Assignment" or a.submitDate == None) or now < date %}
                                         {# today is before the due date ^ #}
-                                        <div class="flex bg-gray-100 shadow dark:bg-gray-800/75 rounded-lg p-6 event
-                                            shadow-md dark:border-gray-700 text-sm mb-5 mx-4 text-left relative expandable">
-                                            <div class="absolute right-0 bottom-0 material-icons hover:bg-gray-50
-                                                 dark:hover:bg-gray-500 p-1 expand text-gray-200 cursor-pointer
-                                                  dark:text-gray-400 invisible rounded-lg mr-3 mb-3">
+                                        <div class="flex bg-gray-100 shadow dark:bg-gray-800/75 rounded-lg p-6 event shadow-md dark:border-gray-700 text-sm mb-5 mx-4 text-left relative expandable">
+                                            <div class="absolute right-0 bottom-0 material-icons hover:bg-gray-50 dark:hover:bg-gray-500 p-1 expand text-gray-200 cursor-pointer dark:text-gray-400 invisible rounded-lg mr-3 mb-3">
                                                 open_in_new
                                             </div>
-
                                             <div content-element hidden class="hidden">{{ a.description }}</div>
                                             <div author-element hidden class="hidden">{{ a.course.teacher }}</div>
-                                            <img src="{% if "teacherAccount" in a.course %}
-                                            {{ a.course.teacher.avatar.avatar_url }}
-                                            {% else %}
-                                            https://app.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg
-                                            {% endif %}"
-                                                 image-element hidden class="hidden">
-
+                                            <img src="{% if "teacherAccount" in a.course %} {{ a.course.teacher.avatar.avatar_url }} {% else %} https://app.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg {% endif %}"
+                                                 image-element
+                                                 hidden
+                                                 class="hidden">
                                             <div class="mr-4 material-icons ml-2 text-black dark:text-white"
                                                  style="transform: translate(0, 50%) scale(1.75)">
                                                 assignment
                                             </div>
                                             <div class="text-gray-700 dark:text-gray-400 leading-relaxed w-full">
-                                                <h1 class="text-black dark:text-white text-xl truncate" title-element
+                                                <h1 class="text-black dark:text-white text-xl truncate"
+                                                    title-element
                                                     style="max-width: 90%">{{ a.title }}</h1>
                                                 <p class="truncate" style="max-width: 90%;"
                                                    course-name-element>{{ a.course.name }}</p>
-
                                                 {% if a._cls == "Assignment" %}
                                                     Due at
                                                 {% else %}
                                                     Happening at
                                                 {% endif %}
                                                 {{ strftime(date, "%-I:%M %p") }}
-
                                                 <div due-time-element hidden class="hidden">
                                                     {% if a._cls == "Assignment" %}
                                                         Due at
@@ -335,7 +321,6 @@
                                                         <span class="text-orange-500">Not Submitted</span>
                                                     {% endif %}
                                                 </div>
-
                                                 <div post-time-element hidden class="hidden">
                                                     Posted at
                                                     {% if "creationDate" in a %}
@@ -344,7 +329,6 @@
                                                         {{ strftime(a.get_timestamp(), "%-m/%-d/%y %-I:%m %p") }}
                                                     {% endif %}
                                                 </div>
-
                                                 {% if a._cls == "Assignment" %}
                                                     <div class="text-black dark:text-white">
                                                         {% if a.submitDate %}
@@ -367,26 +351,34 @@
                     </div>
                 </div>
             </div>
-
         </div>
-        <div id="modal" tabindex="-1" aria-hidden="true"
+        <div id="modal"
+             tabindex="-1"
+             aria-hidden="true"
              class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
             <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
                 <!-- Modal content -->
                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                    <div id="dueTime" class="absolute bottom-0 right-0 p-3 text-gray-200 dark:text-gray-500 text-sm">
+                    <div id="dueTime"
+                         class="absolute bottom-0 right-0 p-3 text-gray-200 dark:text-gray-500 text-sm">
                         Due at 9:43 am
                     </div>
                     <!-- Modal header -->
                     <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600 relative">
-                        <div id="header"></div>
+                        <div id="header">
+                        </div>
                         <button class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                data-modal-toggle="modal" onclick="removeBackdrop()">
-                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                data-modal-toggle="modal"
+                                onclick="removeBackdrop()">
+                            <svg aria-hidden="true"
+                                 class="w-5 h-5"
+                                 fill="currentColor"
+                                 viewBox="0 0 20 20"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
                                       d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                      clip-rule="evenodd"></path>
+                                      clip-rule="evenodd">
+                                </path>
                             </svg>
                             <span class="sr-only">Close modal</span>
                         </button>
@@ -401,12 +393,17 @@
                              class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
                             stuff
                         </div>
-                        <button data-modal-toggle="modal" onclick="removeBackdrop()"
+                        <button data-modal-toggle="modal"
+                                onclick="removeBackdrop()"
                                 class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                            <svg class="w-6 h-6 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            <svg class="w-6 h-6 inline-block"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 viewBox="0 0 24 24"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M5 13l4 4L19 7"></path>
+                                      d="M5 13l4 4L19 7">
+                                </path>
                             </svg>
                             Okay
                         </button>
@@ -414,7 +411,6 @@
                 </div>
             </div>
         </div>
-
         <script src="/static/js/app.js"></script>
         {% include "learning/lms-modal.html" %}
     </div>

@@ -832,46 +832,45 @@
                              style="min-height: 968px;">
                             {% if not notepad[courses[0].id] %}
                                 <span>
-                                <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">
-                                    <span style="font-size: 30pt;
-                                                 font-family: Montserrat, sans-serif;
-                                                 background-color: transparent;
-                                                 font-variant-numeric: normal;
-                                                 font-variant-east-asian: normal;
-                                                 vertical-align: baseline;
-                                                 white-space: pre-wrap;">Welcome to your </span><span
-                                        style="font-size: 30pt;
-                                                font-family: Montserrat, sans-serif;
-                                                color: {{ color[0] }};
-                                                background-color: transparent;
-                                                font-weight: 700;
-                                                font-variant-numeric: normal;
-                                                font-variant-east-asian: normal;
-                                                vertical-align: baseline;
-                                                white-space: pre-wrap;">{{ courses[0].name }} Notes</span>
-                                </p>
-                                <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">
-                                    <span style="font-size: 10.5pt;
-                                                 font-family: Montserrat, sans-serif;
-                                                 color: rgb(163, 163, 163);
-                                                 font-variant-numeric: normal;
-                                                 font-variant-east-asian: normal;
-                                                 vertical-align: baseline;
-                                                 white-space: pre-wrap;">Type / to insert</span>
-                                </p>
-                                <div>
-                                    <span style="font-size: 10.5pt;
-                                                 font-family: Montserrat, sans-serif;
-                                                 color: rgb(163, 163, 163);
-                                                 font-variant-numeric: normal;
-                                                 font-variant-east-asian: normal;
-                                                 vertical-align: baseline;
-                                                 white-space: pre-wrap;">
-                                        <br>
-                                    </span>
-                                </div>
-                            </span>
-
+                                    <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">
+                                        <span style="font-size: 30pt;
+                                                     font-family: Montserrat, sans-serif;
+                                                     background-color: transparent;
+                                                     font-variant-numeric: normal;
+                                                     font-variant-east-asian: normal;
+                                                     vertical-align: baseline;
+                                                     white-space: pre-wrap;">Welcome to your </span><span
+                                            style="font-size: 30pt;
+                                                    font-family: Montserrat, sans-serif;
+                                                    color: {{ color[0] }};
+                                                    background-color: transparent;
+                                                    font-weight: 700;
+                                                    font-variant-numeric: normal;
+                                                    font-variant-east-asian: normal;
+                                                    vertical-align: baseline;
+                                                    white-space: pre-wrap;">{{ courses[0].name }} Notes</span>
+                                    </p>
+                                    <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">
+                                        <span style="font-size: 10.5pt;
+                                                     font-family: Montserrat, sans-serif;
+                                                     color: rgb(163, 163, 163);
+                                                     font-variant-numeric: normal;
+                                                     font-variant-east-asian: normal;
+                                                     vertical-align: baseline;
+                                                     white-space: pre-wrap;">Type / to insert</span>
+                                    </p>
+                                    <div>
+                                        <span style="font-size: 10.5pt;
+                                                     font-family: Montserrat, sans-serif;
+                                                     color: rgb(163, 163, 163);
+                                                     font-variant-numeric: normal;
+                                                     font-variant-east-asian: normal;
+                                                     vertical-align: baseline;
+                                                     white-space: pre-wrap;">
+                                            <br>
+                                        </span>
+                                    </div>
+                                </span>
                             {% else %}
                                 <script>
                                     {#document.getElementById("editor").innerHTML = "{{ notepad[courses[0].id]  | safe }}";#}
@@ -889,39 +888,13 @@
             document.getElementById("course_id").innerText = index;
             document.getElementById("editor").innerHTML = `
         <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">
-                                    <span style="font-size: 30pt;
-                                                 font-family: Montserrat, sans-serif;
-                                                 background-color: transparent;
-                                                 font-variant-numeric: normal;
-                                                 font-variant-east-asian: normal;
-                                                 vertical-align: baseline;
-                                                 white-space: pre-wrap;">Welcome to your </span><span style="font-size: 30pt;
-             font-family: Montserrat, sans-serif;
-             color: ${color};
-             background-color: transparent;
-             font-weight: 700;
-             font-variant-numeric: normal;
-             font-variant-east-asian: normal;
-             vertical-align: baseline;
-             white-space: pre-wrap;">${course} Notes</span>
+                                    <span style="font-size: 30pt; font-family: Montserrat, sans-serif; background-color: transparent; font-variant-numeric: normal; font-variant-east-asian: normal; vertical-align: baseline; white-space: pre-wrap;">Welcome to your </span><span style="font-size: 30pt; font-family: Montserrat, sans-serif; color: ${color}; background-color: transparent; font-weight: 700; font-variant-numeric: normal; font-variant-east-asian: normal; vertical-align: baseline; white-space: pre-wrap;">${course} Notes</span>
                                 </p>
                                 <p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">
-                                    <span style="font-size: 10.5pt;
-                                                 font-family: Montserrat, sans-serif;
-                                                 color: rgb(163, 163, 163);
-                                                 font-variant-numeric: normal;
-                                                 font-variant-east-asian: normal;
-                                                 vertical-align: baseline;
-                                                 white-space: pre-wrap;">Type / to insert</span>
+                                    <span style="font-size: 10.5pt; font-family: Montserrat, sans-serif; color: rgb(163, 163, 163); font-variant-numeric: normal; font-variant-east-asian: normal; vertical-align: baseline; white-space: pre-wrap;">Type / to insert</span>
                                 </p>
                                 <div>
-                                    <span style="font-size: 10.5pt;
-                                                 font-family: Montserrat, sans-serif;
-                                                 color: rgb(163, 163, 163);
-                                                 font-variant-numeric: normal;
-                                                 font-variant-east-asian: normal;
-                                                 vertical-align: baseline;
-                                                 white-space: pre-wrap;">
+                                    <span style="font-size: 10.5pt; font-family: Montserrat, sans-serif; color: rgb(163, 163, 163); font-variant-numeric: normal; font-variant-east-asian: normal; vertical-align: baseline; white-space: pre-wrap;">
                                         <br>
                                     </span>
                                 </div>

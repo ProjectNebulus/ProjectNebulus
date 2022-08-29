@@ -8,73 +8,55 @@ const ALERT_THRESHOLD = 5;
 
 const COLOR_CODES = {
     info: {
-        color: "green"
+        color: 'green'
     },
     warning: {
-        color: "orange",
+        color: 'orange',
         threshold: WARNING_THRESHOLD
     },
     alert: {
-        color: "red",
+        color: 'red',
         threshold: ALERT_THRESHOLD
     }
 };
 
-
 setInterval(() => {
-        if (localStorage.getItem('originalTimer')) {
-            const current = localStorage.getItem('currentTimer').split('\n');
-            let TIME_LIMIT = parseInt(localStorage.getItem('originalTimer'));
+    if (localStorage.getItem('originalTimer')) {
+        const current = localStorage.getItem('currentTimer').split('\n');
+        let TIME_LIMIT = parseInt(localStorage.getItem('originalTimer'));
 
+        let timeLeft =
+            parseInt(current[2]) * 3600 + parseInt(current[3]) * 60 + parseInt(current[4]);
+        focus.classList.remove('hidden');
 
-            let timeLeft = (parseInt(current[2]) * 3600 + parseInt(current[3]) * 60 + parseInt(current[4]));
-            focus.classList.remove('hidden');
+        document.getElementById('base-timer-label').innerHTML = formatTime1(timeLeft);
+        const circleDasharray = `${(
+            calculateTimeFraction(timeLeft, TIME_LIMIT) * FULL_DASH_ARRAY
+        ).toFixed(0)} 283`;
+        document
+            .getElementById('base-timer-path-remaining')
+            .setAttribute('stroke-dasharray', circleDasharray);
 
-            document.getElementById("base-timer-label").innerHTML = formatTime1(
-                timeLeft
-            );
-            const circleDasharray = `${(
-                calculateTimeFraction(timeLeft, TIME_LIMIT) * FULL_DASH_ARRAY
-            ).toFixed(0)} 283`;
-            document
-                .getElementById("base-timer-path-remaining")
-                .setAttribute("stroke-dasharray", circleDasharray);
-
-            const {alert, warning, info} = COLOR_CODES;
-            if (timeLeft <= alert.threshold) {
-                document
-                    .getElementById("base-timer-path-remaining")
-                    .classList.remove(warning.color);
-                document
-                    .getElementById("base-timer-path-remaining")
-                    .classList.add(alert.color);
-            } else if (timeLeft <= warning.threshold) {
-                document
-                    .getElementById("base-timer-path-remaining")
-                    .classList.remove(info.color);
-                document
-                    .getElementById("base-timer-path-remaining")
-                    .classList.add(warning.color);
-            }
-
-
-        } else {
-
-            let focus = document.getElementById('focus');
-            if (!(focus.classList.contains('hidden'))) {
-                focus.classList.add('hidden');
-            }
+        const {alert, warning, info} = COLOR_CODES;
+        if (timeLeft <= alert.threshold) {
+            document.getElementById('base-timer-path-remaining').classList.remove(warning.color);
+            document.getElementById('base-timer-path-remaining').classList.add(alert.color);
+        } else if (timeLeft <= warning.threshold) {
+            document.getElementById('base-timer-path-remaining').classList.remove(info.color);
+            document.getElementById('base-timer-path-remaining').classList.add(warning.color);
         }
-
+    } else {
+        let focus = document.getElementById('focus');
+        if (!focus.classList.contains('hidden')) {
+            focus.classList.add('hidden');
+        }
     }
-    ,
-    1000);
-
+}, 1000);
 
 function formatTime1(time) {
     let minutes = Math.floor(time / 60);
     const hours = Math.floor(minutes / 60);
-    minutes = minutes % 60
+    minutes = minutes % 60;
     let seconds = time % 60;
 
     if (seconds < 10) {
@@ -87,9 +69,8 @@ function formatTime1(time) {
     if (hours) {
         return `${hours}:${minutes}:${seconds}`;
     }
-    return `${minutes}:${seconds}`
+    return `${minutes}:${seconds}`;
 }
-
 
 function calculateTimeFraction(timeLeft, time_limit) {
     const rawTimeFraction = timeLeft / time_limit;
@@ -104,16 +85,16 @@ for (const a of controlCenter.getElementsByTagName('a'))
     a.className +=
         ' text-gray-500 dark:text-gray-400 focus:outline-none hover:bg-purple-800 text-left text-sm rounded-lg p-2.5 w-36 cursor-pointer';
 
-let chatStatus = document.getElementById('chatStatus')
-if (window.location.pathname === "/chat") {
+let chatStatus = document.getElementById('chatStatus');
+if (window.location.pathname === '/chat') {
     $.ajax({
         url: '/api/v1/internal/get-chat-status',
         type: 'GET'
     }).done(function (data) {
         let status_text = document.getElementById('profile-status-text');
         let profile_username = document.getElementById('profile-username');
-        if (!(data['statusText'])) {
-            status_text.innerText = "No status";
+        if (!data['statusText']) {
+            status_text.innerText = 'No status';
         } else {
             status_text.innerText = data['statusText'];
         }
@@ -122,12 +103,12 @@ if (window.location.pathname === "/chat") {
         profile_avatar.src = data['avatar'];
         let color;
 
-        if (data['status'] === "Do Not Disturb") {
+        if (data['status'] === 'Do Not Disturb') {
             color = '#ef4444';
-        } else if (data['status'] === "Idle") {
-            color = "#f59e0b";
-        } else if (data['status'] === "Invisible") {
-            color = "#374151";
+        } else if (data['status'] === 'Idle') {
+            color = '#f59e0b';
+        } else if (data['status'] === 'Invisible') {
+            color = '#374151';
         } else {
             color = '#4ade80';
         }

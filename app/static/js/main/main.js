@@ -1,7 +1,7 @@
 const siteName = window.location.protocol + '//' + window.location.host;
 const startLoad = Date.now();
 let loadTime;
-window.addEventListener("load", () => {
+window.addEventListener('load', () => {
     loadTime = Date.now() - startLoad;
     console.log(loadTime);
 });
@@ -94,11 +94,13 @@ function invertSite() {
     if (localStorage.getItem('color-theme') === 'dark') {
         if (window.location.pathname === '/') {
             let wallpaper = localStorage.getItem('wallpaper');
-            if (!wallpaper) wallpaper = 'https://media.discordapp.net/attachments/934282772657344562/1006709877034451024/cross_fade_ezgif-5-3a978299a9.gif';
+            if (!wallpaper)
+                wallpaper =
+                    'https://media.discordapp.net/attachments/934282772657344562/1006709877034451024/cross_fade_ezgif-5-3a978299a9.gif';
 
             document.body.style.background = `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)) 0% 0% / cover, url("${wallpaper}") center center no-repeat fixed`;
             document.body.style.backgroundSize = 'cover';
-            document.body.style.backgroundColor = "#111926";
+            document.body.style.backgroundColor = '#111926';
         }
         if (banner) banner.style.filter = 'brightness(100%)';
 
@@ -126,7 +128,7 @@ function invertSite() {
     for (const frame of document.getElementsByTagName('iframe')) {
         if (frame && (frame.src.includes(siteName) || !frame.src.includes('http'))) {
             const innerDoc = frame.contentDocument || frame.contentWindow.document;
-            innerDoc.addEventListener("click", () => window.dispatchEvent(new Event("click")));
+            innerDoc.addEventListener('click', () => window.dispatchEvent(new Event('click')));
 
             if (document.documentElement.classList.contains('dark')) {
                 innerDoc.documentElement.classList.add('dark');
@@ -248,7 +250,7 @@ function navFetchStatus() {
 
     request.done((data) => {
         if (parseInt(data)) {
-            document.getElementById('spotifyStatus').style.display = "none";
+            document.getElementById('spotifyStatus').style.display = 'none';
             shouldGetSpotify = false;
             clearInterval(statusInterval);
             return;
@@ -265,7 +267,7 @@ function navFetchStatus() {
         let timestamp = songs[6];
         let total = songs[7];
         let ratio = songs[8];
-        document.getElementById('spotifyStatus').style.display = "block";
+        document.getElementById('spotifyStatus').style.display = 'block';
         document.getElementById('spotifyStatus').innerHTML = `
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
             <div style="width:110px;vertical-align: middle; display:inline-block;">
@@ -306,7 +308,7 @@ for (let i = 0; i < list.length; i++) {
 
 fetch(`/static/images/nebulusCats/v3.gif`)
     .then((response) => response.blob())
-    .then((imageBlob) => v3Image = URL.createObjectURL(imageBlob));
+    .then((imageBlob) => (v3Image = URL.createObjectURL(imageBlob)));
 
 function changeFavicon() {
     let link = document.querySelector("link[rel~='icon']");

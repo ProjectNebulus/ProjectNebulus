@@ -2,10 +2,11 @@ let override = false;
 
 function deleteMaterial(delete_button) {
     const mainElement = delete_button.parentElement.parentElement;
-    if (!confirm("Delete " + mainElement.querySelector("div.text-sm span.mr-8").innerText + "?")) return;
+    if (!confirm('Delete ' + mainElement.querySelector('div.text-sm span.mr-8').innerText + '?'))
+        return;
 
-    const contents = mainElement.getAttribute("onclick").split("/").slice(2, 4);
-    contents[1] = contents[1].replace("', true)", "");
+    const contents = mainElement.getAttribute('onclick').split('/').slice(2, 4);
+    contents[1] = contents[1].replace("', true)", '');
 
     const request = $.ajax({
         type: 'POST',
@@ -14,16 +15,14 @@ function deleteMaterial(delete_button) {
         data: JSON.stringify({course_id: contents[0], document_id: contents[1]})
     });
     request.done((data) => {
-        if (data !== "success")
-            alert("The material was not found.");
-        else
-            mainElement.remove();
+        if (data !== 'success') alert('The material was not found.');
+        else mainElement.remove();
     });
-    request.fail(() => alert("An error occurred while deleting the material."));
+    request.fail(() => alert('An error occurred while deleting the material.'));
 }
 
-for (const action of document.querySelectorAll(".edit-controls span"))
-    action.classList.add("hover:bg-gray-200", "dark:hover:bg-gray-700", "p-2")
+for (const action of document.querySelectorAll('.edit-controls span'))
+    action.classList.add('hover:bg-gray-200', 'dark:hover:bg-gray-700', 'p-2');
 
 addHTML();
 
@@ -61,7 +60,7 @@ function startFile(file, link, isPDF) {
         try {
             startPDF(link);
         } catch (e) {
-            document.getElementById("loading").innerHTML = "Error: " + e;
+            document.getElementById('loading').innerHTML = 'Error: ' + e;
         }
     } else {
         document.getElementById('code-viewer').style.display = 'block';

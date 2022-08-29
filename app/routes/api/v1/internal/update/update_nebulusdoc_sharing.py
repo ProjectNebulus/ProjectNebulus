@@ -1,5 +1,4 @@
 from app.routes.api import internal
-
 from app.routes.main import private_endpoint
 
 

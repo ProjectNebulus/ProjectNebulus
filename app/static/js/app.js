@@ -93,27 +93,27 @@ const Default = {
     }
 };
 
-for (const button of document.getElementsByClassName("expand")) {
+for (const button of document.getElementsByClassName('expand')) {
     const parent = button.parentElement;
-    button.addEventListener("click", () => openDetailsModal(
-        parent.querySelector("[content-element]").innerHTML,
-        parent.querySelector("[title-element]").innerHTML,
-        parent.querySelector("[author-element]").innerHTML,
-        parent.querySelector("[image-element]").src,
-        parent.querySelector("[course-name-element]").innerHTML,
-        parent.querySelector("[post-time-element]").innerHTML,
-        parent.querySelector("[due-time-element]").innerHTML
-    ));
+    button.addEventListener('click', () =>
+        openDetailsModal(
+            parent.querySelector('[content-element]').innerHTML,
+            parent.querySelector('[title-element]').innerHTML,
+            parent.querySelector('[author-element]').innerHTML,
+            parent.querySelector('[image-element]').src,
+            parent.querySelector('[course-name-element]').innerHTML,
+            parent.querySelector('[post-time-element]').innerHTML,
+            parent.querySelector('[due-time-element]').innerHTML
+        )
+    );
 }
 
 function openDetailsModal(content, title, author, pic, course, postTime, dueTime) {
     const targetEl = document.getElementById('modal');
 
-    if (title === author)
-        title = "Announcement from " + title;
+    if (title === author) title = 'Announcement from ' + title;
 
-    if (dueTime === undefined)
-        dueTime = "";
+    if (dueTime === undefined) dueTime = '';
 
     document.getElementById('header').innerHTML = `
 <h3 class="text-xl font-semibold text-gray-900 dark:text-white truncate h-full">${title}</h3>
@@ -130,7 +130,7 @@ function openDetailsModal(content, title, author, pic, course, postTime, dueTime
     </div>
 </div>`;
 
-    document.getElementById("dueTime").innerHTML = dueTime;
+    document.getElementById('dueTime').innerHTML = dueTime;
 
     document.getElementById('announcementBody').innerHTML = content;
 
@@ -148,7 +148,7 @@ function openDetailsModal(content, title, author, pic, course, postTime, dueTime
 }
 
 function removeBackdrop() {
-    document.querySelector("[modal-backdrop]").remove();
+    document.querySelector('[modal-backdrop]').remove();
 }
 
 function replaceURLs(message) {
@@ -404,7 +404,7 @@ window.addEventListener('load', () => {
 
         let description = document.createElement('span');
         description.classList.add('text-gray-300', 'text-sm');
-        description.innerHTML += "Includes: "
+        description.innerHTML += 'Includes: ';
         for (let i = 0; i < Math.min(template.subtemplates.length, 4); i++)
             description.innerHTML += template.subtemplates[i] + ', ';
 
@@ -564,8 +564,6 @@ window.addEventListener('load', () => {
         );
     }
 
-
-
     function googleCourseReq() {
         const status = document.getElementById('create-course-status2');
         if (this.responseText === '1') {
@@ -589,7 +587,6 @@ window.addEventListener('load', () => {
             status.innerHTML = 'Course created!';
         }
     }
-
 });
 
 function updateCanvasLink(link) {
@@ -668,4 +665,3 @@ function importSchoology() {
         })
     );
 }
-

@@ -49,22 +49,19 @@ function next(num) {
                     username: document.getElementById('username').value
                 })
             });
-            nextModal(num)
+            nextModal(num);
         } else alert("You can't move on yet!");
     } else if (num === 2) {
         console.log(checks);
         if (checks[4].innerHTML.includes('check') && checks[5].innerHTML.includes('check'))
             nextModal(num);
-        else
-            alert("You can't move on yet!");
-    } else if (num === 3)
-        nextModal(num);
+        else alert("You can't move on yet!");
+    } else if (num === 3) nextModal(num);
 }
 
 function onComplete() {
     setTimeout(createUser, 1000);
 }
-
 
 function prev(num) {
     if (num !== 1) {

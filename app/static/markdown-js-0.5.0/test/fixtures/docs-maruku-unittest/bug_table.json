@@ -10,36 +10,36 @@
     ],
     "\u000a",
     [
-        "table",
-        {
-            "class": "class1",
-            "summary": "Table summary",
-            "style": "color:red"
-        },
+      "table",
+      {
+        "class": "class1",
+        "summary": "Table summary",
+        "style": "color:red"
+      },
+      [
+        "thead",
         [
-            "thead",
-            [
-                "tr",
-                [
-                    "th",
-                    "h"
-                ],
-                [
-                    "th",
-                    "h"
-                ]
-            ]
-        ],
+          "tr",
+          [
+            "th",
+            "h"
+          ],
+          [
+            "th",
+            "h"
+          ]
+        ]
+      ],
+      [
+        "tbody",
         [
-            "tbody",
-            [
-                "tr",
-                [
-                    "th",
-                    {
-                        "scope": "row",
-                        "style": "text-align: left;"
-                    },
+          "tr",
+          [
+            "th",
+            {
+              "scope": "row",
+              "style": "text-align: left;"
+            },
                     " c1"
                 ],
                 [

@@ -361,19 +361,20 @@ function loadFromServer() {
 
         plannerName.value = data['name'];
         saveData = data['saveData'];
-        const lastEdit = new Date(data["lastEdited"]);
-        const timeSince = (Date.now() - new Date("2022-08-13T21:39:26.749+00:00").getTime()) / 1000 / 60;   // time since last edit in minutes
+        const lastEdit = new Date(data['lastEdited']);
+        const timeSince =
+            (Date.now() - new Date('2022-08-13T21:39:26.749+00:00').getTime()) / 1000 / 60; // time since last edit in minutes
 
-        if (timeSince < 1)
-            saveState.innerHTML = "Last edit was seconds ago";
+        if (timeSince < 1) saveState.innerHTML = 'Last edit was seconds ago';
         else if (timeSince < 60)
-            saveState.innerHTML = "Last edit was " + Math.floor(timeSince) + " minutes ago";
+            saveState.innerHTML = 'Last edit was ' + Math.floor(timeSince) + ' minutes ago';
         else if (timeSince < 60 * 9)
-            saveState.innerHTML = "Last edit was " + Math.floor(timeSince / 60) + " hours ago";
+            saveState.innerHTML = 'Last edit was ' + Math.floor(timeSince / 60) + ' hours ago';
         else if (timeSince < 60 * 24)
-            saveState.innerHTML = "Last edit was at " + formatAMPM(lastEdit);
+            saveState.innerHTML = 'Last edit was at ' + formatAMPM(lastEdit);
         else
-            saveState.innerHTML = "Last edit was on " + (lastEdit.getMonth() + 1) + "/" + lastEdit.getDate();
+            saveState.innerHTML =
+                'Last edit was on ' + (lastEdit.getMonth() + 1) + '/' + lastEdit.getDate();
 
         for (let i = 0; i < data['periods'].length; i++) addTimePeriod();
 

@@ -11,25 +11,23 @@ let prevScreen;
 function recaptchaScreen() {
     let screen;
     for (screen of [main, reset, code]) {
-        if (!screen.classList.contains("hidden"))
-            break;
+        if (!screen.classList.contains('hidden')) break;
     }
 
     prevScreen = screen;
-    screen.classList.add("hidden");
-    recaptcha.classList.remove("hidden");
+    screen.classList.add('hidden');
+    recaptcha.classList.remove('hidden');
 }
 
 function onComplete() {
-    setTimeout(recaptchaSuccess, 1000)
+    setTimeout(recaptchaSuccess, 1000);
 }
 
 function recaptchaSuccess() {
-    if (!grecaptcha.getResponse())
-        return;
+    if (!grecaptcha.getResponse()) return;
 
-    recaptcha.classList.add("hidden");
-    prevScreen.classList.remove("hidden");
+    recaptcha.classList.add('hidden');
+    prevScreen.classList.remove('hidden');
 }
 
 function selectChanged() {
@@ -204,7 +202,7 @@ window.addEventListener('load', function () {
     email = document.getElementById('email');
     password = document.getElementById('psw');
     main = document.getElementById('main');
-    recaptcha = document.getElementById("recaptcha");
+    recaptcha = document.getElementById('recaptcha');
     reset = document.getElementById('reset');
     code = document.getElementById('resetCode');
 
@@ -227,14 +225,11 @@ window.addEventListener('load', function () {
         const errorEmail = document.getElementById('error-msg');
         const errorPassword = document.getElementById('password-error-msg');
 
-        if (email.value === '')
-            errorEmail.innerHTML = 'Please enter your email!';
-
+        if (email.value === '') errorEmail.innerHTML = 'Please enter your email!';
         else if (!/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}/.test(email.value))
             errorEmail.innerHTML = 'Did you enter a valid email?';
 
-        if (password.value === '')
-            errorPassword.innerHTML = 'Please enter a password!';
+        if (password.value === '') errorPassword.innerHTML = 'Please enter a password!';
 
         if (email.value === '' || password.value === '') return;
 
@@ -309,7 +304,7 @@ window.addEventListener('load', function () {
     keyUpDelay('#email, #psw', 500, checkCredentials);
 });
 
-const loginUser = () => window.location.href = getRedirectParam();
+const loginUser = () => (window.location.href = getRedirectParam());
 
 function getRedirectParam() {
     let qd = {};

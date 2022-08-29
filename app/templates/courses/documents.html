@@ -9,7 +9,6 @@
             visibility: visible;
         }
     </style>
-
     <link rel="stylesheet"
           href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"></script>
@@ -36,8 +35,8 @@
     <div style="margin-left: 10px; width: 98%; float: left;" id="documentPage">
         <div style="width:70%;float:left;">
             {% if course.documents|length == 0 and course.folders|length == 0 %}
-                <h1 class="mx-4 my-4 text-xl text-black dark:text-white">
-                    You have no documents or folders! Try creating one!</h1>
+                <h1 class="mx-4 my-4 text-xl text-black dark:text-white">You have no documents or folders! Try creating
+                    one!</h1>
             {% endif %}
             {% for folder in course.folders %}
                 <br>
@@ -55,13 +54,20 @@
                         <span>{{ folder.name }}</span>
                     </p>
                 </a>
-            {% endfor %}<br>
+            {% endfor %}
+            <br>
             {% for document in course.documents %}
-                <div onclick="startFile('{{ document.name }}', siteName + '/getResource/{{ course.id }}/{{ document.id }}', {{ ("pdf" in document.url)|string|lower }})"
+            <div onclick="startFile('{{ document.name }}', siteName + '/getResource/{{ course.id }}/{{ document.id }}',
+{{ ("
+                     pdf
+                     in
+                     document.url
+                     string
+                     lower
                      class="editable p-6 mb-8 bg-white rounded-lg cursor-pointer border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 relative"
                      style="width: min-content; max-width: 90%">
-                    <div class="edit-controls absolute flex bg-gray-500 dark:bg-gray-800 material-icons rounded-lg
-                     text-gray-200 dark:text-gray-500 overflow-hidden shadow" style="top: -0.5rem; right: -1rem"
+                    <div class="edit-controls absolute flex bg-gray-500 dark:bg-gray-800 material-icons rounded-lg text-gray-200 dark:text-gray-500 overflow-hidden shadow"
+                         style="top: -0.5rem; right: -1rem"
                          onclick="override=true">
                         <span>edit</span>
                         <span onclick="deleteMaterial(this)">delete</span>

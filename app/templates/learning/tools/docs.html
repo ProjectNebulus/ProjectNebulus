@@ -20,7 +20,9 @@
             <div class="w-full grid gap-4 justify-center"
                  style="grid-template-columns: repeat(auto-fit, 13rem)">
                 <div class="flex flex-col">
-                    <div class="document rounded-md" style=" text-align: center; " onclick="click_doc()">
+                    <div class="document rounded-md"
+                         style=" text-align: center; "
+                         onclick="click_doc()">
                         <div style="padding-top:38%;
                                         font-size: 70px;
                                         background: -webkit-linear-gradient(red,#fffcbd);
@@ -32,11 +34,11 @@
                     <p style="padding-left:45px;
                                   margin-left:20px;
                                   width:160px;"
-                           class="uppercase text-gray-400">Blank</p>
-                    </div>
-                    <div class="flex flex-col">
-                        <div class="document rounded-md" style=" text-align: center; ">
-                            <div style="padding-top:38%;
+                       class="uppercase text-gray-400">Blank</p>
+                </div>
+                <div class="flex flex-col">
+                    <div class="document rounded-md" style=" text-align: center; ">
+                        <div style="padding-top:38%;
                                         font-size: 70px;
                                         background: -webkit-linear-gradient(red,#fffcbd);
                                         -webkit-background-clip: text;
@@ -118,20 +120,21 @@
             </div>
             <div>
                 <h1 style="margin-left:35px;" class="text-black dark:text-white text-3xl">Recent Documents</h1>
-                {% if docs|length == 0 %}<br><br>
+                {% if docs|length == 0 %}
+                    <br>
+                    <br>
                     <p style="margin-left:35px;" class="text-black dark:text-white">No Documents Yet!</p>
                 {% endif %}
-                <div class="w-full grid gap-4 justify-center" style="grid-template-columns: repeat(auto-fit, 13rem)">
+                <div class="w-full grid gap-4 justify-center"
+                     style="grid-template-columns: repeat(auto-fit, 13rem)">
                     {% for doc in docs %}
                         <a href="/docs/document/{{ doc.id }}">
                             <div class="flex flex-col">
-                                <div class="document rounded-md" style=" text-align: left;overflow:hidden; ">
+                                <div class="document rounded-md"
+                                     style=" text-align: left;overflow:hidden; ">
                                     <div style="text-align: left; zoom: 20%;padding:40px; overflow:hidden;">{{ doc.content|safe }}</div>
                                 </div>
-                                <p style="
-                                           width:160px;
-                                   margin: 20px;
-                                "
+                                <p style=" width:160px; margin: 20px; "
                                    class="text-sm text-gray-400">{{ doc.title }}</p>
                             </div>
                         </a>

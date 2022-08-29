@@ -1,5 +1,5 @@
 let actions, pageTitle, createButton;
-window.addEventListener("click", () => {
+window.addEventListener('click', () => {
     actions = document.getElementsByClassName('link');
     pageTitle = document.getElementById('page-title');
     createButton = document.getElementById('create');
@@ -51,8 +51,7 @@ window.addEventListener("click", () => {
         const modal = new Modal(targetEl, options);
         modal.hide();
 
-        for (const element of document.querySelectorAll('[modal-backdrop]'))
-            element.remove();
+        for (const element of document.querySelectorAll('[modal-backdrop]')) element.remove();
 
         return true;
     }

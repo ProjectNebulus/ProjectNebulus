@@ -7,7 +7,6 @@
 </head>
 <body>
 <script>
-
     function updateCanvasLink(link) {
         document.getElementById('canvas-course-id').value = link;
         document.getElementById('clist').style.display = 'none';
@@ -47,16 +46,24 @@
                 <br>
                 <div id="skip-templates"
                      class="createSelectButton text-white bg-gray-500 dark:hover:bg-gray-800 dark:bg-gray-900 font-medium rounded-lg text-lg px-5 py-5 text-center mr-2 mb-2">
-                            <span style="float: left;"><img height="40" width="40" src="static/images/icons/new.svg"
-                                                            style="float: right;"></span><span>Create a Course</span><img
-                        height="40" width="40" src="static/images/icons/next.svg" style="float: right;"></div>
-                <h2 class="text-2xl" style="
-    margin: 30px;
-">Or, Choose your Subject
+                            <span style="float: left;">
+                                <img height="40"
+                                     width="40"
+                                     src="static/images/icons/new.svg"
+                                     style="float: right;">
+                                </span><span>Create a Course</span>
+                    <img height="40"
+                         width="40"
+                         src="static/images/icons/next.svg"
+                         style="float: right;">
+                </div>
+                <h2 class="text-2xl" style=" margin: 30px; ">
+                    Or, Choose your Subject
                     <span class="text-base text-white bg-gradient-to-r from-green-400 via-blue-600 to-orange-400 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-                          style="margin: 20px;vertical-align: middle;">
-                            Recommended
-                        </span>
+                          style="margin: 20px;
+                                             vertical-align: middle;">
+                                    Recommended
+                                </span>
                 </h2>
                 <div class='scroll mt-2'></div>
             </div>
@@ -113,48 +120,48 @@
                  id="import-schoology">
                 <img src="/static/images/logos/schoology.png"
                      style="visibility:visible;
-                                    width:40px;
-                                    height:40px;
-                                    float:left;"
+                                        width:40px;
+                                        height:40px;
+                                        float:left;"
                      alt="Create course image">
                 Import from Schoology
                 <img src="/static/images/icons/next.svg"
                      style="visibility:visible;
-                                    width:40px;
-                                    height:40px;
-                                    float:right;"
+                                        width:40px;
+                                        height:40px;
+                                        float:right;"
                      alt="Next">
             </div>
             <div class='createSelectButton text-white bg-gray-500 dark:hover:bg-gray-800 dark:bg-gray-900 font-medium rounded-lg text-lg px-5 py-5 text-center mr-2 mb-2'
                  id="import-classroom">
                 <img src="/static/images/logos/classroom.png"
                      style="visibility:visible;
-                                    width:40px;
-                                    height:40px;
-                                    float:left;"
+                                        width:40px;
+                                        height:40px;
+                                        float:left;"
                      alt="Create course image">
                 Import from Google Classroom
                 <img src="/static/images/icons/next.svg"
                      style="visibility:visible;
-                                    width:40px;
-                                    height:40px;
-                                    float:right;"
+                                        width:40px;
+                                        height:40px;
+                                        float:right;"
                      alt="Next">
             </div>
             <div class='createSelectButton text-white bg-gray-500 dark:hover:bg-gray-800 dark:bg-gray-900 font-medium rounded-lg text-lg px-5 py-5 text-center mr-2 mb-2'
                  id="import-canvas">
                 <img src="/static/images/logos/canvas.png"
                      style="visibility:visible;
-                                    width:40px;
-                                    height:40px;
-                                    float:left;"
+                                        width:40px;
+                                        height:40px;
+                                        float:left;"
                      alt="Create course image">
                 Import from Canvas
                 <img src="/static/images/icons/next.svg"
                      style="visibility:visible;
-                                    width:40px;
-                                    height:40px;
-                                    float:right;"
+                                        width:40px;
+                                        height:40px;
+                                        float:right;"
                      alt="Next">
             </div>
         </div>
@@ -173,10 +180,10 @@
                     we couldn't find any courses! Is your Schoology account
                     connected? <a href="/settings#connections">
                     <button style="margin-left: 10px;
-                                           display:grid;
-                                           grid-auto-flow: column;
-                                           align-content: center;
-                                           justify-content: center;"
+                                               display:grid;
+                                               grid-auto-flow: column;
+                                               align-content: center;
+                                               justify-content: center;"
                             type="button"
                             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                         Connect Schoology <i style="display:grid;
@@ -196,19 +203,18 @@
                 <br>
                 <br>
                 <div class="flex flex-col "
-                     style="
-                                align-items: center;
-                                justify-content: center;">
+                     style="align-items: center;
+                                    justify-content: center;">
                     {% for course in schoologycourses[:-1] %}
                         <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
                              style="height:16rem;
-                                        width:34rem;">
+                                            width:34rem;">
                             <a onclick="updateSchoologyLink('{{ course["link"] }}');"
                                class="overflow-hidden"
                                style="width:382px;
-                                          height:186px;">
+                                              height:186px;">
                                 <img style="width:382px;
-                                                height:130px;"
+                                                    height:130px;"
                                      class="rounded-t-lg w-full object-cover"
                                      src="{{ course["profile_url"] }}"
                                      alt=""/>
@@ -231,8 +237,8 @@
         </div>
         <form id="schoology-create-course"
               style="width:90%;
-                         height:90%;
-                         display:none;"
+                             height:90%;
+                             display:none;"
               onsubmit="importSchoology(); ">
             <div class="mb-6">
                 <label for="course-name"
@@ -261,7 +267,8 @@
             </button>
             <span class="text-3xl text-green-500" id="create-course-status"></span>
         </form>
-        <div class="pageCount"></div>
+        <div class="pageCount">
+        </div>
     </div>
     <div class="CoursePage" id="create-gclass-page">
         <h3 class="modalheader flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white">
@@ -275,16 +282,16 @@
                     we couldn't find any courses! Is your Google Classroom account linked?
                     <a href="/settings#connections">
                         <button style="margin-left: 10px;
-                                           display:grid;
-                                           grid-auto-flow: column;
-                                           align-content: center;
-                                           justify-content: center;"
+                                               display:grid;
+                                               grid-auto-flow: column;
+                                               align-content: center;
+                                               justify-content: center;"
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                             Connect Google Classroom
                             <i style="display:grid;
-                                          grid-auto-flow: column;
-                                          align-content: center;
-                                          justify-content: center;"
+                                              grid-auto-flow: column;
+                                              align-content: center;
+                                              justify-content: center;"
                                class="material-icons">open_in_newt</i>
                         </button>
                     </a>
@@ -312,8 +319,8 @@
                 </div>
                 <form id="google-create-course"
                       style="width:90%;
-                                 height:90%;
-                                 display:none;"
+                                     height:90%;
+                                     display:none;"
                       onsubmit="importGClassroom(); return false;">
                     <div class="mb-6">
                         <label for="course-name"
@@ -361,10 +368,10 @@
                         we couldn't find any courses! Is your Canvas account
                         connected? <a href="/settings#connections">
                         <button style="margin-left: 10px;
-                                           display:grid;
-                                           grid-auto-flow: column;
-                                           align-content: center;
-                                           justify-content: center;"
+                                               display:grid;
+                                               grid-auto-flow: column;
+                                               align-content: center;
+                                               justify-content: center;"
                                 type="button"
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                             Connect Canvas <i style="display:grid;
@@ -398,8 +405,8 @@
         <form id="canvas-create-course"
               onsubmit="importCanvas(); return false;"
               style="height:90%;
-                     width:90%;
-                     display:none;">
+                         width:90%;
+                         display:none;">
             <div class="mb-6">
                 <label for="course-name" class="">
                     Canvas Course Link (Automatically Filled)
@@ -498,11 +505,12 @@
             <!-- Modal body -->
             <div class="p-6 space-y-6 dark:text-white text-black">
                 <div class="mb-6">
-                    <input oninput="changeSearch();" id="search_input" placeholder="Type here..." required=""
+                    <input oninput="changeSearch();"
+                           id="search_input"
+                           placeholder="Type here..."
+                           required=""
                            class="bg-gray-50 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-5 m-5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:bg-gray-900"
-                           style="
-    font-size: 1.5em;
-">
+                           style=" font-size: 1.5em; ">
                     <ul id="search_items" class="scroll">
                         <li>
                             <div class="py-2.5 rounded-lg mx-auto block px-4 py-2 mx-2 dark:hover:text-white">

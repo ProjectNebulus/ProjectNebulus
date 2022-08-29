@@ -33,7 +33,7 @@ def index():
 @main_blueprint.route("/google34d8c04c4b82b69a.html")
 def googleVerification():
     # GOOGLE VERIFICATION FILE
-    return render_template("utils/google34d8c04c4b82b69a.html", translate=getText)
+    return render_template("utils/google_site_verification.html", translate=getText)
 
 
 @main_blueprint.route("/arc-sw.js")

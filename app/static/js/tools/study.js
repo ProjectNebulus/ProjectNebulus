@@ -15,9 +15,9 @@ function padWith0(num) {
     return string;
 }
 
-if (localStorage.getItem("popup")) {
-    document.getElementById("sidebar_").classList.add("hidden");
-    document.getElementById("sidebar_").hidden = true;
+if (localStorage.getItem('popup')) {
+    document.getElementById('sidebar_').classList.add('hidden');
+    document.getElementById('sidebar_').hidden = true;
 }
 
 const pauseClasses = ['bg-yellow-300', 'border-yellow-400', 'hover:bg-yellow-500'];
@@ -106,7 +106,7 @@ document.addEventListener('keydown', () => {
             }
         }
 
-    if (!focused) document.getElementById("name").focus();
+    if (!focused) document.getElementById('name').focus();
 });
 
 for (let i = 0; i < 3; i++) {
@@ -118,11 +118,13 @@ for (let i = 0; i < 3; i++) {
         if (max < 99 && parseInt(inputs[i].value) > max) inputs[i].value = max + '';
 
         if (parseInt(inputs[i].value) !== 1) {
-            if (!labels[i].innerHTML.endsWith('s'))
-                labels[i].innerHTML += 's';
+            if (!labels[i].innerHTML.endsWith('s')) labels[i].innerHTML += 's';
         } else {
             if (labels[i].innerHTML.endsWith('s'))
-                labels[i].innerHTML = labels[i].innerHTML.substring(0, labels[i].innerHTML.length - 1);
+                labels[i].innerHTML = labels[i].innerHTML.substring(
+                    0,
+                    labels[i].innerHTML.length - 1
+                );
         }
 
         startTimer.disabled = validTimer();
@@ -137,8 +139,7 @@ startTimer.disabled = validTimer();
 
 function validTimer() {
     for (let i = 0; i < 3; i++) {
-        if (inputs[i].value !== '' && parseInt(inputs[i].value) > 0)
-            return false;
+        if (inputs[i].value !== '' && parseInt(inputs[i].value) > 0) return false;
     }
     return true;
 }
@@ -225,8 +226,7 @@ function subtractTime() {
 }
 
 function onTimerEnd() {
-    for (let i = 0; i < 1000; i++)
-        clearInterval(i);
+    for (let i = 0; i < 1000; i++) clearInterval(i);
 
     timerStarted = false;
     localStorage.removeItem('currentTimer');
