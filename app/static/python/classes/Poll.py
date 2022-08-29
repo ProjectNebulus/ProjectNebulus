@@ -6,7 +6,7 @@ from mongoengine import (
     StringField,
     URLField,
     ValidationError,
-    EmbeddedDocument
+    EmbeddedDocument,
 )
 
 
@@ -16,7 +16,9 @@ class Poll(EmbeddedDocument):
     name = StringField(required=True)
     description = StringField(default="", null=True)
     upload_date = DateTimeField(default=lambda: datetime.now)
-    folder = ReferenceField("Folder", default=None, null=True, required=True)  # 0 if it's in the course, not any folder
+    folder = ReferenceField(
+        "Folder", default=None, null=True, required=True
+    )  # 0 if it's in the course, not any folder
     course = ReferenceField("Course", default=None, null=True, required=True)
 
     def clean(self):

@@ -1,7 +1,7 @@
 function uploadLink() {
     let request = $.ajax({
         type: 'POST',
-        url: '/api/v1/internal/upload_file_link',
+        url: '/api/v1/internal/create/upload/link',
         data: {
             link: document.getElementById('thelink').value,
             course: course_id,
@@ -24,7 +24,7 @@ function uploadFile() {
 
     let request = $.ajax({
         type: 'POST',
-        url: '/api/v1/internal/upload-document',
+        url: '/api/v1/internal/create/upload/document',
         processData: false,
         contentType: false,
         data: formData

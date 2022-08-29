@@ -1,5 +1,10 @@
-from mongoengine import (DateTimeField, EmbeddedDocumentField, ListField,
-                         ReferenceField, StringField)
+from mongoengine import (
+    DateTimeField,
+    EmbeddedDocumentField,
+    ListField,
+    ReferenceField,
+    StringField,
+)
 
 from .Avatar import Avatar
 from .Snowflake import Snowflake

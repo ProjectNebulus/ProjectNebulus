@@ -9,7 +9,7 @@ function deleteMaterial(delete_button) {
 
     const request = $.ajax({
         type: 'POST',
-        url: '/api/v1/internal/delete-file',
+        url: '/api/v1/internal/delete/file',
         contentType: 'application/json',
         data: JSON.stringify({course_id: contents[0], document_id: contents[1]})
     });

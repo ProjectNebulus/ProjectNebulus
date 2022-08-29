@@ -4,8 +4,7 @@ import schoolopy
 from flask import request, session
 
 from app.routes.api.v1.internal import internal
-from app.static.python.extensions.integrations.schoology import \
-    create_schoology_auth
+from app.static.python.extensions.integrations.schoology import create_schoology_auth
 from app.static.python.mongodb import create, read, update
 from app.static.python.utils.colors import getColor
 
@@ -32,7 +31,9 @@ async def import_schoology():
         access_token=schoology.Schoology_access_token,
         access_token_secret=schoology.Schoology_access_secret,
     )
-    auth.request_authorization(callback_url=(request.url_root + "/api/v1/internal/schoology-callback"))
+    auth.request_authorization(
+        callback_url=(request.url_root + "/api/v1/internal/schoology-callback")
+    )
     while not auth.authorized:
         auth.authorize()
     sc = schoolopy.Schoology(auth)
@@ -187,7 +188,9 @@ def user_connect_to_schoology_route():
     auth = schoolopy.Auth(
         key, secret, three_legged=True, domain=request.form.get("link")
     )
-    return auth.request_authorization(callback_url=request.url_root + "/api/v1/internal/schoology-callback")
+    return auth.request_authorization(
+        callback_url=request.url_root + "/api/v1/internal/schoology-callback"
+    )
 
 
 @internal.route("/connect-to-schoology", methods=["POST"])

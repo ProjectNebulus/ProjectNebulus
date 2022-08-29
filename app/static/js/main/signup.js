@@ -9,7 +9,7 @@ function createUser() {
     console.log(document.getElementById('chosen').value);
     const request = $.ajax({
         type: 'POST',
-        url: '/api/v1/internal/create-user',
+        url: '/api/v1/internal/create/user',
         data: JSON.stringify({
             email: document.getElementById('email').value,
             username: document.getElementById('username').value,
@@ -177,7 +177,7 @@ window.addEventListener('load', function () {
         if (VALID_USERNAME_REGEX.test(value)) {
             const request = $.ajax({
                 type: 'POST',
-                url: '/api/v1/internal/check-signup-user',
+                url: '/api/v1/internal/check/signup/user',
                 data: {
                     username: value
                 }
@@ -235,7 +235,7 @@ window.addEventListener('load', function () {
         // return true;
         const request = $.ajax({
             type: 'POST',
-            url: '/api/v1/internal/check-signup-email',
+            url: '/api/v1/internal/check/signup/email',
             data: {
                 email: value
             }
@@ -287,7 +287,7 @@ window.addEventListener('load', function () {
         status.innerHTML = '<br>';
         const request = $.ajax({
             type: 'POST',
-            url: '/api/v1/internal/check-verification-code',
+            url: '/api/v1/internal/check/verification-code',
             contentType: 'application/json',
             data: JSON.stringify({value: verification.value})
         });

@@ -1,7 +1,6 @@
 import time
 
-from mongoengine import (EmbeddedDocument, ListField, ReferenceField,
-                         StringField)
+from mongoengine import EmbeddedDocument, ListField, ReferenceField, StringField
 
 from app.static.python.utils.snowflake_generator import make_snowflake
 

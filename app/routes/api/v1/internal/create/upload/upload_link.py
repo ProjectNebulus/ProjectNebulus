@@ -17,7 +17,7 @@ def allowed_file(filename):
     return True
 
 
-@internal.route("/upload_file_link", methods=["POST"])
+@internal.route("/create/upload/link", methods=["POST"])
 def upload_file_link():
     course = request.form.get("course")
     folder = request.form.get("folder")

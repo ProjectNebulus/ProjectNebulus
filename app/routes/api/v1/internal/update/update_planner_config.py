@@ -7,8 +7,8 @@ from app.routes.main import private_endpoint
 from app.static.python.mongodb import update
 
 
-@internal.route("/planner/saveConfig", methods=["POST"])
+@internal.route("/update/planner/config", methods=["POST"])
 @private_endpoint
-def saveConfig():
+def update_planner_config():
     data = next(request.form.items())[0]
     return update.saveConfig(loads(data), session["id"])

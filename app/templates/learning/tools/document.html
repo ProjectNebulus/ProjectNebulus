@@ -854,7 +854,7 @@
             let content = document.getElementById('editor').innerHTML;
             let title = document.getElementById("name").value; //document.getElementById('title').value;
             let request = $.ajax({
-                url: "/api/v1/internal/nebulusdoc/save",
+                url: "/api/v1/internal/update/nebulusdoc",
                 method: "POST",
                 data: {
                     "title": title,

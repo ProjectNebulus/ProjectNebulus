@@ -9,7 +9,7 @@ from app.static.python.mongodb import create
 from app.static.python.utils.security import hash256
 
 
-@internal.route("/create-user", methods=["POST"])
+@internal.route("/create/user", methods=["POST"])
 def create_user():
     data = request.get_json()
     cats = {

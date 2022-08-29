@@ -2,8 +2,15 @@ import datetime
 
 from flask import session
 
-from ..classes import (Chat, Community, Message, NebulusDocument, Planner,
-                       Schoology, User)
+from ..classes import (
+    Chat,
+    Community,
+    Message,
+    NebulusDocument,
+    Planner,
+    Schoology,
+    User,
+)
 from ..classes.Notepad import Notepad
 from ..utils.security import hash256
 

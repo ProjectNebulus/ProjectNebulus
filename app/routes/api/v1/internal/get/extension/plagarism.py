@@ -1,7 +1,7 @@
 from flask import request
 
 from app.routes.api.v1.internal import internal
-from app.static.python.extensions.custom.plagarism import daplagarism
+from app.static.python.extensions.custom.plagarism import check_plagarism
 
 
 @internal.route("/plagarism", methods=["POST"])
@@ -14,7 +14,7 @@ def plagarism():
     text1 = data["text1"]
     text2 = data["text2"]
     try:
-        result = daplagarism(text1, text2)
+        result = check_plagarism(text1, text2)
         if result[1] == True:
             result[1] = "This is Plagarized by: "
         else:

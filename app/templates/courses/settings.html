@@ -50,7 +50,7 @@
         function deleteCourse() {
             const request = $.ajax({
                 type: "POST",
-                url: "/api/v1/internal/delete-course",
+                url: "/api/v1/internal/delete/course",
                 data: JSON.stringify({
                     course: "{{ course_id }}",
                 }),
@@ -61,10 +61,11 @@
                 window.close();
             });
         }
-        function saveChanges(){
+
+        function saveChanges() {
             const request = $.ajax({
                 type: "POST",
-                url: "/api/v1/internal/change-course",
+                url: "/api/v1/internal/update/course",
                 data: JSON.stringify({
                     course: "{{ course_id }}",
                     name: document.getElementById("name"),

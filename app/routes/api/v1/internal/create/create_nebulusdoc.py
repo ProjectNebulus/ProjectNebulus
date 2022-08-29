@@ -3,7 +3,7 @@ from app.routes.main import private_endpoint
 from app.static.python.mongodb import create
 
 
-@internal.route("/nebulusdoc/create", methods=["POST"])
+@internal.route("/create/nebulusdoc", methods=["POST"])
 @private_endpoint
 def newNebulusdoc():
     data = {

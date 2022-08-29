@@ -1,10 +1,10 @@
 from flask import request, session
-from static.python.classes import DocumentFile, Course
 
 from app.routes.api.v1.internal import internal
+from app.static.python.classes import DocumentFile, Course
 
 
-@internal.route("/delete-file", methods=["POST"])
+@internal.route("/delete/file", methods=["POST"])
 def deleteFile():
     data = request.get_json()
     course = Course.objects(pk=data.get("course_id"))[0]

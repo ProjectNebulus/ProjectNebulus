@@ -13,7 +13,7 @@ def docs():
         user=session.get("username"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         translate=getText,
-        docs=docs
+        docs=docs,
     )
 
 
@@ -61,7 +61,7 @@ def notepad():
         fonts=fonts,
         translate=getText,
         courses=courses,
-        notepad=user_notepad
+        notepad=user_notepad,
     )
 
 

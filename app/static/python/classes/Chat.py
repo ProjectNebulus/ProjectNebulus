@@ -1,8 +1,14 @@
 from datetime import datetime
 
-from mongoengine import (DateTimeField, EmbeddedDocument,
-                         EmbeddedDocumentField, IntField, ListField,
-                         ReferenceField, StringField)
+from mongoengine import (
+    DateTimeField,
+    EmbeddedDocument,
+    EmbeddedDocumentField,
+    IntField,
+    ListField,
+    ReferenceField,
+    StringField,
+)
 
 from .Avatar import Avatar
 from .Message import Message

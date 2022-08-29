@@ -1,7 +1,12 @@
 from datetime import datetime
 
-from mongoengine import (DateTimeField, ListField, ReferenceField, StringField,
-                         ValidationError)
+from mongoengine import (
+    DateTimeField,
+    ListField,
+    ReferenceField,
+    StringField,
+    ValidationError,
+)
 
 from .Snowflake import Snowflake
 

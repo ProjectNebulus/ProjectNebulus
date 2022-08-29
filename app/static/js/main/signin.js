@@ -132,7 +132,7 @@ function startSchoology() {
     function checkIfDone() {
         const request = $.ajax({
             type: 'GET',
-            url: '/api/v1/internal/check-schoology-connection',
+            url: '/api/v1/internal/check/schoology',
             data: {}
         });
 
@@ -239,7 +239,7 @@ window.addEventListener('load', function () {
         if (email.value === '' || password.value === '') return;
 
         const xhttp = new XMLHttpRequest();
-        xhttp.open('POST', '/api/v1/internal/check-signin', true);
+        xhttp.open('POST', '/api/v1/internal/check/signin', true);
         xhttp.setRequestHeader('Content-type', 'application/json');
         xhttp.addEventListener('load', afterCheck);
         xhttp.send(

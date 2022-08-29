@@ -251,7 +251,7 @@ function saveConfig() {
 
     const request = $.ajax({
         type: 'POST',
-        url: '/api/v1/internal/planner/saveConfig',
+        url: '/api/v1/internal/update/planner/config',
         data: JSON.stringify(values)
     });
 
@@ -340,7 +340,7 @@ function formatAMPM(date) {
 function loadFromServer() {
     const request = $.ajax({
         type: 'GET',
-        url: '/api/v1/internal/planner/load'
+        url: '/api/v1/internal/get/planner'
     });
 
     request.done((data) => {
@@ -405,7 +405,7 @@ function recursiveSave(saveDict, count) {
 
     const request = $.ajax({
         type: 'POST',
-        url: '/api/v1/internal/planner/save',
+        url: '/api/v1/internal/update/planner',
         data: JSON.stringify(saveDict)
     });
 

@@ -8,7 +8,7 @@ from app.static.python.mongodb import read
 internal.secret_key = os.getenv("MONGOPASS")
 
 
-@internal.route("/check-signin", methods=["POST"])
+@internal.route("/check/signin", methods=["POST"])
 def checkSignin():
     json = request.get_json()
     validation = read.check_signin(json["email"], json["password"])

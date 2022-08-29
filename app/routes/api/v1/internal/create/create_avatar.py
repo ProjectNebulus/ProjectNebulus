@@ -4,7 +4,7 @@ from app.routes.api.v1.internal import internal
 from app.static.python.cdn.upload_avatar import upload_avatar
 
 
-@internal.route("/create_avatar", methods=["POST"])
+@internal.route("/create/avatar", methods=["POST"])
 def create_avatar():
     """
     Create a new avatar.

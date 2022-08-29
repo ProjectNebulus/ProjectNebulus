@@ -4,7 +4,7 @@ from app.routes.api.v1.internal import internal
 from app.static.python.cdn.upload_document import upload_document
 
 
-@internal.route("/upload-document", methods=["POST"])
+@internal.route("/create/upload/document", methods=["POST"])
 def upload_file():
     print("arrived")
     course = request.form.get("course")

@@ -10,7 +10,7 @@ from app.static.python.mongodb import create, read
 from app.static.python.utils.colors import getColor
 
 
-@internal.route("/create-course", methods=["POST"])
+@internal.route("/create/course", methods=["POST"])
 def create_course():
     data = request.get_json()
     if data["name"] == "":
@@ -88,7 +88,7 @@ def getPFP(courseid):
         return None
 
 
-@internal.route("/createGcourse", methods=["POST"])
+@internal.route("/create/course/google", methods=["POST"])
 def create_google_course():
     post_data = request.get_json()
     if request.method == "GET":
@@ -122,7 +122,7 @@ def create_google_course():
     return "success"
 
 
-@internal.route("/createCanvascourse", methods=["POST"])
+@internal.route("/create/course/canvas", methods=["POST"])
 def create_canvas_course():
     post_data = request.get_json()
     if request.method == "GET":
@@ -181,10 +181,10 @@ def create_canvas_course():
     return "success"
 
 
-@internal.route("/createSchoologyCourse", methods=["GET", "POST"])
+@internal.route("/create/course/schoology", methods=["GET", "POST"])
 def create_schoology_course():
     post_data = request.json
-    print("Request Recieved `/createSchoologyCourse`")
+    print("Request Recieved `/create/course/schoology`")
     if request.method == "GET":
         post_data = request.args
     link = post_data["link"]
@@ -209,7 +209,9 @@ def create_schoology_course():
         access_token=schoology.Schoology_access_token,
         access_token_secret=schoology.Schoology_access_secret,
     )
-    auth.request_authorization(callback_url=(request.url_root + "/api/v1/internal/schoology-callback"))
+    auth.request_authorization(
+        callback_url=(request.url_root + "/api/v1/internal/schoology-callback")
+    )
     while not auth.authorized:
         auth.authorize()
     sc = schoolopy.Schoology(auth)
@@ -266,7 +268,9 @@ def create_schoology_course():
     scdiscussions = sc.get_discussions(section_id=link)
     for i in range(0, len(scdiscussions)):
         scdiscussion = scdiscussions[i]
-        scdiscussionreplies = sc.get_discussion_replies(section_id=link, discussion_id=scdiscussion["id"])
+        scdiscussionreplies = sc.get_discussion_replies(
+            section_id=link, discussion_id=scdiscussion["id"]
+        )
 
     scevents = sc.get_section_events(link)
     for event in scevents:

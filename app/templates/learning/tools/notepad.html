@@ -930,8 +930,8 @@
 
         function saveEditor() {
             let request = $.ajax({
-                {#url: "/api/v1/internal/nebulusdoc/save",#}
-                url: "/api/v1/internal/nebulusnotepad/save",
+                {#url: "/api/v1/internal/update/nebulusdoc",#}
+                url: "/api/v1/internal/update/notepad",
                 method: "POST",
                 data: {
                     course_id: document.getElementById("course_id").innerText,

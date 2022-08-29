@@ -143,7 +143,7 @@
     <script>
         function click_doc() {
             let request = $.ajax({
-                url: "/api/v1/internal/nebulusdoc/create",
+                url: "/api/v1/internal/create/nebulusdoc",
                 type: "POST",
             });
             request.done(function (msg) {

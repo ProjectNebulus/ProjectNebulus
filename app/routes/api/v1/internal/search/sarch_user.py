@@ -10,7 +10,7 @@ from app.static.python.mongodb import create, read
 from app.static.python.utils.security import hash256
 
 
-@internal.route("/create-user", methods=["POST"])
+@internal.route("/create/user", methods=["POST"])
 def create_user():
     data = request.get_json()
     cats = {
@@ -167,7 +167,12 @@ def search_within_user():
 
     for nebdoc in NebulusDocuments:
         everything.append(
-            ["NebDoc", nebdoc.title, nebdoc.content[0:100], "a"]  # type  # name  # description
+            [
+                "NebDoc",
+                nebdoc.title,
+                nebdoc.content[0:100],
+                "a",
+            ]  # type  # name  # description
         )
 
     for account in accounts:

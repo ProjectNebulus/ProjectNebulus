@@ -1,11 +1,11 @@
-from app.routes.main import private_endpoint
+from app.routes.api import internal
 
 from app.routes.main import private_endpoint
 
 
 @internal.route(
-    "nebulusDocuments/share", methods=["POST"]
+    "/update/nebulusdoc/sharing", methods=["POST"]
 )  # For sharing a document with another user
 @private_endpoint
-def shareDoc():
+def share_nebulusdoc():
     pass

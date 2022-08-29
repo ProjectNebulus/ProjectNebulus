@@ -510,7 +510,7 @@ window.addEventListener('load', () => {
         status.innerHTML = 'Creating course...';
 
         const xhttp = new XMLHttpRequest();
-        xhttp.open('POST', '/api/v1/internal/createGcourse', true);
+        xhttp.open('POST', '/api/v1/internal/create/course/google', true);
         xhttp.setRequestHeader('Content-type', 'application/json');
         xhttp.addEventListener('load', googleCourseReq);
         xhttp.send(
@@ -553,7 +553,7 @@ window.addEventListener('load', () => {
         status.innerHTML = 'Creating course...';
 
         const xhttp = new XMLHttpRequest();
-        xhttp.open('POST', '/api/v1/internal/createCanvascourse', true);
+        xhttp.open('POST', '/api/v1/internal/create/course/canvas', true);
         xhttp.setRequestHeader('Content-type', 'application/json');
         xhttp.addEventListener('load', canvasCourseReq);
         xhttp.send(
@@ -658,7 +658,7 @@ function importSchoology() {
     status.innerHTML = 'Creating course...';
 
     const xhttp = new XMLHttpRequest();
-    xhttp.open('POST', '/api/v1/internal/createSchoologyCourse', true);
+    xhttp.open('POST', '/api/v1/internal/create/course/schoology', true);
     xhttp.setRequestHeader('Content-type', 'application/json');
     xhttp.addEventListener('load', schoologyCourseReq);
     xhttp.send(

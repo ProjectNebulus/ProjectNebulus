@@ -1,8 +1,15 @@
 from datetime import datetime
 
-from mongoengine import (BooleanField, DateTimeField, EmailField,
-                         EmbeddedDocumentField, IntField, ListField,
-                         ReferenceField, StringField)
+from mongoengine import (
+    BooleanField,
+    DateTimeField,
+    EmailField,
+    EmbeddedDocumentField,
+    IntField,
+    ListField,
+    ReferenceField,
+    StringField,
+)
 
 from .Avatar import Avatar
 from .Calendar import Calendar
