@@ -57,13 +57,7 @@
             {% endfor %}
             <br>
             {% for document in course.documents %}
-            <div onclick="startFile('{{ document.name }}', siteName + '/getResource/{{ course.id }}/{{ document.id }}',
-{{ ("
-                     pdf
-                     in
-                     document.url
-                     string
-                     lower
+                <div onclick="startFile('{{ document.name }}', siteName + '/getResource/{{ course.id }}/{{ document.id }}',{{ ("pdf" in document.url)|string|lower }})"
                      class="editable p-6 mb-8 bg-white rounded-lg cursor-pointer border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 relative"
                      style="width: min-content; max-width: 90%">
                     <div class="edit-controls absolute flex bg-gray-500 dark:bg-gray-800 material-icons rounded-lg text-gray-200 dark:text-gray-500 overflow-hidden shadow"

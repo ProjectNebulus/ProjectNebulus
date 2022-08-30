@@ -249,7 +249,7 @@ function navFetchStatus() {
     });
 
     request.done((data) => {
-        if (parseInt(data)) {
+        if (data === "2") {
             document.getElementById('spotifyStatus').style.display = 'none';
             shouldGetSpotify = false;
             clearInterval(statusInterval);

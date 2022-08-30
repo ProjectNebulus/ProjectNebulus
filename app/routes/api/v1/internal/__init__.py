@@ -13,4 +13,9 @@ v1.register_blueprint(internal)
 
 # Importing routes for this blueprint
 
-from app.routes.api.v1.internal.check import *
+from .check import *
+from .create import *
+from .delete import *
+from .get import *
+from .search import *
+from .update import *

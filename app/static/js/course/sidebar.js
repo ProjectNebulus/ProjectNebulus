@@ -1,4 +1,4 @@
-sidebar = document.querySelector('aside:not(#sidebar_)');
+const sidebar = document.querySelector("aside:not(#sidebar_)");
 
 let sidebarLinks = sidebar.getElementsByTagName('a');
 

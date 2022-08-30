@@ -28,13 +28,13 @@ def convert(secs):
 def spotify_status():
     song = get_currently_playing()
     if song[0] == 1:
-        return "1"  # Spotify Not Detected
+        return "1", 200  # Spotify Not Detected
 
     elif song[0] == 2:
-        return "2"  # Spotify Isn't Connected
+        return "2", 200  # Spotify Isn't Connected
 
     elif song[0] == 3:
-        return "3"  # Spotify Not Registered in Developer Dashboard
+        return "3", 200  # Spotify Not Registered in Developer Dashboard
 
     elif len(song) == 8:
         # TODO: support advertisements, returns 500 currently
@@ -75,27 +75,27 @@ def spotify_status():
                     'class="material-icons">pause</i> '
                 )
         string = (
-            name
-            + " • "
-            + artists
-            + " • "
-            + album
-            + " • "
-            + str(explicit)
-            + " • "
-            + image
-            + " • "
-            + str(playing)
-            + " • "
-            + str(timestamp)
-            + " • "
-            + str(total)
-            + " • "
-            + str(ratio)
+                name
+                + " • "
+                + artists
+                + " • "
+                + album
+                + " • "
+                + str(explicit)
+                + " • "
+                + image
+                + " • "
+                + str(playing)
+                + " • "
+                + str(timestamp)
+                + " • "
+                + str(total)
+                + " • "
+                + str(ratio)
         )
     else:
         string = "You aren't listening to anything!"
-    return string
+    return string, 200
 
 
 @internal.route("/spotify/skip-f", methods=["POST"])
