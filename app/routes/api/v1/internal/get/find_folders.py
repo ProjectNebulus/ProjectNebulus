@@ -1,6 +1,6 @@
 """Find Folders"""
 
-from app.routes.api.v1.internal import internal
+from .. import internal
 from app.routes.main.utils import private_endpoint
 from app.static.python.mongodb import read
 

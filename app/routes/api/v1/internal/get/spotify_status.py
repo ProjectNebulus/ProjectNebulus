@@ -1,6 +1,6 @@
 from flask import request
 
-from app.routes.api.v1.internal import internal
+from .. import internal
 from app.routes.main.spotify import (
     get_currently_playing,
     loop1_spotify,

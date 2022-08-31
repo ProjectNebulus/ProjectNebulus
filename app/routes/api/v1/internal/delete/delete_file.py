@@ -1,6 +1,6 @@
 from flask import request, session
 
-from app.routes.api.v1.internal import internal
+from .. import internal
 from app.static.python.classes import Course, DocumentFile
 
 
@@ -12,7 +12,7 @@ def deleteFile():
     if session.get("id") not in [u.id for u in course.authorizedUsers]:
         return "not found", 403
 
-    file = DocumentFile.objects(id=data["document_id"])[0]
+    file = DocumentFile.objects(pk=data["document_id"])[0]
 
     if file not in course.documents:
         return "not found", 403

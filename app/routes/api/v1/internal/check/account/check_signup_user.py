@@ -1,6 +1,6 @@
 from flask import request
 
-from app.routes.api.v1.internal import internal
+from ... import internal
 from app.static.python.mongodb import read
 
 

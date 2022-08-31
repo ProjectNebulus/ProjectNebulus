@@ -3,7 +3,7 @@ from datetime import datetime
 
 from flask import request, session
 
-from app.routes.api.v1.internal import internal
+from .. import internal
 from app.static.python.classes import Avatar, ChatProfile
 from app.static.python.mongodb import create
 from app.static.python.utils.security import hash256
@@ -42,7 +42,7 @@ def create_user():
     data["avatar"] = cats[int(data["avatar"].replace("cat", ""))]
     data["avatar"] = Avatar(
         avatar_url="https://beta.nebulus.ml/static/images/nebulusCats/"
-        + data["avatar"],
+                   + data["avatar"],
         parent="User",
     )
     data["age"] = datetime.strptime(data["age"].strip(), "%m/%d/%Y")

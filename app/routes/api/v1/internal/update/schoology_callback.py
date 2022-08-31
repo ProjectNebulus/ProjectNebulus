@@ -1,6 +1,6 @@
 from flask import session
 
-from . import internal
+from routes.api.v1.internal import internal
 
 
 @internal.route("/schoology-callback")

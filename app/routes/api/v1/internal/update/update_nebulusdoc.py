@@ -2,7 +2,7 @@ from datetime import datetime
 
 from flask import request
 
-from app.routes.api.v1.internal import internal
+from .. import internal
 from app.routes.main import private_endpoint
 from app.static.python.mongodb import create
 
@@ -19,3 +19,9 @@ def update_nebulusdoc():
     create.update_nebulusdoc(data)
 
     return "success"
+
+
+@internal.route("/update/nebulusdoc/sharing", methods=["POST"])
+@private_endpoint
+def share_nebulusdoc():
+    pass

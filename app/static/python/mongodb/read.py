@@ -11,11 +11,15 @@ from app.static.python.utils.security import valid_password
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 
-with open("app/static/python/dictionary.json") as dictFile:
-    dictionary = json.loads(dictFile.read())
+dictionary = None
 
 
 def getText(query):
+    global dictionary
+    if not dictionary:
+        with open("app/static/python/dictionary.json") as dictFile:
+            dictionary = json.loads(dictFile.read())
+
     try:
         return dictionary[query][session.get("global", "us")]
     except KeyError:

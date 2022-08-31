@@ -2,7 +2,7 @@ from flask import Blueprint
 
 api_blueprint = Blueprint(
     "api",
-    __name__,
+    "api",
     url_prefix="/api",
     template_folder="templates",
     static_folder="static",

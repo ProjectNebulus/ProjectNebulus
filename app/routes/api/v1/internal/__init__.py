@@ -4,7 +4,7 @@ from .. import v1
 
 internal = flask.Blueprint(
     "internal",
-    __name__,
+    "internal",
     url_prefix="/internal",
     static_folder="static",
     template_folder="templates",

@@ -2,7 +2,7 @@ from datetime import datetime
 
 from flask import request, session
 
-from app.routes.api.v1.internal import internal
+from .. import internal
 from app.static.python.mongodb import read
 
 log_data = True

@@ -3,7 +3,7 @@ from datetime import datetime
 import schoolopy
 from flask import request, session
 
-from app.routes.api.v1.internal import internal
+from .. import internal
 from app.static.python.extensions.integrations.schoology import create_schoology_auth
 from app.static.python.mongodb import create, read, update
 from app.static.python.utils.colors import getColor

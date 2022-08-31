@@ -5,7 +5,7 @@ import schoolopy
 from flask import request, session
 from googleapiclient.discovery import build
 
-from app.routes.api.v1.internal import internal
+from .. import internal
 from app.static.python.mongodb import create, read
 from app.static.python.utils.colors import getColor
 

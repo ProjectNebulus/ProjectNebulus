@@ -1,6 +1,6 @@
 from flask import Flask, request
 
-from app.routes.api.v1.internal import internal
+from .. import internal
 from app.static.python.cdn import utils
 from app.static.python.mongodb import create
 

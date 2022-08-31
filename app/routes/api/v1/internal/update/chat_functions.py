@@ -12,15 +12,16 @@ from pandas import *
 from app.static.python.classes import User
 from app.static.python.mongodb import create, delete, read, update
 
-from .....static.python.classes import ChatMember
-from .... import socketio
-from . import internal
+from static.python.classes import ChatMember
+from routes import socketio
+from routes.api.v1.internal import internal
+
 
 # from app.static.python.school import get_school
 
 
 def get_school():
-    # xls = ExcelFile("..../static/school_db.xlsx")
+    # xls = ExcelFile(".../static/school_db.xlsx")
     # xls = ExcelFile("./school_db.xlsx")
     # ls = ExcelFile("/school_db.xlsx")
     xls = ExcelFile("school_db.xlsx")
@@ -296,14 +297,14 @@ def get_embed():
     try:
         if "youtube.com/watch" in link:
             location = link.index("v=")
-            id = link[location + 2 : location + 14]
+            id = link[location + 2: location + 14]
             image = """
             
            <iframe width="560" height="315" src="https://www.youtube.com/embed/${id}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>"""
 
         if "youtu.be/" in link:
             location = link.index("/")
-            id = link[location + 1 : location + 13]
+            id = link[location + 1: location + 13]
             image = """
             
            <iframe width="560" height="315" src="https://www.youtube.com/embed/${id}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>"""
@@ -317,12 +318,12 @@ def get_embed():
     except:
         color = ""
     if (
-        title != ""
-        or url != ""
-        or color != ""
-        or image != ""
-        or site != ""
-        or descrip != ""
+            title != ""
+            or url != ""
+            or color != ""
+            or image != ""
+            or site != ""
+            or descrip != ""
     ):
         embed = f"""
         <div style="border-style: none none none solid; border-width:3px; border-color:{color}" class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
@@ -458,12 +459,12 @@ def fetchMessages():
     if len(chat["messages"]) < data["current_index"] + 50:
         print(len(chat["messages"]))
         chat["messages"] = list(reversed(chat["messages"]))[
-            data["current_index"] : len(chat["messages"])
-        ]
+                           data["current_index"]: len(chat["messages"])
+                           ]
     else:
         chat["messages"] = list(reversed(chat["messages"]))[
-            data["current_index"] : (data["current_index"] + 50)
-        ]
+                           data["current_index"]: (data["current_index"] + 50)
+                           ]
 
     for message in chat["messages"]:
         message["sender"] = json.loads(

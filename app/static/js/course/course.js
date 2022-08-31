@@ -1,5 +1,7 @@
 let actions, pageTitle, createButton;
-window.addEventListener('click', () => {
+window.addEventListener('load', () => {
+    sidebarLinks = document.querySelectorAll('aside:not(#sidebar_) a');
+
     actions = document.getElementsByClassName('link');
     pageTitle = document.getElementById('page-title');
     createButton = document.getElementById('create');
@@ -81,3 +83,41 @@ window.addEventListener('click', () => {
         });
     });
 });
+
+function setCreateButton(title) {
+    for (const a of actions) a.innerHTML = '';
+
+    switch (title.toLowerCase()) {
+        case 'documents':
+            actions[0].innerHTML = 'Upload File';
+            actions[0].onclick = () => openModal('createDocument');
+            actions[1].innerHTML = 'Post a link';
+            actions[1].onclick = () => openModal('postLink');
+            actions[2].innerHTML = 'Add Assignment';
+            actions[2].onclick = () => openModal('createAssignment');
+            break;
+
+        case 'announcements':
+            actions[0].innerHTML = 'Add Announcement';
+            actions[0].onclick = () => openModal('createAnnouncement');
+            break;
+
+        case 'textbook':
+            actions[0].innerHTML = 'Create Textbook';
+            actions[0].onclick = () => openModal('createTextbook');
+            break;
+    }
+
+    let hideButton = true;
+    for (const a of actions) {
+        if (a.innerHTML !== '') {
+            a.innerHTML =
+                '<span class="material-icons mr-1.5" style="vertical-align: bottom">add</span>' +
+                a.innerHTML;
+            a.parentElement.classList.remove('hidden');
+            hideButton = false;
+        } else a.parentElement.classList.add('hidden');
+    }
+
+    createButton.style.display = hideButton ? 'none' : 'block';
+}

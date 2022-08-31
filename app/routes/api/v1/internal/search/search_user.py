@@ -4,7 +4,7 @@ from datetime import datetime
 from flask import request, session
 from flask.json import jsonify
 
-from app.routes.api.v1.internal import internal
+from .. import internal
 from app.static.python.classes import Avatar, Chat, ChatProfile, User
 from app.static.python.mongodb import create, read
 from app.static.python.utils.security import hash256
