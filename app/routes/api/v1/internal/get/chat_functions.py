@@ -272,12 +272,12 @@ def changeStatus():
 def get_embed():
     from bs4 import BeautifulSoup
 
-    link = flask.request.args.get("link")
+    link = request.args.get("link")
     try:
-        request = requests.get(link)
+        req = requests.get(link)
     except:
         return "invalid"
-    soup = BeautifulSoup(request.content, "html.parser")
+    soup = BeautifulSoup(req.content, "html.parser")
     try:
         title = soup.find("meta", property="og:title")["content"]
     except:
@@ -287,9 +287,9 @@ def get_embed():
     except:
         url = ""
     try:
-        descrip = soup.find("meta", property="og:description")["content"]
+        description = soup.find("meta", property="og:description")["content"]
     except:
-        descrip = ""
+        description = ""
     try:
         site = soup.find("meta", property="og:site_name")["content"]
     except:
@@ -323,13 +323,13 @@ def get_embed():
             or color != ""
             or image != ""
             or site != ""
-            or descrip != ""
+            or description != ""
     ):
         embed = f"""
         <div style="border-style: none none none solid; border-width:3px; border-color:{color}" class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
         <a href="{url}"><h5 class="mb-2 text-md hover:underline font-bold tracking-tight text-black dark:text-white">{site}</h5></a>
         <a href="{link}"><h5 class="mb-2 text-xl hover:underline font-bold tracking-tight text-sky-500">{title}</h5></a>
-        <p class="font-normal text-gray-700 dark:text-gray-400">{descrip}</p>
+        <p class="font-normal text-gray-700 dark:text-gray-400">{description}</p>
         <img src="{image}" style="width:90%; margin:auto; margin-top:10px;">
         </div>
         """
@@ -364,7 +364,7 @@ def join_a_room(data):
     join_room(data["id"])
 
 
-@internal.route("/fetch-chats", methods=["POST"])
+@internal.route("/get/chats", methods=["POST"])
 def fetchChats():
     data = request.get_json()
     current_index = data["index"]
@@ -379,7 +379,7 @@ def fetchChats():
     return jsonify(chats)
 
 
-@internal.route("/get-chat", methods=["POST"])
+@internal.route("/get/chat", methods=["POST"])
 def getChat():
     data = request.get_json()
     chatID = data["chatID"]
@@ -414,7 +414,7 @@ def getChat():
     return jsonify(chat)
 
 
-@internal.route("/get-total-unread", methods=["GET"])
+@internal.route("/get/total-unread", methods=["GET"])
 def get_total_unread():
     chats = read.getUserChats(session["id"], ["members"])
     sum = 0
@@ -425,7 +425,7 @@ def get_total_unread():
     return str(sum)
 
 
-@internal.route("/get-chat-status", methods=["GET"])
+@internal.route("/get/chat-status", methods=["GET"])
 def get_chat_status():
     user = read.find_user(id=session["id"])
     data = {}
@@ -443,7 +443,7 @@ def get_chat_status():
     return data
 
 
-@internal.route("/update-unread", methods=["POST"])
+@internal.route("/update/unread", methods=["POST"])
 def update_unread():
     data = request.get_json()
     update.update_unread(data, session["id"])
@@ -478,13 +478,13 @@ def fetchMessages():
     return jsonify(chat["messages"])
 
 
-@internal.route("/get-friends", methods=["GET"])
+@internal.route("/get/friends", methods=["GET"])
 def get_friends():
     friends = read.get_friends(session["id"])
     return str(friends)
 
 
-@internal.route("/get-blocks", methods=["GET"])
+@internal.route("/get/blocks", methods=["GET"])
 def get_blocked():
     blocked = read.get_blocks(session["id"])
     return str(blocked)

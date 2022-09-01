@@ -35,8 +35,8 @@
     <div style="margin-left: 10px; width: 98%; float: left;" id="documentPage">
         <div style="width:70%;float:left;">
             {% if course.documents|length == 0 and course.folders|length == 0 %}
-                <h1 class="mx-4 my-4 text-xl text-black dark:text-white">You have no documents or folders! Try creating
-                    one!</h1>
+                <h1 class="mx-4 my-4 text-xl text-black dark:text-white">
+                    You have no documents or folders! Try creating one!</h1>
             {% endif %}
             {% for folder in course.folders %}
                 <br>

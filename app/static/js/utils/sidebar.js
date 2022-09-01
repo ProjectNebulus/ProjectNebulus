@@ -16,7 +16,7 @@ if (!(window.location.pathname === "/chat")) {
     let io = window.io;
 
     $.ajax({
-        url: '/api/v1/internal/get-total-unread',
+        url: '/api/v1/internal/get/total-unread',
         type: 'GET'
     })
         .done(function (data) {

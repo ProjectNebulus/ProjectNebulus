@@ -14,7 +14,7 @@ function getChat(chatID) {
     toggleChat();
     document.getElementById(`notification_${chatID}`).classList.add('hidden');
     $.ajax({
-        url: '/api/v1/internal/get-chat',
+        url: '/api/v1/internal/get/chat',
         type: 'POST',
         beforeSend: function () {
             if (!('hidden' in document.getElementById('preview_border').classList)) {

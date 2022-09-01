@@ -3,7 +3,7 @@ import load from './chatSidebarLoader.js';
 function makeCall(getFirst = true) {
     let chatAmount = document.getElementById('user-chats').childElementCount;
     $.ajax({
-        url: '/api/v1/internal/fetch-chats',
+        url: '/api/v1/internal/get/chats',
         type: 'POST',
         beforeSend: function () {
             // $('#user-chats').hide();

@@ -6,7 +6,7 @@ function deleteMaterial(delete_button) {
         return;
 
     const contents = mainElement.getAttribute('onclick').split('/').slice(2, 4);
-    contents[1] = contents[1].replace("', true)", '');
+    contents[1] = contents[1].replace("',true)", '');
 
     const request = $.ajax({
         type: 'POST',

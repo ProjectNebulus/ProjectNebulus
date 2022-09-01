@@ -1,7 +1,5 @@
 let actions, pageTitle, createButton;
 window.addEventListener('load', () => {
-    sidebarLinks = document.querySelectorAll('aside:not(#sidebar_) a');
-
     actions = document.getElementsByClassName('link');
     pageTitle = document.getElementById('page-title');
     createButton = document.getElementById('create');
@@ -12,8 +10,8 @@ window.addEventListener('load', () => {
 
     pageTitle.innerHTML = saveData[0].toUpperCase() + saveData.substring(1);
 
-    for (const link of sidebarLinks) {
-        if (link.innerHTML.includes(saveData)) {
+    for (const link of document.querySelectorAll("a[target=frame]")) {
+        if (link.innerText.toLowerCase().includes(saveData)) {
             link.classList.add('dark:bg-gray-600', 'light:bg-gray-600');
             link.style.pointerEvents = 'none';
             break;

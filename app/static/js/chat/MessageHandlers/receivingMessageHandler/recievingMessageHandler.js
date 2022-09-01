@@ -16,7 +16,7 @@ function newMessageHandler(data) {
         el_notifs.innerText = (parseInt(el_notifs.innerText) + 1).toString(); // Increment the value in the div
         // Make a request to the backend to increment the amount of unread messages on this chat for the user
         $.ajax({
-            url: '/api/v1/internal/update-unread',
+            url: '/api/v1/internal/update/unread',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({

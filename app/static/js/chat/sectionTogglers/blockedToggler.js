@@ -1,6 +1,6 @@
 function openBlocked() {
     $.ajax({
-        url: '/api/v1/internal/get-blocks',
+        url: '/api/v1/internal/get/blocks',
         type: 'GET',
         contentType: 'application/json',
         data: JSON.stringify({})

@@ -19,7 +19,6 @@ lms_choices = (
 
 # In graphql, we use the snowflake as the unique identifier for a node. The snowflake is represented as a String.
 
-
 class Snowflake(Document):
     meta = {"allow_inheritance": True, "abstract": True}
     id = StringField(
@@ -31,3 +30,6 @@ class Snowflake(Document):
 
     def get_timestamp(self) -> datetime.datetime:
         return datetime.datetime.fromtimestamp(melt(int(self.id))[0] / 1000)
+
+    def __eq__(self, other):
+        return self.id == other.id

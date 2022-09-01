@@ -1,13 +1,9 @@
-const sidebar = document.querySelector("aside:not(#sidebar_)");
-
-let sidebarLinks = sidebar.getElementsByTagName('a');
-
-for (const a of sidebarLinks) {
+for (const a of document.querySelectorAll("a[target=frame]")) {
     a.href += '?iframe=true';
     a.onclick = () => {
         window.history.pushState(null, '', a.href.replace('?iframe=true', ''));
 
-        for (const link of sidebarLinks) {
+        for (const link of document.querySelectorAll("a[target=frame]")) {
             if (link === a) continue;
 
             link.style.pointerEvents = 'auto';

@@ -1,6 +1,6 @@
 function openFriends() {
     $.ajax({
-        url: '/api/v1/internal/get-friends',
+        url: '/api/v1/internal//get/friends',
         type: 'GET',
         contentType: 'application/json',
         data: JSON.stringify({})

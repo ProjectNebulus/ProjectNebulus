@@ -88,7 +88,7 @@ for (const a of controlCenter.getElementsByTagName('a'))
 let chatStatus = document.getElementById('chatStatus');
 if (window.location.pathname === '/chat') {
     $.ajax({
-        url: '/api/v1/internal/get-chat-status',
+        url: '/api/v1/internal/get/chat-status',
         type: 'GET'
     }).done(function (data) {
         let status_text = document.getElementById('profile-status-text');
