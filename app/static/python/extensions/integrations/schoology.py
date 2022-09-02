@@ -6,8 +6,7 @@ import schoolopy
 from bs4 import BeautifulSoup
 from flask import session
 
-from app.static.python.mongodb import read
-from app.static.python.mongodb import create
+from app.static.python.mongodb import create, read
 from app.static.python.utils.colors import getColor
 
 
@@ -163,7 +162,7 @@ def generate_schoology_url(link):
     auth = schoolopy.Auth(key, secret, three_legged=True, domain=DOMAIN)
     # Request authorization URL to open in another window.
     url = auth.request_authorization(
-        callback_url=(link + "api/v1/internal/schoology-callback")
+        callback_url=(link + "/api/v1/internal/schoology-callback")
     )
     session["request_token"] = auth.request_token
     session["request_token_secret"] = auth.request_token_secret

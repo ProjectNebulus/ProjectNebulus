@@ -1,20 +1,25 @@
 # Imports
+import eventlet
+
+eventlet.monkey_patch()
 from logging import LogRecord
 
-from flask import has_request_context, session, request, redirect
+from flask import has_request_context, redirect, request, session
 from flask.logging import default_handler, logging
+from flask_babel import Babel
 from flask_cors import CORS
 from flask_mail import Mail
 from flask_socketio import SocketIO
-from flask_babel import Babel, gettext
 
 socketio = SocketIO()
 mail = Mail()
 babel = Babel()
+
+from app.static.python.mongodb import read
+
 from .api import api_blueprint
 from .main import main_blueprint
 from .static import static_blueprint
-from app.static.python.mongodb import read
 
 
 class _LogFilter(logging.Filter):
@@ -85,6 +90,6 @@ def init_app():
     mail.init_app(app)
     logging.getLogger("werkzeug").addFilter(_LogFilter())
     default_handler.setFormatter(_LogFormatter())
-    socketio.init_app(app)
+    socketio.init_app(app, async_mode="eventlet")
 
     return app

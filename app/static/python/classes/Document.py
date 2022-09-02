@@ -20,12 +20,14 @@ class DocumentFile(Snowflake):
     """
 
     meta = {"collection": "Documents"}
-    url = URLField(required=False)
+    url = URLField(required=True)
     name = StringField(required=True)
-    upload_date = DateTimeField(default=lambda: datetime.now)
     description = StringField(default="", null=True)
-    folder = ReferenceField("Folder", default=None, null=True)
-    course = ReferenceField("Course", default=None, null=True)
+    upload_date = DateTimeField(default=lambda: datetime.now)
+    folder = ReferenceField(
+        "Folder", default=None, null=True
+    )  # 0 if it's in the course, not any folder
+    course = ReferenceField("Course", default=None, null=True, required=True)
 
     def clean(self):
         """
@@ -33,10 +35,8 @@ class DocumentFile(Snowflake):
         """
         if not self.url:
             self.url = f"https://nebulus-cdn.sfo3.cdn.digitaloceanspaces.com/Documents/{self.pk}"
-        if self.folder is not None and self.course is not None:
-            raise ValidationError(
-                "Document cannot be linked to both a folder and a course."
-            )
+
+        # Document should be linked to both course and folder. Folder is 0 if its in the root.
         if self.folder is None and self.course is None:
             raise ValidationError(
                 "Document must be linked to either a folder or a course."

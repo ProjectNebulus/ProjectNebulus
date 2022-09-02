@@ -1,20 +1,39 @@
 from __future__ import annotations
 
 import json
-import re
 
 import schoolopy
+from flask import session
 from mongoengine import Q
 
+from app.static.python.classes import *
 from app.static.python.utils.security import valid_password
-from ..classes import *
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
+
+dictionary = None
+
+
+def getText(query):
+    global dictionary
+    if not dictionary:
+        with open("app/static/python/dictionary.json") as dictFile:
+            dictionary = json.loads(dictFile.read())
+
+    try:
+        return dictionary[query][session.get("global", "us")]
+    except KeyError:
+        return query
 
 
 def getAssignment(assignment_id: str) -> Assignment:
     assignment = Assignment.objects(id=assignment_id).first()
     return assignment
+
+
+def getNebulusDocument(document_id: str) -> NebulusDocument:
+    document = NebulusDocument.objects(id=document_id).first()
+    return document
 
 
 def getEvent(event_id: str) -> Event:
@@ -40,6 +59,11 @@ def getFolder(folder_id: str) -> Folder:
 def get_user_courses(user_id: str) -> list[Course]:
     user = find_user(pk=user_id)
     return Course.objects(authorizedUsers=user)
+
+
+def get_user_docs(user_id: str) -> list[NebulusDocument]:
+    user = find_user(pk=user_id)
+    return NebulusDocument.objects(authorizedUsers=user)
 
 
 def search_user(query: str, ignore_id: str = None) -> list[User]:
@@ -100,7 +124,7 @@ def getSchoology(**kwargs) -> list[Schoology] | None:
 
 
 def getClassroom(
-    userID: str = None, username: str = None, email: str = None
+        userID: str = None, username: str = None, email: str = None
 ) -> GoogleClassroom:
     return find_user(id=userID, username=username, email=email).gclassroom
 
@@ -110,7 +134,7 @@ def getSpotify(userID: str = None, username: str = None, email: str = None) -> S
 
 
 def getSpotifyCache(
-    userID: str = None, username: str = None, email: str = None
+        userID: str = None, username: str = None, email: str = None
 ) -> Spotify | None:
     try:
         return find_user(
@@ -136,22 +160,13 @@ def check_type(o):
         return "document"
 
 
-def check_password_username(username, password):
-    validuser = "false"
-    valid_pass = "false"
+def check_signin(email, password):
     try:
-        if re.fullmatch(regex, username):
-            user = find_user(email=username)
-            validuser = "true"
-        else:
-            user = find_user(username=username)
-            validuser = "true"
+        user = find_user(email=email)
     except KeyError:
-        return "false-false"
+        return False
 
-    if valid_password(user.password, password):
-        valid_pass = "true"
-    return f"{validuser}-{valid_pass}"
+    return valid_password(user.password, password)
 
 
 def get_announcement(announcement_id: str) -> Announcement:
@@ -199,7 +214,9 @@ def sort_course_events(user_id: str, course_id: int):
     dates = dict(
         {
             key: list(result)
-            for key, result in groupby(sorted_events, key=lambda obj: sortByDate(obj))
+            for key, result in groupby(
+            sorted_events, key=lambda obj: sortByDateTime(obj)
+        )
         }
     )
 
@@ -210,8 +227,8 @@ def sort_course_events(user_id: str, course_id: int):
                 {
                     key: list(result)
                     for key, result in groupby(
-                        sorted_announcements, key=lambda obj: obj.date.date()
-                    )
+                    sorted_announcements, key=lambda obj: obj.date.date()
+                )
                 }.items()
             )
         )
@@ -229,14 +246,19 @@ def sort_user_events(user_id: str, maxDays=5, maxEvents=16):
     from itertools import chain, groupby
 
     events_assessments_assignments = list(chain(events, assignments, assessments))
-    sorted_events = sorted(
-        events_assessments_assignments[:maxEvents], key=lambda obj: sortByDateTime(obj)
+    sorted_events = reversed(
+        sorted(
+            events_assessments_assignments[:maxEvents],
+            key=lambda obj: sortByDateTime(obj),
+        )
     )
 
     dates = dict(
         {
             key: list(result)
-            for key, result in groupby(sorted_events, key=lambda obj: sortByDate(obj))
+            for key, result in groupby(
+            sorted_events, key=lambda obj: sortByDateTime(obj)
+        )
         }
     )
 
@@ -247,8 +269,8 @@ def sort_user_events(user_id: str, maxDays=5, maxEvents=16):
                 {
                     key: list(result)
                     for key, result in groupby(
-                        sorted_announcements, key=lambda obj: obj.date.date()
-                    )
+                    sorted_announcements, key=lambda obj: obj.date.date()
+                )
                 }.items()
             )[-maxDays:]
         )
@@ -368,11 +390,11 @@ def search(keyword: str, username: str):
         {"$project": {"title": 1, "_id": 1, "_cls": 1}},
     ]
     courses = Course.objects(Q(authorizedUsers=user.id) & Q(name__istartswith=keyword))[
-        :10
-    ]
+              :10
+              ]
     chats = Chat.objects(Q(owner=user.id) & Q(title__istartswith=keyword))[:10]
     NebulusDocuments = NebulusDocument.objects(
-        Q(authorizedUsers=user.id) & Q(name__istartswith=keyword)
+        Q(authorizedUsers=user.id) & Q(title__istartswith=keyword)
     )[:10]
 
     events = list(Event.objects().aggregate(pipeline1))
@@ -416,13 +438,12 @@ def search_course(keyword: str, course: str):
         events,
         assignments,
         announcements,
-        NebulusDocuments,
+        # NebulusDocuments,
     )
 
 
-def getUserChats(user_id: str, required_fields: list):
-    user = find_user(pk=user_id)
-    chats = Chat.objects(members=user).only(*required_fields)
+def getUserChats(user_id, required_fields: list):
+    chats = Chat.objects(members__user=user_id).only(*required_fields)
     return chats
 
 
@@ -434,19 +455,20 @@ def loadChats(user_id: str, current_index, initial_amount, required_fields):
     if len(chats) < current_index + initial_amount:
         initial_amount = len(chats) - current_index
 
-    chats = chats[current_index : (current_index + initial_amount)]
+    chats = chats[current_index: (current_index + initial_amount)]
     for chat in chats:
         if len(chat["members"]) == 2:
             for x, member in enumerate(chat["members"]):
-                chat["members"][x] = json.loads(
+                chat["members"][x]["user"] = json.loads(
                     User.objects.only(
                         "id", "chatProfile", "username", "avatar.avatar_url"
                     )
-                    .get(pk=member)
+                    .get(pk=member["user"])
                     .to_json()
                 )
+                chat["members"][x]["unread"] = str(chat["members"][x]["unread"])
             chat["owner"] = list(
-                filter(lambda x: x["_id"] == chat["owner"], chat["members"])
+                filter(lambda x: x["user"]["_id"] == chat["owner"], chat["members"])
             )[0]
 
     print(chats)
@@ -469,3 +491,15 @@ def get_blocks(user_id):
     except:
         blocked = None
     return blocked
+
+
+def get_user_notepad(user):
+    user = find_user(pk=user)
+    try:
+        # print(user.notepad)
+        notepad = dict(user.notepad.data)
+    except Exception as e:
+
+        print(e)
+        notepad = {}
+    return notepad

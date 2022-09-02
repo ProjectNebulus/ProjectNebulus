@@ -1,7 +1,7 @@
 const HAS_NUMBER = /\d/;
 const EMAIL_REGEX =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-const VALID_USERNAME_REGEX = /^[A-Za-z][a-zA-Z0-9\.\-_]{2,31}$/;
+const VALID_USERNAME_REGEX = /^[A-Za-z][a-zA-Z\d\-_]{2,31}$/;
 let email_valid = false;
 let validPassword = false;
 
@@ -9,7 +9,7 @@ function createUser() {
     console.log(document.getElementById('chosen').value);
     const request = $.ajax({
         type: 'POST',
-        url: '/api/v1/internal/create-user',
+        url: '/api/v1/internal/create/user',
         data: JSON.stringify({
             email: document.getElementById('email').value,
             username: document.getElementById('username').value,
@@ -24,7 +24,12 @@ function createUser() {
         dataType: 'json'
     });
 
-    request.done((data) => (window.location.href = '/dashboard'));
+    request.done((data) => (window.location.href = '/app'));
+}
+
+function nextModal(num) {
+    document.getElementById('step' + num.toString()).style.display = 'none';
+    document.getElementById('step' + (num + 1).toString()).style.display = 'block';
 }
 
 function next(num) {
@@ -44,16 +49,18 @@ function next(num) {
                     username: document.getElementById('username').value
                 })
             });
-            document.getElementById('step' + num.toString()).style.display = 'none';
-            document.getElementById('step' + (num + 1).toString()).style.display = 'block';
+            nextModal(num);
         } else alert("You can't move on yet!");
     } else if (num === 2) {
         console.log(checks);
-        if (checks[4].innerHTML.includes('check') && checks[5].innerHTML.includes('check')) {
-            document.getElementById('step' + num.toString()).style.display = 'none';
-            document.getElementById('step' + (num + 1).toString()).style.display = 'block';
-        } else alert("You can't move on yet!");
-    } else if (num === 3) createUser();
+        if (checks[4].innerHTML.includes('check') && checks[5].innerHTML.includes('check'))
+            nextModal(num);
+        else alert("You can't move on yet!");
+    } else if (num === 3) nextModal(num);
+}
+
+function onComplete() {
+    setTimeout(createUser, 1000);
 }
 
 function prev(num) {
@@ -139,24 +146,24 @@ window.addEventListener('load', function () {
 
     function changeUser() {
         let usernameStatus = errorMessages[1];
-        const usrname = username.value;
+        const value = username.value;
         usernameStatus.style.color = 'red';
         usernameStatus.innerHTML = '<br>';
-        if (!usrname) {
+        if (!value) {
             usernameStatus.innerHTML = 'Please enter a username!';
             validationIcons[1].style.color = 'red';
             validationIcons[1].innerHTML = '<i class="material-icons">close</i>';
-            usrname.classList.add(...RED_BORDER);
+            username.classList.add(...RED_BORDER);
             return false;
         }
-        if (usrname.length < 3) {
+        if (value.length < 3) {
             usernameStatus.innerHTML = 'Your username must be at least 3 characters long!';
             validationIcons[1].style.color = 'red';
             validationIcons[1].innerHTML = '<i class="material-icons">close</i>';
             username.classList.add(...RED_BORDER);
             return false;
         }
-        if (usrname.length > 32) {
+        if (value.length > 32) {
             usernameStatus.innerHTML = 'Your username must be less than 32 characters long!';
             validationIcons[1].style.color = 'red';
             validationIcons[1].innerHTML = '<i class="material-icons">close</i>';
@@ -164,13 +171,12 @@ window.addEventListener('load', function () {
             return false;
         }
 
-        if (VALID_USERNAME_REGEX.test(usrname)) {
-
+        if (VALID_USERNAME_REGEX.test(value)) {
             const request = $.ajax({
                 type: 'POST',
-                url: '/api/v1/internal/check-signup-user',
+                url: '/api/v1/internal/check/signup/user',
                 data: {
-                    username: usrname
+                    username: value
                 }
             });
 
@@ -191,7 +197,8 @@ window.addEventListener('load', function () {
                 }
             });
         } else {
-            usernameStatus.innerHTML = 'Your username may only contain letters, numbers, underscores, dashes, and spaces!';
+            usernameStatus.innerHTML =
+                'Your username may only contain letters, numbers, underscores, dashes, and spaces!';
             validationIcons[1].style.color = 'red';
             validationIcons[1].innerHTML = '<i class="material-icons">close</i>';
             username.classList.add(...RED_BORDER);
@@ -225,7 +232,7 @@ window.addEventListener('load', function () {
         // return true;
         const request = $.ajax({
             type: 'POST',
-            url: '/api/v1/internal/check-signup-email',
+            url: '/api/v1/internal/check/signup/email',
             data: {
                 email: value
             }
@@ -277,7 +284,7 @@ window.addEventListener('load', function () {
         status.innerHTML = '<br>';
         const request = $.ajax({
             type: 'POST',
-            url: '/api/v1/internal/check-verification-code',
+            url: '/api/v1/internal/check/verification-code',
             contentType: 'application/json',
             data: JSON.stringify({value: verification.value})
         });
@@ -391,65 +398,3 @@ window.addEventListener('load', function () {
     bday.onclick = confirmDate;
     keyUpDelay('#verification', 1000, confirmVerification);
 });
-
-function signUp() {
-    console.log(validPassword);
-    console.log(email_valid);
-
-    let status = document.getElementById('status');
-    status.style.color = 'red';
-    status.innerHTML = '<br>';
-
-    if (email.value === '') status.innerHTML = 'Please enter an email!';
-    else if (username.value === '') status.innerHTML = 'Please enter a username!';
-    else if (password.value === '') status.innerHTML = 'Please enter a password!';
-    else if (document.getElementById('confirm').value === '')
-        status.innerHTML = 'Please confirm your password!';
-    else if (password.value !== document.getElementById('confirm').value)
-        status.innerHTML = 'Passwords do not match!';
-    else if (!email_valid) status.innerHTML = 'Please enter a valid email!';
-    else if (!validPassword) status.innerHTML = 'Please enter a valid password!';
-    else if (!(validPassword && email_valid))
-        status.innerHTML = 'Please enter a valid email and password!';
-
-    let submit = document.getElementById('submit');
-    submit.disabled = true;
-    submit.style.color = 'gray';
-    submit.style.backgroundColor = '#006097';
-
-    const xhttp = new XMLHttpRequest();
-    xhttp.open('POST', '/signup', true);
-    xhttp.setRequestHeader('Content-type', 'application/json');
-    xhttp.addEventListener('load', reqListener);
-    xhttp.send(
-        JSON.stringify({
-            username: document.querySelector('#username').value,
-            password: document.querySelector('#password').value,
-            email: document.querySelector('#email').value,
-            age: document.querySelector('#bday').value,
-            theme: document.querySelector('#themes').value,
-            language: document.querySelector('#languages').value,
-            avatar: document.querySelector('#chosen').value
-        })
-    );
-}
-
-function reqListener() {
-    let status = document.getElementById('status');
-    let submit = document.getElementById('submit');
-
-    if (this.responseText === '1')
-        status.innerHTML =
-            'That email and username already exist! Consider <a href="/signin">signing in</a> instead.';
-    else if (this.responseText === '2') status.innerHTML = 'Username already exists!';
-    else if (this.responseText === '3') status.innerHTML = 'Email already exists!';
-    else {
-        status.style.color = 'yellowgreen';
-        status.innerHTML = 'Sign up successful!';
-        window.location.href = '/dashboard';
-    }
-
-    submit.disabled = false;
-    submit.style.color = 'white';
-    submit.style.backgroundColor = '#00a2ff';
-}

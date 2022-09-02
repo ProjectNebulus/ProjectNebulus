@@ -1,5 +1,5 @@
 let actions, pageTitle, createButton;
-window.onload = () => {
+window.addEventListener('load', () => {
     actions = document.getElementsByClassName('link');
     pageTitle = document.getElementById('page-title');
     createButton = document.getElementById('create');
@@ -10,8 +10,8 @@ window.onload = () => {
 
     pageTitle.innerHTML = saveData[0].toUpperCase() + saveData.substring(1);
 
-    for (const link of sidebarLinks) {
-        if (link.innerHTML.includes(saveData)) {
+    for (const link of document.querySelectorAll("a[target=frame]")) {
+        if (link.innerText.toLowerCase().includes(saveData)) {
             link.classList.add('dark:bg-gray-600', 'light:bg-gray-600');
             link.style.pointerEvents = 'none';
             break;
@@ -51,8 +51,7 @@ window.onload = () => {
         const modal = new Modal(targetEl, options);
         modal.hide();
 
-        for (const element of document.querySelectorAll('[modal-backdrop]'))
-            element.parentElement.removeChild(element);
+        for (const element of document.querySelectorAll('[modal-backdrop]')) element.remove();
 
         return true;
     }
@@ -81,4 +80,42 @@ window.onload = () => {
             alert(data);
         });
     });
-};
+});
+
+function setCreateButton(title) {
+    for (const a of actions) a.innerHTML = '';
+
+    switch (title.toLowerCase()) {
+        case 'documents':
+            actions[0].innerHTML = 'Upload File';
+            actions[0].onclick = () => openModal('createDocument');
+            actions[1].innerHTML = 'Post a link';
+            actions[1].onclick = () => openModal('postLink');
+            actions[2].innerHTML = 'Add Assignment';
+            actions[2].onclick = () => openModal('createAssignment');
+            break;
+
+        case 'announcements':
+            actions[0].innerHTML = 'Add Announcement';
+            actions[0].onclick = () => openModal('createAnnouncement');
+            break;
+
+        case 'textbook':
+            actions[0].innerHTML = 'Create Textbook';
+            actions[0].onclick = () => openModal('createTextbook');
+            break;
+    }
+
+    let hideButton = true;
+    for (const a of actions) {
+        if (a.innerHTML !== '') {
+            a.innerHTML =
+                '<span class="material-icons mr-1.5" style="vertical-align: bottom">add</span>' +
+                a.innerHTML;
+            a.parentElement.classList.remove('hidden');
+            hideButton = false;
+        } else a.parentElement.classList.add('hidden');
+    }
+
+    createButton.style.display = hideButton ? 'none' : 'block';
+}

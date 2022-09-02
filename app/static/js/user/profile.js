@@ -1,7 +1,7 @@
 function fetchStatus() {
     const request = $.ajax({
         type: 'POST',
-        url: '/api/v1/internal/spotify-status'
+        url: '/api/v1/internal/get/spotify'
     });
 
     request.done((data) => {
@@ -29,7 +29,7 @@ function fetchStatus() {
             document.getElementById('song').innerHTML = `
             <div style="float:right;display: grid; grid-auto-flow: column; align-content: center;">
                 <i style="display:inline-block; color:#1BD661; margin-right:10px;" class="fab fa-spotify"></i> Your Spotify Account is not registered in the developer dashboard!
-                    <a target="_blank" href="https://developer.spotify.com/dashboard">
+                    <a target="_blank" href="https://developer.spotify.com/app">
                     <button style="margin-left: 10px; display:grid; grid-auto-flow: column; align-content: center; justify-content: center;" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                     Go to Spotify <i style="display:grid; grid-auto-flow: column; align-content: center; justify-content: center;" class="material-icons">open_in_newt</i>
                     </button>

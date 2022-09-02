@@ -6,6 +6,7 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 
+from app.static.python.mongodb.read import getText
 from . import main_blueprint
 
 
@@ -21,7 +22,7 @@ def schoology():
     auth = schoolopy.Auth(key, secret, three_legged=True, domain=DOMAIN)
     # Request authorization URL to open in another window.
     url = auth.request_authorization(
-        callback_url=(request.url_root + "/closeSchoology")
+        callback_url=(request.url_root + "/api/v1/internal/schoology-callback")
     )
     session["request_token"] = auth.request_token
     session["request_token_secret"] = auth.request_token_secret
@@ -29,7 +30,11 @@ def schoology():
     session["access_token"] = auth.access_token
 
     # Open OAuth authorization webpage. Give time to authorize.
-    return render_template("connections/connectSchoology.html", url=url)
+    return render_template(
+        "user/connections/connectSchoology.html",
+        url=url,
+        translate=getText,
+    )
 
 
 @main_blueprint.route("/connections/google-classroom")
@@ -70,5 +75,8 @@ def g_classroom_auth():
     print(user_info)
     user_info = [user_info["name"], user_info["picture"]]
     return render_template(
-        "connections/connectClassroom.html", link=creds, data=user_info
+        "user/connections/connectClassroom.html",
+        link=creds,
+        data=user_info,
+        translate=getText,
     )

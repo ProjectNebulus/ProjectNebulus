@@ -1,4 +1,4 @@
-from ....mongodb.create import *
+from ...mongodb.create import *
 from ..graphene_models import *
 from ..graphql_inputs.create_inputs import *
 

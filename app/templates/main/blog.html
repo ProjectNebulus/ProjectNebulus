@@ -1,0 +1,173 @@
+{% extends "layout.html" %}
+{% block main %}
+    {% include "utils/navbar.html" %}
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <style>
+            .timeline {
+                border-left: 3px solid #727cf5;
+                border-bottom-right-radius: 4px;
+                border-top-right-radius: 4px;
+                background: rgba(197, 201, 250, 0.75);
+                margin: 0px auto;
+                letter-spacing: 0.2px;
+                position: relative;
+                line-height: 25px;
+                font-size: 20px;
+    				padding: 50px;
+    				list-style: none;
+    				text-align: left;
+    				max-width: 70%;
+				min-width: 50%;
+			}
+
+			@media screen (max-width: 767px) {
+    				.timeline {
+        				max-width: 98%;
+        				padding: 25px;
+    				}
+			}
+
+			.timeline h1 {
+			    font-weight: 300;
+			    font-size: 22px;
+			}	
+
+			.timeline h2,
+			.timeline h3 {
+			    font-weight: 600;
+			    font-size: 16px;
+			    margin-bottom: 10px;
+			}
+
+			.timeline .event {
+			    border-bottom: 1px dashed #e8ebf1;
+			    padding-bottom: 25px;
+			    margin-bottom: 25px;
+			    position: relative;
+			}
+
+			@media screen and (max-width: 767px) {
+			    .timeline .event {
+				padding-top: 30px;
+			    }
+			}
+
+			.timeline .event:last-of-type {
+			    padding-bottom: 0;
+			    margin-bottom: 0;
+			    border: none;
+			}
+
+			.timeline .event:before,
+			.timeline .event:after {
+			    position: absolute;
+			    display: block;
+			    top: 0;
+			}
+
+			.timeline .event:before {
+			    left: -200px;
+			    content: attr(data-date);
+			    text-align: right;
+			    font-weight: 100;
+			    font-size: 15px;
+			    min-width: 120px;
+			 }
+
+			@media (max-width: 767px) {
+    				.timeline .event:before {
+        				left: 0px;
+        				text-align: left;
+   				 }
+			}
+
+			.timeline .event:after {
+			    -webkit-box-shadow: 0 0 0 3px #727cf5;
+			    box-shadow: 0 0 0 3px #727cf5;
+			    left: -55.8px;
+			    background: #fff;
+			    border-radius: 50%;
+			    height: 9px;
+			    width: 9px;
+			    content: "";
+			    top: 5px;
+			}
+
+			@media (max-width: 767px) {
+			    .timeline .event:after {
+				left: -32px;
+			    }
+			}
+
+			.rtl .timeline {
+    				border-left: 0;
+    				text-align: right;
+    				border-bottom-right-radius: 0;
+    				border-top-right-radius: 0;
+    				border-bottom-left-radius: 4px;
+    				border-top-left-radius: 4px;
+    				border-right: 3px solid #727cf5;
+			}
+
+            .rtl .timeline .event::before {
+                left: 0;
+                right: -170px;
+            }
+
+            .rtl .timeline .event::after {
+                left: 0;
+                right: -55.8px;
+            }
+            </style>
+        </head>
+        <body>
+            <center>
+                <h1 class="text-4xl text-black dark:text-white mt-4 mb-4">Nebulus Blog</h1>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div id="content">
+                                        <ul class="timeline dark:text-white text-black">
+                                            <li class="event" data-date="7/12/2022">
+                                                <h3>Lorem</h3>
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                                    tempor incididunt ut labore et dolore magna aliqua.
+                                                </p>
+                                            </li>
+                                            <li class="event" data-date="3/1/2022">
+                                                <h3>Ipsum</h3>
+                                                <p>
+                                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                                    aliquip ex ea commodo consequat.
+                                                </p>
+                                            </li>
+                                            <li class="event" data-date="5/1/2021">
+                                                <h3>Dolor</h3>
+                                                <p>
+                                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                                                    eu fugiat nulla pariatur.
+                                                </p>
+                                            </li>
+                                            <li class="event" data-date="dategoeshere">
+                                                <h3>Sit</h3>
+                                                <p>
+                                                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                                                    deserunt mollit anim id est laborum.
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </center>
+        </body>
+    </html>
+{% endblock %}

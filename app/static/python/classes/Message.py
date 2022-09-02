@@ -1,13 +1,6 @@
 import time
-from datetime import datetime
 
-from mongoengine import (
-    DateTimeField,
-    EmbeddedDocument,
-    ListField,
-    ReferenceField,
-    StringField,
-)
+from mongoengine import EmbeddedDocument, ListField, ReferenceField, StringField
 
 from app.static.python.utils.snowflake_generator import make_snowflake
 
@@ -20,6 +13,6 @@ class Message(EmbeddedDocument):
     id = StringField(default=lambda: str(make_snowflake(time.time() * 1000, 1, 0, 0)))
     sender = ReferenceField("User", required=True)
     content = StringField(required=True)
+    send_date = StringField(required=True)
     reactions = ListField(StringField())
     # list of emojis
-    send_date = DateTimeField(default=lambda: datetime.now())

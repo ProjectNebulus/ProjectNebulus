@@ -3,15 +3,16 @@ import datetime
 from flask import redirect, render_template, session
 
 from app.static.python.mongodb import read
+from app.static.python.mongodb.read import getText
 from . import main_blueprint, utils
 
 
 @main_blueprint.route("/signup", methods=["GET"])
 def signup():
     if session.get("username"):
-        return redirect("/dashboard")
+        return redirect("/app")
     if session.get("username"):
-        return redirect("/dashboard")
+        return redirect("/app")
     return render_template(
         "main/signup.html",
         page="Nebulus - Sign Up",
@@ -19,4 +20,5 @@ def signup():
         read=read,
         today=datetime.date.today(),
         strftime=utils.strftime,
+        translate=getText,
     )

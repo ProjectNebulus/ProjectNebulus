@@ -1,13 +1,12 @@
-let exitTime;
-let loadingModal;
-let empty = false;
+let d = new Date();
+let month,
+    year,
+    startDate,
+    exitTime,
+    loadingModal,
+    empty = false;
 
 const times = document.getElementById('timePeriods');
-
-let d = new Date(),
-    month,
-    year,
-    startDate;
 
 const oneWeek = 1000 * 60 * 60 * 24 * 7;
 
@@ -51,18 +50,18 @@ const daysInMonths = [
     31
 ];
 
-const table = document.getElementsByTagName('table')[0];
+const table = document.querySelector('table');
 
 let saveData = {};
 
 window.addEventListener('load', () => {
-    if (empty) {
-        for (let i = 0; i < 6; i++) addTimePeriod();
-    }
+    loadFromServer();
+
+    if (empty) for (let i = 0; i < 6; i++) addTimePeriod();
 
     loadingModal = new Modal(document.getElementById('loading'));
     loadingModal.show();
-    document.querySelector('#loading p').innerHTML += loadingIcon(30);
+    document.querySelector('#loading p').innerHTML += loadingIcon(8);
     exitTime = Date.now() + 300;
 
     reloadTable();
@@ -94,9 +93,7 @@ function reloadTable() {
         i++
     ) {
         const row = table.insertRow();
-        row.classList.add(
-            "bg-white/75", "border-b", "dark:bg-gray-800/75", "dark:border-gray-700",
-        )
+        row.classList.add('bg-white/75', 'border-b', 'dark:bg-gray-800/75', 'dark:border-gray-700');
         const smallCell = row.insertCell();
 
         smallCell.innerHTML = i + '';
@@ -112,12 +109,6 @@ function reloadTable() {
 
             if (saveData[page] && saveData[page][i])
                 div.innerHTML = saveData[page][i].replaceAll(':::::', '=');
-            else div.innerHTML = `
-            <ul>
-              <li><br></li>
-              <li><br></li>
-              </ul>      `;
-
             cell.appendChild(div);
         }
     }
@@ -135,11 +126,6 @@ document.addEventListener('keyup', (e) => {
         else if (e.key === 'ArrowUp') today.click();
     }
 });
-window.onload = function () {
-    loadFromServer();
-}
-
-
 nextPage.onclick = function () {
     save();
 
@@ -239,7 +225,7 @@ function removePeriod(element) {
     num--;
     element.classList.add('fade-out');
     setTimeout(() => {
-        element.parentElement.removeChild(element);
+        element.remove();
 
         let inputs = document.querySelectorAll('#configureModal #timePeriods .timePeriod');
         const timePeriods = [];
@@ -265,7 +251,7 @@ function saveConfig() {
 
     const request = $.ajax({
         type: 'POST',
-        url: '/api/v1/internal/planner/saveConfig',
+        url: '/api/v1/internal/update/planner/config',
         data: JSON.stringify(values)
     });
 
@@ -296,8 +282,13 @@ function changeDate(insert) {
     if (insert === true) {
         const daysRow = table.insertRow();
         daysRow.classList.add(
-            "text-xs", "text-gray-700", "uppercase", "bg-gray-50", "dark:bg-gray-700", "dark:text-gray-400",
-        )
+            'text-xs',
+            'text-gray-700',
+            'uppercase',
+            'bg-gray-50',
+            'dark:bg-gray-700',
+            'dark:text-gray-400'
+        );
         for (let i = 0; i <= 7; i++) daysRow.insertCell();
     }
 
@@ -315,14 +306,14 @@ function save(e) {
     if (e) {
         const code = String.fromCharCode(e.keyCode);
 
-        if (!(/[a-zA-Z0-9-_ ]/.test(code) && code === code.toUpperCase())) return;
+        if (!(/[a-zA-Z\d-_ ]/.test(code) && code === code.toUpperCase())) return;
     }
 
     const notes = document.getElementsByClassName('note');
     saveData[page] = {};
     for (let i = 0; i < notes.length; i++) {
-        if (notes[i].innerHTML !== '')
-            saveData[page][i] = notes[i].innerHTML.replaceAll('=', ':::::');
+        if (notes[i].innerText !== '')
+            saveData[page][i] = notes[i].innerText.replaceAll('=', ':::::');
     }
 }
 
@@ -330,19 +321,26 @@ function load(page) {
     const notes = document.getElementsByClassName('note');
     for (let i = 0; i < notes.length; i++) {
         if (saveData[page] && saveData[page][i])
-            notes[i].innerHTML = saveData[page][i].replaceAll(':::::', '=');
-        else notes[i].innerHTML = `
-            <ul>
-              <li><br></li>
-              <li><br></li>
-              </ul>      `;
+            notes[i].innerText = saveData[page][i].replaceAll(':::::', '=');
+        else notes[i].innerText = '';
     }
+}
+
+function formatAMPM(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
 }
 
 function loadFromServer() {
     const request = $.ajax({
         type: 'GET',
-        url: '/api/v1/internal/planner/load'
+        url: '/api/v1/internal/get/planner'
     });
 
     request.done((data) => {
@@ -363,6 +361,20 @@ function loadFromServer() {
 
         plannerName.value = data['name'];
         saveData = data['saveData'];
+        const lastEdit = new Date(data['lastEdited']);
+        const timeSince =
+            (Date.now() - new Date('2022-08-13T21:39:26.749+00:00').getTime()) / 1000 / 60; // time since last edit in minutes
+
+        if (timeSince < 1) saveState.innerHTML = 'Last edit was seconds ago';
+        else if (timeSince < 60)
+            saveState.innerHTML = 'Last edit was ' + Math.floor(timeSince) + ' minutes ago';
+        else if (timeSince < 60 * 9)
+            saveState.innerHTML = 'Last edit was ' + Math.floor(timeSince / 60) + ' hours ago';
+        else if (timeSince < 60 * 24)
+            saveState.innerHTML = 'Last edit was at ' + formatAMPM(lastEdit);
+        else
+            saveState.innerHTML =
+                'Last edit was on ' + (lastEdit.getMonth() + 1) + '/' + lastEdit.getDate();
 
         for (let i = 0; i < data['periods'].length; i++) addTimePeriod();
 
@@ -394,7 +406,7 @@ function recursiveSave(saveDict, count) {
 
     const request = $.ajax({
         type: 'POST',
-        url: '/api/v1/internal/planner/save',
+        url: '/api/v1/internal/update/planner',
         data: JSON.stringify(saveDict)
     });
 
@@ -433,10 +445,6 @@ function saveToServer() {
     const saveDict = {};
     saveDict['name'] = plannerName.value;
     saveDict['saveData'] = saveData;
-    saveDict['lastEdited'] =
-        [year, month + 1, d.getDate()].join('-') +
-        ' ' +
-        [d.getHours(), d.getMinutes(), d.getSeconds()].join(':');
 
     saveDict['periods'] = [];
 

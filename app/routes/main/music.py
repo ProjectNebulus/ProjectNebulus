@@ -6,6 +6,7 @@ import requests
 from flask import redirect, render_template, request, session
 from werkzeug.utils import secure_filename
 
+from app.static.python.mongodb.read import getText
 from . import main_blueprint
 from .utils import logged_in
 
@@ -669,6 +670,7 @@ def music():
         "music/music.html",
         user=session.get("username"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        translate=getText,
     )
 
 
@@ -868,6 +870,7 @@ def music_post():
         spotify_arr=spotify_arr,
         user=session.get("username"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        translate=getText,
     )
 
 
@@ -884,6 +887,7 @@ def music_spotify(smth):
                 i=i,
                 user=session.get("username"),
                 avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+                translate=getText,
             )
 
 
@@ -897,7 +901,6 @@ def music_video(id_: str):
         # title
         import json
         import pprint
-        import urllib
         import urllib.request
 
         # change to yours VideoID or change url inparams
@@ -936,4 +939,5 @@ def music_video(id_: str):
         link=link,
         user=session.get("username"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        translate=getText,
     )

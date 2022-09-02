@@ -1,3 +1,5 @@
+import datetime
+
 from flask import session
 
 from ..classes import (
@@ -9,11 +11,19 @@ from ..classes import (
     Schoology,
     User,
 )
+from ..classes.Notepad import Notepad
 from ..utils.security import hash256
 
 
+def update_unread(data, user_id):
+    chat = Chat.objects.get(pk=data["chat_id"])
+    user = list(filter(lambda x: x.user.id == user_id, chat.members))[0]
+    user.unread += 1
+    chat.save()
+
+
 def schoologyLogin(_id: str, schoology: dict):
-    from .read import find_user
+    from app.static.python.mongodb.read import find_user
 
     user = find_user(pk=_id)
     if not user:
@@ -25,7 +35,7 @@ def schoologyLogin(_id: str, schoology: dict):
 
 
 def createPlanner(_id: str, planner: dict):
-    from .read import find_user
+    from app.static.python.mongodb.read import find_user
 
     user = find_user(pk=_id)
     if not user:
@@ -38,7 +48,7 @@ def createPlanner(_id: str, planner: dict):
 
 
 def logout_from_schoology(_id: str, schoology_obj: Schoology):
-    from .read import find_user
+    from app.static.python.mongodb.read import find_user
 
     user = find_user(id=_id)
     if not user:
@@ -53,7 +63,7 @@ def resolve_updated_object(obj, attr, value):
 
 
 def savePlanner(data: dict, user_id):
-    from .read import find_user
+    from app.static.python.mongodb.read import find_user
 
     user = find_user(id=user_id)
 
@@ -62,7 +72,7 @@ def savePlanner(data: dict, user_id):
 
     user.planner.name = data["name"]
     user.planner.saveData = data["saveData"]
-    user.planner.lastEdited = data["lastEdited"]
+    user.planner.lastEdited = datetime.datetime.utcnow().isoformat()
 
     user.save(validate=False, clean=False)
 
@@ -70,7 +80,7 @@ def savePlanner(data: dict, user_id):
 
 
 def saveConfig(configs: list, user_id):
-    from .read import find_user
+    from app.static.python.mongodb.read import find_user
 
     user = find_user(id=user_id)
 
@@ -84,7 +94,7 @@ def saveConfig(configs: list, user_id):
 
 
 def changeNebulusDocument(_id: str, document: dict):
-    from .read import find_user
+    from app.static.python.mongodb.read import find_user
 
     user = find_user(pk=_id)
     if not user:
@@ -97,7 +107,7 @@ def changeNebulusDocument(_id: str, document: dict):
 
 
 def changeCourse(course_id, course_name, course_teacher):
-    from .read import find_courses
+    from app.static.python.mongodb.read import find_courses
 
     course = find_courses(course_id)
     course.name = course_name
@@ -227,11 +237,14 @@ def deleteMessage(chat_id, message_id):
 
 def set_status(user_id: str, status: str):
     user = User.objects.get(pk=user_id)
-    if status == "Online" and user.chatProfile.status != "Offline":
-        pass
+    if status == "Online":
+        user.chatProfile.offline = False
+    elif status == "Offline":
+        user.chatProfile.offline = True
     else:
         user.chatProfile.status = status
-        user.save(clean=False)
+
+    user.save()
 
 
 def resetPassword(username: str, psw: str):
@@ -244,3 +257,17 @@ def resetPassword(username: str, psw: str):
     session["email"] = user.email
     session["avatar"] = user.avatar.avatar_url
     session["id"] = user.id
+
+
+def change_user_notepad(course_id, content, user_id):
+    user = User.objects.get(pk=user_id)
+    try:
+        dictionary = dict(user.notepad)
+        dictionary["data"][course_id] = content
+        user.notepad = Notepad(dictionary)
+    except:
+        dictionary = {"data": {str(course_id): str(content)}}
+        user.notepad = Notepad(**dictionary)
+
+    user.save(clean=False)
+    return "0"

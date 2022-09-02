@@ -1,6 +1,7 @@
 import schoolopy
 from flask import render_template, request, session
 
+from app.static.python.mongodb.read import getText
 from . import main_blueprint
 from .utils import logged_in
 
@@ -14,10 +15,14 @@ def aschoology():
 
     auth = schoolopy.Auth(key, secret, three_legged=True, domain=DOMAIN)
     url = auth.request_authorization(
-        callback_url=(request.url_root + "/closeSchoology")
+        callback_url=(request.url_root + "/api/v1/internal/schoology-callback")
     )
     session["request_token"] = auth.request_token
     session["request_token_secret"] = auth.request_token_secret
     session["access_token_secret"] = auth.access_token_secret
     session["access_token"] = auth.access_token
-    return render_template("connections/connectSchoology.html", url=url)
+    return render_template(
+        "user/connections/connectSchoology.html",
+        url=url,
+        translate=getText,
+    )
