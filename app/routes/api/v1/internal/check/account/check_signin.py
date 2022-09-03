@@ -3,7 +3,7 @@ import os
 from flask import request, session
 
 from ... import internal
-from app.static.python.mongodb import read
+from .......static.python.mongodb import read
 
 internal.secret_key = os.getenv("MONGOPASS")
 

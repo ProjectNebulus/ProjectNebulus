@@ -7,7 +7,7 @@ from app.routes.main.utils import private_endpoint
 from app.static.python.mongodb import read
 from app.static.python.utils.colors import getColor
 
-from routes.api.v1.internal import internal
+from ...internal import internal
 
 
 @internal.route("/get_schoology_messages", methods=["POST"])

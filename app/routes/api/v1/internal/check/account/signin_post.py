@@ -1,7 +1,7 @@
 from flask import request, session
 
 from ... import internal
-from app.routes.main import private_endpoint
+from ......main import private_endpoint
 from app.static.python.mongodb import update
 
 

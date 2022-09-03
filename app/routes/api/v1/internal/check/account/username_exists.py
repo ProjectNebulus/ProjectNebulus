@@ -1,7 +1,7 @@
 from flask import request
 
 from ... import internal
-from app.static.python.classes.User import User
+from .......static.python.classes.User import User
 
 
 @internal.route("/username-exists", methods=["POST"])

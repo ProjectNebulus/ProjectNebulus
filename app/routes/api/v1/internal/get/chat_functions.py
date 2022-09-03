@@ -12,9 +12,9 @@ from pandas import *
 from app.static.python.classes import User
 from app.static.python.mongodb import create, delete, read, update
 
-from static.python.classes import ChatMember
-from routes import socketio
-from routes.api.v1.internal import internal
+from ......static.python.classes import ChatMember
+from ......routes import socketio
+from ...internal import internal
 
 
 # from app.static.python.school import get_school

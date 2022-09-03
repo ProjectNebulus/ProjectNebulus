@@ -2,7 +2,7 @@ from flask import redirect, session
 
 from app.static.python.mongodb import read, update
 
-from routes.api.v1.internal import internal
+from .. import internal
 
 
 @internal.route("/logout-of-schoology")

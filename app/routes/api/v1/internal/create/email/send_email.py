@@ -6,10 +6,10 @@ from threading import Thread
 from flask import current_app, request, session
 from flask_mail import Message
 
-from app.routes import mail
-from .. import internal
-from app.routes.main import private_endpoint
-from app.static.python.mongodb import read
+from ...... import mail
+from ... import internal
+from ......main import private_endpoint
+from .......static.python.mongodb import read
 
 
 def send_async_email(app, msg):
