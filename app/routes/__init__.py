@@ -63,7 +63,7 @@ def init_app():
 
     from flask import Flask
 
-    app = Flask(__name__)
+    app = Flask(__name__, template_folder="../templates")
     app.config["SECRET_KEY"] = os.environ.get("MONGOPASS")
     CORS(app, resources={r"/api/*": {"origins": "*"}})
     app.config["UPLOAD_FOLDER"] = "/app/static/UserContent/"
