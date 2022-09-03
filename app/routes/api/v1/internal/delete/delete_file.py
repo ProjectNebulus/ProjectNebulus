@@ -1,6 +1,6 @@
 from flask import request, session
 
-from static.python.mongodb.read import find_user
+from app.static.python.mongodb.read import find_user
 from .. import internal
 from app.static.python.classes import Course, DocumentFile
 
