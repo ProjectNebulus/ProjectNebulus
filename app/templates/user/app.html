@@ -2,6 +2,10 @@
 {% extends "layout.html" %}
 {% block main %}
     <style>
+        .expand {
+            visibility: hidden;
+        }
+
         .expandable:hover .expand {
             visibility: visible;
         }
@@ -54,7 +58,7 @@
                                                  style="height: min-content">
 
                                                 <button class="absolute top-0 right-0 text-xl mt-2 mr-3 material-icons
-                                                 hover:bg-gray-50 dark:hover:bg-gray-600 px-1 rounded-lg expand invisible">
+                                                 hover:bg-gray-50 dark:hover:bg-gray-600 px-1 rounded-lg expand">
                                                     open_in_new
                                                 </button>
 
@@ -288,7 +292,7 @@
                                             shadow-md dark:border-gray-700 text-sm mb-5 mx-4 text-left relative expandable">
                                             <div class="absolute right-0 bottom-0 material-icons hover:bg-gray-50
                                                  dark:hover:bg-gray-500 p-1 expand text-gray-200 cursor-pointer
-                                                  dark:text-gray-400 invisible rounded-lg mr-3 mb-3">
+                                                  dark:text-gray-400 rounded-lg mr-3 mb-3">
                                                 open_in_new
                                             </div>
 
