@@ -33,6 +33,8 @@ function nextModal(num) {
 }
 
 function next(num) {
+    document.getElementById("step_").style.width = `${100/3*(num+1)}%`;
+    document.getElementById("step__").innerText = `${num+1}`;
     if (num === 1) {
         if (
             checks[0].innerText === 'check' &&
@@ -64,6 +66,8 @@ function onComplete() {
 }
 
 function prev(num) {
+    document.getElementById("step_").style.width = `${100/3*(num-1)}%`;
+    document.getElementById("step__").innerText = `${num-1}`;
     if (num !== 1) {
         setTimeout(function () {
             document.getElementById('step' + num.toString()).style.display = 'none';
@@ -100,9 +104,7 @@ window.addEventListener('load', function () {
     checks = document.getElementsByClassName('validation-icon');
 
     const RED_BORDER = [
-        'bg-red-50',
         'border',
-        'border-red-500',
         'text-red-900',
         'placeholder-red-700',
         'text-sm',
@@ -112,12 +114,12 @@ window.addEventListener('load', function () {
         'block',
         'w-full',
         'p-2.5',
-        'dark:bg-red-100',
-        'dark:border-red-400'
+        'bg-red-500',
+        'border-red-400'
     ];
+    const GRAY = ["bg-gray-800"];
 
     const GREEN_BORDER = [
-        'g-green-50',
         'border',
         'border-green-500',
         'text-green-900',
@@ -129,8 +131,8 @@ window.addEventListener('load', function () {
         'block',
         'w-full',
         'p-2.5',
-        'dark:bg-green-100',
-        'dark:border-green-400'
+        'bg-green-600',
+        'border-green-400'
     ];
 
     for (let i = 1; i < 23; i++) {
@@ -147,26 +149,29 @@ window.addEventListener('load', function () {
     function changeUser() {
         let usernameStatus = errorMessages[1];
         const value = username.value;
-        usernameStatus.style.color = 'red';
+        usernameStatus.style.color = 'pink';
         usernameStatus.innerHTML = '<br>';
         if (!value) {
             usernameStatus.innerHTML = 'Please enter a username!';
-            validationIcons[1].style.color = 'red';
+            validationIcons[1].style.color = 'pink';
             validationIcons[1].innerHTML = '<i class="material-icons">close</i>';
+            username.classList.remove(...GRAY);
             username.classList.add(...RED_BORDER);
             return false;
         }
         if (value.length < 3) {
             usernameStatus.innerHTML = 'Your username must be at least 3 characters long!';
-            validationIcons[1].style.color = 'red';
+            validationIcons[1].style.color = 'pink';
             validationIcons[1].innerHTML = '<i class="material-icons">close</i>';
+            username.classList.remove(...GRAY);
             username.classList.add(...RED_BORDER);
             return false;
         }
         if (value.length > 32) {
             usernameStatus.innerHTML = 'Your username must be less than 32 characters long!';
-            validationIcons[1].style.color = 'red';
+            validationIcons[1].style.color = 'pink';
             validationIcons[1].innerHTML = '<i class="material-icons">close</i>';
+            username.classList.remove(...GRAY);
             username.classList.add(...RED_BORDER);
             return false;
         }
@@ -182,16 +187,18 @@ window.addEventListener('load', function () {
 
             request.done(function (data) {
                 if (data === 'false') {
-                    validationIcons[1].style.color = 'red';
+                    validationIcons[1].style.color = 'pink';
                     validationIcons[1].innerHTML = '<i class="material-icons">close</i>';
                     usernameStatus.innerHTML = 'This username already exists!';
                     username.classList.remove(...GREEN_BORDER);
+                    username.classList.remove(...GRAY);
                     username.classList.add(...RED_BORDER);
                     return false;
                 } else {
-                    validationIcons[1].style.color = 'green';
+                    validationIcons[1].style.color = 'lightgreen';
                     validationIcons[1].innerHTML = '<i class="material-icons">check</i>';
                     username.classList.remove(...RED_BORDER);
+                    username.classList.remove(...GRAY);
                     username.classList.add(...GREEN_BORDER);
                     usernameStatus.innerHTML = '<br>';
                 }
@@ -199,8 +206,9 @@ window.addEventListener('load', function () {
         } else {
             usernameStatus.innerHTML =
                 'Your username may only contain letters, numbers, underscores, dashes, and spaces!';
-            validationIcons[1].style.color = 'red';
+            validationIcons[1].style.color = 'pink';
             validationIcons[1].innerHTML = '<i class="material-icons">close</i>';
+            username.classList.remove(...GRAY);
             username.classList.add(...RED_BORDER);
             return false;
         }
@@ -210,20 +218,22 @@ window.addEventListener('load', function () {
         const value = email.value;
 
         let emailStatus = errorMessages[0];
-        emailStatus.style.color = 'red';
+        emailStatus.style.color = 'pink';
         emailStatus.innerHTML = '<br>';
 
         if (email.value === '') {
-            validationIcons[0].style.color = 'red';
+            validationIcons[0].style.color = 'pink';
             validationIcons[0].innerHTML = '<i class="material-icons">close</i>';
             emailStatus.innerHTML = 'Please enter an email!';
+            username.classList.remove(...GRAY);
             email.classList.add(...RED_BORDER);
             return false;
         }
         if (validate(value) === false && value !== '') {
-            validationIcons[0].style.color = 'red';
+            validationIcons[0].style.color = 'pink';
             validationIcons[0].innerHTML = '<i class="material-icons">close</i>';
             emailStatus.innerHTML = 'Please enter a valid email!';
+            username.classList.remove(...GRAY);
             email.classList.add(...RED_BORDER);
             return false;
         }
@@ -241,14 +251,14 @@ window.addEventListener('load', function () {
         request.done(function (data) {
             console.log(data);
             if (data === 'false') {
-                validationIcons[0].style.color = 'red';
+                validationIcons[0].style.color = 'pink';
                 validationIcons[0].innerHTML = '<i class="material-icons">close</i>';
                 emailStatus.innerHTML = 'This email already exists!';
                 email.classList.remove(...GREEN_BORDER);
                 email.classList.add(...RED_BORDER);
                 return false;
             } else {
-                validationIcons[0].style.color = 'green';
+                validationIcons[0].style.color = 'lightgreen';
                 validationIcons[0].innerHTML = '<i class="material-icons">check</i>';
                 email.classList.remove(...RED_BORDER);
                 email.classList.add(...GREEN_BORDER);
@@ -259,17 +269,17 @@ window.addEventListener('load', function () {
 
     function confirmDate() {
         let status = errorMessages[5];
-        status.style.color = 'red';
+        status.style.color = 'pink';
         status.innerHTML = '<br>';
         let value = bday.value;
         if (value !== '') {
-            validationIcons[5].style.color = 'green';
+            validationIcons[5].style.color = 'lightgreen';
             validationIcons[5].innerHTML = '<i class="material-icons">check</i>';
             bday.classList.remove(...RED_BORDER);
             bday.classList.add(...GREEN_BORDER);
             email_valid = true;
         } else {
-            validationIcons[5].style.color = 'red';
+            validationIcons[5].style.color = 'pink';
             validationIcons[5].innerHTML = '<i class="material-icons">close</i>';
             status.innerHTML = 'Invalid Birthday';
             bday.classList.remove(...GREEN_BORDER);
@@ -280,7 +290,7 @@ window.addEventListener('load', function () {
 
     function confirmVerification() {
         let status = errorMessages[4];
-        status.style.color = 'red';
+        status.style.color = 'pink';
         status.innerHTML = '<br>';
         const request = $.ajax({
             type: 'POST',
@@ -290,13 +300,13 @@ window.addEventListener('load', function () {
         });
         request.done(function (data) {
             if (data === 'true') {
-                validationIcons[4].style.color = 'green';
+                validationIcons[4].style.color = 'lightgreen';
                 validationIcons[4].innerHTML = '<i class="material-icons">check</i>';
                 verification.classList.remove(...RED_BORDER);
                 verification.classList.add(...GREEN_BORDER);
                 email_valid = true;
             } else {
-                validationIcons[4].style.color = 'red';
+                validationIcons[4].style.color = 'pink';
                 validationIcons[4].innerHTML = '<i class="material-icons">close</i>';
                 status.innerHTML = 'Incorrect Confirmation';
                 verification.classList.remove(...GREEN_BORDER);
@@ -308,12 +318,12 @@ window.addEventListener('load', function () {
 
     function confirmPassword() {
         let status = errorMessages[3];
-        status.style.color = 'red';
+        status.style.color = 'pink';
         status.innerHTML = '<br>';
         let value = passwordConfirm.value;
         let value2 = password.value;
         if (value === '') {
-            validationIcons[3].style.color = 'red';
+            validationIcons[3].style.color = 'pink';
             validationIcons[3].innerHTML = '<i class="material-icons">close</i>';
             status.innerHTML = 'Please confirm your password!';
             passwordConfirm.classList.remove(...GREEN_BORDER);
@@ -322,13 +332,13 @@ window.addEventListener('load', function () {
             return false;
         }
         if (value === value2 && value !== '') {
-            validationIcons[3].style.color = 'green';
+            validationIcons[3].style.color = 'lightgreen';
             validationIcons[3].innerHTML = '<i class="material-icons">check</i>';
             passwordConfirm.classList.remove(...RED_BORDER);
             passwordConfirm.classList.add(...GREEN_BORDER);
             email_valid = true;
         } else {
-            validationIcons[3].style.color = 'red';
+            validationIcons[3].style.color = 'pink';
             validationIcons[3].innerHTML = '<i class="material-icons">close</i>';
             status.innerHTML = 'Two Passwords do not Match';
             passwordConfirm.classList.remove(...GREEN_BORDER);
@@ -343,7 +353,7 @@ window.addEventListener('load', function () {
         validPassword = false;
 
         let status = errorMessages[2];
-        status.style.color = 'red';
+        status.style.color = 'pink';
         status.innerHTML = '<br>';
         const value = password.value;
         if (value === '') {
@@ -351,7 +361,7 @@ window.addEventListener('load', function () {
             status.innerHTML = 'Please enter a password!';
             password.classList.remove(...GREEN_BORDER);
             password.classList.add(...RED_BORDER);
-            validationIcons[2].style.color = 'red';
+            validationIcons[2].style.color = 'pink';
             validationIcons[2].innerHTML = '<i class="material-icons">close</i>';
             return false;
         }
@@ -359,7 +369,7 @@ window.addEventListener('load', function () {
             status.innerHTML = 'Password must be at least 6 characters long';
             password.classList.remove(...GREEN_BORDER);
             password.classList.add(...RED_BORDER);
-            validationIcons[2].style.color = 'red';
+            validationIcons[2].style.color = 'pink';
             validationIcons[2].innerHTML = '<i class="material-icons">close</i>';
             return false;
         } else if (!HAS_NUMBER.test(value))
@@ -378,13 +388,13 @@ window.addEventListener('load', function () {
                 status.innerHTML = 'Password must include at least 1 special character!';
                 password.classList.remove(...GREEN_BORDER);
                 password.classList.add(...RED_BORDER);
-                validationIcons[2].style.color = 'red';
+                validationIcons[2].style.color = 'pink';
                 validationIcons[2].innerHTML = '<i class="material-icons">close</i>';
             } else {
                 validPassword = true;
                 password.classList.remove(...RED_BORDER);
                 password.classList.add(...GREEN_BORDER);
-                validationIcons[2].style.color = 'green';
+                validationIcons[2].style.color = 'lightgreen';
                 validationIcons[2].innerHTML = '<i class="material-icons">check</i>';
             }
         }

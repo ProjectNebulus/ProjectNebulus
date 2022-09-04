@@ -3,7 +3,7 @@
     <head>
         <style>
             .signupbody {
-                width: 80%;
+                width: 95%;
                 padding: 5rem;
                 top: 50%;
                 left: 50%;
@@ -12,7 +12,7 @@
 
             @media (min-width: /*768px*/ 1000px) {
                 .signupbody {
-                    width: 40%;
+                    width: 70%;
                 }
             }
         </style>
@@ -23,12 +23,20 @@
     <div id="bgLms"
          class="noselect noclick w-full absolute"
          style="z-index: -1; filter:blur(1rem)"></div>
-    <div class="container mx-auto bg-white/[0.9] signupbody absolute rounded-lg">
-        <div class="mx-auto">
+    <div class="container mx-auto bg-gray-900 signupbody absolute rounded-lg">
+        <div class="mx-auto text-white">
             <h1 class="text-lg font-bold">
                 <img src="/static/images/NebulusSpecialLogo.png"
                      style=" display: inline-block; width: 40px; border-radius: 10px; margin: 10px; ">
-                {{ translate("Sign Up") }}
+                {{ translate("Sign Up") }}  <div class="m-auto w-1/2 bg-gray-600 rounded-full h-2.5 mb-4"
+                                                 style=" margin:10px; vertical-align: middle; display: inline-block;">
+                <div class="bg-gray-600 h-2.5 rounded-full" id="step_"
+                     style="width: 33%;
+                     /*transition:30s;*/
+                     transition:5s linear;
+                                    background: linear-gradient(45deg,#ffae00,#d400ff);">
+                </div>
+            </div> <span style="margin:5px;vertical-align: middle;  font-size: 0.8em;" class="text-gray-500">Step <span id="step__"></span> of 3</span>
             </h1>
             <div class="flex flex-col items-left mt-5">
                 <p class="mt-1 text-xs font-light text-gray-500">
@@ -48,7 +56,7 @@
                     <input type="text"
                            id="email"
                            autocomplete="new-email"
-                           class="text-sm rounded-lg  block w-full p-2.5 mt-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-blue-500 block w-full pl-10 p-2.5"
+                           class="text-sm rounded-lg  block w-full p-2.5 mt-4 bg-gray-800 border-gray-800 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-blue-500 block w-full pl-10 p-2.5"
                            placeholder="{{ translate("Email") }}"
                            style="-webkit-user-select: text;">
                 </div>
@@ -63,7 +71,7 @@
                     <input type="text"
                            id="username"
                            autocomplete="new-username"
-                           class=" border text-sm rounded-lg block w-full p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
+                           class=" border text-sm rounded-lg block w-full p-2.5 bg-gray-800 border-gray-800 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
                            placeholder="{{ translate("Username") }}"
                            style="-webkit-user-select: text;">
                 </div>
@@ -77,7 +85,7 @@
                     <input type="password"
                            id="password"
                            autocomplete="new-password"
-                           class="border text-sm rounded-lg block w-full p-2.5 mt-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
+                           class="border text-sm rounded-lg block w-full p-2.5 mt-4 bg-gray-800 border-gray-800 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
                            placeholder="{{ translate("Password") }}"
                            style="-webkit-user-select: text;">
                 </div>
@@ -91,7 +99,7 @@
                     <input type="password"
                            id="confirm-password"
                            autocomplete="new-password"
-                           class=" border text-sm rounded-lg block w-full p-2.5 mt-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
+                           class=" border text-sm rounded-lg block w-full p-2.5 mt-4 bg-gray-800 border-gray-800 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
                            placeholder="{{ translate("Confirm Password") }}"
                            style="-webkit-user-select: text;">
                 </div>
@@ -99,7 +107,7 @@
                 <button onclick="prev(1);"
                         style="margin-right:10px;
                                    float:left;"
-                        class="mt-4 px-4 py-3  leading-6 text-base rounded-md border border-transparent text-white focus:outline-none bg-blue-500 text-blue-100 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer inline-flex items-center w-40 justify-center items-center font-medium focus:outline-none">
+                        class="mt-4 px-4 py-3  leading-6 text-base rounded-md border border-transparent text-white focus:outline-none bg-blue-700 p-6 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer inline-flex items-center w-40 justify-center items-center font-medium focus:outline-none">
                     <svg class="inline-block w-6 h-6"
                          fill="currentColor"
                          viewBox="0 0 20 20"
@@ -113,7 +121,7 @@
                 </button>
                 <button onclick="next(1);"
                         style="float:left;"
-                        class="mt-4 px-4 py-3  leading-6 text-base rounded-md border border-transparent text-white focus:outline-none bg-blue-500 text-blue-100 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer inline-flex items-center w-40 justify-center items-center font-medium focus:outline-none">
+                        class="mt-4 px-4 py-3  leading-6 text-base rounded-md border border-transparent text-white focus:outline-none bg-blue-700 p-6 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer inline-flex items-center w-40 justify-center items-center font-medium focus:outline-none">
                     {{ translate("Next") }}
                     <svg class="inline-block ml-2 -mr-1 w-5 h-5"
                          fill="currentColor"
@@ -125,13 +133,7 @@
                         </path>
                     </svg>
                 </button>
-                <div class="m-auto w-1/2 bg-gray-600 rounded-full h-5 mb-4"
-                     style=" margin-bottom: 10px !important; margin-top: 80px !important; margin: auto; ">
-                    <div class="bg-gray-600 h-5 rounded-full"
-                         style="width: 33%;
-                                    background: linear-gradient(45deg,#ffae00,#d400ff);">
-                    </div>
-                </div>
+
             </div>
             <div class="mt-4" id="step2" style="display:none;">
                 <div class="relative">
@@ -144,7 +146,7 @@
                            min="10000000"
                            max="99999999"
                            id="verification"
-                           class="border border-red-500 text-red-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5dark:border-red-400 mt-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
+                           class="border border-red-500 text-red-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5dark:border-red-400 mt-4 bg-gray-800 border-gray-800 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
                            placeholder="Email Verification Code (Check Your Email)"
                            style="-webkit-user-select: text;">
                     <p style="color:red;" class="text-sm errormsg">Incorrect Verification Code</p>
@@ -161,7 +163,7 @@
                            datepicker-buttons
                            id="bday"
                            type="text"
-                           class="border border-red-500 text-red-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
+                           class="border border-red-500 text-red-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 bg-gray-800 border-gray-800 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
                            placeholder="Birthday"
                            style="-webkit-user-select: text;">
                     <p style="color:red;" class="text-sm errormsg">Invalid Birthday</p>
@@ -169,7 +171,7 @@
                 <button onclick="prev(2);"
                         style="margin-right:10px;
                                    float:left;"
-                        class="mt-4 px-4 py-3 leading-6 text-base rounded-md border border-transparent text-white focus:outline-none bg-blue-500 text-blue-100 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer inline-flex items-center w-48 justify-center items-center font-medium focus:outline-none">
+                        class="mt-4 px-4 py-3 leading-6 text-base rounded-md border border-transparent text-white focus:outline-none bg-blue-700 p-6 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer inline-flex items-center w-48 justify-center items-center font-medium focus:outline-none">
                     <svg class="inline-block w-6 h-6"
                          fill="none"
                          stroke="currentColor"
@@ -182,7 +184,7 @@
                 </button>
                 <button onclick="next(2);"
                         style="float:left;"
-                        class="mt-4 px-4 py-3  leading-6 text-base rounded-md border border-transparent text-white focus:outline-none bg-blue-500 text-blue-100 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer inline-flex items-center w-40 justify-center items-center font-medium focus:outline-none">
+                        class="mt-4 px-4 py-3  leading-6 text-base rounded-md border border-transparent text-white focus:outline-none bg-blue-700 p-6 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer inline-flex items-center w-40 justify-center items-center font-medium focus:outline-none">
                     {{ translate("Next") }}
                     <svg class="inline-block ml-2 -mr-1 w-5 h-5"
                          fill="currentColor"
@@ -194,13 +196,6 @@
                         </path>
                     </svg>
                 </button>
-                <div class="m-auto w-1/2 bg-gray-600 rounded-full h-5 mb-4"
-                     style=" margin-bottom: 10px !important; margin-top: 80px !important; margin: auto; ">
-                    <div class="bg-gray-600 h-5 rounded-full"
-                         style="width: 66%;
-                                    background: linear-gradient(45deg,#ffae00,#d400ff);">
-                    </div>
-                </div>
             </div>
             <div class="mt-4" id="step3" style="display:none;">
                 <label for="languages"
@@ -208,7 +203,7 @@
                     Select your Language
                 </label>
                 <select id="languages"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="bg-gray-800 border-gray-800 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option selected>
                         English (United States)
                     </option>
@@ -245,7 +240,7 @@
                     Select your Theme
                 </label>
                 <select id="theme"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="bg-gray-800 border-gray-800 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option>
                         Light Theme
                     </option>
@@ -438,7 +433,7 @@
                 <button onclick="prev(3);"
                         style="float:left;
                                    margin-right:10px;"
-                        class="mt-4 px-4 py-3 leading-6 text-base rounded-md border border-transparent text-white focus:outline-none bg-blue-500 text-blue-100 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer inline-flex items-center w-48 justify-center items-center font-medium focus:outline-none">
+                        class="mt-4 px-4 py-3 leading-6 text-base rounded-md border border-transparent text-white focus:outline-none bg-blue-700 p-6 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer inline-flex items-center w-48 justify-center items-center font-medium focus:outline-none">
                     <svg class="inline-block w-6 h-6"
                          fill="none"
                          stroke="currentColor"
@@ -451,7 +446,7 @@
                 </button>
                 <button onclick="next(3);"
                         style="float:left;"
-                        class="mt-4 px-4 py-3 leading-6 text-base rounded-md border border-transparent text-white focus:outline-none bg-blue-500 text-blue-100 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer inline-flex items-center w-40 justify-center items-center font-medium focus:outline-none">
+                        class="mt-4 px-4 py-3 leading-6 text-base rounded-md border border-transparent text-white focus:outline-none bg-blue-700 p-6 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer inline-flex items-center w-40 justify-center items-center font-medium focus:outline-none">
                     {{ translate("Join") }}
                     <svg class="inline-block ml-2 -mr-1 w-5 h-5"
                          fill="currentColor"
@@ -463,12 +458,7 @@
                         </path>
                     </svg>
                 </button>
-                <div class="m-auto w-1/2 bg-gray-600 rounded-full h-5 mb-4"
-                     style=" margin-bottom: 10px !important; margin-top: 80px !important; margin: auto; ">
-                    <div class="bg-gray-600 w-full h-5 rounded-full"
-                         style="background: linear-gradient(45deg,#ffae00,#d400ff);">
-                    </div>
-                </div>
+
             </div>
         </div>
         <div id="step4" class="hidden flex items-center justify-center">

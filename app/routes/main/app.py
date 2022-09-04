@@ -56,9 +56,9 @@ def getGclassroomcourses():
     return courses
 
 
-@main_blueprint.route("/app", methods=["GET"])
+@main_blueprint.route("/courses", methods=["GET"])
 @logged_in
-def app():
+def courses():
     from app.static.python.classes import Event
 
     user_acc = read.find_user(id=session["id"])
@@ -86,9 +86,9 @@ def app():
     )
 
 
-@main_blueprint.route("/courses", methods=["GET"])
+@main_blueprint.route("/app", methods=["GET"])
 @logged_in
-def courses():
+def app():
     user_acc = read.find_user(id=session["id"])
     user_courses = read.get_user_courses(session["id"])
     events = read.sort_user_events(session["id"])
