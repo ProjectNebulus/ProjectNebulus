@@ -175,12 +175,13 @@ function confirmSchoology() {
 }
 
 const NORMAL_BORDER = [
-    'bg-gray-800',
-    'border-transparent',
+    'dark:bg-gray-800',
+    'border',
+    'border-gray-400',
     'focus:border-gray-500',
     'focus:bg-gray-700',
     'focus:ring-0',
-    'text-white'
+    'dark:text-white'
 ];
 
 const RED_BORDER = [
