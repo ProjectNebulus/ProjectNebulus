@@ -166,6 +166,8 @@ def app():
         print(e)
         scCourses = []
 
+    events = read.sort_user_events(session["id"])
+
     return render_template(
         "learning/app.html",
         user=session["username"],
@@ -176,6 +178,9 @@ def app():
         read=read,
         page="Nebulus - Learning",
         gcourses=gcourses,
+        announcements=events[0],
+        enumerate=enumerate,
+        strftime=datetime.strftime,
         canvascourses=canvascourses,
         schoologycourses=scCourses,
         pastschoologycourses=scCourses,

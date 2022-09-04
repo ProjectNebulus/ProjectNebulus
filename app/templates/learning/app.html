@@ -67,14 +67,10 @@
                                                          id="avatar{{ i }}_{{ j }}"
                                                          image-element
                                                          data-dropdown-placement="bottom-start"
-                                                         class="rounded-full ring-2 ring-gray-300 dark:ring-gray-500 cursor-pointer mb-3 rounded-full shadow-lg {% if "black" in avatar %} bg-gray-300 {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %} {% if a.title == "
-                                                         w-8
-                                                         h-8
-                                                         mt-4
-                                                         {% else %}
+                                                         class="rounded-full ring-2 ring-gray-300 dark:ring-gray-500 cursor-pointer mb-3 rounded-full shadow-lg {% if "black" in avatar %} bg-gray-300 {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %} {% if a.title == "w-8 h-8mt-4" %} {% else %}
                                                          w-6
                                                          h-6
-                                                         {% endif %}
+                                     {% endif %}"
                                                          src="{{ a.author_pic }}"
                                                          alt="{{ a.author }}'s profile picture">
                                                     <br>
