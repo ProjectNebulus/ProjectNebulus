@@ -178,6 +178,7 @@ const NORMAL_BORDER = [
     'dark:bg-gray-800',
     'border',
     'border-gray-400',
+    'dark:border-gray-600',
     'focus:border-gray-500',
     'focus:bg-gray-700',
     'focus:ring-0',
