@@ -49,8 +49,8 @@
     <!--Title!-->
     <title>{{ page }}</title>
     <script>
-        const user = "{{ user }}";
         AOS.init();
+        const user = "{{ user }}";
     </script>
 
     <style>
@@ -62,10 +62,6 @@
             transition: 0.3s;
         }
     </style>
-
-
-
 </head>
-<body>
 {% block main %}
 {% endblock %}

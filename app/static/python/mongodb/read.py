@@ -384,10 +384,14 @@ def search(keyword: str, username: str):
                 "localField": "course",
                 "foreignField": "_id",
                 "as": "course",
-            }
+            },
         },
-        {"$match": {"course.authorizedUsers": user.pk}},
+        {"$match": {"$or": [
+            {"course.authorizedUsers": user.pk},
+            {"chat.members": user.pk}
+        ]}},
         {"$project": {"title": 1, "_id": 1, "_cls": 1}},
+        {"$limit": 20}
     ]
     courses = Course.objects(Q(authorizedUsers=user.id) & Q(name__istartswith=keyword))[
               :10
@@ -397,20 +401,22 @@ def search(keyword: str, username: str):
         Q(authorizedUsers=user.id) & Q(title__istartswith=keyword)
     )[:10]
 
+    users = list(User.objects().aggregate(pipeline1))
     events = list(Event.objects().aggregate(pipeline1))
     assignments = list(Assignment.objects().aggregate(pipeline1))
     announcements = list(Announcement.objects().aggregate(pipeline1))
-    documents = list(DocumentFile.objects.aggregate(pipeline1))
+    documents = list(DocumentFile.objects().aggregate(pipeline1))
+
     return (
-        courses,
-        documents,
-        chats,
-        events,
-        assignments,
-        announcements,
-        NebulusDocuments,
-        users,
-    )
+               courses,
+               documents,
+               chats,
+               events,
+               assignments,
+               announcements,
+               NebulusDocuments,
+               users,
+           ), 200
 
 
 def search_course(keyword: str, course: str):

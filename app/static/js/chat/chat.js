@@ -5,7 +5,7 @@ import {openBlocked, openFriends, toggleEmail, toggleEmoji, togglePreview} from 
 
 let io = window.io;
 window['getChat'] = getChat;
-window['changeSearch'] = changeSearch;
+window['searchWithin'] = changeSearch;
 window['toggleEmoji'] = toggleEmoji;
 window['openFriends'] = openFriends;
 window['openBlocked'] = openBlocked;

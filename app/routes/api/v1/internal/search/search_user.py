@@ -37,7 +37,7 @@ def search_user():
     return jsonify(users)
 
 
-@internal.route("/search-within_user", methods=["POST"])
+@internal.route("/search-within-user", methods=["POST"])
 def search_within_user():
     data = request.get_json()
     data = data["search"]
@@ -54,7 +54,7 @@ def search_within_user():
         announcements,
         NebulusDocuments,
         accounts,
-    ) = users
+    ) = users[0]
 
     everything = []
     for course in courses:
@@ -148,7 +148,7 @@ def search_within_user():
     return string
 
 
-@internal.route("/search-within_course", methods=["POST"])
+@internal.route("/search-within-course", methods=["POST"])
 def search_within_course():
     data = request.get_json()
     course = data["course"]

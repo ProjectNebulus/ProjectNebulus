@@ -1,8 +1,15 @@
 {% if not disablesidebar %}
     <style>
+        #sidebar_::-webkit-scrollbar {
+            display: none;
+        }
+
         #sidebar_ {
             width: 4rem;
             transition: width 0.5s;
+
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
         }
 
         #sidebar_ .text_nav {

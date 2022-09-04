@@ -16,7 +16,6 @@ def signup():
     return render_template(
         "main/signup.html",
         page="Nebulus - Sign Up",
-        disablebar=True,
         read=read,
         today=datetime.date.today(),
         strftime=utils.strftime,
