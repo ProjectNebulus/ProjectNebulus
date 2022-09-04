@@ -66,14 +66,14 @@ def courses():
     events = read.sort_user_events(session["id"])
 
     return render_template(
-        "user/app.html",
+        "learning/courses.html",
         user=session["username"],
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         user_acc=user_acc,
         user_courses=list(user_courses),
         read=read,
-        page="Nebulus - Learning",
+        page="Nebulus - Courses",
         announcements=events[0],
         events=events[1],
         now=datetime.now(),
@@ -86,7 +86,7 @@ def courses():
     )
 
 
-@main_blueprint.route("/app", methods=["GET"])
+@main_blueprint.route("/app")
 @logged_in
 def app():
     user_acc = read.find_user(id=session["id"])
@@ -167,14 +167,14 @@ def app():
         scCourses = []
 
     return render_template(
-        "learning/courses.html",
+        "learning/app.html",
         user=session["username"],
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         user_acc=user_acc,
         user_courses=list(user_courses),
         read=read,
-        page="Nebulus - Courses",
+        page="Nebulus - Learning",
         gcourses=gcourses,
         canvascourses=canvascourses,
         schoologycourses=scCourses,
