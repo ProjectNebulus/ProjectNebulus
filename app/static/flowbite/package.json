@@ -103,8 +103,8 @@
   },
   "scripts": {
     "build": "NODE_ENV=production && HUGO_ENV=production && run-s build:webpack build:hugo",
-    "build:css": "NPM_ENV=development npx postcss src/flowbite.css  > dist/flowbite.css",
-    "build:css:min": "NPM_ENV=production npx postcss src/flowbite.css  > dist/flowbite.min.css",
+    "build:css": "NPM_ENV=development npx postcss src/theflowbite.css  > dist/theflowbite.css",
+    "build:css:min": "NPM_ENV=production npx postcss src/theflowbite.css  > dist/flowbite.min.css",
     "build:hugo": "hugo",
     "build:js": "run-s build:webpack && copyfiles --flat static/flowbite.js dist && copyfiles --flat static/flowbite.js.map dist && copyfiles --flat static/datepicker.js dist && copyfiles --flat static/datepicker.js.map dist",
     "build:npm": "run-s build:css:min build:css build:js",
@@ -113,6 +113,6 @@
     "start:hugo": "hugo server -D",
     "start:webpack": "webpack --mode=development --watch"
   },
-  "style": "dist/flowbite.css",
+  "style": "dist/theflowbite.css",
   "version": "1.4.2"
 }

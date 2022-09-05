@@ -1,4 +1,4 @@
-import './flowbite.css';
+import './theflowbite.css';
 
 // core components
 import Accordion from './components/accordion';

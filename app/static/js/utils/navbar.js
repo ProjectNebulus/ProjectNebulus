@@ -42,7 +42,7 @@ document.querySelector("#navbar [data-dropdown-toggle='control-center']").oncont
     e.preventDefault();
 
 function searchWithin(search) {
-    if (!search) search = "user"
+    if (search !== "course" ) search = "user"
 
     let value = document.getElementById('search_input').value;
 
