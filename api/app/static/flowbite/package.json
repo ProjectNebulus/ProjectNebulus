@@ -95,7 +95,7 @@
     "tailwind css angular"
   ],
   "license": "MIT",
-  "main": "dist/flowbite.js",
+  "main": "dist/flowbite_.js",
   "name": "flowbite",
   "repository": {
     "type": "git",
@@ -106,7 +106,7 @@
     "build:css": "NPM_ENV=development npx postcss src/flowbite.css  > dist/flowbite.css",
     "build:css:min": "NPM_ENV=production npx postcss src/flowbite.css  > dist/flowbite.min.css",
     "build:hugo": "hugo",
-    "build:js": "run-s build:webpack && copyfiles --flat static/flowbite.js dist && copyfiles --flat static/flowbite.js.map dist && copyfiles --flat static/datepicker.js dist && copyfiles --flat static/datepicker.js.map dist",
+    "build:js": "run-s build:webpack && copyfiles --flat static/flowbite_.js dist && copyfiles --flat static/flowbite.js.map dist && copyfiles --flat static/datepicker.js dist && copyfiles --flat static/datepicker.js.map dist",
     "build:npm": "run-s build:css:min build:css build:js",
     "build:webpack": "webpack --mode=production",
     "start": "NODE_ENV=development run-p start:*",
