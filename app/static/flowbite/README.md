@@ -252,7 +252,7 @@ module.exports = {
 3. Include the main JavaScript file to make interactive elements work:
 
 ```html
-<script src="../path/to/flowbite/dist/flowbite_.js"></script>
+<script src="../path/to/flowbite/dist/flowbite.js"></script>
 ```
 
 If you use Webpack or other bundlers you can also import it like this:

@@ -4290,7 +4290,7 @@ reference element's position.
         });
     });
     /* harmony default export */
-    const tooltip = Tooltip; // CONCATENATED MODULE: ./src/flowbite_.js
+    const tooltip = Tooltip; // CONCATENATED MODULE: ./src/flowbite.js
     // core components
 
     /* harmony default export */
