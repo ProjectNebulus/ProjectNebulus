@@ -580,5 +580,29 @@
             padding: 0;
         }
         </style>
+
+	<script>
+
+		function next(){
+    			let active = document.querySelector('.slide.translate-x-0');
+    			active.classList.remove('translate-x-0');
+    			active.classList.add('-translate-x-full');
+
+    			let next = active.nextElementSibling;
+    			next.classList.remove('translate-x-full');
+    			next.classList.add('translate-x-0');
+		}
+
+		function previous(){
+    			let active = document.querySelector('.slide.translate-x-0');
+    			active.classList.remove('translate-x-0');
+    			active.classList.add('translate-x-full');
+
+    			let previous = activeSlide.previousElementSibling;
+    			previous.classList.remove('-translate-x-full');
+    			previous.classList.add('translate-x-0');
+		}
+
+	</script>
     </body>
 {% endblock %}
