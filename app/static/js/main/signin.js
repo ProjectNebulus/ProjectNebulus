@@ -175,7 +175,7 @@ function confirmSchoology() {
 }
 
 const NORMAL_BORDER = [
-    'dark:bg-gray-800',
+    'dark:bg-gray-900/50',
     'border',
     'border-gray-400',
     'dark:border-gray-600',

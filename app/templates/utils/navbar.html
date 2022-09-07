@@ -76,28 +76,63 @@
         {% if user %}
             <div>
                 <!-- Middle -->
-                <button data-modal-toggle="searchModal"
-                        id="search"
-                        style="float:left;"
-                        type="button"
-                        class="hidden sm:flex items-center w-80 text-left space-x-3 px-4 h-10 bg-white/75 ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800/75 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700 text-sm">
-                    <svg width="24"
-                         height="24"
-                         fill="none"
-                         stroke="currentColor"
-                         stroke-width="2"
-                         stroke-linecap="round"
-                         stroke-linejoin="round"
-                         class="flex-none text-slate-300 dark:text-slate-400"
-                         aria-hidden="true">
+                <button data-modal-toggle="searchModal" id="search" style="float:left;vertical-align: middle;" type="button" class="hidden sm:flex items-center w-64 text-left space-x-3 px-4 h-12 bg-white/75 ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800/75 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700 text-sm">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-none text-slate-300 dark:text-slate-400" aria-hidden="true">
                         <path d="m19 19-3.5-3.5"></path>
                         <circle cx="11" cy="11" r="6"></circle>
                     </svg>
                     <span class="w-full">Quick search...</span><kbd class="font-sans font-semibold dark:text-slate-500 flex">
-                <abbr title="Command"
-                      class="no-underline text-slate-300 dark:text-slate-500 mr-2">⌘</abbr> K</kbd>
-        </button>
-    </div>
+                    <abbr title="Command" class="no-underline text-slate-300 dark:text-slate-500 mr-2">⌘</abbr> K</kbd>
+                </button>
+                <button data-dropdown-toggle="changedropdown" class="hidden sm:flex items-center w-64 text-left space-x-3 px-4 h-12 bg-white/75 ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800/75 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700 text-sm" type="button" style="float: left;margin-left: 20px;vertical-align: middle;">Courses<svg class="ml-2 w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+                </button>
+                <div id="changedropdown" class="z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-800 hidden" style="z-index: 1000; position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(720.5px, 72px, 0px);" data-popper-placement="bottom">
+                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200 align-left" aria-labelledby="dropdownDefault">
+                        <li>
+                            <a style="text-align: left;" href="/app" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Courses</a>
+                        </li>
+                        <li>
+                            <a style="text-align: left;" href="/announcements" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Announcements</a>
+                        </li>
+                        <li>
+                            <a style="text-align: left;" href="/events" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Events</a>
+                        </li>
+                        <li>
+                            <a style="text-align: left;" href="/calendar" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Calendar</a>
+                        </li>
+                        <li>
+                            <a style="text-align: left;" href="/planner" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Planner</a>
+                        </li>
+                    </ul>
+                </div>
+                <button style=" border-radius: 50%; float: left; margin-right:10px; " class="mx-4 hidden sm:flex items-center text-left space-x-3 w-12 h-12 dark:bg-slate-800/75 hover:bg-gray-700 text-white font-medium rounded-lg text-sm pl-4 py-2.5 text-center">
+                    <span style="font-size: 18px;" class="material-icons">school</span>
+                </button>
+
+
+
+
+
+
+                <button style="float:left;
+                                   margin-right:10px;" id="create" class="mx-4 hidden sm:flex items-center text-left space-x-3 w-16 h-12 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800/75 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-gray-500 text-white font-medium rounded-lg text-sm pl-4 py-2.5 text-center">
+                    <span style="font-size:30px;" class="material-icons">add</span>
+                </button>
+
+                <h1 style="
+    display: inline-block;
+    float: right;
+    margin-left: 20px;
+    vertical-align: middle;
+    margin-top: 10px;
+    font-weight: 900;
+    overflow: hidden;
+    width: 150px;
+    height: 30px;
+" class="text-xl text-gray-500 uppercase truncate">Courses (11111)</h1>
+            </div>
 {% endif %}
 <div style="display: grid; grid-auto-flow: column; align-content: center;">
     <!--Right -->

@@ -23,7 +23,6 @@ from .index import *
 from .logout import *
 from .music import *
 from .notepad import *
-from .overview import *
 from .planner import *
 from .points import *
 from .pricing import *
