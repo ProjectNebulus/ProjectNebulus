@@ -2,21 +2,24 @@
 {% extends "layout.html" %}
 {% block main %}
     {% include "utils/navbar.html" %}
-    {% if session.get("username") %}
+    <div style="text-align: left;width: 50%;border-radius: 30px;padding: 50px;margin: auto;margin-top: 40px;" class="dark:bg-gray-800 p-6">
+        <br>
+        <h1 class="text-black dark:text-white text-7xl" style="
+    background: linear-gradient(to left, #f54242, #f54242, #f5c242);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bolder;
+">Error 500</h1>
+        <span class="font-bold text-xl text-black dark:text-white">Our server encountered an error. Please try again later.</span>
+        <br>
+        <br>
 
-    {% endif %}
-    <div style="text-align: center;">
-        <br>
-        <h1 class="text-black dark:text-white text-5xl">500 Internal Server Error</h1>
-        <span class="font-bold text-xl text-black dark:text-white">Whoops! Our server encountered an error! If the problem persists, please contact us.</span>
-        <br>
-        <br>
-        <a href="https://discord.gg/4tANVhXdeK">
-            <button class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:ring-pink-200 dark:focus:ring-pink-800">
-                <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                    Contact us on Our Discord Server
-                </span>
+        <a href="/app">
+            <button class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-red-400 to-yellow-200 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:ring-green-200 dark:focus:ring-green-800">
+                <span class="relative px-5 py-2.5 rounded-md group-hover:bg-opacity-0">Home</span>
             </button>
         </a>
+
+
     </div>
 {% endblock %}
