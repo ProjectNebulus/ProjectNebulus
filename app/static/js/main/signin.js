@@ -85,13 +85,13 @@ $('#confirmBTN').on('click', function () {
             $this.button('reset');
             let resp = document.getElementById('resp');
             if (data === '1') {
-                resp.style.color = 'red';
+                resp.style.color = 'pink';
                 resp.innerHTML =
                     'Login Failed. Reason: Clicked Deny on Schoology or closed Schoology popup window. Make sure Popups are enabled on your browser. Click Authorize again and click Approve this time!';
                 document.getElementById('auth').style.display = 'inline';
                 document.getElementById('connectbtn').style.display = 'none';
             } else if (data === '2') {
-                resp.style.color = 'red';
+                resp.style.color = 'pink';
                 resp.innerHTML =
                     'Login Failed. Reason: Your account is not connected to Schoology. Please signin normally and then connect your schoology account to signin with Schoology.';
                 document.getElementById('auth').style.display = 'inline';
@@ -302,18 +302,18 @@ window.addEventListener('load', function () {
                 loginButton.style.backgroundColor = '#3E82F8';
                 loginButton.classList.add('hover:bg-blue-800');
             } else {
-                emailError.style.color = 'red';
+                emailError.style.color = 'pink';
                 emailError.innerHTML = '<p class="material-icons">error</p>';
-                emailErrorMsg.style.color = 'red';
+                emailErrorMsg.style.color = 'pink';
                 emailErrorMsg.innerHTML = 'Invalid email or password!';
 
                 email.classList.remove(...NORMAL_BORDER);
                 email.classList.remove(...GREEN_BORDER);
                 email.classList.add(...RED_BORDER);
 
-                passwordError.style.color = 'red';
+                passwordError.style.color = 'pink';
                 passwordError.innerHTML = '<p class="material-icons">error</p>';
-                passwordErrorMsg.style.color = 'red';
+                passwordErrorMsg.style.color = 'pink';
                 passwordErrorMsg.innerHTML = 'Invalid email or password!';
 
                 password.classList.remove(...NORMAL_BORDER);
