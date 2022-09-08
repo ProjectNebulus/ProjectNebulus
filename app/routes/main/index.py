@@ -19,7 +19,7 @@ def get_locale():
 def index():
     return render_template(
         "main/index.html",
-        page="Nebulus - Learning, All In One",
+        page="Nebulus. Education. Redefined.",
         user=session.get("username"),
         email=session.get("email"),
         avatar=session.get(

@@ -27,7 +27,7 @@ themeToggleBtn.addEventListener('click', function () {
 
 for (const a of document.getElementsByClassName('nav-link'))
     a.className +=
-        ' block py-2 px-4 text-sm text-gray-700 dark:text-gray-200 dark:hover:text-white';
+        ' hover:underline block py-2 px-1 text-sm text-gray-700 dark:text-gray-200 dark:hover:text-white';
 
 for (const a of document.getElementsByClassName('nav-link-2'))
     a.className +=
