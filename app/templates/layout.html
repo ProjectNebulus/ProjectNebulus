@@ -52,17 +52,14 @@
         }
     </style>
 
-    <div id="contextMenu" class="context-menu bg-white dark:bg-gray-700 text-black dark:text-white"
-         style="text-align:left; padding: 20px;display: none;margin: 20px;z-index: 100;position: absolute;text-align: center;border-radius: 20px;border: none;width: 200px;">
+    <div id="contextMenu" class="context-menu bg-white dark:bg-gray-800/75 backdrop-blur-sm text-black dark:text-white"
+         style="padding: 5px;margin: 5px;display: none;z-index: 100;position: absolute;text-align: center;border-radius: 20px;border: none;width: 200px;left: 422px;top: 244px;">
         <ul style="text-align:left;">
-            {% if not user %}
-                <li><a href="/signin"><i class="material-icons">login</i>Login</a></li>
-                <li><a href="/signup"><i class="material-icons">app_registration</i>Sign Up</a></li>
-            {% else %}
-                <li><a href="/settings"><i class="material-icons">settings</i>Settings</a></li>
-                <li><a href="/profile"><i class="material-icons">person</i>View Profile</a></li>
-                <li><a href="/logout"><i class="material-icons">logout</i>Log Out</a></li>
-            {% endif %}
+
+            <li><a href="/settings"><i class="material-icons">settings</i>Settings</a></li>
+            <li><a href="/profile"><i class="material-icons">person</i>View Profile</a></li>
+            <li><a href="/logout"><i class="material-icons">logout</i>Log Out</a></li>
+
         </ul>
     </div>
     <style>

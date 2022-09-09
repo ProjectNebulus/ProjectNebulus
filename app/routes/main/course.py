@@ -6,7 +6,6 @@ from flask_cors import cross_origin
 
 from app.static.python.classes import Course, User
 from app.static.python.mongodb import create, read
-
 from app.static.python.mongodb.read import getText
 from . import main_blueprint, utils
 from .utils import logged_in, private_endpoint
@@ -40,8 +39,6 @@ def course_page(page, **kwargs):
         if page == "course":
             page = "documents"
 
-        iframeSrc += page + "?iframe=true"
-        page = "course"
 
     return render_template(
         f"courses/{page}.html",

@@ -1,9 +1,10 @@
 from flask import render_template, session
 
 from . import main_blueprint
+from ...static.python.mongodb.read import getText
 
 
-@main_blueprint.route("/ComingSoon", methods=["GET"])
+@main_blueprint.route("/coming-soon", methods=["GET"])
 def soon():
     return render_template(
         "errors/coming_soon.html",
@@ -11,4 +12,5 @@ def soon():
         user=session.get("username"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        translate=getText
     )
