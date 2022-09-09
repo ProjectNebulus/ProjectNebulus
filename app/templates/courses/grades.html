@@ -13,6 +13,7 @@
         <h1 class="text-black dark:text-white text-2xl m-6">Coming Soon</h1>
     </div>
     <script>const course_id = "{{ course_id }}"
+    document.getElementById("navbartitle").innerText = "Grades";
     document.getElementById('currentdrop').innerHTML = `
         <a style="text-align: left;" href="/app" class="truncate overflow-auto">
                         <img src="https://api.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg" alt="Course Icon" class="object-cover rounded-lg inline-block" style="width:40px;
@@ -21,8 +22,7 @@
             Biology 7 (Section 1)
             </a>`;
     document.getElementById("changedropdown").innerHTML = `
-
-        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200 align-left"
+     <ul class="py-1 text-sm text-gray-700 dark:text-gray-200 align-left"
                         aria-labelledby="dropdownDefault">
 
                         <li>
@@ -33,7 +33,7 @@
                         <li>
                             <a style="text-align: left;"
                                href="/course/{{ course_id }}/announcements"
-                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Announcements
+                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Announcements</a>
                         </li>
                         <li>
                             <a style="text-align: left;"
@@ -65,9 +65,11 @@
                                href="/course/{{ course_id }}/extensions"
                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Extensions</a>
                         </li>
-                    </ul>
-`</script>
+                    </ul>`
+    </script>
     {% include "courses/courseModals.html" %}
     </body>
 {% endblock %}
+
+
 
