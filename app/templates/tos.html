@@ -1,48 +1,17 @@
 {% include 'layout.html' %}
 {% block main %}
+    {% include 'utils/navbar.html' %}
     <style>
+        ul {
+            margin-left: 50px;
+        }
+
         [data-custom-class='body'], [data-custom-class='body'] * {
             background: transparent !important;
         }
 
-        [data-custom-class='title'], [data-custom-class='title'] * {
-            font-family: Arial !important;
-            font-size: 26px !important;
-            color: #000000 !important;
-        }
-
-        [data-custom-class='subtitle'], [data-custom-class='subtitle'] * {
-            font-family: Arial !important;
-            color: #595959 !important;
-            font-size: 14px !important;
-        }
-
-        [data-custom-class='heading_1'], [data-custom-class='heading_1'] * {
-            font-family: Arial !important;
-            font-size: 19px !important;
-            color: #000000 !important;
-        }
-
-        [data-custom-class='heading_2'], [data-custom-class='heading_2'] * {
-            font-family: Arial !important;
-            font-size: 17px !important;
-            color: #000000 !important;
-        }
-
-        [data-custom-class='body_text'], [data-custom-class='body_text'] * {
-            color: #595959 !important;
-            font-size: 14px !important;
-            font-family: Arial !important;
-        }
-
-        [data-custom-class='link'], [data-custom-class='link'] * {
-            color: #3030F1 !important;
-            font-size: 14px !important;
-            font-family: Arial !important;
-            word-break: break-word !important;
-        }
     </style>
-    <div data-custom-class="body">
+    <div class="text-black dark:text-white" style="margin: auto;padding: 20vh 0;width:70%;">
     <div align="center" style="text-align: left; line-height: 1;">
     <div align="center"
          class="MsoNormal"
@@ -58,10 +27,11 @@
                     <a name="_gm5sejt4p02f"></a>
                     <div align="center"
                          class="MsoNormal"
-                         data-custom-class="title"
+                         class="dark:text-white text-black text-5xl"
                          style="text-align: left;
                                         line-height: 1.5;">
-                        <strong><span style="line-height: 22.5px; font-size: 26px;"><bdt class="block-component"></bdt><bdt
+                        <strong class="text-5xl dark:text-white text-black"><span
+                                style="line-height: 22.5px; font-size: 26px;"><bdt class="block-component"></bdt><bdt
                                 class="question">TERMS OF SERVICE</bdt><bdt
                                 class="statement-end-if-in-editor"></bdt></span></strong>
                     </div>
@@ -73,22 +43,22 @@
                     </div>
                     <div align="center"
                          class="MsoNormal"
-                         data-custom-class="subtitle"
+                         class="text-gray-500 text-2xl"
                          style="text-align: left;
                                         line-height: 22.5px;">
                         <br>
                     </div>
                     <div align="center"
                          class="MsoNormal"
-                         data-custom-class="subtitle"
+                         class="text-gray-500 text-2xl"
                          style="text-align: left;
                                         line-height: 1.5;">
-                                <span style="color: rgb(89, 89, 89);
+                                <span class="text-gray-500 text-2xl" style="
                                              font-size: 14.6667px;
                                              text-align: justify;"><strong>Last updated <bdt
                                         class="block-container question question-in-editor"
                                         data-id="e2088df5-25ea-aec9-83d4-6284f5a7e043"
-                                        data-type="question">July 15, 2022</bdt></strong></span>
+                                        data-type="question">September 1, 2022</bdt></strong></span>
                     </div>
                 </div>
             </div>
@@ -112,27 +82,28 @@
             </div>
             <div style="line-height: 1.5; text-align: left;">
                 <span style="font-size: 15px;"><span style="color: rgb(127, 127, 127);"><span
-                        style="color: rgb(0, 0, 0);"><strong><span
-                        data-custom-class="heading_1">TABLE OF CONTENTS</span></strong></span></span></span>
+                        style=""><strong><span
+                        class="dark:text-white text-black text-3xl">TABLE OF CONTENTS</span></strong></span></span></span>
             </div>
             <div style="line-height: 1.5; text-align: left;">
                 <br>
             </div>
             <div style="line-height: 1.5; text-align: left;">
-                <span style="font-size: 15px;"><a data-custom-class="link" href="#agreement"><span
-                        style="color: rgb(89, 89, 89);">1. AGREEMENT TO TERMS</span></a></span>
+                <span style="font-size: 15px;"><a class="text-sky-500 hover:underline font-bold" href="#agreement"><span
+                        style="">1. AGREEMENT TO TERMS</span></a></span>
             </div>
             <div style="line-height: 1.5; text-align: left;">
-                <span style="font-size: 15px;"><a data-custom-class="link" href="#ip"><span
-                        style="color: rgb(89, 89, 89);">2. INTELLECTUAL PROPERTY RIGHTS</span></a></span>
+                <span style="font-size: 15px;"><a class="text-sky-500 hover:underline font-bold" href="#ip"><span
+                        style="">2. INTELLECTUAL PROPERTY RIGHTS</span></a></span>
             </div>
             <div style="line-height: 1.5; text-align: left;">
-                <span style="font-size: 15px;"><span style="color: rgb(89, 89, 89);"><a data-custom-class="link"
-                                                                                        href="#userreps">3. USER REPRESENTATIONS</a></span></span>
+                <span style="font-size: 15px;"><span style=""><a class="text-sky-500 hover:underline font-bold"
+                                                                 href="#userreps">3. USER REPRESENTATIONS</a></span></span>
             </div>
             <div style="line-height: 1.5; text-align: left;">
-                        <span style="font-size: 15px;"><a data-custom-class="link" href="#userreg"><span
-                                style="color: rgb(89, 89, 89);"><bdt
+                        <span style="font-size: 15px;"><a class="text-sky-500 hover:underline font-bold"
+                                                          href="#userreg"><span
+                                style=""><bdt
                                 data-type="conditional-block"><bdt class="block-component"
                                                                    data-record-question-key="user_account_option"
                                                                    data-type="statement"><span
@@ -141,20 +112,22 @@
                 </bdt>
             </div>
             <div style="line-height: 1.5; text-align: left;">
-                <span style="font-size: 15px;"><a data-custom-class="link" href="#prohibited"><span
-                        style="color: rgb(89, 89, 89);">5. PROHIBITED ACTIVITIES</span></a></span>
+                <span style="font-size: 15px;"><a class="text-sky-500 hover:underline font-bold"
+                                                  href="#prohibited"><span
+                        style="">5. PROHIBITED ACTIVITIES</span></a></span>
             </div>
             <div style="line-height: 1.5; text-align: left;">
-                <span style="font-size: 15px;"><a data-custom-class="link" href="#ugc"><span
-                        style="color: rgb(89, 89, 89);">6. USER GENERATED CONTRIBUTIONS</span></a></span>
+                <span style="font-size: 15px;"><a class="text-sky-500 hover:underline font-bold" href="#ugc"><span
+                        style="">6. USER GENERATED CONTRIBUTIONS</span></a></span>
             </div>
             <div style="line-height: 1.5; text-align: left;">
-                <span style="font-size: 15px;"><span style="color: rgb(89, 89, 89);"><a data-custom-class="link"
-                                                                                        href="#license">7. CONTRIBUTION LICENSE</a></span></span>
+                <span style="font-size: 15px;"><span style=""><a class="text-sky-500 hover:underline font-bold"
+                                                                 href="#license">7. CONTRIBUTION LICENSE</a></span></span>
             </div>
             <div style="line-height: 1.5; text-align: left;">
-                            <span style="font-size: 15px;"><a data-custom-class="link" href="#reviews"><span
-                                    style="color: rgb(89, 89, 89);"><bdt
+                            <span style="font-size: 15px;"><a class="text-sky-500 hover:underline font-bold"
+                                                              href="#reviews"><span
+                                    style=""><bdt
                                     class="block-container if" data-type="if" id="a378120a-96b1-6fa3-279f-63d5b96341d3"><bdt
                                     data-type="conditional-block"><bdt class="block-component"
                                                                        data-record-question-key="review_option"
@@ -164,41 +137,45 @@
                                     style="font-size: 15px;"></span></bdt></span></a></span>
             </div>
             <div style="line-height: 1.5; text-align: left;">
-                            <span style="font-size: 15px;"><a data-custom-class="link" href="#mobile"><span
-                                    style="color: rgb(89, 89, 89);"><bdt
+                            <span style="font-size: 15px;"><a class="text-sky-500 hover:underline font-bold"
+                                                              href="#mobile"><span
+                                    style=""><bdt
                                     class="block-container if" data-type="if" id="c954892f-02b9-c743-d1e8-faf0d59a4b70"><bdt
                                     data-type="conditional-block"><bdt class="block-component"
                                                                        data-record-question-key="mobile_app_option"
                                                                        data-type="statement"><span
                                     style="font-size: 15px;"></span></bdt></bdt></bdt>9. MOBILE APPLICATION LICENSE</span> </a><a
-                                    data-custom-class="link" href="#agreement"><span style="color: rgb(89, 89, 89);"><bdt
+                                    class="text-sky-500 hover:underline font-bold" href="#agreement"><span style=""><bdt
                                     class="statement-end-if-in-editor" data-type="close"><span
                                     style="font-size: 15px;"></span></bdt></span></a></span>
             </div>
             <div align="center" style="text-align: left;">
                             <span style="font-size: 15px;"><bdt
-                                    class="block-component"></bdt><span style="color: rgb(89, 89, 89);"><a
-                                    data-custom-class="link" href="#socialmedia">10. SOCIAL MEDIA</a><a
-                                    data-custom-class="link" href="#agreement"><span style="color: rgb(89, 89, 89);"><bdt
+                                    class="block-component"></bdt><span style=""><a
+                                    class="text-sky-500 hover:underline font-bold"
+                                    href="#socialmedia">10. SOCIAL MEDIA</a><a
+                                    class="text-sky-500 hover:underline font-bold" href="#agreement"><span style=""><bdt
                                     class="statement-end-if-in-editor"
                                     data-type="close"><span
                                     style="font-size: 15px;"></span></bdt></span></a></span></span>
             </div>
             <div style="line-height: 1.5; text-align: left;">
-                <span style="font-size: 15px;"><span style="color: rgb(89, 89, 89);"><a data-custom-class="link"
-                                                                                        href="#submissions">11. SUBMISSIONS</a></span></span>
+                <span style="font-size: 15px;"><span style=""><a class="text-sky-500 hover:underline font-bold"
+                                                                 href="#submissions">11. SUBMISSIONS</a></span></span>
             </div>
             <div align="center" style="text-align: left;">
                             <span style="font-size: 15px;"><bdt
-                                    class="block-component"></bdt><a data-custom-class="link" href="#thirdparty"><span
-                                    style="color: rgb(89, 89, 89);">12. THIRD-PARTY WEBSITE AND CONTENT</span></a><a
-                                    data-custom-class="link" href="#agreement"><span style="color: rgb(89, 89, 89);"><bdt
+                                    class="block-component"></bdt><a class="text-sky-500 hover:underline font-bold"
+                                                                     href="#thirdparty"><span
+                                    style="">12. THIRD-PARTY WEBSITE AND CONTENT</span></a><a
+                                    class="text-sky-500 hover:underline font-bold" href="#agreement"><span style=""><bdt
                                     class="statement-end-if-in-editor" data-type="close"><span
                                     style="font-size: 15px;"></span></bdt></span></a></span>
             </div>
             <div style="line-height: 1.5; text-align: left;">
-                            <span style="font-size: 15px;"><a data-custom-class="link" href="#advertisers"><span
-                                    style="color: rgb(89, 89, 89);"><bdt
+                            <span style="font-size: 15px;"><a class="text-sky-500 hover:underline font-bold"
+                                                              href="#advertisers"><span
+                                    style=""><bdt
                                     class="block-container if" data-type="if" id="14038561-dad7-be9d-370f-f8aa487b2570"><bdt
                                     data-type="conditional-block"><bdt class="block-component"
                                                                        data-record-question-key="advertiser_option"
@@ -206,22 +183,24 @@
                                     style="font-size: 15px;"></span></bdt></span></a></span>
             </div>
             <div style="line-height: 1.5; text-align: left;">
-                <span style="font-size: 15px;"><span style="color: rgb(89, 89, 89);"><a data-custom-class="link"
-                                                                                        href="#sitemanage">13. SITE MANAGEMENT</a></span></span>
+                <span style="font-size: 15px;"><span style=""><a class="text-sky-500 hover:underline font-bold"
+                                                                 href="#sitemanage">13. SITE MANAGEMENT</a></span></span>
             </div>
             <div style="line-height: 1.5; text-align: left;">
-                                <span style="font-size: 15px;"><a data-custom-class="link" href="#privacypolicy1"><span
-                                        style="color: rgb(89, 89, 89);"><bdt
+                                <span style="font-size: 15px;"><a class="text-sky-500 hover:underline font-bold"
+                                                                  href="#privacypolicy1"><span
+                                        style=""><bdt
                                         class="block-container if" data-type="if"
                                         id="bdd90fa9-e664-7d0b-c352-2b8e77dd3bb4"><bdt
                                         data-type="conditional-block"><bdt class="block-component"
                                                                            data-record-question-key="privacy_policy_option"
                                                                            data-type="statement"><span
                                         style="font-size: 15px;"></span></bdt></bdt></bdt>14. PRIVACY POLICY</span></a><a
-                                        data-custom-class="link" href="#advertisers"></a><a data-custom-class="link"
-                                                                                            href="#agreement"><span
-                                        style="color: rgb(89, 89, 89);"><bdt class="statement-end-if-in-editor"
-                                                                             data-type="close"><span
+                                        class="text-sky-500 hover:underline font-bold" href="#advertisers"></a><a
+                                        class="text-sky-500 hover:underline font-bold"
+                                        href="#agreement"><span
+                                        style=""><bdt class="statement-end-if-in-editor"
+                                                      data-type="close"><span
                                         style="font-size: 15px;"><bdt
                                         class="block-container if" data-type="if"
                                         id="87a7471d-cf82-1032-fdf8-601d37d7b017"><bdt
@@ -229,31 +208,35 @@
                                                                            data-record-question-key="privacy_policy_followup"
                                                                            data-type="statement"
                                                                            style="font-size: 14.6667px;"><span
-                                        style="font-size: 15px;"></span></bdt></span></a><a data-custom-class="link"
-                                                                                            href="#privacypolicy"></a></span>
+                                        style="font-size: 15px;"></span></bdt></span></a><a
+                                        class="text-sky-500 hover:underline font-bold"
+                                        href="#privacypolicy"></a></span>
             </div>
             <div style="line-height: 1.5; text-align: left;">
-                                <span style="font-size: 15px;"><a data-custom-class="link" href="#dmca"><span
-                                        style="color: rgb(89, 89, 89);"><bdt
+                                <span style="font-size: 15px;"><a class="text-sky-500 hover:underline font-bold"
+                                                                  href="#dmca"><span
+                                        style=""><bdt
                                         class="block-component"><bdt
                                         class="block-component"></bdt></bdt></span></a></span><span
-                    style="font-size: 15px;"><a data-custom-class="link" href="#dmca"><span
-                    style="color: rgb(89, 89, 89);"><bdt class="block-component"><bdt class="block-container if"
-                                                                                      data-type="if"><bdt
+                    style="font-size: 15px;"><a class="text-sky-500 hover:underline font-bold" href="#dmca"><span
+                    style=""><bdt class="block-component"><bdt class="block-container if"
+                                                               data-type="if"><bdt
                     class="statement-end-if-in-editor" data-type="close"><span
                     style="font-size: 15px;"></span></bdt></bdt></span></bdt></bdt></span></a></span>
             </div>
             <div style="line-height: 1.5; text-align: left;">
-                                <span style="font-size: 15px;"><a data-custom-class="link" href="#copyright1"><span
-                                        style="color: rgb(89, 89, 89);"><bdt
+                                <span style="font-size: 15px;"><a class="text-sky-500 hover:underline font-bold"
+                                                                  href="#copyright1"><span
+                                        style=""><bdt
                                         class="block-component"><bdt
                                         class="block-component"></bdt></bdt></span></a></span>
                 <bdt class="block-container if" data-type="if">
                     <bdt class="statement-end-if-in-editor" data-type="close"><span style="font-size: 15px;"><bdt
                             class="block-component"></bdt></span></bdt>
                 </bdt>
-                <span style="font-size: 15px;"><a data-custom-class="link" href="#copyright2"><span
-                        style="color: rgb(89, 89, 89);">15. COPYRIGHT INFRINGEMENTS</span></a></span>
+                <span style="font-size: 15px;"><a class="text-sky-500 hover:underline font-bold"
+                                                  href="#copyright2"><span
+                        style="">15. COPYRIGHT INFRINGEMENTS</span></a></span>
                 <bdt class="block-container if" data-type="if">
                     <bdt class="statement-end-if-in-editor" data-type="close"><span style="font-size: 15px;"></span>
                     </bdt>
@@ -261,45 +244,49 @@
                 <bdt class="block-component"></bdt>
             </div>
             <div style="line-height: 1.5; text-align: left;">
-                <span style="font-size: 15px;"><a data-custom-class="link" href="#terms"></a><a data-custom-class="link"
-                                                                                                href="#terms"><span
-                        style="color: rgb(89, 89, 89);">16. TERM AND TERMINATION</span></a></span>
+                <span style="font-size: 15px;"><a class="text-sky-500 hover:underline font-bold" href="#terms"></a><a
+                        class="text-sky-500 hover:underline font-bold"
+                        href="#terms"><span
+                        style="">16. TERM AND TERMINATION</span></a></span>
             </div>
             <div style="line-height: 1.5; text-align: left;">
-                <span style="font-size: 15px;"><a data-custom-class="link" href="#modifications"><span
-                        style="color: rgb(89, 89, 89);">17. MODIFICATIONS AND INTERRUPTIONS</span></a></span>
+                <span style="font-size: 15px;"><a class="text-sky-500 hover:underline font-bold"
+                                                  href="#modifications"><span
+                        style="">17. MODIFICATIONS AND INTERRUPTIONS</span></a></span>
             </div>
             <div style="line-height: 1.5; text-align: left;">
-                <span style="font-size: 15px;"><a data-custom-class="link" href="#law"><span
-                        style="color: rgb(89, 89, 89);">18. GOVERNING LAW</span></a></span>
+                <span style="font-size: 15px;"><a class="text-sky-500 hover:underline font-bold" href="#law"><span
+                        style="">18. GOVERNING LAW</span></a></span>
             </div>
             <div style="line-height: 1.5; text-align: left;">
-                <span style="font-size: 15px;"><a data-custom-class="link" href="#disputes"><span
-                        style="color: rgb(89, 89, 89);">19. DISPUTE RESOLUTION</span></a></span>
+                <span style="font-size: 15px;"><a class="text-sky-500 hover:underline font-bold" href="#disputes"><span
+                        style="">19. DISPUTE RESOLUTION</span></a></span>
             </div>
             <div style="line-height: 1.5; text-align: left;">
-                <span style="font-size: 15px;"><span style="color: rgb(89, 89, 89);"><a data-custom-class="link"
-                                                                                        href="#corrections">20. CORRECTIONS</a></span></span>
+                <span style="font-size: 15px;"><span style=""><a class="text-sky-500 hover:underline font-bold"
+                                                                 href="#corrections">20. CORRECTIONS</a></span></span>
             </div>
             <div style="line-height: 1.5; text-align: left;">
-                <span style="font-size: 15px;"><a data-custom-class="link" href="#disclaimer"><span
-                        style="color: rgb(89, 89, 89);">21. DISCLAIMER</span></a></span>
+                <span style="font-size: 15px;"><a class="text-sky-500 hover:underline font-bold"
+                                                  href="#disclaimer"><span
+                        style="">21. DISCLAIMER</span></a></span>
             </div>
             <div style="line-height: 1.5; text-align: left;">
-                <span style="font-size: 15px;"><a data-custom-class="link" href="#liability"><span
-                        style="color: rgb(89, 89, 89);">22. LIMITATIONS OF LIABILITY</span></a></span>
+                <span style="font-size: 15px;"><a class="text-sky-500 hover:underline font-bold" href="#liability"><span
+                        style="">22. LIMITATIONS OF LIABILITY</span></a></span>
             </div>
             <div style="line-height: 1.5; text-align: left;">
-                <span style="font-size: 15px;"><span style="color: rgb(89, 89, 89);"><a data-custom-class="link"
-                                                                                        href="#indemnification">23. INDEMNIFICATION</a></span></span>
+                <span style="font-size: 15px;"><span style=""><a class="text-sky-500 hover:underline font-bold"
+                                                                 href="#indemnification">23. INDEMNIFICATION</a></span></span>
             </div>
             <div style="line-height: 1.5; text-align: left;">
-                <span style="font-size: 15px;"><a data-custom-class="link" href="#userdata"><span
-                        style="color: rgb(89, 89, 89);">24. USER DATA</span></a></span>
+                <span style="font-size: 15px;"><a class="text-sky-500 hover:underline font-bold" href="#userdata"><span
+                        style="">24. USER DATA</span></a></span>
             </div>
             <div style="line-height: 1.5; text-align: left;">
-                <span style="font-size: 15px;"><a data-custom-class="link" href="#electronic"><span
-                        style="color: rgb(89, 89, 89);">25. ELECTRONIC COMMUNICATIONS, TRANSACTIONS, AND SIGNATURES</span></a></span>
+                <span style="font-size: 15px;"><a class="text-sky-500 hover:underline font-bold"
+                                                  href="#electronic"><span
+                        style="">25. ELECTRONIC COMMUNICATIONS, TRANSACTIONS, AND SIGNATURES</span></a></span>
             </div>
             <div class="MsoNormal" style="line-height: 1.5; text-align: left;">
                         <span style="font-size:11.0pt;
@@ -309,19 +296,19 @@
                                      color:#595959;
                                      mso-themecolor:text1;
                                      mso-themetint:166;"><bdt class="block-component"></bdt></span><span
-                    style="font-size: 15px;"><span style="color: rgb(89, 89, 89);"><a data-custom-class="link"
-                                                                                      href="#california">26. CALIFORNIA USERS AND RESIDENTS</a><a
-                    data-custom-class="link" href="#agreement"><span style="color: rgb(89, 89, 89);"><bdt
+                    style="font-size: 15px;"><span style=""><a class="text-sky-500 hover:underline font-bold"
+                                                               href="#california">26. CALIFORNIA USERS AND RESIDENTS</a><a
+                    class="text-sky-500 hover:underline font-bold" href="#agreement"><span style=""><bdt
                     class="statement-end-if-in-editor" data-type="close"><span
                     style="font-size: 15px;"></span></bdt></span></a></span></span>
             </div>
             <div style="line-height: 1.5; text-align: left;">
-                <span style="font-size: 15px;"><a data-custom-class="link" href="#misc"><span
-                        style="color: rgb(89, 89, 89);">27. MISCELLANEOUS</span></a></span>
+                <span style="font-size: 15px;"><a class="text-sky-500 hover:underline font-bold" href="#misc"><span
+                        style="">27. MISCELLANEOUS</span></a></span>
             </div>
             <div style="line-height: 1.5; text-align: left;">
-                <span style="font-size: 15px;"><span style="color: rgb(89, 89, 89);"><a data-custom-class="link"
-                                                                                        href="#contact">28. CONTACT US</a></span></span>
+                <span style="font-size: 15px;"><span style=""><a class="text-sky-500 hover:underline font-bold"
+                                                                 href="#contact">28. CONTACT US</a></span></span>
             </div>
             <div style="line-height: 1.5; text-align: left;">
                 <br>
@@ -331,7 +318,7 @@
             </div>
         </div>
         <div class="MsoNormal"
-             data-custom-class="heading_1"
+             class="dark:text-white text-black text-3xl"
              id="agreement"
              style="line-height: 115%;">
             <a name="_a7mwfgcrtsqn"></a><strong><span style="line-height: 115%; font-family: Arial; font-size: 19px;">1. AGREEMENT TO TERMS</span></strong>
@@ -348,15 +335,9 @@
          style="text-align: left;
                     line-height: 150%;">
         <div class="MsoNormal"
-             data-custom-class="body_text"
+             class="text-black dark:text-white"
              style="line-height: 1.5;">
-                <span style="font-size:11.0pt;
-                             line-height:115%;
-                             Arial;
-                             mso-fareast-font-family:Calibri;
-                             color:#595959;
-                             mso-themecolor:text1;
-                             mso-themetint:166;">These Terms of Use constitute a legally binding agreement made between you, whether personally or on behalf of an entity (“you”) and <bdt
+                <span style="">These Terms of Use constitute a legally binding agreement made between you, whether personally or on behalf of an entity (“you”) and <bdt
                         class="block-container question question-in-editor"
                         data-id="4ab94aa9-19d1-61e0-711e-42c7d186232b" data-type="question">Nebulus</bdt><bdt
                         class="block-component"></bdt> ("<bdt class="block-component"></bdt><strong>Company</strong><bdt
@@ -364,20 +345,8 @@
                         class="block-container question question-in-editor"
                         data-id="92c3b320-1d8b-c74c-db68-d12810736807" data-type="question"><a href="https://nebulus.ml"
                                                                                                target="_blank"
-                                                                                               data-custom-class="link">https://nebulus.ml</a></bdt> website as well as any other media form, media channel, mobile website or mobile application related, linked, or otherwise connected thereto (collectively, the “Site”).<span
-                        style="font-size:11.0pt;
-             line-height:115%;
-             Arial;
-             mso-fareast-font-family:Calibri;
-             color:#595959;
-             mso-themecolor:text1;
-             mso-themetint:166;"><span style="font-size:11.0pt;
-             line-height:115%;
-             Arial;
-             mso-fareast-font-family:Calibri;
-             color:#595959;
-             mso-themecolor:text1;
-             mso-themetint:166;"><bdt class="question"><bdt class="block-component"></bdt></span><bdt
+                                                                                               class="text-sky-500 hover:underline font-bold">https://nebulus.ml</a></bdt> website as well as any other media form, media channel, mobile website or mobile application related, linked, or otherwise connected thereto (collectively, the “Site”).<span
+                        style=""><bdt class="question"><bdt class="block-component"></bdt></span><bdt
                         class="block-component"></bdt></span></span></span></span>
             You agree that by accessing the Site, you have read, understood, and agreed to be bound by all of
             these Terms of Use. IF YOU DO NOT AGREE WITH ALL OF THESE TERMS OF USE, THEN YOU ARE EXPRESSLY
@@ -395,7 +364,7 @@
          style="text-align: left;
             line-height: 150%;">
         <div class="MsoNormal"
-             data-custom-class="body_text"
+             class="text-black dark:text-white"
              style="line-height: 1.5;">
         <span style="font-size:11.0pt;
                      line-height:115%;
@@ -418,7 +387,7 @@
          style="text-align: left;
             line-height: 150%;">
         <div class="MsoNormal"
-             data-custom-class="body_text"
+             class="text-black dark:text-white"
              style="line-height: 1.5;">
         <span style="font-size:11.0pt;
                      line-height:115%;
@@ -455,7 +424,7 @@
          style="text-align: left;
             line-height: 150%;">
         <div class="MsoNormal"
-             data-custom-class="body_text"
+             class="text-black dark:text-white"
              style="line-height: 1.5;">
         <span style="font-size:11.0pt;
                      line-height:115%;
@@ -498,18 +467,18 @@
          style="text-align: left;
             line-height: 150%;">
         <div class="MsoNormal"
-             data-custom-class="body_text"
+             class="text-black dark:text-white"
              style="line-height: 1.5;">
             <bdt data-type="conditional-block">
                 <bdt class="block-component" data-record-question-key="user_o18_option" data-type="statement">
                     <span style="font-size: 15px;"></bdt>
                 <bdt class="block-container if" data-type="if" id="a2595956-7028-dbe5-123e-d3d3a93ed076">
                     <bdt data-type="conditional-block">
-                        <bdt data-type="body"><span style="color: rgb(89, 89, 89); font-size: 14.6667px;">The Site is intended for users who are at least 13 years of age. All users who are minors in the jurisdiction in which they reside (generally under the age of 18) must have the permission of, and be directly supervised by, their parent or guardian to use the Site. If you are a minor, you must have your parent or guardian read and agree to these Terms of Use prior to you using the Site.</span>
+                        <bdt data-type="body"><span style=" font-size: 14.6667px;">The Site is intended for users who are at least 13 years of age. All users who are minors in the jurisdiction in which they reside (generally under the age of 18) must have the permission of, and be directly supervised by, their parent or guardian to use the Site. If you are a minor, you must have your parent or guardian read and agree to these Terms of Use prior to you using the Site.</span>
                         </bdt>
                     </bdt>
                 </bdt>
-                <bdt data-type="body"><span style="color: rgb(89, 89, 89); font-size: 14.6667px;"><bdt
+                <bdt data-type="body"><span style=" font-size: 14.6667px;"><bdt
                         class="block-component"></span></bdt>
         </div>
     </div>
@@ -527,7 +496,7 @@
             <br>
         </div>
         <div class="MsoNormal"
-             data-custom-class="heading_1"
+             class="dark:text-white text-black text-3xl"
              id="ip"
              style="line-height: 1.5;">
             <a name="_4rd71iod99ud"></a><strong><span
@@ -546,7 +515,7 @@
          style="text-align: left;
             line-height: 150%;">
         <div class="MsoNormal"
-             data-custom-class="body_text"
+             class="text-black dark:text-white"
              style="line-height: 1.5;">
         <span style="font-size:11.0pt;
                      line-height:115%;
@@ -580,7 +549,7 @@
          style="text-align: left;
             line-height: 150%;">
         <div class="MsoNormal"
-             data-custom-class="body_text"
+             class="text-black dark:text-white"
              style="line-height: 1.5;">
         <span style="font-size:11.0pt;
                      line-height:115%;
@@ -609,7 +578,7 @@
             <br>
         </div>
         <div class="MsoNormal"
-             data-custom-class="heading_1"
+             class="dark:text-white text-black text-3xl"
              id="userreps"
              style="line-height: 1.5;">
             <a name="_vhkegautf00d"></a><strong><span
@@ -630,54 +599,54 @@
                 text-justify:inter-ideograph;
                 line-height:115%;">
             <div class="MsoNormal"
-                 data-custom-class="body_text"
+                 class="text-black dark:text-white"
                  style="line-height: 1.5;
                     text-align: left;">
             <span style="font-size: 11pt;
                          line-height: 16.8667px;
-                         color: rgb(89, 89, 89);">By using the Site, you represent and warrant that: </span>
+                         ">By using the Site, you represent and warrant that: </span>
                 <bdt class="block-container if" data-type="if" id="d2d82ca8-275f-3f86-8149-8a5ef8054af6">
                     <bdt data-type="conditional-block">
                         <bdt class="block-component" data-record-question-key="user_account_option"
                              data-type="statement"></bdt>
-                        <bdt data-type="body"><span style="color: rgb(89, 89, 89); font-size: 11pt;">(</span><span
-                                style="color: rgb(89, 89, 89); font-size: 14.6667px;">1</span><span
-                                style="color: rgb(89, 89, 89); font-size: 11pt;">) all registration information you submit will be true, accurate, current, and complete; (</span><span
-                                style="color: rgb(89, 89, 89); font-size: 14.6667px;">2</span><span
-                                style="color: rgb(89, 89, 89); font-size: 11pt;">) you will maintain the accuracy of such information and promptly update such registration information as necessary<bdt
+                        <bdt data-type="body"><span style=" font-size: 11pt;">(</span><span
+                                style=" font-size: 14.6667px;">1</span><span
+                                style=" font-size: 11pt;">) all registration information you submit will be true, accurate, current, and complete; (</span><span
+                                style=" font-size: 14.6667px;">2</span><span
+                                style=" font-size: 11pt;">) you will maintain the accuracy of such information and promptly update such registration information as necessary<bdt
                                 class="block-container if" data-type="if"
                                 id="d2d82ca8-275f-3f86-8149-8a5ef8054af6"><bdt data-type="conditional-block"><bdt
                                 data-type="body"><span
-                                style="color: rgb(89, 89, 89); font-size: 11pt;">;</span></bdt></bdt><bdt
+                                style=" font-size: 11pt;">;</span></bdt></bdt><bdt
                                 class="statement-end-if-in-editor" data-type="close"></bdt> </bdt><span
-                                style="color: rgb(89, 89, 89); font-size: 11pt;">(</span><span
-                                style="color: rgb(89, 89, 89); font-size: 14.6667px;">3</span><span
-                                style="color: rgb(89, 89, 89); font-size: 11pt;">) you have the legal capacity and you agree to comply with these Terms of Use;</span><bdt
+                                style=" font-size: 11pt;">(</span><span
+                                style=" font-size: 14.6667px;">3</span><span
+                                style=" font-size: 11pt;">) you have the legal capacity and you agree to comply with these Terms of Use;</span><bdt
                                 class="block-container if" data-type="if"
                                 id="8d4c883b-bc2c-f0b4-da3e-6d0ee51aca13"><bdt data-type="conditional-block"><bdt
                                 class="block-component" data-record-question-key="user_u13_option"
                                 data-type="statement"></bdt> <bdt data-type="body"><span
-                                style="color: rgb(89, 89, 89); font-size: 11pt;">(</span><span
-                                style="color: rgb(89, 89, 89); font-size: 14.6667px;">4</span><span
-                                style="color: rgb(89, 89, 89); font-size: 11pt;">) you are not under the age of 13;</span></bdt></bdt><bdt
+                                style=" font-size: 11pt;">(</span><span
+                                style=" font-size: 14.6667px;">4</span><span
+                                style=" font-size: 11pt;">) you are not under the age of 13;</span></bdt></bdt><bdt
                                 class="statement-end-if-in-editor" data-type="close"></bdt></bdt></span></bdt>
                     </bdt>
                 </bdt>
-                <span style="color: rgb(89, 89, 89); font-size: 11pt;"> (</span><span
-                    style="color: rgb(89, 89, 89); font-size: 14.6667px;">5</span><span
-                    style="color: rgb(89, 89, 89); font-size: 11pt;">) you are not a minor in the jurisdiction in which you reside<bdt
+                <span style=" font-size: 11pt;"> (</span><span
+                    style=" font-size: 14.6667px;">5</span><span
+                    style=" font-size: 11pt;">) you are not a minor in the jurisdiction in which you reside<bdt
                     class="block-container if" data-type="if" id="76948fab-ec9e-266a-bb91-948929c050c9"><bdt
                     data-type="conditional-block"><bdt class="block-component"
                                                        data-record-question-key="user_o18_option"
                                                        data-type="statement"></bdt><bdt data-type="body">, or if a minor, you have received parental permission to use the Site</bdt></bdt><bdt
                     class="statement-end-if-in-editor" data-type="close"></bdt></bdt>; (</span><span
-                    style="color: rgb(89, 89, 89); font-size: 14.6667px;">6</span><span
-                    style="color: rgb(89, 89, 89); font-size: 11pt;">) you will not access the Site through automated or non-human means, whether through a bot, script, or otherwise; (</span><span
-                    style="color: rgb(89, 89, 89); font-size: 14.6667px;">7</span><span
-                    style="color: rgb(89, 89, 89); font-size: 11pt;">) you will not use the Site for any illegal or unauthorized purpose; and (</span><span
-                    style="color: rgb(89, 89, 89); font-size: 14.6667px;">8</span><span
-                    style="color: rgb(89, 89, 89); font-size: 11pt;">) your use of the Site will not violate any applicable law or regulation.</span><span
-                    style="color: rgb(89, 89, 89); font-size: 14.6667px;"></span>
+                    style=" font-size: 14.6667px;">6</span><span
+                    style=" font-size: 11pt;">) you will not access the Site through automated or non-human means, whether through a bot, script, or otherwise; (</span><span
+                    style=" font-size: 14.6667px;">7</span><span
+                    style=" font-size: 11pt;">) you will not use the Site for any illegal or unauthorized purpose; and (</span><span
+                    style=" font-size: 14.6667px;">8</span><span
+                    style=" font-size: 11pt;">) your use of the Site will not violate any applicable law or regulation.</span><span
+                    style=" font-size: 14.6667px;"></span>
             </div>
         </div>
         <div class="MsoNormal" style="text-align: justify; line-height: 1;">
@@ -688,12 +657,12 @@
             text-justify:inter-ideograph;
             line-height:115%;">
             <div class="MsoNormal"
-                 data-custom-class="body_text"
+                 class="text-black dark:text-white"
                  style="line-height: 1.5;
                 text-align: left;">
         <span style="font-size: 11pt;
                      line-height: 16.8667px;
-                     color: rgb(89, 89, 89);">If you provide any information that is untrue, inaccurate, not current, or incomplete, we have the right to suspend or terminate your account and refuse any and all current or future use of the Site (or any portion thereof).</span>
+                     ">If you provide any information that is untrue, inaccurate, not current, or incomplete, we have the right to suspend or terminate your account and refuse any and all current or future use of the Site (or any portion thereof).</span>
             </div>
         </div>
     </div>
@@ -717,7 +686,7 @@
                      data-type="statement"><span style="font-size: 15px;"></span></bdt>
                 <bdt data-type="body">
                     <div class="MsoNormal"
-                         data-custom-class="heading_1"
+                         class="dark:text-white text-black text-3xl"
                          id="userreg"
                          style="line-height: 17.25px;">
                         <strong><span style="line-height: 24.5333px; font-size: 19px;"><strong><span
@@ -731,11 +700,11 @@
             <bdt data-type="conditional-block"> 
                 <bdt data-type="body"> 
                     <div class="MsoNormal"
-                         data-custom-class="body_text"
+                         class="text-black dark:text-white"
                          style="line-height: 1.5;">
         <span style="font-size: 11pt;
                      line-height: 16.8667px;
-                     color: rgb(89, 89, 89);">You may be required to register with the Site. You agree to keep your password confidential and will be responsible for all use of your account and password. We reserve the right to remove, reclaim, or change a username you select if we determine, in our sole discretion, that such username is inappropriate, obscene, or otherwise objectionable.</span>
+                     ">You may be required to register with the Site. You agree to keep your password confidential and will be responsible for all use of your account and password. We reserve the right to remove, reclaim, or change a username you select if we determine, in our sole discretion, that such username is inappropriate, obscene, or otherwise objectionable.</span>
                     </div>
                 </bdt>
             </bdt>
@@ -764,7 +733,7 @@
         <div class="MsoNormal" style="line-height:115%;">
             <a name="_1voziltdxegg"></a>
             <div class="MsoNormal"
-                 data-custom-class="heading_1"
+                 class="dark:text-white text-black text-3xl"
                  id="prohibited"
                  style="line-height: 17.25px;">
                 <strong><span style="line-height: 24.5333px; font-size: 19px;"><strong><span
@@ -777,11 +746,11 @@
         </div>
         <div class="MsoNormal" style="line-height:115%;">
             <div class="MsoNormal"
-                 data-custom-class="body_text"
+                 class="text-black dark:text-white"
                  style="line-height: 1.5;">
             <span style="font-size: 11pt;
                          line-height: 16.8667px;
-                         color: rgb(89, 89, 89);">You may not access or use the Site for any purpose other than that for which we make the Site available. The Site may not be used in connection with any commercial endeavors except those that are specifically endorsed or approved by us.</span>
+                         ">You may not access or use the Site for any purpose other than that for which we make the Site available. The Site may not be used in connection with any commercial endeavors except those that are specifically endorsed or approved by us.</span>
             </div>
         </div>
         <div class="MsoNormal" style="line-height: 1;">
@@ -791,983 +760,229 @@
             <div class="MsoNormal" style="text-align: justify; line-height: 17.25px;">
                 <div class="MsoNormal" style="line-height: 17.25px;">
                     <div class="MsoNormal"
-                         data-custom-class="body_text"
+                         class="text-black dark:text-white"
                          style="line-height: 1.5;
                             text-align: left;">
                     <span style="font-size: 11pt;
                                  line-height: 16.8667px;
-                                 color: rgb(89, 89, 89);">As a user of the Site, you agree not to:</span>
+                                 ">As a user of the Site, you agree not to:</span>
                     </div>
                 </div>
                 <ul>
                     <li class="MsoNormal"
-                        data-custom-class="body_text"
+                        class="text-black dark:text-white"
                         style="line-height: 1.5;
                            text-align: left;">
                     <span style="font-size: 11pt;
                                  line-height: 16.8667px;
-                                 color: rgb(89, 89, 89);"><span style="font-family: sans-serif;
-             font-size: 15px;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);">Systematically retrieve data or other content from the Site to create or compile, directly or indirectly, a collection, compilation, database, or directory without written permission from us.</span></span>
+                                 "><span style=" ">Systematically retrieve data or other content from the Site to create or compile, directly or indirectly, a collection, compilation, database, or directory without written permission from us.</span></span>
                     </li>
                     <li class="MsoNormal"
-                        data-custom-class="body_text"
+                        class="text-black dark:text-white"
                         style="line-height: 1.5;
                            text-align: left;">
-                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span
-                            style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);">Trick, defraud, or mislead us and other users, especially in any attempt to learn sensitive account information such as user passwords.</span></span></span></span></span>
+                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; "><span
+                            style="
+             "><span style="line-height: 16.8667px; "><span style="
+             ">Trick, defraud, or mislead us and other users, especially in any attempt to learn sensitive account information such as user passwords.</span></span></span></span></span>
                     </li>
                     <li class="MsoNormal"
-                        data-custom-class="body_text"
+                        class="text-black dark:text-white"
                         style="line-height: 1.5;
                            text-align: left;">
-                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span
-                            style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);">Circumvent, disable, or otherwise interfere with security-related features of the Site, including features that prevent or restrict the use or copying of any Content or enforce limitations on the use of the Site and/or the Content contained therein.</span></span></span></span></span>
+                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; "><span
+                            style="
+             "><span style="line-height: 16.8667px; "><span style="
+             ">Circumvent, disable, or otherwise interfere with security-related features of the Site, including features that prevent or restrict the use or copying of any Content or enforce limitations on the use of the Site and/or the Content contained therein.</span></span></span></span></span>
                     </li>
                     <li class="MsoNormal"
-                        data-custom-class="body_text"
+                        class="text-black dark:text-white"
                         style="line-height: 1.5;
                            text-align: left;">
-                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span
-                            style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);">Disparage, tarnish, or otherwise harm, in our opinion, us and/or the Site.</span></span></span></span></span>
+                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; "><span
+                            style="
+             "><span style="line-height: 16.8667px; "><span style="
+             ">Disparage, tarnish, or otherwise harm, in our opinion, us and/or the Site.</span></span></span></span></span>
                     </li>
                     <li class="MsoNormal"
-                        data-custom-class="body_text"
+                        class="text-black dark:text-white"
                         style="line-height: 1.5;
                            text-align: left;">
-                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span
-                            style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);">Use any information obtained from the Site in order to harass, abuse, or harm another person.</span></span></span></span></span>
+                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; "><span
+                            style="
+             "><span style="line-height: 16.8667px; "><span style="
+             ">Use any information obtained from the Site in order to harass, abuse, or harm another person.</span></span></span></span></span>
                     </li>
                     <li class="MsoNormal"
-                        data-custom-class="body_text"
+                        class="text-black dark:text-white"
                         style="line-height: 1.5;
                            text-align: left;">
-                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span
-                            style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);">Make improper use of our support services or submit false reports of abuse or misconduct.</span></span></span></span></span>
+                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; "><span
+                            style="
+             "><span style="line-height: 16.8667px; "><span style="
+             ">Make improper use of our support services or submit false reports of abuse or misconduct.</span></span></span></span></span>
                     </li>
                     <li class="MsoNormal"
-                        data-custom-class="body_text"
+                        class="text-black dark:text-white"
                         style="line-height: 1.5;
                            text-align: left;">
-                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span
-                            style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);">Use the Site in a manner inconsistent with any applicable laws or regulations.</span></span></span></span></span>
+                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; "><span
+                            style="
+             "><span style="line-height: 16.8667px; "><span style="
+             ">Use the Site in a manner inconsistent with any applicable laws or regulations.</span></span></span></span></span>
                     </li>
                     <li class="MsoNormal"
-                        data-custom-class="body_text"
+                        class="text-black dark:text-white"
                         style="line-height: 1.5;
                            text-align: left;">
-                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span
-                            style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);">Engage in unauthorized framing of or linking to the Site.</span></span></span></span></span>
+                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; "><span
+                            style="
+             "><span style="line-height: 16.8667px; "><span style="
+             ">Engage in unauthorized framing of or linking to the Site.</span></span></span></span></span>
                     </li>
                     <li class="MsoNormal"
-                        data-custom-class="body_text"
+                        class="text-black dark:text-white"
                         style="line-height: 1.5;
                            text-align: left;">
-                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span
-                            style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);">Upload or transmit (or attempt to upload or to transmit) viruses, Trojan horses, or other material, including excessive use of capital letters and spamming (continuous posting of repetitive text), that interferes with any party’s uninterrupted use and enjoyment of the Site or modifies, impairs, disrupts, alters, or interferes with the use, features, functions, operation, or maintenance of the Site.</span></span></span></span></span>
+                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; "><span
+                            style="
+             "><span style="line-height: 16.8667px; "><span style="
+             ">Upload or transmit (or attempt to upload or to transmit) viruses, Trojan horses, or other material, including excessive use of capital letters and spamming (continuous posting of repetitive text), that interferes with any party’s uninterrupted use and enjoyment of the Site or modifies, impairs, disrupts, alters, or interferes with the use, features, functions, operation, or maintenance of the Site.</span></span></span></span></span>
                     </li>
                     <li class="MsoNormal"
-                        data-custom-class="body_text"
+                        class="text-black dark:text-white"
                         style="line-height: 1.5;
                            text-align: left;">
-                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span
-                            style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);">Engage in any automated use of the system, such as using scripts to send comments or messages, or using any data mining, robots, or similar data gathering and extraction tools.</span></span></span></span></span>
+                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; "><span
+                            style="
+             "><span style="line-height: 16.8667px; "><span style="
+             ">Engage in any automated use of the system, such as using scripts to send comments or messages, or using any data mining, robots, or similar data gathering and extraction tools.</span></span></span></span></span>
                     </li>
                     <li class="MsoNormal"
-                        data-custom-class="body_text"
+                        class="text-black dark:text-white"
                         style="line-height: 1.5;
                            text-align: left;">
-                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span
-                            style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);">Delete the copyright or other proprietary rights notice from any Content.</span></span></span></span></span>
+                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; "><span
+                            style="
+             "><span style="line-height: 16.8667px; "><span style="
+             ">Delete the copyright or other proprietary rights notice from any Content.</span></span></span></span></span>
                     </li>
                     <li class="MsoNormal"
-                        data-custom-class="body_text"
+                        class="text-black dark:text-white"
                         style="line-height: 1.5;
                            text-align: left;">
-                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span
-                            style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);">Attempt to impersonate another user or person or use the username of another user.</span></span></span></span></span>
+                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; "><span
+                            style="
+             "><span style="line-height: 16.8667px; "><span style="
+             ">Attempt to impersonate another user or person or use the username of another user.</span></span></span></span></span>
                     </li>
                     <li class="MsoNormal"
-                        data-custom-class="body_text"
+                        class="text-black dark:text-white"
                         style="line-height: 1.5;
                            text-align: left;">
-                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span
-                            style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);">Upload or transmit (or attempt to upload or to transmit) any material that acts as a passive or active information collection or transmission mechanism, including without limitation, clear graphics interchange formats (“gifs”), 1×1 pixels, web bugs, cookies, or other similar devices (sometimes referred to as “spyware” or “passive collection mechanisms” or “pcms”).</span></span></span></span></span>
+                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; "><span
+                            style="
+             "><span style="line-height: 16.8667px; "><span style="
+             ">Upload or transmit (or attempt to upload or to transmit) any material that acts as a passive or active information collection or transmission mechanism, including without limitation, clear graphics interchange formats (“gifs”), 1×1 pixels, web bugs, cookies, or other similar devices (sometimes referred to as “spyware” or “passive collection mechanisms” or “pcms”).</span></span></span></span></span>
                     </li>
                     <li class="MsoNormal"
-                        data-custom-class="body_text"
+                        class="text-black dark:text-white"
                         style="line-height: 1.5;
                            text-align: left;">
-                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span
-                            style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);">Interfere with, disrupt, or create an undue burden on the Site or the networks or services connected to the Site.</span></span></span></span></span>
+                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; "><span
+                            style="
+             "><span style="line-height: 16.8667px; "><span style="
+             ">Interfere with, disrupt, or create an undue burden on the Site or the networks or services connected to the Site.</span></span></span></span></span>
                     </li>
                     <li class="MsoNormal"
-                        data-custom-class="body_text"
+                        class="text-black dark:text-white"
                         style="line-height: 1.5;
                            text-align: left;">
-                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span
-                            style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);">Harass, annoy, intimidate, or threaten any of our employees or agents engaged in providing any portion of the Site to you.</span></span></span></span></span>
+                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; "><span
+                            style="
+             "><span style="line-height: 16.8667px; "><span style="
+             ">Harass, annoy, intimidate, or threaten any of our employees or agents engaged in providing any portion of the Site to you.</span></span></span></span></span>
                     </li>
                     <li class="MsoNormal"
-                        data-custom-class="body_text"
+                        class="text-black dark:text-white"
                         style="line-height: 1.5;
                            text-align: left;">
-                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span
-                            style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);">Attempt to bypass any measures of the Site designed to prevent or restrict access to the Site, or any portion of the Site.</span></span></span></span></span>
+                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; "><span
+                            style="
+             "><span style="line-height: 16.8667px; "><span style="
+             ">Attempt to bypass any measures of the Site designed to prevent or restrict access to the Site, or any portion of the Site.</span></span></span></span></span>
                     </li>
                     <li class="MsoNormal"
-                        data-custom-class="body_text"
+                        class="text-black dark:text-white"
                         style="line-height: 1.5;
                            text-align: left;">
-                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span
-                            style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);">Copy or adapt the Site’s software, including but not limited to Flash, PHP, HTML, JavaScript, or other code.</span></span></span></span></span>
+                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; "><span
+                            style="
+             "><span style="line-height: 16.8667px; "><span style="
+             ">Copy or adapt the Site’s software, including but not limited to Flash, PHP, HTML, JavaScript, or other code.</span></span></span></span></span>
                     </li>
                     <li class="MsoNormal"
-                        data-custom-class="body_text"
+                        class="text-black dark:text-white"
                         style="line-height: 1.5;
                            text-align: left;">
-                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span
-                            style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);">Except as permitted by applicable law, decipher, decompile, disassemble, or reverse engineer any of the software comprising or in any way making up a part of the Site.</span></span></span></span></span>
+                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; "><span
+                            style="
+             "><span style="line-height: 16.8667px; "><span style="
+             ">Except as permitted by applicable law, decipher, decompile, disassemble, or reverse engineer any of the software comprising or in any way making up a part of the Site.</span></span></span></span></span>
                     </li>
                     <li class="MsoNormal"
-                        data-custom-class="body_text"
+                        class="text-black dark:text-white"
                         style="line-height: 1.5;
                            text-align: left;">
-                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span
-                            style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);">Except as may be the result of standard search engine or Internet browser usage, use, launch, develop, or distribute any automated system, including without limitation, any spider, robot, cheat utility, scraper, or offline reader that accesses the Site, or using or launching any unauthorized script or other software.</span></span></span></span></span>
+                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; "><span
+                            style="
+             "><span style="line-height: 16.8667px; "><span style="
+             ">Except as may be the result of standard search engine or Internet browser usage, use, launch, develop, or distribute any automated system, including without limitation, any spider, robot, cheat utility, scraper, or offline reader that accesses the Site, or using or launching any unauthorized script or other software.</span></span></span></span></span>
                     </li>
                     <li class="MsoNormal"
-                        data-custom-class="body_text"
+                        class="text-black dark:text-white"
                         style="line-height: 1.5;
                            text-align: left;">
-                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span
-                            style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);">Use a buying agent or purchasing agent to make purchases on the Site.</span></span></span></span></span>
+                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; "><span
+                            style="
+             "><span style="line-height: 16.8667px; "><span style="
+             ">Use a buying agent or purchasing agent to make purchases on the Site.</span></span></span></span></span>
                     </li>
                     <li class="MsoNormal"
-                        data-custom-class="body_text"
+                        class="text-black dark:text-white"
                         style="line-height: 1.5;
                            text-align: left;">
-                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span
-                            style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);">Make any unauthorized use of the Site, including collecting usernames and/or email addresses of users by electronic or other means for the purpose of sending unsolicited email, or creating user accounts by automated means or under false pretenses.</span></span></span></span></span>
+                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; "><span
+                            style="
+             "><span style="line-height: 16.8667px; "><span style="
+             ">Make any unauthorized use of the Site, including collecting usernames and/or email addresses of users by electronic or other means for the purpose of sending unsolicited email, or creating user accounts by automated means or under false pretenses.</span></span></span></span></span>
                     </li>
                     <li class="MsoNormal"
-                        data-custom-class="body_text"
+                        class="text-black dark:text-white"
                         style="line-height: 1.5;
                            text-align: left;">
-                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span
-                            style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);">Use the Site as part of any effort to compete with us or otherwise use the Site and/or the Content for any revenue-generating endeavor or commercial enterprise.</span></span></span></span><bdt
+                    <span style="font-size: 15px;"><span style="line-height: 16.8667px; "><span
+                            style="
+             "><span style="line-height: 16.8667px; "><span style="
+             ">Use the Site as part of any effort to compete with us or otherwise use the Site and/or the Content for any revenue-generating endeavor or commercial enterprise.</span></span></span></span><bdt
                             class="block-component"></bdt></span>
                     </li>
                     <li class="MsoNormal"
-                        data-custom-class="body_text"
+                        class="text-black dark:text-white"
                         style="line-height: 1.5;
                    text-align: left;">
-            <span style="font-size: 15px;"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);">Use the Site to advertise or offer to sell goods and services.</span></span></span></span><bdt
+            <span style="font-size: 15px;"><span style="line-height: 16.8667px; "><span style="
+             "><span style="line-height: 16.8667px; "><span style="
+             ">Use the Site to advertise or offer to sell goods and services.</span></span></span></span><bdt
                     class="statement-end-if-in-editor"></bdt><bdt class="block-component"></bdt></span>
                     </li>
                     <li class="MsoNormal"
-                        data-custom-class="body_text"
+                        class="text-black dark:text-white"
                         style="line-height: 1.5;
            text-align: left;">
-    <span style="font-size: 15px;"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);"><span style="line-height: 16.8667px; color: rgb(89, 89, 89);"><span style="font-family: sans-serif;
-             font-style: normal;
-             font-variant-ligatures: normal;
-             font-variant-caps: normal;
-             font-weight: 400;
-             letter-spacing: normal;
-             orphans: 2;
-             text-align: justify;
-             text-indent: -29.4px;
-             text-transform: none;
-             white-space: normal;
-             widows: 2;
-             word-spacing: 0px;
-             -webkit-text-stroke-width: 0px;
-             background-color: rgb(255, 255, 255);
-             text-decoration-style: initial;
-             text-decoration-color: initial;
-             color: rgb(89, 89, 89);">Sell or otherwise transfer your profile.</span></span></span></span><bdt
+    <span style="font-size: 15px;"><span style="line-height: 16.8667px; "><span style="
+             "><span style="line-height: 16.8667px; "><span style="
+             ">Sell or otherwise transfer your profile.</span></span></span></span><bdt
             class="statement-end-if-in-editor"></bdt><bdt
             class="forloop-component"></bdt></span>
                     </li>
@@ -1786,7 +1001,7 @@
                 <bdt data-type="conditional-block">
                     <bdt data-type="body">
                         <div class="MsoNormal"
-                             data-custom-class="heading_1"
+                             class="dark:text-white text-black text-3xl"
                              id="ugc"
                              style="line-height: 17.25px;
                 text-align: left;">
@@ -1804,12 +1019,12 @@
                 <bdt data-type="conditional-block">
                     <bdt data-type="body">
                         <div class="MsoNormal"
-                             data-custom-class="body_text"
+                             class="text-black dark:text-white"
                              style="line-height: 1.5;
                 text-align: left;">
         <span style="font-size: 11pt;
                      line-height: 16.8667px;
-                     color: rgb(89, 89, 89);"><bdt
+                     "><bdt
                 class="block-component"></bdt>The Site may invite you to chat, contribute to, or participate in blogs, message boards, online forums, and other functionality, and may provide you with the opportunity to create, submit, post, display, transmit, perform, publish, distribute, or broadcast content and materials to us or on the Site, including but not limited to text, writings, video, audio, photographs, graphics, comments, suggestions, or personal information or other material (collectively, "Contributions"). Contributions may be viewable by other users of the Site and through third-party websites. As such, any Contributions you transmit may be treated as non-confidential and non-proprietary. When you create or make available any Contributions, you thereby represent and warrant that:<bdt
                 class="else-block"></bdt></span></span>
                         </div>
@@ -1819,84 +1034,84 @@
                     <bdt data-type="body">
                         <ul>
                             <li class="MsoNormal"
-                                data-custom-class="body_text"
+                                class="text-black dark:text-white"
                                 style="line-height: 1.5;
                    text-align: left;">
-                                <span style="font-size: 14px; color: rgb(89, 89, 89);">The creation, <span
-                                        style="font-size: 14px; color: rgb(89, 89, 89);">distribution, transmission, public display, or performance, and the accessing, downloading, or copying of your Contributions do not and will not infringe the proprietary rights, including but not limited to the copyright, patent, trademark, trade secret, or moral rights of any third party.</span></span>
+                                <span style="font-size: 14px; ">The creation, <span
+                                        style="font-size: 14px; ">distribution, transmission, public display, or performance, and the accessing, downloading, or copying of your Contributions do not and will not infringe the proprietary rights, including but not limited to the copyright, patent, trademark, trade secret, or moral rights of any third party.</span></span>
                             </li>
                             <li class="MsoNormal"
-                                data-custom-class="body_text"
+                                class="text-black dark:text-white"
                                 style="line-height: 1.5;
                    text-align: left;">
-                                <span style="font-size: 14px; color: rgb(89, 89, 89);"><span
-                                        style="font-size: 14px; color: rgb(89, 89, 89);">You are the creator and owner of or have the necessary licenses, rights, consents, releases, and permissions to use and to authorize us, the Site, and other users of the Site to use your Contributions in any manner contemplated by the Site and these Terms of Use.</span></span>
+                                <span style="font-size: 14px; "><span
+                                        style="font-size: 14px; ">You are the creator and owner of or have the necessary licenses, rights, consents, releases, and permissions to use and to authorize us, the Site, and other users of the Site to use your Contributions in any manner contemplated by the Site and these Terms of Use.</span></span>
                             </li>
                             <li class="MsoNormal"
-                                data-custom-class="body_text"
+                                class="text-black dark:text-white"
                                 style="line-height: 1.5;
                    text-align: left;">
-                                <span style="font-size: 14px; color: rgb(89, 89, 89);">You have the written consent, release, and/or permission of each and every identifiable individual person in your Contributions to use the name or likeness of each and every such identifiable individual person to enable inclusion and use of your Contributions in any manner contemplated by the Site and these Terms of Use.</span>
+                                <span style="font-size: 14px; ">You have the written consent, release, and/or permission of each and every identifiable individual person in your Contributions to use the name or likeness of each and every such identifiable individual person to enable inclusion and use of your Contributions in any manner contemplated by the Site and these Terms of Use.</span>
                             </li>
                             <li class="MsoNormal"
-                                data-custom-class="body_text"
+                                class="text-black dark:text-white"
                                 style="line-height: 1.5;
                    text-align: left;">
-                                <span style="font-size: 14px; color: rgb(89, 89, 89);">Your Contributions are not false, inaccurate, or misleading.</span>
+                                <span style="font-size: 14px; ">Your Contributions are not false, inaccurate, or misleading.</span>
                             </li>
                             <li class="MsoNormal"
-                                data-custom-class="body_text"
+                                class="text-black dark:text-white"
                                 style="line-height: 1.5;
                    text-align: left;">
-                                <span style="font-size: 14px; color: rgb(89, 89, 89);">Your Contributions are not unsolicited or unauthorized advertising, promotional materials, pyramid schemes, chain letters, spam, mass mailings, or other forms of solicitation.</span>
+                                <span style="font-size: 14px; ">Your Contributions are not unsolicited or unauthorized advertising, promotional materials, pyramid schemes, chain letters, spam, mass mailings, or other forms of solicitation.</span>
                             </li>
                             <li class="MsoNormal"
-                                data-custom-class="body_text"
+                                class="text-black dark:text-white"
                                 style="line-height: 1.5;
                    text-align: left;">
-                                <span style="font-size: 14px; color: rgb(89, 89, 89);">Your Contributions are not obscene, lewd, lascivious, filthy, violent, harassing, libelous, slanderous, or otherwise objectionable (as determined by us).</span>
+                                <span style="font-size: 14px; ">Your Contributions are not obscene, lewd, lascivious, filthy, violent, harassing, libelous, slanderous, or otherwise objectionable (as determined by us).</span>
                             </li>
                             <li class="MsoNormal"
-                                data-custom-class="body_text"
+                                class="text-black dark:text-white"
                                 style="line-height: 1.5;
                    text-align: left;">
-                                <span style="font-size: 14px; color: rgb(89, 89, 89);">Your Contributions do not ridicule, mock, disparage, intimidate, or abuse anyone.</span>
+                                <span style="font-size: 14px; ">Your Contributions do not ridicule, mock, disparage, intimidate, or abuse anyone.</span>
                             </li>
                             <li class="MsoNormal"
-                                data-custom-class="body_text"
+                                class="text-black dark:text-white"
                                 style="line-height: 1.5;
                    text-align: left;">
-                                <span style="font-size: 14px; color: rgb(89, 89, 89);">Your Contributions are not used to harass or threaten (in the legal sense of those terms) any other person and to promote violence against a specific person or class of people.</span>
+                                <span style="font-size: 14px; ">Your Contributions are not used to harass or threaten (in the legal sense of those terms) any other person and to promote violence against a specific person or class of people.</span>
                             </li>
                             <li class="MsoNormal"
-                                data-custom-class="body_text"
+                                class="text-black dark:text-white"
                                 style="line-height: 1.5;
                    text-align: left;">
-                                <span style="font-size: 14px; color: rgb(89, 89, 89);">Your Contributions do not violate any applicable law, regulation, or rule.</span>
+                                <span style="font-size: 14px; ">Your Contributions do not violate any applicable law, regulation, or rule.</span>
                             </li>
                             <li class="MsoNormal"
-                                data-custom-class="body_text"
+                                class="text-black dark:text-white"
                                 style="line-height: 1.5;
                    text-align: left;">
-                                <span style="font-size: 14px; color: rgb(89, 89, 89);">Your Contributions do not violate the privacy or publicity rights of any third party.</span>
+                                <span style="font-size: 14px; ">Your Contributions do not violate the privacy or publicity rights of any third party.</span>
                             </li>
                             <li class="MsoNormal"
-                                data-custom-class="body_text"
+                                class="text-black dark:text-white"
                                 style="line-height: 1.5;
                    text-align: left;">
-                                <span style="font-size: 14px; color: rgb(89, 89, 89);">Your Contributions do not violate any applicable law concerning child pornography, or otherwise intended to protect the health or well-being of minors.</span>
+                                <span style="font-size: 14px; ">Your Contributions do not violate any applicable law concerning child pornography, or otherwise intended to protect the health or well-being of minors.</span>
                             </li>
                             <li class="MsoNormal"
-                                data-custom-class="body_text"
+                                class="text-black dark:text-white"
                                 style="line-height: 1.5;
                    text-align: left;">
-                                <span style="font-size: 14px; color: rgb(89, 89, 89);">Your Contributions do not include any offensive comments that are connected to race, national origin, gender, sexual preference, or physical handicap.</span>
+                                <span style="font-size: 14px; ">Your Contributions do not include any offensive comments that are connected to race, national origin, gender, sexual preference, or physical handicap.</span>
                             </li>
                             <li class="MsoNormal"
-                                data-custom-class="body_text"
+                                class="text-black dark:text-white"
                                 style="line-height: 1.5;
                    text-align: left;">
-                                <span style="font-size: 14px; color: rgb(89, 89, 89);">Your Contributions do not otherwise violate, or link to material that violates, any provision of these Terms of Use, or any applicable law or regulation.</span>
+                                <span style="font-size: 14px; ">Your Contributions do not otherwise violate, or link to material that violates, any provision of these Terms of Use, or any applicable law or regulation.</span>
                             </li>
                         </ul>
                     </bdt>
@@ -1904,12 +1119,12 @@
                 <bdt data-type="conditional-block">
                     <bdt data-type="body">
                         <div class="MsoNormal"
-                             data-custom-class="body_text"
+                             class="text-black dark:text-white"
                              style="line-height: 1.5;
                 text-align: left;">
         <span style="font-size: 11pt;
                      line-height: 16.8667px;
-                     color: rgb(89, 89, 89);">Any use of the Site in violation of the foregoing violates these Terms of Use and may result in, among other things, termination or suspension of your rights to use the Site.</span>
+                     ">Any use of the Site in violation of the foregoing violates these Terms of Use and may result in, among other things, termination or suspension of your rights to use the Site.</span>
                         </div>
                     </bdt>
                 </bdt>
@@ -1926,7 +1141,7 @@
                 <bdt data-type="conditional-block">
                     <bdt data-type="body">
                         <div class="MsoNormal"
-                             data-custom-class="heading_1"
+                             class="dark:text-white text-black text-3xl"
                              id="license"
                              style="line-height: 1.5;
                     text-align: left;">
@@ -1941,7 +1156,7 @@
                         <div class="MsoNormal" style="line-height: 17.25px; text-align: left;">
             <span style="font-size: 11pt;
                          line-height: 16.8667px;
-                         color: rgb(89, 89, 89);"><bdt
+                         "><bdt
                     class="block-component"></bdt></span>
                         </div>
                     </bdt>
@@ -1954,12 +1169,12 @@
                 <bdt data-type="conditional-block">
                     <bdt data-type="body">
                         <div class="MsoNormal"
-                             data-custom-class="body_text"
+                             class="text-black dark:text-white"
                              style="line-height: 1.5;
                     text-align: left;">
             <span style="font-size: 11pt;
                          line-height: 16.8667px;
-                         color: rgb(89, 89, 89);">By posting your Contributions to any part of the Site<bdt
+                         ">By posting your Contributions to any part of the Site<bdt
                     class="block-container if" data-type="if"
                     id="19652acc-9a2a-5ffe-6189-9474402fa6cc"><bdt data-type="conditional-block"><bdt
                     class="block-component" data-record-question-key="socialnetwork_link_option"
@@ -1976,12 +1191,12 @@
                 <bdt data-type="conditional-block">
                     <bdt data-type="body">
                         <div class="MsoNormal"
-                             data-custom-class="body_text"
+                             class="text-black dark:text-white"
                              style="line-height: 1.5;
                     text-align: left;">
             <span style="font-size: 11pt;
                          line-height: 16.8667px;
-                         color: rgb(89, 89, 89);">This license will apply to any form, media, or technology now known or hereafter developed, and includes our use of your name, company name, and franchise name, as applicable, and any of the trademarks, service marks, trade names, logos, and personal and commercial images you provide. You waive all moral rights in your Contributions, and you warrant that moral rights have not otherwise been asserted in your Contributions.</span>
+                         ">This license will apply to any form, media, or technology now known or hereafter developed, and includes our use of your name, company name, and franchise name, as applicable, and any of the trademarks, service marks, trade names, logos, and personal and commercial images you provide. You waive all moral rights in your Contributions, and you warrant that moral rights have not otherwise been asserted in your Contributions.</span>
                         </div>
                     </bdt>
                 </bdt>
@@ -1993,12 +1208,12 @@
                 <bdt data-type="conditional-block">
                     <bdt data-type="body">
                         <div class="MsoNormal"
-                             data-custom-class="body_text"
+                             class="text-black dark:text-white"
                              style="line-height: 1.5;
                     text-align: left;">
             <span style="font-size: 11pt;
                          line-height: 16.8667px;
-                         color: rgb(89, 89, 89);">We do not assert any ownership over your Contributions. You retain full ownership of all of your Contributions and any intellectual property rights or other proprietary rights associated with your Contributions. We are not liable for any statements or representations in your Contributions provided by you in any area on the Site. You are solely responsible for your Contributions to the Site and you expressly agree to exonerate us from any and all responsibility and to refrain from any legal action against us regarding your Contributions.</span>
+                         ">We do not assert any ownership over your Contributions. You retain full ownership of all of your Contributions and any intellectual property rights or other proprietary rights associated with your Contributions. We are not liable for any statements or representations in your Contributions provided by you in any area on the Site. You are solely responsible for your Contributions to the Site and you expressly agree to exonerate us from any and all responsibility and to refrain from any legal action against us regarding your Contributions.</span>
                         </div>
                     </bdt>
                 </bdt>
@@ -2007,12 +1222,12 @@
                 <br>
             </div>
             <div class="MsoNormal"
-                 data-custom-class="body_text"
+                 class="text-black dark:text-white"
                  style="line-height: 1.5;
                 text-align: left;">
         <span style="font-size: 11pt;
                      line-height: 16.8667px;
-                     color: rgb(89, 89, 89);">We have the right, in our sole and absolute discretion, (1) to edit, redact, or otherwise change any Contributions; (2) to re-categorize any Contributions to place them in more appropriate locations on the Site; and (3) to pre-screen or delete any Contributions at any time and for any reason, without notice. We have no obligation to monitor your Contributions.<bdt
+                     ">We have the right, in our sole and absolute discretion, (1) to edit, redact, or otherwise change any Contributions; (2) to re-categorize any Contributions to place them in more appropriate locations on the Site; and (3) to pre-screen or delete any Contributions at any time and for any reason, without notice. We have no obligation to monitor your Contributions.<bdt
                 class="else-block"></span></bdt></bdt>
             </div>
             <div class="MsoNormal" style="line-height: 1.5;">
@@ -2034,7 +1249,7 @@
                     <bdt data-type="conditional-block">
                         <bdt data-type="body">
                             <div class="MsoNormal"
-                                 data-custom-class="heading_1"
+                                 class="dark:text-white text-black text-3xl"
                                  id="reviews"
                                  style="line-height: 115%;">
                                 <strong><span
@@ -2050,23 +1265,23 @@
                 <br>
             </div>
             <div class="MsoNormal"
-                 data-custom-class="body_text"
+                 class="text-black dark:text-white"
                  style="line-height: 1.5;
             text-align: left;">
     <span style="font-size: 11pt;
                  line-height: 16.8667px;
-                 color: rgb(89, 89, 89);">We may provide you areas on the Site to leave reviews or ratings. When posting a review, you must comply with the following criteria: (1) you should have firsthand experience with the person/entity being reviewed; (2) your reviews should not contain offensive profanity, or abusive, racist, offensive, or hate language; (3) your reviews should not contain discriminatory references based on religion, race, gender, national origin, age, marital status, sexual orientation, or disability; (4) your reviews should not contain references to illegal activity; (5) you should not be affiliated with competitors if posting negative reviews; (6) you should not make any conclusions as to the legality of conduct; (7) you may not post any false or misleading statements; and (8) you may not organize a campaign encouraging others to post reviews, whether positive or negative.</span>
+                 ">We may provide you areas on the Site to leave reviews or ratings. When posting a review, you must comply with the following criteria: (1) you should have firsthand experience with the person/entity being reviewed; (2) your reviews should not contain offensive profanity, or abusive, racist, offensive, or hate language; (3) your reviews should not contain discriminatory references based on religion, race, gender, national origin, age, marital status, sexual orientation, or disability; (4) your reviews should not contain references to illegal activity; (5) you should not be affiliated with competitors if posting negative reviews; (6) you should not make any conclusions as to the legality of conduct; (7) you may not post any false or misleading statements; and (8) you may not organize a campaign encouraging others to post reviews, whether positive or negative.</span>
             </div>
             <div class="MsoNormal" style="line-height: 1;">
                 <br>
             </div>
             <div class="MsoNormal"
-                 data-custom-class="body_text"
+                 class="text-black dark:text-white"
                  style="line-height: 1.5;
             text-align: left;">
     <span style="font-size: 11pt;
                  line-height: 16.8667px;
-                 color: rgb(89, 89, 89);">We may accept, reject, or remove reviews in our sole discretion. We have absolutely no obligation to screen reviews or to delete reviews, even if anyone considers reviews objectionable or inaccurate. Reviews are not endorsed by us, and do not necessarily represent our opinions or the views of any of our affiliates or partners. We do not assume liability for any review or for any claims, liabilities, or losses resulting from any review. By posting a review, you hereby grant to us a perpetual, non-exclusive, worldwide, royalty-free, fully-paid, assignable, and sublicensable right and license to reproduce, modify, translate, transmit by any means, display, perform, and/or distribute all content relating to reviews.</span>
+                 ">We may accept, reject, or remove reviews in our sole discretion. We have absolutely no obligation to screen reviews or to delete reviews, even if anyone considers reviews objectionable or inaccurate. Reviews are not endorsed by us, and do not necessarily represent our opinions or the views of any of our affiliates or partners. We do not assume liability for any review or for any claims, liabilities, or losses resulting from any review. By posting a review, you hereby grant to us a perpetual, non-exclusive, worldwide, royalty-free, fully-paid, assignable, and sublicensable right and license to reproduce, modify, translate, transmit by any means, display, perform, and/or distribute all content relating to reviews.</span>
             </div>
             <div class="MsoNormal" style="line-height: 1.5;">
                 <br>
@@ -2090,7 +1305,7 @@
                     <span style="font-size: 15px;"></span></bdt>
                 <bdt data-type="body">
                     <div class="MsoNormal"
-                         data-custom-class="heading_1"
+                         class="dark:text-white text-black text-3xl"
                          id="mobile"
                          style="line-height: 115%;">
                         <strong><span style="line-height: 115%; font-family: Arial; font-size: 19px;"><strong><span
@@ -2112,7 +1327,7 @@
                         <a name="_4p0l96wt8fhj"></a>
                     </div>
                     <div class="MsoNormal"
-                         data-custom-class="heading_2"
+                         class="dark:text-white text-black text-2xl"
                          style="line-height: 115%;">
                         <strong><span style="line-height: 115%; font-family: Arial;">Use
         License</span></strong>
@@ -2129,7 +1344,7 @@
             <bdt data-type="conditional-block">
                 <bdt data-type="body">
                     <div class="MsoNormal"
-                         data-custom-class="body_text"
+                         class="text-black dark:text-white"
                          style="line-height: 1.5;">
         <span style="font-size:11.0pt;
                      line-height:115%;
@@ -2174,7 +1389,7 @@
             <bdt data-type="conditional-block">
                 <bdt data-type="body">
                     <div class="MsoNormal"
-                         data-custom-class="heading_2"
+                         class="dark:text-white text-black text-2xl"
                          style="line-height: 115%;">
                         <a name="_vzf0b5xscg"></a><strong><span style="line-height: 115%; font-family: Arial;">Apple and Android Devices</span></strong>
                     </div>
@@ -2190,7 +1405,7 @@
             <bdt data-type="conditional-block">
                 <bdt data-type="body">
                     <div class="MsoNormal"
-                         data-custom-class="body_text"
+                         class="text-black dark:text-white"
                          style="line-height: 1.5;">
         <span style="font-size:11.0pt;
                      line-height:115%;
@@ -2220,7 +1435,7 @@
         <span style="font-size: 15px;"><bdt class="block-component"></bdt></span>
     </div>
     <div class="MsoNormal"
-         data-custom-class="heading_1"
+         class="dark:text-white text-black text-3xl"
          id="socialmedia"
          style="line-height: 115%;">
         <strong><span style="line-height: 115%; font-family: Arial; font-size: 19px;"><strong><span
@@ -2231,7 +1446,7 @@
         <br>
     </div>
     <div class="MsoNormal"
-         data-custom-class="body_text"
+         class="text-black dark:text-white"
          style="line-height: 1.5;">
     <span style="font-size:11.0pt;
                  line-height:115%;
@@ -2252,7 +1467,7 @@
             class="statement-end-if-in-editor"></bdt></span>
     </div>
     <div class="MsoNormal"
-         data-custom-class="heading_1"
+         class="dark:text-white text-black text-3xl"
          id="submissions"
          style="line-height: 115%;">
         <strong><span style="line-height: 115%; font-family: Arial; font-size: 19px;"><strong><span
@@ -2263,7 +1478,7 @@
         <br>
     </div>
     <div class="MsoNormal"
-         data-custom-class="body_text"
+         class="text-black dark:text-white"
          style="line-height: 1.5;">
     <span style="font-size:11.0pt;
                  line-height:115%;
@@ -2289,7 +1504,7 @@
         <span style="font-size: 15px;"><bdt class="block-component"></bdt></span>
     </div>
     <div class="MsoNormal"
-         data-custom-class="heading_1"
+         class="dark:text-white text-black text-3xl"
          id="thirdparty"
          style="line-height: 115%;">
         <strong><span style="line-height: 115%; font-family: Arial; font-size: 19px;"><strong><span
@@ -2300,7 +1515,7 @@
         <br>
     </div>
     <div class="MsoNormal"
-         data-custom-class="body_text"
+         class="text-black dark:text-white"
          style="line-height: 1.5;">
     <span style="font-size:11.0pt;
                  line-height:115%;
@@ -2329,7 +1544,7 @@
                     <span style="font-size: 15px;"></span></bdt>
             </bdt>
             <div class="MsoNormal"
-                 data-custom-class="heading_1"
+                 class="dark:text-white text-black text-3xl"
                  id="sitemanage"
                  style="line-height: 115%;">
                 <a name="_wj13r09u8u3u"></a><strong><span
@@ -2343,7 +1558,7 @@
     </div>
     <div align="center" style="text-align: left; line-height: 1.5;">
         <div class="MsoNormal"
-             data-custom-class="body_text"
+             class="text-black dark:text-white"
              style="line-height: 1.5;">
         <span style="font-size:11.0pt;
                      line-height:115%;
@@ -2382,7 +1597,7 @@
                      data-type="statement"><span style="font-size: 15px;"></span></bdt>
                 <bdt data-type="body">
                     <div class="MsoNormal"
-                         data-custom-class="heading_1"
+                         class="dark:text-white text-black text-3xl"
                          id="privacypolicy1"
                          style="line-height: 1.5;">
                         <strong><span style="line-height: 115%; font-family: Arial; font-size: 19px;"><strong><span
@@ -2393,7 +1608,7 @@
                         <br>
                     </div>
                     <div class="MsoNormal"
-                         data-custom-class="body_text"
+                         class="text-black dark:text-white"
                          style="line-height: 1.5;">
     <span style="font-size:11.0pt;
                  line-height:115%;
@@ -2402,37 +1617,38 @@
                  color:#595959;
                  mso-themecolor:text1;
                  mso-themetint:166;">We care about data privacy and security. </span><span
-                            style="color: rgb(89, 89, 89); font-size: 14.6667px;">Please review our Privacy Policy:</span><b
-                            style="color: rgb(89, 89, 89); font-size: 14.6667px;"> 
+                            style=" font-size: 14.6667px;">Please review our Privacy Policy:</span><b
+                            style=" font-size: 14.6667px;"> 
                         <bdt class="block-container question question-in-editor"
                              data-id="d10c7fd7-0685-12ac-c717-cbc45ff916d1" data-type="question"><a
                                 href="https://nebulus.ml/privacy-policy"
                                 target="_blank"
-                                data-custom-class="link">https://nebulus.ml/privacy-policy</a></bdt>
-                    </b><span style="color: rgb(89, 89, 89); font-size: 14.6667px;">. </span><span
-                            style="color: rgb(89, 89, 89); font-size: 11pt;">By using the Site, you agree to be bound by our Privacy Policy, which is incorporated into these Terms of Use. Please be advised the Site is hosted in <span
+                                class="text-sky-500 hover:underline font-bold">https://nebulus.ml/privacy-policy</a>
+                        </bdt>
+                    </b><span style=" font-size: 14.6667px;">. </span><span
+                            style=" font-size: 11pt;">By using the Site, you agree to be bound by our Privacy Policy, which is incorporated into these Terms of Use. Please be advised the Site is hosted in <span
                             style="font-size: 11pt;
               line-height: 16.8667px;
-              color: rgb(89, 89, 89);"><bdt
+              "><bdt
                             class="block-component"></bdt>the <bdt class="question">United States</bdt><bdt
                             class="block-component"></bdt></span>. If you access the Site from any other region of the world with laws or other requirements governing personal data collection, use, or disclosure that differ from applicable laws in <span
                             style="font-size: 11pt;
               line-height: 16.8667px;
-              color: rgb(89, 89, 89);"><bdt
+              "><bdt
                             class="block-component"></bdt>the <bdt class="question">United States</bdt><bdt
                             class="block-component"></bdt></span>, then through your continued use of the Site, you are transferring your data to <span
                             style="font-size: 11pt;
               line-height: 16.8667px;
-              color: rgb(89, 89, 89);"><bdt
+              "><bdt
                             class="block-component"></bdt>the <bdt class="question">United States</bdt><bdt
                             class="block-component"></bdt></span>, and you agree to have your data transferred to and processed in <span
                             style="font-size: 11pt;
               line-height: 16.8667px;
-              color: rgb(89, 89, 89);"><bdt
+              "><bdt
                             class="block-component"></bdt>the <bdt class="question">United States</bdt><bdt
                             class="block-component"></bdt></span>. <bdt class="block-component"></bdt></span>
                         <bdt class="block-container if" data-type="if" id="547bb7bb-ecf2-84b9-1cbb-a861dc3e14e7"
-                             style="color: rgb(89, 89, 89); font-size: 11pt;">
+                             style=" font-size: 11pt;">
                             <bdt data-type="conditional-block">
                                 <bdt class="block-component" data-record-question-key="user_u13_option"
                                      data-type="statement"></bdt>
@@ -2442,7 +1658,7 @@
                                     receive actual knowledge that anyone under the age of 13 has provided
                                     personal information to us without the requisite and verifiable parental
                                     consent, we will delete that information from the Site as quickly as is
-                                    reasonably practical.<span style="color: rgb(89, 89, 89); font-size: 11pt;"><bdt
+                                    reasonably practical.<span style=" font-size: 11pt;"><bdt
                                             class="statement-end-if-in-editor"></bdt><bdt
                                             class="statement-end-if-in-editor"></bdt></span></bdt>
                             </bdt>
@@ -2496,7 +1712,7 @@
         </div>
     </div>
     <div class="MsoNormal"
-         data-custom-class="heading_1"
+         class="dark:text-white text-black text-3xl"
          id="copyright2"
          style="line-height: 115%;">
         <strong><span style="line-height: 115%; font-family: Arial; font-size: 19px;"><strong><span
@@ -2507,7 +1723,7 @@
         <br>
     </div>
     <div align="center"
-         data-custom-class="body_text"
+         class="text-black dark:text-white"
          style="text-align: left;
             line-height: 1.5;">
         <span style="font-size: 15px;">We respect the intellectual property rights of others. If you believe that any material available on or through the Site infringes upon any copyright you own or control, please immediately notify us using the contact information provided below (a “Notification”). A copy of your Notification will be sent to the person who posted or stored the material addressed in the Notification. Please be advised that pursuant to applicable law you may be held liable for damages if you make material misrepresentations in a Notification. Thus, if you are not sure that material located on or linked to by the Site infringes your copyright, you should consider first contacting an attorney.</span>
@@ -2527,7 +1743,7 @@
     </div>
     <div align="center" style="text-align: left;">
         <div class="MsoNormal"
-             data-custom-class="heading_1"
+             class="dark:text-white text-black text-3xl"
              id="terms"
              style="line-height: 115%;">
             <a name="_k3mndam4w6w1"></a><strong><span
@@ -2541,12 +1757,12 @@
     </div>
     <div align="center" style="text-align: left;">
         <div class="MsoNormal"
-             data-custom-class="body_text"
+             class="text-black dark:text-white"
              style="line-height: 1.5;">
         <span style="font-size: 15px;
                      line-height: 115%;
                      font-family: Arial;
-                     color: rgb(89, 89, 89);">These Terms of Use shall remain in full force and effect while you use the Site. WITHOUT LIMITING ANY OTHER PROVISION OF THESE TERMS OF USE, WE RESERVE THE RIGHT TO, IN OUR SOLE DISCRETION AND WITHOUT NOTICE OR LIABILITY, DENY ACCESS TO AND USE OF THE SITE (INCLUDING BLOCKING CERTAIN IP ADDRESSES), TO ANY PERSON FOR ANY REASON OR FOR NO REASON, INCLUDING WITHOUT LIMITATION FOR BREACH OF ANY REPRESENTATION, WARRANTY, OR COVENANT CONTAINED IN THESE TERMS OF USE OR OF ANY APPLICABLE LAW OR REGULATION. WE MAY TERMINATE YOUR USE OR PARTICIPATION IN THE SITE OR DELETE <bdt
+                     ">These Terms of Use shall remain in full force and effect while you use the Site. WITHOUT LIMITING ANY OTHER PROVISION OF THESE TERMS OF USE, WE RESERVE THE RIGHT TO, IN OUR SOLE DISCRETION AND WITHOUT NOTICE OR LIABILITY, DENY ACCESS TO AND USE OF THE SITE (INCLUDING BLOCKING CERTAIN IP ADDRESSES), TO ANY PERSON FOR ANY REASON OR FOR NO REASON, INCLUDING WITHOUT LIMITATION FOR BREACH OF ANY REPRESENTATION, WARRANTY, OR COVENANT CONTAINED IN THESE TERMS OF USE OR OF ANY APPLICABLE LAW OR REGULATION. WE MAY TERMINATE YOUR USE OR PARTICIPATION IN THE SITE OR DELETE <bdt
                 class="block-container if" data-type="if" id="a6e121c2-36b4-5066-bf9f-a0a33512e768"><bdt
                 data-type="conditional-block"><bdt class="block-component"
                                                    data-record-question-key="user_account_option"
@@ -2561,7 +1777,7 @@
     </div>
     <div align="center" style="text-align: left;">
         <div class="MsoNormal"
-             data-custom-class="body_text"
+             class="text-black dark:text-white"
              style="line-height: 1.5;">
         <span style="font-size:11.0pt;
                      line-height:115%;
@@ -2586,7 +1802,7 @@
             <br>
         </div>
         <div class="MsoNormal"
-             data-custom-class="heading_1"
+             class="dark:text-white text-black text-3xl"
              id="modifications"
              style="line-height: 1.5;">
             <a name="_e2dep1hfgltt"></a><strong><span style="line-height: 115%; font-family: Arial;"><span
@@ -2600,7 +1816,7 @@
     </div>
     <div align="center" style="text-align: left;">
         <div class="MsoNormal"
-             data-custom-class="body_text"
+             class="text-black dark:text-white"
              style="line-height: 1.5;">
         <span style="font-size:11.0pt;
                      line-height:115%;
@@ -2616,7 +1832,7 @@
     </div>
     <div align="center" style="text-align: left;">
         <div class="MsoNormal"
-             data-custom-class="body_text"
+             class="text-black dark:text-white"
              style="line-height: 1.5;">
         <span style="font-size:11.0pt;
                      line-height:115%;
@@ -2644,7 +1860,7 @@
             <br>
         </div>
         <div class="MsoNormal"
-             data-custom-class="heading_1"
+             class="dark:text-white text-black text-3xl"
              id="law"
              style="line-height: 1.5;">
             <a name="_p6vbf8atcwhs"></a><strong><span style="line-height: 115%; font-family: Arial;"><span
@@ -2659,7 +1875,7 @@
             <bdt class="block-component"><span style="font-size: 15px;"></span></bdt>
         </div>
         <div class="MsoNormal"
-             data-custom-class="body_text"
+             class="text-black dark:text-white"
              style="line-height: 1.5;">
     <span style="font-size:11.0pt;
                  line-height:115%;
@@ -2699,7 +1915,7 @@
             <br>
         </div>
         <div class="MsoNormal"
-             data-custom-class="heading_1"
+             class="dark:text-white text-black text-3xl"
              id="disputes"
              style="line-height: 1.5;">
             <a name="_v5i5tjw62cyw"></a><strong><span
@@ -2722,7 +1938,7 @@
                 </bdt>
                 <bdt data-type="body">
                     <div class="MsoNormal"
-                         data-custom-class="body_text"
+                         class="text-black dark:text-white"
                          style="line-height: 1.5;">
             <span style="font-size:11.0pt;
                          line-height:115%;
@@ -2802,7 +2018,7 @@
             <br>
         </div>
         <div class="MsoNormal"
-             data-custom-class="heading_1"
+             class="dark:text-white text-black text-3xl"
              id="corrections"
              style="line-height: 1.5;">
             <a name="_mjgzo07ttzx5"></a><strong><span
@@ -2816,7 +2032,7 @@
     </div>
     <div align="center" style="text-align: left;">
         <div class="MsoNormal"
-             data-custom-class="body_text"
+             class="text-black dark:text-white"
              style="line-height: 1.5;">
         <span style="font-size:11.0pt;
                      line-height:115%;
@@ -2840,7 +2056,7 @@
             <br>
         </div>
         <div class="MsoNormal"
-             data-custom-class="heading_1"
+             class="dark:text-white text-black text-3xl"
              id="disclaimer"
              style="line-height: 1.5;">
             <a name="_gvi74blrahf9"></a><strong><span
@@ -2854,7 +2070,7 @@
     </div>
     <div align="center" style="text-align: left;">
         <div class="MsoNormal"
-             data-custom-class="body_text"
+             class="text-black dark:text-white"
              style="line-height: 1.5;">
         <span style="font-size:11.0pt;
                      line-height:115%;
@@ -2898,7 +2114,7 @@
             <br>
         </div>
         <div class="MsoNormal"
-             data-custom-class="heading_1"
+             class="dark:text-white text-black text-3xl"
              id="liability"
              style="line-height: 1.5;">
             <a name="_4pjah3d0455q"></a><strong><span
@@ -2912,7 +2128,7 @@
     </div>
     <div align="center" style="text-align: left;">
         <div class="MsoNormal"
-             data-custom-class="body_text"
+             class="text-black dark:text-white"
              style="line-height: 1.5;">
         <span style="font-size:11.0pt;
                      line-height:115%;
@@ -2934,7 +2150,7 @@
                     data-type="conditional-block"><bdt
                     class="block-component" data-record-question-key="limilation_liability_time_option"
                     data-type="statement"></bdt><bdt data-type="body"> <span style="font-size: 11pt;
-              color: rgb(89, 89, 89);
+              
               text-transform: uppercase;">DURING THE <bdt
                     class="block-container question question-in-editor"
                     data-id="5dd68d46-ed6f-61c7-cd66-6b3f424b6bdd" data-type="question">six (6)</bdt> mONTH PERIOD PRIOR TO ANY CAUSE OF ACTION ARISING</span></bdt></bdt><bdt
@@ -2953,7 +2169,7 @@
             <br>
         </div>
         <div class="MsoNormal"
-             data-custom-class="heading_1"
+             class="dark:text-white text-black text-3xl"
              id="indemnification"
              style="line-height: 1.5;">
             <a name="_k5ap68aj1dd4"></a><strong><span
@@ -2967,7 +2183,7 @@
     </div>
     <div align="center" style="text-align: left;">
         <div class="MsoNormal"
-             data-custom-class="body_text"
+             class="text-black dark:text-white"
              style="line-height: 1.5;">
         <span style="font-size:11.0pt;
                      line-height:115%;
@@ -2990,7 +2206,7 @@
                     style="font-size: 14.6667px;">4</span>) any breach of your representations and warranties set forth in these Terms of Use; (<span
                     style="font-size: 14.6667px;">5</span>) your violation of the rights of a third party, including but not limited to intellectual property rights; or (<span
                     style="font-size: 14.6667px;">6</span>) any overt harmful act toward any other user of the Site with whom you connected via the Site. Notwithstanding the foregoing, we reserve the right, at your expense, to assume the exclusive defense and control of any matter for which you are required to indemnify us, and you agree to cooperate, at your expense, with our defense of such claims. We will use reasonable efforts to notify you of any such claim, action, or proceeding which is subject to this indemnification upon becoming aware of it.</span><span
-                style="color: rgb(89, 89, 89); font-size: 14.6667px;"></span>
+                style=" font-size: 14.6667px;"></span>
         </div>
     </div>
     <div align="center" style="text-align: left; line-height: 1.5;">
@@ -3001,7 +2217,7 @@
             <br>
         </div>
         <div class="MsoNormal"
-             data-custom-class="heading_1"
+             class="dark:text-white text-black text-3xl"
              id="userdata"
              style="line-height: 1.5;">
             <a name="_ftgg17oha0ep"></a><strong><span
@@ -3016,7 +2232,7 @@
     </div>
     <div align="center" style="text-align: left;">
         <div class="MsoNormal"
-             data-custom-class="body_text"
+             class="text-black dark:text-white"
              style="line-height: 1.5;">
             <span style="font-size:11.0pt;
                          line-height:115%;
@@ -3042,7 +2258,7 @@
             <br>
         </div>
         <div class="MsoNormal"
-             data-custom-class="heading_1"
+             class="dark:text-white text-black text-3xl"
              id="electronic"
              style="line-height: 1.5;">
             <a name="_dkovrslqodui"></a><strong><span
@@ -3056,7 +2272,7 @@
     </div>
     <div align="center" style="text-align: left;">
         <div class="MsoNormal"
-             data-custom-class="body_text"
+             class="text-black dark:text-white"
              style="line-height: 1.5;">
             <span style="font-size:11.0pt;
                          line-height:115%;
@@ -3082,7 +2298,7 @@
                          mso-themetint:166;"><bdt class="block-component"></bdt></span>
         </div>
         <div class="MsoNormal"
-             data-custom-class="heading_1"
+             class="dark:text-white text-black text-3xl"
              id="california"
              style="line-height: 115%;">
             <a name="_cem9cu2usl7k"></a><strong><span
@@ -3096,7 +2312,7 @@
     </div>
     <div align="center" style="text-align: left;">
         <div class="MsoNormal"
-             data-custom-class="body_text"
+             class="text-black dark:text-white"
              style="line-height: 1.5;">
             <span style="font-size:11.0pt;
                          line-height:115%;
@@ -3134,7 +2350,7 @@
                     class="statement-end-if-in-editor"></bdt></span></span>
         </div>
         <div class="MsoNormal"
-             data-custom-class="heading_1"
+             class="dark:text-white text-black text-3xl"
              id="misc"
              style="line-height: 115%;">
             <a name="_d4jvmcnxg0wt"></a><strong><span
@@ -3148,7 +2364,7 @@
     </div>
     <div align="center" style="text-align: left;">
         <div class="MsoNormal"
-             data-custom-class="body_text"
+             class="text-black dark:text-white"
              style="line-height: 1.5;">
             <span style="font-size:11.0pt;
                          line-height:115%;
@@ -3175,7 +2391,7 @@
                 <br>
             </div>
             <div class="MsoNormal"
-                 data-custom-class="heading_1"
+                 class="dark:text-white text-black text-3xl"
                  id="contact"
                  style="line-height: 1.5;">
                 <a name="_t4pq5cwn486q"></a><strong><span style="line-height: 115%; font-family: Arial;"><span
@@ -3189,7 +2405,7 @@
         </div>
         <div align="center" style="text-align: left;">
             <div class="MsoNormal"
-                 data-custom-class="body_text"
+                 class="text-black dark:text-white"
                  style="line-height: 1.5;">
                 <span style="font-size:11.0pt;
                              line-height:115%;
@@ -3205,97 +2421,85 @@
         </div>
         <div align="center" style="text-align: left;">
             <div class="MsoNormal"
-                 data-custom-class="body_text"
+                 class="text-black dark:text-white"
                  style="line-height: 1.5;">
                 <span style="font-size: 15px;
                              line-height: 115%;
                              font-family: Arial;
-                             color: rgb(89, 89, 89);"><bdt
+                             "><bdt
                         class="block-container question question-in-editor"
                         data-id="8a6919c4-2010-e7d6-2305-d74dfb08909d"
                         data-type="question"><strong>Nebulus</strong></bdt></span>
             </div>
             <div class="MsoNormal"
-                 data-custom-class="body_text"
+                 class="text-black dark:text-white"
                  style="line-height: 1.5;">
-                <span style="color: rgb(89, 89, 89);"><strong><span style="font-size: 15px;"><bdt
-                        class="question"><span style="color: rgb(89, 89, 89);"><strong><span style="font-size: 15px;"><bdt
+                <span style=""><strong><span style="font-size: 15px;"><bdt
+                        class="question"><span style=""><strong><span style="font-size: 15px;"><bdt
                         class="block-component"></bdt></span></strong></span>
             </div>
             <div class="MsoNormal"
-                 data-custom-class="body_text"
+                 class="text-black dark:text-white"
                  style="line-height: 1.5;">
-                    <span style="color: rgb(89, 89, 89);"><strong><span style="font-size: 15px;"><bdt
-                            class="question"><span style="color: rgb(89, 89, 89);"><strong><span
+                    <span style=""><strong><span style="font-size: 15px;"><bdt
+                            class="question"><span style=""><strong><span
                             style="font-size: 15px;"><bdt class="block-component"></bdt></span></strong></span>
             </div>
             <div class="MsoNormal"
-                 data-custom-class="body_text"
+                 class="text-black dark:text-white"
                  style="line-height: 1.5;">
-                        <span style="color: rgb(89, 89, 89);"><strong><span style="font-size: 15px;"><bdt
+                        <span style=""><strong><span style="font-size: 15px;"><bdt
                                 class="question">__________</bdt><bdt
                                 class="block-component"></bdt></span></strong><strong><span style="font-size: 15px;"><bdt
                                 class="block-component"></bdt></span></strong></span>
             </div>
             <div class="MsoNormal" style="line-height: 1.5;">
-                    <span style="color: rgb(89, 89, 89);"><strong><span style="font-size: 15px;"><bdt
-                            class="question"><span style="color: rgb(89, 89, 89);"><strong><span
+                    <span style=""><strong><span style="font-size: 15px;"><bdt
+                            class="question"><span style=""><strong><span
                             style="font-size: 15px;"><bdt
                             class="block-component"></bdt></span></strong></span></bdt></span></strong><strong><span
                             style="font-size: 15px;"><bdt class="question"><span
-                            style="color: rgb(89, 89, 89);"><strong><span style="font-size: 15px;"><bdt
+                            style=""><strong><span style="font-size: 15px;"><bdt
                             class="block-component"></bdt><bdt
                             class="block-component"></bdt></span></strong></span></bdt></span></strong></span>
             </div>
             <div class="MsoNormal"
-                 data-custom-class="body_text"
+                 class="text-black dark:text-white"
                  style="line-height: 1.5;">
-                <span style="color: rgb(89, 89, 89);"><strong><span style="font-size: 15px;"><bdt
-                        class="statement-end-if-in-editor"><bdt class="block-component"><span style="font-size:11.0pt;
-             line-height:115%;
-             Arial;
-             mso-fareast-font-family:Calibri;
-             color:#595959;
-             mso-themecolor:text1;
-             mso-themetint:166;"><span style="font-size:11.0pt;
-             line-height:115%;
-             Arial;
-             mso-fareast-font-family:Calibri;
-             color:#595959;
-             mso-themecolor:text1;
-             mso-themetint:166;"><bdt
+                <span style=""><strong><span style="font-size: 15px;"><bdt
+                        class="statement-end-if-in-editor"><bdt class="block-component"><span style=""><bdt
                         class="question">United States</bdt></span></span></bdt></bdt></span></strong></span>
             </div>
             <div class="MsoNormal" style="line-height: 1.5;">
-                    <span style="color: rgb(89, 89, 89);"><strong><span style="font-size: 15px;"><bdt
-                            class="statement-end-if-in-editor"><span style="color: rgb(89, 89, 89);"><strong><span
+                    <span style=""><strong><span style="font-size: 15px;"><bdt
+                            class="statement-end-if-in-editor"><span style=""><strong><span
                             style="font-size: 15px;"><bdt class="statement-end-if-in-editor"><bdt
                             class="block-component"></bdt><bdt
                             class="statement-end-if-in-editor"></bdt></span></strong></span></span></strong></span>
             </div>
             <div class="MsoNormal"
-                 data-custom-class="body_text"
+                 class="text-black dark:text-white"
                  style="line-height: 1.5;">
-                    <span style="color: rgb(89, 89, 89);"><strong><span style="font-size: 15px;">Phone: </span></strong><strong><span
+                    <span style=""><strong><span style="font-size: 15px;">Phone: </span></strong><strong><span
                             style="font-size: 15px;"><span style="line-height: 115%; font-family: Arial;"><bdt
                             class="block-container question question-in-editor"
                             data-id="dd6f266f-438b-bfdc-9204-0b17e109e270"
                             data-type="question">NULL</bdt></span></span></strong></span>
             </div>
             <div class="MsoNormal"
-                 data-custom-class="body_text"
+                 class="text-black dark:text-white"
                  style="line-height: 1.5;">
-            <span style="font-size: 15px;"><strong><span style="color: rgb(89, 89, 89);"><span style="font-size: 15px;"><strong><span
-                    style="color: rgb(89, 89, 89);"><bdt
+            <span style="font-size: 15px;"><strong><span style=""><span style="font-size: 15px;"><strong><span
+                    style=""><bdt
                     class="block-component"></bdt></span></strong></span>
             </div>
             <div class="MsoNormal"
-                 data-custom-class="body_text"
+                 class="text-black dark:text-white"
                  style="line-height: 1.5;">
             <span style="font-size: 15px;
                          line-height: 115%;
                          font-family: Arial;
-                         color: rgb(89, 89, 89);"><bdt
+                         "><bdt
                     class="block-container question question-in-editor"
                     data-id="fdc2b5b8-c95f-244b-23a7-287f82541348"
                     data-type="question"><strong>support@nebulus.ml</strong></bdt></span>

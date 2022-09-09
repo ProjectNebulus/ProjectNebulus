@@ -43,12 +43,12 @@ def arcstuff():
 
 @main_blueprint.route("/privacy-policy")
 def pp():
-    return render_template("privacy.html")
+    return render_template("privacy.html", translate=getText, )
 
 
 @main_blueprint.route("/terms-of-service")
 def tos():
-    return render_template("tos.html")
+    return render_template("tos.html", translate=getText, )
 
 
 @main_blueprint.route("/select-a-region")
