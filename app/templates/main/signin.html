@@ -36,8 +36,8 @@
          style="z-index: -1;
                     filter: blur(1rem);">
     </div>
-    <div class="container mx-auto px-8 py-12 bg-white dark:bg-gray-900 rounded-lg pb-1/2 w-full" style="
-                    overflow: hidden;
+    <div class="container mx-auto px-8 py-12 bg-white dark:bg-gray-900 rounded-lg pb-1/2 w-full"
+         style="overflow: hidden;
                     max-width: 50rem;
                     position: absolute;
                     top: 50%;
@@ -56,34 +56,48 @@
                 </p>
                 <p>
                     Forgot password?
-                    <span onclick="resetScreen()" class="text-blue-400 hover:text-blue-600 cursor-pointer">Reset</span>
+                    <span onclick="resetScreen()"
+                          class="text-blue-400 hover:text-blue-600 cursor-pointer">Reset</span>
                 </p>
             </div>
             <div class="relative mt-4">
                 <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                    <p id="error" class="material-icons" style="color: gray;
+                    <p id="error"
+                       class="material-icons"
+                       style="color: gray;
                                   vertical-align: middle;">mail</p>
                 </div>
-                <input id="email" autocomplete="email"
+                <input id="email"
+                       autocomplete="email"
                        class="pl-11 px-4 py-3 w-full rounded-md text-sm w-full p-2.5"
                        placeholder="Email">
             </div>
-            <p id="error-msg" class="mt-2 text-sm" style="color: gray">
-                Please enter your email!</p>
+            <p id="error-msg" class="mt-2 text-sm" style="color: gray">Please enter your email!</p>
             <div class="relative mt-4">
                 <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                    <p id="password-error" class="material-icons" style="color: gray;
+                    <p id="password-error"
+                       class="material-icons"
+                       style="color: gray;
                                   vertical-align: middle;">key</p>
                 </div>
-                <input type="password" id="psw" autocomplete="password"
+                <input type="password"
+                       id="psw"
+                       autocomplete="password"
                        class="text-white pl-11 px-4 py-3 w-full rounded-md  text-sm w-full p-2.5"
                        placeholder="Password">
             </div>
-            <p id="password-error-msg" class="mt-2 text-sm text-red-600 dark:text-red-500" style="color: gray">Please
-                enter a password!</p>
-            <button id="log_in" onclick="loginUser()"
+            <p id="password-error-msg"
+               class="mt-2 text-sm text-red-600 dark:text-red-500"
+               style="color: gray">
+                Please
+                enter a password!
+            </p>
+            <button id="log_in"
+                    onclick="loginUser()"
                     class="mt-4 px-4 py-3 leading-6 text-base rounded-md border border-transparent text-white focus:outline-none bg-blue-500 text-blue-100 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer inline-flex items-center w-full justify-center items-center font-medium focus:outline-none"
-                    disabled="" style="color: gray; background-color: rgb(0, 96, 151);">
+                    disabled=""
+                    style="color: gray;
+                               background-color: rgb(0, 96, 151);">
                 Login
             </button>
             <br>
@@ -92,17 +106,23 @@
                 <p class="mt-1 text-xl font-light text-gray-500">Sign in with:</p>
                 <div class="flex flex-row justify-center items-center p-3 rounded-lg bg-gray-200 dark:bg-gray-800/75"
                      style="flex-wrap: wrap;">
-                    <img class="oauth-button w-6 h-6 mr-2 -ml-1" src="/static/images/logos/google.png"
+                    <img class="oauth-button w-6 h-6 mr-2 -ml-1"
+                         src="/static/images/logos/google.png"
                          alt="Rounded avatar">
-                    <img class="oauth-button w-6 h-6 mr-2 -ml-1" src="/static/images/logos/discord.png"
+                    <img class="oauth-button w-6 h-6 mr-2 -ml-1"
+                         src="/static/images/logos/discord.png"
                          alt="Rounded avatar">
-                    <img class="oauth-button w-6 h-6 mr-2 -ml-1" src="/static/images/logos/spotify.png"
+                    <img class="oauth-button w-6 h-6 mr-2 -ml-1"
+                         src="/static/images/logos/spotify.png"
                          alt="Rounded avatar">
-                    <img class="oauth-button w-6 h-6 mr-2 -ml-1" src="/static/images/logos/github.png"
+                    <img class="oauth-button w-6 h-6 mr-2 -ml-1"
+                         src="/static/images/logos/github.png"
                          alt="Rounded avatar">
-                    <img class="oauth-button w-6 h-6 mr-2 -ml-1" src="/static/images/logos/schoology.png"
+                    <img class="oauth-button w-6 h-6 mr-2 -ml-1"
+                         src="/static/images/logos/schoology.png"
                          alt="Rounded avatar">
-                    <img class="oauth-button w-6 h-6 mr-2 -ml-1" src="/static/images/logos/canvas.png"
+                    <img class="oauth-button w-6 h-6 mr-2 -ml-1"
+                         src="/static/images/logos/canvas.png"
                          alt="Rounded avatar">
                 </div>
             </div>
@@ -115,9 +135,11 @@
                 <p class="text-gray-500">Are you a human?</p>
                 <br>
                 <br>
-                <div data-theme="dark" class="g-recaptcha"
+                <div data-theme="dark"
+                     class="g-recaptcha"
                      data-sitekey="6LfBJHshAAAAAE3I3N8z6s9OyXXlqtdDG6ovf_sT"
-                     data-callback="onComplete"></div>
+                     data-callback="onComplete">
+                </div>
             </div>
         </div>
         <style>
@@ -160,15 +182,14 @@
                 }
             }
         </style>
-        <div style="
-             background: linear-gradient(90deg, #ff0000, #001cff);
-            -webkit-animation: pulse 5s ease infinite;
-            -moz-animation: pulse 5s ease infinite;
-            animation: pulse 5s ease infinite;
-            filter: blur(100px);" class="absolute -z-10"></div>
+        <div style="background: linear-gradient(90deg, #ff0000, #001cff);
+                        -webkit-animation: pulse 5s ease infinite;
+                        -moz-animation: pulse 5s ease infinite;
+                        animation: pulse 5s ease infinite;
+                        filter: blur(100px);"
+             class="absolute -z-10">
+        </div>
     </div>
-
-
     <style>
         .oauth-button {
             margin: 5px;
@@ -191,6 +212,5 @@
             background: black;
         }
     </style>
-
     </body>
 {% endblock %}

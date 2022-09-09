@@ -1,21 +1,23 @@
 <!--Style Sheets!-->
 <html lang="en">
 <head>
-<style>
-    ::-moz-selection { /* Code for Firefox */
-        background: rgba(120, 120, 120, 0.3);
-    }
+    <style>
+        ::-moz-selection { /* Code for Firefox */
+            background: rgba(120, 120, 120, 0.3);
+        }
 
-    ::selection {
-        background: rgba(120, 120, 120, 0.3);
-    }
-    button{
-        outline:none !important;
-    }
-    input{
-        outline: none !important;
-    }
-</style>
+        ::selection {
+            background: rgba(120, 120, 120, 0.3);
+        }
+
+        button {
+            outline: none !important;
+        }
+
+        input {
+            outline: none !important;
+        }
+    </style>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
     <script type="text/javascript" src="//cdn.socket.io/4.4.1/socket.io.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.1"></script>
@@ -63,10 +65,7 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!--Title!-->
     <title>{{ page }}</title>
-    <script>
-        const user = "{{ user }}";
-    </script>
-
+    <script>const user = "{{ user }}";</script>
     <style>
         html {
             -webkit-background-size: cover !important;
@@ -78,7 +77,6 @@
     </style>
 </head>
 <body>
-<script> AOS.init();</script>
+<script>AOS.init();</script>
 </body>
-{% block main %}
-{% endblock %}
+{% block main %}{% endblock %}

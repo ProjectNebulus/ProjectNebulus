@@ -12,7 +12,6 @@
     </style>
     {% include "utils/navbar.html" %}
     <div>
-
         <div class="grid grid-cols-1 divide-y divide-gray-300 dark:divide-gray-700 w-full pl-8">
             <div id="middle"
                  style="flex: 0 0 68vw"
@@ -63,10 +62,14 @@
                                                      id="avatar{{ i }}_{{ j }}"
                                                      image-element
                                                      data-dropdown-placement="bottom-start"
-                                                     class="rounded-full ring-2 ring-gray-300 dark:ring-gray-500 cursor-pointer mb-3 rounded-full shadow-lg {% if "black" in avatar %} bg-gray-300 {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %} {% if a.title == "w-8 h-8mt-4" %} {% else %}
+                                                     class="rounded-full ring-2 ring-gray-300 dark:ring-gray-500 cursor-pointer mb-3 rounded-full shadow-lg {% if "black" in avatar %} bg-gray-300 {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}
+                                                             {% if a.title == "
+                                                     w-8
+                                                     h-8mt-4
+                                                     {% else %}
                                                      w-6
                                                      h-6
-                                 {% endif %}"
+                                                     {% endif %}
                                                      src="{{ a.author_pic }}"
                                                      alt="{{ a.author }}'s profile picture">
                                                 <br>
@@ -214,13 +217,11 @@
                 <!-- Modal content -->
                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                     <div id="dueTime"
-                         class="absolute bottom-0 right-0 p-3 text-gray-200 dark:text-gray-500 text-sm">
-                        Due at 9:43 am
+                         class="absolute bottom-0 right-0 p-3 text-gray-200 dark:text-gray-500 text-sm">Due at 9:43 am
                     </div>
                     <!-- Modal header -->
                     <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600 relative">
-                        <div id="header">
-                        </div>
+                        <div id="header"></div>
                         <button class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
                                 data-modal-toggle="modal"
                                 onclick="removeBackdrop()">
@@ -230,7 +231,7 @@
                                  viewBox="0 0 20 20"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
-                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
                                 clip-rule="evenodd">
                                 </path>
                             </svg>
@@ -244,8 +245,7 @@
                     <!-- Modal body -->
                     <div class="p-6 space-y-6">
                         <div id="announcementBody"
-                             class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                            stuff
+                             class="text-base leading-relaxed text-gray-500 dark:text-gray-400">stuff
                         </div>
                         <button data-modal-toggle="modal"
                                 onclick="removeBackdrop()"
@@ -256,8 +256,7 @@
                                  viewBox="0 0 24 24"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M5 13l4 4L19 7">
-                                </path>
+                                      d="M5 13l4 4L19 7"></path>
                             </svg>
                             Okay
                         </button>

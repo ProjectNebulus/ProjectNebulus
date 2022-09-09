@@ -11,12 +11,8 @@
         }
     </style>
     {% include "utils/navbar.html" %}
-
-
-
     <div class="grid grid-cols-1 divide-y divide-gray-300 dark:divide-gray-700 w-full pl-8">
         <div >
-
             <div id="right"
                  style="flex: 0 0 30vw"
                  class="border-gray-200 dark:border-gray-700 border-l text-center h-full overflow-auto">
@@ -34,46 +30,46 @@
                             {% set diff = (date - now).days %}
                             {% if diff < 0 %}
                                 <h1 style="text-align: left;
-                                               background: orangered -webkit-linear-gradient(left,#ff7878,#ffb078);
-                                               -webkit-background-clip: text;
-                                               -webkit-text-fill-color: transparent;
-                                               margin: 13px;">
+                                           background: orangered -webkit-linear-gradient(left,#ff7878,#ffb078);
+                                           -webkit-background-clip: text;
+                                           -webkit-text-fill-color: transparent;
+                                           margin: 13px;">
                                     {{ strftime(date, "%a, %B %-d, %Y") }}
                                     ({{ -diff }}d Overdue)
                                 </h1>
                             {% elif diff < 1 %}
                                 <h1 style="text-align: left;
-                                               background: orange -webkit-linear-gradient(left,#ff78ed,#ffb378);
-                                               -webkit-background-clip: text;
-                                               -webkit-text-fill-color: transparent;
-                                               margin: 13px;">
+                                           background: orange -webkit-linear-gradient(left,#ff78ed,#ffb378);
+                                           -webkit-background-clip: text;
+                                           -webkit-text-fill-color: transparent;
+                                           margin: 13px;">
                                     {{ strftime(date, "%a, %B %-d, %Y") }}
                                     ({{ diff }}d remaining)
                                 </h1>
                             {% elif diff < 3 %}
                                 <h1 style="text-align: left;
-                                               background: yellow -webkit-linear-gradient(left,#ffc578,#fff878);
-                                               -webkit-background-clip: text;
-                                               -webkit-text-fill-color: transparent;
-                                               margin: 13px;">
+                                           background: yellow -webkit-linear-gradient(left,#ffc578,#fff878);
+                                           -webkit-background-clip: text;
+                                           -webkit-text-fill-color: transparent;
+                                           margin: 13px;">
                                     {{ strftime(date, "%a, %B %-d, %Y") }}
                                     ({{ diff }}d remaining)
                                 </h1>
                             {% elif diff < 5 %}
                                 <h1 style="text-align: left;
-                                               background: green -webkit-linear-gradient(left,#ffd978,#ddff78);
-                                               -webkit-background-clip: text;
-                                               -webkit-text-fill-color: transparent;
-                                               margin: 13px;">
+                                           background: green -webkit-linear-gradient(left,#ffd978,#ddff78);
+                                           -webkit-background-clip: text;
+                                           -webkit-text-fill-color: transparent;
+                                           margin: 13px;">
                                     {{ strftime(date, "%a, %B %-d, %Y") }}
                                     ({{ diff }}d remaining)
                                 </h1>
                             {% else %}
                                 <h1 style="text-align: left;
-                                               background: greenyellow -webkit-linear-gradient(left,#d9ff78,#78ffb7);
-                                               -webkit-background-clip: text;
-                                               -webkit-text-fill-color: transparent;
-                                               margin: 13px;">
+                                           background: greenyellow -webkit-linear-gradient(left,#d9ff78,#78ffb7);
+                                           -webkit-background-clip: text;
+                                           -webkit-text-fill-color: transparent;
+                                           margin: 13px;">
                                     {{ strftime(date, "%a, %B %-d, %Y") }}
                                     ({{ diff }}d remaining)
                                 </h1>
@@ -162,13 +158,11 @@
                 <!-- Modal content -->
                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                     <div id="dueTime"
-                         class="absolute bottom-0 right-0 p-3 text-gray-200 dark:text-gray-500 text-sm">
-                        Due at 9:43 am
+                         class="absolute bottom-0 right-0 p-3 text-gray-200 dark:text-gray-500 text-sm">Due at 9:43 am
                     </div>
                     <!-- Modal header -->
                     <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600 relative">
-                        <div id="header">
-                        </div>
+                        <div id="header"></div>
                         <button class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
                                 data-modal-toggle="modal"
                                 onclick="removeBackdrop()">
@@ -192,8 +186,7 @@
                     <!-- Modal body -->
                     <div class="p-6 space-y-6">
                         <div id="announcementBody"
-                             class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                            stuff
+                             class="text-base leading-relaxed text-gray-500 dark:text-gray-400">stuff
                         </div>
                         <button data-modal-toggle="modal"
                                 onclick="removeBackdrop()"
@@ -204,8 +197,7 @@
                                  viewBox="0 0 24 24"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M5 13l4 4L19 7">
-                                </path>
+                                      d="M5 13l4 4L19 7"></path>
                             </svg>
                             Okay
                         </button>
