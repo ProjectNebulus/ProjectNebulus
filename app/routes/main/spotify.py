@@ -260,22 +260,24 @@ def get_currently_playing():
         return [3]
 
     track = spotify.current_user_playing_track()
-    if track is not None:
-        timestamp = int(track["progress_ms"] // 1000)
-        total = int(track["item"]["duration_ms"] // 1000)
-        name = track["item"]["name"]
-        artists = []
-        explicit = track["item"]["explicit"]
-        for i in track["item"]["artists"]:
-            artists.append(i["name"])
-        image = track["item"]["album"]["images"][0]["url"]
-        album = track["item"]["album"]["name"]
+    try:
+        if track is not None:
+            timestamp = int(track["progress_ms"] // 1000)
+            total = int(track["item"]["duration_ms"] // 1000)
+            name = track["item"]["name"]
+            artists = []
+            explicit = track["item"]["explicit"]
+            for i in track["item"]["artists"]:
+                artists.append(i["name"])
+            image = track["item"]["album"]["images"][0]["url"]
+            album = track["item"]["album"]["name"]
 
-        playing = track["is_playing"]
-        return [name, artists, album, explicit, image, playing, timestamp, total]
+            playing = track["is_playing"]
+            return [name, artists, album, explicit, image, playing, timestamp, total]
 
-    return [1]
-
+        return [1]
+    except:
+        return ["Advertisement", "Spotify", "Spotify", False, "", True, 0, 0]
 
 def resume_spotify():
     spotify = get_spotify_auth()

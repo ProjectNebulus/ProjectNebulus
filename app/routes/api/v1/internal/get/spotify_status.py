@@ -1,6 +1,5 @@
 from flask import request
 
-from .. import internal
 from app.routes.main.spotify import (
     get_currently_playing,
     loop1_spotify,
@@ -14,6 +13,7 @@ from app.routes.main.spotify import (
     shuffle_spotify,
 )
 from app.static.python.extensions.music.musixmatch import Musixmatch
+from .. import internal
 
 
 def convert(secs):
@@ -52,13 +52,16 @@ def spotify_status():
             count += 1
             if count != len(artists2):
                 artists += ", "
-        ratio = round(timestamp / total * 100)
+        try:
+            ratio = round(timestamp / total * 100)
+        except:  # 0 and 0 and ads:
+            ratio = 0
         timestamp = convert(timestamp)
         total = convert(total)
         if not playing:
             if not request.form.get("paused"):
                 playing = (
-                    '<i onclick="sendRQ(\'/api/v1/internal/spotify/pause\')" style="font-size:48px !important;" '
+                    '<i onclick="sendRQ(\'/api/v1/internal/spotify/pause\')" style="" '
                     'class="material-icons">pause_circle</i> '
                 )
             else:
@@ -66,7 +69,7 @@ def spotify_status():
         else:
             if not request.form.get("paused"):
                 playing = (
-                    '<i onclick="sendRQ(\'/api/v1/internal/spotify/pause\')" style="font-size:48px !important;" '
+                    '<i onclick="sendRQ(\'/api/v1/internal/spotify/pause\')" style="" '
                     'class="material-icons">pause_circle</i> '
                 )
             else:

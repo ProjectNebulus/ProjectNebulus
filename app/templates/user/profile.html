@@ -7,70 +7,27 @@
         <div style="margin-left:64px;">
             <h1 class="dark:text-white text-4xl noselect">Your Profile</h1>
             <br>
-            <div style="margin:20px;"
-                 class="w-full md:w-1/2 bg-white/75 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800/75 dark:border-gray-700">
-                <div class="flex justify-end px-4 pt-4">
-                    <button class="text-black dark:text-white"
-                            id="dropdownButton"
-                            data-dropdown-toggle="dropdown">
-                        <svg class="w-6 h-6"
-                             fill="currentColor"
-                             viewBox="0 0 20 20"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
-                        </svg>
+            <div style="border-radius: 10px;width: 500px;margin: 30px;overflow: hidden;" id="usercard">
+                <div style="background: linear-gradient(45deg, skyblue, orange);height: 80px;"></div>
+                <div style="text-align: left;padding: 30px;background: #374151;">
+                    <button class="rounded-full border-gray-300 border-none w-24 h-24  dark:bg-gray-900 dark:hover:bg-gray-800 "
+                            style="
+    margin: 20px;
+    margin-top: -60px;
+">
+                        <logo image="{{ avatar }}" no-revert=""></logo>
                     </button>
-                    <!-- Dropdown menu -->
-                    <div id="dropdown"
-                         class="hidden z-10 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
-                        <ul class="py-1" aria-labelledby="dropdownButton">
-                            <li>
-                                <a href="#"
-                                   class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                   class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Export
-                                Data</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                   class="block py-2 px-4 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="flex flex-col items-center pb-10">
-                    <div class="grid grid-cols-2 gap-4">
-                        <div style="text-align:right;">
-                            <button class="rounded-full border-gray-300 border-none w-24 h-24 {% if "black" in avatar %} bg-gray-300 {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}">
-                                <logo image="{{ avatar }}" no-revert class="h-16 mx-auto my-auto "></logo>
-                            </button>
-                        </div>
-                        <div>
-                            <h3 class="mb-1 text-3xl font-medium text-gray-900 dark:text-white">{{ session.get('username') }}</h3>
-                            <span class="text-xl text-gray-500 dark:text-gray-400">{{ session.get('email') }}</span>
-                        </div>
-                    </div>
-                    <div class="flex mt-4 space-x-3 lg:mt-6">
-                        <a href="/settings"
-                           class="noselect inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Settings</a>
-                        <a href="/app"
-                           class="noselect inline-flex items-center py-2 px-4 text-sm font-medium text-center text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-800">Dashboard</a>
-                    </div>
-                    <br>
-                    <br>
-                    <h2 class="dark:text-white text-4xl noselect">Spotify</h2>
-                    <br>
+                    <br style="">
+                    <p style="font-weight: 800; " class="text-black dark:text-white text-4xl">{{ user }}</p>
+                    <p style="color: darkgray;" class="text-2xl">{{ email }}</p>
                     <p>
-                        <span style="display:grid; grid-auto-flow: column; align-content: center; justify-content: center;; "
-                              class="noselect dark:text-white"
-                              id="song"><i style="display:inline-block;
-          color:greenyellow;
-          margin-right:10px;"
-   class="fab fa-spotify"></i> Loading...</span>
+                        <br><br>
+                        <span style="display:grid; grid-auto-flow: column; align-content: center; justify-content: center; "
+                              class="noselect dark:text-white dark: bg-gray-800 p-6 m-6 rounded-lg noselect dark:text-white"
+                              id="song">
+                        </span>
                     </p>
-                    <br>
+
                 </div>
             </div>
             <div style="height:80%;"
@@ -108,7 +65,6 @@
                     </div>
                 </div>
             </div>
-            {% include "utils/footer.html" %}
         </div>
     </div>
 {% endblock %}

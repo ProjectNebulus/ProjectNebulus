@@ -1,6 +1,64 @@
 <!--Style Sheets!-->
 <html lang="en">
 <head>
+    <script>
+        document.onclick = hideMenu;
+        document.oncontextmenu = rightClick;
+
+        function hideMenu() {
+            document.getElementById(
+                "contextMenu").style.display = "none"
+        }
+
+        function rightClick(e) {
+            e.preventDefault();
+
+            if (document.getElementById(
+                "contextMenu").style.display == "block")
+                hideMenu();
+            else {
+                var menu = document
+                    .getElementById("contextMenu")
+
+                menu.style.display = 'block';
+                menu.style.left = e.pageX + "px";
+                menu.style.top = e.pageY + "px";
+            }
+        }
+
+        let area = document.body;
+        area.onkeyup = function (e) {
+            if (e.ctrlKey && e.which === 75) {
+                alert("ok")
+            } else {
+            }
+        };
+    </script>
+    <style>
+        #contextMenu ul li {
+            padding: 10px;
+            border-radius: 10px;
+            margin: 3px;
+        }
+
+        #contextMenu ul li:hover {
+            background: #4B5563;
+        }
+    </style>
+
+    <div id="contextMenu" class="context-menu bg-white dark:bg-gray-700 text-black dark:text-white"
+         style="padding: 20px;display: none;margin: 20px;z-index: 100;position: absolute;text-align: center;border-radius: 20px;border: none;width: 200px;">
+        <ul>
+            {% if not user %}
+                <li><a href="/signin">Login</a></li>
+                <li><a href="/signup">Sign Up</a></li>
+            {% else %}
+                <li><a href="/settings">Go to Settings</a></li>
+                <li><a href="/profile">View Profile</a></li>
+                <li><a href="/logout">Log Out</a></li>
+            {% endif %}
+        </ul>
+    </div>
     <style>
         ::-moz-selection { /* Code for Firefox */
             background: rgba(120, 120, 120, 0.3);
