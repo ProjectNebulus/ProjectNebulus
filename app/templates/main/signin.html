@@ -3,12 +3,32 @@
     <head>
         <script src="/static/js/main/signin.js"></script>
         <script src='https://www.google.com/recaptcha/api.js' async defer></script>
-    <style>
-        input{
-            outline: none;
-            border: none;
-        }
-    </style>
+        <style>
+            input {
+                outline: none;
+                border: none;
+            }
+
+            input:-webkit-autofill {
+                -webkit-box-shadow: 0 0 0 50px white inset; /* Change the color to your own background color */
+                -webkit-text-fill-color: black;
+            }
+
+            input:-webkit-autofill:focus {
+                -webkit-box-shadow: 0 0 0 50px white inset; /*your box-shadow*/
+                -webkit-text-fill-color: black;
+            }
+
+            .dark input:-webkit-autofill {
+                -webkit-box-shadow: 0 0 0 50px #111827 inset; /* Change the color to your own background color */
+                -webkit-text-fill-color: white;
+            }
+
+            .dark input:-webkit-autofill:focus {
+                -webkit-box-shadow: 0 0 0 50px #111827 inset; /*your box-shadow*/
+                -webkit-text-fill-color: white;
+            }
+        </style>
     </head>
     <body style="background: rgb(30 40 58)">
     <div id="bgLms"
@@ -16,7 +36,7 @@
          style="z-index: -1;
                     filter: blur(1rem);">
     </div>
-    <div class="container mx-auto px-8 py-12 bg-white dark:bg-gray-900 rounded-lg pb-1/2 w-full"  style="
+    <div class="container mx-auto px-8 py-12 bg-white dark:bg-gray-900 rounded-lg pb-1/2 w-full" style="
                     overflow: hidden;
                     max-width: 50rem;
                     position: absolute;

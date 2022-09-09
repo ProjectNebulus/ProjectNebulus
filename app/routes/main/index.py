@@ -43,14 +43,12 @@ def arcstuff():
 
 @main_blueprint.route("/privacy-policy")
 def pp():
-    return redirect("https://privacypolicy.nebuluslms.repl.co/")
+    return render_template("privacy.html")
 
 
 @main_blueprint.route("/terms-of-service")
 def tos():
-    return redirect(
-        "https://docs.google.com/document/d/1XjNHjBRS2xJWKObo_zuQ2oPVSKQ8EK8Y_o8e77VPZf4/edit"
-    )
+    return render_template("tos.html")
 
 
 @main_blueprint.route("/select-a-region")
