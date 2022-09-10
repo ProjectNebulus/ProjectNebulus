@@ -237,7 +237,7 @@ def sort_course_events(user_id: str, course_id: int):
     return [announcements, dates]
 
 
-def sort_user_events(user_id: str, maxDays=5, maxEvents=16):
+def sort_user_events(user_id: str, max_days=5, max_events=16):
     courses = get_user_courses(user_id)
     events = Event.objects(course__in=courses)
     announcements = Announcement.objects(course__in=courses)
@@ -248,7 +248,7 @@ def sort_user_events(user_id: str, maxDays=5, maxEvents=16):
     events_assessments_assignments = list(chain(events, assignments, assessments))
     sorted_events = reversed(
         sorted(
-            events_assessments_assignments[:maxEvents],
+            events_assessments_assignments[:max_events],
             key=lambda obj: sortByDateTime(obj),
         )
     )
@@ -272,7 +272,7 @@ def sort_user_events(user_id: str, maxDays=5, maxEvents=16):
                     sorted_announcements, key=lambda obj: obj.date.date()
                 )
                 }.items()
-            )[-maxDays:]
+            )[-max_days:]
         )
     )
 

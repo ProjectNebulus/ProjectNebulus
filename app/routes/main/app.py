@@ -7,7 +7,7 @@ from markupsafe import Markup
 
 from app.static.python.mongodb import read
 from app.static.python.mongodb.read import getText
-from . import main_blueprint, utils
+from . import main_blueprint
 from .utils import logged_in
 
 
@@ -56,14 +56,106 @@ def getGclassroomcourses():
     return courses
 
 
-@main_blueprint.route("/app", methods=["GET"])
+@main_blueprint.route("/app")
 @logged_in
-def app():
-    from app.static.python.classes import Event
+def announcements():
+    user_acc = read.find_user(id=session["id"])
+    user_events = read.sort_user_events(session["id"])
 
+    return render_template(
+        "learning/app.html",
+        user=session["username"],
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        user_acc=user_acc,
+        read=read,
+        page="Nebulus - Learning",
+        announcements=user_events[0],
+        assignments=user_events[1],
+        enumerate=enumerate,
+        strftime=datetime.strftime,
+        translate=getText,
+        fmt=fmt,
+    )
+
+
+@main_blueprint.route("/courses")
+@logged_in
+def courses():
     user_acc = read.find_user(id=session["id"])
     user_courses = read.get_user_courses(session["id"])
-    events = read.sort_user_events(session["id"])
+    try:
+        gcourses = getGclassroomcourses()
+    except:
+        gcourses = []
+
+    canvascourses = []
+    try:
+        from canvasapi import Canvas
+
+        API_URL = session["canvas_link"]
+        API_KEY = session["canvas_key"]
+        canvas = Canvas(API_URL, API_KEY)
+        account = canvas.get_user(user="self")
+        courses = account.get_courses()
+        for course in courses:
+            original_name = ""
+            try:
+                original_name = course.original_name
+            except:
+                original_name = course.name
+            canvascourses.append(
+                [course.name, f"{API_URL}/course/{course.id}", original_name]
+            )
+    except Exception as e:
+        canvascourses = []
+
+    scCourses = []
+    import schoolopy
+
+    try:
+        schoology = read.getSchoology(id=session["id"])
+        if schoology:
+            schoology = schoology[0]
+            key = (
+                    schoology.apikey
+                    or session.get("request_token")
+                    or "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
+            )
+            secret = (
+                    schoology.apisecret
+                    or session.get("request_token_secret")
+                    or "59ccaaeb93ba02570b1281e1b0a90e18"
+            )
+
+            auth = schoolopy.Auth(
+                key,
+                secret,
+                domain=schoology.schoologyDomain,
+                three_legged=True,
+                request_token=schoology.Schoology_request_token,
+                request_token_secret=schoology.Schoology_request_secret,
+                access_token=schoology.Schoology_access_token,
+                access_token_secret=schoology.Schoology_access_secret,
+            )
+            auth.authorize()
+            sc = schoolopy.Schoology(auth)
+            sc.limit = "100&include_past=1"
+            scCourses = list(sc.get_user_sections(user_id=sc.get_me().id))
+            for i in range(0, len(scCourses)):
+                scCourses[i] = dict(scCourses[i])
+                scCourses[i]["link"] = (
+                        schoology.schoologyDomain
+                        + "course/"
+                        + scCourses[i]["id"]
+                        + "/materials"
+                )
+            scSchool = sc.get_school(scCourses[0]["school_id"])
+            scCourses.append(scSchool)
+    except Exception as e:
+        print(session)
+        print(e)
+        scCourses = []
 
     return render_template(
         "learning/courses.html",
@@ -74,222 +166,11 @@ def app():
         user_courses=list(user_courses),
         read=read,
         page="Nebulus - Courses",
-        announcements=events[0],
-        events=events[1],
-        now=datetime.now(),
-        strftime=utils.strftime,
-        enumerate=enumerate,
-        Event=Event,
         translate=getText,
-        fmt=fmt,
         uniqueUsers=set(),
-    )
-
-
-@main_blueprint.route("/announcements")
-@logged_in
-def announcements():
-    user_acc = read.find_user(id=session["id"])
-    user_courses = read.get_user_courses(session["id"])
-    events = read.sort_user_events(session["id"])
-
-    try:
-        gcourses = getGclassroomcourses()
-    except:
-        gcourses = []
-
-    canvascourses = []
-    try:
-        from canvasapi import Canvas
-
-        API_URL = session["canvas_link"]
-        API_KEY = session["canvas_key"]
-        canvas = Canvas(API_URL, API_KEY)
-        account = canvas.get_user(user="self")
-        courses = account.get_courses()
-        for course in courses:
-            original_name = ""
-            try:
-                original_name = course.original_name
-            except:
-                original_name = course.name
-            canvascourses.append(
-                [course.name, f"{API_URL}/course/{course.id}", original_name]
-            )
-    except Exception as e:
-        canvascourses = []
-
-    scCourses = []
-    import schoolopy
-
-    try:
-        schoology = read.getSchoology(id=session["id"])
-        if schoology:
-            schoology = schoology[0]
-            key = (
-                    schoology.apikey
-                    or session.get("request_token")
-                    or "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
-            )
-            secret = (
-                    schoology.apisecret
-                    or session.get("request_token_secret")
-                    or "59ccaaeb93ba02570b1281e1b0a90e18"
-            )
-
-            auth = schoolopy.Auth(
-                key,
-                secret,
-                domain=schoology.schoologyDomain,
-                three_legged=True,
-                request_token=schoology.Schoology_request_token,
-                request_token_secret=schoology.Schoology_request_secret,
-                access_token=schoology.Schoology_access_token,
-                access_token_secret=schoology.Schoology_access_secret,
-            )
-            auth.authorize()
-            sc = schoolopy.Schoology(auth)
-            sc.limit = "100&include_past=1"
-            scCourses = list(sc.get_user_sections(user_id=sc.get_me().id))
-            for i in range(0, len(scCourses)):
-                scCourses[i] = dict(scCourses[i])
-                scCourses[i]["link"] = (
-                        schoology.schoologyDomain
-                        + "course/"
-                        + scCourses[i]["id"]
-                        + "/materials"
-                )
-            scSchool = sc.get_school(scCourses[0]["school_id"])
-            scCourses.append(scSchool)
-    except Exception as e:
-        print(session)
-        print(e)
-        scCourses = []
-
-    events = read.sort_user_events(session["id"])
-
-    return render_template(
-        "learning/announcements.html",
-        user=session["username"],
-        email=session.get("email"),
-        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-        user_acc=user_acc,
-        user_courses=list(user_courses),
-        read=read,
-        page="Nebulus - Learning",
         gcourses=gcourses,
-        announcements=events[0],
-        enumerate=enumerate,
-        strftime=datetime.strftime,
-        canvascourses=canvascourses,
-        schoologycourses=scCourses,
-        pastschoologycourses=scCourses,
-        translate=getText,
-        fmt=fmt,
-        uniqueUsers=set(),
-    )
-
-@main_blueprint.route("/events")
-@logged_in
-def events():
-    user_acc = read.find_user(id=session["id"])
-    user_courses = read.get_user_courses(session["id"])
-    events = read.sort_user_events(session["id"])
-
-    try:
-        gcourses = getGclassroomcourses()
-    except:
-        gcourses = []
-
-    canvascourses = []
-    try:
-        from canvasapi import Canvas
-
-        API_URL = session["canvas_link"]
-        API_KEY = session["canvas_key"]
-        canvas = Canvas(API_URL, API_KEY)
-        account = canvas.get_user(user="self")
-        courses = account.get_courses()
-        for course in courses:
-            original_name = ""
-            try:
-                original_name = course.original_name
-            except:
-                original_name = course.name
-            canvascourses.append(
-                [course.name, f"{API_URL}/course/{course.id}", original_name]
-            )
-    except Exception as e:
-        canvascourses = []
-
-    scCourses = []
-    import schoolopy
-
-    try:
-        schoology = read.getSchoology(id=session["id"])
-        if schoology:
-            schoology = schoology[0]
-            key = (
-                    schoology.apikey
-                    or session.get("request_token")
-                    or "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
-            )
-            secret = (
-                    schoology.apisecret
-                    or session.get("request_token_secret")
-                    or "59ccaaeb93ba02570b1281e1b0a90e18"
-            )
-
-            auth = schoolopy.Auth(
-                key,
-                secret,
-                domain=schoology.schoologyDomain,
-                three_legged=True,
-                request_token=schoology.Schoology_request_token,
-                request_token_secret=schoology.Schoology_request_secret,
-                access_token=schoology.Schoology_access_token,
-                access_token_secret=schoology.Schoology_access_secret,
-            )
-            auth.authorize()
-            sc = schoolopy.Schoology(auth)
-            sc.limit = "100&include_past=1"
-            scCourses = list(sc.get_user_sections(user_id=sc.get_me().id))
-            for i in range(0, len(scCourses)):
-                scCourses[i] = dict(scCourses[i])
-                scCourses[i]["link"] = (
-                        schoology.schoologyDomain
-                        + "course/"
-                        + scCourses[i]["id"]
-                        + "/materials"
-                )
-            scSchool = sc.get_school(scCourses[0]["school_id"])
-            scCourses.append(scSchool)
-    except Exception as e:
-        print(session)
-        print(e)
-        scCourses = []
-
-    events = read.sort_user_events(session["id"])
-
-    return render_template(
-        "learning/events.html",
-        user=session["username"],
-        email=session.get("email"),
-        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-        user_acc=user_acc,
-        user_courses=list(user_courses),
-        read=read,
-        page="Nebulus - Learning",
-        gcourses=gcourses,
-        announcements=events[0],
-        enumerate=enumerate,
-        strftime=datetime.strftime,
-        canvascourses=canvascourses,
-        schoologycourses=scCourses,
-        pastschoologycourses=scCourses,
-        translate=getText,
-        fmt=fmt,
-        uniqueUsers=set(),
+        scCourses=scCourses,
+        canvascourses=canvascourses
     )
 
 

@@ -1,3 +1,14 @@
+if (document.title.includes("Nebulus - "))
+    document.getElementById("pageTitle").innerHTML = document.title.replace("Nebulus - ", "")
+
+for (const element of document.querySelectorAll("#changePage li")) {
+    element.classList.add('py-2', 'px-4', 'hover:bg-gray-100', 'dark:hover:bg-gray-600', 'dark:hover:text-white', 'flex', 'gap-4', 'cursor-pointer');
+    element.addEventListener("click", () => window.open(element.getAttribute("href"), "_self"))
+}
+
+for (const element of document.querySelectorAll("#changePage li span"))
+    element.classList.add("material-icons", "text-gray-600", "dark:text-gray-300")
+
 const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
 const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
 
@@ -42,7 +53,7 @@ document.querySelector("#navbar [data-dropdown-toggle='control-center']").oncont
     e.preventDefault();
 
 function searchWithin(search) {
-    if (!search) search = "user"
+    if (search !== "course") search = "user"
 
     let value = document.getElementById('search_input').value;
 
@@ -94,7 +105,7 @@ function searchWithin(search) {
 
                         string += `
                     <li style="margin:5px;">
-                        <div class="truncate py-2.5 rounded-lg mx-auto block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 mx-2 dark:hover:text-white" style="text-align:left; width:240px;;">
+                        <div class="truncate py-2.5 rounded-lg mx-auto block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 mx-2 dark:hover:text-white">
                 ${pic}
                 <div style="display: inline-block; vertical-align: middle;">
                 ${temp_arr[1]} <br><span class="text-gray-500">${temp_arr[2]}</span></div>

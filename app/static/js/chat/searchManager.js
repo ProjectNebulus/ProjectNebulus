@@ -33,7 +33,7 @@ Searching...
                 data.forEach(function (element) {
                     document.getElementById('search_items').innerHTML += `
                 <div>
-                    <span onclick="createChat('${element[0]}');" class="truncate py-2.5 rounded-lg mx-auto block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 mx-2 dark:hover:text-white"  id="user_option_${element[0]}" style="text-align:left; width:240px;;">
+                    <span onclick="createChat('${element[0]}');" class="truncate py-2.5 rounded-lg mx-auto block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 mx-2 dark:hover:text-white"  id="user_option_${element[0]}">
             <img src="${element[1]}" class="inline-block w-10 h-10 rounded-full" alt="dates">
             ${element[2]} <span class="text-gray-500 ml-2">${element[3]}</span></span>
                 </div>

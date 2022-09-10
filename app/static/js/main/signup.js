@@ -33,8 +33,8 @@ function nextModal(num) {
 }
 
 function next(num) {
-    document.getElementById("step_").style.width = `${100/3*(num+1)}%`;
-    document.getElementById("step__").innerText = `${num+1}`;
+    document.getElementById("stepBar").style.width = `${100/3*(num+1)}%`;
+    document.getElementById("stepText").innerText = `${num+1}`;
     if (num === 1) {
         if (
             checks[0].innerText === 'check' &&
@@ -67,7 +67,7 @@ function onComplete() {
 
 function prev(num) {
     document.getElementById("step_").style.width = `${100/3*(num-1)}%`;
-    document.getElementById("step__").innerText = `${num-1}`;
+    document.getElementById("stepText").innerText = `${num-1}`;
     if (num !== 1) {
         setTimeout(function () {
             document.getElementById('step' + num.toString()).style.display = 'none';

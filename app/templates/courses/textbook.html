@@ -32,7 +32,7 @@
     </div>
     <script>const course_id = "{{ course_id }}"
     document.getElementById("navbartitle").innerText = "Information";
-    document.getElementById('currentdrop').innerHTML = `
+    document.getElementById('pageTitle').innerHTML = `
 
                         <span class="overflow-auto truncate" style="text-align:left; width:240px;"><span class="overflow-auto truncate" style="text-align:left; width:240px;"><img src="{{ course.avatar.avatar_url }}" alt="Course Icon" class="object-cover rounded-lg inline-block" style="width:40px;
                         height:40px;
@@ -54,7 +54,7 @@
                         </li>
                         <li>
                             <a style="text-align: left;"
-                               href="/course/{{ course_id }}/announcements"
+                               href="/course/{{ course_id }}/app"
                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Announcements</a>
                         </li>
                         <li>

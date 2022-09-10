@@ -11,7 +11,8 @@ let prevScreen;
 function recaptchaScreen() {
     let screen;
     for (screen of [main, reset, code]) {
-        if (!screen.classList.contains('hidden')) break;
+        if (!screen.classList.contains('hidden'))
+            break;
     }
 
     prevScreen = screen;
@@ -326,7 +327,7 @@ window.addEventListener('load', function () {
                 loginButton.disabled = true;
 
                 loginAttempts++;
-                if (loginAttempts % 3 === 0) {
+                if (loginAttempts % 7 === 0) {
                     showRecaptcha = true;
                     recaptchaScreen();
                 }
