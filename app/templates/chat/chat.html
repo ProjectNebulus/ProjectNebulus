@@ -938,7 +938,10 @@
 
 
         function updateEditor(input, preview) {
-            preview.innerHTML = DOMPurify.sanitize(twemoji.parse(marked.parseInline(smile2emoji.checkText(input.value))), {ALLOWED_TAGS: ['strong', 'em', 'i', 'img', 'p', 'h1', 'h2', 'h3', 'h4', 'a', 'u']});
+            preview.innerHTML = DOMPurify.sanitize(twemoji.parse(marked.parseInline(smile2emoji.checkText(input.value)), {
+                folder: 'svg',
+                ext: '.svg'
+            }), {ALLOWED_TAGS: ['strong', 'em', 'i', 'img', 'p', 'h1', 'h2', 'h3', 'h4', 'a', 'u']});
         }
 
         // The picker must have a root element to insert itself into

@@ -2,17 +2,17 @@
 {% block main %}
     {% include "utils/navbar.html" %}
     <html>
-        <head>
-            <link rel="stylesheet/less" type="text/css" href="static/css/styles.less"/>
-            <script src="https://cdn.jsdelivr.net/npm/less@4.1.1"></script>
-        </head>
-        <body>
-            <div style="vertical-align: top;">
-                <div style="text-align:left;">
-                    <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-                        <a href="#">
-                            <iframe width="100%"
-                                    src="{{ "https://www.youtube.com/embed/"+id_ }}"
+    <head>
+        <link rel="stylesheet/less" type="text/css" href="static/css/styles.less"/>
+        <script src="https://cdn.jsdelivr.net/npm/less@4.1.1"></script>
+    </head>
+    <body>
+    <div style="vertical-align: top;">
+        <div style="text-align:left; width:240px;;">
+            <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                <a href="#">
+                    <iframe width="100%"
+                            src="{{ "https://www.youtube.com/embed/"+id_ }}"
                                     title="YouTube video player"
                                     frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

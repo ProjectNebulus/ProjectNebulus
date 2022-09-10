@@ -1,7 +1,7 @@
 import datetime
 
 import requests
-from flask import render_template, request, session
+from flask import render_template, request, session, redirect
 from flask_cors import cross_origin
 
 from app.static.python.classes import Course, User
@@ -13,7 +13,12 @@ from .utils import logged_in, private_endpoint
 
 @main_blueprint.route("/course/<id>")
 def course_home(**kwargs):
-    return course_page("course", id=kwargs["id"])
+    return course_page("home", id=kwargs["id"])
+
+
+@main_blueprint.route("/course/<id>/")
+def wrong(**kwargs):
+    return redirect(f"/course/{kwargs['id']}")
 
 
 @main_blueprint.route("/course/<id>/<page>")

@@ -72,8 +72,8 @@ function fetchStatus() {
                   <span class="text-sm font-medium text-blue-700 dark:text-white">${timestamp}</span>
                   <span class="text-sm font-medium text-blue-700 dark:text-white">${total}</span>
                 </div>
-                <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700" style="text-align:left;">
-                  <div class="bg-green-400 h-2.5 rounded-full" style="text-align:left;width: ${Math.round(
+                <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700" style="text-align:left; width:240px;;">
+                  <div class="bg-green-400 h-2.5 rounded-full" style="text-align:left; width:240px;;width: ${Math.round(
                 ratio
             )}%;"></div>
                 </div>

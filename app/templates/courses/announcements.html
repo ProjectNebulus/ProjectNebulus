@@ -40,13 +40,14 @@
         }
     </style>
     {% include "utils/navbar.html" %}
-    <div>
+    <div style="    height: 100%;
+    overflow-y: auto;">
         {% if course.announcements|length == 0 %}
             <h1 class="mx-4 my-4 text-2xl text-black dark:text-white">You have no announcements! Try creating one!</h1>
         {% else %}
             {% for i in course.announcements %}
                 <div class="block p-6 ml-4 my-4 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
-                     style="width: 90%">
+                     style="width: 700px; margin:auto; margin-bottom:40px;">
                     <div class="flex justify-between items-center bg-gray-200 dark:bg-gray-900">
                         <div class="flex flex-row items-left rounded-lg p-3">
                             <img class="mb-3 w-12 h-12 rounded-full shadow-lg  dark:bg-gray-900 dark:hover:bg-gray-800 "
@@ -172,17 +173,21 @@
     <script>const course_id = "{{ course_id }}"
     document.getElementById("navbartitle").innerText = "Announcements";
     document.getElementById('currentdrop').innerHTML = `
-        <a style="text-align: left;" href="/app" class="truncate overflow-auto">
-                        <img src="https://api.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg" alt="Course Icon" class="object-cover rounded-lg inline-block" style="width:40px;
+
+                        <span class="overflow-auto truncate" style="text-align:left; width:240px;"><img src="{{ course.avatar.avatar_url }}" alt="Course Icon" class="object-cover rounded-lg inline-block" style="width:40px;
                         height:40px;
                         margin: 10px;">
-            Biology 7 (Section 1)
-            </a>`;
+{{course.name}}</span>
+          `;
     document.getElementById("changedropdown").innerHTML = `
      <ul class="py-1 text-sm text-gray-700 dark:text-gray-200 align-left"
                         aria-labelledby="dropdownDefault">
 
-                        <li>
+                            <li>
+                            <a style="text-align: left;"
+                               href="/course/{{ course_id }}/"
+                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Home</a>
+                        </li><li>
                             <a style="text-align: left;"
                                href="/course/{{ course_id }}/documents"
                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Documents</a>
@@ -197,11 +202,7 @@
                                href="/course/{{ course_id }}/grades"
                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Grades</a>
                         </li>
-                        <li>
-                            <a style="text-align: left;"
-                               href="/course/{{ course_id }}/information"
-                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Information</a>
-                        </li>
+
                         <li>
                             <a style="text-align: left;"
                                href="/course/{{ course_id }}/settings"

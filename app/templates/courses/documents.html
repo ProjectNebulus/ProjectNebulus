@@ -1,82 +1,144 @@
+<!--Extend with Jinja!-->
 {% extends "layout.html" %}
 {% block main %}
-    <style>
-        .edit-controls {
-            visibility: hidden;
-        }
+    <body style="overflow: hidden">
+    <script src="/static/js/course/createDocument.js" type='text/javascript'></script>
+    <script src="/static/js/course/createAnnouncement.js" type='text/javascript'></script>
+    <script src="/static/js/course/createAssignment.js" type='text/javascript'></script>
+    <script src="https://unpkg.com/flowbite@1.4.1/dist/datepicker.js"></script>
+    <script src="/static/js/course/course.js" type='text/javascript'></script>
 
-        .editable:hover .edit-controls {
-            visibility: visible;
-        }
-    </style>
-    <link rel="stylesheet"
-          href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/default.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script>
-    <nav class="flex justify-between py-3 px-5 text-gray-700 bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700"
-         aria-label="Breadcrumb">
-        <ol class="inline-flex items-center space-x-1 md:space-x-3 -mx-1"
-            id="breadcrumy">
-            <li class="inline-flex items-center">
-                <a onclick="location.reload();"
-                   class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
-                    <svg class="mr-2 w-4 h-4"
-                         fill="currentColor"
-                         viewBox="0 0 20 20"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
-                        </path>
-                    </svg>
-                    Home
-                </a>
-            </li>
-        </ol>
-    </nav>
-    <div style="margin-left: 10px; width: 98%; float: left;" id="documentPage">
-        <div style="width:70%;float:left;">
-            {% if course.documents|length == 0 and course.folders|length == 0 %}
-                <h1 class="mx-4 my-4 text-xl text-black dark:text-white">You have no documents or folders! Try creating one!</h1>
-            {% endif %}
-            {% for folder in course.folders %}
+    {% include "utils/navbar.html" %}
+    <div>
+        <style>
+            .edit-controls {
+                visibility: hidden;
+            }
+
+            .editable:hover .edit-controls {
+                visibility: visible;
+            }
+        </style>
+        <link rel="stylesheet"
+              href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script>
+        <nav class="flex justify-between py-3 px-5 text-white bg-transparent"
+             aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3 -mx-1"
+                id="breadcrumy">
+                <li class="inline-flex items-center">
+                    <span class="overflow-auto truncate" style="text-align:left; "><img
+                            src="{{ course.avatar.avatar_url }}" alt="Course Icon"
+                            class="object-cover rounded-lg inline-block" style="width:40px;
+                        height:40px;
+                        margin: 10px;">
+                        {{ course.name }}</span>
+                </li>
+            </ol>
+        </nav>
+        <div style="margin-left: 10px; width: 98%; float: left;" id="documentPage">
+            <div style="width:70%;float:left;">
+                {% if course.documents|length == 0 and course.folders|length == 0 %}
+                    <h1 class="mx-4 my-4 text-xl text-black dark:text-white">You have no documents or folders! Try
+                        creating one!</h1>
+                {% endif %}
+                {% for folder in course.folders %}
+                    <br>
+                    <a class="truncate text-ellipsis overflow-hidden block max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                        <p class="font-normal text-gray-700 dark:text-gray-400 whitespace-nowrap">
+                            <svg class="w-6 h-6 inline-block mr-2 -mt-1.5"
+                                 fill="none"
+                                 stroke="{{ folder.color }}"
+                                 viewBox="0 0 24 24"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z">
+                                </path>
+                            </svg>
+                            <span>{{ folder.name }}</span>
+                        </p>
+                    </a>
+                {% endfor %}
                 <br>
-                <a class="truncate text-ellipsis overflow-hidden block max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <p class="font-normal text-gray-700 dark:text-gray-400 whitespace-nowrap">
-                        <svg class="w-6 h-6 inline-block mr-2 -mt-1.5"
-                             fill="none"
-                             stroke="{{ folder.color }}"
-                             viewBox="0 0 24 24"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z">
-                            </path>
-                        </svg>
-                        <span>{{ folder.name }}</span>
-                    </p>
-                </a>
-            {% endfor %}
-            <br>
-            {% for document in course.documents %}
-                <div onclick="startFile('{{ document.name }}', siteName + '/getResource/{{ course.id }}/{{ document.id }}',{{ ("
-                     pdf
-                     in
-                     document.url
-                     string
-                     lower
-                     class="editable p-6 mb-8 bg-white rounded-lg cursor-pointer border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 relative"
-                     style="width: min-content; max-width: 90%">
-                    <div class="edit-controls absolute flex bg-gray-500 dark:bg-gray-800 material-icons rounded-lg text-gray-200 dark:text-gray-500 overflow-hidden shadow"
-                         style="top: -0.5rem; right: -1rem"
-                         onclick="override=true">
-                        <span>edit</span>
-                        <span onclick="deleteMaterial(this)">delete</span>
+                {% for document in course.documents %}
+                    <div onclick="startFile('{{ document.name }}', siteName + '/getResource/{{ course.id }}/{{ document.id }}','{{ ('pdf' in document.name|string|lower) }}')"
+                         class="editable p-6 mb-8 bg-white rounded-lg cursor-pointer border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 relative"
+                         style="width: min-content; max-width: 90%">
+                        <div class="edit-controls absolute flex bg-gray-500 dark:bg-gray-800 material-icons rounded-lg text-gray-200 dark:text-gray-500 overflow-hidden shadow"
+                             style="top: -0.5rem; right: -1rem"
+                             onclick="override=true">
+                            <span>edit</span>
+                            <span onclick="deleteMaterial(this)">delete</span>
+                        </div>
+                        <div class="text-sm text-gray-700 dark:text-gray-400 whitespace-nowrap mr-2 flex">
+                            <span class="mr-3 -mt-1 material-icons">description</span>
+                            <span class="mr-8 truncate w-full">{{ document.name }}</span>
+                        </div>
                     </div>
-                    <div class="text-sm text-gray-700 dark:text-gray-400 whitespace-nowrap mr-2 flex">
-                        <span class="mr-3 -mt-1 material-icons">description</span>
-                        <span class="mr-8 truncate w-full">{{ document.name }}</span>
-                    </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
+        <script src="/static/js/tools/files.js"></script>
     </div>
-    <script src="/static/js/tools/files.js"></script>
+
+    <script>const course_id = "{{ course_id }}"
+    document.getElementById("navbartitle").innerText = "Documents";
+    document.getElementById('currentdrop').innerHTML = `
+
+                        <span class="overflow-auto truncate" style="text-align:left; width:240px;"><img src="{{ course.avatar.avatar_url }}" alt="Course Icon" class="object-cover rounded-lg inline-block" style="width:40px;
+                        height:40px;
+                        margin: 10px;">
+{{course.name}}</span>
+          `;
+    document.getElementById("changedropdown").innerHTML = `
+     <ul class="py-1 text-sm text-gray-700 dark:text-gray-200 align-left"
+                        aria-labelledby="dropdownDefault">
+
+                            <li>
+                            <a style="text-align: left;"
+                               href="/course/{{ course_id }}/"
+                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Home</a>
+                        </li><li>
+                            <a style="text-align: left;"
+                               href="/course/{{ course_id }}/documents"
+                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Documents</a>
+                        </li>
+                        <li>
+                            <a style="text-align: left;"
+                               href="/course/{{ course_id }}/announcements"
+                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Announcements</a>
+                        </li>
+                        <li>
+                            <a style="text-align: left;"
+                               href="/course/{{ course_id }}/grades"
+                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Grades</a>
+                        </li>
+
+                        <li>
+                            <a style="text-align: left;"
+                               href="/course/{{ course_id }}/settings"
+                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                        </li>
+                        <li>
+                            <a style="text-align: left;"
+                               href="/course/{{ course_id }}/textbook"
+                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Textbook</a>
+                        </li>
+                        <li>
+                            <a style="text-align: left;"
+                               href="/course/{{ course_id }}/learning"
+                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Learning</a>
+                        </li>
+                        <li>
+                            <a style="text-align: left;"
+                               href="/course/{{ course_id }}/extensions"
+                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Extensions</a>
+                        </li>
+                    </ul>`
+    </script>
+    {% include "courses/courseModals.html" %}
+    </body>
 {% endblock %}
+
+

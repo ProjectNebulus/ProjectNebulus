@@ -94,7 +94,7 @@ function searchWithin(search) {
 
                         string += `
                     <li style="margin:5px;">
-                        <div class="truncate py-2.5 rounded-lg mx-auto block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 mx-2 dark:hover:text-white" style="text-align:left;">
+                        <div class="truncate py-2.5 rounded-lg mx-auto block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 mx-2 dark:hover:text-white" style="text-align:left; width:240px;;">
                 ${pic}
                 <div style="display: inline-block; vertical-align: middle;">
                 ${temp_arr[1]} <br><span class="text-gray-500">${temp_arr[2]}</span></div>
