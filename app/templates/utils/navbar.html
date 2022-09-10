@@ -70,8 +70,46 @@
                     </ul>
                 </div>
             {% endif %}
+            {% if user and homepage %}
+                <div class="hidden justify-between items-center w-full lg:flex md:w-auto md:order-1"
+                     id="mobile-menu-2"
+                     style="margin-left:5rem;margin-top:0.1rem">
+                    <ul class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm dark:text-gray-200"
+                        aria-label="Navigation Links">
+                        <li>
+                            <a href="/about" class="nav-link">{{ translate("About") }}</a>
+                        </li>
+                        <li>
+                            <a href="/pricing" class="nav-link">{{ translate("Pricing") }}</a>
+                        </li>
+                        <li>
+                            <a href="/support" class="nav-link">Support</a>
+                        </li>
+                        <li>
+                            <a href="/blog" class="nav-link">Blog</a>
+                        </li>
+                        <li>
+                            <a href="/enterpise" class="nav-link">Enterprise</a>
+                        </li>
+                        <li>
+                            <a href="/developers" class="nav-link">Developers</a>
+                        </li>
+                        <li>
+                            <a href="/select-a-region" class="nav-link"><i class="material-icons">language</i></a>
+                        </li>
+                        <li>
+                            <button id="theme-toggle"
+                                    type="button"
+                                    class="nav-link block py-2 px-1 text-sm text-gray-700 dark:text-gray-200 dark:hover:text-white">
+                                <i id="theme-toggle-dark-icon" class="hidden material-icons">light_mode</i>
+                                <i id="theme-toggle-light-icon" class="hidden material-icons">dark_mode</i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            {% endif %}
         </div>
-        {% if user %}
+        {% if user and not homepage %}
             <div>
                 <!-- Middle -->
                 <button data-modal-toggle="searchModal"
@@ -156,11 +194,11 @@
                     <span style="font-size: 18px;" class="material-icons">school</span>
                 </button>
                 <div id="app_dropdown"
-                     class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
+                     class="hidden z-10 w-24 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
                     <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault">
                         <a href="/app">
                             <li>
-                                <button style=" border-radius: 50%; float: left; margin-right:10px; "
+                                <button style="margin: 20px; border-radius: 50%; float: left; margin-right:10px; "
                                         class="mx-4 hidden sm:flex items-center text-left space-x-3 w-12 h-12 dark:bg-slate-800/75 hover:bg-gray-700 text-white font-medium rounded-lg text-sm pl-4 py-2.5 text-center">
                                     <span style="font-size: 18px;" class="material-icons">school</span>
                                 </button>
@@ -168,7 +206,7 @@
                         </a><br>
                         <a href="/study">
                             <li>
-                                <button style=" border-radius: 50%; float: left; margin-right:10px; "
+                                <button style="margin: 20px; border-radius: 50%; float: left; margin-right:10px; "
                                         class="mx-4 hidden sm:flex items-center text-left space-x-3 w-12 h-12 dark:bg-slate-800/75 hover:bg-gray-700 text-white font-medium rounded-lg text-sm pl-4 py-2.5 text-center">
                                     <span style="font-size: 18px;" class="material-icons">timer</span>
                                 </button>
@@ -176,7 +214,7 @@
                         </a><br>
                         <a href="/music">
                             <li>
-                                <button style=" border-radius: 50%; float: left; margin-right:10px; "
+                                <button style="margin: 20px; border-radius: 50%; float: left; margin-right:10px; "
                                         class="mx-4 hidden sm:flex items-center text-left space-x-3 w-12 h-12 dark:bg-slate-800/75 hover:bg-gray-700 text-white font-medium rounded-lg text-sm pl-4 py-2.5 text-center">
                                     <span style="font-size: 18px;" class="material-icons">music_note</span>
                                 </button>
@@ -184,7 +222,7 @@
                         </a><br>
                         <a href="/chat">
                             <li>
-                                <button style=" border-radius: 50%; float: left; margin-right:10px; "
+                                <button style="margin: 20px; border-radius: 50%; float: left; margin-right:10px; "
                                         class="mx-4 hidden sm:flex items-center text-left space-x-3 w-12 h-12 dark:bg-slate-800/75 hover:bg-gray-700 text-white font-medium rounded-lg text-sm pl-4 py-2.5 text-center">
                                     <span style="font-size: 18px;" class="material-icons">forum</span>
                                 </button>
@@ -205,26 +243,35 @@
                     Courses (11111)
                 </h1>
             </div>
-{% endif %}
-<div style="display: grid; grid-auto-flow: column; align-content: center;">
-    <!--Right -->
-    {% if user %}
-        <button data-dropdown-toggle="control-center"
-                aria-label="Control Center"
-                class="rounded-full border-gray-300 border-none w-12 h-12 {% if "black" in avatar %} bg-gray-300 {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}">
-            <logo image="{{ avatar }}" no-revert class="h-8 mx-auto my-auto"></logo>
-        </button>
-    {% else %}
-        <div class="flex md:order-2">
-            <a href="/signin">
-                <button id="login"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    {{ translate("Login") }}
+        {% endif %}
+        <div style="display: grid; grid-auto-flow: column; align-content: center;">
+            <!--Right -->
+            {% if user and not homepage %}
+                <button data-dropdown-toggle="control-center"
+                        aria-label="Control Center"
+                        class="rounded-full border-gray-300 border-none w-12 h-12 {% if "black" in avatar %} bg-gray-300 {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}">
+                    <logo image="{{ avatar }}" no-revert class="h-8 mx-auto my-auto"></logo>
                 </button>
-            </a>
-            <a href="/signup">
-                <button id="signup"
-                        class="text-white text-white bg-gradient-to-r from-green-400 via-blue-600 to-orange-400 hover:bg-gradient-to- focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+            {% elif user and homepage %}
+                <div class="flex md:order-2">
+
+                    <a href="/app">
+                        <button id="signup"
+                                class="text-white text-white bg-gradient-to-r from-green-400 via-blue-600 to-orange-400 hover:bg-gradient-to- focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                            {{ translate("Launch Nebulus") }}
+                        </button>
+                    </a>
+                </div>{% else %}
+                <div class="flex md:order-2">
+                    <a href="/signin">
+                        <button id="login"
+                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            {{ translate("Login") }}
+                        </button>
+                    </a>
+                    <a href="/signup">
+                        <button id="signup"
+                                class="text-white text-white bg-gradient-to-r from-green-400 via-blue-600 to-orange-400 hover:bg-gradient-to- focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                     {{ translate("Get Started") }}
                 </button>
             </a>

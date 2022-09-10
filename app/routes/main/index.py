@@ -27,6 +27,7 @@ def index():
             "/static/images/nebulusCats/v3.gif",
         ),
         translate=getText,
+        homepage=True,
     )
 
 
@@ -43,12 +44,18 @@ def arcstuff():
 
 @main_blueprint.route("/privacy-policy")
 def pp():
-    return render_template("privacy.html", translate=getText, )
+    return render_template("privacy.html", translate=getText, user=session.get("username"),
+                           email=session.get("email"),
+                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+                           homepage=True, )
 
 
 @main_blueprint.route("/terms-of-service")
 def tos():
-    return render_template("tos.html", translate=getText, )
+    return render_template("tos.html", translate=getText, user=session.get("username"),
+                           email=session.get("email"),
+                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+                           homepage=True, )
 
 
 @main_blueprint.route("/select-a-region")
@@ -60,6 +67,7 @@ def selectregion():
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         page="Select a Region",
         translate=getText,
+        homepage=True,
     )
 
 
