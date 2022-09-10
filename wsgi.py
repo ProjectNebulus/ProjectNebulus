@@ -5,17 +5,6 @@ from main import app, socketio
 debug = False
 if __name__ == "__main__":
     if __name__ == "__main__":
-        if (
-            platform.system().lower() == "linux"
-        ):  # linux - used for VPS (like DigitalOcean)
-            debug = False
-            port = 80
-            host = "0.0.0.0"
-            protocol = "s"
-        else:  # macos (darwin) or windows (windows)
-            port = 8080
-            host = "localhost"
-            protocol = ""
 
         print(
             *sorted(
@@ -26,5 +15,5 @@ if __name__ == "__main__":
             ),
             sep="\n",
         )
-        print(f"Started Running: http{protocol}://{host}:{port}")
-        socketio.run(app, host=host, port=port)
+        print("Started Running: http{protocol}://{host}:{port}")
+        socketio.run(app, host="0.0.0.0", port=8080)
