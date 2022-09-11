@@ -1,6 +1,11 @@
 {% extends "layout.html" %}
 {% block main %}
     {% include "utils/navbar.html" %}
+    <script>
+        document.getElementById("current_app").innerText = "music_note";
+        document.getElementById("navbartitle").innerText = "Music";
+        document.getElementById('pageTitle').innerHTML = `Music`;
+    </script>
     <div style="margin:40px;">
         <title>{{ i["name"] }} | {{ i["author"] }}</title>
         <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap"
