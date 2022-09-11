@@ -1,4 +1,4 @@
-function changeDropdown(value) {
+function changePage(value) {
     document.getElementsByName('type')[0].value = value;
     document.getElementById('changeable').innerHTML =
         document.getElementsByClassName('change')[value - 1].innerHTML;

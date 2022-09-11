@@ -111,7 +111,9 @@
             {% endif %}
         </div>
         {% if user and not homepage %}
-            <div>
+            <div style="
+    width: calc(100% - 300px);
+">
                 <!-- Middle -->
                 <button data-modal-toggle="searchModal"
                         id="search"
@@ -189,50 +191,51 @@
                     <span style="font-size: 18px;" class="material-icons">school</span>
                 </button>
                 <div id="app_dropdown"
-                     class="hidden z-10 w-24 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
-                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
-                        aria-labelledby="dropdownDefault">
+                     class="z-10 w-80 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 hidden"
+                     style="position: absolute;inset: 0px auto auto 0px;margin: 0px;transform: translate3d(801px, 72px, 0px);margin: 10px;"
+                     data-popper-placement="bottom">
+                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault">
                         <a href="/app">
                             <li>
-                                <button style="margin: 20px; border-radius: 50%; float: left; margin-right:10px; "
+                                <button style="margin: 5px 20px;border-radius: 50%;float: left; margin-right:10px;"
                                         class="mx-4 hidden sm:flex items-center text-left space-x-3 w-12 h-12 dark:bg-slate-800/75 hover:bg-gray-700 text-white font-medium rounded-lg text-sm pl-4 py-2.5 text-center">
                                     <span style="font-size: 18px;" class="material-icons">school</span>
                                 </button>
                             </li>
                         </a>
-                        <br>
+
                         <a href="/study">
                             <li>
-                                <button style="margin: 20px; border-radius: 50%; float: left; margin-right:10px; "
+                                <button style="margin: 5px 20px;border-radius: 50%;float: left; margin-right:10px;"
                                         class="mx-4 hidden sm:flex items-center text-left space-x-3 w-12 h-12 dark:bg-slate-800/75 hover:bg-gray-700 text-white font-medium rounded-lg text-sm pl-4 py-2.5 text-center">
                                     <span style="font-size: 18px;" class="material-icons">timer</span>
                                 </button>
                             </li>
                         </a>
-                        <br>
+
                         <a href="/music">
                             <li>
-                                <button style="margin: 20px; border-radius: 50%; float: left; margin-right:10px; "
+                                <button style="margin: 5px 20px;border-radius: 50%;float: left; margin-right:10px;"
                                         class="mx-4 hidden sm:flex items-center text-left space-x-3 w-12 h-12 dark:bg-slate-800/75 hover:bg-gray-700 text-white font-medium rounded-lg text-sm pl-4 py-2.5 text-center">
                                     <span style="font-size: 18px;" class="material-icons">music_note</span>
                                 </button>
                             </li>
                         </a>
-                        <br>
+
                         <a href="/chat">
                             <li>
-                                <button style="margin: 20px; border-radius: 50%; float: left; margin-right:10px; "
+                                <button style="margin: 5px 20px;border-radius: 50%;float: left; margin-right:10px;"
                                         class="mx-4 hidden sm:flex items-center text-left space-x-3 w-12 h-12 dark:bg-slate-800/75 hover:bg-gray-700 text-white font-medium rounded-lg text-sm pl-4 py-2.5 text-center">
                                     <span style="font-size: 18px;" class="material-icons">forum</span>
                                 </button>
                             </li>
                         </a>
-                        <br>
+
                     </ul>
                 </div>
                 <div id="extraWidgets" style=" display: inline-block; ">
                 </div>
-                <h1 style=" display: inline-block; float: right; margin-left: 20px; vertical-align: middle; margin-top: 10px; font-weight: 900; overflow: hidden; width: calc(100% - 720px); height: 30px; "
+                <h1 style=" display: inline-block; margin-left: 20px; vertical-align: middle; margin-top: 10px; font-weight: 900; overflow: hidden; width: calc(100% - 720px); height: 30px; "
                     id="navbartitle"
                     class="text-xl text-gray-500 uppercase truncate">
                     Nebulus
