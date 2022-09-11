@@ -41,7 +41,7 @@ def signup_email():
     print(code)
 
     current_dir = Path(__file__)
-    root_path = [p for p in current_dir.parents if p.parts[-1] == "ProjectNebulus"][0]
+    root_path = [p for p in current_dir.parents if "ProjectNebulus" in p.parts[-1]][0]
 
     htmlform = (
         str(codecs.open(str(root_path) + "/app/templates/utils/email.html", "r").read())
@@ -69,7 +69,7 @@ def reset_email():
 
     current_dir = Path(__file__)
 
-    root_path = [p for p in current_dir.parents if p.parts[-1] == "ProjectNebulus"][0]
+    root_path = [p for p in current_dir.parents if "ProjectNebulus" in p.parts[-1]][0]
 
     htmlform = (
         str(codecs.open(str(root_path) + "/app/templates/utils/email.html", "r").read())
