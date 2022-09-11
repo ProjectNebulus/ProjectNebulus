@@ -1,15 +1,99 @@
 <!--Style Sheets!-->
 <html lang="en">
 <head>
+    <script>
+        document.onclick = hideMenu;
+        document.oncontextmenu = rightClick;
+
+        function hideMenu() {
+            document.getElementById(
+                "contextMenu").style.display = "none"
+        }
+
+        function rightClick(e) {
+            e.preventDefault();
+
+            if (document.getElementById(
+                "contextMenu").style.display == "block")
+                hideMenu();
+            else {
+                var menu = document
+                    .getElementById("contextMenu")
+
+                menu.style.display = 'block';
+                menu.style.left = e.pageX + "px";
+                menu.style.top = e.pageY + "px";
+            }
+        }
+    </script>
+    <style>
+        #contextMenu ul li {
+            padding: 10px;
+            border-radius: 10px;
+            margin: 3px;
+        }
+
+        #contextMenu ul li:hover {
+            background: #4B5563;
+        }
+
+        #contextMenu ul li i {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 5px;
+        }
+    </style>
+    <div id="contextMenu"
+         class="context-menu bg-white dark:bg-gray-800/75 backdrop-blur-sm text-black dark:text-white"
+         style="padding: 5px;
+                    margin: 5px;
+                    display: none;
+                    z-index: 100;
+                    position: absolute;
+                    text-align: center;
+                    border-radius: 20px;
+                    border: none;
+                    width: 200px;
+                    left: 422px;
+                    top: 244px;">
+        <ul style="text-align:left; width:240px;;">
+            <li>
+                <a href="/settings"><i class="material-icons">settings</i>Settings</a>
+            </li>
+            <li>
+                <a href="/profile"><i class="material-icons">person</i>View Profile</a>
+            </li>
+            <li>
+                <a href="/logout"><i class="material-icons">logout</i>Log Out</a>
+            </li>
+        </ul>
+    </div>
+    <style>
+        ::-moz-selection { /* Code for Firefox */
+            background: rgba(120, 120, 120, 0.3);
+        }
+
+        ::selection {
+            background: rgba(120, 120, 120, 0.3);
+        }
+
+        button {
+            outline: none !important;
+        }
+
+        input {
+            outline: none !important;
+        }
+    </style>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
     <script type="text/javascript" src="//cdn.socket.io/4.4.1/socket.io.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.1"></script>
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta http-equiv="Content-Security-Policy"
+          content="upgrade-insecure-requests">
     <meta name="google-site-verification"
           content="5RLtqNU5_UuQAcLqyee0ZoaLyNQ9-6VF0qfJsABVhm4"/>
     {% if not disableArc %}
-        <script async src="https://arc.io/widget.min.js#MAqsJqoN"></script>
-    {% endif %}
+        <script async src="https://arc.io/widget.min.js#MAqsJqoN"></script>{% endif %}
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7084604546168550"
             crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"

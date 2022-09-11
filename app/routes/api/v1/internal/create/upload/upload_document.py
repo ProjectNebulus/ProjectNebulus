@@ -1,7 +1,7 @@
 from flask import flash, request
 
-from .. import internal
 from app.static.python.cdn.upload_document import upload_document
+from .. import internal
 
 
 @internal.route("/create/upload/document", methods=["POST"])

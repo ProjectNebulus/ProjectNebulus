@@ -6,8 +6,8 @@ from threading import Thread
 from flask import current_app, request, session
 from flask_mail import Message
 
-from ...... import mail
 from ... import internal
+from ...... import mail
 from ......main import private_endpoint
 from .......static.python.mongodb import read
 

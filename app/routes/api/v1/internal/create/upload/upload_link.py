@@ -1,8 +1,7 @@
 from flask import Flask, request
 
-from .. import internal
-from app.static.python.cdn import utils
 from app.static.python.mongodb import create
+from .. import internal
 
 UPLOAD_FOLDER = "app/static/"
 UPLOAD_FOLDER_CDN = "../"

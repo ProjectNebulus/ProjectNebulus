@@ -1,7 +1,7 @@
 from flask import request, session
 
-from .. import internal
 from app.static.python.mongodb import update
+from .. import internal
 
 
 @internal.route("/update/notepad", methods=["POST"])

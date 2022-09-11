@@ -170,7 +170,7 @@ def courses():
         uniqueUsers=set(),
         gcourses=gcourses,
         scCourses=scCourses,
-        canvascourses=canvascourses
+        canvascourses=canvascourses,
     )
 
 

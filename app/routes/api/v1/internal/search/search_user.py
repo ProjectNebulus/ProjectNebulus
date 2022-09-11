@@ -1,13 +1,9 @@
-import datetime
-from datetime import datetime
-
 from flask import request, session
 from flask.json import jsonify
 
+from app.static.python.classes import Chat, User
+from app.static.python.mongodb import read
 from .. import internal
-from app.static.python.classes import Avatar, Chat, ChatProfile, User
-from app.static.python.mongodb import create, read
-from app.static.python.utils.security import hash256
 
 
 @internal.route("/search-user", methods=["POST"])

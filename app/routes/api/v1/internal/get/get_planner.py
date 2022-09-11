@@ -1,8 +1,8 @@
 from flask import session
 
-from .. import internal
 from app.routes.main import private_endpoint
 from app.static.python.mongodb import read
+from .. import internal
 
 
 @internal.route("/get/planner")

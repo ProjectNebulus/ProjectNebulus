@@ -386,12 +386,13 @@ def search(keyword: str, username: str):
                 "as": "course",
             },
         },
-        {"$match": {"$or": [
-            {"course.authorizedUsers": user.pk},
-            {"chat.members": user.pk}
-        ]}},
+        {
+            "$match": {
+                "$or": [{"course.authorizedUsers": user.pk}, {"chat.members": user.pk}]
+            }
+        },
         {"$project": {"title": 1, "_id": 1, "_cls": 1}},
-        {"$limit": 20}
+        {"$limit": 20},
     ]
     courses = Course.objects(Q(authorizedUsers=user.id) & Q(name__istartswith=keyword))[
               :10

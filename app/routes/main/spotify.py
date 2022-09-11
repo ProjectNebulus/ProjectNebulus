@@ -279,6 +279,7 @@ def get_currently_playing():
     except:
         return ["Advertisement", "Spotify", "Spotify", False, "", True, 0, 0]
 
+
 def resume_spotify():
     spotify = get_spotify_auth()
 

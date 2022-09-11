@@ -2,9 +2,9 @@ from datetime import datetime
 
 from flask import request
 
-from .. import internal
 from app.routes.main import private_endpoint
 from app.static.python.mongodb import create
+from .. import internal
 
 
 @internal.route("/update/nebulusdoc", methods=["POST"])

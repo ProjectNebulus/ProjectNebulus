@@ -19,6 +19,7 @@ lms_choices = (
 
 # In graphql, we use the snowflake as the unique identifier for a node. The snowflake is represented as a String.
 
+
 class Snowflake(Document):
     meta = {"allow_inheritance": True, "abstract": True}
     id = StringField(

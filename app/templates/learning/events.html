@@ -11,194 +11,195 @@
         }
     </style>
     {% include "utils/navbar.html" %}
-            <div id="right"
-                 style="flex: 0 0 30vw"
-                 class="border-gray-200 dark:border-gray-700 border-l text-center h-full overflow-auto">
-                <p class="text-2xl text-black dark:text-white">Upcoming Events</p>
-                <br>
-                <div class="flex flex-col sm:rounded-lg min-w-full align-middle overflow-auto inline-block"
-                     style="height: 80%">
-                    {% if events|length == 0 %}
-                        <p class="text-gray-300 dark:text-gray-500 mx-4">
-                            No Events, Assignments, or Quizzes! To
-                            add events on to your Nebulus dashboard, please add it within a Course!
-                        </p>
+    <div id="right"
+         style="flex: 0 0 30vw"
+         class="border-gray-200 dark:border-gray-700 border-l text-center h-full overflow-auto">
+        <p class="text-2xl text-black dark:text-white">Upcoming Events</p>
+        <br>
+        <div class="flex flex-col sm:rounded-lg min-w-full align-middle overflow-auto inline-block"
+             style="height: 80%">
+            {% if events|length == 0 %}
+                <p class="text-gray-300 dark:text-gray-500 mx-4">
+                    No Events, Assignments, or Quizzes! To
+                    add events on to your Nebulus dashboard, please add it within a Course!
+                </p>
+            {% else %}
+                {% for date, assignments in events.items() %}
+                    {% set diff = (date - now).days %}
+                    {% if diff < 0 %}
+                        <h1 style="text-align: left;
+                                   background: orangered -webkit-linear-gradient(left,#ff7878,#ffb078);
+                                   -webkit-background-clip: text;
+                                   -webkit-text-fill-color: transparent;
+                                   margin: 13px;">
+                            {{ strftime(date, "%a, %B %-d, %Y") }}
+                            ({{ -diff }}d Overdue)
+                        </h1>
+                    {% elif diff < 1 %}
+                        <h1 style="text-align: left;
+                                   background: orange -webkit-linear-gradient(left,#ff78ed,#ffb378);
+                                   -webkit-background-clip: text;
+                                   -webkit-text-fill-color: transparent;
+                                   margin: 13px;">
+                            {{ strftime(date, "%a, %B %-d, %Y") }}
+                            ({{ diff }}d remaining)
+                        </h1>
+                    {% elif diff < 3 %}
+                        <h1 style="text-align: left;
+                                   background: yellow -webkit-linear-gradient(left,#ffc578,#fff878);
+                                   -webkit-background-clip: text;
+                                   -webkit-text-fill-color: transparent;
+                                   margin: 13px;">
+                            {{ strftime(date, "%a, %B %-d, %Y") }}
+                            ({{ diff }}d remaining)
+                        </h1>
+                    {% elif diff < 5 %}
+                        <h1 style="text-align: left;
+                                   background: green -webkit-linear-gradient(left,#ffd978,#ddff78);
+                                   -webkit-background-clip: text;
+                                   -webkit-text-fill-color: transparent;
+                                   margin: 13px;">
+                            {{ strftime(date, "%a, %B %-d, %Y") }}
+                            ({{ diff }}d remaining)
+                        </h1>
                     {% else %}
-                        {% for date, assignments in events.items() %}
-                            {% set diff = (date - now).days %}
-                            {% if diff < 0 %}
-                                <h1 style="text-align: left;
-                                           background: orangered -webkit-linear-gradient(left,#ff7878,#ffb078);
-                                           -webkit-background-clip: text;
-                                           -webkit-text-fill-color: transparent;
-                                           margin: 13px;">
-                                    {{ strftime(date, "%a, %B %-d, %Y") }}
-                                    ({{ -diff }}d Overdue)
-                                </h1>
-                            {% elif diff < 1 %}
-                                <h1 style="text-align: left;
-                                           background: orange -webkit-linear-gradient(left,#ff78ed,#ffb378);
-                                           -webkit-background-clip: text;
-                                           -webkit-text-fill-color: transparent;
-                                           margin: 13px;">
-                                    {{ strftime(date, "%a, %B %-d, %Y") }}
-                                    ({{ diff }}d remaining)
-                                </h1>
-                            {% elif diff < 3 %}
-                                <h1 style="text-align: left;
-                                           background: yellow -webkit-linear-gradient(left,#ffc578,#fff878);
-                                           -webkit-background-clip: text;
-                                           -webkit-text-fill-color: transparent;
-                                           margin: 13px;">
-                                    {{ strftime(date, "%a, %B %-d, %Y") }}
-                                    ({{ diff }}d remaining)
-                                </h1>
-                            {% elif diff < 5 %}
-                                <h1 style="text-align: left;
-                                           background: green -webkit-linear-gradient(left,#ffd978,#ddff78);
-                                           -webkit-background-clip: text;
-                                           -webkit-text-fill-color: transparent;
-                                           margin: 13px;">
-                                    {{ strftime(date, "%a, %B %-d, %Y") }}
-                                    ({{ diff }}d remaining)
-                                </h1>
-                            {% else %}
-                                <h1 style="text-align: left;
-                                           background: greenyellow -webkit-linear-gradient(left,#d9ff78,#78ffb7);
-                                           -webkit-background-clip: text;
-                                           -webkit-text-fill-color: transparent;
-                                           margin: 13px;">
-                                    {{ strftime(date, "%a, %B %-d, %Y") }}
-                                    ({{ diff }}d remaining)
-                                </h1>
-                            {% endif %}
-                            {% for a in assignments[:15] %}
-                                {% if (a._cls != "Assignment" or a.submitDate == None) or now < date %}
-                                    {# today is before the due date ^ #}
-                                    <div class="flex bg-gray-100 shadow dark:bg-gray-800/75 rounded-lg p-6 event shadow-md dark:border-gray-700 text-sm mb-5 mx-4 text-left relative expandable">
-                                        <div class="absolute right-0 bottom-0 material-icons hover:bg-gray-50 dark:hover:bg-gray-500 p-1 expand text-gray-200 cursor-pointer dark:text-gray-400 rounded-lg mr-3 mb-3">
-                                            open_in_new
-                                        </div>
-                                        <div content-element hidden class="hidden">{{ a.description }}</div>
-                                        <div author-element hidden class="hidden">{{ a.course.teacher }}</div>
-                                        <img src="{% if "teacherAccount" in a.course %} {{ a.course.teacher.avatar.avatar_url }} {% else %} https://app.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg {% endif %}"
-                                             image-element
-                                             hidden
-                                             class="hidden">
-                                        <div class="mr-4 material-icons ml-2 text-black dark:text-white"
-                                             style="transform: translate(0, 50%) scale(1.75)">
-                                            assignment
-                                        </div>
-                                        <div class="text-gray-700 dark:text-gray-400 leading-relaxed w-full">
-                                            <h1 class="text-black dark:text-white text-xl truncate"
-                                                title-element
-                                                style="max-width: 90%">{{ a.title }}</h1>
-                                            <p class="truncate" style="max-width: 90%;" course-name-element>{{ a.course.name }}</p>
-                                            {% if a._cls == "Assignment" %}
-                                                Due at
-                                            {% else %}
-                                                Happening at
-                                            {% endif %}
-                                            {{ strftime(date, "%-I:%M %p") }}
-                                            <div due-time-element hidden class="hidden">
-                                                {% if a._cls == "Assignment" %}
-                                                    Due at
-                                                {% else %}
-                                                    Happening on
-                                                {% endif %}
-                                                {{ strftime(date, "%-m/%-d/%y %-I:%M %p") }} •
-                                                {% if a.submitDate %}
-                                                    <span class="text-green-600 dark:text-green-500">Submitted</span>
-                                                {% elif now > date %}
-                                                    <span class="text-red-600 dark:text-red-500">Overdue</span>
-                                                {% elif a.grade != None and a.grade / a.points < 0.6 %}
-                                                    <span class="text-gray-300 dark:text-gray-700">{{ a.grade }}/{{ a.points }}</span>
-                                                {% else %}
-                                                    <span class="text-orange-500">Not Submitted</span>
-                                                {% endif %}
-                                            </div>
-                                            <div post-time-element hidden class="hidden">
-                                                Posted at
-                                                {% if "creationDate" in a %}
-                                                    {{ strftime(a.creationDate, "%-m/%-d/%y %-I:%m %p") }}
-                                                {% else %}
-                                                    {{ strftime(a.get_timestamp(), "%-m/%-d/%y %-I:%m %p") }}
-                                                {% endif %}
-                                            </div>
-                                            {% if a._cls == "Assignment" %}
-                                                <div class="text-black dark:text-white">
-                                                    {% if a.submitDate %}
-                                                        <span class="text-green-600 dark:text-green-500">Submitted</span>
-                                                    {% elif now > date %}
-                                                        <span class="text-red-600 dark:text-red-500">Overdue</span>
-                                                    {% elif a.grade != None and a.grade / a.points < 0.6 %}
-                                                        <span class="text-gray-300 dark:text-gray-700">{{ a.grade }}/{{ a.points }}</span>
-                                                    {% else %}
-                                                        <span class="text-orange-500">Not Submitted</span>
-                                                    {% endif %}
-                                                </div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-                        {% endfor %}
+                        <h1 style="text-align: left;
+                                   background: greenyellow -webkit-linear-gradient(left,#d9ff78,#78ffb7);
+                                   -webkit-background-clip: text;
+                                   -webkit-text-fill-color: transparent;
+                                   margin: 13px;">
+                            {{ strftime(date, "%a, %B %-d, %Y") }}
+                            ({{ diff }}d remaining)
+                        </h1>
                     {% endif %}
+                    {% for a in assignments[:15] %}
+                        {% if (a._cls != "Assignment" or a.submitDate == None) or now < date %}
+                            {# today is before the due date ^ #}
+                            <div class="flex bg-gray-100 shadow dark:bg-gray-800/75 rounded-lg p-6 event shadow-md dark:border-gray-700 text-sm mb-5 mx-4 text-left relative expandable">
+                                <div class="absolute right-0 bottom-0 material-icons hover:bg-gray-50 dark:hover:bg-gray-500 p-1 expand text-gray-200 cursor-pointer dark:text-gray-400 rounded-lg mr-3 mb-3">
+                                    open_in_new
+                                </div>
+                                <div content-element hidden class="hidden">{{ a.description }}</div>
+                                <div author-element hidden class="hidden">{{ a.course.teacher }}</div>
+                                <img src="{% if "teacherAccount" in a.course %} {{ a.course.teacher.avatar.avatar_url }} {% else %} https://app.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg {% endif %}"
+                                     image-element
+                                     hidden
+                                     class="hidden">
+                                <div class="mr-4 material-icons ml-2 text-black dark:text-white"
+                                     style="transform: translate(0, 50%) scale(1.75)">
+                                    assignment
+                                </div>
+                                <div class="text-gray-700 dark:text-gray-400 leading-relaxed w-full">
+                                    <h1 class="text-black dark:text-white text-xl truncate"
+                                        title-element
+                                        style="max-width: 90%">{{ a.title }}</h1>
+                                    <p class="truncate" style="max-width: 90%;"
+                                       course-name-element>{{ a.course.name }}</p>
+                                    {% if a._cls == "Assignment" %}
+                                        Due at
+                                    {% else %}
+                                        Happening at
+                                    {% endif %}
+                                    {{ strftime(date, "%-I:%M %p") }}
+                                    <div due-time-element hidden class="hidden">
+                                        {% if a._cls == "Assignment" %}
+                                            Due at
+                                        {% else %}
+                                            Happening on
+                                        {% endif %}
+                                        {{ strftime(date, "%-m/%-d/%y %-I:%M %p") }} •
+                                        {% if a.submitDate %}
+                                            <span class="text-green-600 dark:text-green-500">Submitted</span>
+                                        {% elif now > date %}
+                                            <span class="text-red-600 dark:text-red-500">Overdue</span>
+                                        {% elif a.grade != None and a.grade / a.points < 0.6 %}
+                                            <span class="text-gray-300 dark:text-gray-700">{{ a.grade }}/{{ a.points }}</span>
+                                        {% else %}
+                                            <span class="text-orange-500">Not Submitted</span>
+                                        {% endif %}
+                                    </div>
+                                    <div post-time-element hidden class="hidden">
+                                        Posted at
+                                        {% if "creationDate" in a %}
+                                            {{ strftime(a.creationDate, "%-m/%-d/%y %-I:%m %p") }}
+                                        {% else %}
+                                            {{ strftime(a.get_timestamp(), "%-m/%-d/%y %-I:%m %p") }}
+                                        {% endif %}
+                                    </div>
+                                    {% if a._cls == "Assignment" %}
+                                        <div class="text-black dark:text-white">
+                                            {% if a.submitDate %}
+                                                <span class="text-green-600 dark:text-green-500">Submitted</span>
+                                            {% elif now > date %}
+                                                <span class="text-red-600 dark:text-red-500">Overdue</span>
+                                            {% elif a.grade != None and a.grade / a.points < 0.6 %}
+                                                <span class="text-gray-300 dark:text-gray-700">{{ a.grade }}/{{ a.points }}</span>
+                                            {% else %}
+                                                <span class="text-orange-500">Not Submitted</span>
+                                            {% endif %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <div id="modal"
+         tabindex="-1"
+         aria-hidden="true"
+         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+    <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <div id="dueTime"
+                 class="absolute bottom-0 right-0 p-3 text-gray-200 dark:text-gray-500 text-sm">Due at 9:43 am
+            </div>
+            <!-- Modal header -->
+            <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600 relative">
+                <div id="header"></div>
+                <button class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                        data-modal-toggle="modal"
+                        onclick="removeBackdrop()">
+                    <svg aria-hidden="true"
+                         class="w-5 h-5"
+                         fill="currentColor"
+                         viewBox="0 0 20 20"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                              clip-rule="evenodd">
+                        </path>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+                <div id="postTime"
+                     class="absolute bottom-0 right-0 p-3 text-gray-200 dark:text-gray-500 text-sm">
+                    Posted at 9:43 am
                 </div>
             </div>
-        <div id="modal"
-             tabindex="-1"
-             aria-hidden="true"
-             class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
-            <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
-                <!-- Modal content -->
-                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                    <div id="dueTime"
-                         class="absolute bottom-0 right-0 p-3 text-gray-200 dark:text-gray-500 text-sm">Due at 9:43 am
-                    </div>
-                    <!-- Modal header -->
-                    <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600 relative">
-                        <div id="header"></div>
-                        <button class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                data-modal-toggle="modal"
-                                onclick="removeBackdrop()">
-                            <svg aria-hidden="true"
-                                 class="w-5 h-5"
-                                 fill="currentColor"
-                                 viewBox="0 0 20 20"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                      clip-rule="evenodd">
-                                </path>
-                            </svg>
-                            <span class="sr-only">Close modal</span>
-                        </button>
-                        <div id="postTime"
-                             class="absolute bottom-0 right-0 p-3 text-gray-200 dark:text-gray-500 text-sm">
-                            Posted at 9:43 am
-                        </div>
-                    </div>
-                    <!-- Modal body -->
-                    <div class="p-6 space-y-6">
-                        <div id="announcementBody"
-                             class="text-base leading-relaxed text-gray-500 dark:text-gray-400">stuff
-                        </div>
-                        <button data-modal-toggle="modal"
-                                onclick="removeBackdrop()"
-                                class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                            <svg class="w-6 h-6 inline-block"
-                                 fill="none"
-                                 stroke="currentColor"
-                                 viewBox="0 0 24 24"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M5 13l4 4L19 7"></path>
-                            </svg>
-                            Okay
-                        </button>
-                    </div>
+            <!-- Modal body -->
+            <div class="p-6 space-y-6">
+                <div id="announcementBody"
+                     class="text-base leading-relaxed text-gray-500 dark:text-gray-400">stuff
                 </div>
+                <button data-modal-toggle="modal"
+                        onclick="removeBackdrop()"
+                        class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                    <svg class="w-6 h-6 inline-block"
+                         fill="none"
+                         stroke="currentColor"
+                         viewBox="0 0 24 24"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Okay
+                </button>
+            </div>
+        </div>
         <script src="/static/js/app.js"></script>
         {% include "learning/lms-modal.html" %}
     </div>

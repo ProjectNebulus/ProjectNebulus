@@ -63,10 +63,14 @@
                                                  id="avatar{{ i }}_{{ j }}"
                                                  image-element
                                                  data-dropdown-placement="bottom-start"
-                                                 class="rounded-full ring-2 ring-gray-300 dark:ring-gray-500 cursor-pointer mb-3 rounded-full shadow-lg {% if "black" in avatar %} bg-gray-300 {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %} {% if a.title == "w-8 h-8mt-4" %} {% else %}
-                                                     w-6
-                                                     h-6
-                                                     {% endif %}"
+                                                 class="rounded-full ring-2 ring-gray-300 dark:ring-gray-500 cursor-pointer mb-3 rounded-full shadow-lg {% if "black" in avatar %} bg-gray-300 {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}
+                                                         {% if a.title == "
+                                                 w-8
+                                                 h-8mt-4
+                                                 {% else %}
+                                                 w-6
+                                                 h-6
+                                                 {% endif %}
                                                  src="{{ a.author_pic }}"
                                                  alt="{{ a.author }}'s profile picture">
                                             <br>
@@ -87,8 +91,8 @@
                                                     {% endif %}
                                                     <span class="bg-gray-300 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300 -mt-1"
                                                           course-name-element>
-                                                            {{ a.course.name }}
-                                                        </span>
+                                                        {{ a.course.name }}
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -115,7 +119,7 @@
                                             {% if a.imported_from|lower == "schoology" %}
                                                 <div data-tooltip-target="tooltip-default-{{ i }}"
                                                      style="float:right;
-                                                                margin:5px;">
+                                                            margin:5px;">
                                                     <img alt="Schoology Image"
                                                          src="/static/images/logos/schoology.png"
                                                          class="w-5 h-5">
@@ -138,7 +142,7 @@
                                                          alt="{{ a.author }}'s Profile Picture">
                                                     <span class="absolute  w-5 h-5 bg-green-400 border-2 border-white dark:border-gray-700 rounded-full"
                                                           style="left:90px;
-                                                                     top:85px;"></span>
+                                                                 top:85px;"></span>
                                                 </div>
                                                 <div>{{ a.author }}</div>
                                                 {% if a.author_email %}
@@ -185,8 +189,8 @@
                                             <span class="uppercase font-bold text-black dark:text-white ">Nebulus</span>
                                             in
                                             <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">
-                                                    Nebulus Auto-Generator
-                                                </span>
+                                                Nebulus Auto-Generator
+                                            </span>
                                         </p>
                                     </div>
                                     <div class="flex items-center">
@@ -225,46 +229,46 @@
                         {% set diff = (date - now).days %}
                         {% if diff < 0 %}
                             <h1 style="text-align: left;
-                                           background: orangered -webkit-linear-gradient(left,#ff7878,#ffb078);
-                                           -webkit-background-clip: text;
-                                           -webkit-text-fill-color: transparent;
-                                           margin: 13px;">
+                                       background: orangered -webkit-linear-gradient(left,#ff7878,#ffb078);
+                                       -webkit-background-clip: text;
+                                       -webkit-text-fill-color: transparent;
+                                       margin: 13px;">
                                 {{ strftime(date, "%a, %B %-d, %Y") }}
                                 ({{ -diff }}d Overdue)
                             </h1>
                         {% elif diff < 1 %}
                             <h1 style="text-align: left;
-                                           background: orange -webkit-linear-gradient(left,#ff78ed,#ffb378);
-                                           -webkit-background-clip: text;
-                                           -webkit-text-fill-color: transparent;
-                                           margin: 13px;">
+                                       background: orange -webkit-linear-gradient(left,#ff78ed,#ffb378);
+                                       -webkit-background-clip: text;
+                                       -webkit-text-fill-color: transparent;
+                                       margin: 13px;">
                                 {{ strftime(date, "%a, %B %-d, %Y") }}
                                 ({{ diff }}d remaining)
                             </h1>
                         {% elif diff < 3 %}
                             <h1 style="text-align: left;
-                                           background: yellow -webkit-linear-gradient(left,#ffc578,#fff878);
-                                           -webkit-background-clip: text;
-                                           -webkit-text-fill-color: transparent;
-                                           margin: 13px;">
+                                       background: yellow -webkit-linear-gradient(left,#ffc578,#fff878);
+                                       -webkit-background-clip: text;
+                                       -webkit-text-fill-color: transparent;
+                                       margin: 13px;">
                                 {{ strftime(date, "%a, %B %-d, %Y") }}
                                 ({{ diff }}d remaining)
                             </h1>
                         {% elif diff < 5 %}
                             <h1 style="text-align: left;
-                                           background: green -webkit-linear-gradient(left,#ffd978,#ddff78);
-                                           -webkit-background-clip: text;
-                                           -webkit-text-fill-color: transparent;
-                                           margin: 13px;">
+                                       background: green -webkit-linear-gradient(left,#ffd978,#ddff78);
+                                       -webkit-background-clip: text;
+                                       -webkit-text-fill-color: transparent;
+                                       margin: 13px;">
                                 {{ strftime(date, "%a, %B %-d, %Y") }}
                                 ({{ diff }}d remaining)
                             </h1>
                         {% else %}
                             <h1 style="text-align: left;
-                                           background: greenyellow -webkit-linear-gradient(left,#d9ff78,#78ffb7);
-                                           -webkit-background-clip: text;
-                                           -webkit-text-fill-color: transparent;
-                                           margin: 13px;">
+                                       background: greenyellow -webkit-linear-gradient(left,#d9ff78,#78ffb7);
+                                       -webkit-background-clip: text;
+                                       -webkit-text-fill-color: transparent;
+                                       margin: 13px;">
                                 {{ strftime(date, "%a, %B %-d, %Y") }}
                                 ({{ diff }}d remaining)
                             </h1>
@@ -353,11 +357,13 @@
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <div id="dueTime"
-                 class="absolute bottom-0 right-0 p-3 text-gray-200 dark:text-gray-500 text-sm">Due at 9:43 am
+                 class="absolute bottom-0 right-0 p-3 text-gray-200 dark:text-gray-500 text-sm">
+                Due at 9:43 am
             </div>
             <!-- Modal header -->
             <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600 relative">
-                <div id="header"></div>
+                <div id="header">
+                </div>
                 <button class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
                         data-modal-toggle="modal"
                         onclick="removeBackdrop()">
@@ -381,7 +387,8 @@
             <!-- Modal body -->
             <div class="p-6 space-y-6">
                 <div id="announcementBody"
-                     class="text-base leading-relaxed text-gray-500 dark:text-gray-400">stuff
+                     class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                    stuff
                 </div>
                 <button data-modal-toggle="modal"
                         onclick="removeBackdrop()"
@@ -392,7 +399,8 @@
                          viewBox="0 0 24 24"
                          xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M5 13l4 4L19 7"></path>
+                              d="M5 13l4 4L19 7">
+                        </path>
                     </svg>
                     Okay
                 </button>

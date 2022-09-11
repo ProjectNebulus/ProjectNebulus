@@ -44,18 +44,26 @@ def arcstuff():
 
 @main_blueprint.route("/privacy-policy")
 def pp():
-    return render_template("privacy.html", translate=getText, user=session.get("username"),
-                           email=session.get("email"),
-                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-                           homepage=True, )
+    return render_template(
+        "privacy.html",
+        translate=getText,
+        user=session.get("username"),
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        homepage=True,
+    )
 
 
 @main_blueprint.route("/terms-of-service")
 def tos():
-    return render_template("tos.html", translate=getText, user=session.get("username"),
-                           email=session.get("email"),
-                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-                           homepage=True, )
+    return render_template(
+        "tos.html",
+        translate=getText,
+        user=session.get("username"),
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        homepage=True,
+    )
 
 
 @main_blueprint.route("/select-a-region")

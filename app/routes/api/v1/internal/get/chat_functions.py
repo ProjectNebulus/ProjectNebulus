@@ -2,7 +2,6 @@ import datetime
 import json
 from datetime import timedelta
 
-import flask
 import requests
 from flask import request, session
 from flask.json import jsonify
@@ -11,10 +10,9 @@ from pandas import *
 
 from app.static.python.classes import User
 from app.static.python.mongodb import create, delete, read, update
-
-from ......static.python.classes import ChatMember
-from ......routes import socketio
 from ...internal import internal
+from ......routes import socketio
+from ......static.python.classes import ChatMember
 
 
 # from app.static.python.school import get_school

@@ -47,7 +47,7 @@
                              viewBox="0 0 24 24"
                              xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z">
+                                  d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z">
                             </path>
                         </svg>
                         <span>{{ folder.name }}</span>
@@ -56,7 +56,13 @@
             {% endfor %}
             <br>
             {% for document in course.documents %}
-                <div onclick="startFile('{{ document.name }}', siteName + '/getResource/{{ course.id }}/{{ document.id }}', {{ ("pdf" in document.url)|string|lower }})"
+            <div onclick="startFile('{{ document.name }}', siteName + '/getResource/{{ course.id }}/{{ document.id }}',
+{{ ("
+                     pdf
+                     in
+                     document.url
+                     string
+                     lower
                      class="editable p-6 mb-8 bg-white rounded-lg cursor-pointer border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 relative"
                      style="width: min-content; max-width: 90%">
                     <div class="edit-controls absolute flex bg-gray-500 dark:bg-gray-800 material-icons rounded-lg text-gray-200 dark:text-gray-500 overflow-hidden shadow"

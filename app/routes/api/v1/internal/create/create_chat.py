@@ -1,7 +1,7 @@
 from flask import request
 
-from .. import internal
 from app.static.python.mongodb.create import createChat
+from .. import internal
 
 
 @internal.route("/create/chat", methods=["POST"])

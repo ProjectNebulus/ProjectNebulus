@@ -7,27 +7,30 @@
         <div style="">
             <h1 class="dark:text-white text-4xl noselect">Your Profile</h1>
             <br>
-            <div style="border-radius: 10px;width: 500px;margin: 30px;overflow: hidden;" id="usercard">
-                <div style="background: linear-gradient(45deg, skyblue, orange);height: 80px;"></div>
+            <div style="border-radius: 10px;
+                        width: 500px;
+                        margin: 30px;
+                        overflow: hidden;"
+                 id="usercard">
+                <div style="background: linear-gradient(45deg, skyblue, orange);
+                            height: 80px;"></div>
                 <div style="text-align: left;padding: 30px;background: #374151;">
                     <button class="rounded-full border-gray-300 border-none w-24 h-24  dark:bg-gray-900 dark:hover:bg-gray-800 "
-                            style="
-    margin: 20px;
-    margin-top: -60px;
-">
+                            style=" margin: 20px; margin-top: -60px; ">
                         <logo image="{{ avatar }}" no-revert=""></logo>
                     </button>
                     <br style="">
-                    <p style="font-weight: 800; " class="text-black dark:text-white text-4xl">{{ user }}</p>
+                    <p style="font-weight: 800; "
+                       class="text-black dark:text-white text-4xl">{{ user }}</p>
                     <p style="color: darkgray;" class="text-2xl">{{ email }}</p>
                     <p>
-                        <br><br>
+                        <br>
+                        <br>
                         <span style="display:grid; grid-auto-flow: column; align-content: center; justify-content: center; "
                               class="noselect dark:text-white dark: bg-gray-800 p-6 m-6 rounded-lg noselect dark:text-white"
                               id="song">
                         </span>
                     </p>
-
                 </div>
             </div>
             <div style="height:80%;"

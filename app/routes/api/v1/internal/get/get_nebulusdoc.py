@@ -1,7 +1,7 @@
 from flask import request
 
-from .. import internal
 from app.routes.main import private_endpoint
+from .. import internal
 
 
 @internal.route("/get/nebulusdoc", methods=["POST"])

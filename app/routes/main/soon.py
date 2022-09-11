@@ -12,5 +12,5 @@ def soon():
         user=session.get("username"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-        translate=getText
+        translate=getText,
     )

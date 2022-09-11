@@ -1,7 +1,7 @@
 from flask import request
 
-from .. import internal
 from app.static.python.extensions.custom.plagarism import check_plagarism
+from .. import internal
 
 
 @internal.route("/plagarism", methods=["POST"])

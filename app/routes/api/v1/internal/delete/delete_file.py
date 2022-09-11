@@ -1,8 +1,8 @@
 from flask import request, session
 
-from ......static.python.mongodb.read import find_user
+from app.static.python.classes import Course
 from .. import internal
-from app.static.python.classes import Course, DocumentFile
+from ......static.python.mongodb.read import find_user
 
 
 @internal.route("/delete/file", methods=["POST"])

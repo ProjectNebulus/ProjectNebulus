@@ -1,7 +1,7 @@
 import datetime
 
 import requests
-from flask import render_template, request, session, redirect
+from flask import redirect, render_template, request, session
 from flask_cors import cross_origin
 
 from app.static.python.classes import Course, User
@@ -43,7 +43,6 @@ def course_page(page, **kwargs):
     if not request.args.get("iframe"):
         if page == "course":
             page = "documents"
-
 
     return render_template(
         f"courses/{page}.html",

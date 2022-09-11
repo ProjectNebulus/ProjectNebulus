@@ -1,7 +1,7 @@
 from flask import request
 
-from .. import internal
 from app.static.python.mongodb import delete
+from .. import internal
 
 
 @internal.route("/delete/user", methods=["POST"])

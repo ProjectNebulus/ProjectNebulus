@@ -23,7 +23,7 @@
     </div>
     {% include "utils/navbar.html" %}
     <div class="flex"
-         style="padding: 10%; text-align: center; background: linear-gradient(45deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/static/images/nebulusCats/IMG_1134.png'); height: 90%; min-height: 500px">
+         style="padding: 30px; text-align: center; background-size:cover !important; background: linear-gradient(45deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/static/images/nebulusCats/IMG_1134.png'); height: 90%; min-height: 500px">
         <div style="margin-top: 5vw" class="ml-6 w-full" data-aos="fade-left">
             <p data-aos-duration="500"
                class="text-8xl text-white dark:text-white "
@@ -40,16 +40,16 @@
             </p>
             <br>
             {% if user %}
-                    <a href="/app">
-                        <button class="text-base text-white bg-gradient-to-r from-green-400 via-blue-600 to-orange-400 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                            {{ translate("Launch Nebulus") }}
-                        </button>
-                    </a>
-                {% else %}
-                    <a data-aos-duration="2000" href="/signup">
-                        <button class="text-base text-white bg-gradient-to-r from-green-400 via-blue-600 to-orange-400 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                            {{ translate("Get Started for Free") }}
-                        </button>
+                <a href="/app">
+                    <button class="text-base text-white bg-gradient-to-r from-green-400 via-blue-600 to-orange-400 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                        {{ translate("Launch Nebulus") }}
+                    </button>
+                </a>
+            {% else %}
+                <a data-aos-duration="2000" href="/signup">
+                    <button class="text-base text-white bg-gradient-to-r from-green-400 via-blue-600 to-orange-400 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                        {{ translate("Get Started for Free") }}
+                    </button>
                     </a>
                 {% endif %}
                 <a data-aos-duration="2500" href="/about">

@@ -3,10 +3,10 @@ from datetime import datetime
 import schoolopy
 from flask import request, session
 
-from .. import internal
 from app.static.python.extensions.integrations.schoology import create_schoology_auth
 from app.static.python.mongodb import create, read, update
 from app.static.python.utils.colors import getColor
+from .. import internal
 
 auth = None
 key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
