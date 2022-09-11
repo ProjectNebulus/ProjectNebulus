@@ -2,8 +2,8 @@ from pathlib import Path
 
 from werkzeug.utils import secure_filename
 
-from ..mongodb import create
 from .utils import allowed_file, os, upload_file
+from ..mongodb import create
 
 """
 Status Codes:
@@ -44,7 +44,7 @@ def upload_document(file, course, folder):
         ]
         print(root_path)
         file_path = os.path.join(
-            f"{root_path}/app/static/",
+            f"/app/static/",
             str(mongo_document.pk) + "." + filename.split(".")[-1],
         )
         file.save(file_path)

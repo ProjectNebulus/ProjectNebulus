@@ -3,8 +3,8 @@ from pathlib import Path
 
 from werkzeug.utils import secure_filename
 
-from ..mongodb import create
 from .utils import allowed_file, upload_file
+from ..mongodb import create
 
 """
 Status Codes:
@@ -35,7 +35,7 @@ def upload_avatar(file, parent, parent_id):
         ]
         print(root_path)
         file_path = os.path.join(
-            f"{root_path}/app/static/UserContent/Avatars/{parent}",
+            f"/app/static/UserContent/Avatars/{parent}",
             str(mongo_document.id) + "." + filename.split(".")[-1],
         )
         file.save(file_path)
