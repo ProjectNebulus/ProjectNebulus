@@ -5,6 +5,7 @@ function openBlocked() {
         contentType: 'application/json',
         data: JSON.stringify({})
     }).done((data) => {
+        document.getElementById("pageTitle").innerText = "Blocked";
         document.getElementById('members-sidebar').style.display = 'none';
         document.getElementById('main-area').style.display = 'none';
         document.getElementById('blocked').style.display = 'block';

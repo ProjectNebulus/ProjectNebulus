@@ -144,7 +144,7 @@ function getChat(chatID) {
                 if (other['user']['_id'] !== userID && chat['members'].length === 2)
                     other_color = color;
                 chatMembers += `
-<div oncontextmenu='profile(this)' style="margin-bottom:4px;"
+<div oncontextmenu='profile(this)' style="margin-bottom:15px;"
          class="p-2 flex items-center space-x-4 dark:bg-gray-800/50 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" id="member_${other['_id']}">`;
                 chatMembers += `<div class="relative">
 <img class="w-10 h-10 rounded-full" src="${other['user']['avatar']['avatar_url']}" alt="${other['user']['username']}'s Profile Picture">

@@ -128,86 +128,72 @@
                         width:270px;"
                  class="noselect h-full justify-start"
                  aria-label="Sidebar">
-                <div class="px-3 py-4 overflow-y-auto rounded bg-gray-100/75 dark:bg-gray-800/75 h-full"
+                <div class="px-3 py-4 overflow-y-auto rounded h-full"
                      id="chat-sidebar">
-                    <form>
-                        <label for="default-search"
-                               class="mb-2 text-xs text-gray-900 sr-only dark:text-stone-400">
-                            Search or start a conversation
-                        </label>
-                        <div class="relative">
-                            <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                                <svg class="w-5 h-5 text-gray-500 dark:text-gray-400"
-                                     fill="none"
-                                     stroke="currentColor"
-                                     viewBox="0 0 24 24"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z">
-                                    </path>
-                                </svg>
-                            </div>
-                            <input type="search"
-                                   id="default-search"
-                                   class="block p-2 pl-10 pr-0 w-full text-2xs text-gray-900 bg-gray-50 rounded-md border border-gray-300 focus:ring-slate-900 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                   placeholder="Find or Start a Conversation"
-                                   style="font-size:15px;"
-                                   required>
-                        </div>
-                    </form>
                     <div class="flex flex-col w-full rounded-sm ">
-                        <div id="friends_btn"
-                             onclick="openFriends()"
-                             class="flex flex-row dark:hover:bg-zinc-700 hover:bg-gray-200 rounded-lg">
-                            <div style="margin-bottom:0;" class="flex items-center space-x-4">
-                                <i class="material-icons text-black dark:text-stone-400"
+                        <script>
+                            document.getElementById("navbartitle").innerText = "Chat";
+                            document.getElementById('pageTitle').innerHTML = `Chat`;
+                            document.getElementById("changePage").innerHTML = `
+     <ul class="py-1 text-sm text-gray-700 dark:text-gray-200 align-left" aria-labelledby="dropdownDefault">
+
+                            <li>
+                            <a style="text-align: left;" id="friends_btn"
+                             onclick="openFriends()" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+ <i class="material-icons text-black dark:text-stone-400"
                                    style="font-size:30px;
-                                          margin:10px;">group</i>
-                                <div class="space-y-1 text-md dark:text-stone-400">
-                                    <div>Friends</div>
+                                          margin:10px; display:inline-block; vertical-align:middle; ">group</i>
+                                <span style="
+    display: inline-block;
+" class="space-y-1 text-md dark:text-stone-400">
+                                    <span>Friends</span>
                                 </div>
-                            </div>
-                            <div class="inline-flex items-center mt-4 p-1 mr-3 h-5 w-5 text-sm font-semibold text-white rounded-full bg-red-500"
+
+                            <span style="
+    display: inline-block;
+" class="inline-flex items-center mt-4 p-1 mr-3 h-5 w-5 text-sm font-semibold text-white rounded-full bg-red-500"
                                  style="margin-left: 100px;">
                                 {{ user_obj.chatProfile.incomingFriendRequests|length }}
-                            </div>
-                        </div>
-                        <div id="blocked_btn"
-                             onclick="openBlocked()"
-                             style="margin-bottom:0;"
-                             class="flex items-center space-x-4 dark:hover:bg-zinc-700 hover:bg-gray-200 rounded-lg">
-                            <i class="material-icons text-black dark:text-stone-400"
-                               style="font-size:30px;
-                                      margin:10px;">block</i>
-                            <div class="space-y-1 text-md dark:text-stone-400">
+                                </span>
+                                </a>
+                        </li><li>
+                            <a style="text-align: left;"  id="blocked_btn"
+                             onclick="openBlocked()" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"> <i class="material-icons text-black dark:text-stone-400" style="font-size:30px;
+                                      margin:10px; display:inline-block; vertical-align:middle;">block</i>
+                            <span style="
+    display: inline-block;
+" class="space-y-1 text-md dark:text-stone-400">
                                 <div>Blocked</div>
-                            </div>
-                        </div>
-                        <div id="emojis_btn"
-                             onclick="toggleEmoji()"
-                             style="margin-bottom:0;"
-                             class="flex items-center space-x-4 dark:hover:bg-zinc-700 hover:bg-gray-200 rounded-lg">
-                            <i class="material-icons text-black dark:text-stone-400"
-                               style="font-size:30px;
-                                      margin:10px;">mood</i>
-                            <div class="space-y-1 text-md dark:text-stone-400">
-                                <div>Emojis</div>
-                            </div>
-                        </div>
-                        <div id="email_btn"
-                             onclick="toggleEmail();"
-                             style="margin-bottom:0;"
-                             class="flex items-center space-x-4 dark:hover:bg-zinc-700 hover:bg-gray-200 rounded-lg">
-                            <i class="material-icons text-black dark:text-stone-400"
-                               style="font-size:30px;
-                                      margin:10px;">mail</i>
-                            <div class="space-y-1 text-md dark:text-stone-400">
-                                <div>Emails</div>
-                            </div>
-                        </div>
+                            </span></a>
+                        </li>
+                        <li>
+                            <a style="text-align: left;" id="emojis_btn"
+                             onclick="toggleEmoji()" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"> <i class="material-icons text-black dark:text-stone-400" style="font-size:30px;
+                                      margin:10px; display:inline-block; vertical-align:middle;">mood</i>
+                            <span style="
+    display: inline-block;
+" class="space-y-1 text-md dark:text-stone-400">
+                                Emojis
+                            </span></a>
+                        </li>
+                        <li>
+                            <a style="text-align: left;" id="email_btn"
+                             onclick="toggleEmail();" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"> <i class="material-icons text-black dark:text-stone-400" style="font-size:30px;
+                                      margin:10px; display:inline-block; vertical-align:middle;">mail</i>
+                            <span style="
+    display: inline-block;
+" class="space-y-1 text-md dark:text-stone-400">
+                                Emails
+                            </span></a>
+                        </li>
+
+
+                    </ul>`
+                        </script>
                         <div class="flex flex-row">
                             <div class="uppercase text-xl text-gray-600 cursor-pointer"
-                                 style="font-size:15px;">Direct Messages</div>
+                                 style="font-size:15px;">Direct Messages
+                            </div>
                             <div style="float:right;
                                         font-size:15px;
                                         margin-left:80px;"
@@ -660,7 +646,7 @@
                                class="block mt-6 mb-6 p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
                     <a href="javascript:getChat(1538912503336140800)">
-                        <div style="margin-bottom:4px;"
+                        <div style="margin-bottom:15px;"
                              class="p-2 flex items-center space-x-4 dark:bg-gray-600 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg">
                             <div class="relative">
                                 <img class="w-10 h-10 rounded-full"
@@ -708,7 +694,7 @@
                                class="block mt-6 mb-6 p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
                     <a>
-                        <div style="margin-bottom:4px;"
+                        <div style="margin-bottom:15px;"
                              class="p-2 flex items-center space-x-4 dark:bg-gray-600 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg">
                             <div class="relative">
                                 <img class="w-10 h-10 rounded-full"
@@ -771,7 +757,7 @@
                         width: 240px;"
                  class="noselect"
                  id="members-sidebar">
-                <div class="px-3 py-4 overflow-y-auto rounded bg-gray-100/75 dark:bg-gray-800/75 h-full">
+                <div class="px-3 py-4 overflow-y-auto rounded h-full">
                     <form>
                         <label for="default-search"
                                class="mb-2 text-xs text-gray-900 sr-only dark:text-stone-400">
@@ -785,13 +771,13 @@
                                      viewBox="0 0 24 24"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z">
+                                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z">
                                     </path>
                                 </svg>
                             </div>
                             <input type="search"
                                    id="default-search"
-                                   class="block p-2 pl-10 pr-0 w-full text-2xs text-gray-900 bg-gray-50 rounded-md border border-gray-300 focus:ring-slate-900 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                   class="block border-0 p-2 pl-10 pr-0 w-full text-2xs text-gray-900 bg-gray-50 rounded-md focus:ring-slate-900 focus:border-blue-500 dark:bg-slate-800/75 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                    placeholder="Search this Chat"
                                    style="font-size:15px;"
                                    required>

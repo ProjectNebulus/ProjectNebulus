@@ -1,4 +1,5 @@
 function toggleChat() {
+    document.getElementById("pageTitle").innerText = "Chat";
     document.getElementById('members-sidebar').style.display = 'block';
     document.getElementById('main-area').style.display = 'block';
     document.getElementById('blocked').style.display = 'none';

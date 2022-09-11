@@ -3,7 +3,7 @@ function handleNewChat(chat, socket) {
     el.innerHTML = '';
     let s = ``;
     s += `
-    <div onclick="getChat('${chat['_id']}')" id="sidechat_${chat['_id']}" style="margin-bottom:4px;"
+    <div onclick="getChat('${chat['_id']}')" id="sidechat_${chat['_id']}" style="margin-bottom:15px;"
      class="p-2 flex items-center space-x-4 dark:bg-gray-800/50 bg-gray-30/500 dark:hover:bg-gray-700/50 hover:bg-gray-200/50  rounded-lg" >`;
     if (chat['members'].length === 2) {
         let other = chat['members'].filter(function (user) {

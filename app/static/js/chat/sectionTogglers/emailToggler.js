@@ -1,4 +1,5 @@
 function toggleEmail() {
+    document.getElementById("pageTitle").innerText = "Emails";
     document.getElementById('members-sidebar').style.display = 'none';
     document.getElementById('main-area').style.display = 'none';
     document.getElementById('blocked').style.display = 'none';

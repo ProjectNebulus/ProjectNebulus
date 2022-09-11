@@ -10,11 +10,11 @@ function load(data, getFirst = false) {
 
         if (data.indexOf(chat) === 0 && getFirst) {
             s += `
-        <div onclick="getChat('${chat['_id']}')" id="sidechat_${chat['_id']}" style="margin-bottom:4px;"
+        <div onclick="getChat('${chat['_id']}')" id="sidechat_${chat['_id']}" style="margin-bottom:15px;"
          class="p-2 flex items-center space-x-4 dark:bg-gray-600 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" >`;
         } else {
             s += `
-        <div onclick="getChat('${chat['_id']}')" id="sidechat_${chat['_id']}" style="margin-bottom:4px;"
+        <div onclick="getChat('${chat['_id']}')" id="sidechat_${chat['_id']}" style="margin-bottom:15px;"
          class="p-2 flex items-center space-x-4 dark:bg-gray-800/50 bg-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-lg" >`;
         }
         if (chat['members'].length === 2) {
@@ -56,8 +56,8 @@ function load(data, getFirst = false) {
                 status_text = '';
             }
             s += `
-        <div class="space-y-1 font-medium dark:text-white">
-            <div class="dark:text-gray-300" style="font-size:15px" id="${chat['_id']}_title" >${other['username']}</div>
+        <div class="space-y-1 font-medium dark:text-white chat_container">
+            <div class="chatnames dark:text-gray-300" style="font-size:15px" id="${chat['_id']}_title" >${other['username']}</div>
             <div class="text-sm text-gray-500 dark:text-gray-400" style="font-size:13px;">${status_emoji} ${status_text}</div>
         </div>
     </div>
