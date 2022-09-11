@@ -101,4 +101,5 @@ def settings():
         spotify=spotify,
         discord=discord,
         translate=getText,
+        points=read.find_user(username=session.get("username")).points,
     )

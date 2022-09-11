@@ -36,7 +36,7 @@
                     </span>
                 </a>
             </div>
-            {% if not user %}
+            {% if not user or homepage %}
                 <div class="hidden justify-between items-center w-full lg:flex md:w-auto md:order-1"
                      id="mobile-menu-2"
                      style="margin-left:5rem;margin-top:0.1rem">
@@ -75,7 +75,7 @@
                 </div>
             {% endif %}
         </div>
-        {% if user %}
+        {% if user and not homepage %}
             <div class="flex gap-4">
             <!-- Middle -->
             <button data-modal-toggle="searchModal"
@@ -124,6 +124,10 @@
                         <span>school</span>
                         Courses
                     </li>
+                    <li href="/courses">
+                        <span>school</span>
+                        Clubs / Extracurricular
+                    </li>
                     <li href="/calendar">
                         <span>event</span>
                         Calendar
@@ -135,6 +139,10 @@
                 </ul>
                 <ul>
                     <li class="text-gray-500 dark:text-gray-400 text-xl ml-4">Tools</li>
+                    <li href="/lunch">
+                        <span>timer</span>
+                        Lunch Planner
+                    </li>
                     <li href="/study">
                         <span>timer</span>
                         Study Timer
@@ -162,12 +170,22 @@
         </div>
 
         <!--Right -->
-        {% if user %}
+        {% if user and not homepage %}
             <button data-dropdown-toggle="control-center"
                     aria-label="Control Center"
                     class="rounded-full border-gray-300 border-none w-12 h-12 bg-gray-300 {% if "black" not in avatar %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}">
                 <logo image="{{ avatar }}" no-revert class="h-8 mx-auto my-auto"></logo>
             </button>
+        {% elif homepage %}
+            <div class="flex md:order-2">
+                <a href="/signin">
+                    <button id="login"
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        {{ translate("Launch Nebulus") }}
+                    </button>
+                </a>
+
+            </div>
         {% else %}
             <div class="flex md:order-2">
                 <a href="/signin">

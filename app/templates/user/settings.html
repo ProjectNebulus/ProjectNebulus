@@ -79,7 +79,7 @@
                                 <span onclick="open_pls('themeSettings')"
                                       class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                                     <span class="material-icons">palette</span>
-                                    Themes
+                                    Customizations
                                 </span>
                             </li>
                             <li>
@@ -93,7 +93,7 @@
                                 <span onclick="open_pls('badgeSettings')"
                                       class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                                     <span class="material-icons">badge</span>
-                                    Badges
+                                    Staff
                                 </span>
                             </li>
                             <li>
@@ -149,6 +149,20 @@
                                       class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                                     <span class="material-icons">timer</span>
                                     Screen Time
+                                </span>
+                            </li>
+                            <li>
+                                <span onclick="open_pls('pointSettings')"
+                                      class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    <span class="material-icons">monetization_on</span>
+                                    Points
+                                </span>
+                            </li>
+                            <li>
+                                <span onclick="open_pls('scheduleSettings')"
+                                      class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    <span class="material-icons">schedule</span>
+                                    Bell Schedule
                                 </span>
                             </li>
                             <li>
@@ -1527,6 +1541,34 @@
                             Screen Time
                         </h2>
                         <br>
+                    </div>
+                    <div id="pointSettings" style="display:none;">
+                        <div class="mt-6">
+                            <h1 class="text-3xl text-black dark:text-white">
+                                My Account
+                            </h1>
+                        </div>
+                        <br>
+                        <h2 id="general" class="text-2xl text-black dark:text-white">
+                            Points
+                        </h2>
+                        <br>
+                        <div class="flex flex-row">
+                            <div class="w-full">
+                                <br>
+                                <div class="p-6 bg-white/75 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800/75 dark:border-gray-700"
+                                     style="margin:10px; width:100%; ">
+                                    <span class="text-black dark:text-white">{{ points }} Points Earned. {{ points//10 }}% to 1000 Points</span>
+                                    <div class="w-full bg-gray-200 rounded-full h-6 dark:bg-gray-700">
+                                        <div class="h-6 rounded-full"
+                                             style="width: {{ points//10 }}%;
+                                                     background:linear-gradient(45deg, #7cff73, #cc73ff);">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
                     </div>
                     <div id="passwordSettings" style="display:none;">
                         <div class="mt-6">
