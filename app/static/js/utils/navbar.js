@@ -1,12 +1,12 @@
 if (document.title.includes("Nebulus - "))
     document.getElementById("pageTitle").innerHTML = document.title.replace("Nebulus - ", "")
 
-for (const element of document.querySelectorAll("#changePage li")) {
-    element.classList.add('py-2', 'px-4', 'hover:bg-gray-100', 'dark:hover:bg-gray-600', 'dark:hover:text-white', 'flex', 'gap-4', 'cursor-pointer');
+for (const element of document.querySelectorAll("#changePage li[href]")) {
+    element.classList.add('py-2', 'pl-4', 'pr-10', 'hover:bg-gray-100', 'dark:hover:bg-gray-600', 'dark:hover:text-white', 'flex', 'gap-4', 'cursor-pointer');
     element.addEventListener("click", () => window.open(element.getAttribute("href"), "_self"))
 }
 
-for (const element of document.querySelectorAll("#changePage li span"))
+for (const element of document.querySelectorAll("#changePage li[href] span"))
     element.classList.add("material-icons", "text-gray-600", "dark:text-gray-300")
 
 const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');

@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
     <script>
-        document.onclick = hideMenu;
-        document.oncontextmenu = rightClick;
+        if (localStorage.getItem("disableContextMenu") === null) {
+            document.onclick = hideMenu;
+            document.oncontextmenu = rightClick;
+        }
 
         function hideMenu() {
             document.getElementById(
@@ -13,8 +15,7 @@
         function rightClick(e) {
             e.preventDefault();
 
-            if (document.getElementById(
-                "contextMenu").style.display == "block")
+            if (document.getElementById("contextMenu").style.display === "block")
                 hideMenu();
             else {
                 var menu = document
@@ -24,6 +25,11 @@
                 menu.style.left = e.pageX + "px";
                 menu.style.top = e.pageY + "px";
             }
+        }
+
+        function disableContextMenu() {
+            localStorage.setItem("disableContextMenu", "");
+            location.reload();
         }
     </script>
     <style>
@@ -158,7 +164,19 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!--Title!-->
     <title>{{ page }}</title>
-    <script>const user = "{{ user }}";</script>
+    <script>
+        const user = "{{ user }}";
+
+        function showBranchPopup(branchName) {
+            document.getElementById("branchPopup").style.right = "1rem";
+            document.getElementById("branchName").innerHTML = branchName;
+            setTimeout(hideBranchPopup, 5000);
+        }
+
+        function hideBranchPopup() {
+            document.getElementById("branchPopup").style.right = "-30rem";
+        }
+    </script>
     <style>
         html {
             -webkit-background-size: cover !important;
@@ -167,9 +185,28 @@
             background-size: cover !important;
             transition: 0.3s;
         }
+
+        #branchPopup {
+            top: 5rem;
+            right: -30rem;
+            transition: 1s right ease;
+        }
     </style>
 </head>
 <body>
+<div id="branchPopup" class="fixed">
+    <div class="flex gap-2 place-items-center bg-gray-100 dark:bg-gray-700 p-4 pr-10 rounded-lg shadow shadow-lg relative
+     border border-gray-200 dark:border-gray-600 z-40">
+        <div class="absolute top-0 right-0 p-1 text-gray-200 dark:text-gray-700 material-icons"
+             style="padding-right: 4rem" onclick="hideBranchPopup()">close
+        </div>
+        <div class="material-icons text-4xl text-gray-500 dark:text-gray-400">info</div>
+        <div class="dark:text-white">
+            You are viewing the <strong style="font-weight: 900" id="branchName"></strong> branch
+        </div>
+    </div>
+</div>
+
 <script>
     AOS.init();
     localStorage.removeItem("currentTimer");

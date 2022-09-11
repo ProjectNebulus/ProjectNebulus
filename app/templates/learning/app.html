@@ -16,7 +16,7 @@
              style="flex: 0 0 70vw"
              class="pl-8 pr-4 border-r border-gray-200 dark:border-gray-700">
             <div class="flex justify-between place-items-center w-full mb-4">
-                <p class="dark:text-gray-500 text-2xl uppercase">Announcements</p>
+                <p class="dark:text-white text-4xl">Recent Activity</p>
                 <button class="p-1.5 hover:bg-blue-200 dark:hover:bg-gray-700 rounded-lg mt-5 text-black dark:text-white"
                         aria-label="Filter Events"
                         title="Filter Events">
@@ -32,7 +32,7 @@
                     </svg>
                 </button>
             </div>
-
+            <
             <div class="overflow-auto" style="max-height: 77vh">
                 <ol class="relative border-l border-gray-200 dark:border-gray-700 ml-2">
                     {% for i, tuple in enumerate(announcements.items()) %}
@@ -66,7 +66,8 @@
                                                  class="rounded-full ring-2 ring-gray-300 dark:ring-gray-500 cursor-pointer mb-3 rounded-full shadow-lg {% if "black" in avatar %} bg-gray-300 {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}
                                                          {% if a.title == "" %}
                                                  w-8
-                                                 h-8mt-4
+                                                 h-8
+                                                 mt-4
                                                  {% else %}
                                                  w-6
                                                  h-6
@@ -87,7 +88,7 @@
                                                         <span class="text-lg cursor-pointer hover:underline"
                                                               author-element
                                                               data-dropdown-toggle="userDropdown-{{ i }}_{{ j }}">{{ a.author }}</span>
-                                                        <span class="text-lg"></span>
+                                                        <span class="text-lg">></span>
                                                     {% endif %}
                                                     <span class="bg-gray-300 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300 -mt-1"
                                                           course-name-element>
@@ -214,8 +215,8 @@
         </div>
         <div id="right"
              style="flex: 0 0 30vw"
-             class="border-gray-200 dark:border-gray-700 border-l text-center h-full overflow-auto">
-            <p class="dark:text-gray-500 text-2xl uppercase text-left m-6">Events</p>
+             class="border-gray-200 dark:border-gray-700 border-l text-center h-full overflow-auto pt-4">
+            <p class="text-2xl text-black dark:text-white">Upcoming Events</p>
             <br>
             <div class="flex flex-col sm:rounded-lg min-w-full align-middle overflow-auto inline-block"
                  style="height: 80%">
