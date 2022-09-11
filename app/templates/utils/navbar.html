@@ -163,32 +163,32 @@
                      data-popper-placement="bottom">
                     <ul class="text-sm text-gray-700 dark:text-gray-200 align-left"
                         aria-labelledby="dropdownDefault">
-                        <li href="/app"
-                            class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex gap-4 cursor-pointer">
+                        <a href="/app"
+                           class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex gap-4 cursor-pointer">
                             <span class="material-icons text-gray-600 dark:text-gray-300">home</span>
                             App
-                        </li>
-                        <li href="/courses"
-                            class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex gap-4 cursor-pointer">
+                        </a>
+                        <a href="/courses"
+                           class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex gap-4 cursor-pointer">
                             <span class="material-icons text-gray-600 dark:text-gray-300">school</span>
                             Courses
-                        </li>
-                        <li href="/calendar"
-                            class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex gap-4 cursor-pointer">
+                        </a>
+                        <a href="/calendar"
+                           class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex gap-4 cursor-pointer">
                             <span class="material-icons text-gray-600 dark:text-gray-300">event</span>
                             Calendar
-                        </li>
-                        <li href="/planner"
-                            class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex gap-4 cursor-pointer">
+                        </a>
+                        <a href="/planner"
+                           class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex gap-4 cursor-pointer">
                             <span class="material-icons text-gray-600 dark:text-gray-300">event_note</span>
                             Planner
-                        </li>
+                        </a>
                     </ul>
                 </div>
                 <button style=" border-radius: 50%; float: left; margin-right:10px; "
                         data-dropdown-toggle="app_dropdown"
                         class="mx-4 hidden sm:flex items-center text-left space-x-3 w-12 h-12 dark:bg-slate-800/75 hover:bg-gray-700 text-white font-medium rounded-lg text-sm pl-4 py-2.5 text-center">
-                    <span style="font-size: 18px;" class="material-icons">school</span>
+                    <span style="font-size: 18px;" id="current_app" class="material-icons">school</span>
                 </button>
                 <div id="app_dropdown"
                      class="z-10 w-80 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 hidden"
