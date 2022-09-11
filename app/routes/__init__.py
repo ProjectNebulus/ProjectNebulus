@@ -90,6 +90,6 @@ def init_app():
     mail.init_app(app)
     logging.getLogger("werkzeug").addFilter(_LogFilter())
     default_handler.setFormatter(_LogFormatter())
-    socketio.init_app(app, async_mode="eventlet")
+    socketio.init_app(app, async_mode="eventlet", cors_allowed_origins="*")
 
     return app
