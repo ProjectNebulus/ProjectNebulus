@@ -35,28 +35,29 @@
             <p data-aos-duration="1500" class="text-2xl text-white dark:text-white">
                 Nebulus is a Learning Management System for students which
                 incorporates commonly used tools such as Schoology and Google Classroom.
-                Consisting of students from many regions of across the globe, our goal is to centralize everyone’s
-                learning experience in a single application.
+                Consisting of students from many regions of across the globe, our goal is to <span
+                    style="color:#57ff7e;">centralize</span> everyone’s
+                learning experience in a <span style="color:#57ff7e;">single</span> application.
             </p>
             <br>
             {% if user %}
                 <a href="/app">
-                    <button class="text-base text-white bg-gradient-to-r from-green-400 via-blue-600 to-orange-400 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                    <button class="text-base text-white bg-gradient-to-r from-green-400 to-blue-600 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
                         {{ translate("Launch Nebulus") }}
                     </button>
                 </a>
             {% else %}
                 <a data-aos-duration="2000" href="/signup">
-                    <button class="text-base text-white bg-gradient-to-r from-green-400 via-blue-600 to-orange-400 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                    <button class="text-base text-white bg-gradient-to-r from-green-400 to-blue-600 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
                         {{ translate("Get Started for Free") }}
                     </button>
-                    </a>
-                {% endif %}
-                <a data-aos-duration="2500" href="/about">
-                    <button class="text-base text-white bg-gradient-to-r from-red-400 to-pink-600 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                        {{ translate("Learn More") }}
-                    </button>
                 </a>
+            {% endif %}
+            <a data-aos-duration="2500" href="/about">
+                <button class="text-base text-white bg-gradient-to-r from-red-400 to-pink-600 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                    {{ translate("Learn More") }}
+                </button>
+            </a>
         </div>
     </div>
     <div class="dark:bg-gray-900 bg-white"
@@ -66,14 +67,19 @@
     <div data-aos-duration="2000" style=" margin: 30px; text-align: center; ">
         <h1 class="text-3xl text-black dark:text-white text-center"
             style=" font-weight: 800; ">
-            Are You Ready to Start Your Learning Journey?
+            Are You <span style="background: #57ff7e;
+              color: black;
+              padding: 10px;
+              margin: 5px;
+              border-radius: 5px;">Ready</span> to Start Your Learning Journey?
         </h1>
+        <br>
         <p class="text-gray-500">
-            Get rready to prepare for a brighter future in your education with Nebulus! It's free, and always will be
+            Get ready to prepare for a brighter future in your education with Nebulus! It's free, and always will be
             free.
         </p>
         <a href="/signup">
-            <button class="text-base text-white bg-gradient-to-r from-green-400 via-blue-600 to-orange-400 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+            <button class="text-base text-white bg-gradient-to-r from-green-400 to-blue-600 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
                     style=" margin: 30px; ">
                 Get Started Now!
             </button>

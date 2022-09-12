@@ -117,7 +117,7 @@ window.addEventListener('load', function () {
         'bg-red-500',
         'border-red-400'
     ];
-    const GRAY = ["bg-gray-800"];
+    const GRAY = ["dark:bg-gray-800/75"];
 
     const GREEN_BORDER = [
         'border',

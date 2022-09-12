@@ -10,66 +10,48 @@
     {% include "utils/navbar.html" %}
     <div style="margin:30px">
         <div style="width:49%; margin-right: 1%; height:100%">
-            <div class="dark:bg-gray-700 p-6 rounded-lg" style="
-    width: 700px;
-">
-                <p class="text-xl dark:text-white"><img src="{{ course.avatar.avatar_url }}" alt="Course Icon"
-                                                        class="object-cover rounded-lg inline-block"
-                                                        style="width: 40px;height: 40px;display: inline-block;margin: 10px;"><span
-                        style="
-    display: inline-block;
-    vertical-align: middle;
-">
-{{ course.name }}
-<img src="/static/images/logos/{{ course.imported_from }}.png" style="
-    width: 25px;
-    margin-left: 15px;
-    display: inline-block;
-    vertical-align: middle;
-"><br><span class="text-gray-500 text-sm">{{ course.teacher }} • {{ course.template }} Template • Imported from {{ course.imported_from }}</span></span>
+            <div class="dark:bg-gray-700 p-6 rounded-lg" style=" width: 700px; ">
+                <p class="text-xl dark:text-white">
+                    <img src="{{ course.avatar.avatar_url }}"
+                         alt="Course Icon"
+                         class="object-cover rounded-lg inline-block"
+                         style="width: 40px;
+                                    height: 40px;
+                                    display: inline-block;
+                                    margin: 10px;">
+                    <span style=" display: inline-block; vertical-align: middle; ">
+                            {{ course.name }}
+                            <img src="/static/images/logos/{{ course.imported_from }}.png"
+                                 style=" width: 25px; margin-left: 15px; display: inline-block; vertical-align: middle; ">
+                            <br>
+                            <span class="text-gray-500 text-sm">{{ course.teacher }} • {{ course.template }} Template • Imported from {{ course.imported_from }}</span></span>
                 </p>
-
-
-                <span class="text-xl dark:text-white" style="
-    margin-right: 10px;
-    display: inline-block;
-    vertical-align: middle;
-">
-                <i class="material-icons" style="margin-right: 20px;">campaign</i><span
+                <span class="text-xl dark:text-white"
+                      style=" margin-right: 10px; display: inline-block; vertical-align: middle; ">
+                            <i class="material-icons" style="margin-right: 20px;">campaign</i><span
                         class="text-gray-500">{{ course.announcements | length }}</span>
-            </span>
-                <span class="text-xl dark:text-white" style="
-    margin-right: 10px;
-    display: inline-block;
-    vertical-align: middle;
-">
-                <i class="material-icons" style="
-    margin-right: 20px;
-">folder</i><span class="text-gray-500">{{ course.folders | length }}</span>
-            </span>
-                <span class="text-xl dark:text-white" style="
-    margin-right: 10px;
-    display: inline-block;
-    vertical-align: middle;
-">
-                <i class="material-icons" style="margin-right: 20px;">description</i><span
+                        </span>
+                <span class="text-xl dark:text-white"
+                      style=" margin-right: 10px; display: inline-block; vertical-align: middle; ">
+                            <i class="material-icons" style=" margin-right: 20px; ">folder</i><span
+                        class="text-gray-500">{{ course.folders | length }}</span>
+                        </span>
+                <span class="text-xl dark:text-white"
+                      style=" margin-right: 10px; display: inline-block; vertical-align: middle; ">
+                            <i class="material-icons" style="margin-right: 20px;">description</i><span
                         class="text-gray-500">{{ course.documents | length }}</span>
-            </span>
-                <span class="text-xl dark:text-white" style="
-    margin-right: 10px;
-    display: inline-block;
-    vertical-align: middle;
-">
-                <i class="material-icons" style="margin-right: 20px;">bookmark</i><span
+                        </span>
+                <span class="text-xl dark:text-white"
+                      style=" margin-right: 10px; display: inline-block; vertical-align: middle; ">
+                            <i class="material-icons" style="margin-right: 20px;">bookmark</i><span
                         class="text-gray-500">{{ course.textbooks | length }}</span>
-            </span>
+                        </span>
             </div>
         </div>
         <div style="width:49%; margin-left:1%; height: 100%;"></div>
-
     </div>
     <script>const course_id = "{{ course_id }}"
-    document.getElementById("navbartitle").innerText = "Home";
+    // document.getElementById("navbartitle").innerText = "Home";
     document.getElementById('pageTitle').innerHTML = `
 
                         <span class="overflow-auto truncate" style="text-align:left; width:240px;"><img src="{{ course.avatar.avatar_url }}" alt="Course Icon" class="object-cover rounded-lg inline-block" style="width:40px; height:40px; margin: 10px;">

@@ -4,7 +4,9 @@
 <script type="module" src="https://unpkg.com/whatwg-fetch@3.6.2/fetch.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="https://cdn.skypack.dev/smile2emoji"></script>
-<script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
+<script src="https://cdn.socket.io/4.5.0/socket.io.min.js"
+        integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k"
+        crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.8/purify.min.js"></script>
 <script type="text/javascript" src="/static/js/main/main.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,9 +15,7 @@
 <script type="module" src="/static/js/chat/chat.js"></script>
 {% extends "layout.html" %}
 {% block main %}
-    <div style="height:10%;">
-    {% include "utils/navbar.html" %}
-    </div>
+    <div style="height:10%;">{% include "utils/navbar.html" %}</div>
     <div class="flex flex-row" style="height:90%;">
         <style>
             .message {
@@ -130,64 +130,39 @@
                         width:270px;"
                  class="noselect h-full justify-start"
                  aria-label="Sidebar">
-                <div class="px-3 py-4 overflow-y-auto rounded h-full"
-                     id="chat-sidebar">
+                <div class="px-3 py-4 overflow-y-auto rounded h-full" id="chat-sidebar">
                     <div class="flex flex-col w-full rounded-sm ">
                         <script>
-                            document.getElementById("navbartitle").innerText = "Chat";
+                            // document.getElementById("navbartitle").innerText = "Chat";
                             document.getElementById('pageTitle').innerHTML = `Chat`;
                             document.getElementById("current_app").innerText = "forum";
                             document.getElementById("changePage").innerHTML = `
      <ul class="py-1 text-sm text-gray-700 dark:text-gray-200 align-left" aria-labelledby="dropdownDefault">
 
                             <li>
-                            <a style="text-align: left;" id="friends_btn"
-                             onclick="openFriends()" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
- <i class="material-icons text-black dark:text-stone-400"
-                                   style="font-size:30px;
-                                          margin:10px; display:inline-block; vertical-align:middle; ">group</i>
-                                <span style="
-    display: inline-block;
-" class="space-y-1 text-md dark:text-stone-400">
+                            <a style="text-align: left;" id="friends_btn" onclick="openFriends()" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+ <i class="material-icons text-black dark:text-white" style="margin-right:10px; display:inline-block; vertical-align:middle; ">group</i>
+                                <span style=" display: inline-block; " class="space-y-1 text-md dark:text-white">
                                     <span>Friends</span>
                                 </div>
 
-                            <span style="
-    display: inline-block;
-" class="inline-flex items-center mt-4 p-1 mr-3 h-5 w-5 text-sm font-semibold text-white rounded-full bg-red-500"
-                                 style="margin-left: 100px;">
+                            <span style=" display: inline-block; " class="inline-flex items-center mt-4 p-1 mr-3 h-5 w-5 text-sm font-semibold text-white rounded-full bg-red-500" style="margin-left: 100px;">
                                 {{ user_obj.chatProfile.incomingFriendRequests|length }}
                                 </span>
                                 </a>
                         </li><li>
-                            <a style="text-align: left;"  id="blocked_btn"
-                             onclick="openBlocked()" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"> <i class="material-icons text-black dark:text-stone-400" style="font-size:30px;
-                                      margin:10px; display:inline-block; vertical-align:middle;">block</i>
-                            <span style="
-    display: inline-block;
-" class="space-y-1 text-md dark:text-stone-400">
+                            <a style="text-align: left;"  id="blocked_btn" onclick="openBlocked()" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"> <i class="material-icons text-black dark:text-white" style="margin-right:10px; display:inline-block; vertical-align:middle;">block</i>
+                            <span style=" display: inline-block; " class="space-y-1 text-md dark:text-white">
                                 <div>Blocked</div>
                             </span></a>
                         </li>
                         <li>
-                            <a style="text-align: left;" id="emojis_btn"
-                             onclick="toggleEmoji()" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"> <i class="material-icons text-black dark:text-stone-400" style="font-size:30px;
-                                      margin:10px; display:inline-block; vertical-align:middle;">mood</i>
-                            <span style="
-    display: inline-block;
-" class="space-y-1 text-md dark:text-stone-400">
-                                Emojis
-                            </span></a>
+                            <a style="text-align: left;" id="emojis_btn" onclick="toggleEmoji()" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"> <i class="material-icons text-black dark:text-white" style="margin-right:10px; display:inline-block; vertical-align:middle;">mood</i>
+                            <span style=" display: inline-block; " class="space-y-1 text-md dark:text-white">Emojis</span></a>
                         </li>
                         <li>
-                            <a style="text-align: left;" id="email_btn"
-                             onclick="toggleEmail();" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"> <i class="material-icons text-black dark:text-stone-400" style="font-size:30px;
-                                      margin:10px; display:inline-block; vertical-align:middle;">mail</i>
-                            <span style="
-    display: inline-block;
-" class="space-y-1 text-md dark:text-stone-400">
-                                Emails
-                            </span></a>
+                            <a style="text-align: left;" id="email_btn" onclick="toggleEmail();" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"> <i class="material-icons text-black dark:text-white" style="margin-right:10px; display:inline-block; vertical-align:middle;">mail</i>
+                            <span style=" display: inline-block; " class="space-y-1 text-md dark:text-white">Emails</span></a>
                         </li>
 
 
@@ -233,13 +208,12 @@
                                          viewBox="0 0 20 20"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd"
-                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
-                                        clip-rule="evenodd">
+                                              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                                              clip-rule="evenodd">
                                         </path>
                                     </svg>
                                     <div class="mt-2">
-                                        <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32 mb-2">
-                                        </div>
+                                        <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32 mb-2"></div>
                                         <div class="w-48 mb-2 mb-1 h-2 bg-gray-200 rounded-full dark:bg-gray-700">
                                         </div>
                                         <div class="w-48  h-2 bg-gray-200 rounded-full dark:bg-gray-700">
@@ -763,7 +737,7 @@
                 <div class="px-3 py-4 overflow-y-auto rounded h-full">
                     <form>
                         <label for="default-search"
-                               class="mb-2 text-xs text-gray-900 sr-only dark:text-stone-400">
+                               class="mb-2 text-xs text-gray-900 sr-only dark:text-white">
                             Search
                         </label>
                         <div class="relative">
