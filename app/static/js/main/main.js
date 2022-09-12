@@ -97,16 +97,6 @@ function invertSite() {
         for (const logo of document.getElementsByTagName('logo'))
             if (!logo.getAttribute('no-revert')) logo.style.filter = 'brightness(100%)';
     } else {
-        if (window.location.href.endsWith('/')) {
-            let wallpaper = localStorage.getItem('wallpaper');
-            if (wallpaper === null) {
-                document.body.style.backgroundImage = '';
-            } else {
-                document.body.style.background = `linear-gradient( rgba(256, 256, 256, 0.5), rgba(256, 256, 256, 0.2) ), url('${wallpaper}') no-repeat center center fixed`;
-                document.body.style.backgroundSize = 'cover';
-            }
-            document.body.style.backgroundColor = 'white';
-        }
 
         if (banner) banner.style.filter = 'brightness(70%)';
 
