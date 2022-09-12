@@ -8,6 +8,12 @@ function resetScreen() {
 
 let prevScreen;
 
+function open_sso() {
+    document.getElementById("main").style.display = "none";
+    document.getElementById("sso").style.display = "block";
+
+}
+
 function recaptchaScreen() {
     let screen;
     for (screen of [main, reset, code]) {
