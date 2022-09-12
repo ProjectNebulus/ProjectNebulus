@@ -16,7 +16,7 @@
     <div style="width:100%;">
         <div class="pl-3 bg-gray-100/75 dark:bg-gray-800/75">
             <h1 style="margin-left:35px;" class="text-black dark:text-white text-3xl">Start a new document!</h1>
-            <div class="w-full grid gap-4 justify-center"
+            <div class="w-full grid gap-4"
                  style="grid-template-columns: repeat(auto-fit, 13rem)">
                 <div class="flex flex-col">
                     <div class="document rounded-md"
@@ -124,7 +124,7 @@
                         <br>
                         <p style="margin-left:35px;" class="text-black dark:text-white">No Documents Yet!</p>
                     {% endif %}
-                    <div class="w-full grid gap-4 justify-center"
+                    <div class="w-full grid gap-4"
                          style="grid-template-columns: repeat(auto-fit, 13rem)">
                         {% for doc in docs %}
                             <a href="/docs/document/{{ doc.id }}">
