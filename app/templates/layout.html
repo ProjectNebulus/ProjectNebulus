@@ -1,6 +1,19 @@
 <!--Style Sheets!-->
 <html lang="en">
 <head>
+    <script src="/static/progress.js-0.1.0/minified/progress.min.js"></script>
+    <link rel="stylesheet" src="/static/progress.js-0.1.0/minified/progressjs.min.css">
+    <script type="module">
+        //to set progress-bar for whole page
+        //import {progressJs} from "/static/progress.js-0.1.0";
+        // import {progressJs} from "/static/progress.js-0.1.0/minified/progress.min.js";
+
+        {#progressJs().start();#}
+        //or for specific element
+        //progressJs("#targetElement").start();
+        progressJs().setOption("theme", "black");
+        progressJs("#thebody").start();
+    </script>
     <style>
         body::-webkit-scrollbar {
             display: none;
@@ -202,6 +215,7 @@
     <meta property="og:description"
           content="Nebulus is a modern Learning Management System that centralizes everyone’s learning experience into a single application. It’s perfect for Students, Teachers, Parents, and Schools!"/>
     <meta name="twitter:card" content="summary_large_image">
+
     <meta name="theme-color" content="#AC7AFF">
     <meta property="og:site_name" content="Nebulus.">
     <meta property="og:locale" content="en_US">
@@ -213,6 +227,7 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!--Title!-->
     <title>{{ page }}</title>
+
     <script>
         const user = "{{ user }}";
 
