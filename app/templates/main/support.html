@@ -104,7 +104,7 @@
                         body: JSON.stringify(webhookmsg),
                     });
 
-                    console.log(response)
+                    console.log(response.text())
 
                     if (response.ok) {
                         alert('Message sent! We should reply back in about 2 hours.');
