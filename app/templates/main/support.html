@@ -6,26 +6,12 @@
         <head>
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <script src="https://cdn.tailwindcss.com/"></script>
-          <!--temporary fix ._.-->
+          <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
         </head>
         <body>
-  
-            <script>
-            
-                function toggledropdown(){
-                  if (document.getElementById('dropdown').classList.contains('hidden')) {
-                    document.getElementById('dropdown').classList.remove('hidden')
-                    document.getElementById('dropdown').classList.add('block')
-                  } else {
-                    document.getElementById('dropdown').classList.remove('block') 
-                    document.getElementById('dropdown').classList.add('hidden')
-                  }
-                }
-              </script>
           
-              <center><form class="mt-8">
-                <div class="inline-block bg-gradient-to-b from-[#3F83F8] to-[#3FF8C0] rounded-tl-md rounded-bl-md h-[440px] w-[206px] mr-0"></div>
+              <center><form onsubmit="sendform()">
+                <div class="mt-8 inline-block bg-gradient-to-b from-[#3F83F8] to-[#3FF8C0] rounded-tl-md rounded-bl-md h-[440px] w-[206px] mr-0"></div>
                 
                 <div class="px-6 py-4 inline-block bg-[#F8F8F8] rounded-tr-md rounded-br-md h-[440px] w-[446px] ml-[-4px]" style="vertical-align: top">
           
@@ -36,11 +22,11 @@
                         <span class="inline-flex items-center px-2 py-[4px] text-sm rounded-l-md border border-r-0 border-[#0066FF] bg-white border-2 text-gray-900">
                           @
                         </span>
-                        <input type="text" class=" rounded-r-md bg-white border border-2 border-[#0066FF] text-gray-900 block flex-1 min-w-0 w-full text-sm p-2" placeholder="Email">
+                        <input id="useremail" type="text" class=" rounded-r-md bg-white border border-2 border-[#0066FF] text-gray-900 block flex-1 min-w-0 w-full text-sm p-2" placeholder="Email">
                       </div>
             
                               
-                      <button id="dropdownDefault" data-dropdown-toggle="dropdown" class="text-gray-900 bg-white font-medium rounded-md text-sm px-4 py-[4px] text-center flex border-2 border-[#0066FF] h-[32px] w-[194px] inline-block" style="justify-content: space-between" type="button" onclick="toggledropdown()">Category <svg class="ml-2 w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+                      <button id="usercategory" data-dropdown-toggle="dropdown" class="text-gray-900 bg-white font-medium rounded-md text-sm px-4 py-[4px] text-center flex border-2 border-[#0066FF] h-[32px] w-[194px] inline-block" style="justify-content: space-between" type="button" onclick="toggledropdown()">Category <svg class="ml-2 w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
                       <div id="dropdown" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100" data-popper-placement="bottom" style="position: absolute; inset: 0px auto auto 0px; margin: 0px;">
                           <ul class="py-1 text-sm text-gray-700" aria-labelledby="dropdownDefault">
                             <li>
@@ -67,18 +53,76 @@
                     </label>
                   </div>
           
-                  <input class="h-[32px] w-[395px] rounded-md bg-white border border-2 border-[#0066FF] text-gray-900 w-full text-sm p-2 mb-4" placeholder="Title"/>
+                  <input id="usertitle" class="h-[32px] w-[395px] rounded-md bg-white border border-2 border-[#0066FF] text-gray-900 w-full text-sm p-2 mb-4" placeholder="Title"/>
           
-                  <textarea id="message" rows="4" class="h-[126px] w-[395px] rounded-md bg-white border border-2 border-[#0066FF] text-gray-900 w-full text-sm p-2 mb-2" placeholder="Your message..."></textarea>
+                  <textarea id="usermessage" rows="4" class="h-[126px] w-[395px] rounded-md bg-white border border-2 border-[#0066FF] text-gray-900 w-full text-sm p-2 mb-2" placeholder="Your message..."></textarea>
           
-                  <button class="text-white py-2.5 px-4 w-[104px] bg-[#3F83F8] ml-[293px] rounded-lg">
+                  <button type="submit" id="sendbtn" class="text-white py-2.5 px-4 w-[104px] bg-[#3F83F8] ml-[293px] rounded-lg">
                     Send&nbsp; <svg style="color: white; height: 16px; float:right;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" ><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M511.6 36.86l-64 415.1c-1.5 9.734-7.375 18.22-15.97 23.05c-4.844 2.719-10.27 4.097-15.68 4.097c-4.188 0-8.319-.8154-12.29-2.472l-122.6-51.1l-50.86 76.29C226.3 508.5 219.8 512 212.8 512C201.3 512 192 502.7 192 491.2v-96.18c0-7.115 2.372-14.03 6.742-19.64L416 96l-293.7 264.3L19.69 317.5C8.438 312.8 .8125 302.2 .0625 289.1s5.469-23.72 16.06-29.77l448-255.1c10.69-6.109 23.88-5.547 34 1.406S513.5 24.72 511.6 36.86z" fill="white"></path></svg>
                   </button>
           
                   
                 </div>
-              </form>
-              </center>
+                </form>
+            </center>
+
+            <script>
+
+                async function sendform() {
+                    //ev.preventDefault();
+
+                    const useremail = document.getElementById('useremail').value;
+                    const usermsg = document.getElementById('usermessage').value;
+                    //const usercategory = document.getElementById('usercategory').value;
+                    const usertitle = document.getElementById('usertitle').value;
+                    //const userfile = get the file somehow
+
+                    console.log(useremail, usermsg, usertitle)
+
+                    const webhookmsg = {
+                        embeds: [{
+                            title: 'New Support Form:',
+                            fields: [
+                            { name: 'Email:', value: useremail },
+                            //{ name: 'Category: ', value: usercategory },
+                            { name: 'Title: ', value: usertitle },
+                            { name: 'Message: ', value: usermsg }
+                            ]
+                        }],
+                    };
+
+                    const webhookurl = 'https://discord.com/api/webhooks/1019052484423069738/Fk9oxCPKQsde0i2kuwRWjJV7UoIpjqaNi1hl3Y2ATOkAUTkf0bygksS2h_GUKiWwfCT3';
+
+                    const response = await fetch(webhookurl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(webhookmsg),
+                    });
+
+                    console.log(response)
+
+                    if (response.ok) {
+                        alert('Message sent! We should reply back in about 2 hours.');
+                        console.log('Worked')
+                    } else {
+                        alert('There was an error sending your form. Please try again later.');
+                        console.log('failed')
+                    }
+                }
+
+                function toggledropdown(){
+                  if (document.getElementById('dropdown').classList.contains('hidden')) {
+                    document.getElementById('dropdown').classList.remove('hidden')
+                    document.getElementById('dropdown').classList.add('block')
+                  } else {
+                    document.getElementById('dropdown').classList.remove('block') 
+                    document.getElementById('dropdown').classList.add('hidden')
+                  }
+                }
+
+              </script>
               
         </body>
     </html>
