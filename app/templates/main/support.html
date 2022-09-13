@@ -80,11 +80,11 @@
                     console.log(useremail, usermsg, usertitle)
 
                     const webhookmsg = {
+                        username: 'Nebulus Bugs',
+                        content: 'Incoming Support Ticker: ',
+                        avatar_url: 'https://nebulus.app/static/images/NebulusSpecialLogo.png',
                         embeds: [{
                             title: 'New Support Form:',
-                            content: 'Incoming Support Ticker!',
-                            username: 'Nebulus Bugs',
-                            avatar_url: 'https://nebulus.app/static/images/NebulusSpecialLogo.png',
                             fields: [
                                 {name: 'Email:', value: useremail},
                                 //{ name: 'Category: ', value: usercategory },
