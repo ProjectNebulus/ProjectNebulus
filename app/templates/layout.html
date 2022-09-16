@@ -11,8 +11,8 @@
         {#progressJs().start();#}
         //or for specific element
         //progressJs("#targetElement").start();
-        progressJs().setOption("theme", "black");
-        progressJs("#thebody").start();
+        //progressJs().setOption("theme", "black");
+        //progressJs("#thebody").start();
     </script>
     <style>
         body::-webkit-scrollbar {
@@ -87,7 +87,10 @@
         }
 
         function disableContextMenu() {
-            localStorage.setItem("disableContextMenu", "");
+            if (localStorage.getItem("disableContextMenu") === null)
+                localStorage.setItem("disableContextMenu", "");
+            else
+                localStorage.removeItem("disableContextMenu");
             location.reload();
         }
     </script>

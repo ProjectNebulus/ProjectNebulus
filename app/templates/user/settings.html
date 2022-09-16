@@ -222,7 +222,7 @@
                                        value="{{ session.get('username') }}"
                                        class="bg-gray-50/75 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block dark:bg-gray-800/75 dark:border-gray-600 dark:focus:border-blue-500 dark:placeholder-gray-400 dark:text-white w-full pl-10 p-2.5 dark:focus:ring-blue-500">
                             </div>
-                            <button data-modal-toggle=""
+                            <button data-modal-toggle="usernameModal"
                                     style="margin-top: 20px;"
                                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                 Change
@@ -252,7 +252,7 @@
                                        class="bg-gray-50/75 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-800/75 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                        placeholder="">
                             </div>
-                            <button data-modal-toggle="#change-password"
+                            <button data-modal-toggle="passwordModal"
                                     style="margin-top: 20px;"
                                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                 Change
@@ -280,7 +280,7 @@
                                        class="bg-gray-50/75 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-800/75 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                        placeholder="">
                             </div>
-                            <button data-modal-toggle=""
+                            <button data-modal-toggle="emailModal"
                                     style="margin-top: 20px;"
                                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                 Change
@@ -550,7 +550,7 @@
                                     <div class="tooltip-arrow" data-popper-arrow>
                                     </div>
                                 </div>
-                                <div onclick="newwindow=window.open('/canvas','Authorize with Canvas','height=400,width=900')"
+                                <div onclick="window.location.href = '/canvas'"
                                      style="float:left;
                                             margin:10px;
                                             width:80px;
@@ -595,7 +595,7 @@
                                     <div class="tooltip-arrow" data-popper-arrow>
                                     </div>
                                 </div>
-                                <div onclick="newwindow=window.open('/discord','Authorize with Discord','height=900,width=600')"
+                                <div onclick="window.location.href = '/discord'"
                                      style="float:left;
                                             margin:10px;
                                             width:80px;
@@ -618,7 +618,7 @@
                                     <div class="tooltip-arrow" data-popper-arrow>
                                     </div>
                                 </div>
-                                <div onclick="newwindow=window.open('/spotify','Authorize with Spotify','height=950,width=570')"
+                                <div onclick="window.location.href = '/spotify';"
                                      style="float:left;
                                             margin:10px;
                                             width:80px;
@@ -1222,8 +1222,48 @@
                         </div>
                         <br>
                         <h2 id="general" class="text-2xl text-black dark:text-white">
-                            Theme Settings
+                            Customizations
                         </h2>
+                        <script>
+                            if (localStorage.getItem("disableContextMenu") === "") {
+                                document.getElementById("sss").innerHTML = `
+                                 <label onclick="disableContextMenu()" for="toggle-example-checked" class="flex relative items-center mb-4 cursor-pointer">
+                            <input type="checkbox" id="toggle-example-checked" class="sr-only" checked="">
+                            <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600">
+                            </div>
+                            <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Hide Nebulus Right Click Menu</span>
+                        </label>`;
+                            } else {
+
+                                document.getElementById("sss").innerHTML = `
+                                 <label for="default-toggle" class="inline-flex relative items-center cursor-pointer">
+  <input onclick="disableContextMenu()"  type="checkbox" value="" id="default-toggle" class="sr-only peer">
+  <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+  <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Show  Nebulus Right Click Men</span>
+</label>`;
+                            }
+                        </script>
+                        <div id="sss">
+
+                        </div>
+                        <br><br>
+                        <div class="flex items-center pl-4 rounded border border-gray-200 dark:border-gray-700">
+                            <input id="bordered-radio-1" type="radio" value="" name="bordered-radio"
+                                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="bordered-radio-1"
+                                   class="py-4 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Dark
+                                Mode</label>
+                        </div>
+                        <div class="flex items-center pl-4 rounded border border-gray-200 dark:border-gray-700">
+                            <input checked id="bordered-radio-2" type="radio" value="" name="bordered-radio"
+                                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="bordered-radio-2"
+                                   class="py-4 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Light
+                                Mode</label>
+                        </div>
+                        <br>
+
+
                         <br>
                     </div>
                     <div style="display:none;" id="appearanceSettings">
@@ -1597,6 +1637,7 @@
 
         function open_pls(id_name) {
             toggle_display("generalSettings");
+            toggle_display("pointSettings");
             toggle_display("profileSettings");
             toggle_display("connectionSettings");
             toggle_display("schoolSettings");
@@ -1905,7 +1946,7 @@
                                 <p>
                                     Email: <span id="email"></span>
                                 </p>
-                                <button onclick="window.close();"
+                                <button onclick="window.location.href = '/settings#connectionSettings';"
                                         type="button"
                                         class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
                                     <svg style="display:inline-block;"
@@ -1914,8 +1955,8 @@
                                          viewBox="0 0 20 20"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd"
-                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                        clip-rule="evenodd">
+                                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                              clip-rule="evenodd">
                                         </path>
                                     </svg>
                                     OK, Close Window
@@ -1931,6 +1972,60 @@
                             class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                         Cancel
                     </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="passwordModal" tabindex="-1" aria-hidden="true"
+         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+        <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <!-- Modal header -->
+                <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                        Change your Password
+                    </h3>
+                    <button type="button"
+                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                            data-modal-toggle="passwordModal">
+                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                  clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <div class="p-6 space-y-6">
+                    <div class="mb-6">
+                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Old
+                            Password</label>
+                        <input type="password" id="password"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">New
+                            Password</label>
+                        <input type="password" id="password"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Confirm
+                            New Password</label>
+                        <input type="password" id="password"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               required>
+                    </div>
+                    <button type="submit"
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Change Password!
+                    </button>
+
                 </div>
             </div>
         </div>
