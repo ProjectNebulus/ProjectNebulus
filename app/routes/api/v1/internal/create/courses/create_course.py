@@ -20,6 +20,14 @@ def create_course():
     if not data["template"]:
         data["template"] = None
 
+    user = read.find_user(id=session['id'])
+    if user.type == "student":
+        #TODO: Figure out how to determine whether the course is imported
+        data["type"] = "Student"
+    elif user.type == "teacher":
+        data["type"] = "Native"
+        
+
     data["authorizedUsers"] = [session.get("id")]
     create.create_course(data)
     return "Course Created"
@@ -108,6 +116,7 @@ def create_google_course():
         "imported_from": "Google Classroom",
         "authorizedUsers": [session["id"]],
         "teacher": post_data["teacher"],
+        "type": "Imported",
     }
     course_obj = create.create_course(createcourse)
     image = getPFP(course["id"])
@@ -144,6 +153,7 @@ def create_canvas_course():
         "imported_from": "Canvas",
         "authorizedUsers": [session["id"]],
         "teacher": post_data["teacher"],
+        "type": "Imported",
     }
 
     course_obj = create.create_course(createcourse)
@@ -226,6 +236,7 @@ def create_schoology_course():
         "authorizedUsers": [session["id"]],
         "teacher": post_data["teacher"],
         "imported_id": str(section["id"]),
+        "type": "Imported",
     }
 
     course_obj = create.create_course(course)

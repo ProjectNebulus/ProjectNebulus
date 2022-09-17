@@ -81,9 +81,7 @@ class User(Snowflake):
     nebulus_documents = ListField(ReferenceField(NebulusDocument), default=[])
     points = IntField(default=0)
     premium = BooleanField(default=False)
-    is_staff = BooleanField(default=False)
-    student = BooleanField(default=True)
-    teacher = BooleanField(default=False)
+    type = StringField(options=["staff", "parent", "teacher", "student"], default="student")
     chats = ListField(ReferenceField("Chat"), default=[])
     chatProfile = EmbeddedDocumentField(ChatProfile)
 
