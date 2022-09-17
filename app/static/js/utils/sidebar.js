@@ -1,4 +1,4 @@
-let sidebar = document.getElementById("sidebar_");
+let sidebar = document.getElementById("sidebar");
 let override = false;
 sidebar.style.height = "calc(100%-" + document.getElementById("navbar").getBoundingClientRect().height + "px)";
 sidebar.onclick = () => {

@@ -22,4 +22,8 @@ def check_signin():
         session["avatar"] = user.avatar.avatar_url
         session["id"] = user.id
 
+        if user.is_staff:
+            print("Staff Login")
+            session["showPopup"] = True
+
     return str(validation)

@@ -16,8 +16,8 @@ function padWith0(num) {
 }
 
 if (localStorage.getItem('popup')) {
-    document.getElementById('sidebar_').classList.add('hidden');
-    document.getElementById('sidebar_').hidden = true;
+    document.getElementById('sidebar').classList.add('hidden');
+    document.getElementById('sidebar').hidden = true;
 }
 
 const pauseClasses = ['bg-yellow-300', 'border-yellow-400', 'hover:bg-yellow-500'];

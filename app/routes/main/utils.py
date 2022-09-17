@@ -18,10 +18,13 @@ def logged_in(func):
     def wrapper(*args, **kwargs):
         if session.get("username"):
             try:
-                read.find_user(id=session.get("id"))
-                return func(*args, **kwargs)
-            except KeyError:
+                read.find_user(pk=session.get("id"))
+            except KeyError as e:
+                print(e)
+                print(session)
                 return redirect("/logout")
+            
+            return func(*args, **kwargs)
         else:
             return redirect("/signin?redirect=" + request.path)
 
@@ -40,7 +43,7 @@ def private_endpoint(func):
         # the first parameter should be the flask server ip address, so change it to what the ip is for your server
 
         if (
-            str(user_ip) == "127.0.0.1" or "2600:1700:5450:7b08:9806:a9a9:a039:e92e"
+                str(user_ip) == "127.0.0.1" or "2600:1700:5450:7b08:9806:a9a9:a039:e92e"
         ):  # server ip
             return func(*args, **kwargs)
         else:

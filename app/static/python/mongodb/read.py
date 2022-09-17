@@ -327,22 +327,20 @@ def getSchoologyAuth(user_id) -> schoolopy.Schoology | None:
     return sc
 
 
-def check_signup_user(username) -> str:
+def check_duplicate_username(username) -> bool:
     if User.objects(username=username):
-        return "false"
-    return "true"
+        return True
+    return False
 
 
-def check_signup_email(email) -> str:
+def check_duplicate_email(email) -> bool:
     if User.objects(email=email):
-        return "false"
-    return "true"
+        return True
+    return False
 
 
 def check_duplicate_schoology(schoology_email) -> str:
-    if User.objects(schoology__schoologyEmail=schoology_email):
-        return "true"
-    return "false"
+    return User.objects(schoology__schoologyEmail=schoology_email)
 
 
 def getChat(chat_id: str):

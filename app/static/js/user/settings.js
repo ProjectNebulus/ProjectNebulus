@@ -1,3 +1,7 @@
+const VALID_USERNAME_REGEX = /^[A-Za-z][a-zA-Z\d\-_]{2,31}$/;
+const EMAIL_REGEX =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}])|(([a-zA-Z\-\d]+\.)+[a-zA-Z]{2,}))$/;
+
 window.addEventListener('load', function () {
     const bgCards = document.querySelectorAll('.card img');
     const wallpaper = localStorage.getItem('wallpaper');
@@ -23,7 +27,7 @@ window.addEventListener('load', function () {
             : 'white';
     });
 
-    const sidebarOptions = document.querySelectorAll('aside:not(#sidebar_) li > span');
+    const sidebarOptions = document.querySelectorAll('aside:not(#sidebar) li > span');
     const search = location.href.split('#');
     console.log(search[1]);
 
@@ -63,16 +67,207 @@ window.addEventListener('load', function () {
             document.getElementById('email').innerHTML = data.split('•')[1];
         }
     });
+
+    function hasSpecialCharacter(str) {
+        const r_l = ',<.>/?;:\'"\\|[{]}=+-_`!@#$%^&*()_+';
+
+        for (const c in str) {
+            if (r_l.includes(c))
+                return true;
+        }
+        return false;
+    }
+
+    function validation(type) {
+        const error = document.getElementById("error");
+        const btn = document.querySelector("#change-modal .disabled-css");
+        error.innerHTML = ""
+        btn.disabled = true;
+
+        const req = $.ajax({
+            url: "/api/v1/internal/check/access",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({"password": document.getElementById("access-check").value})
+        });
+
+        req.done(data => {
+            btn.disabled = false;
+            if (data === "True") {
+                error.style.color = "greenyellow";
+                error.innerHTML = "Correct Password!";
+            } else {
+                error.style.color = "red";
+                error.innerHTML = "Incorrect Password";
+            }
+        });
+
+        req.fail(() => {
+            btn.disabled = false;
+            error.innerHTML = "An error occurred! Retry?";
+        });
+    }
+
+    function valid(type) {
+        const error = document.getElementById("error");
+        const value = document.getElementById("enter-value").value;
+        document.getElementById("confirm-change").disabled = true;
+
+        if (!value) return false;
+        error.style.color = "red";
+
+        if (type === "username") {
+            if (value.length < 3)
+                error.innerHTML = "Username must be at least 3 characters long!";
+            else if (value.length > 32)
+                error.innerHTML = "Username must be less than 32 characters long";
+            else if (!VALID_USERNAME_REGEX.test(value))
+                error.innerHTML = 'Your username may only contain letters, numbers, underscores, dashes, and spaces!'
+            else {
+                error.innerHTML = loadingIcon(5);
+
+                const req = $.ajax({
+                    url: "/api/v1/internal/check/signup/user",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({username: value})
+                })
+
+                req.done(data => {
+                    if (data === "True") {
+                        error.style.color = "red";
+                        error.innerHTML = "Username exists!";
+                    } else {
+                        error.style.color = "greenyellow";
+                        error.innerHTML = "Valid username!";
+                        document.getElementById("confirm-change").disabled = false;
+                    }
+                });
+
+                req.fail(() => {
+                    error.style.color = "red";
+                    error.innerHTML = "An error occurred! Retry?";
+                });
+
+                document.getElementById("confirm-change").disabled = false;
+                return true;
+            }
+        } else if (type === "password") {
+            if (value.length < 6)
+                error.innerHTML = "Password must be at least 6 characters long!";
+            else if (!/\d/.test(value))
+                error.innerHTML = 'Password must include at least 1 number';
+            else if (!hasSpecialCharacter(value))
+                error.innerHTML = 'Password must include at least 1 special character';
+            else {
+                error.style.color = "greenyellow";
+                error.innerHTML = "Valid password!";
+                return true;
+            }
+        } else if (type === "email")
+            if (EMAIL_REGEX.test(value)) {
+                error.style.color = "greenyellow";
+                error.innerHTML = "Valid email!";
+                document.getElementById("confirm-change").disabled = false;
+
+                const req = $.ajax({
+                    url: "/api/v1/internal/check/signup/email",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({email: value})
+                })
+
+                req.done(data => {
+                    if (data === "True") {
+                        error.style.color = "red";
+                        error.innerHTML = "Email exists!";
+                    } else {
+                        error.style.color = "greenyellow";
+                        error.innerHTML = "Valid email!";
+                        document.getElementById("confirm-change").disabled = false;
+                    }
+                });
+
+                req.fail(() => {
+                    error.style.color = "red";
+                    error.innerHTML = "An error occurred! Retry?";
+                });
+
+                return true;
+            }
+
+        return false;
+    }
+
+    for (const el of document.querySelectorAll("[step]:not([step='1'])"))
+        el.style.display = "none";
+
+    keyUpDelay('#access-check', 1000, () => validation(type));
+    keyUpDelay('#enter-value', 1000, () => valid(type));
+
+    const confirm = document.getElementById("confirm-change");
+    confirm.addEventListener("click", () => {
+        confirm.disabled = true;
+
+        const req = $.ajax({
+            url: "/api/v1/internal/update/setting",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({
+                "type": type,
+                "value": document.getElementById("enter-value").value
+            })
+        });
+
+        req.done(() => {
+            document.getElementById("error").innerHTML = "Username changed!";
+            location.reload();
+        });
+    });
 });
 
-function prev(step) {
-    document.getElementById('step' + step).style.display = 'none';
-    document.getElementById('step' + (step - 1)).style.display = 'block';
+let step = 1;
+let type;
+
+function changeSettingsModal(settingType) {
+    new Modal(document.getElementById("change-modal")).show();
+    const input = document.getElementById("enter-value")
+    input.setAttribute("autocomplete", "new-" + settingType);
+    input.setAttribute("name", settingType);
+    type = settingType;
+    document.getElementById("replace").innerHTML = "Enter New " + settingType.charAt(0).toUpperCase() + settingType.substring(1);
 }
 
-function next(step) {
-    document.getElementById('step' + step).style.display = 'none';
-    document.getElementById('step' + (step + 1)).style.display = 'block';
+function prev() {
+    if (step > 1) {
+        for (const el of document.querySelectorAll(" [step='" + step + "']"))
+            el.style.display = 'none';
+
+        for (const el of document.querySelectorAll(" [step='" + (step - 1) + "']"))
+            el.style.display = 'block';
+
+        step--;
+    }
+
+    const error = document.getElementById("error");
+    if (error)
+        error.innerHTML = "";
+}
+
+function next() {
+    if (step < 3) {
+        for (const el of document.querySelectorAll(" [step='" + step + "']"))
+            el.style.display = 'none';
+
+        for (const el of document.querySelectorAll(" [step='" + (step + 1) + "']"))
+            el.style.display = 'block';
+
+        step++;
+    }
+
+    const error = document.getElementById("error");
+    if (error)
+        error.innerHTML = "";
 }
 
 function changeInput() {

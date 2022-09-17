@@ -1,3 +1,4 @@
+from .change_settings import *
 from .connect_to_schoology import *
 from .logout_of_schoology import *
 from .schoology_callback import *

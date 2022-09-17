@@ -54,6 +54,9 @@ class KeyUpTimer {
     enable() {
         this.elements = document.querySelectorAll(this.selector);
         this.onKeyUp = (e) => {
+            if (e.key.length > 1 && e.key !== "Enter" && e.key !== "Backspace")
+                return;
+
             this.lastKeyUpTime = Date.now();
             this.recheck = true;
             this.lastKeyEvent = e;

@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import flask
 import google.oauth2.credentials
 from googleapiclient.discovery import build
@@ -26,12 +28,11 @@ def generate_redirect(url):
     return url + "spotify"
 
 
-@main_blueprint.route("/settings", methods=["GET"])
+@main_blueprint.route("/settings")
 @logged_in
 def settings():
-    print(session.get("username"))
-    the_schoology = read.getSchoology(username=session.get("username"))
-    the_google_classroom = read.getClassroom(username=session.get("username"))
+    the_schoology = read.getSchoology(id=session.get("id"))
+    the_google_classroom = read.getClassroom(session.get("id"))
     googleclassroom = None
     try:
         credentials = google.oauth2.credentials.Credentials(
@@ -83,13 +84,17 @@ def settings():
 
     try:
         discord = (session["discord_user"], session["discord_avatar"])
-    except:
+    except KeyError:
         discord = None
+
+    if session.get("access"):
+        print("Last confirmed access (seconds):", datetime.now().timestamp() - float(session["access"]))
 
     return render_template(
         "user/settings.html",
         page="Nebulus - Account Settings",
         session=session,
+        now=datetime.now().timestamp(),
         user=session.get("username"),
         pswHashes="*" * session.get("pswLen"),
         email=session.get("email"),
@@ -101,5 +106,5 @@ def settings():
         spotify=spotify,
         discord=discord,
         translate=getText,
-        points=read.find_user(username=session.get("username")).points,
+        points=read.find_user(id=session.get("id")).points,
     )

@@ -10,6 +10,10 @@ body {
     transition: visibility 0s 0.5s, opacity 0.5s linear;
 }
 
+.disabled-css:disabled {
+    filter: brightness(0.75);
+}
+
 .noselect,
 img,
 svg,

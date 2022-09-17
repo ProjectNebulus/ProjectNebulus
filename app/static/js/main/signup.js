@@ -1,4 +1,3 @@
-const HAS_NUMBER = /\d/;
 const EMAIL_REGEX =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const VALID_USERNAME_REGEX = /^[A-Za-z][a-zA-Z\d\-_]{2,31}$/;
@@ -33,8 +32,8 @@ function nextModal(num) {
 }
 
 function next(num) {
-    document.getElementById("stepBar").style.width = `${100/3*(num+1)}%`;
-    document.getElementById("stepText").innerText = `${num+1}`;
+    document.getElementById("stepBar").style.width = `${100 / 3 * (num + 1)}%`;
+    document.getElementById("stepText").innerText = `${num + 1}`;
     if (num === 1) {
         if (
             checks[0].innerText === 'check' &&
@@ -66,8 +65,8 @@ function onComplete() {
 }
 
 function prev(num) {
-    document.getElementById("step_").style.width = `${100/3*(num-1)}%`;
-    document.getElementById("stepText").innerText = `${num-1}`;
+    document.getElementById("step_").style.width = `${100 / 3 * (num - 1)}%`;
+    document.getElementById("stepText").innerText = `${num - 1}`;
     if (num !== 1) {
         setTimeout(function () {
             document.getElementById('step' + num.toString()).style.display = 'none';
@@ -152,7 +151,6 @@ window.addEventListener('load', function () {
         usernameStatus.style.color = 'pink';
         usernameStatus.innerHTML = '<br>';
         if (!value) {
-            usernameStatus.innerHTML = 'Please enter a username!';
             validationIcons[1].style.color = 'pink';
             validationIcons[1].innerHTML = '<i class="material-icons">close</i>';
             username.classList.remove(...GRAY);
@@ -186,7 +184,7 @@ window.addEventListener('load', function () {
             });
 
             request.done(function (data) {
-                if (data === 'false') {
+                if (data === 'True') {
                     validationIcons[1].style.color = 'pink';
                     validationIcons[1].innerHTML = '<i class="material-icons">close</i>';
                     usernameStatus.innerHTML = 'This username already exists!';
@@ -224,7 +222,6 @@ window.addEventListener('load', function () {
         if (email.value === '') {
             validationIcons[0].style.color = 'pink';
             validationIcons[0].innerHTML = '<i class="material-icons">close</i>';
-            emailStatus.innerHTML = 'Please enter an email!';
             username.classList.remove(...GRAY);
             email.classList.add(...RED_BORDER);
             return false;
@@ -250,7 +247,7 @@ window.addEventListener('load', function () {
 
         request.done(function (data) {
             console.log(data);
-            if (data === 'false') {
+            if (data === 'True') {
                 validationIcons[0].style.color = 'pink';
                 validationIcons[0].innerHTML = '<i class="material-icons">close</i>';
                 emailStatus.innerHTML = 'This email already exists!';
@@ -325,7 +322,6 @@ window.addEventListener('load', function () {
         if (value === '') {
             validationIcons[3].style.color = 'pink';
             validationIcons[3].innerHTML = '<i class="material-icons">close</i>';
-            status.innerHTML = 'Please confirm your password!';
             passwordConfirm.classList.remove(...GREEN_BORDER);
             passwordConfirm.classList.add(...RED_BORDER);
             email_valid = false;
@@ -349,16 +345,14 @@ window.addEventListener('load', function () {
 
     if (localStorage.getItem('email') !== null) email.value = localStorage.getItem('email');
 
-    function checkPassword() {
+    function changePassword() {
         validPassword = false;
 
         let status = errorMessages[2];
         status.style.color = 'pink';
         status.innerHTML = '<br>';
         const value = password.value;
-        if (value === '') {
-            // User hasn't entered a password
-            status.innerHTML = 'Please enter a password!';
+        if (!value) {
             password.classList.remove(...GREEN_BORDER);
             password.classList.add(...RED_BORDER);
             validationIcons[2].style.color = 'pink';
@@ -372,7 +366,7 @@ window.addEventListener('load', function () {
             validationIcons[2].style.color = 'pink';
             validationIcons[2].innerHTML = '<i class="material-icons">close</i>';
             return false;
-        } else if (!HAS_NUMBER.test(value))
+        } else if (!/\d/.test(value))
             status.innerHTML = 'Password must include at least 1 number';
         else {
             let hasSpecialCharacter = false;
@@ -401,10 +395,10 @@ window.addEventListener('load', function () {
     }
 
     email.onkeyup = changeEmail;
-    (password.onkeyup = checkPassword), confirmPassword;
+    password.onkeyup = changePassword;
     passwordConfirm.onkeyup = confirmPassword;
     username.onkeyup = changeUser;
     bday.onkeyup = confirmDate;
     bday.onclick = confirmDate;
-    keyUpDelay('#verification', 1000, confirmVerification);
+    keyUpDelay('#verification', 500, confirmVerification);
 });

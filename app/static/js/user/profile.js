@@ -65,7 +65,7 @@ function fetchStatus() {
                 <span style="font-size:25px !important;" class=" text-black dark:text-white">${playing}</span>
                  <i style="font-size:25px !important;" class="material-icons">skip_next</i>
                 <i style="font-size:25px !important;" class="material-icons">loop</i>
-                <i data-modal-toggle="lyricModal" onclick="openModal('lyricModal');" style="font-size:25px !important;" class="material-icons">lyrics</i>
+                <i data-modal-toggle="lyricModal" onclick="changeSettingsModal('lyricModal');" style="font-size:25px !important;" class="material-icons">lyrics</i>
                 
                 </span> <br>
                   <div class="flex justify-between mb-1">

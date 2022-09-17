@@ -130,19 +130,19 @@
              viewBox="0 0 100 100"
              xmlns="http://www.w3.org/2000/svg">
             <g class="base-timer__circle">
-            <circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
-            <path
-            id="base-timer-path-remaining"
-            stroke-dasharray="283"
-            class="base-timer__path-remaining green"
-            d="
+                <circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
+                <path
+                        id="base-timer-path-remaining"
+                        stroke-dasharray="283"
+                        class="base-timer__path-remaining green"
+                        d="
             M 50, 50
             m -45, 0
             a 45,45 0 1,0 90,0
             a 45,45 0 1,0 -90,0
             "
-            >
-            </path>
+                >
+                </path>
             </g>
         </svg>
         <span id="base-timer-label" class="base-timer__label"></span>
@@ -165,7 +165,8 @@
                 <div id="profile-username"
                      class="my-3 text-gray-400"
                      style="font-size:30px;
-                            text-align: start;">Coder N</div>
+                            text-align: start;">Coder N
+                </div>
                 <div id="profile-status-text"
                      class=" text-sm text-gray-400"
                      style="text-align: start;
@@ -211,8 +212,8 @@
                          xmlns="http://www.w3.org/2000/svg"
                          stroke-width="0">
                         <path
-                        stroke-linecap="round" stroke-linejoin="round"
-                        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                                stroke-linecap="round" stroke-linejoin="round"
+                                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
                         </path>
                     </svg>
                 Idle</span>
@@ -225,8 +226,8 @@
                          viewBox="0 0 24 24"
                          xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round"
-                        stroke-linejoin="round" stroke-width="2"
-                        d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z">
+                              stroke-linejoin="round" stroke-width="2"
+                              d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z">
                         </path>
                     </svg>
                 Do Not Disturb</span>
@@ -246,9 +247,6 @@
      role="alert">
 </div>
 <script src="/static/js/utils/control.js"></script>
-{#<div style="display:none;">#}
-{#    <h1>Points</h1>#}
-{#</div>#}
 <button onclick="window.location.href = '/logout';"
         type="button"
         class="w-full my-4 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">

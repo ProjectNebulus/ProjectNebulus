@@ -333,7 +333,7 @@ window.addEventListener('load', function () {
                 loginButton.disabled = true;
 
                 loginAttempts++;
-                if (loginAttempts % 7 === 0) {
+                if (loginAttempts % 5 === 0) {
                     showRecaptcha = true;
                     recaptchaScreen();
                 }
@@ -341,7 +341,7 @@ window.addEventListener('load', function () {
         }
     }
 
-    keyUpDelay('#email, #psw', 500, checkCredentials);
+    keyUpDelay('#email, #psw', 1000, checkCredentials);
 });
 
 const loginUser = () => {

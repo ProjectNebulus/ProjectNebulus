@@ -88,21 +88,21 @@ function setCreateButton(title) {
     switch (title.toLowerCase()) {
         case 'documents':
             actions[0].innerHTML = 'Upload File';
-            actions[0].onclick = () => openModal('createDocument');
+            actions[0].onclick = () => changeSettingsModal('createDocument');
             actions[1].innerHTML = 'Post a link';
-            actions[1].onclick = () => openModal('postLink');
+            actions[1].onclick = () => changeSettingsModal('postLink');
             actions[2].innerHTML = 'Add Assignment';
-            actions[2].onclick = () => openModal('createAssignment');
+            actions[2].onclick = () => changeSettingsModal('createAssignment');
             break;
 
         case 'announcements':
             actions[0].innerHTML = 'Add Announcement';
-            actions[0].onclick = () => openModal('createAnnouncement');
+            actions[0].onclick = () => changeSettingsModal('createAnnouncement');
             break;
 
         case 'textbook':
             actions[0].innerHTML = 'Create Textbook';
-            actions[0].onclick = () => openModal('createTextbook');
+            actions[0].onclick = () => changeSettingsModal('createTextbook');
             break;
     }
 

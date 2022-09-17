@@ -58,9 +58,13 @@ def getGclassroomcourses():
 
 @main_blueprint.route("/app")
 @logged_in
-def announcements():
+def app():
     user_acc = read.find_user(id=session["id"])
     user_events = read.sort_user_events(session["id"])
+
+    show_popup = session.get("showPopup")
+    if show_popup:
+        del session["showPopup"]
 
     return render_template(
         "learning/app.html",
@@ -75,6 +79,7 @@ def announcements():
         enumerate=enumerate,
         strftime=datetime.strftime,
         translate=getText,
+        showPopup=show_popup,
         fmt=fmt,
     )
 

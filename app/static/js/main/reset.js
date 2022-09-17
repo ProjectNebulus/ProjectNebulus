@@ -118,7 +118,7 @@ keyUpDelay('#code', 1000, () => {
     });
 });
 
-keyUpDelay('#newPsw', 1000, checkPassword);
+keyUpDelay('#newPsw', 500, checkPassword);
 
 function checkPassword() {
     icons[1].classList.remove('rotate-45');
