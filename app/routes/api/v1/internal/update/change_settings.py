@@ -2,9 +2,9 @@ from datetime import datetime
 
 from flask import request, session
 
-from static.python.classes import User
-from static.python.mongodb import read
-from static.python.utils.security import valid_password, hash256
+from app.static.python.classes import User
+from app.static.python.mongodb import read
+from app.static.python.utils.security import valid_password, hash256
 from .. import internal
 
 
