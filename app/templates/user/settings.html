@@ -35,9 +35,17 @@
     {% include "utils/navbar.html" %}
     <script src="/static/js/user/settings.js"></script>
     <div class="flex">
-        <aside class="w-64" aria-label="Sidebar">
-            <div class="w-64 h-full overflow-y-auto p-4 backdrop-blur-sm  bg-gray-100/75 rounded dark:bg-gray-800/75 fixed">
-                <h1 class="text-md text-gray-500 uppercase ml-4 text-xl">Settings</h1>
+        <aside class="w-64" aria-label="Sidebar" style="
+">
+
+            <div class="w-64 overflow-y-auto hover:text-gray-500 p-4 backdrop-blur-sm  bg-gray-100/75 rounded dark:bg-gray-800/75 fixed"
+                 style="
+    height: 65% !important;
+    margin-left: 30px;
+    border-radius: 20px;
+    overflow-y: scroll !important;
+">
+                <h1 class="text-lg text-gray-500 uppercase ml-4 text-xl">Account Settings</h1>
                 <ul class="mt-4">
                     <li>
                                 <span onclick="open_pls('generalSettings')"
@@ -98,10 +106,7 @@
                     <li>
                                 <span onclick="open_pls('achievementSettings')"
                                       class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                         x="0px"
-                                         y="0px"
-                                         class="w-6 h-6"
+                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="w-6 h-6"
                                          viewBox="0 0 31.481 31.481">
                                         <g>
                                         <path d="M31.455,6.595c0.143-1.89-0.301-3.312-1.322-4.224c-0.957-0.858-2.183-1.03-3.002-1.032   c0.036-0.369,0.065-0.732,0.075-1.066H4.273c0.01,0.333,0.039,0.697,0.077,1.066C3.529,1.342,2.306,1.513,1.347,2.371   c-1.019,0.912-1.463,2.334-1.32,4.224c0.398,5.27,4.929,9.679,11.855,11.611c0.518,0.452,1.046,0.851,1.594,1.13   c-0.052,0.198-0.09,0.402-0.09,0.616c0,0.726,0.335,1.367,0.851,1.799v6.603h-1.229c-1.224,0-2.348,0.679-2.919,1.762l-0.576,1.093   h12.455l-0.577-1.094c-0.571-1.083-1.694-1.761-2.919-1.761h-1.228v-6.603c0.517-0.432,0.85-1.073,0.85-1.799   c0-0.214-0.037-0.418-0.09-0.616c0.548-0.279,1.075-0.679,1.595-1.13C26.525,16.274,31.056,11.865,31.455,6.595z M29.137,3.497   c0.647,0.585,0.923,1.589,0.814,2.984c-0.256,3.397-2.549,6.406-6.251,8.459c-0.247,0.137-0.557,0.092-0.754-0.111   c-0.198-0.203-0.235-0.513-0.092-0.757c2.019-3.441,3.489-7.776,4.075-11.224C27.478,2.825,28.453,2.88,29.137,3.497z M1.528,6.482   C1.422,5.087,1.698,4.083,2.344,3.498C3.029,2.88,4.002,2.826,4.551,2.85c0.587,3.448,2.057,7.782,4.075,11.223   c0.144,0.244,0.105,0.554-0.092,0.756c-0.198,0.203-0.506,0.249-0.754,0.112C4.08,12.887,1.785,9.878,1.528,6.482z">
@@ -177,20 +182,32 @@
                                 </span>
                     </li>
                     <li>
+                                <span onclick="open_pls('languageSettings')"
+                                      class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    <span class="material-icons">language</span>
+                                    Language
+                                </span>
+                    </li>
+                    <li>
                                 <span onclick="open_pls('changelog')"
                                       class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                                     <span class="material-icons">tune</span>
                                     Change Log
                                 </span>
                     </li>
+
                 </ul>
             </div>
         </aside>
-        <div id="account"
-             style="flex: 0 0 0 90%;
+        <div id="account" style="
+                            flex: 0 0 0 90%;
                             margin-left: calc(8% + 250px);
-                            margin-right:8%;
-                            width:100%;">
+                            margin-right:10%;
+                            width: 60%;
+                            height: 65%;
+                            border-radius: 20px;
+                            "
+             class="w-64 overflow-y-auto hover:text-gray-500 p-4 backdrop-blur-sm  bg-gray-100/75 rounded dark:bg-gray-800/75 fixed">
             <div id="generalSettings">
                 <div class="mt-6">
                     <h1 class="text-3xl text-black dark:text-white">My Account</h1>
@@ -198,7 +215,7 @@
                 <br>
                 <h2 id="general" class="text-2xl text-black dark:text-white">General Settings</h2>
                 <br>
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                <label class="block mb-2 text-sm uppercase dark:text-gray-500">
                     Your Username
                 </label>
                 <div class="flex place-items-center gap-2">
@@ -225,7 +242,7 @@
                     </button>
                 </div>
 
-                <label class="block mt-6 mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                <label class="block mt-6 mb-2 text-sm uppercase dark:text-gray-500">
                     Your Password
                 </label>
                 <div class="flex place-items-center gap-2">
@@ -254,7 +271,7 @@
                         Change
                     </button>
                 </div>
-                <label class="block mt-6 mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                <label class="block mt-6 mb-2 text-sm uppercase dark:text-gray-500">
                     Your Email
                 </label>
                 <div class="flex place-items-center gap-2">
@@ -280,6 +297,46 @@
                         Change
                     </button>
                 </div>
+                <label for="message" class="block mt-6 mb-2 text-sm uppercase dark:text-gray-500">Bio</label>
+                <textarea id="message" rows="4"
+                          class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          placeholder="(Markdown Supported) Write your biography..."></textarea>
+                <h3 class="block mt-6 mb-2 text-sm uppercase dark:text-gray-500">Account Type</h3>
+                <ul class="grid gap-6 w-full md:grid-cols-2">
+                    <li>
+                        <input type="radio" id="hosting-small" name="hosting" value="hosting-small" class="hidden peer"
+                               required>
+                        <label for="hosting-small"
+                               class="inline-flex justify-between items-center p-5 w-full text-gray-500 bg-white rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                            <div class="block">
+                                <div class="w-full text-lg font-semibold">Student</div>
+                                <div class="w-full">Includes personalized tools for students.</div>
+                            </div>
+                            <svg aria-hidden="true" class="ml-3 w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                        </label>
+                    </li>
+                    <li>
+                        <input type="radio" id="hosting-big" name="hosting" value="hosting-big" class="hidden peer">
+                        <label for="hosting-big"
+                               class="inline-flex justify-between items-center p-5 w-full text-gray-500 bg-white rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                            <div class="block">
+                                <div class="w-full text-lg font-semibold">Teacher</div>
+                                <div class="w-full">Includes personalized tools for teachers.</div>
+                            </div>
+                            <svg aria-hidden="true" class="ml-3 w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                        </label>
+                    </li>
+                </ul>
             </div>
             <div style="display:none;" id="profileSettings">
                 <div class="mt-6">
@@ -288,8 +345,11 @@
                 <br>
                 <h2 id="general" class="text-2xl text-black dark:text-white">Profile Settings</h2>
                 <br>
+                <h1 class="text-xl uppercase dark:text-gray-500">avatars</h1><br>
                 <span style="display:none;" id="chosen">cat1</span>
-                <div style="">
+                <div style="
+    border-radius: 20px;
+" class="p-6 m-3 dark:bg-gray-700">
                     <img style="float:left;
                                         margin:10px;"
                          class="cat1 pfp pfp_selected mb-3 w-16 h-16 rounded-full shadow-lg"
@@ -461,6 +521,37 @@
                     <br>
                     <br style="clear: left;">
                 </div>
+                <br>
+                <h1 class="text-xl uppercase dark:text-gray-500">banner color</h1><br>
+                <div style="
+    border-radius: 20px;
+" class="p-6 m-3 dark:bg-gray-700">
+
+
+                    <div style="border-radius: 10px;background: #ff5454;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div style="border-radius: 10px;background: #ffa054;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div style="border-radius: 10px;background: #ffd254;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+
+
+                    <div style="border-radius: 10px;background: #eeff54;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div style="border-radius: 10px;background: #c0ff54;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div style="border-radius: 10px;background: #5cff54;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div style="border-radius: 10px;background: #54ffda;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div style="border-radius: 10px;background: #54ddff;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div style="border-radius: 10px;background: #5854ff;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div style="border-radius: 10px;background: #ae54ff;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div style="border-radius: 10px;background: #ff5497;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div style="border-radius: 10px;background: #000000;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div style="border-radius: 10px;background: #ffffff;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div style="border-radius: 10px;background: #818181;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div style="border-radius: 10px;background: linear-gradient(45deg, #ff5454, #ffd254);height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div style="border-radius: 10px;background: linear-gradient(45deg, #eeff54, #5cff54);height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div style="border-radius: 10px;background: linear-gradient(45deg, #7754ff, #ff5454);height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+
+                    <div style="border-radius: 10px;background: linear-gradient(45deg, #fff054, #ae54ff);height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div style="border-radius: 10px;background: linear-gradient(45deg, #54ffc4, #5e54ff);height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div style="border-radius: 10px;background: linear-gradient(45deg, #003250, #00a2fe);height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                </div>
                 <style>
                     .pfp_selected {
                         background: #eee0ff;
@@ -477,6 +568,7 @@
                     }
                 </style>
             </div>
+
             <div style="display:none;" id="connectionSettings">
                 <div class="mt-6">
                     <h1 class="text-3xl text-black dark:text-white">
@@ -1089,7 +1181,7 @@
                         <a href="/gclassroom/clear"
                            class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             Disconnect Google Classroom
-                            <svg class="ml-2 -mr-1 w-4 h-4"
+                            <svg classﬁ="ml-2 -mr-1 w-4 h-4"
                                  fill="currentColor"
                                  viewBox="0 0 20 20"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -1100,7 +1192,7 @@
                             </svg>
                         </a>
                         <br>
-                        <br>
+                        <br>›
                         <label for="toggle-example-checked"
                                class="flex relative items-center mb-4 cursor-pointer">
                             <input type="checkbox" id="toggle-example-checked" class="sr-only" checked>
@@ -1216,9 +1308,16 @@
                 </div>
                 <br>
                 <h2 id="general" class="text-2xl text-black dark:text-white">
-                    Theme Settings
+                    Customization Settings
                 </h2>
                 <br>
+                <label for="toggle-example-checked" class="flex relative items-center mb-4 cursor-pointer">
+                    <input type="checkbox" id="toggle-example-checked" class="sr-only" checked="">
+                    <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600">
+                    </div>
+                    <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Custom Right Click</span>
+                </label>
+
             </div>
             <div style="display:none;" id="appearanceSettings">
                 <div class="mt-6">
@@ -1231,21 +1330,19 @@
                     Appearance Settings
                 </h2>
                 <br>
-                <p class="text-black dark:text-white">
-                    Select your wallpaper.
-                </p>
+                <h1 class="text-xl uppercase dark:text-gray-500">wallpapers</h1>
                 <div class="main">
                     <style>
                         .imagecard {
                             height: 100px;
                             margin: 20px 50px 20px 0;
                             border-radius: 5px;
-                            transition: 0.4s;
+                            transition: 0.1s;
                         }
 
                         .imagecard:hover {
                             filter: brightness(0.5);
-                            height: 105px;
+                            height: 101px;
                             margin: 15px 40px 15px 0;
                         }
 
@@ -1444,47 +1541,6 @@
                     </button>
                 </div>
             </div>
-            <div style="display:none;" id="dangerSettings">
-                <div id="danger"
-                     class="p-4 mb-4 bg-red-100 rounded-lg dark:bg-red-200 mt-4"
-                     role="alert">
-                    <div class="flex items-center">
-                        <svg class="w-6 h-6"
-                             fill="#9F2826"
-                             viewBox="0 0 20 20"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                  d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-                                  clip-rule="evenodd">
-                            </path>
-                        </svg>
-                        <h3 class="text-lg font-medium text-red-700 dark:text-red-800">
-                            Danger Zone
-                        </h3>
-                    </div>
-                    <div class="mt-2 mb-4 text-sm text-red-700 dark:text-red-800">
-                        These are very dangerous actions!
-                    </div>
-                    <div class="flex">
-                        <button class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 mr-2 text-center inline-flex items-center dark:bg-red-800 dark:hover:bg-red-900">
-                            Delete Account
-                        </button>
-                        <button class="text-red-700 bg-transparent border border-red-700 hover:bg-red-800 hover:text-white focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:border-red-800 dark:text-red-800 dark:hover:text-white"
-                                data-collapse-toggle="alert-additional-content-2"
-                                aria-label="Close">
-                            Disable Account
-                        </button>
-                        <a href="/logout">
-                            <button style="margin-left:10px !important;"
-                                    class="text-red-700 bg-transparent border border-red-700 hover:bg-red-800 hover:text-white focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:border-red-800 dark:text-red-800 dark:hover:text-white"
-                                    data-collapse-toggle="alert-additional-content-2"
-                                    aria-label="Close">
-                                Log Out
-                            </button>
-                        </a>
-                    </div>
-                </div>
-            </div>
             <div id="chatSettings" style="display:none;">
                 <div class="mt-6">
                     <h1 class="text-3xl text-black dark:text-white">
@@ -1496,6 +1552,18 @@
                     Chat Settings
                 </h2>
                 <br>
+                <label for="toggle-example-checked" class="flex relative items-center mb-4 cursor-pointer">
+                    <input type="checkbox" id="toggle-example-checked" class="sr-only" checked="">
+                    <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600">
+                    </div>
+                    <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Enable in-app Notifications</span>
+                </label>
+                <label for="toggle-example-checked1" class="flex relative items-center mb-4 cursor-pointer">
+                    <input type="checkbox" id="toggle-example-checked1" class="sr-only">
+                    <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600">
+                    </div>
+                    <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Enable Desktop Notifications</span>
+                </label>
             </div>
             <div id="badgeSettings" style="display:none;">
                 <div class="mt-6">
@@ -1532,6 +1600,188 @@
                     Screen Time
                 </h2>
                 <br>
+            </div>
+            <style>
+                #selectlang {
+                    width: 600px;
+                }
+
+                .button {
+                    font-size: 20px;
+                    padding: 10px;
+                    border-radius: 5px;
+                    border-style: none;
+                    display: inline-block;
+                    margin-bottom: 10px;
+                    width: 500px;
+                    text-align: left;
+                    cursor: grab;
+                    background: #4B5563;
+                }
+
+                .button:hover {
+                    background: #374151;
+
+                }
+
+                .button img {
+                    height: 1em;
+                    margin-right: 5px;
+                }
+
+                .button_selected img {
+                    height: 1em;
+                    margin-right: 5px;
+                }
+
+                span img {
+                    display: inline-block;
+                }
+
+
+            </style>
+            <div id="languageSettings" style="display:none;">
+                <div class="mt-6">
+                    <h1 class="text-3xl text-black dark:text-white">
+                        My Account
+                    </h1>
+                </div>
+                <br>
+                <h2 id="general" class="text-2xl text-black dark:text-white">
+                    Language Settings
+                </h2>
+                <br>
+                <div style="height:60%; overflow-y: scroll;">
+                    <span onclick="select_lang('us');" class="button text-black dark:text-white">
+                        <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/281/flag-united-states_1f1fa-1f1f8.png"
+                             class="image">
+                    English (United States)</span>
+                    <br>
+                    <span onclick="select_lang('uk');" class="button text-black dark:text-white">
+                        <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/154/flag-for-united-kingdom_1f1ec-1f1e7.png"
+                             class="image">
+                    English (United Kingdom)</span>
+                    <br>
+                    <span onclick="select_lang('au');" class="button text-black dark:text-white">
+                        <img src="https://images.emojiterra.com/twitter/512px/1f1e6-1f1fa.png" class="image">
+                    English (Australia)</span>
+                    <br>
+                    <span onclick="select_lang('ca');" class="button text-black dark:text-white">
+                        <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/322/flag-canada_1f1e8-1f1e6.png"
+                             class="image">
+                    English (Canada)</span>
+                    <br>
+                    <span onclick="select_lang('ca-FR');" class="button text-black dark:text-white">
+                        <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/322/flag-canada_1f1e8-1f1e6.png"
+                             class="image">
+                    Français (Canada)</span>
+                    <br>
+                    <span onclick="select_lang('bz');" class="button text-black dark:text-white">
+                        <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/322/flag-belize_1f1e7-1f1ff.png"
+                             class="image">
+                    English (Belize)</span>
+                    <br>
+                    <span onclick="select_lang('in');" class="button text-black dark:text-white">
+                        <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/322/flag-india_1f1ee-1f1f3.png"
+                             class="image">
+                    English (India)</span>
+                    <br>
+                    <span onclick="select_lang('es');" class="button text-black dark:text-white">
+                        <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/53/flag-for-spain_1f1ea-1f1f8.png"
+                             class="image">
+                    Español (España)</span>
+                    <br>
+                    <span onclick="select_lang('mx');" class="button text-black dark:text-white">
+                        <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/322/flag-mexico_1f1f2-1f1fd.png"
+                             class="image">
+                    Español (Mexico)</span>
+                    <br>
+                    <span onclick="select_lang('sv');" class="button text-black dark:text-white">
+                        <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/322/flag-el-salvador_1f1f8-1f1fb.png"
+                             class="image">
+                    Español (El Salvador)</span>
+                    <br>
+                    <span onclick="select_lang('co');" class="button text-black dark:text-white">
+                        <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/322/flag-colombia_1f1e8-1f1f4.png"
+                             class="image">
+                    Español (Colombia)</span>
+                    <br>
+                    <span onclick="select_lang('cu');" class="button text-black dark:text-white">
+                        <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/322/flag-cuba_1f1e8-1f1fa.png"
+                             class="image">
+                    Español (Cuba)</span>
+                    <br>
+                    <span onclick="select_lang('do');" class="button text-black dark:text-white">
+                        <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/322/flag-dominican-republic_1f1e9-1f1f4.png"
+                             class="image">
+                    Español (República Dominicana)</span>
+                    <br>
+                    <span onclick="select_lang('ar');" class="button text-black dark:text-white">
+                        <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/322/flag-argentina_1f1e6-1f1f7.png"
+                             class="image">
+                    Español (Argentina)</span>
+                    <br>
+                    <span onclick="select_lang('cr');" class="button text-black dark:text-white">
+                        <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/53/flag-for-costa-rica_1f1e8-1f1f7.png"
+                             class="image">
+                    Español (Costa Rica)</span>
+                    <br>
+                    <span onclick="select_lang('fr');" class="button text-black dark:text-white">
+                        <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/154/flag-for-france_1f1eb-1f1f7.png"
+                             class="image">
+                    Français</span>
+                    <br>
+                    <span onclick="select_lang('cn');" class="button text-black dark:text-white">
+                        <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/154/flag-for-china_1f1e8-1f1f3.png"
+                             class="image">
+                    简体中文</span>
+                    <br>
+                    <span onclick="select_lang('tw');" class="button text-black dark:text-white">
+                        <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/53/flag-for-taiwan_1f1f9-1f1fc.png"
+                             class="image">
+                    繁體中文（台灣）</span>
+                    <br>
+                    <span onclick="select_lang('hk');" class="button text-black dark:text-white">
+                        <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/322/flag-hong-kong-sar-china_1f1ed-1f1f0.png"
+                             class="image">
+                    繁體中文（香港）</span>
+                    <br>
+                    <span onclick="select_lang('mo');" class="button text-black dark:text-white">
+                        <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/322/flag-macao-sar-china_1f1f2-1f1f4.png"
+                             class="image">
+                    繁體中文（澳門）</span>
+                    <br>
+                    <span onclick="select_lang('jp');" class="button text-black dark:text-white">
+                        <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/77/flag-for-japan_1f1ef-1f1f5.png"
+                             class="image">
+                    日本語（日本）</span>
+                    <br>
+                    <span onclick="select_lang('kr');" class="button text-black dark:text-white">
+                        <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/53/flag-for-south-korea_1f1f0-1f1f7.png"
+                             class="image">
+                    한국어 (대한민국)</span>
+                    <br>
+                    <span onclick="select_lang('vn');" class="button text-black dark:text-white">
+                        <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/322/flag-vietnam_1f1fb-1f1f3.png"
+                             class="image">
+                    Tiếng việt (việt nam)</span>
+                    <br>
+                    <span onclick="select_lang('th');" class="button text-black dark:text-white">
+                        <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/322/flag-thailand_1f1f9-1f1ed.png"
+                             class="image">
+                    ไทย (ประเทศไทย)</span>
+                    <br>
+                    <span onclick="select_lang('ru');" class="button text-black dark:text-white">
+                        <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/322/flag-russia_1f1f7-1f1fa.png"
+                             class="image">
+                    Русский (Россия)</span>
+                    <br>
+                    <span onclick="select_lang('it');" class="button text-black dark:text-white">
+                        <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/322/flag-italy_1f1ee-1f1f9.png"
+                             class="image">
+                    Italiano (Italia)</span>
+                    <br>
+                </div>
             </div>
             <div id="pointSettings" style="display:none;">
                 <div class="mt-6">
@@ -1585,6 +1835,8 @@
             toggle_display("badgeSettings");
             toggle_display("achievementSettings");
             toggle_display("screentimeSettings");
+            toggle_display("pointSettings");
+            toggle_display("languageSettings");
 
             opposite_toggle_display(id_name);
         }
