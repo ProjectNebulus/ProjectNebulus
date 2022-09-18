@@ -87,14 +87,16 @@ def settings():
     except KeyError:
         discord = None
 
+    last_access = 0
     if session.get("access"):
         print("Last confirmed access (seconds):", datetime.now().timestamp() - float(session["access"]))
+        last_access = datetime.now().timestamp() - float(session["access"])
 
     return render_template(
         "user/settings.html",
         page="Nebulus - Account Settings",
         session=session,
-        now=datetime.now().timestamp(),
+        lastAccess=last_access,
         user=session.get("username"),
         pswHashes="*" * session.get("pswLen"),
         email=session.get("email"),

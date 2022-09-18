@@ -13,7 +13,7 @@ def check_password():
     data = request.get_json()
     valid = valid_password(read.find_user(id=session["id"]).password, data["password"])
     if valid:
-        session["access"] = str(datetime.now().timestamp())
+        session["access"] = str(round(datetime.now().timestamp()))
 
     return str(valid)
 

@@ -5,7 +5,7 @@ eventlet.monkey_patch()
 from logging import LogRecord
 
 from flask import has_request_context, redirect, request, session
-from flask.logging import default_handler, logging
+from flask.logging import logging
 from flask_babel import Babel
 from flask_cors import CORS
 from flask_mail import Mail
@@ -88,8 +88,8 @@ def init_app():
                 return redirect("/logout")
 
     mail.init_app(app)
-    logging.getLogger("werkzeug").addFilter(_LogFilter())
-    default_handler.setFormatter(_LogFormatter())
+    # logging.getLogger("werkzeug").addFilter(_LogFilter())
+    # default_handler.setFormatter(_LogFormatter())
     socketio.init_app(app, async_mode="eventlet", cors_allowed_origins="*")
 
     return app

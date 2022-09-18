@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 from app.routes import init_app, socketio
+# noinspection PyUnresolvedReferences
 from app.static.python.classes import Course
 
 app = init_app()
@@ -26,7 +27,6 @@ if __name__ == "__main__":
         port = 8080
         host = "localhost"
         protocol = "http"
-
 
     print(str(app.url_map).replace("Map([", " ", 1).replace("])", "\n"), sep="\n")
     print(f"Started Running: {protocol}://{host}:{port}")

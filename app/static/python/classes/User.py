@@ -94,5 +94,5 @@ class User(Snowflake):
 
         if "static/images/nebulusCats" not in self.avatar.avatar_url:
             self.avatar.avatar_url = (
-                "/static/images/nebulusCats" + self.avatar.avatar_url
+                    "/static/images/nebulusCats" + self.avatar.avatar_url
             )

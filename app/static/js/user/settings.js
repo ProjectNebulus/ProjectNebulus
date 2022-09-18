@@ -78,10 +78,10 @@ window.addEventListener('load', function () {
         return false;
     }
 
-    function validation(type) {
+    function validation() {
         const error = document.getElementById("error");
         const btn = document.querySelector("#change-modal .disabled-css");
-        error.innerHTML = ""
+        error.innerHTML = "<br>"
         btn.disabled = true;
 
         const req = $.ajax({
@@ -93,6 +93,9 @@ window.addEventListener('load', function () {
 
         req.done(data => {
             btn.disabled = false;
+
+            timeout();
+
             if (data === "True") {
                 error.style.color = "greenyellow";
                 error.innerHTML = "Correct Password!";
@@ -199,10 +202,22 @@ window.addEventListener('load', function () {
         return false;
     }
 
-    for (const el of document.querySelectorAll("[step]:not([step='1'])"))
-        el.style.display = "none";
+    function timeout() {
+        if (expireTimeout)
+            clearTimeout(expireTimeout);
 
-    keyUpDelay('#access-check', 1000, () => validation(type));
+        setTimeout(() => {
+            prev();
+            const error = document.getElementById("error");
+            error.style.color = "red";
+            error.innerHTML = "Please enter your password again.";
+        }, 5 * 60 * 1000);
+    }
+
+    for (const el of document.querySelectorAll("[step]:not([step='1'])"))
+        el.classList.add("hidden");
+
+    keyUpDelay('#access-check', 1000, () => validation());
     keyUpDelay('#enter-value', 1000, () => valid(type));
 
     const confirm = document.getElementById("confirm-change");
@@ -224,27 +239,44 @@ window.addEventListener('load', function () {
             location.reload();
         });
     });
+
+    modal = new Modal(document.getElementById("change-modal"));
 });
 
 let step = 1;
-let type;
+let type, modal;
 
 function changeSettingsModal(settingType) {
-    new Modal(document.getElementById("change-modal")).show();
-    const input = document.getElementById("enter-value")
+    modal.show();
+
+    const capsType = settingType.charAt(0).toUpperCase() + settingType.substring(1);
+    const input = document.getElementById("enter-value");
+
+    if (input.placeholder.includes(capsType))
+        return;
+
+    step = 1;
+
+    input.value = "";
+
     input.setAttribute("autocomplete", "new-" + settingType);
     input.setAttribute("name", settingType);
+    input.setAttribute("placeholder", "New " + capsType)
+    input.setAttribute("type", capsType === "Password" ? "password" : "text");
+
     type = settingType;
-    document.getElementById("replace").innerHTML = "Enter New " + settingType.charAt(0).toUpperCase() + settingType.substring(1);
+    document.getElementById("replace").innerHTML = "Enter New " + capsType;
+    document.getElementById("confirm-password").style.display = (capsType === "Password" && step === 2) ? "block" : "none";
+    document.getElementById("error").innerHTML = "";
 }
 
 function prev() {
     if (step > 1) {
         for (const el of document.querySelectorAll(" [step='" + step + "']"))
-            el.style.display = 'none';
+            el.classList.add("hidden");
 
         for (const el of document.querySelectorAll(" [step='" + (step - 1) + "']"))
-            el.style.display = 'block';
+            el.classList.remove("hidden");
 
         step--;
     }
@@ -257,10 +289,10 @@ function prev() {
 function next() {
     if (step < 3) {
         for (const el of document.querySelectorAll(" [step='" + step + "']"))
-            el.style.display = 'none';
+            el.classList.add("hidden");
 
         for (const el of document.querySelectorAll(" [step='" + (step + 1) + "']"))
-            el.style.display = 'block';
+            el.classList.remove("hidden");
 
         step++;
     }

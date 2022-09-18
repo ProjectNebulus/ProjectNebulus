@@ -90,8 +90,6 @@ class UserInput(graphene.InputObjectType):
     points = graphene.Int(default_value=0)
     premium = graphene.Boolean(default_value=False)
     is_staff = graphene.Boolean(default_value=False)
-    student = graphene.Boolean(default_value=False)
-    teacher = graphene.Boolean(default_value=False)
 
 
 class AnnouncementInput(graphene.InputObjectType):

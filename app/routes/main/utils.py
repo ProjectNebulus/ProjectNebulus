@@ -19,11 +19,9 @@ def logged_in(func):
         if session.get("username"):
             try:
                 read.find_user(pk=session.get("id"))
-            except KeyError as e:
-                print(e)
-                print(session)
+            except KeyError:
                 return redirect("/logout")
-            
+
             return func(*args, **kwargs)
         else:
             return redirect("/signin?redirect=" + request.path)
