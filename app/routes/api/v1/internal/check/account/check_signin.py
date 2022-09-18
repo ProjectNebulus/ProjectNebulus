@@ -22,7 +22,7 @@ def check_signin():
         session["avatar"] = user.avatar.avatar_url
         session["id"] = user.id
 
-        if user.is_staff:
+        if user.type == "staff":
             print("Staff Login")
             session["showPopup"] = True
 
