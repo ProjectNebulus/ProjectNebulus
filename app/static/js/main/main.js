@@ -6,6 +6,14 @@ window.addEventListener('load', () => {
     console.log(loadTime);
 });
 
+document.onkeyup = function (e) {
+    if (e.ctrlKey && e.which == 75) {
+        openModal('searchModal');
+    } else if (e.metaKey && e.which == 75) {
+        openModal('searchModal');
+    }
+};
+
 setInterval(changeFavicon, 3000);
 Array.prototype.insert = (index, item) => this.splice(index, 0, item);
 
