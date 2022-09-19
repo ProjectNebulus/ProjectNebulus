@@ -31,7 +31,10 @@ window.addEventListener('load', () => {
 
     setCreateButton(pageTitle.innerHTML);
 
+
     function openModal(object_id) {
+        document.getElementById(object_id).style.scale = "50%";
+        document.getElementById(object_id).style.transition = "10s";
         let targetEl = document.getElementById(object_id);
         const options = {
             placement: 'center',
@@ -39,6 +42,9 @@ window.addEventListener('load', () => {
         };
         const modal = new Modal(targetEl, options);
         modal.show();
+        setTimeout(function () {
+            document.getElementById(object_id).style.scale = "100%";
+        }, 500)
         return true;
     }
 

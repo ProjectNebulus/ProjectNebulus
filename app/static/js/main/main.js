@@ -116,7 +116,7 @@ function invertSite() {
             if (document.documentElement.classList.contains('dark')) {
                 innerDoc.documentElement.classList.add('dark');
                 let wallpaper = localStorage.getItem('wallpaper');
-                if (wallpaper === null) {
+                if (wallpaper === null || window.location.pathname == "/") {
                     innerDoc.body.style.background = '#111926';
                 } else {
                     document.body.style.background = `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2) ), url('${wallpaper}') no-repeat center center fixed`;
@@ -125,7 +125,7 @@ function invertSite() {
             } else {
                 innerDoc.documentElement.classList.remove('dark');
                 let wallpaper = localStorage.getItem('wallpaper');
-                if (wallpaper === null) {
+                if (wallpaper === null || window.location.pathname == "/") {
                     innerDoc.body.style.background = 'white';
                 } else {
                     document.body.style.backgroundSize = 'cover';
@@ -300,13 +300,18 @@ function changeFavicon() {
 }
 
 function openModal(object_id) {
+    document.getElementById(object_id).style.scale = "50%";
+    document.getElementById(object_id).style.transition = "10s";
     let targetEl = document.getElementById(object_id);
     const options = {
-        placement: 'bottom-right',
+        placement: 'center',
         backdropClasses: 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40'
     };
-    const modal = new Modal(targetEl);
+    const modal = new Modal(targetEl, options);
     modal.show();
+    setTimeout(function () {
+        document.getElementById(object_id).style.scale = "100%";
+    }, 500)
     return true;
 }
 

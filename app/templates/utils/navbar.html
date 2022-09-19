@@ -111,9 +111,9 @@
             {% endif %}
         </div>
         {% if user and not homepage %}
-            <div style=" width: calc(100% - 300px); ">
+            <div style="">
                 <!-- Middle -->
-                <button data-modal-toggle="searchModal"
+                <button onclick="openModal('searchModal');"
                         id="search"
                         style="float:left;
                                vertical-align: middle;"
