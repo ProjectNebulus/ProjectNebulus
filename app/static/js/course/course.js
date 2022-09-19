@@ -33,8 +33,9 @@ window.addEventListener('load', () => {
 
 
     function openModal(object_id) {
-        document.getElementById(object_id).style.scale = "50%";
-        document.getElementById(object_id).style.transition = "10s";
+        document.getElementById(object_id).style.scale = "75%";
+        document.getElementById(object_id).style.opacity = "50%";
+        document.getElementById(object_id).style.transition = "1s";
         let targetEl = document.getElementById(object_id);
         const options = {
             placement: 'center',
@@ -44,7 +45,8 @@ window.addEventListener('load', () => {
         modal.show();
         setTimeout(function () {
             document.getElementById(object_id).style.scale = "100%";
-        }, 500)
+            document.getElementById(object_id).style.opacity = "100%";
+        }, 25)
         return true;
     }
 

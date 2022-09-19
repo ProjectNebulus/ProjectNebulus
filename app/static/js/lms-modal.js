@@ -47,7 +47,7 @@ window.addEventListener('load', () => {
     for (const list of templateLists) list.classList.add('scroll');
 
     btn.onclick = function () {
-        modal.style.display = 'block';
+
 
         screens[0].style.top = '-1000px';
         screens[0].style.animation = '0.5s movein';

@@ -300,8 +300,9 @@ function changeFavicon() {
 }
 
 function openModal(object_id) {
-    document.getElementById(object_id).style.scale = "50%";
-    document.getElementById(object_id).style.transition = "10s";
+    document.getElementById(object_id).style.scale = "75%";
+    document.getElementById(object_id).style.opacity = "50%";
+    document.getElementById(object_id).style.transition = "1s";
     let targetEl = document.getElementById(object_id);
     const options = {
         placement: 'center',
@@ -309,9 +310,13 @@ function openModal(object_id) {
     };
     const modal = new Modal(targetEl, options);
     modal.show();
+    if (object_id === "searchModal") {
+        document.getElementById("search_input").focus();
+    }
     setTimeout(function () {
         document.getElementById(object_id).style.scale = "100%";
-    }, 500)
+        document.getElementById(object_id).style.opacity = "100%";
+    }, 25)
     return true;
 }
 
