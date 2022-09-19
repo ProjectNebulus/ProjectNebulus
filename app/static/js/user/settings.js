@@ -243,11 +243,12 @@ window.addEventListener('load', function () {
     modal = new Modal(document.getElementById("change-modal"));
 });
 
-let step = 1;
+let step = 1, max = 3;
 let type, modal;
 
 function changeSettingsModal(settingType) {
     modal.show();
+    max = 3;
 
     const capsType = settingType.charAt(0).toUpperCase() + settingType.substring(1);
     const input = document.getElementById("enter-value");
@@ -287,7 +288,7 @@ function prev() {
 }
 
 function next() {
-    if (step < 3) {
+    if (step < max) {
         for (const el of document.querySelectorAll(" [step='" + step + "']"))
             el.classList.add("hidden");
 
