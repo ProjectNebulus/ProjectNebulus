@@ -31,39 +31,6 @@ window.addEventListener('load', () => {
 
     setCreateButton(pageTitle.innerHTML);
 
-
-    function openModal(object_id) {
-        document.getElementById(object_id).style.scale = "75%";
-        document.getElementById(object_id).style.opacity = "50%";
-        document.getElementById(object_id).style.transition = "1s";
-        let targetEl = document.getElementById(object_id);
-        const options = {
-            placement: 'center',
-            backdropClasses: 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40'
-        };
-        const modal = new Modal(targetEl, options);
-        modal.show();
-        setTimeout(function () {
-            document.getElementById(object_id).style.scale = "100%";
-            document.getElementById(object_id).style.opacity = "100%";
-        }, 25)
-        return true;
-    }
-
-    function closeModal(object_id) {
-        let targetEl = document.getElementById(object_id);
-        const options = {
-            placement: 'bottom-right',
-            backdropClasses: 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40'
-        };
-        const modal = new Modal(targetEl, options);
-        modal.hide();
-
-        for (const element of document.querySelectorAll('[modal-backdrop]')) element.remove();
-
-        return true;
-    }
-
     $('#search').click(function () {
         openModal('searchModal');
     });

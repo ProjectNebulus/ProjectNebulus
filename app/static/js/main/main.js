@@ -1,18 +1,26 @@
 const siteName = window.location.protocol + '//' + window.location.host;
 const startLoad = Date.now();
 let loadTime;
+
+const modals = new Set();
+
 window.addEventListener('load', () => {
     loadTime = Date.now() - startLoad;
     console.log(loadTime);
+
+    for (const el in document.querySelectorAll("[data-modal-toggle]"))
+        modals.add(el.getAttribute("data-modal-toggle"));
 });
 
-document.onkeyup = function (e) {
-    if (e.ctrlKey && e.which == 75) {
+document.addEventListener("keydown", e => {
+    if ((e.ctrlKey || e.metaKey) && e.key === "k")
         openModal('searchModal');
-    } else if (e.metaKey && e.which == 75) {
-        openModal('searchModal');
+
+    if (e.key === "Escape") {
+        for (const modal of modals)
+            closeModal(modal);
     }
-};
+});
 
 setInterval(changeFavicon, 3000);
 Array.prototype.insert = (index, item) => this.splice(index, 0, item);
@@ -308,37 +316,44 @@ function changeFavicon() {
 }
 
 function openModal(object_id) {
-    document.getElementById(object_id).style.scale = "75%";
-    document.getElementById(object_id).style.opacity = "50%";
-    document.getElementById(object_id).style.transition = "1s";
     let targetEl = document.getElementById(object_id);
-    const options = {
-        placement: 'center',
-        backdropClasses: 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40'
-    };
-    const modal = new Modal(targetEl, options);
+
+    if (!targetEl.classList.contains("hidden")) return;
+
+    modals.add(object_id);
+
+    const modal = new Modal(targetEl);
     modal.show();
+
+    targetEl.style.scale = "75%";
+    targetEl.style.opacity = "50%";
+    targetEl.style.transition = "0.2s";
+
     if (object_id === "searchModal") {
         document.getElementById("search_input").focus();
     }
     setTimeout(function () {
-        document.getElementById(object_id).style.scale = "100%";
-        document.getElementById(object_id).style.opacity = "100%";
+        targetEl.style.scale = "100%";
+        targetEl.style.opacity = "100%";
     }, 25)
-    return true;
 }
 
 function closeModal(object_id) {
     let targetEl = document.getElementById(object_id);
-    const options = {
-        placement: 'bottom-right',
-        backdropClasses: 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40'
-    };
-    const modal = new Modal(targetEl, options);
-    modal.hide();
-    let elements = document.querySelectorAll('[modal-backdrop]');
-    for (let i = 0; i < elements.length; i++) {
-        elements[i].style.display = 'none';
+    targetEl.style.scale = "0";
+    targetEl.style.opacity = "50%";
+    targetEl.style.transition = "0.2s";
+
+    for (const el of document.querySelectorAll("[modal-backdrop]")) {
+        el.style.transition = "0.2s";
+        el.style.opacity = "0";
     }
-    return true;
+
+    setTimeout(() => {
+        const modal = new Modal(targetEl);
+        modal.hide();
+
+        for (const el of document.querySelectorAll('[modal-backdrop]'))
+            el.remove();
+    }, 200);
 }
