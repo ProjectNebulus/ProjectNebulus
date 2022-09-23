@@ -222,7 +222,7 @@ window.addEventListener('load', function () {
         if (email.value === '') {
             validationIcons[0].style.color = 'pink';
             validationIcons[0].innerHTML = '<i class="material-icons">close</i>';
-            username.classList.remove(...GRAY);
+            email.classList.remove(...GRAY);
             email.classList.add(...RED_BORDER);
             return false;
         }
@@ -230,7 +230,7 @@ window.addEventListener('load', function () {
             validationIcons[0].style.color = 'pink';
             validationIcons[0].innerHTML = '<i class="material-icons">close</i>';
             emailStatus.innerHTML = 'Please enter a valid email!';
-            username.classList.remove(...GRAY);
+            email.classList.remove(...GRAY);
             email.classList.add(...RED_BORDER);
             return false;
         }
@@ -251,12 +251,14 @@ window.addEventListener('load', function () {
                 validationIcons[0].style.color = 'pink';
                 validationIcons[0].innerHTML = '<i class="material-icons">close</i>';
                 emailStatus.innerHTML = 'This email already exists!';
+                email.classList.remove(...GRAY);
                 email.classList.remove(...GREEN_BORDER);
                 email.classList.add(...RED_BORDER);
                 return false;
             } else {
                 validationIcons[0].style.color = 'lightgreen';
                 validationIcons[0].innerHTML = '<i class="material-icons">check</i>';
+                mail.classList.remove(...GRAY);
                 email.classList.remove(...RED_BORDER);
                 email.classList.add(...GREEN_BORDER);
                 emailStatus.innerHTML = '<br>';
@@ -272,6 +274,7 @@ window.addEventListener('load', function () {
         if (value !== '') {
             validationIcons[5].style.color = 'lightgreen';
             validationIcons[5].innerHTML = '<i class="material-icons">check</i>';
+            bday.classList.remove(...GRAY);
             bday.classList.remove(...RED_BORDER);
             bday.classList.add(...GREEN_BORDER);
             email_valid = true;
@@ -279,6 +282,7 @@ window.addEventListener('load', function () {
             validationIcons[5].style.color = 'pink';
             validationIcons[5].innerHTML = '<i class="material-icons">close</i>';
             status.innerHTML = 'Invalid Birthday';
+            bday.classList.remove(...GRAY);
             bday.classList.remove(...GREEN_BORDER);
             bday.classList.add(...RED_BORDER);
             email_valid = false;
@@ -299,6 +303,7 @@ window.addEventListener('load', function () {
             if (data === 'true') {
                 validationIcons[4].style.color = 'lightgreen';
                 validationIcons[4].innerHTML = '<i class="material-icons">check</i>';
+                verification.classList.remove(...GRAY);
                 verification.classList.remove(...RED_BORDER);
                 verification.classList.add(...GREEN_BORDER);
                 email_valid = true;
@@ -306,6 +311,7 @@ window.addEventListener('load', function () {
                 validationIcons[4].style.color = 'pink';
                 validationIcons[4].innerHTML = '<i class="material-icons">close</i>';
                 status.innerHTML = 'Incorrect Confirmation';
+                verification.classList.remove(...GRAY);
                 verification.classList.remove(...GREEN_BORDER);
                 verification.classList.add(...RED_BORDER);
                 email_valid = false;
@@ -322,6 +328,7 @@ window.addEventListener('load', function () {
         if (value === '') {
             validationIcons[3].style.color = 'pink';
             validationIcons[3].innerHTML = '<i class="material-icons">close</i>';
+            passwordConfirm.classList.remove(...GRAY);
             passwordConfirm.classList.remove(...GREEN_BORDER);
             passwordConfirm.classList.add(...RED_BORDER);
             email_valid = false;
@@ -330,6 +337,7 @@ window.addEventListener('load', function () {
         if (value === value2 && value !== '') {
             validationIcons[3].style.color = 'lightgreen';
             validationIcons[3].innerHTML = '<i class="material-icons">check</i>';
+            passwordConfirm.classList.remove(...GRAY);
             passwordConfirm.classList.remove(...RED_BORDER);
             passwordConfirm.classList.add(...GREEN_BORDER);
             email_valid = true;
@@ -337,6 +345,7 @@ window.addEventListener('load', function () {
             validationIcons[3].style.color = 'pink';
             validationIcons[3].innerHTML = '<i class="material-icons">close</i>';
             status.innerHTML = 'Two Passwords do not Match';
+            passwordConfirm.classList.remove(...GRAY);
             passwordConfirm.classList.remove(...GREEN_BORDER);
             passwordConfirm.classList.add(...RED_BORDER);
             email_valid = false;
@@ -353,6 +362,7 @@ window.addEventListener('load', function () {
         status.innerHTML = '<br>';
         const value = password.value;
         if (!value) {
+            password.classList.remove(...GRAY);
             password.classList.remove(...GREEN_BORDER);
             password.classList.add(...RED_BORDER);
             validationIcons[2].style.color = 'pink';
@@ -361,6 +371,7 @@ window.addEventListener('load', function () {
         }
         if (value.length < 6) {
             status.innerHTML = 'Password must be at least 6 characters long';
+            password.classList.remove(...GRAY);
             password.classList.remove(...GREEN_BORDER);
             password.classList.add(...RED_BORDER);
             validationIcons[2].style.color = 'pink';
@@ -380,12 +391,14 @@ window.addEventListener('load', function () {
 
             if (!hasSpecialCharacter) {
                 status.innerHTML = 'Password must include at least 1 special character!';
+                password.classList.remove(...GRAY);
                 password.classList.remove(...GREEN_BORDER);
                 password.classList.add(...RED_BORDER);
                 validationIcons[2].style.color = 'pink';
                 validationIcons[2].innerHTML = '<i class="material-icons">close</i>';
             } else {
                 validPassword = true;
+                password.classList.remove(...GRAY);
                 password.classList.remove(...RED_BORDER);
                 password.classList.add(...GREEN_BORDER);
                 validationIcons[2].style.color = 'lightgreen';
