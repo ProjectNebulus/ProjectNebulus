@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     actions = document.getElementsByClassName('link');
     pageTitle = document.getElementById('page-title');
     createButton = document.getElementById('create');
-    createButton.style.transition = "0.25s";
+    createButton.style.transition = "0.5s";
 
     const path = window.location.pathname.split('/');
     let saveData = path.reverse()[0];
@@ -94,5 +94,5 @@ function setCreateButton(title) {
     }
 
     createButton.style.opacity = hideButton ? '0' : '1';
-    createButton.style.visibility = hideButton ? 'visible' : 'hidden'
+    createButton.style.visibility = hideButton ? 'hidden' : 'visible';
 }
