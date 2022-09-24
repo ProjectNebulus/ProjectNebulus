@@ -179,6 +179,25 @@ def courses():
     )
 
 
+@main_blueprint.route("/clubs")
+@logged_in
+def clubs():
+    user_acc = read.find_user(id=session["id"])
+    user_clubs = read.get_user_clubs(session["id"])
+    return render_template(
+        "learning/clubs.html",
+        user=session["username"],
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        user_acc=user_acc,
+        user_clubs=list(user_clubs),
+        read=read,
+        page="Nebulus - Clubs",
+        translate=getText,
+        uniqueUsers=set(),
+    )
+
+
 def fmt(content: str) -> str:
     output = ""
     for line in content.strip().split("\n"):

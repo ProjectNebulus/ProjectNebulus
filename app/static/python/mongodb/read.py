@@ -61,6 +61,11 @@ def get_user_courses(user_id: str) -> list[Course]:
     return Course.objects(authorizedUsers=user)
 
 
+def get_user_clubs(user_id: str) -> list[Club]:
+    user = find_user(pk=user_id)
+    return Club.objects(authorizedUsers=user)
+
+
 def get_user_docs(user_id: str) -> list[NebulusDocument]:
     user = find_user(pk=user_id)
     return NebulusDocument.objects(authorizedUsers=user)

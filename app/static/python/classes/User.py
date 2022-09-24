@@ -75,6 +75,7 @@ class User(Snowflake):
     premium_expiration = DateTimeField(required=False, default=None, null=True)
     status = StringField(default="", null=True)
     courses = ListField(ReferenceField("Course"), default=[])
+    clubs = ListField(ReferenceField("Club"), default=[])
     planner = EmbeddedDocumentField(Planner, null=True, default=None)
     notepad = EmbeddedDocumentField(Notepad, null=True, default=None)
     calendar = EmbeddedDocumentField(Calendar, null=True, default=None)
