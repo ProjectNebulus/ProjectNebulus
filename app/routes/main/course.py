@@ -1,11 +1,12 @@
 import datetime
 
 import requests
-from flask import redirect, render_template, request, session
+from flask import render_template, request, session
 from flask_cors import cross_origin
 
 from app.static.python.classes import Course, User
 from app.static.python.mongodb import create, read
+
 from app.static.python.mongodb.read import getText
 from . import main_blueprint, utils
 from .utils import logged_in, private_endpoint
@@ -13,12 +14,7 @@ from .utils import logged_in, private_endpoint
 
 @main_blueprint.route("/course/<id>")
 def course_home(**kwargs):
-    return course_page("home", id=kwargs["id"])
-
-
-@main_blueprint.route("/course/<id>/")
-def wrong(**kwargs):
-    return redirect(f"/course/{kwargs['id']}")
+    return course_page("course", id=kwargs["id"])
 
 
 @main_blueprint.route("/course/<id>/<page>")
@@ -43,6 +39,9 @@ def course_page(page, **kwargs):
     if not request.args.get("iframe"):
         if page == "course":
             page = "documents"
+
+        iframeSrc += page + "?iframe=true"
+        page = "course"
 
     return render_template(
         f"courses/{page}.html",

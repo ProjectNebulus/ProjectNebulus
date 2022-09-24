@@ -98,11 +98,8 @@ function initEvents() {
     let prevPageBtn = document.getElementById('prev_page');
     let nextPageBtn = document.getElementById('next_page');
     let goToPage = document.getElementById('go_to_page');
-    console.log(prevPageBtn);
     prevPageBtn.addEventListener('click', renderPreviousPage);
-    console.log(nextPageBtn);
     nextPageBtn.addEventListener('click', renderNextPage);
-    console.log(goToPage);
     goToPage.addEventListener('click', goToPageNum);
 }
 

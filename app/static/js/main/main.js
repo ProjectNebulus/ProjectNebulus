@@ -52,6 +52,10 @@ function keyUpDelay(querySelector, duration, func) {
     new KeyUpTimer(querySelector, duration, func).enable();
 }
 
+if (window.location.search.includes("iframe=true")) {
+    document.body.style.background = "transparent";
+}
+
 /**
  * This class calls a function once an input's value has not been changed for a certain amount of time.
  * @param func The function to be called.
@@ -96,7 +100,7 @@ class KeyUpTimer {
     }
 }
 
-function detectTheme() {
+function toggleTheme() {
     if (!localStorage.getItem('color-theme')) {
         const darkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
         localStorage.setItem('color-theme', darkTheme ? 'dark' : 'light');
@@ -107,16 +111,29 @@ function detectTheme() {
     else document.documentElement.classList.remove('dark');
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+    const wallpaper = localStorage.getItem("wallpaper");
+    if (window.location.search.includes("iframe=true")) document.body.style.background = "transparent";
+    else if (wallpaper) {
+        const brightness = document.documentElement.classList.contains("dark") ? 0 : 255;
+        document.body.style.background = `linear-gradient( rgba(${brightness}, ${brightness}, ${brightness}, 0.5), rgba(${brightness}, ${brightness}, ${brightness}, 0.2) ), url('${wallpaper}') no-repeat center center fixed`;
+        document.body.style.backgroundSize = 'cover';
+    }
+});
+
 function invertSite() {
+    if (window.location.search.includes("iframe=true"))
+        return;
+
     const banner = document.getElementById('homeBanner');
 
     if (localStorage.getItem('color-theme') === 'dark') {
         if (banner) banner.style.filter = 'brightness(100%)';
 
         for (const logo of document.getElementsByTagName('logo'))
-            if (!logo.getAttribute('no-revert')) logo.style.filter = 'brightness(100%)';
+            if (!logo.getAttribute('no-revert'))
+                logo.style.filter = 'brightness(100%)';
     } else {
-
         if (banner) banner.style.filter = 'brightness(70%)';
 
         for (const logo of document.getElementsByTagName('logo')) {
@@ -128,45 +145,17 @@ function invertSite() {
         if (frame && (frame.src.includes(siteName) || !frame.src.includes('http'))) {
             const innerDoc = frame.contentDocument || frame.contentWindow.document;
             innerDoc.addEventListener('click', () => window.dispatchEvent(new Event('click')));
-
-            if (document.documentElement.classList.contains('dark')) {
-                innerDoc.documentElement.classList.add('dark');
-                let wallpaper = localStorage.getItem('wallpaper');
-                if (wallpaper === null || window.location.pathname == "/") {
-                    innerDoc.body.style.background = '#111926';
-                } else {
-                    document.body.style.background = `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2) ), url('${wallpaper}') no-repeat center center fixed`;
-                    document.body.style.backgroundSize = 'cover';
-                }
-            } else {
-                innerDoc.documentElement.classList.remove('dark');
-                let wallpaper = localStorage.getItem('wallpaper');
-                if (wallpaper === null || window.location.pathname == "/") {
-                    innerDoc.body.style.background = 'white';
-                } else {
-                    document.body.style.backgroundSize = 'cover';
-                    document.body.style.background = `linear-gradient( rgba(256, 256, 256, 0.5), rgba(256, 256, 256, 0.2) ), url('${wallpaper}') no-repeat center center fixed`;
-                    document.body.style.backgroundSize = 'cover';
-                    for (let header of document.getElementsByClassName('modalheader')) {
-                        header.style = `background: linear-gradient(rgba(256, 256, 256, 0.5), rgba(256, 256, 256, 0.2)) 0% 0% / cover, url("${wallpaper}") ;
-                    background-position: center top;
-                    background-size: 100% auto;`;
-                    }
-                }
-            }
         }
     }
 
     if (localStorage.getItem('color-theme') === 'dark') {
         let elements = document.getElementsByClassName('changeable-gradient');
-        console.log(elements);
         for (let element of elements) {
             element.classList.remove('gradient-text');
             element.classList.add('gradient-text-dark');
         }
     } else {
         let elements = document.getElementsByClassName('changeable-gradient');
-        console.log(elements);
         for (let element of elements) {
             element.classList.remove('gradient-text-dark');
             element.classList.add('gradient-text');
@@ -319,19 +308,23 @@ function openModal(object_id) {
     let targetEl = document.getElementById(object_id);
 
     if (!targetEl.classList.contains("hidden")) return;
+    targetEl.classList.add("pointer-events-none");
+    targetEl.children[0].classList.add("pointer-events-auto");
 
     modals.add(object_id);
 
     const modal = new Modal(targetEl);
     modal.show();
 
+    document.querySelector("[modal-backdrop]").addEventListener("click", () => closeModal(object_id));
+
     targetEl.style.scale = "75%";
     targetEl.style.opacity = "50%";
     targetEl.style.transition = "0.2s";
 
-    if (object_id === "searchModal") {
+    if (object_id === "searchModal")
         document.getElementById("search_input").focus();
-    }
+
     setTimeout(function () {
         targetEl.style.scale = "100%";
         targetEl.style.opacity = "100%";

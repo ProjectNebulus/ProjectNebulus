@@ -1,8 +1,9 @@
 let actions, pageTitle, createButton;
-window.addEventListener('load', () => {
+document.addEventListener('DOMContentLoaded', () => {
     actions = document.getElementsByClassName('link');
     pageTitle = document.getElementById('page-title');
     createButton = document.getElementById('create');
+    createButton.style.transition = "0.25s";
 
     const path = window.location.pathname.split('/');
     let saveData = path.reverse()[0];
@@ -63,21 +64,21 @@ function setCreateButton(title) {
     switch (title.toLowerCase()) {
         case 'documents':
             actions[0].innerHTML = 'Upload File';
-            actions[0].onclick = () => changeSettingsModal('createDocument');
+            actions[0].onclick = () => openModal('createDocument');
             actions[1].innerHTML = 'Post a link';
-            actions[1].onclick = () => changeSettingsModal('postLink');
+            actions[1].onclick = () => openModal('postLink');
             actions[2].innerHTML = 'Add Assignment';
-            actions[2].onclick = () => changeSettingsModal('createAssignment');
+            actions[2].onclick = () => openModal('createAssignment');
             break;
 
         case 'announcements':
             actions[0].innerHTML = 'Add Announcement';
-            actions[0].onclick = () => changeSettingsModal('createAnnouncement');
+            actions[0].onclick = () => openModal('createAnnouncement');
             break;
 
         case 'textbook':
             actions[0].innerHTML = 'Create Textbook';
-            actions[0].onclick = () => changeSettingsModal('createTextbook');
+            actions[0].onclick = () => openModal('createTextbook');
             break;
     }
 
@@ -92,5 +93,6 @@ function setCreateButton(title) {
         } else a.parentElement.classList.add('hidden');
     }
 
-    createButton.style.display = hideButton ? 'none' : 'block';
+    createButton.style.opacity = hideButton ? '0' : '1';
+    createButton.style.visibility = hideButton ? 'visible' : 'hidden'
 }

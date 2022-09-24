@@ -32,7 +32,7 @@ themeToggleBtn.addEventListener('click', function () {
         localStorage.setItem('color-theme', 'dark');
     else localStorage.setItem('color-theme', 'light');
 
-    detectTheme();
+    toggleTheme();
     invertSite();
 });
 

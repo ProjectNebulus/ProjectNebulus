@@ -22,7 +22,5 @@ for (const a of document.querySelectorAll("a[target=frame]")) {
         a.style.pointerEvents = 'none';
         a.style.cursor = 'default';
         a.classList.add('dark:bg-gray-600', 'light:bg-gray-600');
-
-        sessionStorage.setItem('{{ course_id }}', title);
     };
 }
