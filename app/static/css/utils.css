@@ -10,13 +10,18 @@ body {
 }
 
 a {
-    cursor: none;
+    cursor: none !important;
+}
+
+button {
+    cursor: none !important;
 }
 
 #circularcursor {
     background-color: rgb(84 84 84 / 20%);
     border: 1px solid #4B5563;
     height: 40px;
+    pointer-events: none;
     width: 40px;
     border-radius: 50%;
     -moz-border-radius: 50%;

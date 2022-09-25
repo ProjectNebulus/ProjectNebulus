@@ -7,12 +7,41 @@ const modals = new Set();
 $(document).ready(function () {
     $(document).on('mousemove', function (e) {
         $('#circularcursor').css({
-            left: e.pageX,
-            top: e.pageY,
+            left: e.pageX - 20,
+            top: e.pageY - 20,
             display: "block"
         });
     })
 });
+
+$("a").on("mouseover", function () {
+    $('#circularcursor').css({
+        borderWidth: 4,
+        borderColor: "black",
+    });
+});
+
+$("button").on("mouseover", function () {
+    $('#circularcursor').css({
+        borderWidth: 4,
+        borderColor: "black",
+    });
+});
+$("a").on("mouseout", function () {
+    $('#circularcursor').css({
+        borderWidth: 1,
+        borderColor: "#4B5563",
+    });
+});
+
+$("button").on("mouseout", function () {
+    $('#circularcursor').css({
+        borderWidth: 1,
+        borderColor: "#4B5563",
+    });
+});
+
+
 window.addEventListener('load', () => {
     loadTime = Date.now() - startLoad;
     console.log(loadTime);
