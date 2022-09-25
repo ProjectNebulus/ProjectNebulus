@@ -38,14 +38,16 @@
     {% if course.announcements|length == 0 %}
         <h1 class="mx-4 my-4 text-2xl text-black dark:text-white">You have no announcements! Try creating one!</h1>
     {% else %}
-        {% for i in course.announcements %}
-            <div class="block p-6 ml-4 my-4 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
-                 style="width: 90%">
-                <div class="flex justify-between items-center bg-gray-200 dark:bg-gray-900">
-                    <div class="flex flex-row items-left rounded-lg p-3">
-                        <img class="mb-3 w-12 h-12 rounded-full shadow-lg  dark:bg-gray-900 dark:hover:bg-gray-800 "
-                             data-dropdown-toggle="userDropdown-Announcement object"
-                             alt="{{ i.author }}'s Profile Pic"
+        <div style="    height: 80%;
+    overflow-y: scroll; margin-top: 30px;">
+            {% for i in course.announcements %}
+                <div class="block p-6 ml-4 my-4 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
+                     style="width: 90%; margin:auto;     margin-top: 30px;">
+                    <div class="flex justify-between items-center bg-gray-200 dark:bg-gray-900">
+                        <div class="flex flex-row items-left rounded-lg p-3">
+                            <img class="mb-3 w-12 h-12 rounded-full shadow-lg  dark:bg-gray-900 dark:hover:bg-gray-800 "
+                                 data-dropdown-toggle="userDropdown-Announcement object"
+                                 alt="{{ i.author }}'s Profile Pic"
                              src="{{ i.author_pic }}">
                         <div class="ml-4">
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white">{{ i.author }}</h3>
@@ -162,6 +164,7 @@
                 </div>
             </div>
         {% endfor %}
+        </div>
     {% endif %}
     </body>
 {% endblock %}
