@@ -123,7 +123,7 @@ function toggleTheme() {
 document.addEventListener("DOMContentLoaded", () => {
     const wallpaper = localStorage.getItem("wallpaper");
     if (window.location.search.includes("iframe=true")) document.body.style.background = "transparent";
-    else if (wallpaper) {
+    else if (wallpaper && !(window.location.pathname === "/")) {
         const brightness = document.documentElement.classList.contains("dark") ? 0 : 255;
         document.body.style.background = `linear-gradient( rgba(${brightness}, ${brightness}, ${brightness}, 0.6), rgba(${brightness}, ${brightness}, ${brightness}, 0.6) ), url('${wallpaper}') no-repeat center center fixed`;
         document.body.style.backgroundSize = 'cover';
@@ -138,13 +138,19 @@ function invertSite() {
 
     if (localStorage.getItem('color-theme') === 'dark') {
         if (banner) banner.style.filter = 'brightness(100%)';
-
+        if (window.location.pathname ==="/"){
+            document.getElementById("homeBanner").style.background = `linear-gradient(45deg, rgba(0, 0,0, 0.5), rgba(0, 0, 0, 0.5)), url('/static/images/nebulusCats/IMG_1134.png')`;
+            document.getElementById("homeBanner").style.backgroundSize = "cover";
+        }
         for (const logo of document.getElementsByTagName('logo'))
             if (!logo.getAttribute('no-revert'))
                 logo.style.filter = 'brightness(100%)';
     } else {
         if (banner) banner.style.filter = 'brightness(70%)';
-
+        if (window.location.pathname ==="/"){
+            document.getElementById("homeBanner").style.background = `linear-gradient(45deg, rgba(0, 0,0, 0.5), rgba(0, 0, 0, 0.5)), url('/static/images/nebulusCats/IMG_1131.png')`;
+            document.getElementById("homeBanner").style.backgroundSize = "cover";
+        }
         for (const logo of document.getElementsByTagName('logo')) {
             if (logo.getAttribute('no-revert') === null) logo.style.filter = 'brightness(70%)';
         }

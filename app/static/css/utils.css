@@ -2,11 +2,11 @@
 
 html {
     cursor: none;
-    overflow-y: hidden !important;
+    overflow-x: hidden !important;
 }
 
 body {
-    overflow-y: hidden !important;
+    overflow-x: hidden !important;
 }
 
 a {
