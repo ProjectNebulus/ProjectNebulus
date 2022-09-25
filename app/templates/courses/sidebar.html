@@ -1,4 +1,4 @@
-<aside class="w-96 h-full" aria-label="Sidebar" style="flex: 15rem 0 0">
+<aside class="w-48 h-full" aria-label="Sidebar" style="flex: 15rem 0 0">
     <div class="px-3 py-4 overflow-y-auto rounded bg-gray-100/75 dark:bg-gray-800/75 h-full">
         <span class="self-center text-lg whitespace-nowrap w-full overflow-hidden block font-semibold text-black dark:text-white text-black truncate">
             <img src="{{ course.avatar.avatar_url }}"
@@ -9,6 +9,14 @@
                         margin: 10px;">
             {{ course.name }}
         </span>
+        <li>
+            <a href="/course/{{ course_id }}/home"
+               target="frame"
+               class="flex items-center p-2 text-base text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-200 dark:hover:bg-gray-700">
+                <p class="dark:text-gray-400 material-icons">home</p>
+                <span class="ml-3">Home</span>
+            </a>
+        </li>
         <ul class="space-y-2 cursor-pointer">
             <li>
                 <a href="/course/{{ course_id }}/documents"
@@ -34,14 +42,7 @@
                     <span class="ml-3">Grades</span>
                 </a>
             </li>
-            <li>
-                <a href="/course/{{ course_id }}/"
-                   target="frame"
-                   class="flex items-center p-2 text-base text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-200 dark:hover:bg-gray-700">
-                    <p class="dark:text-gray-400 material-icons">info</p>
-                    <span class="ml-3">Information</span>
-                </a>
-            </li>
+
             <li>
                 <a href="/course/{{ course_id }}/settings"
                    target="frame"
