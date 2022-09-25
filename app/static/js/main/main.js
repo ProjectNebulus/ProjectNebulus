@@ -4,6 +4,15 @@ let loadTime;
 
 const modals = new Set();
 
+$(document).ready(function () {
+    $(document).on('mousemove', function (e) {
+        $('#circularcursor').css({
+            left: e.pageX,
+            top: e.pageY,
+            display: "block"
+        });
+    })
+});
 window.addEventListener('load', () => {
     loadTime = Date.now() - startLoad;
     console.log(loadTime);

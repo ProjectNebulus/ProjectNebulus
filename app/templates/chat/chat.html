@@ -136,36 +136,27 @@
                             document.getElementById('pageTitle').innerHTML = `Chat`;
                             document.getElementById("current_app").innerText = "forum";
                             document.getElementById("changePage").innerHTML = `
-     <ul class="py-1 text-sm text-gray-700 dark:text-gray-200 align-left" aria-labelledby="dropdownDefault">
+                    <ul class="text-sm text-gray-700 dark:text-gray-200 align-left" aria-labelledby="dropdownDefault">
+                        <a id="friends_btn" onclick="openFriends()" class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex gap-4 cursor-pointer">
+                            <span class="material-icons text-gray-600 dark:text-gray-300">group</span>
+                           Friends
+<div class="inline-flex justify-center items-center w-6 h-6 text-xs font-bold text-white bg-red-500 rounded-full">{{ user_obj.chatProfile.incomingFriendRequests|length }}</div>
+                        </a>
+                        <a id="blocked_btn" onclick="openBlocked()" class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex gap-4 cursor-pointer">
+                            <span class="material-icons text-gray-600 dark:text-gray-300">block</span>
+                            Blocked
+                        </a>
+                        <a id="emojis_btn" onclick="toggleEmoji()" class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex gap-4 cursor-pointer">
+                            <span class="material-icons text-gray-600 dark:text-gray-300">mood</span>
+                            Emojis
+                        </a>
+                        <a id="email_btn" onclick="toggleEmail();"  class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex gap-4 cursor-pointer">
+                            <span class="material-icons text-gray-600 dark:text-gray-300">mail</span>
+                            Emails
+                        </a>
 
-                            <li>
-                            <a style="text-align: left;" id="friends_btn" onclick="openFriends()" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
- <i class="material-icons text-black dark:text-white" style="margin-right:10px; display:inline-block; vertical-align:middle; ">group</i>
-                                <span style=" display: inline-block; " class="space-y-1 text-md dark:text-white">
-                                    <span>Friends</span>
-                                </div>
-
-                            <span style=" display: inline-block; " class="inline-flex items-center mt-4 p-1 mr-3 h-5 w-5 text-sm font-semibold text-white rounded-full bg-red-500" style="margin-left: 100px;">
-                                {{ user_obj.chatProfile.incomingFriendRequests|length }}
-                                </span>
-                                </a>
-                        </li><li>
-                            <a style="text-align: left;"  id="blocked_btn" onclick="openBlocked()" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"> <i class="material-icons text-black dark:text-white" style="margin-right:10px; display:inline-block; vertical-align:middle;">block</i>
-                            <span style=" display: inline-block; " class="space-y-1 text-md dark:text-white">
-                                <div>Blocked</div>
-                            </span></a>
-                        </li>
-                        <li>
-                            <a style="text-align: left;" id="emojis_btn" onclick="toggleEmoji()" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"> <i class="material-icons text-black dark:text-white" style="margin-right:10px; display:inline-block; vertical-align:middle;">mood</i>
-                            <span style=" display: inline-block; " class="space-y-1 text-md dark:text-white">Emojis</span></a>
-                        </li>
-                        <li>
-                            <a style="text-align: left;" id="email_btn" onclick="toggleEmail();" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"> <i class="material-icons text-black dark:text-white" style="margin-right:10px; display:inline-block; vertical-align:middle;">mail</i>
-                            <span style=" display: inline-block; " class="space-y-1 text-md dark:text-white">Emails</span></a>
-                        </li>
-
-
-                    </ul>`
+                    </ul>
+                `
                         </script>
                         <div class="flex flex-row">
                             <div class="uppercase text-xl text-gray-600 cursor-pointer"
