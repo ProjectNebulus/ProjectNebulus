@@ -31,7 +31,7 @@
             {% endif %}
             {% for folder in course.folders %}
                 <br>
-                <a class="truncate text-ellipsis overflow-hidden block max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                <a class="truncate text-ellipsis overflow-hidden block max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800/75 dark:border-gray-700 dark:hover:bg-gray-700">
                     <p class="font-normal text-gray-700 dark:text-gray-400 whitespace-nowrap">
                         <svg class="w-6 h-6 inline-block mr-2 -mt-1.5"
                              fill="none"
@@ -49,9 +49,9 @@
             <br>
             {% for document in course.documents %}
                 <div onclick="startFile('{{ document.name }}', siteName + '/getResource/{{ course.id }}/{{ document.id }}',{{ ("pdf" in document.url)|string|lower }})"
-                     class="editable p-6 mb-8 bg-white rounded-lg cursor-pointer border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 relative"
+                     class="editable p-6 mb-8 bg-white rounded-lg cursor-pointer border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800/75 dark:border-gray-700 dark:hover:bg-gray-700 relative"
                      style="width: min-content; max-width: 90%">
-                    <div class="edit-controls absolute flex bg-gray-500 dark:bg-gray-800 material-icons rounded-lg text-gray-200 dark:text-gray-500 overflow-hidden shadow"
+                    <div class="edit-controls absolute flex bg-gray-500 dark:bg-gray-800/75 material-icons rounded-lg text-gray-200 dark:text-gray-500 overflow-hidden shadow"
                          style="top: -0.5rem; right: -1rem"
                          onclick="override=true">
                         <span>edit</span>

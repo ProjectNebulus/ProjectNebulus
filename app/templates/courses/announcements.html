@@ -41,11 +41,11 @@
         <div style="    height: 80%;
     overflow-y: scroll; margin-top: 30px;">
             {% for i in course.announcements %}
-                <div class="block p-6 ml-4 my-4 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
+                <div class="block p-6 ml-4 my-4 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800/75 dark:border-gray-700"
                      style="width: 90%; margin:auto;     margin-top: 30px;">
-                    <div class="flex justify-between items-center bg-gray-200 dark:bg-gray-900">
+                    <div class="flex justify-between rounded-lg items-center bg-gray-200 dark:bg-gray-800/50">
                         <div class="flex flex-row items-left rounded-lg p-3">
-                            <img class="mb-3 w-12 h-12 rounded-full shadow-lg  dark:bg-gray-900 dark:hover:bg-gray-800 "
+                            <img class="mb-3 w-12 h-12 rounded-full shadow-lg  dark:bg-gray-800/50 dark:hover:bg-gray-800 "
                                  data-dropdown-toggle="userDropdown-Announcement object"
                                  alt="{{ i.author }}'s Profile Pic"
                              src="{{ i.author_pic }}">
@@ -82,29 +82,29 @@
                         </svg>
                         {{ i.comments|length }}
                     </div>
-                </div>
-                <div class="text-gray-700 dark:text-gray-400 my-4 bg-gray-200 dark:bg-gray-900 p-4 rounded-lg overflow-auto"
-                     style="max-height: 20rem">
-                    {% for line in i.content.strip().split("\n") %}
+                    </div>
+                    <div class="text-gray-700 dark:text-gray-400 my-4 bg-gray-200 dark:bg-gray-800/50 p-4 rounded-lg overflow-auto"
+                         style="max-height: 20rem">
+                        {% for line in i.content.strip().split("\n") %}
                         {% if line != "" %}
                             <p>{{ line }}</p>
                         {% else %}
                             <br>
                         {% endif %}
                     {% endfor %}
-                </div>
-                <br>
-                <div class="text-gray-400 dark:text-gray-600 bg-gray-200 dark:bg-gray-900 p-2 rounded-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                         fill="none"
-                         viewBox="0 0 24 24"
-                         stroke-width="2"
-                         stroke="currentColor"
-                         aria-hidden="true"
-                         class="w-5 h-5 mr-2"
-                         style=" display: inline-block; ">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </div>
+                    <br>
+                    <div class="text-gray-400 dark:text-gray-600 bg-gray-200 dark:bg-gray-800/50 p-2 rounded-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             fill="none"
+                             viewBox="0 0 24 24"
+                             stroke-width="2"
+                             stroke="currentColor"
+                             aria-hidden="true"
+                             class="w-5 h-5 mr-2"
+                             style=" display: inline-block; ">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                     Posted {{ strftime(i.date, "%-I:%M %p on %B %-d, %Y") }}
                 </div>
@@ -156,7 +156,7 @@
                         <div class="mb-6">
                             <input type="text"
                                    id="msg"
-                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800/50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                    placeholder="Message @{{ i.author }}"
                                    required>
                         </div>
