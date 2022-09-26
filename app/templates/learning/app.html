@@ -218,15 +218,15 @@
              class="border-gray-200 dark:border-gray-700 border-l text-left h-full overflow-auto pt-4">
             <p class="block mb-2 text-3xl uppercase dark:text-gray-500 mx-4">Upcoming Events</p>
             <br>
-            <div class="flex flex-col sm:rounded-lg min-w-full align-middle overflow-auto inline-block"
-                 style="height: 80%">
+            <div class="flex flex-col sm:rounded-lg align-middle overflow-auto inline-block"
+                 style="overflow-x: hidden;overflow-y: auto;height: 80%;width: 90%;margin: auto;">
                 {% if events|length == 0 %}
                     <p class="text-gray-300 dark:text-gray-500 mx-4">
                         No Events, Assignments, or Quizzes! To
                         add events on to your Nebulus dashboard, please add it within a Course!
                     </p>
                 {% else %}
-                    {% for date, alist in assignments.items() %}
+                    {% for date, alist in events.items() %}
                         {% set diff = (date - now).days %}
                         {% if diff < 0 %}
                             <h1 style="text-align: left;

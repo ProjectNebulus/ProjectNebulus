@@ -68,6 +68,7 @@ def app():
 
     return render_template(
         "learning/app.html",
+        now=datetime.now(),
         user=session["username"],
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
@@ -75,7 +76,7 @@ def app():
         read=read,
         page="Nebulus - Learning",
         announcements=user_events[0],
-        assignments=user_events[1],
+        events=user_events[1],
         enumerate=enumerate,
         strftime=datetime.strftime,
         translate=getText,
