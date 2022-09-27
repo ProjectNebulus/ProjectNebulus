@@ -3,88 +3,88 @@
     {% include "utils/navbar.html" %}
     <!DOCTYPE html>
     <html>
-	     <head>
+	    <head>
     		<meta charset="UTF-8">
     		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     		<style>
-		      #strike {
-			display: block;
-			text-align: center;
-			overflow: hidden;
-			white-space: nowrap; 
-		      }
-		  
-		      #strike > span {
-			position: relative;
-			display: inline-block;
-		      }
-			
-		      #strike > span:before,
-		      #strike > span:after {
-			content: "";
-			position: absolute;
-			top: 50%;
-			width: 800px;
-			height: 4px;
-		      }
+			#strike {
+				display: block;
+				text-align: center;
+				overflow: hidden;
+				white-space: nowrap; 
+			}
+		
+			#strike > span {
+				position: relative;
+				display: inline-block;
+			}
+		
+			#strike > span:before,
+				#strike > span:after {
+				content: "";
+				position: absolute;
+				top: 50%;
+				width: 800px;
+				height: 4px;
+			}
 
-		      #strike > span:before {
-			background-image: linear-gradient(to left, #E5944D, #FF3B3B)
-		      }
+			#strike > span:before {
+				background-image: linear-gradient(to left, #E5944D, #FF3B3B)
+			}
 
-		      #strike > span:after {
-			background-image: linear-gradient(to left, #D3CF59, #E5944D)
-		      }
-		  
-		      #strike > span:before {
-			right: 100%;
-			margin-right: 15px;
-		      }
-		  
-		      #strike > span:after {
-			left: 100%;
-			margin-left: 15px;
-		      }
+			#strike > span:after {
+				background-image: linear-gradient(to left, #D3CF59, #E5944D)
+			}
+		
+			#strike > span:before {
+				right: 100%;
+				margin-right: 15px;
+			}
+		
+			#strike > span:after {
+				left: 100%;
+				margin-left: 15px;
+			}
 
-		      #r-y {
-			height: 4px;
-			width: 100%;
-			border: 0;
-			background-image: linear-gradient(to right, #FF3B3B, #E5944D);
-		      }
+			#r-y {
+				height: 4px;
+				width: 100%;
+				border: 0;
+				background-image: linear-gradient(to right, #FF3B3B, #E5944D);
+			}
 
-		      #a::before{
-			content: '';
-			display: inline-block;
-			width: 12px;
-			height: 12px;
-			border-radius: 50%;
-			border: 2px solid red;
-			margin-left: -13px;
-			background-color: white;
-		      }
+			#a::before{
+				content: '';
+				display: inline-block;
+				width: 12px;
+				height: 12px;
+				border-radius: 50%;
+				border: 2px solid red;
+				margin-left: -13px;
+				background-color: white;
+			}
 
-		      .parent {
-			display: grid;
-			grid-template-columns: repeat(3, 1fr);
-			grid-template-rows: repeat(2, 1fr);
-			grid-column-gap: 30px;
-			grid-row-gap: 30px;
-			width: 100%;   
-			height: 500px;
-		      }
-			
-		      .div1 { grid-area: 1 / 1 / 3 / 3; }
-		      .div2 { grid-area: 1 / 3 / 2 / 4; }
-		      .div3 { grid-area: 2 / 3 / 3 / 4; }
+			.parent {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				grid-template-rows: repeat(2, 1fr);
+				grid-column-gap: 30px;
+				grid-row-gap: 30px;
+				width: 100%;   
+				height: 700px;
+			}
+		
+			.div1 { grid-area: 1 / 1 / 3 / 3; }
+			.div2 { grid-area: 1 / 3 / 2 / 4; }
+			.div3 { grid-area: 2 / 3 / 3 / 4; }
 
-		      input {
-			border-image-source: linear-gradient(to right, #FF3B3B, #E5944D);
-			border-width: 4px;
-			border-image-slice: 1;
-		      }
-	  	</style>
+			input {
+				border-image-source: linear-gradient(to right, #FF3B3B, #E5944D);
+				border-width: 4px;
+				border-image-slice: 1;
+			}
+	  		</style>
 	  </head>
 	  <body>
 
