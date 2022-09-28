@@ -104,7 +104,7 @@ aside *::-webkit-scrollbar, nav *::-webkit-scrollbar {
 }
 
 .dark ::-webkit-scrollbar-track-piece {
-    background: rgb(36 46 60);
+    background: rgb(36 46 60 / 44%);
 }
 
 .text-3xl {

@@ -1,6 +1,7 @@
 const siteName = window.location.protocol + '//' + window.location.host;
 const startLoad = Date.now();
 let loadTime;
+let screenTime;
 
 const modals = new Set();
 
@@ -49,6 +50,11 @@ window.addEventListener('load', () => {
     for (const el in document.querySelectorAll("[data-modal-toggle]"))
         modals.add(el.getAttribute("data-modal-toggle"));
 });
+
+
+window.addEventListener("beforeunload", function (e) {
+    alert("bye");
+}, false);
 
 document.addEventListener("keydown", e => {
     if ((e.ctrlKey || e.metaKey) && e.key === "k")
