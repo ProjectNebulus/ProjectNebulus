@@ -5,6 +5,24 @@ let screenTime;
 
 const modals = new Set();
 
+
+window.addEventListener("beforeunload", function (e) {
+    screenTime = Date.now() - startLoad;
+    $.ajax({
+        url: '/screenTime',
+        type: 'GET',
+        contentType: 'application/json',
+        data: {
+            "data": screenTime,
+            "location": window.location.pathname,
+        }
+    })
+    // var confirmationMessage = 'It looks like you have been editing something. '
+    //     + 'If you leave before saving, your changes will be lost.';
+    //
+    // (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+    // return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
+});
 $(document).ready(function () {
     $(document).on('mousemove', function (e) {
         $('#circularcursor').css({
@@ -52,9 +70,6 @@ window.addEventListener('load', () => {
 });
 
 
-window.addEventListener("beforeunload", function (e) {
-    alert("bye");
-}, false);
 
 document.addEventListener("keydown", e => {
     if ((e.ctrlKey || e.metaKey) && e.key === "k")
