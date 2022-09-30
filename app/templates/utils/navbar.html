@@ -120,7 +120,7 @@
                         style="float:left;
                                vertical-align: middle;"
                         type="button"
-                        class="hidden sm:flex items-center w-64 text-left space-x-3 px-4 h-12 bg-white/75 ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800/75 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700 text-sm">
+                        class="hidden lg:flex items-center w-64 text-left space-x-3 px-4 h-12 bg-white/75 ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800/75 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700 text-sm">
                     <svg width="24"
                          height="24"
                          fill="none"
@@ -138,8 +138,28 @@
                     <abbr title="Command"
                           class="no-underline text-slate-300 dark:text-slate-500 mr-2">⌘</abbr> K</kbd>
                 </button>
+                <button onclick="openModal('searchModal');"
+                        id="search"
+                        style="float:left;
+                               vertical-align: middle;"
+                        type="button"
+                        class="flex lg:hidden items-center w-12 text-left space-x-3 px-4 h-12 bg-white/75 ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800/75 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700 text-sm">
+                    <svg width="24"
+                         height="24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round"
+                         class="flex-none"
+                         aria-hidden="true">
+                        <path d="m19 19-3.5-3.5"></path>
+                        <circle cx="11" cy="11" r="6"></circle>
+                    </svg>
+
+                </button>
                 <button data-dropdown-toggle="changePage"
-                        class="hidden sm:flex items-center w-64 text-left space-x-3 px-4 h-12 bg-white/75 ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800/75 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700 text-sm"
+                        class="hidden lg:flex items-center w-64 text-left space-x-3 px-4 h-12 bg-white/75 ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800/75 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700 text-sm"
                         type="button"
                         style="float: left;
                        margin-left: 20px;
@@ -153,6 +173,14 @@
                          xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
+                </button>
+                <button data-dropdown-toggle="changePage"
+                        class="lg:hidden items-center w-12 text-left space-x-3 px-4 h-12 bg-white/75 ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800/75 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700 text-sm"
+                        type="button" style="float: left;
+                       margin-left: 20px;
+                       vertical-align: middle;">
+
+                    <i class="material-icons h-4 w-4"> menu </i>
                 </button>
                 <div id="changePage"
                      class="z-40 py-2 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-800 hidden"
@@ -197,7 +225,7 @@
                 </div>
                 <button style=" border-radius: 50%; float: left; margin-right:10px; "
                         data-dropdown-toggle="app_dropdown"
-                        class="mx-4 hidden sm:flex items-center text-left space-x-3 w-12 h-12 dark:bg-slate-800/75 hover:bg-gray-700 text-white font-medium rounded-lg text-sm pl-4 py-2.5 text-center">
+                        class="mx-4 flex items-center text-left space-x-3 w-12 h-12 dark:bg-slate-800/75 hover:bg-gray-700 text-white font-medium rounded-lg text-sm pl-4 py-2.5 text-center">
                     <span style="font-size: 18px;" id="current_app" class="material-icons">school</span>
                 </button>
                 <div id="app_dropdown"
@@ -216,7 +244,7 @@
                                 <button style="background: #172136;border-radius: 50%;
                                        float: left;margin-bottom:15px;
                                        margin-right:10px;"
-                                        class="mx-4 hidden sm:flex items-center text-left space-x-3 w-12 h-12 dark:bg-slate-800/75 hover:bg-gray-700 text-white font-medium rounded-lg text-sm pl-4 py-2.5 text-center">
+                                        class="mx-4 flex items-center text-left space-x-3 w-12 h-12 dark:bg-slate-800/75 hover:bg-gray-700 text-white font-medium rounded-lg text-sm pl-4 py-2.5 text-center">
                                     <span style="font-size: 18px;" class="material-icons">school</span>
                                 </button>
                                 <br>
@@ -229,7 +257,7 @@
                                 <button style="background: #172136;border-radius: 50%;
                                        float: left;margin-bottom:15px;
                                        margin-right:10px;"
-                                        class="mx-4 hidden sm:flex items-center text-left space-x-3 w-12 h-12 dark:bg-slate-800/75 hover:bg-gray-700 text-white font-medium rounded-lg text-sm pl-4 py-2.5 text-center">
+                                        class="mx-4 flex items-center text-left space-x-3 w-12 h-12 dark:bg-slate-800/75 hover:bg-gray-700 text-white font-medium rounded-lg text-sm pl-4 py-2.5 text-center">
                                     <span style="font-size: 18px;" class="material-icons">forum</span>
                                 </button>
                                 <br>
@@ -242,7 +270,7 @@
                                 <button style="background: #172136;border-radius: 50%;
                                        float: left;margin-bottom:15px;
                                        margin-right:10px;"
-                                        class="mx-4 hidden sm:flex items-center text-left space-x-3 w-12 h-12 dark:bg-slate-800/75 hover:bg-gray-700 text-white font-medium rounded-lg text-sm pl-4 py-2.5 text-center">
+                                        class="mx-4 flex items-center text-left space-x-3 w-12 h-12 dark:bg-slate-800/75 hover:bg-gray-700 text-white font-medium rounded-lg text-sm pl-4 py-2.5 text-center">
                                     <span style="font-size: 18px;" class="material-icons">timer</span>
                                 </button>
                                 <br>
@@ -254,7 +282,7 @@
                             <button style="background: #172136;border-radius: 50%;
                                    float: left;
                                    margin-right:10px;"
-                                    class="mx-4 hidden sm:flex items-center text-left space-x-3 w-12 h-12 dark:bg-slate-800/75 hover:bg-gray-700 text-white font-medium rounded-lg text-sm pl-4 py-2.5 text-center">
+                                    class="mx-4 flex items-center text-left space-x-3 w-12 h-12 dark:bg-slate-800/75 hover:bg-gray-700 text-white font-medium rounded-lg text-sm pl-4 py-2.5 text-center">
                                 <span style="font-size: 18px;" class="material-icons">music_note</span>
                             </button>
                             <br>
@@ -266,7 +294,7 @@
                             <button style="background: #172136;border-radius: 50%;
                                float: left;
                                margin-right:10px;"
-                                    class="mx-4 hidden sm:flex items-center text-left space-x-3 w-12 h-12 dark:bg-slate-800/75 hover:bg-gray-700 text-white font-medium rounded-lg text-sm pl-4 py-2.5 text-center">
+                                    class="mx-4 flex items-center text-left space-x-3 w-12 h-12 dark:bg-slate-800/75 hover:bg-gray-700 text-white font-medium rounded-lg text-sm pl-4 py-2.5 text-center">
                                 <span style="font-size: 18px;" class="material-icons">description</span>
                             </button>
                             <br>
