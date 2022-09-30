@@ -187,7 +187,10 @@ def user_connect_to_schoology_route():
 
     session["link"] = request.form.get("link")
     auth = schoolopy.Auth(
-        schoology_key, schoology_secret, three_legged=True, domain=request.form.get("link")
+        schoology_key,
+        schoology_secret,
+        three_legged=True,
+        domain=request.form.get("link"),
     )
     return auth.request_authorization(
         callback_url=request.url_root + "/api/v1/internal/schoology-callback"
@@ -202,7 +205,9 @@ def connect_to_schoology():
     if not schoology_key or not schoology_secret:
         return "1"
 
-    auth = schoolopy.Auth(schoology_key, schoology_secret, three_legged=True, domain=session["link"])
+    auth = schoolopy.Auth(
+        schoology_key, schoology_secret, three_legged=True, domain=session["link"]
+    )
     auth.request_authorization()
     auth.authorize()
 

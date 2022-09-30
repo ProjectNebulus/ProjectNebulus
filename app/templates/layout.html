@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <script src="/static/progress.js-0.1.0/minified/progress.min.js"></script>
-    <link rel="stylesheet" src="/static/progress.js-0.1.0/minified/progressjs.min.css">
+    <link rel="stylesheet"
+          src="/static/progress.js-0.1.0/minified/progressjs.min.css">
     <script type="module">
         //to set progress-bar for whole page
         //import {progressJs} from "/static/progress.js-0.1.0";
@@ -142,9 +143,7 @@
           content="upgrade-insecure-requests">
     <meta name="google-site-verification"
           content="5RLtqNU5_UuQAcLqyee0ZoaLyNQ9-6VF0qfJsABVhm4"/>
-    {% if not disableArc %}
-        {# <script async src="https://arc.io/widget.min.js#MAqsJqoN"></script>#}
-    {% endif %}
+    {% if not disableArc %}{# <script async src="https://arc.io/widget.min.js#MAqsJqoN"></script>#}{% endif %}
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7084604546168550"
             crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
@@ -159,7 +158,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <!--Javascript!-->
     <script src="/static/flowbite/dist/flowbite.js"></script>
-    <script src="/static/js/main/main.js"></script>
+    <script src="/static/js/main/main.js?version=3.0.0"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <div id="circularcursor"></div>
     <!--discord embeds and google search!-->
@@ -173,7 +172,6 @@
     <meta property="og:description"
           content="Nebulus is a modern Learning Management System that centralizes everyone’s learning experience into a single application. It’s perfect for Students, Teachers, Parents, and Schools!"/>
     <meta name="twitter:card" content="summary_large_image">
-
     <meta name="theme-color" content="#AC7AFF">
     <meta property="og:site_name" content="Nebulus.">
     <meta property="og:locale" content="en_US">
@@ -185,7 +183,6 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!--Title!-->
     <title>{{ page }}</title>
-
     <script>
         const user = "{{ user }}";
 
@@ -224,10 +221,11 @@
 </head>
 <body>
 <div id="branchPopup" class="fixed">
-    <div class="flex gap-2 place-items-center bg-gray-100 dark:bg-gray-700 p-4 pr-10 rounded-lg shadow shadow-lg relative
-     border border-gray-200 dark:border-gray-600 z-40">
+    <div class="flex gap-2 place-items-center bg-gray-100 dark:bg-gray-700 p-4 pr-10 rounded-lg shadow shadow-lg relative border border-gray-200 dark:border-gray-600 z-40">
         <div class="absolute top-0 right-0 p-1 text-gray-200 dark:text-gray-700 material-icons"
-             style="padding-right: 4rem" onclick="hideBranchPopup()">close
+             style="padding-right: 4rem"
+             onclick="hideBranchPopup()">
+            close
         </div>
         <div class="material-icons text-4xl text-gray-500 dark:text-gray-400">info</div>
         <div class="dark:text-white">
@@ -235,7 +233,6 @@
         </div>
     </div>
 </div>
-
 <script>
     AOS.init();
     localStorage.removeItem("currentTimer");

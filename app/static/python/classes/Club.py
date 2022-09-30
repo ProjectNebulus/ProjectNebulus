@@ -38,11 +38,11 @@ class Club(Snowflake):
     meta = {"collection": "Clubs"}
     name = StringField(required=True)
     teacher = StringField(required=True)
-    type = StringField(required=True, options=['Native', 'Imported', 'Student'])
+    type = StringField(required=True, options=["Native", "Imported", "Student"])
     teacherAccount = ReferenceField("User")
     created_at = DateTimeField(default=lambda: datetime.now())
     template = StringField(default=None)
-    members = ReferenceField('User')
+    members = ReferenceField("User")
     # sub_template = StringField(default=None)
 
     authorizedUsers = ListField(ReferenceField("User"))

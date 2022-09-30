@@ -83,7 +83,9 @@ class User(Snowflake):
     nebulus_documents = ListField(ReferenceField(NebulusDocument), default=[])
     points = IntField(default=0)
     premium = BooleanField(default=False)
-    type = StringField(options=["staff", "parent", "teacher", "student"], default="student")
+    type = StringField(
+        options=["staff", "parent", "teacher", "student"], default="student"
+    )
     chats = ListField(ReferenceField("Chat"), default=[])
     chatProfile = EmbeddedDocumentField(ChatProfile)
     screenTime = EmbeddedDocumentField(ScreenTime, default=None)
@@ -91,8 +93,8 @@ class User(Snowflake):
     def clean(self):
         self.avatar.avatar_url = (
             self.avatar.avatar_url.replace("http://localhost:8080", "")
-            .replace("https://localhost:8080", "")
-            .replace("https://beta.nebulus.ml", "")
+                .replace("https://localhost:8080", "")
+                .replace("https://beta.nebulus.ml", "")
         )
 
         if "static/images/nebulusCats" not in self.avatar.avatar_url:

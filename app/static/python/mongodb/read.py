@@ -412,15 +412,18 @@ def search(keyword: str, username: str):
     documents = list(DocumentFile.objects().aggregate(pipeline1))
 
     return (
-               courses,
-               documents,
-               chats,
-               events,
-               assignments,
-               announcements,
-               NebulusDocuments,
-               users,
-           ), 200
+        (
+            courses,
+            documents,
+            chats,
+            events,
+            assignments,
+            announcements,
+            NebulusDocuments,
+            users,
+        ),
+        200,
+    )
 
 
 def search_course(keyword: str, course: str):
