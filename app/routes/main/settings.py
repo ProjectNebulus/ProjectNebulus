@@ -89,10 +89,7 @@ def settings():
 
     last_access = 0
     if session.get("access"):
-        print(
-            "Last confirmed access (seconds):",
-            datetime.now().timestamp() - float(session["access"]),
-        )
+        print("Last confirmed access (seconds):", datetime.now().timestamp() - float(session["access"]))
         last_access = datetime.now().timestamp() - float(session["access"])
 
     return render_template(

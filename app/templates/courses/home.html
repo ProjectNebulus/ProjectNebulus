@@ -9,73 +9,71 @@
     <script src="/static/js/course/course.js" type='text/javascript'></script>
     <div style="margin:30px">
         <div style="width:49%;margin-right: 1%; height:100%;float: left;">
-            <label class="block mb-2 text-sm uppercase dark:text-gray-500">Course Information</label>
+            <label class="block mb-2 text-sm uppercase dark:text-gray-500">Course Information
+            </label>
+
             <div class="dark:bg-gray-700 p-6 rounded-lg"
-                 style="width: 100%;
-                            background: linear-gradient(45deg, #1f2937, #4B5563);">
+                 style="width: 100%;background: linear-gradient(45deg, #1f2937, #4B5563);">
                 <p class="text-xl dark:text-white">
                     <img src="https://api.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg"
-                         alt="Course Icon"
-                         class="object-cover rounded-lg inline-block"
-                         style=" width: 60px; height: 60px; display: inline-block; margin: 10px; ">
+                         alt="Course Icon" class="object-cover rounded-lg inline-block" style="
+                                    width: 60px;
+                                    height: 60px;
+                                    display: inline-block;
+                                    margin: 10px;
+                                    ">
                     <span style=" display: inline-block; vertical-align: middle; ">
-                            {{ course.name }}
-                            <img src="/static/images/logos/{{ course.imported_from | lower }}.png"
-                                 style=" width: 25px; margin-left: 15px; display: inline-block; vertical-align: middle; ">
-                            <br>
-                            <span class="text-gray-500 text-sm">{{ course.name }}・{{ course.template }}・Imported from {{ course.imported_from }}</span>
-                            <br>
-                            <span class="text-xl dark:text-white"
-                                  style=" margin-right: 10px; display: inline-block; vertical-align: middle; ">
-                                <i class="material-icons" style="margin-right: 20px;">campaign</i><span
-                                    class="text-gray-500">{{ course.announcements | length }}</span>
-                            </span>
-                            <span class="text-xl dark:text-white"
-                                  style=" margin-right: 10px; display: inline-block; vertical-align: middle; ">
-                                <i class="material-icons" style=" margin-right: 20px; ">folder</i><span
-                                    class="text-gray-500">{{ course.folders | length }}</span>
-                            </span>
-                            <span class="text-xl dark:text-white"
-                                  style=" margin-right: 10px; display: inline-block; vertical-align: middle; ">
-                                <i class="material-icons" style="margin-right: 20px;">description</i><span
-                                    class="text-gray-500">{{ course.documents | length }}</span>
-                            </span>
-                            <span class="text-xl dark:text-white"
-                                  style=" margin-right: 10px; display: inline-block; vertical-align: middle; ">
-                                <i class="material-icons" style="margin-right: 20px;">bookmark</i><span
-                                    class="text-gray-500">{{ course.textbooks | length }}</span>
-                            </span></span>
+{{ course.name }}
+<img src="/static/images/logos/{{ course.imported_from | lower }}.png"
+     style=" width: 25px; margin-left: 15px; display: inline-block; vertical-align: middle; ">
+<br>
+<span class="text-gray-500 text-sm">{{ course.name }}・{{ course.template }}・Imported from {{ course.imported_from }}</span><br>
+    <span class="text-xl dark:text-white" style=" margin-right: 10px; display: inline-block; vertical-align: middle; ">
+<i class="material-icons" style="margin-right: 20px;">campaign</i><span
+            class="text-gray-500">{{ course.announcements | length }}</span>
+</span>
+<span class="text-xl dark:text-white" style=" margin-right: 10px; display: inline-block; vertical-align: middle; ">
+<i class="material-icons" style=" margin-right: 20px; ">folder</i><span
+        class="text-gray-500">{{ course.folders | length }}</span>
+</span>
+<span class="text-xl dark:text-white" style=" margin-right: 10px; display: inline-block; vertical-align: middle; ">
+<i class="material-icons" style="margin-right: 20px;">description</i><span
+        class="text-gray-500">{{ course.documents | length }}</span>
+</span>
+<span class="text-xl dark:text-white" style=" margin-right: 10px; display: inline-block; vertical-align: middle; ">
+<i class="material-icons" style="margin-right: 20px;">bookmark</i><span
+        class="text-gray-500">{{ course.textbooks | length }}</span>
+</span></span>
                 </p>
             </div>
-            <br>
-            <label class="block mb-2 text-sm uppercase dark:text-gray-500">Grade</label>
+            <br><label class="block mb-2 text-sm uppercase dark:text-gray-500">Grade
+        </label>
+
             <div class="dark:bg-gray-700 p-6 rounded-lg"
-                 style="width: 100%;
-                                background: linear-gradient(45deg, #1f2937, #4B5563);">
-                <p class="text-xl dark:text-white text-sm">
-                    <span class="text-weight-900" style=" font-weight: 900; ">A+</span> 95%
-                </p>
+                 style="width: 100%;background: linear-gradient(45deg, #1f2937, #4B5563);">
+                <p class="text-xl dark:text-white text-sm"><span class="text-weight-900" style="
+    font-weight: 900;
+">A+</span> 95%</p>
             </div>
+
         </div>
         <div style="width:49%; margin-left:1%;height: 100%;float: left;">
-            <label class="block mb-2 text-sm uppercase dark:text-gray-500">Overdue</label>
+            <label class="block mb-2 text-sm uppercase dark:text-gray-500">Overdue
+            </label>
             <div class="dark:bg-gray-700 p-6 rounded-lg text-black dark:text-white"
-                 style="background: linear-gradient(45deg, #1f2937, #4B5563);
-                                width: 100%;">
+                 style="background: linear-gradient(45deg, #1f2937, #4B5563);width: 100%;">
                 No Overdue Assignments
             </div>
-            <br>
-            <label class="block mb-2 text-sm uppercase dark:text-gray-500">Upcoming</label>
+            <br><label class="block mb-2 text-sm uppercase dark:text-gray-500">Upcoming
+        </label>
             <div class="dark:bg-gray-700 p-6 rounded-lg text-black dark:text-white"
-                 style="width: 100%;
-                                background: linear-gradient(45deg, #1f2937, #4B5563);">
+                 style="width: 100%;background: linear-gradient(45deg, #1f2937, #4B5563);">
                 No Overdue Assignments
             </div>
-            <br>
-            <label class="block mb-2 text-sm uppercase dark:text-gray-500">Announcements</label>
+            <br><label class="block mb-2 text-sm uppercase dark:text-gray-500">Announcements
+        </label>
             <div class="dark:bg-gray-700 p-6 rounded-lg text-black dark:text-white"
-                 style="width: 100%;
-                                background: linear-gradient(45deg, #1f2937, #4B5563);">
+                 style="width: 100%;background: linear-gradient(45deg, #1f2937, #4B5563);">
                 No Announcements
             </div>
         </div>

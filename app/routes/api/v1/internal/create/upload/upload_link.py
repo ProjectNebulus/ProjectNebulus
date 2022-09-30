@@ -24,11 +24,20 @@ def upload_file_link():
     filename = link.split("/")[-1]
     if not folder or folder == "0":
         create.createDocumentFile(
-            {"name": filename, "url": link, "course": course, }
+            {
+                "name": filename,
+                "url": link,
+                "course": course,
+            }
         )
     else:
         create.createDocumentFile(
-            {"name": filename, "url": link, "course": course, "folder": folder, }
+            {
+                "name": filename,
+                "url": link,
+                "course": course,
+                "folder": folder,
+            }
         )
 
     return "success", 200

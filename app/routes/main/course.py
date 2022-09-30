@@ -6,6 +6,7 @@ from flask_cors import cross_origin
 
 from app.static.python.classes import Course, User
 from app.static.python.mongodb import create, read
+
 from app.static.python.mongodb.read import getText
 from . import main_blueprint, utils
 from .utils import logged_in, private_endpoint
@@ -74,7 +75,7 @@ def getResource(courseID, documentID):
         filter(lambda c: c.id == courseID, read.get_user_courses(session["id"]))
     )
     if not len(courses) or not len(
-        [user for user in courses[0].authorizedUsers if user.id == session["id"]]
+            [user for user in courses[0].authorizedUsers if user.id == session["id"]]
     ):
         return render_template("errors/404.html"), 404
 
@@ -120,7 +121,11 @@ def search_word(id):
 def course_page_ex(id, extension):
     try:
         return render_template(
-            f"courses/extensions/{extension}.html", translate=getText,
+            f"courses/extensions/{extension}.html",
+            translate=getText,
         )
     except Exception as e:
-        return render_template("errors/404.html", translate=getText, )
+        return render_template(
+            "errors/404.html",
+            translate=getText,
+        )

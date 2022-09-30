@@ -19,7 +19,9 @@ def send_async_email(app, msg):
 
 def send_email(subject, recipients, message):
     msg = Message(
-        subject, sender=f"Nebulus <help.nebulus@gmail.com>", recipients=recipients,
+        subject,
+        sender=f"Nebulus <help.nebulus@gmail.com>",
+        recipients=recipients,
     )
 
     msg.html = message

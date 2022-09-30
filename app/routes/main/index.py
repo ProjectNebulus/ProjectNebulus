@@ -20,9 +20,7 @@ def get_locale():
 def screenTime():
     data = int(request.args.get("data"))
     location = request.args.get("location")
-    print(
-        f"[Screen Time Log | {datetime.date.today()} @ '{location}'] {data / 1000} seconds "
-    )
+    print(f"[Screen Time Log | {datetime.date.today()} @ '{location}'] {data / 1000} seconds ")
     return str(data)
 
 
@@ -33,7 +31,10 @@ def index():
         page="Nebulus. Education. Redefined.",
         user=session.get("username"),
         email=session.get("email"),
-        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif", ),
+        avatar=session.get(
+            "avatar",
+            "/static/images/nebulusCats/v3.gif",
+        ),
         translate=getText,
         homepage=True,
     )

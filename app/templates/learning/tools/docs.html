@@ -36,13 +36,8 @@
         }
     </script>
     {% include "utils/navbar.html" %}
-    <div class="pl-3"
-         style="overflow-y: scroll;
-                height: calc(100% - 120px);
-                margin-left: 20px;
-                margin-right: 20px;">
-        <h1 style="margin-left:15px;"
-            class="block mb-2 text-3xl uppercase dark:text-gray-500">Templates</h1>
+    <div class="pl-3" style="overflow-y: scroll; height: calc(100% - 120px); margin-left: 20px; margin-right: 20px;">
+        <h1 style="margin-left:15px;" class="block mb-2 text-3xl uppercase dark:text-gray-500">Templates</h1>
         <div class="w-full grid gap-4"
              style="grid-template-columns: repeat(auto-fit, 13rem)">
             <div class="flex flex-col">
@@ -50,91 +45,91 @@
                      style=" text-align: center; "
                      onclick="click_doc()">
                     <div style="padding-top:38%;
-                                font-size: 70px;
-                                background: -webkit-linear-gradient(red,#fffcbd);
-                                -webkit-background-clip: text;
-                                -webkit-text-fill-color: transparent;">
+                                    font-size: 70px;
+                                    background: -webkit-linear-gradient(red,#fffcbd);
+                                    -webkit-background-clip: text;
+                                    -webkit-text-fill-color: transparent;">
                         +
                     </div>
                 </div>
                 <p style="padding-left:45px;
-                          margin-left:20px;
-                          width:160px;"
+                              margin-left:20px;
+                              width:160px;"
                    class="uppercase text-gray-400">Blank</p>
             </div>
             <div class="flex flex-col">
                 <div class="document rounded-md" style=" text-align: center; ">
                     <div style="padding-top:38%;
-                                font-size: 70px;
-                                background: -webkit-linear-gradient(red,#fffcbd);
-                                -webkit-background-clip: text;
-                                -webkit-text-fill-color: transparent;">
+                                    font-size: 70px;
+                                    background: -webkit-linear-gradient(red,#fffcbd);
+                                    -webkit-background-clip: text;
+                                    -webkit-text-fill-color: transparent;">
                         +
                     </div>
                 </div>
                 <p style="padding-left:45px;
-                          margin-left:20px;
-                          width:160px;"
+                              margin-left:20px;
+                              width:160px;"
                    class="uppercase text-gray-400">Blank</p>
             </div>
             <div class="flex flex-col">
                 <div class="document rounded-md" style=" text-align: center; ">
                     <div style="padding-top:38%;
-                                font-size: 70px;
-                                background: -webkit-linear-gradient(red,#fffcbd);
-                                -webkit-background-clip: text;
-                                -webkit-text-fill-color: transparent;">
+                                    font-size: 70px;
+                                    background: -webkit-linear-gradient(red,#fffcbd);
+                                    -webkit-background-clip: text;
+                                    -webkit-text-fill-color: transparent;">
                         +
                     </div>
                 </div>
                 <p style="padding-left:45px;
-                          margin-left:20px;
-                          width:160px;"
+                              margin-left:20px;
+                              width:160px;"
                    class="uppercase text-gray-400">Blank</p>
             </div>
             <div class="flex flex-col">
                 <div class="document rounded-md" style=" text-align: center; ">
                     <div style="padding-top:38%;
-                                font-size: 70px;
-                                background: -webkit-linear-gradient(red,#fffcbd);
-                                -webkit-background-clip: text;
-                                -webkit-text-fill-color: transparent;">
+                                    font-size: 70px;
+                                    background: -webkit-linear-gradient(red,#fffcbd);
+                                    -webkit-background-clip: text;
+                                    -webkit-text-fill-color: transparent;">
                         +
                     </div>
                 </div>
                 <p style="padding-left:45px;
-                          margin-left:20px;
-                          width:160px;"
+                              margin-left:20px;
+                              width:160px;"
                    class="uppercase text-gray-400">Blank</p>
             </div>
             <div class="flex flex-col">
                 <div class="document rounded-md" style=" text-align: center; ">
                     <div style="padding-top:38%;
-                                font-size: 70px;
-                                background: -webkit-linear-gradient(red,#fffcbd);
-                                -webkit-background-clip: text;
-                                -webkit-text-fill-color: transparent;">
+                                    font-size: 70px;
+                                    background: -webkit-linear-gradient(red,#fffcbd);
+                                    -webkit-background-clip: text;
+                                    -webkit-text-fill-color: transparent;">
                         +
                     </div>
                 </div>
                 <p style="padding-left:45px;
-                          margin-left:20px;
-                          width:160px;"
+                              margin-left:20px;
+                              width:160px;"
                    class="uppercase text-gray-400">Blank</p>
             </div>
             <div class="flex flex-col">
                 <div class="document rounded-md" style=" text-align: center; ">
                     <div style="padding-top:38%;
-                                font-size: 70px;
-                                background: -webkit-linear-gradient(red,#fffcbd);
-                                -webkit-background-clip: text;
-                                -webkit-text-fill-color: transparent;">
+                                    font-size: 70px;
+                                    background: -webkit-linear-gradient(red,#fffcbd);
+                                    -webkit-background-clip: text;
+                                    -webkit-text-fill-color: transparent;">
                         +
                     </div>
                 </div>
                 <p style="padding-left:45px;
-                          margin-left:20px;
-                          width:160px;"
+                              margin-left:20px;
+                              width:160px;"
                    class="uppercase text-gray-400">Blank</p>
             </div>
         </div>
@@ -145,8 +140,7 @@
             <div style="margin-left:15px;" class="flex-grow border-t border-gray-400"></div>
         </div>
         <div>
-            <h1 style="margin-left:15px;"
-                class="block mb-2 text-3xl uppercase dark:text-gray-500">Recent Documents</h1>
+            <h1 style="margin-left:15px;" class="block mb-2 text-3xl uppercase dark:text-gray-500">Recent Documents</h1>
             {% if docs|length == 0 %}
                 <br>
                 <br>
@@ -168,4 +162,7 @@
             </div>
         </div>
     </div>
+
+
+
 {% endblock %}

@@ -20,12 +20,13 @@ def create_course():
     if not data["template"]:
         data["template"] = None
 
-    user = read.find_user(id=session["id"])
+    user = read.find_user(id=session['id'])
     if user.type == "student":
-        # TODO: Figure out how to determine whether the course is imported
+        #TODO: Figure out how to determine whether the course is imported
         data["type"] = "Student"
     elif user.type == "teacher":
         data["type"] = "Native"
+        
 
     data["authorizedUsers"] = [session.get("id")]
     create.create_course(data)
@@ -121,7 +122,11 @@ def create_google_course():
     image = getPFP(course["id"])
     if image:
         create.createAvatar(
-            {"avatar_url": image, "parent": "Course", "parent_id": course_obj.id, }
+            {
+                "avatar_url": image,
+                "parent": "Course",
+                "parent_id": course_obj.id,
+            }
         )
     return "success"
 
@@ -155,7 +160,11 @@ def create_canvas_course():
     image = course.get_settings()["image"]
     if image:
         create.createAvatar(
-            {"avatar_url": image, "parent": "Course", "parent_id": course_obj.id, }
+            {
+                "avatar_url": image,
+                "parent": "Course",
+                "parent_id": course_obj.id,
+            }
         )
 
     announcements = canvas.get_announcements(context_codes=[course.id])

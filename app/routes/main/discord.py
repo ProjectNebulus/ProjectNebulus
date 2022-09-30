@@ -121,33 +121,35 @@ import requests
 
 def get_auth():
     client_id = "a5443a5dffe717b56bf2"
-    return f"https://github.com/login/oauth/authorize?client_id={client_id}"
+    return f'https://github.com/login/oauth/authorize?client_id={client_id}'
 
 
 def get_access_token(request_token: str) -> str:
     CLIENT_ID = "00526a398682e4475ba1"
     CLIENT_SECRET = "3b583a946d881ae85d6b187c3096ed98debe0343"
 
-    url = f"https://github.com/login/oauth/access_token?client_id={CLIENT_ID}&client_secret={CLIENT_SECRET}&code={request_token}"
-    headers = {"accept": "application/json"}
+    url = f'https://github.com/login/oauth/access_token?client_id={CLIENT_ID}&client_secret={CLIENT_SECRET}&code={request_token}'
+    headers = {
+        'accept': 'application/json'
+    }
 
     res = requests.post(url, headers=headers)
 
     data = res.json()
     print(data)
-    access_token = data["access_token"]
+    access_token = data['access_token']
 
     return access_token
 
 
 def get_user_data(access_token: str) -> dict:
     if not access_token:
-        raise ValueError("The request token has to be supplied!")
+        raise ValueError('The request token has to be supplied!')
     if not isinstance(access_token, str):
-        raise ValueError("The request token has to be a string!")
+        raise ValueError('The request token has to be a string!')
 
-    access_token = "token " + access_token
-    url = "https://api.github.com/user"
+    access_token = 'token ' + access_token
+    url = 'https://api.github.com/user'
     headers = {"Authorization": access_token}
 
     resp = requests.get(url=url, headers=headers)
@@ -159,15 +161,15 @@ def get_user_data(access_token: str) -> dict:
 
 def get_user_repos(access_token: str):
     if not access_token:
-        raise ValueError("The request token has to be supplied!")
+        raise ValueError('The request token has to be supplied!')
     if not isinstance(access_token, str):
-        raise ValueError("The request token has to be a string!")
-    access_token = "token " + access_token
-    url = "https://api.github.com/user"
+        raise ValueError('The request token has to be a string!')
+    access_token = 'token ' + access_token
+    url = 'https://api.github.com/user'
     headers = {"Authorization": access_token}
     resp = requests.get(url=url, headers=headers)
     userData = resp.json()
-    username = userData["login"]
+    username = userData['login']
     url = f"https://api.github.com/users/{username}/repos"
     headers = {"Authorization": access_token}
     resp = requests.get(url=url, headers=headers)

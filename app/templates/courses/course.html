@@ -13,6 +13,7 @@
             overflow-x: hidden;
         }
     </style>
+
     {% include "utils/navbar.html" %}
     <div class="flex" style="height: 92%">
         {% include "courses/sidebar.html" %}
@@ -23,7 +24,13 @@
                 <div style="margin-right: 3rem" data-aos="fade">
                     <script>
                         document.getElementById("extraWidgets").innerHTML = `
-        <button style="float:left;margin-right:10px;width:64px;height:44px;font-size:30px" data-dropdown-toggle="addDropdown" id="create" class="flex place-items-center justify-center bg-white/75 ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800/75 dark:ring-0 dark:text-slate-300 dark:hover:bg-slate-700 px-5 py-2.5 font-medium rounded-lg material-icons">
+        <button style="float:left;margin-right:10px;width:64px;height:44px;font-size:30px"
+                            data-dropdown-toggle="addDropdown"
+                            id="create"
+                            class="flex place-items-center justify-center bg-white/75 ring-1 ring-slate-900/10 hover:ring-slate-300
+                             focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400
+                             dark:bg-slate-800/75 dark:ring-0 dark:text-slate-300 dark:hover:bg-slate-700 px-5 py-2.5
+                             font-medium rounded-lg material-icons">
                         add
                     </button>`;
                     </script>
@@ -48,21 +55,23 @@
                     </div>
                 </div>
             </div>
-            <hr style=" border-color: gray; margin: 10px 0px 10px 0px; ">
+            <hr style="
+    border-color: gray;
+    margin: 10px 0px 10px 0px;
+">
             <iframe id="frame" name="frame" src="{{ src }}"></iframe>
         </div>
         <div class="hidden xl:block border-l border-gray-200 dark:border-gray-700 text-left "
-             id="upcoming-events"
-             style="width:300px">
-            <h1 style="margin:13px;"
-                class="block mb-2 text-3xl uppercase dark:text-gray-500">Upcoming Events</h1>
-            <hr style=" border-color: gray; margin: 10px 15px 10px 15px; ">
+             id="upcoming-events" style="width:300px">
+            <h1 style="margin:13px;" class="block mb-2 text-3xl uppercase dark:text-gray-500">Upcoming Events</h1>
+            <hr style="
+    border-color: gray;
+    margin: 10px 15px 10px 15px;
+">
             <div class="flex flex-col sm:rounded-lg overflow-y-auto"
-                 style="height: 70%;
-                            width: 90%;
-                            margin: auto;
-                            overflow-y: auto;
-                            overflow-x: hidden;">
+                 style="height: 70%;width: 90%;margin: auto;overflow-y: auto;overflow-x: hidden;">
+
+
                 {% if events|length == 0 %}
                     <p class="text-gray-300 dark:text-gray-500 mx-4">No Events</p>
                 {% else %}
@@ -70,46 +79,46 @@
                         {% set diff = (date - now).days %}
                         {% if diff < 0 %}
                             <h1 style="text-align: left;
-                                           background: orangered -webkit-linear-gradient(left,#ff7878,#ffb078);
-                                           -webkit-background-clip: text;
-                                           -webkit-text-fill-color: transparent;
-                                           margin: 13px;">
+                                   background: orangered -webkit-linear-gradient(left,#ff7878,#ffb078);
+                                   -webkit-background-clip: text;
+                                   -webkit-text-fill-color: transparent;
+                                   margin: 13px;">
                                 {{ strftime(date, "%a, %B %-d, %Y") }}
                                 ({{ -diff }}d Overdue)
                             </h1>
                         {% elif diff < 1 %}
                             <h1 style="text-align: left;
-                                           background: orange -webkit-linear-gradient(left,#ff78ed,#ffb378);
-                                           -webkit-background-clip: text;
-                                           -webkit-text-fill-color: transparent;
-                                           margin: 13px;">
+                                   background: orange -webkit-linear-gradient(left,#ff78ed,#ffb378);
+                                   -webkit-background-clip: text;
+                                   -webkit-text-fill-color: transparent;
+                                   margin: 13px;">
                                 {{ strftime(date, "%a, %B %-d, %Y") }}
                                 ({{ diff }}d remaining)
                             </h1>
                         {% elif diff < 3 %}
                             <h1 style="text-align: left;
-                                           background: yellow -webkit-linear-gradient(left,#ffc578,#fff878);
-                                           -webkit-background-clip: text;
-                                           -webkit-text-fill-color: transparent;
-                                           margin: 13px;">
+                                   background: yellow -webkit-linear-gradient(left,#ffc578,#fff878);
+                                   -webkit-background-clip: text;
+                                   -webkit-text-fill-color: transparent;
+                                   margin: 13px;">
                                 {{ strftime(date, "%a, %B %-d, %Y") }}
                                 ({{ diff }}d remaining)
                             </h1>
                         {% elif diff < 5 %}
                             <h1 style="text-align: left;
-                                           background: green -webkit-linear-gradient(left,#ffd978,#ddff78);
-                                           -webkit-background-clip: text;
-                                           -webkit-text-fill-color: transparent;
-                                           margin: 13px;">
+                                   background: green -webkit-linear-gradient(left,#ffd978,#ddff78);
+                                   -webkit-background-clip: text;
+                                   -webkit-text-fill-color: transparent;
+                                   margin: 13px;">
                                 {{ strftime(date, "%a, %B %-d, %Y") }}
                                 ({{ diff }}d remaining)
                             </h1>
                         {% else %}
                             <h1 style="text-align: left;
-                                           background: greenyellow -webkit-linear-gradient(left,#d9ff78,#78ffb7);
-                                           -webkit-background-clip: text;
-                                           -webkit-text-fill-color: transparent;
-                                           margin: 13px;">
+                                   background: greenyellow -webkit-linear-gradient(left,#d9ff78,#78ffb7);
+                                   -webkit-background-clip: text;
+                                   -webkit-text-fill-color: transparent;
+                                   margin: 13px;">
                                 {{ strftime(date, "%a, %B %-d, %Y") }}
                                 ({{ diff }}d remaining)
                             </h1>
