@@ -66,7 +66,10 @@ window.addEventListener('load', () => {
     console.log(loadTime);
 
     for (const el in document.querySelectorAll("[data-modal-toggle]"))
-        modals.add(el.getAttribute("data-modal-toggle"));
+        try {
+            modals.add(el.getAttribute("data-modal-toggle"));
+        } catch {
+        }
 });
 
 
