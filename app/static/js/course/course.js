@@ -5,10 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     createButton = document.getElementById('create');
     createButton.style.transition = "0.5s";
 
-    const navImg = document.getElementById("navigationImage");
-    navImg.classList.remove("hidden");
-    navImg.src = imgUrl;
-
     const path = window.location.pathname.split('/');
     let saveData = path.reverse()[0];
     if (path.length < 4) saveData = 'documents';
@@ -36,7 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setCreateButton(pageTitle.innerHTML);
 
-    $('#search').click(() => openModal('searchModal'));
+    $('#search').click(function () {
+        openModal('searchModal');
+    });
 
     $('#upload-file').click(function () {
         alert('Uploaded');

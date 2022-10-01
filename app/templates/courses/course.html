@@ -13,48 +13,27 @@
             overflow-x: hidden;
         }
     </style>
+
     {% include "utils/navbar.html" %}
     <div class="flex" style="height: 92%">
         {% include "courses/sidebar.html" %}
-        <div class="w-full ml-4 mt-8">
+        <div class="w-full ml-4 mr-4 mt-4">
             <div class="flex justify-between">
-                    <span class="text-5xl text-black dark:text-white text-black"
+                    <span class="block mb-2 text-3xl uppercase dark:text-gray-500"
                           id="page-title">Documents</span>
                 <div style="margin-right: 3rem" data-aos="fade">
-                    <button style="float:left"
+                    <script>
+                        document.getElementById("extraWidgets").innerHTML = `
+        <button style="float:left;margin-right:10px;width:64px;height:44px;font-size:30px"
                             data-dropdown-toggle="addDropdown"
                             id="create"
-                            class="flex justify-center bg-white/75 ring-1 ring-slate-900/10 hover:ring-slate-300
+                            class="flex place-items-center justify-center bg-white/75 ring-1 ring-slate-900/10 hover:ring-slate-300
                              focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400
                              dark:bg-slate-800/75 dark:ring-0 dark:text-slate-300 dark:hover:bg-slate-700 px-5 py-2.5
-                             font-medium rounded-lg material-icons w-16 h-12 place-items-center text-3xl mr-2">
+                             font-medium rounded-lg material-icons">
                         add
-                    </button>
-                    <button onclick="openModal('searchModal')"
-                            id="search"
-                            style="float:left;"
-                            type="button"
-                            class="hidden sm:flex items-center w-72 text-left space-x-3 px-4 h-12 bg-white/75 ring-1
-                             ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500
-                              shadow-sm rounded-lg text-slate-400 dark:bg-slate-800/75 dark:ring-0 dark:text-slate-300
-                               dark:highlight-white/5 dark:hover:bg-slate-700">
-                        <svg width="24"
-                             height="24"
-                             fill="none"
-                             stroke="currentColor"
-                             stroke-width="2"
-                             stroke-linecap="round"
-                             stroke-linejoin="round"
-                             class="flex-none text-slate-300 dark:text-slate-400"
-                             aria-hidden="true">
-                            <path d="m19 19-3.5-3.5"></path>
-                            <circle cx="11" cy="11" r="6"></circle>
-                        </svg>
-                        <span class="flex-auto">Search within course</span><kbd
-                            class="font-sans font-semibold dark:text-slate-500">
-                        <abbr title="Command"
-                              class="no-underline text-slate-300 dark:text-slate-500">⌘</abbr> K</kbd>
-                    </button>
+                    </button>`;
+                    </script>
                     <!-- Dropdown menu -->
                     <div id="addDropdown"
                          class="hidden z-10 w-50 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
@@ -76,57 +55,62 @@
                     </div>
                 </div>
             </div>
-            <br>
-            <hr class="dark:text-white text-black">
+            <hr style="
+    border-color: gray;
+    margin: 10px 0px 10px 0px;
+">
             <iframe id="frame" name="frame" src="{{ src }}"></iframe>
         </div>
-        <div class="hidden xl:block border-l border-gray-200 dark:border-gray-700 text-center overflow-auto hover:scroll"
-             id="upcoming-events" style="width:37%">
-            <h1 class="text-black dark:text-white text-2xl">Upcoming Events</h1>
-            <br>
-            <div class="flex flex-col sm:rounded-lg min-w-full overflow-auto" style="height: 90%">
+        <div class="hidden xl:block border-l border-gray-200 dark:border-gray-700 text-left "
+             id="upcoming-events" style="width:300px">
+            <h1 style="margin:13px;" class="block mb-2 text-3xl uppercase dark:text-gray-500">Upcoming Events</h1>
+            <hr style="
+    border-color: gray;
+    margin: 10px 15px 10px 15px;
+">
+            <div class="flex flex-col sm:rounded-lg overflow-y-auto"
+                 style="height: 70%;width: 90%;margin: auto;overflow-y: auto;overflow-x: hidden;">
+
+
                 {% if events|length == 0 %}
                     <p class="text-gray-300 dark:text-gray-500 mx-4">No Events</p>
                 {% else %}
                     {% for date, assignments in events.items() %}
                         {% set diff = (date - now).days %}
-                        {% if diff >= 0 %}
-                            {% set diff = diff + 1 %}
-                        {% endif %}
                         {% if diff < 0 %}
                             <h1 style="text-align: left;
                                    background: orangered -webkit-linear-gradient(left,#ff7878,#ffb078);
                                    -webkit-background-clip: text;
                                    -webkit-text-fill-color: transparent;
-                                   margin: 0.75rem;">
-                                {{ strftime(date, "%a %b %-d %Y") }}
+                                   margin: 13px;">
+                                {{ strftime(date, "%a, %B %-d, %Y") }}
                                 ({{ -diff }}d Overdue)
                             </h1>
-                        {% elif diff <= 1 %}
+                        {% elif diff < 1 %}
                             <h1 style="text-align: left;
                                    background: orange -webkit-linear-gradient(left,#ff78ed,#ffb378);
                                    -webkit-background-clip: text;
                                    -webkit-text-fill-color: transparent;
-                                   margin: 0.75rem;">
-                                {{ strftime(date, "%a %b %-d %Y") }}
+                                   margin: 13px;">
+                                {{ strftime(date, "%a, %B %-d, %Y") }}
                                 ({{ diff }}d remaining)
                             </h1>
-                        {% elif diff <= 3 %}
+                        {% elif diff < 3 %}
                             <h1 style="text-align: left;
-                                   background: yellow -webkit-linear-gradient(left,#dd7e00,#fcff34);
+                                   background: yellow -webkit-linear-gradient(left,#ffc578,#fff878);
                                    -webkit-background-clip: text;
                                    -webkit-text-fill-color: transparent;
-                                   margin: 0.75rem;">
-                                {{ strftime(date, "%a %b %-d %Y") }}
+                                   margin: 13px;">
+                                {{ strftime(date, "%a, %B %-d, %Y") }}
                                 ({{ diff }}d remaining)
                             </h1>
-                        {% elif diff <= 5 %}
+                        {% elif diff < 5 %}
                             <h1 style="text-align: left;
                                    background: green -webkit-linear-gradient(left,#ffd978,#ddff78);
                                    -webkit-background-clip: text;
                                    -webkit-text-fill-color: transparent;
-                                   margin: 0.75rem;">
-                                {{ strftime(date, "%a %b %-d %Y") }}
+                                   margin: 13px;">
+                                {{ strftime(date, "%a, %B %-d, %Y") }}
                                 ({{ diff }}d remaining)
                             </h1>
                         {% else %}
@@ -134,8 +118,8 @@
                                    background: greenyellow -webkit-linear-gradient(left,#d9ff78,#78ffb7);
                                    -webkit-background-clip: text;
                                    -webkit-text-fill-color: transparent;
-                                   margin: 0.75rem;">
-                                {{ strftime(date, "%a %b %-d %Y") }}
+                                   margin: 13px;">
+                                {{ strftime(date, "%a, %B %-d, %Y") }}
                                 ({{ diff }}d remaining)
                             </h1>
                         {% endif %}
@@ -213,9 +197,39 @@
             </div>
         </div>
     </div>
-    <script>
-        const course_id = "{{ course_id }}";
-        const imgUrl = "{{ course.avatar.avatar_url }}";
+    <script>const course_id = "{{ course_id }}"</script>
+    <script>const course_id = "{{ course_id }}"
+    // document.getElementById("navbartitle").innerText = "Documents";
+    document.getElementById('currentdrop').innerHTML = `
+                        <span class="overflow-auto truncate" style="text-align:left; width:240px;"><img src="{{ course.avatar.avatar_url }}" alt="Course Icon" class="object-cover rounded-lg inline-block" style="width:40px; height:40px; margin: 10px;">
+{{course.name}}</span>
+          `;
+    document.getElementById("changedropdown").innerHTML = `
+     <ul class="py-1 text-sm text-gray-700 dark:text-gray-200 align-left" aria-labelledby="dropdownDefault">
+                            <li>
+                            <a style="text-align: left;" href="/course/{{ course_id }}/" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Home</a>
+                        </li><li>
+                            <a style="text-align: left;" href="/course/{{ course_id }}/documents" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Documents</a>
+                        </li>
+                        <li>
+                            <a style="text-align: left;" href="/course/{{ course_id }}/announcements" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Announcements</a>
+                        </li>
+                        <li>
+                            <a style="text-align: left;" href="/course/{{ course_id }}/grades" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Grades</a>
+                        </li>
+                        <li>
+                            <a style="text-align: left;" href="/course/{{ course_id }}/settings" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                        </li>
+                        <li>
+                            <a style="text-align: left;" href="/course/{{ course_id }}/textbook" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Textbook</a>
+                        </li>
+                        <li>
+                            <a style="text-align: left;" href="/course/{{ course_id }}/learning" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Learning</a>
+                        </li>
+                        <li>
+                            <a style="text-align: left;" href="/course/{{ course_id }}/extensions" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Extensions</a>
+                        </li>
+                    </ul>`
     </script>
     {% include "courses/courseModals.html" %}
     </body>

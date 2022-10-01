@@ -126,10 +126,8 @@
         alwaysOpen: false,
         activeClasses: 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white',
         inactiveClasses: 'text-gray-500 dark:text-gray-400',
-        onOpen: function onOpen() {
-        },
-        onClose: function onClose() {
-        }
+        onOpen: function onOpen() {},
+        onClose: function onClose() {}
     };
 
     var Accordion = /*#__PURE__*/ (function () {
@@ -374,12 +372,9 @@
 
     var collapse_Default = {
         triggerEl: null,
-        onCollapse: function onCollapse() {
-        },
-        onExpand: function onExpand() {
-        },
-        onToggle: function onToggle() {
-        }
+        onCollapse: function onCollapse() {},
+        onExpand: function onExpand() {},
+        onToggle: function onToggle() {}
     };
 
     var Collapse = /*#__PURE__*/ (function () {
@@ -602,12 +597,9 @@
             inactiveClasses: 'bg-white/50 dark:bg-gray-800/50 hover:bg-white dark:hover:bg-gray-800'
         },
         interval: 3000,
-        onNext: function onNext() {
-        },
-        onPrev: function onPrev() {
-        },
-        onChange: function onChange() {
-        }
+        onNext: function onNext() {},
+        onPrev: function onPrev() {},
+        onChange: function onChange() {}
     };
 
     var Carousel = /*#__PURE__*/ (function () {
@@ -1012,8 +1004,7 @@
         transition: 'transition-opacity',
         duration: 300,
         timing: 'ease-out',
-        onHide: function onHide() {
-        }
+        onHide: function onHide() {}
     };
 
     var Dismiss = /*#__PURE__*/ (function () {
@@ -1756,8 +1747,7 @@ reference element's position.
                             options: options
                         });
 
-                        var noopFn = function noopFn() {
-                        };
+                        var noopFn = function noopFn() {};
 
                         effectCleanupFns.push(cleanupFn || noopFn);
                     }
@@ -3270,10 +3260,8 @@ reference element's position.
     var dropdown_Default = {
         placement: 'bottom',
         triggerType: 'click',
-        onShow: function onShow() {
-        },
-        onHide: function onHide() {
-        }
+        onShow: function onShow() {},
+        onHide: function onHide() {}
     };
 
     var Dropdown = /*#__PURE__*/ (function () {
@@ -3562,12 +3550,9 @@ reference element's position.
     var modal_Default = {
         placement: 'center',
         backdropClasses: 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40',
-        onHide: function onHide() {
-        },
-        onShow: function onShow() {
-        },
-        onToggle: function onToggle() {
-        }
+        onHide: function onHide() {},
+        onShow: function onShow() {},
+        onToggle: function onToggle() {}
     };
 
     var Modal = /*#__PURE__*/ (function () {
@@ -3733,6 +3718,39 @@ reference element's position.
         return false;
     };
 
+    document.addEventListener('DOMContentLoaded', function () {
+        var modalInstances = [];
+        document.querySelectorAll('[data-modal-toggle]').forEach(function (el) {
+            var modalId = el.getAttribute('data-modal-toggle');
+            var modalEl = document.getElementById(modalId);
+            var placement = modalEl.getAttribute('data-modal-placement');
+
+            if (modalEl) {
+                if (!modalEl.hasAttribute('aria-hidden') && !modalEl.hasAttribute('aria-modal')) {
+                    modalEl.setAttribute('aria-hidden', 'true');
+                }
+            }
+
+            var modal = null;
+
+            if (getModalInstance(modalId, modalInstances)) {
+                modal = getModalInstance(modalId, modalInstances);
+                modal = modal.object;
+            } else {
+                modal = new Modal(modalEl, {
+                    placement: placement ? placement : modal_Default.placement
+                });
+                modalInstances.push({
+                    id: modalId,
+                    object: modal
+                });
+            }
+
+            el.addEventListener('click', function () {
+                modal.toggle();
+            });
+        });
+    });
     /* harmony default export */
     const modal = Modal; // CONCATENATED MODULE: ./src/components/tabs.js
     function tabs_toConsumableArray(arr) {
@@ -4116,10 +4134,8 @@ reference element's position.
     var tooltip_Default = {
         placement: 'top',
         triggerType: 'hover',
-        onShow: function onShow() {
-        },
-        onHide: function onHide() {
-        }
+        onShow: function onShow() {},
+        onHide: function onHide() {}
     };
 
     var Tooltip = /*#__PURE__*/ (function () {
