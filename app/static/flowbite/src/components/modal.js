@@ -8,6 +8,7 @@ const Default = {
     onToggle: () => {
     }
 };
+
 class Modal {
     constructor(targetEl = null, options = {}) {
         this._targetEl = targetEl;
@@ -107,45 +108,5 @@ class Modal {
 }
 
 window.Modal = Modal;
-
-const getModalInstance = (id, instances) => {
-    if (instances.some((modalInstance) => modalInstance.id === id)) {
-        return instances.find((modalInstance) => modalInstance.id === id);
-    }
-    return false;
-};
-
-document.addEventListener('DOMContentLoaded', () => {
-    let modalInstances = [];
-    document.querySelectorAll('[data-modal-toggle]').forEach((el) => {
-        const modalId = el.getAttribute('data-modal-toggle');
-        const modalEl = document.getElementById(modalId);
-        const placement = modalEl.getAttribute('data-modal-placement');
-
-        if (modalEl) {
-            if (!modalEl.hasAttribute('aria-hidden') && !modalEl.hasAttribute('aria-modal')) {
-                modalEl.setAttribute('aria-hidden', 'true');
-            }
-        }
-
-        let modal = null;
-        if (getModalInstance(modalId, modalInstances)) {
-            modal = getModalInstance(modalId, modalInstances);
-            modal = modal.object;
-        } else {
-            modal = new Modal(modalEl, {
-                placement: placement ? placement : Default.placement
-            });
-            modalInstances.push({
-                id: modalId,
-                object: modal
-            });
-        }
-
-        el.addEventListener('click', () => {
-            modal.toggle();
-        });
-    });
-});
 
 export default Modal;

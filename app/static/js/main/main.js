@@ -23,42 +23,46 @@ window.addEventListener("beforeunload", function (e) {
     // (e || window.event).returnValue = confirmationMessage; //Gecko + IE
     // return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
 });
-$(document).ready(function () {
-    $(document).on('mousemove', function (e) {
-        $('#circularcursor').css({
-            left: e.pageX - 20,
-            top: e.pageY - 20,
-            display: "block"
+if (localStorage.getItem("customCursor") !== null && !window.location.search.includes("iframe=true")) {
+    document.documentElement.classList.add("custom-cursor");
+
+    $(document).ready(function () {
+        $(document).on('mousemove', function (e) {
+            $('#customCursor').css({
+                left: e.pageX - 20,
+                top: e.pageY - 20,
+                display: "block"
+            });
+        })
+    });
+
+    $("a").on("mouseover", function () {
+        $('#customCursor').css({
+            borderWidth: 4,
+            borderColor: "black",
         });
-    })
-});
+    });
 
-$("a").on("mouseover", function () {
-    $('#circularcursor').css({
-        borderWidth: 4,
-        borderColor: "black",
+    $("button").on("mouseover", function () {
+        $('#customCursor').css({
+            borderWidth: 4,
+            borderColor: "black",
+        });
     });
-});
+    $("a").on("mouseout", function () {
+        $('#customCursor').css({
+            borderWidth: 1,
+            borderColor: "#4B5563",
+        });
+    });
 
-$("button").on("mouseover", function () {
-    $('#circularcursor').css({
-        borderWidth: 4,
-        borderColor: "black",
+    $("button").on("mouseout", function () {
+        $('#customCursor').css({
+            borderWidth: 1,
+            borderColor: "#4B5563",
+        });
     });
-});
-$("a").on("mouseout", function () {
-    $('#circularcursor').css({
-        borderWidth: 1,
-        borderColor: "#4B5563",
-    });
-});
-
-$("button").on("mouseout", function () {
-    $('#circularcursor').css({
-        borderWidth: 1,
-        borderColor: "#4B5563",
-    });
-});
+}
 
 
 window.addEventListener('load', () => {
@@ -178,7 +182,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (window.location.search.includes("iframe=true")) document.body.style.background = "transparent";
     else if (wallpaper && !(window.location.pathname === "/")) {
         const brightness = document.documentElement.classList.contains("dark") ? 0 : 255;
-        document.body.style.background = `linear-gradient( rgba(${brightness}, ${brightness}, ${brightness}, 0.6), rgba(${brightness}, ${brightness}, ${brightness}, 0.6) ), url('${wallpaper}') no-repeat center center fixed`;
+        document.body.style.background = `linear-gradient( rgba(${brightness}, ${brightness}, ${brightness}, 0.2), rgba(${brightness}, ${brightness}, ${brightness}, 0.2) ), url('${wallpaper}') no-repeat center center fixed`;
         document.body.style.backgroundSize = 'cover';
     }
 });
@@ -191,7 +195,7 @@ function invertSite() {
 
     if (localStorage.getItem('color-theme') === 'dark') {
         if (banner) banner.style.filter = 'brightness(100%)';
-        if (window.location.pathname ==="/"){
+        if (window.location.pathname === "/") {
             document.getElementById("homeBanner").style.background = `linear-gradient(45deg, rgba(0, 0,0, 0.5), rgba(0, 0, 0, 0.5)), url('/static/images/nebulusCats/IMG_1134.png')`;
             document.getElementById("homeBanner").style.backgroundSize = "cover";
         }
@@ -200,7 +204,7 @@ function invertSite() {
                 logo.style.filter = 'brightness(100%)';
     } else {
         if (banner) banner.style.filter = 'brightness(70%)';
-        if (window.location.pathname ==="/"){
+        if (window.location.pathname === "/") {
             document.getElementById("homeBanner").style.background = `linear-gradient(45deg, rgba(0, 0,0, 0.5), rgba(0, 0, 0, 0.5)), url('/static/images/nebulusCats/IMG_1131.png')`;
             document.getElementById("homeBanner").style.backgroundSize = "cover";
         }

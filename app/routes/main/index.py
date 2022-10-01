@@ -1,4 +1,3 @@
-import datetime
 from pathlib import Path
 
 from flask import redirect, render_template, request, send_file, session
@@ -14,14 +13,6 @@ def get_locale():
         return "es"
     else:
         return "en"
-
-
-@main_blueprint.route("/screenTime", methods=["GET"])
-def screenTime():
-    data = int(request.args.get("data"))
-    location = request.args.get("location")
-    print(f"[Screen Time Log | {datetime.date.today()} @ '{location}'] {data / 1000} seconds ")
-    return str(data)
 
 
 @main_blueprint.route("/", methods=["GET"])
@@ -92,7 +83,10 @@ def selectregion():
 @main_blueprint.app_errorhandler(400)
 def page_not_found(e):
     path = request.path
-    # print(path)
+    if path.endswith("/"):
+        return redirect(path[:-1])
+
+    print("404 Not Found:", path)
     if len(path.strip("/")) == 2:
         return redirect(f"/global/{path}")
     # note that we set the 404 status explicitly

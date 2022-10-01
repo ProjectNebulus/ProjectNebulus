@@ -78,42 +78,6 @@
             </div>
         </div>
     </div>
-    <script>const course_id = "{{ course_id }}"
-    // document.getElementById("navbartitle").innerText = "Home";
-    document.getElementById('pageTitle').innerHTML = `
-
-                        <span class="overflow-auto truncate" style="text-align:left; width:240px;"><img src="{{ course.avatar.avatar_url }}" alt="Course Icon" class="object-cover rounded-lg inline-block" style="width:40px; height:40px; margin: 10px;">
-{{course.name}}</span>
-          `;
-    document.getElementById("changePage").innerHTML = `
-     <ul class="py-1 text-sm text-gray-700 dark:text-gray-200 align-left" aria-labelledby="dropdownDefault">
-
-                            <li>
-                            <a style="text-align: left;" href="/course/{{ course_id }}/" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Home</a>
-                        </li><li>
-                            <a style="text-align: left;" href="/course/{{ course_id }}/documents" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Documents</a>
-                        </li>
-                        <li>
-                            <a style="text-align: left;" href="/course/{{ course_id }}/announcements" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Announcements</a>
-                        </li>
-                        <li>
-                            <a style="text-align: left;" href="/course/{{ course_id }}/grades" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Grades</a>
-                        </li>
-
-                        <li>
-                            <a style="text-align: left;" href="/course/{{ course_id }}/settings" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-                        </li>
-                        <li>
-                            <a style="text-align: left;" href="/course/{{ course_id }}/textbook" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Textbook</a>
-                        </li>
-                        <li>
-                            <a style="text-align: left;" href="/course/{{ course_id }}/learning" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Learning</a>
-                        </li>
-                        <li>
-                            <a style="text-align: left;" href="/course/{{ course_id }}/extensions" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Extensions</a>
-                        </li>
-                    </ul>`
-    </script>
     {% include "courses/courseModals.html" %}
     </body>
 {% endblock %}
