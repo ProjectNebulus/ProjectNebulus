@@ -1407,7 +1407,14 @@
                     Customization Settings
                 </h2>
                 <br>
-                <label onclick="toggleContextMenu()" for="toggle_context_menu"
+                <script>
+                    window.onload = function () {
+                        if (localStorage.getItem("disableContextMenu") !== null) {
+                            document.getElementById("toggle_context_menu").checked = false;
+                        }
+                    }
+                </script>
+                <label onclick="disableContextMenu()" for="toggle_context_menu"
                        class="flex relative items-center mb-4 cursor-pointer">
                     <input type="checkbox" id="toggle_context_menu" class="sr-only" checked="">
                     <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600">
