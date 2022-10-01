@@ -5,27 +5,26 @@ document.addEventListener('load', function () {
 });
 
 function createAssignment() {
+    const dateString = document.getElementById('duedate').value + ' ' + document.getElementById('duetime').value;
+
+    if (new Date(dateString).getTime() - Date.now() <= 0 && !confirm("The entered due date is in the past. Continue?"))
+        return;
+
     let assignment = {
         title: document.getElementById('assignmentname').value,
         points: document.getElementById('points').value,
-        due:
-            document.getElementById('duedate').value +
-            ' ' +
-            document.getElementById('duetime').value,
-        course: document.getElementById('course_id').innerText,
+        due: dateString,
+        course: course_id,
         description: document.getElementById('description').value
     };
     $.ajax({
         type: 'POST',
-        url: '/api/v1/internal/create-assignment',
+        url: '/api/v1/internal/create/assignment',
         data: JSON.stringify(assignment),
         dataType: 'json',
         contentType: 'application/json',
-        done: function (data) {
+        done() {
             alert('Successfully created assignment');
-        },
-        error: function (error) {
-            alert(error);
         }
     });
 }

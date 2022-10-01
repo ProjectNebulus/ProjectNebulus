@@ -2,11 +2,9 @@ import datetime
 
 import requests
 from flask import render_template, request, session
-from flask_cors import cross_origin
 
 from app.static.python.classes import Course, User
-from app.static.python.mongodb import create, read
-
+from app.static.python.mongodb import read
 from app.static.python.mongodb.read import getText
 from . import main_blueprint, utils
 from .utils import logged_in, private_endpoint
@@ -60,16 +58,8 @@ def course_page(page, **kwargs):
     )
 
 
-@main_blueprint.route("/createCourse", methods=["POST"])
-@private_endpoint
-def createCourse():
-    create.create_course(request.get_json())
-    return "0"
-
-
 @main_blueprint.route("/getResource/<courseID>/<documentID>")
 @private_endpoint
-@cross_origin()
 def getResource(courseID, documentID):
     courses = list(
         filter(lambda c: c.id == courseID, read.get_user_courses(session["id"]))

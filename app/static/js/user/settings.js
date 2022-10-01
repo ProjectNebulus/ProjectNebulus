@@ -2,7 +2,9 @@ const VALID_USERNAME_REGEX = /^[A-Za-z][a-zA-Z\d\-_]{2,31}$/;
 const EMAIL_REGEX =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}])|(([a-zA-Z\-\d]+\.)+[a-zA-Z]{2,}))$/;
 
-window.addEventListener('load', function () {
+window.addEventListener('DOMContentLoaded', function () {
+    document.getElementById("toggle_context_menu").checked = localStorage.getItem("enableContextMenu") != null;
+
     const bgCards = document.querySelectorAll('.card img');
     const wallpaper = localStorage.getItem('wallpaper');
 

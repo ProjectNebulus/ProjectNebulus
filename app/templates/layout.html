@@ -15,7 +15,7 @@
         //progressJs("#thebody").start();
     </script>
     <script>
-        if (localStorage.getItem("disableContextMenu") === null) {
+        if (localStorage.getItem("enableContextMenu") === null) {
             document.onclick = hideMenu;
             document.oncontextmenu = rightClick;
         }
@@ -39,12 +39,16 @@
             }
         }
 
-        function disableContextMenu() {
-            if (localStorage.getItem("disableContextMenu") === null)
-                localStorage.setItem("disableContextMenu", "");
-            else
-                localStorage.removeItem("disableContextMenu");
-            location.reload();
+        function toggleContextMenu() {
+            if (localStorage.getItem("enableContextMenu") === null) {
+                localStorage.setItem("enableContextMenu", "");
+                document.onclick = hideMenu;
+                document.oncontextmenu = rightClick;
+            } else {
+                localStorage.removeItem("enableContextMenu");
+                document.onclick = null;
+                document.oncontextmenu = null;
+            }
         }
     </script>
     <style>
@@ -161,7 +165,6 @@
     <script src="/static/flowbite/dist/flowbite.js"></script>
     <script src="/static/js/main/main.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <div id="circularcursor"></div>
     <!--discord embeds and google search!-->
     <meta name="description"
           content="Nebulus is a modern Learning Management System that centralizes everyone’s learning experience into a single application. It’s perfect for Students, Teachers, Parents, and Schools!"/>
@@ -177,6 +180,7 @@
     <meta name="theme-color" content="#AC7AFF">
     <meta property="og:site_name" content="Nebulus.">
     <meta property="og:locale" content="en_US">
+    <div id="customCursor"></div>
     <!--Icons!-->
     <link rel="icon"
           type="image/x-icon"
@@ -194,6 +198,7 @@
                 if (!window.location.host.includes("alpha"))
                     return;
 
+                document.getElementById("branchPopup").classList.remove("hidden");
                 document.getElementById("branchPopup").style.right = "1rem";
                 document.getElementById("branchName").innerHTML = branchName;
                 setTimeout(hideBranchPopup, 5000);
@@ -223,7 +228,7 @@
     </style>
 </head>
 <body>
-<div id="branchPopup" class="fixed">
+<div id="branchPopup" class="hidden fixed">
     <div class="flex gap-2 place-items-center bg-gray-100 dark:bg-gray-700 p-4 pr-10 rounded-lg shadow shadow-lg relative
      border border-gray-200 dark:border-gray-600 z-40">
         <div class="absolute top-0 right-0 p-1 text-gray-200 dark:text-gray-700 material-icons"

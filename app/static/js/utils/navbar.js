@@ -1,13 +1,19 @@
+const dropdownTitle = document.getElementById("pageTitle");
+
 if (document.title.includes("Nebulus - "))
-    document.getElementById("pageTitle").innerHTML = document.title.replace("Nebulus - ", "")
+    dropdownTitle.innerHTML = document.title.replace("Nebulus - ", "");
+
+const pageTitleRect = dropdownTitle.getBoundingClientRect();
+if (pageTitleRect.width < 175)
+    dropdownTitle.style.width = (pageTitleRect.width + 30) + "px";
 
 for (const element of document.querySelectorAll("#changePage li[href]")) {
-    element.classList.add('py-2', 'pl-4', 'pr-10', 'hover:bg-gray-100', 'dark:hover:bg-gray-600', 'dark:hover:text-white', 'flex', 'gap-4', 'cursor-pointer');
+    element.classList.add('py-2', 'pl-2', 'pr-10', 'mx-2', 'hover:bg-gray-100', 'dark:hover:bg-gray-600', 'dark:hover:text-white', 'flex', 'cursor-pointer', 'rounded');
     element.addEventListener("click", () => window.open(element.getAttribute("href"), "_self"))
 }
 
 for (const element of document.querySelectorAll("#changePage li[href] span"))
-    element.classList.add("material-icons", "text-gray-600", "dark:text-gray-300")
+    element.classList.add("material-icons", 'mr-3', "text-gray-600", "dark:text-gray-300")
 
 const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
 const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
