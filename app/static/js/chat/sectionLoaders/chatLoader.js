@@ -83,7 +83,7 @@ function getChat(chatID) {
                         prevMessage['send_date'] = formatTime(prevMessage['send_date']);
                         prevMessage['content'] = prevMessage['content'].replace('<br>', '');
                         chatContent += `
-                    <div class="flex mb-1 items-top space-x-4 mt-6 hover:bg-gray-100/50 dark:hover:bg-gray-700/50">
+                    <div class="rounded-md flex mb-1 items-top space-x-4 mt-6 hover:bg-gray-100/50 dark:hover:bg-gray-700/50" style="width:96%">
                         <img class="mt-1 w-10 h-10 rounded-full" data-dropdown-toggle="user_${prevMessage['sender']['username']}"
                              src="${prevMessage['sender']['avatar']['avatar_url']}"
                              alt="${prevMessage['sender']['username']}'s Profile Picture">
@@ -96,7 +96,7 @@ function getChat(chatID) {
                         </div>
                     </div>`;
                     } else {
-                        chatContent += `<div class="group flex flex-row hover:bg-gray-100/50 dark:hover:bg-gray-700/50"><div class="opacity-0 text-gray-600 uppercase mr-2 group-hover:opacity-100" style="margin-top:3px;font-size:10px;width:50px;">
+                        chatContent += `<div class="rounded-md group flex flex-row hover:bg-gray-100/50 dark:hover:bg-gray-700/50" style="width:96%"><div class="opacity-0 text-gray-600 uppercase ml-1 group-hover:opacity-100" style="margin-top:3px;font-size:10px;width:50px;">
         ${formatTime(message['send_date'], true)}</div> <div id="content_${
                             message['id']
                         }" class="message text-sm text-gray-500 dark:text-gray-400  mr-2">${
