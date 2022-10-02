@@ -3,7 +3,7 @@
 function getEmbed(hyperlink) {
     return new Promise((resolve, reject) => {
         $.ajax({
-            url: 'http://url-metadata.herokuapp.com/api/metadata?url=' + hyperlink, // POST request to url-metadata API to get metadata about URL
+            url: 'https://url-metadata.herokuapp.com/api/metadata?url=' + hyperlink, // POST request to url-metadata API to get metadata about URL
             type: 'GET',
             success: function (data) {
                 resolve(data);
