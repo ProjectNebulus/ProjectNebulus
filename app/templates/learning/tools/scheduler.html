@@ -5,117 +5,179 @@
         <body>
             <script>
 		function addEvent() {
-		    document.getElementById("addNewEvent").classList.remove("hidden");
+		    openModal("addNewEvent");
 		}
 
 		function go() {
-		    document.getElementById("addNewEvent").classList.add("hidden");
+		    closeModal("addNewEvent");
 		    //add other stuff here
 		}
 	
             </script>
-            <button onclick="addEvent()"
+            <button onclick="addEvent()" style="margin:10px;"
                     type="button"
                     class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-large rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 Add Task
             </button>
-            <table class="table-fixed w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        <th scope="col" class="py-3 px-6">Title</th>
-                        <th scope="col" class="py-3 px-6">Desc</th>
-                        <th scope="col" class="py-3 px-6">Date</th>
-                        <th scope="col" class="py-3 px-6">Priority</th>
-                    </tr>
+            <table class="table-fixed w-3/4 rounded-lg text-sm text-left text-gray-500 dark:text-gray-400" style="
+    margin: auto;
+    border-radius: 10px;
+    overflow: hidden;
+">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-800/50 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="py-3 px-6">Title</th>
+                    <th scope="col" class="py-3 px-6">Course</th>
+                    <th scope="col" class="py-3 px-6">Type</th><th scope="col" class="py-3 px-6">Due Date</th>
+                    <th scope="col" class="py-3 px-6">Priority</th>
+                    <th scope="col" class="py-3 px-6">Difficulty</th></tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <td scope="row"
-                            class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">Snack</td>
-                        <td class="py-4 px-6">yum</td>
-                        <td class="py-4 px-6">6-2-2022</td>
-                        <td class="py-4 px-6 text-red">Overdue</td>
-                    </tr>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <td scope="row"
-                            class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">Test</td>
-                        <td class="py-4 px-6">For school</td>
-                        <td class="py-4 px-6">6-8-2022</td>
-                        <td class="py-4 px-6 text-green">Upcoming</td>
-                    </tr>
-                </tbody>
+                <tr class="bg-white border-b dark:bg-gray-900/50 dark:border-gray-700">
+                    <td scope="row" class="text-red-500 py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white" style="
+    color: #ff6f6f !important;
+">Biology Worksheet</td>
+                    <td class="py-4 px-6">Biology 8 (99%)</td>
+                    <td class="py-4 px-6">Homework</td><td class="py-4 px-6">10/2/2022</td>
+                    <td class="py-4 px-6">Important
+                    </td>
+                    <td class="py-4 px-6" style="
+    color: #59ff59;
+">10 Minutes
+                    </td></tr>
+                <tr class="bg-white border-b dark:bg-gray-900/50 dark:border-gray-700">
+                    <td scope="row" class="text-red-500 py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white" style="
+    color: #ff6f6f !important;
+">Latin Stage 18 Test</td>
+                    <td class="py-4 px-6">Latin IIB (95%)</td>
+                    <td class="py-4 px-6">Assesment</td><td class="py-4 px-6">10/3/2022</td>
+                    <td class="py-4 px-6">Important
+                    </td>
+                    <td class="py-4 px-6" style="
+    color: #e7841d;
+">50 Points
+                    </td></tr><tr class="bg-white border-b dark:bg-gray-900/50 dark:border-gray-700">
+                    <td scope="row" class="text-red-500 py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white" style="
+    color: #ff6f6f !important;
+">English "The Vedlt" Essay</td>
+                    <td class="py-4 px-6">English 8 (50%)</td>
+                    <td class="py-4 px-6">Essay</td><td class="py-4 px-6">10/3/2022</td>
+                    <td class="py-4 px-6">Important
+                    </td>
+                    <td class="py-4 px-6" style="
+    color: #e7841d;
+">55 Points
+                    </td></tr><tr class="bg-white border-b dark:bg-gray-900/50 dark:border-gray-700">
+                    <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white" style="
+    color: orange;
+">History Unit Test</td>
+                    <td class="py-4 px-6" style="
+">U.S. History (85%)</td>
+                    <td class="py-4 px-6">Assessment</td>
+                    <td class="py-4 px-6">10/10/22</td><td class="py-4 px-6 text-green">Critical</td>
+                    <td class="py-4 px-6 text-green" style="
+    color: red;
+">25 Points</td></tr>
+                <tr class="bg-white border-b dark:bg-gray-900/50 dark:border-gray-700">
+                    <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white" style="
+    color: orange;
+">Biology Cells Test</td>
+                    <td class="py-4 px-6" style="
+">Biology 8 (99%)</td>
+                    <td class="py-4 px-6">Assessment</td>
+                    <td class="py-4 px-6">10/10/22</td><td class="py-4 px-6 text-green">Important</td>
+                    <td class="py-4 px-6 text-green" style="
+    color: #e7841d;
+">30 Points</td></tr><tr class="bg-white border-b dark:bg-gray-900/50 dark:border-gray-700">
+                    <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white" style="
+    color: #39ff3e;
+">History Presentation</td>
+                    <td class="py-4 px-6" style="
+">U.S. History (85%)</td>
+                    <td class="py-4 px-6">Presentation</td>
+                    <td class="py-4 px-6">10/25/22</td><td class="py-4 px-6 text-green">Critical</td>
+                    <td class="py-4 px-6 text-green" style="
+    color: #ff0000;
+">16 Points</td></tr><tr class="bg-white border-b dark:bg-gray-900/50 dark:border-gray-700">
+                    <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white" style="
+    color: #39ff3e;
+">Chemistry Lab</td>
+                    <td class="py-4 px-6" style="
+">Chemistry 8 (93%)</td>
+                    <td class="py-4 px-6">Lab</td>
+                    <td class="py-4 px-6">10/31/22</td><td class="py-4 px-6 text-green">Important</td>
+                    <td class="py-4 px-6 text-green" style="
+    color: #ff0000;
+">100 Points</td></tr></tbody>
             </table>
-            <div id="addNewEvent"
-                 class="text-white bg-white hover:bg-lightgray focus:outline-none focus:ring-4 focus:ring-blue-300 font-large rounded text-center dark:focus:ring-blue-800 p-6 hidden w-1/2 md:w-full drop-shadow-lg"
-                 style="position: fixed;
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -50%);">
-                <h1 class="text-blue-600 text-lg mb-6">Add a New Event!</h1>
-                <input type="text"
-                       id="small-input"
-                       class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark-text-white dark_focus:ring-blue-500 dark:focus:border-blue-500 mb-2"
-                       placeholder="Event Name">
-                <button id="dropdownDividerButton"
-                        data-dropdown-toggle="dropdownDivider"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-2"
-                        type="button">
-                    Choose event type
-                    <svg class="ml-2 w-4 h-4"
-                         aria-hidden="true"
-                         fill="none"
-                         stroke="currentColor"
-                         viewBox="0 0 24 24"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                </button>
-                <br>
-                <div id="dropdownDivider"
-                     class="z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 block"
-                     data-popper-reference-hidden=""
-                     data-popper-escaped=""
-                     data-popper-placement="bottom"
-                     style="position: absolute;
+            <!-- Main modal -->
+            <div id="addNewEvent" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+                <div class="relative p-4 w-full max-w-2xl h-full md:h-auto bg-white dark:bg-gray-800 rounded-lg">
+                    <h1 class="text-blue-600 text-lg mb-6">Add a New Event!</h1>
+                    <input type="text"
+                           id="small-input"
+                           class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark-text-white dark_focus:ring-blue-500 dark:focus:border-blue-500 mb-2"
+                           placeholder="Event Name">
+                    <button id="dropdownDividerButton"
+                            data-dropdown-toggle="dropdownDivider"
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-2"
+                            type="button">
+                        Choose event type
+                        <svg class="ml-2 w-4 h-4"
+                             aria-hidden="true"
+                             fill="none"
+                             stroke="currentColor"
+                             viewBox="0 0 24 24"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <br>
+                    <div id="dropdownDivider"
+                         class="z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 hidden"
+                         data-popper-reference-hidden=""
+                         data-popper-escaped=""
+                         data-popper-placement="bottom"
+                         style="position: absolute;
                             inset: 0px auto auto 0px;
                             margin: 0px;
-                            transform: translate3d(326.875px, 70px, 0px);">
-                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
-                        aria-labelledby="dropdownDividerButton">
-                        <li>
-                            <a href="#"
-                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Homework</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Test</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Project</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Reading</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">School Club</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Class</a>
-                        </li>
-                        <div class="py-1">
-                            <a href="#"
-                               class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-                                <input type="text"
-                                       id="other"
-                                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                       placeholder="Other"
-                                       required>
-                            </a>
-                        </div>
+                 ">
+                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                            aria-labelledby="dropdownDividerButton">
+                            <li>
+                                <a href="#"
+                                   class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Homework</a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                   class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Test</a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                   class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Project</a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                   class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Reading</a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                   class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">School Club</a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                   class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Class</a>
+                            </li>
+                            <div class="py-1">
+                                <a href="#"
+                                   class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                    <input type="text"
+                                           id="other"
+                                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                           placeholder="Other"
+                                           required>
+                                </a>
+                            </div>
                     </div>
                     <textarea id="description"
                               rows="4"
@@ -140,7 +202,7 @@
                     <button type="button"
                             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-2"
                             onclick="go()">
-                        go
+                        Create Task
                         <svg aria-hidden="true"
                              class="ml-2 -mr-1 w-5 h-5"
                              fill="currentColor"
@@ -151,6 +213,8 @@
                         </svg>
                     </button>
                 </div>
+            </div>
+
             </body>
         </html>
     {% endblock %}
