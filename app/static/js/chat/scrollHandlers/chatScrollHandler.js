@@ -78,7 +78,10 @@ function chatScrollHandler() {
                         message['id']
                     }" class="message text-sm text-gray-500 dark:text-gray-400  mr-2">${
                         message['content']
-                    }</div>`;
+                    }</div><div class="edit-controls flex bg-gray-500 dark:bg-gray-800/75 material-icons rounded-lg group-hover:opacity-100 opacity-0 text-gray-200 dark:text-gray-500 overflow-hidden shadow" style="margin-top: -20px;" onclick="override=true">
+<span class="hover:bg-gray-200 dark:hover:bg-gray-700 p-2">edit</span>
+<span onclick="deleteMaterial(this)" class="hover:bg-gray-200 dark:hover:bg-gray-700 p-2">delete</span>
+</div>`;
                 }
 
                 if (!dropdowns.includes(message['sender']['username'])) {
