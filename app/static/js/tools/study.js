@@ -242,7 +242,7 @@ popupButton.onclick = () => {
         if (timerStarted) saveTimer();
 
         localStorage.setItem('popup', 'true');
-        window.open('/study', 'Study Timer', 'width=600,height=550');
+        window.open('/study/timer', 'Study Timer', 'width=600,height=550');
     } else {
         saveTimer();
         localStorage.removeItem('popup');

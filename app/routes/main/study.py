@@ -4,7 +4,7 @@ from app.static.python.mongodb.read import getText
 from . import main_blueprint
 
 
-@main_blueprint.route("/study", methods=["GET"])
+@main_blueprint.route("/study/timer", methods=["GET"])
 def study():
     return render_template(
         "learning/tools/study.html",

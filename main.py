@@ -8,8 +8,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 from app.routes import init_app, socketio
-# noinspection PyUnresolvedReferences
-from app.static.python.classes import Course
+# noinspection PpyUnresolvedReferences
 
 app = init_app()
 app.secret_key = os.getenv("MONGOPASS")

@@ -4,21 +4,53 @@
     <html>
         <body>
             <script>
-		function addEvent() {
-		    openModal("addNewEvent");
-		}
+                function addEvent() {
+                    openModal("addNewEvent");
+                }
 
-		function go() {
-		    closeModal("addNewEvent");
-		    //add other stuff here
-		}
-	
+                function go() {
+                    closeModal("addNewEvent");
+                    //add other stuff here
+                }
+
             </script>
-            <button onclick="addEvent()" style="margin:10px;"
-                    type="button"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-large rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <div style="
+    margin: 20px;
+">
+                <div style="float:left;">
+                    <h1 class="text-gray-500 uppercase text-3xl">My Tasks (7)</h1>
+                    <h1 class="text-blue-500 uppercase text-1xl">My Comfort Level: 85%</h1></div>
+            </div>
+            <button onclick="window.location.href = '/study/session'" style="margin:10px;" type="button"
+                    class="text-white bg-gradient-to-r from-purple-500 to-pink-500  focus:outline-none focus:ring-4 focus:ring-blue-300 font-large rounded-LG text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Start SmartStudy Session
+            </button>
+            <button onclick="window.location.href = '/study/analytics'" style="margin:10px;" type="button"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-large rounded-LG text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <i class="material-icons" style="
+    margin: 0 10px;
+    vertical-align: middle;
+">insights</i>View Analytics
+            </button>
+            <button onclick="addEvent()" style="margin:10px;" type="button"
+                    class="text-white bg-gray-700 hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-large rounded-LG text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-blue-800">
+                <i class="material-icons" style="
+    margin: 0 10px;
+    vertical-align: middle;
+">add</i>
                 Add Task
             </button>
+            <button onclick="window.location.href = '/study/timer';" style="margin:10px;" type="button"
+                    class="text-white bg-gray-700 hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-large rounded-LG text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-blue-800">
+                <i class="material-icons" style="
+    margin: 0 10px;
+    vertical-align: middle;
+">timer</i>Study Timer
+            </button>
+            </div><br><br>
+
+            </div>
+            <br><br><br>
             <table class="table-fixed w-3/4 rounded-lg text-sm text-left text-gray-500 dark:text-gray-400" style="
     margin: auto;
     border-radius: 10px;
@@ -28,7 +60,8 @@
                 <tr>
                     <th scope="col" class="py-3 px-6">Title</th>
                     <th scope="col" class="py-3 px-6">Course</th>
-                    <th scope="col" class="py-3 px-6">Type</th><th scope="col" class="py-3 px-6">Due Date</th>
+                    <th scope="col" class="py-3 px-6">Type</th>
+                    <th scope="col" class="py-3 px-6">Due Date</th>
                     <th scope="col" class="py-3 px-6">Priority</th>
                     <th scope="col" class="py-3 px-6">Difficulty</th></tr>
                 </thead>

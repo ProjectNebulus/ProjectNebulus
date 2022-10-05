@@ -145,7 +145,7 @@ def international(country):
     return redirect("/")
 
 
-@main_blueprint.route("/scheduler")
+@main_blueprint.route("/study")
 def scheduler():
     return render_template(
         "learning/tools/scheduler.html",
@@ -157,7 +157,7 @@ def scheduler():
     )
 
 
-@main_blueprint.route("/study-planner")
+@main_blueprint.route("/study/session")
 def studyplanner():
     return render_template(
         "learning/tools/study-planner.html",
@@ -205,7 +205,7 @@ def extracurricular():
     )
 
 
-@main_blueprint.route("/analysis")
+@main_blueprint.route("/study/analytics")
 def analysis():
     return render_template(
         "learning/tools/analysis.html",
