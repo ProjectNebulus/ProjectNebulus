@@ -6,7 +6,7 @@ from flask import render_template, request, session
 from app.static.python.classes import Course, User
 from app.static.python.mongodb import read
 from app.static.python.mongodb.read import getText
-from static.python.classes import Assignment
+from app.static.python.classes import Assignment
 from . import main_blueprint, utils
 from .utils import logged_in, private_endpoint
 

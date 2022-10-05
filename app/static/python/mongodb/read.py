@@ -465,7 +465,7 @@ def loadChats(user_id: str, current_index, initial_amount, required_fields):
     if len(chats) < current_index + initial_amount:
         initial_amount = len(chats) - current_index
 
-    chats = chats[current_index: (current_index + initial_amount)]
+    chats = chats[(current_index+1): (current_index + initial_amount)]
     for chat in chats:
         if len(chat["members"]) == 2:
             for x, member in enumerate(chat["members"]):
