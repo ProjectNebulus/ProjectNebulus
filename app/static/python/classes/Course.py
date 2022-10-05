@@ -9,6 +9,7 @@ from mongoengine import (
     StringField,
 )
 
+from . import Grades
 from .Avatar import Avatar
 from .Snowflake import Snowflake
 
@@ -63,3 +64,6 @@ class Course(Snowflake):
             self.avatar = Avatar(
                 avatar_url="https://app.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg"
             )
+
+        if not self.grades:
+            self.grades = Grades()

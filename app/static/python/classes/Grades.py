@@ -8,6 +8,9 @@ class Grades(Snowflake):
     student = ReferenceField("User", required=True)
     terms = DictField(ReferenceField("TermGrade"))  # Trimester 1, Trimester 2, etc.
 
+    letter = StringField(required=False)
+    percent = FloatField(required=False)
+
     average = FloatField(required=False)
     median = FloatField(required=False)
     mode = FloatField(required=False)
@@ -15,36 +18,50 @@ class Grades(Snowflake):
     grade_frequency = DictField(required=False)
 
     def clean(self):
-        grades_list = list(self.grades.values())
-        self.average = float(get_average(grades_list))
-        self.median = float(get_median(grades_list))
-        self.mode = float(get_mode(grades_list))
-        self.range = float(get_range(grades_list))
-        self.grade_frequency = get_grade_frequency(grades_list)
+        points = [a.grade for a in self.course.assignments]
+        total = [a.points for a in self.course.assignments]
+        self.percent = sum(points) / sum(total)
+        self.letter = getLetterGrade(self.percent)
+
+        self.average = float(get_average(points))
+        self.median = float(get_median(points))
+        self.mode = float(get_mode(points))
+        self.range = float(get_range(points))
+        self.grade_frequency = get_grade_frequency(points)
 
 
-def get_average(grades_list):
-    return sum(grades_list) / len(grades_list)
+def getLetterGrade(percent: float):
+    percent *= 100
+    if percent >= 90:
+        return "A"
+    elif percent >= 80:
+        return "B"
+    elif percent >= 70:
+        return "C"
+    elif percent >= 60:
+        return "D"
+    else:
+        return "F"
 
 
-def get_median(grades_list):
-    grades_list.sort()
-    if len(grades_list) % 2 == 0:
-        return (
-            grades_list[int(len(grades_list) / 2)]
-            + grades_list[int(len(grades_list) / 2) - 1]
-        ) / 2
-    return grades_list[int(len(grades_list) / 2)]
+def get_average(points):
+    return sum(points) / len(points)
 
 
-def get_mode(grades_list):
-    return max(set(grades_list), key=grades_list.count)
+def get_median(points):
+    points.sort()
+    if len(points) % 2 == 0:
+        return (points[int(len(points) / 2)] + points[int(len(points) / 2) - 1]) / 2
+    return points[int(len(points) / 2)]
 
 
-def get_range(grades_list):
-    grades_list.sort()
-    return grades_list[-1] - grades_list[0]
+def get_mode(points):
+    return max(set(points), key=points.count)
 
 
-def get_grade_frequency(grades_list):
-    return {str(grade): grades_list.count(grade) for grade in grades_list}
+def get_range(points):
+    return max(points) - min(points)
+
+
+def get_grade_frequency(points):
+    return {str(grade): points.count(grade) for grade in points}

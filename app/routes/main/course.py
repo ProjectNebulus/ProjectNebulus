@@ -2,12 +2,11 @@ import datetime
 
 import requests
 from flask import render_template, request, session
-from flask_cors import cross_origin
 
 from app.static.python.classes import Course, User
-from app.static.python.mongodb import create, read
-
+from app.static.python.mongodb import read
 from app.static.python.mongodb.read import getText
+from static.python.classes import Assignment
 from . import main_blueprint, utils
 from .utils import logged_in, private_endpoint
 
@@ -22,8 +21,8 @@ def course_home(**kwargs):
 def course_page(page, **kwargs):
     user = User.objects(id=session["id"])[0]
     course_id = kwargs["id"]
-    course = Course.objects(pk=course_id)[0]
-    if user.id not in [u.id for u in course.authorizedUsers]:
+    course = Course.objects(pk=course_id)
+    if not course or user.id not in [u.id for u in course[0].authorizedUsers]:
         return (
             render_template(
                 "errors/404.html",
@@ -35,19 +34,23 @@ def course_page(page, **kwargs):
             ),
             404,
         )
-    iframeSrc = "/course/" + course_id + "/"
+
+    course = course[0]
+    iframe_src = "/course/" + course_id + "/"
     if not request.args.get("iframe"):
+        session["recent"] = course_id
+
         if page == "course":
             page = "documents"
 
-        iframeSrc += page + "?iframe=true"
+        iframe_src += page + "?iframe=true"
         page = "course"
 
     return render_template(
         f"courses/{page}.html",
         now=datetime.datetime.now(),
         page="Nebulus - " + course.name,
-        src=iframeSrc,
+        src=iframe_src,
         course=course,
         course_id=course_id,
         user=session.get("username"),
@@ -57,19 +60,45 @@ def course_page(page, **kwargs):
         events=read.sort_course_events(session["id"], int(course_id))[1],
         strftime=utils.strftime,
         translate=getText,
+        gradeStr=gradeStr
     )
 
 
-@main_blueprint.route("/createCourse", methods=["POST"])
-@private_endpoint
-def createCourse():
-    create.create_course(request.get_json())
-    return "0"
+def gradeStr(assignment: Assignment):
+    try:
+        percent = round(assignment.grade / assignment.points, 2)
+        percent *= 100
+
+        if percent >= 90:
+            letter = "A"
+        elif percent >= 80:
+            letter = "B"
+        elif percent >= 70:
+            letter = "C"
+        elif percent >= 60:
+            letter = "D"
+        else:
+            letter = "F"
+
+        grade = assignment.grade
+        if assignment.grade % 1 == 0:
+            grade = int(grade)
+
+        points = assignment.points
+        if assignment.points % 1 == 0:
+            points = int(points)
+
+        return f'<span color="{letter}" class="font-bold text-gray-700 dark:text-gray-400">{grade}/{points} ({letter})</span>'
+
+    except TypeError:
+        return '<span class="text-gray-700 dark:text-gray-400">No Grade</span>'
+
+    except AttributeError:
+        return '<span class="text-gray-700 dark:text-gray-400">Missing/No Grade</span>'
 
 
 @main_blueprint.route("/getResource/<courseID>/<documentID>")
 @private_endpoint
-@cross_origin()
 def getResource(courseID, documentID):
     courses = list(
         filter(lambda c: c.id == courseID, read.get_user_courses(session["id"]))

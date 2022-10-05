@@ -26,8 +26,6 @@ for (const button of document.getElementsByClassName('expand')) {
 }
 
 function openDetailsModal(content, title, author, pic, course, postTime, dueTime) {
-    const targetEl = document.getElementById('modal');
-
     if (title === author) title = 'Announcement from ' + title;
 
     if (dueTime === undefined) dueTime = '';
@@ -48,24 +46,8 @@ function openDetailsModal(content, title, author, pic, course, postTime, dueTime
 </div>`;
 
     document.getElementById('dueTime').innerHTML = dueTime;
-
     document.getElementById('announcementBody').innerHTML = content;
-
-    targetEl.querySelectorAll('[data-dropdown-toggle]').forEach((triggerEl) => {
-        const targetEl = document.getElementById(triggerEl.getAttribute('data-dropdown-toggle'));
-        const placement = triggerEl.getAttribute('data-dropdown-placement');
-
-        new Dropdown(targetEl, triggerEl, {
-            placement: placement ? placement : Default.placement
-        });
-    });
-
-    const modal = new Modal(targetEl);
-    modal.toggle();
-}
-
-function removeBackdrop() {
-    document.querySelector('[modal-backdrop]').remove();
+    openModal("modal");
 }
 
 function replaceURLs(message) {
