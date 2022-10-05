@@ -1,6 +1,67 @@
 <!--Extend with Jinja!-->
 {% extends "layout.html" %}
 {% block main %}
-    <div style="margin-top:20px; margin-left: 20px">
-        <h1 class="text-black dark:text-white text-2xl m-6">Coming Soon</h1>
-    {% endblock %}
+    <style>
+        [color=A] {
+            color: greenyellow !important;
+        }
+
+        [color=B] {
+            color: yellowgreen !important;
+        }
+
+        [color=C] {
+            color: yellow !important;
+        }
+
+        thead td {
+            text-transform: uppercase;
+        }
+
+        th, td {
+            padding: 0.8rem;
+            border: lightgray;
+        }
+
+        td:first-child {
+            padding-left: 1rem;
+        }
+
+        tr:last-child td {
+            padding-bottom: 1rem;
+            border-bottom: none;
+        }
+    </style>
+    <div class="flex justify-between bg-gray-200/50 dark:bg-gray-800/50 dark:text-white p-4 rounded-lg">
+        {{ course.name }}
+        <div>
+            Overall Grade:
+            <span color="A" class="font-bold text-gray-700 dark:text-gray-400">95% (A)</span>
+        </div>
+    </div>
+
+    <div class="mt-8 mr-4 rounded-lg overflow-hidden">
+        <table class="w-full text-gray-700 dark:text-gray-400">
+            <thead class="bg-gray-300 dark:bg-gray-700">
+            <tr>
+                <td>Assignment Name</td>
+                <td>Grade</td>
+                <td>Comments</td>
+                <td>Your Submission</td>
+            </tr>
+            </thead>
+            <tbody class="bg-gray-100 dark:bg-gray-800">
+            {% for a in course.assignments %}
+                {% if a._cls == "Assignment" %}
+                    <tr class="border-b border-gray-200 dark:border-gray-700">
+                        <td>{{ a.title }}</td>
+                        <td>{{ gradeStr(a)|safe }}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

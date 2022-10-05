@@ -38,7 +38,7 @@ function replaceURLs(message, message_id) {
                 data['themeColor'] = data['themeColor'] || '#534F4E';
                 let site = data['siteName'] || siteName;
 
-                result += `<div style="border-style: none none none solid; border-width:8px; border-color:${data['themeColor']}"
+                result += `<div style="margin-top:20px; margin-bottom:20px; border-style: none none none solid; border-width:8px; border-color:${data['themeColor']}"
                      class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100/75 dark:bg-gray-800/50 dark:border-gray-700 dark:hover:bg-gray-700/75">
                     <a href="${hyperlink}"><h5
                         class="mb-2 text-md hover:underline font-bold tracking-tight text-black dark:text-white">${site}</h5>

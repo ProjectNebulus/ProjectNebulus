@@ -1,166 +1,157 @@
 {% extends "layout.html" %}
 {% block main %}
     {% include "utils/navbar.html" %}
-    <!DOCTYPE html>
-    <html>
-	    <head>
-    		<meta charset="UTF-8">
-    		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <div>
 
-    		<style>
-			#strike {
-				display: block;
-				text-align: center;
-				overflow: hidden;
-				white-space: nowrap; 
-			}
-		
-			#strike > span {
-				position: relative;
-				display: inline-block;
-			}
-		
-			#strike > span:before,
-				#strike > span:after {
-				content: "";
-				position: absolute;
-				top: 50%;
-				width: 800px;
-				height: 4px;
-			}
+        <div id="strike">
+            <span class="text-3xl text-gray-500 uppercase">Latest Articles</span>
+        </div>
 
-			#strike > span:before {
-				background-image: linear-gradient(to left, #E5944D, #FF3B3B)
-			}
+        <br><br>
 
-			#strike > span:after {
-				background-image: linear-gradient(to left, #D3CF59, #E5944D)
-			}
-		
-			#strike > span:before {
-				right: 100%;
-				margin-right: 15px;
-			}
-		
-			#strike > span:after {
-				left: 100%;
-				margin-left: 15px;
-			}
-
-			#r-y {
-				height: 4px;
-				width: 100%;
-				border: 0;
-				background-image: linear-gradient(to right, #FF3B3B, #E5944D);
-			}
-
-			#a::before{
-				content: '';
-				display: inline-block;
-				width: 12px;
-				height: 12px;
-				border-radius: 50%;
-				border: 2px solid red;
-				margin-left: -13px;
-				background-color: white;
-			}
-
-			.parent {
-				display: grid;
-				grid-template-columns: repeat(3, 1fr);
-				grid-template-rows: repeat(2, 1fr);
-				grid-column-gap: 30px;
-				grid-row-gap: 30px;
-				width: 100%;   
-				height: 500px;
-			}
-		
-			.div1 { grid-area: 1 / 1 / 3 / 3; }
-			.div2 { grid-area: 1 / 3 / 2 / 4; }
-			.div3 { grid-area: 2 / 3 / 3 / 4; }
-
-			input {
-				border-image-source: linear-gradient(to right, #FF3B3B, #E5944D);
-				border-width: 4px;
-				border-image-slice: 1;
-			}
-	  		</style>
-	  </head>
-	  <body>
-
-	    <center>
-			<div class="block w-[80%] h-[70%] z-0 mt-16 text-2xl bold" style="object-fit: cover">
-				<a href="article.html"><img src="https://cdn.pixabay.com/photo/2016/05/24/16/48/mountains-1412683__480.png" class="rounded-lg hover:scale-110 shadow-lg" width=90% height=90%></a>
-			</div>
-			
-			<div class="block w-[85%] h-[150px] bg-gray-200 rounded-lg mt-[-110px] z-10 opacity-90 py-4 px-8 text-2xl shadow-lg relative" style="margin-top: -90px; margin-left: 30px; margin-right: 30px">
-				BIG HEADLINE THING<br><br>
-			</div>
-	    </center>
-
-	    <br><br>
-
-	    <div id="strike">
-	    	<span class=text-3xl>Latest</span>
-	    </div>
-
-	    <br><br>
-
-	    <div class="parent py-2 relative">
-	    	<div class="overflow-hidden div1 bg-gray-200 opacity-90 rounded-r-lg w-full shadow-lg">
-			<a href="article.html"><img src="https://cdn.pixabay.com/photo/2016/05/24/16/48/mountains-1412683__480.png" class="rounded-tr-lg h-[calc(100% - 200px)] w-full hover:scale-110" style="object-fit: cover"></a>
-			<div class="py-4 px-4">
-				<p class="text-blue-500 text-xl" style="top: 10px; ">Technology</p>
-				<p class="text-2xl text-black" style="top: 35px; "><b>Stuff stuff stuff stuff stuff stuff stuff stuff</b></p>
-				<div id="bottom" style="bottom: 20px; position:absolute">
-					<img src="circle_placeholder.png" width=20 height=20 style="float:left; margin-right: 10px;">
-					<span class="text-slate-500 text-xl">SomeOne1234&nbsp;</span>
-					<span class="text-slate-500 text-xl">•</span>
-					<span class="text-slate-500 text-xl">&nbsp;4/4/4444</span>
-				</div>
-			</div>
-	    </div>
-	      
-	    <div class="div2 bg-gray-200 opacity-90 rounded-l-lg overflow-hidden shadow-lg">
-			<a href="article.html"><img src="https://cdn.pixabay.com/photo/2016/05/24/16/48/mountains-1412683__480.png" class="h-full rounded-l-lg inset-y-0 left-0 hover:scale-110" style="object-fit: cover" width=40%></a>
-	    </div>
-	      
-	    <div class="div3 bg-gray-200 opacity-90 rounded-l-lg overflow-hidden shadow-lg">
-			<a href="article.html"><img src="https://cdn.pixabay.com/photo/2016/05/24/16/48/mountains-1412683__480.png" class="h-full rounded-l-lg inset-y-0 left-0 hover:scale-110 " style="object-fit:cover" width=40%></a>
-	    </div>
-		</div>
+        <div class=" parent py-2 relative">
+            <div class="overflow-hidden div1 bg-gray-200 dark:bg-gray-800 opacity-90 rounded-r-lg w-full shadow-lg"
+                 style="
+">
+                <a href="article.html"><img src="/static/images/nebulusCats/IMG_1134.png"
+                                            class="rounded-tr-lg w-full hover:scale-110"
+                                            style="height: calc(100% - 200px);object-fit: cover;min-height: 350px"></a>
+                <div class="py-4 px-4">
+                    <p class="text-blue-500 text-xl" style="top: 10px; ">Product</p>
+                    <p class="text-2xl text-black dark:text-white" style="top: 35px; "><b>What's new in Nebulus
+                        3.0.0?</b></p>
+                    <div id="bottom" style="bottom: 20px; position:absolute">
 
 
-	    <br><br>
+                        <span class="text-gray-500 text-xl">Published 9/20/22</span>
+                    </div>
+                </div>
+            </div>
 
-	    <hr id="r-y">
+            <div class="div2 bg-gray-200 dark:bg-gray-800  opacity-90 rounded-l-lg overflow-hidden shadow-lg">
+                <a href="article.html"><img src="/static/images/nebulusCats/IMG_1132.png"
+                                            class="h-full rounded-l-lg inset-y-0 left-0 hover:scale-110"
+                                            style="object-fit: cover" width="40%"></a>
+            </div>
 
-	    <br>
-
-	    <div id="a" class="bg-gray-200 opacity-90 rounded-lg w-[calc(100% - 20px)] mx-4 px-2 py-4 my-6 text-xl shadow-lg">
-	    	eeeee
-	    </div>
-
-	    <div id="a" class="bg-gray-200 opacity-90 rounded-lg w-[calc(100% - 20px)] mx-4 px-2 py-4 my-6 text-xl shadow-lg">
-	    	eeeee
-	    </div>
-
-	    <div id="a" class="bg-gray-200 opacity-90 rounded-lg w-[calc(100% - 20px)] mx-4 px-2 py-4 my-6 text-xl shadow-lg">
-	    	eeeee
-	    </div>
-
-	    <div id="a" class="bg-gray-200 opacity-90 rounded-lg w-[calc(100% - 20px)] mx-4 px-2 py-4 my-6 text-xl mb-8 shadow-lg">
-	    	eeeee
-	    </div>
+            <div class="div3 bg-gray-200 dark:bg-gray-800  opacity-90 rounded-l-lg overflow-hidden shadow-lg">
+                <a href="article.html"><img src="/static/images/nebulusCats/IMG_1131.png"
+                                            class="h-full rounded-l-lg inset-y-0 left-0 hover:scale-110 "
+                                            style="object-fit:cover" width="40%">
+                </a>
+            </div>
+        </div>
 
 
-	    <div id="strike" class="mb-16" style="margin-bottom: 40px">
-	    	<span class=text-3xl>
-				<input type="text" placeholder="Search Blog Results"/>
+        <br>
+
+
+        <div id="strike" class="mb-16" style="margin-bottom: 40px">
+	    	<span class="text-3xl">
+				<div class="relative">
+        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor"
+                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round"
+                                                                              stroke-linejoin="round" stroke-width="2"
+                                                                              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        </div>
+        <input type="search" id="default-search"
+               class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+               placeholder="Search Nebulus Blogs" required=""
+               style="border-style: none; border-radius: 10px; width: 400px; ">
+        <button type="submit"
+                class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+    </div>
 	    	</span>
-	    </div>
-	    
-	      
-	  </body>
+        </div>
+
+
+    </div>
+    <style>
+        #strike {
+            display: block;
+            text-align: center;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        #strike > span {
+            position: relative;
+            display: inline-block;
+        }
+
+        #strike > span:before,
+        #strike > span:after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 800px;
+            height: 4px;
+        }
+
+        #strike > span:before {
+            background-image: linear-gradient(to left, #E5944D, #FF3B3B)
+        }
+
+        #strike > span:after {
+            background-image: linear-gradient(to left, #D3CF59, #E5944D)
+        }
+
+        #strike > span:before {
+            right: 100%;
+            margin-right: 15px;
+        }
+
+        #strike > span:after {
+            left: 100%;
+            margin-left: 15px;
+        }
+
+        #r-y {
+            height: 4px;
+            width: 100%;
+            border: 0;
+            background-image: linear-gradient(to right, #FF3B3B, #E5944D);
+        }
+
+        #a::before {
+            content: '';
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid red;
+            margin-left: -13px;
+            background-color: white;
+        }
+
+        .parent {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            grid-column-gap: 30px;
+            grid-row-gap: 30px;
+            width: 100%;
+            height: 500px;
+        }
+
+        .div1 {
+            grid-area: 1 / 1 / 3 / 3;
+        }
+
+        .div2 {
+            grid-area: 1 / 3 / 2 / 4;
+        }
+
+        .div3 {
+            grid-area: 2 / 3 / 3 / 4;
+        }
+
+        input {
+            border-image-source: linear-gradient(to right, #FF3B3B, #E5944D);
+            border-width: 4px;
+            border-image-slice: 1;
+        }
+    </style>
     </html>
 {% endblock %}

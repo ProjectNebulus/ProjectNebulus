@@ -8,7 +8,7 @@ from .......static.python.mongodb import read
 log_data = True
 
 
-@internal.route("/create-announcement", methods=["POST"])
+@internal.route("/create/announcement", methods=["POST"])
 def create_announcement():
     """
     Create an announcement.
@@ -24,7 +24,7 @@ def create_announcement():
     return "success", 200
 
 
-@internal.route("/create-assignment", methods=["POST"])
+@internal.route("/create/assignment", methods=["POST"])
 def create_assignment():
     """
     Create an assignment.
@@ -45,10 +45,10 @@ def create_assignment():
     createAssignment(data)
 
     # Return the success message.
-    return "success"
+    return "success", 200
 
 
-@internal.route("/create-folder", methods=["POST"])
+@internal.route("/create/folder", methods=["POST"])
 def create_folder():
     from app.static.python.mongodb.create import createFolder
 

@@ -21,6 +21,7 @@ from .NebulusDocument import NebulusDocument
 from .Notepad import Notepad
 from .Planner import Planner
 from .Schoology import Schoology
+from .ScreenTime import ScreenTime
 from .Snowflake import Snowflake
 from .Spotify import Spotify
 
@@ -85,6 +86,7 @@ class User(Snowflake):
     type = StringField(options=["staff", "parent", "teacher", "student"], default="student")
     chats = ListField(ReferenceField("Chat"), default=[])
     chatProfile = EmbeddedDocumentField(ChatProfile)
+    screenTime = EmbeddedDocumentField(ScreenTime, default=None)
 
     def clean(self):
         self.avatar.avatar_url = (

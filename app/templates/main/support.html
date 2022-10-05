@@ -3,72 +3,98 @@
     {% include "utils/navbar.html" %}
     <!DOCTYPE html>
     <html>
-        <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-          <script src="/static/js/main/support.js"></script>
-        </head>
-        <body>
-          
-              <center><form onsubmit="sendform()">
-                <div class="mt-8 inline-block bg-gradient-to-b from-[#3F83F8] to-[#3FF8C0] rounded-tl-md rounded-bl-md h-[440px] w-[206px] mr-0"></div>
-                
-                <div class="px-6 py-4 inline-block bg-[#F8F8F8] rounded-tr-md rounded-br-md h-[440px] w-[446px] ml-[-4px]" style="vertical-align: top">
-          
-                    <h1 class="text-xl font-bold text-[#1C4F9B] text-center mb-4">Support Form</h1>
-          
-                    <div class="flex items-stretch mb-4">
-                     <div class="flex w-[194px] mr-2 inline-block mr-2 h-[32px]">
-                        <span class="inline-flex items-center px-2 py-[4px] text-sm rounded-l-md border border-r-0 border-[#0066FF] bg-white border-2 text-gray-900">
-                          @
-                        </span>
-                        <input id="useremail" type="text" class=" rounded-r-md bg-white border border-2 border-[#0066FF] text-gray-900 block flex-1 min-w-0 w-full text-sm p-2" placeholder="Email">
-                      </div>
-            
-                              
-                      <select id="usercategory" class="text-gray-900 bg-white font-medium rounded-md text-sm px-4 py-[4px] text-center flex border-2 border-[#0066FF] h-[32px] w-[194px] inline-block" style="justify-content: space-between">
-                        <div id="dropdown" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100">
-                          <option selected>Category <svg class="ml-2 w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></option>
-                          <option value="US">Bug</option>
-                          <option value="CA">Help</option>
-                          <option value="FR">Feedback</option>
-                          <option value="DE">Other</option>
-                        </div>
-                      </select>
-            
-                  </div>
-          
-                  <div class="w-[395px] h-[65px] border-2 border-[#005EFF] border-dotted mb-4">
-                    <label class="text-center">
-                        <span class="mt-2 text-base leading-normal text-center text-[#005EFF] text-lg">Select a file</span>
-                        <input type='file' class="hidden" />
-                    </label>
-                  </div>
-          
-                  <input id="usertitle" class="h-[32px] w-[395px] rounded-md bg-white border border-2 border-[#0066FF] text-gray-900 w-full text-sm p-2 mb-4" placeholder="Title"/>
-          
-                  <textarea id="usermessage" rows="4" class="h-[126px] w-[395px] rounded-md bg-white border border-2 border-[#0066FF] text-gray-900 w-full text-sm p-2 mb-2" placeholder="Your message..."></textarea>
-          
-                  <button type="submit" id="sendbtn" class="text-white py-2.5 px-4 w-[104px] bg-[#3F83F8] ml-[293px] rounded-lg">
-                    Send&nbsp; <svg style="color: white; height: 16px; float:right;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" ><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M511.6 36.86l-64 415.1c-1.5 9.734-7.375 18.22-15.97 23.05c-4.844 2.719-10.27 4.097-15.68 4.097c-4.188 0-8.319-.8154-12.29-2.472l-122.6-51.1l-50.86 76.29C226.3 508.5 219.8 512 212.8 512C201.3 512 192 502.7 192 491.2v-96.18c0-7.115 2.372-14.03 6.742-19.64L416 96l-293.7 264.3L19.69 317.5C8.438 312.8 .8125 302.2 .0625 289.1s5.469-23.72 16.06-29.77l448-255.1c10.69-6.109 23.88-5.547 34 1.406S513.5 24.72 511.6 36.86z" fill="white"></path></svg>
-                  </button>
-          
-                  
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+        <script src="/static/js/main/support.js"></script>
+    </head>
+    <body>
+
+    <div style="text-align:center;">
+        <form onsubmit="sendform()">
+            <div class="inline-block bg-gradient-to-br from-blue-500 to-green-600 rounded-bl-md h-96 w-48  mr-0"
+                 style="opacity: 75%;height: 450px;backdrop-filter: blur(10px);border-radius: 15px 0 0 15px;"></div>
+
+            <div class="px-6 py-4 inline-block bg-white rounded-tr-md rounded-br-md h-96 w-96 -ml-1 bg-white dark:bg-gray-800/50"
+                 style="height: 450px;border-radius: 0 15px 15px 0;vertical-align: top;backdrop-filter: blur(10px);">
+
+                <h1 class="text-3xl font-bold text-gray-500 text-center mb-4 uppercase" style="
+    text-align: left;
+">Support Form</h1>
+
+                <div class="flex items-stretch mb-4">
+                    <div class="flex" style="
+    margin: 10px;
+">
+  <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+    @
+  </span>
+                        <input type="text" id="website-admin"
+                               class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="{% if user %} {{ user }} {% else %}user{% endif %}"
+                               value="{% if user %} {{ user }} {% else %}{% endif %}">
+                    </div>
+
+                    <select id="usercategory"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            style="
+    width: 200px;
+    margin: 10px;
+">
+                        <option selected="">Category</option>
+                        <option value="US">Bug</option>
+                        <option value="CA">Help</option>
+                        <option value="FR">Feedback</option>
+                        <option value="DE">Other</option>
+                    </select>
                 </div>
-                </form>
-            </center>
 
-            <script>
+                <input class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                       id="file_input" type="file" style="
+    margin: 10px;
+">
 
-                function toggledropdown(){
-                  if (document.getElementById('usercategory').classList.contains('hidden')) {
-                    document.getElementById('usercategory').classList.remove('hidden')
-                    document.getElementById('usercategory').classList.add('block')
-                  } else {
-                    document.getElementById('usercategory').classList.remove('block') 
-                    document.getElementById('usercategory').classList.add('hidden')
-                  }
+                <input type="text" id="usertitle"
+                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                       placeholder="John" required="" style="
+    margin: 20px 10px 20px 10px;
+">
+
+
+                <textarea id="usermessage" rows="4"
+                          class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          placeholder="Your message..." style="
+    margin: 10px;
+" spellcheck="false"></textarea>
+                <button type="submit" id="sendbtn"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                        style="
+    margin: 10px;
+">
+                    Send!&nbsp;
+                    <svg style="color: white;margin-left: 10px;height: 16px;display: inline-block;vertical-align: middle;"
+                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
+                        <path d="M511.6 36.86l-64 415.1c-1.5 9.734-7.375 18.22-15.97 23.05c-4.844 2.719-10.27 4.097-15.68 4.097c-4.188 0-8.319-.8154-12.29-2.472l-122.6-51.1l-50.86 76.29C226.3 508.5 219.8 512 212.8 512C201.3 512 192 502.7 192 491.2v-96.18c0-7.115 2.372-14.03 6.742-19.64L416 96l-293.7 264.3L19.69 317.5C8.438 312.8 .8125 302.2 .0625 289.1s5.469-23.72 16.06-29.77l448-255.1c10.69-6.109 23.88-5.547 34 1.406S513.5 24.72 511.6 36.86z"
+                              fill="white"></path>
+                    </svg>
+                </button>
+
+
+            </div>
+        </form>
+    </div>
+    <script>
+
+        function toggledropdown() {
+            if (document.getElementById('usercategory').classList.contains('hidden')) {
+                document.getElementById('usercategory').classList.remove('hidden')
+                document.getElementById('usercategory').classList.add('block')
+            } else {
+                document.getElementById('usercategory').classList.remove('block')
+                document.getElementById('usercategory').classList.add('hidden')
+            }
                 }
 
               </script>
