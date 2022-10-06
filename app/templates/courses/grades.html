@@ -7,11 +7,15 @@
         }
 
         [color=B] {
-            color: yellowgreen !important;
+            color: yellow !important;
         }
 
         [color=C] {
-            color: yellow !important;
+            color: orange !important;
+        }
+
+        [color]:not(.dark) {
+            filter: brightness(0.9);
         }
 
         thead td {
@@ -36,7 +40,8 @@
         {{ course.name }}
         <div>
             Overall Grade:
-            <span color="A" class="font-bold text-gray-700 dark:text-gray-400">95% (A)</span>
+            <span color="{{ course.grades.letter }}"
+                  class="font-bold text-gray-700 dark:text-gray-400">{{ (course.grades.percent * 100)|int }}% ({{ course.grades.letter }})</span>
         </div>
     </div>
 

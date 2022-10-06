@@ -66,4 +66,4 @@ class Course(Snowflake):
             )
 
         if not self.grades:
-            self.grades = Grades()
+            self.grades = Grades(course=self)

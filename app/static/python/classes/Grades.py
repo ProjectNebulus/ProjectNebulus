@@ -1,5 +1,6 @@
 from mongoengine import *
 
+from . import Assignment
 from .Snowflake import Snowflake
 
 
@@ -18,8 +19,8 @@ class Grades(Snowflake):
     grade_frequency = DictField(required=False)
 
     def clean(self):
-        points = [a.grade for a in self.course.assignments]
-        total = [a.points for a in self.course.assignments]
+        points = [a.grade for a in self.course.assignments if type(a) is Assignment and a.grade is not None]
+        total = [a.points for a in self.course.assignments if type(a) is Assignment and a.grade is not None]
         self.percent = sum(points) / sum(total)
         self.letter = getLetterGrade(self.percent)
 
