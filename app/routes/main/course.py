@@ -7,7 +7,7 @@ from app.static.python.classes import Assignment
 from app.static.python.classes import Course, User
 from app.static.python.mongodb import read
 from app.static.python.mongodb.read import getText, find_user
-from static.python.classes import Grades
+from app.static.python.classes import Grades
 from . import main_blueprint, utils
 from .utils import logged_in, private_endpoint
 
