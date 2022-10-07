@@ -11,6 +11,7 @@ main_blueprint = Blueprint(
 
 from .about import *
 from .app import *
+from .enterprise import *
 from .calendar import *
 from .canvas import *
 from .chat import *
@@ -35,4 +36,4 @@ from .soon import *
 from .spotify import *
 from .study import *
 from .utils import *
-from .enterprise import *
+
