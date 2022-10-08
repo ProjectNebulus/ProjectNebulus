@@ -32,8 +32,6 @@ function nextModal(num) {
 }
 
 function next(num) {
-    document.getElementById("stepBar").style.width = `${100 / 4 * (num + 1)}%`;
-    document.getElementById("stepText").innerText = `${num + 1}`;
     if (num === 1) {
         if (
             checks[0].innerText === 'check' &&
@@ -51,13 +49,25 @@ function next(num) {
                 })
             });
             nextModal(num);
+            document.getElementById("stepBar").style.width = `${100 / 5 * (num + 1)}%`;
+            document.getElementById("stepText").innerText = `${num + 1}`;
         } else alert("You can't move on yet!");
     } else if (num === 2) {
         console.log(checks);
-        if (checks[4].innerHTML.includes('check') && checks[5].innerHTML.includes('check'))
+        if (checks[4].innerHTML.includes('check') && checks[5].innerHTML.includes('check')) {
             nextModal(num);
-        else alert("You can't move on yet!");
-    } else if (num === 4) nextModal(num);
+            document.getElementById("stepBar").style.width = `${100 / 5 * (num + 1)}%`;
+            document.getElementById("stepText").innerText = `${num + 1}`;
+        } else alert("You can't move on yet!");
+    } else if (num == 3) {
+        nextModal(num);
+        document.getElementById("stepBar").style.width = `${100 / 5 * (num + 1)}%`;
+        document.getElementById("stepText").innerText = `${num + 1}`;
+    } else if (num === 4) {
+        nextModal(num);
+        document.getElementById("stepBar").style.width = `${100 / 5 * (num + 1)}%`;
+        document.getElementById("stepText").innerText = `${num + 1}`;
+    }
 }
 
 function onComplete() {
@@ -65,7 +75,7 @@ function onComplete() {
 }
 
 function prev(num) {
-    document.getElementById("stepBar").style.width = `${100 / 4 * (num - 1)}%`;
+    document.getElementById("stepBar").style.width = `${100 / 5 * (num - 1)}%`;
     document.getElementById("stepText").innerText = `${num - 1}`;
     if (num !== 1) {
         setTimeout(function () {

@@ -63,7 +63,7 @@
                         -moz-animation: pulse 5s ease infinite;
                         animation: pulse 5s ease infinite;
                         filter: blur(100px);
-                        margin-top:500px;"
+                        margin-top:500px;    opacity: 0.6;"
              class="absolute -z-10">
         </div>
         <div class="mx-auto text-white">
@@ -78,15 +78,15 @@
                                 display: inline-block;">
                     <div class="bg-gray-600 h-2.5 rounded-full"
                          id="stepBar"
-                         style="width: 25%;
+                         style="width: 20%;
                                     transition: 2s ease;
-                                    background: linear-gradient(45deg,#ffae00,#d400ff);">
+                                    background: linear-gradient(45deg, rgb(0 255 181), rgb(0 121 255))">
                     </div>
                 </div>
                 <span style="margin:5px;
                                  vertical-align: middle;
                                  font-size: 0.8em;"
-                      class="text-gray-500">Step <span id="stepText">1</span> of 4</span>
+                      class="text-gray-500">Step <span id="stepText">1</span> of 5</span>
             </h1>
             <div class="flex flex-col items-left mt-5">
                 <p class="mt-1 text-xs font-light text-gray-500">
@@ -188,35 +188,34 @@
                 <div class="mt-4" id="step2" style="display:none;">
                     <div class="relative">
                         <div class="flex absolute inset-y-0 pb-5 left-0 items-center pl-3 pointer-events-none">
-                            <p class="validation-icon material-icons"
-                               style="color: red;
-                                      vertical-align: middle;">close</p>
+                            <p class="validation-icon material-icons" style="color: gray;
+                                      vertical-align: middle;">vpn_key</p>
                         </div>
                         <input type="number"
                                min="10000000"
                                max="99999999"
                                id="verification"
-                               class="border border-red-500 text-red-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5dark:border-red-400 mt-4 bg-gray-800 border-gray-800 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
-                               placeholder="Email Verification Code (Check Your Email)"
+                               class=" border text-sm rounded-lg block w-full p-2.5 mt-4 dark:bg-gray-800/75 border-gray-800 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
+                               placeholder="Email Verification Code"
                                style="-webkit-user-select: text;">
-                        <p style="color:red;" class="text-sm errormsg">Incorrect Verification Code</p>
+                        <p style="color:gray;" class="text-sm errormsg">Please enter the verification code just sent to
+                            your email! Didn't recieve? Click "previous" then next again</p>
                     </div>
                     <div class="relative mt-4">
                         <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                             <div class="flex absolute inset-y-0 pb-5 left-0 items-center pl-3 pointer-events-none">
-                                <p class="validation-icon material-icons"
-                                   style="color: red;
-                                          vertical-align: middle;">close</p>
+                                <p class="validation-icon material-icons" style="color: gray;
+                                      vertical-align: middle;">cake</p>
                             </div>
                         </div>
                         <input datepicker
                                datepicker-buttons
                                id="bday"
                                type="text"
-                               class="border border-red-500 text-red-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 bg-gray-800 border-gray-800 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
+                               class=" border text-sm rounded-lg block w-full p-2.5 mt-4 dark:bg-gray-800/75 border-gray-800 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
                                placeholder="Birthday"
                                style="-webkit-user-select: text;">
-                        <p style="color:red;" class="text-sm errormsg">Invalid Birthday</p>
+                        <p style="color:gray;" class="text-sm errormsg">Please enter your birthday.</p>
                     </div>
                     <button onclick="prev(2);"
                             style="margin-right:10px;
@@ -247,7 +246,7 @@
                         </svg>
                     </button>
                 </div>
-                <div class="mt-4" id="step3" style="height:400px;overflow-y: auto;padding: 20px;">
+                <div class="mt-4" id="step3" style="display:none;height:400px;overflow-y: auto;padding: 20px;">
 
                     <h3 class="mb-5 text-lg font-medium text-gray-900 dark:text-white">Choose Account Type</h3>
                     <ul class="grid gap-6 w-full grid-cols-2">
@@ -332,6 +331,34 @@
                             </label>
                         </li>
                     </ul>
+                    <button onclick="prev(3);"
+                            style="margin-right:10px;
+                                   float:left;"
+                            class="mt-4 px-4 py-3 leading-6 text-base rounded-md border border-transparent text-white focus:outline-none bg-blue-700 p-6 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer inline-flex items-center w-48 justify-center items-center font-medium focus:outline-none">
+                        <svg class="inline-block w-6 h-6"
+                             fill="none"
+                             stroke="currentColor"
+                             viewBox="0 0 24 24"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M7 16l-4-4m0 0l4-4m-4 4h18"></path>
+                        </svg>
+                        {{ translate("Previous") }}
+                    </button>
+                    <button onclick="next(3);"
+                            style="float:left;"
+                            class="mt-4 px-4 py-3  leading-6 text-base rounded-md border border-transparent text-white focus:outline-none bg-blue-700 p-6 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer inline-flex items-center w-40 justify-center items-center font-medium focus:outline-none">
+                        {{ translate("Next") }}
+                        <svg class="inline-block ml-2 -mr-1 w-5 h-5"
+                             fill="currentColor"
+                             viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                  clip-rule="evenodd">
+                            </path>
+                        </svg>
+                    </button>
 
                 </div>
                 <div class="mt-4" id="step4" style="display:none;">
@@ -567,7 +594,7 @@
                         <br>
                         <br style="clear: left;">
                     </div>
-                    <button onclick="prev(3);"
+                    <button onclick="prev(4);"
                             style="float:left; margin-right:10px;"
                             class="mt-4 px-4 py-3 leading-6 text-base rounded-md border border-transparent text-white focus:outline-none bg-blue-700 p-6 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer inline-flex items-center w-48 justify-center items-center font-medium focus:outline-none">
                         <svg class="inline-block w-6 h-6"
@@ -581,7 +608,7 @@
                         </svg>
                         {{ translate("Previous") }}
                     </button>
-                    <button onclick="next(3);"
+                    <button onclick="next(4);"
                             style="float:left;"
                             class="mt-4 px-4 py-3 leading-6 text-base rounded-md border border-transparent text-white focus:outline-none bg-blue-700 p-6 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer inline-flex items-center w-40 justify-center items-center font-medium focus:outline-none">
                         {{ translate("Join") }}
@@ -598,10 +625,17 @@
                 </div>
 
                 <div id="step5" class="hidden flex items-center justify-center">
-                    <div class="g-recaptcha"
-                         data-sitekey="6LfBJHshAAAAAE3I3N8z6s9OyXXlqtdDG6ovf_sT"
-                         data-callback="onComplete">
-                    </div>
+                    <center>
+                        <h1 class="text-3xl text-black dark:text-white">Beep Boop.</h1>
+                        <p class="text-gray-500">Are you a human?</p>
+                        <p class="text-sm text-gray-500">Once you submit this, your Nebulus account will be created.</p>
+                        <br>
+                        <br>
+                        <div data-theme="dark" class="g-recaptcha"
+                             data-sitekey="6LfBJHshAAAAAE3I3N8z6s9OyXXlqtdDG6ovf_sT"
+                             data-callback="onComplete">
+                        </div>
+                    </center>
                 </div>
             </div>
         </div>
@@ -625,28 +659,6 @@
             padding: 0;
         }
     </style>
-    <script>
-        function next() {
-            let active = document.querySelector('.slide.translate-x-0');
-            active.classList.remove('translate-x-0');
-            active.classList.add('-translate-x-full');
 
-            let next = active.nextElementSibling;
-            next.classList.remove('translate-x-full');
-            next.classList.add('translate-x-0');
-        }
-
-        function previous() {
-            let active = document.querySelector('.slide.translate-x-0');
-            active.classList.remove('translate-x-0');
-            active.classList.add('translate-x-full');
-
-            let previous = activeSlide.previousElementSibling;
-            previous.classList.remove('-translate-x-full');
-            previous.classList.add('translate-x-0');
-        }
-
-
-    </script>
     </body>
 {% endblock %}
