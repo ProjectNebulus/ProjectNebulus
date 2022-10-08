@@ -51,13 +51,13 @@ function fetchStatus() {
             document.getElementById('song').innerHTML = `
             <div> <!--class="grid grid-cols-2"!-->
             <div style="width:80px;vertical-align:middle; display:inline-block;"> 
-                <img style="display: inline-block; margin:20px; border-radius:10px;" class="mb-3 w-24 h-24 shadow-lg" src="${image}">
+                <img style="border-radius:10px;" class="mb-3 shadow-lg" src="${image}">
             </div>
-            <div style="width: calc(100% - 100px);vertical-align:middle; display:inline-block;">
-                <p class="text-2xl text-black dark:text-white"><i style="display:inline-block; color:#1BD661; margin-right:10px;" class="fa fa-spotify"></i> ${name} ${explicit}</p>
+            <div style="margin-left:15px; width: 250px;vertical-align:middle; display:inline-block;">
+                <p class="text-2xl text-black dark:text-white overflow-x-hidden truncate"><i style="display:inline-block; color:#1BD661; margin-right:10px;" class="fa fa-spotify"></i> ${name} ${explicit}</p>
      
-                <p class="text-xl text-gray-600 dark:text-gray-300">${artists}</p>
-                <p class="text-xl text-gray-600 dark:text-gray-300">${album}</p>
+                <p class="text-xl text-gray-600 dark:text-gray-300 overflow-x-hidden truncate">${artists}</p>
+                <p class="text-xl text-gray-600 dark:text-gray-300 overflow-x-hidden truncate">${album}</p>
             </div><br><br>
             <div class="text-center">
                 <span style="text-align: center;font-size:25px;" class=" text-gray-600 dark:text-gray-300"><i style="font-size:25px !important;" class="material-icons">shuffle</i> 

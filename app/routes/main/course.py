@@ -2,7 +2,7 @@ import datetime
 
 import requests
 from flask import render_template, request, session
-from static.python.classes import Assignment
+from app.static.python.classes import Assignment
 
 from app.static.python.classes import Course, User
 from app.static.python.mongodb import read

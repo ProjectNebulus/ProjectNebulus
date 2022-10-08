@@ -5,32 +5,37 @@
     <script src="/static/js/user/profile.js"></script>
     <div class="flex flex-row">
         <div style="">
-            <h1 class="dark:text-white text-4xl noselect">Your Profile</h1>
+            <h1 class="text-gray-500 text-4xl noselect" style="
+    margin-left: 30px;
+">Profile Preview</h1>
             <br>
             <div style="border-radius: 10px;
                         width: 500px;
-                        margin: 30px;
-                        overflow: hidden;"
+                        margin: 0 0px 0 30px;
+                        overflow: hidden;
+                        "
                  id="usercard">
                 <div style="background: linear-gradient(45deg, skyblue, orange);
-                            height: 80px;"></div>
-                <div style="text-align: left;padding: 30px;background: #374151;">
-                    <button class="rounded-full border-gray-300 border-none w-24 h-24  dark:bg-gray-900 dark:hover:bg-gray-800 "
-                            style=" margin: 20px; margin-top: -60px; ">
-                        <logo image="{{ avatar }}" no-revert=""></logo>
+                            height: 80px;opacity:0.8;"></div>
+                <div style="text-align: left;padding: 30px;backdrop-filter: blur(3px) !important;
+    background: #3741517d;">
+                    <button class="rounded-full border-gray-300 border-none w-20 h-20  dark:bg-gray-900 dark:hover:bg-gray-800 " style="
+    margin-bottom: 30px;
+    margin-top: -70px;
+">
+                        <span image="{{avatar}}" no-revert=""><img alt="logo" style="filter: brightness(100%);" class="h-12 mx-auto my-auto" src="{{avatar}}"></>
+                    </button>
                     </button>
                     <br style="">
                     <p style="font-weight: 800; "
                        class="text-black dark:text-white text-4xl">{{ user }}</p>
                     <p style="color: darkgray;" class="text-2xl">{{ email }}</p>
-                    <p>
-                        <br>
-                        <br>
-                        <span style="display:grid; grid-auto-flow: column; align-content: center; justify-content: center; "
-                              class="noselect dark:text-white dark: bg-gray-800 p-6 m-6 rounded-lg noselect dark:text-white"
+
+                        <span style="margin-top:15px;display:grid; grid-auto-flow: column; align-content: center; justify-content: center; "
+                              class="noselect dark:text-white dark: bg-gray-800 p-6 rounded-lg noselect dark:text-white"
                               id="song">
                         </span>
-                    </p>
+
                 </div>
             </div>
             <div style="height:80%;"

@@ -1,1 +1,1 @@
-from .schoology import check_schoology
+from .schoology import *

@@ -32,7 +32,7 @@ function nextModal(num) {
 }
 
 function next(num) {
-    document.getElementById("stepBar").style.width = `${100 / 3 * (num + 1)}%`;
+    document.getElementById("stepBar").style.width = `${100 / 4 * (num + 1)}%`;
     document.getElementById("stepText").innerText = `${num + 1}`;
     if (num === 1) {
         if (
@@ -57,7 +57,7 @@ function next(num) {
         if (checks[4].innerHTML.includes('check') && checks[5].innerHTML.includes('check'))
             nextModal(num);
         else alert("You can't move on yet!");
-    } else if (num === 3) nextModal(num);
+    } else if (num === 4) nextModal(num);
 }
 
 function onComplete() {
@@ -65,7 +65,7 @@ function onComplete() {
 }
 
 function prev(num) {
-    document.getElementById("step_").style.width = `${100 / 3 * (num - 1)}%`;
+    document.getElementById("stepBar").style.width = `${100 / 4 * (num - 1)}%`;
     document.getElementById("stepText").innerText = `${num - 1}`;
     if (num !== 1) {
         setTimeout(function () {
@@ -176,12 +176,11 @@ window.addEventListener('load', function () {
 
         if (VALID_USERNAME_REGEX.test(value)) {
             const request = $.ajax({
-                type: 'POST',
-                url: '/api/v1/internal/check/signup/user',
-                data: {
-                    username: value
-                }
-            });
+                url: "/api/v1/internal/check/signup/user",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({username: value})
+            })
 
             request.done(function (data) {
                 if (data === 'True') {
@@ -238,12 +237,11 @@ window.addEventListener('load', function () {
         // alert(validate(value) && checkEmailExists(value));
         // return true;
         const request = $.ajax({
-            type: 'POST',
-            url: '/api/v1/internal/check/signup/email',
-            data: {
-                email: value
-            }
-        });
+            url: "/api/v1/internal/check/signup/email",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({email: value})
+        })
 
         request.done(function (data) {
             console.log(data);
@@ -258,7 +256,7 @@ window.addEventListener('load', function () {
             } else {
                 validationIcons[0].style.color = 'lightgreen';
                 validationIcons[0].innerHTML = '<i class="material-icons">check</i>';
-                mail.classList.remove(...GRAY);
+                email.classList.remove(...GRAY);
                 email.classList.remove(...RED_BORDER);
                 email.classList.add(...GREEN_BORDER);
                 emailStatus.innerHTML = '<br>';

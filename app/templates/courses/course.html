@@ -18,43 +18,9 @@
         {% include "courses/sidebar.html" %}
         <div class="w-full ml-4 mt-8">
             <div class="flex justify-between">
-                    <span class="text-5xl text-black dark:text-white text-black"
+                    <span class="text-5xl text-gray-500 uppercase"
                           id="page-title">Documents</span>
                 <div style="margin-right: 3rem" data-aos="fade">
-                    <button style="float:left"
-                            data-dropdown-toggle="addDropdown"
-                            id="create"
-                            class="flex justify-center bg-white/75 ring-1 ring-slate-900/10 hover:ring-slate-300
-                             focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400
-                             dark:bg-slate-800/75 dark:ring-0 dark:text-slate-300 dark:hover:bg-slate-700 px-5 py-2.5
-                             font-medium rounded-lg material-icons w-16 h-12 place-items-center text-3xl mr-2">
-                        add
-                    </button>
-                    <button onclick="openModal('searchModal')"
-                            id="search"
-                            style="float:left;"
-                            type="button"
-                            class="hidden sm:flex items-center w-72 text-left space-x-3 px-4 h-12 bg-white/75 ring-1
-                             ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500
-                              shadow-sm rounded-lg text-slate-400 dark:bg-slate-800/75 dark:ring-0 dark:text-slate-300
-                               dark:highlight-white/5 dark:hover:bg-slate-700">
-                        <svg width="24"
-                             height="24"
-                             fill="none"
-                             stroke="currentColor"
-                             stroke-width="2"
-                             stroke-linecap="round"
-                             stroke-linejoin="round"
-                             class="flex-none text-slate-300 dark:text-slate-400"
-                             aria-hidden="true">
-                            <path d="m19 19-3.5-3.5"></path>
-                            <circle cx="11" cy="11" r="6"></circle>
-                        </svg>
-                        <span class="flex-auto">Search within course</span><kbd
-                            class="font-sans font-semibold dark:text-slate-500">
-                        <abbr title="Command"
-                              class="no-underline text-slate-300 dark:text-slate-500">⌘</abbr> K</kbd>
-                    </button>
                     <!-- Dropdown menu -->
                     <div id="addDropdown"
                          class="hidden z-10 w-50 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
@@ -77,14 +43,17 @@
                 </div>
             </div>
             <br>
-            <hr class="dark:text-white text-black">
+            <hr class="border-gray-500" style="
+    border-width: 1.5px;
+    margin: 10px 30px 30px 10px;
+">
             <iframe id="frame" name="frame" src="{{ src }}"></iframe>
         </div>
-        <div class="hidden xl:block border-l border-gray-200 dark:border-gray-700 text-center overflow-auto hover:scroll"
-             id="upcoming-events" style="width:37%">
-            <h1 class="text-black dark:text-white text-2xl">Upcoming Events</h1>
+        <div class="hidden xl:block border-l border-gray-200 dark:border-gray-700 text-center"
+             id="upcoming-events" style="width:27%">
+            <h1 class="text-gray-500 uppercase text-2xl">Upcoming Events</h1>
             <br>
-            <div class="flex flex-col sm:rounded-lg min-w-full overflow-auto" style="height: 90%">
+            <div class="flex flex-col sm:rounded-lg overflow-y-auto" style="height: 80%;width: 70%;margin: auto;overflow-x: hidden;">
                 {% if events|length == 0 %}
                     <p class="text-gray-300 dark:text-gray-500 mx-4">No Events</p>
                 {% else %}
