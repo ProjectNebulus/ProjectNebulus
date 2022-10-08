@@ -18,35 +18,36 @@
     margin: 20px;
 ">
                 <div style="float:left;">
-                    <h1 class="text-gray-500 uppercase text-3xl">My Tasks (7)</h1>
+                    <h1 class="text-gray-400 dark:text-gray-300 uppercase text-3xl">My Tasks (7)</h1>
                     <h1 class="text-blue-500 uppercase text-1xl">My Comfort Level: 85%</h1></div>
             </div>
-            <button onclick="window.location.href = '/study/session'" style="margin:10px;" type="button"
-                    class="text-white bg-gradient-to-r from-purple-500 to-pink-500  focus:outline-none focus:ring-4 focus:ring-blue-300 font-large rounded-LG text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                Start SmartStudy Session
-            </button>
-            <button onclick="window.location.href = '/study/analytics'" style="margin:10px;" type="button"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-large rounded-LG text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                <i class="material-icons" style="
+            <div style="float:right;">
+                <button onclick="window.location.href = '/study/session'" style="margin:10px;" type="button"
+                        class="text-white bg-gradient-to-r from-purple-500 to-pink-500  focus:outline-none focus:ring-4 focus:ring-blue-300 font-large rounded-LG text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Start SmartStudy Session
+                </button>
+                <button onclick="window.location.href = '/study/analytics'" style="margin:10px;" type="button"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-large rounded-LG text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <i class="material-icons" style="
     margin: 0 10px;
     vertical-align: middle;
 ">insights</i>View Analytics
-            </button>
-            <button onclick="addEvent()" style="margin:10px;" type="button"
-                    class="text-white bg-gray-700 hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-large rounded-LG text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-blue-800">
-                <i class="material-icons" style="
+                </button>
+                <button onclick="addEvent()" style="margin:10px;" type="button"
+                        class="text-white bg-gray-700 hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-large rounded-LG text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-blue-800">
+                    <i class="material-icons" style="
     margin: 0 10px;
     vertical-align: middle;
 ">add</i>
-                Add Task
-            </button>
-            <button onclick="window.location.href = '/study/timer';" style="margin:10px;" type="button"
-                    class="text-white bg-gray-700 hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-large rounded-LG text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-blue-800">
-                <i class="material-icons" style="
+                    Add Task
+                </button>
+                <button onclick="window.location.href = '/study/timer';" style="margin:10px;" type="button"
+                        class="text-white bg-gray-700 hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-large rounded-LG text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-blue-800">
+                    <i class="material-icons" style="
     margin: 0 10px;
     vertical-align: middle;
 ">timer</i>Study Timer
-            </button>
+                </button>
             </div><br><br>
 
             </div>
@@ -136,33 +137,40 @@
     color: #39ff3e;
 ">Chemistry Lab</td>
                     <td class="py-4 px-6" style="
-">Chemistry 8 (93%)</td>
+">Chemistry 8 (93%)
+                    </td>
                     <td class="py-4 px-6">Lab</td>
-                    <td class="py-4 px-6">10/31/22</td><td class="py-4 px-6 text-green">Important</td>
+                    <td class="py-4 px-6">10/31/22</td>
+                    <td class="py-4 px-6 text-green">Important</td>
                     <td class="py-4 px-6 text-green" style="
     color: #ff0000;
-">100 Points</td></tr></tbody>
+">100 Points
+                    </td>
+                </tr>
+                </tbody>
             </table>
             <!-- Main modal -->
-            <div id="addNewEvent" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+            <div id="addNewEvent" tabindex="-1" aria-hidden="true"
+                 class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
                 <div class="relative p-4 w-full max-w-2xl h-full md:h-auto bg-white dark:bg-gray-800 rounded-lg">
-                    <h1 class="text-blue-600 text-lg mb-6">Add a New Event!</h1>
+                    <h1 class="text-blue-600 text-lg mb-6">Add a New Task</h1>
                     <input type="text"
                            id="small-input"
                            class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark-text-white dark_focus:ring-blue-500 dark:focus:border-blue-500 mb-2"
-                           placeholder="Event Name">
+                           placeholder="Task Name">
                     <button id="dropdownDividerButton"
                             data-dropdown-toggle="dropdownDivider"
                             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-2"
                             type="button">
-                        Choose event type
+                        Task Type
                         <svg class="ml-2 w-4 h-4"
                              aria-hidden="true"
                              fill="none"
                              stroke="currentColor"
                              viewBox="0 0 24 24"
                              xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </button>
                     <br>
@@ -178,38 +186,38 @@
                         <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
                             aria-labelledby="dropdownDividerButton">
                             <li>
-                                <a href="#"
-                                   class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Homework</a>
+                                <span class="taskType"
+                                      class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Homework</span>
                             </li>
                             <li>
-                                <a href="#"
-                                   class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Test</a>
+                                <span class="taskType"
+                                      class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Test</span>
                             </li>
                             <li>
-                                <a href="#"
-                                   class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Project</a>
+                                <span class="taskType"
+                                      class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Project</span>
                             </li>
                             <li>
-                                <a href="#"
-                                   class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Reading</a>
+                                <span class="taskType"
+                                      class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Reading</span>
                             </li>
                             <li>
-                                <a href="#"
-                                   class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">School Club</a>
+                                <span class="taskType"
+                                      class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">School Club</span>
                             </li>
                             <li>
-                                <a href="#"
-                                   class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Class</a>
+                                <span class="taskType"
+                                      class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Class</span>
                             </li>
                             <div class="py-1">
-                                <a href="#"
-                                   class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                <span class="taskType"
+                                      class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                                     <input type="text"
                                            id="other"
                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                            placeholder="Other"
                                            required>
-                                </a>
+                                </span>
                             </div>
                     </div>
                     <textarea id="description"

@@ -3,20 +3,29 @@
 {% block main %}
     <style>
         [color=A] {
-            color: greenyellow !important;
+            color: skyblue !important;
         }
 
         [color=B] {
-            color: yellow !important;
+            color: greenyellow !important;
         }
 
         [color=C] {
+            color: yellow !important;
+        }
+
+        [color=D] {
             color: orange !important;
+        }
+
+        [color=F] {
+            color: red !important;
         }
 
         [color]:not(.dark) {
             filter: brightness(0.9);
         }
+
 
         thead td {
             text-transform: uppercase;
@@ -40,8 +49,7 @@
         {{ course.name }}
         <div>
             Overall Grade:
-            <span color="{{ course.grades.letter }}"
-                  class="font-bold text-gray-700 dark:text-gray-400">{{ (course.grades.percent * 100)|int }}% ({{ course.grades.letter }})</span>
+            <span color="A" class="font-bold text-gray-700 dark:text-gray-400">95% (A)</span>
         </div>
     </div>
 

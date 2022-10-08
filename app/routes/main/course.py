@@ -2,12 +2,11 @@ import datetime
 
 import requests
 from flask import render_template, request, session
+from static.python.classes import Assignment
 
-from app.static.python.classes import Assignment
 from app.static.python.classes import Course, User
 from app.static.python.mongodb import read
-from app.static.python.mongodb.read import getText, find_user
-from app.static.python.classes import Grades
+from app.static.python.mongodb.read import getText
 from . import main_blueprint, utils
 from .utils import logged_in, private_endpoint
 
@@ -46,17 +45,6 @@ def course_page(page, **kwargs):
 
         iframe_src += page + "?iframe=true"
         page = "course"
-
-    else:
-        if page == "grades" and not course.grades:
-            course.grades = Grades(course=course, student=find_user(id=session["id"]))
-
-        if course.grades.percent is None:
-            course.grades.clean()
-
-        print(f"Course: {course.name} (id={course_id})")
-        print("Percent:", course.grades.percent)
-        print("Letter:", course.grades.letter)
 
     return render_template(
         f"courses/{page}.html",
@@ -100,10 +88,13 @@ def gradeStr(assignment: Assignment):
         if assignment.points % 1 == 0:
             points = int(points)
 
-        return f'<span color="{letter}" class="font-bold text-gray-500 dark:text-gray-300">{grade}/{points} ({letter})</span>'
+        return f'<span color="{letter}" class="font-bold text-gray-700 dark:text-gray-400">{grade}/{points} ({letter})</span>'
 
     except TypeError:
         return '<span class="text-gray-700 dark:text-gray-400">No Grade</span>'
+
+    except AttributeError:
+        return '<span class="text-gray-700 dark:text-gray-400">Missing/No Grade</span>'
 
 
 @main_blueprint.route("/getResource/<courseID>/<documentID>")
