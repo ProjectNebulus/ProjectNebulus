@@ -19,7 +19,7 @@ function fetchStatus() {
             document.getElementById('song').innerHTML = `
             <div style="float:right;display: grid; grid-auto-flow: column; align-content: center;"><br>
             <i style="display:inline-block; color:#1BD661; margin-right:10px;" class="fa fa-spotify"></i> Spotify isn't Connected!
-            <a target="_blank" href="/settings#connections">
+            <a target="_blank" href="/settings#connectionSettings">
                 <button style="vertical-align: middle;" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                 Connect Spotify <i style="vertical-align: middle; display: inline-block;" class="material-icons">open_in_newt</i>
                 </button>

@@ -1,13 +1,12 @@
 {% include "layout.html" %}
 <div style="margin:15px;">
     <p class="text-black dark:text-white">
-        Successfully Connected to the Discord Account
-        <span class="font-bold">
-            <img src="{{ data[2] }}"
-                 style="margin-right:10px;
+        Successfully Connected to the Github Account
+        <span class="font-bold">  <img src="{{ avatar }}"
+                                       style="margin-right:10px;
                         display:inline-block;"
-                 class="w-10 h-10 rounded-full">
-        {{ data[0] }}</span>
+                                       class="w-10 h-10 rounded-full">
+            {{ username }}</span>
     </p>
     <button onclick="window.location.href = '/settings#connectionSettingsettings';"
             type="button"

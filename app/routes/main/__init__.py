@@ -36,4 +36,4 @@ from .soon import *
 from .spotify import *
 from .study import *
 from .utils import *
-
+from .github import *
