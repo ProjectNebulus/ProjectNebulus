@@ -1,27 +1,28 @@
-const { isSupported } = require("dompurify");
+const {isSupported} = require("dompurify");
 
-async function sendform() {
-    //ev.preventDefault();
+if (window.isPopup)
+    document.getElementById("navbar").style.display = "hidden";
 
-    const useremail = document.getElementById('useremail').value;
-    const usermsg = document.getElementById('usermessage').value;
-    //const usercategory = document.getElementById('usercategory').value;
-    const usertitle = document.getElementById('usertitle').value;
-    //const userfile = get the file somehow
+async function sendForm() {
+    const email = document.getElementById('useremail').value;
+    const msg = document.getElementById('usermessage').value;
+    //const userCategory = document.getElementById('userCategory').value;
+    const title = document.getElementById('usertitle').value;
+    //const file = get the file somehow
 
-    console.log(useremail, usermsg, usertitle)
+    console.log(email, msg, title)
 
     const webhookmsg = {
         username: 'Nebulus Bugs',
-        content: 'Incoming Support Ticker: ',
-        avatar_url: 'https://nebulus.app/static/images/NebulusSpecialLogo.png',
+        content: 'Incoming Support Ticket: ' + title,
+        avatar_url: "https://nebulus.app/static/images/NebulusSpecialLogo.png",
         embeds: [{
             title: 'New Support Form:',
             fields: [
-                {name: 'Email:', value: useremail},
-                //{ name: 'Category: ', value: usercategory },
-                {name: 'Title: ', value: usertitle},
-                {name: 'Message: ', value: usermsg}
+                {email: 'Email:', value: email},
+                //{ category: 'Category: ', value: userCategory },
+                {title: 'Title: ', value: title},
+                {message: 'Message: ', value: msg}
             ]
         }],
     };
