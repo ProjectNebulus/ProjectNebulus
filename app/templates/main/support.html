@@ -1,8 +1,6 @@
 {% extends "layout.html" %}
 {% block main %}
     {% include "utils/navbar.html" %}
-    <!DOCTYPE html>
-    <html>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +10,7 @@
     <body>
 
     <div style="text-align:center;">
-        <form onsubmit="sendform()">
+        <form onsubmit="sendForm()">
             <div class="inline-block bg-gradient-to-br from-blue-500 to-green-600 rounded-bl-md h-96 w-48  mr-0"
                  style="opacity: 75%;height: 450px;backdrop-filter: blur(10px);border-radius: 15px 0 0 15px;"></div>
 
@@ -27,23 +25,19 @@
                     <div class="flex" style="
     margin: 10px;
 ">
-  <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
-    @
-  </span>
+                      <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                        @
+                      </span>
                         <input type="text" id="website-admin"
                                class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                placeholder="{% if user %} {{ user }} {% else %}user{% endif %}"
                                value="{% if user %} {{ user }} {% else %}{% endif %}">
                     </div>
 
-                    <select id="usercategory"
+                    <select id="userCategory"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            style="
-    width: 200px;
-    margin: 10px;
-">
-                        <option selected="">Category</option>
-                        <option value="US">Bug</option>
+                            style="width: 200px;margin: 10px;">
+                        <option value="US" selected>Bug</option>
                         <option value="CA">Help</option>
                         <option value="FR">Feedback</option>
                         <option value="DE">Other</option>
@@ -85,20 +79,5 @@
             </div>
         </form>
     </div>
-    <script>
-
-        function toggledropdown() {
-            if (document.getElementById('usercategory').classList.contains('hidden')) {
-                document.getElementById('usercategory').classList.remove('hidden')
-                document.getElementById('usercategory').classList.add('block')
-            } else {
-                document.getElementById('usercategory').classList.remove('block')
-                document.getElementById('usercategory').classList.add('hidden')
-            }
-                }
-
-              </script>
-              
-        </body>
-    </html>
+    </body>
 {% endblock %}
