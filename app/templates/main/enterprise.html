@@ -50,7 +50,7 @@
     
         li {
             list-style-type: none;
-            list-style-image: url('checkmark.svg')
+            list-style-image: url('../static/images/icons/checkmark.svg')
         }
 
       </style>
@@ -71,18 +71,23 @@
             <div class="shape w-screen -z-10"></div>
         </center>
 
-        <div class="h-[400px] bg-[#E4FFF5] w-screen mt-1 flex "
-             style="z-index: 999; display: flex; justify-content: center;">
-            <div class="w-4/12 text-[#01A3AD] inline-block leading-2 mb-2 mt-20">
-                <b><h1 class="text-bold text-4xl mb-4">Seamless integration.</h1></b>
+        <div class="h-[400px] bg-[#E4FFF5] w-screen mt-1 flex px-20 w-[80%] "
+             style="z-index: 999; 
+             display: flex;
+             flex-direction: row;
+             flex-wrap: wrap;
+             justify-content: center;
+             align-items: center;">
+            <div class="w-4/12 text-[#01A3AD] inline-block mb-2 mt-2 mr-32">
+                <b><h1 class="text-bold text-4xl mb-4 ">Seamless integration.</h1></b>
                 <p class="text-2xl">Google Classroom, Canvas, Discord, Spotify and more advanced integrations all at your fingertips.</p> 
             </div>
-            <img src="integrations.png" style="height: 80%; user-drag: none">
+            <img src="../static/images/logos/integrations.png" style="max-height: 80%;">
         </div>
       </div>
     
-      <div class="h-[400px] w-screen mt-16 flex" style="z-index: 999; display: flex; justify-content: center;">
-        <img src="book.png" style="height: 80%; user-drag: none" class="mr-4">
+      <div class="h-[400px] w-screen mt-16 flex px-16" style="z-index: 999; display: flex; justify-content: space-around;">
+        <img src="../static/images/logos/book.png" style="height: 80%; user-drag: none" class="mr-4">
         <div class="w-4/12 text-[#01A3AD] inline-block leading-2 mb-2 mt-20 ml-16">
           <b><h1 class="text-bold text-4xl mb-4 text-[#757575]">Digital Library</h1></b>
           <p class="text-2xl text-[#999999]">Enterprise allows access to a vast collection of digital books and extensions to maximize studying efficiency.</p> 
@@ -94,9 +99,9 @@
           <b><h1 class="inline-block text-bold text-3xl mb-4 text-[#757575]">SmartStudy Learning System</h1></b><span class="text-white text-lg bg-[#6ADCEC] rounded-xl px-2 py-0 ml-2 inline-block" style="display: relative; margin-top: -10px;">New!</span>
           <hr class="w-[40%] h-[3px] mt-2 mb-4 min-w-[300px]">
     
-          <p class="text-[#999999] text-2xl w-4/12">With Nebulus Enterprise, there won’t be any more late-night procrastination, thanks to our...</p>
+          <p class="text-[#999999] text-2xl w-6/12">With Nebulus Enterprise, there won’t be any more late-night procrastination, thanks to our...</p>
     
-          <ul class="text-[#5F5F5F] text-2xl leading-10 mt-8 w-3/12" style="text-align:left">
+          <ul class="text-[#5F5F5F] text-2xl  mt-8 w-3/12" style="text-align:left; line-height: 32px;">
             <li>Advanced Grade Calculator</li>
             <li>Customized Study Schedule</li>
             <li>Special Extension Tools</li>
