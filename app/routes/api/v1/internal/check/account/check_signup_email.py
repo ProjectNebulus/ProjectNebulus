@@ -1,7 +1,7 @@
 from flask import request
 
+from app.static.python.mongodb import read
 from ... import internal
-from .......static.python.mongodb import read
 
 
 @internal.route("/check/signup/email", methods=["POST"])

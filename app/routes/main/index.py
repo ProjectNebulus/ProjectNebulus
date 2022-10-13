@@ -145,18 +145,6 @@ def international(country):
     return redirect("/")
 
 
-@main_blueprint.route("/study")
-def scheduler():
-    return render_template(
-        "learning/tools/scheduler.html",
-        user=session.get("username"),
-        email=session.get("email"),
-        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-        page="Scheduler",
-        translate=getText,
-    )
-
-
 @main_blueprint.route("/study/session")
 def studyplanner():
     return render_template(

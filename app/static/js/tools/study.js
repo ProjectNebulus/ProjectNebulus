@@ -16,8 +16,13 @@ function padWith0(num) {
 }
 
 if (localStorage.getItem('popup')) {
-    document.getElementById('sidebar').classList.add('hidden');
-    document.getElementById('sidebar').hidden = true;
+    try {
+        document.getElementById('navbar').classList.add('hidden');
+        document.getElementById('navbar').hidden = true;
+        document.getElementById('sidebar').classList.add('hidden');
+        document.getElementById('sidebar').hidden = true;
+    } catch (e) {
+    }
 }
 
 const pauseClasses = ['bg-yellow-300', 'border-yellow-400', 'hover:bg-yellow-500'];
