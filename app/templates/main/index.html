@@ -9,6 +9,13 @@
             font-weight: bolder;
         }
     </style>
+    <script>
+        window.onload = function () {
+            if (localStorage.getItem('version') === '3') {
+                document.getElementById("v2-alert").style.display = "none";
+            }
+        }
+    </script>
     <div data-aos="fade-left" id="v2-alert" role="alert" style="
    width: 35rem;
    background: rgb(31 41 55 / 0.75);margin:15px;
@@ -28,7 +35,8 @@
             ">July 1st at 12:00 AM
          </span>
             </div>
-            <button data-dismiss-target="#v2-alert" class="material-icons absolute text-gray-500 right-0 top-0 p-2">
+            <button data-dismiss-target="#v2-alert" onclick="localStorage.setItem('version', '3');"
+                    class="material-icons absolute text-gray-500 right-0 top-0 p-2">
                 close
             </button>
         </div>

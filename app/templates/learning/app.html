@@ -111,7 +111,7 @@
                                         <div due-time-element hidden class="hidden"></div>
                                     </div>
                                     <!-- Dropdown menu -->
-                                    <div id="userDropdown-{{ i }}_{{ j }}"
+                                    <div id="userDropdown-{{ i }}_{{ j }}" style="border-radius:10px; overflow:hidden;"
                                          class="absolute hidden bg-gray-50 divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600">
                                         <div style="border-radius:10px 10px 0 0;
                                                 height:60px;
@@ -137,27 +137,41 @@
                                              style="border-radius:0 0 10px 10px;">
                                             <div style="text-align: left; margin-left:3px;">
                                                 <div style="margin-top:-60px;">
-                                                    <img style="border: solid 2px"
+                                                    <img style="border: solid 5px;border-color: rgb(55,65,81);"
                                                          src="{{ a.author_pic }}"
                                                          class="w-24 h-24 rounded-full border-white dark:border-gray-700 {% if "black" in avatar %} bg-gray-300 {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}"
                                                          alt="{{ a.author }}'s Profile Picture">
-                                                    <span class="absolute  w-5 h-5 bg-green-400 border-2 border-white dark:border-gray-700 rounded-full"
-                                                          style="left:90px;
-                                                                 top:85px;"></span>
+                                                    <span class="absolute  w-7 h-7 bg-green-400 border-4 border-white dark:border-gray-700 rounded-full"
+                                                          style="
+                                                                 left: 80px;
+                                                                 top: 75px;
+                                                                 "></span>
                                                 </div>
                                                 <div>{{ a.author }}</div>
+
                                                 {% if a.author_email %}
+                                                    <div class="text-sm white uppercase" style="
+    font-weight: 900;
+    margin-top: 10px;
+    margin-bottom: 5px;
+">Email
+                                                    </div>
                                                     <div class="text-sm text-gray-400">{{ a.author_email }}</div>{% endif %}
                                                 {% if a.author_school %}
+                                                    <div class="text-sm white uppercase" style="
+    font-weight: 900;
+    margin-top: 10px;
+    margin-bottom: 5px;
+">School
+                                                    </div>
                                                     <div class="text-sm text-gray-400">
-                                                        Instructor
-                                                        at {{ a.author_school }}
+                                                        {{ a.author_school }}
                                                     </div>
                                                 {% endif %}
-                                                <div class="mb-6">
-                                                    <input type="text"
+                                                <div class="mb-6" style="margin-top: 10px;">
+                                                    <input onsubmit="window.location.href='/chat';" type="text"
                                                            id="msg"
-                                                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                           class="bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                            placeholder="Message @{{ a.author }}"
                                                            required>
                                                 </div>
@@ -350,61 +364,159 @@
             </div>
         </div>
     </div>
-    <div id="modal"
-         tabindex="-1"
-         aria-hidden="true"
-         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
-    <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
-        <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <div id="dueTime"
-                 class="absolute bottom-0 right-0 p-3 text-gray-200 dark:text-gray-500 text-sm">
-                Due at 9:43 am
-            </div>
-            <!-- Modal header -->
-            <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600 relative">
-                <div id="header">
+    <div id="modal" tabindex="-1"
+         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full pointer-events-none justify-center items-center flex"
+         style="scale: 1; opacity: 1; transition: all 0.2s ease 0s;" aria-modal="true" role="dialog">
+        <div class="relative p-4 w-full max-w-2xl h-full md:h-auto pointer-events-auto">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <div id="dueTime" class="absolute bottom-0 right-0 p-3 text-gray-200 dark:text-gray-500 text-sm">
+
+                    Happening on
+
+                    5/20/22 10:10 AM •
+
+                    <span class="text-red-600 dark:text-red-500">Overdue</span>
+
                 </div>
-                <button class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                        onclick="closeModal('modal')">
-                    <svg aria-hidden="true"
-                         class="w-5 h-5"
-                         fill="currentColor"
-                         viewBox="0 0 20 20"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                              clip-rule="evenodd">
-                        </path>
-                    </svg>
-                    <span class="sr-only">Close modal</span>
-                </button>
-                <div id="postTime"
-                     class="absolute bottom-0 right-0 p-3 text-gray-200 dark:text-gray-500 text-sm">
-                    Posted at 9:43 am
+                <!-- Modal header -->
+                <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600 relative">
+                    <div id="header">
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white truncate h-full"><i
+                                class="material-icons" style="
+    color: white;
+    vertical-align: middle;
+    margin-right: 10px;
+    font-size: 2em;
+    display: inline-block;
+">assignment</i>Comp Practice Test 2 (Participation)</h3>
+                        <div class="flex mt-2">
+                            <img data-dropdown-toggle="userDropdown-0_0" id="avatar0_0"
+                                 data-dropdown-placement="bottom-start" class="mr-2 inline-block rounded-full mt-2 rounded-full
+      shadow-lg dark:bg-gray-900 dark:hover:bg-gray-800 w-8 h-8"
+                                 src="https://app.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg"
+                                 alt="Ms. Nagami's profile picture">
+
+                            <div class="flex flex-col text-xs">
+                                <h4 class="text-lg text-gray-900 dark:text-white truncate cursor-pointer hover:underline"
+                                    data-dropdown-toggle="userDropdown-0_0">Mr. Schindler</h4>
+                                <span class="bg-gray-300 text-gray-800 text-xs font-normal uppercase
+         mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300"><img class="inline-block rounded-md rounded-full
+      shadow-lg dark:bg-gray-900 dark:hover:bg-gray-800 w-6 h-6"
+                                                                              src="https://app.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg"
+                                                                              alt="Ms. Nagami's profile picture"> Physics 8</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                            onclick="closeModal('modal')">
+                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                  clip-rule="evenodd">
+                            </path>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                    <div id="postTime" class="absolute bottom-0 right-0 p-3 text-gray-200 dark:text-gray-500 text-sm">
+                        Posted at 9:43 am
+                    </div>
+                </div>
+                <!-- Modal body -->
+                <div class="p-6 space-y-6">
+                    <div style="
+    height: 100px;
+    overflow-y: scroll;
+">
+                        <h1 class="text-white font-bold uppercase">Description</h1>
+                        <div id="announcementBody" class="text-base leading-relaxed text-gray-500 dark:text-gray-400">Do
+                            Homework 4 Worksheet. Turn in at end of class on day listed (Day 1 of Week of Oct 17th)<br>
+
+                            Be sure to show steps for solving a physics problem when necessary:<br>
+
+                            1)Create a model, define your origin, and set your coordinates<br>
+
+                            2) State all Known Variables<br>
+
+                            3)State Unknown Variables<br>
+
+                            4) Write down all necessary equations<br>
+
+                            5) Write solution by plugging in variables and solving equations<br>
+
+                            6) Check your answer:<br>
+
+                            a) Do dimensional analysis to check all units are correct.<br>
+                            <br>
+                            b) Ask yourself, is this a reasonable answer for this situation?<br></div>
+                    </div>
+                    <div>
+                        <h1 class="text-white font-bold uppercase">Submission</h1>
+                        <h1 class="text-gray-500">Go to the "Physics 8" course and add extensions for more submission
+                            methods!</h1>
+                        <div class="bg-gray-800 p-3 rounded-lg" style="
+    overflow-y: scroll;
+    margin-top: 10px;
+    height: 150px;
+">
+                            <button class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                <i class="w-6 h-6 inline-block material-icons" style="
+    vertical-align: middle;
+">upload
+                                </i>Upload File
+                            </button>
+                            <button class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-800 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                <i class="w-6 h-6 inline-block material-icons" style="
+    vertical-align: middle;
+">check</i>Mark as Done
+                            </button>
+                            <button class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                <i class="w-6 h-6 inline-block material-icons" style="
+    vertical-align: middle;
+">create</i>Create Submission
+                            </button>
+                            <button class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-purple-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                <i class="w-6 h-6 inline-block material-icons" style="
+    vertical-align: middle;
+">description</i>NebulusDoc
+                            </button>
+                            <button class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-900 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                <i class="fa fa-github inline-block" style="
+    font-size: 1.5em;
+    vertical-align: middle;
+    margin-right: 4px;
+"></i>Github Repository
+                            </button>
+                            <button class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                <i class="fa fa-google inline-block" style="
+    font-size: 1.5em;
+    vertical-align: middle;
+    margin-right: 4px;
+"></i>Google Drive
+                            </button>
+                            <button class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 bg-yellow-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                <i class="material-icons inline-block" style="
+    font-size: 1.5em;
+    vertical-align: middle;
+    margin-right: 4px;
+">cloud</i>OneDrive
+                            </button>
+                        </div>
+                    </div>
+                    <button onclick="closeModal('modal')"
+                            class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                        <svg class="w-6 h-6 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
+                            </path>
+                        </svg>
+                        Dismiss
+                    </button>
                 </div>
             </div>
-            <!-- Modal body -->
-            <div class="p-6 space-y-6">
-                <div id="announcementBody"
-                     class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                    stuff
-                </div>
-                <button onclick="closeModal('modal')"
-                        class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                    <svg class="w-6 h-6 inline-block"
-                         fill="none"
-                         stroke="currentColor"
-                         viewBox="0 0 24 24"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M5 13l4 4L19 7">
-                        </path>
-                    </svg>
-                    Okay
-                </button>
-            </div>
+            <script src="/static/js/app.js"></script>
         </div>
-        <script src="/static/js/app.js"></script>
     </div>
+
 {% endblock %}

@@ -63,8 +63,14 @@ function searchWithin(search) {
     if (search !== "course") search = "user"
 
     let value = document.getElementById('search_input').value;
-
-    if (value.length > 0) {
+    let searchItems = document.getElementById('search_items');
+    if (/\w+/.test(value)) {
+        searchItems.innerHTML = `
+                    <li>
+                        <div class="flex gap-2 place-items-center py-2.5 rounded-lg mx-auto block px-4 py-2 mx-2 dark:hover:text-white">
+                            ${loadingIcon(8)} Searching...
+                        </div>
+                    </li>`;
 
         const request = $.ajax({
             type: 'POST',
@@ -78,11 +84,10 @@ function searchWithin(search) {
             if (data === '0') {
                 string = `
                     <li>
-                            <div class="py-2.5 rounded-lg mx-auto block px-4 py-2 mx-2 dark:hover:text-white">
-                      
-                        No Results Found
-                            </div>
-                        </li>`;
+                        <div class="py-2.5 rounded-lg mx-auto block px-4 py-2 mx-2 dark:hover:text-white">
+                            No Results Found
+                        </div>
+                    </li>`;
             } else {
                 let datas = data.split('•');
                 for (let i = 0; i < datas.length; i++) {
@@ -122,7 +127,7 @@ function searchWithin(search) {
                     }
                 }
             }
-            document.getElementById('search_items').innerHTML = string;
+            searchItems.innerHTML = string;
         });
 
     }

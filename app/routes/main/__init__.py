@@ -28,6 +28,7 @@ from .planner import *
 from .points import *
 from .pricing import *
 from .profile import *
+from .scheduler import *
 from .schoology import *
 from .settings import *
 from .signin import *

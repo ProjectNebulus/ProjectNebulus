@@ -5,9 +5,9 @@ import schoolopy
 from flask import request, session
 from googleapiclient.discovery import build
 
+from app.static.python.mongodb import create, read
+from app.static.python.utils.colors import getColor
 from ... import internal
-from .......static.python.mongodb import create, read
-from .......static.python.utils.colors import getColor
 
 
 @internal.route("/create/course", methods=["POST"])
@@ -22,11 +22,10 @@ def create_course():
 
     user = read.find_user(id=session['id'])
     if user.type == "student":
-        #TODO: Figure out how to determine whether the course is imported
+        # TODO: Figure out how to determine whether the course is imported
         data["type"] = "Student"
     elif user.type == "teacher":
         data["type"] = "Native"
-        
 
     data["authorizedUsers"] = [session.get("id")]
     create.create_course(data)
