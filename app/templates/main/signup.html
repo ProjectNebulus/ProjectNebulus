@@ -249,7 +249,7 @@
                 <div class="mt-4" id="step3" style="display:none;height:400px;overflow-y: auto;padding: 20px;">
 
                     <h3 class="mb-5 text-lg font-medium text-gray-900 dark:text-white">Choose Account Type</h3>
-                    <ul class="grid gap-6 w-full grid-cols-2">
+                    <ul class="grid gap-6 w-full grid-cols-2 w-full">
                         <li>
                             <input type="checkbox" id="react-option" value="" class="hidden peer" required="">
                             <label for="react-option"
@@ -266,7 +266,13 @@
     width: 80px;
 ">Student
                                     </div>
-                                    <div class="w-full text-sm">Perfect for Students</div>
+                                    <div class="w-full text-sm">
+                                        <ul class="list-disc">
+                                            <li>Join organizations &amp; courses</li>
+                                            <li>Free Music Library</li>
+                                            <li>Auto-scheduler (soon!)</li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </label>
                         </li>
@@ -286,7 +292,13 @@
     width: 80px;
 ">Teacher
                                     </div>
-                                    <div class="w-full text-sm">Perfect for Teachers</div>
+                                    <div class="w-full text-sm">
+                                        <ul class="list-disc">
+                                            <li>Add/Remove Courses</li>
+                                            <li>Add/Remove Students</li>
+                                            <li>Post Announcements</li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </label>
                         </li>
@@ -306,7 +318,13 @@
     width: 130px;
 ">Administrator
                                     </div>
-                                    <div class="w-full text-sm">Perfect for School Admins</div>
+                                    <div class="w-full text-sm">
+                                        <ul class="list-disc">
+                                            <li>Full control over school organization</li>
+                                            <li>School Digital Library</li>
+                                            <li>Perfect for school board members</li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </label>
                         </li>
@@ -326,7 +344,13 @@
     width: 80px;
 ">Parent
                                     </div>
-                                    <div class="w-full text-sm">Perfect for parents</div>
+                                    <div class="w-full text-sm">
+                                        <ul class="list-disc">
+                                            <li>View Dashboard Stats</li>
+                                            <li>View Assignments</li>
+                                            <li>Add courses and reminders</li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </label>
                         </li>
@@ -367,7 +391,7 @@
                         Select your Language
                     </label>
                     <select id="languages"
-                            class="bg-gray-800 border-gray-800 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            class="bg-gray-200 border-gray-800 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:bg-gray-800 dark:focus:border-blue-500">
                         <option selected>
                             English (United States)
                         </option>
@@ -404,7 +428,7 @@
                         Select your Theme
                     </label>
                     <select id="theme"
-                            class="bg-gray-800 border-gray-800 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            class="bg-gray-200 border-gray-800 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:bg-gray-800 dark:focus:border-blue-50">
                         <option>
                             Light Theme
                         </option>
