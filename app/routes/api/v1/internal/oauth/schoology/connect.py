@@ -3,10 +3,11 @@ from datetime import datetime
 import schoolopy
 from flask import request, session
 
+from app.routes.api.v1.internal import internal
+from app.routes.main import private_endpoint
 from app.static.python.extensions.integrations.schoology import create_schoology_auth
 from app.static.python.mongodb import create, read, update
 from app.static.python.utils.colors import getColor
-from .. import internal
 
 auth = None
 key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
@@ -32,7 +33,7 @@ async def import_schoology():
         access_token_secret=schoology.Schoology_access_secret,
     )
     auth.request_authorization(
-        callback_url=(request.url_root + "/api/v1/internal/schoology-callback")
+        callback_url=(request.url_root + "/api/v1/internal/oauth/schoology/callback")
     )
     while not auth.authorized:
         auth.authorize()
@@ -173,29 +174,9 @@ async def import_schoology():
             documents.append(document)
 
 
-@internal.route("/get-schoology", methods=["POST"])
-def user_connect_to_schoology_route():
-    schoology_key = ""
-    schoology_secret = ""
-    if request.form.get("key"):
-        session["key"] = request.form.get("key")
-        schoology_key = request.form.get("key")
-
-    if request.form.get("secret"):
-        session["secret"] = request.form.get("secret")
-        schoology_secret = request.form.get("secret")
-
-    session["link"] = request.form.get("link")
-    auth = schoolopy.Auth(
-        schoology_key, schoology_secret, three_legged=True, domain=request.form.get("link")
-    )
-    return auth.request_authorization(
-        callback_url=request.url_root + "/api/v1/internal/schoology-callback"
-    )
-
-
-@internal.route("/connect-to-schoology", methods=["POST"])
-def connect_to_schoology():
+@internal.route("/oauth/schoology/connect", methods=["POST"])
+@private_endpoint
+def schoology_connect():
     schoology_key = session.get("key")
     schoology_secret = session.get("secret")
 
@@ -207,7 +188,7 @@ def connect_to_schoology():
     auth.authorize()
 
     if not auth.authorized:
-        return "error!!!"
+        return "0"
 
     data = request.form
     request_token = auth.request_token

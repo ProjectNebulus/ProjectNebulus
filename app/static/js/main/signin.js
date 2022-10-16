@@ -116,7 +116,7 @@ function startSchoology() {
     let domain = document.getElementById('domain').value;
     const request = $.ajax({
         type: 'GET',
-        url: '/api/v1/internal/generate-schoology-oauth-url',
+        url: '/api/v1/internal/oauth/schoology/url',
         data: {}
     });
 
@@ -137,7 +137,7 @@ function startSchoology() {
     function checkIfDone() {
         const request = $.ajax({
             type: 'GET',
-            url: '/api/v1/internal/check/schoology',
+            url: '/api/v1/internal/oauth/schoology/check',
             data: {}
         });
 

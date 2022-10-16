@@ -34,6 +34,7 @@
     <body>
     {% include "utils/navbar.html" %}
     <script src="/static/js/user/settings.js"></script>
+    <script src="/static/js/user/schoology.js"></script>
     <div class="flex">
         <aside class="w-64" aria-label="Sidebar">
             <div class="w-64 overflow-y-auto hover:text-gray-500 p-4 backdrop-blur-sm  bg-gray-100/75 rounded dark:bg-gray-800/75 fixed"
@@ -1092,7 +1093,7 @@
                             </a>
                             <div class="block p-6 w-3/4 bg-white rounded-b-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-700 dark:border-gray-700 dark:hover:bg-gray-700">
                                 <div>
-                                    <a href="/api/v1/internal/logout-of-schoology"
+                                    <a href="/api/v1/internal/oauth/schoology/disconnect"
                                        class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                         Disconnect Schoology
                                         <svg class="ml-2 -mr-1 w-4 h-4"
@@ -1153,7 +1154,7 @@
                         </a>
                         <div class="block p-6 w-3/4 bg-white rounded-b-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-700 dark:border-gray-700 dark:hover:bg-gray-700">
                             <div>
-                                <a href="/api/v1/internal/logout-of-schoology"
+                                <a href="/api/v1/internal/oauth/schoology/disconnect"
                                    class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                     Disconnect Canvas
                                     <svg class="ml-2 -mr-1 w-4 h-4"
@@ -2146,9 +2147,13 @@
                     <div class="p-4">
                         <div step="1">
                             <h1 class="text-black dark:text-white text-3xl">
-                                <span class="text-5xl"
-                                      style="background: linear-gradient(to bottom right, #ffff80, #ffc3bf,  #ffc3bf, #e959ff,  transparent); color: transparent; background-clip: text; -webkit-background-clip: text; color: transparent; ">Step 1.</span>
-                                Login to your Schoology Account Normally
+                                <span style="
+    background: -webkit-linear-gradient(left, #42cbf5, #42f578);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 900;
+" class="text-4xl">Step 1.</span>
+                                ogin to your Schoology Account Normally
                             </h1>
                             <br>
                             <p class="text-black dark:text-white">
@@ -2198,8 +2203,12 @@
                         </div>
                         <div step="2">
                             <h1 class="text-black dark:text-white text-3xl">
-                                <span class="text-5xl"
-                                      style=" background: linear-gradient(to bottom right, #ffff80, #ffc3bf,  #ffc3bf, #e959ff,  transparent); color: transparent; background-clip: text; -webkit-background-clip: text; color: transparent; ">Step 2.</span>
+                               <span style="
+    background: -webkit-linear-gradient(left, #42cbf5, #42f578);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 900;
+" class="text-4xl">Step 2.</span>
                                 Paste your Schoology Link
                             </h1>
                             <p class="text-black dark:text-white mt-8">
@@ -2216,7 +2225,7 @@
                                 </div>
                                 <input onchange="changeInput();"
                                        id="sgy_link"
-                                       class="pl-10 p-2.5 px-4 py-3 mt-4 w-full rounded-md bg-gray-100 dark:bg-gray-800 outline-none dark:text-white border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
+                                       class="pl-10 p-2.5 px-4 py-3 mt-4 w-full rounded-md bg-gray-100 dark:bg-gray-900 outline-none dark:text-white border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
                                        placeholder="Schoology Link"
                                        style="-webkit-user-select: text;">
                                 <p id="error-msg"
@@ -2284,8 +2293,12 @@
                         </div>
                         <div step="3">
                             <h1 class="text-black dark:text-white text-3xl">
-                                <span class="text-5xl"
-                                      style=" background: linear-gradient(to bottom right, #ffff80, #ffc3bf,  #ffc3bf, #e959ff,  transparent); color: transparent; background-clip: text; -webkit-background-clip: text; color: transparent; ">Step 3.</span>
+                                <span style="
+    background: -webkit-linear-gradient(left, #42cbf5, #42f578);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 900;
+" class="text-4xl">Step 3.</span>
                                 Paste your API Key
                             </h1>
                             <p class="text-black dark:text-white my-8">
@@ -2299,7 +2312,7 @@
                                    type="text"
                                    id="key"
                                    name="key"
-                                   class="w-full bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-800 border-0 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                   class="w-full bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-900 border-0 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                    required>
                             <br>
                             <br>
@@ -2308,7 +2321,7 @@
                                    type="text"
                                    id="secret"
                                    name="secret"
-                                   class="w-full mt-2 bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-800 border-0 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                   class="w-full mt-2 bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-900 border-0 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                    required>
                             <br>
                             <button onclick="prev()"
@@ -2352,11 +2365,12 @@
                         </div>
                         <div step="4">
                             <h1 class="text-black dark:text-white text-3xl">
-                                <span class="text-5xl"
-                                      style="background: linear-gradient(to bottom right, #ffff80, #ffc3bf,  #ffc3bf, #e959ff,  transparent);
-                                             color: transparent;
-                                             background-clip: text;
-                                             -webkit-background-clip: text;">Step 4.</span>
+                               <span style="
+    background: -webkit-linear-gradient(left, #42cbf5, #42f578);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 900;
+" class="text-4xl">Step 4.</span>
                                 Launch Schoology
                             </h1>
                             <p class="text-black dark:text-white my-8">
@@ -2374,14 +2388,13 @@
                             <div id="confirmation" class="dark:text-white text-black">
                                 <div style="color:red;display:none;" id="error">
                                     Something went wrong! Make sure you entered valid API credentials and clicked
-                                    the
-                                    "Approve" button in the popup.
+                                    the "Approve" button in the popup.
                                 </div>
                                 <span style="color:red;display:none" id="error2">This Schoology account is already connected!</span>
                                 <span style="color:red;display:none"
                                       id="error3">Oops! An error occured on our side.</span>
                             </div>
-                            <div id="successconfirm" style="display: none;">
+                            <div id="schoology_successful" style="display: none;">
                                 <p class="text-2xl">
                                     Successfully connected a Schoology account. The details are below:
                                 </p>

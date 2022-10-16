@@ -1,12 +1,11 @@
 from flask import redirect, session
 
+from app.routes.api.v1.internal import internal
 from app.static.python.mongodb import read, update
 
-from .. import internal
 
-
-@internal.route("/logout-of-schoology")
-def logout_from_schoology2():
+@internal.route("/oauth/schoology/disconnect")
+def schoology_disconnect():
     try:
         session.pop("schoologyEmail")
     except ValueError:

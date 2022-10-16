@@ -219,7 +219,7 @@ def create_schoology_course():
         access_token_secret=schoology.Schoology_access_secret,
     )
     auth.request_authorization(
-        callback_url=(request.url_root + "/api/v1/internal/schoology-callback")
+        callback_url=(request.url_root + "/api/v1/internal/oauth/schoology/callback")
     )
     while not auth.authorized:
         auth.authorize()

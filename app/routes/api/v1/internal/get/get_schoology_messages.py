@@ -3,11 +3,10 @@ from datetime import datetime
 
 from flask import jsonify, request, session
 
+from app.routes.api.v1.internal import internal
 from app.routes.main.utils import private_endpoint
 from app.static.python.mongodb import read
 from app.static.python.utils.colors import getColor
-
-from ...internal import internal
 
 
 @internal.route("/get_schoology_messages", methods=["POST"])
