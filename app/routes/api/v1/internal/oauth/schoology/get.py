@@ -26,5 +26,6 @@ def schoology_get():
         schoology_key, schoology_secret, three_legged=True, domain=request.form.get("link")
     )
     return str(auth.request_authorization(
-        callback_url=request.url_root + "/api/v1/internal/oauth/schoology/callback"
-    )).replace("oauth_callback", "return_url").replace("//", "/")
+        callback_url=str(request.url_root).replace("https://", "").replace("http://", "")
+                     + "/api/v1/internal/oauth/schoology/callback"
+    )).replace("//oauth", "/oauth")
