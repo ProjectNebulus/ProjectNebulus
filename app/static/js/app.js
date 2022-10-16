@@ -12,20 +12,32 @@ const Default = {
 
 for (const button of document.getElementsByClassName('expand')) {
     const parent = button.parentElement;
+    let title = "Announcement from " + parent.querySelector('[author-element]').innerHTML;
+    try {
+        title = parent.querySelector('[title-element]').innerHTML;
+    } catch (ignored) {
+    }
     button.addEventListener('click', () =>
         openDetailsModal(
             parent.querySelector('[content-element]').innerHTML,
-            parent.querySelector('[title-element]').innerHTML,
+            title,
             parent.querySelector('[author-element]').innerHTML,
             parent.querySelector('[image-element]').src,
             parent.querySelector('[course-name-element]').innerHTML,
             parent.querySelector('[post-time-element]').innerHTML,
-            parent.querySelector('[due-time-element]').innerHTML
+            parent.querySelector('[due-time-element]').innerHTML,
+            parent.querySelector('[type-element]').innerHTML
         )
     );
 }
 
-function openDetailsModal(content, title, author, pic, course, postTime, dueTime) {
+function openDetailsModal(content, title, author, pic, course, postTime, dueTime, type) {
+    if (type === "Announcement") {
+        document.getElementById("submissionsBox").style.display = "none";
+        document.getElementById("descriptionTitle").innerHTML = "Message";
+    } else {
+        document.getElementById("commentBox").style.display = "none";
+    }
     if (title === author) title = 'Announcement from ' + title;
 
     if (dueTime === undefined) dueTime = '';

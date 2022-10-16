@@ -61,6 +61,8 @@ window.addEventListener('DOMContentLoaded', function () {
         resp = document.getElementById('error');
         if (data === 'error!!!') {
             document.getElementById('error').style.display = 'block';
+        } else if (data === '1') {
+            document.getElementById('error3').style.display = 'block';
         } else if (data === '2') {
             document.getElementById('error2').style.display = 'block';
         } else {
@@ -289,7 +291,8 @@ function prev() {
         error.innerHTML = "";
 }
 
-function next() {
+function nextSchoology() {
+    max = 4;
     if (step < max) {
         for (const el of document.querySelectorAll(" [step='" + step + "']"))
             el.classList.add("hidden");

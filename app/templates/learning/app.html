@@ -54,6 +54,7 @@
                                         <button class="absolute top-0 right-0 text-xl mt-2 mr-3 material-icons hover:bg-gray-50 dark:hover:bg-gray-600 px-1 rounded-lg expand">
                                             open_in_new
                                         </button>
+                                        <div type-element class="hidden">Announcement</div>
                                         {% if a.title != "" %}
                                             <h4 class="text-lg font-semibold text-gray-900 dark:text-white truncate"
                                                 title-element>{{ a.title }}</h4>
@@ -295,6 +296,7 @@
                                     <div class="absolute right-0 bottom-0 material-icons hover:bg-gray-50 dark:hover:bg-gray-500 p-1 expand text-gray-200 cursor-pointer dark:text-gray-400 rounded-lg mr-3 mb-3">
                                         open_in_new
                                     </div>
+                                    <div type-element class="hidden">Event</div>
                                     <div content-element hidden class="hidden">{{ a.description }}</div>
                                     <div author-element hidden class="hidden">{{ a.course.teacher }}</div>
                                     <img src="{% if "teacherAccount" in a.course %} {{ a.course.teacher.avatar.avatar_url }} {% else %} https://app.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg {% endif %}"
@@ -426,10 +428,10 @@
                 <!-- Modal body -->
                 <div class="p-6 space-y-6">
                     <div style="
-    height: 100px;
+    max-height: 100px;
     overflow-y: scroll;
 ">
-                        <h1 class="text-white font-bold uppercase">Description</h1>
+                        <h1 class="text-white font-bold uppercase" id="descriptionTitle">Description</h1>
                         <div id="announcementBody" class="text-base leading-relaxed text-gray-500 dark:text-gray-400">Do
                             Homework 4 Worksheet. Turn in at end of class on day listed (Day 1 of Week of Oct 17th)<br>
 
@@ -451,7 +453,7 @@
                             <br>
                             b) Ask yourself, is this a reasonable answer for this situation?<br></div>
                     </div>
-                    <div>
+                    <div id="submissionsBox">
                         <h1 class="text-white font-bold uppercase">Submission</h1>
                         <h1 class="text-gray-500">Go to the "Physics 8" course and add extensions for more submission
                             methods!</h1>
@@ -502,6 +504,47 @@
     margin-right: 4px;
 ">cloud</i>OneDrive
                             </button>
+                        </div>
+                    </div>
+                    <div id="commentBox" style="">
+                        <h1 class="text-white font-bold uppercase">Reactions</h1>
+
+                        <style>
+                            #likes svg {
+                                color: rgb(118 169 250);
+                                fill: rgb(118 169 250);
+                                margin-left: 1.7rem;
+                                margin-right: 0.1rem;
+                                cursor: pointer;
+                            }
+
+                            #likes * {
+                                width: 1.5rem;
+                                height: 1.5rem;
+                                display: inline-block;
+                                vertical-align: bottom;
+                            }
+                        </style>
+                        <div id="likes" class="dark:text-white text-black">
+
+                            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
+                                 style="margin-left: 0">
+                                <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z">
+                                </path>
+                            </svg>
+                            2
+                            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667v-5.43a2 2 0 00-1.105-1.79l-.05-.025A4 4 0 0011.055 2H5.64a2 2 0 00-1.962 1.608l-1.2 6A2 2 0 004.44 12H8v4a2 2 0 002 2 1 1 0 001-1v-.667a4 4 0 01.8-2.4l1.4-1.866a4 4 0 00.8-2.4z">
+                                </path>
+                            </svg>
+                            0
+                            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z"
+                                      clip-rule="evenodd">
+                                </path>
+                            </svg>
+                            0
                         </div>
                     </div>
                     <button onclick="closeModal('modal')"
