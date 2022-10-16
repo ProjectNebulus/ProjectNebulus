@@ -1,1 +1,1 @@
-from schoology import *
+from .schoology import *

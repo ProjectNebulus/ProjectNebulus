@@ -19,3 +19,4 @@ from .delete import *
 from .get import *
 from .search import *
 from .update import *
+from .oauth import *

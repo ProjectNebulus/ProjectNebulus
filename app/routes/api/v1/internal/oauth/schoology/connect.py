@@ -221,5 +221,5 @@ def schoology_connect():
     }
 
     update.schoologyLogin(session["id"], schoology)
-    import_schoology()
+    # import_schoology()
     return str(sc.get_me().name_display + "•" + sc.get_me().primary_email)

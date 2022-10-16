@@ -103,5 +103,8 @@ function launch_sgy() {
     });
 
     request.done((data) => window.open(data, 'Authorize with Schoology', 'height=400,width=800'));
-    request.fail(() => (error.style.display = 'block'));
+    request.fail(() => (function () {
+        const error = document.getElementById("error");
+        error.style.display = 'block';
+    }));
 }
