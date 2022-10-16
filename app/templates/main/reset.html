@@ -22,7 +22,7 @@
              viewBox="0 0 24 24"
              xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M7 16l-4-4m0 0l4-4m-4 4h18"></path>
+                  d="M7 16l-4-4m0 0l4-4m-4 4h18"></path>
         </svg>
         Back
     </button>
@@ -32,13 +32,9 @@
     </button>
     <div class="pageCount"></div>
 </div>
-<div class="container mx-auto px-8 py-12 bg-white/[0.9] rounded-lg w-1/2 lg:w-1/3 pb-1/2 hidden text-sm"
-     id="resetCode"
-     style="position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);">
-    <h1 class="text-xl">Reset Password</h1>
+<div class="container mx-auto px-8 py-12 rounded-lg pb-1/2 text-sm hidden"
+     id="resetCode">
+    <h1 class="text-xl text-black dark:text-white">Reset Password</h1>
     <p class="text-gray-400 my-2" id="username-email">
         Enter the emailed code and your new
         password.
@@ -48,7 +44,7 @@
             mail
         </div>
         <input id="code"
-               class="pl-11 p-2.5 px-4 py-3 w-full rounded-md bg-gray-100 border-transparent text-sm focus:border-gray-500 focus:bg-white focus:ring-0"
+               class="dark:bg-gray-900/50 dark:text-white pl-11 p-2.5 px-4 py-3 w-full rounded-md bg-gray-100 border-transparent text-sm focus:border-gray-500 focus:bg-white focus:ring-0"
                placeholder="Code"
                style="-webkit-user-select: text;">
     </div>
@@ -58,7 +54,7 @@
             key
         </div>
         <input id="newPsw"
-               class="pl-11 p-2.5 px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:bg-white focus:border-gray-500 focus:ring-0 text-sm"
+               class="dark:bg-gray-900/50 dark:text-white pl-11 p-2.5 px-4 py-3 w-full rounded-md bg-gray-100 border-transparent text-sm focus:border-gray-500 focus:bg-white focus:ring-0"
                placeholder="New Password"
                style="-webkit-user-select: text;"
                autocomplete="new-password"

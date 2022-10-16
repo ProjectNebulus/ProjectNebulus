@@ -1,5 +1,5 @@
 let actions, pageTitle, createButton;
-document.addEventListener('DOMContentLoaded', () => {
+window.onload = function () {
     actions = document.getElementsByClassName('link');
     pageTitle = document.getElementById('page-title');
     createButton = document.getElementById('create');
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert(data);
         });
     });
-});
+};
 
 function setCreateButton(title) {
     for (const a of actions) a.innerHTML = '';

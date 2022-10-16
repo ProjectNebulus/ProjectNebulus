@@ -4,8 +4,8 @@ from datetime import datetime
 
 from flask import render_template, session
 
-from static.python.mongodb import read
-from static.python.mongodb.read import getText
+from app.static.python.mongodb import read
+from app.static.python.mongodb.read import getText
 from . import main_blueprint
 
 

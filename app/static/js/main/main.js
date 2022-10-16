@@ -73,8 +73,10 @@ window.addEventListener('load', () => {
 
 
 document.addEventListener("keydown", e => {
-    if ((e.ctrlKey || e.metaKey) && e.key === "k")
-        openModal('searchModal');
+    if ((e.ctrlKey || e.metaKey) && e.key === "k") {
+        if (document.getElementById('searchModal').classList.contains("hidden")) openModal('searchModal');
+        else closeModal('searchModal');
+    }
 
     if (e.key === "Escape") {
         for (const modal of modals)

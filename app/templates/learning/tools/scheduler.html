@@ -3,17 +3,42 @@
     {% include "utils/navbar.html" %}
     <div style="margin: auto; max-width: 75rem; padding: 5vh 5vw">
         <div class="flex justify-between text-black dark:text-white mb-8">
-            <div class="text-3xl" id="tasks-count">
+            <div class="text-3xl uppercase text-gray-500" id="tasks-count">
                 {% if events|length > 0 %}
-                    My tasks ({{ events|length }})
+                    My Tasks ({{ events|length }})
                 {% else %}
                     No tasks &#127881;
                 {% endif %}
             </div>
-            <div>
+            <div style="
+">
+                <button onclick="window.location.href = '/study/session'" style="margin:10px;" type="button"
+                        class="text-white bg-gradient-to-r from-purple-500 to-pink-500  focus:outline-none focus:ring-4 focus:ring-blue-300 font-large rounded-LG text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Start SmartStudy Session
+                </button>
+                <button onclick="window.location.href = '/study/analytics'" style="margin:10px;" type="button"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-large rounded-LG text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <i class="material-icons" style="
+    margin: 0 10px;
+    vertical-align: middle;
+">insights</i>View Analytics
+                </button>
+                <button onclick="addEvent()" style="margin:10px;display: inline-block;" type="button"
+                        class="text-white bg-gray-700 hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-large rounded-LG text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-blue-800">
+                    <i class="material-icons" style="
+    margin: 0 10px;
+    vertical-align: middle;
+">add</i>
+                    Add Task
+                </button>
                 <button class="flex gap-2 bg-blue-300 dark:bg-blue-600 px-4 py-2.5 rounded-lg"
-                        onclick="localStorage.setItem('popup', 'true'); window.open('/study/timer', 'Study Timer', 'width=500,height=450')">
-                    <span class="material-icons">timer</span>
+                        onclick="localStorage.setItem('popup', 'true'); window.open('/study/timer', 'Study Timer', 'width=500,height=450')"
+                        style="
+    display: inline-block;
+">
+                    <span class="material-icons" style="
+    vertical-align: middle;
+">timer</span>
                     Study Timer
                 </button>
             </div>
@@ -26,6 +51,7 @@
                     <th scope="col" class="py-3 px-6">Course</th>
                     <th scope="col" class="py-3 px-6">Due Date</th>
                     <th scope="col" class="py-3 px-6">Priority</th>
+                    <th scope="col" class="py-3 px-6">Notes</th>
                 </tr>
                 </thead>
                 <tbody>

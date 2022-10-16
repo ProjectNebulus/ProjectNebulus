@@ -1,5 +1,5 @@
 document.getElementById("extraWidgets").innerHTML = `
-<button id="create" onclick="openModal('courseModal')" class="hidden sm:flex items-center text-left space-x-3 w-16 h-12 bg-white ring-1
+<button id="create" class="hidden sm:flex items-center text-left space-x-3 w-16 h-12 bg-white ring-1
  ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg
   text-slate-400 dark:bg-slate-800/75 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-gray-500
    text-white font-medium rounded-lg text-sm pl-4 py-2.5 text-center">
@@ -47,6 +47,8 @@ window.addEventListener('load', () => {
     for (const list of templateLists) list.classList.add('scroll');
 
     btn.onclick = function () {
+        modal.style.display = 'block';
+
         screens[0].style.top = '-1000px';
         screens[0].style.animation = '0.5s movein';
 
