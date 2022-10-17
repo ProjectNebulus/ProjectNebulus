@@ -179,10 +179,10 @@ def schoology_connect():
     schoology_key = session.get("key")
     schoology_secret = session.get("secret")
     data = request.form
-    request_token = None
-    request_token_secret = None
-    access_token_secret = None
-    access_token = None
+    request_token = ""
+    request_token_secret = ""
+    access_token_secret = ""
+    access_token = ""
     sc = schoolopy.Schoology(schoolopy.Auth(schoology_key, schoology_secret))
 
     if link_method == "OAuth":
@@ -218,11 +218,11 @@ def schoology_connect():
         "Schoology_request_secret": request_token_secret,
         "Schoology_access_token": access_token,
         "Schoology_access_secret": access_token_secret,
-        "schoology_name": session["schoology_name"],
-        "schoology_email": session["schoology_email"],
-        "schoology_domain": session["schoology_domain"],
-        "apikey": data["key"],
-        "apisecret": data["secret"],
+        "schoologyName": session["Schoologyname"],
+        "schoologyEmail": session["Schoologyemail"],
+        "schoologyDomain": session["Schoologydomain"],
+        "apikey": session["key"],
+        "apisecret": session["secret"],
         "type": link_method
     }
 

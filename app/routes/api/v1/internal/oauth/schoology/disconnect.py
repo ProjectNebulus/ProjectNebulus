@@ -7,32 +7,28 @@ from app.static.python.mongodb import read, update
 @internal.route("/oauth/schoology/disconnect")
 def schoology_disconnect():
     try:
-        session.pop("schoologyEmail")
-    except ValueError:
+        session.pop("Schoologyemail")
+    except:
         pass
     try:
-        session.pop("schoologyName")
-    except ValueError:
-        pass
-    try:
-        session.pop("token")
-    except ValueError:
+        session.pop("Schoologyname")
+    except:
         pass
     try:
         session.pop("request_token")
-    except ValueError:
+    except:
         pass
     try:
         session.pop("request_token_secret")
-    except ValueError:
+    except:
         pass
     try:
         session.pop("access_token_secret")
-    except ValueError:
+    except:
         pass
     try:
         session.pop("access_token")
-    except ValueError:
+    except:
         pass
     user = read.find_user(username=session["username"])
 
