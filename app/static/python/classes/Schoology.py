@@ -10,6 +10,7 @@ class Schoology(EmbeddedDocument):
     Schoology_request_secret = StringField(required=True)
     Schoology_access_token = StringField(required=True)
     Schoology_access_secret = StringField(required=True)
+    type = StringField(default="OAuth")
     apikey = StringField(
         required=True, default="eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
     )

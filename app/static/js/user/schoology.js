@@ -1,7 +1,8 @@
 setInterval(1000, function () {
     $.ajax({
-        type: 'POST',
+        type: 'GET',
         url: '/api/v1/internal/oauth/schoology/connect',
+        mymymethod: "OAuth",
         data: {}
     }).done(function (data) {
         document.getElementById('confirmation').style.display = 'block';
@@ -19,6 +20,29 @@ setInterval(1000, function () {
         }
     });
 });
+
+function saveApiKey() {
+    $.ajax({
+        type: 'GET',
+        url: '/api/v1/internal/oauth/schoology/connect',
+        mymymethod: "Key",
+        data: {}
+    }).done(function (data) {
+        document.getElementById('confirmation').style.display = 'block';
+        let resp = document.getElementById('error');
+        if (data === '0') {
+            resp.style.display = 'block';
+        } else if (data === '1') {
+            document.getElementById('error3').style.display = 'block';
+        } else if (data === '2') {
+            document.getElementById('error2').style.display = 'block';
+        } else {
+            document.getElementById('schoology_successful').style.display = 'block';
+            document.getElementById('name').innerHTML = data.split('•')[0];
+            document.getElementById('email').innerHTML = data.split('•')[1];
+        }
+    });
+}
 
 function prev() {
     if (step > 1) {

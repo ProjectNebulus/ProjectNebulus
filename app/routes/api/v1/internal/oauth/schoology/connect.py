@@ -4,7 +4,6 @@ import schoolopy
 from flask import request, session
 
 from app.routes.api.v1.internal import internal
-from app.routes.main import private_endpoint
 from app.static.python.extensions.integrations.schoology import create_schoology_auth
 from app.static.python.mongodb import create, read, update
 from app.static.python.utils.colors import getColor
@@ -174,10 +173,9 @@ async def import_schoology():
             documents.append(document)
 
 
-@internal.route("/oauth/schoology/connect", methods=["POST"])
-@private_endpoint
+@internal.route("/oauth/schoology/connect")
 def schoology_connect():
-    link_method = "Key"
+    link_method = request.form.get("mymethod")
     schoology_key = session.get("key")
     schoology_secret = session.get("secret")
     data = request.form
@@ -209,10 +207,10 @@ def schoology_connect():
 
     session["Schoologyname"] = sc.get_me().name_display
     session["Schoologyemail"] = sc.get_me().primary_email
-    session["Schoologydomain"] = data["link"]
+    session["Schoologydomain"] = session["link"]
     session["Schoologyid"] = sc.get_me().id
 
-    if read.check_duplicate_schoology(session["schoology_email"]):
+    if read.check_duplicate_schoology(session["Schoologyemail"]):
         return "2"
 
     schoology = {
@@ -225,6 +223,7 @@ def schoology_connect():
         "schoology_domain": session["schoology_domain"],
         "apikey": data["key"],
         "apisecret": data["secret"],
+        "type": link_method
     }
 
     update.schoologyLogin(session["id"], schoology)

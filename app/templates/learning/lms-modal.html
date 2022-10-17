@@ -40,7 +40,7 @@
                 </div>
                 <h2 class="text-2xl" style=" margin: 30px; ">
                     Or, Choose your Subject
-                    <span class="text-base text-white bg-gradient-to-r from-green-400 to-blue-600 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                    <span class="text-base text-white bg-gradient-to-r from-green-400 to-blue-600  focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
                           style="margin: 20px;
                                              vertical-align: middle;">
                                     Recommended
@@ -155,26 +155,11 @@
         </h3>
         <br>
         <br>
-        <div style="width:90%;height:75%;" id="slist" class="scroll">
+        <div style="height:50%; margin:20px" id="slist" class="scroll">
             {% if schoologycourses|length == 0 %}
-                <h1 class="text-black dark:text-white text-xl">
-                    we couldn't find any courses! Is your Schoology account
-                    connected? <a href="/settings#connectionSettings">
-                    <button style="margin-left: 10px;
-                                               display:grid;
-                                               grid-auto-flow: column;
-                                               align-content: center;
-                                               justify-content: center;"
-                            type="button"
-                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                        Connect Schoology <i style="display:grid;
-           grid-auto-flow: column;
-           align-content: center;
-           justify-content: center;"
-                                             class="material-icons">open_in_new</i>
-                    </button>
-                </a>
-                </h1>
+                <p class="text-black dark:text-white text-xl text-left">
+                    No courses found. Is your Schoology Account linked?
+                </p>
             {% else %}
                 <h1 class="text-black dark:text-white text-3xl">Select a Schoology Course</h1>
                 <button type="button"
@@ -259,38 +244,23 @@
         <br>
         <div>
             {% if gcourses|length == 0 %}
-                <p class="text-black dark:text-white text-xl">
-                    we couldn't find any courses! Is your Google Classroom account linked?
-                    <a href="/settings#connectionSettings">
-                        <button style="margin-left: 10px;
-                                               display:grid;
-                                               grid-auto-flow: column;
-                                               align-content: center;
-                                               justify-content: center;"
-                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                            Connect Google Classroom
-                            <i style="display:grid;
-                                              grid-auto-flow: column;
-                                              align-content: center;
-                                              justify-content: center;"
-                               class="material-icons">open_in_newt</i>
-                        </button>
-                    </a>
+                <p class="text-black dark:text-white text-xl text-left">
+                    No courses found. Is your Google Classroom Account linked?
                 </p>
             {% else %}
                 <p class="text-black dark:text-white text-3xl">
                     Select a Google Classroom Course
                 </p>
                 <div style="text-align: center;">
-                    <div class="scroll" id="glist" style="height:90%;">
+                    <div class="scroll" id="glist" style="height:50%; margin:20px">
                         {% for course in gcourses %}
                             <a onclick="updateGoogleLink('{{ course[1] }}', '{{ course[2] }}');"
-                               class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                               class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 text-left dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-600 tet">
                                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                     {{ course[0] }}
                                 </h5>
                                 <p class="font-normal text-gray-700 dark:text-gray-400">
-                                    {{ course[2] }}
+                                    Taught by {{ course[2] }}
                                 </p>
                             </a>
                             <br>
@@ -343,38 +313,23 @@
         </h3>
         <br>
         <div class="text-center">
-            <div class="scroll" id="clist" style="height:90%;width:90%;">
+            <div class="scroll" id="clist" style="height:50%; margin:20px">
                 {% if canvascourses|length == 0 %}
-                    <h1 class="text-black dark:text-white text-xl">
-                        we couldn't find any courses! Is your Canvas account
-                        connected? <a href="/settings#connectionSettings">
-                        <button style="margin-left: 10px;
-                                               display:grid;
-                                               grid-auto-flow: column;
-                                               align-content: center;
-                                               justify-content: center;"
-                                type="button"
-                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                            Connect Canvas <i style="display:grid;
-           grid-auto-flow: column;
-           align-content: center;
-           justify-content: center;"
-                                              class="material-icons">open_in_newt</i>
-                        </button>
-                    </a>
-                    </h1>
+                    <p class="text-black dark:text-white text-xl text-left">
+                        No courses found. Is your Canvas Account linked?
+                    </p>
                 {% else %}
                     <h1 class="text-black dark:text-white text-3xl">
                         Select a Canvas Course
                     </h1>
                     {% for course in canvascourses %}
                         <a onclick="updateCanvasLink('{{ course[1] }}')"
-                           class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                           class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 text-left dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-600 tet">
                             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                 {{ course[0] }}
                             </h5>
                             <p class="font-normal text-gray-700 dark:text-gray-400">
-                                {{ course[2] }}
+                                Full Name: {{ course[2] }}
                             </p>
                         </a>
                         <br>
@@ -424,10 +379,9 @@
             <span class="close"></span>
         </h3>
         {% if canvascourses|length == 0 %}
-            <h1 class="text-black dark:text-white text-3xl">
-                we couldn't find any courses! Is your Canvas account
-                connected? <a href="/settings">Open Settings</a>!
-            </h1>
+            <p class="text-black dark:text-white text-xl text-left">
+                No courses found. Is your Canvas Account linked?
+            </p>
         {% else %}
             <h1 class="text-black dark:text-white text-3xl">
                 Select a Canvas Course
