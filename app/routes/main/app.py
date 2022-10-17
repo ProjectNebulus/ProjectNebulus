@@ -121,7 +121,7 @@ def courses():
 
     try:
         schoology = read.getSchoology(id=session["id"])
-        if schoology:
+        if schoology and schoology[0].apikey == "":
             schoology = schoology[0]
             key = (
                     schoology.apikey
@@ -158,6 +158,28 @@ def courses():
                 )
             scSchool = sc.get_school(scCourses[0]["school_id"])
             scCourses.append(scSchool)
+        elif schoology:
+            schoology = schoology[0]
+            auth = schoolopy.Auth(
+                schoology.apikey,
+                schoology.apisecret,
+                domain=schoology.schoologyDomain,
+            )
+            auth.authorize()
+            sc = schoolopy.Schoology(auth)
+            sc.limit = "100&include_past=1"
+            scCourses = list(sc.get_user_sections(user_id=sc.get_me().id))
+            for i in range(0, len(scCourses)):
+                scCourses[i] = dict(scCourses[i])
+                scCourses[i]["link"] = (
+                        schoology.schoologyDomain
+                        + "course/"
+                        + scCourses[i]["id"]
+                        + "/materials"
+                )
+            scSchool = sc.get_school(scCourses[0]["school_id"])
+            scCourses.append(scSchool)
+
     except Exception as e:
         print(session)
         print(e)

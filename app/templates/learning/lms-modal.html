@@ -155,23 +155,24 @@
         </h3>
         <br>
         <br>
-        <div style="height:50%; margin:20px" id="slist" class="scroll">
-            {% if schoologycourses|length == 0 %}
+        <div style="height:50%; margin:20px; text-align: left;" id="slist" class="scroll">
+            {% if scCourses|length == 0 %}
                 <p class="text-black dark:text-white text-xl text-left">
                     No courses found. Is your Schoology Account linked?
                 </p>
             {% else %}
-                <h1 class="text-black dark:text-white text-3xl">Select a Schoology Course</h1>
+                <h1 class="text-left text-black dark:text-white text-3xl">Select a Schoology Course</h1><br>
                 <button type="button"
-                        class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                        class="text-left text-white bg-gradient-to-br from-green-400 to-blue-600 focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
                     Import All Courses (Recommended)
                 </button>
                 <br>
-                <br>
+                <h1 class="text-gray-500 text-xl uppercase">Schoology Courses ({{ scCourses|length }})</h1>
+                <br><br>
                 <div class="flex flex-col "
-                     style="align-items: center;
-                                    justify-content: center;">
-                    {% for course in schoologycourses[:-1] %}
+                     style="align-items: left;
+                                    justify-content: left;">
+                    {% for course in scCourses[:-1] %}
                         <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
                              style="height:16rem;
                                             width:34rem;">
@@ -192,7 +193,7 @@
                                         <span class="mb-3 text-lg  text-gray-700 dark:text-gray-400">{{ course.section_title }}</span>
                                     </h5>
                                 </a>
-                                <p class="text-gray-700 text-xs uppercase dark:text-gray-400">{{ schoologycourses[-1]["title"] }}</p>
+                                <p class="text-gray-700 text-xs uppercase dark:text-gray-400">{{ scCourses[-1]["title"] }}</p>
                             </div>
                         </div>
                         <br>
@@ -213,7 +214,7 @@
                 </label>
                 <input type="text"
                        id="schoology-course-id"
-                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                        placeholder="https://app.schoology.com/course/5131176437/materials"
                        required>
                 <label for="course-name"
@@ -222,7 +223,7 @@
                 </label>
                 <input type="text"
                        id="schoology-course-teacher"
-                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                        placeholder="Mr. Ross"
                        required>
             </div>
@@ -350,7 +351,7 @@
                 <input disabled
                        type="text"
                        id="canvas-course-id"
-                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                        placeholder="The Link will be Automatically Filled from the buttons Above."
                        required>
                 <label for="course-name"
@@ -359,7 +360,7 @@
                 </label>
                 <input type="text"
                        id="canvas-course-teacher"
-                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                        placeholder="Mr. Adams"
                        required>
             </div>
