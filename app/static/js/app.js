@@ -35,8 +35,12 @@ function openDetailsModal(content, title, author, pic, course, postTime, dueTime
     if (type === "Announcement") {
         document.getElementById("submissionsBox").style.display = "none";
         document.getElementById("descriptionTitle").innerHTML = "Message";
+        document.getElementById("commentBox").style.display = "block";
+
     } else {
+        document.getElementById("descriptionTitle").innerHTML = "Description";
         document.getElementById("commentBox").style.display = "none";
+        document.getElementById("submissionsBox").style.display = "block";
     }
     if (title === author) title = 'Announcement from ' + title;
 

@@ -38,7 +38,7 @@ window.addEventListener('load', () => {
 
     for (const screen of screens)
         screen.className +=
-            ' relative px-4 w-full max-w-2xl relative bg-gray-200 rounded-lg shadow dark:bg-gray-700 text-black dark:text-white';
+            ' relative px-4 w-full max-w-2xl relative bg-gray-200 rounded-lg shadow dark:bg-gray-800 text-black dark:text-white';
 
     for (const h3 of modal.getElementsByTagName('h3'))
         h3.className +=

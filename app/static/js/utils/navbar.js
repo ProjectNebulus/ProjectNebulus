@@ -1,21 +1,3 @@
-const dropdownTitle = document.getElementById("pageTitle");
-
-if (document.title.includes("Nebulus - "))
-    dropdownTitle.innerHTML = document.title.replace("Nebulus - ", "");
-
-const pageTitleRect = dropdownTitle.getBoundingClientRect();
-if (pageTitleRect.width < 175)
-    dropdownTitle.style.width = (pageTitleRect.width + 30) + "px";
-
-for (const element of document.querySelectorAll("#changePage li[href] span"))
-    element.classList.add("material-icons", 'mr-3', "text-gray-600", "dark:text-gray-300")
-
-for (const element of document.querySelectorAll("#changePage li[href]")) {
-    const list = ['py-2', 'pl-2', 'pr-10', 'mx-2', 'hover:bg-gray-100', 'dark:hover:bg-gray-600', 'dark:hover:text-white', 'flex', 'place-items-center', 'cursor-pointer', 'rounded'];
-    element.innerHTML = "<a href='" + element.getAttribute("href") + "' class='" + list.join(" ") + "'>" + element.innerHTML + "</a>";
-    element.removeAttribute("href");
-}
-
 const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
 const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
 
@@ -42,6 +24,25 @@ themeToggleBtn.addEventListener('click', function () {
     toggleTheme();
     invertSite();
 });
+
+
+const dropdownTitle = document.getElementById("pageTitle");
+
+if (document.title.includes("Nebulus - "))
+    dropdownTitle.innerHTML = document.title.replace("Nebulus - ", "");
+
+const pageTitleRect = dropdownTitle.getBoundingClientRect();
+if (pageTitleRect.width < 175)
+    dropdownTitle.style.width = (pageTitleRect.width + 30) + "px";
+
+for (const element of document.querySelectorAll("#changePage li[href] span"))
+    element.classList.add("material-icons", 'mr-3', "text-gray-600", "dark:text-gray-300")
+
+for (const element of document.querySelectorAll("#changePage li[href]")) {
+    const list = ['py-2', 'pl-2', 'pr-10', 'mx-2', 'hover:bg-gray-100', 'dark:hover:bg-gray-600', 'dark:hover:text-white', 'flex', 'place-items-center', 'cursor-pointer', 'rounded'];
+    element.innerHTML = "<a href='" + element.getAttribute("href") + "' class='" + list.join(" ") + "'>" + element.innerHTML + "</a>";
+    element.removeAttribute("href");
+}
 
 for (const a of document.getElementsByClassName('nav-link'))
     a.className +=

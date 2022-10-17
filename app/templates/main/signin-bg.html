@@ -131,9 +131,8 @@
                                                 <span class="text-green-600 dark:text-green-500">Submitted</span>
                                             {% elif today > date %}
                                                 <span class="text-red-600 dark:text-red-500">Overdue</span>
-                                            {% elif a.grade != None and a.grade / a.points < 0.6 %}
-                                                <span class="text-gray-300 dark:text-gray-700">{{ a.grade }}/{{ a.points }}</span>
-                                            {% else %}
+                                                {#% elif a.grade != None and a.grade / a.points < 0.6 %#}
+                                                {#  <span class="text-gray-300 dark:text-gray-700">{{ a.grade }}/{{ a.points }}</span>#}                                            {% else %}
                                                 <span class="text-orange-500">Not Submitted</span>
                                             {% endif %}
                                         </div>
@@ -143,7 +142,8 @@
                         {% else %}
                             <div class="flex text-black dark:text-white text-left bg-gray-100 rounded-lg shadow dark:bg-gray-800 dark:text-gray-300 rounded-lg p-6 ml-3 shadow-md dark:border-gray-700 text-xl mb-5 mr-4">
                                 <div class="mr-4 material-icons ml-2"
-                                     style="transform: translate(0, 50%) scale(1.75)">event</div>
+                                     style="transform: translate(0, 50%) scale(1.75)">event
+                                </div>
                                 <div class="truncate">
                                     <span class="truncate">{{ a.title }}</span>
                                     <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">{{ a.course.name }}</span>

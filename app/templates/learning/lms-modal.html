@@ -173,12 +173,13 @@
                      style="align-items: left;
                                     justify-content: left;">
                     {% for course in scCourses[:-1] %}
-                        <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
+                        <div onclick="updateSchoologyLink('{{ course["link"] }}');"
+                             class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
                              style="height:16rem;
                                             width:34rem;">
-                            <a onclick="updateSchoologyLink('{{ course["link"] }}');"
-                               class="overflow-hidden"
-                               style="width:382px;
+                            <a
+                                    class="overflow-hidden"
+                                    style="width:382px;
                                               height:186px;">
                                 <img style="width:382px;
                                                     height:130px;"
@@ -187,7 +188,7 @@
                                      alt=""/>
                             </a>
                             <div class="p-4">
-                                <a href="#">
+                                <a>
                                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                         {{ course["course_title"] }}
                                         <span class="mb-3 text-lg  text-gray-700 dark:text-gray-400">{{ course.section_title }}</span>
