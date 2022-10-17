@@ -25,7 +25,7 @@ async def import_schoology():
     auth = schoolopy.Auth(
         key,
         secret,
-        domain=schoology.schoologyDomain,
+        domain=schoology.schoology_domain,
         three_legged=True,
         request_token=schoology.Schoology_request_token,
         request_token_secret=schoology.Schoology_request_secret,
@@ -42,7 +42,7 @@ async def import_schoology():
     sections = sc.get_user_sections(sc.get_me()["id"])
 
     for section in sections:
-        link = "https://" + schoology.schoologyDomain + "/course/" + section["id"]
+        link = "https://" + schoology.schoology_domain + "/course/" + section["id"]
         section = dict(section)
         print(section)
         course = {
@@ -177,35 +177,42 @@ async def import_schoology():
 @internal.route("/oauth/schoology/connect", methods=["POST"])
 @private_endpoint
 def schoology_connect():
+    link_method = "Key"
     schoology_key = session.get("key")
     schoology_secret = session.get("secret")
-
-    if not schoology_key or not schoology_secret:
-        return "1"
-
-    auth = schoolopy.Auth(schoology_key, schoology_secret, three_legged=True, domain=session["link"])
-    auth.request_authorization()
-    auth.authorize()
-
-    if not auth.authorized:
-        return "0"
-
     data = request.form
-    request_token = auth.request_token
-    request_token_secret = auth.request_token_secret
-    access_token_secret = auth.access_token_secret
-    access_token = auth.access_token
-    session["request_token"] = request_token
-    session["request_token_secret"] = request_token_secret
-    session["access_token_secret"] = access_token_secret
-    session["access_token"] = access_token
-    sc = create_schoology_auth(auth)
+    request_token = None
+    request_token_secret = None
+    access_token_secret = None
+    access_token = None
+    sc = schoolopy.Schoology(schoolopy.Auth(schoology_key, schoology_secret))
+
+    if link_method == "OAuth":
+        if not schoology_key or not schoology_secret:
+            return "1"
+
+        auth = schoolopy.Auth(schoology_key, schoology_secret, three_legged=True, domain=session["link"])
+        auth.request_authorization()
+        auth.authorize()
+
+        if not auth.authorized:
+            return "0"
+        request_token = auth.request_token
+        request_token_secret = auth.request_token_secret
+        access_token_secret = auth.access_token_secret
+        access_token = auth.access_token
+        session["request_token"] = request_token
+        session["request_token_secret"] = request_token_secret
+        session["access_token_secret"] = access_token_secret
+        session["access_token"] = access_token
+        sc = create_schoology_auth(auth)
+
     session["Schoologyname"] = sc.get_me().name_display
     session["Schoologyemail"] = sc.get_me().primary_email
     session["Schoologydomain"] = data["link"]
     session["Schoologyid"] = sc.get_me().id
 
-    if read.check_duplicate_schoology(session["Schoologyemail"]):
+    if read.check_duplicate_schoology(session["schoology_email"]):
         return "2"
 
     schoology = {
@@ -213,9 +220,9 @@ def schoology_connect():
         "Schoology_request_secret": request_token_secret,
         "Schoology_access_token": access_token,
         "Schoology_access_secret": access_token_secret,
-        "schoologyName": session["Schoologyname"],
-        "schoologyEmail": session["Schoologyemail"],
-        "schoologyDomain": session["Schoologydomain"],
+        "schoology_name": session["schoology_name"],
+        "schoology_email": session["schoology_email"],
+        "schoology_domain": session["schoology_domain"],
         "apikey": data["key"],
         "apisecret": data["secret"],
     }

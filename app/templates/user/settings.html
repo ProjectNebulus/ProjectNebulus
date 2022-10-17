@@ -828,7 +828,7 @@
                         <div style="float:left;
                                             margin:10px;
                                             width:80px;
-                                            height:80px;"
+                                            height:80px;" onclick="window.location.href = '/dropbox'"
                              data-tooltip-target="tooltip-default7"
                              class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
                             <img src="/static/images/logos/dropbox.png"
@@ -1081,10 +1081,10 @@
                                     </div>
                                     <div style="float:left;width:50%;">
                                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                            {{ schoology_acc.schoologyName }}
+                                            {{ schoology_acc.schoology_name }}
                                         </h5>
                                         <p class="font-sm text-sm text-gray-700 dark:text-gray-400">
-                                            {{ schoology_acc.schoologyEmail }}
+                                            {{ schoology_acc.schoology_email }}
                                         </p>
                                     </div>
                                 </div>
@@ -2106,33 +2106,34 @@
                 <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                         Link Schoology
-                        <img class=" w-6 h-6 mr-2 -ml-1 bg-gray-800"
-                             src="/static/images/logos/schoology.png"
-                             alt="Rounded avatar"
-                             style="display: inline-block;
+                        <img class=" w-6 h-6 mr-2 -ml-1 bg-gray-800" src="/static/images/logos/schoology.png"
+                             alt="Rounded avatar" style="
+                                    box-shadow: 6px 6px 20px 7px #04c2ff8c;
+                                    background: linear-gradient(45deg, #04c2ff75, #00ffaf7d);
+                                    display: inline-block;
                                     padding: 15px;
                                     height: 90px;
                                     width: 90px;
                                     border-radius: 10px;
-                                    margin: 5px 5px 5px 30px;">
+                                    margin: 5px 5px 5px 30px;
+                                    ">
                         <span style=" margin: 15px; font-size: 1.5em; "><i class="material-icons">close</i></span>
                         <img class=" w-6 h-6 mr-2 -ml-1"
-                             src="http://localhost:8080/static/images/NebulusSpecialLogo.png"
-                             alt="Rounded avatar"
-                             style="display: inline-block;
+                             src="http://localhost:8080/static/images/NebulusSpecialLogo.png" alt="Rounded avatar"
+                             style="
+                                    display: inline-block;
                                     margin: 5px;
                                     height: 90px;
                                     width: 90px;
                                     border-radius: 10px;
-                                    background: lightgray;">
+                                    background: lightgray;
+                                    box-shadow: 6px 6px 20px 7px #a204ff8c;
+                                    ">
                     </h3>
                     <button type="button"
                             class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
                             onclick="openModal('schoology-modal')">
-                        <svg aria-hidden="true"
-                             class="w-5 h-5"
-                             fill="currentColor"
-                             viewBox="0 0 20 20"
+                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                              xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
                                   d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
@@ -2394,7 +2395,8 @@
                                 <span style="color:red;display:none"
                                       id="error3">Oops! An error occured on our side.</span>
                             </div>
-                            <div id="schoology_successful" style="display: none;">
+                            <div id="schoology_successful" style="display: none;"
+                                 class="dark:text-white text-black bg-gray-700 rounded-lg p-3">
                                 <p class="text-2xl">
                                     Successfully connected a Schoology account. The details are below:
                                 </p>

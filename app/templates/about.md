@@ -14,7 +14,7 @@ The objective of this folder is to store HTML Files
   * connectCanvas.html
   * connectClassroom.html
   * connectDiscord.html
-  * connectSchoology.html
+  * connectGithub.html
   * connectSpotify.html
 * `courses`
   * extensions

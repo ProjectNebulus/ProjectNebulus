@@ -1,6 +1,5 @@
-window.addEventListener('DOMContentLoaded', function () {
-
-    setInterval(1000, function(){ $.ajax({
+setInterval(1000, function () {
+    $.ajax({
         type: 'POST',
         url: '/api/v1/internal/oauth/schoology/connect',
         data: {}
@@ -18,7 +17,7 @@ window.addEventListener('DOMContentLoaded', function () {
             document.getElementById('name').innerHTML = data.split('•')[0];
             document.getElementById('email').innerHTML = data.split('•')[1];
         }
-    });})
+    });
 });
 
 function prev() {
