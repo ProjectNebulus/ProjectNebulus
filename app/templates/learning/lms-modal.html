@@ -270,40 +270,41 @@
                         {% endfor %}
                     </div>
                 </div>
-                <form id="google-create-course"
-                      style="width:90%;
-                                     height:90%;
-                                     display:none;"
-                      onsubmit="importGClassroom(); return false;">
-                    <div class="mb-6">
-                        <label for="course-name"
-                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                            Google Course Link (Automatically Filled)
-                        </label>
-                        <input disabled
-                               type="text"
-                               id="google-course-id"
-                               class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                               placeholder="The link will be Filled when you click the buttons Above!"
-                               required>
-                        <label for="course-name"
-                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                            Google Course Teacher (Automatically Filled)
-                        </label>
-                        <input type="text"
-                               id="google-course-teacher"
-                               class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                               placeholder="Your teacher will be Filled when you click the buttons Above!"
-                               required>
-                    </div>
-                    <br>
-                    <button type="submit"
-                            class="createSelectButton bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                        Import Course
-                    </button>
-                    <span class="text-3xl text-green-500" id="create-course-status"></span>
-                </form>
             {% endif %}
+            <form id="google-create-course"
+                  style="width:90%;
+                                 height:90%;
+                                 display:none;"
+                  onsubmit="importGClassroom(); return false;">
+                <div class="mb-6">
+                    <label for="course-name"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Google Course Link (Automatically Filled)
+                    </label>
+                    <input disabled
+                           type="text"
+                           id="google-course-id"
+                           class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                           placeholder="The link will be Filled when you click the buttons Above!"
+                           required>
+                    <label for="course-name"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Google Course Teacher (Automatically Filled)
+                    </label>
+                    <input type="text"
+                           id="google-course-teacher"
+                           class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                           placeholder="Your teacher will be Filled when you click the buttons Above!"
+                           required>
+                </div>
+                <br>
+                <button type="submit"
+                        class="createSelectButton bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                    Import Course
+                </button>
+                <span class="text-3xl text-green-500" id="create-course-status"></span>
+            </form>
+
         </div>
         <div class="pageCount">
         </div>

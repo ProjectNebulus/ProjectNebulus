@@ -131,10 +131,25 @@
                                         backdrop-filter: blur(30px);">
                                 <div class="text-left">
                                     <div class="p-4 flex">
-                                        <img src="{{ course.avatar.avatar_url }}"
+                                    {%  if course.avatar == None %}
+{#                                        <div class="object-cover inline-block rounded-lg mr-4 bg-gray-800"#}
+{#                                             style="width: 50px; height: 50px"></div>#}
+                                    {% else %}
+                                        <img src="{{ course.avatar.avatar_url }}" onload="if (!IsImageOk(this)) this.style.display = 'none';"
                                              alt="Image for {{ course.name }}"
                                              class="object-cover inline-block rounded-lg mr-4"
                                              style="width: 50px; height: 50px">
+                                        <script>
+                                            function IsImageOk(img) {
+                                                if (!img.complete) {
+                                                    return false;
+                                                }
+                                                if (img.naturalWidth === 0 || img.naturalHeight === 0) {
+                                                    return false;
+                                                }
+                                                return true;
+                                        </script>
+                                    {% endif %}
                                         <div class="-mt-1">
                                             <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white truncate">
                                                 {% if course.name|length <= 16 %}
@@ -148,7 +163,7 @@
                                     </div>
                                     <div class="mt-4 ml-2 grid grid-cols-2 grid-rows-3 gap-2">
                                         <div>
-                                            <p class="text-sm text-gray-700 dark:text-gray-400">
+                                            <p class="text-sm text-gray-700 dark:text-gray-400 truncate">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                      class="h-8 w-8 inline-block text-blue-500 inline-block"
                                                      viewBox="0 0 20 20"

@@ -8,8 +8,6 @@ document.getElementById("extraWidgets").innerHTML = `
 
 window.addEventListener('load', () => {
     let modal = document.getElementById('courseModal');
-
-    // set up templates
     let templateLists = modal.getElementsByClassName('scroll');
 
     let screens = modal.getElementsByClassName('CoursePage');
@@ -384,6 +382,9 @@ function importSchoology() {
 
 
 function importCanvas() {
+    let modal = document.getElementById('courseModal');
+    let templateLists = modal.getElementsByClassName('scroll');
+    let screens = modal.getElementsByClassName('CoursePage');
     screens[2].style.display = 'none';
     screens[5].style.display = 'block';
     const status = document.getElementById('create-course-status2');
@@ -428,6 +429,9 @@ function importCanvas() {
 
 
 function importGClassroom() {
+    let modal = document.getElementById('courseModal');
+    let templateLists = modal.getElementsByClassName('scroll');
+    let screens = modal.getElementsByClassName('CoursePage');
     screens[2].style.display = 'none';
     screens[4].style.display = 'block';
     const status = document.getElementById('create-course-status2');

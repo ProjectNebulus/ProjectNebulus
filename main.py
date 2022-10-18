@@ -18,7 +18,7 @@ app.config["secret_key"] = os.getenv("MONGOPASS")
 debug = False
 if __name__ == "__main__":
     if platform.system().lower() == "linux":  # linux - use3d for VPS (like DigitalOcean)
-        debug = False
+        debug  = False
         port = 8080
         host = "127.0.0.1"
         protocol = "http"

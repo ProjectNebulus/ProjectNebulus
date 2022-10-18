@@ -89,8 +89,9 @@ def getPFP(courseid):
         service.courses().teachers().list(pageSize=10, courseId=courseid).execute()
     )
     try:
-        pfp = rawteachers["teachers"][0]["profile"]["photoUrl"]
-        return pfp
+        pfp = str(rawteachers["teachers"][0]["profile"]["photoUrl"])
+        if "http://" not in pfp and  "https://" not in pfp:
+            return pfp.replace("//", "https://")
     except:
         return None
 
@@ -137,7 +138,7 @@ def create_canvas_course():
         post_data = request.args
     link = post_data["link"]
     teacher = post_data["teacher"]
-    index = link.index("/course/") + 9
+    index = link.index("/course/") + 8
     course_id = link[index: len(link)]
     # print(f"I'm at Canvas Creation. The ID is: {link}")
     from canvasapi import Canvas
@@ -151,7 +152,7 @@ def create_canvas_course():
         "description": link,
         "imported_from": "Canvas",
         "authorizedUsers": [session["id"]],
-        "teacher": post_data["teacher"],
+        "teacher": teacher,
         "type": "Imported",
     }
 
