@@ -1,34 +1,22 @@
 from mongoengine import *
 
-from . import Assignment
+from . import TermGrade
 from .Snowflake import Snowflake
+
+
 
 
 class Grades(Snowflake):
     course = ReferenceField("Course", required=True)
     student = ReferenceField("User", required=True)
-    terms = DictField(ReferenceField("TermGrade"))  # Trimester 1, Trimester 2, etc.
+    terms = DictField(EmbeddedDocumentField)  # Trimester 1, Trimester 2, etc.
 
     letter = StringField(required=False)
-    percent = FloatField(required=False)
-
-    average = FloatField(required=False)
-    median = FloatField(required=False)
-    mode = FloatField(required=False)
-    range = FloatField(required=False)
-    grade_frequency = DictField(required=False)
+    grade = FloatField(required=False)
 
     def clean(self):
-        points = [a.grade for a in self.course.assignments if type(a) is Assignment and a.grade is not None]
-        total = [a.points for a in self.course.assignments if type(a) is Assignment and a.grade is not None]
-        self.percent = sum(points) / sum(total)
-        self.letter = getLetterGrade(self.percent)
-
-        self.average = float(get_average(points))
-        self.median = float(get_median(points))
-        self.mode = float(get_mode(points))
-        self.range = float(get_range(points))
-        self.grade_frequency = get_grade_frequency(points)
+        self.grade = sum([term.grade for term in self.terms])/len(self.terms)
+        self.letter = getLetterGrade(self.grade)
 
 
 def getLetterGrade(percent: float):
@@ -46,22 +34,24 @@ def getLetterGrade(percent: float):
 
 
 def get_average(points):
-    return sum(points) / len(points)
+    return 100 if len(points) == 0 else sum(points) / len(points)
 
 
 def get_median(points):
     points.sort()
+    if len(points) == 0:
+        return 100
     if len(points) % 2 == 0:
         return (points[int(len(points) / 2)] + points[int(len(points) / 2) - 1]) / 2
     return points[int(len(points) / 2)]
 
 
 def get_mode(points):
-    return max(set(points), key=points.count)
+    return max(set(points), key=points.count) if len(points) > 0 else 100
 
 
 def get_range(points):
-    return max(points) - min(points)
+    return 0 if len(points) == 0 else max(points) - min(points)
 
 
 def get_grade_frequency(points):

@@ -227,6 +227,7 @@ def create_schoology_course():
     sc = schoolopy.Schoology(auth)
     sc.limit = 10000
     section = dict(sc.get_section(link))
+    user = sc.get_me()
 
     print(section)
     course = {
@@ -274,7 +275,12 @@ def create_schoology_course():
             }
         )
 
-    scgrades = sc.get_user_grades_by_section(sc.get_me()["id"], link)
+    scgrades = sc.get_user_grades_by_section(user['id'], link)
+    print(scgrades)
+    scgrades = scgrades['period']
+
+
+
 
     scdiscussions = sc.get_discussions(section_id=link)
     for i in range(0, len(scdiscussions)):
@@ -292,6 +298,8 @@ def create_schoology_course():
                 due = datetime.fromisoformat(due)
             else:
                 due = None
+
+            print(assignment)
             create.createAssignment(
                 {
                     # "id": str(assignment["id"]),
@@ -320,7 +328,16 @@ def create_schoology_course():
             )
     folders = []
 
+    for period in scgrades[1:]:
+        for assignment in period:
+            assignment_obj = read.getAssignment(imported_id=assignment[0]['assignment_id'])
+            assignment_obj.grade = assignment[0]['grade']
+            assignment_obj.semester = period['period_title']
+        assignment_obj.save()
+
+
     scdocuments = sc.get_section_documents(link)
+
 
     def get_doc_link(sc, url):
         rq = sc.schoology_auth.oauth.get(
@@ -332,10 +349,13 @@ def create_schoology_course():
 
     documents = []
 
+
     for scdocument in scdocuments:
+
         document = {}
         document["schoology_id"] = scdocument["id"]
         document["name"] = scdocument["title"]
+        print(scdocument)
         document["file_ending"] = scdocument["attachments"]["files"]["file"][0][
             "extension"
         ]

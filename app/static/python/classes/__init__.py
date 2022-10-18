@@ -31,3 +31,5 @@ from .Snowflake import Snowflake
 from .Spotify import Spotify
 from .Textbook import Textbook
 from .User import User
+from .TermGrade import TermGrade
+from .GradingCategory import GradingCategory

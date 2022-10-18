@@ -26,8 +26,13 @@ def getText(query):
         return query
 
 
-def getAssignment(assignment_id: str) -> Assignment:
-    assignment = Assignment.objects(id=assignment_id).first()
+def getAssignment(assignment_id: str=None, imported_id: str=None) -> Assignment:
+    if imported_id:
+        assignment = Assignment.objects(imported_id=imported_id).first()
+    elif assignment_id:
+        assignment = Assignment.objects(assignment_id=assignment_id).first()
+    else:
+        raise TypeError
     return assignment
 
 
