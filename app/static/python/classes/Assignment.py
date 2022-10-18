@@ -44,6 +44,13 @@ class Assignment(Snowflake):
     description = StringField(
         default="", null=True, description="The description of the assignment."
     )
+    semester = StringField(
+        default="None", description="The trimester in which the assignment is in"
+    )
+    grading_category = StringField(
+        default="None", description="The grading category in which the assignment is in"
+    )
+
 
     def __str__(self):
         return f'Assignment(title="{self.title}", grade={self.grade}, points={self.points}, due="{self.due.date()}")'

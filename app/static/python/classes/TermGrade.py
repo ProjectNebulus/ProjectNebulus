@@ -1,4 +1,5 @@
-from Grades import *
+from mongoengine import *
+from . import GradingCategory
 
 
 class TermGrade(EmbeddedDocument):
@@ -19,16 +20,14 @@ class TermGrade(EmbeddedDocument):
         - grade_frequency: A dictionary with the frequency of each grade.
     """
 
-    average = FloatField(required=False)
-    median = FloatField(required=False)
-    mode = FloatField(required=False)
-    range = FloatField(required=False)
-    grade_frequency = DictField(required=False)
+    title = StringField(required=True)
+    start_date = DateTimeField(required=True)
+    end_date = DateTimeField(required=True)
+    grading_categories = ListField(EmbeddedDocumentField(GradingCategory))
+    grade = FloatField(required=False)
 
     def clean(self):
-        grades_list = list(self.grades.values())
-        self.average = float(get_average(grades_list))
-        self.median = float(get_median(grades_list))
-        self.mode = float(get_mode(grades_list))
-        self.range = float(get_range(grades_list))
-        self.grade_frequency = get_grade_frequency(grades_list)
+        self.grade = sum([grading_category.grade*grading_category.weight for grading_category in self.grading_categories])
+
+
+
