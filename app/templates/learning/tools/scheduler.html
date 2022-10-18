@@ -3,44 +3,25 @@
     {% include "utils/navbar.html" %}
     <div style="margin: auto; max-width: 75rem; padding: 5vh 5vw">
         <div class="flex justify-between text-black dark:text-white mb-8">
-            <div class="text-3xl uppercase text-gray-500" id="tasks-count">
+            <div class="text-3xl" id="tasks-count">
                 {% if events|length > 0 %}
-                    My Tasks ({{ events|length }})
+                    My tasks ({{ events|length }})
                 {% else %}
                     No tasks &#127881;
                 {% endif %}
             </div>
-            <div style="
-">
-                <button onclick="window.location.href = '/study/session'" style="margin:10px;" type="button"
-                        class="text-white bg-gradient-to-r from-purple-500 to-pink-500  focus:outline-none focus:ring-4 focus:ring-blue-300 font-large rounded-LG text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Start SmartStudy Session
-                </button>
-                <button onclick="window.location.href = '/study/analytics'" style="margin:10px;" type="button"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-large rounded-LG text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    <i class="material-icons" style="
-    margin: 0 10px;
-    vertical-align: middle;
-">insights</i>View Analytics
-                </button>
-                <button onclick="addEvent()" style="margin:10px;display: inline-block;" type="button"
-                        class="text-white bg-gray-700 hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-large rounded-LG text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-blue-800">
-                    <i class="material-icons" style="
-    margin: 0 10px;
-    vertical-align: middle;
-">add</i>
-                    Add Task
-                </button>
-                <button class="flex gap-2 bg-blue-300 dark:bg-blue-600 px-4 py-2.5 rounded-lg"
-                        onclick="localStorage.setItem('popup', 'true'); window.open('/study/timer', 'Study Timer', 'width=500,height=450')"
-                        style="
-    display: inline-block;
-">
-                    <span class="material-icons" style="
-    vertical-align: middle;
-">timer</span>
+            <div class="flex gap-6">
+                <button class="flex gap-2 bg-blue-500 dark:bg-gradient-to-br from-blue-500 to-blue-700 px-4 py-2.5 rounded-lg"
+                        onclick="openStudyTimer()">
+                    <span class="material-icons">timer</span>
                     Study Timer
                 </button>
+                <a href="/study/analytics">
+                    <button class="flex gap-2 bg-red-400 dark:bg-gradient-to-br from-red-400 to-red-600 px-4 py-2.5 rounded-lg">
+                        <span class="material-icons">insights</span>
+                        Study Analytics
+                    </button>
+                </a>
             </div>
         </div>
         <div class="overflow-auto" style="height: 70vh">
@@ -51,7 +32,6 @@
                     <th scope="col" class="py-3 px-6">Course</th>
                     <th scope="col" class="py-3 px-6">Due Date</th>
                     <th scope="col" class="py-3 px-6">Priority</th>
-                    <th scope="col" class="py-3 px-6">Notes</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -61,7 +41,7 @@
                             {{ event[2] }}
                         </td>
                         <td class="py-4 px-6">{{ event[3] }}</td>
-                        <td class="py-4 px-6">{{ event[5] }}</td>
+                        <td class="py-4 px-6">{{ event[5]|safe }}</td>
                         <td class="py-4 px-6" style="color: {{ event[7] }}">{{ event[6] }}</td>
                     </tr>
                 {% endfor %}
@@ -174,4 +154,5 @@
             </button>
         </div>
     </div>
+    <script src="/static/js/tools/scheduler.js"></script>
 {% endblock %}
