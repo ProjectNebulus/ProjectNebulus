@@ -21,7 +21,26 @@ def scheduler():
 
     for event in events:
         if event._cls != "Event":
-            importance = event.points * (event.due - datetime.now()).days
+            days = (event.due - datetime.now()).days
+
+            if days < 0:
+                color = "#ff6227"
+                dueString = f"{-days}d past"
+            else:
+                days += 1
+                dueString = f"in {days}d"
+
+                if days <= 1:
+                    color = "orange"
+                    dueString = "Due Tomorrow"
+                elif days <= 3:
+                    color = "yellow"
+                elif days <= 5:
+                    color = "lightgreen"
+                else:
+                    color = "greenyellow"
+
+            importance = event.points * days
             max_imp = max(max_imp, importance)
             min_imp = min(min_imp, importance)
             total_imp += importance
@@ -29,7 +48,10 @@ def scheduler():
             # format: importance calculation, points, title, course name, icon name ("assignment" or "assessment"),
             # date string, importance string, color
             everything.append([importance, event.points, event.title, event.course.name, event._cls,
-                               strftime(event.due, "%-m/%-d/%y %-I:%M %p"), "", ""])
+                               f'{strftime(event.due, "%-m/%-d")}'
+                               ' <span class="text-gray-400 dark:text-gray-300">•</span> '
+                               f'<span style="color:{color}">{dueString}<span>',
+                               "", ""])
 
     for e in everything:
         try:

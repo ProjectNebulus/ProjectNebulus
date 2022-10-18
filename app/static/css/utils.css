@@ -95,6 +95,14 @@ aside *::-webkit-scrollbar, nav *::-webkit-scrollbar {
     background: rgb(36 46 60 / 44%);
 }
 
+.dark .dark\:bg-gradient-to-br {
+    background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
+}
+
+.dark .dark\:bg-gradient-to-r {
+    background-image: linear-gradient(to right, var(--tw-gradient-stops));
+}
+
 .text-3xl {
     font-size: 1.875rem;
     line-height: 2.25rem;
