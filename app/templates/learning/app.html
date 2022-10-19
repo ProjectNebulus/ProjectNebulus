@@ -289,7 +289,7 @@
                                 ({{ diff }}d remaining)
                             </h1>
                         {% endif %}
-                        {% for a in alist[:15] %}
+                        {% for a in alist %}
                             {% if (a._cls != "Assignment" or a.submitDate == None) or now < date %}
                                 {# today is before the due date ^ #}
                                 <div class="flex bg-gray-100 shadow dark:bg-gray-800/75 rounded-lg p-6 event shadow-md dark:border-gray-700 text-sm mb-5 mx-4 text-left relative expandable">
@@ -560,5 +560,5 @@
             <script src="/static/js/app.js"></script>
         </div>
     </div>
-
+    {% include "learning/lms-modal.html" %}
 {% endblock %}

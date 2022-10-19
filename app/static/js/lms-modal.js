@@ -6,7 +6,13 @@ document.getElementById("extraWidgets").innerHTML = `
     <span style="font-size:30px;" class="material-icons">add</span>
 </button>`
 
-window.addEventListener('load', () => {
+$.ajax({
+    url: '/import-course',
+    type: 'POST',
+    contentType: 'application/json',
+}).done(data => {
+    document.getElementById("courseModal").innerHTML += data;
+
     let modal = document.getElementById('courseModal');
     let templateLists = modal.getElementsByClassName('scroll');
 
@@ -17,31 +23,21 @@ window.addEventListener('load', () => {
 
     for (const screen of screens)
         screen.className +=
-            ' relative px-4 w-full max-w-2xl relative bg-gray-200 rounded-lg shadow dark:bg-gray-800 text-black dark:text-white';
+            ' relative w-full max-w-2xl relative bg-gray-200 rounded-lg shadow dark:bg-gray-800 text-black dark:text-white';
 
     for (const h3 of modal.getElementsByTagName('h3'))
         h3.className +=
-            ' flex justify-between items-start p-5 rounded-t border-b border-gray-300 dark:border-gray-600 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white';
+            ' flex justify-between items-start pb-4 rounded-t border-b border-gray-300 dark:border-gray-600 text-xl font-semibold text-gray-900 text-2xl dark:text-white';
 
     for (const list of templateLists) list.classList.add('scroll');
 
     btn.onclick = function () {
+        if (modal.style.display === "block")
+            return;
+
         modal.style.display = 'block';
-
-        screens[0].style.top = '-1000px';
-        screens[0].style.animation = '0.5s movein';
-
-        for (let screen of screens) {
-            screen.style.display = 'none';
-            screen.style.animationFillMode = 'forwards';
-            screen.style.webkitAnimationFillMode = 'forwards';
-        }
-
+        for (let screen of screens) screen.style.display = 'none';
         screens[0].style.display = 'block';
-    };
-
-    window.onclick = function (event) {
-        if (event.target === modal) modal.style.display = 'none';
     };
 
     // set up close button
@@ -57,10 +53,11 @@ window.addEventListener('load', () => {
 
     for (const element of modal.getElementsByClassName('CoursePage'))
         element.className +=
-            ' hidden overflow-visible fixed right-0 left-0 top-4 z-50 justify-center items-center h-72 md:inset-0';
+            ' hidden overflow-visible fixed right-0 left-0 top-4 z-50 justify-center items-center h-72 md:inset-0 duration-500';
 
     function lms(subtemplate) {
-        document.getElementById('create-course-status').innerHTML = 'Creating course...';
+        for (const el of document.getElementsByClassName("create-course-status"))
+            el.innerHTML = "Creating course...";
 
         const xhttp = new XMLHttpRequest();
         xhttp.open('POST', '/lms', true);
@@ -73,6 +70,10 @@ window.addEventListener('load', () => {
                 template: subtemplate
             })
         );
+        xhttp.addEventListener("load", () => {
+            for (const el of document.getElementsByClassName("create-course-status"))
+                el.innerHTML = "Course created!";
+        })
     }
 
     function skipTemplates() {
@@ -194,8 +195,8 @@ window.addEventListener('load', () => {
     for (const template of templates) {
         let button = document.createElement('div');
         button.className =
-            'createSelectButton flex justify-between place-items-center text-white bg-gray-500 dark:hover:bg-gray-800 dark:bg-gray-900 font-medium rounded-lg text-lg px-5 py-5 text-center mr-2 mb-2';
-        button.onclick = () => chooseTemplate(template);
+            'cursor-pointer flex justify-between place-items-center text-white bg-gray-500 dark:hover:bg-gray-700 dark:bg-gray-900 font-medium rounded-lg text-lg px-5 py-3 text-center mr-2 mb-2';
+        button.addEventListener("click", () => chooseTemplate(template));
 
         let imageSpan = document.createElement('span');
 
@@ -248,7 +249,7 @@ window.addEventListener('load', () => {
         for (const subtemplate of template.subtemplates) {
             let button = document.createElement('div');
             button.className =
-                'createSelectButton text-white bg-gray-500 dark:hover:bg-gray-800 dark:bg-gray-900 font-medium rounded-lg text-lg px-5 py-5 text-center mr-2 mb-2';
+                'cursor-pointer text-white bg-gray-500 dark:hover:bg-gray-700 dark:bg-gray-900 font-medium rounded-lg text-lg px-5 py-3 text-center mr-2 mb-2';
             button.onclick = function () {
                 const name = template.name;
                 customize(name, subtemplate);
@@ -291,47 +292,24 @@ window.addEventListener('load', () => {
         courseTeacher.placeholder = user;
 
         document.getElementById('create-course').onsubmit = () => lms(subtemplate);
-
-        document.getElementById('import-schoology').onclick = importSchoology;
-        document.getElementById('import-classroom').onclick = importGClassroom;
-        document.getElementById('import-canvas').onclick = importCanvas;
     }
 });
 
-function schoologyCourseReq() {
-    const status = document.getElementById('create-course-status2');
-    if (this.responseText === '1') {
-        status.style.color = 'red';
-        status.innerHTML =
-            'You have not connected your schoology account! Please connect a schoology account to import courses from Schoology.';
-    } else {
-        status.style.color = 'green';
-        status.innerHTML = 'Course created!';
-    }
-}
 
-function googleCourseReq() {
-    const status = document.getElementById('create-course-status2');
-    if (this.responseText === '1') {
-        status.style.color = 'red';
-        status.innerHTML =
-            'You have not connected your google account! Please connect a schoology account to import courses from Schoology.';
-    } else {
-        status.style.color = 'green';
-        status.innerHTML = 'Course created!';
-    }
-}
+function createSchoologyCourse() {
+    const input = document.getElementById('schoology-course-id');
+    const teacher = document.getElementById('schoology-course-teacher');
 
-function canvasCourseReq() {
-    const status = document.getElementById('create-course-status2');
-    if (this.responseText === '1') {
-        status.style.color = 'red';
-        status.innerHTML =
-            'You have not connected your canvas account! Please connect a schoology account to import courses from Schoology.';
-    } else {
-        status.style.color = 'green';
-        status.innerHTML = 'Course created!';
-    }
+    const xhttp = new XMLHttpRequest();
+    xhttp.open('POST', '/api/v1/internal/create/course/schoology', true);
+    xhttp.setRequestHeader('Content-type', 'application/json');
+    xhttp.send(
+        JSON.stringify({
+            link: input.value,
+            teacher: teacher.value,
+            profile_url: schoologyCoursePic,
+        })
+    );
 }
 
 function importSchoology() {
@@ -339,158 +317,46 @@ function importSchoology() {
     let screens = modal.getElementsByClassName('CoursePage');
     screens[2].style.display = 'none';
     screens[3].style.display = 'block';
-
-    const status = document.getElementById('create-course-status2');
-    const input = document.getElementById('schoology-course-id');
-    const teacher = document.getElementById('schoology-course-teacher');
-
-    const index = input.value.indexOf('.schoology.com/course/');
-
-    if (index === -1) {
-        status.style.color = 'red';
-        status.innerHTML = 'Invalid Course Link!';
-        return;
-    }
-
-    let endIndex;
-    for (endIndex = index + 22; endIndex < input.value.length; endIndex++) {
-        if (isNaN(parseInt(input.value.charAt(endIndex)))) break;
-    }
-
-    if (endIndex - index < 1) {
-        status.style.color = 'red';
-        status.innerHTML = 'Invalid Course Link!';
-        return;
-    }
-
-    const id = input.value.substring(index, endIndex);
-
-    status.innerHTML;
-    status.innerHTML = 'Creating course...';
-
-    const xhttp = new XMLHttpRequest();
-    xhttp.open('POST', '/api/v1/internal/create/course/schoology', true);
-    xhttp.setRequestHeader('Content-type', 'application/json');
-    xhttp.addEventListener('load', schoologyCourseReq);
-    xhttp.send(
-        JSON.stringify({
-            link: input.value,
-            teacher: teacher.value
-        })
-    );
 }
-
 
 function importCanvas() {
     let modal = document.getElementById('courseModal');
-    let templateLists = modal.getElementsByClassName('scroll');
     let screens = modal.getElementsByClassName('CoursePage');
     screens[2].style.display = 'none';
     screens[5].style.display = 'block';
-    const status = document.getElementById('create-course-status2');
-    const input = document.getElementById('canvas-course-id');
-    const teacher = document.getElementById('canvas-course-teacher');
-
-    const index = input.value.indexOf('/course/');
-
-    if (index === -1) {
-        status.style.color = 'red';
-        status.innerHTML = 'Invalid Course Link!';
-        return;
-    }
-
-    let endIndex;
-    for (endIndex = index + 22; endIndex < input.value.length; endIndex++) {
-        if (isNaN(parseInt(input.value.charAt(endIndex)))) break;
-    }
-
-    if (endIndex - index < 1) {
-        status.style.color = 'red';
-        status.innerHTML = 'Invalid Course Link!';
-        return;
-    }
-
-    const id = input.value.substring(index, endIndex);
-
-    status.innerHTML;
-    status.innerHTML = 'Creating course...';
-
-    const xhttp = new XMLHttpRequest();
-    xhttp.open('POST', '/api/v1/internal/create/course/canvas', true);
-    xhttp.setRequestHeader('Content-type', 'application/json');
-    xhttp.addEventListener('load', canvasCourseReq);
-    xhttp.send(
-        JSON.stringify({
-            link: input.value,
-            teacher: teacher.value
-        })
-    );
 }
 
 
 function importGClassroom() {
     let modal = document.getElementById('courseModal');
-    let templateLists = modal.getElementsByClassName('scroll');
     let screens = modal.getElementsByClassName('CoursePage');
     screens[2].style.display = 'none';
     screens[4].style.display = 'block';
-    const status = document.getElementById('create-course-status2');
-    const input = document.getElementById('google-course-id');
-    const teacher = document.getElementById('google-course-teacher');
-
-    const index = input.value.indexOf('classroom.google.com/c/');
-
-    if (index === -1) {
-        status.style.color = 'red';
-        status.innerHTML = 'Invalid Course Link!';
-        return;
-    }
-
-    let endIndex;
-    for (endIndex = index + 22; endIndex < input.value.length; endIndex++) {
-        if (isNaN(parseInt(input.value.charAt(endIndex)))) break;
-    }
-
-    if (endIndex - index < 1) {
-        status.style.color = 'red';
-        status.innerHTML = 'Invalid Course Link!';
-        return;
-    }
-
-    const id = input.value.substring(index, endIndex);
-
-    status.innerHTML;
-    status.innerHTML = 'Creating course...';
-
-    const xhttp = new XMLHttpRequest();
-    xhttp.open('POST', '/api/v1/internal/create/course/google', true);
-    xhttp.setRequestHeader('Content-type', 'application/json');
-    xhttp.addEventListener('load', googleCourseReq);
-    xhttp.send(
-        JSON.stringify({
-            link: input.value,
-            teacher: teacher.value
-        })
-    );
 }
 
 
 function updateCanvasLink(link) {
+    document.getElementById('active-course-header').innerHTML = "Create Course";
     document.getElementById('canvas-course-id').value = link;
     document.getElementById('clist').style.display = 'none';
     document.getElementById('canvas-create-course').style.display = 'block';
 }
 
 function updateGoogleLink(link, teacher) {
+    document.getElementById('active-course-header').innerHTML = "Create Course";
     document.getElementById('google-course-id').value = link;
     document.getElementById('google-course-teacher').value = teacher;
     document.getElementById('glist').style.display = 'none';
     document.getElementById('google-create-course').style.display = 'block';
 }
 
-function updateSchoologyLink(link) {
+let schoologyCoursePic;
+
+function updateSchoologyLink(link, coursePic) {
+    schoologyCoursePic = coursePic;
+    document.getElementById('active-course-header').innerHTML = "Create Course";
     document.getElementById('schoology-course-id').value = link;
-    document.getElementById('slist').style.display = 'none';
+    document.getElementById('course-list').style.display = 'none';
     document.getElementById('schoology-create-course').style.display = 'block';
 }
 

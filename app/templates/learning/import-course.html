@@ -1,0 +1,208 @@
+<div class="CoursePage" id="schoology-create-page">
+    <h3 class="flex justify-between items-start rounded-t border-b dark:border-gray-600 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white">
+        {% if scCourses|length > 0 %}
+            <div class="flex gap-8 place-items-center" id="active-course-header">
+                Select a course ({{ scCourses|length }})
+                <button class="text-left text-white bg-gradient-to-br from-green-400 to-blue-600 focus:ring-4 focus:outline-none
+             focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                    Import Active Courses
+                </button>
+            </div>
+        {% endif %}
+        <span class="close"></span>
+    </h3>
+    <br>
+    {% if scCourses|length == 0 %}
+        <p class="text-black dark:text-white text-xl text-left">
+            No courses found. Is your Schoology Account linked?
+        </p>
+    {% else %}
+        <div class="overflow-auto mt-2" style="height: 75%" id="course-list">
+            <div class="grid grid-cols-2 gap-6 justify-center">
+                {% for course in scCourses %}
+                    <div onclick="updateSchoologyLink('{{ course["link"] }}', this.children[0].src);"
+                         style="height: min-content"
+                         class="bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800
+                          dark:hover:bg-gray-700 dark:border-gray-700 w-64 cursor-pointer">
+                        <img class="rounded-t-lg w-full object-cover"
+                             src="{{ course["profile_url"] }}"
+                             alt="Course Image"/>
+                        <div class="p-3">
+                            <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                {{ course["course_title"] }}
+                                <span class="mb-3 text-lg text-gray-700 dark:text-gray-400">{{ course.section_title }}</span>
+                            </h5>
+                            <p class="text-gray-700 text-xs uppercase dark:text-gray-400">{{ scCourses[-1]["title"] }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+    <form id="schoology-create-course" onsubmit="createSchoologyCourse()"
+          style="width:90%; height:90%; display:none;">
+        <div class="mb-6">
+            <label for="course-name"
+                   class="block text-sm font-medium text-gray-900 dark:text-gray-300">
+                Schoology Course Link
+            </label>
+            <input type="text"
+                   id="schoology-course-id"
+                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                   placeholder="https://app.schoology.com/course/5131176437/materials"
+                   required>
+            <br>
+            <label for="course-name"
+                   class="block text-sm font-medium text-gray-900 dark:text-gray-300">
+                Schoology Course Teacher
+            </label>
+            <input type="text"
+                   id="schoology-course-teacher"
+                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                   placeholder="Mr. Ross"
+                   required>
+        </div>
+        <br>
+        <button type="submit"
+                class="cursor-pointer bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+            Import Course
+        </button>
+        <span class="text-xl text-green-500 create-course-status"></span>
+    </form>
+    <div class="pageCount"></div>
+</div>
+<div class="CoursePage" id="create-gclass-page">
+    <h3 class="flex justify-between items-start rounded-t border-b dark:border-gray-600 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white">
+        Import from Google Classroom
+        <span class="close"></span>
+    </h3>
+    <br>
+    <div>
+        {% if gcourses|length == 0 %}
+            <p class="text-black dark:text-white text-xl text-left">
+                No courses found. Is your Google Classroom Account linked?
+            </p>
+        {% else %}
+            <p class="text-black dark:text-white text-xl">
+                Select a Google Classroom Course
+            </p>
+            <div style="text-align: center;">
+                <div class="scroll" id="glist" style="height:50%; margin:20px">
+                    {% for course in gcourses %}
+                        <a onclick="updateGoogleLink('{{ course[1] }}', '{{ course[2] }}');"
+                           class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 text-left dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-600 tet">
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                {{ course[0] }}
+                            </h5>
+                            <p class="font-normal text-gray-700 dark:text-gray-400">
+                                Taught by {{ course[2] }}
+                            </p>
+                        </a>
+                        <br>
+                        <br>
+                    {% endfor %}
+                </div>
+            </div>
+            <form id="google-create-course"
+                  style="width:90%; height:90%; display:none;"
+                  onsubmit="importGClassroom(); return false;">
+                <div class="mb-6">
+                    <label for="course-name"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Google Course Link (Automatically Filled)
+                    </label>
+                    <input disabled
+                           type="text"
+                           id="google-course-id"
+                           class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                           placeholder="The link will be Filled when you click the buttons Above!"
+                           required>
+                    <label for="course-name"
+                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Google Course Teacher (Automatically Filled)
+                    </label>
+                    <input type="text"
+                           id="google-course-teacher"
+                           class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                           placeholder="Your teacher will be Filled when you click the buttons Above!"
+                           required>
+                </div>
+                <br>
+                <button type="submit"
+                        class="cursor-pointer bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                    Import Course
+                </button>
+                <span class="text-xl text-green-500 create-course-status"></span>
+            </form>
+        {% endif %}
+    </div>
+    <div class="pageCount">
+    </div>
+</div>
+<div class="CoursePage" id="create-canvas-page">
+    <h3 class="flex justify-between items-start rounded-t border-b dark:border-gray-600 text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white">
+        Import from Canvas
+        <span class="close"></span>
+    </h3>
+    <br>
+    <div class="text-center">
+        <div class="scroll" id="clist" style="height:50%; margin:20px">
+            {% if canvascourses|length == 0 %}
+                <p class="text-black dark:text-white text-xl text-left">
+                    No courses found. Is your Canvas Account linked?
+                </p>
+            {% else %}
+                <h1 class="text-black dark:text-white text-xl">
+                    Select a Canvas Course
+                </h1>
+                {% for course in canvascourses %}
+                    <a onclick="updateCanvasLink('{{ course[1] }}')"
+                       class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 text-left dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-600 tet">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                            {{ course[0] }}
+                        </h5>
+                        <p class="font-normal text-gray-700 dark:text-gray-400">
+                            Full Name: {{ course[2] }}
+                        </p>
+                    </a>
+                    <br>
+                    <br>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <form id="canvas-create-course"
+          onsubmit="importCanvas(); return false;"
+          style="height:90%;
+                         width:90%;
+                         display:none;">
+        <div class="mb-6">
+            <label for="course-name" class="">
+                Canvas Course Link (Automatically Filled)
+            </label>
+            <input disabled
+                   type="text"
+                   id="canvas-course-id"
+                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                   placeholder="The Link will be Automatically Filled from the buttons Above."
+                   required>
+            <label for="course-name"
+                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                Canvas Course Teacher
+            </label>
+            <input type="text"
+                   id="canvas-course-teacher"
+                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-200 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                   placeholder="Mr. Adams"
+                   required>
+        </div>
+        <br>
+        <button type="submit"
+                class="cursor-pointer bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+            Import Course
+        </button>
+        <span class="text-xl text-green-500 create-course-status"></span>
+    </form>
+    <div class="pageCount">
+    </div>
+</div>

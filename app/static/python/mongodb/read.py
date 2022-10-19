@@ -26,7 +26,7 @@ def getText(query):
         return query
 
 
-def getAssignment(assignment_id: str=None, imported_id: str=None) -> Assignment:
+def getAssignment(assignment_id: str = None, imported_id: str = None) -> Assignment:
     if imported_id:
         assignment = Assignment.objects(imported_id=imported_id).first()
     elif assignment_id:
@@ -247,7 +247,7 @@ def sort_course_events(user_id: str, course_id: int):
     return [announcements, dates]
 
 
-def sort_user_events(user_id: str, max_days=20, max_events=100):
+def sort_user_events(user_id: str, events=True, max_days=15, max_events=15):
     courses = get_user_courses(user_id)
     events = Event.objects(course__in=courses)
     announcements = Announcement.objects(course__in=courses)
@@ -256,16 +256,14 @@ def sort_user_events(user_id: str, max_days=20, max_events=100):
     from itertools import chain, groupby
 
     events_assessments_assignments = list(chain(events, assignments, assessments))
-    sorted_events = reversed(
-        sorted(
-            events_assessments_assignments[:max_events],
-            key=lambda obj: sortByDateTime(obj),
-        )
+    sorted_events = sorted(
+        events_assessments_assignments[:max_events],
+        key=lambda obj: sortByDateTime(obj),
     )
 
     dates = dict(
         {
-            key: list(result)
+            key: reversed(list(result))
             for key, result in groupby(
             sorted_events, key=lambda obj: sortByDateTime(obj)
         )
@@ -287,8 +285,6 @@ def sort_user_events(user_id: str, max_days=20, max_events=100):
     )
 
     return [announcements, dates]
-
-    # events_assessments_assignments = events | assignments | assessments
 
 
 def unsorted_user_events(user_id: str) -> list[list]:
@@ -470,7 +466,7 @@ def loadChats(user_id: str, current_index, initial_amount, required_fields):
     if len(chats) < current_index + initial_amount:
         initial_amount = len(chats) - current_index
 
-    chats = chats[(current_index+1): (current_index + initial_amount)]
+    chats = chats[(current_index + 1): (current_index + initial_amount)]
     for chat in chats:
         if len(chat["members"]) == 2:
             for x, member in enumerate(chat["members"]):

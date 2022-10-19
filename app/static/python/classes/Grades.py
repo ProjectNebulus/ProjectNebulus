@@ -1,9 +1,6 @@
 from mongoengine import *
 
-from . import TermGrade
 from .Snowflake import Snowflake
-
-
 
 
 class Grades(Snowflake):
@@ -15,7 +12,7 @@ class Grades(Snowflake):
     grade = FloatField(required=False)
 
     def clean(self):
-        self.grade = sum([term.grade for term in self.terms])/len(self.terms)
+        self.grade = sum([term.grade for term in self.terms]) / len(self.terms)
         self.letter = getLetterGrade(self.grade)
 
 

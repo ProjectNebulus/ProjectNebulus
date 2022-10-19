@@ -18,9 +18,9 @@
 /* Modal Content */
 
 #CourseModal .CoursePage {
-    margin-top: 6%;
+    margin-top: 8%;
     margin-left: 31%;
-    padding: 20px;
+    padding: 2.5rem;
     color: white;
     border-radius: 10px;
     position: absolute;
@@ -75,45 +75,17 @@
     background: gray;
 }
 
-@keyframes movein {
-    from {
-        top: -1000px;
-    }
-    to {
-        top: 0;
-    }
-}
-
-@keyframes moveout {
-    from {
-        top: 0;
-    }
-    to {
-        top: -1000px;
-    }
-}
-
-#CourseModal.image {
+#CourseModal .image {
     width: 20px;
     height: 20px;
     border-radius: 0;
     margin-right: 10px;
 }
 
-#CourseModal.createSelectButton {
-    font-size: 1.5rem;
-    padding: 0.75rem;
-    border-radius: 10px;
-    border: 1px solid #bababa;
-    display: inline-block;
-    margin-bottom: 10px;
-    width: 500px;
-    cursor: pointer;
-}
-
 .scroll {
     height: 40%;
     overflow: auto;
+    cursor: pointer;
 }
 
 #CourseModal::-webkit-scrollbar {

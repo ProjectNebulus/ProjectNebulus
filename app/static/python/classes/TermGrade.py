@@ -1,5 +1,6 @@
 from mongoengine import *
-from . import GradingCategory
+
+from .GradingCategory import GradingCategory
 
 
 class TermGrade(EmbeddedDocument):
@@ -27,7 +28,5 @@ class TermGrade(EmbeddedDocument):
     grade = FloatField(required=False)
 
     def clean(self):
-        self.grade = sum([grading_category.grade*grading_category.weight for grading_category in self.grading_categories])
-
-
-
+        self.grade = sum(
+            [grading_category.grade * grading_category.weight for grading_category in self.grading_categories])

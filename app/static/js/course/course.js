@@ -2,7 +2,7 @@ let actions, pageTitle, createButton;
 window.onload = function () {
     actions = document.getElementsByClassName('link');
     pageTitle = document.getElementById('page-title');
-    createButton = document.getElementById('create');
+    createButton = document.getElementById('create-resource');
     createButton.style.transition = "0.5s";
 
     const navImg = document.getElementById("navigationImage");

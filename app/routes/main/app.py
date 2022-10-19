@@ -8,7 +8,7 @@ from markupsafe import Markup
 from app.static.python.mongodb import read
 from app.static.python.mongodb.read import getText
 from . import main_blueprint
-from .utils import logged_in
+from .utils import logged_in, strftime
 
 
 def credentials_to_dict(credentials):
@@ -56,6 +56,18 @@ def getGclassroomcourses():
     return courses
 
 
+@main_blueprint.route("/import-course", methods=["POST"])
+def lms_modal():
+    scCourses, gcourses, canvascourses = get_courses()
+
+    return render_template(
+        "learning/import-course.html",
+        gcourses=gcourses,
+        scCourses=scCourses,
+        canvascourses=canvascourses,
+    )
+
+
 @main_blueprint.route("/app")
 @logged_in
 def app():
@@ -78,7 +90,7 @@ def app():
         announcements=user_events[0],
         events=user_events[1],
         enumerate=enumerate,
-        strftime=datetime.strftime,
+        strftime=strftime,
         translate=getText,
         showPopup=show_popup,
         fmt=fmt,
@@ -90,12 +102,49 @@ def app():
 def courses():
     user_acc = read.find_user(id=session["id"])
     user_courses = read.get_user_courses(session["id"])
+    scCourses, gcourses, canvascourses = get_courses()
+
+    return render_template(
+        "learning/courses.html",
+        user=session["username"],
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        user_acc=user_acc,
+        user_courses=list(user_courses),
+        read=read,
+        page="Nebulus - Courses",
+        translate=getText,
+        gcourses=gcourses,
+        scCourses=scCourses,
+        canvascourses=canvascourses,
+    )
+
+
+@main_blueprint.route("/clubs")
+@logged_in
+def clubs():
+    user_acc = read.find_user(id=session["id"])
+    user_clubs = read.get_user_clubs(session["id"])
+    return render_template(
+        "learning/clubs.html",
+        user=session["username"],
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        user_acc=user_acc,
+        user_clubs=list(user_clubs),
+        read=read,
+        page="Nebulus - Clubs",
+        translate=getText,
+    )
+
+
+def get_courses():
     try:
         gcourses = getGclassroomcourses()
     except:
         gcourses = []
 
-    canvascourses = []
+    canvas_courses = []
     try:
         from canvasapi import Canvas
 
@@ -105,16 +154,17 @@ def courses():
         account = canvas.get_user(user="self")
         courses = account.get_courses()
         for course in courses:
-            original_name = ""
             try:
                 original_name = course.original_name
-            except:
+            except AttributeError:
                 original_name = course.name
-            canvascourses.append(
+
+            canvas_courses.append(
                 [course.name, f"{API_URL}/course/{course.id}", original_name]
             )
+
     except Exception as e:
-        canvascourses = []
+        canvas_courses = []
 
     scCourses = []
     import schoolopy
@@ -158,6 +208,7 @@ def courses():
                 )
             scSchool = sc.get_school(scCourses[0]["school_id"])
             scCourses.append(scSchool)
+
         elif schoology:
             schoology = schoology[0]
             auth = schoolopy.Auth(
@@ -180,45 +231,15 @@ def courses():
             scSchool = sc.get_school(scCourses[0]["school_id"])
             scCourses.append(scSchool)
 
+        scCourses = sorted(scCourses[:-1], key=lambda c: (-int(c["active"]), c["course_title"]))
+        print(scCourses)
+
     except Exception as e:
         print(session)
         print(e)
         scCourses = []
 
-    return render_template(
-        "learning/courses.html",
-        user=session["username"],
-        email=session.get("email"),
-        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-        user_acc=user_acc,
-        user_courses=list(user_courses),
-        read=read,
-        page="Nebulus - Courses",
-        translate=getText,
-        uniqueUsers=set(),
-        gcourses=gcourses,
-        scCourses=scCourses,
-        canvascourses=canvascourses,
-    )
-
-
-@main_blueprint.route("/clubs")
-@logged_in
-def clubs():
-    user_acc = read.find_user(id=session["id"])
-    user_clubs = read.get_user_clubs(session["id"])
-    return render_template(
-        "learning/clubs.html",
-        user=session["username"],
-        email=session.get("email"),
-        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-        user_acc=user_acc,
-        user_clubs=list(user_clubs),
-        read=read,
-        page="Nebulus - Clubs",
-        translate=getText,
-        uniqueUsers=set(),
-    )
+    return scCourses, gcourses, canvas_courses
 
 
 def fmt(content: str) -> str:
