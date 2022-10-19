@@ -2,10 +2,11 @@ from mongoengine import *
 
 
 class GradingCategory(EmbeddedDocument):
+    meta = {"collection": "GradingCategories"}
     weight = FloatField(required=True)
     course = ReferenceField('Course', required=True)
     title = StringField(required=True)
-    subcategories = ListField(ReferenceField('GradingCategory'), required=False)
+    subcategories = ListField(EmbeddedDocumentField("GradingCategory"), required=False)
     grade = FloatField(required=False)
 
     def clean(self):
