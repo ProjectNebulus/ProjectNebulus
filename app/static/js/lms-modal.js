@@ -312,6 +312,15 @@ function createSchoologyCourse() {
     );
 }
 
+function importSchoologyAll() {
+    const xhttp = new XMLHttpRequest();
+    xhttp.open('POST', '/api/v1/internal/create/course/schoology/all', true);
+    xhttp.setRequestHeader('Content-type', 'application/json');
+    xhttp.send(
+        JSON.stringify({})
+    );
+}
+
 function importSchoology() {
     let modal = document.getElementById('courseModal');
     let screens = modal.getElementsByClassName('CoursePage');

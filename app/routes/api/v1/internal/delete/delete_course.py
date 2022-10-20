@@ -4,8 +4,8 @@ from app.static.python.mongodb import delete
 from .. import internal
 
 
-@internal.route("/delete/user", methods=["POST"])
+@internal.route("/delete/course", methods=["POST"])
 def delete_course_route():
-    data = request.json()
-    delete.delete_course(data["id"])
+    data = request.get_json()
+    delete.delete_course(data["course"])
     return "success"

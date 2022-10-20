@@ -3,9 +3,9 @@
         {% if scCourses|length > 0 %}
             <div class="flex gap-8 place-items-center" id="active-course-header">
                 Select a course ({{ scCourses|length }})
-                <button class="text-left text-white bg-gradient-to-br from-green-400 to-blue-600 focus:ring-4 focus:outline-none
+                <button onclick="importSchoologyAll()" class="text-left text-white bg-gradient-to-br from-green-400 to-blue-600 focus:ring-4 focus:outline-none
              focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                    Import Active Courses
+                    Import All Courses
                 </button>
             </div>
         {% endif %}
@@ -24,7 +24,8 @@
                          style="height: min-content"
                          class="bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800
                           dark:hover:bg-gray-700 dark:border-gray-700 w-64 cursor-pointer">
-                        <img class="rounded-t-lg w-full object-cover"
+                        <img style="height: 80px;
+    width: 100%;" class="rounded-t-lg w-full object-cover"
                              src="{{ course["profile_url"] }}"
                              alt="Course Image"/>
                         <div class="p-3">

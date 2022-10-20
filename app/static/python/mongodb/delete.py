@@ -15,10 +15,9 @@ from app.static.python.mongodb.read import (
     get_announcement,
     getAssignment,
     getChat,
-    getDocument,
     getEvent,
     getFolder,
-    getGrades,
+    getGrades, getCourseDocument,
 )
 
 
@@ -116,7 +115,7 @@ def delete_document(document_id: str) -> None:
     """
     Deletes a document from the database.
     """
-    document = getDocument(document_id)
+    document = getCourseDocument(document_id)
     if not document.folder:
         document.course.documents.remove(document)
         document.course.save()

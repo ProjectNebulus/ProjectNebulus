@@ -386,3 +386,200 @@ def create_schoology_course():
     print(documents)
 
     return "success"
+
+
+@internal.route("/create/course/schoology/all", methods=["GET", "POST"])
+def create_schoology_course_all():
+    post_data = request.json
+    schoology = read.getSchoology(id=session["id"])
+    if len(schoology) == 0:
+        return "1"
+    schoology = schoology[0]
+    key = schoology.apikey
+    secret = schoology.apisecret
+    thelink = schoology.schoologyDomain
+
+    auth = schoolopy.Auth(
+        key,
+        secret,
+        domain=schoology.schoologyDomain,
+        three_legged=True,
+        request_token=schoology.Schoology_request_token,
+        request_token_secret=schoology.Schoology_request_secret,
+        access_token=schoology.Schoology_access_token,
+        access_token_secret=schoology.Schoology_access_secret,
+    )
+    auth.request_authorization(
+        callback_url=(request.url_root + "/api/v1/internal/oauth/schoology/callback")
+    )
+    while not auth.authorized:
+        auth.authorize()
+    sc = schoolopy.Schoology(auth)
+    sc.limit = "1000&include_past=1"
+    scCourses = list(sc.get_user_sections(user_id=sc.get_me().id))
+    sc.limit = 10000
+    user = sc.get_me()
+    sections = []
+    for i in range(0, len(scCourses)):
+        scCourses[i] = dict(scCourses[i])
+        sections.append(scCourses[i]["id"])
+    for i in range(0, len(sections)):
+        section = sections[i]
+        link = section
+        # link = f"{thelink}/course{section}/materials"
+        section = dict(sc.get_section(section))
+        course = {
+            "name": f'{section["course_title"]} ({section["section_title"]})',
+            "description": section["description"],
+            "imported_from": "Schoology",
+            "authorizedUsers": [session["id"]],
+            "teacher": "Unknown",
+            "imported_id": str(section["id"]),
+            "type": "Imported",
+        }
+
+        course_obj = create.create_course(course)
+
+        create.createAvatar(
+            {
+                "avatar_url": section["profile_url"],
+                "parent": "Course",
+                "parent_id": course_obj.id,
+            }
+        )
+        scupdates = sc.get_section_updates(link)
+
+        for update in scupdates:
+            author = sc.get_user(update["uid"])
+            color = getColor(author["picture_url"])
+            school = sc.get_school(author["school_id"])["title"]
+
+            create.createAnnouncement(
+                {
+                    "content": update["body"],
+                    "course": str(course_obj.id),
+                    # "id": str(update["id"]),
+                    "author": author["name_display"],
+                    "author_pic": author["picture_url"],
+                    "likes": update["likes"],
+                    "comment_number": update["num_comments"],
+                    "imported_from": "Schoology",
+                    "date": datetime.fromtimestamp(int(update["last_updated"])),
+                    "title": "",
+                    "author_color": color,
+                    "author_email": author["primary_email"],
+                    "author_school": school,
+                    "imported_id": str(update["id"]),
+                }
+            )
+
+        scgrades = sc.get_user_grades_by_section(user['id'], link)
+        print(scgrades)
+        try:
+            scgrades = scgrades['period']
+        except:
+            print("")
+
+        scdiscussions = sc.get_discussions(section_id=link)
+        for i in range(0, len(scdiscussions)):
+            scdiscussion = scdiscussions[i]
+            scdiscussionreplies = sc.get_discussion_replies(
+                section_id=link, discussion_id=scdiscussion["id"]
+            )
+
+        scevents = sc.get_section_events(link)
+        for event in scevents:
+            if event["type"] == "assignment":
+                assignment = sc.get_assignment(section["id"], event["assignment_id"])
+                due = assignment["due"]
+                if due != "":
+                    due = datetime.fromisoformat(due)
+                else:
+                    due = None
+
+                print(assignment)
+                create.createAssignment(
+                    {
+                        # "id": str(assignment["id"]),
+                        "title": assignment["title"],
+                        "description": assignment["description"]
+                                       + f"\n\nView On Schoology: {assignment['web_url']}",
+                        # "submitDate": assignment["dropbox_last_submission"],
+                        "due": due,
+                        # "course": str(course_obj.id),
+                        "course": str(course_obj.id),
+                        "points": float(assignment["max_points"]),
+                        "imported_from": "Schoology",
+                        "imported_id": str(assignment["id"]),
+                    }
+                )
+            else:
+                create.createEvent(
+                    {
+                        "course": str(course_obj.id),
+                        "title": event["title"],
+                        "description": event["description"],
+                        "date": datetime.strptime(event["start"], "%Y-%m-%d %H:%M:%S"),
+                        "imported_from": "Schoology",
+                        "imported_id": str(event["id"]),
+                    }
+                )
+        folders = []
+
+        for period in scgrades[1:]:
+            for assignment in period:
+                assignment_obj = read.getAssignment(imported_id=assignment[0]['assignment_id'])
+                assignment_obj.grade = assignment[0]['grade']
+                assignment_obj.semester = period['period_title']
+            assignment_obj.save()
+
+        scdocuments = sc.get_section_documents(link)
+
+        def get_doc_link(sc, url):
+            rq = sc.schoology_auth.oauth.get(
+                url=url,
+                headers=sc.schoology_auth._request_header(),
+                auth=sc.schoology_auth.oauth.auth,
+            )
+            return rq.url  # rq["url"]
+
+        documents = []
+
+        for scdocument in scdocuments:
+            try:
+                document = {}
+                document["schoology_id"] = scdocument["id"]
+                document["name"] = scdocument["title"]
+                print(scdocument)
+                document["file_ending"] = scdocument["attachments"]["files"]["file"][0][
+                    "extension"
+                ]
+                try:
+                    document["upload_date"] = datetime.fromtimestamp(scdocument["timestamp"])
+                except:
+                    print("can't find timestamp")
+                document["course"] = str(course_obj.id)
+                document["imported_from"] = "Schoology"
+                document["imported_id"] = str(scdocument["id"])
+                document["attachments"] = get_doc_link(
+                    sc, scdocument["attachments"]["files"]["file"][0]["download_path"]
+                )
+
+                filename = link.split("/")[-1]
+                mongo_document = create.createDocumentFile(
+                    {
+                        "name": document["name"],
+                        "course": document["course"],
+                        "file_ending": document["file_ending"],
+                        "imported_from": "Schoology",
+                        "imported_id": document["imported_id"],
+                    }
+                )
+
+                print(document)
+                documents.append(document)
+            except:
+                print("")
+        print(documents)
+
+    return "success"

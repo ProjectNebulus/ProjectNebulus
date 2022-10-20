@@ -377,6 +377,13 @@ def getDocument(document_id: str):  # Nebulus Document
     return doc
 
 
+def getCourseDocument(document_id: str):
+    doc = DocumentFile.objects(pk=document_id)
+    if not doc:
+        raise KeyError("Invalid Document ID")
+    return doc
+
+
 def search(keyword: str, username: str):
     user = User.objects(username=username).first()
     users = search_user(keyword)

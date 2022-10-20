@@ -14,7 +14,7 @@ function uploadLink() {
 }
 
 function uploadFile() {
-    alert('Uploaded');
+    alert('Uploading');
 
     const formData = new FormData();
     let fileupload = document.getElementById('file');
