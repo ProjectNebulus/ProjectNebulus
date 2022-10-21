@@ -47,11 +47,20 @@ def scheduler():
 
             # format: importance calculation, points, title, course name, icon name ("assignment" or "assessment"),
             # date string, importance string, color
-            everything.append([importance, event.points, event.title, event.course.name, event._cls,
-                               f'{strftime(event.due, "%-m/%-d")}'
-                               ' <span class="text-gray-400 dark:text-gray-300">•</span> '
-                               f'<span style="color:{color}">{dueString}<span>',
-                               "", ""])
+            everything.append(
+                [
+                    importance,
+                    event.points,
+                    event.title,
+                    event.course.name,
+                    event._cls,
+                    f'{strftime(event.due, "%-m/%-d")}'
+                    ' <span class="text-gray-400 dark:text-gray-300">•</span> '
+                    f'<span style="color:{color}">{dueString}<span>',
+                    "",
+                    "",
+                ]
+            )
 
     for e in everything:
         try:

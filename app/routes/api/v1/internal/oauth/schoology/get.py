@@ -23,9 +23,16 @@ def schoology_get():
 
     session["link"] = request.form.get("link").replace("//", "/")
     auth = schoolopy.Auth(
-        schoology_key, schoology_secret, three_legged=True, domain=request.form.get("link")
+        schoology_key,
+        schoology_secret,
+        three_legged=True,
+        domain=request.form.get("link"),
     )
-    return str(auth.request_authorization(
-        callback_url=str(request.url_root).replace("https://", "").replace("http://", "")
-                     + "/api/v1/internal/oauth/schoology/callback"
-    )).replace("//oauth", "/oauth")
+    return str(
+        auth.request_authorization(
+            callback_url=str(request.url_root)
+                             .replace("https://", "")
+                             .replace("http://", "")
+                         + "/api/v1/internal/oauth/schoology/callback"
+        )
+    ).replace("//oauth", "/oauth")

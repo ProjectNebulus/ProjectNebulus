@@ -537,13 +537,7 @@ class Musixmatch:
         return data
 
     def album_tracks_get(
-        self,
-        album_id,
-        page,
-        page_size,
-        album_mbid,
-        f_has_lyrics=None,
-        _format="json",
+            self, album_id, page, page_size, album_mbid, f_has_lyrics=None, _format="json",
     ):
         """This api provides you the list of the songs of an album.
         Parameters:

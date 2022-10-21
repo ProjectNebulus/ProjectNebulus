@@ -6,35 +6,33 @@ from . import main_blueprint
 
 def get_auth():
     client_id = "a5443a5dffe717b56bf2"
-    return f'https://github.com/login/oauth/authorize?client_id={client_id}'
+    return f"https://github.com/login/oauth/authorize?client_id={client_id}"
 
 
 def get_access_token(request_token: str) -> str:
     CLIENT_ID = "a5443a5dffe717b56bf2"
     CLIENT_SECRET = "8c895931234e1d44734b29b9e966d8917cda454e"
 
-    url = f'https://github.com/login/oauth/access_token?client_id={CLIENT_ID}&client_secret={CLIENT_SECRET}&code={request_token}'
-    headers = {
-        'accept': 'application/json'
-    }
+    url = f"https://github.com/login/oauth/access_token?client_id={CLIENT_ID}&client_secret={CLIENT_SECRET}&code={request_token}"
+    headers = {"accept": "application/json"}
 
     res = requests.post(url, headers=headers)
 
     data = res.json()
     print(data)
-    access_token = data['access_token']
+    access_token = data["access_token"]
 
     return access_token
 
 
 def get_user_data(access_token: str) -> dict:
     if not access_token:
-        raise ValueError('The request token has to be supplied!')
+        raise ValueError("The request token has to be supplied!")
     if not isinstance(access_token, str):
-        raise ValueError('The request token has to be a string!')
+        raise ValueError("The request token has to be a string!")
 
-    access_token = 'token ' + access_token
-    url = 'https://api.github.com/user'
+    access_token = "token " + access_token
+    url = "https://api.github.com/user"
     headers = {"Authorization": access_token}
 
     resp = requests.get(url=url, headers=headers)
@@ -46,15 +44,15 @@ def get_user_data(access_token: str) -> dict:
 
 def get_user_repos(access_token: str):
     if not access_token:
-        raise ValueError('The request token has to be supplied!')
+        raise ValueError("The request token has to be supplied!")
     if not isinstance(access_token, str):
-        raise ValueError('The request token has to be a string!')
-    access_token = 'token ' + access_token
-    url = 'https://api.github.com/user'
+        raise ValueError("The request token has to be a string!")
+    access_token = "token " + access_token
+    url = "https://api.github.com/user"
     headers = {"Authorization": access_token}
     resp = requests.get(url=url, headers=headers)
     userData = resp.json()
-    username = userData['login']
+    username = userData["login"]
     url = f"https://api.github.com/users/{username}/repos"
     headers = {"Authorization": access_token}
     resp = requests.get(url=url, headers=headers)
@@ -85,8 +83,11 @@ def github_callback():
     print(code)
     token = get_access_token(code)
     session["github"] = token
-    return render_template("user/connections/connectGithub.html", username=get_user_data(token)['login'],
-                           avatar=get_user_data(token)['avatar_url'])
+    return render_template(
+        "user/connections/connectGithub.html",
+        username=get_user_data(token)["login"],
+        avatar=get_user_data(token)["avatar_url"],
+    )
 
 
 @main_blueprint.route("/github/repos")
@@ -98,16 +99,21 @@ def get_repos():
     string = ""
     for repo in repos:
         symbol = ""
-        if (repo[1]):
+        if repo[1]:
             symbol = "<i class='material-icons'>lock</i>"
-        string += "<p>" + """
+        string += (
+                "<p>"
+                + """
 		<img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" style="
     filter: invert(1);
     height: 30px;
     vertical-align: middle;
     margin: 10px;
 ">
-	""" + repo[0] + symbol + """<button style="
+	"""
+                + repo[0]
+                + symbol
+                + """<button style="
     margin: 20px;
     font-weight: 600;
     border: none;
@@ -115,5 +121,7 @@ def get_repos():
     padding: 10px 20px;
     border-radius: 10px;
     background: deepskyblue;
-">Import</button>""" + "</p>"
+">Import</button>"""
+                + "</p>"
+        )
     return string

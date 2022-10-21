@@ -17,7 +17,8 @@ from app.static.python.mongodb.read import (
     getChat,
     getEvent,
     getFolder,
-    getGrades, getCourseDocument,
+    getGrades,
+    getCourseDocument,
 )
 
 

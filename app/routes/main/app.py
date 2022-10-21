@@ -212,9 +212,7 @@ def get_courses():
         elif schoology:
             schoology = schoology[0]
             auth = schoolopy.Auth(
-                schoology.apikey,
-                schoology.apisecret,
-                domain=schoology.schoologyDomain,
+                schoology.apikey, schoology.apisecret, domain=schoology.schoologyDomain,
             )
             auth.authorize()
             sc = schoolopy.Schoology(auth)
@@ -231,7 +229,9 @@ def get_courses():
             scSchool = sc.get_school(scCourses[0]["school_id"])
             scCourses.append(scSchool)
 
-        scCourses = sorted(scCourses[:-1], key=lambda c: (-int(c["active"]), c["course_title"]))
+        scCourses = sorted(
+            scCourses[:-1], key=lambda c: (-int(c["active"]), c["course_title"])
+        )
         print(scCourses)
 
     except Exception as e:

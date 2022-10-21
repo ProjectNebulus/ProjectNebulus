@@ -51,6 +51,5 @@ class Assignment(Snowflake):
         default="None", description="The grading category in which the assignment is in"
     )
 
-
     def __str__(self):
         return f'Assignment(title="{self.title}", grade={self.grade}, points={self.points}, due="{self.due.date()}")'

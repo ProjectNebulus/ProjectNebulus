@@ -189,7 +189,9 @@ def schoology_connect():
         if not schoology_key or not schoology_secret:
             return "1"
 
-        auth = schoolopy.Auth(schoology_key, schoology_secret, three_legged=True, domain=session["link"])
+        auth = schoolopy.Auth(
+            schoology_key, schoology_secret, three_legged=True, domain=session["link"]
+        )
         auth.request_authorization()
         auth.authorize()
 
@@ -223,7 +225,7 @@ def schoology_connect():
         "schoologyDomain": session["Schoologydomain"],
         "apikey": session["key"],
         "apisecret": session["secret"],
-        "type": link_method
+        "type": link_method,
     }
 
     update.schoologyLogin(session["id"], schoology)

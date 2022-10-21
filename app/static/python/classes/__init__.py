@@ -18,6 +18,7 @@ from .Event import Event
 from .Folder import Folder
 from .GoogleClassroom import GoogleClassroom
 from .Grades import Grades
+from .GradingCategory import GradingCategory
 from .Integration import Integration
 # from .Invite import Invite
 from .Message import Message
@@ -29,7 +30,6 @@ from .Schoology import Schoology
 # from .ServerProfile import ServerProfile
 from .Snowflake import Snowflake
 from .Spotify import Spotify
+from .TermGrade import TermGrade
 from .Textbook import Textbook
 from .User import User
-from .TermGrade import TermGrade
-from .GradingCategory import GradingCategory

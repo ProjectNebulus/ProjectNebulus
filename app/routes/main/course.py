@@ -5,9 +5,9 @@ from flask import render_template, request, session
 
 from app.static.python.classes import Assignment
 from app.static.python.classes import Course, User
+from app.static.python.classes import Grades
 from app.static.python.mongodb import read
 from app.static.python.mongodb.read import getText, find_user
-from app.static.python.classes import Grades
 from . import main_blueprint, utils
 from .utils import logged_in, private_endpoint
 
@@ -71,7 +71,7 @@ def course_page(page, **kwargs):
         events=read.sort_course_events(session["id"], int(course_id))[1],
         strftime=utils.strftime,
         translate=getText,
-        gradeStr=gradeStr
+        gradeStr=gradeStr,
     )
 
 
@@ -158,11 +158,7 @@ def search_word(id):
 def course_page_ex(id, extension):
     try:
         return render_template(
-            f"courses/extensions/{extension}.html",
-            translate=getText,
+            f"courses/extensions/{extension}.html", translate=getText,
         )
     except Exception as e:
-        return render_template(
-            "errors/404.html",
-            translate=getText,
-        )
+        return render_template("errors/404.html", translate=getText, )

@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 from app.routes import init_app, socketio
+
 # noinspection PpyUnresolvedReferences
 
 app = init_app()
@@ -17,8 +18,10 @@ app.config["secret_key"] = os.getenv("")
 # Debug mode logs errors in more detail. Best used for testing, not production
 debug = False
 if __name__ == "__main__":
-    if platform.system().lower() == "linux":  # linux - use3d for VPS (like DigitalOcean)
-        debug  = False
+    if (
+            platform.system().lower() == "linux"
+    ):  # linux - use3d for VPS (like DigitalOcean)
+        debug = False
         port = 8080
         host = "127.0.0.1"
         protocol = "http"

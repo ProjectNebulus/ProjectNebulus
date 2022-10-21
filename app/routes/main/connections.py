@@ -31,9 +31,7 @@ def schoology():
 
     # Open OAuth authorization webpage. Give time to authorize.
     return render_template(
-        "user/connections/connectSchoology.html",
-        url=url,
-        translate=getText,
+        "user/connections/connectSchoology.html", url=url, translate=getText,
     )
 
 

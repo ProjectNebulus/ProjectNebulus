@@ -11,7 +11,9 @@ app_secret = "srv2o2zn2rvg0ml"
 def dropbox():
     authorization_url = f"https://www.dropbox.com/oauth2/authorize?client_id={app_key}&response_type=code"
 
-    return render_template("user/connections/connectDropbox.html", link=authorization_url)
+    return render_template(
+        "user/connections/connectDropbox.html", link=authorization_url
+    )
 
 
 @main_blueprint.route("/dropbox/auth", methods=["POST"])
@@ -24,7 +26,7 @@ def dropbox_callback():
         "code": authorization_code,
         "grant_type": "authorization_code",
         "client_id": app_key,
-        "client_secret": app_secret
+        "client_secret": app_secret,
     }
     r = requests.post(token_url, data=params)
     return str(r.text)

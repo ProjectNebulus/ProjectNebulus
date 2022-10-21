@@ -23,4 +23,6 @@ def canvasConnect2():
         session["canvas_link"] = request.form.get("link")
     else:
         return redirect("/canvas")
-    return render_template("user/connections/connectCanvas.html", done=str(a), avatar=a.avatar_url)
+    return render_template(
+        "user/connections/connectCanvas.html", done=str(a), avatar=a.avatar_url
+    )
