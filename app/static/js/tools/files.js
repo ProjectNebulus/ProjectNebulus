@@ -341,9 +341,9 @@ function addHTML() {
 
 
     <div id="code-viewer" style="display:none;">
-        <pre onClick="this.contentEditable='true';" style="width:80%;border-radius:10px;margin-left:10%;">
-        <code id="code_loc" onClick="this.contentEditable='true';"
-              style="border-radius:10px; background:#1F2937;color:white;"
+        <pre style="width:80%;border-radius:10px;margin-left:10%;">
+        <code id="code_loc" 
+              style="border-radius:10px; background:#1F2937;color:white; height: 300px;overflow-y: scroll;"
               class="language-python">
         </code>
     </pre>

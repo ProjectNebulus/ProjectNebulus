@@ -139,12 +139,6 @@ def sitemap():
     return send_file(str(path.parent.parent.parent) + "/static/sitemap.xml")
 
 
-@main_blueprint.route("/global/<country>", methods=["GET"])
-def international(country):
-    session["global"] = country
-    return redirect("/")
-
-
 @main_blueprint.route("/study/session")
 def studyplanner():
     return render_template(

@@ -140,7 +140,7 @@ def createDocumentFile(data: dict) -> DocumentFile:
 
     document_file = DocumentFile(**data)
     document_file.save(force_insert=True)
-    document_file.url += "." + file_ending
+    # document_file.url += "." + file_ending
     document_file.save()
     folder = document_file.folder
     course = document_file.course

@@ -238,8 +238,9 @@ def create_schoology_course():
         "teacher": post_data["teacher"],
         "imported_id": str(section["id"]),
         "type": "Imported",
-    }
-
+    } \
+ \
+    from app.static.python.mongodb import create
     course_obj = create.create_course(course)
 
     create.createAvatar(
@@ -277,10 +278,16 @@ def create_schoology_course():
 
     scgrades = sc.get_user_grades_by_section(user['id'], link)
     print(scgrades)
-    scgrades = scgrades['period']
-
-
-
+    try:
+        scgrades = scgrades['period']
+        for period in scgrades[1:]:
+            for assignment in period:
+                assignment_obj = read.getAssignment(imported_id=assignment[0]['assignment_id'])
+                assignment_obj.grade = assignment[0]['grade']
+                assignment_obj.semester = period['period_title']
+        assignment_obj.save()
+    except:
+        scgrades = None
 
     scdiscussions = sc.get_discussions(section_id=link)
     for i in range(0, len(scdiscussions)):
@@ -328,12 +335,7 @@ def create_schoology_course():
             )
     folders = []
 
-    for period in scgrades[1:]:
-        for assignment in period:
-            assignment_obj = read.getAssignment(imported_id=assignment[0]['assignment_id'])
-            assignment_obj.grade = assignment[0]['grade']
-            assignment_obj.semester = period['period_title']
-        assignment_obj.save()
+
 
 
     scdocuments = sc.get_section_documents(link)
@@ -366,9 +368,6 @@ def create_schoology_course():
         document["course"] = str(course_obj.id)
         document["imported_from"] = "Schoology"
         document["imported_id"] = str(scdocument["id"])
-        document["attachments"] = get_doc_link(
-            sc, scdocument["attachments"]["files"]["file"][0]["download_path"]
-        )
 
         filename = link.split("/")[-1]
         mongo_document = create.createDocumentFile(
@@ -380,6 +379,29 @@ def create_schoology_course():
                 "imported_id": document["imported_id"],
             }
         )
+        from pathlib import Path
+
+        from app.static.python.cdn.utils import os, upload_file
+        from app.static.python.mongodb import create
+
+        current_dir = Path(__file__)
+        root_path = [p for p in current_dir.parents if p.parts[-1] == "ProjectNebulus"][
+            0
+        ]
+        print(root_path)
+        file_path = os.path.join(
+            f"{root_path}/app/static/",
+            str(mongo_document.pk) + "." + filename.split(".")[-1],
+        )
+        import urllib
+
+        testfile = urllib.URLopener()
+        document["attachments"] = get_doc_link(
+            sc, scdocument["attachments"]["files"]["file"][0]["download_path"]
+        )
+        testfile.retrieve(document["attachments"], file_path)
+        upload_file(file_path, mongo_document.pk, "Documents")
+        os.remove(file_path)
 
         print(document)
         documents.append(document)

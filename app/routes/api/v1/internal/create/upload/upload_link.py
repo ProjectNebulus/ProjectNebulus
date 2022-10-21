@@ -1,11 +1,11 @@
 from flask import Flask, request
 
 from app.static.python.mongodb import create
-from .. import internal
+from ... import internal
 
 UPLOAD_FOLDER = "app/static/"
 UPLOAD_FOLDER_CDN = "../"
-ALLOWED_EXTENSIONS = {"txt", "py", "java", "js", "gif", "jpeg"}
+ALLOWED_EXTENSIONS = {"txt", "py", "png", "java", "js", "gif", "jpeg"}
 
 app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
