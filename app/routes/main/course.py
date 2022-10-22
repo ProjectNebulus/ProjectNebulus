@@ -42,7 +42,7 @@ def course_page(page, **kwargs):
         session["recent"] = course_id
 
         if page == "course":
-            page = "documents"
+            page = "home"
 
         iframe_src += page + "?iframe=true"
         page = "course"

@@ -11,7 +11,7 @@ window.onload = function () {
 
     const path = window.location.pathname.split('/');
     let saveData = path.reverse()[0];
-    if (path.length < 4) saveData = 'documents';
+    if (path.length < 4) saveData = 'home';
 
     pageTitle.innerHTML = saveData[0].toUpperCase() + saveData.substring(1);
 

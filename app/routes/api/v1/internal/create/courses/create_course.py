@@ -43,57 +43,6 @@ def credentials_to_dict(credentials):
     }
 
 
-def getGclassroomcourse(cid):
-    # Load credentials from the session.
-    credentials = google.oauth2.credentials.Credentials(**session["credentials"])
-
-    service = build("classroom", "v1", credentials=credentials)
-
-    # Call the Classroom API
-
-    results = service.courses().get(id=cid).execute()
-
-    return results
-
-
-def getAssignments(id):
-    credentials = google.oauth2.credentials.Credentials(**session["credentials"])
-
-    service = build("classroom", "v1", credentials=credentials)
-
-    return str(service.courses().courseWork().list(link=id).execute())
-
-
-def getTopics(id):
-    credentials = google.oauth2.credentials.Credentials(**session["credentials"])
-
-    service = build("classroom", "v1", credentials=credentials)
-
-    return str(service.courses().topics().list(link=id).execute())
-
-
-def getAnnouncements(id):
-    pass
-
-
-def getStudents(id):
-    pass
-
-
-def getPFP(courseid):
-    credentials = google.oauth2.credentials.Credentials(**session["credentials"])
-
-    service = build("classroom", "v1", credentials=credentials)
-
-    rawteachers = (
-        service.courses().teachers().list(pageSize=10, courseId=courseid).execute()
-    )
-    try:
-        pfp = str(rawteachers["teachers"][0]["profile"]["photoUrl"])
-        if "http://" not in pfp and "https://" not in pfp:
-            return pfp.replace("//", "https://")
-    except:
-        return None
 
 
 @internal.route("/create/course/google", methods=["POST"])
@@ -109,7 +58,10 @@ def create_google_course():
     index = link.index("?id=") + 4
     link = link[index: len(link)]
     # print(f"I'm at Google Classroom Creation. The ID is: {link}")
-    course = getGclassroomcourse(link)
+    credentials = google.oauth2.credentials.Credentials(**session["credentials"])
+    service = build("classroom", "v1", credentials=credentials)
+    course = service.courses().get(id=link).execute()
+
     createcourse = {
         "name": f'{course["name"]}',
         "description": course["alternateLink"],
@@ -119,11 +71,47 @@ def create_google_course():
         "type": "Imported",
     }
     course_obj = create.create_course(createcourse)
-    image = getPFP(course["id"])
+    image = None
+    raw_teachers = (
+        service.courses().teachers().list(pageSize=10, courseId=course["id"]).execute()
+    )
+    try:
+        image = str(raw_teachers["teachers"][0]["profile"]["photoUrl"])
+        if "http://" not in image and "https://" not in image:
+            image = image.replace("//", "https://")
+    except:
+        return None
     if image:
         create.createAvatar(
             {"avatar_url": image, "parent": "Course", "parent_id": course_obj.id, }
         )
+    assignments = service.courses().courseWork().list(courseId=course["id"]).execute()["courseWork"]
+    for assignment in assignments:
+        theassignment = assignment.__dict__
+        create.createAssignment(
+            {
+
+                "title": theassignment["title"],
+                "course": str(course_obj.id),
+                "points": float(theassignment["maxPoints"]),
+                "imported_from": "Google Classroom",
+                "imported_id": str(theassignment["id"]),
+            }
+        )
+    # topics = service.courses().topics().list(courseId=course["id"]).execute()
+    announcements = service.courses().announcements().list(courseId=course["id"]).execute()["announcements"]
+    for announcement in announcements:
+        create.createAnnouncement(
+            {
+                "content": announcement["text"],
+                "course": str(course_obj.id),
+                # "author": announcement["user_name"],
+                "imported_from": "Google Classroom",
+                "date": datetime.fromtimestamp(announcement["creationtime"]),
+                # "author_pic": author["picture_url"],
+            }
+        )
+
     return "success"
 
 
