@@ -19,17 +19,16 @@ CLIENT_SECRETS_FILE = "app/static/python/credentials.json"
 SCOPES = [
     "https://www.googleapis.com/auth/classroom.courses.readonly",
     "https://www.googleapis.com/auth/classroom.rosters.readonly",
-    "https://www.googleapis.com/auth/classroom.coursework.me",
     "https://www.googleapis.com/auth/classroom.coursework.me.readonly",
-    "https://www.googleapis.com/auth/classroom.coursework.students",
     "https://www.googleapis.com/auth/classroom.coursework.students.readonly",
-    "https://www.googleapis.com/auth/classroom.announcements",
     "https://www.googleapis.com/auth/classroom.announcements.readonly",
     "https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly",
     "https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly",
     "https://www.googleapis.com/auth/classroom.push-notifications",
     "https://www.googleapis.com/auth/userinfo.profile",
     "https://www.googleapis.com/auth/classroom.profile.photos",
+    "https://www.googleapis.com/auth/classroom.topics.readonly",
+    "https://www.googleapis.com/auth/classroom.student-submissions.me.readonly"
 ]
 API_SERVICE_NAME = "classroom"
 API_VERSION = "v1"

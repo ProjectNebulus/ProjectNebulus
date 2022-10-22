@@ -85,25 +85,14 @@ def create_google_course():
         create.createAvatar(
             {"avatar_url": image, "parent": "Course", "parent_id": course_obj.id, }
         )
-    assignments = service.courses().courseWork().list(courseId=course["id"]).execute()["courseWork"]
-    for assignment in assignments:
-        theassignment = assignment
-        create.createAssignment(
-            {
-
-                "title": theassignment["title"],
-                "course": str(course_obj.id),
-                "points": float(theassignment["maxPoints"]),
-                "imported_from": "Google Classroom",
-                "imported_id": str(theassignment["id"]),
-            }
-        )
-    # topics = service.courses().topics().list(courseId=course["id"]).execute()
-    announcements = service.courses().announcements().list(courseId=course["id"]).execute()["announcements"]
+    try:
+        announcements = service.courses().announcements().list(courseId=course["id"]).execute()["announcements"]
+    except:
+        announcements = []
     for announcement in announcements:
-        user = service.userProfiles().get(userId='117531006911610488406').execute()
+        user = service.userProfiles().get(userId=announcement["creatorUserId"]).execute()
         name = user["name"]["fullName"]
-        photo = user["photoUrl"]
+        photo = user["photoUrl"].replace("//", "https://")
         if ("https://" not in photo and "http://" not in photo):
             photo.replace("//", "https://")
         create.createAnnouncement(
@@ -117,6 +106,23 @@ def create_google_course():
                 "author_pic": photo
             }
         )
+    try:
+        assignments = service.courses().courseWork().list(courseId=course["id"]).execute()["courseWork"]
+    except:
+        assignments = None
+    for assignment in assignments:
+        theassignment = assignment
+        create.createAssignment(
+            {
+
+                "title": theassignment["title"],
+                "course": str(course_obj.id),
+                "points": float(theassignment["maxPoints"]),
+                "imported_from": "Google Classroom",
+                "imported_id": str(theassignment["id"]),
+            }
+        )
+    # topics = service.courses().topics().list(courseId=course["id"]).execute()
 
     return "success"
 
