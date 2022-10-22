@@ -87,7 +87,7 @@ def create_google_course():
         )
     assignments = service.courses().courseWork().list(courseId=course["id"]).execute()["courseWork"]
     for assignment in assignments:
-        theassignment = assignment.__dict__
+        theassignment = assignment
         create.createAssignment(
             {
 
@@ -101,14 +101,20 @@ def create_google_course():
     # topics = service.courses().topics().list(courseId=course["id"]).execute()
     announcements = service.courses().announcements().list(courseId=course["id"]).execute()["announcements"]
     for announcement in announcements:
+        user = service.userProfiles().get(userId='117531006911610488406').execute()
+        name = user["name"]["fullName"]
+        photo = user["photoUrl"]
+        if ("https://" not in photo and "http://" not in photo):
+            photo.replace("//", "https://")
         create.createAnnouncement(
             {
                 "content": announcement["text"],
+                "title": "",
+                "author": name,
                 "course": str(course_obj.id),
-                # "author": announcement["user_name"],
                 "imported_from": "Google Classroom",
-                "date": datetime.fromtimestamp(announcement["creationtime"]),
-                # "author_pic": author["picture_url"],
+                "date": datetime.strptime(announcement["creationTime"], "%Y-%m-%dT%H:%M:%S.%fZ"),
+                "author_pic": photo
             }
         )
 
