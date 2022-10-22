@@ -312,6 +312,36 @@ function createSchoologyCourse() {
     );
 }
 
+function createGoogleCourse() {
+    const input = document.getElementById('google-course-id');
+    const teacher = document.getElementById('google-course-teacher');
+
+    const xhttp = new XMLHttpRequest();
+    xhttp.open('POST', '/api/v1/internal/create/course/google', true);
+    xhttp.setRequestHeader('Content-type', 'application/json');
+    xhttp.send(
+        JSON.stringify({
+            link: input.value,
+            teacher: teacher.value,
+        })
+    );
+}
+
+function createCanvasCourse() {
+    const input = document.getElementById('canvas-course-id');
+    const teacher = document.getElementById('canvas-course-teacher');
+
+    const xhttp = new XMLHttpRequest();
+    xhttp.open('POST', '/api/v1/internal/create/course/canvas', true);
+    xhttp.setRequestHeader('Content-type', 'application/json');
+    xhttp.send(
+        JSON.stringify({
+            link: input.value,
+            teacher: teacher.value,
+        })
+    );
+}
+
 function importSchoologyAll() {
     const xhttp = new XMLHttpRequest();
     xhttp.open('POST', '/api/v1/internal/create/course/schoology/all', true);

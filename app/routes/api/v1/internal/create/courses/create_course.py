@@ -159,24 +159,47 @@ def create_canvas_course():
             {"avatar_url": image, "parent": "Course", "parent_id": course_obj.id, }
         )
 
-    announcements = canvas.get_announcements(context_codes=[course.id])
+    announcements = list(canvas.get_announcements(context_codes=[course]))
 
     for announcement in announcements:
         create.createAnnouncement(
             {
                 "content": announcement["message"],
                 "course": str(course_obj.id),
-                # "id": str(update["id"]),
                 "author": announcement["user_name"],
-                # "author_pic": author["picture_url"],
-                # "likes": update["likes"],
-                # "comment_number": update["num_comments"],
-                "imported_from": "Schoology",
+                "imported_from": "Canvas",
                 "date": datetime.fromtimestamp(announcement["posted_at"]),
                 "title": announcement["title"],
-                # "author_color": color,
-                # "author_email": author["primary_email"],
-                # "author_school": school,
+            }
+        )
+
+    assignments = list(course.get_assignments())
+    for assignment in assignments:
+        theassignment = assignment.__dict__
+        create.createAssignment(
+            {
+
+                "title": theassignment["name"],
+                "description": theassignment["description"],
+                "due": theassignment["due_at"],
+                "course": str(course_obj.id),
+                "points": float(theassignment["points_possible"]),
+                "imported_from": "Canvas",
+                "imported_id": str(theassignment["id"]),
+            }
+        )
+
+    documents = list(course.get_files())
+    for document in documents:
+        thedocument = document.__dict__
+        mongo_document = create.createDocumentFile(
+            {
+                "name": thedocument["display_name"],
+                "course": course_obj.id,
+                "file_ending": thedocument["display_name"].split(".")[-1],
+                "imported_from": "Canvas",
+                "imported_id": str(thedocument["id"]),
+                "url": thedocument["url"],
             }
         )
 

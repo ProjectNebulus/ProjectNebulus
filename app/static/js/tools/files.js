@@ -36,7 +36,7 @@ let totalPages;
 let currentPageNum = 1;
 
 // events
-function startFile(file, link, isPDF) {
+function startFile(file, link) {
     if (override) {
         override = false;
         return;
@@ -54,6 +54,11 @@ function startFile(file, link, isPDF) {
     </div>
 </li>
             `;
+    let isDoc = false;
+    let extension = link.split(".");
+    extension = extension[extension.length].toLowerCase();
+    if (extension.includes("pdf")) isPDF = true;
+    if (extension.includes("doc") || extension.includes("docx")) isDoc = true;
     if (isPDF) {
         document.getElementById('pdf-viewer').style.display = 'block';
 
@@ -62,6 +67,10 @@ function startFile(file, link, isPDF) {
         } catch (e) {
             document.getElementById('loading').innerHTML = 'Error: ' + e;
         }
+    } else if (isDoc) {
+        document.getElementById('office-viewer').style.display = 'block';
+
+        document.getElementById("officeviewlink").src = "https://docs.google.com/gview?url=" + link;
     } else {
         document.getElementById('code-viewer').style.display = 'block';
         const request = new XMLHttpRequest();
@@ -385,7 +394,7 @@ function addHTML() {
     </div>
 
     <div id="office-viewer" style="display:none; ">
-        <iframe src="https://docs.google.com/gview?url=http://writing.engr.psu.edu/workbooks/formal_report_template.doc&embedded=true"
+        <iframe id="officeviewlink" src="https://docs.google.com/gview?url=http://writing.engr.psu.edu/workbooks/formal_report_template.doc&embedded=true"
                 width='95%' height='100%'></iframe>
         <iframe src='https://view.officeapps.live.com/op/embed.aspx?src=http://writing.engr.psu.edu/workbooks/formal_report_template.doc'
                 width='95%' height='100%' frameborder='0'>
