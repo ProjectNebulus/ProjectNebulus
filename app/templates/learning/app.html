@@ -75,6 +75,9 @@
                                                  {% endif %}"
                                                  src="{{ a.author_pic }}"
                                                  alt="{{ a.author }}'s profile picture">
+                                            <img class="hidden"
+                                                 image-element2
+                                                 src="{{ a.course.avatar.avatar_url }}">
                                             <br>
                                             <div class="flex flex-col text-xs text-gray-700 dark:text-gray-400 pl-2">
                                                 {% if a.title == "" %}
@@ -101,7 +104,7 @@
                                         <div class="flex items-center mb-3">
                                             <div class="text-sm text-gray-900 dark:text-white font-normal">
                                                 <div class="text-sm text-gray-900 dark:text-white font-normal line-clamp-5"
-                                                     content-element>{{ fmt(a.content) }}</div>
+                                                     content-element>{{ fmt(a.content) | safe }}</div>
                                             </div>
                                         </div>
                                         <time class="text-xs font-medium text-blue-600 dark:text-blue-500">
@@ -303,6 +306,11 @@
                                          image-element
                                          hidden
                                          class="hidden">
+                                    <img src="{% if "teacherAccount" in a.course %} {{ a.course.avatar.avatar_url }} {% else %} https://app.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg {% endif %}"
+                                         image-element2
+                                         hidden
+                                         class="hidden">
+
                                     <div class="mr-4 material-icons ml-2 text-black dark:text-white"
                                          style="transform: translate(0, 50%) scale(1.75)">
                                         assignment
@@ -388,11 +396,16 @@
     display: inline-block;
 ">assignment</i>Comp Practice Test 2 (Participation)</h3>
                         <div class="flex mt-2">
-                            <img data-dropdown-toggle="userDropdown-0_0" id="avatar0_0"
-                                 data-dropdown-placement="bottom-start" class="mr-2 inline-block rounded-full mt-2 rounded-full
-      shadow-lg dark:bg-gray-900 dark:hover:bg-gray-800 w-8 h-8"
-                                 src="https://app.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg"
-                                 alt="Ms. Nagami's profile picture">
+                            <img class="inline-block mt-2 rounded-lg dark:bg-gray-900 w-12 h-12"
+                                 src="https://asset-cdn.schoology.com/system/files/imagecache/profile_reg/pictures/picture-a4e0cd7501f839a1fa616bc07887b839_5f2c7354873ce.png"
+                                 alt="
+                                                        Ms. Nagami
+                                                    's profile picture" style="
+    margin-right: 10px;
+">
+                            <img src="https://api.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg"
+                                 style="margin-left: -30px;margin-top: 40px;margin-right: 10px;"
+                                 class="inline-block w-6 h-6 rounded-md">
 
                             <div class="flex flex-col text-xs">
                                 <h4 class="text-lg text-gray-900 dark:text-white truncate cursor-pointer hover:underline"
@@ -422,6 +435,12 @@
                 </div>
                 <!-- Modal body -->
                 <div class="p-6 space-y-6">
+                    <style>
+                        [title="Link"] {
+                            color: deepskyblue !important;
+                            text-decoration: underline !important;
+                        }
+                    </style>
                     <h1 class="text-white font-bold uppercase" id="descriptionTitle">Description</h1>
                     <div style="max-height: 15rem" class="overflow-auto">
                         <div id="announcementBody" class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
@@ -441,7 +460,8 @@
                     </div>
                     <div id="submissionsBox">
                         <h1 class="text-white font-bold uppercase">Submission</h1>
-                        <h1 class="text-gray-500">Go to the "Physics 8" course and add extensions for more submission
+                        <h1 class="text-gray-500">Go to the "<span id="courseNameForSubmission"></span>" course and add
+                            extensions for more submission
                             methods!</h1>
                         <div class="bg-gray-800 p-3 rounded-lg" style="
     overflow-y: scroll;

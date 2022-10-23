@@ -243,7 +243,7 @@ def sort_course_events(course_id: int, show_events=True, load_start=0, max_days=
     return [announcements, dates]
 
 
-def sort_user_events(user_id: str, show_events=True, load_start=0, max_days=8, max_events=15):
+def sort_user_events(user_id: str, show_events=True, load_start=0, max_days=25, max_events=15):
     courses = get_user_courses(user_id)
     events = Event.objects(course__in=courses)
     announcements = Announcement.objects(course__in=courses)
