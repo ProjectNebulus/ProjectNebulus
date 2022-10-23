@@ -26,12 +26,13 @@ for (const button of document.getElementsByClassName('expand')) {
             parent.querySelector('[course-name-element]').innerHTML,
             parent.querySelector('[post-time-element]').innerHTML,
             parent.querySelector('[due-time-element]').innerHTML,
-            parent.querySelector('[type-element]').innerHTML
+            parent.querySelector('[type-element]').innerHTML,
+            parent.querySelector('[image-element2]').src
         )
     );
 }
 
-function openDetailsModal(content, title, author, pic, course, postTime, dueTime, type) {
+function openDetailsModal(content, title, author, pic, course, postTime, dueTime, type, coursepic) {
     if (type === "Announcement") {
         document.getElementById("submissionsBox").style.display = "none";
         document.getElementById("descriptionTitle").innerHTML = "Message";
@@ -49,9 +50,12 @@ function openDetailsModal(content, title, author, pic, course, postTime, dueTime
     document.getElementById('header').innerHTML = `
 <h3 class="text-xl font-semibold text-gray-900 dark:text-white truncate h-full">${title}</h3>
 <div class="flex mt-2">
-    <img data-dropdown-toggle="userDropdown-0_0" id="avatar0_0" data-dropdown-placement="bottom-start" class="mr-2 inline-block rounded-full ring-2 ring-gray-300 dark:ring-gray-500 cursor-pointer mt-2 rounded-full
-      shadow-lg dark:bg-gray-900 dark:hover:bg-gray-800 w-8 h-8" src="${pic}" alt="${author}'s profile picture">
-    
+     <img class="inline-block mt-2 rounded-lg dark:bg-gray-900 w-12 h-12" src="${pic}" alt="
+                                                        ${author}'s profile picture" style="
+    margin-right: 10px;
+">
+                            <img src="${coursepic}" style="margin-left: -30px;margin-top: 40px;margin-right: 10px;" class="inline-block w-6 h-6 rounded-md">
+
     <div class="flex flex-col text-xs">
         <h4 class="text-lg text-gray-900 dark:text-white truncate cursor-pointer hover:underline" data-dropdown-toggle="userDropdown-0_0">
             ${author}
@@ -63,6 +67,8 @@ function openDetailsModal(content, title, author, pic, course, postTime, dueTime
 
     document.getElementById('dueTime').innerHTML = dueTime;
     document.getElementById('announcementBody').innerHTML = content;
+    document.getElementById("announcementBody").innerHTML = document.getElementById("announcementBody").innerText;
+    document.getElementById("courseNameForSubmission").innerText = course;
     openModal("modal");
 }
 

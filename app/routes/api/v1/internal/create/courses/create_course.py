@@ -214,6 +214,91 @@ def create_canvas_course():
     return "success"
 
 
+@internal.route("/sync/course/schoology", methods=["GET", "POST"])
+def sync_schoology_course():
+    from app.static.python.mongodb import create, read, update
+    post_data = request.json
+    if request.method == "GET":
+        post_data = request.args
+    course_id = post_data["course_id"]
+    course = list(read.getCourse(course_id))[0]
+    print("Currently syncing " + course.name)
+    schoology_id = course.imported_id
+    schoology = read.getSchoology(id=session["id"])
+    if len(schoology) == 0:
+        return "1"
+    schoology = schoology[0]
+    key = schoology.apikey
+    secret = schoology.apisecret
+    auth = schoolopy.Auth(
+        key,
+        secret,
+        domain=schoology.schoologyDomain,
+        three_legged=True,
+        request_token=schoology.Schoology_request_token,
+        request_token_secret=schoology.Schoology_request_secret,
+        access_token=schoology.Schoology_access_token,
+        access_token_secret=schoology.Schoology_access_secret,
+    )
+    auth.request_authorization(
+        callback_url=(request.url_root + "/api/v1/internal/oauth/schoology/callback")
+    )
+    while not auth.authorized:
+        auth.authorize()
+    sc = schoolopy.Schoology(auth)
+    sc.limit = 10000
+
+    raw_updates = sc.get_section_updates(schoology_id)
+    nebulus_announcements = course.announcements
+    for raw_update in raw_updates:
+        author = sc.get_user(raw_update["uid"])
+        color = getColor(author["picture_url"])
+        school = sc.get_school(author["school_id"])["title"]
+        found = False
+        for nebulus_announcement in nebulus_announcements:
+            if (int(nebulus_announcement.imported_id) == int(raw_update["id"])):
+                found = True
+                data = {
+                    "content": raw_update["body"],
+                    "course": str(course.id),
+                    # "id": str(update["id"]),
+                    "author": author["name_display"],
+                    "author_pic": author["picture_url"],
+                    "likes": raw_update["likes"],
+                    "comment_number": raw_update["num_comments"],
+                    "imported_from": "Schoology",
+                    "date": datetime.fromtimestamp(int(raw_update["last_updated"])),
+                    "title": "",
+                    "author_color": color,
+                    "author_email": author["primary_email"],
+                    "author_school": school,
+                    "imported_id": str(raw_update["id"]),
+                }
+                update.update_announcement(int(nebulus_announcement.pk), data)
+                break
+        if not found:
+            create.createAnnouncement(
+                {
+                    "content": raw_update["body"],
+                    "course": str(course.id),
+                    # "id": str(update["id"]),
+                    "author": author["name_display"],
+                    "author_pic": author["picture_url"],
+                    "likes": raw_update["likes"],
+                    "comment_number": raw_update["num_comments"],
+                    "imported_from": "Schoology",
+                    "date": datetime.fromtimestamp(int(raw_update["last_updated"])),
+                    "title": "",
+                    "author_color": color,
+                    "author_email": author["primary_email"],
+                    "author_school": school,
+                    "imported_id": str(raw_update["id"]),
+                }
+            )
+
+    return "success"
+
+
 @internal.route("/create/course/schoology", methods=["GET", "POST"])
 def create_schoology_course():
     post_data = request.json

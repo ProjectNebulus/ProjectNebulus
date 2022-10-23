@@ -10,6 +10,28 @@
             {{ course.name }}
         </span>
         <ul class="space-y-2 cursor-pointer">
+            {% if course.imported_from != "Nebulus" %}
+                <li>
+                    <a onclick="syncLMS()"
+                       class="flex items-center p-2 text-base text-gray-900 rounded-lg dark:text-white text-black hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <img src="/static/images/logos/{{ course.imported_from | lower | replace("google_", "") }}.png"
+                             style=" width: 25px; margin-left: 8px; display: inline-block; vertical-align: middle; ">
+                        <span class="ml-3">LMS Sync</span>
+                    </a>
+                </li>
+                <script>
+                    function syncLMS() {
+                        const xhttp = new XMLHttpRequest();
+                        xhttp.open('POST', '/api/v1/internal/sync/course/schoology', true);
+                        xhttp.setRequestHeader('Content-type', 'application/json');
+                        xhttp.send(
+                            JSON.stringify({
+                                course_id: '{{ course_id }}'
+                            })
+                        );
+                    }
+                </script>
+            {% endif %}
             <li>
                 <a href="/course/{{ course_id }}/home"
                    target="frame"
