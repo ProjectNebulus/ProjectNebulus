@@ -49,12 +49,11 @@ def createPlanner(_id: str, planner: dict):
 
 
 def update_announcement(_id: str, data: dict):
-    from app.static.python.mongodb.read import getCourseDocument, getAnnouncementDocument
+    from app.static.python.mongodb.read import getAnnouncementDocument
 
-    course = getCourseDocument(_id)
-    if not course:
+    theannouncement = getAnnouncementDocument(str(_id))
+    if not theannouncement:
         raise KeyError("Course not found")
-    theannouncement = getAnnouncementDocument(_id)
 
     theannouncement = Announcement(**data)
 
