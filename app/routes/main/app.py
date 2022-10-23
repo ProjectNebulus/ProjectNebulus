@@ -58,13 +58,14 @@ def getGclassroomcourses():
 
 @main_blueprint.route("/import-course", methods=["POST"])
 def lms_modal():
-    scCourses, gcourses, canvascourses = get_courses()
+    scCourses, gcourses, canvascourses, scGroups = get_courses()
 
     return render_template(
         "learning/import-course.html",
         gcourses=gcourses,
         scCourses=scCourses,
         canvascourses=canvascourses,
+        scGroups=scGroups
     )
 
 
@@ -102,6 +103,7 @@ def app():
 def courses():
     user_acc = read.find_user(id=session["id"])
     user_courses = read.get_user_courses(session["id"])
+    scCourses, gcourses, canvascourses, scGroups = get_courses()
 
     return render_template(
         "learning/courses.html",
@@ -113,6 +115,10 @@ def courses():
         read=read,
         page="Nebulus - Courses",
         translate=getText,
+        gcourses=gcourses,
+        scCourses=scCourses,
+        scGroups=scGroups,
+        canvascourses=canvascourses,
     )
 
 
@@ -163,6 +169,7 @@ def get_courses():
         canvas_courses = []
 
     scCourses = []
+    scGroups = []
     import schoolopy
 
     try:
@@ -225,6 +232,17 @@ def get_courses():
             scSchool = sc.get_school(scCourses[0]["school_id"])
             scCourses.append(scSchool)
 
+            scGroups = list(sc.get_user_groups(user_id=sc.get_me().id))
+            for i in range(0, len(scGroups)):
+                scGroups[i] = dict(scGroups[i])
+                scGroups[i]["link"] = (
+                        schoology.schoologyDomain
+                        + "group/"
+                        + scCourses[i]["id"]
+                )
+            scSchool = sc.get_school(scCourses[0]["school_id"])
+            scGroups.append(scSchool)
+
         scCourses = sorted(
             scCourses[:-1], key=lambda c: (-int(c["active"]), c["course_title"])
         )
@@ -235,13 +253,14 @@ def get_courses():
         print(e)
         scCourses = []
 
-    return scCourses, gcourses, canvas_courses
+    return scCourses, gcourses, canvas_courses, scGroups
 
 
 def fmt(content: str) -> str:
     output = ""
     for line in content.strip().split("\n"):
-        output += line
-        output += "<br>"
-
+        if line == "":
+            output += "<br>"
+        else:
+            output += "<p>" + line + "</p>"
     return Markup(output)

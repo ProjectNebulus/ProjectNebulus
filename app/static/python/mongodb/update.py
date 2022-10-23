@@ -9,6 +9,7 @@ from ..classes import (
     NebulusDocument,
     Planner,
     Schoology,
+    Announcement,
     User,
 )
 from ..classes.Notepad import Notepad
@@ -44,6 +45,20 @@ def createPlanner(_id: str, planner: dict):
     planner = Planner(**planner)
     user.planner = planner
     user.save(clean=False)
+    return "0"
+
+
+def update_announcement(_id: str, data: dict):
+    from app.static.python.mongodb.read import getCourseDocument, getAnnouncementDocument
+
+    course = getCourseDocument(_id)
+    if not course:
+        raise KeyError("Course not found")
+    theannouncement = getAnnouncementDocument(_id)
+
+    theannouncement = Announcement(**data)
+
+    theannouncement.save(clean=False)
     return "0"
 
 

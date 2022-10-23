@@ -381,6 +381,20 @@ def getCourseDocument(document_id: str):
     return doc
 
 
+def getCourse(document_id: str):
+    course = Course.objects(pk=document_id)
+    if not course:
+        raise KeyError("Invalid Document ID")
+    return course
+
+
+def getAnnouncementDocument(document_id: str):
+    obj = Announcement.objects(pk=document_id)
+    if not obj:
+        raise KeyError("Invalid Document ID")
+    return obj
+
+
 def search(keyword: str, username: str):
     user = User.objects(username=username).first()
     users = search_user(keyword)

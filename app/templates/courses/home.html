@@ -23,7 +23,7 @@
                                     ">
                 <span style=" display: inline-block; vertical-align: middle; ">
 {{ course.name }}
-<img src="/static/images/logos/{{ course.imported_from | lower }}.png"
+<img src="/static/images/logos/{{ course.imported_from | lower | replace("google_", "") }}.png"
      style=" width: 25px; margin-left: 8px; display: inline-block; vertical-align: middle; ">
 <br>
 <span class="text-gray-500 text-sm">{{ course.teacher }}・{{ course.template }}・Imported from {{ course.imported_from }}</span><br>
