@@ -340,15 +340,13 @@ function createCanvasCourse() {
             teacher: teacher.value,
         })
     );
+    xhttp.addEventListener("load", () => window.location.href = xhttp.response);
 }
 
 function importSchoologyAll() {
     const xhttp = new XMLHttpRequest();
     xhttp.open('POST', '/api/v1/internal/create/course/schoology/all', true);
     xhttp.setRequestHeader('Content-type', 'application/json');
-    xhttp.send(
-        JSON.stringify({})
-    );
 }
 
 function importSchoology() {

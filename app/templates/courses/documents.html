@@ -33,46 +33,44 @@
         </ol>
     </nav>
     <div style="margin-left: 10px; width: 98%; float: left;" id="documentPage">
-        <div style="width:70%;float:left;">
-            {% if course.documents|length == 0 and course.folders|length == 0 %}
-                <h1 class="mx-4 my-4 text-xl text-black dark:text-white">You have no documents or folders! Try creating
-                    one!</h1>
-            {% endif %}
-            {% for folder in course.folders %}
-                <br>
-                <a class="truncate text-ellipsis overflow-hidden block max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <p class="font-normal text-gray-700 dark:text-gray-400 whitespace-nowrap">
-                        <svg class="w-6 h-6 inline-block mr-2 -mt-1.5"
-                             fill="none"
-                             stroke="{{ folder.color }}"
-                             viewBox="0 0 24 24"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z">
-                            </path>
-                        </svg>
-                        <span>{{ folder.name }}</span>
-                    </p>
-                </a>
-            {% endfor %}
+        {% if course.documents|length == 0 and course.folders|length == 0 %}
+            <h1 class="mx-4 my-4 text-xl text-black dark:text-white">
+                You have no documents or folders! Try creating one!</h1>
+        {% endif %}
+        {% for folder in course.folders %}
             <br>
-            {% for document in course.documents %}
-                <div onclick="startFile('{{ document.name }}', siteName + '/getResource/{{ course.id }}/{{ document.id }}'"
-                     class="editable p-6 mb-8 bg-gray-200/50 rounded-lg cursor-pointer border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800/50 dark:border-gray-700 dark:hover:bg-gray-700 relative"
-                     style="width: min-content; max-width: 90%">
-                    <div class="edit-controls absolute flex bg-gray-500 dark:bg-gray-800 material-icons rounded-lg text-gray-200 dark:text-gray-500 overflow-hidden shadow"
-                         style="top: -0.5rem; right: -1rem"
-                         onclick="override=true">
-                        <span>edit</span>
-                        <span onclick="deleteMaterial(this)">delete</span>
-                    </div>
-                    <div class="text-sm text-gray-700 dark:text-gray-400 whitespace-nowrap mr-2 flex">
-                        <span class="mr-3 -mt-1 material-icons">description</span>
-                        <span class="mr-8 truncate w-full">{{ document.name }}</span>
-                    </div>
+            <a class="truncate text-ellipsis overflow-hidden block max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                <p class="font-normal text-gray-700 dark:text-gray-400 whitespace-nowrap">
+                    <svg class="w-6 h-6 inline-block mr-2 -mt-1.5"
+                         fill="none"
+                         stroke="{{ folder.color }}"
+                         viewBox="0 0 24 24"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z">
+                        </path>
+                    </svg>
+                    <span>{{ folder.name }}</span>
+                </p>
+            </a>
+        {% endfor %}
+        <br>
+        {% for document in course.documents %}
+            <div onclick="startFile('{{ document.name }}', siteName + '/getResource/{{ course.id }}/{{ document.id }}')"
+                 class="editable p-6 mb-8 bg-gray-200/50 rounded-lg cursor-pointer border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800/50 dark:border-gray-700 dark:hover:bg-gray-700 relative"
+                 style="width: min-content; max-width: 90%">
+                <div class="edit-controls absolute flex bg-gray-500 dark:bg-gray-800 material-icons rounded-lg text-gray-200 dark:text-gray-500 overflow-hidden shadow"
+                     style="top: -0.5rem; right: -1rem"
+                     onclick="override=true">
+                    <span>edit</span>
+                    <span onclick="deleteMaterial(this)">delete</span>
                 </div>
-            {% endfor %}
-        </div>
+                <div class="text-sm text-gray-700 dark:text-gray-400 whitespace-nowrap mr-2 flex">
+                    <span class="mr-3 -mt-1 material-icons">description</span>
+                    <span class="mr-8 truncate w-full">{{ document.name }}</span>
+                </div>
+            </div>
+        {% endfor %}
     </div>
     <script src="/static/js/tools/files.js"></script>
 {% endblock %}

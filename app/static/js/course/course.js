@@ -2,7 +2,7 @@ let actions, pageTitle, createButton;
 window.onload = function () {
     actions = document.getElementsByClassName('link');
     pageTitle = document.getElementById('page-title');
-    createButton = document.getElementById('create');
+    createButton = document.getElementById('create-resource');
     createButton.style.transition = "0.5s";
 
     const navImg = document.getElementById("navigationImage");
@@ -39,7 +39,24 @@ window.onload = function () {
     $('#search').click(() => openModal('searchModal'));
 
     $('#upload-file').click(function () {
-        uploadFile();
+        alert('Uploaded');
+        var formData = new FormData();
+        let fileupload = document.getElementById('file');
+        formData.append('file', fileupload.files[0]);
+        formData.append('course', document.getElementById('course_id').innerText);
+        formData.append('folder', '0');
+        let request = $.ajax({
+            type: 'POST',
+            url: '/api/v1/internal/upload_file',
+            processData: false,
+            contentType: false,
+            data: formData
+        });
+
+        request.done(function (data) {
+            alert('Uploaded :)');
+            alert(data);
+        });
     });
 };
 

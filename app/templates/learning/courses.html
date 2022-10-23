@@ -131,25 +131,19 @@
                                         backdrop-filter: blur(30px);">
                                 <div class="text-left">
                                     <div class="p-4 flex">
-                                    {%  if course.avatar == None %}
-{#                                        <div class="object-cover inline-block rounded-lg mr-4 bg-gray-800"#}
-{#                                             style="width: 50px; height: 50px"></div>#}
-                                    {% else %}
-                                        <img src="{{ course.avatar.avatar_url }}" onload="if (!IsImageOk(this)) this.style.display = 'none';"
-                                             alt="Image for {{ course.name }}"
-                                             class="object-cover inline-block rounded-lg mr-4"
-                                             style="width: 50px; height: 50px">
-                                        <script>
-                                            function IsImageOk(img) {
-                                                if (!img.complete) {
-                                                    return false;
+                                        {% if course.avatar != None %}
+                                            <img src="{{ course.avatar.avatar_url }}"
+                                                 onload="if (!IsImageOk(this)) this.style.display = 'none';"
+                                                 alt="Image for {{ course.name }}"
+                                                 class="object-cover inline-block rounded-lg mr-4"
+                                                 style="width: 50px; height: 50px">
+                                            <script>
+                                                function IsImageOk(img) {
+                                                    if (!img.complete) return false;
+                                                    return !(img.naturalWidth === 0 || img.naturalHeight === 0);
                                                 }
-                                                if (img.naturalWidth === 0 || img.naturalHeight === 0) {
-                                                    return false;
-                                                }
-                                                return true;
-                                        </script>
-                                    {% endif %}
+                                            </script>
+                                        {% endif %}
                                         <div class="-mt-1">
                                             <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white truncate">
                                                 {% if course.name|length <= 16 %}

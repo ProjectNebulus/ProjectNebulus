@@ -12,38 +12,28 @@ from app.static.python.mongodb.read import (
     User,
     find_courses,
     find_user,
-    get_announcement,
-    getAssignment,
     getChat,
-    getEvent,
-    getFolder,
-    getGrades,
-    getCourseDocument,
 )
 
 
-# from .read import getChat, getGrades, getEvent, getFolder, getDocument, getAssignment, get_announcement, find_user, find_courses
-
-
-def delete_course(course_id: str) -> None:
+def delete_course(course) -> None:
     """
     Deletes a user from the database.
     """
-    course = find_courses(course_id)
     for announcement in course.announcements:
-        delete_announcement(announcement.id)
+        delete_announcement(announcement)
 
     for event in course.events:
-        delete_event(event.id)
+        delete_event(event)
 
     for folder in course.folders:
-        delete_folder(folder.id)
+        delete_folder(folder)
 
     for document in course.documents:
-        delete_document(document.id)
+        delete_document(document)
 
     for assignmnent in course.assignments:
-        delete_assignment(assignmnent.id)
+        delete_assignment(assignmnent)
 
     for i in course.authorizedUsers:
         if course in i.courses:
@@ -53,12 +43,10 @@ def delete_course(course_id: str) -> None:
     course.delete()
 
 
-def delete_announcement(announcement_id) -> None:
+def delete_announcement(announcement) -> None:
     """
     Deletes an announcement from the database.
     """
-
-    announcement = get_announcement(announcement_id)
     announcement.course.announcements.remove(announcement)
     announcement.course.save()
     announcement.delete()
@@ -68,7 +56,7 @@ def delete_user(user_id: str) -> None:
     """
     Deletes a user from the database.
     """
-    user = find_user(user_id)
+    user = find_user(id=user_id)
     for i in user.courses:
 
         if i.AuthorizedUsers.count() == 1:
@@ -78,11 +66,10 @@ def delete_user(user_id: str) -> None:
     user.delete()
 
 
-def delete_folder(folder_id: str) -> None:
+def delete_folder(folder) -> None:
     """
     Deletes a folder from the database.
     """
-    folder = getFolder(folder_id)
     if folder.course:
         folder.course.folders.remove(folder)
         folder.course.course.save()
@@ -92,31 +79,28 @@ def delete_folder(folder_id: str) -> None:
     folder.delete()
 
 
-def delete_assignment(assignment_id: str) -> None:
+def delete_assignment(assignment) -> None:
     """
     Deletes an assignment from the database.
     """
-    assignment = getAssignment(assignment_id)
-    assignment.course.events.remove(assignment)
+    assignment.course.assignments.remove(assignment)
     assignment.course.save()
     assignment.delete()
 
 
-def delete_event(event_id: str) -> None:
+def delete_event(event) -> None:
     """
     Deletes an event from the database.
     """
-    event = getEvent(event_id)
     event.course.events.remove(event)
     event.course.save()
     event.delete()
 
 
-def delete_document(document_id: str) -> None:
+def delete_document(document) -> None:
     """
     Deletes a document from the database.
     """
-    document = getCourseDocument(document_id)
     if not document.folder:
         document.course.documents.remove(document)
         document.course.save()
@@ -126,11 +110,10 @@ def delete_document(document_id: str) -> None:
     document.delete()
 
 
-def delete_grade(grade_id: str) -> None:
+def delete_grade(grade) -> None:
     """
     Deletes a grade from the database.
     """
-    grade = getGrades(grade_id)
     grade.course.grades.remove(grade)
     grade.course.save()
     grade.delete()
@@ -140,7 +123,7 @@ def delete_schoology(user_id: str, schoology_object: Schoology) -> None:
     """
     Deletes a user from the database.
     """
-    user = find_user(user_id)
+    user = find_user(id=user_id)
     user.schoology.remove(schoology_object)
     user.save()
 
@@ -150,7 +133,7 @@ def delete_avatar(user_id: str = None, course_id: str = None) -> None:
         raise ValueError("Must provide either a user_id or a course_id")
 
     if user_id:
-        user = find_user(user_id)
+        user = find_user(id=user_id)
         user.avatar = None
         user.save()
     else:
@@ -178,7 +161,7 @@ def delete_canvas_connection(user_id: str, canvas_object: Canvas) -> None:
 
 
 def delete_google_classroom_connection(
-    user_id: str, google_classroom_object: GoogleClassroom
+        user_id: str, google_classroom_object: GoogleClassroom
 ) -> None:
     """
     Deletes a Google Classroom connection object  from the database.
@@ -192,7 +175,7 @@ def delete_spotify_connection(user_id: str, spotify_object: Spotify) -> None:
     """
     Deletes a Spotify connection object  from the database.
     """
-    user = find_user(user_id)
+    user = find_user(id=user_id)
     user.spotify.remove(spotify_object)
     user.save()
 

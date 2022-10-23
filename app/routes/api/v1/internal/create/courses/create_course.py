@@ -20,7 +20,7 @@ def create_course():
     if not data["template"]:
         data["template"] = None
 
-    user = read.find_user(id=session["id"])
+    user = read.find_user(id=session['id'])
     if user.type == "student":
         # TODO: Figure out how to determine whether the course is imported
         data["type"] = "Student"
@@ -83,7 +83,11 @@ def create_google_course():
         return None
     if image:
         create.createAvatar(
-            {"avatar_url": image, "parent": "Course", "parent_id": course_obj.id, }
+            {
+                "avatar_url": image,
+                "parent": "Course",
+                "parent_id": course_obj.id,
+            }
         )
     try:
         announcements = service.courses().announcements().list(courseId=course["id"]).execute()["announcements"]
@@ -156,7 +160,11 @@ def create_canvas_course():
     image = course.get_settings()["image"]
     if image:
         create.createAvatar(
-            {"avatar_url": image, "parent": "Course", "parent_id": course_obj.id, }
+            {
+                "avatar_url": image,
+                "parent": "Course",
+                "parent_id": course_obj.id,
+            }
         )
 
     announcements = list(canvas.get_announcements(context_codes=[course]))
@@ -240,7 +248,7 @@ def create_schoology_course():
     while not auth.authorized:
         auth.authorize()
     sc = schoolopy.Schoology(auth)
-    sc.limit = 10000
+    sc.limit = 100
     section = dict(sc.get_section(link))
     user = sc.get_me()
 
@@ -255,8 +263,6 @@ def create_schoology_course():
         "type": "Imported",
     }
 
-    from app.static.python.mongodb import create
-
     course_obj = create.create_course(course)
 
     create.createAvatar(
@@ -266,77 +272,8 @@ def create_schoology_course():
             "parent_id": course_obj.id,
         }
     )
-    folders = []
-    scdocuments = sc.get_section_documents(link)
-
-    def get_doc_link(sc, url):
-        rq = sc.schoology_auth.oauth.get(
-            url=url,
-            headers=sc.schoology_auth._request_header(),
-            auth=sc.schoology_auth.oauth.auth,
-        )
-        return rq.url  # rq["url"]
-
-    documents = []
-    for scdocument in scdocuments:
-
-        document = {}
-        document["schoology_id"] = scdocument["id"]
-        document["name"] = scdocument["title"] + "." + scdocument["attachments"]["files"]["file"][0][
-            "extension"
-        ]
-        print(scdocument)
-        document["file_ending"] = scdocument["attachments"]["files"]["file"][0][
-            "extension"
-        ]
-        try:
-            document["upload_date"] = datetime.fromtimestamp(scdocument["timestamp"])
-        except:
-            print("can't find timestamp")
-        document["course"] = str(course_obj.id)
-        document["imported_from"] = "Schoology"
-        document["imported_id"] = str(scdocument["id"])
-
-        filename = link.split("/")[-1]
-        mongo_document = create.createDocumentFile(
-            {
-                "name": document["name"],
-                "course": document["course"],
-                "file_ending": document["file_ending"],
-                "imported_from": "Schoology",
-                "imported_id": document["imported_id"],
-            }
-        )
-        from pathlib import Path
-
-        from app.static.python.cdn.utils import os, upload_file
-        from app.static.python.mongodb import create
-
-        current_dir = Path(__file__)
-        root_path = [p for p in current_dir.parents if p.parts[-1] == "ProjectNebulus"][
-            0
-        ]
-        print(root_path)
-        file_path = os.path.join(
-            f"{root_path}/app/static/",
-            str(mongo_document.pk) + "." + document["file_ending"]
-        )
-        import urllib.request
-
-        document["attachments"] = get_doc_link(
-            sc, scdocument["attachments"]["files"]["file"][0]["download_path"]
-        )
-        urllib.request.urlretrieve(document["attachments"], file_path)
-        import time
-        time.sleep(40)
-        upload_file(file_path, mongo_document.pk, "Documents")
-
-        os.remove(file_path)
-
-        print(document)
-        documents.append(document)
-    print(documents)
     scupdates = sc.get_section_updates(link)
+
     for update in scupdates:
         author = sc.get_user(update["uid"])
         color = getColor(author["picture_url"])
@@ -360,26 +297,17 @@ def create_schoology_course():
                 "imported_id": str(update["id"]),
             }
         )
-    scgrades = sc.get_user_grades_by_section(user["id"], link)
+
+    scgrades = sc.get_user_grades_by_section(user['id'], link)
     print(scgrades)
-    try:
-        scgrades = scgrades["period"]
-        for period in scgrades[1:]:
-            for assignment in period:
-                assignment_obj = read.getAssignment(
-                    imported_id=assignment[0]["assignment_id"]
-                )
-                assignment_obj.grade = assignment[0]["grade"]
-                assignment_obj.semester = period["period_title"]
-        assignment_obj.save()
-    except:
-        scgrades = None
+
     scdiscussions = sc.get_discussions(section_id=link)
     for i in range(0, len(scdiscussions)):
         scdiscussion = scdiscussions[i]
         scdiscussionreplies = sc.get_discussion_replies(
             section_id=link, discussion_id=scdiscussion["id"]
         )
+
     scevents = sc.get_section_events(link)
     for event in scevents:
         if event["type"] == "assignment":
@@ -417,7 +345,62 @@ def create_schoology_course():
                     "imported_id": str(event["id"]),
                 }
             )
-    return "success"
+    folders = []
+
+    for period in scgrades[1:]:
+        for assignment in period:
+            assignment_obj = read.getAssignment(imported_id=assignment[0]['assignment_id'])
+            assignment_obj.grade = assignment[0]['grade']
+            assignment_obj.semester = period['period_title']
+        assignment_obj.save()
+
+    scdocuments = sc.get_section_documents(link)
+
+    def get_doc_link(sc, url):
+        rq = sc.schoology_auth.oauth.get(
+            url=url,
+            headers=sc.schoology_auth._request_header(),
+            auth=sc.schoology_auth.oauth.auth,
+        )
+        return rq.url  # rq["url"]
+
+    documents = []
+
+    for scdocument in scdocuments:
+        document = {}
+        document["schoology_id"] = scdocument["id"]
+        document["name"] = scdocument["title"]
+        print(scdocument)
+        document["file_ending"] = scdocument["attachments"]["files"]["file"][0][
+            "extension"
+        ]
+        try:
+            document["upload_date"] = datetime.fromtimestamp(scdocument["timestamp"])
+        except:
+            print("can't find timestamp")
+        document["course"] = str(course_obj.id)
+        document["imported_from"] = "Schoology"
+        document["imported_id"] = str(scdocument["id"])
+        document["attachments"] = get_doc_link(
+            sc, scdocument["attachments"]["files"]["file"][0]["download_path"]
+        )
+
+        filename = link.split("/")[-1]
+        mongo_document = create.createDocumentFile(
+            {
+                "name": document["name"],
+                "course": document["course"],
+                "file_ending": document["file_ending"],
+                "imported_from": "Schoology",
+                "imported_id": document["imported_id"],
+            }
+        )
+
+        print(document)
+        documents.append(document)
+    print(documents)
+
+    return f"/course/{course_obj.id}/documents"
 
 
 @internal.route("/create/course/schoology/all", methods=["GET", "POST"])
@@ -505,10 +488,10 @@ def create_schoology_course_all():
                 }
             )
 
-        scgrades = sc.get_user_grades_by_section(user["id"], link)
+        scgrades = sc.get_user_grades_by_section(user['id'], link)
         print(scgrades)
         try:
-            scgrades = scgrades["period"]
+            scgrades = scgrades['period']
         except:
             print("")
 
@@ -560,11 +543,9 @@ def create_schoology_course_all():
 
         for period in scgrades[1:]:
             for assignment in period:
-                assignment_obj = read.getAssignment(
-                    imported_id=assignment[0]["assignment_id"]
-                )
-                assignment_obj.grade = assignment[0]["grade"]
-                assignment_obj.semester = period["period_title"]
+                assignment_obj = read.getAssignment(imported_id=assignment[0]['assignment_id'])
+                assignment_obj.grade = assignment[0]['grade']
+                assignment_obj.semester = period['period_title']
             assignment_obj.save()
 
         scdocuments = sc.get_section_documents(link)
@@ -589,9 +570,7 @@ def create_schoology_course_all():
                     "extension"
                 ]
                 try:
-                    document["upload_date"] = datetime.fromtimestamp(
-                        scdocument["timestamp"]
-                    )
+                    document["upload_date"] = datetime.fromtimestamp(scdocument["timestamp"])
                 except:
                     print("can't find timestamp")
                 document["course"] = str(course_obj.id)

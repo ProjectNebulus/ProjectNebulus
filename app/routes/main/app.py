@@ -102,7 +102,6 @@ def app():
 def courses():
     user_acc = read.find_user(id=session["id"])
     user_courses = read.get_user_courses(session["id"])
-    scCourses, gcourses, canvascourses = get_courses()
 
     return render_template(
         "learning/courses.html",
@@ -114,9 +113,6 @@ def courses():
         read=read,
         page="Nebulus - Courses",
         translate=getText,
-        gcourses=gcourses,
-        scCourses=scCourses,
-        canvascourses=canvascourses,
     )
 
 
@@ -245,8 +241,7 @@ def get_courses():
 def fmt(content: str) -> str:
     output = ""
     for line in content.strip().split("\n"):
-        if line == "":
-            output += "<br>"
-        else:
-            output += "<p>" + line + "</p>"
+        output += line
+        output += "<br>"
+
     return Markup(output)

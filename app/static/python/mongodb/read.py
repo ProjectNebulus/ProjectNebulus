@@ -202,24 +202,22 @@ def sortByDateTime(obj):
     return obj.date if obj._cls == "Event" else obj.due
 
 
-def sort_course_events(user_id: str, course_id: int):
-    courses = get_user_courses(user_id)
-    course = None
-    for i in courses:
-        if str(i.id) == str(course_id):
-            course = i
-            break
-    courses = [course]
+def sort_course_events(course_id: int, show_events=True, load_start=0, max_days=8, max_events=15):
+    course = Course.objects(pk=course_id).first().id
 
-    events = Event.objects(course__in=courses)
-    announcements = Announcement.objects(course__in=courses)
-    assignments = Assignment.objects(course__in=courses)
-    assessments = Assessment.objects(course__in=courses)
+    events = Event.objects(course=course)
+    announcements = Announcement.objects(course=course)
+    assignments = Assignment.objects(course=course)
+    assessments = Assessment.objects(course=course)
     from itertools import chain, groupby
 
-    events_assessments_assignments = list(chain(events, assignments, assessments))
+    if show_events:
+        events_assessments_assignments = list(chain(events, assignments, assessments))
+    else:
+        events_assessments_assignments = list(chain(assignments, assessments))
+
     sorted_events = sorted(
-        events_assessments_assignments, key=lambda obj: sortByDateTime(obj)
+        events_assessments_assignments[load_start:load_start + max_events], key=lambda obj: sortByDateTime(obj)
     )
     dates = dict(
         {
@@ -230,15 +228,13 @@ def sort_course_events(user_id: str, course_id: int):
         }
     )
 
-    sorted_announcements = sorted(announcements, key=lambda obj: obj.date)
+    sorted_announcements = sorted(announcements, key=lambda obj: obj.date)[load_start:load_start + max_days]
     announcements = dict(
         reversed(
             list(
                 {
                     key: list(result)
-                    for key, result in groupby(
-                    sorted_announcements, key=lambda obj: obj.date.date()
-                )
+                    for key, result in groupby(sorted_announcements, key=lambda obj: obj.date.date())
                 }.items()
             )
         )
@@ -247,7 +243,7 @@ def sort_course_events(user_id: str, course_id: int):
     return [announcements, dates]
 
 
-def sort_user_events(user_id: str, events=True, max_days=15, max_events=15):
+def sort_user_events(user_id: str, show_events=True, load_start=0, max_days=8, max_events=15):
     courses = get_user_courses(user_id)
     events = Event.objects(course__in=courses)
     announcements = Announcement.objects(course__in=courses)
@@ -255,32 +251,33 @@ def sort_user_events(user_id: str, events=True, max_days=15, max_events=15):
     assessments = Assessment.objects(course__in=courses)
     from itertools import chain, groupby
 
-    events_assessments_assignments = list(chain(events, assignments, assessments))
+    if show_events:
+        events_assessments_assignments = list(chain(events, assignments, assessments))
+    else:
+        events_assessments_assignments = list(chain(assignments, assessments))
+
     sorted_events = sorted(
-        events_assessments_assignments[:max_events],
+        events_assessments_assignments,
         key=lambda obj: sortByDateTime(obj),
-    )
+    )[load_start:load_start + max_events]
 
     dates = dict(
         {
             key: reversed(list(result))
-            for key, result in groupby(
-            sorted_events, key=lambda obj: sortByDateTime(obj)
-        )
+            for key, result in groupby(sorted_events, key=lambda obj: sortByDateTime(obj))
         }
     )
 
-    sorted_announcements = sorted(announcements, key=lambda obj: obj.date)
+    sorted_announcements = sorted(announcements, key=lambda obj: obj.date)[load_start:load_start + max_days]
     announcements = dict(
         reversed(
             list(
                 {
                     key: list(result)
-                    for key, result in groupby(
-                    sorted_announcements, key=lambda obj: obj.date.date()
-                )
+                    for key, result in groupby(sorted_announcements, key=lambda obj: obj.date.date()
+                                               )
                 }.items()
-            )[-max_days:]
+            )
         )
     )
 

@@ -54,21 +54,22 @@ function startFile(file, link) {
 </li>`;
     let isDoc = false;
     let isPDF = false;
-    let extension = link.split(".");
-    extension = extension[extension.length].toLowerCase();
-    if (extension.includes("pdf")) {
-        isPDF = true;
-    }
-    if (extension.includes("doc") || extension.includes("docx")) {
-        isDoc = true;
-    }
+    const list = ['Red', 'Blue', 'Green', 'Blurple', 'Pink', 'Jade', 'Yellow'];
+    let extension = file.split(".");
+    extension = extension[extension.length - 1].toLowerCase();
+    if (extension.includes("pdf")) isPDF = true;
+    else if (extension.includes("doc")) isDoc = true;
+
     if (isPDF) {
         document.getElementById('pdf-viewer').style.display = 'block';
+        const loading = document.getElementById("loading");
+        loading.style.display = "flex";
+        loading.children[0].src = `/static/images/nebulusCats/new${list[Math.floor(Math.random() * list.length)]}.png`;
 
         try {
             startPDF(link);
         } catch (e) {
-            document.getElementById('loading').innerHTML = 'Error: ' + e;
+            loading.children[1].innerHTML = 'Error: ' + e;
         }
     } else if (isDoc) {
         document.getElementById('office-viewer').style.display = 'block';
@@ -133,12 +134,12 @@ function renderPage(pageNumToRender = 1, scale = 1) {
     isPageRendering = true;
     document.getElementById('current_page_num').textContent = pageNumToRender;
     pdf.getPage(pageNumToRender).then((page) => {
-        document.getElementById('loader').style.display = 'none';
         const viewport = page.getViewport({scale: 3});
         canvas.height = viewport.height;
         canvas.width = viewport.width;
         let renderCtx = {canvasContext, viewport};
         page.render(renderCtx).promise.then(() => {
+            document.getElementById("loading").style.display = "none";
             isPageRendering = false;
             if (pageRenderingQueue !== null) {
                 // this is to check of there is next page to be rendered in the queue
@@ -323,8 +324,12 @@ function addHTML() {
             text-align: center;
         }
     </style>
-
-    <div id="loader" class="text-black dark:text-white">Loading .....</div>
+    
+    <div class="fixed left-0 top-0 hidden m-auto text-gray-200 dark:text-white text-3xl pointer-events-none
+        gap-6 flex-col place-items-center justify-center" id="loading" style="width: 95%; height: 95%;">
+        <img src="/static/images/nebulusCats/blue_cat.png" class="w-20 h-24">
+        <div class="text-black dark:text-white ml-2">Loading...</div>
+    </div>
     <div class="container">
         <button id="prev_page" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium
          rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">

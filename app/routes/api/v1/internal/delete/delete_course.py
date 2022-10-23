@@ -1,11 +1,17 @@
-from flask import request
+from flask import request, session
 
 from app.static.python.mongodb import delete
+from static.python.classes import Course
+from static.python.mongodb import read
 from .. import internal
 
 
 @internal.route("/delete/course", methods=["POST"])
 def delete_course_route():
     data = request.get_json()
-    delete.delete_course(data["course"])
+    course = Course.objects(pk=data["course"]).first()
+    if not course or course not in read.get_user_courses(session["id"]):
+        return "Invalid Course", 404
+
+    delete.delete_course(course)
     return "success"

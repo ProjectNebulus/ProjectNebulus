@@ -54,7 +54,7 @@
                                         <button class="absolute top-0 right-0 text-xl mt-2 mr-3 material-icons hover:bg-gray-50 dark:hover:bg-gray-600 px-1 rounded-lg expand">
                                             open_in_new
                                         </button>
-                                        <div type-element class="hidden">Announcement</div>
+                                        <div type-element hidden class="hidden">Announcement</div>
                                         {% if a.title != "" %}
                                             <h4 class="text-lg font-semibold text-gray-900 dark:text-white truncate"
                                                 title-element>{{ a.title }}</h4>
@@ -64,7 +64,7 @@
                                                  id="avatar{{ i }}_{{ j }}"
                                                  image-element
                                                  data-dropdown-placement="bottom-start"
-                                                 class="rounded-full ring-2 ring-gray-300 dark:ring-gray-500 cursor-pointer mb-3 rounded-full shadow-lg {% if "black" in avatar %} bg-gray-300 {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}
+                                                 class="rounded-full ring-2 ring-gray-300 dark:ring-gray-500 cursor-pointer mb-3 rounded-full shadow-lg {% if "black" in avatar %} bg-gray-300 dark:bg-gray-700 {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}
                                                          {% if a.title == "" %}
                                                  w-8
                                                  h-8
@@ -372,13 +372,9 @@
             <!-- Modal content -->
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
                 <div id="dueTime" class="absolute bottom-0 right-0 p-3 text-gray-200 dark:text-gray-500 text-sm">
-
                     Happening on
-
                     5/20/22 10:10 AM •
-
                     <span class="text-red-600 dark:text-red-500">Overdue</span>
-
                 </div>
                 <!-- Modal header -->
                 <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600 relative">
@@ -426,31 +422,22 @@
                 </div>
                 <!-- Modal body -->
                 <div class="p-6 space-y-6">
-                    <div style="
-    max-height: 100px;
-    overflow-y: scroll;
-">
-                        <h1 class="text-white font-bold uppercase" id="descriptionTitle">Description</h1>
-                        <div id="announcementBody" class="text-base leading-relaxed text-gray-500 dark:text-gray-400">Do
-                            Homework 4 Worksheet. Turn in at end of class on day listed (Day 1 of Week of Oct 17th)<br>
-
+                    <h1 class="text-white font-bold uppercase" id="descriptionTitle">Description</h1>
+                    <div style="max-height: 15rem" class="overflow-auto">
+                        <div id="announcementBody" class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                            Do Homework 4 Worksheet. Turn in at end of class on day listed (Day 1 of Week of Oct 17th)
+                            <br><br>
                             Be sure to show steps for solving a physics problem when necessary:<br>
-
                             1)Create a model, define your origin, and set your coordinates<br>
-
                             2) State all Known Variables<br>
-
                             3)State Unknown Variables<br>
-
                             4) Write down all necessary equations<br>
-
                             5) Write solution by plugging in variables and solving equations<br>
-
                             6) Check your answer:<br>
-
                             a) Do dimensional analysis to check all units are correct.<br>
                             <br>
-                            b) Ask yourself, is this a reasonable answer for this situation?<br></div>
+                            b) Ask yourself, is this a reasonable answer for this situation?<br>
+                        </div>
                     </div>
                     <div id="submissionsBox">
                         <h1 class="text-white font-bold uppercase">Submission</h1>

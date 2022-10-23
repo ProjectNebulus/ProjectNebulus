@@ -84,6 +84,7 @@ document.addEventListener("keydown", e => {
     }
 });
 
+
 setInterval(changeFavicon, 3000);
 Array.prototype.insert = (index, item) => this.splice(index, 0, item);
 

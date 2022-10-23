@@ -68,7 +68,7 @@ def course_page(page, **kwargs):
         email=session.get("email"),
         avatar=session.get("avatar", "/v3.gif"),
         disableArc=(page != "course"),
-        events=read.sort_course_events(session["id"], int(course_id))[1],
+        events=read.sort_course_events(course_id)[1],
         strftime=utils.strftime,
         translate=getText,
         gradeStr=gradeStr,
