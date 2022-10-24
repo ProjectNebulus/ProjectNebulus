@@ -94,11 +94,18 @@ def create_google_course():
     except:
         announcements = []
     for announcement in announcements:
-        user = service.userProfiles().get(userId=announcement["creatorUserId"]).execute()
-        name = user["name"]["fullName"]
-        photo = user["photoUrl"].replace("//", "https://")
-        if ("https://" not in photo and "http://" not in photo):
-            photo.replace("//", "https://")
+        try:
+            user = service.userProfiles().get(userId=announcement["creatorUserId"]).execute()
+            name = user["name"]["fullName"]
+        except:
+            name = "Unknown"
+        try:
+            user = service.userProfiles().get(userId=announcement["creatorUserId"]).execute()
+            photo = user["photoUrl"].replace("//", "https://")
+            if ("https://" not in photo and "http://" not in photo):
+                photo.replace("//", "https://")
+        except:
+            photo = ""
         create.createAnnouncement(
             {
                 "content": announcement["text"],
@@ -113,15 +120,20 @@ def create_google_course():
     try:
         assignments = service.courses().courseWork().list(courseId=course["id"]).execute()["courseWork"]
     except:
-        assignments = None
+        assignments = []
     for assignment in assignments:
         theassignment = assignment
+        points = float(0)
+        try:
+            points = int(float(theassignment["maxPoints"])[0]),
+        except:
+            points = float(0)
         create.createAssignment(
             {
 
                 "title": theassignment["title"],
                 "course": str(course_obj.id),
-                "points": float(theassignment["maxPoints"]),
+                "points": points,
                 "imported_from": "Google Classroom",
                 "imported_id": str(theassignment["id"]),
             }

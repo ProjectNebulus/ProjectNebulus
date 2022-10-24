@@ -268,7 +268,7 @@ def sort_user_events(user_id: str, show_events=True, load_start=0, max_days=25, 
         }
     )
 
-    sorted_announcements = sorted(announcements, key=lambda obj: obj.date)[load_start:load_start + max_days]
+    sorted_announcements = sorted(announcements, key=lambda obj: obj.date)#[load_start:load_start + max_days]
     announcements = dict(
         reversed(
             list(
