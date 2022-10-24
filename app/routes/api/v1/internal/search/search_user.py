@@ -54,12 +54,18 @@ def search_within_user():
 
     everything = []
     for course in courses:
+        try:
+            theurl = course.avatar.avatar_url,
+        except:
+            theurl = ""
         everything.append(
             [
                 "course",  # type
                 course.name,  # name
                 course.teacher,  # description
-                course.avatar.avatar_url,
+                str(theurl).replace("(", "").replace(")", "").replace(",", "").replace("'", ""),
+                "",
+                "/course/" + str(course.pk),
             ]
         )
 
@@ -70,6 +76,8 @@ def search_within_user():
                 document.name,  # name
                 document.description,  # description
                 "a",
+                document.course.avatar.avatar_url,
+                "",
             ]
         )
     for chat in chats:
@@ -79,6 +87,8 @@ def search_within_user():
                 chat.title,  # name
                 "",  # description
                 chat.avatar.avatar_url,
+                ""
+                "",
             ]
         )
     for event in events:
@@ -87,15 +97,23 @@ def search_within_user():
         except:
             de = ""
         everything.append(
-            ["event", event["title"], de, "a"]  # type  # name  # description
+            ["event", event["title"], de, "a",
+             event.course.avatar.avatar_url,
+             "",
+             ]  # type  # name  # description
         )
     for assignment in assignments:
         try:
             de = assignment["description"]
         except:
             de = ""
+        try:
+            image = assignment['course']['avatar']['a9vatar_url']
+        except:
+            image = ""
         everything.append(
-            ["assignment", assignment["title"], de, "a"]  # type  # name  # description
+            ["assignment", assignment["title"], de, "a", image,
+             "", ]  # type  # name  # description
         )
     for announcement in announcements:
         everything.append(
@@ -104,6 +122,8 @@ def search_within_user():
                 announcement.title,  # name
                 announcement.content,  # description
                 "a",
+                announcement['course']['avatar']['avatar_url'],
+                "",
             ]
         )
 
@@ -114,6 +134,8 @@ def search_within_user():
                 nebdoc.title,
                 nebdoc.content[0:100],
                 "a",
+                "",
+                "/document/" + nebdoc.pk,
             ]  # type  # name  # description
         )
 
@@ -124,6 +146,8 @@ def search_within_user():
                 account.username,  # name
                 account.email,  # description
                 account.avatar.avatar_url,
+                "",
+                "/profile/" + account.pk,
             ]
         )
     print(everything)
@@ -136,6 +160,10 @@ def search_within_user():
         string += i[2]
         string += "•"
         string += i[3]
+        string += "•"
+        string += i[4]
+        string += "•"
+        string += i[5]
         if len(everything) != count:
             string += "•"
     if len(everything) == 0:
