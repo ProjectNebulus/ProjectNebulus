@@ -97,40 +97,40 @@ function searchWithin(search) {
                 document.getElementById("resultCount").innerText = "0";
             } else {
                 let datas = data.split('•');
-                document.getElementById("resultCount").innerText = `${datas.length / 4}`;
+                document.getElementById("resultCount").innerText = `${datas.length / 6}`;
                 for (let i = 0; i < datas.length; i++) {
                     temp_arr.push(datas[i]);
-                    if (i % 4 === 3) {
+                    if (i % 6 === 5) {
                         let pic = `<img src="${temp_arr[3]}" style="margin-right: 20px;" class="inline-block w-10 h-10 rounded-md">`;
                         switch (temp_arr[0]) {
                             case 'document':
-                                pic = `<i class="material-icons" style="font-size: 40px;vertical-align: middle;margin-right: 20px;">description</i><img src="https://api.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg" style="margin-left: -40px;margin-top: 20px;" class="inline-block w-6 h-6 rounded-md">`;
+                                pic = `<i class="material-icons" style="font-size: 40px;vertical-align: middle;margin-right: 20px;">description</i><img src="${temp_arr[4]}" style="margin-left: -40px;margin-top: 20px;" class="inline-block w-6 h-6 rounded-md">`;
                                 break;
                             case 'NebDoc':
-                                pic = `<i class="material-icons" style="font-size: 40px;vertical-align: middle;margin-right: 20px;">draft</i><img src="https://api.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg" style="margin-left: -40px;margin-top: 20px;" class="inline-block w-6 h-6 rounded-md">`;
+                                pic = `<i class="material-icons" style="font-size: 40px;vertical-align: middle;margin-right: 20px;">article</i>`;
                                 break;
                             case 'event':
-                                pic = `<i class="material-icons" style="font-size: 40px;vertical-align: middle;margin-right: 20px;">event</i><img src="https://api.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg" style="margin-left: -40px;margin-top: 20px;" class="inline-block w-6 h-6 rounded-md">`;
+                                pic = `<i class="material-icons" style="font-size: 40px;vertical-align: middle;margin-right: 20px;">event</i><img src="${temp_arr[4]}" style="margin-left: -40px;margin-top: 20px;" class="inline-block w-6 h-6 rounded-md">`;
                                 break;
                             case 'assignment':
-                                pic = `<i class="material-icons" style="font-size: 40px;vertical-align: middle;margin-right: 20px;">assignment</i><img src="https://api.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg" style="margin-left: -40px;margin-top: 20px;" class="inline-block w-6 h-6 rounded-md">`;
+                                pic = `<i class="material-icons" style="font-size: 40px;vertical-align: middle;margin-right: 20px;">assignment</i><img src="${temp_arr[4]}" style="margin-left: -40px;margin-top: 20px;" class="inline-block w-6 h-6 rounded-md">`;
                                 break;
                             case 'chat':
-                                pic = `<i class="material-icons" style="font-size: 40px;vertical-align: middle;margin-right: 20px;">forum</i><img src="https://api.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg" style="margin-left: -40px;margin-top: 20px;" class="inline-block w-6 h-6 rounded-md">`;
+                                pic = `<i class="material-icons" style="font-size: 40px;vertical-align: middle;margin-right: 20px;">forum</i>`;
                                 break;
                             case 'announcement':
-                                pic = `<i class="material-icons" style="font-size: 40px;vertical-align: middle;margin-right: 20px;">campaign</i><img src="https://api.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg" style="margin-left: -40px;margin-top: 20px;" class="inline-block w-6 h-6 rounded-md">`;
+                                pic = `<i class="material-icons" style="font-size: 40px;vertical-align: middle;margin-right: 20px;">campaign</i><img src="${temp_arr[4]}" style="margin-left: -40px;margin-top: 20px;" class="inline-block w-6 h-6 rounded-md">`;
                                 break;
                         }
 
                         string += `
-                    <li style="margin:5px;">
+                    <a href="${temp_arr[5]}"><li style="margin:5px;">
                         <div class="truncate py-2.5 rounded-lg mx-auto block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 mx-2 dark:hover:text-white">
                 ${pic}
                 <div style="display: inline-block; vertical-align: middle;">
                 ${temp_arr[1]} <br><span class="text-gray-500">${temp_arr[2]}</span></div>
                 </div>
-                    </li>`;
+                    </li></a>`;
                         temp_arr = [];
                     }
                 }
