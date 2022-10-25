@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+{% block main %}
+    <meta name="description"
+          content="You have been invited to join the {{ school["name"] }} community on Nebulus!"/>
+    <meta property="og:title" content="Join the {{ school["name"] }} community on Nebulus!"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://nebulus.app"/>
+    <meta property="og:image"
+          content="/static/images/HighQualityWebsiteEmbed.png"/>
+    <meta property="og:description"
+          content="You have been invited to join the official {{ school["name"] }} community on Nebulus! This school is located in {{ school["city"] }}. The LMS is {{ school["LMS"] }}. Welcome! #{{ school["code"] }}"/>
+    <meta name="twitter:card" content="summary_large_image">
+
+    <meta name="theme-color" content="#AC7AFF">
+    <meta property="og:site_name" content="Nebulus.">
+    <div class="dark:bg-gray-800/75 p-6" style="
+                text-align: left;
+                width: 70%;
+                backdrop-filter: blur(10px);
+                border-radius: 30px;
+                padding: 50px;
+                margin: auto;
+                margin-top: 40px;
+                ">
+        <h3 class="font-bold text-gray-500 text-lg uppercase" style="
+    margin-bottom: 20px;
+">You've been invited to join...<span style="
+    float: right;
+    font-weight: 100;
+    color: white;
+    font-size: 0.6em;
+"><span style="
+    margin-right: 4px;
+    color: red;
+    font-size: 2em;
+    display: inline-block;
+    vertical-align: middle;
+">*</span>{{ school["LMS"] }} Verification Required</span></h3>
+        <div>
+            <div class="" style="
+    width: 150px;
+    display: inline-block;
+    height: 150px;
+    vertical-align: middle;
+"><img src="/static/images/schools/{{ school["code"] }}.{{ school[ "picture_url"] }}"
+       class="w-32 h-32 object-cover rounded-xl"><img src="/static/images/NebulusSpecialLogo.png" class="w-12 h-12"
+                                                      style="
+    border-radius: 15px;
+    position: absolute;
+    top: 185px;
+    left: 135px;
+"></div>
+            <div class="" style="
+    width: calc(100% - 160px);
+    display: inline-block;
+    vertical-align: middle;
+"><h1 class="text-4xl text-black dark:text-white" style="
+    font-weight: 900;
+">{{ school["name"] }}<img src="/static/images/logos/{{ school["LMS"]|lower }}.png" class="w-10 h-10" style="
+    vertical-align: middle;
+    display: inline-block;
+    margin-left: 20px;
+"></h1>
+                <h1 class="text-lg text-gray-500"><i class="material-icons" style="
+    vertical-align: middle;
+">alternate_email</i>{{ school["code"] }}</h1>
+                <h1 class="text-lg text-gray-500"><i class="material-icons" style="
+    vertical-align: middle;
+">place</i>{{ school["city"] }}</h1></div>
+        </div>
+        <button type="button"
+                class="text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                style="
+    width: 50%;
+    background: linear-gradient(45deg, #4a00ff, #bb00ff);
+">Accept Invite as
+            <span style="
+    font-weight: 800;
+">
+        <i class="material-icons" style="
+    vertical-align: middle;
+    font-size: 20px;
+    margin-right: 5px;
+">alternate_email</i>{{ user }}
+</span>
+        </button>
+
+    </div>
+    <script>
+        window.onload = function () {
+            document.body.style.background = `
+        linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)) 0% 0% / cover,
+        url("/static/images/schools/{{ school["code"] }}2.{{ school[ "background_url"] }}")
+        center center no-repeat fixed`;
+        }
+    </script>
+{% endblock %}

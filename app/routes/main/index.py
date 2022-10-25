@@ -26,6 +26,43 @@ def screenTime():
     return str(data)
 
 
+@main_blueprint.route("/getSchoolEmbed/<school>", methods=["GET"])
+def schoolEmbed(school):
+    import imgkit
+
+    imgkit.from_file('./app/templates/joinschoolembed.html', f'{school}.jpg')
+    return send_file(f'{school}.jpg')
+
+
+@main_blueprint.route("/school", methods=["GET"])
+def school():
+    return render_template("school.html", page="Select your School",
+                           user=session.get("username"),
+                           email=session.get("email"),
+                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif", ),
+                           translate=getText, )
+
+
+@main_blueprint.route("/invite/school/<school>", methods=["GET"])
+def specificschool(school):
+    school = school.upper()
+    schools = ["BISV", "HKR", "CBYA", "MLR", "SDPB", "VCS", "PNLK", "BCP", "GUNN", "PALY", "LNBK", "CLGBA"]
+    if (school not in schools):
+        return render_template("errors/404.html", translate=getText), 404
+    import json
+    myjson = json.load(open("app/schools.json"))
+    for current in myjson:
+        if current["code"] == school:
+            return render_template("joinschool.html", school=current,
+                                   page="Nebulus. Education. Redefined.",
+                                   user=session.get("username"),
+                                   email=session.get("email"),
+                                   avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif", ),
+                                   translate=getText,
+                                   homepage=True,
+                                   embedoverride=True)
+
+
 @main_blueprint.route("/", methods=["GET"])
 def index():
     return render_template(

@@ -166,6 +166,7 @@
     <script src="/static/js/main/main.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <!--discord embeds and google search!-->
+{% if not embedoverride %}
     <meta name="description"
           content="Nebulus is a modern Learning Management System that centralizes everyone’s learning experience into a single application. It’s perfect for Students, Teachers, Parents, and Schools!"/>
     <meta property="og:title" content="Nebulus. Education. Redefined."/>
@@ -179,6 +180,7 @@
 
     <meta name="theme-color" content="#AC7AFF">
     <meta property="og:site_name" content="Nebulus.">
+{% endif %}
     <meta property="og:locale" content="en_US">
     <div id="customCursor"></div>
     <!--Icons!-->
