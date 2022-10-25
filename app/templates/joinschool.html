@@ -22,7 +22,8 @@
                 margin: auto;
                 margin-top: 40px;
                 ">
-        <h3 class="font-bold text-gray-500 text-lg uppercase" style="
+        <div id="main">
+            <h3 class="font-bold text-gray-500 text-lg uppercase" style="
     margin-bottom: 20px;
 ">You've been invited to join...<span style="
     float: right;
@@ -36,8 +37,8 @@
     display: inline-block;
     vertical-align: middle;
 ">*</span>{{ school["LMS"] }} Verification Required</span></h3>
-        <div>
-            <div class="" style="
+            <div>
+                <div class="" style="
     width: 150px;
     display: inline-block;
     height: 150px;
@@ -50,7 +51,7 @@
     top: 185px;
     left: 135px;
 "></div>
-            <div class="" style="
+                <div class="" style="
     width: calc(100% - 160px);
     display: inline-block;
     vertical-align: middle;
@@ -61,30 +62,115 @@
     display: inline-block;
     margin-left: 20px;
 "></h1>
-                <h1 class="text-lg text-gray-500"><i class="material-icons" style="
+                    <h1 class="text-lg text-gray-500"><i class="material-icons" style="
     vertical-align: middle;
 ">alternate_email</i>{{ school["code"] }}</h1>
-                <h1 class="text-lg text-gray-500"><i class="material-icons" style="
+                    <h1 class="text-lg text-gray-500"><i class="material-icons" style="
     vertical-align: middle;
 ">place</i>{{ school["city"] }}</h1></div>
+            </div>
+            <button onclick="verify()" type="button"
+                    class="text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                    style="
+    padding: 20px;
+    font-size: 1em;
+    text-transform: uppercase;
+    border-radius: 40px;
+    margin-top: 30px;
+    background: linear-gradient(45deg, #d000ff, #007aff);
+">Accept Invite
+            </button>
         </div>
-        <button type="button"
-                class="text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-                style="
-    width: 50%;
-    background: linear-gradient(45deg, #4a00ff, #bb00ff);
-">Accept Invite as
-            <span style="
-    font-weight: 800;
-">
-        <i class="material-icons" style="
+        <div style="display: none;" id="verifySchoology">
+            <h3 class="font-bold text-gray-500 text-lg uppercase" style="
+    margin-bottom: 20px;
+">Verify with {{ school["LMS"] }} to join {{ school["name"] }}</h3>
+            <div>
+                <p class="dark:text-white text-black text-3xl font-bold" style="
+    margin-bottom: 40px;
+"><img src="/static/images/logos/schoology.png" class="w-10 h-10" style="
     vertical-align: middle;
-    font-size: 20px;
-    margin-right: 5px;
-">alternate_email</i>{{ user }}
-</span>
-        </button>
+    display: inline-block;
+    margin-right: 20px;
+"> Verify with Schoology</p>
+                <p class="dark:text-white text-black text-sm">This school's Schoology link is <a
+                        href="{{ school["sgy_url"] }}/" class="font-bold text-sky-500">{{ school["sgy_url"] }}/</a>!
+                    This school's email addresses all end in <span class="bg-gray-700 p-2 rounded-lg " style="
+    display: inline-block;
+    margin: 5px;
+">{{ school["email"] }}</span>! We verify you are a {{ school["name"] }} student by verifying if your Schoology account
+                    ends in <span class="bg-gray-700 p-2 rounded-lg " style="
+    display: inline-block;
+    margin: 5px;
+">{{ school["email"] }}</span></p>
+                <div style="
+    margin-top: 10px;
+">
+                    <p></p>
+                    <h1 class="text-black dark:text-white text-3xl" style="
+    margin-bottom: 20px;
+">
+                                <span style="
+    background: -webkit-linear-gradient(left, #42cbf5, #42f578);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 900;
+" class="text-4xl">Step 1</span>
+                        Go to <a target="_blank" href="{{ school["sgy_url"] }}/api"
+                                 class="font-bold text-sky-500">{{ school["sgy_url"] }}/api</a>
+                    </h1>
+                    <h1 class="text-black dark:text-white text-3xl" style="
+    margin-bottom: 10px;
+">
+                                <span style="
+    background: -webkit-linear-gradient(left, #42cbf5, #42f578);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 900;
+" class="text-4xl">Step 2</span> Generate your API Keys if you haven't Already.</h1>
+                    <h1 class="text-black dark:text-white text-3xl">
+                                <span style="
+    background: -webkit-linear-gradient(left, #42cbf5, #42f578);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 900;
+" class="text-4xl">Step 3</span> Paste your API Keys here:</h1>
+                    <input style="width: 300px;margin-top: 20px;" placeholder="API KEY" type="text" id="key" name="key"
+                           class="w-full bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-900 border-0 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                           required="">
+                    <input style="
+    width: 300px;
+    margin-top: 20px;
+" placeholder="API Secret" type="text" id="secret" name="secret"
+                           class="w-full mt-2 bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-900 border-0 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                           required="">
+                    <p></p>
+                </div>
+            </div>
+            <button type="button"
+                    class="text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                    style="
+    padding: 20px;
+    font-size: 1em;
+    text-transform: uppercase;
+    border-radius: 40px;
+    margin-top: 30px;
+    background: linear-gradient(45deg, #d000ff, #007aff);
+">Verify my Identity!
+            </button>
 
+            <button id="back()" type="button"
+                    class="text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                    style="
+    padding: 20px;
+    font-size: 1em;
+    text-transform: uppercase;
+    border-radius: 40px;
+    margin-top: 30px;
+    background: #4c5a70;
+">Chose a Different School
+            </button>
+        </div>
     </div>
     <script>
         window.onload = function () {
@@ -92,6 +178,17 @@
         linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)) 0% 0% / cover,
         url("/static/images/schools/{{ school["code"] }}2.{{ school[ "background_url"] }}")
         center center no-repeat fixed`;
+        }
+
+        function verify() {
+            document.getElementById("main").style.display = "none";
+            document.getElementById("verify{{school["LMS"]}}").style.display = "block"
+        }
+
+        function back() {
+            document.getElementById("main").style.display = "block";
+            document.getElementById("verify{{school["LMS"]}}").style.display = "none"
+
         }
     </script>
 {% endblock %}

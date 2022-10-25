@@ -18,5 +18,18 @@
                 </div>
             </div>
         </div>
-    </div>
+        <div class="dark:text-white text-black">
+            {% for school in schools %}
+                <a href="/invite/school/{{ school["code"] }}">
+                    <div class="flex flex-row gap-4 cursor-pointer items-center p-2 rounded-xl border-2 border-transparent  transition-all">
+                        <img src="/static/images/schools/{{ school["code"] }}.{{ school["picture_url"] }}"
+                             class="w-12 h-12 rounded-xl shadow-lg bg-green-500">
+                        <div class="flex flex-col gap-2">
+                            <h3 class="font-extrabold text-xl font-montserrat dark:text-gray-50">{{ school["name"] }}</h3>
+                            <p class="text-sm font-semibold dark:text-gray-400">#{{ school["code"] }}</p>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
 {% endblock %}

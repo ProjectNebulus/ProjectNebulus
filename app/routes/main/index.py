@@ -36,11 +36,13 @@ def schoolEmbed(school):
 
 @main_blueprint.route("/school", methods=["GET"])
 def school():
+    import json
+    myjson = json.load(open("app/schools.json"))
     return render_template("school.html", page="Select your School",
                            user=session.get("username"),
                            email=session.get("email"),
                            avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif", ),
-                           translate=getText, )
+                           translate=getText, schools=myjson)
 
 
 @main_blueprint.route("/invite/school/<school>", methods=["GET"])
