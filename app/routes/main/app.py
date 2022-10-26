@@ -98,6 +98,20 @@ def app():
     )
 
 
+@main_blueprint.route("/bell-schedule")
+@logged_in
+def bell_schedule():
+    return render_template(
+        "bellschedule.html",
+        user=session["username"],
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        read=read,
+        page="Nebulus - Bell Schedule",
+        translate=getText,
+    )
+
+
 @main_blueprint.route("/courses")
 @logged_in
 def courses():
