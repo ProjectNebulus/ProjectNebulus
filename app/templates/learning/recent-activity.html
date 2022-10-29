@@ -1,0 +1,195 @@
+<ol class="relative border-l border-gray-200 dark:border-gray-700 ml-2">
+    {% for i, tuple in enumerate(announcements.items()) %}
+        {% set date,list = tuple %}
+        <li class="mb-10 ml-4" aria-label="Events on {{ strftime(date, "%D") }}">
+            <div class="absolute w-3 h-3 bg-gray-200 rounded-full -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700">
+            </div>
+            <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+                {{ strftime(date, "%a %b %-d %Y") }}
+            </time>
+            <br>
+            <div class="grid gap-4 pt-2"
+                 style="grid-template-columns: repeat(auto-fit, 23rem)">
+                {% for j in range(list|length) %}
+                    {% set a = list[j] %}
+                    <div class="expandable min-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg shadow mb-4 dark:bg-gray-800/75 dark:text-gray-300 relative"
+                         role="alert"
+                         style="backdrop-filter:blur(10px); height: min-content">
+                        <button class="absolute top-0 right-0 text-xl mt-2 mr-3 material-icons hover:bg-gray-50 dark:hover:bg-gray-600 px-1 rounded-lg expand">
+                            open_in_new
+                        </button>
+                        <div type-element hidden class="hidden">Announcement</div>
+                        {% if a.title != "" %}
+                            <h4 class="text-lg font-semibold text-gray-900 dark:text-white truncate"
+                                title-element>{{ a.title }}</h4>
+                        {% endif %}
+                        <div class="flex items-center mb-3">
+                            <img data-dropdown-toggle="userDropdown-{{ i }}_{{ j }}"
+                                 id="avatar{{ i }}_{{ j }}"
+                                 image-element
+                                 data-dropdown-placement="bottom-start"
+                                 class="rounded-full ring-2 ring-gray-300 dark:ring-gray-500 cursor-pointer mb-3 rounded-full shadow-lg {% if "black" in avatar %} bg-gray-300 dark:bg-gray-700 {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}
+                                                         {% if a.title == "" %}
+                                                 w-8
+                                                 h-8
+                                                 mt-4
+                                                 {% else %}
+                                                 w-6
+                                                 h-6
+                                                 {% endif %}"
+                                 src="{{ a.author_pic }}"
+                                 alt="{{ a.author }}'s profile picture">
+                            <img class="hidden"
+                                 image-element2
+                                 src="{{ a.course.avatar.avatar_url }}">
+                            <br>
+                            <div class="flex flex-col text-xs text-gray-700 dark:text-gray-400 pl-2">
+                                {% if a.title == "" %}
+                                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white truncate mb-1 cursor-pointer hover:underline"
+                                        data-dropdown-toggle="userDropdown-{{ i }}_{{ j }}"
+                                        author-element>
+                                        {{ a.author }}
+                                    </h4>
+                                {% endif %}
+                                <div {% if a.title != "" %} class="-mt-1.5"{% endif %}>
+                                    {% if a.title != "" %}
+                                        <span class="text-lg cursor-pointer hover:underline"
+                                              author-element
+                                              data-dropdown-toggle="userDropdown-{{ i }}_{{ j }}">{{ a.author }}</span>
+                                        <span class="text-lg">></span>
+                                    {% endif %}
+                                    <span class="bg-gray-300 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300 -mt-1"
+                                          course-name-element>
+                                                        {{ a.course.name }}
+                                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center mb-3">
+                            <div class="text-sm text-gray-900 dark:text-white font-normal">
+                                <div class="text-sm text-gray-900 dark:text-white font-normal line-clamp-5"
+                                     content-element>{{ fmt(a.content) | safe }}</div>
+                            </div>
+                        </div>
+                        <time class="text-xs font-medium text-blue-600 dark:text-blue-500">
+                            {{ strftime(a.date, "%-I:%M %p") }}
+                        </time>
+                        <time post-time-element hidden class="hidden">Posted at
+                            {{ strftime(a.date, "%-m/%-d/%y %-I:%M %p") }}</time>
+                        <div due-time-element hidden class="hidden"></div>
+                    </div>
+                    <!-- Dropdown menu -->
+                    <div id="userDropdown-{{ i }}_{{ j }}" style="border-radius:10px; overflow:hidden;"
+                         class="absolute hidden bg-gray-50 divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600">
+                        <div style="border-radius:10px 10px 0 0;
+                                height:60px;
+                                background:{% if a.author_color %}rgba
+                            {{ a.author_color }}{% else %}#515A67{% endif %};">
+                            {% if a.imported_from|lower == "schoology" %}
+                                <div data-tooltip-target="tooltip-default-{{ i }}"
+                                     style="float:right;
+                                                            margin:5px;">
+                                    <img alt="Schoology Image"
+                                         src="/static/images/logos/schoology.png"
+                                         class="w-5 h-5">
+                                    <div id="tooltip-default-{{ i }}"
+                                         role="tooltip"
+                                         class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                                        User Imported from Schoology
+                                        <div class="tooltip-arrow" data-popper-arrow></div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="px-4 py-3 text-xl text-gray-900 dark:text-white"
+                             style="border-radius:0 0 10px 10px;">
+                            <div style="text-align: left; margin-left:3px;">
+                                <div style="margin-top:-60px;">
+                                    <img style="border: solid 5px;border-color: rgb(55,65,81);"
+                                         src="{{ a.author_pic }}"
+                                         class="w-24 h-24 rounded-full border-white dark:border-gray-700 {% if "black" in avatar %} bg-gray-300 {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}"
+                                         alt="{{ a.author }}'s Profile Picture">
+                                    <span class="absolute  w-7 h-7 bg-green-400 border-4 border-white dark:border-gray-700 rounded-full"
+                                          style="
+                                                                 left: 80px;
+                                                                 top: 75px;
+                                                                 "></span>
+                                </div>
+                                <div>{{ a.author }}</div>
+
+                                {% if a.author_email %}
+                                    <div class="text-sm white uppercase" style="
+    font-weight: 900;
+    margin-top: 10px;
+    margin-bottom: 5px;
+">Email
+                                    </div>
+                                    <div class="text-sm text-gray-400">{{ a.author_email }}</div>{% endif %}
+                                {% if a.author_school %}
+                                    <div class="text-sm white uppercase" style="
+    font-weight: 900;
+    margin-top: 10px;
+    margin-bottom: 5px;
+">School
+                                    </div>
+                                    <div class="text-sm text-gray-400">
+                                        {{ a.author_school }}
+                                    </div>
+                                {% endif %}
+                                <div class="mb-6" style="margin-top: 10px;">
+                                    <input onsubmit="window.location.href='/chat';" type="text"
+                                           id="msg"
+                                           class="bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                           placeholder="Message @{{ a.author }}"
+                                           required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </li>
+    {% endfor %}
+    {% if announcements.items()|length == 0 %}
+        <li class="mb-10 ml-4">
+            <div class="absolute w-3 h-3 bg-gray-200 rounded-full -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700">
+            </div>
+            <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+                {{ strftime(user_acc.created_at, "%a %b %-d %Y") }}
+            </time>
+            <br>
+            <div class="grid grid-cols-4 gap-2 pt-2">
+                <div role="alert"
+                     class="w-full max-w-xs p-4 text-gray-900 bg-gray-100 rounded-lg shadow dark:bg-gray-800/75 dark:text-gray-300 overflow-hidden relative">
+                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2 truncate">
+                        Welcome to Nebulus</h4>
+                    <div class="flex items-center mb-3">
+                        <img class="w-6 h-6 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 {% if "black" in avatar %} bg-gray-300 {% else %} dark:bg-gray-900 dark:hover:bg-gray-800 {% endif %}"
+                             src="{{ avatar }}"
+                             alt="Nebulus profile picture">
+                        <br>
+                        <p class="text-xs text-gray-700 dark:text-gray-400 pl-2 line-clamp-1">
+                            <span class="uppercase font-bold text-black dark:text-white ">Nebulus</span>
+                            in
+                            <span class="bg-gray-100 text-gray-800 text-xs font-normal uppercase mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">
+                                                Nebulus Auto-Generator
+                                            </span>
+                        </p>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="text-sm text-gray-900 dark:text-white font-normal">
+                            <div class="text-sm text-gray-900 dark:text-white font-normal line-clamp-3">
+                                Welcome to your Nebulus account! Get started by adding your
+                                courses
+                                - school & extracurricular!
+                            </div>
+                            <time class="text-xs font-medium text-blue-600 dark:text-blue-500">
+                                {{ strftime(user_acc.created_at, "%-I:%M %p") }}
+                            </time>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    {% endif %}
+</ol>

@@ -10,26 +10,84 @@ const Default = {
     }
 };
 
-for (const button of document.getElementsByClassName('expand')) {
-    const parent = button.parentElement;
-    let title = "Announcement from " + parent.querySelector('[author-element]').innerHTML;
-    try {
-        title = parent.querySelector('[title-element]').innerHTML;
-    } catch (ignored) {
+function updateExpand() {
+    for (const button of document.getElementsByClassName('expand')) {
+        const parent = button.parentElement;
+        let title = "Announcement from " + parent.querySelector('[author-element]').innerHTML;
+        try {
+            title = parent.querySelector('[title-element]').innerHTML;
+        } catch (ignored) {
+        }
+        button.addEventListener('click', () =>
+            openDetailsModal(
+                parent.querySelector('[content-element]').innerHTML,
+                title,
+                parent.querySelector('[author-element]').innerHTML,
+                parent.querySelector('[image-element]').src,
+                parent.querySelector('[course-name-element]').innerHTML,
+                parent.querySelector('[post-time-element]').innerHTML,
+                parent.querySelector('[due-time-element]').innerHTML,
+                parent.querySelector('[type-element]').innerHTML,
+                parent.querySelector('[image-element2]').src
+            )
+        );
     }
-    button.addEventListener('click', () =>
-        openDetailsModal(
-            parent.querySelector('[content-element]').innerHTML,
-            title,
-            parent.querySelector('[author-element]').innerHTML,
-            parent.querySelector('[image-element]').src,
-            parent.querySelector('[course-name-element]').innerHTML,
-            parent.querySelector('[post-time-element]').innerHTML,
-            parent.querySelector('[due-time-element]').innerHTML,
-            parent.querySelector('[type-element]').innerHTML,
-            parent.querySelector('[image-element2]').src
-        )
-    );
+}
+
+updateExpand();
+
+{
+    const recActivity = document.getElementById("recent-activity-div");
+    recActivity.style.scrollBehavior = "smooth";
+    let announcementStart = 8;
+    let eventStart = 15;
+    let waiting = false;
+    let endMessageAdded = false;
+
+    recActivity.addEventListener("scroll", () => {
+        if ($(recActivity).scrollTop() + $(recActivity).innerHeight() < $(recActivity)[0].scrollHeight - 5)
+            return;
+
+        if (announcementStart >= announcementEnd) {
+            if (!endMessageAdded) {
+                endMessageAdded = true;
+                recActivity.innerHTML += `
+                <div class="flex gap-4 justify-center place-items-center mb-4">
+                    <img src="${randomCat()}" class="w-8 h-10">
+                    <p class="text-gray-500 dark:text-gray-400 text-2xl">This is the end...</p>
+                </div>`
+            }
+
+            return;
+        }
+
+        if (waiting)
+            return;
+
+        recActivity.innerHTML += `
+        <div class="flex gap-4 justify-center place-items-center mb-4">
+            <img src="${v3Image}" class="w-10 h-12">
+            <p class="text-gray-500 dark:text-gray-400 text-2xl">Loading...</p>
+        </div>
+        `
+        recActivity.scrollTop = recActivity.scrollHeight;
+
+        waiting = true;
+        const req = $.ajax({
+            url: "/api/v1/internal/get/recent-activity",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({load: announcementStart})
+        });
+        req.done(data => {
+            recActivity.children[recActivity.children.length - 1].remove();
+            announcementStart += 8;
+            waiting = false;
+
+            recActivity.innerHTML += data;
+            updateExpand();
+        });
+    });
 }
 
 function openDetailsModal(content, title, author, pic, course, postTime, dueTime, type, coursepic) {
@@ -67,7 +125,6 @@ function openDetailsModal(content, title, author, pic, course, postTime, dueTime
 
     document.getElementById('dueTime').innerHTML = dueTime;
     document.getElementById('announcementBody').innerHTML = content;
-    document.getElementById("announcementBody").innerHTML = document.getElementById("announcementBody").innerText;
     document.getElementById("courseNameForSubmission").innerText = course;
     openModal("modal");
 }

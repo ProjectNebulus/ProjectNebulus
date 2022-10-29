@@ -73,7 +73,7 @@ def lms_modal():
 @logged_in
 def app():
     user_acc = read.find_user(id=session["id"])
-    user_events = read.sort_user_events(session["id"])
+    announcements, events, a_len, e_len = read.sort_user_events(session["id"])
 
     show_popup = session.get("showPopup")
     if show_popup:
@@ -88,8 +88,10 @@ def app():
         user_acc=user_acc,
         read=read,
         page="Nebulus - Learning",
-        announcements=user_events[0],
-        events=user_events[1],
+        announcements=announcements,
+        events=events,
+        ae=a_len,
+        ee=e_len,
         enumerate=enumerate,
         strftime=strftime,
         translate=getText,

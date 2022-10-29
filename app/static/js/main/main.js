@@ -400,6 +400,11 @@ function openModal(object_id) {
     }, 25)
 }
 
+
+function randomCat() {
+    return list[Math.floor(Math.random() * list.length)];
+}
+
 function closeModal(object_id) {
     let targetEl = document.getElementById(object_id);
     targetEl.style.scale = "0";

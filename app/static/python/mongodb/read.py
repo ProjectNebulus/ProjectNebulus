@@ -217,30 +217,28 @@ def sort_course_events(course_id: int, show_events=True, load_start=0, max_days=
         events_assessments_assignments = list(chain(assignments, assessments))
 
     sorted_events = sorted(
-        events_assessments_assignments[load_start:load_start + max_events], key=lambda obj: sortByDateTime(obj)
+        events_assessments_assignments[load_start:load_start + max_events], key=sortByDateTime,
+        reverse=True
     )
     dates = dict(
         {
             key: list(result)
-            for key, result in groupby(
-            sorted_events, key=lambda obj: sortByDateTime(obj)
-        )
+            for key, result in groupby(sorted_events, key=sortByDateTime)
         }
     )
 
-    sorted_announcements = sorted(announcements, key=lambda obj: obj.date)[load_start:load_start + max_days]
+    sorted_announcements = sorted(announcements, key=lambda obj: obj.date, reverse=True)[
+                           load_start:load_start + max_days]
     announcements = dict(
-        reversed(
-            list(
-                {
-                    key: list(result)
-                    for key, result in groupby(sorted_announcements, key=lambda obj: obj.date.date())
-                }.items()
-            )
+        list(
+            {
+                key: list(result)
+                for key, result in groupby(sorted_announcements, key=lambda obj: obj.date.date())
+            }.items()
         )
     )
 
-    return [announcements, dates]
+    return announcements, dates
 
 
 def sort_user_events(user_id: str, show_events=True, load_start=0, max_days=8, max_events=10):
@@ -256,32 +254,31 @@ def sort_user_events(user_id: str, show_events=True, load_start=0, max_days=8, m
     else:
         events_assessments_assignments = list(chain(assignments, assessments))
 
-    sorted_events = sorted(
-        events_assessments_assignments,
-        key=lambda obj: sortByDateTime(obj),
-    )[load_start:load_start + max_events]
+    sorted_events = sorted(events_assessments_assignments, key=sortByDateTime, reverse=True) \
+        [load_start:load_start + max_events]
 
-    dates = dict(
+    grouped_events = dict(
         {
-            key: reversed(list(result))
-            for key, result in groupby(sorted_events, key=lambda obj: sortByDateTime(obj))
+            key: list(result)
+            for key, result in groupby(sorted_events, key=sortByDateTime)
         }
     )
 
-    sorted_announcements = sorted(announcements, key=lambda obj: obj.date)[load_start:load_start + max_days]
-    announcements = dict(
-        reversed(
-            list(
-                {
-                    key: list(result)
-                    for key, result in groupby(sorted_announcements, key=lambda obj: obj.date.date()
-                                               )
-                }.items()
-            )
+    sorted_announcements = sorted(announcements, key=lambda obj: obj.date, reverse=True)[
+                           load_start:load_start + max_days]
+    grouped_announcements = dict(
+        list(
+            {
+                key: list(result)
+                for key, result in groupby(sorted_announcements, key=lambda obj: obj.date.date())
+            }.items()
         )
     )
 
-    return [announcements, dates]
+    a_len = len(list(groupby(announcements, key=lambda obj: obj.date)))
+    e_len = len(list(groupby(events_assessments_assignments, key=sortByDateTime)))
+
+    return grouped_announcements, grouped_events, a_len, e_len
 
 
 def unsorted_user_events(user_id: str) -> list[list]:
@@ -296,7 +293,7 @@ def unsorted_user_events(user_id: str) -> list[list]:
     announcements = list(reversed(announcements))
     return [
         announcements,
-        sorted(events_assessments_assignments, key=lambda obj: sortByDateTime(obj)),
+        sorted(events_assessments_assignments, key=sortByDateTime),
     ]
 
 

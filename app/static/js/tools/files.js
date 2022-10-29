@@ -54,7 +54,6 @@ function startFile(file, link) {
 </li>`;
     let isDoc = false;
     let isPDF = false;
-    const list = ['Red', 'Blue', 'Green', 'Blurple', 'Pink', 'Jade', 'Yellow'];
     let extension = file.split(".");
     extension = extension[extension.length - 1].toLowerCase();
     if (extension.includes("pdf")) isPDF = true;
@@ -64,7 +63,7 @@ function startFile(file, link) {
         document.getElementById('pdf-viewer').style.display = 'block';
         const loading = document.getElementById("loading");
         loading.style.display = "flex";
-        loading.children[0].src = `/static/images/nebulusCats/new${list[Math.floor(Math.random() * list.length)]}.png`;
+        loading.children[0].src = randomCat();
 
         try {
             startPDF(link);
