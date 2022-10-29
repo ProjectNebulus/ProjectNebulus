@@ -6,13 +6,11 @@ document.getElementById("extraWidgets").innerHTML = `
     <span style="font-size:30px;" class="material-icons">add</span>
 </button>`
 
-$.ajax({
-    url: '/import-course',
-    type: 'POST',
-    contentType: 'application/json',
-}).done(data => {
-    document.getElementById("courseModal").innerHTML += data;
+window.addEventListener("load", setUpFunc);
 
+let setup = false;
+
+function setUpFunc() {
     let modal = document.getElementById('courseModal');
     let templateLists = modal.getElementsByClassName('scroll');
 
@@ -36,15 +34,34 @@ $.ajax({
             return;
 
         modal.style.display = 'block';
-        for (let screen of screens) screen.style.display = 'none';
+        for (let screen of [...screens, ...document.querySelectorAll("#courseModal form:not(#create-course)")])
+            screen.style.display = 'none';
+
+        for (let screen of document.querySelectorAll("#course-list, #glist, #clist"))
+            screen.style.display = 'block';
+
         screens[0].style.display = 'block';
+
+        if (setup)
+            return;
+
+        setup = true;
+
+        $.ajax({
+            url: '/import-course',
+            type: 'POST',
+            contentType: 'application/json',
+        }).done(data => {
+            document.getElementById("courseModal").innerHTML += data;
+            setUpFunc();
+        });
     };
 
     // set up close button
     for (let close of modal.getElementsByClassName('close')) {
         close.className += ' material-icons dark:text-white';
         close.innerHTML = 'close';
-        close.onclick = () => (modal.style.display = 'none');
+        close.onclick = () => modal.style.display = 'none';
     }
 
     // set up course stuff
@@ -86,27 +103,28 @@ $.ajax({
     document.getElementById('skip-templates').addEventListener('click', skipTemplates);
 
     const pageCounters = modal.getElementsByClassName('pageCount');
+    if (pageCounters[0].classList.length === 0) {
+        for (const i in pageCounters) {
+            pageCounters[i].className += ' flex items-center p-6 space-x-2 absolute bottom-0';
+            for (let j = 0; j < 3; j++) {
+                if (j === i)
+                    pageCounters[i].innerHTML +=
+                        "<div class='rounded-full w-2 h-2 bg-gray-400 dark:bg-gray-500'></div>";
+                else
+                    pageCounters[i].innerHTML +=
+                        "<div class='rounded-full w-2 h-2 bg-gray-300 dark:bg-gray-400'></div>";
+            }
 
-    for (const i in pageCounters) {
-        pageCounters[i].className += ' flex items-center p-6 space-x-2 absolute bottom-0';
-        for (let j = 0; j < 3; j++) {
-            if (j === i)
-                pageCounters[i].innerHTML +=
-                    "<div class='rounded-full w-2 h-2 bg-gray-400 dark:bg-gray-500'></div>";
-            else
-                pageCounters[i].innerHTML +=
-                    "<div class='rounded-full w-2 h-2 bg-gray-300 dark:bg-gray-400'></div>";
-        }
-
-        try {
-            pageCounters[i].setAttribute('style', 'transform: translate(300%)');
-        } catch (e) {
+            try {
+                pageCounters[i].setAttribute('style', 'transform: translate(300%)');
+            } catch (e) {
+            }
         }
     }
 
     /*
 
-    To course a new template, add a new dictionary and put the parameters:
+    To create a new template, add a new dictionary and put the parameters:
 
     name (e.g. Science)
     icon (e.g. science.svg)
@@ -293,7 +311,7 @@ $.ajax({
 
         document.getElementById('create-course').onsubmit = () => lms(subtemplate);
     }
-});
+}
 
 
 function createSchoologyCourse() {
@@ -327,6 +345,7 @@ function createGoogleCourse() {
     );
 }
 
+
 function createCanvasCourse() {
     const input = document.getElementById('canvas-course-id');
     const teacher = document.getElementById('canvas-course-teacher');
@@ -352,6 +371,10 @@ function importSchoologyAll() {
 function importSchoology() {
     let modal = document.getElementById('courseModal');
     let screens = modal.getElementsByClassName('CoursePage');
+
+    if (screens.length < 4)
+        return;
+
     screens[2].style.display = 'none';
     screens[3].style.display = 'block';
 }
@@ -359,6 +382,10 @@ function importSchoology() {
 function importCanvas() {
     let modal = document.getElementById('courseModal');
     let screens = modal.getElementsByClassName('CoursePage');
+
+    if (screens.length < 4)
+        return;
+
     screens[2].style.display = 'none';
     screens[5].style.display = 'block';
 }
@@ -367,6 +394,10 @@ function importCanvas() {
 function importGClassroom() {
     let modal = document.getElementById('courseModal');
     let screens = modal.getElementsByClassName('CoursePage');
+
+    if (screens.length < 4)
+        return;
+
     screens[2].style.display = 'none';
     screens[4].style.display = 'block';
 }

@@ -1,7 +1,10 @@
+from __future__ import annotations
+
 from dotenv import load_dotenv
 from flask import session
 
 from . import read
+from .read import find_user
 
 load_dotenv()
 import schoolopy
@@ -11,6 +14,7 @@ from ..classes import *
 
 def generateSchoologyObject(_id: str) -> schoolopy.Schoology:
     key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
+    # noinspection SpellCheckingInspection
     secret = "59ccaaeb93ba02570b1281e1b0a90e18"
     user = read.find_user(id=_id)
 
@@ -48,7 +52,7 @@ def create_course(data: dict) -> Course:
     return course
 
 
-def create_nebulusdoc(data: dict) -> NebulusDocument:
+def create_nebulus_doc(data: dict) -> NebulusDocument:
     user = read.find_user(id=session["id"])
 
     doc = NebulusDocument(**data)
@@ -60,7 +64,7 @@ def create_nebulusdoc(data: dict) -> NebulusDocument:
     return doc.id
 
 
-def update_nebulusdoc(data: dict):
+def update_nebulus_doc(data: dict):
     # doc = getNebulusDocument(data["id"])
     doc = NebulusDocument.objects.get(pk=data["id"])
     # print(doc.__dict__)
@@ -91,12 +95,15 @@ def create_user(data: dict) -> str | list[str | User]:
     return ["0", user]
 
 
-def createEvent(data: dict) -> Event:
+def createEvent(data: dict, save=True) -> Event:
     event = Event(**data)
-    event.save(force_insert=True)
     course = event.course
     course.events.append(event)
-    course.save()
+
+    if save:
+        event.save(force_insert=True)
+        course.save(validate=False, clean=False)
+
     return event
 
 
@@ -114,21 +121,27 @@ def createNebulusDocument(data: dict, user_id: str) -> NebulusDocument:
     return doc
 
 
-def createAssignment(data: dict) -> Assignment:
+def createAssignment(data: dict, save=True) -> Assignment:
     assignment = Assignment(**data)
-    assignment.save(force_insert=True)
     course = assignment.course
     course.assignments.append(assignment)
-    course.save(validate=False)
+
+    if save:
+        assignment.save(force_insert=True)
+        course.save(validate=False)
+
     return assignment
 
 
-def createGrades(data: dict) -> Grades:
+def createGrades(data: dict, save=True) -> Grades:
     grades = Grades(**data)
-    grades.save(force_insert=True)
     course = grades.course
     course.grades.append(grades)
-    course.save()
+
+    if save:
+        grades.save(force_insert=True)
+        course.save()
+
     return grades
 
 
@@ -156,21 +169,27 @@ def createDocumentFile(data: dict) -> DocumentFile:
     return document_file
 
 
-def createFolder(data: dict) -> Folder:
+def createFolder(data: dict, save=True) -> Folder:
     folder = Folder(**data)
-    folder.save(force_insert=True)
     course = folder.course
     course.folders.append(folder)
-    course.save()
+
+    if save:
+        folder.save(force_insert=True)
+        course.save()
+
     return folder
 
 
-def createAnnouncement(data: dict) -> Announcement:
+def createAnnouncement(data: dict, save=True) -> Announcement:
     announcement = Announcement(**data)
-    announcement.save(force_insert=True)
     course = announcement.course
     course.announcements.append(announcement)
-    course.save(validate=False)
+
+    if save:
+        announcement.save(force_insert=True)
+        course.save(validate=False)
+
     return announcement
 
 
@@ -261,23 +280,23 @@ def pinMessage(message_id, chat_id):
     chat.save()
 
 
-def sendFriendRequest(user_id, reciever_id):
+def sendFriendRequest(user_id, receiver_id):
     user = User.objects.get(pk=user_id)
-    reciever = User.objects.get(pk=reciever_id)
-    if not reciever.chatProfile.acceptingFriendRequests:
+    receiver = User.objects.get(pk=receiver_id)
+    if not receiver.chatProfile.acceptingFriendRequests:
         return "0"
-    user.chatProfile.outgoingFriendRequests.append(reciever)
-    reciever.incomingFriendrequests.append(user)
+    user.chatProfile.outgoingFriendRequests.append(receiver)
+    receiver.incomingFriendrequests.append(user)
     user.save()
-    reciever.save()
+    receiver.save()
 
 
-def acceptFriendRequest(reciever_id, sender_id):
-    reciever = User.objects.get(pk=reciever_id)
+def acceptFriendRequest(receiver_id, sender_id):
+    receiver = User.objects.get(pk=receiver_id)
     sender = User.objects.get(pk=sender_id)
-    reciever.chatProfile.incomingFriendRequests.remove(sender)
-    sender.chatProfile.outgoingFriendRequests.remove(reciever)
-    reciever.chatProfile.friends.append(sender)
-    sender.chatProfile.friends.append(reciever)
+    receiver.chatProfile.incomingFriendRequests.remove(sender)
+    sender.chatProfile.outgoingFriendRequests.remove(receiver)
+    receiver.chatProfile.friends.append(sender)
+    sender.chatProfile.friends.append(receiver)
     sender.save()
-    reciever.save()
+    receiver.save()
