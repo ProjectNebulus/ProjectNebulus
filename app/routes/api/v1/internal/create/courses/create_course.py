@@ -7,7 +7,7 @@ from googleapiclient.discovery import build
 
 from app.static.python.mongodb import create, read
 from app.static.python.utils.colors import getColor
-from static.python.classes import Announcement
+from app.static.python.classes import Announcement
 from ... import internal
 
 
