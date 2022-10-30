@@ -534,7 +534,7 @@
                                    style="border-style:none;">
                         </div>
                         <p style="float:right;margin-top:-30px;" class="text-xl dark:text-white">
-                            <button type="button"
+                            <button onclick='openModal("accessModal")' type="button"
                                     style="margin:5px;"
                                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                                 <i class="material-icons"
@@ -879,4 +879,101 @@
 
         setInterval(save_editor, 500);
     </script>
+    <div id="accessModal" tabindex="-1"
+         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full pointer-events-none justify-center items-center flex"
+         style="scale: 1; opacity: 1; transition: all 0.2s ease 0s;" aria-modal="true" role="dialog">
+        <div class="relative p-4 w-full max-w-2xl h-full md:h-auto pointer-events-auto">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
+                <div class="flex justify-between items-start p-4 rounded-t">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Share "{{ title }}"</h3>
+
+                    <button type="button"
+                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm  ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                            onclick="closeModal('accessModal')">
+                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                  clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <div class="p-6 space-y-6">
+                    <input type="text"
+                           class="block p-4 w-full text-gray-900 bg-gray-50 rounded-lg sm:text-md dark:bg-gray-900 dark:placeholder-gray-400 dark:text-white"
+                           style="border-width: 0" placeholder="Add People to this Document">
+                    <p class="text-gray-500 text-xl uppercase">People with Access
+                    </p>
+
+                    <div class="flex items-center space-x-4 hover:bg-gray-700 p-3 rounded-lg">
+                        <img class="w-10 h-10 rounded-full" src="/static/images/nebulusCats/ocean_cat.png" alt="">
+                        <div class="font-medium dark:text-white">
+                            <div>Nicholas Wang</div>
+                            <div class="text-sm text-gray-500 dark:text-gray-400">nicholasxwang</div>
+                        </div>
+                        <div class="font-medium dark:text-white" style="
+">
+                            <div class="text-gray-400" style="
+    right: 30px;
+    vertical-align: middle;
+    position: absolute;
+">Owner
+                            </div>
+
+                        </div>
+                    </div>
+                    <p class="text-gray-500 text-xl uppercase">General Access
+                    </p>
+                    <div class="hover:bg-gray-700 p-3 rounded-lg">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-10 h-10 rounded-full bg-gray-700" alt="" style="
+    color: white;
+"><i class="material-icons" style="
+    margin: 20%;
+">lock</i></div>
+                            <div class="font-medium dark:text-white">
+                                <div><select id="countries" style="
+    background: transparent;
+    outline: red;
+">
+                                    <option selected="">Restricted</option>
+                                    <option>Anyone with the Link</option>
+                                    <option>Anyone on Nebulus</option>
+
+
+                                </select></div>
+                                <div class="text-sm text-gray-500 dark:text-gray-400">Only people listed abovew have
+                                    access.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="flex items-center p-6 space-x-2 rounded-b">
+
+
+                    <button type="button"
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            onclick="closeModal('accessModal')" style="
+    vertical-align: middle;
+"><i class="material-icons" style="
+    vertical-align: middle;
+    margin-right: 5px;
+">check_circle</i>Done
+                    </button>
+                    <button type="button"
+                            class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-900 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                            style="vertical-align: middle;position: absolute;right: 30px;"><i class="material-icons"
+                                                                                              style="
+    vertical-align: middle;
+    margin-right: 5px;
+">link</i>Copy Link
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -9,7 +9,7 @@ def study():
     return render_template(
         "learning/tools/study.html",
         page="Nebulus - Study Session",
-        user=session.get("username"),
+        user=session.get("username"), user_id=session.get("id"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         translate=getText,

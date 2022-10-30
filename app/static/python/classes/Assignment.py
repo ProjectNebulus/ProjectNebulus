@@ -35,6 +35,9 @@ class Assignment(Snowflake):
         null=True,
         description="The number of points the teacher assigned.",
     )
+    folder = ReferenceField(
+        "Folder", default=None, null=True
+    )  # 0 if it's in the course, not any folder
     creationDate = DateTimeField(
         default=None, null=True, description="The time the assignment was created."
     )

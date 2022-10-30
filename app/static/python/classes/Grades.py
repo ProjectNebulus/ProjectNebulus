@@ -12,7 +12,10 @@ class Grades(Snowflake):
     grade = FloatField(required=False)
 
     def clean(self):
-        self.grade = sum([term.grade for term in self.terms]) / len(self.terms)
+        if (len(self.terms) == 0):
+            self.grade = 100
+        else:
+            self.grade = sum([term.grade for term in self.terms]) / len(self.terms)
         self.letter = getLetterGrade(self.grade)
 
 

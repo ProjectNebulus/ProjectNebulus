@@ -28,7 +28,7 @@ def course_page(page, **kwargs):
             render_template(
                 "errors/404.html",
                 page="404 Not Found",
-                user=session.get("username"),
+                user=session.get("username"), user_id=session.get("id"),
                 email=session.get("email"),
                 avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
                 translate=getText,
@@ -50,11 +50,15 @@ def course_page(page, **kwargs):
     elif page == "grades" and not course.grades:
         course.grades = Grades(course=course, student=find_user(id=session["id"]))
 
-        if course.grades.percent is None:
+        try:
+            print(course.grades.grade)
+        except:
+            course.grades.clean()
+        if (course.grades.grade == None):
             course.grades.clean()
 
         print(f"Course: {course.name} (id={course_id})")
-        print("Percent:", course.grades.percent)
+        print("Percent:", course.grades.grade)
         print("Letter:", course.grades.letter)
 
     return render_template(
@@ -64,7 +68,7 @@ def course_page(page, **kwargs):
         src=iframe_src,
         course=course,
         course_id=course_id,
-        user=session.get("username"),
+        user=session.get("username"), user_id=session.get("id"),
         email=session.get("email"),
         avatar=session.get("avatar", "/v3.gif"),
         disableArc=(page != "course"),

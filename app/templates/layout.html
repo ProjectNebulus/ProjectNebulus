@@ -120,7 +120,10 @@
             <li id="delete_menu" class="text-red-500">
                 <a href="/logout"><i class="material-icons">logout</i>Log Out</a>
             </li>
-        </ul>
+            <li class="text-gray-500">
+                <a onclick="navigator.clipboard.writeText('{{ user_id }}');"><i class="material-icons">content_copy</i>Copy
+                    User ID</a>
+            </li>
     </div>
     <style>
         ::-moz-selection { /* Code for Firefox */

@@ -10,7 +10,7 @@ def docs():
     docs = read.get_user_docs(session["id"])
     return render_template(
         "learning/tools/docs.html",
-        user=session.get("username"),
+        user=session.get("username"), user_id=session.get("id"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         translate=getText,
         docs=docs,
@@ -55,7 +55,7 @@ def notepad():
     return render_template(
         "learning/tools/notepad.html",
         page="Nebulus - Notepad",
-        user=session.get("username"),
+        user=session.get("username"), user_id=session.get("id"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         read=read,
         fonts=fonts,
@@ -104,7 +104,7 @@ def document(id):
         return render_template(
             "learning/tools/document.html",
             page="Nebulus - Notepad",
-            user=session.get("username"),
+            user=session.get("username"), user_id=session.get("id"),
             avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
             read=read,
             fonts=fonts,

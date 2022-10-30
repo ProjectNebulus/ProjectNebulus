@@ -98,7 +98,7 @@ def search_within_user():
             de = ""
         everything.append(
             ["event", event["title"], de, "a",
-             event.course.avatar.avatar_url,
+             event["course"]["avatar"]["avatar_url"],
              "",
              ]  # type  # name  # description
         )

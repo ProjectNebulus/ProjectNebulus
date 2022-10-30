@@ -9,7 +9,7 @@ def soon():
     return render_template(
         "errors/coming_soon.html",
         page="Nebulus - Learning, All In One",
-        user=session.get("username"),
+        user=session.get("username"), user_id=session.get("id"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         translate=getText,

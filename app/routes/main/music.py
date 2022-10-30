@@ -662,7 +662,7 @@ def main_program(file_name):
 def music():
     return render_template(
         "music/music.html",
-        user=session.get("username"),
+        user=session.get("username"), user_id=session.get("id"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         translate=getText,
     )
@@ -703,7 +703,7 @@ def music_post():
                 "music/music_image_results.html",
                 songs=songs,
                 id_=search(songs[0]["track_name"] + " by " + songs[0]["artist_name"]),
-                user=session.get("username"),
+                user=session.get("username"), user_id=session.get("id"),
                 avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
             )
 
@@ -831,7 +831,7 @@ def music_post():
         return render_template(
             "music/music_results.html",
             noresults=True,
-            user=session.get("username"),
+            user=session.get("username"), user_id=session.get("id"),
             avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         )
 
@@ -862,7 +862,7 @@ def music_post():
         noresults=False,
         mylist=mylist,
         spotify_arr=spotify_arr,
-        user=session.get("username"),
+        user=session.get("username"), user_id=session.get("id"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         translate=getText,
     )
@@ -879,7 +879,7 @@ def music_spotify(smth):
             return render_template(
                 "music/spotify_preview.html",
                 i=i,
-                user=session.get("username"),
+                user=session.get("username"), user_id=session.get("id"),
                 avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
                 translate=getText,
             )
@@ -931,7 +931,7 @@ def music_video(id_: str):
         youtube=youtube,
         sub=sub,
         link=link,
-        user=session.get("username"),
+        user=session.get("username"), user_id=session.get("id"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         translate=getText,
     )

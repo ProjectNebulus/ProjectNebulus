@@ -411,7 +411,7 @@ def search(keyword: str, username: str):
             }
         },
         {"$project": {"title": 1, "_id": 1, "_cls": 1}},
-        {"$limit": 20},
+        {"$limit": 50},
     ]
     courses = Course.objects(Q(authorizedUsers=user.id) & Q(name__istartswith=keyword))[
               :10
