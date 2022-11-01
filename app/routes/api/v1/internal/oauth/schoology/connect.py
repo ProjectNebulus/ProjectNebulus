@@ -232,13 +232,15 @@ def schoology_connect():
     # import_schoology()
     return str(sc.get_me().name_display + "•" + sc.get_me().primary_email)
 
+
 @internal.route("/oauth/schoology/schoolVerify")
 def schoology_school_verify():
-    email_format = request.form.get("email")
-    domain = request.form.get("domain")
-    schoology_key = request.form.get("key")
-    schoology_secret = request.form.get("secret")
-    sc = schoolopy.Schoology(schoolopy.Auth(schoology_key, schoology_secret), domain=domain, )
+    email_format = request.json.get("email")
+    domain = request.json.get("domain")
+    schoology_key = request.json.get("key")
+    schoology_secret = request.json.get("secret")
+    sc = schoolopy.Schoology(schoolopy.Auth(schoology_key, schoology_secret), )
     email = sc.get_me().primary_email
-    if (email_format in str(email)): return "Yes"
+    if email_format in str(email):
+        return "Yes"
     return "No"

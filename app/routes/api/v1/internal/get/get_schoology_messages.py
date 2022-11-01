@@ -9,7 +9,7 @@ from app.static.python.mongodb import read
 from app.static.python.utils.colors import getColor
 
 
-@internal.route("/get_schoology_messages", methods=["POST"])
+@internal.route("/get/schoology/messages", methods=["POST"])
 @private_endpoint
 def get_schoology_messages():
     sc = read.getSchoologyAuth(session["id"])

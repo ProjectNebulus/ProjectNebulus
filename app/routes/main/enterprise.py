@@ -9,7 +9,8 @@ def enterprise():
     return render_template(
         "main/enterprise.html",
         page="Nebulus - Enterprise",
-        user=session.get("username"), user_id=session.get("id"),
+        user=session.get("username"),
+        user_id=session.get("id"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         translate=getText,

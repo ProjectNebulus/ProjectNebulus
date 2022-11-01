@@ -346,6 +346,7 @@ window.addEventListener('load', function () {
 
 const loginUser = () => {
     document.getElementById("log_in").innerHTML = loadingIcon(5) + "Logging in...";
+    document.getElementById("log_in").style.backgroundColor = '#1C64F2'
     window.location.href = getRedirectParam();
 }
 

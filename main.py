@@ -19,7 +19,7 @@ app.config["secret_key"] = os.getenv("")
 debug = False
 if __name__ == "__main__":
     if (
-            platform.system().lower() == "linux"
+        platform.system().lower() == "linux"
     ):  # linux - use3d for VPS (like DigitalOcean)
         debug = False
         port = 8080

@@ -65,7 +65,7 @@ def lms_modal():
         gcourses=gcourses,
         scCourses=scCourses,
         canvascourses=canvascourses,
-        scGroups=scGroups
+        scGroups=scGroups,
     )
 
 
@@ -252,9 +252,7 @@ def get_courses():
             for i in range(0, len(scGroups)):
                 scGroups[i] = dict(scGroups[i])
                 scGroups[i]["link"] = (
-                        schoology.schoologyDomain
-                        + "group/"
-                        + scCourses[i]["id"]
+                        schoology.schoologyDomain + "group/" + scCourses[i]["id"]
                 )
             scSchool = sc.get_school(scCourses[0]["school_id"])
             scGroups.append(scSchool)

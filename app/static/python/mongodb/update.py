@@ -3,13 +3,13 @@ import datetime
 from flask import session
 
 from ..classes import (
+    Announcement,
     Chat,
     Community,
     Message,
     NebulusDocument,
     Planner,
     Schoology,
-    Announcement,
     User,
 )
 from ..classes.Notepad import Notepad

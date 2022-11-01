@@ -13,7 +13,8 @@ def profile():
     return render_template(
         "user/profile.html",
         page="Nebulus - Profile",
-        user=session.get("username"), user_id=session.get("id"),
+        user=session.get("username"),
+        user_id=session.get("id"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         read=read,
@@ -26,7 +27,8 @@ def pubProfile(id):
     userobject = User.objects(pk=id)
     return render_template(
         "user/profile.html",
-        user=userobject.username, user_id=userobject.pk,
+        user=userobject.username,
+        user_id=userobject.pk,
         email=userobject.email,
         avatar=userobject.avatar.avatar_url,
         translate=getText,

@@ -17,6 +17,6 @@ from .check import *
 from .create import *
 from .delete import *
 from .get import *
+from .oauth import *
 from .search import *
 from .update import *
-from .oauth import *

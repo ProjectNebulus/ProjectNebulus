@@ -10,7 +10,8 @@ def files():
     return render_template(
         "learning/tools/files.html",
         page="Nebulus - Files",
-        user=session.get("username"), user_id=session.get("id"),
+        user=session.get("username"),
+        user_id=session.get("id"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         translate=getText,
         read=read,

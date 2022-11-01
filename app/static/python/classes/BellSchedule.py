@@ -1,8 +1,4 @@
-from mongoengine import (
-    EmbeddedDocument,
-    ListField,
-    StringField,
-)
+from mongoengine import EmbeddedDocument, ListField, StringField
 
 
 class BellSchedule(EmbeddedDocument):

@@ -55,7 +55,7 @@ def search_within_user():
     everything = []
     for course in courses:
         try:
-            theurl = course.avatar.avatar_url,
+            theurl = (course.avatar.avatar_url,)
         except:
             theurl = ""
         everything.append(
@@ -63,7 +63,11 @@ def search_within_user():
                 "course",  # type
                 course.name,  # name
                 course.teacher,  # description
-                str(theurl).replace("(", "").replace(")", "").replace(",", "").replace("'", ""),
+                str(theurl)
+                    .replace("(", "")
+                    .replace(")", "")
+                    .replace(",", "")
+                    .replace("'", ""),
                 "",
                 "/course/" + str(course.pk),
             ]
@@ -87,8 +91,7 @@ def search_within_user():
                 chat.title,  # name
                 "",  # description
                 chat.avatar.avatar_url,
-                ""
-                "",
+                "" "",
             ]
         )
     for event in events:
@@ -97,10 +100,14 @@ def search_within_user():
         except:
             de = ""
         everything.append(
-            ["event", event["title"], de, "a",
-             event["course"]["avatar"]["avatar_url"],
-             "",
-             ]  # type  # name  # description
+            [
+                "event",
+                event["title"],
+                de,
+                "a",
+                event["course"]["avatar"]["avatar_url"],
+                "",
+            ]  # type  # name  # description
         )
     for assignment in assignments:
         try:
@@ -108,12 +115,18 @@ def search_within_user():
         except:
             de = ""
         try:
-            image = assignment['course']['avatar']['a9vatar_url']
+            image = assignment["course"]["avatar"]["a9vatar_url"]
         except:
             image = ""
         everything.append(
-            ["assignment", assignment["title"], de, "a", image,
-             "", ]  # type  # name  # description
+            [
+                "assignment",
+                assignment["title"],
+                de,
+                "a",
+                image,
+                "",
+            ]  # type  # name  # description
         )
     for announcement in announcements:
         everything.append(
@@ -122,7 +135,7 @@ def search_within_user():
                 announcement.title,  # name
                 announcement.content,  # description
                 "a",
-                announcement['course']['avatar']['avatar_url'],
+                announcement["course"]["avatar"]["avatar_url"],
                 "",
             ]
         )

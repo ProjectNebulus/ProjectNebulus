@@ -11,15 +11,17 @@ main_blueprint = Blueprint(
 
 from .about import *
 from .app import *
-from .enterprise import *
 from .calendar import *
 from .canvas import *
 from .chat import *
 from .connections import *
 from .course import *
 from .discord import *
+from .dropbox import *
+from .enterprise import *
 from .files import *
 from .gclassroom import *
+from .github import *
 from .index import *
 from .logout import *
 from .music import *
@@ -37,5 +39,3 @@ from .soon import *
 from .spotify import *
 from .study import *
 from .utils import *
-from .dropbox import *
-from .github import *

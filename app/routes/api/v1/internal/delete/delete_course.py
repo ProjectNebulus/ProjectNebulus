@@ -1,8 +1,7 @@
 from flask import request, session
 
 from app.static.python.classes import Course
-from app.static.python.mongodb import delete
-from app.static.python.mongodb import read
+from app.static.python.mongodb import delete, read
 from .. import internal
 
 

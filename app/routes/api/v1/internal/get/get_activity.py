@@ -1,4 +1,4 @@
-from flask import session, request, render_template
+from flask import render_template, request, session
 from markupsafe import Markup
 
 from app.routes.main import strftime
@@ -9,7 +9,9 @@ from .. import internal
 @internal.route("/get/recent-activity", methods=["POST"])
 def recent_activity():
     load_start = request.json.get("load")
-    announcements, dates, a_len, e_len = read.sort_user_events(session["id"], False, load_start)
+    announcements, dates, a_len, e_len = read.sort_user_events(
+        session["id"], False, load_start
+    )
 
     return render_template(
         "learning/recent-activity.html",
@@ -19,7 +21,26 @@ def recent_activity():
         ee=e_len,
         enumerate=enumerate,
         strftime=strftime,
-        fmt=fmt
+        fmt=fmt,
+    )
+
+
+@internal.route("/get/events", methods=["POST"])
+def recent_events():
+    load_start = request.json.get("load")
+    announcements, dates, a_len, e_len = read.sort_user_events(
+        session["id"], False, load_start
+    )
+
+    return render_template(
+        "learning/recent-activity.html",
+        announcements=announcements,
+        events=dates,
+        ae=a_len,
+        ee=e_len,
+        enumerate=enumerate,
+        strftime=strftime,
+        fmt=fmt,
     )
 
 

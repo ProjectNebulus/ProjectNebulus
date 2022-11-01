@@ -81,6 +81,14 @@
     background: linear-gradient(45deg, #d000ff, #007aff);
 ">Accept Invite
             </button>
+            {% if school["code"] == "BCP" %}
+                <br>
+                <p class="text-black dark:text-white text-lg">
+                    <img class="mr-3 inline-block bg-gray-900 rounded-lg w-16 h-16 p-3"
+                         src="https://graderoom.me/public/resources/dark_mode/logo.png"
+                         style="vertical-align: middle;">The Bellarmine community is managed by an external software,
+                    <span class="gradient-text">Graderoom</span>.</p>
+            {% endif %}
         </div>
         <div style="display: none;" id="verifySchoology">
             <h3 class="font-bold text-gray-500 text-lg uppercase" style="
@@ -198,18 +206,19 @@
     </svg>
     <span>Verifying your Schoology Account...</span>
 </div>`
-            const myrequest = $.ajax({
-                url: "/oauth/schoology/schoolVerify",
-                type: 'GET',
-                dataType: 'json',
-                data: {
+
+            const req = $.ajax({
+                url: "/api/v1/internal/oauth/schoology/schoolVerify",
+                type: "GET",
+                contentType: "application/json",
+                data: JSON.stringify({
                     email_format: '{{ school["email"] }}',
                     domain: '{{ school["sgy_url"] }}',
                     key: document.getElementById("key"),
                     secret: document.getElementById("secret"),
-                }
+                })
             });
-            myrequest.done(function (data) {
+            req.done(function (data) {
                 if (data === "Yes") document.getElementById("verifyBtn").innerHTML = "Verification Successful";
                 else document.getElementById("verifyBtn").innerHTML = "Unsuccessful Verification";
             });

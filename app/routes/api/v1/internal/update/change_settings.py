@@ -4,7 +4,7 @@ from flask import request, session
 
 from app.static.python.classes import User
 from app.static.python.mongodb import read
-from app.static.python.utils.security import valid_password, hash256
+from app.static.python.utils.security import hash256, valid_password
 from .. import internal
 
 

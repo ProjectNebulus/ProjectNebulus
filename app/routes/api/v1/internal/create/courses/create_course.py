@@ -5,9 +5,9 @@ import schoolopy
 from flask import request, session
 from googleapiclient.discovery import build
 
+from app.static.python.classes import Announcement
 from app.static.python.mongodb import create, read
 from app.static.python.utils.colors import getColor
-from app.static.python.classes import Announcement
 from ... import internal
 
 
@@ -21,7 +21,7 @@ def create_course():
     if not data["template"]:
         data["template"] = None
 
-    user = read.find_user(id=session['id'])
+    user = read.find_user(id=session["id"])
     if user.type == "student":
         # TODO: Figure out how to determine whether the course is imported
         data["type"] = "Student"
@@ -83,19 +83,22 @@ def create_google_course():
 
     if image:
         create.createAvatar(
-            {
-                "avatar_url": image,
-                "parent": "Course",
-                "parent_id": course_obj.id,
-            }
+            {"avatar_url": image, "parent": "Course", "parent_id": course_obj.id, }
         )
     try:
-        announcements = service.courses().announcements().list(courseId=course["id"]).execute()["announcements"]
+        announcements = (
+            service.courses()
+                .announcements()
+                .list(courseId=course["id"])
+                .execute()["announcements"]
+        )
     except Exception as e:
         print(f"{type(e).__name__}: {e}")
 
     for announcement in announcements:
-        user = service.userProfiles().get(userId=announcement["creatorUserId"]).execute()
+        user = (
+            service.userProfiles().get(userId=announcement["creatorUserId"]).execute()
+        )
         name = user["name"]["fullName"]
         photo = user["photoUrl"].replace("//", "https://")
         if "https://" not in photo and "http://" not in photo:
@@ -107,19 +110,25 @@ def create_google_course():
                 "author": name,
                 "course": str(course_obj.id),
                 "imported_from": "Google Classroom",
-                "date": datetime.strptime(announcement["creationTime"], "%Y-%m-%dT%H:%M:%S.%fZ"),
-                "author_pic": photo
+                "date": datetime.strptime(
+                    announcement["creationTime"], "%Y-%m-%dT%H:%M:%S.%fZ"
+                ),
+                "author_pic": photo,
             }
         )
     try:
-        assignments = service.courses().courseWork().list(courseId=course["id"]).execute()["courseWork"]
+        assignments = (
+            service.courses()
+                .courseWork()
+                .list(courseId=course["id"])
+                .execute()["courseWork"]
+        )
     except Exception as e:
         print(f"{type(e).__name__}: {e}")
 
     for assignment in assignments:
         create.createAssignment(
             {
-
                 "title": assignment["title"],
                 "course": str(course_obj.id),
                 "points": float(assignment["maxPoints"]),
@@ -161,11 +170,7 @@ def create_canvas_course():
     image = course.get_settings()["image"]
     if image:
         create.createAvatar(
-            {
-                "avatar_url": image,
-                "parent": "Course",
-                "parent_id": course_obj.id,
-            }
+            {"avatar_url": image, "parent": "Course", "parent_id": course_obj.id, }
         )
 
     announcements = list(canvas.get_announcements(context_codes=[course]))
@@ -187,7 +192,6 @@ def create_canvas_course():
         assignment = dict(assignment)
         create.createAssignment(
             {
-
                 "title": assignment["name"],
                 "description": assignment["description"],
                 "due": assignment["due_at"],
@@ -218,6 +222,7 @@ def create_canvas_course():
 @internal.route("/sync/course/schoology", methods=["GET", "POST"])
 def sync_schoology_course():
     from app.static.python.mongodb import create, read, update
+
     post_data = request.json
     if request.method == "GET":
         post_data = request.args
@@ -372,26 +377,28 @@ def create_schoology_course(section, link, teacher, user, sc=None):
             color = getColor(author["picture_url"])
             school = sc.get_school(author["school_id"])["title"]
 
-        announcements.append(create.createAnnouncement(
-            {
-                "content": update["body"],
-                "course": str(course_obj.id),
-                # "id": str(update["id"]),
-                "author": author["name_display"],
-                "author_pic": author["picture_url"],
-                "likes": update["likes"],
-                "comment_number": update["num_comments"],
-                "imported_from": "Schoology",
-                "date": datetime.fromtimestamp(int(update["last_updated"])),
-                "title": "",
-                "author_color": color,
-                "author_email": author["primary_email"],
-                "author_school": school,
-                "imported_id": str(update["id"]),
-            }
-        ))
+        announcements.append(
+            create.createAnnouncement(
+                {
+                    "content": update["body"],
+                    "course": str(course_obj.id),
+                    # "id": str(update["id"]),
+                    "author": author["name_display"],
+                    "author_pic": author["picture_url"],
+                    "likes": update["likes"],
+                    "comment_number": update["num_comments"],
+                    "imported_from": "Schoology",
+                    "date": datetime.fromtimestamp(int(update["last_updated"])),
+                    "title": "",
+                    "author_color": color,
+                    "author_email": author["primary_email"],
+                    "author_school": school,
+                    "imported_id": str(update["id"]),
+                }
+            )
+        )
 
-    sc_grades = sc.get_user_grades_by_section(user['id'], link)
+    sc_grades = sc.get_user_grades_by_section(user["id"], link)
     print(sc_grades)
 
     sc_discussions = sc.get_discussions(section_id=link)
@@ -413,40 +420,46 @@ def create_schoology_course(section, link, teacher, user, sc=None):
             else:
                 due = None
 
-            assignments.append(create.createAssignment(
-                {
-                    # "id": str(assignment["id"]),
-                    "title": assignment["title"],
-                    "description": assignment["description"]
-                                   + f"\n\nView On Schoology: {assignment['web_url']}",
-                    # "submitDate": assignment["dropbox_last_submission"],
-                    "due": due,
-                    # "course": str(course_obj.id),
-                    "course": str(course_obj.id),
-                    "points": float(assignment["max_points"]),
-                    "imported_from": "Schoology",
-                    "imported_id": str(assignment["id"]),
-                }
-            ))
+            assignments.append(
+                create.createAssignment(
+                    {
+                        # "id": str(assignment["id"]),
+                        "title": assignment["title"],
+                        "description": assignment["description"]
+                                       + f"\n\nView On Schoology: {assignment['web_url']}",
+                        # "submitDate": assignment["dropbox_last_submission"],
+                        "due": due,
+                        # "course": str(course_obj.id),
+                        "course": str(course_obj.id),
+                        "points": float(assignment["max_points"]),
+                        "imported_from": "Schoology",
+                        "imported_id": str(assignment["id"]),
+                    }
+                )
+            )
         else:
-            events.append(create.createEvent(
-                {
-                    "course": str(course_obj.id),
-                    "title": event["title"],
-                    "description": event["description"],
-                    "date": datetime.strptime(event["start"], "%Y-%m-%d %H:%M:%S"),
-                    "imported_from": "Schoology",
-                    "imported_id": str(event["id"]),
-                }
-            ))
+            events.append(
+                create.createEvent(
+                    {
+                        "course": str(course_obj.id),
+                        "title": event["title"],
+                        "description": event["description"],
+                        "date": datetime.strptime(event["start"], "%Y-%m-%d %H:%M:%S"),
+                        "imported_from": "Schoology",
+                        "imported_id": str(event["id"]),
+                    }
+                )
+            )
 
     folders = []
 
     for period in sc_grades[1:]:
         for assignment in period:
-            assignment_obj = read.getAssignment(imported_id=assignment[0]['assignment_id'])
-            assignment_obj.grade = assignment[0]['grade']
-            assignment_obj.semester = period['period_title']
+            assignment_obj = read.getAssignment(
+                imported_id=assignment[0]["assignment_id"]
+            )
+            assignment_obj.grade = assignment[0]["grade"]
+            assignment_obj.semester = period["period_title"]
             assignment_obj.save()
 
     sc_documents = sc.get_section_documents(link)
@@ -506,12 +519,7 @@ def create_schoology_course_all():
 
     for course in sc.get_courses():
         for section in sc.get_sections(course["course_id"]):
-            link = (
-                    domain
-                    + "course/"
-                    + course["course_id"]
-                    + "/materials"
-            )
+            link = domain + "course/" + course["course_id"] + "/materials"
             create_schoology_course(section, link, "", user, sc)
 
     return "success"

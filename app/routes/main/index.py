@@ -30,39 +30,63 @@ def screenTime():
 def schoolEmbed(school):
     import imgkit
 
-    imgkit.from_file('./app/templates/joinschoolembed.html', f'{school}.jpg')
-    return send_file(f'{school}.jpg')
+    imgkit.from_file("./app/templates/joinschoolembed.html", f"{school}.jpg")
+    return send_file(f"{school}.jpg")
 
 
 @main_blueprint.route("/school", methods=["GET"])
 def school():
     import json
+
     myjson = json.load(open("app/schools.json"))
-    return render_template("school.html", page="Select your School",
-                           user=session.get("username"), user_id=session.get("id"),
-                           email=session.get("email"),
-                           avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif", ),
-                           translate=getText, schools=myjson)
+    return render_template(
+        "school.html",
+        page="Select your School",
+        user=session.get("username"),
+        user_id=session.get("id"),
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif", ),
+        translate=getText,
+        schools=myjson,
+    )
 
 
 @main_blueprint.route("/invite/school/<school>", methods=["GET"])
 def specificschool(school):
     school = school.upper()
-    schools = ["BISV", "HKR", "CBYA", "MLR", "SDPB", "VCS", "PNLK", "BCP", "GUNN", "PALY", "LNBK", "CLGBA"]
-    if (school not in schools):
+    schools = [
+        "BISV",
+        "HKR",
+        "CBYA",
+        "MLR",
+        "SDPB",
+        "VCS",
+        "PNLK",
+        "BCP",
+        "GUNN",
+        "PALY",
+        "LNBK",
+        "CLGBA",
+    ]
+    if school not in schools:
         return render_template("errors/404.html", translate=getText), 404
     import json
+
     myjson = json.load(open("app/schools.json"))
     for current in myjson:
         if current["code"] == school:
-            return render_template("joinschool.html", school=current,
-                                   page="Nebulus. Education. Redefined.",
-                                   user=session.get("username"), user_id=session.get("id"),
-                                   email=session.get("email"),
-                                   avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif", ),
-                                   translate=getText,
-                                   homepage=True,
-                                   embedoverride=True)
+            return render_template(
+                "joinschool.html",
+                school=current,
+                page="Nebulus. Education. Redefined.",
+                user=session.get("username"),
+                user_id=session.get("id"),
+                email=session.get("email"),
+                avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif", ),
+                translate=getText,
+                homepage=True,
+                embedoverride=True,
+            )
 
 
 @main_blueprint.route("/", methods=["GET"])
@@ -70,7 +94,8 @@ def index():
     return render_template(
         "main/index.html",
         page="Nebulus. Education. Redefined.",
-        user=session.get("username"), user_id=session.get("id"),
+        user=session.get("username"),
+        user_id=session.get("id"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif", ),
         translate=getText,
@@ -94,7 +119,8 @@ def pp():
     return render_template(
         "privacy.html",
         translate=getText,
-        user=session.get("username"), user_id=session.get("id"),
+        user=session.get("username"),
+        user_id=session.get("id"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         homepage=True,
@@ -106,7 +132,8 @@ def tos():
     return render_template(
         "tos.html",
         translate=getText,
-        user=session.get("username"), user_id=session.get("id"),
+        user=session.get("username"),
+        user_id=session.get("id"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         homepage=True,
@@ -117,7 +144,8 @@ def tos():
 def selectregion():
     return render_template(
         "main/select-a-region.html",
-        user=session.get("username"), user_id=session.get("id"),
+        user=session.get("username"),
+        user_id=session.get("id"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         page="Select a Region",
@@ -138,7 +166,8 @@ def page_not_found(e):
         render_template(
             "errors/404.html",
             page="Not Found",
-            user=session.get("username"), user_id=session.get("id"),
+            user=session.get("username"),
+            user_id=session.get("id"),
             email=session.get("email"),
             avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
             translate=getText,
@@ -154,7 +183,8 @@ def internal_error(e):
         render_template(
             "errors/500.html",
             page="Nebulus is Down",
-            user=session.get("username"), user_id=session.get("id"),
+            user=session.get("username"),
+            user_id=session.get("id"),
             email=session.get("email"),
             avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
             translate=getText,
@@ -181,7 +211,8 @@ def sitemap():
 def studyplanner():
     return render_template(
         "learning/tools/study-planner.html",
-        user=session.get("username"), user_id=session.get("id"),
+        user=session.get("username"),
+        user_id=session.get("id"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         page="Study Planner",
@@ -193,7 +224,8 @@ def studyplanner():
 def lunchplanner():
     return render_template(
         "learning/tools/lunch.html",
-        user=session.get("username"), user_id=session.get("id"),
+        user=session.get("username"),
+        user_id=session.get("id"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         page="Lunch Planner",
@@ -205,7 +237,8 @@ def lunchplanner():
 def vacationmode():
     return render_template(
         "learning/tools/vacation.html",
-        user=session.get("username"), user_id=session.get("id"),
+        user=session.get("username"),
+        user_id=session.get("id"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         page="Vacation Mode",
@@ -217,7 +250,8 @@ def vacationmode():
 def extracurricular():
     return render_template(
         "learning/tools/extra-curricular.html",
-        user=session.get("username"), user_id=session.get("id"),
+        user=session.get("username"),
+        user_id=session.get("id"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         page="Extracurricular Mode",
@@ -229,7 +263,8 @@ def extracurricular():
 def analysis():
     return render_template(
         "learning/tools/analysis.html",
-        user=session.get("username"), user_id=session.get("id"),
+        user=session.get("username"),
+        user_id=session.get("id"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         page="Study Planner",
@@ -241,7 +276,8 @@ def analysis():
 def blog():
     return render_template(
         "main/blog.html",
-        user=session.get("username"), user_id=session.get("id"),
+        user=session.get("username"),
+        user_id=session.get("id"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         page="Blog",
@@ -253,7 +289,8 @@ def blog():
 def upgrade():
     return render_template(
         "upgrade.html",
-        user=session.get("username"), user_id=session.get("id"),
+        user=session.get("username"),
+        user_id=session.get("id"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         page="Upgrade",
@@ -265,7 +302,8 @@ def upgrade():
 def support():
     return render_template(
         "main/support.html",
-        user=session.get("username"), user_id=session.get("id"),
+        user=session.get("username"),
+        user_id=session.get("id"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         page="Support",

@@ -43,7 +43,7 @@
     "name": "Joaquin Miller Middle School",
     "color": "",
     "picture_url": "webp",
-    "background_url": "jpeg",
+    "background_url": "webp",
     "LMS": "Classroom",
     "sgy_url": "",
     "canvas_url": "",
@@ -94,6 +94,7 @@
   {
     "name": "Bellarmine College Preparatory",
     "color": "",
+    "background_url": "jpeg",
     "picture_url": "png",
     "LMS": "Canvas",
     "sgy_url": "",

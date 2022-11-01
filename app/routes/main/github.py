@@ -1,5 +1,5 @@
 import requests
-from flask import redirect, request, session, render_template
+from flask import redirect, render_template, request, session
 
 from . import main_blueprint
 

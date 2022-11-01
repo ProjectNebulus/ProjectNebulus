@@ -1,4 +1,4 @@
-from mongoengine import EmbeddedDocument, DictField, StringField
+from mongoengine import DictField, EmbeddedDocument, StringField
 
 
 class ScreenTime(EmbeddedDocument):

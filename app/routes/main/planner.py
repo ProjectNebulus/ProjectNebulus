@@ -12,7 +12,8 @@ def planner():
     return render_template(
         "learning/tools/planner.html",
         page="Nebulus - Planner",
-        user=session.get("username"), user_id=session.get("id"),
+        user=session.get("username"),
+        user_id=session.get("id"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         read=read,

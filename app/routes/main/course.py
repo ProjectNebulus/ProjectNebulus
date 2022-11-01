@@ -3,11 +3,9 @@ import datetime
 import requests
 from flask import render_template, request, session
 
-from app.static.python.classes import Assignment
-from app.static.python.classes import Course, User
-from app.static.python.classes import Grades
+from app.static.python.classes import Assignment, Course, Grades, User
 from app.static.python.mongodb import read
-from app.static.python.mongodb.read import getText, find_user
+from app.static.python.mongodb.read import find_user, getText
 from . import main_blueprint, utils
 from .utils import logged_in, private_endpoint
 
@@ -28,7 +26,8 @@ def course_page(page, **kwargs):
             render_template(
                 "errors/404.html",
                 page="404 Not Found",
-                user=session.get("username"), user_id=session.get("id"),
+                user=session.get("username"),
+                user_id=session.get("id"),
                 email=session.get("email"),
                 avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
                 translate=getText,
@@ -54,7 +53,7 @@ def course_page(page, **kwargs):
             print(course.grades.grade)
         except:
             course.grades.clean()
-        if (course.grades.grade == None):
+        if course.grades.grade == None:
             course.grades.clean()
 
         print(f"Course: {course.name} (id={course_id})")
@@ -68,7 +67,8 @@ def course_page(page, **kwargs):
         src=iframe_src,
         course=course,
         course_id=course_id,
-        user=session.get("username"), user_id=session.get("id"),
+        user=session.get("username"),
+        user_id=session.get("id"),
         email=session.get("email"),
         avatar=session.get("avatar", "/v3.gif"),
         disableArc=(page != "course"),

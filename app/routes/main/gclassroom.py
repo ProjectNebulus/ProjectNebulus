@@ -30,7 +30,7 @@ SCOPES = [
     "https://www.googleapis.com/auth/classroom.topics.readonly",
     "https://www.googleapis.com/auth/classroom.student-submissions.me.readonly"
     "https://www.googleapis.com/auth/classroom.profile.emails",
-    "https://www.googleapis.com/auth/classroom.profile.photos"
+    "https://www.googleapis.com/auth/classroom.profile.photos",
 ]
 API_SERVICE_NAME = "classroom"
 API_VERSION = "v1"

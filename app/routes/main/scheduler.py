@@ -83,7 +83,8 @@ def scheduler():
 
     return render_template(
         "learning/tools/scheduler.html",
-        user=session.get("username"), user_id=session.get("id"),
+        user=session.get("username"),
+        user_id=session.get("id"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         page="Scheduler",
