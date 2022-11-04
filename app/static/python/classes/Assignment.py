@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from mongoengine import DateTimeField, FloatField, ReferenceField, StringField
+from mongoengine import DateTimeField, FloatField, ReferenceField, StringField, BooleanField
 
 from .Snowflake import Snowflake
 
@@ -26,6 +26,7 @@ class Assignment(Snowflake):
     due = DateTimeField(
         description="The due date of the assignment.", default=datetime.max
     )
+    allow_submissions = BooleanField(default=True, description="Whether the assignment allows submissions.")
     title = StringField(required=True, description="The title of the assignment.")
     points = FloatField(
         default=10, description="The number of points the assignment is worth."

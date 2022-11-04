@@ -10,7 +10,7 @@ const Default = {
     }
 };
 
-function updateExpand() {
+function updateEventListeners() {
     for (const button of document.getElementsByClassName('expand')) {
         const parent = button.parentElement;
         let title = "Announcement from " + parent.querySelector('[author-element]').innerHTML;
@@ -34,23 +34,27 @@ function updateExpand() {
     }
 }
 
-updateExpand();
+updateEventListeners();
 
 {
     const recActivity = document.getElementById("recent-activity-div");
-    recActivity.style.scrollBehavior = "smooth";
+    const upcEvents = document.getElementById("upcoming-events");
+    upcEvents.style.scrollBehavior = "smooth";
+    upcEvents.style.scrollBehavior = "smooth";
+
     let announcementStart = 8;
     let eventStart = 15;
     let waiting = false;
-    let endMessageAdded = false;
+    let endAnnouncementsMessage = false;
+    let endEventsMessage = false;
 
     recActivity.addEventListener("scroll", () => {
         if ($(recActivity).scrollTop() + $(recActivity).innerHeight() < $(recActivity)[0].scrollHeight - 5)
             return;
 
         if (announcementStart >= announcementEnd) {
-            if (!endMessageAdded) {
-                endMessageAdded = true;
+            if (!endAnnouncementsMessage) {
+                endAnnouncementsMessage = true;
                 recActivity.innerHTML += `
                 <div class="flex gap-4 justify-center place-items-center mb-4">
                     <img src="${randomCat()}" class="w-8 h-10">
@@ -85,7 +89,52 @@ updateExpand();
             waiting = false;
 
             recActivity.innerHTML += data;
-            updateExpand();
+            updateEventListeners();
+        });
+    });
+
+    upcEvents.addEventListener("scroll", () => {
+        if ($(upcEvents).scrollTop() + $(upcEvents).innerHeight() < $(upcEvents)[0].scrollHeight - 5)
+            return;
+
+        if (eventStart >= eventEnd) {
+            if (!endEventsMessage) {
+                endEventsMessage = true;
+                upcEvents.innerHTML += `
+                <div class="flex gap-4 justify-center place-items-center mb-4">
+                    <img src="${randomCat()}" class="w-8 h-10">
+                    <p class="text-gray-500 dark:text-gray-400 text-2xl">This is the end...</p>
+                </div>`
+            }
+
+            return;
+        }
+
+        if (waiting)
+            return;
+
+        upcEvents.innerHTML += `
+        <div class="flex gap-4 justify-center place-items-center mb-4">
+            <img src="${v3Image}" class="w-10 h-12">
+            <p class="text-gray-500 dark:text-gray-400 text-2xl">Loading...</p>
+        </div>
+        `
+        upcEvents.scrollTop = upcEvents.scrollHeight;
+
+        waiting = true;
+        const req = $.ajax({
+            url: "/api/v1/internal/get/upcoming-events",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({load: eventStart})
+        });
+        req.done(data => {
+            upcEvents.children[upcEvents.children.length - 1].remove();
+            eventStart += 8;
+            waiting = false;
+
+            upcEvents.innerHTML += data;
+            updateEventListeners();
         });
     });
 }
@@ -95,7 +144,6 @@ function openDetailsModal(content, title, author, pic, course, postTime, dueTime
         document.getElementById("submissionsBox").style.display = "none";
         document.getElementById("descriptionTitle").innerHTML = "Message";
         document.getElementById("commentBox").style.display = "block";
-
     } else {
         document.getElementById("descriptionTitle").innerHTML = "Description";
         document.getElementById("commentBox").style.display = "none";

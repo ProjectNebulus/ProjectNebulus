@@ -1,6 +1,18 @@
 <!--Extend with Jinja!-->
 {% extends "layout.html" %}
 {% block main %}
+    <style>
+        .settings {
+            top: -0.5rem;
+            right: -0.5rem;
+            visibility: hidden;
+            overflow: hidden;
+        }
+
+        .course:hover .settings {
+            visibility: visible;
+        }
+    </style>
     {% include "utils/navbar.html" %}
     <div id="middle2" style="width: 90%;overflow-y: auto;margin: auto;height: 80%;">
         <div class="overflow-auto pr-4">
@@ -122,42 +134,38 @@
                 {% endif %}
                 {% for course in user_courses %}
                     <a href="/course/{{ course.id }}">
-                        <div style="background: url('{{ course.avatar.avatar_url }}');height: 15rem;width: 22rem;margin: 20px;"
-                             class="rounded-xl">
+                        <div style="background: url('{{ course.avatar.avatar_url }}'); height: 15rem; width: 22rem; margin: 20px;"
+                             class="rounded-xl course"
+                             total-resources="{{ course.assignments|length + course.announcements|length + course.events|length + course.documents|length }}">
                             <div class="max-w-sm bg-gray-50 rounded-xl shadow-md dark:bg-gray-800/75 dark:border-gray-700 p-2"
                                  style="float:left;
                                         height:15rem;
                                         width:22rem;
                                         backdrop-filter: blur(30px);">
+                                <div class="absolute material-icons text-gray-500 dark:text-gray-400 bg-gray-300
+                                 dark:bg-gray-700 rounded-lg settings flex" onclick="override = true">
+                                    <div class="hover:bg-gray-200 dark:hover:bg-gray-600 p-2"
+                                         title="Copy Course Id"
+                                         onclick="copyCourseId('{{ course.id }}', this)">content_copy
+                                    </div>
+                                    <div class="hover:bg-gray-200 dark:hover:bg-gray-600 p-2"
+                                         title="Delete Course"
+                                         onclick="deleteCourse('{{ course.id }}', this.parentElement.parentElement.parentElement)">
+                                        delete
+                                    </div>
+                                </div>
                                 <div class="text-left">
                                     <div class="p-4 flex">
-                                    {%  if course.avatar == None %}
-{#                                        <div class="object-cover inline-block rounded-lg mr-4 bg-gray-800"#}
-{#                                             style="width: 50px; height: 50px"></div>#}
-                                    {% else %}
-                                        <img src="{{ course.avatar.avatar_url }}" onload="if (!IsImageOk(this)) this.style.display = 'none';"
-                                             alt="Image for {{ course.name }}"
-                                             class="object-cover inline-block rounded-lg mr-4"
-                                             style="width: 50px; height: 50px">
-                                        <script>
-                                            function IsImageOk(img) {
-                                                if (!img.complete) {
-                                                    return false;
-                                                }
-                                                if (img.naturalWidth === 0 || img.naturalHeight === 0) {
-                                                    return false;
-                                                }
-                                                return true;
-                                            }
-                                        </script>
-                                    {% endif %}
-                                        <div class="-mt-1">
-                                            <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white truncate">
-                                                {% if course.name|length <= 16 %}
-                                                    {{ course.name }}
-                                                {% else %}
-                                                    {{ course.name[0:16] }}...
-                                                {% endif %}
+                                        {% if course.avatar != None %}
+                                            <img src="{{ course.avatar.avatar_url }}"
+                                                 onload="if (!displayImage(this)) this.style.display = 'none';"
+                                                 alt="Image for {{ course.name }}"
+                                                 class="object-cover inline-block rounded-lg mr-4"
+                                                 style="width: 50px; height: 50px">
+                                        {% endif %}
+                                        <div class="-mt-1" style="max-width: 80%">
+                                            <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white truncate w-full">
+                                                {{ course.name }}
                                             </h5>
                                             <span class="font-normal text-gray-700 dark:text-gray-400">{{ course.teacher }}</span>
                                         </div>
@@ -263,5 +271,6 @@
             </div>
         </div>
     </div>
+    <script src="/static/js/courses.js"></script>
     {% include "learning/lms-modal.html" %}
 {% endblock %}

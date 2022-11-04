@@ -1,0 +1,130 @@
+{% if events|length == 0 %}
+    <p class="text-gray-300 dark:text-gray-500 mx-4">
+        No Events, Assignments, or Quizzes! To
+        add events on to your Nebulus dashboard, please add it within a Course!
+    </p>
+{% else %}
+    {% for date, alist in events.items() %}
+        {% set diff = (date - now).days %}
+        {% if diff < 0 %}
+            <h1 style="text-align: left;
+                   background: orangered -webkit-linear-gradient(left,#ff7878,#ffb078);
+                   -webkit-background-clip: text;
+                   -webkit-text-fill-color: transparent;
+                   margin: 13px;">
+                {{ strftime(date, "%a %b %-d %Y") }}
+                ({{ -diff }}d Overdue)
+            </h1>
+        {% elif diff < 1 %}
+            <h1 style="text-align: left;
+                   background: orange -webkit-linear-gradient(left,#ff78ed,#ffb378);
+                   -webkit-background-clip: text;
+                   -webkit-text-fill-color: transparent;
+                   margin: 13px;">
+                {{ strftime(date, "%a %b %-d %Y") }}
+                ({{ diff }}d remaining)
+            </h1>
+        {% elif diff < 3 %}
+            <h1 style="text-align: left;
+                   background: yellow -webkit-linear-gradient(left,#dd7e00,#fcff34);
+                   -webkit-background-clip: text;
+                   -webkit-text-fill-color: transparent;
+                   margin: 13px;">
+                {{ strftime(date, "%a %b %-d %Y") }}
+                ({{ diff }}d remaining)
+            </h1>
+        {% elif diff < 5 %}
+            <h1 style="text-align: left;
+                   background: green -webkit-linear-gradient(left,#ffd978,#ddff78);
+                   -webkit-background-clip: text;
+                   -webkit-text-fill-color: transparent;
+                   margin: 13px;">
+                {{ strftime(date, "%a %b %-d %Y") }}
+                ({{ diff }}d remaining)
+            </h1>
+        {% else %}
+            <h1 style="text-align: left;
+                   background: greenyellow -webkit-linear-gradient(left,#d9ff78,#78ffb7);
+                   -webkit-background-clip: text;
+                   -webkit-text-fill-color: transparent;
+                   margin: 13px;">
+                {{ strftime(date, "%a %b %-d %Y") }}
+                ({{ diff }}d remaining)
+            </h1>
+        {% endif %}
+        {% for a in alist %}
+            {% if (a._cls != "Assignment" or a.submitDate == None) or now < date %}
+                {# today is before the due date ^ #}
+                <div class="flex bg-gray-100 shadow dark:bg-gray-800/75 rounded-lg p-6 event shadow-md dark:border-gray-700 text-sm mb-5 mx-4 text-left relative expandable">
+                    <div class="absolute right-0 bottom-0 material-icons hover:bg-gray-50 dark:hover:bg-gray-500 p-1 expand text-gray-200 cursor-pointer dark:text-gray-400 rounded-lg mr-3 mb-3">
+                        open_in_new
+                    </div>
+                    <div type-element class="hidden">Event</div>
+                    <div content-element hidden class="hidden">{{ a.description }}</div>
+                    <div author-element hidden class="hidden">{{ a.course.teacher }}</div>
+                    <img src="{% if "teacherAccount" in a.course %} {{ a.course.teacher.avatar.avatar_url }} {% else %} https://app.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg {% endif %}"
+                         image-element
+                         hidden
+                         class="hidden">
+                    <img src="{% if "teacherAccount" in a.course %} {{ a.course.avatar.avatar_url }} {% else %} https://app.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg {% endif %}"
+                         image-element2
+                         hidden
+                         class="hidden">
+
+                    <div class="mr-4 material-icons ml-2 text-black dark:text-white"
+                         style="transform: translate(0, 50%) scale(1.75)">
+                        assignment
+                    </div>
+                    <div class="text-gray-700 dark:text-gray-400 leading-relaxed w-full">
+                        <h1 class="text-black dark:text-white text-xl truncate"
+                            title-element
+                            style="max-width: 90%">{{ a.title }}</h1>
+                        <p class="truncate" style="max-width: 90%;"
+                           course-name-element>{{ a.course.name }}</p>
+                        {% if a._cls == "Assignment" %}
+                            Due at
+                        {% else %}
+                            Happening at
+                        {% endif %}
+                        {{ strftime(date, "%-I:%M %p") }}
+                        <div due-time-element hidden class="hidden">
+                            {% if a._cls == "Assignment" %}
+                                Due at
+                            {% else %}
+                                Happening on
+                            {% endif %}
+                            {{ strftime(date, "%-m/%-d/%y %-I:%M %p") }} •
+                            {% if a.submitDate %}
+                                <span class="text-green-600 dark:text-green-500">Submitted</span>
+                            {% elif now > date %}
+                                <span class="text-red-600 dark:text-red-500">Overdue</span>
+                                <span class="text-orange-500">Not Submitted</span>
+                            {% endif %}
+                        </div>
+                        <div post-time-element hidden class="hidden">
+                            Posted at
+                            {% if "creationDate" in a %}
+                                {{ strftime(a.creationDate, "%-m/%-d/%y %-I:%m %p") }}
+                            {% else %}
+                                {{ strftime(a.get_timestamp(), "%-m/%-d/%y %-I:%m %p") }}
+                            {% endif %}
+                        </div>
+                        {% if a._cls == "Assignment" %}
+                            <div class="text-black dark:text-white">
+                                {% if a.submitDate %}
+                                    <span class="text-green-600 dark:text-green-500">Submitted</span>
+                                {% elif now > date %}
+                                    <span class="text-red-600 dark:text-red-500">Overdue</span>
+                                {% elif a.grade != None and a.grade / a.points < 0.6 %}
+                                    <span class="text-gray-300 dark:text-gray-700">{{ a.grade }}/{{ a.points }}</span>
+                                {% else %}
+                                    <span class="text-orange-500">Not Submitted</span>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+{% endif %}

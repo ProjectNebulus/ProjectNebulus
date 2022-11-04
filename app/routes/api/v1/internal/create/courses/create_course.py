@@ -4,6 +4,7 @@ import google.oauth2.credentials
 import schoolopy
 from flask import request, session
 from googleapiclient.discovery import build
+from schoolopy import Schoology
 
 from app.static.python.classes import Announcement
 from app.static.python.mongodb import create, read
@@ -88,9 +89,9 @@ def create_google_course():
     try:
         announcements = (
             service.courses()
-                .announcements()
-                .list(courseId=course["id"])
-                .execute()["announcements"]
+            .announcements()
+            .list(courseId=course["id"])
+            .execute()["announcements"]
         )
     except Exception as e:
         print(f"{type(e).__name__}: {e}")
@@ -119,9 +120,9 @@ def create_google_course():
     try:
         assignments = (
             service.courses()
-                .courseWork()
-                .list(courseId=course["id"])
-                .execute()["courseWork"]
+            .courseWork()
+            .list(courseId=course["id"])
+            .execute()["courseWork"]
         )
     except Exception as e:
         print(f"{type(e).__name__}: {e}")
@@ -346,7 +347,7 @@ def get_schoology():
     return user, schoology.schoologyDomain, sc
 
 
-def create_schoology_course(section, link, teacher, user, sc=None):
+def create_schoology_course(section, link, teacher, user, sc: Schoology = None):
     course = {
         "name": f'{section["course_title"]} ({section["section_title"]})',
         "description": section["description"],
@@ -420,23 +421,22 @@ def create_schoology_course(section, link, teacher, user, sc=None):
             else:
                 due = None
 
-            assignments.append(
-                create.createAssignment(
-                    {
-                        # "id": str(assignment["id"]),
-                        "title": assignment["title"],
-                        "description": assignment["description"]
-                                       + f"\n\nView On Schoology: {assignment['web_url']}",
-                        # "submitDate": assignment["dropbox_last_submission"],
-                        "due": due,
-                        # "course": str(course_obj.id),
-                        "course": str(course_obj.id),
-                        "points": float(assignment["max_points"]),
-                        "imported_from": "Schoology",
-                        "imported_id": str(assignment["id"]),
-                    }
-                )
-            )
+            data = {
+                "title": assignment["title"],
+                "description": assignment["description"]
+                               + f"\n\nView On Schoology: {assignment['web_url']}",
+                "due": due,
+                "allow_submissions": int(assignment["allow_dropbox"]) == 1,
+                "course": str(course_obj.id),
+                "points": float(assignment["max_points"]),
+                "imported_from": "Schoology",
+                "imported_id": str(assignment["id"]),
+            }
+
+            if int(assignment["allow_dropbox"]) and int(assignment.get("completed", 0)):
+                data["submitDate"] = datetime.max
+
+            assignments.append(create.createAssignment(data))
         else:
             events.append(
                 create.createEvent(

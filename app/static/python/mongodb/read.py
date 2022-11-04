@@ -265,14 +265,14 @@ def sort_user_events(
     # filter out events that aren't due
     for one_event in events_assessments_assignments:
         try:
-            if "9999" not in str(one_event.due):
-                sorted_events.append(one_event)
-        except:
-            if "9999" not in str(one_event.date):
-                sorted_events.append(one_event)
-    sorted_events = sorted(sorted_events, key=sortByDateTime, reverse=True)[
-                    load_start: load_start + max_events
-                    ]
+            due = one_event.due
+        except AttributeError:
+            due = one_event.date
+
+        if "9999" not in str(due):
+            sorted_events.append(one_event)
+
+    sorted_events = sorted(sorted_events, key=sortByDateTime)[load_start: load_start + max_events]
 
     grouped_events = dict(
         {
@@ -284,6 +284,7 @@ def sort_user_events(
     sorted_announcements = sorted(
         announcements, key=lambda obj: obj.date, reverse=True
     )[load_start: load_start + max_days]
+    
     grouped_announcements = dict(
         list(
             {
