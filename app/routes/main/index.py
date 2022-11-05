@@ -67,6 +67,7 @@ def specificschool(school):
         "PALY",
         "LNBK",
         "CLGBA",
+        "NBLS"
     ]
     if school not in schools:
         return render_template("errors/404.html", translate=getText), 404

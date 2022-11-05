@@ -155,5 +155,19 @@
     "city": "San Jose, CA, USA",
     "location": "1290 Parkmoor Ave, San Jose, CA 95126",
     "code": "LNBK"
+  },
+  {
+    "name": "Nebulus",
+    "color": "",
+    "picture_url": "png",
+    "background_url": "png",
+    "LMS": "Nebulus",
+    "sgy_url": "",
+    "email": "@nebulus.app",
+    "canvas_url": "",
+    "_id": "",
+    "city": "Seattle, Washington, USA",
+    "location": "",
+    "code": "NBLS"
   }
 ]
