@@ -245,19 +245,20 @@ def schoology_school_verify():
         return "Yes"
     return "No"
 
-
 @internal.route("/oauth/graderoom/connect")
 def graderoom_connect():
     import requests
-    pairing_key = request.form.get("graderoom_key")
+    pairing_key = request.args.get("graderoom_key")
     params = {
         "pairingKey": pairing_key
     }
-    api_key = str(requests.get("https://beta.graderoom.me/api/pair", params=params).text)
+    api_key = str(requests.post("https://beta.graderoom.me/api/pair", params=params).text)
     print(api_key)
+    if (api_key == 'Invalid pairing key'):
+        return "invalid"
     params = {
         " x-api-key": api_key
     }
-    information = dict(requests.get("https://beta.graderoom.me/api/info", headers=params).json())
+    information = dict(requests.post("https://beta.graderoom.me/api/info", headers=params).json())
 
     return str(information)
