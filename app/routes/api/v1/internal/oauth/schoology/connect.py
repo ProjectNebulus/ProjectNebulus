@@ -252,13 +252,23 @@ def graderoom_connect():
     params = {
         "pairingKey": pairing_key
     }
-    api_key = str(requests.post("https://beta.graderoom.me/api/pair", params=params).text)
+    api_key = str(requests.post("https://beta.graderoom.me/api/pair", data=params).text)
     print(api_key)
     if (api_key == 'Invalid pairing key'):
         return "invalid"
+    if (api_key == "This pairing key has expired"):
+        return "invalid-2"
     params = {
-        " x-api-key": api_key
+        "x-api-key": api_key
     }
     information = dict(requests.post("https://beta.graderoom.me/api/info", headers=params).json())
-
+    session["api_key_graderoom"] = api_key
+    session["username_graderoom"] = information["username"]
+    conversion = {
+        "basis": "BISV",
+        "bellarmine": "BCP",
+        "ndsj": "NDSJ"
+    }
+    school = conversion[information["school"].lower()]
+    session["school_graderoom"] = school
     return str(information)

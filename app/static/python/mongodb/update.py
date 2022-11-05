@@ -10,7 +10,7 @@ from ..classes import (
     NebulusDocument,
     Planner,
     Schoology,
-    User,
+    User, Canvas,
 )
 from ..classes.Notepad import Notepad
 from ..utils.security import hash256
@@ -32,6 +32,18 @@ def schoologyLogin(_id: str, schoology: dict):
 
     schoology = Schoology(**schoology)
     user.schoology.append(schoology)
+    user.save(clean=False)
+
+
+def canvasLogin(_id: str, canvas: dict):
+    from app.static.python.mongodb.read import find_user
+
+    user = find_user(pk=_id)
+    if not user:
+        raise KeyError("User not found")
+
+    canvas = Canvas(**canvas)
+    user.canvas.append(canvas)
     user.save(clean=False)
 
 

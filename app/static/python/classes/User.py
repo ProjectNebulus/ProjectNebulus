@@ -17,6 +17,7 @@ from .Canvas import Canvas
 from .ChatProfile import ChatProfile
 from .Discord import Discord
 from .GoogleClassroom import GoogleClassroom
+from .Graderoom import Graderoom
 from .NebulusDocument import NebulusDocument
 from .Notepad import Notepad
 from .Planner import Planner
@@ -62,12 +63,12 @@ class User(Snowflake):
 
     # optional params
     schoology = ListField(EmbeddedDocumentField(Schoology, default=None, null=True))
-    gclassroom = ListField(
-        EmbeddedDocumentField(GoogleClassroom, default=None, null=True)
-    )
+    gclassroom = ListField(EmbeddedDocumentField(GoogleClassroom, default=None, null=True))
     spotify = ListField(EmbeddedDocumentField(Spotify, default=None, null=True))
     discord = ListField(EmbeddedDocumentField(Discord, default=None, null=True))
     canvas = ListField(EmbeddedDocumentField(Canvas, default=None, null=True))
+    graderoom = ListField(EmbeddedDocumentField(Graderoom, default=None, null=True))
+
     avatar = EmbeddedDocumentField(
         Avatar,
         default=Avatar(avatar_url="/static/images/nebulusCats/v3.gif", parent="User"),

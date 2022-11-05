@@ -94,10 +94,16 @@ def settings():
             datetime.now().timestamp() - float(session["access"]),
         )
         last_access = datetime.now().timestamp() - float(session["access"])
-
+    graderoom = []
+    if "username_graderoom" in session.keys():
+        graderoom = [
+            session["username_graderoom"],
+            session["school_graderoom"]
+        ]
     return render_template(
         "user/settings.html",
         page="Nebulus - Account Settings",
+        graderoom=graderoom,
         session=session,
         lastAccess=last_access,
         user=session.get("username"),

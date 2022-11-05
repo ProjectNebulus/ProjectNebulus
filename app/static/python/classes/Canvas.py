@@ -8,3 +8,4 @@ class Canvas(EmbeddedDocument):
 
     url = URLField(required=True)
     key = StringField(required=True)
+    name = StringField(required=True)
