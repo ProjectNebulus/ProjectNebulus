@@ -58,8 +58,10 @@ def settings():
 
     except:
         user_info = None
-
-    canvas = list(read.getCanvas(id=session.get("id")))[0].name
+    try:
+        canvas = list(read.getCanvas(id=session.get("id")))[0].name
+    except:
+        canvas = None
 
     cache_handler = FlaskSessionCacheHandler(CacheHandler)
     spotify_auth_manager = spotipy.oauth2.SpotifyOAuth(
@@ -80,11 +82,14 @@ def settings():
         except SpotifyException:
             spotify = None
 
-    discord = list(read.getDiscord(id=session.get("id")))[0]
-    discord = [
-        discord.discord_user,
-        discord.discord_avatar
-    ]
+    try:
+        discord = list(read.getDiscord(id=session.get("id")))[0]
+        discord = [
+            discord.discord_user,
+            discord.discord_avatar
+        ]
+    except:
+        discord = None
 
     last_access = 0
     if session.get("access"):
@@ -93,16 +98,22 @@ def settings():
             datetime.now().timestamp() - float(session["access"]),
         )
         last_access = datetime.now().timestamp() - float(session["access"])
-    graderoom = list(read.getGraderoom(id=session.get("id")))[0]
-    graderoom = [
-        graderoom.username,
-        graderoom.school
-    ]
-    github = list(read.getGithub(id=session.get("id")))[0]
-    github = [
-        github.username,
-        github.avatar
-    ]
+    try:
+        graderoom = list(read.getGraderoom(id=session.get("id")))[0]
+        graderoom = [
+            graderoom.username,
+            graderoom.school
+        ]
+    except:
+        graderoom = []
+    try:
+        github = list(read.getGithub(id=session.get("id")))[0]
+        github = [
+            github.username,
+            github.avatar
+        ]
+    except:
+        github = []
     return render_template(
         "user/settings.html",
         page="Nebulus - Account Settings",
