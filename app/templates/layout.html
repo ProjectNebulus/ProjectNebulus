@@ -16,7 +16,7 @@
         //progressJs("#thebody").start();
     </script>
     <script>
-         $(window).on("load", function() {
+         $(document).ready(function() {
             if ($("#progress").length === 0) {
                 $("body").append($("<div></div>").attr("id", "progress"));
                 $("body").append(`
