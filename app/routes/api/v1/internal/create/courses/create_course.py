@@ -7,10 +7,10 @@ from googleapiclient.discovery import build
 from schoolopy import Schoology
 
 from app.static.python.classes import Announcement
+from app.static.python.classes import GradingCategory, Grades, TermGrade
 from app.static.python.mongodb import create, read
+from app.static.python.mongodb.create import debug_importing
 from app.static.python.utils.colors import getColor
-from static.python.classes import GradingCategory, Grades, TermGrade
-from static.python.mongodb.create import debug_importing
 from ... import internal
 
 
