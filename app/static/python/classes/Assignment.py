@@ -36,6 +36,8 @@ class Assignment(Snowflake):
         null=True,
         description="The number of points the teacher assigned.",
     )
+    comment = StringField(default=None, null=True, description="The comment that the teacher left when grading.")
+
     folder = ReferenceField(
         "Folder", default=None, null=True
     )  # 0 if it's in the course, not any folder
@@ -48,12 +50,8 @@ class Assignment(Snowflake):
     description = StringField(
         default="", null=True, description="The description of the assignment."
     )
-    semester = StringField(
-        default="None", description="The trimester in which the assignment is in"
-    )
-    grading_category = StringField(
-        default="None", description="The grading category in which the assignment is in"
-    )
+    period = ReferenceField("TermGrade", default=None, null=True)
+    grading_category = ReferenceField("GradingCategory", default=None, null=True)
 
     def __str__(self):
-        return f'Assignment(title="{self.title}", grade={self.grade}, points={self.points}, due="{self.due.date()}")'
+        return f'Assignment(title="{self.title}", grade={self.grade}, points={self.points}, due={self.due.date()}, grading_category={self.grading_category})'

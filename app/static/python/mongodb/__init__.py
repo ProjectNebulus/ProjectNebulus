@@ -14,4 +14,4 @@ db = connect(
     password=os.environ.get("MONGOPASS"),
     host=os.environ.get("MONGO"),
     tlsCAFile=ca,
-)
+)["Nebulus"]

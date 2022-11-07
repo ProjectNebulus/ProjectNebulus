@@ -98,6 +98,7 @@ function setUpFunc() {
         customize(null, user + "'s class");
         const h1 = document.getElementById('change-if-skip-templates');
         h1.innerHTML = h1.innerHTML.replace('Step 3: ', '');
+        h1.querySelector(".close").addEventListener("click", () => modal.style.display = "none");
     }
 
     document.getElementById('skip-templates').addEventListener('click', skipTemplates);
@@ -309,7 +310,10 @@ function setUpFunc() {
         courseName.placeholder = subtemplate;
         courseTeacher.placeholder = user;
 
-        document.getElementById('create-course').onsubmit = () => lms(subtemplate);
+        document.getElementById('create-course').onsubmit = () => {
+            lms(subtemplate);
+            return false;
+        };
     }
 }
 

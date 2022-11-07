@@ -28,6 +28,10 @@
     filter: brightness(0.75);
 }
 
+.hover-dim:hover {
+    filter: brightness(0.7);
+}
+
 .noselect,
 img,
 svg,

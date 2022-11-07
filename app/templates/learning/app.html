@@ -9,6 +9,21 @@
         .expandable:hover .expand {
             visibility: visible;
         }
+
+        #likes svg {
+            color: rgb(118 169 250);
+            fill: rgb(118 169 250);
+            margin-left: 1.7rem;
+            margin-right: 0.1rem;
+            cursor: pointer;
+        }
+
+        #likes * {
+            width: 1.5rem;
+            height: 1.5rem;
+            display: inline-block;
+            vertical-align: bottom;
+        }
     </style>
     {% include "utils/navbar.html" %}
     <div class="flex" style="height: 80vh">
@@ -41,8 +56,8 @@
              class="border-gray-200 dark:border-gray-700 border-l text-left h-full overflow-auto pt-4">
             <p class="block mb-2 text-3xl uppercase dark:text-gray-500 mx-4">Upcoming Events</p>
             <br>
-            <div class="flex flex-col sm:rounded-lg align-middle overflow-auto inline-block" id="upcoming-events"
-                 style="overflow-x: hidden;overflow-y: auto;height: 80%;width: 90%;margin: auto;">
+            <div class="flex flex-col sm:rounded-lg align-middle overflow-auto inline-block overflow-auto"
+                 id="upcoming-events" style="height: 90%; width: 90%">
                 {% include "learning/upcoming-events.html" %}
             </div>
         </div>
@@ -129,79 +144,37 @@
                     </div>
                     <div id="submissionsBox">
                         <h1 class="text-white font-bold uppercase">Submission</h1>
-                        <h1 class="text-gray-500">Go to the "<span id="courseNameForSubmission"></span>" course and add
-                            extensions for more submission
-                            methods!</h1>
                         <div class="bg-gray-800 p-3 rounded-lg" style="
     overflow-y: scroll;
     margin-top: 10px;
     height: 150px;
 ">
-                            <button class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                                <i class="w-6 h-6 inline-block material-icons" style="
-    vertical-align: middle;
-">upload
+                            <button class="focus:outline-none text-white hover-dim font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:focus:ring-green-800 flex place-items-center justify-center gap-2">
+                                <i class="w-6 h-6 inline-block material-icons">upload
                                 </i>Upload File
                             </button>
-                            <button class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-800 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                                <i class="w-6 h-6 inline-block material-icons" style="
-    vertical-align: middle;
-">check</i>Mark as Done
+                            <button class="focus:outline-none text-white hover-dim font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 bg-green-700 dark:focus:ring-green-800 flex place-items-center gap-2">
+                                <i class="w-6 h-6 inline-block material-icons">check</i>Mark as Done
                             </button>
-                            <button class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                                <i class="w-6 h-6 inline-block material-icons" style="
-    vertical-align: middle;
-">create</i>Create Submission
+                            <button class="focus:outline-none text-white hover-dim font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:focus:ring-green-800 flex place-items-center justify-center gap-2">
+                                <i class="w-6 h-6 inline-block material-icons">create</i>Create Submission
                             </button>
-                            <button class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-purple-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                                <i class="w-6 h-6 inline-block material-icons" style="
-    vertical-align: middle;
-">description</i>NebulusDoc
+                            <button class="focus:outline-none text-white hover-dim font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-purple-600 dark:focus:ring-green-800 flex place-items-center justify-center gap-2">
+                                <i class="w-6 h-6 inline-block material-icons">description</i>NebulusDoc
                             </button>
-                            <button class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-900 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                                <i class="fa fa-github inline-block" style="
-    font-size: 1.5em;
-    vertical-align: middle;
-    margin-right: 4px;
-"></i>Github Repository
-                            </button>
-                            <button class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                            <button class="focus:outline-none text-white hover-dim font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:focus:ring-green-800 flex place-items-center justify-center gap-2">
                                 <i class="fa fa-google inline-block" style="
     font-size: 1.5em;
     vertical-align: middle;
     margin-right: 4px;
 "></i>Google Drive
                             </button>
-                            <button class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 bg-yellow-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                                <i class="material-icons inline-block" style="
-    font-size: 1.5em;
-    vertical-align: middle;
-    margin-right: 4px;
-">cloud</i>OneDrive
-                            </button>
                         </div>
                     </div>
                     <div id="commentBox" style="">
                         <h1 class="text-white font-bold uppercase">Reactions</h1>
 
-                        <style>
-                            #likes svg {
-                                color: rgb(118 169 250);
-                                fill: rgb(118 169 250);
-                                margin-left: 1.7rem;
-                                margin-right: 0.1rem;
-                                cursor: pointer;
-                            }
-
-                            #likes * {
-                                width: 1.5rem;
-                                height: 1.5rem;
-                                display: inline-block;
-                                vertical-align: bottom;
-                            }
-                        </style>
                         <div id="likes" class="dark:text-white text-black">
-
                             <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
                                  style="margin-left: 0">
                                 <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z">
@@ -223,7 +196,7 @@
                         </div>
                     </div>
                     <button onclick="closeModal('modal')"
-                            class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                            class="focus:outline-none text-white font-medium bg-green-700 rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 flex place-items-center justify-center gap-2">
                         <svg class="w-6 h-6 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                              xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">

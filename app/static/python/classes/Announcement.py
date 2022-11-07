@@ -34,3 +34,6 @@ class Announcement(Snowflake):
     ]
     """
     comments = ListField(ListField(ReferenceField("User"), StringField()))
+
+    def __str__(self):
+        return f'Announcement(title="{self.title}", date={self.date}, author="{self.author}")'

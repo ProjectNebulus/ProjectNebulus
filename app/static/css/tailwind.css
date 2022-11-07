@@ -4811,6 +4811,10 @@ video {
   background-color: rgb(30 41 59 / 0.75);
 }
 
+.dark .dark\:bg-slate-800\/50 {
+  background-color: rgb(30 41 59 / 0.5);
+}
+
 .dark .dark\:bg-gray-700\/75 {
   background-color: rgb(55 65 81 / 0.75);
 }

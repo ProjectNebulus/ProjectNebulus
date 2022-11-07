@@ -173,7 +173,6 @@ function openDetailsModal(content, title, author, pic, course, postTime, dueTime
 
     document.getElementById('dueTime').innerHTML = dueTime;
     document.getElementById('announcementBody').innerHTML = content;
-    document.getElementById("courseNameForSubmission").innerText = course;
     openModal("modal");
 }
 

@@ -11,6 +11,8 @@ import schoolopy
 
 from ..classes import *
 
+debug_importing = False  # does not save objects to database
+
 
 def generateSchoologyObject(_id: str) -> schoolopy.Schoology:
     key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
@@ -39,7 +41,7 @@ def generateSchoologyObject(_id: str) -> schoolopy.Schoology:
     return sc
 
 
-def create_course(data: dict) -> Course:
+def create_course(data: dict, save=True) -> Course:
     user = read.find_user(id=session["id"])
 
     if data.get("avatar"):
@@ -48,7 +50,9 @@ def create_course(data: dict) -> Course:
     course = Course(**data)
     if not data.get("authorizedUsers"):
         course.authorizedUsers.append(user)
-    course.save(force_insert=True, validate=False)
+
+    if save:
+        course.save(force_insert=True, validate=False)
     return course
 
 
@@ -97,12 +101,10 @@ def create_user(data: dict) -> str | list[str | User]:
 
 def createEvent(data: dict, save=True) -> Event:
     event = Event(**data)
-    course = event.course
-    course.events.append(event)
-
-    if save:
+    if save and not debug_importing:
+        course = event.course
+        course.events.append(event)
         event.save(force_insert=True)
-        course.save(validate=False, clean=False)
 
     return event
 
@@ -123,58 +125,54 @@ def createNebulusDocument(data: dict, user_id: str) -> NebulusDocument:
 
 def createAssignment(data: dict, save=True) -> Assignment:
     assignment = Assignment(**data)
-    course = assignment.course
-    course.assignments.append(assignment)
-
-    if save:
+    if save and not debug_importing:
+        course = assignment.course
+        course.assignments.append(assignment)
         assignment.save(force_insert=True)
-        course.save(validate=False)
 
     return assignment
 
 
 def createGrades(data: dict, save=True) -> Grades:
     grades = Grades(**data)
-    course = grades.course
-    course.grades.append(grades)
-
-    if save:
+    if save and not debug_importing:
+        course = grades.course
+        course.grades.append(grades)
         grades.save(force_insert=True)
         course.save()
 
     return grades
 
 
-def createDocumentFile(data: dict) -> DocumentFile:
+def createDocumentFile(data: dict, save=True) -> DocumentFile:
     file_ending = ""
     if data.get("file_ending"):
         file_ending = data["file_ending"]
         del data["file_ending"]
 
     document_file = DocumentFile(**data)
-    document_file.save(force_insert=True)
-    # document_file.url += "." + file_ending
-    document_file.save()
-    folder = document_file.folder
-    course = document_file.course
-    if not folder:
-        course.documents.append(document_file)
-        course.save(validate=False)
-    elif not course:
-        folder.documents.append(document_file)
-        folder.save()
-    else:
-        raise Exception("Cannot course document file without either course or folder")
+
+    if save and not debug_importing:
+        document_file.save(force_insert=True)
+
+        folder = document_file.folder
+        course = document_file.course
+        if not folder:
+            course.documents.append(document_file)
+        elif not course:
+            folder.documents.append(document_file)
+            folder.save()
+        else:
+            raise Exception("Cannot create document file without either course or folder")
 
     return document_file
 
 
 def createFolder(data: dict, save=True) -> Folder:
     folder = Folder(**data)
-    course = folder.course
-    course.folders.append(folder)
-
-    if save:
+    if save and not debug_importing:
+        course = folder.course
+        course.folders.append(folder)
         folder.save(force_insert=True)
         course.save()
 
@@ -183,12 +181,10 @@ def createFolder(data: dict, save=True) -> Folder:
 
 def createAnnouncement(data: dict, save=True) -> Announcement:
     announcement = Announcement(**data)
-    course = announcement.course
-    course.announcements.append(announcement)
-
-    if save:
+    if save and not debug_importing:
+        course = announcement.course
+        course.announcements.append(announcement)
         announcement.save(force_insert=True)
-        course.save(validate=False)
 
     return announcement
 

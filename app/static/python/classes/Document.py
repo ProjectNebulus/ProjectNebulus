@@ -41,3 +41,6 @@ class DocumentFile(Snowflake):
             raise ValidationError(
                 "Document must be linked to either a folder or a course."
             )
+
+    def __str__(self):
+        return f'DocumentFile(name="{self.name}", url="{self.url}", upload_date={self.upload_date})'

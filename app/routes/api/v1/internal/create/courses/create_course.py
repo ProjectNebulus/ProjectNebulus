@@ -9,6 +9,8 @@ from schoolopy import Schoology
 from app.static.python.classes import Announcement
 from app.static.python.mongodb import create, read
 from app.static.python.utils.colors import getColor
+from static.python.classes import GradingCategory, Grades, TermGrade
+from static.python.mongodb.create import debug_importing
 from ... import internal
 
 
@@ -301,7 +303,7 @@ def sync_schoology_course():
 @internal.route("/create/course/schoology", methods=["GET", "POST"])
 def schoology_course_route():
     post_data = request.json
-    print("Request Received `/create/course/schoology`")
+    print("Request Received '/create/course/schoology'")
     if request.method == "GET":
         post_data = request.args
     link = post_data["link"]
@@ -358,15 +360,17 @@ def create_schoology_course(section, link, teacher, user, sc: Schoology = None):
         "type": "Imported",
     }
 
-    course_obj = create.create_course(course)
+    course_obj = create.create_course(course, False)
 
-    create.createAvatar(
-        {
-            "avatar_url": section["profile_url"],
-            "parent": "Course",
-            "parent_id": course_obj.id,
-        }
-    )
+    if not debug_importing:
+        create.createAvatar(
+            {
+                "avatar_url": section["profile_url"],
+                "parent": "Course",
+                "parent_id": course_obj.id,
+            }
+        )
+
     sc_updates = sc.get_section_updates(link)
 
     announcements = []
@@ -399,8 +403,21 @@ def create_schoology_course(section, link, teacher, user, sc: Schoology = None):
             )
         )
 
-    sc_grades = sc.get_user_grades_by_section(user["id"], link)
-    print(sc_grades)
+    sc_grades = sc.get_user_grades_by_section(user["id"], link)[0]
+    print("Grades:", sc_grades)
+
+    categories = {}
+    sc_grading_categories = sc.get_grading_categories(link)
+    print("Grading Categories:", sc_grading_categories)
+
+    for category in sc_grading_categories:
+        categories[category["id"]] = GradingCategory(
+            title=category["title"],
+            weight=category.get("weight", 100) / 100,
+            calculation_type=category.get("calculation_type", 2),
+            imported_id=category["id"]
+        )
+    print(categories)
 
     sc_discussions = sc.get_discussions(section_id=link)
     for i in range(0, len(sc_discussions)):
@@ -411,12 +428,11 @@ def create_schoology_course(section, link, teacher, user, sc: Schoology = None):
 
     sc_events = sc.get_section_events(link)
     events = []
-    assignments = []
+    assignments = {}
     for event in sc_events:
         if event["type"] == "assignment":
             assignment = sc.get_assignment(section["id"], event["assignment_id"])
-            due = assignment["due"]
-            if due != "":
+            if due := assignment["due"]:
                 due = datetime.fromisoformat(due)
             else:
                 due = None
@@ -429,6 +445,7 @@ def create_schoology_course(section, link, teacher, user, sc: Schoology = None):
                 "allow_submissions": int(assignment["allow_dropbox"]) == 1,
                 "course": str(course_obj.id),
                 "points": float(assignment["max_points"]),
+                "grading_category": categories[int(assignment["grading_category"])],
                 "imported_from": "Schoology",
                 "imported_id": str(assignment["id"]),
             }
@@ -436,7 +453,8 @@ def create_schoology_course(section, link, teacher, user, sc: Schoology = None):
             if int(assignment["allow_dropbox"]) and int(assignment.get("completed", 0)):
                 data["submitDate"] = datetime.max
 
-            assignments.append(create.createAssignment(data))
+            assignments[assignment["id"]] = create.createAssignment(data)
+
         else:
             events.append(
                 create.createEvent(
@@ -452,46 +470,39 @@ def create_schoology_course(section, link, teacher, user, sc: Schoology = None):
             )
 
     folders = []
+    terms = []
 
-    for period in sc_grades[1:]:
-        for assignment in period:
-            assignment_obj = read.getAssignment(
-                imported_id=assignment[0]["assignment_id"]
-            )
-            assignment_obj.grade = assignment[0]["grade"]
-            assignment_obj.semester = period["period_title"]
-            assignment_obj.save()
+    for period in sc_grades["period"]:
+        terms.append(term := TermGrade(title=period["period_title"], grading_categories=list(categories.values())))
+        for assignment in period["assignment"]:
+            assignment_obj = assignments.get(assignment["assignment_id"])
+            assignment_obj.grade = assignment["grade"]
+            assignment_obj.period = term
+
+            if not debug_importing:
+                assignment_obj.save()
+
+    grades = Grades(student=read.find_user(id=session["id"]), terms=terms)
+    if not debug_importing:
+        grades.course = course_obj
+        course_obj.grades = grades
 
     sc_documents = sc.get_section_documents(link)
-
-    def get_doc_link(sc, url):
-        rq = sc.schoology_auth.oauth.get(
-            url=url,
-            headers=sc.schoology_auth._request_header(),
-            auth=sc.schoology_auth.oauth.auth,
-        )
-        return rq.url  # rq["url"]
-
     documents = []
 
     for sc_document in sc_documents:
-        document = {}
-        document["schoology_id"] = sc_document["id"]
-        document["name"] = sc_document["title"]
-        document["file_ending"] = sc_document["attachments"]["files"]["file"][0][
-            "extension"
-        ]
-        try:
-            document["upload_date"] = datetime.fromtimestamp(sc_document["timestamp"])
-        except Exception as e:
-            print(f"{type(e).__name__}: {e}")
+        document = {
+            "schoology_id": sc_document["id"],
+            "name": sc_document["title"],
+            "file_ending": sc_document["attachments"]["files"]["file"][0]["extension"],
+            "course": str(course_obj.id),
+            "attachments": sc_document["attachments"]["files"]["file"][0]["download_path"],
+            "imported_id": str(sc_document["id"]),
+            "imported_from": "Schoology"
+        }
 
-        document["course"] = str(course_obj.id)
-        document["imported_from"] = "Schoology"
-        document["imported_id"] = str(sc_document["id"])
-        document["attachments"] = get_doc_link(
-            sc, sc_document["attachments"]["files"]["file"][0]["download_path"]
-        )
+        if timestamp := sc_document.get("timestamp"):
+            document["upload_date"] = datetime.fromtimestamp(timestamp)
 
         filename = link.split("/")[-1]
         mongo_document = create.createDocumentFile(
@@ -504,11 +515,13 @@ def create_schoology_course(section, link, teacher, user, sc: Schoology = None):
             }
         )
 
-        documents.append(document)
+        documents.append(mongo_document)
 
-    print(documents)
-    print(announcements, assignments, events, sep="\n")
-    print("Lengths:", len(announcements), len(assignments), len(events))
+    if not debug_importing:
+        course_obj.save()
+
+    print(documents, announcements, assignments, events, sep="\n")
+    print("Lengths:", len(documents), len(announcements), len(assignments), len(events))
 
     return f"/course/{course_obj.id}/documents"
 

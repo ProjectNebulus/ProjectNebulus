@@ -22,9 +22,9 @@ function deleteCourse(id, courseElement) {
                 ":" + (deleteETA % 60 + "").padStart(2, "0") + ")";
             deleteETA--;
 
-            if (deleteETA <= 0) {
+            if (deleteETA < -1) {
                 clearInterval(interval);
-                courseElement.remove();
+                courseElement.parentElement.remove();
             }
         }, 1000);
     }

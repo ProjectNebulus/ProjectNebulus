@@ -291,6 +291,7 @@ def sort_user_events(
         events_assessments_assignments = list(chain(events, assignments, assessments))
     else:
         events_assessments_assignments = list(chain(assignments, assessments))
+
     sorted_events = []
     # filter out events that aren't due
     for one_event in events_assessments_assignments:
@@ -314,7 +315,7 @@ def sort_user_events(
     sorted_announcements = sorted(
         announcements, key=lambda obj: obj.date, reverse=True
     )[load_start: load_start + max_days]
-    
+
     grouped_announcements = dict(
         list(
             {
