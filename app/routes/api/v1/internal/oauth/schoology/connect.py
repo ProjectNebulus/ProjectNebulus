@@ -261,7 +261,7 @@ def graderoom_connect():
     params = {
         "x-api-key": api_key
     }
-    information = dict(requests.post("https://beta.graderoom.me/api/info", headers=params).json())
+    information = dict(requests.get("https://beta.graderoom.me/api/info", headers=params).json())
     conversion = {
         "basis": "BISV",
         "bellarmine": "BCP",
