@@ -33,7 +33,6 @@ def generate_redirect(url):
 def settings():
     the_schoology = read.getSchoology(id=session.get("id"))
     the_google_classroom = read.getClassroom(session.get("id"))
-    googleclassroom = None
     try:
         credentials = google.oauth2.credentials.Credentials(
             **flask.session["credentials"]
@@ -42,7 +41,6 @@ def settings():
         service = build("people", "v1", credentials=credentials)
         profile = service.people().get("people/me", personFields="names,emailAddresses")
         print(profile)
-
     except:
         googleclassroom = None
 
@@ -61,7 +59,7 @@ def settings():
     except:
         user_info = None
 
-    canvas = session.get("canvas")
+    canvas = list(read.getCanvas(id=session.get("id")))[0].name
 
     cache_handler = FlaskSessionCacheHandler(CacheHandler)
     spotify_auth_manager = spotipy.oauth2.SpotifyOAuth(
@@ -82,10 +80,11 @@ def settings():
         except SpotifyException:
             spotify = None
 
-    try:
-        discord = (session["discord_user"], session["discord_avatar"])
-    except KeyError:
-        discord = None
+    discord = list(read.getDiscord(id=session.get("id")))[0]
+    discord = [
+        discord.discord_user,
+        discord.discord_avatar
+    ]
 
     last_access = 0
     if session.get("access"):
@@ -94,16 +93,21 @@ def settings():
             datetime.now().timestamp() - float(session["access"]),
         )
         last_access = datetime.now().timestamp() - float(session["access"])
-    graderoom = []
-    if "username_graderoom" in session.keys():
-        graderoom = [
-            session["username_graderoom"],
-            session["school_graderoom"]
-        ]
+    graderoom = list(read.getGraderoom(id=session.get("id")))[0]
+    graderoom = [
+        graderoom.username,
+        graderoom.school
+    ]
+    github = list(read.getGithub(id=session.get("id")))[0]
+    github = [
+        github.username,
+        github.avatar
+    ]
     return render_template(
         "user/settings.html",
         page="Nebulus - Account Settings",
         graderoom=graderoom,
+        github=github,
         session=session,
         lastAccess=last_access,
         user=session.get("username"),

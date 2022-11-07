@@ -5,6 +5,7 @@ from flask import Flask, redirect, render_template, request, session
 from flask_discord import DiscordOAuth2Session
 
 from . import main_blueprint
+from ...static.python.mongodb import update
 
 app = Flask(__name__)
 app.config["DISCORD_CLIENT_ID"] = 955153343020429343  # Discord client ID.
@@ -90,11 +91,14 @@ def recieve():
             user = f"{data['username']}#{data['discriminator']}"
 
             data = [user, int(data["id"]), avatar_link]
-            session["discord_code"] = code
-            session["discord_access_token"] = access_token
-            session["discord_avatar"] = avatar_link
-            session["discord_user"] = user
-            session["discord_id"] = data[1]
+            discord_dict = {
+                "discord_code": code,
+                "discord_id": data[1],
+                "discord_user": str(user),
+                "discord_avatar": avatar_link,
+                "discord_access_token": access_token,
+            }
+            update.discordLogin(session["id"], discord_dict)
 
             return render_template("user/connections/connectDiscord.html", data=data)
 

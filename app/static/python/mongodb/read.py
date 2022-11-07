@@ -7,6 +7,8 @@ from flask import session
 from mongoengine import Q
 
 from app.static.python.classes import *
+from app.static.python.classes import Github
+from app.static.python.classes.Graderoom import Graderoom
 from app.static.python.utils.security import valid_password
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
@@ -129,6 +131,34 @@ def find_document(**kwargs) -> Document | None:
 def getSchoology(**kwargs) -> list[Schoology] | None:
     try:
         return find_user(**kwargs).schoology
+    except KeyError:
+        return
+
+
+def getGraderoom(**kwargs) -> list[Graderoom] | None:
+    try:
+        return find_user(**kwargs).graderoom
+    except KeyError:
+        return
+
+
+def getGithub(**kwargs) -> list[Github] | None:
+    try:
+        return find_user(**kwargs).github
+    except KeyError:
+        return
+
+
+def getDiscord(**kwargs) -> list[Discord] | None:
+    try:
+        return find_user(**kwargs).discord
+    except KeyError:
+        return
+
+
+def getCanvas(**kwargs) -> list[Canvas] | None:
+    try:
+        return find_user(**kwargs).canvas
     except KeyError:
         return
 

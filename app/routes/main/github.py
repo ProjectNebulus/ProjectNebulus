@@ -2,6 +2,7 @@ import requests
 from flask import redirect, render_template, request, session
 
 from . import main_blueprint
+from ...static.python.mongodb import update
 
 
 def get_auth():
@@ -82,7 +83,11 @@ def github_callback():
     code = request.args.get("code")
     print(code)
     token = get_access_token(code)
-    session["github"] = token
+    update.githubLogin(session["id"], {
+        "token": token,
+        "username": get_user_data(token)["login"],
+        "avatar": get_user_data(token)["avatar_url"],
+    })
     return render_template(
         "user/connections/connectGithub.html",
         username=get_user_data(token)["login"],

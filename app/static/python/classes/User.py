@@ -16,6 +16,7 @@ from .Calendar import Calendar
 from .Canvas import Canvas
 from .ChatProfile import ChatProfile
 from .Discord import Discord
+from .Github import Github
 from .GoogleClassroom import GoogleClassroom
 from .Graderoom import Graderoom
 from .NebulusDocument import NebulusDocument
@@ -68,6 +69,7 @@ class User(Snowflake):
     discord = ListField(EmbeddedDocumentField(Discord, default=None, null=True))
     canvas = ListField(EmbeddedDocumentField(Canvas, default=None, null=True))
     graderoom = ListField(EmbeddedDocumentField(Graderoom, default=None, null=True))
+    github = ListField(EmbeddedDocumentField(Github, default=None, null=True))
 
     avatar = EmbeddedDocumentField(
         Avatar,

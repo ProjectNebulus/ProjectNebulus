@@ -2,6 +2,7 @@ from flask import redirect, render_template, request, session
 
 from app.static.python.extensions.integrations.canvas import connectCanvas
 from app.static.python.mongodb.read import getText
+from app.static.python.mongodb.update import canvasLogin
 from . import main_blueprint
 from .utils import logged_in
 
@@ -18,9 +19,12 @@ def canvasConnect():
 def canvasConnect2():
     a = connectCanvas(request.form.get("link"), request.form.get("key"))
     if a != False:
-        session["canvas"] = str(a)
-        session["canvas_key"] = request.form.get("key")
-        session["canvas_link"] = request.form.get("link")
+        canvasLogin(session["id"], {
+            "url": request.form.get("link"),
+            "key": request.form.get("key"),
+            "name": str(a),
+        })
+
     else:
         return redirect("/canvas")
     return render_template(

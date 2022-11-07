@@ -10,8 +10,10 @@ from ..classes import (
     NebulusDocument,
     Planner,
     Schoology,
-    User, Canvas,
+    User, Canvas, Discord, Spotify,
 )
+from ..classes.Github import Github
+from ..classes.Graderoom import Graderoom
 from ..classes.Notepad import Notepad
 from ..utils.security import hash256
 
@@ -44,6 +46,54 @@ def canvasLogin(_id: str, canvas: dict):
 
     canvas = Canvas(**canvas)
     user.canvas.append(canvas)
+    user.save(clean=False)
+
+
+def discordLogin(_id: str, discord: dict):
+    from app.static.python.mongodb.read import find_user
+
+    user = find_user(pk=_id)
+    if not user:
+        raise KeyError("User not found")
+
+    discord = Discord(**discord)
+    user.discord.append(discord)
+    user.save(clean=False)
+
+
+def spotifyLogin(_id: str, spotify: dict):
+    from app.static.python.mongodb.read import find_user
+
+    user = find_user(pk=_id)
+    if not user:
+        raise KeyError("User not found")
+
+    spotify = Spotify(**spotify)
+    user.spotify.append(spotify)
+    user.save(clean=False)
+
+
+def githubLogin(_id: str, github: dict):
+    from app.static.python.mongodb.read import find_user
+
+    user = find_user(pk=_id)
+    if not user:
+        raise KeyError("User not found")
+
+    github = Github(**github)
+    user.github.append(github)
+    user.save(clean=False)
+
+
+def graderoomLogin(_id: str, graderoom: dict):
+    from app.static.python.mongodb.read import find_user
+
+    user = find_user(pk=_id)
+    if not user:
+        raise KeyError("User not found")
+
+    graderoom = Graderoom(**graderoom)
+    user.graderoom.append(graderoom)
     user.save(clean=False)
 
 

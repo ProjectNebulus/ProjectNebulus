@@ -8,9 +8,9 @@ function resetScreen() {
 
 let prevScreen;
 
-function open_sso() {
+function open_tab(tab_name) {
     document.getElementById("main").style.display = "none";
-    document.getElementById("sso").style.display = "block";
+    document.getElementById(tab_name).style.display = "block";
 
 }
 

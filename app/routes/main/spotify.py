@@ -1,14 +1,13 @@
-import uuid
-
 import spotipy
 from flask import redirect, render_template, request, session
 from spotipy import CacheHandler, SpotifyException
 
 from . import main_blueprint
 from .utils import logged_in
-
 # In order to get Spotipy to work, you must install the latest version with cloning the repo with the following command:
 # pip3 install git+https://github.com/plamere/spotipy
+from ...static.python.mongodb import update
+
 SPOTIPY_CLIENT_ID = "9eb38c31d84b43e5a2557a6f98c5a064"
 SPOTIPY_CLIENT_SECRET = "eddbab5eb3b2434694af122a8f99bf87"
 
@@ -41,6 +40,7 @@ class FlaskSessionCacheHandler(CacheHandler):
     def get_cached_token(self):
         token_info = None
         try:
+
             token_info = session["token_info"]
         except KeyError:
             print("Spotify token not found in the session")
@@ -85,6 +85,7 @@ def get_spotify_auth():
 @logged_in
 def spotify_route():
     if not session.get("uuid"):
+        import uuid
         # Step 1. Visitor is unknown, give random ID
         session["uuid"] = str(uuid.uuid4())
 
@@ -111,6 +112,17 @@ def spotify_route():
 
     # Step 4. Signed in, display data
     spotify = spotipy.Spotify(auth_manager=auth_manager)
+    avatar = spotify.me()["images"][0]["url"]
+    name = spotify.me()["display_name"]
+    token_info = str(session.get("token_info"))
+    uuid = session.get("uuid")
+    update.spotifyLogin(session["id"], {
+        "avatar": avatar,
+        "name": name,
+        "token_info": token_info,
+        "uuid": uuid,
+    })
+
     return render_template(
         "user/connections/connectSpotify.html", spotify=spotify, auth=False
     )

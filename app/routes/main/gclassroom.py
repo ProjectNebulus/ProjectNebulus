@@ -19,17 +19,16 @@ CLIENT_SECRETS_FILE = "app/static/python/credentials.json"
 SCOPES = [
     "https://www.googleapis.com/auth/classroom.courses.readonly",
     "https://www.googleapis.com/auth/classroom.rosters.readonly",
+    "https://www.googleapis.com/auth/classroom.coursework.me",
     "https://www.googleapis.com/auth/classroom.coursework.me.readonly",
+    "https://www.googleapis.com/auth/classroom.coursework.students",
     "https://www.googleapis.com/auth/classroom.coursework.students.readonly",
+    "https://www.googleapis.com/auth/classroom.announcements",
     "https://www.googleapis.com/auth/classroom.announcements.readonly",
     "https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly",
     "https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly",
     "https://www.googleapis.com/auth/classroom.push-notifications",
     "https://www.googleapis.com/auth/userinfo.profile",
-    "https://www.googleapis.com/auth/classroom.profile.photos",
-    "https://www.googleapis.com/auth/classroom.topics.readonly",
-    "https://www.googleapis.com/auth/classroom.student-submissions.me.readonly"
-    "https://www.googleapis.com/auth/classroom.profile.emails",
     "https://www.googleapis.com/auth/classroom.profile.photos",
 ]
 API_SERVICE_NAME = "classroom"
@@ -67,6 +66,7 @@ def gtest_api_request():
     user_info = user_info_service.userinfo().get().execute()
     print(user_info)
     user_info = [user_info["name"], user_info["picture"]]
+
     return render_template("user/connections/connectClassroom.html", data=user_info)
     # return flask.jsonify(courses)
 
@@ -121,7 +121,7 @@ def oauth2callback():
     # Use the authorization server's response to fetch the OAuth 2.0 tokens.
     # authorization_response = flask.request.url
     authorization_response = (
-        session["redirect_url_g"] + "&code=" + request.args.get("code")
+            session["redirect_url_g"] + "&code=" + request.args.get("code")
     )
     if "http://beta.nebulus.ml" in authorization_response:
         authorization_response = authorization_response.replace("http", "https")

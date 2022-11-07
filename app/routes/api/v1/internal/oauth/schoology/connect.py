@@ -262,13 +262,15 @@ def graderoom_connect():
         "x-api-key": api_key
     }
     information = dict(requests.post("https://beta.graderoom.me/api/info", headers=params).json())
-    session["api_key_graderoom"] = api_key
-    session["username_graderoom"] = information["username"]
     conversion = {
         "basis": "BISV",
         "bellarmine": "BCP",
         "ndsj": "NDSJ"
     }
     school = conversion[information["school"].lower()]
-    session["school_graderoom"] = school
+    update.graderoomLogin(session["id"], {
+        "key": api_key,
+        "username": information["username"],
+        "school": school
+    })
     return str(information)
