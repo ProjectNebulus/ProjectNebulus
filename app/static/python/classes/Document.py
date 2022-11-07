@@ -23,7 +23,7 @@ class DocumentFile(Snowflake):
     url = URLField(required=True)
     name = StringField(required=True)
     description = StringField(default="", null=True)
-    upload_date = DateTimeField(default=lambda: datetime.now)
+    upload_date = DateTimeField(default=datetime.now())
     folder = ReferenceField(
         "Folder", default=None, null=True
     )  # 0 if it's in the course, not any folder

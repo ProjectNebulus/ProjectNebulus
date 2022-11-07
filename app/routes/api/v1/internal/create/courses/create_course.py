@@ -496,7 +496,7 @@ def create_schoology_course(section, link, teacher, user, sc: Schoology = None):
             "name": sc_document["title"],
             "file_ending": sc_document["attachments"]["files"]["file"][0]["extension"],
             "course": str(course_obj.id),
-            "attachments": sc_document["attachments"]["files"]["file"][0]["download_path"],
+            "url": sc_document["attachments"]["files"]["file"][0]["download_path"],
             "imported_id": str(sc_document["id"]),
             "imported_from": "Schoology"
         }
