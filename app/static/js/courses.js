@@ -27,7 +27,8 @@ function deleteCourse(id, courseElement) {
                 courseElement.parentElement.remove();
             }
         }, 1000);
-    }
+    } else
+        courseElement.parentElement.remove();
 
     $.ajax({
         type: "POST",

@@ -321,6 +321,9 @@ function setUpFunc() {
 function createSchoologyCourse() {
     const input = document.getElementById('schoology-course-id');
     const teacher = document.getElementById('schoology-course-teacher');
+    const status = document.getElementById("schoology-import-status");
+    status.style.color = "gray";
+    status.innerHTML = "Creating course...";
 
     const xhttp = new XMLHttpRequest();
     xhttp.open('POST', '/api/v1/internal/create/course/schoology', true);
@@ -332,6 +335,18 @@ function createSchoologyCourse() {
             profile_url: schoologyCoursePic,
         })
     );
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState === 4) {
+            if (xhttp.status === 200) {
+                status.style.color = "greenyellow";
+                status.innerHTML = "Course created!";
+                window.location.href = xhttp.responseText;
+            } else {
+                status.style.color = "red";
+                status.innerHTML = "An error occurred!";
+            }
+        }
+    }
 }
 
 function createGoogleCourse() {

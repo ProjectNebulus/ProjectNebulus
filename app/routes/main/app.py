@@ -119,7 +119,6 @@ def bell_schedule():
 def courses():
     user_acc = read.find_user(id=session["id"])
     user_courses = read.get_user_courses(session["id"])
-    scCourses, gcourses, canvascourses, scGroups = get_courses()
 
     return render_template(
         "learning/courses.html",
@@ -131,10 +130,6 @@ def courses():
         read=read,
         page="Nebulus - Courses",
         translate=getText,
-        gcourses=gcourses,
-        scCourses=scCourses,
-        scGroups=scGroups,
-        canvascourses=canvascourses,
     )
 
 
@@ -143,6 +138,7 @@ def courses():
 def clubs():
     user_acc = read.find_user(id=session["id"])
     user_clubs = read.get_user_clubs(session["id"])
+    
     return render_template(
         "learning/clubs.html",
         user=session["username"],

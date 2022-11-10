@@ -360,7 +360,7 @@ def create_schoology_course(section, link, teacher, user, sc: Schoology = None):
         "type": "Imported",
     }
 
-    course_obj = create.create_course(course, False)
+    course_obj = create.create_course(course)
 
     if not debug_importing:
         create.createAvatar(
@@ -368,7 +368,8 @@ def create_schoology_course(section, link, teacher, user, sc: Schoology = None):
                 "avatar_url": section["profile_url"],
                 "parent": "Course",
                 "parent_id": course_obj.id,
-            }
+            },
+            course_obj
         )
 
     sc_updates = sc.get_section_updates(link)
@@ -387,7 +388,6 @@ def create_schoology_course(section, link, teacher, user, sc: Schoology = None):
                 {
                     "content": update["body"],
                     "course": str(course_obj.id),
-                    # "id": str(update["id"]),
                     "author": author["name_display"],
                     "author_pic": author["picture_url"],
                     "likes": update["likes"],
@@ -451,7 +451,7 @@ def create_schoology_course(section, link, teacher, user, sc: Schoology = None):
             }
 
             if int(assignment["allow_dropbox"]) and int(assignment.get("completed", 0)):
-                data["submitDate"] = datetime.max
+                data["submitDate"] = datetime.now()
 
             assignments[assignment["id"]] = create.createAssignment(data)
 

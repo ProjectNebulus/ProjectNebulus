@@ -123,16 +123,6 @@ def createNebulusDocument(data: dict, user_id: str) -> NebulusDocument:
     return doc
 
 
-def createAssignment(data: dict, save=True) -> Assignment:
-    assignment = Assignment(**data)
-    if save and not debug_importing:
-        course = assignment.course
-        course.assignments.append(assignment)
-        assignment.save(force_insert=True)
-
-    return assignment
-
-
 def createGrades(data: dict, save=True) -> Grades:
     grades = Grades(**data)
     if save and not debug_importing:
@@ -189,13 +179,25 @@ def createAnnouncement(data: dict, save=True) -> Announcement:
     return announcement
 
 
-def createAvatar(data: dict) -> Avatar:
-    if data["parent"] == "User":
-        parent = User.objects(id=data["parent_id"]).first()
-    elif data["parent"] == "Course":
-        parent = Course.objects(id=data["parent_id"]).first()
-    else:
-        parent = Textbook.objects(id=data["parent_id"]).first()
+def createAssignment(data: dict, save=True) -> Assignment:
+    assignment = Assignment(**data)
+    if save and not debug_importing:
+        course = assignment.course
+        assignment.save(force_insert=True)
+        course.assignments.append(assignment)
+
+    return assignment
+
+
+def createAvatar(data: dict, parent=None) -> Avatar:
+    if parent is None:
+        if data["parent"] == "User":
+            parent = User.objects(id=data["parent_id"]).first()
+        elif data["parent"] == "Course":
+            parent = Course.objects(id=data["parent_id"]).first()
+        else:
+            parent = Textbook.objects(id=data["parent_id"]).first()
+
     file_ending = ""
     if data.get("file_ending"):
         file_ending = data["file_ending"]
@@ -207,7 +209,6 @@ def createAvatar(data: dict) -> Avatar:
         avatar.avatar_url += "." + file_ending
 
     parent.avatar = avatar
-    parent.save()
     return avatar
 
 

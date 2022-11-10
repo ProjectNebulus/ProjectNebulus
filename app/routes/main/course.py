@@ -50,10 +50,8 @@ def course_page(page, **kwargs):
         course.grades = Grades(course=course, student=find_user(id=session["id"]))
 
         try:
-            print(course.grades.grade)
-        except:
-            course.grades.clean()
-        if course.grades.grade == None:
+            assert course.grades.grade is not None
+        except (ValueError, AssertionError):
             course.grades.clean()
 
         print(f"Course: {course.name} (id={course_id})")
