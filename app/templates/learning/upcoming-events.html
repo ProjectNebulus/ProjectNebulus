@@ -1,8 +1,11 @@
 {% if events|length == 0 %}
-    <p class="text-gray-300 dark:text-gray-500 mx-4">
-        No Events, Assignments, or Quizzes! To
-        add events on to your Nebulus dashboard, please add it within a Course!
-    </p>
+    <div class="text-black dark:text-white m-3 p-6 rounded-lg w-full dark:bg-gray-900/50 bg-white/50"
+         style="backdrop-filter: blur(10px);">
+        <h1 class="text-2xl ">Nothing Here Yet!</h1>
+        <p>No events, quizzes, assignments, or assessments yet! Things you add to your calendar and courses will appear
+            here!</p>
+
+    </div>
 {% else %}
     {% for date, alist in events.items() %}
         {% set diff = (date - now).days %}
@@ -55,7 +58,8 @@
         {% for a in alist %}
             {% if (a._cls != "Assignment" or a.submitDate == None) or now < date %}
                 {# today is before the due date ^ #}
-                <div class="flex bg-gray-100 shadow dark:bg-gray-800/75 rounded-lg p-6 event shadow-md dark:border-gray-700 text-sm mb-5 mx-4 text-left relative expandable">
+                <div style="backdrop-filter: blur(10px)"
+                     class="flex bg-gray-100/50 shadow dark:bg-gray-800/50 rounded-lg p-6 event shadow-md dark:border-gray-700 text-sm mb-5 mx-4 text-left relative expandable">
                     <div class="absolute right-0 bottom-0 material-icons hover:bg-gray-50 dark:hover:bg-gray-500 p-1 expand text-gray-200 cursor-pointer dark:text-gray-400 rounded-lg mr-3 mb-3">
                         open_in_new
                     </div>

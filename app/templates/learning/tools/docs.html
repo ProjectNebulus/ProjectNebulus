@@ -37,7 +37,8 @@
     </script>
     {% include "utils/navbar.html" %}
     <div class="pl-3" style="overflow-y: scroll; height: calc(100% - 120px); margin-left: 20px; margin-right: 20px;">
-        <h1 style="margin-left:15px;" class="block mb-2 text-3xl uppercase dark:text-gray-500">Templates</h1>
+        <h1 style="margin-left:15px;" class="text-gray-600 block mb-2 text-xl uppercase dark:text-gray-500">
+            Templates</h1>
         <div class="w-full grid gap-4"
              style="grid-template-columns: repeat(auto-fit, 13rem)">
             <div class="flex flex-col">
@@ -140,7 +141,8 @@
             <div style="margin-left:15px;" class="flex-grow border-t border-gray-400"></div>
         </div>
         <div>
-            <h1 style="margin-left:15px;" class="block mb-2 text-3xl uppercase dark:text-gray-500">Recent Documents</h1>
+            <h1 style="margin-left:15px;" class="text-gray-600 block mb-2 text-xl uppercase dark:text-gray-500">Recent
+                Documents</h1>
             {% if docs|length == 0 %}
                 <br>
                 <br>

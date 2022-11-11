@@ -230,6 +230,13 @@ function invertSite() {
             element.classList.add('gradient-text');
         }
     }
+    const wallpaper = localStorage.getItem("wallpaper");
+    if (window.location.search.includes("iframe=true")) document.body.style.background = "transparent";
+    else if (wallpaper && !(window.location.pathname === "/")) {
+        const brightness = document.documentElement.classList.contains("dark") ? 0 : 255;
+        document.body.style.background = `linear-gradient( rgba(${brightness}, ${brightness}, ${brightness}, 0.6), rgba(${brightness}, ${brightness}, ${brightness}, 0.6) ), url('${wallpaper}') no-repeat center center fixed`;
+        document.body.style.backgroundSize = 'cover';
+    }
 }
 
 let isOnline = true;

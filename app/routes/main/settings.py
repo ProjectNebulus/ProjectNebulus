@@ -63,6 +63,11 @@ def settings():
     except:
         canvas = None
 
+    try:
+        canvas = list(read.getCanvas(id=session.get("id")))[0].name
+    except:
+        canvas = []
+
     cache_handler = FlaskSessionCacheHandler(CacheHandler)
     spotify_auth_manager = spotipy.oauth2.SpotifyOAuth(
         scope="user-read-currently-playing playlist-modify-private",
@@ -89,7 +94,7 @@ def settings():
             discord.discord_avatar
         ]
     except:
-        discord = None
+        discord = []
 
     last_access = 0
     if session.get("access"):

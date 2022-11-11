@@ -85,12 +85,9 @@
                         {{ translate("Nebulus is a combination of all your learning apps into one website. Say good bye to switching tabs! Built for students, by students, we understand the challenges of learning, and Nebulus is here to help make it easier. Our app contains everything you need, including Study Planners, Calculators, Docs, Dictionary, Plagiarism checker, World Map, Code Compiler, Chat, Planners and more. In addition, Nebulus is a great place to merge your other apps as one. In Nebulus, you can integrate Google Classroom, Schoology, Canvas, and more.   For even more perks such as access to special ebooks, Learning review system, buy Nebulus Plus. And to take it up another notch, buy Nebulus Infinite. Our devoted team is working to make learning easier for you. We are adding even more features for our Stable release on December 23rd") }}
                     </p>
                     <br>
-                    <div style="left: 50%;
-                                margin: auto;
-                                width: 50%;
-                                padding: 10px;
-                                border-radius: 20px;"
-                         class="bg-gray-200 dark:bg-gray-700">
+                    <div style=" left: 50%; margin: auto; width: 50%; backdrop-filter: blur(10px); padding: 10px; border-radius: 20px; "
+                         class="bg-gray-200/50 dark:bg-gray-700/50">
+
                         <a href="https://discord.gg/QNgTSN2PBM">
                             <img src="/static/images/logos/discord.png">
                         </a>
@@ -122,7 +119,7 @@
                        font-weight: 700;"
                 class="text-5xl text-black dark:text-white">
                 Our Team<span style=" vertical-align: middle; font-weight: 100; margin-left: 30px; "
-                              class="text-3xl text-gray-400">VP and Executives
+                              class="text-3xl text-gray-400">The Nebulus Core Team
             </span>
             </h1>
             <br>
@@ -216,27 +213,28 @@
                     title: "Frontend Developer",
                     profileLink: "838458143121604639"
                 },
-            ]
+                    ]
 
-            people.innerHTML += '<h1 class="text-3xl text-black dark:text-white">Executives</h1>'
+                    people.innerHTML += '<h1 class="text-3xl text-black dark:text-white">Executives</h1>'
 
-            for (const person of people) {
-                const bgDiv = document.createElement("div");
-                bgDiv.className = "max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700";
-                bgDiv.style.margin = "1.5rem";
-                bgDiv.style.padding = "1rem";
-                bgDiv.style.float = "left";
-                bgDiv.style.width = "290px";
+                    for (const person of people) {
+                        const bgDiv = document.createElement("div");
+                        bgDiv.className = "max-w-sm bg-white/50 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800/50 dark:border-gray-700";
+                        bgDiv.style.margin = "1.5rem";
+                        bgDiv.style.padding = "1rem";
+                        bgDiv.style.float = "left";
+                        bgDiv.style.width = "290px";
+                        bgDiv.style.backdropFilter = "blur(10px)";
 
-                const bodyDiv = document.createElement("div");
-                bodyDiv.className = "flex flex-col items-center pb-5 mt-5";
+                        const bodyDiv = document.createElement("div");
+                        bodyDiv.className = "flex flex-col items-center pb-5 mt-5";
 
-                const img = document.createElement("img");
-                img.className = "mb-3 w-24 h-24 rounded-full shadow-lg";
-                img.src = "/static/images/people/" + person.image;
+                        const img = document.createElement("img");
+                        img.className = "mb-3 w-24 h-24 rounded-full shadow-lg";
+                        img.src = "/static/images/people/" + person.image;
 
-                const name = document.createElement("h3");
-                name.className = "mb-1 text-xl font-medium text-gray-900 dark:text-white";
+                        const name = document.createElement("h3");
+                        name.className = "mb-1 text-xl font-medium text-gray-900 dark:text-white";
                 name.innerHTML = person.name;
 
                 const title = document.createElement("span");
