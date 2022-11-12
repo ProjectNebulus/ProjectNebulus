@@ -5,7 +5,6 @@ class GradingCategory(EmbeddedDocument):
     CALC_PERCENTAGE = 1
     CALC_TOTAL_PTS = 2
 
-    meta = {"collection": "GradingCategories"}
     weight = FloatField(required=True, description="Weight (in decimal) of this category.")
     course = ReferenceField("Course", required=True)
     title = StringField(required=True)

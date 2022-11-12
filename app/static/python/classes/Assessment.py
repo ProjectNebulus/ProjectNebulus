@@ -23,6 +23,10 @@ class Assessment(Snowflake):
     points = IntField(
         default=100, description="The number of points the assignment is worth."
     )
+    status = StringField(
+        description="The status of the assessment. Can be 'Not Taken', 'Finished', or 'Graded'.",
+        default="Not Started",
+    )
     description = StringField(
         default="", null=True, description="The description of the assignment."
     )
