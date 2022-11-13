@@ -202,7 +202,7 @@
     {% if not embedoverride %}
         <meta name="description"
               content="Nebulus is a modern Learning Management System that centralizes everyone’s learning experience into a single application. It’s perfect for Students, Teachers, Parents, and Schools!"/>
-        <meta property="og:title" content="Nebulus. Education. Redefined."/>
+        <meta property="og:title" content="{{ translate("Nebulus.") }} {{ translate("Education. Redefined.") }} {% if translate("Learning") != "Learning" %}({{ translate("Learning") }}){% endif %}"/>
         <meta property="og:type" content="website"/>
         <meta property="og:url" content="https://nebulus.app"/>
         <meta property="og:image"

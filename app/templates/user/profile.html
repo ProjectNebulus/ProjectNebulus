@@ -3,6 +3,20 @@
 {% block main %}
     {% include "utils/navbar.html" %}
     <script src="/static/js/user/profile.js"></script>
+    {% if embedoverride %}
+        <meta name="description"
+              content="Check out {{ guestuser }}'s Profile on Nebulus!"/>
+        <meta property="og:title" content="{{ guestuser }} Profile"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:url" content="https://nebulus.app/profile/{{ guestuser_id }}"/>
+        <meta property="og:image"
+              content="{{ guestavatar}}"/>
+        <meta property="og:description"
+              content="Check out {{ guestuser }}'s Profile on Nebulus!"/>
+
+        <meta name="theme-color" content="#AC7AFF">
+        <meta property="og:site_name" content="Nebulus.">
+    {% endif %}
     <div class="flex flex-row">
         <div style="">
             <h1 class="text-gray-500 text-4xl noselect" style="
@@ -23,13 +37,13 @@
     margin-bottom: 30px;
     margin-top: -70px;
 ">
-                        <span image="{{avatar}}" no-revert=""><img alt="logo" style="filter: brightness(100%);" class="h-12 mx-auto my-auto" src="{{avatar}}"></>
+                        <span image="{{guestavatar}}" no-revert=""><img alt="logo" style="filter: brightness(100%);" class="h-12 mx-auto my-auto" src="{{avatar}}"></>
                     </button>
                     </button>
                     <br style="">
                     <p style="font-weight: 800; "
-                       class="text-black dark:text-white text-4xl">{{ user }}</p>
-                    <p style="color: darkgray;" class="text-2xl">{{ email }}</p>
+                       class="text-black dark:text-white text-4xl">{{ guestuser }}</p>
+                    <p style="color: darkgray;" class="text-2xl">{{ guestemail }}</p>
 
                         <span style="margin-top:15px;display:grid; grid-auto-flow: column; align-content: center; justify-content: center; "
                               class="noselect dark:text-white dark: bg-gray-800 p-6 rounded-lg noselect dark:text-white"

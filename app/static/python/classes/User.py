@@ -54,6 +54,8 @@ class User(Snowflake):
     """
 
     meta = {"collection": "Accounts"}
+
+    # General
     username = StringField(required=True)
     password = StringField(required=True)
     email = EmailField(required=True)
@@ -62,7 +64,7 @@ class User(Snowflake):
     language = StringField(required=True, default="English (United States)")
     created_at = DateTimeField(default=lambda: datetime.now())
 
-    # optional params
+    # Connections
     schoology = ListField(EmbeddedDocumentField(Schoology, default=None, null=True))
     gclassroom = ListField(EmbeddedDocumentField(GoogleClassroom, default=None, null=True))
     spotify = ListField(EmbeddedDocumentField(Spotify, default=None, null=True))
@@ -71,27 +73,36 @@ class User(Snowflake):
     graderoom = ListField(EmbeddedDocumentField(Graderoom, default=None, null=True))
     github = ListField(EmbeddedDocumentField(Github, default=None, null=True))
 
+    # User Customizations
     avatar = EmbeddedDocumentField(
         Avatar,
         default=Avatar(avatar_url="/static/images/nebulusCats/v3.gif", parent="User"),
     )
-    bio = StringField(default="", null=True)
-    premium_expiration = DateTimeField(required=False, default=None, null=True)
+    bio = StringField(default="N", null=True)
+    primary_color = StringField(default="#ff5454")
+    secondary_color = StringField(default="#ffd254")
     status = StringField(default="", null=True)
+    screenTime = EmbeddedDocumentField(ScreenTime, default=None)
+    school = StringField(default="", null=True)  # School's CODE (3-4 Letters)
+
+    # Membership
+    premium_expiration = DateTimeField(required=False, default=None, null=True)
+    points = IntField(default=0)
+    premium = BooleanField(default=False)
+    type = StringField(
+        options=["parent", "teacher", "student", "administrator"], default="student"
+    )
+    is_staff = BooleanField(default=False)
+
+    # Processions
     courses = ListField(ReferenceField("Course"), default=[])
     clubs = ListField(ReferenceField("Club"), default=[])
     planner = EmbeddedDocumentField(Planner, null=True, default=None)
     notepad = EmbeddedDocumentField(Notepad, null=True, default=None)
     calendar = EmbeddedDocumentField(Calendar, null=True, default=None)
     nebulus_documents = ListField(ReferenceField(NebulusDocument), default=[])
-    points = IntField(default=0)
-    premium = BooleanField(default=False)
-    type = StringField(
-        options=["staff", "parent", "teacher", "student"], default="student"
-    )
     chats = ListField(ReferenceField("Chat"), default=[])
     chatProfile = EmbeddedDocumentField(ChatProfile)
-    screenTime = EmbeddedDocumentField(ScreenTime, default=None)
 
     def clean(self):
         self.avatar.avatar_url = (

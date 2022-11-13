@@ -53,8 +53,8 @@ class Assignment(Snowflake):
     description = StringField(
         default="", null=True, description="The description of the assignment."
     )
-    period = EmbeddedDocumentField("TermGrade", default=None, null=True)
-    grading_category = EmbeddedDocumentField("GradingCategory", default=None, null=True)
+    period = EmbeddedDocumentField("TermGrade")
+    grading_category = EmbeddedDocumentField("GradingCategory")
 
     def __str__(self):
         return f'Assignment(title="{self.title}", grade={self.grade}, points={self.points}, due={self.due.date()}, grading_category={self.grading_category})'

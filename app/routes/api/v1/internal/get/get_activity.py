@@ -2,9 +2,9 @@ from datetime import datetime
 
 from flask import session, request, render_template
 
+from app.routes.main import fmt
 from app.routes.main import strftime
 from app.static.python.mongodb import read
-from routes.main import fmt
 from .. import internal
 
 

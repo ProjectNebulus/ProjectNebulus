@@ -3,38 +3,57 @@
     "us": "Nebulus",
     "uk": "Nebulus",
     "au": "Nebulus",
-    "es": "N\u00e9bulus",
-    "mx": "N\u00e9bulus",
-    "cr": "N\u00e9bulus",
-    "cu": "N\u00e9bulus",
-    "co": "N\u00e9bulus",
-    "ar": "N\u00e9bulus",
-    "it": "N\u00e8bulo",
-    "cn": "\u8010\u535a\u4e50\u601d",
-    "tw": "\u8010\u535a\u6a02\u601d",
-    "hk": "\u8010\u535a\u6a02\u601d",
-    "mo": "\u8010\u535a\u6a02\u601d",
-    "jp": "\u30cd\u30d3\u30e5\u30e9\u30b9",
-    "kr": "\ub124\ubdf8\ub7ec\uc2a4",
+    "es": "Nébulus",
+    "mx": "Nébulus",
+    "cr": "Nébulus",
+    "cu": "Nébulus",
+    "co": "Nébulus",
+    "ar": "Nébulus",
+    "it": "Nèbulo",
+    "cn": "耐博乐思",
+    "tw": "耐博樂思",
+    "hk": "耐博樂思",
+    "mo": "耐博樂思",
+    "jp": "ネビュラス",
+    "kr": "네뷸러스",
     "ir": "Nebulus"
+  },
+  "Nebulus.": {
+    "us": "Nebulus.",
+    "uk": "Nebulus.",
+    "au": "Nebulus.",
+    "es": "Nébulus.",
+    "mx": "Nébulus.",
+    "cr": "Nébulus.",
+    "cu": "Nébulus.",
+    "co": "Nébulus.",
+    "ar": "Nébulus.",
+    "it": "Nèbulo.",
+    "cn": "耐博乐思。",
+    "tw": "耐博樂思。",
+    "hk": "耐博樂思。",
+    "mo": "耐博樂思。",
+    "jp": "ネビュラス。",
+    "kr": "네뷸러스",
+    "ir": "Nebulus."
   },
   "Learning": {
     "us": "Learning",
     "uk": "United Kingdom",
     "au": "Australia",
-    "es": "Espa\u00f1a",
-    "mx": "M\u00e9xico",
+    "es": "España",
+    "mx": "México",
     "cr": "Costa Rica",
     "cu": "Cuba",
     "co": "Colombia",
     "ar": "Argentina",
     "it": "Italia",
-    "cn": "\u4e2d\u56fd\u5927\u9646",
-    "tw": "\u53f0\u7063",
-    "hk": "\u9999\u6e2f",
-    "mo": "\u6fb3\u9580",
-    "jp": "\u65e5\u672c",
-    "kr": "\ub300\ud55c\ubbfc\uad6d \uc0ac\ub78c",
+    "cn": "中国大陆",
+    "tw": "台灣",
+    "hk": "香港",
+    "mo": "澳門",
+    "jp": "日本",
+    "kr": "대한민국 사람",
     "ir": "Imperium Romae"
   },
   "A Learning, All In One Experience": {
@@ -47,62 +66,62 @@
     "cu": "Una Experiencia de Aprendizaje todo en Uno",
     "co": "Una Experiencia de Aprendizaje todo en Uno",
     "ar": "Una Experiencia de Aprendizaje todo en Uno",
-    "cn": "\u4e00\u4e2a\u6709\u8da3\uff0c\u5168\u9762\u7684\u5b66\u4e60\u5e73\u53f0",
-    "tw": "\u4e00\u4e2a\u6709\u8da3\uff0c\u5168\u9762\u7684\u5b66\u4e60\u5e73\u53f0",
-    "hk": "\u4e00\u4e2a\u6709\u8da3\uff0c\u5168\u9762\u7684\u5b66\u4e60\u5e73\u53f0",
-    "mo": "\u4e00\u4e2a\u6709\u8da3\uff0c\u5168\u9762\u7684\u5b66\u4e60\u5e73\u53f0",
-    "kr": "\ud558\ub098\uc758 \uacbd\ud5d8\uc5d0\uc11c \ubc30\uc6b0\ub294 \ud559\uc2b5"
+    "cn": "一个有趣，全面的学习平台",
+    "tw": "一个有趣，全面的学习平台",
+    "hk": "一个有趣，全面的学习平台",
+    "mo": "一个有趣，全面的学习平台",
+    "kr": "하나의 경험에서 배우는 학습"
   },
-  "Nebulus. Education. Redefined.": {
-    "us": "Nebulus. Education. Redefined",
-    "uk": "Nebulus. Education. Redefined",
-    "au": "Nebulus. Education. Redefined",
-    "es": "N\u00e9bulus. Educaci\u00f3n. Redefinida.",
-    "mx": "N\u00e9bulus. Educaci\u00f3n. Redefinida.",
-    "cr": "N\u00e9bulus. Educaci\u00f3n. Redefinida.",
-    "cu": "N\u00e9bulus. Educaci\u00f3n. Redefinida.",
-    "co": "N\u00e9bulus. Educaci\u00f3n. Redefinida.",
-    "ar": "N\u00e9bulus. Educaci\u00f3n. Redefinida.",
-    "it": "Nebulo. Istruzione. Ridefinito.",
-    "cn": "\u8010\u535a\u4e50\u601d\uff1a\u521b\u65b0\u7684\u6559\u80b2\u65b9\u5f0f\u3002",
-    "tw": "\u8010\u535a\u6a02\u601d\uff1a\u5275\u65b0\u7684\u6559\u80b2\u65b9\u5f0f\u3002",
-    "hk": "\u8010\u535a\u6a02\u601d\uff1a\u5275\u65b0\u7684\u6559\u80b2\u65b9\u5f0f\u3002",
-    "mo": "\u8010\u535a\u6a02\u601d\uff1a\u5275\u65b0\u7684\u6559\u80b2\u65b9\u5f0f\u3002",
-    "jp": "\u30cd\u30d3\u30e5\u30e9\u30b9\u3002\u65b0\u3057\u3044\u6559\u80b2\u306e\u59cb\u307e\u308a\u3002",
-    "kr": "\ub124\ubdf8\ub7ec\uc2a4.  \uad50\uc721.  \uc7ac\uc815\uc758.",
-    "ir": "Nebulus. Educatio. Reformatur."
+  "Education. Redefined.": {
+    "us": "Education. Redefined",
+    "uk": "Education. Redefined",
+    "au": "Education. Redefined",
+    "es": "Educación. Redefinida.",
+    "mx": "Educación. Redefinida.",
+    "cr": "Educación. Redefinida.",
+    "cu": "Educación. Redefinida.",
+    "co": "Educación. Redefinida.",
+    "ar": "Educación. Redefinida.",
+    "it": "Istruzione. Ridefinito.",
+    "cn": "创新的教育方式。",
+    "tw": "創新的教育方式。",
+    "hk": "創新的教育方式。",
+    "mo": "創新的教育方式。",
+    "jp": "新しい教育の始まり。",
+    "kr": "교육.  재정의.",
+    "ir": "Educatio. Reformatur."
   },
   "Nebulus is a combination of all your learning apps into one website. Say good bye to switching tabs! Built for students, by students, we understand the challenges of learning, and Nebulus is here to help make it easier. Our app contains everything you need, including Study Planners, Calculators, Docs, Dictionary, Plagiarism checker, World Map, Code Compiler, Chat, Planners and more. In addition, Nebulus is a great place to merge your other apps as one. In Nebulus, you can integrate Google Classroom, Schoology, Canvas, and more.   For even more perks such as access to special ebooks, Learning review system, buy Nebulus Plus. And to take it up another notch, buy Nebulus Infinite. Our devoted team is working to make learning easier for you. We are adding even more features for our Stable release on December 23rd": {
-    "es": "N\u00e9bulus te ayuda a tener todo tu aprendizaje organizado y simple. Para empezar, ofrecemos muchas conexiones con otros sitios web. Ya no hace falta que cambies entre sitios web. Puedes conectar tus cuentas de Schoology, Google Classroom y Canvas en N\u00e9bulus para acceder a ellas f\u00e1cilmente. Tambi\u00e9n te puedes organizar con N\u00e9bulus. No hace falta que tengas todos tus papeles, documentos, tareas, libros de texto, calendarios y eventos por todos lados. \u00a1Todo est\u00e1 organizado para ti de manera f\u00e1cil de usar! Puedes tener todo lo que necesitas para la escuela en un lugar. Aparte de eso, entendemos que estudiar y aprender puede ser dificil. \u00a1Por eso, hemos a\u00f1adido herramientas que te ayudan a organizar tu estudio, organizar tus materiales, hacer que aprender sea divertido y mantener tu concentraci\u00f3n! Puedes usar nuestros temporizadores de estudio, planeadores de trabajo y de revisi\u00f3n de ex\u00e1menes y mucho m\u00e1s. Tambi\u00e9n contamos con una gran variedad de extensiones e integraciones para enriquecer tu experiencia. \u00a1Tenemos integraciones que te permiten tener una calculadora, una calculadora gr\u00e1fica, un diccionario, un comprobador de plagio, un mapamundi, una tabla peri\u00f3dica, un editor de c\u00f3digo y un editor de documentos que puede editar Microsoft Word o Google Docs y mucho m\u00e1s! Estamos a\u00f1adiendo muchos m\u00e1s aspectos para nuestro lanzamiento de la web estable el 23 de diciembre de 2022.",
-    "mx": "N\u00e9bulus te ayuda a tener todo tu aprendizaje organizado y simple. Para empezar, ofrecemos muchas conexiones con otros sitios web. Ya no hace falta que cambies entre sitios web. Puedes conectar tus cuentas de Schoology, Google Classroom y Canvas en N\u00e9bulus para acceder a ellas f\u00e1cilmente. Tambi\u00e9n te puedes organizar con N\u00e9bulus. No hace falta que tengas todos tus papeles, documentos, tareas, libros de texto, calendarios y eventos por todos lados. \u00a1Todo est\u00e1 organizado para ti de manera f\u00e1cil de usar! Puedes tener todo lo que necesitas para la escuela en un lugar. Aparte de eso, entendemos que estudiar y aprender puede ser dificil. \u00a1Por eso, hemos a\u00f1adido herramientas que te ayudan a organizar tu estudio, organizar tus materiales, hacer que aprender sea divertido y mantener tu concentraci\u00f3n! Puedes usar nuestros temporizadores de estudio, planeadores de trabajo y de revisi\u00f3n de ex\u00e1menes y mucho m\u00e1s. Tambi\u00e9n contamos con una gran variedad de extensiones e integraciones para enriquecer tu experiencia. \u00a1Tenemos integraciones que te permiten tener una calculadora, una calculadora gr\u00e1fica, un diccionario, un comprobador de plagio, un mapamundi, una tabla peri\u00f3dica, un editor de c\u00f3digo y un editor de documentos que puede editar Microsoft Word o Google Docs y mucho m\u00e1s! Estamos a\u00f1adiendo muchos m\u00e1s aspectos para nuestro lanzamiento de la web estable el 23 de diciembre de 2022.",
-    "cr": "N\u00e9bulus te ayuda a tener todo tu aprendizaje organizado y simple. Para empezar, ofrecemos muchas conexiones con otros sitios web. Ya no hace falta que cambies entre sitios web. Puedes conectar tus cuentas de Schoology, Google Classroom y Canvas en N\u00e9bulus para acceder a ellas f\u00e1cilmente. Tambi\u00e9n te puedes organizar con N\u00e9bulus. No hace falta que tengas todos tus papeles, documentos, tareas, libros de texto, calendarios y eventos por todos lados. \u00a1Todo est\u00e1 organizado para ti de manera f\u00e1cil de usar! Puedes tener todo lo que necesitas para la escuela en un lugar. Aparte de eso, entendemos que estudiar y aprender puede ser dificil. \u00a1Por eso, hemos a\u00f1adido herramientas que te ayudan a organizar tu estudio, organizar tus materiales, hacer que aprender sea divertido y mantener tu concentraci\u00f3n! Puedes usar nuestros temporizadores de estudio, planeadores de trabajo y de revisi\u00f3n de ex\u00e1menes y mucho m\u00e1s. Tambi\u00e9n contamos con una gran variedad de extensiones e integraciones para enriquecer tu experiencia. \u00a1Tenemos integraciones que te permiten tener una calculadora, una calculadora gr\u00e1fica, un diccionario, un comprobador de plagio, un mapamundi, una tabla peri\u00f3dica, un editor de c\u00f3digo y un editor de documentos que puede editar Microsoft Word o Google Docs y mucho m\u00e1s! Estamos a\u00f1adiendo muchos m\u00e1s aspectos para nuestro lanzamiento de la web estable el 23 de diciembre de 2022.",
-    "cu": "N\u00e9bulus te ayuda a tener todo tu aprendizaje organizado y simple. Para empezar, ofrecemos muchas conexiones con otros sitios web. Ya no hace falta que cambies entre sitios web. Puedes conectar tus cuentas de Schoology, Google Classroom y Canvas en N\u00e9bulus para acceder a ellas f\u00e1cilmente. Tambi\u00e9n te puedes organizar con N\u00e9bulus. No hace falta que tengas todos tus papeles, documentos, tareas, libros de texto, calendarios y eventos por todos lados. \u00a1Todo est\u00e1 organizado para ti de manera f\u00e1cil de usar! Puedes tener todo lo que necesitas para la escuela en un lugar. Aparte de eso, entendemos que estudiar y aprender puede ser dificil. \u00a1Por eso, hemos a\u00f1adido herramientas que te ayudan a organizar tu estudio, organizar tus materiales, hacer que aprender sea divertido y mantener tu concentraci\u00f3n! Puedes usar nuestros temporizadores de estudio, planeadores de trabajo y de revisi\u00f3n de ex\u00e1menes y mucho m\u00e1s. Tambi\u00e9n contamos con una gran variedad de extensiones e integraciones para enriquecer tu experiencia. \u00a1Tenemos integraciones que te permiten tener una calculadora, una calculadora gr\u00e1fica, un diccionario, un comprobador de plagio, un mapamundi, una tabla peri\u00f3dica, un editor de c\u00f3digo y un editor de documentos que puede editar Microsoft Word o Google Docs y mucho m\u00e1s! Estamos a\u00f1adiendo muchos m\u00e1s aspectos para nuestro lanzamiento de la web estable el 23 de diciembre de 2022.",
-    "co": "N\u00e9bulus te ayuda a tener todo tu aprendizaje organizado y simple. Para empezar, ofrecemos muchas conexiones con otros sitios web. Ya no hace falta que cambies entre sitios web. Puedes conectar tus cuentas de Schoology, Google Classroom y Canvas en N\u00e9bulus para acceder a ellas f\u00e1cilmente. Tambi\u00e9n te puedes organizar con N\u00e9bulus. No hace falta que tengas todos tus papeles, documentos, tareas, libros de texto, calendarios y eventos por todos lados. \u00a1Todo est\u00e1 organizado para ti de manera f\u00e1cil de usar! Puedes tener todo lo que necesitas para la escuela en un lugar. Aparte de eso, entendemos que estudiar y aprender puede ser dificil. \u00a1Por eso, hemos a\u00f1adido herramientas que te ayudan a organizar tu estudio, organizar tus materiales, hacer que aprender sea divertido y mantener tu concentraci\u00f3n! Puedes usar nuestros temporizadores de estudio, planeadores de trabajo y de revisi\u00f3n de ex\u00e1menes y mucho m\u00e1s. Tambi\u00e9n contamos con una gran variedad de extensiones e integraciones para enriquecer tu experiencia. \u00a1Tenemos integraciones que te permiten tener una calculadora, una calculadora gr\u00e1fica, un diccionario, un comprobador de plagio, un mapamundi, una tabla peri\u00f3dica, un editor de c\u00f3digo y un editor de documentos que puede editar Microsoft Word o Google Docs y mucho m\u00e1s! Estamos a\u00f1adiendo muchos m\u00e1s aspectos para nuestro lanzamiento de la web estable el 23 de diciembre de 2022.",
-    "ar": "N\u00e9bulus te ayuda a tener todo tu aprendizaje organizado y simple. Para empezar, ofrecemos muchas conexiones con otros sitios web. Ya no hace falta que cambies entre sitios web. Puedes conectar tus cuentas de Schoology, Google Classroom y Canvas en N\u00e9bulus para acceder a ellas f\u00e1cilmente. Tambi\u00e9n te puedes organizar con N\u00e9bulus. No hace falta que tengas todos tus papeles, documentos, tareas, libros de texto, calendarios y eventos por todos lados. \u00a1Todo est\u00e1 organizado para ti de manera f\u00e1cil de usar! Puedes tener todo lo que necesitas para la escuela en un lugar. Aparte de eso, entendemos que estudiar y aprender puede ser dificil. \u00a1Por eso, hemos a\u00f1adido herramientas que te ayudan a organizar tu estudio, organizar tus materiales, hacer que aprender sea divertido y mantener tu concentraci\u00f3n! Puedes usar nuestros temporizadores de estudio, planeadores de trabajo y de revisi\u00f3n de ex\u00e1menes y mucho m\u00e1s. Tambi\u00e9n contamos con una gran variedad de extensiones e integraciones para enriquecer tu experiencia. \u00a1Tenemos integraciones que te permiten tener una calculadora, una calculadora gr\u00e1fica, un diccionario, un comprobador de plagio, un mapamundi, una tabla peri\u00f3dica, un editor de c\u00f3digo y un editor de documentos que puede editar Microsoft Word o Google Docs y mucho m\u00e1s! Estamos a\u00f1adiendo muchos m\u00e1s aspectos para nuestro lanzamiento de la web estable el 23 de diciembre de 2022.",
-    "cn": "\u8010\u535a\u4e50\u601d\u4f1a\u8ba9\u60a8\u7684\u6574\u4e2a\u5b66\u4e60\u4f53\u9a8c\u53d8\u5f97\u65e2\u7b80\u5355\uff0c\u53c8\u6709\u79e9\u5e8f\u3002\u9996\u5148\uff0c\u6211\u4eec\u4f1a\u7ed9\u4e88\u8bb8\u591a\u7f51\u7ad9\u8054\u7cfb\u3002\u60a8\u4e0d\u7528\u518d\u5728\u7f51\u7ad9\u4e4b\u95f4\u53cd\u590d\u9605\u89c8\u4e86\u3002\u6bd4\u5982\uff0c\u60a8\u53ef\u4ee5\u5728\u8010\u535a\u4e50\u601d\u5e73\u53f0\u4e0a\u8f7b\u677e\u5730\u8fde\u63a5\u50cfSchoology, Canvas, \u6216Google Classroom\u7b49\u5404\u79cd\u5b66\u4e60\u7f51\u7ad9\u3002\u5176\u6b21\uff0c\u60a8\u4e5f\u53ef\u4ee5\u5728\u8010\u535a\u4e50\u601d\u5e73\u53f0\u4e0a\u6709\u79e9\u5e8f\u5730\u5b66\u4e60\u3002\u60a8\u4e0d\u518d\u9700\u8981\u5c06\u6587\u6863\u3001\u8bba\u6587\u3001\u4f5c\u4e1a\u3001\u6559\u79d1\u4e66\u3001\u65f6\u95f4\u8868\u3001\u4e8b\u4ef6\u7b49\u6240\u6709\u4efb\u52a1\u644a\u5f97\u5230\u5904\u90fd\u662f\u4e86\u3002\u6240\u6709\u5143\u7d20\u90fd\u4f1a\u4e3a\u60a8\u6574\u7406\u6210\u4e00\u4e2a\u65b9\u4fbf\u5feb\u6377\u7684\u65b9\u5f0f\uff01\u60a8\u53ef\u4ee5\u5c06\u6240\u6709\u5b66\u6821\u9700\u8981\u7684\u5143\u7d20\u5168\u90fd\u6536\u96c6\u5728\u540c\u4e00\u4e2a\u5730\u65b9\u3002\u9664\u6b64\u4e4b\u5916\uff0c\u6211\u4eec\u4e5f\u5341\u5206\u7406\u89e3\u5b66\u4e60\u53ef\u80fd\u4f1a\u5f88\u67af\u71e5\u3002\u9488\u5bf9\u8fd9\u4e2a\uff0c\u6211\u4eec\u4e5f\u6709\u8bb8\u591a\u5de5\u5177\u53ef\u4ee5\u5e2e\u60a8\u5b66\u4e60\u3001\u6574\u7406\u8d44\u6599\u3001\u8ba9\u5b66\u4e60\u53d8\u5feb\u4e50\u3001\u540c\u65f6\u4e5f\u8ba9\u60a8\u4e13\u6ce8\u4e8e\u5b66\u4e60\uff01\u60a8\u53ef\u4ee5\u9009\u62e9\u4f7f\u7528\u6211\u4eec\u7684\u5b66\u4e60\u65f6\u949f\u3001\u8003\u8bd5\u5468\u8ba1\u5212\u8868\u3001\u7b49\u3002\u6211\u4eec\u4e5f\u6709\u8bb8\u591a\u6269\u5c55\u96c6\u6210\u53bb\u4e30\u5bcc\u60a8\u7684\u4f7f\u7528\u7ecf\u5386\u3002\u6211\u4eec\u5305\u62ec\u8ba1\u7b97\u673a\u96c6\u6210\u3001\u56fe\u8868\u8ba1\u7b97\u673a\u96c6\u6210\u3001\u5b57\u5178\u6269\u5c55\u3001\u6284\u88ad\u68c0\u67e5\u5668\u6269\u5c55\u3001\u4e16\u754c\u5730\u56fe\u3001\u5143\u7d20\u5468\u671f\u8868\u3001\u96c6\u6210\u4ee3\u7801\u7f16\u8f91\u5668\u3001\u53ef\u4ee5\u8de8\u7f16\u8f91\u5668\u7f16\u5199\u7684\u6587\u6863\u7f16\u8f91\u5668\u3001\u7b49\u8bb8\u591a\u5176\u4ed6\u7684\u5de5\u5177\uff01\u6211\u4eec\u4e5f\u4f1a\u572812\u670823\u53f7\u5373\u5c06\u53d1\u5e03\u7684\u7684\u7a33\u5b9a\u66f4\u65b0\u4e0a\u589e\u52a0\u66f4\u591a\u7684\u529f\u80fd\u9009\u9879\uff01",
-    "tw": "\u8010\u535a\u6a02\u601d\u6703\u8b93\u60a8\u7684\u6574\u500b\u5b78\u7fd2\u9ad4\u9a57\u8b8a\u5f97\u65e2\u7c21\u55ae\uff0c\u53c8\u6709\u79e9\u5e8f\u3002\u9996\u5148\uff0c\u6211\u5011\u6703\u7d66\u4e88\u8a31\u591a\u7db2\u7ad9\u806f\u7e6b\u3002\u60a8\u4e0d\u7528\u518d\u5728\u7db2\u7ad9\u4e4b\u9593\u53cd\u590d\u95b1\u89bd\u4e86\u3002\u6bd4\u5982\uff0c\u60a8\u53ef\u4ee5\u5728\u8010\u535a\u6a02\u601d\u5e73\u53f0\u4e0a\u8f15\u9b06\u5730\u9023\u63a5\u50cfSchoology, Canvas, \u6216Google Classroom\u7b49\u5404\u7a2e\u5b78\u7fd2\u7db2\u7ad9\u3002\u5176\u6b21\uff0c\u60a8\u4e5f\u53ef\u4ee5\u5728\u8010\u535a\u6a02\u601d\u5e73\u53f0\u4e0a\u6709\u79e9\u5e8f\u5730\u5b78\u7fd2\u3002\u60a8\u4e0d\u518d\u9700\u8981\u5c07\u6587\u6a94\u3001\u8ad6\u6587\u3001\u4f5c\u696d\u3001\u6559\u79d1\u66f8\u3001\u6642\u9593\u8868\u3001\u4e8b\u4ef6\u7b49\u6240\u6709\u4efb\u52d9\u6524\u5f97\u5230\u8655\u90fd\u662f\u4e86\u3002\u6240\u6709\u5143\u7d20\u90fd\u6703\u70ba\u60a8\u6574\u7406\u6210\u4e00\u500b\u65b9\u4fbf\u5feb\u6377\u7684\u65b9\u5f0f\uff01\u60a8\u53ef\u4ee5\u5c07\u6240\u6709\u5b78\u6821\u9700\u8981\u7684\u5143\u7d20\u5168\u90fd\u6536\u96c6\u5728\u540c\u4e00\u500b\u5730\u65b9\u3002\u9664\u6b64\u4e4b\u5916\uff0c\u6211\u5011\u4e5f\u5341\u5206\u7406\u89e3\u5b78\u7fd2\u53ef\u80fd\u6703\u5f88\u67af\u71e5\u3002\u91dd\u5c0d\u9019\u500b\uff0c\u6211\u5011\u4e5f\u6709\u8a31\u591a\u5de5\u5177\u53ef\u4ee5\u5e6b\u60a8\u5b78\u7fd2\u3001\u6574\u7406\u8cc7\u6599\u3001\u8b93\u5b78\u7fd2\u8b8a\u5feb\u6a02\u3001\u540c\u6642\u4e5f\u8b93\u60a8\u5c08\u6ce8\u65bc\u5b78\u7fd2\uff01\u60a8\u53ef\u4ee5\u9078\u64c7\u4f7f\u7528\u6211\u5011\u7684\u5b78\u7fd2\u6642\u9418\u3001\u8003\u8a66\u9031\u8a08\u5283\u8868\u3001\u7b49\u3002\u6211\u5011\u4e5f\u6709\u8a31\u591a\u64f4\u5c55\u96c6\u6210\u53bb\u8c50\u5bcc\u60a8\u7684\u4f7f\u7528\u7d93\u6b77\u3002\u6211\u5011\u5305\u62ec\u8a08\u7b97\u6a5f\u96c6\u6210\u3001\u5716\u8868\u8a08\u7b97\u6a5f\u96c6\u6210\u3001\u5b57\u5178\u64f4\u5c55\u3001\u6284\u8972\u6aa2\u67e5\u5668\u64f4\u5c55\u3001\u4e16\u754c\u5730\u5716\u3001\u5143\u7d20\u9031\u671f\u8868\u3001\u96c6\u6210\u4ee3\u78bc\u7de8\u8f2f\u5668\u3001\u53ef\u4ee5\u8de8\u7de8\u8f2f\u5668\u7de8\u5beb\u7684\u6587\u6a94\u7de8\u8f2f\u5668\u3001\u7b49\u8a31\u591a\u5176\u4ed6\u7684\u5de5\u5177\uff01\u6211\u5011\u4e5f\u6703\u572812\u670823\u865f\u5373\u5c07\u767c\u5e03\u7684\u7684\u7a69\u5b9a\u66f4\u65b0\u4e0a\u589e\u52a0\u66f4\u591a\u7684\u529f\u80fd\u9078\u9805\uff01",
-    "hk": "\u8010\u535a\u6a02\u601d\u6703\u8b93\u60a8\u7684\u6574\u500b\u5b78\u7fd2\u9ad4\u9a57\u8b8a\u5f97\u65e2\u7c21\u55ae\uff0c\u53c8\u6709\u79e9\u5e8f\u3002\u9996\u5148\uff0c\u6211\u5011\u6703\u7d66\u4e88\u8a31\u591a\u7db2\u7ad9\u806f\u7e6b\u3002\u60a8\u4e0d\u7528\u518d\u5728\u7db2\u7ad9\u4e4b\u9593\u53cd\u590d\u95b1\u89bd\u4e86\u3002\u6bd4\u5982\uff0c\u60a8\u53ef\u4ee5\u5728\u8010\u535a\u6a02\u601d\u5e73\u53f0\u4e0a\u8f15\u9b06\u5730\u9023\u63a5\u50cfSchoology, Canvas, \u6216Google Classroom\u7b49\u5404\u7a2e\u5b78\u7fd2\u7db2\u7ad9\u3002\u5176\u6b21\uff0c\u60a8\u4e5f\u53ef\u4ee5\u5728\u8010\u535a\u6a02\u601d\u5e73\u53f0\u4e0a\u6709\u79e9\u5e8f\u5730\u5b78\u7fd2\u3002\u60a8\u4e0d\u518d\u9700\u8981\u5c07\u6587\u6a94\u3001\u8ad6\u6587\u3001\u4f5c\u696d\u3001\u6559\u79d1\u66f8\u3001\u6642\u9593\u8868\u3001\u4e8b\u4ef6\u7b49\u6240\u6709\u4efb\u52d9\u6524\u5f97\u5230\u8655\u90fd\u662f\u4e86\u3002\u6240\u6709\u5143\u7d20\u90fd\u6703\u70ba\u60a8\u6574\u7406\u6210\u4e00\u500b\u65b9\u4fbf\u5feb\u6377\u7684\u65b9\u5f0f\uff01\u60a8\u53ef\u4ee5\u5c07\u6240\u6709\u5b78\u6821\u9700\u8981\u7684\u5143\u7d20\u5168\u90fd\u6536\u96c6\u5728\u540c\u4e00\u500b\u5730\u65b9\u3002\u9664\u6b64\u4e4b\u5916\uff0c\u6211\u5011\u4e5f\u5341\u5206\u7406\u89e3\u5b78\u7fd2\u53ef\u80fd\u6703\u5f88\u67af\u71e5\u3002\u91dd\u5c0d\u9019\u500b\uff0c\u6211\u5011\u4e5f\u6709\u8a31\u591a\u5de5\u5177\u53ef\u4ee5\u5e6b\u60a8\u5b78\u7fd2\u3001\u6574\u7406\u8cc7\u6599\u3001\u8b93\u5b78\u7fd2\u8b8a\u5feb\u6a02\u3001\u540c\u6642\u4e5f\u8b93\u60a8\u5c08\u6ce8\u65bc\u5b78\u7fd2\uff01\u60a8\u53ef\u4ee5\u9078\u64c7\u4f7f\u7528\u6211\u5011\u7684\u5b78\u7fd2\u6642\u9418\u3001\u8003\u8a66\u9031\u8a08\u5283\u8868\u3001\u7b49\u3002\u6211\u5011\u4e5f\u6709\u8a31\u591a\u64f4\u5c55\u96c6\u6210\u53bb\u8c50\u5bcc\u60a8\u7684\u4f7f\u7528\u7d93\u6b77\u3002\u6211\u5011\u5305\u62ec\u8a08\u7b97\u6a5f\u96c6\u6210\u3001\u5716\u8868\u8a08\u7b97\u6a5f\u96c6\u6210\u3001\u5b57\u5178\u64f4\u5c55\u3001\u6284\u8972\u6aa2\u67e5\u5668\u64f4\u5c55\u3001\u4e16\u754c\u5730\u5716\u3001\u5143\u7d20\u9031\u671f\u8868\u3001\u96c6\u6210\u4ee3\u78bc\u7de8\u8f2f\u5668\u3001\u53ef\u4ee5\u8de8\u7de8\u8f2f\u5668\u7de8\u5beb\u7684\u6587\u6a94\u7de8\u8f2f\u5668\u3001\u7b49\u8a31\u591a\u5176\u4ed6\u7684\u5de5\u5177\uff01\u6211\u5011\u4e5f\u6703\u572812\u670823\u865f\u5373\u5c07\u767c\u5e03\u7684\u7684\u7a69\u5b9a\u66f4\u65b0\u4e0a\u589e\u52a0\u66f4\u591a\u7684\u529f\u80fd\u9078\u9805\uff01",
-    "mo": "\u8010\u535a\u6a02\u601d\u6703\u8b93\u60a8\u7684\u6574\u500b\u5b78\u7fd2\u9ad4\u9a57\u8b8a\u5f97\u65e2\u7c21\u55ae\uff0c\u53c8\u6709\u79e9\u5e8f\u3002\u9996\u5148\uff0c\u6211\u5011\u6703\u7d66\u4e88\u8a31\u591a\u7db2\u7ad9\u806f\u7e6b\u3002\u60a8\u4e0d\u7528\u518d\u5728\u7db2\u7ad9\u4e4b\u9593\u53cd\u590d\u95b1\u89bd\u4e86\u3002\u6bd4\u5982\uff0c\u60a8\u53ef\u4ee5\u5728\u8010\u535a\u6a02\u601d\u5e73\u53f0\u4e0a\u8f15\u9b06\u5730\u9023\u63a5\u50cfSchoology, Canvas, \u6216Google Classroom\u7b49\u5404\u7a2e\u5b78\u7fd2\u7db2\u7ad9\u3002\u5176\u6b21\uff0c\u60a8\u4e5f\u53ef\u4ee5\u5728\u8010\u535a\u6a02\u601d\u5e73\u53f0\u4e0a\u6709\u79e9\u5e8f\u5730\u5b78\u7fd2\u3002\u60a8\u4e0d\u518d\u9700\u8981\u5c07\u6587\u6a94\u3001\u8ad6\u6587\u3001\u4f5c\u696d\u3001\u6559\u79d1\u66f8\u3001\u6642\u9593\u8868\u3001\u4e8b\u4ef6\u7b49\u6240\u6709\u4efb\u52d9\u6524\u5f97\u5230\u8655\u90fd\u662f\u4e86\u3002\u6240\u6709\u5143\u7d20\u90fd\u6703\u70ba\u60a8\u6574\u7406\u6210\u4e00\u500b\u65b9\u4fbf\u5feb\u6377\u7684\u65b9\u5f0f\uff01\u60a8\u53ef\u4ee5\u5c07\u6240\u6709\u5b78\u6821\u9700\u8981\u7684\u5143\u7d20\u5168\u90fd\u6536\u96c6\u5728\u540c\u4e00\u500b\u5730\u65b9\u3002\u9664\u6b64\u4e4b\u5916\uff0c\u6211\u5011\u4e5f\u5341\u5206\u7406\u89e3\u5b78\u7fd2\u53ef\u80fd\u6703\u5f88\u67af\u71e5\u3002\u91dd\u5c0d\u9019\u500b\uff0c\u6211\u5011\u4e5f\u6709\u8a31\u591a\u5de5\u5177\u53ef\u4ee5\u5e6b\u60a8\u5b78\u7fd2\u3001\u6574\u7406\u8cc7\u6599\u3001\u8b93\u5b78\u7fd2\u8b8a\u5feb\u6a02\u3001\u540c\u6642\u4e5f\u8b93\u60a8\u5c08\u6ce8\u65bc\u5b78\u7fd2\uff01\u60a8\u53ef\u4ee5\u9078\u64c7\u4f7f\u7528\u6211\u5011\u7684\u5b78\u7fd2\u6642\u9418\u3001\u8003\u8a66\u9031\u8a08\u5283\u8868\u3001\u7b49\u3002\u6211\u5011\u4e5f\u6709\u8a31\u591a\u64f4\u5c55\u96c6\u6210\u53bb\u8c50\u5bcc\u60a8\u7684\u4f7f\u7528\u7d93\u6b77\u3002\u6211\u5011\u5305\u62ec\u8a08\u7b97\u6a5f\u96c6\u6210\u3001\u5716\u8868\u8a08\u7b97\u6a5f\u96c6\u6210\u3001\u5b57\u5178\u64f4\u5c55\u3001\u6284\u8972\u6aa2\u67e5\u5668\u64f4\u5c55\u3001\u4e16\u754c\u5730\u5716\u3001\u5143\u7d20\u9031\u671f\u8868\u3001\u96c6\u6210\u4ee3\u78bc\u7de8\u8f2f\u5668\u3001\u53ef\u4ee5\u8de8\u7de8\u8f2f\u5668\u7de8\u5beb\u7684\u6587\u6a94\u7de8\u8f2f\u5668\u3001\u7b49\u8a31\u591a\u5176\u4ed6\u7684\u5de5\u5177\uff01\u6211\u5011\u4e5f\u6703\u572812\u670823\u865f\u5373\u5c07\u767c\u5e03\u7684\u7684\u7a69\u5b9a\u66f4\u65b0\u4e0a\u589e\u52a0\u66f4\u591a\u7684\u529f\u80fd\u9078\u9805\uff01",
-    "kr": "\ub124\ubdf8\ub7ec\uc2a4 \ub97c \uc0ac\uc6a9\ud558\uba74 \uc804\uccb4 \ud559\uc2b5 \uacbd\ud5d8\uc744 \uccb4\uacc4\uc801\uc774\uace0 \uac04\ub2e8\ud558\uac8c \ub9cc\ub4e4 \uc218 \uc788\uc2b5\ub2c8\ub2e4. \uccab\uc9f8, \uc6b0\ub9ac\ub294 \ub9ce\uc740 \uc5f0\uacb0\uc744 \uc81c\uacf5\ud569\ub2c8\ub2e4. \ub354 \uc774\uc0c1 \uc6f9\uc0ac\uc774\ud2b8 \uac04\uc5d0 \uc804\ud658\ud560 \ud544\uc694\uac00 \uc5c6\uc2b5\ub2c8\ub2e4. \ub124\ubdf8\ub7ec\uc2a4\uc5d0 \uc5f0\uacb0\ub41c Schoology, Google \ud074\ub798\uc2a4\ub8f8 \ubc0f Canvas \uacc4\uc815\uc744 \uc5f0\uacb0\ud558\uc5ec \uc27d\uac8c \uc561\uc138\uc2a4\ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4. \ub124\ubdf8\ub7ec\uc2a4\ub85c \uc815\ub9ac\ub97c \uc720\uc9c0\ud560 \uc218\ub3c4 \uc788\uc2b5\ub2c8\ub2e4. \uc11c\ub958, \ubb38\uc11c, \uacfc\uc81c, \uad50\uacfc\uc11c, \ub2ec\ub825 \ubc0f \uc774\ubca4\ud2b8\ub97c \uc5ec\uae30\uc800\uae30\uc5d0 \ub458 \ud544\uc694\uac00 \uc5c6\uc2b5\ub2c8\ub2e4. \ubaa8\ub4e0 \uac83\uc774 \uc0ac\uc6a9\ud558\uae30 \uc26c\uc6b4 \ubc29\uc2dd\uc73c\ub85c \uad6c\uc131\ub418\uc5b4 \uc788\uc2b5\ub2c8\ub2e4! \ud559\uad50\uc5d0 \ud544\uc694\ud55c \ubaa8\ub4e0 \uac83\uc744 \ud55c \uacf3\uc5d0\uc11c \ubc1b\uc744 \uc218 \uc788\uc2b5\ub2c8\ub2e4. \ub610\ud55c \uc6b0\ub9ac\ub294 \uacf5\ubd80\uc640 \ud559\uc2b5\uc774 \uc5b4\ub824\uc6b8 \uc218 \uc788\uc74c\uc744 \uc774\ud574\ud569\ub2c8\ub2e4. \ud559\uc2b5\uc744 \uc815\ub9ac\ud558\uace0, \uc790\ub8cc\ub97c \uc815\ub9ac\ud558\uace0, \ud559\uc2b5\uc744 \uc7ac\ubbf8\uc788\uac8c \ub9cc\ub4e4\uace0, \uc9d1\uc911\ud560 \uc218 \uc788\ub294 \ub3c4\uad6c\uac00 \uc788\uc2b5\ub2c8\ub2e4! \ud559\uc2b5 \ud0c0\uc774\uba38, \uc2dc\ud5d8 \uac80\ud1a0 \uacc4\ud68d \ub4f1\uc744 \uc0ac\uc6a9\ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4. \uacbd\ud5d8\uc744 \ud48d\ubd80\ud558\uac8c \ud558\uae30 \uc704\ud574 \ub9ce\uc740 \ud655\uc7a5 \ubc0f \ud1b5\ud569\uc774 \uc788\uc2b5\ub2c8\ub2e4. \uacc4\uc0b0\uae30 \ud1b5\ud569, \uadf8\ub798\ud504 \uacc4\uc0b0\uae30, \uc0ac\uc804, \ud45c\uc808 \uac80\uc0ac\uae30, \uc138\uacc4 \uc9c0\ub3c4, \uc8fc\uae30\uc728\ud45c, \ub0b4\uc7a5 IDE(\ucf54\ub4dc \ud3b8\uc9d1\uae30) \ubc0f \ubb38\uc11c \ud3b8\uc9d1\uae30(Word \ub610\ub294 Google \ubb38\uc11c\ub97c \ud3b8\uc9d1\ud560 \uc218 \uc788\uc74c) \ubc0f \ub9ce\uc740 \uae30\ub2a5\uc774 \uc788\uc2b5\ub2c8\ub2e4. \ub354! 12\uc6d4 23\uc77c \uacf5\uac1c \ubc84\uc804 \ub9b4\ub9ac\uc2a4\uc5d0 \ub354 \ub9ce\uc740 \uae30\ub2a5\uc744 \ucd94\uac00\ud558\uace0 \uc788\uc2b5\ub2c8\ub2e4.",
+    "es": "Nébulus te ayuda a tener todo tu aprendizaje organizado y simple. Para empezar, ofrecemos muchas conexiones con otros sitios web. Ya no hace falta que cambies entre sitios web. Puedes conectar tus cuentas de Schoology, Google Classroom y Canvas en Nébulus para acceder a ellas fácilmente. También te puedes organizar con Nébulus. No hace falta que tengas todos tus papeles, documentos, tareas, libros de texto, calendarios y eventos por todos lados. ¡Todo está organizado para ti de manera fácil de usar! Puedes tener todo lo que necesitas para la escuela en un lugar. Aparte de eso, entendemos que estudiar y aprender puede ser dificil. ¡Por eso, hemos añadido herramientas que te ayudan a organizar tu estudio, organizar tus materiales, hacer que aprender sea divertido y mantener tu concentración! Puedes usar nuestros temporizadores de estudio, planeadores de trabajo y de revisión de exámenes y mucho más. También contamos con una gran variedad de extensiones e integraciones para enriquecer tu experiencia. ¡Tenemos integraciones que te permiten tener una calculadora, una calculadora gráfica, un diccionario, un comprobador de plagio, un mapamundi, una tabla periódica, un editor de código y un editor de documentos que puede editar Microsoft Word o Google Docs y mucho más! Estamos añadiendo muchos más aspectos para nuestro lanzamiento de la web estable el 23 de diciembre de 2022.",
+    "mx": "Nébulus te ayuda a tener todo tu aprendizaje organizado y simple. Para empezar, ofrecemos muchas conexiones con otros sitios web. Ya no hace falta que cambies entre sitios web. Puedes conectar tus cuentas de Schoology, Google Classroom y Canvas en Nébulus para acceder a ellas fácilmente. También te puedes organizar con Nébulus. No hace falta que tengas todos tus papeles, documentos, tareas, libros de texto, calendarios y eventos por todos lados. ¡Todo está organizado para ti de manera fácil de usar! Puedes tener todo lo que necesitas para la escuela en un lugar. Aparte de eso, entendemos que estudiar y aprender puede ser dificil. ¡Por eso, hemos añadido herramientas que te ayudan a organizar tu estudio, organizar tus materiales, hacer que aprender sea divertido y mantener tu concentración! Puedes usar nuestros temporizadores de estudio, planeadores de trabajo y de revisión de exámenes y mucho más. También contamos con una gran variedad de extensiones e integraciones para enriquecer tu experiencia. ¡Tenemos integraciones que te permiten tener una calculadora, una calculadora gráfica, un diccionario, un comprobador de plagio, un mapamundi, una tabla periódica, un editor de código y un editor de documentos que puede editar Microsoft Word o Google Docs y mucho más! Estamos añadiendo muchos más aspectos para nuestro lanzamiento de la web estable el 23 de diciembre de 2022.",
+    "cr": "Nébulus te ayuda a tener todo tu aprendizaje organizado y simple. Para empezar, ofrecemos muchas conexiones con otros sitios web. Ya no hace falta que cambies entre sitios web. Puedes conectar tus cuentas de Schoology, Google Classroom y Canvas en Nébulus para acceder a ellas fácilmente. También te puedes organizar con Nébulus. No hace falta que tengas todos tus papeles, documentos, tareas, libros de texto, calendarios y eventos por todos lados. ¡Todo está organizado para ti de manera fácil de usar! Puedes tener todo lo que necesitas para la escuela en un lugar. Aparte de eso, entendemos que estudiar y aprender puede ser dificil. ¡Por eso, hemos añadido herramientas que te ayudan a organizar tu estudio, organizar tus materiales, hacer que aprender sea divertido y mantener tu concentración! Puedes usar nuestros temporizadores de estudio, planeadores de trabajo y de revisión de exámenes y mucho más. También contamos con una gran variedad de extensiones e integraciones para enriquecer tu experiencia. ¡Tenemos integraciones que te permiten tener una calculadora, una calculadora gráfica, un diccionario, un comprobador de plagio, un mapamundi, una tabla periódica, un editor de código y un editor de documentos que puede editar Microsoft Word o Google Docs y mucho más! Estamos añadiendo muchos más aspectos para nuestro lanzamiento de la web estable el 23 de diciembre de 2022.",
+    "cu": "Nébulus te ayuda a tener todo tu aprendizaje organizado y simple. Para empezar, ofrecemos muchas conexiones con otros sitios web. Ya no hace falta que cambies entre sitios web. Puedes conectar tus cuentas de Schoology, Google Classroom y Canvas en Nébulus para acceder a ellas fácilmente. También te puedes organizar con Nébulus. No hace falta que tengas todos tus papeles, documentos, tareas, libros de texto, calendarios y eventos por todos lados. ¡Todo está organizado para ti de manera fácil de usar! Puedes tener todo lo que necesitas para la escuela en un lugar. Aparte de eso, entendemos que estudiar y aprender puede ser dificil. ¡Por eso, hemos añadido herramientas que te ayudan a organizar tu estudio, organizar tus materiales, hacer que aprender sea divertido y mantener tu concentración! Puedes usar nuestros temporizadores de estudio, planeadores de trabajo y de revisión de exámenes y mucho más. También contamos con una gran variedad de extensiones e integraciones para enriquecer tu experiencia. ¡Tenemos integraciones que te permiten tener una calculadora, una calculadora gráfica, un diccionario, un comprobador de plagio, un mapamundi, una tabla periódica, un editor de código y un editor de documentos que puede editar Microsoft Word o Google Docs y mucho más! Estamos añadiendo muchos más aspectos para nuestro lanzamiento de la web estable el 23 de diciembre de 2022.",
+    "co": "Nébulus te ayuda a tener todo tu aprendizaje organizado y simple. Para empezar, ofrecemos muchas conexiones con otros sitios web. Ya no hace falta que cambies entre sitios web. Puedes conectar tus cuentas de Schoology, Google Classroom y Canvas en Nébulus para acceder a ellas fácilmente. También te puedes organizar con Nébulus. No hace falta que tengas todos tus papeles, documentos, tareas, libros de texto, calendarios y eventos por todos lados. ¡Todo está organizado para ti de manera fácil de usar! Puedes tener todo lo que necesitas para la escuela en un lugar. Aparte de eso, entendemos que estudiar y aprender puede ser dificil. ¡Por eso, hemos añadido herramientas que te ayudan a organizar tu estudio, organizar tus materiales, hacer que aprender sea divertido y mantener tu concentración! Puedes usar nuestros temporizadores de estudio, planeadores de trabajo y de revisión de exámenes y mucho más. También contamos con una gran variedad de extensiones e integraciones para enriquecer tu experiencia. ¡Tenemos integraciones que te permiten tener una calculadora, una calculadora gráfica, un diccionario, un comprobador de plagio, un mapamundi, una tabla periódica, un editor de código y un editor de documentos que puede editar Microsoft Word o Google Docs y mucho más! Estamos añadiendo muchos más aspectos para nuestro lanzamiento de la web estable el 23 de diciembre de 2022.",
+    "ar": "Nébulus te ayuda a tener todo tu aprendizaje organizado y simple. Para empezar, ofrecemos muchas conexiones con otros sitios web. Ya no hace falta que cambies entre sitios web. Puedes conectar tus cuentas de Schoology, Google Classroom y Canvas en Nébulus para acceder a ellas fácilmente. También te puedes organizar con Nébulus. No hace falta que tengas todos tus papeles, documentos, tareas, libros de texto, calendarios y eventos por todos lados. ¡Todo está organizado para ti de manera fácil de usar! Puedes tener todo lo que necesitas para la escuela en un lugar. Aparte de eso, entendemos que estudiar y aprender puede ser dificil. ¡Por eso, hemos añadido herramientas que te ayudan a organizar tu estudio, organizar tus materiales, hacer que aprender sea divertido y mantener tu concentración! Puedes usar nuestros temporizadores de estudio, planeadores de trabajo y de revisión de exámenes y mucho más. También contamos con una gran variedad de extensiones e integraciones para enriquecer tu experiencia. ¡Tenemos integraciones que te permiten tener una calculadora, una calculadora gráfica, un diccionario, un comprobador de plagio, un mapamundi, una tabla periódica, un editor de código y un editor de documentos que puede editar Microsoft Word o Google Docs y mucho más! Estamos añadiendo muchos más aspectos para nuestro lanzamiento de la web estable el 23 de diciembre de 2022.",
+    "cn": "耐博乐思会让您的整个学习体验变得既简单，又有秩序。首先，我们会给予许多网站联系。您不用再在网站之间反复阅览了。比如，您可以在耐博乐思平台上轻松地连接像Schoology, Canvas, 或Google Classroom等各种学习网站。其次，您也可以在耐博乐思平台上有秩序地学习。您不再需要将文档、论文、作业、教科书、时间表、事件等所有任务摊得到处都是了。所有元素都会为您整理成一个方便快捷的方式！您可以将所有学校需要的元素全都收集在同一个地方。除此之外，我们也十分理解学习可能会很枯燥。针对这个，我们也有许多工具可以帮您学习、整理资料、让学习变快乐、同时也让您专注于学习！您可以选择使用我们的学习时钟、考试周计划表、等。我们也有许多扩展集成去丰富您的使用经历。我们包括计算机集成、图表计算机集成、字典扩展、抄袭检查器扩展、世界地图、元素周期表、集成代码编辑器、可以跨编辑器编写的文档编辑器、等许多其他的工具！我们也会在12月23号即将发布的的稳定更新上增加更多的功能选项！",
+    "tw": "耐博樂思會讓您的整個學習體驗變得既簡單，又有秩序。首先，我們會給予許多網站聯繫。您不用再在網站之間反复閱覽了。比如，您可以在耐博樂思平台上輕鬆地連接像Schoology, Canvas, 或Google Classroom等各種學習網站。其次，您也可以在耐博樂思平台上有秩序地學習。您不再需要將文檔、論文、作業、教科書、時間表、事件等所有任務攤得到處都是了。所有元素都會為您整理成一個方便快捷的方式！您可以將所有學校需要的元素全都收集在同一個地方。除此之外，我們也十分理解學習可能會很枯燥。針對這個，我們也有許多工具可以幫您學習、整理資料、讓學習變快樂、同時也讓您專注於學習！您可以選擇使用我們的學習時鐘、考試週計劃表、等。我們也有許多擴展集成去豐富您的使用經歷。我們包括計算機集成、圖表計算機集成、字典擴展、抄襲檢查器擴展、世界地圖、元素週期表、集成代碼編輯器、可以跨編輯器編寫的文檔編輯器、等許多其他的工具！我們也會在12月23號即將發布的的穩定更新上增加更多的功能選項！",
+    "hk": "耐博樂思會讓您的整個學習體驗變得既簡單，又有秩序。首先，我們會給予許多網站聯繫。您不用再在網站之間反复閱覽了。比如，您可以在耐博樂思平台上輕鬆地連接像Schoology, Canvas, 或Google Classroom等各種學習網站。其次，您也可以在耐博樂思平台上有秩序地學習。您不再需要將文檔、論文、作業、教科書、時間表、事件等所有任務攤得到處都是了。所有元素都會為您整理成一個方便快捷的方式！您可以將所有學校需要的元素全都收集在同一個地方。除此之外，我們也十分理解學習可能會很枯燥。針對這個，我們也有許多工具可以幫您學習、整理資料、讓學習變快樂、同時也讓您專注於學習！您可以選擇使用我們的學習時鐘、考試週計劃表、等。我們也有許多擴展集成去豐富您的使用經歷。我們包括計算機集成、圖表計算機集成、字典擴展、抄襲檢查器擴展、世界地圖、元素週期表、集成代碼編輯器、可以跨編輯器編寫的文檔編輯器、等許多其他的工具！我們也會在12月23號即將發布的的穩定更新上增加更多的功能選項！",
+    "mo": "耐博樂思會讓您的整個學習體驗變得既簡單，又有秩序。首先，我們會給予許多網站聯繫。您不用再在網站之間反复閱覽了。比如，您可以在耐博樂思平台上輕鬆地連接像Schoology, Canvas, 或Google Classroom等各種學習網站。其次，您也可以在耐博樂思平台上有秩序地學習。您不再需要將文檔、論文、作業、教科書、時間表、事件等所有任務攤得到處都是了。所有元素都會為您整理成一個方便快捷的方式！您可以將所有學校需要的元素全都收集在同一個地方。除此之外，我們也十分理解學習可能會很枯燥。針對這個，我們也有許多工具可以幫您學習、整理資料、讓學習變快樂、同時也讓您專注於學習！您可以選擇使用我們的學習時鐘、考試週計劃表、等。我們也有許多擴展集成去豐富您的使用經歷。我們包括計算機集成、圖表計算機集成、字典擴展、抄襲檢查器擴展、世界地圖、元素週期表、集成代碼編輯器、可以跨編輯器編寫的文檔編輯器、等許多其他的工具！我們也會在12月23號即將發布的的穩定更新上增加更多的功能選項！",
+    "kr": "네뷸러스 를 사용하면 전체 학습 경험을 체계적이고 간단하게 만들 수 있습니다. 첫째, 우리는 많은 연결을 제공합니다. 더 이상 웹사이트 간에 전환할 필요가 없습니다. 네뷸러스에 연결된 Schoology, Google 클래스룸 및 Canvas 계정을 연결하여 쉽게 액세스할 수 있습니다. 네뷸러스로 정리를 유지할 수도 있습니다. 서류, 문서, 과제, 교과서, 달력 및 이벤트를 여기저기에 둘 필요가 없습니다. 모든 것이 사용하기 쉬운 방식으로 구성되어 있습니다! 학교에 필요한 모든 것을 한 곳에서 받을 수 있습니다. 또한 우리는 공부와 학습이 어려울 수 있음을 이해합니다. 학습을 정리하고, 자료를 정리하고, 학습을 재미있게 만들고, 집중할 수 있는 도구가 있습니다! 학습 타이머, 시험 검토 계획 등을 사용할 수 있습니다. 경험을 풍부하게 하기 위해 많은 확장 및 통합이 있습니다. 계산기 통합, 그래프 계산기, 사전, 표절 검사기, 세계 지도, 주기율표, 내장 IDE(코드 편집기) 및 문서 편집기(Word 또는 Google 문서를 편집할 수 있음) 및 많은 기능이 있습니다. 더! 12월 23일 공개 버전 릴리스에 더 많은 기능을 추가하고 있습니다.",
     "ir": "Nebulus est coniunctio omnium vestrum "
   },
   "Login": {
-    "cn": "\u767b\u5f55"
+    "cn": "登录"
   },
   "Signup": {
-    "cn": "\u6ce8\u518c"
+    "cn": "注册"
   },
   "Sign Up": {
-    "cn": "\u6ce8\u518c"
+    "cn": "注册"
   },
   "Launch Nebulus": {
-    "cn": "\u542f\u52a8\u8010\u535a\u4e50\u601d"
+    "cn": "启动耐博乐思"
   },
   "Watch Our Event": {
-    "cn": "\u89c2\u770b\u6211\u4eec\u7684\u6d3b\u52a8"
+    "cn": "观看我们的活动"
   },
   "Get Started": {
-    "cn": "\u5f00\u59cb\u4f7f\u7528\uff01"
+    "cn": "开始使用！"
   },
   "Learning, All In One": {
     "us": "Learning, All In One",
@@ -114,7 +133,7 @@
     "cu": "Todo tu aprendizaje en un sitio",
     "co": "Todo tu aprendizaje en un sitio",
     "ar": "Todo tu aprendizaje en un sitio",
-    "cn": "\u6709\u8da3\u3001\u5168\u9762\u5730\u5b66\u4e60"
+    "cn": "有趣、全面地学习"
   },
   "Connect all of Learning": {
     "us": "Connect all of Learning",
@@ -126,19 +145,19 @@
     "cu": "Conecta todo tu aprendizaje",
     "co": "Conecta todo tu aprendizaje",
     "ar": "Conecta todo tu aprendizaje",
-    "cn": "\u8fde\u63a5\u6240\u6709\u7684\u5b66\u4e60\u65b9\u5f0f"
+    "cn": "连接所有的学习方式"
   },
   "No more switching between websites. Get your Schoology, Google Classroom, and Canvas accounts connected today.": {
     "us": "No more switching between websites. Get your Schoology, Google Classroom, and Canvas accounts connected today.",
     "uk": "No more switching between websites. Get your Schoology, Google Classroom, and Canvas accounts connected today.",
     "au": "No more switching between websites. Get your Schoology, Google Classroom, and Canvas accounts connected today.",
-    "es": "No cambies m\u00e1s entre sitios web. Conecta tus cuentas de Schoology, Google Classroom y Canvas hoy.",
-    "mx": "No cambies m\u00e1s entre sitios web. Conecta tus cuentas de Schoology, Google Classroom y Canvas hoy.",
-    "cr": "No cambies m\u00e1s entre sitios web. Conecta tus cuentas de Schoology, Google Classroom y Canvas hoy.",
-    "cu": "No cambies m\u00e1s entre sitios web. Conecta tus cuentas de Schoology, Google Classroom y Canvas hoy.",
-    "co": "No cambies m\u00e1s entre sitios web. Conecta tus cuentas de Schoology, Google Classroom y Canvas hoy.",
-    "ar": "No cambies m\u00e1s entre sitios web. Conecta tus cuentas de Schoology, Google Classroom y Canvas hoy.",
-    "cn": "\u60a8\u4e0d\u9700\u8981\u7ee7\u7eed\u5728\u7f51\u7ad9\u4e4b\u95f4\u5207\u6362\u3002\u5c06\u60a8\u7684Schoology. Google Classroom, \u4e0e Canvas\u8d26\u6237\u5168\u90e8\u8fde\u63a5\u5230\u8010\u535a\u4e50\u601d\u5c31\u53ef\u4ee5\u4e86\u3002"
+    "es": "No cambies más entre sitios web. Conecta tus cuentas de Schoology, Google Classroom y Canvas hoy.",
+    "mx": "No cambies más entre sitios web. Conecta tus cuentas de Schoology, Google Classroom y Canvas hoy.",
+    "cr": "No cambies más entre sitios web. Conecta tus cuentas de Schoology, Google Classroom y Canvas hoy.",
+    "cu": "No cambies más entre sitios web. Conecta tus cuentas de Schoology, Google Classroom y Canvas hoy.",
+    "co": "No cambies más entre sitios web. Conecta tus cuentas de Schoology, Google Classroom y Canvas hoy.",
+    "ar": "No cambies más entre sitios web. Conecta tus cuentas de Schoology, Google Classroom y Canvas hoy.",
+    "cn": "您不需要继续在网站之间切换。将您的Schoology. Google Classroom, 与 Canvas账户全部连接到耐博乐思就可以了。"
   },
   "Organize your Learning Experience": {
     "us": "Organize your learning experience",
@@ -150,139 +169,139 @@
     "cu": "Organiza tu experiencia de aprendizaje",
     "co": "Organiza tu experiencia de aprendizaje",
     "ar": "Organiza tu experiencia de aprendizaje",
-    "cn": "\u89c4\u6574\u60a8\u7684\u5b66\u4e60\u7ecf\u5386"
+    "cn": "规整您的学习经历"
   },
   "With Nebulus, there is no need to have your papers, documents, assignments, textbooks, and events be all over the place. With Nebulus, everything is organized for you in an easy-to-use way!": {
     "us": "With Nebulus, there is no need to have your papers, documents, assignments, textbooks, and events be all over the place. With Nebulus, everything is organized for you in an easy-to-use way!",
     "uk": "With Nebulus, there is no need to have your papers, documents, assignments, textbooks, and events be all over the place. With Nebulus, everything is organized for you in an easy-to-use way!",
     "au": "With Nebulus, there is no need to have your papers, documents, assignments, textbooks, and events be all over the place. With Nebulus, everything is organized for you in an easy-to-use way!",
-    "es": "Con N\u00e9bulus, no hay necesidad de tener todos tus papeles, documentos, tareas, libros de texto y eventos por todos lados. \u00a1Con N\u00e9bulus, todo est\u00e1 organizado para ti de manera f\u00e1cil de usar!",
-    "mx": "Con N\u00e9bulus, no hay necesidad de tener todos tus papeles, documentos, tareas, libros de texto y eventos por todos lados. \u00a1Con N\u00e9bulus, todo est\u00e1 organizado para ti de manera f\u00e1cil de usar!",
-    "cr": "Con N\u00e9bulus, no hay necesidad de tener todos tus papeles, documentos, tareas, libros de texto y eventos por todos lados. \u00a1Con N\u00e9bulus, todo est\u00e1 organizado para ti de manera f\u00e1cil de usar!",
-    "cu": "Con N\u00e9bulus, no hay necesidad de tener todos tus papeles, documentos, tareas, libros de texto y eventos por todos lados. \u00a1Con N\u00e9bulus, todo est\u00e1 organizado para ti de manera f\u00e1cil de usar!",
-    "co": "Con N\u00e9bulus, no hay necesidad de tener todos tus papeles, documentos, tareas, libros de texto y eventos por todos lados. \u00a1Con N\u00e9bulus, todo est\u00e1 organizado para ti de manera f\u00e1cil de usar!",
-    "ar": "Con N\u00e9bulus, no hay necesidad de tener todos tus papeles, documentos, tareas, libros de texto y eventos por todos lados. \u00a1Con N\u00e9bulus, todo est\u00e1 organizado para ti de manera f\u00e1cil de usar!",
-    "cn": "\u6709\u4e86\u8010\u535a\u4e50\u601d\uff0c\u60a8\u7684\u8bba\u6587\u3001\u6587\u6863\u3001\u4f5c\u4e1a\u3001\u6559\u79d1\u4e66\u548c\u6d3b\u52a8\u5c31\u4e0d\u5fc5\u5230\u5904\u4e71\u7a9c\u4e86\u3002 \u4f7f\u7528 \u8010\u535a\u4e50\u601d\uff0c\u4e00\u5207\u90fd\u4ee5\u6613\u4e8e\u4f7f\u7528\u7684\u65b9\u5f0f\u4e3a\u60a8\u5b89\u6392\u59a5\u5f53\uff01"
+    "es": "Con Nébulus, no hay necesidad de tener todos tus papeles, documentos, tareas, libros de texto y eventos por todos lados. ¡Con Nébulus, todo está organizado para ti de manera fácil de usar!",
+    "mx": "Con Nébulus, no hay necesidad de tener todos tus papeles, documentos, tareas, libros de texto y eventos por todos lados. ¡Con Nébulus, todo está organizado para ti de manera fácil de usar!",
+    "cr": "Con Nébulus, no hay necesidad de tener todos tus papeles, documentos, tareas, libros de texto y eventos por todos lados. ¡Con Nébulus, todo está organizado para ti de manera fácil de usar!",
+    "cu": "Con Nébulus, no hay necesidad de tener todos tus papeles, documentos, tareas, libros de texto y eventos por todos lados. ¡Con Nébulus, todo está organizado para ti de manera fácil de usar!",
+    "co": "Con Nébulus, no hay necesidad de tener todos tus papeles, documentos, tareas, libros de texto y eventos por todos lados. ¡Con Nébulus, todo está organizado para ti de manera fácil de usar!",
+    "ar": "Con Nébulus, no hay necesidad de tener todos tus papeles, documentos, tareas, libros de texto y eventos por todos lados. ¡Con Nébulus, todo está organizado para ti de manera fácil de usar!",
+    "cn": "有了耐博乐思，您的论文、文档、作业、教科书和活动就不必到处乱窜了。 使用 耐博乐思，一切都以易于使用的方式为您安排妥当！"
   },
   "Make Learning Easier": {
     "us": "Make Learning Easier",
     "uk": "Make Learning Easier",
     "au": "Make Learning Easier",
-    "es": "Haz tu aprendizaje m\u00e1s f\u00e1cil",
-    "mx": "Haz tu aprendizaje m\u00e1s f\u00e1cil",
-    "cr": "Haz tu aprendizaje m\u00e1s f\u00e1cil",
-    "cu": "Haz tu aprendizaje m\u00e1s f\u00e1cil",
-    "co": "Haz tu aprendizaje m\u00e1s f\u00e1cil",
-    "ar": "Haz tu aprendizaje m\u00e1s f\u00e1cil",
-    "cn": "\u8ba9\u5b66\u4e60\u66f4\u7b80\u5355\u548c\u8f7b\u677e"
+    "es": "Haz tu aprendizaje más fácil",
+    "mx": "Haz tu aprendizaje más fácil",
+    "cr": "Haz tu aprendizaje más fácil",
+    "cu": "Haz tu aprendizaje más fácil",
+    "co": "Haz tu aprendizaje más fácil",
+    "ar": "Haz tu aprendizaje más fácil",
+    "cn": "让学习更简单和轻松"
   },
   "We have tools to organize your studying, organize your materials, make learning fun, and keep you focused!": {
     "us": "We have tools to organize your studying, organize your materials, make learning fun, and keep you focused!",
     "uk": "We have tools to organize your studying, organize your materials, make learning fun, and keep you focused!",
     "au": "We have tools to organize your studying, organize your materials, make learning fun, and keep you focused!",
-    "es": "\u00a1Tenemos herramientas para organizar tu estudio y tus materiales, hacer que aprender sea divertido y mantener tu concentraci\u00f3n!",
-    "mx": "\u00a1Tenemos herramientas para organizar tu estudio y tus materiales, hacer que aprender sea divertido y mantener tu concentraci\u00f3n!",
-    "cr": "\u00a1Tenemos herramientas para organizar tu estudio y tus materiales, hacer que aprender sea divertido y mantener tu concentraci\u00f3n!",
-    "cu": "\u00a1Tenemos herramientas para organizar tu estudio y tus materiales, hacer que aprender sea divertido y mantener tu concentraci\u00f3n!",
-    "co": "\u00a1Tenemos herramientas para organizar tu estudio y tus materiales, hacer que aprender sea divertido y mantener tu concentraci\u00f3n!",
-    "ar": "\u00a1Tenemos herramientas para organizar tu estudio y tus materiales, hacer que aprender sea divertido y mantener tu concentraci\u00f3n!",
-    "cn": "\u6211\u4eec\u62e5\u6709\u53ef\u4ee5\u8bb8\u591a\u5de5\u5177\u53ef\u4ee5\u5e2e\u52a9\u60a8\u5b66\u4e60\uff0c\u6574\u7406\u8d44\u6599\uff0c\u8ba9\u5b66\u4e60\u53d8\u5f97\u6709\u8da3\uff0c\u5e76\u4e14\u5e2e\u52a9\u60a8\u4fdd\u6301\u4e13\u6ce8\uff01"
+    "es": "¡Tenemos herramientas para organizar tu estudio y tus materiales, hacer que aprender sea divertido y mantener tu concentración!",
+    "mx": "¡Tenemos herramientas para organizar tu estudio y tus materiales, hacer que aprender sea divertido y mantener tu concentración!",
+    "cr": "¡Tenemos herramientas para organizar tu estudio y tus materiales, hacer que aprender sea divertido y mantener tu concentración!",
+    "cu": "¡Tenemos herramientas para organizar tu estudio y tus materiales, hacer que aprender sea divertido y mantener tu concentración!",
+    "co": "¡Tenemos herramientas para organizar tu estudio y tus materiales, hacer que aprender sea divertido y mantener tu concentración!",
+    "ar": "¡Tenemos herramientas para organizar tu estudio y tus materiales, hacer que aprender sea divertido y mantener tu concentración!",
+    "cn": "我们拥有可以许多工具可以帮助您学习，整理资料，让学习变得有趣，并且帮助您保持专注！"
   },
   "Start Now!": {
     "us": "Start Now!",
     "uk": "Start Now!",
     "au": "Start Now!",
-    "es": "\u00a1Comienza ahora!",
-    "mx": "\u00a1Comienza ahora!",
-    "cr": "\u00a1Comienza ahora!",
-    "cu": "\u00a1Comienza ahora!",
-    "co": "\u00a1Comienza ahora!",
-    "ar": "\u00a1Comienza ahora!",
-    "cn": "\u5f00\u59cb\u4f7f\u7528\uff01"
+    "es": "¡Comienza ahora!",
+    "mx": "¡Comienza ahora!",
+    "cr": "¡Comienza ahora!",
+    "cu": "¡Comienza ahora!",
+    "co": "¡Comienza ahora!",
+    "ar": "¡Comienza ahora!",
+    "cn": "开始使用！"
   },
   "About": {
-    "cn": "\u5173\u4e8e",
+    "cn": "关于",
     "ir": "De"
   },
   "Pricing": {
-    "cn": "\u4ef7\u94b1"
+    "cn": "价钱"
   },
   "Change Language": {
-    "cn": "\u6539\u53d8\u8bed\u8a00"
+    "cn": "改变语言"
   },
   "With Nebulus, have your whole learning experience": {
-    "cn": "\u8010\u535a\u4e50\u601d\u4f1a\u8ba9\u60a8\u7684\u5b66\u4e60\u7ecf\u5386\u65e2\u6709"
+    "cn": "耐博乐思会让您的学习经历既有"
   },
   "organized": {
-    "cn": "\u79e9\u5e8f"
+    "cn": "秩序"
   },
   "and": {
-    "cn": "\u3001\u53c8"
+    "cn": "、又"
   },
   "simple": {
-    "cn": "\u7b80\u5355\u65b9\u4fbf"
+    "cn": "简单方便"
   },
   "All it takes is one": {
-    "cn": "\u60a8\u6240\u9700\u7684\u4ec5\u4ec5\u662f\u4e00\u4e2a"
+    "cn": "您所需的仅仅是一个"
   },
   "Nebulus Account": {
-    "cn": "\u8010\u535a\u4e50\u601d\u8d26\u53f7"
+    "cn": "耐博乐思账号"
   },
   "New to Nebulus?": {
-    "cn": "\u65b0\u624b\u6307\u5357?"
+    "cn": "新手指南?"
   },
   "Forgot password?": {
-    "cn": "\u5fd8\u8bb0\u5bc6\u7801\uff1f"
+    "cn": "忘记密码？"
   },
   "Reset": {
-    "cn": "\u91cd\u5236"
+    "cn": "重制"
   },
   "Or, Sign in with Your Apps:": {
-    "cn": "\u6216\u8005\uff0c\u4f7f\u7528\u5176\u5b83\u5e94\u7528\u767b\u5f55\uff1a"
+    "cn": "或者，使用其它应用登录："
   },
   "Sign up Now": {
-    "cn": "\u73b0\u5728\u6ce8\u518c"
+    "cn": "现在注册"
   },
   "Password": {
-    "cn": "\u5bc6\u7801"
+    "cn": "密码"
   },
   "Username": {
-    "cn": "\u7528\u6237\u540d"
+    "cn": "用户名"
   },
   "Email": {
-    "cn": "\u90ae\u7bb1"
+    "cn": "邮箱"
   },
   "Existing Member?": {
-    "cn": "\u5df2\u6ce8\u518c\u8d26\u6237\uff1f"
+    "cn": "已注册账户？"
   },
   "Prepare for a brighter future in your education with Nebulus! It's free and it always will be.": {
-    "cn": "\u51c6\u5907\u597d\u4e0e\u8010\u535a\u4e50\u601d\u4e00\u8d77\u5728\u60a8\u7684\u5b66\u4e60\u8fc7\u7a0b\u4e2d\u5f00\u542f\u4e00\u4e2a\u66f4\u7f8e\u597d\u7684\u672a\u6765\uff01"
+    "cn": "准备好与耐博乐思一起在您的学习过程中开启一个更美好的未来！"
   },
   "Restart": {
-    "cn": "\u91cd\u65b0\u8f93\u5165"
+    "cn": "重新输入"
   },
   "Next": {
-    "cn": "\u4e0b\u4e00\u6b65"
+    "cn": "下一步"
   },
   "Previous": {
-    "cn": "\u524d\u4e00\u6b65"
+    "cn": "前一步"
   },
   "Join": {
-    "cn": "\u5f00\u59cb\u7528\u8010\u535a\u4e50\u601d\uff01"
+    "cn": "开始用耐博乐思！"
   },
   "Confirm Password": {
-    "cn": "\u786e\u8ba4\u5bc6\u7801"
+    "cn": "确认密码"
   },
   "Welcome to Nebulus! Please enter an Email!": {
-    "cn": " \u6b22\u8fce\u6765\u5230\u8010\u535a\u4e50\u601d\uff01\u8bf7\u8f93\u5165\u7528\u6237\u540d\u3002"
+    "cn": " 欢迎来到耐博乐思！请输入用户名。"
   },
   "Please enter a Username!": {
-    "cn": "\u8bf7\u8f93\u5165\u7528\u6237\u540d\u3002"
+    "cn": "请输入用户名。"
   },
   "Please enter a password!": {
-    "cn": "\u8bf7\u8f93\u5165\u5bc6\u7801\uff01"
+    "cn": "请输入密码！"
   },
   "Please confirm your password!": {
-    "cn": "\u8bf7\u786e\u8ba4\u60a8\u7684\u5bc6\u7801\uff01"
+    "cn": "请确认您的密码！"
   }
 }

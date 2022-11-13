@@ -154,6 +154,10 @@ def selectregion():
         homepage=True,
     )
 
+@main_blueprint.route("/global/<country>")
+def globalcountry(country):
+    session["global"] = country
+    return redirect("/")
 
 @main_blueprint.app_errorhandler(404)
 @main_blueprint.app_errorhandler(400)
@@ -161,7 +165,7 @@ def page_not_found(e):
     path = request.path
     # print(path)
     if len(path.strip("/")) == 2:
-        return redirect(f"/global/{path}")
+        return redirect(f"/global{path}")
     # note that we set the 404 status explicitly
     return (
         render_template(
