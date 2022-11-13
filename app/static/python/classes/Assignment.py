@@ -1,8 +1,7 @@
-from datetime import datetime
-
-from mongoengine import DateTimeField, FloatField, ReferenceField, StringField, BooleanField, EmbeddedDocumentField
-
+# noinspection PyUnresolvedReferences
+from .GradingCategory import *
 from .Snowflake import Snowflake
+from .TermGrade import *
 
 
 class Assignment(Snowflake):
@@ -24,7 +23,7 @@ class Assignment(Snowflake):
         "Course", required=True, description="The course that this assignment is in."
     )
     due = DateTimeField(
-        description="The due date of the assignment.", default=datetime.max
+        description="The due date of the assignment.", default=datetime.now()
     )
     status = StringField(
         description="The status of the assignment. Can be 'Not Started', 'Submitted', or 'Graded'.",

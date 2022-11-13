@@ -47,14 +47,18 @@ function setUpFunc() {
 
         setup = true;
 
-        $.ajax({
+        const req = $.ajax({
             url: '/import-course',
             type: 'POST',
             contentType: 'application/json',
-        }).done(data => {
+        })
+
+        req.done(data => {
             document.getElementById("courseModal").innerHTML += data;
             setUpFunc();
         });
+
+        req.fail(() => setup = false);
     };
 
     // set up close button
@@ -322,8 +326,10 @@ function createSchoologyCourse() {
     const input = document.getElementById('schoology-course-id');
     const teacher = document.getElementById('schoology-course-teacher');
     const status = document.getElementById("schoology-import-status");
+    const submitButton = document.querySelector("#schoology-create-course button[type=submit]");
     status.style.color = "gray";
     status.innerHTML = "Creating course...";
+    submitButton.disabled = true;
 
     const xhttp = new XMLHttpRequest();
     xhttp.open('POST', '/api/v1/internal/create/course/schoology', true);
@@ -344,6 +350,7 @@ function createSchoologyCourse() {
             } else {
                 status.style.color = "red";
                 status.innerHTML = "An error occurred!";
+                submitButton.disabled = false;
             }
         }
     }

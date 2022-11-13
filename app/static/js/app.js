@@ -1,4 +1,5 @@
-document.getElementById("pageTitle").innerHTML = "App";
+if (!document.getElementById("page-title"))
+    document.getElementById("pageTitle").innerHTML = "App";
 
 keyUpDelay('#search', 1000, searchWithin);
 const Default = {
@@ -28,7 +29,8 @@ function updateEventListeners() {
                 parent.querySelector('[post-time-element]').innerHTML,
                 parent.querySelector('[due-time-element]').innerHTML,
                 parent.querySelector('[type-element]').innerHTML,
-                parent.querySelector('[image-element2]').src
+                parent.querySelector('[image-element2]').src,
+                parent.querySelector(".likes")
             )
         );
     }
@@ -39,7 +41,6 @@ updateEventListeners();
 {
     const recActivity = document.getElementById("recent-activity-div");
     const upcEvents = document.getElementById("upcoming-events");
-    upcEvents.style.scrollBehavior = "smooth";
     upcEvents.style.scrollBehavior = "smooth";
 
     let announcementStart = 8;
@@ -139,7 +140,7 @@ updateEventListeners();
     });
 }
 
-function openDetailsModal(content, title, author, pic, course, postTime, dueTime, type, coursepic) {
+function openDetailsModal(content, title, author, pic, course, postTime, dueTime, type, coursePic, likes) {
     if (type === "Announcement") {
         document.getElementById("submissionsBox").style.display = "none";
         document.getElementById("descriptionTitle").innerHTML = "Message";
@@ -152,6 +153,8 @@ function openDetailsModal(content, title, author, pic, course, postTime, dueTime
     if (title === author) title = 'Announcement from ' + title;
 
     if (dueTime === undefined) dueTime = '';
+    if (likes === null) likes = '';
+    else likes = likes.innerHTML;
 
     document.getElementById('header').innerHTML = `
 <h3 class="text-xl font-semibold text-gray-900 dark:text-white truncate h-full">${title}</h3>
@@ -160,7 +163,7 @@ function openDetailsModal(content, title, author, pic, course, postTime, dueTime
                                                         ${author}'s profile picture" style="
     margin-right: 10px;
 ">
-                            <img src="${coursepic}" style="margin-left: -30px;margin-top: 40px;margin-right: 10px;" class="inline-block w-6 h-6 rounded-md">
+                            <img src="${coursePic}" style="margin-left: -30px;margin-top: 40px;margin-right: 10px;" class="inline-block w-6 h-6 rounded-md">
 
     <div class="flex flex-col text-xs">
         <h4 class="text-lg text-gray-900 dark:text-white truncate cursor-pointer hover:underline" data-dropdown-toggle="userDropdown-0_0">
@@ -173,6 +176,7 @@ function openDetailsModal(content, title, author, pic, course, postTime, dueTime
 
     document.getElementById('dueTime').innerHTML = dueTime;
     document.getElementById('announcementBody').innerHTML = content;
+    document.getElementById("likes-section").innerHTML = likes;
     openModal("modal");
 }
 

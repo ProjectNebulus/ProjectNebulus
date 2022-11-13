@@ -183,7 +183,7 @@ def createAssignment(data: dict, save=True) -> Assignment:
     assignment = Assignment(**data)
     if save and not debug_importing:
         course = assignment.course
-        assignment.save(force_insert=True)
+        assignment.save(force_insert=True, validate=False)
         course.assignments.append(assignment)
 
     return assignment

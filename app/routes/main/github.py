@@ -1,8 +1,8 @@
 import requests
 from flask import redirect, render_template, request, session
 
+from app.static.python.mongodb import update
 from . import main_blueprint
-from ...static.python.mongodb import update
 
 
 def get_auth():

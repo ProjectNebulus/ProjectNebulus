@@ -29,9 +29,10 @@ class TermGrade(EmbeddedDocument):
     grade = FloatField(required=False)
 
     def clean(self):
-        self.grade = sum(
-            [
-                grading_category.grade * grading_category.weight
-                for grading_category in self.grading_categories
-            ]
-        )
+        self.grade = 0
+
+        for category in self.grading_categories:
+            if not category.grade:
+                category.clean()
+
+            self.grade += category.grade * category.weight

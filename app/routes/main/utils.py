@@ -4,9 +4,10 @@ import datetime
 from functools import wraps
 
 from flask import redirect, render_template, request, session
+from markupsafe import Markup
 
 try:
-    from ...static.python.mongodb import read
+    from app.static.python.mongodb import read
 except ImportError:
     ...
 
@@ -41,7 +42,7 @@ def private_endpoint(func):
         # the first parameter should be the flask server ip address, so change it to what the ip is for your server
 
         if (
-            str(user_ip) == "127.0.0.1" or "2600:1700:5450:7b08:9806:a9a9:a039:e92e"
+                str(user_ip) == "127.0.0.1" or "2600:1700:5450:7b08:9806:a9a9:a039:e92e"
         ):  # server ip
             return func(*args, **kwargs)
         else:
@@ -62,3 +63,13 @@ def strftime(time: datetime.date, fmt) -> str:
             fmt = fmt.replace("#", "-")
 
         return time.strftime(fmt)
+
+
+def fmt(content: str) -> str:
+    output = ""
+    for line in content.strip().split("\n"):
+        if line == "":
+            output += "<br>"
+        else:
+            output += "<p>" + line + "</p>"
+    return Markup(output)

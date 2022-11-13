@@ -314,9 +314,7 @@ def schoology_course_route():
     user, domain, sc = get_schoology()
     section = dict(sc.get_section(link))
 
-    create_schoology_course(section, link, post_data["teacher"], user, sc)
-
-    return "success"
+    return create_schoology_course(section, link, post_data["teacher"], user, sc)
 
 
 def get_schoology():
@@ -350,7 +348,7 @@ def get_schoology():
 
 
 def create_schoology_course(section, link, teacher, user, sc: Schoology = None):
-    course = {
+    course_obj = create.create_course({
         "name": f'{section["course_title"]} ({section["section_title"]})',
         "description": section["description"],
         "imported_from": "Schoology",
@@ -358,9 +356,7 @@ def create_schoology_course(section, link, teacher, user, sc: Schoology = None):
         "teacher": teacher,
         "imported_id": str(section["id"]),
         "type": "Imported",
-    }
-
-    course_obj = create.create_course(course)
+    })
 
     if not debug_importing:
         create.createAvatar(
@@ -451,7 +447,7 @@ def create_schoology_course(section, link, teacher, user, sc: Schoology = None):
             }
 
             if int(assignment["allow_dropbox"]) and int(assignment.get("completed", 0)):
-                data["submitDate"] = datetime.now()
+                data["submitDate"] = datetime.max
 
             assignments[assignment["id"]] = create.createAssignment(data)
 
@@ -480,7 +476,7 @@ def create_schoology_course(section, link, teacher, user, sc: Schoology = None):
             assignment_obj.period = term
 
             if not debug_importing:
-                assignment_obj.save()
+                assignment_obj.save(validate=False)
 
     grades = Grades(student=read.find_user(id=session["id"]), terms=terms)
     if not debug_importing:

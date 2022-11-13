@@ -8,11 +8,11 @@ from flask.json import jsonify
 from flask_socketio import emit, join_room, leave_room
 from pandas import *
 
+from app.routes import socketio
+from app.static.python.classes import ChatMember
 from app.static.python.classes import User
 from app.static.python.mongodb import create, delete, read, update
 from ...internal import internal
-from ......routes import socketio
-from ......static.python.classes import ChatMember
 
 
 # from app.static.python.school import get_school

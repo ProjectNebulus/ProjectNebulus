@@ -24,7 +24,7 @@
                     <button style="float:left"
                             data-dropdown-toggle="addDropdown"
                             id="create-resource"
-                            class="flex justify-center bg-white/75 ring-1 ring-slate-900/10 hover:ring-slate-300
+                            class="flex justify-center bg-gray-100 ring-1 ring-slate-900/10 hover:ring-slate-300
                              focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-slate-400
                              dark:bg-slate-800/75 dark:ring-0 dark:text-slate-300 dark:hover:bg-slate-700 px-5 py-2.5
                              font-medium rounded-lg material-icons w-16 h-12 place-items-center text-3xl mr-2">
@@ -34,7 +34,7 @@
                             id="search"
                             style="float:left;"
                             type="button"
-                            class="hidden sm:flex items-center w-72 text-left space-x-3 px-4 h-12 bg-white/75 ring-1
+                            class="hidden sm:flex items-center w-72 text-left space-x-3 px-4 h-12 bg-gray-100 ring-1
                              ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500
                               shadow-sm rounded-lg text-slate-400 dark:bg-slate-800/75 dark:ring-0 dark:text-slate-300
                                dark:highlight-white/5 dark:hover:bg-slate-700">
@@ -81,139 +81,146 @@
             <iframe id="frame" name="frame" src="{{ src }}"></iframe>
         </div>
         <div class="hidden xl:block border-l mr-4 border-gray-200 dark:border-gray-700 text-center overflow-auto"
-             id="upcoming-events" style="width:37%">
+             style="width:37%">
             <h1 class="text-black dark:text-white text-2xl">Upcoming Events</h1>
             <br>
-            <div class="flex flex-col sm:rounded-lg min-w-full overflow-auto" style="height: 90%">
-                {% if events|length == 0 %}
-                    <p class="text-gray-300 dark:text-gray-500 mx-4">No Events</p>
-                {% else %}
-                    {% for date, assignments in events.items() %}
-                        {% set diff = (date - now).days %}
-                        {% if diff >= 0 %}
-                            {% set diff = diff + 1 %}
-                        {% endif %}
-                        {% if diff < 0 %}
-                            <h1 style="text-align: left;
-                                   background: orangered -webkit-linear-gradient(left,#ff7878,#ffb078);
-                                   -webkit-background-clip: text;
-                                   -webkit-text-fill-color: transparent;
-                                   margin: 0.75rem;">
-                                {{ strftime(date, "%a %b %-d %Y") }}
-                                ({{ -diff }}d Overdue)
-                            </h1>
-                        {% elif diff <= 1 %}
-                            <h1 style="text-align: left;
-                                   background: orange -webkit-linear-gradient(left,#ff78ed,#ffb378);
-                                   -webkit-background-clip: text;
-                                   -webkit-text-fill-color: transparent;
-                                   margin: 0.75rem;">
-                                {{ strftime(date, "%a %b %-d %Y") }}
-                                ({{ diff }}d remaining)
-                            </h1>
-                        {% elif diff <= 3 %}
-                            <h1 style="text-align: left;
-                                   background: yellow -webkit-linear-gradient(left,#dd7e00,#fcff34);
-                                   -webkit-background-clip: text;
-                                   -webkit-text-fill-color: transparent;
-                                   margin: 0.75rem;">
-                                {{ strftime(date, "%a %b %-d %Y") }}
-                                ({{ diff }}d remaining)
-                            </h1>
-                        {% elif diff <= 5 %}
-                            <h1 style="text-align: left;
-                                   background: green -webkit-linear-gradient(left,#ffd978,#ddff78);
-                                   -webkit-background-clip: text;
-                                   -webkit-text-fill-color: transparent;
-                                   margin: 0.75rem;">
-                                {{ strftime(date, "%a %b %-d %Y") }}
-                                ({{ diff }}d remaining)
-                            </h1>
-                        {% else %}
-                            <h1 style="text-align: left;
-                                   background: greenyellow -webkit-linear-gradient(left,#d9ff78,#78ffb7);
-                                   -webkit-background-clip: text;
-                                   -webkit-text-fill-color: transparent;
-                                   margin: 0.75rem;">
-                                {{ strftime(date, "%a %b %-d %Y") }}
-                                ({{ diff }}d remaining)
-                            </h1>
-                        {% endif %}
-                        {% for a in assignments[:15] %}
-                            {% if (a._cls != "Assignment" or a.submitDate == None) or now < date %}
-                                {# today is before the due date ^ #}
-                                <div class="flex bg-gray-100 shadow dark:bg-gray-800/75 rounded-lg p-6 event shadow-md dark:border-gray-700 text-sm mb-5 mx-4 text-left relative expandable">
-                                    <div class="absolute right-0 bottom-0 material-icons hover:bg-gray-50 dark:hover:bg-gray-500 p-1 expand text-gray-200 cursor-pointer dark:text-gray-400 invisible rounded-lg mr-3 mb-3">
-                                        open_in_new
-                                    </div>
-                                    <div content-element hidden class="hidden">{{ a.description }}</div>
-                                    <div author-element hidden class="hidden">{{ a.course.teacher }}</div>
-                                    <img src="{% if "teacherAccount" in a.course %} {{ a.course.teacher.avatar.avatar_url }} {% else %} https://app.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg {% endif %}"
-                                         image-element
-                                         hidden
-                                         class="hidden">
-                                    <div class="mr-4 material-icons ml-2 text-black dark:text-white"
-                                         style="transform: translate(0, 50%) scale(1.75)">
-                                        assignment
-                                    </div>
-                                    <div class="text-gray-700 dark:text-gray-400 leading-relaxed" style="width: 90%">
-                                        <h1 class="text-black dark:text-white text-xl truncate" title-element=""
-                                            style="max-width: 95%;" title-element>{{ a.title }}</h1>
-                                        {% if a._cls == "Assignment" %}
-                                            Due at
-                                        {% else %}
-                                            Happening at
-                                        {% endif %}
-                                        {{ strftime(date, "%-I:%M %p") }}
-                                        <div due-time-element hidden class="hidden">
-                                            {% if a._cls == "Assignment" %}
-                                                Due at
-                                            {% else %}
-                                                Happening on
-                                            {% endif %}
-                                            {{ strftime(date, "%-m/%-d/%y %-I:%M %p") }} •
-                                            {% if a.submitDate %}
-                                                <span class="text-green-600 dark:text-green-500">Submitted</span>
-                                            {% elif now > date %}
-                                                <span class="text-red-600 dark:text-red-500">Overdue</span>
-                                                {#% elif a.grade != None and a.grade / a.points < 0.6 %#}
-                                                {#  <span class="text-gray-300 dark:text-gray-700">{{ a.grade }}/{{ a.points }}</span>#}                                            {% else %}
-                                                <span class="text-orange-500">Not Submitted</span>
-                                            {% endif %}
-                                        </div>
-                                        <div post-time-element hidden class="hidden">
-                                            Posted at
-                                            {% if "creationDate" in a %}
-                                                {{ strftime(a.creationDate, "%-m/%-d/%y %-I:%m %p") }}
-                                            {% else %}
-                                                {{ strftime(a.get_timestamp(), "%-m/%-d/%y %-I:%m %p") }}
-                                            {% endif %}
-                                        </div>
-                                        {% if a._cls == "Assignment" %}
-                                            <div class="text-black dark:text-white">
-                                                {% if a.submitDate %}
-                                                    <span class="text-green-600 dark:text-green-500">Submitted</span>
-                                                {% elif now > date %}
-                                                    <span class="text-red-600 dark:text-red-500">Overdue</span>
-                                                {% elif a.grade != None and a.grade / a.points < 0.6 %}
-                                                    <span class="text-gray-300 dark:text-gray-700">{{ a.grade }}/{{ a.points }}</span>
-                                                {% else %}
-                                                    <span class="text-orange-500">Not Submitted</span>
-                                                {% endif %}
-                                            </div>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            {% endif %}
-                        {% endfor %}
-                    {% endfor %}
-                {% endif %}
+            <div class="flex flex-col sm:rounded-lg align-middle overflow-auto inline-block overflow-x-hidden"
+                 id="upcoming-events" style="height: 90%">
+                {% include "learning/upcoming-events.html" %}
             </div>
         </div>
     </div>
     <script>
         const course_id = "{{ course_id }}";
         const imgUrl = "{{ course.avatar.avatar_url }}";
+    </script>
+    {% include "courses/courseModals.html" %}
+    <div id="modal" tabindex="-1"
+         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full pointer-events-none justify-center items-center flex"
+         style="scale: 1; opacity: 1; transition: all 0.2s ease 0s;" aria-modal="true" role="dialog">
+        <div class="relative p-4 w-full max-w-2xl h-full md:h-auto pointer-events-auto">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
+                <div id="dueTime" class="absolute bottom-0 right-0 p-3 text-gray-200 dark:text-gray-500 text-sm">
+                    Happening on
+                    5/20/22 10:10 AM •
+                    <span class="text-red-600 dark:text-red-500">Overdue</span>
+                </div>
+                <!-- Modal header -->
+                <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600 relative">
+                    <div id="header">
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white truncate h-full"><i
+                                class="material-icons" style="
+    color: white;
+    vertical-align: middle;
+    margin-right: 10px;
+    font-size: 2em;
+    display: inline-block;
+">assignment</i>Comp Practice Test 2 (Participation)</h3>
+                        <div class="flex mt-2">
+                            <img class="inline-block mt-2 rounded-lg dark:bg-gray-900 w-12 h-12"
+                                 src="https://asset-cdn.schoology.com/system/files/imagecache/profile_reg/pictures/picture-a4e0cd7501f839a1fa616bc07887b839_5f2c7354873ce.png"
+                                 alt="Ms. Nagami 's profile picture">
+                            <img src="https://api.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg"
+                                 style="margin-left: -30px;margin-top: 40px;margin-right: 10px;"
+                                 class="inline-block w-6 h-6 rounded-md">
+                            <div class="flex flex-col text-xs">
+                                <h4 class="text-lg text-gray-900 dark:text-white truncate cursor-pointer hover:underline"
+                                    data-dropdown-toggle="userDropdown-0_0">Mr. Schindler</h4>
+                                <span class="bg-gray-300 text-gray-800 text-xs font-normal uppercase
+         mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300"><img class="inline-block rounded-md rounded-full
+      shadow-lg dark:bg-gray-900 dark:hover:bg-gray-800 w-6 h-6"
+                                                                              src="https://app.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg"
+                                                                              alt="Ms. Nagami's profile picture"> Physics 8</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                            onclick="closeModal('modal')">
+                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                  clip-rule="evenodd">
+                            </path>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                    <div id="postTime" class="absolute bottom-0 right-0 p-3 text-gray-200 dark:text-gray-500 text-sm">
+                        Posted at 9:43 am
+                    </div>
+                </div>
+                <!-- Modal body -->
+                <div class="p-6 space-y-6">
+                    <h1 class="text-white font-bold uppercase" id="descriptionTitle">Description</h1>
+                    <div style="max-height: 15rem" class="overflow-auto">
+                        <div id="announcementBody" class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                            Do Homework 4 Worksheet. Turn in at end of class on day listed (Day 1 of Week of Oct 17th)
+                            <br><br>
+                            Be sure to show steps for solving a physics problem when necessary:<br>
+                            1)Create a model, define your origin, and set your coordinates<br>
+                            2) State all Known Variables<br>
+                            3)State Unknown Variables<br>
+                            4) Write down all necessary equations<br>
+                            5) Write solution by plugging in variables and solving equations<br>
+                            6) Check your answer:<br>
+                            a) Do dimensional analysis to check all units are correct.<br>
+                            <br>
+                            b) Ask yourself, is this a reasonable answer for this situation?<br>
+                        </div>
+                    </div>
+                    <div id="submissionsBox">
+                        <h1 class="text-white font-bold uppercase">Submission</h1>
+                        <div class="bg-gray-800 p-3 rounded-lg" style="
+    overflow-y: scroll;
+    margin-top: 10px;
+    height: 150px;
+">
+                            <button class="focus:outline-none text-white hover-dim font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:focus:ring-green-800 flex place-items-center justify-center gap-2">
+                                <i class="w-6 h-6 inline-block material-icons">upload
+                                </i>Upload File
+                            </button>
+                            <button class="focus:outline-none text-white hover-dim font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 bg-green-700 dark:focus:ring-green-800 flex place-items-center gap-2">
+                                <i class="w-6 h-6 inline-block material-icons">check</i>Mark as Done
+                            </button>
+                            <button class="focus:outline-none text-white hover-dim font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:focus:ring-green-800 flex place-items-center justify-center gap-2">
+                                <i class="w-6 h-6 inline-block material-icons">create</i>Create Submission
+                            </button>
+                            <button class="focus:outline-none text-white hover-dim font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-purple-600 dark:focus:ring-green-800 flex place-items-center justify-center gap-2">
+                                <i class="w-6 h-6 inline-block material-icons">description</i>NebulusDoc
+                            </button>
+                            <button class="focus:outline-none text-white hover-dim font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:focus:ring-green-800 flex place-items-center justify-center gap-2">
+                                <i class="fa fa-google inline-block" style="
+    font-size: 1.5em;
+    vertical-align: middle;
+    margin-right: 4px;
+"></i>Google Drive
+                            </button>
+                        </div>
+                    </div>
+                    <div id="commentBox" style="">
+                        <h1 class="text-white font-bold uppercase">Reactions</h1>
+
+                        <div class="dark:text-white text-black" id="likes-section">
+                        </div>
+                    </div>
+                    <button onclick="closeModal('modal')"
+                            class="focus:outline-none text-white font-medium bg-green-700 rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 flex place-items-center justify-center gap-2">
+                        <svg class="w-6 h-6 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
+                            </path>
+                        </svg>
+                        Dismiss
+                    </button>
+                </div>
+            </div>
+            <script src="/static/js/app.js"></script>
+        </div>
+    </div>
+    <script>
+        const announcementEnd = {{ ae }};
+        const eventEnd = {{ ee }};
     </script>
     </body>
 {% endblock %}

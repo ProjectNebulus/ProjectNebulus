@@ -1,7 +1,7 @@
 from flask import redirect, session
 
-from app.routes.api.v1.internal import internal
 from app.static.python.mongodb import read, update
+from ... import internal
 
 
 @internal.route("/oauth/schoology/disconnect")

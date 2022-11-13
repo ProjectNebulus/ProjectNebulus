@@ -4,10 +4,9 @@ import requests
 from flask import render_template, request, session
 
 from app.static.python.classes import Assignment, Course, Grades, User
-from app.static.python.mongodb import read
-from app.static.python.mongodb.read import find_user, getText
+from app.static.python.mongodb.read import find_user, getText, sort_course_events, get_user_courses
 from . import main_blueprint, utils
-from .utils import logged_in, private_endpoint
+from .utils import logged_in, private_endpoint, fmt
 
 
 @main_blueprint.route("/course/<id>")
@@ -64,13 +63,14 @@ def course_page(page, **kwargs):
         page="Nebulus - " + course.name,
         src=iframe_src,
         course=course,
+        fmt=fmt,
         course_id=course_id,
         user=session.get("username"),
         user_id=session.get("id"),
         email=session.get("email"),
         avatar=session.get("avatar", "/v3.gif"),
         disableArc=(page != "course"),
-        events=read.sort_course_events(course_id)[1],
+        events=sort_course_events(course_id)[1],
         strftime=utils.strftime,
         translate=getText,
         gradeStr=gradeStr,
@@ -111,7 +111,7 @@ def gradeStr(assignment: Assignment):
 @private_endpoint
 def getResource(courseID, documentID):
     courses = list(
-        filter(lambda c: c.id == courseID, read.get_user_courses(session["id"]))
+        filter(lambda c: c.id == courseID, get_user_courses(session["id"]))
     )
     if not len(courses) or not len(
             [user for user in courses[0].authorizedUsers if user.id == session["id"]]

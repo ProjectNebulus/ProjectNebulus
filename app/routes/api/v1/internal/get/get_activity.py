@@ -1,10 +1,10 @@
 from datetime import datetime
 
 from flask import session, request, render_template
-from markupsafe import Markup
 
 from app.routes.main import strftime
 from app.static.python.mongodb import read
+from routes.main import fmt
 from .. import internal
 
 
@@ -38,13 +38,3 @@ def upcoming_events():
         fmt=fmt,
         now=datetime.now()
     )
-
-
-def fmt(content: str) -> str:
-    output = ""
-    for line in content.strip().split("\n"):
-        if line == "":
-            output += "<br>"
-        else:
-            output += "<p>" + line + "</p>"
-    return Markup(output)

@@ -2,11 +2,11 @@ import spotipy
 from flask import redirect, render_template, request, session
 from spotipy import CacheHandler, SpotifyException
 
-from . import main_blueprint
-from .utils import logged_in
 # In order to get Spotipy to work, you must install the latest version with cloning the repo with the following command:
 # pip3 install git+https://github.com/plamere/spotipy
-from ...static.python.mongodb import update
+from app.static.python.mongodb import update
+from . import main_blueprint
+from .utils import logged_in
 
 SPOTIPY_CLIENT_ID = "9eb38c31d84b43e5a2557a6f98c5a064"
 SPOTIPY_CLIENT_SECRET = "eddbab5eb3b2434694af122a8f99bf87"

@@ -3,12 +3,11 @@ from datetime import datetime
 import google.oauth2.credentials
 from flask import render_template, session
 from googleapiclient.discovery import build
-from markupsafe import Markup
 
 from app.static.python.mongodb import read
 from app.static.python.mongodb.read import getText
 from . import main_blueprint
-from .utils import logged_in, strftime
+from .utils import logged_in, strftime, fmt
 
 
 def credentials_to_dict(credentials):
@@ -138,7 +137,7 @@ def courses():
 def clubs():
     user_acc = read.find_user(id=session["id"])
     user_clubs = read.get_user_clubs(session["id"])
-    
+
     return render_template(
         "learning/clubs.html",
         user=session["username"],
@@ -264,13 +263,3 @@ def get_courses():
         scCourses = []
 
     return scCourses, gcourses, canvas_courses, scGroups
-
-
-def fmt(content: str) -> str:
-    output = ""
-    for line in content.strip().split("\n"):
-        if line == "":
-            output += "<br>"
-        else:
-            output += "<p>" + line + "</p>"
-    return Markup(output)

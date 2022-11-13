@@ -1,8 +1,8 @@
 import schoolopy
 from flask import request, session
 
-from app.routes.api.v1.internal import internal
 from app.routes.main import private_endpoint
+from ... import internal
 
 key = "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
 secret = "59ccaaeb93ba02570b1281e1b0a90e18"
@@ -31,8 +31,8 @@ def schoology_get():
     return str(
         auth.request_authorization(
             callback_url=str(request.url_root)
-                             .replace("https://", "")
-                             .replace("http://", "")
+                         .replace("https://", "")
+                         .replace("http://", "")
                          + "/api/v1/internal/oauth/schoology/callback"
         )
     ).replace("//oauth", "/oauth")

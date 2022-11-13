@@ -93,7 +93,7 @@ function reloadTable() {
         i++
     ) {
         const row = table.insertRow();
-        row.classList.add('bg-white/75', 'border-b', 'dark:bg-gray-800/75', 'dark:border-gray-700');
+        row.classList.add('bg-gray-100', 'border-b', 'dark:bg-gray-800/75', 'dark:border-gray-700');
         const smallCell = row.insertCell();
 
         smallCell.innerHTML = i + '';

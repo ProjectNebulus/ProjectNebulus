@@ -1,10 +1,10 @@
 from flask import render_template, session
 
+from app.static.python.classes import User
 from app.static.python.mongodb import read
 from app.static.python.mongodb.read import getText
 from . import main_blueprint
 from .utils import logged_in
-from ...static.python.classes import User
 
 
 @main_blueprint.route("/profile")

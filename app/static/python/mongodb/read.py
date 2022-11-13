@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from datetime import datetime
 
 import schoolopy
 from flask import session
@@ -285,6 +286,7 @@ def sort_user_events(
     announcements = Announcement.objects(course__in=courses)
     assignments = Assignment.objects(course__in=courses)
     assessments = Assessment.objects(course__in=courses)
+
     from itertools import chain, groupby
 
     if show_events:
@@ -293,6 +295,7 @@ def sort_user_events(
         events_assessments_assignments = list(chain(assignments, assessments))
 
     sorted_events = []
+    now = datetime.now()
     # filter out events that aren't due
     for one_event in events_assessments_assignments:
         try:
@@ -300,7 +303,7 @@ def sort_user_events(
         except AttributeError:
             due = one_event.date
 
-        if "9999" not in str(due):
+        if "9999" not in str(due) and ((one_event._cls != "Assignment" or one_event.submitDate is None) or now < due):
             sorted_events.append(one_event)
 
     sorted_events = sorted(sorted_events, key=sortByDateTime)[load_start: load_start + max_events]

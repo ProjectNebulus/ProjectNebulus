@@ -4,8 +4,8 @@ import requests
 from flask import Flask, redirect, render_template, request, session
 from flask_discord import DiscordOAuth2Session
 
+from app.static.python.mongodb import update
 from . import main_blueprint
-from ...static.python.mongodb import update
 
 app = Flask(__name__)
 app.config["DISCORD_CLIENT_ID"] = 955153343020429343  # Discord client ID.

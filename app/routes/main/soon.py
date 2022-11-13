@@ -1,7 +1,7 @@
 from flask import render_template, session
 
+from app.static.python.mongodb.read import getText
 from . import main_blueprint
-from ...static.python.mongodb.read import getText
 
 
 @main_blueprint.route("/coming-soon", methods=["GET"])

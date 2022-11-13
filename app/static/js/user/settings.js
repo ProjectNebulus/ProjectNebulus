@@ -15,7 +15,9 @@ window.addEventListener('DOMContentLoaded', function () {
             if (card.classList.contains('selected_card')) return;
 
             localStorage.setItem('wallpaper', card.src);
-            document.body.style.background = `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${card.src}') no-repeat center center fixed`;
+
+            const brightness = document.documentElement.classList.contains("dark") ? 0 : 255;
+            document.body.style.background = `linear-gradient(rgba(${brightness}, ${brightness}, ${brightness}, 0.6), rgba(${brightness}, ${brightness}, ${brightness}, 0.6)), url('${card.src}') no-repeat center center fixed`;
             document.body.style.backgroundSize = 'cover';
             document.querySelector('.selected_card').classList.remove('.selected_card');
         });
