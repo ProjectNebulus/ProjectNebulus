@@ -334,6 +334,17 @@ def resetPassword(username: str, psw: str):
     session["avatar"] = user.avatar.avatar_url
     session["id"] = user.id
 
+def add_school_to_user(user_id:str, school: str):
+    user = User.objects.get(pk=user_id)
+    if not user.schools:
+        user.schools = []
+    #check duplicates
+    if school in user.schools:
+        return "1"
+    user.schools.append(school)
+    user.save(clean=False)
+
+
 
 def change_user_notepad(course_id, content, user_id):
     user = User.objects.get(pk=user_id)

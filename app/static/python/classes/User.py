@@ -83,7 +83,7 @@ class User(Snowflake):
     secondary_color = StringField(default="#ffd254")
     status = StringField(default="", null=True)
     screenTime = EmbeddedDocumentField(ScreenTime, default=None)
-    school = StringField(default="", null=True)  # School's CODE (3-4 Letters)
+    schools = ListField(StringField(), default=None, null=True)  # School's CODE (3-4 Letters)
 
     # Membership
     premium_expiration = DateTimeField(required=False, default=None, null=True)

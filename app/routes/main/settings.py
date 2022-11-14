@@ -119,6 +119,17 @@ def settings():
         ]
     except:
         github = []
+    schools= []
+    import json
+    try:
+        rawschool = list(read.getSchools(session.get("id")))
+        myjson = list(json.load(open("app/schools.json")))
+        for school in myjson:
+            if school["code"] in rawschool:
+                schools.append(school)
+
+    except:
+        schools = []
     return render_template(
         "user/settings.html",
         page="Nebulus - Account Settings",
@@ -134,6 +145,7 @@ def settings():
         schoology=the_schoology,
         classroom=the_google_classroom,
         googleclassroom=user_info,
+        schools = schools,
         canvas=canvas,
         spotify=spotify,
         discord=discord,

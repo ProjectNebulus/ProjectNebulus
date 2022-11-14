@@ -233,17 +233,23 @@ def schoology_connect():
     return str(sc.get_me().name_display + "•" + sc.get_me().primary_email)
 
 
-@internal.route("/oauth/schoology/schoolVerify")
+@internal.route("/oauth/schoology/schoolVerify", methods=["POST"])
 def schoology_school_verify():
-    email_format = request.json.get("email")
+    email_format = request.json.get("email_format")
     domain = request.json.get("domain")
     schoology_key = request.json.get("key")
     schoology_secret = request.json.get("secret")
-    sc = schoolopy.Schoology(schoolopy.Auth(schoology_key, schoology_secret), )
-    email = sc.get_me().primary_email
-    if email_format in str(email):
-        return "Yes"
-    return "No"
+    school = request.json.get("school")
+    try:
+        sc = schoolopy.Schoology(schoolopy.Auth(schoology_key, schoology_secret), )
+        email = sc.get_me().primary_email
+        if email_format in str(email):
+            update.add_school_to_user(session["id"], school)
+            return "Yes"
+        return "No"
+    except Exception as e:
+        print(e)
+        return "No"
 
 
 @internal.route("/oauth/graderoom/connect")

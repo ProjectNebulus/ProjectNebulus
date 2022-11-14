@@ -17,6 +17,9 @@ regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 dictionary = None
 
 
+def getSchools(user_id: str):
+    user = find_user(id=user_id)
+    return list(user.schools)
 def getText(query):
     global dictionary
     if not dictionary:

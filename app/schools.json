@@ -24,7 +24,8 @@
     "_id": "",
     "city": "San Jose, CA, USA",
     "location": "500 Saratoga Ave, San Jose, CA 95129",
-    "code": "HKR"
+    "code": "HKR",
+    "email_format": "harker.org"
   },
   {
     "name": "Chaboya Middle School",
@@ -63,7 +64,8 @@
     "id": "",
     "city": "San Jose, CA, USA",
     "location": "1290 Parkmoor Ave, San Jose, CA 95126",
-    "code": "SDPB"
+    "code": "SDPB",
+    "email": "@stratfordschools.net"
   },
   {
     "name": "Valley Christian School",
@@ -102,7 +104,8 @@
     "id": "",
     "city": "San Jose, CA, USA",
     "location": "1290 Parkmoor Ave, San Jose, CA 95126",
-    "code": "BCP"
+    "code": "BCP",
+    "email": "@bcp.org"
   },
   {
     "name": "Henry M Gunn High School",
