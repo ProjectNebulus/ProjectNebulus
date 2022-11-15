@@ -2,6 +2,8 @@ from datetime import datetime
 
 from mongoengine import *
 
+from static.python.classes import GradingCategory
+
 
 class TermGrade(EmbeddedDocument):
     """
@@ -22,7 +24,8 @@ class TermGrade(EmbeddedDocument):
         - grade_frequency: A dictionary with the frequency of each grade.
     """
 
-    title = StringField(required=True)
+    course = ReferenceField("Course")
+    title = StringField(default=None, null=True)
     start_date = DateTimeField(default=datetime.max)
     end_date = DateTimeField(default=datetime.max)
     grading_categories = ListField(EmbeddedDocumentField("GradingCategory"))
@@ -31,8 +34,18 @@ class TermGrade(EmbeddedDocument):
     def clean(self):
         self.grade = 0
 
+        if not self.grading_categories:
+            default_category = GradingCategory(course=self.course)
+            self.grading_categories = [default_category]
+
+            for assignment in self.course.assignments:
+                assignment.grading_category = default_category
+
         for category in self.grading_categories:
             if not category.grade:
                 category.clean()
 
             self.grade += category.grade * category.weight
+
+    def __str__(self):
+        return f'TermGrade(title="{self.title}", grade={self.grade}, grading_categories={self.grading_categories})'

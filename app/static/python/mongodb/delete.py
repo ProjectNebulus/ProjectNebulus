@@ -18,22 +18,25 @@ from app.static.python.mongodb.read import (
 
 def delete_course(course) -> None:
     """
-    Deletes a user from the database.
+    Deletes a course from the database.
     """
+
+    print(f"Deleting course '{course.name}'...")
+
     for announcement in course.announcements:
-        delete_announcement(announcement)
+        delete_announcement(announcement, False)
 
     for event in course.events:
-        delete_event(event)
+        delete_event(event, False)
 
     for folder in course.folders:
-        delete_folder(folder)
+        delete_folder(folder, False)
 
     for document in course.documents:
-        delete_document(document)
+        delete_document(document, False)
 
-    for assignmnent in course.assignments:
-        delete_assignment(assignmnent)
+    for assignment in course.assignments:
+        delete_assignment(assignment, False)
 
     for i in course.authorizedUsers:
         if course in i.courses:
@@ -41,15 +44,21 @@ def delete_course(course) -> None:
             i.save()
 
     course.delete()
+    print("Done!")
 
 
-def delete_announcement(announcement) -> None:
+def delete_announcement(announcement, save=True) -> None:
     """
     Deletes an announcement from the database.
     """
-    announcement.course.announcements.remove(announcement)
-    announcement.course.save()
-    announcement.delete()
+    if save:
+        announcement.course.announcements.remove(announcement)
+        announcement.course.save()
+
+    try:
+        announcement.delete()
+    except AttributeError:  # Document does not exist
+        pass
 
 
 def delete_user(user_id: str) -> None:
@@ -58,56 +67,80 @@ def delete_user(user_id: str) -> None:
     """
     user = find_user(id=user_id)
     for i in user.courses:
-
         if i.AuthorizedUsers.count() == 1:
             delete_course(i.id)
         else:
             i.authorizedUsers.remove(user)
-    user.delete()
+
+    try:
+        user.delete()
+    except AttributeError:  # Document does not exist
+        pass
 
 
-def delete_folder(folder) -> None:
+def delete_folder(folder, save=True) -> None:
     """
     Deletes a folder from the database.
     """
-    if folder.course:
-        folder.course.folders.remove(folder)
-        folder.course.course.save()
-    else:
-        folder.parent.subfolders.remove(folder)
-        folder.parent.course.save()
-    folder.delete()
+    if save:
+        if folder.course:
+            folder.course.folders.remove(folder)
+            folder.course.course.save()
+        else:
+            folder.parent.subfolders.remove(folder)
+            folder.parent.course.save()
+
+    try:
+        folder.delete()
+    except AttributeError:  # Document does not exist
+        pass
 
 
-def delete_assignment(assignment) -> None:
+def delete_assignment(assignment, save=True) -> None:
     """
     Deletes an assignment from the database.
     """
-    assignment.course.assignments.remove(assignment)
-    assignment.course.save()
-    assignment.delete()
+
+    if save:
+        assignment.course.assignments.remove(assignment)
+        assignment.course.save()
+
+    try:
+        assignment.delete()
+    except AttributeError:  # Document does not exist
+        pass
 
 
-def delete_event(event) -> None:
+def delete_event(event, save=True) -> None:
     """
     Deletes an event from the database.
     """
-    event.course.events.remove(event)
-    event.course.save()
-    event.delete()
+    if save:
+        event.course.events.remove(event)
+        event.course.save()
+
+    try:
+        event.delete()
+    except AttributeError:  # Document does not exist
+        pass
 
 
-def delete_document(document) -> None:
+def delete_document(document, save=True) -> None:
     """
     Deletes a document from the database.
     """
-    if not document.folder:
-        document.course.documents.remove(document)
-        document.course.save()
-    else:
-        document.folder.documents.remove(document)
-        document.folder.save()
-    document.delete()
+    if save:
+        if not document.folder:
+            document.course.documents.remove(document)
+            document.course.save()
+        else:
+            document.folder.documents.remove(document)
+            document.folder.save()
+
+    try:
+        document.delete()
+    except AttributeError:  # Document does not exist
+        pass
 
 
 def delete_grade(grade) -> None:
@@ -116,7 +149,10 @@ def delete_grade(grade) -> None:
     """
     grade.course.grades.remove(grade)
     grade.course.save()
-    grade.delete()
+    try:
+        grade.delete()
+    except AttributeError:  # Document does not exist
+        pass
 
 
 def delete_schoology(user_id: str, schoology_object: Schoology) -> None:

@@ -16,36 +16,16 @@
         //progressJs("#thebody").start();
     </script>
     <script>
-        $(window).on("load", function () {
-            if ($("#progress").length === 0) {
-                $("body").append($("<div></div>").attr("id", "progress"));
-                $("body").append(`
-               <style>
-                   #progress {
-                       position: fixed;
-                       z-index: 999999;
-                       top: 0;
-                       left: -1px;
-                       width: 1%;
-                       height: 3px;
-                       background-image: linear-gradient(to right, #3a88fe, #5e30eb);
-
-                       -moz-transition: width 500ms ease-out,opacity 500ms linear;
-                       -ms-transition: width 500ms ease-out,opacity 500ms linear;
-                       -o-transition: width 500ms ease-out,opacity 500ms linear;
-                       -webkit-transition: width 600ms ease-out,opacity 500ms linear;
-                       transition: width 500ms ease-out,opacity 500ms linear;
-                   }
-
-               </style>
-               `)
+        document.addEventListener("DOMContentLoaded", function () {
+            if (window.top === window && $("#progress").length === 0) {
+                $("body").append($("<div></div>").attr("id", "progress"))
                 $("#progress").width("101%").delay(200).fadeOut(800, function () {
                     $(this).remove();
                 });
             }
         });
 
-        if (localStorage.getItem("enableContextMenu") === null) {
+        if (localStorage.getItem("enableContextMenu") !== null) {
             document.onclick = hideMenu;
             document.oncontextmenu = rightClick;
         }
@@ -106,6 +86,22 @@
             display: inline-block;
             vertical-align: middle;
             margin: 5px;
+        }
+
+        #progress {
+            position: fixed;
+            z-index: 999999;
+            top: 0;
+            left: -1px;
+            width: 1%;
+            height: 3px;
+            background-image: linear-gradient(to right, #3a88fe, #5e30eb);
+
+            -moz-transition: width 500ms ease-out, opacity 500ms linear;
+            -ms-transition: width 500ms ease-out, opacity 500ms linear;
+            -o-transition: width 500ms ease-out, opacity 500ms linear;
+            -webkit-transition: width 600ms ease-out, opacity 500ms linear;
+            transition: width 500ms ease-out, opacity 500ms linear;
         }
     </style>
     <div id="contextMenu"
@@ -202,7 +198,8 @@
     {% if not embedoverride %}
         <meta name="description"
               content="Nebulus is a modern Learning Management System that centralizes everyone’s learning experience into a single application. It’s perfect for Students, Teachers, Parents, and Schools!"/>
-        <meta property="og:title" content="{{ translate("Nebulus.") }} {{ translate("Education. Redefined.") }} {% if translate("Learning") != "Learning" %}({{ translate("Learning") }}){% endif %}"/>
+        <meta property="og:title"
+              content="{{ translate("Nebulus.") }} {{ translate("Education. Redefined.") }} {% if translate("Learning") != "Learning" %}({{ translate("Learning") }}){% endif %}"/>
         <meta property="og:type" content="website"/>
         <meta property="og:url" content="https://nebulus.app"/>
         <meta property="og:image"

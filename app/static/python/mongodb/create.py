@@ -41,7 +41,7 @@ def generateSchoologyObject(_id: str) -> schoolopy.Schoology:
     return sc
 
 
-def create_course(data: dict, save=True) -> Course:
+def create_course(data: dict, course=None, save=True) -> Course:
     user = read.find_user(id=session["id"])
 
     if data.get("avatar"):
@@ -99,10 +99,11 @@ def create_user(data: dict) -> str | list[str | User]:
     return ["0", user]
 
 
-def createEvent(data: dict, save=True) -> Event:
+def createEvent(data: dict, course=None, save=True) -> Event:
     event = Event(**data)
     if save and not debug_importing:
-        course = event.course
+        if not course:
+            course = event.course
         course.events.append(event)
         event.save(force_insert=True)
 
@@ -123,18 +124,18 @@ def createNebulusDocument(data: dict, user_id: str) -> NebulusDocument:
     return doc
 
 
-def createGrades(data: dict, save=True) -> Grades:
+def createGrades(data: dict, course=None, save=True) -> Grades:
     grades = Grades(**data)
     if save and not debug_importing:
-        course = grades.course
+        if not course:
+            course = grades.course
         course.grades.append(grades)
         grades.save(force_insert=True)
-        course.save()
 
     return grades
 
 
-def createDocumentFile(data: dict, save=True) -> DocumentFile:
+def createDocumentFile(data: dict, course=None, save=True) -> DocumentFile:
     file_ending = ""
     if data.get("file_ending"):
         file_ending = data["file_ending"]
@@ -146,10 +147,12 @@ def createDocumentFile(data: dict, save=True) -> DocumentFile:
         document_file.save(force_insert=True)
 
         folder = document_file.folder
-        course = document_file.course
-        if not folder:
+        if not course:
+            course = document_file.course
+
+        if course:
             course.documents.append(document_file)
-        elif not course:
+        elif folder:
             folder.documents.append(document_file)
             folder.save()
         else:
@@ -158,31 +161,33 @@ def createDocumentFile(data: dict, save=True) -> DocumentFile:
     return document_file
 
 
-def createFolder(data: dict, save=True) -> Folder:
+def createFolder(data: dict, course=None, save=True) -> Folder:
     folder = Folder(**data)
     if save and not debug_importing:
-        course = folder.course
+        if not course:
+            course = folder.course
         course.folders.append(folder)
         folder.save(force_insert=True)
-        course.save()
 
     return folder
 
 
-def createAnnouncement(data: dict, save=True) -> Announcement:
+def createAnnouncement(data: dict, course=None, save=True) -> Announcement:
     announcement = Announcement(**data)
     if save and not debug_importing:
-        course = announcement.course
+        if not course:
+            course = announcement.course
         course.announcements.append(announcement)
         announcement.save(force_insert=True)
 
     return announcement
 
 
-def createAssignment(data: dict, save=True) -> Assignment:
+def createAssignment(data: dict, course=None, save=True) -> Assignment:
     assignment = Assignment(**data)
     if save and not debug_importing:
-        course = assignment.course
+        if not course:
+            course = assignment.course
         assignment.save(force_insert=True, validate=False)
         course.assignments.append(assignment)
 
@@ -209,6 +214,7 @@ def createAvatar(data: dict, parent=None) -> Avatar:
         avatar.avatar_url += "." + file_ending
 
     parent.avatar = avatar
+    parent.save()
     return avatar
 
 

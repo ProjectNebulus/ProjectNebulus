@@ -2,6 +2,7 @@ import datetime
 
 import requests
 from flask import render_template, request, session
+from mongoengine import DoesNotExist
 
 from app.static.python.classes import Assignment, Course, Grades, User
 from app.static.python.mongodb.read import find_user, getText, sort_course_events, get_user_courses
@@ -45,17 +46,19 @@ def course_page(page, **kwargs):
         iframe_src += page + "?iframe=true"
         page = "course"
 
-    elif page == "grades" and not course.grades:
-        course.grades = Grades(course=course, student=find_user(id=session["id"]))
-
+    elif page == "grades":
         try:
             assert course.grades.grade is not None
-        except (ValueError, AssertionError):
+        except (AttributeError, AssertionError, DoesNotExist):
+            course.grades = Grades(course=course, student=find_user(id=session["id"]))
+
+        if not course.grades.terms:
             course.grades.clean()
 
-        print(f"Course: {course.name} (id={course_id})")
+        print(f"Course: {course.name} (id: {course_id})")
         print("Percent:", course.grades.grade)
         print("Letter:", course.grades.letter)
+        print("Terms:", *course.grades.terms)
 
     return render_template(
         f"courses/{page}.html",

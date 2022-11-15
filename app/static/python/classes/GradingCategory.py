@@ -5,12 +5,12 @@ class GradingCategory(EmbeddedDocument):
     CALC_PERCENTAGE = 1
     CALC_TOTAL_PTS = 2
 
-    weight = FloatField(required=True, description="Weight (in decimal) of this category.")
-    course = ReferenceField("Course", required=True)
-    title = StringField(required=True)
+    course = ReferenceField("Course")
+    weight = FloatField(default=1, description="Weight (in decimal) of this category.")
+    title = StringField(default=None, null=True, required=True)
     subcategories = ListField(EmbeddedDocumentField("GradingCategory"), required=False, default=[])
     grade = FloatField(required=False)
-    calculation_type = IntField(default=1)
+    calculation_type = IntField(default=CALC_PERCENTAGE)
     imported_id = StringField(required=True)
 
     def clean(self):
@@ -39,7 +39,10 @@ class GradingCategory(EmbeddedDocument):
                     if assignment.grading_category is self:
                         grades.append(assignment.points / assignment.grade)
 
-                self.grade = sum(grades) / len(grades)
+                if len(grades) > 0:
+                    self.grade = sum(grades) / len(grades)
+                else:
+                    self.grade = 1
 
     def __str__(self):
         return f'GradingCategory(title="{self.title}", weight={self.weight})'

@@ -11,7 +11,6 @@ function deleteCourse(id, courseElement) {
     const header = courseElement.querySelector("div.text-left div.-mt-1");
 
     if (!confirm('Delete course "' + header.children[0].innerText.trim() + '"? This is irreversible!')) return;
-    if (!confirm('Are you very sure you want to delete this course?')) return;
     header.children[1].innerText = "Deleting...";
 
     let deleteETA = Math.floor(parseInt(courseElement.getAttribute("total-resources")) * 0.4);

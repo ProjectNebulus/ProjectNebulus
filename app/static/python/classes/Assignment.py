@@ -25,10 +25,6 @@ class Assignment(Snowflake):
     due = DateTimeField(
         description="The due date of the assignment.", default=datetime.now()
     )
-    status = StringField(
-        description="The status of the assignment. Can be 'Not Started', 'Submitted', or 'Graded'.",
-        default="Not Started",
-    )
     allow_submissions = BooleanField(default=True, description="Whether the assignment allows submissions.")
     title = StringField(required=True, description="The title of the assignment.")
     points = FloatField(
@@ -53,8 +49,8 @@ class Assignment(Snowflake):
     description = StringField(
         default="", null=True, description="The description of the assignment."
     )
-    period = EmbeddedDocumentField("TermGrade")
-    grading_category = EmbeddedDocumentField("GradingCategory")
+    period = EmbeddedDocumentField("TermGrade", default=None)
+    grading_category = EmbeddedDocumentField("GradingCategory", default=None)
 
     def __str__(self):
         return f'Assignment(title="{self.title}", grade={self.grade}, points={self.points}, due={self.due.date()}, grading_category={self.grading_category})'

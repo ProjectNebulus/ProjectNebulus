@@ -20,6 +20,8 @@ dictionary = None
 def getSchools(user_id: str):
     user = find_user(id=user_id)
     return list(user.schools)
+
+
 def getText(query):
     global dictionary
     if not dictionary:
@@ -299,14 +301,16 @@ def sort_user_events(
 
     sorted_events = []
     now = datetime.now()
-    # filter out events that aren't due
+
     for one_event in events_assessments_assignments:
         try:
             due = one_event.due
         except AttributeError:
             due = one_event.date
 
-        if "9999" not in str(due) and ((one_event._cls != "Assignment" or one_event.submitDate is None) or now < due):
+        if ("9999" not in str(due) and not (one_event._cls == "Assignment" and (
+                not one_event.allow_submissions or one_event.grade / one_event.points < 0.5))) and (
+                now < due or (one_event._cls == "Assignment" and one_event.submitDate is None)):
             sorted_events.append(one_event)
 
     sorted_events = sorted(sorted_events, key=sortByDateTime)[load_start: load_start + max_events]

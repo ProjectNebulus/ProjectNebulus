@@ -10,6 +10,7 @@ from mongoengine import (
 )
 
 from .Avatar import Avatar
+from .Grades import Grades
 from .Snowflake import Snowflake
 
 templates = (
@@ -64,5 +65,5 @@ class Course(Snowflake):
                 avatar_url="https://app.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg"
             )
 
-        # if not self.grades:
-        #     self.grades = Grades(course=self)
+        if not self.grades:
+            self.grades = Grades(course=self)

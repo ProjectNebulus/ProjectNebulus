@@ -1,5 +1,5 @@
 let actions, pageTitle, createButton;
-$(window).on('load', function () {
+document.addEventListener("DOMContentLoaded", function () {
     actions = document.getElementsByClassName('link');
     pageTitle = document.getElementById('page-title');
     createButton = document.getElementById('create-resource');
@@ -58,7 +58,8 @@ $(window).on('load', function () {
             alert(data);
         });
     });
-});
+})
+;
 
 function setCreateButton(title) {
     for (const a of actions) a.innerHTML = '';
