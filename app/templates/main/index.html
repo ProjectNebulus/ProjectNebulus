@@ -8,6 +8,13 @@
             -webkit-text-fill-color: transparent;
             font-weight: bolder;
         }
+        [data-aos="fade-out"] {
+            opacity: 1;
+            transition-property: opacity;
+        }
+        [data-aos="fade-out"].aos-animate {
+            opacity: 0;
+        }
     </style>
     <script>
         window.onload = function () {
@@ -16,7 +23,7 @@
             }
         }
     </script>
-    <div data-aos="fade-left" id="v2-alert" role="alert" style="
+    <div data-aos="fade-left fade-out" id="v2-alert" role="alert" style="
    width: 35rem;
    background: rgb(31 41 55 / 0.75);margin:15px;
    " class="p-4 backdrop-blur-sm fixed right-0 z-30 rounded-lg aos-init">
@@ -55,7 +62,7 @@
     {% include "utils/navbar.html" %}
     <div class="flex" id="homeBanner"
          style="padding: 30px; text-align: center; margin-bottom: 200px; background-size:cover !important; background: linear-gradient(45deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/static/images/nebulusCats/IMG_1134.png'); height: 90%; min-height: 500px">
-        <div style="margin-top: 5vw" class="ml-6 w-full" data-aos="fade-left">
+        <div style="margin-top: 5vw" class="ml-6 w-full" data-aos="fade-left fade-out">
             <p
                class="text-8xl text-white dark:text-white "
                style="font-weight: 800;">{{ translate("Nebulus.") }}</p>
@@ -91,7 +98,7 @@
             </a>
         </div>
     </div>
-    <div  data-aos="fade-right" data-aos-duration="1000" class="bg-white dark:bg-gray-900"
+    <div  data-aos="fade-right fade-out" data-aos-duration="1000" class="bg-white dark:bg-gray-900"
          style="padding-bottom: 50px; padding-top: 50px;margin-left: 20px;margin-right: 20px;">
         <div class="" style="
          display: inline-block;
@@ -153,7 +160,7 @@
             "></div>
         </div>
     </div>
-    <div  data-aos="fade-left" data-aos-duration="1000" class="bg-white dark:bg-gray-900"
+    <div  data-aos="fade-left fade-out" data-aos-duration="1000" class="bg-white dark:bg-gray-900"
          style=" padding-bottom: 50px; padding-top: 50px; margin-left: 20px;  margin-right: 20px;
        ">
         <div style="
@@ -217,7 +224,7 @@
             </a>
         </div>
     </div>
-    <div  data-aos="fade-right" data-aos-duration="1000" class="bg-white dark:bg-gray-900"
+    <div  data-aos="fade-right fade-out" data-aos-duration="1000" class="bg-white dark:bg-gray-900"
          style="padding-bottom: 50px; padding-top: 50px;margin-left: 20px;margin-right: 20px;">
         <div class="" style="
          display: inline-block;
@@ -281,7 +288,7 @@
             "></div>
         </div>
     </div>
-    <div  data-aos="fade-left" data-aos-duration="1000" class="bg-white dark:bg-gray-900"
+    <div  data-aos="fade-left fade-out" data-aos-duration="1000" class="bg-white dark:bg-gray-900"
           style=" padding-bottom: 50px; padding-top: 50px; margin-left: 20px;  margin-right: 20px;
        ">
         <div style="
@@ -342,7 +349,7 @@
             </a>
         </div>
     </div>
-    <div  data-aos="fade-right"  data-aos-duration="1000" class="bg-white dark:bg-gray-900"
+    <div  data-aos="fade-right fade-out"  data-aos-duration="1000" class="bg-white dark:bg-gray-900"
           style="padding-bottom: 50px; padding-top: 50px;margin-left: 20px;margin-right: 20px;">
         <div class="" style="
          display: inline-block;
@@ -404,7 +411,7 @@
             "></div>
         </div>
     </div>
-    <div  data-aos="fade-left"  data-aos-duration="1000" class="bg-white dark:bg-gray-900"
+    <div  data-aos="fade-left fade-out"  data-aos-duration="1000" class="bg-white dark:bg-gray-900"
           style=" padding-bottom: 50px; padding-top: 50px; margin-left: 20px;  margin-right: 20px;
        ">
         <div style="
@@ -465,7 +472,7 @@
             </a>
         </div>
     </div>
-    <div  data-aos="fade-right" data-aos-duration="1000" class="bg-white dark:bg-gray-900"
+    <div  data-aos="fade-right fade-out" data-aos-duration="1000" class="bg-white dark:bg-gray-900"
           style="padding-bottom: 50px; padding-top: 50px;margin-left: 20px;margin-right: 20px;">
         <div class="" style="
          display: inline-block;
@@ -528,7 +535,7 @@
             "></div>
         </div>
     </div>
-    <div  data-aos="fade-left" data-aos-duration="1000" class="bg-white dark:bg-gray-900"
+    <div  data-aos="fade-left fade-out" data-aos-duration="1000" class="bg-white dark:bg-gray-900"
           style=" padding-bottom: 50px; padding-top: 50px; margin-left: 20px;  margin-right: 20px;
        ">
         <div style="
@@ -591,7 +598,7 @@
             </a>
         </div>
     </div>
-    <div  data-aos="fade-right" data-aos-duration="1000" class="bg-white dark:bg-gray-900"
+    <div  data-aos="fade-right fade-out" data-aos-duration="1000" class="bg-white dark:bg-gray-900"
           style="padding-bottom: 50px; padding-top: 50px;margin-left: 20px;margin-right: 20px;">
         <div class="" style="
          display: inline-block;
@@ -652,7 +659,7 @@
             "></div>
         </div>
     </div>
-    <div  data-aos="fade-left" data-aos-duration="1000" class="bg-white dark:bg-gray-900"
+    <div  data-aos="fade-left fade-out" data-aos-duration="1000" class="bg-white dark:bg-gray-900"
           style=" padding-bottom: 50px; padding-top: 50px; margin-left: 20px;  margin-right: 20px;
        ">
         <div style="

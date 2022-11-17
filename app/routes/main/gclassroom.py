@@ -9,8 +9,8 @@ from googleapiclient.discovery import build
 
 from . import main_blueprint
 from .utils import logged_in
-
 # -*- coding: utf-8 -*-
+from ...static.python.mongodb.read import getText
 
 os.environ["OAUTHLIB_RELAX_TOKEN_SCOPE"] = "None"
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
@@ -67,7 +67,7 @@ def gtest_api_request():
     print(user_info)
     user_info = [user_info["name"], user_info["picture"]]
 
-    return render_template("user/connections/connectClassroom.html", data=user_info)
+    return render_template("user/connections/connectClassroom.html", data=user_info, translate = getText)
     # return flask.jsonify(courses)
 
 

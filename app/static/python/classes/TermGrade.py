@@ -2,7 +2,7 @@ from datetime import datetime
 
 from mongoengine import *
 
-from static.python.classes import GradingCategory
+from app.static.python.classes import GradingCategory
 
 
 class TermGrade(EmbeddedDocument):
