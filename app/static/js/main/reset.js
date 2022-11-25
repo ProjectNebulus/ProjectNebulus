@@ -19,7 +19,7 @@ function sendEmail() {
 
     const request = $.ajax({
         type: 'POST',
-        url: '/api/v1/internal/reset-email',
+        url: '/api/v1/internal/reset-psw',
         contentType: 'application/json',
         data: JSON.stringify({username: emailInput.value})
     });

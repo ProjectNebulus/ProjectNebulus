@@ -2,7 +2,7 @@ from datetime import datetime
 
 from mongoengine import *
 
-from app.static.python.classes import GradingCategory
+from .GradingCategory import GradingCategory
 
 
 class TermGrade(EmbeddedDocument):
@@ -25,7 +25,7 @@ class TermGrade(EmbeddedDocument):
     """
 
     course = ReferenceField("Course")
-    title = StringField(default=None, null=True)
+    title = StringField(default=None)
     start_date = DateTimeField(default=datetime.max)
     end_date = DateTimeField(default=datetime.max)
     grading_categories = ListField(EmbeddedDocumentField("GradingCategory"))
@@ -42,10 +42,19 @@ class TermGrade(EmbeddedDocument):
                 assignment.grading_category = default_category
 
         for category in self.grading_categories:
+            if not category.course:
+                category.course = self.course
+
             if not category.grade:
                 category.clean()
 
-            self.grade += category.grade * category.weight
+            if category.weight:
+                self.grade += category.grade * category.weight
+            else:
+                self.grade += category.grade
 
     def __str__(self):
-        return f'TermGrade(title="{self.title}", grade={self.grade}, grading_categories={self.grading_categories})'
+        return f'TermGrade(title="{self.title}", grade={self.grade})'
+
+    def __hash__(self):
+        return hash(" ".join(map(str, self._fields_ordered)))

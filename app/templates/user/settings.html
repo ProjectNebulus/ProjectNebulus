@@ -1,6 +1,7 @@
 <!--Extend with Jinja!-->
 {% extends "layout.html" %}
 {% block main %}
+
     <head>
         <style>
             /* Hide scrollbar for Chrome, Safari and Opera */
@@ -10,27 +11,36 @@
 
             /* Hide scrollbar for IE, Edge and Firefox */
             body {
-                -ms-overflow-style: none; /* IE and Edge */
-                scrollbar-width: none; /* Firefox */
+                -ms-overflow-style: none;
+                /* IE and Edge */
+                scrollbar-width: none;
+                /* Firefox */
             }
 
             ::marker {
                 display: none !important;
             }
 
-            aside:not(#sidebar) span[onclick] span.material-icons, aside:not(#sidebar) span[onclick] svg {
+            aside:not(#sidebar) span[onclick] span.material-icons,
+            aside:not(#sidebar) span[onclick] svg {
                 margin: 0 1rem 0 0.5rem;
                 color: gray;
                 fill: gray;
             }
 
-            .dark aside:not(#sidebar) span[onclick] span.material-icons, .dark aside:not(#sidebar) span[onclick] svg {
+            .dark aside:not(#sidebar) span[onclick] span.material-icons,
+            .dark aside:not(#sidebar) span[onclick] svg {
                 margin: 0 1rem 0 0.5rem;
                 color: lightgray;
                 fill: lightgray;
             }
+
+            #account img {
+                display: none;
+            }
         </style>
     </head>
+
     <body>
     {% include "utils/navbar.html" %}
     <script src="/static/js/user/settings.js"></script>
@@ -42,67 +52,67 @@
                 <h1 class="text-lg text-gray-500 uppercase ml-4 text-xl">Account Settings</h1>
                 <ul class="mt-4">
                     <li>
-                                <span onclick="open_pls('generalSettings')"
-                                      class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 bg-gray-300 dark:bg-gray-600">
-                                    <span class="material-icons">settings</span>
-                                    General
-                                </span>
+            <span onclick="openTab('generalSettings')"
+                  class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 bg-gray-300 dark:bg-gray-600">
+                            <span class="material-icons">settings</span>
+            General
+            </span>
                     </li>
                     <li>
-                                <span onclick="open_pls('profileSettings')"
-                                      class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    <span class="material-icons">person</span>
-                                    Profile
-                                </span>
+            <span onclick="openTab('profileSettings')"
+                  class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <span class="material-icons">person</span>
+            Profile
+            </span>
                     </li>
                     <li>
-                                <span onclick="open_pls('connectionSettings')"
-                                      class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    <span class="material-icons">link</span>
-                                    Connections
-                                </span>
+            <span onclick="openTab('connectionSettings')"
+                  class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <span class="material-icons">link</span>
+            Connections
+            </span>
                     </li>
                     <li>
-                                <span onclick="open_pls('schoolSettings')"
-                                      class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    <span class="material-icons">school</span>
-                                    School
-                                </span>
+            <span onclick="openTab('schoolSettings')"
+                  class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <span class="material-icons">school</span>
+            School
+            </span>
                     </li>
                     <li>
-                                <span onclick="open_pls('appearanceSettings')"
-                                      class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    <span class="material-icons">image</span>
-                                    Appearance
-                                </span>
+            <span onclick="openTab('appearanceSettings')"
+                  class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <span class="material-icons">image</span>
+            Appearance
+            </span>
                     </li>
                     <li>
-                                <span onclick="open_pls('themeSettings')"
-                                      class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    <span class="material-icons">palette</span>
-                                    Customizations
-                                </span>
+            <span onclick="openTab('themeSettings')"
+                  class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <span class="material-icons">palette</span>
+            Customizations
+            </span>
                     </li>
                     <li>
-                                <span onclick="open_pls('chatSettings')"
-                                      class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    <span class="material-icons">forum</span>
-                                    Chat
-                                </span>
+            <span onclick="openTab('chatSettings')"
+                  class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <span class="material-icons">forum</span>
+            Chat
+            </span>
                     </li>
                     <li>
-                                <span onclick="open_pls('badgeSettings')"
-                                      class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    <span class="material-icons">badge</span>
-                                    Staff
-                                </span>
+            <span onclick="openTab('badgeSettings')"
+                  class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <span class="material-icons">badge</span>
+            Staff
+            </span>
                     </li>
                     <li>
-                                <span onclick="open_pls('achievementSettings')"
-                                      class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="w-6 h-6"
-                                         viewBox="0 0 31.481 31.481">
-                                        <g>
+            <span onclick="openTab('achievementSettings')"
+                  class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="w-6 h-6"
+                                 viewBox="0 0 31.481 31.481">
+                                <g>
                                         <path d="M31.455,6.595c0.143-1.89-0.301-3.312-1.322-4.224c-0.957-0.858-2.183-1.03-3.002-1.032   c0.036-0.369,0.065-0.732,0.075-1.066H4.273c0.01,0.333,0.039,0.697,0.077,1.066C3.529,1.342,2.306,1.513,1.347,2.371   c-1.019,0.912-1.463,2.334-1.32,4.224c0.398,5.27,4.929,9.679,11.855,11.611c0.518,0.452,1.046,0.851,1.594,1.13   c-0.052,0.198-0.09,0.402-0.09,0.616c0,0.726,0.335,1.367,0.851,1.799v6.603h-1.229c-1.224,0-2.348,0.679-2.919,1.762l-0.576,1.093   h12.455l-0.577-1.094c-0.571-1.083-1.694-1.761-2.919-1.761h-1.228v-6.603c0.517-0.432,0.85-1.073,0.85-1.799   c0-0.214-0.037-0.418-0.09-0.616c0.548-0.279,1.075-0.679,1.595-1.13C26.525,16.274,31.056,11.865,31.455,6.595z M29.137,3.497   c0.647,0.585,0.923,1.589,0.814,2.984c-0.256,3.397-2.549,6.406-6.251,8.459c-0.247,0.137-0.557,0.092-0.754-0.111   c-0.198-0.203-0.235-0.513-0.092-0.757c2.019-3.441,3.489-7.776,4.075-11.224C27.478,2.825,28.453,2.88,29.137,3.497z M1.528,6.482   C1.422,5.087,1.698,4.083,2.344,3.498C3.029,2.88,4.002,2.826,4.551,2.85c0.587,3.448,2.057,7.782,4.075,11.223   c0.144,0.244,0.105,0.554-0.092,0.756c-0.198,0.203-0.506,0.249-0.754,0.112C4.08,12.887,1.785,9.878,1.528,6.482z">
                                         </path>
                                         </g>
@@ -111,53 +121,53 @@
                                 </span>
                     </li>
                     <li>
-                                <span onclick="open_pls('screentimeSettings')"
-                                      class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    <span class="material-icons">timer</span>
-                                    Screen Time
-                                </span>
+            <span onclick="openTab('screentimeSettings')"
+                  class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <span class="material-icons">timer</span>
+            Screen Time
+            </span>
                     </li>
                     <li>
-                                <span onclick="open_pls('pointSettings')"
-                                      class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    <span class="material-icons">monetization_on</span>
-                                    Points
-                                </span>
+            <span onclick="openTab('pointSettings')"
+                  class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <span class="material-icons">monetization_on</span>
+            Points
+            </span>
                     </li>
                     <li>
-                                <span onclick="open_pls('scheduleSettings')"
-                                      class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    <span class="material-icons">schedule</span>
-                                    Bell Schedule
-                                </span>
+            <span onclick="openTab('scheduleSettings')"
+                  class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <span class="material-icons">schedule</span>
+            Bell Schedule
+            </span>
                     </li>
                     <li>
-                                <span onclick="open_pls('securitySettings')"
-                                      class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    <span class="material-icons">lock</span>
-                                    Security
-                                </span>
+            <span onclick="openTab('securitySettings')"
+                  class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <span class="material-icons">lock</span>
+            Security
+            </span>
                     </li>
                     <li>
-                                <span onclick="open_pls('reportSettings')"
-                                      class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    <span class="material-icons">report</span>
-                                    Reports
-                                </span>
+            <span onclick="openTab('reportSettings')"
+                  class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <span class="material-icons">report</span>
+            Reports
+            </span>
                     </li>
                     <li>
-                                <span onclick="open_pls('languageSettings')"
-                                      class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    <span class="material-icons">language</span>
-                                    Language
-                                </span>
+            <span onclick="openTab('languageSettings')"
+                  class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <span class="material-icons">language</span>
+            Language
+            </span>
                     </li>
                     <li>
-                                <span onclick="open_pls('changelog')"
-                                      class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    <span class="material-icons">tune</span>
-                                    Change Log
-                                </span>
+            <span onclick="openTab('changelog')"
+                  class="flex items-center p-2 my-1 text-base cursor-pointer font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <span class="material-icons">tune</span>
+            Change Log
+            </span>
                     </li>
 
                 </ul>
@@ -174,7 +184,7 @@
             <div id="changelog" style=" display:none;">
 
                 <h1 class="text-6xl">
-                    <span style="
+          <span style="
     background: linear-gradient(to left, #42cbf5, #42cbf5, #42f578);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -186,7 +196,8 @@
     vertical-align: middle;
     background: linear-gradient(to left, #42cbf57a, #42f5782e);
     color: white;
-">Alpha Build</span></h1>
+">Alpha Build</span>
+                </h1>
                 <div style="height: 36rem" class="overflow-auto p-5">
                     <ol class="relative border-l border-gray-200 dark:border-gray-700" style="
     margin-top: 30px;
@@ -194,7 +205,7 @@
     border-color: #55555569;
 ">
                         <li class="mb-10 ml-6">
-        <span class="flex absolute -left-3 justify-center items-center w-6 h-6 bg-blue-200 rounded-full ring-8 dark:ring-gray-900 dark:bg-blue-900">
+              <span class="flex absolute -left-3 justify-center items-center w-6 h-6 bg-blue-200 rounded-full ring-8 dark:ring-gray-900 dark:bg-blue-900">
             <svg aria-hidden="true" class="w-3 h-3 text-blue-600 dark:text-blue-400" fill="currentColor"
                  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd"
                                                                               d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
@@ -221,7 +232,7 @@
                                 Download Full Description</a>
                         </li>
                         <li class="mb-10 ml-6">
-        <span class="flex absolute -left-3 justify-center items-center w-6 h-6 bg-blue-200 rounded-full ring-8 dark:ring-gray-900 dark:bg-blue-900">
+              <span class="flex absolute -left-3 justify-center items-center w-6 h-6 bg-blue-200 rounded-full ring-8 dark:ring-gray-900 dark:bg-blue-900">
             <svg aria-hidden="true" class="w-3 h-3 text-blue-600 dark:text-blue-400" fill="currentColor"
                  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd"
                                                                               d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
@@ -245,7 +256,7 @@
                             Download Full Description</a>
                         </li>
                         <li class="ml-6">
-        <span class="flex absolute -left-3 justify-center items-center w-6 h-6 bg-blue-200 rounded-full ring-8 dark:ring-gray-900 dark:bg-blue-900">
+              <span class="flex absolute -left-3 justify-center items-center w-6 h-6 bg-blue-200 rounded-full ring-8 dark:ring-gray-900 dark:bg-blue-900">
             <svg aria-hidden="true" class="w-3 h-3 text-blue-600 dark:text-blue-400" fill="currentColor"
                  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd"
                                                                               d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
@@ -281,21 +292,16 @@
                 <div class="flex place-items-center gap-2">
                     <div class="relative">
                         <div class="flex inset-y-0 left-0 absolute items-center pl-3 pointer-events-none">
-                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400"
-                                 fill="currentColor"
-                                 viewBox="0 0 20 20"
-                                 xmlns="http://www.w3.org/2000/svg">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
+                                 viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
                                 <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
                             </svg>
                         </div>
-                        <input style="width:400px"
-                               disabled
-                               type="text"
-                               value="{{ session.get('username') }}"
+                        <input style="width:400px" disabled type="text" value="{{ session.get('username') }}"
                                class="bg-gray-50/75 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block dark:bg-gray-800/50 dark:border-gray-600 dark:focus:border-blue-500 dark:placeholder-gray-400 dark:text-white w-full pl-10 p-2.5 dark:focus:ring-blue-500">
                     </div>
-                    <button onclick="changeSettingsModal('username')" class="text-white bg-blue-700 hover:bg-blue-800
+                    <button onclick="openSettingsModal('username')" class="text-white bg-blue-700 hover:bg-blue-800
                          focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center
                           dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Change
@@ -308,24 +314,18 @@
                 <div class="flex place-items-center gap-2">
                     <div class="relative">
                         <div class="flex inset-y-0 left-0 absolute items-center pl-3 pointer-events-none">
-                            <svg class="w-6 h-6"
-                                 fill="#9BA2AE"
-                                 viewBox="0 0 20 20"
-                                 xmlns="http://www.w3.org/2000/svg">
+                            <svg class="w-6 h-6" fill="#9BA2AE" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
                                       d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                                       clip-rule="evenodd">
                                 </path>
                             </svg>
                         </div>
-                        <input style="width:400px;"
-                               disabled
-                               type="password"
-                               value="{{ session.get('pswLen') * '*' }}"
+                        <input style="width:400px;" disabled type="password" value="{{ session.get('pswLen') * '*' }}"
                                class="bg-gray-50/75 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-800/50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                placeholder="">
                     </div>
-                    <button onclick="changeSettingsModal('password')" class="text-white bg-blue-700 hover:bg-blue-800
+                    <button onclick="openSettingsModal('password')" class="text-white bg-blue-700 hover:bg-blue-800
                      focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center
                       dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Change
@@ -337,29 +337,22 @@
                 <div class="flex place-items-center gap-2">
                     <div class="relative">
                         <div class="flex inset-y-0 left-0 absolute items-center pl-3 pointer-events-none">
-                            <svg class="w-6 h-6"
-                                 fill="#9BA2AE"
-                                 viewBox="0 0 20 20"
-                                 xmlns="http://www.w3.org/2000/svg">
+                            <svg class="w-6 h-6" fill="#9BA2AE" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
                                       clip-rule="evenodd"></path>
                             </svg>
                         </div>
-                        <input style="width:400px;"
-                               disabled
-                               type="text"
-                               value="{{ session.get('email') }}"
+                        <input style="width:400px;" disabled type="text" value="{{ session.get('email') }}"
                                class="bg-gray-50/75 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-800/50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
-                    <button onclick="changeSettingsModal('email')" class="text-white bg-blue-700 hover:bg-blue-800
+                    <button onclick="openSettingsModal('email')" class="text-white bg-blue-700 hover:bg-blue-800
                      focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center
                       dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Change
                     </button>
                 </div>
                 <label for="message" class="block mt-6 mb-2 text-sm uppercase dark:text-gray-500">Bio</label>
-                <textarea id="message" rows="4" style="min-height: 2rem; max-height: 30rem"
-                          class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300
+                <textarea id="message" rows="4" style="min-height: 2rem; max-height: 30rem" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300
                        focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800/50 dark:border-gray-600
                         dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           placeholder="(Markdown Supported) Write your biography..."></textarea>
@@ -379,171 +372,99 @@
                     <img style="float:left;
                                         margin:10px;"
                          class="cat1 pfp pfp_selected rounded-full border-gray-300 border-none w-20 h-20 bg-gray-300   dark:bg-gray-900 dark:hover:bg-gray-800 p-3"
-                         height="50"
-                         width="50"
-                         src="/static/images/nebulusCats/black_cat.png"
-                         alt="Pfp selection"/>
+                         height="50" width="50" src="/static/images/nebulusCats/black_cat.png" alt="Pfp selection"/>
                     <img style="float:left;
                                         margin:10px;"
                          class="cat2 pfp rounded-full border-gray-300 border-none w-20 h-20 bg-gray-300   dark:bg-gray-900 dark:hover:bg-gray-800 p-3"
-                         height="50"
-                         width="50"
-                         src="/static/images/nebulusCats/blue_cat.png"
-                         alt="Pfp selection"/>
+                         height="50" width="50" src="/static/images/nebulusCats/blue_cat.png" alt="Pfp selection"/>
                     <img style="float:left;
                                         margin:10px;"
                          class="cat3 pfp rounded-full border-gray-300 border-none w-20 h-20 bg-gray-300   dark:bg-gray-900 dark:hover:bg-gray-800 p-3"
-                         height="50"
-                         width="50"
-                         src="/static/images/nebulusCats/green_cat.png"
-                         alt="Pfp selection"/>
+                         height="50" width="50" src="/static/images/nebulusCats/green_cat.png" alt="Pfp selection"/>
                     <img style="float:left;
                                         margin:10px;"
                          class="cat4 pfp rounded-full border-gray-300 border-none w-20 h-20 bg-gray-300   dark:bg-gray-900 dark:hover:bg-gray-800 p-3"
-                         height="50"
-                         width="50"
-                         src="/static/images/nebulusCats/pink_cat.png"
-                         alt="Pfp selection"/>
+                         height="50" width="50" src="/static/images/nebulusCats/pink_cat.png" alt="Pfp selection"/>
                     <img style="float:left;
                                         margin:10px;"
                          class="cat5 pfp rounded-full border-gray-300 border-none w-20 h-20 bg-gray-300   dark:bg-gray-900 dark:hover:bg-gray-800 p-3"
-                         height="50"
-                         width="50"
-                         src="/static/images/nebulusCats/yellow_cat.png"
-                         alt="Pfp selection"/>
+                         height="50" width="50" src="/static/images/nebulusCats/yellow_cat.png" alt="Pfp selection"/>
                     <img style="float:left;
                                         margin:10px;"
                          class="cat6 pfp rounded-full border-gray-300 border-none w-20 h-20 bg-gray-300   dark:bg-gray-900 dark:hover:bg-gray-800 p-3"
-                         height="50"
-                         width="50"
-                         src="/static/images/nebulusCats/blurple_cat.png"
-                         alt="Pfp selection"/>
+                         height="50" width="50" src="/static/images/nebulusCats/blurple_cat.png" alt="Pfp selection"/>
                     <img style="float:left;
                                         margin:10px;"
                          class="cat7 pfp rounded-full border-gray-300 border-none w-20 h-20 bg-gray-300   dark:bg-gray-900 dark:hover:bg-gray-800 p-3"
-                         height="50"
-                         width="50"
-                         src="/static/images/nebulusCats/red_cat.png"
-                         alt="Pfp selection"/>
+                         height="50" width="50" src="/static/images/nebulusCats/red_cat.png" alt="Pfp selection"/>
                     <img style="float:left;
                                         margin:10px;"
                          class="cat8 pfp rounded-full border-gray-300 border-none w-20 h-20 bg-gray-300   dark:bg-gray-900 dark:hover:bg-gray-800 p-3"
-                         height="50"
-                         width="50"
-                         src="/static/images/nebulusCats/100_cat.png"
-                         alt="Pfp selection"/>
+                         height="50" width="50" src="/static/images/nebulusCats/100_cat.png" alt="Pfp selection"/>
                     <img style="float:left;
                                         margin:10px;"
                          class="cat9 pfp rounded-full border-gray-300 border-none w-20 h-20 bg-gray-300   dark:bg-gray-900 dark:hover:bg-gray-800 p-3"
-                         height="50"
-                         width="50"
-                         src="/static/images/nebulusCats/river_cat.png"
-                         alt="Pfp selection"/>
+                         height="50" width="50" src="/static/images/nebulusCats/river_cat.png" alt="Pfp selection"/>
                     <img style="float:left;
                                         margin:10px;"
                          class="cat10 pfp rounded-full border-gray-300 border-none w-20 h-20 bg-gray-300   dark:bg-gray-900 dark:hover:bg-gray-800 p-3"
-                         height="50"
-                         width="50"
-                         src="/static/images/nebulusCats/cake_cat.png"
-                         alt="Pfp selection"/>
+                         height="50" width="50" src="/static/images/nebulusCats/cake_cat.png" alt="Pfp selection"/>
                     <img style="float:left;
                                         margin:10px;"
                          class="cat11 pfp rounded-full border-gray-300 border-none w-20 h-20 bg-gray-300   dark:bg-gray-900 dark:hover:bg-gray-800 p-3"
-                         height="50"
-                         width="50"
-                         src="/static/images/nebulusCats/ocean_cat.png"
-                         alt="Pfp selection"/>
+                         height="50" width="50" src="/static/images/nebulusCats/ocean_cat.png" alt="Pfp selection"/>
                     <img style="float:left;
                                         margin:10px;"
                          class="cat12 pfp rounded-full border-gray-300 border-none w-20 h-20 bg-gray-300   dark:bg-gray-900 dark:hover:bg-gray-800 p-3"
-                         height="50"
-                         width="50"
-                         src="/static/images/nebulusCats/mountains.png"
-                         alt="Pfp selection"/>
+                         height="50" width="50" src="/static/images/nebulusCats/mountains.png" alt="Pfp selection"/>
                     <img style="float:left;
                                         margin:10px;"
                          class="cat13 pfp rounded-full border-gray-300 border-none w-20 h-20 bg-gray-300   dark:bg-gray-900 dark:hover:bg-gray-800 p-3"
-                         height="50"
-                         width="50"
-                         src="/static/images/nebulusCats/pizza.png"
-                         alt="Pfp selection"/>
+                         height="50" width="50" src="/static/images/nebulusCats/pizza.png" alt="Pfp selection"/>
                     <img style="float:left;
                                         margin:10px;"
                          class="cat14 pfp rounded-full border-gray-300 border-none w-20 h-20 bg-gray-300   dark:bg-gray-900 dark:hover:bg-gray-800 p-3"
-                         height="50"
-                         width="50"
-                         src="/static/images/nebulusCats/popTart.png"
-                         alt="Pfp selection"/>
+                         height="50" width="50" src="/static/images/nebulusCats/popTart.png" alt="Pfp selection"/>
                     <img style="float:left;
                                         margin:10px;"
                          class="cat15 pfp rounded-full border-gray-300 border-none w-20 h-20 bg-gray-300   dark:bg-gray-900 dark:hover:bg-gray-800 p-3"
-                         height="50"
-                         width="50"
-                         src="/static/images/nebulusCats/v3.gif"
-                         alt="Pfp selection"/>
+                         height="50" width="50" src="/static/images/nebulusCats/v3.gif" alt="Pfp selection"/>
                     <img style="float:left;
                                         margin:10px;"
                          class="cat16 pfp rounded-full border-gray-300 border-none w-20 h-20 bg-gray-300   dark:bg-gray-900 dark:hover:bg-gray-800 p-3"
-                         height="50"
-                         width="50"
-                         src="/static/images/nebulusCats/v2.gif"
-                         alt="Pfp selection"/>
+                         height="50" width="50" src="/static/images/nebulusCats/v2.gif" alt="Pfp selection"/>
                     <img style="float:left;
                                         margin:10px;"
                          class="cat17 pfp rounded-full border-gray-300 border-none w-20 h-20 bg-gray-300   dark:bg-gray-900 dark:hover:bg-gray-800 p-3"
-                         height="50"
-                         width="50"
-                         src="/static/images/nebulusCats/newBlue.png"
-                         alt="Pfp selection"/>
+                         height="50" width="50" src="/static/images/nebulusCats/newBlue.png" alt="Pfp selection"/>
                     <img style="float:left;
                                         margin:10px;"
                          class="cat18 pfp rounded-full border-gray-300 border-none w-20 h-20 bg-gray-300   dark:bg-gray-900 dark:hover:bg-gray-800 p-3"
-                         height="50"
-                         width="50"
-                         src="/static/images/nebulusCats/newGreen.png"
-                         alt="Pfp selection"/>
+                         height="50" width="50" src="/static/images/nebulusCats/newGreen.png" alt="Pfp selection"/>
                     <img style="float:left;
                                         margin:10px;"
                          class="cat19 pfp rounded-full border-gray-300 border-none w-20 h-20 bg-gray-300   dark:bg-gray-900 dark:hover:bg-gray-800 p-3"
-                         height="50"
-                         width="50"
-                         src="/static/images/nebulusCats/newJade.png"
-                         alt="Pfp selection"/>
+                         height="50" width="50" src="/static/images/nebulusCats/newJade.png" alt="Pfp selection"/>
                     <img style="float:left;
                                         margin:10px;"
                          class="cat20 pfp rounded-full border-gray-300 border-none w-20 h-20 bg-gray-300   dark:bg-gray-900 dark:hover:bg-gray-800 p-3"
-                         height="50"
-                         width="50"
-                         src="/static/images/nebulusCats/newPink.png"
-                         alt="Pfp selection"/>
+                         height="50" width="50" src="/static/images/nebulusCats/newPink.png" alt="Pfp selection"/>
                     <img style="float:left;
                                         margin:10px;"
                          class="cat21 pfp rounded-full border-gray-300 border-none w-20 h-20 bg-gray-300   dark:bg-gray-900 dark:hover:bg-gray-800 p-3"
-                         height="50"
-                         width="50"
-                         src="/static/images/nebulusCats/newRed.png"
-                         alt="Pfp selection"/>
+                         height="50" width="50" src="/static/images/nebulusCats/newRed.png" alt="Pfp selection"/>
                     <img style="float:left;
                                         margin:10px;"
                          class="cat22 pfp rounded-full border-gray-300 border-none w-20 h-20 bg-gray-300   dark:bg-gray-900 dark:hover:bg-gray-800 p-3"
-                         height="50"
-                         width="50"
-                         src="/static/images/nebulusCats/newYellow.png"
-                         alt="Pfp selection"/>
+                         height="50" width="50" src="/static/images/nebulusCats/newYellow.png" alt="Pfp selection"/>
                     <img style="float:left;
                                         margin:10px;"
                          class="cat23 pfp rounded-full border-gray-300 border-none w-20 h-20 bg-gray-300   dark:bg-gray-900 dark:hover:bg-gray-800 p-3"
-                         height="50"
-                         width="50"
-                         src="/static/images/nebulusCats/ukraine.png"
-                         alt="Pfp selection"/>
+                         height="50" width="50" src="/static/images/nebulusCats/ukraine.png" alt="Pfp selection"/>
                     <img style="float:left;
                                         margin:10px;"
                          class="cat24 pfp rounded-full border-gray-300 border-none w-20 h-20 bg-gray-300   dark:bg-gray-900 dark:hover:bg-gray-800 p-3"
-                         height="50"
-                         width="50"
-                         src="/static/images/nebulusCats/pride.png"
-                         alt="Pfp selection"/>
+                         height="50" width="50" src="/static/images/nebulusCats/pride.png" alt="Pfp selection"/>
                     <br>
                     <br style="clear: left;">
                 </div>
@@ -616,92 +537,72 @@
                         Note: Some of them don't work yet.
                     </p>
                     <div style="max-height: 25rem; overflow: auto">
-                        <div onclick="openModal('graderoom-modal');"
-                             style="float:left;
+                        <div onclick="openModal('graderoom-modal');" style="float:left;
                                             margin:10px;
                                             width:80px;
-                                            height:80px;"
-                             data-tooltip-target="tooltip-graderoom"
+                                            height:80px;" data-tooltip-target="tooltip-graderoom"
                              class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                            <img src="/static/images/logos/graderoom.png"
-                                 alt="Graderoom Image"
-                                 style="margin-top: calc(50% - 20px);
+                            <img src="/static/images/logos/graderoom.png" alt="Graderoom Image" style="margin-top: calc(50% - 20px);
                                                 margin-bottom: calc(50% - 20px);
                                                 object-fit: cover;
                                                 width:40px;
                                                 height:40px;
                                                 display: inline-block;">
                         </div>
-                        <div id="tooltip-graderoom"
-                             role="tooltip"
+                        <div id="tooltip-graderoom" role="tooltip"
                              class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
                             Graderoom
                             <div class="tooltip-arrow" data-popper-arrow>
                             </div>
                         </div>
-                        <div onclick="window.location.href = '/gclassroom'"
-                             style="float:left;
+                        <div onclick="window.location.href = '/gclassroom'" style="float:left;
                                             margin:10px;
                                             width:80px;
-                                            height:80px;"
-                             data-tooltip-target="tooltip-default"
+                                            height:80px;" data-tooltip-target="tooltip-default"
                              class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                            <img src="/static/images/logos/classroom.png"
-                                 alt="Google Classroom Image"
-                                 style="margin-top: calc(50% - 20px);
+                            <img src="/static/images/logos/classroom.png" alt="Google Classroom Image" style="margin-top: calc(50% - 20px);
                                                 margin-bottom: calc(50% - 20px);
                                                 object-fit: cover;
                                                 width:40px;
                                                 height:40px;
                                                 display: inline-block;">
                         </div>
-                        <div id="tooltip-default"
-                             role="tooltip"
+                        <div id="tooltip-default" role="tooltip"
                              class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
                             Google Classroom
                             <div class="tooltip-arrow" data-popper-arrow></div>
                         </div>
-                        <div onclick="openModal('schoology-modal');"
-                             style="float:left;
+                        <div onclick="openModal('schoology-modal');" style="float:left;
                                             margin:10px;
                                             width:80px;
-                                            height:80px;"
-                             data-tooltip-target="tooltip-default2"
+                                            height:80px;" data-tooltip-target="tooltip-default2"
                              class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                            <img src="/static/images/logos/schoology.png"
-                                 alt="Schoology Image"
-                                 style="margin-top: calc(50% - 20px);
+                            <img src="/static/images/logos/schoology.png" alt="Schoology Image" style="margin-top: calc(50% - 20px);
                                                 margin-bottom: calc(50% - 20px);
                                                 object-fit: cover;
                                                 width:40px;
                                                 height:40px;
                                                 display: inline-block;">
                         </div>
-                        <div id="tooltip-default2"
-                             role="tooltip"
+                        <div id="tooltip-default2" role="tooltip"
                              class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
                             Schoology
                             <div class="tooltip-arrow" data-popper-arrow>
                             </div>
                         </div>
-                        <div onclick="window.location.href = '/canvas'"
-                             style="float:left;
+                        <div onclick="window.location.href = '/canvas'" style="float:left;
                                             margin:10px;
                                             width:80px;
-                                            height:80px;"
-                             data-tooltip-target="tooltip-default3"
+                                            height:80px;" data-tooltip-target="tooltip-default3"
                              class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                            <img src="/static/images/logos/canvas.png"
-                                 alt="Canvas Image"
-                                 style="margin-top: calc(50% - 20px);
+                            <img src="/static/images/logos/canvas.png" alt="Canvas Image" style="margin-top: calc(50% - 20px);
                                                 margin-bottom: calc(50% - 20px);
                                                 object-fit: cover;
                                                 width:40px;
                                                 height:40px;
                                                 display: inline-block;">
                         </div>
-                        <div id="tooltip-default3"
-                             role="tooltip"
+                        <div id="tooltip-default3" role="tooltip"
                              class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
                             Canvas
                             <div class="tooltip-arrow" data-popper-arrow>
@@ -713,63 +614,50 @@
                                             height:80px;" onclick="window.location.href = '/github'"
                              data-tooltip-target="tooltip-default4"
                              class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                            <img src="/static/images/logos/github.png"
-                                 alt="Github Image"
-                                 style="margin-top: calc(50% - 20px);
+                            <img src="/static/images/logos/github.png" alt="Github Image" style="margin-top: calc(50% - 20px);
                                                 margin-bottom: calc(50% - 20px);
                                                 object-fit: cover;
                                                 width:40px;
                                                 height:40px;
                                                 display: inline-block;">
                         </div>
-                        <div id="tooltip-default4"
-                             role="tooltip"
+                        <div id="tooltip-default4" role="tooltip"
                              class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
                             Github
                             <div class="tooltip-arrow" data-popper-arrow>
                             </div>
                         </div>
-                        <div onclick="window.location.href = '/discord'"
-                             style="float:left;
+                        <div onclick="window.location.href = '/discord'" style="float:left;
                                             margin:10px;
                                             width:80px;
-                                            height:80px;"
-                             data-tooltip-target="tooltip-default5"
+                                            height:80px;" data-tooltip-target="tooltip-default5"
                              class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                            <img src="/static/images/logos/discord.png"
-                                 alt="Discord Image"
-                                 style="margin-top: calc(50% - 20px);
+                            <img src="/static/images/logos/discord.png" alt="Discord Image" style="margin-top: calc(50% - 20px);
                                                 margin-bottom: calc(50% - 20px);
                                                 object-fit: cover;
                                                 width:40px;
                                                 height:40px;
                                                 display: inline-block;">
                         </div>
-                        <div id="tooltip-default5"
-                             role="tooltip"
+                        <div id="tooltip-default5" role="tooltip"
                              class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
                             Discord
                             <div class="tooltip-arrow" data-popper-arrow>
                             </div>
                         </div>
-                        <div onclick="window.location.href = '/spotify'"
-                             style="float:left;
+                        <div onclick="window.location.href = '/spotify'" style="float:left;
                                             margin:10px;
                                             width:80px;
-                                            height:80px;"
-                             data-tooltip-target="tooltip-default6"
+                                            height:80px;" data-tooltip-target="tooltip-default6"
                              class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                            <img src="/static/images/logos/spotify.png"
-                                 alt="Spotify Image"
-                                 style="margin-top: calc(50% - 20px);
+                            <img src="/static/images/logos/spotify.png" alt="Spotify Image" style="margin-top: calc(50% - 20px);
                                                 margin-bottom: calc(50% - 20px);
                                                 object-fit: cover;
                                                 width:40px;
                                                 height:40px;
                                                 display: inline-block;">
                         </div>
-                        <div id="tooltip-default6"
-                             role="tooltip"
+                        <div id="tooltip-default6" role="tooltip"
                              class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
                             Spotify
                             <div class="tooltip-arrow" data-popper-arrow>
@@ -778,20 +666,17 @@
                         <div style="float:left;
                                             margin:10px;
                                             width:80px;
-                                            height:80px;" onclick="window.location.href = '/dropbox'"
+                                            height:80px;" onclick="location.href = '/dropbox'"
                              data-tooltip-target="tooltip-default7"
                              class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                            <img src="/static/images/logos/dropbox.png"
-                                 alt="Dropbox Image"
-                                 style="margin-top: calc(50% - 20px);
+                            <img src="/static/images/logos/dropbox.png" alt="Dropbox Image" style="margin-top: calc(50% - 20px);
                                                 margin-bottom: calc(50% - 20px);
                                                 object-fit: cover;
                                                 width:40px;
                                                 height:40px;
                                                 display: inline-block;">
                         </div>
-                        <div id="tooltip-default7"
-                             role="tooltip"
+                        <div id="tooltip-default7" role="tooltip"
                              class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
                             Dropbox
                             <div class="tooltip-arrow" data-popper-arrow>
@@ -800,20 +685,16 @@
                         <div style="float:left;
                                             margin:10px;
                                             width:80px;
-                                            height:80px;"
-                             data-tooltip-target="tooltip-default8"
+                                            height:80px;" data-tooltip-target="tooltip-default8"
                              class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                            <img src="/static/images/logos/docs.png"
-                                 alt="Google Docs Image"
-                                 style="margin-top: calc(50% - 20px);
+                            <img src="/static/images/logos/docs.png" alt="Google Docs Image" style="margin-top: calc(50% - 20px);
                                                 margin-bottom: calc(50% - 20px);
                                                 object-fit: cover;
                                                 width:40px;
                                                 height:40px;
                                                 display: inline-block;">
                         </div>
-                        <div id="tooltip-default8"
-                             role="tooltip"
+                        <div id="tooltip-default8" role="tooltip"
                              class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
                             Google Docs
                             <div class="tooltip-arrow" data-popper-arrow>
@@ -822,19 +703,15 @@
                         <div style="float:left;
                                             margin:10px;
                                             width:80px;
-                                            height:80px;"
-                             data-tooltip-target="tooltip-default9"
+                                            height:80px;" data-tooltip-target="tooltip-default9"
                              class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                            <img src="/static/images/logos/slides.png"
-                                 alt="Google Slides Image"
-                                 style="margin-top: calc(50% - 20px);
+                            <img src="/static/images/logos/slides.png" alt="Google Slides Image" style="margin-top: calc(50% - 20px);
                                                 margin-bottom: calc(50% - 20px);
                                                 object-fit: cover;
                                                 height:40px;
                                                 display: inline-block;">
                         </div>
-                        <div id="tooltip-default9"
-                             role="tooltip"
+                        <div id="tooltip-default9" role="tooltip"
                              class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
                             Google Slides
                             <div class="tooltip-arrow" data-popper-arrow>
@@ -843,19 +720,15 @@
                         <div style="float:left;
                                             margin:10px;
                                             width:80px;
-                                            height:80px;"
-                             data-tooltip-target="tooltip-default10"
+                                            height:80px;" data-tooltip-target="tooltip-default10"
                              class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                            <img src="/static/images/logos/sheets.png"
-                                 alt="Google Sheets Image"
-                                 style="margin-top: calc(50% - 20px);
+                            <img src="/static/images/logos/sheets.png" alt="Google Sheets Image" style="margin-top: calc(50% - 20px);
                                                 margin-bottom: calc(50% - 20px);
                                                 object-fit: cover;
                                                 height:40px;
                                                 display: inline-block;">
                         </div>
-                        <div id="tooltip-default10"
-                             role="tooltip"
+                        <div id="tooltip-default10" role="tooltip"
                              class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
                             Google Sheets
                             <div class="tooltip-arrow" data-popper-arrow>
@@ -864,20 +737,16 @@
                         <div style="float:left;
                                             margin:10px;
                                             width:80px;
-                                            height:80px;"
-                             data-tooltip-target="tooltip-default11"
+                                            height:80px;" data-tooltip-target="tooltip-default11"
                              class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                            <img src="/static/images/logos/drive.png"
-                                 alt="Google Drive Image"
-                                 style="margin-top: calc(50% - 20px);
+                            <img src="/static/images/logos/drive.png" alt="Google Drive Image" style="margin-top: calc(50% - 20px);
                                                 margin-bottom: calc(50% - 20px);
                                                 object-fit: cover;
                                                 width:40px;
                                                 height:40px;
                                                 display: inline-block;">
                         </div>
-                        <div id="tooltip-default11"
-                             role="tooltip"
+                        <div id="tooltip-default11" role="tooltip"
                              class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
                             Google Drive
                             <div class="tooltip-arrow" data-popper-arrow>
@@ -886,19 +755,15 @@
                         <div style="float:left;
                                             margin:10px;
                                             width:80px;
-                                            height:80px;"
-                             data-tooltip-target="tooltip-default12"
+                                            height:80px;" data-tooltip-target="tooltip-default12"
                              class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                            <img src="/static/images/logos/gmail.png"
-                                 alt="Gmail Image"
-                                 style="margin-top: calc(50% - 20px);
+                            <img src="/static/images/logos/gmail.png" alt="Gmail Image" style="margin-top: calc(50% - 20px);
                                                 margin-bottom: calc(50% - 20px);
                                                 object-fit: cover;
                                                 height:40px;
                                                 display: inline-block;">
                         </div>
-                        <div id="tooltip-default12"
-                             role="tooltip"
+                        <div id="tooltip-default12" role="tooltip"
                              class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
                             Gmail
                             <div class="tooltip-arrow" data-popper-arrow>
@@ -907,20 +772,16 @@
                         <div style="float:left;
                                             margin:10px;
                                             width:80px;
-                                            height:80px;"
-                             data-tooltip-target="tooltip-default13"
+                                            height:80px;" data-tooltip-target="tooltip-default13"
                              class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                            <img src="/static/images/logos/calendar.png"
-                                 alt="Google Calendar Image"
-                                 style="margin-top: calc(50% - 20px);
+                            <img src="/static/images/logos/calendar.png" alt="Google Calendar Image" style="margin-top: calc(50% - 20px);
                                                 margin-bottom: calc(50% - 20px);
                                                 object-fit: cover;
                                                 width:40px;
                                                 height:40px;
                                                 display: inline-block;">
                         </div>
-                        <div id="tooltip-default13"
-                             role="tooltip"
+                        <div id="tooltip-default13" role="tooltip"
                              class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
                             Google Calendar
                             <div class="tooltip-arrow" data-popper-arrow>
@@ -929,20 +790,16 @@
                         <div style="float:left;
                                             margin:10px;
                                             width:80px;
-                                            height:80px;"
-                             data-tooltip-target="tooltip-default14"
+                                            height:80px;" data-tooltip-target="tooltip-default14"
                              class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                            <img src="/static/images/logos/meet.png"
-                                 alt="Google Meet Image"
-                                 style="margin-top: calc(50% - 20px);
+                            <img src="/static/images/logos/meet.png" alt="Google Meet Image" style="margin-top: calc(50% - 20px);
                                                 margin-bottom: calc(50% - 20px);
                                                 object-fit: cover;
                                                 width:40px;
                                                 height:40px;
                                                 display: inline-block;">
                         </div>
-                        <div id="tooltip-default14"
-                             role="tooltip"
+                        <div id="tooltip-default14" role="tooltip"
                              class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
                             Google Meet
                             <div class="tooltip-arrow" data-popper-arrow>
@@ -952,20 +809,16 @@
                         <div onclick="LoginWithReplit()" style="float:left;
                                             margin:10px;
                                             width:80px;
-                                            height:80px;"
-                             data-tooltip-target="tooltip-default15"
+                                            height:80px;" data-tooltip-target="tooltip-default15"
                              class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                            <img src="/static/images/logos/replit.png"
-                                 alt="Replit Image"
-                                 style="margin-top: calc(50% - 20px);
+                            <img src="/static/images/logos/replit.png" alt="Replit Image" style="margin-top: calc(50% - 20px);
                                                 margin-bottom: calc(50% - 20px);
                                                 object-fit: cover;
                                                 width:40px;
                                                 height:40px;
                                                 display: inline-block;">
                         </div>
-                        <div id="tooltip-default15"
-                             role="tooltip"
+                        <div id="tooltip-default15" role="tooltip"
                              class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
                             Replit
                             <div class="tooltip-arrow" data-popper-arrow>
@@ -974,20 +827,16 @@
                         <div style="float:left;
                                             margin:10px;
                                             width:80px;
-                                            height:80px;"
-                             data-tooltip-target="tooltip-default16"
+                                            height:80px;" data-tooltip-target="tooltip-default16"
                              class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                            <img src="/static/images/logos/twitter.png"
-                                 alt="Twitter Image"
-                                 style="margin-top: calc(50% - 20px);
+                            <img src="/static/images/logos/twitter.png" alt="Twitter Image" style="margin-top: calc(50% - 20px);
                                                 margin-bottom: calc(50% - 20px);
                                                 object-fit: cover;
                                                 width:40px;
                                                 height:40px;
                                                 display: inline-block;">
                         </div>
-                        <div id="tooltip-default16"
-                             role="tooltip"
+                        <div id="tooltip-default16" role="tooltip"
                              class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
                             Twitter
                             <div class="tooltip-arrow" data-popper-arrow>
@@ -996,20 +845,16 @@
                         <div style="float:left;
                                             margin:10px;
                                             width:80px;
-                                            height:80px;"
-                             data-tooltip-target="tooltip-default17"
+                                            height:80px;" data-tooltip-target="tooltip-default17"
                              class="text-white dark:bg-gray-700 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm text-center dark:bg-gray-600 dark:focus:ring-gray-800">
-                            <img src="/static/images/logos/facebook.png"
-                                 alt="Facebook Image"
-                                 style="margin-top: calc(50% - 20px);
+                            <img src="/static/images/logos/facebook.png" alt="Facebook Image" style="margin-top: calc(50% - 20px);
                                                 margin-bottom: calc(50% - 20px);
                                                 object-fit: cover;
                                                 width:40px;
                                                 height:40px;
                                                 display: inline-block;">
                         </div>
-                        <div id="tooltip-default17"
-                             role="tooltip"
+                        <div id="tooltip-default17" role="tooltip"
                              class="inline-block invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
                             Facebook
                             <div class="tooltip-arrow" data-popper-arrow>
@@ -1031,21 +876,26 @@
                     School Settings
                 </h2>
                 <br>
-                <a href="/school"><button style="float:left;
-                               vertical-align: middle;" type="button" class="hidden lg:flex items-center w-64 text-left space-x-3 px-4 h-12 bg-gray-300 ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-gray-600 dark:bg-slate-800/75 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700 text-sm">
-                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-none text-slate-300 dark:text-slate-400" aria-hidden="true">
-                        <path d="m19 19-3.5-3.5"></path>
-                        <circle cx="11" cy="11" r="6"></circle>
-                    </svg>
-                    <span class="w-full">Join a School</span>
+                <a href="/school">
+                    <button style="float:left;
+                               vertical-align: middle;" type="button"
+                            class="hidden lg:flex items-center w-64 text-left space-x-3 px-4 h-12 bg-gray-300 ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-gray-600 dark:bg-slate-800/75 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700 text-sm">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round"
+                             class="flex-none text-slate-300 dark:text-slate-400" aria-hidden="true">
+                            <path d="m19 19-3.5-3.5"></path>
+                            <circle cx="11" cy="11" r="6"></circle>
+                        </svg>
+                        <span class="w-full">Join a School</span>
 
-                </button></a><br><br>
-                {% if schools|length == 0  %}
-                <div class="mt-6">
-                    <h1 class="text-gray-500">
-                        You are not in a school! Click the above button to join one.
-                    </h1>
-                </div>
+                    </button>
+                </a><br><br>
+                {% if schools|length == 0 %}
+                    <div class="mt-6">
+                        <h1 class="text-gray-500">
+                            You are not in a school! Click the above button to join one.
+                        </h1>
+                    </div>
                 {% endif %}
                 {% for school in schools %}
                     <div>
@@ -1132,9 +982,7 @@
                     </style>
                     <div class="w-44 h-24 bg-gray-200 dark:bg-gray-600 hover:bg-gray-100 dark:hover:bg-gray-500 rounded-lg flex items-center justify-center mt-4 duration-300"
                          id="no-filter">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                             viewBox="0 0 1000 1000"
-                             class="w-10 h-10 fill-gray-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" class="w-10 h-10 fill-gray-300">
                             <g>
                                 <g transform="translate(0.000000,511.000000) scale(0.100000,-0.100000)">
                                     <path d="M4684,5046.1c-651.5-43-1251.8-204.9-1833.6-493.7C1807.7,4034.1,1002.5,3198.2,525.2,2139C97,1186.4-13.6,51.4,219.9-997.5C535.4-2417.3,1490.1-3644.5,2791-4306.2c2362.1-1200.5,5240.6-299.1,6512.8,2038.5c401.5,737.5,596.2,1514,596.2,2376.5c0,1124.7-331.9,2114.3-1010,3015.7c-452.8,600.3-1046.9,1087.8-1747.5,1432C6368.1,4935.5,5530.1,5103.5,4684,5046.1z M5308.9,3898.9c590-53.3,1114.5-225.4,1645.1-538.8c75.8-45.1,135.2-88.1,133.2-96.3c-4.1-8.2-1175.9-1194.4-2608-2638.7L1877.3-1997.3l-47.1,55.3c-24.6,28.7-108.6,180.3-186.4,333.9c-692.5,1378.8-501.9,2993.1,491.7,4185.5c622.8,745.7,1573.4,1239.5,2542.4,1319.4C4981.1,3921.4,5046.6,3921.4,5308.9,3898.9z M8361.4,1819.4c165.9-333.9,243.8-549,315.5-872.7C9062.1-788.6,8209.8-2556.6,6620-3320.8c-1141.1-547-2464.6-485.5-3550.4,166c-86,53.2-155.7,102.4-153.7,110.6c4.1,6.2,1178,1192.3,2608,2636.7l2601.8,2624.4l47.1-55.3C8197.5,2130.8,8283.6,1977.2,8361.4,1819.4z">
@@ -1283,23 +1131,26 @@
                 </h2>
                 <br>
 
-                <h1 class="text-gray-500">This feature is only available if you are enrolled in a School. Join a school with the
-                "School" tab in settings.</h1><br>
-                <button type="button" class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                    <i class="material-icons"
-                       style="vertical-align:middle;">
+                <h1 class="text-gray-500">This feature is only available if you are enrolled in a School. Join a school
+                    with the
+                    "School" tab in settings.</h1><br>
+                <button type="button"
+                        class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                    <i class="material-icons" style="vertical-align:middle;">
                         add
                     </i> Create New Schedule
                 </button>
                 <hr class="my-4 mx-auto w-3/4 h-1 bg-gray-100 rounded border-0 md:my-10 dark:bg-gray-700">
-                <h1  class="text-xl text-gray-500">My Schedules</h1><br>
+                <h1 class="text-xl text-gray-500">My Schedules</h1><br>
                 <div class="block p-6 max-w-sm bg-gray-200/50 rounded-lg hover:bg-gray-100 dark:bg-gray-800/50 dark:border-gray-700 dark:hover:bg-gray-700"
-                style="backdrop-filter: blur(10px);">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">2029-2030 School Year</h5>
-                    <p class="font-normal text-gray-700 dark:text-gray-400">This schedule is for the school year, 2029-2030.</p>
-                </a>
+                     style="backdrop-filter: blur(10px);">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">2029-2030 School
+                        Year</h5>
+                    <p class="font-normal text-gray-700 dark:text-gray-400">This schedule is for the school year,
+                        2029-2030.</p>
+                    </a>
 
-            </div>
+                </div>
             </div>
             <div style="display:none;" id="reportSettings">
                 <div class="mt-6">
@@ -1318,11 +1169,8 @@
                     Open Form
                 </button>
                 <div id="alert-border-1"
-                     class="flex p-4 mb-4 bg-blue-100 border-t-4 border-blue-500 dark:bg-blue-200 mt-2"
-                     role="alert">
-                    <svg class="flex-shrink-0 w-5 h-5 text-blue-700"
-                         fill="currentColor"
-                         viewBox="0 0 20 20"
+                     class="flex p-4 mb-4 bg-blue-100 border-t-4 border-blue-500 dark:bg-blue-200 mt-2" role="alert">
+                    <svg class="flex-shrink-0 w-5 h-5 text-blue-700" fill="currentColor" viewBox="0 0 20 20"
                          xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
                               d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
@@ -1335,13 +1183,9 @@
                         will decide how much to award you based on how good quality/important it is!
                     </div>
                     <button class="ml-auto -mx-1.5 -my-1.5 bg-blue-100 dark:bg-blue-200 text-blue-500 rounded-lg focus:ring-2 focus:ring-blue-400 p-1.5 hover:bg-blue-200 dark:hover:bg-blue-300 inline-flex h-8 w-8"
-                            data-collapse-toggle="alert-border-1"
-                            aria-label="Close">
+                            data-collapse-toggle="alert-border-1" aria-label="Close">
                         <span class="sr-only">Dismiss</span>
-                        <svg class="w-5 h-5"
-                             fill="currentColor"
-                             viewBox="0 0 20 20"
-                             xmlns="http://www.w3.org/2000/svg">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
                                   d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
                                   clip-rule="evenodd">
@@ -1477,8 +1321,8 @@
                 </h2>
                 <br>
                 <div style="height:60%; overflow-y: scroll;">
-                    <span onclick="select_lang('us');"
-                          class="button text-black dark:text-white bg-gray-300 dark:bg-gray-700/75 hover:bg-gray-400 dark:hover:bg-gray-600">
+          <span onclick="select_lang('us');"
+                class="button text-black dark:text-white bg-gray-300 dark:bg-gray-700/75 hover:bg-gray-400 dark:hover:bg-gray-600">
                         <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/281/flag-united-states_1f1fa-1f1f8.png"
                              class="image">
                     English (United States)</span>
@@ -1650,10 +1494,10 @@
                         <br>
                         <div class="p-6 bg-gray-100 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800/50 dark:border-gray-700"
                              style="margin:10px; width:100%; ">
-                            <span class="text-black dark:text-white">{{ points }} Points Earned. {{ points//10 }}% to 1000 Points</span>
+                            <span class="text-black dark:text-white">{{ points }} Points Earned. {{ points // 10 }}% to 1000 Points</span>
                             <div class="w-full bg-gray-200 rounded-full h-6 dark:bg-gray-700/50 mt-4">
                                 <div class="h-6 rounded-full"
-                                     style="width: {{ points//10 }}%; background:linear-gradient(45deg, #7cff73, #cc73ff);">
+                                     style="width: {{ points // 10 }}%; background: linear-gradient(45deg, #7cff73, #cc73ff)">
                                 </div>
                             </div>
                         </div>
@@ -1664,48 +1508,24 @@
         </div>
     </div>
     <script>
-        function closeTab(id_name) {
-            document.getElementById(id_name).style.display = "none";
+        {
+        %
+            if session.get("access") and
+            lastAccess < 5 * 60 %
         }
-
-        function openTab(id_name) {
-            document.getElementById(id_name).style.display = "block";
+        window.addEventListener("load", next);
+        timeout({
+        {
+            (300 - lastAccess) * 1000
         }
+        })
 
-        function open_pls(id_name) {
-            closeTab("generalSettings");
-            closeTab("profileSettings");
-            closeTab("connectionSettings");
-            closeTab("schoolSettings");
-            closeTab("themeSettings");
-            closeTab("appearanceSettings");
-            closeTab("reportSettings");
-            closeTab("chatSettings");
-            closeTab("badgeSettings");
-            closeTab("achievementSettings");
-            closeTab("screentimeSettings");
-            closeTab("pointSettings");
-            closeTab("languageSettings");
-            closeTab("changelog");
-
-
-            openTab(id_name);
+        {
+        %
+            endif %
         }
-
-        let expireTimeout;
-        {% if session.get("access") and lastAccess < 5 * 60 %}
-            window.addEventListener("load", next);
-            expireTimeout = setTimeout(() => {
-                prev();
-                const error = document.getElementById("error");
-                error.style.color = "red";
-                error.innerHTML = "Please enter your password again.";
-            });
-        {% endif %}
     </script>
-    <div id="change-modal"
-         tabindex="-1"
-         aria-hidden="true"
+    <div id="change-modal" tabindex="-1" aria-hidden="true"
          class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
         <div class="relative p-4 w-96 max-w-2xl h-full md:h-auto">
             <!-- Modal content -->
@@ -1719,10 +1539,7 @@
                     <button class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm
                      p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
                             onclick="modal.hide()">
-                        <svg class="w-5 h-5"
-                             fill="currentColor"
-                             viewBox="0 0 20 20"
-                             xmlns="http://www.w3.org/2000/svg">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
                                   d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
                                   clip-rule="evenodd">
@@ -1732,41 +1549,24 @@
                 </div>
                 <!-- Modal body -->
                 <div class="p-6 space-y-6">
-                    <input type="password" step="1"
-                           id="access-check"
-                           name="password"
-                           placeholder="Password"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5
-                                    focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500
-                                     dark:focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400
-                                      dark:text-white w-full dark:bg-gray-700">
-                    <input type="text" step="2"
-                           id="enter-value"
-                           name="username"
-                           autocomplete="new-username"
-                           placeholder="New Username"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5
-                                    focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 my-4
-                                     dark:focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400
-                                      dark:text-white w-full dark:bg-gray-700">
-                    <input type="password" step="2" id="confirm-password" placeholder="Confirm Password"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5
-                                    focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500
-                                     dark:focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400
-                                      dark:text-white w-full dark:bg-gray-700">
+                    <input type="password" step="1" id="access-check" name="password" placeholder="Password">
+                    <input type="text" step="3" id="enter-value" name="username" autocomplete="new-username"
+                           placeholder="New Username">
+
+                    <div class="relative">
+                        <div class="material-icons absolute right-0 p-2"></div>
+                        <input type="text" step="3" id="confirm-email" placeholder="Validation Code" class="pr-10">
+                    </div>
+
+                    <input type="password" step="2" id="confirm-password" placeholder="Confirm Password">
                     <p id="error" class="my-2 text-red-700"></p>
                 </div>
                 <!-- Modal footer -->
                 <div class="flex items-center space-x-2 px-6 pb-6">
-                    <button onclick="openModal('change-modal')"
-                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none flex gap-2
+                    <button onclick="prev()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none flex gap-2
                                  focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600
-                                  dark:hover:bg-blue-700 dark:focus:ring-blue-800 place-items-center"
-                            onclick="prev()">
-                        <svg class="inline-block w-6 h-6"
-                             fill="none"
-                             stroke="currentColor"
-                             viewBox="0 0 24 24"
+                                  dark:hover:bg-blue-700 dark:focus:ring-blue-800 place-items-center">
+                        <svg class="inline-block w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                              xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                   d="M7 16l-4-4m0 0l4-4m-4 4h18">
@@ -1777,11 +1577,9 @@
                     <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none flex gap-2
                                  focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-blue-600
                                  dark:hover:bg-blue-700 dark:focus:ring-blue-800 place-items-center disabled-css"
-                            disabled step="1" onclick="nextSchoology()">
+                            disabled step="1" onclick="next()">
                         Next
-                        <svg class="inline-block ml-2 -mr-1 w-5 h-5"
-                             fill="currentColor"
-                             viewBox="0 0 20 20"
+                        <svg class="inline-block ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                              xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
                                   d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
@@ -1792,7 +1590,13 @@
                     <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none flex gap-2
                                  focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-blue-600
                                  dark:hover:bg-blue-700 dark:focus:ring-blue-800 place-items-center disabled-css"
-                            disabled step="2" id="confirm-change">
+                            step="2" id="send-email">
+                        Send Email
+                    </button>
+                    <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none flex gap-2
+                                 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-blue-600
+                                 dark:hover:bg-blue-700 dark:focus:ring-blue-800 place-items-center disabled-css"
+                            disabled step="3" id="confirm-change">
                         Change
                     </button>
                 </div>
@@ -1800,9 +1604,7 @@
         </div>
     </div>
 
-    <div id="schoology-modal"
-         tabindex="-1"
-         aria-hidden="true"
+    <div id="schoology-modal" tabindex="-1" aria-hidden="true"
          class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
         <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
             <!-- Modal content -->
@@ -1823,9 +1625,8 @@
                                     margin: 5px 5px 5px 30px;
                                     ">
                         <span style=" margin: 15px; font-size: 1.5em; "><i class="material-icons">close</i></span>
-                        <img class=" w-6 h-6 mr-2 -ml-1"
-                             src="/static/images/NebulusSpecialLogo.png" alt="Rounded avatar"
-                             style="
+                        <img class=" w-6 h-6 mr-2 -ml-1" src="/static/images/NebulusSpecialLogo.png"
+                             alt="Rounded avatar" style="
                                     display: inline-block;
                                     margin: 5px;
                                     height: 90px;
@@ -1853,7 +1654,7 @@
                     <div class="p-4">
                         <div step="1">
                             <h1 class="text-black dark:text-white text-3xl">
-                                <span style="
+                <span style="
     background: -webkit-linear-gradient(left, #42cbf5, #42f578);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -1868,15 +1669,10 @@
                             </p>
                             <br>
                             <br>
-                            <button onclick="prev()"
-                                    type="button"
-                                    disabled
+                            <button onclick="prev()" type="button" disabled
                                     class="inline-block text-white bg-yellow-700 text-gray-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                                <svg aria-hidden="true"
-                                     class="-ml-1 mr-2 w-5 h-5 rotate-180"
-                                     fill="currentColor"
-                                     viewBox="0 0 20 20"
-                                     xmlns="http://www.w3.org/2000/svg"
+                                <svg aria-hidden="true" class="-ml-1 mr-2 w-5 h-5 rotate-180" fill="currentColor"
+                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
                                      style=" DISPLAY: inline-block; ">
                                     <path fill-rule="evenodd"
                                           d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
@@ -1885,15 +1681,11 @@
                                 </svg>
                                 Previous Step
                             </button>
-                            <button onclick="nextSchoology()"
-                                    type="button"
+                            <button onclick="nextSchoology()" type="button"
                                     class="inline-block text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">
                                 Next Step
-                                <svg aria-hidden="true"
-                                     class="ml-2 -mr-1 w-5 h-5"
-                                     fill="currentColor"
-                                     viewBox="0 0 20 20"
-                                     xmlns="http://www.w3.org/2000/svg"
+                                <svg aria-hidden="true" class="ml-2 -mr-1 w-5 h-5" fill="currentColor"
+                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
                                      style=" DISPLAY: inline-block; ">
                                     <path fill-rule="evenodd"
                                           d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
@@ -1909,7 +1701,7 @@
                         </div>
                         <div step="2">
                             <h1 class="text-black dark:text-white text-3xl">
-                               <span style="
+                <span style="
     background: -webkit-linear-gradient(left, #42cbf5, #42f578);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -1922,20 +1714,15 @@
                             </p>
                             <div class="relative">
                                 <div class="flex absolute inset-y-0 left-0 items-center pl-3 pb-2 pointer-events-none">
-                                    <p id="error"
-                                       class="material-icons"
-                                       style="color: gray;
+                                    <p id="error" class="material-icons" style="color: gray;
                                               vertical-align: middle;">
                                         pending
                                     </p>
                                 </div>
-                                <input onchange="changeInput();"
-                                       id="sgy_link"
+                                <input onchange="changeInput();" id="sgy_link"
                                        class="pl-10 p-2.5 px-4 py-3 mt-4 w-full rounded-md bg-gray-100 dark:bg-gray-900 outline-none dark:text-white border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
-                                       placeholder="Schoology Link"
-                                       style="-webkit-user-select: text;">
-                                <p id="error-msg"
-                                   class="mt-2 text-sm text-red-600 dark:text-red-500"
+                                       placeholder="Schoology Link" style="-webkit-user-select: text;">
+                                <p id="error-msg" class="mt-2 text-sm text-red-600 dark:text-red-500"
                                    style=" color: gray !important; ">
                                     Enter your Schoology link please.
                                 </p>
@@ -1957,14 +1744,10 @@
                             </p>
                             <br>
                             <br>
-                            <button onclick="prev()"
-                                    type="button"
+                            <button onclick="prev()" type="button"
                                     class="inline-block text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">
-                                <svg aria-hidden="true"
-                                     class="-ml-1 mr-2 w-5 h-5 rotate-180"
-                                     fill="currentColor"
-                                     viewBox="0 0 20 20"
-                                     xmlns="http://www.w3.org/2000/svg"
+                                <svg aria-hidden="true" class="-ml-1 mr-2 w-5 h-5 rotate-180" fill="currentColor"
+                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
                                      style=" DISPLAY: inline-block; ">
                                     <path fill-rule="evenodd"
                                           d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
@@ -1973,17 +1756,11 @@
                                 </svg>
                                 Previous Step
                             </button>
-                            <button id="step_2_button"
-                                    disabled
-                                    onclick="nextSchoology()"
-                                    type="button"
+                            <button id="step_2_button" disabled onclick="nextSchoology()" type="button"
                                     class="inline-block text-white bg-yellow-700 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">
                                 Next Step
-                                <svg aria-hidden="true"
-                                     class="ml-2 -mr-1 w-5 h-5"
-                                     fill="currentColor"
-                                     viewBox="0 0 20 20"
-                                     xmlns="http://www.w3.org/2000/svg"
+                                <svg aria-hidden="true" class="ml-2 -mr-1 w-5 h-5" fill="currentColor"
+                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
                                      style=" DISPLAY: inline-block; ">
                                     <path fill-rule="evenodd"
                                           d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
@@ -1999,7 +1776,7 @@
                         </div>
                         <div step="3">
                             <h1 class="text-black dark:text-white text-3xl">
-                                <span style="
+                <span style="
     background: -webkit-linear-gradient(left, #42cbf5, #42f578);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -2013,31 +1790,19 @@
                                 Please disable Schoology Plus or any Schoology extensions or this may not work
                                 properly.
                             </p>
-                            <input style="float:left;"
-                                   placeholder="API KEY"
-                                   type="text"
-                                   id="key"
-                                   name="key"
+                            <input style="float:left;" placeholder="API KEY" type="text" id="key" name="key"
                                    class="w-full bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-900 border-0 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                    required>
                             <br>
                             <br>
-                            <input style="float:left;"
-                                   placeholder="API Secret"
-                                   type="text"
-                                   id="secret"
-                                   name="secret"
+                            <input style="float:left;" placeholder="API Secret" type="text" id="secret" name="secret"
                                    class="w-full mt-2 bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-900 border-0 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                    required>
                             <br>
-                            <button onclick="prev()"
-                                    type="button"
+                            <button onclick="prev()" type="button"
                                     class="inline-block text-white mt-6 bg-yellow-400 hover:bg-yellow-500 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:focus:ring-yellow-900">
-                                <svg aria-hidden="true"
-                                     class="-ml-1 mr-2 w-5 h-5 rotate-180"
-                                     fill="currentColor"
-                                     viewBox="0 0 20 20"
-                                     xmlns="http://www.w3.org/2000/svg"
+                                <svg aria-hidden="true" class="-ml-1 mr-2 w-5 h-5 rotate-180" fill="currentColor"
+                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
                                      style=" DISPLAY: inline-block; ">
                                     <path fill-rule="evenodd"
                                           d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
@@ -2046,15 +1811,11 @@
                                 </svg>
                                 Previous Step
                             </button>
-                            <button onclick="nextSchoology()"
-                                    type="button"
+                            <button onclick="nextSchoology()" type="button"
                                     class="inline-block text-white mt-6 bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:focus:ring-yellow-900">
                                 Next Step
-                                <svg aria-hidden="true"
-                                     class="ml-2 -mr-1 w-5 h-5"
-                                     fill="currentColor"
-                                     viewBox="0 0 20 20"
-                                     xmlns="http://www.w3.org/2000/svg"
+                                <svg aria-hidden="true" class="ml-2 -mr-1 w-5 h-5" fill="currentColor"
+                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
                                      style=" DISPLAY: inline-block; ">
                                     <path fill-rule="evenodd"
                                           d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
@@ -2071,7 +1832,7 @@
                         </div>
                         <div step="4">
                             <h1 class="text-black dark:text-white text-3xl">
-                               <span style="
+                <span style="
     background: -webkit-linear-gradient(left, #42cbf5, #42f578);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -2085,15 +1846,11 @@
                                 click
                                 "Accept".
                             </p>
-                            <button onclick="launch_sgy()"
-                                    id="launchBTN"
-                                    type="button"
+                            <button onclick="launch_sgy()" id="launchBTN" type="button"
                                     class="text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">
                                 Launch Schoology
                             </button>
-                            <button onclick="saveApiKey()"
-                                    id="launchBTN"
-                                    type="button"
+                            <button onclick="saveApiKey()" id="launchBTN" type="button"
                                     class="text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">
                                 Use API Keys to Authorize
                             </button>
@@ -2117,14 +1874,10 @@
                                 <p>
                                     Email: <span id="email"></span>
                                 </p>
-                                <button onclick="window.close();"
-                                        type="button"
+                                <button onclick="window.close();" type="button"
                                         class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800/50 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
-                                    <svg style="display:inline-block;"
-                                         class="w-6 h-6"
-                                         fill="currentColor"
-                                         viewBox="0 0 20 20"
-                                         xmlns="http://www.w3.org/2000/svg">
+                                    <svg style="display:inline-block;" class="w-6 h-6" fill="currentColor"
+                                         viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd"
                                               d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                                               clip-rule="evenodd">
@@ -2138,8 +1891,7 @@
                 </div>
                 <!-- Modal footer -->
                 <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-                    <button onclick="closeModal('schoology-modal')"
-                            type="button"
+                    <button onclick="closeModal('schoology-modal')" type="button"
                             class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                         Cancel
                     </button>
@@ -2147,9 +1899,7 @@
             </div>
         </div>
     </div>
-    <div id="graderoom-modal"
-         tabindex="-1"
-         aria-hidden="true"
+    <div id="graderoom-modal" tabindex="-1" aria-hidden="true"
          class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
         <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
             <!-- Modal content -->
@@ -2170,9 +1920,8 @@
                                     margin: 5px 5px 5px 30px;
                                     ">
                         <span style=" margin: 15px; font-size: 1.5em; "><i class="material-icons">close</i></span>
-                        <img class=" w-6 h-6 mr-2 -ml-1"
-                             src="/static/images/NebulusSpecialLogo.png" alt="Rounded avatar"
-                             style="
+                        <img class=" w-6 h-6 mr-2 -ml-1" src="/static/images/NebulusSpecialLogo.png"
+                             alt="Rounded avatar" style="
                                     display: inline-block;
                                     margin: 5px;
                                     height: 90px;
@@ -2214,11 +1963,12 @@
                         <h2 class="text-gray-300 text-xl">Which version of Graderoom is supported?</h2>
                         <p class="text-black dark:text-white">We currently only support Graderoom's Beta Build.</p>
                         <br><br>
-                        <h2 class="text-gray-300 text-xl">Where can I find my pairing 3key?</h2>
+                        <h2 class="text-gray-300 text-xl">Where can I find my pairing key?</h2>
                         <p class="text-black dark:text-white">It's located at
                             <a class="text-sky-500 font-bold hover:underline" href="https://beta.graderoom.me/">https://beta.graderoom.me/</a>.
                             It will generate a key that expires in an hour.
-                            Generate a key and place it in the box above.</p><br><br>
+                            Generate a key and place it in the box above.
+                        </p><br><br>
                         <h2 class="text-gray-300 text-xl">It's not letting me Generate a Pairing Key.</h2>
                         <p class="text-black dark:text-white">You need at least one sync to be able to generate a key.
                             This verifies you are a real person.</p>
@@ -2227,8 +1977,7 @@
                 </div>
                 <!-- Modal footer -->
                 <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-                    <button onclick="closeModal('graderoom-modal')"
-                            type="button"
+                    <button onclick="closeModal('graderoom-modal')" type="button"
                             class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                         Cancel
                     </button>
@@ -2236,21 +1985,5 @@
             </div>
         </div>
     </div>
-    <script>
-        function connectGraderoom() {
-            let data = document.getElementById("graderoom-key").value;
-            if (data.length === 6) {
-                $.ajax({
-                    type: 'GET',
-                    url: '/api/v1/internal/oauth/graderoom/connect',
-                    data: {
-                        graderoom_key: document.getElementById("graderoom-key").value
-                    }
-                }).done(function (data) {
-                    window.location.reload();
-                });
-            }
-        }
-    </script>
     </body>
 {% endblock %}

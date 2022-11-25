@@ -20,6 +20,9 @@ class Grades(Snowflake):
 
         grade = 0
         for term in self.terms:
+            if not term.course:
+                term.course = self.course
+
             if not term.grade:
                 term.clean()
 

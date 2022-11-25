@@ -52,7 +52,7 @@ def school():
 
 
 @main_blueprint.route("/invite/school/<school>", methods=["GET"])
-def specificschool(school):
+def specific_school(school):
     school = school.upper()
     schools = [
         "BISV",
@@ -154,10 +154,12 @@ def selectregion():
         homepage=True,
     )
 
+
 @main_blueprint.route("/global/<country>")
 def globalcountry(country):
     session["global"] = country
     return redirect("/")
+
 
 @main_blueprint.app_errorhandler(404)
 @main_blueprint.app_errorhandler(400)

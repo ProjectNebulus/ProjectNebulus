@@ -28,6 +28,6 @@ class Assessment(Snowflake):
         default="Not Started",
     )
     description = StringField(
-        default="", null=True, description="The description of the assignment."
+        default="", description="The description of the assignment."
     )
-    link = StringField(default="", null=True, description="Link to the LMS")
+    link = StringField(default="", description="Link to the LMS")

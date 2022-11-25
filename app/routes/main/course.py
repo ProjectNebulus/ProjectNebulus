@@ -1,11 +1,12 @@
 import datetime
+from collections import defaultdict
 
 import requests
 from flask import render_template, request, session
 from mongoengine import DoesNotExist
 
 from app.static.python.classes import Assignment, Course, Grades, User
-from app.static.python.mongodb.read import find_user, getText, sort_course_events, get_user_courses
+from app.static.python.mongodb.read import find_user, getText, get_user_courses, sort_user_events
 from . import main_blueprint, utils
 from .utils import logged_in, private_endpoint, fmt
 
@@ -21,6 +22,8 @@ def course_page(page, **kwargs):
     user = User.objects(id=session["id"])[0]
     course_id = kwargs["id"]
     course = Course.objects(pk=course_id)
+    announcements, events, a_len, e_len = sort_user_events(session["id"], course)
+
     if not course or user.id not in [u.id for u in course[0].authorizedUsers]:
         return (
             render_template(
@@ -37,6 +40,8 @@ def course_page(page, **kwargs):
 
     course = course[0]
     iframe_src = "/course/" + course_id + "/"
+    groupedData = defaultdict(lambda: defaultdict(lambda: set()))
+
     if not request.args.get("iframe"):
         session["recent"] = course_id
 
@@ -54,6 +59,15 @@ def course_page(page, **kwargs):
 
         if not course.grades.terms:
             course.grades.clean()
+
+        for assignment in course.assignments:
+            if not assignment or assignment._cls != "Assignment":
+                continue
+
+            if not assignment.period or not assignment.grading_category:
+                continue
+
+            groupedData[assignment.period][assignment.grading_category].add(assignment)
 
         print(f"Course: {course.name} (id: {course_id})")
         print("Percent:", course.grades.grade)
@@ -73,11 +87,31 @@ def course_page(page, **kwargs):
         email=session.get("email"),
         avatar=session.get("avatar", "/v3.gif"),
         disableArc=(page != "course"),
-        events=sort_course_events(course_id)[1],
+        events=events,
+        ae=a_len,
+        ee=e_len,
         strftime=utils.strftime,
         translate=getText,
         gradeStr=gradeStr,
+        courseGrade=courseGrade,
+        groupedData=groupedData,
     )
+
+
+def courseGrade(percent):
+    percent = round(percent * 100, 1)
+    if percent >= 90:
+        letter = "A"
+    elif percent >= 80:
+        letter = "B"
+    elif percent >= 70:
+        letter = "C"
+    elif percent >= 60:
+        letter = "D"
+    else:
+        letter = "F"
+
+    return f'<span color="{letter}" class="font-bold text-gray-500 dark:text-gray-300">{percent}% ({letter})</span>'
 
 
 def gradeStr(assignment: Assignment):

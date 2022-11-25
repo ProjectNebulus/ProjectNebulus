@@ -6,10 +6,11 @@ class GradingCategory(EmbeddedDocument):
     CALC_TOTAL_PTS = 2
 
     course = ReferenceField("Course")
-    weight = FloatField(default=1, description="Weight (in decimal) of this category.")
-    title = StringField(default=None, null=True, required=True)
-    subcategories = ListField(EmbeddedDocumentField("GradingCategory"), required=False, default=[])
+    weight = FloatField(default=None, description="Weight (in decimal) of this category.")
+    title = StringField(default=None)
+    subcategories = ListField(EmbeddedDocumentField("GradingCategory"), default=None)
     grade = FloatField(required=False)
+    show_in_upcoming = BooleanField(default=False)
     calculation_type = IntField(default=CALC_PERCENTAGE)
     imported_id = StringField(required=True)
 
@@ -31,13 +32,16 @@ class GradingCategory(EmbeddedDocument):
                     [assignment.grade for assignment in self.course.assignments if assignment.grading_category is self]
                 )
 
-                self.grade = grades / max_grade
+                if max_grade > 0:
+                    self.grade = grades / max_grade
+                else:
+                    self.grade = 1
 
             else:
                 grades = []
                 for assignment in self.course.assignments:
-                    if assignment.grading_category is self:
-                        grades.append(assignment.points / assignment.grade)
+                    if assignment.grading_category is self and assignment.points and assignment.grade is not None:
+                        grades.append(assignment.grade / assignment.points)
 
                 if len(grades) > 0:
                     self.grade = sum(grades) / len(grades)
@@ -46,3 +50,6 @@ class GradingCategory(EmbeddedDocument):
 
     def __str__(self):
         return f'GradingCategory(title="{self.title}", weight={self.weight})'
+
+    def __hash__(self):
+        return hash(" ".join(map(str, self._fields_ordered)))

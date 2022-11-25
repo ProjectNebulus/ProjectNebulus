@@ -65,28 +65,28 @@ class User(Snowflake):
     created_at = DateTimeField(default=lambda: datetime.now())
 
     # Connections
-    schoology = ListField(EmbeddedDocumentField(Schoology, default=None, null=True))
-    gclassroom = ListField(EmbeddedDocumentField(GoogleClassroom, default=None, null=True))
-    spotify = ListField(EmbeddedDocumentField(Spotify, default=None, null=True))
-    discord = ListField(EmbeddedDocumentField(Discord, default=None, null=True))
-    canvas = ListField(EmbeddedDocumentField(Canvas, default=None, null=True))
-    graderoom = ListField(EmbeddedDocumentField(Graderoom, default=None, null=True))
-    github = ListField(EmbeddedDocumentField(Github, default=None, null=True))
+    schoology = ListField(EmbeddedDocumentField(Schoology, default=None))
+    gclassroom = ListField(EmbeddedDocumentField(GoogleClassroom, default=None))
+    spotify = ListField(EmbeddedDocumentField(Spotify, default=None))
+    discord = ListField(EmbeddedDocumentField(Discord, default=None))
+    canvas = ListField(EmbeddedDocumentField(Canvas, default=None))
+    graderoom = ListField(EmbeddedDocumentField(Graderoom, default=None))
+    github = ListField(EmbeddedDocumentField(Github, default=None))
 
     # User Customizations
     avatar = EmbeddedDocumentField(
         Avatar,
         default=Avatar(avatar_url="/static/images/nebulusCats/v3.gif", parent="User"),
     )
-    bio = StringField(default="N", null=True)
+    bio = StringField(default="N")
     primary_color = StringField(default="#ff5454")
     secondary_color = StringField(default="#ffd254")
-    status = StringField(default="", null=True)
+    status = StringField(default="")
     screenTime = EmbeddedDocumentField(ScreenTime, default=None)
-    schools = ListField(StringField(), default=None, null=True)  # School's CODE (3-4 Letters)
+    schools = ListField(StringField(), default=None)  # School's CODE (3-4 Letters)
 
     # Membership
-    premium_expiration = DateTimeField(required=False, default=None, null=True)
+    premium_expiration = DateTimeField(required=False, default=None)
     points = IntField(default=0)
     premium = BooleanField(default=False)
     type = StringField(
@@ -97,9 +97,9 @@ class User(Snowflake):
     # Processions
     courses = ListField(ReferenceField("Course"), default=[])
     clubs = ListField(ReferenceField("Club"), default=[])
-    planner = EmbeddedDocumentField(Planner, null=True, default=None)
-    notepad = EmbeddedDocumentField(Notepad, null=True, default=None)
-    calendar = EmbeddedDocumentField(Calendar, null=True, default=None)
+    planner = EmbeddedDocumentField(Planner, default=None)
+    notepad = EmbeddedDocumentField(Notepad, default=None)
+    calendar = EmbeddedDocumentField(Calendar, default=None)
     nebulus_documents = ListField(ReferenceField(NebulusDocument), default=[])
     chats = ListField(ReferenceField("Chat"), default=[])
     chatProfile = EmbeddedDocumentField(ChatProfile)
@@ -107,8 +107,8 @@ class User(Snowflake):
     def clean(self):
         self.avatar.avatar_url = (
             self.avatar.avatar_url.replace("http://localhost:8080", "")
-                .replace("https://localhost:8080", "")
-                .replace("https://beta.nebulus.ml", "")
+            .replace("https://localhost:8080", "")
+            .replace("https://beta.nebulus.ml", "")
         )
 
         if "static/images/nebulusCats" not in self.avatar.avatar_url:

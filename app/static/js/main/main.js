@@ -18,6 +18,8 @@ window.addEventListener("beforeunload", function (e) {
         }
     })
 });
+
+
 if (localStorage.getItem("customCursor") !== null && !window.location.search.includes("iframe=true")) {
     document.documentElement.classList.add("custom-cursor");
 
@@ -113,10 +115,6 @@ function loadingIcon(length, width, fill) {
 
 function keyUpDelay(querySelector, duration, func) {
     new KeyUpTimer(querySelector, duration, func).enable();
-}
-
-if (window.location.search.includes("iframe=true")) {
-    document.body.style.background = "transparent";
 }
 
 /**
@@ -270,7 +268,6 @@ window.addEventListener('load', function () {
     }
 });
 
-let statusInterval = 0;
 let shouldGetSpotify = true;
 let requestAttempts = 0;
 
@@ -288,7 +285,8 @@ function onFailedRequest() {
 function online() {
     isOnline = true;
     requestAttempts = 0;
-    if (shouldGetSpotify) statusInterval = setInterval(navFetchStatus, 350);
+    shouldGetSpotify = true;
+    navFetchStatus();
 
     document.getElementById('wifi').innerHTML = 'wifi';
     document.getElementById('wifi').classList.add('bg-blue-600');
@@ -297,7 +295,7 @@ function online() {
 
 function offline() {
     isOnline = false;
-    if (shouldGetSpotify) clearInterval(statusInterval);
+    shouldGetSpotify = false;
 
     document.getElementById('wifi').innerHTML = 'wifi_off';
     document.getElementById('wifi').classList.remove('bg-blue-600');
@@ -316,7 +314,6 @@ function navFetchStatus() {
         if (data === "2") {
             document.getElementById('spotifyStatus').style.display = 'none';
             shouldGetSpotify = false;
-            clearInterval(statusInterval);
             return;
         }
 
@@ -354,10 +351,13 @@ function navFetchStatus() {
                     ${playing}
                     <i style="margin-left:20px;color:white;" class="material-icons">skip_next</i>
                 </p></div>`;
+
+        navFetchStatus();
     });
 
     request.fail(onFailedRequest);
 }
+
 
 const list = ['Red', 'Blue', 'Green', 'Blurple', 'Pink', 'Jade', 'Yellow'];
 let v3Image;
@@ -370,15 +370,18 @@ for (let i = 0; i < list.length; i++) {
         .then((imageBlob) => (list[i] = URL.createObjectURL(imageBlob)));
 }
 
+
 fetch(`/static/images/nebulusCats/v3.gif`)
     .then((response) => response.blob())
     .then((imageBlob) => (v3Image = URL.createObjectURL(imageBlob)));
+
 
 function changeFavicon() {
     let link = document.querySelector("link[rel~='icon']");
     index = (index + 1) % list.length;
     link.href = list[index];
 }
+
 
 function openModal(object_id) {
     let targetEl = document.getElementById(object_id);
@@ -408,10 +411,6 @@ function openModal(object_id) {
 }
 
 
-function randomCat() {
-    return list[Math.floor(Math.random() * list.length)];
-}
-
 function closeModal(object_id) {
     let targetEl = document.getElementById(object_id);
     targetEl.style.scale = "0";
@@ -430,4 +429,17 @@ function closeModal(object_id) {
         for (const el of document.querySelectorAll('[modal-backdrop]'))
             el.remove();
     }, 200);
+}
+
+function randomCat() {
+    return list[Math.floor(Math.random() * list.length)];
+}
+
+function linkProxy(onChange) {
+    return new Proxy(location, {
+        set(target, p, value, receiver) {
+            if (p === "pathname")
+                onChange(value);
+        }
+    })
 }

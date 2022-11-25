@@ -7,8 +7,6 @@
     "LMS": "Schoology",
     "sgy_url": "https://bins.schoology.com",
     "email": "@basisindependent.com",
-    "canvas_url": "",
-    "_id": "",
     "city": "San Jose, CA, USA",
     "location": "1290 Parkmoor Ave, San Jose, CA 95126",
     "code": "BISV"
@@ -20,8 +18,6 @@
     "background_url": "jpeg",
     "LMS": "Schoology",
     "sgy_url": "https://schoology.harker.org",
-    "canvas_url": "",
-    "_id": "",
     "city": "San Jose, CA, USA",
     "location": "500 Saratoga Ave, San Jose, CA 95129",
     "code": "HKR",
@@ -34,8 +30,6 @@
     "background_url": "png",
     "LMS": "Classroom",
     "sgy_url": "",
-    "canvas_url": "",
-    "id": "",
     "city": "San Jose, CA, USA",
     "location": "1290 Parkmoor Ave, San Jose, CA 95126",
     "code": "CBYA"
@@ -47,8 +41,6 @@
     "background_url": "webp",
     "LMS": "Classroom",
     "sgy_url": "",
-    "canvas_url": "",
-    "id": "",
     "city": "San Jose, CA, USA",
     "location": "Cupertino, San Jose, CA 95126",
     "code": "MLR"
@@ -60,8 +52,6 @@
     "background_url": "jpeg",
     "LMS": "Schoology",
     "sgy_url": "https://stratfordschools.schoology.com",
-    "canvas_url": "",
-    "id": "",
     "city": "San Jose, CA, USA",
     "location": "1290 Parkmoor Ave, San Jose, CA 95126",
     "code": "SDPB",
@@ -74,8 +64,6 @@
     "background_url": "jpeg",
     "LMS": "Moodle",
     "sgy_url": "",
-    "canvas_url": "",
-    "id": "",
     "city": "San Jose, CA, USA",
     "location": "1290 Parkmoor Ave, San Jose, CA 95126",
     "code": "VCS"
@@ -87,8 +75,6 @@
     "background_url": "jpeg",
     "LMS": "Canvas",
     "sgy_url": "",
-    "canvas_url": "",
-    "id": "",
     "city": "Sammamish, Washington",
     "location": "1290 Parkmoor Ave, San Jose, CA 95126",
     "code": "PNLK"
@@ -100,8 +86,6 @@
     "picture_url": "png",
     "LMS": "Canvas",
     "sgy_url": "",
-    "canvas_url": "",
-    "id": "",
     "city": "San Jose, CA, USA",
     "location": "1290 Parkmoor Ave, San Jose, CA 95126",
     "code": "BCP",
@@ -114,8 +98,6 @@
     "background_url": "jpeg",
     "LMS": "Schoology",
     "sgy_url": "https://pausd.schoology.com",
-    "canvas_url": "",
-    "id": "",
     "city": "Palo Alto, CA, USA",
     "location": "1290 Parkmoor Ave, San Jose, CA 95126",
     "code": "GUNN"
@@ -127,8 +109,6 @@
     "background_url": "jpeg",
     "LMS": "Schoology",
     "sgy_url": "https://pausd.schoology.com",
-    "canvas_url": "",
-    "id": "",
     "city": "Palo Alto, CA, USA",
     "location": "1290 Parkmoor Ave, San Jose, CA 95126",
     "code": "PALY"
@@ -140,8 +120,6 @@
     "background_url": "png",
     "LMS": "Moodle",
     "sgy_url": "https://schoology.harker.org",
-    "canvas_url": "",
-    "id": "",
     "city": "San Jose, CA, USA",
     "location": "1290 Parkmoor Ave, San Jose, CA 95126",
     "code": "CLGBA"
@@ -153,8 +131,6 @@
     "background_url": "png",
     "LMS": "schoology",
     "sgy_url": "https://schoology.harker.org",
-    "canvas_url": "",
-    "id": "",
     "city": "San Jose, CA, USA",
     "location": "1290 Parkmoor Ave, San Jose, CA 95126",
     "code": "LNBK"
@@ -167,8 +143,6 @@
     "LMS": "Nebulus",
     "sgy_url": "",
     "email": "@nebulus.app",
-    "canvas_url": "",
-    "_id": "",
     "city": "Seattle, Washington, USA",
     "location": "",
     "code": "NBLS"

@@ -16,6 +16,9 @@
         //progressJs("#thebody").start();
     </script>
     <script>
+        if (window.location.search.includes("iframe=true"))
+            document.body.style.background = "transparent";
+
         document.addEventListener("DOMContentLoaded", function () {
             if (window.top === window && $("#progress").length === 0) {
                 $("body").append($("<div></div>").attr("id", "progress"))

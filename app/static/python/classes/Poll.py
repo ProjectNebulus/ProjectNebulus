@@ -14,12 +14,12 @@ class Poll(EmbeddedDocument):
     meta = {"collection": "Polls"}
     url = URLField(required=True)
     name = StringField(required=True)
-    description = StringField(default="", null=True)
+    description = StringField(default="")
     upload_date = DateTimeField(default=lambda: datetime.now)
     folder = ReferenceField(
-        "Folder", default=None, null=True, required=True
+        "Folder", default=None, required=True
     )  # 0 if it's in the course, not any folder
-    course = ReferenceField("Course", default=None, null=True, required=True)
+    course = ReferenceField("Course", default=None, required=True)
 
     def clean(self):
         """

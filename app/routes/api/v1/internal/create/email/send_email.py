@@ -1,5 +1,6 @@
 import codecs
 import random
+from datetime import datetime
 from pathlib import Path
 from threading import Thread
 
@@ -29,10 +30,9 @@ def send_email(subject, recipients, message):
     Thread(target=send_async_email, args=(app, msg)).start()
 
 
-@internal.route("/signup-email", methods=["POST"])
-@private_endpoint
-def signup_email():
-    data = request.get_json()
+def send_reset_email(replace=None, data=None):
+    if not data:
+        data = request.get_json()
 
     code = random.randint(10000000, 99999999)
     session["verificationCode"] = str(code)
@@ -44,10 +44,40 @@ def signup_email():
     htmlform = (
         str(codecs.open(str(root_path) + "/app/templates/utils/email.html", "r").read())
         .replace("123456", str(code))
-        .replace("Nicholas Wang", data["username"])
+        .replace("Nicholas Wang", data.get("username") or session["username"])
     )
 
+    if replace:
+        htmlform = replace(htmlform)
+
     send_email(f"Your Nebulus Email Verification Code", [data["email"]], htmlform)
+
+
+@internal.route("/signup-email", methods=["POST"])
+@private_endpoint
+def signup_email():
+    send_reset_email()
+    return "success"
+
+
+@internal.route("/reset-psw", methods=["POST"])
+@private_endpoint
+def reset_psw_email():
+    data = request.get_json()
+    try:
+        read.find_user(username=data["username"])
+    except KeyError:
+        return "Invalid Username"
+
+    def replace(html):
+        return (
+            html
+            .replace("signed up", "requested a password reset")
+            .replace("sign up", "do so")
+            .replace("Signup", "Reset")
+        )
+
+    send_reset_email(replace, data)
 
     return "success"
 
@@ -55,29 +85,17 @@ def signup_email():
 @internal.route("/reset-email", methods=["POST"])
 @private_endpoint
 def reset_email():
-    data = request.get_json()
-    try:
-        email = read.find_user(username=data["username"]).email
-    except KeyError:
-        return "0"
+    if not (access := session.get("access")) or datetime.now().timestamp() - float(access) > 5 * 60:
+        return "Unauthorized", 401
 
-    code = random.randint(10000000, 99999999)
-    session["verificationCode"] = str(code)
-    print(code)
+    def replace(html):
+        return (
+            html
+            .replace("signed up", "requested an email change")
+            .replace("sign up", "do so")
+            .replace("Signup", "Change")
+        )
 
-    current_dir = Path(__file__)
-
-    root_path = [p for p in current_dir.parents if "ProjectNebulus" in p.parts[-1]][0]
-
-    htmlform = (
-        str(codecs.open(str(root_path) + "/app/templates/utils/email.html", "r").read())
-        .replace("123456", str(code))
-        .replace("Nicholas Wang", data["username"])
-        .replace("signed up", "requested a password reset")
-        .replace("sign up", "do so")
-        .replace("Signup", "Reset")
-    )
-
-    send_email(f"Your Nebulus Password Reset Code", [email], htmlform)
+    send_reset_email(replace)
 
     return "success"

@@ -24,3 +24,30 @@ for (const a of document.querySelectorAll("a[target=frame]")) {
         a.classList.add('dark:bg-gray-600', 'light:bg-gray-600');
     };
 }
+
+{
+    const syncButton = document.getElementById("sync-lms");
+    const syncText = syncButton.querySelector("div.ml-3");
+    syncButton.addEventListener("click", () => {
+        syncButton.disabled = true;
+        syncText.innerText = "Syncing...";
+
+        const xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '/api/v1/internal/sync/course/' + syncFrom, true);
+        xhttp.setRequestHeader('Content-type', 'application/json');
+        xhttp.send(JSON.stringify({course_id: '{{ course_id }}'}));
+        xhttp.addEventListener("readystatechange", () => {
+            if (xhttp.readyState !== XMLHttpRequest.DONE)
+                return;
+
+            const status = xhttp.status;
+            if (status === 0 || (status >= 200 && status < 400))
+                syncText.innerText = "Sync Complete!";
+            else
+                syncText.innerText = "Sync failed!";
+
+            setTimeout(() => syncText.innerText = "LMS Sync", 2000);
+            setTimeout(() => syncText.disabled = false, 10000);
+        });
+    });
+}

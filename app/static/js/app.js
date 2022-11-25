@@ -1,6 +1,8 @@
 if (!document.getElementById("page-title"))
     document.getElementById("pageTitle").innerHTML = "App";
 
+let courseId = null;
+
 keyUpDelay('#search', 1000, searchWithin);
 const Default = {
     placement: 'bottom-right',
@@ -38,7 +40,7 @@ function updateEventListeners() {
 
 updateEventListeners();
 
-{
+document.addEventListener("DOMContentLoaded", () => {
     const recActivity = document.getElementById("recent-activity-div");
     const upcEvents = document.getElementById("upcoming-events");
     upcEvents.style.scrollBehavior = "smooth";
@@ -54,7 +56,7 @@ updateEventListeners();
             return;
 
         if (announcementStart >= announcementEnd) {
-            if (!endAnnouncementsMessage) {
+            if (!endAnnouncementsMessage && announcementEnd > 8) {
                 endAnnouncementsMessage = true;
                 recActivity.innerHTML += `
                 <div class="flex gap-4 justify-center place-items-center mb-4">
@@ -77,12 +79,16 @@ updateEventListeners();
         `
         recActivity.scrollTop = recActivity.scrollHeight;
 
+        let data = {"load": announcementStart};
+        if (courseId)
+            data["course_id"] = courseId;
+
         waiting = true;
         const req = $.ajax({
             url: "/api/v1/internal/get/recent-activity",
             type: "POST",
             contentType: "application/json",
-            data: JSON.stringify({load: announcementStart})
+            data: JSON.stringify(data)
         });
         req.done(data => {
             recActivity.children[recActivity.children.length - 1].remove();
@@ -99,7 +105,7 @@ updateEventListeners();
             return;
 
         if (eventStart >= eventEnd) {
-            if (!endEventsMessage) {
+            if (!endEventsMessage && eventEnd > 10) {
                 endEventsMessage = true;
                 upcEvents.innerHTML += `
                 <div class="flex gap-4 justify-center place-items-center mb-4">
@@ -138,7 +144,7 @@ updateEventListeners();
             updateEventListeners();
         });
     });
-}
+})
 
 function openDetailsModal(content, title, author, pic, course, postTime, dueTime, type, coursePic, likes) {
     if (type === "Announcement") {

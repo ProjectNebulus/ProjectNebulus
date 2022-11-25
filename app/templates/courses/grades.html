@@ -19,7 +19,7 @@
         }
 
         [color=F] {
-            color: red !important;
+            color: orangered !important;
         }
 
         [color]:not(.dark) {
@@ -48,32 +48,62 @@
         {{ course.name }}
         <div>
             Overall Grade:
-            <span color="A" class="font-bold text-gray-700 dark:text-gray-400">95% (A)</span>
+            <span color="A"
+                  class="font-bold text-gray-700 dark:text-gray-400">{{ courseGrade(course.grades.grade)|safe|safe }}</span>
         </div>
     </div>
 
-    <div class="mt-8 mr-4 rounded-lg overflow-hidden">
-        <table class="w-full text-gray-700 dark:text-gray-400">
-            <thead class="bg-gray-300 dark:bg-gray-700">
-            <tr>
-                <td>Assignment Name</td>
-                <td>Grade</td>
-                <td>Comments</td>
-                <td>Your Submission</td>
-            </tr>
-            </thead>
-            <tbody class="bg-gray-100 dark:bg-gray-800">
-            {% for a in course.assignments %}
-                {% if a._cls == "Assignment" %}
-                    <tr class="border-b border-gray-200 dark:border-gray-700">
-                        <td>{{ a.title }}</td>
-                        <td>{{ gradeStr(a)|safe }}</td>
-                        <td></td>
-                        <td></td>
+    <div class="mt-8 mr-2 pr-4 overflow-auto" style="height: 80%">
+        <div class="rounded-xl overflow-hidden">
+            <table class="w-full text-gray-700 dark:text-gray-400">
+                <thead class="bg-gray-300 dark:bg-gray-700/75">
+                <tr>
+                    <td>Assignment Name</td>
+                    <td>Grade</td>
+                    <td>Comments</td>
+                    <td>Your Submission</td>
+                </tr>
+                </thead>
+                <tbody class="bg-gray-100 dark:bg-gray-800/75">
+                {% for period in groupedData.keys() %}
+                    <tr class="bg-gray-300/75 dark:bg-gray-700/75">
+                        <div class="flex justify-between">
+                            <div>
+                                {{ period.title }}
+                                {% if period.start_date.year < 9999 and period.end_date.year < 9999 %}
+                                    ({{ strftime(period.start_date, "%-m/%-d/%-y") }} -
+                                    {{ strftime(period.end_date, "%-m/%-d/%-y") }})
+                                {% endif %}
+                            </div>
+                            {{ courseGrade(period.grade)|safe }}
+                        </div>
                     </tr>
-                {% endif %}
-            {% endfor %}
-            </tbody>
-        </table>
+                    {% for category in groupedData[period] %}
+                        <tr class="bg-gray-300/75 dark:bg-gray-700/75">
+                            <div class="flex justify-between">
+                                <div>
+                                    {{ category.title }}
+                                    {% if category.weight %}
+                                        <span class="text-gray-200 dark:text-gray-400">({{ category.weight }})</span>
+                                    {% endif %}
+                                </div>
+                                {{ courseGrade(period.grade)|safe }}
+                            </div>
+                        </tr>
+                        {% for assignment in groupedData[period][category] %}
+                            {% if a and a._cls == "Assignment" %}
+                                <tr class="border-b border-gray-200 dark:border-gray-700">
+                                    <td>{{ a.title }}</td>
+                                    <td>{{ gradeStr(a)|safe }}</td>
+                                    <td>{% if a.comment %}{{ a.comment }}{% endif %}</td>
+                                    <td></td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 {% endblock %}

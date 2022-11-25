@@ -32,7 +32,7 @@ class Folder(Snowflake):
 
     meta = {"collection": "Folders"}
     name = StringField(required=True)
-    description = StringField(default="", null=True)
+    description = StringField(default="")
     create_date = DateTimeField(default=lambda: datetime.now)
     course = ReferenceField("Course", required=True)
     parent = ReferenceField(

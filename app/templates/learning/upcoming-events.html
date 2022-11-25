@@ -9,12 +9,18 @@
 </style>
 
 {% if events|length == 0 %}
-    <div class="text-black dark:text-white m-3 p-6 rounded-lg w-full dark:bg-gray-900/50 bg-white/50"
-         style="backdrop-filter: blur(10px);">
-        <h1 class="text-2xl ">Nothing Here Yet!</h1>
-        <p>No events, quizzes, assignments, or assessments yet! Things you add to your calendar and courses will appear
-            here!</p>
-    </div>
+    {% if ee > 0 %}
+        <div class="text-black dark:text-white m-3 p-6 rounded-lg dark:bg-gray-900/50 bg-white/50">
+            <h1 class="text-2xl mb-2">You're up to date!</h1>
+            <p>No assignments are due or overdue. Hooray!</p>
+        </div>
+    {% else %}
+        <div class="text-black dark:text-white m-3 p-6 rounded-lg w-full dark:bg-gray-900/50 bg-white/50">
+            <h1 class="text-2xl mb-2">Nothing Here Yet!</h1>
+            <p>No events, quizzes, assignments, or assessments yet! Things you add to your calendar and courses will
+                appear here!</p>
+        </div>
+    {% endif %}
 {% else %}
     {% for date, alist in events.items() %}
         {% set diff = (date - now).days %}

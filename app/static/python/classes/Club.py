@@ -48,7 +48,7 @@ class Club(Snowflake):
     authorizedUsers = ListField(ReferenceField("User"))
     assignments = ListField(ReferenceField("Assignment"))
     folders = ListField(ReferenceField("Folder"))
-    description = StringField(default="", null=True)
+    description = StringField(default="")
     documents = ListField(ReferenceField("DocumentFile"))
     grades = ReferenceField("Grades")
     events = ListField(ReferenceField("Event"))

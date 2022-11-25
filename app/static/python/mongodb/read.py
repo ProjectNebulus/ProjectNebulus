@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from datetime import datetime
+from itertools import chain, groupby
 
 import schoolopy
 from flask import session
@@ -19,7 +20,12 @@ dictionary = None
 
 def getSchools(user_id: str):
     user = find_user(id=user_id)
-    return list(user.schools)
+    if user.schools:
+        schools = list(user.schools)
+    else:
+        schools = None
+
+    return schools
 
 
 def getText(query):
@@ -220,7 +226,7 @@ def get_announcement(announcement_id: str) -> Announcement:
     return announcement
 
 
-def get_folders(parent_id: int = None, course_id: int = None) -> list[Folder]:
+def get_folders(parent_id: str = None, course_id: str = None) -> list[Folder]:
     if not parent_id and not course_id:
         raise ValueError("Must provide either parent_id or course_id")
 
@@ -238,61 +244,16 @@ def sortByDateTime(obj):
     return obj.date if obj._cls == "Event" else obj.due
 
 
-def sort_course_events(
-        course_id: int, show_events=True, load_start=0, max_days=8, max_events=15
-):
-    course = Course.objects(pk=course_id).first().id
-
-    events = Event.objects(course=course)
-    announcements = Announcement.objects(course=course)
-    assignments = Assignment.objects(course=course)
-    assessments = Assessment.objects(course=course)
-    from itertools import chain, groupby
-
-    if show_events:
-        events_assessments_assignments = list(chain(events, assignments, assessments))
-    else:
-        events_assessments_assignments = list(chain(assignments, assessments))
-
-    sorted_events = sorted(
-        events_assessments_assignments[load_start: load_start + max_events],
-        key=sortByDateTime,
-        reverse=True,
-    )
-    dates = dict(
-        {
-            key: list(result)
-            for key, result in groupby(sorted_events, key=sortByDateTime)
-        }
-    )
-
-    sorted_announcements = sorted(
-        announcements, key=lambda obj: obj.date, reverse=True
-    )[load_start: load_start + max_days]
-    announcements = dict(
-        list(
-            {
-                key: list(result)
-                for key, result in groupby(
-                sorted_announcements, key=lambda obj: obj.date.date()
-            )
-            }.items()
-        )
-    )
-
-    return announcements, dates
-
-
 def sort_user_events(
-        user_id: str, show_events=True, load_start=0, max_days=8, max_events=10
+        user_id: str, courses=None, show_events=True, load_start=0, max_days=8, max_events=10
 ):
-    courses = get_user_courses(user_id)
+    if not courses:
+        courses = get_user_courses(user_id)
+
     events = Event.objects(course__in=courses)
     announcements = Announcement.objects(course__in=courses)
     assignments = Assignment.objects(course__in=courses)
     assessments = Assessment.objects(course__in=courses)
-
-    from itertools import chain, groupby
 
     if show_events:
         events_assessments_assignments = list(chain(events, assignments, assessments))
@@ -308,9 +269,12 @@ def sort_user_events(
         except AttributeError:
             due = one_event.date
 
-        if ("9999" not in str(due) and not (one_event._cls == "Assignment" and (
-                not one_event.allow_submissions or one_event.grade / one_event.points < 0.5))) and (
-                now < due or (one_event._cls == "Assignment" and one_event.submitDate is None)):
+        if (due.year < 9990 and
+            not (one_event._cls == "Assignment" and (
+                    not one_event.allow_submissions
+                    or (one_event.grade is not None and one_event.points
+                        and one_event.grade / one_event.points < 0.5)))) \
+                and (now < due or (one_event._cls == "Assignment" and one_event.submitDate is None)):
             sorted_events.append(one_event)
 
     sorted_events = sorted(sorted_events, key=sortByDateTime)[load_start: load_start + max_events]
@@ -337,8 +301,8 @@ def sort_user_events(
         )
     )
 
-    a_len = len(list(groupby(announcements, key=lambda obj: obj.date)))
-    e_len = len(list(groupby(events_assessments_assignments, key=sortByDateTime)))
+    a_len = len(list(groupby(announcements, lambda a: a.date)))
+    e_len = len(events_assessments_assignments)
 
     return grouped_announcements, grouped_events, a_len, e_len
 

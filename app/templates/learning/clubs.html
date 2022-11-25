@@ -3,8 +3,7 @@
 {% block main %}
     {% include "utils/navbar.html" %}
     {% if user_clubs|length == 0 %}
-        <div class="text-black dark:text-white m-3 p-6 rounded-lg w-1/2 dark:bg-gray-900/50 bg-white/50"
-             style="backdrop-filter: blur(10px);">
+        <div class="text-black dark:text-white m-3 p-6 rounded-lg w-1/2 dark:bg-gray-900/50 bg-white/50">
             <h1 class="text-2xl ">You don't have any Clubs yet!</h1>
             <p style=" margin-top: 10px; margin-bottom: 10px; ">You can...</p>
             <ul class="ml-3 space-y-1 max-w-md list-disc list-inside text-gray-500 dark:text-gray-400">

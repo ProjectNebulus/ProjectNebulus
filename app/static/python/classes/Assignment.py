@@ -35,22 +35,27 @@ class Assignment(Snowflake):
         null=True,
         description="The number of points the teacher assigned.",
     )
-    comment = StringField(default=None, null=True, description="The comment that the teacher left when grading.")
+    comment = StringField(default=None, description="The comment that the teacher left when grading.")
 
     folder = ReferenceField(
-        "Folder", default=None, null=True
+        "Folder", default=None
     )  # 0 if it's in the course, not any folder
     creationDate = DateTimeField(
-        default=None, null=True, description="The time the assignment was created."
+        default=None, description="The time the assignment was created."
     )
     submitDate = DateTimeField(
-        default=None, null=True, description="The time the assignment was submitted."
+        default=None, description="The time the assignment was submitted."
     )
     description = StringField(
-        default="", null=True, description="The description of the assignment."
+        default="", description="The description of the assignment."
     )
     period = EmbeddedDocumentField("TermGrade", default=None)
     grading_category = EmbeddedDocumentField("GradingCategory", default=None)
+    show_in_upcoming = BooleanField(default=None)
+
+    def clean(self):
+        self.show_in_upcoming = self.show_in_upcoming or (
+                    self.grading_category and self.grading_category.show_in_upcoming)
 
     def __str__(self):
         return f'Assignment(title="{self.title}", grade={self.grade}, points={self.points}, due={self.due.date()}, grading_category={self.grading_category})'

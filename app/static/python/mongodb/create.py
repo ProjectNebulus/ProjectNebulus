@@ -136,9 +136,7 @@ def createGrades(data: dict, course=None, save=True) -> Grades:
 
 
 def createDocumentFile(data: dict, course=None, save=True) -> DocumentFile:
-    file_ending = ""
-    if data.get("file_ending"):
-        file_ending = data["file_ending"]
+    if file_ending := data.get("file_ending"):
         del data["file_ending"]
 
     document_file = DocumentFile(**data)

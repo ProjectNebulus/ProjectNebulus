@@ -2,7 +2,30 @@ const VALID_USERNAME_REGEX = /^[A-Za-z][a-zA-Z\d\-_]{2,31}$/;
 const EMAIL_REGEX =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}])|(([a-zA-Z\-\d]+\.)+[a-zA-Z]{2,}))$/;
 
+let currentTab;
+
+function openTab(id_name) {
+    currentTab.style.display = "none";
+    const tab = document.getElementById(id_name);
+    if (!tab)
+        return;
+
+    currentTab = tab;
+    currentTab.style.display = "block";
+
+    for (const img of document.querySelectorAll("#" + id_name + " img"))
+        img.style.display = "inline-block";
+}
+
 window.addEventListener('DOMContentLoaded', function () {
+    currentTab = document.getElementById("generalSettings");
+    linkProxy(openTab);
+
+    for (const el of document.querySelectorAll("#access-check, #enter-value, #confirm-password, #confirm-email"))
+        el.classList.add('bg-gray-50', 'border', 'border-gray-300', 'text-gray-900', 'text-sm', 'rounded-lg', 'block',
+            'p-2.5', 'focus:ring-blue-500', 'focus:border-blue-500', 'dark:focus:ring-blue-500', 'w-full', 'dark:bg-gray-700',
+            'dark:focus:border-blue-500', 'dark:border-gray-600', 'dark:placeholder-gray-400', 'dark:text-white');
+
     document.getElementById("toggle_context_menu").checked = localStorage.getItem("enableContextMenu") != null;
 
     const bgCards = document.querySelectorAll('.card img');
@@ -36,11 +59,11 @@ window.addEventListener('DOMContentLoaded', function () {
     console.log(search[1]);
 
     for (const option of sidebarOptions) {
-        let opensPage = option.getAttribute('onclick').substring(10);
+        let opensPage = option.getAttribute('onclick').substring(9);
         opensPage = opensPage.substring(0, opensPage.length - 2);
 
         option.addEventListener('click', () => {
-            if (!option.classList.contains('bg-gray-300')) window.location = '#' + opensPage;
+            if (!option.classList.contains('bg-gray-300')) window.location.href = '#' + opensPage;
 
             for (const op of sidebarOptions) op.classList.remove('bg-gray-300', 'dark:bg-gray-600');
 
@@ -50,10 +73,9 @@ window.addEventListener('DOMContentLoaded', function () {
         if (sidebarOptions[0] !== option && search.length > 1 && opensPage === search[1]) {
             sidebarOptions[0].classList.remove('bg-gray-300', 'dark:bg-gray-600');
             option.classList.add('bg-gray-300', 'dark:bg-gray-600');
-            open_pls(opensPage);
+            openTab(opensPage);
         }
     }
-
 
     function hasSpecialCharacter(str) {
         const r_l = ',<.>/?;:\'"\\|[{]}=+-_`!@#$%^&*()_+';
@@ -64,6 +86,7 @@ window.addEventListener('DOMContentLoaded', function () {
         }
         return false;
     }
+
 
     function validation() {
         const error = document.getElementById("error");
@@ -81,11 +104,10 @@ window.addEventListener('DOMContentLoaded', function () {
         req.done(data => {
             btn.disabled = false;
 
-            timeout();
-
             if (data === "True") {
                 error.style.color = "greenyellow";
                 error.innerHTML = "Correct Password!";
+                timeout(5 * 60 * 1000);
             } else {
                 error.style.color = "red";
                 error.innerHTML = "Incorrect Password";
@@ -98,7 +120,30 @@ window.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    function valid(type) {
+    function checkVerifCode() {
+        const codeInput = document.getElementById("confirm-email");
+        codeInput.disabled = true;
+
+        const req = $.ajax({
+            url: "/api/v1/internal/check/verification-code",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({value: codeInput.value})
+        });
+
+        req.done(data => {
+            const status = codeInput.parentElement.children[0];
+            if (data === "True") {
+                status.style.color = "greenyellow";
+                status.style.innerHTML = "done";
+            } else {
+                status.style.color = "red";
+                status.style.innerHTML = "close";
+            }
+        });
+    }
+
+    function valid() {
         const error = document.getElementById("error");
         const value = document.getElementById("enter-value").value;
         document.getElementById("confirm-change").disabled = true;
@@ -189,27 +234,14 @@ window.addEventListener('DOMContentLoaded', function () {
         return false;
     }
 
-    function timeout() {
-        if (expireTimeout)
-            clearTimeout(expireTimeout);
-
-        setTimeout(() => {
-            prev();
-            const error = document.getElementById("error");
-            error.style.color = "red";
-            error.innerHTML = "Please enter your password again.";
-        }, 5 * 60 * 1000);
-    }
-
-    for (const el of document.querySelectorAll("[step]:not([step='1'])"))
-        el.classList.add("hidden");
-
     keyUpDelay('#access-check', 1000, () => validation());
-    keyUpDelay('#enter-value', 1000, () => valid(type));
+    keyUpDelay('#enter-value', 1000, () => valid());
+    keyUpDelay("#enter-email", 1000, () => checkVerifCode())
 
     const confirm = document.getElementById("confirm-change");
     confirm.addEventListener("click", () => {
         confirm.disabled = true;
+        const value = document.getElementById("enter-value").value;
 
         const req = $.ajax({
             url: "/api/v1/internal/update/setting",
@@ -217,23 +249,90 @@ window.addEventListener('DOMContentLoaded', function () {
             contentType: "application/json",
             data: JSON.stringify({
                 "type": type,
-                "value": document.getElementById("enter-value").value
+                "value": value
             })
         });
 
         req.done(() => {
-            document.getElementById("error").innerHTML = "Username changed!";
-            location.reload();
+            document.getElementById("error").innerHTML = type.charAt(0).toUpperCase() + type.substring(1) + " changed!";
+            document.getElementById(type + "-display").innerText = value;
         });
     });
+
+    function sendEmail() {
+        const button = document.getElementById("send-email");
+        button.disabled = true;
+
+        const req = $.ajax({
+            url: "/api/v1/internal/reset-email",
+            type: "POST",
+            contentType: "application/json",
+            data: {email: document.getElementById("confirm-email")}
+        });
+
+        req.done(() => {
+            button.innerHTML = "Done";
+            setTimeout(() => {
+                button.innerHTML = "Resend in 5s";
+                setTimeout(() => {
+                    button.innerHTML = "Resend";
+                    button.disabled = false;
+                }, 5000);
+            }, 1000);
+        });
+
+        req.fail(() => {
+            button.innerHTML = "Error";
+            setTimeout(() => {
+                button.innerHTML = "Retry in 3s";
+                setTimeout(() => {
+                    button.innerHTML = "Retry";
+                    button.disabled = false;
+                }, 3000);
+            }, 1000);
+        });
+    }
+
+    document.getElementById("send-email").addEventListener("click", sendEmail);
 
     modal = new Modal(document.getElementById("change-modal"));
 });
 
 let step = 1, max = 3;
-let type, modal;
+let type, modal, expireTimeout;
 
-function changeSettingsModal(settingType) {
+function timeout(delay) {
+    if (expireTimeout)
+        clearTimeout(expireTimeout);
+
+    expireTimeout = setTimeout(() => {
+        prev();
+        const error = document.getElementById("error");
+        error.style.color = "red";
+        error.innerHTML = "Please enter your password again.";
+    }, delay);
+}
+
+function connectGraderoom() {
+    let data = document.getElementById("graderoom-key").value;
+    if (data.length === 6) {
+        $.ajax({
+            type: 'GET',
+            url: '/api/v1/internal/oauth/graderoom/connect',
+            data: {
+                graderoom_key: document.getElementById("graderoom-key").value
+            }
+        }).done(location.reload);
+    }
+}
+
+function openSettingsModal(settingType) {
+    for (const el of document.querySelectorAll("[step]"))
+        el.classList.add("hidden");
+
+    for (const el of document.querySelectorAll("[step='1']"))
+        el.classList.remove("hidden");
+
     modal.show();
     max = 3;
 
@@ -250,23 +349,48 @@ function changeSettingsModal(settingType) {
     input.setAttribute("autocomplete", "new-" + settingType);
     input.setAttribute("name", settingType);
     input.setAttribute("placeholder", "New " + capsType)
-    input.setAttribute("type", capsType === "Password" ? "password" : "text");
+    input.setAttribute("type", capsType === "Username" ? "text" : capsType.toLowerCase());
+    input.setAttribute("step", capsType === "Email" ? "2" : "3");
 
     type = settingType;
     document.getElementById("replace").innerHTML = "Enter New " + capsType;
-    document.getElementById("confirm-password").style.display = (capsType === "Password" && step === 2) ? "block" : "none";
+    document.getElementById("confirm-email").style.display = capsType === "Email" ? "block" : "none";
+    document.getElementById("confirm-password").style.display = capsType === "Password" ? "block" : "none";
     document.getElementById("error").innerHTML = "";
 }
 
 function prev() {
     if (step > 1) {
-        for (const el of document.querySelectorAll(" [step='" + step + "']"))
+        for (const el of document.querySelectorAll(" [step~='" + step + "']"))
             el.classList.add("hidden");
 
-        for (const el of document.querySelectorAll(" [step='" + (step - 1) + "']"))
+        for (const el of document.querySelectorAll(" [step~='" + (step - 1) + "']"))
             el.classList.remove("hidden");
 
         step--;
+
+        if (step === 2 && type === "username")
+            prev();
+    }
+
+    const error = document.getElementById("error");
+    if (error)
+        error.innerHTML = "";
+}
+
+function next() {
+    max = 3;
+    if (step < max) {
+        for (const el of document.querySelectorAll(" [step~='" + step + "']"))
+            el.classList.add("hidden");
+
+        for (const el of document.querySelectorAll(" [step~='" + (step + 1) + "']"))
+            el.classList.remove("hidden");
+
+        step++;
+
+        if (step === 2 && type === "username")
+            next();
     }
 
     const error = document.getElementById("error");

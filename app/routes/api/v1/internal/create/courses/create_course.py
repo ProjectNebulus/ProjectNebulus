@@ -1,3 +1,4 @@
+import re
 from datetime import datetime
 
 import google.oauth2.credentials
@@ -6,12 +7,13 @@ from flask import request, session
 from googleapiclient.discovery import build
 from schoolopy import Schoology
 
-from app.static.python.classes import Announcement
 from app.static.python.classes import Grades, TermGrade
 from app.static.python.mongodb import create, read
 from app.static.python.mongodb.create import debug_importing
 from app.static.python.utils.colors import getColor
 from ... import internal
+
+date_regex = "(\d|\d\d)(\/|-)(\d|\d\d)(\/|-)(\d+)"
 
 
 @internal.route("/create/course", methods=["POST"])
@@ -235,9 +237,11 @@ def create_canvas_course():
 def sync_schoology_course():
     from app.static.python.mongodb import create, read, update
 
-    post_data = request.json
-    if request.method == "GET":
+    if request.method == "POST":
+        post_data = request.json
+    else:
         post_data = request.args
+        
     course_id = post_data["course_id"]
     course = list(read.getCourse(course_id))[0]
     print("Currently syncing " + course.name)
@@ -281,8 +285,6 @@ def sync_schoology_course():
 
         if not found:
             new_announcements.append(create.createAnnouncement(data, course))
-
-    Announcement.objects.insert(new_announcements)
 
     return "success"
 
@@ -459,11 +461,29 @@ def create_schoology_course(section, link, teacher, user, sc: Schoology = None):
     terms = []
 
     for period in sc_grades["period"]:
-        terms.append(term := TermGrade(title=period["period_title"], grading_categories=list(categories.values())))
+        title = period["period_title"]
+        dates = re.findall(date_regex, title)
+        if len(dates) == 2:
+            try:
+                start_date = datetime.strptime("%m/%d/%y", dates[0])
+                end_date = datetime.strptime("%m/%d/%y", dates[1])
+            except ValueError:
+                start_date = datetime.strptime("%m-%d-%y", dates[0])
+                end_date = datetime.strptime("%m-%d-%y", dates[1])
+
+            terms.append(term := TermGrade(title=period["period_title"], grading_categories=list(categories.values()),
+                                           start_date=start_date, end_date=end_date))
+
+        else:
+            terms.append(term := TermGrade(title=period["period_title"], grading_categories=list(categories.values())))
+
         for assignment in period["assignment"]:
             assignment_obj = assignments.get(assignment["assignment_id"])
             assignment_obj.grade = assignment["grade"]
             assignment_obj.period = term
+
+            if comment := assignment.get("comment"):
+                assignment_obj.comment = comment
 
             if not debug_importing:
                 assignment_obj.save(validate=False)
@@ -477,30 +497,27 @@ def create_schoology_course(section, link, teacher, user, sc: Schoology = None):
     documents = []
 
     for sc_document in sc_documents:
+        file = sc_document["attachments"]["files"]["file"]
+        if not len(file):
+            continue
+
+        file = file[0]
+
         document = {
             "schoology_id": sc_document["id"],
             "name": sc_document["title"],
-            "file_ending": sc_document["attachments"]["files"]["file"][0]["extension"],
+            "file_ending": file["extension"],
             "course": str(course_obj.id),
-            "url": sc_document["attachments"]["files"]["file"][0]["download_path"],
+            "url": file["download_path"],
             "imported_id": str(sc_document["id"]),
             "imported_from": "Schoology"
         }
 
-        if timestamp := sc_document.get("timestamp"):
+        if timestamp := file.get("timestamp"):
             document["upload_date"] = datetime.fromtimestamp(timestamp)
 
         filename = link.split("/")[-1]
-        mongo_document = create.createDocumentFile(
-            {
-                "name": document["name"],
-                "course": document["course"],
-                "file_ending": document["file_ending"],
-                "imported_from": "Schoology",
-                "imported_id": document["imported_id"],
-            },
-            course_obj
-        )
+        mongo_document = create.createDocumentFile(document, course_obj)
 
         documents.append(mongo_document)
 

@@ -27,10 +27,13 @@ class Snowflake(Document):
         primary_key=True,
     )
     imported_from = StringField(default="Nebulus", choices=lms_choices)
-    imported_id = StringField(default=None, null=True)
+    imported_id = StringField(default=None)
 
     def get_timestamp(self) -> datetime.datetime:
         return datetime.datetime.fromtimestamp(melt(int(self.id))[0] / 1000)
 
     def __eq__(self, other):
-        return self.id == other.id
+        return self.id == other.id and self._cls == other._cls
+
+    def __hash__(self):
+        return hash(" ".join(map(str, self._fields_ordered)))

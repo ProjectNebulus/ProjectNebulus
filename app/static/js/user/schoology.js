@@ -44,22 +44,6 @@ function saveApiKey() {
     });
 }
 
-function prev() {
-    if (step > 1) {
-        for (const el of document.querySelectorAll(" [step='" + step + "']"))
-            el.classList.add("hidden");
-
-        for (const el of document.querySelectorAll(" [step='" + (step - 1) + "']"))
-            el.classList.remove("hidden");
-
-        step--;
-    }
-
-    const error = document.getElementById("error");
-    if (error)
-        error.innerHTML = "";
-}
-
 function nextSchoology() {
     max = 4;
     if (step < max) {

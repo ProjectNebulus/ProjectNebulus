@@ -31,8 +31,8 @@ def generate_redirect(url):
 @main_blueprint.route("/settings")
 @logged_in
 def settings():
-    the_schoology = read.getSchoology(id=session.get("id"))
-    the_google_classroom = read.getClassroom(session.get("id"))
+    the_schoology = read.getSchoology(id=session["id"])
+    the_google_classroom = read.getClassroom(session["id"])
     try:
         credentials = google.oauth2.credentials.Credentials(
             **flask.session["credentials"]
@@ -42,7 +42,7 @@ def settings():
         profile = service.people().get("people/me", personFields="names,emailAddresses")
         print(profile)
     except:
-        googleclassroom = None
+        google_classroom = None
 
     try:
         credentials = google.oauth2.credentials.Credentials(
@@ -54,17 +54,17 @@ def settings():
         user_info = user_info_service.userinfo().get().execute()
         print(user_info)
         user_info = [user_info["name"], user_info["picture"]]
-        googleclassroom = user_info
+        google_classroom = user_info
 
     except:
         user_info = None
     try:
-        canvas = list(read.getCanvas(id=session.get("id")))[0].name
-    except:
+        canvas = list(read.getCanvas(id=session["id"]))[0].name
+    except (TypeError, IndexError):
         canvas = None
 
     try:
-        canvas = list(read.getCanvas(id=session.get("id")))[0].name
+        canvas = list(read.getCanvas(id=session["id"]))[0].name
     except:
         canvas = []
 
@@ -88,48 +88,53 @@ def settings():
             spotify = None
 
     try:
-        discord = list(read.getDiscord(id=session.get("id")))[0]
+        discord = list(read.getDiscord(id=session["id"]))[0]
         discord = [
             discord.discord_user,
             discord.discord_avatar
         ]
-    except:
+    except (TypeError, IndexError):
         discord = []
 
-    last_access = 0
+    last_access = 10000
     if session.get("access"):
-        print(
-            "Last confirmed access (seconds):",
-            datetime.now().timestamp() - float(session["access"]),
-        )
         last_access = datetime.now().timestamp() - float(session["access"])
+
+        if last_access > 60 * 60:
+            del session["access"]
+
+        print("Last confirmed access (seconds):", last_access)
+
     try:
-        graderoom = list(read.getGraderoom(id=session.get("id")))[0]
+        graderoom = list(read.getGraderoom(id=session["id"]))[0]
         graderoom = [
             graderoom.username,
             graderoom.school
         ]
-    except:
+    except (TypeError, IndexError):
         graderoom = []
+
     try:
-        github = list(read.getGithub(id=session.get("id")))[0]
+        github = list(read.getGithub(id=session["id"]))[0]
         github = [
             github.username,
             github.avatar
         ]
-    except:
+    except (TypeError, IndexError):
         github = []
-    schools= []
+
+    schools = []
     import json
     try:
-        rawschool = list(read.getSchools(session.get("id")))
+        rawschool = list(read.getSchools(session["id"]))
         myjson = list(json.load(open("app/schools.json")))
         for school in myjson:
             if school["code"] in rawschool:
                 schools.append(school)
 
-    except:
+    except (TypeError, IndexError):
         schools = []
+
     return render_template(
         "user/settings.html",
         page="Nebulus - Account Settings",
@@ -138,17 +143,17 @@ def settings():
         session=session,
         lastAccess=last_access,
         user=session.get("username"),
-        user_id=session.get("id"),
+        user_id=session["id"],
         pswHashes="*" * session.get("pswLen"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         schoology=the_schoology,
         classroom=the_google_classroom,
         googleclassroom=user_info,
-        schools = schools,
+        schools=schools,
         canvas=canvas,
         spotify=spotify,
         discord=discord,
         translate=getText,
-        points=read.find_user(id=session.get("id")).points,
+        points=read.find_user(id=session["id"]).points,
     )
