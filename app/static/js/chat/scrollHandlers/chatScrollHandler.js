@@ -34,23 +34,16 @@ function chatScrollHandler() {
             messages.forEach(function (message, index) {
                 let l = message['content'].match(/<img src="https:\/\/twemoji.maxcdn.com/g);
 
-                if (!l) {
-                    l = 0;
-                } else {
-                    l = l.length;
-                }
+                l = l ? l.length : 0;
 
-                if (l === 1 && message['content'].slice(-1) === '>') {
+                if (l === 1 && message['content'].slice(-1) === '>')
                     message['content'] = message['content'].slice(0, -7) + 'w-10 h-10">';
-                }
+
                 message['content'] = replaceURLs(message['content'], message['id']);
                 message['content'] = message['content'].replace('<br>', '');
                 let prevMessage;
-                if (index > 0) {
-                    prevMessage = messages[index - 1];
-                } else {
-                    prevMessage = message;
-                }
+                if (index > 0) prevMessage = messages[index - 1];
+                else prevMessage = message;
 
                 if (
                     prevMessage['sender']['username'] !== message['sender']['username'] ||

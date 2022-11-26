@@ -437,9 +437,12 @@ function randomCat() {
 
 function linkProxy(onChange) {
     return new Proxy(location, {
-        set(target, p, value, receiver) {
+        set: (target, p, value, receiver) => {
+            console.log(target, p, value, receiver);
             if (p === "pathname")
                 onChange(value);
+
+            return Reflect.set(target, p, value, receiver);
         }
-    })
+    });
 }

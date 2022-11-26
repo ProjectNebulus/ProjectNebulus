@@ -47,19 +47,18 @@ regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 
 
 @socketio.event(namespace="/chat")
-def user_status_change(data):
-    print(data)
-    if data["chatType"] == "chat":
-
-        update.set_status(session["id"], data["status"])
+def user_status_change(json_data):
+    print(json_data)
+    if json_data["chatType"] == "chat":
+        update.set_status(session["id"], json_data["status"])
         offline = ""
         status = ""
-        if data["status"] == "Online":
+        if json_data["status"] == "Online":
             offline = False
-        elif data["status"] == "Offline":
+        elif json_data["status"] == "Offline":
             offline = True
         else:
-            status = data["status"]
+            status = json_data["status"]
 
         socketio.emit(
             "user_status_change",

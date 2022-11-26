@@ -442,7 +442,7 @@
         }
     }; // CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/options/defaultOptions.js
 
-    // config options updatable by setOptions() and their default values
+    // config.py options updatable by setOptions() and their default values
     const defaultOptions = {
         autohide: false,
         beforeShowDay: null,
@@ -639,7 +639,7 @@
 
         //*** dates ***//
         // while min and maxDate for "no limit" in the options are better to be null
-        // (especially when updating), the ones in the config have to be undefined
+        // (especially when updating), the ones in the config.py have to be undefined
         // because null is treated as 0 (= unix epoch) when comparing with time value
         let minDt = minDate;
         let maxDt = maxDate;
@@ -2403,7 +2403,7 @@
         /**
          * Create a date picker
          * @param  {Element} element - element to bind a date picker
-         * @param  {Object} [options] - config options
+         * @param  {Object} [options] - config.py options
          * @param  {DateRangePicker} [rangepicker] - DateRangePicker instance the
          * date picker belongs to. Use this only when creating date picker as a part
          * of date range picker
@@ -2412,7 +2412,7 @@
             element.datepicker = this;
             this.element = element;
 
-            // set up config
+            // set up config.py
             const config = (this.config = Object.assign(
                 {
                     buttonClass: (options.buttonClass && String(options.buttonClass)) || 'button',
@@ -2557,8 +2557,8 @@
         }
 
         /**
-         * Set new values to the config options
-         * @param {Object} options - config options to update
+         * Set new values to the config.py options
+         * @param {Object} options - config.py options to update
          */
         setOptions(options) {
             const picker = this.picker;
@@ -2675,7 +2675,7 @@
          *     default: true
          * - autohide: {boolean} - Whether to hide the picker element after re-render
          *     Ignored when used with render: false
-         *     default: config.autohide
+         *     default: config.py.autohide
          */
         setDate(...args) {
             const dates = [...args];
@@ -2771,7 +2771,7 @@
         }
     } // CONCATENATED MODULE: ./node_modules/@themesberg/tailwind-datepicker/js/DateRangePicker.js
 
-    // filter out the config options inapproprite to pass to Datepicker
+    // filter out the config.py options inapproprite to pass to Datepicker
     function filterOptions(options) {
         const newOpts = Object.assign({}, options);
 
@@ -2835,7 +2835,7 @@
         /**
          * Create a date range picker
          * @param  {Element} element - element to bind a date range picker
-         * @param  {Object} [options] - config options
+         * @param  {Object} [options] - config.py options
          */
         constructor(element, options = {}) {
             const inputs = Array.isArray(options.inputs)
@@ -2881,8 +2881,8 @@
         }
 
         /**
-         * Set new values to the config options
-         * @param {Object} options - config options to update
+         * Set new values to the config.py options
+         * @param {Object} options - config.py options to update
          */
         setOptions(options) {
             this.allowOneSidedRange = !!options.allowOneSidedRange;
@@ -2911,7 +2911,7 @@
          * The result array always contains 2 items (start date/end date) and
          * undefined is used for unselected side. (e.g. If none is selected,
          * the result will be [undefined, undefined]. If only the end date is set
-         * when allowOneSidedRange config option is true, [undefined, endDate] will
+         * when allowOneSidedRange config.py option is true, [undefined, endDate] will
          * be returned.)
          *
          * @param  {String} [format] - Format string to stringify the dates
@@ -2939,7 +2939,7 @@
          * "ineffective" argument because calling datepicker.setDate() with those
          * values makes no changes to the date selection.
          *
-         * When the allowOneSidedRange config option is false, passing {clear: true}
+         * When the allowOneSidedRange config.py option is false, passing {clear: true}
          * to clear the range works only when it is done to the last effective
          * argument (in other words, passed to rangeEnd or to rangeStart along with
          * ineffective rangeEnd). This is because when the date range is changed,

@@ -18,7 +18,7 @@
         factory(root);
     }
 }(this, function (exports) {
-    //Default config/variables
+    //Default config.py/variables
     var VERSION = '0.1.0';
 
     /**

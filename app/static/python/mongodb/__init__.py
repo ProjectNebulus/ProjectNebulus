@@ -2,6 +2,8 @@ import os
 
 from dotenv import load_dotenv
 
+from .config import run
+
 load_dotenv()
 
 import certifi
@@ -15,3 +17,5 @@ db = connect(
     host=os.environ.get("MONGO"),
     tlsCAFile=ca,
 )["Nebulus"]
+
+run()

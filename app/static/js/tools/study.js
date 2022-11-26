@@ -1,6 +1,6 @@
 const inputs = document.querySelectorAll('#time input');
 const labels = document.querySelectorAll('#time span');
-const config = document.getElementById('config');
+const config = document.getElementById('config.py');
 const timer = document.getElementById('timer');
 const timerEnd = document.getElementById('timerEnd');
 const display = document.getElementById('timerDisplay');

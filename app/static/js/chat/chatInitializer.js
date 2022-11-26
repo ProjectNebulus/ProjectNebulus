@@ -12,18 +12,10 @@ function initializeChat(io) {
     makeCall();
 
     let socket = loadSocket(io);
-    window['createChat'] = function (members) {
-        createChat(members, socket);
-    };
-    socket.on('new_chat', function (data) {
-        handleNewChat(data, socket);
-    });
-    socket.on('new_message', function (data) {
-        newMessageHandler(data);
-    });
-    socket.on('user_status_change', function (data) {
-        statusChangeHandler(data);
-    });
+    window['createChat'] = members => createChat(members, socket);
+    socket.on('new_chat', data => handleNewChat(data, socket));
+    socket.on('new_message', newMessageHandler);
+    socket.on('user_status_change', statusChangeHandler);
 
     window.onunload = function () {
         socket.emit('user_unloaded', {}, function () {

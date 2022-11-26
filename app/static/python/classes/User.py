@@ -11,21 +11,7 @@ from mongoengine import (
     StringField,
 )
 
-from .Avatar import Avatar
-from .Calendar import Calendar
-from .Canvas import Canvas
-from .ChatProfile import ChatProfile
-from .Discord import Discord
-from .Github import Github
-from .GoogleClassroom import GoogleClassroom
-from .Graderoom import Graderoom
-from .NebulusDocument import NebulusDocument
-from .Notepad import Notepad
-from .Planner import Planner
-from .Schoology import Schoology
-from .ScreenTime import ScreenTime
-from .Snowflake import Snowflake
-from .Spotify import Spotify
+from . import *
 
 
 class User(Snowflake):
