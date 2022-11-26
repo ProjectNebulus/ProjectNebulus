@@ -81,16 +81,37 @@ class User(Snowflake):
     is_staff = BooleanField(default=False)
 
     # Processions
-    courses = ListField(ReferenceField("Course"), default=[])
-    clubs = ListField(ReferenceField("Club"), default=[])
+    courses = ListField(ReferenceField("Course"), default=None)
+    clubs = ListField(ReferenceField("Club"), default=None)
     planner = EmbeddedDocumentField(Planner, default=None)
     notepad = EmbeddedDocumentField(Notepad, default=None)
     calendar = EmbeddedDocumentField(Calendar, default=None)
-    nebulus_documents = ListField(ReferenceField(NebulusDocument), default=[])
-    chats = ListField(ReferenceField("Chat"), default=[])
+    nebulus_documents = ListField(ReferenceField(NebulusDocument), default=None)
+    chats = ListField(ReferenceField("Chat"), default=None)
     chatProfile = EmbeddedDocumentField(ChatProfile)
 
     def clean(self):
+        if not self.schoology:
+            self.schoology = None
+
+        if not self.gclassroom:
+            self.gclassroom = None
+
+        if not self.spotify:
+            self.spotify = None
+
+        if not self.discord:
+            self.discord = None
+
+        if not self.canvas:
+            self.canvas = None
+
+        if not self.graderoom:
+            self.graderoom = None
+
+        if not self.github:
+            self.github = None
+
         self.avatar.avatar_url = (
             self.avatar.avatar_url.replace("http://localhost:8080", "")
             .replace("https://localhost:8080", "")
@@ -98,6 +119,4 @@ class User(Snowflake):
         )
 
         if "static/images/nebulusCats" not in self.avatar.avatar_url:
-            self.avatar.avatar_url = (
-                    "/static/images/nebulusCats" + self.avatar.avatar_url
-            )
+            self.avatar.avatar_url = "/static/images/nebulusCats" + self.avatar.avatar_url

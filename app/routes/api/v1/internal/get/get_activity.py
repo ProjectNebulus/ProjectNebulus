@@ -4,8 +4,8 @@ from flask import session, request, render_template
 
 from app.routes.main import fmt
 from app.routes.main import strftime
+from app.static.python.classes import Course
 from app.static.python.mongodb import read
-from static.python.classes import Course
 from .. import internal
 
 

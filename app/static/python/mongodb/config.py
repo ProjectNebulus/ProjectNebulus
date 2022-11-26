@@ -17,12 +17,13 @@ def promote_to_staff(username: str):
 
     user = find_user(username=username)
     if user.is_staff:
+        print(f"User {username} is already staff")
         return
 
     user.is_staff = True
     user.save()
 
-    print("Done!")
+    print(f"Promoted {username} to staff")
 
 
 def removeFields(collection_name: str, fields: iter | str):
@@ -33,18 +34,18 @@ def removeFields(collection_name: str, fields: iter | str):
     Note: collection_name is the name of the collection,
     not the name of the class.
 
-    e.g. removeFields("Assignment", "status")
+    e.g. removeFields("Assignments", "status")
     """
 
-    from static.python.mongodb import db
+    from app.static.python.mongodb import db
 
     if isinstance(fields, str):
         fields = [fields]
     else:
         fields = list(fields)
 
-    db[collection_name.capitalize()].update_many({fields[0]: {"$exists": True}},
-                                                 {"$unset": {field: "" for field in fields}})
+    db[collection_name.capitalize()]. \
+        update_many({fields[0]: {"$exists": True}}, {"$unset": {field: "" for field in fields}})
 
     print("Done!")
 
@@ -70,4 +71,5 @@ def removeDangling(class_name="all"):
         print(*objs, sep="\n")
         if input("Delete? (y/n): ").lower() == "y":
             objs.delete()
-            print("Done!")
+
+    print("Done!")
