@@ -26,7 +26,7 @@ def promote_to_staff(username: str):
     print(f"Promoted {username} to staff")
 
 
-def removeFields(collection_name: str, fields: iter | str):
+def removeFields(collection_name: str, fields: list | str):
     """
     Runs a database query to remove fields that are not
     in the Mongoengine model but are in the database.
