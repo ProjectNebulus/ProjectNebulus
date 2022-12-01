@@ -35,7 +35,8 @@ class TermGrade(EmbeddedDocument):
         self.grade = 0
 
         if not self.grading_categories:
-            default_category = GradingCategory(course=self.course)
+            category = GradingCategory(course=self.course)
+            default_category = category
             self.grading_categories = [default_category]
 
             for assignment in self.course.assignments:

@@ -173,7 +173,22 @@ function toggleTheme() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    const wallpaper = localStorage.getItem("wallpaper");
+    let wallpaper = localStorage.getItem("wallpaper");
+    // choose random wallpaper if `/signin` or `/signup`
+    if (wallpaper === null && (window.location.pathname === "/signin" || window.location.pathname === "/signup")) {
+        let wallpapers = [
+            "/static/images/wallpaper/northernLights1.jpeg",
+            "/static/images/wallpaper/craterlake2.jpeg",
+            "/static/images/wallpaper/northernLights3.jpeg",
+            "/static/images/wallpaper/jtree.jpeg",
+            "/static/images/wallpaper/olympic1.jpeg",
+            "/static/images/wallpaper/deathValley.jpeg",
+            "/static/images/wallpaper/grandCanyon.jpeg",
+            "/static/images/wallpaper/shanghai1.jpeg",
+            "/static/images/wallpaper/costaRica.jpeg"
+            ]
+        wallpaper = wallpapers[Math.floor(Math.random() * wallpapers.length)];
+    }
     if (window.location.search.includes("iframe=true")) document.body.style.background = "transparent";
     else if (wallpaper && !(window.location.pathname === "/")) {
         const brightness = document.documentElement.classList.contains("dark") ? 0 : 255;

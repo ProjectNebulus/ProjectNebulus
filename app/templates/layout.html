@@ -28,7 +28,7 @@
             }
         });
 
-        if (localStorage.getItem("enableContextMenu") !== null) {
+        if (localStorage.getItem("enableContextMenu") === null) {
             document.onclick = hideMenu;
             document.oncontextmenu = rightClick;
         }
