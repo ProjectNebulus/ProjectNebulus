@@ -268,7 +268,6 @@ def sort_user_events(
             due = one_event.due
         except AttributeError:
             due = one_event.date
-<<<<<<< Updated upstream
 
         if (due.year < 9990 and
             not (one_event._cls == "Assignment" and (
@@ -277,7 +276,6 @@ def sort_user_events(
                         and one_event.grade / one_event.points < 0.5)))) \
                 and (now < due or (one_event._cls == "Assignment" and one_event.submitDate is None)):
             sorted_events.append(one_event)
-=======
         try:
             if ("9999" not in str(due) and not (one_event._cls == "Assignment" and (
                     not one_event.allow_submissions or one_event.grade / one_event.points < 0.5))) and (
@@ -285,7 +283,6 @@ def sort_user_events(
                 sorted_events.append(one_event)
         except:
             pass
->>>>>>> Stashed changes
 
     sorted_events = sorted(sorted_events, key=sortByDateTime)[load_start: load_start + max_events]
 
