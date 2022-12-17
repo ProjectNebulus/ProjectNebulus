@@ -186,7 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
             "/static/images/wallpaper/grandCanyon.jpeg",
             "/static/images/wallpaper/shanghai1.jpeg",
             "/static/images/wallpaper/costaRica.jpeg"
-            ]
+        ]
         wallpaper = wallpapers[Math.floor(Math.random() * wallpapers.length)];
     }
     if (window.location.search.includes("iframe=true")) document.body.style.background = "transparent";
@@ -392,7 +392,7 @@ fetch(`/static/images/nebulusCats/v3.gif`)
 
 
 function changeFavicon() {
-    let link = document.querySelector("link[rel~='icon']");
+    let link = document.querySelector("link[rel*='icon']");
     index = (index + 1) % list.length;
     link.href = list[index];
 }

@@ -28,14 +28,83 @@
                 -webkit-box-shadow: 0 0 0 50px #111827 inset; /*your box-shadow*/
                 -webkit-text-fill-color: white;
             }
+
+
+            .oauth-button {
+                margin: 5px;
+                padding: 5px;
+                height: 45px;
+                width: 45px;
+                border-radius: 10px;
+                background: lightgray;
+            }
+
+            .oauth-button:hover {
+                background: #4f5d73;
+            }
+
+            .dark .oauth-button {
+                background: #374151;
+            }
+
+            .dark .oauth-button:hover {
+                background: #4f5d73;
+            }
+
+            input:-webkit-autofill,
+            input:-webkit-autofill:hover,
+            input:-webkit-autofill:focus,
+            input:-webkit-autofill:active {
+                -webkit-box-shadow: 0 0 0 30px #1F2937 inset !important;
+            }
+
+            /*Change text in autofill textbox*/
+            input:-webkit-autofill {
+                -webkit-text-fill-color: white !important;
+            }
+
+
+            @-webkit-keyframes pulse {
+                0%, 100% {
+                    width: 50%;
+                    height: 40%;
+                    transform: rotate(20deg) translate(38%, -198%);
+                }
+                50% {
+                    width: 70%;
+                    height: 50%;
+                    transform: rotate(20deg) translate(8%, -168%);
+                }
+            }
+
+            @-moz-keyframes pulse {
+                0%, 100% {
+                    width: 50%;
+                    height: 40%;
+                    transform: rotate(20deg) translate(38%, -198%);
+                }
+                50% {
+                    width: 70%;
+                    height: 50%;
+                    transform: rotate(20deg) translate(8%, -168%);
+                }
+            }
+
+            @keyframes pulse {
+                0%, 100% {
+                    width: 50%;
+                    height: 40%;
+                    transform: rotate(20deg) translate(38%, -198%);
+                }
+                50% {
+                    width: 70%;
+                    height: 50%;
+                    transform: rotate(20deg) translate(8%, -168%);
+                }
+            }
         </style>
     </head>
     <body style="background: rgb(30 40 58)">
-    <div id="bgLms"
-         class="noselect noclick overflow-y-auto overflow-x-hidden"
-         style="z-index: -1;
-                    filter: blur(1rem);">
-    </div>
     <div class="container mx-auto px-8 py-12 bg-white dark:bg-gray-900 rounded-lg pb-1/2 w-full"
          style="overflow: hidden;
                     max-width: 50rem;
@@ -208,46 +277,6 @@
                 </div>
             </div>
         </div>
-        <style>
-            @-webkit-keyframes pulse {
-                0%, 100% {
-                    width: 50%;
-                    height: 40%;
-                    transform: rotate(20deg) translate(38%, -198%);
-                }
-                50% {
-                    width: 70%;
-                    height: 50%;
-                    transform: rotate(20deg) translate(8%, -168%);
-                }
-            }
-
-            @-moz-keyframes pulse {
-                0%, 100% {
-                    width: 50%;
-                    height: 40%;
-                    transform: rotate(20deg) translate(38%, -198%);
-                }
-                50% {
-                    width: 70%;
-                    height: 50%;
-                    transform: rotate(20deg) translate(8%, -168%);
-                }
-            }
-
-            @keyframes pulse {
-                0%, 100% {
-                    width: 50%;
-                    height: 40%;
-                    transform: rotate(20deg) translate(38%, -198%);
-                }
-                50% {
-                    width: 70%;
-                    height: 50%;
-                    transform: rotate(20deg) translate(8%, -168%);
-                }
-            }
-        </style>
         <div style="background: linear-gradient(90deg, #ff0000, #001cff);
                         -webkit-animation: pulse 5s ease infinite;
                         -moz-animation: pulse 5s ease infinite;
@@ -256,39 +285,5 @@
              class="absolute -z-10">
         </div>
     </div>
-    <style>
-        .oauth-button {
-            margin: 5px;
-            padding: 5px;
-            height: 45px;
-            width: 45px;
-            border-radius: 10px;
-            background: lightgray;
-        }
-
-        .oauth-button:hover {
-            background: #4f5d73;
-        }
-
-        .dark .oauth-button {
-            background: #374151;
-        }
-
-        .dark .oauth-button:hover {
-            background: #4f5d73;
-        }
-
-        input:-webkit-autofill,
-        input:-webkit-autofill:hover,
-        input:-webkit-autofill:focus,
-        input:-webkit-autofill:active {
-            -webkit-box-shadow: 0 0 0 30px #1F2937 inset !important;
-        }
-
-        /*Change text in autofill textbox*/
-        input:-webkit-autofill {
-            -webkit-text-fill-color: white !important;
-        }
-    </style>
     </body>
 {% endblock %}

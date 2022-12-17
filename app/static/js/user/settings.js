@@ -18,8 +18,12 @@ function openTab(id_name) {
 }
 
 window.addEventListener('DOMContentLoaded', function () {
+    modals.add("change-modal");
+
     currentTab = document.getElementById("generalSettings");
     linkProxy(openTab);
+
+    let validEmail = false;
 
     for (const el of document.querySelectorAll("#access-check, #enter-value, #confirm-password, #confirm-email"))
         el.classList.add('bg-gray-50', 'border', 'border-gray-300', 'text-gray-900', 'text-sm', 'rounded-lg', 'block',
@@ -88,7 +92,7 @@ window.addEventListener('DOMContentLoaded', function () {
     }
 
 
-    function validation() {
+    function checkPsw() {
         const error = document.getElementById("error");
         const btn = document.querySelector("#change-modal .disabled-css");
         error.innerHTML = "<br>"
@@ -102,27 +106,25 @@ window.addEventListener('DOMContentLoaded', function () {
         });
 
         req.done(data => {
-            btn.disabled = false;
-
             if (data === "True") {
+                btn.disabled = false;
                 error.style.color = "greenyellow";
                 error.innerHTML = "Correct Password!";
-                timeout(5 * 60 * 1000);
+                timeout(10 * 60 * 1000);
             } else {
                 error.style.color = "red";
                 error.innerHTML = "Incorrect Password";
             }
         });
 
-        req.fail(() => {
-            btn.disabled = false;
-            error.innerHTML = "An error occurred! Retry?";
-        });
+        req.fail(() => error.innerHTML = "An error occurred! Retry?");
     }
 
     function checkVerifCode() {
+        if (!validEmail)
+            return;
+
         const codeInput = document.getElementById("confirm-email");
-        codeInput.disabled = true;
 
         const req = $.ajax({
             url: "/api/v1/internal/check/verification-code",
@@ -132,18 +134,30 @@ window.addEventListener('DOMContentLoaded', function () {
         });
 
         req.done(data => {
-            const status = codeInput.parentElement.children[0];
-            if (data === "True") {
+            const status = document.getElementById("error");
+            const statusIcon = codeInput.parentElement.children[0];
+
+            if (data === "true") {
                 status.style.color = "greenyellow";
-                status.style.innerHTML = "done";
+                status.innerHTML = "Correct Validation Code";
+                statusIcon.style.color = "greenyellow";
+                statusIcon.innerHTML = "check_circle";
+                next();
+                document.getElementById("replace").innerHTML = "Confirm Change";
+                document.getElementById("enter-value").disabled = true;
             } else {
                 status.style.color = "red";
-                status.style.innerHTML = "close";
+                status.innerHTML = "Incorrect Validation Code";
+                statusIcon.style.color = "red";
+                statusIcon.innerHTML = "error";
             }
         });
     }
 
-    function valid() {
+    function validInput() {
+        if (document.getElementById("replace").innerText === "Confirm Change")
+            return;
+
         const error = document.getElementById("error");
         const value = document.getElementById("enter-value").value;
         document.getElementById("confirm-change").disabled = true;
@@ -201,8 +215,6 @@ window.addEventListener('DOMContentLoaded', function () {
             }
         } else if (type === "email")
             if (EMAIL_REGEX.test(value)) {
-                error.style.color = "greenyellow";
-                error.innerHTML = "Valid email!";
                 document.getElementById("confirm-change").disabled = false;
 
                 const req = $.ajax({
@@ -216,11 +228,14 @@ window.addEventListener('DOMContentLoaded', function () {
                     if (data === "True") {
                         error.style.color = "red";
                         error.innerHTML = "Email exists!";
+                        validEmail = false;
                     } else {
                         error.style.color = "greenyellow";
                         error.innerHTML = "Valid email!";
-                        document.getElementById("confirm-change").disabled = false;
+                        validEmail = true;
                     }
+
+                    document.getElementById("send-email").disabled = !validEmail;
                 });
 
                 req.fail(() => {
@@ -234,9 +249,9 @@ window.addEventListener('DOMContentLoaded', function () {
         return false;
     }
 
-    keyUpDelay('#access-check', 1000, () => validation());
-    keyUpDelay('#enter-value', 1000, () => valid());
-    keyUpDelay("#enter-email", 1000, () => checkVerifCode())
+    keyUpDelay('#access-check', 1000, () => checkPsw());
+    keyUpDelay('#enter-value', 1000, () => validInput());
+    keyUpDelay("#confirm-email", 1000, () => checkVerifCode())
 
     const confirm = document.getElementById("confirm-change");
     confirm.addEventListener("click", () => {
@@ -249,26 +264,32 @@ window.addEventListener('DOMContentLoaded', function () {
             contentType: "application/json",
             data: JSON.stringify({
                 "type": type,
-                "value": value
             })
         });
 
         req.done(() => {
-            document.getElementById("error").innerHTML = type.charAt(0).toUpperCase() + type.substring(1) + " changed!";
+            document.getElementById("error").innerHTML = type.charAt(0).toUpperCase() + type.substring(1) + " changed! "
+                + '<span onclick="location.reload()" class="text-blue-500 hover:text-blue-600 underline cursor-pointer">Reload</span>';
             document.getElementById(type + "-display").innerText = value;
         });
     });
 
     function sendEmail() {
+        if (!validEmail) {
+            document.getElementById("confirm-email").innerHTML = ""
+            return;
+        }
+
         const button = document.getElementById("send-email");
         button.disabled = true;
+        button.innerText = "Sending...";
 
         const req = $.ajax({
             url: "/api/v1/internal/reset-email",
             type: "POST",
             contentType: "application/json",
-            data: {email: document.getElementById("confirm-email")}
-        });
+            data: JSON.stringify({email: document.getElementById("enter-value").value})
+        })
 
         req.done(() => {
             button.innerHTML = "Done";
@@ -299,14 +320,22 @@ window.addEventListener('DOMContentLoaded', function () {
 });
 
 let step = 1, max = 3;
-let type, modal, expireTimeout;
+let type, modal, expireTimeout = null;
 
 function timeout(delay) {
     if (expireTimeout)
         clearTimeout(expireTimeout);
 
     expireTimeout = setTimeout(() => {
-        prev();
+        if (step === 1)
+            return;
+
+        while (step > 1)
+            prev();
+        expireTimeout = null;
+
+        document.getElementById("access-check").value = "";
+        document.querySelector("#change-modal .disabled-css").disabled = true;
         const error = document.getElementById("error");
         error.style.color = "red";
         error.innerHTML = "Please enter your password again.";
@@ -327,50 +356,52 @@ function connectGraderoom() {
 }
 
 function openSettingsModal(settingType) {
-    for (const el of document.querySelectorAll("[step]"))
-        el.classList.add("hidden");
-
-    for (const el of document.querySelectorAll("[step='1']"))
-        el.classList.remove("hidden");
-
-    modal.show();
-    max = 3;
+    type = settingType;
 
     const capsType = settingType.charAt(0).toUpperCase() + settingType.substring(1);
     const input = document.getElementById("enter-value");
 
-    if (input.placeholder.includes(capsType))
-        return;
+    while (step > 1)
+        prev();
 
-    step = 1;
+    for (const el of document.querySelectorAll("[step]:not([step='1'])"))
+        el.classList.add("hidden");
+
+    modal.show();
+    max = 3;
 
     input.value = "";
 
+    if (input.placeholder.includes(capsType))
+        return;
+
+    input.disabled = false;
     input.setAttribute("autocomplete", "new-" + settingType);
     input.setAttribute("name", settingType);
     input.setAttribute("placeholder", "New " + capsType)
     input.setAttribute("type", capsType === "Username" ? "text" : capsType.toLowerCase());
-    input.setAttribute("step", capsType === "Email" ? "2" : "3");
+    input.setAttribute("step", capsType === "Email" ? "2,3" : "3");
 
-    type = settingType;
     document.getElementById("replace").innerHTML = "Enter New " + capsType;
-    document.getElementById("confirm-email").style.display = capsType === "Email" ? "block" : "none";
-    document.getElementById("confirm-password").style.display = capsType === "Password" ? "block" : "none";
     document.getElementById("error").innerHTML = "";
 }
 
 function prev() {
     if (step > 1) {
-        for (const el of document.querySelectorAll(" [step~='" + step + "']"))
+        for (const el of document.querySelectorAll(" [step*='" + step + "']"))
             el.classList.add("hidden");
 
-        for (const el of document.querySelectorAll(" [step~='" + (step - 1) + "']"))
+        for (const el of document.querySelectorAll(" [step*='" + (step - 1) + "']"))
             el.classList.remove("hidden");
 
         step--;
 
-        if (step === 2 && type === "username")
+        if (type === "username" && step === 2)
             prev();
+        else {
+            document.getElementById("confirm-email").style.display = type === "email" && step === 2 ? "block" : "none";
+            document.getElementById("confirm-password").style.display = type === "password" && step === 2 ? "block" : "none";
+        }
     }
 
     const error = document.getElementById("error");
@@ -381,16 +412,22 @@ function prev() {
 function next() {
     max = 3;
     if (step < max) {
-        for (const el of document.querySelectorAll(" [step~='" + step + "']"))
+        for (const el of document.querySelectorAll(" [step*='" + step + "']"))
             el.classList.add("hidden");
 
-        for (const el of document.querySelectorAll(" [step~='" + (step + 1) + "']"))
+        for (const el of document.querySelectorAll(" [step*='" + (step + 1) + "']"))
             el.classList.remove("hidden");
 
         step++;
 
-        if (step === 2 && type === "username")
-            next();
+        if (step === 2) {
+            if (type === "username")
+                next();
+            else {
+                document.getElementById("confirm-email").style.display = type === "email" ? "block" : "none";
+                document.getElementById("confirm-password").style.display = type === "password" ? "block" : "none";
+            }
+        }
     }
 
     const error = document.getElementById("error");

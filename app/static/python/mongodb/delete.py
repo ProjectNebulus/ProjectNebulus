@@ -44,7 +44,7 @@ def delete_course(course) -> None:
             i.save()
 
     course.delete()
-    print("Done!")
+    print(f"Course {course.name} deleted successfully")
 
 
 def delete_announcement(announcement, save=True) -> None:

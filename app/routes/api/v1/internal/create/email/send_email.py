@@ -34,6 +34,8 @@ def send_reset_email(replace=None, data=None):
     if not data:
         data = request.get_json()
 
+    session["email-for-reset"] = data["email"]
+
     code = random.randint(10000000, 99999999)
     session["verificationCode"] = str(code)
     print(code)
@@ -85,7 +87,7 @@ def reset_psw_email():
 @internal.route("/reset-email", methods=["POST"])
 @private_endpoint
 def reset_email():
-    if not (access := session.get("access")) or datetime.now().timestamp() - float(access) > 5 * 60:
+    if not (access := session.get("access")) or datetime.now().timestamp() - float(access) > 10 * 60:
         return "Unauthorized", 401
 
     def replace(html):
@@ -94,6 +96,7 @@ def reset_email():
             .replace("signed up", "requested an email change")
             .replace("sign up", "do so")
             .replace("Signup", "Change")
+            .replace("Change Code", "Verification Code")
         )
 
     send_reset_email(replace)

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from app.static.python.classes import Course, Assignment, Announcement, Assessment
 from app.static.python.mongodb.read import find_user
 

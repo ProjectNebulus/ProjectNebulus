@@ -46,8 +46,8 @@ class User(Snowflake):
     password = StringField(required=True)
     email = EmailField(required=True)
     age = DateTimeField(required=True)
-    theme = StringField(required=True, default="System Default")
-    language = StringField(required=True, default="English (United States)")
+    theme = StringField(default="System Default")
+    language = StringField(default="English (United States)")
     created_at = DateTimeField(default=lambda: datetime.now())
 
     # Connections

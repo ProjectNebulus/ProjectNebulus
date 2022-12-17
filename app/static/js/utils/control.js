@@ -78,12 +78,12 @@ function calculateTimeFraction(timeLeft, time_limit) {
 }
 
 for (const icon of controlCenter.getElementsByTagName('i'))
-    icon.className +=
-        ' material-icons text-center text-sm text-white rounded-full bg-purple-600 w-5 h-5 mr-1';
+    icon.className += ' material-icons text-center text-sm text-white rounded-full bg-purple-600 w-5 h-5 mr-1';
 
 for (const a of controlCenter.getElementsByTagName('a'))
-    a.className +=
-        ' text-gray-500 dark:text-gray-400 focus:outline-none hover:bg-purple-800 text-left text-sm rounded-lg p-2.5 w-36 cursor-pointer';
+    a.className += ' text-gray-500 dark:text-gray-400 focus:outline-none hover:bg-purple-800 text-left text-sm rounded-lg p-2.5 w-44 cursor-pointer';
+
+$("#control-progress").width("101%").delay(200).fadeOut(800, $("#control-progress").remove)
 
 let chatStatus = document.getElementById('chatStatus');
 if (window.location.pathname === '/chat') {

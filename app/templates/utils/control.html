@@ -63,37 +63,24 @@
         width: 300px;
         height: 300px;
     }
-</style>
-<script>
-    function openProgress() {
-        if ($("#control-progress").length === 0) {
-            $("control-center").append($("<div></div>").attr("id", "control-progress"));
-            $("control-center").append(`
-               <style>
-                   #control-progress {
-                       position: fixed;
-                       z-index: 999999;
-                       top: 0;
-                       left: -1px;
-                       width: 1%;
-                       height: 3px;
-                       background-image: linear-gradient(to right, #3a88fe, #5e30eb);
 
-                       -moz-transition: width 500ms ease-out,opacity 500ms linear;
-                       -ms-transition: width 500ms ease-out,opacity 500ms linear;
-                       -o-transition: width 500ms ease-out,opacity 500ms linear;
-                       -webkit-transition: width 600ms ease-out,opacity 500ms linear;
-                       transition: width 500ms ease-out,opacity 500ms linear;
-                   }
+    #control-progress {
+        position: fixed;
+        z-index: 999999;
+        top: 0;
+        left: -1px;
+        width: 1%;
+        height: 3px;
+        background-image: linear-gradient(to right, #3a88fe, #5e30eb);
 
-               </style>
-               `)
-            $("#control-progress").width("101%").delay(200).fadeOut(800, function () {
-                $(this).remove();
-            });
-        }
+        -moz-transition: width 500ms ease-out, opacity 500ms linear;
+        -ms-transition: width 500ms ease-out, opacity 500ms linear;
+        -o-transition: width 500ms ease-out, opacity 500ms linear;
+        -webkit-transition: width 600ms ease-out, opacity 500ms linear;
+        transition: width 500ms ease-out, opacity 500ms linear;
     }
-</script>
+</style>
+<div id="control-progress"></div>
 <div class="mx-4 my-4 flex flex-col">
     <h1 class="dark:text-white text-gray-600 text-xl" id="username-display">{{ user }}</h1>
     <p class="text-gray-800 dark:text-gray-400" id="email-display">{{ email }}</p>
@@ -178,9 +165,8 @@
         <span id="base-timer-label" class="base-timer__label"></span>
     </div>
 </div>
-<div style=" margin-top: 10px; margin-bottom: 10px; "
-     id="chatStatus"
-     class="dark:border-gray-700 border text-sm  bg-gray-300/75 dark:bg-gray-800/75 rounded-lg h-40 w-full text-center  text-xs font-medium px-3 py-2 rounded">
+<div id="chatStatus" style="margin: 10px 0"
+     class="dark:border-gray-700 border text-sm bg-gray-300/75 dark:bg-gray-800/75 rounded-lg h-40 w-full text-center  text-xs font-medium px-3 py-2 rounded">
     <div class="flex flex-col">
         <div class="flex items-center  mb-4">
             <div class="relative mr-4">
@@ -276,7 +262,7 @@
      class="flex p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
      role="alert">
 </div>
-<script src="/static/js/utils/control.js"></script>
+<script src="/static/js/utils/control.js" defer></script>
 <button onclick="window.location.href = '/logout';"
         type="button"
         class="w-full my-4 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">

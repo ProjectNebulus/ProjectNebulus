@@ -10,7 +10,7 @@ api_blueprint = Blueprint(
 
 # Importing routes for this blueprint
 
-from .developers import *
+# from .developers import *
 from .v1 import *
 
 # from app.routes.api import graphql

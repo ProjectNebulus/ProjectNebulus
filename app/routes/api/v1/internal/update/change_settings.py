@@ -21,11 +21,14 @@ def check_password():
 @internal.route("/update/setting", methods=["POST"])
 def changeSetting():
     date = session.get("access")
-    if not date or float(date) - datetime.now().timestamp() > 5 * 60:
+    if not date or float(date) - datetime.now().timestamp() > 10 * 60:
         return "Unauthorized", 401
 
     data = request.get_json()
-    val = data["value"]
+    val = session.get("email-for-reset")
+
+    if not val:
+        return "Missing Value", 401
 
     user = User.objects(pk=session["id"]).first()
 
@@ -44,7 +47,10 @@ def changeSetting():
     elif data["type"] == "password":
         user.password = hash256(val)
 
-    session["username"] = val
+    else:
+        return "Invalid type", 403
+
+    session[data["type"]] = val
     user.save()
 
     return "success"

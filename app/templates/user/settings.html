@@ -1402,12 +1402,6 @@
             </div>
         </div>
     </div>
-    <script>
-        {% if session.get("access") and lastAccess < 5 * 60 %}
-            window.addEventListener("load", next);
-            timeout({{ (300 - lastAccess) * 1000 }});
-        {% endif %}
-    </script>
     <div id="change-modal" tabindex="-1" aria-hidden="true"
          class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
         <div class="relative p-4 w-96 max-w-2xl h-full md:h-auto">
@@ -1417,7 +1411,7 @@
                 <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                         <span step="1">Enter Password</span>
-                        <span step="2" id="replace">Enter New Username</span>
+                        <span step="2,3" id="replace">Enter New Username</span>
                     </h3>
                     <button class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm
                      p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -1433,12 +1427,12 @@
                 <!-- Modal body -->
                 <div class="p-6 space-y-6">
                     <input type="password" step="1" id="access-check" name="password" placeholder="Password">
-                    <input type="text" step="3" id="enter-value" name="username" autocomplete="new-username"
-                           placeholder="New Username">
+                    <input type="text" step="3" id="enter-value" name="username" autocomplete="new-username">
 
-                    <div class="relative">
+                    <div class="relative" step="2,3">
                         <div class="material-icons absolute right-0 p-2"></div>
-                        <input type="text" step="3" id="confirm-email" placeholder="Validation Code" class="pr-10">
+                        <input type="text" id="confirm-email" autocomplete="off" placeholder="Validation Code"
+                               class="pr-10">
                     </div>
 
                     <input type="password" step="2" id="confirm-password" placeholder="Confirm Password">
@@ -1473,7 +1467,7 @@
                     <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none flex gap-2
                                  focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-blue-600
                                  dark:hover:bg-blue-700 dark:focus:ring-blue-800 place-items-center disabled-css"
-                            step="2" id="send-email">
+                            step="2" id="send-email" disabled>
                         Send Email
                     </button>
                     <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none flex gap-2
