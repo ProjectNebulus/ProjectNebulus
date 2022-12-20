@@ -8,3 +8,6 @@ def hash256(password):
 
 def valid_password(hashed, unhashed):
     return check_password_hash(hashed, unhashed)
+
+
+print(hash256("12345"))

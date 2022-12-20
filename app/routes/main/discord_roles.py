@@ -6,27 +6,27 @@ from flask_discord import DiscordOAuth2Session
 
 from app.static.python.mongodb import update
 from . import main_blueprint
-from ...static.python.mongodb.read import getText
+from ...static.python.mongodb.read import getText, find_user
 
 app = Flask(__name__)
-app.config["DISCORD_CLIENT_ID"] = 955153343020429343  # Discord client ID.
+app.config["DISCORD_CLIENT_ID"] = 992107195003043841  # Discord client ID.
 app.config[
     "DISCORD_CLIENT_SECRET"
-] = "6ApEyUtWUsp1SwuXlrRn3e_lNB6IqfSO"  # Discord client secret.
+] = "lxvcD2qBjLzeS2rERdvmm26no3IAc4KV"  # Discord client secret.
 app.config["DISCORD_REDIRECT_URI"] = "null"
 
 
 def generate_redirect(url):
     if "nebulus" in url:
         if "https" not in url:
-            return url.replace("http", "https") + "discord/receive"
-    return url + "discord/receive"
+            return url.replace("http", "https") + "discord-roles/receive"
+    return url + "discord-roles/receive"
 
 
 def exchange_code(code, url):
     data = {
-        "client_id": 955153343020429343,
-        "client_secret": "6ApEyUtWUsp1SwuXlrRn3e_lNB6IqfSO",
+        "client_id": 992107195003043841,
+        "client_secret": "lxvcD2qBjLzeS2rERdvmm26no3IAc4KV",
         "grant_type": "authorization_code",
         "code": code,
         "scope": "role_connections.write identify",
@@ -69,22 +69,37 @@ def getMe(access_token):  # this works
     return getRequest(access_token, endpoint)
 
 
-@main_blueprint.route("/discord")
-def discord_auth():
+@main_blueprint.route("/discord-roles")
+def roles_discord_auth():
     app.config["DISCORD_REDIRECT_URI"] = generate_redirect(request.root_url)
     discordAuth = DiscordOAuth2Session(app)
 
-    return discordAuth.create_session()
+    return discordAuth.create_session(scope=["role_connections.write", "identify"])
+
+def push_metadata(access_token):
+    url = "https://discord.com/api/v10/users/@me/applications/992107195003043841/role-connection"
+    user = find_user(session["id"])
+    data = {
+        "platform_name": "Nebulus",
+        "isstaff": user.is_staff,
+        "earlysupporter": True,
+        "courseamount": len(user.courses),
+    }
+
+    requests.put(url, headers=getHeaders(access_token), data=json.dumps(data))
 
 
-@main_blueprint.route("/discord/receive")
-def recieve():
+
+
+@main_blueprint.route("/discord-roles/receive")
+def roles_recieve():
     if "code" in request.args:
         try:
             code = request.args["code"]
             data = exchange_code(code, request.root_url)
             access_token = data["access_token"]
             data = getMe(access_token)
+            push_metadata(access_token)
 
             avatar_link = (
                 f"https://cdn.discordapp.com/avatars/{data['id']}/{data['avatar']}.png"

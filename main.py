@@ -26,7 +26,7 @@ if __name__ == "__main__":
         host = "127.0.0.1"
         protocol = "http"
     else:  # macos (darwin) or windows (windows)
-        port = 8080
+        port = 5000
         host = "localhost"
         protocol = "http"
 
