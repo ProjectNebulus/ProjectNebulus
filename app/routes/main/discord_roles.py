@@ -78,7 +78,7 @@ def roles_discord_auth():
 
 def push_metadata(access_token):
     url = "https://discord.com/api/v10/users/@me/applications/992107195003043841/role-connection"
-    user = find_user(session["id"])
+    user = find_user(id=session["id"])
     data = {
         "platform_name": "Nebulus",
         "isstaff": user.is_staff,
