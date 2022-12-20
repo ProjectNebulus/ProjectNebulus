@@ -13,5 +13,5 @@ def newNebulusdoc():
         <font face="Montserrat" color="#a3a3a3"><b style="">Type / to insert</b></font>
         """,
     }
-    id = create.create_nebulusdoc(data)
+    id = create.create_nebulus_doc(data)
     return str(id)  # /docs/document/"

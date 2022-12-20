@@ -10,7 +10,7 @@ from ..classes import (
     NebulusDocument,
     Planner,
     Schoology,
-    User, Canvas, Discord, Spotify,
+    User, Canvas, Discord, Spotify, Event, Assignment
 )
 from ..classes.Github import Github
 from ..classes.Graderoom import Graderoom
@@ -343,6 +343,23 @@ def add_school_to_user(user_id:str, school: str):
         return "1"
     user.schools.append(school)
     user.save(clean=False)
+
+def mark_event_as_done(event_id: str):
+    try:
+        event = Event.objects.get(pk=event_id)
+        event.save(clean=False)
+        return "0"
+    except:
+        event = None
+
+    try:
+        assignment  = Assignment.objects.get(pk=event_id)
+        assignment.status = "Submitted"
+        assignment.save(clean=False)
+        return "0"
+    except:
+        assignment = None
+
 
 
 

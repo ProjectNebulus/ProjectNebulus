@@ -776,34 +776,60 @@
                     School Settings
                 </h2>
                 <br>
-                <a href="/school">
-                    <button style="float:left;
-                               vertical-align: middle;" type="button"
-                            class="hidden lg:flex items-center w-64 text-left space-x-3 px-4 h-12 bg-gray-300 ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-gray-600 dark:bg-slate-800/75 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700 text-sm">
-                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
-                             stroke-linecap="round" stroke-linejoin="round"
-                             class="flex-none text-slate-300 dark:text-slate-400" aria-hidden="true">
-                            <path d="m19 19-3.5-3.5"></path>
-                            <circle cx="11" cy="11" r="6"></circle>
-                        </svg>
-                        <span class="w-full">Join a School</span>
-                    </button>
-                </a><br><br>
+
                 {% if schools|length == 0 %}
+                    <a href="/school">
+                        <button style="float:left;
+                               vertical-align: middle;" type="button"
+                                class="hidden lg:flex items-center w-64 text-left space-x-3 px-4 h-12 bg-gray-300 ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg text-gray-600 dark:bg-slate-800/75 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700 text-sm">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round"
+                                 class="flex-none text-slate-300 dark:text-slate-400" aria-hidden="true">
+                                <path d="m19 19-3.5-3.5"></path>
+                                <circle cx="11" cy="11" r="6"></circle>
+                            </svg>
+                            <span class="w-full">Join a School</span>
+                        </button>
+                    </a><br><br>
                     <h1 class="text-gray-500 mt-6">
                         You are not in a school! Click the above button to join one.
                     </h1>
                 {% endif %}
-                {% for school in schools %}
-                    <div class="flex flex-row gap-4 cursor-pointer items-center p-2 rounded-xl border-2 border-transparent  transition-all">
-                        <img src="/static/images/schools/{{ school["code"] }}.{{ school["picture_url"] }}"
-                             class="w-12 h-12 rounded-xl shadow-lg" alt="{{ school["name"] }}'s Logo">
-                        <div class="flex flex-col gap-2">
-                            <h3 class="font-extrabold text-xl font-montserrat dark:text-white text-black">{{ school["name"] }}</h3>
-                            <p class="text-sm font-semibold dark:text-gray-400">#{{ school["code"] }}</p>
-                        </div>
+
+                <div class="w-full max-w-md p-4 bg-white/75 rounded-lg shadow-md sm:p-8 dark:bg-gray-800/75" style="backdrop-font: blur(10px);">
+                    <div class="flex items-center justify-between mb-4">
+                        <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">My Schools</h5>
+                        <a href="/school" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
+                            Add a School
+                        </a>
                     </div>
-                {% endfor %}
+                    <div class="flow-root">
+                        <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                            {% for school in schools %}
+                            <li class="py-3 sm:py-4">
+                                <div class="flex items-center space-x-4">
+                                    <div class="flex-shrink-0">
+                                        <img class="w-8 h-8 rounded-full" alt="{{ school["name"] }}'s Logo" src="/static/images/schools/{{ school["code"] }}.{{ school["picture_url"] }}" alt="Neil image">
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                            {{ school["name"] }}
+                                        </p>
+                                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                            #{{ school["code"] }}
+                                        </p>
+                                    </div>
+                                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                        1 Member
+                                    </div>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+
             </div>
 
             <div id="themeSettings" style="display:none;">
@@ -1029,7 +1055,7 @@
                 <h1 class="text-gray-500">This feature is only available if you are enrolled in a School. Join a school
                     with the
                     "School" tab in settings.</h1><br>
-                <button type="button"
+                <button type="button" onclick="openModal('bellScheduleModal')"
                         class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
                     <i class="material-icons" style="vertical-align:middle;">
                         add
@@ -1861,5 +1887,27 @@
             </div>
         </div>
     </div>
+
+    <div id="bellScheduleModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
+        <div class="relative w-full h-full max-w-md md:h-auto">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-900">
+                <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="authentication-modal">
+                    <svg onclick="closeModal('bellScheduleModal')" aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+                <div class="px-6 py-6 lg:px-8">
+                    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Create a New Bell Schedule</h3>
+                    <form class="space-y-6" action="#">
+                        <label for="name" class="block">
+                            <span class="text-gray-700 dark:text-gray-200">Name</span>
+                            <input id="name" type="text" name="name" placeholder="Period 1" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray form-input" required>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     </body>
 {% endblock %}

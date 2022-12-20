@@ -36,6 +36,14 @@ function updateEventListeners() {
             )
         );
     }
+    for (const button of document.getElementsByClassName('checklist')) {
+        const parent = button.parentElement;
+        let announcement_id = parent.querySelector('[type-id]').innerHTML;
+
+        button.addEventListener('click', () =>
+            markElementAsDone(announcement_id)
+        );
+    }
 }
 
 updateEventListeners();
@@ -146,6 +154,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 })
 
+function markElementAsDone(id) {
+    $.ajax({
+        url: "/api/v1/internal/update/event/done",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify({id: id})
+    });
+}
 function openDetailsModal(content, title, author, pic, course, postTime, dueTime, type, coursePic, likes) {
     if (type === "Announcement") {
         document.getElementById("submissionsBox").style.display = "none";

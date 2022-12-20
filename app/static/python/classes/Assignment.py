@@ -46,12 +46,17 @@ class Assignment(Snowflake):
     submitDate = DateTimeField(
         default=None, description="The time the assignment was submitted."
     )
+    status = StringField(
+        description="The status of the assessment. Can be 'Not Submitted', 'Submitted', or 'Graded'.",
+        default="Not Submitted",
+    )
     description = StringField(
         default="", description="The description of the assignment."
     )
     period = EmbeddedDocumentField("TermGrade", default=None)
     grading_category = EmbeddedDocumentField("GradingCategory", default=None)
     show_in_upcoming = BooleanField(default=None)
+
 
     def clean(self):
         self.show_in_upcoming = self.show_in_upcoming or (

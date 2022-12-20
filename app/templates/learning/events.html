@@ -50,8 +50,9 @@
         {% if (a._cls != "Assignment" or a.submitDate == None) or now < date %}
             {# today is before the due date ^ #}
             <div class="flex bg-gray-100 shadow dark:bg-gray-800/75 rounded-lg p-6 event shadow-md dark:border-gray-700 text-sm mb-5 mx-4 text-left relative expandable">
-                <div class="absolute right-0 bottom-0 material-icons hover:bg-gray-50 dark:hover:bg-gray-500 p-1 expand text-gray-200 cursor-pointer dark:text-gray-400 rounded-lg mr-3 mb-3">
-                    open_in_new
+                <div class="absolute right-0 bottom-0 hover:bg-gray-50 dark:hover:bg-gray-500 p-1  text-gray-200 cursor-pointer dark:text-gray-400 rounded-lg mr-3 mb-3">
+                    <span class="expand material-icons">open_in_new</span>
+                    <span class="material-icons">done</span>
                 </div>
                 <div content-element hidden class="hidden">{{ a.description }}</div>
                 <div author-element hidden class="hidden">{{ a.course.teacher }}</div>

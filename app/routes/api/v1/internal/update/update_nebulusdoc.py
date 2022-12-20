@@ -15,8 +15,7 @@ def update_nebulusdoc():
     data3 = request.form.get("id")
     data = {"title": data1, "content": data2, "id": data3}
     data["lastEdited"] = datetime.now()
-    print(data)
-    create.update_nebulusdoc(data)
+    create.update_nebulus_doc(data)
 
     return "success"
 
