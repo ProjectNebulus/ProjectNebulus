@@ -1,6 +1,6 @@
 import json
 
-import requests
+import requests, datetime
 from flask import Flask, redirect, render_template, request, session
 from flask_discord import DiscordOAuth2Session
 
@@ -83,7 +83,7 @@ def push_metadata(access_token):
     data = {
         "platform_name": "Nebulus",
         "isstaff": user.is_staff,
-        "earlysupporter": user.created_at < "2022-12-18T00:00:00.000Z",
+        "earlysupporter": user.created_at < datetime.datetime(2022, 12, 18, 0, 0, 0),
         "courseamount": course_amount,
     }
 
