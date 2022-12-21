@@ -1,4 +1,5 @@
-import requests, json, os
+import requests, json, os, dotenv
+dotenv.load_dotenv()
 
 url = "https://discord.com/api/v10/applications/992107195003043841/role-connections/metadata"
 
@@ -21,6 +22,12 @@ data = [
     'description': 'Courses added by the user.',
     'type': 2,
   },
+  {
+    'key': 'date_created',
+    'name': 'Joined At',
+    'description': 'Date the user joined Nebulus.',
+    'type': 5,
+  }
 ]
 
 headers = {

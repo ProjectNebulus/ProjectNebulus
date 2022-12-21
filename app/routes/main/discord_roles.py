@@ -87,7 +87,8 @@ def push_metadata(access_token):
         "metadata": {
             "isstaff": 1 if user.is_staff else 0,
             "earlysupporter": 1 if user.created_at < datetime.datetime(2022, 12, 18, 0, 0, 0) else 0,
-            "courseamount": course_amount
+            "courseamount": course_amount,
+            "date_created": user.created_at
         }
     }
 
