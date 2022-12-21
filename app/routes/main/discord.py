@@ -5,7 +5,7 @@ from flask import Flask, redirect, render_template, request, session
 from flask_discord import DiscordOAuth2Session
 
 from app.static.python.mongodb import update
-from . import main_blueprint
+from . import main_blueprint, logged_in
 from ...static.python.mongodb.read import getText
 
 app = Flask(__name__)
@@ -69,6 +69,7 @@ def getMe(access_token):  # this works
     return getRequest(access_token, endpoint)
 
 
+@logged_in
 @main_blueprint.route("/discord")
 def discord_auth():
     app.config["DISCORD_REDIRECT_URI"] = generate_redirect(request.root_url)

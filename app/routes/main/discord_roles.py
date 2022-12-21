@@ -1,11 +1,12 @@
 import json
 
-import requests, datetime
+import datetime
+import requests
 from flask import Flask, redirect, render_template, request, session
 from flask_discord import DiscordOAuth2Session
 
 from app.static.python.mongodb import update
-from . import main_blueprint
+from . import main_blueprint, logged_in
 from ...static.python.mongodb.read import getText, find_user, get_user_courses
 
 app = Flask(__name__)
@@ -70,6 +71,7 @@ def getMe(access_token):  # this works
 
 
 @main_blueprint.route("/discord-roles")
+@logged_in
 def roles_discord_auth():
     app.config["DISCORD_REDIRECT_URI"] = generate_redirect(request.root_url)
     discordAuth = DiscordOAuth2Session(app)
