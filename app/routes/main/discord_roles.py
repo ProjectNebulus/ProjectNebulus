@@ -6,7 +6,7 @@ from flask_discord import DiscordOAuth2Session
 
 from app.static.python.mongodb import update
 from . import main_blueprint
-from ...static.python.mongodb.read import getText, find_user
+from ...static.python.mongodb.read import getText, find_user, get_user_courses
 
 app = Flask(__name__)
 app.config["DISCORD_CLIENT_ID"] = 992107195003043841  # Discord client ID.
@@ -79,11 +79,12 @@ def roles_discord_auth():
 def push_metadata(access_token):
     url = "https://discord.com/api/v10/users/@me/applications/992107195003043841/role-connection"
     user = find_user(id=session["id"])
+    course_amount = len(get_user_courses(session["id"]))
     data = {
         "platform_name": "Nebulus",
         "isstaff": user.is_staff,
-        "earlysupporter": True,
-        "courseamount": len(user.courses),
+        "earlysupporter": user.created_at < "2022-12-18T00:00:00.000Z",
+        "courseamount": course_amount,
     }
 
     requests.put(url, headers={"Content-Type": "application/json", "Authorization": f'Bearer {access_token}'}, data=json.dumps(data))
