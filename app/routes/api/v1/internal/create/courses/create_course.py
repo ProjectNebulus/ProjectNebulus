@@ -424,6 +424,8 @@ def create_schoology_course(section, link, teacher, user, sc: Schoology = None):
             else:
                 due = None
 
+
+
             data = {
                 "title": assignment["title"],
                 "description": assignment["description"]
@@ -432,7 +434,7 @@ def create_schoology_course(section, link, teacher, user, sc: Schoology = None):
                 "allow_submissions": int(assignment["allow_dropbox"]) == 1,
                 "course": str(course_obj.id),
                 "points": float(assignment["max_points"]),
-                "grading_category": categories[int(assignment["grading_category"])],
+                "grading_category": categories.get(int(assignment["grading_category"]), None),
                 "imported_from": "Schoology",
                 "imported_id": str(assignment["id"]),
             }

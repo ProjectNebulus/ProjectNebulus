@@ -28,6 +28,12 @@ data = [
     'description': 'Date the user joined Nebulus.',
     'type': 5,
   },
+  {
+    'key': 'schoology_user',
+    'name': 'Schoology User',
+    'description': 'The user has connected their Schoology account.',
+    'type': 7,
+  }
 ]
 
 headers = {

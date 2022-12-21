@@ -89,6 +89,7 @@ def push_metadata(access_token):
             "earlysupporter": 1 if user.created_at < datetime.datetime(2022, 12, 18, 0, 0, 0) else 0,
             "courseamount": course_amount,
             "date_created": user.created_at.strftime("%Y-%m-%d %H:%M:%S"),
+            "schoology_user": 1 if user.schoology else 0,
         }
     }
 
