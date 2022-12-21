@@ -82,9 +82,11 @@ def push_metadata(access_token):
     course_amount = len(get_user_courses(session["id"]))
     data = {
         "platform_name": "Nebulus",
-        "isstaff": 1 if user.is_staff else 0,
-        "earlysupporter": 1 if user.created_at < datetime.datetime(2022, 12, 18, 0, 0, 0) else 0,
-        "courseamount": course_amount,
+        "metadata": {
+            "isstaff": 1 if user.is_staff else 0,
+            "earlysupporter": 1 if user.created_at < datetime.datetime(2022, 12, 18, 0, 0, 0) else 0,
+            "courseamount": course_amount
+        }
     }
 
     requests.put(url, headers={"Content-Type": "application/json", "Authorization": f'Bearer {access_token}'}, data=json.dumps(data))
