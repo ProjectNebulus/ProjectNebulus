@@ -86,7 +86,7 @@ def push_metadata(access_token):
         "courseamount": len(user.courses),
     }
 
-    requests.put(url, headers=getHeaders(access_token), data=json.dumps(data))
+    requests.put(url, headers={"Content-Type": "application/json", "Authorization": f'Bearer {access_token}'}, data=json.dumps(data))
 
 
 
