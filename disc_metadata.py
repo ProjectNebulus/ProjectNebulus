@@ -28,13 +28,6 @@ data = [
     'description': 'Date the user joined Nebulus.',
     'type': 5,
   },
-  {
-    'key': 'user_id',
-    'name': 'User ID',
-    'description': "The user's unique Nebulus ID",
-    'type': 2,
-  }
-
 ]
 
 headers = {

@@ -83,13 +83,12 @@ def push_metadata(access_token):
     user = find_user(id=session["id"])
     course_amount = len(get_user_courses(session["id"]))
     data = {
-        "platform_name": "Nebulus",
+        "platform_name": user.username,
         "metadata": {
             "isstaff": 1 if user.is_staff else 0,
             "earlysupporter": 1 if user.created_at < datetime.datetime(2022, 12, 18, 0, 0, 0) else 0,
             "courseamount": course_amount,
             "date_created": user.created_at.strftime("%Y-%m-%d %H:%M:%S"),
-            "name": user.username,
         }
     }
 
