@@ -1,6 +1,6 @@
+import datetime
 import json
 
-import datetime
 import requests
 from flask import Flask, redirect, render_template, request, session
 from flask_discord import DiscordOAuth2Session
@@ -72,6 +72,11 @@ def getMe(access_token):  # this works
 
 @main_blueprint.route("/discord-roles")
 @logged_in
+def discord_roles():
+    return render_template("user/connections/connectDiscordRolesPrepare.html", username=session["username"], translate=getText)
+
+@main_blueprint.route("/discord-roles/start")
+@logged_in
 def roles_discord_auth():
     app.config["DISCORD_REDIRECT_URI"] = generate_redirect(request.root_url)
     discordAuth = DiscordOAuth2Session(app)
@@ -124,7 +129,7 @@ def roles_recieve():
             }
             update.discordLogin(session["id"], discord_dict)
 
-            return render_template("user/connections/connectDiscord.html", data=data, translate = getText)
+            return render_template("user/connections/connectDiscordRoles.html", data=data, translate = getText)
 
         except Exception as e:
             print(e)
