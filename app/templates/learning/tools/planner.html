@@ -1,258 +1,256 @@
 {% extends "layout.html" %}
 {% block main %}
     {% include "utils/navbar.html" %}
-    <div>
-        <style>
-            table {
-                table-layout: fixed;
-            }
+    <style>
+        table {
+            table-layout: fixed;
+        }
 
-            td {
-                border: 1px solid #000;
-                width: 30px;
-            }
+        td {
+            border: 1px solid #000;
+            width: 30px;
+        }
 
-            td + td {
-                width: auto;
-            }
+        td + td {
+            width: auto;
+        }
 
-            .note li {
-                border-bottom: 1px solid gray;
-                width: 100%;
-                display: block;
-            }
+        .note li {
+            border-bottom: 1px solid gray;
+            width: 100%;
+            display: block;
+        }
 
-            .note::-webkit-scrollbar {
-                display: none;
-            }
+        .note::-webkit-scrollbar {
+            display: none;
+        }
 
-            .note {
-                -ms-overflow-style: none; /* IE and Edge */
-                scrollbar-width: none; /* Firefox */
-            }
+        .note {
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
+        }
 
-            [modal-backdrop] {
-                backdrop-filter: blur(6px);
-                z-index: 200;
+        [modal-backdrop] {
+            backdrop-filter: blur(6px);
+            z-index: 200;
 
-            }
+        }
 
-            .dark [modal-backdrop] {
-                background-color: rgb(156 163 175 / var(--tw-bg-opacity));
-            }
+        .dark [modal-backdrop] {
+            background-color: rgb(156 163 175 / var(--tw-bg-opacity));
+        }
 
-            #timePeriods {
-                height: 23%;
-                overflow-y: auto;
-                overflow-x: hidden;
-                padding-right: 1rem;
-                scroll-behavior: smooth;
-            }
+        #timePeriods {
+            height: 23%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding-right: 1rem;
+            scroll-behavior: smooth;
+        }
 
-            table {
-                font-family: 'Lato', sans-serif;
-                border-collapse: collapse;
-                width: 100%;
-            }
+        table {
+            font-family: 'Lato', sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
 
-            th:first-of-type {
-                border-top-left-radius: 10px;
-            }
+        th:first-of-type {
+            border-top-left-radius: 10px;
+        }
 
-            th:last-of-type {
-                border-top-right-radius: 10px;
-            }
+        th:last-of-type {
+            border-top-right-radius: 10px;
+        }
 
-            tr:last-of-type td:first-of-type {
-                border-bottom-left-radius: 10px;
-            }
+        tr:last-of-type td:first-of-type {
+            border-bottom-left-radius: 10px;
+        }
 
-            tr:last-of-type td:last-of-type {
-                border-bottom-right-radius: 10px;
-            }
+        tr:last-of-type td:last-of-type {
+            border-bottom-right-radius: 10px;
+        }
 
-            td {
-                border: none;
-                text-align: left;
-                padding: 8px;
-                position: relative;
-                height: 60px;
-            }
+        td {
+            border: none;
+            text-align: left;
+            padding: 8px;
+            position: relative;
+            height: 60px;
+        }
 
-            div[contenteditable=true] {
-                font-family: 'Lato', sans-serif;
-                position: absolute;
-                background-color: transparent;
-                background-image: repeating-linear-gradient(to bottom, transparent 0 20px, #EEE 0 21px);
-                color: black;
-                width: 100%;
-                overflow: auto;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                font-size: 0.9rem;
-                line-height: 1.1rem;
-                padding: 0.5rem;
-                -webkit-box-sizing: border-box; /* <=iOS4, <= Android  2.3 */
-                -moz-box-sizing: border-box; /* FF1+ */
-                box-sizing: border-box; /* Chrome, IE8, Opera, Safari 5.1*/
-                outline: none;
-            }
+        div[contenteditable=true] {
+            font-family: 'Lato', sans-serif;
+            position: absolute;
+            background-color: transparent;
+            background-image: repeating-linear-gradient(to bottom, transparent 0 20px, #EEE 0 21px);
+            color: black;
+            width: 100%;
+            overflow: auto;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            font-size: 0.9rem;
+            line-height: 1.1rem;
+            padding: 0.5rem;
+            -webkit-box-sizing: border-box; /* <=iOS4, <= Android  2.3 */
+            -moz-box-sizing: border-box; /* FF1+ */
+            box-sizing: border-box; /* Chrome, IE8, Opera, Safari 5.1*/
+            outline: none;
+        }
 
-            div[contenteditable=true]:focus {
-                border: 2px solid deepskyblue;
-                padding: calc(0.5rem - 2px);
-            }
+        div[contenteditable=true]:focus {
+            border: 2px solid deepskyblue;
+            padding: calc(0.5rem - 2px);
+        }
 
-            .dark div[contenteditable=true] {
-                color: white;
-                background-image: repeating-linear-gradient(to bottom, transparent 0 20px, #444 0 21px);
-            }
+        .dark div[contenteditable=true] {
+            color: white;
+            background-image: repeating-linear-gradient(to bottom, transparent 0 20px, #444 0 21px);
+        }
 
-            .dark td {
-                border: 1px solid gray;
-            }
-        </style>
-        <div class="w-full h-full" style="padding: 20px">
-            <div class="flex flex-row justify-between">
-                <span id="month" class="text-4xl text-black dark:text-white">Error Finding Month</span>
-                <div class="text-center">
-                    <span id="savestate" style="color:#b8b8b8;text-decoration:underline">Synced to Cloud | Last Edit was seconds ago</span>
-                    <br>
-                    <span id="error" style="color:green;">Connected to Nebulus</span>
-                    <br>
-                </div>
-                <div class="text-4xl text-black dark:text-white"
-                     style='float:right; margin-top: -2.5rem'>
-                    <div class="flex justify-between text-xl">
-                        <label for="planner_name" class="text-gray-500 dark:text-gray-400">Planner Name</label>
-                        <button class="material-icons text-gray-50 dark:text-gray-400 hover:bg-gray-200 p-1 rounded dark:hover:bg-gray-500 mb-3"
-                                onclick="openModal('configureModal')"
-                                onclick="settings()">
-                            settings
-                        </button>
-                    </div>
-                    <input type="text"
-                           id="planner_name"
-                           name="planner-name"
-                           placeholder="My Agenda"
-                           required
-                           class="bg-gray-50/75 border border-gray-300 text-gray-900 text-2xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800/75 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                </div>
+        .dark td {
+            border: 1px solid gray;
+        }
+    </style>
+    <div style="padding: 0 5%">
+        <div class="flex flex-row justify-between mt-16">
+            <span id="month" class="text-4xl text-black dark:text-white">Error Finding Month</span>
+            <div class="text-center">
+                <span id="savestate" style="color:#b8b8b8;text-decoration:underline">Synced to Cloud | Last Edit was seconds ago</span>
+                <br>
+                <span id="error" style="color:green;">Connected to Nebulus</span>
+                <br>
             </div>
-            <br>
-            <span id="dates"></span>
-            <div style="border: 1px solid gray; border-radius: 15px; overflow: hidden">
-                <table class="bg-gray-800/50 bg-white/50 text-sm text-left text-gray-500 dark:text-gray-400"
-                       style="backdrop-filter: blur(5px);">
-                </table>
-                <div class="border-b bg-gray-50 dark:bg-gray-700 dark:border-gray-700 flex justify-between px-4 py-3">
-                    <button class="material-icons pl-3 pr-1 py-1 rounded-full border border-gray-100 dark:border-gray-500 hover:bg-gray-50 dark:hover:bg-gray-500 dark:text-white text-lg"
-                            id="prevPage">
-                        arrow_back_ios
-                    </button>
-                    <button class="border border-gray-100 dark:border-gray-500 px-4 py-1 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-500 dark:text-white bg-gray-50 dark:bg-gray-700"
-                            id="today">
-                        Today
-                    </button>
-                    <button class="material-icons px-2 py-1 rounded-full border border-gray-100 dark:border-gray-500 hover:bg-gray-50 dark:hover:bg-gray-500 dark:text-white text-lg"
-                            id="nextPage">
-                        arrow_forward_ios
+            <div class="text-4xl text-black dark:text-white"
+                 style='float:right; margin-top: -2.5rem'>
+                <div class="flex justify-between text-xl">
+                    <label for="planner_name" class="text-gray-500 dark:text-gray-400">Planner Name</label>
+                    <button class="material-icons text-gray-50 dark:text-gray-400 hover:bg-gray-200 p-1 rounded dark:hover:bg-gray-500"
+                            onclick="openModal('configureModal'); settings()">
+                        settings
                     </button>
                 </div>
+                <input type="text"
+                       id="planner_name"
+                       name="planner-name"
+                       placeholder="My Agenda"
+                       required
+                       class="bg-gray-50/75 border border-gray-300 text-gray-900 text-2xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800/75 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             </div>
         </div>
-        <div id="configureModal"
-             tabindex="-1"
-             aria-hidden="true"
-             style="object-position: center;
-                    z-index:300;"
-             class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 w-full md:inset-0 h-modal md:h-full">
-            <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
-                <!-- Modal content -->
-                <div class="relative bg-gray-50 rounded-lg shadow dark:bg-gray-800">
-                    <!-- Modal header -->
-                    <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
-                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Configure Your Planner</h3>
-                        <button class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                onclick="closeModal('configureModal')">
-                            <svg class="w-5 h-5"
-                                 fill="currentColor"
-                                 viewBox="0 0 20 20"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                      clip-rule="evenodd">
-                                </path>
-                            </svg>
-                        </button>
-                    </div>
-                    <!-- Modal body -->
-                    <div class="p-6 space-y-6">
-                        <div class="mb-6">
-                            <label for="configName"
-                                   class="mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                Planner
-                                Name
-                            </label>
-                            <input type="text"
-                                   id="configName"
-                                   name="planner-name"
-                                   placeholder="My Agenda"
-                                   required
-                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white w-full dark:bg-gray-700">
-                        </div>
-                        <div class="mb-6">
-                            <label for="period1"
-                                   class="block text-sm font-medium text-gray-900 dark:text-gray-300">
-                                Configure your School Periods / Time Intervals
-                                <button style="float:right"
-                                        class="material-icons hover:bg-gray-200 dark:hover:bg-gray-500 text-gray-500 dark:text-gray-400 p-0.5 rounded -mt-1"
-                                        onclick="addTimePeriod()">
-                                    add
-                                </button>
-                                <button style="float:right"
-                                        class="material-icons hover:bg-gray-200 dark:hover:bg-gray-500 text-gray-500 dark:text-gray-400 p-0.5 rounded -mt-1"
-                                        onclick="toggleRemoveIcons()">
-                                    remove
-                                </button>
-                            </label>
-                            <br>
-                            <div id="timePeriods"></div>
-                        </div>
-                    </div>
-                    <!-- Modal footer -->
-                    <div class="flex items-center p-6 pt-0 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-                        <button onclick="saveConfig();closeModal('configureModal')"
-                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                                onclick="plannerName.value = document.getElementById('configName').value; saveConfig()">
-                            Save Configuration
-                        </button>
-                        <button onclick="closeModal('configureModal')"
-                                class="text-gray-500 bg-gray-50 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
-                            Cancel
-                        </button>
-                    </div>
-                </div>
+        <br>
+        <span id="dates"></span>
+        <div style="border: 1px solid gray; border-radius: 15px; overflow: hidden">
+            <table class="bg-gray-800/50 bg-white/50 text-sm text-left text-gray-500 dark:text-gray-400"
+                   style="backdrop-filter: blur(5px);">
+            </table>
+            <div class="border-b bg-gray-50 dark:bg-gray-700 dark:border-gray-700 flex justify-between px-4 py-3">
+                <button class="material-icons pl-3 pr-1 py-1 rounded-full border border-gray-100 dark:border-gray-500 hover:bg-gray-50 dark:hover:bg-gray-500 dark:text-white text-lg"
+                        id="prevPage">
+                    arrow_back_ios
+                </button>
+                <button class="border border-gray-100 dark:border-gray-500 px-4 py-1 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-500 dark:text-white bg-gray-50 dark:bg-gray-700"
+                        id="today">
+                    Today
+                </button>
+                <button class="material-icons px-2 py-1 rounded-full border border-gray-100 dark:border-gray-500 hover:bg-gray-50 dark:hover:bg-gray-500 dark:text-white text-lg"
+                        id="nextPage">
+                    arrow_forward_ios
+                </button>
             </div>
         </div>
-        <div id="loading"
-             tabindex="-1"
-             aria-hidden="true"
-             class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 w-full md:inset-0 h-modal md:h-full"
-             style="z-index:300;">
-            <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
-                <!-- Modal content -->
-                <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
-                    <div class="text-center p-8">
-                        <p style="float: left; margin-top: -0.25rem"></p>
-                        <span class="text-black dark:text-white -ml-1">Loading Planner...</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button class="hidden" onclick="openModal('configureModal')" id="openModal"></button>
-        <script src="/static/js/tools/planner.js"></script>
     </div>
+    <div id="configureModal"
+         tabindex="-1"
+         aria-hidden="true"
+         style="object-position: center;
+                    z-index:300;"
+         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 w-full md:inset-0 h-modal md:h-full">
+        <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+            <!-- Modal content -->
+            <div class="relative bg-gray-50 rounded-lg shadow dark:bg-gray-800">
+                <!-- Modal header -->
+                <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Configure Your Planner</h3>
+                    <button class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                            onclick="closeModal('configureModal')">
+                        <svg class="w-5 h-5"
+                             fill="currentColor"
+                             viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                  clip-rule="evenodd">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <div class="p-6 space-y-6">
+                    <div class="mb-6">
+                        <label for="configName"
+                               class="mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                            Planner
+                            Name
+                        </label>
+                        <input type="text"
+                               id="configName"
+                               name="planner-name"
+                               placeholder="My Agenda"
+                               required
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white w-full dark:bg-gray-700">
+                    </div>
+                    <div class="mb-6">
+                        <label for="period1"
+                               class="block text-sm font-medium text-gray-900 dark:text-gray-300">
+                            Configure your School Periods / Time Intervals
+                            <button style="float:right"
+                                    class="material-icons hover:bg-gray-200 dark:hover:bg-gray-500 text-gray-500 dark:text-gray-400 p-0.5 rounded -mt-1"
+                                    onclick="addTimePeriod()">
+                                add
+                            </button>
+                            <button style="float:right"
+                                    class="material-icons hover:bg-gray-200 dark:hover:bg-gray-500 text-gray-500 dark:text-gray-400 p-0.5 rounded -mt-1"
+                                    onclick="toggleRemoveIcons()">
+                                remove
+                            </button>
+                        </label>
+                        <br>
+                        <div id="timePeriods"></div>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="flex items-center p-6 pt-0 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+                    <button onclick="saveConfig()"
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
+                             focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600
+                              dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Save Configuration
+                    </button>
+                    <button onclick="closeModal('configureModal')"
+                            class="text-gray-500 bg-gray-50 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="loading"
+         tabindex="-1"
+         aria-hidden="true"
+         class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 w-full md:inset-0 h-modal md:h-full z-50">
+        <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
+                <div class="text-center p-8">
+                    <p style="float: left; margin-top: -0.25rem"></p>
+                    <span class="text-black dark:text-white -ml-1">Loading Planner...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="hidden" onclick="openModal('configureModal')" id="openModal"></button>
+    <script src="/static/js/tools/planner.js"></script>
 {% endblock %}

@@ -311,21 +311,15 @@
 {% endif %}
 {% if discord %}
     <div>
-        <div class="block p-6 w-3/4 bg-gray-100 rounded-t-lg border border-gray-200 shadow-md dark:bg-gray-700/50 dark:border-gray-700">
-            <div style="float:left;margin-right:15px;">
-                <img src="/static/images/logos/discord.png"
-                     style="width:30px;
-                                                height:30px;
-                                                overflow:hidden;">
+        <div class="flex gap-2 p-6 w-3/4 bg-gray-100 rounded-t-lg border border-gray-200 shadow-md dark:bg-gray-700/50 dark:border-gray-700">
+            <div>
+                <img src="/static/images/logos/discord.png" class="w-8 h-8">
+                <img src="{{ discord[1] }}" alt="Discord Pfp" class="mr-4 w-8 h-8 rounded-full">
             </div>
-            <div style="float:left;">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                    <img style="margin-right:10px;
-                                                    display: inline-block;"
-                         src="{{ discord[1] }}"
-                         class="w-10 h-10 rounded-full">
+            <div>
+                <div class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                     {{ discord[0] }}
-                </h5>
+                </div>
                 <p class="font-normal text-gray-700 dark:text-gray-400">
                     Discord
                 </p>

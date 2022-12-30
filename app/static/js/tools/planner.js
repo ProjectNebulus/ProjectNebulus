@@ -54,7 +54,7 @@ const table = document.querySelector('table');
 
 let saveData = {};
 
-window.addEventListener('load', () => {
+window.addEventListener('DOMContentLoaded', () => {
     loadFromServer();
 
     if (empty) for (let i = 0; i < 6; i++) addTimePeriod();
@@ -243,6 +243,8 @@ function removePeriod(element) {
 let configSaved = true;
 
 function saveConfig() {
+    plannerName.value = document.getElementById('configName').value;
+
     configSaved = false;
     reloadTable();
     let inputs = document.querySelectorAll('#configureModal #timePeriods .timePeriod input');
@@ -260,6 +262,8 @@ function saveConfig() {
         configSaved = true;
     });
     request.fail(() => (saveState.innerHTML = 'Configuration Saving Failed | Retrying soon...'));
+
+    closeModal('configureModal');
 }
 
 let showIcons = false;
@@ -374,7 +378,7 @@ function loadFromServer() {
             saveState.innerHTML = 'Last edit was at ' + formatAMPM(lastEdit);
         else
             saveState.innerHTML =
-                'Last edit was on ' + (lastEdit.getMonth() + 1) + '/' + lastEdit.getDate();
+                'Last edit was on ' + lastEdit.toLocaleDateString();
 
         for (let i = 0; i < data['periods'].length; i++) addTimePeriod();
 

@@ -43,10 +43,6 @@ def exchange_code(code, url):
     return r.json()
 
 
-global baseUrl
-baseUrl = "https://discordapp.com/api"
-
-
 def getHeaders(access_token):
     return {
         "Authorization": "{} {}".format("Bearer", access_token),
@@ -103,7 +99,7 @@ def recieve():
             }
             update.discordLogin(session["id"], discord_dict)
 
-            return render_template("user/connections/connectDiscord.html", data=data, translate = getText)
+            return render_template("user/connections/connectDiscord.html", data=data, translate=getText)
 
         except Exception as e:
             print(e)

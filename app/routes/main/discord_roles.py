@@ -73,7 +73,9 @@ def getMe(access_token):  # this works
 @main_blueprint.route("/discord-roles")
 @logged_in
 def discord_roles():
-    return render_template("user/connections/connectDiscordRolesPrepare.html", username=session["username"], translate=getText)
+    return render_template("user/connections/connectDiscordRolesPrepare.html", username=session["username"],
+                           translate=getText)
+
 
 @main_blueprint.route("/discord-roles/start")
 @logged_in
@@ -83,6 +85,7 @@ def roles_discord_auth():
 
     return discordAuth.create_session(scope=["role_connections.write", "identify"])
 
+
 def push_metadata(access_token):
     url = "https://discord.com/api/v10/users/@me/applications/992107195003043841/role-connection"
     user = find_user(id=session["id"])
@@ -90,17 +93,16 @@ def push_metadata(access_token):
     data = {
         "platform_name": user.username,
         "metadata": {
-            "isstaff": 1 if user.is_staff else 0,
-            "earlysupporter": 1 if user.created_at < datetime.datetime(2022, 12, 18, 0, 0, 0) else 0,
+            "isstaff": int(user.is_staff),
+            "earlysupporter": int(user.created_at < datetime.datetime(2022, 12, 18, 0, 0, 0)),
             "courseamount": course_amount,
             "date_created": user.created_at.strftime("%Y-%m-%d %H:%M:%S"),
-            "schoology_user": 1 if user.schoology else 0,
+            "schoology_user": int(user.schoology),
         }
     }
 
-    requests.put(url, headers={"Content-Type": "application/json", "Authorization": f'Bearer {access_token}'}, data=json.dumps(data))
-
-
+    requests.put(url, headers={"Content-Type": "application/json", "Authorization": f'Bearer {access_token}'},
+                 data=json.dumps(data))
 
 
 @main_blueprint.route("/discord-roles/receive")
@@ -129,7 +131,7 @@ def roles_recieve():
             }
             update.discordLogin(session["id"], discord_dict)
 
-            return render_template("user/connections/connectDiscordRoles.html", data=data, translate = getText)
+            return render_template("user/connections/connectDiscordRoles.html", data=data, translate=getText)
 
         except Exception as e:
             print(e)
@@ -138,8 +140,3 @@ def roles_recieve():
 
     else:
         return redirect("/discord")
-    resp = flask.make_response(redirect("/"))
-    resp.set_cookie("login", str(data[0]))
-    resp.set_cookie("id", str(data[1]))
-    resp.set_cookie("avatar", str(data[2]))
-    return resp
