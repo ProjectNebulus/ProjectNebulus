@@ -62,12 +62,12 @@ def signup_email():
     return "success"
 
 
-@internal.route("/reset-psw", methods=["POST"])
+@internal.route("/reset-psw-email", methods=["POST"])
 @private_endpoint
 def reset_psw_email():
     data = request.get_json()
     try:
-        read.find_user(username=data["username"])
+        data["email"] = read.find_user(username=data["username"]).email
     except KeyError:
         return "Invalid Username"
 

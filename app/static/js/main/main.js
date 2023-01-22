@@ -446,6 +446,12 @@ function closeModal(object_id) {
     }, 200);
 }
 
+function bindFunc(clsName, func) {
+    for (let el of document.getElementsByClassName(clsName)) {
+        el.addEventListener("click", func);
+    }
+}
+
 function randomCat() {
     return list[Math.floor(Math.random() * list.length)];
 }

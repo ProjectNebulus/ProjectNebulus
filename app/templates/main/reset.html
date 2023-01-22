@@ -1,22 +1,31 @@
-<div class="container mx-auto px-8 py-12 rounded-lg pb-1/2 hidden text-sm"
-     id="reset">
-    <h1 class="text-black dark:text-white text-xl">Reset Password</h1>
-    <p class="text-gray-400 my-2">Enter your username. We will send a reset code to that email.</p>
-    <div class="relative mt-4">
-        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none material-icons text-gray-500">
+<div id="reset" class="p-8 pt-2 hidden">
+    <div class="text-black dark:text-white text-xl flex gap-2 items-center">
+        <img src="/static/images/NebulusSpecialLogo.png"
+             style="display: inline-block; width: 60px; height: 60px; border-radius: 10px; margin: 10px; ">
+        <div class="flex flex-col">
+            Reset Password
+            <p class="text-gray-400 my-1 text-sm">
+                Enter your <span id="read-bro">username</span>. We will email you a code.
+            </p>
+        </div>
+    </div>
+    <div class="relative my-8">
+        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none material-icons text-gray-500 text-4xl">
             person
         </div>
         <input id="reset-username"
                autocomplete="username"
-               class="dark:bg-gray-900/50 dark:text-white pl-11 p-2.5 px-4 py-3 w-full rounded-md bg-gray-100 border-transparent text-sm focus:border-gray-500 focus:bg-white focus:ring-0"
+               class="dark:bg-gray-900/50 dark:text-white p-2.5 px-4 py-3 w-full rounded-md bg-gray-100 border-transparent
+                text-xl focus:border-gray-500 focus:bg-white focus:ring-0 border-gray-200 dark:border-gray-700"
                placeholder="Username"
-               style="-webkit-user-select: text;">
+               style="-webkit-user-select: text; padding-left: 3.5rem">
     </div>
-    <button onclick="resetScreen()"
-            style="margin-right:10px;
+    <button style="margin-right:10px;
                    float:left;"
-            class="mt-4 px-4 py-3 leading-6 text-base rounded-md border border-transparent text-white focus:outline-none bg-blue-500 text-blue-100 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer inline-flex items-center w-40 justify-center items-center font-medium focus:outline-none">
-        <svg class="inline-block w-6 h-6"
+            class="reset-screen-btn mt-4 px-4 py-3 leading-6 text-base rounded-md border border-transparent text-white
+             focus:outline-none bg-blue-500 text-blue-100 hover:text-white focus:ring-2 focus:ring-blue-500 font-medium
+              focus:ring-offset-2 cursor-pointer inline-flex items-center w-32 justify-center items-center focus:outline-none">
+        <svg class="inline-block w-6 h-6 mr-2"
              fill="none"
              stroke="currentColor"
              viewBox="0 0 24 24"
@@ -26,18 +35,18 @@
         </svg>
         Back
     </button>
-    <button id="send"
-            class="mt-4 px-4 py-3 leading-6 text-base rounded-md border border-transparent text-white focus:outline-none bg-blue-500 text-blue-100 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer inline-flex items-center w-40 justify-center items-center font-medium focus:outline-none">
+    <button id="send" class="mt-4 px-4 py-3 leading-6 text-base rounded-md border border-transparent text-white disabled-css
+     focus:outline-none bg-blue-500 text-blue-100 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+      cursor-pointer inline-flex items-center w-32 justify-center items-center font-medium focus:outline-none">
         Send
     </button>
     <div class="pageCount"></div>
 </div>
-<div class="container mx-auto px-8 py-12 rounded-lg pb-1/2 text-sm hidden"
+<div class="container mx-auto px-8 pb-10 pt-4 rounded-lg pb-1/2 text-sm hidden"
      id="resetCode">
     <h1 class="text-xl text-black dark:text-white">Reset Password</h1>
     <p class="text-gray-400 my-2" id="username-email">
-        Enter the emailed code and your new
-        password.
+        Enter the emailed code and your new password.
     </p>
     <div class="relative mt-4">
         <div class="flex absolute inset-y-0 left-0 items-center pl-3 pb-2 pointer-events-none material-icons text-gray-500 mt-1">
@@ -64,28 +73,34 @@
     <div class="flex items-center mt-6">
         <button onclick="codeScreen()"
                 style="margin-right:10px"
-                class="mt-4 px-4 py-3 leading-6 text-base rounded-md border border-transparent text-white focus:outline-none bg-blue-500 text-blue-100 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer inline-flex items-center w-40 justify-center items-center font-medium focus:outline-none">
-            <svg class="inline-block w-6 h-6"
+                class="mt-4 px-4 py-3 leading-6 text-base rounded-md border border-transparent text-white focus:outline-none bg-blue-500 text-blue-100 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer inline-flex items-center w-32 justify-center items-center font-medium focus:outline-none">
+            <svg class="inline-block w-6 h-6 mr-2"
                  fill="none"
                  stroke="currentColor"
                  viewBox="0 0 24 24"
                  xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M7 16l-4-4m0 0l4-4m-4 4h18"></path>
+                      d="M7 16l-4-4m0 0l4-4m-4 4h18"></path>
             </svg>
             Back
         </button>
-        <button id="resetPsw"
-                class="mt-4 px-4 py-3 leading-6 text-base rounded-md border border-transparent text-white focus:outline-none bg-blue-500 text-blue-100 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer inline-flex items-center w-48 justify-center items-center font-medium focus:outline-none">
+        <button id="resetPsw" class="mt-4 px-4 py-3 leading-6 text-base rounded-md border border-transparent text-white disabled-css
+         focus:outline-none bg-blue-500 text-blue-100 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+          cursor-pointer inline-flex items-center w-48 justify-center items-center font-medium focus:outline-none">
             Reset Password
         </button>
     </div>
     <div class="pageCount"></div>
 </div>
 <style>
-    #send:disabled, #resetPsw:disabled {
-        background-color: rgb(28 100 242);
-        color: lightgray;
+    #read-bro {
+        transition: 0.2s;
+        display: inline-block;
+    }
+
+    #read-bro.bro-read {
+        color: red;
+        scale: 1.05;
     }
 </style>
 <script src="/static/js/main/reset.js"></script>
