@@ -16,6 +16,7 @@ from app.static.python.utils.security import valid_password
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 
 dictionary = None
+now = datetime.now()
 
 
 def getSchools(user_id: str):
@@ -176,23 +177,24 @@ def getCanvas(**kwargs) -> list[Canvas] | None:
 
 
 def getClassroom(
-        userID: str = None, username: str = None, email: str = None
+        user_id: str = None, username: str = None, email: str = None
 ) -> GoogleClassroom:
-    return find_user(id=userID, username=username, email=email).gclassroom
+    return find_user(id=user_id, username=username, email=email).gclassroom
 
 
-def getSpotify(userID: str = None, username: str = None, email: str = None) -> Spotify:
-    return find_user(id=userID, username=username, email=email).spotify
+def getSpotify(user_id: str = None, username: str = None, email: str = None) -> Spotify:
+    return find_user(id=user_id, username=username, email=email).spotify
 
 
 def getSpotifyCache(
-        userID: str = None, username: str = None, email: str = None
+        user_id: str = None, username: str = None, email: str = None
 ) -> Spotify | None:
     try:
         return find_user(
-            id=userID, username=username, email=email
+            id=user_id, username=username, email=email
         ).spotify.Spotify_cache
-    except:
+    except Exception as e:
+        print(f"{type(e).__name__}: {e}")
         return None
 
 
@@ -208,7 +210,8 @@ def check_type(o):
             return "document"
         else:
             return "folder"
-    except:
+    except Exception as e:
+        print(f"{type(e).__name__}: {e}")
         return "document"
 
 
@@ -247,6 +250,8 @@ def sortByDateTime(obj):
 def sort_user_events(
         user_id: str, courses=None, show_events=True, load_start=0, max_days=8, max_events=10
 ):
+    global now
+
     if not courses:
         courses = get_user_courses(user_id)
 
@@ -263,19 +268,9 @@ def sort_user_events(
     sorted_events = []
     now = datetime.now()
 
-    for one_event in events_assessments_assignments:
-        try:
-            due = one_event.due
-        except AttributeError:
-            due = one_event.date
-
-        if (due.year < 9990 and
-            not (one_event._cls == "Assignment" and (
-                    not one_event.allow_submissions
-                    or (one_event.grade is not None and one_event.points
-                        and one_event.grade / one_event.points < 0.5)))) \
-                and (now < due or (one_event._cls == "Assignment" and one_event.submitDate is None)):
-            sorted_events.append(one_event)
+    for event in events_assessments_assignments:
+        if valid_event(event):
+            sorted_events.append(event)
 
     sorted_events = sorted(sorted_events, key=sortByDateTime)[load_start: load_start + max_events]
 
@@ -308,6 +303,9 @@ def sort_user_events(
 
 
 def unsorted_user_events(user_id: str) -> list[list]:
+    global now
+    now = datetime.now()
+
     courses = get_user_courses(user_id)
     events = Event.objects(course__in=courses)
     announcements = Announcement.objects(course__in=courses)
@@ -315,12 +313,30 @@ def unsorted_user_events(user_id: str) -> list[list]:
     assessments = Assessment.objects(course__in=courses)
     from itertools import chain
 
-    events_assessments_assignments = list(chain(events, assignments, assessments))
-    announcements = list(reversed(announcements))
+    events_assessments_assignments = list(filter(valid_event, chain(events, assignments, assessments)))
+    announcements = reversed(announcements)
     return [
         announcements,
         sorted(events_assessments_assignments, key=sortByDateTime),
     ]
+
+
+def valid_event(event):
+    if event._cls == "Assignment":
+        due = event.due
+        if due.year >= 9990:
+            return False
+
+        if now < due:
+            return True
+
+        if event.submitDate is None and event.allow_submissions:
+            return True
+
+        return event.grade is not None and event.points and event.grade / event.points < 0.5
+
+    else:
+        return now < event.date
 
 
 def getSchoologyAuth(user_id) -> schoolopy.Schoology | None:
@@ -420,7 +436,6 @@ def getAnnouncementDocument(document_id: str):
 
 def search(keyword: str, username: str):
     user = User.objects(username=username).first()
-    users = search_user(keyword)
     pipeline1 = [
         {"$match": {"title": {"$regex": f"^{keyword}", "$options": "i"}}},
         {
@@ -439,9 +454,7 @@ def search(keyword: str, username: str):
         {"$project": {"title": 1, "_id": 1, "_cls": 1}},
         {"$limit": 50},
     ]
-    courses = Course.objects(Q(authorizedUsers=user.id) & Q(name__istartswith=keyword))[
-              :10
-              ]
+    courses = Course.objects(Q(authorizedUsers=user.id) & Q(name__istartswith=keyword))[:10]
     chats = Chat.objects(Q(owner=user.id) & Q(title__istartswith=keyword))[:10]
     NebulusDocuments = NebulusDocument.objects(
         Q(authorizedUsers=user.id) & Q(title__istartswith=keyword)
@@ -523,7 +536,7 @@ def loadChats(user_id: str, current_index, initial_amount, required_fields):
                 )
                 chat["members"][x]["unread"] = str(chat["members"][x]["unread"])
             chat["owner"] = list(
-                filter(lambda x: x["user"]["_id"] == chat["owner"], chat["members"])
+                filter(lambda user: user["user"]["_id"] == chat["owner"], chat["members"])
             )[0]
 
     print(chats)
@@ -534,7 +547,8 @@ def get_friends(user_id):
     user = find_user(pk=user_id)
     try:
         friends = user.chatProfile.friends
-    except:
+    except Exception as e:
+        print(f"{type(e).__name__}: {e}")
         friends = None
     return friends
 
@@ -543,7 +557,8 @@ def get_blocks(user_id):
     user = find_user(pk=user_id)
     try:
         blocked = user.chatProfile.blocked
-    except:
+    except Exception as e:
+        print(f"{type(e).__name__}: {e}")
         blocked = None
     return blocked
 

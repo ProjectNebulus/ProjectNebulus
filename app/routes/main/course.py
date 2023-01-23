@@ -8,7 +8,7 @@ from mongoengine import DoesNotExist
 from app.static.python.classes import Assignment, Course, Grades, User
 from app.static.python.mongodb.read import find_user, getText, get_user_courses, sort_user_events
 from . import main_blueprint, utils
-from .utils import logged_in, private_endpoint, fmt
+from .utils import logged_in, private_endpoint, fmt, grade_score
 
 
 @main_blueprint.route("/course/<id>")
@@ -92,13 +92,14 @@ def course_page(page, **kwargs):
         ee=e_len,
         strftime=utils.strftime,
         translate=getText,
-        gradeStr=gradeStr,
-        courseGrade=courseGrade,
+        grade_score=grade_score,
+        grade_letter=grade_letter,
+        courseGrade=course_grade,
         groupedData=groupedData,
     )
 
 
-def courseGrade(percent):
+def course_grade(percent):
     percent = round(percent * 100, 1)
     if percent >= 90:
         letter = "A"
@@ -114,7 +115,7 @@ def courseGrade(percent):
     return f'<span color="{letter}" class="font-bold text-gray-500 dark:text-gray-300">{percent}% ({letter})</span>'
 
 
-def gradeStr(assignment: Assignment):
+def grade_letter(assignment: Assignment):
     try:
         percent = round(assignment.grade / assignment.points, 2)
         percent *= 100
@@ -146,7 +147,7 @@ def gradeStr(assignment: Assignment):
 
 @main_blueprint.route("/getResource/<courseID>/<documentID>")
 @private_endpoint
-def getResource(courseID, documentID):
+def get_resource(courseID, documentID):
     courses = list(
         filter(lambda c: c.id == courseID, get_user_courses(session["id"]))
     )

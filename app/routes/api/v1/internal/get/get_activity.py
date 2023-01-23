@@ -2,8 +2,7 @@ from datetime import datetime
 
 from flask import session, request, render_template
 
-from app.routes.main import fmt
-from app.routes.main import strftime
+from app.routes.main import fmt, strftime, grade_score
 from app.static.python.classes import Course
 from app.static.python.mongodb import read
 from .. import internal
@@ -45,5 +44,6 @@ def upcoming_events():
         ee=e_len,
         strftime=strftime,
         fmt=fmt,
+        grade_score=grade_score,
         now=datetime.now()
     )

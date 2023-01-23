@@ -94,7 +94,7 @@
                             {% if a and a._cls == "Assignment" %}
                                 <tr class="border-b border-gray-200 dark:border-gray-700">
                                     <td>{{ a.title }}</td>
-                                    <td>{{ gradeStr(a)|safe }}</td>
+                                    <td>{{ grade_letter(a)|safe }}</td>
                                     <td>{% if a.comment %}{{ a.comment }}{% endif %}</td>
                                     <td></td>
                                 </tr>

@@ -7,7 +7,7 @@ from googleapiclient.discovery import build
 from app.static.python.mongodb import read
 from app.static.python.mongodb.read import getText
 from . import main_blueprint
-from .utils import logged_in, strftime, fmt
+from .utils import logged_in, strftime, fmt, grade_score
 
 
 def credentials_to_dict(credentials):
@@ -91,6 +91,7 @@ def app():
         events=events,
         ae=a_len,
         ee=e_len,
+        grade_score=grade_score,
         enumerate=enumerate,
         strftime=strftime,
         translate=getText,

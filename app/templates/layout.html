@@ -3,6 +3,7 @@
 <head>
     <script src="/static/progress.js-0.1.0/minified/progress.min.js"></script>
     <link rel="stylesheet" src="/static/progress.js-0.1.0/minified/progressjs.min.css">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="module">
         //to set progress-bar for whole page
@@ -15,167 +16,9 @@
         //progressJs().setOption("theme", "black");
         //progressJs("#thebody").start();
     </script>
-    <script>
-        if (window.location.search.includes("iframe=true"))
-            document.body.style.background = "transparent";
-
-        document.addEventListener("DOMContentLoaded", function () {
-            if (window.top === window && $("#progress").length === 0) {
-                $("body").append($("<div></div>").attr("id", "progress"))
-                $("#progress").width("101%").delay(200).fadeOut(800, function () {
-                    $(this).remove();
-                });
-            }
-        });
-
-        if (localStorage.getItem("enableContextMenu") !== null) {
-            document.onclick = hideMenu;
-            document.oncontextmenu = rightClick;
-        }
-
-        function hideMenu() {
-            document.getElementById(
-                "contextMenu").style.display = "none"
-        }
-
-        function rightClick(e) {
-            e.preventDefault();
-
-            if (document.getElementById("contextMenu").style.display === "block")
-                hideMenu();
-            else {
-                const menu = document.getElementById("contextMenu");
-
-                menu.style.display = 'block';
-                menu.style.left = e.pageX + "px";
-                menu.style.top = e.pageY + "px";
-            }
-        }
-
-        function toggleContextMenu() {
-            if (localStorage.getItem("enableContextMenu") === null) {
-                localStorage.setItem("enableContextMenu", "");
-                document.onclick = hideMenu;
-                document.oncontextmenu = rightClick;
-            } else {
-                localStorage.removeItem("enableContextMenu");
-                document.onclick = null;
-                document.oncontextmenu = null;
-            }
-        }
-    </script>
-    <style>
-        #contextMenu ul li {
-            padding: 4px;
-            border-radius: 10px;
-            margin: 3px;
-        }
-
-        #contextMenu ul li:hover {
-            background: #4B5563;
-        }
-
-        #delete_menu:hover {
-            background: #fa4040 !important;
-            color: white !Important;
-        }
-
-        #upgrade_menu:hover {
-            background: #9a67ff !important;
-            color: white !Important;
-        }
-
-        #contextMenu ul li i {
-            display: inline-block;
-            vertical-align: middle;
-            margin: 5px;
-        }
-
-        #progress {
-            position: fixed;
-            z-index: 999999;
-            top: 0;
-            left: -1px;
-            width: 1%;
-            height: 3px;
-            background-image: linear-gradient(to right, #3a88fe, #5e30eb);
-
-            -moz-transition: width 500ms ease-out, opacity 500ms linear;
-            -ms-transition: width 500ms ease-out, opacity 500ms linear;
-            -o-transition: width 500ms ease-out, opacity 500ms linear;
-            -webkit-transition: width 600ms ease-out, opacity 500ms linear;
-            transition: width 500ms ease-out, opacity 500ms linear;
-        }
-    </style>
-    <div id="contextMenu"
-         class="context-menu bg-white/50 dark:bg-gray-800/75 backdrop-blur-sm text-gray-700 dark:text-white"
-         style="padding: 5px;
-                    margin: 5px;
-                    display: none;
-                    z-index: 100;
-                    position: absolute;
-                    text-align: center;
-                    border-radius: 20px;
-                    border: none;
-                    width: 200px;
-                    left: 422px;
-                    top: 244px;">
-        <ul style="text-align:left;">
-            <li>
-                <a href="/settings"><i class="material-icons">settings</i>Settings</a>
-            </li>
-            <li>
-                <a href="/profile"><i class="material-icons">person</i>Profile</a>
-            </li>
-            <li>
-                <a href="/app"><i class="material-icons">school</i>Learning</a>
-            </li>
-            <li>
-                <a href="/chat"><i class="material-icons">forum</i>Chat</a>
-            </li>
-            <li>
-                <a href="/music"><i class="material-icons">music_note</i>Music</a>
-            </li>
-            <li>
-                <a href="/study"><i class="material-icons">timer</i>Study</a>
-            </li>
-            <hr style="margin:15px;
-                           border-width: 2px;
-                           border-radius: 2px;"
-                class="text-gray-600">
-            <li id="upgrade_menu" class="text-purple-500">
-                <a href="/pricing"><i class="material-icons">upgrade</i>Upgrade</a>
-            </li>
-            <li id="delete_menu" class="text-red-500">
-                <a href="/logout"><i class="material-icons">logout</i>Log Out</a>
-            </li>
-            <li class="text-gray-500">
-                <a onclick="navigator.clipboard.writeText('{{ user_id }}');"><i class="material-icons">content_copy</i>Copy
-                    User ID</a>
-            </li>
-    </div>
-    <style>
-        ::-moz-selection { /* Code for Firefox */
-            background: rgba(120, 120, 120, 0.3);
-        }
-
-        ::selection {
-            background: rgba(120, 120, 120, 0.3);
-        }
-
-        button {
-            outline: none !important;
-        }
-
-        input {
-            outline: none !important;
-        }
-    </style>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
     <script type="text/javascript" src="//cdn.socket.io/4.4.1/socket.io.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.1"></script>
-    <meta http-equiv="Content-Security-Policy"
-          content="upgrade-insecure-requests">
     <meta name="google-site-verification"
           content="5RLtqNU5_UuQAcLqyee0ZoaLyNQ9-6VF0qfJsABVhm4"/>
     {% if not disableArc %}
@@ -217,9 +60,7 @@
     <meta property="og:locale" content="en_US">
     <div id="customCursor"></div>
     <!--Icons!-->
-    <link rel="icon"
-          type="image/x-icon"
-          href="/static/images/nebulusCats/newRed.png">
+    <link rel="icon" type="image/png" href="">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!--Title!-->

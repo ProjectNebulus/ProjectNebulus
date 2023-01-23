@@ -214,19 +214,6 @@ def sitemap():
     return send_file(str(path.parent.parent.parent) + "/static/sitemap.xml")
 
 
-@main_blueprint.route("/study/session")
-def studyplanner():
-    return render_template(
-        "learning/tools/study-planner.html",
-        user=session.get("username"),
-        user_id=session.get("id"),
-        email=session.get("email"),
-        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-        page="Study Planner",
-        translate=getText,
-    )
-
-
 @main_blueprint.route("/lunch")
 def lunchplanner():
     return render_template(

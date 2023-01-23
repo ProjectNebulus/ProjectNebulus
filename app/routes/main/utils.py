@@ -73,3 +73,13 @@ def fmt(content: str) -> str:
         else:
             output += "<p>" + line + "</p>"
     return Markup(output)
+
+
+def grade_score(grade, points):
+    if grade == (floor_grade := int(grade)):
+        grade = floor_grade
+
+    if points == (floor_points := int(points)):
+        points = floor_points
+
+    return f"Grade: {grade}/{points}"
