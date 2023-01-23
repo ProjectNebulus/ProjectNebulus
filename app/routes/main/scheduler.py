@@ -5,7 +5,7 @@ from datetime import datetime
 from flask import render_template, session
 
 from app.static.python.mongodb import read
-from app.static.python.mongodb.read import getText
+from app.static.python.mongodb.read import get_text
 from . import main_blueprint
 
 
@@ -90,5 +90,5 @@ def scheduler():
         page="Scheduler",
         events=sorted(everything),
         strftime=strftime,
-        translate=getText,
+        translate=get_text,
     )

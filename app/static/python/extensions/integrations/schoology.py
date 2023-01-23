@@ -46,7 +46,7 @@ def scrape_schoology():
 
 def get_schoology_emails():
     try:
-        sc = read.getSchoologyAuth()
+        sc = read.get_schoology_auth()
 
         messages = sc.get_inbox_messages()
         newMessages = []
@@ -88,7 +88,7 @@ def get_schoology_emails():
             # print(thread)
             info["message"] = thread[-1]["message"]
             info["message"] = info["message"][:100] + "..." * (
-                len(info["message"]) > 100
+                    len(info["message"]) > 100
             )
             newThread = []
             for threadItem in thread:
@@ -121,15 +121,15 @@ def create_schoology(key, secret):
 
 
 def generate_auth(
-    authorize,
-    key,
-    secret,
-    domain,
-    three_legged,
-    request_token,
-    request_token_secret,
-    access_token,
-    access_token_secret,
+        authorize,
+        key,
+        secret,
+        domain,
+        three_legged,
+        request_token,
+        request_token_secret,
+        access_token,
+        access_token_secret,
 ):
     auth = schoolopy.Auth(
         key,

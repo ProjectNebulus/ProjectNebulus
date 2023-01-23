@@ -12,7 +12,7 @@ from . import internal
 @internal.route("/get/schoology/messages", methods=["POST"])
 @private_endpoint
 def get_schoology_messages():
-    sc = read.getSchoologyAuth(session["id"])
+    sc = read.get_schoology_auth(session["id"])
     start_at = int(request.form.get("start"))
     end_at = int(request.form.get("start")) + 5
     sc.limit = end_at + 1

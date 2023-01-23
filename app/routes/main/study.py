@@ -1,6 +1,6 @@
 from flask import render_template, session
 
-from app.static.python.mongodb.read import getText
+from app.static.python.mongodb.read import get_text
 from . import main_blueprint
 
 
@@ -13,7 +13,7 @@ def study():
         user_id=session.get("id"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-        translate=getText,
+        translate=get_text,
     )
 
 
@@ -26,5 +26,5 @@ def study_planner():
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         page="Study Planner",
-        translate=getText,
+        translate=get_text,
     )

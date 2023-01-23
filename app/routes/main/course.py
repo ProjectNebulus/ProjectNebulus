@@ -6,7 +6,7 @@ from flask import render_template, request, session
 from mongoengine import DoesNotExist
 
 from app.static.python.classes import Assignment, Course, Grades, User
-from app.static.python.mongodb.read import find_user, getText, get_user_courses, sort_user_events
+from app.static.python.mongodb.read import find_user, get_text, get_user_courses, sort_user_events
 from . import main_blueprint, utils
 from .utils import logged_in, private_endpoint, fmt, grade_score
 
@@ -33,7 +33,7 @@ def course_page(page, **kwargs):
                 user_id=session.get("id"),
                 email=session.get("email"),
                 avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-                translate=getText,
+                translate=get_text,
             ),
             404,
         )
@@ -91,7 +91,7 @@ def course_page(page, **kwargs):
         ae=a_len,
         ee=e_len,
         strftime=utils.strftime,
-        translate=getText,
+        translate=get_text,
         grade_score=grade_score,
         grade_letter=grade_letter,
         courseGrade=course_grade,
@@ -189,7 +189,7 @@ def search_word(id):
         definition=shortdef,
         word=word,
         partofspeech=partofspeech,
-        translate=getText,
+        translate=get_text,
     )
 
 
@@ -198,7 +198,7 @@ def search_word(id):
 def course_page_ex(id, extension):
     try:
         return render_template(
-            f"courses/extensions/{extension}.html", translate=getText,
+            f"courses/extensions/{extension}.html", translate=get_text,
         )
     except Exception as e:
-        return render_template("errors/404.html", translate=getText, )
+        return render_template("errors/404.html", translate=get_text, )

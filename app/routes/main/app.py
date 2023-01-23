@@ -5,7 +5,7 @@ from flask import render_template, session
 from googleapiclient.discovery import build
 
 from app.static.python.mongodb import read
-from app.static.python.mongodb.read import getText
+from app.static.python.mongodb.read import get_text
 from . import main_blueprint
 from .utils import logged_in, strftime, fmt, grade_score
 
@@ -94,7 +94,7 @@ def app():
         grade_score=grade_score,
         enumerate=enumerate,
         strftime=strftime,
-        translate=getText,
+        translate=get_text,
         showPopup=show_popup,
         fmt=fmt,
     )
@@ -110,7 +110,7 @@ def bell_schedule():
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         read=read,
         page="Nebulus - Bell Schedule",
-        translate=getText,
+        translate=get_text,
     )
 
 
@@ -129,7 +129,7 @@ def courses():
         user_courses=list(user_courses),
         read=read,
         page="Nebulus - Courses",
-        translate=getText,
+        translate=get_text,
     )
 
 
@@ -148,7 +148,7 @@ def clubs():
         user_clubs=list(user_clubs),
         read=read,
         page="Nebulus - Clubs",
-        translate=getText,
+        translate=get_text,
     )
 
 
@@ -185,7 +185,7 @@ def get_courses():
     import schoolopy
 
     try:
-        schoology = read.getSchoology(id=session["id"])
+        schoology = read.get_schoology(id=session["id"])
         if schoology and schoology[0].apikey == "":
             schoology = schoology[0]
             key = (

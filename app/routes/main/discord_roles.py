@@ -7,7 +7,7 @@ from flask_discord import DiscordOAuth2Session
 
 from app.static.python.mongodb import update
 from . import main_blueprint, logged_in
-from ...static.python.mongodb.read import getText, find_user, get_user_courses
+from ...static.python.mongodb.read import get_text, find_user, get_user_courses
 
 app = Flask(__name__)
 app.config["DISCORD_CLIENT_ID"] = 992107195003043841  # Discord client ID.
@@ -74,7 +74,7 @@ def getMe(access_token):  # this works
 @logged_in
 def discord_roles():
     return render_template("user/connections/connectDiscordRolesPrepare.html", username=session["username"],
-                           translate=getText)
+                           translate=get_text)
 
 
 @main_blueprint.route("/discord-roles/start")
@@ -131,7 +131,7 @@ def roles_recieve():
             }
             update.discordLogin(session["id"], discord_dict)
 
-            return render_template("user/connections/connectDiscordRoles.html", data=data, translate=getText)
+            return render_template("user/connections/connectDiscordRoles.html", data=data, translate=get_text)
 
         except Exception as e:
             print(e)

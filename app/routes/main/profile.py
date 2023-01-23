@@ -2,7 +2,7 @@ from flask import render_template, session
 
 from app.static.python.classes import User
 from app.static.python.mongodb import read
-from app.static.python.mongodb.read import getText
+from app.static.python.mongodb.read import get_text
 from . import main_blueprint
 from .utils import logged_in
 
@@ -22,7 +22,7 @@ def profile():
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         guestavatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         read=read,
-        translate=getText,
+        translate=get_text,
     )
 
 
@@ -35,10 +35,10 @@ def pubProfile(id):
         guestuser_id=userobject.pk,
         guestemail=userobject.email,
         guestavatar=userobject.avatar.avatar_url,
-        translate=getText,
+        translate=get_text,
         user=session.get("username"),
         email=session.get("email"),
         user_id=session.get("id"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-        embedoverride = True,
+        embedoverride=True,
     )

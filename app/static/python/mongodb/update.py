@@ -111,9 +111,9 @@ def createPlanner(_id: str, planner: dict):
 
 
 def update_announcement(_id: str, data: dict):
-    from app.static.python.mongodb.read import getAnnouncementDocument
+    from app.static.python.mongodb.read import get_announcement
 
-    theannouncement = getAnnouncementDocument(str(_id))
+    theannouncement = get_announcement(str(_id))
     if not theannouncement:
         raise KeyError("Course not found")
 
@@ -334,15 +334,17 @@ def resetPassword(username: str, psw: str):
     session["avatar"] = user.avatar.avatar_url
     session["id"] = user.id
 
-def add_school_to_user(user_id:str, school: str):
+
+def add_school_to_user(user_id: str, school: str):
     user = User.objects.get(pk=user_id)
     if not user.schools:
         user.schools = []
-    #check duplicates
+    # check duplicates
     if school in user.schools:
         return "1"
     user.schools.append(school)
     user.save(clean=False)
+
 
 def mark_event_as_done(event_id: str):
     try:
@@ -353,14 +355,12 @@ def mark_event_as_done(event_id: str):
         event = None
 
     try:
-        assignment  = Assignment.objects.get(pk=event_id)
+        assignment = Assignment.objects.get(pk=event_id)
         assignment.status = "Submitted"
         assignment.save(clean=False)
         return "0"
     except:
         assignment = None
-
-
 
 
 def change_user_notepad(course_id, content, user_id):

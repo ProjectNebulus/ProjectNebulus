@@ -3,7 +3,7 @@ from flask import render_template, session
 from app.routes.main.utils import logged_in
 from app.static.python.mongodb import read
 from . import api_blueprint
-from ...static.python.mongodb.read import getText
+from ...static.python.mongodb.read import get_text
 
 
 @api_blueprint.route("/developers", methods=["GET"])
@@ -18,5 +18,5 @@ def api():
         read=read,
         page="Nebulus - Developer Portal",
         developer=True,
-        translate= getText,
+        translate=get_text,
     )

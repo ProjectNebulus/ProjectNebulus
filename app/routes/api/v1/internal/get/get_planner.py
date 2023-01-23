@@ -8,4 +8,4 @@ from .. import internal
 @internal.route("/get/planner")
 @private_endpoint
 def getPlanner():
-    return read.getPlanner(session["id"])
+    return read.get_planner(session["id"])

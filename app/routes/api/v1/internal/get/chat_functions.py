@@ -73,7 +73,7 @@ def new_message(json_data):
         del json_data["chatID"], json_data["chatType"]
         json_data["sender"] = session["id"]
         json_data["content"] = json_data["content"].replace("\n", "<br>")
-        chat = read.getChat(chatID)
+        chat = read.get_chat(chatID)
         send_date = datetime.datetime.fromisoformat(json_data["send_date"])
         if not chat.messages:
             group = False
@@ -365,7 +365,7 @@ def join_a_room(data):
 def fetchChats():
     data = request.get_json()
     current_index = data["index"]
-    chats = read.loadChats(
+    chats = read.load_chats(
         session["id"],
         current_index,
         10,
@@ -380,7 +380,7 @@ def fetchChats():
 def getChat():
     data = request.get_json()
     chatID = data["chatID"]
-    chat_obj = read.getChat(chatID)
+    chat_obj = read.get_chat(chatID)
     chat = json.loads(chat_obj.to_json())
 
     current_user = list(filter(lambda x: x.user.id == session["id"], chat_obj.members))[
@@ -413,7 +413,7 @@ def getChat():
 
 @internal.route("/get/total-unread", methods=["GET"])
 def get_total_unread():
-    chats = read.getUserChats(session["id"], ["members"])
+    chats = read.get_user_chats(session["id"], ["members"])
     sum = 0
     for chat in chats:
         member = list(filter(lambda x: x.user.id == session["id"], chat.members))[0]
@@ -452,7 +452,7 @@ def fetchMessages():
     data = request.get_json()
     print(data)
     chatID = data["chatID"]
-    chat = json.loads(read.getChat(chatID).to_json())
+    chat = json.loads(read.get_chat(chatID).to_json())
     if len(chat["messages"]) < data["current_index"] + 50:
         print(len(chat["messages"]))
         chat["messages"] = list(reversed(chat["messages"]))[

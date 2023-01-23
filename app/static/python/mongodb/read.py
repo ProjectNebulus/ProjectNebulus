@@ -9,8 +9,6 @@ from flask import session
 from mongoengine import Q
 
 from app.static.python.classes import *
-from app.static.python.classes import Github
-from app.static.python.classes.Graderoom import Graderoom
 from app.static.python.utils.security import valid_password
 
 regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
@@ -19,7 +17,12 @@ dictionary = None
 now = datetime.now()
 
 
-def getSchools(user_id: str):
+def check_schoology(_id: int):
+    user = find_user(id=_id)
+    return str(user and user.schoology).lower()
+
+
+def get_schools(user_id: str):
     user = find_user(id=user_id)
     if user.schools:
         schools = list(user.schools)
@@ -29,7 +32,7 @@ def getSchools(user_id: str):
     return schools
 
 
-def getText(query):
+def get_text(query):
     global dictionary
     if not dictionary:
         with open("app/static/python/dictionary.json") as dictFile:
@@ -41,7 +44,7 @@ def getText(query):
         return query
 
 
-def getAssignment(assignment_id: str = None, imported_id: str = None) -> Assignment:
+def get_assignment(assignment_id: str = None, imported_id: str = None) -> Assignment:
     if imported_id:
         assignment = Assignment.objects(imported_id=imported_id).first()
     elif assignment_id:
@@ -51,29 +54,19 @@ def getAssignment(assignment_id: str = None, imported_id: str = None) -> Assignm
     return assignment
 
 
-def getNebulusDocument(document_id: str) -> NebulusDocument:
+def get_neb_doc(document_id: str) -> NebulusDocument:
     document = NebulusDocument.objects(id=document_id).first()
     return document
 
 
-def getEvent(event_id: str) -> Event:
+def get_event(event_id: str) -> Event:
     event = Event.objects(pk=event_id).first()
     return event
 
 
-def getGrades(grades_id: str) -> Grades:
+def get_grades(grades_id: str) -> Grades:
     grades = Grades.objects(pk=grades_id).first()
     return grades
-
-
-def getDocumentFile(document_file_id: str) -> DocumentFile:
-    document_file = DocumentFile.objects(pk=document_file_id).first()
-    return document_file
-
-
-def getFolder(folder_id: str) -> Folder:
-    folder = Folder.objects(pk=folder_id).first()
-    return folder
 
 
 def get_user_courses(user_id: str) -> list[Course]:
@@ -89,24 +82,6 @@ def get_user_clubs(user_id: str) -> list[Club]:
 def get_user_docs(user_id: str) -> list[NebulusDocument]:
     user = find_user(pk=user_id)
     return NebulusDocument.objects(authorizedUsers=user)
-
-
-def search_user(query: str, ignore_id: str = None) -> list[User]:
-    if ignore_id:
-        return User.objects(username__istartswith=query, id__ne=ignore_id).only(
-            "id", "username", "email", "avatar", "_cls"
-        )[:10]
-    else:
-        return User.objects(username__istartswith=query).only(
-            "id", "username", "email", "avatar", "_cls"
-        )[:10]
-    # return User.objects.filter(username__contains=query)._query
-
-
-def search_within_course(query: str, course_id: str):
-    assignments = Assignment.objects(course_id=course_id, title__contains=query)
-    events = Event.objects(course_id=course_id, title__contains=query)
-    document_file = DocumentFile.objects(course_id=course_id, title__contains=query)
 
 
 def find_courses(_id: str):
@@ -141,52 +116,52 @@ def find_document(**kwargs) -> Document | None:
     return document
 
 
-def getSchoology(**kwargs) -> list[Schoology] | None:
+def get_schoology(**kwargs) -> list[Schoology] | None:
     try:
         return find_user(**kwargs).schoology
     except KeyError:
         return
 
 
-def getGraderoom(**kwargs) -> list[Graderoom] | None:
+def get_graderoom(**kwargs) -> list[Graderoom] | None:
     try:
         return find_user(**kwargs).graderoom
     except KeyError:
         return
 
 
-def getGithub(**kwargs) -> list[Github] | None:
+def get_github(**kwargs) -> list[Github] | None:
     try:
         return find_user(**kwargs).github
     except KeyError:
         return
 
 
-def getDiscord(**kwargs) -> list[Discord] | None:
+def get_discord(**kwargs) -> list[Discord] | None:
     try:
         return find_user(**kwargs).discord
     except KeyError:
         return
 
 
-def getCanvas(**kwargs) -> list[Canvas] | None:
+def get_canvas(**kwargs) -> list[Canvas] | None:
     try:
         return find_user(**kwargs).canvas
     except KeyError:
         return
 
 
-def getClassroom(
+def get_classroom(
         user_id: str = None, username: str = None, email: str = None
 ) -> GoogleClassroom:
     return find_user(id=user_id, username=username, email=email).gclassroom
 
 
-def getSpotify(user_id: str = None, username: str = None, email: str = None) -> Spotify:
+def get_spotify(user_id: str = None, username: str = None, email: str = None) -> Spotify:
     return find_user(id=user_id, username=username, email=email).spotify
 
 
-def getSpotifyCache(
+def get_spotify_cache(
         user_id: str = None, username: str = None, email: str = None
 ) -> Spotify | None:
     try:
@@ -198,9 +173,22 @@ def getSpotifyCache(
         return None
 
 
-def checkSchoology(_id: int):
-    user = find_user(id=_id)
-    return str(user and user.schoology).lower()
+def search_user(query: str, ignore_id: str = None) -> list[User]:
+    if ignore_id:
+        return User.objects(username__istartswith=query, id__ne=ignore_id).only(
+            "id", "username", "email", "avatar", "_cls"
+        )[:10]
+    else:
+        return User.objects(username__istartswith=query).only(
+            "id", "username", "email", "avatar", "_cls"
+        )[:10]
+    # return User.objects.filter(username__contains=query)._query
+
+
+def search_within_course(query: str, course_id: str):
+    assignments = Assignment.objects(course_id=course_id, title__contains=query)
+    events = Event.objects(course_id=course_id, title__contains=query)
+    document_file = DocumentFile.objects(course_id=course_id, title__contains=query)
 
 
 def check_type(o):
@@ -222,11 +210,6 @@ def check_signin(email, password):
         return False
 
     return valid_password(user.password, password)
-
-
-def get_announcement(announcement_id: str) -> Announcement:
-    announcement = Announcement.objects(pk=announcement_id).first()
-    return announcement
 
 
 def get_folders(parent_id: str = None, course_id: str = None) -> list[Folder]:
@@ -323,13 +306,14 @@ def unsorted_user_events(user_id: str) -> list[list]:
 
 def valid_event(event):
     if event._cls == "Assignment":
+        if event.course.archived:
+            return False
+
         due = event.due
         if due.year >= 9990:
             return False
-
         if now < due:
             return True
-
         if event.submitDate is None and event.allow_submissions:
             return True
 
@@ -339,8 +323,24 @@ def valid_event(event):
         return now < event.date
 
 
-def getSchoologyAuth(user_id) -> schoolopy.Schoology | None:
-    schoology = getSchoology(id=user_id)
+def check_duplicate_username(username) -> bool:
+    if User.objects(username=username):
+        return True
+    return False
+
+
+def check_duplicate_email(email) -> bool:
+    if User.objects(email=email):
+        return True
+    return False
+
+
+def check_duplicate_schoology(schoology_email) -> str:
+    return User.objects(schoology__schoologyEmail=schoology_email)
+
+
+def get_schoology_auth(user_id) -> schoolopy.Schoology | None:
+    schoology = get_schoology(id=user_id)
     if not schoology:
         return
 
@@ -369,23 +369,7 @@ def getSchoologyAuth(user_id) -> schoolopy.Schoology | None:
     return sc
 
 
-def check_duplicate_username(username) -> bool:
-    if User.objects(username=username):
-        return True
-    return False
-
-
-def check_duplicate_email(email) -> bool:
-    if User.objects(email=email):
-        return True
-    return False
-
-
-def check_duplicate_schoology(schoology_email) -> str:
-    return User.objects(schoology__schoologyEmail=schoology_email)
-
-
-def getChat(chat_id: str):
+def get_chat(chat_id: str):
     chat = Chat.objects.get(pk=chat_id)
     if not chat:
         raise KeyError("Invalid Chat ID")
@@ -393,7 +377,7 @@ def getChat(chat_id: str):
     return chat
 
 
-def getPlanner(user_id: str):
+def get_planner(user_id: str):
     planner = find_user(id=user_id).planner
     if not planner:
         return {}
@@ -406,28 +390,14 @@ def getPlanner(user_id: str):
     }
 
 
-def getDocument(document_id: str):  # Nebulus Document
-    doc = NebulusDocument.objects(pk=document_id)
-    if not doc:
-        raise KeyError("Invalid Document ID")
-    return doc
-
-
-def getCourseDocument(document_id: str):
-    doc = DocumentFile.objects(pk=document_id)
-    if not doc:
-        raise KeyError("Invalid Document ID")
-    return doc
-
-
-def getCourse(document_id: str):
+def get_course(document_id: str):
     course = Course.objects(pk=document_id)
     if not course:
         raise KeyError("Invalid Document ID")
     return course
 
 
-def getAnnouncementDocument(document_id: str):
+def get_announcement(document_id: str):
     obj = Announcement.objects(pk=document_id)
     if not obj:
         raise KeyError("Invalid Document ID")
@@ -510,13 +480,13 @@ def search_course(keyword: str, course: str):
     )
 
 
-def getUserChats(user_id, required_fields: list):
+def get_user_chats(user_id, required_fields: list):
     chats = Chat.objects(members__user=user_id).only(*required_fields)
     return chats
 
 
-def loadChats(user_id: str, current_index, initial_amount, required_fields):
-    chats = json.loads(getUserChats(user_id, required_fields).to_json())
+def load_chats(user_id: str, current_index, initial_amount, required_fields):
+    chats = json.loads(get_user_chats(user_id, required_fields).to_json())
 
     chats = sorted(chats, key=lambda x: x["lastEdited"]["$date"], reverse=True)
 

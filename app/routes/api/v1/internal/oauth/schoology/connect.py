@@ -14,7 +14,7 @@ secret = "59ccaaeb93ba02570b1281e1b0a90e18"
 
 
 async def import_schoology():
-    schoology = read.getSchoology(username=session["username"])
+    schoology = read.get_schoology(username=session["username"])
     if len(schoology) == 0:
         return "1"
     schoology = schoology[0]
@@ -102,8 +102,7 @@ async def import_schoology():
                     {
                         # "id": str(assignment["id"]),
                         "title": assignment["title"],
-                        "description": assignment["description"]
-                                       + f"\n\nView On Schoology: {assignment['web_url']}",
+                        "description": assignment["description"],
                         # "submitDate": assignment["dropbox_last_submission"],
                         "due": due,
                         # "course": str(course_obj.id),
@@ -111,6 +110,7 @@ async def import_schoology():
                         "points": float(assignment["max_points"]),
                         "imported_from": "Schoology",
                         "imported_id": str(assignment["id"]),
+                        "import_link": assignment["web_url"],
                     }
                 )
             else:

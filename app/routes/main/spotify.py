@@ -7,7 +7,7 @@ from spotipy import CacheHandler, SpotifyException
 from app.static.python.mongodb import update
 from . import main_blueprint
 from .utils import logged_in
-from ...static.python.mongodb.read import getText
+from ...static.python.mongodb.read import get_text
 
 SPOTIPY_CLIENT_ID = "9eb38c31d84b43e5a2557a6f98c5a064"
 SPOTIPY_CLIENT_SECRET = "eddbab5eb3b2434694af122a8f99bf87"
@@ -125,7 +125,7 @@ def spotify_route():
     })
 
     return render_template(
-        "user/connections/connectSpotify.html", spotify=spotify, auth=False, translate = getText
+        "user/connections/connectSpotify.html", spotify=spotify, auth=False, translate=get_text
     )
 
 

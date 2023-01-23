@@ -154,6 +154,8 @@ def create_google_course():
 
 @internal.route("/create/course/canvas", methods=["POST"])
 def create_canvas_course():
+    from canvasapi import Canvas
+
     post_data = request.get_json()
     if request.method == "GET":
         post_data = request.args
@@ -161,8 +163,6 @@ def create_canvas_course():
     teacher = post_data["teacher"]
     index = link.index("/course/") + 8
     course_id = link[index: len(link)]
-    # print(f"I'm at Canvas Creation. The ID is: {link}")
-    from canvasapi import Canvas
 
     API_URL = session["canvas_link"]
     API_KEY = session["canvas_key"]
@@ -241,9 +241,9 @@ def sync_schoology_course():
         post_data = request.json
     else:
         post_data = request.args
-        
+
     course_id = post_data["course_id"]
-    course = list(read.getCourse(course_id))[0]
+    course = list(read.get_course(course_id))[0]
     print("Currently syncing " + course.name)
     schoology_id = course.imported_id
     user, domain, sc = get_schoology()
@@ -307,7 +307,7 @@ def schoology_course_route():
 
 
 def get_schoology():
-    schoology = read.getSchoology(id=session["id"])
+    schoology = read.get_schoology(id=session["id"])
     if len(schoology) == 0:
         return "1"
     schoology = schoology[0]
@@ -424,18 +424,16 @@ def create_schoology_course(section, link, teacher, user, sc: Schoology = None):
             else:
                 due = None
 
-
-
             data = {
                 "title": assignment["title"],
-                "description": assignment["description"]
-                               + f"\n\nView On Schoology: {assignment['web_url']}",
+                "description": assignment["description"],
                 "due": due,
                 "allow_submissions": int(assignment["allow_dropbox"]) == 1,
                 "course": str(course_obj.id),
                 "points": float(assignment["max_points"]),
                 "grading_category": categories.get(int(assignment["grading_category"]), None),
                 "imported_from": "Schoology",
+                "import_link": assignment["web_url"],
                 "imported_id": str(assignment["id"]),
             }
 
