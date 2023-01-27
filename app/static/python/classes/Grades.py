@@ -9,7 +9,9 @@ from .TermGrade import TermGrade
 class Grades(Snowflake):
     course = ReferenceField("Course", required=True)
     student = ReferenceField("User", required=True)
-    terms = ListField(EmbeddedDocumentField(TermGrade), default=[])  # Trimester 1, Trimester 2, etc.
+    terms = ListField(
+        EmbeddedDocumentField(TermGrade), default=[]
+    )  # Trimester 1, Trimester 2, etc.
 
     letter = StringField(required=False)
     grade = FloatField(required=False)

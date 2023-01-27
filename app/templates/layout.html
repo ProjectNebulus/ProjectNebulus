@@ -1,29 +1,58 @@
 <!--Style Sheets!-->
 <html lang="en">
 <head>
+<style>
+    body{
+        background:#111926;
+    }
+</style>
     <script src="/static/progress.js-0.1.0/minified/progress.min.js"></script>
     <link rel="stylesheet" src="/static/progress.js-0.1.0/minified/progressjs.min.css">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="module">
-        //to set progress-bar for whole page
-        //import {progressJs} from "/static/progress.js-0.1.0";
-        // import {progressJs} from "/static/progress.js-0.1.0/minified/progress.min.js";
 
-        //{#progressJs().start();#}
-        //or for specific element
-        //progressJs("#targetElement").start();
-        //progressJs().setOption("theme", "black");
-        //progressJs("#thebody").start();
-    </script>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
     <script type="text/javascript" src="//cdn.socket.io/4.4.1/socket.io.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.1"></script>
     <meta name="google-site-verification"
           content="5RLtqNU5_UuQAcLqyee0ZoaLyNQ9-6VF0qfJsABVhm4"/>
+
     {% if not disableArc %}
         {# <script async src="https://arc.io/widget.min.js#MAqsJqoN"></script>#}
     {% endif %}
+
+    <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+    </div>
+
+    <style>
+
+        .progress-bar {
+            position: fixed;
+            z-index: 999999;
+            top: 0;
+            left: -1px;
+            width: 5%;
+            height: 3px;
+            background-image: linear-gradient(to right, #3a88fe, #5e30eb);
+            -moz-transition: width 600ms ease-out,opacity 500ms linear;
+            -ms-transition: width 600ms ease-out,opacity 500ms linear;
+            -o-transition: width 600ms ease-out,opacity 500ms linear;
+            -webkit-transition: width 600ms ease-out,opacity 500ms linear;
+            transition: width 1000ms ease-out,opacity 500ms linear;
+        }
+    </style>
+    <script>
+        window.addEventListener("load", function() {
+            const progressBar = document.getElementById("progress-bar");
+            progressBar.style.width = "100%";
+            setTimeout(function() {
+                document.getElementById("progress-bar").style.display = "none";
+            }, 1000);
+        });
+    </script>
+
+
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7084604546168550"
             crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"

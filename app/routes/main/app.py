@@ -152,16 +152,27 @@ def clubs():
     )
 
 
+import schoolopy
+from canvasapi import Canvas
+
 def get_courses():
+    """
+    This function retrieves a list of courses from the user's Google Classroom, Canvas, and Schoology accounts.
+    """
+    # Initialize lists to store courses from each platform
+    gcourses = []
+    canvas_courses = []
+    scCourses = []
+    scGroups = []
+
+    # Retrieve Google Classroom courses
     try:
         gcourses = getGclassroomcourses()
     except:
-        gcourses = []
+        pass
 
-    canvas_courses = []
+    # Retrieve Canvas courses
     try:
-        from canvasapi import Canvas
-
         API_URL = session["canvas_link"]
         API_KEY = session["canvas_key"]
         canvas = Canvas(API_URL, API_KEY)
@@ -180,23 +191,21 @@ def get_courses():
     except Exception as e:
         canvas_courses = []
 
-    scCourses = []
-    scGroups = []
-    import schoolopy
+    # Retrieve Schoology courses
 
     try:
         schoology = read.get_schoology(id=session["id"])
         if schoology and schoology[0].apikey == "":
             schoology = schoology[0]
             key = (
-                    schoology.apikey
-                    or session.get("request_token")
-                    or "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
+                schoology.apikey
+                or session.get("request_token")
+                or "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
             )
             secret = (
-                    schoology.apisecret
-                    or session.get("request_token_secret")
-                    or "59ccaaeb93ba02570b1281e1b0a90e18"
+                schoology.apisecret
+                or session.get("request_token_secret")
+                or "59ccaaeb93ba02570b1281e1b0a90e18"
             )
 
             auth = schoolopy.Auth(
@@ -216,10 +225,10 @@ def get_courses():
             for i in range(0, len(scCourses)):
                 scCourses[i] = dict(scCourses[i])
                 scCourses[i]["link"] = (
-                        schoology.schoologyDomain
-                        + "course/"
-                        + scCourses[i]["id"]
-                        + "/materials"
+                    schoology.schoologyDomain
+                    + "course/"
+                    + scCourses[i]["id"]
+                    + "/materials"
                 )
             scSchool = sc.get_school(scCourses[0]["school_id"])
             scCourses.append(scSchool)
@@ -236,11 +245,12 @@ def get_courses():
             for i in range(0, len(scCourses)):
                 scCourses[i] = dict(scCourses[i])
                 scCourses[i]["link"] = (
-                        schoology.schoologyDomain
-                        + "course/"
-                        + scCourses[i]["id"]
-                        + "/materials"
+                    schoology.schoologyDomain
+                    + "course/"
+                    + scCourses[i]["id"]
+                    + "/materials"
                 )
+
             scSchool = sc.get_school(scCourses[0]["school_id"])
             scCourses.append(scSchool)
 
@@ -248,7 +258,7 @@ def get_courses():
             for i in range(0, len(scGroups)):
                 scGroups[i] = dict(scGroups[i])
                 scGroups[i]["link"] = (
-                        schoology.schoologyDomain + "group/" + scCourses[i]["id"]
+                    schoology.schoologyDomain + "group/" + scCourses[i]["id"]
                 )
             scSchool = sc.get_school(scCourses[0]["school_id"])
             scGroups.append(scSchool)

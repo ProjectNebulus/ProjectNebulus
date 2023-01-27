@@ -73,8 +73,7 @@ def reset_psw_email():
 
     def replace(html):
         return (
-            html
-            .replace("signed up", "requested a password reset")
+            html.replace("signed up", "requested a password reset")
             .replace("sign up", "do so")
             .replace("Signup", "Reset")
         )
@@ -87,13 +86,15 @@ def reset_psw_email():
 @internal.route("/reset-email", methods=["POST"])
 @private_endpoint
 def reset_email():
-    if not (access := session.get("access")) or datetime.now().timestamp() - float(access) > 10 * 60:
+    if (
+        not (access := session.get("access"))
+        or datetime.now().timestamp() - float(access) > 10 * 60
+    ):
         return "Unauthorized", 401
 
     def replace(html):
         return (
-            html
-            .replace("signed up", "requested an email change")
+            html.replace("signed up", "requested an email change")
             .replace("sign up", "do so")
             .replace("Signup", "Change")
             .replace("Change Code", "Verification Code")

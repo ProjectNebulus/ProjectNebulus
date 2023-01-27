@@ -67,7 +67,9 @@ def gtest_api_request():
     print(user_info)
     user_info = [user_info["name"], user_info["picture"]]
 
-    return render_template("user/connections/connectClassroom.html", data=user_info, translate=get_text)
+    return render_template(
+        "user/connections/connectClassroom.html", data=user_info, translate=get_text
+    )
     # return flask.jsonify(courses)
 
 
@@ -121,7 +123,7 @@ def oauth2callback():
     # Use the authorization server's response to fetch the OAuth 2.0 tokens.
     # authorization_response = flask.request.url
     authorization_response = (
-            session["redirect_url_g"] + "&code=" + request.args.get("code")
+        session["redirect_url_g"] + "&code=" + request.args.get("code")
     )
     if "http://beta.nebulus.ml" in authorization_response:
         authorization_response = authorization_response.replace("http", "https")

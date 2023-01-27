@@ -99,7 +99,9 @@ def recieve():
             }
             update.discordLogin(session["id"], discord_dict)
 
-            return render_template("user/connections/connectDiscord.html", data=data, translate=get_text)
+            return render_template(
+                "user/connections/connectDiscord.html", data=data, translate=get_text
+            )
 
         except Exception as e:
             print(e)

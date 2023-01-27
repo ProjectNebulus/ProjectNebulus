@@ -83,11 +83,14 @@ def github_callback():
     code = request.args.get("code")
     print(code)
     token = get_access_token(code)
-    update.githubLogin(session["id"], {
-        "token": token,
-        "username": get_user_data(token)["login"],
-        "avatar": get_user_data(token)["avatar_url"],
-    })
+    update.githubLogin(
+        session["id"],
+        {
+            "token": token,
+            "username": get_user_data(token)["login"],
+            "avatar": get_user_data(token)["avatar_url"],
+        },
+    )
     return render_template(
         "user/connections/connectGithub.html",
         username=get_user_data(token)["login"],
@@ -107,8 +110,8 @@ def get_repos():
         if repo[1]:
             symbol = "<i class='material-icons'>lock</i>"
         string += (
-                "<p>"
-                + """
+            "<p>"
+            + """
 		<img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" style="
     filter: invert(1);
     height: 30px;
@@ -116,9 +119,9 @@ def get_repos():
     margin: 10px;
 ">
 	"""
-                + repo[0]
-                + symbol
-                + """<button style="
+            + repo[0]
+            + symbol
+            + """<button style="
     margin: 20px;
     font-weight: 600;
     border: none;
@@ -127,6 +130,6 @@ def get_repos():
     border-radius: 10px;
     background: deepskyblue;
 ">Import</button>"""
-                + "</p>"
+            + "</p>"
         )
     return string

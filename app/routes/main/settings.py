@@ -89,10 +89,7 @@ def settings():
 
     try:
         discord = list(read.get_discord(id=session["id"]))[0]
-        discord = [
-            discord.discord_user,
-            discord.discord_avatar
-        ]
+        discord = [discord.discord_user, discord.discord_avatar]
     except (TypeError, IndexError):
         discord = []
 
@@ -107,24 +104,19 @@ def settings():
 
     try:
         graderoom = list(read.get_graderoom(id=session["id"]))[0]
-        graderoom = [
-            graderoom.username,
-            graderoom.school
-        ]
+        graderoom = [graderoom.username, graderoom.school]
     except (TypeError, IndexError):
         graderoom = []
 
     try:
         github = list(read.get_github(id=session["id"]))[0]
-        github = [
-            github.username,
-            github.avatar
-        ]
+        github = [github.username, github.avatar]
     except (TypeError, IndexError):
         github = []
 
     schools = []
     import json
+
     try:
         rawschool = list(read.get_schools(session["id"]))
         myjson = list(json.load(open("app/schools.json")))

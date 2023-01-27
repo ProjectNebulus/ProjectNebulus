@@ -14,7 +14,9 @@ def recent_activity():
     courses = None
     if course_id := request.json.get("course_id"):
         courses = Course.objects(pk=course_id)
-    announcements, dates, a_len, e_len = read.sort_user_events(session["id"], courses, False, load_start)
+    announcements, dates, a_len, e_len = read.sort_user_events(
+        session["id"], courses, False, load_start
+    )
 
     return render_template(
         "learning/recent-activity.html",
@@ -24,7 +26,7 @@ def recent_activity():
         ee=e_len,
         enumerate=enumerate,
         strftime=strftime,
-        fmt=fmt
+        fmt=fmt,
     )
 
 
@@ -35,7 +37,9 @@ def upcoming_events():
     if course_id := request.json.get("course_id"):
         course = Course.objects(pk=course_id)
 
-    announcements, dates, a_len, e_len = read.sort_user_events(session["id"], course, True, load_start)
+    announcements, dates, a_len, e_len = read.sort_user_events(
+        session["id"], course, True, load_start
+    )
 
     return render_template(
         "learning/upcoming-events.html",
@@ -45,5 +49,5 @@ def upcoming_events():
         strftime=strftime,
         fmt=fmt,
         grade_score=grade_score,
-        now=datetime.now()
+        now=datetime.now(),
     )

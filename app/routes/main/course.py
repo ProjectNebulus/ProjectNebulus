@@ -6,7 +6,12 @@ from flask import render_template, request, session
 from mongoengine import DoesNotExist
 
 from app.static.python.classes import Assignment, Course, Grades, User
-from app.static.python.mongodb.read import find_user, get_text, get_user_courses, sort_user_events
+from app.static.python.mongodb.read import (
+    find_user,
+    get_text,
+    get_user_courses,
+    sort_user_events,
+)
 from . import main_blueprint, utils
 from .utils import logged_in, private_endpoint, fmt, grade_score
 
@@ -148,11 +153,9 @@ def grade_letter(assignment: Assignment):
 @main_blueprint.route("/getResource/<courseID>/<documentID>")
 @private_endpoint
 def get_resource(courseID, documentID):
-    courses = list(
-        filter(lambda c: c.id == courseID, get_user_courses(session["id"]))
-    )
+    courses = list(filter(lambda c: c.id == courseID, get_user_courses(session["id"])))
     if not len(courses) or not len(
-            [user for user in courses[0].authorizedUsers if user.id == session["id"]]
+        [user for user in courses[0].authorizedUsers if user.id == session["id"]]
     ):
         return render_template("errors/404.html"), 404
 
@@ -201,4 +204,4 @@ def course_page_ex(id, extension):
             f"courses/extensions/{extension}.html", translate=get_text,
         )
     except Exception as e:
-        return render_template("errors/404.html", translate=get_text, )
+        return render_template("errors/404.html", translate=get_text,)

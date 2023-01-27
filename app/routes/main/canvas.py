@@ -19,11 +19,14 @@ def canvasConnect():
 def canvasConnect2():
     a = connectCanvas(request.form.get("link"), request.form.get("key"))
     if a != False:
-        canvasLogin(session["id"], {
-            "url": request.form.get("link"),
-            "key": request.form.get("key"),
-            "name": str(a),
-        })
+        canvasLogin(
+            session["id"],
+            {
+                "url": request.form.get("link"),
+                "key": request.form.get("key"),
+                "name": str(a),
+            },
+        )
 
     else:
         return redirect("/canvas")

@@ -46,8 +46,9 @@ def removeFields(collection_name: str, fields: list | str):
     else:
         fields = list(fields)
 
-    db[collection_name.capitalize()]. \
-        update_many({fields[0]: {"$exists": True}}, {"$unset": {field: "" for field in fields}})
+    db[collection_name.capitalize()].update_many(
+        {fields[0]: {"$exists": True}}, {"$unset": {field: "" for field in fields}}
+    )
 
     print("Done!")
 

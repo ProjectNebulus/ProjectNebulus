@@ -45,7 +45,7 @@ def school():
         user=session.get("username"),
         user_id=session.get("id"),
         email=session.get("email"),
-        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif", ),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif",),
         translate=get_text,
         schools=myjson,
     )
@@ -67,7 +67,7 @@ def specific_school(school):
         "PALY",
         "LNBK",
         "CLGBA",
-        "NBLS"
+        "NBLS",
     ]
     if school not in schools:
         return render_template("errors/404.html", translate=get_text), 404
@@ -83,7 +83,7 @@ def specific_school(school):
                 user=session.get("username"),
                 user_id=session.get("id"),
                 email=session.get("email"),
-                avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif", ),
+                avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif",),
                 translate=get_text,
                 homepage=True,
                 embedoverride=True,
@@ -98,7 +98,7 @@ def index():
         user=session.get("username"),
         user_id=session.get("id"),
         email=session.get("email"),
-        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif", ),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif",),
         translate=get_text,
         homepage=True,
     )

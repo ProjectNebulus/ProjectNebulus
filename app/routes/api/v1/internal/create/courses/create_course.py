@@ -60,7 +60,7 @@ def create_google_course():
         post_data["teacher"] = "Unknown Teacher"
     link = post_data["link"]
     index = link.index("?id=") + 4
-    link = link[index: len(link)]
+    link = link[index : len(link)]
     # print(f"I'm at Google Classroom Creation. The ID is: {link}")
     credentials = google.oauth2.credentials.Credentials(**session["credentials"])
     service = build("classroom", "v1", credentials=credentials)
@@ -88,11 +88,7 @@ def create_google_course():
 
     if image:
         create.createAvatar(
-            {
-                "avatar_url": image,
-                "parent": "Course",
-                "parent_id": course_obj.id
-            }
+            {"avatar_url": image, "parent": "Course", "parent_id": course_obj.id}
         )
     try:
         announcements = (
@@ -124,7 +120,7 @@ def create_google_course():
                 ),
                 "author_pic": photo,
             },
-            course_obj
+            course_obj,
         )
     try:
         assignments = (
@@ -145,7 +141,7 @@ def create_google_course():
                 "imported_from": "Google Classroom",
                 "imported_id": str(assignment["id"]),
             },
-            course_obj
+            course_obj,
         )
     # topics = service.courses().topics().list(courseId=course["id"]).execute()
 
@@ -162,7 +158,7 @@ def create_canvas_course():
     link = post_data["link"]
     teacher = post_data["teacher"]
     index = link.index("/course/") + 8
-    course_id = link[index: len(link)]
+    course_id = link[index : len(link)]
 
     API_URL = session["canvas_link"]
     API_KEY = session["canvas_key"]
@@ -181,7 +177,7 @@ def create_canvas_course():
     image = course.get_settings()["image"]
     if image:
         create.createAvatar(
-            {"avatar_url": image, "parent": "Course", "parent_id": course_obj.id, }
+            {"avatar_url": image, "parent": "Course", "parent_id": course_obj.id,}
         )
 
     announcements = list(canvas.get_announcements(context_codes=[course]))
@@ -196,7 +192,7 @@ def create_canvas_course():
                 "date": datetime.fromtimestamp(announcement["posted_at"]),
                 "title": announcement["title"],
             },
-            course_obj
+            course_obj,
         )
 
     assignments = list(course.get_assignments())
@@ -212,7 +208,7 @@ def create_canvas_course():
                 "imported_from": "Canvas",
                 "imported_id": str(assignment["id"]),
             },
-            course_obj
+            course_obj,
         )
 
     documents = list(course.get_files())
@@ -227,7 +223,7 @@ def create_canvas_course():
                 "imported_id": str(document["id"]),
                 "url": document["url"],
             },
-            course_obj
+            course_obj,
         )
 
     return "success"
@@ -298,7 +294,7 @@ def schoology_course_route():
     link = post_data["link"]
     if "schoology" in link:
         index = link.index("/course/") + 8
-        link = link[index: index + 10]
+        link = link[index : index + 10]
 
     user, domain, sc = get_schoology()
     section = dict(sc.get_section(link))
@@ -337,15 +333,17 @@ def get_schoology():
 
 
 def create_schoology_course(section, link, teacher, user, sc: Schoology = None):
-    course_obj = create.create_course({
-        "name": f'{section["course_title"]} ({section["section_title"]})',
-        "description": section["description"],
-        "imported_from": "Schoology",
-        "authorizedUsers": [session["id"]],
-        "teacher": teacher,
-        "imported_id": str(section["id"]),
-        "type": "Imported",
-    })
+    course_obj = create.create_course(
+        {
+            "name": f'{section["course_title"]} ({section["section_title"]})',
+            "description": section["description"],
+            "imported_from": "Schoology",
+            "authorizedUsers": [session["id"]],
+            "teacher": teacher,
+            "imported_id": str(section["id"]),
+            "type": "Imported",
+        }
+    )
 
     if not debug_importing:
         create.createAvatar(
@@ -354,7 +352,7 @@ def create_schoology_course(section, link, teacher, user, sc: Schoology = None):
                 "parent": "Course",
                 "parent_id": course_obj.id,
             },
-            course_obj
+            course_obj,
         )
 
     sc_updates = sc.get_section_updates(link)
@@ -385,7 +383,7 @@ def create_schoology_course(section, link, teacher, user, sc: Schoology = None):
                     "author_school": school,
                     "imported_id": str(update["id"]),
                 },
-                course_obj
+                course_obj,
             )
         )
 
@@ -401,7 +399,7 @@ def create_schoology_course(section, link, teacher, user, sc: Schoology = None):
             "title": category["title"],
             "weight": category.get("weight", 100) / 100,
             "calculation_type": category.get("calculation_type", 2),
-            "imported_id": category["id"]
+            "imported_id": category["id"],
         }
 
     print(categories)
@@ -431,13 +429,17 @@ def create_schoology_course(section, link, teacher, user, sc: Schoology = None):
                 "allow_submissions": int(assignment["allow_dropbox"]) == 1,
                 "course": str(course_obj.id),
                 "points": float(assignment["max_points"]),
-                "grading_category": categories.get(int(assignment["grading_category"]), None),
+                "grading_category": categories.get(
+                    int(assignment["grading_category"]), None
+                ),
                 "imported_from": "Schoology",
                 "import_link": assignment["web_url"],
                 "imported_id": str(assignment["id"]),
             }
 
-            if not int(assignment["allow_dropbox"]) or int(assignment.get("completed", 0)):
+            if not int(assignment["allow_dropbox"]) or int(
+                assignment.get("completed", 0)
+            ):
                 data["submitDate"] = datetime.max
 
             assignments[assignment["id"]] = create.createAssignment(data, course_obj)
@@ -453,7 +455,7 @@ def create_schoology_course(section, link, teacher, user, sc: Schoology = None):
                         "imported_from": "Schoology",
                         "imported_id": str(event["id"]),
                     },
-                    course_obj
+                    course_obj,
                 )
             )
 
@@ -471,11 +473,22 @@ def create_schoology_course(section, link, teacher, user, sc: Schoology = None):
                 start_date = datetime.strptime("%m-%d-%y", dates[0])
                 end_date = datetime.strptime("%m-%d-%y", dates[1])
 
-            terms.append(term := TermGrade(title=period["period_title"], grading_categories=list(categories.values()),
-                                           start_date=start_date, end_date=end_date))
+            terms.append(
+                term := TermGrade(
+                    title=period["period_title"],
+                    grading_categories=list(categories.values()),
+                    start_date=start_date,
+                    end_date=end_date,
+                )
+            )
 
         else:
-            terms.append(term := TermGrade(title=period["period_title"], grading_categories=list(categories.values())))
+            terms.append(
+                term := TermGrade(
+                    title=period["period_title"],
+                    grading_categories=list(categories.values()),
+                )
+            )
 
         for assignment in period["assignment"]:
             assignment_obj = assignments.get(assignment["assignment_id"])
@@ -510,7 +523,7 @@ def create_schoology_course(section, link, teacher, user, sc: Schoology = None):
             "course": str(course_obj.id),
             "url": file["download_path"],
             "imported_id": str(sc_document["id"]),
-            "imported_from": "Schoology"
+            "imported_from": "Schoology",
         }
 
         if timestamp := file.get("timestamp"):

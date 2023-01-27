@@ -10,7 +10,12 @@ from ..classes import (
     NebulusDocument,
     Planner,
     Schoology,
-    User, Canvas, Discord, Spotify, Event, Assignment
+    User,
+    Canvas,
+    Discord,
+    Spotify,
+    Event,
+    Assignment,
 )
 from ..classes.Github import Github
 from ..classes.Graderoom import Graderoom

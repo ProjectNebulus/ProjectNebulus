@@ -65,7 +65,7 @@ class Musixmatch:
         return request
 
     def track_search(
-            self, q_track, page_size, page, s_track_rating, q_artist=None, _format="json",
+        self, q_track, page_size, page, s_track_rating, q_artist=None, _format="json",
     ):
         """Search for track in our database.
         Parameters:
@@ -496,7 +496,7 @@ class Musixmatch:
         return data
 
     def album_tracks_get(
-            self, album_id, page, page_size, album_mbid, f_has_lyrics=None, _format="json",
+        self, album_id, page, page_size, album_mbid, f_has_lyrics=None, _format="json",
     ):
         """This api provides you the list of the songs of an album.
         Parameters:

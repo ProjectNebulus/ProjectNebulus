@@ -7,7 +7,7 @@ class BellSchedule(EmbeddedDocument):
     """
 
     school_code = StringField(default="")  # Example: BISV, SDPB, CBTA, HKR, GUNN
-    type = StringField(default="None", options=["Weekly", "Daily", "Block"], )
+    type = StringField(default="None", options=["Weekly", "Daily", "Block"],)
     block_days = ListField(StringField(), default=[])
     daily_schedule = ListField(StringField())
     weekly_schedule = ListField(ListField(StringField()))
