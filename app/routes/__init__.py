@@ -16,7 +16,7 @@ socketio = SocketIO()
 mail = Mail()
 babel = Babel()
 
-from app.static.python.mongodb import read
+from app.static.python.mongodb import read, init_db
 
 # Blueprints
 from .api import api_blueprint
@@ -28,6 +28,7 @@ class LogFilter(logging.Filter):
     """
     Filter class for logging.
     """
+
     def filter(self, record: logging.LogRecord) -> bool:
         message = record.getMessage()
         keywords = ("200", "304")
@@ -98,5 +99,7 @@ def init_app():
 
     mail.init_app(app)
     socketio.init_app(app, async_mode="eventlet", cors_allowed_origins="*")
+
+    init_db()
 
     return app

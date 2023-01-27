@@ -1,13 +1,15 @@
 {% if schoology %}
     {% for schoology_acc in schoology %}
         <div>
-            <div class="block p-6 w-3/4 bg-gray-100 rounded-t-lg border border-gray-200 shadow-md dark:bg-gray-700/50 dark:border-gray-700">
+            <div class="relative p-6 w-3/4 bg-gray-100 rounded-t-lg border border-gray-200 shadow-md dark:bg-gray-700/50 dark:border-gray-700">
+                <div class="absolute p-1 mx-2 my-2 top-0 right-0 material-icons hover:bg-gray-200 dark:hover:bg-gray-700
+                 rounded-lg cursor-pointer text-gray-400 dark:text-gray-500" key="Schoology">
+                    <span class="rotate-45 inline-block">key</span>
+                </div>
                 <div>
                     <div style="float:left;margin-right:15px;">
                         <img src="/static/images/logos/schoology.png"
-                             style="width:30px;
-                                                            height:30px;
-                                                            overflow:hidden;"
+                             style="width:30px;height:30px;overflow:hidden;"
                              alt="Schoology Image">
                     </div>
                     <div style="float:left;width:50%;">
@@ -22,40 +24,38 @@
                 <br>
                 <br>
             </div>
-            <div class="block p-6 w-3/4 bg-white rounded-b-lg border border-gray-200 shadow-md dark:bg-gray-800/50 dark:border-gray-700">
-                <div>
-                    <a href="/api/v1/internal/oauth/schoology/disconnect"
-                       class="inline-flex place-items-center font-medium text-center text-white bg-blue-700
+            <div class="relative p-6 w-3/4 bg-white rounded-b-lg border border-gray-200 shadow-md dark:bg-gray-800/50 dark:border-gray-700">
+                <a href="/api/v1/internal/oauth/schoology/disconnect"
+                   class="inline-flex place-items-center font-medium text-center text-white bg-blue-700
                                     rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300
                                      dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 px-3 py-2">
-                        Disconnect Schoology
-                        <svg class="ml-2 -mr-1 w-4 h-4"
-                             fill="currentColor"
-                             viewBox="0 0 20 20"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                  clip-rule="evenodd">
-                            </path>
-                        </svg>
-                    </a>
-                    <br>
-                    <br>
-                    <label for="toggle-example-checked"
-                           class="flex relative items-center mb-4 cursor-pointer">
-                        <input type="checkbox" id="toggle-example-checked" class="sr-only" checked>
-                        <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600">
-                        </div>
-                        <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Show in Profile</span>
-                    </label>
-                    <label for="toggle-example-checked1"
-                           class="flex relative items-center mb-4 cursor-pointer">
-                        <input type="checkbox" id="toggle-example-checked1" class="sr-only" checked>
-                        <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600">
-                        </div>
-                        <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Use in Courses</span>
-                    </label>
-                </div>
+                    Disconnect Schoology
+                    <svg class="ml-2 -mr-1 w-4 h-4"
+                         fill="currentColor"
+                         viewBox="0 0 20 20"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                              clip-rule="evenodd">
+                        </path>
+                    </svg>
+                </a>
+                <br>
+                <br>
+                <label for="toggle-example-checked"
+                       class="flex relative items-center mb-4 cursor-pointer">
+                    <input type="checkbox" id="toggle-example-checked" class="sr-only" checked>
+                    <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600">
+                    </div>
+                    <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Show in Profile</span>
+                </label>
+                <label for="toggle-example-checked1"
+                       class="flex relative items-center mb-4 cursor-pointer">
+                    <input type="checkbox" id="toggle-example-checked1" class="sr-only" checked>
+                    <div class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600">
+                    </div>
+                    <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Use in Courses</span>
+                </label>
             </div>
         </div>
         <br>
@@ -421,3 +421,4 @@
     </div>
     <br>
 {% endif %}
+<script src="/static/js/user/connections.js" defer></script>

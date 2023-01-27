@@ -314,7 +314,7 @@ window.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    document.getElementById("send-email").addEventListener("click", sendEmail);
+    bindFunc("#send-email", sendEmail);
 
     modal = new Modal(document.getElementById("change-modal"));
 });
@@ -340,19 +340,6 @@ function timeout(delay) {
         error.style.color = "red";
         error.innerHTML = "Please enter your password again.";
     }, delay);
-}
-
-function connectGraderoom() {
-    let data = document.getElementById("graderoom-key").value;
-    if (data.length === 6) {
-        $.ajax({
-            type: 'GET',
-            url: '/api/v1/internal/oauth/graderoom/connect',
-            data: {
-                graderoom_key: document.getElementById("graderoom-key").value
-            }
-        }).done(location.reload);
-    }
 }
 
 function openSettingsModal(settingType) {

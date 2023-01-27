@@ -11,7 +11,7 @@ from .utils import logged_in
 @logged_in
 def canvasConnect():
     # Open OAuth authorization webpage. Give time to authorize.
-    return render_template("user/connections/connectCanvas.html", translate=get_text)
+    return render_template("user/connections/connect_canvas.html", translate=get_text)
 
 
 @main_blueprint.route("/canvas", methods=["POST"])
@@ -31,5 +31,5 @@ def canvasConnect2():
     else:
         return redirect("/canvas")
     return render_template(
-        "user/connections/connectCanvas.html", done=str(a), avatar=a.avatar_url
+        "user/connections/connect_canvas.html", done=str(a), avatar=a.avatar_url
     )

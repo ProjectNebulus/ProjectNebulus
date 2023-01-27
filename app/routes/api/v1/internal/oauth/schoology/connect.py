@@ -5,7 +5,7 @@ from flask import request, session
 
 from app.static.python.extensions.integrations.schoology import create_schoology_auth
 from app.static.python.mongodb import create, read, update
-from app.static.python.utils.colors import getColor
+from app.static.python.utils.colors import get_color
 from ... import internal
 
 auth = None
@@ -18,18 +18,18 @@ async def import_schoology():
     if len(schoology) == 0:
         return "1"
     schoology = schoology[0]
-    key = schoology.apikey
-    secret = schoology.apisecret
+    key = schoology.api_key
+    secret = schoology.api_secret
 
     auth = schoolopy.Auth(
         key,
         secret,
         domain=schoology.schoology_domain,
         three_legged=True,
-        request_token=schoology.Schoology_request_token,
-        request_token_secret=schoology.Schoology_request_secret,
-        access_token=schoology.Schoology_access_token,
-        access_token_secret=schoology.Schoology_access_secret,
+        request_token=schoology.request_token,
+        request_token_secret=schoology.request_secret,
+        access_token=schoology.access_token,
+        access_token_secret=schoology.access_secret,
     )
     auth.request_authorization(
         callback_url=(request.url_root + "/api/v1/internal/oauth/schoology/callback")
@@ -66,7 +66,7 @@ async def import_schoology():
 
         for update in scupdates:
             author = sc.get_user(update["uid"])
-            color = getColor(author["picture_url"])
+            color = get_color(author["picture_url"])
             school = sc.get_school(author["school_id"])["title"]
 
             create.createAnnouncement(
@@ -241,7 +241,7 @@ def schoology_school_verify():
     schoology_secret = request.json.get("secret")
     school = request.json.get("school")
     try:
-        sc = schoolopy.Schoology(schoolopy.Auth(schoology_key, schoology_secret),)
+        sc = schoolopy.Schoology(schoolopy.Auth(schoology_key, schoology_secret), )
         email = sc.get_me().primary_email
         if email_format in str(email):
             update.add_school_to_user(session["id"], school)
@@ -255,23 +255,28 @@ def schoology_school_verify():
 @internal.route("/oauth/graderoom/connect")
 def graderoom_connect():
     import requests
-
     pairing_key = request.args.get("graderoom_key")
-    params = {"pairingKey": pairing_key}
+    params = {
+        "pairingKey": pairing_key
+    }
     api_key = str(requests.post("https://beta.graderoom.me/api/pair", data=params).text)
     print(api_key)
-    if api_key == "Invalid pairing key":
-        return "invalid"
-    if api_key == "This pairing key has expired":
-        return "invalid-2"
-    params = {"x-api-key": api_key}
-    information = dict(
-        requests.get("https://beta.graderoom.me/api/info", headers=params).json()
-    )
-    conversion = {"basis": "BISV", "bellarmine": "BCP", "ndsj": "NDSJ"}
+    if api_key in ('Invalid pairing key', "This pairing key has expired"):
+        return api_key
+
+    params = {
+        "x-api-key": api_key
+    }
+    information = dict(requests.get("https://beta.graderoom.me/api/info", headers=params).json())
+    conversion = {
+        "basis": "BISV",
+        "bellarmine": "BCP",
+        "ndsj": "NDSJ"
+    }
     school = conversion[information["school"].lower()]
-    update.graderoomLogin(
-        session["id"],
-        {"key": api_key, "username": information["username"], "school": school},
-    )
+    update.graderoomLogin(session["id"], {
+        "key": api_key,
+        "username": information["username"],
+        "school": school
+    })
     return str(information)

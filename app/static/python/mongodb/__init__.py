@@ -2,20 +2,28 @@ import os
 
 from dotenv import load_dotenv
 
-from .config import run
+from ..utils import config
 
 load_dotenv()
 
 import certifi
 from mongoengine import connect
 
-ca = certifi.where()
-db = connect(
-    db="Nebulus",
-    username="MainUser",
-    password=os.environ.get("MONGOPASS"),
-    host=os.environ.get("MONGO"),
-    tlsCAFile=ca,
-)["Nebulus"]
+db = ca = None
 
-run()
+
+def init_db():
+    global db, ca
+
+    config.auto_run()
+
+    ca = certifi.where()
+    db = connect(
+        db="Nebulus",
+        username="MainUser",
+        password=os.environ.get("MONGOPASS"),
+        host=os.environ.get("MONGO"),
+        tlsCAFile=ca,
+    )["Nebulus"]
+
+    config.run()

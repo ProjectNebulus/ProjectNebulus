@@ -134,8 +134,11 @@ class KeyUpTimer {
 
     enable() {
         this.elements = document.querySelectorAll(this.selector);
-        this.onKeyUp = (e) => {
-            if (e.key.length > 1 && e.key !== "Enter" && e.key !== "Backspace")
+        if (this.elements.length === 0)
+            console.error("WARNING: KeyUpTime query selector does not match any elements.");
+
+        this.onKeyUp = e => {
+            if (e.key && e.key.length > 1 && e.key !== "Enter" && e.key !== "Backspace")
                 return;
 
             this.lastKeyUpTime = Date.now();
@@ -143,7 +146,17 @@ class KeyUpTimer {
             this.lastKeyEvent = e;
         };
 
-        for (const element of this.elements) element.addEventListener('keyup', this.onKeyUp);
+        this.onClick = el => {
+            if (Date.now() - this.lastKeyUpTime >= 2000 && el.value && el === document.activeElement)
+                this.func(el);
+
+            this.lastKeyUpTime = Date.now();
+        }
+
+        for (const element of this.elements) {
+            element.addEventListener('keyup', this.onKeyUp);
+            element.addEventListener('click', () => this.onClick(element));
+        }
 
         this.interval = setInterval(() => {
             if (!this.recheck) return;
@@ -195,6 +208,9 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.style.background = `linear-gradient( rgba(${brightness}, ${brightness}, ${brightness}, 0.6), rgba(${brightness}, ${brightness}, ${brightness}, 0.6) ), url('${wallpaper}') no-repeat center center fixed`;
         document.body.style.backgroundSize = 'cover';
     }
+
+    for (const el of document.querySelectorAll("input.textarea-styling"))
+        el.classList.add('bg-gray-50/75', 'border', 'border-gray-300', 'text-gray-900', 'text-sm', 'rounded-lg', 'focus:ring-blue-500', 'focus:border-blue-500', 'block', 'dark:bg-gray-800/50', 'dark:border-gray-600', 'dark:focus:border-blue-500', 'dark:placeholder-gray-400', 'dark:text-white', 'w-full', 'pl-10', 'p-2.5', 'dark:focus:ring-blue-500')
 });
 
 function invertSite() {
@@ -446,10 +462,15 @@ function closeModal(object_id) {
     }, 200);
 }
 
-function bindFunc(clsName, func) {
-    for (let el of document.getElementsByClassName(clsName)) {
-        el.addEventListener("click", func);
+function bindFunc(query, func) {
+    let valid = false;
+    for (let el of document.querySelectorAll(query)) {
+        el.addEventListener("click", () => func(el));
+        valid = true;
     }
+
+    if (!valid)
+        console.error("Query " + query + " did not match any elements");
 }
 
 function randomCat() {

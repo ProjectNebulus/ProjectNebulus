@@ -11,8 +11,6 @@ internal = flask.Blueprint(
 )
 v1.register_blueprint(internal)
 
-# Importing routes for this blueprint
-
 from .check import *
 from .create import *
 from .delete import *

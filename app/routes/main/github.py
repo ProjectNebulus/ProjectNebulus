@@ -92,7 +92,7 @@ def github_callback():
         },
     )
     return render_template(
-        "user/connections/connectGithub.html",
+        "user/connections/connect_github.html",
         username=get_user_data(token)["login"],
         avatar=get_user_data(token)["avatar_url"],
     )

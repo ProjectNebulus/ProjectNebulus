@@ -20,9 +20,7 @@ def get_locale():
 def screenTime():
     data = int(request.args.get("data"))
     location = request.args.get("location")
-    print(
-        f"[Screen Time Log | {datetime.date.today()} @ '{location}'] {data / 1000} seconds "
-    )
+    print(f"[Screen Time Log | {datetime.date.today()} @ '{location}'] {data / 1000} seconds")
     return str(data)
 
 
@@ -45,7 +43,7 @@ def school():
         user=session.get("username"),
         user_id=session.get("id"),
         email=session.get("email"),
-        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif",),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         translate=get_text,
         schools=myjson,
     )
@@ -67,7 +65,7 @@ def specific_school(school):
         "PALY",
         "LNBK",
         "CLGBA",
-        "NBLS",
+        "NBLS"
     ]
     if school not in schools:
         return render_template("errors/404.html", translate=get_text), 404
@@ -83,7 +81,7 @@ def specific_school(school):
                 user=session.get("username"),
                 user_id=session.get("id"),
                 email=session.get("email"),
-                avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif",),
+                avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
                 translate=get_text,
                 homepage=True,
                 embedoverride=True,
@@ -98,7 +96,7 @@ def index():
         user=session.get("username"),
         user_id=session.get("id"),
         email=session.get("email"),
-        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif",),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         translate=get_text,
         homepage=True,
     )
@@ -165,38 +163,30 @@ def globalcountry(country):
 @main_blueprint.app_errorhandler(400)
 def page_not_found(e):
     path = request.path
-    # print(path)
     if len(path.strip("/")) == 2:
         return redirect(f"/global{path}")
-    # note that we set the 404 status explicitly
-    return (
-        render_template(
-            "errors/404.html",
-            page="Not Found",
-            user=session.get("username"),
-            user_id=session.get("id"),
-            email=session.get("email"),
-            avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-            translate=get_text,
-        ),
-        404,
+
+    return render_template(
+        "errors/404.html",
+        page="Not Found",
+        user=session.get("username"),
+        user_id=session.get("id"),
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        translate=get_text,
     )
 
 
 @main_blueprint.app_errorhandler(500)
 def internal_error(e):
-    # note that we set the 500 status explicitly
-    return (
-        render_template(
-            "errors/500.html",
-            page="Nebulus is Down",
-            user=session.get("username"),
-            user_id=session.get("id"),
-            email=session.get("email"),
-            avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-            translate=get_text,
-        ),
-        500,
+    return render_template(
+        "errors/500.html",
+        page="Nebulus is Down",
+        user=session.get("username"),
+        user_id=session.get("id"),
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        translate=get_text,
     )
 
 

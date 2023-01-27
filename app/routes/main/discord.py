@@ -5,8 +5,8 @@ from flask import Flask, redirect, render_template, request, session
 from flask_discord import DiscordOAuth2Session
 
 from app.static.python.mongodb import update
+from app.static.python.mongodb.read import get_text
 from . import main_blueprint, logged_in
-from ...static.python.mongodb.read import get_text
 
 app = Flask(__name__)
 app.config["DISCORD_CLIENT_ID"] = 955153343020429343  # Discord client ID.
@@ -99,9 +99,7 @@ def recieve():
             }
             update.discordLogin(session["id"], discord_dict)
 
-            return render_template(
-                "user/connections/connectDiscord.html", data=data, translate=get_text
-            )
+            return render_template("user/connections/connect_discord.html", data=data, translate=get_text)
 
         except Exception as e:
             print(e)

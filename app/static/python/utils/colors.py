@@ -4,7 +4,7 @@ import urllib.request
 from colorthief import ColorThief
 
 
-def getColor(url):
+def get_color(url):
     try:
         ending = url.split("/")[-1]
         if "?" in ending:

@@ -73,7 +73,7 @@ def g_classroom_auth():
     print(user_info)
     user_info = [user_info["name"], user_info["picture"]]
     return render_template(
-        "user/connections/connectClassroom.html",
+        "user/connections/connect_classroom.html",
         link=creds,
         data=user_info,
         translate=get_text,

@@ -298,8 +298,8 @@
                                 <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
                             </svg>
                         </div>
-                        <input style="width:400px" disabled type="text" value="{{ session.get('username') }}"
-                               class="bg-gray-50/75 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block dark:bg-gray-800/50 dark:border-gray-600 dark:focus:border-blue-500 dark:placeholder-gray-400 dark:text-white w-full pl-10 p-2.5 dark:focus:ring-blue-500">
+                        <input style="width: 25rem" disabled type="text" value="{{ session.get('username') }}"
+                               class="textarea-styling">
                     </div>
                     <button onclick="openSettingsModal('username')" class="text-white bg-blue-700 hover:bg-blue-800
                          focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center
@@ -322,8 +322,7 @@
                             </svg>
                         </div>
                         <input style="width:400px;" disabled type="password" value="{{ session.get('pswLen') * '*' }}"
-                               class="bg-gray-50/75 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-800/50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                               placeholder="">
+                               class="textarea-styling">
                     </div>
                     <button onclick="openSettingsModal('password')" class="text-white bg-blue-700 hover:bg-blue-800
                      focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center
@@ -343,7 +342,7 @@
                             </svg>
                         </div>
                         <input style="width:400px;" disabled type="text" value="{{ session.get('email') }}"
-                               class="bg-gray-50/75 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-800/50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                               class="textarea-styling">
                     </div>
                     <button onclick="openSettingsModal('email')" class="text-white bg-blue-700 hover:bg-blue-800
                      focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center
@@ -814,7 +813,7 @@
                     </div>
                 </div>
                 <br>
-                {% include "user/connections.html" %}
+                {% include "user/connections/connections.html" %}
             </div>
             <div style="display:none;" id="schoolSettings">
                 <div class="mt-6">
@@ -847,7 +846,8 @@
                     </h1>
                 {% endif %}
 
-                <div class="w-full max-w-md p-4 bg-white/75 rounded-lg shadow-md sm:p-8 dark:bg-gray-800/75" style="backdrop-font: blur(10px);">
+                <div class="w-full max-w-md p-4 bg-white/75 rounded-lg shadow-md sm:p-8 dark:bg-gray-800/75"
+                     style="backdrop-font: blur(10px);">
                     <div class="flex items-center justify-between mb-4">
                         <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">My Schools</h5>
                         <a href="/school" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
@@ -857,24 +857,26 @@
                     <div class="flow-root">
                         <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
                             {% for school in schools %}
-                            <li class="py-3 sm:py-4">
-                                <div class="flex items-center space-x-4">
-                                    <div class="flex-shrink-0">
-                                        <img class="w-8 h-8 rounded-full" alt="{{ school["name"] }}'s Logo" src="/static/images/schools/{{ school["code"] }}.{{ school["picture_url"] }}" alt="Neil image">
+                                <li class="py-3 sm:py-4">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="flex-shrink-0">
+                                            <img class="w-8 h-8 rounded-full" alt="{{ school["name"] }}'s Logo"
+                                                 src="/static/images/schools/{{ school["code"] }}.{{ school["picture_url"] }}"
+                                                 alt="Neil image">
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                                {{ school["name"] }}
+                                            </p>
+                                            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                                #{{ school["code"] }}
+                                            </p>
+                                        </div>
+                                        <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                            1 Member
+                                        </div>
                                     </div>
-                                    <div class="flex-1 min-w-0">
-                                        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                            {{ school["name"] }}
-                                        </p>
-                                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                                            #{{ school["code"] }}
-                                        </p>
-                                    </div>
-                                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                                        1 Member
-                                    </div>
-                                </div>
-                            </li>
+                                </li>
                             {% endfor %}
                         </ul>
                     </div>
@@ -1886,7 +1888,7 @@
                     </h3>
                     <button type="button"
                             class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                            onclick="openModal('schoology-modal')">
+                            onclick="closeModal('graderoom-modal')">
                         <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                              xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -1901,14 +1903,17 @@
                 <div class="p-6 space-y-6">
                     <div class="mb-6">
                         <label for="graderoom-key"
-                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Graderoom Pairing
-                            Key</label>
-                        <input maxlength="6" onkeyup="connectGraderoom()" type="text" id="graderoom-key"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                            Graderoom Pairing Key
+                        </label>
+                        <input maxlength="6" type="text" id="graderoom-key"
                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                placeholder="s8xje8" required>
+                        <p id="graderoom-pair-fail" style="color: red" class="mt-2"><br></p>
                     </div>
                     <div style="height:200px; overflow-y: scroll;">
-                        <h1 class="text-black dark:text-white text-2xl">FAQ for Connecting your Graderoom Account</h1>
+                        <h1 class="text-black dark:text-white text-3xl text-center">Frequently Asked Questions</h1>
+                        <br>
                         <h2 class="text-gray-300 text-xl">What schools does Graderoom Support?</h2>
                         <p class="text-black dark:text-white">Graderoom currently only supports Bellarmine College
                             Preparatory, BASIS Independent Silicon Valley,
@@ -1925,7 +1930,6 @@
                         <h2 class="text-gray-300 text-xl">It's not letting me Generate a Pairing Key.</h2>
                         <p class="text-black dark:text-white">You need at least one sync to be able to generate a key.
                             This verifies you are a real person.</p>
-
                     </div>
                 </div>
                 <!-- Modal footer -->
@@ -1939,12 +1943,20 @@
         </div>
     </div>
 
-    <div id="bellScheduleModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
+    <div id="bellScheduleModal" tabindex="-1" aria-hidden="true"
+         class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
         <div class="relative w-full h-full max-w-md md:h-auto">
             <!-- Modal content -->
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-900">
-                <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="authentication-modal">
-                    <svg onclick="closeModal('bellScheduleModal')" aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                <button type="button"
+                        class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+                        data-modal-toggle="authentication-modal">
+                    <svg onclick="closeModal('bellScheduleModal')" aria-hidden="true" class="w-5 h-5"
+                         fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                              clip-rule="evenodd"></path>
+                    </svg>
                     <span class="sr-only">Close modal</span>
                 </button>
                 <div class="px-6 py-6 lg:px-8">
@@ -1952,13 +1964,15 @@
                     <form class="space-y-6" action="#">
                         <label for="name" class="block">
                             <span class="text-gray-700 dark:text-gray-200">Name</span>
-                            <input id="name" type="text" name="name" placeholder="Period 1" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray form-input" required>
-
+                            <input id="name" type="text" name="name" placeholder="Period 1"
+                                   class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray form-input"
+                                   required>
+                        </label>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
+    {% include "user/connections/display_api_keys.html" %}
     </body>
 {% endblock %}

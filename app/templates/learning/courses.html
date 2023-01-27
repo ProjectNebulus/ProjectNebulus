@@ -40,7 +40,7 @@
                 {% for course in user_courses %}
                     <a href="/course/{{ course.id }}">
                         <div style="background: url('{{ course.avatar.avatar_url }}'); height: 15rem; width: 22rem"
-                             class="rounded-xl course"
+                             class="rounded-xl course" id="{{ course.id }}"
                              total-resources="{{ course.assignments|length + course.announcements|length + course.events|length + course.documents|length }}">
                             <div class="max-w-sm bg-gray-50 rounded-xl shadow-md dark:bg-gray-800/75 dark:border-gray-700 p-2"
                                  style="float:left;
@@ -50,24 +50,23 @@
                                 <div class="absolute material-icons text-gray-500 dark:text-gray-400 bg-gray-300
                                  dark:bg-gray-700 rounded-lg settings flex" onclick="override = true">
                                     <div class="hover:bg-gray-200 dark:hover:bg-gray-600 p-2"
-                                         title="Copy Course Id"
-                                         onclick="copyCourseId('{{ course.id }}', this)">content_copy
+                                         title="Copy Course Id">content_copy
                                     </div>
                                     <div class="hover:bg-gray-200 dark:hover:bg-gray-600 p-2"
-                                         title="Delete Course"
-                                         onclick="deleteCourse('{{ course.id }}', this.parentElement.parentElement.parentElement)">
+                                         title="Delete Course">
                                         delete
                                     </div>
-                                    <div class="hover:bg-gray-200 dark:hover:bg-gray-600 p-2"
-                                         title="Sync Course">
-                                       sync
-                                    </div>
+                                    {% if course.imported_from != "Nebulus" %}
+                                        <div class="hover:bg-gray-200 dark:hover:bg-gray-600 p-2"
+                                             title="Sync Course">
+                                            sync
+                                        </div>
+                                    {% endif %}
                                 </div>
                                 <div class="text-left">
                                     <div class="p-4 flex">
                                         {% if course.avatar != None %}
                                             <img src="{{ course.avatar.avatar_url }}"
-                                                 onload="if (!displayImage(this)) this.style.display = 'none';"
                                                  alt="Image for {{ course.name }}"
                                                  class="object-cover inline-block rounded-lg mr-4"
                                                  style="width: 50px; height: 50px">
@@ -180,6 +179,6 @@
             </div>
         </div>
     </div>
-    <script src="/static/js/courses.js"></script>
+    <script src="/static/js/courses.js" defer></script>
     {% include "learning/lms-modal.html" %}
 {% endblock %}

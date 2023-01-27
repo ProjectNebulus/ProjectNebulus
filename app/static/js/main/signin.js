@@ -219,7 +219,7 @@ function clearBorders() {
 }
 
 window.addEventListener('load', function () {
-    bindFunc("reset-screen-btn", () => {
+    bindFunc(".reset-screen-btn", () => {
         const modal = document.getElementById("main-modal");
         modal.style.maxWidth = modal.style.maxWidth.startsWith("50") ? "40rem" : "50rem";
 

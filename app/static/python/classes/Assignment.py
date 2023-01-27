@@ -69,3 +69,6 @@ class Assignment(Snowflake):
 
     def __str__(self):
         return f'Assignment(title="{self.title}", grade={self.grade}, points={self.points}, due={self.due.date()}, grading_category={self.grading_category})'
+
+    def __hash__(self):
+        return hash(" ".join(map(str, self._fields_ordered)))

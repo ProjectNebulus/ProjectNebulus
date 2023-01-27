@@ -5,9 +5,9 @@ from spotipy import CacheHandler, SpotifyException
 # In order to get Spotipy to work, you must install the latest version with cloning the repo with the following command:
 # pip3 install git+https://github.com/plamere/spotipy
 from app.static.python.mongodb import update
+from app.static.python.mongodb.read import get_text
 from . import main_blueprint
 from .utils import logged_in
-from ...static.python.mongodb.read import get_text
 
 SPOTIPY_CLIENT_ID = "9eb38c31d84b43e5a2557a6f98c5a064"
 SPOTIPY_CLIENT_SECRET = "eddbab5eb3b2434694af122a8f99bf87"
@@ -87,7 +87,6 @@ def get_spotify_auth():
 def spotify_route():
     if not session.get("uuid"):
         import uuid
-
         # Step 1. Visitor is unknown, give random ID
         session["uuid"] = str(uuid.uuid4())
 
@@ -118,16 +117,15 @@ def spotify_route():
     name = spotify.me()["display_name"]
     token_info = str(session.get("token_info"))
     uuid = session.get("uuid")
-    update.spotifyLogin(
-        session["id"],
-        {"avatar": avatar, "name": name, "token_info": token_info, "uuid": uuid,},
-    )
+    update.spotifyLogin(session["id"], {
+        "avatar": avatar,
+        "name": name,
+        "token_info": token_info,
+        "uuid": uuid,
+    })
 
     return render_template(
-        "user/connections/connectSpotify.html",
-        spotify=spotify,
-        auth=False,
-        translate=get_text,
+        "user/connections/connect_spotify.html", spotify=spotify, auth=False, translate=get_text
     )
 
 

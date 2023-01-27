@@ -12,7 +12,7 @@ def dropbox():
     authorization_url = f"https://www.dropbox.com/oauth2/authorize?client_id={app_key}&response_type=code"
 
     return render_template(
-        "user/connections/connectDropbox.html", link=authorization_url
+        "user/connections/connect_dropbox.html", link=authorization_url
     )
 
 

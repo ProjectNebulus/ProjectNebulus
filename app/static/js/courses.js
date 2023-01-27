@@ -7,7 +7,10 @@ document.addEventListener("click", (e) => {
     }
 })
 
-function deleteCourse(id, courseElement) {
+bindFunc("[title*=Copy]", courseElement => {
+    courseElement = courseElement.parentElement.parentElement.parentElement;
+    let id = courseElement.getAttribute("id");
+
     const header = courseElement.querySelector("div.text-left div.-mt-1");
 
     if (!confirm('Delete course "' + header.children[0].innerText.trim() + '"? This is irreversible!')) return;
@@ -38,9 +41,12 @@ function deleteCourse(id, courseElement) {
 
         contentType: 'application/json; charset=utf-8',
     });
-}
+});
 
-function copyCourseId(id, element) {
+bindFunc("[title*=Delete]", element => {
+    const id = element.parentElement.parentElement.parentElement.getAttribute("id");
+    element.disabled = true;
+
     navigator.clipboard.writeText(id).then(
         () => {
             element.style.color = "#00AA00";
@@ -48,7 +54,7 @@ function copyCourseId(id, element) {
 
             setTimeout(() => {
                 element.innerHTML = "content_copy";
-                element.removeAttribute("style");
+                element.style.color = "";
             }, 2000);
         },
         () => {
@@ -57,12 +63,52 @@ function copyCourseId(id, element) {
 
             setTimeout(() => {
                 element.innerHTML = "content_copy";
-                element.removeAttribute("style");
+                element.style.color = "";
             }, 2000);
         }
     );
+});
+
+bindFunc("[title*=Sync]", element => {
+    const id = element.parentElement.parentElement.parentElement.getAttribute("id");
+    element.disabled = true;
+    element.innerHTML = loadingIcon(5, 5);
+
+    const req = $.ajax({
+        url: "/api/v1/internal/sync/course/schoology",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify({link: "app.schoology.com/course/" + id})
+    });
+
+    req.done(() => {
+        element.disabled = false;
+        element.style.color = "#00AA00";
+        element.innerHTML = "done";
+
+        setTimeout(() => {
+            element.innerHTML = "sync";
+            element.style.color = "";
+        }, 2000);
+    });
+
+    req.fail(() => {
+        element.disabled = false;
+        element.style.color = "#FF7777";
+        element.innerHTML = "error";
+
+        setTimeout(() => {
+            element.innerHTML = "sync";
+            element.style.color = "";
+        }, 2000);
+    });
+});
+
+for (const el of document.getElementsByTagName("img")) {
+    if (!validImage(el))
+        el.style.display = "none";
 }
 
-function displayImage(img) {
-    return !(img.naturalWidth === 0 || img.naturalHeight === 0 || !img.complete);
+function validImage(img) {
+    return img.naturalWidth > 0 && img.naturalHeight > 0 && img.complete;
 }
