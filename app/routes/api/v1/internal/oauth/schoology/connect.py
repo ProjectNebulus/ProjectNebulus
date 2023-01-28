@@ -3,7 +3,6 @@ from datetime import datetime
 import schoolopy
 from flask import request, session
 
-from app.static.python.extensions.integrations.schoology import create_schoology_auth
 from app.static.python.mongodb import create, read, update
 from app.static.python.utils.colors import get_color
 from ... import internal
@@ -38,7 +37,9 @@ async def import_schoology():
         auth.authorize()
     sc = schoolopy.Schoology(auth)
     sc.limit = 1000
-    sections = sc.get_user_sections(sc.get_me()["id"])
+
+    me = sc.get_me()
+    sections = sc.get_user_sections(me["id"])
 
     for section in sections:
         link = "https://" + schoology.schoology_domain + "/course/" + section["id"]
@@ -88,7 +89,7 @@ async def import_schoology():
                 }
             )
 
-        scgrades = sc.get_user_grades_by_section(sc.get_me()["id"], link)
+        scgrades = sc.get_user_grades_by_section(me["id"], link)
         scevents = sc.get_section_events(link)
         for event in scevents:
             if event["type"] == "assignment":
@@ -184,6 +185,7 @@ def schoology_connect():
     access_token_secret = ""
     access_token = ""
     sc = schoolopy.Schoology(schoolopy.Auth(schoology_key, schoology_secret))
+    me = sc.get_me()
 
     if link_method == "OAuth":
         if not schoology_key or not schoology_secret:
@@ -197,6 +199,7 @@ def schoology_connect():
 
         if not auth.authorized:
             return "0"
+
         request_token = auth.request_token
         request_token_secret = auth.request_token_secret
         access_token_secret = auth.access_token_secret
@@ -205,32 +208,32 @@ def schoology_connect():
         session["request_token_secret"] = request_token_secret
         session["access_token_secret"] = access_token_secret
         session["access_token"] = access_token
-        sc = create_schoology_auth(auth)
 
-    session["Schoologyname"] = sc.get_me().name_display
-    session["Schoologyemail"] = sc.get_me().primary_email
+    session["Schoologyname"] = me.name_display
+    session["Schoologyemail"] = me.primary_email
     session["Schoologydomain"] = session["link"]
-    session["Schoologyid"] = sc.get_me().id
+    session["Schoologyid"] = me.id
 
-    if read.check_duplicate_schoology(session["Schoologyemail"]):
+    print(session["Schoologyemail"])
+    if read.check_duplicate_schoology(str(session["Schoologyemail"])):
         return "2"
 
     schoology = {
-        "Schoology_request_token": request_token,
-        "Schoology_request_secret": request_token_secret,
-        "Schoology_access_token": access_token,
-        "Schoology_access_secret": access_token_secret,
-        "schoologyName": session["Schoologyname"],
-        "schoologyEmail": session["Schoologyemail"],
-        "schoologyDomain": session["Schoologydomain"],
-        "apikey": session["key"],
-        "apisecret": session["secret"],
+        "request_token": request_token,
+        "request_secret": request_token_secret,
+        "access_token": access_token,
+        "access_secret": access_token_secret,
+        "name": session["Schoologyname"],
+        "email": session["Schoologyemail"],
+        "domain": session["Schoologydomain"],
+        "api_key": session["key"],
+        "api_secret": session["secret"],
         "type": link_method,
     }
 
     update.schoologyLogin(session["id"], schoology)
     # import_schoology()
-    return str(sc.get_me().name_display + "•" + sc.get_me().primary_email)
+    return str(me.name_display + "•" + me.primary_email)
 
 
 @internal.route("/oauth/schoology/schoolVerify", methods=["POST"])
@@ -240,9 +243,11 @@ def schoology_school_verify():
     schoology_key = request.json.get("key")
     schoology_secret = request.json.get("secret")
     school = request.json.get("school")
+
     try:
         sc = schoolopy.Schoology(schoolopy.Auth(schoology_key, schoology_secret), )
-        email = sc.get_me().primary_email
+        me = sc.get_me()
+        email = me.primary_email
         if email_format in str(email):
             update.add_school_to_user(session["id"], school)
             return "Yes"

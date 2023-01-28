@@ -212,7 +212,9 @@ def get_courses():
             auth.authorize()
             sc = schoolopy.Schoology(auth)
             sc.limit = "100&include_past=1"
-            scCourses = list(sc.get_user_sections(user_id=sc.get_me().id))
+
+            me = sc.get_me()
+            scCourses = list(sc.get_user_sections(user_id=me.id))
             for i in range(0, len(scCourses)):
                 scCourses[i] = dict(scCourses[i])
                 scCourses[i]["link"] = (
@@ -232,7 +234,9 @@ def get_courses():
             auth.authorize()
             sc = schoolopy.Schoology(auth)
             sc.limit = "100&include_past=1"
-            scCourses = list(sc.get_user_sections(user_id=sc.get_me().id))
+            me = sc.get_me()
+
+            scCourses = list(sc.get_user_sections(user_id=me.id))
             for i in range(0, len(scCourses)):
                 scCourses[i] = dict(scCourses[i])
                 scCourses[i]["link"] = (
@@ -244,7 +248,7 @@ def get_courses():
             scSchool = sc.get_school(scCourses[0]["school_id"])
             scCourses.append(scSchool)
 
-            scGroups = list(sc.get_user_groups(user_id=sc.get_me().id))
+            scGroups = list(sc.get_user_groups(user_id=me.id))
             for i in range(0, len(scGroups)):
                 scGroups[i] = dict(scGroups[i])
                 scGroups[i]["link"] = (

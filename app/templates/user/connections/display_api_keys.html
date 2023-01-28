@@ -6,8 +6,8 @@
         <div class="relative bg-gray-50 rounded-lg shadow dark:bg-gray-800">
             <!-- Modal header -->
             <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
-                <h3 class="text-xl font-semibold text-gray-900 dark:text-white"><span id="key-name">Schoology</span> API
-                    Keys
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    <span id="key-name">Schoology</span> API Keys
                 </h3>
                 <button class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm
                      p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -24,17 +24,24 @@
             <div class="p-6 text-gray-500 dark:text-gray-400" style="font-size: 1.1rem">
                 <label>
                     API Key:
-                    <input disabled id="api-key"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-xl px-3 py-2 dark:text-white mb-8
-                           rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 w-full mt-2
+                    <div class="relative mb-8 mt-2 text-xl">
+                        <div class="button-styling text-xl mx-1 h-8">content_copy</div>
+                        <input disabled id="api-key"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm px-3 py-2 dark:text-white
+                           rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 w-full
                            dark:bg-gray-700 dark:focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400">
+                    </div>
                 </label>
                 <label>
                     API Secret:
-                    <input disabled id="api-secret"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg px-3 py-2 mt-2
+                    <div class="relative mt-2 text-xl">
+                        <div class="button-styling text-xl mx-1 h-8">content_copy</div>
+                        <div class="button-styling text-xl mx-1 h-8" id="show" style="right: 2rem">visibility</div>
+                        <input disabled id="api-secret" type="password"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg px-3 py-2
                             focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 w-full dark:bg-gray-700
                             dark:focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+                    </div>
                 </label>
             </div>
             <!-- Modal footer -->

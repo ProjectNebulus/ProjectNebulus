@@ -87,8 +87,8 @@ def reset_psw_email():
 @private_endpoint
 def reset_email():
     if (
-        not (access := session.get("access"))
-        or datetime.now().timestamp() - float(access) > 10 * 60
+            not (access := session.get("access"))
+            or datetime.now().timestamp() - float(access) > 10 * 60
     ):
         return "Unauthorized", 401
 

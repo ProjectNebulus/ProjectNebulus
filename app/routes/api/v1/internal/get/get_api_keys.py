@@ -6,16 +6,10 @@ from .. import internal
 
 @internal.route("/get/api-keys/schoology", methods=["GET"])
 def schoology_api_keys():
-    print("Reached here")
-
     account_name = request.args.get("name")
-    print("Reached here")
-
     schoology = read.get_schoology(id=session["id"])
-    print("Reached here")
 
     if not schoology:
-        print("Reached there")
         return "No schoology found", 422
 
     account = None
@@ -23,11 +17,13 @@ def schoology_api_keys():
         if account.name == account_name:
             break
 
-    print("Reached here")
-    if not account:
-        print("Reached there")
-        return "No account with the specified name found", 422
+    key = account.api_key
+    secret = account.api_secret
 
-    print("Reached here")
+    if request.args.get("hide"):
+        secret = '*' * len(secret)
 
-    return "\n".join((account.api_key, account.api_secret)), 200
+    if not account or not account.api_key or not account.api_secret:
+        return "No schoology account with the specified name found", 422
+
+    return "\n".join((key, secret)), 200

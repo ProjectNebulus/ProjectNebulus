@@ -43,30 +43,9 @@ bindFunc("[title*=Copy]", courseElement => {
     });
 });
 
-bindFunc("[title*=Delete]", element => {
-    const id = element.parentElement.parentElement.parentElement.getAttribute("id");
-    element.disabled = true;
-
-    navigator.clipboard.writeText(id).then(
-        () => {
-            element.style.color = "#00AA00";
-            element.innerHTML = "done";
-
-            setTimeout(() => {
-                element.innerHTML = "content_copy";
-                element.style.color = "";
-            }, 2000);
-        },
-        () => {
-            element.style.color = "#FF7777";
-            element.innerHTML = "error";
-
-            setTimeout(() => {
-                element.innerHTML = "content_copy";
-                element.style.color = "";
-            }, 2000);
-        }
-    );
+bindFunc("[title*=Delete]", el => {
+    const id = el.parentElement.parentElement.parentElement.getAttribute("id");
+    copy(el, id);
 });
 
 bindFunc("[title*=Sync]", element => {

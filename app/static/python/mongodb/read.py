@@ -351,7 +351,7 @@ def check_duplicate_email(email) -> bool:
 
 
 def check_duplicate_schoology(schoology_email) -> str:
-    return User.objects(schoology__schoologyEmail=schoology_email)
+    return User.objects(schoology__email=schoology_email)
 
 
 def get_schoology_auth(user_id) -> schoolopy.Schoology | None:

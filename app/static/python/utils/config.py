@@ -19,7 +19,7 @@ def run():
     Add some of the below functions here.
 
     If you forget to remove database operation fields,
-    it may delete important data.
+    it may delete important data (like I did with my schoology connection).
 
     DO NOT FORGET.
     """
@@ -124,7 +124,8 @@ def migrate_fields(collection_name: str, update_filter: dict, fields: dict[str],
 
     field_updates = {
         embedded_doc_name + new:
-            {'$let': {'vars': {old.lower(): {'$first': '$' + embedded_doc_name + old}}, 'in': '$$' + old.lower()}}
+            {"$set": {embedded_doc_name + new: {"$first": "$" + embedded_doc_name + old} for old, new in
+                      fields.items()}}
         for old, new in fields.items()
     }
 

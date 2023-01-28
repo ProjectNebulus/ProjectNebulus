@@ -135,7 +135,7 @@ def logout_from_schoology(_id: str, schoology_obj: Schoology):
     if not user:
         raise KeyError("User not found")
     user.schoology.remove(schoology_obj)
-    user.save(clean=False)
+    user.save(validate=False, clean=False)
     return "0"
 
 

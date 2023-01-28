@@ -31,8 +31,8 @@ def generate_redirect(url):
 @main_blueprint.route("/settings")
 @logged_in
 def settings():
-    the_schoology = read.get_schoology(id=session["id"])
-    the_google_classroom = read.get_classroom(session["id"])
+    schoology = read.get_schoology(id=session["id"])
+    google_classroom = read.get_classroom(session["id"])
     try:
         credentials = google.oauth2.credentials.Credentials(
             **flask.session["credentials"]
@@ -139,8 +139,8 @@ def settings():
         pswHashes="*" * session.get("pswLen"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-        schoology=the_schoology,
-        classroom=the_google_classroom,
+        schoology=schoology,
+        classroom=google_classroom,
         googleclassroom=user_info,
         schools=schools,
         canvas=canvas,
