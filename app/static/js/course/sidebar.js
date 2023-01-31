@@ -27,7 +27,7 @@ for (const a of document.querySelectorAll("a[target=frame]")) {
 
 {
     const syncButton = document.getElementById("sync-lms");
-    const syncText = syncButton.querySelector("div.ml-3");
+    const syncText = syncButton.querySelector("span.ml-3");
     syncButton.addEventListener("click", () => {
         syncButton.disabled = true;
         syncText.innerText = "Syncing...";
@@ -35,7 +35,11 @@ for (const a of document.querySelectorAll("a[target=frame]")) {
         const xhttp = new XMLHttpRequest();
         xhttp.open('POST', '/api/v1/internal/sync/course/' + syncFrom, true);
         xhttp.setRequestHeader('Content-type', 'application/json');
-        xhttp.send(JSON.stringify({course_id: '{{ course_id }}'}));
+        const data = {link: "app.schoology.com/course/" + syncID};
+        xhttp.send(JSON.stringify(data));
+
+
+
         xhttp.addEventListener("readystatechange", () => {
             if (xhttp.readyState !== XMLHttpRequest.DONE)
                 return;
