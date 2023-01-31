@@ -11,7 +11,7 @@ import schoolopy
 
 from ..classes import *
 
-debug_importing = False  # does not save objects to database
+debug_importing = False  # does not save objects to database if true
 
 
 def generateSchoologyObject(_id: str) -> schoolopy.Schoology:
@@ -150,6 +150,8 @@ def createDocumentFile(data: dict, course=None, save=True) -> DocumentFile:
 
         if course:
             course.documents.append(document_file)
+            if save:
+                course.save(validate=False)
         elif folder:
             folder.documents.append(document_file)
             folder.save()

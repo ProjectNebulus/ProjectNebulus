@@ -510,7 +510,7 @@ function bindFunc(query, func) {
     }
 
     if (!valid)
-        console.error("Query " + query + " did not match any elements");
+        console.warn("Query " + query + " did not match any elements");
 }
 
 function randomCat() {

@@ -1,20 +1,16 @@
 {% if announcements.items()|length == 0 %}
-    <div class="text-black dark:text-white m-3 p-6 rounded-lg w-1/2 dark:bg-gray-900/50 bg-white/50"
+    <div class="text-black dark:text-white m-3 p-6 rounded-lg w-1/2 max-w-lg dark:bg-gray-900/50 bg-white/50"
          style="backdrop-filter: blur(10px);">
-        <h1 class="text-2xl ">Nothing on your Feed!</h1>
+        <h1 class="text-2xl mb-6">Nothing on your Feed!</h1>
         <p>This is where you can see your Nebulus feed. Announcements, updates, news, and anything else of
             importance
             can be found here. </p>
-        <br><br>
+        <br>
         <p>Get started with Nebulus by adding a course!</p>
-        <a href="/courses">
-            <button type="button"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                    style="
-    margin-top: 20px;
-">Add a Course
-            </button>
-        </a>
+        <button class="create text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium
+             rounded-lg text-sm px-5 py-2.5 mt-8 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            Add a Course
+        </button>
     </div>
 {% endif %}
 <ol class="relative border-l border-gray-200 dark:border-gray-700 ml-2">

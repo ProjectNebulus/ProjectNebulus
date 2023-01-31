@@ -41,12 +41,8 @@
     color: #5499c7;
 }
 
-#CourseModal label {
-    font-size: 1.25vw;
-    font-weight: 700;
-    color: lightgray;
+#courseModal label {
     float: left;
-    margin: 5px;
 }
 
 #CourseModal input[type='submit'] {
