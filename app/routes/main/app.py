@@ -189,14 +189,14 @@ def get_courses():
         if schoology and schoology[0].api_key == "":
             schoology = schoology[0]
             key = (
-                    schoology.api_key
-                    or session.get("request_token")
-                    or "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
+                schoology.api_key
+                or session.get("request_token")
+                or "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
             )
             secret = (
-                    schoology.api_secret
-                    or session.get("request_token_secret")
-                    or "59ccaaeb93ba02570b1281e1b0a90e18"
+                schoology.api_secret
+                or session.get("request_token_secret")
+                or "59ccaaeb93ba02570b1281e1b0a90e18"
             )
 
             auth = schoolopy.Auth(
@@ -218,10 +218,7 @@ def get_courses():
             for i in range(0, len(scCourses)):
                 scCourses[i] = dict(scCourses[i])
                 scCourses[i]["link"] = (
-                        schoology.domain
-                        + "course/"
-                        + scCourses[i]["id"]
-                        + "/materials"
+                    schoology.domain + "course/" + scCourses[i]["id"] + "/materials"
                 )
             scSchool = sc.get_school(scCourses[0]["school_id"])
             scCourses.append(scSchool)
@@ -240,10 +237,7 @@ def get_courses():
             for i in range(0, len(scCourses)):
                 scCourses[i] = dict(scCourses[i])
                 scCourses[i]["link"] = (
-                        schoology.domain
-                        + "course/"
-                        + scCourses[i]["id"]
-                        + "/materials"
+                    schoology.domain + "course/" + scCourses[i]["id"] + "/materials"
                 )
             scSchool = sc.get_school(scCourses[0]["school_id"])
             scCourses.append(scSchool)
@@ -251,9 +245,7 @@ def get_courses():
             scGroups = list(sc.get_user_groups(user_id=me.id))
             for i in range(0, len(scGroups)):
                 scGroups[i] = dict(scGroups[i])
-                scGroups[i]["link"] = (
-                        schoology.domain + "group/" + scCourses[i]["id"]
-                )
+                scGroups[i]["link"] = schoology.domain + "group/" + scCourses[i]["id"]
             scSchool = sc.get_school(scCourses[0]["school_id"])
             scGroups.append(scSchool)
 

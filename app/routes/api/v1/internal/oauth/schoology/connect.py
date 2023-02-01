@@ -245,7 +245,7 @@ def schoology_school_verify():
     school = request.json.get("school")
 
     try:
-        sc = schoolopy.Schoology(schoolopy.Auth(schoology_key, schoology_secret), )
+        sc = schoolopy.Schoology(schoolopy.Auth(schoology_key, schoology_secret),)
         me = sc.get_me()
         email = me.primary_email
         if email_format in str(email):
@@ -260,28 +260,22 @@ def schoology_school_verify():
 @internal.route("/oauth/graderoom/connect")
 def graderoom_connect():
     import requests
+
     pairing_key = request.args.get("graderoom_key")
-    params = {
-        "pairingKey": pairing_key
-    }
+    params = {"pairingKey": pairing_key}
     api_key = str(requests.post("https://beta.graderoom.me/api/pair", data=params).text)
     print(api_key)
-    if api_key in ('Invalid pairing key', "This pairing key has expired"):
+    if api_key in ("Invalid pairing key", "This pairing key has expired"):
         return api_key
 
-    params = {
-        "x-api-key": api_key
-    }
-    information = dict(requests.get("https://beta.graderoom.me/api/info", headers=params).json())
-    conversion = {
-        "basis": "BISV",
-        "bellarmine": "BCP",
-        "ndsj": "NDSJ"
-    }
+    params = {"x-api-key": api_key}
+    information = dict(
+        requests.get("https://beta.graderoom.me/api/info", headers=params).json()
+    )
+    conversion = {"basis": "BISV", "bellarmine": "BCP", "ndsj": "NDSJ"}
     school = conversion[information["school"].lower()]
-    update.graderoomLogin(session["id"], {
-        "key": api_key,
-        "username": information["username"],
-        "school": school
-    })
+    update.graderoomLogin(
+        session["id"],
+        {"key": api_key, "username": information["username"], "school": school},
+    )
     return str(information)

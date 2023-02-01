@@ -87,6 +87,7 @@ def get_spotify_auth():
 def spotify_route():
     if not session.get("uuid"):
         import uuid
+
         # Step 1. Visitor is unknown, give random ID
         session["uuid"] = str(uuid.uuid4())
 
@@ -117,15 +118,16 @@ def spotify_route():
     name = spotify.me()["display_name"]
     token_info = str(session.get("token_info"))
     uuid = session.get("uuid")
-    update.spotifyLogin(session["id"], {
-        "avatar": avatar,
-        "name": name,
-        "token_info": token_info,
-        "uuid": uuid,
-    })
+    update.spotifyLogin(
+        session["id"],
+        {"avatar": avatar, "name": name, "token_info": token_info, "uuid": uuid,},
+    )
 
     return render_template(
-        "user/connections/connect_spotify.html", spotify=spotify, auth=False, translate=get_text
+        "user/connections/connect_spotify.html",
+        spotify=spotify,
+        auth=False,
+        translate=get_text,
     )
 
 

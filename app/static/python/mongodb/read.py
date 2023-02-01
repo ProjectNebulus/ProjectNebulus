@@ -152,19 +152,19 @@ def get_canvas(**kwargs) -> list[Canvas] | None:
 
 
 def get_classroom(
-        user_id: str = None, username: str = None, email: str = None
+    user_id: str = None, username: str = None, email: str = None
 ) -> GoogleClassroom:
     return find_user(id=user_id, username=username, email=email).gclassroom
 
 
 def get_spotify(
-        user_id: str = None, username: str = None, email: str = None
+    user_id: str = None, username: str = None, email: str = None
 ) -> Spotify:
     return find_user(id=user_id, username=username, email=email).spotify
 
 
 def get_spotify_cache(
-        user_id: str = None, username: str = None, email: str = None
+    user_id: str = None, username: str = None, email: str = None
 ) -> Spotify | None:
     try:
         return find_user(
@@ -233,12 +233,12 @@ def sortByDateTime(obj):
 
 
 def sort_user_events(
-        user_id: str,
-        courses=None,
-        show_events=True,
-        load_start=0,
-        max_days=8,
-        max_events=10,
+    user_id: str,
+    courses=None,
+    show_events=True,
+    load_start=0,
+    max_days=8,
+    max_events=10,
 ):
     global now
 
@@ -263,8 +263,8 @@ def sort_user_events(
             sorted_events.append(event)
 
     sorted_events = sorted(sorted_events, key=sortByDateTime)[
-                    load_start: load_start + max_events
-                    ]
+        load_start : load_start + max_events
+    ]
 
     grouped_events = dict(
         {
@@ -275,15 +275,15 @@ def sort_user_events(
 
     sorted_announcements = sorted(
         announcements, key=lambda obj: obj.date, reverse=True
-    )[load_start: load_start + max_days]
+    )[load_start : load_start + max_days]
 
     grouped_announcements = dict(
         list(
             {
                 key: list(result)
                 for key, result in groupby(
-                sorted_announcements, key=lambda obj: obj.date.date()
-            )
+                    sorted_announcements, key=lambda obj: obj.date.date()
+                )
             }.items()
         )
     )
@@ -329,9 +329,9 @@ def valid_event(event):
             return True
 
         return (
-                event.grade is not None
-                and event.points
-                and event.grade / event.points < 0.5
+            event.grade is not None
+            and event.points
+            and event.grade / event.points < 0.5
         )
 
     else:
@@ -440,8 +440,8 @@ def search(keyword: str, username: str):
         {"$limit": 50},
     ]
     courses = Course.objects(Q(authorizedUsers=user.id) & Q(name__istartswith=keyword))[
-              :10
-              ]
+        :10
+    ]
     chats = Chat.objects(Q(owner=user.id) & Q(title__istartswith=keyword))[:10]
     NebulusDocuments = NebulusDocument.objects(
         Q(authorizedUsers=user.id) & Q(title__istartswith=keyword)
@@ -510,7 +510,7 @@ def load_chats(user_id: str, current_index, initial_amount, required_fields):
     if len(chats) < current_index + initial_amount:
         initial_amount = len(chats) - current_index
 
-    chats = chats[(current_index + 1): (current_index + initial_amount)]
+    chats = chats[(current_index + 1) : (current_index + initial_amount)]
     for chat in chats:
         if len(chat["members"]) == 2:
             for x, member in enumerate(chat["members"]):

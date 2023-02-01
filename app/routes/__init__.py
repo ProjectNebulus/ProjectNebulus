@@ -40,6 +40,7 @@ class LogFormatter(logging.Formatter):
     """
     Formatter class for logging.
     """
+
     prev_message = ""
     occurrences = 1
 

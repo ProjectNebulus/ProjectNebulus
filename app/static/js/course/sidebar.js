@@ -39,7 +39,6 @@ for (const a of document.querySelectorAll("a[target=frame]")) {
         xhttp.send(JSON.stringify(data));
 
 
-
         xhttp.addEventListener("readystatechange", () => {
             if (xhttp.readyState !== XMLHttpRequest.DONE)
                 return;

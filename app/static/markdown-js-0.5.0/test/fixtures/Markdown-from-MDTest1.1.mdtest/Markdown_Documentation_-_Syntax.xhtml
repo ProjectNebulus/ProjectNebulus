@@ -1,47 +1,51 @@
 <h1>Markdown: Syntax</h1>
 
 <ul id="ProjectSubmenu">
-    <li><a href="/projects/markdown/" title="Markdown Project Page">Main</a></li>
-    <li><a href="/projects/markdown/basics" title="Markdown Basics">Basics</a></li>
-    <li><a class="selected" title="Markdown Syntax Documentation">Syntax</a></li>
-    <li><a href="/projects/markdown/license" title="Pricing and License Information">License</a></li>
-    <li><a href="/projects/markdown/dingus" title="Online Markdown Web Form">Dingus</a></li>
+<li><a href="/projects/markdown/" title="Markdown Project Page">Main</a></li>
+<li><a href="/projects/markdown/basics" title="Markdown Basics">Basics</a></li>
+<li><a class="selected" title="Markdown Syntax Documentation">Syntax</a></li>
+<li><a href="/projects/markdown/license" title="Pricing and License Information">License</a></li>
+<li><a href="/projects/markdown/dingus" title="Online Markdown Web Form">Dingus</a></li>
 </ul>
 
 <ul>
 <li><a href="#overview">Overview</a>
-<ul>
-<li><a href="#philosophy">Philosophy</a></li>
-<li><a href="#html">Inline HTML</a></li>
-<li><a href="#autoescape">Automatic Escaping for Special Characters</a></li>
-</ul></li>
+    <ul>
+        <li><a href="#philosophy">Philosophy</a></li>
+        <li><a href="#html">Inline HTML</a></li>
+        <li><a href="#autoescape">Automatic Escaping for Special Characters</a></li>
+    </ul>
+</li>
 <li><a href="#block">Block Elements</a>
-<ul>
-<li><a href="#p">Paragraphs and Line Breaks</a></li>
-<li><a href="#header">Headers</a></li>
-<li><a href="#blockquote">Blockquotes</a></li>
-<li><a href="#list">Lists</a></li>
-<li><a href="#precode">Code Blocks</a></li>
-<li><a href="#hr">Horizontal Rules</a></li>
-</ul></li>
+    <ul>
+        <li><a href="#p">Paragraphs and Line Breaks</a></li>
+        <li><a href="#header">Headers</a></li>
+        <li><a href="#blockquote">Blockquotes</a></li>
+        <li><a href="#list">Lists</a></li>
+        <li><a href="#precode">Code Blocks</a></li>
+        <li><a href="#hr">Horizontal Rules</a></li>
+    </ul>
+</li>
 <li><a href="#span">Span Elements</a>
-<ul>
-<li><a href="#link">Links</a></li>
-<li><a href="#em">Emphasis</a></li>
-<li><a href="#code">Code</a></li>
-<li><a href="#img">Images</a></li>
-</ul></li>
+    <ul>
+        <li><a href="#link">Links</a></li>
+        <li><a href="#em">Emphasis</a></li>
+        <li><a href="#code">Code</a></li>
+        <li><a href="#img">Images</a></li>
+    </ul>
+</li>
 <li><a href="#misc">Miscellaneous</a>
-<ul>
-<li><a href="#backslash">Backslash Escapes</a></li>
-<li><a href="#autolink">Automatic Links</a></li>
-</ul></li>
+    <ul>
+        <li><a href="#backslash">Backslash Escapes</a></li>
+        <li><a href="#autolink">Automatic Links</a></li>
+    </ul>
+</li>
 </ul>
 
 <p><strong>Note:</strong> This document is itself written using Markdown; you
 can <a href="/projects/markdown/syntax.text">see the source for it by adding '.text' to the URL</a>.</p>
 
-<hr />
+<hr/>
 
 <h2 id="overview">Overview</h2>
 
@@ -53,8 +57,11 @@ can <a href="/projects/markdown/syntax.text">see the source for it by adding '.t
 document should be publishable as-is, as plain text, without looking
 like it's been marked up with tags or formatting instructions. While
 Markdown's syntax has been influenced by several existing text-to-HTML
-filters -- including <a href="http://docutils.sourceforge.net/mirror/setext.html">Setext</a>, <a href="http://www.aaronsw.com/2002/atx/">atx</a>, <a href="http://textism.com/tools/textile/">Textile</a>, <a href="http://docutils.sourceforge.net/rst.html">reStructuredText</a>,
-<a href="http://www.triptico.com/software/grutatxt.html">Grutatext</a>, and <a href="http://ettext.taint.org/doc/">EtText</a> -- the single biggest source of
+filters -- including <a href="http://docutils.sourceforge.net/mirror/setext.html">Setext</a>, <a
+        href="http://www.aaronsw.com/2002/atx/">atx</a>, <a href="http://textism.com/tools/textile/">Textile</a>, <a
+        href="http://docutils.sourceforge.net/rst.html">reStructuredText</a>,
+<a href="http://www.triptico.com/software/grutatxt.html">Grutatext</a>, and <a href="http://ettext.taint.org/doc/">EtText</a>
+-- the single biggest source of
 inspiration for Markdown's syntax is the format of plain text email.</p>
 
 <p>To this end, Markdown's syntax is comprised entirely of punctuation
@@ -106,7 +113,8 @@ This is another regular paragraph.
 HTML tags. E.g., you can't use Markdown-style <code>*emphasis*</code> inside an
 HTML block.</p>
 
-<p>Span-level HTML tags -- e.g. <code>&lt;span&gt;</code>, <code>&lt;cite&gt;</code>, or <code>&lt;del&gt;</code> -- can be
+<p>Span-level HTML tags -- e.g. <code>&lt;span&gt;</code>, <code>&lt;cite&gt;</code>, or <code>&lt;del&gt;</code> -- can
+be
 used anywhere in a Markdown paragraph, list item, or header. If you
 want, you can even use HTML tags instead of Markdown formatting; e.g. if
 you'd prefer to use HTML <code>&lt;a&gt;</code> or <code>&lt;img&gt;</code> tags instead of Markdown's
@@ -177,7 +185,7 @@ Markdown to write about HTML code. (As opposed to raw HTML, which is a
 terrible format for writing about HTML syntax, because every single <code>&lt;</code>
 and <code>&amp;</code> in your example code needs to be escaped.)</p>
 
-<hr />
+<hr/>
 
 <h2 id="block">Block Elements</h2>
 
@@ -204,7 +212,8 @@ work best -- and look better -- when you format them with hard breaks.</p>
 
 <h3 id="header">Headers</h3>
 
-<p>Markdown supports two styles of headers, <a href="http://docutils.sourceforge.net/mirror/setext.html">Setext</a> and <a href="http://www.aaronsw.com/2002/atx/">atx</a>.</p>
+<p>Markdown supports two styles of headers, <a href="http://docutils.sourceforge.net/mirror/setext.html">Setext</a> and
+<a href="http://www.aaronsw.com/2002/atx/">atx</a>.</p>
 
 <p>Setext-style headers are "underlined" using equal signs (for first-level
 headers) and dashes (for second-level headers). For example:</p>
@@ -559,7 +568,7 @@ following lines will produce a horizontal rule:</p>
 _ _ _
 </code></pre>
 
-<hr />
+<hr/>
 
 <h2 id="span">Span Elements</h2>
 
@@ -615,12 +624,14 @@ on a line by itself:</p>
 
 <ul>
 <li>Square brackets containing the link identifier (optionally
-indented from the left margin using up to three spaces);</li>
+    indented from the left margin using up to three spaces);
+</li>
 <li>followed by a colon;</li>
 <li>followed by one or more spaces (or tabs);</li>
 <li>followed by the URL for the link;</li>
 <li>optionally followed by a title attribute for the link, enclosed
-in double or single quotes.</li>
+    in double or single quotes.
+</li>
 </ul>
 
 <p>The link URL may, optionally, be surrounded by angle brackets:</p>
@@ -638,7 +649,8 @@ or tabs for padding, which tends to look better with longer URLs:</p>
 <p>Link definitions are only used for creating links during Markdown
 processing, and are stripped from your document in the HTML output.</p>
 
-<p>Link definition names may constist of letters, numbers, spaces, and punctuation -- but they are <em>not</em> case sensitive. E.g. these two links:</p>
+<p>Link definition names may constist of letters, numbers, spaces, and punctuation -- but they are <em>not</em> case
+sensitive. E.g. these two links:</p>
 
 <pre><code>[link text][a]
 [link text][A]
@@ -854,10 +866,12 @@ for links, allowing for two styles: <em>inline</em> and <em>reference</em>.</p>
 <ul>
 <li>An exclamation mark: <code>!</code>;</li>
 <li>followed by a set of square brackets, containing the <code>alt</code>
-attribute text for the image;</li>
+    attribute text for the image;
+</li>
 <li>followed by a set of parentheses, containing the URL or path to
-the image, and an optional <code>title</code> attribute enclosed in double
-or single quotes.</li>
+    the image, and an optional <code>title</code> attribute enclosed in double
+    or single quotes.
+</li>
 </ul>
 
 <p>Reference-style image syntax looks like this:</p>
@@ -875,13 +889,15 @@ are defined using syntax identical to link references:</p>
 dimensions of an image; if this is important to you, you can simply
 use regular HTML <code>&lt;img&gt;</code> tags.</p>
 
-<hr />
+<hr/>
 
 <h2 id="misc">Miscellaneous</h2>
 
 <h3 id="autolink">Automatic Links</h3>
 
-<p>Markdown supports a shortcut style for creating "automatic" links for URLs and email addresses: simply surround the URL or email address with angle brackets. What this means is that if you want to show the actual text of a URL or email address, and also have it be a clickable link, you can do this:</p>
+<p>Markdown supports a shortcut style for creating "automatic" links for URLs and email addresses: simply surround the
+URL or email address with angle brackets. What this means is that if you want to show the actual text of a URL or email
+address, and also have it be a clickable link, you can do this:</p>
 
 <pre><code>&lt;http://example.com/&gt;
 </code></pre>

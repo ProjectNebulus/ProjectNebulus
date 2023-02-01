@@ -14,4 +14,6 @@ def static_3layer(folder, folder2, folder3, file):
     root_path = next(p for p in current_dir.parents if "ProjectNebulus" in p.parts[-1])
 
     # return the file from the specified directory
-    return send_from_directory(f"{root_path}/app/static/{folder}/{folder2}/{folder3}", file)
+    return send_from_directory(
+        f"{root_path}/app/static/{folder}/{folder2}/{folder3}", file
+    )

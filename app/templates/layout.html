@@ -1,11 +1,11 @@
 <!--Style Sheets!-->
 <html lang="en">
 <head>
-<style>
-    body{
-        background:#111926;
-    }
-</style>
+    <style>
+        body {
+            background: #111926;
+        }
+    </style>
     <script src="/static/progress.js-0.1.0/minified/progress.min.js"></script>
     <link rel="stylesheet" src="/static/progress.js-0.1.0/minified/progressjs.min.css">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
@@ -35,18 +35,18 @@
             width: 5%;
             height: 3px;
             background-image: linear-gradient(to right, #3a88fe, #5e30eb);
-            -moz-transition: width 600ms ease-out,opacity 500ms linear;
-            -ms-transition: width 600ms ease-out,opacity 500ms linear;
-            -o-transition: width 600ms ease-out,opacity 500ms linear;
-            -webkit-transition: width 600ms ease-out,opacity 500ms linear;
-            transition: width 1000ms ease-out,opacity 500ms linear;
+            -moz-transition: width 600ms ease-out, opacity 500ms linear;
+            -ms-transition: width 600ms ease-out, opacity 500ms linear;
+            -o-transition: width 600ms ease-out, opacity 500ms linear;
+            -webkit-transition: width 600ms ease-out, opacity 500ms linear;
+            transition: width 1000ms ease-out, opacity 500ms linear;
         }
     </style>
     <script>
-        window.addEventListener("load", function() {
+        window.addEventListener("load", function () {
             const progressBar = document.getElementById("progress-bar");
             progressBar.style.width = "100%";
-            setTimeout(function() {
+            setTimeout(function () {
                 document.getElementById("progress-bar").style.display = "none";
             }, 1000);
         });

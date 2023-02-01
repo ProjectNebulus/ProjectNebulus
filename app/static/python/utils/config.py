@@ -23,6 +23,7 @@ def run():
 
     DO NOT FORGET.
     """
+    update_imports()
     pass
 
 
@@ -30,8 +31,12 @@ def auto_run():
     save = False
     read_config()
 
-    if (current_time := round(datetime.now().timestamp())) - settings.get("last_cleanup_time", -69) > 30 * 60 * 60 * 24:
-        print("Removed dangling fields in database (this operation is done weekly and automatically)")
+    if (current_time := round(datetime.now().timestamp())) - settings.get(
+        "last_cleanup_time", -69
+    ) > 30 * 60 * 60 * 24:
+        print(
+            "Removed dangling fields in database (this operation is done weekly and automatically)"
+        )
         remove_dangling()
         settings["last_cleanup_time"] = current_time
         save = True
@@ -89,7 +94,9 @@ def update_imports(path: Path = api_path):
 
         if file.name == "__init__.py":
             init_file = file
-        elif not file.name.startswith("__") and (file.name.endswith(".py") or file.is_dir()):
+        elif not file.name.startswith("__") and (
+            file.name.endswith(".py") or file.is_dir()
+        ):
             files.append(f"from .{file.name.replace('.py', '')} import *")
 
     if len(files) == 0:
@@ -117,24 +124,33 @@ def promote_to_staff(username: str):
     print(f"Promoted {username} to staff")
 
 
-def migrate_fields(collection_name: str, update_filter: dict, fields: dict[str], embedded_doc_name=""):
+def migrate_fields(
+    collection_name: str, update_filter: dict, fields: dict[str], embedded_doc_name=""
+):
     from app.static.python.mongodb import db
 
     embedded_doc_name += "."
 
     field_updates = {
-        embedded_doc_name + new:
-            {"$set": {embedded_doc_name + new: {"$first": "$" + embedded_doc_name + old} for old, new in
-                      fields.items()}}
+        embedded_doc_name
+        + new: {
+            "$set": {
+                embedded_doc_name + new: {"$first": "$" + embedded_doc_name + old}
+                for old, new in fields.items()
+            }
+        }
         for old, new in fields.items()
     }
 
     print(field_updates)
 
-    db[collection_name].update_many(update_filter, [
-        {'$set': field_updates},
-        {'$unset': [embedded_doc_name + key for key in fields.keys()]}
-    ])
+    db[collection_name].update_many(
+        update_filter,
+        [
+            {"$set": field_updates},
+            {"$unset": [embedded_doc_name + key for key in fields.keys()]},
+        ],
+    )
 
     print("Done!")
 

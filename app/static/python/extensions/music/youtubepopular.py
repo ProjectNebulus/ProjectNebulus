@@ -22,7 +22,6 @@ SCOPES = "https://www.googleapis.com/auth/youtube.readonly"
 API_SERVICE_NAME = "youtube"
 API_VERSION = "v3"
 
-
 app = flask.Flask(__name__)
 # # Note: A secret key is included in the sample so that it works.
 # # If you use this code in your application, replace this with a truly secret

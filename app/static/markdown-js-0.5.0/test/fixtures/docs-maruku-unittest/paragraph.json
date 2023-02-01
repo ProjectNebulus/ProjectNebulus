@@ -1,1 +1,7 @@
-["html", ["p", "Paragraph"]]
+[
+  "html",
+  [
+    "p",
+    "Paragraph"
+  ]
+]

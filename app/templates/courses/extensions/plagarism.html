@@ -44,22 +44,20 @@
                     text1: message,
                     text2: message1
                 }
-    });
-    request.done(
-
-        function(data){
-            if (data === "short"){
-                document.getElementById("short").style.display = "block";
-            }
-            else {
-                let newdata = data.split("•");
-                document.getElementById('body').innerHTML = `
+            });
+            request.done(
+                function (data) {
+                    if (data === "short") {
+                        document.getElementById("short").style.display = "block";
+                    } else {
+                        let newdata = data.split("•");
+                        document.getElementById('body').innerHTML = `
                 <p class="text-black dark:text-white text-3xl">${newdata[1]} ${newdata[0]}%</p>
                 <img src="${newdata[2]}">
                 `
-            }
-        }
-    );
+                    }
+                }
+            );
 
         }
     </script>

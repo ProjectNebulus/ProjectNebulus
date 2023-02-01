@@ -5,9 +5,9 @@
     when the user clicks and drags, they should be able to draw on the whiteboard.
  -->
     <html>
-        <head>
-            <title>Whiteboard</title>
-            <style>
+    <head>
+        <title>Whiteboard</title>
+        <style>
             html, body {
                 width: 100%;
                 height: 100%;
@@ -18,11 +18,11 @@
             canvas {
                 cursor: crosshair;
             }
-            </style>
-        </head>
-        <body>
-            <!-- make a canvas element. width and height should be the same as the window. -->
-            <div style="width: 80%;
+        </style>
+    </head>
+    <body>
+    <!-- make a canvas element. width and height should be the same as the window. -->
+    <div style="width: 80%;
                         position: absolute;
                         z-index: 300;
                         background-color:gray;
@@ -30,40 +30,40 @@
                         padding: 10px;
                         margin: 20px;
                         text-align: center;">
-                <button type="button"
-                        id="lineWidth"
-                        class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Change Line Width
-                </button>
-                <button id="clear"
-                        type="button"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    <i class="material-icons">delete</i>
-                </button>
-                <button id="save"
-                        type="button"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    <i class="material-icons">download</i>
-                </button>
-                <button id=pen" type="button"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    <i class="material-icons">edit</i>
-                </button>
-                <button id="eraser"
-                        type="button"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    <i class="material-icons">backspace</i>
-                </button>
-                <button id="insert-text"
-                        type="button"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    <i class="material-icons">keyboard</i>
-                </button>
-                <button type="button"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    <input type="color" id="color" value="#000000">
-                </button>
-                <style>
+        <button type="button"
+                id="lineWidth"
+                class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Change Line Width
+        </button>
+        <button id="clear"
+                type="button"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <i class="material-icons">delete</i>
+        </button>
+        <button id="save"
+                type="button"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <i class="material-icons">download</i>
+        </button>
+        <button id=pen" type="button"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <i class="material-icons">edit</i>
+        </button>
+        <button id="eraser"
+                type="button"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <i class="material-icons">backspace</i>
+        </button>
+        <button id="insert-text"
+                type="button"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <i class="material-icons">keyboard</i>
+        </button>
+        <button type="button"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <input type="color" id="color" value="#000000">
+        </button>
+        <style>
             #color {
                 -webkit-appearance: none;
                 padding: 0;
@@ -86,14 +86,14 @@
                 border-radius: 10px;
                 padding: 0;
             }
-                </style>
-            </div>
-            <canvas id="whiteboard"
-                    width="100%"
-                    height="100%"
-                    style="background:white;
+        </style>
+    </div>
+    <canvas id="whiteboard"
+            width="100%"
+            height="100%"
+            style="background:white;
                            border-radius:10px;"></canvas>
-            <script>
+    <script>
         var canvas = document.getElementById('whiteboard');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight - 50;
@@ -108,10 +108,10 @@
             lastX = e.offsetX;
             lastY = e.offsetY;
         });
-        canvas.addEventListener('mouseup', function(e) {
+        canvas.addEventListener('mouseup', function (e) {
             mouseDown = false;
         });
-        canvas.addEventListener('mousemove', function(e) {
+        canvas.addEventListener('mousemove', function (e) {
             if (mouseDown) {
                 ctx.beginPath();
                 ctx.moveTo(lastX, lastY);
@@ -124,7 +124,7 @@
             }
         });
 
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.keyCode == 88) {
                 e.preventDefault();
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -132,7 +132,7 @@
         });
 
         //command-l to change the line width
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             e.preventDefault();
             if (e.keyCode == 76) {
                 lineWidth = lineWidth + 1;
@@ -142,21 +142,21 @@
             }
         });
 
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.keyCode == 67) {
                 e.preventDefault();
                 color = prompt('What color would you like to use?');
             }
         });
 
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.keyCode == 87) {
                 e.preventDefault();
                 lineWidth = prompt('What line width would you like to use?');
             }
         });
 
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.keyCode == 83) {
                 e.preventDefault();
                 var data = canvas.toDataURL();
@@ -169,30 +169,30 @@
             }
         });
 
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.keyCode == 69) {
                 e.preventDefault();
                 color = 'white';
             }
         });
 
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.keyCode == 72) {
                 e.preventDefault();
                 alert('option+x: clear the canvas\ncommand+c: change the color\ncommand+w: change the line width\ncommand+s: save the canvas as an image');
             }
         });
 
-        document.getElementById('lineWidth').addEventListener('click', function(e) {
+        document.getElementById('lineWidth').addEventListener('click', function (e) {
             lineWidth = prompt('What line width would you like to use?');
             color = document.getElementById('color').value;
         });
 
-        document.getElementById('clear').addEventListener('click', function(e) {
+        document.getElementById('clear').addEventListener('click', function (e) {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         });
 
-        document.getElementById('save').addEventListener('click', function(e) {
+        document.getElementById('save').addEventListener('click', function (e) {
             var data = canvas.toDataURL();
             var link = document.createElement('a');
             link.download = prompt('What would you like to name the image?');
@@ -202,20 +202,20 @@
             }
         });
 
-        document.getElementById('color').addEventListener('change', function(e) {
+        document.getElementById('color').addEventListener('change', function (e) {
             color = document.getElementById('color').value;
         });
 
 
-        document.getElementById('pen').addEventListener('click', function(e) {
+        document.getElementById('pen').addEventListener('click', function (e) {
             color = 'black';
         });
 
-        document.getElementById('eraser').addEventListener('click', function(e) {
+        document.getElementById('eraser').addEventListener('click', function (e) {
             color = 'white';
         });
 
-        document.getElementById('insert-text').addEventListener('click', function(e) {
+        document.getElementById('insert-text').addEventListener('click', function (e) {
             var text = prompt('What would you like to write?');
             ctx.font = '30px Arial';
             ctx.fillStyle = color;
@@ -229,7 +229,7 @@
             });
         });
 
-            </script>
-        </body>
+    </script>
+    </body>
     </html>
 {% endblock %}

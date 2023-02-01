@@ -20,7 +20,9 @@ def get_locale():
 def screenTime():
     data = int(request.args.get("data"))
     location = request.args.get("location")
-    print(f"[Screen Time Log | {datetime.date.today()} @ '{location}'] {data / 1000} seconds")
+    print(
+        f"[Screen Time Log | {datetime.date.today()} @ '{location}'] {data / 1000} seconds"
+    )
     return str(data)
 
 
@@ -65,7 +67,7 @@ def specific_school(school):
         "PALY",
         "LNBK",
         "CLGBA",
-        "NBLS"
+        "NBLS",
     ]
     if school not in schools:
         return render_template("errors/404.html", translate=get_text), 404

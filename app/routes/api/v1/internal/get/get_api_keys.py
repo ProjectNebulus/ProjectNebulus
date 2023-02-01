@@ -21,7 +21,7 @@ def schoology_api_keys():
     secret = account.api_secret
 
     if request.args.get("hide"):
-        secret = '*' * len(secret)
+        secret = "*" * len(secret)
 
     if not account or not account.api_key or not account.api_secret:
         return "No schoology account with the specified name found", 422

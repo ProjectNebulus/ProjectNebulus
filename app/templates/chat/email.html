@@ -5,18 +5,18 @@
         <table id="table"
                class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-200/75 dark:bg-gray-700/75 dark:text-gray-400">
-                <tr>
-                    <th scope="col" class="px-6 py-3">Inbox</th>
-                    <th scope="col" class="px-6 py-3"></th>
-                    <th scope="col" class="px-6 py-3"></th>
-                    <th scope="col" class="px-6 py-3">
-                        <button class="material-icons p-1 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-500"
-                                style="vertical-align: bottom; float: right"
-                                onclick="window.location.reload(); this.innerHTML = loadingIcon('1.5rem'); this.disabled = 'true'">
-                            refresh
-                        </button>
-                    </th>
-                </tr>
+            <tr>
+                <th scope="col" class="px-6 py-3">Inbox</th>
+                <th scope="col" class="px-6 py-3"></th>
+                <th scope="col" class="px-6 py-3"></th>
+                <th scope="col" class="px-6 py-3">
+                    <button class="material-icons p-1 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-500"
+                            style="vertical-align: bottom; float: right"
+                            onclick="window.location.reload(); this.innerHTML = loadingIcon('1.5rem'); this.disabled = 'true'">
+                        refresh
+                    </button>
+                </th>
+            </tr>
             </thead>
             <tbody id="tbody"></tbody>
         </table>
@@ -75,18 +75,18 @@
 
                             </div>`
 
-                images += `
+                    images += `
                  <img data-dropdown-toggle="userDropdown_a${count}" class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="${author["avatar"]}" alt="">
                 `;
-                for (let i = 0; i<recipients.length; i++){
-                    address+= `<span data-dropdown-toggle="userDropdown${count}_r${i}" class="hover:underline">${recipients[i]["name"]}</span>`
-                    if (i !== (recipients.length - 1)){
-                        address += ", "
-                    }
-                    images += `
+                    for (let i = 0; i < recipients.length; i++) {
+                        address += `<span data-dropdown-toggle="userDropdown${count}_r${i}" class="hover:underline">${recipients[i]["name"]}</span>`
+                        if (i !== (recipients.length - 1)) {
+                            address += ", "
+                        }
+                        images += `
                  <img data-dropdown-toggle="userDropdown1_${count}${i}" class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="${recipients[i]["avatar"]}" alt="">
                 `;
-                    profiles += `
+                        profiles += `
                     <div id="userDropdown${count}_r${i}" class="z-50 bg-white divide-y divide-gray-100 rounded shadow w-80 dark:bg-gray-700 dark:divide-gray-600 rounded-lg block" data-popper-placement="bottom" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 109.5px, 0px);">
                                 <div style="border-radius:10px 10px 0 0; height:60px;background:rgb${recipients[i]["color"]};">
 
@@ -114,7 +114,7 @@
 
                             </div>`
 
-                }
+                    }
                     images += "</div>";
                     document.getElementById('tbody').innerHTML += `
             <tr onclick="openEmail(' ${subject}', ' ${dmessage}')" class="bg-white dark:bg-gray-800 border-b  dark:border-gray-700">

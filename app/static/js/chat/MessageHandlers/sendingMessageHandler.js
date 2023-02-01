@@ -1,6 +1,7 @@
 import toIsoString from '../timeUtils/toIsoString.js';
 
 $('#pressMe').on('click', sendMessage);
+
 function sendMessage(socket) {
     let chatBox = document.getElementById('msg_content');
     if (!/\S/.test(chatBox.value)) return;

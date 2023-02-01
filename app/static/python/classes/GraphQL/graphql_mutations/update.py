@@ -1,7 +1,6 @@
-from ...Document import DocumentFile as DocumentFileModel
-from ...User import User as UserModel
 from ..graphene_models import *
 from ..graphql_inputs.update_inputs import *
+from ...Document import DocumentFile as DocumentFileModel
 
 
 class UpdateUser(graphene.Mutation):

@@ -1,1 +1,10 @@
-["html", ["pre", ["code", "       $ python       "]]]
+[
+  "html",
+  [
+    "pre",
+    [
+      "code",
+      "       $ python       "
+    ]
+  ]
+]
