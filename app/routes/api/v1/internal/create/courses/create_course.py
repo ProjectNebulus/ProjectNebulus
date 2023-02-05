@@ -41,18 +41,6 @@ def credentials_to_dict(credentials):
     }
 
 
-def create_documents(sync=False):
-    ...
-
-
-def create_grades(sync=False):
-    ...
-
-
-def create_announcements(sync=False):
-    ...
-
-
 def create_members(sc, course):
     members = sc.get_enrollments(course["id"])
     teachers = []

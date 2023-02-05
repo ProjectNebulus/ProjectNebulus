@@ -19,7 +19,7 @@ def run():
     Add some of the below functions here.
 
     If you forget to remove database operation fields,
-    it may delete important data (like I did with my schoology connection).
+    it may delete important data.
 
     DO NOT FORGET.
     """
@@ -32,7 +32,7 @@ def auto_run():
     read_config()
 
     if (current_time := round(datetime.now().timestamp())) - settings.get(
-        "last_cleanup_time", -69
+            "last_cleanup_time", -69
     ) > 30 * 60 * 60 * 24:
         print(
             "Removed dangling fields in database (this operation is done weekly and automatically)"
@@ -84,22 +84,27 @@ def update_imports(path: Path = api_path):
 
     init_file = None
     files = []
+    empty = True
 
     for file in path.iterdir():
+        if file.name.startswith("__"):
+            if file.name == "__init__.py":
+                init_file = file
+            else:
+                continue
+
         if file.is_dir() and not file.name.startswith("__"):
             update_imports(file)
+
+        empty = False
 
         if path.name.endswith("internal"):
             continue
 
-        if file.name == "__init__.py":
-            init_file = file
-        elif not file.name.startswith("__") and (
-            file.name.endswith(".py") or file.is_dir()
-        ):
+        if file != init_file and file.name.endswith(".py") or file.is_dir():
             files.append(f"from .{file.name.replace('.py', '')} import *")
 
-    if len(files) == 0:
+    if empty or path.name.endswith("internal"):
         return
 
     assert init_file is not None, f"No __init__.py file found in directory {path}."
@@ -125,7 +130,7 @@ def promote_to_staff(username: str):
 
 
 def migrate_fields(
-    collection_name: str, update_filter: dict, fields: dict[str], embedded_doc_name=""
+        collection_name: str, update_filter: dict, fields: dict[str], embedded_doc_name=""
 ):
     from app.static.python.mongodb import db
 

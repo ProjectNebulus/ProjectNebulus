@@ -156,7 +156,7 @@ def selectregion():
 
 
 @main_blueprint.route("/global/<country>")
-def globalcountry(country):
+def global_country(country):
     session["global"] = country
     return redirect("/")
 
@@ -189,7 +189,7 @@ def internal_error(e):
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         translate=get_text,
-    )
+    ), 500
 
 
 @main_blueprint.route("/sw.js")

@@ -12,37 +12,15 @@ from .. import internal
 @internal.route("/create/user", methods=["POST"])
 def create_user():
     data = request.get_json()
-    cats = {
-        1: "black_cat.png",
-        2: "blue_cat.png",
-        3: "green_cat.png",
-        4: "pink_cat.png",
-        5: "yellow_cat.png",
-        6: "blurple_cat.png",
-        7: "red_cat.png",
-        8: "100_cat.png",
-        9: "river_cat.png",
-        10: "cake_cat.png",
-        11: "ocean_cat.png",
-        12: "mountains.png",
-        13: "pizza.png",
-        14: "popTart.png",
-        15: "v3.gif",
-        16: "v2.gif",
-        17: "newBlue.png",
-        18: "newGreen.png",
-        19: "newJade.png",
-        20: "newPink.png",
-        21: "newRed.png",
-        22: "newYellow.png",
-        23: "ukraine.png",
-        24: "pride.png",
-    }
+    cats = ['black_cat.png', 'blue_cat.png', 'green_cat.png', 'pink_cat.png', 'yellow_cat.png', 'blurple_cat.png',
+            'red_cat.png', '100_cat.png', 'river_cat.png', 'cake_cat.png', 'ocean_cat.png', 'mountains.png',
+            'pizza.png', 'popTart.png', 'v3.gif', 'v2.gif', 'newBlue.png', 'newGreen.png', 'newJade.png', 'newPink.png',
+            'newRed.png', 'newYellow.png', 'ukraine.png', 'pride.png']
 
     data["avatar"] = cats[int(data["avatar"].replace("cat", ""))]
     data["avatar"] = Avatar(
         avatar_url="https://beta.nebulus.ml/static/images/nebulusCats/"
-        + data["avatar"],
+                   + data["avatar"],
         parent="User",
     )
     data["age"] = datetime.strptime(data["age"].strip(), "%m/%d/%Y")
