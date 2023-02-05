@@ -136,13 +136,13 @@ def createGrades(data: dict, course=None, save=True) -> Grades:
 
 
 def createDocumentFile(data: dict, course=None, save=True) -> DocumentFile:
-    if file_ending := data.get("file_ending"):
+    if data.get("file_ending"):
         del data["file_ending"]
 
     document_file = DocumentFile(**data)
 
     if save and not debug_importing:
-        document_file.save(force_insert=True)
+        document_file.save(validate=False, force_insert=True)
 
         folder = document_file.folder
         if not course:

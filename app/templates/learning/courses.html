@@ -16,7 +16,7 @@
     {% include "utils/navbar.html" %}
     <div id="middle2" style="width: 90%;overflow-y: auto;margin: auto;height: 80%;">
         <div class="text-black dark:text-white m-auto mt-16 p-6 rounded-lg w-1/2 max-w-lg dark:bg-gray-900/50 bg-white/50
-            {%- if user.courses|length > 0 -%}hidden{%- endif -%}" id="no-courses"
+            {% if user_courses|length > 0 %}hidden{% endif %}" id="no-courses"
              style="backdrop-filter: blur(10px);">
             <h1 class="text-2xl">You don't have any Courses yet!</h1>
             <p style=" margin-top: 10px; margin-bottom: 10px; ">You can...</p>
@@ -50,16 +50,16 @@
                                     <div class="hover:bg-gray-200 dark:hover:bg-gray-600 p-2"
                                          title="Copy Course Id">content_copy
                                     </div>
-                                    <div class="hover:bg-gray-200 dark:hover:bg-gray-600 p-2"
-                                         title="Delete Course">
-                                        delete
-                                    </div>
                                     {% if course.imported_from != "Nebulus" %}
                                         <div class="hover:bg-gray-200 dark:hover:bg-gray-600 p-2"
                                              title="Sync Course">
                                             sync
                                         </div>
                                     {% endif %}
+                                    <div class="hover:bg-gray-200 dark:hover:bg-gray-600 p-2"
+                                         title="Delete Course">
+                                        delete
+                                    </div>
                                 </div>
                                 <div class="text-left">
                                     <div class="p-4 flex">

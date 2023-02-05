@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import re
 from datetime import datetime
 
@@ -7,36 +9,33 @@ from flask import request, session
 from app.static.python.classes import *
 from app.static.python.mongodb import create, read
 from app.static.python.mongodb.create import debug_importing
-from app.static.python.mongodb.delete import delete_course
 from app.static.python.utils.colors import get_color
+from static.python.mongodb.delete import delete_course
 from ... import internal
 
-# ok everyone lets work on dis file
 date_regex = "(\d{1,4})(\/|-)(\d{1,4})(\/|-)(\d{2,4})"
 
 
-@internal.route("/create/course/schoology", methods=["POST"])
-def create_schoology_course():
+@internal.route("/sync/course/schoology", methods=["POST"])
+def sync_schoology_course():
     schoology_course_route(True)
 
 
 @internal.route("/create/course/schoology", methods=["POST"])
-def schoology_course_route(create=False):
+def schoology_course_route(sync=False):
     post_data = request.json
-    print(f"Request Received '/{'create' if create else 'create'}/course/schoology'")
+    print(f"Request Received '/{'sync' if sync else 'create'}/course/schoology'")
     if request.method == "GET":
         post_data = request.args
     link = post_data["link"]
     if "schoology" in link:
         index = link.index("/course/") + 8
-        link = link[index : index + 10]
+        link = link[index: index + 10]
 
     user, domain, sc = get_schoology()
-    section = sc.get_course(link)
+    section = dict(sc.get_section(link))
 
-    return create_schoology_course(
-        section, link, post_data["teacher"], user, sc, create
-    )
+    return create_schoology_course(section, link, post_data["teacher"], user, sc, sync)
 
 
 def get_schoology() -> tuple[schoolopy.User, str, schoolopy.Schoology]:
@@ -71,25 +70,21 @@ def get_schoology() -> tuple[schoolopy.User, str, schoolopy.Schoology]:
     return user, schoology.domain, sc
 
 
-def create_schoology_course(
-    section, section_id, teacher, user, sc: schoolopy.Schoology = None, sync=False
-):
+def create_schoology_course(section, section_id, teacher, user, sc: schoolopy.Schoology = None, sync=False):
     name = f'{section["course_title"]} ({section["section_title"]})'
     course_obj = Course.objects(imported_id=str(section["id"]))
     assert len(course_obj) <= 1
 
     if not course_obj:
-        course_obj = create.create_course(
-            {
-                "name": name,
-                "description": section["description"],
-                "imported_from": "Schoology",
-                "authorizedUsers": [session["id"]],
-                "teacher": teacher,
-                "imported_id": str(section["id"]),
-                "type": "Imported",
-            }
-        )
+        course_obj = create.create_course({
+            "name": name,
+            "description": section["description"],
+            "imported_from": "Schoology",
+            "authorizedUsers": [session["id"]],
+            "teacher": teacher,
+            "imported_id": str(section["id"]),
+            "type": "Imported",
+        })
 
     elif not sync:
         return "This course already has been imported!", 422
@@ -97,22 +92,19 @@ def create_schoology_course(
     else:
         course_obj = course_obj[0]
 
-    if not debug_importing and (
-        not sync or section["profile_url"] != course_obj.avatar.avatar_url
-    ):
+    if not debug_importing and (not sync or section["profile_url"] != course_obj.avatar.avatar_url):
         create.createAvatar(
             {
                 "avatar_url": section["profile_url"],
                 "parent": "Course",
                 "parent_id": course_obj.id,
             },
-            course_obj,
+            course_obj
         )
 
     success = False
 
     try:
-        # updates
         sc_updates = sc.get_section_updates(section_id)
 
         announcements = []
@@ -121,10 +113,7 @@ def create_schoology_course(
             if len(course_obj.announcements) == len(sc_updates):
                 skip = True
             else:
-                announcements = {
-                    announcement.imported_id
-                    for announcement in course_obj.announcements
-                }
+                announcements = {announcement.imported_id for announcement in course_obj.announcements}
 
         if not skip:
             prev_id = None
@@ -155,32 +144,34 @@ def create_schoology_course(
                             "author_school": school,
                             "imported_id": str(update["id"]),
                         },
-                        course_obj,
+                        course_obj
                     )
                 )
 
-        # Grades (fetch)
-        print(user["id"], section_id, section["id"])
+        print("Announcements done")
+
         sc_grades = sc.get_user_grades_by_section(user["id"], section_id)
-        print(sc_grades)
-        sc_grades = sc_grades[0]
-        print("Grades:", sc_grades)
-
         categories = {}
-        sc_grading_categories = sc.get_grading_categories(section_id)
-        print("Grading Categories:", sc_grading_categories)
 
-        for category in sc_grading_categories:
-            categories[category["id"]] = {
-                "title": category["title"],
-                "weight": category.get("weight", 100) / 100,
-                "calculation_type": category.get("calculation_type", 2),
-                "imported_id": category["id"],
-            }
+        if sc_grades:
+            sc_grades = sc_grades[0]
 
-        print(categories)
+            sc_grading_categories = sc.get_grading_categories(section_id)
+            print("Grading Categories:", sc_grading_categories)
 
-        # Discussions
+            for category in sc_grading_categories:
+                categories[category["id"]] = {
+                    "title": category["title"],
+                    "weight": category.get("weight", 100) / 100,
+                    "calculation_type": category.get("calculation_type", 2),
+                    "imported_id": category["id"]
+                }
+
+            print(categories)
+
+        else:
+            print("No Grades found for section " + section_id)
+
         sc_discussions = sc.get_discussions(section_id=section_id)
         for i in range(0, len(sc_discussions)):
             sc_discussion = sc_discussions[i]
@@ -188,7 +179,6 @@ def create_schoology_course(
                 section_id=section_id, discussion_id=sc_discussion["id"]
             )
 
-        # Assignments
         sc_assignments = sc.get_assignments(section["id"])
         assignments = {}
         skip = False
@@ -197,10 +187,7 @@ def create_schoology_course(
             if len(course_obj.assignments) == len(sc_updates):
                 skip = True
             else:
-                assignments = {
-                    assignment.imported_id: assignment
-                    for assignment in course_obj.assignments
-                }
+                assignments = {assignment.imported_id: assignment for assignment in course_obj.assignments}
                 print(assignments)
 
         if not skip:
@@ -220,24 +207,21 @@ def create_schoology_course(
                     "allow_submissions": int(assignment["allow_dropbox"]) == 1,
                     "course": str(course_obj.id),
                     "points": float(assignment["max_points"]),
-                    "grading_category": categories.get(
-                        int(assignment["grading_category"]), None
-                    ),
                     "imported_from": "Schoology",
                     "import_link": assignment["web_url"],
                     "imported_id": str(assignment["id"]),
                 }
 
-                if not int(assignment["allow_dropbox"]) or int(
-                    assignment.get("completed", 0)
-                ):
+                if sc_grades:
+                    data["grading_category"] = categories.get(int(assignment["grading_category"]), None)
+
+                if not int(assignment["allow_dropbox"]) or int(assignment.get("completed", 0)):
                     data["submitDate"] = datetime.max
 
-                assignments[assignment["id"]] = create.createAssignment(
-                    data, course_obj
-                )
+                assignments[assignment["id"]] = create.createAssignment(data, course_obj)
 
-        # Events
+        print("Assignments done")
+
         sc_events = sc.get_section_events(section_id)
         events = []
 
@@ -258,91 +242,97 @@ def create_schoology_course(
                             "course": str(course_obj.id),
                             "title": event["title"],
                             "description": event["description"],
-                            "date": datetime.strptime(
-                                event["start"], "%Y-%m-%d %H:%M:%S"
-                            ),
+                            "date": datetime.strptime(event["start"], "%Y-%m-%d %H:%M:%S"),
                             "imported_from": "Schoology",
                             "imported_id": str(event["id"]),
                         },
-                        course_obj,
+                        course_obj
                     )
                 )
 
+        print("Events done")
+
+        folders = []
         terms = []
 
-        # Grades (assign to assignments)
-        for period in sc_grades["period"]:
-            title = period["period_title"]
-            dates = re.findall(date_regex, title)
-            if len(dates) == 2:
-                try:
-                    start_date = datetime.strptime("%m/%d/%y", dates[0])
-                    end_date = datetime.strptime("%m/%d/%y", dates[1])
-                except ValueError:
-                    start_date = datetime.strptime("%m-%d-%y", dates[0])
-                    end_date = datetime.strptime("%m-%d-%y", dates[1])
+        if sc_grades:
+            for period in sc_grades["period"]:
+                title = period["period_title"]
+                dates = re.findall(date_regex, title)
+                if len(dates) == 2:
+                    try:
+                        start_date = datetime.strptime("%m/%d/%y", dates[0])
+                        end_date = datetime.strptime("%m/%d/%y", dates[1])
+                    except ValueError:
+                        start_date = datetime.strptime("%m-%d-%y", dates[0])
+                        end_date = datetime.strptime("%m-%d-%y", dates[1])
 
-                terms.append(
-                    term := TermGrade(
-                        title=period["period_title"],
-                        grading_categories=list(categories.values()),
-                        start_date=start_date,
-                        end_date=end_date,
-                    )
-                )
+                    terms.append(
+                        term := TermGrade(title=period["period_title"], grading_categories=list(categories.values()),
+                                          start_date=start_date, end_date=end_date))
 
-            else:
-                terms.append(
-                    term := TermGrade(
-                        title=period["period_title"],
-                        grading_categories=list(categories.values()),
-                    )
-                )
+                else:
+                    terms.append(
+                        term := TermGrade(title=period["period_title"], grading_categories=list(categories.values())))
 
-            for assignment in period["assignment"]:
-                assignment_obj = prev_obj = assignments.get(assignment["assignment_id"])
-                assignment_obj.grade = assignment["grade"]
-                assignment_obj.period = term
+                for assignment in period["assignment"]:
+                    assignment_obj = prev_obj = assignments.get(assignment["assignment_id"])
+                    assignment_obj.grade = assignment["grade"]
+                    assignment_obj.period = term
 
-                if comment := assignment.get("comment"):
-                    assignment_obj.comment = comment
+                    if comment := assignment.get("comment"):
+                        assignment_obj.comment = comment
 
-                if hash(assignment_obj) != hash(prev_obj) and not debug_importing:
-                    assignment_obj.save(validate=False)
+                    if hash(assignment_obj) != hash(prev_obj) and not debug_importing:
+                        assignment_obj.save(validate=False)
 
-        grades = Grades(student=read.find_user(id=session["id"]), terms=terms)
-        if not debug_importing:
-            grades.course = course_obj
-            course_obj.grades = grades
+            grades = Grades(student=read.find_user(id=session["id"]), terms=terms)
+            if not debug_importing:
+                grades.course = course_obj
+                course_obj.grades = grades
 
-        # Documents
+            print("Assigning grades to assignments done")
+
         sc_documents = sc.get_section_documents(section_id)
         documents = []
 
         for sc_document in sc_documents:
-            file = sc_document["attachments"]["files"]["file"]
-            if not len(file):
+            if not (attachment := sc_document.get("attachments")):
                 continue
 
-            file = file[0]
-
             document = {
-                "schoology_id": sc_document["id"],
                 "name": sc_document["title"],
-                "file_ending": file["extension"],
                 "course": str(course_obj.id),
-                "url": file["download_path"],
                 "imported_id": str(sc_document["id"]),
                 "imported_from": "Schoology",
             }
 
-            if timestamp := file.get("timestamp"):
-                document["upload_date"] = datetime.fromtimestamp(timestamp)
+            if files := attachment.get("files"):
+                for file in files["file"]:
+                    document["file_ending"] = file["extension"]
+                    document["type"] = "file"
 
-            filename = section_id.split("/")[-1]
+                    if timestamp := file.get("timestamp"):
+                        document["upload_date"] = datetime.fromtimestamp(timestamp)
+
+            if videos := attachment.get("videos"):
+                for video in videos["video"]:
+                    document["url"] = video["url"]
+                    document["type"] = "video"
+
+            if links := attachment.get("links"):
+                for link in links["link"]:
+                    document["url"] = link["url"]
+                    document["type"] = "link"
+
+                    if summary := link.get("summary"):
+                        document["description"] = summary
+
             mongo_document = create.createDocumentFile(document, course_obj)
 
             documents.append(mongo_document)
+
+        print("Documents done!")
 
         if not debug_importing:
             course_obj.save(validate=False)
@@ -351,7 +341,6 @@ def create_schoology_course(
 
     finally:
         if not success:
-            # Delete course if error occurs
             delete_course(course_obj)
 
     print(documents, announcements, assignments, events, sep="\n")
