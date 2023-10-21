@@ -1,11 +1,17 @@
-["html",
-  ["ul",
-    ["li",
-      ["p",
+[
+  "html",
+  [
+    "ul",
+    [
+      "li",
+      [
+        "p",
         "Loose list"
       ],
-      ["pre",
-        ["code",
+      [
+        "pre",
+        [
+          "code",
           "some code\n\nmore code"
         ]
       ]

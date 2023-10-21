@@ -1,21 +1,29 @@
-["html",
-  ["dl",
-    ["dt",
+[
+  "html",
+  [
+    "dl",
+    [
+      "dt",
       "fruit"
     ],
-    ["dt",
+    [
+      "dt",
       "vegetable"
     ],
-    ["dd",
+    [
+      "dd",
       "tomato"
     ],
-    ["dt",
+    [
+      "dt",
       "animal"
     ],
-    ["dt",
+    [
+      "dt",
       "mineral"
     ],
-    ["dd",
+    [
+      "dd",
       "pet rock"
     ]
   ]

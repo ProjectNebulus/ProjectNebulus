@@ -1,6 +1,10 @@
-["html",
-  ["p",
-    { "foo" : "bar baz" },
+[
+  "html",
+  [
+    "p",
+    {
+      "foo": "bar baz"
+    },
     "A paragraph with a\nquoted attribute."
   ]
 ]

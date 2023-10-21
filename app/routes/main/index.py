@@ -1,49 +1,39 @@
-import json
 from pathlib import Path
-from urllib.request import urlopen
 
 from flask import redirect, render_template, request, send_file, session
 
+from app.static.python.mongodb.read import getText
 from . import main_blueprint
+from .. import babel
+
+
+@babel.localeselector
+def get_locale():
+    if session.get("lang") == "es":
+        return "es"
+    else:
+        return "en"
 
 
 @main_blueprint.route("/", methods=["GET"])
 def index():
-    # return "hi"
-    # ip = request.remote_addr
-    # return jsonify({'ip': request.remote_addr}), 200
-
-    if request.headers.getlist("X-Forwarded-For"):
-        ip = request.headers.getlist("X-Forwarded-For")[0]
-    else:
-        ip = request.remote_addr
-    try:
-        url = f"freegeoip.net/{ip}/json"
-        response = urlopen(url)
-        data = json.load(response)
-        return str(data)
-        IP = data["ip"]
-        org = data["org"]
-        city = data["city"]
-        country = data["country"]
-        region = data["region"]
-
-    except:
-        country = "US"
-
     return render_template(
         "main/index.html",
         page="Nebulus - Learning, All In One",
         user=session.get("username"),
         email=session.get("email"),
-        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        avatar=session.get(
+            "avatar",
+            "/static/images/nebulusCats/v3.gif",
+        ),
+        translate=getText,
     )
 
 
 @main_blueprint.route("/google34d8c04c4b82b69a.html")
 def googleVerification():
     # GOOGLE VERIFICATION FILE
-    return render_template("utils/google34d8c04c4b82b69a.html")
+    return render_template("utils/google_site_verification.html", translate=getText)
 
 
 @main_blueprint.route("/arc-sw.js")
@@ -66,11 +56,12 @@ def tos():
 @main_blueprint.route("/select-a-region")
 def selectregion():
     return render_template(
-        "main/global/select-a-region.html",
+        "main/select-a-region.html",
         user=session.get("username"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         page="Select a Region",
+        translate=getText,
     )
 
 
@@ -89,6 +80,7 @@ def page_not_found(e):
             user=session.get("username"),
             email=session.get("email"),
             avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+            translate=getText,
         ),
         404,
     )
@@ -104,6 +96,7 @@ def internal_error(e):
             user=session.get("username"),
             email=session.get("email"),
             avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+            translate=getText,
         ),
         500,
     )
@@ -116,31 +109,122 @@ def sw():
     return send_file(str(path.parent.parent.parent) + "/static/js/sw.js")
 
 
+@main_blueprint.route("/sitemap.xml")
+def sitemap():
+    path = Path(__file__)
+    print(path.parent.parent.parent)
+    return send_file(str(path.parent.parent.parent) + "/static/sitemap.xml")
+
+
 @main_blueprint.route("/global/<country>", methods=["GET"])
 def international(country):
-    page = "Nebulus - Learning, All In One"
-    spanish_country = ["ar", "co", "cr", "cu", "do", "ec", "es", "mx", "pa", "sv"]
-    if country in spanish_country:
-        page = "Nebulus - Aprendizaje, todo en uno"
-    if country == "th":
-        page = "Nebulus - การเรียนรู้ ทั้งหมดในที่เดียว"
-    if country == "kr":
-        page = "Nebulus - 학습, 올인원"
-    if country == "cn":
-        page = "难不来 - 学习，多合一"
-    if country == "hk" or country == "mo" or country == "tw":
-        page = "難不來 - 學習，多合一"
-    if country == "jp":
-        page = "Nebulus - 学習、オールインワン"
-    if country == "us":
-        return redirect("/")
-    try:
-        return render_template(
-            f"main/global/{country}.html",
-            page=page,
-            user=session.get("username"),
-            email=session.get("email"),
-            avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-        )
-    except:
-        return "This country doesn't exist yet :( Contact norachai on Discord and request this country to be made."
+    session["global"] = country
+    return redirect("/")
+
+
+@main_blueprint.route("/scheduler")
+def scheduler():
+    return render_template(
+        "learning/tools/scheduler.html",
+        user=session.get("username"),
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        page="Scheduler",
+        translate=getText,
+    )
+
+
+@main_blueprint.route("/study-planner")
+def studyplanner():
+    return render_template(
+        "learning/tools/study-planner.html",
+        user=session.get("username"),
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        page="Study Planner",
+        translate=getText,
+    )
+
+
+@main_blueprint.route("/lunch")
+def lunchplanner():
+    return render_template(
+        "learning/tools/lunch.html",
+        user=session.get("username"),
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        page="Lunch Planner",
+        translate=getText,
+    )
+
+
+@main_blueprint.route("/vacation")
+def vacationmode():
+    return render_template(
+        "learning/tools/vacation.html",
+        user=session.get("username"),
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        page="Vacation Mode",
+        translate=getText,
+    )
+
+
+@main_blueprint.route("/extra-curricular")
+def extracurricular():
+    return render_template(
+        "learning/tools/extra-curricular.html",
+        user=session.get("username"),
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        page="Extracurricular Mode",
+        translate=getText,
+    )
+
+
+@main_blueprint.route("/analysis")
+def analysis():
+    return render_template(
+        "learning/tools/analysis.html",
+        user=session.get("username"),
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        page="Study Planner",
+        translate=getText,
+    )
+
+
+@main_blueprint.route("/blog")
+def blog():
+    return render_template(
+        "main/blog.html",
+        user=session.get("username"),
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        page="Blog",
+        translate=getText,
+    )
+
+
+@main_blueprint.route("/upgrade")
+def upgrade():
+    return render_template(
+        "upgrade.html",
+        user=session.get("username"),
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        page="Upgrade",
+        translate=getText,
+    )
+
+
+@main_blueprint.route("/support")
+def support():
+    return render_template(
+        "main/support.html",
+        user=session.get("username"),
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        page="Support",
+        translate=getText,
+    )

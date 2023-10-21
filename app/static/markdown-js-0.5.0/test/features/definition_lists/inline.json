@@ -1,19 +1,27 @@
-["html",
-  ["dl",
-    ["dt",
+[
+  "html",
+  [
+    "dl",
+    [
+      "dt",
       "a term"
     ],
-    ["dd",
-      ["em",
+    [
+      "dd",
+      [
+        "em",
         "emphasised"
       ],
       " definition."
     ],
-    ["dt",
+    [
+      "dt",
       "another term"
     ],
-    ["dd",
-      ["strong",
+    [
+      "dd",
+      [
+        "strong",
         "strong"
       ],
       " definition."

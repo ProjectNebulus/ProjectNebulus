@@ -1,8 +1,13 @@
-["html",
-  ["p",
+[
+  "html",
+  [
+    "p",
     "URLs like ",
-    ["a",
-      { "href" : "http://google.com" },
+    [
+      "a",
+      {
+        "href": "http://google.com"
+      },
       "http://google.com"
     ],
     " get autolinkified."

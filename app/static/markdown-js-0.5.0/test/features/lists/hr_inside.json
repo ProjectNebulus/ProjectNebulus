@@ -1,10 +1,20 @@
-["html",
-  ["ul",
-    [ "li",
-      ["p", "before"],
-      ["hr"],
-      ["p", "after"]
+[
+  "html",
+  [
+    "ul",
+    [
+      "li",
+      [
+        "p",
+        "before"
+      ],
+      [
+        "hr"
+      ],
+      [
+        "p",
+        "after"
+      ]
     ]
   ]
 ]
-

@@ -1,9 +1,13 @@
-["html",
-  ["ul",
-    ["li",
+[
+  "html",
+  [
+    "ul",
+    [
+      "li",
       "white"
     ],
-    ["li",
+    [
+      "li",
       "space"
     ]
   ]

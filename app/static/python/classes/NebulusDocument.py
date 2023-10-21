@@ -10,8 +10,8 @@ class NebulusDocument(Snowflake):
 
     meta = {"collection": "NebulusDocument"}
     owner = ReferenceField("User", required=True)
-    name = StringField(default="Untitled Document")
-    Data = StringField()
+    title = StringField(default="Untitled Document")
+    content = StringField()
     availability = BooleanField(
         default=True
     )  # True = Restricted, False = Available to anyone with the link

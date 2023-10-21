@@ -3,6 +3,7 @@ import google.oauth2.credentials
 from googleapiclient.discovery import build
 
 from app.static.python.mongodb import read
+from app.static.python.mongodb.read import getText
 from . import main_blueprint
 from .spotify import (
     SPOTIPY_CLIENT_ID,
@@ -99,4 +100,5 @@ def settings():
         canvas=canvas,
         spotify=spotify,
         discord=discord,
+        translate=getText,
     )

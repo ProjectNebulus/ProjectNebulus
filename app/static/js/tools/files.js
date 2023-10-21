@@ -1,3 +1,29 @@
+let override = false;
+
+function deleteMaterial(delete_button) {
+    const mainElement = delete_button.parentElement.parentElement;
+    if (!confirm('Delete ' + mainElement.querySelector('div.text-sm span.mr-8').innerText + '?'))
+        return;
+
+    const contents = mainElement.getAttribute('onclick').split('/').slice(2, 4);
+    contents[1] = contents[1].replace("',true)", '');
+
+    const request = $.ajax({
+        type: 'POST',
+        url: '/api/v1/internal/delete/file',
+        contentType: 'application/json',
+        data: JSON.stringify({course_id: contents[0], document_id: contents[1]})
+    });
+    request.done((data) => {
+        if (data !== 'success') alert('The material was not found.');
+        else mainElement.remove();
+    });
+    request.fail(() => alert('An error occurred while deleting the material.'));
+}
+
+for (const action of document.querySelectorAll('.edit-controls span'))
+    action.classList.add('hover:bg-gray-200', 'dark:hover:bg-gray-700', 'p-2');
+
 addHTML();
 
 // pdf viewer
@@ -11,32 +37,48 @@ let currentPageNum = 1;
 
 // events
 function startFile(file, link, isPDF) {
-    document.getElementById("breadcrumy").innerHTML = document.getElementById("breadcrumy").innerHTML + `
+    if (override) {
+        override = false;
+        return;
+    }
+
+    document.getElementById('documentPage').style.display = 'none';
+
+    document.getElementById('breadcrumy').innerHTML =
+        document.getElementById('breadcrumy').innerHTML +
+        `
 <li>
     <div class="flex items-center">
         <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
         <a href="#" class="ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white">${file}</a>
     </div>
 </li>
-            `
+            `;
     if (isPDF) {
-        document.getElementById("pdf-viewer").style.display = "block";
-        startPDF(link);
-    }
-    else {
-        document.getElementById("code-viewer").style.display = "block";
+        document.getElementById('pdf-viewer').style.display = 'block';
+
+        try {
+            startPDF(link);
+        } catch (e) {
+            document.getElementById('loading').innerHTML = 'Error: ' + e;
+        }
+    } else {
+        document.getElementById('code-viewer').style.display = 'block';
         const request = new XMLHttpRequest();
         request.open('GET', link, true);
         request.send(null);
         request.onreadystatechange = function () {
             if (request.readyState === 4 && request.status === 200) {
                 const type = request.getResponseHeader('Content-Type');
-                if (type.indexOf("text") !== 1) {
+                if (type.indexOf('text') !== 1) {
                     //alert(request.responseText);
-                    document.getElementById("code_loc").innerHTML = request.responseText.replace("/\n/g", "<br>");
+                    document.getElementById('code_loc').innerHTML = request.responseText.replace(
+                        '/\n/g',
+                        '<br>'
+                    );
                 }
             }
-        }
+        };
     }
 }
 
@@ -68,7 +110,7 @@ function initEvents() {
 function initPDFRenderer(url) {
     let option = {url};
 
-    pdfjsLib.getDocument(option).promise.then(pdfData => {
+    pdfjsLib.getDocument(option).promise.then((pdfData) => {
         totalPages = pdfData.numPages;
         let pagesCounter = document.getElementById('total_page_num');
         pagesCounter.textContent = totalPages;
@@ -81,15 +123,16 @@ function initPDFRenderer(url) {
 function renderPage(pageNumToRender = 1, scale = 1) {
     isPageRendering = true;
     document.getElementById('current_page_num').textContent = pageNumToRender;
-    pdf.getPage(pageNumToRender).then(page => {
-        document.getElementById("loader").style.display = "none";
+    pdf.getPage(pageNumToRender).then((page) => {
+        document.getElementById('loader').style.display = 'none';
         const viewport = page.getViewport({scale: 3});
         canvas.height = viewport.height;
         canvas.width = viewport.width;
         let renderCtx = {canvasContext, viewport};
         page.render(renderCtx).promise.then(() => {
             isPageRendering = false;
-            if (pageRenderingQueue !== null) { // this is to check of there is next page to be rendered in the queue
+            if (pageRenderingQueue !== null) {
+                // this is to check of there is next page to be rendered in the queue
                 renderPage(pageNumToRender);
                 pageRenderingQueue = null;
             }
@@ -100,8 +143,7 @@ function renderPage(pageNumToRender = 1, scale = 1) {
 function renderPageQueue(pageNum) {
     if (pageRenderingQueue != null) {
         pageRenderingQueue = pageNum;
-    }
-    else {
+    } else {
         renderPage(pageNum);
     }
 }
@@ -116,7 +158,7 @@ function renderNextPage(ev) {
 
 function renderPreviousPage(ev) {
     if (currentPageNum <= 1) {
-        currentPageNum = (totalPages + 1);
+        currentPageNum = totalPages + 1;
     }
     currentPageNum--;
     renderPageQueue(currentPageNum);
@@ -128,12 +170,12 @@ function goToPageNum(ev) {
     if (pageNumber) {
         if (pageNumber <= totalPages && pageNumber >= 1) {
             currentPageNum = pageNumber;
-            numberInput.value = "";
+            numberInput.value = '';
             renderPageQueue(pageNumber);
             return;
         }
     }
-    numberInput.value = "";
+    numberInput.value = '';
 }
 
 // video player
@@ -149,7 +191,7 @@ setInterval(function () {
     document.querySelectorAll('pre code').forEach((el) => {
         hljs.highlightElement(el);
     });
-}, 5000)
+}, 5000);
 
 // Possible improvements:
 // - Change timeline and volume slider into input sliders, reskinned
@@ -157,78 +199,83 @@ setInterval(function () {
 // - Be able to grab a custom title instead of "Music Song"
 // - Hover over sliders to see preview of timestamp/volume change
 
-const audioPlayer = document.querySelector(".audio-player");
+const audioPlayer = document.querySelector('.audio-player');
 const audio = new Audio(
-    "https://ia800905.us.archive.org/19/items/FREE_background_music_dhalius/backsound.mp3"
+    'https://ia800905.us.archive.org/19/items/FREE_background_music_dhalius/backsound.mp3'
 );
 //credit for song: Adrian kreativaweb@gmail.com
 
 console.dir(audio);
 
 audio.addEventListener(
-    "loadeddata",
+    'loadeddata',
     () => {
-        audioPlayer.querySelector(".time .length").textContent = getTimeCodeFromNum(audio.duration);
-        audio.volume = .75;
+        audioPlayer.querySelector('.time .length').textContent = getTimeCodeFromNum(audio.duration);
+        audio.volume = 0.75;
     },
     false
 );
 
 //click on timeline to skip around
-const timeline = audioPlayer.querySelector(".timeline");
-timeline.addEventListener("click", e => {
-    const timelineWidth = window.getComputedStyle(timeline).width;
-    const timeToSeek = e.offsetX / parseInt(timelineWidth) * audio.duration;
-    audio.currentTime = timeToSeek;
-}, false);
+const timeline = audioPlayer.querySelector('.timeline');
+timeline.addEventListener(
+    'click',
+    (e) => {
+        const timelineWidth = window.getComputedStyle(timeline).width;
+        const timeToSeek = (e.offsetX / parseInt(timelineWidth)) * audio.duration;
+        audio.currentTime = timeToSeek;
+    },
+    false
+);
 
 //click volume slider to change volume
-const volumeSlider = audioPlayer.querySelector(".controls .volume-slider");
-volumeSlider.addEventListener('click', e => {
-    const sliderWidth = window.getComputedStyle(volumeSlider).width;
-    const newVolume = e.offsetX / parseInt(sliderWidth);
-    audio.volume = newVolume;
-    audioPlayer.querySelector(".controls .volume-percentage").style.width = newVolume * 100 + '%';
-}, false)
+const volumeSlider = audioPlayer.querySelector('.controls .volume-slider');
+volumeSlider.addEventListener(
+    'click',
+    (e) => {
+        const sliderWidth = window.getComputedStyle(volumeSlider).width;
+        const newVolume = e.offsetX / parseInt(sliderWidth);
+        audio.volume = newVolume;
+        audioPlayer.querySelector('.controls .volume-percentage').style.width =
+            newVolume * 100 + '%';
+    },
+    false
+);
 
 //check audio percentage and update time accordingly
 setInterval(() => {
-    const progressBar = audioPlayer.querySelector(".progress");
-    progressBar.style.width = audio.currentTime / audio.duration * 100 + "%";
-    audioPlayer.querySelector(".time .current").textContent = getTimeCodeFromNum(
-        audio.currentTime
-    );
+    const progressBar = audioPlayer.querySelector('.progress');
+    progressBar.style.width = (audio.currentTime / audio.duration) * 100 + '%';
+    audioPlayer.querySelector('.time .current').textContent = getTimeCodeFromNum(audio.currentTime);
 }, 500);
 
 //toggle between playing and pausing on button click
-const playBtn = audioPlayer.querySelector(".controls .toggle-play");
+const playBtn = audioPlayer.querySelector('.controls .toggle-play');
 playBtn.addEventListener(
-    "click",
+    'click',
     () => {
         if (audio.paused) {
-            playBtn.classList.remove("play");
-            playBtn.classList.add("pause");
+            playBtn.classList.remove('play');
+            playBtn.classList.add('pause');
             audio.play();
-        }
-        else {
-            playBtn.classList.remove("pause");
-            playBtn.classList.add("play");
+        } else {
+            playBtn.classList.remove('pause');
+            playBtn.classList.add('play');
             audio.pause();
         }
     },
     false
 );
 
-audioPlayer.querySelector(".volume-button").addEventListener("click", () => {
-    const volumeEl = audioPlayer.querySelector(".volume-container .volume");
+audioPlayer.querySelector('.volume-button').addEventListener('click', () => {
+    const volumeEl = audioPlayer.querySelector('.volume-container .volume');
     audio.muted = !audio.muted;
     if (audio.muted) {
-        volumeEl.classList.remove("icono-volumeMedium");
-        volumeEl.classList.add("icono-volumeMute");
-    }
-    else {
-        volumeEl.classList.add("icono-volumeMedium");
-        volumeEl.classList.remove("icono-volumeMute");
+        volumeEl.classList.remove('icono-volumeMedium');
+        volumeEl.classList.add('icono-volumeMute');
+    } else {
+        volumeEl.classList.add('icono-volumeMedium');
+        volumeEl.classList.remove('icono-volumeMute');
     }
 });
 
@@ -240,8 +287,7 @@ function getTimeCodeFromNum(num) {
     const hours = minutes / 60;
     minutes -= hours * 60;
 
-    if (hours === 0)
-        return `${minutes}:${String(seconds % 60).padStart(2, 0)}`;
+    if (hours === 0) return `${minutes}:${String(seconds % 60).padStart(2, 0)}`;
 
     return `${String(hours).padStart(2, 0)}:${minutes}:${String(seconds % 60).padStart(2, 0)}`;
 }
@@ -269,7 +315,7 @@ function addHTML() {
         }
     </style>
 
-    <div id="loader" class="text-black dark:text-white">Loading ......</div>
+    <div id="loader" class="text-black dark:text-white">Loading .....</div>
     <div class="container">
         <button id="prev_page" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium
          rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
@@ -513,5 +559,5 @@ function addHTML() {
                 width: 120px;
             }
         </style>
-    </div>`
+    </div>`;
 }

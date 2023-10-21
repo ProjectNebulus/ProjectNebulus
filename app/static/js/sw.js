@@ -2,18 +2,17 @@ const CACHE_NAME = 'nebulus-offline';
 const urlsToCache = [
     '/',
     '/static/tailwind.css',
-    '/static/fonts.css',
     '/static/lms.css',
-    '/static/lms.js',
+    '/static/app.js',
     '/static/main.js',
-    '/static/dashboard.js',
+    '/static/app.js',
     '/static/profile.js',
     '/static/signin.js',
     '/static/signup.js',
     '/signin',
     '/signup',
     '/lms',
-    '/dashboard',
+    '/app',
     '/settings',
     '/profile',
     'login',
@@ -25,9 +24,8 @@ const urlsToCache = [
 self.addEventListener('install', function (event) {
     // install files needed offline
 
-
     event.waitUntil(
-        Promise.all[caches.open(CACHE_NAME), self.skipWaiting()].then(function (cache) {
+        Promise.all[(caches.open(CACHE_NAME), self.skipWaiting())].then(function (cache) {
             console.log('Opened cache');
             return cache.addAll(urlsToCache);
         })
@@ -43,12 +41,11 @@ self.addEventListener('fetch', function (event) {
 
         caches.match(event.request).then(function (response) {
             if (response) {
-                if (!(response.redirected)) {
+                if (!response.redirected) {
                     return response;
                 }
                 // if we are here, that means there's a match
                 //return the response stored in browser
-
             }
 
             // no match in cache, use the network instead

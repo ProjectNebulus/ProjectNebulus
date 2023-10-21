@@ -1,7 +1,7 @@
 from flask import redirect, render_template, request, session
 
 from app.static.python.extensions.integrations.canvas import connectCanvas
-
+from app.static.python.mongodb.read import getText
 from . import main_blueprint
 from .utils import logged_in
 
@@ -10,7 +10,7 @@ from .utils import logged_in
 @logged_in
 def canvasConnect():
     # Open OAuth authorization webpage. Give time to authorize.
-    return render_template("connections/connectCanvas.html")
+    return render_template("user/connections/connectCanvas.html", translate=getText)
 
 
 @main_blueprint.route("/canvas", methods=["POST"])
@@ -23,4 +23,4 @@ def canvasConnect2():
         session["canvas_link"] = request.form.get("link")
     else:
         return redirect("/canvas")
-    return render_template("connections/connectCanvas.html", done=str(a))
+    return render_template("user/connections/connectCanvas.html", done=str(a))

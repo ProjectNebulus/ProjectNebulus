@@ -5,7 +5,7 @@ from .Avatar import Avatar
 from .Canvas import Canvas
 
 # from .Channel import Channel
-from .Chat import Chat
+from .Chat import Chat, ChatMember
 from .ChatProfile import ChatProfile
 from .Community import Community
 from .Course import Course
@@ -31,9 +31,9 @@ from .Planner import Planner
 
 # from .Role import Role
 from .Schoology import Schoology
-from .Spotify import Spotify
 
 # from .ServerProfile import ServerProfile
 from .Snowflake import Snowflake
+from .Spotify import Spotify
 from .Textbook import Textbook
 from .User import User

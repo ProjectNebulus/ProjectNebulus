@@ -1,9 +1,14 @@
-["html",
-  ["p",
+[
+  "html",
+  [
+    "p",
     "An ",
-    ["a",
-      { "href" : "http://inline.com",
-        "title" : "le title" },
+    [
+      "a",
+      {
+        "href": "http://inline.com",
+        "title": "le title"
+      },
       "inline link"
     ],
     " with a title."

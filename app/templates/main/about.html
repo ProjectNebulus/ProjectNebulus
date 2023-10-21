@@ -2,21 +2,25 @@
 {% block main %}
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700;1,900&display=swap');
-    .dark #github{
-        filter:invert(1);
-    }
-    img{
-        width:2.5em;
-        margin:10px;
-        display:inline-block;
-    }
-    a{
-        color:#00AFF4;
-        font-weight:bold;
-        font-family: "Roboto";
-        height: 3em;
 
-    }
+        .dark #github {
+            filter: invert(1);
+        }
+
+        #datext img {
+            width: 2.5em;
+            margin: 10px;
+            display: inline-block;
+        }
+
+        #datext a {
+            color: #00AFF4;
+            font-weight: bold;
+            font-family: "Roboto";
+            height: 3em;
+
+        }
+
         hr {
             border: 0;
             border-radius: 5px;
@@ -29,52 +33,89 @@
         }
 
         @-webkit-keyframes Animation {
-            0%{background-position:10% 0%}
-            50%{background-position:91% 100%}
-            100%{background-position:10% 0%}
+            0% {
+                background-position: 10% 0%
+            }
+            50% {
+                background-position: 91% 100%
+            }
+            100% {
+                background-position: 10% 0%
+            }
         }
+
         @-moz-keyframes Animation {
-            0%{background-position:10% 0%}
-            50%{background-position:91% 100%}
-            100%{background-position:10% 0%}
+            0% {
+                background-position: 10% 0%
+            }
+            50% {
+                background-position: 91% 100%
+            }
+            100% {
+                background-position: 10% 0%
+            }
         }
+
         @keyframes Animation {
-            0%{background-position:10% 0%}
-            50%{background-position:91% 100%}
-            100%{background-position:10% 0%}
+            0% {
+                background-position: 10% 0%
+            }
+            50% {
+                background-position: 91% 100%
+            }
+            100% {
+                background-position: 10% 0%
+            }
         }
 
     </style>
     <html>
     <body>
     {% include "utils/navbar.html" %}
-    <div class="overflow-hidden" style="text-align:justify;  text-justify:auto;">
-            <div style="margin: auto;padding: 20vh 0;width:70%;">
-        <h1 class="text-5xl text-blue-600 dark:text-blue-400">Nebulus. Education. Redefined</h1><br><br>
-            <h1 class="text-xl text-gray-400 uppercase">A Learning, All In One Experience</h1><br><br>
-        <p class="text-xl text-black dark:text-white">
-            Nebulus helps you have your whole learning experience organized and simple. First, we offer many connections.  No more switching between websites. You can connect your Schoology, Google Classroom, and Canvas accounts connected on Nebulus for easy access. You can also stay organized with Nebulus. There is no need to have your papers, documents, assignments, textbooks, calendars, and events all over the place. Everything is organized for you in an easy-to-use way! You can have everything you need for school in one place. Additionally, we understand studying and learning can be difficult. We have tools to organize your studying, organize your materials, make learning fun, and keep you focused! You can use our study timers, test review planning, etc. We have many extensions and integrations to enrich your experience. We have Calculator integrations, a Graphing Calculator, a Dictionary, a Plagarism Checker, a World Map, a Periodic Table, a built-in IDE (Code Editor), and a Document editor (that can edit Word or Google Docs), and much more! We are adding even more features for our Stable release on December 23rd.
-        </p><br>
-
-                <img src="/static/images/logos/discord.png"><a href="https://discord.gg/seQ89A8wwT">https://discord.gg/seQ89A8wwT</a><br>
-                <img src="/static/images/logos/twitter.png"> <a href="https://twitter.com/Nebuluslearning">https://twitter.com/Nebuluslearning</a><br>
-                <img id="github" src="/static/images/logos/github.png"><a href="https://github.com/ProjectNebulus/ProjectNebulus">https://github.com/ProjectNebulus/ProjectNebulus</a><br>
-                <img src="/static/images/logos/linkedin.png"><a href="https://linkedin.com/company/nebulus-lms">https://linkedin.com/company/nebulus-lms</a><br>
-                <img src="/static/images/logos/youtube.png"><a href="https://www.youtube.com/channel/UCcuhNzvkjNkEYdJFuGsH4wg/about">https://www.youtube.com/channel/UCcuhNzvkjNkEYdJFuGsH4wg/about</a><br>
-                <img src="/static/images/logos/facebook.png"> <a href="https://www.facebook.com/profile.php?id=100079149206273">https://www.facebook.com/profile.php?id=100079149206273</a><br>
-                <img src="/static/images/logos/reddit.png"><a href="https://www.reddit.com/r/Nebulus">https://www.reddit.com/r/Nebulus</a><br>
+    <div class="overflow-hidden"
+         tyle="text-align:justify;  text-justify:auto;">
+        <div id="datext" style="margin: auto;padding: 20vh 0;width:70%;">
+            <h1 class="text-6xl font-extrabold gradient-text ">{{ translate("Nebulus. Education. Redefined.") }}</h1>
+            <br>
+            <br>
+            <h1 class="text-xl text-gray-400 italic uppercase">{{ translate("A Learning, All In One Experience") }}</h1>
+            <br>
+            <br>
+            <p class="text-xl text-black dark:text-white">
+                {{ translate("Nebulus is a combination of all your learning apps into one website. Say good bye to switching tabs! Built for students, by students, we understand the challenges of learning, and Nebulus is here to help make it easier. Our app contains everything you need, including Study Planners, Calculators, Docs, Dictionary, Plagiarism checker, World Map, Code Compiler, Chat, Planners and more. In addition, Nebulus is a great place to merge your other apps as one. In Nebulus, you can integrate Google Classroom, Schoology, Canvas, and more.   For even more perks such as access to special ebooks, Learning review system, buy Nebulus Plus. And to take it up another notch, buy Nebulus Infinite. Our devoted team is working to make learning easier for you. We are adding even more features for our Stable release on December 23rd") }}
+            </p>
+            <br>
+            <img src="/static/images/logos/discord.png">
+            <a href="https://discord.gg/QNgTSN2PBM">https://discord.gg/QNgTSN2PBM</a>
+            <br>
+            <img src="/static/images/logos/twitter.png">
+            <a href="https://twitter.com/Nebuluslearning">https://twitter.com/Nebuluslearning</a>
+            <br>
+            <img id="github" src="/static/images/logos/github.png">
+            <a href="https://github.com/ProjectNebulus/ProjectNebulus">https://github.com/ProjectNebulus</a>
+            <br>
+            <img src="/static/images/logos/linkedin.png">
+            <a href="https://linkedin.com/company/nebulus-lms">https://linkedin.com/company/nebulus-lms</a>
+            <br>
+            <img src="/static/images/logos/youtube.png">
+            <a href="https://www.youtube.com/channel/UCcuhNzvkjNkEYdJFuGsH4wg/about">https://www.youtube.com/channel/UCcuhNzvkjNkEYdJFuGsH4wg/about</a>
+                    <br>
+                    <img src="/static/images/logos/facebook.png">
+                    <a href="https://www.facebook.com/profile.php?id=100079149206273">https://www.facebook.com/profile.php?id=100079149206273</a>
+                    <br>
+                    <img src="/static/images/logos/reddit.png">
+                    <a href="https://www.reddit.com/r/Nebulus">https://www.reddit.com/r/Nebulus</a>
+                    <br>
+                </div>
+            </div>
+            <hr class="dark:text-white">
+            <br>
+            <h1 class="text-3xl text-black dark:text-white">Our Team</h1>
+            <br>
+            <div style="margin:20px;padding:10px;float:left;" id="people"></div>
         </div>
-        <hr>
-
-
-        <div
-                style="margin:20px;padding:10px;float:left;" id="people">
-            <h1 style="margin: 1.5rem;" class="text-3xl text-black dark:text-white">Our Team</h1><br>
-        </div>
-    </div>
-
-    <script>
-        window.onload = function(){
+        <script>
+        window.onload = function () {
             const peopleDiv = document.getElementById("people");
 
             const people = [
@@ -91,40 +132,58 @@
                     profileLink: "751594192739893298"
                 },
                 {
-                    image: "kevin.gif",
-                    name: "Kevin Ma",
-                    title: "Co-Chief Operation Officer",
-                    profileLink: "679867543066116169"
-                },
-                {
-                    image: "vedh.jpeg",
-                    name: "Vedh Reddy",
-                    title: "Co-Chief Operation Officer",
-                    profileLink: ""
-                },
-                {
                     image: "rishaan.jpg",
                     name: "Rishaan Desai",
-                    title: "Chief Product Officer",
+                    title: "President & Chief Strategy Officer",
                     profileLink: "622179531301847054"
-                },
-                {
-                    image: "aryav.png",
-                    name: "Aryav Kaushik",
-                    title: "Chief Marketing Officer",
-                    profileLink: "665804534831906876"
                 },
                 {
                     image: "aaryan.PNG",
                     name: "Aaryan Parikh",
-                    title: "Chief Information Officer",
+                    title: "Chief Operations Officer",
                     profileLink: "739958520329404536"
                 },
                 {
                     image: "Gam3rr2.png",
                     name: "Gam3rr",
-                    title: "Chief Of Cyber Security",
+                    title: "Chief of InfoSec",
                     profileLink: "849731649289453629"
+                },
+                {
+                    image: "kev.png",
+                    name: "Kevin Ma",
+                    title: "Co-Chief Operations Officer",
+                    profileLink: "679867543066116169" // to change later, do not touch
+                },
+                {
+                    image: "Benjamin.png",
+                    name: "Benjamin Zhang",
+                    title: "Chief Information Officer",
+                    profileLink: "738821494871687199"
+                },
+                {
+                    image: "demi.png",
+                    name: "Demi Zheng",
+                    title: "Co-Chief Marketing Officer",
+                    profileLink: "716730842830995466"
+                },
+                {
+                    image: "aryav.png",
+                    name: "Aryav Kaushik",
+                    title: "Co-Chief Marketing Officer",
+                    profileLink: "665804534831906876"
+                },
+                {
+                    image: "hanz.png",
+                    name: "Hanz Baek",
+                    title: "Senior VP of Global Operations",
+                    profileLink: "786394888404992082"
+                },
+                {
+                    image: "vedh.jpeg",
+                    name: "Vedh Reddy",
+                    title: "Senior VP of Operations",
+                    profileLink: "860946211116154911"
                 },
                 {
                     image: "timothy1.webp",
@@ -133,29 +192,23 @@
                     profileLink: "774061881367068712"
                 },
                 {
-                    image: "timothy2.webp",
-                    name: "Timothy Hu",
-                    title: "VP of Software Engineering",
-                    profileLink: "395695390097408000"
-                },
-                {
                     image: "vivian.webp",
                     name: "Vivian Liao",
-                    title: "VP of Graphic Design",
+                    title: "VP of Graphic Design and Art",
                     profileLink: "570795812850892813"
-                },
-                {
-                    image: "Benjamin.png",
-                    name: "Benjamin Zhang",
-                    title: "VP of Operations",
-                    profileLink: "738821494871687199"
                 },
                 {
                     image: "rhyley.webp",
                     name: "Rhyley Plant",
-                    title: "Senior Software Developer",
+                    title: "Software Developer",
                     profileLink: "413553618101338118"
-                }
+                },
+                {
+                    image: "timothy2.webp",
+                    name: "Timothy Hu",
+                    title: "Former Developer",
+                    profileLink: "395695390097408000"
+                },
             ]
 
             people.innerHTML += '<h1 class="text-3xl text-black dark:text-white">Executives</h1>'
@@ -172,7 +225,7 @@
 
                 const img = document.createElement("img");
                 img.className = "mb-3 w-24 h-24 rounded-full shadow-lg";
-                img.src = "/static/people/" + person.image;
+                img.src = "/static/images/people/" + person.image;
 
                 const name = document.createElement("h3");
                 name.className = "mb-1 text-xl font-medium text-gray-900 dark:text-white";
@@ -187,17 +240,17 @@
 
                 const buttons = document.createElement("div");
                 buttons.className = "flex mt-4 space-x-3 lg:mt-6";
-
+                let discord = person.profileLink;
                 const viewProfile = document.createElement("a");
                 viewProfile.className = "inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800";
-                viewProfile.href = "https://discord.com/users/"+person.profileLink;
+                viewProfile.href = "https://discord.com/users/" + discord;
                 viewProfile.target = "_blank";
                 viewProfile.innerHTML = "View Profile";
 
                 const message = document.createElement("a");
                 message.className = "inline-flex items-center py-2 px-4 text-sm font-medium text-center text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-800";
-                message.href = "https://discord.com/users/"+person.profileLink;
-                 message.target = "_blank";
+                message.href = "https://discord.com/users/" + discord;
+                message.target = "_blank";
                 message.innerHTML = "Message";
 
                 buttons.append(viewProfile, message);
@@ -205,9 +258,8 @@
                 peopleDiv.append(bgDiv);
             }
         }
-    </script>
-
+        </script>
     </body>
-    </html>
-    {% include "utils/footer.html" %}
+</html>
+{% include "utils/footer.html" %}
 {% endblock %}

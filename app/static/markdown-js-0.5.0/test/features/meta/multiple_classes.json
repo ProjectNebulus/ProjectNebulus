@@ -1,9 +1,16 @@
-["html",
-  ["p",
-    { "class" : "foo bar" },
+[
+  "html",
+  [
+    "p",
+    {
+      "class": "foo bar"
+    },
     "Here's a paragraph and\nan ",
-    ["em",
-      { "class" : "foo bar" },
+    [
+      "em",
+      {
+        "class": "foo bar"
+      },
       "em"
     ],
     "\nwith multiple classes"

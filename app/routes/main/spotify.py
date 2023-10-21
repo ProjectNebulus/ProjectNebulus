@@ -1,4 +1,3 @@
-import os
 import uuid
 
 import spotipy
@@ -12,7 +11,10 @@ from .utils import logged_in
 # pip3 install git+https://github.com/plamere/spotipy
 SPOTIPY_CLIENT_ID = "9eb38c31d84b43e5a2557a6f98c5a064"
 SPOTIPY_CLIENT_SECRET = "eddbab5eb3b2434694af122a8f99bf87"
+
+
 # SPOTIPY_REDIRECT_URI = "http://localhost:8080/spotify"
+
 
 def generate_redirect(url):
     if "nebulus" in url:
@@ -41,7 +43,7 @@ class FlaskSessionCacheHandler(CacheHandler):
         try:
             token_info = session["token_info"]
         except KeyError:
-            print("Token not found in the session")
+            print("Spotify token not found in the session")
 
         return token_info
 
@@ -110,7 +112,7 @@ def spotify_route():
     # Step 4. Signed in, display data
     spotify = spotipy.Spotify(auth_manager=auth_manager)
     return render_template(
-        "connections/connectSpotify.html", spotify=spotify, auth=False
+        "user/connections/connectSpotify.html", spotify=spotify, auth=False
     )
 
 

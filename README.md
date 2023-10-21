@@ -16,7 +16,7 @@
 - [Setup (docker)](#setup-docker)
 - [Setup (Pre-hosted Website)](#website)
 
-## Setup (normal)
+## Setting up (normal)
 
 ### Clone the Repository
 

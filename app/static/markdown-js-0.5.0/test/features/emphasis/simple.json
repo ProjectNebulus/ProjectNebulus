@@ -1,22 +1,29 @@
-["html",
-  ["p",
+[
+  "html",
+  [
+    "p",
     "Emphasis can be ",
-    ["em",
+    [
+      "em",
       "weak"
     ],
     " or ",
-    ["strong",
+    [
+      "strong",
       "strong"
     ],
     "."
   ],
-  ["p",
+  [
+    "p",
     "It can ",
-    ["em",
+    [
+      "em",
       "even"
     ],
     " use ",
-    ["strong",
+    [
+      "strong",
       "underscores"
     ],
     "."

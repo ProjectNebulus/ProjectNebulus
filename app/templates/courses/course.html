@@ -1,12 +1,10 @@
 {% extends "layout.html" %}
 {% block main %}
     <head>
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
-
-        <script src="/static/js/course/course.js" type='text/javascript'></script>
         <script src="/static/js/course/createDocument.js" type='text/javascript'></script>
         <script src="/static/js/course/createAnnouncement.js" type='text/javascript'></script>
         <script src="/static/js/course/createAssignment.js" type='text/javascript'></script>
+        <script src="https://unpkg.com/flowbite@1.4.1/dist/datepicker.js"></script>
         <style>
             iframe {
                 background-image: url('/static/images/nebulusCats/v3.gif');
@@ -17,89 +15,204 @@
                 height: 91%;
                 overflow-x: hidden;
             }
-
-            @media (min-width: 1420px) {
-                #upcoming-events {
-                    display: block;
-                }
-            }
         </style>
     </head>
     <body style="overflow: hidden">
     {% include "utils/navbar.html" %}
+    <script src="/static/js/course/course.js" type='text/javascript'></script>
     <div class="flex" style="height: 92%">
         {% include "courses/sidebar.html" %}
         <div class="w-full ml-4 mt-4">
             <div class="flex justify-between">
-                <span class="text-5xl text-black dark:text-white text-black" id="page-title"></span>
-
-                <div class="mr-8">
-                    <button style="float:left" data-dropdown-toggle="addDropdown" id="create" class="flex items-center text-left
-                    space-x-3 px-4 h-12 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2
-                    focus:ring-sky-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300
-                     mr-2 dark:hover:bg-slate-700 rounded-lg">
-                        <span class="material-icons w-full text-3xl">add</span>
+                    <span class="text-5xl text-black dark:text-white text-black"
+                          id="page-title">Documents</span>
+                <div style="margin-right: 3rem" data-aos="fade">
+                    <button style="float:left; margin-right:10px;width:64px;height:44px"
+                            data-dropdown-toggle="addDropdown"
+                            id="create"
+                            class="hidden sm:flex items-center text-left space-x-3 px-4 h-12 bg-white/75 ring-1
+                             ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500
+                             shadow-sm rounded-lg text-slate-400 dark:bg-slate-800/75 dark:ring-0 dark:text-slate-300
+                             dark:highlight-white/5 dark:hover:bg-slate-700 text-white font-medium rounded-lg
+                             text-sm px-5 py-2.5 text-center">
+                        <span style="font-size:30px;" class="material-icons">add</span>
                     </button>
-
-                    <button data-modal-toggle="searchModal" id="search" style="float: left"
-                            class="flex w-72 px-4 h-12 items-center text-left space-x-3 bg-white ring-1 ring-slate-900/10
-                            hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg
-                            text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:hover:bg-slate-700">
-                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
-                             stroke-linecap="round" stroke-linejoin="round"
-                             class="flex-none text-slate-300 dark:text-slate-400" aria-hidden="true">
+                    <button data-modal-toggle="searchModal"
+                            id="search"
+                            style="float:left;"
+                            type="button"
+                            class="hidden sm:flex items-center w-72 text-left space-x-3 px-4 h-12 bg-white/75 ring-1
+                             ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500
+                             shadow-sm rounded-lg text-slate-400 dark:bg-slate-800/75 dark:ring-0 dark:text-slate-300
+                             dark:highlight-white/5 dark:hover:bg-slate-700">
+                        <svg width="24"
+                             height="24"
+                             fill="none"
+                             stroke="currentColor"
+                             stroke-width="2"
+                             stroke-linecap="round"
+                             stroke-linejoin="round"
+                             class="flex-none text-slate-300 dark:text-slate-400"
+                             aria-hidden="true">
                             <path d="m19 19-3.5-3.5"></path>
                             <circle cx="11" cy="11" r="6"></circle>
                         </svg>
                         <span class="flex-auto">Quick search...</span><kbd
                             class="font-sans font-semibold dark:text-slate-500">
-                        <abbr title="Command" class="no-underline text-slate-300 dark:text-slate-500">⌘</abbr> K</kbd>
+                        <abbr title="Command"
+                              class="no-underline text-slate-300 dark:text-slate-500">⌘</abbr> K</kbd>
                     </button>
-
                     <!-- Dropdown menu -->
                     <div id="addDropdown"
                          class="hidden z-10 w-50 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
-                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="addDropdownDefault">
-                            <li class="link"></li>
-                            <li class="link"></li>
-                            <li class="link"></li>
+                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                            aria-labelledby="addDropdownDefault">
+                            <li>
+                                <a class="link"></a>
+                            </li>
+                            <li>
+                                <a class="link"></a>
+                            </li>
+                            <li>
+                                <a class="link"></a>
+                            </li>
+                            <li>
+                                <a class="link"></a>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
             <br>
             <hr class="dark:text-white text-black">
-            <iframe id="frame" name="frame" src="{{ iframe }}"></iframe>
+            <iframe id="frame" name="frame" src="{{ src }}"></iframe>
         </div>
-
-        <div class="hidden border-l border-gray-200 dark:border-gray-700 text-center"
-             id="upcoming-events" style="width:25%">
-            <h1 class="text-black dark:text-white text-2xl mx-4 my-4">Upcoming Events</h1>
-            <div class="flex flex-col sm:rounded-lg min-w-full align-middle overflow-auto hover:scroll inline-block"
-                 style="max-height: 90%">
+        <div class="hidden xl:block border-l border-gray-200 dark:border-gray-700 text-center overflow-auto hover:scroll"
+             id="upcoming-events"
+             style="width:25%">
+            <h1 class="text-black dark:text-white text-2xl">Upcoming Events</h1>
+            <br>
+            <div class="flex flex-col overflow-x-auto sm:rounded-lg min-w-full align-middle overflow-auto inline-block">
                 {% if events|length == 0 %}
-                    <p class="text-gray-500 dark:text-gray-400">No Events!</p>
+                    <p class="text-gray-300 dark:text-gray-500 mx-4">
+                        No Events
+                    </p>
                 {% else %}
                     {% for date, assignments in events.items() %}
+                        {% set diff = (date - now).days %}
+                        {% if diff < 0 %}
+                            <h1 style="text-align: left;
+                           background: orangered -webkit-linear-gradient(left,#ff7878,#ffb078);
+                           -webkit-background-clip: text;
+                           -webkit-text-fill-color: transparent;
+                           margin: 13px;">
+                                {{ strftime(date, "%a, %B %-d, %Y") }}
+                                ({{ -diff }}d Overdue)
+                            </h1>
+                        {% elif diff < 1 %}
+                            <h1 style="text-align: left;
+                           background: orange -webkit-linear-gradient(left,#ff78ed,#ffb378);
+                           -webkit-background-clip: text;
+                           -webkit-text-fill-color: transparent;
+                           margin: 13px;">
+                                {{ strftime(date, "%a, %B %-d, %Y") }}
+                                ({{ diff }}d remaining)
+                            </h1>
+                        {% elif diff < 3 %}
+                            <h1 style="text-align: left;
+                           background: yellow -webkit-linear-gradient(left,#ffc578,#fff878);
+                           -webkit-background-clip: text;
+                           -webkit-text-fill-color: transparent;
+                           margin: 13px;">
+                                {{ strftime(date, "%a, %B %-d, %Y") }}
+                                ({{ diff }}d remaining)
+                            </h1>
+                        {% elif diff < 5 %}
+                            <h1 style="text-align: left;
+                           background: green -webkit-linear-gradient(left,#ffd978,#ddff78);
+                           -webkit-background-clip: text;
+                           -webkit-text-fill-color: transparent;
+                           margin: 13px;">
+                                {{ strftime(date, "%a, %B %-d, %Y") }}
+                                ({{ diff }}d remaining)
+                            </h1>
+                        {% else %}
+                            <h1 style="text-align: left;
+                           background: greenyellow -webkit-linear-gradient(left,#d9ff78,#78ffb7);
+                           -webkit-background-clip: text;
+                           -webkit-text-fill-color: transparent;
+                           margin: 13px;">
+                                {{ strftime(date, "%a, %B %-d, %Y") }}
+                                ({{ diff }}d remaining)
+                            </h1>
+                        {% endif %}
                         {% for a in assignments[:15] %}
-                            {% if a.course.id == course.id %}
-                                {% if a.submitDate == None or today < date %}
-                                    {# today is before the due date ^ #}
-                                    <div class="flex bg-gray-100 shadow dark:bg-gray-800 rounded-lg p-6 ml-3 mr-3
-                                         shadow-md dark:border-gray-700 text-sm mb-5 mr-4 text-left">
-                                        <div class="mr-4 material-icons ml-2 text-black dark:text-white"
-                                             style="transform: translate(0, 50%) scale(1.75)">assignment
+                            {% if (a._cls != "Assignment" or a.submitDate == None) or now < date %}
+                                {# today is before the due date ^ #}
+                                <div class="flex bg-gray-100 shadow dark:bg-gray-800/75 rounded-lg p-6 event
+                                            shadow-md dark:border-gray-700 text-sm mb-5 mx-4 text-left relative expandable">
+                                    <div class="absolute right-0 bottom-0 material-icons hover:bg-gray-50
+                                                 dark:hover:bg-gray-500 p-1 expand text-gray-200 cursor-pointer
+                                                  dark:text-gray-400 invisible rounded-lg mr-3 mb-3">
+                                        open_in_new
+                                    </div>
+
+                                    <div content-element hidden class="hidden">{{ a.description }}</div>
+                                    <div author-element hidden class="hidden">{{ a.course.teacher }}</div>
+                                    <img src="{% if "teacherAccount" in a.course %}
+                                            {{ a.course.teacher.avatar.avatar_url }}
+                                            {% else %}
+                                            https://app.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg
+                                            {% endif %}"
+                                         image-element hidden class="hidden">
+
+                                    <div class="mr-4 material-icons ml-2 text-black dark:text-white"
+                                         style="transform: translate(0, 50%) scale(1.75)">
+                                        assignment
+                                    </div>
+                                    <div class="text-gray-700 dark:text-gray-400 leading-relaxed w-full">
+                                        <h1 class="text-black dark:text-white text-xl truncate" title-element
+                                            style="max-width: 90%">{{ a.title }}</h1>
+
+                                        {% if a._cls == "Assignment" %}
+                                            Due at
+                                        {% else %}
+                                            Happening at
+                                        {% endif %}
+                                        {{ strftime(date, "%-I:%M %p") }}
+
+                                        <div due-time-element hidden class="hidden">
+                                            {% if a._cls == "Assignment" %}
+                                                Due at
+                                            {% else %}
+                                                Happening on
+                                            {% endif %}
+                                            {{ strftime(date, "%-m/%-d/%y %-I:%M %p") }} •
+                                            {% if a.submitDate %}
+                                                <span class="text-green-600 dark:text-green-500">Submitted</span>
+                                            {% elif now > date %}
+                                                <span class="text-red-600 dark:text-red-500">Overdue</span>
+                                            {% elif a.grade != None and a.grade / a.points < 0.6 %}
+                                                <span class="text-gray-300 dark:text-gray-700">{{ a.grade }}/{{ a.points }}</span>
+                                            {% else %}
+                                                <span class="text-orange-500">Not Submitted</span>
+                                            {% endif %}
                                         </div>
 
-                                        <div class="text-gray-700 dark:text-gray-400 leading-relaxed w-full">
-                                            <h1 class="text-black dark:text-white text-xl truncate"
-                                                style="max-width: 90%">{{ a.title }}</h1>
-                                            <p class="truncate" style="max-width: 90%;">{{ a.course.name }}</p>
-                                            Due: {{ strftime(date, "%D at %-I:%M %p") }}
+                                        <div post-time-element hidden class="hidden">
+                                            Posted at
+                                            {% if "creationDate" in a %}
+                                                {{ strftime(a.creationDate, "%-m/%-d/%y %-I:%m %p") }}
+                                            {% else %}
+                                                {{ strftime(a.get_timestamp(), "%-m/%-d/%y %-I:%m %p") }}
+                                            {% endif %}
+                                        </div>
+
+                                        {% if a._cls == "Assignment" %}
                                             <div class="text-black dark:text-white">
                                                 {% if a.submitDate %}
                                                     <span class="text-green-600 dark:text-green-500">Submitted</span>
-                                                {% elif today > date %}
+                                                {% elif now > date %}
                                                     <span class="text-red-600 dark:text-red-500">Overdue</span>
                                                 {% elif a.grade != None and a.grade / a.points < 0.6 %}
                                                     <span class="text-gray-300 dark:text-gray-700">{{ a.grade }}/{{ a.points }}</span>
@@ -107,18 +220,17 @@
                                                     <span class="text-orange-500">Not Submitted</span>
                                                 {% endif %}
                                             </div>
-                                        </div>
+                                        {% endif %}
                                     </div>
-                                    </div>
-                                {% endif %}
+                                </div>
                             {% endif %}
                         {% endfor %}
                     {% endfor %}
                 {% endif %}
+            </div>
         </div>
     </div>
-    </div>
-
+    <script>const course_id = "{{ course_id }}"</script>
     {% include "courses/courseModals.html" %}
     </body>
 {% endblock %}

@@ -21,7 +21,7 @@ develop-eggs/
 downloads/
 eggs/
 .eggs/
-lib/
+# lib/
 lib64/
 parts/
 sdist/
@@ -53,6 +53,7 @@ __pypackages__/
 # Environments
 .venv
 env/
+venv/
 venv2/
 ENV/
 env.bak/

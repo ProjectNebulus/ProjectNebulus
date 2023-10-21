@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 # from ..classes import *
-from .read import (
+from app.static.python.mongodb.read import (
     Canvas,
     Chat,
     Community,
@@ -20,6 +20,7 @@ from .read import (
     getFolder,
     getGrades,
 )
+
 
 # from .read import getChat, getGrades, getEvent, getFolder, getDocument, getAssignment, get_announcement, find_user, find_courses
 

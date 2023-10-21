@@ -1,27 +1,37 @@
-["html",
-  ["dl",
-    ["dt",
+[
+  "html",
+  [
+    "dl",
+    [
+      "dt",
       "fruit"
     ],
-    ["dd",
+    [
+      "dd",
       "apple"
     ],
-    ["dd",
+    [
+      "dd",
       "banana"
     ],
-    ["dd",
+    [
+      "dd",
       "pear"
     ],
-    ["dt",
+    [
+      "dt",
       "animal"
     ],
-    ["dd",
+    [
+      "dd",
       "cow"
     ],
-    ["dd",
+    [
+      "dd",
       "duck"
     ],
-    ["dd",
+    [
+      "dd",
       "horse"
     ]
   ]

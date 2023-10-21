@@ -39,6 +39,9 @@ scipy = "^1.8.1"
 graphene = "~3.0b7"
 graphene-mongo = "^0.2.14"
 python-dotenv = "^0.20.0"
+uWSGI = "^2.0.20"
+Flask-Babel = "^2.0.0"
+dnspython = "^2.2.1"
 
 [tool.poetry.dev-dependencies]
 pylint = "^2.14.3"

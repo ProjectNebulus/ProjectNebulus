@@ -12,11 +12,13 @@ from mongoengine import (
 )
 
 from .Avatar import Avatar
+from .Calendar import Calendar
 from .Canvas import Canvas
 from .ChatProfile import ChatProfile
 from .Discord import Discord
 from .GoogleClassroom import GoogleClassroom
 from .NebulusDocument import NebulusDocument
+from .Notepad import Notepad
 from .Planner import Planner
 from .Schoology import Schoology
 from .Snowflake import Snowflake
@@ -74,6 +76,8 @@ class User(Snowflake):
     status = StringField(default="", null=True)
     courses = ListField(ReferenceField("Course"), default=[])
     planner = EmbeddedDocumentField(Planner, null=True, default=None)
+    notepad = EmbeddedDocumentField(Notepad, null=True, default=None)
+    calendar = EmbeddedDocumentField(Calendar, null=True, default=None)
     nebulus_documents = ListField(ReferenceField(NebulusDocument), default=[])
     points = IntField(default=0)
     premium = BooleanField(default=False)

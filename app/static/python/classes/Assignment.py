@@ -17,6 +17,9 @@ class Assignment(Snowflake):
     """
 
     meta = {"collection": "Assignments"}
+    author = ReferenceField(
+        "User", description="The user that created this assignment."
+    )
     course = ReferenceField(
         "Course", required=True, description="The course that this assignment is in."
     )
@@ -31,6 +34,9 @@ class Assignment(Snowflake):
         default=None,
         null=True,
         description="The number of points the teacher assigned.",
+    )
+    creationDate = DateTimeField(
+        default=None, null=True, description="The time the assignment was created."
     )
     submitDate = DateTimeField(
         default=None, null=True, description="The time the assignment was submitted."

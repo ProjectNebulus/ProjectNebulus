@@ -1,8 +1,12 @@
-["html",
-  ["p",
+[
+  "html",
+  [
+    "p",
     "This is a ",
-    ["code",
-      "code span with an `embedded` backtick"],
+    [
+      "code",
+      "code span with an `embedded` backtick"
+    ],
     "."
   ]
 ]

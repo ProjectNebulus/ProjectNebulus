@@ -1,16 +1,26 @@
-["html",
-  ["p",
+[
+  "html",
+  [
+    "p",
     "para"
   ],
-  ["hr"],
-  ["ul",
-    ["li",
+  [
+    "hr"
+  ],
+  [
+    "ul",
+    [
+      "li",
       "list"
     ]
   ],
-  ["hr"],
-  ["blockquote",
-    ["p",
+  [
+    "hr"
+  ],
+  [
+    "blockquote",
+    [
+      "p",
       "blockquote"
     ]
   ]

@@ -2,7 +2,7 @@ from flask import Blueprint
 
 api_blueprint = Blueprint(
     "api",
-    __name__,
+    "api",
     url_prefix="/api",
     template_folder="templates",
     static_folder="static",
@@ -10,7 +10,7 @@ api_blueprint = Blueprint(
 
 # Importing routes for this blueprint
 
-from .v1 import *
 from .developers import *
+from .v1 import *
 
 # from app.routes.api import graphql

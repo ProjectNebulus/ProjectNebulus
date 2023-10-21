@@ -1,5 +1,3 @@
-from typing import List
-
 from dotenv import load_dotenv
 from flask import session
 
@@ -50,7 +48,31 @@ def create_course(data: dict) -> Course:
     return course
 
 
-def create_user(data: dict) -> str | List[str | User]:
+def create_nebulusdoc(data: dict) -> NebulusDocument:
+    user = read.find_user(id=session["id"])
+
+    doc = NebulusDocument(**data)
+    if not data.get("authorizedUsers"):
+        doc.authorizedUsers.append(user)
+    if not data.get("owner"):
+        doc.owner = user
+    doc.save(force_insert=True, validate=False)
+    return doc.id
+
+
+def update_nebulusdoc(data: dict):
+    # doc = getNebulusDocument(data["id"])
+    doc = NebulusDocument.objects.get(pk=data["id"])
+    # print(doc.__dict__)
+    doc.title = data["title"]
+    doc.content = data["content"]
+    doc.owner = User.objects.get(username=session["username"])
+    doc.save(clean=False)
+    # print(doc.__dict__)
+    return doc.id
+
+
+def create_user(data: dict) -> str | list[str | User]:
     """
     Status Codes:
     0: Success
@@ -206,8 +228,8 @@ def createChat(data: dict) -> Chat:
     chat = Chat(**data)
     chat.save(force_insert=True)
     for member in chat.members:
-        member.chats.append(chat)
-        member.save()
+        member.user.chats.append(chat)
+        member.user.save()
 
     return chat
 

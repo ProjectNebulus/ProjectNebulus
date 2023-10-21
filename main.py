@@ -3,7 +3,6 @@ App entrypoint.
 """
 import os
 import platform
-from app.static.python.classes import User
 
 from dotenv import load_dotenv
 
@@ -12,22 +11,21 @@ from app.routes import init_app, socketio
 
 app = init_app()
 app.secret_key = os.getenv("MONGOPASS")
-
+app.config["secret_key"] = os.getenv("MONGOPASS")
 
 # Debug mode logs errors in more detail. Best used for testing, not production
 debug = False
 if __name__ == "__main__":
     if platform.system().lower() == "linux":  # linux - used for VPS (like DigitalOcean)
         debug = False
-        port = 80
+        port = 5000
         host = "0.0.0.0"
-        type = "s"
+        protocol = "s"
     else:  # macos (darwin) or windows (windows)
         port = 8080
         host = "localhost"
-        type = ""
+        protocol = ""
 
-    print(app.url_map)
-
-    print(f"Started Running: http{type}://{host}:{port}")
-    socketio.run(app, host=host, port=port)
+    print(str(app.url_map).replace("Map([", " ", 1).replace("])", "\n"), sep="\n")
+    print(f"Started Running: http{protocol}://{host}:{port}")
+    socketio.run(app, host=host, port=port, debug=debug)

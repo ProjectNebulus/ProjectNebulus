@@ -1,20 +1,27 @@
-["html",
-  ["h1",
+[
+  "html",
+  [
+    "h1",
     "Header"
   ],
-  ["p",
+  [
+    "p",
     "Paragraph"
   ],
-  ["h2",
+  [
+    "h2",
     "Header"
   ],
-  ["p",
+  [
+    "p",
     "Paragraph"
   ],
-  ["h3",
+  [
+    "h3",
     "Header"
   ],
-  ["p",
+  [
+    "p",
     "Paragraph"
   ]
 ]

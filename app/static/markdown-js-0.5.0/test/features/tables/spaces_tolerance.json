@@ -1,38 +1,53 @@
-[ "html",
-  [ "p",
+[
+  "html",
+  [
+    "p",
     "This is a table (look out, less than 4 spaces\nbefore headers and rule)."
   ],
-  [ "table",
-    [ "thead",
-      [ "tr",
-        [ "th",
+  [
+    "table",
+    [
+      "thead",
+      [
+        "tr",
+        [
+          "th",
           "Header"
         ],
-        [ "th",
+        [
+          "th",
           "Header"
         ]
       ]
     ],
-    [ "tbody",
-      [ "tr",
-        [ "td",
+    [
+      "tbody",
+      [
+        "tr",
+        [
+          "td",
           "1"
         ],
-        [ "td",
+        [
+          "td",
           "2"
         ]
       ],
-      [ "tr",
-        [ "td",
+      [
+        "tr",
+        [
+          "td",
           "3"
         ],
-        [ "td",
+        [
+          "td",
           "4"
         ]
       ]
     ]
   ],
-  [ "p",
+  [
+    "p",
     "Yeah, right."
   ]
 ]
