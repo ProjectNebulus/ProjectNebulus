@@ -67,7 +67,7 @@ mongoengine==0.24.2
 musixmatch~=0.9
 nltk~=3.7
 numpy==1.23.1
-oauthlib==3.2.0
+oauthlib==3.2.2
 packaging
 pandas==1.4.3
 plotly~=5.8.0
