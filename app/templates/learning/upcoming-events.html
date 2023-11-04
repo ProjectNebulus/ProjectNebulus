@@ -85,11 +85,12 @@
                 <div class="absolute right-0 bottom-0 material-icons hover:bg-gray-50 dark:hover:bg-gray-500 p-1 expand text-gray-200 cursor-pointer dark:text-gray-400 rounded-lg mr-3 mb-3">
                     open_in_new
                 </div>
-                <div style="right: 2.25rem;" class="absolute bottom-0 material-icons hover:bg-gray-50 dark:hover:bg-gray-500 p-1 checklist text-gray-200 cursor-pointer dark:text-gray-400 rounded-lg mr-3 mb-3">
+                <div style="right: 2.25rem;"
+                     class="absolute bottom-0 material-icons hover:bg-gray-50 dark:hover:bg-gray-500 p-1 checklist text-gray-200 cursor-pointer dark:text-gray-400 rounded-lg mr-3 mb-3">
                     done
                 </div>
-                <div type-element class="hidden">Event</div>
-            <div type-id class="hidden">{{ a.pk }}</div>
+                <div type-element hidden class="hidden">Event</div>
+                <div type-id hidden class="hidden">{{ a.pk }}</div>
                 <div content-element hidden class="hidden">{{ fmt(a.description)|safe }}</div>
                 <div author-element hidden class="hidden">{{ a.course.teacher }}</div>
                 <img src="{% if "teacherAccount" in a.course %} {{ a.course.teacher.avatar.avatar_url }} {% else %} https://app.schoology.com/sites/all/themes/schoology_theme/images/course-default.svg {% endif %}"
@@ -123,12 +124,16 @@
                         {% else %}
                             Happening on
                         {% endif %}
-                        {{ strftime(date, "%-m/%-d/%y %-I:%M %p") }} •
-                        {% if a.submitDate %}
+                        {{ strftime(date, "%-m/%-d/%y %-I:%M %p") }}
+                        <span class="text-black dark:text-white">•</span>
+                        {% if a.grade != None and a.grade / a.points < 0.9 %}
+                            <span class="text-orange-500">{{ grade_score(a.grade, a.points) }}</span>
+                        {% elif a.submitDate %}
                             <span class="text-green-600 dark:text-green-500">Submitted</span>
                         {% elif now > date %}
                             <span class="text-red-600 dark:text-red-500">Overdue</span>
-                            <span class="text-orange-500">Not Submitted</span>
+                        {% else %}
+                            <span class="text-blue-500">Not Submitted</span>
                         {% endif %}
                     </div>
                     <div post-time-element hidden class="hidden">
@@ -141,14 +146,14 @@
                     </div>
                     {% if a._cls == "Assignment" %}
                         <div class="text-black dark:text-white">
-                            {% if a.submitDate %}
+                            {% if a.grade != None and a.grade / a.points < 0.9 %}
+                                <span class="text-orange-500">{{ grade_score(a.grade, a.points) }}</span>
+                            {% elif a.submitDate %}
                                 <span class="text-green-600 dark:text-green-500">Submitted</span>
                             {% elif now > date %}
                                 <span class="text-red-600 dark:text-red-500">Overdue</span>
-                            {% elif a.grade != None and a.grade / a.points < 0.6 %}
-                                <span class="text-gray-300 dark:text-gray-700">{{ a.grade }}/{{ a.points }}</span>
                             {% else %}
-                                <span class="text-orange-500">Not Submitted</span>
+                                <span class="text-blue-500">Not Submitted</span>
                             {% endif %}
                         </div>
                     {% endif %}

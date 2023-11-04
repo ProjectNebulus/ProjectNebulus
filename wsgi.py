@@ -1,11 +1,8 @@
-import platform
-
 from main import app, socketio
 
 debug = False
 if __name__ == "__main__":
     if __name__ == "__main__":
-
         print(
             *sorted(
                 str(app.url_map)

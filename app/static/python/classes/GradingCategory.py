@@ -6,7 +6,9 @@ class GradingCategory(EmbeddedDocument):
     CALC_TOTAL_PTS = 2
 
     course = ReferenceField("Course")
-    weight = FloatField(default=None, description="Weight (in decimal) of this category.")
+    weight = FloatField(
+        default=None, description="Weight (in decimal) of this category."
+    )
     title = StringField(default=None)
     subcategories = ListField(EmbeddedDocumentField("GradingCategory"), default=None)
     grade = FloatField(required=False)
@@ -26,10 +28,18 @@ class GradingCategory(EmbeddedDocument):
         else:
             if self.calculation_type == self.CALC_TOTAL_PTS:
                 max_grade = sum(
-                    [assignment.points for assignment in self.course.assignments if assignment.grading_category is self]
+                    [
+                        assignment.points
+                        for assignment in self.course.assignments
+                        if assignment.grading_category is self
+                    ]
                 )
                 grades = sum(
-                    [assignment.grade for assignment in self.course.assignments if assignment.grading_category is self]
+                    [
+                        assignment.grade
+                        for assignment in self.course.assignments
+                        if assignment.grading_category is self
+                    ]
                 )
 
                 if max_grade > 0:
@@ -40,7 +50,11 @@ class GradingCategory(EmbeddedDocument):
             else:
                 grades = []
                 for assignment in self.course.assignments:
-                    if assignment.grading_category is self and assignment.points and assignment.grade is not None:
+                    if (
+                        assignment.grading_category is self
+                        and assignment.points
+                        and assignment.grade is not None
+                    ):
                         grades.append(assignment.grade / assignment.points)
 
                 if len(grades) > 0:

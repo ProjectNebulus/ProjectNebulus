@@ -5,7 +5,7 @@ from .. import internal
 
 
 @internal.route("/plagarism", methods=["POST"])
-def plagarism():
+def plagiarism():
     """
     Json input:
 

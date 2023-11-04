@@ -5,7 +5,7 @@ from flask import render_template, session
 
 from app.static.python.extensions.integrations.schoology import get_schoology_emails
 from app.static.python.mongodb import read
-from app.static.python.mongodb.read import getText
+from app.static.python.mongodb.read import get_text
 from . import main_blueprint
 from .utils import logged_in
 
@@ -47,5 +47,5 @@ def chatPage(page):
         disableArc=True,
         status=status,
         date=date_time,
-        translate=getText,
+        translate=get_text,
     )

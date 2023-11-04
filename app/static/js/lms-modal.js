@@ -1,5 +1,5 @@
 document.getElementById("extraWidgets").innerHTML = `
-<button id="create" class="hidden sm:flex items-center text-left space-x-3 w-16 h-12 bg-gray-300 ring-1
+<button class="create flex items-center text-left space-x-3 w-16 h-12 bg-gray-300 ring-1
  ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm rounded-lg
  dark:bg-slate-800/75 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-gray-500
    text-gray-600 font-medium rounded-lg text-sm pl-4 py-2.5 text-center">
@@ -16,9 +16,6 @@ function setUpFunc() {
 
     let screens = modal.getElementsByClassName('CoursePage');
 
-    // set up button
-    let btn = document.getElementById('create');
-
     for (const screen of screens)
         screen.className +=
             ' relative w-full max-w-2xl relative bg-gray-200 rounded-lg shadow dark:bg-gray-800 text-black dark:text-white';
@@ -29,7 +26,7 @@ function setUpFunc() {
 
     for (const list of templateLists) list.classList.add('scroll');
 
-    btn.onclick = function () {
+    bindFunc('.create', () => {
         if (modal.style.display === "block")
             return;
 
@@ -59,7 +56,7 @@ function setUpFunc() {
         });
 
         req.fail(() => setup = false);
-    };
+    });
 
     // set up close button
     for (let close of modal.getElementsByClassName('close')) {

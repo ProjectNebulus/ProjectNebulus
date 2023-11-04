@@ -18,7 +18,6 @@ updating the changes file, sorry :(
 - Fix images inside links mistakenly requiring a title attribute to parse
   correctly (#71)
 
-
 ## v0.4.0 - 2012-06-09
 
 - Fix for anchors enclosed by parenthesis (issue #46)

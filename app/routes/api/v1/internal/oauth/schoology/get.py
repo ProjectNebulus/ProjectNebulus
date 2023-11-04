@@ -31,8 +31,6 @@ def schoology_get():
     return str(
         auth.request_authorization(
             callback_url=str(request.url_root)
-                         .replace("https://", "")
-                         .replace("http://", "")
-                         + "/api/v1/internal/oauth/schoology/callback"
+            + "/api/v1/internal/oauth/schoology/callback"
         )
     ).replace("//oauth", "/oauth")

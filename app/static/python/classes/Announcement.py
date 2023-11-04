@@ -6,7 +6,8 @@ from mongoengine import (
     IntField,
     ListField,
     ReferenceField,
-    StringField, DictField,
+    StringField,
+    DictField,
 )
 
 from .Snowflake import Snowflake

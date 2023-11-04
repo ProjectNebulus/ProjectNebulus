@@ -105,13 +105,9 @@
         </style>
     </head>
     <body style="background: rgb(30 40 58)">
-    <div class="container mx-auto px-8 py-12 bg-white dark:bg-gray-900 rounded-lg pb-1/2 w-full"
-         style="overflow: hidden;
-                    max-width: 50rem;
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);">
+    <div class="container mx-auto px-8 py-12 bg-white dark:bg-gray-900 rounded-lg pb-1/2 w-full absolute"
+         id="main-modal"
+         style="overflow: hidden; max-width: 50rem; top: 50%; left: 50%; transform: translate(-50%, -50%)">
         <div id="main" style="width: 60%; margin-left: 10%">
             <h1 class="dark:text-white text-lg font-bold">
                 <img src="/static/images/NebulusSpecialLogo.png"
@@ -125,8 +121,7 @@
                 </p>
                 <p>
                     Forgot password?
-                    <span onclick="resetScreen()"
-                          class="text-blue-400 hover:text-blue-600 cursor-pointer">Reset</span>
+                    <span class="reset-screen-btn text-blue-400 hover:text-blue-600 cursor-pointer">Reset</span>
                 </p>
             </div>
             <div class="relative mt-4">

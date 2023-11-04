@@ -10,7 +10,7 @@
         <meta property="og:type" content="website"/>
         <meta property="og:url" content="https://nebulus.app/profile/{{ guestuser_id }}"/>
         <meta property="og:image"
-              content="{{ guestavatar}}"/>
+              content="{{ guestavatar }}"/>
         <meta property="og:description"
               content="Check out {{ guestuser }}'s Profile on Nebulus!"/>
 
@@ -33,11 +33,14 @@
                             height: 80px;opacity:0.8;"></div>
                 <div style="text-align: left;padding: 30px;backdrop-filter: blur(3px) !important;
     background: #3741517d;">
-                    <button class="rounded-full border-gray-300 border-none w-20 h-20  dark:bg-gray-900 dark:hover:bg-gray-800 " style="
+                    <button class="rounded-full border-gray-300 border-none w-20 h-20  dark:bg-gray-900 dark:hover:bg-gray-800 "
+                            style="
     margin-bottom: 30px;
     margin-top: -70px;
 ">
-                        <span image="{{guestavatar}}" no-revert=""><img alt="logo" style="filter: brightness(100%);" class="h-12 mx-auto my-auto" src="{{avatar}}"></>
+                        <span image="{{ guestavatar }}" no-revert=""><img alt="logo" style="filter: brightness(100%);"
+                                                                          class="h-12 mx-auto my-auto"
+                                                                          src="{{ avatar }}"></>
                     </button>
                     </button>
                     <br style="">
@@ -45,9 +48,9 @@
                        class="text-black dark:text-white text-4xl">{{ guestuser }}</p>
                     <p style="color: darkgray;" class="text-2xl">{{ guestemail }}</p>
 
-                        <span style="margin-top:15px;display:grid; grid-auto-flow: column; align-content: center; justify-content: center; "
-                              class="noselect dark:text-white dark: bg-gray-800 p-6 rounded-lg noselect dark:text-white"
-                              id="song">
+                    <span style="margin-top:15px;display:grid; grid-auto-flow: column; align-content: center; justify-content: center; "
+                          class="noselect dark:text-white dark: bg-gray-800 p-6 rounded-lg noselect dark:text-white"
+                          id="song">
                         </span>
 
                 </div>

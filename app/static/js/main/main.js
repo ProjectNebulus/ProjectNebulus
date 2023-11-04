@@ -6,7 +6,10 @@ let screenTime;
 const modals = new Set();
 
 
-window.addEventListener("beforeunload", function (e) {
+window.addEventListener("unload", function (e) {
+    for (const blob of list)
+        URL.revokeObjectURL(blob);
+
     screenTime = Date.now() - startLoad;
     $.ajax({
         url: '/screenTime',
@@ -134,8 +137,11 @@ class KeyUpTimer {
 
     enable() {
         this.elements = document.querySelectorAll(this.selector);
-        this.onKeyUp = (e) => {
-            if (e.key.length > 1 && e.key !== "Enter" && e.key !== "Backspace")
+        if (this.elements.length === 0)
+            console.error("WARNING: KeyUpTime query selector does not match any elements.");
+
+        this.onKeyUp = e => {
+            if (e.key && e.key.length > 1 && e.key !== "Enter" && e.key !== "Backspace")
                 return;
 
             this.lastKeyUpTime = Date.now();
@@ -143,7 +149,17 @@ class KeyUpTimer {
             this.lastKeyEvent = e;
         };
 
-        for (const element of this.elements) element.addEventListener('keyup', this.onKeyUp);
+        this.onClick = el => {
+            if (Date.now() - this.lastKeyUpTime >= 2000 && el.value && el === document.activeElement)
+                this.func(el);
+
+            this.lastKeyUpTime = Date.now();
+        }
+
+        for (const element of this.elements) {
+            element.addEventListener('keyup', this.onKeyUp);
+            element.addEventListener('click', () => this.onClick(element));
+        }
 
         this.interval = setInterval(() => {
             if (!this.recheck) return;
@@ -195,6 +211,12 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.style.background = `linear-gradient( rgba(${brightness}, ${brightness}, ${brightness}, 0.6), rgba(${brightness}, ${brightness}, ${brightness}, 0.6) ), url('${wallpaper}') no-repeat center center fixed`;
         document.body.style.backgroundSize = 'cover';
     }
+
+    for (const el of document.querySelectorAll("input.textarea-styling"))
+        el.classList.add('bg-gray-50/75', 'border', 'border-gray-300', 'text-gray-900', 'text-sm', 'rounded-lg', 'focus:ring-blue-500', 'focus:border-blue-500', 'block', 'dark:bg-gray-800/50', 'dark:border-gray-600', 'dark:focus:border-blue-500', 'dark:placeholder-gray-400', 'dark:text-white', 'w-full', 'pl-10', 'p-2.5', 'dark:focus:ring-blue-500')
+
+    for (const el of document.getElementsByClassName("button-styling"))
+        el.classList.add('absolute', 'p-1', 'material-icons', 'top-0', 'right-0', 'hover:bg-gray-200', 'dark:hover:bg-gray-600', 'rounded-lg', 'cursor-pointer', 'text-gray-400', 'dark:text-gray-500')
 });
 
 function invertSite() {
@@ -250,6 +272,33 @@ function invertSite() {
         document.body.style.background = `linear-gradient( rgba(${brightness}, ${brightness}, ${brightness}, 0.6), rgba(${brightness}, ${brightness}, ${brightness}, 0.6) ), url('${wallpaper}') no-repeat center center fixed`;
         document.body.style.backgroundSize = 'cover';
     }
+}
+
+function copy(el, text) {
+    el.disabled = true;
+
+    navigator.clipboard.writeText(text).then(
+        () => {
+            el.style.color = "#00AA00";
+            el.innerHTML = "done";
+            el.disabled = false;
+
+            setTimeout(() => {
+                el.innerHTML = "content_copy";
+                el.style.color = "";
+            }, 2000);
+        },
+        () => {
+            el.style.color = "#FF7777";
+            el.innerHTML = "error";
+            el.disabled = false;
+
+            setTimeout(() => {
+                el.innerHTML = "content_copy";
+                el.style.color = "";
+            }, 2000);
+        }
+    );
 }
 
 let isOnline = true;
@@ -405,6 +454,13 @@ function openModal(object_id) {
     targetEl.classList.add("pointer-events-none");
     targetEl.children[0].classList.add("pointer-events-auto");
 
+    for (const el of document.querySelectorAll("#" + object_id + " [step]"))
+        el.classList.add("hidden");
+
+    const step1 = document.querySelector("#" + object_id + " [step='1']")
+    if (step1)
+        step1.classList.remove("hidden");
+
     modals.add(object_id);
 
     const modal = new Modal(targetEl);
@@ -444,6 +500,17 @@ function closeModal(object_id) {
         for (const el of document.querySelectorAll('[modal-backdrop]'))
             el.remove();
     }, 200);
+}
+
+function bindFunc(query, func) {
+    let valid = false;
+    for (let el of document.querySelectorAll(query)) {
+        el.addEventListener("click", () => func(el));
+        valid = true;
+    }
+
+    if (!valid)
+        console.warn("Query " + query + " did not match any elements");
 }
 
 function randomCat() {

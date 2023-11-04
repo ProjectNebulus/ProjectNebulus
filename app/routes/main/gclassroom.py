@@ -7,10 +7,10 @@ import requests
 from flask import redirect, render_template, request, session
 from googleapiclient.discovery import build
 
+# -*- coding: utf-8 -*-
+from app.static.python.mongodb.read import get_text
 from . import main_blueprint
 from .utils import logged_in
-# -*- coding: utf-8 -*-
-from ...static.python.mongodb.read import getText
 
 os.environ["OAUTHLIB_RELAX_TOKEN_SCOPE"] = "None"
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
@@ -67,7 +67,9 @@ def gtest_api_request():
     print(user_info)
     user_info = [user_info["name"], user_info["picture"]]
 
-    return render_template("user/connections/connectClassroom.html", data=user_info, translate = getText)
+    return render_template(
+        "user/connections/connect_classroom.html", data=user_info, translate=get_text
+    )
     # return flask.jsonify(courses)
 
 
@@ -121,7 +123,7 @@ def oauth2callback():
     # Use the authorization server's response to fetch the OAuth 2.0 tokens.
     # authorization_response = flask.request.url
     authorization_response = (
-            session["redirect_url_g"] + "&code=" + request.args.get("code")
+        session["redirect_url_g"] + "&code=" + request.args.get("code")
     )
     if "http://beta.nebulus.ml" in authorization_response:
         authorization_response = authorization_response.replace("http", "https")

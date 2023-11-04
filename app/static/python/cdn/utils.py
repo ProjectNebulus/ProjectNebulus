@@ -1,6 +1,5 @@
 import zlib
 
-import requests
 from spaces import *
 
 ACCESS_ID = "5POV4IR5H2XWALCF7KWY"

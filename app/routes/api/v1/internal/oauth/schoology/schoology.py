@@ -8,4 +8,4 @@ from ... import internal
 @internal.route("/oauth/schoology/check", methods=["GET"])
 @private_endpoint
 def schoology_check():
-    return read.checkSchoology(session["id"])
+    return read.check_schoology(session["id"])

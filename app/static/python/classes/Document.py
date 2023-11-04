@@ -22,8 +22,9 @@ class DocumentFile(Snowflake):
     meta = {"collection": "Documents"}
     url = URLField(required=True)
     name = StringField(required=True)
-    description = StringField(default="")
+    description = StringField(default=None)
     upload_date = DateTimeField(default=datetime.now())
+    type = StringField(default="file")  # types: file, link
     folder = ReferenceField(
         "Folder", default=None
     )  # 0 if it's in the course, not any folder

@@ -4,14 +4,14 @@ import urllib.request
 from colorthief import ColorThief
 
 
-def getColor(url):
+def get_color(url):
     try:
         ending = url.split("/")[-1]
         if "?" in ending:
             q = ending.index("?")
             ending = ending[0:q]
         dot = ending.index(".")
-        extension = ending[dot + 1:]
+        extension = ending[dot + 1 :]
         file = f"testing.{extension}"
         urllib.request.urlretrieve(url, file)
         if extension.lower() != "png" and extension.lower() != "svg":

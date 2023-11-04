@@ -22,12 +22,12 @@
 <p>Incorrect nesting:</p>
 
 <ol>
-<li>*test  <strong>test*  test</strong></li>
-<li>_test  <strong>test_  test</strong></li>
-<li>**test  <em>test</em>* test*</li>
-<li>__test  <em>test</em>_ test_</li>
-<li><em>test   *test</em>  test*</li>
-<li><em>test   _test</em>  test_</li>
+<li>*test <strong>test* test</strong></li>
+<li>_test <strong>test_ test</strong></li>
+<li>**test <em>test</em>* test*</li>
+<li>__test <em>test</em>_ test_</li>
+<li><em>test *test</em> test*</li>
+<li><em>test _test</em> test_</li>
 <li><strong>test <strong>test</strong> test</strong></li>
 <li><strong>test <strong>test</strong> test</strong></li>
 </ol>
@@ -35,9 +35,9 @@
 <p>No emphasis:</p>
 
 <ol>
-<li>test*  test  *test</li>
+<li>test* test *test</li>
 <li>test** test **test</li>
-<li>test_  test  _test</li>
+<li>test_ test _test</li>
 <li>test__ test __test</li>
 </ol>
 

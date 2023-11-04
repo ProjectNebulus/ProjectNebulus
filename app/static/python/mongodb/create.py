@@ -11,7 +11,7 @@ import schoolopy
 
 from ..classes import *
 
-debug_importing = False  # does not save objects to database
+debug_importing = False  # does not save objects to database if true
 
 
 def generateSchoologyObject(_id: str) -> schoolopy.Schoology:
@@ -136,13 +136,13 @@ def createGrades(data: dict, course=None, save=True) -> Grades:
 
 
 def createDocumentFile(data: dict, course=None, save=True) -> DocumentFile:
-    if file_ending := data.get("file_ending"):
+    if data.get("file_ending"):
         del data["file_ending"]
 
     document_file = DocumentFile(**data)
 
     if save and not debug_importing:
-        document_file.save(force_insert=True)
+        document_file.save(validate=False, force_insert=True)
 
         folder = document_file.folder
         if not course:
@@ -150,11 +150,15 @@ def createDocumentFile(data: dict, course=None, save=True) -> DocumentFile:
 
         if course:
             course.documents.append(document_file)
+            if save:
+                course.save(validate=False)
         elif folder:
             folder.documents.append(document_file)
             folder.save()
         else:
-            raise Exception("Cannot create document file without either course or folder")
+            raise Exception(
+                "Cannot create document file without either course or folder"
+            )
 
     return document_file
 

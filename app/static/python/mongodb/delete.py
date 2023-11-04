@@ -12,7 +12,7 @@ from app.static.python.mongodb.read import (
     User,
     find_courses,
     find_user,
-    getChat,
+    get_chat,
 )
 
 
@@ -197,7 +197,7 @@ def delete_canvas_connection(user_id: str, canvas_object: Canvas) -> None:
 
 
 def delete_google_classroom_connection(
-        user_id: str, google_classroom_object: GoogleClassroom
+    user_id: str, google_classroom_object: GoogleClassroom
 ) -> None:
     """
     Deletes a Google Classroom connection object  from the database.
@@ -217,7 +217,7 @@ def delete_spotify_connection(user_id: str, spotify_object: Spotify) -> None:
 
 
 def deleteChat(chat_id: str):
-    chat = getChat(chat_id)
+    chat = get_chat(chat_id)
     for member in chat.members:
         member.chats.remove(chat)
         member.save()

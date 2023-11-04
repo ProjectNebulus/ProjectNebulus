@@ -5,9 +5,9 @@ from flask import render_template, session
 from googleapiclient.discovery import build
 
 from app.static.python.mongodb import read
-from app.static.python.mongodb.read import getText
+from app.static.python.mongodb.read import get_text
 from . import main_blueprint
-from .utils import logged_in, strftime, fmt
+from .utils import logged_in, strftime, fmt, grade_score
 
 
 def credentials_to_dict(credentials):
@@ -91,9 +91,10 @@ def app():
         events=events,
         ae=a_len,
         ee=e_len,
+        grade_score=grade_score,
         enumerate=enumerate,
         strftime=strftime,
-        translate=getText,
+        translate=get_text,
         showPopup=show_popup,
         fmt=fmt,
     )
@@ -109,7 +110,7 @@ def bell_schedule():
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         read=read,
         page="Nebulus - Bell Schedule",
-        translate=getText,
+        translate=get_text,
     )
 
 
@@ -128,7 +129,7 @@ def courses():
         user_courses=list(user_courses),
         read=read,
         page="Nebulus - Courses",
-        translate=getText,
+        translate=get_text,
     )
 
 
@@ -147,7 +148,7 @@ def clubs():
         user_clubs=list(user_clubs),
         read=read,
         page="Nebulus - Clubs",
-        translate=getText,
+        translate=get_text,
     )
 
 
@@ -184,41 +185,40 @@ def get_courses():
     import schoolopy
 
     try:
-        schoology = read.getSchoology(id=session["id"])
-        if schoology and schoology[0].apikey == "":
+        schoology = read.get_schoology(id=session["id"])
+        if schoology and schoology[0].api_key == "":
             schoology = schoology[0]
             key = (
-                    schoology.apikey
-                    or session.get("request_token")
-                    or "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
+                schoology.api_key
+                or session.get("request_token")
+                or "eb0cdb39ce8fb1f54e691bf5606564ab0605d4def"
             )
             secret = (
-                    schoology.apisecret
-                    or session.get("request_token_secret")
-                    or "59ccaaeb93ba02570b1281e1b0a90e18"
+                schoology.api_secret
+                or session.get("request_token_secret")
+                or "59ccaaeb93ba02570b1281e1b0a90e18"
             )
 
             auth = schoolopy.Auth(
                 key,
                 secret,
-                domain=schoology.schoologyDomain,
+                domain=schoology.domain,
                 three_legged=True,
-                request_token=schoology.Schoology_request_token,
-                request_token_secret=schoology.Schoology_request_secret,
-                access_token=schoology.Schoology_access_token,
-                access_token_secret=schoology.Schoology_access_secret,
+                request_token=schoology.request_token,
+                request_token_secret=schoology.request_secret,
+                access_token=schoology.access_token,
+                access_token_secret=schoology.access_secret,
             )
             auth.authorize()
             sc = schoolopy.Schoology(auth)
             sc.limit = "100&include_past=1"
-            scCourses = list(sc.get_user_sections(user_id=sc.get_me().id))
+
+            me = sc.get_me()
+            scCourses = list(sc.get_user_sections(user_id=me.id))
             for i in range(0, len(scCourses)):
                 scCourses[i] = dict(scCourses[i])
                 scCourses[i]["link"] = (
-                        schoology.schoologyDomain
-                        + "course/"
-                        + scCourses[i]["id"]
-                        + "/materials"
+                    schoology.domain + "course/" + scCourses[i]["id"] + "/materials"
                 )
             scSchool = sc.get_school(scCourses[0]["school_id"])
             scCourses.append(scSchool)
@@ -226,29 +226,26 @@ def get_courses():
         elif schoology:
             schoology = schoology[0]
             auth = schoolopy.Auth(
-                schoology.apikey, schoology.apisecret, domain=schoology.schoologyDomain,
+                schoology.api_key, schoology.api_secret, domain=schoology.domain,
             )
             auth.authorize()
             sc = schoolopy.Schoology(auth)
             sc.limit = "100&include_past=1"
-            scCourses = list(sc.get_user_sections(user_id=sc.get_me().id))
+            me = sc.get_me()
+
+            scCourses = list(sc.get_user_sections(user_id=me.id))
             for i in range(0, len(scCourses)):
                 scCourses[i] = dict(scCourses[i])
                 scCourses[i]["link"] = (
-                        schoology.schoologyDomain
-                        + "course/"
-                        + scCourses[i]["id"]
-                        + "/materials"
+                    schoology.domain + "course/" + scCourses[i]["id"] + "/materials"
                 )
             scSchool = sc.get_school(scCourses[0]["school_id"])
             scCourses.append(scSchool)
 
-            scGroups = list(sc.get_user_groups(user_id=sc.get_me().id))
+            scGroups = list(sc.get_user_groups(user_id=me.id))
             for i in range(0, len(scGroups)):
                 scGroups[i] = dict(scGroups[i])
-                scGroups[i]["link"] = (
-                        schoology.schoologyDomain + "group/" + scCourses[i]["id"]
-                )
+                scGroups[i]["link"] = schoology.domain + "group/" + scCourses[i]["id"]
             scSchool = sc.get_school(scCourses[0]["school_id"])
             scGroups.append(scSchool)
 

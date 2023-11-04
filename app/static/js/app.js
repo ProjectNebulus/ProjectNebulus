@@ -71,6 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <img src="${randomCat()}" class="w-8 h-10">
                     <p class="text-gray-500 dark:text-gray-400 text-2xl">This is the end...</p>
                 </div>`
+                updateEventListeners();
             }
 
             return;
@@ -162,6 +163,7 @@ function markElementAsDone(id) {
         data: JSON.stringify({id: id})
     });
 }
+
 function openDetailsModal(content, title, author, pic, course, postTime, dueTime, type, coursePic, likes) {
     if (type === "Announcement") {
         document.getElementById("submissionsBox").style.display = "none";

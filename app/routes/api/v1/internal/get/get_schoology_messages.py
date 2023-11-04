@@ -5,14 +5,14 @@ from flask import jsonify, request, session
 
 from app.routes.main.utils import private_endpoint
 from app.static.python.mongodb import read
-from app.static.python.utils.colors import getColor
-from . import internal
+from app.static.python.utils.colors import get_color
+from .. import internal
 
 
 @internal.route("/get/schoology/messages", methods=["POST"])
 @private_endpoint
 def get_schoology_messages():
-    sc = read.getSchoologyAuth(session["id"])
+    sc = read.get_schoology_auth(session["id"])
     start_at = int(request.form.get("start"))
     end_at = int(request.form.get("start")) + 5
     sc.limit = end_at + 1
@@ -29,13 +29,13 @@ def get_schoology_messages():
         authorPfp = author["picture_url"]
         authorEmail = author["primary_email"]
         authorSchool = sc.get_school(author["school_id"])["title"]
-        authorColor = getColor(authorPfp)
+        authorColor = get_color(authorPfp)
         oldRecipients = message["recipient_ids"].split(",")
         recipients = []
         for recipient in oldRecipients:  # recipients:
             recipient = sc.get_user(recipient)
             school = sc.get_school(recipient["school_id"])["title"]
-            color = getColor(recipient["picture_url"])
+            color = get_color(recipient["picture_url"])
             recipients.append(
                 {
                     "name": recipient["name_display"],

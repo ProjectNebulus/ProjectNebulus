@@ -15,32 +15,30 @@
     </style>
     {% include "utils/navbar.html" %}
     <div id="middle2" style="width: 90%;overflow-y: auto;margin: auto;height: 80%;">
-        {% if user_courses|length == 0 %}
-            <div class="text-black dark:text-white m-3 p-6 rounded-lg w-1/2 dark:bg-gray-900/50 bg-white/50"
-                 style="backdrop-filter: blur(10px);">
-                <h1 class="text-2xl ">You don't have any Courses yet!</h1>
-                <p style=" margin-top: 10px; margin-bottom: 10px; ">You can...</p>
-                <ul class="ml-3 space-y-1 max-w-md list-disc list-inside text-gray-500 dark:text-gray-400">
-                    <li>Import a Course from External LMS's</li>
-                    <li>Create a Course on Nebulus</li>
-                    <li>Join a Course on Nebulus with a Code</li>
-                </ul>
-                <button type="button"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                        style="
-    margin-top: 20px;
-">Add a Course
-                </button>
+        <div class="text-black dark:text-white m-auto mt-16 p-6 rounded-lg w-1/2 max-w-lg dark:bg-gray-900/50 bg-white/50
+            {% if user_courses|length > 0 %}hidden{% endif %}" id="no-courses"
+             style="backdrop-filter: blur(10px);">
+            <h1 class="text-2xl">You don't have any Courses yet!</h1>
+            <p style=" margin-top: 10px; margin-bottom: 10px; ">You can...</p>
+            <ul class="ml-3 space-y-1 list-disc list-inside text-gray-500 dark:text-gray-400">
+                <li>Import a Course from External LMS's</li>
+                <li>Create a Course on Nebulus</li>
+                <li>Join a Course on Nebulus with a Code</li>
+            </ul>
+            <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium create
+                      rounded-lg text-sm px-5 py-2.5 mt-5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none
+                      dark:focus:ring-blue-800">
+                Add a Course
+            </button>
 
-            </div>
-        {% endif %}
+        </div>
         <div class="overflow-auto p-4">
-            <div class="w-full grid gap-8 justify-center"
+            <div class="w-full grid gap-8 justify-center" id="course-length"
                  style="grid-template-columns: repeat(auto-fit, 24rem)">
                 {% for course in user_courses %}
                     <a href="/course/{{ course.id }}">
                         <div style="background: url('{{ course.avatar.avatar_url }}'); height: 15rem; width: 22rem"
-                             class="rounded-xl course"
+                             class="rounded-xl course" id="{{ course.id }}"
                              total-resources="{{ course.assignments|length + course.announcements|length + course.events|length + course.documents|length }}">
                             <div class="max-w-sm bg-gray-50 rounded-xl shadow-md dark:bg-gray-800/75 dark:border-gray-700 p-2"
                                  style="float:left;
@@ -50,24 +48,23 @@
                                 <div class="absolute material-icons text-gray-500 dark:text-gray-400 bg-gray-300
                                  dark:bg-gray-700 rounded-lg settings flex" onclick="override = true">
                                     <div class="hover:bg-gray-200 dark:hover:bg-gray-600 p-2"
-                                         title="Copy Course Id"
-                                         onclick="copyCourseId('{{ course.id }}', this)">content_copy
+                                         title="Copy Course Id">content_copy
                                     </div>
+                                    {% if course.imported_from != "Nebulus" %}
+                                        <div class="hover:bg-gray-200 dark:hover:bg-gray-600 p-2"
+                                             title="Sync Course">
+                                            sync
+                                        </div>
+                                    {% endif %}
                                     <div class="hover:bg-gray-200 dark:hover:bg-gray-600 p-2"
-                                         title="Delete Course"
-                                         onclick="deleteCourse('{{ course.id }}', this.parentElement.parentElement.parentElement)">
+                                         title="Delete Course">
                                         delete
-                                    </div>
-                                    <div class="hover:bg-gray-200 dark:hover:bg-gray-600 p-2"
-                                         title="Sync Course">
-                                       sync
                                     </div>
                                 </div>
                                 <div class="text-left">
                                     <div class="p-4 flex">
                                         {% if course.avatar != None %}
                                             <img src="{{ course.avatar.avatar_url }}"
-                                                 onload="if (!displayImage(this)) this.style.display = 'none';"
                                                  alt="Image for {{ course.name }}"
                                                  class="object-cover inline-block rounded-lg mr-4"
                                                  style="width: 50px; height: 50px">
@@ -180,6 +177,6 @@
             </div>
         </div>
     </div>
-    <script src="/static/js/courses.js"></script>
+    <script src="/static/js/courses.js" defer></script>
     {% include "learning/lms-modal.html" %}
 {% endblock %}

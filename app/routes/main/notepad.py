@@ -1,7 +1,7 @@
 from flask import render_template, session
 
 from app.static.python.mongodb import read
-from app.static.python.mongodb.read import getText
+from app.static.python.mongodb.read import get_text
 from . import main_blueprint
 
 
@@ -13,7 +13,7 @@ def docs():
         user=session.get("username"),
         user_id=session.get("id"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-        translate=getText,
+        translate=get_text,
         docs=docs,
     )
 
@@ -61,7 +61,7 @@ def notepad():
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         read=read,
         fonts=fonts,
-        translate=getText,
+        translate=get_text,
         courses=courses,
         notepad=user_notepad,
     )
@@ -97,7 +97,7 @@ def document(id):
         "Roboto Mono Slashed Slashed Condensed",
     ]
     try:
-        document = read.getNebulusDocument(id)
+        document = read.get_neb_doc(id)
         print(document)
         # check authorized user
 
@@ -111,7 +111,7 @@ def document(id):
             avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
             read=read,
             fonts=fonts,
-            translate=getText,
+            translate=get_text,
             content=content,
             title=title,
             id=id,

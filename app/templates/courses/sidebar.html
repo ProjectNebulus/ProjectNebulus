@@ -20,6 +20,7 @@
                     </div>
                 </li>
                 <script>const syncFrom = "{{ course.imported_from | lower | replace("google_", "") }}";</script>
+                <script> const syncID = "{{ course.imported_id }}"</script>
             {% endif %}
             <li>
                 <a href="/course/{{ course_id }}/home"

@@ -94,7 +94,7 @@ function changeInput() {
             //add /api
             link = link + '/api';
         }
-        document.getElementById('apikeylink').href = link;
+        document.getElementById('api-key-link').href = link;
     }
 }
 
@@ -109,9 +109,9 @@ function launch_sgy() {
         }
     });
 
-    request.done((data) => window.open(data, 'Authorize with Schoology', 'height=400,width=800'));
-    request.fail(() => (function () {
+    request.done(link => window.open(link, 'Authorize with Schoology', 'height=400,width=800'));
+    request.fail(() => {
         const error = document.getElementById("error");
         error.style.display = 'block';
-    }));
+    });
 }

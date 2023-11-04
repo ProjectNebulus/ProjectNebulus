@@ -298,8 +298,8 @@
                                 <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
                             </svg>
                         </div>
-                        <input style="width:400px" disabled type="text" value="{{ session.get('username') }}"
-                               class="bg-gray-50/75 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block dark:bg-gray-800/50 dark:border-gray-600 dark:focus:border-blue-500 dark:placeholder-gray-400 dark:text-white w-full pl-10 p-2.5 dark:focus:ring-blue-500">
+                        <input style="width: 25rem" disabled type="text" value="{{ session.get('username') }}"
+                               class="textarea-styling">
                     </div>
                     <button onclick="openSettingsModal('username')" class="text-white bg-blue-700 hover:bg-blue-800
                          focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center
@@ -322,8 +322,7 @@
                             </svg>
                         </div>
                         <input style="width:400px;" disabled type="password" value="{{ session.get('pswLen') * '*' }}"
-                               class="bg-gray-50/75 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-800/50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                               placeholder="">
+                               class="textarea-styling">
                     </div>
                     <button onclick="openSettingsModal('password')" class="text-white bg-blue-700 hover:bg-blue-800
                      focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center
@@ -343,7 +342,7 @@
                             </svg>
                         </div>
                         <input style="width:400px;" disabled type="text" value="{{ session.get('email') }}"
-                               class="bg-gray-50/75 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-800/50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                               class="textarea-styling">
                     </div>
                     <button onclick="openSettingsModal('email')" class="text-white bg-blue-700 hover:bg-blue-800
                      focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center
@@ -475,30 +474,68 @@
 " class="p-6 m-3 dark:bg-gray-700">
 
 
-                    <div style="border-radius: 10px;background: #ff5454;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
-                    <div style="border-radius: 10px;background: #ffa054;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
-                    <div style="border-radius: 10px;background: #ffd254;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div class="color-div"
+                         style="border-radius: 10px;background: #ff5454;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div class="color-div"
+                         style="border-radius: 10px;background: #ffa054;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div class="color-div"
+                         style="border-radius: 10px;background: #ffd254;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
 
 
-                    <div style="border-radius: 10px;background: #eeff54;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
-                    <div style="border-radius: 10px;background: #c0ff54;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
-                    <div style="border-radius: 10px;background: #5cff54;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
-                    <div style="border-radius: 10px;background: #54ffda;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
-                    <div style="border-radius: 10px;background: #54ddff;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
-                    <div style="border-radius: 10px;background: #5854ff;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
-                    <div style="border-radius: 10px;background: #ae54ff;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
-                    <div style="border-radius: 10px;background: #ff5497;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
-                    <div style="border-radius: 10px;background: #000000;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
-                    <div style="border-radius: 10px;background: #ffffff;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
-                    <div style="border-radius: 10px;background: #818181;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
-                    <div style="border-radius: 10px;background: linear-gradient(45deg, #ff5454, #ffd254);height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
-                    <div style="border-radius: 10px;background: linear-gradient(45deg, #eeff54, #5cff54);height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
-                    <div style="border-radius: 10px;background: linear-gradient(45deg, #7754ff, #ff5454);height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div class="color-div"
+                         style="border-radius: 10px;background: #eeff54;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div class="color-div"
+                         style="border-radius: 10px;background: #c0ff54;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div class="color-div"
+                         style="border-radius: 10px;background: #5cff54;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div class="color-div"
+                         style="border-radius: 10px;background: #54ffda;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div class="color-div"
+                         style="border-radius: 10px;background: #54ddff;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div class="color-div"
+                         style="border-radius: 10px;background: #5854ff;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div class="color-div"
+                         style="border-radius: 10px;background: #ae54ff;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div class="color-div"
+                         style="border-radius: 10px;background: #ff5497;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div class="color-div"
+                         style="border-radius: 10px;background: #000000;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div class="color-div"
+                         style="border-radius: 10px;background: #ffffff;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div class="color-div"
+                         style="border-radius: 10px;background: #818181;height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div class="color-div"
+                         style="border-radius: 10px;background: linear-gradient(45deg, #ff5454, #ffd254);height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div class="color-div"
+                         style="border-radius: 10px;background: linear-gradient(45deg, #eeff54, #5cff54);height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div class="color-div"
+                         style="border-radius: 10px;background: linear-gradient(45deg, #7754ff, #ff5454);height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
 
-                    <div style="border-radius: 10px;background: linear-gradient(45deg, #fff054, #ae54ff);height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
-                    <div style="border-radius: 10px;background: linear-gradient(45deg, #54ffc4, #5e54ff);height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
-                    <div style="border-radius: 10px;background: linear-gradient(45deg, #003250, #00a2fe);height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div class="color-div"
+                         style="border-radius: 10px;background: linear-gradient(45deg, #fff054, #ae54ff);height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div class="color-div"
+                         style="border-radius: 10px;background: linear-gradient(45deg, #54ffc4, #5e54ff);height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
+                    <div class="color-div"
+                         style="border-radius: 10px;background: linear-gradient(45deg, #003250, #00a2fe);height: 40px;display: inline-block;margin: 5px;width: 60px;"></div>
                 </div>
+                <script>
+                    // Get all color divs
+                    const colorDivs = document.querySelectorAll(".color-div");
+                    // Add an event listener to each color div
+                    colorDivs.forEach((colorDiv) => {
+                        colorDiv.addEventListener("click", (event) => {
+                            // Remove "selected" class from all color divs
+                            colorDivs.forEach((colorDiv) => {
+                                colorDiv.classList.remove("selected");
+                            });
+                            // Add "selected" class to the clicked color div
+                            event.target.parentElement.classList.add("selected");
+                        });
+                    });
+                    // Add "selected" class to the first color div
+                    colorDivs[0].classList.add("selected");
+                </script>
+
                 <style>
                     .pfp_selected {
                         background: #eee0ff;
@@ -513,6 +550,39 @@
                         border-style: solid;
                         border-width: 2px;
                     }
+
+                    .color-div {
+                        border-radius: 10px;
+                        height: 40px;
+                        display: inline-block;
+                        margin: 5px;
+                        width: 60px;
+                        position: relative;
+                    }
+
+                    .color-div.selected {
+                        position: absolute;
+                        top: 5px;
+                        left: 5px;
+                        width: 50px;
+                        height: 30px;
+                        border-radius: 10px;
+                        background-color: rgba(255, 255, 255, 0.8);
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+
+                    .color-div.selected::before {
+                        content: "";
+                        width: 0;
+                        height: 0;
+                        border-top: 10px solid transparent;
+                        border-bottom: 10px solid transparent;
+                        border-left: 10px solid white;
+                        transform: rotate(45deg);
+                    }
+
                 </style>
             </div>
 
@@ -763,7 +833,7 @@
                     </div>
                 </div>
                 <br>
-                {% include "user/connections.html" %}
+                {% include "user/connections/connections.html" %}
             </div>
             <div style="display:none;" id="schoolSettings">
                 <div class="mt-6">
@@ -796,7 +866,7 @@
                     </h1>
                 {% endif %}
 
-                <div class="w-full max-w-md p-4 bg-white/75 rounded-lg shadow-md sm:p-8 dark:bg-gray-800/75" style="backdrop-font: blur(10px);">
+                <div class="w-full max-w-md p-4 bg-white/75 rounded-lg shadow-md sm:p-8 dark:bg-gray-800/75 backdrop-blur">
                     <div class="flex items-center justify-between mb-4">
                         <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">My Schools</h5>
                         <a href="/school" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
@@ -806,30 +876,29 @@
                     <div class="flow-root">
                         <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
                             {% for school in schools %}
-                            <li class="py-3 sm:py-4">
-                                <div class="flex items-center space-x-4">
-                                    <div class="flex-shrink-0">
-                                        <img class="w-8 h-8 rounded-full" alt="{{ school["name"] }}'s Logo" src="/static/images/schools/{{ school["code"] }}.{{ school["picture_url"] }}" alt="Neil image">
+                                <li class="py-3 sm:py-4">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="flex-shrink-0">
+                                            <img class="w-8 h-8 rounded-full" alt="{{ school["name"] }}'s Logo"
+                                                 src="/static/images/schools/{{ school["code"] }}.{{ school["picture_url"] }}">
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                                {{ school["name"] }}
+                                            </p>
+                                            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                                #{{ school["code"] }}
+                                            </p>
+                                        </div>
+                                        <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                            1 Member
+                                        </div>
                                     </div>
-                                    <div class="flex-1 min-w-0">
-                                        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                            {{ school["name"] }}
-                                        </p>
-                                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                                            #{{ school["code"] }}
-                                        </p>
-                                    </div>
-                                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                                        1 Member
-                                    </div>
-                                </div>
-                            </li>
+                                </li>
                             {% endfor %}
                         </ul>
                     </div>
                 </div>
-
-
             </div>
 
             <div id="themeSettings" style="display:none;">
@@ -1065,12 +1134,10 @@
                 <h1 class="text-xl text-gray-500">My Schedules</h1><br>
                 <div class="block p-6 max-w-sm bg-gray-200/50 rounded-lg hover:bg-gray-100 dark:bg-gray-800/50 dark:border-gray-700 dark:hover:bg-gray-700"
                      style="backdrop-filter: blur(10px);">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">2029-2030 School
-                        Year</h5>
-                    <p class="font-normal text-gray-700 dark:text-gray-400">This schedule is for the school year,
-                        2029-2030.</p>
-                    </a>
-
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                        2029-2030 School Year</h5>
+                    <p class="font-normal text-gray-700 dark:text-gray-400">
+                        This schedule is for the school year of 2029-2030.</p>
                 </div>
             </div>
             <div style="display:none;" id="reportSettings">
@@ -1507,393 +1574,23 @@
         </div>
     </div>
 
-    <div id="schoology-modal" tabindex="-1" aria-hidden="true"
-         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
-        <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
-            <!-- Modal content -->
-            <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
-                <!-- Modal header -->
-                <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                        Link Schoology
-                        <img class=" w-6 h-6 mr-2 -ml-1 bg-gray-800" src="/static/images/logos/schoology.png"
-                             alt="Rounded avatar" style="
-                                    box-shadow: 6px 6px 20px 7px #04c2ff8c;
-                                    background: linear-gradient(45deg, #04c2ff75, #00ffaf7d);
-                                    display: inline-block;
-                                    padding: 15px;
-                                    height: 90px;
-                                    width: 90px;
-                                    border-radius: 10px;
-                                    margin: 5px 5px 5px 30px;
-                                    ">
-                        <span style=" margin: 15px; font-size: 1.5em; "><i class="material-icons">close</i></span>
-                        <img class=" w-6 h-6 mr-2 -ml-1" src="/static/images/NebulusSpecialLogo.png"
-                             alt="Rounded avatar" style="
-                                    display: inline-block;
-                                    margin: 5px;
-                                    height: 90px;
-                                    width: 90px;
-                                    border-radius: 10px;
-                                    background: lightgray;
-                                    box-shadow: 6px 6px 20px 7px #a204ff4d;
-                                    ">
-                    </h3>
-                    <button type="button"
-                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                            onclick="openModal('schoology-modal')">
-                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                  clip-rule="evenodd">
-                            </path>
-                        </svg>
-                        <span class="sr-only">Close modal</span>
-                    </button>
-                </div>
-                <!-- Modal body -->
-                <div class="p-6 space-y-6">
-                    <div class="p-4">
-                        <div step="1">
-                            <h1 class="text-black dark:text-white text-3xl">
-                <span style="
-    background: -webkit-linear-gradient(left, #42cbf5, #42f578);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 900;
-" class="text-4xl">Step 1.</span>
-                                Login to your Schoology Account Normally
-                            </h1>
-                            <br>
-                            <p class="text-black dark:text-white">
-                                Go to your Schoology website and log in. If you are
-                                logged in, you may click "Next Step".
-                            </p>
-                            <br>
-                            <br>
-                            <button onclick="prev()" type="button" disabled
-                                    class="inline-block text-white bg-yellow-700 text-gray-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                                <svg aria-hidden="true" class="-ml-1 mr-2 w-5 h-5 rotate-180" fill="currentColor"
-                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
-                                     style=" DISPLAY: inline-block; ">
-                                    <path fill-rule="evenodd"
-                                          d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                          clip-rule="evenodd">
-                                    </path>
-                                </svg>
-                                Previous Step
-                            </button>
-                            <button onclick="nextSchoology()" type="button"
-                                    class="inline-block text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">
-                                Next Step
-                                <svg aria-hidden="true" class="ml-2 -mr-1 w-5 h-5" fill="currentColor"
-                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
-                                     style=" DISPLAY: inline-block; ">
-                                    <path fill-rule="evenodd"
-                                          d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                          clip-rule="evenodd">
-                                    </path>
-                                </svg>
-                            </button>
-                            <br>
-                            <br>
-                            <p class="text-black dark:text-white">
-                                Step 1<span class="text-gray-500">/4</span>
-                            </p>
-                        </div>
-                        <div step="2">
-                            <h1 class="text-black dark:text-white text-3xl">
-                <span style="
-    background: -webkit-linear-gradient(left, #42cbf5, #42f578);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 900;
-" class="text-4xl">Step 2.</span>
-                                Paste your Schoology Link
-                            </h1>
-                            <p class="text-black dark:text-white mt-8">
-                                Paste the Schoology Link you use normally here:
-                            </p>
-                            <div class="relative">
-                                <div class="flex absolute inset-y-0 left-0 items-center pl-3 pb-2 pointer-events-none">
-                                    <p id="error" class="material-icons" style="color: gray;vertical-align: middle;">
-                                        pending
-                                    </p>
-                                </div>
-                                <input onchange="changeInput();" id="sgy_link"
-                                       class="pl-10 p-2.5 px-4 py-3 mt-4 w-full rounded-md bg-gray-100 dark:bg-gray-900 outline-none dark:text-white border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
-                                       placeholder="Schoology Link" style="-webkit-user-select: text;">
-                                <p id="error-msg" class="mt-2 text-sm text-red-600 dark:text-red-500"
-                                   style=" color: gray !important; ">
-                                    Enter your Schoology link please.
-                                </p>
-                            </div>
-                            <p class="text-black dark:text-white">
-                                <i class="material-icons" style="color:lightgreen;">check_circle</i>
-                                https://app.schoology.com/
-                            </p>
-                            <p class="text-black dark:text-white">
-                                <i class="material-icons" style="color:lightgreen;">check_circle</i>
-                                https://school.schoology.com/
-                            </p>
-                            <p class="text-black dark:text-white">
-                                <i class="material-icons" style="color:lightgreen;">check_circle</i>
-                                https://schoology.app.com/
-                            </p>
-                            <p class="text-black dark:text-white">
-                                <i class="material-icons" style="color:pink;">cancel</i> schoology.com/courses
-                            </p>
-                            <br>
-                            <br>
-                            <button onclick="prev()" type="button"
-                                    class="inline-block text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">
-                                <svg aria-hidden="true" class="-ml-1 mr-2 w-5 h-5 rotate-180" fill="currentColor"
-                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
-                                     style=" DISPLAY: inline-block; ">
-                                    <path fill-rule="evenodd"
-                                          d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                          clip-rule="evenodd">
-                                    </path>
-                                </svg>
-                                Previous Step
-                            </button>
-                            <button id="step_2_button" disabled onclick="nextSchoology()" type="button"
-                                    class="inline-block text-white bg-yellow-700 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">
-                                Next Step
-                                <svg aria-hidden="true" class="ml-2 -mr-1 w-5 h-5" fill="currentColor"
-                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
-                                     style=" DISPLAY: inline-block; ">
-                                    <path fill-rule="evenodd"
-                                          d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                          clip-rule="evenodd">
-                                    </path>
-                                </svg>
-                            </button>
-                            <br>
-                            <br>
-                            <p class="text-black dark:text-white">
-                                Step 2<span class="text-gray-500">/4</span>
-                            </p>
-                        </div>
-                        <div step="3">
-                            <h1 class="text-black dark:text-white text-3xl">
-                <span style="
-    background: -webkit-linear-gradient(left, #42cbf5, #42f578);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 900;
-" class="text-4xl">Step 3.</span>
-                                Paste your API Key
-                            </h1>
-                            <p class="text-black dark:text-white my-8">
-                                Your API keys can be found
-                                <a class="text-sky-500 hover:underline" target="_blank" id="apikeylink">here</a>.
-                                Please disable Schoology Plus or any Schoology extensions or this may not work
-                                properly.
-                            </p>
-                            <input style="float:left;" placeholder="API KEY" type="text" id="key" name="key"
-                                   class="w-full bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-900 border-0 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                   required>
-                            <br>
-                            <br>
-                            <input style="float:left;" placeholder="API Secret" type="text" id="secret" name="secret"
-                                   class="w-full mt-2 bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-900 border-0 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                   required>
-                            <br>
-                            <button onclick="prev()" type="button"
-                                    class="inline-block text-white mt-6 bg-yellow-400 hover:bg-yellow-500 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:focus:ring-yellow-900">
-                                <svg aria-hidden="true" class="-ml-1 mr-2 w-5 h-5 rotate-180" fill="currentColor"
-                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
-                                     style=" DISPLAY: inline-block; ">
-                                    <path fill-rule="evenodd"
-                                          d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                          clip-rule="evenodd">
-                                    </path>
-                                </svg>
-                                Previous Step
-                            </button>
-                            <button onclick="nextSchoology()" type="button"
-                                    class="inline-block text-white mt-6 bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:focus:ring-yellow-900">
-                                Next Step
-                                <svg aria-hidden="true" class="ml-2 -mr-1 w-5 h-5" fill="currentColor"
-                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
-                                     style=" DISPLAY: inline-block; ">
-                                    <path fill-rule="evenodd"
-                                          d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                          clip-rule="evenodd">
-                                    </path>
-                                </svg>
-                            </button>
-                            <br>
-                            <br>
-                            <br>
-                            <p class="text-black dark:text-white">
-                                Step 3<span class="text-gray-500">/4</span>
-                            </p>
-                        </div>
-                        <div step="4">
-                            <h1 class="text-black dark:text-white text-3xl">
-                <span style="
-    background: -webkit-linear-gradient(left, #42cbf5, #42f578);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 900;
-" class="text-4xl">Step 4.</span>
-                                Launch Schoology
-                            </h1>
-                            <p class="text-black dark:text-white my-8">
-                                Please click the button below. When you click it,
-                                there will be a popup window to authorize with Schoology. Fill out the Captcha and
-                                click
-                                "Accept".
-                            </p>
-                            <button onclick="launch_sgy()" id="launchBTN" type="button"
-                                    class="text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">
-                                Launch Schoology
-                            </button>
-                            <button onclick="saveApiKey()" id="launchBTN" type="button"
-                                    class="text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">
-                                Use API Keys to Authorize
-                            </button>
-                            <div id="confirmation" class="dark:text-white text-black">
-                                <div style="color:red;display:none;" id="error">
-                                    Something went wrong! Make sure you entered valid API credentials and clicked
-                                    the "Approve" button in the popup.
-                                </div>
-                                <span style="color:red;display:none" id="error2">This Schoology account is already connected!</span>
-                                <span style="color:red;display:none"
-                                      id="error3">Oops! An error occured on our side.</span>
-                            </div>
-                            <div id="schoology_successful" style="display: none;"
-                                 class="dark:text-white text-black bg-gray-700 rounded-lg p-3">
-                                <p class="text-2xl">
-                                    Successfully connected a Schoology account. The details are below:
-                                </p>
-                                <p>
-                                    Name: <span id="name"></span>
-                                </p>
-                                <p>
-                                    Email: <span id="email"></span>
-                                </p>
-                                <button onclick="window.close();" type="button"
-                                        class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800/50 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
-                                    <svg style="display:inline-block;" class="w-6 h-6" fill="currentColor"
-                                         viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                              clip-rule="evenodd">
-                                        </path>
-                                    </svg>
-                                    Return to Settings
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Modal footer -->
-                <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-                    <button onclick="closeModal('schoology-modal')" type="button"
-                            class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
-                        Cancel
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="graderoom-modal" tabindex="-1" aria-hidden="true"
-         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
-        <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
-            <!-- Modal content -->
-            <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
-                <!-- Modal header -->
-                <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                        Link Graderoom
-                        <img class=" w-6 h-6 mr-2 -ml-1 bg-gray-800" src="/static/images/logos/graderoom.png"
-                             alt="Rounded avatar" style="
-                                    box-shadow: 6px 6px 20px 7px #333232;
-                                    background: linear-gradient(45deg, #222222, #333232);
-                                    display: inline-block;
-                                    padding: 15px;
-                                    height: 90px;
-                                    width: 90px;
-                                    border-radius: 10px;
-                                    margin: 5px 5px 5px 30px;
-                                    ">
-                        <span style=" margin: 15px; font-size: 1.5em; "><i class="material-icons">close</i></span>
-                        <img class=" w-6 h-6 mr-2 -ml-1" src="/static/images/NebulusSpecialLogo.png"
-                             alt="Rounded avatar" style="
-                                    display: inline-block;
-                                    margin: 5px;
-                                    height: 90px;
-                                    width: 90px;
-                                    border-radius: 10px;
-                                    background: lightgray;
-                                    box-shadow: 6px 6px 20px 7px #a204ff4d;
-                                    ">
-                    </h3>
-                    <button type="button"
-                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                            onclick="openModal('schoology-modal')">
-                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                  clip-rule="evenodd">
-                            </path>
-                        </svg>
-                        <span class="sr-only">Close modal</span>
-                    </button>
-                </div>
-                <!-- Modal body -->
-                <div class="p-6 space-y-6">
-                    <div class="mb-6">
-                        <label for="graderoom-key"
-                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Graderoom Pairing
-                            Key</label>
-                        <input maxlength="6" onkeyup="connectGraderoom()" type="text" id="graderoom-key"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                               placeholder="s8xje8" required>
-                    </div>
-                    <div style="height:200px; overflow-y: scroll;">
-                        <h1 class="text-black dark:text-white text-2xl">FAQ for Connecting your Graderoom Account</h1>
-                        <h2 class="text-gray-300 text-xl">What schools does Graderoom Support?</h2>
-                        <p class="text-black dark:text-white">Graderoom currently only supports Bellarmine College
-                            Preparatory, BASIS Independent Silicon Valley,
-                            and Notre Dame High School.</p><br><br>
-                        <h2 class="text-gray-300 text-xl">Which version of Graderoom is supported?</h2>
-                        <p class="text-black dark:text-white">We currently only support Graderoom's Beta Build.</p>
-                        <br><br>
-                        <h2 class="text-gray-300 text-xl">Where can I find my pairing key?</h2>
-                        <p class="text-black dark:text-white">It's located at
-                            <a class="text-sky-500 font-bold hover:underline" href="https://beta.graderoom.me/">https://beta.graderoom.me/</a>.
-                            It will generate a key that expires in an hour.
-                            Generate a key and place it in the box above.
-                        </p><br><br>
-                        <h2 class="text-gray-300 text-xl">It's not letting me Generate a Pairing Key.</h2>
-                        <p class="text-black dark:text-white">You need at least one sync to be able to generate a key.
-                            This verifies you are a real person.</p>
+    {% include "user/connections/connect_schoology.html" %}
+    {% include "user/connections/connect_graderoom.html" %}
 
-                    </div>
-                </div>
-                <!-- Modal footer -->
-                <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-                    <button onclick="closeModal('graderoom-modal')" type="button"
-                            class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
-                        Cancel
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="bellScheduleModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
+    <div id="bellScheduleModal" tabindex="-1" aria-hidden="true"
+         class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
         <div class="relative w-full h-full max-w-md md:h-auto">
             <!-- Modal content -->
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-900">
-                <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="authentication-modal">
-                    <svg onclick="closeModal('bellScheduleModal')" aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                <button type="button"
+                        class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+                        data-modal-toggle="authentication-modal">
+                    <svg onclick="closeModal('bellScheduleModal')" aria-hidden="true" class="w-5 h-5"
+                         fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                              clip-rule="evenodd"></path>
+                    </svg>
                     <span class="sr-only">Close modal</span>
                 </button>
                 <div class="px-6 py-6 lg:px-8">
@@ -1901,13 +1598,15 @@
                     <form class="space-y-6" action="#">
                         <label for="name" class="block">
                             <span class="text-gray-700 dark:text-gray-200">Name</span>
-                            <input id="name" type="text" name="name" placeholder="Period 1" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray form-input" required>
-
+                            <input id="name" type="text" name="name" placeholder="Period 1"
+                                   class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-gray form-input"
+                                   required>
+                        </label>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
+    {% include "user/connections/display_api_keys.html" %}
     </body>
 {% endblock %}

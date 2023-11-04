@@ -64,10 +64,10 @@ def search_within_user():
                 course.name,  # name
                 course.teacher,  # description
                 str(theurl)
-                    .replace("(", "")
-                    .replace(")", "")
-                    .replace(",", "")
-                    .replace("'", ""),
+                .replace("(", "")
+                .replace(")", "")
+                .replace(",", "")
+                .replace("'", ""),
                 "",
                 "/course/" + str(course.pk),
             ]

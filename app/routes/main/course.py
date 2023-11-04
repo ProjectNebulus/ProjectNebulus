@@ -6,9 +6,14 @@ from flask import render_template, request, session
 from mongoengine import DoesNotExist
 
 from app.static.python.classes import Assignment, Course, Grades, User
-from app.static.python.mongodb.read import find_user, getText, get_user_courses, sort_user_events
+from app.static.python.mongodb.read import (
+    find_user,
+    get_text,
+    get_user_courses,
+    sort_user_events,
+)
 from . import main_blueprint, utils
-from .utils import logged_in, private_endpoint, fmt
+from .utils import logged_in, private_endpoint, fmt, grade_score
 
 
 @main_blueprint.route("/course/<id>")
@@ -33,7 +38,7 @@ def course_page(page, **kwargs):
                 user_id=session.get("id"),
                 email=session.get("email"),
                 avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-                translate=getText,
+                translate=get_text,
             ),
             404,
         )
@@ -91,14 +96,15 @@ def course_page(page, **kwargs):
         ae=a_len,
         ee=e_len,
         strftime=utils.strftime,
-        translate=getText,
-        gradeStr=gradeStr,
-        courseGrade=courseGrade,
+        translate=get_text,
+        grade_score=grade_score,
+        grade_letter=grade_letter,
+        courseGrade=course_grade,
         groupedData=groupedData,
     )
 
 
-def courseGrade(percent):
+def course_grade(percent):
     percent = round(percent * 100, 1)
     if percent >= 90:
         letter = "A"
@@ -114,7 +120,7 @@ def courseGrade(percent):
     return f'<span color="{letter}" class="font-bold text-gray-500 dark:text-gray-300">{percent}% ({letter})</span>'
 
 
-def gradeStr(assignment: Assignment):
+def grade_letter(assignment: Assignment):
     try:
         percent = round(assignment.grade / assignment.points, 2)
         percent *= 100
@@ -146,12 +152,10 @@ def gradeStr(assignment: Assignment):
 
 @main_blueprint.route("/getResource/<courseID>/<documentID>")
 @private_endpoint
-def getResource(courseID, documentID):
-    courses = list(
-        filter(lambda c: c.id == courseID, get_user_courses(session["id"]))
-    )
+def get_resource(courseID, documentID):
+    courses = list(filter(lambda c: c.id == courseID, get_user_courses(session["id"])))
     if not len(courses) or not len(
-            [user for user in courses[0].authorizedUsers if user.id == session["id"]]
+        [user for user in courses[0].authorizedUsers if user.id == session["id"]]
     ):
         return render_template("errors/404.html"), 404
 
@@ -188,7 +192,7 @@ def search_word(id):
         definition=shortdef,
         word=word,
         partofspeech=partofspeech,
-        translate=getText,
+        translate=get_text,
     )
 
 
@@ -197,7 +201,7 @@ def search_word(id):
 def course_page_ex(id, extension):
     try:
         return render_template(
-            f"courses/extensions/{extension}.html", translate=getText,
+            f"courses/extensions/{extension}.html", translate=get_text,
         )
     except Exception as e:
-        return render_template("errors/404.html", translate=getText, )
+        return render_template("errors/404.html", translate=get_text,)

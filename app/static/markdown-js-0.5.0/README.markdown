@@ -6,18 +6,18 @@ conversion as a single step process. You pass markdown in and get HTML
 out, end of story. We had some pretty particular views on how the
 process should actually look, which include:
 
-  * producing well-formed HTML. This means that `em` and `strong` nesting
-    is important, as is the ability to output as both HTML and XHTML
+* producing well-formed HTML. This means that `em` and `strong` nesting
+  is important, as is the ability to output as both HTML and XHTML
 
-  * having an intermediate representation to allow processing of parsed
-    data (we in fact have two, both [JsonML]: a markdown tree and an HTML tree)
+* having an intermediate representation to allow processing of parsed
+  data (we in fact have two, both [JsonML]: a markdown tree and an HTML tree)
 
-  * being easily extensible to add new dialects without having to
-    rewrite the entire parsing mechanics
+* being easily extensible to add new dialects without having to
+  rewrite the entire parsing mechanics
 
-  * having a good test suite. The only test suites we could find tested
-    massive blocks of input, and passing depended on outputting the HTML
-    with exactly the same whitespace as the original implementation
+* having a good test suite. The only test suites we could find tested
+  massive blocks of input, and passing depended on outputting the HTML
+  with exactly the same whitespace as the original implementation
 
 [JsonML]: http://jsonml.org/ "JSON Markup Language"
 
@@ -33,7 +33,7 @@ Optionally, install `md2html` into your path
 
 ## Usage
 
-### Node
+### Node
 
 The simple way to use it with node is:
 
@@ -42,7 +42,7 @@ var markdown = require( "markdown" ).markdown;
 console.log( markdown.toHTML( "Hello *World*!" ) );
 ```
 
-### Browser
+### Browser
 
 It also works in a browser; here is a complete example:
 
@@ -85,7 +85,7 @@ md2html /path/to/doc.md > /path/to/doc.html
 echo 'Hello *World*!' | md2html
 ```
 
-### More options
+### More options
 
 If you want more control check out the documentation in
 [lib/markdown.js] which details all the methods and parameters
@@ -137,16 +137,16 @@ console.log( html );
 Internally the process to convert a chunk of markdown into a chunk of
 HTML has three steps:
 
- 1. Parse the markdown into a JsonML tree. Any references found in the
-    parsing are stored in the attribute hash of the root node under the
-    key `references`.
+1. Parse the markdown into a JsonML tree. Any references found in the
+   parsing are stored in the attribute hash of the root node under the
+   key `references`.
 
- 2. Convert the markdown tree into an HTML tree. Rename any nodes that
-    need it (`bulletlist` to `ul` for example) and lookup any references
-    used by links or images. Remove the references attribute once done.
+2. Convert the markdown tree into an HTML tree. Rename any nodes that
+   need it (`bulletlist` to `ul` for example) and lookup any references
+   used by links or images. Remove the references attribute once done.
 
- 3. Stringify the HTML tree being careful not to wreck whitespace where
-    whitespace is important (surrounding inline elements for example).
+3. Stringify the HTML tree being careful not to wreck whitespace where
+   whitespace is important (surrounding inline elements for example).
 
 Each step of this process can be called individually if you need to do
 some processing or modification of the data at an intermediate stage.
@@ -166,7 +166,7 @@ To run the tests under node you will need tap installed (it's listed as a
 Do the usual github fork and pull request dance. Add yourself to the
 contributors section of [package.json](/package.json) too if you want to.
 
-## License
+## License
 
 Released under the MIT license.
 

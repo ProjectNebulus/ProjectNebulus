@@ -20,7 +20,8 @@ For full documentation, visit [flowbite.com](https://flowbite.com/).
 
 ## Components
 
-Flowbite is an open source collection of UI components built with the utility classes from Tailwind CSS that you can use as a starting point when coding user interfaces and websites.
+Flowbite is an open source collection of UI components built with the utility classes from Tailwind CSS that you can use
+as a starting point when coding user interfaces and websites.
 
 <table>
   <tr>
@@ -225,11 +226,13 @@ Flowbite is an open source collection of UI components built with the utility cl
 
 ## Getting started
 
-Flowbite can be included as a plugin into an existing Tailwind CSS project and it is supposed to help you build websites faster by having a set of web components to work with built with the utility classes from Tailwind CSS.
+Flowbite can be included as a plugin into an existing Tailwind CSS project and it is supposed to help you build websites
+faster by having a set of web components to work with built with the utility classes from Tailwind CSS.
 
 ### Require via NPM
 
-Make sure that you have <a href="https://nodejs.org/en/" rel="nofollow" >Node.js</a> and <a href="https://tailwindcss.com/" rel="nofollow" >Tailwind CSS</a> installed. 
+Make sure that you have <a href="https://nodejs.org/en/" rel="nofollow" >Node.js</a>
+and <a href="https://tailwindcss.com/" rel="nofollow" >Tailwind CSS</a> installed.
 
 1. Install Flowbite as a dependency using NPM by running the following command:
 
@@ -263,7 +266,8 @@ import 'flowbite';
 
 ### Include via CDN
 
-The quickest way to get started working with FlowBite is to simply include the CSS and JavaScript into your project via CDN.
+The quickest way to get started working with FlowBite is to simply include the CSS and JavaScript into your project via
+CDN.
 
 Require the following minified stylesheet inside the `head` tag:
 
@@ -295,6 +299,6 @@ If you need the Figma files for the components you can check out our website for
 
 ## Copyright and license
 
-The Flowbite name and logos are trademarks of Crafty Dwarf Inc. 
+The Flowbite name and logos are trademarks of Crafty Dwarf Inc.
 
 📝 [Read about the licensing terms](https://flowbite.com/docs/getting-started/license/)

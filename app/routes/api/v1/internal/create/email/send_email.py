@@ -41,7 +41,7 @@ def send_reset_email(replace=None, data=None):
     print(code)
 
     current_dir = Path(__file__)
-    root_path = [p for p in current_dir.parents if "ProjectNebulus" in p.parts[-1]][0]
+    root_path = next(p for p in current_dir.parents if "ProjectNebulus" in p.parts[-1])
 
     htmlform = (
         str(codecs.open(str(root_path) + "/app/templates/utils/email.html", "r").read())
@@ -62,19 +62,18 @@ def signup_email():
     return "success"
 
 
-@internal.route("/reset-psw", methods=["POST"])
+@internal.route("/reset-psw-email", methods=["POST"])
 @private_endpoint
 def reset_psw_email():
     data = request.get_json()
     try:
-        read.find_user(username=data["username"])
+        data["email"] = read.find_user(username=data["username"]).email
     except KeyError:
         return "Invalid Username"
 
     def replace(html):
         return (
-            html
-            .replace("signed up", "requested a password reset")
+            html.replace("signed up", "requested a password reset")
             .replace("sign up", "do so")
             .replace("Signup", "Reset")
         )
@@ -87,13 +86,15 @@ def reset_psw_email():
 @internal.route("/reset-email", methods=["POST"])
 @private_endpoint
 def reset_email():
-    if not (access := session.get("access")) or datetime.now().timestamp() - float(access) > 10 * 60:
+    if (
+        not (access := session.get("access"))
+        or datetime.now().timestamp() - float(access) > 10 * 60
+    ):
         return "Unauthorized", 401
 
     def replace(html):
         return (
-            html
-            .replace("signed up", "requested an email change")
+            html.replace("signed up", "requested an email change")
             .replace("sign up", "do so")
             .replace("Signup", "Change")
             .replace("Change Code", "Verification Code")

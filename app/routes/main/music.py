@@ -6,7 +6,7 @@ import requests
 from flask import redirect, render_template, request, session
 from werkzeug.utils import secure_filename
 
-from app.static.python.mongodb.read import getText
+from app.static.python.mongodb.read import get_text
 from . import main_blueprint
 from .utils import logged_in
 
@@ -537,7 +537,7 @@ class Musixmatch:
         return data
 
     def album_tracks_get(
-            self, album_id, page, page_size, album_mbid, f_has_lyrics=None, _format="json",
+        self, album_id, page, page_size, album_mbid, f_has_lyrics=None, _format="json",
     ):
         """This api provides you the list of the songs of an album.
         Parameters:
@@ -665,7 +665,7 @@ def music():
         user=session.get("username"),
         user_id=session.get("id"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-        translate=getText,
+        translate=get_text,
     )
 
 
@@ -868,7 +868,7 @@ def music_post():
         user=session.get("username"),
         user_id=session.get("id"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-        translate=getText,
+        translate=get_text,
     )
 
 
@@ -886,7 +886,7 @@ def music_spotify(smth):
                 user=session.get("username"),
                 user_id=session.get("id"),
                 avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-                translate=getText,
+                translate=get_text,
             )
 
 
@@ -939,5 +939,5 @@ def music_video(id_: str):
         user=session.get("username"),
         user_id=session.get("id"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-        translate=getText,
+        translate=get_text,
     )

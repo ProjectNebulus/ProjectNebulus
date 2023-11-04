@@ -11,7 +11,6 @@ main_blueprint = Blueprint(
 
 from .about import *
 from .app import *
-from .calendar import *
 from .canvas import *
 from .chat import *
 from .connections import *

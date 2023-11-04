@@ -1,17 +1,12 @@
+const EMAIL_REGEX =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
 let main, reset, recaptcha, code;
-
-function resetScreen() {
-    main.classList.toggle('hidden');
-    reset.classList.toggle('hidden');
-    emailInput.value = email.value;
-}
-
 let prevScreen;
 
 function open_tab(tab_name) {
     document.getElementById("main").style.display = "none";
     document.getElementById(tab_name).style.display = "block";
-
 }
 
 function recaptchaScreen() {
@@ -224,6 +219,15 @@ function clearBorders() {
 }
 
 window.addEventListener('load', function () {
+    bindFunc(".reset-screen-btn", () => {
+        const modal = document.getElementById("main-modal");
+        modal.style.maxWidth = modal.style.maxWidth.startsWith("50") ? "40rem" : "50rem";
+
+        main.classList.toggle('hidden');
+        reset.classList.toggle('hidden');
+        emailInput.value = email.value;
+    });
+
     email = document.getElementById('email');
     password = document.getElementById('psw');
     main = document.getElementById('main');

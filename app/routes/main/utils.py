@@ -42,7 +42,7 @@ def private_endpoint(func):
         # the first parameter should be the flask server ip address, so change it to what the ip is for your server
 
         if (
-                str(user_ip) == "127.0.0.1" or "2600:1700:5450:7b08:9806:a9a9:a039:e92e"
+            str(user_ip) == "127.0.0.1" or "2600:1700:5450:7b08:9806:a9a9:a039:e92e"
         ):  # server ip
             return func(*args, **kwargs)
         else:
@@ -73,3 +73,13 @@ def fmt(content: str) -> str:
         else:
             output += "<p>" + line + "</p>"
     return Markup(output)
+
+
+def grade_score(grade, points):
+    if grade == (floor_grade := int(grade)):
+        grade = floor_grade
+
+    if points == (floor_points := int(points)):
+        points = floor_points
+
+    return f"Grade: {grade}/{points}"

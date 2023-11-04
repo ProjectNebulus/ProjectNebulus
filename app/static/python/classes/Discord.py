@@ -2,7 +2,7 @@ from mongoengine import EmbeddedDocument, IntField, StringField, URLField
 
 
 class Discord(EmbeddedDocument):
-    """ "
+    """
     Stores a user's Discord credentials.
     """
 

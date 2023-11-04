@@ -1,56 +1,56 @@
 [
-    "html",
+  "html",
+  [
+    "p",
+    {
+      "class": "class1",
+      "style": "color:red"
+    },
+    "hello"
+  ],
+  "\u000a",
+  [
+    "table",
+    {
+      "class": "class1",
+      "summary": "Table summary",
+      "style": "color:red"
+    },
     [
-        "p",
-        {
-            "class": "class1",
-            "style": "color:red"
-        },
-        "hello"
+      "thead",
+      [
+        "tr",
+        [
+          "th",
+          "h"
+        ],
+        [
+          "th",
+          "h"
+        ]
+      ]
     ],
-    "\u000a",
     [
-      "table",
-      {
-        "class": "class1",
-        "summary": "Table summary",
-        "style": "color:red"
-      },
+      "tbody",
       [
-        "thead",
+        "tr",
         [
-          "tr",
-          [
-            "th",
-            "h"
-          ],
-          [
-            "th",
-            "h"
-          ]
-        ]
-      ],
-      [
-        "tbody",
+          "th",
+          {
+            "scope": "row",
+            "style": "text-align: left;"
+          },
+          " c1"
+        ],
         [
-          "tr",
-          [
-            "th",
-            {
-              "scope": "row",
-              "style": "text-align: left;"
-            },
-                    " c1"
-                ],
-                [
-                    "td",
-                    {
-                        "style": "text-align: left;"
-                    },
-                    "c2"
-                ]
-            ]
+          "td",
+          {
+            "style": "text-align: left;"
+          },
+          "c2"
         ]
-    ],
-    "\u000a"
+      ]
+    ]
+  ],
+  "\u000a"
 ]

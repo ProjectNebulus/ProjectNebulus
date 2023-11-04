@@ -5,7 +5,7 @@ import google.oauth2.credentials
 from googleapiclient.discovery import build
 
 from app.static.python.mongodb import read
-from app.static.python.mongodb.read import getText
+from app.static.python.mongodb.read import get_text
 from . import main_blueprint
 from .spotify import (
     SPOTIPY_CLIENT_ID,
@@ -31,8 +31,8 @@ def generate_redirect(url):
 @main_blueprint.route("/settings")
 @logged_in
 def settings():
-    the_schoology = read.getSchoology(id=session["id"])
-    the_google_classroom = read.getClassroom(session["id"])
+    schoology = read.get_schoology(id=session["id"])
+    google_classroom = read.get_classroom(session["id"])
     try:
         credentials = google.oauth2.credentials.Credentials(
             **flask.session["credentials"]
@@ -59,12 +59,12 @@ def settings():
     except:
         user_info = None
     try:
-        canvas = list(read.getCanvas(id=session["id"]))[0].name
+        canvas = list(read.get_canvas(id=session["id"]))[0].name
     except (TypeError, IndexError):
         canvas = None
 
     try:
-        canvas = list(read.getCanvas(id=session["id"]))[0].name
+        canvas = list(read.get_canvas(id=session["id"]))[0].name
     except:
         canvas = []
 
@@ -88,11 +88,8 @@ def settings():
             spotify = None
 
     try:
-        discord = list(read.getDiscord(id=session["id"]))[0]
-        discord = [
-            discord.discord_user,
-            discord.discord_avatar
-        ]
+        discord = list(read.get_discord(id=session["id"]))[0]
+        discord = [discord.discord_user, discord.discord_avatar]
     except (TypeError, IndexError):
         discord = []
 
@@ -106,27 +103,22 @@ def settings():
         print("Last confirmed access (seconds):", last_access)
 
     try:
-        graderoom = list(read.getGraderoom(id=session["id"]))[0]
-        graderoom = [
-            graderoom.username,
-            graderoom.school
-        ]
+        graderoom = list(read.get_graderoom(id=session["id"]))[0]
+        graderoom = [graderoom.username, graderoom.school]
     except (TypeError, IndexError):
         graderoom = []
 
     try:
-        github = list(read.getGithub(id=session["id"]))[0]
-        github = [
-            github.username,
-            github.avatar
-        ]
+        github = list(read.get_github(id=session["id"]))[0]
+        github = [github.username, github.avatar]
     except (TypeError, IndexError):
         github = []
 
     schools = []
     import json
+
     try:
-        rawschool = list(read.getSchools(session["id"]))
+        rawschool = list(read.get_schools(session["id"]))
         myjson = list(json.load(open("app/schools.json")))
         for school in myjson:
             if school["code"] in rawschool:
@@ -147,13 +139,13 @@ def settings():
         pswHashes="*" * session.get("pswLen"),
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-        schoology=the_schoology,
-        classroom=the_google_classroom,
+        schoology=schoology,
+        classroom=google_classroom,
         googleclassroom=user_info,
         schools=schools,
         canvas=canvas,
         spotify=spotify,
         discord=discord,
-        translate=getText,
+        translate=get_text,
         points=read.find_user(id=session["id"]).points,
     )

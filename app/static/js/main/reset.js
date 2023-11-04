@@ -14,12 +14,19 @@ function codeScreen() {
 }
 
 function sendEmail() {
+    if (EMAIL_REGEX.test(emailInput.value)) {
+        const text = document.getElementById("read-bro");
+        text.classList.toggle("bro-read");
+        setTimeout(() => text.classList.toggle("bro-read"), 300);
+        return
+    }
+
     send.disabled = true;
     send.innerHTML = 'Sending...';
 
     const request = $.ajax({
         type: 'POST',
-        url: '/api/v1/internal/reset-psw',
+        url: '/api/v1/internal/reset-psw-email',
         contentType: 'application/json',
         data: JSON.stringify({username: emailInput.value})
     });
@@ -31,7 +38,7 @@ function sendEmail() {
     });
     request.fail(() => {
         send.disabled = false;
-        send.innerHTML = 'Error - Retry';
+        send.innerHTML = 'Error';
     });
 }
 
@@ -47,7 +54,7 @@ window.addEventListener('load', () => {
         pageCounters[i].className +=
             ' flex items-center justify-center p-6 space-x-2 absolute bottom-0';
         for (let j = 0; j < 3; j++) {
-            if (j == i)
+            if (j === i)
                 pageCounters[i].innerHTML +=
                     "<div class='rounded-full w-2 h-2 bg-gray-400 dark:bg-gray-500'></div>";
             else
@@ -83,7 +90,7 @@ confirm.addEventListener('click', () => {
         } else confirm.innerHTML = 'Nice try buddy';
     });
 
-    request.fail(() => (confirm.innerHTML = 'Error - Retry'));
+    request.fail(() => (confirm.innerHTML = 'Error'));
 });
 
 keyUpDelay('#code', 1000, () => {

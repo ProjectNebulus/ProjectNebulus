@@ -3,7 +3,7 @@ from pathlib import Path
 
 from flask import redirect, render_template, request, send_file, session
 
-from app.static.python.mongodb.read import getText
+from app.static.python.mongodb.read import get_text
 from . import main_blueprint
 from .. import babel
 
@@ -21,7 +21,7 @@ def screenTime():
     data = int(request.args.get("data"))
     location = request.args.get("location")
     print(
-        f"[Screen Time Log | {datetime.date.today()} @ '{location}'] {data / 1000} seconds "
+        f"[Screen Time Log | {datetime.date.today()} @ '{location}'] {data / 1000} seconds"
     )
     return str(data)
 
@@ -45,8 +45,8 @@ def school():
         user=session.get("username"),
         user_id=session.get("id"),
         email=session.get("email"),
-        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif", ),
-        translate=getText,
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        translate=get_text,
         schools=myjson,
     )
 
@@ -67,10 +67,10 @@ def specific_school(school):
         "PALY",
         "LNBK",
         "CLGBA",
-        "NBLS"
+        "NBLS",
     ]
     if school not in schools:
-        return render_template("errors/404.html", translate=getText), 404
+        return render_template("errors/404.html", translate=get_text), 404
     import json
 
     myjson = json.load(open("app/schools.json"))
@@ -83,8 +83,8 @@ def specific_school(school):
                 user=session.get("username"),
                 user_id=session.get("id"),
                 email=session.get("email"),
-                avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif", ),
-                translate=getText,
+                avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+                translate=get_text,
                 homepage=True,
                 embedoverride=True,
             )
@@ -98,8 +98,8 @@ def index():
         user=session.get("username"),
         user_id=session.get("id"),
         email=session.get("email"),
-        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif", ),
-        translate=getText,
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        translate=get_text,
         homepage=True,
     )
 
@@ -107,7 +107,7 @@ def index():
 @main_blueprint.route("/google34d8c04c4b82b69a.html")
 def googleVerification():
     # GOOGLE VERIFICATION FILE
-    return render_template("utils/google_site_verification.html", translate=getText)
+    return render_template("utils/google_site_verification.html", translate=get_text)
 
 
 @main_blueprint.route("/arc-sw.js")
@@ -119,7 +119,7 @@ def arcstuff():
 def pp():
     return render_template(
         "privacy.html",
-        translate=getText,
+        translate=get_text,
         user=session.get("username"),
         user_id=session.get("id"),
         email=session.get("email"),
@@ -132,7 +132,7 @@ def pp():
 def tos():
     return render_template(
         "tos.html",
-        translate=getText,
+        translate=get_text,
         user=session.get("username"),
         user_id=session.get("id"),
         email=session.get("email"),
@@ -150,13 +150,13 @@ def selectregion():
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         page="Select a Region",
-        translate=getText,
+        translate=get_text,
         homepage=True,
     )
 
 
 @main_blueprint.route("/global/<country>")
-def globalcountry(country):
+def global_country(country):
     session["global"] = country
     return redirect("/")
 
@@ -165,39 +165,31 @@ def globalcountry(country):
 @main_blueprint.app_errorhandler(400)
 def page_not_found(e):
     path = request.path
-    # print(path)
     if len(path.strip("/")) == 2:
         return redirect(f"/global{path}")
-    # note that we set the 404 status explicitly
-    return (
-        render_template(
-            "errors/404.html",
-            page="Not Found",
-            user=session.get("username"),
-            user_id=session.get("id"),
-            email=session.get("email"),
-            avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-            translate=getText,
-        ),
-        404,
+
+    return render_template(
+        "errors/404.html",
+        page="Not Found",
+        user=session.get("username"),
+        user_id=session.get("id"),
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        translate=get_text,
     )
 
 
 @main_blueprint.app_errorhandler(500)
 def internal_error(e):
-    # note that we set the 500 status explicitly
-    return (
-        render_template(
-            "errors/500.html",
-            page="Nebulus is Down",
-            user=session.get("username"),
-            user_id=session.get("id"),
-            email=session.get("email"),
-            avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-            translate=getText,
-        ),
-        500,
-    )
+    return render_template(
+        "errors/500.html",
+        page="Nebulus is Down",
+        user=session.get("username"),
+        user_id=session.get("id"),
+        email=session.get("email"),
+        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
+        translate=get_text,
+    ), 500
 
 
 @main_blueprint.route("/sw.js")
@@ -214,19 +206,6 @@ def sitemap():
     return send_file(str(path.parent.parent.parent) + "/static/sitemap.xml")
 
 
-@main_blueprint.route("/study/session")
-def studyplanner():
-    return render_template(
-        "learning/tools/study-planner.html",
-        user=session.get("username"),
-        user_id=session.get("id"),
-        email=session.get("email"),
-        avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
-        page="Study Planner",
-        translate=getText,
-    )
-
-
 @main_blueprint.route("/lunch")
 def lunchplanner():
     return render_template(
@@ -236,7 +215,7 @@ def lunchplanner():
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         page="Lunch Planner",
-        translate=getText,
+        translate=get_text,
     )
 
 
@@ -249,7 +228,7 @@ def vacationmode():
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         page="Vacation Mode",
-        translate=getText,
+        translate=get_text,
     )
 
 
@@ -262,7 +241,7 @@ def extracurricular():
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         page="Extracurricular Mode",
-        translate=getText,
+        translate=get_text,
     )
 
 
@@ -275,7 +254,7 @@ def analysis():
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         page="Study Planner",
-        translate=getText,
+        translate=get_text,
     )
 
 
@@ -288,7 +267,7 @@ def blog():
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         page="Blog",
-        translate=getText,
+        translate=get_text,
     )
 
 
@@ -301,7 +280,7 @@ def upgrade():
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         page="Upgrade",
-        translate=getText,
+        translate=get_text,
     )
 
 
@@ -314,5 +293,5 @@ def support():
         email=session.get("email"),
         avatar=session.get("avatar", "/static/images/nebulusCats/v3.gif"),
         page="Support",
-        translate=getText,
+        translate=get_text,
     )
