@@ -63,7 +63,7 @@ idna
 iso8601==1.0.2
 itsdangerous==2.1.2
 mechanize==0.4.8
-mongoengine==0.24.2
+mongoengine==0.27.0
 musixmatch~=0.9
 nltk~=3.7
 numpy==1.23.1

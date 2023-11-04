@@ -15,8 +15,6 @@ db = ca = None
 def init_db():
     global db, ca
 
-    config.auto_run()
-
     ca = certifi.where()
     db = connect(
         db="Nebulus",
@@ -25,5 +23,5 @@ def init_db():
         host=os.environ.get("MONGO"),
         tlsCAFile=ca,
     )["Nebulus"]
-
+    config.auto_run()
     config.run()

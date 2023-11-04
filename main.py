@@ -8,7 +8,6 @@ from app.static.python.mongodb.update import update_schoology
 from app.routes import init_app, socketio
 
 # Load environment variables
-load_dotenv()
 
 # Initialize the app
 app = init_app()
@@ -27,6 +26,7 @@ def run_server():
         host = "127.0.0.1"
         protocol = "http"
     else:
+        debug = True
         port = 8080
         host = "localhost"
         protocol = "http"
