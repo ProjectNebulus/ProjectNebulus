@@ -16,7 +16,8 @@ app.config["secret_key"] = os.getenv("")
 
 
 # Debug mode logs errors in more detail. Best used for testing, not production
-debug = True
+
+
 
 
 def run_server():
@@ -26,7 +27,7 @@ def run_server():
         host = "127.0.0.1"
         protocol = "http"
     else:
-        debug = True
+        debug = False
         port = 8080
         host = "localhost"
         protocol = "http"

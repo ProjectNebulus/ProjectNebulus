@@ -2,14 +2,14 @@
 import logging
 import os
 
-import eventlet
+
 from flask import Flask, has_request_context, redirect, request, session
 from flask_babel import Babel
 from flask_cors import CORS
 from flask_mail import Mail
 from flask_socketio import SocketIO
 
-eventlet.monkey_patch()
+
 
 # Global Variables
 socketio = SocketIO()

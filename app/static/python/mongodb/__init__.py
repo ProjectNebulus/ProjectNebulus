@@ -14,7 +14,7 @@ db = ca = None
 
 def init_db():
     global db, ca
-
+    print(certifi.where())
     ca = certifi.where()
     db = connect(
         db="Nebulus",

@@ -23,38 +23,24 @@ from ..classes.Notepad import Notepad
 from ..utils.security import hash256
 
 
-
 def update_schoology():
     # change field names on ALL schoology objects using pymongo
+
     from pymongo import MongoClient
     client = MongoClient(os.environ["MONGO"])
     db = client.Nebulus
     User_collection = db.Accounts
     for user in User_collection.find():
         uid = user["_id"]
+        if "schoology" not in user:
+            continue
 
-        if "schoology" in user:
-            for i in range(0, len(user["schoology"])):
-                User_collection.update_one(
-                    {"_id": uid},
-                    {"$rename": {
-                        "schoology." + str(i) + ".name": "schoology." + str(i) + ".schoologyName",
-                        "schoology."+str(i)+".domain": "schoology."+str(i)+".schoologyDomain",
-                        "schoology."+str(i)+".email": "schoology."+str(i)+".schoologyEmail",
-                        "schoology."+str(i)+".request_token": "schoology."+str(i)+".Schoology_request_token",
-                        "schoology."+str(i)+".request_secret": "schoology."+str(i)+".Schoology_request_secret",
-                        "schoology."+str(i)+".access_token": "schoology."+str(i)+".Schoology_access_token",
-                        "schoology."+str(i)+".access_secret": "schoology."+str(i)+".Schoology_access_secret",
-                        "schoology."+str(i)+".api_key": "schoology."+str(i)+".apikey",
-                        "schoology."+str(i)+".api_secret": "schoology."+str(i)+".apisecret",
-                    }
-                    },
-                )
+        for i in range(0, len(user["schoology"])):
 
-
-
-
-
+            user["schoology"][i].update(user["schoology"][i]["0"])
+            del user["schoology"][i]["0"]
+        print(user)
+        User_collection.replace_one({"_id": uid}, user)
 
 
 def update_unread(data, user_id):

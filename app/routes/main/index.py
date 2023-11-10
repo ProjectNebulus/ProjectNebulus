@@ -7,14 +7,14 @@ from app.static.python.mongodb.read import get_text
 from . import main_blueprint
 from .. import babel
 
-
+"""
 @babel.localeselector
 def get_locale():
     if session.get("lang") == "es":
         return "es"
     else:
         return "en"
-
+"""
 
 @main_blueprint.route("/screenTime", methods=["GET"])
 def screenTime():

@@ -10,7 +10,7 @@ from app.static.python.classes import *
 from app.static.python.mongodb import create, read
 from app.static.python.mongodb.create import debug_importing
 from app.static.python.utils.colors import get_color
-from static.python.mongodb.delete import delete_course
+from app.static.python.mongodb.delete import delete_course
 from ... import internal
 
 date_regex = "(\d{1,4})(\/|-)(\d{1,4})(\/|-)(\d{2,4})"
