@@ -58,7 +58,7 @@ python-dotenv==1.0.0
 python-engineio==4.8.0
 python-socketio==5.10.0
 pytz==2023.3.post1
-PyYAML==5.3.1
+PyYAML==5.4
 redis==5.0.1
 regex==2023.10.3
 requests==2.31.0
